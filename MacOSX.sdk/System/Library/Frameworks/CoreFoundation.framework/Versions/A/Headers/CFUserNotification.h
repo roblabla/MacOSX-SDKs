@@ -1,5 +1,5 @@
 /*	CFUserNotification.h
-	Copyright 2000-2002, Apple, Inc. All rights reserved.
+	Copyright (c) 2000-2003, Apple, Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFUSERNOTIFICATION__)
@@ -119,9 +119,9 @@ enum {
     kCFUserNotificationUseRadioButtonsFlag 	= (1 << 6)
 };
 
-CF_INLINE CFOptionFlags CFUserNotificationCheckBoxChecked(CFIndex i) {return (1 << (8 + i));}
-CF_INLINE CFOptionFlags CFUserNotificationSecureTextField(CFIndex i) {return (1 << (16 + i));}
-CF_INLINE CFOptionFlags CFUserNotificationPopUpSelection(CFIndex n) {return (n << 24);}
+CF_INLINE CFOptionFlags CFUserNotificationCheckBoxChecked(CFIndex i) {return ((CFOptionFlags)(1 << (8 + i)));}
+CF_INLINE CFOptionFlags CFUserNotificationSecureTextField(CFIndex i) {return ((CFOptionFlags)(1 << (16 + i)));}
+CF_INLINE CFOptionFlags CFUserNotificationPopUpSelection(CFIndex n) {return ((CFOptionFlags)(n << 24));}
 
 
 /* Keys */
@@ -164,6 +164,11 @@ const CFStringRef kCFUserNotificationCheckBoxTitlesKey;
 
 CF_EXPORT
 const CFStringRef kCFUserNotificationTextFieldValuesKey;
+
+#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
+CF_EXPORT
+const CFStringRef kCFUserNotificationPopUpSelectionKey	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+#endif
 
 #if defined(__cplusplus)
 }

@@ -3,9 +3,9 @@
  
      Contains:   AppleEvents Registry Interface.
  
-     Version:    AppleEvents-242~1
+     Version:    AppleEvents-275~1
  
-     Copyright:  © 1993-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1993-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -509,6 +509,8 @@
 #define typeTextStyles 					'tsty'				/*   0x74737479   */
 
 #define typeTIFF 						'TIFF'				/*   0x54494646   */
+#define typeJPEG 						'JPEG'
+#define typeGIF 						'GIFf'
 #define typeVersion 					'vers'				/*   0x76657273   */
 
 #define kAEMenuClass 					'menu'

@@ -3,9 +3,9 @@
  
      Contains:   interface to embedding a Java Applet in a Carbon Control
  
-     Version:    JavaEmbedding-12~208
+     Version:    JavaEmbedding-24~64
  
-     Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -153,7 +153,7 @@ typedef CALLBACK_API_C( void , JE_SetStatusCallback )(jobject applet, CFStringRe
  *      filled in with new data on completion.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -177,7 +177,7 @@ GetEmbeddingVMParams(JavaVMInitArgs * ioJavaVMInitArgs)       AVAILABLE_MAC_OS_X
  *      The newly created applet arena.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -213,7 +213,7 @@ CreateAppletArena(AppletArena * outNewArena)                  AVAILABLE_MAC_OS_X
  *      creating controls.  Call env->DeleteGlobalRef() on it when done.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -262,7 +262,7 @@ typedef enum AppletState AppletState;
  *      Host defined data passed into showStatusFunction.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -304,7 +304,7 @@ SetJavaAppletState(
  *      Host defined data passed into showStatusFunction.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -350,7 +350,7 @@ RegisterStatusCallback(
  *    An operating system status code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */

@@ -3,9 +3,9 @@
  
      Contains:   OSErr codes.
  
-     Version:    CarbonCore-472~1
+     Version:    CarbonCore-545~1
  
-     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -404,7 +404,7 @@ enum {
 enum {
   smCPUErr                      = -334, /*Code revision is wrong*/
   smsPointerNil                 = -335, /*LPointer is nil From sOffsetData. If this error occurs; check sInfo rec for more information.*/
-  smNilsBlockErr                = -336, /*Nil sBlock error (Dont allocate and try to use a nil sBlock)*/
+  smNilsBlockErr                = -336, /*Nil sBlock error (Don't allocate and try to use a nil sBlock)*/
   smSlotOOBErr                  = -337, /*Slot out of bounds error*/
   smSelOOBErr                   = -338, /*Selector out of bounds error*/
   smNewPErr                     = -339, /*_NewPtr error*/
@@ -869,7 +869,8 @@ enum {
   qtmlDllEntryNotFoundErr       = -2094, /* Windows specific errors (when qtml is loading)*/
   qtmlUninitialized             = -2095,
   unsupportedOSErr              = -2096,
-  unsupportedProcessorErr       = -2097
+  unsupportedProcessorErr       = -2097,
+  componentNotThreadSafeErr     = -2098 /* component is not thread-safe*/
 };
 
 enum {
@@ -998,7 +999,10 @@ enum {
   tsmDefaultIsNotInputMethodErr = -2524, /* Current Input source is KCHR or uchr, not Input Method  (GetDefaultInputMethod) */
   tsmDocPropertyNotFoundErr     = -2528, /* Requested TSM Document property not found */
   tsmDocPropertyBufferTooSmallErr = -2529, /* Buffer passed in for property value is too small */
-  tsmCantChangeForcedClassStateErr = -2530 /* Enabled state of a TextService class has been forced and cannot be changed */
+  tsmCantChangeForcedClassStateErr = -2530, /* Enabled state of a TextService class has been forced and cannot be changed */
+  tsmComponentPropertyUnsupportedErr = -2531, /* Component property unsupported (or failed to be set) */
+  tsmComponentPropertyNotFoundErr = -2532, /* Component property not found */
+  tsmInputModeChangeFailedErr   = -2533 /* Input Mode not changed */
 };
 
 
@@ -2076,6 +2080,8 @@ enum {
                                         /*    for the requested operation.*/
   kATSUInvalidCallInsideCallbackErr = -8904, /*    A call was made within the context of a callback that could*/
                                         /*    potetially cause an infinite recursion*/
+  kATSUNoFontNameErr            = -8905, /*    This error is returned when either ATSUFindFontName() or ATSUGetIndFontName() */
+                                        /*    function cannot find a corresponding font name given the input parameters*/
   kATSULastErr                  = -8959 /*    The last ATSUI error code.*/
 };
 
@@ -2403,27 +2409,27 @@ enum {
 
 
 
-/* MacTextEditor error codes */
+/* Multilingual Text Engine (MLTE) error codes */
 enum {
-  kTXNEndIterationErr           = -22000,
-  kTXNCannotAddFrameErr         = -22001,
-  kTXNInvalidFrameIDErr         = -22002,
-  kTXNIllegalToCrossDataBoundariesErr = -22003,
-  kTXNUserCanceledOperationErr  = -22004,
-  kTXNBadDefaultFileTypeWarning = -22005,
-  kTXNCannotSetAutoIndentErr    = -22006,
-  kTXNRunIndexOutofBoundsErr    = -22007,
-  kTXNNoMatchErr                = -22008,
-  kTXNAttributeTagInvalidForRunErr = -22009, /*dataValue is set to this per invalid tag*/
-  kTXNSomeOrAllTagsInvalidForRunErr = -22010,
-  kTXNInvalidRunIndex           = -22011,
-  kTXNAlreadyInitializedErr     = -22012,
-  kTXNCannotTurnTSMOffWhenUsingUnicodeErr = -22013,
-  kTXNCopyNotAllowedInEchoModeErr = -22014,
-  kTXNDataTypeNotAllowedErr     = -22015,
-  kTXNATSUIIsNotInstalledErr    = -22016,
-  kTXNOutsideOfLineErr          = -22017,
-  kTXNOutsideOfFrameErr         = -22018
+  kTXNEndIterationErr           = -22000, /* Function was not able to iterate through the data contained by a text object*/
+  kTXNCannotAddFrameErr         = -22001, /* Multiple frames are not currently supported in MLTE*/
+  kTXNInvalidFrameIDErr         = -22002, /* The frame ID is invalid*/
+  kTXNIllegalToCrossDataBoundariesErr = -22003, /* Offsets specify a range that crosses a data type boundary*/
+  kTXNUserCanceledOperationErr  = -22004, /* A user canceled an operation before your application completed processing it*/
+  kTXNBadDefaultFileTypeWarning = -22005, /* The text file is not in the format you specified*/
+  kTXNCannotSetAutoIndentErr    = -22006, /* Auto indentation is not available when word wrapping is enabled*/
+  kTXNRunIndexOutofBoundsErr    = -22007, /* An index you supplied to a function is out of bounds*/
+  kTXNNoMatchErr                = -22008, /* Returned by TXNFind when a match is not found*/
+  kTXNAttributeTagInvalidForRunErr = -22009, /* Tag for a specific run is not valid (the tag's dataValue is set to this)*/
+  kTXNSomeOrAllTagsInvalidForRunErr = -22010, /* At least one of the tags given is invalid*/
+  kTXNInvalidRunIndex           = -22011, /* Index is out of range for that run*/
+  kTXNAlreadyInitializedErr     = -22012, /* You already called the TXNInitTextension function*/
+  kTXNCannotTurnTSMOffWhenUsingUnicodeErr = -22013, /* Your application tried to turn off the Text Services Manager when using Unicode*/
+  kTXNCopyNotAllowedInEchoModeErr = -22014, /* Your application tried to copy text that was in echo mode*/
+  kTXNDataTypeNotAllowedErr     = -22015, /* Your application specified a data type that MLTE does not allow*/
+  kTXNATSUIIsNotInstalledErr    = -22016, /* Indicates that ATSUI is not installed on the system*/
+  kTXNOutsideOfLineErr          = -22017, /* Indicates a value that is beyond the length of the line*/
+  kTXNOutsideOfFrameErr         = -22018 /* Indicates a value that is outside of the text object's frame*/
 };
 
 
@@ -2477,6 +2483,12 @@ enum {
 enum {
   kUCTSNoKeysAddedToObjectErr   = -25342,
   kUCTSSearchListErr            = -25343
+};
+
+enum {
+  kUCTokenizerIterationFinished = -25344,
+  kUCTokenizerUnknownLang       = -25345,
+  kUCTokenNotFound              = -25346
 };
 
 /* Multiprocessing API error codes*/

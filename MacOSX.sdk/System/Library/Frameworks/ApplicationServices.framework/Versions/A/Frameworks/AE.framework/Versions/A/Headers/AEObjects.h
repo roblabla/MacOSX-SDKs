@@ -3,9 +3,9 @@
  
      Contains:   Object Support Library Interfaces.
  
-     Version:    AppleEvents-242~1
+     Version:    AppleEvents-275~1
  
-     Copyright:  © 1991-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1991-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -463,6 +463,9 @@ InvokeOSLAdjustMarksUPP(
 /*
  *  AEObjectInit()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -476,6 +479,9 @@ AEObjectInit(void)                                            AVAILABLE_MAC_OS_X
   such that further calls can be via inline */
 /*
  *  AESetObjectCallbacks()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -496,6 +502,9 @@ AESetObjectCallbacks(
 /*
  *  AEResolve()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -510,6 +519,9 @@ AEResolve(
 
 /*
  *  AEInstallObjectAccessor()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -528,6 +540,9 @@ AEInstallObjectAccessor(
 /*
  *  AERemoveObjectAccessor()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -543,6 +558,9 @@ AERemoveObjectAccessor(
 
 /*
  *  AEGetObjectAccessor()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -561,6 +579,9 @@ AEGetObjectAccessor(
 /*
  *  AEDisposeToken()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -572,6 +593,9 @@ AEDisposeToken(AEDesc * theToken)                             AVAILABLE_MAC_OS_X
 
 /*
  *  AECallObjectAccessor()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework

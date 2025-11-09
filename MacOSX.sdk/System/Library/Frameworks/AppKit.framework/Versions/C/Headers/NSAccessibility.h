@@ -5,8 +5,6 @@
 	All rights reserved.
 */
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
-
 #import <AppKit/AppKitDefines.h>
 #import <AppKit/NSErrors.h>
 #import <Foundation/NSGeometry.h>
@@ -14,6 +12,8 @@
 
 @class NSString, NSArray;
 
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 
 //
 // Accessibility Informal Protocol
@@ -26,6 +26,12 @@
 - (id)accessibilityAttributeValue:(NSString *)attribute;
 - (BOOL)accessibilityIsAttributeSettable:(NSString *)attribute;
 - (void)accessibilitySetValue:(id)value forAttribute:(NSString *)attribute;
+
+// parameterized attribute methods
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (NSArray *)accessibilityParameterizedAttributeNames;
+- (id)accessibilityAttributeValue:(NSString *)attribute forParameter:(id)parameter;
+#endif
 
 // action methods
 - (NSArray *)accessibilityActionNames;
@@ -42,6 +48,9 @@
 - (id)accessibilityFocusedUIElement;
 
 @end
+
+// error signaling for bad setter value or bad parameter.
+APPKIT_EXTERN void NSAccessibilityRaiseBadArgumentException(id element, NSString *attribute, id value) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 //
@@ -95,13 +104,35 @@ APPKIT_EXTERN NSString *const NSAccessibilitySelectedChildrenAttribute;	//(NSArr
 APPKIT_EXTERN NSString *const NSAccessibilityVisibleChildrenAttribute;	//(NSArray *)  - child elements which are visible
 APPKIT_EXTERN NSString *const NSAccessibilityPositionAttribute;		//(NSValue *)  - (pointValue) position in screen coords
 APPKIT_EXTERN NSString *const NSAccessibilitySizeAttribute;		//(NSValue *)  - (sizeValue) size
-APPKIT_EXTERN NSString *const NSAccessibilityContentsAttribute;		//(NSArray *)   - main elements
-APPKIT_EXTERN NSString *const NSAccessibilityPreviousContentsAttribute;	//(NSArray *)   - main elements
-APPKIT_EXTERN NSString *const NSAccessibilityNextContentsAttribute;	//(NSArray *)   - main elements
+APPKIT_EXTERN NSString *const NSAccessibilityContentsAttribute;		//(NSArray *)  - main elements
+APPKIT_EXTERN NSString *const NSAccessibilityPreviousContentsAttribute;	//(NSArray *)  - main elements
+APPKIT_EXTERN NSString *const NSAccessibilityNextContentsAttribute;	//(NSArray *)  - main elements
 
 // text specific attributes
-APPKIT_EXTERN NSString *const NSAccessibilitySelectedTextAttribute;	//(NSString *) - currently selected text
-APPKIT_EXTERN NSString *const NSAccessibilitySelectedTextRangeAttribute;//(NSValue *)  - (rangeValue) range of currently selectd text
+APPKIT_EXTERN NSString *const NSAccessibilitySelectedTextAttribute;	//(NSString *) - selected text
+APPKIT_EXTERN NSString *const NSAccessibilitySelectedTextRangeAttribute;//(NSValue *)  - (rangeValue) range of selected text
+APPKIT_EXTERN NSString *const NSAccessibilityNumberOfCharactersAttribute	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+                                                                        //(NSNumber *) - number of characters
+APPKIT_EXTERN NSString *const NSAccessibilityVisibleCharacterRangeAttribute	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+                                                                        //(NSValue *)  - (rangeValue) range of visible text
+                                                                        
+// parameterized text specific attributes
+APPKIT_EXTERN NSString *const NSAccessibilityLineForIndexParameterizedAttribute		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+                                                                                //(NSNumber *) - line# for char index; param:(NSNumber *)
+APPKIT_EXTERN NSString *const NSAccessibilityRangeForLineParameterizedAttribute		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+                                                                                //(NSValue *)  - (rangeValue) range of line; param:(NSNumber *)
+APPKIT_EXTERN NSString *const NSAccessibilityStringForRangeParameterizedAttribute	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+                                                                                //(NSString *) - substring; param:(NSValue * - rangeValue) 
+APPKIT_EXTERN NSString *const NSAccessibilityRangeForPositionParameterizedAttribute	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+                                                                                //(NSValue *)  - (rangeValue) composed char range; param:(NSValue * - pointValue)
+APPKIT_EXTERN NSString *const NSAccessibilityRangeForIndexParameterizedAttribute	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+                                                                                //(NSValue *)  - (rangeValue) composed char range; param:(NSNumber *)
+APPKIT_EXTERN NSString *const NSAccessibilityBoundsForRangeParameterizedAttribute	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+                                                                                //(NSValue *)  - (rectValue) bounds of text; param:(NSValue * - rangeValue)
+APPKIT_EXTERN NSString *const NSAccessibilityRTFForRangeParameterizedAttribute		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+                                                                                //(NSData *)   - rtf for text; param:(NSValue * - rangeValue)
+APPKIT_EXTERN NSString *const NSAccessibilityStyleRangeForIndexParameterizedAttribute	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+                                                                                //(NSValue *)  - (rangeValue) extent of style run; param:(NSNumber *)
 
 // window specific attributes
 APPKIT_EXTERN NSString *const NSAccessibilityMainAttribute;		//(NSNumber *) - (boolValue) is it the main window?
@@ -112,6 +143,12 @@ APPKIT_EXTERN NSString *const NSAccessibilityMinimizeButtonAttribute;	//(id) - U
 APPKIT_EXTERN NSString *const NSAccessibilityToolbarButtonAttribute;	//(id) - UIElement for toolbar box (or nil)
 APPKIT_EXTERN NSString *const NSAccessibilityProxyAttribute;		//(id) - UIElement for title's icon (or nil)
 APPKIT_EXTERN NSString *const NSAccessibilityGrowAreaAttribute;		//(id) - UIElement for grow box (or nil)
+APPKIT_EXTERN NSString *const NSAccessibilityModalAttribute		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+                                                                        //(NSNumber *) - (boolValue) is the window modal
+APPKIT_EXTERN NSString *const NSAccessibilityDefaultButtonAttribute	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+                                                                        //(id) - UIElement for default button
+APPKIT_EXTERN NSString *const NSAccessibilityCancelButtonAttribute	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+                                                                        //(id) - UIElement for cancel button
 
 // application specific attributes
 APPKIT_EXTERN NSString *const NSAccessibilityMenuBarAttribute;		//(id)         - UIElement for the menu bar
@@ -135,14 +172,20 @@ APPKIT_EXTERN NSString *const NSAccessibilityDecrementButtonAttribute;	//(id)   
 APPKIT_EXTERN NSString *const NSAccessibilityFilenameAttribute;		//(NSString *) - filename
 APPKIT_EXTERN NSString *const NSAccessibilityExpandedAttribute;		//(NSNumber *) - (boolValue) in expanded state?
 APPKIT_EXTERN NSString *const NSAccessibilitySelectedAttribute;		//(NSNumber *) - (boolValue) is selected?
-APPKIT_EXTERN NSString *const NSAccessibilityColumnTitlesAttribute;	//(NSArray *)  - UIElements for titles
 APPKIT_EXTERN NSString *const NSAccessibilitySplittersAttribute;	//(NSArray *)  - UIElements for splitters
 APPKIT_EXTERN NSString *const NSAccessibilityDocumentAttribute;		//(NSString *) - url for open document
 
-APPKIT_EXTERN NSString *const NSAccessibilityOrientationAttribute;	//(NSString *) - NSAccessibilityXXXOrientation
+APPKIT_EXTERN NSString *const NSAccessibilityOrientationAttribute;	//(NSString *) - NSAccessibilityXXXOrientationValue
 APPKIT_EXTERN NSString *const NSAccessibilityVerticalOrientationValue;
 APPKIT_EXTERN NSString *const NSAccessibilityHorizontalOrientationValue;
+APPKIT_EXTERN NSString *const NSAccessibilityColumnTitlesAttribute;	//(NSArray *)  - UIElements for titles
 
+APPKIT_EXTERN NSString *const NSAccessibilitySearchButtonAttribute	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+									//(id)         - UIElement for search field search btn
+APPKIT_EXTERN NSString *const NSAccessibilitySearchMenuAttribute	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+									//(id)         - UIElement for search field menu
+APPKIT_EXTERN NSString *const NSAccessibilityClearButtonAttribute	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+									//(id)         - UIElement for search field clear btn
 
 // table/outline view attributes
 APPKIT_EXTERN NSString *const NSAccessibilityRowsAttribute;		//(NSArray *)  - UIElements for rows
@@ -158,14 +201,14 @@ APPKIT_EXTERN NSString *const NSAccessibilityDisclosingAttribute;	//(NSNumber *)
 APPKIT_EXTERN NSString *const NSAccessibilityDisclosedRowsAttribute;	//(NSArray *)  - UIElements for disclosed rows
 APPKIT_EXTERN NSString *const NSAccessibilityDisclosedByRowAttribute;	//(id)         - UIElement for disclosing row
 
-
 // actions
 APPKIT_EXTERN NSString *const NSAccessibilityPressAction;
 APPKIT_EXTERN NSString *const NSAccessibilityIncrementAction;
 APPKIT_EXTERN NSString *const NSAccessibilityDecrementAction;
 APPKIT_EXTERN NSString *const NSAccessibilityConfirmAction;
 APPKIT_EXTERN NSString *const NSAccessibilityPickAction;
-
+APPKIT_EXTERN NSString *const NSAccessibilityCancelAction	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+APPKIT_EXTERN NSString *const NSAccessibilityRaiseAction	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 // focus notifications
 APPKIT_EXTERN NSString *const NSAccessibilityMainWindowChangedNotification;
@@ -184,6 +227,10 @@ APPKIT_EXTERN NSString *const NSAccessibilityWindowMovedNotification;
 APPKIT_EXTERN NSString *const NSAccessibilityWindowResizedNotification;
 APPKIT_EXTERN NSString *const NSAccessibilityWindowMiniaturizedNotification;
 APPKIT_EXTERN NSString *const NSAccessibilityWindowDeminiaturizedNotification;
+
+// drawer & sheet notifications
+APPKIT_EXTERN NSString *const NSAccessibilityDrawerCreatedNotification	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+APPKIT_EXTERN NSString *const NSAccessibilitySheetCreatedNotification	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 // element notifications
 APPKIT_EXTERN NSString *const NSAccessibilityValueChangedNotification;
@@ -218,10 +265,7 @@ APPKIT_EXTERN NSString *const NSAccessibilityRowRole;
 APPKIT_EXTERN NSString *const NSAccessibilityToolbarRole;
 APPKIT_EXTERN NSString *const NSAccessibilityBusyIndicatorRole;
 APPKIT_EXTERN NSString *const NSAccessibilityProgressIndicatorRole;
-APPKIT_EXTERN NSString *const NSAccessibilityRelevanceIndicatorRole;
 APPKIT_EXTERN NSString *const NSAccessibilityWindowRole;
-APPKIT_EXTERN NSString *const NSAccessibilityWindowTitleRole;
-APPKIT_EXTERN NSString *const NSAccessibilityWindowProxyRole;
 APPKIT_EXTERN NSString *const NSAccessibilityDrawerRole;
 APPKIT_EXTERN NSString *const NSAccessibilitySystemWideRole;
 APPKIT_EXTERN NSString *const NSAccessibilityOutlineRole;
@@ -243,5 +287,15 @@ APPKIT_EXTERN NSString *const NSAccessibilityToolbarButtonSubrole;
 APPKIT_EXTERN NSString *const NSAccessibilityTableRowSubrole;
 APPKIT_EXTERN NSString *const NSAccessibilityOutlineRowSubrole;
 APPKIT_EXTERN NSString *const NSAccessibilitySecureTextFieldSubrole;
+APPKIT_EXTERN NSString *const NSAccessibilityStandardWindowSubrole		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+APPKIT_EXTERN NSString *const NSAccessibilityDialogSubrole			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+APPKIT_EXTERN NSString *const NSAccessibilitySystemDialogSubrole		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+APPKIT_EXTERN NSString *const NSAccessibilityFloatingWindowSubrole		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+APPKIT_EXTERN NSString *const NSAccessibilitySystemFloatingWindowSubrole	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+APPKIT_EXTERN NSString *const NSAccessibilityIncrementArrowSubrole		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+APPKIT_EXTERN NSString *const NSAccessibilityDecrementArrowSubrole		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+APPKIT_EXTERN NSString *const NSAccessibilityIncrementPageSubrole		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+APPKIT_EXTERN NSString *const NSAccessibilityDecrementPageSubrole		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+APPKIT_EXTERN NSString *const NSAccessibilitySearchFieldSubrole			AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 #endif

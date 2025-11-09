@@ -3,9 +3,9 @@
  
      Contains:   File Manager (MFS, HFS, and HFS+) Interfaces.
  
-     Version:    CarbonCore-472~1
+     Version:    CarbonCore-545~1
  
-     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -52,6 +52,8 @@
 #endif
 
 
+#include <sys/types.h>
+
 #include <AvailabilityMacros.h>
 
 #if PRAGMA_ONCE
@@ -64,7 +66,6 @@ extern "C" {
 
 #pragma options align=mac68k
 
-#include <sys/types.h>
 /* HFSUniStr255 is the Unicode equivalent of Str255 */
 struct HFSUniStr255 {
   UInt16              length;                 /* number of unicode characters */
@@ -113,27 +114,35 @@ enum {
 
 enum {
                                         /* CatSearch Search bitmask Constants */
-  fsSBPartialName               = 1,
-  fsSBFullName                  = 2,
-  fsSBFlAttrib                  = 4,
-  fsSBFlFndrInfo                = 8,
-  fsSBFlLgLen                   = 32,
-  fsSBFlPyLen                   = 64,
-  fsSBFlRLgLen                  = 128,
-  fsSBFlRPyLen                  = 256,
-  fsSBFlCrDat                   = 512,
-  fsSBFlMdDat                   = 1024,
-  fsSBFlBkDat                   = 2048,
-  fsSBFlXFndrInfo               = 4096,
-  fsSBFlParID                   = 8192,
-  fsSBNegate                    = 16384,
-  fsSBDrUsrWds                  = 8,
-  fsSBDrNmFls                   = 16,
-  fsSBDrCrDat                   = 512,
-  fsSBDrMdDat                   = 1024,
-  fsSBDrBkDat                   = 2048,
-  fsSBDrFndrInfo                = 4096,
-  fsSBDrParID                   = 8192
+  fsSBPartialName               = 0x01,
+  fsSBFullName                  = 0x02,
+  fsSBFlAttrib                  = 0x04,
+  fsSBFlFndrInfo                = 0x08,
+  fsSBFlLgLen                   = 0x20,
+  fsSBFlPyLen                   = 0x40,
+  fsSBFlRLgLen                  = 0x80,
+  fsSBFlRPyLen                  = 0x0100,
+  fsSBFlCrDat                   = 0x0200,
+  fsSBFlMdDat                   = 0x0400,
+  fsSBFlBkDat                   = 0x0800,
+  fsSBFlXFndrInfo               = 0x1000,
+  fsSBFlParID                   = 0x2000,
+  fsSBNegate                    = 0x4000,
+  fsSBDrUsrWds                  = 0x08,
+  fsSBDrNmFls                   = 0x10,
+  fsSBDrCrDat                   = 0x0200,
+  fsSBDrMdDat                   = 0x0400,
+  fsSBDrBkDat                   = 0x0800,
+  fsSBDrFndrInfo                = 0x1000,
+  fsSBDrParID                   = 0x2000,
+  fsSBNodeID                    = 0x8000,
+  fsSBAttributeModDate          = 0x00010000,
+  fsSBAccessDate                = 0x00020000,
+  fsSBPermissions               = 0x00040000,
+  fsSBSkipPackageContents       = 0x00080000,
+  fsSBSkipHiddenItems           = 0x00100000,
+  fsSBUserID                    = 0x00200000,
+  fsSBGroupID                   = 0x00400000
 };
 
 enum {
@@ -158,7 +167,15 @@ enum {
   fsSBDrMdDatBit                = 10,   /*directory-named version of fsSBFlMdDatBit*/
   fsSBDrBkDatBit                = 11,   /*directory-named version of fsSBFlBkDatBit*/
   fsSBDrFndrInfoBit             = 12,   /*directory-named version of fsSBFlXFndrInfoBit*/
-  fsSBDrParIDBit                = 13    /*directory-named version of fsSBFlParIDBit*/
+  fsSBDrParIDBit                = 13,   /*directory-named version of fsSBFlParIDBit*/
+  fsSBNodeIDBit                 = 15,   /* search by range of nodeID */
+  fsSBAttributeModDateBit       = 16,   /* search by range of attributeModDate */
+  fsSBAccessDateBit             = 17,   /* search by range of accessDate [CatalogSearch only] */
+  fsSBPermissionsBit            = 18,   /* search by value/mask of permissions [CatalogSearch only] */
+  fsSBSkipPackageContentsBit    = 19,   /*do not return items inside of packages*/
+  fsSBSkipHiddenItemsBit        = 20,   /*do not return items with an invisible element in their path*/
+  fsSBUserIDBit                 = 21,   /* search by userID in permissions field [CatalogSearch only] */
+  fsSBGroupIDBit                = 22    /* search by groupID in permissions field [CatalogSearch only] */
 };
 
 enum {
@@ -207,21 +224,18 @@ enum {
   bSupportsMultiScriptNames     = 6,    /* volume supports file/directory/volume names with characters from multiple script systems */
   bSupportsNamedForks           = 7,    /* volume supports forks beyond the data and resource forks */
   bSupportsSubtreeIterators     = 8,    /* volume supports recursive iterators not at the volume root */
-  bL2PCanMapFileBlocks          = 9     /* volume supports Lg2Phys SPI correctly */
-};
-
-enum {
-                                        /* vMExtendedAttributes (GetVolParms) bit position constants */
+  bL2PCanMapFileBlocks          = 9,    /* volume supports Lg2Phys SPI correctly */
   bParentModDateChanges         = 10,   /* Changing a file or folder causes its parent's mod date to change */
-  bAncestorModDateChanges       = 11    /* Changing a file or folder causes all ancestor mod dates to change */
-};
-
-enum {
-                                        /* vMExtendedAttributes (GetVolParms) bit position constants */
+  bAncestorModDateChanges       = 11,   /* Changing a file or folder causes all ancestor mod dates to change */
   bSupportsSymbolicLinks        = 13,   /* volume supports the creation and use of symbolic links (Mac OS X only) */
   bIsAutoMounted                = 14,   /* volume was mounted automatically (Mac OS X only) */
   bAllowCDiDataHandler          = 17,   /* allow QuickTime's CDi data handler to examine this volume */
-  bSupportsExclusiveLocks       = 18    /* volume supports exclusive opens for writing */
+  bSupportsExclusiveLocks       = 18,   /* volume supports exclusive opens for writing */
+  bSupportsJournaling           = 19,   /* volume supports journal (journal may not be active) */
+  bNoVolumeSizes                = 20,   /* volume is unable to report volume size or free space */
+  bIsCaseSensitive              = 22,   /* volume is case sensitive */
+  bIsCasePreserving             = 23,   /* volume is case preserving */
+  bDoNotDisplay                 = 24    /* volume should not be displayed in UI */
 };
 
 enum {
@@ -3943,7 +3957,7 @@ extern OSErr  PBSetForeignPrivsAsync(HParmBlkPtr paramBlock)  AVAILABLE_MAC_OS_X
  *  PBDTGetPath()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -3957,7 +3971,7 @@ extern OSErr  PBDTGetPath(DTPBPtr paramBlock)                 AVAILABLE_MAC_OS_X
  *  PBDTCloseDown()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -3971,7 +3985,7 @@ extern OSErr  PBDTCloseDown(DTPBPtr paramBlock)               AVAILABLE_MAC_OS_X
  *  PBDTAddIconSync()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -3985,7 +3999,7 @@ extern OSErr  PBDTAddIconSync(DTPBPtr paramBlock)             AVAILABLE_MAC_OS_X
  *  PBDTAddIconAsync()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -3999,7 +4013,7 @@ extern OSErr  PBDTAddIconAsync(DTPBPtr paramBlock)            AVAILABLE_MAC_OS_X
  *  PBDTGetIconSync()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4013,7 +4027,7 @@ extern OSErr  PBDTGetIconSync(DTPBPtr paramBlock)             AVAILABLE_MAC_OS_X
  *  PBDTGetIconAsync()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4027,7 +4041,7 @@ extern OSErr  PBDTGetIconAsync(DTPBPtr paramBlock)            AVAILABLE_MAC_OS_X
  *  PBDTGetIconInfoSync()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4041,7 +4055,7 @@ extern OSErr  PBDTGetIconInfoSync(DTPBPtr paramBlock)         AVAILABLE_MAC_OS_X
  *  PBDTGetIconInfoAsync()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4055,7 +4069,7 @@ extern OSErr  PBDTGetIconInfoAsync(DTPBPtr paramBlock)        AVAILABLE_MAC_OS_X
  *  PBDTAddAPPLSync()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4069,7 +4083,7 @@ extern OSErr  PBDTAddAPPLSync(DTPBPtr paramBlock)             AVAILABLE_MAC_OS_X
  *  PBDTAddAPPLAsync()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4083,7 +4097,7 @@ extern OSErr  PBDTAddAPPLAsync(DTPBPtr paramBlock)            AVAILABLE_MAC_OS_X
  *  PBDTRemoveAPPLSync()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4097,7 +4111,7 @@ extern OSErr  PBDTRemoveAPPLSync(DTPBPtr paramBlock)          AVAILABLE_MAC_OS_X
  *  PBDTRemoveAPPLAsync()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4111,7 +4125,7 @@ extern OSErr  PBDTRemoveAPPLAsync(DTPBPtr paramBlock)         AVAILABLE_MAC_OS_X
  *  PBDTGetAPPLSync()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4125,7 +4139,7 @@ extern OSErr  PBDTGetAPPLSync(DTPBPtr paramBlock)             AVAILABLE_MAC_OS_X
  *  PBDTGetAPPLAsync()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4139,7 +4153,7 @@ extern OSErr  PBDTGetAPPLAsync(DTPBPtr paramBlock)            AVAILABLE_MAC_OS_X
  *  PBDTSetCommentSync()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4153,7 +4167,7 @@ extern OSErr  PBDTSetCommentSync(DTPBPtr paramBlock)          AVAILABLE_MAC_OS_X
  *  PBDTSetCommentAsync()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4167,7 +4181,7 @@ extern OSErr  PBDTSetCommentAsync(DTPBPtr paramBlock)         AVAILABLE_MAC_OS_X
  *  PBDTRemoveCommentSync()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4181,7 +4195,7 @@ extern OSErr  PBDTRemoveCommentSync(DTPBPtr paramBlock)       AVAILABLE_MAC_OS_X
  *  PBDTRemoveCommentAsync()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4195,7 +4209,7 @@ extern OSErr  PBDTRemoveCommentAsync(DTPBPtr paramBlock)      AVAILABLE_MAC_OS_X
  *  PBDTGetCommentSync()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4209,7 +4223,7 @@ extern OSErr  PBDTGetCommentSync(DTPBPtr paramBlock)          AVAILABLE_MAC_OS_X
  *  PBDTGetCommentAsync()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4223,7 +4237,7 @@ extern OSErr  PBDTGetCommentAsync(DTPBPtr paramBlock)         AVAILABLE_MAC_OS_X
  *  PBDTFlushSync()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4237,7 +4251,7 @@ extern OSErr  PBDTFlushSync(DTPBPtr paramBlock)               AVAILABLE_MAC_OS_X
  *  PBDTFlushAsync()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4251,7 +4265,7 @@ extern OSErr  PBDTFlushAsync(DTPBPtr paramBlock)              AVAILABLE_MAC_OS_X
  *  PBDTResetSync()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4265,7 +4279,7 @@ extern OSErr  PBDTResetSync(DTPBPtr paramBlock)               AVAILABLE_MAC_OS_X
  *  PBDTResetAsync()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4279,7 +4293,7 @@ extern OSErr  PBDTResetAsync(DTPBPtr paramBlock)              AVAILABLE_MAC_OS_X
  *  PBDTGetInfoSync()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4293,7 +4307,7 @@ extern OSErr  PBDTGetInfoSync(DTPBPtr paramBlock)             AVAILABLE_MAC_OS_X
  *  PBDTGetInfoAsync()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4307,7 +4321,7 @@ extern OSErr  PBDTGetInfoAsync(DTPBPtr paramBlock)            AVAILABLE_MAC_OS_X
  *  PBDTOpenInform()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4321,7 +4335,7 @@ extern OSErr  PBDTOpenInform(DTPBPtr paramBlock)              AVAILABLE_MAC_OS_X
  *  PBDTDeleteSync()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4335,7 +4349,7 @@ extern OSErr  PBDTDeleteSync(DTPBPtr paramBlock)              AVAILABLE_MAC_OS_X
  *  PBDTDeleteAsync()
  *  
  *  Mac OS X threading:
- *    Thread safe since version Jaguar
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -4826,7 +4840,7 @@ enum {
   kFSCatInfoAttrMod             = 0x00000080,
   kFSCatInfoAccessDate          = 0x00000100,
   kFSCatInfoBackupDate          = 0x00000200,
-  kFSCatInfoPermissions         = 0x00000400, /* Should this be finer granularity? */
+  kFSCatInfoPermissions         = 0x00000400,
   kFSCatInfoFinderInfo          = 0x00000800,
   kFSCatInfoFinderXInfo         = 0x00001000,
   kFSCatInfoValence             = 0x00002000, /* Folders only, zero for files */
@@ -4835,6 +4849,7 @@ enum {
   kFSCatInfoSharingFlags        = 0x00010000, /* sharingFlags: kioFlAttribMountedBit, kioFlAttribSharePointBit */
   kFSCatInfoUserPrivs           = 0x00020000, /* userPrivileges */
   kFSCatInfoUserAccess          = 0x00080000, /* (OS X only) */
+  kFSCatInfoSetOwnership        = 0x00100000, /* (OS X only) */
   kFSCatInfoAllDates            = 0x000003E0,
   kFSCatInfoGettableInfo        = 0x0003FFFF,
   kFSCatInfoSettableInfo        = 0x00001FE3, /* flags, dates, permissions, Finder info, text encoding */
@@ -4937,18 +4952,6 @@ enum {
 };
 
 typedef OptionBits                      FSIteratorFlags;
-enum {
-                                        /* CatalogSearch constants */
-  fsSBNodeID                    = 0x00008000, /* search by range of nodeID */
-  fsSBAttributeModDate          = 0x00010000, /* search by range of attributeModDate */
-  fsSBAccessDate                = 0x00020000, /* search by range of accessDate */
-  fsSBPermissions               = 0x00040000, /* search by value/mask of permissions */
-  fsSBNodeIDBit                 = 15,
-  fsSBAttributeModDateBit       = 16,
-  fsSBAccessDateBit             = 17,
-  fsSBPermissionsBit            = 18
-};
-
 struct FSSearchParams {
   Duration            searchTime;             /* a Time Manager duration */
   OptionBits          searchBits;             /* which fields to search on */
@@ -5087,6 +5090,8 @@ enum {
   kFSVolFlagFilesOpenMask       = 0x0040,
   kFSVolFlagHardwareLockedBit   = 7,    /* Set if volume is locked by a hardware setting */
   kFSVolFlagHardwareLockedMask  = 0x0080,
+  kFSVolFlagJournalingActiveBit = 14,   /* Set if journaling is active on volume */
+  kFSVolFlagJournalingActiveMask = 0x4000,
   kFSVolFlagSoftwareLockedBit   = 15,   /* Set if volume is locked by software */
   kFSVolFlagSoftwareLockedMask  = 0x8000
 };
@@ -7334,7 +7339,15 @@ enum {
    * subscription is also implicitly a subscription to wildcard
    * notifications
    */
-  kFNNoImplicitAllSubscription  = (1 << 0)
+  kFNNoImplicitAllSubscription  = (1 << 0),
+
+  /*
+   * Specify this option if you want to receive notifications on this
+   * subscription when your application is in background.  By default
+   * notifications will be coalesced and and delivered when your
+   * application becomes foreground.
+   */
+  kFNNotifyInBackground         = (1 << 1)
 };
 
 
@@ -7366,7 +7379,7 @@ typedef STACK_UPP_TYPE(FNSubscriptionProcPtr)                   FNSubscriptionUP
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib on Mac OS X
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern FNSubscriptionUPP
@@ -7377,7 +7390,7 @@ NewFNSubscriptionUPP(FNSubscriptionProcPtr userRoutine)       AVAILABLE_MAC_OS_X
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib on Mac OS X
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
@@ -7388,7 +7401,7 @@ DisposeFNSubscriptionUPP(FNSubscriptionUPP userUPP)           AVAILABLE_MAC_OS_X
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib on Mac OS X
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
@@ -7526,6 +7539,7 @@ FNGetDirectoryForSubscription(
   FSRef *             ref)                                    AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
+
 /* Async Volume Operation Status return values*/
 enum {
   kAsyncMountInProgress         = 1,
@@ -7551,7 +7565,7 @@ typedef STACK_UPP_TYPE(FSVolumeEjectProcPtr)                    FSVolumeEjectUPP
  *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib on Mac OS X
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
 extern FSVolumeMountUPP
@@ -7562,7 +7576,7 @@ NewFSVolumeMountUPP(FSVolumeMountProcPtr userRoutine)         AVAILABLE_MAC_OS_X
  *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib on Mac OS X
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
 extern FSVolumeUnmountUPP
@@ -7573,7 +7587,7 @@ NewFSVolumeUnmountUPP(FSVolumeUnmountProcPtr userRoutine)     AVAILABLE_MAC_OS_X
  *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib on Mac OS X
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
 extern FSVolumeEjectUPP
@@ -7584,7 +7598,7 @@ NewFSVolumeEjectUPP(FSVolumeEjectProcPtr userRoutine)         AVAILABLE_MAC_OS_X
  *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib on Mac OS X
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
 extern void
@@ -7595,7 +7609,7 @@ DisposeFSVolumeMountUPP(FSVolumeMountUPP userUPP)             AVAILABLE_MAC_OS_X
  *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib on Mac OS X
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
 extern void
@@ -7606,7 +7620,7 @@ DisposeFSVolumeUnmountUPP(FSVolumeUnmountUPP userUPP)         AVAILABLE_MAC_OS_X
  *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib on Mac OS X
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
 extern void
@@ -7617,7 +7631,7 @@ DisposeFSVolumeEjectUPP(FSVolumeEjectUPP userUPP)             AVAILABLE_MAC_OS_X
  *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib on Mac OS X
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
 extern void
@@ -7633,7 +7647,7 @@ InvokeFSVolumeMountUPP(
  *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib on Mac OS X
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
 extern void
@@ -7650,7 +7664,7 @@ InvokeFSVolumeUnmountUPP(
  *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in CoreServices.framework
- *    CarbonLib:        in CarbonLib on Mac OS X
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
 extern void
@@ -7662,6 +7676,33 @@ InvokeFSVolumeEjectUPP(
   pid_t              dissenter,
   FSVolumeEjectUPP   userUPP)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
+
+/*
+ *  Discussion:
+ *    Options that can be passed to the FSMountServerVolumeCalls. These
+ *    options are not for use with the local volumes.
+ */
+enum {
+
+  /*
+   * Specify this option if you do want the volume displayed as a stand
+   * along volume in the UI.
+   */
+  kFSMountServerMarkDoNotDisplay = (1 << 0),
+
+  /*
+   * Specify this option if you do not want other processes notified
+   * that this volume has been mounted.
+   */
+  kFSMountServerMountWithoutNotification = (1 << 1),
+
+  /*
+   * Specify this option if you want the volume mounted on the mountdir
+   * passed in instead of in it.
+   */
+  kFSMountServerMountOnMountDir = (1 << 2)
+};
+
 /*
  *  FSCreateVolumeOperation()
  *  
@@ -7670,6 +7711,9 @@ InvokeFSVolumeEjectUPP(
  *    for an async volume operation.  When the operation is completed
  *    the volumeOp should be disposed of to free the memory associated
  *    with the operation using FSDisposeVolumeOperation.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Parameters:
  *    
@@ -7692,6 +7736,9 @@ FSCreateVolumeOperation(FSVolumeOperation * volumeOp)         AVAILABLE_MAC_OS_X
  *    This routine will release the memory associated with the passed
  *    in volumeOp. It will return paramErr is the volumeOp is in use.
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Parameters:
  *    
  *    volumeOp:
@@ -7713,6 +7760,9 @@ FSDisposeVolumeOperation(FSVolumeOperation volumeOp)          AVAILABLE_MAC_OS_X
  *    This routine will mount the disk specified by diskID at mountDir
  *    (or the default location if mountDir is NULL).  This routine
  *    returns after the mount is complete.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Parameters:
  *    
@@ -7751,6 +7801,9 @@ FSMountLocalVolumeSync(
  *    the mount operation is complete.  Once this routine returns noErr
  *    the status of the operation can be found using
  *    FSGetAsyncMountStatus.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Parameters:
  *    
@@ -7806,6 +7859,9 @@ FSMountLocalVolumeAsync(
  *    authentication if required.  This routine returns after the mount
  *    is complete.
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Parameters:
  *    
  *    url:
@@ -7854,6 +7910,9 @@ FSMountServerVolumeSync(
  *    when the mount operation is complete.  Once this routine returns
  *    noErr the status of the operation can be found using
  *    FSGetAsyncMountStatus.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Parameters:
  *    
@@ -7918,6 +7977,9 @@ FSMountServerVolumeAsync(
  *    mountedVolumeRefNum parameters are invalid (The clientData will
  *    be ok).
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Parameters:
  *    
  *    volumeOp:
@@ -7962,6 +8024,9 @@ FSGetAsyncMountStatus(
  *    the unmount will be returned in the dissenter parameter.  This
  *    routine returns after the unmount is complete.
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Parameters:
  *    
  *    vRefNum:
@@ -7995,6 +8060,9 @@ FSUnmountVolumeSync(
  *    function will be called when the unmount operation is complete. 
  *    Once this routine returns noErr the status of the operation can
  *    be found using FSGetAsyncUnmountStatus.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Parameters:
  *    
@@ -8043,6 +8111,9 @@ FSUnmountVolumeAsync(
  *    unmount operation. A return value of noErr signifies that the
  *    status parameter has been filled with valid information.
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Parameters:
  *    
  *    volumeOp:
@@ -8089,6 +8160,9 @@ FSGetAsyncUnmountStatus(
  *    mounting operation. It currently is only supported for server
  *    mounts.
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Parameters:
  *    
  *    volumeOp:
@@ -8112,6 +8186,9 @@ FSCancelVolumeOperation(FSVolumeOperation volumeOp)           AVAILABLE_MAC_OS_X
  *    unmount will be returned in the dissenter parameter.  This
  *    routine returns after the eject is complete.  Ejecting a volume
  *    will result in the unmounting of other volumes on the same device.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Parameters:
  *    
@@ -8146,6 +8223,9 @@ FSEjectVolumeSync(
  *    be called when the eject operation is complete.  Once this
  *    routine returns noErr the status of the operation can be found
  *    using FSGetAsyncEjectStatus.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Parameters:
  *    
@@ -8194,6 +8274,9 @@ FSEjectVolumeAsync(
  *    operation. A return value of noErr signifies that the status
  *    parameter has been filled with valid information.
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Parameters:
  *    
  *    volumeOp:
@@ -8240,6 +8323,9 @@ FSGetAsyncEjectStatus(
  *    volume.  The caller is responsible for releasing the CFString
  *    later.
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Parameters:
  *    
  *    vRefNum:
@@ -8257,6 +8343,35 @@ extern OSStatus
 FSCopyDiskIDForVolume(
   FSVolumeRefNum   vRefNum,
   CFStringRef *    diskID)                                    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  FSCopyURLForVolume()
+ *  
+ *  Discussion:
+ *    This routine returns a copy of the url for the passed in volume. 
+ *    The caller is responsible for releasing the CFURL later.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
+ *  Parameters:
+ *    
+ *    vRefNum:
+ *      FSVolumeRefNum of the target volume.
+ *    
+ *    url:
+ *      The url associated with the target volume.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+FSCopyURLForVolume(
+  FSVolumeRefNum   vRefNum,
+  CFURLRef *       url)                                       AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 

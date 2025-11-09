@@ -1,5 +1,5 @@
 /*	NSNumberFormatter.h
-	Copyright 1996-2002, Apple, Inc. All rights reserved.
+	Copyright (c) 1996-2003, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSFormatter.h>
@@ -26,7 +26,8 @@
 	unsigned int thousandSeparators:1;
 	unsigned int localizesFormat:1;
 	unsigned int allowsFloats:1;
-	unsigned int RESERVED:29;
+	unsigned int allowSameSep:1;
+	unsigned int RESERVED:28;
     } _flags;
     
     void *_reserved;

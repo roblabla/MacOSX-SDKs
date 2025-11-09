@@ -3,9 +3,9 @@
  
      Contains:   Alias Manager Interfaces.
  
-     Version:    CarbonCore-472~1
+     Version:    CarbonCore-545~1
  
-     Copyright:  © 1989-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1989-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -115,6 +115,9 @@ typedef short                           AliasInfoType;
  *    create a new alias between fromFile and target, returns alias
  *    record handle
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -134,6 +137,9 @@ NewAlias(
  *    create a minimal new alias for a target and return alias record
  *    handle
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -151,6 +157,9 @@ NewAliasMinimal(
  *  Summary:
  *    create a minimal new alias from a target fullpath (optional zone
  *    and server name) and return alias record handle
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -173,6 +182,9 @@ NewAliasMinimalFromFullPath(
  *    given an alias handle and fromFile, resolve the alias, update the
  *    alias record and return aliased filename and wasChanged flag.
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -187,15 +199,23 @@ ResolveAlias(
 
 
 /*
- *  GetAliasInfo()
+ *  GetAliasInfo()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use FSCopyAliasInfo instead.
  *  
  *  Summary:
- *    given an alias handle and an index specifying requested alias
- *    information type, return the information from alias record as a
- *    string.
+ *    This call does not work on all aliases. Given an alias handle and
+ *    an index specifying requested alias information type, return the
+ *    information from alias record as a string. An empty string is
+ *    returned when the index is greater than the number of levels
+ *    between the target and root.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -203,12 +223,15 @@ extern OSErr
 GetAliasInfo(
   AliasHandle     alias,
   AliasInfoType   index,
-  Str63           theString)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Str63           theString)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
 
 
 
 /*
  *  IsAliasFile()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -224,6 +247,9 @@ IsAliasFile(
 
 /*
  *  ResolveAliasWithMountFlags()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -248,6 +274,9 @@ ResolveAliasWithMountFlags(
  *    chain.  It returns info about whether the target is a folder or
  *    file; and whether the input file spec was an alias or not.
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -265,10 +294,13 @@ ResolveAliasFile(
 /*
  *  ResolveAliasFileWithMountFlags()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
 extern OSErr 
 ResolveAliasFileWithMountFlags(
@@ -282,10 +314,13 @@ ResolveAliasFileWithMountFlags(
 /*
  *  FollowFinderAlias()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
+ *    Non-Carbon CFM:   in InterfaceLib 8.5 and later
  */
 extern OSErr 
 FollowFinderAlias(
@@ -306,6 +341,9 @@ FollowFinderAlias(
  *    given a fromFile-target pair and an alias handle, update the
  *    alias record pointed to by alias handle to represent target as
  *    the new alias.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -367,6 +405,9 @@ InvokeAliasFilterUPP(
  *    Given an alias handle and fromFile, match the alias and return
  *    FSSpecs to the aliased file(s) and needsUpdate flag
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -393,6 +434,9 @@ MatchAlias(
  *    variation on ResolveAliasFile that does not prompt user with a
  *    dialog
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -412,6 +456,9 @@ ResolveAliasFileWithMountFlagsNoUI(
  *  
  *  Summary:
  *    variation on MatchAlias that does not prompt user with a dialog
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -433,6 +480,9 @@ MatchAliasNoUI(
 /*
  *  FSNewAlias()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -448,6 +498,9 @@ FSNewAlias(
 /*
  *  FSNewAliasMinimal()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -461,6 +514,9 @@ FSNewAliasMinimal(
 
 /*
  *  FSIsAliasFile()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -477,6 +533,9 @@ FSIsAliasFile(
 
 /*
  *  FSResolveAliasWithMountFlags()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -496,6 +555,9 @@ FSResolveAliasWithMountFlags(
 /*
  *  FSResolveAlias()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -512,6 +574,9 @@ FSResolveAlias(
 
 /*
  *  FSResolveAliasFileWithMountFlags()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -531,6 +596,9 @@ FSResolveAliasFileWithMountFlags(
 /*
  *  FSResolveAliasFile()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -548,6 +616,9 @@ FSResolveAliasFile(
 /*
  *  FSFollowFinderAlias()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -564,6 +635,9 @@ FSFollowFinderAlias(
 
 /*
  *  FSUpdateAlias()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -587,6 +661,9 @@ FSUpdateAlias(
  *    the target's unicode name.  If the target does not exist fnfErr
  *    will be returned but the alias will still be created.  This
  *    allows the creation of aliases to targets that do not exist.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
  *  
  *  Parameters:
  *    
@@ -634,6 +711,9 @@ FSNewAliasUnicode(
  *    directory and the target's unicode name.  If the target does not
  *    exist fnfErr will be returned but the alias will still be created.
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
  *  Parameters:
  *    
  *    targetParentRef:
@@ -673,6 +753,9 @@ FSNewAliasMinimalUnicode(
  *    Given an alias handle and fromFile, match the alias and return
  *    FSRefs to the aliased file(s) and needsUpdate flag
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
@@ -695,6 +778,9 @@ FSMatchAlias(
  *  
  *  Summary:
  *    variation on FSMatchAlias that does not prompt user with a dialog
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
  *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in CoreServices.framework
@@ -722,6 +808,9 @@ FSMatchAliasNoUI(
  *    alias record so it may not match what is on disk (no disk i/o is
  *    performed).  The whichInfo paramter is an output parameter that
  *    signifies which fields in the info record contain valid data.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Parameters:
  *    

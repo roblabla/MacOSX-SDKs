@@ -1,5 +1,5 @@
 /*	CFPlugInCOM.h
-	Copyright 1999-2002, Apple, Inc. All rights reserved.
+	Copyright (c) 1999-2003, Apple, Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFPLUGINCOM__)
@@ -84,7 +84,7 @@ typedef struct IUnknownVTbl {
 /* This is a definition of IUnknown as a pure abstract virtual C++ class.  This class will work only with compilers that can produce COM-compatible object layouts for C++ classes.  egcs can not do this.  MetroWerks can do this (if you subclass from __comobject) */
 
 class IUnknown
-#if defined(__MWERKS__)
+#if defined(__MWERKS__) && !defined(__MACH__)
  : __comobject
 #endif
 {

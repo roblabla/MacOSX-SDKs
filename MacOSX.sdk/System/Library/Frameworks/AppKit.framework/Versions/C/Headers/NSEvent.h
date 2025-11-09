@@ -1,7 +1,7 @@
 /*
 	NSEvent.h
 	Application Kit
-	Copyright (c) 1994-2001, Apple Computer, Inc.
+	Copyright (c) 1994-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -143,7 +143,7 @@ enum {
   /* the chars that would have been generated, regardless of modifier keys (except shift) */
 - (BOOL)isARepeat;
 /* this message is valid for keyup, keydown and flagschanged events */
-- (unsigned short)keyCode;		/* device-dependent key number */
+- (unsigned short)keyCode;		/* device-independent key number */
 
 /* these messages are valid for enter and exit events */
 - (int)trackingNumber;

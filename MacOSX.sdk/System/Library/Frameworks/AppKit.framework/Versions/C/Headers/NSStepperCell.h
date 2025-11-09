@@ -1,7 +1,7 @@
 /*
         NSStepperCell.h
         Application Kit
-        Copyright (c) 2000-2001, Apple Computer, Inc.
+        Copyright (c) 2000-2003, Apple Computer, Inc.
         All rights reserved.
 */
 
@@ -16,7 +16,8 @@
     struct {
         unsigned int valueWraps:1;
         unsigned int autorepeat:1;
-        unsigned int reserved:30;
+        unsigned int drawing:1;
+        unsigned int reserved:29;
     } _stFlags;
     unsigned int _reserved1;
     unsigned int _reserved2;
@@ -40,3 +41,4 @@
 - (void)setAutorepeat:(BOOL)autorepeat;
 
 @end
+

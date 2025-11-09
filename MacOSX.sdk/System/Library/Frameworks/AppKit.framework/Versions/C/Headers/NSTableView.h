@@ -1,24 +1,25 @@
 /*
         NSTableView.h
         Application Kit
-        Copyright (c) 1995-2001, Apple Computer, Inc.
+        Copyright (c) 1995-2003, Apple Computer, Inc.
         All rights reserved.
 */
 
 #import <AppKit/NSControl.h>
 #import <AppKit/AppKitDefines.h>
 #import <AppKit/NSDragging.h>
+#import <AppKit/NSUserInterfaceValidation.h>
 
 @class NSTableHeaderView;
 @class NSTableColumn;
-@class _NSSparseArray;
 @class NSMutableArray;
+@class NSIndexSet, NSMutableIndexSet;
 
 typedef struct __TvFlags {
 #ifdef __BIG_ENDIAN__
     unsigned int	allowsColumnReordering:1;
     unsigned int	allowsColumnResizing:1;
-    unsigned int	drawsGrid:1;
+    unsigned int	oldDrawsGridFlag:1;
     unsigned int	allowsEmptySelection:1;
     unsigned int	allowsMultipleSelection:1;
     unsigned int	allowsColumnSelection:1;
@@ -52,7 +53,7 @@ typedef struct __TvFlags {
     unsigned int	allowsColumnSelection:1;
     unsigned int	allowsMultipleSelection:1;
     unsigned int	allowsEmptySelection:1;
-    unsigned int	drawsGrid:1;
+    unsigned int	oldDrawsGridFlag:1;
     unsigned int	allowsColumnResizing:1;
     unsigned int	allowsColumnReordering:1;
 #endif
@@ -61,8 +62,18 @@ typedef struct __TvFlags {
 typedef enum { NSTableViewDropOn, NSTableViewDropAbove } NSTableViewDropOperation;
         // In drag and drop, used to specify a dropOperation.  For example, given a table with N rows (numbered with row 0 at the top visually), a row of N-1 and operation of NSTableViewDropOn would specify a drop on the last row.  To specify a drop below the last row, one would use a row of N and NSTableViewDropAbove for the operation.
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 
-@interface NSTableView : NSControl
+// Grid styles	
+enum {
+    NSTableViewGridNone                    = 0,
+    NSTableViewSolidVerticalGridLineMask   = 1 << 0,
+    NSTableViewSolidHorizontalGridLineMask = 1 << 1
+};
+
+#endif
+
+@interface NSTableView : NSControl <NSUserInterfaceValidations>
 {
     /*All instance variables are private*/
     NSTableHeaderView	*_headerView;
@@ -77,8 +88,8 @@ typedef enum { NSTableViewDropOn, NSTableViewDropAbove } NSTableViewDropOperatio
     int			_lastSelectedRow;
     int			_editingRow;
     int			_editingColumn;
-    _NSSparseArray	*_selectedColumns;
-    _NSSparseArray	*_selectedRows;
+    NSMutableIndexSet	*_selectedColumns;
+    NSMutableIndexSet	*_selectedRows;
     NSImage		*_bodyDragImage;
     NSColor		*_backgroundColor;
     NSColor		*_gridColor;
@@ -108,12 +119,27 @@ typedef enum { NSTableViewDropOn, NSTableViewDropAbove } NSTableViewDropOperatio
 - (BOOL)allowsColumnResizing;
 - (void)setAutoresizesAllColumnsToFit:(BOOL)flag;
 - (BOOL)autoresizesAllColumnsToFit;
-- (void)setDrawsGrid:(BOOL)flag;
-- (BOOL)drawsGrid;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void)setGridStyleMask:(unsigned int)gridType;
+- (unsigned int)gridStyleMask;
+#endif
+
+- (void)setDrawsGrid:(BOOL)flag;  // A method that was deprecated in Mac OS 10.3.  Calls setGridStyleMask:, setting grid style to either None, or vertical and horizonal solid grid lines as appropriate.
+- (BOOL)drawsGrid;  // A method that was deprecated in Mac OS 10.3.  Returns YES if gridStyleMask returns anything other than NSTableViewGridNone.
+
 - (void)setIntercellSpacing:(NSSize)aSize;
 - (NSSize)intercellSpacing;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void)setUsesAlternatingRowBackgroundColors:(BOOL)useAlternatingRowColors;
+- (BOOL)usesAlternatingRowBackgroundColors;
+    // Configures the table to use either the standard alternating row colors, or a solid color for its background. 
+#endif
+
 - (void)setBackgroundColor:(NSColor *)color;
 - (NSColor *)backgroundColor;
+
 - (void)setGridColor:(NSColor *)color;
 - (NSColor *)gridColor;
 - (void)setRowHeight:(float)rowHeight;
@@ -129,6 +155,7 @@ typedef enum { NSTableViewDropOn, NSTableViewDropAbove } NSTableViewDropOperatio
 - (NSTableColumn *)tableColumnWithIdentifier:(id)identifier;
 
 - (void)tile;
+- (void)sizeToFit;
 - (void)sizeLastColumnToFit;
 - (void)scrollRowToVisible:(int)row;
 - (void)scrollColumnToVisible:(int)column;
@@ -144,6 +171,16 @@ typedef enum { NSTableViewDropOn, NSTableViewDropAbove } NSTableViewDropOperatio
 
 - (void)setDoubleAction:(SEL)aSelector;
 - (SEL)doubleAction;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+
+/* Sorting support 
+*/
+- (void)setSortDescriptors:(NSArray *)array;
+- (NSArray *)sortDescriptors;
+    // The array of sort descriptors is archived.  Sort descriptors will persist along with other column information if an autosave name is set.
+
+#endif
 
 /* Support for little "indicator" images in table header cells.
 */
@@ -179,8 +216,28 @@ typedef enum { NSTableViewDropOn, NSTableViewDropAbove } NSTableViewDropOperatio
 - (BOOL)allowsColumnSelection;
 - (void)selectAll:(id)sender;
 - (void)deselectAll:(id)sender;
+
+// A method that was deprecated in Mac OS 10.3.  You should use selectColumnIndexes:byExtendingSelection: instead.  See that method for more details.
 - (void)selectColumn:(int)column byExtendingSelection:(BOOL)extend;
+// A method that was deprecated in Mac OS 10.3.  You should use selectRowIndexes:byExtendingSelection: instead.  See that method for more details.
 - (void)selectRow:(int)row byExtendingSelection:(BOOL)extend;
+// A method that was deprecated in Mac OS 10.3.  You should use selectedColumnIndexes instead.
+- (NSEnumerator *)selectedColumnEnumerator;
+// A method that was deprecated in Mac OS 10.3.  You should use selectedRowIndexes instead.
+- (NSEnumerator *)selectedRowEnumerator;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void)selectColumnIndexes:(NSIndexSet *)indexes byExtendingSelection:(BOOL)extend;
+    // Sets the column selection using the indexes.  Selection is set/extended based on the extend flag. 
+    // If a subclasser implements only the deprecated selectColumn:byExtendingSelection: methods, then this method will be called in a loop.  If a subclasser implements this method, then selectColumn:byExtendingSelection: will not be used.  This allows subclassers already overriding selectColumn:byExtendingSelection: to still receive all selection message.  Note that, to avoid cycles, subclassers of this method and selectColumn:byExtendingSelection: should not call each other.
+- (void)selectRowIndexes:(NSIndexSet *)indexes byExtendingSelection:(BOOL)extend;
+    // Sets the row selection using the indexes.  Selection is set/extended based on the extend flag.
+    // If a subclasser implements only the deprecated selectRow:byExtendingSelection: methods, then this method will be called in a loop.  If a subclasser implements this method, then selectRow:byExtendingSelection: will not be used.  This allows subclassers already overriding selectRow:byExtendingSelection: to still receive all selection message.  Note that, to avoid cycles, subclassers of this method and selectRow:byExtendingSelection: should not call each other.
+
+- (NSIndexSet *)selectedColumnIndexes;
+- (NSIndexSet *)selectedRowIndexes;
+#endif
+
 - (void)deselectColumn:(int)column;
 - (void)deselectRow:(int)row;
 - (int)selectedColumn;
@@ -189,8 +246,6 @@ typedef enum { NSTableViewDropOn, NSTableViewDropAbove } NSTableViewDropOperatio
 - (BOOL)isRowSelected:(int)row;
 - (int)numberOfSelectedColumns;
 - (int)numberOfSelectedRows;
-- (NSEnumerator *)selectedColumnEnumerator;
-- (NSEnumerator *)selectedRowEnumerator;
 
 
 /*
@@ -229,6 +284,9 @@ typedef enum { NSTableViewDropOn, NSTableViewDropAbove } NSTableViewDropOperatio
 - (void)drawRow:(int)row clipRect:(NSRect)rect;
 - (void)highlightSelectionInClipRect:(NSRect)rect;
 - (void)drawGridInClipRect:(NSRect)rect;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void)drawBackgroundInClipRect:(NSRect)clipRect;
+#endif
 
 @end
 
@@ -267,6 +325,14 @@ APPKIT_EXTERN NSString *NSTableViewSelectionIsChangingNotification;
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(int)row;
 // optional
 - (void)tableView:(NSTableView *)tableView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn row:(int)row;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+
+// optional - sorting support
+- (void)tableView:(NSTableView *)tableView sortDescriptorsDidChange:(NSArray *)oldDescriptors;
+    // This is the indication that sorting needs to be done.  Typically the data source will sort its data, reload, and adjust selections.
+
+#endif
 
 // optional - drag and drop support
 - (BOOL)tableView:(NSTableView *)tv writeRows:(NSArray*)rows toPasteboard:(NSPasteboard*)pboard;

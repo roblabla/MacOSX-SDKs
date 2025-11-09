@@ -24,14 +24,10 @@
 #define _GSSAPI_GENERIC_H_
 
 /*
- * $Id: gssapi_generic.h,v 1.11.6.1.2.4 2002/05/05 18:01:50 lxs Exp $
+ * $Id: gssapi_generic.h,v 1.16 2003/03/06 20:26:35 lxs Exp $
  */
 
-#if defined(macintosh) || (defined(__MACH__) && defined(__APPLE__))
 #include <gssapi/gssapi.h>
-#else
-#include <gssapi/gssapi.h>
-#endif
 
 #if defined(__cplusplus) && !defined(GSSAPIGENERIC_BEGIN_DECLS)
 #define GSSAPIGENERIC_BEGIN_DECLS	extern "C" {
@@ -50,9 +46,9 @@ GSSAPIGENERIC_BEGIN_DECLS
 GSS_DLLIMP extern gss_OID gss_nt_user_name;
 GSS_DLLIMP extern gss_OID gss_nt_machine_uid_name;
 GSS_DLLIMP extern gss_OID gss_nt_string_uid_name;
-GSS_DLLIMP extern gss_OID gss_nt_service_name_v2;
+extern gss_OID gss_nt_service_name_v2;
 GSS_DLLIMP extern gss_OID gss_nt_service_name;
-GSS_DLLIMP extern gss_OID gss_nt_exported_name;
+extern gss_OID gss_nt_exported_name;
 
 GSSAPIGENERIC_END_DECLS
 

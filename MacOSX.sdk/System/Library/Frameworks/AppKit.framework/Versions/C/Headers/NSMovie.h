@@ -1,7 +1,7 @@
 /*
         NSMovie.h
         Application Kit
-        Copyright (c) 2000-2001, Apple Computer, Inc.
+        Copyright (c) 2000-2003, Apple Computer, Inc.
         All rights reserved.
 */
 
@@ -13,9 +13,12 @@
   @private
     void*    _movie;
     NSURL*   _url;
+    struct {
+	int dispose:1;
+	int reserved:31;
+    } _movieFlags;
     long     _reserved1;
     long     _reserved2;
-    long     _reserved3;
 }
 
 - (id) initWithMovie:(void* /*Movie*/)movie;			// When archived, saves contents

@@ -1,5 +1,5 @@
 /*	CFSet.h
-	Copyright 1998-2002, Apple, Inc. All rights reserved.
+	Copyright (c) 1998-2003, Apple, Inc. All rights reserved.
 */
 /*!
         @header CFSet
@@ -302,10 +302,10 @@ CFIndex CFSetGetCount(CFSetRef theSet);
 	@param theSet The set to be searched. If this parameter is not a
 		valid CFSet, the behavior is undefined.
 	@param value The value for which to find matches in the set. The
-		hash() callback provided when the set was created is
-		used to compare. If the hash() callback was NULL, pointer
+		equal() callback provided when the set was created is
+		used to compare. If the equal() callback was NULL, pointer
 		equality (in C, ==) is used. If value, or any of the values
-		in the set, are not understood by the hash() callback,
+		in the set, are not understood by the equal() callback,
 		the behavior is undefined.
 	@result The number of times the given value occurs in the set.
 */
@@ -318,10 +318,10 @@ CFIndex CFSetGetCountOfValue(CFSetRef theSet, const void *value);
 	@param theSet The set to be searched. If this parameter is not a
 		valid CFSet, the behavior is undefined.
 	@param value The value for which to find matches in the set. The
-		hash() callback provided when the set was created is
-		used to compare. If the hash() callback was NULL, pointer
+		equal() callback provided when the set was created is
+		used to compare. If the equal() callback was NULL, pointer
 		equality (in C, ==) is used. If value, or any of the values
-		in the set, are not understood by the hash() callback,
+		in the set, are not understood by the equal() callback,
 		the behavior is undefined.
 	@result true, if the value is in the set, otherwise false.
 */
@@ -333,10 +333,10 @@ Boolean CFSetContainsValue(CFSetRef theSet, const void *value);
 	Retrieves a value in the set which hashes the same as the specified value.
 	@param theSet The set to be queried. If this parameter is not a
 		valid CFSet, the behavior is undefined.
-	@param value The value to retrieve. The hash() callback provided when
-                the set was created is used to compare. If the hash() callback
+	@param value The value to retrieve. The equal() callback provided when
+                the set was created is used to compare. If the equal() callback
                 was NULL, pointer equality (in C, ==) is used. If a value, or
-                any of the values in the set, are not understood by the hash()
+                any of the values in the set, are not understood by the equal()
                 callback, the behavior is undefined.
         @result The value in the set with the given hash.
 */
@@ -350,10 +350,10 @@ const void *CFSetGetValue(CFSetRef theSet, const void *value);
 	@param theSet The set to be queried. If this parameter is not a
 		valid CFSet, the behavior is undefined.
 	@param candidate This value is hashed and compared with values in the
-                set to determine which value to retrieve. The hash() callback provided when
-                the set was created is used to compare. If the hash() callback
+                set to determine which value to retrieve. The equal() callback provided when
+                the set was created is used to compare. If the equal() callback
                 was NULL, pointer equality (in C, ==) is used. If a value, or
-                any of the values in the set, are not understood by the hash()
+                any of the values in the set, are not understood by the equal()
                 callback, the behavior is undefined.
 	@param value A pointer to memory which should be filled with the
 		pointer-sized value if a matching value is found. If no
@@ -423,10 +423,10 @@ void CFSetAddValue(CFMutableSetRef theSet, const void *value);
 	@param theSet The set to which the value is to be replaced. If this
 		parameter is not a valid mutable CFSet, the behavior is
 		undefined.
-        @param value The value to replace in the set. The hash() callback provided when
-                the set was created is used to compare. If the hash() callback
+        @param value The value to replace in the set. The equal() callback provided when
+                the set was created is used to compare. If the equal() callback
                 was NULL, pointer equality (in C, ==) is used. If a value, or
-                any of the values in the set, are not understood by the hash()
+                any of the values in the set, are not understood by the equal()
                 callback, the behavior is undefined. The value is retained by
 		the set using the retain callback provided when the set
 		was created. If the value is not of the sort expected by the
@@ -443,10 +443,10 @@ void CFSetReplaceValue(CFMutableSetRef theSet, const void *value);
 	@param theSet The set to which the value is to be replaced. If this
 		parameter is not a valid mutable CFSet, the behavior is
 		undefined.
-        @param value The value to set in the CFSet. The hash() callback provided when
-                the set was created is used to compare. If the hash() callback
+        @param value The value to set in the CFSet. The equal() callback provided when
+                the set was created is used to compare. If the equal() callback
                 was NULL, pointer equality (in C, ==) is used. If a value, or
-                any of the values in the set, are not understood by the hash()
+                any of the values in the set, are not understood by the equal()
                 callback, the behavior is undefined. The value is retained by
 		the set using the retain callback provided when the set
 		was created. If the value is not of the sort expected by the
@@ -462,10 +462,10 @@ void CFSetSetValue(CFMutableSetRef theSet, const void *value);
 	@param theSet The set from which the value is to be removed.
                 If this parameter is not a valid mutable CFSet,
 		the behavior is undefined.
-        @param value The value to remove. The hash() callback provided when
-                the set was created is used to compare. If the hash() callback
+        @param value The value to remove. The equal() callback provided when
+                the set was created is used to compare. If the equal() callback
                 was NULL, pointer equality (in C, ==) is used. If a value, or
-                any of the values in the set, are not understood by the hash()
+                any of the values in the set, are not understood by the equal()
                 callback, the behavior is undefined.
 */
 CF_EXPORT

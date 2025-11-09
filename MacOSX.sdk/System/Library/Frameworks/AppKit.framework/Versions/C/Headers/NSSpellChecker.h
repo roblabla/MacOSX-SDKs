@@ -1,7 +1,7 @@
 /*
         NSSpellChecker.h
 	Application Kit
-	Copyright (c) 1990-2001, Apple Computer, Inc.
+	Copyright (c) 1990-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -84,6 +84,11 @@ The usual usage of this is to implement a checkSpelling: method in an object tha
 - (NSArray *)ignoredWordsInSpellDocumentWithTag:(int)tag;
 - (void)setIgnoredWords:(NSArray *)words inSpellDocumentWithTag:(int)tag;
 - (NSArray *)guessesForWord:(NSString *)word;
+
+/* completionsForPartialWord:... returns an array of strings, in the order in which they should be presented, representing complete words that the user might be trying to type when starting by typing the partial word at the given range in the given string. */
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (NSArray *)completionsForPartialWordRange:(NSRange)range inString:(NSString *)string language:(NSString *)language inSpellDocumentWithTag:(int)tag;
+#endif
 
 /* When a document closes, it should notify the NSSpellChecker via closeSpellDocumentWithTag: so that its ignored word list gets cleaned up. */
 - (void)closeSpellDocumentWithTag:(int)tag;

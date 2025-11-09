@@ -1,6 +1,6 @@
 /* 
 	NSTypesetter.h
-	Copyright (c) 1994-2001, Apple Computer, Inc.  All rights reserved. 
+	Copyright (c) 1994-2003, Apple Computer, Inc.  All rights reserved. 
 
 	A concrete class to lay glyphs out in horizontal or vertical boxes	
 */

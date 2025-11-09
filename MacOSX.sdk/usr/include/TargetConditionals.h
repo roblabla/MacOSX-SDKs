@@ -7,7 +7,7 @@
 						with all compilers.  This header only recognizes compilers
 						known to run on Mac OS X.
  
-     Copyright:  (c) 2000-2001 by Apple Computer, Inc., all rights reserved.
+     Copyright:  (c) 2000-2003 by Apple Computer, Inc., all rights reserved.
  
 */
 
@@ -151,7 +151,7 @@
     			appropriately.  
 			
     			The short term work around is to set the TARGET_CPU_ and TARGET_OS_
-    			on the command line to the compiler (e.g. d TARGET_CPU_MIPS -d TARGET_OS_UNIX)
+    			on the command line to the compiler (e.g. -DTARGET_CPU_MIPS=1 -DTARGET_OS_UNIX=1)
 			
     			The long term solution is to add a new case to this file which
     			auto detects your compiler and sets up the TARGET_ conditionals.

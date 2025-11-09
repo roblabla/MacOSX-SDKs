@@ -1,6 +1,6 @@
 /*
 	NSAppleEventDescriptor.h
-	Copyright (c) 1997-2002, Apple Computer, Inc.
+	Copyright (c) 1997-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -13,18 +13,19 @@
     @private
     AEDesc _desc;
     BOOL _hasValidDesc;
+    char _padding[3];
 }
 
 // Create an autoreleased NSAppleEventDescriptor whose AEDesc type is typeNull.
 + (NSAppleEventDescriptor *)nullDescriptor;
 
-// Given some data, and a four-character type code, create an autoreleased NSAppleEventDescriptor that contains that data, with that type.
+// Given some data, and a four-character type code, create and return an autoreleased NSAppleEventDescriptor that contains that data, with that type.
 #if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 + (NSAppleEventDescriptor *)descriptorWithDescriptorType:(DescType)descriptorType bytes:(const void *)bytes length:(unsigned int)byteCount;
 #endif
 + (NSAppleEventDescriptor *)descriptorWithDescriptorType:(DescType)descriptorType data:(NSData *)data;
 
-// Given a value, create an autoreleased NSAppleEventDescriptor that contains that value, with an appropriate type (typeBoolean, typeEnumerated, typeSInt32, or typeType, respectively).
+// Given a value, create and return an autoreleased NSAppleEventDescriptor that contains that value, with an appropriate type (typeBoolean, typeEnumerated, typeSInt32, or typeType, respectively).
 #if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 + (NSAppleEventDescriptor *)descriptorWithBoolean:(Boolean)boolean;
 + (NSAppleEventDescriptor *)descriptorWithEnumCode:(OSType)enumerator;
@@ -32,12 +33,12 @@
 + (NSAppleEventDescriptor *)descriptorWithTypeCode:(OSType)typeCode;
 #endif
 
-// Given a string, create an autoreleased NSAppleEventDescriptor that contains that string, as typeUnicodeText.
+// Given a string, create and return an autoreleased NSAppleEventDescriptor that contains that string, as typeUnicodeText.
 #if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 + (NSAppleEventDescriptor *)descriptorWithString:(NSString *)string;
 #endif
 
-// Create an autoreleased event, list, or record NSAppleEventDescriptor, respectively.
+// Create and return an autoreleased event, list, or record NSAppleEventDescriptor, respectively.
 + (NSAppleEventDescriptor *)appleEventWithEventClass:(AEEventClass)eventClass eventID:(AEEventID)eventID targetDescriptor:(NSAppleEventDescriptor *)targetDescriptor returnID:(AEReturnID)returnID transactionID:(AETransactionID)transactionID;
 + (NSAppleEventDescriptor *)listDescriptor;
 + (NSAppleEventDescriptor *)recordDescriptor;

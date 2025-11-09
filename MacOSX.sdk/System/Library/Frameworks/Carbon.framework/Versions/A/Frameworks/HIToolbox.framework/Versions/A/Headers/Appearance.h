@@ -3,9 +3,9 @@
  
      Contains:   Appearance Manager Interfaces.
  
-     Version:    HIToolbox-124.14~2
+     Version:    HIToolbox-145.33~1
  
-     Copyright:  © 1994-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1994-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -20,16 +20,12 @@
 #include <ApplicationServices/ApplicationServices.h>
 #endif
 
-#ifndef __TEXTEDIT__
-#include <HIToolbox/TextEdit.h>
+#ifndef __COLLECTIONS__
+#include <CarbonCore/Collections.h>
 #endif
 
-#ifndef __MACWINDOWS__
-#include <HIToolbox/MacWindows.h>
-#endif
-
-#ifndef __CONTROLS__
-#include <HIToolbox/Controls.h>
+#ifndef __PROCESSES__
+#include <HIServices/Processes.h>
 #endif
 
 
@@ -77,6 +73,117 @@ enum {
 #define kThemeAppearanceAqua         CFSTR( "com.apple.theme.appearance.aqua" )
 #define kThemeAppearanceAquaBlue     CFSTR( "com.apple.theme.appearance.aqua.blue" )
 #define kThemeAppearanceAquaGraphite    CFSTR( "com.apple.theme.appearance.aqua.graphite" )
+
+
+/*
+ *  AppearancePartCode
+ *  
+ *  Summary:
+ *    These are part codes returned by a few of the hit testing
+ *    Appearance APIs. Many of the Control Manager's ControlPartCodes
+ *    are based on these part codes.
+ */
+typedef SInt16 AppearancePartCode;
+enum {
+
+  /*
+   * This represents the lack of a part. It will be returned when the
+   * Appearance Manager's hit testing logic determines that the input
+   * point is not in any part of the widget.
+   */
+  kAppearancePartMetaNone       = 0,
+
+  /*
+   * This represents a widget which is not currently clickable because
+   * it is disabled.
+   */
+  kAppearancePartMetaDisabled   = 254,
+
+  /*
+   * This represents a widget which is inactive, presumably because it
+   * is in a window that is inactive.
+   */
+  kAppearancePartMetaInactive   = 255,
+
+  /*
+   * The part of a widget which indicates the widget's value. Scroll
+   * bar thumbs and slider thumbs are the two main examples.
+   */
+  kAppearancePartIndicator      = 129,
+
+  /*
+   * The part of a widget which moves its value visually upward. Scroll
+   * bar up arrows are the main example.
+   */
+  kAppearancePartUpButton       = 20,
+
+  /*
+   * The part of a widget which moves its value visually downward.
+   * Scroll bar down arrows are the main example.
+   */
+  kAppearancePartDownButton     = 21,
+
+  /*
+   * The part of a widget which moves its value visually leftward.
+   * Scroll bar left arrows are the main example.
+   */
+  kAppearancePartLeftButton     = kAppearancePartUpButton,
+
+  /*
+   * The part of a widget which moves its value visually rightward.
+   * Scroll bar right arrows are the main example.
+   */
+  kAppearancePartRightButton    = kAppearancePartDownButton,
+
+  /*
+   * The part of a widget which moves its value visually upward one
+   * whole page. Scroll bar page up areas are the main example.
+   */
+  kAppearancePartPageUpArea     = 22,
+
+  /*
+   * The part of a widget which moves its value visually downward one
+   * whole page. Scroll bar page down areas are the main example.
+   */
+  kAppearancePartPageDownArea   = 23,
+
+  /*
+   * The part of a widget which moves its value visually leftward one
+   * whole page. Scroll bar page left areas are the main example.
+   */
+  kAppearancePartPageLeftArea   = kAppearancePartPageUpArea,
+
+  /*
+   * The part of a widget which moves its value visually rightward one
+   * whole page. Scroll bar page right areas are the main example.
+   */
+  kAppearancePartPageRightArea  = kAppearancePartPageDownArea
+};
+
+
+
+/*
+ *  AppearanceRegionCode
+ *  
+ *  Summary:
+ *    These are region codes used by a few of window-related Appearance
+ *    APIs. Many of the Window Manager's WindowRegionCodes are based on
+ *    these region codes.
+ */
+typedef UInt16 AppearanceRegionCode;
+enum {
+  kAppearanceRegionTitleBar     = 0,
+  kAppearanceRegionTitleText    = 1,
+  kAppearanceRegionCloseBox     = 2,
+  kAppearanceRegionZoomBox      = 3,
+  kAppearanceRegionDrag         = 5,
+  kAppearanceRegionGrow         = 6,
+  kAppearanceRegionCollapseBox  = 7,
+  kAppearanceRegionTitleProxyIcon = 8,  /* Mac OS 8.5 forward*/
+  kAppearanceRegionStructure    = 32,
+  kAppearanceRegionContent      = 33    /* Content area of the window; empty when the window is collapsed*/
+};
+
 
 enum {
   kThemeBrushDialogBackgroundActive = 1, /* use with kModalWindowClass */
@@ -160,7 +267,8 @@ enum {
   kThemeBrushBlack              = -1,
   kThemeBrushWhite              = -2,
   kThemeBrushPrimaryHighlightColor = -3, /* available in Mac OS 10.1 and CarbonLib 1.6, and later*/
-  kThemeBrushSecondaryHighlightColor = -4 /* available in Mac OS 10.1 and CarbonLib 1.6, and later*/
+  kThemeBrushSecondaryHighlightColor = -4, /* available in Mac OS 10.1 and CarbonLib 1.6, and later*/
+  kThemeBrushAlternatePrimaryHighlightColor = -5 /* available in Mac OS 10.2 and later*/
 };
 
 typedef SInt16                          ThemeBrush;
@@ -265,6 +373,9 @@ typedef UInt32                          ThemeDrawState;
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /* Theme cursor selectors available in Appearance 1.1 or later                      */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+
+/*
+ */
 enum {
   kThemeArrowCursor             = 0,
   kThemeCopyArrowCursor         = 1,
@@ -284,7 +395,31 @@ enum {
   kThemeResizeLeftCursor        = 15,
   kThemeResizeRightCursor       = 16,
   kThemeResizeLeftRightCursor   = 17,
-  kThemeNotAllowedCursor        = 18    /* Jaguar or Later */
+  kThemeNotAllowedCursor        = 18,   /* available on Mac OS X 10.2 and later */
+
+  /*
+   * Available in Mac OS X 10.3 or later.
+   */
+  kThemeResizeUpCursor          = 19,
+
+  /*
+   * Available in Mac OS X 10.3 or later.
+   */
+  kThemeResizeDownCursor        = 20,
+
+  /*
+   * Available in Mac OS X 10.3 or later.
+   */
+  kThemeResizeUpDownCursor      = 21,
+
+  /*
+   * A special cursor to indicate that letting up the mouse will cause
+   * a dragged item to go away. When the item goes away, a poof cloud
+   * animation should occur. This cursor should be updated dynamically
+   * dependeding on whether the mouse up action will remove the item.
+   * Available in Mac OS X 10.3 or later.
+   */
+  kThemePoofCursor              = 22
 };
 
 typedef UInt32                          ThemeCursor;
@@ -341,12 +476,21 @@ typedef UInt16                          ThemeMenuItemType;
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /* Theme Backgrounds                                                                        */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+
+/*
+ */
 enum {
   kThemeBackgroundTabPane       = 1,
   kThemeBackgroundPlacard       = 2,
   kThemeBackgroundWindowHeader  = 3,
   kThemeBackgroundListViewWindowHeader = 4,
-  kThemeBackgroundSecondaryGroupBox = 5
+  kThemeBackgroundSecondaryGroupBox = 5,
+
+  /*
+   * A special theme brush for drawing metal backgrounds. Currently,
+   * this brush only works with HIThemeApplyBackground.
+   */
+  kThemeBackgroundMetal         = 6
 };
 
 typedef UInt32                          ThemeBackgroundKind;
@@ -562,18 +706,24 @@ enum {
    * use kThemeCurrentPortFont only as a last resort. Only available on
    * Mac OS X or CarbonLib 1.3 or later.
    */
-  kThemeCurrentPortFont         = 200,  /* Available in JAGUAR or later*/
+  kThemeCurrentPortFont         = 200,
 
   /*
    * The font used to draw the label of a toolbar item. Available in
    * Mac OS X 10.2 or later.
    */
-  kThemeToolbarFont             = 108
+  kThemeToolbarFont             = 108,
+
+  /*
+   * The appropriate system font for mini-sized controls. Available in
+   * Mac OS X 10.3 or later.
+   */
+  kThemeMiniSystemFont          = 109
 };
 
 /* This is the total of the PUBLIC ThemeFontIDs!*/
 enum {
-  kPublicThemeFontCount         = 17
+  kPublicThemeFontCount         = 20
 };
 
 typedef UInt16                          ThemeFontID;
@@ -599,18 +749,44 @@ enum {
 };
 
 typedef UInt16                          ThemeTabDirection;
-/* NOTE ON TAB HEIGHT                                                                       */
-/* Use the kThemeSmallTabHeightMax and kThemeLargeTabHeightMax when calculating the rects   */
-/* to draw tabs into. This height includes the tab frame overlap. Tabs that are not in the  */
-/* front are only drawn down to where they meet the frame, as if the height was just        */
-/* kThemeLargeTabHeight, for example, as opposed to the ...Max constant. Remember that for  */
-/* East and West tabs, the height referred to below is actually the width.                  */
+
+/*
+ *  Summary:
+ *    Deprecated tab height and overlap constants.
+ *  
+ *  Discussion:
+ *    These constants have been deprecated in favor of theme metrics.
+ *    Please do not use them anymore. These constants will be removed
+ *    in the next major release of OS X.
+ */
 enum {
-  kThemeSmallTabHeight          = 16,   /* amount small tabs protrude from frame.*/
-  kThemeLargeTabHeight          = 21,   /* amount large tabs protrude from frame.*/
-  kThemeTabPaneOverlap          = 3,    /* amount tabs overlap frame.*/
-  kThemeSmallTabHeightMax       = 19,   /* small tab height + overlap*/
-  kThemeLargeTabHeightMax       = 24    /* large tab height + overlap*/
+
+  /*
+   * Deprecated. Use kThemeMetricSmallTabHeight.
+   */
+  kThemeSmallTabHeight          = 16,
+
+  /*
+   * Deprecated. Use kThemeMetricLargeTabHeight.
+   */
+  kThemeLargeTabHeight          = 21,
+
+  /*
+   * Deprecated. Use kThemeMetricTabFrameOverlap.
+   */
+  kThemeTabPaneOverlap          = 3,
+
+  /*
+   * Deprecated. Use kThemeMetricSmallTabHeight and
+   * kThemeMetricSmallTabFrameOverlap.
+   */
+  kThemeSmallTabHeightMax       = 19,
+
+  /*
+   * Deprecated. Use metric kThemeMetricLargeTabHeight and
+   * kThemeMetricTabFrameOverlap.
+   */
+  kThemeLargeTabHeightMax       = 24
 };
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -626,6 +802,35 @@ enum {
   kThemeSmallSlider             = 6,
   kThemeLargeProgressBar        = 7,
   kThemeLargeIndeterminateBar   = 8
+};
+
+
+/*
+ *  Discussion:
+ *    New TThemeTrackKinds on Mac OS X 10.3 and later. Not all of them
+ *    are implemented.
+ */
+enum {
+
+  /*
+   * Not implemented. Will return paramErr if used.
+   */
+  kThemeMiniScrollBar           = 9,
+
+  /*
+   * A miniature version of the slider.
+   */
+  kThemeMiniSlider              = 10,
+
+  /*
+   * Not implemented. Will return paramErr if used.
+   */
+  kThemeMiniProgressBar         = 11,
+
+  /*
+   * Not implemented. Will return paramErr if used.
+   */
+  kThemeMiniIndeterminateBar    = 12
 };
 
 typedef UInt16                          ThemeTrackKind;
@@ -845,24 +1050,188 @@ typedef UInt16                          ThemeGrowDirection;
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /* Button kinds                                                                             */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+
+/*
+ *  Discussion:
+ *    ThemeButtonKinds
+ */
 enum {
+
+  /*
+   * Dynamically-sized push button kind. Prior to Mac OS X 10.3 all
+   * push button sizes could be determined dynamically: either they
+   * were smaller than normal size and therefore small or they were
+   * normal size. This constant will never describe a mini push button,
+   * regardless of associated bounds. Please use the explicitly-sized
+   * kThemePushButton{Normal,Small,Mini} constants.
+   */
   kThemePushButton              = 0,
   kThemeCheckBox                = 1,
   kThemeRadioButton             = 2,
-  kThemeBevelButton             = 3,    /* bevel button (obsolete) */
-  kThemeArrowButton             = 4,    /* popup button without text (no label). See ThemeButtonAdornment for glyphs. */
-  kThemePopupButton             = 5,    /* popup button */
+
+  /*
+   * Bevel button (obsolete)
+   */
+  kThemeBevelButton             = 3,
+
+  /*
+   * Popup button without text (no label). See ThemeButtonAdornment for
+   * glyphs. The arrow button theme name is somewhat confusing. This is
+   * the primitive used to draw the control known as the disclosure
+   * button.
+   */
+  kThemeArrowButton             = 4,
+
+  /*
+   * Dynamically-sized popup button kind. Prior to Mac OS X 10.3 all
+   * popup button sizes could be determined dynamically: either they
+   * were smaller than normal size and therefore small or they were
+   * normal size. This constant will never describe a mini popup
+   * button, regardless of associated bounds. Please use the
+   * explicitly-sized kThemePopupButton{Normal,Small,Mini} constants.
+   */
+  kThemePopupButton             = 5,
   kThemeDisclosureButton        = 6,
-  kThemeIncDecButton            = 7,    /* increment/decrement buttons  (no label) */
-  kThemeSmallBevelButton        = 8,    /* small-shadow bevel button */
-  kThemeMediumBevelButton       = 3,    /* med-shadow bevel button */
-  kThemeLargeBevelButton        = 9,    /* large-shadow bevel button */
-  kThemeListHeaderButton        = 10,   /* sort button for top of list */
-  kThemeRoundButton             = 11,   /* round button */
-  kThemeLargeRoundButton        = 12,   /* large round button */
-  kThemeSmallCheckBox           = 13,   /* small checkbox */
-  kThemeSmallRadioButton        = 14,   /* small radio button */
-  kThemeRoundedBevelButton      = 15,   /* rounded bevel button */
+
+  /*
+   * Increment/decrement buttons (no label). This is the primitive used
+   * to draw the LittleArrows control.
+   */
+  kThemeIncDecButton            = 7,
+
+  /*
+   * Small-shadow bevel button
+   */
+  kThemeSmallBevelButton        = 8,
+
+  /*
+   * Med-shadow bevel button
+   */
+  kThemeMediumBevelButton       = 3,
+
+  /*
+   * Large-shadow bevel button
+   */
+  kThemeLargeBevelButton        = 9,
+
+  /*
+   * Sort button for top of a list. This is the theme primitive used to
+   * draw the top of the columns in the data browser.
+   */
+  kThemeListHeaderButton        = 10,
+  kThemeRoundButton             = 11,
+  kThemeLargeRoundButton        = 12,
+  kThemeSmallCheckBox           = 13,
+  kThemeSmallRadioButton        = 14,
+  kThemeRoundedBevelButton      = 15,
+  kThemeComboBox                = 16,
+  kThemeComboBoxSmall           = 17
+};
+
+
+/*
+ *  Discussion:
+ *    New ThemeButtonKinds available on Mac OS X 10.3 and later.
+ */
+enum {
+  kThemeComboBoxMini            = 18,
+  kThemeMiniCheckBox            = 19,
+  kThemeMiniRadioButton         = 20,
+
+  /*
+   * This is the primitive used to draw the small variant of the
+   * LittleArrows control.
+   */
+  kThemeIncDecButtonSmall       = 21,
+
+  /*
+   * This is the primitive used to draw the mini variant of the
+   * LittleArrows control.
+   */
+  kThemeIncDecButtonMini        = 22,
+
+  /*
+   * The arrow button theme name is somewhat confusing. This is the
+   * primitive used to draw the small variant of the control known as
+   * the disclosure button.
+   */
+  kThemeArrowButtonSmall        = 23,
+
+  /*
+   * The arrow button theme name is somewhat confusing. This is the
+   * primitive used to draw the mini variant of the control known as
+   * the disclosure button.
+   */
+  kThemeArrowButtonMini         = 24,
+
+  /*
+   * Explicitly-sized normal push button kind. Prior to Mac OS X 10.3
+   * all push button sizes could be determined dynamically: either they
+   * were smaller than normal size and therefore small or they were
+   * normal size. Using this constant, an explicitly-sized normal push
+   * button can be specified.
+   */
+  kThemePushButtonNormal        = 25,
+
+  /*
+   * Explicitly-sized small push button kind. Prior to Mac OS X 10.3
+   * all push button sizes could be determined dynamically: either they
+   * were smaller than normal size and therefore small or they were
+   * normal size. Using this constant, an explicitly-sized small push
+   * button can be specified.
+   */
+  kThemePushButtonSmall         = 26,
+
+  /*
+   * Explicitly-sized mini push button kind. Prior to Mac OS X 10.3 all
+   * push button sizes could be determined dynamically: either they
+   * were smaller than normal size and therefore small or they were
+   * normal size. Since a mini variant was introduced in Mac OS X 10.3,
+   * smaller than normal size is can also mean mini. To avoid confusion
+   * with existing code, the mini variant will never be implicitly
+   * determined and must be explicity requested with the
+   * kThemePushButtonMini constant.
+   */
+  kThemePushButtonMini          = 27,
+
+  /*
+   * Explicitly-sized normal popup button kind. Prior to Mac OS X 10.3
+   * all popup button sizes could be determined dynamically: either
+   * they were smaller than normal size and therefore small or they
+   * were normal size. Using this constant, an explicitly-sized normal
+   * popup button can be specified.
+   */
+  kThemePopupButtonNormal       = 28,
+
+  /*
+   * Explicitly-sized small popup button kind. Prior to Mac OS X 10.3
+   * all popup button sizes could be determined dynamically: either
+   * they were smaller than normal size and therefore small or they
+   * were normal size. Using this constant, an explicitly-sized small
+   * popup button can be specified.
+   */
+  kThemePopupButtonSmall        = 29,
+
+  /*
+   * Explicitly-sized mini popup button kind. Prior to Mac OS X 10.3
+   * all popup button sizes could be determined dynamically: either
+   * they were smaller than normal size and therefore small or they
+   * were normal size. Since a mini variant was introduced in Mac OS X
+   * 10.3, smaller than normal size is can also mean mini. To avoid
+   * confusion with existing code, the mini variant will never be
+   * implicitly determined and must be explicity requested with the
+   * kThemePopupButtonMini constant.
+   */
+  kThemePopupButtonMini         = 30
+};
+
+
+/*
+ *  Discussion:
+ *    These are legacy synonyms for previously defined
+ *    ThemeButtonKinds. Please use the modern constant names.
+ */
+enum {
   kThemeNormalCheckBox          = kThemeCheckBox,
   kThemeNormalRadioButton       = kThemeRadioButton
 };
@@ -1540,6 +1909,78 @@ enum {
   kThemeMetricSmallVSliderTickOffset = 57
 };
 
+
+/*
+ *  Discussion:
+ *    The following metrics are only available in Mac OS X 10.3 and
+ *    later.
+ */
+enum {
+  kThemeMetricComboBoxLargeBottomShadowOffset = 70,
+  kThemeMetricComboBoxLargeRightShadowOffset = 71,
+  kThemeMetricComboBoxSmallBottomShadowOffset = 72,
+  kThemeMetricComboBoxSmallRightShadowOffset = 73,
+  kThemeMetricComboBoxLargeDisclosureWidth = 74,
+  kThemeMetricComboBoxSmallDisclosureWidth = 75,
+  kThemeMetricRoundTextFieldContentInsetLeft = 76,
+  kThemeMetricRoundTextFieldContentInsetRight = 77,
+  kThemeMetricRoundTextFieldContentInsetBottom = 78,
+  kThemeMetricRoundTextFieldContentInsetTop = 79,
+  kThemeMetricRoundTextFieldContentHeight = 80,
+  kThemeMetricComboBoxMiniBottomShadowOffset = 81,
+  kThemeMetricComboBoxMiniDisclosureWidth = 82,
+  kThemeMetricComboBoxMiniRightShadowOffset = 83,
+  kThemeMetricLittleArrowsMiniHeight = 84,
+  kThemeMetricLittleArrowsMiniWidth = 85,
+  kThemeMetricLittleArrowsSmallHeight = 86,
+  kThemeMetricLittleArrowsSmallWidth = 87,
+  kThemeMetricMiniCheckBoxHeight = 88,
+  kThemeMetricMiniCheckBoxWidth = 89,
+  kThemeMetricMiniDisclosureButtonHeight = 90,
+  kThemeMetricMiniDisclosureButtonWidth = 91,
+  kThemeMetricMiniHSliderHeight = 92,
+  kThemeMetricMiniHSliderMinThumbWidth = 93,
+  kThemeMetricMiniHSliderTickHeight = 94,
+  kThemeMetricMiniHSliderTickOffset = 95,
+  kThemeMetricMiniPopupButtonHeight = 96,
+  kThemeMetricMiniPullDownHeight = 97,
+  kThemeMetricMiniPushButtonHeight = 98,
+  kThemeMetricMiniRadioButtonHeight = 99,
+  kThemeMetricMiniRadioButtonWidth = 100,
+  kThemeMetricMiniTabCapsWidth  = 101,
+  kThemeMetricMiniTabFrameOverlap = 102,
+  kThemeMetricMiniTabHeight     = 103,
+  kThemeMetricMiniTabOverlap    = 104,
+  kThemeMetricMiniVSliderMinThumbHeight = 105,
+  kThemeMetricMiniVSliderTickOffset = 106,
+  kThemeMetricMiniVSliderTickWidth = 107,
+  kThemeMetricMiniVSliderWidth  = 108,
+  kThemeMetricRoundTextFieldContentInsetWithIconLeft = 109,
+  kThemeMetricRoundTextFieldContentInsetWithIconRight = 110,
+  kThemeMetricRoundTextFieldMiniContentHeight = 111,
+  kThemeMetricRoundTextFieldMiniContentInsetBottom = 112,
+  kThemeMetricRoundTextFieldMiniContentInsetLeft = 113,
+  kThemeMetricRoundTextFieldMiniContentInsetRight = 114,
+  kThemeMetricRoundTextFieldMiniContentInsetTop = 115,
+  kThemeMetricRoundTextFieldMiniContentInsetWithIconLeft = 116,
+  kThemeMetricRoundTextFieldMiniContentInsetWithIconRight = 117,
+  kThemeMetricRoundTextFieldSmallContentHeight = 118,
+  kThemeMetricRoundTextFieldSmallContentInsetBottom = 119,
+  kThemeMetricRoundTextFieldSmallContentInsetLeft = 120,
+  kThemeMetricRoundTextFieldSmallContentInsetRight = 121,
+  kThemeMetricRoundTextFieldSmallContentInsetTop = 122,
+  kThemeMetricRoundTextFieldSmallContentInsetWithIconLeft = 123,
+  kThemeMetricRoundTextFieldSmallContentInsetWithIconRight = 124,
+  kThemeMetricSmallTabFrameOverlap = 125,
+  kThemeMetricSmallTabOverlap   = 126,
+
+  /*
+   * The height of a small pane splitter. Should only be used in a
+   * window with thick borders, like a metal window.
+   */
+  kThemeMetricSmallPaneSplitterHeight = 127
+};
+
 typedef UInt32                          ThemeMetric;
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /* Drawing State                                                                            */
@@ -1951,23 +2392,8 @@ SetThemeTextColor(
 
 
 /*
- *  SetThemeWindowBackground()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
+ *  SetThemeWindowBackground() has moved to MacWindows.h
  */
-extern OSStatus 
-SetThemeWindowBackground(
-  WindowRef    inWindow,
-  ThemeBrush   inBrush,
-  Boolean      inUpdate)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
 /* Window Placards, Headers and Frames */
 /*
  *  DrawThemeWindowHeader()
@@ -2691,7 +3117,7 @@ GetThemeFont(
  *      Mac OS X, all text drawing happens in CGContextRefs; if you
  *      pass NULL, a transient CGContextRef will be allocated and
  *      deallocated for use within the single API call. Relying on the
- *      system behavior if transiently createing CGContextRefs may
+ *      system behavior if transiently creating CGContextRefs may
  *      result in performance problems. On Mac OS 9, the CGContextRef
  *      parameter is ignored.
  *  
@@ -2828,7 +3254,8 @@ TruncateThemeText(
  *      On output, outBaseline contains the offset (in Quickdraw space)
  *      from the bottom edge of the last line of text to the baseline
  *      of the first line of text. outBaseline will generally be a
- *      negative value.
+ *      negative value. On Mac OS X 10.2 and later, you may pass NULL
+ *      if you don't want this information.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2842,7 +3269,7 @@ GetThemeTextDimensions(
   ThemeDrawState   inState,
   Boolean          inWrapToWidth,
   Point *          ioBounds,
-  SInt16 *         outBaseline)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt16 *         outBaseline)         /* can be NULL */     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -2931,7 +3358,7 @@ extern Boolean
 HitTestThemeTrack(
   const ThemeTrackDrawInfo *  drawInfo,
   Point                       mousePoint,
-  ControlPartCode *           partHit)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AppearancePartCode *        partHit)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3118,7 +3545,7 @@ HitTestThemeScrollBarArrows(
   Boolean                 isHoriz,
   Point                   ptHit,
   Rect *                  trackBounds,
-  ControlPartCode *       partcode)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AppearancePartCode *    partcode)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ WINDOWS ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -3140,7 +3567,7 @@ GetThemeWindowRegion(
   ThemeDrawState              state,
   const ThemeWindowMetrics *  metrics,
   ThemeWindowAttributes       attributes,
-  WindowRegionCode            winRegion,
+  AppearanceRegionCode        winRegion,
   RgnHandle                   rgn)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -3250,7 +3677,7 @@ GetThemeWindowRegionHit(
   const ThemeWindowMetrics *  metrics,
   ThemeWindowAttributes       inAttributes,
   Point                       inPoint,
-  WindowRegionCode *          outRegionHit)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  AppearanceRegionCode *      outRegionHit)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -3629,57 +4056,8 @@ ApplyThemeBackground(
 
 
 /*
- *  SetThemeTextColorForWindow()
- *  
- *  Summary:
- *    Sets a text color which contrasts with a theme brush.
- *  
- *  Discussion:
- *    SetThemeTextColorForWindow sets a text color in the specified
- *    window's port which contrasts with the specified brush and also
- *    matches the inActive parameter. Only a subset of the theme
- *    brushes have theme text colors: currently (as of Mac OS 9 and Mac
- *    OS X 10.1), the Alert, Dialog, ModelessDialog, and Notification
- *    brushes have corresponding text colors. For any other brush,
- *    SetThemeTextColorForWindow returns themeNoAppropriateBrushErr and
- *    does not modify the text color.
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Parameters:
- *    
- *    inWindow:
- *      The window whose text color to change.
- *    
- *    inActive:
- *      Whether the text color should indicate an active or inactive
- *      state.
- *    
- *    inDepth:
- *      The bit depth of the window's port.
- *    
- *    inColorDev:
- *      Whether the window's port is color or black&white.
- *  
- *  Result:
- *    An operating system result code, including
- *    themeNoAppropriateBrushErr if the specified theme brush does not
- *    have a corresponding theme text color.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
+ *  SetThemeTextColorForWindow() has moved to MacWindows.h
  */
-extern OSStatus 
-SetThemeTextColorForWindow(
-  WindowRef   inWindow,
-  Boolean     inActive,
-  SInt16      inDepth,
-  Boolean     inColorDev)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
 /*
  *  IsValidAppearanceFileType()
  *  

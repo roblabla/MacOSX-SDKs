@@ -1,11 +1,11 @@
 /*
      File:       HIToolbox/MacTextEditor.h
  
-     Contains:   Interfaces for MLTE - TextEdit replacement
+     Contains:   Interfaces for Multilingual Text Engine (MLTE)
  
-     Version:    HIToolbox-124.14~2
+     Version:    HIToolbox-145.33~1
  
-     Copyright:  © 1996-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1996-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -36,6 +36,10 @@
 #include <HIToolbox/CarbonEvents.h>
 #endif
 
+#ifndef __HIVIEW__
+#include <HIToolbox/HIView.h>
+#endif
+
 
 
 #include <AvailabilityMacros.h>
@@ -51,11 +55,25 @@ extern "C" {
 #pragma options align=mac68k
 
 
-
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Various Defs                                                                                      */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 typedef struct OpaqueTXNObject*         TXNObject;
 typedef struct OpaqueTXNFontMenuObject*  TXNFontMenuObject;
 typedef UInt32                          TXNFrameID;
 typedef UInt32                          TXNVersionValue;
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Error Status                                                                                      */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  MLTE status errors assigned is -22000 through -22039.  See MacError.h for -22000 to -22018.         */
+enum {
+  kTXNDisabledFunctionalityErr  = -22019 /*This routine's functionality is disabled.*/
+};
+
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Feature Bits                                                                                      */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  Useful for the TXNVersionInformation API.                                                           */
 enum {
   kTXNWillDefaultToATSUIBit     = 0,
   kTXNWillDefaultToCarbonEventBit = 1
@@ -68,6 +86,10 @@ enum {
   kTXNWillDefaultToCarbonEventMask = 1L << kTXNWillDefaultToCarbonEventBit
 };
 
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Initialization Bits                                                                               */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  Useful for the TXNInitTextension API.                                                               */
 enum {
   kTXNWantMoviesBit             = 0,
   kTXNWantSoundBit              = 1,
@@ -86,6 +108,20 @@ enum {
   kTXNUseTemporaryMemoryMask    = 1L << kTXNUseTemporaryMemoryBit
 };
 
+/* Default constants  */
+#define kTXNDefaultFontName             ((StringPtr)NULL)
+enum {
+  kTXNDefaultFontSize           = 0x000C0000
+};
+
+enum {
+  kTXNDefaultFontStyle          = normal
+};
+
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • FrameOption Bits                                                                                  */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  Useful for the TXNNewObject and TXNCreateObject APIs.                                               */
 enum {
   kTXNDrawGrowIconBit           = 0,
   kTXNShowWindowBit             = 1,
@@ -104,7 +140,8 @@ enum {
   kTXNSingleLineOnlyBit         = 14,
   kTXNDisableDragAndDropBit     = 15,
   kTXNUseQDforImagingBit        = 16,
-  kTXNMonostyledTextBit         = 17
+  kTXNMonostyledTextBit         = 17,
+  kTXNDoFontSubstitutionBit     = 22
 };
 
 
@@ -114,11 +151,12 @@ enum {
  *  
  *  Summary:
  *    Defines the initial behavior of an MLTE object created with
- *    TXNNewObject.
+ *    TXNCreateObject/TXNNewObject.
  *  
  *  Discussion:
- *    These masks can be combined and passed to TXNNewObject to define
- *    the initial behavior of a new object.
+ *    These masks can be combined and passed to
+ *    TXNCreateObject/TXNNewObject to define the initial behavior of a
+ *    new object.
  */
 typedef OptionBits TXNFrameOptions;
 enum {
@@ -137,23 +175,36 @@ enum {
   kTXNShowWindowMask            = 1L << kTXNShowWindowBit,
 
   /*
-   * Indicates that the frame will have a horizontal scrollbar.
+   * Indicates that the frame will have a horizontal scrollbar. The
+   * scrollbar will be enabled upon creation.  If there are multiple
+   * MLTE objects in the same window, the client will need to
+   * explicitly disable the scrollbars for those inactive MLTE objects.
+   *  Use TXNSetScrollbarState to deactivate the scrollbar.
    */
   kTXNWantHScrollBarMask        = 1L << kTXNWantHScrollBarBit,
 
   /*
-   * Indicates that the frame will have a vertical scrollbar.
+   * Indicates that the frame will have a vertical scrollbar. The
+   * scrollbar will be enabled upon creation.  If there are multiple
+   * MLTE objects in the same window, the client will need to
+   * explicitly disable the scrollbars for those inactive MLTE objects.
+   *  Use TXNSetScrollbarState to deactivate the scrollbar.
    */
   kTXNWantVScrollBarMask        = 1L << kTXNWantVScrollBarBit,
 
   /*
-   * Indicates that the Text Services Manager will not be used.  You
-   * cannot use this mask when your application accepts Unicode input.
+   * Deprecated.  Previously used to indicate that the Text Services
+   * Manager would not be used.  Versions of MLTE newer than 1.4 rely
+   * on the Text Services Manager to support Unicode.
    */
   kTXNNoTSMEverMask             = 1L << kTXNNoTSMEverBit,
 
   /*
-   * Indicates that the text object will be read-only.
+   * Indicates that the text object will be read-only.  It is
+   * equivalent to setting the object into NoUserIO mode, via the tag
+   * kTXNNoUserIOTag in TXNSetTXNObjectControls. See description in
+   * individual API to determine if the API will still work in NoUserIO
+   * mode.
    */
   kTXNReadOnlyMask              = 1L << kTXNReadOnlyBit,
 
@@ -235,11 +286,20 @@ enum {
 
   /*
    * Indicates that the text object will keep in single style no matter
-   * what kind of changes made to the object.
+   * what kind of changes made to the object. [X-only]
    */
-  kTXNMonostyledTextMask        = 1L << kTXNMonostyledTextBit
+  kTXNMonostyledTextMask        = 1L << kTXNMonostyledTextBit,
+
+  /*
+   * Indicates that ATSUI font substitution will be used. [X-only]
+   */
+  kTXNDoFontSubstitutionMask    = 1L << kTXNDoFontSubstitutionBit
 };
 
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • TextBox Option Bits                                                                               */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  Useful for TXNDrawUnicodeTextBox and TXNDrawCFStringTextBox APIs.                                   */
 enum {
   kTXNSetFlushnessBit           = 0,
   kTXNSetJustificationBit       = 1,
@@ -283,8 +343,8 @@ enum {
   kTXNSetJustificationMask      = 1L << kTXNSetJustificationBit,
 
   /*
-   * Indicates that ATSUI transient font matching (that searches for a
-   * font that has a matching character) will be used.
+   * Indicates that ATSUI font substitution (that searches for a font
+   * that has a matching character) will be used.
    */
   kTXNUseFontFallBackMask       = 1L << kTXNUseFontFallBackBit,
 
@@ -335,6 +395,9 @@ enum {
   kTXNDontWrapTextMask          = 1L << kTXNDontWrapTextBit
 };
 
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • TextBox Options Data                                                                              */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 struct TXNTextBoxOptionsData {
   TXNTextBoxOptions   optionTags;
   Fract               flushness;
@@ -343,35 +406,10 @@ struct TXNTextBoxOptionsData {
   void *              options;                /* for future use*/
 };
 typedef struct TXNTextBoxOptionsData    TXNTextBoxOptionsData;
-enum {
-  kTXNFontContinuousBit         = 0,
-  kTXNSizeContinuousBit         = 1,
-  kTXNStyleContinuousBit        = 2,
-  kTXNColorContinuousBit        = 3
-};
-
-typedef OptionBits TXNContinuousFlags;
-enum {
-  kTXNFontContinuousMask        = 1L << kTXNFontContinuousBit,
-  kTXNSizeContinuousMask        = 1L << kTXNSizeContinuousBit,
-  kTXNStyleContinuousMask       = 1L << kTXNStyleContinuousBit,
-  kTXNColorContinuousMask       = 1L << kTXNColorContinuousBit
-};
-
-enum {
-  kTXNIgnoreCaseBit             = 0,
-  kTXNEntireWordBit             = 1,
-  kTXNUseEncodingWordRulesBit   = 31
-};
-
-typedef OptionBits TXNMatchOptions;
-enum {
-  kTXNIgnoreCaseMask            = 1L << kTXNIgnoreCaseBit,
-  kTXNEntireWordMask            = 1L << kTXNEntireWordBit,
-  kTXNUseEncodingWordRulesMask  = (unsigned long)(1L << kTXNUseEncodingWordRulesBit)
-};
-
-
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • File Types                                                                                        */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  Useful for TXNNewObject and TXNSave APIs.                                                           */
 typedef OSType TXNFileType;
 enum {
   kTXNTextensionFile            = 'txtn',
@@ -383,49 +421,36 @@ enum {
   kTXNUnicodeTextFile           = 'utxt'
 };
 
-/* Only kTXNTextEditStyleFrameType is supported at this time */
-typedef UInt32 TXNFrameType;
+
+
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Text Encoding Types                                                                               */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  Useful for TXNNewObject and TXNSave APIs. Only kTXNTextEditStyleFrameType is supported at this time.                                                        *|*/
+typedef UInt32 TXNPermanentTextEncodingType;
 enum {
-  kTXNTextEditStyleFrameType    = 1,
-  kTXNPageFrameType             = 2,    /* not supported*/
-  kTXNMultipleFrameType         = 3     /* not supported*/
+  kTXNSystemDefaultEncoding     = 0,
+  kTXNMacOSEncoding             = 1,
+  kTXNUnicodeEncoding           = 2
 };
 
-
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Data Types                                                                                        */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 typedef OSType TXNDataType;
 enum {
   kTXNTextData                  = 'TEXT',
   kTXNPictureData               = 'PICT',
   kTXNMovieData                 = 'moov',
   kTXNSoundData                 = 'snd ',
-  kTXNUnicodeTextData           = 'utxt'
+  kTXNUnicodeTextData           = 'utxt',
+  kTXNTextAndMultimediaData     = 'txtn',
+  kTXNRichTextFormatData        = 'RTF '
 };
 
-
-typedef FourCharCode TXNControlTag;
-enum {
-  kTXNLineDirectionTag          = 'lndr',
-  kTXNJustificationTag          = 'just',
-  kTXNIOPrivilegesTag           = 'iopv',
-  kTXNSelectionStateTag         = 'slst',
-  kTXNInlineStateTag            = 'inst',
-  kTXNWordWrapStateTag          = 'wwrs',
-  kTXNKeyboardSyncStateTag      = 'kbsy',
-  kTXNAutoIndentStateTag        = 'auin',
-  kTXNTabSettingsTag            = 'tabs',
-  kTXNRefConTag                 = 'rfcn',
-  kTXNMarginsTag                = 'marg',
-  kTXNFlattenMoviesTag          = 'flat',
-  kTXNDoFontSubstitution        = 'fSub', /*note : this could degrade performance greatly in the case of large documents.*/
-  kTXNNoUserIOTag               = 'nuio',
-  kTXNUseCarbonEvents           = 'cbcb',
-  kTXNDrawCaretWhenInactiveTag  = 'dcrt',
-  kTXNDrawSelectionWhenInactiveTag = 'dsln',
-  kTXNDisableDragAndDropTag     = 'drag',
-  kTXNSingleLevelUndoTag        = 'undo',
-  kTXNVisibilityTag             = 'visb' /*set the visibility state of the object*/
-};
-
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Action Keys                                                                                       */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 typedef UInt32 TXNActionKey;
 enum {
   kTXNTypingAction              = 0,
@@ -446,15 +471,84 @@ enum {
   kTXNUndoLastAction            = 1024  /*use if none of the above apply*/
 };
 
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Format Setting Constants                                                                          */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+typedef SInt8 TXNTabType;
 enum {
-  kTXNClearThisControl          = (long)0xFFFFFFFF,
-  kTXNClearTheseFontFeatures    = (long)0x80000000
+  kTXNRightTab                  = -1,
+  kTXNLeftTab                   = 0,
+  kTXNCenterTab                 = 1
+};
+
+struct TXNTab {
+  SInt16              value;
+  TXNTabType          tabType;
+  UInt8               filler;
+};
+typedef struct TXNTab                   TXNTab;
+enum {
+  kTXNLeftToRight               = 0,
+  kTXNRightToLeft               = 1
+};
+
+enum {
+  kTXNFlushDefault              = 0,    /*flush according to the line direction */
+  kTXNFlushLeft                 = 1,
+  kTXNFlushRight                = 2,
+  kTXNCenter                    = 4,
+  kTXNFullJust                  = 8,
+  kTXNForceFullJust             = 16    /*flush left and right for all lines */
 };
 
 /*
-  convenience constants for TXNGet/SetTXNControls
-   kTXNIOPrivilegesTag
+  In version 1.2 of MLTE and later you can change the top, left and right margins. 
+  The bottom margin is a placeholder for possible future enhancements. 
 */
+struct TXNMargins {
+  SInt16              topMargin;
+  SInt16              leftMargin;
+  SInt16              bottomMargin;
+  SInt16              rightMargin;
+};
+typedef struct TXNMargins               TXNMargins;
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Control Tags                                                                                      */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+typedef FourCharCode TXNControlTag;
+enum {
+  kTXNLineDirectionTag          = 'lndr', /*not functional when userIO is not allowed.*/
+  kTXNJustificationTag          = 'just', /*not functional when userIO is not allowed.*/
+  kTXNIOPrivilegesTag           = 'iopv',
+  kTXNSelectionStateTag         = 'slst',
+  kTXNInlineStateTag            = 'inst',
+  kTXNWordWrapStateTag          = 'wwrs',
+  kTXNKeyboardSyncStateTag      = 'kbsy',
+  kTXNAutoIndentStateTag        = 'auin',
+  kTXNTabSettingsTag            = 'tabs',
+  kTXNRefConTag                 = 'rfcn',
+  kTXNMarginsTag                = 'marg',
+  kTXNFlattenMoviesTag          = 'flat',
+  kTXNDoFontSubstitution        = 'fSub', /*note : this could degrade performance greatly in the case of large documents.*/
+  kTXNNoUserIOTag               = 'nuio',
+  kTXNUseCarbonEvents           = 'cbcb',
+  kTXNDrawCaretWhenInactiveTag  = 'dcrt', /*when using CG on OS X, this tag will be ignored.  Caret will not be drawn when inactive.*/
+  kTXNDrawSelectionWhenInactiveTag = 'dsln',
+  kTXNDisableDragAndDropTag     = 'drag',
+  kTXNSingleLevelUndoTag        = 'undo', /*set this state during creation of the object. Switching Undo level back and forth is not recommended.*/
+  kTXNVisibilityTag             = 'visb' /*set the visibility state of the object  */
+};
+
+
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Convenience Constants for TXNGet/SetTXNControls                                                   */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+enum {
+  kTXNClearThisControl          = (long)0xFFFFFFFF, /*to clear an object control setting*/
+  kTXNClearTheseFontFeatures    = (long)0x80000000 /*to clear atsui font feature(s)*/
+};
+
+/* kTXNIOPrivilegesTag*/
 enum {
   kTXNReadWrite                 = false,
   kTXNReadOnly                  = true
@@ -471,7 +565,6 @@ enum {
   kTXNUseInline                 = false,
   kTXNUseBottomline             = true
 };
-
 
 /* kTXNWordWrapStateTag*/
 enum {
@@ -509,44 +602,7 @@ enum {
   kTXNDisableDragAndDrop        = true
 };
 
-typedef SInt8 TXNTabType;
-enum {
-  kTXNRightTab                  = -1,
-  kTXNLeftTab                   = 0,
-  kTXNCenterTab                 = 1
-};
-
-struct TXNTab {
-  SInt16              value;
-  TXNTabType          tabType;
-  UInt8               filler;
-};
-typedef struct TXNTab                   TXNTab;
-enum {
-  kTXNLeftToRight               = 0,
-  kTXNRightToLeft               = 1
-};
-
-enum {
-  kTXNFlushDefault              = 0,    /*flush according to the line direction */
-  kTXNFlushLeft                 = 1,
-  kTXNFlushRight                = 2,
-  kTXNCenter                    = 4,
-  kTXNFullJust                  = 8,
-  kTXNForceFullJust             = 16    /*flush left for all scripts */
-};
-
-/*
-  In version 1.2 of MLTE and later you can change the top, left and right margins. 
-  The bottom margin is a placeholder for possible future enhancements. 
-*/
-struct TXNMargins {
-  SInt16              topMargin;
-  SInt16              leftMargin;
-  SInt16              bottomMargin;
-  SInt16              rightMargin;
-};
-typedef struct TXNMargins               TXNMargins;
+/* Formatting info */
 union TXNControlData {
   UInt32              uValue;
   SInt32              sValue;
@@ -554,25 +610,9 @@ union TXNControlData {
   TXNMargins *        marginsPtr;
 };
 typedef union TXNControlData            TXNControlData;
-typedef Boolean TXNScrollBarState;
-enum {
-  kScrollBarsAlwaysActive       = true,
-  kScrollBarsSyncWithFocus      = false
-};
-
-/*
-  kTXNNoFontVariations is returned in the dataValue field when the caller as asked
-  to see if the variation is continuous and there was no variation in the continuous range
-*/
-enum {
-  kTXNDontCareTypeSize          = (long)0xFFFFFFFF,
-  kTXNDontCareTypeStyle         = 0xFF,
-  kTXNIncrementTypeSize         = 0x00000001,
-  kTXNDecrementTypeSize         = (long)0x80000000,
-  kTXNUseScriptDefaultValue     = -1,
-  kTXNNoFontVariations          = 0x7FFF
-};
-
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Offset/Selection Constants                                                                        */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 typedef UInt32 TXNOffset;
 enum {
   kTXNUseCurrentSelection       = (unsigned long)0xFFFFFFFF,
@@ -580,32 +620,26 @@ enum {
   kTXNEndOffset                 = 0x7FFFFFFF
 };
 
+/* Useful for TXNShowSelection API.*/
+enum {
+  kTXNShowStart                 = false,
+  kTXNShowEnd                   = true
+};
 
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Resource Constants                                                                                */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/* Useful for saving document                                                                           */
 enum {
   kTXNSingleStylePerTextDocumentResType = 'MPSR',
   kTXNMultipleStylesPerTextDocumentResType = 'styl'
 };
 
 
-typedef void *                          TXNObjectRefcon;
-/*constants for TXNShowSelection*/
-enum {
-  kTXNShowStart                 = false,
-  kTXNShowEnd                   = true
-};
-
-typedef OSStatus                        TXNErrors;
-/*default constants for TXTNInit.  */
-#define kTXNDefaultFontName             ((StringPtr)NULL)
-enum {
-  kTXNDefaultFontSize           = 0x000C0000
-};
-
-enum {
-  kTXNDefaultFontStyle          = normal
-};
-
-
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • URL Constants                                                                                     */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/* Currently not available.  Will be implemented in the future.                                         */
 typedef UInt32 TXNHyperLinkState;
 enum {
   kTXNLinkNotPressed            = 0,
@@ -613,6 +647,13 @@ enum {
   kTXNLinkTracking              = 3
 };
 
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Type Attributes / ATSUI Features and Variations                                                                               */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  Since MLTE currently uses ATSUI by default, the available face types for kTXNQDFontStyleAttribute   */
+/*  are limited by what's available in ATSUI.  Currently, MLTE supports types defined in MacTypes.h     */
+/*  which are normal, bold, italic, underline, condensed, and extended.  An alternative is to use           */
+/*  available QD compatibility tags defined in ATSUUnicode.h.                                           */
 typedef FourCharCode TXNTypeRunAttributes;
 enum {
   kTXNQDFontNameAttribute       = 'fntn',
@@ -623,35 +664,25 @@ enum {
   kTXNTextEncodingAttribute     = 'encd',
   kTXNATSUIFontFeaturesAttribute = 'atfe',
   kTXNATSUIFontVariationsAttribute = 'atva',
-  kTXNURLAttribute              = 'urla'
+  kTXNURLAttribute              = 'urla',
+  kTXNATSUIStyle                = 'astl'
 };
 
-/*
-  kTXNQDFontSizeAttributeSize is obsolete and incorrect
-  font sizes are always returned as a Fixed value, just as
-  they are passed to MLTE.  Use kTXNFontSizeAttributeSize.
-*/
+/*  kTXNQDFontSizeAttributeSize is obsolete and incorrect font sizes are always returned as a Fixed     */
+/*  value, just as  they are passed to MLTE.  Use kTXNFontSizeAttributeSize instead.                    */
 typedef ByteCount TXNTypeRunAttributeSizes;
 enum {
   kTXNQDFontNameAttributeSize   = sizeof(Str255),
   kTXNQDFontFamilyIDAttributeSize = sizeof(SInt16),
-  kTXNQDFontSizeAttributeSize   = sizeof(SInt16),
+  kTXNQDFontSizeAttributeSize   = sizeof(SInt16), /* obsolete*/
   kTXNQDFontStyleAttributeSize  = sizeof(Style),
   kTXNQDFontColorAttributeSize  = sizeof(RGBColor),
   kTXNTextEncodingAttributeSize = sizeof(TextEncoding),
-  kTXNFontSizeAttributeSize     = sizeof(Fixed)
-};
-
-typedef UInt32 TXNPermanentTextEncodingType;
-enum {
-  kTXNSystemDefaultEncoding     = 0,
-  kTXNMacOSEncoding             = 1,
-  kTXNUnicodeEncoding           = 2
+  kTXNFontSizeAttributeSize     = sizeof(Fixed),
+  kTXNATSUIStyleSize            = sizeof(ATSUStyle)
 };
 
 
-
-typedef FourCharCode                    TXTNTag;
 struct TXNATSUIFeatures {
   ItemCount           featureCount;
   ATSUFontFeatureType * featureTypes;
@@ -673,11 +704,72 @@ union TXNAttributeData {
 };
 typedef union TXNAttributeData          TXNAttributeData;
 struct TXNTypeAttributes {
-  TXTNTag             tag;
+  TXNTypeRunAttributes  tag;
   ByteCount           size;
   TXNAttributeData    data;
 };
 typedef struct TXNTypeAttributes        TXNTypeAttributes;
+/*
+  kTXNNoFontVariations is returned in the dataValue field when the caller as asked
+  to see if the variation is continuous and there was no variation in the continuous range
+*/
+enum {
+  kTXNDontCareTypeSize          = (long)0xFFFFFFFF,
+  kTXNDontCareTypeStyle         = 0xFF,
+  kTXNIncrementTypeSize         = 0x00000001,
+  kTXNDecrementTypeSize         = (long)0x80000000,
+  kTXNUseScriptDefaultValue     = -1,
+  kTXNNoFontVariations          = 0x7FFF
+};
+
+
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Style Continuous Bits                                                                             */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/* Useful for TXNGetContinuousTypeAttributes API.                                                       */
+enum {
+  kTXNFontContinuousBit         = 0,
+  kTXNSizeContinuousBit         = 1,
+  kTXNStyleContinuousBit        = 2,
+  kTXNColorContinuousBit        = 3,
+  kTXNATSUIStyleContinuousBit   = 4
+};
+
+typedef OptionBits TXNContinuousFlags;
+enum {
+  kTXNFontContinuousMask        = 1L << kTXNFontContinuousBit,
+  kTXNSizeContinuousMask        = 1L << kTXNSizeContinuousBit,
+  kTXNStyleContinuousMask       = 1L << kTXNStyleContinuousBit,
+  kTXNColorContinuousMask       = 1L << kTXNColorContinuousBit,
+  kTXNATSUIStyleContinuousMask  = 1L << kTXNATSUIStyleContinuousBit
+};
+
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Match Options Bits                                                                                */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/* Useful for TXNFind API.                                                                              */
+enum {
+  kTXNIgnoreCaseBit             = 0,
+  kTXNEntireWordBit             = 1,
+  kTXNUseEncodingWordRulesBit   = 31
+};
+
+typedef OptionBits TXNMatchOptions;
+enum {
+  kTXNIgnoreCaseMask            = 1L << kTXNIgnoreCaseBit,
+  kTXNEntireWordMask            = 1L << kTXNEntireWordBit,
+  kTXNUseEncodingWordRulesMask  = (unsigned long)(1L << kTXNUseEncodingWordRulesBit)
+};
+
+struct TXNMatchTextRecord {
+  const void *        iTextPtr;
+  SInt32              iTextToMatchLength;
+  TextEncoding        iTextEncoding;
+};
+typedef struct TXNMatchTextRecord       TXNMatchTextRecord;
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Fonts Description                                                                                 */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 struct TXNMacOSPreferredFontDescription {
   UInt32              fontID;
   Fixed               pointSize;
@@ -685,17 +777,15 @@ struct TXNMacOSPreferredFontDescription {
   Style               fontStyle;
 };
 typedef struct TXNMacOSPreferredFontDescription TXNMacOSPreferredFontDescription;
-struct TXNMatchTextRecord {
-  const void *        iTextPtr;
-  SInt32              iTextToMatchLength;
-  TextEncoding        iTextEncoding;
-};
-typedef struct TXNMatchTextRecord       TXNMatchTextRecord;
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Background                                                                                        */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*constants & typedefs for setting the background*/
 typedef UInt32 TXNBackgroundType;
 enum {
   kTXNBackgroundTypeRGB         = 1
 };
+
 
 /*
    The TXNBackgroundData is left as a union so that it can be expanded
@@ -710,17 +800,10 @@ struct TXNBackground {
   TXNBackgroundData   bg;
 };
 typedef struct TXNBackground            TXNBackground;
-struct TXNLongRect {
-  SInt32              top;
-  SInt32              left;
-  SInt32              bottom;
-  SInt32              right;
-};
-typedef struct TXNLongRect              TXNLongRect;
-/*
-  options for TXNGet/ClearActionChangeCount to decide what type(s) of action 
-  count to use 
-*/
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Count Option Bits                                                                                 */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  Options for TXNGet/ClearActionChangeCount to decide what type(s) of action count to use.            */
 enum {
   kTXNTextInputCountBit         = 0,
   kTXNRunCountBit               = 1
@@ -733,7 +816,10 @@ enum {
   kTXNAllCountMask              = kTXNTextInputCountMask | kTXNRunCountMask
 };
 
-
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Scrolling                                                                                         */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/* Use as a param in TXNScroll API*/
 typedef UInt32 TXNScrollUnit;
 enum {
   kTXNScrollUnitsInPixels       = 0,
@@ -741,12 +827,94 @@ enum {
   kTXNScrollUnitsInViewRects    = 2
 };
 
+/* Use as a param in ScrollInfo callback*/
 typedef UInt32 TXNScrollBarOrientation;
 enum {
   kTXNHorizontal                = 0,
   kTXNVertical                  = 1
 };
 
+/* Use as a param in TXNActivate and TXNSetScrollbarState APIs*/
+typedef Boolean TXNScrollBarState;
+enum {
+  kScrollBarsAlwaysActive       = true,
+  kScrollBarsSyncWithFocus      = false
+};
+
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Draw Item Bits                                                                                    */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  Specifies which element(s) of the text object to render.   Useful in TXNDrawObject API.             */
+enum {
+  kTXNDrawItemScrollbarsBit     = 0,
+  kTXNDrawItemTextBit           = 1,
+  kTXNDrawItemTextAndSelectionBit = 2
+};
+
+typedef OptionBits TXNDrawItems;
+enum {
+  kTXNDrawItemScrollbarsMask    = 1L << kTXNDrawItemScrollbarsBit,
+  kTXNDrawItemTextMask          = 1L << kTXNDrawItemTextBit,
+  kTXNDrawItemTextAndSelectionMask = 1L << kTXNDrawItemTextAndSelectionBit,
+  kTXNDrawItemAllMask           = (unsigned long)0xFFFFFFFF
+};
+
+
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Rectangle Keys                                                                                    */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  Each key corresponds to a specific bound for the object.  Useful in TXNGetHIRect API.               */
+
+typedef UInt32                          TXNRectKey;
+enum {
+  kTXNViewRectKey               = 0,
+  kTXNDestinationRectKey        = 1,
+  kTXNTextRectKey               = 2,
+  kTXNVerticalScrollBarRectKey  = 3,
+  kTXNHorizontalScrollBarRectKey = 4
+};
+
+
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Carbon Events Info                                                                                */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  These are currently the only settings for the flags field of TXNCarbonEventInfo.                    */
+/*  If you want the AppleEventHandlers removed use kTXNNoAppleEventHandlersMask.                        */
+/*  If you want to subsequently restart AppleEvent Handlers after removing Texthandlers. Use            */
+/*  kTXNRestartAppleEventHandlersMask.                                                                  */
+enum {
+  kTXNNoAppleEventHandlersBit   = 0,
+  kTXNRestartAppleEventHandlersBit = 1
+};
+
+enum {
+  kTXNNoAppleEventHandlersMask  = 1 << kTXNNoAppleEventHandlersBit,
+  kTXNRestartAppleEventHandlersMask = 1 << kTXNRestartAppleEventHandlersBit
+};
+
+/* Dictionary keys currently supported in the TXNCarbonEventInfo dictionary*/
+#define   kTXNTextHandlerKey                        CFSTR("TextInput")
+#define   kTXNWindowEventHandlerKey                 CFSTR("WindowEvent")
+#define   kTXNWindowResizeEventHandlerKey           CFSTR("WindowResize")
+#define   kTXNCommandTargetKey                      CFSTR("CommandTarget")
+#define   kTXNCommandUpdateKey                      CFSTR("CommandUpdate")
+#define   kTXNFontMenuObjectKey                     CFSTR("FontMenuObject")
+#define   kTXNActionKeyMapperKey                    CFSTR("ActionKeyMapper")
+#define   kTXNWheelMouseEventHandlerKey             CFSTR("WheelMouseEvent")
+#define   kTXNTSMDocumentAccessHandlerKey           CFSTR("TSMDocumentAccess")
+
+
+/* Use this to pass an EventTargetRef to MLTE via the TXNSetTXNControl... call*/
+struct TXNCarbonEventInfo {
+  Boolean             useCarbonEvents;
+  UInt8               filler;
+  UInt16              flags;
+  CFDictionaryRef     fDictionary;
+};
+typedef struct TXNCarbonEventInfo       TXNCarbonEventInfo;
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Callbacks                                                                                         */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 typedef CALLBACK_API( OSStatus , TXNFindProcPtr )(const TXNMatchTextRecord *matchData, TXNDataType iDataType, TXNMatchOptions iMatchOptions, const void *iSearchTextPtr, TextEncoding encoding, TXNOffset absStartOffset, ByteCount searchTextLength, TXNOffset *oStartMatch, TXNOffset *oEndMatch, Boolean *ofound, UInt32 refCon);
 typedef CALLBACK_API( CFStringRef , TXNActionKeyMapperProcPtr )(TXNActionKey actionKey, UInt32 commandID);
 
@@ -781,7 +949,7 @@ NewTXNActionKeyMapperUPP(TXNActionKeyMapperProcPtr userRoutine) AVAILABLE_MAC_OS
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib on Mac OS X
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern TXNScrollInfoUPP
@@ -814,7 +982,7 @@ DisposeTXNActionKeyMapperUPP(TXNActionKeyMapperUPP userUPP)   AVAILABLE_MAC_OS_X
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib on Mac OS X
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
@@ -862,7 +1030,7 @@ InvokeTXNActionKeyMapperUPP(
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib on Mac OS X
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
@@ -876,130 +1044,79 @@ InvokeTXNScrollInfoUPP(
 
 
 
+/* **************************************************************************************************** */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*                                  •  MLTE APIs •                                                      */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/* **************************************************************************************************** */
+
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Creating and Destroying Object                                                                    */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*
-  These are currently the only settings for the flags field of TXNCarbonEventInfo
-  If you want the AppleEventHandlers removed use kTXNNoAppleEventHandlersMask.
-  If you want to subsequently restart AppleEvent Handlers after removing
-  your Texthandlers. Use kTXNRestartAppleEventHandlersMask.
-*/
-
-enum {
-  kTXNNoAppleEventHandlersBit   = 0,
-  kTXNRestartAppleEventHandlersBit = 1
-};
-
-enum {
-  kTXNNoAppleEventHandlersMask  = 1 << kTXNNoAppleEventHandlersBit,
-  kTXNRestartAppleEventHandlersMask = 1 << kTXNRestartAppleEventHandlersBit
-};
-
-/*dictionary keys currently supported in the TXNCarbonEventInfo dictionary*/
-#define   kTXNTextHandlerKey                        CFSTR("TextInput")
-#define   kTXNWindowEventHandlerKey                 CFSTR("WindowEvent")
-#define   kTXNWindowResizeEventHandlerKey           CFSTR("WindowResize")
-#define   kTXNCommandTargetKey                      CFSTR("CommandTarget")
-#define   kTXNCommandUpdateKey                      CFSTR("CommandUpdate")
-#define   kTXNFontMenuRefKey                        CFSTR("FontMenuRef")
-#define   kTXNFontMenuObjectKey                     CFSTR("FontMenuObject")
-#define   kTXNActionKeyMapperKey                    CFSTR("ActionKeyMapper")
-#define   kTXNWheelMouseEventHandlerKey             CFSTR("WheelMouseEvent")
-
-/* use this to pass an EventTargetRef to MLTE via the TXNSetTXNControl... call*/
-struct TXNCarbonEventInfo {
-  Boolean             useCarbonEvents;
-  UInt8               filler;
-  UInt16              flags;
-  CFDictionaryRef     fDictionary;
-};
-typedef struct TXNCarbonEventInfo       TXNCarbonEventInfo;
-
-/*
-  *****************************************************************************************************
-   Allocates a new frame (i.e. new is called to allocate a TXNObject) and returns a pointer to the object 
-   in the newDoc parameter.
-   Input:
-        
-    iFileSpec:  If not NULL the file is read to obtain the document contents  after the object is 
-                successfully allocated.  If NULL you start with an empty document.
-                
-    iWindow:        Required.  The window in which the document is going to be  displayed.
-                
-    iFrame:     If text-area does not fill the entire window.  This specifies the area to fill.  Can be NULL.  
-                In  which case, the window’s portRect is used as the frame.
-                                
-    iFrameOptions:  Specify the options to be supported by this frame.  The available options are support 
-                    for cutting and pasting  movies and sound, handle scrollbars and handle grow box in  the 
-                    frame.
-    iFrameType:     Specify the type of frame to be used.  In MLTE version 1.1 and earlier, only 
-                    kTXNTextEditStyleFrameType is supported.
-   
-    iFileType:  Specify the primary file type.  If you  use  kTextensionTextFile files will be saved 
-                in a private format (see xxx).  If you  want saved files to be plain text files you should 
-                specify 'TEXT' here. If you specify 'TEXT' here you can use the frameOptions parameter to 
-                specify  whether the TEXT files should be saved  with 'MPSR' resources or 'styl' resources.  
-                These are resources which contain style information for a  file, and they  both have there 
-                own limitations.  If you use 'styl' resources to save style info your documents can have as 
-                many styles as you like however tabs will not be saved.  If you use 'MPSR' resources only the 
-                first style in the document  will be saved (you as client are expected to apply all style  
-                changes to the entire document).  If you  truly want  rich documents which can potentially 
-                contain graphics and sound you should specify kTextensionTextFileOutput.  If you want a plain 
-                text editor like SimpleText specify that style information by saved via ‘styl’ resources.  
-                If you want files similar to those output by CW IDE, BBEdit, and MPW specify that style 
-                information be saved in a ‘MPSR’ resource.
-   
-   Output:
-    
-    OSStatus:   function  result.  If anything goes wrong the error is returned.  Success must be complete.  
-                That is if everything  works, but there is a failure reading a specified file the  object 
-                is freed.
-    oTXNObject:     Pointer to the opaque datastructure allocated by the function.  Most of the subsequent 
-                    functions require that such a pointer be passed in.
-                
-    oTXNFrameID:    Unique ID for the frame. <Note in version 1.0 this value is always set to 0>
-    iRefCon:        Caller can set this to any value.  It is retained by the
-                    TXNNewObject which can later be asked to return it.
-  **************************************************************************************************************
-*/
-/*
- *  TXNNewObject()
+ *  TXNCreateObject()
+ *  
+ *  Summary:
+ *    Creates a new text object of type TXNObject, which is an opaque
+ *    structure that handles text formatting.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
+ *  Parameters:
+ *    
+ *    iFrameRect:
+ *      A pointer to a variable of type HIRect. The rectangle is used
+ *      to specify the destination and view rectangles for the new MLTE
+ *      object. A value of NULL indicates that the rectangle for the
+ *      window port will be used as view and destination rectangles
+ *      when the object is attached later on to the window. See
+ *      TXNAttachObjectToWindowRef API below.
+ *    
+ *    iFrameOptions:
+ *      A value of type TXNFrameOptions that specifies the options you
+ *      want the object to support. “See Frame Options” in the MLTE
+ *      Reference for a description of the options.
+ *    
+ *    oTXNObject:
+ *      A pointer to a structure of type TXNObject. On return, this
+ *      points to the opaque text object data structure allocated by
+ *      the function. You need to pass this object to most MLTE
+ *      functions.
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
+ *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in Textension 1.0 and later
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-TXNNewObject(
-  const FSSpec *                 iFileSpec,                /* can be NULL */
-  WindowRef                      iWindow,
-  const Rect *                   iFrame,                   /* can be NULL */
-  TXNFrameOptions                iFrameOptions,
-  TXNFrameType                   iFrameType,
-  TXNFileType                    iFileType,
-  TXNPermanentTextEncodingType   iPermanentEncoding,
-  TXNObject *                    oTXNObject,
-  TXNFrameID *                   oTXNFrameID,
-  TXNObjectRefcon                iRefCon)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+TXNCreateObject(
+  const HIRect *    iFrameRect,
+  TXNFrameOptions   iFrameOptions,
+  TXNObject *       oTXNObject)                               AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 
-/*
-  *************************************************************************************************
-   Delete a previously allocated TXNObject and all associated data structures.  If the frameType is 
-   multiple frames all frames are released.
-        
-   Input:
-    iTXNObject: opaque structure to free.
-  **************************************************************************************************
-*/
+
 /*
  *  TXNDeleteObject()
  *  
+ *  Summary:
+ *    Delete a previously allocated TXNObject and all associated data
+ *    structures. If the frameType is multiple frames all frames are
+ *    released.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.  The text
+ *      object to free.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1011,111 +1128,43 @@ TXNDeleteObject(TXNObject iTXNObject)                         AVAILABLE_MAC_OS_X
 
 
 
-/*
-  *************************************************************************************************                         
-   Changes the frame's size to match the new width and height.
-   Input:
-    
-    iTXNObject:     opaque Textension structure.
-    
-    iWidth:         New width in pixels.
-    
-    iHeight:        New height in pixels.
-    
-    iTXNFrameID:    FrameID that specifies the frame to move.
-  *************************************************************************************************
-*/
-/*
- *  TXNResizeFrame()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in Textension 1.0 and later
- */
-extern void 
-TXNResizeFrame(
-  TXNObject    iTXNObject,
-  UInt32       iWidth,
-  UInt32       iHeight,
-  TXNFrameID   iTXNFrameID)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-
-/*
-  *************************************************************************************************                         
-   Changes the frame's bounds to match the Rect. 
-   Input:
-        iTXNObject :                                opaque Textension structure.
-        
-        (iTop, iLeft, iBottom, iRight):     Rect of the view
-         
-    
-    iTXNFrameID:        FrameID that specifies the frame to move.
-  *************************************************************************************************
-*/
-/*
- *  TXNSetFrameBounds()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in Textension 1.0 and later
- */
-extern void 
-TXNSetFrameBounds(
-  TXNObject    iTXNObject,
-  SInt32       iTop,
-  SInt32       iLeft,
-  SInt32       iBottom,
-  SInt32       iRight,
-  TXNFrameID   iTXNFrameID)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-
-/*
-  ****************************************************************************************************
-    Initialize the Textension library.  Should be called as soon as possible after the Macintosh toolbox
-    is initialized.
-   Input:
-    iDefaultFonts:      A table of font information including fontFamily ID, point size,
-                        style, and script code. The table can be NULL or can have
-                        an entry for any script for which you would like to to
-                        designate a default font.  Only a valid script number is
-                        required.  You can designate that Textension should use
-                        the default for a give script by setting the field to kTXNUseScriptDefaultValue (-1).
-                                            
-   For example, if you wanted to specify New York as the default
-   font to use for Roman scripts, but were happy with the 
-   default style and size you would call the function like this:
-    
-    TXNMacOSPreferredFontDescription    defaults;
-    GetFNum( "\pNew York", &defaults.fontFamilyID );
-    defaults.pointSize = kTXNDefaultFontSize;
-    defaults.fontStyle = kTXNDefaultFontStyle;
-    defaults.script = smRoman;
-    status = TXNInitTextension( &defaults, 1, 0 );
-    iCountDefaultFonts: Count of entries in the iDefaultFonts parameter.
-    
-                    
-                            
-    iUsageFlags:        Specify whether sound and movies should be supported.
-   Output:
-    OSStatus:       Function result.  NoErr if everything initialized correctly.  Variety of
-                    possible MacOS errors if something goes wrong.
-  *********************************************************************************************|
-*/
 /*
  *  TXNInitTextension()
  *  
+ *  Summary:
+ *    Initialize the Textension library.  Should be called as soon as
+ *    possible after the Macintosh toolbox is initialized.  On OS 10.3
+ *    or later, it's not necessary to call this routine. The cases
+ *    where you may want to call this routine are: 1) A set of default
+ *    fonts different from the system default is desired. 2) Want to
+ *    have multimedia support 3) Want to use QuickdrawText instead of
+ *    ATSUI to render the text.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iDefaultFonts:
+ *      A table of font information including fontFamily ID, point
+ *      size, style, and script code. The table can be NULL or can have
+ *      an entry for any script for which you would like to to
+ *      designate a default font.  Only a valid script number is
+ *      required.  You can designate that Textension should use the
+ *      default for a give script by setting the field to
+ *      kTXNUseScriptDefaultValue (-1).
+ *    
+ *    iCountDefaultFonts:
+ *      Count of entries in the iDefaultFonts parameter.
+ *    
+ *    iUsageFlags:
+ *      Specify whether multimeida should be supported.
+ *  
+ *  Result:
+ *    A result code indicating success or failure. Various MacOS errors
+ *    are possible if something is wrong.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1130,45 +1179,132 @@ TXNInitTextension(
 
 
 
+
 /*
-  *************************************************************************************
-   Close the Textension library.  It is necessary to call this function so that Textension 
-   can correctly close down any TSM connections and do other clean up.
-  **************************************************************************************
-*/
-/*
- *  TXNTerminateTextension()
+ *  TXNVersionInformation()
+ *  
+ *  Summary:
+ *    Get the version number and a set of feature bits. 
+ *    TXNVersionValue uses a NumVersion structure. See MacTypes.h for
+ *    the format of the version.  Currently there are two feature bits:
+ *     one for ATSUI default, another one for CarbonEvent default.
  *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    oFeatureFlags:
+ *      Pointer to a bit mask.  See TXNFeatureMask enum above. If
+ *      kTXNWillDefaultToATSUIBit is set it means that by default MLTE
+ *      will use ATSUI to image and measure text and will default to
+ *      using Unicode to store characters.  If
+ *      kTXNWillDefaultToCarbonEventBit is set, then MLTE will use
+ *      carbon events by default and apple event will not be supported.
+ *  
+ *  Result:
+ *    TXNVersionValue: Current version.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in Textension 1.0 and later
  */
-extern void 
-TXNTerminateTextension(void)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern TXNVersionValue 
+TXNVersionInformation(TXNFeatureBits * oFeatureFlags)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Set/Get Window Associated with the Object                                                         */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*
-  **************************************************************************************
-    Process a keydown event. Note that if CJK script is installed and current font is 
-    CJK inline input will take place. This is always the case unless the application has 
-    requested the bottomline window or has turned off TSM (see initialization options above).
-        
-   Input:
-        iTXNObject:     opaque struct to apply keydown to.
-            
-        iEvent:     the keydown event.  
-  ***************************************************************************************
-*/
-/*
- *  TXNKeyDown()
+ *  TXNAttachObjectToWindowRef()
+ *  
+ *  Summary:
+ *    Attaches a text object to a window.
  *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.  The text
+ *      object you want to attach to the input window.
+ *    
+ *    iWindowRef:
+ *      A WindowRef for the window you want to attach the object to.
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+TXNAttachObjectToWindowRef(
+  TXNObject   iTXNObject,
+  WindowRef   iWindowRef)                                     AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+
+/*
+ *  TXNGetWindowRef()
+ *  
+ *  Summary:
+ *    Returns the window that the input object is attached to.
+ *  
+ *  Discussion:
+ *    If no window is attached to the object it returns NULL.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.  The text
+ *      object you want to attach to the input window.
+ *  
+ *  Result:
+ *    The windowRef for the current window attached to the the text
+ *    object.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern WindowRef 
+TXNGetWindowRef(TXNObject iTXNObject)                         AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Event APIs                                                                                        */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*
+ *  TXNKeyDown()
+ *  
+ *  Summary:
+ *    Process a keydown event. Note that if CJK script is installed and
+ *    current font is CJK inline input will take place. This is always
+ *    the case unless the application has requested the bottomline
+ *    window or has turned off TSM (see initialization options above).
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque struct to apply keydown to.
+ *    
+ *    iEvent:
+ *      The keydown event.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1181,22 +1317,27 @@ TXNKeyDown(
   const EventRecord *  iEvent)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-/*
-  ***************************************************************************************
-    Handle switching the cursor.  If over text area set to i-beam.  Over graphics, sound,
-    movie, scrollbar or outside of window set to arrow.
-    
-    Input:
-        iTXNObject:         Opaque struct obtained from TXNNewObject.
-        ioCursorRgn:        Region to be passed to WaitNextEvent.  Resized  accordingly by 
-                        TXNAdjustCursor.
-  ***************************************************************************************
-*/
+
+
 /*
  *  TXNAdjustCursor()
  *  
+ *  Summary:
+ *    Handle switching the cursor.  If over text area set to i-beam. 
+ *    Over graphics, sound, movie, scrollbar or outside of window set
+ *    to arrow.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque struct obtained from TXNCreateObject.
+ *    
+ *    ioCursorRgn:
+ *      Region to be passed to WaitNextEvent.  Resized accordingly by
+ *      TXNAdjustCursor.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1210,20 +1351,25 @@ TXNAdjustCursor(
 
 
 
-/*
-  ****************************************************************************************                      
-    Process click in content region.  Takes care of scrolling, selecting text,  playing 
-    sound and movies, drag & drop, and double-clicks.
-    Input:
-        iTXNObject:     Opaque struct obtained from TXNNewObject.
-        iEvent:     the mousedown event
-  *****************************************************************************************
-*/
+
 /*
  *  TXNClick()
  *  
+ *  Summary:
+ *    Process click in content region.  Takes care of scrolling,
+ *    selecting text,  playing sound and movies, drag & drop, and
+ *    double-clicks.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque struct obtained from TXNCreateObject.
+ *    
+ *    iEvent:
+ *      The mousedown event.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1237,47 +1383,20 @@ TXNClick(
 
 
 
-/*
-  ********************************************************************************************
-    
-    Call this when WaitNextEvent returns false or there is no active TSNObject . 
-    The TXNObject parameter can be NULL which allows a client to call this function at any 
-    time.  This is necessary to insure input methods enough time to be reasonably responsive.
-    NOTE : You do not need to call this when working on Carbon, TSM events are passed directly
-           to the text object.
-    Input:
-        iTXNObject:         The currently active TXNObject or NULL.
-        ioEvent:            The event record.  Usually a NULL event.  If the 
-                            event is not an NULL event on entry, and an input
-                            method consumes the event the event should return
-                            as a NULL event.
-    Output:
-        Boolean:        True if TSM handled this event.  False if TSM did not handle this event.
-  **********************************************************************************************
-*/
-/*
- *  TXNTSMCheck()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in Textension 1.0 and later
- */
 
-
-
-/*
-  ***********************************************************************************************                       
-    Selects everything in a frame.
-    Input:
-        iTXNObject: opaque TXNObject 
-  ***********************************************************************************************   
-*/
 /*
  *  TXNSelectAll()
  *  
+ *  Summary:
+ *    Selects everything in a frame.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque struct obtained from TXNCreateObject.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1291,21 +1410,22 @@ TXNSelectAll(TXNObject iTXNObject)                            AVAILABLE_MAC_OS_X
 
 
 /*
-  ***********************************************************************************************                       
-    Focues the TXNObject.  Scrollbars and insertion point are made active  if iBecomingFocused
-    is true, and inactive if false.
-    
-    Input:
-        iTXNObject:         opaque TXNObject
-        
-        iBecomingFocused:   true if becoming active.  false otherwise.
-  ************************************************************************************************  
-*/
-/*
  *  TXNFocus()
+ *  
+ *  Summary:
+ *    Focus the TXNObject.  Scrollbars and insertion point are made
+ *    active  if iBecomingFocused is true, and inactive if false.
  *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque struct obtained from TXNCreateObject.
+ *    
+ *    iBecomingFocused:
+ *      true if becoming active.  false otherwise.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1318,20 +1438,25 @@ TXNFocus(
   Boolean     iBecomingFocused)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-/*
-  ************************************************************************************************                      
-    Handle update event (i.e. draw everything in a frame.) This function calls the Toolbox
-    BeginUpdate - EndUpdate functions for the window that was passed to TXNNewObject.  This
-    makes it inappropriate for windows that contain something else besides the TXNObject.
-    Input:
-        iTXNObject: opaque TXNObject 
-  ************************************************************************************************
-*/
+
+
 /*
  *  TXNUpdate()
  *  
+ *  Summary:
+ *    Handle update event (i.e. draw everything in a frame.) This
+ *    function calls the Toolbox BeginUpdate - EndUpdate functions for
+ *    the window that was passed to TXNCreateObject.  This makes it
+ *    inappropriate for windows that contain something else besides the
+ *    TXNObject.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque struct obtained from TXNCreateObject.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1342,56 +1467,70 @@ extern void
 TXNUpdate(TXNObject iTXNObject)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+
+
 /*
-  *************************************************************************************************
-    Redraw the TXNObject including any scrollbars associated with the text frame.  Call this function
-    in response to an update event for a window that contains multiple TXNObjects or some other graphic
-    element.  The caller is responsible for calling BeginUpdate/EndUpdate in response to the update
-    event.
-    Input:
-        iTXNObject:     opaque TXNObject to draw
-        iDrawPort:  Can be NULL. If NULL the port is drawn to the port currently attached to the 
-                    iTXNObject.  If not NULL drawing goes to the iDrawPort.  If drawing is done
-                    to the iDrawPort selection is not updated.  This works this way so that it
-                    is possible to Draw a TXNObject to a static port (i.e. print the thing without 
-                    reflowing the text to match the paper size which is what TXNPrint does) 
-                    and not have a line drawn where the selection would be.  If you pass an 
-                    iDrawPort to an active TXNObject (i.e. editable) the selection will not be updated. In 
-                    this case the selection will behave oddly until text is typed which will serve
-                    to realign the selection.  Bottom-line don't pass a port in unless you want
-                    static text (printed or non-editable)
-  *************************************************************************************************
-*/
-/*
- *  TXNDraw()
+ *  TXNDrawObject()
+ *  
+ *  Summary:
+ *    Renders the current content of the TXNObject on the screen.
+ *  
+ *  Discussion:
+ *    Redraws the object element(s) specified in the TXNDrawItems
+ *    flags.  Drawing is limited to the input clip rectangle.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject. Draw into this
+ *      text object.
+ *    
+ *    iClipRect:
+ *      A pointer to a HIRect. If the rectangle is NULL, MLTE uses its
+ *      view rectangle when drawing. If the rectangle is not NULL, MLTE
+ *      will intersect iClipRect with the view rectangle to determine
+ *      the rectangle to draw.  MLTE will not draw in area not covered
+ *      by the port's clip region.  Therefore, a given clipRect larger
+ *      than the port's clip region will be trimmed down.
+ *    
+ *    iDrawItems:
+ *      A value of type TXNDrawItems. Indicates what element(s) of the
+ *      object are to be drawn.
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
+ *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in Textension 1.0 and later
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
  */
-extern void 
-TXNDraw(
-  TXNObject   iTXNObject,
-  GWorldPtr   iDrawPort)        /* can be NULL */             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSStatus 
+TXNDrawObject(
+  TXNObject       iTXNObject,
+  const HIRect *  iClipRect,
+  TXNDrawItems    iDrawItems)                                 AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
-/*
-  *************************************************************************************************
-    Force a frame to be updated.  Very much like toolbox call InvalRect.
-    
-    Input:
-        iTXNObject: opaque TXNObject 
-  **************************************************************************************************                        
-*/
+
+
 /*
  *  TXNForceUpdate()
  *  
+ *  Summary:
+ *    Force a frame to be updated.  Very much like toolbox call
+ *    InvalRect.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1403,22 +1542,24 @@ TXNForceUpdate(TXNObject iTXNObject)                          AVAILABLE_MAC_OS_X
 
 
 
-/*
-  **************************************************************************************************
-    Depending on state of window get the appropriate sleep time to be passed to WaitNextEvent.
-    Input:
-        iTXNObject: opaque TXNObject obtained from TXNNewObject
-        
-    Output:
-    
-        UInt32: function result appropriate sleep time.
-  ***************************************************************************************************
-*/
+
 /*
  *  TXNGetSleepTicks()
  *  
+ *  Summary:
+ *    Depending on state of window get the appropriate sleep time to be
+ *    passed to WaitNextEvent.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *  
+ *  Result:
+ *    A UInt32 value of the appropriate sleep time.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1429,19 +1570,22 @@ extern UInt32
 TXNGetSleepTicks(TXNObject iTXNObject)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-/*
-  ***************************************************************************************************
-    Do necessary Idle time processing. Typically flash the cursor. If a TextService is active
-    pass a NULL event to the Text Service so it gets  time.
-    Input:
-        iTXNObject: opaque TXNObject obtained from TXNNewObject
-  ****************************************************************************************************
-*/
+
 /*
  *  TXNIdle()
  *  
+ *  Summary:
+ *    Do necessary Idle time processing. Typically flash the cursor. If
+ *    a TextService is active pass a NULL event to the Text Service so
+ *    it gets  time.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1453,19 +1597,23 @@ TXNIdle(TXNObject iTXNObject)                                 AVAILABLE_MAC_OS_X
 
 
 
-/*
-  *********************************************************************************************************
-    Handle mouse-down in grow region. 
-    Input:
-        iTXNObject:     opaque TXNObject obtained from TXNNewObject
-        iEvent:     The mousedown event
-  *********************************************************************************************************
-*/
+
 /*
  *  TXNGrowWindow()
  *  
+ *  Summary:
+ *    Handle mouse-down in grow region.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *    
+ *    iEvent:
+ *      The mousedown event
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1479,19 +1627,23 @@ TXNGrowWindow(
 
 
 
-/*
-  ********************************************************************************************************
-    Handle mousedown in zoom.
-    Input:
-        iTXNObject:     opaque TXNObject obtained from  TXNNewObject
-        iPart:      Value returned by FindWindow
-  *********************************************************************************************************
-*/
+
 /*
  *  TXNZoomWindow()
  *  
+ *  Summary:
+ *    Handle mouse-down in zoom.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *    
+ *    iPart:
+ *      Value returned by FindWindow
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1505,25 +1657,33 @@ TXNZoomWindow(
 
 
 
-/*
-  *******************************************************************************************************
-    Use this to determine if the Undo item in Edit menu should be highlighted or not.  Tells you if last
-    command was undoable.
-    Input:
-        iTXNObject:     opaque TXNObject obtained from TXNNewObject
-    Output:
-        Boolean     function result.  If True the last command is undoable and the undo item in the menu 
-                    should be active.  If false last command cannot be undone and undo should be grayed 
-                    in the menu.
-        oTXNActionKey The key code that the caller can use to pick a string to describe the undoable
-                      action in the undo item.  Pass in NULL if the string isn't needed.
-  *********************************************************************************************************
-*/
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Redo/Undo                                                                                         */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*
  *  TXNCanUndo()
  *  
+ *  Summary:
+ *    Use this to determine if the Undo item in Edit menu should be
+ *    highlighted or not. Tells you if last command was undoable.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *    
+ *    oTXNActionKey:
+ *      The key code that the caller can use to pick a string to
+ *      describe the undoable action in the undo item.  Pass in NULL if
+ *      the string isn't needed.
+ *  
+ *  Result:
+ *    Boolean: If True the last command is undoable and the undo item
+ *    in the menu should be active.  If false last command cannot be
+ *    undone and undo should be grayed in the menu.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1536,18 +1696,20 @@ TXNCanUndo(
   TXNActionKey *  oTXNActionKey)       /* can be NULL */      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-/*
-  ********************************************************************************************************
-    Undo the last command.
-    Input:
-        iTXNObject:     opaque TXNObject obtained from TXNNewObject
-  *********************************************************************************************************
-*/
+
 /*
  *  TXNUndo()
  *  
+ *  Summary:
+ *    Undo the last command.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1559,23 +1721,30 @@ TXNUndo(TXNObject iTXNObject)                                 AVAILABLE_MAC_OS_X
 
 
 
-/*
-  *********************************************************************************************************
-    Use this to determine if the current item on the undo stack is redoable.  If it returns true.
-    than the redo item in the edit menu should be active.
-    
-    Input:
-        iTXNObject:     opaque TXNObject obtained from TXNNewObject.
-        oTXNActionKey The key code that the caller can use to pick a string to describe the redoable
-                      action in the redo item.  Pass in NULL if the string isn't needed.
-*/
 
-/***********************************************************************************************************/
 /*
  *  TXNCanRedo()
  *  
+ *  Summary:
+ *    Use this to determine if the current item on the undo stack is
+ *    redoable.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *    
+ *    oTXNActionKey:
+ *      The key code that the caller can use to pick a string to
+ *      describe the redoable action in the redo item.  Pass in NULL if
+ *      the string isn't needed.
+ *  
+ *  Result:
+ *    If it returns true, then the redo item in the edit menu should be
+ *    active.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1589,18 +1758,20 @@ TXNCanRedo(
 
 
 
-/*
-  ********************************************************************************************************
-    Redo the last command.
-    Input:
-        iTXNObject:     opaque TXNObject obtained from TXNNewObject
-  *********************************************************************************************************
-*/
+
 /*
  *  TXNRedo()
  *  
+ *  Summary:
+ *    Redo the last command.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1612,20 +1783,50 @@ TXNRedo(TXNObject iTXNObject)                                 AVAILABLE_MAC_OS_X
 
 
 
+
 /*
-  *********************************************************************************************************
-    Cut the current selection to the clipboard.
-    Input:
-        iTXNObject:     opaque TXNObject obtained from TXNNewObject
-    Output:
-        OSStatus:   function result.  Variety of memory or scrap MacOS errors.
-  **********************************************************************************************************
-*/
-/*
- *  TXNCut()
+ *  TXNClearUndo()
+ *  
+ *  Summary:
+ *    Purge the undo stack
  *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   in Textension not yet available
+ */
+extern OSStatus 
+TXNClearUndo(TXNObject iTXNObject)                            AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Editing                                                                                           */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*
+ *  TXNCut()
+ *  
+ *  Summary:
+ *    Cut the current selection to the clipboard.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1637,21 +1838,23 @@ TXNCut(TXNObject iTXNObject)                                  AVAILABLE_MAC_OS_X
 
 
 
-/*
-  *********************************************************************************************************
-    TXNCopy
-        Copy current selection
-   
-    Input:
-        iTXNObject:         current document
-                    
-  **********************************************************************************************************                        
-*/
+
 /*
  *  TXNCopy()
  *  
+ *  Summary:
+ *    Copy current selection to the clipboard.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1663,21 +1866,23 @@ TXNCopy(TXNObject iTXNObject)                                 AVAILABLE_MAC_OS_X
 
 
 
-/*
-  ***********************************************************************************************************
-    TXNPaste
-        Paste the clipboard
-   
-    Input:
-        iTXNObject:         current document
-                    
-  **********************************************************************************************************
-*/
+
 /*
  *  TXNPaste()
  *  
+ *  Summary:
+ *    Paste from the clipboard.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1689,21 +1894,23 @@ TXNPaste(TXNObject iTXNObject)                                AVAILABLE_MAC_OS_X
 
 
 
-/*
-  **********************************************************************************************************
-    TXNClear
-        clear the current selection
-   
-    Input:
-        iTXNObject:         current document
-                    
-  **********************************************************************************************************
-*/
+
 /*
  *  TXNClear()
  *  
+ *  Summary:
+ *    Clear the current selection.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1715,25 +1922,58 @@ TXNClear(TXNObject iTXNObject)                                AVAILABLE_MAC_OS_X
 
 
 
+
 /*
-  *********************************************************************************************************
-    TXNGetSelection
-        Get the absolute offsets of the current selection.  
-        Embedded graphics, sound, etc. each count as one character.
-   
-    Input:
-        iTXNObject:         current document
-    
-    Output:
-        oStartOffset:   absolute beginning of the current selection.
-        oEndOffset:     end of current selection.
-  *********************************************************************************************************                     
-*/
-/*
- *  TXNGetSelection()
+ *  TXNIsScrapPastable()
+ *  
+ *  Summary:
+ *    Test to see if the current scrap contains data that is supported
+ *    by Textension.  Used to determine if Paste item in Edit menu
+ *    should be active or inactive. The types of data supported depends
+ *    on what data types were specified in the TXNInitTextension
+ *    options.
  *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Result:
+ *    Boolean: True if data type in Clipboard is supported.  False if
+ *    not a supported data type.  If result is True the Paste item in
+ *    the menu can be highlighted.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in Textension 1.0 and later
+ */
+extern Boolean 
+TXNIsScrapPastable(void)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Selection                                                                                         */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*
+ *  TXNGetSelection()
+ *  
+ *  Summary:
+ *    Get the absolute offsets of the current selection.  Embedded
+ *    graphics, sound, etc. each count as one character.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *    
+ *    oStartOffset:
+ *      Absolute beginning of the current selection.
+ *    
+ *    oEndOffset:
+ *      End of current selection.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1748,20 +1988,24 @@ TXNGetSelection(
 
 
 
-/*
-  *****************************************************************************************************
-    Scroll the current selection into view.
-    Input:
-        iTXNObject:         opaque TXNObject obtained from TXNNewObject
-        iShowEnd:   If true the end of the selection is scrolled into view. If false the
-                    beginning of selection is scrolled into view.
-  ****************************************************************************************************                      
-*/
+
 /*
  *  TXNShowSelection()
  *  
+ *  Summary:
+ *    Scroll the current selection into view.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *    
+ *    iShowEnd:
+ *      If true the end of the selection is scrolled into view. If
+ *      false the beginning of selection is scrolled into view.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1776,21 +2020,24 @@ TXNShowSelection(
 
 
 /*
-  *****************************************************************************************************
-    Call to find out if the current selection is empty. Use this to determine if Paste, Cut, Copy, 
-    Clear should be highlighted in Edit menu.
-    Input:
-        iTXNObject:     opaque TXNObject obtained from TXNNewObject
-    Output:
-        Boolean:    function result.  True if current selection is empty (i.e. start offset == end offset).  
-                    False if selection is not empty.
-  ********************************************************************************************************
-*/
-/*
  *  TXNIsSelectionEmpty()
+ *  
+ *  Summary:
+ *    Call to find out if the current selection is empty. Use this to
+ *    determine if Paste, Cut, Copy, Clear should be highlighted in
+ *    Edit menu.
  *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *  
+ *  Result:
+ *    Boolean: True if current selection is empty (i.e. start offset ==
+ *    end offset). False if selection is not empty.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1802,21 +2049,29 @@ TXNIsSelectionEmpty(TXNObject iTXNObject)                     AVAILABLE_MAC_OS_X
 
 
 
-/*
-  ********************************************************************************************************
-    Set the current selection. 
-   
-    Input:
-        iTXNObject:     opaque TXNObject obtained from TXNNewObject
-        iStartOffset:   new beginning
-        iEndOffset:     new end
-  ********************************************************************************************************
-*/
+
 /*
  *  TXNSetSelection()
  *  
+ *  Summary:
+ *    Set the current selection.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *    
+ *    iStartOffset:
+ *      New beginning.
+ *    
+ *    iEndOffset:
+ *      New end.
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1831,42 +2086,59 @@ TXNSetSelection(
 
 
 
-/*
-  *******************************************************************************************************
-    TXNGetContinuousTypeAttributes
-        Test the current selection to see if type size, style, color and/or font are continuous. 
-        That is is the current selection made up of one font, one font size, one Style, and/or one color.  
-        On return examine the flags to see if the attributes specified were continuous.  If an attribute
-        is continuous then the dataValue field in the TXNTypeAttributes can be examined to get the continous
-        value.  Remember that for color you pass a ptr to an RGBColor in attr[0].data.dataPtr.
-    Input:
-        iTXNObject:             current document
-        oContinuousFlags:   Bits which can be examined to see if type size, style, color, and/or font are continuous
-                            
-                            e.g 
-                            if (  TXNGetContinuousTypeAttributes( txnObject, &flags, 1, &attr ) == noErr )
-                            {
-                                    if ( flags & kTXNFontContinuousMask )
-                                        ....check a font name
-        ioCount:            Count of TXNTypeAttributes records in the ioTypeAttributes array.
-        ioTypeAttributes:   Array of TXNTypeAttributes that indicate the type attributes the
-                            caller is interested in.  For example, if you wanted to know if
-                            the current selection was continuous in terms of being all
-                            one same font size you could do something like this.
-                            
-                            TXNTypeAttributes       attr[1] = { TXNFontSizeAttribute, sizeof(Fixed),{ 0 } }
-                            
-                            on return  from the function if size is continuous (i.e. if the bit 3 of flags is set)
-                            then the third field (attr[0].data.dataValue) will contain the size of the font as a Fixed value.
-    
-                                
-  ***********************************************************************************************************
-*/
+
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Set/Get Type Attributes                                                                           */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*
  *  TXNGetContinuousTypeAttributes()
  *  
+ *  Summary:
+ *    Test the current selection to see if type size, style, color
+ *    and/or font are continuous. That is is the current selection made
+ *    up of one font, one font size, one Style, and/or one color.  On
+ *    return examine the flags to see if the attributes specified were
+ *    continuous.  If an attribute is continuous then the dataValue
+ *    field in the TXNTypeAttributes can be examined to get the
+ *    continous value.  Remember that for color you pass a ptr to an
+ *    RGBColor in attr[0].data.dataPtr.
+ *  
+ *  Discussion:
+ *    If examining kTXNATSUIStyleContinuous bit, be sure to call
+ *    ATSUDisposeStyle to dispose the style that is returned from MLTE.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *    
+ *    oContinuousFlags:
+ *      Bits which can be examined to see if type size, style, color,
+ *      and/or font are continuous. Example: if ( 
+ *      TXNGetContinuousTypeAttributes( txnObject, &flags, 1, &attr )
+ *      == noErr ) { if ( flags & kTXNFontContinuousMask ) ....check a
+ *      font name
+ *    
+ *    iCount:
+ *      Count of TXNTypeAttributes records in the ioTypeAttributes
+ *      array.
+ *    
+ *    ioTypeAttributes:
+ *      Array of TXNTypeAttributes that indicate the type attributes
+ *      the caller is interested in. For example, if you wanted to know
+ *      if the current selection was continuous in terms of being all
+ *      one same font size you could do something like this.
+ *      TXNTypeAttributes       attr[1] = { TXNFontSizeAttribute,
+ *      sizeof(Fixed),{ 0 } } on return  from the function if size is
+ *      continuous (i.e. if the bit 3 of flags is set) then the third
+ *      field (attr[0].data.dataValue) will contain the size of the
+ *      font as a Fixed value.
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1875,38 +2147,47 @@ TXNSetSelection(
  */
 extern OSStatus 
 TXNGetContinuousTypeAttributes(
-  TXNObject             iTxnObject,
+  TXNObject             iTXNObject,
   TXNContinuousFlags *  oContinuousFlags,
   ItemCount             iCount,
   TXNTypeAttributes     ioTypeAttributes[])     /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
-/*
-  *************************************************************************************************
-    TXNSetTypeAttributes
-        Set the current ranges font information.  Values are passed
-        in the attributes array.  Values <= sizeof(UInt32) are passed
-        by value. > sizeof(UInt32) are passed as a pointer.  That is
-        the TXNTypeAttributes' 3rd field is a union that servers as
-        either a 32-bit integer where values can be written or a 32-bit pointer 
-        a value.
-    Input:
-        iTXNObject:         current document
-        iAttrCount:     Count of type attributes in the TXNTypeAttributes array.
-        iAttributes:    Attributes that caller would like to set.
-        iStartOffset:   Start of the range where text attributes should be changed.
-        iEndOffset:     End of the range.
-    
-    Output:
-        OSStatus:           various MacOS  errs.  Notably memory manager and paramErrs.                         
-  *************************************************************************************************                         
-*/
+
 /*
  *  TXNSetTypeAttributes()
  *  
+ *  Summary:
+ *    Set the current ranges font information.  Values are passed in
+ *    the attributes array. Values <= sizeof(UInt32) are passed by
+ *    value. > sizeof(UInt32) are passed as a pointer. That is the
+ *    TXNTypeAttributes' 3rd field is a union that servers as either a
+ *    32-bit integer where values can be written or a 32-bit pointer a
+ *    value.  Functional in NoUserIO mode.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *    
+ *    iAttrCount:
+ *      Count of type attributes in the TXNTypeAttributes array.
+ *    
+ *    iAttributes:
+ *      Attributes that caller would like to set.
+ *    
+ *    iStartOffset:
+ *      Start of the range where text attributes should be changed.
+ *    
+ *    iEndOffset:
+ *      End of the range.
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1923,6 +2204,9 @@ TXNSetTypeAttributes(
 
 
 
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Set/Get Object Controls                                                                           */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*
  *  TXNSetTXNObjectControls()
  *  
@@ -1951,7 +2235,8 @@ TXNSetTypeAttributes(
  *      A Boolean value. If you set this to true, all formatting and
  *      privileges attributes are reset to their default value. That
  *      is, true clears existing tags and resets each to its default
- *      value.
+ *      value.  This can be done even when the object is in NoUserIO
+ *      mode.
  *    
  *    iControlCount:
  *      The number of items in the iControlTags array.
@@ -1992,6 +2277,7 @@ TXNSetTXNObjectControls(
 
 
 
+
 /*
  *  TXNGetTXNObjectControls()
  *  
@@ -2007,6 +2293,7 @@ TXNSetTXNObjectControls(
  *    
  *    iTXNObject:
  *      The text object that identifies the document to be activated.
+ *      If NULL then the default value for an MLTE object is returned.
  *    
  *    iControlCount:
  *      The number of items in the iControlTags array.
@@ -2040,27 +2327,125 @@ TXNGetTXNObjectControls(
 
 
 
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Other Settings                                                                                    */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*
-  ******************************************************************************************************
-    TXNCountRunsInRange
-        Given a range specified by the starting and ending offset return a count of the runs in that
-        range.  Run in this case means changes in TextSyles or a graphic or sound.
-        Result:
-            OSStatus:       paramerr mostly
-        Input:
-            iTXNObject          The TXNObject you are interested in.
-            iStartOffset        start of range
-            iEndOffset          end of range
-        
-        Output:
-            oRunCount           count of runs in the range
-  *******************************************************************************************************
-*/
-/*
- *  TXNCountRunsInRange()
+ *  TXNSetBackground()
+ *  
+ *  Summary:
+ *    Set the type of background the TXNObject's text, etc. is drawn
+ *    onto.  At this point the background can be a color.  Functional
+ *    in NoUserIO mode.
  *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *    
+ *    iBackgroundInfo:
+ *      Struct containing information that describes the background.
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in Textension 1.0 and later
+ */
+extern OSStatus 
+TXNSetBackground(
+  TXNObject              iTXNObject,
+  const TXNBackground *  iBackgroundInfo)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+
+
+/*
+ *  TXNEchoMode()
+ *  
+ *  Summary:
+ *    Put the TXNObject into echo mode. What that means is that all
+ *    characters in the TXNObject have the character 'echoCharacter'
+ *    substituted for the actual glyph when drawing occurs.
+ *  
+ *  Discussion:
+ *    Note that the echoCharacter is typed as a UniChar, but this is
+ *    done merely to facilitate passing any 2 byte character.  The
+ *    encoding parameter actually determines the encoding used to
+ *    locate a font and display a character.  Thus if you wanted to
+ *    display the diamond found in the Shift-JIS encoding for MacOS you
+ *    would pass in 0x86A6 for the character but an encoding that was
+ *    built to represent the MacOS Japanese encoding.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from IncomingDataFilter callback.
+ *    
+ *    iEchoCharacter:
+ *      Character to use in substitution.
+ *    
+ *    iEncoding:
+ *      Encoding from which character is drawn.
+ *    
+ *    iOn:
+ *      True if turning EchoMode on.  False if turning it off.
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in Textension 1.0 and later
+ */
+extern OSStatus 
+TXNEchoMode(
+  TXNObject      iTXNObject,
+  UniChar        iEchoCharacter,
+  TextEncoding   iEncoding,
+  Boolean        iOn)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Retrieve Run Info                                                                                 */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*
+ *  TXNCountRunsInRange()
+ *  
+ *  Summary:
+ *    Given a range specified by the starting and ending offset return
+ *    a count of the runs in that range.  Run in this case means
+ *    changes in TextSyles or a graphic or sound.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *    
+ *    iStartOffset:
+ *      Start of range.
+ *    
+ *    iEndOffset:
+ *      End of range.
+ *    
+ *    oRunCount:
+ *      Count of runs in the range
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2086,7 +2471,9 @@ TXNCountRunsInRange(
  *    You should first call the TXNCountRunsInRange function to get the
  *    count. The TXNTypeAttributes structure must specify the text
  *    attribute in which the application is interested. In other words,
- *    the tag field must be set.
+ *    the tag field must be set. If you asked for the kTXNATSUIStyle
+ *    info, you are now responsible for disposing the ATSUI style
+ *    returned from the attribute array by calling ATSUDisposeStyle.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -2129,7 +2516,7 @@ TXNCountRunsInRange(
  *    
  *    ioTypeAttributes:
  *      A pointer to a structure of type TXNTypeAttributes. On input,
- *      you specify the attribute (such as color) in the tag field and
+ *      you specify the attribute (such as size) in the tag field and
  *      the attribute size in the size field. You can pass NULL for the
  *      data field. On return, the data field contains the attribute
  *      data. The data field is a union that serves either as a 32-bit
@@ -2157,22 +2544,25 @@ TXNGetIndexedRunInfoFromRange(
 
 
 
-/*
-  **********************************************************************************************************
-    TXNDataSize
-    Return the size in bytes of the characters in a given TXNObject.
-    Result:
-        ByteCount:          The bytes required to hold the characters
-    Input:
-        iTXNObject:         The TXNObject
-    
-  **********************************************************************************************************
-*/
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Set/Get Data                                                                                      */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*
  *  TXNDataSize()
  *  
+ *  Summary:
+ *    Return the size in bytes of the characters in a given TXNObject.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *  
+ *  Result:
+ *    The bytes required to hold the characters.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2184,36 +2574,48 @@ TXNDataSize(TXNObject iTXNObject)                             AVAILABLE_MAC_OS_X
 
 
 
-/*
-  ***********************************************************************************************************
-    Copy the data in the range specified by startOffset and endOffset. This function should be used
-    in conjunction with TXNNextDataRun.  The client would call TXNCountRunsInRange to the number of data
-    runs in a given range.  The client can then walk the runs with the function TXNGetIndexedRunInfoFromRange.
-    TXNGetIndexedRunInfoFromRange lets you examine each runs type and text attributes.  
-    For each data run of interest (i.e. one whose data the caller wanted to look at) 
-    the client would call TXNGetData. The handle passed to TXNGetData should not be allocated.  
-    TXNGetData takes care of allocating the dataHandle as necessary.  However, the caller is  responsible 
-    for disposing the handle.  
-    No effort is made to insure that data copies align on a word boundary.  Data is simply copied as
-    specified in the offsets.
-    Input:
-        iTXNObject:     opaque TXNObject obtained from TXNNewObject.
-        iStartOffset:   absolute offset from which data copy should begin.
-        iEndOffset: absolute offset at which data copy should end.
-                        
-    Output:
-        OSStatus    Memory errors or  TXN_IllegalToCrossDataBoundaries if offsets specify a range that 
-                    crosses a data type boundary.
-        oDataHandle: If noErr a new handle containing the requested data. The caller is responsible
-                     for disposing the handle.  Note that the handle is a copy so it can be safely
-                     disposed at any time.
-  **********************************************************************************************************
-*/
+
 /*
  *  TXNGetData()
  *  
+ *  Summary:
+ *    Copy the data in the range specified by startOffset and endOffset.
+ *  
+ *  Discussion:
+ *    This function should be used in conjunction with TXNNextDataRun. 
+ *    The client would call TXNCountRunsInRange to the number of data
+ *    runs in a given range.  The client can then walk the runs with
+ *    the function TXNGetIndexedRunInfoFromRange. 
+ *    TXNGetIndexedRunInfoFromRange lets you examine each runs type and
+ *    text attributes. For each data run of interest (i.e. one whose
+ *    data the caller wanted to look at) the client would call
+ *    TXNGetData. The handle passed to TXNGetData should not be
+ *    allocated. TXNGetData takes care of allocating the dataHandle as
+ *    necessary.  However, the caller is responsible for disposing the
+ *    handle.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *    
+ *    iStartOffset:
+ *      Absolute offset from which data copy should begin.
+ *    
+ *    iEndOffset:
+ *      Absolute offset at which data copy should end.
+ *    
+ *    oDataHandle:
+ *      If noErr a new handle containing the requested data. The caller
+ *      is responsible for disposing the handle.  Note that the handle
+ *      is a copy so it can be safely disposed at any time.
+ *  
+ *  Result:
+ *    Memory errors or TXN_IllegalToCrossDataBoundaries if offsets
+ *    specify a range that crosses a data type boundary.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2229,30 +2631,41 @@ TXNGetData(
 
 
 
-/*
-  ***********************************************************************************************************
-    Copy the data in the range specified by startOffset and endOffset. 
-    The handle passed to TXNGetDataEncoded should not be allocated.  
-    TXNGetData takes care of allocating the dataHandle as necessary.  However, the caller is  responsible 
-    for disposing the handle.  
-    No effort is made to insure that data copies align on a word boundary.  Data is simply copied as
-    specified in the offsets.
-    Input:
-        iTXNObject:     opaque TXNObject obtained from TXNNewObject.
-        iStartOffset:   absolute offset from which data copy should begin.
-        iEndOffset: absolute offset at which data copy should end.
-        iEncoding : should be kTXNTextData or kTXNUnicodeTextData               
-    Output:
-        OSStatus    Memory errors or  TXN_IllegalToCrossDataBoundaries if offsets specify a range that 
-                crosses a data type boundary.
-        oDataHandle:        If noErr a new handle containing the requested data.
-  **********************************************************************************************************
-*/
+
 /*
  *  TXNGetDataEncoded()
  *  
+ *  Summary:
+ *    Copy the data in the range specified by startOffset and endOffset.
+ *  
+ *  Discussion:
+ *    The handle passed to TXNGetDataEncoded should not be allocated.
+ *    TXNGetData takes care of allocating the dataHandle as necessary. 
+ *    However, the caller is responsible for disposing the handle.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *    
+ *    iStartOffset:
+ *      Absolute offset from which data copy should begin.
+ *    
+ *    iEndOffset:
+ *      Absolute offset at which data copy should end.
+ *    
+ *    oDataHandle:
+ *      If noErr a new handle containing the requested data.
+ *    
+ *    iEncoding:
+ *      should be kTXNTextData or kTXNUnicodeTextData.
+ *  
+ *  Result:
+ *    Memory errors or  TXN_IllegalToCrossDataBoundaries if offsets
+ *    specify a range that crosses a data type boundary.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2269,47 +2682,56 @@ TXNGetDataEncoded(
 
 
 
+
 /*
-  *********************************************************************************************************
-    Replace the specified range with the contents of the specified file.  The data fork of the file 
-    must be opened by the caller.
-    Input:
-        iTXNObject:     opaque TXNObject obtained from  TXNNewObject
-        fileSpec:   HFS file reference obtained when file is opened.
-        fileType:   files type.
-        iFileLength: The length of data in the file that should be considered data.  This
-                     parameter is available to enable callers to embed text inside their
-                     own private data structures.  Note that if the data is in the Textension(txtn)
-                     format this parameter is ignored since length, etc. information is
-                     part of the format. Further note that if you you just want Textension
-                     to read a file and you are not interested in embedding you can just pass
-                     kTXNEndOffset(0x7FFFFFFF), and Textension will use the file manager to
-                     determine the files length.
-        iStartOffset:   start position at which to insert the file into the document.
-        iEndOffset:     end position of range being replaced by the file.
-    Output:
-        OSStatus:   File manager error or noErr.
-  ***********************************************************************************************************
-*/
-/*
- *  TXNSetDataFromFile()
+ *  TXNSetDataFromCFURLRef()
+ *  
+ *  Summary:
+ *    Replaces a range of data with the content of a file.
+ *  
+ *  Discussion:
+ *    Uses URL file name extension to determine the type of the input
+ *    file. If the entire content is replaced, calling TXNRevert will
+ *    revert to the last saved CFURLRef.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.  Data will be
+ *      added to this text object.
+ *    
+ *    iURL:
+ *      The url referring to the file which contains the data you want
+ *      to add to the object.
+ *    
+ *    iStartOffset:
+ *      The starting offset at which to insert the file into a
+ *      document.. If you want to replace the entire text content then
+ *      set the iStartOffset parameter to kTXNStartOffset.
+ *    
+ *    iEndOffset:
+ *      The ending position of the range being replaced by the file. If
+ *      you want to replace the entire text content then set the
+ *      iEndOffset parameter to kTXNEndOffset.
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
+ *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in Textension 1.0 and later
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
-TXNSetDataFromFile(
+TXNSetDataFromCFURLRef(
   TXNObject   iTXNObject,
-  SInt16      iFileRefNum,
-  OSType      iFileType,
-  ByteCount   iFileLength,
+  CFURLRef    iURL,
   TXNOffset   iStartOffset,
-  TXNOffset   iEndOffset)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TXNOffset   iEndOffset)                                     AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
 
 
 
@@ -2318,6 +2740,9 @@ TXNSetDataFromFile(
  *  
  *  Summary:
  *    Replaces a range of data (text, graphics, and so forth).
+ *  
+ *  Discussion:
+ *    Functional in NoUserIO mode.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -2369,67 +2794,103 @@ TXNSetData(
   TXNOffset     iEndOffset)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Saving Data                                                                                       */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*
-  ************************************************************************************************************                          
-    Retrieve number of times document has been changed.  That is for every committed command 
-    (keydown, cut, copy) the value returned is count of those. This is useful for deciding if  the Save 
-    item in the File menu should be active.
-    Input:
-        iTXNObject:     opaque TXNObject obtained from TXNNewObject
-                            
-    Output:
-        ItemCount:  count of changes.  This is total changes since document  was created or last saved.  
-                    Not count since this routine was last called or anything like that.
-  ***********************************************************************************************************
-*/
-/*
- *  TXNGetChangeCount()
+ *  TXNFlattenObjectToCFDataRef()
+ *  
+ *  Summary:
+ *    Flattens a text object so it can be saved to disk or embedded
+ *    with other data.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.  Retrieve
+ *      flattened data from this text object.
+ *    
+ *    iTXNDataType:
+ *      A value of type TXNDataType that specifies the format in which
+ *      the data is written out.
+ *    
+ *    oDataRef:
+ *      A pointer to a structure of type CFDataRef. On return the data
+ *      will contain a flattened version of the iTXNObject in the
+ *      format specified by iTXNDataType. Clients are responsible to
+ *      retain the returned CFDataRef.
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
+ *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in Textension 1.0 and later
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
  */
-extern ItemCount 
-TXNGetChangeCount(TXNObject iTXNObject)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+extern OSStatus 
+TXNFlattenObjectToCFDataRef(
+  TXNObject     iTXNObject,
+  TXNDataType   iTXNDataType,
+  CFDataRef *   oDataRef)                                     AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 
-/*
-  *********************************************************************************************************
-    Save the contents of the document as the given type. 
-    Input:
-        iTXNObject:         opaque TXNObject obtained from TXNNewObject.
-        iType:              The type of file to create.
-        iResType:           When saving file as plain TEXT the type of resource to
-                            save style information.  Use kTXNMultipleStylesPerTextDocumentResType
-                            if your document contains multiple styles and you want a SimpleText
-                            like document.  Use kTXNSingleStylePerTextDocumentResType if the 
-                            document has a single style and you would like a BBEdit, MPW, CW type
-                            of document.
-        iPermanentEncoding: The encoding in which the document should be saved (Unicode, Text or System
-                            default).
-        iFileSpecification:  The file specification to which the document should be saved. The
-                             file must have been opened by the caller.  The file specification is remembered by the TXNObject
-                             and is used for any subsequent calls to TXNRevert.
-        iDataReference:     The data fork ref num.  This is used to write data to the data fork of the
-                            file. The data is written beginning at the current mark.  
-        iResourceReference: The resource fork ref num.  If the caller has specified that style information be
-                            saved as a resource (MPW or SimpleText) than this should be a valid reference to
-                            an open resource fork.  If the txtn format is being used than this input value
-                            is ignored.
-    Output:
-        OSStatus        The result of writing the file.
-  **********************************************************************************************************    
-*/
+
 /*
  *  TXNSave()
  *  
+ *  Summary:
+ *    Save the contents of the document as the given type.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *    
+ *    iType:
+ *      The type of file to create.
+ *    
+ *    iResType:
+ *      When saving file as plain TEXT the type of resource to save
+ *      style information. Use kTXNMultipleStylesPerTextDocumentResType
+ *      if your document contains multiple styles and you want a
+ *      SimpleText like document.  Use
+ *      kTXNSingleStylePerTextDocumentResType if the document has a
+ *      single style and you would like a BBEdit, MPW, CW type of
+ *      document.
+ *    
+ *    iPermanentEncoding:
+ *      The encoding in which the document should be saved (Unicode,
+ *      Text or System default).
+ *    
+ *    iFileSpecification:
+ *      The file specification to which the document should be saved.
+ *      The file must have been opened by the caller.  The file
+ *      specification is remembered by the TXNObject and is used for
+ *      any subsequent calls to TXNRevert.
+ *    
+ *    iDataReference:
+ *      The data fork ref num.  This is used to write data to the data
+ *      fork of the file. The data is written beginning at the current
+ *      mark.
+ *    
+ *    iResourceReference:
+ *      The resource fork ref num.  If the caller has specified that
+ *      style information be saved as a resource (MPW or SimpleText)
+ *      than this should be a valid reference to an open resource fork.
+ *       If the txtn format is being used than this input value is
+ *      ignored.
+ *  
+ *  Result:
+ *    The result of writing the file.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2448,21 +2909,26 @@ TXNSave(
 
 
 
-/*
-  ***********************************************************************************************************
-    Revert  to the last saved version of this document.  If the file was not previously saved the document
-    is reverted to an empty document.
-    Input:
-        iTXNObject:     opaque TXNObject obtained from TXNNewObject
-    Output:
-        OSStatus:   File manager errors, paramErr, or noErr.
-  **********************************************************************************************************                    
-*/
+
 /*
  *  TXNRevert()
  *  
+ *  Summary:
+ *    Revert  to the last saved version of this document.  If the file
+ *    was not previously saved the document is reverted to an empty
+ *    document.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *  
+ *  Result:
+ *    A result code indicating success or failure. (such as File
+ *    Manager errors)
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2474,22 +2940,28 @@ TXNRevert(TXNObject iTXNObject)                               AVAILABLE_MAC_OS_X
 
 
 
-/*
-  *********************************************************************************************************                 
-    Display the Page Setup dialog of the current default printer and react to any changes 
-    (i.e. Reformat the text if the page layout changes.)
-    Input:
-        iTXNObject:     opaque TXNObject obtained from TXNNewObject.
-    
-    Output:
-        OSStatus:   Print Manager errors, paramErr, noErr.
-  **********************************************************************************************************
-*/
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Printing                                                                                          */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*
  *  TXNPageSetup()
  *  
+ *  Summary:
+ *    Display the Page Setup dialog of the current default printer and
+ *    react to any changes (i.e. Reformat the text if the page layout
+ *    changes.)
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *  
+ *  Result:
+ *    A result code indicating success or failure. ( such as Print
+ *    Manager errors )
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2501,20 +2973,24 @@ TXNPageSetup(TXNObject iTXNObject)                            AVAILABLE_MAC_OS_X
 
 
 
-/*
-  **********************************************************************************************************
-    Print the document.
-    Input:
-        iTXNObject:     opaque TXNObject obtained from TXNNewObject.
-    Output:
-        OSStatus:   Print Manager errors, paramErr, noErr.
-  **********************************************************************************************************
-*/
+
 /*
  *  TXNPrint()
  *  
+ *  Summary:
+ *    Print the document.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *  
+ *  Result:
+ *    A result code indicating success or failure. ( such as Print
+ *    Manager errors )
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2526,183 +3002,81 @@ TXNPrint(TXNObject iTXNObject)                                AVAILABLE_MAC_OS_X
 
 
 
-/*
-  ***********************************************************************************************************                           
-    Test to see if the current scrap contains data that is supported by Textension.  Used to determine
-    if Paste item in Edit menu should be active or inactive. The types of data supported depends on what 
-    data types were specified in the TXNInitTextension options.
-    Output:
-        Boolean:        function result.  True if data type in Clipboard is supported.  False if 
-                        not a supported data type.  If result is True the Paste item in the menu can 
-                        be highlighted.
-  **********************************************************************************************************
-*/
-/*
- *  TXNIsScrapPastable()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in Textension 1.0 and later
- */
-extern Boolean 
-TXNIsScrapPastable(void)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-
-/*
-  ***********************************************************************************************************
-    Convert the Textension private scrap to the public clipboard.  This should be called on suspend 
-    events and before the application displays a dialog that might support cut and paste.  Or more 
-    generally, whenever someone other than the Textension Shared Library needs access to the scrap data.
-    Output:
-         OSStatus:  Function result.  Memory Manager errors, Scrap Manager errors, noErr.
-  ************************************************************************************************************
-*/
-/*
- *  TXNConvertToPublicScrap()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in Textension 1.0 and later
- */
-extern OSStatus 
-TXNConvertToPublicScrap(void)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-
-/*
-  ***********************************************************************************************************
-    Convert the  public clipboard to our private scrap .  This should be called on resume 
-    events and after an application has modified the scrap. Before doing work we check the validity of the public 
-    scrap (date modification and type)
-    Output:
-         OSStatus:  Function result.  Memory Manager errors, Scrap Manager errors, noErr.
-  ************************************************************************************************************  
-*/
-/*
- *  TXNConvertFromPublicScrap()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in Textension 1.0 and later
- */
-extern OSStatus 
-TXNConvertFromPublicScrap(void)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-
-/*
-  ************************************************************************************************************
-    Get the  rectangle describing the current view into the document. The coordinates of this rectangle will be 
-    local to the the window.
-    Input:
-        iTXNObject:     opaque TXNObject obtained from TXNNewObject.
-    Output:
-        oViewRect:      the requested view rectangle.
-  *************************************************************************************************************
-*/
-/*
- *  TXNGetViewRect()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in Textension 1.0 and later
- */
-extern void 
-TXNGetViewRect(
-  TXNObject   iTXNObject,
-  Rect *      oViewRect)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-
-/*
-  !! TXNSetViewRect is now deprecated for 10.2 and later.  Please use TXNSetFrameBounds or TXNSetRectBounds API !!
-  *************************************************************************************************                         
-   Set the rectangle describing the current view into the document. This
-   will change how much text is viewable.  Not where a line of text wraps.
-   That is controlled by TXNSetFrameBoundsSize.
-   Input:
-        iTXNObject :    opaque Textension structure.
-        
-        iViewRect:      Rect of the view
-         
-    
-  *************************************************************************************************
-*/
-/*
- *  TXNSetViewRect()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.3 and later
- *    Non-Carbon CFM:   in Textension 1.3 and later
- */
-extern void 
-TXNSetViewRect(
-  TXNObject     iTXNObject,
-  const Rect *  iViewRect)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-
-/*
-  ***********************************************************************************************************
-    Find a piece of text or a graphics object.
-    Input:
-        iTXNObject:         opaque TXNObject obtained from TXNNewObject.
-        iMatchTextDataPtr   ptr to a MatchTextRecord which contains the text to match, the length of that text
-                            and the TextEncoding the text is encoded in.  This must be there if you are looking
-                            for Text, but can be NULL if you are looking for a graphics object.
-        iDataType           The type of data to find.  This can be any of the types defined in TXNDataType enum
-                            (TEXT, PICT, moov, snd ).  However, if PICT, moov, or snd is passed then the default
-                            behavior is to match on any non-Text object.  If you really want to find a specific
-                            type you can provide a custom find callback or ignore matches which aren't the precise
-                            type you are interested in.
-        iStartSearchOffset  The offset at which a search should begin. The constant kTXNStartOffset specifies the start
-                            of the objects data.
-        iEndSearchOffset    The offset at which the search should end. The constant kTXNEndOffset specifies the end
-                            of the objects data.
-        iFindProc           A custom callback.  If will be called to match things rather than the default matching
-                            behavior.
-        iRefCon             This can be use for whatever the caller likes.  It is passed to the FindProc (if a FindProc
-                            is provided.
-    Output:
-        oStartMatchOffset   absolute offset to start of match.  set to 0xFFFFFFFF if not match.
-        oEndMatchOffset     absolute offset to end of match.  Set to 0xFFFFFFFF is no match.
-    The default matching behavior is pretty simple for Text a basic binary compare is done.  If the matchOptions say 
-    to ignore case the characters to be searched are duplicated and case neutralized.  This naturally can fail due
-    to lack of memory if there is a large amount of text.  It also slows things down.  If MatchOptions say
-    find an entire word that once a match is found an effort is made to determine if the match is a word.  The default
-    behavior is to test the character before and after the to see if it is White space.  If the kTXNUseEncodingWordRulesBit
-    is set than the Script Manager's FindWord function is called to make this determination.
-    If the caller is looking for a non-text type than each non-text type in the document is returned.
-    If more elaborate ( a regular expression processor or whatever ) is what you want then that is what the FindProc is
-    for.
-  *******************************************************************************************************************
-*/
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Search                                                                                            */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*
  *  TXNFind()
  *  
+ *  Summary:
+ *    Find a piece of text or a graphics object.
+ *  
+ *  Discussion:
+ *    The default matching behavior is pretty simple for Text a basic
+ *    binary compare is done.  If the matchOptions say to ignore case
+ *    the characters to be searched are duplicated and case
+ *    neutralized. This naturally can fail due to lack of memory if
+ *    there is a large amount of text.  It also slows things down.  If
+ *    MatchOptions say find an entire word that once a match is found
+ *    an effort is made to determine if the match is a word.  The
+ *    default behavior is to test the character before and after the to
+ *    see if it is White space.  If the kTXNUseEncodingWordRulesBit is
+ *    set than the Script Manager's FindWord function is called to make
+ *    this determination. If the caller is looking for a non-text type
+ *    than each non-text type in the document is returned. If more
+ *    elaborate ( a regular expression processor or whatever ) is what
+ *    you want then that is what the FindProc is for.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *    
+ *    iMatchTextDataPtr:
+ *      Ptr to a MatchTextRecord which contains the text to match, the
+ *      length of that text and the TextEncoding the text is encoded
+ *      in.  This must be there if you are looking for Text, but can be
+ *      NULL if you are looking for a graphics object.
+ *    
+ *    iDataType:
+ *      The type of data to find.  This can be any of the types defined
+ *      in TXNDataType enum (TEXT, PICT, moov, snd ).  However, if
+ *      PICT, moov, or snd is passed then the default behavior is to
+ *      match on any non-Text object.  If you really want to find a
+ *      specific type you can provide a custom find callback or ignore
+ *      matches which aren't the precise type you are interested in.
+ *    
+ *    iMatchOptions:
+ *      Options on what to search for.
+ *    
+ *    iStartSearchOffset:
+ *      The offset at which a search should begin. The constant
+ *      kTXNStartOffset specifies the start of the objects data.
+ *    
+ *    iEndSearchOffset:
+ *      The offset at which the search should end. The constant
+ *      kTXNEndOffset specifies the end of the objects data.
+ *    
+ *    iFindProc:
+ *      A custom callback.  If will be called to match things rather
+ *      than the default matching behavior.
+ *    
+ *    iRefCon:
+ *      This can be use for whatever the caller likes.  It is passed to
+ *      the FindProc (if a FindProc is provided.
+ *    
+ *    oStartMatchOffset:
+ *      Absolute offset to start of match.  set to 0xFFFFFFFF if not
+ *      match.
+ *    
+ *    oEndMatchOffset:
+ *      Absolute offset to end of match.  Set to 0xFFFFFFFF is no match.
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2724,24 +3098,32 @@ TXNFind(
 
 
 
-/*
-  ***************************************************************************************************************
-   TXNSetFontDefaults
-    
-   For a given TXNObject specify the font defaults for each script.
-   Input:
-        iTXNObject:         opaque TXNObject obtained from TXNNewObject.
-        iCount:             count of FontDescriptions.
-        iFontDefaults:      array of FontDescriptions.
-   Output:
-        OSStatus:           function result ( memory error, paramErr )
-  ****************************************************************************************************************
-*/
+
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Font Defaults                                                                                     */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*
  *  TXNSetFontDefaults()
  *  
+ *  Summary:
+ *    For a given TXNObject specify the font defaults for each script.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *    
+ *    iCount:
+ *      Count of FontDescriptions.
+ *    
+ *    iFontDefaults:
+ *      Array of FontDescriptions.
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2756,26 +3138,34 @@ TXNSetFontDefaults(
 
 
 
-/*
-  ***************************************************************************************************************
-   TXNGetFontDefaults
-    
-   For a given TXNObject make a copy of the font defaults.
-   Input:
-        iTXNObject:         opaque TXNObject obtained from TXNNewObject.
-        iCount:             count of FontDescriptions in the array.
-        iFontDefaults:      array of FontDescriptins to be filled out.
-   Output:
-        OSStatus:           function result ( memory error, paramErr )
-    To determine how many font descriptions need to be in the array you should call this function with
-    a NULL for the array.  iCount will return with the number of font defaults currently stored.
-  ****************************************************************************************************************
-*/
+
 /*
  *  TXNGetFontDefaults()
  *  
+ *  Summary:
+ *    For a given TXNObject make a copy of the font defaults.
+ *  
+ *  Discussion:
+ *    To determine how many font descriptions need to be in the array
+ *    you should call this function with a NULL for the array.  iCount
+ *    will return with the number of font defaults currently stored.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *    
+ *    ioCount:
+ *      Count of FontDescriptions in the array.
+ *    
+ *    oFontDefaults:
+ *      Array of FontDescriptins to be filled out.
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2786,296 +3176,56 @@ extern OSStatus
 TXNGetFontDefaults(
   TXNObject                          iTXNObject,
   ItemCount *                        ioCount,
-  TXNMacOSPreferredFontDescription   ioFontDefaults[])     /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  TXNMacOSPreferredFontDescription   oFontDefaults[])     /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
-/*
-  ****************************************************************************************************************
-    TXNAttachObjectToWindow
-    If a TXNObject was initialized with a NULL window pointer use this function to attach a window
-    to that object.  In version 1.0 of Textension attaching a TXNObject to more than one window
-    is not supported.  Note that if a CGContextRef was passed to the TXNObject previously thru the
-    API TXNSetTXNObjectControls, that CGContextRef will be ignored.  The CGContextRef associated with
-    the iWindow will be used instead.  You may revert back to the previous CGContextRef by calling the
-    API TXNSetTXNObjectControls with the desired CGContextRef again after calling TXNAttachObjectToWindow.
-    
-    Input:
-        iTXNObject:         opaque TXNObject obtained from TXNNewObject.
-        iWindow:            GWorldPtr that the object should be attached to
-        iIsActualWindow:    Let the library know if the GWorldPtr is actually
-                            a WindowRef or actually a GWorldPtr.  This is important
-                            if the client is taking advantage of the editing packages
-                            scrollbar support.
-    Output:
-        OSStatus:           function result.  paramErrs. 
-  ****************************************************************************************************************
-*/
-/*
- *  TXNAttachObjectToWindow()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in Textension 1.0 and later
- */
-extern OSStatus 
-TXNAttachObjectToWindow(
-  TXNObject   iTXNObject,
-  GWorldPtr   iWindow,
-  Boolean     iIsActualWindow)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
-
-
-/*
-  ****************************************************************************************************************
-    TXNIsObjectAttachedToWindow
-    A utility function that allows a caller to check a TXNObject to see if it is attached
-    to a window.
-    Input:
-        iTXNObject:         opaque TXNObject obtained from TXNNewObject.
-    Output:
-        Boolean:            function result.  True is object is attached.
-                            False if TXNObject is not attached.
-  ****************************************************************************************************************
-*/
-/*
- *  TXNIsObjectAttachedToWindow()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in Textension 1.0 and later
- */
-extern Boolean 
-TXNIsObjectAttachedToWindow(TXNObject iTXNObject)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-
-/*
-  ****************************************************************************************************************
-    TXNDragTracker
-    If you ask that Drag handling procs not be installed.  Call this when your drag tracker is called
-    and you want Textension to take over
-    Input:
-        iTXNObject:         opaque TXNObject obtained from TXNNewObject.
-        iTXNFrameID:            TXNFrameID obtained from TXNNewObject
-        iMessage:           drag message obtained from Drag Manager
-        iWindow :           WindowRef obtained from Drag Manager
-        iDragReference:     dragReference obtained from Drag Manager
-        iDifferentObjectSameWindow: Pass true if the drag is still in the same window
-                                   that it started in. False if the drag has moved into
-                                   a different window.
-    Output:
-        OSErr:              function result.  OSErr is used over
-                            OSStatus so that it matches the Drag Manager definition of Tracking callback
-  ****************************************************************************************************************
-*/
-/*
- *  TXNDragTracker()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in Textension 1.0 and later
- */
-extern OSErr 
-TXNDragTracker(
-  TXNObject             iTXNObject,
-  TXNFrameID            iTXNFrameID,
-  DragTrackingMessage   iMessage,
-  WindowRef             iWindow,
-  DragReference         iDragReference,
-  Boolean               iDifferentObjectSameWindow)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-
-/*
-  ****************************************************************************************************************
-    TXNDragReceiver
-    If you ask that Drag handling procs not be installed.  Call this when your drag receiver is called
-    and you want Textension to take over
-    Input:
-        iTXNObject:         opaque TXNObject obtained from TXNNewObject.
-        iTXNFrameID         TXNFrameID obtained from TXNNewObject
-        iWindow             WindowRef obtained from Drag Manager
-        iDragReference      dragReference obtained from Drag Manager
-        iDifferentObjectSameWindow: Pass true if the drag is still in the same window
-                                   that it started in. False if the drag has moved into
-                                   a different window.
-    Output:
-        OSErr:              function result.  OSErr is used over
-                            OSStatus so that it matches the Drag Manager definition of Tracking callback
-  ****************************************************************************************************************
-*/
-/*
- *  TXNDragReceiver()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in Textension 1.0 and later
- */
-extern OSErr 
-TXNDragReceiver(
-  TXNObject       iTXNObject,
-  TXNFrameID      iTXNFrameID,
-  WindowRef       iWindow,
-  DragReference   iDragReference,
-  Boolean         iDifferentObjectSameWindow)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-
-/*
-  ****************************************************************************************************************
-    TXNActivate
-    Make the TXNObject object active in the sense that it can be scrolled if it has scrollbars.  If the TXNScrollBarState parameter
-    is true than the scrollbars will be active even when the TXNObject is not focused (i.e. insertion point not active)
-    
-    This function should be used if you have multiple TXNObjects in a window, and you want them all to be scrollable
-    even though only one at a time can have the keyboard focus.
-    Input:
-        iTXNObject:         opaque TXNObject obtained from TXNNewObject.
-        iTXNFrameID         TXNFrameID obtained from TXNNewObject
-        iActiveState        Boolean if true Scrollbars active even though TXNObject does not have the keyboard focus.  
-                            if false scrollbars are synced with active state (i.e. a focused object has an
-                            active insertion point or selection and active scrollbars. An unfocused object has inactive
-                            selection (grayed or framed selection) and inactive scrollbars.  The latter state is the 
-                            default and usually the one you use if you have one TXNObject in a window.
-    Output:
-        OSStatus:           function result.  ParamErr if bad iTXNObject or frame ID.
-  ****************************************************************************************************************
-*/
-/*
- *  TXNActivate()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in Textension 1.0 and later
- */
-extern OSStatus 
-TXNActivate(
-  TXNObject           iTXNObject,
-  TXNFrameID          iTXNFrameID,
-  TXNScrollBarState   iActiveState)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-
-/*
-  *****************************************************************************************************************
-    TXNSetBackgound
-    Set the type of background the TXNObject's text, etc. is drawn onto.  At this point the background
-    can be a color or a picture.  
-    
-    Input:
-        iTXNObject:         opaque TXNObject obtained from IncomingDataFilter callback.
-        iBackgroundInfo:    struct containing information that describes the background
-    Output:
-        OSStatus:           function result.  paramErrs.
-  ********************************************************************************************************************
-*/
-/*
- *  TXNSetBackground()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in Textension 1.0 and later
- */
-extern OSStatus 
-TXNSetBackground(
-  TXNObject              iTXNObject,
-  const TXNBackground *  iBackgroundInfo)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-
-/*
-  *****************************************************************************************************************
-    TXNEchoMode
-    Put the TXNObject into echo mode.  What that means is that all characters in the TXNObject have the character
-    'echoCharacter' substituted for the actual glyph when drawing occurs. Note that the echoCharacter is typed
-    as a UniChar, but this is done merely to facilitate passing any 2 byte character.  The encoding parameter
-    actually determines the encoding used to locate a font and display a character.  Thus if you wanted to
-    display the diamond found in the Shift-JIS encoding for MacOS you would pass in 0x86A6 for the character
-    but an encoding that was built to represent the MacOS Japanese encoding.
-    
-    Input:
-        iTXNObject:         opaque TXNObject obtained from IncomingDataFilter callback.
-        iEchoCharacter:     character to use in substitution
-        iEncoding:          encoding from which character is drawn.
-        iOn:                true if turning EchoMode on.  False if turning it off.
-    Output:
-        OSStatus:           function result.  paramErrs.
-  ********************************************************************************************************************
-*/
-/*
- *  TXNEchoMode()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in Textension 1.0 and later
- */
-extern OSStatus 
-TXNEchoMode(
-  TXNObject      iTXNObject,
-  UniChar        iEchoCharacter,
-  TextEncoding   iEncoding,
-  Boolean        iOn)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-
-/*
-  ********************************************************************************************************************
-    TXNNewFontMenuObject
-    Get a FontMenuObject.  Caller can extract a fontmenu from this object and pass this object to the active
-    TXNObject to handle events in the font menu.
-    Input:
-        iFontMenuHandle:    An empty menu handle (well the title is there) that the caller created via
-                            NewMenu or GetNewMenu. This menu handle should not be disposed before
-                            the returned TXNFontMenuObject has been disposed via TXNDisposeFontMenuObject.
-        iMenuID:            The MenuID for iFontMenuHandle.
-        iStartHierMenuID:   The first MenuID to use if any hierarchical menus need to be created. TXNNewFontMenuObject
-                            uses SetMenuItemHierarchicalID when creating hierarchial menus.  The iStartHierMenuID must
-                            therefor follow the rules for this function.  On systems less than system 8.5 the submenuID
-                            must be less than 255.  For systems above system 8.5 the range can be as large can be as large
-                            32767.  However, it is important to remember that TXNNewFontMenuObject only uses iStartHierMenuID
-                            as a starting id when adding hierarchical menus.  Therefore provide plenty of room to increment
-                            this value. For example, on a system less than 8.5 it would be good to start at 175.  On systems greater
-                            than 8.5 it is probably a good idea to not use a value higher than 32000. 
-        
-    Output:
-        OSStatus:           function result.  memory, parameter errors.
-        TXNFontMenuObject:  A font menu object
-  *********************************************************************************************************************
-*/
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Font Menu                                                                                         */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*
  *  TXNNewFontMenuObject()
  *  
+ *  Summary:
+ *    Get a FontMenuObject.  Caller can extract a fontmenu from this
+ *    object and pass this object to the active TXNObject to handle
+ *    events in the font menu.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iFontMenuHandle:
+ *      An empty menu handle (well the title is there) that the caller
+ *      created via NewMenu or GetNewMenu. This menu handle should not
+ *      be disposed before the returned TXNFontMenuObject has been
+ *      disposed via TXNDisposeFontMenuObject.
+ *    
+ *    iMenuID:
+ *      The MenuID for iFontMenuHandle.
+ *    
+ *    iStartHierMenuID:
+ *      The first MenuID to use if any hierarchical menus need to be
+ *      created. TXNNewFontMenuObject uses SetMenuItemHierarchicalID
+ *      when creating hierarchial menus.  The iStartHierMenuID must
+ *      therefor follow the rules for this function.  On systems less
+ *      than system 8.5 the submenuID must be less than 255.  For
+ *      systems above system 8.5 the range can be as large can be as
+ *      large 32767.  However, it is important to remember that
+ *      TXNNewFontMenuObject only uses iStartHierMenuID as a starting
+ *      id when adding hierarchical menus.  Therefore provide plenty of
+ *      room to increment this value. For example, on a system less
+ *      than 8.5 it would be good to start at 175.  On systems greater
+ *      than 8.5 it is probably a good idea to not use a value higher
+ *      than 32000.
+ *    
+ *    oTXNFontMenuObject:
+ *      A font menu object.
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3091,22 +3241,26 @@ TXNNewFontMenuObject(
 
 
 
-/*
-  *********************************************************************************************************************
-    TXNGetFontMenuHandle
-    Get the MenuRef from the TXNFontMenuObject.
-    Input:
-        iTXNFontMenuObject:     A Font Menu Object obtained from TXNNewFontMenuObject.
-    Output:
-        OSStatus:           function result. parameter errors.
-        oFontMenuHandle:    The returned font menu. (returned value could be NULL)
-  *********************************************************************************************************************
-*/
+
 /*
  *  TXNGetFontMenuHandle()
  *  
+ *  Summary:
+ *    Get the MenuRef from the TXNFontMenuObject.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNFontMenuObject:
+ *      A Font Menu Object obtained from TXNNewFontMenuObject.
+ *    
+ *    oFontMenuHandle:
+ *      The returned font menu. Returned value could be NULL.
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3121,21 +3275,23 @@ TXNGetFontMenuHandle(
 
 #define TXNGetFontMenuRef TXNGetFontMenuHandle
 
-/*
-  *********************************************************************************************************************
-    TXNDisposeFontMenuObject
-    Dispose a TXNFontMenuObject and its font menu handle
-    Input:
-        iTXNFontMenuObject:     A Font Menu Object obtained from TXNNewFontMenuObject.
-    Output:
-        OSStatus:   function result. parameter errors.
-  *********************************************************************************************************************
-*/
+
 /*
  *  TXNDisposeFontMenuObject()
  *  
+ *  Summary:
+ *    Dispose a TXNFontMenuObject and its font menu handle.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNFontMenuObject:
+ *      A Font Menu Object obtained from TXNNewFontMenuObject.
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3147,26 +3303,35 @@ TXNDisposeFontMenuObject(TXNFontMenuObject iTXNFontMenuObject) AVAILABLE_MAC_OS_
 
 
 
-/*
-  *********************************************************************************************************************
-    TXNDoFontMenuSelection
-        Given the menuID and menu item returned by MenuSelect determine the selected font
-        and change the current selection to be that Font.  If the input TXNObject is
-        not active a parameter error is returned.
-    Input:
-        iTXNObject: An opaque TXNObject obtained from TXNNewObject.
-        iTXNFontMenuObject:     A Font Menu Object obtained from TXNNewFontMenuObject.
-        iMenuID:    SInt16 the ID of the selected menu.
-        iMenuItem:  The item that was selected.
-    Output:
-        OSStatus:   ParamErr and memory errors are possible.
-  **********************************************************************************************************************
-*/
+
 /*
  *  TXNDoFontMenuSelection()
  *  
+ *  Summary:
+ *    Given the menuID and menu item returned by MenuSelect determine
+ *    the selected font and change the current selection to be that
+ *    Font.  If the input TXNObject is not active a parameter error is
+ *    returned.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *    
+ *    iTXNFontMenuObject:
+ *      A Font Menu Object obtained from TXNNewFontMenuObject.
+ *    
+ *    iMenuID:
+ *      SInt16 the ID of the selected menu.
+ *    
+ *    iMenuItem:
+ *      The item that was selected.
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3222,103 +3387,12 @@ TXNPrepareFontMenu(
 
 
 
-/*
-  **********************************************************************************************************************
-    TXNVersionValue
-        Get the version number and a set of feature bits.  TXNVersionValue uses a NumVersion structure.
-        See MacTypes.h for the format of the version.  Currently there are two feature bits:  one for 
-        ATSUI default, another one for CarbonEvent default.
-    Input:
-        NONE
-        
-    Output:
-        TXNVersionValue:    Current version.
-        TXNFeatureBits*:    Pointer to a bit mask.  See TXNFeatureMask enum above. If kTXNWillDefaultToATSUIBit
-                            is set it means that by default MLTE will use ATSUI to image and measure text and will
-                            default to using Unicode to store characters.  If kTXNWillDefaultToCarbonEventBit is set,
-                            then MLTE will use carbon events by default and apple event will not be supported.
-  **********************************************************************************************************************
-*/
-/*
- *  TXNVersionInformation()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.0 and later
- *    Non-Carbon CFM:   in Textension 1.0 and later
- */
-extern TXNVersionValue 
-TXNVersionInformation(TXNFeatureBits * oFeatureFlags)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-
-/*
-  ****************************************************************************************
-    TXNPointToOffset
-        
-    
-    Input:
-        iTXNObject: An opaque TXNObject obtained from TXNNewObject.
-        iPoint:     a point (in local coord.)
-    Output:
-        TXNOffset   :   Offset corresponding to the point
-        OSStatus:   Memory, out of bounds errors.(if the point is out of the ViewRect)
-  ****************************************************************************************
-*/
-/*
- *  TXNPointToOffset()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in Textension 1.1 and later
- */
-extern OSStatus 
-TXNPointToOffset(
-  TXNObject    iTXNObject,
-  Point        iPoint,
-  TXNOffset *  oOffset)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-
-/*
-  ****************************************************************************************
-    TXNOffsetToPoint
-        
-    
-    Input:
-        iTXNObject: An opaque TXNObject obtained from TXNNewObject.
-        iOffset:    an offset
-    Output:
-        Point   :   Point corresponding to the offset iOffset.
-        OSStatus:   Memory, out of bounds errors.
-  ****************************************************************************************
-*/
-/*
- *  TXNOffsetToPoint()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   in Textension 1.1 and later
- */
-extern OSStatus 
-TXNOffsetToPoint(
-  TXNObject   iTXNObject,
-  TXNOffset   iOffset,
-  Point *     oPoint)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-
+/*%if APPLE_ONLY_UNTIL_CARBONLIB_11*/
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Static Text Box                                                                                   */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*
  *  TXNDrawUnicodeTextBox()
  *  
@@ -3421,6 +3495,9 @@ TXNDrawCFStringTextBox(
 
 
 
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Get Line Info                                                                                     */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
 /*
  *  TXNGetLineCount()
  *  
@@ -3433,7 +3510,7 @@ TXNDrawCFStringTextBox(
  *  Parameters:
  *    
  *    iTXNObject:
- *      Opaque TXNObject obtained from TXNNewObject.
+ *      Opaque TXNObject obtained from TXNCreateObject.
  *    
  *    oLineTotal:
  *      On return the total number of lines in the object.
@@ -3465,7 +3542,7 @@ TXNGetLineCount(
  *  Parameters:
  *    
  *    iTXNObject:
- *      Opaque TXNObject obtained from TXNNewObject.
+ *      Opaque TXNObject obtained from TXNCreateObject.
  *    
  *    iLineNumber:
  *      The line we want the metrics for (0 based).
@@ -3494,6 +3571,44 @@ TXNGetLineMetrics(
 
 
 
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Count Changes                                                                                     */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*
+ *  TXNGetChangeCount()
+ *  
+ *  Summary:
+ *    Retrieve number of times document has been changed.
+ *  
+ *  Discussion:
+ *    That is for every committed command (keydown, cut, copy) the
+ *    value returned is count of those. This is useful for deciding if 
+ *    the Save item in the File menu should be active.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *  
+ *  Result:
+ *    ItemCount: count of changes.  This is total changes since
+ *    document  was created or last saved.  Not count since this
+ *    routine was last called or anything like that.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in Textension 1.0 and later
+ */
+extern ItemCount 
+TXNGetChangeCount(TXNObject iTXNObject)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+
+
 /*
  *  TXNGetActionChangeCount()
  *  
@@ -3511,7 +3626,7 @@ TXNGetLineMetrics(
  *  Parameters:
  *    
  *    iTXNObject:
- *      Opaque TXNObject obtained from TXNNewObject.
+ *      Opaque TXNObject obtained from TXNCreateObject.
  *    
  *    iOptions:
  *      Specify the the type of action changes to be include when
@@ -3551,7 +3666,7 @@ TXNGetActionChangeCount(
  *  Parameters:
  *    
  *    iTXNObject:
- *      Opaque TXNObject obtained from TXNNewObject.
+ *      Opaque TXNObject obtained from TXNCreateObject.
  *    
  *    iOptions:
  *      Specify the the type of action changes to be include when
@@ -3569,6 +3684,1062 @@ extern OSStatus
 TXNClearActionChangeCount(
   TXNObject         iTXNObject,
   TXNCountOptions   iOptions)                                 AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
+
+
+/*%endif*/
+
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Set/Get Object Bounds                                                                             */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*
+ *  TXNSetHIRectBounds()
+ *  
+ *  Summary:
+ *    Sets the text object's view, the destination rectangles or both.
+ *  
+ *  Discussion:
+ *    Either of the input rectangle can be NULL. HIRect provides an
+ *    uniform interface to the HIView coordinate system.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.  The bounds for
+ *      this text object will be set.
+ *    
+ *    iViewRect:
+ *      A pointer to a HIRect data structure that contains the new
+ *      coordinates for the view rectangle. Pass NULL if you don’t want
+ *      to change the view rectangle.
+ *    
+ *    iDestinationRect:
+ *      A pointer to a HIRect data structure that contains the new
+ *      coordinates for the destination rectangle. Pass NULL if you
+ *      don’t want to change the destination rectangle.
+ *    
+ *    iUpdate:
+ *      Pass true if you want the location of the text and scrollbars
+ *      to be recalculated and redrawn, otherwise pass false.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+TXNSetHIRectBounds(
+  TXNObject       iTXNObject,
+  const HIRect *  iViewRect,
+  const HIRect *  iDestinationRect,
+  Boolean         iUpdate)                                    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  TXNGetHIRect()
+ *  
+ *  Summary:
+ *    Gets one of the text object's bounds based on the specified
+ *    TXNRectKey
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject. The specified
+ *      bounds for this text object will be returned.
+ *    
+ *    iTXNRectKey:
+ *      The value for the type of rectangle you want the function to
+ *      return.
+ *    
+ *    oRectangle:
+ *      On return, a pointer to the HIRect data structure that contains
+ *      the coordinates for the requested rectangle. If a rect is not
+ *      defined, a pointer to an empty rect will be returned. Note that
+ *      only scrollbar rectangle may be undefined for the text object.
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+TXNGetHIRect(
+  TXNObject    iTXNObject,
+  TXNRectKey   iTXNRectKey,
+  HIRect *     oRectangle)                                    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+
+
+/*
+ *  TXNResizeFrame()
+ *  
+ *  Summary:
+ *    Changes the frame's size to match the new width and height.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *    
+ *    iWidth:
+ *      New width in pixels.
+ *    
+ *    iHeight:
+ *      New height in pixels.
+ *    
+ *    iTXNFrameID:
+ *      Specifies the frame to move.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in Textension 1.0 and later
+ */
+extern void 
+TXNResizeFrame(
+  TXNObject    iTXNObject,
+  UInt32       iWidth,
+  UInt32       iHeight,
+  TXNFrameID   iTXNFrameID)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+
+
+/*
+ *  TXNSetFrameBounds()
+ *  
+ *  Summary:
+ *    Changes the frame's bounds to match the Rect.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *    
+ *    iTop:
+ *      Top of the bounds.
+ *    
+ *    iLeft:
+ *      Left of the bounds.
+ *    
+ *    iBottom:
+ *      Bottom of the bounds.
+ *    
+ *    iRight:
+ *      Right of the bounds.
+ *    
+ *    iTXNFrameID:
+ *      Specifies the frame to move.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in Textension 1.0 and later
+ */
+extern void 
+TXNSetFrameBounds(
+  TXNObject    iTXNObject,
+  SInt32       iTop,
+  SInt32       iLeft,
+  SInt32       iBottom,
+  SInt32       iRight,
+  TXNFrameID   iTXNFrameID)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+
+
+/*
+ *  TXNGetViewRect()
+ *  
+ *  Summary:
+ *    Get the rectangle describing the current view into the document.
+ *    The coordinates of this rectangle will be local to the the window.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *    
+ *    oViewRect:
+ *      The requested view rectangle.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in Textension 1.0 and later
+ */
+extern void 
+TXNGetViewRect(
+  TXNObject   iTXNObject,
+  Rect *      oViewRect)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+
+
+
+
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Layout Calculation                                                                                */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*
+ *  TXNRecalcTextLayout()
+ *  
+ *  Summary:
+ *    Recalculates the text layout based on the new View and
+ *    Destination rectangles.
+ *  
+ *  Discussion:
+ *    Call this if you called TXNSetRectBounds with the iUpdate
+ *    parameter set to false. It will also recalcuate where the
+ *    scrollbars, if any, should be placed. Finally an update event
+ *    will be generated so that the TXNObject is redrawn.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.5 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+TXNRecalcTextLayout(TXNObject iTXNObject)                     AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
+
+
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Scrolling                                                                                         */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*
+ *  TXNScroll()
+ *  
+ *  Discussion:
+ *    TXNScroll scrolls the text within a view rectangle of the
+ *    specified object by the designated number of units.  For example,
+ *    you might want to scroll the text in an object in response to
+ *    user input in a control other than the standard scrollbars that
+ *    MLTE supplies.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *    
+ *    iVerticalScrollUnit:
+ *      Specifies what units the values in ioVerticalDelta are in.  If
+ *      iVerticalScrollUnit is equal to kTXNScrollUnitsInPixels the
+ *      value is treated as pixels.  If the value is
+ *      kTXNScrollUnitsInLines the value is treated as a count of
+ *      lines. Note that using this value is the slowest because each
+ *      line must be measured before it scrolls.  Finally if
+ *      kTXNScrollUnitsInViewRects the value is treated as the height
+ *      of the current viewRect.
+ *    
+ *    iHorizontalScrollUnit:
+ *      Specifies what units the values in iDh are in.  If
+ *      iHorizontalScrollUnit is equal to kTXNScrollUnitsInPixels the
+ *      value is treated as pixels.  If the value is
+ *      kTXNScrollUnitsInLines the value is treated as a count of
+ *      lines. Note that using this value for horizontal scrolling
+ *      means that 16 pixels will be used to represent a line.  Finally
+ *      if kTXNScrollUnitsInViewRects the value is treated as the width
+ *      of the current viewRect.
+ *    
+ *    ioVerticalDelta:
+ *      The vertical amount to scroll.  The values in ioVerticalDelta
+ *      can be treated as pixels, lines or viewrects.  See the
+ *      discussion of the TXNScrollUnit parameters for more information
+ *      for this.  On return this will contain the number of pixels
+ *      actually scrolled in the vertical direction. A positive value
+ *      moves the text down.
+ *    
+ *    ioHorizontalDelta:
+ *      The horizontal amount to scroll. The values in
+ *      ioHorizontalDelta can specify a scroll amount that is pixels,
+ *      lines or view rects.  Set TXNScrollUnit discussion for more
+ *      information. On return this will contain the number of pixels
+ *      actually scrolled in the horizontal direction. A positive value
+ *      moves the text to the right.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   in Textension not yet available
+ */
+extern OSStatus 
+TXNScroll(
+  TXNObject       iTXNObject,
+  TXNScrollUnit   iVerticalScrollUnit,
+  TXNScrollUnit   iHorizontalScrollUnit,
+  SInt32 *        ioVerticalDelta,
+  SInt32 *        ioHorizontalDelta)                          AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+
+
+/*
+ *  TXNRegisterScrollInfoProc()
+ *  
+ *  Discussion:
+ *    If your application is drawing and handling its own scrolling
+ *    widgets use this function to register a TXNScrollInfoUPP.  If you
+ *    register a TXNScrollInfoUPP it will be called every time MLTE
+ *    would normally update the values and maximum values of an MLTE
+ *    scrollbar. For example when the user types the return key to add
+ *    a new line at the end of their text MLTE will calculate a new
+ *    maximum value.  If you have registered a TXNScrollInfoUPP it will
+ *    be called with this nex maximum value. To turn off the callbacks
+ *    call TXNRegisterScrollInfoProc with a value of NULL for the
+ *    iTXNScrollInfoUPP.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *    
+ *    iTXNScrollInfoUPP:
+ *      A universal procedure pointer.
+ *    
+ *    iRefCon:
+ *      A refcon that is passed to the callback.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
+ *    Non-Carbon CFM:   in Textension not yet available
+ */
+extern void 
+TXNRegisterScrollInfoProc(
+  TXNObject          iTXNObject,
+  TXNScrollInfoUPP   iTXNScrollInfoUPP,
+  SInt32             iRefCon)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+
+
+/*
+ *  TXNSetScrollbarState()
+ *  
+ *  Summary:
+ *    Sets the state of the scrollbars
+ *  
+ *  Discussion:
+ *    This replaces existing API TXNActivate, which was confusing to
+ *    many developers, since it only activates/inactivates the
+ *    scrollbar.  This is useful for activating scrollbar(s) even when
+ *    the object does not have focus.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *    
+ *    iActiveState:
+ *      Boolean: if true, scrollbars will be active even if the object
+ *      does not have the keyboard focus.  If false, scrollbars are
+ *      synched with active state
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+TXNSetScrollbarState(
+  TXNObject           iTXNObject,
+  TXNScrollBarState   iActiveState)                           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+
+
+
+
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Offset/Point Conversion                                                                           */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*
+ *  TXNHIPointToOffset()
+ *  
+ *  Summary:
+ *    Gets the coordinates of the point that corresponds to a specified
+ *    offset in a text object.
+ *  
+ *  Discussion:
+ *    The coordinates of the point are in the coordinate system of the
+ *    window or view owning the text object.  Note that the owner of
+ *    the a text object is a view only in the case when the object is
+ *    in a HITextView.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject. The text object
+ *      for which you want to obtain an offset value.
+ *    
+ *    iHIPoint:
+ *      A pointer to an HIPoint.
+ *    
+ *    oOffset:
+ *      On return, a pointer to the offset that corresponds to the
+ *      value of the iHIPoint parameter.
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+TXNHIPointToOffset(
+  TXNObject        iTXNObject,
+  const HIPoint *  iHIPoint,
+  TXNOffset *      oOffset)                                   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+
+/*
+ *  TXNOffsetToHIPoint()
+ *  
+ *  Summary:
+ *    Gets the coordinates of the point that corresponds to a specified
+ *    offset in a text object.
+ *  
+ *  Discussion:
+ *    The coordinates of the point are in the coordinate system of the
+ *    window or view owning the text object.  Note that the owner of
+ *    the a text object is a view only in the case when the object is
+ *    in a HITextView.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNCreateObject. The text object
+ *      for which you want to obtain the coordinates of a point.
+ *    
+ *    iOffset:
+ *      A text offset value.
+ *    
+ *    oHIPoint:
+ *      On return, a pointer to the point that corresponds to the value
+ *      of the iOffset parameter.
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+TXNOffsetToHIPoint(
+  TXNObject   iTXNObject,
+  TXNOffset   iOffset,
+  HIPoint *   oHIPoint)                                       AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • Drag and Drop                                                                                     */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*
+ *  TXNDragTracker()
+ *  
+ *  Summary:
+ *    If you ask that Drag handling procs not be installed.  Call this
+ *    when your drag tracker is called and you want Textension to take
+ *    over.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNNewObject.
+ *    
+ *    iTXNFrameID:
+ *      TXNFrameID obtained from TXNNewObject.
+ *    
+ *    iMessage:
+ *      Drag message obtained from Drag Manager.
+ *    
+ *    iWindow:
+ *      WindowRef obtained from Drag Manager.
+ *    
+ *    iDragReference:
+ *      DragReference obtained from Drag Manager.
+ *    
+ *    iDifferentObjectSameWindow:
+ *      Pass true if the drag is still in the same window that it
+ *      started in. False if the drag has moved into a different window.
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in Textension 1.0 and later
+ */
+extern OSErr 
+TXNDragTracker(
+  TXNObject             iTXNObject,
+  TXNFrameID            iTXNFrameID,
+  DragTrackingMessage   iMessage,
+  WindowRef             iWindow,
+  DragReference         iDragReference,
+  Boolean               iDifferentObjectSameWindow)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+
+
+/*
+ *  TXNDragReceiver()
+ *  
+ *  Summary:
+ *    If you ask that Drag handling procs not be installed.  Call this
+ *    when your drag receiver is called and you want Textension to take
+ *    over.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iTXNObject:
+ *      Opaque TXNObject obtained from TXNNewObject.
+ *    
+ *    iTXNFrameID:
+ *      TXNFrameID obtained from TXNNewObject.
+ *    
+ *    iWindow:
+ *      WindowRef obtained from Drag Manager.
+ *    
+ *    iDragReference:
+ *      DragReference obtained from Drag Manager.
+ *    
+ *    iDifferentObjectSameWindow:
+ *      Pass true if the drag is still in the same window that it
+ *      started in. False if the drag has moved into a different window.
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in Textension 1.0 and later
+ */
+extern OSErr 
+TXNDragReceiver(
+  TXNObject       iTXNObject,
+  TXNFrameID      iTXNFrameID,
+  WindowRef       iWindow,
+  DragReference   iDragReference,
+  Boolean         iDifferentObjectSameWindow)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+
+
+
+
+/* **************************************************************************************************** */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*                                  • HITEXTVIEW APIs •                                                 */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/* **************************************************************************************************** */
+/*==============================================================================*/
+/* HITextView is a MLTE view that can be embedded in the HIView hierarchy. The  */
+/* view can be embedded in an HIScrollView if scroll bars are desired and can   */
+/* be used in a composited window. On creation, a TXNObject is created to back  */
+/* the view. You can extract the TXNObject at any time and use a subset of the  */
+/* MLTE API with that object as an argument.                                    */
+/*==============================================================================*/
+/* The HIObject class ID for the HITextView class. */
+#define kHITextViewClassID              CFSTR("com.apple.HITextView")
+/* ControlKind*/
+enum {
+  kControlKindHITextView        = 'hitx'
+};
+
+
+/*
+ *  HITextViewCreate()
+ *  
+ *  Summary:
+ *    Creates a text view. The new view is initially invisible.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inBoundsRect:
+ *      The bounding box of the view. If NULL, the bounds of the view
+ *      will be initialized to 0.
+ *    
+ *    inOptions:
+ *      There are currently no options. This must be 0.
+ *    
+ *    inTXNFrameOptions:
+ *      Any frame options desired for the TXN object creation.
+ *    
+ *    outTextView:
+ *      On exit, contains the new view.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HITextViewCreate(
+  const HIRect *    inBoundsRect,            /* can be NULL */
+  OptionBits        inOptions,
+  TXNFrameOptions   inTXNFrameOptions,
+  HIViewRef *       outTextView)                              AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  HITextViewGetTXNObject()
+ *  
+ *  Summary:
+ *    Obtains the TXNObject that backs the text view.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inTextView:
+ *      The text view that contains the TXNObject you wish to retrieve.
+ *  
+ *  Result:
+ *    The TXNObject backing the given view.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern TXNObject 
+HITextViewGetTXNObject(HIViewRef inTextView)                  AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+
+
+/* **************************************************************************************************** */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*                                  •  DEPRECATED •                                                     */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/* **************************************************************************************************** */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • DEPRECATED CONSTANTS                                                                              */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+
+typedef FourCharCode                    TXTNTag;
+typedef OSStatus                        TXNErrors;
+typedef void *                          TXNObjectRefcon;
+#define   kTXNFontMenuRefKey    CFSTR("FontMenuRef")
+/* use kTXNFontMenuObjectKey*/
+struct TXNLongRect {
+  SInt32              top;
+  SInt32              left;
+  SInt32              bottom;
+  SInt32              right;
+};
+typedef struct TXNLongRect              TXNLongRect;
+/*
+    • Frame Types                                                                                       
+    Useful for TXNNewObject API.  Only kTXNTextEditStyleFrameType is supported at this time.                                                                        *|
+*/
+typedef UInt32 TXNFrameType;
+enum {
+  kTXNTextEditStyleFrameType    = 1,
+  kTXNPageFrameType             = 2,    /* not supported*/
+  kTXNMultipleFrameType         = 3     /* not supported*/
+};
+
+
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • DEPRECATED APIs 10.2 and later                                                                    */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*
+  *************************************************************************************************                         
+   Set the rectangle describing the current view into the document. This
+   will change how much text is viewable.  Not where a line of text wraps.
+   That is controlled by TXNSetFrameBoundsSize.
+   Input:
+        iTXNObject :    opaque Textension structure.
+        
+        iViewRect:      Rect of the view
+         
+        Deprecated. Please use TXNSetFrameBounds or TXNSetRectBounds API !!
+  *************************************************************************************************
+*/
+/*
+ *  TXNSetViewRect()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.3 and later
+ *    Non-Carbon CFM:   in Textension 1.3 and later
+ */
+extern void 
+TXNSetViewRect(
+  TXNObject     iTXNObject,
+  const Rect *  iViewRect)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*  • DEPRECATED APIs 10.3 and later                                                                    */
+/*——————————————————————————————————————————————————————————————————————————————————————————————————————*/
+/*
+  *****************************************************************************************************
+   Allocates a new frame (i.e. new is called to allocate a TXNObject) and returns a pointer to the object 
+   in the newDoc parameter.
+   Input:
+        
+    iFileSpec:  If NULL you start with an empty document.  If not NULL, the file is read to obtain the 
+                document contents  after the object is successfully allocated.   
+                
+    iWindow:    Required.  The window in which the document is going to be  displayed.  If a fileSpec is provided
+                during creation, the filename is going to be used as the window title.  If iWindow is NULL, 
+                TXNAttachObjectToWindow needs to be called after creation.
+                
+    iFrame:     If text-area does not fill the entire window.  This specifies the area to fill.  Can be NULL.  
+                In  which case, the window’s portRect is used as the frame.
+                                
+    iFrameOptions:  Specify the options to be supported by this frame.  The available options are support 
+                    for cutting and pasting  movies and sound, handle scrollbars and handle grow box in  the 
+                    frame.
+    iFrameType:     Specify the type of frame to be used.  In MLTE version 1.1 and earlier, only 
+                    kTXNTextEditStyleFrameType is supported.
+   
+    iFileType:  Specify the primary file type.  If you  use  kTextensionTextFile files will be saved 
+                in a private format (see xxx).  If you  want saved files to be plain text files you should 
+                specify 'TEXT' here. If you specify 'TEXT' here you can use the frameOptions parameter to 
+                specify  whether the TEXT files should be saved  with 'MPSR' resources or 'styl' resources.  
+                These are resources which contain style information for a  file, and they  both have there 
+                own limitations.  If you use 'styl' resources to save style info your documents can have as 
+                many styles as you like however tabs will not be saved.  If you use 'MPSR' resources only the 
+                first style in the document  will be saved (you as client are expected to apply all style  
+                changes to the entire document).  If you  truly want  rich documents which can potentially 
+                contain graphics and sound you should specify kTextensionTextFileOutput.  If you want a plain 
+                text editor like SimpleText specify that style information by saved via ‘styl’ resources.  
+                If you want files similar to those output by CW IDE, BBEdit, and MPW specify that style 
+                information be saved in a ‘MPSR’ resource.
+   
+   Output:
+    
+    OSStatus:   function  result.  If anything goes wrong the error is returned.  Success must be complete.  
+                That is if everything  works, but there is a failure reading a specified file the  object 
+                is freed.
+    oTXNObject:     Pointer to the opaque datastructure allocated by the function.  Most of the subsequent 
+                    functions require that such a pointer be passed in.
+                
+    oTXNFrameID:    Unique ID for the frame. <Note in version 1.0 this value is always set to 0>
+    iRefCon:        Caller can set this to any value.  It is retained by the
+                    TXNNewObject which can later be asked to return it.
+  **************************************************************************************************************
+*/
+/*
+ *  TXNNewObject()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in Textension 1.0 and later
+ */
+extern OSStatus 
+TXNNewObject(
+  const FSSpec *                 iFileSpec,                /* can be NULL */
+  WindowRef                      iWindow,
+  const Rect *                   iFrame,                   /* can be NULL */
+  TXNFrameOptions                iFrameOptions,
+  TXNFrameType                   iFrameType,
+  TXNFileType                    iFileType,
+  TXNPermanentTextEncodingType   iPermanentEncoding,
+  TXNObject *                    oTXNObject,
+  TXNFrameID *                   oTXNFrameID,
+  TXNObjectRefcon                iRefCon)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+
+
+/*
+ *  TXNTerminateTextension()
+ *  
+ *  Summary:
+ *    Close the Textension library.  It is necessary to call this
+ *    function so that Textension can correctly close down any TSM
+ *    connections and do other clean up.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in Textension 1.0 and later
+ */
+extern void 
+TXNTerminateTextension(void)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+
+
+/*
+  *********************************************************************************************************
+    Replace the specified range with the contents of the specified file.  The data fork of the file 
+    must be opened by the caller.  Functional in NoUserIO mode.
+    Input:
+        iTXNObject:     opaque TXNObject obtained from  TXNNewObject
+        fileSpec:   HFS file reference obtained when file is opened.
+        fileType:   files type.
+        iFileLength: The length of data in the file that should be considered data.  This
+                     parameter is available to enable callers to embed text inside their
+                     own private data structures.  Note that if the data is in the Textension(txtn)
+                     format this parameter is ignored since length, etc. information is
+                     part of the format. Further note that if you you just want Textension
+                     to read a file and you are not interested in embedding you can just pass
+                     kTXNEndOffset(0x7FFFFFFF), and Textension will use the file manager to
+                     determine the files length.
+        iStartOffset:   start position at which to insert the file into the document.
+        iEndOffset:     end position of range being replaced by the file.
+    Output:
+        OSStatus:   File manager error or noErr.
+  ***********************************************************************************************************
+*/
+/*
+ *  TXNSetDataFromFile()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in Textension 1.0 and later
+ */
+extern OSStatus 
+TXNSetDataFromFile(
+  TXNObject   iTXNObject,
+  SInt16      iFileRefNum,
+  OSType      iFileType,
+  ByteCount   iFileLength,
+  TXNOffset   iStartOffset,
+  TXNOffset   iEndOffset)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+
+/*
+  ***********************************************************************************************************
+    Convert the Textension private scrap to the public clipboard.  This should be called on suspend 
+    events and before the application displays a dialog that might support cut and paste.  Or more 
+    generally, whenever someone other than the Textension Shared Library needs access to the scrap data.
+    This is no-op'ed out in OS X.
+    Output:
+         OSStatus:  Function result.  Memory Manager errors, Scrap Manager errors, noErr.
+  ************************************************************************************************************
+*/
+/*
+ *  TXNConvertToPublicScrap()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in Textension 1.0 and later
+ */
+extern OSStatus 
+TXNConvertToPublicScrap(void)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+
+/*
+  ***********************************************************************************************************
+    Convert the  public clipboard to our private scrap .  This should be called on resume 
+    events and after an application has modified the scrap. Before doing work we check the validity of the public 
+    scrap (date modification and type).  This is no longer needed in 10.2 and later.  Calling TXNPaste will
+    automatically handle conversion from public scrap.
+    Output:
+         OSStatus:  Function result.  Memory Manager errors, Scrap Manager errors, noErr.
+  ************************************************************************************************************  
+*/
+/*
+ *  TXNConvertFromPublicScrap()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in Textension 1.0 and later
+ */
+extern OSStatus 
+TXNConvertFromPublicScrap(void)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+
+/*
+  *************************************************************************************************
+    Redraw the TXNObject including any scrollbars associated with the text frame.  Call this function
+    in response to an update event for a window that contains multiple TXNObjects or some other graphic
+    element.  The caller is responsible for calling BeginUpdate/EndUpdate in response to the update
+    event.
+    Input:
+        iTXNObject:     opaque TXNObject to draw
+        iDrawPort:  Can be NULL. If NULL the port is drawn to the port currently attached to the 
+                    iTXNObject.  If not NULL drawing goes to the iDrawPort.  If drawing is done
+                    to the iDrawPort selection is not updated.  This works this way so that it
+                    is possible to Draw a TXNObject to a static port (i.e. print the thing without 
+                    reflowing the text to match the paper size which is what TXNPrint does) 
+                    and not have a line drawn where the selection would be.  If you pass an 
+                    iDrawPort to an active TXNObject (i.e. editable) the selection will not be updated. In 
+                    this case the selection will behave oddly until text is typed which will serve
+                    to realign the selection.  Bottom-line don't pass a port in unless you want
+                    static text (printed or non-editable)
+  *************************************************************************************************
+*/
+/*
+ *  TXNDraw()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in Textension 1.0 and later
+ */
+extern void 
+TXNDraw(
+  TXNObject   iTXNObject,
+  GWorldPtr   iDrawPort)        /* can be NULL */             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+
+/*
+  ****************************************************************************************************************
+    TXNAttachObjectToWindow
+    If a TXNObject was initialized with a NULL window pointer use this function to attach a window
+    to that object.  In version 1.0 of Textension attaching a TXNObject to more than one window
+    is not supported.  Note that if a CGContextRef was passed to the TXNObject previously thru the
+    API TXNSetTXNObjectControls, that CGContextRef will be ignored.  The CGContextRef associated with
+    the iWindow will be used instead.  You may revert back to the previous CGContextRef by calling the
+    API TXNSetTXNObjectControls with the desired CGContextRef again after calling TXNAttachObjectToWindow.
+    
+    Input:
+        iTXNObject:         opaque TXNObject obtained from TXNNewObject.
+        iWindow:            GWorldPtr that the object should be attached to
+        iIsActualWindow:    Let the library know if the GWorldPtr is actually
+                            a WindowRef or actually a GWorldPtr.  This is important
+                            if the client is taking advantage of the editing packages
+                            scrollbar support.
+    Output:
+        OSStatus:           function result.  paramErrs. 
+  ****************************************************************************************************************
+*/
+/*
+ *  TXNAttachObjectToWindow()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in Textension 1.0 and later
+ */
+extern OSStatus 
+TXNAttachObjectToWindow(
+  TXNObject   iTXNObject,
+  GWorldPtr   iWindow,
+  Boolean     iIsActualWindow)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+
+/*
+  ****************************************************************************************************************
+    TXNIsObjectAttachedToWindow
+    A utility function that allows a caller to check a TXNObject to see if it is attached
+    to a window.
+    Input:
+        iTXNObject:         opaque TXNObject obtained from TXNNewObject.
+    Output:
+        Boolean:            function result.  True is object is attached.
+                            False if TXNObject is not attached.
+  ****************************************************************************************************************
+*/
+/*
+ *  TXNIsObjectAttachedToWindow()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in Textension 1.0 and later
+ */
+extern Boolean 
+TXNIsObjectAttachedToWindow(TXNObject iTXNObject)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -3607,6 +4778,8 @@ TXNIsObjectAttachedToSpecificWindow(
   TXNObject   iTXNObject,
   WindowRef   iWindow,
   Boolean *   oAttached)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
 
 
 /*
@@ -3705,17 +4878,19 @@ TXNGetRectBounds(
 
 
 /*
- *  TXNRecalcTextLayout()
+ *  TXNActivate()
  *  
  *  Summary:
- *    Recalculates the text layout based on the new View and
- *    Destination rectangles.
+ *    Make the TXNObject object active in the sense that it can be
+ *    scrolled if it has scrollbars. If the TXNScrollBarState parameter
+ *    is true than the scrollbars will be active even when the
+ *    TXNObject is not focused (i.e. insertion point not active).  See
+ *    the equivalent TXNSetScrollbarState.
  *  
  *  Discussion:
- *    Call this if you called TXNSetRectBounds with the iUpdate
- *    parameter set to false. It will also recalcuate where the
- *    scrollbars, if any, should be placed. Finally an update event
- *    will be generated so that the TXNObject is redrawn.
+ *    This function should be used if you have multiple TXNObjects in a
+ *    window, and you want them all to be scrollable even though only
+ *    one at a time can have the keyboard focus.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -3723,153 +4898,131 @@ TXNGetRectBounds(
  *  Parameters:
  *    
  *    iTXNObject:
- *      Opaque TXNObject obtained from TXNNewObject.
+ *      Opaque TXNObject obtained from TXNCreateObject.
+ *    
+ *    iTXNFrameID:
+ *      TXNFrameID obtained from TXNCreateObject.
+ *    
+ *    iActiveState:
+ *      Boolean if true Scrollbars active even though TXNObject does
+ *      not have the keyboard focus. if false scrollbars are synced
+ *      with active state (i.e. a focused object has an active
+ *      insertion point or selection and active scrollbars. An
+ *      unfocused object has inactive selection (grayed or framed
+ *      selection) and inactive scrollbars.  The latter state is the
+ *      default and usually the one you use if you have one TXNObject
+ *      in a window.
+ *  
+ *  Result:
+ *    A result code indicating success or failure.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.5 and later
- *    Non-Carbon CFM:   not available
- */
-extern void 
-TXNRecalcTextLayout(TXNObject iTXNObject)                     AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
-
-
-
-
-/*
- *  TXNScroll()
- *  
- *  Discussion:
- *    TXNScroll scrolls the text within a view rectangle of the
- *    specified object by the designated number of units.  For example,
- *    you might want to scroll the text in an object in response to
- *    user input in a control other than the standard scrollbars that
- *    MLTE supplies.
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Parameters:
- *    
- *    iTXNObject:
- *      Opaque TXNObject obtained from TXNNewObject.
- *    
- *    iVerticalScrollUnit:
- *      Specifies what units the values in ioVerticalDelta are in.  If
- *      iVerticalScrollUnit is equal to kTXNScrollUnitsArePixels the
- *      value is treated as pixels.  If the value is
- *      kTXNScrollUnitsAreLines the value is treated as a count of
- *      lines. Note that using this value is the slowest because each
- *      line must be measured before it scrolls.  Finally if
- *      kTXNScrollUnitsAreViewRects the value is treated as the height
- *      of the current viewRect.
- *    
- *    iHorizontalScrollUnit:
- *      Specifies what units the values in iDh are in.  If
- *      iHorizontalScrollUnit is equal to kTXNScrollUnitsArePixels the
- *      value is treated as pixels.  If the value is
- *      kTXNScrollUnitsAreLines the value is treated as a count of
- *      lines. Note that using this value for horizontal scrolling
- *      means that 16 pixels will be used to represent a line.  Finally
- *      if kTXNScrollUnitsAreViewRects the value is treated as the
- *      width of the current viewRect.
- *    
- *    ioVerticalDelta:
- *      The vertical amount to scroll.  The values in ioVerticalDelta
- *      can be treated as pixels, lines or viewrects.  See the
- *      discussion of the TXNScrollUnit parameters for more information
- *      for this.  On return this will contain the number of pixels
- *      actually scrolled in the vertical direction. A positive value
- *      moves the text down.
- *    
- *    ioHorizontalDelta:
- *      The horizontal amount to scroll. The values in
- *      ioHorizontalDelta can specify a scroll amount that is pixels,
- *      lines or view rects.  Set TXNScrollUnit discussion for more
- *      information. On return this will contain the number of pixels
- *      actually scrolled in the horizontal direction. A positive value
- *      moves the text to the right.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
- *    Non-Carbon CFM:   in Textension not yet available
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in Textension 1.0 and later
  */
 extern OSStatus 
-TXNScroll(
-  TXNObject       iTXNObject,
-  TXNScrollUnit   iVerticalScrollUnit,
-  TXNScrollUnit   iHorizontalScrollUnit,
-  SInt32 *        ioVerticalDelta,
-  SInt32 *        ioHorizontalDelta)                          AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+TXNActivate(
+  TXNObject           iTXNObject,
+  TXNFrameID          iTXNFrameID,
+  TXNScrollBarState   iActiveState)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
 
 
 
 /*
- *  TXNRegisterScrollInfoProc()
- *  
- *  Discussion:
- *    If your application is drawing and handling its own scrolling
- *    widgets use this function to register a TXNScrollInfoUPP.  If you
- *    register a TXNScrollInfoUPP it will be called every time MLTE
- *    would normally update the values and maximum values of an MLTE
- *    scrollbar. For example when the user types the return key to add
- *    a new line at the end of their text MLTE will calculate a new
- *    maximum value.  If you have registered a TXNScrollInfoUPP it will
- *    be called with this nex maximum value. To turn off the callbacks
- *    call TXNRegisterScrollInfoProc with a value of NULL for the
- *    iTXNScrollInfoUPP.
+  ****************************************************************************************
+    TXNPointToOffset
+        
+    
+    Input:
+        iTXNObject: An opaque TXNObject obtained from TXNNewObject.
+        iPoint:     a point (in local coord.)
+    Output:
+        TXNOffset   :   Offset corresponding to the point
+        OSStatus:   Memory, out of bounds errors.(if the point is out of the ViewRect)
+  ****************************************************************************************
+*/
+/*
+ *  TXNPointToOffset()
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
- *  Parameters:
- *    
- *    iTXNObject:
- *      Opaque TXNObject obtained from TXNNewObject.
- *    
- *    iTXNScrollInfoUPP:
- *      A universal procedure pointer.
- *    
- *    iRefCon:
- *      A refcon that is passed to the callback.
- *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
- *    Non-Carbon CFM:   in Textension not yet available
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.1 and later
+ *    Non-Carbon CFM:   in Textension 1.1 and later
  */
-extern void 
-TXNRegisterScrollInfoProc(
-  TXNObject          iTXNObject,
-  TXNScrollInfoUPP   iTXNScrollInfoUPP,
-  SInt32             iRefCon)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
-
-
+extern OSStatus 
+TXNPointToOffset(
+  TXNObject    iTXNObject,
+  Point        iPoint,
+  TXNOffset *  oOffset)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
 /*
- *  TXNClearUndo()
+  ****************************************************************************************
+    TXNOffsetToPoint
+        
+    
+    Input:
+        iTXNObject: An opaque TXNObject obtained from TXNNewObject.
+        iOffset:    an offset
+    Output:
+        Point   :   Point corresponding to the offset iOffset.
+        OSStatus:   Memory, out of bounds errors.
+  ****************************************************************************************
+*/
+/*
+ *  TXNOffsetToPoint()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.1 and later
+ *    Non-Carbon CFM:   in Textension 1.1 and later
+ */
+extern OSStatus 
+TXNOffsetToPoint(
+  TXNObject   iTXNObject,
+  TXNOffset   iOffset,
+  Point *     oPoint)                                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+
+/*
+ *  TXNTSMCheck()
  *  
  *  Summary:
- *    Purge the undo stack
- *  
- *  Mac OS X threading:
- *    Not thread safe
+ *    Call this when WaitNextEvent returns false or there is no active
+ *    TSMObject . The TXNObject parameter can be NULL which allows a
+ *    client to call this function at any time.  This is necessary to
+ *    insure input methods enough time to be reasonably responsive.
  *  
  *  Parameters:
  *    
  *    iTXNObject:
- *      Opaque TXNObject obtained from TXNNewObject.
+ *      Opaque struct obtained from TXNNewObject.
+ *    
+ *    ioEvent:
+ *      The event record.  Usually a NULL event.  If the event is not
+ *      an NULL event on entry, and an input method consumes the event
+ *      the event should return as a NULL event.
+ *  
+ *  Result:
+ *    Boolean: True if TSM handled this event.  False if TSM did not
+ *    handle this event.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
- *    Non-Carbon CFM:   in Textension not yet available
+ *    Mac OS X:         not available
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   in Textension 1.0 and later
  */
-extern OSStatus 
-TXNClearUndo(TXNObject iTXNObject)                            AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
 
 
 

@@ -3,9 +3,9 @@
  
      Contains:   interface to embedding Java code in a Carbon Control
  
-     Version:    JavaEmbedding-12~208
+     Version:    JavaEmbedding-24~64
  
-     Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -99,7 +99,7 @@ enum {
  *      height)
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -122,7 +122,7 @@ MoveAndClipJavaControl(
  *    Sets the size of the Java control.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -152,7 +152,7 @@ SizeJavaControl(
  *      True shows the control.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -190,7 +190,7 @@ ShowHideJavaControl(
  *      The Java control (applet).
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -219,7 +219,7 @@ StopJavaControlAsyncDrawing(
  *      The Java control (applet).
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -253,7 +253,7 @@ RestartJavaControlAsyncDrawing(
  *      The corresponding Java control (applet) that is to be drawn.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -290,7 +290,7 @@ DrawJavaControl(
  *      when done.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -320,7 +320,7 @@ GetJavaWindowFromWindow(
  *      The corresponding native window.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -351,7 +351,7 @@ GetWindowFromJavaWindow(
  *      when done.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -381,7 +381,7 @@ GetJavaFrameFromControl(
  *      A reference to the control for the applet.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -423,7 +423,7 @@ GetControlFromJavaFrame(
  *      A reference to the control that is created for the applet.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    Mac OS X:         in version 10.1 and later in JavaEmbedding.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */

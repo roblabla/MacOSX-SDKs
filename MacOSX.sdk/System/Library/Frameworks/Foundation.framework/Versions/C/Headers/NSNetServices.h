@@ -1,5 +1,5 @@
 /*	NSNetServices.h
-        Copyright 2002, Apple, Inc. All rights reserved.
+        Copyright 2002-2003, Apple, Inc. All rights reserved.
 */
 
 #if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
@@ -51,7 +51,8 @@ typedef enum {
 - (NSString *)type;
 - (NSString *)name;
 
-//  These methods are provided for older clients to specify and retrieve information that is peculiar to a given protocol. They are primarily here for legacy support of older zeroconf-style clients and their use is discouraged.
+//  These methods are provided for clients to specify and retrieve information that is peculiar to a given protocol.
+//  -protocolSpecificInformation returns nil if a resolve has not been performed or if setProtocolSpecificInformation has not been called.
 - (NSString *)protocolSpecificInformation;
 - (void)setProtocolSpecificInformation:(NSString *)specificInformation;
 

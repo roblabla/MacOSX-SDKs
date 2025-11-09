@@ -36,102 +36,6 @@ typedef function_table_entry 	*function_table_t;
 __BeforeMigServerHeader
 #endif /* __BeforeMigServerHeader */
 
-/* typedefs for all requests */
-
-#ifndef __Request__notify_subsystem__defined
-#define __Request__notify_subsystem__defined
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		mach_port_name_t name;
-	} __Request__mach_notify_port_deleted_t;
-
-	typedef struct {
-		mach_msg_header_t Head;
-		/* start of the kernel processed data */
-		mach_msg_body_t msgh_body;
-		mach_msg_port_descriptor_t rights;
-		/* end of the kernel processed data */
-	} __Request__mach_notify_port_destroyed_t;
-
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		mach_port_mscount_t mscount;
-	} __Request__mach_notify_no_senders_t;
-
-	typedef struct {
-		mach_msg_header_t Head;
-	} __Request__mach_notify_send_once_t;
-
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		mach_port_name_t name;
-	} __Request__mach_notify_dead_name_t;
-
-#endif /* !__Request__notify_subsystem__defined */
-
-/* union of all requests */
-
-#ifndef __RequestUnion__do_notify_subsystem__defined
-#define __RequestUnion__do_notify_subsystem__defined
-union __RequestUnion__do_notify_subsystem {
-	__Request__mach_notify_port_deleted_t Request_mach_notify_port_deleted;
-	__Request__mach_notify_port_destroyed_t Request_mach_notify_port_destroyed;
-	__Request__mach_notify_no_senders_t Request_mach_notify_no_senders;
-	__Request__mach_notify_send_once_t Request_mach_notify_send_once;
-	__Request__mach_notify_dead_name_t Request_mach_notify_dead_name;
-};
-#endif /* __RequestUnion__do_notify_subsystem__defined */
-/* typedefs for all replies */
-
-#ifndef __Reply__notify_subsystem__defined
-#define __Reply__notify_subsystem__defined
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		kern_return_t RetCode;
-	} __Reply__mach_notify_port_deleted_t;
-
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		kern_return_t RetCode;
-	} __Reply__mach_notify_port_destroyed_t;
-
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		kern_return_t RetCode;
-	} __Reply__mach_notify_no_senders_t;
-
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		kern_return_t RetCode;
-	} __Reply__mach_notify_send_once_t;
-
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		kern_return_t RetCode;
-	} __Reply__mach_notify_dead_name_t;
-
-#endif /* !__Reply__notify_subsystem__defined */
-
-/* union of all replies */
-
-#ifndef __ReplyUnion__do_notify_subsystem__defined
-#define __ReplyUnion__do_notify_subsystem__defined
-union __ReplyUnion__do_notify_subsystem {
-	__Reply__mach_notify_port_deleted_t Reply_mach_notify_port_deleted;
-	__Reply__mach_notify_port_destroyed_t Reply_mach_notify_port_destroyed;
-	__Reply__mach_notify_no_senders_t Reply_mach_notify_no_senders;
-	__Reply__mach_notify_send_once_t Reply_mach_notify_send_once;
-	__Reply__mach_notify_dead_name_t Reply_mach_notify_dead_name;
-};
-#endif /* __RequestUnion__do_notify_subsystem__defined */
 
 /* SimpleRoutine mach_notify_port_deleted */
 #ifdef	mig_external
@@ -211,6 +115,104 @@ extern const struct do_notify_subsystem {
 		routine[9];
 } do_notify_subsystem;
 
+/* typedefs for all requests */
+
+#ifndef __Request__notify_subsystem__defined
+#define __Request__notify_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_port_name_t name;
+	} __Request__mach_notify_port_deleted_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t rights;
+		/* end of the kernel processed data */
+	} __Request__mach_notify_port_destroyed_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_port_mscount_t mscount;
+	} __Request__mach_notify_no_senders_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__mach_notify_send_once_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_port_name_t name;
+	} __Request__mach_notify_dead_name_t;
+
+#endif /* !__Request__notify_subsystem__defined */
+
+
+/* union of all requests */
+
+#ifndef __RequestUnion__do_notify_subsystem__defined
+#define __RequestUnion__do_notify_subsystem__defined
+union __RequestUnion__do_notify_subsystem {
+	__Request__mach_notify_port_deleted_t Request_mach_notify_port_deleted;
+	__Request__mach_notify_port_destroyed_t Request_mach_notify_port_destroyed;
+	__Request__mach_notify_no_senders_t Request_mach_notify_no_senders;
+	__Request__mach_notify_send_once_t Request_mach_notify_send_once;
+	__Request__mach_notify_dead_name_t Request_mach_notify_dead_name;
+};
+#endif /* __RequestUnion__do_notify_subsystem__defined */
+/* typedefs for all replies */
+
+#ifndef __Reply__notify_subsystem__defined
+#define __Reply__notify_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__mach_notify_port_deleted_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__mach_notify_port_destroyed_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__mach_notify_no_senders_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__mach_notify_send_once_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__mach_notify_dead_name_t;
+
+#endif /* !__Reply__notify_subsystem__defined */
+
+
+/* union of all replies */
+
+#ifndef __ReplyUnion__do_notify_subsystem__defined
+#define __ReplyUnion__do_notify_subsystem__defined
+union __ReplyUnion__do_notify_subsystem {
+	__Reply__mach_notify_port_deleted_t Reply_mach_notify_port_deleted;
+	__Reply__mach_notify_port_destroyed_t Reply_mach_notify_port_destroyed;
+	__Reply__mach_notify_no_senders_t Reply_mach_notify_no_senders;
+	__Reply__mach_notify_send_once_t Reply_mach_notify_send_once;
+	__Reply__mach_notify_dead_name_t Reply_mach_notify_dead_name;
+};
+#endif /* __RequestUnion__do_notify_subsystem__defined */
 
 #ifndef subsystem_to_name_map_notify
 #define subsystem_to_name_map_notify \

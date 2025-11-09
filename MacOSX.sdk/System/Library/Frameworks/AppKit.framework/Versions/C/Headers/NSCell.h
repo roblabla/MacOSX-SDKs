@@ -1,7 +1,7 @@
 /*
 	NSCell.h
 	Application Kit
-	Copyright (c) 1994-2001, Apple Computer, Inc.
+	Copyright (c) 1994-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -74,13 +74,20 @@ enum {
 };
 
 typedef enum _NSControlTint {
-    NSDefaultControlTint = 0,	// system 'default'
-    NSClearControlTint   = 7
+    NSDefaultControlTint  = 0,	// system 'default'
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+    NSBlueControlTint     = 1,
+    NSGraphiteControlTint = 6,
+#endif
+    NSClearControlTint    = 7
 } NSControlTint;
 
 typedef enum _NSControlSize {
     NSRegularControlSize,
     NSSmallControlSize
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+    , NSMiniControlSize
+#endif
 } NSControlSize;
 
 typedef struct __CFlags {
@@ -98,7 +105,9 @@ typedef struct __CFlags {
     unsigned int        continuous:1;
     unsigned int        actOnMouseDown:1;
     unsigned int        isLeaf:1;
-    unsigned int        mnemonicLocation:8;
+    unsigned int        invalidObjectValue:1;
+    unsigned int        invalidFont:1;
+    unsigned int        reserved1:6;
     unsigned int        actOnMouseDragged:1;
     unsigned int        isLoaded:1;
     unsigned int        noWrap:1;
@@ -106,8 +115,7 @@ typedef struct __CFlags {
     unsigned int        isWhite:1;
     unsigned int        useUserKeyEquivalent:1;
     unsigned int        showsFirstResponder:1;
-    unsigned int        docEditing:1;
-    unsigned int        docSaved:1;
+    unsigned int	focusRingType:2;
     unsigned int        wasSelectable:1;
     unsigned int        hasInvalidObject:1;
     unsigned int        allowsEditingTextAttributes:1;
@@ -117,7 +125,7 @@ typedef struct __CFlags {
     unsigned int        retainCount:7;
     unsigned int        refusesFirstResponder:1;
     unsigned int        needsHighlightedText:1;
-    unsigned int        doesntShowMnemonicNormally:1;
+    unsigned int        reserved2:1;
     unsigned int        currentlyEditing:1;
     unsigned int	allowsMixedState:1;
     unsigned int	inMixedState:1;
@@ -195,7 +203,7 @@ typedef struct __CFlags {
 - (NSString *)keyEquivalent;
 - (void)setFormatter:(NSFormatter *)newFormatter;
 - (id)formatter;
-- (id <NSCopying>)objectValue;
+- (id)objectValue;
 - (void)setObjectValue:(id <NSCopying>)obj;
 - (BOOL)hasValidObjectValue;
 - (NSString *)stringValue;
@@ -265,6 +273,12 @@ typedef struct __CFlags {
 - (NSString *)mnemonic;
 - (void)setTitleWithMnemonic:(NSString *)stringWithAmpersand;
 - (void)performClick:(id)sender;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void)setFocusRingType:(NSFocusRingType)focusRingType;
+- (NSFocusRingType)focusRingType;
++ (NSFocusRingType)defaultFocusRingType;
+#endif
 @end
 
 @interface NSCell(NSCellAttributedStringMethods)

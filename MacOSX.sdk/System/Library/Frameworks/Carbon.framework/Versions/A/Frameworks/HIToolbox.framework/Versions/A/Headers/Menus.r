@@ -3,9 +3,9 @@
  
      Contains:   Menu Manager Interfaces.
  
-     Version:    HIToolbox-124.14~2
+     Version:    HIToolbox-145.33~1
  
-     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1985-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -105,6 +105,9 @@
 #define kMenuAttrAutoDisable 			0x04
 #define kMenuAttrUsePencilGlyph 		0x08
 #define kMenuAttrHidden 				0x10
+#define kMenuAttrCondenseSeparators 	0x20
+#define kMenuAttrDoNotCacheImage 		0x40
+#define kMenuAttrDoNotUseUserCommandKeys  0x80
 
 #define kMenuItemAttrDisabled 			0x01
 #define kMenuItemAttrIconDisabled 		0x02
@@ -119,6 +122,8 @@
 #define kMenuItemAttrUseVirtualKey 		0x0400
 #define kMenuItemAttrCustomDraw 		0x0800
 #define kMenuItemAttrIncludeInCmdKeyMatching  0x1000
+#define kMenuItemAttrAutoDisable 		0x2000
+#define kMenuItemAttrUpdateSingleItem 	0x4000
 
 #define gestaltContextualMenuAttr 		'cmnu'
 #define gestaltContextualMenuUnusedBit 	0

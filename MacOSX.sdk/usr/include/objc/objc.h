@@ -39,7 +39,10 @@ typedef struct objc_object {
 
 typedef struct objc_selector 	*SEL;    
 typedef id 			(*IMP)(id, SEL, ...); 
-typedef char			BOOL;
+typedef signed char		BOOL; 
+// BOOL is explicitly signed so @encode(BOOL) == "c" rather than "C" 
+// even if -funsigned-char is used.
+
 
 #define YES             (BOOL)1
 #define NO              (BOOL)0
@@ -73,11 +76,11 @@ OBJC_EXPORT void *object_getIndexedIvars(id obj);
 #if defined(__osf__) && defined(__alpha__)
     typedef long arith_t;
     typedef unsigned long uarith_t;
-    #define ARITH_SHIFT 32
+#   define ARITH_SHIFT 32
 #else
     typedef int arith_t;
     typedef unsigned uarith_t;
-    #define ARITH_SHIFT 16
+#   define ARITH_SHIFT 16
 #endif
 
 #endif	/* !STRICT_OPENSTEP */

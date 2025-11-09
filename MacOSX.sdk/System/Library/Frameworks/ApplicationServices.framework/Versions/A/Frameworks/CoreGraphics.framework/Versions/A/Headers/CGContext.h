@@ -1,16 +1,16 @@
 /* CoreGraphics - CGContext.h
- * Copyright (c) 2000 Apple Computer, Inc.
+ * Copyright (c) 2000-2003 Apple Computer, Inc.
  * All rights reserved.
  */
 
 #ifndef CGCONTEXT_H_
 #define CGCONTEXT_H_
-#define __CGCONTEXT__
 
 typedef struct CGContext *CGContextRef;
 
 #include <CoreGraphics/CGBase.h>
 #include <CoreGraphics/CGAffineTransform.h>
+#include <CoreGraphics/CGColor.h>
 #include <CoreGraphics/CGColorSpace.h>
 #include <CoreGraphics/CGFont.h>
 #include <CoreGraphics/CGImage.h>
@@ -21,6 +21,7 @@ typedef struct CGContext *CGContextRef;
 #include <CoreFoundation/CFBase.h>
 #include <limits.h>
 #include <stddef.h>
+#include <AvailabilityMacros.h>
 
 CG_EXTERN_C_BEGIN
 
@@ -300,6 +301,12 @@ CG_EXTERN void CGContextClip(CGContextRef c);
 
 CG_EXTERN void CGContextEOClip(CGContextRef c);
 
+/* Return the bounding box of the clip path of `c' in user space.  The
+ * bounding box is the smallest rectangle completely enclosing all points
+ * in the clip. */
+
+CG_EXTERN CGRect CGContextGetClipBoundingBox(CGContextRef c) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
 /** Clipping convenience functions. **/
 
 /* Intersect the current clipping path with `rect'.  Note that this
@@ -312,6 +319,16 @@ CG_EXTERN void CGContextClipToRect(CGContextRef c, CGRect rect);
  * function resets the context's path to the empty path. */
 
 CG_EXTERN void CGContextClipToRects(CGContextRef c, const CGRect rects[], size_t count);
+
+/** Primitive color functions. **/
+
+/* Set the current fill color in the context `c' to `color'. */
+
+CG_EXTERN void CGContextSetFillColorWithColor(CGContextRef c, CGColorRef color) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+/* Set the current stroke color in the context `c' to `color'. */
+
+CG_EXTERN void CGContextSetStrokeColorWithColor(CGContextRef c, CGColorRef color) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /** Colorspace functions. **/
 
@@ -430,6 +447,27 @@ CG_EXTERN CGInterpolationQuality CGContextGetInterpolationQuality(CGContextRef c
 
 CG_EXTERN void CGContextSetInterpolationQuality(CGContextRef c, CGInterpolationQuality quality);
 
+/** Shadow support. **/
+
+/* Set the shadow parameters in `context'.  `offset' specifies a
+ * translation in base-space; `blur' is a non-negative number specifying
+ * the amount of blur; `color' specifies the color of the shadow, which may
+ * contain a non-opaque alpha value.  If `color' is NULL, it's equivalent
+ * to specifying a fully transparent color.  The shadow is a gstate
+ * parameter. After a shadow is specified, all objects drawn subsequently
+ * will be shadowed.  To turn off shadowing, set the shadow color to a
+ * fully transparent color (or pass NULL as the color), or use the standard
+ * gsave/grestore mechanism. */
+
+CG_EXTERN void CGContextSetShadowWithColor(CGContextRef context, CGSize offset, float blur, CGColorRef color) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+/* Equivalent to calling
+ *   CGContextSetShadowWithColor(context, offset, blur, color)
+ * where color is black with 1/3 alpha (i.e., RGBA = {0, 0, 0, 1.0/3.0}) in
+ * the DeviceRGB colorspace. */
+
+CG_EXTERN void CGContextSetShadow(CGContextRef context, CGSize offset, float blur) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
 /** Shading functions. **/
 
 /* Fill the current clipping region of `c' with `shading'. */
@@ -492,6 +530,13 @@ CG_EXTERN void CGContextShowText(CGContextRef c, const char *string, size_t leng
 
 CG_EXTERN void CGContextShowGlyphs(CGContextRef c, const CGGlyph g[], size_t count);
 
+/* Draw `glyphs', an array of `count' CGGlyphs, at the current point
+ * specified by the text matrix.  Each element of `advances' specifies the
+ * offset from the previous glyph's origin to the origin of the associated
+ * glyph; the advances are specified in user space. */
+
+CG_EXTERN void CGContextShowGlyphsWithAdvances(CGContextRef c, const CGGlyph glyphs[], const CGSize advances[], size_t count) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
 /** Text convenience functions. **/
 
 /* Draw `string', a string of `length' bytes, at the point `(x, y)',
@@ -507,15 +552,20 @@ CG_EXTERN void CGContextShowTextAtPoint(CGContextRef c, float x, float y, const 
 
 CG_EXTERN void CGContextShowGlyphsAtPoint(CGContextRef c, float x, float y, const CGGlyph glyphs[], size_t count);
 
-/** PDF document functions. **/
+/** PDF functions. **/
 
-/* Draw `page' in `document' in the rectangular area specified by `rect' in
+/* Draw `page' in the current user space of the context `c'. */
+
+CG_EXTERN void CGContextDrawPDFPage(CGContextRef c, CGPDFPageRef page);
+
+/* DEPRECATED; use the CGPDFPage API instead.
+ * Draw `page' in `document' in the rectangular area specified by `rect' in
  * the context `c'.  The media box of the page is scaled, if necessary, to
  * fit into `rect'. */
 
 CG_EXTERN void CGContextDrawPDFDocument(CGContextRef c, CGRect rect, CGPDFDocumentRef document, int page);
 
-/** Page functions. **/
+/** Output page functions. **/
 
 /* Begin a new page. */
 
@@ -553,9 +603,33 @@ CG_EXTERN void CGContextSetShouldAntialias(CGContextRef c, bool shouldAntialias)
 /** Font smoothing functions. **/
 
 /* Turn on font smoothing if `shouldSmoothFonts' is true; turn it off
- * otherwise.  This parameter is part of the graphics state. */
+ * otherwise.  This parameter is part of the graphics state. Note that this
+ * doesn't guarantee that font smoothing will occur: not all destination
+ * contexts support font smoothing. */
 
 CG_EXTERN void CGContextSetShouldSmoothFonts(CGContextRef c, bool shouldSmoothFonts);
+
+/** Transparency layer support. **/
+
+/* Begin a transparency layer.  All subsequent drawing operations until a
+ * corresponding CGContextEndTransparencyLayer are composited into a fully
+ * transparent backdrop (which is treated as a separate destination buffer
+ * from the context); after a call to CGContextEndTransparencyLayer, the
+ * result is composited into the context using the global alpha and shadow
+ * state of the context.  This operation respects the clipping region of
+ * the context.  After a call to this function, all of the parameters in
+ * the graphics state remain unchanged with the exception of the following:
+ *   The global alpha is set to 1.
+ *   The shadow is turned off.
+ * Ending the transparency layer restores these parameters to the values
+ * they had before CGContextBeginTransparencyLayer was called.
+ * Transparency layers may be nested. */
+
+CG_EXTERN void CGContextBeginTransparencyLayer(CGContextRef context, CFDictionaryRef auxiliaryInfo) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+/* End a tranparency layer. */
+
+CG_EXTERN void CGContextEndTransparencyLayer(CGContextRef context) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 CG_EXTERN_C_END
 

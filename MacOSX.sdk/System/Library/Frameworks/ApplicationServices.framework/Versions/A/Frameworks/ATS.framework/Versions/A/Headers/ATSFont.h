@@ -3,9 +3,9 @@
  
      Contains:   Public interface to the font access and data management functions of ATS.
  
-     Version:    ATS-102.4~1
+     Version:    ATS-135~1
  
-     Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -64,7 +64,8 @@ enum {
   kATSInvalidFontAccess         = -982L,
   kATSIterationScopeModified    = -983L,
   kATSInvalidFontTableAccess    = -984L,
-  kATSInvalidFontContainerAccess = -985L
+  kATSInvalidFontContainerAccess = -985L,
+  kATSInvalidGlyphAccess        = -986L
 };
 
 /* Activation Option Flags */
@@ -76,17 +77,17 @@ enum {
 };
 
 enum {
-  kATSOptionFlagsDoNotNotify    = 0x00000001 << 8, /* Do not notify after global activation/deactivation */
-  kATSOptionFlagsIterationScopeMask = 0x00000007 << 12, /* Mask option bits 12-14 for iteration scopes */
-  kATSOptionFlagsDefaultScope   = 0x00000000 << 12,
-  kATSOptionFlagsUnRestrictedScope = 0x00000001 << 12,
-  kATSOptionFlagsRestrictedScope = 0x00000002 << 12,
-  kATSOptionFlagsProcessSubdirectories = 0x00000001 << 6
+  kATSOptionFlagsProcessSubdirectories = 0x00000001 << 6, /* Used by activation/deactivation & iteration */
+  kATSOptionFlagsDoNotNotify    = 0x00000001 << 7 /* Do not notify after global activation/deactivation */
 };
 
 /* Iteration Option Flags */
 enum {
-  kATSOptionFlagsIterateByPrecedenceMask = 0x00000001 << 5
+  kATSOptionFlagsIterateByPrecedenceMask = 0x00000001 << 5,
+  kATSOptionFlagsIterationScopeMask = 0x00000007 << 12, /* Mask option bits 12-14 for iteration scopes */
+  kATSOptionFlagsDefaultScope   = 0x00000000 << 12,
+  kATSOptionFlagsUnRestrictedScope = 0x00000001 << 12,
+  kATSOptionFlagsRestrictedScope = 0x00000002 << 12
 };
 
 typedef UInt32                          ATSFontFormat;
@@ -177,11 +178,11 @@ enum ATSFontNotifyAction {
 
   /*
    * The ATS system with the help of the Finder keeps track of changes
-   * to any of the fonts directories ( System, Local, Network, User, &
-   * Classic). However, one may wish to add/remove fonts to these
-   * locations programmatically.   This action is used to let ATS
-   * server to rescan these directories and post notifications if
-   * necessary.
+   * to any of the font directories in the system domains ( System,
+   * Local, Network, User, & Classic). However, one may wish to
+   * add/remove fonts to these locations programmatically. This action
+   * is used to let ATS server to rescan these directories and post
+   * notifications if necessary.
    */
   kATSFontNotifyActionDirectoriesChanged = 2
 };

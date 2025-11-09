@@ -3,9 +3,9 @@
  
      Contains:   Macintosh Easy Open Translation Extension Interfaces.
  
-     Version:    HIToolbox-124.14~2
+     Version:    HIToolbox-145.33~1
  
-     Copyright:  © 1993-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1993-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -33,6 +33,11 @@ extern "C" {
 
 #pragma options align=mac68k
 
+/*
+   Translation Extensions are no longer supported. Carbon clients interested in extending translations
+   should use filter services as described in TranslationServices.h.  The definitions below will NOT work
+   for Carbon and are only defined for those files that need to build pre-Carbon applications.
+*/
 enum {
   kSupportsFileTranslation      = 1,
   kSupportsScrapTranslation     = 2,
@@ -118,20 +123,23 @@ typedef long                            TranslationRefNum;
 
 *******************************************************************************************/
 /*
- *  SetTranslationAdvertisement()
+ *  SetTranslationAdvertisement()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    There is no direct replacement at this time.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 thru 1.0.2
  *    Non-Carbon CFM:   in Translation 1.0 and later
  */
 extern OSErr 
 SetTranslationAdvertisement(
   TranslationRefNum   refNum,
-  PicHandle           advertisement)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  PicHandle           advertisement)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
 
 
 
@@ -151,13 +159,16 @@ SetTranslationAdvertisement(
 
 *******************************************************************************************/
 /*
- *  UpdateTranslationProgress()
+ *  UpdateTranslationProgress()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    There is no direct replacement at this time.
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 thru 1.0.2
  *    Non-Carbon CFM:   in Translation 1.0 and later
  */
@@ -165,7 +176,7 @@ extern OSErr
 UpdateTranslationProgress(
   TranslationRefNum   refNum,
   short               percentDone,
-  Boolean *           canceled)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean *           canceled)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
 
 
 /*******************************************************************************************

@@ -1,6 +1,6 @@
 /*
 	NSScriptObjectSpecifiers.h
-	Copyright (c) 1997-2002, Apple Computer, Inc.
+	Copyright (c) 1997-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -61,6 +61,7 @@ typedef enum {
     NSScriptClassDescription *_containerClassDescription;
     BOOL _containerIsObjectBeingTested;
     BOOL _containerIsRangeContainerObject;
+    char _padding[2];
     int _error;
 }
 

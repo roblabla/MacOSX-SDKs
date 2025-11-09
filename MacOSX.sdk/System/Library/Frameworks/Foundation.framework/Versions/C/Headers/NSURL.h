@@ -1,11 +1,12 @@
 /*	NSURL.h
-	Copyright 1997-2002, Apple, Inc. All rights reserved.
+	Copyright (c) 1997-2003, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSURLHandle.h>
+#import <Foundation/NSString.h>
 
-@class NSString, NSNumber, NSData, NSDictionary, NSURLHandle;
+@class NSNumber, NSData, NSDictionary;
 
 // As more schemes are used and understood, strong constants for them will be added here
 FOUNDATION_EXPORT NSString *NSURLFileScheme;
@@ -74,4 +75,14 @@ FOUNDATION_EXPORT NSString *NSURLFileScheme;
 - (void)URL:(NSURL *)sender resourceDidFailLoadingWithReason:(NSString *)reason;
 @end
 
+#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
+@interface NSString (NSURLUtilities)
 
+/* Adds all percent escapes necessary to convert the receiver in to a legal URL string.  Uses the given encoding to determine the correct percent escapes (returning nil if the given encoding cannot encode a particular character).  See CFURLCreateStringByAddingPercentEscapes in CFURL.h for more complex transformations */
+- (NSString *)stringByAddingPercentEscapesUsingEncoding:(NSStringEncoding)enc;
+
+/* Replaces all percent escapes with the matching characters as determined by the given encoding.  Returns nil if the transformation is not possible (i.e. the percent escapes give a byte sequence not legal in the given encoding).  See CFURLCreateStringByReplacingPercentEscapes in CFURL.h for more complex transformations */
+- (NSString *)stringByReplacingPercentEscapesUsingEncoding:(NSStringEncoding)enc;
+
+@end
+#endif

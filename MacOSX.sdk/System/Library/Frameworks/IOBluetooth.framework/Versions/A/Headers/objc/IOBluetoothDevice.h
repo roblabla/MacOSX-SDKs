@@ -182,8 +182,10 @@
 
 // L2CAP channel.
 
+#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_2
+
 /*!
-    @method		openL2CAPChannelSync:  withPSM:  delegate:
+    @method		openL2CAPChannelSync:withPSM:delegate:
 	@abstract	Opens a new L2CAP channel to the target device. Returns only after the channel is opened.
 	@discussion	This method will begin the process of opening a new L2CAP channel to the target device.  
                 The baseband connection to the device will be opened if it is not open already.  The L2CAP
@@ -191,6 +193,8 @@
                 listener on the new channel.  This prevents a situation where the channel succeeds
                 in being configured and opened and receives data before the client is listening and
                 is ready for it.
+
+				NOTE: This method is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
 	@param		newChannel		A pointer to an IOBluetoothL2CAPChannel object to receive the L2CAP channel 
                                 requested to be opened.  The newChannel pointer will only be set if 
                                 kIOReturnSuccess is returned.
@@ -208,7 +212,7 @@
 - (IOReturn)openL2CAPChannelSync:(IOBluetoothL2CAPChannel **)newChannel withPSM:(BluetoothL2CAPPSM)psm delegate:(id)channelDelegate;
 
 /*!
-    @method		openL2CAPChannelAsync:findExisting:newChannel:delegate:
+    @method		openL2CAPChannelAsync:withPSM:delegate:
 	@abstract	Opens a new L2CAP channel to the target device. Returns immediately after starting the opening process.
 	@discussion	This method will begin the process of opening a new L2CAP channel to the target device.  
                 The baseband connection to the device will be opened if it is not open already.  The L2CAP
@@ -216,10 +220,12 @@
                 listener on the new channel.  This prevents a situation where the channel succeeds
                 in being configured and opened and receives data before the client is listening and
                 is ready for it.
+
+				NOTE: This method is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
 	@param		newChannel		A pointer to an IOBluetoothL2CAPChannel object to receive the L2CAP channel 
                                 requested to be opened.  The newChannel pointer will only be set if 
                                 kIOReturnSuccess is returned.
-	@param		withPSM			The L2CAP PSM value for the new channel.
+	@param		psm				The L2CAP PSM value for the new channel.
 	@param		delegate the object that will play the role of delegate for the channel.
 				A channel delegate is the object the l2cap uses as target for  data and events. The
 				developer will implement only the the methods he/she is interested in. A list of the
@@ -231,6 +237,8 @@
 */
 
 - (IOReturn)openL2CAPChannelAsync:(IOBluetoothL2CAPChannel **)newChannel withPSM:(BluetoothL2CAPPSM)psm delegate:(id)channelDelegate;
+
+#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_2 */
 
 /*!
     @method		openL2CAPChannel:findExisting:newChannel:
@@ -286,14 +294,17 @@
 
 - (IOReturn)openRFCOMMChannel:(BluetoothRFCOMMChannelID)channelID channel:(IOBluetoothRFCOMMChannel **)rfcommChannel;
 
+#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_2
+
 /*!
-    @method		openRFCOMMChannelSync:channel:delegate:
+    @method		openRFCOMMChannelSync:withChannelID:delegate:
 	@abstract	Opens a new RFCOMM channel to the target device.  Returns only once the channel is open or failed to open.
 	@discussion	This method will begin the process of opening a new RFCOMM channel to the target device.  
                 The baseband connection to the device will be opened if it is not open already.  The RFCOMM
                 channel open process will not complete until the client has registered an incoming data 
                 listener on the new channel.
-					
+
+				NOTE: This method is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
 	@param		rfcommChannel	A pointer to an IOBluetoothRFCOMMChannel object to receive the RFCOMM channel 
                                 requested to be opened.  The rfcommChannel pointer will only be set if 
                                 kIOReturnSuccess is returned.
@@ -313,13 +324,14 @@
 - (IOReturn)openRFCOMMChannelSync:(IOBluetoothRFCOMMChannel **)rfcommChannel withChannelID:(BluetoothRFCOMMChannelID)channelID delegate:(id)channelDelegate;
 
 /*!
-    @method		openRFCOMMChannelAsync:channel:delegate:
+    @method		openRFCOMMChannelAsync:withChannelID:delegate:
 	@abstract	Opens a new RFCOMM channel to the target device. Returns immediately.
 	@discussion	This method will begin the process of opening a new RFCOMM channel to the target device.  
                 The baseband connection to the device will be opened if it is not open already.  The RFCOMM
                 channel open process will not complete until the client has registered an incoming data 
                 listener on the new channel.
 					
+				NOTE: This method is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
 	@param		rfcommChannel	A pointer to an IOBluetoothRFCOMMChannel object to receive the RFCOMM channel 
                                 requested to be opened.  The rfcommChannel pointer will only be set if 
                                 kIOReturnSuccess is returned.
@@ -337,6 +349,8 @@
 */
 
 - (IOReturn)openRFCOMMChannelAsync:(IOBluetoothRFCOMMChannel **)rfcommChannel withChannelID:(BluetoothRFCOMMChannelID)channelID delegate:(id)channelDelegate;
+
+#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_2 */
 
 // Setting/getting device info.
 
@@ -425,14 +439,19 @@
 
 - (const BluetoothDeviceAddress *)getAddress;
 
+#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_1
+
 /*!
     @method		getAddressString
 	@abstract	Get a string representation of the Bluetooth device address for the target device.  The
 				format of the string is the same as returned by IOBluetoothNSStringFromDeviceAddress().
+	@discussion	NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later.
 	@result		Returns an NSString containing the Bluetooth device address of the target device.
 */
 
 - (NSString *)getAddressString;
+
+#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_1 */
 
 // Connecting to the device.
 
@@ -527,6 +546,8 @@
 
 - (IOReturn)openConnection:(id)target;
 
+#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_3
+
 /*!
     @method		openConnection:withPageTimeout:authenticationRequired:
 	@abstract	Create a baseband connection to the device.
@@ -534,6 +555,8 @@
 				CREATE_CONNECTION command, the method -connectionComplete:status: will be called on the specified target.  
 				If no target is specified, the call is synchronous and will not return until the connection is open
 				or the CREATE_CONNECTION call has failed.
+
+				NOTE: This method is only available in Mac OS X 10.2.7 (Bluetooth v1.3) or later.
 	@param		target The target to message when the create connection call is complete
 	@param		pageTimeoutValue The page timeout value to use for this call
 	@param		authenticationRequired BOOL value to indicate whether authentication should be required for the connection
@@ -542,12 +565,14 @@
 */
 - (IOReturn)openConnection:(id)target withPageTimeout:(BluetoothHCIPageTimeout)pageTimeoutValue authenticationRequired:(BOOL)authenticationRequired;
 
+#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_3 */
+
 /*!
     @method		closeConnection
 	@abstract	Close down the baseband connection to the device.
 	@discussion	This method is synchronous and will not return until the connection has been closed (or the 
                 command failed).  In the future this API will be changed to allow asynchronous operation.
-    @return		Returns kIOReturnSuccess if the connection has successfully been closed.
+    @result		Returns kIOReturnSuccess if the connection has successfully been closed.
 */
 
 - (IOReturn)closeConnection;
@@ -561,11 +586,13 @@
                 complete.  This call with operate with the default page timeout value.  If a different page timeout
 				value is desired, the method -remoteNameRequest:withPageTimeout: should be used instead.
 	@param		target The target to message when the remote name request is complete
-    @return		Returns kIOReturnSuccess if the remote name request was successfully issued (and if synchronous, if
+    @result		Returns kIOReturnSuccess if the remote name request was successfully issued (and if synchronous, if
                 the request completed successfully).
 */
 
 - (IOReturn)remoteNameRequest:(id)target;
+
+#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_3
 
 /*!
     @method		remoteNameRequest:withPageTimeout:
@@ -574,13 +601,17 @@
                 command, the method -remoteNameRequestComplete:status:name: will be called on the specified target.
                 If no target is specified, the request is made synchronously and won't return until the request is 
                 complete.
+
+				NOTE: This method is only available in Mac OS X 10.2.7 (Bluetooth v1.3) or later.
 	@param		target The target to message when the remote name request is complete
 	@param		pageTimeoutValue The page timeout value to use for this call
-    @return		Returns kIOReturnSuccess if the remote name request was successfully issued (and if synchronous, if
+    @result		Returns kIOReturnSuccess if the remote name request was successfully issued (and if synchronous, if
                 the request completed successfully).
 */
 
 - (IOReturn)remoteNameRequest:(id)target withPageTimeout:(BluetoothHCIPageTimeout)pageTimeoutValue;
+
+#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_3 */
 
 /*!
     @method		requestAuthentication
@@ -605,14 +636,20 @@
 
 - (BluetoothConnectionHandle)getConnectionHandle;
 
+#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_3
+
 /*!
-    @method		isInitiator
+    @method		isIncoming
 	@abstract	Returns TRUE if the device connection was generated by the remote host.
     @discussion	Returns TRUE if the device connection was generated by the remote host. False if the connection was generated by some other device that connected to the local host.
+
+				NOTE: This method is only available in Mac OS X 10.2.7 (Bluetooth v1.3) or later.
 	@result		Returns TRUE if the device connection was generated by the remote host.
 */
 
 - (BOOL)isIncoming;
+
+#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_3 */
 
 /*!
     @method		getLinkType
@@ -647,7 +684,7 @@
 				is specified, the request is still synchronous, but no callback will be made.  That can be useful if the client 
 				has	registered for SDP service changed notifications.
 	@param		target The target to message when the SDP query is complete
-    @return		Returns kIOReturnSuccess if the SDP query was successfully started.
+    @result		Returns kIOReturnSuccess if the SDP query was successfully started.
 */
 
 - (IOReturn)performSDPQuery:(id)target;
@@ -693,10 +730,14 @@
 
 - (IOBluetoothSDPServiceRecord *)getServiceRecordForUUID:(IOBluetoothSDPUUID *)sdpUUID;
 
+#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_1
+
 /*!
     @method		favoriteDevices
 	@abstract	Gets an array of the user's favorite devices.
 	@discussion	The resulting array contains IOBluetoothDevice objects.
+
+				NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later.
 	@result		Returns an array of device objects representing the user's favorite devices.  If the
 				user has no favorites, nil is returned.
 */
@@ -706,6 +747,7 @@
 /*!
     @method		isFavorite
 	@abstract	Reports whether the target device is a favorite for the user.
+	@discussion	NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later.
 	@result		Returns TRUE if the target device is a favorite for the user, FALSE if not.
 */
 
@@ -714,6 +756,7 @@
 /*!
     @method		addToFavorites
 	@abstract	Adds the target device to the user's favorite devices list.
+	@discussion	NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later.
 	@result		Returns kIOReturnSuccess if the device was successfully added to the user's
 				list of favorite devices.
 */
@@ -723,6 +766,7 @@
 /*!
     @method		removeFromFavorites
 	@abstract	Removes the target device from the user's favorite devices list.
+	@discussion	NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later.
 	@result		Returns kIOReturnSuccess if the device was successfully removed from the user's
 				list of favorite devices.
 */
@@ -736,6 +780,8 @@
 				The most recently accessed devices are first.  If the numDevices parameter is 0, all devices 
 				accessed by the system are returned.  If numDevices is non-zero, only the most recent devices
 				are returned.
+
+				NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later.
     @param		numDevices The number of devices to return.
 	@result		Returns an array of device objects recently used by the system.  If no devices have been accessed,
 				nil is returned.
@@ -748,17 +794,25 @@
 	@abstract	Returns the date/time of the most recent access of the target device.
 	@discussion	This is the date that -recentDevices uses to sort its list of the most recently accessed
 				devices.
+
+				NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later.
 	@result		Returns the date/time of the most recent access of the target device.  If the device
 				has not been accessed, nil is returned.
 */
 
 - (NSDate *)recentAccessDate;
 
+#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_1 */
+
+#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_2
+
 /*!
     @method		pairedDevices
 	@abstract	Gets an array of all of the paired devices on the system.
 	@discussion	The resulting array contains IOBluetoothDevice objects.  The paired devices are currently NOT stored
 				per user, so this is all devices paired by any user.
+
+				NOTE: This method is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
 	@result		Returns an array of device objects for all of the paired devices on the system.  If there are
 				no paired devices, nil is returned.
 */
@@ -768,10 +822,13 @@
 /*!
     @method		isPaired
 	@abstract	Returns whether the target device is paired.
+	@discussion	NOTE: This method is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
 	@result		Returns TRUE if the target device is paired, FALSE if not.
 */
 
 - (BOOL)isPaired;
+
+#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_2 */
 
 - (NSString *)description;
 - (id)initWithCoder:(NSCoder *)coder;

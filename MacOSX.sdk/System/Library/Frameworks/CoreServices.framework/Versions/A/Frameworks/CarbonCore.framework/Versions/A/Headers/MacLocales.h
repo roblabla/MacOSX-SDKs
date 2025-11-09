@@ -3,9 +3,9 @@
  
      Contains:   Types & prototypes for locale functions
  
-     Version:    CarbonCore-472~1
+     Version:    CarbonCore-545~1
  
-     Copyright:  © 1998-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1998-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -128,6 +128,7 @@ LocaleRefGetPartString(
   char             partString[])                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+
 /*
  *  LocaleStringToLangAndRegionCodes()
  *  
@@ -143,7 +144,9 @@ LocaleStringToLangAndRegionCodes(
   RegionCode *  region)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+
 /* Enumerate locales for a LocaleOperationClass */
+
 /*
  *  LocaleOperationCountLocales()
  *  
@@ -231,6 +234,7 @@ LocaleGetIndName(
   LocaleRef *              displayLocale)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+
 /*
  *  LocaleGetRegionLanguageName()
  *  
@@ -245,7 +249,9 @@ LocaleGetRegionLanguageName(
   Str255       languageName)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+
 /* Get names for a LocaleOperationClass*/
+
 /*
  *  LocaleOperationGetName()
  *  

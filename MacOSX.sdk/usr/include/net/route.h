@@ -142,7 +142,7 @@ struct rtentry {
 				  struct sockaddr *, struct rtentry *));
 					/* output routine for this (rt,if) */
 	struct	rtentry *rt_parent; 	/* cloning parent of this route */
-	void	*rt_filler2;		/* more filler */
+	u_long	generation_id;		/* route generation id */
 };
 #endif /* __APPLE_API_UNSTABLE */
 

@@ -7,6 +7,7 @@
 #define CGGEOMETRY_H_
 
 #include <CoreGraphics/CGBase.h>
+#include <CoreFoundation/CFByteOrder.h>
 
 CG_EXTERN_C_BEGIN
 

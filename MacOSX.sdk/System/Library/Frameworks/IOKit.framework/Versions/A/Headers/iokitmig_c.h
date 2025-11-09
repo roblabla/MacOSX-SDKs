@@ -26,7 +26,7 @@ typedef function_table_entry 	*function_table_t;
 #endif /* AUTOTEST */
 
 #ifndef	iokit_MSG_COUNT
-#define	iokit_MSG_COUNT	56
+#define	iokit_MSG_COUNT	60
 #endif	/* iokit_MSG_COUNT */
 
 #include <mach/std_types.h>
@@ -39,6 +39,9 @@ typedef function_table_entry 	*function_table_t;
 #ifdef __BeforeMigUserHeader
 __BeforeMigUserHeader
 #endif /* __BeforeMigUserHeader */
+
+#include <sys/cdefs.h>
+__BEGIN_DECLS
 
 
 /* Routine io_object_get_class */
@@ -810,6 +813,81 @@ kern_return_t io_registry_entry_get_property_recursively
 	io_buf_ptr_t *properties,
 	mach_msg_type_number_t *propertiesCnt
 );
+
+/* Routine io_service_get_state */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t io_service_get_state
+(
+	mach_port_t service,
+	uint64_t *state
+);
+
+/* Routine io_service_get_matching_services_ool */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t io_service_get_matching_services_ool
+(
+	mach_port_t master_port,
+	io_buf_ptr_t matching,
+	mach_msg_type_number_t matchingCnt,
+	natural_t *result,
+	mach_port_t *existing
+);
+
+/* Routine io_service_match_property_table_ool */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t io_service_match_property_table_ool
+(
+	mach_port_t service,
+	io_buf_ptr_t matching,
+	mach_msg_type_number_t matchingCnt,
+	natural_t *result,
+	boolean_t *matches
+);
+
+/* Routine io_service_add_notification_ool */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t io_service_add_notification_ool
+(
+	mach_port_t master_port,
+	io_name_t notification_type,
+	io_buf_ptr_t matching,
+	mach_msg_type_number_t matchingCnt,
+	mach_port_t wake_port,
+	io_async_ref_t reference,
+	mach_msg_type_number_t referenceCnt,
+	natural_t *result,
+	mach_port_t *notification
+);
+
+__END_DECLS
+
+/********************** Caution **************************/
+/* The following data types should be used to calculate  */
+/* maximum message sizes only. The actual message may be */
+/* smaller, and the position of the arguments within the */
+/* message layout may vary from what is presented here.  */
+/* For example, if any of the arguments are variable-    */
+/* sized, and less than the maximum is sent, the data    */
+/* will be packed tight in the actual message to reduce  */
+/* the presence of holes.                                */
+/********************** Caution **************************/
+
 /* typedefs for all requests */
 
 #ifndef __Request__iokit_subsystem__defined
@@ -1273,6 +1351,46 @@ kern_return_t io_registry_entry_get_property_recursively
 		int options;
 	} __Request__io_registry_entry_get_property_recursively_t;
 
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__io_service_get_state_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_descriptor_t matching;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t matchingCnt;
+	} __Request__io_service_get_matching_services_ool_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_descriptor_t matching;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t matchingCnt;
+	} __Request__io_service_match_property_table_ool_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_descriptor_t matching;
+		mach_msg_port_descriptor_t wake_port;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t notification_typeOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t notification_typeCnt;
+		char notification_type[128];
+		mach_msg_type_number_t matchingCnt;
+		mach_msg_type_number_t referenceCnt;
+		natural_t reference[8];
+	} __Request__io_service_add_notification_ool_t;
+
 #endif /* !__Request__iokit_subsystem__defined */
 
 /* union of all requests */
@@ -1336,6 +1454,10 @@ union __RequestUnion__iokit_subsystem {
 	__Request__io_connect_unmap_memory_t Request_io_connect_unmap_memory;
 	__Request__io_registry_entry_get_location_in_plane_t Request_io_registry_entry_get_location_in_plane;
 	__Request__io_registry_entry_get_property_recursively_t Request_io_registry_entry_get_property_recursively;
+	__Request__io_service_get_state_t Request_io_service_get_state;
+	__Request__io_service_get_matching_services_ool_t Request_io_service_get_matching_services_ool;
+	__Request__io_service_match_property_table_ool_t Request_io_service_match_property_table_ool;
+	__Request__io_service_add_notification_ool_t Request_io_service_add_notification_ool;
 };
 #endif /* !__RequestUnion__iokit_subsystem__defined */
 /* typedefs for all replies */
@@ -1764,6 +1886,41 @@ union __RequestUnion__iokit_subsystem {
 		mach_msg_type_number_t propertiesCnt;
 	} __Reply__io_registry_entry_get_property_recursively_t;
 
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		uint64_t state;
+	} __Reply__io_service_get_state_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t existing;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		natural_t result;
+	} __Reply__io_service_get_matching_services_ool_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		natural_t result;
+		boolean_t matches;
+	} __Reply__io_service_match_property_table_ool_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t notification;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		natural_t result;
+	} __Reply__io_service_add_notification_ool_t;
+
 #endif /* !__Reply__iokit_subsystem__defined */
 
 /* union of all replies */
@@ -1827,6 +1984,10 @@ union __ReplyUnion__iokit_subsystem {
 	__Reply__io_connect_unmap_memory_t Reply_io_connect_unmap_memory;
 	__Reply__io_registry_entry_get_location_in_plane_t Reply_io_registry_entry_get_location_in_plane;
 	__Reply__io_registry_entry_get_property_recursively_t Reply_io_registry_entry_get_property_recursively;
+	__Reply__io_service_get_state_t Reply_io_service_get_state;
+	__Reply__io_service_get_matching_services_ool_t Reply_io_service_get_matching_services_ool;
+	__Reply__io_service_match_property_table_ool_t Reply_io_service_match_property_table_ool;
+	__Reply__io_service_add_notification_ool_t Reply_io_service_add_notification_ool;
 };
 #endif /* !__RequestUnion__iokit_subsystem__defined */
 
@@ -1887,7 +2048,11 @@ union __ReplyUnion__iokit_subsystem {
     { "io_connect_get_notification_semaphore", 2852 },\
     { "io_connect_unmap_memory", 2853 },\
     { "io_registry_entry_get_location_in_plane", 2854 },\
-    { "io_registry_entry_get_property_recursively", 2855 }
+    { "io_registry_entry_get_property_recursively", 2855 },\
+    { "io_service_get_state", 2856 },\
+    { "io_service_get_matching_services_ool", 2857 },\
+    { "io_service_match_property_table_ool", 2858 },\
+    { "io_service_add_notification_ool", 2859 }
 #endif
 
 #ifdef __AfterMigUserHeader

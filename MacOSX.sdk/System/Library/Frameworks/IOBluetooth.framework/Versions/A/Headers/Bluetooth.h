@@ -1290,6 +1290,14 @@ struct			BluetoothHCIEventConnectionPacketTypeResults
 	BluetoothPacketType							packetType;
 };
 
+typedef struct	BluetoothHCIEventReadRemoteSupportedFeaturesResults 	BluetoothHCIEventReadRemoteSupportedFeaturesResults;
+struct			BluetoothHCIEventReadRemoteSupportedFeaturesResults
+{
+	BluetoothHCIStatus							error;
+	BluetoothConnectionHandle					connectionHandle;
+	BluetoothHCISupportedFeatures				lmpFeatures;
+};
+
 typedef struct	BluetoothHCIEventQoSViolationResults 	BluetoothHCIEventQoSViolationResults;
 struct			BluetoothHCIEventQoSViolationResults
 {

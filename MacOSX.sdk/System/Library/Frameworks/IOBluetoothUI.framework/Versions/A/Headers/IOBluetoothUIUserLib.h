@@ -32,6 +32,7 @@ enum
 {
 	kIOBluetoothServiceBrowserControllerOptionsNone					= (0 << 0L),
 	kIOBluetoothServiceBrowserControllerOptionsAutoStartInquiry		= (1 << 0L),
+    kIOBluetoothServiceBrowserControllerOptionsDisconnectWhenDone	= (2 << 0L)
 };
 
 
@@ -150,4 +151,4 @@ CFArrayRef	IOBluetoothDeviceSelectorRunPanelWithAttributes(IOBluetoothDeviceSele
 #endif
 
 
-IOReturn IOBluetoothValidateHardware( CFStringRef cancelButtonTitle );
+IOReturn IOBluetoothValidateHardware( CFStringRef cancelButtonTitle ) AVAILABLE_BLUETOOTH_VERSION_1_1_AND_LATER;

@@ -19,8 +19,6 @@
 #define kMIDIInputRingBufferSize 		(1 * 1024)
 #define kMIDIOutputRingBufferSize		(1 * 1024) 
 
-#define NOTIFYON 1
-
 enum 
 {
 	kMIDIStreamOut = 0,

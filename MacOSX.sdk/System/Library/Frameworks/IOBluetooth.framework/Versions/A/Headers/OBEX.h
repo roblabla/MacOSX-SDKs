@@ -1321,6 +1321,7 @@ extern CFStringRef	kOBEXHeaderIDKeyUnknownUnicodeText;
 extern CFStringRef	kOBEXHeaderIDKeyUnknownByteSequence;
 extern CFStringRef	kOBEXHeaderIDKeyUnknown1ByteQuantity;
 extern CFStringRef	kOBEXHeaderIDKeyUnknown4ByteQuantity;
+extern CFStringRef	kOBEXHeaderIDKeyUserDefined;
 
 //---------------------------------------------------------------------------------------------------------------------------
 /*!	@function		OBEXGetHeaders
@@ -1390,7 +1391,7 @@ CFDictionaryRef OBEXGetHeaders( const void* inData, size_t inDataSize );
 	
 	// Package up desired headers.
 
-	OBEXAddTypeHeader( CFStringCreateWithCString( NULL, "text/x-vCard", kCFStringEncodingASCII ), dictionary ); 
+	OBEXAddTypeHeader( CFSTR( "text/x-vCard" ), dictionary ); 
 
 	mGetHeadersDataRef = OBEXHeadersToBytes( dictionary );
 
@@ -1568,6 +1569,20 @@ OBEXError OBEXAddConnectionIDHeader(	const void*				inHeaderData,
 										CFMutableDictionaryRef	dictRef );
 
 //---------------------------------------------------------------------------------------------------------------------------
+/*!	@function		OBEXAddApplicationParameterHeader
+	@abstract		Add an bytes representing a connection ID to a dictionary of OBEX headers.
+	@param			inHeaderData		Application parameter data - should be tag/length/value triplets.
+	@param			inHeaderDataLength	Length of application parameter data.		
+	@param			dictRef				dictionary you have allocated to hold the headers. Make sure it's mutable.		
+	@result			Error code, kOBEXSuccess (0) if success.
+	@discussion		Application Request/Response Parameter headers - OBEX Spec, 2.2.11: Byte Sequence
+*/
+
+OBEXError OBEXAddApplicationParameterHeader(	const void*				inHeaderData,
+												uint32_t				inHeaderDataLength,
+												CFMutableDictionaryRef	dictRef );
+
+//---------------------------------------------------------------------------------------------------------------------------
 /*!	@function		OBEXAddByteSequenceHeader
 	@abstract		Add an arbitrary byte sequence header to a dictionary of OBEXheaders.
 	@param			inHeaderData		bytes you want to put in the byte sequence header.			
@@ -1622,6 +1637,20 @@ OBEXError OBEXAddAuthorizationChallengeHeader(	const void*				inHeaderData,
 OBEXError OBEXAddAuthorizationResponseHeader(	const void*				inHeaderData,
 												uint32_t				inHeaderDataLength,
 												CFMutableDictionaryRef	dictRef );
+
+//---------------------------------------------------------------------------------------------------------------------------
+/*!	@function		OBEXAddUserDefinedHeader
+	@abstract		Add a user-defined custom header to a dictionary of OBEXheaders.
+	@param			inHeaderData		bytes you want to put in the user-defined header.			
+	@param			inHeaderDataLength	length of the bytes you want to put in user-defined header.			
+	@param			dictRef			dictionary you have allocated to hold the headers. Make sure it's mutable.		
+	@result			Error code, kOBEXSuccess (0) if success.
+	@discussion		User Defined header - OBEX Spec, 2.2.20: User Defined Headers.
+*/
+
+OBEXError OBEXAddUserDefinedHeader(	const void*				inHeaderData,
+									uint32_t				inHeaderDataLength,
+									CFMutableDictionaryRef	dictRef );
 
 #ifdef	__cplusplus
 	}

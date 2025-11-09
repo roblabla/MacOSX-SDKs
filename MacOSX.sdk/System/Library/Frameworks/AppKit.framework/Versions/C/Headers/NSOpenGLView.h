@@ -1,7 +1,7 @@
 /*
         NSOpenGLView.h
         Application Kit
-        Copyright (c) 2000-2001, Apple Computer, Inc.
+        Copyright (c) 2000-2003, Apple Computer, Inc.
         All rights reserved.
 */
 
@@ -32,4 +32,7 @@
 - (void)setPixelFormat:(NSOpenGLPixelFormat*)pixelFormat;
 - (NSOpenGLPixelFormat*)pixelFormat;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void)prepareOpenGL;
+#endif
 @end

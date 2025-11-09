@@ -37,48 +37,6 @@ typedef function_table_entry 	*function_table_t;
 __BeforeMigServerHeader
 #endif /* __BeforeMigServerHeader */
 
-/* typedefs for all requests */
-
-#ifndef __Request__clock_reply_subsystem__defined
-#define __Request__clock_reply_subsystem__defined
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		kern_return_t alarm_code;
-		alarm_type_t alarm_type;
-		mach_timespec_t alarm_time;
-	} __Request__clock_alarm_reply_t;
-
-#endif /* !__Request__clock_reply_subsystem__defined */
-
-/* union of all requests */
-
-#ifndef __RequestUnion__clock_reply_subsystem__defined
-#define __RequestUnion__clock_reply_subsystem__defined
-union __RequestUnion__clock_reply_subsystem {
-	__Request__clock_alarm_reply_t Request_clock_alarm_reply;
-};
-#endif /* __RequestUnion__clock_reply_subsystem__defined */
-/* typedefs for all replies */
-
-#ifndef __Reply__clock_reply_subsystem__defined
-#define __Reply__clock_reply_subsystem__defined
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		kern_return_t RetCode;
-	} __Reply__clock_alarm_reply_t;
-
-#endif /* !__Reply__clock_reply_subsystem__defined */
-
-/* union of all replies */
-
-#ifndef __ReplyUnion__clock_reply_subsystem__defined
-#define __ReplyUnion__clock_reply_subsystem__defined
-union __ReplyUnion__clock_reply_subsystem {
-	__Reply__clock_alarm_reply_t Reply_clock_alarm_reply;
-};
-#endif /* __RequestUnion__clock_reply_subsystem__defined */
 
 /* SimpleRoutine clock_alarm_reply */
 #ifdef	mig_external
@@ -113,6 +71,50 @@ extern const struct clock_reply_subsystem {
 		routine[1];
 } clock_reply_subsystem;
 
+/* typedefs for all requests */
+
+#ifndef __Request__clock_reply_subsystem__defined
+#define __Request__clock_reply_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t alarm_code;
+		alarm_type_t alarm_type;
+		mach_timespec_t alarm_time;
+	} __Request__clock_alarm_reply_t;
+
+#endif /* !__Request__clock_reply_subsystem__defined */
+
+
+/* union of all requests */
+
+#ifndef __RequestUnion__clock_reply_subsystem__defined
+#define __RequestUnion__clock_reply_subsystem__defined
+union __RequestUnion__clock_reply_subsystem {
+	__Request__clock_alarm_reply_t Request_clock_alarm_reply;
+};
+#endif /* __RequestUnion__clock_reply_subsystem__defined */
+/* typedefs for all replies */
+
+#ifndef __Reply__clock_reply_subsystem__defined
+#define __Reply__clock_reply_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__clock_alarm_reply_t;
+
+#endif /* !__Reply__clock_reply_subsystem__defined */
+
+
+/* union of all replies */
+
+#ifndef __ReplyUnion__clock_reply_subsystem__defined
+#define __ReplyUnion__clock_reply_subsystem__defined
+union __ReplyUnion__clock_reply_subsystem {
+	__Reply__clock_alarm_reply_t Reply_clock_alarm_reply;
+};
+#endif /* __RequestUnion__clock_reply_subsystem__defined */
 
 #ifndef subsystem_to_name_map_clock_reply
 #define subsystem_to_name_map_clock_reply \

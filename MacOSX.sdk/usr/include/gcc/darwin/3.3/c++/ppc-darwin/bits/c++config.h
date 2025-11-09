@@ -107,7 +107,7 @@
 /* #undef _GLIBCPP_USE_C99 */
 
 // Define if code specialized for wchar_t should be used.
-/* #undef _GLIBCPP_USE_WCHAR_T */
+#define _GLIBCPP_USE_WCHAR_T 1
 
 // Define if using setrlimit to limit memory usage during 'make check'.
 #define _GLIBCPP_MEM_LIMITS 1
@@ -145,7 +145,7 @@
 #define _GLIBCPP_HAVE_SIGSETJMP 1
 
 // Define if mbstate_t exists in wchar.h.
-/* #undef _GLIBCPP_HAVE_MBSTATE_T */
+#define _GLIBCPP_HAVE_MBSTATE_T 1
 
 // Define if you have the modff function.
 #define _GLIBCPP_HAVE_MODFF 1
@@ -433,7 +433,7 @@
 /* #undef _GLIBCPP_HAVE_ATANL */
 
 /* Define if you have the btowc function.  */
-/* #undef _GLIBCPP_HAVE_BTOWC */
+#define _GLIBCPP_HAVE_BTOWC 1
 
 /* Define if you have the ceilf function.  */
 #define _GLIBCPP_HAVE_CEILF 1
@@ -478,10 +478,10 @@
 /* #undef _GLIBCPP_HAVE_FABSL */
 
 /* Define if you have the fgetwc function.  */
-/* #undef _GLIBCPP_HAVE_FGETWC */
+#define _GLIBCPP_HAVE_FGETWC 1
 
 /* Define if you have the fgetws function.  */
-/* #undef _GLIBCPP_HAVE_FGETWS */
+#define _GLIBCPP_HAVE_FGETWS 1
 
 /* Define if you have the finite function.  */
 #define _GLIBCPP_HAVE_FINITE 1
@@ -508,10 +508,10 @@
 /* #undef _GLIBCPP_HAVE_FPCLASS */
 
 /* Define if you have the fputwc function.  */
-/* #undef _GLIBCPP_HAVE_FPUTWC */
+#define _GLIBCPP_HAVE_FPUTWC 1
 
 /* Define if you have the fputws function.  */
-/* #undef _GLIBCPP_HAVE_FPUTWS */
+#define _GLIBCPP_HAVE_FPUTWS 1
 
 /* Define if you have the frexpf function.  */
 #define _GLIBCPP_HAVE_FREXPF 1
@@ -520,22 +520,22 @@
 /* #undef _GLIBCPP_HAVE_FREXPL */
 
 /* Define if you have the fwide function.  */
-/* #undef _GLIBCPP_HAVE_FWIDE */
+#define _GLIBCPP_HAVE_FWIDE 1
 
 /* Define if you have the fwprintf function.  */
-/* #undef _GLIBCPP_HAVE_FWPRINTF */
+#define _GLIBCPP_HAVE_FWPRINTF 1
 
 /* Define if you have the fwscanf function.  */
-/* #undef _GLIBCPP_HAVE_FWSCANF */
+#define _GLIBCPP_HAVE_FWSCANF 1
 
 /* Define if you have the getpagesize function.  */
 #define _GLIBCPP_HAVE_GETPAGESIZE 1
 
 /* Define if you have the getwc function.  */
-/* #undef _GLIBCPP_HAVE_GETWC */
+#define _GLIBCPP_HAVE_GETWC 1
 
 /* Define if you have the getwchar function.  */
-/* #undef _GLIBCPP_HAVE_GETWCHAR */
+#define _GLIBCPP_HAVE_GETWCHAR 1
 
 /* Define if you have the hypot function.  */
 #define _GLIBCPP_HAVE_HYPOT 1
@@ -595,16 +595,16 @@
 /* #undef _GLIBCPP_HAVE_LOGL */
 
 /* Define if you have the mbrlen function.  */
-/* #undef _GLIBCPP_HAVE_MBRLEN */
+#define _GLIBCPP_HAVE_MBRLEN 1
 
 /* Define if you have the mbrtowc function.  */
-/* #undef _GLIBCPP_HAVE_MBRTOWC */
+#define _GLIBCPP_HAVE_MBRTOWC 1
 
 /* Define if you have the mbsinit function.  */
-/* #undef _GLIBCPP_HAVE_MBSINIT */
+#define _GLIBCPP_HAVE_MBSINIT 1
 
 /* Define if you have the mbsrtowcs function.  */
-/* #undef _GLIBCPP_HAVE_MBSRTOWCS */
+#define _GLIBCPP_HAVE_MBSRTOWCS 1
 
 /* Define if you have the modff function.  */
 #define _GLIBCPP_HAVE_MODFF 1
@@ -616,7 +616,7 @@
 #define _GLIBCPP_HAVE_NAN 1
 
 /* Define if you have the nl_langinfo function.  */
-/* #undef _GLIBCPP_HAVE_NL_LANGINFO */
+#define _GLIBCPP_HAVE_NL_LANGINFO 1
 
 /* Define if you have the powf function.  */
 /* #undef _GLIBCPP_HAVE_POWF */
@@ -625,10 +625,10 @@
 /* #undef _GLIBCPP_HAVE_POWL */
 
 /* Define if you have the putwc function.  */
-/* #undef _GLIBCPP_HAVE_PUTWC */
+#define _GLIBCPP_HAVE_PUTWC 1
 
 /* Define if you have the putwchar function.  */
-/* #undef _GLIBCPP_HAVE_PUTWCHAR */
+#define _GLIBCPP_HAVE_PUTWCHAR 1
 
 /* Define if you have the qfpclass function.  */
 /* #undef _GLIBCPP_HAVE_QFPCLASS */
@@ -664,16 +664,16 @@
 /* #undef _GLIBCPP_HAVE_SQRTL */
 
 /* Define if you have the strtof function.  */
-/* #undef _GLIBCPP_HAVE_STRTOF */
+#define _GLIBCPP_HAVE_STRTOF 1
 
 /* Define if you have the strtold function.  */
-/* #undef _GLIBCPP_HAVE_STRTOLD */
+#define _GLIBCPP_HAVE_STRTOLD 1
 
 /* Define if you have the swprintf function.  */
-/* #undef _GLIBCPP_HAVE_SWPRINTF */
+#define _GLIBCPP_HAVE_SWPRINTF 1
 
 /* Define if you have the swscanf function.  */
-/* #undef _GLIBCPP_HAVE_SWSCANF */
+#define _GLIBCPP_HAVE_SWSCANF 1
 
 /* Define if you have the tanf function.  */
 /* #undef _GLIBCPP_HAVE_TANF */
@@ -688,118 +688,118 @@
 /* #undef _GLIBCPP_HAVE_TANL */
 
 /* Define if you have the ungetwc function.  */
-/* #undef _GLIBCPP_HAVE_UNGETWC */
+#define _GLIBCPP_HAVE_UNGETWC 1
 
 /* Define if you have the vfwprintf function.  */
-/* #undef _GLIBCPP_HAVE_VFWPRINTF */
+#define _GLIBCPP_HAVE_VFWPRINTF 1
 
 /* Define if you have the vfwscanf function.  */
-/* #undef _GLIBCPP_HAVE_VFWSCANF */
+#define _GLIBCPP_HAVE_VFWSCANF 1
 
 /* Define if you have the vswprintf function.  */
-/* #undef _GLIBCPP_HAVE_VSWPRINTF */
+#define _GLIBCPP_HAVE_VSWPRINTF 1
 
 /* Define if you have the vswscanf function.  */
-/* #undef _GLIBCPP_HAVE_VSWSCANF */
+#define _GLIBCPP_HAVE_VSWSCANF 1
 
 /* Define if you have the vwprintf function.  */
-/* #undef _GLIBCPP_HAVE_VWPRINTF */
+#define _GLIBCPP_HAVE_VWPRINTF 1
 
 /* Define if you have the vwscanf function.  */
-/* #undef _GLIBCPP_HAVE_VWSCANF */
+#define _GLIBCPP_HAVE_VWSCANF 1
 
 /* Define if you have the wcrtomb function.  */
-/* #undef _GLIBCPP_HAVE_WCRTOMB */
+#define _GLIBCPP_HAVE_WCRTOMB 1
 
 /* Define if you have the wcscat function.  */
-/* #undef _GLIBCPP_HAVE_WCSCAT */
+#define _GLIBCPP_HAVE_WCSCAT 1
 
 /* Define if you have the wcschr function.  */
-/* #undef _GLIBCPP_HAVE_WCSCHR */
+#define _GLIBCPP_HAVE_WCSCHR 1
 
 /* Define if you have the wcscmp function.  */
-/* #undef _GLIBCPP_HAVE_WCSCMP */
+#define _GLIBCPP_HAVE_WCSCMP 1
 
 /* Define if you have the wcscoll function.  */
-/* #undef _GLIBCPP_HAVE_WCSCOLL */
+#define _GLIBCPP_HAVE_WCSCOLL 1
 
 /* Define if you have the wcscpy function.  */
-/* #undef _GLIBCPP_HAVE_WCSCPY */
+#define _GLIBCPP_HAVE_WCSCPY 1
 
 /* Define if you have the wcscspn function.  */
-/* #undef _GLIBCPP_HAVE_WCSCSPN */
+#define _GLIBCPP_HAVE_WCSCSPN 1
 
 /* Define if you have the wcsftime function.  */
-/* #undef _GLIBCPP_HAVE_WCSFTIME */
+#define _GLIBCPP_HAVE_WCSFTIME 1
 
 /* Define if you have the wcslen function.  */
-/* #undef _GLIBCPP_HAVE_WCSLEN */
+#define _GLIBCPP_HAVE_WCSLEN 1
 
 /* Define if you have the wcsncat function.  */
-/* #undef _GLIBCPP_HAVE_WCSNCAT */
+#define _GLIBCPP_HAVE_WCSNCAT 1
 
 /* Define if you have the wcsncmp function.  */
-/* #undef _GLIBCPP_HAVE_WCSNCMP */
+#define _GLIBCPP_HAVE_WCSNCMP 1
 
 /* Define if you have the wcsncpy function.  */
-/* #undef _GLIBCPP_HAVE_WCSNCPY */
+#define _GLIBCPP_HAVE_WCSNCPY 1
 
 /* Define if you have the wcspbrk function.  */
-/* #undef _GLIBCPP_HAVE_WCSPBRK */
+#define _GLIBCPP_HAVE_WCSPBRK 1
 
 /* Define if you have the wcsrchr function.  */
-/* #undef _GLIBCPP_HAVE_WCSRCHR */
+#define _GLIBCPP_HAVE_WCSRCHR 1
 
 /* Define if you have the wcsrtombs function.  */
-/* #undef _GLIBCPP_HAVE_WCSRTOMBS */
+#define _GLIBCPP_HAVE_WCSRTOMBS 1
 
 /* Define if you have the wcsspn function.  */
-/* #undef _GLIBCPP_HAVE_WCSSPN */
+#define _GLIBCPP_HAVE_WCSSPN 1
 
 /* Define if you have the wcsstr function.  */
-/* #undef _GLIBCPP_HAVE_WCSSTR */
+#define _GLIBCPP_HAVE_WCSSTR 1
 
 /* Define if you have the wcstod function.  */
-/* #undef _GLIBCPP_HAVE_WCSTOD */
+#define _GLIBCPP_HAVE_WCSTOD 1
 
 /* Define if you have the wcstof function.  */
-/* #undef _GLIBCPP_HAVE_WCSTOF */
+#define _GLIBCPP_HAVE_WCSTOF 1
 
 /* Define if you have the wcstok function.  */
-/* #undef _GLIBCPP_HAVE_WCSTOK */
+#define _GLIBCPP_HAVE_WCSTOK 1
 
 /* Define if you have the wcstol function.  */
-/* #undef _GLIBCPP_HAVE_WCSTOL */
+#define _GLIBCPP_HAVE_WCSTOL 1
 
 /* Define if you have the wcstoul function.  */
-/* #undef _GLIBCPP_HAVE_WCSTOUL */
+#define _GLIBCPP_HAVE_WCSTOUL 1
 
 /* Define if you have the wcsxfrm function.  */
-/* #undef _GLIBCPP_HAVE_WCSXFRM */
+#define _GLIBCPP_HAVE_WCSXFRM 1
 
 /* Define if you have the wctob function.  */
-/* #undef _GLIBCPP_HAVE_WCTOB */
+#define _GLIBCPP_HAVE_WCTOB 1
 
 /* Define if you have the wmemchr function.  */
-/* #undef _GLIBCPP_HAVE_WMEMCHR */
+#define _GLIBCPP_HAVE_WMEMCHR 1
 
 /* Define if you have the wmemcmp function.  */
-/* #undef _GLIBCPP_HAVE_WMEMCMP */
+#define _GLIBCPP_HAVE_WMEMCMP 1
 
 /* Define if you have the wmemcpy function.  */
-/* #undef _GLIBCPP_HAVE_WMEMCPY */
+#define _GLIBCPP_HAVE_WMEMCPY 1
 
 /* Define if you have the wmemmove function.  */
-/* #undef _GLIBCPP_HAVE_WMEMMOVE */
+#define _GLIBCPP_HAVE_WMEMMOVE 1
 
 /* Define if you have the wmemset function.  */
-/* #undef _GLIBCPP_HAVE_WMEMSET */
+#define _GLIBCPP_HAVE_WMEMSET 1
 
 /* Define if you have the wprintf function.  */
-/* #undef _GLIBCPP_HAVE_WPRINTF */
+#define _GLIBCPP_HAVE_WPRINTF 1
 
 /* Define if you have the wscanf function.  */
-/* #undef _GLIBCPP_HAVE_WSCANF */
+#define _GLIBCPP_HAVE_WSCANF 1
 
 /* Define if you have the <endian.h> header file.  */
 /* #undef _GLIBCPP_HAVE_ENDIAN_H */
@@ -859,10 +859,10 @@
 #define _GLIBCPP_HAVE_UNISTD_H 1
 
 /* Define if you have the <wchar.h> header file.  */
-/* #undef _GLIBCPP_HAVE_WCHAR_H */
+#define _GLIBCPP_HAVE_WCHAR_H 1
 
 /* Define if you have the <wctype.h> header file.  */
-/* #undef _GLIBCPP_HAVE_WCTYPE_H */
+#define _GLIBCPP_HAVE_WCTYPE_H 1
 
 /* Define if you have the m library (-lm).  */
 #define _GLIBCPP_HAVE_LIBM 1

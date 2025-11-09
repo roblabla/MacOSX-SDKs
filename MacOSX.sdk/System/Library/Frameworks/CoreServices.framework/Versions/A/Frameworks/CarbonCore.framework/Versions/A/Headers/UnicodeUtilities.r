@@ -3,9 +3,9 @@
  
      Contains:   Types, constants, prototypes for Unicode Utilities (Unicode input and text utils)
  
-     Version:    CarbonCore-472~1
+     Version:    CarbonCore-545~1
  
-     Copyright:  © 1997-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1997-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -65,6 +65,7 @@
 #define kUCTextBreakClusterMask 		0x00000004
 #define kUCTextBreakWordMask 			0x00000010
 #define kUCTextBreakLineMask 			0x00000040
+#define kUCTextBreakParagraphMask 		0x00000100
 
 #define kUCTextBreakLeadingEdgeMask 	0x00000001
 #define kUCTextBreakGoBackwardsMask 	0x00000002

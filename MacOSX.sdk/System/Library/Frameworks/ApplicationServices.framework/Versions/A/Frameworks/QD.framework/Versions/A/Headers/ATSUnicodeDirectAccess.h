@@ -3,9 +3,9 @@
  
      Contains:   Public Interfaces/Types for Low Level ATSUI
  
-     Version:    Quickdraw-96.21~1
+     Version:    Quickdraw-150~1
  
-     Copyright:  © 2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2002-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -16,11 +16,14 @@
 #ifndef __ATSUNICODEDIRECTACCESS__
 #define __ATSUNICODEDIRECTACCESS__
 
-#ifndef __ATSUNICODE__
-#include <QD/ATSUnicode.h>
+#ifndef __ATSUNICODETYPES__
+#include <QD/ATSUnicodeTypes.h>
 #endif
 
 
+/* ---------------------------------------------------------------------------- */
+/* Constants                                                                    */
+/* ---------------------------------------------------------------------------- */
 
 #include <AvailabilityMacros.h>
 
@@ -32,9 +35,6 @@
 extern "C" {
 #endif
 
-/* ---------------------------------------------------------------------------- */
-/* Constants                                                                    */
-/* ---------------------------------------------------------------------------- */
 
 /*
  *  ATSUDirectDataSelector
@@ -149,7 +149,7 @@ enum {
  *    A reference to a style setting object that represents an
  *    ATSUStyle plus any cached/set information about that style.
  */
-typedef struct ATSStyleSetting*         ATSUStyleSettingRef;
+typedef struct LLCStyleInfo*            ATSUStyleSettingRef;
 /* ---------------------------------------------------------------------------- */
 /* Direct Accessors                                                             */
 /* ---------------------------------------------------------------------------- */
@@ -402,7 +402,6 @@ ATSUDirectAddStyleSettingRef(
   ATSULineRef           iLineRef,
   ATSUStyleSettingRef   iStyleSettingRef,
   UInt16 *              oStyleIndex)                          AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
-
 
 
 

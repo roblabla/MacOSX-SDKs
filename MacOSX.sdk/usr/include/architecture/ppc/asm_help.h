@@ -381,7 +381,7 @@ name:
 
 #define PICIFY(var)				\
 	mflr	r0				@\
-	bl	1f				@\
+	bcl	20,31,1f			@\
 1:	mflr	PICIFY_REG			@\
 	mtlr	r0				@\
 	addis	PICIFY_REG, PICIFY_REG, ha16(L ## var ## $non_lazy_ptr - 1b) @\

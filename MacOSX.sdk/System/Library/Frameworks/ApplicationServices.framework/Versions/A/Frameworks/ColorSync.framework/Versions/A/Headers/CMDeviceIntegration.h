@@ -3,9 +3,9 @@
  
      Contains:   Color Management Device Interfaces
  
-     Version:    ColorSync-98.1~196
+     Version:    ColorSync-118.2~1
  
-     Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -128,25 +128,24 @@ enum {
 
 
 /*
-    Clients can register for notifications of device evolutions:
-   
-   DeviceRegistered                A new device was registered
-    DeviceUnregistered              A device was unregistered
-  DeviceOnline                    Change to Online as a result of CMSetDeviceState
-   DeviceOffline                   Change to Offline as a result of CMSetDeviceState
-  DeviceState                     Any change to a device state
-   DefaultDevice                   A default device for any device class changed
-  DeviceProfiles                  Any change to any device's profiles
-    DefaultDeviceProfile            The default profile for any device changed
+   Clients can register for notifications of device changes:
+      DeviceRegistered      a new device was registered
+      DeviceUnregistered    a device was unregistered
+      DeviceOnline          change to Online as a result of CMSetDeviceState
+      DeviceOffline         change to Offline as a result of CMSetDeviceState
+      DeviceState           other change to a device state
+      DefaultDevice         default device for a device class changed
+      DeviceProfiles        change to a device's profiles
+      DefaultDeviceProfile  The default profile for any device changed
 */
-#define   kCMDeviceRegisteredNotification     CFSTR("CMDeviceRegisteredNotification")
+#define kCMDeviceRegisteredNotification     CFSTR("CMDeviceRegisteredNotification")
 #define kCMDeviceUnregisteredNotification   CFSTR("CMDeviceUnregisteredNotification")
-#define   kCMDeviceOnlineNotification         CFSTR("CMDeviceOnlineNotification")
+#define kCMDeviceOnlineNotification         CFSTR("CMDeviceOnlineNotification")
 #define kCMDeviceOfflineNotification        CFSTR("CMDeviceOfflineNotification")
-#define    kCMDeviceStateNotification          CFSTR("CMDeviceStateNotification")
-#define  kCMDefaultDeviceNotification        CFSTR("CMDefaultDeviceNotification")
-#define    kCMDeviceProfilesNotification       CFSTR("CMDeviceProfilesNotification")
-#define   kCMDefaultDeviceProfileNotification CFSTR("CMDefaultDeviceProfileNotification")
+#define kCMDeviceStateNotification          CFSTR("CMDeviceStateNotification")
+#define kCMDefaultDeviceNotification        CFSTR("CMDefaultDeviceNotification")
+#define kCMDeviceProfilesNotification       CFSTR("CMDeviceProfilesNotification")
+#define kCMDefaultDeviceProfileNotification CFSTR("CMDefaultDeviceProfileNotification")
 
 /*
     Device state data.
@@ -242,8 +241,32 @@ typedef CALLBACK_API_C( OSErr , CMIterateDeviceProfileProcPtr )(const CMDeviceIn
 /*
  *  CMRegisterColorDevice()
  *  
+ *  Summary:
+ *    Registers a device with ColorSync
+ *  
+ *  Discussion:
+ *    For a device to be recognized by ColorSync it needs to register
+ *    itself via this API.  After calling this API, the
+ *    CMSetDeviceFactoryProfiles API should be called to specify the
+ *    initial modes and profiles for the device. Registration need only
+ *    happen once, when the device is installed.
+ *  
+ *  Parameters:
+ *    
+ *    deviceClass:
+ *      (in) Device class to add
+ *    
+ *    deviceID:
+ *      (in) Device id to add
+ *    
+ *    deviceName:
+ *      (in) Dictionary containing localized names
+ *    
+ *    deviceScope:
+ *      (in) Scope where information should be stored
+ *  
  *  Availability:
- *    Mac OS X:         in 3.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -258,8 +281,27 @@ CMRegisterColorDevice(
 /*
  *  CMUnregisterColorDevice()
  *  
+ *  Summary:
+ *    Unregisters a device with ColorSync
+ *  
+ *  Discussion:
+ *    When a device is no longer to be used on a system (as opposed to
+ *    just being offline), it should be unregistered. If a device is
+ *    temporariy shut down or disconnected it need not be unregistered
+ *    unless the device driver knows that it will not be used (e.g.
+ *    being deinstalled) or cannot access the device profiles without
+ *    the device.
+ *  
+ *  Parameters:
+ *    
+ *    deviceClass:
+ *      (in) Device class to remove
+ *    
+ *    deviceID:
+ *      (in) Device id to remove
+ *  
  *  Availability:
- *    Mac OS X:         in 3.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -275,8 +317,19 @@ CMUnregisterColorDevice(
 /*
  *  CMSetDefaultDevice()
  *  
+ *  Summary:
+ *    Specifeis the default device of a class
+ *  
+ *  Parameters:
+ *    
+ *    deviceClass:
+ *      (in) Device class to modify
+ *    
+ *    deviceID:
+ *      (in) Device id to make default
+ *  
  *  Availability:
- *    Mac OS X:         in 3.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -289,8 +342,19 @@ CMSetDefaultDevice(
 /*
  *  CMGetDefaultDevice()
  *  
+ *  Summary:
+ *    Returns the default device of a class
+ *  
+ *  Parameters:
+ *    
+ *    deviceClass:
+ *      (in) Device class to query
+ *    
+ *    deviceID:
+ *      (out) Returns default device for class
+ *  
  *  Availability:
- *    Mac OS X:         in 3.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -306,8 +370,30 @@ CMGetDefaultDevice(
 /*
  *  CMSetDeviceFactoryProfiles()
  *  
+ *  Summary:
+ *    Registers a device's factory profiles with ColorSync
+ *  
+ *  Discussion:
+ *    This API establishes the profiles used by a particular device for
+ *    it's various modes. It is meant to be called once, right after
+ *    device registration to notify ColorSync of the device's profiles.
+ *  
+ *  Parameters:
+ *    
+ *    deviceClass:
+ *      (in) Device class to modify
+ *    
+ *    deviceID:
+ *      (in) Device id to modify
+ *    
+ *    defaultProfID:
+ *      (in) The id of the default profile
+ *    
+ *    deviceProfiles:
+ *      (in) List of profile IDs, names, and locations
+ *  
  *  Availability:
- *    Mac OS X:         in 3.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -322,8 +408,35 @@ CMSetDeviceFactoryProfiles(
 /*
  *  CMGetDeviceFactoryProfiles()
  *  
+ *  Summary:
+ *    Returns all the device's factory profiles
+ *  
+ *  Discussion:
+ *    This API allows the caller to retrieve the original profiles for
+ *    a device. These may differ from the profiles currently in use for
+ *    that device in the case where factory profiles have been
+ *    overriden with custom profiles.
+ *  
+ *  Parameters:
+ *    
+ *    deviceClass:
+ *      (in) Device class to query
+ *    
+ *    deviceID:
+ *      (in) Device id to query (can be cmDefaultDeviceID)
+ *    
+ *    defaultProfID:
+ *      (out) Returns id of default mode (optional)
+ *    
+ *    arraySize:
+ *      (in/out) Size of buffer passed in / Returns size of array in
+ *      bytes
+ *    
+ *    deviceProfiles:
+ *      (out) Returns list of profile IDs, names, and locations
+ *  
  *  Availability:
- *    Mac OS X:         in 3.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -331,7 +444,7 @@ extern CMError
 CMGetDeviceFactoryProfiles(
   CMDeviceClass           deviceClass,
   CMDeviceID              deviceID,
-  CMDeviceProfileID *     defaultProfID,
+  CMDeviceProfileID *     defaultProfID,        /* can be NULL */
   UInt32 *                arraySize,
   CMDeviceProfileArray *  deviceProfiles)                     AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
@@ -339,8 +452,33 @@ CMGetDeviceFactoryProfiles(
 /*
  *  CMSetDeviceProfiles()
  *  
+ *  Summary:
+ *    Specifies custom overide profiles for a device
+ *  
+ *  Discussion:
+ *    This API provides a way to overide the factory profiles of a
+ *    device for a particular mode or modes. To set custom profiles,
+ *    the profileScope and deviceProfiles params must be valid. To
+ *    remove all custom profiles of a device, pass in nil for the
+ *    profileScope and deviceProfiles parameters.
+ *  
+ *  Parameters:
+ *    
+ *    deviceClass:
+ *      (in) Device class to change
+ *    
+ *    deviceID:
+ *      (in) Device id to change (can be cmDefaultDeviceID)
+ *    
+ *    profileScope:
+ *      (in) Scope where information should be stored (or nil to remove
+ *      all)
+ *    
+ *    deviceProfiles:
+ *      (in) Profiles to set (or nil to remove all)
+ *  
  *  Availability:
- *    Mac OS X:         in 3.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -348,15 +486,37 @@ extern CMError
 CMSetDeviceProfiles(
   CMDeviceClass                 deviceClass,
   CMDeviceID                    deviceID,
-  const CMDeviceProfileScope *  profileScope,
-  const CMDeviceProfileArray *  deviceProfiles)               AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  const CMDeviceProfileScope *  profileScope,         /* can be NULL */
+  const CMDeviceProfileArray *  deviceProfiles)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
  *  CMGetDeviceProfiles()
  *  
+ *  Summary:
+ *    Returns all the device's current profiles
+ *  
+ *  Discussion:
+ *    This API allows the caller to retrieve the current profiles for a
+ *    device.
+ *  
+ *  Parameters:
+ *    
+ *    deviceClass:
+ *      (in) Device class to query
+ *    
+ *    deviceID:
+ *      (in) Device id to query (can be cmDefaultDeviceID)
+ *    
+ *    arraySize:
+ *      (in/out) Size of buffer passed in / Returns size of array in
+ *      bytes
+ *    
+ *    deviceProfiles:
+ *      (out) Returns list of profile IDs, names, and locations
+ *  
  *  Availability:
- *    Mac OS X:         in 3.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -371,8 +531,27 @@ CMGetDeviceProfiles(
 /*
  *  CMSetDeviceDefaultProfileID()
  *  
+ *  Summary:
+ *    Specifies a device's default profile mode
+ *  
+ *  Discussion:
+ *    This API allows the caller to change the default profile ID for a
+ *    device. The initial default is established when
+ *    CMSetDeviceFactoryProfiles is called.
+ *  
+ *  Parameters:
+ *    
+ *    deviceClass:
+ *      (in) Device class to modify
+ *    
+ *    deviceID:
+ *      (in) Device id to modify (can be cmDefaultDeviceID)
+ *    
+ *    defaultProfID:
+ *      (in) New device default
+ *  
  *  Availability:
- *    Mac OS X:         in 3.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -386,8 +565,22 @@ CMSetDeviceDefaultProfileID(
 /*
  *  CMGetDeviceDefaultProfileID()
  *  
+ *  Summary:
+ *    Returns the default profile ID for a device
+ *  
+ *  Parameters:
+ *    
+ *    deviceClass:
+ *      (in) Device class to query
+ *    
+ *    deviceID:
+ *      (in) Device id to query (can be cmDefaultDeviceID)
+ *    
+ *    defaultProfID:
+ *      (out) Returns id of default profile
+ *  
  *  Availability:
- *    Mac OS X:         in 3.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -399,26 +592,36 @@ CMGetDeviceDefaultProfileID(
 
 
 /*
- *  CMGetDeviceProfile()
- *  
- *  Availability:
- *    Mac OS X:         in 3.1 and later in ApplicationServices.framework
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-extern CMError 
-CMGetDeviceProfile(
-  CMDeviceClass        deviceClass,
-  CMDeviceID           deviceID,
-  CMDeviceProfileID    profileID,
-  CMProfileLocation *  deviceProfLoc)                         AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
-
-
-/*
  *  CMSetDeviceProfile()
  *  
+ *  Summary:
+ *    Specifies a custom overide profile for a device
+ *  
+ *  Discussion:
+ *    This API provides a way to change one of the profiles used by a
+ *    device for a particular mode. It can be called after device
+ *    registration by calibration applications to reset a device's
+ *    profile from its factory default to a custom calibrated profile.
+ *  
+ *  Parameters:
+ *    
+ *    deviceClass:
+ *      (in) Device class to modify
+ *    
+ *    deviceID:
+ *      (in) Device id to modify (can be cmDefaultDeviceID)
+ *    
+ *    profileScope:
+ *      (in) Scope where information should be stored
+ *    
+ *    profileID:
+ *      (in) Profile id to modify (can be cmDefaultProfileID)
+ *    
+ *    profileLoc:
+ *      (in) New profile location
+ *  
  *  Availability:
- *    Mac OS X:         in 3.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -428,7 +631,41 @@ CMSetDeviceProfile(
   CMDeviceID                    deviceID,
   const CMDeviceProfileScope *  profileScope,
   CMDeviceProfileID             profileID,
-  const CMProfileLocation *     deviceProfLoc)                AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  const CMProfileLocation *     profileLoc)                   AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
+
+/*
+ *  CMGetDeviceProfile()
+ *  
+ *  Summary:
+ *    Returns the location of the current profile for a given device
+ *    class, device ID, and profile ID
+ *  
+ *  Parameters:
+ *    
+ *    deviceClass:
+ *      (in) Device class to query
+ *    
+ *    deviceID:
+ *      (in) Device id to query (can be cmDefaultDeviceID)
+ *    
+ *    profileID:
+ *      (in) Profile id to query (can be cmDefaultDeviceID)
+ *    
+ *    profileLoc:
+ *      (out) Returns profile location
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CMError 
+CMGetDeviceProfile(
+  CMDeviceClass        deviceClass,
+  CMDeviceID           deviceID,
+  CMDeviceProfileID    profileID,
+  CMProfileLocation *  profileLoc)                            AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
@@ -437,8 +674,28 @@ CMSetDeviceProfile(
 /*
  *  CMSetDeviceState()
  *  
+ *  Summary:
+ *    Specifies the state of a device
+ *  
+ *  Discussion:
+ *    This API provides access for the device management layer to
+ *    update the state of a particular device. For example, a device
+ *    can be offline, busy, calibrated, etc. The state data passed in
+ *    replaces the old state data with the new value.
+ *  
+ *  Parameters:
+ *    
+ *    deviceClass:
+ *      (in) Device class to modify
+ *    
+ *    deviceID:
+ *      (in) Device id to modify (can be cmDefaultDeviceID)
+ *    
+ *    deviceState:
+ *      (in) New device state
+ *  
  *  Availability:
- *    Mac OS X:         in 3.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -452,8 +709,22 @@ CMSetDeviceState(
 /*
  *  CMGetDeviceState()
  *  
+ *  Summary:
+ *    Returns the state of a device.
+ *  
+ *  Parameters:
+ *    
+ *    deviceClass:
+ *      (in) Device class to query
+ *    
+ *    deviceID:
+ *      (in) Device id to query (can be cmDefaultDeviceID)
+ *    
+ *    deviceState:
+ *      (out) Returns device state
+ *  
  *  Availability:
- *    Mac OS X:         in 3.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -467,8 +738,31 @@ CMGetDeviceState(
 /*
  *  CMGetDeviceInfo()
  *  
+ *  Summary:
+ *    Returns information about a device.
+ *  
+ *  Discussion:
+ *    This API returns information about a registered device. If, on
+ *    input, deviceInfo->deviceName is nil then the name is not
+ *    returned. If the caller wants the device name dictionary
+ *    returned, then the caller should provide in
+ *    deviceInfo->deviceName the address where this API should store
+ *    the CFDictionaryRef. The caller is responsible for disposing of
+ *    the name dictionary.
+ *  
+ *  Parameters:
+ *    
+ *    deviceClass:
+ *      (in) Device class to query
+ *    
+ *    deviceID:
+ *      (in) Device id to query (can be cmDefaultDeviceID)
+ *    
+ *    deviceInfo:
+ *      (in/out) Returns device information
+ *  
  *  Availability:
- *    Mac OS X:         in 3.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -485,34 +779,93 @@ CMGetDeviceInfo(
 /*
  *  CMIterateColorDevices()
  *  
+ *  Summary:
+ *    Returns information about all devices to a callback procedure.
+ *  
+ *  Discussion:
+ *    This API allows the caller to get device information about all
+ *    registered color devices.  If provided, the supplied proceedure
+ *    will be called once for each registered device, passing in the
+ *    device info and the supplied refcon. If the caller passes in a
+ *    pointer to a seed value that is the same as the current seed
+ *    value, then the callback proc is not called.
+ *  
+ *  Parameters:
+ *    
+ *    proc:
+ *      (in) Client callback proc (optional)
+ *    
+ *    seed:
+ *      (in/out) seed value (optional)
+ *    
+ *    count:
+ *      (out) Returns count of devices (optional)
+ *    
+ *    refCon:
+ *      (in) Passed to callback proc (optional)
+ *  
  *  Availability:
- *    Mac OS X:         in 3.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern CMError 
 CMIterateColorDevices(
   CMIterateDeviceInfoProcPtr   proc,
-  UInt32 *                     seed,
-  UInt32 *                     count,
-  void *                       refCon)                        AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  UInt32 *                     seed,         /* can be NULL */
+  UInt32 *                     count,        /* can be NULL */
+  void *                       refCon)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 /*
  *  CMIterateDeviceProfiles()
  *  
+ *  Summary:
+ *    Returns information about profiles of all devices to a callback
+ *    procedure.
+ *  
+ *  Discussion:
+ *    This API allows the caller to get device information about
+ *    profiles of all registered color devices.  If provided, the
+ *    supplied proceedure will be called once for each registered
+ *    device, passing in the device info, the profile info and the
+ *    supplied refcon. If the caller passes in a pointer to a seed
+ *    value that is the same as the current seed value, then the
+ *    callback proc is not called.
+ *  
+ *  Parameters:
+ *    
+ *    proc:
+ *      (in) Client callback proc (optional)
+ *    
+ *    seed:
+ *      (in/out) seed value (optional)
+ *    
+ *    count:
+ *      (out) Returns count of devices (optional)
+ *    
+ *    flags:
+ *      (in) Options for which set of profiles are to be iterated. It
+ *      can have the following possible values:
+ *      cmIterateFactoryDeviceProfiles, cmIterateCustomDeviceProfiles,
+ *      cmIterateCurrentDeviceProfiles, cmIterateAllDeviceProfiles or
+ *      0. The flag value 0 behaves like cmIterateCurrentDeviceProfiles.
+ *    
+ *    refCon:
+ *      (in) Passed to callback proc (optional)
+ *  
  *  Availability:
- *    Mac OS X:         in 3.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
 extern CMError 
 CMIterateDeviceProfiles(
   CMIterateDeviceProfileProcPtr   proc,
-  UInt32 *                        seed,
-  UInt32 *                        count,
+  UInt32 *                        seed,         /* can be NULL */
+  UInt32 *                        count,        /* can be NULL */
   UInt32                          flags,
-  void *                          refCon)                     AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+  void *                          refCon)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
 
 
 

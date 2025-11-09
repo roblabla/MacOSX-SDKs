@@ -125,12 +125,16 @@
 
 - (IOReturn)getServiceRecordHandle:(BluetoothSDPServiceRecordHandle *)outServiceRecordHandle;
 
+#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_1
+
 /*!
     @method matchesUUIDArray:
     @abstract Returns TRUE if ALL of the UUIDs in the given array is found in the target service.
     @discussion The given array should contain IOBluetoothSDPUUID objects.  It only returns TRUE if all of
                 the UUIDs are found.  This method is like hasServiceFromArray: except that it requires that
                 all UUIDs match instead of any of them matching.
+
+				NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later.
     @param array An NSArray of IOBluetoothSDPUUID objects to search for in the target service.	 
     @result Returns TRUE if all of the given UUIDs are present in the service.
 */
@@ -144,10 +148,14 @@
                 If any of those returns TRUE, then the search stops and TRUE is returned.
                 Essentially the master NSArray contains the OR operations and each sub-array contains
                 the AND operations.
+
+				NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later.
     @param array An NSArray of NSArrays of IOBluetoothSDPUUID objects.	 
     @result Returns TRUE if any of the UUID arrays match.
 */
 - (BOOL)matchesSearchArray:(NSArray *)searchArray;
+
+#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_1 */
 
 /*!
     @method hasServiceFromArray:

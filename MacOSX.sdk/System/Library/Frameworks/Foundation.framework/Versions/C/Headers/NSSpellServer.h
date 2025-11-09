@@ -1,5 +1,5 @@
 /*	NSSpellServer.h
-	Copyright 1990-2002, Apple, Inc. All rights reserved.
+	Copyright (c) 1990-2003, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -55,7 +55,7 @@ Executable: franglais.daemon
 @end
 
 /*
-This is the protocol the object in the server that does the real work must respond to.  The first method checks spelling and the second suggests proper corrections.  The third and fourth allow the delegate to be notified when new words are learned or forgotten.  Only the first method is required.
+These are the methods the object in the server that does the real work should respond to.  Only the first method is required.  The first method checks spelling and the second suggests proper corrections.  The third and fourth allow the delegate to be notified when new words are learned or forgotten.  The fifth suggests potential completions, in the order in which they should be presented to the user.  The elements of the suggested completions array should be complete words that the user might be trying to type when starting by typing the partial word at the given range in the given string.
 
 The argument wordCount is an out parameter.  It should return the number of words found in the document from startPosition until the misspelled word was found (or the end of the stream)  If your spell server can't count words (though it is hard to imagine why that might be), return -1 in wordCount.  countOnly of Yes means forget about checking the spelling of words, just count them until you get to the end of the stream.
 */
@@ -69,5 +69,9 @@ The argument wordCount is an out parameter.  It should return the number of word
 - (void)spellServer:(NSSpellServer *)sender didLearnWord:(NSString *)word inLanguage:(NSString *)language;
 
 - (void)spellServer:(NSSpellServer *)sender didForgetWord:(NSString *)word inLanguage:(NSString *)language;
+
+#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED 
+- (NSArray *)spellServer:(NSSpellServer *)sender suggestCompletionsForPartialWordRange:(NSRange)range inString:(NSString *)string language:(NSString *)language;
+#endif
 
 @end

@@ -1,11 +1,12 @@
 /*
         NSStatusItem.h
         Application Kit
-        Copyright (c) 1997-2001, Apple Computer, Inc.
+        Copyright (c) 1997-2003, Apple Computer, Inc.
         All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSGeometry.h>
 
 @class NSAttributedString;
 @class NSImage;
@@ -18,7 +19,8 @@
 typedef struct {
     unsigned int customView:1;
     unsigned int highlightMode:1;
-    unsigned int reserved:30;
+    unsigned int hasAlternateImage:1;
+    unsigned int reserved:29;
 } _SBIFlags;
 
 
@@ -61,6 +63,11 @@ typedef struct {
 - (NSImage*) image;
 - (void) setImage:(NSImage*)image;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (NSImage *)alternateImage;
+- (void)setAlternateImage:(NSImage*)image;
+#endif
+
 - (NSMenu*) menu;
 - (void) setMenu:(NSMenu*)menu;
 
@@ -75,6 +82,11 @@ typedef struct {
 
 - (void) sendActionOn:(int)mask;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void) popUpStatusItemMenu:(NSMenu*)menu;
+- (void) drawStatusBarBackgroundInRect:(NSRect)rect withHighlight:(BOOL)highlight;
+#endif
+
 @end
 
 @interface NSStatusItem (NSStatusItemView)
@@ -83,3 +95,4 @@ typedef struct {
 - (void) setView:(NSView*)view;
 
 @end
+

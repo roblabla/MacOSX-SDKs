@@ -6,7 +6,7 @@
       Version:   Technology: Mac OS X
                  Release:    Mac OS X
  
-    Copyright:   (c) 2002 by Apple Computer, Inc., all rights reserved
+    Copyright:   (c) 2002-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -15,8 +15,8 @@
  
 */
 
+#import <DiscRecording/DiscRecording.h>
 #import <DiscRecordingUI/DRSetupPanel.h>
-#import <DiscRecording/DRErase.h>
 
 /*!
 	@class			DREraseSetupPanel
@@ -41,7 +41,7 @@
 	IBOutlet NSMatrix*		_eraseTypes;
 
 	id						_state;
-	int						_exclusivity;
+	void*					_auxStorage;
 }
 
 /* --------------------------------------------------------------------------- */

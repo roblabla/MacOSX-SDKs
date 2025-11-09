@@ -7,8 +7,8 @@
 #define AP_CONFIG_AUTO_H
 
 /* check: #include <dlfcn.h> */
-#ifdef HAVE_DLFCN_H
-#undef HAVE_DLFCN_H
+#ifndef HAVE_DLFCN_H
+#define HAVE_DLFCN_H 1
 #endif
 
 /* check: #include <dl.h> */

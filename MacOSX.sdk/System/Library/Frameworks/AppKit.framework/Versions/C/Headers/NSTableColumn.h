@@ -1,7 +1,7 @@
 /*
         NSTableColumn.h
         Application Kit
-        Copyright (c) 1995-2001, Apple Computer, Inc.
+        Copyright (c) 1995-2003, Apple Computer, Inc.
         All rights reserved.
 */
 
@@ -10,8 +10,9 @@
 @class NSTableView;
 @class NSCell;
 @class NSImage;
+@class NSSortDescriptor;
 
-@interface NSTableColumn : NSObject
+@interface NSTableColumn : NSObject <NSCoding>
 {
     /*All instance variables are private*/
     id		_identifier;
@@ -28,7 +29,7 @@
         unsigned int    canUseReorderResizeImageCache:1;
         unsigned int	RESERVED:21;
     } _cFlags;
-    NSImage 	*_reorderResizeImageCache;
+    void 	*_tcAuxiliaryStorage;
 }
 
 - (id)initWithIdentifier:(id)identifier;
@@ -58,5 +59,14 @@
 - (void)setEditable:(BOOL)flag;
 - (BOOL)isEditable;
 - (void)sizeToFit;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+
+- (void)setSortDescriptorPrototype:(NSSortDescriptor *)sortDescriptor;
+- (NSSortDescriptor *)sortDescriptorPrototype;
+    // A column is considered sortable if it has a sortDescriptorPrototype.  This prototype defines several things about the columns sorting.  The prototype's ascending value defines the default sorting direction.  Its key defines an arbitrary attribute which helps clients identify what to sort, while the selector defines how to sort.  Note that, it is not required that the key be the same as the identifier.  However, the key must be unique from the key used by other columns.  The sortDescriptor is archived.
+
+#endif
+
 
 @end

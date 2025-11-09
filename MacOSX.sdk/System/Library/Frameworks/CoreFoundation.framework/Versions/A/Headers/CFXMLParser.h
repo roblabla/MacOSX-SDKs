@@ -1,5 +1,5 @@
 /*	CFXMLParser.h
-	Copyright 1998-2002, Apple, Inc. All rights reserved.
+	Copyright (c) 1998-2003, Apple, Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFXMLPARSER__)
@@ -222,6 +222,12 @@ Boolean CFXMLParserParse(CFXMLParserRef parser);
 CF_EXPORT
 CFXMLTreeRef CFXMLTreeCreateFromData(CFAllocatorRef allocator, CFDataRef xmlData, CFURLRef dataSource, CFOptionFlags parseOptions, CFIndex versionOfNodes);
 
+/* As above, with the additional by-reference pass of a CFDictionaryRef containing
+   various error information (see below). The caller is responsible for releasing the
+   returned dictionary. If the error dictionary is not desired, pass NULL. */
+CF_EXPORT
+CFXMLTreeRef CFXMLTreeCreateFromDataWithError(CFAllocatorRef allocator, CFDataRef xmlData, CFURLRef dataSource, CFOptionFlags parseOptions, CFIndex versionOfNodes, CFDictionaryRef *errorDict) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
 #if !defined(DARWIN)
 /* Loads the data to be parsed directly from dataSource.  Arguments as above. */
 CF_EXPORT
@@ -235,6 +241,31 @@ CFXMLTreeRef CFXMLTreeCreateWithDataFromURL(CFAllocatorRef allocator, CFURLRef d
    that should appear in the final output file. */
 CF_EXPORT
 CFDataRef CFXMLTreeCreateXMLData(CFAllocatorRef allocator, CFXMLTreeRef xmlTree);
+
+/* Escaping and unescaping XML entities in CFStrings. The standard XML entities
+   are always replaced.  */
+/* Creates a CFString by replacing entities that appear in the entities dictionary.
+   Dictionary keys are the entities themselves, and the values should be CFStrings
+   containing the expansion. Pass NULL for entitiesDictionary to indicate no entities
+   other than the standard five. */
+CF_EXPORT
+CFStringRef CFXMLCreateStringByEscapingEntities(CFAllocatorRef allocator, CFStringRef string, CFDictionaryRef entitiesDictionary) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+CF_EXPORT
+CFStringRef CFXMLCreateStringByUnescapingEntities(CFAllocatorRef allocator, CFStringRef string, CFDictionaryRef entitiesDictionary) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+/* CFXMLTreeCreateFromDataWithError error dictionary key constants. */
+CF_EXPORT const CFStringRef kCFXMLTreeErrorDescription		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+    /* value is a CFString containing the readable error string. */
+
+CF_EXPORT const CFStringRef kCFXMLTreeErrorLineNumber		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+    /* value is a CFNumber containing the line on which the error appears. */
+
+CF_EXPORT const CFStringRef kCFXMLTreeErrorLocation		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+    /* value is a CFNumber containing the byte location at which the error occurred. */
+
+CF_EXPORT const CFStringRef kCFXMLTreeErrorStatusCode		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+    /* value is a CFNumber containing the error status code. */
 
 #if defined(__cplusplus)
 }

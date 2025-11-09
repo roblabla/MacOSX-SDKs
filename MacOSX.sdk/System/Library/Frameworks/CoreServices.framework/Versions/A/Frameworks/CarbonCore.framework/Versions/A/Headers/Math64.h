@@ -3,9 +3,9 @@
  
      Contains:   64-bit integer math Interfaces.
  
-     Version:    CarbonCore-472~1
+     Version:    CarbonCore-545~1
  
-     Copyright:  © 1994-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1994-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -1352,15 +1352,49 @@ SInt64ToUInt64(SInt64 value);
                 implemented as a long long, it reads the struct into a long long.
 */
 #if TYPE_LONGLONG 
-    #define SInt64ToWide(x)         (*((wide*)(&(x))))
- #define WideToSInt64(x)         (*((SInt64*)(&(x))))
-   #define UInt64ToUnsignedWide(x) (*((UnsignedWide*)(&(x))))
- #define UnsignedWideToUInt64(x) (*((UInt64*)(&(x))))
+
+#if defined(__GNUC__)
+
+    union __ull_outwit_u {
+          UnsignedWide  asUnsignedWide;
+          UInt64        asUInt64;
+    };
+
+    union __ll_outwit_u {
+          wide          aswide;
+          SInt64        asSInt64;
+    };
+    
+    #define __ull_outwit(srcType, dstType, v)        ({ union __ull_outwit_u __u;      \
+                              __u.as##srcType = (v);  \
+                              __u.as##dstType; })
+
+    #define __ll_outwit(srcType, dstType, v)        ({ union __ll_outwit_u __u;        \
+                              __u.as##srcType = (v);  \
+                              __u.as##dstType; })
+
 #else
- #define SInt64ToWide(x)         (x)
+
+    #define __ll_outwit(srcType, dstType, v)        (*((dstType *) (& (v))))
+ #define __ull_outwit(srcType, dstType, v)       (*((dstType *) (& (v))))
+
+#endif
+
+#define SInt64ToWide(x)         __ll_outwit(SInt64, wide, (x))
+#define WideToSInt64(x)         __ll_outwit(wide, SInt64, (x))
+#define UInt64ToUnsignedWide(x) __ull_outwit(UInt64, UnsignedWide, (x))
+#define UnsignedWideToUInt64(x) __ull_outwit(UnsignedWide, UInt64, (x))
+
+
+
+
+#else
+
+   #define SInt64ToWide(x)         (x)
     #define WideToSInt64(x)         (x)
     #define UInt64ToUnsignedWide(x) (x)
     #define UnsignedWideToUInt64(x) (x)
+
 #endif
 
 

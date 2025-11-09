@@ -37,6 +37,9 @@ typedef function_table_entry 	*function_table_t;
 __BeforeMigUserHeader
 #endif /* __BeforeMigUserHeader */
 
+#include <sys/cdefs.h>
+__BEGIN_DECLS
+
 
 /* SimpleRoutine clock_alarm_reply */
 #ifdef	mig_external
@@ -52,6 +55,20 @@ kern_return_t clock_alarm_reply
 	alarm_type_t alarm_type,
 	mach_timespec_t alarm_time
 );
+
+__END_DECLS
+
+/********************** Caution **************************/
+/* The following data types should be used to calculate  */
+/* maximum message sizes only. The actual message may be */
+/* smaller, and the position of the arguments within the */
+/* message layout may vary from what is presented here.  */
+/* For example, if any of the arguments are variable-    */
+/* sized, and less than the maximum is sent, the data    */
+/* will be packed tight in the actual message to reduce  */
+/* the presence of holes.                                */
+/********************** Caution **************************/
+
 /* typedefs for all requests */
 
 #ifndef __Request__clock_reply_subsystem__defined

@@ -1,14 +1,12 @@
 /*	NSConnection.h
-	Copyright 1989-2002, Apple, Inc. All rights reserved.
+	Copyright (c) 1989-2003, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSDate.h>
-#import <Foundation/NSHashTable.h>	// imported for backwards source compat
-#import <Foundation/NSMapTable.h>	// imported for backwards source compat
 
 @class NSMutableData, NSDistantObject, NSException, NSData;
-@class NSPort, NSRunLoop, NSPortNameServer;
+@class NSPort, NSRunLoop, NSPortNameServer, NSDictionary, NSArray;
 
 @interface NSConnection : NSObject {
     @private

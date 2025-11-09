@@ -6,10 +6,18 @@
 #endif
 
 
+
+#ifndef __WSTYPES__
+#include <WebServicesCore/WSTypes.h>
+#endif
+
 #ifndef __WSMETHODINVOCATION__
 #include <WebServicesCore/WSMethodInvocation.h>
 #endif
 
+#ifndef __WSPROTOCOLHANDLER__
+#include <WebServicesCore/WSProtocolHandler.h>
+#endif
 
 
 

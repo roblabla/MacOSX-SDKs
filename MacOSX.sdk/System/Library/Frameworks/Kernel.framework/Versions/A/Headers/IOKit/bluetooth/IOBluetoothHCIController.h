@@ -1004,6 +1004,9 @@ public:
 	virtual	UInt8 *rangeForChannel(UInt16 channel);
 	virtual IOReturn handleAirPortChangesChannelWL(IOService *serviceForAirport);
 
+        // Version of stop in the workloop
+        virtual void stopWL( IOService * provider );
+        
 private:
 	static bool staticAirPortDriverNotification(void *us, void *unused, IOService * yourDevice);
 	static IOReturn handleAirPortChangesChannelAction( OSObject *owner, void *castMeToServiceForAirport, void *arg2, void *arg3, void *arg4 );
@@ -1017,8 +1020,8 @@ private:
 	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  5 );
 	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  6 );
 	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  7 );
-	
-	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  8 );
+	OSMetaClassDeclareReservedUsed(	IOBluetoothHCIController,  8 );
+
 	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  9 );
 	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  10 );
 	OSMetaClassDeclareReservedUnused(	IOBluetoothHCIController,  11 );

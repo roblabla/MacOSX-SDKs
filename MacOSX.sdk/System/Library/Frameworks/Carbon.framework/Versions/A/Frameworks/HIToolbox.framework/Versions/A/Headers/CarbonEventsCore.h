@@ -3,9 +3,9 @@
  
      Contains:   Carbon Event Manager
  
-     Version:    HIToolbox-124.14~2
+     Version:    HIToolbox-145.33~1
  
-     Copyright:  © 1999-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -72,6 +72,21 @@ enum {
   eventClassIncorrectErr        = -9864,
 
   /*
+   * This is what you should return from a kEventClassAccessibility
+   * event handler when asked to process a directly dispached event
+   * that would cause your handler proc to not return after more than a
+   * split-second. This will cause the accessibility engine to defer
+   * the event until a later time when your handler will be able to
+   * take all the time it needs without causing timeout problems for
+   * the assistive application. See kEventClassAccessibility and
+   * kEventAccessiblePerformNamedAction for more information. You
+   * should only return this on Mac OS X 10.3 and later; earlier
+   * versions will treat this like a true failure, which prevents
+   * assistive applications from getting the functionality they need.
+   */
+  eventDeferAccessibilityEventErr = -9865,
+
+  /*
    * Returned from InstallEventHandler if the handler proc you pass is
    * already installed for a given event type you are trying to
    * register.
@@ -121,13 +136,80 @@ enum {
    * that's not in any queue.
    */
   eventNotInQueueErr            = -9877,
+
+  /*
+   * Returned from RegisterEventHotKey when an attempt is made to
+   * register a hotkey that is already registered in the current
+   * process. (Note that it is not an error to register the same hotkey
+   * in multiple processes.)
+   */
   eventHotKeyExistsErr          = -9878,
-  eventHotKeyInvalidErr         = -9879
+
+  /*
+   * This error code is not currently used.
+   */
+  eventHotKeyInvalidErr         = -9879,
+
+  /*
+   * When returned from an event handler, causes the event dispatcher
+   * to abandon event dispatching on this target, and pass the event to
+   * the first handler on the next event target. Any event handlers
+   * installed beneath the current handler on the current target will
+   * not receive the event. Although newly documented in Mac OS X 10.3,
+   * this error code is actually available on Mac OS X 10.0 and
+   * CarbonLib 1.3 and later.
+   */
+  eventPassToNextTargetErr      = -9880
 };
 
 /*======================================================================================*/
 /*  EVENT CORE                                                                          */
 /*======================================================================================*/
+/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+/*  ¥ Core Event Parameters                                                             */
+/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+enum {
+  kEventParamDirectObject       = '----', /* type varies depending on event*/
+  kEventParamDragRef            = 'drag' /* typeDragRef*/
+};
+
+/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+/*  ¥ Core Event Types                                                                  */
+/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+/*
+    Some Carbon event data types will be retained when added to an EventRef in
+    Mac OS X 10.2 and later, and released when the EventRef is destroyed.
+    
+        Retained in 10.2 and later:
+        
+            typeCFStringRef
+            typeCFMutableStringRef
+            typeCFMutableArrayRef
+            typeCFTypeRef
+            typeHIAccessibleObjectRef
+            
+        Retained in Panther and later:
+        
+            typeCFArrayRef
+            typeCFDictionaryRef:
+            typeCFMutableDictionaryRef
+            
+    Note that other data types may be retained in future releases of Mac OS X.
+    Apple recommends that if you need to know whether a particular data type
+    (other than the ones documented here) is retained, that you check the retain
+    count of an instance of that data type before and after adding it to an EventRef.
+*/
+enum {
+  typeCFStringRef               = 'cfst', /* CFStringRef*/
+  typeCFMutableStringRef        = 'cfms', /* CFMutableStringRef*/
+  typeCFArrayRef                = 'cfar', /* CFArrayRef*/
+  typeCFMutableArrayRef         = 'cfma', /* CFMutableArrayRef*/
+  typeCFDictionaryRef           = 'cfdc', /* CFDictionaryRef*/
+  typeCFMutableDictionaryRef    = 'cfmd', /* CFMutableDictionaryRef*/
+  typeCFTypeRef                 = 'cfty', /* CFTypeRef*/
+  typeDragRef                   = 'drag' /* DragRef*/
+};
+
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*  ¥ Event Flags, options                                                              */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -252,6 +334,9 @@ typedef struct OpaqueEventLoopRef*      EventLoopRef;
  *    current thread is a cooperative thread, the main event loop is
  *    returned.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Result:
  *    An event loop reference.
  *  
@@ -269,6 +354,9 @@ GetCurrentEventLoop(void)                                     AVAILABLE_MAC_OS_X
  *  
  *  Discussion:
  *    Returns the event loop object for the main application thread.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Result:
  *    An event loop reference.
@@ -294,6 +382,9 @@ GetMainEventLoop(void)                                        AVAILABLE_MAC_OS_X
  *    cause the current thread to wait for some operation to complete,
  *    most likely on another thread of execution.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inTimeout:
@@ -317,6 +408,9 @@ RunCurrentEventLoop(EventTimeout inTimeout)                   AVAILABLE_MAC_OS_X
  *    specified to return immediately (as opposed to timing out).
  *    Typically this call is used in conjunction with
  *    RunCurrentEventLoop.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -348,6 +442,9 @@ QuitEventLoop(EventLoopRef inEventLoop)                       AVAILABLE_MAC_OS_X
  *    loop. If you don't know what I'm talking about, then you probably
  *    don't need to use this.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inEventLoop:
@@ -377,6 +474,9 @@ GetCFRunLoopFromEventLoop(EventLoopRef inEventLoop)           AVAILABLE_MAC_OS_X
  *    current event loop until an event that matches arrives, or the
  *    timeout expires. Except for timers firing, your application is
  *    blocked waiting for events to arrive when inside this function.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -421,14 +521,69 @@ ReceiveNextEvent(
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*  ¥ Core event lifetime APIs                                                          */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+
+/*
+ *  EventAttributes
+ *  
+ *  Summary:
+ *    Attributes of a Carbon event.
+ */
 typedef UInt32 EventAttributes;
 enum {
+
+  /*
+   * The absence of any attributes.
+   */
   kEventAttributeNone           = 0,
-  kEventAttributeUserEvent      = (1 << 0)
+
+  /*
+   * Indicates that the event is considered user input; for example, a
+   * mouse event or keyboard event. Not appropriate for higher-level
+   * events such as a window update or activate.
+   */
+  kEventAttributeUserEvent      = 1 << 0,
+
+  /*
+   * This event was not originally targeted to this process, but has
+   * been provided to this process because someone has installed an
+   * event handler for this event type on the event monitoring target.
+   * Events with this attribute are sent directly to the event monitor
+   * target by the event dispatcher.
+   */
+  kEventAttributeMonitored      = 1 << 3
 };
 
 /*
  *  [Mac]CreateEvent()
+ *  
+ *  Summary:
+ *    Creates a new Carbon event.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inAllocator:
+ *      The CFAllocator to use to allocate the event data. You can pass
+ *      NULL or kCFAllocatorDefault to use the standard allocator.
+ *    
+ *    inClassID:
+ *      The event class for the event.
+ *    
+ *    inKind:
+ *      The event kind for the event.
+ *    
+ *    inWhen:
+ *      The event timestamp to be recorded in the event. You may pass 0
+ *      to indicate the current time.
+ *    
+ *    inAttributes:
+ *      The event attributes. Typically this should be
+ *      kEventAttributeNone.
+ *    
+ *    outEvent:
+ *      On exit, contains the new event.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -440,16 +595,32 @@ enum {
 #endif
 extern OSStatus 
 MacCreateEvent(
-  CFAllocatorRef    inAllocator,       /* can be NULL */
+  CFAllocatorRef    inAllocator,        /* can be NULL */
   UInt32            inClassID,
-  UInt32            kind,
-  EventTime         when,
-  EventAttributes   flags,
+  UInt32            inKind,
+  EventTime         inWhen,
+  EventAttributes   inAttributes,
   EventRef *        outEvent)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  CopyEvent()
+ *  
+ *  Summary:
+ *    Copies an existing event.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inOther:
+ *      The original event to copy.
+ *  
+ *  Result:
+ *    The newly created event, or NULL if either the input event was
+ *    NULL or the memory for the event could not be allocated. The new
+ *    event is allocated using the same allocator as the original event.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -461,7 +632,58 @@ CopyEvent(EventRef inOther)                                   AVAILABLE_MAC_OS_X
 
 
 /*
+ *  CopyEventAs()
+ *  
+ *  Summary:
+ *    Copies an existing event, allowing you to change the class and
+ *    kind of the event.
+ *  
+ *  Discussion:
+ *    CopyEventAs may be useful during event flow and transformation.
+ *    For example, this API is used when upgrading a raw mouse down to
+ *    a window click event, to ensure that the window click event has
+ *    exactly the same parameters as the original mouse down event.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inAllocator:
+ *      The CFAllocator to use to allocate the event data. You can pass
+ *      NULL or kCFAllocatorDefault to use the standard allocator.
+ *    
+ *    inOther:
+ *      The original event to copy.
+ *    
+ *    inEventClass:
+ *      The new event class for the copy of the event.
+ *    
+ *    inEventKind:
+ *      The new event kind for the copy of the event.
+ *  
+ *  Result:
+ *    The newly created event, or NULL if either the input event was
+ *    NULL or the memory for the event could not be allocated.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern EventRef 
+CopyEventAs(
+  CFAllocatorRef   inAllocator,        /* can be NULL */
+  EventRef         inOther,
+  UInt32           inEventClass,
+  UInt32           inEventKind)                               AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
  *  RetainEvent()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -475,6 +697,9 @@ RetainEvent(EventRef inEvent)                                 AVAILABLE_MAC_OS_X
 /*
  *  GetEventRetainCount()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -486,6 +711,9 @@ GetEventRetainCount(EventRef inEvent)                         AVAILABLE_MAC_OS_X
 
 /*
  *  ReleaseEvent()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -501,6 +729,9 @@ ReleaseEvent(EventRef inEvent)                                AVAILABLE_MAC_OS_X
  *  
  *  Discussion:
  *    Sets a piece of data for the given event.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -543,6 +774,9 @@ SetEventParameter(
  *  Discussion:
  *    Gets a piece of data from the given event, if it exists.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inEvent:
@@ -552,23 +786,29 @@ SetEventParameter(
  *      The symbolic name of the parameter.
  *    
  *    inDesiredType:
- *      The desired type of the parameter. At present we do not support
- *      coercion, so this parameter must be the actual type of data
- *      stored in the event, or an error will be returned.
+ *      The desired type of the parameter. The Carbon Event Manager
+ *      will automatically use AppleEvent coercion handlers to convert
+ *      the data in the event into the desired type, if possible. You
+ *      may also pass typeWildCard to request that the data be returned
+ *      in its original format.
  *    
  *    outActualType:
- *      The actual type of the parameter, can be NULL if you are not
+ *      The actual type of the parameter, or NULL if you are not
  *      interested in receiving this information.
  *    
  *    inBufferSize:
- *      The size of the output buffer specified by ioBuffer.
+ *      The size of the output buffer specified by ioBuffer. You may
+ *      pass zero for this parameter and NULL for the outData parameter
+ *      if you don't want the data returned.
  *    
  *    outActualSize:
  *      The actual size of the data, or NULL if you don't want this
  *      information.
  *    
  *    outData:
- *      The pointer to the buffer which will receive the parameter data.
+ *      The pointer to the buffer which will receive the parameter
+ *      data, or NULL if you don't want the data returned. If you pass
+ *      NULL, you must also pass zero for the inBufferSize parameter.
  *  
  *  Result:
  *    An operating system result code.
@@ -586,7 +826,7 @@ GetEventParameter(
   EventParamType *  outActualType,       /* can be NULL */
   UInt32            inBufferSize,
   UInt32 *          outActualSize,       /* can be NULL */
-  void *            outData)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  void *            outData)             /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -599,6 +839,9 @@ GetEventParameter(
  *  Discussion:
  *    Returns the class of the given event, such as mouse, keyboard,
  *    etc.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -626,6 +869,9 @@ GetEventClass(EventRef inEvent)                               AVAILABLE_MAC_OS_X
  *    kEventAppActivated have the same value (1). The combination of
  *    class and kind is what determines an event signature.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inEvent:
@@ -650,6 +896,9 @@ GetEventKind(EventRef inEvent)                                AVAILABLE_MAC_OS_X
  *    Returns the time the event specified occurred, specified in
  *    EventTime, which is a floating point number representing seconds
  *    since the last system startup.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -680,6 +929,9 @@ GetEventTime(EventRef inEvent)                                AVAILABLE_MAC_OS_X
  *    so desire. In general, you would never use this routine, except
  *    for those special cases where you reuse an event from time to
  *    time instead of creating a new event each time.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -716,6 +968,9 @@ typedef struct OpaqueEventQueueRef*     EventQueueRef;
  *    current thread is a cooperative thread, the main event queue is
  *    returned.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Result:
  *    An event queue reference.
  *  
@@ -733,6 +988,9 @@ GetCurrentEventQueue(void)                                    AVAILABLE_MAC_OS_X
  *  
  *  Discussion:
  *    Returns the event queue object for the main application thread.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Result:
  *    An event queue reference.
@@ -1043,6 +1301,9 @@ RemoveEventFromQueue(
  *  Discussion:
  *    Returns true if the specified event is posted to a queue.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inQueue:
@@ -1065,6 +1326,71 @@ IsEventInQueue(
   EventRef        inEvent)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+
+/*
+ */
+enum {
+
+  /*
+   * Currently, the only value you can pass to
+   * AcquireFirstMatchingEventInQueue in its inOptions parameter.
+   */
+  kEventQueueOptionsNone        = 0
+};
+
+/*
+ *  AcquireFirstMatchingEventInQueue()
+ *  
+ *  Discussion:
+ *    Returns the first event that matches the list of event classes
+ *    and kinds passed in. This call does not call the event loop, and
+ *    hence no timers will fire nor will any window flushing occur when
+ *    this API is called. New events will be pulled from the window
+ *    server, however. Overall this API should have better performance
+ *    characteristics than the older EventAvail API.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inQueue:
+ *      The queue to check.
+ *    
+ *    inNumTypes:
+ *      The number of event kinds to search for. You may pass zero for
+ *      this parameter if you also pass NULL for inList.
+ *    
+ *    inList:
+ *      The list of event classes and kinds to search for in the queue.
+ *      You may pass NULL for this parameter if you also pass zero for
+ *      inNumTypes. This effectively matches ANY event in the queue,
+ *      and will merely return the first event in the queue.
+ *    
+ *    inOptions:
+ *      Currently, you must pass kEventQueueOptionsNone for this
+ *      parameter.
+ *  
+ *  Result:
+ *    An event reference, or NULL if no events match the list passed.
+ *    The event returned has had its refcount incremented (i.e. it has
+ *    been retained). As a result, you must release this value
+ *    (assuming it's non-NULL). The event is not removed from the queue
+ *    by this API; you should call RemoveEventFromQueue if necessary.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern EventRef 
+AcquireFirstMatchingEventInQueue(
+  EventQueueRef          inQueue,
+  UInt32                 inNumTypes,
+  const EventTypeSpec *  inList,
+  OptionBits             inOptions)                           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*  Queue-synchronized event state                                                      */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -1079,6 +1405,9 @@ IsEventInQueue(
  *    event dispatcher target, it is recorded internally by the Event
  *    Manager. At any time during the handling of that event,
  *    GetCurrentEvent may be used to retrieve the original EventRef.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Result:
  *    The user input (mouse or keyboard) event currently being handled.
@@ -1129,6 +1458,9 @@ GetCurrentEvent(void)                                         AVAILABLE_MAC_OS_X
  *    through the event dispatcher and the queue-synchronized state is
  *    not updated.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Result:
  *    The queue-synchronized state of the mouse buttons. Bit zero
  *    indicates the state of the primary button, bit one the state of
@@ -1174,6 +1506,9 @@ GetCurrentEventButtonState(void)                              AVAILABLE_MAC_OS_X
  *    flowing through the event dispatcher and the queue-synchronized
  *    state is not updated.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Result:
  *    The queue-synchronized state of the keyboard modifiers. The
  *    format of the return value is the same as the modifiers field of
@@ -1217,6 +1552,9 @@ GetCurrentEventKeyModifiers(void)                             AVAILABLE_MAC_OS_X
  *    application, and you must use GetCurrentButtonState to determine
  *    the current hardware state.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Result:
  *    The state of the mouse buttons on the mouse hardware. Bit zero
  *    indicates the state of the primary button, bit one the state of
@@ -1240,6 +1578,9 @@ GetCurrentButtonState(void)                                   AVAILABLE_MAC_OS_X
  *  
  *  Discussion:
  *    Returns the current time since last system startup in seconds.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Result:
  *    EventTime.
@@ -1322,7 +1663,9 @@ enum {
   /*
    * If you specified an interval on your idle timer, your idle timer
    * proc will be called with this message, letting you know it is
-   * merely firing at the interval specified. If you did not specify an
+   * merely firing at the interval specified. You will receive this
+   * message for the first time at the specified interval after you
+   * receive kEventLoopIdleTimerStarted. If you did not specify an
    * interval, this message is not sent.
    */
   kEventLoopIdleTimerIdling     = 2,
@@ -1371,12 +1714,12 @@ NewEventLoopTimerUPP(EventLoopTimerProcPtr userRoutine)       AVAILABLE_MAC_OS_X
  *  NewEventLoopIdleTimerUPP()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        not available
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern EventLoopIdleTimerUPP
-NewEventLoopIdleTimerUPP(EventLoopIdleTimerProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewEventLoopIdleTimerUPP(EventLoopIdleTimerProcPtr userRoutine) AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*
  *  DisposeEventLoopTimerUPP()
@@ -1393,12 +1736,12 @@ DisposeEventLoopTimerUPP(EventLoopTimerUPP userUPP)           AVAILABLE_MAC_OS_X
  *  DisposeEventLoopIdleTimerUPP()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        not available
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeEventLoopIdleTimerUPP(EventLoopIdleTimerUPP userUPP)   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeEventLoopIdleTimerUPP(EventLoopIdleTimerUPP userUPP)   AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*
  *  InvokeEventLoopTimerUPP()
@@ -1418,8 +1761,8 @@ InvokeEventLoopTimerUPP(
  *  InvokeEventLoopIdleTimerUPP()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        not available
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
@@ -1427,7 +1770,7 @@ InvokeEventLoopIdleTimerUPP(
   EventLoopTimerRef          inTimer,
   EventLoopIdleTimerMessage  inState,
   void *                     inUserData,
-  EventLoopIdleTimerUPP      userUPP)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  EventLoopIdleTimerUPP      userUPP)                         AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 /*
  *  InstallEventLoopTimer()
@@ -1436,6 +1779,9 @@ InvokeEventLoopIdleTimerUPP(
  *    Installs a timer onto the event loop specified. The timer can
  *    either fire once or repeatedly at a specified interval depending
  *    on the parameters passed to this function.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -1497,6 +1843,9 @@ InstallEventLoopTimer(
  *    control, menu, or window. TrackMouseLocation actually disables
  *    all idle timers automatically for you.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inEventLoop:
@@ -1533,8 +1882,8 @@ InstallEventLoopTimer(
  *    An operating system status code.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.1 and later
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 
@@ -1544,26 +1893,7 @@ InstallEventLoopIdleTimer(
   EventTimerInterval      inInterval,
   EventLoopIdleTimerUPP   inTimerProc,
   void *                  inTimerData,
-  EventLoopTimerRef *     outTimer)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/* GOING AWAY!!!! DO NOT CALL THIS API!!!!! USE INSTALLEVENTLOOPIDLETIMER ABOVE!!!! */
-/*
- *  InstallIdleTimer()
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-InstallIdleTimer(
-  EventLoopRef         inEventLoop,
-  EventTimerInterval   inDelay,
-  EventTimerInterval   inInterval,
-  EventLoopTimerUPP    inTimerProc,
-  void *               inTimerData,
-  EventLoopTimerRef *  outTimer)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  EventLoopTimerRef *     outTimer)                           AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /*
@@ -1573,6 +1903,9 @@ InstallIdleTimer(
  *    Removes a timer that was previously installed by a call to
  *    InstallEventLoopTimer. You call this function when you are done
  *    using a timer.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -1603,6 +1936,9 @@ RemoveEventLoopTimer(EventLoopTimerRef inTimer)               AVAILABLE_MAC_OS_X
  *    fire. It will then resume its one-second interval after that. It
  *    is as if you removed the timer and reinstalled it with a new
  *    first-fire delay.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -1639,6 +1975,13 @@ typedef struct OpaqueEventHandlerCallRef*  EventHandlerCallRef;
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*  ¥ EventHandler specification                                                        */
+/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+/*  ¥ C++ Methods as Event Handlers                                                     */
+/*                                                                                      */
+/* To use a C++ method as an Event Handler callback, it must be declared in its class   */
+/* as a static method.  Otherwise, the implicit "this" parameter will make the function */
+/* not match the EventHandlerProcPtr prototype.                                         */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 
 /*
@@ -1738,6 +2081,9 @@ typedef struct OpaqueEventTargetRef*    EventTargetRef;
  *    event of the corresponding type and class are send to the target
  *    you are installing your handler on.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inTarget:
@@ -1784,6 +2130,9 @@ InstallEventHandler(
 /*
  *  InstallStandardEventHandler()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -1798,6 +2147,9 @@ InstallStandardEventHandler(EventTargetRef inTarget)          AVAILABLE_MAC_OS_X
  *  
  *  Discussion:
  *    Removes an event handler from the target it was bound to.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -1840,6 +2192,9 @@ RemoveEventHandler(EventHandlerRef inHandlerRef)              AVAILABLE_MAC_OS_X
  *    Adds additional events to an event handler that has already been
  *    installed.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inHandlerRef:
@@ -1873,6 +2228,9 @@ AddEventTypesToHandler(
  *    Removes events from an event handler that has already been
  *    installed.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inHandlerRef:
@@ -1900,7 +2258,7 @@ RemoveEventTypesFromHandler(
 
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
-/*  ¥ Explicit Propogation                                                              */
+/*  ¥ Explicit Propagation                                                              */
 /*                                                                                      */
 /*  CallNextEventHandler can be used to call thru to all handlers below the current     */
 /*  handler being called. You pass the EventHandlerCallRef passed to your EventHandler  */
@@ -1919,6 +2277,9 @@ RemoveEventTypesFromHandler(
  *    this to call thru to the default toolbox handling in order to
  *    post-process the event. You can only call this routine from
  *    within an event handler.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -1980,6 +2341,9 @@ enum {
  *  Discussion:
  *    Sends an event to the specified event target.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inEvent:
@@ -2010,6 +2374,9 @@ SendEventToEventTarget(
  *    controlling how the event propagates. See the discussion of the
  *    event send options above for more detail.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inEvent:
@@ -2036,6 +2403,106 @@ SendEventToEventTargetWithOptions(
   EventTargetRef   inTarget,
   OptionBits       inOptions)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
+
+
+/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+/*  ¥ Secure Event Input                                                                */
+/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+/*
+ *  EnableSecureEventInput()
+ *  
+ *  Summary:
+ *    Enables secure event input mode.
+ *  
+ *  Discussion:
+ *    When secure event input is enabled, keyboard input will only go
+ *    to the application with keyboard focus, and will not be echoed to
+ *    other applications that might be using the event monitor target
+ *    to watch keyboard input. The EditText and EditUnicodeText
+ *    controls automatically enter secure input mode when a password
+ *    control has the focus; if your application implements its own
+ *    password entry, you should enable secure event input while the
+ *    user is entering text.
+ *    
+ *    This API maintains a count of the number of times that it has
+ *    been called. Secure event input is not disabled until
+ *    DisableSecureEventInput has been called the same number of
+ *    times.
+ *    
+ *    Be sure to disable secure event input if your application becomes
+ *    inactive. If your application crashes, secure event input will
+ *    automatically be disabled if no other application has enabled it.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+EnableSecureEventInput(void)                                  AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  DisableSecureEventInput()
+ *  
+ *  Summary:
+ *    Disables secure event input mode.
+ *  
+ *  Discussion:
+ *    When secure event input is enabled, keyboard input will only go
+ *    to the application with keyboard focus, and will not be echoed to
+ *    other applications that might be using the event monitor target
+ *    to watch keyboard input. The EditText and EditUnicodeText
+ *    controls automatically enter secure input mode when a password
+ *    control has the focus; if your application implements its own
+ *    password entry, you should enable secure event input while the
+ *    user is entering text.
+ *    
+ *    The EnableSecureEventInput API maintains a count of the number of
+ *    times that it has been called. Secure event input is not disabled
+ *    until this API has been called the same number of times.
+ *    
+ *    Be sure to disable secure event input if your application becomes
+ *    inactive. If your application crashes, secure event input will
+ *    automatically be disabled if no other application has enabled it.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+DisableSecureEventInput(void)                                 AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  IsSecureEventInputEnabled()
+ *  
+ *  Summary:
+ *    Indicates whether secure event input is currently enabled.
+ *  
+ *  Discussion:
+ *    This API returns whether secure event input is enabled by any
+ *    process, not just the current process. Secure event input may be
+ *    disabled in the current process but enabled in some other
+ *    process; in that case, this API will return true.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern Boolean 
+IsSecureEventInputEnabled(void)                               AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 

@@ -1,44 +1,53 @@
 /*
 	NSFontPanel.h
 	Application Kit
-	Copyright (c) 1994-2001, Apple Computer, Inc.
+	Copyright (c) 1994-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSPanel.h>
-#import <AppKit/NSBrowser.h>
 
-@class NSButton, NSFont, NSMatrix, NSMutableArray, NSMutableDictionary;
+@class NSFontPanel, NSMutableDictionary, NSFontManager, NSMutableArray, NSTableView, NSFontDescriptor, NSFont;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+
+@interface NSObject (NSFontPanelValidationAdditions)
+- (unsigned int) validModesForFontPanel: (NSFontPanel *) fontPanel;
+@end
+
+#endif
 
 @interface NSFontPanel : NSPanel {
     /*All instance variables are private*/
-    NSMatrix 		*_faces;
-    NSMatrix 		*_families;
-    id                  _preview; 
-    id                  _current; // no longer used
-    id                  _size;
-    NSMatrix 		*_sizes;
-    id                  _manager;
-    id                  _selFont;
-    NSMutableArray	*_collections;
-    NSMutableDictionary *_collectionDicts;
-    id                  _accessoryView;
-    id			_browser;	
-    NSButton		*_setButton;
-    id                  _separator;
-    id                  _sizeTitle;
-    id			_titles; 	// No longer used - reserved.
-    id			_fontSetButton;	// No longer used - reserved.
-    id			_fontSetMatrix;
-    id		        _chooser; // The family, face, and size list group
-    id		        _previewBox; // no longer used.
+    NSFontManager	*_manager;
+
+    id			_familyList;
+    id                  _faceList; 
+    id                  _sizeList; 
+    id                  _mainCollectionList;
+    id			_sizeField;
+    id                  _sizeSlider;
+    id                  _sizeSliderBox;
+    id			_preview;
+    id			_previewCaption;
+    id                  _mainSplitView;
+    id			_mmCollectionList;	
+    id			_mmFamilyList;
+    id                  _mmFaceList;
+    id                  _mmSizeList;
+    id			_extrasPopup; 	
+    id			_searchField;	
+    id			_fixedListButton;
+    id		        _sliderButton; 
+    id		        _accessoryView; 
     struct __fpFlags {
         unsigned int        multipleFont:1;
         unsigned int        dirty:1;
         unsigned int        amPreviewing:1;
         unsigned int        alwaysPreview:1;
         unsigned int        dontPreview:1;
-	unsigned int	    sizeFieldChanged:1;
+	unsigned int	    setFontChange:1;
+	unsigned int	    setFontAttributeChange:1;
 	unsigned int	    sizeValueCacheIsValid:1;
 	unsigned int	    sizeFieldIsRelative:1;
 	unsigned int	    inittedCollPane:1;
@@ -49,95 +58,95 @@
 	unsigned int	    _delRespFace:1;
 	unsigned int	    _delRespSize:1;
 	unsigned int	    _delRespColl:1;
-	unsigned int	    _miniModeActive; // true if we are in "mini mode".
-	unsigned int	    _miniFavsActive; // true if "favorites" is active in mini-mode.
-	unsigned int	    _mainFavActive; // true if main mode "Favorites" is active.
-	unsigned int	    _inTakingSizeFromSlider; // true if in process of taking slider value.
-        unsigned int        RESERVED2:13;
+	unsigned int	    _collectionDisabled; // used by validate font panel modes. 
+	unsigned int	    _sizeDisabled; // used by validate font panel modes. 
+	unsigned int	    _faceDisabled; // used by validate font panel modes. 
+	unsigned int	    _lastFaceSelection; 
+        unsigned int        RESERVED2:12;
     } _fpFlags;
     float		_cachedSizeValue;
-    id _familyDict; /* current family dict, obtained from manager */
-    id _curSelFace;
-    id _tabVue; // the big tab view in the main panel.
-    id _choosePanelButton; // popup button for choosing what sub-panel to display.
-    id _collectionBox;
-    id _favoritesBox; // no longer used.
-    id _mainBrowserBox;
-    id _collectionBrowser;
-    id _colFamilies;
-    id _allFamiliesBrowser;
-    id _favoritesBrowser;
-    id _favoritesDict;
-    NSString *_curFontSetName;
-    id _passedCel;
-    id _passedStr;
-    id faces;
-    id families;
-    id _addFavButton;
-    id _lboxSep, _rboxSep; // will no longer be used
-    id _removeFromColButton;
-    id _addToColButton;
-    int _lastPane;
-    id _splitVue; // will no longer be used
-    id _fontSizesEditingPaneInnerBox;
-    id _collectionAddButton;
-    id _collectionRemoveButton;
+    id			_separator; 
+    id 			_splitVue;
+    id			_regularModeBox; 
+    id			_miniModeBox; 
+    id			_modeBoxSuperview; 
+    id			_collectionLabel; 
+    id			_sizeLabel; 
+    id			_faceLabel; 
+    id			_familyLabel; 
+    id			_sizeStyleButton; 
+    id			_newSizeField; 
+    id			_editSizeList; 
+    id			_editSizeListBox; 
+    id			_editSizeSliderBox; 
+    id			_editSizeSliderMaxField; 
+    id			_editSizeSliderMinField; 
+    id			_sizeEditWindow; 
+    id			_defaultCollection; 
+    id 			_defaultCollectionRep, _currentCollectionRep;
+    id			_availableSizes; 
+    id 			_collections;  // an array of font collections
+    int 		_lastPane;
+    NSFontDescriptor 	*_prevSelectedFontDescriptor;
+    id 			_searchTimer;
+    id			_unused0; 
+    void 		*_carbonNotification; 
     id _collectionRenameButton;
     id _reserved3[2];
 
-    id _mainColBrowser;
-    id _fontSizeChooserTabVue;
-    id _fixedListBox;
-    id _adjSliderBox;
-    id _fontSizesEditingPane;
+    id _addCollectionButton;
+    id _removeCollectionButton;
+    id _previewBox;
+    int _genCount;
+    id _collectionsPboard;
 
-    id _miniModeBox; // box containing mini mode main items.
-    id _miniModeCollectionsPopup;
-    id _miniModeCollectionsPopupBox;
-    id _miniModeFamPopup;
-    id _miniModeFavoritesPopup;
-    id _miniModeFavoritesPopupBox;
-    id _miniModeTypefacePopup;
-    id _miniModeTypefacesBox;
-    id _miniModeSizesPopup;
-    id _sizeSliderBox;
-    id _sizesBox;
-    int _fontSizeChooserType; // fixed list or adj slider
-    id _sizesSlider; // the slider from SizeSlider+Favs view
-    id _collectionMatrix; // (new) main "collections" one-column browser
-    id _fixedListScrollView; // scroll view in size editing list box
-    id _sizesEditList; // the matrix of cells in the size editing scroll view
+    float _fontPanelPreviewHeight; 
+    id _typographyPanel;
+    id _actionButton;
+    id _fontEffectsBox;
+    int _seqNumber;
+    int _sizeStyle;
+    id _targetObject;
+    id _unused13;
+    id _unused14;
+    id _unused15;
+    id _unused16;
+    int _unused17; 
+    id _unsed18; 
+    id _unused19; 
+    id _unused20; 
+    id _unused21;
 
-    id _mmTitleCollections; // titles of various mini-mode items...
-    id _mmTitleFavorites;
-    id _mmTitleFamily;
-    id _mmTitleTypeface;
-    id _mmTitleSize;
+    id _unused22; 
+    id _unused23;
+    id _unused24;
+    id _unused25;
+    id _unused26;
 
-    id _mainBox;  // box containing tab view and fontExtras button
-    id _mainBoxSuperview; // the "real" saved superview of the mainBox...
-    id _sizesScrollView; // super view of the _sizes matrix...
-    id _fontColBox; // box containing the collection editor pane...
+    id _unused27; 
+    id _unused28;
+    id _unused29; 
+    id _unused30; 
 
-    id _doneButton; // done with col editing.
+    id _unused31; 
 
-    id _familyList;
-    id _faceList;
-    id _familyBrowser;
-    id _faceBrowser;
-    id _favoritesList;
-    id _mainCollectionList;
-    id _sizeList;
-    id _allFamiliesList;
-    id _curFont;
-    id _sizeEditDoneButton;
-    id _carbonNotification;
-    id _resetSizesButton;
+    id _unused32;
+    id _unused33;
+    id _unused34;
+    id _unused35;
+    id _unused36;
+    id _unused37;
+    id _unused38;
+    id _unused39;
+    id _unused40;
+    id _unused41;
+    id _unused42;
+    id _unused43;
     id _Reserved32[16]; // Some reserved thingies for ui widgets.
-    id _sizeChooser; // matrix of radio buttons to choose list/slider mode
-    id _sizeChooserFld_New; // text fields in the size edit pane.
-    id _sizeChooserFld_Min;
-    id _sizeChooserFld_Max;
+    id _unused44;
+    id _unused45; 
+    id _unused46;
+    id _unused47;
 }
 
 + (NSFontPanel *)sharedFontPanel;
@@ -171,4 +180,14 @@ enum {
     NSFPCurrentField			= 134
 };
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
 
+enum {
+    NSFontPanelFaceModeMask = 1 << 0,
+    NSFontPanelSizeModeMask = 1 << 1,
+    NSFontPanelCollectionModeMask = 1 << 2,
+    NSFontPanelStandardModesMask = 0xFFFF,
+    NSFontPanelAllModesMask = 0xFFFFFFFF
+};
+
+#endif

@@ -1,7 +1,7 @@
 /*
 	NSComboBox.h
 	Application Kit
-	Copyright (c) 1996-2001, Apple Computer, Inc.
+	Copyright (c) 1996-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -26,6 +26,11 @@ APPKIT_EXTERN NSString *NSComboBoxSelectionIsChangingNotification;
 - (int)numberOfVisibleItems;
 - (void)setNumberOfVisibleItems:(int)visibleItems;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void)setButtonBordered:(BOOL)flag;
+- (BOOL)isButtonBordered;
+#endif
+
 - (void)reloadData;
 - (void)noteNumberOfItemsChanged;
 
@@ -39,9 +44,6 @@ APPKIT_EXTERN NSString *NSComboBoxSelectionIsChangingNotification;
 - (void)deselectItemAtIndex:(int)index;
 - (int)indexOfSelectedItem;
 - (int)numberOfItems;
-
-- (void)encodeWithCoder:(NSCoder *)coder;
-- (id)initWithCoder:(NSCoder *)coder;
 
 - (BOOL)completes;
 - (void)setCompletes:(BOOL)completes;

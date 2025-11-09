@@ -3,9 +3,9 @@
  
      Contains:   Appearance Manager Interfaces.
  
-     Version:    HIToolbox-124.14~2
+     Version:    HIToolbox-145.33~1
  
-     Copyright:  © 1994-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1994-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -31,6 +31,30 @@
 #define kThemePlatinumFileType 			'pltn'				/*  file type for platinum appearance  */
 #define kThemeCustomThemesFileType 		'scen'				/*  file type for user themes  */
 #define kThemeSoundTrackFileType 		'tsnd'
+
+#define kAppearancePartMetaNone 		0
+#define kAppearancePartMetaDisabled 	254
+#define kAppearancePartMetaInactive 	255
+#define kAppearancePartIndicator 		129
+#define kAppearancePartUpButton 		20
+#define kAppearancePartDownButton 		21
+#define kAppearancePartLeftButton 		20
+#define kAppearancePartRightButton 		21
+#define kAppearancePartPageUpArea 		22
+#define kAppearancePartPageDownArea 	23
+#define kAppearancePartPageLeftArea 	22
+#define kAppearancePartPageRightArea 	23
+
+#define kAppearanceRegionTitleBar 		0
+#define kAppearanceRegionTitleText 		1
+#define kAppearanceRegionCloseBox 		2
+#define kAppearanceRegionZoomBox 		3
+#define kAppearanceRegionDrag 			5
+#define kAppearanceRegionGrow 			6
+#define kAppearanceRegionCollapseBox 	7
+#define kAppearanceRegionTitleProxyIcon  8					/*  Mac OS 8.5 forward */
+#define kAppearanceRegionStructure 		32
+#define kAppearanceRegionContent 		33					/*  Content area of the window; empty when the window is collapsed */
 
 #define kThemeBrushDialogBackgroundActive  1				/*  use with kModalWindowClass  */
 #define kThemeBrushDialogBackgroundInactive  2				/*  use with kModalWindowClass  */
@@ -95,6 +119,7 @@
 #define kThemeBrushWhite 				(-2)
 #define kThemeBrushPrimaryHighlightColor  (-3)				/*  available in Mac OS 10.1 and CarbonLib 1.6, and later */
 #define kThemeBrushSecondaryHighlightColor  (-4)			/*  available in Mac OS 10.1 and CarbonLib 1.6, and later */
+#define kThemeBrushAlternatePrimaryHighlightColor  (-5)		/*  available in Mac OS 10.2 and later */
 
 #define kThemeTextColorDialogActive 	1
 #define kThemeTextColorDialogInactive 	2
@@ -179,7 +204,11 @@
 #define kThemeResizeLeftCursor 			15
 #define kThemeResizeRightCursor 		16
 #define kThemeResizeLeftRightCursor 	17
-#define kThemeNotAllowedCursor 			18					/*  Jaguar or Later  */
+#define kThemeNotAllowedCursor 			18					/*  available on Mac OS X 10.2 and later  */
+#define kThemeResizeUpCursor 			19
+#define kThemeResizeDownCursor 			20
+#define kThemeResizeUpDownCursor 		21
+#define kThemePoofCursor 				22
 
 #define kThemeMenuBarNormal 			0
 #define kThemeMenuBarSelected 			1
@@ -210,6 +239,7 @@
 #define kThemeBackgroundWindowHeader 	3
 #define kThemeBackgroundListViewWindowHeader  4
 #define kThemeBackgroundSecondaryGroupBox  5
+#define kThemeBackgroundMetal 			6
 
 #define kThemeNameTag 					'name'				/*  Str255 */
 #define kThemeVariantNameTag 			'varn'				/*  Str255 */
@@ -270,10 +300,11 @@
 #define kThemeAlertHeaderFont 			107
 #define kThemeSystemFontDetail 			7
 #define kThemeSystemFontDetailEmphasized  8
-#define kThemeCurrentPortFont 			200					/*  Available in JAGUAR or later */
+#define kThemeCurrentPortFont 			200
 #define kThemeToolbarFont 				108
+#define kThemeMiniSystemFont 			109
 
-#define kPublicThemeFontCount 			17
+#define kPublicThemeFontCount 			20
 #define kThemeTabNonFront 				0
 #define kThemeTabNonFrontPressed 		1
 #define kThemeTabNonFrontInactive 		2
@@ -287,11 +318,11 @@
 #define kThemeTabEast 					2
 #define kThemeTabWest 					3
 
-#define kThemeSmallTabHeight 			16					/*  amount small tabs protrude from frame. */
-#define kThemeLargeTabHeight 			21					/*  amount large tabs protrude from frame. */
-#define kThemeTabPaneOverlap 			3					/*  amount tabs overlap frame. */
-#define kThemeSmallTabHeightMax 		19					/*  small tab height + overlap */
-#define kThemeLargeTabHeightMax 		24					/*  large tab height + overlap */
+#define kThemeSmallTabHeight 			16
+#define kThemeLargeTabHeight 			21
+#define kThemeTabPaneOverlap 			3
+#define kThemeSmallTabHeightMax 		19
+#define kThemeLargeTabHeightMax 		24
 
 #define kThemeMediumScrollBar 			0
 #define kThemeSmallScrollBar 			1
@@ -302,6 +333,11 @@
 #define kThemeSmallSlider 				6
 #define kThemeLargeProgressBar 			7
 #define kThemeLargeIndeterminateBar 	8
+
+#define kThemeMiniScrollBar 			9
+#define kThemeMiniSlider 				10
+#define kThemeMiniProgressBar 			11
+#define kThemeMiniIndeterminateBar 		12
 
 															/*  track states  */
 #define kThemeTrackActive 				0
@@ -387,20 +423,37 @@
 #define kThemePushButton 				0
 #define kThemeCheckBox 					1
 #define kThemeRadioButton 				2
-#define kThemeBevelButton 				3					/*  bevel button (obsolete)  */
-#define kThemeArrowButton 				4					/*  popup button without text (no label). See ThemeButtonAdornment for glyphs.  */
-#define kThemePopupButton 				5					/*  popup button  */
+#define kThemeBevelButton 				3
+#define kThemeArrowButton 				4
+#define kThemePopupButton 				5
 #define kThemeDisclosureButton 			6
-#define kThemeIncDecButton 				7					/*  increment/decrement buttons  (no label)  */
-#define kThemeSmallBevelButton 			8					/*  small-shadow bevel button  */
-#define kThemeMediumBevelButton 		3					/*  med-shadow bevel button  */
-#define kThemeLargeBevelButton 			9					/*  large-shadow bevel button  */
-#define kThemeListHeaderButton 			10					/*  sort button for top of list  */
-#define kThemeRoundButton 				11					/*  round button  */
-#define kThemeLargeRoundButton 			12					/*  large round button  */
-#define kThemeSmallCheckBox 			13					/*  small checkbox  */
-#define kThemeSmallRadioButton 			14					/*  small radio button  */
-#define kThemeRoundedBevelButton 		15					/*  rounded bevel button  */
+#define kThemeIncDecButton 				7
+#define kThemeSmallBevelButton 			8
+#define kThemeMediumBevelButton 		3
+#define kThemeLargeBevelButton 			9
+#define kThemeListHeaderButton 			10
+#define kThemeRoundButton 				11
+#define kThemeLargeRoundButton 			12
+#define kThemeSmallCheckBox 			13
+#define kThemeSmallRadioButton 			14
+#define kThemeRoundedBevelButton 		15
+#define kThemeComboBox 					16
+#define kThemeComboBoxSmall 			17
+
+#define kThemeComboBoxMini 				18
+#define kThemeMiniCheckBox 				19
+#define kThemeMiniRadioButton 			20
+#define kThemeIncDecButtonSmall 		21
+#define kThemeIncDecButtonMini 			22
+#define kThemeArrowButtonSmall 			23
+#define kThemeArrowButtonMini 			24
+#define kThemePushButtonNormal 			25
+#define kThemePushButtonSmall 			26
+#define kThemePushButtonMini 			27
+#define kThemePopupButtonNormal 		28
+#define kThemePopupButtonSmall 			29
+#define kThemePopupButtonMini 			30
+
 #define kThemeNormalCheckBox 			1
 #define kThemeNormalRadioButton 		2
 
@@ -644,6 +697,65 @@
 #define kThemeMetricSmallVSliderMinThumbHeight  55
 #define kThemeMetricSmallHSliderTickOffset  56
 #define kThemeMetricSmallVSliderTickOffset  57
+
+#define kThemeMetricComboBoxLargeBottomShadowOffset  70
+#define kThemeMetricComboBoxLargeRightShadowOffset  71
+#define kThemeMetricComboBoxSmallBottomShadowOffset  72
+#define kThemeMetricComboBoxSmallRightShadowOffset  73
+#define kThemeMetricComboBoxLargeDisclosureWidth  74
+#define kThemeMetricComboBoxSmallDisclosureWidth  75
+#define kThemeMetricRoundTextFieldContentInsetLeft  76
+#define kThemeMetricRoundTextFieldContentInsetRight  77
+#define kThemeMetricRoundTextFieldContentInsetBottom  78
+#define kThemeMetricRoundTextFieldContentInsetTop  79
+#define kThemeMetricRoundTextFieldContentHeight  80
+#define kThemeMetricComboBoxMiniBottomShadowOffset  81
+#define kThemeMetricComboBoxMiniDisclosureWidth  82
+#define kThemeMetricComboBoxMiniRightShadowOffset  83
+#define kThemeMetricLittleArrowsMiniHeight  84
+#define kThemeMetricLittleArrowsMiniWidth  85
+#define kThemeMetricLittleArrowsSmallHeight  86
+#define kThemeMetricLittleArrowsSmallWidth  87
+#define kThemeMetricMiniCheckBoxHeight 	88
+#define kThemeMetricMiniCheckBoxWidth 	89
+#define kThemeMetricMiniDisclosureButtonHeight  90
+#define kThemeMetricMiniDisclosureButtonWidth  91
+#define kThemeMetricMiniHSliderHeight 	92
+#define kThemeMetricMiniHSliderMinThumbWidth  93
+#define kThemeMetricMiniHSliderTickHeight  94
+#define kThemeMetricMiniHSliderTickOffset  95
+#define kThemeMetricMiniPopupButtonHeight  96
+#define kThemeMetricMiniPullDownHeight 	97
+#define kThemeMetricMiniPushButtonHeight  98
+#define kThemeMetricMiniRadioButtonHeight  99
+#define kThemeMetricMiniRadioButtonWidth  100
+#define kThemeMetricMiniTabCapsWidth 	101
+#define kThemeMetricMiniTabFrameOverlap  102
+#define kThemeMetricMiniTabHeight 		103
+#define kThemeMetricMiniTabOverlap 		104
+#define kThemeMetricMiniVSliderMinThumbHeight  105
+#define kThemeMetricMiniVSliderTickOffset  106
+#define kThemeMetricMiniVSliderTickWidth  107
+#define kThemeMetricMiniVSliderWidth 	108
+#define kThemeMetricRoundTextFieldContentInsetWithIconLeft  109
+#define kThemeMetricRoundTextFieldContentInsetWithIconRight  110
+#define kThemeMetricRoundTextFieldMiniContentHeight  111
+#define kThemeMetricRoundTextFieldMiniContentInsetBottom  112
+#define kThemeMetricRoundTextFieldMiniContentInsetLeft  113
+#define kThemeMetricRoundTextFieldMiniContentInsetRight  114
+#define kThemeMetricRoundTextFieldMiniContentInsetTop  115
+#define kThemeMetricRoundTextFieldMiniContentInsetWithIconLeft  116
+#define kThemeMetricRoundTextFieldMiniContentInsetWithIconRight  117
+#define kThemeMetricRoundTextFieldSmallContentHeight  118
+#define kThemeMetricRoundTextFieldSmallContentInsetBottom  119
+#define kThemeMetricRoundTextFieldSmallContentInsetLeft  120
+#define kThemeMetricRoundTextFieldSmallContentInsetRight  121
+#define kThemeMetricRoundTextFieldSmallContentInsetTop  122
+#define kThemeMetricRoundTextFieldSmallContentInsetWithIconLeft  123
+#define kThemeMetricRoundTextFieldSmallContentInsetWithIconRight  124
+#define kThemeMetricSmallTabFrameOverlap  125
+#define kThemeMetricSmallTabOverlap 	126
+#define kThemeMetricSmallPaneSplitterHeight  127
 
 #define appearanceBadBrushIndexErr 		(-30560)			/*  pattern index invalid  */
 #define appearanceProcessRegisteredErr 	(-30561)

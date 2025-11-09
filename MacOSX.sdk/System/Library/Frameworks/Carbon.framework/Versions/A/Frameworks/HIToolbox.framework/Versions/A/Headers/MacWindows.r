@@ -3,9 +3,9 @@
  
      Contains:   Window Manager Interfaces
  
-     Version:    HIToolbox-124.14~2
+     Version:    HIToolbox-145.33~1
  
-     Copyright:  © 1997-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1997-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -24,6 +24,51 @@
 #ifndef __COLLECTIONS_R__
 #include <CarbonCore/Collections.r>
 #endif
+
+#define kAlertWindowClass 				1
+#define kMovableAlertWindowClass 		2
+#define kModalWindowClass 				3
+#define kMovableModalWindowClass 		4
+#define kFloatingWindowClass 			5
+#define kDocumentWindowClass 			6
+#define kUtilityWindowClass 			8
+#define kHelpWindowClass 				10
+#define kSheetWindowClass 				11
+#define kToolbarWindowClass 			12
+#define kPlainWindowClass 				13
+#define kOverlayWindowClass 			14
+#define kSheetAlertWindowClass 			15
+#define kAltPlainWindowClass 			16
+#define kSimpleWindowClass 				18
+#define kDrawerWindowClass 				20
+#define kAllWindowClasses 				0xFFFFFFFF
+
+#define kWindowNoAttributes 			0
+#define kWindowCloseBoxAttribute 		0x00000001
+#define kWindowHorizontalZoomAttribute 	0x00000002
+#define kWindowVerticalZoomAttribute 	0x00000004
+#define kWindowFullZoomAttribute 		0x00000006
+#define kWindowCollapseBoxAttribute 	0x00000008
+#define kWindowResizableAttribute 		0x00000010
+#define kWindowSideTitlebarAttribute 	0x00000020
+#define kWindowToolbarButtonAttribute 	0x00000040
+#define kWindowMetalAttribute 			0x00000100
+#define kWindowDoesNotCycleAttribute 	0x00008000
+#define kWindowNoUpdatesAttribute 		0x00010000
+#define kWindowNoActivatesAttribute 	0x00020000
+#define kWindowOpaqueForEventsAttribute  0x00040000
+#define kWindowCompositingAttribute 	0x00080000
+#define kWindowNoShadowAttribute 		0x00200000
+#define kWindowHideOnSuspendAttribute 	0x01000000
+#define kWindowAsyncDragAttribute 		0x00800000
+#define kWindowStandardHandlerAttribute  0x02000000
+#define kWindowHideOnFullScreenAttribute  0x04000000
+#define kWindowInWindowMenuAttribute 	0x08000000
+#define kWindowLiveResizeAttribute 		0x10000000
+#define kWindowIgnoreClicksAttribute 	0x20000000
+#define kWindowNoConstrainAttribute 	0x80000000
+#define kWindowStandardDocumentAttributes  0x0000001F
+#define kWindowStandardFloatingAttributes  0x00000009
 
 #define kWindowDefProcType 				'WDEF'
 #define kStandardWindowDefinition 		0					/*  for document windows and dialogs */
@@ -91,7 +136,7 @@
 
 															/*  Proc IDs for sheet windows  */
 #define kWindowSheetProc 				1088				/*  available in Mac OS X and CarbonLib 1.3  */
-#define kWindowSheetAlertProc 			1120				/*  available in Mac OS X after 1.0, and CarbonLib 1.3  */
+#define kWindowSheetAlertProc 			1120				/*  available in Mac OS X 10.1 and CarbonLib 1.3  */
 
 															/*  Proc IDs for simple windows  */
 #define kWindowSimpleProc 				1104
@@ -119,6 +164,15 @@
 #define kWindowAlertPositionOnMainScreen  7
 #define kWindowAlertPositionOnParentWindow  8
 #define kWindowAlertPositionOnParentWindowScreen  9
+
+#define kWindowDefinitionVersionOne 	1
+#define kWindowDefinitionVersionTwo 	2
+
+#define kWindowIsCollapsedState 		0x01
+#define kStoredWindowSystemTag 			'appl'				/*  Only Apple collection items will be of this tag */
+#define kStoredBasicWindowDescriptionID  'sbas'				/*  BasicWindowDescription */
+#define kStoredWindowPascalTitleID 		's255'				/*  pascal title string */
+#define kStoredWindowTitleCFStringID 	'cfst'				/*  CFString title string */
 
 
 

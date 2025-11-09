@@ -1,7 +1,7 @@
 /*
 	NSTextFieldCell.h
 	Application Kit
-	Copyright (c) 1994-2001, Apple Computer, Inc.
+	Copyright (c) 1994-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -23,10 +23,16 @@ typedef enum {
     struct __tfFlags {
 	unsigned int drawsBackground:1;
 	unsigned int bezelStyle:3;
-	unsigned int reservedTextFieldCell:28;
+	unsigned int thcSortDirection:2;
+	unsigned int thcSortPriority:4;
+	unsigned int mini:1;
+	unsigned int textColorIgnoresNormalDisableFlag:1;
+	unsigned int textColorDisableFlag:1;
+        unsigned int thcForceHighlightForSort:1;
+	unsigned int invalidTextColor:1;
+	unsigned int reservedTextFieldCell:17;
     } _tfFlags;
 }
-
 
 - (void)setBackgroundColor:(NSColor *)color;
 - (NSColor *)backgroundColor;
@@ -39,6 +45,13 @@ typedef enum {
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 - (void)setBezelStyle:(NSTextFieldBezelStyle)style;
 - (NSTextFieldBezelStyle)bezelStyle;
+#endif
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void)setPlaceholderString:(NSString*)string;
+- (NSString*)placeholderString;
+- (void)setPlaceholderAttributedString:(NSAttributedString*)string;
+- (NSAttributedString*)placeholderAttributedString;
 #endif
 
 @end

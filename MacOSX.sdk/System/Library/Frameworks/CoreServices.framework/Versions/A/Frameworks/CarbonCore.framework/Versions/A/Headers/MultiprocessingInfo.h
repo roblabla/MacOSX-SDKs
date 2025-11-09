@@ -3,9 +3,9 @@
  
      Contains:   Multiprocessing Information interfaces
  
-     Version:    CarbonCore-472~1
+     Version:    CarbonCore-545~1
  
-     Copyright:  © 1995-2002 DayStar Digital, Inc.
+     Copyright:  © 1995-2003 DayStar Digital, Inc.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

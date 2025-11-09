@@ -2,23 +2,27 @@
 //  ABAddressBookC.h
 //  AddressBook Framework
 //
-//  Copyright (c) 2002 Apple Computer. All rights reserved.
+//  Copyright (c) 2002-2003 Apple Computer. All rights reserved.
 //
 
 #ifndef __ADDRESSBOOKC__
 #define __ADDRESSBOOKC__
 
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
 #include <CoreFoundation/CoreFoundation.h>
 #include <AddressBook/ABTypedefs.h>
 #include <AddressBook/ABGlobalsC.h>
 
-typedef void                    	*ABRecordRef;
-typedef struct __ABPerson       	*ABPersonRef;
-typedef struct __ABGroup        	*ABGroupRef;
-typedef struct __ABSearchElementRef	*ABSearchElementRef;
-typedef struct __ABAddressBookRef	*ABAddressBookRef;
-typedef const struct __ABMultiValue	*ABMultiValueRef;
-typedef struct __ABMultiValue		*ABMutableMultiValueRef;
+typedef void                            *ABRecordRef;
+typedef struct __ABPerson               *ABPersonRef;
+typedef struct __ABGroup                *ABGroupRef;
+typedef struct __ABSearchElementRef     *ABSearchElementRef;
+typedef struct __ABAddressBookRef       *ABAddressBookRef;
+typedef const struct __ABMultiValue     *ABMultiValueRef;
+typedef struct __ABMultiValue           *ABMutableMultiValueRef;
 
 // --------------------------------------------------------------------------------
 //	LSOpenCFURLRef support
@@ -63,6 +67,9 @@ extern bool ABHasUnsavedChanges(ABAddressBookRef addressBook);
     // --- Me
 extern ABPersonRef ABGetMe(ABAddressBookRef addressBook); // Not retain???
 extern void ABSetMe(ABAddressBookRef addressBook, ABPersonRef moi);
+
+    // Returns the record class Name for a particular uniqueId
+extern CFStringRef ABCopyRecordTypeFromUniqueId(ABAddressBookRef addressBook, CFStringRef uniqueId) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
     // --- Properties
     // Property names must be unique for a record type
@@ -116,7 +123,7 @@ extern ABSearchElementRef ABPersonCreateSearchElement(CFStringRef property, CFSt
 //      ABGroups
 // --------------------------------------------------------------------------------
 
-extern ABGroupRef ABGroupCreate();
+extern ABGroupRef ABGroupCreate(void);
 
     // --- Dealing with Persons
 extern CFArrayRef ABGroupCopyArrayOfAllMembers(ABGroupRef group);
@@ -179,6 +186,10 @@ extern ABMutableMultiValueRef ABMultiValueCreateMutableCopy(ABMultiValueRef mult
 
 extern CFStringRef ABCopyLocalizedPropertyOrLabel(CFStringRef labelOrProperty);
 
+// --- Address formatting
+extern CFStringRef ABCreateFormattedAddressFromDictionary(ABAddressBookRef addressBook, CFDictionaryRef address) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern CFStringRef ABCopyDefaultCountryCode(ABAddressBookRef addressBook) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
 // --------------------------------------------------------------------------------
 //      Person Image Loading
 // --------------------------------------------------------------------------------
@@ -190,5 +201,9 @@ typedef void (*ABImageClientCallback) (CFDataRef imageData, int tag, void* refco
 
 extern int ABBeginLoadingImageDataForClient(ABPersonRef person, ABImageClientCallback callback, void* refcon);
 extern void ABCancelLoadingImageDataForTag(int tag);
+
+#if defined(__cplusplus)
+}
+#endif
 
 #endif

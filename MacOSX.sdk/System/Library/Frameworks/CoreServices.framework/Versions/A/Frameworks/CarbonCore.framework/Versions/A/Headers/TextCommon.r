@@ -3,9 +3,9 @@
  
      Contains:   TextEncoding-related types and constants, and prototypes for related functions
  
-     Version:    CarbonCore-472~1
+     Version:    CarbonCore-545~1
  
-     Copyright:  © 1995-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1995-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -88,20 +88,22 @@
 #define kTextEncodingUnicodeV3_0 		0x0104
 #define kTextEncodingUnicodeV3_1 		0x0105				/*  Adds characters requiring surrogate pairs in UTF-16 */
 #define kTextEncodingUnicodeV3_2 		0x0106
+#define kTextEncodingUnicodeV4_0 		0x0108
 
-#define kTextEncodingISOLatin1 			0x0201				/*  ISO 8859-1 */
-#define kTextEncodingISOLatin2 			0x0202				/*  ISO 8859-2 */
-#define kTextEncodingISOLatin3 			0x0203				/*  ISO 8859-3 */
-#define kTextEncodingISOLatin4 			0x0204				/*  ISO 8859-4 */
+#define kTextEncodingISOLatin1 			0x0201				/*  ISO 8859-1, Western European */
+#define kTextEncodingISOLatin2 			0x0202				/*  ISO 8859-2, Central European */
+#define kTextEncodingISOLatin3 			0x0203				/*  ISO 8859-3, South European (Maltese...) */
+#define kTextEncodingISOLatin4 			0x0204				/*  ISO 8859-4, North European & some Baltic */
 #define kTextEncodingISOLatinCyrillic 	0x0205				/*  ISO 8859-5 */
 #define kTextEncodingISOLatinArabic 	0x0206				/*  ISO 8859-6, = ASMO 708, =DOS CP 708 */
 #define kTextEncodingISOLatinGreek 		0x0207				/*  ISO 8859-7 */
 #define kTextEncodingISOLatinHebrew 	0x0208				/*  ISO 8859-8 */
-#define kTextEncodingISOLatin5 			0x0209				/*  ISO 8859-9 */
-#define kTextEncodingISOLatin6 			0x020A				/*  ISO 8859-10                            */
+#define kTextEncodingISOLatin5 			0x0209				/*  ISO 8859-9, Turkish */
+#define kTextEncodingISOLatin6 			0x020A				/*  ISO 8859-10, Nordic                     */
 #define kTextEncodingISOLatin7 			0x020D				/*  ISO 8859-13, Baltic Rim                    */
 #define kTextEncodingISOLatin8 			0x020E				/*  ISO 8859-14, Celtic                     */
 #define kTextEncodingISOLatin9 			0x020F				/*  ISO 8859-15, 8859-1 changed for EURO & CP1252 letters   */
+#define kTextEncodingISOLatin10 		0x0210				/*  ISO 8859-16, Romanian */
 
 #define kTextEncodingDOSLatinUS 		0x0400				/*  code page 437 */
 #define kTextEncodingDOSGreek 			0x0405				/*  code page 737 (formerly code page 437G) */
@@ -137,12 +139,14 @@
 #define kTextEncodingWindowsKoreanJohab  0x0510				/*  code page 1361, for Windows NT */
 
 #define kTextEncodingUS_ASCII 			0x0600
+#define kTextEncodingANSEL 				0x0601				/*  ANSEL (ANSI Z39.47) for library use */
 #define kTextEncodingJIS_X0201_76 		0x0620				/*  JIS Roman and 1-byte katakana (halfwidth) */
 #define kTextEncodingJIS_X0208_83 		0x0621
 #define kTextEncodingJIS_X0208_90 		0x0622
 #define kTextEncodingJIS_X0212_90 		0x0623
 #define kTextEncodingJIS_C6226_78 		0x0624
 #define kTextEncodingShiftJIS_X0213_00 	0x0628				/*  Shift-JIS format encoding of JIS X0213 planes 1 and 2 */
+#define kTextEncodingJIS_X0213_MenKuTen  0x0629				/*  JIS X0213 in plane-row-column notation (3 bytes) */
 #define kTextEncodingGB_2312_80 		0x0630
 #define kTextEncodingGBK_95 			0x0631				/*  annex to GB 13000-93; for Windows 95; EUC-CN extended */
 #define kTextEncodingGB_18030_2000 		0x0632
@@ -156,21 +160,24 @@
 #define kTextEncodingISO_2022_JP_2 		0x0821				/*  RFC 1554 */
 #define kTextEncodingISO_2022_JP_1 		0x0822				/*  RFC 2237 */
 #define kTextEncodingISO_2022_JP_3 		0x0823				/*  JIS X0213 */
-#define kTextEncodingISO_2022_CN 		0x0830
-#define kTextEncodingISO_2022_CN_EXT 	0x0831
-#define kTextEncodingISO_2022_KR 		0x0840
+#define kTextEncodingISO_2022_CN 		0x0830				/*  RFC 1922 */
+#define kTextEncodingISO_2022_CN_EXT 	0x0831				/*  RFC 1922 */
+#define kTextEncodingISO_2022_KR 		0x0840				/*  RFC 1557 */
 
 #define kTextEncodingEUC_JP 			0x0920				/*  ISO 646, 1-byte katakana, JIS 208, JIS 212 */
 #define kTextEncodingEUC_CN 			0x0930				/*  ISO 646, GB 2312-80 */
 #define kTextEncodingEUC_TW 			0x0931				/*  ISO 646, CNS 11643-1992 Planes 1-16 */
-#define kTextEncodingEUC_KR 			0x0940				/*  ISO 646, KS C 5601-1987 */
+#define kTextEncodingEUC_KR 			0x0940				/*  RFC 1557: ISO 646, KS C 5601-1987 */
 
 #define kTextEncodingShiftJIS 			0x0A01				/*  plain Shift-JIS */
-#define kTextEncodingKOI8_R 			0x0A02				/*  Russian internet standard */
+#define kTextEncodingKOI8_R 			0x0A02				/*  RFC 1489, Russian internet standard */
 #define kTextEncodingBig5 				0x0A03				/*  Big-5 (has variants) */
 #define kTextEncodingMacRomanLatin1 	0x0A04				/*  Mac OS Roman permuted to align with ISO Latin-1 */
 #define kTextEncodingHZ_GB_2312 		0x0A05				/*  HZ (RFC 1842, for Chinese mail & news) */
 #define kTextEncodingBig5_HKSCS_1999 	0x0A06				/*  Big-5 with Hong Kong special char set supplement */
+#define kTextEncodingVISCII 			0x0A07				/*  RFC 1456, Vietnamese */
+#define kTextEncodingKOI8_U 			0x0A08				/*  RFC 2319, Ukrainian */
+#define kTextEncodingBig5_E 			0x0A09				/*  Taiwan Big-5E standard */
 
 #define kTextEncodingNextStepLatin 		0x0B01				/*  NextStep Latin encoding */
 #define kTextEncodingNextStepJapanese 	0x0B02				/*  NextStep Japanese encoding (variant of EUC-JP) */
@@ -226,6 +233,10 @@
 #define kMacHebrewStandardVariant 		0
 #define kMacHebrewFigureSpaceVariant 	1
 
+#define kMacGreekDefaultVariant 		0					/*  meta value, maps to 1 or 2 depending on System */
+#define kMacGreekNoEuroSignVariant 		1					/*  Mac OS version < 9.2.2, 0x9C is SOFT HYPHEN, 0xFF is undefined */
+#define kMacGreekEuroSignVariant 		2					/*  Mac OS version >= 9.2.2, 0x9C is EURO SIGN, 0xFF is SOFT HYPHEN */
+
 #define kMacVT100DefaultVariant 		0					/*  meta value, maps to 1 or 2 depending on System  */
 #define kMacVT100CurrencySignVariant 	1					/*  Mac OS version < 8.5, 0xDB is CURRENCY SIGN        */
 #define kMacVT100EuroSignVariant 		2					/*  Mac OS version >= 8.5, 0xDB is EURO SIGN       */
@@ -236,9 +247,37 @@
 #define kUnicodeHFSPlusDecompVariant 	8					/*  decomposition for HFS+; doesn't decompose in 2000-2FFF, F900-FAFF, 2F800-2FAFF */
 #define kUnicodeHFSPlusCompVariant 		9					/*  composition based on HFS+ decomposition */
 
+#define kISOLatin1StandardVariant 		0
+#define kISOLatin1MusicCDVariant 		1
+
+#define kISOLatinArabicImplicitOrderVariant  0
+#define kISOLatinArabicVisualOrderVariant  1
+#define kISOLatinArabicExplicitOrderVariant  2
+
+#define kISOLatinHebrewImplicitOrderVariant  0
+#define kISOLatinHebrewVisualOrderVariant  1
+#define kISOLatinHebrewExplicitOrderVariant  2
+
+#define kWindowsLatin1StandardVariant 	0
+#define kWindowsLatin1PalmVariant 		1					/*  PalmSource variant of cp1252 */
+
+#define kDOSJapaneseStandardVariant 	0
+#define kDOSJapanesePalmVariant 		1					/*  PalmSource variant of cp932 */
+
+#define kEUC_CN_BasicVariant 			0
+#define kEUC_CN_DOSVariant 				1
+
+#define kEUC_KR_BasicVariant 			0
+#define kEUC_KR_DOSVariant 				1
+
+#define kShiftJIS_BasicVariant 			0
+#define kShiftJIS_DOSVariant 			1
+#define kShiftJIS_MusicCDVariant 		2					/*  MusicShiftJIS, per RIS-506 (RIAJ) */
+
 #define kBig5_BasicVariant 				0
 #define kBig5_StandardVariant 			1					/*  0xC6A1-0xC7FC: kana, Cyrillic, enclosed numerics */
 #define kBig5_ETenVariant 				2					/*  adds kana, Cyrillic, radicals, etc with hi bytes C6-C8,F9 */
+#define kBig5_DOSVariant 				3
 
 #define kMacRomanLatin1DefaultVariant 	0					/*  meta value, maps to others depending on System */
 #define kMacRomanLatin1StandardVariant 	2					/*  permuted MacRoman, EuroSignVariant */
@@ -271,9 +310,25 @@
 
 															/*  Default TextEncodingFormat for any TextEncodingBase */
 #define kTextEncodingDefaultFormat 		0					/*  Formats for Unicode & ISO 10646 */
+#define kUnicodeUTF16Format 			0					/*  UTF16 form (16-bit units), native or external byte order (see below) */
+#define kUnicodeUTF7Format 				1					/*  UTF7 form */
+#define kUnicodeUTF8Format 				2					/*  UTF8 form */
+#define kUnicodeUTF32Format 			3					/*  UTF32 form (32-bit units), native or external byte order (see below) */
+#define kUnicodeUTF16BEFormat 			4					/*  UTF16 form, explicit big-endian byte order, no BOM */
+#define kUnicodeUTF16LEFormat 			5					/*  UTF16 form, explicit little-endian byte order, no BOM */
+#define kUnicodeUTF32BEFormat 			6					/*  UTF32 form, explicit big-endian byte order, no BOM */
+#define kUnicodeUTF32LEFormat 			7					/*  UTF32 form, explicit little-endian byte order, no BOM */
+#define kUnicodeSCSUFormat 				8					/*  Std. Compression Scheme for Unicode, Unicode Tech Std. #6 */
+															/*  Note for kUnicodeUTF16Format and kUnicodeUTF32Format: */
+															/*  - An array of UTF16Char (UniChar) or UTF32Char is normally understood to use "internal" or */
+															/*  platform-native byte ordering for kUnicodeUTF16Format and kUnicodeUTF32Format; the array MAY */
+															/*  begin with byte-order mark (BOM), but the BOM should match the internal ordering. */
+															/*  - If an array of bytes (such as char *) that can be in various encodings is specified to be */
+															/*  in Unicode with kUnicodeUTF16Format or kUnicodeUTF32Format (not explicitly BE or LE), then it */
+															/*  is assumed to use "external" byte ordering, which means: If there is a BOM at the beginning */
+															/*  of text, the BOM specifies the byte ordering, otherwise big-endian is assumed. */
+															/*  Synonyms for some Unicode formats */
 #define kUnicode16BitFormat 			0
-#define kUnicodeUTF7Format 				1
-#define kUnicodeUTF8Format 				2
 #define kUnicode32BitFormat 			3
 
 #define kTextEncodingFullName 			0

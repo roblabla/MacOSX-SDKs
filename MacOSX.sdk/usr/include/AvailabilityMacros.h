@@ -1,5 +1,5 @@
 /*
-     File:       AvailabilityMacros.h (QuickTime 6.4 edition)
+     File:       AvailabilityMacros.h
  
      Copyright:  (c) 2001-2003 by Apple Computer, Inc., all rights reserved.
 
@@ -86,13 +86,13 @@
 #endif
 
 /*
- * if max OS not specified, assume largerof(10.3, min) (Modified for QuickTime)
+ * if max OS not specified, assume largerof(10.3, min)
  */
 #ifndef MAC_OS_X_VERSION_MAX_ALLOWED
     #if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_3
         #define MAC_OS_X_VERSION_MAX_ALLOWED MAC_OS_X_VERSION_MIN_REQUIRED
     #else
-        #define MAC_OS_X_VERSION_MAX_ALLOWED MAC_OS_X_VERSION_10_2
+        #define MAC_OS_X_VERSION_MAX_ALLOWED MAC_OS_X_VERSION_10_3
     #endif
 #endif
 
@@ -283,9 +283,9 @@
 /*
  * AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER
  * 
- * Used on declarations introduced in Mac OS X 10.3 (Modified for QuickTime)
+ * Used on declarations introduced in Mac OS X 10.3 
  */
-#if MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_2
+#if MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_3
     #define AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER     UNAVAILABLE_ATTRIBUTE
 #elif MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_3
     #define AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER     WEAK_IMPORT_ATTRIBUTE

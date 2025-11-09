@@ -1,6 +1,6 @@
 /*
         NSStringDrawing.h
-        Copyright (c) 1994-2001, Apple Computer, Inc.  All rights reserved.
+        Copyright (c) 1994-2003, Apple Computer, Inc.  All rights reserved.
 
         Methods to deal with NSString drawing, measuring
    

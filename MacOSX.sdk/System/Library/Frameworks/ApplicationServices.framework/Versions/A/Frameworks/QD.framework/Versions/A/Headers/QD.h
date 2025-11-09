@@ -3,9 +3,9 @@
  
      Contains:   Master include for QD private framework
  
-     Version:    Quickdraw-96.21~1
+     Version:    Quickdraw-150~1
  
-     Copyright:  © 1999-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -66,10 +66,6 @@
 #include <QD/PictUtils.h>
 #endif
 
-#ifndef __ATSUNICODE__
-#include <QD/ATSUnicode.h>
-#endif
-
 #ifndef __VIDEO__
 #include <QD/Video.h>
 #endif
@@ -80,6 +76,30 @@
 
 #ifndef __FONTSYNC__
 #include <QD/FontSync.h>
+#endif
+
+#ifndef __ATSUNICODE__
+#include <QD/ATSUnicode.h>
+#endif
+
+#ifndef __ATSUNICODETYPES__
+#include <QD/ATSUnicodeTypes.h>
+#endif
+
+#ifndef __ATSUNICODEOBJECTS__
+#include <QD/ATSUnicodeObjects.h>
+#endif
+
+#ifndef __ATSUNICODEDRAWING__
+#include <QD/ATSUnicodeDrawing.h>
+#endif
+
+#ifndef __ATSUNICODEFONTS__
+#include <QD/ATSUnicodeFonts.h>
+#endif
+
+#ifndef __ATSUNICODEGLYPHS__
+#include <QD/ATSUnicodeGlyphs.h>
 #endif
 
 #ifndef __ATSUNICODEFLATTENING__

@@ -140,6 +140,7 @@ public:
     virtual bool validateFormat(IOAudioStreamFormat *streamFormat, IOAudioStreamFormatExtension *formatExtension, IOAudioStreamFormatDesc *formatDesc);
 	virtual void setTerminalType(const UInt32 terminalType);
 	virtual IOReturn mixOutputSamples(const void *sourceBuf, void *mixBuf, UInt32 firstSampleFrame, UInt32 numSampleFrames, const IOAudioStreamFormat *streamFormat, IOAudioStream *audioStream);
+	virtual void setSampleLatency(UInt32 numSamples);
 
 private:
     OSMetaClassDeclareReservedUsed(IOAudioStream, 0);
@@ -150,8 +151,8 @@ private:
     OSMetaClassDeclareReservedUsed(IOAudioStream, 5);
     OSMetaClassDeclareReservedUsed(IOAudioStream, 6);
     OSMetaClassDeclareReservedUsed(IOAudioStream, 7);
+    OSMetaClassDeclareReservedUsed(IOAudioStream, 8);
 
-    OSMetaClassDeclareReservedUnused(IOAudioStream, 8);
     OSMetaClassDeclareReservedUnused(IOAudioStream, 9);
     OSMetaClassDeclareReservedUnused(IOAudioStream, 10);
     OSMetaClassDeclareReservedUnused(IOAudioStream, 11);

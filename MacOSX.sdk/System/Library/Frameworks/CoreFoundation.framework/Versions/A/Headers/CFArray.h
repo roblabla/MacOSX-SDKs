@@ -1,5 +1,5 @@
 /*	CFArray.h
-	Copyright 1998-2002, Apple, Inc. All rights reserved.
+	Copyright (c) 1998-2003, Apple, Inc. All rights reserved.
 */
 
 /*!
@@ -23,7 +23,7 @@
 	into the array, and variable capacity, which can have an unlimited
 	number of values (or rather, limited only by constraints external
 	to CFArray, like the amount of available memory). Fixed-capacity
-	arrays can be somewhat higher performing, if you can put a definate
+	arrays can be somewhat higher performing, if you can put a definite
 	upper limit on the number of values that might be put into the
 	array.
 
@@ -41,7 +41,7 @@
 	will typically be linear in the number of values in the array, but
 	may be O(N*lg N) clearly in the worst case in some implementations.
 	There are no favored positions within the array for performance;
-	that is, it is not necessarily faster access values with low
+	that is, it is not necessarily faster to access values with low
 	indices, or to insert or delete values with high indices, or
 	whatever.
 */
@@ -145,7 +145,7 @@ CFTypeID CFArrayGetTypeID(void);
 		array into the CFArray. This number will be the count of the
 		array.
 		If this parameter is negative, or greater than the number of
-		values actually in the values C array, the behavior is
+		values actually in the value's C array, the behavior is
 		undefined.
 	@param callBacks A pointer to a CFArrayCallBacks structure
 		initialized with the callbacks for the array to use on each
@@ -292,7 +292,7 @@ CFIndex CFArrayGetCount(CFArrayRef theArray);
 		valid CFArray, the behavior is undefined.
 	@param range The range within the array to search. If the range
 		location or end point (defined by the location plus length
-		minus 1) are outside the index space of the array (0 to
+		minus 1) is outside the index space of the array (0 to
 		N-1 inclusive, where N is the count of the array), the
 		behavior is undefined. If the range length is negative, the
 		behavior is undefined. The range may be empty (length 0).
@@ -315,7 +315,7 @@ CFIndex CFArrayGetCountOfValue(CFArrayRef theArray, CFRange range, const void *v
 		valid CFArray, the behavior is undefined.
 	@param range The range within the array to search. If the range
 		location or end point (defined by the location plus length
-		minus 1) are outside the index space of the array (0 to
+		minus 1) is outside the index space of the array (0 to
 		N-1 inclusive, where N is the count of the array), the
 		behavior is undefined. If the range length is negative, the
 		behavior is undefined. The range may be empty (length 0).
@@ -352,7 +352,7 @@ const void *CFArrayGetValueAtIndex(CFArrayRef theArray, CFIndex idx);
 		valid CFArray, the behavior is undefined.
 	@param range The range of values within the array to retrieve. If
 		the range location or end point (defined by the location
-		plus length minus 1) are outside the index space of the
+		plus length minus 1) is outside the index space of the
 		array (0 to N-1 inclusive, where N is the count of the
 		array), the behavior is undefined. If the range length is
 		negative, the behavior is undefined. The range may be empty
@@ -373,7 +373,7 @@ void CFArrayGetValues(CFArrayRef theArray, CFRange range, const void **values);
 		a valid CFArray, the behavior is undefined.
 	@param range The range of values within the array to which to apply
 		the function. If the range location or end point (defined by
-		the location plus length minus 1) are outside the index
+		the location plus length minus 1) is outside the index
 		space of the array (0 to N-1 inclusive, where N is the count
 		of the array), the behavior is undefined. If the range
 		length is negative, the behavior is undefined. The range may
@@ -400,7 +400,7 @@ void CFArrayApplyFunction(CFArrayRef theArray, CFRange range, CFArrayApplierFunc
 		valid CFArray, the behavior is undefined.
 	@param range The range within the array to search. If the range
 		location or end point (defined by the location plus length
-		minus 1) are outside the index space of the array (0 to
+		minus 1) is outside the index space of the array (0 to
 		N-1 inclusive, where N is the count of the array), the
 		behavior is undefined. If the range length is negative, the
 		behavior is undefined. The range may be empty (length 0).
@@ -425,7 +425,7 @@ CFIndex CFArrayGetFirstIndexOfValue(CFArrayRef theArray, CFRange range, const vo
 		valid CFArray, the behavior is undefined.
 	@param range The range within the array to search. If the range
 		location or end point (defined by the location plus length
-		minus 1) are outside the index space of the array (0 to
+		minus 1) is outside the index space of the array (0 to
 		N-1 inclusive, where N is the count of the array), the
 		behavior is undefined. If the range length is negative, the
 		behavior is undefined. The range may be empty (length 0).
@@ -452,7 +452,7 @@ CFIndex CFArrayGetLastIndexOfValue(CFArrayRef theArray, CFRange range, const voi
 		comparator function, the behavior is undefined.
 	@param range The range within the array to search. If the range
 		location or end point (defined by the location plus length
-		minus 1) are outside the index space of the array (0 to
+		minus 1) is outside the index space of the array (0 to
 		N-1 inclusive, where N is the count of the array), the
 		behavior is undefined. If the range length is negative, the
 		behavior is undefined. The range may be empty (length 0).
@@ -484,7 +484,7 @@ CFIndex CFArrayBSearchValues(CFArrayRef theArray, CFRange range, const void *val
 
 /*!
 	@function CFArrayAppendValue
-	Adds the value to the array giving it the new largest index.
+	Adds the value to the array giving it a new largest index.
 	@param theArray The array to which the value is to be added. If this
 		parameter is not a valid mutable CFArray, the behavior is
 		undefined. If the array is a fixed-capacity array and it
@@ -501,7 +501,7 @@ void CFArrayAppendValue(CFMutableArrayRef theArray, const void *value);
 
 /*!
 	@function CFArrayInsertValueAtIndex
-	Adds the value to the array giving it the given index.
+	Adds the value to the array, giving it the given index.
 	@param theArray The array to which the value is to be added. If this
 		parameter is not a valid mutable CFArray, the behavior is
 		undefined. If the array is a fixed-capacity array and it
@@ -576,7 +576,7 @@ void CFArrayRemoveAllValues(CFMutableArrayRef theArray);
 		the behavior is undefined.
 	@param range The range of values within the array to replace. If the
 		range location or end point (defined by the location plus
-		length minus 1) are outside the index space of the array (0
+		length minus 1) is outside the index space of the array (0
 		to N inclusive, where N is the count of the array), the
 		behavior is undefined. If the range length is negative, the
 		behavior is undefined. The range may be empty (length 0),
@@ -628,7 +628,7 @@ void CFArrayExchangeValuesAtIndices(CFMutableArrayRef theArray, CFIndex idx1, CF
 		undefined.
 	@param range The range of values within the array to sort. If the
 		range location or end point (defined by the location plus
-		length minus 1) are outside the index space of the array (0
+		length minus 1) is outside the index space of the array (0
 		to N-1 inclusive, where N is the count of the array), the
 		behavior is undefined. If the range length is negative, the
 		behavior is undefined. The range may be empty (length 0).
@@ -664,7 +664,7 @@ void CFArraySortValues(CFMutableArrayRef theArray, CFRange range, CFComparatorFu
 		behavior is undefined.
 	@param otherRange The range within the otherArray from which to add
 		the values to the array. If the range location or end point
-		(defined by the location plus length minus 1) are outside
+		(defined by the location plus length minus 1) is outside
 		the index space of the otherArray (0 to N-1 inclusive, where
 		N is the count of the otherArray), the behavior is
 		undefined. The new values are retained by the array using

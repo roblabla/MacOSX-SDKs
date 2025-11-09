@@ -1,5 +1,5 @@
 /*	NSByteOrder.h
-	Copyright 1995-2002, Apple, Inc. All rights reserved.
+	Copyright (c) 1995-2003, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObjCRuntime.h>

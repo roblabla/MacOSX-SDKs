@@ -2,21 +2,22 @@
  * Copyright (c) 1998-2003 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
- *
- * The contents of this file constitute Original Code as defined in and
- * are subject to the Apple Public Source License Version 1.1 (the
- * "License").  You may not use this file except in compliance with the
- * License.  Please obtain a copy of the License at
- * http://www.apple.com/publicsource and read it before using this file.
- *
- * This Original Code and all software distributed under the License are
- * distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * 
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this
+ * file.
+ * 
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
  * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT.  Please see the
- * License for the specific language governing rights and limitations
- * under the License.
- *
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
+ * limitations under the License.
+ * 
  * @APPLE_LICENSE_HEADER_END@
  */
 
@@ -162,7 +163,7 @@ protected:
 	
 	static const UInt32 kDefaultBusyTimeoutValue	= 0x0000000F;
 	static const UInt64 kMaxFireWireLUN				= 0xFFFF;
-	static const UInt32 kMaxFireWirePayload			= 2048;
+	static const UInt32 kMaxFireWirePayload			= 4096;
 	static const UInt32 kMaxLoginRetryCount			= 8;
 	static const UInt32 kMaxReconnectCount			= 128;
 	static const UInt32 kCSRModelInfoKey			= 0x17;
@@ -351,15 +352,13 @@ public:
 
 	/*! 
 		@function start
-		@abstract During an IOService instantiation, the start method is called when the
-		IOService has been selected to run on the provider.
 		@discussion See IOService for discussion.
 		@result Return true if the start was successful, false otherwise ( which will
 		cause the instance to be detached and usually freed ).
 	*/
 
 	virtual bool start ( IOService * provider );
-
+	
 	/*!
 	 *	@function cleanUp
 		@abstract cleanUp is called to tear down IOFireWireSerialBusProtocolTransport.
@@ -369,6 +368,22 @@ public:
 	
 	virtual void cleanUp ( void );
 
+	/*!
+		@function finalize
+		@abstract See IOService for discussion.
+		@result Returns true.
+	*/
+	
+	virtual bool finalize ( IOOptionBits options );
+
+	/*! 
+		@function free
+		@discussion See IOService for discussion.
+		@result none.
+	*/
+	
+	virtual void free ( void );
+		
 protected:
 	
 	virtual IOReturn login ( void );
@@ -385,6 +400,26 @@ protected:
    
 	virtual void loginResumed ( void );
 	OSMetaClassDeclareReservedUsed ( IOFireWireSerialBusProtocolTransport, 5 );
+
+	static IOReturn
+		IOFireWireSerialBusProtocolTransport::CriticalOrbSubmissionStatic ( 
+			OSObject * refCon, 
+			void * val1,
+			void * val2,
+			void * val3,
+			void * val4 );
+
+	/*!
+		@function CriticalOrbSubmission
+		@abstract xxx.
+		@discussion	xxx.
+		@result none.
+	*/
+	
+	void
+		CriticalOrbSubmission (
+			IOFireWireSBP2ORB * orb,
+			SCSITaskIdentifier request );
 		
 private:
 	

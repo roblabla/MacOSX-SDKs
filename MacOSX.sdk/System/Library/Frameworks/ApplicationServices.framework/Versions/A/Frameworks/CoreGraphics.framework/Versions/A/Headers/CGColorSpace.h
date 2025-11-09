@@ -1,5 +1,5 @@
 /* CoreGraphics - CGColorSpace.h
- * Copyright (c) 1999-2001 Apple Computer, Inc.
+ * Copyright (c) 1999-2003 Apple Computer, Inc.
  * All rights reserved.
  */
 
@@ -113,9 +113,9 @@ CG_EXTERN CGColorSpaceRef CGColorSpaceCreateIndexed(CGColorSpaceRef baseSpace, s
 
 CG_EXTERN CGColorSpaceRef CGColorSpaceCreatePattern(CGColorSpaceRef baseSpace);
 
-/* Create a CGColorSpace using `platformColorSpaceReference', a pointer to
- * a platform-specific color space reference. For MacOS X,
- * `platformColorSpaceReference' should be a pointer to a CMProfileRef. */
+/* Create a CGColorSpace using `platformColorSpaceReference', a
+ * platform-specific color space reference. For MacOS X,
+ * `platformColorSpaceReference' should be a CMProfileRef. */
 
 CG_EXTERN CGColorSpaceRef CGColorSpaceCreateWithPlatformColorSpace(void *platformColorSpaceReference);
 

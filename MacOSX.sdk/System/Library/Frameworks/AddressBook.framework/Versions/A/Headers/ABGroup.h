@@ -2,7 +2,7 @@
 //  ABGroup.h
 //  AddressBook Framework
 //
-//  Copyright (c) 2002 Apple Computer. All rights reserved.
+//  Copyright (c) 2002-2003 Apple Computer. All rights reserved.
 //
 
 #import <AddressBook/ABRecord.h>
@@ -65,7 +65,7 @@
     // Raises if property or person is nil
     // Returns YES is successful
 
-- (NSString*)distributionIdentifierForProperty:(NSString *)property person:(ABPerson *)person;
+- (NSString *)distributionIdentifierForProperty:(NSString *)property person:(ABPerson *)person;
     // Returns the distribution identifier for a given property and person. If not set then returns the property primary identifier
     // Raises if property or person is nil
     // Returns the distribution identifier or nil if not sucessfull
@@ -81,8 +81,8 @@
 
 + (int)addPropertiesAndTypes:(NSDictionary *)properties;
     // Add properties to all groups. The dictionary must be of the form:
-    //		key: propety name
-    //		value: property type
+    //          key: propety name
+    //          value: property type
     // Property name must be unique
     // Returns YES is successful
 
@@ -107,18 +107,17 @@
 @interface ABGroup (ABGroup_Searching)
 + (ABSearchElement *)searchElementForProperty:(NSString*)property
                                         label:(NSString*)label
-                                        key:(NSString*)key
+                                          key:(NSString*)key
                                         value:(id)value
-                                    comparison:(ABSearchComparison)comparison;
+                                   comparison:(ABSearchComparison)comparison;
     // Returns a search element that will search on groups
-    // 		property: the name of the property to search on (cannot be null)
-    //		label: for multi-value properties an optional label (can be null)
-    //		key: for dictionary values an optional key (can be null)
-    //		value: value to match (can be null)
-    //		comparison: the type of search (see ABTypedefs.h)
+    //          property: the name of the property to search on (cannot be null)
+    //          label: for multi-value properties an optional label (can be null)
+    //          key: for dictionary values an optional key (can be null)
+    //          value: value to match (can be null)
+    //          comparison: the type of search (see ABTypedefs.h)
     //
-    // If the value is null the only supported comparisons are kABEqual or kABNotEqual.
-    // Support for null values was added in Mac OS X version 10.2.4
-
+    // if the value is null the only supported comparisons are kABEqual or kABNotEqual
+    // Note: Support for Null values was added to Mac OS X version 10.2.4
 @end
 

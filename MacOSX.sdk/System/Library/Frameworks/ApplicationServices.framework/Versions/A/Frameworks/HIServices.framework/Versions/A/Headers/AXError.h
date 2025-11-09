@@ -15,20 +15,21 @@ extern "C" {
 #include <CoreFoundation/CoreFoundation.h>
 
 enum {
-    kAXErrorSuccess 						= 0,
-    kAXErrorFailure							= -25200,
-    kAXErrorIllegalArgument					= -25201,
-    kAXErrorInvalidUIElement				= -25202,
+    kAXErrorSuccess 				= 0,
+    kAXErrorFailure				= -25200,
+    kAXErrorIllegalArgument			= -25201,
+    kAXErrorInvalidUIElement			= -25202,
     kAXErrorInvalidUIElementObserver		= -25203,
-    kAXErrorCannotComplete					= -25204,
-    kAXErrorAttributeUnsupported			= -25205,
-    kAXErrorActionUnsupported				= -25206,
-    kAXErrorNotificationUnsupported			= -25207,
-    kAXErrorNotImplemented					= -25208,
+    kAXErrorCannotComplete			= -25204,
+    kAXErrorAttributeUnsupported		= -25205,
+    kAXErrorActionUnsupported			= -25206,
+    kAXErrorNotificationUnsupported		= -25207,
+    kAXErrorNotImplemented			= -25208,
     kAXErrorNotificationAlreadyRegistered	= -25209,
     kAXErrorNotificationNotRegistered		= -25210,
-    kAXErrorAPIDisabled						= -25211,
-    kAXErrorNoValue							= -25212
+    kAXErrorAPIDisabled				= -25211,
+    kAXErrorNoValue				= -25212,
+    kAXErrorParameterizedAttributeUnsupported	= -25213
 };
 typedef SInt32 AXError;
 

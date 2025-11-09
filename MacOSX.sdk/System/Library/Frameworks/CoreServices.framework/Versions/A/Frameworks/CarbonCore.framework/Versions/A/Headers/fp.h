@@ -3,9 +3,9 @@
  
      Contains:   FPCE Floating-Point Definitions and Declarations.
  
-     Version:    CarbonCore-472~1
+     Version:    CarbonCore-545~1
  
-     Copyright:  © 1987-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1987-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -1196,13 +1196,13 @@ extern double_t  fmin(double_t x, double_t y);
 *******************************************************************************/
 /*
  *  pi
- *  
+ *
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later
  */
-extern const double_t pi;
+extern const double_t pi                                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 /********************************************************************************
 *                                                                               *
 *                              Non NCEG extensions                              *
@@ -2409,11 +2409,19 @@ extern double  x80tod(const extended80 * x80)                 AVAILABLE_MAC_OS_X
 extern void  dtox80(const double *x, extended80 *x80)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+
+
+#if __cplusplus && TYPE_LONGDOUBLE_IS_DOUBLE
+#define x80told       __inline_x80told
+#define ldtox80        __inline_ldtox80
+#endif
+
+
 /*
  *  x80told()
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         in version 10.3 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later or as macro/inline
  */
@@ -2432,7 +2440,7 @@ extern void  x80told(const extended80 *x80, long double *x);
  *  ldtox80()
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         in version 10.3 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MathLib 1.0 and later or as macro/inline
  */

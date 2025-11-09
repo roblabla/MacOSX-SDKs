@@ -26,7 +26,7 @@ typedef function_table_entry 	*function_table_t;
 #endif /* AUTOTEST */
 
 #ifndef	mach_host_MSG_COUNT
-#define	mach_host_MSG_COUNT	17
+#define	mach_host_MSG_COUNT	18
 #endif	/* mach_host_MSG_COUNT */
 
 #include <mach/std_types.h>
@@ -39,6 +39,9 @@ typedef function_table_entry 	*function_table_t;
 #ifdef __BeforeMigUserHeader
 __BeforeMigUserHeader
 #endif /* __BeforeMigUserHeader */
+
+#include <sys/cdefs.h>
+__BEGIN_DECLS
 
 
 /* Routine host_info */
@@ -268,6 +271,33 @@ kern_return_t host_statistics
 	host_info_t host_info_out,
 	mach_msg_type_number_t *host_info_outCnt
 );
+
+/* Routine host_request_notification */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t host_request_notification
+(
+	host_t host,
+	host_flavor_t notify_type,
+	mach_port_t notify_port
+);
+
+__END_DECLS
+
+/********************** Caution **************************/
+/* The following data types should be used to calculate  */
+/* maximum message sizes only. The actual message may be */
+/* smaller, and the position of the arguments within the */
+/* message layout may vary from what is presented here.  */
+/* For example, if any of the arguments are variable-    */
+/* sized, and less than the maximum is sent, the data    */
+/* will be packed tight in the actual message to reduce  */
+/* the presence of holes.                                */
+/********************** Caution **************************/
+
 /* typedefs for all requests */
 
 #ifndef __Request__mach_host_subsystem__defined
@@ -370,6 +400,16 @@ kern_return_t host_statistics
 		mach_msg_type_number_t host_info_outCnt;
 	} __Request__host_statistics_t;
 
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t notify_port;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		host_flavor_t notify_type;
+	} __Request__host_request_notification_t;
+
 #endif /* !__Request__mach_host_subsystem__defined */
 
 /* union of all requests */
@@ -394,6 +434,7 @@ union __RequestUnion__mach_host_subsystem {
 	__Request__processor_set_create_t Request_processor_set_create;
 	__Request__mach_memory_object_memory_entry_64_t Request_mach_memory_object_memory_entry_64;
 	__Request__host_statistics_t Request_host_statistics;
+	__Request__host_request_notification_t Request_host_request_notification;
 };
 #endif /* !__RequestUnion__mach_host_subsystem__defined */
 /* typedefs for all replies */
@@ -546,6 +587,12 @@ union __RequestUnion__mach_host_subsystem {
 		integer_t host_info_out[12];
 	} __Reply__host_statistics_t;
 
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__host_request_notification_t;
+
 #endif /* !__Reply__mach_host_subsystem__defined */
 
 /* union of all replies */
@@ -570,6 +617,7 @@ union __ReplyUnion__mach_host_subsystem {
 	__Reply__processor_set_create_t Reply_processor_set_create;
 	__Reply__mach_memory_object_memory_entry_64_t Reply_mach_memory_object_memory_entry_64;
 	__Reply__host_statistics_t Reply_host_statistics;
+	__Reply__host_request_notification_t Reply_host_request_notification;
 };
 #endif /* !__RequestUnion__mach_host_subsystem__defined */
 
@@ -591,7 +639,8 @@ union __ReplyUnion__mach_host_subsystem {
     { "processor_set_default", 213 },\
     { "processor_set_create", 214 },\
     { "mach_memory_object_memory_entry_64", 215 },\
-    { "host_statistics", 216 }
+    { "host_statistics", 216 },\
+    { "host_request_notification", 217 }
 #endif
 
 #ifdef __AfterMigUserHeader

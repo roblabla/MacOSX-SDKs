@@ -178,7 +178,7 @@ extern const CFStringRef kMIDIDriverPropertyUsesSerial;
 struct MIDIDriverInterface
 {
 #ifdef __cplusplus
-public:		// informs HeaderDoc that the members of a struct are public by default
+//public:		// informs HeaderDoc that the members of a struct are public by default
 #endif
 	IUNKNOWN_C_GUTS;
 
@@ -322,6 +322,24 @@ extern OSStatus		MIDIDeviceCreate(MIDIDriverRef owner,
 							CFStringRef name, CFStringRef manufacturer, 
 							CFStringRef model, MIDIDeviceRef *outDevice);
 
+
+/*!
+	@function		MIDIDeviceDispose
+
+	@discussion		Drivers may call this function to dispose MIDIDevice objects
+					which have not yet been added to the system via MIDISetupAddDevice.
+					Once a device has been added to the system with MIDISetupAddDevice,
+					the driver must not use this call to destroy it; it must
+					use MIDISetupRemoveDevice to do so.
+					
+					Non-drivers do not have access to this function; they must call
+					MIDISetupAddDevice and MIDISetupRemoveDevice.
+	
+	@param			device
+						The device to be disposed.
+	@result			An OSStatus result code.
+*/
+extern OSStatus		MIDIDeviceDispose(MIDIDeviceRef device);
 
 // ___________________________________________________________________________________________
 //	MIDIDeviceList

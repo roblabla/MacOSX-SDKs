@@ -1,7 +1,7 @@
 /*
 	NSScrollView.h
 	Application Kit
-	Copyright (c) 1994-2001, Apple Computer, Inc.
+	Copyright (c) 1994-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 #import <Foundation/NSDate.h>
@@ -24,9 +24,15 @@ typedef struct __SFlags {
     unsigned int        needsTile:1;
     unsigned int	doesNotDrawBackground:1;
     unsigned int	skipRemoveSuperviewCheck:1;
-    unsigned int        RESERVED:18;
+    unsigned int	focusRingNeedsRedisplay:1;
+    unsigned int	hasCustomLineBorderColor:1;
+    unsigned int	autohidesScrollers:1;
+    unsigned int        RESERVED:15;
 #else
-    unsigned int        RESERVED:18;
+    unsigned int        RESERVED:15;
+    unsigned int	autohidesScrollers:1;
+    unsigned int	hasCustomLineBorderColor:1;
+    unsigned int	focusRingNeedsRedisplay:1;
     unsigned int	skipRemoveSuperviewCheck:1;
     unsigned int	doesNotDrawBackground:1;
     unsigned int        needsTile:1;
@@ -86,6 +92,10 @@ typedef struct __SFlags {
 - (NSScroller *)verticalScroller;
 - (void)setHorizontalScroller:(NSScroller *)anObject;
 - (NSScroller *)horizontalScroller;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (BOOL)autohidesScrollers;
+- (void)setAutohidesScrollers:(BOOL)flag;
+#endif
 - (void)setHorizontalLineScroll:(float)value;
 - (void)setVerticalLineScroll:(float)value;
 - (void)setLineScroll:(float)value;

@@ -56,6 +56,8 @@ typedef struct OpaquePrivOBEXSessionData* PrivOBEXSessionDataRef;
 	size_t							mResponsePacketDataLengthSoFar;		// Desgmentation buffer support.
 	OBEXOpCode						mIncompletePacketResponseCode;		// Desgmentation buffer support.
 	PrivOBEXSessionDataRef			mPrivateOBEXSessionData;			// Truly-private session state data.
+	OBEXMaxPacketLength				mTheirMaxPacketLength;				// Negotiated maximum packet size.
+	OBEXMaxPacketLength				mOurMaxPacketLength;				// Negotiated maximum packet size we can handle.
 }
 
 #if 0

@@ -3,9 +3,9 @@
  
      Contains:   Generic Abstract Shape API
  
-     Version:    HIToolbox-124.14~2
+     Version:    HIToolbox-145.33~1
  
-     Copyright:  © 2001-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2001-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -52,7 +52,16 @@ extern "C" {
  *    created and passed around and 'copied' very quickly, since they
  *    are actually refcounted when copied. This avoids needing to do
  *    the handle-to-handle copies that occur right now with
- *    RgnHandle-based APIs.
+ *    RgnHandle-based APIs. 
+ *    
+ *    IMPORTANT: Unfortunately, this header is somewhat useless in Mac
+ *    OS X 10.2. We did not get to use HIShapeRefs anywhere in our
+ *    HIView APIs, yet it was too late to pull this header for fear of
+ *    breakage. So look at this header as a kind of sneak peek. You can
+ *    use this APIs to start using HIShapeRefs in your own code if you
+ *    wish though. When the Toolbox starts to use this in future
+ *    releases, you will be able to pass your HIShapeRefs directly into
+ *    APIs as you'd expect.
  */
 typedef const struct __HIShape*         HIShapeRef;
 typedef struct __HIShape*               HIMutableShapeRef;

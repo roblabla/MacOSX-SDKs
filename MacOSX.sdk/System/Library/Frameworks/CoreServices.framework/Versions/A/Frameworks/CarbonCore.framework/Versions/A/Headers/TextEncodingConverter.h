@@ -3,9 +3,9 @@
  
      Contains:   Text Encoding Conversion Interfaces.
  
-     Version:    CarbonCore-472~1
+     Version:    CarbonCore-545~1
  
-     Copyright:  © 1994-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1994-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -22,6 +22,10 @@
 
 #ifndef __TEXTCOMMON__
 #include <CarbonCore/TextCommon.h>
+#endif
+
+#ifndef __CFSTRING__
+#include <CoreFoundation/CFString.h>
 #endif
 
 
@@ -61,6 +65,46 @@ struct TECConversionInfo {
   UInt16              reserved2;
 };
 typedef struct TECConversionInfo        TECConversionInfo;
+
+/*
+ *  TECInternetNameUsageMask
+ *  
+ *  Discussion:
+ *    Mask values that control the mapping between TextEncoding and
+ *    IANA charset name or MIB enum.
+ */
+typedef UInt32 TECInternetNameUsageMask;
+enum {
+                                        /* Use one of the following*/
+
+  /*
+   * Use the default type of mapping given other usage information
+   * (none currently defined).
+   */
+  kTECInternetNameDefaultUsageMask = 0,
+
+  /*
+   * Use the closest possible match between TextEncoding value and IANA
+   * charset name or MIB enum
+   */
+  kTECInternetNameStrictUsageMask = 1,
+
+  /*
+   * When mapping from IANA charset name or MIB enum to TextEncoding,
+   * map to the largest superset of the encoding specified by the
+   * charset name or MIB enum (i.e. be tolerant). When mapping from
+   * TextEncoding to IANA charset name or MIB enum, typically map to
+   * the most generic or widely recognized charset name or MIB enum.
+   */
+  kTECInternetNameTolerantUsageMask = 2
+};
+
+/* Special values for MIB enums */
+enum {
+  kTEC_MIBEnumDontCare          = -1
+};
+
+
 /* return number of encodings types supported by user's configuraton of the encoding converter */
 /*
  *  TECCountAvailableTextEncodings()
@@ -489,7 +533,7 @@ TECCreateSniffer(
 extern OSStatus 
 TECSniffTextEncoding(
   TECSnifferObjectRef   encodingSniffer,
-  TextPtr               inputBuffer,
+  ConstTextPtr          inputBuffer,
   ByteCount             inputBufferLength,
   TextEncoding          testEncodings[],
   ItemCount             numTextEncodings,
@@ -527,10 +571,103 @@ TECClearSnifferContextInfo(TECSnifferObjectRef encodingSniffer) AVAILABLE_MAC_OS
  *  TECSetBasicOptions()
  *  
  *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
+ *    Mac OS X:         in version 10.3 and later in CoreServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
  *    Non-Carbon CFM:   in TextEncodingConverter 1.5 and later
  */
+extern OSStatus 
+TECSetBasicOptions(
+  TECObjectRef   encodingConverter,
+  OptionBits     controlFlags)                                AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/* Map TextEncoding values to/from IANA charset names and/or MIB enums, with usage control */
+/*
+ *  TECCopyTextEncodingInternetNameAndMIB()
+ *  
+ *  Summary:
+ *    Converts a TextEncoding value to an IANA charset name and/or a
+ *    MIB enum value
+ *  
+ *  Discussion:
+ *    Given a TextEncoding value, this function maps it to an IANA
+ *    charset name (if encodingNamePtr is non-NULL) and/or a MIB enum
+ *    value (if mibEnumPtr is non-NULL), as specified by the usage
+ *    parameter.
+ *  
+ *  Parameters:
+ *    
+ *    textEncoding:
+ *      A TextEncoding value to map to a charset name and/or MIB enum.
+ *    
+ *    usage:
+ *      Specifies the type of mapping desired (see
+ *      TECInternetNameUsageMask above).
+ *    
+ *    encodingNamePtr:
+ *      If non-NULL, is a pointer to a CStringRef for an immutable
+ *      CFString created by this function; when the caller is finished
+ *      with it, the caller must dispose of it by calling CFRelease.
+ *    
+ *    mibEnumPtr:
+ *      If non-NULL, is a pointer to an SInt32 that will be set to the
+ *      appropriate MIB enum value, or to 0 (or kTEC_MIBEnumDontCare)
+ *      if there is no appropriate MIB enum value (valid MIB enums
+ *      begin at 3).
+ *  
+ *  Result:
+ *    The function returns paramErr if encodingNamePtr and mibEnumPtr
+ *    are both NULL. It returns kTextUnsupportedEncodingErr if it has
+ *    no data for the supplied textEncoding. It returns noErr if it
+ *    found useful data.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in CoreServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+TECCopyTextEncodingInternetNameAndMIB(
+  TextEncoding               textEncoding,
+  TECInternetNameUsageMask   usage,
+  CFStringRef *              encodingNamePtr,       /* can be NULL */
+  SInt32 *                   mibEnumPtr)            /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  TECGetTextEncodingFromInternetNameOrMIB()
+ *  
+ *  Summary:
+ *    Converts an IANA charset name or a MIB enum value to a
+ *    TextEncoding value
+ *  
+ *  Discussion:
+ *    If encodingName is non-NULL, this function treats it as an IANA
+ *    charset name and maps it to a TextEncoding value; in this case
+ *    mibEnum is ignored, and may be set to kTEC_MIBEnumDontCare.
+ *    Otherwise, this function maps the mibEnum to a TextEncoding
+ *    value. In either case, the mapping is controlled by the usage
+ *    parameter. The textEncodingPtr parameter must be non-NULL.
+ *  
+ *  Result:
+ *    The function returns paramErr if textEncodingPtr is NULL. It
+ *    returns kTextUnsupportedEncodingErr if it has no data for the
+ *    supplied encodingName or mibEnum. It returns noErr if it found
+ *    useful data.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in CoreServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+TECGetTextEncodingFromInternetNameOrMIB(
+  TextEncoding *             textEncodingPtr,
+  TECInternetNameUsageMask   usage,
+  CFStringRef                encodingName,
+  SInt32                     mibEnum)                         AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
 
 
 

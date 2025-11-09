@@ -83,6 +83,7 @@
 
 #include <sys/param.h>
 #include <sys/cdefs.h>
+#include <sys/socket.h>
 
 #define	_PATH_HEQUIV	"/etc/hosts.equiv"
 #define	_PATH_HOSTS	"/etc/hosts"
@@ -216,44 +217,44 @@ struct rpcent {
 #define SCOPE_DELIMITER	'%'
 
 __BEGIN_DECLS
-void		endhostent __P((void));
-void		endnetent __P((void));
-void		endprotoent __P((void));
-void		endservent __P((void));
-void		freehostent __P((struct hostent *));
-struct hostent	*gethostbyaddr __P((const char *, int, int));
-struct hostent	*gethostbyname __P((const char *));
-struct hostent	*gethostbyname2 __P((const char *, int));
-struct hostent	*gethostent __P((void));
-struct hostent	*getipnodebyaddr __P((const void *, size_t, int, int *));
-struct hostent	*getipnodebyname __P((const char *, int, int, int *));
-struct netent	*getnetbyaddr __P((long, int));
-struct netent	*getnetbyname __P((const char *));
-struct netent	*getnetent __P((void));
-struct protoent	*getprotobyname __P((const char *));
-struct protoent	*getprotobynumber __P((int));
-struct protoent	*getprotoent __P((void));
-struct servent	*getservbyname __P((const char *, const char *));
-struct servent	*getservbyport __P((int, const char *));
-struct servent	*getservent __P((void));
-struct rpcent	*getrpcbyname __P((const char *name));
-struct rpcent	*getrpcbynumber __P((long number));
-struct rpcent	*getrpcent __P((void));
-void		setrpcent __P((int stayopen));
-void		endrpcent __P((void));
+void		endhostent(void);
+void		endnetent(void);
+void		endprotoent(void);
+void		endservent(void);
+void		freehostent(struct hostent *);
+struct hostent	*gethostbyaddr(const char *, int, int);
+struct hostent	*gethostbyname(const char *);
+struct hostent	*gethostbyname2(const char *, int);
+struct hostent	*gethostent(void);
+struct hostent	*getipnodebyaddr(const void *, size_t, int, int *);
+struct hostent	*getipnodebyname(const char *, int, int, int *);
+struct netent	*getnetbyaddr(long, int);
+struct netent	*getnetbyname(const char *);
+struct netent	*getnetent(void);
+struct protoent	*getprotobyname(const char *);
+struct protoent	*getprotobynumber(int);
+struct protoent	*getprotoent(void);
+struct servent	*getservbyname(const char *, const char *);
+struct servent	*getservbyport(int, const char *);
+struct servent	*getservent(void);
+struct rpcent	*getrpcbyname(const char *name);
+struct rpcent	*getrpcbynumber(long number);
+struct rpcent	*getrpcent(void);
+void		setrpcent(int stayopen);
+void		endrpcent(void);
 
-void		herror __P((const char *));
-char		*hstrerror __P((int));
-void		sethostent __P((int));
-/* void		sethostfile __P((const char *)); */
-void		setnetent __P((int));
-void		setprotoent __P((int));
-void		setservent __P((int));
-
-char		*gai_strerror __P((int));
-void		freeaddrinfo __P((struct addrinfo *));
-int		getaddrinfo __P((const char *, const char *, const struct addrinfo *, struct addrinfo **));
-int		getnameinfo __P((const struct sockaddr *, size_t, char *, size_t, char *, size_t, int));
+void		herror(const char *);
+const char	*hstrerror(int);
+int		innetgr(const char *, const char *, const char *, const char *);
+void		sethostent(int);
+/* void		sethostfile(const char *); */
+void		setnetent(int);
+void		setprotoent(int);
+void		setservent(int);
+const char	*gai_strerror(int);
+void		freeaddrinfo(struct addrinfo *);
+int		getaddrinfo(const char *, const char *, const struct addrinfo *, struct addrinfo **);
+int		getnameinfo(const struct sockaddr *, socklen_t, char *, size_t, char *, size_t, int);
 __END_DECLS
 
 #endif /* !_NETDB_H_ */

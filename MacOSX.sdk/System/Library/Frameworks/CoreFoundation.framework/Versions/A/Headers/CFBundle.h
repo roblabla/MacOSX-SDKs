@@ -1,5 +1,5 @@
 /*	CFBundle.h
-	Copyright 1999-2002, Apple, Inc. All rights reserved.
+	Copyright (c) 1999-2003, Apple, Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFBUNDLE__)
@@ -55,6 +55,8 @@ CFBundleRef CFBundleGetBundleWithIdentifier(CFStringRef bundleID);
     /* This facility is meant to allow bundle-writers to get hold of their */
     /* bundle from their code without having to know where it was on the disk. */
     /* This is meant to be a replacement mechanism for +bundleForClass: users. */
+    /* Note that this does not search for bundles on the disk; it will locate */
+    /* only bundles already loaded or otherwise known to the current process. */
 
 CF_EXPORT
 CFArrayRef CFBundleGetAllBundles(void);
@@ -82,6 +84,7 @@ CFURLRef CFBundleCopyBundleURL(CFBundleRef bundle);
 CF_EXPORT
 CFTypeRef CFBundleGetValueForInfoDictionaryKey(CFBundleRef bundle, CFStringRef key);
     /* Returns a localized value if available, otherwise the global value. */
+    /* This is the recommended function for examining the info dictionary. */
 
 CF_EXPORT
 CFDictionaryRef CFBundleGetInfoDictionary(CFBundleRef bundle);
@@ -125,6 +128,8 @@ CFURLRef CFBundleCopyBuiltInPlugInsURL(CFBundleRef bundle);
 /* ------------- Basic Bundle Info without a CFBundle instance ------------- */
 /* This API is provided to enable developers to retrieve basic information */
 /* about a bundle without having to create an instance of CFBundle. */
+/* Because of caching behavior when a CFBundle instance exists, it will be faster */
+/* to actually create a CFBundle if you need to retrieve multiple pieces of info. */
 CF_EXPORT
 CFDictionaryRef CFBundleCopyInfoDictionaryInDirectory(CFURLRef bundleURL);
 

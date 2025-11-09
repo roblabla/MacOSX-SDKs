@@ -1,15 +1,16 @@
 /*
 	NSAppleScriptExtensions.h
 	Application Kit
-	Copyright (c) 2002, Apple Computer, Inc.
+	Copyright (c) 2002-2003, Apple Computer, Inc.
 	All rights reserved.
 */
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 
 #import <Foundation/NSAppleScript.h>
 
 @class NSAttributedString;
+
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 
 @interface NSAppleScript(NSExtensions)
 

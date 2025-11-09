@@ -3,9 +3,9 @@
  
      Contains:   Basic Macintosh data types.
  
-     Version:    CarbonCore-472~1
+     Version:    CarbonCore-545~1
  
-     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1985-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -71,6 +71,8 @@ typedef unsigned short                  UInt16;
 typedef signed short                    SInt16;
 typedef unsigned long                   UInt32;
 typedef signed long                     SInt32;
+/* avoid redeclaration if libkern/OSTypes.h */
+#ifndef _OS_OSTYPES_H
 #if TARGET_RT_BIG_ENDIAN
 struct wide {
   SInt32              hi;
@@ -95,6 +97,7 @@ struct UnsignedWide {
 typedef struct UnsignedWide             UnsignedWide;
 #endif  /* TARGET_RT_BIG_ENDIAN */
 
+#endif
 
 #if TYPE_LONGLONG
 /*
@@ -244,7 +247,7 @@ typedef ResType *                       ResTypePtr;
     Boolean types and values
     
         Boolean         Mac OS historic type, sizeof(Boolean)==1
-        bool            Defined in stdbool.h, ISO C/C++ standard type, sizeof(bool)==4
+        bool            Defined in stdbool.h, ISO C/C++ standard type
         false           Now defined in stdbool.h
         true            Now defined in stdbool.h
         

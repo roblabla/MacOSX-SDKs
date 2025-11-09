@@ -19,7 +19,6 @@
  *
  * @APPLE_LICENSE_HEADER_END@
  */
-/*
 
 /******************************************************************
 
@@ -59,7 +58,7 @@ extern "C"
 	typedef const void *LPCVOID;
 	typedef unsigned long DWORD;
 	typedef unsigned long *PDWORD;
-	typedef DWORD WORD;
+        typedef unsigned short WORD;       /* H. Bragstad Schlumberger */
 	typedef long LONG;
 	typedef long RESPONSECODE;
 	typedef const char *LPCSTR;

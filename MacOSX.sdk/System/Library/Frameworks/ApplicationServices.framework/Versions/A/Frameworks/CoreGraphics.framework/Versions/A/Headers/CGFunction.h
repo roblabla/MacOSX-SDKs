@@ -89,7 +89,10 @@ CG_EXTERN CFTypeID CGFunctionGetTypeID(void);
  *   than or equal to <tt>domain[2*k+1]</tt>, and the <tt>k</tt>'th input
  *   value <tt>in[k]</tt> will be clipped to lie in the interval
  *   <tt>domain[2*k] <= in[k] <= domain[2*k+1]</tt>.  If this parameter is
- *   NULL, then the input values are not clipped.
+ *   NULL, then the input values are not clipped.  However, it's strongly
+ *   recommended that this parameter be specified; each domain interval
+ *   should specify reasonable values for the minimum and maximum in each
+ *   dimension.
  *
  * @param rangeDimension
  *   The number of outputs from the function.
@@ -101,14 +104,15 @@ CG_EXTERN CFTypeID CGFunctionGetTypeID(void);
  *   equal to <tt>range[2*k+1]</tt>, and the <tt>k</tt>'th output value
  *   <tt>out[k]</tt> will be clipped to lie in the interval <tt>range[2*k]
  *   <= out[k] <= range[2*k+1]</tt>.  If this parameter is NULL, then the
- *   output values are not clipped.
+ *   output values are not clipped.  However, it's strongly recommended
+ *   that this parameter be specified; each range interval should specify
+ *   reasonable values for the minimum and maximum in each dimension.
  *
  * @param callbacks
  *   A pointer to a CGFunctionCallbacks structure.  The function uses these
  *   callbacks to evaluate values.  The contents of the callbacks structure
  *   is copied, so, for example, a pointer to a structure on the stack can
- *   be passed in.
- */
+ *   be passed in.  */
 
 CG_EXTERN CGFunctionRef CGFunctionCreate(void *info, size_t domainDimension, const float *domain, size_t rangeDimension, const float *range, const CGFunctionCallbacks *callbacks);
 

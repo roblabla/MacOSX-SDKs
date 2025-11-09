@@ -3,9 +3,9 @@
  
      Contains:   Macros to handle exceptions and assertions.
  
-     Version:    CarbonCore-472~1
+     Version:    CarbonCore-545~1
  
-     Copyright:  © 1989-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1989-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -280,8 +280,8 @@ extern "C" {
  *  prevent conflicts with developer code.
  */
 
-#if DEBUG
-    #define DPRINTF(x)   dprintf x
+#if defined(DEBUG) && DEBUG
+    #define DPRINTF(x) dprintf x
 #else
     #define DPRINTF(x)  { }
 #endif
@@ -310,6 +310,12 @@ enum {
  *    calls (by default) to display assertion messsages. The output
  *    from DebugAssert can be redirected by installing a
  *    DebugAssertOutputHandler with InstallDebugAssertOutputHandler.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *    This call is thread safe if no debug components are registered,
+ *    and may be thread unsafe if there are debug components being
+ *    installed or removed.
  *  
  *  Parameters:
  *    
@@ -374,7 +380,11 @@ enum {
  *    TaskLevel returns 0 if we're (probably) running at non-interrupt
  *    time. There's no way to make this perfect, but this is as close
  *    as we can get. If TaskLevel doesn't return 0, then one of the
- *    TaskLevel masks can be used to learn more.
+ *    TaskLevel masks can be used to learn more. Mac OS X has no
+ *    concept of "TaskLevel"; and so it will always return the value 0.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe
  *  
  *  Result:
  *    The current task level.
@@ -433,6 +443,9 @@ typedef STACK_UPP_TYPE(DebugComponentCallbackProcPtr)           DebugComponentCa
  *  Summary:
  *    NewDebugComponent registers a component with DebugLib.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    componentSignature:
@@ -466,6 +479,9 @@ NewDebugComponent(
  *  
  *  Summary:
  *    NewDebugOption registers a debug option with DebugLib.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -503,6 +519,9 @@ NewDebugOption(
  *    DisposeDebugComponent removes a component registration and all
  *    related debug options from DebugLib.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    componentSignature:
@@ -527,6 +546,9 @@ DisposeDebugComponent(OSType componentSignature)              AVAILABLE_MAC_OS_X
  *  Summary:
  *    GetDebugComponentInfo returns a component registered with
  *    DebugLib.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -562,6 +584,9 @@ GetDebugComponentInfo(
  *  Summary:
  *    GetDebugOptionInfo returns a debug option registered with
  *    DebugLib.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -607,6 +632,9 @@ GetDebugOptionInfo(
  *  
  *  Summary:
  *    SetDebugOptionValue sets a debug option registered with DebugLib.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    

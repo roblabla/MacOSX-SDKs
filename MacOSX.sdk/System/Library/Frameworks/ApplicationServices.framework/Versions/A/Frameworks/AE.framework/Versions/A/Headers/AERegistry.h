@@ -3,9 +3,9 @@
  
      Contains:   AppleEvents Registry Interface.
  
-     Version:    AppleEvents-242~1
+     Version:    AppleEvents-275~1
  
-     Copyright:  © 1993-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1993-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -577,6 +577,8 @@ enum {
 
 enum {
   typeTIFF                      = 'TIFF', /*  0x54494646  */
+  typeJPEG                      = 'JPEG',
+  typeGIF                       = 'GIFf',
   typeVersion                   = 'vers' /*  0x76657273  */
 };
 
@@ -806,7 +808,7 @@ enum {
 enum {
                                         /* Suite code */
   kAEInternetSuite              = 'gurl',
-  kAEISWebStarSuite             = 'WWW½'
+  kAEISWebStarSuite             = 0x575757BD
 };
 
 enum {

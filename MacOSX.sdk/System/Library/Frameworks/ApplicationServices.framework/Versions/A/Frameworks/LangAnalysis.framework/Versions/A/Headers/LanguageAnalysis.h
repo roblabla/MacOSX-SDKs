@@ -3,9 +3,9 @@
  
      Contains:   Language Analysis Manager Interfaces
  
-     Version:    LanguageAnalysis-85.2.1~3
+     Version:    LanguageAnalysis-124~1
  
-     Copyright:  © 1996-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1996-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

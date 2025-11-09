@@ -1,7 +1,7 @@
 /*
         NSOpenGL.h
         Application Kit
-        Copyright (c) 2000-2001, Apple Computer, Inc.
+        Copyright (c) 2000-2003, Apple Computer, Inc.
         All rights reserved.
 */
 
@@ -74,6 +74,7 @@ typedef enum {
 	NSOpenGLPFAMultiScreen        =  81,	/* single window can span multiple screens      */
 	NSOpenGLPFACompliant          =  83,	/* renderer is opengl compliant                 */
 	NSOpenGLPFAScreenMask         =  84,	/* bit mask of supported physical screens       */
+	NSOpenGLPFAPixelBuffer        =  90,	/* can be used to render to a pbuffer           */
 	NSOpenGLPFAVirtualScreenCount = 128	/* number of virtual screens in this format     */
 } NSOpenGLPixelFormatAttribute;
 
@@ -102,7 +103,41 @@ typedef struct _CGLPixelFormatObject NSOpenGLPixelFormatAuxiliary;
 - (void)getValues:(long*)vals forAttribute:(NSOpenGLPixelFormatAttribute)attrib forVirtualScreen:(int)screen;
 - (int)numberOfVirtualScreens;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void *)CGLPixelFormatObj;
+#endif
+
 @end
+
+/*********************
+** NSOpenGLPixelBuffer
+*********************/
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+
+@interface NSOpenGLPixelBuffer : NSObject
+{
+@private
+    struct _CGLPBufferObject	*_pixelBufferAuxiliary;
+    void			*_reserved1;
+    void			*_reserved2;
+}
+
+/*
+** size width and height must be powers of two for 1D or 2D or CUBE_MAP targets
+** size width and height must also be equal for CUBE_MAP target
+** target should be one of GL_TEXTURE_1D, GL_TEXTURE_2D, GL_TEXTURE_CUBE_MAP or GL_TEXTURE_RECTANGLE_EXT
+** internalFormat should be GL_RGB, GL_RGBA or GL_DEPTH_COMPONENT
+** maxLevel specifies the desired maximum mipmap level, starting with 0.  Must be 0 for
+** TEXTURE_RECTANGLE targets.
+*/
+- (id)initWithTextureTarget:(unsigned long/*GLenum*/)target textureInternalFormat:(unsigned long/*GLenum*/)format textureMaxMipMapLevel:(long/*GLenum*/)maxLevel pixelsWide:(int)pixelsWide pixelsHigh:(int)pixelsHigh;
+- (int)pixelsWide;
+- (int)pixelsHigh;
+- (unsigned long/*GLenum*/)textureTarget;
+- (unsigned long/*GLenum*/)textureInternalFormat;
+- (long/*GLint*/)textureMaxMipMapLevel;
+@end
+#endif
 
 
 /*****************
@@ -172,6 +207,30 @@ typedef struct _CGLContextObject NSOpenGLContextAuxiliary;
 /* creating textures */
 - (void)createTexture:(unsigned long/*GLenum*/)target fromView:(NSView*)view internalFormat:(unsigned long/*GLenum*/)format;
 
+#endif
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void *)CGLContextObj;
+
+/*
+** Attach context to an NSOpenGLPixelBuffer instance.
+** For GL_CUBE_MAP target pixel buffers, face should be one of GL_TEXTURE_CUBE_MAP_POSITIVE_X, 
+** GL_TEXTURE_CUBE_MAP_POSITIVE_Y, etc.  Otherwise it should be 0.
+** Level specifies the desired mipmap level you want to render to.  It must less than or equal to the maxLevel
+** parameter of the pixel buffer.
+** If applicable, the virtual screen should be set to the same value as the current virtual screen you are using
+** to render on-screen with.
+*/
+- (void)setPixelBuffer:(NSOpenGLPixelBuffer *)pixelBuffer cubeMapFace:(unsigned long/*GLenum*/)face mipMapLevel:(long/*GLint*/)level currentVirtualScreen:(int)screen;
+- (NSOpenGLPixelBuffer *)pixelBuffer;
+- (unsigned long/*GLenum*/)pixelBufferCubeMapFace;
+- (long/*GLint*/)pixelBufferMipMapLevel;
+/*
+** This call is a mirror of CGLTexImagePBuffer.  This essentially "binds" the given pixel buffer's image data
+** to the currently bound texture object.   Source specifies which of the PBuffer's color buffers should be used,
+** and should be one of GL_FRONT, GL_BACK, GL_AUX0, etc.
+*/
+- (void)setTextureImageToPixelBuffer:(NSOpenGLPixelBuffer *)pixelBuffer colorBuffer:(unsigned long/*GLenum*/)source;
 #endif
 
 @end

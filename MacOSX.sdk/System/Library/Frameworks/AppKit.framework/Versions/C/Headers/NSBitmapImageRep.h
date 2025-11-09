@@ -1,7 +1,7 @@
 /*
 	NSBitmapImageRep.h
 	Application Kit
-	Copyright (c) 1994-2001, Apple Computer, Inc.
+	Copyright (c) 1994-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -44,11 +44,14 @@ APPKIT_EXTERN NSString* NSImageCompressionFactor;	// TIFF/JPEG input/output (flo
 APPKIT_EXTERN NSString* NSImageDitherTransparency;	// GIF output (BOOL in NSNumber)
 APPKIT_EXTERN NSString* NSImageRGBColorTable;		// GIF input/output (packed RGB in NSData)
 APPKIT_EXTERN NSString* NSImageInterlaced;		// PNG output (BOOL in NSNumber)
-APPKIT_EXTERN NSString* NSImageColorSyncProfileData;	// TIFF input/output (NSData)
+APPKIT_EXTERN NSString* NSImageColorSyncProfileData;	// TIFF,GIF input/output (NSData)
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 APPKIT_EXTERN NSString* NSImageFrameCount;		// GIF input (int in NSNumber) (read-only)
 APPKIT_EXTERN NSString* NSImageCurrentFrame;		// GIF input (int in NSNumber)
 APPKIT_EXTERN NSString* NSImageCurrentFrameDuration;	// GIF input (float in NSNumber) (read-only)
+#endif
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+APPKIT_EXTERN NSString* NSImageLoopCount;		// GIF input (int in NSNumber) (read-only)
 #endif
 
 @interface NSBitmapImageRep : NSImageRep {

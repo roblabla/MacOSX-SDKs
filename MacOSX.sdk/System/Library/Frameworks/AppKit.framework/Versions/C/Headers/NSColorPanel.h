@@ -1,14 +1,14 @@
 /*
 	NSColorPanel.h
 	Application Kit
-	Copyright (c) 1994-2001, Apple Computer, Inc.
+	Copyright (c) 1994-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSPanel.h>
 #import <AppKit/NSApplication.h>
 
-@class NSColorList, NSSet, NSMutableSet, NSDate;
+@class NSColorList, NSMutableArray;
 
 enum {
     NSGrayModeColorPanel		= 0,
@@ -64,7 +64,7 @@ enum {
     NSSize		_maxColorPanelSize;
     NSSize		_reserved2;
     NSSize		_reserved3;
-    float		_reserved4;
+    id			_resizeDimple;
     BOOL		_reserved5;
     BOOL		_reserved6;
     BOOL		_reserved7;

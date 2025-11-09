@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2002 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -20,10 +20,7 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 /*
- * Copyright (c) 1998 Apple Computer, Inc.  All rights reserved. 
- *
  * HISTORY
- *
  */
  
 /*
@@ -48,6 +45,9 @@ typedef	kern_return_t		IOReturn;
 #define sub_iokit_usb                err_sub(1)
 #define sub_iokit_firewire           err_sub(2)
 #define sub_iokit_block_storage      err_sub(4)
+#define sub_iokit_graphics           err_sub(5)
+#define sub_iokit_bluetooth          err_sub(8)
+#define sub_iokit_pmu                err_sub(9)
 #define sub_iokit_reserved           err_sub(-1)
 #define	iokit_common_err(return)     (sys_iokit|sub_iokit_common|return)
 #define	iokit_family_err(sub,return) (sys_iokit|sub|return)

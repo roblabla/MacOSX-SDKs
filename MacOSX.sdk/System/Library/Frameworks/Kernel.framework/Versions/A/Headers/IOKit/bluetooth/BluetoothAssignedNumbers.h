@@ -1,6 +1,6 @@
 /*
 	File:		BluetoothAssignedNumbers.h
-	Copyright:	© 2002-2003 by Apple Computer, Inc. All rights reserved.
+	Copyright:	© 2002 by Apple Computer, Inc. All rights reserved.
 */
 
 #pragma once

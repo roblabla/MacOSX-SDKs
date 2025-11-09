@@ -45,7 +45,7 @@ enum {
     kIONetworkDataAccessTypeWrite       = 0x02,
     kIONetworkDataAccessTypeReset       = 0x04,
     kIONetworkDataAccessTypeSerialize   = 0x08,
-    kIONetworkDataAccessTypeMask        = 0xff,
+    kIONetworkDataAccessTypeMask        = 0xff
 };
 
 /*! @define kIONetworkDataBasicAccessTypes
@@ -68,7 +68,7 @@ enum {
 enum {
     kIONetworkDataBufferTypeInternal = 0,
     kIONetworkDataBufferTypeExternal,
-    kIONetworkDataBufferTypeNone,
+    kIONetworkDataBufferTypeNone
 };
 
 /*! @defined kIONetworkDataBytes

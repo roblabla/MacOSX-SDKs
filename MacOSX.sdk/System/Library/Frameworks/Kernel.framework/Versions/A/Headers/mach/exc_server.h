@@ -38,102 +38,6 @@ typedef function_table_entry 	*function_table_t;
 __BeforeMigServerHeader
 #endif /* __BeforeMigServerHeader */
 
-/* typedefs for all requests */
-
-#ifndef __Request__exc_subsystem__defined
-#define __Request__exc_subsystem__defined
-	typedef struct {
-		mach_msg_header_t Head;
-		/* start of the kernel processed data */
-		mach_msg_body_t msgh_body;
-		mach_msg_port_descriptor_t thread;
-		mach_msg_port_descriptor_t task;
-		/* end of the kernel processed data */
-		NDR_record_t NDR;
-		exception_type_t exception;
-		mach_msg_type_number_t codeCnt;
-		integer_t code[2];
-	} __Request__exception_raise_t;
-
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		exception_type_t exception;
-		mach_msg_type_number_t codeCnt;
-		integer_t code[2];
-		int flavor;
-		mach_msg_type_number_t old_stateCnt;
-		natural_t old_state[144];
-	} __Request__exception_raise_state_t;
-
-	typedef struct {
-		mach_msg_header_t Head;
-		/* start of the kernel processed data */
-		mach_msg_body_t msgh_body;
-		mach_msg_port_descriptor_t thread;
-		mach_msg_port_descriptor_t task;
-		/* end of the kernel processed data */
-		NDR_record_t NDR;
-		exception_type_t exception;
-		mach_msg_type_number_t codeCnt;
-		integer_t code[2];
-		int flavor;
-		mach_msg_type_number_t old_stateCnt;
-		natural_t old_state[144];
-	} __Request__exception_raise_state_identity_t;
-
-#endif /* !__Request__exc_subsystem__defined */
-
-/* union of all requests */
-
-#ifndef __RequestUnion__catch_exc_subsystem__defined
-#define __RequestUnion__catch_exc_subsystem__defined
-union __RequestUnion__catch_exc_subsystem {
-	__Request__exception_raise_t Request_exception_raise;
-	__Request__exception_raise_state_t Request_exception_raise_state;
-	__Request__exception_raise_state_identity_t Request_exception_raise_state_identity;
-};
-#endif /* __RequestUnion__catch_exc_subsystem__defined */
-/* typedefs for all replies */
-
-#ifndef __Reply__exc_subsystem__defined
-#define __Reply__exc_subsystem__defined
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		kern_return_t RetCode;
-	} __Reply__exception_raise_t;
-
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		kern_return_t RetCode;
-		int flavor;
-		mach_msg_type_number_t new_stateCnt;
-		natural_t new_state[144];
-	} __Reply__exception_raise_state_t;
-
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		kern_return_t RetCode;
-		int flavor;
-		mach_msg_type_number_t new_stateCnt;
-		natural_t new_state[144];
-	} __Reply__exception_raise_state_identity_t;
-
-#endif /* !__Reply__exc_subsystem__defined */
-
-/* union of all replies */
-
-#ifndef __ReplyUnion__catch_exc_subsystem__defined
-#define __ReplyUnion__catch_exc_subsystem__defined
-union __ReplyUnion__catch_exc_subsystem {
-	__Reply__exception_raise_t Reply_exception_raise;
-	__Reply__exception_raise_state_t Reply_exception_raise_state;
-	__Reply__exception_raise_state_identity_t Reply_exception_raise_state_identity;
-};
-#endif /* __RequestUnion__catch_exc_subsystem__defined */
 
 /* Routine exception_raise */
 #ifdef	mig_external
@@ -210,6 +114,104 @@ extern const struct catch_exc_subsystem {
 		routine[3];
 } catch_exc_subsystem;
 
+/* typedefs for all requests */
+
+#ifndef __Request__exc_subsystem__defined
+#define __Request__exc_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t thread;
+		mach_msg_port_descriptor_t task;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		exception_type_t exception;
+		mach_msg_type_number_t codeCnt;
+		integer_t code[2];
+	} __Request__exception_raise_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		exception_type_t exception;
+		mach_msg_type_number_t codeCnt;
+		integer_t code[2];
+		int flavor;
+		mach_msg_type_number_t old_stateCnt;
+		natural_t old_state[144];
+	} __Request__exception_raise_state_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t thread;
+		mach_msg_port_descriptor_t task;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		exception_type_t exception;
+		mach_msg_type_number_t codeCnt;
+		integer_t code[2];
+		int flavor;
+		mach_msg_type_number_t old_stateCnt;
+		natural_t old_state[144];
+	} __Request__exception_raise_state_identity_t;
+
+#endif /* !__Request__exc_subsystem__defined */
+
+
+/* union of all requests */
+
+#ifndef __RequestUnion__catch_exc_subsystem__defined
+#define __RequestUnion__catch_exc_subsystem__defined
+union __RequestUnion__catch_exc_subsystem {
+	__Request__exception_raise_t Request_exception_raise;
+	__Request__exception_raise_state_t Request_exception_raise_state;
+	__Request__exception_raise_state_identity_t Request_exception_raise_state_identity;
+};
+#endif /* __RequestUnion__catch_exc_subsystem__defined */
+/* typedefs for all replies */
+
+#ifndef __Reply__exc_subsystem__defined
+#define __Reply__exc_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__exception_raise_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		int flavor;
+		mach_msg_type_number_t new_stateCnt;
+		natural_t new_state[144];
+	} __Reply__exception_raise_state_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		int flavor;
+		mach_msg_type_number_t new_stateCnt;
+		natural_t new_state[144];
+	} __Reply__exception_raise_state_identity_t;
+
+#endif /* !__Reply__exc_subsystem__defined */
+
+
+/* union of all replies */
+
+#ifndef __ReplyUnion__catch_exc_subsystem__defined
+#define __ReplyUnion__catch_exc_subsystem__defined
+union __ReplyUnion__catch_exc_subsystem {
+	__Reply__exception_raise_t Reply_exception_raise;
+	__Reply__exception_raise_state_t Reply_exception_raise_state;
+	__Reply__exception_raise_state_identity_t Reply_exception_raise_state_identity;
+};
+#endif /* __RequestUnion__catch_exc_subsystem__defined */
 
 #ifndef subsystem_to_name_map_exc
 #define subsystem_to_name_map_exc \

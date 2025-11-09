@@ -82,7 +82,7 @@ typedef enum {
 	Froot,
 	Fdevfd,
 	Fdesc,
-	Flink,
+	Flink
 } fdntype;
 
 struct fdescnode {

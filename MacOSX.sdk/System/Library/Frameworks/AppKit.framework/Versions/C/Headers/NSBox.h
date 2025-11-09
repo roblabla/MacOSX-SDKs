@@ -1,7 +1,7 @@
 /*
 	NSBox.h
 	Application Kit
-	Copyright (c) 1994-2001, Apple Computer, Inc.
+	Copyright (c) 1994-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -39,7 +39,8 @@ typedef enum {
 	NSTitlePosition	titlePosition:3;
 	unsigned int	transparent:1;
         unsigned int	boxType:2;
-        unsigned int	_RESERVED:24;
+        unsigned int	needsTile:1;
+        unsigned int	_RESERVED:23;
     } _bFlags;
     id			_unused;
 }

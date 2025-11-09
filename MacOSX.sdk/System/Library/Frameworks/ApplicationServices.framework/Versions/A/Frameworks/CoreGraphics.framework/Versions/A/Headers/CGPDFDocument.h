@@ -1,5 +1,5 @@
 /* CoreGraphics - CGPDFDocument.h
- * Copyright (c) 2000-2002 Apple Computer, Inc.
+ * Copyright (c) 2000-2003 Apple Computer, Inc.
  * All rights reserved.
  */
 
@@ -8,16 +8,12 @@
 
 typedef struct CGPDFDocument *CGPDFDocumentRef;
 
-#include <CoreGraphics/CGBase.h>
 #include <CoreGraphics/CGDataProvider.h> 
 #include <CoreGraphics/CGGeometry.h> 
+#include <CoreGraphics/CGPDFPage.h> 
 #include <CoreFoundation/CFURL.h>
 
 CG_EXTERN_C_BEGIN
-
-/* Return the CFTypeID for CGPDFDocumentRefs. */
-
-CG_EXTERN CFTypeID CGPDFDocumentGetTypeID(void);
 
 /* Create a PDF document, using `provider' to obtain the document's
  * data. */
@@ -28,13 +24,19 @@ CG_EXTERN CGPDFDocumentRef CGPDFDocumentCreateWithProvider(CGDataProviderRef pro
 
 CG_EXTERN CGPDFDocumentRef CGPDFDocumentCreateWithURL(CFURLRef url);
 
-/* Equivalent to `CFRetain(document)'. */
+/* Equivalent to `CFRetain(document)', except it doesn't crash (as CFRetain
+ * does) if `document' is NULL. */
 
 CG_EXTERN CGPDFDocumentRef CGPDFDocumentRetain(CGPDFDocumentRef document);
 
-/* Equivalent to `CFRelease(document)'. */
+/* Equivalent to `CFRelease(document)', except it doesn't crash (as
+ * CFRelease does) if `document' is NULL. */
 
 CG_EXTERN void CGPDFDocumentRelease(CGPDFDocumentRef document);
+
+/* Return the major and minor version numbers of `document'. */
+
+CG_EXTERN void CGPDFDocumentGetVersion(CGPDFDocumentRef document, int *majorVersion, int *minorVersion);
 
 /* Return true if the PDF file associated with `document' is encrypted;
  * false otherwise.  If the PDF file is encrypted, then a password must be
@@ -73,28 +75,43 @@ CG_EXTERN bool CGPDFDocumentAllowsCopying(CGPDFDocumentRef document);
 
 CG_EXTERN size_t CGPDFDocumentGetNumberOfPages(CGPDFDocumentRef document);
 
-/* Return the media box of page number `page' in `document'. */
+/* Return the page corresponding to `pageNumber', or NULL if no such page
+ * exists in the document.  Pages are numbered starting at 1. */
+
+CG_EXTERN CGPDFPageRef CGPDFDocumentGetPage(CGPDFDocumentRef document, size_t pageNumber);
+
+/* Return the document catalog of `document'. */
+
+CG_EXTERN CGPDFDictionaryRef CGPDFDocumentGetCatalog(CGPDFDocumentRef document);
+
+/* Return the CFTypeID for CGPDFDocumentRefs. */
+
+CG_EXTERN CFTypeID CGPDFDocumentGetTypeID(void);
+
+/* The following functions are deprecated in favor of the CGPDFPage API. */
+
+/* DEPRECATED; return the media box of page number `page' in `document'. */
 
 CG_EXTERN CGRect CGPDFDocumentGetMediaBox(CGPDFDocumentRef document, int page);
 
-/* Return the crop box of page number `page' in `document'. */
+/* DEPRECATED; return the crop box of page number `page' in `document'. */
 
 CG_EXTERN CGRect CGPDFDocumentGetCropBox(CGPDFDocumentRef document, int page);
 
-/* Return the bleed box of page number `page' in `document'. */
+/* DEPRECATED; return the bleed box of page number `page' in `document'. */
 
 CG_EXTERN CGRect CGPDFDocumentGetBleedBox(CGPDFDocumentRef document, int page);
 
-/* Return the trim box of page number `page' in `document'. */
+/* DEPRECATED; return the trim box of page number `page' in `document'. */
 
 CG_EXTERN CGRect CGPDFDocumentGetTrimBox(CGPDFDocumentRef document, int page);
 
-/* Return the art box of page number `page' in `document'. */
+/* DEPRECATED; return the art box of page number `page' in `document'. */
 
 CG_EXTERN CGRect CGPDFDocumentGetArtBox(CGPDFDocumentRef document, int page);
 
-/* Return the rotation angle (in degrees) of page number `page' in
- * `document'. */
+/* DEPRECATED; return the rotation angle (in degrees) of page number `page'
+ * in `document'. */
 
 CG_EXTERN int CGPDFDocumentGetRotationAngle(CGPDFDocumentRef document, int page);
 

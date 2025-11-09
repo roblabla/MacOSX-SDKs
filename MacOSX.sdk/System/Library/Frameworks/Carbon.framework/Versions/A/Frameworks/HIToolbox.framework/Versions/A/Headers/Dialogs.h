@@ -3,9 +3,9 @@
  
      Contains:   Dialog Manager interfaces.
  
-     Version:    HIToolbox-124.14~2
+     Version:    HIToolbox-145.33~1
  
-     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -1365,8 +1365,9 @@ GetStandardAlertDefaultParams(
  *    CreateStandardAlert should be used in conjunction with
  *    RunStandardAlert. After CreateStandardAlert returns, the alert is
  *    still invisible. RunStandardAlert will show the alert and run a
- *    modal dialog loop to process events in the alert. The strings
- *    passed to this API in the error, explanation, and
+ *    modal dialog loop to process events in the alert. 
+ *    
+ *    The strings passed to this API in the error, explanation, and
  *    AlertStdCFStringAlertParamRec button title parameters will all be
  *    retained during the creation of the alert, and released when the
  *    alert is disposed by RunStandardAlert. There is no net change to
@@ -1427,7 +1428,7 @@ CreateStandardAlert(
  *    CreateStandardAlert. It handles all user interaction with the
  *    alert. After the user has dismissed the alert, RunStandardAlert
  *    destroys the alert dialog; the DialogRef will be invalid after
- *    RunStandardAlert returns.
+ *    RunStandardAlert returns. DO NOT call DisposeDialog. 
  *    
  *    NOTE: DO NOT call this function for a dialog that was not created
  *    with CreateStandardAlert! You will sorely regret it, I promise
@@ -1478,8 +1479,11 @@ RunStandardAlert(
  *    the sheet is pressed, the EventTargetRef passed to
  *    CreateStandardSheet will receive a command event with one of the
  *    command IDs kHICommandOK, kHICommandCancel, or kHICommandOther.
- *    The sheet is closed before the command is sent. The strings
- *    passed to this API in the error, explanation, and
+ *    The sheet is hidden and the sheet dialog destroyed before the
+ *    command is sent; the caller does not have to call HideSheetWindow
+ *    or DisposeDialog. 
+ *    
+ *    The strings passed to this API in the error, explanation, and
  *    AlertStdCFStringAlertParamRec button title parameters will all be
  *    retained during the creation of the sheet, and released when the
  *    sheet is disposed. There is no net change to the refcount of
@@ -1513,7 +1517,22 @@ RunStandardAlert(
  *    notifyTarget:
  *      The event target to be notified when the sheet is closed. The
  *      caller should install an event handler on this target for the
- *      [kEventClassCommand, kEventProcessCommand] event.
+ *      [kEventClassCommand, kEventProcessCommand] event. May be NULL
+ *      if the caller does not need the command event to be sent to any
+ *      target. 
+ *      
+ *      Typically, this will be the event target for the parent window
+ *      of the sheet; a standard practice is to install a handler on
+ *      the parent window just before showing the sheet window, and to
+ *      remove the handler from the parent window after the sheet has
+ *      been closed. It is also possible to install a handler on the
+ *      sheet window itself, in which case you would pass NULL for this
+ *      parameter, since the command event is automatically sent to the
+ *      sheet window already. If you install a handler on the sheet
+ *      itself, make sure to return eventNotHandledErr from your
+ *      handler, because CreateStandardSheet installs its own handler
+ *      on the sheet and that handler must be allowed to run to close
+ *      the sheet window and release the DialogRef.
  *    
  *    outSheet:
  *      On exit, contains the new alert.
@@ -1529,7 +1548,7 @@ CreateStandardSheet(
   CFStringRef                            error,
   CFStringRef                            explanation,        /* can be NULL */
   const AlertStdCFStringAlertParamRec *  param,              /* can be NULL */
-  EventTargetRef                         notifyTarget,
+  EventTargetRef                         notifyTarget,       /* can be NULL */
   DialogRef *                            outSheet)            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -1547,10 +1566,13 @@ CreateStandardSheet(
  *    open on a document window. Meanwhile, the user drags the document
  *    into the trash. When your application sees that the document has
  *    been moved to the trash, it knows that it should close the
- *    document window, but first it needs to close the sheet.
+ *    document window, but first it needs to close the sheet. 
+ *    
  *    CloseStandardSheet should not be used by your Carbon event
  *    handler in response to a click in one of the sheet buttons; the
  *    Dialog Manager will close the sheet automatically in that case.
+ *    
+ *    
  *    If kStdAlertDoNotDisposeSheet was specified when the sheet was
  *    created, the sheet dialog will be hidden but not released, and
  *    you can reuse the sheet later.
@@ -1988,13 +2010,6 @@ NewColorDialog(dStorage, boundsRect, title, visible, procID, behind, goAwayFlag,
 #define DlgDelete(theDialog) DialogDelete(theDialog)
 #define SetDAFont(fontNum) SetDialogFont(fontNum)
 #define SetGrafPortOfDialog(dialog) SetPortDialogPort(dialog)
-#if CGLUESUPPORTED
-#define newcdialog(dStorage, boundsRect, title, visible, procID, behind, goAwayFlag, refCon, items) \
-newcolordialog(dStorage, boundsRect, title, visible, procID, behind, goAwayFlag, refCon, items)
-#define getitext(item, text) getdialogitemtext(item, text)
-#define setitext(item, text) setdialogitemtext(item, text)
-#define findditem(theDialog, thePt) finddialogitem(theDialog, thePt)
-#endif
 #endif  /* OLDROUTINENAMES */
 
 

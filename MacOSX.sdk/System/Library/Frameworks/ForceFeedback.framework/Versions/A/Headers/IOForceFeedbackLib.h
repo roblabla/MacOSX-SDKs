@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------------------
 //      File:           IOForceFeedbackLib.h
-//      Contains:       Public interfaces for the Force Feedback Plugin architecture .
-//      Copyright:      © 2002 by Apple Computer, Inc. All rights reserved.
+//      Contains:       Public interfaces for the Force Feedback PlugIn architecture .
+//      Copyright:      © 2002-2003 by Apple Computer, Inc. All rights reserved.
 //
 //-----------------------------------------------------------------------------
 
@@ -14,11 +14,15 @@
 
 /*!	@header		IOForceFeedbackLib.h
 	@abstract	Public Interfaces and constants used to develop Force Feedback plugIns.
-	@discussion	A force feedback device manufacturer might need to implement a plug in
+	@discussion	A force feedback device manufacturer might need to implement a plugIn
                 to allow the Force Feedback Library to control the device.  This header
                 file describes the functions that need to be implemented.  This interface definition 
-                follows Microsoft Windoes IDirectInputEffectDriver definition wherever it makes sense to do so.  
-                Certain functions may contain more or fewer parameters than the Windows version
+                follows Microsoft Windows IDirectInputEffectDriver definition wherever it makes sense
+                to do so. This plugIn architecture uses the CFPlugIn model (COM).  The Force Feedback
+                Framework will find available plugIns and will use this interface to communicate with
+                the hardware.<br><br>
+                Certain functions may contain more or fewer parameters than the corresponding Windows
+                IDirectInputEffectDriver version.
 
 */
 #include <sys/cdefs.h>
@@ -37,6 +41,10 @@ __BEGIN_DECLS
 // The Version of the FF PlugIn API
 //====================================================================================================================
 //
+    /*!
+    @enum Force Feedback PlugIn API Version
+     @discussion This refers the Force Feedback PlugIn API (and not the Framework API).
+     */
 enum {
     kFFPlugInAPIMajorRev = 1,
     kFFPlugInAPIMinorAndBugRev = 0,
@@ -49,8 +57,12 @@ enum {
 //====================================================================================================================
 //
 
-#define FFDEVICESTATE	ForceFeedbackDeviceState
-#define PFFDEVICESTATE  ForceFeedbackDeviceStatePtr
+/*!
+    @defined FFDEVICESTATE & PFFDEVICESTATE
+    @discussion Mac OS versions of these definitions 
+    */
+    #define FFDEVICESTATE	ForceFeedbackDeviceState
+	#define PFFDEVICESTATE  ForceFeedbackDeviceStatePtr
 
 
 // F4545CE5-BF5B-11D6-A4BB-0003933E3E3E
@@ -68,6 +80,38 @@ enum {
 //	Structs
 //====================================================================================================================
 //
+/*!
+@typedef ForceFeedbackDeviceState
+@abstract Returns information about the state of a force feedback device.
+@discussion
+@field dwSize Specifies the size of the structure in bytes. This member must be initialized before the structure is used.
+@field dwState Indicates various aspects of the device state. Can indicate zero, one, or more of the following: 
+<br><br>FFGFFS_EMPTY 
+<br><br>Indicates that the force feedback device is devoid of any downloaded effects. 
+<br><br>FFGFFS_STOPPED 
+<br><br>Indicates that no effects are currently playing and the device is not paused. 
+<br><br>FFGFFS_PAUSED 
+<br><br>Indicates that playback of effects has been paused by a previous FFSFFC_PAUSE command. 
+<br><br>FFGFFS_ACTUATORSON 
+<br><br>Indicates that the device's force-feedback actuators are enabled. 
+<br><br>FFGFFS_ACTUATORSOFF 
+<br><br>Indicates that the device's force-feedback actuators are disabled. 
+<br><br>FFGFFS_POWERON 
+<br><br>Indicates that power to the force-feedback system is currently available. If the device cannot report the power state, then neither FFGFFS_POWERON nor FFGFFS_POWEROFF should be returned. 
+<br><br>FFGFFS_POWEROFF 
+Indicates that power to the force-feedback system is not currently available. If the device cannot report the power state, then neither FFGFFS_POWERON nor FFGFFS_POWEROFF should be returned. 
+<br><br>FFGFFS_SAFETYSWITCHON 
+<br><br>Indicates that the safety switch (dead-man switch) is currently on, meaning that the device can operate. If the device cannot report the state of the safety switch, then neither FFGFFS_SAFETYSWITCHON nor FFGFFS_SAFETYSWITCHOFF should be returned. 
+<br><br>FFGFFS_SAFETYSWITCHOFF 
+<br><br>Indicates that the safety switch (dead-man switch) is currently off, meaning that the device cannot operate. If the device cannot report the state of the safety switch, then neither FFGFFS_SAFETYSWITCHON nor FFGFFS_SAFETYSWITCHOFF should be returned. 
+<br><br>FFGFFS_USERFFSWITCHON 
+<br><br>Indicates that the user force-feedback switch is currently on, meaning that the device can operate. If the device cannot report the state of the user force-feedback switch, then neither FFGFFS_USERFFSWITCHON nor FFGFFS_USERFFSWITCHOFF should be returned. 
+<br><br>FFGFFS_USERFFSWITCHOFF 
+<br><br>Indicates that the user force-feedback switch is currently off, meaning that the device cannot operate. If the device cannot report the state of the user force-feedback switch, then neither FFGFFS_USERFFSWITCHON nor FFGFFS_USERFFSWITCHOFF should be returned. 
+<br><br>FFGFFS_DEVICELOST 
+<br><br>Indicates that the device suffered an unexpected failure and is in an indeterminate state. It must be reset either by unacquiring and reacquiring the device, or by explicitly sending a FFSFFC_RESET command. For example, the device may be lost if the user suspends the computer, causing on-board memory on the device to be lost. 
+@field dwLoad A value indicating the percentage of device memory in use. A value of zero indicates that the device memory is completely available. A value of 100 indicates that the device is full
+*/
 struct ForceFeedbackDeviceState
 {
     UInt32   dwSize;
@@ -75,11 +119,17 @@ struct ForceFeedbackDeviceState
     UInt32   dwLoad;
 
 };
-
 typedef struct ForceFeedbackDeviceState ForceFeedbackDeviceState;
 typedef ForceFeedbackDeviceState * 	ForceFeedbackDeviceStatePtr;
 
 
+/*!
+@typedef ForceFeedbackVersion
+@abstract Used to return plugIn version information.
+@discussion
+@field apiVersion The version of the plugIn API that is implemented by this driver
+@field plugInVersion Vendor-determined version of the plugIn.
+*/
 struct ForceFeedbackVersion
 {
     NumVersion	apiVersion;
@@ -93,6 +143,10 @@ typedef ForceFeedbackVersion * 	ForceFeedbackVersionPtr;
 //	Types
 //====================================================================================================================
 //
+/*!
+    @typedef FFEffectDownloadID
+    @abstract Unique identification for an effect.
+*/
 typedef UInt32		FFEffectDownloadID;
 
 
@@ -110,7 +164,7 @@ typedef UInt32		FFEffectDownloadID;
 	HRESULT	(*InitializeTerminate)(			void *			self,					\
 											NumVersion		forceFeedbackAPIVersion,\
 											io_object_t		hidDevice,				\
-											bool			begin );				\
+											boolean_t			begin );				\
 																					\
 	HRESULT	(*DestroyEffect)(				void *				self,				\
 											FFEffectDownloadID	downloadID );		\
@@ -205,7 +259,7 @@ If begin is false, this parameter is ignored.  (You can pass NULL.)
 <br>	FFERR_OUTOFMEMORY
 <br> 
 */
-	HRESULT	(*InitializeTerminate)(void * self, NumVersion forceFeedbackAPIVersion, io_object_t hidDevice, bool begin );				
+	HRESULT	(*InitializeTerminate)(void * self, NumVersion forceFeedbackAPIVersion, io_object_t hidDevice, boolean_t begin );				
 																					
 
 /*! @function DestroyEffect

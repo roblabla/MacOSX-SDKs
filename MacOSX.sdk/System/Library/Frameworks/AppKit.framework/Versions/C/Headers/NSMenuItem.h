@@ -1,7 +1,7 @@
 /*
         NSMenuItem.h
         Application Kit
-        Copyright (c) 1996-2001, Apple Computer, Inc.
+        Copyright (c) 1996-2003, Apple Computer, Inc.
         All rights reserved.
 */
 
@@ -10,7 +10,7 @@
 #import <AppKit/NSUserInterfaceValidation.h>
 
 @class NSMenu;
-@class NSImage;
+@class NSImage, NSAttributedString;
 
 // This protocol is deprecated.  Use the NSMenuItem class in your code.
 @protocol NSMenuItem <NSObject, NSCopying, NSCoding, NSValidatedUserInterfaceItem>
@@ -32,6 +32,11 @@
 
 - (void)setTitle:(NSString *)aString;
 - (NSString *)title;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void)setAttributedTitle:(NSAttributedString*)string;
+- (NSAttributedString*)attributedTitle;
+#endif
+
 - (BOOL)isSeparatorItem;
 
 - (void)setKeyEquivalent:(NSString *)aKeyEquivalent;
@@ -62,6 +67,14 @@
 - (void)setEnabled:(BOOL)flag;
 - (BOOL)isEnabled;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void) setAlternate:(BOOL)isAlternate;
+- (BOOL) isAlternate;
+
+- (void) setIndentationLevel:(int)indentationLevel;
+- (int) indentationLevel;
+#endif
+
 - (void)setTarget:(id)anObject;
 - (id)target;
 - (void)setAction:(SEL)aSelector;
@@ -72,6 +85,11 @@
 
 - (void)setRepresentedObject:(id)anObject;
 - (id)representedObject;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void) setToolTip:(NSString*)toolTip;
+- (NSString*) toolTip;
+#endif
 
 @end
 
@@ -96,7 +114,10 @@
         unsigned int disabled:1;
         unsigned int isSeparator:1;
         unsigned int hidden:1;
-        unsigned int RESERVED:29;
+        unsigned int alternate:1;
+        unsigned int indent:4;
+	unsigned int changed:10;
+	unsigned int RESERVED:14;
     } _miFlags;
 }
 
@@ -117,6 +138,11 @@
 
 - (void)setTitle:(NSString *)aString;
 - (NSString *)title;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void)setAttributedTitle:(NSAttributedString*)string;
+- (NSAttributedString*)attributedTitle;
+#endif
+
 - (BOOL)isSeparatorItem;
 
 - (void)setKeyEquivalent:(NSString *)aKeyEquivalent;
@@ -146,6 +172,14 @@
 - (void)setEnabled:(BOOL)flag;
 - (BOOL)isEnabled;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void) setAlternate:(BOOL)isAlternate;
+- (BOOL) isAlternate;
+
+- (void) setIndentationLevel:(int)indentationLevel;
+- (int) indentationLevel;
+#endif
+
 - (void)setTarget:(id)anObject;
 - (id)target;
 - (void)setAction:(SEL)aSelector;
@@ -156,5 +190,10 @@
 
 - (void)setRepresentedObject:(id)anObject;
 - (id)representedObject;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void) setToolTip:(NSString*)toolTip;
+- (NSString*) toolTip;
+#endif
 
 @end

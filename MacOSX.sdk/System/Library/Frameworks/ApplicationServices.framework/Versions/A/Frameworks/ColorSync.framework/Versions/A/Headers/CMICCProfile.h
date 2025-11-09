@@ -3,9 +3,9 @@
  
      Contains:   ICC Profile Format Definitions
  
-     Version:    ColorSync-98.1~196
+     Version:    ColorSync-118.2~1
  
-     Copyright:  © 1994-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1994-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -941,59 +941,6 @@ struct CMProfile {
 typedef struct CMProfile                CMProfile;
 typedef CMProfile *                     CMProfilePtr;
 typedef CMProfilePtr *                  CMProfileHandle;
-#if OLDROUTINENAMES
-enum {
-  kCMApplProfileVersion         = cmCS1ProfileVersion
-};
-
-enum {
-  grayResponse                  = cmGrayResponse,
-  redResponse                   = cmRedResponse,
-  greenResponse                 = cmGreenResponse,
-  blueResponse                  = cmBlueResponse,
-  cyanResponse                  = cmCyanResponse,
-  magentaResponse               = cmMagentaResponse,
-  yellowResponse                = cmYellowResponse,
-  ucrResponse                   = cmUcrResponse,
-  bgResponse                    = cmBgResponse,
-  onePlusLastResponse           = cmOnePlusLastResponse
-};
-
-enum {
-  rgbData                       = cmRGBData,
-  cmykData                      = cmCMYKData,
-  grayData                      = cmGrayData,
-  xyzData                       = cmXYZData
-};
-
-enum {
-  XYZData                       = cmXYZData
-};
-
-enum {
-  monitorDevice                 = cmMonitorDevice,
-  scannerDevice                 = cmScannerDevice,
-  printerDevice                 = cmPrinterDevice
-};
-
-enum {
-  CMNativeMatchingPreferred     = cmNativeMatchingPreferred, /* Default to native not preferred */
-  CMTurnOffCache                = cmTurnOffCache /* Default to turn on CMM cache */
-};
-
-enum {
-  CMPerceptualMatch             = cmPerceptualMatch, /* Default. For photographic images */
-  CMColorimetricMatch           = cmColorimetricMatch, /* Exact matching when possible */
-  CMSaturationMatch             = cmSaturationMatch /* For solid colors */
-};
-
-typedef UInt16                          XYZComponent;
-typedef CMXYZColor                      XYZColor;
-typedef UInt16                          CMResponseData;
-typedef CMIString                       IString;
-typedef long                            CMResponseColor;
-typedef CMResponseColor                 responseColor;
-#endif  /* OLDROUTINENAMES */
 
 
 

@@ -3,9 +3,9 @@
  
      Contains:   Event Manager Interfaces.
  
-     Version:    HIToolbox-124.14~2
+     Version:    HIToolbox-145.33~1
  
-     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -171,7 +171,8 @@ enum {
   kControlUnicode               = 0x2303, /* Unicode UP ARROWHEAD*/
   kOptionUnicode                = 0x2325, /* Unicode OPTION KEY*/
   kCommandUnicode               = 0x2318, /* Unicode PLACE OF INTEREST SIGN*/
-  kPencilUnicode                = 0x270E, /* Unicode LOWER RIGHT PENCIL*/
+  kPencilUnicode                = 0x270E, /* Unicode LOWER RIGHT PENCIL; actually pointed left until Mac OS X 10.3*/
+  kPencilLeftUnicode            = 0xF802, /* Unicode LOWER LEFT PENCIL; available in Mac OS X 10.3 and later*/
   kCheckUnicode                 = 0x2713, /* Unicode CHECK MARK*/
   kDiamondUnicode               = 0x25C6, /* Unicode BLACK DIAMOND*/
   kBulletUnicode                = 0x2022, /* Unicode BULLET*/

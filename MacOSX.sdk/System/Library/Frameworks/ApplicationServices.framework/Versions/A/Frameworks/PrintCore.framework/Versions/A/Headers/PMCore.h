@@ -3,9 +3,9 @@
  
      Contains:   Carbon Printing Manager Interfaces.
  
-     Version:    PrintingCore-102.1~1
+     Version:    PrintingCore-129~1
  
-     Copyright:  © 1998-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1998-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -700,6 +700,20 @@ extern OSStatus
 PMSessionSetCurrentPrinter(
   PMPrintSession   session,
   CFStringRef      printerName)                               AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
+
+/*
+ *  PMSessionSetCurrentPMPrinter()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMSessionSetCurrentPMPrinter(
+  PMPrintSession   session,
+  PMPrinter        printer)                                   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 /*
@@ -2306,6 +2320,41 @@ PMPrinterIsFavorite(PMPrinter printer)                        AVAILABLE_MAC_OS_X
 
 
 /*
+ *  PMPrinterCopyHostName()
+ *  
+ *  Summary:
+ *    Hand back the host name of the printer's server.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMPrinterCopyHostName(
+  PMPrinter      printer,
+  CFStringRef *  hostNameP)                                   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  PMPrinterIsRemote()
+ *  
+ *  Summary:
+ *    Hand back a boolean indicating whether the printer is hosted on a
+ *    remote print server.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMPrinterIsRemote(
+  PMPrinter   printer,
+  Boolean *   isRemoteP)                                      AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
  *  PMCGImageCreateWithEPSDataProvider()
  *  
  *  Summary:
@@ -2366,6 +2415,814 @@ extern CGImageRef
 PMCGImageCreateWithEPSDataProvider(
   CGDataProviderRef   epsDataProvider,
   CGImageRef          epsPreview)                             AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
+
+/*
+ *  PMPresetGetAttributes()
+ *  
+ *  Summary:
+ *    Hand back the meta-data describing a given preset.
+ *  
+ *  Discussion:
+ *    Each preset has associated with it a dictionary containing
+ *    meta-data. The meta-data provides the preset's id, the preset's
+ *    localized names, and descriptions of the environment for which
+ *    the preset it intended.
+ *  
+ *  Parameters:
+ *    
+ *    preset:
+ *      A print settings preset as obtained from PMPrinterCopyPresets().
+ *    
+ *    attributes:
+ *      On exit, *'attributes' is set to reference a dictionary
+ *      containing the preset's meta-data. The caller is responsible
+ *      for retaining this reference if it is to be used beyond the
+ *      lifetime of 'preset'. If this function fails, returning a
+ *      non-zero error code, then *'attributes' is set to NULL.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMPresetGetAttributes(
+  PMPreset           preset,
+  CFDictionaryRef *  attributes)                              AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  PMPrinterCopyPresets()
+ *  
+ *  Summary:
+ *    Provides a list of print settings presets for the specified
+ *    printer.
+ *  
+ *  Discussion:
+ *    A printer may have associated with it a list of preset settings.
+ *    Each setting is optimized for a particular printing situation.
+ *    This function returns all of the presets for a given printer. To
+ *    obtain more information about a particular preset see
+ *    PMPresetGetAttributes(). To apply a preset to some print
+ *    settings, use PMPresetApplyToPrintSettings().
+ *  
+ *  Parameters:
+ *    
+ *    printer:
+ *      Obtain the presets for this printer.
+ *    
+ *    presetList:
+ *      On exit, *'presetList' is set to reference an array of presets.
+ *      The caller must call CFRelease when it no longer needs the
+ *      array. Each element of the array is a PMPPreset. If this
+ *      function fails, returning a non-zero error code, then
+ *      *'presetList' will be set to NULL.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMPrinterCopyPresets(
+  PMPrinter     printer,
+  CFArrayRef *  presetList)                                   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  PMPresetCopyName()
+ *  
+ *  Summary:
+ *    Hand back a copy of the localized name for the specified preset.
+ *  
+ *  Parameters:
+ *    
+ *    preset:
+ *      The preset whose name is needed.
+ *    
+ *    name:
+ *      On exit, if this routine succeeds, *'name' is filled in with a
+ *      reference to a localized string with the preset's name. If this
+ *      routine fails, then *'name' is set to NULL.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMPresetCopyName(
+  PMPreset       preset,
+  CFStringRef *  name)                                        AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  PMPresetCreatePrintSettings()
+ *  
+ *  Summary:
+ *    Create a print settings conforming to the specified print
+ *    settings preset.
+ *  
+ *  Parameters:
+ *    
+ *    preset:
+ *      A preset specifying a set of initial print settings.
+ *    
+ *    session:
+ *      A valid print session.
+ *    
+ *    printSettings:
+ *      On exit, *'printSettings' is set to a newly created print
+ *      settings that contains the settings specified by 'preset'. The
+ *      caller is responsible for calling PMRelease when the print
+ *      settings are no longer needed.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMPresetCreatePrintSettings(
+  PMPreset           preset,
+  PMPrintSession     session,
+  PMPrintSettings *  printSettings)                           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  PMPrinterGetCommInfo()
+ *  
+ *  Summary:
+ *    Provides information about the comm channel characteristics for
+ *    the printer.
+ *  
+ *  Discussion:
+ *    This function is typically relevant only to PostScript capable
+ *    printers. All PostScript printers, regardless of what
+ *    communications channel is used to send data to them, support data
+ *    in the range 0x20 - 0x7F. Many comm channels can support data
+ *    outside this range. The Boolean returned in *supportsTransparentP
+ *    indicates whether the comm channel to this printer supports bytes
+ *    in the range 0x0 to 0x1F. The Boolean returned in
+ *    *supportsEightBitP indicates whether the comm channel to this
+ *    printer supports bytes with the high bit set, i.e. bytes in the
+ *    range 0x80 - 0xFF.
+ *  
+ *  Parameters:
+ *    
+ *    printer:
+ *      Obtain the comm information for this printer.
+ *    
+ *    supportsTransparentP:
+ *      Storage for the returned Boolean indicating whether the comm
+ *      channel to this printer is transparent to bytes in the range
+ *      0x0 - 0x1F
+ *    
+ *    supportsEightBitP:
+ *      Storage for the returned Boolean indicating whether the comm
+ *      channel to this printer can bytes in the range 0x80 - 0xFF
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMPrinterGetCommInfo(
+  PMPrinter   printer,
+  Boolean *   supportsTransparentP,
+  Boolean *   supportsEightBitP)                              AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  PMPaperCreate()
+ *  
+ *  Summary:
+ *    Create a new paper instance.
+ *  
+ *  Parameters:
+ *    
+ *    printer:
+ *      The new paper size is appropriate for this printer.
+ *    
+ *    id:
+ *      A unique identifier for this paper type.
+ *    
+ *    name:
+ *      The name to display to the user for this paper type.
+ *    
+ *    width:
+ *      The width, in points, of the paper.
+ *    
+ *    height:
+ *      The height, in points, of the paper.
+ *    
+ *    margins:
+ *      The unprintable margins on the paper.
+ *    
+ *    paperP:
+ *      if this function is successful, returning noErr, then *'paperP'
+ *      is set to be a reference to a newly created PMPaper instance.
+ *      The caller is responsible for calling PMRelease when the
+ *      instance is no longer needed. If this functions fails, it will
+ *      return a non-zero error and set *'paperP' to NULL.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMPaperCreate(
+  PMPrinter               printer,
+  CFStringRef             id,
+  CFStringRef             name,
+  double                  width,
+  double                  height,
+  const PMPaperMargins *  margins,
+  PMPaper *               paperP)                             AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  PMCreatePageFormatWithPMPaper()
+ *  
+ *  Summary:
+ *    Create a pageformat with a specific paper.
+ *  
+ *  Parameters:
+ *    
+ *    pageFormat:
+ *      On return, will contain the pageformat which was created
+ *    
+ *    paper:
+ *      The paper that will be associate with the pageformat
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMCreatePageFormatWithPMPaper(
+  PMPageFormat *  pageFormat,
+  PMPaper         paper)                                      AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  PMGetPageFormatPaper()
+ *  
+ *  Summary:
+ *    Returns the paper associated with a pageformat.
+ *  
+ *  Parameters:
+ *    
+ *    format:
+ *      Obtain the paper for this pageformat.
+ *    
+ *    paper:
+ *      If successful noErr is returned and *paper will contain a
+ *      PMPaper object describing the current paper associated with the
+ *      pageformat.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMGetPageFormatPaper(
+  PMPageFormat   format,
+  PMPaper *      paper)                                       AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  PMPrinterGetPaperList()
+ *  
+ *  Summary:
+ *    Returns the list of papers available for a given printer.
+ *  
+ *  Parameters:
+ *    
+ *    printer:
+ *      Obtain the paper list for this printer. Passing NULL will
+ *      return the paper list for the generic printer
+ *    
+ *    paperList:
+ *      If successful noErr is returned and *paperList is a CFArray of
+ *      PMPapers representing the list of papers available for the
+ *      printer.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMPrinterGetPaperList(
+  PMPrinter     printer,
+  CFArrayRef *  paperList)                                    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  PMPaperGetID()
+ *  
+ *  Summary:
+ *    Returns the id for a given paper.
+ *  
+ *  Parameters:
+ *    
+ *    paper:
+ *      Obtain the id for this paper.
+ *    
+ *    paperID:
+ *      If successful noErr is returned and *paperID is set to the id
+ *      of the paper.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMPaperGetID(
+  PMPaper        paper,
+  CFStringRef *  paperID)                                     AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  PMPaperGetName()
+ *  
+ *  Summary:
+ *    Returns the name for a given paper.
+ *  
+ *  Parameters:
+ *    
+ *    paper:
+ *      Obtain the name for this paper.
+ *    
+ *    paperName:
+ *      If successful noErr is returned and *paperName is set to the
+ *      name of the paper.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMPaperGetName(
+  PMPaper        paper,
+  CFStringRef *  paperName)                                   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  PMPaperGetHeight()
+ *  
+ *  Summary:
+ *    Returns the height for a given paper.
+ *  
+ *  Parameters:
+ *    
+ *    paper:
+ *      Obtain the height for this paper.
+ *    
+ *    paperHeight:
+ *      If successful noErr is returned and *paperHeight is set to the
+ *      height of the paper.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMPaperGetHeight(
+  PMPaper   paper,
+  double *  paperHeight)                                      AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  PMPaperGetWidth()
+ *  
+ *  Summary:
+ *    Returns the width for a given paper.
+ *  
+ *  Parameters:
+ *    
+ *    paper:
+ *      Obtain the width for this paper.
+ *    
+ *    paperWidth:
+ *      If successful noErr is returned and *paperWidth is set to the
+ *      width of the paper.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMPaperGetWidth(
+  PMPaper   paper,
+  double *  paperWidth)                                       AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  PMPaperGetMargins()
+ *  
+ *  Summary:
+ *    Returns the margins for a given paper.
+ *  
+ *  Parameters:
+ *    
+ *    paper:
+ *      Obtain the margin information for this paper.
+ *    
+ *    paperMargins:
+ *      If successful noErr is returned and *paperMargins is set to the
+ *      margins of the paper.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMPaperGetMargins(
+  PMPaper           paper,
+  PMPaperMargins *  paperMargins)                             AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  PMWorkflowCopyItems()
+ *  
+ *  Summary:
+ *    Hand back an array of dictionaries describing the PDF Workflow
+ *    items installed on the system
+ *  
+ *  Parameters:
+ *    
+ *    workflowItems:
+ *      If this function returns without error then *'workflowItems'
+ *      will be filled in with a reference to an array. It is the
+ *      caller's responsability to release the array when done with it.
+ *      Each element in the array describes a PDF Workflow item or a
+ *      folder holding workflow items. A dictionary describing a
+ *      workflow item has, at least, the following keys and values:
+ *      displayName - The user's diaplayable name for the workflow item
+ *      itemURL - A CFURLRef pointing to the workflow item. A
+ *      dictionary describing a workflow folder has at least the
+ *      following keys: displayName - The user's diaplayable name for
+ *      the workflow item folderURL - A CFURLRef pointing to the
+ *      folder. items - A CFArrayRef describing the workflow items in
+ *      the folder. If this function returns a non-zero error code then
+ *      *'workflowItems' will be set to NULL.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMWorkflowCopyItems(CFArrayRef * workflowItems)               AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  PMPrinterGetMimeTypes()
+ *  
+ *  Summary:
+ *    Return the array of mime type supported by the printer for a
+ *    given set of print settings.
+ *  
+ *  Parameters:
+ *    
+ *    printer:
+ *      The printer.
+ *    
+ *    settings:
+ *      The print settings for the print job. The part of the print
+ *      settings that effects the available mime type is the
+ *      destination. This parameter can be NULL.
+ *    
+ *    mimeTypes:
+ *      If this function returns without error then *'mimeTypes' is
+ *      filled in with a reference to an array of CFStrings. Each
+ *      CFString names a mime type supported by the printer with the
+ *      specified print settings. The caller must not release this
+ *      reference without first doing a retain. If this function
+ *      returns an error then 'mimeTypes' will be set to NULL.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMPrinterGetMimeTypes(
+  PMPrinter         printer,
+  PMPrintSettings   settings,
+  CFArrayRef *      mimeTypes)                                AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  PMWorkflowSubmitPDFWithSettings()
+ *  
+ *  Summary:
+ *    Submit a PDF file for workflow processing.
+ *  
+ *  Discussion:
+ *    The print dialog uses this function is conjunction with
+ *    PMWorkflowGetItems to implement the PDF workflow button. Caller's
+ *    can use PMWorkflowGetItems to obtain a CFURLRef that can be
+ *    passed to PMWorkflowPDF or they can create a CFURLRef to another
+ *    file system item.
+ *  
+ *  Parameters:
+ *    
+ *    workflowItem:
+ *      A file system URL pointing to the workflow item that will
+ *      handle the PDF file. Here are the different types of workflow
+ *      items currently supported: Folder alias:   The PDF is moved to
+ *      the resolved folder. Application or application alias: The
+ *      application is sent an open event along with a reference to the
+ *      PDF file. Compiled data fork AppleScript: The applescript is
+ *      run with an open event along with a reference to the PDF file.
+ *      executable tool: The tool is run with the following parameters:
+ *      title options pdfFile
+ *    
+ *    settings:
+ *      The prints settings to apply to the PDF.
+ *    
+ *    pdfFile:
+ *      A file system URL pointing to the file to be processed by the
+ *      workflow item.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMWorkflowSubmitPDFWithSettings(
+  CFURLRef          workflowItem,
+  PMPrintSettings   settings,
+  CFURLRef          pdfFile)                                  AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  PMWorkflowSubmitPDFWithOptions()
+ *  
+ *  Summary:
+ *    Submit a PDF file for workflow processing.
+ *  
+ *  Discussion:
+ *    The print dialog uses this function is conjunction with
+ *    PMWorkflowGetItems to implement the PDF workflow button. Caller's
+ *    can use PMWorkflowGetItems to obtain a CFURLRef that can be
+ *    passed to PMWorkflowPDF or they can create a CFURLRef to another
+ *    file system item.
+ *  
+ *  Parameters:
+ *    
+ *    workflowItem:
+ *      A file system URL pointing to the workflow item that will
+ *      handle the PDF file. Here are the different types of workflow
+ *      items currently supported: Folder alias:   The PDF is moved to
+ *      the resolved folder. Application or application alias: The
+ *      application is sent an open event along with a reference to the
+ *      PDF file. Compiled data fork AppleScript: The applescript is
+ *      run with an open event along with a reference to the PDF file.
+ *      executable tool: The tool is run with the following parameters:
+ *      title options pdfFile
+ *    
+ *    title:
+ *      The user displayable name of the document.
+ *    
+ *    options:
+ *      A string of CUPS style key-value pairs that may be passed to
+ *      the PDF Workflow item. This parameter can be NULL in which case
+ *      an empty string of options is used.
+ *    
+ *    pdfFile:
+ *      A file system URL pointing to the file to be processed by the
+ *      workflow item.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMWorkflowSubmitPDFWithOptions(
+  CFURLRef      workflowItem,
+  CFStringRef   title,
+  const char *  options,
+  CFURLRef      pdfFile)                                      AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*** Job Submission APIs ***/
+/*
+ *  PMPrintSettingsToOptions()
+ *  
+ *  Summary:
+ *    Convert print settings to a CUPS style options string.
+ *  
+ *  Parameters:
+ *    
+ *    settings:
+ *      The print settings that should be converted to a CUPS style
+ *      options string.
+ *    
+ *    options:
+ *      On exit *'options' will be filled in with a malloc'd C string
+ *      describing the passed in print settings. It is the caller's
+ *      responsibility to free this memory when done with it. If this
+ *      function fails returning a non-zero error code then *'options'
+ *      will be set to NULL.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMPrintSettingsToOptions(
+  PMPrintSettings   settings,
+  char **           options)                                  AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  PMPrinterPrintWithFile()
+ *  
+ *  Summary:
+ *    Submit a file for printing to a specified printer.
+ *  
+ *  Discussion:
+ *    One reason this function may fail is if the specified printer can
+ *    not handle the file's mime type. Use PMPrinterGetMimeTypes() to
+ *    check whether a mime type is supported. This function is
+ *    implemented using PMPrinterPrintWithProvider().
+ *  
+ *  Parameters:
+ *    
+ *    printer:
+ *      The printer.
+ *    
+ *    settings:
+ *      The print settings for the print job.
+ *    
+ *    format:
+ *      The physical page size and orientation on to which the document
+ *      should be printed. This parameter can be NULL.
+ *    
+ *    mimeType:
+ *      The mime type of the file to be printed. If this parameter is
+ *      NULL then the supplied file will be auto-typed.
+ *    
+ *    fileURL:
+ *      A file URL specifying the file to be printed.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMPrinterPrintWithFile(
+  PMPrinter         printer,
+  PMPrintSettings   settings,
+  PMPageFormat      format,
+  CFStringRef       mimeType,
+  CFURLRef          fileURL)                                  AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  PMPrinterPrintWithProvider()
+ *  
+ *  Summary:
+ *    Submit a print data to a specified printer.
+ *  
+ *  Parameters:
+ *    
+ *    printer:
+ *      The printer.
+ *    
+ *    settings:
+ *      The print settings for the print job.
+ *    
+ *    format:
+ *      The physical page size and orientation on to which the document
+ *      should be printed. This parameter can be NULL.
+ *    
+ *    mimeType:
+ *      The mime type of the file to be printed. This parameter can not
+ *      be NULL. Use PMPrinterPrintWithFile() if aut-typing is desired.
+ *    
+ *    provider:
+ *      The data provider that supplies the print data.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMPrinterPrintWithProvider(
+  PMPrinter           printer,
+  PMPrintSettings     settings,
+  PMPageFormat        format,
+  CFStringRef         mimeType,
+  CGDataProviderRef   provider)                               AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  PMCopyAvailablePPDs()
+ *  
+ *  Summary:
+ *    Hand back the list of PPDs in the specified PPD domain.
+ *  
+ *  Parameters:
+ *    
+ *    domain:
+ *      The domain to search for PPDs.
+ *    
+ *    ppds:
+ *      If this function completes without error, *'ppds' is set to an
+ *      array of CFURLs. Each CFURL specifies the location of a PPD
+ *      file or a compressed PPD file. The caller is responsible for
+ *      releasing the array. If this function returns a non-zero error
+ *      code then *'ppds' is set to NULL.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMCopyAvailablePPDs(
+  PMPPDDomain   domain,
+  CFArrayRef *  ppds)                                         AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+
+/*
+ *  PMCopyLocalizedPPD()
+ *  
+ *  Summary:
+ *    Hand back a reference to a localized PPD.
+ *  
+ *  Parameters:
+ *    
+ *    ppd:
+ *      A PPD reference. Typically this is a CFURLRef returned from
+ *      PMCopyAvailablePPDs().
+ *    
+ *    localizedPPD:
+ *      If this function completes without error, *'localizedPPD' will
+ *      be set to a CFURLRef referencing the PPD that should be used
+ *      given the current user's language preferences. If this function
+ *      returns an error then *'localizedPPD' will be set to to NULL.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMCopyLocalizedPPD(
+  CFURLRef    ppd,
+  CFURLRef *  localizedPPD)                                   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  PMCopyPPDData()
+ *  
+ *  Summary:
+ *    Hand back the uncompressed PPD data for a PPD or compressed PPD
+ *    file.
+ *  
+ *  Parameters:
+ *    
+ *    ppd:
+ *      A reference to a PPD or compressed PPD file. This reference is
+ *      usually obtained from PMCopyAvailablePPDs() or from
+ *      PMCopyLocalizedPPD().
+ *    
+ *    data:
+ *      If this function completes without error then *'data' is set to
+ *      reference the uncompressed PPD data from the PPD file. If this
+ *      function returns a non-zero error then *'data is set to NULL.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+PMCopyPPDData(
+  CFURLRef     ppd,
+  CFDataRef *  data)                                          AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 

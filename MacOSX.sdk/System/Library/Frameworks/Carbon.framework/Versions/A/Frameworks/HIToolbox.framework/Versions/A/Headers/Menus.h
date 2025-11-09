@@ -3,9 +3,9 @@
  
      Contains:   Menu Manager Interfaces.
  
-     Version:    HIToolbox-124.14~2
+     Version:    HIToolbox-145.33~1
  
-     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1985-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -57,10 +57,6 @@ extern "C" {
 /*——————————————————————————————————————————————————————————————————————————————————————*/
 /*  • Menu Constants                                                                    */
 /*——————————————————————————————————————————————————————————————————————————————————————*/
-enum {
-  noMark                        = 0     /* mark symbol for SetItemMark; other mark symbols are defined in Fonts.h */
-};
-
 /*
     A Short Course on Menu Definition Functions
     
@@ -386,11 +382,52 @@ enum {
   kMenuDrawItemsMsg             = 12
 };
 
+
+/*
+ */
 enum {
+
+  /*
+   * Proc ID for a normal text menu. This constant is not typically
+   * used.
+   */
   textMenuProc                  = 0,
-  hMenuCmd                      = 27,   /*itemCmd == 0x001B ==> hierarchical menu*/
-  hierMenu                      = -1,   /*a hierarchical menu - for InsertMenu call*/
-  kInsertHierarchicalMenu       = -1,   /*a better name for hierMenu */
+
+  /*
+   * Menu item command ID to indicate a hierarchical menu; the item
+   * icon ID is the hierarchical menu ID. This constant is deprecated.
+   * Use SetMenuItemHierarchicalID or SetMenuItemHierarchicalMenu
+   * instead of using this constant.
+   */
+  hMenuCmd                      = 27,
+
+  /*
+   * A menu ID used with InsertMenu to insert a menu into the
+   * hierarchical portion of the menubar.
+   */
+  kInsertHierarchicalMenu       = -1,
+
+  /*
+   * The old name for kInsertHierarchicalMenu. This constant is
+   * deprecated.
+   */
+  hierMenu                      = -1,
+
+  /*
+   * This value may be passed to InsertMenuItem, InsertMenuItemText,
+   * and InsertMenuItemTextWithCFString to indicate that the new item
+   * should be inserted at the end of the menu. Note that you can also
+   * just call AppendMenu[ItemText][WithCFString].
+   */
+  kHIMenuAppendItem             = 0x0000FFFF
+};
+
+enum {
+  noMark                        = 0     /* mark symbol for SetItemMark; other mark symbols are defined in Fonts.h */
+};
+
+/* obsolete menu color table constants*/
+enum {
   mctAllItems                   = -98,  /*search for all Items for the given ID*/
   mctLastIDIndic                = -99   /*last color table entry has this in ID field*/
 };
@@ -524,10 +561,47 @@ enum {
    * correspond to a visible menu item; menu items with the desired
    * command keys can be added to the menu and inserted in the menubar
    * without making the menu visible. This attribute is available in
-   * Mac OS X after 10.1.
+   * Mac OS X 10.2 and later.
    */
-  kMenuAttrHidden               = (1 << 4)
+  kMenuAttrHidden               = (1 << 4),
+
+  /*
+   * If menu item separators are present at the beginning or end of the
+   * menu, or if multiple contiguous separators are present, the extra
+   * separator items are marked as hidden to avoid extra blank space in
+   * the menu. The menu is examined for extra separators whenever the
+   * menu size is recalculated. This attribute is available in Mac OS X
+   * 10.3 and later.
+   */
+  kMenuAttrCondenseSeparators   = (1 << 5),
+
+  /*
+   * Disables automatic caching of the menu image by the Menu Manager.
+   * Automatic caching is provided for all menus that use an HIView to
+   * draw their content. Setting this attribute will prevent the Menu
+   * Manager from caching the menu image; instead, the menu will be
+   * drawn using the standard HIView drawing mechanism each time that
+   * it is displayed. This attribute is available in Mac OS X 10.3 and
+   * later.
+   */
+  kMenuAttrDoNotCacheImage      = (1 << 6),
+
+  /*
+   * Disables substitution of command keys from the
+   * NSUserKeyEquivalents dictionary. By default, all menu items are
+   * checked for a match in the dictionary. Note that this attribute,
+   * to be effective, should be added at the time that the menu is
+   * created; once the menu has been searched for user command keys
+   * (which occurs in CalcMenuSize, in GetItemCmd and
+   * GetMenuItemCommandKey, and before command key matching), the
+   * original command keys are replaced by the user command keys and
+   * cannot be retrieved. For this reason, it is also not useful to
+   * clear this attribute; the original command keys cannot be
+   * restored. This attribute is available in Mac OS X 10.3 and later.
+   */
+  kMenuAttrDoNotUseUserCommandKeys = (1 << 7)
 };
+
 
 
 /*
@@ -619,9 +693,44 @@ enum {
    * attribute). The IncludeInCmdKeyMatching attribute can be used to
    * force a hidden, non-dynamic menu item to be included in command
    * key matching when it normally wouldn't. This attribute is
-   * available in CarbonLib 1.6 and later, and in Mac OS X after 10.1.
+   * available in CarbonLib 1.6 and Mac OS X 10.2 and later.
    */
-  kMenuItemAttrIncludeInCmdKeyMatching = (1 << 12)
+  kMenuItemAttrIncludeInCmdKeyMatching = (1 << 12),
+
+  /*
+   * This item is automatically disabled if, when
+   * kEventCommandUpdateStatus is sent for this item, no handler is
+   * installed or all handlers return eventNotHandledErr. A return
+   * value from any handler of any value other than eventNotHandledErr
+   * will prevent automatic disabling. This attribute is useful for
+   * applications that use kEventCommandUpdateStatus events for all
+   * menu item enabling; previously, an application would need to
+   * install UpdateStatus handlers on its application target to disable
+   * all items in the application that were unnecessary when no
+   * document windows were open. By setting this attribute, all menu
+   * items will be disabled automatically unless specifically enabled
+   * by an UpdateStatus handler on a window, control, or application
+   * target. This attribute is available in Mac OS X 10.3 and later.
+   */
+  kMenuItemAttrAutoDisable      = (1 << 13),
+
+  /*
+   * During command key matching, the Menu Manager uses a cache of the
+   * available command keys to locate the menu item that matches an
+   * event. Before returning this item, the Menu Manager sends a
+   * kEventMenuEnableItems event to the menu containing the item, and a
+   * kEventCommandUpdateStatus event to each item in the menu, so that
+   * the item can be properly enabled or disabled. For some
+   * applications, updating the item status for each item in the menu
+   * is quite expensive, and also unnecessary since only a single item
+   * actually needs to be updated. Setting this attribute indicates to
+   * the Menu Manager that it only needs to send a
+   * kEventCommandUpdateStatus event to this menu item before returning
+   * it from command key matching; kEventMenuEnableItems will not be
+   * sent to the menu, and no other menu item will receive
+   * kEventCommandUpdateStatus.
+   */
+  kMenuItemAttrUpdateSingleItem = (1 << 14)
 };
 
 
@@ -1330,20 +1439,48 @@ typedef STACK_UPP_TYPE(MBarHookProcPtr)                         MBarHookUPP;
  *    Non-Carbon CFM:   available as macro/inline
  */
 
+
+/*
+ *  Summary:
+ *    Types of custom menu definitions.
+ */
 enum {
-  kMenuDefProcPtr               = 0     /* raw proc-ptr access based on old MDEF */
+
+  /*
+   * A custom menu definition using a function pointer based on the
+   * pre-Carbon MDEF model.
+   */
+  kMenuDefProcPtr               = 0,
+
+  /*
+   * A custom menu definition using an HIView subclass. Available in
+   * Mac OS X 10.3 and later.
+   */
+  kMenuDefClassID               = 1
 };
 
 typedef UInt32                          MenuDefType;
-enum {
-  kMenuDefObjectClass           = 1     /* event-based definition (not yet implemented)*/
-};
 
-typedef struct OpaqueMenuLayoutRef*     MenuLayoutRef;
+/*
+ *  MenuDefSpec
+ *  
+ *  Summary:
+ *    Specifies a custom menu definition.
+ */
 struct MenuDefSpec {
+
+  /*
+   * The type of menu definition: either kMenuDefProcPtr or
+   * kMenuDefClassID. kMenuDefClassID may only be used in Mac OS X 10.3
+   * and later.
+   */
   MenuDefType         defType;
   union {
     MenuDefUPP          defProc;
+    struct {
+      CFStringRef         classID;
+      EventRef            initEvent;
+    }                       view;
   }                       u;
 };
 typedef struct MenuDefSpec              MenuDefSpec;
@@ -1548,8 +1685,8 @@ SetMenuExcludesMarkColumn(
  *    menu definition function.
  *  
  *  Discussion:
- *    In the Mac OS 8.x Menu Manager, a 'MENU' resource can contain an
- *    embedded MDEF procID that is used by the Menu Manager as the
+ *    In the classic Mac OS Menu Manager, a 'MENU' resource can contain
+ *    an embedded MDEF procID that is used by the Menu Manager as the
  *    resource ID of an 'MDEF' resource to measure and draw the menu.
  *    The 'MDEF' resource is loaded by the Menu Manager when you load
  *    the menu with GetMenu. Since MDEFs can no longer be packaged as
@@ -1601,7 +1738,8 @@ RegisterMenuDefinition(
  *  Parameters:
  *    
  *    inMenuID:
- *      The menu ID to use for the new menu.
+ *      The menu ID to use for the new menu. Zero is a valid menu ID in
+ *      Carbon.
  *    
  *    inMenuAttributes:
  *      The menu attributes to use for the new menu.
@@ -1639,7 +1777,8 @@ CreateNewMenu(
  *    
  *    inDefSpec:
  *      Specifies a custom menu definition function. defSpec->defType
- *      must be kMenuDefProcPtr.
+ *      must be kMenuDefProcPtr or, on Mac OS X 10.3 and later,
+ *      kMenuDefClassID.
  *    
  *    inMenuID:
  *      The menu ID to use for the new menu.
@@ -1879,11 +2018,11 @@ SetMenuTitleWithCFString(
  *    call. When a menu with an title icon is disposed, the Menu
  *    Manager will dispose the icon also; the Menu Manager will also
  *    dispose of the current title icon when a new text or icon title
- *    is supplied for a menu. If an IconRef is specified, the Menu
- *    Manager will increment its refcount, so you may freely release
- *    your reference to the IconRef without invalidating the Menu
- *    Manager's copy. The menubar will be invalidated by this call, and
- *    redrawn at the next opportunity.
+ *    is supplied for a menu. If an IconRef or CGImageRef is specified,
+ *    the Menu Manager will increment its refcount, so you may freely
+ *    release your reference to the icon or image without invalidating
+ *    the Menu Manager's copy. The menubar will be invalidated by this
+ *    call, and redrawn at the next opportunity.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -1895,12 +2034,15 @@ SetMenuTitleWithCFString(
  *    
  *    inType:
  *      The type of icon being used to specify the icon title; use
- *      kMenuNoIcon to remove the icon from the menu title. The
- *      supported types are kMenuIconSuiteType and kMenuIconRefType.
+ *      kMenuNoIcon to remove the icon from the menu title. In Mac OS X
+ *      10.2 and earlier, the supported types are kMenuIconSuiteType
+ *      and kMenuIconRefType; Mac OS X 10.3 also support
+ *      kMenuCGImageRefType.
  *    
  *    inIcon:
  *      The icon; must be NULL if inType is kMenuNoIcon. The supported
- *      icon formats are IconSuiteRef and IconRef.
+ *      icon formats are IconSuiteRef, IconRef, and in Mac OS X 10.3
+ *      and later, CGImageRef.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1938,9 +2080,9 @@ SetMenuTitleIcon(
  *      icon title.
  *    
  *    outIcon:
- *      On exit, contains the IconSuiteRef or IconRef being used as the
- *      title of the menu, or NULL if the menu does not have an icon
- *      title. May be NULL.
+ *      On exit, contains the IconSuiteRef, IconRef, or CGImageRef
+ *      being used as the title of the menu, or NULL if the menu does
+ *      not have an icon title. May be NULL.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2170,8 +2312,28 @@ AppendResMenu(
 /*
  *  [Mac]InsertMenuItem()
  *  
+ *  Summary:
+ *    Inserts a new menu item into a menu, using a Str255 for the item
+ *    text.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    theMenu:
+ *      The menu into which to insert the item.
+ *    
+ *    itemString:
+ *      The text of the new item. This string is parsed for the
+ *      meta-characters documented in the Menu Manager chapter of
+ *      Inside Macintosh.
+ *    
+ *    afterItem:
+ *      The menu item after which to insert the item. Pass 0 to insert
+ *      the item at the beginning of the menu. If afterItem is greater
+ *      than the number of items in the menu, the item is inserted at
+ *      the end of the menu.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2262,8 +2424,29 @@ AppendMenuItemText(
 /*
  *  InsertMenuItemText()
  *  
+ *  Summary:
+ *    Inserts a new menu item into a menu, using a Str255 for the item
+ *    text.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    menu:
+ *      The menu into which to insert the item.
+ *    
+ *    inString:
+ *      The text of the new item. This string is not parsed for the
+ *      meta-characters documented in the Menu Manager chapter of
+ *      Inside Macintosh; the new item's text becomes exactly the
+ *      specified text.
+ *    
+ *    afterItem:
+ *      The menu item after which to insert the item. Pass 0 to insert
+ *      the item at the beginning of the menu. If afterItem is greater
+ *      than the number of items in the menu, the item is inserted at
+ *      the end of the menu.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2302,7 +2485,9 @@ InsertMenuItemText(
  *    
  *    inInsertAfter:
  *      The menu item in the destination menu after which to insert the
- *      copied items.
+ *      copied items. Pass 0 to insert the items at the beginning of
+ *      the menu. This value of this parameter must not exceed the
+ *      number of items in the destination menu.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2431,7 +2616,10 @@ AppendMenuItemTextWithCFString(
  *      The text of the new item.
  *    
  *    inAfterItem:
- *      The item after which to insert the new item.
+ *      The item after which to insert the new item. Pass 0 to insert
+ *      the item at the beginning of the menu. If inAfterItem is
+ *      greater than the number of items in the menu, the item is
+ *      inserted at the end of the menu.
  *    
  *    inAttributes:
  *      The attributes of the new item.
@@ -2489,8 +2677,41 @@ MenuSelect(Point startPt)                                     AVAILABLE_MAC_OS_X
 /*
  *  PopUpMenuSelect()
  *  
+ *  Summary:
+ *    Displays a pop-up menu at a specified location.
+ *  
+ *  Discussion:
+ *    In Mac OS 9 and earlier, PopUpMenuSelect requires that the menu
+ *    be inserted into the menubar using InsertMenu( menuRef,
+ *    kInsertHierarchicalMenu ). CarbonLib 1.1 and later, and Mac OS X,
+ *    do not have this requirement; a menu can be displayed by
+ *    PopUpMenuSelect even if it is not inserted in the menubar.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    menu:
+ *      The menu to display.
+ *    
+ *    top:
+ *      The vertical position, in global coordinates, of the top left
+ *      corner of the selected item when the menu is opened.
+ *    
+ *    left:
+ *      The horizontal position, in global coordinates, of the top left
+ *      corner of the selected item when the menu is opened.
+ *    
+ *    popUpItem:
+ *      The item that should be positioned at the global point
+ *      specified by the top and left parameters. May be zero, in which
+ *      case item one is positioned at the specified global point.
+ *  
+ *  Result:
+ *    A 32-value whose high 16-bit word is the menu ID and whose low
+ *    16-bit word is the index of the menu item that was selected, or
+ *    zero if no item was selected.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2621,6 +2842,105 @@ IsMenuKeyEvent(
  */
 extern OSStatus 
 InvalidateMenuEnabling(MenuRef inMenu)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+
+/*
+ *  Summary:
+ *    Menu dismissal causation constants
+ */
+enum {
+
+  /*
+   * The menu was dismissed by the selection of a menu item.
+   */
+  kHIMenuDismissedBySelection   = 1,
+
+  /*
+   * The menu was dismissed because the user canceled menu tracking.
+   */
+  kHIMenuDismissedByUserCancel  = 2,
+
+  /*
+   * The menu was dismissed by a mouse-down somewhere that did not
+   * result in menu item selection.
+   */
+  kHIMenuDismissedByMouseDown   = 3,
+
+  /*
+   * The menu was dismissed by a mouse-up.
+   */
+  kHIMenuDismissedByMouseUp     = 4,
+
+  /*
+   * The menu was dismissed by a keyboard event.
+   */
+  kHIMenuDismissedByKeyEvent    = 5,
+
+  /*
+   * The menu was dismissed because the current application was no
+   * longer frontmost.
+   */
+  kHIMenuDismissedByAppSwitch   = 6,
+
+  /*
+   * The menu was dismissed because menu tracking mode timed out.
+   */
+  kHIMenuDismissedByTimeout     = 7,
+
+  /*
+   * The menu was dismissed by the CancelMenuTracking API.
+   */
+  kHIMenuDismissedByCancelMenuTracking = 8,
+
+  /*
+   * The menu was dismissed because the active window changed.
+   */
+  kHIMenuDismissedByActivationChange = 9,
+
+  /*
+   * The menu was dismissed bcause the user focus window changed, or
+   * because keyboard focus was removed from the current process.
+   */
+  kHIMenuDismissedByFocusChange = 10
+};
+
+/*
+ *  CancelMenuTracking()
+ *  
+ *  Summary:
+ *    Cancels a menu tracking session.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inRootMenu:
+ *      The root menu of the menu tracking session that should be
+ *      dismissed. For menubar tracking, use the result of AcquireRoot
+ *      menu; for popup menu tracking, use the menu that was passed to
+ *      PopUpMenuSelect.
+ *    
+ *    inImmediate:
+ *      Whether the open menus should disappear immediately or fade out.
+ *    
+ *    inDismissalReason:
+ *      Why the menu is being dismissed; this value will be added to
+ *      the kEventMenuEndTracking event. If zero,
+ *      kHIMenuDismissedByCancelMenuTracking is added to the
+ *      EndTracking event.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+CancelMenuTracking(
+  MenuRef   inRootMenu,
+  Boolean   inImmediate,
+  UInt32    inDismissalReason)                                AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 
@@ -3037,6 +3357,20 @@ AcquireRootMenu(void)                                         AVAILABLE_MAC_OS_X
  *  Discussion:
  *    The refcount of the root menu is incremented by this API. The
  *    caller may release the menu after calling SetRootMenu.
+ *    
+ *    A root menu should contain one menu item for each top-level menu
+ *    that should be displayed in the menubar. Each menu item should
+ *    have a submenu that was installed with
+ *    SetMenuItemHierarchicalMenu.
+ *    
+ *    SetRootMenu also sets the contents of the hierarchical portion of
+ *    the menulist (the set of menus that were inserted with
+ *    InsertMenu( menu, kInsertHierarchicalMenu). If a menu that was
+ *    returned by AcquireRootMenu is passed to SetRootMenu, the
+ *    hierarchical menulist is changed to include the menus that were
+ *    in the hierarchical menulist when AcquireRootMenu was called. If
+ *    a newly created menu is passed to SetRootMenu, the hierarchical
+ *    menulist is cleared and has no menus in it.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -4873,10 +5207,10 @@ IsMenuCommandEnabled(
  *      one item has this command ID, only the first will be modified.
  *    
  *    inMark:
- *      The new mark character. This is a Unicode character. On Mac OS
- *      8.x, the low byte of this character will be used as the mark
- *      character. On Mac OS X, the entire UniChar will be used and
- *      drawn.
+ *      The new mark character. Although the type of this parameter is
+ *      UniChar, currently only the low byte of this character will be
+ *      used as the mark character, and it is interpreted using the
+ *      application’s text encoding.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5225,7 +5559,7 @@ SetMenuItemData(
 
 
 /*——————————————————————————————————————————————————————————————————————————————————————*/
-/*  • Dynamic menu item support (CarbonLib 1.1 and Carbon for Mac OS X, and later)      */
+/*  • Dynamic menu item support (available in CarbonLib 1.1 and Mac OS X)               */
 /*                                                                                      */
 /*  Dynamic menu item support allows a menu item to be redrawn while the menu is open   */
 /*  and visible to the user. Carbon contains automatic support for dynamic items based  */
@@ -5239,9 +5573,20 @@ SetMenuItemData(
 /*      Close       cmd-W                                                               */
 /*      Close All   cmd-option-W                                                        */
 /*                                                                                      */
-/*  In your MENU resource, you would create the Close and Close All items and give      */
-/*  them each the letter 'W' as the command key; using an associated xmnu resource,     */
-/*  you would specify kMenuOptionModifier as the modifier for the Close All item.       */
+/*  The Menu Manager automatically determines a dynamic menu group using the base       */
+/*  command key of a dynamic menu item ('W' in this case). Only a single item from      */
+/*  a dynamic group is visible at any time; the other items are hidden. The Menu        */
+/*  Manager uses the current keyboard modifiers to determine which item is visible.     */
+/*  It is also possible to have a dynamic menu item group that does not have command    */
+/*  keys, but only modifiers; for example, in the Finder's View menu, the Clean Up      */
+/*  and Clean Up Selection items have no command key, but are a dynamic menu item       */
+/*  group that changes visibility based on the Option modifier key.                     */
+/*                                                                                      */
+/*  In this example, in your MENU resource, you would create the Close and Close All    */
+/*  items and give them each the letter 'W' as the command key; using an associated     */
+/*  xmnu resource, you would specify kMenuOptionModifier as the modifier for the        */
+/*  Close All item. You can do the same thing using InterfacerBuilder and nib-based     */
+/*  menus.                                                                              */
 /*                                                                                      */
 /*  After loading your menu from the resource, you must set the kMenuItemAttrDynamic    */
 /*  flag for each dynamic item. In this example, you would use:                         */
@@ -5252,6 +5597,18 @@ SetMenuItemData(
 /*  The Menu Manager will now automatically display the correct item depending on       */
 /*  whether the Option key is pressed. The result from MenuSelect will be the item      */
 /*  number of the item that was visible when the menu closed.                           */
+/*                                                                                      */
+/*  Note that:                                                                          */
+/*                                                                                      */
+/*      - If you use InterfacerBuilder, you can set the kMenuItemAttrDynamic attribute  */
+/*        directly in the menu object in the nib, using the Inspector window for the    */
+/*        menu. You don't need to add the attribute after creating the menu.            */
+/*                                                                                      */
+/*      - If your application requires Mac OS X 10.2 or CarbonLib 1.6 or later, you     */
+/*        can also use a version-one-format 'xmnu' resource, which allows settting      */
+/*        the menu item attributes in the 'xmnu'. Using a version one resource, you     */
+/*        can include the kMenuItemAttrDynamic attribute in the resource rather than    */
+/*        adding it after creating the menu.                                            */
 /*                                                                                      */
 /*  If the Menu Manager's built-in support is not sufficient, you can also change the   */
 /*  attributes of an item yourself and use the UpdateInvalidMenuItems API to cause      */

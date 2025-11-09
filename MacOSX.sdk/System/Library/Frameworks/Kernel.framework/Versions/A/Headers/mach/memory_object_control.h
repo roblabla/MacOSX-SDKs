@@ -26,7 +26,7 @@ typedef function_table_entry 	*function_table_t;
 #endif /* AUTOTEST */
 
 #ifndef	memory_object_control_MSG_COUNT
-#define	memory_object_control_MSG_COUNT	10
+#define	memory_object_control_MSG_COUNT	11
 #endif	/* memory_object_control_MSG_COUNT */
 
 #include <mach/std_types.h>
@@ -37,6 +37,9 @@ typedef function_table_entry 	*function_table_t;
 #ifdef __BeforeMigUserHeader
 __BeforeMigUserHeader
 #endif /* __BeforeMigUserHeader */
+
+#include <sys/cdefs.h>
+__BEGIN_DECLS
 
 
 /* Routine memory_object_get_attributes */
@@ -154,7 +157,7 @@ kern_return_t memory_object_page_op
 	memory_object_control_t memory_control,
 	memory_object_offset_t offset,
 	integer_t ops,
-	vm_offset_t *phys_entry,
+	uint32_t *phys_entry,
 	integer_t *flags
 );
 
@@ -181,6 +184,35 @@ kern_return_t memory_object_release_name
 	memory_object_control_t memory_control,
 	integer_t flags
 );
+
+/* Routine memory_object_range_op */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t memory_object_range_op
+(
+	memory_object_control_t memory_control,
+	memory_object_offset_t offset_beg,
+	memory_object_offset_t offset_end,
+	integer_t ops,
+	integer_t *range
+);
+
+__END_DECLS
+
+/********************** Caution **************************/
+/* The following data types should be used to calculate  */
+/* maximum message sizes only. The actual message may be */
+/* smaller, and the position of the arguments within the */
+/* message layout may vary from what is presented here.  */
+/* For example, if any of the arguments are variable-    */
+/* sized, and less than the maximum is sent, the data    */
+/* will be packed tight in the actual message to reduce  */
+/* the presence of holes.                                */
+/********************** Caution **************************/
+
 /* typedefs for all requests */
 
 #ifndef __Request__memory_object_control_subsystem__defined
@@ -261,6 +293,14 @@ kern_return_t memory_object_release_name
 		integer_t flags;
 	} __Request__memory_object_release_name_t;
 
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		memory_object_offset_t offset_beg;
+		memory_object_offset_t offset_end;
+		integer_t ops;
+	} __Request__memory_object_range_op_t;
+
 #endif /* !__Request__memory_object_control_subsystem__defined */
 
 /* union of all requests */
@@ -278,6 +318,7 @@ union __RequestUnion__memory_object_control_subsystem {
 	__Request__memory_object_page_op_t Request_memory_object_page_op;
 	__Request__memory_object_recover_named_t Request_memory_object_recover_named;
 	__Request__memory_object_release_name_t Request_memory_object_release_name;
+	__Request__memory_object_range_op_t Request_memory_object_range_op;
 };
 #endif /* !__RequestUnion__memory_object_control_subsystem__defined */
 /* typedefs for all replies */
@@ -342,7 +383,7 @@ union __RequestUnion__memory_object_control_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-		vm_offset_t phys_entry;
+		uint32_t phys_entry;
 		integer_t flags;
 	} __Reply__memory_object_page_op_t;
 
@@ -357,6 +398,13 @@ union __RequestUnion__memory_object_control_subsystem {
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 	} __Reply__memory_object_release_name_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		integer_t range;
+	} __Reply__memory_object_range_op_t;
 
 #endif /* !__Reply__memory_object_control_subsystem__defined */
 
@@ -375,6 +423,7 @@ union __ReplyUnion__memory_object_control_subsystem {
 	__Reply__memory_object_page_op_t Reply_memory_object_page_op;
 	__Reply__memory_object_recover_named_t Reply_memory_object_recover_named;
 	__Reply__memory_object_release_name_t Reply_memory_object_release_name;
+	__Reply__memory_object_range_op_t Reply_memory_object_range_op;
 };
 #endif /* !__RequestUnion__memory_object_control_subsystem__defined */
 
@@ -389,7 +438,8 @@ union __ReplyUnion__memory_object_control_subsystem {
     { "memory_object_super_upl_request", 2006 },\
     { "memory_object_page_op", 2007 },\
     { "memory_object_recover_named", 2008 },\
-    { "memory_object_release_name", 2009 }
+    { "memory_object_release_name", 2009 },\
+    { "memory_object_range_op", 2010 }
 #endif
 
 #ifdef __AfterMigUserHeader

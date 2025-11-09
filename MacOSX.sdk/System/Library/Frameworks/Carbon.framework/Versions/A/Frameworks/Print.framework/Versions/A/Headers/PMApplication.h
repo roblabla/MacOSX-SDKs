@@ -3,9 +3,9 @@
  
      Contains:   Carbon Printing Manager Interfaces.
  
-     Version:    Printing-135.1~1
+     Version:    Printing-158~1
  
-     Copyright:  © 1998-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1998-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

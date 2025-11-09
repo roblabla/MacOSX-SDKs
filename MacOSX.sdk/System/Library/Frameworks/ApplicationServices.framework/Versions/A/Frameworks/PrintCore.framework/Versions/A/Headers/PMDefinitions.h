@@ -3,9 +3,9 @@
  
      Contains:   Carbon Printing Manager Interfaces.
  
-     Version:    PrintingCore-102.1~1
+     Version:    PrintingCore-129~1
  
-     Copyright:  © 1998-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1998-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -38,6 +38,8 @@ typedef struct OpaquePMPrintContext*    PMPrintContext;
 typedef struct OpaquePMPrintSession*    PMPrintSession;
 typedef struct OpaquePMPrinter*         PMPrinter;
 typedef struct OpaquePMServer*          PMServer;
+typedef struct OpaquePMPreset*          PMPreset;
+typedef struct OpaquePMPaper*           PMPaper;
 enum {
   kPMCancel                     = 0x0080 /* user hit cancel button in dialog */
 };
@@ -110,6 +112,16 @@ enum {
   kPMColorModeSpecialColor      = 5     /* to allow for special colors such as metalic, light cyan, etc. */
 };
 
+typedef UInt32 PMColorSpaceModel;
+enum {
+  kPMUnknownColorSpaceModel     = 0,
+  kPMGrayColorSpaceModel        = 1,
+  kPMRGBColorSpaceModel         = 2,
+  kPMCMYKColorSpaceModel        = 3,
+  kPMDevNColorSpaceModel        = 4
+};
+
+#define kPMColorSpaceModelCount 4   /* total number of color space models supported */
 /* Constants to define the ColorSync Intents. These intents may be used */
 /* to set an intent part way through a page or for an entire document. */
 typedef UInt32 PMColorSyncIntent;
@@ -247,6 +259,15 @@ enum {
   kInjectionSubEndPageSetup     = 31    /* EndPageSetup          */
 };
 
+typedef UInt16 PMPPDDomain;
+enum {
+  kAllPPDDomains                = 1,
+  kSystemPPDDomain              = 2,
+  kLocalPPDDomain               = 3,
+  kNetworkPPDDomain             = 4,
+  kUserPPDDomain                = 5,
+  kCUPSPPDDomain                = 6
+};
 
 /* Description types */
 #define kPMPPDDescriptionType           CFSTR("PMPPDDescriptionType")
@@ -255,6 +276,7 @@ enum {
 #define kPMDocumentFormatPDF            CFSTR("application/pdf")
 #define kPMDocumentFormatPICT           CFSTR("application/vnd.apple.printing-pict")
 #define kPMDocumentFormatPICTPS         CFSTR("application/vnd.apple.printing-pict-ps")
+#define kPMDocumentFormatPICTPSwPSNormalizer  CFSTR("application/vnd.apple.printing-pict-ps-viapsnormalizer")
 #define kPMDocumentFormatPostScript     CFSTR("application/postscript")
 /* Graphic context strings */
 #define kPMGraphicsContextDefault       CFSTR("com.apple.graphicscontext.default")
@@ -271,6 +293,11 @@ enum {
 #define kPSInjectionPageKey             CFSTR("page")
 #define kPSInjectionPlacementKey        CFSTR("place")
 #define kPSInjectionPostScriptKey       CFSTR("psdata")
+/* PDF Workflow Keys */
+#define kPDFWorkFlowItemURLKey          CFSTR("itemURL")
+#define kPDFWorkflowForlderURLKey       CFSTR("folderURL")
+#define kPDFWorkflowDisplayNameKey      CFSTR("displayName")
+#define kPDFWorkflowItemsKey            CFSTR("items")
 /* OSStatus return codes */
 enum {
   kPMNoError                    = noErr,
@@ -289,7 +316,8 @@ enum {
 enum {
   kPMInvalidPrintSession        = -30879, /* the print session is invalid */
   kPMInvalidPrinter             = -30880, /* the printer reference is invalid */
-  kPMObjectInUse                = -30881 /* the object is in use */
+  kPMObjectInUse                = -30881, /* the object is in use */
+  kPMInvalidPreset              = -30882 /* the preset is invalid */
 };
 
 
@@ -320,6 +348,8 @@ struct PMLanguageInfo {
   Str32               release;
 };
 typedef struct PMLanguageInfo           PMLanguageInfo;
+
+typedef PMRect                          PMPaperMargins;
 
 #pragma options align=reset
 

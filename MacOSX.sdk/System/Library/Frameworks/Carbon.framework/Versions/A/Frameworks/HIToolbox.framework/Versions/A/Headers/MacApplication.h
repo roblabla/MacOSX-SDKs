@@ -3,9 +3,9 @@
  
      Contains:   Application-level APIs
  
-     Version:    HIToolbox-124.14~2
+     Version:    HIToolbox-145.33~1
  
-     Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -40,6 +40,21 @@
 extern "C" {
 #endif
 
+/*
+ *  kHIToolboxVersionNumber
+ *  
+ *  Discussion:
+ *    The current build number of HIToolbox.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern const float kHIToolboxVersionNumber                           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*
  *  Summary:
@@ -77,6 +92,16 @@ enum {
    * show themselves in this mode.
    */
   kUIModeContentHidden          = 2,
+
+  /*
+   * In this mode, all system UI elements, including the menubar, are
+   * hidden. However, these elements may automatically show themselves
+   * in response to mouse movements or other user activity;
+   * specifically, the Dock and menubar will still show themselves
+   * automatically when the mouse moves into the Dock's auto-show
+   * region. Available in Mac OS X 10.3 and later.
+   */
+  kUIModeAllSuppressed          = 4,
 
   /*
    * In this mode, all system UI elements, including the menubar, are
@@ -134,7 +159,15 @@ enum {
    * Down, and Log Out menu items in the Apple menu. Only valid with
    * modes other than kUIModeNormal.
    */
-  kUIOptionDisableSessionTerminate = 1 << 5
+  kUIOptionDisableSessionTerminate = 1 << 5,
+
+  /*
+   * The Hide menu item in the Application menu is disabled. Note that
+   * this option does not prevent this application from being hidden if
+   * Hide Others is selected in some other application. Available in
+   * Mac OS X 10.3 and later.
+   */
+  kUIOptionDisableHide          = 1 << 6
 };
 
 typedef OptionBits                      SystemUIOptions;
@@ -555,6 +588,80 @@ GetApplicationTextEncoding(void)                              AVAILABLE_MAC_OS_X
 extern ScriptCode 
 GetApplicationScript(void)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+/*------------------------------------------------------------------------------*/
+/*  HIAboutBox                                                                  */
+/*                                                                              */
+/*  The strings below are for use as keys in the inOptions parameter of the     */
+/*  HIAboutBox function, described below.                                       */
+/*------------------------------------------------------------------------------*/
+
+#define kHIAboutBoxNameKey              CFSTR("HIAboutBoxName")
+#define kHIAboutBoxVersionKey           CFSTR("HIAboutBoxVersion")
+#define kHIAboutBoxCopyrightKey         CFSTR("HIAboutBoxCopyright")
+#define kHIAboutBoxDescriptionKey       CFSTR("HIAboutBoxDescription")
+#define kHIAboutBoxStringFileKey        CFSTR("HIAboutBoxStringFile")
+
+/*
+ *  HIAboutBox()
+ *  
+ *  Summary:
+ *    Displays an HI-conformant about box.
+ *  
+ *  Discussion:
+ *    This about box is a generic about box that automatically can
+ *    display your application name, version string, and copyright
+ *    string. It peeks into either the Info.plist or your bundle
+ *    resource (not recommended) to get the information by default. You
+ *    can customize what it displays by passing in various options in
+ *    the input dictionary.
+ *    There are three basic ways to call this function. First, you can
+ *    pass NULL for inOptions. As mentioned, default information will
+ *    be displayed. Second, you can pass the actual values for the
+ *    strings displayed by passing the strings in the inOptions
+ *    dictionary using the keys provided, such as kHIAboutBoxNameKey.
+ *    If a replacement string is not passed, the default behavior kicks
+ *    in. For example, you could pass some variant of your application
+ *    name in the dictionary, but not pass a replacement version or
+ *    copyright strings. The Toolbox would display your replacement
+ *    string, and fall back to looking in the Info.plist for the other
+ *    strings. The third way to call this is to pass the name of a
+ *    string file in the dictionary with the key
+ *    kHIAboutBoxStringFileKey. We will automatically use that file to
+ *    find the strings for the about box. The keys in the string file
+ *    should be the same value as the keys you would use to pass into
+ *    the inOptions dictionary. Again, if a string is not found in that
+ *    file, we would fall back to looking for a string in the
+ *    dictionary, and then finally the Info.plist.
+ *    Certainly this is not the be-all-end-all of about boxes, but it
+ *    does provide a simple no-work about box for your application. The
+ *    standard Toolbox application handler now responds to the
+ *    kHICommandAbout command ID by calling HIAboutBox for you. This
+ *    means that any Carbon Event-based application will get this
+ *    behavior for free right out of the box. If you wish for the
+ *    window to respond to cmd-W in the menu bar, you should be sure
+ *    that menu item has the kHICommandClose commandID.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inOptions:
+ *      A dictionary of replacement strings, or the name of a string
+ *      file to retrieve the strings from, or NULL. See the discussion
+ *      for how this is used.
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIAboutBox(CFDictionaryRef inOptions)                         AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 

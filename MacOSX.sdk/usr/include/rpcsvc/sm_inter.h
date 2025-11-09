@@ -69,6 +69,20 @@ bool_t xdr_mon();
 #endif /* Old Style C */
 
 
+struct stat_chge {
+	char *mon_name;
+	int state;
+};
+typedef struct stat_chge stat_chge;
+#ifdef __cplusplus
+extern "C" bool_t xdr_stat_chge(XDR *, stat_chge*);
+#elif __STDC__
+extern  bool_t xdr_stat_chge(XDR *, stat_chge*);
+#else /* Old Style C */
+bool_t xdr_stat_chge();
+#endif /* Old Style C */
+
+
 struct sm_stat {
 	int state;
 };
@@ -82,22 +96,22 @@ bool_t xdr_sm_stat();
 #endif /* Old Style C */
 
 
-enum res {
+enum sm_res {
 	stat_succ = 0,
 	stat_fail = 1,
 };
-typedef enum res res;
+typedef enum sm_res sm_res;
 #ifdef __cplusplus
-extern "C" bool_t xdr_res(XDR *, res*);
+extern "C" bool_t xdr_sm_res(XDR *, sm_res*);
 #elif __STDC__
-extern  bool_t xdr_res(XDR *, res*);
+extern  bool_t xdr_sm_res(XDR *, sm_res*);
 #else /* Old Style C */
-bool_t xdr_res();
+bool_t xdr_sm_res();
 #endif /* Old Style C */
 
 
 struct sm_stat_res {
-	res res_stat;
+	sm_res res_stat;
 	int state;
 };
 typedef struct sm_stat_res sm_stat_res;
@@ -110,18 +124,18 @@ bool_t xdr_sm_stat_res();
 #endif /* Old Style C */
 
 
-struct status {
+struct sm_status {
 	char *mon_name;
 	int state;
 	char priv[16];
 };
-typedef struct status status;
+typedef struct sm_status sm_status;
 #ifdef __cplusplus
-extern "C" bool_t xdr_status(XDR *, status*);
+extern "C" bool_t xdr_sm_status(XDR *, sm_status*);
 #elif __STDC__
-extern  bool_t xdr_status(XDR *, status*);
+extern  bool_t xdr_sm_status(XDR *, sm_status*);
 #else /* Old Style C */
-bool_t xdr_status();
+bool_t xdr_sm_status();
 #endif /* Old Style C */
 
 
@@ -144,6 +158,9 @@ extern "C" struct sm_stat * sm_unmon_all_1_svc(struct my_id *, struct svc_req *)
 #define SM_SIMU_CRASH ((u_long)5)
 extern "C" void * sm_simu_crash_1(void *, CLIENT *);
 extern "C" void * sm_simu_crash_1_svc(void *, struct svc_req *);
+#define SM_NOTIFY ((u_long)6)
+extern "C" void * sm_notify_1(struct stat_chge *, CLIENT *);
+extern "C" void * sm_notify_1_svc(struct stat_chge *, struct svc_req *);
 
 #elif __STDC__
 #define SM_STAT ((u_long)1)
@@ -161,6 +178,9 @@ extern  struct sm_stat * sm_unmon_all_1_svc(struct my_id *, struct svc_req *);
 #define SM_SIMU_CRASH ((u_long)5)
 extern  void * sm_simu_crash_1(void *, CLIENT *);
 extern  void * sm_simu_crash_1_svc(void *, struct svc_req *);
+#define SM_NOTIFY ((u_long)6)
+extern  void * sm_notify_1(struct stat_chge *, CLIENT *);
+extern  void * sm_notify_1_svc(struct stat_chge *, struct svc_req *);
 
 #else /* Old Style C */
 #define SM_STAT ((u_long)1)
@@ -178,6 +198,9 @@ extern  struct sm_stat * sm_unmon_all_1_svc();
 #define SM_SIMU_CRASH ((u_long)5)
 extern  void * sm_simu_crash_1();
 extern  void * sm_simu_crash_1_svc();
+#define SM_NOTIFY ((u_long)6)
+extern  void * sm_notify_1();
+extern  void * sm_notify_1_svc();
 #endif /* Old Style C */
 
 #endif /* !_SM_INTER_H_RPCGEN */

@@ -1,5 +1,5 @@
 /*	NSPropertyList.h
-	Copyright 2002-2002, Apple, Inc. All rights reserved.
+	Copyright (c) 2002-2003, Apple, Inc. All rights reserved.
 */
 
 #if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED

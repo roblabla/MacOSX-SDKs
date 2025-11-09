@@ -90,6 +90,7 @@ enum {
     kPMInvalidFileType				= -30895,		/* invalid file type in queue */
     kPMInvalidObject				= -30896,		/* invalid object or internal error */
     kPMInvalidPaper				= -30897,		/* Invalid PMPaper. */
+    kPMInvalidCalibrationTarget		= -30898,		/* invalid dictionary specifying printer calibration target */
     
 	/* Print Job Creator and Printing Dialog Extension error codes (-9500 to -9540) */
     kPMNoDefaultItem            	= -9500,		/* unused; to be removed */
@@ -156,8 +157,10 @@ enum {
     kPMJobStreamOpenFailed         	= -9668,		/* failed to open job stream */
     kPMJobStreamReadFailed       	= -9669,		/* failed to read from job stream */
     kPMJobStreamEndError          	= -9670,		/* reached end of job stream */
-   	kPMJobManagerAborted			= -9671,		/* Job Manager is aborting */
-
+    kPMJobManagerAborted			= -9671,		/* Job Manager is aborting */
+    kPMJobGetTicketBadFormatError		= -9672,		/* The XML for the printer module tickets could not be parsed. */
+    kPMJobGetTicketReadError			= -9673,		/* There was an unknown error reading stdout from the PrintJobMgr */
+    
 	/* Converters (-9700 to -9739) */
 	kPMPluginNotFound				= -9701,		/* Converter plugin not found */
     kPMPluginRegisterationFailed	= -9702,		/* Converter Plugin error */

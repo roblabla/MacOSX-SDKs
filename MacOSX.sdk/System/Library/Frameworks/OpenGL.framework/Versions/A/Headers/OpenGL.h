@@ -5,6 +5,7 @@
 #ifndef _OPENGL_H
 #define _OPENGL_H
 
+#include <AvailabilityMacros.h>
 #include <OpenGL/CGLCurrent.h>
 
 #ifdef __cplusplus
@@ -16,6 +17,7 @@ extern "C" {
 ** CGL API version.
 */
 #define CGL_VERSION_1_0  1
+#define CGL_VERSION_1_1  1
 
 
 /*
@@ -40,11 +42,27 @@ extern CGLError CGLDestroyContext(CGLContextObj ctx);
 extern CGLError CGLCopyContext(CGLContextObj src, CGLContextObj dst, unsigned long mask);
 
 /*
+** PBuffer functions
+*/
+extern CGLError CGLCreatePBuffer(long width, long height, unsigned long target, unsigned long internalFormat, long max_level, CGLPBufferObj *pbuffer) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+extern CGLError CGLDestroyPBuffer(CGLPBufferObj pbuffer) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+extern CGLError CGLDescribePBuffer(CGLPBufferObj obj, long *width, long *height, unsigned long *target, unsigned long *internalFormat, long *mipmap) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+extern CGLError CGLTexImagePBuffer(CGLContextObj ctx, CGLPBufferObj pbuffer, unsigned long source) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+/*
 ** Drawable Functions
 */
 extern CGLError CGLSetOffScreen(CGLContextObj ctx, long width, long height, long rowbytes, void *baseaddr);
 extern CGLError CGLGetOffScreen(CGLContextObj ctx, long *width, long *height, long *rowbytes, void **baseaddr);
 extern CGLError CGLSetFullScreen(CGLContextObj ctx);
+
+extern CGLError CGLSetPBuffer(CGLContextObj ctx, CGLPBufferObj pbuffer, unsigned long face, long level, long screen) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+extern CGLError CGLGetPBuffer(CGLContextObj ctx, CGLPBufferObj *pbuffer, unsigned long *face, long *level, long *screen) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
 extern CGLError CGLClearDrawable(CGLContextObj ctx);
 extern CGLError CGLFlushDrawable(CGLContextObj ctx);
 

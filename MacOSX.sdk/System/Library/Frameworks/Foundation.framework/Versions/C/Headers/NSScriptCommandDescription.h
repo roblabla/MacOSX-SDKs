@@ -1,5 +1,5 @@
 /*	NSScriptCommandDescription.h
-	Copyright 1997-2002, Apple, Inc. All rights reserved.
+	Copyright (c) 1997-2003, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>

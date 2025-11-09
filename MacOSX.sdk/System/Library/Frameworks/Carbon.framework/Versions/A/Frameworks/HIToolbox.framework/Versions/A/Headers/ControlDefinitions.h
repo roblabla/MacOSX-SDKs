@@ -3,9 +3,9 @@
  
      Contains:   Definitions of controls provided by the Control Manager
  
-     Version:    HIToolbox-124.14~2
+     Version:    HIToolbox-145.33~1
  
-     Copyright:  © 1999-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -169,10 +169,10 @@ enum {
   kControlButtonPart            = 10,
   kControlCheckBoxPart          = 11,
   kControlRadioButtonPart       = 11,
-  kControlUpButtonPart          = 20,
-  kControlDownButtonPart        = 21,
-  kControlPageUpPart            = 22,
-  kControlPageDownPart          = 23,
+  kControlUpButtonPart          = kAppearancePartUpButton,
+  kControlDownButtonPart        = kAppearancePartDownButton,
+  kControlPageUpPart            = kAppearancePartPageUpArea,
+  kControlPageDownPart          = kAppearancePartPageDownArea,
   kControlClockHourDayPart      = 9,    /* Appearance 1.1 and later*/
   kControlClockMinuteMonthPart  = 10,   /* Appearance 1.1 and later*/
   kControlClockSecondYearPart   = 11,   /* Appearance 1.1 and later*/
@@ -244,6 +244,12 @@ enum {
 /*  based content with a resource-based content to properly dispose of the handle,      */
 /*  else a memory leak will ensue.                                                      */
 /*                                                                                      */
+/*  Textual Content                                                                     */
+/*  ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ                                                                */
+/*  Please note that if a bevel button gets its textual content from the title          */
+/*  of the control. To alter the textual content of a bevel button, use the             */
+/*  SetControlTitle[WithCFString] API.                                                  */
+/*                                                                                      */
 /* Bevel Button Proc IDs */
 enum {
   kControlBevelButtonSmallBevelProc = 32,
@@ -297,6 +303,8 @@ enum {
   kControlKindBevelButton       = 'bevl'
 };
 
+/* The HIObject class ID for the HIBevelButton class. */
+#define kHIBevelButtonClassID           CFSTR("com.apple.HIBevelButton")
 /* Creation API: Carbon Only */
 /*
  *  CreateBevelButtonControl()
@@ -396,6 +404,21 @@ enum {
 enum {
   kControlBevelButtonOwnedMenuRefTag = 'omrf', /* MenuRef (control will dispose)*/
   kControlBevelButtonKindTag    = 'bebk' /* ThemeButtonKind ( kTheme[Small,Medium,Large,Rounded]BevelButton )*/
+};
+
+
+/*
+ *  Summary:
+ *    Tags available with Mac OS X 10.3 or later
+ */
+enum {
+
+  /*
+   * Passed data is an Boolean.  Gets or sets whether or not the
+   * associated menu is a multi-value menu or not.  True means that the
+   * menu can have multiple selections.
+   */
+  kControlBevelButtonIsMultiValueMenuTag = 'mult'
 };
 
 /* Helper routines are available only thru the shared library/glue. */
@@ -586,6 +609,32 @@ SetBevelButtonTextPlacement(
 /*                              kSliderHasTickMarks variants. It creates an indicator   */
 /*                              which is rectangular and doesn't point in any direction */
 /*                              like the normal indicator does.                         */
+/*                                                                                      */
+/*                                                                                      */
+/*  Mac OS X has a "Scroll to here" option in the General pane of System Preferences    */
+/*  which allows users to click in the page up/down regions of a slider and have the    */
+/*  thumb/indicator jump directly to the clicked position, which alters the value of    */
+/*  the slider and moves any associated content appropriately. As long as the mouse     */
+/*  button is held down, the click is treated as though the user had clicked in the     */
+/*  thumb/indicator in the first place.                                                 */
+/*                                                                                      */
+/*  If you want the sliders in your application to work with the "Scroll to here"       */
+/*  option, you must do the following:                                                  */
+/*                                                                                      */
+/*  1. Create live-tracking sliders, not sliders that show a "ghost" thumb when you     */
+/*  click on it. You can request live-tracking sliders by passing true in the           */
+/*  liveTracking parameter to CreateSliderControl. If you create sliders with           */
+/*  NewControl, use the kControlSliderLiveFeedback variant.                             */
+/*                                                                                      */
+/*  2. Write an appropriate ControlActionProc and associate it with your slider via     */
+/*  the SetControlAction API. This allows your application to update its content        */
+/*  appropriately when the live-tracking slider is clicked.                             */
+/*                                                                                      */
+/*  3. When calling HandleControlClick or TrackControl, pass -1 in the action proc      */
+/*  parameter. This is a request for the Control Manager to use the action proc you     */
+/*  associated with your control in step 2. If you rely on the standard window event    */
+/*  handler to do your control tracking, this step is handled for you automatically.    */
+/*                                                                                      */
 /* Slider proc ID and variants */
 enum {
   kControlSliderProc            = 48,
@@ -608,6 +657,8 @@ enum {
   kControlKindSlider            = 'sldr'
 };
 
+/* The HIObject class ID for the HISlider class. */
+#define kHISliderClassID                CFSTR("com.apple.HISlider")
 /* Creation API: Carbon Only */
 /*
  *  CreateSliderControl()
@@ -663,6 +714,8 @@ enum {
   kControlKindDisclosureTriangle = 'dist'
 };
 
+/* The HIObject class ID for the HIDisclosureTriangle class. */
+#define kHIDisclosureTriangleClassID    CFSTR("com.apple.HIDisclosureTriangle")
 /*
  *  CreateDisclosureTriangleControl()
  *  
@@ -790,6 +843,8 @@ enum {
   kControlKindRelevanceBar      = 'relb'
 };
 
+/* The HIObject class ID for the HIProgressBar class. */
+#define kHIProgressBarClassID           CFSTR("com.apple.HIProgressBar")
 /* Creation API: Carbon only */
 /*
  *  CreateProgressBarControl()
@@ -813,6 +868,8 @@ CreateProgressBarControl(
   ControlRef *  outControl)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/* The HIObject class ID for the HIRelevanceBar class. */
+#define kHIRelevanceBarClassID          CFSTR("com.apple.HIRelevanceBar")
 /*
  *  CreateRelevanceBarControl()
  *  
@@ -855,6 +912,22 @@ enum {
   kControlKindLittleArrows      = 'larr'
 };
 
+
+/*
+ *  Summary:
+ *    Tags available with Mac OS X 10.3 or later
+ */
+enum {
+
+  /*
+   * Passed data is an SInt32.  Gets or sets the increment value of the
+   * control.
+   */
+  kControlLittleArrowsIncrementValueTag = 'incr'
+};
+
+/* The HIObject class ID for the HILittleArrows class. */
+#define kHILittleArrowsClassID          CFSTR("com.apple.HILittleArrows")
 /* Creation API: Carbon only */
 /*
  *  CreateLittleArrowsControl()
@@ -893,6 +966,8 @@ enum {
   kControlKindChasingArrows     = 'carr'
 };
 
+/* The HIObject class ID for the HIChasingArrows class. */
+#define kHIChasingArrowsClassID         CFSTR("com.apple.HIChasingArrows")
 /* Creation API: Carbon only */
 /*
  *  CreateChasingArrowsControl()
@@ -932,7 +1007,8 @@ enum {
 /*  Passing zero in for the tab# resource tells the control not to read in a tab# res.  */
 /*  You can then use SetControlMaximum to add tabs, followed by a call to SetControlData*/
 /*  with the kControlTabInfoTag, passing in a pointer to a ControlTabInfoRec. This sets */
-/*  the name and optionally an icon for a tab.                                          */
+/*  the name and optionally an icon for a tab. Pass the 1-based tab index as the part   */
+/*  code parameter to SetControlData to indicate the tab that you want to modify.       */
 /* Tabs proc IDs */
 enum {
   kControlTabLargeProc          = 128,  /* Large tab size, north facing   */
@@ -960,7 +1036,8 @@ enum {
 typedef UInt16 ControlTabSize;
 enum {
   kControlTabSizeLarge          = kControlSizeNormal,
-  kControlTabSizeSmall          = kControlSizeSmall
+  kControlTabSizeSmall          = kControlSizeSmall,
+  kControlTabSizeMini           = kControlSizeMini
 };
 
 /* Control Tab Entry - used during creation                             */
@@ -978,6 +1055,8 @@ enum {
   kControlKindTabs              = 'tabs'
 };
 
+/* The HIObject class ID for the HITabbedView class. */
+#define kHITabbedViewClassID            CFSTR("com.apple.HITabbedView")
 /* Creation API: Carbon only */
 /*
  *  CreateTabsControl()
@@ -1088,6 +1167,8 @@ enum {
   kControlKindSeparator         = 'sepa'
 };
 
+/* The HIObject class ID for the HIVisualSeparator class. */
+#define kHIVisualSeparatorClassID       CFSTR("com.apple.HIVisualSeparator")
 /* Creation API: Carbon only */
 /*
  *  CreateSeparatorControl()
@@ -1130,6 +1211,10 @@ enum {
   kControlKindPopupGroupBox     = 'pgrp'
 };
 
+/* The HIObject class ID for the HIGroupBox class. */
+#define kHIGroupBoxClassID              CFSTR("com.apple.HIGroupBox")
+/* The HIObject class ID for the HICheckBoxGroup class. */
+#define kHICheckBoxGroupClassID         CFSTR("com.apple.HICheckBoxGroup")
 /* Creation APIs: Carbon only */
 /*
  *  CreateGroupBoxControl()
@@ -1299,6 +1384,21 @@ enum {
   kControlGroupBoxTitleRectTag  = 'trec' /* Rect. Rectangle that the title text/control is drawn in. (get only)*/
 };
 
+
+/*
+ *  Summary:
+ *    Tags available with Mac OS X 10.3 or later
+ */
+enum {
+
+  /*
+   * Passed data is a Rect.  Returns the full rectangle that content is
+   * drawn in (get only). This is slightly different than the content
+   * region, as it also includes the frame drawn around the content.
+   */
+  kControlGroupBoxFrameRectTag  = 'frec'
+};
+
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*  ¥ IMAGE WELL (CDEF 11)                                                              */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -1333,6 +1433,8 @@ enum {
   kControlKindImageWell         = 'well'
 };
 
+/* The HIObject class ID for the HIImageWell class. */
+#define kHIImageWellClassID             CFSTR("com.apple.HIImageWell")
 /* Creation API: Carbon only */
 /*
  *  CreateImageWellControl()
@@ -1454,12 +1556,32 @@ enum {
   kControlKindPopupArrow        = 'parr'
 };
 
-/* Creation API: Carbon only */
 /*
  *  CreatePopupArrowControl()
  *  
+ *  Summary:
+ *    Creates a popup arrow control.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window that should contain the control. May be NULL on Mac
+ *      OS X 10.3 and later.
+ *    
+ *    boundsRect:
+ *      The bounding box of the control.
+ *    
+ *    orientation:
+ *      The orientation of the control.
+ *    
+ *    size:
+ *      The size of the control.
+ *    
+ *    outControl:
+ *      On exit, contains the new control.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1468,7 +1590,7 @@ enum {
  */
 extern OSStatus 
 CreatePopupArrowControl(
-  WindowRef                      window,
+  WindowRef                      window,            /* can be NULL */
   const Rect *                   boundsRect,
   ControlPopupArrowOrientation   orientation,
   ControlPopupArrowSize          size,
@@ -1488,12 +1610,28 @@ enum {
   kControlKindPlacard           = 'plac'
 };
 
-/* Creation API: Carbon only */
+/* The HIObject class ID for the HIPlacardView class. */
+#define kHIPlacardViewClassID           CFSTR("com.apple.HIPlacardView")
 /*
  *  CreatePlacardControl()
  *  
+ *  Summary:
+ *    Creates a placard control.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window that should contain the control. May be NULL on Mac
+ *      OS X 10.3 and later.
+ *    
+ *    boundsRect:
+ *      The bounding box of the control.
+ *    
+ *    outControl:
+ *      On exit, contains the new control.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1502,7 +1640,7 @@ enum {
  */
 extern OSStatus 
 CreatePlacardControl(
-  WindowRef     window,
+  WindowRef     window,           /* can be NULL */
   const Rect *  boundsRect,
   ControlRef *  outControl)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
@@ -1559,6 +1697,8 @@ enum {
   kControlKindClock             = 'clck'
 };
 
+/* The HIObject class ID for the HIClock class. */
+#define kHIClockViewClassID             CFSTR("com.apple.HIClock")
 /* Creation API: Carbon only */
 /*
  *  CreateClockControl()
@@ -1644,7 +1784,7 @@ CreateUserPaneControl(
 /* Currently, they are all proc ptrs for doing things like drawing and hit testing, etc. */
 enum {
   kControlUserItemDrawProcTag   = 'uidp', /* UserItemUPP*/
-  kControlUserPaneDrawProcTag   = 'draw', /* ControlUserPaneDrawingUPP*/
+  kControlUserPaneDrawProcTag   = 'draw', /* ControlUserPaneDrawUPP*/
   kControlUserPaneHitTestProcTag = 'hitt', /* ControlUserPaneHitTestUPP*/
   kControlUserPaneTrackingProcTag = 'trak', /* ControlUserPaneTrackingUPP*/
   kControlUserPaneIdleProcTag   = 'idle', /* ControlUserPaneIdleUPP*/
@@ -1981,12 +2121,54 @@ enum {
   kControlKindEditText          = 'etxt'
 };
 
-/* Creation API: Carbon only */
 /*
  *  CreateEditTextControl()
  *  
+ *  Summary:
+ *    Creates a new edit text control.
+ *  
+ *  Discussion:
+ *    This control is a legacy control. It is deprecated in favor of
+ *    the EditUnicodeText control, which handles Unicode and draws its
+ *    text using antialiasing. If you are creating a new text field,
+ *    please use CreateEditUnicodeTextControl.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window in which the control should be placed. May be NULL
+ *      in Mac OS X 10.3 and later.
+ *    
+ *    boundsRect:
+ *      The bounds of the control, in local coordinates of the window.
+ *    
+ *    text:
+ *      The text of the control. May be NULL.
+ *    
+ *    isPassword:
+ *      A Boolean indicating whether the field is to be used as a
+ *      password field. Passing false indicates that the field is to
+ *      display entered text normally. True means that the field will
+ *      be used as a password field and any text typed into the field
+ *      will be displayed only as bullets.
+ *    
+ *    useInlineInput:
+ *      A Boolean indicating whether or not the control is to accept
+ *      inline input. Pass true to to accept inline input, otherwise
+ *      pass false.
+ *    
+ *    style:
+ *      The control's font style, size, color, and so on. May be NULL.
+ *    
+ *    outControl:
+ *      On exit, contains the new control (if noErr is returned as the
+ *      result code).
+ *  
+ *  Result:
+ *    An operating system result code.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -1997,7 +2179,7 @@ extern OSStatus
 CreateEditTextControl(
   WindowRef                    window,
   const Rect *                 boundsRect,
-  CFStringRef                  text,
+  CFStringRef                  text,                 /* can be NULL */
   Boolean                      isPassword,
   Boolean                      useInlineInput,
   const ControlFontStyleRec *  style,                /* can be NULL */
@@ -2108,12 +2290,38 @@ enum {
   kControlKindStaticText        = 'stxt'
 };
 
+/* The HIObject class ID for the HIStaticTextView class. */
+#define kHIStaticTextViewClassID        CFSTR("com.apple.HIStaticTextView")
 /* Creation API: Carbon only */
 /*
  *  CreateStaticTextControl()
  *  
+ *  Summary:
+ *    Creates a new static text control.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window in which the control should be placed. May be NULL
+ *      in Mac OS X 10.3 and later.
+ *    
+ *    boundsRect:
+ *      The bounds of the control, in local coordinates of the window.
+ *    
+ *    text:
+ *      The text of the control. May be NULL.
+ *    
+ *    style:
+ *      The control's font style, size, color, and so on. May be NULL.
+ *    
+ *    outControl:
+ *      On exit, contains the new control.
+ *  
+ *  Result:
+ *    An operating system result code.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2122,29 +2330,74 @@ enum {
  */
 extern OSStatus 
 CreateStaticTextControl(
-  WindowRef                    window,
+  WindowRef                    window,           /* can be NULL */
   const Rect *                 boundsRect,
-  CFStringRef                  text,
-  const ControlFontStyleRec *  style,
+  CFStringRef                  text,             /* can be NULL */
+  const ControlFontStyleRec *  style,            /* can be NULL */
   ControlRef *                 outControl)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
-/* Tagged data supported by static text */
-enum {
-  kControlStaticTextStyleTag    = kControlFontStyleTag, /* ControlFontStyleRec*/
-  kControlStaticTextTextTag     = 'text', /* Copy of text*/
-  kControlStaticTextTextHeightTag = 'thei' /* SInt16*/
-};
 
-/* Tags available with appearance 1.1 or later */
+/*
+ *  Summary:
+ *    Tagged data supported by the static text control
+ */
 enum {
-  kControlStaticTextTruncTag    = 'trun' /* TruncCode (-1 means no truncation)*/
-};
 
-/* Tags available with Mac OS X or later */
-enum {
-  kControlStaticTextCFStringTag = 'cfst' /* CFStringRef (Also available on CarbonLib 1.5)*/
+  /*
+   * Used to get or set the control's current text style. Data is of
+   * type ControlFontStyleRec. Available with Appearance Manager 1.0
+   * (Mac OS 8.0) and later.
+   */
+  kControlStaticTextStyleTag    = kControlFontStyleTag,
+
+  /*
+   * Used to get or set the control's current text. Data is an array of
+   * chars. Generally you should used GetControlDataSize to determine
+   * the length of the text, and allocate a buffer of that length,
+   * before calling GetControlData with this selector. Deprecated in
+   * Carbon in favor of kControlStaticTextCFStringTag. Available with
+   * Appearance Manager 1.0 (Mac OS 8.0) and later.
+   */
+  kControlStaticTextTextTag     = 'text',
+
+  /*
+   * Used to get the height of the control's text. May not be used with
+   * SetControlData. Data is of type SInt16. Available with Appearance
+   * Manager 1.0 (Mac OS 8.0) and later.
+   */
+  kControlStaticTextTextHeightTag = 'thei',
+
+  /*
+   * Used to get or set the control's text truncation style. Data is of
+   * type TruncCode; pass a truncation code of -1 to indication no
+   * truncation. Available with Appearance Manager 1.1 (Mac OS 8.5) and
+   * later. Truncation will not occur unless
+   * kControlStaticTextIsMultilineTag is set to false.
+   */
+  kControlStaticTextTruncTag    = 'trun',
+
+  /*
+   * Used to get or set the control's current text. Data is of type
+   * CFStringRef. When setting the text, the control will retain the
+   * string, so you may release the string after calling
+   * SetControlData; if the string is mutable, the control will make a
+   * copy of the string, so any changes to the string after calling
+   * SetControlData will not affect the control. When getting the text,
+   * the control retains the string before returning it to you, so you
+   * must release the string after you are done with it. Available in
+   * CarbonLib 1.5 and Mac OS X 10.0 and later.
+   */
+  kControlStaticTextCFStringTag = 'cfst',
+
+  /*
+   * Used to get or set whether the control draws its text in multiple
+   * lines if the text is too wide for the control bounds. If false,
+   * then the control always draws the text in a single line. Data is
+   * of type Boolean. Available in Mac OS X 10.1 and later.
+   */
+  kControlStaticTextIsMultilineTag = 'stim'
 };
 
 
@@ -2165,12 +2418,33 @@ enum {
   kControlKindPicture           = 'pict'
 };
 
-/* Creation API: Carbon only */
 /*
  *  CreatePictureControl()
  *  
+ *  Summary:
+ *    Creates a picture control.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window that should contain the control. May be NULL on Mac
+ *      OS X 10.3 and later.
+ *    
+ *    boundsRect:
+ *      The bounding box of the control.
+ *    
+ *    content:
+ *      The descriptor for the picture you want the control to display.
+ *    
+ *    dontTrack:
+ *      A Boolean value indicating whether the control should hilite
+ *      when it is clicked on. False means hilite and track the mouse.
+ *    
+ *    outControl:
+ *      On exit, contains the new control.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2179,7 +2453,7 @@ enum {
  */
 extern OSStatus 
 CreatePictureControl(
-  WindowRef                         window,
+  WindowRef                         window,           /* can be NULL */
   const Rect *                      boundsRect,
   const ControlButtonContentInfo *  content,
   Boolean                           dontTrack,
@@ -2218,6 +2492,8 @@ enum {
   kControlKindIcon              = 'icon'
 };
 
+/* The HIObject class ID for the HIIconView class. */
+#define kHIIconViewClassID              CFSTR("com.apple.HIIconView")
 /*
  *  CreateIconControl()
  *  
@@ -2237,7 +2513,8 @@ enum {
  *  Parameters:
  *    
  *    inWindow:
- *      The WindowRef into which the Icon control will be created.
+ *      The WindowRef into which the Icon control will be created. May
+ *      be NULL on Mac OS X 10.3 and later.
  *    
  *    inBoundsRect:
  *      The desired position (in coordinates local to the window's
@@ -2268,7 +2545,7 @@ enum {
  */
 extern OSStatus 
 CreateIconControl(
-  WindowRef                         inWindow,
+  WindowRef                         inWindow,            /* can be NULL */
   const Rect *                      inBoundsRect,
   const ControlButtonContentInfo *  inIconContent,
   Boolean                           inDontTrack,
@@ -2301,6 +2578,22 @@ enum {
   kControlKindWindowHeader      = 'whed'
 };
 
+
+/*
+ *  Summary:
+ *    Tags available with Mac OS X 10.3 or later
+ */
+enum {
+
+  /*
+   * Passed data is a Boolean.  Set to true if the control is to draw
+   * as a list header.
+   */
+  kControlWindowHeaderIsListHeaderTag = 'islh'
+};
+
+/* The HIObject class ID for the HIWindowHeaderView class. */
+#define kHIWindowHeaderViewClassID      CFSTR("com.apple.HIWindowHeaderView")
 /* Creation API: Carbon Only */
 /*
  *  CreateWindowHeaderControl()
@@ -2437,6 +2730,12 @@ enum {
   kControlKindCheckBox          = 'cbox'
 };
 
+/* The HIObject class ID for the HIPushButton class. */
+#define kHIPushButtonClassID            CFSTR("com.apple.HIPushButton")
+/* The HIObject class ID for the HICheckBox class. */
+#define kHICheckBoxClassID              CFSTR("com.apple.HICheckBox")
+/* The HIObject class ID for the HIRadioButton class. */
+#define kHIRadioButtonClassID           CFSTR("com.apple.HIRadioButton")
 /* Creation APIs: Carbon Only */
 /*
  *  CreatePushButtonControl()
@@ -2533,6 +2832,31 @@ enum {
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*  This is the new Appearance scroll bar.                                              */
 /*                                                                                      */
+/*                                                                                      */
+/*  Mac OS X has a "Scroll to here" option in the General pane of System Preferences    */
+/*  which allows users to click in the page up/down regions of a scroll bar and have    */
+/*  the thumb/indicator jump directly to the clicked position, which alters the value   */
+/*  of the scroll bar and moves the scrolled content appropriately. As long as the      */
+/*  mouse button is held down, the click is treated as though the user had clicked in   */
+/*  the thumb/indicator in the first place.                                             */
+/*                                                                                      */
+/*  If you want the scroll bars in your application to work with the "Scroll to here"   */
+/*  option, you must do the following:                                                  */
+/*                                                                                      */
+/*  1. Create live-tracking scroll bars, not scroll bars that show a "ghost" thumb      */
+/*  when you click on it. You can request live-tracking scroll bars by passing true     */
+/*  in the liveTracking parameter to CreateScrollBarControl. If you create scroll bars  */
+/*  with NewControl, use the kControlScrollBarLiveProc.                                 */
+/*                                                                                      */
+/*  2. Write an appropriate ControlActionProc and associate it with your scroll bar     */
+/*  via the SetControlAction API. This allows your application to update its content    */
+/*  appropriately when the live-tracking scroll bar is clicked.                         */
+/*                                                                                      */
+/*  3. When calling HandleControlClick or TrackControl, pass -1 in the action proc      */
+/*  parameter. This is a request for the Control Manager to use the action proc you     */
+/*  associated with your control in step 2. If you rely on the standard window event    */
+/*  handler to do your control tracking, this step is handled for you automatically.    */
+/*                                                                                      */
 /* Theme Scroll Bar proc IDs */
 enum {
   kControlScrollBarProc         = 384,  /* normal scroll bar*/
@@ -2544,12 +2868,57 @@ enum {
   kControlKindScrollBar         = 'sbar'
 };
 
-/* Creation API: Carbon Only */
+/* The HIObject class ID for the HIScrollBar class. */
+#define kHIScrollBarClassID             CFSTR("com.apple.HIScrollBar")
 /*
  *  CreateScrollBarControl()
  *  
+ *  Summary:
+ *    Creates a scroll bar control.
+ *  
+ *  Discussion:
+ *    This creation API is available in Carbon only.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window that should contain the control. May be NULL on Mac
+ *      OS X 10.3 and later.
+ *    
+ *    boundsRect:
+ *      The bounding box of the control.
+ *    
+ *    value:
+ *      The initial value of the control.
+ *    
+ *    minimum:
+ *      The minimum value of the control.
+ *    
+ *    maximum:
+ *      The maximum value of the control.
+ *    
+ *    viewSize:
+ *      Whether the width of the control is allowed to vary according
+ *      to the width of the
+ *    
+ *    liveTracking:
+ *      A Boolean indicating whether or not live tracking is enabled
+ *      for this scroll bar. If set to true and a valid
+ *      liveTrackingProc is also passed in, the callback will be called
+ *      repeatedly as the thumb is moved during tracking.  If set to
+ *      false, a semi-transparent thumb called a "ghost thumb" will
+ *      draw and no live tracking will occur.
+ *    
+ *    liveTrackingProc:
+ *      If liveTracking is on, a ControlActionUPP callback to be called
+ *      as the control live tracks.  This callback is called repeatedly
+ *      as the scroll thumb is moved during tracking.
+ *    
+ *    outControl:
+ *      On exit, contains the new control.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2603,12 +2972,55 @@ enum {
   kControlKindPopupButton       = 'popb'
 };
 
-/* Creation API: Carbon Only */
+/* The HIObject class ID for the HIPopupButton class. */
+#define kHIPopupButtonClassID           CFSTR("com.apple.HIPopupButton")
 /*
  *  CreatePopupButtonControl()
  *  
+ *  Summary:
+ *    Creates a popup button control.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window that should contain the control. May be NULL on Mac
+ *      OS X 10.3 and later.
+ *    
+ *    boundsRect:
+ *      The bounding box of the control.
+ *    
+ *    title:
+ *      The title of the control.
+ *    
+ *    menuID:
+ *      The ID of a menu that should be used by the control. A menu
+ *      with this ID should be inserted into the menubar with
+ *      InsertMenu(menu, kInsertHierarchicalMenu). You can also pass
+ *      -12345 to have the control delay its acquisition of a menu; in
+ *      this case, you can build the menu and later provide it to the
+ *      control with SetControlData and kControlPopupButtonMenuRefTag
+ *      or kControlPopupButtonOwnedMenuRefTag.
+ *    
+ *    variableWidth:
+ *      Whether the width of the control is allowed to vary according
+ *      to the width of the selected menu item text, or should remain
+ *      fixed to the original control bounds width.
+ *    
+ *    titleWidth:
+ *      The width of the title.
+ *    
+ *    titleJustification:
+ *      The justification of the title.
+ *    
+ *    titleStyle:
+ *      A QuickDraw style bitfield indicating the font style of the
+ *      title.
+ *    
+ *    outControl:
+ *      On exit, contains the new control.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2617,7 +3029,7 @@ enum {
  */
 extern OSStatus 
 CreatePopupButtonControl(
-  WindowRef     window,
+  WindowRef     window,                   /* can be NULL */
   const Rect *  boundsRect,
   CFStringRef   title,
   SInt16        menuID,
@@ -2626,8 +3038,6 @@ CreatePopupButtonControl(
   SInt16        titleJustification,
   Style         titleStyle,
   ControlRef *  outControl)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
 
 
 /* These tags are available in 1.0.1 or later of Appearance */
@@ -2671,6 +3081,8 @@ enum {
   kControlKindRadioGroup        = 'rgrp'
 };
 
+/* The HIObject class ID for the HIRadioGroup class. */
+#define kHIRadioGroupClassID            CFSTR("com.apple.HIRadioGroup")
 /* Creation API: Carbon Only */
 /*
  *  CreateRadioGroupControl()
@@ -2756,6 +3168,8 @@ enum {
 /*  ¥ DISCLOSURE BUTTON                                                                 */
 /*  (CDEF 30)                                                                           */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+/* The HIObject class ID for the HIDisclosureButton class. */
+#define kHIDisclosureButtonClassID      CFSTR("com.apple.HIDisclosureButton")
 /*
  *  CreateDisclosureButtonControl()
  *  
@@ -2869,6 +3283,8 @@ enum {
   kControlKindRoundButton       = 'rndb'
 };
 
+/* The HIObject class ID for the HIRoundButton class. */
+#define kHIRoundButtonClassID           CFSTR("com.apple.HIRoundButton")
 /*
  *  CreateRoundButtonControl()
  *  
@@ -2886,7 +3302,8 @@ enum {
  *  Parameters:
  *    
  *    inWindow:
- *      The WindowRef in which to create the control.
+ *      The WindowRef in which to create the control. May be NULL in
+ *      Mac OS X 10.3 and later.
  *    
  *    inBoundsRect:
  *      The bounding rectangle for the control. The height and width of
@@ -2900,7 +3317,7 @@ enum {
  *    
  *    inContent:
  *      Any optional content displayed in the button. Currently only
- *      kControlContentIconRef is supported.
+ *      kControlContentIconRef is supported. May be NULL.
  *    
  *    outControl:
  *      On successful exit, this will contain the new control.
@@ -2912,10 +3329,10 @@ enum {
  */
 extern OSStatus 
 CreateRoundButtonControl(
-  WindowRef                   inWindow,
+  WindowRef                   inWindow,           /* can be NULL */
   const Rect *                inBoundsRect,
   ControlRoundButtonSize      inSize,
-  ControlButtonContentInfo *  inContent,
+  ControlButtonContentInfo *  inContent,          /* can be NULL */
   ControlRef *                outControl)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
@@ -5903,16 +6320,37 @@ GetDataBrowserTableViewColumnProperty(
 
 
 /* kDataBrowserListView Formatting */
-typedef UInt32 DataBrowserListViewPropertyFlags;
+
+/*
+ *  Discussion:
+ *    DataBrowserPropertyFlags that are specific to kDataBrowserListView
+ */
 enum {
-                                        /* kDataBrowserListView DataBrowserPropertyFlags */
+  kDataBrowserListViewSelectionColumn = kDataBrowserTableViewSelectionColumn,
   kDataBrowserListViewMovableColumn = 1 << (kDataBrowserViewSpecificFlagsOffset + 1),
   kDataBrowserListViewSortableColumn = 1 << (kDataBrowserViewSpecificFlagsOffset + 2),
-  kDataBrowserListViewSelectionColumn = kDataBrowserTableViewSelectionColumn,
+
+  /*
+   * kDataBrowserListViewTypeSelectColumn marks a column as
+   * type-selectable. If one or more of your list view columns are
+   * marked as type-selectable, Data Browser will do type-selection for
+   * you automatically. Data Browser applies the typing to the first
+   * column (in the system direction) with this property flag. This
+   * flag only intended for use with columns of type
+   * kDataBrowserTextType, kDataBrowserIconAndTextType, and
+   * kDataBrowserDateTimeType; if you set it for a column of another
+   * type, the type-selection behavior is undefined. Turning on this
+   * flag also causes Data Browser to gather all keyboard input via a
+   * carbon event handler instead of relying on calls to
+   * HandleControlKey; therefore, you will never see these keyboard
+   * events come out of WaitNextEvent. Only available on Mac OS X 10.3
+   * and later.
+   */
+  kDataBrowserListViewTypeSelectColumn = 1 << (kDataBrowserViewSpecificFlagsOffset + 3),
   kDataBrowserListViewDefaultColumnFlags = kDataBrowserListViewMovableColumn + kDataBrowserListViewSortableColumn
 };
 
-
+typedef DataBrowserPropertyFlags        DataBrowserListViewPropertyFlags;
 enum {
   kDataBrowserListViewLatestHeaderDesc = 0
 };
@@ -6222,7 +6660,7 @@ typedef STACK_UPP_TYPE(EditUnicodePostUpdateProcPtr)            EditUnicodePostU
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib on Mac OS X
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
  *    Non-Carbon CFM:   not available
  */
 extern EditUnicodePostUpdateUPP
@@ -6233,7 +6671,7 @@ NewEditUnicodePostUpdateUPP(EditUnicodePostUpdateProcPtr userRoutine) AVAILABLE_
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib on Mac OS X
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
  *    Non-Carbon CFM:   not available
  */
 extern void
@@ -6244,7 +6682,7 @@ DisposeEditUnicodePostUpdateUPP(EditUnicodePostUpdateUPP userUPP) AVAILABLE_MAC_
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib on Mac OS X
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
  *    Non-Carbon CFM:   not available
  */
 extern Boolean
@@ -6256,13 +6694,6 @@ InvokeEditUnicodePostUpdateUPP(
   void *                    refcon,
   EditUnicodePostUpdateUPP  userUPP)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
-/* Use this tag when calling ControlSet/GetData to specify the UnicodePostUpdateProcPtr */
-/* tags available with Appearance 1.1 or later */
-enum {
-  kControlEditUnicodeTextPostUpdateProcTag = 'upup'
-};
-
-
 enum {
   kControlEditUnicodeTextProc   = 912,
   kControlEditUnicodeTextPasswordProc = 914
@@ -6273,12 +6704,50 @@ enum {
   kControlKindEditUnicodeText   = 'eutx'
 };
 
-/* Creation API for X */
+/* The HIObject class ID for the HITextField class. */
+#define kHITextFieldClassID             CFSTR("com.apple.HITextField")
 /*
  *  CreateEditUnicodeTextControl()
  *  
+ *  Summary:
+ *    Creates a new edit text control.
+ *  
+ *  Discussion:
+ *    This is the preferred edit text control. Use it instead of the
+ *    EditText control. This control handles Unicode and draws its text
+ *    using antialiasing, which the other control does not.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window in which the control should be placed. May be NULL
+ *      in Mac OS X 10.3 and later.
+ *    
+ *    boundsRect:
+ *      The bounds of the control, in local coordinates of the window.
+ *    
+ *    text:
+ *      The text of the control. May be NULL.
+ *    
+ *    isPassword:
+ *      A Boolean indicating whether the field is to be used as a
+ *      password field. Passing false indicates that the field is to
+ *      display entered text normally. True means that the field will
+ *      be used as a password field and any text typed into the field
+ *      will be displayed only as bullets.
+ *    
+ *    style:
+ *      The control's font style, size, color, and so on. May be NULL.
+ *    
+ *    outControl:
+ *      On exit, contains the new control (if noErr is returned as the
+ *      result code).
+ *  
+ *  Result:
+ *    An operating system result code.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -6289,15 +6758,33 @@ extern OSStatus
 CreateEditUnicodeTextControl(
   WindowRef                    window,
   const Rect *                 boundsRect,
-  CFStringRef                  text,
+  CFStringRef                  text,             /* can be NULL */
   Boolean                      isPassword,
   const ControlFontStyleRec *  style,            /* can be NULL */
   ControlRef *                 outControl)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-/* Tagged data supported by Unicode text Control only*/
+/*
+    The EditUnicodeText control supports these tags previously defined for the EditText control:
+    
+        kControlEditTextLockedTag
+        kControlFontStyleTag
+        kControlEditTextFixedTextTag
+        kControlEditTextTextTag
+        kControlEditTextKeyFilterTag
+        kControlEditTextValidationProcTag
+        kControlEditTextSelectionTag
+        kControlEditTextKeyScriptBehaviorTag
+        kControlEditTextCFStringTag
+        kControlEditTextPasswordTag
+        kControlEditTextPasswordCFStringTag
+*/
+/* Tagged data supported by EditUnicodeText control only */
 enum {
-  kControlEditTextSingleLineTag = 'sglc'
+  kControlEditTextSingleLineTag = 'sglc', /* data is a Boolean; indicates whether the control should always be single-line*/
+  kControlEditTextInsertTextBufferTag = 'intx', /* data is an array of char; get or set the control's text as WorldScript-encoded text*/
+  kControlEditTextInsertCFStringRefTag = 'incf', /* data is a CFStringRef; get or set the control's text as a CFStringRef. Caller should release CFString if getting.*/
+  kControlEditUnicodeTextPostUpdateProcTag = 'upup' /* data is a UnicodePostUpdateUPP; get or set the post-update proc*/
 };
 
 #if OLDROUTINENAMES

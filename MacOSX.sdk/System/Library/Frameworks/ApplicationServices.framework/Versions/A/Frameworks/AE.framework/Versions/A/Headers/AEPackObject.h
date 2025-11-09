@@ -3,9 +3,9 @@
  
      Contains:   AppleEvents object packing Interfaces.
  
-     Version:    AppleEvents-242~1
+     Version:    AppleEvents-275~1
  
-     Copyright:  © 1991-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1991-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -36,6 +36,9 @@ extern "C" {
 /*
  *  CreateOffsetDescriptor()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -49,6 +52,9 @@ CreateOffsetDescriptor(
 
 /*
  *  CreateCompDescriptor()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -67,6 +73,9 @@ CreateCompDescriptor(
 /*
  *  CreateLogicalDescriptor()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -83,6 +92,9 @@ CreateLogicalDescriptor(
 
 /*
  *  CreateObjSpecifier()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -101,6 +113,9 @@ CreateObjSpecifier(
 
 /*
  *  CreateRangeDescriptor()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework

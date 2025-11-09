@@ -212,14 +212,7 @@ OSErr ppdParseHandle (Handle ppdHandle, short compiledRef, short compiledResFRef
 	*'errInfoP'.
 */
 
-/* CUPs and this library conflict over the symbols ppdOpen and ppdClose. We rename our
- * routines by adding the Context postfix. If the including file is not using CUPs
- * then we'll give them the old names through the following defines.
- */
-#if !USE_CUPS
-#define ppdOpen(compiledPPDRef, ppdContext)	ppdOpenContext(compiledPPDRef, ppdContext)
-#define ppdClose(ppdContext)			ppdCloseContext(ppdContext)
-#endif	/* !USE_CUPS */
+// removed ppdOpen macro
 
 OSErr ppdOpenContext(short compiledPPDRef, PPDContext *ppdContext);
 /*	Prepare to reference the compiled PPD information in the
@@ -234,21 +227,16 @@ void ppdCloseContext(PPDContext ppdContext);
 	After this call, 'ppdContext' is no longer valid.
 */
 
-
 OSStatus PPDAddFeatureEntries(PMTicketRef jobTicket, CFMutableDictionaryRef psContextDictRef);
 /*
-Add to psContextDictRef the entries for PPD features needed to satisfy the job requests in jobTicket.
+ Obsolete. Returns kPMNotImplemented.
 */
 
 OSStatus PPDAddFeatureEntriesFromPPDContext(PMTicketRef jobTicket, PPDContext ppdContext, 
 							CFMutableDictionaryRef psContextDictRef);
 /*
-    Added in Mac OS X v10.2.
-    Add to psContextDictRef the entries for PPD features needed to satisfy the job 
-    requests in jobTicket. If a non-NULL ppdContext is explicitly passed in, then it is used
-    rather than obtained from data that may or may not be in the jobTicket.
+    Obsolete. Returns kPMNotImplemented.
 */
-
 
 OSStatus ppdGetCompiledPPDData(PMTicketRef printerInfoTicket, CFDataRef *ppdData);
 /*

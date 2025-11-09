@@ -3,9 +3,9 @@
  
      Contains:   Printing functions that have no UI
  
-     Version:    PrintingCore-102.1~1
+     Version:    PrintingCore-129~1
  
-     Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -38,7 +38,9 @@
 #include <PrintCore/PMDefinitions.h>
 #endif
 
-
+#ifndef __PMPrintAETypes__
+#include <PrintCore/PMPrintAETypes.h>
+#endif
 
 #endif /* __PRINTCORE__ */
 

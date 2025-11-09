@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002,2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2003 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -64,6 +64,8 @@
 #include <stdint.h>
 
 #include <mach/host_info.h>
+#include <mach/host_notify.h>
+#include <mach/host_special_ports.h>
 #include <mach/machine.h>
 #include <mach/machine/vm_types.h>
 #include <mach/memory_object_types.h>

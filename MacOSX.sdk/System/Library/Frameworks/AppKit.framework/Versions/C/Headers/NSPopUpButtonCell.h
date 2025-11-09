@@ -1,7 +1,7 @@
 /*
         NSPopUpButtonCell.h
         Application Kit
-        Copyright (c) 1997-2001, Apple Computer, Inc.
+        Copyright (c) 1997-2003, Apple Computer, Inc.
         All rights reserved.
 */
 
@@ -30,7 +30,8 @@ typedef enum {
         unsigned int decoding:1;
         unsigned int arrowPosition:2;
         unsigned int ignoreMenuLayout:1;
-        unsigned int RESERVED:21;
+        unsigned int drawing:1;
+        unsigned int RESERVED:20;
     } _pbcFlags;
 }
 
@@ -107,6 +108,10 @@ typedef enum {
 // Arrow position for bezel style and borderless popups.
 - (NSPopUpArrowPosition)arrowPosition;
 - (void)setArrowPosition:(NSPopUpArrowPosition)position;
+
+// Object values
+- (id <NSCopying>)objectValue;
+- (void)setObjectValue:(id <NSCopying>)obj;
 
 @end
 

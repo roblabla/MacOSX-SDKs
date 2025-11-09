@@ -1,7 +1,7 @@
 /*
 	NSPrintInfo.h
 	Application Kit
-	Copyright (c) 1994-2002, Apple Computer, Inc.
+	Copyright (c) 1994-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -32,7 +32,7 @@ APPKIT_EXTERN NSString *NSPrintCancelJob;
 
 // Keys for page setup attributes that are recognized by NSPrintInfo.
 APPKIT_EXTERN NSString *NSPrintPaperName; // an NSString
-APPKIT_EXTERN NSString *NSPrintPaperSize; // an NSSize, in points
+APPKIT_EXTERN NSString *NSPrintPaperSize; // an NSValue containing an NSSize, in points
 APPKIT_EXTERN NSString *NSPrintOrientation; // an NSNumber containing NSPortraitOrientation or NSLandscapeOrientation
 APPKIT_EXTERN NSString *NSPrintScalingFactor; // an NSNumber containing a floating-point percentage
 
@@ -114,6 +114,13 @@ APPKIT_EXTERN NSString *NSPrintSavePath; // an NSString containing a path to whi
 
 // Return the imageable area of a sheet of paper specified by this object, taking into account the current printer, paper size, and orientation settings, but not scaling.  "Imageable area" is the maximum area that can possibly be marked on by the printer hardware, not the area defined by the current margin settings.  The rectangle is in a coordinate space measured by points, with (0, 0) being the lower-left corner of the oriented sheet and (paperWidth, paperHeight) being the upper-right corner of the oriented sheet.  The imageable bounds may extend past the edges of the sheet when, for example, a printer driver specifies it so that borderless printing can be done reliably.
 - (NSRect)imageablePageBounds;
+
+#endif
+
+#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
+
+// Return the human-readable name of the currently selected paper size, suitable for presentation in user interfaces.  This will typically be different from the name returned by -paperName, which is almost never suitable for presentation to to the user.
+- (NSString *)localizedPaperName;
 
 #endif
 

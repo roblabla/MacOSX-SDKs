@@ -1,7 +1,7 @@
 /*
         NSLayoutManager.h
         Application Kit
-        Copyright (c) 1994-2001, Apple Computer, Inc.
+        Copyright (c) 1994-2003, Apple Computer, Inc.
         All rights reserved.
 */
 
@@ -11,10 +11,10 @@
 #import <Foundation/NSObject.h>
 #import <AppKit/NSFont.h>
 #import <AppKit/NSImageCell.h>
+#import <AppKit/NSGlyphGenerator.h>
 
 @class NSTextStorage;
 @class NSTypesetter;
-@class NSGlyphGenerator;
 @class NSTextContainer;
 @class NSTextView;
 @class NSWindow;
@@ -34,7 +34,7 @@
 @class NSEvent;
 @class NSCell;
 
-// These glyph attributes are used only inside the glyph generation machinery, but must be shared between componenets.
+// These glyph attributes are used only inside the glyph generation machinery, but must be shared between components.
 enum _NSGlyphAttribute {
     NSGlyphAttributeSoft = 0,
     NSGlyphAttributeElastic = 1,
@@ -61,10 +61,11 @@ typedef enum {
     NSTypesetterOriginalBehavior = 0, // Mac OS X ver 10.0 and 10.1 (uses NSSimpleHorizontalTypesetter)
     NSTypesetterBehavior_10_2_WithCompatibility = 1, // 10.2 with backward compatibility layout (uses new ATS-based typestter)
     NSTypesetterBehavior_10_2 = 2,
+    NSTypesetterBehavior_10_3 = 3
 } NSTypesetterBehavior;
 #endif
 
-@interface NSLayoutManager : NSObject <NSCoding> {
+@interface NSLayoutManager : NSObject <NSCoding, NSGlyphStorage> {
 
   /*All instance variables are private*/
 
@@ -154,14 +155,14 @@ typedef enum {
 
     // Outlets for ruler accessory view.
     NSBox *_rulerAccView;
-    NSMatrix *_rulerAccViewAlignmentButtons;
-    NSTextField *_rulerAccViewLeadingField;
+    id _rulerAccViewAlignmentButtons;
+    id _rulerAccViewSpacing;
     NSTabWell *_rulerAccViewLeftTabWell;
     NSTabWell *_rulerAccViewRightTabWell;
     NSTabWell *_rulerAccViewCenterTabWell;
     NSTabWell *_rulerAccViewDecimalTabWell;
-    NSMatrix *_rulerAccViewIncrementLineHeightButtons;
-    NSMatrix *_rulerAccViewFixedLineHeightButtons;
+    id _rulerAccViewStyles;
+    id _rulerAccViewReserved;
 
     NSRange _newlyFilledGlyphRange;
 
@@ -171,7 +172,7 @@ typedef enum {
 /**************************** Initialization ****************************/
 
 - (id)init;
-    // Designated Initializer.  Sets up this instance.  Finds the shared NSGlyphGenerator and the shared default NSTypesetter.  The NSLayoutManager starts off without a NSTextStorage
+    // Designated Initializer.  Sets up this instance.  Finds the shared NSGlyphGenerator and the shared default NSTypesetter.  The NSLayoutManager starts off without an NSTextStorage
 
 /*************************** Helper objects ***************************/
 
@@ -180,11 +181,11 @@ typedef enum {
     // The set method generally should not be called directly, but you may want to override it.  Used to get and set the text storage.  The set method is called by the NSTextStorage's addLayoutManager:/removeLayoutManager: methods.
 
 - (void)replaceTextStorage:(NSTextStorage *)newTextStorage;
-    // This method should be used instead of the primitive -setTextStorage: if you need to replace a NSLayoutManager's NSTextStorage with a new one leaving the rest of the web intact.  This method deals with all the work of making sure the NSLayoutManager doesn't get deallocated and transferring all the NSLayoutManager s on the old NSTextStorage to the new one.
+    // This method should be used instead of the primitive -setTextStorage: if you need to replace a NSLayoutManager's NSTextStorage with a new one leaving the rest of the web intact.  This method deals with all the work of making sure the NSLayoutManager doesn't get deallocated and transferring all the NSLayoutManagers on the old NSTextStorage to the new one.
 
 - (NSTypesetter *)typesetter;
 - (void)setTypesetter:(NSTypesetter *)typesetter;
-    // Setting the default NSTypeSetter should invalidate all glyphs in the NSLayoutManager.  It can't just invalidate layout because the typesetter may have contributed to the actual glyphs as well (ie hyphenation).
+    // Setting the default NSTypesetter should invalidate all glyphs in the NSLayoutManager.  It can't just invalidate layout because the typesetter may have contributed to the actual glyphs as well (e.g. hyphenation).
 
 - (id)delegate;
 - (void)setDelegate:(id)delegate;
@@ -195,7 +196,7 @@ typedef enum {
 - (NSArray *)textContainers;
 
 - (void)addTextContainer:(NSTextContainer *)container;
-    // Add a container to the end of the array.  Must invalidate layout of all glyphs after the previous last container (ie glyphs that were not previously laid out because they would not fit anywhere).
+    // Add a container to the end of the array.  Must invalidate layout of all glyphs after the previous last container (i.e., glyphs that were not previously laid out because they would not fit anywhere).
 - (void)insertTextContainer:(NSTextContainer *)container atIndex:(unsigned)index;
     // Insert a container into the array before the container at index.  Must invalidate layout of all glyphs in the containers from the one previously at index to the last container.
 - (void)removeTextContainerAtIndex:(unsigned)index;
@@ -205,7 +206,7 @@ typedef enum {
     // Invalidates layout of all glyphs in container and all subsequent containers.
 
 - (void)textContainerChangedTextView:(NSTextContainer *)container;
-    // Called by NSTextContainer whenever its textView changes.  Used to keep notifications in synch.
+    // Called by NSTextContainer whenever its textView changes.  Used to keep notifications in sync.
 
 /************************** Invalidation primitives **************************/
 
@@ -254,7 +255,7 @@ typedef enum {
     // Inserts a single glyph into the glyph stream at glyphIndex.  The character index which this glyph corresponds to is given by charIndex.
 
 - (void)replaceGlyphAtIndex:(unsigned)glyphIndex withGlyph:(NSGlyph)newGlyph;
-    // Replaces the glyph currently at glyphIndex with newGlyph.  The character index of the glyph is assumed to remain the same (although it can, of coiurse, be set explicitly if needed).
+    // Replaces the glyph currently at glyphIndex with newGlyph.  The character index of the glyph is assumed to remain the same (although it can, of course, be set explicitly if needed).
 
 - (void)deleteGlyphsInRange:(NSRange)glyphRange;
     // Removes all glyphs in the given range from the storage.
@@ -276,7 +277,6 @@ typedef enum {
 
 - (unsigned)getGlyphs:(NSGlyph *)glyphArray range:(NSRange)glyphRange;
     // This causes glyph generation similarly to asking for a single glyph.  It formats a sequence of NSGlyphs (unsigned long ints).  It does not include glyphs that aren't shown in the result but does zero-terminate the array.  The memory passed in to the function should be large enough for at least glyphRange.length+1 elements.  The actual number of glyphs stuck into the array is returned (not counting the null-termination).
-    // RM!!! check out the private method "_packedGlyphs:range:length:" if you need to send glyphs to the window server.  It returns a (conceptually) autoreleased array of big-endian packeg glyphs.  Don't use this method to do that.
 
 - (unsigned)characterIndexForGlyphAtIndex:(unsigned)glyphIndex;
     // If there are any holes in the glyph stream this will cause glyph generation for all holes sequentially encountered until the desired index is available.
@@ -310,7 +310,7 @@ typedef enum {
     // Used to indicate that a particular glyph for some reason marks outside its line fragment bounding rect.  This can commonly happen if a fixed line height is used (consider a 12 point line height and a 24 point glyph).
 
 - (void)setLocation:(NSPoint)location forStartOfGlyphRange:(NSRange)glyphRange;
-    // Sets the location to draw the first glyph of the given range at.  Setting the location for a glyph range implies that its first glyph is NOT nominally spaced with respect to the previous glyph.  When all is said and done all glyphs in the layoutManager should have been included in a range passed to this method.  But only glyphs which start a new nominal rtange should be at the start of such ranges.  Glyph locations are given relative the their line fragment bounding rect's origin.
+    // Sets the location to draw the first glyph of the given range at.  Setting the location for a glyph range implies that its first glyph is NOT nominally spaced with respect to the previous glyph.  When all is said and done all glyphs in the layoutManager should have been included in a range passed to this method.  But only glyphs which start a new nominal range should be at the start of such ranges.  Glyph locations are given relative the their line fragment bounding rect's origin.
 
 - (void)setNotShownAttribute:(BOOL)flag forGlyphAtIndex:(unsigned)glyphIndex;
     // Some glyphs are not shown.  The typesetter decides which ones and sets this attribute in layoutManager where the view can find it.
@@ -342,7 +342,7 @@ typedef enum {
     // Returns whether the glyph will make marks outside its line fragment's bounds.
 
 - (NSPoint)locationForGlyphAtIndex:(unsigned)glyphIndex;
-    // Returns the location that the given glyph will draw at.  If this glyph doesn't have an explicit location set for it (ie it is part of (but not first in) a sequence of nominally spaced characters), the location is calculated from the location of the last glyph with a location set.  Glyph locations are relative the their line fragment bounding rect's origin (see -lineFragmentForGlyphAtIndex:effectiveRange: below for finding line fragment bounding rects).  This will cause glyph generation AND layout as needed.
+    // Returns the location that the given glyph will draw at.  If this glyph doesn't have an explicit location set for it (i.e., it is part of (but not first in) a sequence of nominally spaced characters), the location is calculated from the location of the last glyph with a location set.  Glyph locations are relative the their line fragment bounding rect's origin (see -lineFragmentForGlyphAtIndex:effectiveRange: below for finding line fragment bounding rects).  This will cause glyph generation and layout as needed.
 
 - (BOOL)notShownAttributeForGlyphAtIndex:(unsigned) glyphIndex;
     // Some glyphs are not shown.  This will cause glyph generation and layout as needed..
@@ -363,7 +363,7 @@ typedef enum {
     // Returns the range of characters which have been laid into the given container.  This is a less efficient method than the similar -textContainerForGlyphAtIndex:effectiveRange:.
 
 - (NSRange)rangeOfNominallySpacedGlyphsContainingIndex:(unsigned)glyphIndex;
-    // Returns the range including the first glyph from glyphIndex on back that has a location set and up to, but not including the next glyph that has a location set.  This is a range of glyphs that can be shown with a single postscript show operation.
+    // Returns the range including the first glyph from glyphIndex on back that has a location set and up to, but not including the next glyph that has a location set.  This is a range of glyphs that could potentially be shown with a single postscript show operation (not considering changes in color or other attributes not affecting layout).
 
 - (NSRectArray)rectArrayForCharacterRange:(NSRange)charRange withinSelectedCharacterRange:(NSRange)selCharRange inTextContainer:(NSTextContainer *)container rectCount:(unsigned *)rectCount;
 - (NSRectArray)rectArrayForGlyphRange:(NSRange)glyphRange withinSelectedGlyphRange:(NSRange)selGlyphRange inTextContainer:(NSTextContainer *)container rectCount:(unsigned *)rectCount;
@@ -454,6 +454,12 @@ typedef enum {
 - (void)drawUnderlineForGlyphRange:(NSRange)glyphRange underlineType:(int)underlineVal baselineOffset:(float)baselineOffset lineFragmentRect:(NSRect)lineRect lineFragmentGlyphRange:(NSRange)lineGlyphRange containerOrigin:(NSPoint)containerOrigin;
 - (void)underlineGlyphRange:(NSRange)glyphRange underlineType:(int)underlineVal lineFragmentRect:(NSRect)lineRect lineFragmentGlyphRange:(NSRange)lineGlyphRange containerOrigin:(NSPoint)containerOrigin;
     // The first of these methods actually draws an appropriate underline for the glyph range given.  The second method potentailly breaks the range it is given up into subranges and calls drawUnderline... for ranges that should actually have the underline drawn.  As examples of why there are two methods, consider two situations.  First, in all cases you don't want to underline the leading and trailing whitespace on a line.  The -underlineGlyphRange... method is passed glyph ranges that have underlining turned on, but it will then look for this leading and trailing white space and only pass the ranges that should actually be underlined to -drawUnderline...  Second, if the underlineType: indicates that only words, (ie no whitespace), should be underlined, then -underlineGlyphRange... will carve the range it is passed up into words and only pass word ranges to -drawUnderline.
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void)drawStrikethroughForGlyphRange:(NSRange)glyphRange strikethroughType:(int)strikethroughVal baselineOffset:(float)baselineOffset lineFragmentRect:(NSRect)lineRect lineFragmentGlyphRange:(NSRange)lineGlyphRange containerOrigin:(NSPoint)containerOrigin;
+- (void)strikethroughGlyphRange:(NSRange)glyphRange strikethroughType:(int)strikethroughVal lineFragmentRect:(NSRect)lineRect lineFragmentGlyphRange:(NSRange)lineGlyphRange containerOrigin:(NSPoint)containerOrigin;
+    // These two methods parallel the two corresponding underline methods, but draw strikethroughs instead of underlines.
+#endif
 
 @end
 

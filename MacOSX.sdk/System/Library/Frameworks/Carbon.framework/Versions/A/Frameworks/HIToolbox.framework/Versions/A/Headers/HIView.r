@@ -3,9 +3,9 @@
  
      Contains:   HIView routines
  
-     Version:    HIToolbox-124.14~2
+     Version:    HIToolbox-145.33~1
  
-     Copyright:  © 2001-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2001-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -26,6 +26,7 @@
 #define kHIComboBoxListPixelHeightTag 	'cblh'				/*  UInt32 */
 #define kHIComboBoxNumVisibleItemsTag 	'cbni'				/*  UInt32 */
 
+#define kHISegmentedViewKind 			'sgmt'
 
 #endif /* __HIVIEW_R__ */
 

@@ -1,5 +1,5 @@
 /*	CFNotificationCenter.h
-	Copyright 1998-2002, Apple, Inc. All rights reserved.
+	Copyright (c) 1998-2003, Apple, Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFNOTIFICATIONCENTER__)
@@ -29,17 +29,26 @@ typedef enum {
 
 CF_EXPORT CFTypeID CFNotificationCenterGetTypeID(void);
 
-// Getting an instance
 CF_EXPORT CFNotificationCenterRef CFNotificationCenterGetDistributedCenter(void);
 
-// Adding/removing observers
 CF_EXPORT void CFNotificationCenterAddObserver(CFNotificationCenterRef center, const void *observer, CFNotificationCallback callBack, CFStringRef name, const void *object, CFNotificationSuspensionBehavior suspensionBehavior);
 
 CF_EXPORT void CFNotificationCenterRemoveObserver(CFNotificationCenterRef center, const void *observer, CFStringRef name, const void *object);
 CF_EXPORT void CFNotificationCenterRemoveEveryObserver(CFNotificationCenterRef center, const void *observer);
 
-// Posting
 CF_EXPORT void CFNotificationCenterPostNotification(CFNotificationCenterRef center, CFStringRef name, const void *object, CFDictionaryRef userInfo, Boolean deliverImmediately);
+
+#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
+
+enum {
+    kCFNotificationDeliverImmediately = (1 << 0),
+    kCFNotificationPostToAllSessions = (1 << 1)
+};
+
+void CFNotificationCenterPostNotificationWithOptions(CFNotificationCenterRef center, CFStringRef name, const void *object, CFDictionaryRef userInfo, CFOptionFlags options) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+#endif
+
 
 #if defined(__cplusplus)
 }

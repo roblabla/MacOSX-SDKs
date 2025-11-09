@@ -1,7 +1,7 @@
 /*
 	NSFont.h
 	Application Kit
-	Copyright (c) 1994-2001, Apple Computer, Inc.
+	Copyright (c) 1994-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -9,8 +9,9 @@
 #import <Foundation/NSString.h>
 #import <Foundation/NSGeometry.h>
 #import <AppKit/AppKitDefines.h>
+#import <AppKit/NSCell.h>
 
-@class NSArray;
+@class NSArray, NSFontDescriptor;
 
 typedef unsigned int NSGlyph;
 
@@ -44,14 +45,9 @@ APPKIT_EXTERN const float *NSFontIdentityMatrix;
     void *_reservedFont1;
     struct __fFlags {
       /* the following instance variables are no longer part of the API */
-	unsigned int usedByWS:1;
-	unsigned int usedByPrinter:1;
 	unsigned int isScreenFont:1;
 	unsigned int _systemFontType:4;
-	unsigned int _flippedUsedByWS:1;
-	unsigned int _flippedUsedByPrinter:1;
-	unsigned int _hasCharWidth:1;
-	unsigned int _RESERVED:3;
+	unsigned int _RESERVED:8;
 	unsigned int _matrixIsIdentity:1;
 	unsigned int _matrixIsFlipped:1;
 	unsigned int _hasStyle:1;
@@ -80,10 +76,17 @@ APPKIT_EXTERN const float *NSFontIdentityMatrix;
 + (float) smallSystemFontSize;	// size of standard small System font.
 + (float) labelFontSize;	// size of the standard Label Font.
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
++ (float)systemFontSizeForControlSize:(NSControlSize)controlSize;
+#endif
+
 /* The six methods below are for getting various types of pre-defined fonts... corresponding to older Windows & OpenStep API.
 */
 + (NSFont *)titleBarFontOfSize:(float)fontSize;
 + (NSFont *)menuFontOfSize:(float)fontSize;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
++ (NSFont *)menuBarFontOfSize:(float)fontSize;
+#endif
 + (NSFont *)messageFontOfSize:(float)fontSize;
 + (NSFont *)paletteFontOfSize:(float)fontSize;
 + (NSFont *)toolTipsFontOfSize:(float)fontSize;
@@ -93,6 +96,10 @@ APPKIT_EXTERN const float *NSFontIdentityMatrix;
 - (NSString *)fontName;
 - (NSString *)familyName;
 - (NSString *)displayName;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (NSFontDescriptor *)fontDescriptor;
+#endif
+
 
 - (const float *)matrix;
 - (void)set;

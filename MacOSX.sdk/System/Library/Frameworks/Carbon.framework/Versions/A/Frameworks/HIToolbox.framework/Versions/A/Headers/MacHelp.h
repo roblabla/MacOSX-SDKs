@@ -3,9 +3,9 @@
  
      Contains:   Macintosh Help Package Interfaces.
  
-     Version:    HIToolbox-124.14~2
+     Version:    HIToolbox-145.33~1
  
-     Copyright:  © 1998-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1998-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -15,10 +15,6 @@
 */
 #ifndef __MACHELP__
 #define __MACHELP__
-
-#ifndef __BALLOONS__
-#include <HIToolbox/Balloons.h>
-#endif
 
 #ifndef __CONTROLS__
 #include <HIToolbox/Controls.h>
@@ -59,6 +55,10 @@ extern "C" {
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 enum {
   kMacHelpVersion               = 0x0003
+};
+
+enum {
+  kHMHelpMenuID                 = -16490 /* Resource ID and menu ID of help menu */
 };
 
 typedef SInt16 HMContentRequest;
@@ -240,6 +240,11 @@ enum {
   kHelpTagEventHandlerTag       = 'hevt'
 };
 
+struct HMStringResType {
+  short               hmmResID;
+  short               hmmIndex;
+};
+typedef struct HMStringResType          HMStringResType;
 struct HMHelpContent {
   HMContentType       contentType;
   union {
@@ -459,8 +464,9 @@ HMGetHelpMenu(
 
 
 /* Installing/Retrieving Content */
-/* Menu title and item help tags are not yet supported by Carbon or CarbonLib. */
-/* They will be fully supported in a future release. */
+/* Menu title and item help tags are not supported by CarbonLib. They are fully supported on Mac OS X. */
+/* Pass NULL for the inContent parameter of HMSetControl/Window/MenuItemHelpContent to remove help content
+       from a control, window, or menu. */
 /*
  *  HMSetControlHelpContent()
  *  
@@ -475,7 +481,7 @@ HMGetHelpMenu(
 extern OSStatus 
 HMSetControlHelpContent(
   ControlRef                inControl,
-  const HMHelpContentRec *  inContent)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const HMHelpContentRec *  inContent)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -509,7 +515,7 @@ HMGetControlHelpContent(
 extern OSStatus 
 HMSetWindowHelpContent(
   WindowRef                 inWindow,
-  const HMHelpContentRec *  inContent)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const HMHelpContentRec *  inContent)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -544,7 +550,7 @@ extern OSStatus
 HMSetMenuItemHelpContent(
   MenuRef                   inMenu,
   MenuItemIndex             inItem,
-  const HMHelpContentRec *  inContent)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const HMHelpContentRec *  inContent)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
@@ -767,6 +773,13 @@ HMGetTagDelay(Duration * outDelay)                            AVAILABLE_MAC_OS_X
 /*
  *  HMSetMenuHelpFromBalloonRsrc()
  *  
+ *  Summary:
+ *    Not really implemented.
+ *  
+ *  Discussion:
+ *    Though this API is exported from CarbonLib and Mac OS X, it is
+ *    completely non-functional. We have no plans to implement it.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
@@ -783,6 +796,13 @@ HMSetMenuHelpFromBalloonRsrc(
 
 /*
  *  HMSetDialogHelpFromBalloonRsrc()
+ *  
+ *  Summary:
+ *    Not really implemented.
+ *  
+ *  Discussion:
+ *    Though this API is exported from CarbonLib and Mac OS X, it is
+ *    completely non-functional. We have no plans to implement it.
  *  
  *  Mac OS X threading:
  *    Not thread safe

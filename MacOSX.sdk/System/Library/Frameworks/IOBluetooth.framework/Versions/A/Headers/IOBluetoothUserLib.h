@@ -25,6 +25,188 @@
 */
 
 //===========================================================================================================================
+// Availability Macros
+//===========================================================================================================================
+ 
+#if 0
+#pragma mark -
+#pragma mark ее Availability Macros ее
+#endif
+
+
+#if !defined( MAC_OS_X_VERSION_MIN_REQUIRED ) || ( MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_2 )
+	#warning MAC_OS_X_VERSION_MIN_REQUIRED should be at least MAC_OS_X_VERSION_10_2 for Bluetooth support
+	#ifdef MAC_OS_X_VERSION_MIN_REQUIRED
+		#undef MAC_OS_X_VERSION_MIN_REQUIRED
+	#endif
+	#define MAC_OS_X_VERSION_MIN_REQUIRED	MAC_OS_X_VERSION_10_2
+#endif
+
+#include <AvailabilityMacros.h>
+
+#ifndef MAC_OS_X_VERSION_10_2_1
+	#define MAC_OS_X_VERSION_10_2_1	1021
+#endif
+
+#ifndef MAC_OS_X_VERSION_10_2_2
+	#define MAC_OS_X_VERSION_10_2_2	1022
+#endif
+
+#ifndef MAC_OS_X_VERSION_10_2_3
+	#define MAC_OS_X_VERSION_10_2_3	1023
+#endif
+
+#ifndef MAC_OS_X_VERSION_10_2_4
+	#define MAC_OS_X_VERSION_10_2_4	1024
+#endif
+
+#ifndef MAC_OS_X_VERSION_10_2_5
+	#define MAC_OS_X_VERSION_10_2_5	1025
+#endif
+
+#ifndef MAC_OS_X_VERSION_10_2_6
+	#define MAC_OS_X_VERSION_10_2_6	1026
+#endif
+
+#ifndef MAC_OS_X_VERSION_10_2_7
+	#define MAC_OS_X_VERSION_10_2_7	1027
+#endif
+
+#define BLUETOOTH_VERSION_1_0	010000
+#define BLUETOOTH_VERSION_1_0_0	BLUETOOTH_VERSION_1_0
+#define BLUETOOTH_VERSION_1_0_1	010001
+#define BLUETOOTH_VERSION_1_1	010100
+#define BLUETOOTH_VERSION_1_1_0	BLUETOOTH_VERSION_1_1
+#define BLUETOOTH_VERSION_1_2	010200
+#define BLUETOOTH_VERSION_1_2_0	BLUETOOTH_VERSION_1_2
+#define BLUETOOTH_VERSION_1_2_1 010201
+#define BLUETOOTH_VERSION_1_3	010300
+#define BLUETOOTH_VERSION_1_3_0	BLUETOOTH_VERSION_1_3
+#define BLUETOOTH_VERSION_1_3_1 010301
+
+#define BLUETOOTH_VERSION_CURRENT	BLUETOOTH_VERSION_1_3_1
+
+#ifdef BLUETOOTH_VERSION_USE_CURRENT
+	#define BLUETOOTH_VERSION_MIN_REQUIRED	BLUETOOTH_VERSION_CURRENT
+	#define BLUETOOTH_VERSION_MAX_ALLOWED	BLUETOOTH_VERSION_CURRENT
+#else
+	#ifdef MAC_OS_X_VERSION_MIN_REQUIRED
+		#if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_2_7
+			#define BLUETOOTH_VERSION_MIN_REQUIRED	BLUETOOTH_VERSION_1_3_1
+		#elif MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_2_5
+			#define BLUETOOTH_VERSION_MIN_REQUIRED	BLUETOOTH_VERSION_1_2
+		#elif MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_2_4
+			#define BLUETOOTH_VERSION_MIN_REQUIRED	BLUETOOTH_VERSION_1_1
+		#elif MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_2_2
+			#define BLUETOOTH_VERSION_MIN_REQUIRED	BLUETOOTH_VERSION_1_0_1
+		#elif MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_2
+			#define BLUETOOTH_VERSION_MIN_REQUIRED	BLUETOOTH_VERSION_1_0
+		#else
+			#error MAC_OS_X_VERSION_MIN_REQUIRED must be >= MAC_OS_X_VERSION_10_2 for Bluetooth support
+		#endif
+	#endif
+	
+	#ifdef MAC_OS_X_VERSION_MAX_ALLOWED
+		#if MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_2
+			#define BLUETOOTH_VERSION_MAX_ALLOWED	BLUETOOTH_VERSION_1_0
+		#elif MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_2_2
+			#define BLUETOOTH_VERSION_MAX_ALLOWED	BLUETOOTH_VERSION_1_0_1
+		#elif MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_2_4
+			#define BLUETOOTH_VERSION_MAX_ALLOWED	BLUETOOTH_VERSION_1_1
+		#elif MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_2_5
+			#define BLUETOOTH_VERSION_MAX_ALLOWED	BLUETOOTH_VERSION_1_2
+		#else 
+			#define BLUETOOTH_VERSION_MAX_ALLOWED	BLUETOOTH_VERSION_1_3_1
+		#endif
+	#endif
+#endif
+
+
+/*
+ * AVAILABLE_BLUETOOTH_VERSION_1_0_1_AND_LATER
+ *
+ * Used on declarations introduced in Mac OS X 10.2.2 (Bluetooth version 1.0.1)
+ */
+ 
+#if BLUETOOTH_VERSION_MAX_ALLOWED < BLUETOOTH_VERSION_1_0_1
+	#define AVAILABLE_BLUETOOTH_VERSION_1_0_1_AND_LATER		UNAVAILABLE_ATTRIBUTE
+#elif BLUETOOTH_VERSION_MIN_REQUIRED < BLUETOOTH_VERSION_1_0_1
+	#define AVAILABLE_BLUETOOTH_VERSION_1_0_1_AND_LATER		WEAK_IMPORT_ATTRIBUTE
+#else
+	#define AVAILABLE_BLUETOOTH_VERSION_1_0_1_AND_LATER
+#endif
+
+/*
+ * AVAILABLE_BLUETOOTH_VERSION_1_1_AND_LATER
+ *
+ * Used on declarations introduced in Mac OS X 10.2.4 (Bluetooth version 1.1)
+ */
+ 
+#if BLUETOOTH_VERSION_MAX_ALLOWED < BLUETOOTH_VERSION_1_1
+	#define AVAILABLE_BLUETOOTH_VERSION_1_1_AND_LATER		UNAVAILABLE_ATTRIBUTE
+#elif BLUETOOTH_VERSION_MIN_REQUIRED < BLUETOOTH_VERSION_1_1
+	#define AVAILABLE_BLUETOOTH_VERSION_1_1_AND_LATER		WEAK_IMPORT_ATTRIBUTE
+#else
+	#define AVAILABLE_BLUETOOTH_VERSION_1_1_AND_LATER
+#endif
+
+/*
+ * AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER
+ *
+ * Used on declarations introduced in Mac OS X 10.2.5 (Bluetooth version 1.2)
+ */
+ 
+#if BLUETOOTH_VERSION_MAX_ALLOWED < BLUETOOTH_VERSION_1_2
+	#define AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER		UNAVAILABLE_ATTRIBUTE
+#elif BLUETOOTH_VERSION_MIN_REQUIRED < BLUETOOTH_VERSION_1_2
+	#define AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER		WEAK_IMPORT_ATTRIBUTE
+#else
+	#define AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER
+#endif
+
+/*
+ * AVAILABLE_BLUETOOTH_VERSION_1_2_1_AND_LATER
+ *
+ * Used on declarations introduced in Bluetooth Software Update 1.2.1 (Bluetooth version 1.2.1)
+ */
+ 
+#if BLUETOOTH_VERSION_MAX_ALLOWED < BLUETOOTH_VERSION_1_2_1
+	#define AVAILABLE_BLUETOOTH_VERSION_1_2_1_AND_LATER		UNAVAILABLE_ATTRIBUTE
+#elif BLUETOOTH_VERSION_MIN_REQUIRED < BLUETOOTH_VERSION_1_2_1
+	#define AVAILABLE_BLUETOOTH_VERSION_1_2_1_AND_LATER		WEAK_IMPORT_ATTRIBUTE
+#else
+	#define AVAILABLE_BLUETOOTH_VERSION_1_2_1_AND_LATER
+#endif
+
+/*
+ * AVAILABLE_BLUETOOTH_VERSION_1_3_AND_LATER
+ *
+ * Used on declarations introduced in Mac OS X 10.2.7 (Bluetooth version 1.3)
+ */
+ 
+#if BLUETOOTH_VERSION_MAX_ALLOWED < BLUETOOTH_VERSION_1_3
+	#define AVAILABLE_BLUETOOTH_VERSION_1_3_AND_LATER		UNAVAILABLE_ATTRIBUTE
+#elif BLUETOOTH_VERSION_MIN_REQUIRED < BLUETOOTH_VERSION_1_3
+	#define AVAILABLE_BLUETOOTH_VERSION_1_3_AND_LATER		WEAK_IMPORT_ATTRIBUTE
+#else
+	#define AVAILABLE_BLUETOOTH_VERSION_1_3_AND_LATER
+#endif
+
+/*
+ * AVAILABLE_BLUETOOTH_VERSION_1_3_1_AND_LATER
+ *
+ * Used on declarations introduced in Mac OS X 10.2.7 (Bluetooth version 1.3.1)
+ */
+ 
+#if BLUETOOTH_VERSION_MAX_ALLOWED < BLUETOOTH_VERSION_1_3_1
+	#define AVAILABLE_BLUETOOTH_VERSION_1_3_1_AND_LATER		UNAVAILABLE_ATTRIBUTE
+#elif BLUETOOTH_VERSION_MIN_REQUIRED < BLUETOOTH_VERSION_1_3_1
+	#define AVAILABLE_BLUETOOTH_VERSION_1_3_1_AND_LATER		WEAK_IMPORT_ATTRIBUTE
+#else
+	#define AVAILABLE_BLUETOOTH_VERSION_1_3_1_AND_LATER
+#endif
+
+//===========================================================================================================================
 // General
 //===========================================================================================================================
  
@@ -181,10 +363,12 @@ extern IOReturn IOBluetoothDeviceOpenConnection(IOBluetoothDeviceRef btDevice, I
 /*!
     @function	IOBluetoothDeviceOpenConnectionWithOptions
 	@abstract	Create a baseband connection to the device.
-	@discussion	This method can be either synchronous or asynchronous.  If a callback is specified, the
+	@discussion	This function can be either synchronous or asynchronous.  If a callback is specified, the
                 operation is performed asynchronously and the callback called when the connection complete
                 event is received.  If no callback is specified, the operation is synchronous and the 
                 function will not return until the connection complete event is received.
+				
+				NOTE: This function is only available in Mac OS X 10.2.7 (Bluetooth v1.3) or later.
     @param		btDevice The target IOBluetoothDeviceRef
     @param		callback The function to be called when the connection has been established (or the
                 create connection has failed).
@@ -196,7 +380,7 @@ extern IOReturn IOBluetoothDeviceOpenConnection(IOBluetoothDeviceRef btDevice, I
                 is not received in the asynchronous case, the callback will not be called.
 */
 
-extern IOReturn IOBluetoothDeviceOpenConnectionWithOptions(IOBluetoothDeviceRef btDevice, IOBluetoothCreateConnectionCallback callback, void *refCon, BluetoothHCIPageTimeout inPageTimeout, Boolean inAuthenticationRequired);
+extern IOReturn IOBluetoothDeviceOpenConnectionWithOptions(IOBluetoothDeviceRef btDevice, IOBluetoothCreateConnectionCallback callback, void *refCon, BluetoothHCIPageTimeout inPageTimeout, Boolean inAuthenticationRequired) AVAILABLE_BLUETOOTH_VERSION_1_3_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -205,7 +389,7 @@ extern IOReturn IOBluetoothDeviceOpenConnectionWithOptions(IOBluetoothDeviceRef 
 	@discussion	This method is synchronous and will not return until the connection has been closed (or the 
                 command failed).  In the future this API will be changed to allow asynchronous operation.
     @param		btDevice The target IOBluetoothDeviceRef
-    @return		Returns kIOReturnSuccess if the connection has successfully been closed.
+    @result		Returns kIOReturnSuccess if the connection has successfully been closed.
 */
 
 extern IOReturn IOBluetoothDeviceCloseConnection(IOBluetoothDeviceRef btDevice);
@@ -222,7 +406,7 @@ extern IOReturn IOBluetoothDeviceCloseConnection(IOBluetoothDeviceRef btDevice);
     @param		inCallback The callback to call when the remote name request is complete
     @param		inUserRefCon User-supplied reference that will be passed to the callback
     @param		outDeviceName Contains the device name if the request is synchronous and completes successfully.
-    @return		Returns kIOReturnSuccess if the remote name request was successfully issued (and if synchronous, if
+    @result		Returns kIOReturnSuccess if the remote name request was successfully issued (and if synchronous, if
                 the request completed successfully).
 */
 
@@ -239,19 +423,21 @@ extern IOReturn IOBluetoothDeviceRemoteNameRequest(	IOBluetoothDeviceRef						in
                 command, the callback will be called with the given refCon.
                 If no target is specified, the request is made synchronously and won't return until the request is 
                 complete.
+				
+				NOTE: This function is only available in Mac OS X 10.2.7 (Bluetooth v1.3) or later.
     @param		inDeviceRef The target IOBluetoothDeviceRef
     @param		inCallback The callback to call when the remote name request is complete
     @param		inUserRefCon User-supplied reference that will be passed to the callback
     @param		outDeviceName Contains the device name if the request is synchronous and completes successfully.
     @param		inTimeout User supplied page timeout value to use for the remote name request call.
-    @return		Returns kIOReturnSuccess if the remote name request was successfully issued (and if synchronous, if
+    @result		Returns kIOReturnSuccess if the remote name request was successfully issued (and if synchronous, if
                 the request completed successfully).
 */
 extern IOReturn IOBluetoothDeviceRemoteNameRequestWithTimeout(	IOBluetoothDeviceRef						inDeviceRef,
-                                                IOBluetoothRemoteNameRequestCallback		inCallback,
-                                                void *										inUserRefCon,
-                                                BluetoothDeviceName							outDeviceName,
-												BluetoothHCIPageTimeout						inTimeout );
+																IOBluetoothRemoteNameRequestCallback		inCallback,
+																void *										inUserRefCon,
+																BluetoothDeviceName							outDeviceName,
+																BluetoothHCIPageTimeout						inTimeout ) AVAILABLE_BLUETOOTH_VERSION_1_3_AND_LATER;
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothDevicePerformSDPQuery
@@ -268,7 +454,7 @@ extern IOReturn IOBluetoothDeviceRemoteNameRequestWithTimeout(	IOBluetoothDevice
 	@param		inDeviceRef The target IOBluetoothDeviceRef
     @param		inCallback The callback to call when the SDP query is complete
     @param		inUserRefCon User-supplied reference that will be passed to the callback
-    @return		Returns kIOReturnSuccess if the SDP query was successfully started.
+    @result		Returns kIOReturnSuccess if the SDP query was successfully started.
 */
 
 extern IOReturn IOBluetoothDevicePerformSDPQuery(	IOBluetoothDeviceRef						inDeviceRef,
@@ -397,12 +583,14 @@ extern const BluetoothDeviceAddress *IOBluetoothDeviceGetAddress(IOBluetoothDevi
 	@abstract	Get a string containing the Bluetooth device address for the target device.
 	@discussion	Because this function may have to create a new string object, the resulting 
 				string must be released by the caller (by calling CFRelease()).
+				
+				NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
     @param		device The target IOBluetoothDeviceRef
 	@result		Returns a pointer to a CFStringRef containing the Bluetooth device address of the target device.
 				The returned string MUST be released by the caller by calling CFRelease().
 */
 
-extern CFStringRef IOBluetoothDeviceGetAddressString(IOBluetoothDeviceRef device);
+extern CFStringRef IOBluetoothDeviceGetAddressString(IOBluetoothDeviceRef device) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -586,89 +774,101 @@ extern IOBluetoothSDPServiceRecordRef IOBluetoothDeviceGetServiceRecordForUUID(I
     @function	IOBluetoothFavoriteDevices
 	@abstract	Returns an array containing all of the user's favorite devices.
 	@discussion	The CFArrayRef returned by this function must be released by calling CFRelease().
+				
+				NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
 	@result		Returns a CFArray of IOBluetoothDeviceRef objects.  The resulting CFArrayRef must be released by
 				the caller by calling CFRelease().
 */
 
-extern CFArrayRef IOBluetoothFavoriteDevices();
+extern CFArrayRef IOBluetoothFavoriteDevices() AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothDeviceIsFavorite
 	@abstract	Indicates whether the target device is a favorite.
+	@discussion	NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
     @param		device The target IOBluetoothDeviceRef
 	@result		Returns TRUE if the device is one of the user's favorites.
 */
 
-extern Boolean IOBluetoothDeviceIsFavorite(IOBluetoothDeviceRef device);
+extern Boolean IOBluetoothDeviceIsFavorite(IOBluetoothDeviceRef device) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothDeviceAddToFavorites
 	@abstract	Adds the target device to the user's list of favorite devices.
+	@discussion	NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
     @param		device The target IOBluetoothDeviceRef
 	@result		Returns kIOReturnSuccess if the device was successfully added to the user's list of
 				favorite devices.
 */
 
-extern IOReturn IOBluetoothDeviceAddToFavorites(IOBluetoothDeviceRef device);
+extern IOReturn IOBluetoothDeviceAddToFavorites(IOBluetoothDeviceRef device) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothDeviceRemoveFromFavorites
 	@abstract	Removes the target device from the user's list of favorite devices.
+	@discussion	NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
     @param		device The target IOBluetoothDeviceRef
 	@result		Returns kIOReturnSuccess if the device was successfully removed from the user's list of
 				favorite devices or if the device was not in the list at all.
 */
 
-extern IOReturn IOBluetoothDeviceRemoveFromFavorites(IOBluetoothDeviceRef device);
+extern IOReturn IOBluetoothDeviceRemoveFromFavorites(IOBluetoothDeviceRef device) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothRecentDevices
 	@abstract	Returns an array of the most recently accessed devices.
 	@discussion	The CFArrayRef returned by this function must be released by calling CFRelease().
+				
+				NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
 	@param		numDevices	The number of recent devices to return.  If numDevices is zero, all devices accessed
 							by the user will be returned.
 	@result		Returns a CFArray of the most recently accessed IOBluetoothDeviceRef objects.  The resulting CFArrayRef 
 				must be released by the caller by calling CFRelease().
 */
 
-extern CFArrayRef IOBluetoothRecentDevices(UInt32 numDevices);
+extern CFArrayRef IOBluetoothRecentDevices(UInt32 numDevices) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothDeviceGetRecentAccessDate
 	@abstract	Returns a date representing the last time the user accessed the target device.
 	@discussion	The CFDateRef returned by this function must be released by calling CFRelease().
+				
+				NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
     @param		device The target IOBluetoothDeviceRef
 	@result		Returns a CFDateRef representing the last date/time that the user accessed the
 				target device.  The resulting CFDateRef must be released by the caller by calling CFRelease().
 */
 
-extern CFDateRef IOBluetoothDeviceGetRecentAccessDate(IOBluetoothDeviceRef device);
+extern CFDateRef IOBluetoothDeviceGetRecentAccessDate(IOBluetoothDeviceRef device) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothPairedDevices
 	@abstract	Returns an array of the currently paired devices.
 	@discussion	The CFArrayRef returned by this function must be released by calling CFRelease().
+				
+				NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
 	@result		Returns a CFArray of IOBluetoothDeviceRef objects.  The resulting CFArrayRef must be released by
 				the caller by calling CFRelease().
 */
 
-extern CFArrayRef IOBluetoothPairedDevices();
+extern CFArrayRef IOBluetoothPairedDevices() AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothDeviceIsPaired
 	@abstract	Indicates whether the target device is paired.
+	@discussion	NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
     @param		device The target IOBluetoothDeviceRef
 	@result		Returns TRUE if the device is paired.
 */
 
-extern Boolean IOBluetoothDeviceIsPaired(IOBluetoothDeviceRef device);
+extern Boolean IOBluetoothDeviceIsPaired(IOBluetoothDeviceRef device) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
 
 //===========================================================================================================================
 // Device searching.
@@ -768,7 +968,15 @@ extern Boolean	IOBluetoothLocalDeviceAvailable();
 */
 extern IOReturn IOBluetoothLocalDeviceGetDiscoverable(Boolean* discoverableStatus);
 
-extern IOReturn IOBluetoothLocalDeviceGetPowerState(BluetoothHCIPowerState* powerState);
+//--------------------------------------------------------------------------------------------------------------------------
+/*!	@function	IOBluetoothLocalDeviceGetPowerState
+	@abstract	Determines the current power state of the Bluetooth hardware.
+	@discussion	If successful, it passes the current power state of the Bluetooth hardware back to the caller.
+				
+				NOTE: This function is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later.
+	@result		An error code value. 0 if successful.
+*/
+extern IOReturn IOBluetoothLocalDeviceGetPowerState(BluetoothHCIPowerState* powerState) AVAILABLE_BLUETOOTH_VERSION_1_1_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothLocalDeviceReadVersionInformation
@@ -1159,6 +1367,8 @@ extern IOReturn IOBluetoothDeviceSendL2CAPEchoRequest(IOBluetoothDeviceRef btDev
                 Because a new IOBluetoothL2CAPChannelRef will be created for the client as a result of this
                 function, the client is responsible for releasing the resulting IOBluetoothL2CAPChannelRef
                 (by calling IOBluetoothObjectRelease()).
+				
+				NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
     @param		btDevice 		The target IOBluetoothDeviceRef
 	@param		newChannel		A pointer to an IOBluetoothL2CAPChannelRef to receive the L2CAP channel 
                                 requested to be opened.  The newChannel pointer will only be set if 
@@ -1171,7 +1381,7 @@ extern IOReturn IOBluetoothDeviceSendL2CAPEchoRequest(IOBluetoothDeviceRef btDev
                 L2CAP channel was found). 
 */
 
-extern IOReturn IOBluetoothDeviceOpenL2CAPChannelAsync(IOBluetoothDeviceRef btDevice, IOBluetoothL2CAPChannelRef *newChannel, BluetoothL2CAPPSM psm, IOBluetoothL2CAPChannelIncomingEventListener eventListener, void *refcon);
+extern IOReturn IOBluetoothDeviceOpenL2CAPChannelAsync(IOBluetoothDeviceRef btDevice, IOBluetoothL2CAPChannelRef *newChannel, BluetoothL2CAPPSM psm, IOBluetoothL2CAPChannelIncomingEventListener eventListener, void *refcon) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -1187,6 +1397,8 @@ extern IOReturn IOBluetoothDeviceOpenL2CAPChannelAsync(IOBluetoothDeviceRef btDe
                 Because a new IOBluetoothL2CAPChannelRef will be created for the client as a result of this
                 function, the client is responsible for releasing the resulting IOBluetoothL2CAPChannelRef
                 (by calling IOBluetoothObjectRelease()).
+				
+				NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
     @param		btDevice 		The target IOBluetoothDeviceRef
 	@param		newChannel		A pointer to an IOBluetoothL2CAPChannelRef to receive the L2CAP channel 
                                 requested to be opened.  The newChannel pointer will only be set if 
@@ -1199,7 +1411,7 @@ extern IOReturn IOBluetoothDeviceOpenL2CAPChannelAsync(IOBluetoothDeviceRef btDe
                 L2CAP channel was found). 
 */
 
-extern IOReturn IOBluetoothDeviceOpenL2CAPChannelSync(IOBluetoothDeviceRef btDevice, IOBluetoothL2CAPChannelRef *newChannel, BluetoothL2CAPPSM psm, IOBluetoothL2CAPChannelIncomingEventListener eventListener, void *refcon);
+extern IOReturn IOBluetoothDeviceOpenL2CAPChannelSync(IOBluetoothDeviceRef btDevice, IOBluetoothL2CAPChannelRef *newChannel, BluetoothL2CAPPSM psm, IOBluetoothL2CAPChannelIncomingEventListener eventListener, void *refcon) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
 
 #if 0
 #pragma mark -
@@ -1277,6 +1489,8 @@ extern IOReturn IOBluetoothL2CAPChannelWrite(IOBluetoothL2CAPChannelRef l2capCha
     @function	IOBluetoothL2CAPChannelWriteAsync
 	@abstract	Writes asynchronously the given data over the target L2CAP channel to the remote device.
     @discussion	The length of the data may not exceed the L2CAP channel's ougoing MTU.
+				
+				NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
 	@param		l2capChannel	Target L2CAP channel ref
     @param		data	Pointer to the buffer containing the data to send.
     @param		length	The length of the given data buffer.
@@ -1284,20 +1498,22 @@ extern IOReturn IOBluetoothL2CAPChannelWrite(IOBluetoothL2CAPChannelRef l2capCha
 	@result		Returns kIOReturnSuccess if the data was buffered successfully.
 */
 
-extern IOReturn IOBluetoothL2CAPChannelWriteAsync(IOBluetoothL2CAPChannelRef l2capChannel, void *data, UInt16 length, void *refcon);
+extern IOReturn IOBluetoothL2CAPChannelWriteAsync(IOBluetoothL2CAPChannelRef l2capChannel, void *data, UInt16 length, void *refcon) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
     @function	IOBluetoothL2CAPChannelWriteAsync
 	@abstract	Writes synchronously the given data over the target L2CAP channel to the remote device.
     @discussion	The length of the data may not exceed the L2CAP channel's ougoing MTU. This method may block if previous writes have not been delivered.
+				
+				NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
     @param		l2capChannel	Target L2CAP channel ref
     @param		data	Pointer to the buffer containing the data to send.
     @param		length	The length of the given data buffer.
 	@result		Returns kIOReturnSuccess if the data was buffered successfully.
 */
 
-extern IOReturn IOBluetoothL2CAPChannelWriteSync(IOBluetoothL2CAPChannelRef l2capChannel, void *data, UInt16 length);
+extern IOReturn IOBluetoothL2CAPChannelWriteSync(IOBluetoothL2CAPChannelRef l2capChannel, void *data, UInt16 length) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -1319,6 +1535,7 @@ extern IOReturn IOBluetoothL2CAPChannelRegisterIncomingDataListener(IOBluetoothL
         @abstract Registers a callback for events. 
         @discussion Registers a callback for events generated by the L2CAP channel. The form for the callback is:
 
+					NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
         @param		l2capChannel (IOBluetoothRFCOMMChannelRef) The channel reference
         @param 		listener is the callback function.
         @param 		refCon is a void*, its meaning is up to the developer. This parameter will be passed back as second parameter of
@@ -1326,7 +1543,7 @@ extern IOReturn IOBluetoothL2CAPChannelRegisterIncomingDataListener(IOBluetoothL
         @result An error code value. 0 if successful. 
 */
 
-extern IOReturn	IOBluetoothL2CAPChannelRegisterIncomingEventListener(IOBluetoothL2CAPChannelRef l2capChannel, IOBluetoothL2CAPChannelIncomingEventListener listener, void *refCon);
+extern IOReturn	IOBluetoothL2CAPChannelRegisterIncomingEventListener(IOBluetoothL2CAPChannelRef l2capChannel, IOBluetoothL2CAPChannelIncomingEventListener listener, void *refCon) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -1456,6 +1673,7 @@ extern Boolean IOBluetoothL2CAPChannelIsIncoming(IOBluetoothL2CAPChannelRef l2ca
 
 
 typedef enum IOBluetoothRFCOMMChannelEventType {
+	// New event types added in 1.2 (Mac OS X 10.2.5)
 	kIOBluetoothRFCOMMChannelEventTypeData									=	0x0000,
 	kIOBluetoothRFCOMMChannelEventTypeFlowControlChanged					=	0x0001,
 	kIOBluetoothRFCOMMChannelEventTypeClosed								=	0x0002,
@@ -1631,6 +1849,8 @@ extern IOReturn IOBluetoothDeviceOpenRFCOMMChannel(IOBluetoothDeviceRef btDevice
                 Because a new IOBluetoothL2CAPChannelRef will be created for the client as a result of this
                 function, the client is responsible for releasing the resulting IOBluetoothL2CAPChannelRef
                 (by calling IOBluetoothObjectRelease()).
+				
+				NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
     @param		btDevice The target IOBluetoothDeviceRef
 	@param		rfcommChannel	A pointer to an IOBluetoothRFCOMMChannelRef to receive the RFCOMM channel 
                                 requested to be opened.  The rfcommChannel pointer will only be set if 
@@ -1642,7 +1862,7 @@ extern IOReturn IOBluetoothDeviceOpenRFCOMMChannel(IOBluetoothDeviceRef btDevice
 	@result		Returns kIOReturnSuccess if the open process was successfully started .
 */
 
-IOReturn IOBluetoothDeviceOpenRFCOMMChannelAsync(IOBluetoothDeviceRef btDevice, IOBluetoothRFCOMMChannelRef *newChannel, BluetoothRFCOMMChannelID channelID, IOBluetoothRFCOMMChannelIncomingEventListener eventListener, void *refcon);
+IOReturn IOBluetoothDeviceOpenRFCOMMChannelAsync(IOBluetoothDeviceRef btDevice, IOBluetoothRFCOMMChannelRef *newChannel, BluetoothRFCOMMChannelID channelID, IOBluetoothRFCOMMChannelIncomingEventListener eventListener, void *refcon) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!
@@ -1656,6 +1876,8 @@ IOReturn IOBluetoothDeviceOpenRFCOMMChannelAsync(IOBluetoothDeviceRef btDevice, 
                 Because a new IOBluetoothL2CAPChannelRef will be created for the client as a result of this
                 function, the client is responsible for releasing the resulting IOBluetoothL2CAPChannelRef
                 (by calling IOBluetoothObjectRelease()).
+				
+				NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
     @param		btDevice The target IOBluetoothDeviceRef
 	@param		rfcommChannel	A pointer to an IOBluetoothRFCOMMChannelRef to receive the RFCOMM channel 
                                 requested to be opened.  The rfcommChannel pointer will only be set if 
@@ -1667,7 +1889,7 @@ IOReturn IOBluetoothDeviceOpenRFCOMMChannelAsync(IOBluetoothDeviceRef btDevice, 
 	@result		Returns kIOReturnSuccess if the open process was successfully started .
 */
 
-IOReturn IOBluetoothDeviceOpenRFCOMMChannelSync(IOBluetoothDeviceRef btDevice, IOBluetoothRFCOMMChannelRef *newChannel, BluetoothRFCOMMChannelID channelID, IOBluetoothRFCOMMChannelIncomingEventListener eventListener, void *refcon);
+IOReturn IOBluetoothDeviceOpenRFCOMMChannelSync(IOBluetoothDeviceRef btDevice, IOBluetoothRFCOMMChannelRef *newChannel, BluetoothRFCOMMChannelID channelID, IOBluetoothRFCOMMChannelIncomingEventListener eventListener, void *refcon) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
 
 
 #if 0
@@ -1756,7 +1978,7 @@ extern BluetoothRFCOMMChannelID IOBluetoothRFCOMMChannelGetChannelID( IOBluetoot
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothRFCOMMChannelWrite
-	@abstract	Write data to a RFCOMM channel syncronusly.
+	@abstract	Write data to a RFCOMM channel synchronusly.
 	@param		rfcommChannel (IOBluetoothRFCOMMChannelRef) The channel reference				
         @param 		data is a pointer to the data buffer to be sent.
         @param 		length the length of the buffer to be sent (in bytes).
@@ -1778,11 +2000,13 @@ extern IOReturn	IOBluetoothRFCOMMChannelWrite(IOBluetoothRFCOMMChannelRef rfcomm
 	@param 		length the length of the buffer to be sent (in bytes).
 	@param		refcon a NON NULL value that will be contained in the return event (once the data is sent).
 	@result		An error code value. 0 if successful.
-        @discussion Sends data tough the channel. The number of bytes to be sent must not exceed the channel MTU. 
-        If the return value is an error condition none of the data was sent.
+	@discussion	Sends data tough the channel. The number of bytes to be sent must not exceed the channel MTU. 
+				If the return value is an error condition none of the data was sent.
+				
+				NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
 */
 
-extern IOReturn	IOBluetoothRFCOMMChannelWriteAsync(IOBluetoothRFCOMMChannelRef rfcommChannel, void *data, UInt16 length, void *refcon);
+extern IOReturn	IOBluetoothRFCOMMChannelWriteAsync(IOBluetoothRFCOMMChannelRef rfcommChannel, void *data, UInt16 length, void *refcon) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothRFCOMMChannelWriteSync
@@ -1792,11 +2016,13 @@ extern IOReturn	IOBluetoothRFCOMMChannelWriteAsync(IOBluetoothRFCOMMChannelRef r
 	@param 		length the length of the buffer to be sent (in bytes).
 	@param		refcon a NON NULL value that will be contained in the return event (once the data is sent).
 	@result		An error code value. 0 if successful.
-        @discussion Sends data tough the channel. The number of bytes to be sent must not exceed the channel MTU. 
-        If the return value is an error condition none of the data was sent.
+	@discussion	Sends data tough the channel. The number of bytes to be sent must not exceed the channel MTU. 
+				If the return value is an error condition none of the data was sent.
+				
+				NOTE: This function is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
 */
 
-extern IOReturn	IOBluetoothRFCOMMChannelWriteSync(IOBluetoothRFCOMMChannelRef rfcommChannel, void *data, UInt16 length);
+extern IOReturn	IOBluetoothRFCOMMChannelWriteSync(IOBluetoothRFCOMMChannelRef rfcommChannel, void *data, UInt16 length) AVAILABLE_BLUETOOTH_VERSION_1_2_AND_LATER;
 
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@function	IOBluetoothRFCOMMChannelWriteSimple

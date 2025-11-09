@@ -6,7 +6,7 @@
       Version:   Technology: Mac OS X
                  Release:    Mac OS X
  
-    Copyright:   (c) 2002 by Apple Computer, Inc., all rights reserved
+    Copyright:   (c) 2002-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -15,8 +15,8 @@
  
 */
 
+#import <DiscRecording/DiscRecording.h>
 #import <DiscRecordingUI/DRSetupPanel.h>
-#import <DiscRecording/DRBurn.h>
 
 /*!
 	@class		DRBurnSetupPanel
@@ -35,14 +35,11 @@
 	IBOutlet NSMatrix*		_completionActions;
 	IBOutlet NSButton*		_testBurn;
 	IBOutlet NSButton*		_verifyBurn;
-		
 	id						_state;
-		
-	float					_maxHeight;
-	float					_minHeight;
-	
-	id						_menu;
-	id						_first;
+	float					_delta;
+	IBOutlet NSButton*		_eraseDisc;
+	void*					_unused;
+	void*					_auxStorage;
 }
 
 /* ----------------------------------------------------------------------------- */

@@ -1,21 +1,22 @@
 /*
- * Copyright (c) 1998-2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2003 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
- * The contents of this file constitute Original Code as defined in and
- * are subject to the Apple Public Source License Version 1.1 (the
- * "License").  You may not use this file except in compliance with the
- * License.  Please obtain a copy of the License at
- * http://www.apple.com/publicsource and read it before using this file.
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this
+ * file.
  * 
- * This Original Code and all software distributed under the License are
- * distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
  * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT.  Please see the
- * License for the specific language governing rights and limitations
- * under the License.
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
+ * limitations under the License.
  * 
  * @APPLE_LICENSE_HEADER_END@
  */
@@ -34,12 +35,18 @@
 /*!
  * @defined kIOBlockStorageDeviceClass
  * @abstract
- * kIOBlockStorageDeviceClass is the name of the IOBlockStorageDevice class.
- * @discussion
- * kIOBlockStorageDeviceClass is the name of the IOBlockStorageDevice class.
+ * The name of the IOBlockStorageDevice class.
  */
 
 #define kIOBlockStorageDeviceClass "IOBlockStorageDevice"
+
+/*!
+ * @defined kIOBlockStorageDeviceWriteCacheStateKey
+ * @abstract
+ * The name of the property used to get or set the write cache state of the
+ * block storage device.
+ */
+#define kIOBlockStorageDeviceWriteCacheStateKey	"WriteCacheState"
 
 #ifdef KERNEL
 #ifdef __cplusplus
@@ -55,8 +62,10 @@
 
 /*!
  * @defined kIOMessageMediaStateHasChanged
- * The message ID which indicates that the media state has changed.  The message
- * is passed to all clients of the IOBlockStorageDevice via the message() method.
+ * @abstract
+ * The message ID which indicates that the media state has changed.
+ * @discussion
+ * The message is passed to all clients of the IOBlockStorageDevice via the message() method.
  * The argument that is passed along with this message is an IOMediaState value.
  *
  * Devices that aren't capable of detecting media state changes indicate this in
@@ -67,21 +76,21 @@
 /* Property used for matching, so the generic driver gets the nub it wants. */
 /*!
  * @defined kIOBlockStorageDeviceTypeKey
- * The name of the property tested for nub type matching by the generic block
+ * @abstract The name of the property tested for nub type matching by the generic block
  * storage driver.
  */
 #define	kIOBlockStorageDeviceTypeKey	"device-type"
 /*!
  * @defined kIOBlockStorageDeviceTypeGeneric
- * A character string used for nub matching.
+ * @abstract A character string used for nub matching.
  */
 #define	kIOBlockStorageDeviceTypeGeneric	"Generic"
 
 /*!
  * @class
- * IOBlockStorageDevice : public IOService
+ * IOBlockStorageDevice
  * @abstract
- * The IOBlockStorageDevice class is a generic block storage device abstraction.
+ * A generic block storage device abstraction.
  * @discussion
  * The IOBlockStorageDevice class exports the generic block storage protocol,
  * independent of the physical connection protocol (e.g. SCSI, ATA, USB),
@@ -114,6 +123,8 @@ public:
 
     /* Overrides from IORegistryEntry */
 
+    using IORegistryEntry::getProperty;
+
     /*!
      * @function init
      * @discussion
@@ -126,6 +137,10 @@ public:
      */    
     virtual bool	init(OSDictionary * properties);
 
+    virtual OSObject *	getProperty(const OSSymbol * key) const;
+
+    virtual IOReturn	setProperties(OSObject * properties);
+
     /* --- A subclass must implement the the following methods: --- */
 
     /*!
@@ -134,7 +149,7 @@ public:
      * Start an asynchronous read or write operation.
      * @param buffer
      * An IOMemoryDescriptor describing the data-transfer buffer. The data direction
-     * is contained in the IOMemoryDescriptor. Responsiblity for releasing the descriptor
+     * is contained in the IOMemoryDescriptor. Responsibility for releasing the descriptor
      * rests with the caller.
      * @param block
      * The starting block number of the data transfer.
@@ -145,7 +160,7 @@ public:
      */
 
     virtual IOReturn	doAsyncReadWrite(IOMemoryDescriptor *buffer,
-                                            UInt32 block,UInt32 nblks,
+                                            UInt32 block, UInt32 nblks,
                                             IOStorageCompletion completion)	= 0;
 
     /* DEPRECATED */ virtual IOReturn	doSyncReadWrite(IOMemoryDescriptor *buffer,
@@ -156,7 +171,7 @@ public:
      * @abstract
      * Eject the media.
      */
-    virtual IOReturn	doEjectMedia(void)					= 0;
+    virtual IOReturn	doEjectMedia(void)	= 0;
 
     /*!
      * @function doFormatMedia
@@ -168,7 +183,7 @@ public:
      * @param byteCapacity
      * The byte capacity to which the device is to be formatted, if possible.
      */
-    virtual IOReturn	doFormatMedia(UInt64 byteCapacity)			= 0;
+    virtual IOReturn	doFormatMedia(UInt64 byteCapacity)	= 0;
 
     /*!
      * @function doGetFormatCapacities
@@ -179,7 +194,8 @@ public:
      * @param capacities
      * Pointer for returning the list of capacities.
      * @param capacitiesMaxCount
-     * The number of capacity values returned in "capacities."
+     * The number of capacity values returned in "capacities," or if no buffer
+     * is given, the total number of capacity values available.
      */
     virtual UInt32	doGetFormatCapacities(UInt64 * capacities,
                                             UInt32   capacitiesMaxCount) const	= 0;
@@ -193,7 +209,7 @@ public:
      * @param doLock
      * True to lock the media, False to unlock.
      */
-    virtual IOReturn	doLockUnlockMedia(bool doLock)				= 0;
+    virtual IOReturn	doLockUnlockMedia(bool doLock)	= 0;
 
     /*!
      * @function doSynchronizeCache
@@ -202,7 +218,7 @@ public:
      * @discussion
      * This method should only be called if the media is writable.
      */
-    virtual IOReturn	doSynchronizeCache(void)				= 0;
+    virtual IOReturn	doSynchronizeCache(void)	= 0;
     
     /*!
      * @function getVendorString
@@ -211,7 +227,7 @@ public:
      * @result
      * A pointer to a static character string.
      */
-    virtual char *	getVendorString(void)					= 0;
+    virtual char *	getVendorString(void)	= 0;
     
     /*!
      * @function getProductString
@@ -220,7 +236,7 @@ public:
      * @result
      * A pointer to a static character string.
      */
-    virtual char *	getProductString(void)					= 0;
+    virtual char *	getProductString(void)	= 0;
     
     /*!
      * @function getRevisionString
@@ -229,7 +245,7 @@ public:
      * @result
      * A pointer to a static character string.
      */
-    virtual char *	getRevisionString(void)					= 0;
+    virtual char *	getRevisionString(void)	= 0;
     
     /*!
      * @function getAdditionalDeviceInfoString
@@ -238,7 +254,7 @@ public:
      * @result
      * A pointer to a static character string.
      */
-    virtual char *	getAdditionalDeviceInfoString(void)			= 0;
+    virtual char *	getAdditionalDeviceInfoString(void)	= 0;
 
     /*!
      * @function reportBlockSize
@@ -247,7 +263,7 @@ public:
      * @param blockSize
      * Pointer to returned block size value.
      */    
-    virtual IOReturn	reportBlockSize(UInt64 *blockSize)			= 0;
+    virtual IOReturn	reportBlockSize(UInt64 *blockSize)	= 0;
 
     /*!
      * @function reportEjectability
@@ -259,7 +275,7 @@ public:
      * Pointer to returned result. True indicates the media is ejectable, False indicates
      * the media cannot be ejected under software control.
      */
-    virtual IOReturn	reportEjectability(bool *isEjectable)			= 0;
+    virtual IOReturn	reportEjectability(bool *isEjectable)	= 0;
 
     /*!
      * @function reportLockability
@@ -271,7 +287,7 @@ public:
      * Pointer to returned result. True indicates the media can be locked in place; False
      * indicates the media cannot be locked by software.
      */
-    virtual IOReturn	reportLockability(bool *isLockable)			= 0;
+    virtual IOReturn	reportLockability(bool *isLockable)	= 0;
 
     /*!
      * @function reportMaxReadTransfer
@@ -286,7 +302,7 @@ public:
      * @param max
      * Pointer to returned result.
      */
-    virtual IOReturn	reportMaxReadTransfer (UInt64 blockSize,UInt64 *max)	= 0;
+    virtual IOReturn	reportMaxReadTransfer (UInt64 blockSize, UInt64 *max)	= 0;
 
     /*!
      * @function reportMaxWriteTransfer
@@ -310,7 +326,7 @@ public:
      * @param maxBlock
      * Pointer to returned result
      */    
-    virtual IOReturn	reportMaxValidBlock(UInt64 *maxBlock)			= 0;
+    virtual IOReturn	reportMaxValidBlock(UInt64 *maxBlock)	= 0;
 
     /*!
      * @function reportMediaState
@@ -350,7 +366,7 @@ public:
      * False indicates that the polling operation is cheap.
      */
     virtual IOReturn	reportPollRequirements(bool *pollRequired,
-                                            bool *pollIsExpensive)		= 0;
+                                            bool *pollIsExpensive)	= 0;
     
     /*!
      * @function reportRemovability
@@ -363,7 +379,7 @@ public:
      * Pointer to returned result. True indicates that the media is removable; False
      * indicates the media is not removable.
      */
-    virtual IOReturn	reportRemovability(bool *isRemovable)  			= 0;
+    virtual IOReturn	reportRemovability(bool *isRemovable)  	= 0;
     
     /*!
      * @function reportWriteProtection
@@ -374,7 +390,7 @@ public:
      * cannot be written); False indicates that the media is not write-protected (it
      * is permissible to write).
      */
-    virtual IOReturn	reportWriteProtection(bool *isWriteProtected)		= 0;
+    virtual IOReturn	reportWriteProtection(bool *isWriteProtected)	= 0;
 
     /*!
      * @function doAsyncReadWrite
@@ -382,7 +398,7 @@ public:
      * Start an asynchronous read or write operation.
      * @param buffer
      * An IOMemoryDescriptor describing the data-transfer buffer. The data direction
-     * is contained in the IOMemoryDescriptor. Responsiblity for releasing the descriptor
+     * is contained in the IOMemoryDescriptor. Responsibility for releasing the descriptor
      * rests with the caller.
      * @param block
      * The starting block number of the data transfer.
@@ -391,15 +407,41 @@ public:
      * @param completion
      * The completion routine to call once the data transfer is complete.
      */
-
     virtual IOReturn	doAsyncReadWrite(IOMemoryDescriptor *buffer,
-                                            UInt64 block,UInt64 nblks,
+                                            UInt64 block, UInt64 nblks,
                                             IOStorageCompletion completion);
 
     OSMetaClassDeclareReservedUsed(IOBlockStorageDevice, 0); /* 10.2.0 */
 
-    OSMetaClassDeclareReservedUnused(IOBlockStorageDevice,  1);
-    OSMetaClassDeclareReservedUnused(IOBlockStorageDevice,  2);
+    /*!
+     * @function getWriteCacheState
+     * @abstract
+     * Reports the current write cache state of the device.
+     * @discussion
+     * Reports the current write cache state of the device.  The write cache
+     * state is not guaranteed to persist across reboots and detaches.
+     * @param enabled
+     * Pointer to returned result. True indicates the write cache is enabled;
+     * False indicates the write cache is disabled.
+     */
+    virtual IOReturn	getWriteCacheState(bool *enabled);
+
+    OSMetaClassDeclareReservedUsed(IOBlockStorageDevice, 1); /* 10.3.0 */
+
+    /*!
+     * @function setWriteCacheState
+     * @abstract
+     * Sets the write cache state of the device.
+     * @discussion
+     * Sets the write cache state of the device.  The write cache state
+     * is not guaranteed to persist across reboots and detaches.
+     * @param enabled
+     * True to enable the write cache; False to disable the write cache.
+     */
+    virtual IOReturn	setWriteCacheState(bool enabled);
+
+    OSMetaClassDeclareReservedUsed(IOBlockStorageDevice, 2); /* 10.3.0 */
+
     OSMetaClassDeclareReservedUnused(IOBlockStorageDevice,  3);
     OSMetaClassDeclareReservedUnused(IOBlockStorageDevice,  4);
     OSMetaClassDeclareReservedUnused(IOBlockStorageDevice,  5);

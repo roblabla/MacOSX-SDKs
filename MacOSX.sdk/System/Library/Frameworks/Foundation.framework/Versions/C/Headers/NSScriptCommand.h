@@ -1,12 +1,12 @@
-/*	NSScriptCommand.h
-	Copyright 1997-2002, Apple, Inc. All rights reserved.
+/*
+	NSScriptCommand.h
+	Copyright (c) 1997-2003, Apple Computer, Inc.
+	All rights reserved.
 */
-
-// An NSScriptCommand is what an AppleScript AppleEvent turns into when it enters the Foundation Framework's scripting system.  A command can be executed.  Executing a command means invoking the selector on the receivers with the arguments.  The arguments may be NSScriptObjectSpecifiers, in which case they are evaluated and the resulting object[s] are used as the argument.
-// The NSScriptCommand is in charge of making sure of the sanity of the receivers, the selector, and the arguments.  NSScriptClassDescription is consulted for this sanity checking.
 
 #import <Foundation/NSObject.h>
 
+@class NSAppleEventDescriptor;
 @class NSDictionary;
 @class NSMutableDictionary;
 @class NSScriptObjectSpecifier;
@@ -33,15 +33,20 @@ enum {
     // All instance variables are private.
     @private
     NSScriptCommandDescription *_commandDescription;
-    id _directParameterOrReceiversSpecifier;
+    id _directParameter;
+    NSScriptObjectSpecifier *_receiversSpecifier;
     id _evaluatedReceivers;
     NSMutableDictionary *_arguments;
     NSMutableDictionary *_evaluatedArguments;
-    int _isWellFormed;
-    BOOL _hasEvaluatedReceivers;
-    BOOL _hasEvaluatedArguments;
-    int _errorNumber;
-    NSString *_errorString;
+    struct {
+        unsigned int hasEvaluatedReceivers:1;
+        unsigned int hasEvaluatedArguments:1;
+        unsigned int hasBeenValidated:1;
+        unsigned int isWellFormed:1;
+        unsigned int RESERVED:28;
+    } _flags;
+    void *_moreVars;
+    void *_reserved;
 
 }
 
@@ -70,16 +75,39 @@ enum {
 - (BOOL)isWellFormed;
     // This checks the command against the command's description.  It makes sure there is a defined command and that the number of arguments and the types of non-specifier arguments is well formed with respect to the command description.
 
+// Given that the command has no receivers that explicitly handle the command, do some appropriate action.  -[NSScriptCommand executeCommand] invokes this method, and it is not meant to be invoked from anywhere else.  You can override this method when creating a new kind of command class that is not handled by the receivers of the command.
+// If -suspend is invoked during the invocation of this method, its return value is ignored by Cocoa Scripting's built-in Apple event handling.
 - (id)performDefaultImplementation;
-    // Do not call this.  executeCommand calls this method if the receivers don't want to handle the command themselves.  Subclasses should override this.  It is only necessary to provide a subclass for a command if it is going to provide a default implementation by overriding this method.
 
+// Evaluate the receiver specifier and any argument specifiers there may be, and validate using -isWellFormed.  If the command is invalid set the error number and possibly the error string and return.  If the command is valid, and there are receivers, and if a handling method for this command is declared for the class of the receivers, invoke the handler method on each receiver.  If there are multiple receivers the results of invoking the receivers' handlers methods are placed in an array and the array is returned; if there is a single receiver the result of invoking its handler method for this command is returned.  If the command is valid but there are no receivers, or if there are but a handler method for this command is not declared for their class, invoke -performDefaultImplementation on self and return the result.  You should not have to override this method.
+// If -suspend is invoked during the invocation of this method, its return value is ignored by Cocoa Scripting's built-in Apple event handling.
 - (id)executeCommand;
-    // This actually evaluates all the object specifiers involved in the command and then validates that the receivers can actually handle the command and that the types of any arguments that were specifiers are valid.
-    // If the command is valid, it then is executed and the result, if any, is returned.  If the receivers want to handle it themselves, this calls them.  If not, this calls performDefaultImplementation on self.  You shouldn't have to override this method.
 
-- (void)setScriptErrorNumber:(int)num;
+// Get or set the error number that will be put in the reply to the Apple event from which this command was constructed, when execution of the command is completed, if the sender of the event requested a reply.  If -setScriptErrorNumber: is invoked during an invocation of -executeCommand, the invocation of -executeCommand may stop invoking command handling methods in the receiver and return early.
+- (void)setScriptErrorNumber:(int)errorNumber;
 - (int)scriptErrorNumber;
-- (void)setScriptErrorString:(NSString *)str;
+
+// Get or set the error string that will be put in the reply to the Apple event from which this command was constructed, when execution of the command is completed, if the sender of the event requested a reply.
+- (void)setScriptErrorString:(NSString *)errorString;
 - (NSString *)scriptErrorString;
+
+#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
+
+// If a command is being executed in the current thread by Cocoa Scripting's built-in Apple event handling (i.e., an instance of NSScriptCommand is handling an -executeCommand message at this instant, as the result of the dispatch of an Apple event), return the command.  Return nil otherwise.  -setScriptErrorNumber: and -setScriptErrorString: messages sent to the returned command object will affect the reply event sent to the sender of the event from which the command was constructed, if the sender has requested a reply.
++ (NSScriptCommand *)currentCommand;
+
+// If the receiver was constructed by Cocoa Scripting's built-in Apple event handling, the Apple event descriptor from which it was constructed.  The effects of mutating or retaining this descriptor are undefined, though it may be copied.
+- (NSAppleEventDescriptor *)appleEvent;
+
+// If the receiver is being executed in the current thread by Cocoa Scripting's built-in Apple event handling (i.e., would be returned by [NSScriptCommand currentCommand]), suspend the execution of the command.  Otherwise, do nothing.  A matching invocation of -resumeExecutionWithResult: must be made.
+- (void)suspendExecution;
+
+// If a successful, unmatched, invocation -suspendExecution has been made, resume the execution of the command.  Otherwise, do nothing.  The result is for the segment of command execution that was suspended:
+// - If -suspendExecution was invoked from within a command handler of one the command's receivers, the result is considered to be the return value of the handler.  Unless the command has received a -setScriptErrorNumber: message with a nonzero error number, execution of the command will continue and the command handlers of other receivers will be invoked.
+// - If -suspendExecution was invoked from within an override of -performDefaultImplementation the result is treated as if it were the return value of the invocation of -performDefaultImplementation.
+// This method may be invoked in any thread, not just the one in which the corresponding invocation of -suspendExecution occurred.
+- (void)resumeExecutionWithResult:(id)result;
+
+#endif
 
 @end

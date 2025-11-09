@@ -31,11 +31,13 @@ CG_EXTERN CGPathRef CGPathCreateCopy(CGPathRef path);
 
 CG_EXTERN CGMutablePathRef CGPathCreateMutableCopy(CGPathRef path);
 
-/* Equivalent to `CFRetain(path)'. */
+/* Equivalent to `CFRetain(path)', except it doesn't crash (as CFRetain
+ * does) if `path' is NULL. */
 
 CG_EXTERN CGPathRef CGPathRetain(CGPathRef path);
 
-/* Equivalent to `CFRelease(path)'. */
+/* Equivalent to `CFRelease(path)', except it doesn't crash (as CFRelease
+ * does) if `path' is NULL. */
 
 CG_EXTERN void CGPathRelease(CGPathRef path);
 

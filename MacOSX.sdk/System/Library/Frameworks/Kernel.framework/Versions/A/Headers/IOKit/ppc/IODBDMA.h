@@ -112,7 +112,7 @@ enum {
 	kdbdmaStoreQuad		= 4,
 	kdbdmaLoadQuad		= 5,
 	kdbdmaNop		= 6,
-	kdbdmaStop		= 7,
+	kdbdmaStop		= 7
 };
 
 

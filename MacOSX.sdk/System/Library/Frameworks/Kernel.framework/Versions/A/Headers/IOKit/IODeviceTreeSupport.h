@@ -56,7 +56,7 @@ bool IODTCompareNubName( const IORegistryEntry * regEntry,
 
 enum {
     kIODTRecursive	= 0x00000001,
-    kIODTExclusive	= 0x00000002,
+    kIODTExclusive	= 0x00000002
 };
 
 OSCollectionIterator * IODTFindMatchingEntries( IORegistryEntry * from,

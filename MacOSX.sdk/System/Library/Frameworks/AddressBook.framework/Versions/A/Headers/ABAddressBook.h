@@ -2,7 +2,7 @@
 //  ABAddressBook.h
 //  AddressBook Framework
 //
-//  Copyright (c) 2002 Apple Computer. All rights reserved.
+//  Copyright (c) 2002-2003 Apple Computer. All rights reserved.
 //
 
 #import <AddressBook/ABTypedefs.h>
@@ -15,9 +15,9 @@
 @class ABConverter;
 
 // ================================================================
-//	OpenURL support
+//      OpenURL support
 // ================================================================
-// An application can open the AddressBook app and select (or edit) a specific
+// An application can open the AddressBook app and select (and edit) a specific
 // person by using the -[NSWorkspace openURL:] API.
 //
 // To launch (or bring to front) the Address Book app and select a given person
@@ -31,7 +31,7 @@
 // [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:urlString]];
 
 // ================================================================
-//	ABAddressBook
+//      ABAddressBook
 // ================================================================
 
 @interface ABAddressBook : NSObject
@@ -40,24 +40,25 @@
     id                   _personIndexer;
     NSMutableDictionary *_masterCache;
 
-    NSMutableArray      *_insertedRecords;
-    NSMutableArray      *_modifiedRecords;
-    NSMutableArray      *_deletedRecords;
+    NSMutableSet        *_insertedRecords;
+    NSMutableSet        *_modifiedRecords;
+    NSMutableSet        *_deletedRecords;
     NSMutableDictionary *_tableSchemas;
     NSMutableDictionary *_propertyTypes;
-    void		*_converterPort;
+    void                *_converterPort;
     NSTimer             *_inactivityTimer;
+    NSString            *_meUniqueId;
 
-    unsigned int         _insertedPeople;
-    unsigned int         _deletedPeople;
+    unsigned int         _reserved1;
 
     struct __ABBookflags {
-        unsigned int     haveFileLock:1;
         unsigned int     hasUnsavedChanges:1;
         unsigned int     readOnly:1;
         unsigned int     importMe:1;
         unsigned int     needConversion:1;
-        unsigned int     _reserved:27;
+        unsigned int     cleanedUp:1;
+        unsigned int     importTips:1;
+        unsigned int     _reserved:26;
     } _flags;
 }
 
@@ -108,4 +109,24 @@
     // Returns an array of all the groups in the AddressBook database
     // Returns an empty array in case the DB doesn't contain any groups
 
+#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (NSString *)recordClassFromUniqueId:(NSString *)uniqueId;
+    // Given a record uniqueId returns the record class name
+
+- (NSAttributedString *)formattedAddressFromDictionary:(NSDictionary *)address;
+    // Returns an attributed string containing the formatted address.
+    // The string's attributes match address dictionary keys (kABAddressStreetKey for example).
+    // Each attribute value contains the localized description of the key. (For example, the value
+    // of a Canadian kABAddressZIPKey field would be Postal Code)
+
+- (NSString *)defaultCountryCode;
+    // Returns the default country code for records without specified codes.
+
+- (int)defaultNameOrdering;
+    // Returns the default name ordering defined by the user in the Address Book preferences.
+    // Possible values: kABFirstNameFirst or kABLastNameFirst
+
+#endif
 @end
+
+

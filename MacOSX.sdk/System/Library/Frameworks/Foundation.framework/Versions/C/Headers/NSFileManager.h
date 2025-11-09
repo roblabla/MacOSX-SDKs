@@ -1,12 +1,13 @@
 /*	NSFileManager.h
-	Copyright 1994-2002, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2003, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
-#import <Foundation/NSUtilities.h>
+#import <Foundation/NSEnumerator.h>
+#import <Foundation/NSDictionary.h>
 #import <CoreFoundation/CFBase.h>
 
-@class NSString, NSDate, NSDirectoryEnumerator, NSDictionary, NSArray, NSData;
+@class NSNumber, NSDate, NSDirectoryEnumerator, NSArray, NSData;
 
 // Version number where NSFileManager can copy/move/enumerate resources forks correctly
 #define NSFoundationVersionWithFileManagerResourceForkSupport 412

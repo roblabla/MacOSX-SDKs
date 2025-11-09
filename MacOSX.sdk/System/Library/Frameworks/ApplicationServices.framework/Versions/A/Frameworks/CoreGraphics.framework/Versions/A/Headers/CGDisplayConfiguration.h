@@ -10,6 +10,7 @@
 
 #include <IOKit/IOKitLib.h>
 #include <CoreGraphics/CGDirectDisplay.h>
+#include <AvailabilityMacros.h>
 
 CG_EXTERN_C_BEGIN
 /*
@@ -124,6 +125,63 @@ CGError CGCompleteDisplayConfiguration( CGDisplayConfigRef configRef, CGConfigur
 void CGRestorePermanentDisplayConfiguration(void);
 
 /*
+ * Applications may want to register for notifications of display changes.
+ *
+ * Display changes are reported via a callback mechanism.
+ *
+ * Callbacks are invoked when the app is listening for events,
+ * on the event processing thread, or from within the display
+ * reconfiguration function when in the program that is driving the
+ * reconfiguration.
+ *
+ * Callbacks should avoid attempting to change display configurations,
+ * and should not raise exceptions or perform a non-local return such as
+ * calling longjmp().
+ *
+ * Before display reconfiguration, a callback fires to inform
+ * applications of a pending configuration change. The callback runs
+ * once for each on-line display.  The flags passed in are set to
+ * kCGDisplayBeginConfigurationFlag.  This callback does not
+ * carry other per-display information, as details of how a
+ * reconfiguration affects a particular device rely on device-specific
+ * behaviors which may not be exposed by a device driver.
+ *
+ * After display reconfiguration, at the time the callback function
+ * is invoked, all display state reported by CoreGraphics, QuickDraw,
+ * and the Carbon Display Manager API will be up to date.  This callback
+ * runs after the Carbon Display Manager notification callbacks.
+ * The callback runs once for each added, removed, and currently
+ * on-line display.  Note that in the case of removed displays, calls into
+ * the CoreGraphics API with the removed display ID will fail.
+ */
+
+enum {
+    kCGDisplayBeginConfigurationFlag = (1 << 0), /* Set in pre-reconfiguration callback */
+    kCGDisplayMovedFlag              = (1 << 1), /* post-reconfiguration callback flag */
+    kCGDisplaySetMainFlag            = (1 << 2), /* post-reconfiguration callback flag */
+    kCGDisplaySetModeFlag            = (1 << 3), /* post-reconfiguration callback flag */
+    kCGDisplayAddFlag                = (1 << 4), /* post-reconfiguration callback flag */
+    kCGDisplayRemoveFlag             = (1 << 5), /* post-reconfiguration callback flag */
+    kCGDisplayEnabledFlag            = (1 << 8), /* post-reconfiguration callback flag */
+    kCGDisplayDisabledFlag           = (1 << 9), /* post-reconfiguration callback flag */
+    kCGDisplayMirrorFlag             = (1 << 10),/* post-reconfiguration callback flag */
+    kCGDisplayUnMirrorFlag           = (1 << 11) /* post-reconfiguration callback flag */
+};
+typedef u_int32_t CGDisplayChangeSummaryFlags;
+
+typedef void(*CGDisplayReconfigurationCallBack)(CGDirectDisplayID display,
+                                                CGDisplayChangeSummaryFlags flags,
+                                                void *userInfo);
+
+/*
+ * Register and remove a display reconfiguration callback procedure
+ * The userInfo argument is passed back to the callback procedure each time
+ * it is invoked.
+ */
+CGError CGDisplayRegisterReconfigurationCallback(CGDisplayReconfigurationCallBack proc, void *userInfo) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+CGError CGDisplayRemoveReconfigurationCallback(CGDisplayReconfigurationCallBack proc, void *userInfo) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+/*
  * These APIs allow applications and higher level frameworks
  * such as DrawSprocket to determine interesting properties
  * of displays, such as if a display is built-in, if a display
@@ -150,7 +208,7 @@ boolean_t CGDisplayIsAsleep(CGDirectDisplayID display);
  * True if the display is valid, with a monitor connected
  * (support for hot plugging of monitors)
  */
- boolean_t CGDisplayIsOnline(CGDirectDisplayID display);
+boolean_t CGDisplayIsOnline(CGDirectDisplayID display);
 
 /* True if the display is the current main display */
 boolean_t CGDisplayIsMain(CGDirectDisplayID display);
@@ -192,6 +250,16 @@ uint32_t CGDisplaySerialNumber(CGDirectDisplayID display);
 /* Returns the IOKit service port for a display device */
 io_service_t CGDisplayIOServicePort(CGDirectDisplayID display);
 
+/*
+ * Returns the size of the specified display in millimeters.
+ *
+ * If 'display' is not a valid display ID, the size returned has a width and height of 0.
+ *
+ * If EDID data for the display device is not available, the size is estimated based on
+ * the device width and height in pixels from CGDisplayBounds(), with an assumed resolution
+ * of 2.835 pixels/mm, or 72 DPI, a reasonable guess for displays predating EDID support.
+ */
+CGSize CGDisplayScreenSize(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 CG_EXTERN_C_END
 

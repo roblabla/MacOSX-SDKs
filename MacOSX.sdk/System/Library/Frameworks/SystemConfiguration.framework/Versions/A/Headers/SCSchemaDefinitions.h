@@ -1,21 +1,22 @@
 /*
- * Copyright (c) 2000-2002 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2003 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
- * The contents of this file constitute Original Code as defined in and
- * are subject to the Apple Public Source License Version 1.1 (the
- * "License").  You may not use this file except in compliance with the
- * License.  Please obtain a copy of the License at
- * http://www.apple.com/publicsource and read it before using this file.
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this
+ * file.
  * 
- * This Original Code and all software distributed under the License are
- * distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
  * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT.  Please see the
- * License for the specific language governing rights and limitations
- * under the License.
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
+ * limitations under the License.
  * 
  * @APPLE_LICENSE_HEADER_END@
  */
@@ -29,228 +30,265 @@
  * Note: For Cocoa/Obj-C/Foundation programs accessing these preference
  *       keys you may want to consider the following:
  *
- *       #define SCSTR(s) (NSString *)CFSTR(s)
+ *       #define SC_SCHEMA_DECLARATION(x)		extern NSString * x
  *       #import <SystemConfiguration/SystemConfiguration.h>
  */
 
 #ifndef _SCSCHEMADEFINITIONS_H
 #define _SCSCHEMADEFINITIONS_H
 
-#ifndef  SCSTR
+#ifndef SC_SCHEMA_DECLARATION
+#ifndef SCSTR
 #include <CoreFoundation/CFString.h>
-#define  SCSTR(s) CFSTR(s)
+#define SC_SCHEMA_DECLARATION(x)	extern const CFStringRef x
+#else
+#import <Foundation/NSString.h>
+#define SC_SCHEMA_DECLARATION(x)	extern NSString * x
+#endif
 #endif
 
 /*
  * Reserved Keys
  */
-#define kSCResvLink                              SCSTR("__LINK__")                        /* CFString */
-#define kSCResvInactive                          SCSTR("__INACTIVE__")                   
+SC_SCHEMA_DECLARATION(kSCResvLink);                             /* CFString          "__LINK__"                     */
+SC_SCHEMA_DECLARATION(kSCResvInactive);                         /*                   "__INACTIVE__"                 */
 
 /*
  * Generic Keys
  */
-#define kSCPropInterfaceName                     SCSTR("InterfaceName")                   /* CFString */
-#define kSCPropMACAddress                        SCSTR("MACAddress")                      /* CFString */
-#define kSCPropUserDefinedName                   SCSTR("UserDefinedName")                 /* CFString */
-#define kSCPropVersion                           SCSTR("Version")                         /* CFString */
+SC_SCHEMA_DECLARATION(kSCPropInterfaceName);                    /* CFString          "InterfaceName"                */
+SC_SCHEMA_DECLARATION(kSCPropMACAddress);                       /* CFString          "MACAddress"                   */
+SC_SCHEMA_DECLARATION(kSCPropUserDefinedName);                  /* CFString          "UserDefinedName"              */
+SC_SCHEMA_DECLARATION(kSCPropVersion);                          /* CFString          "Version"                      */
 
 /*
  * Preference Keys
  */
-#define kSCPrefCurrentSet                        SCSTR("CurrentSet")                      /* CFString */
-#define kSCPrefNetworkServices                   SCSTR("NetworkServices")                 /* CFDictionary */
-#define kSCPrefSets                              SCSTR("Sets")                            /* CFDictionary */
-#define kSCPrefSystem                            SCSTR("System")                          /* CFDictionary */
+SC_SCHEMA_DECLARATION(kSCPrefCurrentSet);                       /* CFString          "CurrentSet"                   */
+SC_SCHEMA_DECLARATION(kSCPrefNetworkServices);                  /* CFDictionary      "NetworkServices"              */
+SC_SCHEMA_DECLARATION(kSCPrefSets);                             /* CFDictionary      "Sets"                         */
+SC_SCHEMA_DECLARATION(kSCPrefSystem);                           /* CFDictionary      "System"                       */
 
 /*
  * Component Keys
  */
-#define kSCCompNetwork                           SCSTR("Network")                        
-#define kSCCompService                           SCSTR("Service")                        
-#define kSCCompGlobal                            SCSTR("Global")                         
-#define kSCCompHostNames                         SCSTR("HostNames")                      
-#define kSCCompInterface                         SCSTR("Interface")                      
-#define kSCCompSystem                            SCSTR("System")                         
-#define kSCCompUsers                             SCSTR("Users")                          
+SC_SCHEMA_DECLARATION(kSCCompNetwork);                          /*                   "Network"                      */
+SC_SCHEMA_DECLARATION(kSCCompService);                          /*                   "Service"                      */
+SC_SCHEMA_DECLARATION(kSCCompGlobal);                           /*                   "Global"                       */
+SC_SCHEMA_DECLARATION(kSCCompHostNames);                        /*                   "HostNames"                    */
+SC_SCHEMA_DECLARATION(kSCCompInterface);                        /*                   "Interface"                    */
+SC_SCHEMA_DECLARATION(kSCCompSystem);                           /*                   "System"                       */
+SC_SCHEMA_DECLARATION(kSCCompUsers);                            /*                   "Users"                        */
 
 /*
  * Regex key which matches any component
  */
-#define kSCCompAnyRegex                          SCSTR("[^/]+")                          
+SC_SCHEMA_DECLARATION(kSCCompAnyRegex);                         /*                   "[^/]+"                        */
 
 /*
  * Network Entity Keys
  */
-#define kSCEntNetAirPort                         SCSTR("AirPort")                         /* CFDictionary */
-#define kSCEntNetAppleTalk                       SCSTR("AppleTalk")                       /* CFDictionary */
-#define kSCEntNetDHCP                            SCSTR("DHCP")                            /* CFDictionary */
-#define kSCEntNetDNS                             SCSTR("DNS")                             /* CFDictionary */
-#define kSCEntNetEthernet                        SCSTR("Ethernet")                        /* CFDictionary */
-#define kSCEntNetInterface                       SCSTR("Interface")                       /* CFDictionary */
-#define kSCEntNetIPv4                            SCSTR("IPv4")                            /* CFDictionary */
-#define kSCEntNetIPv6                            SCSTR("IPv6")                            /* CFDictionary */
-#define kSCEntNetLink                            SCSTR("Link")                            /* CFDictionary */
-#define kSCEntNetModem                           SCSTR("Modem")                           /* CFDictionary */
-#define kSCEntNetNetInfo                         SCSTR("NetInfo")                         /* CFDictionary */
-/* #define kSCEntNetNIS                          SCSTR("???") */                          /* RESERVED FOR FUTURE USE */
-#define kSCEntNetPPP                             SCSTR("PPP")                             /* CFDictionary */
-#define kSCEntNetPPPoE                           SCSTR("PPPoE")                           /* CFDictionary */
-#define kSCEntNetProxies                         SCSTR("Proxies")                         /* CFDictionary */
+SC_SCHEMA_DECLARATION(kSCEntNetAirPort);                        /* CFDictionary      "AirPort"                      */
+SC_SCHEMA_DECLARATION(kSCEntNetAppleTalk);                      /* CFDictionary      "AppleTalk"                    */
+SC_SCHEMA_DECLARATION(kSCEntNetDHCP);                           /* CFDictionary      "DHCP"                         */
+SC_SCHEMA_DECLARATION(kSCEntNetDNS);                            /* CFDictionary      "DNS"                          */
+SC_SCHEMA_DECLARATION(kSCEntNetEthernet);                       /* CFDictionary      "Ethernet"                     */
+SC_SCHEMA_DECLARATION(kSCEntNetFireWire);                       /* CFDictionary      "FireWire"                     */
+SC_SCHEMA_DECLARATION(kSCEntNetInterface);                      /* CFDictionary      "Interface"                    */
+SC_SCHEMA_DECLARATION(kSCEntNetIPv4);                           /* CFDictionary      "IPv4"                         */
+SC_SCHEMA_DECLARATION(kSCEntNetIPv6);                           /* CFDictionary      "IPv6"                         */
+SC_SCHEMA_DECLARATION(kSCEntNetL2TP);                           /* CFDictionary      "L2TP"                         */
+SC_SCHEMA_DECLARATION(kSCEntNetLink);                           /* CFDictionary      "Link"                         */
+SC_SCHEMA_DECLARATION(kSCEntNetModem);                          /* CFDictionary      "Modem"                        */
+SC_SCHEMA_DECLARATION(kSCEntNetNetInfo);                        /* CFDictionary      "NetInfo"                      */
+// SC_SCHEMA_DECLARATION(kSCEntNetNIS);                         /* RESERVED FOR FUTURE USE */
+SC_SCHEMA_DECLARATION(kSCEntNetPPP);                            /* CFDictionary      "PPP"                          */
+SC_SCHEMA_DECLARATION(kSCEntNetPPPoE);                          /* CFDictionary      "PPPoE"                        */
+SC_SCHEMA_DECLARATION(kSCEntNetPPPSerial);                      /* CFDictionary      "PPPSerial"                    */
+SC_SCHEMA_DECLARATION(kSCEntNetPPTP);                           /* CFDictionary      "PPTP"                         */
+SC_SCHEMA_DECLARATION(kSCEntNetProxies);                        /* CFDictionary      "Proxies"                      */
+SC_SCHEMA_DECLARATION(kSCEntNet6to4);                           /* CFDictionary      "6to4"                         */
 
 /*
  * kSCCompNetwork Properties
  */
-#define kSCPropNetOverridePrimary                SCSTR("OverridePrimary")                 /* CFNumber (0 or 1) */
-#define kSCPropNetServiceOrder                   SCSTR("ServiceOrder")                    /* CFArray[CFString] */
-#define kSCPropNetPPPOverridePrimary             SCSTR("PPPOverridePrimary")              /* CFNumber (0 or 1) */
+SC_SCHEMA_DECLARATION(kSCPropNetOverridePrimary);               /* CFNumber (0 or 1) "OverridePrimary"              */
+SC_SCHEMA_DECLARATION(kSCPropNetServiceOrder);                  /* CFArray[CFString] "ServiceOrder"                 */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPOverridePrimary);            /* CFNumber (0 or 1) "PPPOverridePrimary"           */
 
 /*
  * kSCCompNetworkInterface Properties
  */
-#define kSCPropNetInterfaces                     SCSTR("Interfaces")                      /* CFArray[CFString] */
+SC_SCHEMA_DECLARATION(kSCPropNetInterfaces);                    /* CFArray[CFString] "Interfaces"                   */
 
 /*
  * kSCCompNetworkHostNames Properties
  */
-#define kSCPropNetLocalHostName                  SCSTR("LocalHostName")                   /* CFString */
+SC_SCHEMA_DECLARATION(kSCPropNetLocalHostName);                 /* CFString          "LocalHostName"                */
 
 /*
  * kSCEntNetAirPort (Hardware) Entity Keys
  */
-#define kSCPropNetAirPortAllowNetCreation        SCSTR("AllowNetCreation")                /* CFNumber (0 or 1) */
-#define kSCPropNetAirPortAuthPassword            SCSTR("AuthPassword")                    /* CFData */
-#define kSCPropNetAirPortAuthPasswordEncryption  SCSTR("AuthPasswordEncryption")          /* CFString */
-#define kSCPropNetAirPortJoinMode                SCSTR("JoinMode")                        /* CFString */
-#define kSCPropNetAirPortPowerEnabled            SCSTR("PowerEnabled")                    /* CFNumber (0 or 1) */
-#define kSCPropNetAirPortPreferredNetwork        SCSTR("PreferredNetwork")                /* CFString */
-#define kSCPropNetAirPortSavePasswords           SCSTR("SavePasswords")                   /* CFNumber (0 or 1) */
+SC_SCHEMA_DECLARATION(kSCPropNetAirPortAllowNetCreation);       /* CFNumber (0 or 1) "AllowNetCreation"             */
+SC_SCHEMA_DECLARATION(kSCPropNetAirPortAuthPassword);           /* CFData            "AuthPassword"                 */
+SC_SCHEMA_DECLARATION(kSCPropNetAirPortAuthPasswordEncryption); /* CFString          "AuthPasswordEncryption"       */
+SC_SCHEMA_DECLARATION(kSCPropNetAirPortJoinMode);               /* CFString          "JoinMode"                     */
+SC_SCHEMA_DECLARATION(kSCPropNetAirPortPowerEnabled);           /* CFNumber (0 or 1) "PowerEnabled"                 */
+SC_SCHEMA_DECLARATION(kSCPropNetAirPortPreferredNetwork);       /* CFString          "PreferredNetwork"             */
+SC_SCHEMA_DECLARATION(kSCPropNetAirPortSavePasswords);          /* CFNumber (0 or 1) "SavePasswords"                */
 
 /* kSCPropNetAirPortJoinMode values */
-#define kSCValNetAirPortJoinModePreferred        SCSTR("Preferred")                      
-#define kSCValNetAirPortJoinModeRecent           SCSTR("Recent")                         
-#define kSCValNetAirPortJoinModeStrongest        SCSTR("Strongest")                      
+SC_SCHEMA_DECLARATION(kSCValNetAirPortJoinModeAutomatic);       /*                   "Automatic"                    */
+SC_SCHEMA_DECLARATION(kSCValNetAirPortJoinModePreferred);       /*                   "Preferred"                    */
+SC_SCHEMA_DECLARATION(kSCValNetAirPortJoinModeRecent);          /*                   "Recent"                       */
+SC_SCHEMA_DECLARATION(kSCValNetAirPortJoinModeStrongest);       /*                   "Strongest"                    */
+
+/* kSCPropNetAirPortPasswordEncryption values */
+SC_SCHEMA_DECLARATION(kSCValNetAirPortAuthPasswordEncryptionKeychain); /*                   "Keychain"                     */
 
 /*
  * kSCEntNetAppleTalk Entity Keys
  */
-#define kSCPropNetAppleTalkComputerName          SCSTR("ComputerName")                    /* CFString */
-#define kSCPropNetAppleTalkComputerNameEncoding  SCSTR("ComputerNameEncoding")            /* CFNumber */
-#define kSCPropNetAppleTalkConfigMethod          SCSTR("ConfigMethod")                    /* CFString */
-#define kSCPropNetAppleTalkDefaultZone           SCSTR("DefaultZone")                     /* CFString */
-#define kSCPropNetAppleTalkNetworkID             SCSTR("NetworkID")                       /* CFNumber */
-#define kSCPropNetAppleTalkNetworkRange          SCSTR("NetworkRange")                    /* CFArray[CFNumber] */
-#define kSCPropNetAppleTalkNodeID                SCSTR("NodeID")                          /* CFNumber */
-#define kSCPropNetAppleTalkSeedNetworkRange      SCSTR("SeedNetworkRange")                /* CFArray[CFNumber] */
-#define kSCPropNetAppleTalkSeedZones             SCSTR("SeedZones")                       /* CFArray[CFString] */
+SC_SCHEMA_DECLARATION(kSCPropNetAppleTalkComputerName);         /* CFString          "ComputerName"                 */
+SC_SCHEMA_DECLARATION(kSCPropNetAppleTalkComputerNameEncoding); /* CFNumber          "ComputerNameEncoding"         */
+SC_SCHEMA_DECLARATION(kSCPropNetAppleTalkConfigMethod);         /* CFString          "ConfigMethod"                 */
+SC_SCHEMA_DECLARATION(kSCPropNetAppleTalkDefaultZone);          /* CFString          "DefaultZone"                  */
+SC_SCHEMA_DECLARATION(kSCPropNetAppleTalkNetworkID);            /* CFNumber          "NetworkID"                    */
+SC_SCHEMA_DECLARATION(kSCPropNetAppleTalkNetworkRange);         /* CFArray[CFNumber] "NetworkRange"                 */
+SC_SCHEMA_DECLARATION(kSCPropNetAppleTalkNodeID);               /* CFNumber          "NodeID"                       */
+SC_SCHEMA_DECLARATION(kSCPropNetAppleTalkSeedNetworkRange);     /* CFArray[CFNumber] "SeedNetworkRange"             */
+SC_SCHEMA_DECLARATION(kSCPropNetAppleTalkSeedZones);            /* CFArray[CFString] "SeedZones"                    */
 
 /* kSCPropNetAppleTalkConfigMethod values */
-#define kSCValNetAppleTalkConfigMethodNode       SCSTR("Node")                           
-#define kSCValNetAppleTalkConfigMethodRouter     SCSTR("Router")                         
-#define kSCValNetAppleTalkConfigMethodSeedRouter SCSTR("SeedRouter")                     
+SC_SCHEMA_DECLARATION(kSCValNetAppleTalkConfigMethodNode);      /*                   "Node"                         */
+SC_SCHEMA_DECLARATION(kSCValNetAppleTalkConfigMethodRouter);    /*                   "Router"                       */
+SC_SCHEMA_DECLARATION(kSCValNetAppleTalkConfigMethodSeedRouter); /*                   "SeedRouter"                   */
 
 /*
  * kSCEntNetDNS Entity Keys
  */
-#define kSCPropNetDNSDomainName                  SCSTR("DomainName")                      /* CFString */
-#define kSCPropNetDNSSearchDomains               SCSTR("SearchDomains")                   /* CFArray[CFString] */
-#define kSCPropNetDNSServerAddresses             SCSTR("ServerAddresses")                 /* CFArray[CFString] */
-#define kSCPropNetDNSSortList                    SCSTR("SortList")                        /* CFArray[CFString] */
+SC_SCHEMA_DECLARATION(kSCPropNetDNSDomainName);                 /* CFString          "DomainName"                   */
+SC_SCHEMA_DECLARATION(kSCPropNetDNSSearchDomains);              /* CFArray[CFString] "SearchDomains"                */
+SC_SCHEMA_DECLARATION(kSCPropNetDNSServerAddresses);            /* CFArray[CFString] "ServerAddresses"              */
+SC_SCHEMA_DECLARATION(kSCPropNetDNSSortList);                   /* CFArray[CFString] "SortList"                     */
 
 /*
  * kSCEntNetEthernet (Hardware) Entity Keys
  */
-#define kSCPropNetEthernetMediaSubType           SCSTR("MediaSubType")                    /* CFString */
-#define kSCPropNetEthernetMediaOptions           SCSTR("MediaOptions")                    /* CFArray[CFString] */
-#define kSCPropNetEthernetMTU                    SCSTR("MTU")                             /* CFNumber */
+SC_SCHEMA_DECLARATION(kSCPropNetEthernetMediaSubType);          /* CFString          "MediaSubType"                 */
+SC_SCHEMA_DECLARATION(kSCPropNetEthernetMediaOptions);          /* CFArray[CFString] "MediaOptions"                 */
+SC_SCHEMA_DECLARATION(kSCPropNetEthernetMTU);                   /* CFNumber          "MTU"                          */
+
+/*
+ * kSCEntNetFireWire (Hardware) Entity Keys
+ */
+/* RESERVED FOR FUTURE USE */
 
 /*
  * kSCEntNetInterface Entity Keys
  */
-#define kSCPropNetInterfaceDeviceName            SCSTR("DeviceName")                      /* CFString */
-#define kSCPropNetInterfaceHardware              SCSTR("Hardware")                        /* CFString */
-#define kSCPropNetInterfaceType                  SCSTR("Type")                            /* CFString */
-#define kSCPropNetInterfaceSubType               SCSTR("SubType")                         /* CFString */
-#define kSCPropNetInterfaceSupportsModemOnHold   SCSTR("SupportsModemOnHold")             /* CFNumber (0 or 1) */
+SC_SCHEMA_DECLARATION(kSCPropNetInterfaceDeviceName);           /* CFString          "DeviceName"                   */
+SC_SCHEMA_DECLARATION(kSCPropNetInterfaceHardware);             /* CFString          "Hardware"                     */
+SC_SCHEMA_DECLARATION(kSCPropNetInterfaceType);                 /* CFString          "Type"                         */
+SC_SCHEMA_DECLARATION(kSCPropNetInterfaceSubType);              /* CFString          "SubType"                      */
+SC_SCHEMA_DECLARATION(kSCPropNetInterfaceSupportsModemOnHold);  /* CFNumber (0 or 1) "SupportsModemOnHold"          */
 
 /* kSCPropNetInterfaceType values */
-#define kSCValNetInterfaceTypeEthernet           SCSTR("Ethernet")                       
-#define kSCValNetInterfaceTypePPP                SCSTR("PPP")                            
+SC_SCHEMA_DECLARATION(kSCValNetInterfaceTypeEthernet);          /*                   "Ethernet"                     */
+SC_SCHEMA_DECLARATION(kSCValNetInterfaceTypeFireWire);          /*                   "FireWire"                     */
+SC_SCHEMA_DECLARATION(kSCValNetInterfaceTypePPP);               /*                   "PPP"                          */
+SC_SCHEMA_DECLARATION(kSCValNetInterfaceType6to4);              /*                   "6to4"                         */
 
 /* kSCPropNetServiceSubType values (for PPP) */
-#define kSCValNetInterfaceSubTypePPPoE           SCSTR("PPPoE")                          
-#define kSCValNetInterfaceSubTypePPPSerial       SCSTR("PPPSerial")                      
-#define kSCValNetInterfaceSubTypePPTP            SCSTR("PPTP")                           
+SC_SCHEMA_DECLARATION(kSCValNetInterfaceSubTypePPPoE);          /*                   "PPPoE"                        */
+SC_SCHEMA_DECLARATION(kSCValNetInterfaceSubTypePPPSerial);      /*                   "PPPSerial"                    */
+SC_SCHEMA_DECLARATION(kSCValNetInterfaceSubTypePPTP);           /*                   "PPTP"                         */
+SC_SCHEMA_DECLARATION(kSCValNetInterfaceSubTypeL2TP);           /*                   "L2TP"                         */
 
 /*
  * kSCEntNetIPv4 Entity Keys
  */
-#define kSCPropNetIPv4Addresses                  SCSTR("Addresses")                       /* CFArray[CFString] */
-#define kSCPropNetIPv4ConfigMethod               SCSTR("ConfigMethod")                    /* CFString */
-#define kSCPropNetIPv4DHCPClientID               SCSTR("DHCPClientID")                    /* CFString */
-#define kSCPropNetIPv4Router                     SCSTR("Router")                          /* CFString */
-#define kSCPropNetIPv4SubnetMasks                SCSTR("SubnetMasks")                     /* CFArray[CFString] */
-#define kSCPropNetIPv4DestAddresses              SCSTR("DestAddresses")                   /* CFArray[CFString] */
-#define kSCPropNetIPv4BroadcastAddresses         SCSTR("BroadcastAddresses")              /* CFArray[CFString] */
+SC_SCHEMA_DECLARATION(kSCPropNetIPv4Addresses);                 /* CFArray[CFString] "Addresses"                    */
+SC_SCHEMA_DECLARATION(kSCPropNetIPv4ConfigMethod);              /* CFString          "ConfigMethod"                 */
+SC_SCHEMA_DECLARATION(kSCPropNetIPv4DHCPClientID);              /* CFString          "DHCPClientID"                 */
+SC_SCHEMA_DECLARATION(kSCPropNetIPv4Router);                    /* CFString          "Router"                       */
+SC_SCHEMA_DECLARATION(kSCPropNetIPv4SubnetMasks);               /* CFArray[CFString] "SubnetMasks"                  */
+SC_SCHEMA_DECLARATION(kSCPropNetIPv4DestAddresses);             /* CFArray[CFString] "DestAddresses"                */
+SC_SCHEMA_DECLARATION(kSCPropNetIPv4BroadcastAddresses);        /* CFArray[CFString] "BroadcastAddresses"           */
 
 /* kSCPropNetIPv4ConfigMethod values */
-#define kSCValNetIPv4ConfigMethodBOOTP           SCSTR("BOOTP")                          
-#define kSCValNetIPv4ConfigMethodDHCP            SCSTR("DHCP")                           
-#define kSCValNetIPv4ConfigMethodINFORM          SCSTR("INFORM")                         
-#define kSCValNetIPv4ConfigMethodLinkLocal       SCSTR("LinkLocal")                      
-#define kSCValNetIPv4ConfigMethodManual          SCSTR("Manual")                         
-#define kSCValNetIPv4ConfigMethodPPP             SCSTR("PPP")                            
+SC_SCHEMA_DECLARATION(kSCValNetIPv4ConfigMethodBOOTP);          /*                   "BOOTP"                        */
+SC_SCHEMA_DECLARATION(kSCValNetIPv4ConfigMethodDHCP);           /*                   "DHCP"                         */
+SC_SCHEMA_DECLARATION(kSCValNetIPv4ConfigMethodINFORM);         /*                   "INFORM"                       */
+SC_SCHEMA_DECLARATION(kSCValNetIPv4ConfigMethodLinkLocal);      /*                   "LinkLocal"                    */
+SC_SCHEMA_DECLARATION(kSCValNetIPv4ConfigMethodManual);         /*                   "Manual"                       */
+SC_SCHEMA_DECLARATION(kSCValNetIPv4ConfigMethodPPP);            /*                   "PPP"                          */
 
 /*
  * kSCEntNetIPv6 Entity Keys
  */
-#define kSCPropNetIPv6Addresses                  SCSTR("Addresses")                       /* CFArray[CFString] */
-#define kSCPropNetIPv6ConfigMethod               SCSTR("ConfigMethod")                    /* CFString */
+SC_SCHEMA_DECLARATION(kSCPropNetIPv6Addresses);                 /* CFArray[CFString] "Addresses"                    */
+SC_SCHEMA_DECLARATION(kSCPropNetIPv6ConfigMethod);              /* CFString          "ConfigMethod"                 */
+SC_SCHEMA_DECLARATION(kSCPropNetIPv6DestAddresses);             /* CFArray[CFString] "DestAddresses"                */
+SC_SCHEMA_DECLARATION(kSCPropNetIPv6Flags);                     /* CFNumber          "Flags"                        */
+SC_SCHEMA_DECLARATION(kSCPropNetIPv6PrefixLength);              /* CFArray[CFNumber] "PrefixLength"                 */
+SC_SCHEMA_DECLARATION(kSCPropNetIPv6Router);                    /* CFString          "Router"                       */
+
+/* kSCPropNetIPv6ConfigMethod values */
+SC_SCHEMA_DECLARATION(kSCValNetIPv6ConfigMethodAutomatic);      /*                   "Automatic"                    */
+SC_SCHEMA_DECLARATION(kSCValNetIPv6ConfigMethodManual);         /*                   "Manual"                       */
+SC_SCHEMA_DECLARATION(kSCValNetIPv6ConfigMethodRouterAdvertisement); /*                   "RouterAdvertisement"          */
+SC_SCHEMA_DECLARATION(kSCValNetIPv6ConfigMethod6to4);           /*                   "6to4"                         */
+
+/*
+ * kSCEntNet6to4 Entity Keys
+ */
+SC_SCHEMA_DECLARATION(kSCPropNet6to4Relay);                     /* CFString          "Relay"                        */
 
 /*
  * kSCEntNetLink Entity Keys
  */
-#define kSCPropNetLinkActive                     SCSTR("Active")                          /* CFBoolean */
-#define kSCPropNetLinkDetaching                  SCSTR("Detaching")                       /* CFBoolean */
+SC_SCHEMA_DECLARATION(kSCPropNetLinkActive);                    /* CFBoolean         "Active"                       */
+SC_SCHEMA_DECLARATION(kSCPropNetLinkDetaching);                 /* CFBoolean         "Detaching"                    */
 
 /*
  * kSCEntNetModem (Hardware) Entity Keys
  */
-#define kSCPropNetModemConnectionScript          SCSTR("ConnectionScript")                /* CFString */
-#define kSCPropNetModemConnectSpeed              SCSTR("ConnectSpeed")                    /* CFNumber */
-#define kSCPropNetModemDataCompression           SCSTR("DataCompression")                 /* CFNumber (0 or 1) */
-#define kSCPropNetModemDialMode                  SCSTR("DialMode")                        /* CFString */
-#define kSCPropNetModemErrorCorrection           SCSTR("ErrorCorrection")                 /* CFNumber (0 or 1) */
-#define kSCPropNetModemHoldCallWaitingAudibleAlert SCSTR("HoldCallWaitingAudibleAlert")     /* CFNumber (0 or 1) */
-#define kSCPropNetModemHoldDisconnectOnAnswer    SCSTR("HoldDisconnectOnAnswer")          /* CFNumber (0 or 1) */
-#define kSCPropNetModemHoldEnabled               SCSTR("HoldEnabled")                     /* CFNumber (0 or 1) */
-#define kSCPropNetModemHoldReminder              SCSTR("HoldReminder")                    /* CFNumber (0 or 1) */
-#define kSCPropNetModemHoldReminderTime          SCSTR("HoldReminderTime")                /* CFNumber */
-#define kSCPropNetModemNote                      SCSTR("Note")                            /* CFString */
-#define kSCPropNetModemPulseDial                 SCSTR("PulseDial")                       /* CFNumber (0 or 1) */
-#define kSCPropNetModemSpeaker                   SCSTR("Speaker")                         /* CFNumber (0 or 1) */
-#define kSCPropNetModemSpeed                     SCSTR("Speed")                           /* CFNumber */
+SC_SCHEMA_DECLARATION(kSCPropNetModemConnectionScript);         /* CFString          "ConnectionScript"             */
+SC_SCHEMA_DECLARATION(kSCPropNetModemConnectSpeed);             /* CFNumber          "ConnectSpeed"                 */
+SC_SCHEMA_DECLARATION(kSCPropNetModemDataCompression);          /* CFNumber (0 or 1) "DataCompression"              */
+SC_SCHEMA_DECLARATION(kSCPropNetModemDialMode);                 /* CFString          "DialMode"                     */
+SC_SCHEMA_DECLARATION(kSCPropNetModemErrorCorrection);          /* CFNumber (0 or 1) "ErrorCorrection"              */
+SC_SCHEMA_DECLARATION(kSCPropNetModemHoldCallWaitingAudibleAlert); /* CFNumber (0 or 1) "HoldCallWaitingAudibleAlert"  */
+SC_SCHEMA_DECLARATION(kSCPropNetModemHoldDisconnectOnAnswer);   /* CFNumber (0 or 1) "HoldDisconnectOnAnswer"       */
+SC_SCHEMA_DECLARATION(kSCPropNetModemHoldEnabled);              /* CFNumber (0 or 1) "HoldEnabled"                  */
+SC_SCHEMA_DECLARATION(kSCPropNetModemHoldReminder);             /* CFNumber (0 or 1) "HoldReminder"                 */
+SC_SCHEMA_DECLARATION(kSCPropNetModemHoldReminderTime);         /* CFNumber          "HoldReminderTime"             */
+SC_SCHEMA_DECLARATION(kSCPropNetModemNote);                     /* CFString          "Note"                         */
+SC_SCHEMA_DECLARATION(kSCPropNetModemPulseDial);                /* CFNumber (0 or 1) "PulseDial"                    */
+SC_SCHEMA_DECLARATION(kSCPropNetModemSpeaker);                  /* CFNumber (0 or 1) "Speaker"                      */
+SC_SCHEMA_DECLARATION(kSCPropNetModemSpeed);                    /* CFNumber          "Speed"                        */
 
 /* kSCPropNetModemDialMode values */
-#define kSCValNetModemDialModeIgnoreDialTone     SCSTR("IgnoreDialTone")                 
-#define kSCValNetModemDialModeManual             SCSTR("Manual")                         
-#define kSCValNetModemDialModeWaitForDialTone    SCSTR("WaitForDialTone")                
+SC_SCHEMA_DECLARATION(kSCValNetModemDialModeIgnoreDialTone);    /*                   "IgnoreDialTone"               */
+SC_SCHEMA_DECLARATION(kSCValNetModemDialModeManual);            /*                   "Manual"                       */
+SC_SCHEMA_DECLARATION(kSCValNetModemDialModeWaitForDialTone);   /*                   "WaitForDialTone"              */
 
 /*
  * kSCEntNetNetInfo Entity Keys
  */
-#define kSCPropNetNetInfoBindingMethods          SCSTR("BindingMethods")                  /* CFString */
-#define kSCPropNetNetInfoServerAddresses         SCSTR("ServerAddresses")                 /* CFArray[CFString] */
-#define kSCPropNetNetInfoServerTags              SCSTR("ServerTags")                      /* CFArray[CFString] */
-#define kSCPropNetNetInfoBroadcastServerTag      SCSTR("BroadcastServerTag")              /* CFString */
+SC_SCHEMA_DECLARATION(kSCPropNetNetInfoBindingMethods);         /* CFString          "BindingMethods"               */
+SC_SCHEMA_DECLARATION(kSCPropNetNetInfoServerAddresses);        /* CFArray[CFString] "ServerAddresses"              */
+SC_SCHEMA_DECLARATION(kSCPropNetNetInfoServerTags);             /* CFArray[CFString] "ServerTags"                   */
+SC_SCHEMA_DECLARATION(kSCPropNetNetInfoBroadcastServerTag);     /* CFString          "BroadcastServerTag"           */
 
 /* kSCPropNetNetInfoBindingMethods values */
-#define kSCValNetNetInfoBindingMethodsBroadcast  SCSTR("Broadcast")                      
-#define kSCValNetNetInfoBindingMethodsDHCP       SCSTR("DHCP")                           
-#define kSCValNetNetInfoBindingMethodsManual     SCSTR("Manual")                         
+SC_SCHEMA_DECLARATION(kSCValNetNetInfoBindingMethodsBroadcast); /*                   "Broadcast"                    */
+SC_SCHEMA_DECLARATION(kSCValNetNetInfoBindingMethodsDHCP);      /*                   "DHCP"                         */
+SC_SCHEMA_DECLARATION(kSCValNetNetInfoBindingMethodsManual);    /*                   "Manual"                       */
 
 /* kSCPropNetNetInfoBroadcastServerTag default value */
-#define kSCValNetNetInfoDefaultServerTag         SCSTR("network")                        
+SC_SCHEMA_DECLARATION(kSCValNetNetInfoDefaultServerTag);        /*                   "network"                      */
 
 /*
  * kSCEntNetNIS Entity Keys
@@ -260,60 +298,75 @@
 /*
  * kSCEntNetPPP Entity Keys
  */
-#define kSCPropNetPPPConnectTime                 SCSTR("ConnectTime")                     /* CFNumber */
-#define kSCPropNetPPPDeviceLastCause             SCSTR("DeviceLastCause")                 /* CFNumber */
-#define kSCPropNetPPPDialOnDemand                SCSTR("DialOnDemand")                    /* CFNumber (0 or 1) */
-#define kSCPropNetPPPDisconnectOnIdle            SCSTR("DisconnectOnIdle")                /* CFNumber (0 or 1) */
-#define kSCPropNetPPPDisconnectOnIdleTimer       SCSTR("DisconnectOnIdleTimer")           /* CFNumber */
-#define kSCPropNetPPPDisconnectOnLogout          SCSTR("DisconnectOnLogout")              /* CFNumber (0 or 1) */
-#define kSCPropNetPPPDisconnectOnSleep           SCSTR("DisconnectOnSleep")               /* CFNumber (0 or 1) */
-#define kSCPropNetPPPIdleReminderTimer           SCSTR("IdleReminderTimer")               /* CFNumber */
-#define kSCPropNetPPPIdleReminder                SCSTR("IdleReminder")                    /* CFNumber (0 or 1) */
-#define kSCPropNetPPPLastCause                   SCSTR("LastCause")                       /* CFNumber */
-#define kSCPropNetPPPLogfile                     SCSTR("Logfile")                         /* CFString */
-#define kSCPropNetPPPPlugins                     SCSTR("Plugins")                         /* CFArray[CFString] */
-#define kSCPropNetPPPSessionTimer                SCSTR("SessionTimer")                    /* CFNumber */
-#define kSCPropNetPPPStatus                      SCSTR("Status")                          /* CFString */
-#define kSCPropNetPPPUseSessionTimer             SCSTR("UseSessionTimer")                 /* CFNumber (0 or 1) */
-#define kSCPropNetPPPVerboseLogging              SCSTR("VerboseLogging")                  /* CFNumber (0 or 1) */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPACSPEnabled);                /* CFNumber (0 or 1) "ACSPEnabled"                  */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPConnectTime);                /* CFNumber          "ConnectTime"                  */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPDeviceLastCause);            /* CFNumber          "DeviceLastCause"              */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPDialOnDemand);               /* CFNumber (0 or 1) "DialOnDemand"                 */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPDisconnectOnIdle);           /* CFNumber (0 or 1) "DisconnectOnIdle"             */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPDisconnectOnIdleTimer);      /* CFNumber          "DisconnectOnIdleTimer"        */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPDisconnectOnLogout);         /* CFNumber (0 or 1) "DisconnectOnLogout"           */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPDisconnectOnSleep);          /* CFNumber (0 or 1) "DisconnectOnSleep"            */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPDisconnectTime);             /* CFNumber          "DisconnectTime"               */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPIdleReminderTimer);          /* CFNumber          "IdleReminderTimer"            */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPIdleReminder);               /* CFNumber (0 or 1) "IdleReminder"                 */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPLastCause);                  /* CFNumber          "LastCause"                    */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPLogfile);                    /* CFString          "Logfile"                      */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPPlugins);                    /* CFArray[CFString] "Plugins"                      */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPRetryConnectTime);           /* CFNumber          "RetryConnectTime"             */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPSessionTimer);               /* CFNumber          "SessionTimer"                 */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPStatus);                     /* CFNumber          "Status"                       */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPUseSessionTimer);            /* CFNumber (0 or 1) "UseSessionTimer"              */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPVerboseLogging);             /* CFNumber (0 or 1) "VerboseLogging"               */
 
 /* Auth: */
-#define kSCPropNetPPPAuthName                    SCSTR("AuthName")                        /* CFString */
-#define kSCPropNetPPPAuthPassword                SCSTR("AuthPassword")                    /* CFString */
-#define kSCPropNetPPPAuthPasswordEncryption      SCSTR("AuthPasswordEncryption")          /* CFString */
-#define kSCPropNetPPPAuthProtocol                SCSTR("AuthProtocol")                    /* CFArray[CFString] */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPAuthEAPPlugins);             /* CFArray[CFString] "AuthEAPPlugins"               */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPAuthName);                   /* CFString          "AuthName"                     */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPAuthPassword);               /* CFString          "AuthPassword"                 */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPAuthPasswordEncryption);     /* CFString          "AuthPasswordEncryption"       */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPAuthPrompt);                 /* CFString          "AuthPrompt"                   */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPAuthProtocol);               /* CFArray[CFString] "AuthProtocol"                 */
+
+/* kSCPropNetPPPAuthPasswordEncryption values */
+SC_SCHEMA_DECLARATION(kSCValNetPPPAuthPasswordEncryptionKeychain); /*                   "Keychain"                     */
+
+/* kSCPropNetPPPAuthPrompt values */
+SC_SCHEMA_DECLARATION(kSCValNetPPPAuthPromptBefore);            /* CFString          "Before"                       */
+SC_SCHEMA_DECLARATION(kSCValNetPPPAuthPromptAfter);             /* CFString          "After"                        */
 
 /* kSCPropNetPPPAuthProtocol values */
-#define kSCValNetPPPAuthProtocolCHAP             SCSTR("CHAP")                            /* CFString */
-#define kSCValNetPPPAuthProtocolPAP              SCSTR("PAP")                             /* CFString */
+SC_SCHEMA_DECLARATION(kSCValNetPPPAuthProtocolCHAP);            /* CFString          "CHAP"                         */
+SC_SCHEMA_DECLARATION(kSCValNetPPPAuthProtocolEAP);             /* CFString          "EAP"                          */
+SC_SCHEMA_DECLARATION(kSCValNetPPPAuthProtocolMSCHAP1);         /* CFString          "MSCHAP1"                      */
+SC_SCHEMA_DECLARATION(kSCValNetPPPAuthProtocolMSCHAP2);         /* CFString          "MSCHAP2"                      */
+SC_SCHEMA_DECLARATION(kSCValNetPPPAuthProtocolPAP);             /* CFString          "PAP"                          */
 
 /* Comm: */
-#define kSCPropNetPPPCommAlternateRemoteAddress  SCSTR("CommAlternateRemoteAddress")      /* CFString */
-#define kSCPropNetPPPCommConnectDelay            SCSTR("CommConnectDelay")                /* CFNumber */
-#define kSCPropNetPPPCommDisplayTerminalWindow   SCSTR("CommDisplayTerminalWindow")       /* CFNumber (0 or 1) */
-#define kSCPropNetPPPCommRedialCount             SCSTR("CommRedialCount")                 /* CFNumber */
-#define kSCPropNetPPPCommRedialEnabled           SCSTR("CommRedialEnabled")               /* CFNumber (0 or 1) */
-#define kSCPropNetPPPCommRedialInterval          SCSTR("CommRedialInterval")              /* CFNumber */
-#define kSCPropNetPPPCommRemoteAddress           SCSTR("CommRemoteAddress")               /* CFString */
-#define kSCPropNetPPPCommTerminalScript          SCSTR("CommTerminalScript")              /* CFString */
-#define kSCPropNetPPPCommUseTerminalScript       SCSTR("CommUseTerminalScript")           /* CFNumber (0 or 1) */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPCommAlternateRemoteAddress); /* CFString          "CommAlternateRemoteAddress"   */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPCommConnectDelay);           /* CFNumber          "CommConnectDelay"             */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPCommDisplayTerminalWindow);  /* CFNumber (0 or 1) "CommDisplayTerminalWindow"    */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPCommRedialCount);            /* CFNumber          "CommRedialCount"              */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPCommRedialEnabled);          /* CFNumber (0 or 1) "CommRedialEnabled"            */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPCommRedialInterval);         /* CFNumber          "CommRedialInterval"           */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPCommRemoteAddress);          /* CFString          "CommRemoteAddress"            */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPCommTerminalScript);         /* CFString          "CommTerminalScript"           */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPCommUseTerminalScript);      /* CFNumber (0 or 1) "CommUseTerminalScript"        */
 
 /* CCP: */
-#define kSCPropNetPPPCCPEnabled                  SCSTR("CCPEnabled")                      /* CFNumber (0 or 1) */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPCCPEnabled);                 /* CFNumber (0 or 1) "CCPEnabled"                   */
 
 /* IPCP: */
-#define kSCPropNetPPPIPCPCompressionVJ           SCSTR("IPCPCompressionVJ")               /* CFNumber (0 or 1) */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPIPCPCompressionVJ);          /* CFNumber (0 or 1) "IPCPCompressionVJ"            */
 
 /* LCP: */
-#define kSCPropNetPPPLCPEchoEnabled              SCSTR("LCPEchoEnabled")                  /* CFNumber (0 or 1) */
-#define kSCPropNetPPPLCPEchoFailure              SCSTR("LCPEchoFailure")                  /* CFNumber */
-#define kSCPropNetPPPLCPEchoInterval             SCSTR("LCPEchoInterval")                 /* CFNumber */
-#define kSCPropNetPPPLCPCompressionACField       SCSTR("LCPCompressionACField")           /* CFNumber (0 or 1) */
-#define kSCPropNetPPPLCPCompressionPField        SCSTR("LCPCompressionPField")            /* CFNumber (0 or 1) */
-#define kSCPropNetPPPLCPMRU                      SCSTR("LCPMRU")                          /* CFNumber */
-#define kSCPropNetPPPLCPMTU                      SCSTR("LCPMTU")                          /* CFNumber */
-#define kSCPropNetPPPLCPReceiveACCM              SCSTR("LCPReceiveACCM")                  /* CFNumber */
-#define kSCPropNetPPPLCPTransmitACCM             SCSTR("LCPTransmitACCM")                 /* CFNumber */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPLCPEchoEnabled);             /* CFNumber (0 or 1) "LCPEchoEnabled"               */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPLCPEchoFailure);             /* CFNumber          "LCPEchoFailure"               */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPLCPEchoInterval);            /* CFNumber          "LCPEchoInterval"              */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPLCPCompressionACField);      /* CFNumber (0 or 1) "LCPCompressionACField"        */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPLCPCompressionPField);       /* CFNumber (0 or 1) "LCPCompressionPField"         */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPLCPMRU);                     /* CFNumber          "LCPMRU"                       */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPLCPMTU);                     /* CFNumber          "LCPMTU"                       */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPLCPReceiveACCM);             /* CFNumber          "LCPReceiveACCM"               */
+SC_SCHEMA_DECLARATION(kSCPropNetPPPLCPTransmitACCM);            /* CFNumber          "LCPTransmitACCM"              */
 
 /*
  * kSCEntNetPPPoE Entity Keys
@@ -326,65 +379,95 @@
 /* RESERVED FOR FUTURE USE */
 
 /*
+ * kSCEntNetPPTP Entity Keys
+ */
+/* RESERVED FOR FUTURE USE */
+
+/*
+ * kSCEntNetL2TP Entity Keys
+ */
+SC_SCHEMA_DECLARATION(kSCPropNetL2TPIPSecSharedSecret);         /* CFString          "IPSecSharedSecret"            */
+SC_SCHEMA_DECLARATION(kSCPropNetL2TPIPSecSharedSecretEncryption); /* CFString          "IPSecSharedSecretEncryption"  */
+SC_SCHEMA_DECLARATION(kSCPropNetL2TPTransport);                 /* CFString          "Transport"                    */
+
+/* kSCPropNetL2TPIPSecSharedSecretEncryption values */
+SC_SCHEMA_DECLARATION(kSCValNetL2TPIPSecSharedSecretEncryptionKeychain); /*                   "Keychain"                     */
+
+/* kSCPropNetL2TPTransport values */
+SC_SCHEMA_DECLARATION(kSCValNetL2TPTransportIP);                /*                   "IP"                           */
+SC_SCHEMA_DECLARATION(kSCValNetL2TPTransportIPSec);             /*                   "IPSec"                        */
+
+/*
  * kSCEntNetProxies Entity Keys
  */
-#define kSCPropNetProxiesExceptionsList          SCSTR("ExceptionsList")                  /* CFArray[CFString] */
-#define kSCPropNetProxiesFTPEnable               SCSTR("FTPEnable")                       /* CFNumber (0 or 1) */
-#define kSCPropNetProxiesFTPPassive              SCSTR("FTPPassive")                      /* CFNumber (0 or 1) */
-#define kSCPropNetProxiesFTPPort                 SCSTR("FTPPort")                         /* CFNumber */
-#define kSCPropNetProxiesFTPProxy                SCSTR("FTPProxy")                        /* CFString */
-#define kSCPropNetProxiesGopherEnable            SCSTR("GopherEnable")                    /* CFNumber (0 or 1) */
-#define kSCPropNetProxiesGopherPort              SCSTR("GopherPort")                      /* CFNumber */
-#define kSCPropNetProxiesGopherProxy             SCSTR("GopherProxy")                     /* CFString */
-#define kSCPropNetProxiesHTTPEnable              SCSTR("HTTPEnable")                      /* CFNumber (0 or 1) */
-#define kSCPropNetProxiesHTTPPort                SCSTR("HTTPPort")                        /* CFNumber */
-#define kSCPropNetProxiesHTTPProxy               SCSTR("HTTPProxy")                       /* CFString */
-#define kSCPropNetProxiesHTTPSEnable             SCSTR("HTTPSEnable")                     /* CFNumber (0 or 1) */
-#define kSCPropNetProxiesHTTPSPort               SCSTR("HTTPSPort")                       /* CFNumber */
-#define kSCPropNetProxiesHTTPSProxy              SCSTR("HTTPSProxy")                      /* CFString */
-#define kSCPropNetProxiesRTSPEnable              SCSTR("RTSPEnable")                      /* CFNumber (0 or 1) */
-#define kSCPropNetProxiesRTSPPort                SCSTR("RTSPPort")                        /* CFNumber */
-#define kSCPropNetProxiesRTSPProxy               SCSTR("RTSPProxy")                       /* CFString */
-#define kSCPropNetProxiesSOCKSEnable             SCSTR("SOCKSEnable")                     /* CFNumber (0 or 1) */
-#define kSCPropNetProxiesSOCKSPort               SCSTR("SOCKSPort")                       /* CFNumber */
-#define kSCPropNetProxiesSOCKSProxy              SCSTR("SOCKSProxy")                      /* CFString */
+SC_SCHEMA_DECLARATION(kSCPropNetProxiesExceptionsList);         /* CFArray[CFString] "ExceptionsList"               */
+SC_SCHEMA_DECLARATION(kSCPropNetProxiesFTPEnable);              /* CFNumber (0 or 1) "FTPEnable"                    */
+SC_SCHEMA_DECLARATION(kSCPropNetProxiesFTPPassive);             /* CFNumber (0 or 1) "FTPPassive"                   */
+SC_SCHEMA_DECLARATION(kSCPropNetProxiesFTPPort);                /* CFNumber          "FTPPort"                      */
+SC_SCHEMA_DECLARATION(kSCPropNetProxiesFTPProxy);               /* CFString          "FTPProxy"                     */
+SC_SCHEMA_DECLARATION(kSCPropNetProxiesGopherEnable);           /* CFNumber (0 or 1) "GopherEnable"                 */
+SC_SCHEMA_DECLARATION(kSCPropNetProxiesGopherPort);             /* CFNumber          "GopherPort"                   */
+SC_SCHEMA_DECLARATION(kSCPropNetProxiesGopherProxy);            /* CFString          "GopherProxy"                  */
+SC_SCHEMA_DECLARATION(kSCPropNetProxiesHTTPEnable);             /* CFNumber (0 or 1) "HTTPEnable"                   */
+SC_SCHEMA_DECLARATION(kSCPropNetProxiesHTTPPort);               /* CFNumber          "HTTPPort"                     */
+SC_SCHEMA_DECLARATION(kSCPropNetProxiesHTTPProxy);              /* CFString          "HTTPProxy"                    */
+SC_SCHEMA_DECLARATION(kSCPropNetProxiesHTTPSEnable);            /* CFNumber (0 or 1) "HTTPSEnable"                  */
+SC_SCHEMA_DECLARATION(kSCPropNetProxiesHTTPSPort);              /* CFNumber          "HTTPSPort"                    */
+SC_SCHEMA_DECLARATION(kSCPropNetProxiesHTTPSProxy);             /* CFString          "HTTPSProxy"                   */
+SC_SCHEMA_DECLARATION(kSCPropNetProxiesRTSPEnable);             /* CFNumber (0 or 1) "RTSPEnable"                   */
+SC_SCHEMA_DECLARATION(kSCPropNetProxiesRTSPPort);               /* CFNumber          "RTSPPort"                     */
+SC_SCHEMA_DECLARATION(kSCPropNetProxiesRTSPProxy);              /* CFString          "RTSPProxy"                    */
+SC_SCHEMA_DECLARATION(kSCPropNetProxiesSOCKSEnable);            /* CFNumber (0 or 1) "SOCKSEnable"                  */
+SC_SCHEMA_DECLARATION(kSCPropNetProxiesSOCKSPort);              /* CFNumber          "SOCKSPort"                    */
+SC_SCHEMA_DECLARATION(kSCPropNetProxiesSOCKSProxy);             /* CFString          "SOCKSProxy"                   */
 
 /*
  kSCCompUsers Entity Keys
  */
-#define kSCEntUsersConsoleUser                   SCSTR("ConsoleUser")                    
-
-/*
- kSCPropUsersConsoleUser Properties
- */
-#define kSCPropUsersConsoleUserName              SCSTR("Name")                            /* CFString */
-#define kSCPropUsersConsoleUserUID               SCSTR("UID")                             /* CFString */
-#define kSCPropUsersConsoleUserGID               SCSTR("GID")                             /* CFString */
+SC_SCHEMA_DECLARATION(kSCEntUsersConsoleUser);                  /*                   "ConsoleUser"                  */
 
 /*
  * kSCCompSystem Properties
  */
-#define kSCPropSystemComputerName                SCSTR("ComputerName")                    /* CFString */
-#define kSCPropSystemComputerNameEncoding        SCSTR("ComputerNameEncoding")            /* CFNumber */
+SC_SCHEMA_DECLARATION(kSCPropSystemComputerName);               /* CFString          "ComputerName"                 */
+SC_SCHEMA_DECLARATION(kSCPropSystemComputerNameEncoding);       /* CFNumber          "ComputerNameEncoding"         */
 
 /*
  * Configuration Store Definitions
  */
 /* domain prefixes */
-#define kSCDynamicStoreDomainFile                SCSTR("File:")                          
-#define kSCDynamicStoreDomainPlugin              SCSTR("Plugin:")                        
-#define kSCDynamicStoreDomainSetup               SCSTR("Setup:")                         
-#define kSCDynamicStoreDomainState               SCSTR("State:")                         
-#define kSCDynamicStoreDomainPrefs               SCSTR("Prefs:")                         
+SC_SCHEMA_DECLARATION(kSCDynamicStoreDomainFile);               /*                   "File:"                        */
+SC_SCHEMA_DECLARATION(kSCDynamicStoreDomainPlugin);             /*                   "Plugin:"                      */
+SC_SCHEMA_DECLARATION(kSCDynamicStoreDomainSetup);              /*                   "Setup:"                       */
+SC_SCHEMA_DECLARATION(kSCDynamicStoreDomainState);              /*                   "State:"                       */
+SC_SCHEMA_DECLARATION(kSCDynamicStoreDomainPrefs);              /*                   "Prefs:"                       */
 
 /* kSCDynamicStoreDomainSetup Properties */
-#define kSCDynamicStorePropSetupCurrentSet       SCSTR("CurrentSet")                      /* CFString */
-#define kSCDynamicStorePropSetupLastUpdated      SCSTR("LastUpdated")                    
+SC_SCHEMA_DECLARATION(kSCDynamicStorePropSetupCurrentSet);      /* CFString          "CurrentSet"                   */
+SC_SCHEMA_DECLARATION(kSCDynamicStorePropSetupLastUpdated);     /*                   "LastUpdated"                  */
 
 /* Properties */
-#define kSCDynamicStorePropNetInterfaces         SCSTR("Interfaces")                      /* CFArray[CFString] */
-#define kSCDynamicStorePropNetPrimaryInterface   SCSTR("PrimaryInterface")                /* CFString */
-#define kSCDynamicStorePropNetPrimaryService     SCSTR("PrimaryService")                  /* CFString */
-#define kSCDynamicStorePropNetServiceIDs         SCSTR("ServiceIDs")                      /* CFArray[CFString] */
+SC_SCHEMA_DECLARATION(kSCDynamicStorePropNetInterfaces);        /* CFArray[CFString] "Interfaces"                   */
+SC_SCHEMA_DECLARATION(kSCDynamicStorePropNetPrimaryInterface);  /* CFString          "PrimaryInterface"             */
+SC_SCHEMA_DECLARATION(kSCDynamicStorePropNetPrimaryService);    /* CFString          "PrimaryService"               */
+SC_SCHEMA_DECLARATION(kSCDynamicStorePropNetServiceIDs);        /* CFArray[CFString] "ServiceIDs"                   */
+
+/*
+ * Obsolete schema definitions which will be removed "soon".
+ */
+#ifndef  SCSTR
+#include <CoreFoundation/CFString.h>
+#define  SCSTR(s) CFSTR(s)
+#endif
+#define kSCPropUsersConsoleUserName              SCSTR("Name")                            /* CFString */
+#define kSCPropUsersConsoleUserUID               SCSTR("UID")                             /* CFNumber */
+#define kSCPropUsersConsoleUserGID               SCSTR("GID")                             /* CFNumber */
+
+#include <AvailabilityMacros.h>
+#if MAC_OS_X_VERSION_10_3 > MAC_OS_X_VERSION_MIN_REQUIRED
+  #if MAC_OS_X_VERSION_10_1 <= MAC_OS_X_VERSION_MIN_REQUIRED
+    #include <SystemConfiguration/SCSchemaDefinitions_10_1.h>
+  #endif
+#endif
 
 #endif /* _SCSCHEMADEFINITIONS_H */

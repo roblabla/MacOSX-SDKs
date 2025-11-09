@@ -3,9 +3,9 @@
  
      Contains:   Set up for compiler independent conditionals
  
-     Version:    CarbonCore-472~1
+     Version:    CarbonCore-545~1
  
-     Copyright:  © 1993-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1993-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -34,8 +34,6 @@
         This conditional did not exist prior to version 2.1
 ****************************************************************************************************/
 #define UNIVERSAL_INTERFACES_VERSION 0x0400
-
-
 /****************************************************************************************************
 
     All TARGET_* condtionals are set up by TargetConditionals.h
@@ -62,8 +60,8 @@
 
 
     FOUR_CHAR_CODE
-    This conditional does the proper byte swapping to assue that a four character code (e.g. 'TEXT')
-    is compiled down to the correct value on all compilers.
+    This conditional is deprecated.  It was used to work around a bug in one obscure compiler that did not pack multiple characters in single quotes rationally.
+    It was never intended for endian swapping.
 
         FOUR_CHAR_CODE('abcd')  - Convert a four-char-code to the correct 32-bit value
 
@@ -102,7 +100,13 @@
   #define FOUR_CHAR_CODE(x)           (x)
 
   #define TYPE_EXTENDED               0
-  #define TYPE_LONGDOUBLE_IS_DOUBLE   1
+
+  #ifdef __ppc__
+    #define TYPE_LONGDOUBLE_IS_DOUBLE 1
+  #else
+    #define TYPE_LONGDOUBLE_IS_DOUBLE 0
+  #endif
+
   #define TYPE_LONGLONG               1
   #ifdef __cplusplus
      #define TYPE_BOOL                1
@@ -213,7 +217,6 @@
    #define FUNCTION_WIN32CC            0
   #endif
 #endif
-
 
 
 

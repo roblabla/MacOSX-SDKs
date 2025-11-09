@@ -605,7 +605,10 @@ typedef struct __GLIFunctionDispatchRec
 	void (*window_pos3sv) (GLIContext ctx, const GLshort *v);
 	void (*active_stencil_face_EXT) (GLIContext ctx, GLenum face);
 	void (*stencil_op_separate_ATI) (GLIContext ctx, GLenum face, GLenum sfail, GLenum dpfail, GLenum dppass);
-    void (*stencil_func_separate_ATI) (GLIContext ctx, GLenum frontfunc, GLenum backfunc, GLint ref, GLuint mask);
+	void (*stencil_func_separate_ATI) (GLIContext ctx, GLenum frontfunc, GLenum backfunc, GLint ref, GLuint mask);
+	void (*flush_render_APPLE) (GLIContext ctx);
+	void (*finish_render_APPLE) (GLIContext ctx);
+	void (*swap_APPLE)(GLIContext ctx);
 } GLIFunctionDispatch;
 
 #ifdef __cplusplus
@@ -613,3 +616,4 @@ typedef struct __GLIFunctionDispatchRec
 #endif
 
 #endif /* _GLIDISPATCH_H */
+

@@ -30,6 +30,12 @@
  * Revision History
  *
  * $Log: IOATATypes.h,v $
+ * Revision 1.10  2003/03/14 23:57:11  barras
+ *
+ * Bug #: 3187923
+ * Submitted by:
+ * Reviewed by:
+ *
  * Revision 1.9  2002/11/09 03:46:39  barras
  *
  * Bug #: 3083512, 3090979
@@ -113,6 +119,10 @@
 #define kATAInternalSocketString "internal"
 #define kATAMediaBaySocketString "media-bay"
 #define kATAPCCardSocketString "pccard"
+#define kATAInternalSATAString "serial-ata"
+#define kATASATABayString "sata-bay"
+#define kATAInternalSATA2 "serial-ata-2"
+#define kATASATA2BayString "sata-2-bay"
 #define kATAUnkownSocketString "unknown"
 
 
@@ -135,7 +145,11 @@ enum ataSocketType{
 	kUnknownSocket	= 0,
 	kInternalATASocket,
 	kMediaBaySocket	,
-	kPCCardSocket
+	kPCCardSocket,
+	kInternalSATA,
+	kSATABay,
+	kInternalSATA2,
+	kSATA2Bay
 
 } ;
 

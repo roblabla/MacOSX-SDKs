@@ -1,7 +1,7 @@
 /*
         NSResponder.h
         Application Kit
-        Copyright (c) 1994-2001, Apple Computer, Inc.
+        Copyright (c) 1994-2003, Apple Computer, Inc.
         All rights reserved.
 */
 
@@ -101,6 +101,15 @@
 - (void)moveUpAndModifySelection:(id)sender;
 - (void)moveDownAndModifySelection:(id)sender;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void)moveWordRight:(id)sender;
+- (void)moveWordLeft:(id)sender;
+- (void)moveRightAndModifySelection:(id)sender;
+- (void)moveLeftAndModifySelection:(id)sender;
+- (void)moveWordRightAndModifySelection:(id)sender;
+- (void)moveWordLeftAndModifySelection:(id)sender;
+#endif
+
 - (void)scrollPageUp:(id)sender;
 - (void)scrollPageDown:(id)sender;
 - (void)scrollLineUp:(id)sender;
@@ -139,6 +148,9 @@
 
 - (void)deleteForward:(id)sender;
 - (void)deleteBackward:(id)sender;
+#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (void)deleteBackwardByDecomposingPreviousCharacter:(id)sender;
+#endif /* MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED */
 - (void)deleteWordForward:(id)sender;
 - (void)deleteWordBackward:(id)sender;
 - (void)deleteToBeginningOfLine:(id)sender;
@@ -159,6 +171,11 @@
 - (void)selectToMark:(id)sender;
 - (void)swapWithMark:(id)sender;
 
+    /* Cancellation */
+
+#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (void)cancelOperation:(id)sender;
+#endif /* MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED */
 @end
 
 @interface NSResponder(NSUndoSupport)

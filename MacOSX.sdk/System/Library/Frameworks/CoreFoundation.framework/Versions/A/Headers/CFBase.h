@@ -1,5 +1,5 @@
 /*	CFBase.h
-	Copyright 1998-2002, Apple, Inc. All rights reserved.
+	Copyright (c) 1998-2003, Apple, Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFBASE__)
@@ -91,11 +91,6 @@ extern "C" {
     #endif
 #endif
 
-#if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
-#if !defined(NS_NEW_API)
-#define NS_NEW_API 1
-#endif
-#endif
 
 CF_EXPORT double kCFCoreFoundationVersionNumber;
 
@@ -103,6 +98,12 @@ CF_EXPORT double kCFCoreFoundationVersionNumber;
 #define kCFCoreFoundationVersionNumber10_0_3 196.5
 #if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 #define kCFCoreFoundationVersionNumber10_1 226.0
+/* Note these do not follow the usual numbering policy from the base release */
+#define kCFCoreFoundationVersionNumber10_1_2 227.2
+#define kCFCoreFoundationVersionNumber10_1_4 227.3
+#endif
+#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
+#define kCFCoreFoundationVersionNumber10_2 263.0
 #endif
 
 typedef UInt32 CFTypeID;

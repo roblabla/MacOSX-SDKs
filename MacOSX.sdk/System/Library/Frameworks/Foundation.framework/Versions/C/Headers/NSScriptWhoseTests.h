@@ -1,5 +1,5 @@
 /*	NSScriptWhoseTests.h
-	Copyright 1997-2001, Apple, Inc. All rights reserved.
+	Copyright (c) 1997-2003, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -17,7 +17,7 @@ typedef enum {
     NSGreaterThanComparison,
     NSBeginsWithComparison,
     NSEndsWithComparison,
-    NSContainsComparison,
+    NSContainsComparison
 } NSTestComparisonOperation;
 
 
@@ -84,7 +84,7 @@ typedef enum {
 
 //  Often the correct way to compare two objects for scripting is different from the correct way to compare objects programmatically.  This category defines a set of methods that can be implemented to perform the comparison appropriate for scripting that is independant of other existing methods for doing comparisons, like those defined in EOQualifier.h
 
-// If the object1 implements the appropriate one of these methods for the comparison operation, these methods will be used.  If object1 does not implement the appropriate one of these, and object2 the inverted version, and the comparison operator is one of the first five, then the comparison operator is inverted (ie scriptingIsGreaterThan: -> scriptingIsLessThan:).
+// If the object1 implements the appropriate one of these methods for the comparison operation, these methods will be used.  If object1 does not implement the appropriate one of these, and object2 the inverted version, and the comparison operator is one of the first five, then the comparison operator is inverted (ie scriptingIsGreaterThan: -> scriptingIsLessThanOrEqualTo:).
 // If neither object1 or object2 implement the appropriate one of these selectors, we will fall back on trying to use standard EOQualifier-type methods like isEqualto:, isGreaterThan:, etc... for the first five.
 
 - (BOOL)scriptingIsEqualTo:(id)object;

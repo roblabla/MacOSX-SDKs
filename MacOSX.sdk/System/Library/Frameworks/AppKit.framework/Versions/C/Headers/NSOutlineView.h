@@ -1,7 +1,7 @@
 /*
         NSOutlineView.h
         Application Kit
-        Copyright (c) 1997-2001, Apple Computer, Inc.
+        Copyright (c) 1997-2003, Apple Computer, Inc.
         All rights reserved.
 */
 
@@ -32,11 +32,11 @@ typedef struct __OvFlags {
     unsigned int	removeChildInProgress:1;
     unsigned int 	selectionAdjustmentDisabled:1;
     unsigned int	autoExpandFlashState:1;
-    unsigned int	collapseClearsExpandState:1;
+    unsigned int	compatCollapseForceClearsExpandState:1;
     unsigned int	_reserved:17;
 #else
     unsigned int	_reserved:17;
-    unsigned int	collapseClearsExpandState:1;
+    unsigned int	compatCollapseForceClearsExpandState:1;
     unsigned int	autoExpandFlashState:1;
     unsigned int 	selectionAdjustmentDisabled:1;
     unsigned int	removeChildInProgress:1;
@@ -141,6 +141,15 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
 - (id)outlineView:(NSOutlineView *)outlineView itemForPersistentObject:(id)object;
 - (id)outlineView:(NSOutlineView *)outlineView persistentObjectForItem:(id)item;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+
+// optional - sorting support
+- (void)outlineView:(NSOutlineView *)outlineView sortDescriptorsDidChange:(NSArray *)oldDescriptors;
+    // This is the indication that sorting needs to be done. Typically the data source will sort its data, reload, and adjust selections.
+
+#endif
+
+
 // optional - drag and drop support
 - (BOOL)outlineView:(NSOutlineView *)olv writeItems:(NSArray*)items toPasteboard:(NSPasteboard*)pboard;
     // This method is called after it has been determined that a drag should begin, but before the drag has been started.  To refuse the drag, return NO.  To start a drag, return YES and place the drag data onto the pasteboard (data, owner, etc...).  The drag image and other drag related information will be set up and provided by the outline view once this call returns with YES.  The items array is the list of items that will be participating in the drag.
@@ -164,6 +173,13 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldExpandItem:(id)item;
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldCollapseItem:(id)item;
 - (void)outlineView:(NSOutlineView *)outlineView willDisplayOutlineCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void)outlineView:(NSOutlineView *)outlineView mouseDownInHeaderOfTableColumn:(NSTableColumn *)tableColumn;
+- (void)outlineView:(NSOutlineView *)outlineView didClickTableColumn:(NSTableColumn *)tableColumn;
+- (void)outlineView:(NSOutlineView *)outlineView didDragTableColumn:(NSTableColumn *)tableColumn;
+#endif
+
 @end
 
 

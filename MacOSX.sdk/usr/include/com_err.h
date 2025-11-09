@@ -36,7 +36,7 @@
  * $
  */
 
-/* $Header: /cvs/kfm/KerberosFramework/KerberosErrors/Headers/Kerberos/com_err.h,v 1.6 2002/04/03 21:20:09 lxs Exp $ */
+/* $Header: /cvs/kfm/KerberosFramework/KerberosErrors/Headers/Kerberos/com_err.h,v 1.9 2003/07/03 16:13:38 lxs Exp $ */
 
 /* 
  *
@@ -49,11 +49,12 @@
 #define __KERBEROSCOMERR__
 
 #if defined(macintosh) || (defined(__MACH__) && defined(__APPLE__))
-	#include <TargetConditionals.h>
-    #if TARGET_RT_MAC_CFM
-        #error "Use KfM 4.0 SDK headers for CFM compilation."
-    #endif
+#    include <TargetConditionals.h>
+#    if TARGET_RT_MAC_CFM
+#        error "Use KfM 4.0 SDK headers for CFM compilation."
+#    endif
 #endif
+
 #include <sys/types.h>
 #include <stdarg.h>
 
@@ -62,21 +63,20 @@ extern "C" {
 #endif
 
 #if TARGET_OS_MAC
-    #if defined(__MWERKS__)
-        #pragma import on
-        #pragma enumsalwaysint on
-    #endif
-    #pragma options align=mac68k
+#    if defined(__MWERKS__)
+#        pragma import on
+#    endif
+#    pragma options align=mac68k
 #endif
 
 typedef long errcode_t;
-typedef void (*com_err_handler_t) 
-        (const char *whoami, errcode_t code, const char *format, va_list args);
+typedef void (*com_err_handler_t)
+    (const char *whoami, errcode_t code, const char *format, va_list args);
 
 struct error_table {
-	const char * const * const messages;
+    const char * const * const messages;
     int32_t base;
-	int32_t count;
+    int32_t count;
 };
 
 /* ******************* */
@@ -86,7 +86,8 @@ struct error_table {
 void com_err    (const char *progname, errcode_t code, const char *format, ...);
 void com_err_va (const char *progname, errcode_t code, const char *format, va_list args);
 
-char const *error_message (errcode_t code);
+const char *error_message (errcode_t code);
+const char *error_manager (errcode_t code);
 
 com_err_handler_t set_com_err_hook(com_err_handler_t handler);
 com_err_handler_t reset_com_err_hook(void);
@@ -95,11 +96,10 @@ errcode_t add_error_table    (const struct error_table *et);
 errcode_t remove_error_table (const struct error_table *et);
 
 #if TARGET_OS_MAC
-    #if defined(__MWERKS__)
-        #pragma enumsalwaysint reset
-        #pragma import reset
-    #endif
-	#pragma options align=reset
+#    if defined(__MWERKS__)
+#        pragma import reset
+#    endif
+#    pragma options align=reset
 #endif
 
 #ifdef __cplusplus

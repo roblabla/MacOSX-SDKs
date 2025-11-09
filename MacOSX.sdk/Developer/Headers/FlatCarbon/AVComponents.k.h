@@ -1,1 +1,1 @@
-#warning AVComponents.k.h is not available on Mac OS X
+#include <CoreServices/AVComponents.k.h>

@@ -29,16 +29,6 @@
 #include <CoreFoundation/CoreFoundation.h>
 #endif
 
-#if TARGET_API_MAC_OS8
-    #include <PMDefinitions.h>
-	#include <CFString.h>
-	#include <CFDictionary.h>
-	#include <CFArray.h>
-	#include <CFNumber.h>
-	#include <CFDate.h>
-	#include <stdio.h>
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -224,6 +214,19 @@ enum {
  */
 #define	kPMDuplexDefault	(kPMDuplexNone)
 
+/* The values for kPMCoverPageKey */
+
+enum {
+	kPMCoverPageNone = 1,	
+	// Print a cover page before printing the document.
+    kPMCoverPageBefore = 2,
+	// Print a cover page after printing the document.
+	kPMCoverPageAfter = 3
+};
+/* If the kPMDuplexingKey is not in a ticket then kPMDuplexDefault should be assumed.
+ */
+#define	kPMCoverPageDefault	(kPMCoverPageNone)
+
 // Values for the kPMPSErrorHandlerKey 
 enum {
 	kPSNoErrorHandler		=	0,
@@ -259,6 +262,8 @@ enum {
 #define kPMUnadjustedPageRectKey            CFSTR( kPMUnadjustedPageRectStr )           /* CFArray of 4 CFNumbers of kCFNumberDoubleType for page size within the paper, in points. */
 #define kPMMatchPaperStr            		kPMPaperInfoPrelude "PMMatchPaper"
 #define kPMMatchPaperKey            		CFSTR( kPMMatchPaperStr )           		/* CFBoolean tells if we need to find a closest match for this paper */
+#define kPMConstrainedPaperStr            	kPMPaperInfoPrelude "PMConstrainedPaper"
+#define kPMConstrainedPaperKey            	CFSTR( kPMConstrainedPaperStr )           	/* CFBoolean tells if this paper is constrained */
 
 /* Ticket: PAGE FORMAT TICKET
     Describes the application's drawing environment, including resolution, scaling, and
@@ -306,8 +311,12 @@ enum {
 #define kPMCopiesKey                        CFSTR( kPMCopiesStr )                       /* CFNumber, kCFNumberSInt32Type, number of copies to print. */
 #define kPMCopyCollateStr                   kPMPrintSettingsPrelude "PMCopyCollate"
 #define kPMCopyCollateKey                   CFSTR( kPMCopyCollateStr )                  /* CFBoolean, Turns on collating */
-#define kPMReverseOrderStr                  kPMPrintSettingsPrelude "PMReverseOrder"
-#define kPMReverseOrderKey                  CFSTR( kPMReverseOrderStr )                 /* CFBoolean, If true, we print sheets back to front. All layout options are unaffected by reverse order. */
+#define kPMOutputOrderStr		   "OutputOrder"
+#define kPMOutputOrderKey		    CFSTR(kPMOutputOrderStr)			/* CFString, Reverse or Normal. default is Printer Specific */
+
+#define kPMPageSetStr		   	    "page-set"
+#define kPMPageSetKey			    CFSTR(kPMPageSetStr)	/* CFString, even, odd, or all. default is all */
+
 #define kPMPageRangeStr                     kPMPrintSettingsPrelude "PMPageRange"
 #define kPMPageRangeKey                     CFSTR( kPMPageRangeStr )                    /* CFArray of kCFNumberSInt32Type, each pair indicating valid range of pages that the application is able to print. Does not signify user choices. */
 #define kPMFirstPageStr                     kPMPrintSettingsPrelude "PMFirstPage"
@@ -342,12 +351,22 @@ enum {
 #define kPMPaperSourceKey                   CFSTR( kPMPaperSourceStr )                  /* CFNUmber - kCFNumberSInt32Type, Enum, paper sources. */
 #define kPMDuplexingStr                     kPMPrintSettingsPrelude "PMDuplexing"
 #define kPMDuplexingKey                     CFSTR( kPMDuplexingStr )                    /* CFNumber - kCFNumberSInt32Type, Enum, kPMDuplexNone,  kPMDuplexNoTumble, kPMDuplexTumble, kPMSimplexTumble */
+#define kPMDuplexingRequiresFlippedMarginAdjustStr   kPMPrintSettingsPrelude "PMDuplexingRequiresFlippedMargins"
+#define kPMDuplexingRequiresFlippedMarginAdjustKey CFSTR( kPMDuplexingRequiresFlippedMarginAdjustStr )	
+                                                                                        /* CFBoolean indicating, when duplexing and the OS is flipping
+                                                                                            the coordinate system to provide support for the destination
+                                                                                            tumble mode, whether the raster supplied to the printer
+                                                                                            should begin at a different distance from the top of the sheet
+                                                                                            than is normally generated. */
+#define kPMHasCustomDuplexPDEStr   			kPMPrintSettingsPrelude "HasCustomDuplexPDE"
+#define kPMHasCustomDuplexPDEKey 			CFSTR( kPMHasCustomDuplexPDEStr )	
+                                                                                        /* CFBoolean indicating that the Tioga Printer Module has its own Duplex PDE. */
 #define kPMColorModeStr                     kPMPrintSettingsPrelude "PMColorMode"
 #define kPMColorModeKey                     CFSTR( kPMColorModeStr )                    /* CFNumber - kCFNumberSInt32Type, Enum, B/W, Grayscale, Color, HiFi Color. */
+#define kPMColorSpaceModelStr                     kPMPrintSettingsPrelude "PMColorSpaceModel"
+#define kPMColorSpaceModelKey                     CFSTR( kPMColorSpaceModelStr )                    /* CFNumber - kCFNumberSInt32Type, Enum, see PMColorSpaceModel. */
 #define kPMColorSyncProfileIDStr            kPMPrintSettingsPrelude "PMColorSyncProfileID"
 #define kPMColorSyncProfileIDKey            CFSTR( kPMColorSyncProfileIDStr )           /* CFNumber - kCFNumberSInt32Type, ID of profile to use. */
-#define kPMColorSyncSystemProfilePathStr	kPMPrintSettingsPrelude "PMColorSyncSystemProfilePath"
-#define kPMColorSyncSystemProfilePathKey    CFSTR( kPMColorSyncSystemProfilePathStr )   /* CFString - path of system profile. */
 #define kPMPrintScalingHorizontalStr        kPMPrintSettingsPrelude "PMScaling"
 #define kPMPrintScalingHorizontalKey        CFSTR( kPMPrintScalingHorizontalStr )       /* CFNumber - kCFNumberDoubleType, Horizontal scaling factor applied to original page size. */
 #define kPMPrintScalingVerticalStr          kPMPrintSettingsPrelude "PMVerticalScaling"
@@ -375,11 +394,39 @@ enum {
 #define kPMPSTraySwitchStr					kPMPrintSettingsPrelude "PMPSTraySwitch"
 #define kPMPSTraySwitchKey					CFSTR( kPMPSTraySwitchStr )					/* CFArray - main & option PPD key for tray switching */
 
-
 #define kPMTotalBeginPagesStr		    		kPMPrintSettingsPrelude "PMTotalBeginPages"
 #define kPMTotalBeginPagesKey		    	CFSTR( kPMTotalBeginPagesStr )			/* CFNumber the total number of times beginpage was called */
 #define kPMTotalSidesImagedStr		    		kPMPrintSettingsPrelude "PMTotalSidesImaged"
 #define kPMTotalSidesImagedKey		    	CFSTR( kPMTotalSidesImagedStr )			/* CFNumber the total number of sides that will printed. Does not take into account duplex and collation */
+
+#define kPMFaxNumberStr						"phone"
+#define kPMFaxNumberKey		    			CFSTR( kPMFaxNumberStr )			/* CFString - fax number to dial */
+#define kPMFaxToStr							"faxTo"
+#define kPMFaxToKey		    				CFSTR( kPMFaxToStr )				/* CFString - entire fax to line */
+#define kPMFaxPrefixStr						"faxPrefix"
+#define kPMFaxPrefixKey		    			CFSTR( kPMFaxPrefixStr )			/* CFString - fax prefix to dial */
+#define kPMFaxSubjectStr					"faxSubject"
+#define kPMFaxSubjectKey		    		CFSTR( kPMFaxSubjectStr )			/* CFString - fax subject linee*/
+#define kPMFaxCoverSheetStr					"faxCoverSheet"
+#define kPMFaxCoverSheetKey			   		CFSTR( kPMFaxCoverSheetStr )		/* CFString - fax cover sheet */
+#define kPMFaxCoverSheetMessageStr			"faxCoverSheetMessage"
+#define kPMFaxCoverSheetMessageKey	   		CFSTR( kPMFaxCoverSheetMessageStr )	/* CFString - fax cover sheet message*/
+#define kPMFaxToneDialingStr				"faxToneDialing"
+#define kPMFaxToneDialingKey		   		CFSTR( kPMFaxToneDialingStr )		/* CFString - fax use tone dialing */
+#define kPMFaxUseSoundStr					"faxUseSound"
+#define kPMFaxUseSoundKey		    		CFSTR( kPMFaxUseSoundStr )			/* CFString - fax use sound */
+#define kPMFaxWaitForDialToneStr			"faxWaitForDialTone"
+#define kPMFaxWaitForDialToneKey		    CFSTR( kPMFaxWaitForDialToneStr )	/* CFString - fax wait for dial tone */
+
+
+#define kPMCoverPageStr                     kPMPrintSettingsPrelude "PMCoverPage"
+#define kPMCoverPageKey                     CFSTR( kPMCoverPageStr )                    /* CFNumber - kCFNumberSInt32Type, Enum, kPMCoverPageNone,  kPMCoverPageBefore, kPMCoverPageAfter */
+#define kPMCoverPageSourceStr				kPMPrintSettingsPrelude "PMCoverPageSource"
+#define kPMCoverPageSourceKey				CFSTR( kPMCoverPageSourceStr )				/* CFArray - main & option PPD key for cover page paper source */
+
+#define kPMDestinationPrinterIDStr		"DestinationPrinterID"
+#define kPMDestinationPrinterIDKey		CFSTR( kPMDestinationPrinterIDStr )	/* CFStringRef - the printer ID corresponding to the destination printer */
+
 
 /* Ticket: PAGE TICKET
     Future Feature. Intended to hold Page Format and Print Settings ticket for a single
@@ -451,7 +498,7 @@ enum {
 #define kPMDoesCopiesKey                    CFSTR(kPMDoesCopiesStr )                    /* CFBoolean, If Non-zero, printer/PM can do copies */
 #define kPMDoesCopyCollateStr               kPMPrinterInfoPrelude "PMDoesCopyCollate"
 #define kPMDoesCopyCollateKey               CFSTR( kPMDoesCopyCollateStr )              /* CFBoolean, If Non-zero, printer/PM can collate. */
-#define kPMDoesReverseOrderStr              kPMPrinterInfoPrelude "PMDoesReverseOrderK"
+#define kPMDoesReverseOrderStr              kPMPrinterInfoPrelude "PMDoesReverseOrder"
 #define kPMDoesReverseOrderKey              CFSTR( kPMDoesReverseOrderStr )             /* CFBoolean, If Non-zero, printer/PM can reverse the printing order. */
 #define kPMInputFileTypeListStr             kPMPrinterInfoPrelude "PMInputFileTypeList"
 #define kPMInputFileTypeListKey             CFSTR( kPMInputFileTypeListStr )            /* CFArray of CFStrings indicating file types. See PMDefinitions.h for complete list. */
@@ -706,6 +753,14 @@ PMXMLToTicket                   (CFAllocatorRef         allocator,
                                  PMTicketRef *          ticket,
                                  CFStringRef *          conversionError);
 
+/* Convert from XML File */
+EXTERN_API_C( OSStatus )
+PMXMLURLToTicket				( CFAllocatorRef allocator, 
+                                  CFURLRef anXMLURL, 
+                                  PMTicketRef *ticket, 
+                                  CFPropertyListFormat *format, 
+                                  CFStringRef *errorString );
+
 /* Read from file and convert from XML. */
 EXTERN_API_C( OSStatus )
 PMTicketReadXMLFromFile         (CFAllocatorRef         allocator,
@@ -910,7 +965,6 @@ PMTicketSetCFDictionary         (PMTicketRef            ticket,
                                  CFDictionaryRef        item,
                                  Boolean                locked);
 
-#if TARGET_API_MAC_OSX
 /* Templates, which are defined to be opaque. */
 EXTERN_API_C( OSStatus )
 PMTicketSetTemplate             (PMTicketRef            ticket,
@@ -918,7 +972,6 @@ PMTicketSetTemplate             (PMTicketRef            ticket,
                                  CFStringRef            key,
                                  PMTemplateRef          item,
                                  Boolean                locked);
-#endif
 
 /* Generic CF Type */
 EXTERN_API_C( OSStatus )

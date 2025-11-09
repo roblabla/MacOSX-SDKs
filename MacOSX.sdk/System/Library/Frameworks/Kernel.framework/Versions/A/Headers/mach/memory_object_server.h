@@ -38,154 +38,6 @@ typedef function_table_entry 	*function_table_t;
 __BeforeMigServerHeader
 #endif /* __BeforeMigServerHeader */
 
-/* typedefs for all requests */
-
-#ifndef __Request__memory_object_subsystem__defined
-#define __Request__memory_object_subsystem__defined
-	typedef struct {
-		mach_msg_header_t Head;
-		/* start of the kernel processed data */
-		mach_msg_body_t msgh_body;
-		mach_msg_port_descriptor_t memory_control;
-		/* end of the kernel processed data */
-		NDR_record_t NDR;
-		vm_size_t memory_object_page_size;
-	} __Request__memory_object_init_t;
-
-	typedef struct {
-		mach_msg_header_t Head;
-	} __Request__memory_object_terminate_t;
-
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		memory_object_offset_t offset;
-		vm_size_t length;
-		vm_prot_t desired_access;
-	} __Request__memory_object_data_request_t;
-
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		memory_object_offset_t offset;
-		vm_size_t size;
-		boolean_t dirty;
-		boolean_t kernel_copy;
-	} __Request__memory_object_data_return_t;
-
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		memory_object_offset_t offset;
-		vm_size_t size;
-	} __Request__memory_object_data_initialize_t;
-
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		memory_object_offset_t offset;
-		vm_size_t size;
-		vm_prot_t desired_access;
-	} __Request__memory_object_data_unlock_t;
-
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		memory_object_offset_t offset;
-		vm_size_t size;
-		vm_sync_t sync_flags;
-	} __Request__memory_object_synchronize_t;
-
-	typedef struct {
-		mach_msg_header_t Head;
-	} __Request__memory_object_unmap_t;
-
-#endif /* !__Request__memory_object_subsystem__defined */
-
-/* union of all requests */
-
-#ifndef __RequestUnion__memory_object_subsystem__defined
-#define __RequestUnion__memory_object_subsystem__defined
-union __RequestUnion__memory_object_subsystem {
-	__Request__memory_object_init_t Request_memory_object_init;
-	__Request__memory_object_terminate_t Request_memory_object_terminate;
-	__Request__memory_object_data_request_t Request_memory_object_data_request;
-	__Request__memory_object_data_return_t Request_memory_object_data_return;
-	__Request__memory_object_data_initialize_t Request_memory_object_data_initialize;
-	__Request__memory_object_data_unlock_t Request_memory_object_data_unlock;
-	__Request__memory_object_synchronize_t Request_memory_object_synchronize;
-	__Request__memory_object_unmap_t Request_memory_object_unmap;
-};
-#endif /* __RequestUnion__memory_object_subsystem__defined */
-/* typedefs for all replies */
-
-#ifndef __Reply__memory_object_subsystem__defined
-#define __Reply__memory_object_subsystem__defined
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		kern_return_t RetCode;
-	} __Reply__memory_object_init_t;
-
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		kern_return_t RetCode;
-	} __Reply__memory_object_terminate_t;
-
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		kern_return_t RetCode;
-	} __Reply__memory_object_data_request_t;
-
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		kern_return_t RetCode;
-	} __Reply__memory_object_data_return_t;
-
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		kern_return_t RetCode;
-	} __Reply__memory_object_data_initialize_t;
-
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		kern_return_t RetCode;
-	} __Reply__memory_object_data_unlock_t;
-
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		kern_return_t RetCode;
-	} __Reply__memory_object_synchronize_t;
-
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		kern_return_t RetCode;
-	} __Reply__memory_object_unmap_t;
-
-#endif /* !__Reply__memory_object_subsystem__defined */
-
-/* union of all replies */
-
-#ifndef __ReplyUnion__memory_object_subsystem__defined
-#define __ReplyUnion__memory_object_subsystem__defined
-union __ReplyUnion__memory_object_subsystem {
-	__Reply__memory_object_init_t Reply_memory_object_init;
-	__Reply__memory_object_terminate_t Reply_memory_object_terminate;
-	__Reply__memory_object_data_request_t Reply_memory_object_data_request;
-	__Reply__memory_object_data_return_t Reply_memory_object_data_return;
-	__Reply__memory_object_data_initialize_t Reply_memory_object_data_initialize;
-	__Reply__memory_object_data_unlock_t Reply_memory_object_data_unlock;
-	__Reply__memory_object_synchronize_t Reply_memory_object_synchronize;
-	__Reply__memory_object_unmap_t Reply_memory_object_unmap;
-};
-#endif /* __RequestUnion__memory_object_subsystem__defined */
 
 /* Routine memory_object_init */
 #ifdef	mig_external
@@ -311,6 +163,156 @@ extern const struct memory_object_subsystem {
 		routine[8];
 } memory_object_subsystem;
 
+/* typedefs for all requests */
+
+#ifndef __Request__memory_object_subsystem__defined
+#define __Request__memory_object_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t memory_control;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		vm_size_t memory_object_page_size;
+	} __Request__memory_object_init_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__memory_object_terminate_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		memory_object_offset_t offset;
+		vm_size_t length;
+		vm_prot_t desired_access;
+	} __Request__memory_object_data_request_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		memory_object_offset_t offset;
+		vm_size_t size;
+		boolean_t dirty;
+		boolean_t kernel_copy;
+	} __Request__memory_object_data_return_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		memory_object_offset_t offset;
+		vm_size_t size;
+	} __Request__memory_object_data_initialize_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		memory_object_offset_t offset;
+		vm_size_t size;
+		vm_prot_t desired_access;
+	} __Request__memory_object_data_unlock_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		memory_object_offset_t offset;
+		vm_size_t size;
+		vm_sync_t sync_flags;
+	} __Request__memory_object_synchronize_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__memory_object_unmap_t;
+
+#endif /* !__Request__memory_object_subsystem__defined */
+
+
+/* union of all requests */
+
+#ifndef __RequestUnion__memory_object_subsystem__defined
+#define __RequestUnion__memory_object_subsystem__defined
+union __RequestUnion__memory_object_subsystem {
+	__Request__memory_object_init_t Request_memory_object_init;
+	__Request__memory_object_terminate_t Request_memory_object_terminate;
+	__Request__memory_object_data_request_t Request_memory_object_data_request;
+	__Request__memory_object_data_return_t Request_memory_object_data_return;
+	__Request__memory_object_data_initialize_t Request_memory_object_data_initialize;
+	__Request__memory_object_data_unlock_t Request_memory_object_data_unlock;
+	__Request__memory_object_synchronize_t Request_memory_object_synchronize;
+	__Request__memory_object_unmap_t Request_memory_object_unmap;
+};
+#endif /* __RequestUnion__memory_object_subsystem__defined */
+/* typedefs for all replies */
+
+#ifndef __Reply__memory_object_subsystem__defined
+#define __Reply__memory_object_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__memory_object_init_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__memory_object_terminate_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__memory_object_data_request_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__memory_object_data_return_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__memory_object_data_initialize_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__memory_object_data_unlock_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__memory_object_synchronize_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__memory_object_unmap_t;
+
+#endif /* !__Reply__memory_object_subsystem__defined */
+
+
+/* union of all replies */
+
+#ifndef __ReplyUnion__memory_object_subsystem__defined
+#define __ReplyUnion__memory_object_subsystem__defined
+union __ReplyUnion__memory_object_subsystem {
+	__Reply__memory_object_init_t Reply_memory_object_init;
+	__Reply__memory_object_terminate_t Reply_memory_object_terminate;
+	__Reply__memory_object_data_request_t Reply_memory_object_data_request;
+	__Reply__memory_object_data_return_t Reply_memory_object_data_return;
+	__Reply__memory_object_data_initialize_t Reply_memory_object_data_initialize;
+	__Reply__memory_object_data_unlock_t Reply_memory_object_data_unlock;
+	__Reply__memory_object_synchronize_t Reply_memory_object_synchronize;
+	__Reply__memory_object_unmap_t Reply_memory_object_unmap;
+};
+#endif /* __RequestUnion__memory_object_subsystem__defined */
 
 #ifndef subsystem_to_name_map_memory_object
 #define subsystem_to_name_map_memory_object \

@@ -11,7 +11,8 @@
 #include <CoreGraphics/CGBase.h>
 #include <CoreGraphics/CGGeometry.h>
 #include <CoreGraphics/CGError.h>
-#include <CoreGraphics/CGDirectDisplay.h>	// Widely understood data types, CF types, boolean_t
+#include <CoreGraphics/CGDirectDisplay.h>	/* Widely understood data types, CF types, boolean_t */
+#include <AvailabilityMacros.h>
 
 CG_EXTERN_C_BEGIN
 
@@ -45,13 +46,14 @@ typedef CGError CGEventErr;
 typedef u_int32_t CGRectCount;
 typedef void (*CGScreenRefreshCallback)(CGRectCount count, const CGRect * rectArray, void * userParameter);
 
+/* Begin Old API */
 /*
  * Register a callback function to be invoked when an area of the display
  * is refreshed, or modified.  The function is invoked on the same thread
  * of execution that is processing events within your application.
  * userParameter is passed back with each invocation of the callback function.
  */
-CG_EXTERN void CGRegisterScreenRefreshCallback( CGScreenRefreshCallback function, void * userParameter );
+CG_EXTERN CGError CGRegisterScreenRefreshCallback( CGScreenRefreshCallback function, void * userParameter );
 
 /*
  * Remove a previously registered calback function.
@@ -70,12 +72,122 @@ CG_EXTERN void CGUnregisterScreenRefreshCallback( CGScreenRefreshCallback functi
  * Returns an error code if parameters are invalid or an error occurs in retrieving
  * dirty screen rects from the server.
  */
-CG_EXTERN CGEventErr CGWaitForScreenRefreshRects( CGRect ** pRectArray, CGRectCount * pCount );
+CG_EXTERN CGError CGWaitForScreenRefreshRects( CGRect ** pRectArray, CGRectCount * pCount );
+/* End Old API */
 
+/* Begin New API */
+/*
+ * Screen refresh operation types.
+ * Operations are encoded as bits.
+ * All users of this API must support a simple refresh, kCGScreenUpdateOperationRefresh.
+ */
+enum _CGScreenUpdateOperation
+{
+        kCGScreenUpdateOperationRefresh = 0,
+        kCGScreenUpdateOperationMove = (1 << 0)
+};
+typedef uint32_t CGScreenUpdateOperation;
+
+/*
+ * Move operation notifications are restricted to changes that move a region by
+ * an integer number of pixels.
+ *
+ * dX and dY describe the direction of movement.
+ * Positive values of dX indicate movement to the right.
+ * Negative values of dX indicate movement to the left.
+ * Positive values of dY indicate movement downward.
+ * Negative values of dY indicate movement upward.
+ */
+ struct _CGScreenUpdateMoveDelta {
+      int32_t dX, dY;
+};
+typedef struct _CGScreenUpdateMoveDelta CGScreenUpdateMoveDelta;
+
+/*
+ * Move operation callback function pointer;
+ * Declare your callback function in this form.  When an area of the display is
+ * moved, your callback function will be invoked with a count
+ * of the number of rectangles in the moved area, and a list of the moved.
+ * The rectangles are in global coordinates, and describe the area prior to the move
+ * operation.
+ *
+ * dX and dY describe the direction of movement.
+ * Positive values of dX indicate movement to the right.
+ * Negative values of dX indicate movement to the left.
+ * Positive values of dY indicate movement downward.
+ * Negative values of dY indicate movement upward.
+ *
+ * Your function should not modify, deallocate or free memory pointed to by rectArray.
+ *
+ * This callback may be triggered by window movement or scrolling operations.
+ *
+ * Bear in mind that a single rectangle may occupy multiple displays,
+ * either by overlapping the displays, or by residing on coincident displays
+ * when mirroring is active.  Use the CGGetDisplaysWithRect() function  to determine
+ * the displays a rectangle occupies.
+ *
+ * If no move callback function pointer is registered, then move operations are remapped to
+ * refresh operations, and the CGScreenRefreshCallback function, if any, is called.
+ */
+typedef void (*CGScreenUpdateMoveCallback)(CGScreenUpdateMoveDelta delta,
+                                           size_t count,
+                                           const CGRect * rectArray,
+                                           void * userParameter);
+
+/*
+ * Register a callback function to be invoked when an area of the display
+ * is moved.  The function is invoked on the same thread
+ * of execution that is processing events within your application.
+ * userParameter is passed back with each invocation of the callback function.
+ */
+CG_EXTERN CGError CGScreenRegisterMoveCallback( CGScreenUpdateMoveCallback function, void * userParameter ) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+/*
+ * Remove a previously registered callback function.
+ */
+CG_EXTERN void CGScreenUnregisterMoveCallback( CGScreenUpdateMoveCallback function, void * userParameter ) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+/*
+ * In some applications it may be preferable to have a seperate thread wait for screen update operations.
+ * This function should be called on a thread seperate from the event processing thread.
+ * If screen refresh callback functions are registered, this function should not be used.
+ * The mechanisms are mutually exclusive.
+ *
+ * Deallocate screen update rects using CGReleaseScreenRefreshRects().
+ *
+ * requestedOperations may be:
+ * 	kCGScreenUpdateOperationRefresh
+ *		All move operations are converted to refresh operations
+ *		currentOperation will always be returned as kCGScreenUpdateOperationRefresh
+ *	(kCGScreenUpdateOperationRefresh | kCGScreenUpdateOperationMove)
+ *		Wait for move or refresh operations.
+ *		currentOperation will be either kCGScreenUpdateOperationRefresh or kCGScreenUpdateOperationMove
+ *
+ * pDelta is updated with valid content if the currentOperation is kCGScreenUpdateOperationMove
+ *
+ * Returns an error code if parameters are invalid or an error occurs in retrieving
+ * the screen rect data from the server.
+ */
+CG_EXTERN CGError CGWaitForScreenUpdateRects( CGScreenUpdateOperation requestedOperations,
+                                              CGScreenUpdateOperation * currentOperation,
+                                              CGRect ** pRectArray,
+                                              size_t * pCount,
+                                              CGScreenUpdateMoveDelta *pDelta ) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+/* End New API */
 /*
  * Deallocate the list of rects recieved from CGWaitForScreenRefreshRects()
  */
 CG_EXTERN void CGReleaseScreenRefreshRects( CGRect * rectArray );
+
+/*
+ * Programs reading the frame buffer content may want to hide the cursor, if it is visible and
+ * drawn in framebuffer memory. A cursor may also be generated in an overlay plane of some form. 
+ *
+ * These APIs provide basic cursor visibility and drawing information.
+ * The cursor may be hidden or shown using the CGDisplayHideCursor() and CGDisplayShowCursor() API.
+ */
+CG_EXTERN boolean_t CGCursorIsVisible(void) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+CG_EXTERN boolean_t CGCursorIsDrawnInFramebuffer(void) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*
  * Posting events: These functions post events into the system.  Use for remote
@@ -104,7 +216,7 @@ CG_EXTERN void CGReleaseScreenRefreshRects( CGRect * rectArray );
  * buttons would be in USB device order.
  */
 typedef u_int32_t CGButtonCount;
-CG_EXTERN CGEventErr CGPostMouseEvent( CGPoint mouseCursorPosition,
+CG_EXTERN CGError CGPostMouseEvent( CGPoint mouseCursorPosition,
                                         boolean_t updateMouseCursorPosition,
                                         CGButtonCount buttonCount,
                                         boolean_t mouseButtonDown, ... );
@@ -124,13 +236,13 @@ CG_EXTERN CGEventErr CGPostMouseEvent( CGPoint mouseCursorPosition,
  * depending on the  application that processes the event.
  */
 typedef u_int32_t CGWheelCount;
-CG_EXTERN CGEventErr CGPostScrollWheelEvent( CGWheelCount wheelCount,
+CG_EXTERN CGError CGPostScrollWheelEvent( CGWheelCount wheelCount,
                                             int32_t wheel1, ... );
 
 /*
  * Synthesize keyboard events.  Based on the values entered,
  * the appropriate key down, key up, and flags changed events are generated.
- * If keyChar is NUL (0), an apropriate value will be guessed at, based on the
+ * If keyChar is NUL (0), an appropriate value will be guessed at, based on the
  * default keymapping.
  *
  * All keystrokes needed to generate a character must be entered, including
@@ -142,10 +254,10 @@ CG_EXTERN CGEventErr CGPostScrollWheelEvent( CGWheelCount wheelCount,
  *	CGPostKeyboardEvent( (CGCharCode)'Z', (CGKeyCode)6, false ); // 'z' up
  *	CGPostKeyboardEvent( (CGCharCode)0, (CGKeyCode)56, false ); // 'shift up
  */
-typedef u_int16_t    CGCharCode;	// Character represented by event, if any
-typedef u_int16_t    CGKeyCode;		// Virtual keycode for event
+typedef u_int16_t    CGCharCode;	/* Character represented by event, if any */
+typedef u_int16_t    CGKeyCode;		/* Virtual keycode for event */
 
-CG_EXTERN CGEventErr CGPostKeyboardEvent( CGCharCode keyChar,
+CG_EXTERN CGError CGPostKeyboardEvent( CGCharCode keyChar,
                                           CGKeyCode virtualKey,
                                           boolean_t keyDown );
 
@@ -153,7 +265,7 @@ CG_EXTERN CGEventErr CGPostKeyboardEvent( CGCharCode keyChar,
  * Warp the mouse cursor to the desired position in global
  * coordinates without generating events
  */
-CG_EXTERN CGEventErr CGWarpMouseCursorPosition( CGPoint newCursorPosition );
+CG_EXTERN CGError CGWarpMouseCursorPosition( CGPoint newCursorPosition );
 
 /*
  * Remote operation may want to inhibit local events (events from
@@ -167,13 +279,13 @@ CG_EXTERN CGEventErr CGWarpMouseCursorPosition( CGPoint newCursorPosition );
  *
  * Local event inhibition is turned off if the app that requested it terminates.
  */
-CG_EXTERN CGEventErr CGInhibitLocalEvents( boolean_t doInhibit);
+CG_EXTERN CGError CGInhibitLocalEvents( boolean_t doInhibit);
 
 /*
  * Set the period of time in seconds that local hardware events (keyboard and mouse)
- * are supressed after posting an event.  Defaults to 0.25 second.
+ * are suppressed after posting an event.  Defaults to 0.25 second.
  */
-CG_EXTERN CGEventErr CGSetLocalEventsSuppressionInterval(CFTimeInterval seconds);
+CG_EXTERN CGError CGSetLocalEventsSuppressionInterval(CFTimeInterval seconds);
 
 /*
  * By default, the flags that indicate modifier key state (Command, Alt, Shift, etc.)
@@ -191,10 +303,10 @@ CG_EXTERN CGEventErr CGSetLocalEventsSuppressionInterval(CFTimeInterval seconds)
  * When called with doCombineState equal to TRUE, the current global state of keys, modifiers,
  * and mouse buttons are used in generating events.
  */
-CG_EXTERN CGEventErr CGEnableEventStateCombining(boolean_t doCombineState);
+CG_EXTERN CGError CGEnableEventStateCombining(boolean_t doCombineState);
 
 /*
- * By default the system supresses local hardware events from the keyboard and mouse during
+ * By default the system suppresses local hardware events from the keyboard and mouse during
  * a short interval after a synthetic event is posted (see CGSetLocalEventsSuppressionInterval())
  * and while a synthetic mouse drag (mouse movement with the left/only mouse button down).
  *
@@ -203,7 +315,7 @@ CG_EXTERN CGEventErr CGEnableEventStateCombining(boolean_t doCombineState);
  * keyboard hardware events to pass through. Set the filter state to permit keyboard events
  * prior to posting the mouse event after which you want to get keyboard events.
  *
- * This interface lets an app specify a state (event supression interval, or mouse drag), and
+ * This interface lets an app specify a state (event suppression interval, or mouse drag), and
  * a mask of event categories to be passed through. The new filter state takes effect
  * with the next event your app posts.
  */
@@ -217,27 +329,34 @@ typedef uint32_t CGEventFilterMask;
 
 enum
 {
-    kCGEventSupressionStateSupressionInterval = 0,
-    kCGEventSupressionStateRemoteMouseDrag,
-    kCGNumberOfEventSupressionStates
+    kCGEventSuppressionStateSuppressionInterval = 0,
+    kCGEventSuppressionStateRemoteMouseDrag,
+    kCGNumberOfEventSuppressionStates
 };
-typedef uint32_t CGEventSupressionState;
+typedef uint32_t CGEventSuppressionState;
 #define kCGEventFilterMaskPermitAllEvents \
     (kCGEventFilterMaskPermitLocalMouseEvents | \
     kCGEventFilterMaskPermitLocalKeyboardEvents | \
     kCGEventFilterMaskPermitSystemDefinedEvents)
 
-CG_EXTERN CGEventErr CGSetLocalEventsFilterDuringSupressionState(CGEventFilterMask filter,
-CGEventSupressionState state);
+CG_EXTERN CGError CGSetLocalEventsFilterDuringSuppressionState(CGEventFilterMask filter,
+CGEventSuppressionState state);
+
+/*
+ * After posting a left mouse down, with remote mouse drag suppressing hardware mouse
+ * move events, after some time with no remote mouse drag events, a warning is logged
+ * to aid in diagnosing 'my hardware mouse is dead' problems.
+ * No mechanism is provided to defeat this timeout.
+ *
+ * Mouse-down conditions of arbitrary length may be produced deliberately, as when scrolling
+ * through a lengthly document.
+ */
+#define kCGMouseDownEventMaskingDeadSwitchTimeout	(60.0)
+
 
 /*
  * Helper function to connect or disconnect the mouse and mouse cursor while the calling app
  * is in the foreground.
- * CGAssociateMouseAndMouseCursorPosition(false) has the same effect
- * as the following, without actually modifying the supression interval:
- *
- *	CGSetLocalEventsSuppressionInterval(MAX_DOUBLE);
- *	CGWarpMouseCursorPosition(currentPosition);
  *
  * While disconnected, mouse move and drag events will reflect the current position of
  * the mouse cursor position, which will not change with mouse movement. Use the
@@ -249,11 +368,11 @@ CGEventSupressionState state);
  *
  * To update the display cursor position, use the function defined in this module:
  *
- *	CGEventErr CGWarpMouseCursorPosition( CGPoint newCursorPosition );
+ *	CGError CGWarpMouseCursorPosition( CGPoint newCursorPosition );
  *
  * Note: The Force Quit key combination (CMD-OPT-ESC by default) will reconnect the mouse and cursor.
  */
-CG_EXTERN CGEventErr CGAssociateMouseAndMouseCursorPosition(boolean_t connected);
+CG_EXTERN CGError CGAssociateMouseAndMouseCursorPosition(boolean_t connected);
 
 /*
  * Some classes of applications need to detect when the window server process dies, or
@@ -295,7 +414,19 @@ CG_EXTERN CGEventErr CGAssociateMouseAndMouseCursorPosition(boolean_t connected)
  */
 CG_EXTERN CFMachPortRef CGWindowServerCFMachPort(void);
 
- 
+
+/*
+ * OBSOLETE!
+ *
+ * Present for backwards compatibility with old header typos.
+ */
+#define    kCGEventSupressionStateSupressionInterval kCGEventSuppressionStateSuppressionInterval
+#define    kCGEventSupressionStateRemoteMouseDrag kCGEventSuppressionStateRemoteMouseDrag
+#define    kCGNumberOfEventSupressionStates kCGNumberOfEventSuppressionStates
+#define CGEventSupressionState CGEventSuppressionState
+#define CGSetLocalEventsFilterDuringSupressionState(filter, state) \
+        CGSetLocalEventsFilterDuringSuppressionState(filter, state)
+
 CG_EXTERN_C_END
 
 #endif /* __CGREMOTE_OPERATION_H__ */

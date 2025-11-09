@@ -3,9 +3,9 @@
  
      Contains:   Required interface for Text Encoding Converter-Plugins
  
-     Version:    CarbonCore-472~1
+     Version:    CarbonCore-545~1
  
-     Copyright:  © 1996-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1996-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -48,19 +48,127 @@
    function to grab the plugin's dispatch table must go by. 
 */
 #define kTECMacOSXDispatchTableNameString   "ConverterPluginGetPluginDispatchTable"
+/* These constant are needed for TEC plugins.*/
+enum {
+  kTECAvailableEncodingsResType = 'cven',
+  kTECAvailableSniffersResType  = 'cvsf',
+  kTECSubTextEncodingsResType   = 'cvsb',
+  kTECConversionInfoResType     = 'cvif',
+  kTECMailEncodingsResType      = 'cvml',
+  kTECWebEncodingsResType       = 'cvwb',
+  kTECInternetNamesResType      = 'cvmm'
+};
+
+enum {
+  kTECPluginType                = 'ecpg',
+  kTECPluginCreator             = 'encv',
+  kTECPluginOneToOne            = 'otoo',
+  kTECPluginOneToMany           = 'otom',
+  kTECPluginManyToOne           = 'mtoo',
+  kTECPluginSniffObj            = 'snif'
+};
+
+enum {
+  verUnspecified                = 32767,
+  kTECResourceID                = 128
+};
+
 /*
   ####################################################################################
         Structs
   ####################################################################################
 */
+
+/* These structs are needed for TEC plugins.*/
+
+struct TextEncodingRec {
+  UInt32              base;
+  UInt32              variant;
+  UInt32              format;
+};
+typedef struct TextEncodingRec          TextEncodingRec;
+/* supported encodings & sniffers lists, type TECEncodingsListRec */
+struct TECEncodingsListRec {
+  ItemCount           count;
+  TextEncodingRec     encodings;              /* first of many*/
+};
+typedef struct TECEncodingsListRec      TECEncodingsListRec;
+typedef TECEncodingsListRec *           TECEncodingsListPtr;
+typedef TECEncodingsListPtr *           TECEncodingsListHandle;
+/* sub encodings list - type TECSubTextEncodingsRec */
+struct TECSubTextEncodingRec {
+  UInt32              offset;                 /* offset to next variable-length record*/
+  TextEncodingRec     searchEncoding;         /* the encoding*/
+  UInt32              count;
+  TextEncodingRec     subEncodings;           /* first of many sub encodings for searchEncoding*/
+};
+typedef struct TECSubTextEncodingRec    TECSubTextEncodingRec;
+struct TECSubTextEncodingsRec {
+  ItemCount           count;
+  TECSubTextEncodingRec  subTextEncodingRec;  /* first of many*/
+};
+typedef struct TECSubTextEncodingsRec   TECSubTextEncodingsRec;
+typedef TECSubTextEncodingsRec *        TECSubTextEncodingsPtr;
+typedef TECSubTextEncodingsPtr *        TECSubTextEncodingsHandle;
+/* conversions pairs list - type TECEncodingPairsRec */
+struct TECEncodingPairRec {
+  TextEncodingRec     source;
+  TextEncodingRec     dest;
+};
+typedef struct TECEncodingPairRec       TECEncodingPairRec;
+struct TECEncodingPairs {
+  TECEncodingPairRec  encodingPair;
+  UInt32              flags;                  /* 'flags' name is not really used yet (JKC 9/5/97)*/
+  UInt32              speed;                  /* 'speed' name is not really used yet (JKC 9/5/97)*/
+};
+typedef struct TECEncodingPairs         TECEncodingPairs;
+struct TECEncodingPairsRec {
+  ItemCount           count;
+  TECEncodingPairs    encodingPairs;
+};
+typedef struct TECEncodingPairsRec      TECEncodingPairsRec;
+typedef TECEncodingPairsRec *           TECEncodingPairsPtr;
+typedef TECEncodingPairsPtr *           TECEncodingPairsHandle;
+/* mail & web encodings lists - type TECLocaleToEncodingsListRec */
+struct TECLocaleListToEncodingListRec {
+  UInt32              offset;                 /* offset to next variable-length record*/
+  ItemCount           count;
+  RegionCode          locales;                /* first in list of locales*/
+                                              /* TECEncodingListRec encodingList;     // after local variable length array*/
+};
+typedef struct TECLocaleListToEncodingListRec TECLocaleListToEncodingListRec;
+typedef TECLocaleListToEncodingListRec * TECLocaleListToEncodingListPtr;
+struct TECLocaleToEncodingsListRec {
+  ItemCount           count;
+  TECLocaleListToEncodingListRec  localeListToEncodingList; /* language of name*/
+};
+typedef struct TECLocaleToEncodingsListRec TECLocaleToEncodingsListRec;
+typedef TECLocaleToEncodingsListRec *   TECLocaleToEncodingsListPtr;
+typedef TECLocaleToEncodingsListPtr *   TECLocaleToEncodingsListHandle;
+/* internet names list - type TECInternetNamesRec */
+struct TECInternetNameRec {
+  UInt32              offset;                 /* offset to next variable-length record*/
+  TextEncodingRec     searchEncoding;         /* named encoding*/
+  UInt8               encodingNameLength;
+  UInt8               encodingName[1];        /* first byte of many */
+};
+typedef struct TECInternetNameRec       TECInternetNameRec;
+struct TECInternetNamesRec {
+  ItemCount           count;
+  TECInternetNameRec  InternetNames;          /* first of many*/
+};
+typedef struct TECInternetNamesRec      TECInternetNamesRec;
+typedef TECInternetNamesRec *           TECInternetNamesPtr;
+typedef TECInternetNamesPtr *           TECInternetNamesHandle;
+/* plugin context record */
 struct TECBufferContextRec {
-  TextPtr             textInputBuffer;
-  TextPtr             textInputBufferEnd;
+  ConstTextPtr        textInputBuffer;
+  ConstTextPtr        textInputBufferEnd;
   TextPtr             textOutputBuffer;
   TextPtr             textOutputBufferEnd;
 
-  TextEncodingRunPtr  encodingInputBuffer;
-  TextEncodingRunPtr  encodingInputBufferEnd;
+  ConstTextEncodingRunPtr  encodingInputBuffer;
+  ConstTextEncodingRunPtr  encodingInputBufferEnd;
   TextEncodingRunPtr  encodingOutputBuffer;
   TextEncodingRunPtr  encodingOutputBufferEnd;
 };
@@ -103,8 +211,8 @@ struct TECSnifferContextRec {
   TextEncoding        encoding;
   ItemCount           maxErrors;
   ItemCount           maxFeatures;
-  TextPtr             textInputBuffer;
-  TextPtr             textInputBufferEnd;
+  ConstTextPtr        textInputBuffer;
+  ConstTextPtr        textInputBufferEnd;
   ItemCount           numFeatures;
   ItemCount           numErrors;
                                               /* private - manipulated only within Plugin*/

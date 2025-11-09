@@ -3,9 +3,9 @@
  
      Contains:   Multiprocessing interfaces
  
-     Version:    CarbonCore-472~1
+     Version:    CarbonCore-545~1
  
-     Copyright:  © 1995-2002 DayStar Digital, Inc.
+     Copyright:  © 1995-2003 DayStar Digital, Inc.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -269,6 +269,9 @@ enum {
 /*
  *  MPProcessors()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -282,6 +285,9 @@ MPProcessors(void)                                            AVAILABLE_MAC_OS_X
 
 /*
  *  MPProcessorsScheduled()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -322,6 +328,9 @@ typedef CALLBACK_API_C( OSStatus , TaskProc )(void * parameter);
 /*
  *  MPCreateTask()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -344,6 +353,9 @@ MPCreateTask(
 /*
  *  MPTerminateTask()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -359,6 +371,9 @@ MPTerminateTask(
 
 /*
  *  MPSetTaskWeight()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -376,6 +391,9 @@ MPSetTaskWeight(
 /*
  *  MPTaskIsPreemptive()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -389,6 +407,9 @@ MPTaskIsPreemptive(MPTaskID taskID)                           AVAILABLE_MAC_OS_X
 
 /*
  *  MPExit()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -404,6 +425,9 @@ MPExit(OSStatus status)                                       AVAILABLE_MAC_OS_X
 /*
  *  MPYield()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -418,6 +442,9 @@ MPYield(void)                                                 AVAILABLE_MAC_OS_X
 /*
  *  MPCurrentTaskID()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -431,6 +458,9 @@ MPCurrentTaskID(void)                                         AVAILABLE_MAC_OS_X
 
 /*
  *  MPSetTaskType()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in CoreServices.framework
@@ -457,6 +487,9 @@ MPSetTaskType(
 /*
  *  MPAllocateTaskStorageIndex()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -471,6 +504,9 @@ MPAllocateTaskStorageIndex(TaskStorageIndex * index)          AVAILABLE_MAC_OS_X
 /*
  *  MPDeallocateTaskStorageIndex()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -484,6 +520,9 @@ MPDeallocateTaskStorageIndex(TaskStorageIndex index)          AVAILABLE_MAC_OS_X
 
 /*
  *  MPSetTaskStorageValue()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -500,6 +539,9 @@ MPSetTaskStorageValue(
 
 /*
  *  MPGetTaskStorageValue()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -523,6 +565,9 @@ MPGetTaskStorageValue(TaskStorageIndex index)                 AVAILABLE_MAC_OS_X
 /*
  *  MPCreateQueue()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -537,6 +582,9 @@ MPCreateQueue(MPQueueID * queue)                              AVAILABLE_MAC_OS_X
 /*
  *  MPDeleteQueue()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -550,6 +598,9 @@ MPDeleteQueue(MPQueueID queue)                                AVAILABLE_MAC_OS_X
 
 /*
  *  MPNotifyQueue()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -568,6 +619,9 @@ MPNotifyQueue(
 
 /*
  *  MPWaitOnQueue()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -588,6 +642,9 @@ MPWaitOnQueue(
 /*
  *  MPSetQueueReserve()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -607,6 +664,9 @@ MPSetQueueReserve(
 /*
  *  MPCreateSemaphore()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -624,6 +684,9 @@ MPCreateSemaphore(
 /*
  *  MPDeleteSemaphore()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -638,6 +701,9 @@ MPDeleteSemaphore(MPSemaphoreID semaphore)                    AVAILABLE_MAC_OS_X
 /*
  *  MPSignalSemaphore()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -651,6 +717,9 @@ MPSignalSemaphore(MPSemaphoreID semaphore)                    AVAILABLE_MAC_OS_X
 
 /*
  *  MPWaitOnSemaphore()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -674,6 +743,9 @@ MPWaitOnSemaphore(
 /*
  *  MPCreateCriticalRegion()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -688,6 +760,9 @@ MPCreateCriticalRegion(MPCriticalRegionID * criticalRegion)   AVAILABLE_MAC_OS_X
 /*
  *  MPDeleteCriticalRegion()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -701,6 +776,9 @@ MPDeleteCriticalRegion(MPCriticalRegionID criticalRegion)     AVAILABLE_MAC_OS_X
 
 /*
  *  MPEnterCriticalRegion()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -718,6 +796,9 @@ MPEnterCriticalRegion(
 /*
  *  MPExitCriticalRegion()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -734,6 +815,9 @@ MPExitCriticalRegion(MPCriticalRegionID criticalRegion)       AVAILABLE_MAC_OS_X
 /*
  *  MPCreateEvent()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -746,6 +830,9 @@ MPCreateEvent(MPEventID * event)                              AVAILABLE_MAC_OS_X
 
 /*
  *  MPDeleteEvent()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -761,6 +848,9 @@ MPDeleteEvent(MPEventID event)                                AVAILABLE_MAC_OS_X
 /*
  *  MPSetEvent()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -775,6 +865,9 @@ MPSetEvent(
 
 /*
  *  MPWaitForEvent()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -800,6 +893,9 @@ MPWaitForEvent(
 /*
  *  MPCreateNotification()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -814,6 +910,9 @@ MPCreateNotification(MPNotificationID * notificationID)       AVAILABLE_MAC_OS_X
 /*
  *  MPDeleteNotification()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -827,6 +926,9 @@ MPDeleteNotification(MPNotificationID notificationID)         AVAILABLE_MAC_OS_X
 
 /*
  *  MPModifyNotification()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -847,6 +949,9 @@ MPModifyNotification(
 /*
  *  MPModifyNotificationParameters()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -865,6 +970,9 @@ MPModifyNotificationParameters(
 
 /*
  *  MPCauseNotification()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -903,6 +1011,9 @@ enum {
 /*
  *  MPDelayUntil()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -929,6 +1040,9 @@ MPDelayUntil(AbsoluteTime * expirationTime)                   AVAILABLE_MAC_OS_X
 /*
  *  MPCreateTimer()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -943,6 +1057,9 @@ MPCreateTimer(MPTimerID * timerID)                            AVAILABLE_MAC_OS_X
 /*
  *  MPDeleteTimer()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -956,6 +1073,9 @@ MPDeleteTimer(MPTimerID timerID)                              AVAILABLE_MAC_OS_X
 
 /*
  *  MPSetTimerNotify()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -976,6 +1096,9 @@ MPSetTimerNotify(
 /*
  *  MPArmTimer()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -992,6 +1115,9 @@ MPArmTimer(
 
 /*
  *  MPCancelTimer()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -1052,6 +1178,9 @@ enum {
 /*
  *  MPAllocateAligned()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1069,6 +1198,9 @@ MPAllocateAligned(
 /*
  *  MPAllocate()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1083,6 +1215,9 @@ MPAllocate(ByteCount size)                                    AVAILABLE_MAC_OS_X
 /*
  *  MPFree()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1096,6 +1231,9 @@ MPFree(LogicalAddress object)                                 AVAILABLE_MAC_OS_X
 
 /*
  *  MPGetAllocatedBlockSize()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -1114,6 +1252,9 @@ MPGetAllocatedBlockSize(LogicalAddress object)                AVAILABLE_MAC_OS_X
 /*
  *  MPBlockCopy()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1131,6 +1272,9 @@ MPBlockCopy(
 /*
  *  MPBlockClear()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1146,6 +1290,9 @@ MPBlockClear(
 
 /*
  *  MPDataToCode()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -1309,6 +1456,9 @@ typedef struct MPTaskInfo               MPTaskInfo;
 /*
  *  MPSetExceptionHandler()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1325,6 +1475,9 @@ MPSetExceptionHandler(
 /*
  *  MPDisposeTaskException()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1340,6 +1493,9 @@ MPDisposeTaskException(
 
 /*
  *  MPExtractTaskState()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -1358,6 +1514,9 @@ MPExtractTaskState(
 /*
  *  MPSetTaskState()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1374,6 +1533,9 @@ MPSetTaskState(
 
 /*
  *  MPThrowException()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -1402,6 +1564,9 @@ enum {
 /*
  *  MPRegisterDebugger()
  *  
+ *  Mac OS X threading:
+ *    Thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1417,6 +1582,9 @@ MPRegisterDebugger(
 
 /*
  *  MPUnregisterDebugger()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -1451,6 +1619,9 @@ enum {
 
 /*
  *  MPRemoteCall()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -1531,6 +1702,9 @@ MPRemoteCall(
 
 /*
  *  _MPIsFullyInitialized()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework

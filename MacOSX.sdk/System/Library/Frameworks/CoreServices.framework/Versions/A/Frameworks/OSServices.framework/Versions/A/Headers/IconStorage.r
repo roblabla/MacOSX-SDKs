@@ -3,9 +3,9 @@
  
      Contains:   Services to load and share icon family data.
  
-     Version:    OSServices-39.2~411
+     Version:    OSServices-62.7~16
  
-     Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

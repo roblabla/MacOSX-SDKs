@@ -1,7 +1,7 @@
 /*
         NSPICTImageRep.h
         Application Kit
-        Copyright (c) 1997-2001, Apple Computer, Inc.
+        Copyright (c) 1997-2003, Apple Computer, Inc.
         All rights reserved.
 */
 
@@ -12,8 +12,8 @@
     /*All instance variables are private*/
     NSPoint      _pictOrigin;		/* topLeft of picFrame */
     NSData*      _pictData;
-    void*        _auxilliary;
-    unsigned int _reserved;
+    unsigned int _reserved1;
+    unsigned int _reserved2;
 }
 
 + (id)imageRepWithData:(NSData*)pictData;

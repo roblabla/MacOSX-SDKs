@@ -13,7 +13,7 @@
 
 CG_EXTERN_C_BEGIN
 
-typedef float CGPaletteBlendFraction; // A value between 0.0 and 1.0
+typedef float CGPaletteBlendFraction; /* A value between 0.0 and 1.0 */
 
 /*
  * Convenient device color representation

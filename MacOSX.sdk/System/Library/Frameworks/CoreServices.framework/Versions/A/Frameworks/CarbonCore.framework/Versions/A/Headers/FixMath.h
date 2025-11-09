@@ -3,9 +3,9 @@
  
      Contains:   Fixed Math Interfaces.
  
-     Version:    CarbonCore-472~1
+     Version:    CarbonCore-545~1
  
-     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -37,6 +37,24 @@ extern "C" {
 #define fract1              ((Fract) 0x40000000L)
 #define positiveInfinity    ((long)  0x7FFFFFFFL)
 #define negativeInfinity    ((long)  0x80000000L)
+
+#define FixedRound(a)       ((short)(((Fixed)(a) + fixed1/2) >> 16))
+#define FixedSquareRoot(a)  (((Fixed)FractSquareRoot(a) + 64) >> 7)
+#define FixedTruncate(a)    ((short)((Fixed)(a) >> 16))
+#define FixedToFract(a)     ((Fract)(a) << 14)
+#define FractToFixed(a)     (((Fixed)(a) + 8192L) >> 14)
+#define FixedToInt(a)       ((short)(((Fixed)(a) + fixed1/2) >> 16))
+#define IntToFixed(a)       ((Fixed)(a) << 16)
+#define FixedToFloat(a)     ((float)(a) / fixed1)
+#define FloatToFixed(a)     ((Fixed)((float)(a) * fixed1))
+#define FractToFloat(a)     ((float)(a) / fract1)
+#define FloatToFract(a)     ((Fract)((float)(a) * fract1))
+#define ColorToFract(a)     (((Fract) (a) << 14) + ((Fract)(a) + 2 >> 2))
+#define FractToColor(a)     ((gxColorValue) ((a) - ((a) >> 16) + 8191 >> 14))
+#ifndef ff  /* ff is already defined on some platforms */
+#define ff(a)              IntToFixed(a)
+#define fl(a)              FloatToFixed(a)
+#endif
 /*
     FixRatio, FixMul, and FixRound were previously in ToolUtils.h
 */

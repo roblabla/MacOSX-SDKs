@@ -1,7 +1,7 @@
 /*
 	NSGraphics.h
 	Application Kit
-	Copyright (c) 1994-2001, Apple Computer, Inc.
+	Copyright (c) 1994-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -30,12 +30,6 @@ typedef enum _NSCompositingOperation {
     NSCompositePlusLighter	= 13
 } NSCompositingOperation;
 
-/* special values for alpha */
-enum {
-    NSAlphaEqualToData		= 1,
-    NSAlphaAlwaysOne		= 2
-};
-
 /* types of window backing store */
 typedef enum _NSBackingStoreType {
     NSBackingStoreRetained	 = 0,
@@ -56,6 +50,15 @@ typedef enum {
     NSFocusRingBelow	 = 1,
     NSFocusRingAbove	 = 2
 } NSFocusRingPlacement;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+/* used by NSView and NSCell to configure if and how the control should draw its focus ring */ 
+typedef enum _NSFocusRingType {
+    NSFocusRingTypeDefault = 0,
+    NSFocusRingTypeNone = 1,
+    NSFocusRingTypeExterior = 2
+} NSFocusRingType;
+#endif
 
 /* Predefined colorspace names.
 */
@@ -141,3 +144,41 @@ APPKIT_EXTERN void NSDottedFrameRect(NSRect aRect);
 
 APPKIT_EXTERN void NSDrawWindowBackground(NSRect aRect);
 APPKIT_EXTERN void NSSetFocusRingStyle(NSFocusRingPlacement placement);
+
+/* Disable and reenable screen updates.  
+** NSDisableScreenUpdates prevents drawing for all windows belonging to the calling  
+** process from being flushed to the screen.  This function permits operations on 
+** multiple windows to appear atomic to the user, and is particularly useful for parent
+** and child windows.  Note that this function should be used with care for short 
+** operations only as the system will only allow updates to be disabled for a short 
+** time (currently one second) before automatically reenabling updates.
+** NSEnableScreenUpdates reenables drawing that was previously disabled by 
+** NSDisableScreenUpdates.  Multiple calls stack.
+*/
+APPKIT_EXTERN void NSDisableScreenUpdates(void)	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+APPKIT_EXTERN void NSEnableScreenUpdates(void)	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+
+/* Runs one of the standard system animation effects (display and sound).
+** 'centerLocation' represents the center, in screen coordinates, to show the effect.
+** 'size' specifies how big the effect should be.  Use NSZeroSize to get the default size.
+** 'animationDelegate' is optionally, an object that wants to know when the effect has completed.
+** 'didEndSelector' will be invoked in the animationDelegate when the animation has completed.
+**  
+** The didEndSelector should have the following signature:
+** 	- (void)animationEffectDidEnd:(void *)contextInfo;
+*/
+
+typedef enum _NSAnimationEffect {
+	// The default effect used to indicate removal of an item from a collection, 
+	// such as toolbar (indicates removal, without destroying the underlying data).
+	NSAnimationEffectDisappearingItemDefault = 0,
+
+	// An effect showing a puff of smoke.
+	NSAnimationEffectPoof = 10
+} NSAnimationEffect;
+
+#endif
+
+APPKIT_EXTERN void NSShowAnimationEffect(NSAnimationEffect animationEffect, NSPoint centerLocation, NSSize size, id animationDelegate, SEL didEndSelector, void *contextInfo) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;

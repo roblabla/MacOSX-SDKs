@@ -26,7 +26,7 @@
 #include <IOKit/IOService.h>
 #include <IOKit/firewire/IOFWRegs.h>
 #include <IOKit/firewire/IOFWAddressSpace.h>
-#include "IOFireWireAVCConsts.h"
+#include <IOKit/avc/IOFireWireAVCConsts.h>
 
 extern const OSSymbol *gIOAVCUnitType;
 

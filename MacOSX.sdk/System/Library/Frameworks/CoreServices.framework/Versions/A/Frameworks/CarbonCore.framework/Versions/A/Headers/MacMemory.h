@@ -3,9 +3,9 @@
  
      Contains:   Memory Manager Interfaces.
  
-     Version:    CarbonCore-472~1
+     Version:    CarbonCore-545~1
  
-     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -271,6 +271,9 @@ InvokeUserFnUPP(
 /*
  *  GZSaveHnd()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -283,6 +286,9 @@ GZSaveHnd(void)                                               AVAILABLE_MAC_OS_X
 /*
  *  TopMem()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -294,6 +300,9 @@ TopMem(void)                                                  AVAILABLE_MAC_OS_X
 
 /*
  *  MemError()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Panther
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -318,6 +327,9 @@ MemError(void)                                                AVAILABLE_MAC_OS_X
 /*
  *  NewHandle()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Panther
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -339,6 +351,9 @@ NewHandle(Size byteCount)                                     AVAILABLE_MAC_OS_X
 
 /*
  *  NewHandleClear()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Panther
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -372,6 +387,9 @@ NewHandleClear(Size byteCount)                                AVAILABLE_MAC_OS_X
 /*
  *  RecoverHandle()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Panther
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -394,6 +412,9 @@ RecoverHandle(Ptr p)                                          AVAILABLE_MAC_OS_X
 /*
  *  NewPtr()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Panther
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -415,6 +436,9 @@ NewPtr(Size byteCount)                                        AVAILABLE_MAC_OS_X
 
 /*
  *  NewPtrClear()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Panther
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -448,6 +472,9 @@ NewPtrClear(Size byteCount)                                   AVAILABLE_MAC_OS_X
 /*
  *  MaxBlock()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -470,6 +497,9 @@ MaxBlock(void)                                                AVAILABLE_MAC_OS_X
 /*
  *  StackSpace()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -481,6 +511,9 @@ StackSpace(void)                                              AVAILABLE_MAC_OS_X
 
 /*
  *  NewEmptyHandle()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Panther
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -504,6 +537,9 @@ NewEmptyHandle(void)                                          AVAILABLE_MAC_OS_X
 /*
  *  HLock()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Panther
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -515,6 +551,9 @@ HLock(Handle h)                                               AVAILABLE_MAC_OS_X
 
 /*
  *  HUnlock()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Panther
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -528,6 +567,9 @@ HUnlock(Handle h)                                             AVAILABLE_MAC_OS_X
 /*
  *  HPurge()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Panther
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -539,6 +581,9 @@ HPurge(Handle h)                                              AVAILABLE_MAC_OS_X
 
 /*
  *  HNoPurge()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Panther
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -552,6 +597,9 @@ HNoPurge(Handle h)                                            AVAILABLE_MAC_OS_X
 /*
  *  HLockHi()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Panther
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -563,6 +611,9 @@ HLockHi(Handle h)                                             AVAILABLE_MAC_OS_X
 
 /*
  *  TempNewHandle()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -578,6 +629,9 @@ TempNewHandle(
 /*
  *  TempMaxMem()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -589,6 +643,9 @@ TempMaxMem(Size * grow)                                       AVAILABLE_MAC_OS_X
 
 /*
  *  TempFreeMem()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -622,6 +679,9 @@ TempFreeMem(void)                                             AVAILABLE_MAC_OS_X
 /*
  *  CompactMem()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -643,6 +703,9 @@ CompactMem(Size cbNeeded)                                     AVAILABLE_MAC_OS_X
 
 /*
  *  PurgeMem()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -666,6 +729,9 @@ PurgeMem(Size cbNeeded)                                       AVAILABLE_MAC_OS_X
 /*
  *  FreeMem()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -687,6 +753,9 @@ FreeMem(void)                                                 AVAILABLE_MAC_OS_X
 
 /*
  *  ReserveMem()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -710,6 +779,9 @@ ReserveMem(Size cbNeeded)                                     AVAILABLE_MAC_OS_X
 /*
  *  MaxMem()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -732,6 +804,9 @@ MaxMem(Size * grow)                                           AVAILABLE_MAC_OS_X
 /*
  *  SetGrowZone()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -743,6 +818,9 @@ SetGrowZone(GrowZoneUPP growZone)                             AVAILABLE_MAC_OS_X
 
 /*
  *  GetGrowZone()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -756,6 +834,9 @@ GetGrowZone(void)                                             AVAILABLE_MAC_OS_X
 /*
  *  MoveHHi()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -767,6 +848,9 @@ MoveHHi(Handle h)                                             AVAILABLE_MAC_OS_X
 
 /*
  *  DisposePtr()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Panther
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -780,6 +864,9 @@ DisposePtr(Ptr p)                                             AVAILABLE_MAC_OS_X
 /*
  *  GetPtrSize()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Panther
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -791,6 +878,9 @@ GetPtrSize(Ptr p)                                             AVAILABLE_MAC_OS_X
 
 /*
  *  SetPtrSize()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Panther
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -806,6 +896,9 @@ SetPtrSize(
 /*
  *  DisposeHandle()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Panther
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -817,6 +910,9 @@ DisposeHandle(Handle h)                                       AVAILABLE_MAC_OS_X
 
 /*
  *  SetHandleSize()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Panther
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -839,6 +935,9 @@ SetHandleSize(
 /*
  *  GetHandleSize()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Panther
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -860,6 +959,9 @@ GetHandleSize(Handle h)                                       AVAILABLE_MAC_OS_X
 
 /*
  *  ReallocateHandle()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Panther
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -885,6 +987,9 @@ ReallocateHandle(
 /*
  *  EmptyHandle()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Panther
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -896,6 +1001,9 @@ EmptyHandle(Handle h)                                         AVAILABLE_MAC_OS_X
 
 /*
  *  HSetRBit()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Panther
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -909,6 +1017,9 @@ HSetRBit(Handle h)                                            AVAILABLE_MAC_OS_X
 /*
  *  HClrRBit()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Panther
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -921,6 +1032,9 @@ HClrRBit(Handle h)                                            AVAILABLE_MAC_OS_X
 /*
  *  HGetState()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Panther
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -932,6 +1046,9 @@ HGetState(Handle h)                                           AVAILABLE_MAC_OS_X
 
 /*
  *  HSetState()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Panther
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -946,6 +1063,9 @@ HSetState(
 
 /*
  *  PurgeSpace()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -967,6 +1087,9 @@ PurgeSpace(
 /*
  *  PurgeSpaceTotal()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -978,6 +1101,9 @@ PurgeSpaceTotal(void)                                         AVAILABLE_MAC_OS_X
 
 /*
  *  PurgeSpaceContiguous()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -1025,6 +1151,9 @@ PurgeSpaceContiguous(void)                                    AVAILABLE_MAC_OS_X
 /*
  *  BlockMove()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1039,6 +1168,9 @@ BlockMove(
 
 /*
  *  BlockMoveData()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -1055,6 +1187,9 @@ BlockMoveData(
 /*
  *  BlockMoveUncached()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1069,6 +1204,9 @@ BlockMoveUncached(
 
 /*
  *  BlockMoveDataUncached()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -1085,6 +1223,9 @@ BlockMoveDataUncached(
 /*
  *  BlockZero()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1098,6 +1239,9 @@ BlockZero(
 
 /*
  *  BlockZeroUncached()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Jaguar
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -1134,6 +1278,9 @@ BlockZeroUncached(
 /*
  *  MoreMasters()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1145,6 +1292,9 @@ MoreMasters(void)                                             AVAILABLE_MAC_OS_X
 
 /*
  *  MoreMasterPointers()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -1180,6 +1330,9 @@ MoreMasterPointers(UInt32 inCount)                            AVAILABLE_MAC_OS_X
 /*
  *  TempHLock()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1193,6 +1346,9 @@ TempHLock(
 
 /*
  *  TempHUnlock()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -1208,6 +1364,9 @@ TempHUnlock(
 /*
  *  TempDisposeHandle()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1222,6 +1381,9 @@ TempDisposeHandle(
 /*
  *  TempTopMem()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1233,6 +1395,9 @@ TempTopMem(void)                                              AVAILABLE_MAC_OS_X
 
 /*
  *  HoldMemory()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -1247,6 +1412,9 @@ HoldMemory(
 
 /*
  *  UnholdMemory()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -1302,6 +1470,9 @@ UnholdMemory(
 /*
  *  MakeMemoryResident()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0.2 and later
@@ -1315,6 +1486,9 @@ MakeMemoryResident(
 
 /*
  *  ReleaseMemoryData()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -1330,6 +1504,9 @@ ReleaseMemoryData(
 /*
  *  MakeMemoryNonResident()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0.2 and later
@@ -1343,6 +1520,9 @@ MakeMemoryNonResident(
 
 /*
  *  FlushMemory()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -1507,6 +1687,9 @@ FlushMemory(
 /*
  *  HandToHand()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Panther
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1518,6 +1701,9 @@ HandToHand(Handle * theHndl)                                  AVAILABLE_MAC_OS_X
 
 /*
  *  PtrToXHand()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Panther
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -1534,6 +1720,9 @@ PtrToXHand(
 /*
  *  PtrToHand()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Panther
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1549,6 +1738,9 @@ PtrToHand(
 /*
  *  HandAndHand()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Panther
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1562,6 +1754,9 @@ HandAndHand(
 
 /*
  *  PtrAndHand()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Panther
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -1580,6 +1775,9 @@ PtrAndHand(
 /*
  *  CheckAllHeaps()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1592,6 +1790,9 @@ CheckAllHeaps(void)                                           AVAILABLE_MAC_OS_X
 /* Checks the application heap for validity */
 /*
  *  IsHeapValid()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -1606,6 +1807,9 @@ IsHeapValid(void)                                             AVAILABLE_MAC_OS_X
 /*
  *  IsHandleValid()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version Panther
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1618,6 +1822,9 @@ IsHandleValid(Handle h)                                       AVAILABLE_MAC_OS_X
 /* It is invalid to pass a NULL Pointer to IsPointerValid */
 /*
  *  IsPointerValid()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version Panther
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework

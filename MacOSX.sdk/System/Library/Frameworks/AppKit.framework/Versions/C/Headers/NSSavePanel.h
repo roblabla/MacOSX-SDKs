@@ -1,160 +1,160 @@
 /*
-	NSSavePanel.h - Nav Services version.
+	NSSavePanel.h
 	Application Kit
-	Copyright (c) 1994-2001, Apple Computer, Inc.
+	Copyright (c) 1994-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
+#import <AppKit/NSNibDeclarations.h>
 #import <AppKit/NSPanel.h>
 
-@class NSBrowser, NSURL;
-
-/* Tags of views in the SavePanel */
+@class NSBox, NSMutableArray, NSNavView, NSNavNodePopUpButton, NSTextField, NSTextView, NSView, NSURL, NSNavFilepathInputController, NSNavNewFolderController;
 
 enum {
-    NSFileHandlingPanelImageButton	= 150,
-    NSFileHandlingPanelTitleField	= 151,
-    NSFileHandlingPanelBrowser		= 152,
     NSFileHandlingPanelCancelButton	= NSCancelButton,
     NSFileHandlingPanelOKButton		= NSOKButton,
-    NSFileHandlingPanelForm		= 155,
-
-    // these are obsolete and are no longer in the panel
-    NSFileHandlingPanelHomeButton	= 156,
-    NSFileHandlingPanelDiskButton	= 157,
-    NSFileHandlingPanelDiskEjectButton	= 158
 };		
 
-#ifndef WIN32
-@interface NSSavePanel : NSPanel
-{
-    /*All instance variables are private*/
-    NSBrowser		*_browser;
-    id                  _form;
-    id                  _homeButton;
-    id                  _okButton;
-    id			_hideExtensionButton;
-    id                  _separator;
-    id                  _accessoryView;
-    NSString		*_filename;
-    NSString		*_directory;
-    NSArray		*_filenames;
-    NSString		*_requiredType;
-    void		*_columns;
-    NSString		*_reserved2;
-    int                 _cdcolumn;
-    id                  _scroller;
-    id                  _expandButton;
-    id                  _browserBox;
-    id                  _favoritesPopup;
-    NSArray		*_recents;
-    NSSize              _minCollapsedSize;
-    NSSize              _minExpandedSize;
-    NSSize              _expandedSize;          
-    BOOL		_recyclable;
-    BOOL		_docModal;
-    struct __spFlags {
-        unsigned int        opening:1;
-        unsigned int        exitOk:1;
-        unsigned int        allowMultiple:1;
-        unsigned int        dirty:1;
-        unsigned int        invalidateMatrices:1;
-        unsigned int        filtered:1;
-        unsigned int        canChooseFolders:1;
-        unsigned int        treatsFilePackagesAsDirectories:1;
-        unsigned int        largeFS:1;
-        unsigned int	    delegateValidatesNew:1;
-        unsigned int	    canChooseFiles:1;
-        unsigned int        checkCase:1;
-        unsigned int        cancd:1;
-        unsigned int        UnixExpert:1;
-	unsigned int	    delegateUserEnteredFilename:1;
-        unsigned int        reserved:1;
-        unsigned int        delegateCompares:1;
-        unsigned int        delegateFilters:1;
-        unsigned int	    collapsed:1;
-        unsigned int	    editingNewFolder:1;
-        unsigned int	    delegateNotifyExpands:1;
-        unsigned int	    exitNextTime:1;
-	unsigned int	    enableLeafSave:1;
-        unsigned int	    openApps:1;
-        unsigned int        updateFavorites:1;
-        unsigned int	    includeNewFolder:1;
-        unsigned int	    delegateNotifyDirectoryDidChange:1;
-        unsigned int	    dontResolveAliases:1;
-        unsigned int	    allowHideExtension:1;
-        unsigned int	    hideExtension:1;
-        unsigned int	    RESERVED:2;
-    }                   _spFlags;
-    id			_saveDelegate;
-    SEL			_didEndSelector;
+typedef struct __SPFlags {
+    unsigned int saveMode:1;
+    unsigned int isExpanded:1;
+    unsigned int allowsOtherFileTypes:1;
+    unsigned int canCreateDirectories:1;
+    unsigned int canSelectedHiddenExtension:1;
+    unsigned int reserved:27;
+} _SPFlags;
+
+typedef struct NSSavePanelAuxiliary NSSavePanelAuxiliaryOpaque;
+
+@interface NSSavePanel : NSPanel {
+    NSNavView *_navView;
+    NSView *_accessoryView;
+    NSArray *_allowedFileTypes;
+    NSString *_validatedPosixName;
+    NSString *_hiddenExtension;
+        
+    IBOutlet NSTextField  *_messageTextField;
+    IBOutlet NSView       *_savePane;
+    IBOutlet NSBox        *_saveNavSeparatorBox;
+    IBOutlet NSView         *_nameFieldContainer;
+    IBOutlet NSTextField      *_nameField;
+    IBOutlet NSTextField      *_nameFieldLabel;
+    IBOutlet NSButton         *_expansionButton;
+    IBOutlet NSView         *_directoryPopUpContainer;
+    IBOutlet NSNavNodePopUpButton *_directoryPopUp;
+    IBOutlet NSTextField       *_directoryPopUpLabel;
+    IBOutlet NSBox        *_navViewContainer;
+    IBOutlet NSBox        *_accessoryViewContainer;
+    IBOutlet NSView       *_bottomControlsContainer;
+    IBOutlet NSButton       *_hideExtensionButton;
+    IBOutlet NSButton       *_newFolderButton;
+    IBOutlet NSButton       *_cancelButton;
+    IBOutlet NSButton       *_okButton;
+    
+    IBOutlet NSNavFilepathInputController *_filepathInputController;
+    IBOutlet NSNavNewFolderController *_newFolderController;
+
+    _SPFlags	_spFlags;
+    
+    NSSavePanelAuxiliaryOpaque *_spAuxiliaryStorage;
+    
+    char _reserved[5];
+
+    void *_private;
 }
-#else
-@interface NSSavePanel : NSObject
-{
-    /*All instance variables are private*/
-    NSString *_filename;
-    NSString *_directory;
-    NSArray  *_filenames;
-    NSString *_requiredType;
-    NSString *_title;
-    NSView   *_accessoryView;
-    struct __spFlags {
-        unsigned int        RESERVED2:1;
-        unsigned int        allowMultiple:1;
-        unsigned int        canChooseFolders:1;
-        unsigned int        RESERVED:29;
-    }         _spFlags;
-}
-#endif WIN32
 
 + (NSSavePanel *)savePanel;
 
-- (void)ok:(id)sender;
-- (void)cancel:(id)sender;
-- (int)runModalForDirectory:(NSString *)path file:(NSString *)name;
-/*
-**  Present a sheet savePanel on the given window.  When the modal session is
-** ended, the didEndSelector will be invoked. The didEndSelector method should
-** have the following signature:
-** - (void)savePanelDidEnd:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
-**
-*/
-- (void)beginSheetForDirectory:(NSString *)path file:(NSString *)name modalForWindow:(NSWindow *)docWindow modalDelegate:(id)delegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo;
-/* 
-** runModalForDirectory:file:relativeToWindow: is deprecated. 
-** Please use beginSheetForDirectory:file:modalForWindow:modalDelegate:didEndSelector:contextInfo: instead
-*/
-- (int)runModalForDirectory:(NSString *)path file:(NSString *)name relativeToWindow:(NSWindow*)window;
-- (int)runModal;
-- (NSString *)filename;
 - (NSURL *)URL;
-- (void)setDirectory:(NSString *)path;
+
+- (NSString *)filename;
+
 - (NSString *)directory;
-- (void)setPrompt:(NSString *)prompt;
-- (NSString *)prompt;
-- (void)setTitle:(NSString *)title;
-- (NSString *)title;
-- (void)setRequiredFileType:(NSString *)type;
+- (void)setDirectory:(NSString *)path;
+
 - (NSString *)requiredFileType;
-- (void)setTreatsFilePackagesAsDirectories:(BOOL)flag;
-- (BOOL)treatsFilePackagesAsDirectories;
-- (void)setAccessoryView:(NSView *)aView;
+- (void)setRequiredFileType:(NSString *)type;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (NSArray *)allowedFileTypes;
+- (void)setAllowedFileTypes:(NSArray *)types;
+
+- (BOOL)allowsOtherFileTypes;
+- (void)setAllowsOtherFileTypes:(BOOL)flag;
+#endif
+
 - (NSView *)accessoryView;
-- (void)setDelegate:(id)anObject;
-- (void)validateVisibleColumns;
-- (void)selectText:(id)sender;
+- (void)setAccessoryView:(NSView *)view;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (id)delegate;
+#endif
+- (void)setDelegate:(id)delegate;
+
 - (BOOL)isExpanded;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (BOOL)canCreateDirectories;
+- (void)setCanCreateDirectories:(BOOL)flag;
+#endif
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (BOOL)canSelectHiddenExtension;
+#endif
 - (void)setCanSelectHiddenExtension:(BOOL)flag;
 - (BOOL)isExtensionHidden;
 - (void)setExtensionHidden:(BOOL)flag;
+
+- (BOOL)treatsFilePackagesAsDirectories;
+- (void)setTreatsFilePackagesAsDirectories:(BOOL)flag;
+
+- (NSString *)prompt;
+- (void)setPrompt:(NSString *)prompt;
+
+- (NSString *)title;
+- (void)setTitle:(NSString *)title;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (NSString *)nameFieldLabel;
+- (void)setNameFieldLabel:(NSString *)label;
+#endif
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (NSString *)message;
+- (void)setMessage:(NSString *)message;
+#endif
+
+- (void)validateVisibleColumns;
+
+// A method that was deprecated in Mac OS 10.3.  -[NSSavePanel selectText:] does nothing.
+- (IBAction)selectText:(id)sender;
+
 @end
 
-@interface NSObject(NSSavePanelDelegate)
-- (NSString *)panel:(id)sender userEnteredFilename:(NSString *)filename confirmed:(BOOL)okFlag;
-- (BOOL)panel:(id)sender isValidFilename:(NSString *)filename;
+
+@interface NSSavePanel (NSSavePanelRuntime)
+
+- (IBAction)ok:(id)sender;
+- (IBAction)cancel:(id)sender;
+
+- (void)beginSheetForDirectory:(NSString *)path file:(NSString *)name modalForWindow:(NSWindow *)docWindow modalDelegate:(id)delegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo;
+
+- (int)runModalForDirectory:(NSString *)path file:(NSString *)name;
+- (int)runModal;
+
+@end
+
+
+@interface NSObject (NSSavePanelDelegate)
+
 - (BOOL)panel:(id)sender shouldShowFilename:(NSString *)filename;
-- (NSComparisonResult)panel:(id)sender compareFilename:(NSString *)file1 with:(NSString *)file2 caseSensitive:(BOOL)caseSensitive;
+- (NSComparisonResult)panel:(id)sender compareFilename:(NSString *)name1 with:(NSString *)name2 caseSensitive:(BOOL)caseSensitive;
+- (BOOL)panel:(id)sender isValidFilename:(NSString *)filename;
+- (NSString *)panel:(id)sender userEnteredFilename:(NSString *)filename confirmed:(BOOL)okFlag;
 - (void)panel:(id)sender willExpand:(BOOL)expanding;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void)panel:(id)sender directoryDidChange:(NSString *)path;
+- (void)panelSelectionDidChange:(id)sender;
+#endif
+
 @end

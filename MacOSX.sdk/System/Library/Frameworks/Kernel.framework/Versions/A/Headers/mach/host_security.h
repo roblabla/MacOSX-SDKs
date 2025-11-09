@@ -38,6 +38,9 @@ typedef function_table_entry 	*function_table_t;
 __BeforeMigUserHeader
 #endif /* __BeforeMigUserHeader */
 
+#include <sys/cdefs.h>
+__BEGIN_DECLS
+
 
 /* Routine host_security_create_task_token */
 #ifdef	mig_external
@@ -50,6 +53,7 @@ kern_return_t host_security_create_task_token
 	host_security_t host_security,
 	task_t parent_task,
 	security_token_t sec_token,
+	audit_token_t audit_token,
 	host_t host,
 	ledger_array_t ledgers,
 	mach_msg_type_number_t ledgersCnt,
@@ -68,8 +72,23 @@ kern_return_t host_security_set_task_token
 	host_security_t host_security,
 	task_t target_task,
 	security_token_t sec_token,
+	audit_token_t audit_token,
 	host_t host
 );
+
+__END_DECLS
+
+/********************** Caution **************************/
+/* The following data types should be used to calculate  */
+/* maximum message sizes only. The actual message may be */
+/* smaller, and the position of the arguments within the */
+/* message layout may vary from what is presented here.  */
+/* For example, if any of the arguments are variable-    */
+/* sized, and less than the maximum is sent, the data    */
+/* will be packed tight in the actual message to reduce  */
+/* the presence of holes.                                */
+/********************** Caution **************************/
+
 /* typedefs for all requests */
 
 #ifndef __Request__host_security_subsystem__defined
@@ -84,6 +103,7 @@ kern_return_t host_security_set_task_token
 		/* end of the kernel processed data */
 		NDR_record_t NDR;
 		security_token_t sec_token;
+		audit_token_t audit_token;
 		mach_msg_type_number_t ledgersCnt;
 		boolean_t inherit_memory;
 	} __Request__host_security_create_task_token_t;
@@ -97,6 +117,7 @@ kern_return_t host_security_set_task_token
 		/* end of the kernel processed data */
 		NDR_record_t NDR;
 		security_token_t sec_token;
+		audit_token_t audit_token;
 	} __Request__host_security_set_task_token_t;
 
 #endif /* !__Request__host_security_subsystem__defined */

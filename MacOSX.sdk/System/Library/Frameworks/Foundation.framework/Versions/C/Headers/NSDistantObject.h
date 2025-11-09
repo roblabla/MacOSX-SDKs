@@ -1,5 +1,5 @@
 /*	NSDistantObject.h
-	Copyright 1989-2002, Apple, Inc. All rights reserved.
+	Copyright (c) 1989-2003, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSProxy.h>

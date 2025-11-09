@@ -3,9 +3,9 @@
  
      Contains:   OS Utilities Interfaces.
  
-     Version:    CarbonCore-472~1
+     Version:    CarbonCore-545~1
  
-     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -172,11 +172,11 @@ typedef DeferredTask *                  DeferredTaskPtr;
     
     If your code looked like this:
     
-        MachineLocation.u.dlsDelta = 1;
+        MachineLocation.u.dlsDelta = isDLS? 0x80: 0x00;
     
     you should change it to this:
     
-        MachineLocation.u.dls.Delta = 1;
+        MachineLocation.u.dls.Delta = isDLS? 0x80: 0x00;
     
     to be endian safe. The gmtDelta remains the same; the low 24-bits
     are used. Remember that order of assignment DOES matter:
@@ -190,6 +190,9 @@ typedef DeferredTask *                  DeferredTaskPtr;
 
         MachineLocation.u.gmtDelta = 0xBBBBBB;      // u = 0x00BBBBBB;  
         MachineLocation.u.dls.Delta = 0xAA;         // u = 0xAABBBBBB;
+        
+    NOTE:   The information regarding dlsDelta in Inside Mac is INCORRECT.
+            It's always 0x80 for daylight-saving time or 0x00 for standard time.
 */
 struct MachineLocation {
     Fract   latitude;
@@ -412,15 +415,15 @@ ReadLocation(MachineLocation * loc)                           AVAILABLE_MAC_OS_X
 
 
 /*
- *  WriteLocation()
+ *  WriteLocation()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.0
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-WriteLocation(const MachineLocation * loc)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+WriteLocation(const MachineLocation * loc)                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED;
 
 
 

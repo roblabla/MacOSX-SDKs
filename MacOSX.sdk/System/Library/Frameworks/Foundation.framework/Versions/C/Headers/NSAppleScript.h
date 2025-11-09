@@ -1,6 +1,6 @@
 /*
 	NSAppleScript.h
-	Copyright (c) 2002, Apple Computer, Inc.
+	Copyright (c) 2002-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -31,7 +31,7 @@ FOUNDATION_EXPORT NSString * const NSAppleScriptErrorRange; // NSValue (containi
 // Given a URL that locates a script, in either text or compiled form, initialize.  Return nil and a pointer to an error information dictionary if an error occurs.  This is a designated initializer for this class.
 - (id)initWithContentsOfURL:(NSURL *)url error:(NSDictionary **)errorInfo;
 
-// Given a string containing the source code of a script, initialize.  Return nil if an error occurs.  This is also a designated initializer for this class.
+// Given a string containing the AppleScript source code of a script, initialize.  Return nil if an error occurs.  This is also a designated initializer for this class.
 - (id)initWithSource:(NSString *)source;
 
 // Return the source code of the script if it is available, nil otherwise.  It is possible for an NSAppleScript that has been instantiated with -initWithContentsOfURL:error: to be a script for which the source code is not available, but is nonetheless executable.

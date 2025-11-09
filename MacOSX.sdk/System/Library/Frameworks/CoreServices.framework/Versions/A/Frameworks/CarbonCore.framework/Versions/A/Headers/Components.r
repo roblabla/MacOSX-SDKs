@@ -3,9 +3,9 @@
  
      Contains:   Component Manager Interfaces.
  
-     Version:    CarbonCore-472~1
+     Version:    CarbonCore-545~1
  
-     Copyright:  © 1991-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1991-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -21,6 +21,7 @@
 #include <CarbonCore/ConditionalMacros.r>
 #endif
 
+#define cmpThreadSafe 					0x10000000			/*  component is thread-safe  */
 #define cmpIsMissing 					0x20000000
 #define cmpWantsRegisterMessage 		0x80000000
 
@@ -84,8 +85,9 @@ type 'thng' {
                   platformPowerPC = 2,
                    platformInterpreted = 3,
                    platformWin32 = 4,
-                 platformPowerPCNativeEntryPoint = 5;
-       };
+                 platformPowerPCNativeEntryPoint = 5,
+                   platformIA32NativeEntryPoint = 6;
+      };
 #if thng_RezTemplateVersion >= 2
         literal longint;                                        /* resource map type */
         integer;                                                /* resource map id */

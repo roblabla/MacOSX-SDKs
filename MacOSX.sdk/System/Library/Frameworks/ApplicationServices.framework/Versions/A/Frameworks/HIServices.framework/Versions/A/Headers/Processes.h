@@ -3,9 +3,9 @@
  
      Contains:   Process Manager Interfaces.
  
-     Version:    HIServices-106.1~2
+     Version:    HIServices-125.6~1
  
-     Copyright:  © 1989-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1989-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -60,7 +60,7 @@ enum {
   launchInhibitDaemon           = 0x0080
 };
 
-/* Format for first AppleEvent to pass to new process.  The size of the overall
+/* Format for first AppleEvent to pass to new process. The size of the overall
   buffer variable: the message body immediately follows the messageLength */
 struct AppParameters {
   struct {
@@ -120,20 +120,31 @@ enum {
   modeDisplayManagerAware       = 0x00000004
 };
 
+typedef UInt32 ProcessApplicationTransformState;
+enum {
+  kProcessTransformToForegroundApplication = 1L
+};
+
 /*
    Record returned by GetProcessInformation
-    When calling GetProcessInformation(), the input ProcesInfoRec
+    When calling GetProcessInformation(), the input ProcessInfoRec
     should have the processInfoLength set to sizeof(ProcessInfoRec),
     the processName field set to nil or a pointer to a Str255, and
-    processAppSpec set to nil or a pointer to an FSSpec.  If
+    processAppSpec set to nil or a pointer to an FSSpec. If
     processName or processAppSpec are not specified, this routine
     will very likely write data to whatever random location in memory
     these happen to point to, which is not a good thing.
     Note:  The processName field may not be what you expect, especially if
-    an application has a localized name.  The .processName field, if not NULL,
+    an application has a localized name. The .processName field, if not NULL,
     on return will contain the filename part of the executable file of the
-    application.  If you want the localized, user-displayable name for an 
+    application. If you want the localized, user-displayable name for an 
     application, call CopyProcessName().
+    On Mac OS X, some flags in processMode will not be set as they were on
+    Mac OS 9, even for Classic applications.  Mac OS X doesn't support
+    applications which can't be sent into the background, so 
+    modeCanBackground will always be set.  Similarly, Mac OS X applications
+    will always have mode32BitCompatible and modeHighLevelEventAware
+    set.
     
 */
 struct ProcessInfoRec {
@@ -155,7 +166,7 @@ typedef struct ProcessInfoRec           ProcessInfoRec;
 typedef ProcessInfoRec *                ProcessInfoRecPtr;
 /*
     Some applications assumed the size of a ProcessInfoRec would never change,
-    which has caused problems trying to return additional information.  In
+    which has caused problems trying to return additional information. In
     the future, we will add fields to ProcessInfoExtendedRec when necessary,
     and callers which wish to access 'more' data than originally was present
     in ProcessInfoRec should allocate space for a ProcessInfoExtendedRec,
@@ -163,10 +174,16 @@ typedef ProcessInfoRec *                ProcessInfoRecPtr;
     then coerce this to a ProcessInfoRecPtr in the call to
     GetProcessInformation().
     Note:  The processName field may not be what you expect, especially if
-    an application has a localized name.  The .processName field, if not NULL,
+    an application has a localized name. The .processName field, if not NULL,
     on return will contain the filename part of the executable file of the
-    application.  If you want the localized, user-displayable name for an 
+    application. If you want the localized, user-displayable name for an 
     application, call CopyProcessName().
+    On Mac OS X, some flags in processMode will not be set as they were on
+    Mac OS 9, even for Classic applications.  Mac OS X doesn't support
+    applications which can't be sent into the background, so 
+    modeCanBackground will always be set.  Similarly, Mac OS X applications
+    will always have mode32BitCompatible and modeHighLevelEventAware
+    set.
     
 */
 struct ProcessInfoExtendedRec {
@@ -214,7 +231,7 @@ enum {
 /*
     Applications and background applications can control when they are asked to quit
     by the system at restart/shutdown by setting these bits in a 'quit' ( 0 ) resource
-    in their application's resource fork.  Applications without a 'quit' ( 0 ) will
+    in their application's resource fork. Applications without a 'quit' ( 0 ) will
     be quit at kQuitAtNormalTime mask.
     These options only function on Mac OS 9.x at this time.
 */
@@ -261,19 +278,19 @@ LaunchApplication(LaunchPBPtr LaunchParams)                   AVAILABLE_MAC_OS_X
  *    
  *    All applications ( things which can appear in the Dock or which
  *    are not documents and are launched by the Finder or Dock ) on Mac
- *    OS 10 have a unique process serial number.  This number is
- *    created when the application launches, and remains until the
- *    application quits. Other system services, like AppleEvents, use
- *    the ProcessSerialNumber to specify an application.
+ *    OS 10 have a unique process serial number. This number is created
+ *    when the application launches, and remains until the application
+ *    quits. Other system services, like AppleEvents, use the
+ *    ProcessSerialNumber to specify an application.
  *    
  *    During launch, every application 'checks in' with the Process
  *    Manager. Before this checkin, the application can not receive
- *    events or draw to the screen.  Prior to Mac OS 10.2, this 'check
+ *    events or draw to the screen. Prior to Mac OS 10.2, this 'check
  *    in' happened before the applications's main() function was
- *    entered.  In Mac OS 10.2 and later, this 'check in' does not
+ *    entered. In Mac OS 10.2 and later, this 'check in' does not
  *    happen until the first time the application calls a Process
  *    Manager function, or until it enters CFRunLoopRun() for the main
- *    runloop.  This allows tools and other executables which do not
+ *    runloop. This allows tools and other executables which do not
  *    need to receive events to link against more of the higher level
  *    toolbox frameworks, but may cause a problem if the application
  *    expects to be able to retrieve events or use CoreGraphics
@@ -282,20 +299,20 @@ LaunchApplication(LaunchPBPtr LaunchParams)                   AVAILABLE_MAC_OS_X
  *    An application can force the connection to the Process Manager to
  *    be set up by calling any Process Manager routine, but the
  *    recommended way to do this is to call GetCurrentProcess() to ask
- *    for the current application's PSN.  This will initialize the
+ *    for the current application's PSN. This will initialize the
  *    connection to the Process Manager if it has not already been set
  *    up and 'check in' the application with the system.
  *    
  *    This function is named MacGetCurrentProcess() on non Macintosh
- *    platforms and GetCurrentProcess on the Macintosh.  However, even
+ *    platforms and GetCurrentProcess on the Macintosh. However, even
  *    Macintosh code can use the MacGetCurrentProcess() name since
  *    there is a macro which maps back to GetCurrentProcess().
  *    
  *    Lastly, it is usually not necessary to call GetCurrentProcess()
  *    to get the 'current' process psn merely to pass it to another
- *    Process Manager routine.  Instead, just construct a
+ *    Process Manager routine. Instead, just construct a
  *    ProcessSerialNumber with 0 in highLongOfPSN and kCurrentProcess
- *    in lowLongOfPSN and pass that.  For example, to make the current
+ *    in lowLongOfPSN and pass that. For example, to make the current
  *    process the frontmost process, use ( C code follows )
  *    
  *    ProcessSerialNumber psn = { 0, kCurrentProcess }; 
@@ -360,7 +377,7 @@ GetNextProcess(ProcessSerialNumber * PSN)                     AVAILABLE_MAC_OS_X
  *    
  *    The caller must fill in the .processInfoLength field with the
  *    value sizeof ( ProcessInformationRecord ) before making this
- *    call.  Also, the .processName field must point to either NULL or
+ *    call. Also, the .processName field must point to either NULL or
  *    to a Str31 structure in the caller's memory space, and the
  *    .processAppSpec field must point to a FSSpec in the caller's
  *    memory space.
@@ -372,9 +389,9 @@ GetNextProcess(ProcessSerialNumber * PSN)                     AVAILABLE_MAC_OS_X
  *    efficient.
  *    
  *    The processName field may not be what you expect, especially if
- *    an application has a localized name.  The .processName field, if
+ *    an application has a localized name. The .processName field, if
  *    not NULL, on return will contain the filename part of the
- *    executable file of the application.  If you want the localized,
+ *    executable file of the application. If you want the localized,
  *    user-displayable name for an application, call
  *    CopyProcessName().
  *    
@@ -420,8 +437,8 @@ GetProcessInformation(
  *  
  *  Result:
  *    An immutable CFDictionaryRef containing these keys and their
- *    values. Keys marked with an '*' are optional.  Over time more
- *    keys may be added.
+ *    values. Keys marked with a '*' are optional. Over time more keys
+ *    may be added.
  *    
  *    Key Name                    Type 
  *    --------                    ---- 
@@ -447,7 +464,7 @@ GetProcessInformation(
  *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
- *    CarbonLib:        not available
+ *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
 extern CFDictionaryRef 
@@ -559,6 +576,35 @@ ExitToShell(void)                                             AVAILABLE_MAC_OS_X
 
 
 /*
+ *  KillProcess()
+ *  
+ *  Discussion:
+ *    Kills the process with the given process serial number, without
+ *    sending it a 'quit' AppleEvent or otherwise allowing it to save
+ *    user data or clean up. This should be a last resort way to 'kill'
+ *    an application, after all other attempts to make it stop have
+ *    failed. It is not guaranteed that this will succeed and that the
+ *    target application will be killed, even if this function returns
+ *    noErr and seems to work.
+ *  
+ *  Parameters:
+ *    
+ *    inProcess:
+ *      The process to kill.
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr 
+KillProcess(const ProcessSerialNumber * inProcess)            AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
    LaunchControlPanel is similar to LaunchDeskAccessory, but for Control Panel files instead.
    It launches a control panel in an application shell maintained by the Process Manager.
 */
@@ -581,7 +627,7 @@ ExitToShell(void)                                             AVAILABLE_MAC_OS_X
  *  
  *  Discussion:
  *    Retrieves a reference to the filesystem location of the specified
- *    application.  For an application that is packaged as an app
+ *    application. For an application that is packaged as an app
  *    bundle, this will be the app bundle directory; otherwise it will
  *    be the location of the executable itself.
  *  
@@ -611,9 +657,9 @@ GetProcessBundleLocation(
  *    Get a copy of the name of a process.
  *  
  *  Discussion:
- *    Use this call to get the name of a process as a CFString.  The
+ *    Use this call to get the name of a process as a CFString. The
  *    name returned is a copy, so the caller must CFRelease the name
- *    when finished with it.  The difference between this call and the
+ *    when finished with it. The difference between this call and the
  *    processName field filled in by GetProcessInformation is that the
  *    name here is a CFString, and thus is capable of representing a
  *    multi-lingual name, whereas previously only a mac-encoded string
@@ -647,7 +693,7 @@ CopyProcessName(
  *  
  *  Discussion:
  *    Given a Process serial number, this call will get the UNIX
- *    process ID for that process.  Note that this call does not make
+ *    process ID for that process. Note that this call does not make
  *    sense for Classic apps, since they all share a single UNIX
  *    process ID.
  *  
@@ -678,9 +724,9 @@ GetProcessPID(
  *  
  *  Discussion:
  *    Given a UNIX process ID, this call will get the process serial
- *    number for that process, if appropriate.  Note that this call
- *    does not make sense for Classic apps, since they all share a
- *    single UNIX process ID.
+ *    number for that process, if appropriate. Note that this call does
+ *    not make sense for Classic apps, since they all share a single
+ *    UNIX process ID.
  *  
  *  Parameters:
  *    
@@ -757,6 +803,44 @@ extern OSErr
 ShowHideProcess(
   const ProcessSerialNumber *  psn,
   Boolean                      visible)                       AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
+
+
+/*
+ *  TransformProcessType()
+ *  
+ *  Summary:
+ *    Changes the 'type' of the process specified in the psn parameter.
+ *     The type is specified in the transformState parameter.
+ *  
+ *  Discussion:
+ *    Given a psn which is a background-only application, this call can
+ *    cause that application to be transformed into a foreground
+ *    application.  A background only application does not appear in
+ *    the Dock or in the Force Quit dialog, and never has a menu bar or
+ *    is frontmost, while a foreground application does appear in the
+ *    Dock and Force Quit dialog and does have a menu bar.  This call
+ *    does not cause the application to be brought to the front ( use
+ *    SetFrontProcess for that ).
+ *  
+ *  Parameters:
+ *    
+ *    psn:
+ *      Serial number of the process
+ *    
+ *    transformState:
+ *      state to tranform the application to.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+TransformProcessType(
+  const ProcessSerialNumber *        psn,
+  ProcessApplicationTransformState   transformState)          AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
 
 
 

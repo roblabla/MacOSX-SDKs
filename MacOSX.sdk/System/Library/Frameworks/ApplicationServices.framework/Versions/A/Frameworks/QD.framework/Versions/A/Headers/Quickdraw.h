@@ -3,9 +3,9 @@
  
      Contains:   Interface to Quickdraw Graphics
  
-     Version:    Quickdraw-96.21~1
+     Version:    Quickdraw-150~1
  
-     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -20,12 +20,12 @@
 #include <CoreServices/CoreServices.h>
 #endif
 
-#ifndef __QUICKDRAWTEXT__
-#include <QD/QuickdrawText.h>
+#ifndef __COREGRAPHICS__
+#include <CoreGraphics/CoreGraphics.h>
 #endif
 
-#ifndef __CGCONTEXT__
-#include <CoreGraphics/CGContext.h>
+#ifndef __QUICKDRAWTEXT__
+#include <QD/QuickdrawText.h>
 #endif
 
 #ifndef __CMTYPES__
@@ -105,7 +105,7 @@ enum {
 };
 
 enum {
-  blackColor                    = 33,   /*colors expressed in these mappings*/
+  blackColor                    = 33,   /* colors expressed in these mappings */
   whiteColor                    = 30,
   redColor                      = 205,
   greenColor                    = 341,
@@ -116,36 +116,45 @@ enum {
 };
 
 enum {
-  picLParen                     = 0,    /*standard picture comments*/
-  picRParen                     = 1,
-  clutType                      = 0,    /*0 if lookup table*/
-  fixedType                     = 1,    /*1 if fixed table*/
-  directType                    = 2,    /*2 if direct values*/
-  gdDevType                     = 0     /*0 = monochrome 1 = color*/
+  picLParen                     = 0,    /* standard picture comments */
+  picRParen                     = 1
+};
+
+/* gdType values */
+enum {
+  clutType                      = 0,    /* lookup table */
+  fixedType                     = 1,    /* fixed table - now unused */
+  directType                    = 2     /* direct values */
+};
+
+/* gdFlags bits. Bits 1..10 are legacy, and currently unused */
+enum {
+  gdDevType                     = 0,    /* 0 = monochrome 1 = color */
+  interlacedDevice              = 2,
+  hwMirroredDevice              = 4,
+  roundedDevice                 = 5,
+  hasAuxMenuBar                 = 6,
+  burstDevice                   = 7,
+  ext32Device                   = 8,
+  ramInit                       = 10,
+  mainScreen                    = 11,   /* 1 if main screen */
+  allInit                       = 12,   /* 1 if all devices initialized */
+  screenDevice                  = 13,   /* 1 if screen device */
+  noDriver                      = 14,   /* 1 if no driver for this GDevice */
+  screenActive                  = 15    /* 1 if in use*/
 };
 
 enum {
-  interlacedDevice              = 2,    /* 1 if single pixel lines look bad */
-  hwMirroredDevice              = 4,    /* 1 if device is HW mirrored */
-  roundedDevice                 = 5,    /* 1 if device has been “rounded” into the GrayRgn */
-  hasAuxMenuBar                 = 6,    /* 1 if device has an aux menu bar on it */
-  burstDevice                   = 7,
-  ext32Device                   = 8,
-  ramInit                       = 10,   /*1 if initialized from 'scrn' resource*/
-  mainScreen                    = 11,   /* 1 if main screen */
-  allInit                       = 12,   /* 1 if all devices initialized */
-  screenDevice                  = 13,   /*1 if screen device [not used]*/
-  noDriver                      = 14,   /* 1 if no driver for this GDevice */
-  screenActive                  = 15,   /*1 if in use*/
-  hiliteBit                     = 7,    /*flag bit in LMGet/SetHiliteMode*/
-  pHiliteBit                    = 0,    /*flag bit in LMGet/SetHiliteMode when used with BitClr*/
-  defQDColors                   = 127,  /*resource ID of clut for default QDColors*/
-                                        /* pixel type */
-  RGBDirect                     = 16,   /* 16 & 32 bits/pixel pixelType value */
-                                        /* pmVersion values */
-  baseAddr32                    = 4     /*pixmap base address is 32-bit address*/
+  hiliteBit                     = 7,    /* flag bit in LMGet/SetHiliteMode */
+  pHiliteBit                    = 0     /* flag bit in LMGet/SetHiliteMode when used with BitClr */
 };
 
+/* miscellaneous constants */
+enum {
+  defQDColors                   = 127,  /* (legacy - now unused) */
+  RGBDirect                     = 16,   /* 16 & 32 bits/pixel pixelType value */
+  baseAddr32                    = 4     /* pmVersion value: pixmap base address is 32-bit address */
+};
 
 enum {
   sysPatListID                  = 0,
@@ -316,6 +325,7 @@ typedef CALLBACK_API( short , QDTxMeasProcPtr )(short byteCount, const void *tex
 typedef CALLBACK_API( void , QDGetPicProcPtr )(void *dataPtr, short byteCount);
 typedef CALLBACK_API( void , QDPutPicProcPtr )(const void *dataPtr, short byteCount);
 typedef CALLBACK_API( void , QDOpcodeProcPtr )(const Rect *fromRect, const Rect *toRect, UInt16 opcode, SInt16 version);
+/* The following is unused on Mac OS X - ignore it! */
 typedef CALLBACK_API_C( OSStatus , QDStdGlyphsProcPtr )(void *dataStream, ByteCount size);
 typedef CALLBACK_API( void , QDJShieldCursorProcPtr )(short left, short top, short right, short bottom);
 typedef STACK_UPP_TYPE(QDTextProcPtr)                           QDTextUPP;
@@ -1390,7 +1400,7 @@ struct CQDProcs {
   QDPutPicUPP         putPicProc;
   QDOpcodeUPP         opcodeProc;
   UniversalProcPtr    newProc1;               /* this is the StdPix bottleneck -- see ImageCompression.h */
-  QDStdGlyphsUPP      glyphsProc;             /* was newProc2; now used in Unicode text drawing */
+  QDStdGlyphsUPP      glyphsProc;             /* unused on Mac OS X */
   QDPrinterStatusUPP  printerStatusProc;      /* was newProc3;  now used to communicate status between Printing code and System imaging code */
   UniversalProcPtr    newProc4;
   UniversalProcPtr    newProc5;
@@ -1556,6 +1566,7 @@ extern QDGlobals qd;
 
 #endif  /* !OPAQUE_TOOLBOX_STRUCTS || !TARGET_API_MAC_CARBON */
 
+
 /*
  *  InitGraf()
  *  
@@ -1596,12 +1607,37 @@ extern QDGlobals qd;
  */
 
 
+
+/*
+    General comments about thread-safety of Quickdraw
+    -------------------------------------------------
+    
+    The original design and implementation principles of Quickdraw seriously
+    conflict with the goal of making Quickdraw thread-safe. Many Quickdraw
+    functions rely on globals instead of explicit parameters. Even though the 
+    current port (and the current GDevice) are being maintained per-thread,
+    a simple call like "MoveTo(x, y)" just doesn't make sense with preemptive threads,
+    if two different threads use the same port. More serious obstacles are hiding
+    in picture recording and drawing, or region and polygon recording, or in the
+    presence of custom grafProcs bottleneck procedures. Finally, the global QDError
+    cannot be maintained per thread, because its pervasive access would cause intolerable
+    performance penalties.
+    Currently, nearly all Quickdraw API calls are marked thread-unsafe, even those that
+    seem to work reliably in pthreads, with some plausible precautions. (Note that
+    the absence of crashes in test runs does not guarantee thread-safety!).
+    As the work on making portions of Quickdraw thread-safe progresses, the thread-safe
+    attributes will be updated. 
+
+*/
 /*
    These are Carbon only routines. They do nothing at all on
-   Mac OS 8, but work flawlessly on Mac OS X.
+   Mac OS 9, but work flawlessly on Mac OS X.
 */
 /*
  *  LockPortBits()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -1614,6 +1650,9 @@ LockPortBits(GrafPtr port)                                    AVAILABLE_MAC_OS_X
 
 /*
  *  UnlockPortBits()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -1684,6 +1723,9 @@ InvokeRegionToRectsUPP(
 
 /*
  *  QDRegionToRects()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -1786,6 +1828,9 @@ QDRegionToRects(
 /*
  *  [Mac]SetPort()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1800,6 +1845,9 @@ MacSetPort(GrafPtr port)                                      AVAILABLE_MAC_OS_X
 
 /*
  *  GetPort()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -1824,6 +1872,9 @@ GetPort(GrafPtr * port)                                       AVAILABLE_MAC_OS_X
  *    actually did change. Typical usage: portChanged =
  *    QDSwapPort(newPort, &savePort); // some drawing into newPort if
  *    (portChanged) QDSwapPort(savePort, NULL);
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -1851,6 +1902,9 @@ QDSwapPort(
 /*
  *  GrafDevice()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1863,6 +1917,9 @@ GrafDevice(short device)                                      AVAILABLE_MAC_OS_X
 /*
  *  SetPortBits()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1874,6 +1931,9 @@ SetPortBits(const BitMap * bm)                                AVAILABLE_MAC_OS_X
 
 /*
  *  PortSize()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -1889,6 +1949,9 @@ PortSize(
 /*
  *  MovePortTo()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1902,6 +1965,9 @@ MovePortTo(
 
 /*
  *  SetOrigin()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -1917,6 +1983,9 @@ SetOrigin(
 /*
  *  SetClip()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1928,6 +1997,9 @@ SetClip(RgnHandle rgn)                                        AVAILABLE_MAC_OS_X
 
 /*
  *  GetClip()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -1941,6 +2013,9 @@ GetClip(RgnHandle rgn)                                        AVAILABLE_MAC_OS_X
 /*
  *  ClipRect()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1952,6 +2027,9 @@ ClipRect(const Rect * r)                                      AVAILABLE_MAC_OS_X
 
 /*
  *  BackPat()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -1965,6 +2043,9 @@ BackPat(const Pattern * pat)                                  AVAILABLE_MAC_OS_X
 /*
  *  InitCursor()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1976,6 +2057,9 @@ InitCursor(void)                                              AVAILABLE_MAC_OS_X
 
 /*
  *  [Mac]SetCursor()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -1992,6 +2076,9 @@ MacSetCursor(const Cursor * crsr)                             AVAILABLE_MAC_OS_X
 /*
  *  HideCursor()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2003,6 +2090,9 @@ HideCursor(void)                                              AVAILABLE_MAC_OS_X
 
 /*
  *  [Mac]ShowCursor()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2019,6 +2109,9 @@ MacShowCursor(void)                                           AVAILABLE_MAC_OS_X
 /*
  *  ObscureCursor()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2030,6 +2123,9 @@ ObscureCursor(void)                                           AVAILABLE_MAC_OS_X
 
 /*
  *  HidePen()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2043,6 +2139,9 @@ HidePen(void)                                                 AVAILABLE_MAC_OS_X
 /*
  *  ShowPen()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2054,6 +2153,9 @@ ShowPen(void)                                                 AVAILABLE_MAC_OS_X
 
 /*
  *  GetPen()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2067,6 +2169,9 @@ GetPen(Point * pt)                                            AVAILABLE_MAC_OS_X
 /*
  *  GetPenState()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2079,6 +2184,9 @@ GetPenState(PenState * pnState)                               AVAILABLE_MAC_OS_X
 /*
  *  SetPenState()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2090,6 +2198,9 @@ SetPenState(const PenState * pnState)                         AVAILABLE_MAC_OS_X
 
 /*
  *  PenSize()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2105,6 +2216,9 @@ PenSize(
 /*
  *  PenMode()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2116,6 +2230,9 @@ PenMode(short mode)                                           AVAILABLE_MAC_OS_X
 
 /*
  *  PenPat()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2129,6 +2246,9 @@ PenPat(const Pattern * pat)                                   AVAILABLE_MAC_OS_X
 /*
  *  PenNormal()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2140,6 +2260,9 @@ PenNormal(void)                                               AVAILABLE_MAC_OS_X
 
 /*
  *  MoveTo()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2155,6 +2278,9 @@ MoveTo(
 /*
  *  Move()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2168,6 +2294,9 @@ Move(
 
 /*
  *  [Mac]LineTo()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2186,6 +2315,9 @@ MacLineTo(
 /*
  *  Line()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2200,6 +2332,9 @@ Line(
 /*
  *  ForeColor()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2211,6 +2346,9 @@ ForeColor(long color)                                         AVAILABLE_MAC_OS_X
 
 /*
  *  BackColor()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2224,6 +2362,9 @@ BackColor(long color)                                         AVAILABLE_MAC_OS_X
 /*
  *  ColorBit()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2235,6 +2376,9 @@ ColorBit(short whichBit)                                      AVAILABLE_MAC_OS_X
 
 /*
  *  [Mac]SetRect()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2256,6 +2400,9 @@ MacSetRect(
 /*
  *  [Mac]OffsetRect()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2273,6 +2420,9 @@ MacOffsetRect(
 
 /*
  *  [Mac]InsetRect()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2292,6 +2442,9 @@ MacInsetRect(
 /*
  *  SectRect()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2306,6 +2459,9 @@ SectRect(
 
 /*
  *  [Mac]UnionRect()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2325,6 +2481,9 @@ MacUnionRect(
 /*
  *  [Mac]EqualRect()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2342,6 +2501,9 @@ MacEqualRect(
 /*
  *  EmptyRect()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2353,6 +2515,9 @@ EmptyRect(const Rect * r)                                     AVAILABLE_MAC_OS_X
 
 /*
  *  [Mac]FrameRect()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2369,6 +2534,9 @@ MacFrameRect(const Rect * r)                                  AVAILABLE_MAC_OS_X
 /*
  *  PaintRect()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2381,6 +2549,9 @@ PaintRect(const Rect * r)                                     AVAILABLE_MAC_OS_X
 /*
  *  EraseRect()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2392,6 +2563,9 @@ EraseRect(const Rect * r)                                     AVAILABLE_MAC_OS_X
 
 /*
  *  [Mac]InvertRect()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2407,6 +2581,9 @@ MacInvertRect(const Rect * r)                                 AVAILABLE_MAC_OS_X
 
 /*
  *  [Mac]FillRect()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2425,6 +2602,9 @@ MacFillRect(
 /*
  *  FrameOval()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2436,6 +2616,9 @@ FrameOval(const Rect * r)                                     AVAILABLE_MAC_OS_X
 
 /*
  *  PaintOval()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2449,6 +2632,9 @@ PaintOval(const Rect * r)                                     AVAILABLE_MAC_OS_X
 /*
  *  EraseOval()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2461,6 +2647,9 @@ EraseOval(const Rect * r)                                     AVAILABLE_MAC_OS_X
 /*
  *  InvertOval()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2472,6 +2661,9 @@ InvertOval(const Rect * r)                                    AVAILABLE_MAC_OS_X
 
 /*
  *  FillOval()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2486,6 +2678,9 @@ FillOval(
 
 /*
  *  FrameRoundRect()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2502,6 +2697,9 @@ FrameRoundRect(
 /*
  *  PaintRoundRect()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2516,6 +2714,9 @@ PaintRoundRect(
 
 /*
  *  EraseRoundRect()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2532,6 +2733,9 @@ EraseRoundRect(
 /*
  *  InvertRoundRect()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2546,6 +2750,9 @@ InvertRoundRect(
 
 /*
  *  FillRoundRect()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2563,6 +2770,9 @@ FillRoundRect(
 /*
  *  FrameArc()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2577,6 +2787,9 @@ FrameArc(
 
 /*
  *  PaintArc()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2593,6 +2806,9 @@ PaintArc(
 /*
  *  EraseArc()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2608,6 +2824,9 @@ EraseArc(
 /*
  *  InvertArc()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2622,6 +2841,9 @@ InvertArc(
 
 /*
  *  FillArc()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2639,6 +2861,9 @@ FillArc(
 /*
  *  NewRgn()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2650,6 +2875,9 @@ NewRgn(void)                                                  AVAILABLE_MAC_OS_X
 
 /*
  *  OpenRgn()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2663,6 +2891,9 @@ OpenRgn(void)                                                 AVAILABLE_MAC_OS_X
 /*
  *  CloseRgn()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2674,6 +2905,9 @@ CloseRgn(RgnHandle dstRgn)                                    AVAILABLE_MAC_OS_X
 
 /*
  *  BitMapToRegion()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2689,6 +2923,9 @@ BitMapToRegion(
 /*
  *  HandleToRgn()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -2702,6 +2939,9 @@ HandleToRgn(
 
 /*
  *  RgnToHandle()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
@@ -2717,6 +2957,9 @@ RgnToHandle(
 /*
  *  DisposeRgn()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2728,6 +2971,9 @@ DisposeRgn(RgnHandle rgn)                                     AVAILABLE_MAC_OS_X
 
 /*
  *  [Mac]CopyRgn()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2746,6 +2992,9 @@ MacCopyRgn(
 /*
  *  SetEmptyRgn()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2757,6 +3006,9 @@ SetEmptyRgn(RgnHandle rgn)                                    AVAILABLE_MAC_OS_X
 
 /*
  *  [Mac]SetRectRgn()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2778,6 +3030,9 @@ MacSetRectRgn(
 /*
  *  RectRgn()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2791,6 +3046,9 @@ RectRgn(
 
 /*
  *  [Mac]OffsetRgn()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2810,6 +3068,9 @@ MacOffsetRgn(
 /*
  *  InsetRgn()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2825,6 +3086,9 @@ InsetRgn(
 /*
  *  SectRgn()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2839,6 +3103,9 @@ SectRgn(
 
 /*
  *  [Mac]UnionRgn()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2858,6 +3125,9 @@ MacUnionRgn(
 /*
  *  DiffRgn()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2872,6 +3142,9 @@ DiffRgn(
 
 /*
  *  [Mac]XorRgn()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2891,6 +3164,9 @@ MacXorRgn(
 /*
  *  RectInRgn()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2904,6 +3180,9 @@ RectInRgn(
 
 /*
  *  [Mac]EqualRgn()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2922,6 +3201,9 @@ MacEqualRgn(
 /*
  *  EmptyRgn()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2933,6 +3215,9 @@ EmptyRgn(RgnHandle rgn)                                       AVAILABLE_MAC_OS_X
 
 /*
  *  [Mac]FrameRgn()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2949,6 +3234,9 @@ MacFrameRgn(RgnHandle rgn)                                    AVAILABLE_MAC_OS_X
 /*
  *  [Mac]PaintRgn()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2964,6 +3252,9 @@ MacPaintRgn(RgnHandle rgn)                                    AVAILABLE_MAC_OS_X
 /*
  *  EraseRgn()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -2975,6 +3266,9 @@ EraseRgn(RgnHandle rgn)                                       AVAILABLE_MAC_OS_X
 
 /*
  *  [Mac]InvertRgn()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -2990,6 +3284,9 @@ MacInvertRgn(RgnHandle rgn)                                   AVAILABLE_MAC_OS_X
 
 /*
  *  [Mac]FillRgn()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -3008,6 +3305,9 @@ MacFillRgn(
 /*
  *  ScrollRect()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3023,6 +3323,9 @@ ScrollRect(
 
 /*
  *  CopyBits()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -3041,6 +3344,9 @@ CopyBits(
 
 /*
  *  SeedFill()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -3062,6 +3368,9 @@ SeedFill(
 /*
  *  CalcMask()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3079,6 +3388,9 @@ CalcMask(
 
 /*
  *  CopyMask()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -3098,6 +3410,9 @@ CopyMask(
 /*
  *  OpenPicture()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3109,6 +3424,9 @@ OpenPicture(const Rect * picFrame)                            AVAILABLE_MAC_OS_X
 
 /*
  *  PicComment()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -3125,6 +3443,9 @@ PicComment(
 /*
  *  ClosePicture()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3135,7 +3456,27 @@ ClosePicture(void)                                            AVAILABLE_MAC_OS_X
 
 
 /*
+ *  QDGetPictureBounds()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern Rect * 
+QDGetPictureBounds(
+  PicHandle   picH,
+  Rect *      outRect)                                        AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
  *  DrawPicture()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -3151,6 +3492,9 @@ DrawPicture(
 /*
  *  KillPicture()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3162,6 +3506,9 @@ KillPicture(PicHandle myPicture)                              AVAILABLE_MAC_OS_X
 
 /*
  *  OpenPoly()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -3175,6 +3522,9 @@ OpenPoly(void)                                                AVAILABLE_MAC_OS_X
 /*
  *  ClosePoly()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3187,6 +3537,9 @@ ClosePoly(void)                                               AVAILABLE_MAC_OS_X
 /*
  *  KillPoly()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3198,6 +3551,9 @@ KillPoly(PolyHandle poly)                                     AVAILABLE_MAC_OS_X
 
 /*
  *  OffsetPoly()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -3214,6 +3570,9 @@ OffsetPoly(
 /*
  *  FramePoly()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3225,6 +3584,9 @@ FramePoly(PolyHandle poly)                                    AVAILABLE_MAC_OS_X
 
 /*
  *  PaintPoly()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -3238,6 +3600,9 @@ PaintPoly(PolyHandle poly)                                    AVAILABLE_MAC_OS_X
 /*
  *  ErasePoly()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3250,6 +3615,9 @@ ErasePoly(PolyHandle poly)                                    AVAILABLE_MAC_OS_X
 /*
  *  InvertPoly()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3261,6 +3629,9 @@ InvertPoly(PolyHandle poly)                                   AVAILABLE_MAC_OS_X
 
 /*
  *  FillPoly()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -3275,6 +3646,9 @@ FillPoly(
 
 /*
  *  SetPt()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -3291,6 +3665,9 @@ SetPt(
 /*
  *  LocalToGlobal()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3302,6 +3679,9 @@ LocalToGlobal(Point * pt)                                     AVAILABLE_MAC_OS_X
 
 /*
  *  GlobalToLocal()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -3315,6 +3695,9 @@ GlobalToLocal(Point * pt)                                     AVAILABLE_MAC_OS_X
 /*
  *  Random()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3326,6 +3709,9 @@ Random(void)                                                  AVAILABLE_MAC_OS_X
 
 /*
  *  StuffHex()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -3340,6 +3726,9 @@ StuffHex(
 
 /*
  *  [Mac]GetPixel()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -3358,6 +3747,9 @@ MacGetPixel(
 /*
  *  ScalePt()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3372,6 +3764,9 @@ ScalePt(
 
 /*
  *  MapPt()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -3388,6 +3783,9 @@ MapPt(
 /*
  *  MapRect()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3402,6 +3800,9 @@ MapRect(
 
 /*
  *  MapRgn()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -3418,6 +3819,9 @@ MapRgn(
 /*
  *  MapPoly()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3433,6 +3837,9 @@ MapPoly(
 /*
  *  SetStdProcs()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3444,6 +3851,9 @@ SetStdProcs(QDProcs * procs)                                  AVAILABLE_MAC_OS_X
 
 /*
  *  StdRect()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -3458,6 +3868,9 @@ StdRect(
 
 /*
  *  StdRRect()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -3475,6 +3888,9 @@ StdRRect(
 /*
  *  StdOval()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3488,6 +3904,9 @@ StdOval(
 
 /*
  *  StdArc()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -3505,6 +3924,9 @@ StdArc(
 /*
  *  StdPoly()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3519,6 +3941,9 @@ StdPoly(
 /*
  *  StdRgn()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3532,6 +3957,9 @@ StdRgn(
 
 /*
  *  StdBits()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -3550,6 +3978,9 @@ StdBits(
 /*
  *  StdComment()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3565,6 +3996,9 @@ StdComment(
 /*
  *  StdGetPic()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3579,6 +4013,9 @@ StdGetPic(
 /*
  *  StdPutPic()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3592,6 +4029,9 @@ StdPutPic(
 
 /*
  *  StdOpcode()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -3609,6 +4049,9 @@ StdOpcode(
 /*
  *  AddPt()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3623,6 +4066,9 @@ AddPt(
 /*
  *  EqualPt()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3636,6 +4082,9 @@ EqualPt(
 
 /*
  *  [Mac]PtInRect()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -3654,6 +4103,9 @@ MacPtInRect(
 /*
  *  Pt2Rect()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3668,6 +4120,9 @@ Pt2Rect(
 
 /*
  *  PtToAngle()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -3684,6 +4139,9 @@ PtToAngle(
 /*
  *  SubPt()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3698,6 +4156,9 @@ SubPt(
 /*
  *  PtInRgn()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3711,6 +4172,9 @@ PtInRgn(
 
 /*
  *  StdLine()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -3754,6 +4218,9 @@ StdLine(Point newPt)                                          AVAILABLE_MAC_OS_X
 /*
  *  NewPixMap()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3766,6 +4233,9 @@ NewPixMap(void)                                               AVAILABLE_MAC_OS_X
 /*
  *  DisposePixMap()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3777,6 +4247,9 @@ DisposePixMap(PixMapHandle pm)                                AVAILABLE_MAC_OS_X
 
 /*
  *  CopyPixMap()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -3792,6 +4265,9 @@ CopyPixMap(
 /*
  *  NewPixPat()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3804,6 +4280,9 @@ NewPixPat(void)                                               AVAILABLE_MAC_OS_X
 /*
  *  DisposePixPat()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3815,6 +4294,9 @@ DisposePixPat(PixPatHandle pp)                                AVAILABLE_MAC_OS_X
 
 /*
  *  CopyPixPat()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -3830,6 +4312,9 @@ CopyPixPat(
 /*
  *  PenPixPat()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3841,6 +4326,9 @@ PenPixPat(PixPatHandle pp)                                    AVAILABLE_MAC_OS_X
 
 /*
  *  BackPixPat()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -3854,6 +4342,9 @@ BackPixPat(PixPatHandle pp)                                   AVAILABLE_MAC_OS_X
 /*
  *  GetPixPat()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3865,6 +4356,9 @@ GetPixPat(short patID)                                        AVAILABLE_MAC_OS_X
 
 /*
  *  MakeRGBPat()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -3880,6 +4374,9 @@ MakeRGBPat(
 /*
  *  FillCRect()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3894,6 +4391,9 @@ FillCRect(
 /*
  *  FillCOval()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3907,6 +4407,9 @@ FillCOval(
 
 /*
  *  FillCRoundRect()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -3924,6 +4427,9 @@ FillCRoundRect(
 /*
  *  FillCArc()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3940,6 +4446,9 @@ FillCArc(
 /*
  *  FillCRgn()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3953,6 +4462,9 @@ FillCRgn(
 
 /*
  *  FillCPoly()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -3968,6 +4480,9 @@ FillCPoly(
 /*
  *  RGBForeColor()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3980,6 +4495,9 @@ RGBForeColor(const RGBColor * color)                          AVAILABLE_MAC_OS_X
 /*
  *  RGBBackColor()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -3991,6 +4509,9 @@ RGBBackColor(const RGBColor * color)                          AVAILABLE_MAC_OS_X
 
 /*
  *  SetCPixel()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -4007,6 +4528,9 @@ SetCPixel(
 /*
  *  SetPortPix()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4018,6 +4542,9 @@ SetPortPix(PixMapHandle pm)                                   AVAILABLE_MAC_OS_X
 
 /*
  *  GetCPixel()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -4034,6 +4561,9 @@ GetCPixel(
 /*
  *  GetForeColor()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4046,6 +4576,9 @@ GetForeColor(RGBColor * color)                                AVAILABLE_MAC_OS_X
 /*
  *  GetBackColor()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4057,6 +4590,9 @@ GetBackColor(RGBColor * color)                                AVAILABLE_MAC_OS_X
 
 /*
  *  SeedCFill()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -4078,6 +4614,9 @@ SeedCFill(
 /*
  *  CalcCMask()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4097,6 +4636,9 @@ CalcCMask(
 /*
  *  OpenCPicture()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4108,6 +4650,9 @@ OpenCPicture(const OpenCPicParams * newHeader)                AVAILABLE_MAC_OS_X
 
 /*
  *  OpColor()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -4121,6 +4666,9 @@ OpColor(const RGBColor * color)                               AVAILABLE_MAC_OS_X
 /*
  *  HiliteColor()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4132,6 +4680,9 @@ HiliteColor(const RGBColor * color)                           AVAILABLE_MAC_OS_X
 
 /*
  *  DisposeCTable()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -4145,6 +4696,9 @@ DisposeCTable(CTabHandle cTable)                              AVAILABLE_MAC_OS_X
 /*
  *  GetCTable()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4156,6 +4710,9 @@ GetCTable(short ctID)                                         AVAILABLE_MAC_OS_X
 
 /*
  *  GetCCursor()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -4169,6 +4726,9 @@ GetCCursor(short crsrID)                                      AVAILABLE_MAC_OS_X
 /*
  *  SetCCursor()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4181,6 +4741,9 @@ SetCCursor(CCrsrHandle cCrsr)                                 AVAILABLE_MAC_OS_X
 /*
  *  AllocCursor()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4192,6 +4755,9 @@ AllocCursor(void)                                             AVAILABLE_MAC_OS_X
 
 /*
  *  DisposeCCursor()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -4207,6 +4773,9 @@ DisposeCCursor(CCrsrHandle cCrsr)                             AVAILABLE_MAC_OS_X
 /*
  *  SetStdCProcs()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4218,6 +4787,9 @@ SetStdCProcs(CQDProcs * procs)                                AVAILABLE_MAC_OS_X
 
 /*
  *  GetMaxDevice()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -4231,6 +4803,9 @@ GetMaxDevice(const Rect * globalRect)                         AVAILABLE_MAC_OS_X
 /*
  *  GetCTSeed()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4242,6 +4817,9 @@ GetCTSeed(void)                                               AVAILABLE_MAC_OS_X
 
 /*
  *  GetDeviceList()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -4255,6 +4833,9 @@ GetDeviceList(void)                                           AVAILABLE_MAC_OS_X
 /*
  *  GetMainDevice()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4267,6 +4848,9 @@ GetMainDevice(void)                                           AVAILABLE_MAC_OS_X
 /*
  *  GetNextDevice()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4278,6 +4862,9 @@ GetNextDevice(GDHandle curDevice)                             AVAILABLE_MAC_OS_X
 
 /*
  *  TestDeviceAttribute()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -4292,6 +4879,9 @@ TestDeviceAttribute(
 
 /*
  *  SetDeviceAttribute()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -4308,6 +4898,9 @@ SetDeviceAttribute(
 /*
  *  InitGDevice()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4323,6 +4916,9 @@ InitGDevice(
 /*
  *  NewGDevice()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4337,6 +4933,9 @@ NewGDevice(
 /*
  *  DisposeGDevice()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4348,6 +4947,9 @@ DisposeGDevice(GDHandle gdh)                                  AVAILABLE_MAC_OS_X
 
 /*
  *  SetGDevice()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -4361,6 +4963,9 @@ SetGDevice(GDHandle gd)                                       AVAILABLE_MAC_OS_X
 /*
  *  GetGDevice()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4373,6 +4978,9 @@ GetGDevice(void)                                              AVAILABLE_MAC_OS_X
 /*
  *  Color2Index()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4384,6 +4992,9 @@ Color2Index(const RGBColor * myColor)                         AVAILABLE_MAC_OS_X
 
 /*
  *  Index2Color()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -4399,6 +5010,9 @@ Index2Color(
 /*
  *  InvertColor()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4411,6 +5025,9 @@ InvertColor(RGBColor * myColor)                               AVAILABLE_MAC_OS_X
 /*
  *  RealColor()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4422,6 +5039,9 @@ RealColor(const RGBColor * color)                             AVAILABLE_MAC_OS_X
 
 /*
  *  GetSubTable()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -4438,6 +5058,9 @@ GetSubTable(
 /*
  *  MakeITable()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4453,6 +5076,9 @@ MakeITable(
 /*
  *  AddSearch()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4464,6 +5090,9 @@ AddSearch(ColorSearchUPP searchProc)                          AVAILABLE_MAC_OS_X
 
 /*
  *  AddComp()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -4477,6 +5106,9 @@ AddComp(ColorComplementUPP compProc)                          AVAILABLE_MAC_OS_X
 /*
  *  DelSearch()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4488,6 +5120,9 @@ DelSearch(ColorSearchUPP searchProc)                          AVAILABLE_MAC_OS_X
 
 /*
  *  DelComp()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -4501,6 +5136,9 @@ DelComp(ColorComplementUPP compProc)                          AVAILABLE_MAC_OS_X
 /*
  *  SetClientID()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4512,6 +5150,9 @@ SetClientID(short id)                                         AVAILABLE_MAC_OS_X
 
 /*
  *  ProtectEntry()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -4527,6 +5168,9 @@ ProtectEntry(
 /*
  *  ReserveEntry()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4540,6 +5184,9 @@ ReserveEntry(
 
 /*
  *  SetEntries()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -4556,6 +5203,9 @@ SetEntries(
 /*
  *  SaveEntries()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4570,6 +5220,9 @@ SaveEntries(
 
 /*
  *  RestoreEntries()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -4586,6 +5239,9 @@ RestoreEntries(
 /*
  *  QDError()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4597,6 +5253,9 @@ QDError(void)                                                 AVAILABLE_MAC_OS_X
 
 /*
  *  CopyDeepMask()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -4618,6 +5277,9 @@ CopyDeepMask(
 /*
  *  DeviceLoop()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4636,6 +5298,9 @@ DeviceLoop(
 /*
  *  GetMaskTable()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4649,6 +5314,9 @@ GetMaskTable(void)                                            AVAILABLE_MAC_OS_X
 /*
  *  GetPattern()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4660,6 +5328,9 @@ GetPattern(short patternID)                                   AVAILABLE_MAC_OS_X
 
 /*
  *  [Mac]GetCursor()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -4676,6 +5347,9 @@ MacGetCursor(short cursorID)                                  AVAILABLE_MAC_OS_X
 /*
  *  GetPicture()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4687,6 +5361,9 @@ GetPicture(short pictureID)                                   AVAILABLE_MAC_OS_X
 
 /*
  *  DeltaPoint()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -4702,6 +5379,9 @@ DeltaPoint(
 /*
  *  ShieldCursor()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4716,6 +5396,9 @@ ShieldCursor(
 /*
  *  ScreenRes()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4729,6 +5412,9 @@ ScreenRes(
 
 /*
  *  GetIndPattern()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -4845,6 +5531,9 @@ GetIndPattern(
 /*
  *  deltapoint()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4870,6 +5559,9 @@ deltapoint(
 /*
  *  PackBits()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4884,6 +5576,9 @@ PackBits(
 
 /*
  *  UnpackBits()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -4900,6 +5595,9 @@ UnpackBits(
 /*
  *  SlopeFromAngle()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4911,6 +5609,9 @@ SlopeFromAngle(short angle)                                   AVAILABLE_MAC_OS_X
 
 /*
  *  AngleFromSlope()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -4951,6 +5652,9 @@ typedef CALLBACK_API( void , CustomXFerProcPtr )(CustomXFerRecPtr info);
 /*
  *  GetPortCustomXFerProc()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -4966,6 +5670,9 @@ GetPortCustomXFerProc(
 
 /*
  *  SetPortCustomXFerProc()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -5030,6 +5737,9 @@ enum {
 /*
  *  OpenCursorComponent()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5044,6 +5754,9 @@ OpenCursorComponent(
 /*
  *  CloseCursorComponent()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5055,6 +5768,9 @@ CloseCursorComponent(ComponentInstance ci)                    AVAILABLE_MAC_OS_X
 
 /*
  *  SetCursorComponent()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -5068,6 +5784,9 @@ SetCursorComponent(ComponentInstance ci)                      AVAILABLE_MAC_OS_X
 /*
  *  CursorComponentChanged()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5079,6 +5798,9 @@ CursorComponentChanged(ComponentInstance ci)                  AVAILABLE_MAC_OS_X
 
 /*
  *  CursorComponentSetData()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -5095,6 +5817,9 @@ CursorComponentSetData(
 /*
  *  CWMatchPixMap()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        not available
@@ -5110,6 +5835,9 @@ CWMatchPixMap(
 
 /*
  *  CWCheckPixMap()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -5128,6 +5856,9 @@ CWCheckPixMap(
 /*
  *  NCMBeginMatching()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        not available
@@ -5143,6 +5874,9 @@ NCMBeginMatching(
 /*
  *  CMEndMatching()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        not available
@@ -5154,6 +5888,9 @@ CMEndMatching(CMMatchRef myRef)                               AVAILABLE_MAC_OS_X
 
 /*
  *  NCMDrawMatchedPicture()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -5170,6 +5907,9 @@ NCMDrawMatchedPicture(
 /*
  *  CMEnableMatchingComment()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        not available
@@ -5181,6 +5921,9 @@ CMEnableMatchingComment(Boolean enableIt)                     AVAILABLE_MAC_OS_X
 
 /*
  *  NCMUseProfileComment()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -5197,6 +5940,30 @@ NCMUseProfileComment(
 /*
  *  IsValidPort()
  *  
+ *  Summary:
+ *    Attempts to detect invalid ports
+ *  
+ *  Discussion:
+ *    A grafPort structure contains many nested Handles. An attempt to
+ *    guarantee that they are all valid is prohibitively costly. Since
+ *    10.1, IsValidPort only compares the CGrafPtr parameter against
+ *    the list of grafPorts maintained internally by Quickdraw. The
+ *    function returns true if it is found, false otherwise. This is
+ *    enough to detect ports belonging to windows that have been
+ *    closed, or GWorlds that have been deallocated.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    port:
+ *      The CGrafPtr in question.
+ *  
+ *  Result:
+ *    If false, port is definitely invalid. If true, port is probably
+ *    valid (unless memory has been clobbered)
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -5211,6 +5978,9 @@ IsValidPort(CGrafPtr port)                                    AVAILABLE_MAC_OS_X
 /* Getters */
 /*
  *  GetPortPixMap()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -5235,6 +6005,9 @@ GetPortPixMap(CGrafPtr port)                                  AVAILABLE_MAC_OS_X
  *    BitMapPtr or otherwise depend on its contents unless you've
  *    confirmed that this port is a non-color port.
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0.2 and later
@@ -5246,6 +6019,9 @@ GetPortBitMapForCopyBits(CGrafPtr port)                       AVAILABLE_MAC_OS_X
 
 /*
  *  GetPortBounds()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -5261,6 +6037,9 @@ GetPortBounds(
 /*
  *  GetPortForeColor()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5274,6 +6053,9 @@ GetPortForeColor(
 
 /*
  *  GetPortBackColor()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -5289,6 +6071,9 @@ GetPortBackColor(
 /*
  *  GetPortOpColor()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5302,6 +6087,9 @@ GetPortOpColor(
 
 /*
  *  GetPortHiliteColor()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -5317,6 +6105,9 @@ GetPortHiliteColor(
 /*
  *  GetPortGrafProcs()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5328,6 +6119,9 @@ GetPortGrafProcs(CGrafPtr port)                               AVAILABLE_MAC_OS_X
 
 /*
  *  GetPortTextFont()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -5341,6 +6135,9 @@ GetPortTextFont(CGrafPtr port)                                AVAILABLE_MAC_OS_X
 /*
  *  GetPortTextFace()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5352,6 +6149,9 @@ GetPortTextFace(CGrafPtr port)                                AVAILABLE_MAC_OS_X
 
 /*
  *  GetPortTextMode()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -5365,6 +6165,9 @@ GetPortTextMode(CGrafPtr port)                                AVAILABLE_MAC_OS_X
 /*
  *  GetPortTextSize()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5376,6 +6179,9 @@ GetPortTextSize(CGrafPtr port)                                AVAILABLE_MAC_OS_X
 
 /*
  *  GetPortChExtra()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -5389,6 +6195,9 @@ GetPortChExtra(CGrafPtr port)                                 AVAILABLE_MAC_OS_X
 /*
  *  GetPortFracHPenLocation()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5400,6 +6209,9 @@ GetPortFracHPenLocation(CGrafPtr port)                        AVAILABLE_MAC_OS_X
 
 /*
  *  GetPortSpExtra()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -5413,6 +6225,9 @@ GetPortSpExtra(CGrafPtr port)                                 AVAILABLE_MAC_OS_X
 /*
  *  GetPortPenVisibility()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5424,6 +6239,9 @@ GetPortPenVisibility(CGrafPtr port)                           AVAILABLE_MAC_OS_X
 
 /*
  *  GetPortVisibleRegion()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -5439,6 +6257,9 @@ GetPortVisibleRegion(
 /*
  *  GetPortClipRegion()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5452,6 +6273,9 @@ GetPortClipRegion(
 
 /*
  *  GetPortBackPixPat()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -5467,6 +6291,9 @@ GetPortBackPixPat(
 /*
  *  GetPortPenPixPat()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5480,6 +6307,9 @@ GetPortPenPixPat(
 
 /*
  *  GetPortFillPixPat()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -5495,6 +6325,9 @@ GetPortFillPixPat(
 /*
  *  GetPortPenSize()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5509,6 +6342,9 @@ GetPortPenSize(
 /*
  *  GetPortPenMode()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5520,6 +6356,9 @@ GetPortPenMode(CGrafPtr port)                                 AVAILABLE_MAC_OS_X
 
 /*
  *  GetPortPenLocation()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -5535,6 +6374,9 @@ GetPortPenLocation(
 /*
  *  IsPortRegionBeingDefined()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5546,6 +6388,9 @@ IsPortRegionBeingDefined(CGrafPtr port)                       AVAILABLE_MAC_OS_X
 
 /*
  *  IsPortPictureBeingDefined()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -5559,6 +6404,9 @@ IsPortPictureBeingDefined(CGrafPtr port)                      AVAILABLE_MAC_OS_X
 /*
  *  IsPortPolyBeingDefined()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.3 and later
@@ -5570,6 +6418,9 @@ IsPortPolyBeingDefined(CGrafPtr port)                         AVAILABLE_MAC_OS_X
 
 /*
  *  IsPortOffscreen()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -5583,6 +6434,9 @@ IsPortOffscreen(CGrafPtr port)                                AVAILABLE_MAC_OS_X
 /*
  *  IsPortColor()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.0
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0.2 and later
@@ -5594,6 +6448,9 @@ IsPortColor(CGrafPtr port)                                    AVAILABLE_MAC_OS_X
 
 /*
  *  IsPortVisibleRegionEmpty()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.1
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
@@ -5607,6 +6464,9 @@ IsPortVisibleRegionEmpty(CGrafPtr port)                       AVAILABLE_MAC_OS_X
 /*
  *  IsPortClipRegionEmpty()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.1
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.3 and later
@@ -5618,6 +6478,9 @@ IsPortClipRegionEmpty(CGrafPtr port)                          AVAILABLE_MAC_OS_X
 
 /*
  *  SectRegionWithPortClipRegion()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
@@ -5632,6 +6495,9 @@ SectRegionWithPortClipRegion(
 
 /*
  *  SectRegionWithPortVisibleRegion()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
@@ -5659,6 +6525,9 @@ SectRegionWithPortVisibleRegion(
  *    picSave Handle and setting picSave to NULL. Restoring the saved
  *    picSave Handle resumes picture definition.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    port:
@@ -5685,6 +6554,9 @@ SwapPortPicSaveHandle(
 /*
  *  SwapPortPolySaveHandle()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.6 and later
@@ -5698,6 +6570,9 @@ SwapPortPolySaveHandle(
 
 /*
  *  SwapPortRegionSaveHandle()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
@@ -5715,6 +6590,9 @@ SwapPortRegionSaveHandle(
 /*
  *  SetPortBounds()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5728,6 +6606,9 @@ SetPortBounds(
 
 /*
  *  SetPortOpColor()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -5743,6 +6624,9 @@ SetPortOpColor(
 /*
  *  SetPortGrafProcs()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5756,6 +6640,9 @@ SetPortGrafProcs(
 
 /*
  *  SetPortTextFont()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
@@ -5771,6 +6658,9 @@ SetPortTextFont(
 /*
  *  SetPortTextSize()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.5 and later
@@ -5784,6 +6674,9 @@ SetPortTextSize(
 
 /*
  *  SetPortTextFace()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
@@ -5799,6 +6692,9 @@ SetPortTextFace(
 /*
  *  SetPortTextMode()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.5 and later
@@ -5812,6 +6708,9 @@ SetPortTextMode(
 
 /*
  *  SetPortVisibleRegion()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -5827,6 +6726,9 @@ SetPortVisibleRegion(
 /*
  *  SetPortClipRegion()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5840,6 +6742,9 @@ SetPortClipRegion(
 
 /*
  *  SetPortPenPixPat()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -5855,6 +6760,9 @@ SetPortPenPixPat(
 /*
  *  SetPortFillPixPat()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.2 and later
@@ -5868,6 +6776,9 @@ SetPortFillPixPat(
 
 /*
  *  SetPortBackPixPat()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -5883,6 +6794,9 @@ SetPortBackPixPat(
 /*
  *  SetPortPenSize()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5897,6 +6811,9 @@ SetPortPenSize(
 /*
  *  SetPortPenMode()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5910,6 +6827,9 @@ SetPortPenMode(
 
 /*
  *  SetPortFracHPenLocation()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -5926,6 +6846,9 @@ SetPortFracHPenLocation(
 /*
  *  GetPixBounds()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5939,6 +6862,9 @@ GetPixBounds(
 
 /*
  *  GetPixDepth()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -5954,6 +6880,9 @@ GetPixDepth(PixMapHandle pixMap)                              AVAILABLE_MAC_OS_X
 /*
  *  GetQDGlobalsRandomSeed()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5965,6 +6894,9 @@ GetQDGlobalsRandomSeed(void)                                  AVAILABLE_MAC_OS_X
 
 /*
  *  GetQDGlobalsScreenBits()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -5978,6 +6910,9 @@ GetQDGlobalsScreenBits(BitMap * screenBits)                   AVAILABLE_MAC_OS_X
 /*
  *  GetQDGlobalsArrow()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -5989,6 +6924,9 @@ GetQDGlobalsArrow(Cursor * arrow)                             AVAILABLE_MAC_OS_X
 
 /*
  *  GetQDGlobalsDarkGray()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -6002,6 +6940,9 @@ GetQDGlobalsDarkGray(Pattern * dkGray)                        AVAILABLE_MAC_OS_X
 /*
  *  GetQDGlobalsLightGray()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -6013,6 +6954,9 @@ GetQDGlobalsLightGray(Pattern * ltGray)                       AVAILABLE_MAC_OS_X
 
 /*
  *  GetQDGlobalsGray()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -6026,6 +6970,9 @@ GetQDGlobalsGray(Pattern * gray)                              AVAILABLE_MAC_OS_X
 /*
  *  GetQDGlobalsBlack()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -6038,6 +6985,9 @@ GetQDGlobalsBlack(Pattern * black)                            AVAILABLE_MAC_OS_X
 /*
  *  GetQDGlobalsWhite()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -6049,6 +6999,9 @@ GetQDGlobalsWhite(Pattern * white)                            AVAILABLE_MAC_OS_X
 
 /*
  *  GetQDGlobalsThePort()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -6063,6 +7016,9 @@ GetQDGlobalsThePort(void)                                     AVAILABLE_MAC_OS_X
 /*
  *  SetQDGlobalsRandomSeed()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -6074,6 +7030,9 @@ SetQDGlobalsRandomSeed(long randomSeed)                       AVAILABLE_MAC_OS_X
 
 /*
  *  SetQDGlobalsArrow()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -6088,6 +7047,9 @@ SetQDGlobalsArrow(const Cursor * arrow)                       AVAILABLE_MAC_OS_X
 /*
  *  GetRegionBounds()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -6101,6 +7063,9 @@ GetRegionBounds(
 
 /*
  *  IsRegionRectangular()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -6118,6 +7083,9 @@ IsRegionRectangular(RgnHandle region)                         AVAILABLE_MAC_OS_X
 /*
  *  CreateNewPort()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -6129,6 +7097,9 @@ CreateNewPort(void)                                           AVAILABLE_MAC_OS_X
 
 /*
  *  DisposePort()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -6142,6 +7113,9 @@ DisposePort(CGrafPtr port)                                    AVAILABLE_MAC_OS_X
 
 /*
  *  SetQDError()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -6157,6 +7131,9 @@ SetQDError(OSErr err)                                         AVAILABLE_MAC_OS_X
 /*
  *  QDLocalToGlobalPoint()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -6170,6 +7147,9 @@ QDLocalToGlobalPoint(
 
 /*
  *  QDGlobalToLocalPoint()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -6185,6 +7165,9 @@ QDGlobalToLocalPoint(
 /*
  *  QDLocalToGlobalRect()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -6198,6 +7181,9 @@ QDLocalToGlobalRect(
 
 /*
  *  QDGlobalToLocalRect()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -6213,6 +7199,9 @@ QDGlobalToLocalRect(
 /*
  *  QDLocalToGlobalRegion()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -6226,6 +7215,9 @@ QDLocalToGlobalRegion(
 
 /*
  *  QDGlobalToLocalRegion()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -6247,6 +7239,9 @@ QDGlobalToLocalRegion(
 /*
  *  QDIsPortBuffered()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0.2 and later
@@ -6259,6 +7254,9 @@ QDIsPortBuffered(CGrafPtr port)                               AVAILABLE_MAC_OS_X
 /*
  *  QDIsPortBufferDirty()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0.2 and later
@@ -6270,6 +7268,9 @@ QDIsPortBufferDirty(CGrafPtr port)                            AVAILABLE_MAC_OS_X
 
 /*
  *  QDFlushPortBuffer()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -6285,6 +7286,9 @@ QDFlushPortBuffer(
 /*
  *  QDGetDirtyRegion()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -6298,6 +7302,9 @@ QDGetDirtyRegion(
 
 /*
  *  QDSetDirtyRegion()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -6313,6 +7320,9 @@ QDSetDirtyRegion(
 /*
  *  QDAddRectToDirtyRegion()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.5 and later
@@ -6326,6 +7336,9 @@ QDAddRectToDirtyRegion(
 
 /*
  *  QDAddRegionToDirtyRegion()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -6342,6 +7355,9 @@ QDAddRegionToDirtyRegion(
 /*
  *  CreateCGContextForPort()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
@@ -6355,6 +7371,42 @@ CreateCGContextForPort(
 
 /*
  *  ClipCGContextToRegion()
+ *  
+ *  Summary:
+ *    Set a CGContext's clip path to the equivalent of a RgnHandle
+ *  
+ *  Discussion:
+ *    The usage model of the clipPath in a CGContext is fundamentally
+ *    different from the usage of a clipRgn in a GrafPort (cf.
+ *    CoreGraphics documentation). When Quickdraw and CoreGraphics
+ *    drawing are being mixed, it is often necessary to convert a QD
+ *    clipRgn to a clipPath in CG. In order to produce the expected
+ *    outcome in ClipCGContextToRegion, this function needs to reset
+ *    any CGContext clipPath, before setting it to the converted
+ *    region. Consequently, the previous clipPath in the CGContext is
+ *    lost, and cannot be restored in a
+ *    CGContextSaveGState/CGContextRestoreGState bracket around the
+ *    ClipCGContextToRegion call.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    gc:
+ *      The CGContext
+ *    
+ *    portRect:
+ *      A bounding box for the region (needed by conversion to
+ *      clipPath). Can be the GrafPort bounds, or the region bounds
+ *    
+ *    region:
+ *      The RgnHandle (usually a clipRgn) to be converted to the
+ *      CGContextClip.
+ *  
+ *  Result:
+ *    OSStatus noErr, or a memory error is some internal allocation
+ *    failed.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -6370,6 +7422,9 @@ ClipCGContextToRegion(
 
 /*
  *  SyncCGContextOriginWithPort()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -6403,6 +7458,9 @@ SyncCGContextOriginWithPort(
  *    - QDEndCGContext releases the CGContext returned from
  *    QDBeginCGContext and sets it to NULL.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inPort:
@@ -6425,6 +7483,9 @@ QDBeginCGContext(
 /*
  *  QDEndCGContext()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.1 and later
@@ -6437,7 +7498,6 @@ QDEndCGContext(
 
 
 /*
-    The following routines are implemented in CarbonLib, and on Mac OS X in QD proper.
     They save the pixel data of a region in a packed format for quick save/restore 
     without using a lot of memory to do a large, hollow region, such as the region
     used when drag hiliting (which is where this is used).
@@ -6446,6 +7506,26 @@ QDEndCGContext(
 typedef struct OpaqueQDRegionBitsRef*   QDRegionBitsRef;
 /*
  *  QDSaveRegionBits()
+ *  
+ *  Summary:
+ *    Saves the pixel data of a region in a packed format for quick
+ *    restore
+ *  
+ *  Discussion:
+ *    Implemented in CarbonLib, and on Mac OS X in QD proper. Used in
+ *    particular for drag hiliting. The packed format doesn't use too
+ *    much memory for large hollow regions.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    region:
+ *      The RgnHandle corresponding to the pixel data to be saved.
+ *  
+ *  Result:
+ *    The QDRegionBitsRef to be passed later into QDRestoreRegionBits.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
@@ -6458,6 +7538,31 @@ QDSaveRegionBits(RgnHandle region)                            AVAILABLE_MAC_OS_X
 
 /*
  *  QDRestoreRegionBits()
+ *  
+ *  Summary:
+ *    Restores the pixel data of a region, as returned from
+ *    QDSaveRegionBits
+ *  
+ *  Discussion:
+ *    Implemented in CarbonLib, and on Mac OS X in QD proper. Used in
+ *    particular for drag hiliting. NOTE: QDRestoreRegionBits also
+ *    calls QDDisposeRegionBits on the regionBits passed in - don't
+ *    call it again!
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    region:
+ *      The RgnHandle corresponding to the regionBits.
+ *    
+ *    regionBits:
+ *      The QDRegionBitsRef returned from a preceding QDSaveRegionBits
+ *      call
+ *  
+ *  Result:
+ *    OSStatus noErr, or paramErr if a NULL parameter is passed in
  *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
@@ -6473,6 +7578,29 @@ QDRestoreRegionBits(
 /*
  *  QDDisposeRegionBits()
  *  
+ *  Summary:
+ *    Disposes of data allocated in QDSaveRegionBits, when the
+ *    QDRegionBitsRef needs to be discarded without being passed to
+ *    QDRestoreRegionBits.
+ *  
+ *  Discussion:
+ *    Implemented in CarbonLib, and on Mac OS X in QD proper. NOTE: If
+ *    the QDRegionBitsRef has been passed to QDRestoreRegionBits, it
+ *    has been deallocated already - don't call QDDisposeRegionBits,
+ *    then.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    regionBits:
+ *      The QDRegionBitsRef returned from a preceding QDSaveRegionBits
+ *      call
+ *  
+ *  Result:
+ *    OSStatus noErr, or paramErr if a NULL parameter is passed in
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -6480,6 +7608,7 @@ QDRestoreRegionBits(
  */
 extern OSStatus 
 QDDisposeRegionBits(QDRegionBitsRef regionBits)               AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
 
 
 /*
@@ -6491,6 +7620,9 @@ QDDisposeRegionBits(QDRegionBitsRef regionBits)               AVAILABLE_MAC_OS_X
 */
 /*
  *  CreateNewPortForCGDisplayID()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -6509,6 +7641,9 @@ CreateNewPortForCGDisplayID(UInt32 inCGDisplayID)             AVAILABLE_MAC_OS_X
 */
 /*
  *  QDDisplayWaitCursor()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -6543,6 +7678,9 @@ QDDisplayWaitCursor(Boolean forceWaitCursor)                  AVAILABLE_MAC_OS_X
  *    application might change the port's pattern origin to (-10, -10)
  *    so that patterns are still aligned with the window's content area.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    origin:
@@ -6562,6 +7700,9 @@ QDSetPatternOrigin(Point origin)                              AVAILABLE_MAC_OS_X
  *  
  *  Summary:
  *    Returns the pattern origin of the current port.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -6591,6 +7732,9 @@ QDGetPatternOrigin(Point * origin)                            AVAILABLE_MAC_OS_X
  *    QDRegisterNamedPixMapCursor, and can then be set by
  *    QDSetNamedPixMapCursor.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    name:
@@ -6614,23 +7758,45 @@ QDIsNamedPixMapCursorRegistered(const char name[128])         AVAILABLE_MAC_OS_X
  *  
  *  Discussion:
  *    In order to set a PixMapCursor, it needs to be registered first
- *    by name.
+ *    by name. This only succeeds if the system supports Hardware
+ *    Cursors (depending on video circuits). There is also the obvious
+ *    companion function QDUnregisterNamedPixMapCursor. NOTE: The
+ *    original implementation of QDUnregisterNamedPixMapCursor was
+ *    misspelled "QDUnregisterNamedPixMapCursur".
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
  *    crsrData:
- *      (description forthcoming)
+ *      A PixMapHandle representing the cursor pixels. If the
+ *      pixelDepth is 32, the crsrMask PixMapHandle can be NULL; in
+ *      this case, the alpha channel in the ARGB PixMap is used as
+ *      mask. If a crsrMask is provided, the alpha channel in crsrData
+ *      is ignored. The pixelDepth can be any of 1, 2, 4, 8, 16 or 32.
  *    
  *    crsrMask:
- *      (description forthcoming)
+ *      A PixMapHandle representing the mask. It is assumed to be in
+ *      8-bit deep grayScale format, although other depths are accepted
+ *      and converted to 8-bit grayScale (using CopyBits). The
+ *      (**crsrMask).bounds rectangle needs to match
+ *      (**crsrData).bounds. If the crsrData are 32-bit deep, crsrMask
+ *      can be NULL, and the alpha bytes in the crsrData ARGB pixels
+ *      are used as mask.
  *    
  *    hotSpot:
- *      (description forthcoming)
+ *      The usual cursor hotspot, in coordinates relativ to
+ *      (**crsrData).bounds.topLeft.
  *    
  *    name:
  *      A naming convention involving the name of your application and
  *      descriptive cursor names or resource IDs is suggested. Cursor
- *      names are 0-terminated C-strings up to a length of 127.
+ *      names are 0-terminated C-strings up to a length of 127. $result
+ *              OSStatus: noErr = 0 for success, or (constants from
+ *      MacErrors.h): kQDNoColorHWCursorSupport,
+ *      kQDCursorAlreadyRegistered, paramErr, memFullErr, or a CGError
+ *      as returned internally from CoreGraphics.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
@@ -6648,6 +7814,9 @@ QDRegisterNamedPixMapCursor(
 /*
  *  QDUnregisterNamedPixMapCursur()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
@@ -6658,7 +7827,25 @@ QDUnregisterNamedPixMapCursur(const char name[128])           AVAILABLE_MAC_OS_X
 
 
 /*
+ *  QDUnregisterNamedPixMapCursor()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+QDUnregisterNamedPixMapCursor(const char name[128])           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
  *  QDSetNamedPixMapCursor()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
@@ -6669,8 +7856,65 @@ extern OSStatus
 QDSetNamedPixMapCursor(const char name[128])                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
+enum {
+  kQDXArrowCursor               = 0,
+  kQDXIBeamCursor               = 1,
+  kQDXIBeamXORCursor            = 2,
+  kQDXAliasCursor               = 3,
+  kQDXCopyCursor                = 4,
+  kQDXMoveCursor                = 5,
+  kQDXNumberOfSystemCursors     = 6     /* Must be last */
+};
+
+
+typedef UInt32                          QDXSystemCursorID;
+/*
+ *  QDGetCursorNameForSystemCursor()
+ *  
+ *  Summary:
+ *    Return the name of one of the predefined Mac OS X system cursors
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    cursorID:
+ *      UInt32 in the range 0 ... kQDXNumberOfSystemCursors - 1 (see
+ *      enum above)
+ *  
+ *  Result:
+ *    const char* name, or NULL if 'cursorID' is out of range
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern const char * 
+QDGetCursorNameForSystemCursor(QDXSystemCursorID cursorID)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+
+
 /*
  *  QDSetCursorScale()
+ *  
+ *  Summary:
+ *    Set a scaling factor for the cursor.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    scale:
+ *      Must be at least 0.5, and integer values (1.0, 2.0, 3.0, 4.0)
+ *      are recommended. The scaling factor is system-wide (applies to
+ *      all apps), and is intended for use in such things as assisting
+ *      the visually impaired.  The scaling factor is treated as a hint
+ *      to the system, and the exact scale applied may be limited by
+ *      device driver capabilities and performance considerations.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
@@ -6679,6 +7923,67 @@ QDSetNamedPixMapCursor(const char name[128])                  AVAILABLE_MAC_OS_X
  */
 extern OSStatus 
 QDSetCursorScale(float scale)                                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  QDGetCursorScale()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+QDGetCursorScale(float * outScale)                            AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+
+/*
+ *  QDGetCursorData()
+ *  
+ *  Summary:
+ *    Allocate and return a PixMapHandle with the cursor data; also
+ *    return the hotSpot. The caller is responsible for calling
+ *    DisposePtr((**crsrData).baseAddr) and DisposePixMap(crsrData)
+ *    when done with the crsrData returned.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    contextCursor:
+ *      A Boolean; if true, return data for the current context cursor,
+ *      if false, return data for the currently showing global cursor.
+ *    
+ *    crsrData:
+ *      Allocates a PixMapHandle and pixelData in baseAddr,
+ *      corresponding to the cursorData. The pixelData are in 32-bit
+ *      ARGB format, with the mask contained in the alpha channel. This
+ *      PixMapHandle can be passed as crsrData to
+ *      QDRegisterNamedPixMapCursor, above (with crsrMask = NULL). If
+ *      the return result indicates an error, NULL is returned.
+ *    
+ *    hotSpot:
+ *      Contains the cursor hotSpot, if successful.
+ *  
+ *  Result:
+ *    noErr if successful, or whatever error is returned from lower
+ *    levels otherwise.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+QDGetCursorData(
+  Boolean         contextCursor,
+  PixMapHandle *  crsrData,
+  Point *         hotSpot)                                    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 
@@ -6708,6 +8013,9 @@ enum {
  *    of "newFlags" ... (void)QDSwapTextFlags(savedFlags);  // restore
  *    previous setting
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    newFlags:
@@ -6728,6 +8036,9 @@ QDSwapTextFlags(UInt32 newFlags)                              AVAILABLE_MAC_OS_X
  *  
  *  Summary:
  *    Same as QDSwapTextFlags, but per GrafPort.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -6750,12 +8061,42 @@ QDSwapPortTextFlags(
 
 
 
+/*
+ *  QDGetCGDirectDisplayID()
+ *  
+ *  Summary:
+ *    Return the CGDirectDisplayID corresponding to a GDHandle
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inGDevice:
+ *      The GDevice handle corresponding to the device for which the
+ *      CGDirectDisplayID is requested
+ *  
+ *  Result:
+ *    The CGDirectDisplayID, or 0 if the GDHandle does not represent a
+ *    display.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern CGDirectDisplayID 
+QDGetCGDirectDisplayID(GDHandle inGDevice)                    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
 
 /* 
     LowMem accessor functions previously in LowMem.h
 */
 /*
  *  LMGetScrVRes()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -6769,6 +8110,9 @@ LMGetScrVRes(void)                                            AVAILABLE_MAC_OS_X
 /*
  *  LMSetScrVRes()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -6780,6 +8124,9 @@ LMSetScrVRes(SInt16 value)                                    AVAILABLE_MAC_OS_X
 
 /*
  *  LMGetScrHRes()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -6793,6 +8140,9 @@ LMGetScrHRes(void)                                            AVAILABLE_MAC_OS_X
 /*
  *  LMSetScrHRes()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -6804,6 +8154,9 @@ LMSetScrHRes(SInt16 value)                                    AVAILABLE_MAC_OS_X
 
 /*
  *  LMGetMainDevice()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -6817,6 +8170,9 @@ LMGetMainDevice(void)                                         AVAILABLE_MAC_OS_X
 /*
  *  LMSetMainDevice()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -6828,6 +8184,9 @@ LMSetMainDevice(GDHandle value)                               AVAILABLE_MAC_OS_X
 
 /*
  *  LMGetDeviceList()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -6841,6 +8200,9 @@ LMGetDeviceList(void)                                         AVAILABLE_MAC_OS_X
 /*
  *  LMSetDeviceList()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -6852,6 +8214,9 @@ LMSetDeviceList(GDHandle value)                               AVAILABLE_MAC_OS_X
 
 /*
  *  LMGetQDColors()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -6865,6 +8230,9 @@ LMGetQDColors(void)                                           AVAILABLE_MAC_OS_X
 /*
  *  LMSetQDColors()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -6876,6 +8244,9 @@ LMSetQDColors(Handle value)                                   AVAILABLE_MAC_OS_X
 
 /*
  *  LMGetWidthListHand()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -6889,6 +8260,9 @@ LMGetWidthListHand(void)                                      AVAILABLE_MAC_OS_X
 /*
  *  LMSetWidthListHand()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -6900,6 +8274,9 @@ LMSetWidthListHand(Handle value)                              AVAILABLE_MAC_OS_X
 
 /*
  *  LMGetHiliteMode()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -6913,6 +8290,9 @@ LMGetHiliteMode(void)                                         AVAILABLE_MAC_OS_X
 /*
  *  LMSetHiliteMode()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -6924,6 +8304,9 @@ LMSetHiliteMode(UInt8 value)                                  AVAILABLE_MAC_OS_X
 
 /*
  *  LMGetWidthPtr()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -6937,6 +8320,9 @@ LMGetWidthPtr(void)                                           AVAILABLE_MAC_OS_X
 /*
  *  LMSetWidthPtr()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -6948,6 +8334,9 @@ LMSetWidthPtr(Ptr value)                                      AVAILABLE_MAC_OS_X
 
 /*
  *  LMGetWidthTabHandle()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -6961,6 +8350,9 @@ LMGetWidthTabHandle(void)                                     AVAILABLE_MAC_OS_X
 /*
  *  LMSetWidthTabHandle()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -6972,6 +8364,9 @@ LMSetWidthTabHandle(Handle value)                             AVAILABLE_MAC_OS_X
 
 /*
  *  LMGetLastSPExtra()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -6985,6 +8380,9 @@ LMGetLastSPExtra(void)                                        AVAILABLE_MAC_OS_X
 /*
  *  LMSetLastSPExtra()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -6996,6 +8394,9 @@ LMSetLastSPExtra(SInt32 value)                                AVAILABLE_MAC_OS_X
 
 /*
  *  LMGetLastFOND()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -7009,6 +8410,9 @@ LMGetLastFOND(void)                                           AVAILABLE_MAC_OS_X
 /*
  *  LMSetLastFOND()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -7020,6 +8424,9 @@ LMSetLastFOND(Handle value)                                   AVAILABLE_MAC_OS_X
 
 /*
  *  LMGetFractEnable()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -7033,6 +8440,9 @@ LMGetFractEnable(void)                                        AVAILABLE_MAC_OS_X
 /*
  *  LMSetFractEnable()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -7045,6 +8455,9 @@ LMSetFractEnable(UInt8 value)                                 AVAILABLE_MAC_OS_X
 /*
  *  LMGetTheGDevice()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -7056,6 +8469,9 @@ LMGetTheGDevice(void)                                         AVAILABLE_MAC_OS_X
 
 /*
  *  LMSetTheGDevice()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -7070,6 +8486,9 @@ LMSetTheGDevice(GDHandle value)                               AVAILABLE_MAC_OS_X
 /*
  *  LMGetHiliteRGB()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -7081,6 +8500,9 @@ LMGetHiliteRGB(RGBColor * hiliteRGBValue)                     AVAILABLE_MAC_OS_X
 
 /*
  *  LMSetHiliteRGB()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -7094,6 +8516,9 @@ LMSetHiliteRGB(const RGBColor * hiliteRGBValue)               AVAILABLE_MAC_OS_X
 /*
  *  LMGetCursorNew()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -7105,6 +8530,9 @@ LMGetCursorNew(void)                                          AVAILABLE_MAC_OS_X
 
 /*
  *  LMSetCursorNew()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework

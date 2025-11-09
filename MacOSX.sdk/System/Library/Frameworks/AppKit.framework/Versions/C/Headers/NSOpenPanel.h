@@ -1,48 +1,44 @@
 /*
 	NSOpenPanel.h
 	Application Kit
-	Copyright (c) 1994-2001, Apple Computer, Inc.
+	Copyright (c) 1994-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSSavePanel.h>
 
-/* Tags of views in the OpenPanel */
-
-@interface NSOpenPanel : NSSavePanel
-{
-    /*All instance variables are private*/
-    NSArray	       *_filterTypes;
-    void               *_auxiliaryOpenPanelStorage;
+@interface NSOpenPanel : NSSavePanel {
+    char _reservedOpenPanel[4];
+    void *_privateOpenPanel;
 }
 
 + (NSOpenPanel *)openPanel;
 
-- (void)setAllowsMultipleSelection:(BOOL)flag;
-- (BOOL)allowsMultipleSelection;
-- (void)setCanChooseDirectories:(BOOL)flag;
-- (BOOL)canChooseDirectories;
-- (void)setCanChooseFiles:(BOOL)flag;
-- (BOOL)canChooseFiles;
-- (void)setResolvesAliases:(BOOL)flag;
-- (BOOL)resolvesAliases;
-- (NSArray *)filenames;
 - (NSArray *)URLs;
+- (NSArray *)filenames;
 
-/* Present a sheet openPanel on a given window.  When the modal session is ended, 
-** the didEndSelector will be invoked.  The didEndSelector method should
-** have the following signature:
-    ** - (void)openPanelDidEnd:(NSOpenPanel *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
-**
-*/
+- (BOOL)resolvesAliases;
+- (void)setResolvesAliases:(BOOL)flag;
+
+- (BOOL)canChooseDirectories;
+- (void)setCanChooseDirectories:(BOOL)flag;
+
+- (BOOL)allowsMultipleSelection;
+- (void)setAllowsMultipleSelection:(BOOL)flag;
+
+- (BOOL)canChooseFiles;
+- (void)setCanChooseFiles:(BOOL)flag;
+
+@end
+
+@interface NSOpenPanel (NSOpenPanelRuntime)
 
 - (void)beginSheetForDirectory:(NSString *)path file:(NSString *)name types:(NSArray *)fileTypes modalForWindow:(NSWindow *)docWindow modalDelegate:(id)delegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo;
 
-/*
- ** runModalForDirectory:file:types:relativeToWindow: is deprecated
- ** Please use beginSheetForDirectory:file:types:modalForWindow:modalDelegate:didEndSelector:contextInfo: instead
- */
-- (int)runModalForDirectory:(NSString *)path file:(NSString *)name types:(NSArray *)fileTypes relativeToWindow:(NSWindow*)window;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void)beginForDirectory:(NSString *)path file:(NSString *)name types:(NSArray *)fileTypes modelessDelegate:(id)delegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo;
+#endif
+
 - (int)runModalForDirectory:(NSString *)path file:(NSString *)name types:(NSArray *)fileTypes;
 - (int)runModalForTypes:(NSArray *)fileTypes;
 

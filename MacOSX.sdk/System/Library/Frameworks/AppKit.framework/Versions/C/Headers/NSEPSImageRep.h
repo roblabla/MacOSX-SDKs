@@ -1,17 +1,19 @@
 /*
 	NSEPSImageRep.h
 	Application Kit
-	Copyright (c) 1994-2001, Apple Computer, Inc.
+	Copyright (c) 1994-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSImageRep.h>
 
+@class NSPDFImageRep;
+
 @interface NSEPSImageRep : NSImageRep {
     /*All instance variables are private*/
     NSPoint _bBoxOrigin;
     NSData *_epsData;
-    unsigned int _reserved;
+    NSPDFImageRep* _pdfImageRep;
 }
 
 + (id)imageRepWithData:(NSData *)epsData;	/* Convenience of initWithData: */

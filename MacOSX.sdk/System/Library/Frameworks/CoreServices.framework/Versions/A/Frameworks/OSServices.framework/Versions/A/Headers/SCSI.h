@@ -3,9 +3,9 @@
  
      Contains:   SCSI Family Interfaces.
  
-     Version:    OSServices-39.2~411
+     Version:    OSServices-62.7~16
  
-     Copyright:  © 1986-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1986-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -207,7 +207,7 @@ typedef STACK_UPP_TYPE(SCSICallbackProcPtr)                     SCSICallbackUPP;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SCSICallbackUPP
-NewSCSICallbackUPP(SCSICallbackProcPtr userRoutine)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewSCSICallbackUPP(SCSICallbackProcPtr userRoutine)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_2;
 
 /*
  *  DisposeSCSICallbackUPP()
@@ -218,7 +218,7 @@ NewSCSICallbackUPP(SCSICallbackProcPtr userRoutine)           AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSCSICallbackUPP(SCSICallbackUPP userUPP)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeSCSICallbackUPP(SCSICallbackUPP userUPP)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_2;
 
 /*
  *  InvokeSCSICallbackUPP()
@@ -231,7 +231,7 @@ DisposeSCSICallbackUPP(SCSICallbackUPP userUPP)               AVAILABLE_MAC_OS_X
 extern void
 InvokeSCSICallbackUPP(
   void *           scsiPB,
-  SCSICallbackUPP  userUPP)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SCSICallbackUPP  userUPP)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_2;
 
 
 
@@ -934,20 +934,22 @@ enum {
 
 
 /*
- *  SCSIAction()
+ *  SCSIAction()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use the SCSITaskUserClient API instead.
  *  
  *  Discussion:
  *    This routine is deprecated. It is exported and callable, but it
- *    is no longer being maintained. Please use SCSITaskUserClient
- *    instead.
+ *    is no longer being maintained.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.2
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.5 and later
  */
 extern OSErr 
-SCSIAction(SCSI_PB * parameterBlock)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SCSIAction(SCSI_PB * parameterBlock)                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_2;
 
 
 /*

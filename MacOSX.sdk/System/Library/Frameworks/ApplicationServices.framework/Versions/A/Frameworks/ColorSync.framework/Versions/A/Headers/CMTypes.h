@@ -3,9 +3,9 @@
  
      Contains:   ColorSync types
  
-     Version:    ColorSync-98.1~196
+     Version:    ColorSync-118.2~1
  
-     Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -68,7 +68,7 @@ typedef STACK_UPP_TYPE(CMProfileAccessProcPtr)                  CMProfileAccessU
  *  NewCMFlattenUPP()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -79,7 +79,7 @@ NewCMFlattenUPP(CMFlattenProcPtr userRoutine)                 AVAILABLE_MAC_OS_X
  *  NewCMBitmapCallBackUPP()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -90,7 +90,7 @@ NewCMBitmapCallBackUPP(CMBitmapCallBackProcPtr userRoutine)   AVAILABLE_MAC_OS_X
  *  NewCMConcatCallBackUPP()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -101,7 +101,7 @@ NewCMConcatCallBackUPP(CMConcatCallBackProcPtr userRoutine)   AVAILABLE_MAC_OS_X
  *  NewCMProfileFilterUPP()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -112,7 +112,7 @@ NewCMProfileFilterUPP(CMProfileFilterProcPtr userRoutine)     AVAILABLE_MAC_OS_X
  *  NewCMProfileAccessUPP()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -123,7 +123,7 @@ NewCMProfileAccessUPP(CMProfileAccessProcPtr userRoutine)     AVAILABLE_MAC_OS_X
  *  DisposeCMFlattenUPP()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -134,7 +134,7 @@ DisposeCMFlattenUPP(CMFlattenUPP userUPP)                     AVAILABLE_MAC_OS_X
  *  DisposeCMBitmapCallBackUPP()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -145,7 +145,7 @@ DisposeCMBitmapCallBackUPP(CMBitmapCallBackUPP userUPP)       AVAILABLE_MAC_OS_X
  *  DisposeCMConcatCallBackUPP()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -156,7 +156,7 @@ DisposeCMConcatCallBackUPP(CMConcatCallBackUPP userUPP)       AVAILABLE_MAC_OS_X
  *  DisposeCMProfileFilterUPP()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -167,7 +167,7 @@ DisposeCMProfileFilterUPP(CMProfileFilterUPP userUPP)         AVAILABLE_MAC_OS_X
  *  DisposeCMProfileAccessUPP()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -178,7 +178,7 @@ DisposeCMProfileAccessUPP(CMProfileAccessUPP userUPP)         AVAILABLE_MAC_OS_X
  *  InvokeCMFlattenUPP()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -194,7 +194,7 @@ InvokeCMFlattenUPP(
  *  InvokeCMBitmapCallBackUPP()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -208,7 +208,7 @@ InvokeCMBitmapCallBackUPP(
  *  InvokeCMConcatCallBackUPP()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -222,7 +222,7 @@ InvokeCMConcatCallBackUPP(
  *  InvokeCMProfileFilterUPP()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -236,7 +236,7 @@ InvokeCMProfileFilterUPP(
  *  InvokeCMProfileAccessUPP()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */

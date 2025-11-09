@@ -3,9 +3,9 @@
  
      Contains:   HIView routines
  
-     Version:    HIToolbox-124.14~2
+     Version:    HIToolbox-145.33~1
  
-     Copyright:  © 2001-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2001-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -41,18 +41,23 @@ extern "C" {
 typedef ControlRef                      HIViewRef;
 typedef ControlID                       HIViewID;
 typedef ControlPartCode                 HIViewPartCode;
+typedef ControlContentType              HIViewImageContentType;
+typedef ControlImageContentInfo         HIViewImageContentInfo;
 /*
  *  kHIViewWindowContentID
  *  
  *  Discussion:
  *    The standard view ID for the content view of a window.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in Carbon.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
-extern const HIViewID kHIViewWindowContentID;
+extern const HIViewID kHIViewWindowContentID                         AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 /*
  *  kHIViewWindowGrowBoxID
  *  
@@ -61,12 +66,15 @@ extern const HIViewID kHIViewWindowContentID;
  *    windows have grow boxes, so be aware that you might not find this
  *    view if you look for it.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in Carbon.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   not available
  */
-extern const HIViewID kHIViewWindowGrowBoxID;
+extern const HIViewID kHIViewWindowGrowBoxID                         AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /*
@@ -87,12 +95,52 @@ enum {
 };
 
 typedef UInt32                          HIViewZOrderOp;
+
+/*
+ *  HIViewFrameMetrics
+ *  
+ *  Summary:
+ *    Describes the offsets from the structure to the content area of a
+ *    view; for example, the top metric is the difference between the
+ *    vertical coordinate of the top edge of the view’s structure
+ *    region and the vertical coordinate of the top edge of the view’s
+ *    content region. This structure is returned by a view in response
+ *    to a kEventControlGetFrameMetrics event.
+ */
+struct HIViewFrameMetrics {
+
+  /*
+   * Height of the top of the structure area.
+   */
+  float               top;
+
+  /*
+   * Width of the left of the structure area.
+   */
+  float               left;
+
+  /*
+   * Height of the bottom of the structure area.
+   */
+  float               bottom;
+
+  /*
+   * Width of the right of the structure area.
+   */
+  float               right;
+};
+typedef struct HIViewFrameMetrics       HIViewFrameMetrics;
 /*==============================================================================*/
 /*  CONTROL ATTRIBUTES                                                          */
 /*==============================================================================*/
 
 
 /*
+ *  Summary:
+ *    View attributes are generally determined by clients of the view;
+ *    the view itself should observe the attributes and behave
+ *    accordingly.
+ *  
  *  Discussion:
  *    View Attributes
  */
@@ -107,8 +155,140 @@ enum {
   kHIViewSendCommandToUserFocus = (1 << 0)
 };
 
+
+/*
+ *  Summary:
+ *    View feature flags are generally determined by the view itself,
+ *    and are not typically changed by clients of the view.
+ *  
+ *  Discussion:
+ *    View Features
+ */
+enum {
+
+  /*
+   * This view supports using the ghosting protocol when live tracking
+   * is not enabled.
+   */
+  kHIViewSupportsGhosting       = 1 << 0,
+
+  /*
+   * This view allows subviews to be embedded within it.
+   */
+  kHIViewAllowsSubviews         = 1 << 1,
+
+  /*
+   * If this view is clicked, the keyboard focus should be set to this
+   * view automatically. This is primarily used for edit text controls.
+   */
+  kHIViewGetsFocusOnClick       = 1 << 8,
+
+  /*
+   * This view supports the live feedback protocol. Necessary to
+   * implement live scroll bar tracking. Clients of a view should never
+   * disable this.
+   */
+  kHIViewSupportsLiveFeedback   = 1 << 10,
+
+  /*
+   * This view can be put into a radio group. Radio buttons and bevel
+   * buttons report this behavior.
+   */
+  kHIViewSupportsRadioBehavior  = 1 << 11,
+
+  /*
+   * This view supports the auto-toggle protocol and should at the very
+   * least auto- toggle from off to on and back. The view can support a
+   * carbon event for more advanced auto-toggling of its value. The tab
+   * view supports this, for example, so that when a tab is clicked its
+   * value changes automatically.
+   */
+  kHIViewAutoToggles            = 1 << 14,
+
+  /*
+   * This is merely informational. Turning it off would not necessarily
+   * disable any timer a view might be using, but it could obey this
+   * bit if it so desired.
+   */
+  kHIViewIdlesWithTimer         = 1 << 23,
+
+  /*
+   * This tells the control manager that the up button part increases
+   * the value of the control instead of decreasing it. For example,
+   * the Little Arrows (Spinner) control increase its value when the up
+   * button is pressed. Scroll bars, on the other hand, decrease the
+   * value when their up buttons are pressed.
+   */
+  kHIViewInvertsUpDownValueMeaning = 1 << 24,
+
+  /*
+   * This is an optimization for determining a view's opaque region.
+   * When set, the view system just uses the view's structure region,
+   * and can usually avoid having to call the view at all.
+   */
+  kHIViewIsOpaque               = 1 << 25,
+
+  /*
+   * This is an optimization for determining what gets invalidated when
+   * views are dirtied. For example, on a metal window, the content
+   * view is actually fully transparent, so invalidating it doesn't
+   * really help things. By telling the control manager that the view
+   * is transparent and does not do any drawing, we can avoid trying to
+   * invalidate it and instead invalidate views behind it.
+   */
+  kHIViewDoesNotDraw            = 1 << 27,
+
+  /*
+   * Indicates to the Control Manager that this view doesn't use the
+   * special part codes for indicator, inactive, and disabled.
+   * Available in Mac OS X 10.3 and later.
+   */
+  kHIViewDoesNotUseSpecialParts = 1 << 28,
+
+  /*
+   * This is an optimization for determining the clickable region of a
+   * window (used for metal windows, for example, when doing async
+   * window dragging). The presence of this bit tells us not to bother
+   * asking the control for the clickable region. A view like the
+   * visual separator would set this bit. It's typicially used in
+   * conjunction with the kHIViewDoesNotDraw bit.
+   */
+  kHIViewIgnoresClicks          = 1 << 29,
+  kHIViewValidFeaturesForPanther = 0x3B804D03
+};
+
+
+typedef UInt64                          HIViewFeatures;
+/*==============================================================================*/
+/*  ERROR CODES                                                                 */
+/*==============================================================================*/
+
+/*
+ *  Discussion:
+ *    View/Control Error Codes
+ */
+enum {
+
+  /*
+   * This value will be returned from an HIView API or a Control
+   * Manager API when an action that is only supported on a compositing
+   * window is attempted on a non-compositing window. This doesn't
+   * necessarily mean that the API is only callable for compositing
+   * windows; sometimes the legality of the action is based on other
+   * parameters of the API. See HIViewAddSubview for one particular use
+   * of this error code.
+   */
+  errNeedsCompositedWindow      = -30598
+};
+
 /*==============================================================================*/
 /*  HIOBJECT SUPPORT                                                            */
+/*                                                                              */
+/*  Setting Initial Bounds                                                      */
+/*                                                                              */
+/*  When creating a view using HIObjectCreate, you can set the initial bounds   */
+/*  automatically by passing in an initialization event into HIObjectCreate     */
+/*  with a kEventParamBounds parameter as typeHIRect or typeQDRectangle.        */
 /*==============================================================================*/
 /* The HIObject class ID for the HIView class. */
 #define kHIViewClassID                  CFSTR("com.apple.hiview")
@@ -120,6 +300,9 @@ enum {
  *  
  *  Discussion:
  *    Returns the root view for a window.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -145,6 +328,13 @@ HIViewGetRoot(WindowRef inWindow)                             AVAILABLE_MAC_OS_X
  *  Discussion:
  *    Adds a subview to the given parent. The new subview is added to
  *    the front of the list of subviews (i.e it is made topmost).
+ *    
+ *    The subview being added is not retained by the new parent view.
+ *    Do not release the view after adding it, or it will cease to
+ *    exist.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -155,7 +345,10 @@ HIViewGetRoot(WindowRef inWindow)                             AVAILABLE_MAC_OS_X
  *      The subview being added.
  *  
  *  Result:
- *    An operating system result code.
+ *    An operating system result code. 
+ *    errNeedsCompositedWindow will be returned when you try to embed
+ *    into the content view in a non-compositing window; you can only
+ *    embed into the content view in compositing windows.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in Carbon.framework
@@ -172,7 +365,12 @@ HIViewAddSubview(
  *  HIViewRemoveFromSuperview()
  *  
  *  Discussion:
- *    Removes a view from its parent.
+ *    Removes a view from its parent. 
+ *    The subview being removed from the parent is not released and
+ *    still exists.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -196,6 +394,9 @@ HIViewRemoveFromSuperview(HIViewRef inView)                   AVAILABLE_MAC_OS_X
  *  
  *  Discussion:
  *    Returns a view's parent view.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -222,6 +423,9 @@ HIViewGetSuperview(HIViewRef inView)                          AVAILABLE_MAC_OS_X
  *    Returns the first subview of a container. The first subview is
  *    the topmost subview in z-order.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inView:
@@ -247,6 +451,9 @@ HIViewGetFirstSubview(HIViewRef inView)                       AVAILABLE_MAC_OS_X
  *    Returns the last subview of a container. The last subview is the
  *    bottommost subview in z-order.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inView:
@@ -270,6 +477,9 @@ HIViewGetLastSubview(HIViewRef inView)                        AVAILABLE_MAC_OS_X
  *  
  *  Discussion:
  *    Returns the next view after the one given, in z-order.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -295,6 +505,9 @@ HIViewGetNextView(HIViewRef inView)                           AVAILABLE_MAC_OS_X
  *  Discussion:
  *    Returns the previous view before the one given, in z-order.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inView:
@@ -318,6 +531,9 @@ HIViewGetPreviousView(HIViewRef inView)                       AVAILABLE_MAC_OS_X
  *  
  *  Discussion:
  *    Allows you to change the front-to-back ordering of sibling views.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -359,6 +575,9 @@ HIViewSetZOrder(
  *    Hides or shows a view. Marks the area the view will occupy or
  *    used to occupy as needing to be redrawn later.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inView:
@@ -387,6 +606,9 @@ HIViewSetVisible(
  *  
  *  Discussion:
  *    Returns whether a view is visible.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -421,6 +643,9 @@ HIViewIsVisible(HIViewRef inView)                             AVAILABLE_MAC_OS_X
  *    these local coordinates. Moving a view is done via the frame
  *    instead.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inView:
@@ -449,6 +674,9 @@ HIViewGetBounds(
  *  Discussion:
  *    Returns the frame of a view. The frame is the bounds of a view
  *    relative to its parent's local coordinate system.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -480,6 +708,9 @@ HIViewGetFrame(
  *    its parent. It also marks the view (and anything that was exposed
  *    behind it) to be redrawn.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inView:
@@ -509,6 +740,9 @@ HIViewSetFrame(
  *  Discussion:
  *    Moves a view by a certain distance, relative to its current
  *    location. This affects a view's frame, but not its bounds.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -544,6 +778,9 @@ HIViewMoveBy(
  *  Discussion:
  *    Places a view at an absolute location within its parent. This
  *    affects the view's frame, but not its bounds.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -582,6 +819,9 @@ HIViewPlaceInSuperviewAt(
  *    Toolbox to recalc things and invalidate as appropriate. You might
  *    use this when gaining/losing a focus ring, for example.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inView:
@@ -599,6 +839,47 @@ extern OSStatus
 HIViewReshapeStructure(HIViewRef inView)                      AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
+/*
+ *  HIViewRegionChanged()
+ *  
+ *  Discussion:
+ *    Allows a view to tell the view system that a region of itself has
+ *    changed. The view system might choose to react in some way. For
+ *    example, if a view's clickable region has changed, this can be
+ *    called to tell the Toolbox to resync the region it uses for async
+ *    window dragging, if enabled. Likewise, if a view's opaque region
+ *    changes, we can adjust the window's opaque shape as well. When
+ *    views are moved, resizes, this stuff is taken care of for you. So
+ *    this only need be called when there's a change in your view that
+ *    occurs outside of those times.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inView:
+ *      The view to deal with.
+ *    
+ *    inRegionCode:
+ *      The region that was changed. This can only be the structure
+ *      opaque, and clickable regions at present.
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIViewRegionChanged(
+  HIViewRef         inView,
+  ControlPartCode   inRegionCode)                             AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+
 /*==============================================================================*/
 /*  HIT TESTING/EVENT HANDLING                                                  */
 /*==============================================================================*/
@@ -613,7 +894,12 @@ HIViewReshapeStructure(HIViewRef inView)                      AVAILABLE_MAC_OS_X
  *    to return the appropriate subview. This allows parent views to
  *    catch clicks on their subviews. This is the recommended function
  *    to use before processing mouse events. Using one of the more
- *    primitive functions may result in an undefined behaviour.
+ *    primitive functions may result in an undefined behavior. In
+ *    general we recommend the use of the Standard Window Handler
+ *    instead of calling this function yourself.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -647,7 +933,11 @@ HIViewGetViewForMouseEvent(
  *  Discussion:
  *    After a successful call to HIViewGetViewForMouseEvent for a mouse
  *    down event, you should call this function to have the view handle
- *    the click.
+ *    the click. In general we recommend the use of the Standard Window
+ *    Handler instead of calling this function yourself.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -677,6 +967,9 @@ HIViewClick(
  *  Discussion:
  *    This function is used to simulate a mouse click on a given view.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inView:
@@ -690,7 +983,7 @@ HIViewClick(
  *    
  *    outPartClicked:
  *      The part that was hit, can be kControlNoPart if no action
- *      occurred.
+ *      occurred. May be NULL if you don't need the part code returned.
  *  
  *  Result:
  *    An operating system result code.
@@ -705,7 +998,7 @@ HIViewSimulateClick(
   HIViewRef          inView,
   HIViewPartCode     inPartToClick,
   UInt32             inModifiers,
-  ControlPartCode *  outPartClicked)                          AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  ControlPartCode *  outPartClicked)       /* can be NULL */  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /*
@@ -714,6 +1007,9 @@ HIViewSimulateClick(
  *  Discussion:
  *    Given a view, and a view-relative point, this function returns
  *    the part code hit as determined by the view.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -749,10 +1045,13 @@ HIViewGetPartHit(
  *    This is more primitive than using HIViewGetViewForMouseEvent, and
  *    should be used only in non-event-handling cases.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inView:
- *      The view you wish to position.
+ *      The view you wish to start from.
  *    
  *    inPoint:
  *      The mouse coordinate to use. This is passed in the local
@@ -791,6 +1090,9 @@ HIViewGetSubviewHit(
  *    Returns true if the view passed in or any subview of it requires
  *    redrawing (i.e. part of it has been invalidated).
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inView:
@@ -813,7 +1115,11 @@ HIViewGetNeedsDisplay(HIViewRef inView)                       AVAILABLE_MAC_OS_X
  *  
  *  Discussion:
  *    Marks a view as needing to be completely redrawn, or completely
- *    valid.
+ *    valid. If the view is not visible, or is obscured completely by
+ *    other views, no action is taken.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -843,7 +1149,13 @@ HIViewSetNeedsDisplay(
  *  HIViewSetNeedsDisplayInRegion()
  *  
  *  Discussion:
- *    Marks a portion of a view as needing to be redrawn, or valid.
+ *    Marks a portion of a view as needing to be redrawn, or valid. If
+ *    the view is not visible, or is obscured completely by other
+ *    views, no action is taken. The region passed is effectively
+ *    intersected with the view's visible region.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -873,11 +1185,46 @@ HIViewSetNeedsDisplayInRegion(
 
 
 /*
+ *  HIViewRender()
+ *  
+ *  Discussion:
+ *    Renders the invalid portions of a view (as marked with
+ *    HIViewSetNeedsDisplay[InRegion] immediately. Normally, these
+ *    areas are redraw at event loop time, but there might be
+ *    situations where you need an immediate draw. Use this sparingly,
+ *    as it does cause a fully composited draw for the area of the
+ *    control. Calling this for several views at a particular level of
+ *    a hierarchy can be costsly.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inView:
+ *      The view to draw.
+ *  
+ *  Result:
+ *    An operating system result code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIViewRender(HIViewRef inView)                                AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
  *  HIViewFlashDirtyArea()
  *  
  *  Discussion:
  *    Debugging aid. Flashes the region which would be redrawn at the
  *    next draw time for an entire window.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -904,16 +1251,21 @@ HIViewFlashDirtyArea(WindowRef inWindow)                      AVAILABLE_MAC_OS_X
  *    respond to this protocol to get meaningful results. These sizes
  *    can be used to help autoposition subviews, for example.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inView:
  *      The view to inspect.
  *    
  *    outMinSize:
- *      The minimum size the view can be.
+ *      The minimum size the view can be. May be NULL if you don't need
+ *      this information.
  *    
  *    outMaxSize:
- *      The maximum size the view can be.
+ *      The maximum size the view can be. May be NULL if you don't need
+ *      this information.
  *  
  *  Result:
  *    An operating system result code.
@@ -926,8 +1278,8 @@ HIViewFlashDirtyArea(WindowRef inWindow)                      AVAILABLE_MAC_OS_X
 extern OSStatus 
 HIViewGetSizeConstraints(
   HIViewRef   inView,
-  HISize *    outMinSize,
-  HISize *    outMaxSize)                                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  HISize *    outMinSize,       /* can be NULL */
+  HISize *    outMaxSize)       /* can be NULL */             AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 
@@ -941,6 +1293,9 @@ HIViewGetSizeConstraints(
  *  Discussion:
  *    Converts a point from one view to another. Both views must have a
  *    common ancestor, i.e. they must both be in the same window.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -979,6 +1334,9 @@ HIViewConvertPoint(
  *    Converts a rectangle from one view to another. Both views must
  *    have a common ancestor, i.e. they must both be in the same window.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    ioRect:
@@ -1015,6 +1373,9 @@ HIViewConvertRect(
  *  Discussion:
  *    Converts a region from one view to another. Both views must have
  *    a common ancestor, i.e. they must both be in the same window.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -1056,6 +1417,9 @@ HIViewConvertRegion(
  *    draw! HIViewSetNeedsDisplay is also rendered useless when drawing
  *    is off.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inView:
@@ -1085,6 +1449,9 @@ HIViewSetDrawingEnabled(
  *  Discussion:
  *    Determines if drawing is currently enabled for a control.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inView:
@@ -1113,6 +1480,9 @@ HIViewIsDrawingEnabled(HIViewRef inView)                      AVAILABLE_MAC_OS_X
  *    and then invalidate those portions which need to be redrawn. Be
  *    warned that this is a raw bit scroll. Anything that might overlap
  *    the target view will get thrashed as well.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -1153,8 +1523,12 @@ HIViewScrollRect(
  *  
  *  Discussion:
  *    This API sets the origin of the view. This effectively also moves
- *    all subcontrols of a view as well. This call will invalidate the
- *    view.
+ *    all subcontrols of a view as well. This call will NOT invalidate
+ *    the view. This is because you might want to move the contents
+ *    with HIViewScrollRect instead of redrawing the complete content.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -1197,6 +1571,9 @@ HIViewSetBoundsOrigin(
  *    left to right, top to bottom in a window, taking groups of
  *    controls into account.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inRootForFocus:
@@ -1233,6 +1610,9 @@ HIViewAdvanceFocus(
  *  Discussion:
  *    Returns the currently focused part of the given view.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inView:
@@ -1263,6 +1643,9 @@ HIViewGetFocusPart(
  *    children currently are the keyboard focus. If so, true is
  *    returned as the function result.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inSubtreeStart:
@@ -1284,17 +1667,22 @@ HIViewSubtreeContainsFocus(HIViewRef inSubtreeStart)          AVAILABLE_MAC_OS_X
  *  HIViewSetNextFocus()
  *  
  *  Discussion:
- *    This function hard-wires the next view to shift focus to whenever
- *    the keyboard focus is advanced.
+ *    This function hard-wires the next sibling view to shift focus to
+ *    whenever the keyboard focus is advanced.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
  *    inView:
- *      The view to set the next focus view for.
+ *      The view to set the next focus view for. This parameter and the
+ *      inNextFocus parameter must both have the same parent view.
  *    
  *    inNextFocus:
- *      The view to set focus to next. Pass NULL to tell the view
- *      system to use the default rules.
+ *      The view to set focus to next. This parameter and the inView
+ *      parameter must both have the same parent view. Pass NULL to
+ *      tell the view system to use the default rules.
  *  
  *  Result:
  *    An operating system result code.
@@ -1317,6 +1705,9 @@ HIViewSetNextFocus(
  *    This function hard-wires the first subview to shift focus to
  *    whenever the keyboard focus is advanced and the container view is
  *    entered.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -1343,14 +1734,548 @@ HIViewSetFirstSubViewFocus(
 
 
 /*==============================================================================*/
+/*  LAYOUT                                                                      */
+/*                                                                              */
+/*  Mac OS X 10.3 provides a layout engine for HIViews that allows applications */
+/*  to specify the layout relationships between multiple views. The layout      */
+/*  engine will automatically reposition and resize views that have layout      */
+/*  information when necessary.                                                 */
+/*==============================================================================*/
+
+/*
+ *  Summary:
+ *    Since horizontal and vertical bindings are very similar in
+ *    application, except along different axes, the binding kinds have
+ *    been abstracted to minimum and maximum. Synonyms have been
+ *    provided for convenience. You are encouraged to use them.
+ *  
+ *  Discussion:
+ *    HIBindingKind constants.
+ */
+enum {
+
+  /*
+   * No binding is to occur.
+   */
+  kHILayoutBindNone             = 0,
+
+  /*
+   * Bind to the minimum of the axis.
+   */
+  kHILayoutBindMin              = 1,
+
+  /*
+   * Bind to the maximum of the axis.
+   */
+  kHILayoutBindMax              = 2,
+  kHILayoutBindLeft             = kHILayoutBindMin,
+  kHILayoutBindRight            = kHILayoutBindMax,
+
+  /*
+   * Synonyms for convenience and clarity.
+   */
+  kHILayoutBindTop              = kHILayoutBindMin,
+  kHILayoutBindBottom           = kHILayoutBindMax
+};
+
+typedef UInt16                          HIBindingKind;
+
+/*
+ *  HISideBinding
+ *  
+ *  Summary:
+ *    A binding for a side of an HIView.
+ *  
+ *  Discussion:
+ *    A side binding is entirely related to the change of the parent's
+ *    position or size (but only as the size affects the maximum edge
+ *    position). A side binding doesn't mean "move to where my
+ *    relative's side is" but rather "move as my relative's side has
+ *    moved".
+ */
+struct HISideBinding {
+
+  /*
+   * An HIViewRef to the view to which this side is bound. Can be NULL,
+   * indicating that the the side is bound to its parent view.
+   */
+  HIViewRef           toView;                 /* NULL means parent*/
+
+  /*
+   * An HIBindingKind indicating the bind kind.
+   */
+  HIBindingKind       kind;
+
+  /*
+   * Not currently used. Must be set to 0.
+   */
+  float               offset;
+};
+typedef struct HISideBinding            HISideBinding;
+/*
+    const HISideBinding kHISideNoBinding = { NULL, kHILayoutBindNone };
+*/
+
+/*
+ *  HIBinding
+ *  
+ *  Summary:
+ *    A set of Top, Left, Bottom, and Right bindings for an HIView.
+ */
+struct HIBinding {
+
+  /*
+   * The top side bindings.
+   */
+  HISideBinding       top;
+
+  /*
+   * The left side bindings.
+   */
+  HISideBinding       left;
+
+  /*
+   * The bottom side bindings.
+   */
+  HISideBinding       bottom;
+
+  /*
+   * The right side bindings.
+   */
+  HISideBinding       right;
+};
+typedef struct HIBinding                HIBinding;
+/*
+    const HIBinding kHINoBinding = { kHISideNoBinding, kHISideNoBinding, kHISideNoBinding, kHISideNoBinding };
+*/
+
+/*
+ *  Discussion:
+ *    HIScaleKind constants.
+ */
+enum {
+
+  /*
+   * The scale is determined from the axis size.
+   */
+  kHILayoutScaleAbsolute        = 0
+};
+
+
+typedef UInt16                          HIScaleKind;
+
+/*
+ *  HIAxisScale
+ *  
+ *  Summary:
+ *    A scale description for an axis of an HIView.
+ */
+struct HIAxisScale {
+
+  /*
+   * An HIViewRef to the view to which this axis is scaled. Can be
+   * NULL, indicating that the the axis is scaled relative to its
+   * parent view.
+   */
+  HIViewRef           toView;                 /* NULL means parent*/
+
+  /*
+   * An HIScaleKind describing the type of scaling to be applied. 
+   * Currently, this field can't be anything other than
+   * kScalingAbsolute.
+   */
+  HIScaleKind         kind;
+
+  /*
+   * A float indicating how much to scale the HIView. 0 indicates no
+   * scaling. A value of 1 indicates that the view is to always have
+   * the same axial size.
+   */
+  float               ratio;
+};
+typedef struct HIAxisScale              HIAxisScale;
+
+/*
+ *  HIScaling
+ *  
+ *  Summary:
+ *    A set of scaling descriptions for the axes of an HIView.
+ */
+struct HIScaling {
+
+  /*
+   * An HIAxisScale describing the horizontal scaling for an HIView.
+   */
+  HIAxisScale         x;
+  HIAxisScale         y;
+};
+typedef struct HIScaling                HIScaling;
+
+/*
+ *  Summary:
+ *    Since horizontal and vertical positions are very similar in
+ *    application, except along different axes, the position kinds have
+ *    been abstracted to minimum and maximum. Synonyms have been
+ *    provided for convenience. You are encouraged to use them.
+ *  
+ *  Discussion:
+ *    HIPositionKind constants.
+ */
+enum {
+
+  /*
+   * No positioning is to occur.
+   */
+  kHILayoutPositionNone         = 0,
+
+  /*
+   * Centered positioning will occur. The view will be centered
+   * relative to the specified view.
+   */
+  kHILayoutPositionCenter       = 1,
+
+  /*
+   * Minimum positioning will occur. The view will be left or top
+   * aligned relative to the specified view.
+   */
+  kHILayoutPositionMin          = 2,
+
+  /*
+   * Maximum positioning will occur. The view will be right or bottom
+   * aligned relative to the specified view.
+   */
+  kHILayoutPositionMax          = 3,
+
+  /*
+   * Synonyms for convenience and clarity.
+   */
+  kHILayoutPositionLeft         = kHILayoutPositionMin,
+  kHILayoutPositionRight        = kHILayoutPositionMax,
+  kHILayoutPositionTop          = kHILayoutPositionMin,
+  kHILayoutPositionBottom       = kHILayoutPositionMax
+};
+
+
+typedef UInt16                          HIPositionKind;
+
+/*
+ *  HIAxisPosition
+ *  
+ *  Summary:
+ *    An axial position description for an HIView.
+ */
+struct HIAxisPosition {
+
+  /*
+   * An HIViewRef to the view relative to which a view will be
+   * positioned. Can be NULL, indicating that the the view is
+   * positioned relative to its parent view.
+   */
+  HIViewRef           toView;                 /* NULL means parent*/
+
+  /*
+   * An HIPositionKind indicating the kind of positioning to apply.
+   */
+  HIPositionKind      kind;
+
+  /*
+   * After the position kind has been applied, the origin component
+   * that corresponds to the positioning axis is offet by this value.
+   * (ex: Left aligned + 10 ).
+   */
+  float               offset;
+};
+typedef struct HIAxisPosition           HIAxisPosition;
+
+/*
+ *  HIPositioning
+ *  
+ *  Summary:
+ *    A positioning description for an HIView.
+ */
+struct HIPositioning {
+
+  /*
+   * An HIAxisPosition describing the horizontal positioning for an
+   * HIView.
+   */
+  HIAxisPosition      x;
+  HIAxisPosition      y;
+};
+typedef struct HIPositioning            HIPositioning;
+
+/*
+ *  HILayoutInfo
+ *  
+ *  Summary:
+ *    A layout description for an HIView.
+ *  
+ *  Discussion:
+ *    The different layout transformations are applied sequentially to
+ *    the HIView. First, the bindings are applied. Note that the
+ *    bindings are applied recursively to a container's HIViews. This
+ *    requires care on your part, especially when applying
+ *    inter-relational bindings. Then the scaling (which could
+ *    potentially override some of the previously applied bindings).
+ *    Then the positioning (which could potentially override some of
+ *    the previously applied bindings).
+ */
+struct HILayoutInfo {
+
+  /*
+   * The version of the structure. The current version is
+   * kHILayoutInfoVersionZero.
+   */
+  UInt32              version;
+
+  /*
+   * An HIBinding structure describing the kinds of bindings to apply
+   * to the sides of an HIView.
+   */
+  HIBinding           binding;
+
+  /*
+   * An HIScaling structure describing the axial scaling to apply to an
+   * HIView.
+   */
+  HIScaling           scale;
+
+  /*
+   * An HIPositioning structure positioning to apply to an HIView.
+   */
+  HIPositioning       position;
+};
+typedef struct HILayoutInfo             HILayoutInfo;
+enum {
+  kHILayoutInfoVersionZero      = 0
+};
+
+/*
+
+const HILayoutInfo kHILayoutInfoNone = {
+    kHILayoutInfoVersionZero,
+    kHINoBinding,
+    { { NULL, 0.0 }, { NULL, 0.0 } },
+    { { NULL, kHILayoutPositionNone }, { NULL, kHILayoutPositionNone } } };
+
+*/
+/*
+ *  HIViewGetLayoutInfo()
+ *  
+ *  Summary:
+ *    Get the layout info of an HIView.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inView:
+ *      The HIView whose layout info is to be retreived.
+ *    
+ *    outLayoutInfo:
+ *      A pointer to an HILayoutInfo record into which to copy the
+ *      layout info of the HIView. The version field of this record
+ *      must be valid or the call will fail.
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIViewGetLayoutInfo(
+  HIViewRef       inView,
+  HILayoutInfo *  outLayoutInfo)                              AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  HIViewSetLayoutInfo()
+ *  
+ *  Summary:
+ *    Set the layout info of an HIView.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inView:
+ *      The HIView whose layout info is to be retreived.
+ *    
+ *    inLayoutInfo:
+ *      A pointer to an HILayoutInfo record from which to copy the
+ *      layout info for the HIView.
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIViewSetLayoutInfo(
+  HIViewRef             inView,
+  const HILayoutInfo *  inLayoutInfo)                         AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  HIViewSuspendLayout()
+ *  
+ *  Summary:
+ *    Suspends all layout handling for this layout and its children.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inView:
+ *      The HIView whose layout handling is to be suspended.
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIViewSuspendLayout(HIViewRef inView)                         AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  HIViewResumeLayout()
+ *  
+ *  Summary:
+ *    Resumes all layout handling for this layout and its children.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inView:
+ *      The HIView whose layout handling is to be resumed.
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIViewResumeLayout(HIViewRef inView)                          AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  HIViewIsLayoutActive()
+ *  
+ *  Summary:
+ *    Tests the view to determine if layout is active or suspended.
+ *    Note that this test does not determine whether or not the view
+ *    has a valid layout, only whether or not the layout engine is
+ *    active for the view.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inView:
+ *      The HIView whose layout handling is to be tested.
+ *  
+ *  Result:
+ *    True if the view would respond to any linked relative's changes,
+ *    otherwise false.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern Boolean 
+HIViewIsLayoutActive(HIViewRef inView)                        AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  HIViewApplyLayout()
+ *  
+ *  Summary:
+ *    Applies the current layout into to the specified view. Side
+ *    bindings have no effect, but positioning and scaling will occur,
+ *    in that order.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inView:
+ *      The HIView whose layout info is to be applied.
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIViewApplyLayout(HIViewRef inView)                           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+
+/*==============================================================================*/
 /*  MISCELLANEOUS                                                               */
 /*==============================================================================*/
+/*
+ *  HIViewGetWindow()
+ *  
+ *  Discussion:
+ *    Returns a reference to the window a given view is bound to. If
+ *    the view reference passed is invalid, or the view is not embedded
+ *    into any window, NULL is returned.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inView:
+ *      The view to query.
+ *  
+ *  Result:
+ *    A window reference.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern WindowRef 
+HIViewGetWindow(HIViewRef inView)                             AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+
 /*
  *  HIViewFindByID()
  *  
  *  Discussion:
  *    Allows you to find a particular view by its ID. Currently, this
  *    call uses the ControlID type as its IDs.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -1385,6 +2310,9 @@ HIViewFindByID(
  *  Discussion:
  *    Allows you to get the attributes of a view.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inView:
@@ -1414,6 +2342,9 @@ HIViewGetAttributes(
  *  Discussion:
  *    Allows you to change the attributes of a view. You can
  *    simultaneously set and clear attributes.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -1448,6 +2379,9 @@ HIViewChangeAttributes(
  *  Discussion:
  *    Creates an CGImageRef for the view passed in. The view and any
  *    children it has are rendered in the resultant image.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -1497,6 +2431,9 @@ HIViewCreateOffscreenImage(
  *    drawing, you'd see what I mean! This call attempts to insulate
  *    you from that fact.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inContext:
@@ -1523,9 +2460,88 @@ HIViewDrawCGImage(
   CGImageRef      inImage)                                    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
+/*
+ *  HIViewGetFeatures()
+ *  
+ *  Discussion:
+ *    Returns the features for the current view. This only returns
+ *    feature bits for the HIView space. Older Control Manager features
+ *    such as kControlSupportsDataAccess are not returned.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inView:
+ *      The view to query
+ *    
+ *    outFeatures:
+ *      On output, the features for the view.
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIViewGetFeatures(
+  HIViewRef         inView,
+  HIViewFeatures *  outFeatures)                              AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  HIViewChangeFeatures()
+ *  
+ *  Discussion:
+ *    Allows you to change a view's features on the fly. Typically,
+ *    this is up to the view itself to control. For example, it might
+ *    decide that under some situations it is opaque and other others
+ *    it is transparent. In general entities outside of the view itself
+ *    should not call this function. The only exception might be UI
+ *    building tools, where it would want to make sure a view always
+ *    responds to clicks, for example, so it could override mouse
+ *    tracking to drag items around.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inView:
+ *      The view to change
+ *    
+ *    inFeaturesToSet:
+ *      The features to enable
+ *    
+ *    inFeaturesToClear:
+ *      The features to disable
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIViewChangeFeatures(
+  HIViewRef        inView,
+  HIViewFeatures   inFeaturesToSet,
+  HIViewFeatures   inFeaturesToClear)                         AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
 
 /*==============================================================================*/
-/*  HIGrowBoxView                                                               */
+/* HIGrowBoxView                                                                */
+/*                                                                              */
+/* The grow box view is a new view starting in Mac OS 10.2. It can be used in   */
+/* both the new compositing mode, as well as the traditional control manager    */
+/* mode. Like all new HIFoo views, this view is created invisibly. You must     */
+/* show the view after creation if you want to, like, see it and stuff.         */
 /*==============================================================================*/
 
 
@@ -1545,6 +2561,9 @@ HIViewDrawCGImage(
  *    Sets a grow box view as transparent, meaning it will draw the
  *    grow box lines over any content below it. When not transparent,
  *    it's an opaque white square with the grow lines.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -1575,6 +2594,9 @@ HIGrowBoxViewSetTransparent(
  *  Discussion:
  *    Returns true if a grow box view is set to be transparent.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inGrowBoxView:
@@ -1595,27 +2617,146 @@ HIGrowBoxViewIsTransparent(HIViewRef inGrowBoxView)           AVAILABLE_MAC_OS_X
 
 /*==============================================================================*/
 /*  HIScrollView                                                                */
+/*                                                                              */
+/* The scroll view is a new view starting in Mac OS 10.2. It can be used in     */
+/* the new compositing mode ONLY due to the nature of how it works. Like all    */
+/* new HIFoo views, this view is created invisibly. You must show the view      */
+/* after creation if you want to, like, see it and stuff.                       */
 /*==============================================================================*/
+/* The HIObject class ID for the HIScrollView class. */
+#define kHIScrollViewClassID            CFSTR("com.apple.HIScrollView")
+/*
+    kEventClassScrollable quick reference:
+    
+    kEventScrollableGetInfo         = 1,
+    kEventScrollableInfoChanged     = 2,
+%%  kEventScrollableEmbedded        = 3,
+%%  kEventScrollableRemoved         = 4,
+    kEventScrollableScrollTo        = 10
+*/
 enum {
   kEventClassScrollable         = 'scrl'
 };
 
 enum {
-  kEventScrollableGetInfo       = 1,
-  kEventScrollableInfoChanged   = 2,
-  kEventScrollableScrollTo      = 10
+  kEventParamImageSize          = 'imsz', /* typeHISize*/
+  kEventParamViewSize           = 'vwsz', /* typeHISize*/
+  kEventParamLineSize           = 'lnsz', /* typeHISize*/
+  kEventParamOrigin             = 'orgn' /* typeHIPoint*/
 };
 
+/*
+ *  kEventClassScrollable / kEventScrollableGetInfo
+ *  
+ *  Summary:
+ *    Requests information from an HIScrollView’s scrollable view about
+ *    its size and origin.
+ *  
+ *  Discussion:
+ *    This event is sent by an HIScrollView to its scrollable view to
+ *    determine the current size and origin of the scrollable view. A
+ *    scrollable view must implement this event in order to scroll
+ *    properly inside an HIScrollView.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    <-- kEventParamImageSize (out, typeHISize)
+ *          On exit, contains the size of the entire scrollable view.
+ *    
+ *    <-- kEventParamViewSize (out, typeHISize)
+ *          On exit, contains the amount of the scrollable view that is
+ *          visible.
+ *    
+ *    <-- kEventParamLineSize (out, typeHISize)
+ *          On exit, contains the amount that should be scrolled in
+ *          response to a single click on a scrollbar arrow.
+ *    
+ *    <-- kEventParamOrigin (out, typeHIPoint)
+ *          On exit, contains the scrollable view’s current origin (the
+ *          view-relative coordinate that is drawn at the top left
+ *          corner of its frame). These coordinates should always be
+ *          greater than or equal to zero. They should be less than or
+ *          equal to the view’s image size minus its view size.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available
+ */
 enum {
-  kEventParamImageSize          = 'imsz', /* type HISize*/
-  kEventParamViewSize           = 'vwsz', /* type HISize*/
-  kEventParamLineSize           = 'lnsz', /* type HISize*/
-  kEventParamOrigin             = 'orgn' /* type HIPoint*/
+  kEventScrollableGetInfo       = 1
+};
+
+/*
+ *  kEventClassScrollable / kEventScrollableInfoChanged
+ *  
+ *  Summary:
+ *    Notification that the size or origin of an HIScrollView’s
+ *    scrollable view has changed.
+ *  
+ *  Discussion:
+ *    This event is not sent by HIScrollView itself; rather, it may be
+ *    sent to an instance of HIScrollView to notify the scroll view
+ *    that the size or origin of its scrollable view have changed. The
+ *    HIScrollView responds to this event by sending a
+ *    kEventScrollableGetInfo to its scrollable view. It then updates
+ *    the scroll bars appropriately to reflect the new reality of the
+ *    scrollable view. It does NOT move the origin of the scrollable
+ *    view at all. It is just a notification to allow the scroll view
+ *    to sync up with its scrollable view.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available
+ */
+enum {
+  kEventScrollableInfoChanged   = 2
+};
+
+/*
+ *  kEventClassScrollable / kEventScrollableScrollTo
+ *  
+ *  Summary:
+ *    Requests that an HIScrollView’s scrollable view should scroll to
+ *    a particular origin.
+ *  
+ *  Discussion:
+ *    This event is sent by an HIScrollView to its scrollable view to
+ *    request that the scrollable view update its current origin and
+ *    redraw. Typically, a scrollable view will record its current
+ *    origin in its own instance data; it should update the origin in
+ *    response to this event. A scrollable view should also use either
+ *    HIViewScrollRect to scroll its content, or HIViewSetNeedsDisplay
+ *    to cause itself to redraw using the new origin point. A
+ *    scrollable view must implement this event in order to scroll
+ *    properly inside an HIScrollView.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    --> kEventParamOrigin (in, typeHIPoint)
+ *          The new origin for the scrollable view. The origin
+ *          coordinates will vary from (0,0) to scrollable view’s image
+ *          size minus its view size.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available
+ */
+enum {
+  kEventScrollableScrollTo      = 10
 };
 
 
 /*
- *  Discussion:
+ *  Summary:
  *    HIScrollView options
  */
 enum {
@@ -1632,11 +2773,64 @@ enum {
 
   /*
    * This indicates that space for a grow box should be taken into
-   * account when layout out scroll bars. If both the horizontal and
+   * account when laying out scroll bars. If both the horizontal and
    * vertical scroll bars are requested, this attribute is assumed.
    */
   kHIScrollViewOptionsAllowGrow = (1 << 2),
   kHIScrollViewValidOptions     = (kHIScrollViewOptionsVertScroll | kHIScrollViewOptionsHorizScroll | kHIScrollViewOptionsAllowGrow)
+};
+
+
+
+/*
+ *  HIScrollViewAction
+ *  
+ *  Summary:
+ *    HIScrollView navigation actions. See HIScrollViewNavigate for
+ *    more information.
+ */
+typedef UInt32 HIScrollViewAction;
+enum {
+
+  /*
+   * The scroll view should move to the top of the content.
+   */
+  kHIScrollViewScrollToTop      = (1 << 0),
+
+  /*
+   * The scroll view should move to the bottom of the content.
+   */
+  kHIScrollViewScrollToBottom   = (1 << 1),
+
+  /*
+   * The scroll view should move to the left of the content.
+   */
+  kHIScrollViewScrollToLeft     = (1 << 2),
+
+  /*
+   * The scroll view should move to the right of the content.
+   */
+  kHIScrollViewScrollToRight    = (1 << 3),
+
+  /*
+   * The scroll view should page up.
+   */
+  kHIScrollViewPageUp           = (1 << 4),
+
+  /*
+   * The scroll view should page down.
+   */
+  kHIScrollViewPageDown         = (1 << 5),
+
+  /*
+   * The scroll view should page left.
+   */
+  kHIScrollViewPageLeft         = (1 << 6),
+
+  /*
+   * The scroll view should page right.
+   */
+  kHIScrollViewPageRight        = (1 << 7)
 };
 
 /*
@@ -1648,6 +2842,9 @@ enum {
  *    be scrolled. The view to be scrolled is merely added via
  *    HIViewAddSubview. The scroll view will automatically connect it
  *    up appropriately. **** THIS MAY CHANGE
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -1683,6 +2880,9 @@ HIScrollViewCreate(
  *    bounds. This is similar to the behavior you see in the Preview
  *    application.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inView:
@@ -1711,6 +2911,9 @@ HIScrollViewSetScrollBarAutoHide(
  *  Discussion:
  *    Gets a scroll view's current scroll bar auto-hide setting.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inView:
@@ -1728,10 +2931,92 @@ extern Boolean
 HIScrollViewGetScrollBarAutoHide(HIViewRef inView)            AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
+/*
+ *  HIScrollViewNavigate()
+ *  
+ *  Discussion:
+ *    Allows you to programmatically change what portion of a scroll
+ *    view's target you are seeing. For example, you can move to the
+ *    beginning or end of a document. You can also page up, down, left
+ *    and right. In general, you should not call this from embedded
+ *    content (i.e. the scrollable view inside the scroll view). For
+ *    those cases, you should instead position yourself appropriately
+ *    and tell the scroll view you changed via the
+ *    kEventScrollableInfoChanged carbon event. This routine merely is
+ *    a programmatic way to scroll as one would by hand using the
+ *    scroll bars.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inView:
+ *      The scroll view to affect.
+ *    
+ *    inAction:
+ *      The action to take.
+ *  
+ *  Result:
+ *    A operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIScrollViewNavigate(
+  HIViewRef            inView,
+  HIScrollViewAction   inAction)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+/*
+ *  HIScrollViewCanNavigate()
+ *  
+ *  Discussion:
+ *    Allows you to tell whether it is currently possible to navigate
+ *    somehow in a scroll view. For example, if a scroll view is
+ *    already at the top of the scrollable content, it is not possible
+ *    to navigate upward, so home and page up actions would not be
+ *    possible. You might use this function to help you update the
+ *    state of menu items or the like.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inView:
+ *      The view to examine.
+ *    
+ *    inAction:
+ *      The action to test.
+ *  
+ *  Result:
+ *    A boolean result.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern Boolean 
+HIScrollViewCanNavigate(
+  HIViewRef            inView,
+  HIScrollViewAction   inAction)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
 /*==============================================================================*/
 /*  HIImageView                                                                 */
+/*                                                                              */
+/* The image view is a new view starting in Mac OS 10.2. It can be used in      */
+/* both the new compositing mode, as well as the traditional control manager    */
+/* mode. Like all new HIFoo views, this view is created invisible.              */
+/* You must show the view after creation if you want to, like, see it.          */
 /*==============================================================================*/
-
+/* The HIObject class ID for the HIImageView class. */
+#define kHIImageViewClassID             CFSTR("com.apple.HIImageView")
 /*
  *  HIImageViewCreate()
  *  
@@ -1739,6 +3024,9 @@ HIScrollViewGetScrollBarAutoHide(HIViewRef inView)            AVAILABLE_MAC_OS_X
  *    Creates an image view. The view responds to the scrollable
  *    interface and can be used in a scrolling view. You can pass an
  *    image initially, or set one later.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -1775,9 +3063,16 @@ enum {
  *    opaque. If this is set to true, the image view can make certain
  *    optimizations for compositing and scrolling. The alpha-related
  *    image view APIs are rendered useless if opacity it set to true.
- *    An image view, when created, is opaque by default. You must pass
- *    false to this function in order to change the alpha, etc. or if
- *    your image does not fill the full bounds of the view.
+ *    An image view, when created, is transparent by default.
+ *    
+ *    NOTE: In Mac OS X 10.2, this control was documented as being
+ *    opaque by default, but the implementation did not enforce that.
+ *    So in Mac OS X 10.3 and beyond, the control is transparent by
+ *    default, and you can make it opaque by calling
+ *    HIImageViewSetOpaque.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -1808,6 +3103,9 @@ HIImageViewSetOpaque(
  *  Discussion:
  *    Allows you to determine whether an image view is opaque or not.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inView:
@@ -1832,6 +3130,9 @@ HIImageViewIsOpaque(HIViewRef inView)                         AVAILABLE_MAC_OS_X
  *    Allows you to set the alpha for an image, making it more or less
  *    transparent. An alpha of 1.0 is fully opaque, and 0.0 is fully
  *    transparent. The default alpha for an image is 1.0.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -1862,6 +3163,9 @@ HIImageViewSetAlpha(
  *    Allows you to get the alpha for an image. An alpha of 1.0 is
  *    fully opaque, and 0.0 is fully transparent.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inView:
@@ -1887,6 +3191,9 @@ HIImageViewGetAlpha(HIViewRef inView)                         AVAILABLE_MAC_OS_X
  *    Normally an image view will clip to the view's bounds. Using this
  *    API, you can instead tell the image view to size the image to fit
  *    into the view bounds specified.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -1920,6 +3227,9 @@ HIImageViewSetScaleToFit(
  *    displays to the view bounds or merely clip to the view bounds. A
  *    true result means it scales.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inView:
@@ -1944,6 +3254,9 @@ HIImageViewGetScaleToFit(HIViewRef inView)                    AVAILABLE_MAC_OS_X
  *    Sets the image to display in an image view. The image passed in
  *    is retained by the view, so you may release the image after
  *    calling this API if you no longer need to reference it.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -1976,6 +3289,9 @@ HIImageViewSetImage(
  *    retained, so you should take care to release it when you are
  *    finished with it.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inView:
@@ -1995,7 +3311,14 @@ HIImageViewCopyImage(HIViewRef inView)                        AVAILABLE_MAC_OS_X
 
 /*==============================================================================*/
 /* HIComboBox                                                                   */
+/*                                                                              */
+/* The combo box is a new view starting in Mac OS 10.2. It can be used in       */
+/* both the new compositing mode, as well as the traditional control manager    */
+/* mode. Like all new HIFoo views, this view is created invisible. You must     */
+/* show the view after creation if you want to, like, see it and stuff.         */
 /*==============================================================================*/
+/* The HIObject class ID for the HIComboBox class. */
+#define kHIComboBoxClassID              CFSTR("com.apple.HIComboBox")
 
 /*
  *  Summary:
@@ -2050,6 +3373,21 @@ enum {
   kHIComboBoxDisclosurePart     = 28
 };
 
+/*
+    The ComboBox view supports these tags previously defined for the EditUnicodeText control.
+    These tags are available through Get/SetControlData with a ControlPartCode of kHIComboBoxEditTextPart:
+    
+        kControlFontStyleTag
+        kControlEditTextFixedTextTag
+        kControlEditTextTextTag
+        kControlEditTextKeyFilterTag
+        kControlEditTextValidationProcTag
+        kControlEditUnicodeTextPostUpdateProcTag
+        kControlEditTextSelectionTag
+        kControlEditTextKeyScriptBehaviorTag
+        kControlEditTextCharCount
+        kControlEditTextCFStringTag
+*/
 
 /*
  *  Discussion:
@@ -2088,7 +3426,11 @@ enum {
  *  HIComboBoxCreate()
  *  
  *  Summary:
- *    Creates a combo box control.
+ *    Creates a combo box control. The new control is initially
+ *    invisible.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -2134,6 +3476,9 @@ HIComboBoxCreate(
  *  Summary:
  *    Get the number of items in the combo box disclosure list.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inComboBox:
@@ -2156,6 +3501,9 @@ HIComboBoxGetItemCount(HIViewRef inComboBox)                  AVAILABLE_MAC_OS_X
  *  
  *  Summary:
  *    Inserts a CFString in the disclosure list
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -2192,6 +3540,9 @@ HIComboBoxInsertTextItemAtIndex(
  *  Summary:
  *    Appends a text item to the combo box disclosure list.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inComboBox:
@@ -2225,6 +3576,9 @@ HIComboBoxAppendTextItem(
  *  
  *  Summary:
  *    Copy the text from the combo box disclosure list
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -2261,6 +3615,9 @@ HIComboBoxCopyTextItemAtIndex(
  *  Summary:
  *    Remove an item from a combo box disclosure list.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inComboBox:
@@ -2289,6 +3646,9 @@ HIComboBoxRemoveItemAtIndex(
  *  
  *  Summary:
  *    Change the attributes of a combo box
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -2322,6 +3682,9 @@ HIComboBoxChangeAttributes(
  *  Summary:
  *    Get the attributes of a combo box.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    inComboBox:
@@ -2342,6 +3705,1373 @@ extern OSStatus
 HIComboBoxGetAttributes(
   HIViewRef     inComboBox,
   OptionBits *  outAttributes)                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+
+/*==============================================================================*/
+/*  HISearchField                                                               */
+/*                                                                              */
+/*  HISearchField is a new view available in Mac OS X 10.3.                     */
+/*  This view is designed to be used for applications that provide searching    */
+/*  functionality. Visually, it is a standard text field optionally adorned     */
+/*  with a search icon on the left and/or a cancel image on the right.          */
+/*  When the user has accepted the text by pressing the return or enter key     */
+/*  a Carbon Event of kEventClassTextField / kEventTextAccepted will be sent    */
+/*  to the control. This will be the indication that the search should begin.   */
+/*  This control will also respond to all the standard control tags that are    */
+/*  used by the EditUnicodeText control.                                        */
+/*==============================================================================*/
+/* The HIObject class ID for the HISearchField class. */
+#define kHISearchFieldClassID           CFSTR("com.apple.HISearchField")
+/* ControlKind*/
+enum {
+  kControlKindHISearchField     = 'srfd'
+};
+
+/* HISearchField part codes*/
+enum {
+  kControlSearchFieldCancelPart = 30,
+  kControlSearchFieldMenuPart   = 31
+};
+
+
+/*
+ *  Summary:
+ *    HISearchField attributes
+ */
+enum {
+
+  /*
+   * A constant with value zero; the lack of any attributes.
+   */
+  kHISearchFieldNoAttributes    = 0,
+
+  /*
+   * This view contains the cancel icon in the text field.
+   */
+  kHISearchFieldAttributesCancel = (1 << 0)
+};
+
+/* Event Classes*/
+enum {
+  kEventClassSearchField        = 'srfd'
+};
+
+/*
+ *  kEventClassSearchField / kEventSearchFieldCancelClicked
+ *  
+ *  Summary:
+ *    Notification that the cancel icon has been depressed.
+ *  
+ *  Discussion:
+ *    This event is sent by the HISearchField view if the cancel icon
+ *    is enabled (attribute of kHISearchFieldAtttributesCancel), and
+ *    the cancel has been clicked.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    --> kEventParamDirectObject (in, typeControlRef)
+ *          The HISearchField that has sent the notification.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available
+ */
+enum {
+  kEventSearchFieldCancelClicked = 1
+};
+
+/*
+ *  HISearchFieldCreate()
+ *  
+ *  Summary:
+ *    Creates a search field control. The new control is initially
+ *    invisible.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inBounds:
+ *      The initial bounds of the view. If this parameter is NULL, the
+ *      view defaults to have empty bounds ( 0, 0, 0, 0 ).
+ *    
+ *    inAttributes:
+ *      The initial attributes of the search field. Indicates whether
+ *      the field should contain the cancel icon.
+ *    
+ *    inSearchMenu:
+ *      The menu to be associated with this search field. If
+ *      inSearchMenu is non-NULL, it will be retained by the search
+ *      field and the search icon will be enabled in the left side of
+ *      the text field. If this parameter is NULL, the view will not
+ *      display the search icon in the left portion of the text field.
+ *      You are expected to install handlers on this menu to handle the
+ *      visual appearance of the menu (for example, to draw check marks
+ *      or enable items when the menu receives the
+ *      kEventMenuEnableItems Carbon Event), and to keep track of what
+ *      action should be performed by associating HICommands with each
+ *      menu item and installing a handler for the {
+ *      kEventClassCommand, kEventCommandProcess } Carbon Event.
+ *    
+ *    inDescriptiveText:
+ *      The text to be displayed in the text field when the field does
+ *      not have focus and contains no user entered text. This is meant
+ *      to be an indication of what the search criteria is. For
+ *      example, you may wish to identify to the user that the search
+ *      will cover the "Subject" or "Contents" of a selected range of
+ *      items. If inDescriptiveText is non-NULL it will be retained by
+ *      the search field.
+ *    
+ *    outRef:
+ *      On exit, contains the new view.
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HISearchFieldCreate(
+  const HIRect *  inBounds,                /* can be NULL */
+  OptionBits      inAttributes,
+  MenuRef         inSearchMenu,            /* can be NULL */
+  CFStringRef     inDescriptiveText,       /* can be NULL */
+  HIViewRef *     outRef)                                     AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  HISearchFieldSetSearchMenu()
+ *  
+ *  Summary:
+ *    Set the search menu associated with the view.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inSearchField:
+ *      The search field to associate the search menu with.
+ *    
+ *    inSearchMenu:
+ *      The menu to associate with the search field. If there is
+ *      already a menu associated with the search field, that menu will
+ *      be released. If inSearchMenu is non-NULL, it will be retained
+ *      by the search field and the search icon will be enabled in the
+ *      left side of the text field. You are expected to install
+ *      handlers on this menu to handle the visual appearance of the
+ *      menu (for example, to draw check marks or enable items when the
+ *      menu receives the kEventMenuEnableItems Carbon Event), and to
+ *      keep track of what action should be performed by associating
+ *      HICommands with each menu item and installing a handler for the
+ *      { kEventClassCommand, kEventCommandProcess } Carbon Event. If
+ *      inSearchMenu is NULL, the search icon will be removed from the
+ *      left side of the text field and no menu will be associated with
+ *      this field.
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HISearchFieldSetSearchMenu(
+  HIViewRef   inSearchField,
+  MenuRef     inSearchMenu)        /* can be NULL */          AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  HISearchFieldGetSearchMenu()
+ *  
+ *  Summary:
+ *    Get the menu that is associated with the search field
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inSearchField:
+ *      The search field you wish to retrieve the search menu from.
+ *    
+ *    outSearchMenu:
+ *      On exit, will contain the menu that is associated with search
+ *      field. The menu will _not_ be retained on output and this
+ *      parameter cannot be NULL.
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HISearchFieldGetSearchMenu(
+  HIViewRef   inSearchField,
+  MenuRef *   outSearchMenu)                                  AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  HISearchFieldChangeAttributes()
+ *  
+ *  Summary:
+ *    Set the attributes for the given search field.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inSearchField:
+ *      The search field to change the attributes of.
+ *    
+ *    inAttributesToSet:
+ *      The attributes to set.
+ *    
+ *    inAttributesToClear:
+ *      The attributes to clear.
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HISearchFieldChangeAttributes(
+  HIViewRef    inSearchField,
+  OptionBits   inAttributesToSet,
+  OptionBits   inAttributesToClear)                           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  HISearchFieldGetAttributes()
+ *  
+ *  Summary:
+ *    Returns the attributes of the search field.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inSearchField:
+ *      The search field to get the attributes of.
+ *    
+ *    outAttributes:
+ *      On exit, will contain the attributes of the search field. This
+ *      parameter cannot be NULL.
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HISearchFieldGetAttributes(
+  HIViewRef     inSearchField,
+  OptionBits *  outAttributes)                                AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  HISearchFieldSetDescriptiveText()
+ *  
+ *  Summary:
+ *    Set the description of the search action of the search field.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inSearchField:
+ *      The search field to change the description of.
+ *    
+ *    inDescription:
+ *      The new description for the search field. If the search field
+ *      contains a description, it will be released. If inDescription
+ *      is non-NULL, it will be retained by the search field. If it is
+ *      NULL, no description will be associated with the search field.
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HISearchFieldSetDescriptiveText(
+  HIViewRef     inSearchField,
+  CFStringRef   inDescription)       /* can be NULL */        AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  HISearchFieldCopyDescriptiveText()
+ *  
+ *  Summary:
+ *    Get the description that is associated with the search field.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inSearchField:
+ *      The search field you wish to retrieve the description from.
+ *    
+ *    outDescription:
+ *      On exit, will contain the description that is associated with
+ *      the search field. This parameter cannot be NULL. If there is no
+ *      description associated with the search field, outDescription
+ *      will be set to NULL. If there is a description, a CFStringRef
+ *      will be created that contains the contents of the description.
+ *      You posess ownership of this string and will need to release it
+ *      when you no longer need it.
+ *  
+ *  Result:
+ *    An operating system status code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HISearchFieldCopyDescriptiveText(
+  HIViewRef      inSearchField,
+  CFStringRef *  outDescription)                              AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*==============================================================================*/
+/*  Text field events                                                           */
+/*                                                                              */
+/*  A text field is the part of some controls that you can enter text into.     */
+/*  A text field is common to the EditText, EditUnicodeText, ComboBox, and      */
+/*  HISearchField views. The kEventClassTextField event allows you to receive   */
+/*  notifications when the text has been accepted by the user. For example, you */
+/*  can install a handler for a kEventClassTextField / kEventTextAccepted event */
+/*  on a HISearchField view to receive a notification that the user has         */
+/*  initiated a search by hitting the return or enter key.                      */
+/*==============================================================================*/
+/*
+    kEventClassTextField quick reference:
+    
+    kEventTextAccepted              = 1
+*/
+enum {
+  kEventClassTextField          = 'txfd'
+};
+
+/*
+ *  kEventClassTextField / kEventTextAccepted
+ *  
+ *  Summary:
+ *    Notification that the text in a control's editable text field has
+ *    been accepted.
+ *  
+ *  Discussion:
+ *    This event is sent as a notification when the text contained in a
+ *    control's editable text field has been accepted by the user. Text
+ *    is accepted when the user presses return or enter on the keyboard
+ *    or when the text has changed in the field and the field loses
+ *    focus. This event is sent to the control containing the text
+ *    field only, it will not propagate. It is sent to all handlers
+ *    installed on the control containing the text field.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    --> kEventParamDirectObject (in, typeControlRef)
+ *          The editable text field that has sent the notification.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available
+ */
+enum {
+  kEventTextAccepted            = 1
+};
+
+/*==============================================================================*/
+/*  HIMenuView                                                                  */
+/*                                                                              */
+/*  HIMenuView and HIStandardMenuView are new views available in Mac OS X 10.3. */
+/*  HIMenuView is intended for use as a base class for custom menu item views;  */
+/*  it does not draw or handle events itself, but provides useful functionality */
+/*  that all menu views need to implement. HIStandardMenuView is the standard   */
+/*  HIView used by the Menu Manager to draw menu item content, beginning with   */
+/*  Mac OS X 10.3. It can also be subclassed by custom menu item views.         */
+/*  Both of these views are meant to be used only in compositing windows.       */
+/*                                                                              */
+/*  Because HIMenuView and HIStandardMenuView are not typically created         */
+/*  directly by applications, no API is provided to create instances of these   */
+/*  views. If you need to create an instance of either view, you can use        */
+/*  HIObjectCreate.                                                             */
+/*==============================================================================*/
+
+/* the HIObject class ID for the HIMenuView class*/
+#define kHIMenuViewClassID              CFSTR("com.apple.HIMenuView")
+/* the HIObject class ID for the standard menu HIView class*/
+#define kHIStandardMenuViewClassID      CFSTR("com.apple.HIStandardMenuView")
+/*
+    The kEventHIObjectInitialize event for HIMenuView and HIStandardMenuView is expected to contain
+    the following parameters. Be sure to include these parameters in the init event if you create an
+    instance of these views with HIObjectCreate.
+    
+    --> kEventParamMenuRef (in, typeMenuRef)
+            The menu that the view should draw.
+*/
+/*
+ *  kHIViewMenuContentID
+ *  
+ *  Summary:
+ *    The HIViewID for the menu content view. The Menu Manager assigns
+ *    this view ID to all menu content views.
+ *  
+ *  Availability:
+ *    Mac OS X:         not available
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern HIViewID kHIViewMenuContentID;
+/*
+ *  HIMenuViewGetMenu()
+ *  
+ *  Summary:
+ *    Returns the MenuRef that is associated with an HIView that is a
+ *    subclass of HIMenuView.
+ *  
+ *  Discussion:
+ *    An HIMenuView subclass might use this API to determine the menu
+ *    that it should draw.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inView:
+ *      The view whose menu to return.
+ *  
+ *  Result:
+ *    The MenuRef associated with the HIView, or NULL if an HIView is
+ *    passed that is not a subclass of HIMenuView.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern MenuRef 
+HIMenuViewGetMenu(HIViewRef inView)                           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  HIMenuGetContentView()
+ *  
+ *  Summary:
+ *    Returns the HIViewRef that will be used to draw menu content for
+ *    this menu, if any.
+ *  
+ *  Discussion:
+ *    If the content view has not yet been created, the Menu Manager
+ *    will create the content view using the view class ID and
+ *    initialization event associated with the menu. Note that the menu
+ *    content view is not the same as the window content view; the menu
+ *    content view is embedded inside the window content view. If the
+ *    menu uses an MDEF instead of an HIView to draw its content, noErr
+ *    is returned but the output HIViewRef is set to NULL.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inMenu:
+ *      The menu.
+ *    
+ *    inMenuType:
+ *      The type of menu for which the menu content view should be
+ *      returned. The same MenuRef may have multiple content views,
+ *      depending on the menu type being displayed.
+ *    
+ *    outView:
+ *      On exit, contains the view. May be set to NULL if the menu does
+ *      not use an HIView to draw its content. The caller should not
+ *      release this view.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIMenuGetContentView(
+  MenuRef         inMenu,
+  ThemeMenuType   inMenuType,
+  HIViewRef *     outView)                                    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+
+/*==============================================================================*/
+/*  HISegmentedView                                                             */
+/*                                                                              */
+/*  HISegmentedView is a new view available in Mac OS X 10.3.                   */
+/*  Examples of the segmented view are the Finder's icon/column/list view       */
+/*  switcher, and the back/forward buttons in Open panels.                      */
+/*  The segmented view operates as a group of buttons, each of which can be     */
+/*  configured with different behaviors and content.                            */
+/*==============================================================================*/
+/* The HIObject class ID for the HISegmentedView class. */
+#define kHISegmentedViewClassID         CFSTR("com.apple.HISegmentedView")
+enum {
+  kHISegmentedViewKind          = 'sgmt'
+};
+
+/*
+ *  HISegmentedViewCreate()
+ *  
+ *  Summary:
+ *    Creates a segmented view. This is the type of view you would use
+ *    to implement the icon/column/list view switcher as seen in the
+ *    Finder. After creating a segmented view, you need to set the
+ *    number of segments via HISegmentedViewSetSegmentCount. Each
+ *    segment can be configured independently with via the other
+ *    HISegmentedView APIs. Changing the number of segments and
+ *    configuring each segment will change the appearance of the
+ *    segmented view. After you configure the view, you may want to
+ *    call GetBestControlRect on the view and resize it so the content
+ *    will fit optimally. The value of the whole segmented view
+ *    corresponds to the index of the currently selected segment with
+ *    the radio behavior. If you set the value of the whole segmented
+ *    view to n via SetControl32BitValue, every radio-behavior segment
+ *    will have its value set to zero except for the segment at index
+ *    n; if segment n also has the radio behavior, it will have its
+ *    value set to one. When a radio-behavior segment is clicked, the
+ *    value of the whole segmented view will be set to the segment's
+ *    index. The segmented view works in both compositing and
+ *    non-compositing modes.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inBounds:
+ *      The bounds of the view to be created. Can be NULL, in which
+ *      case the view is created with CGRectZero bounds.
+ *    
+ *    outRef:
+ *      A valid pointer to an HIViewRef. On successful completion of
+ *      this routine, the destination HIViewRef will be filled with the
+ *      HIViewRef of the newly created view.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HISegmentedViewCreate(
+  const HIRect *  inBounds,       /* can be NULL */
+  HIViewRef *     outRef)                                     AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  HISegmentedViewSetSegmentCount()
+ *  
+ *  Summary:
+ *    Sets the number of segments for the segmented view. Any previous
+ *    segments beyond the new count will have their content released.
+ *    All new segments beyond the previous count be initialized with
+ *    the most basic settings possible: Momentary, no attributes, zero
+ *    value, enabled, no command, no label, no content, and
+ *    auto-calculated content width. You should configure any new
+ *    segments to match your needs.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inSegmentedView:
+ *      The segmented view for which the content is to be set.
+ *    
+ *    inSegmentCount:
+ *      A positive integer indicating how many segments the view is to
+ *      have.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HISegmentedViewSetSegmentCount(
+  HIViewRef   inSegmentedView,
+  UInt32      inSegmentCount)                                 AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  HISegmentedViewGetSegmentCount()
+ *  
+ *  Summary:
+ *    Get the number of segments in the segmented view.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inSegmentedView:
+ *      The segmented view for which the content is to be set.
+ *  
+ *  Result:
+ *    A UInt32 indicating the number of segments in the segmented view.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern UInt32 
+HISegmentedViewGetSegmentCount(HIViewRef inSegmentedView)     AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+
+/*
+ *  Summary:
+ *    HISegmentBehavior constants
+ */
+enum {
+
+  /*
+   * Pops back up after being pressed, just like a push button.
+   */
+  kHISegmentBehaviorMomentary   = 1,
+
+  /*
+   * Stays pressed until another segment with the radio behavior is
+   * pressed. This makes the segment behave like a radio button. After
+   * this segment is clicked, the segmented view's value will be
+   * changed to this segment's one-based index.
+   */
+  kHISegmentBehaviorRadio       = 2,
+
+  /*
+   * Like a check box. When clicked, it toggles back and forth between
+   * checked and unchecked states.
+   */
+  kHISegmentBehaviorToggles     = 3,
+
+  /*
+   * After being pressed, this type of segment stays pressed until you
+   * programatically unpress it.
+   */
+  kHISegmentBehaviorSticky      = 4
+};
+
+
+typedef UInt32                          HISegmentBehavior;
+/*
+ *  HISegmentedViewSetSegmentBehavior()
+ *  
+ *  Summary:
+ *    Changes the behavior of an individual segment of a segmented
+ *    view. By default, a segment has the kHISegmentBehaviorMomentary
+ *    behavior.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inSegmentedView:
+ *      The segmented view which owns the segment whose behavior you
+ *      want to change.
+ *    
+ *    inSegmentIndexOneBased:
+ *      The one-based index of the segment whose behavior you want to
+ *      change. This must be a non-zero value that is no higher than
+ *      the segmented view's current segment count.
+ *    
+ *    inBehavior:
+ *      A HISegmentBehavior describing the behavior you wish the
+ *      segment to have.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HISegmentedViewSetSegmentBehavior(
+  HIViewRef           inSegmentedView,
+  UInt32              inSegmentIndexOneBased,
+  HISegmentBehavior   inBehavior)                             AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  HISegmentedViewGetSegmentBehavior()
+ *  
+ *  Summary:
+ *    Returns the behavior of an individual segment of a segmented view.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inSegmentedView:
+ *      The segmented view which owns the segment being queried.
+ *    
+ *    inSegmentIndexOneBased:
+ *      The one-based index of the segment whose behavior you desire.
+ *      This must be a non-zero value that is no higher than the
+ *      segmented view's current segment count.
+ *  
+ *  Result:
+ *    A HISegmentBehavior describing the behavior of the given segment.
+ *    If you pass an illegal segment index, the result is undefined.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern HISegmentBehavior 
+HISegmentedViewGetSegmentBehavior(
+  HIViewRef   inSegmentedView,
+  UInt32      inSegmentIndexOneBased)                         AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+
+/*
+ *  Summary:
+ *    HISegmentedView segment attributes
+ *  
+ *  Discussion:
+ *    These attribute bits are for use with
+ *    HISegmentedViewChangeSegmentAttributes and
+ *    HISegmentedViewGetSegmentAttributes.
+ */
+enum {
+
+  /*
+   * Pass this to indicate no attributes at all.
+   */
+  kHISegmentNoAttributes        = 0,
+
+  /*
+   * If this attribute bit is set, the command that gets sent out when
+   * the segment is clicked will be directed at the user focus instead
+   * of up the segmented view's containment hierarchy.
+   */
+  kHISegmentSendCmdToUserFocus  = (1 << 0)
+};
+
+/*
+ *  HISegmentedViewChangeSegmentAttributes()
+ *  
+ *  Summary:
+ *    Changes the attributes of an individual segment of a segmented
+ *    view. By default, a segment has no attribute bits set.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inSegmentedView:
+ *      The segmented view which owns the segment whose attributes you
+ *      want to change.
+ *    
+ *    inSegmentIndexOneBased:
+ *      The one-based index of the segment whose attributes you want to
+ *      change. This must be a non-zero value that is no higher than
+ *      the segmented view's current segment count.
+ *    
+ *    inAttributesToSet:
+ *      The attribute bits you wish to set/enable for the segment.
+ *    
+ *    inAttributesToClear:
+ *      The attribute bits you wish to clear/disable for the segment.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HISegmentedViewChangeSegmentAttributes(
+  HIViewRef    inSegmentedView,
+  UInt32       inSegmentIndexOneBased,
+  OptionBits   inAttributesToSet,
+  OptionBits   inAttributesToClear)                           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  HISegmentedViewGetSegmentAttributes()
+ *  
+ *  Summary:
+ *    Returns the attributes of an individual segment of a segmented
+ *    view.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inSegmentedView:
+ *      The segmented view which owns the segment being queried.
+ *    
+ *    inSegmentIndexOneBased:
+ *      The one-based index of the segment whose attributes you desire.
+ *      This must be a non-zero value that is no higher than the
+ *      segmented view's current segment count.
+ *  
+ *  Result:
+ *    The attribute bits that are set/enabled for the given segment. If
+ *    you pass an illegal segment index, the result is undefined.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OptionBits 
+HISegmentedViewGetSegmentAttributes(
+  HIViewRef   inSegmentedView,
+  UInt32      inSegmentIndexOneBased)                         AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  HISegmentedViewSetSegmentValue()
+ *  
+ *  Summary:
+ *    Change the value of an individual segment of a segmented view.
+ *    This is only meaningful for segments with the sticky, toggles, or
+ *    radio behaviors. If you set the value of momentary segments to
+ *    something other than zero, the behavior is undefined.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inSegmentedView:
+ *      The segmented view which owns the segment whose value you want
+ *      to change.
+ *    
+ *    inSegmentIndexOneBased:
+ *      The one-based index of the segment whose value you want to
+ *      change. This must be a non-zero value that is no higher than
+ *      the segmented view's current segment count.
+ *    
+ *    inValue:
+ *      The value you wish the segment to have. Zero means
+ *      unpressed/unselected and one means pressed/selected. Other
+ *      values will result in undefined behavior.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HISegmentedViewSetSegmentValue(
+  HIViewRef   inSegmentedView,
+  UInt32      inSegmentIndexOneBased,
+  SInt32      inValue)                                        AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  HISegmentedViewGetSegmentValue()
+ *  
+ *  Summary:
+ *    Determine the value of an individual segment of a segmented view.
+ *    This is only meaningful for segments with the sticky, toggles, or
+ *    radio behaviors. The value of a momentary segment is undefined.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inSegmentedView:
+ *      The segmented view which owns the segment being queried.
+ *    
+ *    inSegmentIndexOneBased:
+ *      The one-based index of the segment whose value you desire. This
+ *      must be a non-zero value that is no higher than the segmented
+ *      view's current segment count.
+ *  
+ *  Result:
+ *    A SInt32 indicating the value of the given segment. If you pass
+ *    an illegal segment index, the result is undefined.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern SInt32 
+HISegmentedViewGetSegmentValue(
+  HIViewRef   inSegmentedView,
+  UInt32      inSegmentIndexOneBased)                         AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  HISegmentedViewSetSegmentEnabled()
+ *  
+ *  Summary:
+ *    Enable or disable an individual segment of a segmented view.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inSegmentedView:
+ *      The segmented view which owns the segment to enable or disable.
+ *    
+ *    inSegmentIndexOneBased:
+ *      The one-based index of the segment to disable or enable. This
+ *      must be a non-zero value that is no higher than the segmented
+ *      view's current segment count.
+ *    
+ *    inEnabled:
+ *      A Boolean indicating whether the segment is to become enabled
+ *      or disabled.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HISegmentedViewSetSegmentEnabled(
+  HIViewRef   inSegmentedView,
+  UInt32      inSegmentIndexOneBased,
+  Boolean     inEnabled)                                      AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  HISegmentedViewIsSegmentEnabled()
+ *  
+ *  Summary:
+ *    Test an individual segment of a segmented view to see if it is
+ *    enabled or disabled.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inSegmentedView:
+ *      The segmented view which owns the segment being queried.
+ *    
+ *    inSegmentIndexOneBased:
+ *      The one-based index of the segment to test. This must be a
+ *      non-zero value that is no higher than the segmented view's
+ *      current segment count.
+ *  
+ *  Result:
+ *    True if the segment is enabled or false if the segment is
+ *    disabled. If you pass an illegal segment index, the result is
+ *    undefined.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern Boolean 
+HISegmentedViewIsSegmentEnabled(
+  HIViewRef   inSegmentedView,
+  UInt32      inSegmentIndexOneBased)                         AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  HISegmentedViewSetSegmentCommand()
+ *  
+ *  Summary:
+ *    Set the command ID for the given segment. By default, the command
+ *    is zero. If you set any non-zero command ID, the segmented view
+ *    will send an HICommand whenever the segment is clicked. By
+ *    default, the command is sent to the segmented view and up the
+ *    containment hierarchy. You can request that the command start at
+ *    the user focus instead by turning on the
+ *    kHISegmentSendCmdToUserFocus attribute for the segment.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inSegmentedView:
+ *      The segmented view which owns the segment whose command you
+ *      wish to set.
+ *    
+ *    inSegmentIndexOneBased:
+ *      The one-based index of the segment whose command you wish to
+ *      set. This must be a non-zero value that is no higher than the
+ *      segmented view's current segment count.
+ *    
+ *    inCommand:
+ *      The command ID you wish to associate with the segment. A value
+ *      of zero signifies "no command".
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HISegmentedViewSetSegmentCommand(
+  HIViewRef   inSegmentedView,
+  UInt32      inSegmentIndexOneBased,
+  UInt32      inCommand)                                      AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  HISegmentedViewGetSegmentCommand()
+ *  
+ *  Summary:
+ *    Get the command ID associated with the given segment.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inSegmentedView:
+ *      The segmented view which owns the segment being queried.
+ *    
+ *    inSegmentIndexOneBased:
+ *      The one-based index of the segment to query. This must be a
+ *      non-zero value that is no higher than the segmented view's
+ *      current segment count.
+ *  
+ *  Result:
+ *    Returns the command ID associated with the segment. If you pass
+ *    an illegal segment index, the result is undefined.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern UInt32 
+HISegmentedViewGetSegmentCommand(
+  HIViewRef   inSegmentedView,
+  UInt32      inSegmentIndexOneBased)                         AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  HISegmentedViewSetSegmentLabel()
+ *  
+ *  Summary:
+ *    Set the label string for the given segment. By default, a segment
+ *    has no label string.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inSegmentedView:
+ *      The segmented view which owns the segment whose label you wish
+ *      to set.
+ *    
+ *    inSegmentIndexOneBased:
+ *      The one-based index of the segment whose label you wish to set.
+ *      This must be a non-zero value that is no higher than the
+ *      segmented view's current segment count.
+ *    
+ *    inLabel:
+ *      A CFStringRef with the text of the label. The segmented view
+ *      will copy the string passed in. You may pass NULL or an empty
+ *      CFStringRef if you wish to eliminate the label from the segment.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HISegmentedViewSetSegmentLabel(
+  HIViewRef     inSegmentedView,
+  UInt32        inSegmentIndexOneBased,
+  CFStringRef   inLabel)                                      AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  HISegmentedViewCopySegmentLabel()
+ *  
+ *  Summary:
+ *    Get the label associated with the given segment.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inSegmentedView:
+ *      The segmented view which owns the segment being queried.
+ *    
+ *    inSegmentIndexOneBased:
+ *      The one-based index of the segment to query. This must be a
+ *      non-zero value that is no higher than the segmented view's
+ *      current segment count.
+ *    
+ *    outLabel:
+ *      On exit, outLabel will be a copy of the label associated with
+ *      the segment; you must release this string. If there is no label
+ *      associated with the segment, outLabel will be set to NULL.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HISegmentedViewCopySegmentLabel(
+  HIViewRef      inSegmentedView,
+  UInt32         inSegmentIndexOneBased,
+  CFStringRef *  outLabel)                                    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  HISegmentedViewSetSegmentContentWidth()
+ *  
+ *  Summary:
+ *    Sets whether you want the segment to automatically calculate its
+ *    own width or whether you want to determine the segment's width
+ *    manually. The content width is the horizontal area taken up by a
+ *    segment's label and/or image.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inSegmentedView:
+ *      The segmented view which owns the segment whose content width
+ *      you wish to set.
+ *    
+ *    inSegmentIndexOneBased:
+ *      The one-based index of the segment whose content width you wish
+ *      to set. This must be a non-zero value that is no higher than
+ *      the segmented view's current segment count.
+ *    
+ *    inAutoCalculateWidth:
+ *      A Boolean indicating whether you want the segment to calculate
+ *      its own width. If you pass true, the inWidth parameter is
+ *      ignored.
+ *    
+ *    inWidth:
+ *      If you passed false in inAutoCalculateWidth, this parameter
+ *      specifies the width you want to manually associate with the
+ *      segment. If you pass a negative width, the behavior is
+ *      undefined.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HISegmentedViewSetSegmentContentWidth(
+  HIViewRef   inSegmentedView,
+  UInt32      inSegmentIndexOneBased,
+  Boolean     inAutoCalculateWidth,
+  float       inWidth)                                        AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  HISegmentedViewGetSegmentContentWidth()
+ *  
+ *  Summary:
+ *    Get the content width of the given segment. This also optionall
+ *    passes back a Boolean indicating whether the width was
+ *    automatically calculated. The content width is the horizontal
+ *    area taken up by a segment's label and/or image.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inSegmentedView:
+ *      The segmented view which owns the segment being queried.
+ *    
+ *    inSegmentIndexOneBased:
+ *      The one-based index of the segment to query. This must be a
+ *      non-zero value that is no higher than the segmented view's
+ *      current segment count.
+ *    
+ *    outAutoCalculated:
+ *      On exit, this is a Boolean indicating whether the width was
+ *      automatically calculated. You may pass NULL if you don't need
+ *      this information.
+ *  
+ *  Result:
+ *    Returns the width of the content for the given segment. If you
+ *    pass an illegal segment index, the result is undefined.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern float 
+HISegmentedViewGetSegmentContentWidth(
+  HIViewRef   inSegmentedView,
+  UInt32      inSegmentIndexOneBased,
+  Boolean *   outAutoCalculated)                              AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  HISegmentedViewSetSegmentImage()
+ *  
+ *  Summary:
+ *    Sets or clears the image associated with a given segment.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inSegmentedView:
+ *      The segmented view which owns the segment whose image you wish
+ *      to set.
+ *    
+ *    inSegmentIndexOneBased:
+ *      The one-based index of the segment whose image you wish to set.
+ *      This must be a non-zero value that is no higher than the
+ *      segmented view's current segment count.
+ *    
+ *    inImage:
+ *      An HIViewImageContentInfo structure with the image information
+ *      for the given segment. Segments only support three types of
+ *      image content: kControlNoContent (no image),
+ *      kControlContentIconRef, and kControlContentCGImageRef.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HISegmentedViewSetSegmentImage(
+  HIViewRef                       inSegmentedView,
+  UInt32                          inSegmentIndexOneBased,
+  const HIViewImageContentInfo *  inImage)                    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  HISegmentedViewGetSegmentImageContentType()
+ *  
+ *  Summary:
+ *    Get the type of image content drawn by the given segment. You
+ *    will need to call this before calling
+ *    HISegmentedViewCopySegmentImage so you know what type of image
+ *    content to request from the latter API.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inSegmentedView:
+ *      The segmented view which owns the segment being queried.
+ *    
+ *    inSegmentIndexOneBased:
+ *      The one-based index of the segment to query. This must be a
+ *      non-zero value that is no higher than the segmented view's
+ *      current segment count.
+ *  
+ *  Result:
+ *    Returns the image content type of the image drawn by the given
+ *    segment. If you pass an illegal segment index, the result is
+ *    undefined.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern HIViewImageContentType 
+HISegmentedViewGetSegmentImageContentType(
+  HIViewRef   inSegmentedView,
+  UInt32      inSegmentIndexOneBased)                         AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  HISegmentedViewCopySegmentImage()
+ *  
+ *  Summary:
+ *    Gives you a copy of the image (if any) drawn by the given
+ *    segment. You are responsible for releasing any image passed back
+ *    by this function. You request the image by asking for a
+ *    particular type of image. If the segment isn't using the
+ *    requested type of image, an error will be returned. If you wish
+ *    to know the actual type of image displayed by the segment, you
+ *    can call HISegmentedViewGetSegmentImageContentType.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inSegmentedView:
+ *      The segmented view which owns the segment being queried.
+ *    
+ *    inSegmentIndexOneBased:
+ *      The one-based index of the segment to query. This must be a
+ *      non-zero value that is no higher than the segmented view's
+ *      current segment count.
+ *    
+ *    ioImage:
+ *      On entry, you must fill out the contentType field of this
+ *      structure with the type of image you desire. On exit, if that
+ *      type of image is used by the segment, the appropriate field of
+ *      the union will be filled in with a copy of the image. You are
+ *      responsible for releasing the image.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HISegmentedViewCopySegmentImage(
+  HIViewRef                 inSegmentedView,
+  UInt32                    inSegmentIndexOneBased,
+  HIViewImageContentInfo *  ioImage)                          AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 

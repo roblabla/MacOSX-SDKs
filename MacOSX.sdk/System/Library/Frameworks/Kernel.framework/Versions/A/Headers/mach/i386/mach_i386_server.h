@@ -41,118 +41,6 @@ typedef function_table_entry 	*function_table_t;
 __BeforeMigServerHeader
 #endif /* __BeforeMigServerHeader */
 
-/* typedefs for all requests */
-
-#ifndef __Request__mach_i386_subsystem__defined
-#define __Request__mach_i386_subsystem__defined
-	typedef struct {
-		mach_msg_header_t Head;
-		/* start of the kernel processed data */
-		mach_msg_body_t msgh_body;
-		mach_msg_port_descriptor_t device;
-		/* end of the kernel processed data */
-	} __Request__i386_io_port_add_t;
-
-	typedef struct {
-		mach_msg_header_t Head;
-		/* start of the kernel processed data */
-		mach_msg_body_t msgh_body;
-		mach_msg_port_descriptor_t device;
-		/* end of the kernel processed data */
-	} __Request__i386_io_port_remove_t;
-
-	typedef struct {
-		mach_msg_header_t Head;
-	} __Request__i386_io_port_list_t;
-
-	typedef struct {
-		mach_msg_header_t Head;
-		/* start of the kernel processed data */
-		mach_msg_body_t msgh_body;
-		mach_msg_ool_descriptor_t desc_list;
-		/* end of the kernel processed data */
-		NDR_record_t NDR;
-		int first_selector;
-		mach_msg_type_number_t desc_listCnt;
-	} __Request__i386_set_ldt_t;
-
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		int first_selector;
-		int selector_count;
-	} __Request__i386_get_ldt_t;
-
-#endif /* !__Request__mach_i386_subsystem__defined */
-
-/* union of all requests */
-
-#ifndef __RequestUnion__mach_i386_subsystem__defined
-#define __RequestUnion__mach_i386_subsystem__defined
-union __RequestUnion__mach_i386_subsystem {
-	__Request__i386_io_port_add_t Request_i386_io_port_add;
-	__Request__i386_io_port_remove_t Request_i386_io_port_remove;
-	__Request__i386_io_port_list_t Request_i386_io_port_list;
-	__Request__i386_set_ldt_t Request_i386_set_ldt;
-	__Request__i386_get_ldt_t Request_i386_get_ldt;
-};
-#endif /* __RequestUnion__mach_i386_subsystem__defined */
-/* typedefs for all replies */
-
-#ifndef __Reply__mach_i386_subsystem__defined
-#define __Reply__mach_i386_subsystem__defined
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		kern_return_t RetCode;
-	} __Reply__i386_io_port_add_t;
-
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		kern_return_t RetCode;
-	} __Reply__i386_io_port_remove_t;
-
-	typedef struct {
-		mach_msg_header_t Head;
-		/* start of the kernel processed data */
-		mach_msg_body_t msgh_body;
-		mach_msg_ool_ports_descriptor_t device_list;
-		/* end of the kernel processed data */
-		NDR_record_t NDR;
-		mach_msg_type_number_t device_listCnt;
-	} __Reply__i386_io_port_list_t;
-
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		kern_return_t RetCode;
-	} __Reply__i386_set_ldt_t;
-
-	typedef struct {
-		mach_msg_header_t Head;
-		/* start of the kernel processed data */
-		mach_msg_body_t msgh_body;
-		mach_msg_ool_descriptor_t desc_list;
-		/* end of the kernel processed data */
-		NDR_record_t NDR;
-		mach_msg_type_number_t desc_listCnt;
-	} __Reply__i386_get_ldt_t;
-
-#endif /* !__Reply__mach_i386_subsystem__defined */
-
-/* union of all replies */
-
-#ifndef __ReplyUnion__mach_i386_subsystem__defined
-#define __ReplyUnion__mach_i386_subsystem__defined
-union __ReplyUnion__mach_i386_subsystem {
-	__Reply__i386_io_port_add_t Reply_i386_io_port_add;
-	__Reply__i386_io_port_remove_t Reply_i386_io_port_remove;
-	__Reply__i386_io_port_list_t Reply_i386_io_port_list;
-	__Reply__i386_set_ldt_t Reply_i386_set_ldt;
-	__Reply__i386_get_ldt_t Reply_i386_get_ldt;
-};
-#endif /* __RequestUnion__mach_i386_subsystem__defined */
 
 /* Routine i386_io_port_add */
 #ifdef	mig_external
@@ -239,6 +127,120 @@ extern const struct mach_i386_subsystem {
 		routine[5];
 } mach_i386_subsystem;
 
+/* typedefs for all requests */
+
+#ifndef __Request__mach_i386_subsystem__defined
+#define __Request__mach_i386_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t device;
+		/* end of the kernel processed data */
+	} __Request__i386_io_port_add_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t device;
+		/* end of the kernel processed data */
+	} __Request__i386_io_port_remove_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__i386_io_port_list_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_descriptor_t desc_list;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		int first_selector;
+		mach_msg_type_number_t desc_listCnt;
+	} __Request__i386_set_ldt_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		int first_selector;
+		int selector_count;
+	} __Request__i386_get_ldt_t;
+
+#endif /* !__Request__mach_i386_subsystem__defined */
+
+
+/* union of all requests */
+
+#ifndef __RequestUnion__mach_i386_subsystem__defined
+#define __RequestUnion__mach_i386_subsystem__defined
+union __RequestUnion__mach_i386_subsystem {
+	__Request__i386_io_port_add_t Request_i386_io_port_add;
+	__Request__i386_io_port_remove_t Request_i386_io_port_remove;
+	__Request__i386_io_port_list_t Request_i386_io_port_list;
+	__Request__i386_set_ldt_t Request_i386_set_ldt;
+	__Request__i386_get_ldt_t Request_i386_get_ldt;
+};
+#endif /* __RequestUnion__mach_i386_subsystem__defined */
+/* typedefs for all replies */
+
+#ifndef __Reply__mach_i386_subsystem__defined
+#define __Reply__mach_i386_subsystem__defined
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__i386_io_port_add_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__i386_io_port_remove_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_ports_descriptor_t device_list;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t device_listCnt;
+	} __Reply__i386_io_port_list_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__i386_set_ldt_t;
+
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_ool_descriptor_t desc_list;
+		/* end of the kernel processed data */
+		NDR_record_t NDR;
+		mach_msg_type_number_t desc_listCnt;
+	} __Reply__i386_get_ldt_t;
+
+#endif /* !__Reply__mach_i386_subsystem__defined */
+
+
+/* union of all replies */
+
+#ifndef __ReplyUnion__mach_i386_subsystem__defined
+#define __ReplyUnion__mach_i386_subsystem__defined
+union __ReplyUnion__mach_i386_subsystem {
+	__Reply__i386_io_port_add_t Reply_i386_io_port_add;
+	__Reply__i386_io_port_remove_t Reply_i386_io_port_remove;
+	__Reply__i386_io_port_list_t Reply_i386_io_port_list;
+	__Reply__i386_set_ldt_t Reply_i386_set_ldt;
+	__Reply__i386_get_ldt_t Reply_i386_get_ldt;
+};
+#endif /* __RequestUnion__mach_i386_subsystem__defined */
 
 #ifndef subsystem_to_name_map_mach_i386
 #define subsystem_to_name_map_mach_i386 \

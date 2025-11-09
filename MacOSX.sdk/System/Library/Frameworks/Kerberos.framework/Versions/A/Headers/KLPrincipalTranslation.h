@@ -1,12 +1,38 @@
 /*
- * API for Kerberos Login Principal Translation plugins
+ * Copyright 1998-2003 Massachusetts Institute of Technology.
+ * All Rights Reserved.
+ *
+ * Export of this software from the United States of America may
+ * require a specific license from the United States Government.
+ * It is the responsibility of any person or organization contemplating
+ * export to obtain such a license before exporting.
+ *
+ * WITHIN THAT CONSTRAINT, permission to use, copy, modify, and
+ * distribute this software and its documentation for any purpose and
+ * without fee is hereby granted, provided that the above copyright
+ * notice appear in all copies and that both that copyright notice and
+ * this permission notice appear in supporting documentation, and that
+ * the name of M.I.T. not be used in advertising or publicity pertaining
+ * to distribution of the software without specific, written prior
+ * permission.  Furthermore if you modify this software you must label
+ * your software as modified software and not distribute it in such a
+ * fashion that it might be confused with the original M.I.T. software.
+ * M.I.T. makes no representations about the suitability of
+ * this software for any purpose.  It is provided "as is" without express
+ * or implied warranty.
+ */
+
+/*
+ * KLPrincipalTranslation.h
+ *
+ * $Header: /cvs/kfm/KerberosFramework/KerberosLogin/Headers/Kerberos/KLPrincipalTranslation.h,v 1.7 2003/04/14 15:47:59 lxs Exp $
  */
  
 #ifndef KLPrincipalTranslation_h_
 #define KLPrincipalTranslation_h_
 
 #if defined(macintosh) || (defined(__MACH__) && defined(__APPLE__))
-	#include <TargetConditionals.h>
+    #include <TargetConditionals.h>
     #if TARGET_RT_MAC_CFM
         #error "Use KfM 4.0 SDK headers for CFM compilation."
     #endif
@@ -21,10 +47,8 @@ extern "C" {
 
 #if TARGET_OS_MAC
     #if defined(__MWERKS__)
-        #pragma import on
-        #pragma enumsalwaysint on
+        #pragma export on
     #endif
-    #pragma options align=mac68k
 #endif
 
 /* Plugin information */
@@ -34,41 +58,36 @@ extern "C" {
 /* API Versions */
 
 enum {
-	kKLPT_APIVersion_1				= 1,
-	kKLPT_APIVersion_Current		= kKLPT_APIVersion_1
+    kKLPT_APIVersion_1       = 1,
+    kKLPT_APIVersion_Current = kKLPT_APIVersion_1
 };
 
 /* Types */
 
-typedef u_int32_t	KLPT_APIVersion;
+typedef u_int32_t KLPT_APIVersion;
 
 /* Function prototypes */
 
 #pragma export on
 
-KLStatus KerberosLoginPrincipalTranslation_InitializePlugin (
-	KLPT_APIVersion		inAPIVersion);
+KLStatus KerberosLoginPrincipalTranslation_InitializePlugin (KLPT_APIVersion inAPIVersion);
 
-KLStatus KerberosLoginPrincipalTranslation_TranslatePrincipal (
-	const char*		inName,
-	const char*		inInstance,
-	const char*		inRealm,
-	const char**	outName,
-	const char**	outInstance,
-	const char**	outRealm,
-	KLBoolean*		outChanged);
+KLStatus KerberosLoginPrincipalTranslation_TranslatePrincipal (const char  *inName,
+                                                               const char  *inInstance,
+                                                               const char  *inRealm,
+                                                               const char **outName,
+                                                               const char **outInstance,
+                                                               const char **outRealm,
+                                                               KLBoolean   *outChanged);
 
-void KerberosLoginPrincipalTranslation_ReleasePrincipal (
-	char*	inName,
-	char*	inInstance,
-	char*	inRealm);
+void KerberosLoginPrincipalTranslation_ReleasePrincipal (char*	inName,
+                                                         char*	inInstance,
+                                                         char*	inRealm);
 
 #if TARGET_OS_MAC
     #if defined(__MWERKS__)
-        #pragma enumsalwaysint reset
-        #pragma import reset
+        #pragma export reset
     #endif
-	#pragma options align=reset
 #endif
 
 #ifdef __cplusplus

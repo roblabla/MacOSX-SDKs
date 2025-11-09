@@ -23,24 +23,14 @@
 #ifndef _GSSAPI_KRB5_H_
 #define _GSSAPI_KRB5_H_
 
-#if defined(macintosh) || (defined(__MACH__) && defined(__APPLE__))
-	#include <TargetConditionals.h>
-#endif
-
-#if TARGET_OS_MAC
-    #include <Kerberos/krb5.h>
-    #include <Kerberos/gssapi.h>
-    #include <Kerberos/gssapi_generic.h>
-#else
-    #include <krb5.h>
-#endif
+#include <Kerberos/gssapi.h>
+#include <Kerberos/krb5.h>
 
 /* C++ friendlyness */
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
 
-#if GSS_RFC_COMPLIANT_OIDS
 /* Reserved static storage for GSS_oids.  See rfc 1964 for more details. */
 
 /* 2.1.1. Kerberos Principal Name Form: */
@@ -80,16 +70,11 @@ GSS_DLLIMP extern const gss_OID_desc * const GSS_KRB5_NT_PRINCIPAL_NAME;
  * generic(1) string_uid_name(3)}.  The recommended symbolic name for
  * this type is "GSS_KRB5_NT_STRING_UID_NAME". */ 
 
-#endif /* GSS_RFC_COMPLIANT_OIDS */
-
 extern const gss_OID_desc * const gss_mech_krb5;
 extern const gss_OID_desc * const gss_mech_krb5_old;
-extern const gss_OID_desc * const gss_mech_krb5_v2;
 extern const gss_OID_set_desc * const gss_mech_set_krb5;
 extern const gss_OID_set_desc * const gss_mech_set_krb5_old;
 extern const gss_OID_set_desc * const gss_mech_set_krb5_both;
-extern const gss_OID_set_desc * const gss_mech_set_krb5_v2;
-extern const gss_OID_set_desc * const gss_mech_set_krb5_v1v2;
 
 extern const gss_OID_desc * const gss_nt_krb5_name;
 extern const gss_OID_desc * const gss_nt_krb5_principal;
@@ -103,19 +88,24 @@ extern const gss_OID_desc krb5_gss_oid_array[];
 #define gss_krb5_nt_machine_uid_name	gss_nt_machine_uid_name
 #define gss_krb5_nt_string_uid_name	gss_nt_string_uid_name
 
-GSS_DLLIMP OM_uint32 KRB5_CALLCONV gss_krb5_get_tkt_flags 
-	PROTOTYPE((OM_uint32 *minor_status,
+/* Alias for Heimdal compat. */
+#define gsskrb5_register_acceptor_identity krb5_gss_register_acceptor_identity
+
+OM_uint32 KRB5_CALLCONV krb5_gss_register_acceptor_identity(const char *);
+
+OM_uint32 KRB5_CALLCONV gss_krb5_get_tkt_flags 
+	(OM_uint32 *minor_status,
 		   gss_ctx_id_t context_handle,
-		   krb5_flags *ticket_flags));
+		   krb5_flags *ticket_flags);
 
-GSS_DLLIMP OM_uint32 KRB5_CALLCONV gss_krb5_copy_ccache
-	PROTOTYPE((OM_uint32 *minor_status,
+OM_uint32 KRB5_CALLCONV gss_krb5_copy_ccache
+	(OM_uint32 *minor_status,
 		   gss_cred_id_t cred_handle,
-		   krb5_ccache out_ccache));
+		   krb5_ccache out_ccache);
 
-GSS_DLLIMP OM_uint32 KRB5_CALLCONV gss_krb5_ccache_name
-	PROTOTYPE((OM_uint32 *minor_status, const char *name,
-		   const char **out_name));
+OM_uint32 KRB5_CALLCONV gss_krb5_ccache_name
+	(OM_uint32 *minor_status, const char *name,
+		   const char **out_name);
 
 #ifdef __cplusplus
 }

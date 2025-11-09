@@ -6,7 +6,7 @@
     Version:	Technology:	Mac OS X
                 Release:	GM
  
-     Copyright:  (c) 2000, 2001, 2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  (c) 2000, 2001, 2002, 2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -19,9 +19,12 @@
 #define _AGL_H
 
 #if defined (__MACH__)
+	#import <AvailabilityMacros.h>
 	#import <Carbon/Carbon.h>
 	#import <OpenGL/gl.h>
 #else
+	#define AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER 
+	#define AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER 
 	#include <Carbon.h>
 	#include <gl.h>
 #endif
@@ -52,6 +55,7 @@ typedef CGrafPtr AGLDrawable;
 typedef struct __AGLRendererInfoRec  *AGLRendererInfo;
 typedef struct __AGLPixelFormatRec   *AGLPixelFormat;
 typedef struct __AGLContextRec       *AGLContext;
+typedef struct __AGLPBufferRec       *AGLPbuffer;
 
 /************************************************************************/
 
@@ -324,7 +328,21 @@ extern void aglResetLibrary(void);
 /*
 ** Surface texture function
 */
-extern void aglSurfaceTexture (AGLContext context, GLenum target, GLenum internalformat, AGLContext surfacecontext);
+extern void aglSurfaceTexture (AGLContext context, GLenum target, GLenum internalformat, AGLContext surfacecontext)    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+/*
+** PBuffer functions
+*/
+extern GLboolean aglCreatePBuffer (GLint width, GLint height, GLenum target, GLenum internalFormat, long max_level, AGLPbuffer *pbuffer)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern GLboolean aglDestroyPBuffer (AGLPbuffer pbuffer)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern GLboolean aglDescribePBuffer (AGLPbuffer pbuffer, GLint *width, GLint *height, GLenum *target, GLenum *internalFormat, GLint *max_level)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern GLboolean aglTexImagePBuffer (AGLContext ctx, AGLPbuffer pbuffer, GLint source)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+/*
+** Pbuffer Drawable Functions
+*/
+extern GLboolean aglSetPBuffer (AGLContext ctx, AGLPbuffer pbuffer, GLint face, GLint level, GLint screen)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+extern GLboolean aglGetPBuffer (AGLContext ctx, AGLPbuffer *pbuffer, GLint *face, GLint *level, GLint *screen)    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 #ifdef __cplusplus
 }

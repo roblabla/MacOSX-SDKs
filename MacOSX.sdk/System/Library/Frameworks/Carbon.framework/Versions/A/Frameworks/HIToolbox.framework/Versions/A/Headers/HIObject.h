@@ -3,9 +3,9 @@
  
      Contains:   Base object for HIToolbox
  
-     Version:    HIToolbox-124.14~2
+     Version:    HIToolbox-145.33~1
  
-     Copyright:  © 2001-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2001-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -131,12 +131,11 @@ extern "C" {
  *    returned to the caller of HIObjectCreate. From there, you can
  *    have all sorts of cool fun. 
  *    
- *    When someone has called HIObjectRelease enough such that the
- *    refcount of the object drops to zero, the object is destroyed.
- *    The Toolbox will send a kEventHIObjectDestruct event to your
- *    object. DO NOT CALL CALLNEXTEVENTHANDLER. You will be setting
- *    yourself up for some hurt. Just clean up and return from your
- *    handler.
+ *    When someone has called CFRelease enough such that the refcount
+ *    of the object drops to zero, the object is destroyed. The Toolbox
+ *    will send a kEventHIObjectDestruct event to your object. DO NOT
+ *    CALL CALLNEXTEVENTHANDLER. You will be setting yourself up for
+ *    some hurt. Just clean up and return from your handler.
  */
 typedef struct OpaqueHIObjectClassRef*  HIObjectClassRef;
 typedef struct OpaqueHIObjectRef*       HIObjectRef;
@@ -168,81 +167,14 @@ enum {
 };
 
 
-
 /*
-    Parameters for HIObject events:
-
-    kEventHIObjectConstruct
-        -->     kEventParamHIObjectInstance             typeHIObjectRef
-    
-    kEventHIObjectInitialize
-        This is up to the class and any superclasses. It will contain the
-        union of all parameters needed by all classes to properly construct.
-    
-    kEventHIObjectDestruct
-        No parameters are passed.
-    
-    kEventHIObjectIsEqual
-        -->     kEventParamDirectObject             typeHIObjectRef
-
-    kEventHIObjectPrintDebugInfo
-        no parameters
-*/
-
-/*
- *  Discussion:
- *    These enums define the base class functionality of HIObjects. You
- *    should only need to be aware of these if you are implementing a
- *    subclass.
  */
 enum {
 
   /*
-   * The event class for HIObject events
+   * The event class for HIObject events.
    */
-  kEventClassHIObject           = 'hiob',
-
-  /*
-   * Your object is being constructed. When your event handler is
-   * called with this event, it is being called directly and not
-   * through the normal event dispatching mechanism. This means that
-   * the EventHandlerCallRef passed to your handler will be NULL and
-   * CallNextEventHandler will not work. You are passed the actual
-   * HIObjectRef of your base class for you to record in your instance
-   * data.
-   */
-  kEventHIObjectConstruct       = 1,
-
-  /*
-   * Your object is being initialized. Your handler should pass this
-   * onto the superclass first before handling this event. This is done
-   * by calling CallNextEventHandler with the event. When that function
-   * returns, you should make sure the result is noErr. If not, you
-   * should NOT continue to initialize your class.
-   */
-  kEventHIObjectInitialize      = 2,
-
-  /*
-   * Your object is being destroyed. This is your chance to dispose of
-   * anything you might have allocated for your object. Do NOT call
-   * through with CallNextEventHandler, as you will disrupt the fabric
-   * of space-time.
-   */
-  kEventHIObjectDestruct        = 3,
-
-  /*
-   * HIObjectIsEqual has been called, and you are being asked to
-   * determine if your object is equivalent to the one being passed to
-   * your handler. You should return true if so, and false if not.
-   */
-  kEventHIObjectIsEqual         = 4,
-
-  /*
-   * HIObjectPrintDebugInfo has been called, and you are being asked to
-   * print your information to stdout. This event is sent to all
-   * handlers and you should NOT call CallNextEventHandler.
-   */
-  kEventHIObjectPrintDebugInfo  = 5
+  kEventClassHIObject           = 'hiob'
 };
 
 enum {
@@ -250,8 +182,188 @@ enum {
   typeHIObjectRef               = 'hiob'
 };
 
+/*
+    kEventClassHIObject quick reference:
+    
+    These are the events for base class functionality of HIObjects. You should only need to be
+    aware of these if you are implementing a subclass of HIObject.
+    
+    kEventHIObjectConstruct         = 1,
+    kEventHIObjectInitialize        = 2,
+    kEventHIObjectDestruct          = 3,
+    kEventHIObjectIsEqual           = 4,
+    kEventHIObjectPrintDebugInfo    = 5
+*/
+/*
+ *  kEventClassHIObject / kEventHIObjectConstruct
+ *  
+ *  Summary:
+ *    Your object is being constructed. You should allocate instance
+ *    data for your object.
+ *  
+ *  Discussion:
+ *    When your event handler is called with this event, it is being
+ *    called directly and not through the normal event dispatching
+ *    mechanism. This means that the EventHandlerCallRef passed to your
+ *    handler will be NULL and CallNextEventHandler will not work. You
+ *    are passed the actual HIObjectRef of your base class for you to
+ *    record in your instance data.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    <-> kEventParamHIObjectInstance (in/out, typeHIObjectRef)
+ *          On entry, this parameter is typeHIObjectRef, and is the
+ *          HIObjectRef of your instanceÕs base class. Typically you
+ *          will read this parameter from the event and store it in
+ *          your instance data so that when your instance needs to call
+ *          HIObject APIs, it can use this HIObjectRef.
+ *          
+ *          On exit, this parameter is typeVoidPtr, and should be a
+ *          pointer to your instance data that you have written into
+ *          the event with SetEventParameter. After your event handler
+ *          returns, the toolbox reads your instance data pointer from
+ *          the event, installs the event handlers that were passed to
+ *          HIObjectRegisterSubclass on the new object, and uses the
+ *          instance data pointer as the refcon for those event
+ *          handlers. This allows your event handlers to retrieve your
+ *          instance data pointer from the refcon.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available
+ */
+enum {
+  kEventHIObjectConstruct       = 1
+};
 
-#define _HIObjectRegisterSubclass HIObjectRegisterSubclass
+/*
+ *  kEventClassHIObject / kEventHIObjectInitialize
+ *  
+ *  Summary:
+ *    Your object is being initialized. You should read initialization
+ *    data from the event and store it into your instance data.
+ *  
+ *  Discussion:
+ *    Your handler should pass this event on to the superclass first
+ *    before handling this event. This is done by calling
+ *    CallNextEventHandler with the event. When that function returns,
+ *    you should make sure the result is noErr. If not, you should NOT
+ *    continue to initialize your class.
+ *    
+ *    Assuming that CallNextEventHandler returned noErr, you may then
+ *    proceed to read initialization data from the event parameters, if
+ *    any. For example, you might be create an object that includes a
+ *    string as part of its instance data. The caller of HIObjectCreate
+ *    would create an EventRef and add a string to the event using a
+ *    parameter name and type defined by your object. In your objectÕs
+ *    kEventHIObjectInitialize event handler, you would read the string
+ *    from the event parameter and store it into your instance
+ *    data.
+ *    
+ *    The parameters of this event, therefore, contain the union of all
+ *    parameters needed by all base classes of this object to properly
+ *    construct themselves.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available
+ */
+enum {
+  kEventHIObjectInitialize      = 2
+};
+
+/*
+ *  kEventClassHIObject / kEventHIObjectDestruct
+ *  
+ *  Summary:
+ *    Your object is being destroyed. This is your chance to dispose of
+ *    anything you might have allocated for your objectÕs instance data.
+ *  
+ *  Discussion:
+ *    Do NOT call through with CallNextEventHandler, as you will
+ *    disrupt the fabric of space-time. An HIObject is destroyed in
+ *    most-derived to least-derived order, and if you call through,
+ *    your base class can be destroyed before you destroy your own
+ *    data, which can cause undefined results.
+ *    
+ *    Note that the refcon of your event handler for this event will be
+ *    the instance data pointer allocated and returned by your
+ *    kEventHIObjectConstruct handler in the
+ *    kEventParamHIObjectInstance parameter.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available
+ */
+enum {
+  kEventHIObjectDestruct        = 3
+};
+
+/*
+ *  kEventClassHIObject / kEventHIObjectIsEqual
+ *  
+ *  Summary:
+ *    HIObjectIsEqual has been called, and you are being asked to
+ *    determine if your object is equivalent to the one being passed to
+ *    your handler.
+ *  
+ *  Discussion:
+ *    The base HIObject class handles this event by comparing the
+ *    HIObjectRef values for pointer equality. Your subclass may choose
+ *    to also compare the contents of the HIObject instance data.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    --> kEventParamDirectObject (in, typeHIObjectRef)
+ *          The object to which your object should be compared.
+ *    
+ *    <-- kEventParamResult (out, typeBoolean)
+ *          If your object is equivalent to the direct object, you
+ *          should return true in this parameter; otherwise, return
+ *          false.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available
+ */
+enum {
+  kEventHIObjectIsEqual         = 4
+};
+
+/*
+ *  kEventClassHIObject / kEventHIObjectPrintDebugInfo
+ *  
+ *  Summary:
+ *    HIObjectPrintDebugInfo has been called, and you are being asked
+ *    to print your information to stdout.
+ *  
+ *  Discussion:
+ *    This event is sent to all handlers registered for it. You should
+ *    NOT call CallNextEventHandler.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.2 and later in Carbon.framework
+ *    CarbonLib:        not available
+ */
+enum {
+  kEventHIObjectPrintDebugInfo  = 5
+};
+
 /*
  *  HIObjectRegisterSubclass()
  *  
@@ -286,7 +398,11 @@ enum {
  *      CallNextEventHandler. Other than that, you should return a
  *      result as usual. After your object is constructed, this proc
  *      will be installed as the event handler for the remaining events
- *      specified in the inEventList parameter.
+ *      specified in the inEventList parameter. You may pass NULL to
+ *      create an "abstract class" that cannot be instantiated, but can
+ *      still be used as a base class for subclasses; if you pass NULL,
+ *      HIObjectCreate on the class ID will return
+ *      hiObjectClassIsAbstractErr.
  *    
  *    inNumEvents:
  *      The number of events you are installing.
@@ -318,7 +434,7 @@ HIObjectRegisterSubclass(
   CFStringRef            inClassID,
   CFStringRef            inBaseClassID,
   OptionBits             inOptions,
-  EventHandlerUPP        inConstructProc,
+  EventHandlerUPP        inConstructProc,       /* can be NULL */
   UInt32                 inNumEvents,
   const EventTypeSpec *  inEventList,
   void *                 inConstructData,
@@ -341,8 +457,6 @@ HIObjectRegisterSubclass(
  *    
  *    inClassRef:
  *      The class ref of the class of object you wish to unregister.
- *    
- *    inConstructData:
  *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in Carbon.framework
@@ -353,7 +467,6 @@ extern OSStatus
 HIObjectUnregisterClass(HIObjectClassRef inClassRef)          AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
-#define _HIObjectCreate HIObjectCreate
 /*
  *  HIObjectCreate()
  *  
@@ -381,7 +494,10 @@ HIObjectUnregisterClass(HIObjectClassRef inClassRef)          AVAILABLE_MAC_OS_X
  *      The instance of the object you create.
  *  
  *  Result:
- *    An operating system result code.
+ *    An operating system result code. A return value of
+ *    hiObjectClassIsAbstractErr indicates that the inConstructProc
+ *    parameter to HIObjectRegisterSubclass was NULL; instances of such
+ *    a class may not be created, only subclassed.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in Carbon.framework
@@ -395,9 +511,6 @@ HIObjectCreate(
   HIObjectRef *  outObject)                                   AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
-
-
-#define _HIObjectGetEventTarget HIObjectGetEventTarget
 /*
  *  HIObjectGetEventTarget()
  *  
@@ -424,7 +537,6 @@ extern EventTargetRef
 HIObjectGetEventTarget(HIObjectRef inObject)                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
-#define _HIObjectPrintDebugInfo HIObjectPrintDebugInfo
 /*
  *  HIObjectPrintDebugInfo()
  *  
@@ -449,7 +561,6 @@ extern void
 HIObjectPrintDebugInfo(HIObjectRef inObject)                  AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
-#define _HIObjectCopyClassID HIObjectCopyClassID
 /*
  *  HIObjectCopyClassID()
  *  
@@ -476,7 +587,6 @@ extern CFStringRef
 HIObjectCopyClassID(HIObjectRef inObject)                     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
-#define _HIObjectIsOfClass HIObjectIsOfClass
 /*
  *  HIObjectIsOfClass()
  *  
@@ -511,7 +621,6 @@ HIObjectIsOfClass(
   CFStringRef   inObjectClassID)                              AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
-#define _HIObjectDynamicCast HIObjectDynamicCast
 /*
  *  HIObjectDynamicCast()
  *  
@@ -596,6 +705,7 @@ HIObjectCreateFromBundle(
  *  Discussion:
  *    Reports whether or not the given HIObject is marked as ignored
  *    for accessibility. 
+ *    
  *    See the discussion of HIObjectSetAccessibilityIgnored for details
  *    on what it means to be accessibility ignored.
  *  
@@ -626,6 +736,7 @@ HIObjectIsAccessibilityIgnored(HIObjectRef inObject)          AVAILABLE_MAC_OS_X
  *  Discussion:
  *    Marks an HIObject as ignored (or not) for the purposes of the
  *    accessibility APIs. 
+ *    
  *    An HIObject that is ignored for accessibility will never be shown
  *    to an assistive application that uses the accessibility APIs to
  *    examine an interface. Your application's accessibility
@@ -633,7 +744,7 @@ HIObjectIsAccessibilityIgnored(HIObjectRef inObject)          AVAILABLE_MAC_OS_X
  *    as usual. Carbon's accessibility engine will automatically prune
  *    any ignored HIObjects out of the data that is shown to an
  *    assistive application. 
- *    By default, an HIObject is *not* accessibility ignored.
+ *    <BR>By default, an HIObject is *not* accessibility ignored.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -659,116 +770,6 @@ HIObjectSetAccessibilityIgnored(
   HIObjectRef   inObject,
   Boolean       inIgnored)                                    AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
-
-/*==============================================================================*/
-/*  DEPRECATED! DO NOT USE. USE CF ROUTINES INSTEAD!!!                          */
-/*==============================================================================*/
-/* Use CFRetain instead!*/
-/*
- *  _HIObjectRetain()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
- *    Non-Carbon CFM:   not available
- */
-extern HIObjectRef 
-_HIObjectRetain(HIObjectRef inObject)                         AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
-
-
-/* Use CFRelease instead!*/
-/*
- *  _HIObjectRelease()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
- *    Non-Carbon CFM:   not available
- */
-extern void 
-_HIObjectRelease(HIObjectRef inObject)                        AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
-
-
-/* Use CFGetRetainCount instead!*/
-/*
- *  _HIObjectGetRetainCount()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
- *    Non-Carbon CFM:   not available
- */
-extern UInt32 
-_HIObjectGetRetainCount(HIObjectRef inObject)                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
-
-
-/* Use CFEqual instead!*/
-/*
- *  _HIObjectIsEqual()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
- *    Non-Carbon CFM:   not available
- */
-extern Boolean 
-_HIObjectIsEqual(
-  HIObjectRef   inObject,
-  HIObjectRef   inOtherObject)                                AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
-
-
-/*
-   These are no longer necessary! Just put the HIObjectRef directly into
-   an array using the standard CFType callbacks.
-*/
-/*
- *  kHIObjectCFArrayCallbacks
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
- *    Non-Carbon CFM:   not available
- */
-extern const CFArrayCallBacks kHIObjectCFArrayCallbacks;
-/*
- *  kHIObjectCFDictKeyCallbacks
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
- *    Non-Carbon CFM:   not available
- */
-extern const CFDictionaryKeyCallBacks kHIObjectCFDictKeyCallbacks;
-/*
- *  kHIObjectCFDictValueCallbacks
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
- *    Non-Carbon CFM:   not available
- */
-extern const CFDictionaryValueCallBacks kHIObjectCFDictValueCallbacks;
 
 
 

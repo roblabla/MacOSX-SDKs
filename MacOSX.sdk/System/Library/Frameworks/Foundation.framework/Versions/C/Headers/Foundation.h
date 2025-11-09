@@ -1,5 +1,5 @@
 /*	Foundation.h
-	Copyright 1994-2002, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2003, Apple, Inc. All rights reserved.
 */
 
 #import <objc/objc.h>
@@ -28,6 +28,7 @@
 #import <Foundation/NSDistributedLock.h>
 #import <Foundation/NSDistributedNotificationCenter.h>
 #import <Foundation/NSEnumerator.h>
+#import <Foundation/NSError.h>
 #import <Foundation/NSException.h>
 #import <Foundation/NSFileHandle.h>
 #import <Foundation/NSFileManager.h>
@@ -36,9 +37,11 @@
 #import <Foundation/NSHashTable.h>
 #import <Foundation/NSHFSFileTypes.h>
 #import <Foundation/NSHost.h>
+#import <Foundation/NSIndexSet.h>
 #import <Foundation/NSInvocation.h>
 #import <Foundation/NSJavaSetup.h>
 #import <Foundation/NSKeyValueCoding.h>
+#import <Foundation/NSKeyValueObserving.h>
 #import <Foundation/NSKeyedArchiver.h>
 #import <Foundation/NSLock.h>
 #import <Foundation/NSMapTable.h>
@@ -62,7 +65,9 @@
 #import <Foundation/NSRunLoop.h>
 #import <Foundation/NSScanner.h>
 #import <Foundation/NSSet.h>
+#import <Foundation/NSSortDescriptor.h>
 #import <Foundation/NSSpellServer.h>
+#import <Foundation/NSStream.h>
 #import <Foundation/NSString.h>
 #import <Foundation/NSTask.h>
 #import <Foundation/NSThread.h>
@@ -73,6 +78,8 @@
 #import <Foundation/NSURLHandle.h>
 #import <Foundation/NSUserDefaults.h>
 #import <Foundation/NSValue.h>
+#import <Foundation/NSValueTransformer.h>
+#import <Foundation/NSXMLParser.h>
 #import <Foundation/NSZone.h>
 
 #import <Foundation/NSAppleEventDescriptor.h>
@@ -94,7 +101,6 @@
 // a runtime check for Foundation-462.1 or later.
 #import <AvailabilityMacros.h>
 #if defined(MAC_OS_X_VERSION_10_2) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2)
-#import <Foundation/NSError.h>
 #import <Foundation/NSURLAuthenticationChallenge.h>
 #import <Foundation/NSURLCredential.h>
 #import <Foundation/NSURLCredentialStorage.h>

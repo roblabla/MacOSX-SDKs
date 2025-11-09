@@ -162,7 +162,6 @@
 extern "C" {
 #endif
 
-
 //=============================================================================
 //	Types
 //=============================================================================
@@ -378,6 +377,10 @@ typedef void
 //	Structs
 //=============================================================================
 
+#if PRAGMA_STRUCT_ALIGN
+	#pragma options align=power
+#endif
+
 //  -----------------------------------------------------------------------------
 /*!
 	@struct			MIDIPacket
@@ -444,6 +447,11 @@ struct MIDIPacketList
 	MIDIPacket  		packet[1];
 };
 
+#if PRAGMA_STRUCT_ALIGN
+	#pragma options align=reset
+#endif
+
+
 //  -----------------------------------------------------------------------------
 /*!
 	@struct			MIDISysexSendRequest
@@ -508,14 +516,16 @@ typedef SInt32			MIDINotificationMessageID;
 										or destroyed.  No data.  New for CoreMIDI 1.3.
 	@constant	kMIDIMsgSerialPortOwnerChanged	A persistent MIDI Thru connection was created
 										or destroyed.  No data.  New for CoreMIDI 1.3.
+	@constant	kMIDIMsgIOError			A driver I/O error occurred.
 */
 enum {
-	kMIDIMsgSetupChanged		= 1,
-	kMIDIMsgObjectAdded			= 2,
-	kMIDIMsgObjectRemoved		= 3,
-	kMIDIMsgPropertyChanged		= 4,
-	kMIDIMsgThruConnectionsChanged = 5,
-	kMIDIMsgSerialPortOwnerChanged = 6
+	kMIDIMsgSetupChanged			= 1,
+	kMIDIMsgObjectAdded				= 2,
+	kMIDIMsgObjectRemoved			= 3,
+	kMIDIMsgPropertyChanged			= 4,
+	kMIDIMsgThruConnectionsChanged	= 5,
+	kMIDIMsgSerialPortOwnerChanged	= 6,
+	kMIDIMsgIOError					= 7
 };
 
 /*!
@@ -556,6 +566,14 @@ typedef struct MIDIObjectPropertyChangeNotification
 	MIDIObjectType				objectType;
 	CFStringRef					propertyName;
 } MIDIObjectPropertyChangeNotification;
+
+typedef struct MIDIIOErrorNotification
+{
+	MIDINotificationMessageID	messageID;
+	ByteCount					messageSize;
+	MIDIDeviceRef				driverDevice;
+	OSStatus					errorCode;
+} MIDIIOErrorNotification;
 
 //=============================================================================
 //	Error codes
@@ -631,6 +649,10 @@ extern const CFStringRef	kMIDIPropertyModel;
 		may fail if the chosen ID is not unique.
 */
 extern const CFStringRef	kMIDIPropertyUniqueID;
+
+enum {
+	kMIDIInvalidUniqueID = 0
+};
 
 /*!
 	@constant		kMIDIPropertyDeviceID
@@ -851,9 +873,12 @@ extern const CFStringRef	kMIDIPropertyUserPatchNameFile;
 					maps to a CFStringRef which is the name of the patchNameList
 					element in the overriding document.
 					
-					key "currentModes" maps to a 16-element CFArrayRef, each element
+					key "currentChannelNameSets" maps to a 16-element CFArrayRef, each element
 					of which is a CFStringRef of the name of the current mode for
 					each of the 16 MIDI channels.
+					
+					key "currentDeviceMode" maps to a CFStringRef containing the name
+					of the device's mode.
 					
 					Clients setting this property must take particular care to preserve dictionary
 					values other than the ones they are interested in changing, and
@@ -921,6 +946,16 @@ extern const CFStringRef	kMIDIPropertyIsEffectUnit;
 extern const CFStringRef	kMIDIPropertyMaxReceiveChannels;
 extern const CFStringRef	kMIDIPropertyMaxTransmitChannels;
 
+/*!
+	@constant		kMIDIPropertyDriverDeviceEditorApp
+	@discussion		device property, string, contains the full path to
+					an application which knows how to configure this driver-owned
+					devices. Drivers may set this property on their owned devices.
+					Applications must not write to it.
+															
+					New for CoreMIDI 1.4.
+*/
+extern const CFStringRef	kMIDIPropertyDriverDeviceEditorApp;
 
 // ______________________________________________________________________________
 //	MIDIClient
@@ -1202,7 +1237,7 @@ MIDIGetDestination(	ItemCount destIndex0 );
 
 //  -----------------------------------------------------------------------------
 /*!
-	@function		MIDIGetNumberOfExternalDevicees
+	@function		MIDIGetNumberOfExternalDevices
 
 	@abstract 		Returns the number of external MIDI devices in the system.
 

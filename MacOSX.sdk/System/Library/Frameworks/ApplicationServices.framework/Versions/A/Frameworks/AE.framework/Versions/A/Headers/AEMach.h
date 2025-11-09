@@ -3,9 +3,9 @@
  
      Contains:   AppleEvent over mach_msg interfaces
  
-     Version:    AppleEvents-242~1
+     Version:    AppleEvents-275~1
  
-     Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -26,7 +26,13 @@
 
 
 #if TARGET_RT_MAC_MACHO
+#ifdef __cplusplus
+extern "C" {
+#endif
 #include <mach/message.h>
+#ifdef __cplusplus
+}
+#endif
 #endif
 
 #include <AvailabilityMacros.h>
@@ -55,16 +61,24 @@ extern "C" {
  * Of note is a new attribute for an AppleEvent, keyReplyPortAttr.
  * This specifies the mach_port_t to which an AppleEvent reply
  * should be directed.  By default, replies are sent to the
- * processes registered port where they are culled from the normal  
+ * processes' registered port where they are culled from the normal  
  * event stream if there is an outstanding AESend + kAEWaitReply.
  * But it may be desirable for a client to specify their own port to
- * receive quued replies.
- * (In the case of AESendMessage with kAEWaitReply specified, an 
- * anonymous port will be used to block until the reply is received.)
+ * receive queud replies.
+ *
+ * In the case of AESendMessage with kAEWaitReply specified, an 
+ * anonymous port will be used to block until the reply is received.
  *
  * Not supplied is a convenience routine to block a server and
  * process AppleEvents.  This implementation will be detailed in a
  * tech note.
+ *
+ * In general, the AppleEvent APIs are thread safe, but the mechanism
+ * of their delivery (AEProcessAppleEvent, AEResumeTheCurrentEvent)
+ * are not.  If you're attemping to write a thread safe server, you
+ * should avoid AppleEvent routines that don't explicitly state their
+ * thread safety.
+ *
  **/
 enum {
   keyReplyPortAttr              = 'repp'
@@ -76,16 +90,19 @@ enum {
 };
 
 /*-
- * Return the mach_port_t that was registered with the bootstrap
- * server for this process.  This port is considered public, and
- * will be used by other applications to target your process.  You
- * are free to use this mach_port_t to add to a port set, if and
- * only if, you are not also using routines from HIToolbox.  In that
- * case, HIToolbox retains control of this port and AppleEvents are
- * dispatched through the main event loop.  
+ * Return the mach_port_t that was registered by the AppleEvent
+ * framework for this process.  This port is considered public, and
+ * will be used by other applications to target your process.  You are
+ * free to use this mach_port_t to add to a port set, if and only if,
+ * you are not also using routines from HIToolbox.  In that case,
+ * HIToolbox retains control of this port and AppleEvents are
+ * dispatched through the main event loop.
  **/
 /*
  *  AEGetRegisteredMachPort()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -104,10 +121,18 @@ AEGetRegisteredMachPort(void)                                 AVAILABLE_MAC_OS_X
  *
  *  AESendMessage(reply, NULL, kAENoReply, kAENormalPriority, kAEDefaultTimeout);
  *
+ * If this message is a reply, the 'reply' parameter will be
+ * initialized to { typeNull, 0 }, and the 'event' parameter will be
+ * the AppleEvent reply with a event class attribute of
+ * typeAppleEvent, class typeAppleEventReply:
+ *
  * The contents of the header are invalid after this call.  
  **/
 /*
  *  AEDecodeMessage()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -130,6 +155,9 @@ AEDecodeMessage(
 /*
  *  AEProcessMessage()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe since version 10.3
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
@@ -147,6 +175,9 @@ AEProcessMessage(mach_msg_header_t * header)                  AVAILABLE_MAC_OS_X
  **/
 /*
  *  AESendMessage()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework

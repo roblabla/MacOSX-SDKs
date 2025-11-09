@@ -1,11 +1,9 @@
 /*	CFSocket.h
-	Copyright 1999-2002, Apple, Inc. All rights reserved.
+	Copyright (c) 1999-2003, Apple, Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFSOCKET__)
 #define __COREFOUNDATION_CFSOCKET__ 1
-
-#if !defined(__MACOS8__)
 
 #include <CoreFoundation/CFBase.h>
 #include <CoreFoundation/CFData.h>
@@ -57,7 +55,13 @@ will never be sent more than once for a given socket.
 The callback types may also have kCFSocketWriteCallBack added to
 them, if large amounts of data are to be sent rapidly over the 
 socket and notification is desired when there is space in the
-kernel buffers so that the socket is writable again.   
+kernel buffers so that the socket is writable again.  
+
+With a connection-oriented socket, if the connection is broken from the
+other end, then one final kCFSocketReadCallBack or kCFSocketDataCallBack 
+will occur.  In the case of kCFSocketReadCallBack, the underlying socket 
+will have 0 bytes available to read.  In the case of kCFSocketDataCallBack,
+the data argument will be a CFDataRef of length 0.
 
 There are socket flags that may be set to control whether callbacks of 
 a given type are automatically reenabled after they are triggered, and 
@@ -212,8 +216,6 @@ CF_EXPORT const CFStringRef kCFSocketRetrieveCommand;
 #if defined(__cplusplus)
 }
 #endif /* __cplusplus */
-
-#endif /* ! __MACOS8__ */
 
 #endif /* ! __COREFOUNDATION_CFSOCKET__ */
 

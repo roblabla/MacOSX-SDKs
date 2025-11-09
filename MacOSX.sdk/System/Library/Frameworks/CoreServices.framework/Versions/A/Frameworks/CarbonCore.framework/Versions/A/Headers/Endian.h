@@ -3,9 +3,9 @@
  
      Contains:   Endian swapping utilties
  
-     Version:    CarbonCore-472~1
+     Version:    CarbonCore-545~1
  
-     Copyright:  © 1997-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1997-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -30,6 +30,10 @@
 
 #if PRAGMA_ONCE
 #pragma once
+#endif
+
+#ifdef __cplusplus
+extern "C" {
 #endif
 
 #pragma options align=mac68k
@@ -60,7 +64,9 @@
             
     If long long's are not supported, you cannot get 64-bit quantities as a single value.
     The macros are not defined in that case.
-    
+
+    For gcc, the macros build on top of the inline byte swapping
+    routines from <libkern/OSByteOrder.h>, which may have better performance.
     
     
                                 <<< W A R N I N G >>>
@@ -71,423 +77,85 @@
     
  */
 /*
-   Note: These functions are currently not implemented in any library
-         and are only listed here as function prototypes to document the macros
+ If building for Mac OS X with GCC, use the inline versions.
+ Otherwise, use the macros.
 */
-/*
- *  EndianS16_BtoN()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
+#ifdef __GNUC__
 
+#include <libkern/OSByteOrder.h>
 
 /*
- *  EndianS16_NtoB()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/*
- *  EndianS16_LtoN()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/*
- *  EndianS16_NtoL()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/*
- *  EndianS16_LtoB()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/*
- *  EndianS16_BtoL()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/*
- *  EndianU16_BtoN()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/*
- *  EndianU16_NtoB()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/*
- *  EndianU16_LtoN()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/*
- *  EndianU16_NtoL()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/*
- *  EndianU16_LtoB()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/*
- *  EndianU16_BtoL()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/*
- *  EndianS32_BtoN()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/*
- *  EndianS32_NtoB()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/*
- *  EndianS32_LtoN()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/*
- *  EndianS32_NtoL()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/*
- *  EndianS32_LtoB()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/*
- *  EndianS32_BtoL()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/*
- *  EndianU32_BtoN()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/*
- *  EndianU32_NtoB()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/*
- *  EndianU32_LtoN()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/*
- *  EndianU32_NtoL()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/*
- *  EndianU32_LtoB()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/*
- *  EndianU32_BtoL()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-#if !TYPE_LONGLONG
-/*
-   Note: If these Int64 functions ever were implemented in a library,
-         we would need two libraries, one for compilers that
-         support long long and one for other compilers.
-*/
-/*
- *  EndianS64_BtoN()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/*
- *  EndianS64_NtoB()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/*
- *  EndianS64_LtoN()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/*
- *  EndianS64_NtoL()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/*
- *  EndianS64_LtoB()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/*
- *  EndianS64_BtoL()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/*
- *  EndianU64_BtoN()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/*
- *  EndianU64_NtoB()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/*
- *  EndianU64_LtoN()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/*
- *  EndianU64_NtoL()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/*
- *  EndianU64_LtoB()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/*
- *  EndianU64_BtoL()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-#endif  /* !TYPE_LONGLONG */
-
-/*
-   These types are used for structures that contain data that is
-   always in BigEndian format.  This extra typing prevents little
-   endian code from directly changing the data, thus saving much
-   time in the debugger.
+  Implement low level Å_Swap functions.
+  
+   These *always* swap the data, without regard of its underlying
+ endian'ness.  If a constant, these will use the constant swapper
+   macro.  
 */
 
-#if TARGET_RT_LITTLE_ENDIAN
-struct BigEndianLong {
-  long                bigEndianValue;
-};
-typedef struct BigEndianLong            BigEndianLong;
-struct BigEndianUnsignedLong {
-  unsigned long       bigEndianValue;
-};
-typedef struct BigEndianUnsignedLong    BigEndianUnsignedLong;
-struct BigEndianShort {
-  short               bigEndianValue;
-};
-typedef struct BigEndianShort           BigEndianShort;
-struct BigEndianUnsignedShort {
-  unsigned short      bigEndianValue;
-};
-typedef struct BigEndianUnsignedShort   BigEndianUnsignedShort;
-struct BigEndianFixed {
-  Fixed               bigEndianValue;
-};
-typedef struct BigEndianFixed           BigEndianFixed;
-struct BigEndianUnsignedFixed {
-  UnsignedFixed       bigEndianValue;
-};
-typedef struct BigEndianUnsignedFixed   BigEndianUnsignedFixed;
-struct BigEndianOSType {
-  OSType              bigEndianValue;
-};
-typedef struct BigEndianOSType          BigEndianOSType;
+#define Endian16_Swap(value)       (UInt16) (__builtin_constant_p(value) ? OSSwapConstInt16(value) : OSSwapInt16(value))
+#define Endian32_Swap(value)      (UInt32) (__builtin_constant_p(value) ? OSSwapConstInt32(value) : OSSwapInt32(value))
+#define Endian64_Swap(value)      (UInt64) (__builtin_constant_p(value) ? OSSwapConstInt64(value) : OSSwapInt64(value))
+
 #else
 
-typedef long                            BigEndianLong;
-typedef unsigned long                   BigEndianUnsignedLong;
-typedef short                           BigEndianShort;
-typedef unsigned short                  BigEndianUnsignedShort;
-typedef Fixed                           BigEndianFixed;
-typedef UnsignedFixed                   BigEndianUnsignedFixed;
-typedef OSType                          BigEndianOSType;
-#endif  /* TARGET_RT_LITTLE_ENDIAN */
+/*
+    Macro versions for non-gcc compilers
+*/
+
+#define Endian16_Swap(value)                 \
+        (((((UInt16)value)<<8) & 0xFF00)   | \
+         ((((UInt16)value)>>8) & 0x00FF))
+
+#define Endian32_Swap(value)                     \
+        (((((UInt32)value)<<24) & 0xFF000000)  | \
+         ((((UInt32)value)<< 8) & 0x00FF0000)  | \
+         ((((UInt32)value)>> 8) & 0x0000FF00)  | \
+         ((((UInt32)value)>>24) & 0x000000FF))
+
+
+#if TYPE_LONGLONG
+        #define Endian64_Swap(value)                                \
+                (((((UInt64)value)<<56) & 0xFF00000000000000ULL)  | \
+                 ((((UInt64)value)<<40) & 0x00FF000000000000ULL)  | \
+                 ((((UInt64)value)<<24) & 0x0000FF0000000000ULL)  | \
+                 ((((UInt64)value)<< 8) & 0x000000FF00000000ULL)  | \
+                 ((((UInt64)value)>> 8) & 0x00000000FF000000ULL)  | \
+                 ((((UInt64)value)>>24) & 0x0000000000FF0000ULL)  | \
+                 ((((UInt64)value)>>40) & 0x000000000000FF00ULL)  | \
+                 ((((UInt64)value)>>56) & 0x00000000000000FFULL))
+#else
+/* 
+    Note: When using compilers that don't support "long long",
+          Endian64_Swap must be implemented as glue. 
+*/
+#ifdef __cplusplus
+    inline static UInt64 Endian64_Swap(UInt64 value)
+    {
+        UInt64 temp;
+        ((UnsignedWide*)&temp)->lo = Endian32_Swap(((UnsignedWide*)&value)->hi);
+        ((UnsignedWide*)&temp)->hi = Endian32_Swap(((UnsignedWide*)&value)->lo);
+        return temp;
+    }
+#else
+/*
+ *  Endian64_Swap()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in CoreServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern UInt64 
+Endian64_Swap(UInt64 value)                                   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+#endif
+#endif  /* TYPE_LONGLONG */
+
+#endif  /* defined(__GNUC__) */
 
 
 /*
@@ -573,90 +241,60 @@ typedef OSType                          BigEndianOSType;
 #define EndianU64_BtoL(value)                ((UInt64)Endian64_Swap(value))
 
 
-
 /*
-    Implement low level Å_Swap functions.
-    
-        extern UInt16 Endian16_Swap(UInt16 value);
-        extern UInt32 Endian32_Swap(UInt32 value);
-        extern UInt64 Endian64_Swap(UInt64 value);
-        
-    Note: Depending on the processor, you might want to implement
-          these as function calls instead of macros.
-    
+   These types are used for structures that contain data that is
+   always in BigEndian format.  This extra typing prevents little
+   endian code from directly changing the data, thus saving much
+   time in the debugger.
 */
-/*
- *  Endian16_Swap()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
 
 
-/*
- *  Endian32_Swap()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
-
-
-/* override with macros */
-#define Endian16_Swap(value)                 \
-        (((((UInt16)value)<<8) & 0xFF00)   | \
-         ((((UInt16)value)>>8) & 0x00FF))
-
-#define Endian32_Swap(value)                     \
-        (((((UInt32)value)<<24) & 0xFF000000)  | \
-         ((((UInt32)value)<< 8) & 0x00FF0000)  | \
-         ((((UInt32)value)>> 8) & 0x0000FF00)  | \
-         ((((UInt32)value)>>24) & 0x000000FF))
-
-#if TYPE_LONGLONG
-        #define Endian64_Swap(value)                                \
-                (((((UInt64)value)<<56) & 0xFF00000000000000ULL)  | \
-                 ((((UInt64)value)<<40) & 0x00FF000000000000ULL)  | \
-                 ((((UInt64)value)<<24) & 0x0000FF0000000000ULL)  | \
-                 ((((UInt64)value)<< 8) & 0x000000FF00000000ULL)  | \
-                 ((((UInt64)value)>> 8) & 0x00000000FF000000ULL)  | \
-                 ((((UInt64)value)>>24) & 0x0000000000FF0000ULL)  | \
-                 ((((UInt64)value)>>40) & 0x000000000000FF00ULL)  | \
-                 ((((UInt64)value)>>56) & 0x00000000000000FFULL))
+#if TARGET_RT_LITTLE_ENDIAN
+struct BigEndianLong {
+  long                bigEndianValue;
+};
+typedef struct BigEndianLong            BigEndianLong;
+struct BigEndianUnsignedLong {
+  unsigned long       bigEndianValue;
+};
+typedef struct BigEndianUnsignedLong    BigEndianUnsignedLong;
+struct BigEndianShort {
+  short               bigEndianValue;
+};
+typedef struct BigEndianShort           BigEndianShort;
+struct BigEndianUnsignedShort {
+  unsigned short      bigEndianValue;
+};
+typedef struct BigEndianUnsignedShort   BigEndianUnsignedShort;
+struct BigEndianFixed {
+  Fixed               bigEndianValue;
+};
+typedef struct BigEndianFixed           BigEndianFixed;
+struct BigEndianUnsignedFixed {
+  UnsignedFixed       bigEndianValue;
+};
+typedef struct BigEndianUnsignedFixed   BigEndianUnsignedFixed;
+struct BigEndianOSType {
+  OSType              bigEndianValue;
+};
+typedef struct BigEndianOSType          BigEndianOSType;
 #else
-/* 
-    Note: When using compilers that don't support "long long",
-          Endian64_Swap must be implemented as glue. 
-*/
-#ifdef __cplusplus
-    inline static UInt64 Endian64_Swap(UInt64 value)
-    {
-        UInt64 temp;
-        ((UnsignedWide*)&temp)->lo = Endian32_Swap(((UnsignedWide*)&value)->hi);
-        ((UnsignedWide*)&temp)->hi = Endian32_Swap(((UnsignedWide*)&value)->lo);
-        return temp;
-    }
-#else
-/*
- *  Endian64_Swap()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   not available
- */
 
-
-#endif
-#endif  /* TYPE_LONGLONG */
-
+typedef long                            BigEndianLong;
+typedef unsigned long                   BigEndianUnsignedLong;
+typedef short                           BigEndianShort;
+typedef unsigned short                  BigEndianUnsignedShort;
+typedef Fixed                           BigEndianFixed;
+typedef UnsignedFixed                   BigEndianUnsignedFixed;
+typedef OSType                          BigEndianOSType;
+#endif  /* TARGET_RT_LITTLE_ENDIAN */
 
 
 #pragma options align=reset
 
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __ENDIAN__ */
 

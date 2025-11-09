@@ -3,9 +3,9 @@
  
      Contains:   Gestalt Interfaces.
  
-     Version:    CarbonCore-472~1
+     Version:    CarbonCore-545~1
  
-     Copyright:  © 1988-2002 by Apple Computer, Inc.  All rights reserved
+     Copyright:  © 1988-2003 by Apple Computer, Inc.  All rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -43,6 +43,83 @@ typedef STACK_UPP_TYPE(SelectorFunctionProcPtr)                 SelectorFunction
 /*
  *  Gestalt()
  *  
+ *  Summary:
+ *    Gestalt returns information about the operating environment.
+ *  
+ *  Discussion:
+ *    The Gestalt function places the information requested by the
+ *    selector parameter in the variable parameter response . Note that
+ *    Gestalt returns the response from all selectors in a long word,
+ *    which occupies 4 bytes. When not all 4 bytes are needed, the
+ *    significant information appears in the low-order byte or bytes.
+ *    Although the response parameter is declared as a variable
+ *    parameter, you cannot use it to pass information to Gestalt or to
+ *    a Gestalt selector function. Gestalt interprets the response
+ *    parameter as an address at which it is to place the result
+ *    returned by the selector function specified by the selector
+ *    parameter. Gestalt ignores any information already at that
+ *    address.
+ *    
+ *    The Apple-defined selector codes fall into two categories:
+ *    environmental selectors, which supply specific environmental
+ *    information you can use to control the behavior of your
+ *    application, and informational selectors, which supply
+ *    information you can't use to determine what hardware or software
+ *    features are available. You can use one of the selector codes
+ *    defined by Apple (listed in the "Constants" section beginning on
+ *    page 1-14 ) or a selector code defined by a third-party
+ *    product.
+ *    
+ *    The meaning of the value that Gestalt returns in the response
+ *    parameter depends on the selector code with which it was called.
+ *    For example, if you call Gestalt using the gestaltTimeMgrVersion
+ *    selector, it returns a version code in the response parameter. In
+ *    this case, a returned value of 3 indicates that the extended Time
+ *    Manager is available.
+ *    
+ *    In most cases, the last few characters in the selector's symbolic
+ *    name form a suffix that indicates what type of value you can
+ *    expect Gestalt to place in the response parameter. For example,
+ *    if the suffix in a Gestalt selector is Size , then Gestalt
+ *    returns a size in the response parameter.
+ *    
+ *    Attr:  A range of 32 bits, the meanings of which are defined by a
+ *    list of constants. Bit 0 is the least significant bit of the long
+ *    word.
+ *    Count: A number indicating how many of the indicated type of item
+ *    exist.
+ *    Size: A size, usually in bytes.
+ *    Table: The base address of a table.
+ *    Type: An index to a list of feature descriptions.
+ *    Version: A version number, which can be either a constant with a
+ *    defined meaning or an actual version number, usually stored as
+ *    four hexadecimal digits in the low-order word of the return
+ *    value. Implied decimal points may separate digits. The value
+ *    $0701, for example, returned in response to the
+ *    gestaltSystemVersion selector, represents system software version
+ *    7.0.1.
+ *    
+ *    Selectors that have the suffix Attr deserve special attention.
+ *    They cause Gestalt to return a bit field that your application
+ *    must interpret to determine whether a desired feature is present.
+ *    For example, the application-defined sample function
+ *    MyGetSoundAttr , defined in Listing 1-2 on page 1-6 , returns a
+ *    LongInt that contains the Sound Manager attributes field
+ *    retrieved from Gestalt . To determine whether a particular
+ *    feature is available, you need to look at the designated bit.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
+ *  Parameters:
+ *    
+ *    selector:
+ *      The selector to return information for
+ *    
+ *    response:
+ *      On exit, the requested information whose format depends on the
+ *      selector specified.
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -54,12 +131,42 @@ Gestalt(
   long *   response)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-
 /*
- *  ReplaceGestalt()
+ *  ReplaceGestalt()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use NewGestaltValue instead wherever possible.
+ *  
+ *  Summary:
+ *    Replaces the gestalt function associated with a selector.
+ *  
+ *  Discussion:
+ *    The ReplaceGestalt function replaces the selector function
+ *    associated with an existing selector code.
+ *    
+ *    So that your function can call the function previously associated
+ *    with the selector, ReplaceGestalt places the address of the old
+ *    selector function in the oldGestaltFunction parameter. If
+ *    ReplaceGestalt returns an error of any type, then the value of
+ *    oldGestaltFunction is undefined.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
+ *  Parameters:
+ *    
+ *    selector:
+ *      the selector to replace
+ *    
+ *    gestaltFunction:
+ *      a UPP for the new selector function
+ *    
+ *    oldGestaltFunction:
+ *      on exit, a pointer to the UPP of the previously associated with
+ *      the specified selector
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -67,27 +174,96 @@ extern OSErr
 ReplaceGestalt(
   OSType                 selector,
   SelectorFunctionUPP    gestaltFunction,
-  SelectorFunctionUPP *  oldGestaltFunction)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SelectorFunctionUPP *  oldGestaltFunction)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
 
 
 /*
- *  NewGestalt()
+ *  NewGestalt()   *** DEPRECATED ***
+ *  
+ *  Deprecated:
+ *    Use NewGestaltValue instead wherever possible.
+ *  
+ *  Summary:
+ *    Adds a selector code to those already recognized by Gestalt.
+ *  
+ *  Discussion:
+ *    The NewGestalt function registers a specified selector code with
+ *    the Gestalt Manager so that when the Gestalt function is called
+ *    with that selector code, the specified selector function is
+ *    executed. Before calling NewGestalt, you must define a selector
+ *    function callback. See SelectorFunctionProcPtr for a description
+ *    of how to define your selector function.
+ *    
+ *    Registering with the Gestalt Manager is a way for software such
+ *    as system extensions to make their presence known to potential
+ *    users of their services.
+ *    
+ *    In Mac OS X, the selector and replacement value are on a
+ *    per-context basis. That means they are available only to the
+ *    application or other code that installs them. You cannot use this
+ *    function to make information available to another process.
+ *     
+ *    A Gestalt selector registered with NewGestalt() can not be
+ *    deleted.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
+ *  Parameters:
+ *    
+ *    selector:
+ *      the selector to create
+ *    
+ *    gestaltFunction:
+ *      a UPP for the new selector function, which Gestalt executes
+ *      when it receives the new selector code. See
+ *      SelectorFunctionProcPtr for more information on the callback
+ *      you need to provide.
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern OSErr 
 NewGestalt(
   OSType                selector,
-  SelectorFunctionUPP   gestaltFunction)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SelectorFunctionUPP   gestaltFunction)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
 
-
-/*  The GestaltValue functions are available in System 7.5 and later*/
 
 /*
  *  NewGestaltValue()
+ *  
+ *  Summary:
+ *    Adds a selector code to those already recognized by Gestalt.
+ *  
+ *  Discussion:
+ *    The NewGestalt function registers a specified selector code with
+ *    the Gestalt Manager so that when the Gestalt function is called
+ *    with that selector code, the specified selector function is
+ *    executed. Before calling NewGestalt, you must define a selector
+ *    function callback. See SelectorFunctionProcPtr for a description
+ *    of how to define your selector function.
+ *    
+ *    Registering with the Gestalt Manager is a way for software such
+ *    as system extensions to make their presence known to potential
+ *    users of their services.
+ *    
+ *    In Mac OS X, the selector and replacement value are on a
+ *    per-context basis. That means they are available only to the
+ *    application or other code that installs them. You cannot use this
+ *    function to make information available to another process.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
+ *  Parameters:
+ *    
+ *    selector:
+ *      the selector to create
+ *    
+ *    newValue:
+ *      the value to return for the new selector code.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -103,6 +279,32 @@ NewGestaltValue(
 /*
  *  ReplaceGestaltValue()
  *  
+ *  Summary:
+ *    Replaces the value that the function Gestalt returns for a
+ *    specified selector code with the value provided to the function.
+ *  
+ *  Discussion:
+ *    You use the function ReplaceGestaltValue to replace an existing
+ *    value. You should not call this function to introduce a value
+ *    that doesn't already exist; instead call the function
+ *    NewGestaltValue.
+ *    
+ *    In Mac OS X, the selector and replacement value are on a
+ *    per-context basis. That means they are available only to the
+ *    application or other code that installs them. You cannot use this
+ *    function to make information available to another process.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
+ *  Parameters:
+ *    
+ *    selector:
+ *      the selector to create
+ *    
+ *    replacementValue:
+ *      the new value to return for the new selector code.
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -117,6 +319,31 @@ ReplaceGestaltValue(
 /*
  *  SetGestaltValue()
  *  
+ *  Summary:
+ *    Sets the value the function Gestalt will return for a specified
+ *    selector code, installing the selector if it was not already
+ *    installed.
+ *  
+ *  Discussion:
+ *    You use SetGestaltValue to establish a value for a selector,
+ *    without regard to whether the selector was already installed.
+ *     
+ *    In Mac OS X, the selector and replacement value are on a
+ *    per-context basis. That means they are available only to the
+ *    application or other code that installs them. You cannot use this
+ *    function to make information available to another process.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
+ *  Parameters:
+ *    
+ *    selector:
+ *      the selector to create
+ *    
+ *    newValue:
+ *      the new value to return for the new selector code.
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -130,6 +357,27 @@ SetGestaltValue(
 
 /*
  *  DeleteGestaltValue()
+ *  
+ *  Summary:
+ *    Deletes a Gestalt selector code so that it is no longer
+ *    recognized by Gestalt.
+ *  
+ *  Discussion:
+ *    After calling this function, subsequent query or replacement
+ *    calls for the selector code will fail as if the selector had
+ *    never been installed 
+ *    
+ *    In Mac OS X, the selector and replacement value are on a
+ *    per-context basis. That means they are available only to the
+ *    application or other code that installs them.
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
+ *  Parameters:
+ *    
+ *    selector:
+ *      the selector to delete
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -323,6 +571,10 @@ enum {
 };
 
 enum {
+  gestaltProcessorCacheLineSize = 'csiz' /* The size, in bytes, of the processor cache line. */
+};
+
+enum {
   gestaltCollectionMgrVersion   = 'cltn' /* Collection Manager version */
 };
 
@@ -384,30 +636,29 @@ enum {
     The gestaltNativeCPUtype ('cput') selector can be used to determine the
     native CPU type for all Macs running System 7.5 or later.
 
-    The 'cput' selector is not available when running System 7.0 (or earlier)
-    on most 68K machines.  If 'cput' is not available, then the 'proc' selector
-    should be used to determine the processor type.
-
-    An application should always try the 'cput' selector first.  This is because,
-    on PowerPC machines, the 'proc' selector will reflect the CPU type of the
-    emulator's "virtual processor" rather than the native CPU type.
-
-    The values specified below are accurate.  Prior versions of the Gestalt
-    interface file contained values that were off by one.
-
-    The Quadra 840AV and the Quadra 660AV contain a bug in the ROM code that
-    causes the 'cput' selector to respond with the value 5.  This behavior
-    occurs only when running System 7.1.  System 7.5 fixes the bug by replacing
-    the faulty 'cput' selector function with the correct one.
-
+    However, the use of these selectors for pretty much anything is discouraged.
+    If you are trying to determine if you can use a particular processor or
+    operating system feature, it would be much better to check directly for that
+    feature using one of the apis for doing so -- like, sysctl() or sysctlbyname().
+    Those apis return information directly from the operating system and kernel.  By
+    using those apis you may be able to avoid linking against Frameworks which you
+    otherwise don't need, and may lessen the memory and code footprint of your
+    applications.
+    
     The gestaltNativeCPUfamily ('cpuf') selector can be used to determine the
-    general family the native CPU is in. This can be helpful for determing how
-    blitters and things should be written. In general, it is smarter to use this
-    selector (when available) than gestaltNativeCPUtype since newer processors
-    in the same family can be handled without revising your code.
+    general family the native CPU is in.
 
     gestaltNativeCPUfamily uses the same results as gestaltNativeCPUtype, but
     will only return certain CPU values.
+    
+    IMPORTANT NOTE: gestaltNativeCPUFamily may no longer be updated for any new
+                    processor families introduced after the 970.  If there are
+                    processor specific features you need to be checking for in
+                    your code, use one of the appropriate apis to get for those
+                    exact features instead of assuming that all members of a given
+                    cpu family exhibit the same behaviour.  The most appropriate api
+                    to look at is sysctl() and sysctlbyname(), which return information
+                    direct from the kernel about the system.
 */
 enum {
   gestaltNativeCPUtype          = 'cput', /* Native CPU type                          */
@@ -430,8 +681,10 @@ enum {
 };
 
 enum {
-  gestaltCPUApollo              = 0x0111, /* Apollo , Altivec */
-  gestaltCPU750FX               = 0x0120 /* Sahara,G3 like thing */
+  gestaltCPUApollo              = 0x0111, /* Apollo , Altivec, G4 7455 */
+  gestaltCPUG47447              = 0x0112,
+  gestaltCPU750FX               = 0x0120, /* Sahara,G3 like thing */
+  gestaltCPU970                 = 0x0139
 };
 
 enum {
@@ -796,6 +1049,16 @@ enum {
   gestaltPortable2001JISKbd     = 207   /* (0xCF) PowerBook and iBook Japanese (JIS) Keyboard with function key moves.                   */
 };
 
+
+enum {
+  gestaltUSBProF16ANSIKbd       = 34,   /* (0x22) USB Pro Keyboard w/ F16 key Domestic (ANSI) Keyboard */
+  gestaltUSBProF16ISOKbd        = 35,   /* (0x23) USB Pro Keyboard w/ F16 key International (ISO) Keyboard */
+  gestaltUSBProF16JISKbd        = 36,   /* (0x24) USB Pro Keyboard w/ F16 key Japanese (JIS) Keyboard */
+  gestaltProF16ANSIKbd          = 31,   /* (0x1F) Pro Keyboard w/F16 key Domestic (ANSI) Keyboard */
+  gestaltProF16ISOKbd           = 32,   /* (0x20) Pro Keyboard w/F16 key International (ISO) Keyboard */
+  gestaltProF16JISKbd           = 33    /* (0x21) Pro Keyboard w/F16 key Japanese (JIS) Keyboard */
+};
+
 /*
     This gestalt indicates the highest UDF version that the active UDF implementation supports.
     The value should be assembled from a read version (upper word) and a write version (lower word)
@@ -1091,13 +1354,15 @@ enum {
   gestaltMenuMgrRetainsIconRefBit = 3,  /* SetMenuItemIconHandle, when passed an IconRef, calls AcquireIconRef*/
   gestaltMenuMgrSendsMenuBoundsToDefProcBit = 4, /* kMenuSizeMsg and kMenuPopUpMsg have menu bounding rect information*/
   gestaltMenuMgrMoreThanFiveMenusDeepBit = 5, /* the Menu Manager supports hierarchical menus more than five deep*/
+  gestaltMenuMgrCGImageMenuTitleBit = 6, /* SetMenuTitleIcon supports CGImageRefs*/
                                         /* masks for the above bits*/
   gestaltMenuMgrPresentMask     = (1L << gestaltMenuMgrPresentBit),
   gestaltMenuMgrAquaLayoutMask  = (1L << gestaltMenuMgrAquaLayoutBit),
   gestaltMenuMgrMultipleItemsWithCommandIDMask = (1L << gestaltMenuMgrMultipleItemsWithCommandIDBit),
   gestaltMenuMgrRetainsIconRefMask = (1L << gestaltMenuMgrRetainsIconRefBit),
   gestaltMenuMgrSendsMenuBoundsToDefProcMask = (1L << gestaltMenuMgrSendsMenuBoundsToDefProcBit),
-  gestaltMenuMgrMoreThanFiveMenusDeepMask = (1L << gestaltMenuMgrMoreThanFiveMenusDeepBit)
+  gestaltMenuMgrMoreThanFiveMenusDeepMask = (1L << gestaltMenuMgrMoreThanFiveMenusDeepBit),
+  gestaltMenuMgrCGImageMenuTitleMask = (1L << gestaltMenuMgrCGImageMenuTitleBit)
 };
 
 
@@ -1307,7 +1572,11 @@ enum {
 };
 
 enum {
-  gestaltProcClkSpeed           = 'pclk' /* processor clock speed in hertz */
+  gestaltProcClkSpeed           = 'pclk' /* processor clock speed in hertz (an unsigned long) */
+};
+
+enum {
+  gestaltProcClkSpeedMHz        = 'mclk' /* processor clock speed in megahertz (an unsigned long) */
 };
 
 enum {
@@ -1379,6 +1648,11 @@ enum {
   gestaltPPCSupportsOutgoingTCP_IP = 0x0200
 };
 
+/*
+    Programs which need to know information about particular features of the processor should
+    migrate to using sysctl() and sysctlbyname() to get this kind of information.  No new
+    information will be added to the 'ppcf' selector going forward.
+*/
 enum {
   gestaltPowerPCProcessorFeatures = 'ppcf', /* Optional PowerPC processor features */
   gestaltPowerPCHasGraphicsInstructions = 0, /* has fres, frsqrte, and fsel instructions */
@@ -1386,7 +1660,11 @@ enum {
   gestaltPowerPCHasSquareRootInstructions = 2, /* has fsqrt and fsqrts instructions */
   gestaltPowerPCHasDCBAInstruction = 3, /* has dcba instruction */
   gestaltPowerPCHasVectorInstructions = 4, /* has vector instructions */
-  gestaltPowerPCHasDataStreams  = 5     /* has dst, dstt, dstst, dss, and dssall instructions */
+  gestaltPowerPCHasDataStreams  = 5,    /* has dst, dstt, dstst, dss, and dssall instructions */
+  gestaltPowerPCHas64BitSupport = 6,    /* double word LSU/ALU, etc. */
+  gestaltPowerPCHasDCBTStreams  = 7,    /* TH field of DCBT recognized */
+  gestaltPowerPCASArchitecture  = 8,    /* chip uses new 'A/S' architecture */
+  gestaltPowerPCIgnoresDCBST    = 9     /* */
 };
 
 enum {
@@ -1506,6 +1784,17 @@ enum {
 };
 
 enum {
+  gestaltQuickTimeThreadSafeFeaturesAttr = 'qtth', /* Quicktime thread safety attributes */
+  gestaltQuickTimeThreadSafeICM = 0,
+  gestaltQuickTimeThreadSafeMovieToolbox = 1,
+  gestaltQuickTimeThreadSafeMovieImport = 2,
+  gestaltQuickTimeThreadSafeMovieExport = 3,
+  gestaltQuickTimeThreadSafeGraphicsImport = 4,
+  gestaltQuickTimeThreadSafeGraphicsExport = 5,
+  gestaltQuickTimeThreadSafeMoviePlayback = 6
+};
+
+enum {
   gestaltQTVRMgrAttr            = 'qtvr', /* QuickTime VR attributes                               */
   gestaltQTVRMgrPresent         = 0,    /* QTVR API is present                                   */
   gestaltQTVRObjMoviesPresent   = 1,    /* QTVR runtime knows about object movies                */
@@ -1517,8 +1806,24 @@ enum {
   gestaltQTVRMgrVers            = 'qtvv' /* QuickTime VR version                                  */
 };
 
+/*    
+    Because some PowerPC machines now support very large physical memory capacities, including
+    some above the maximum value which can held in a 32 bit quantity, there is now a new selector,
+    gestaltPhysicalRAMSizeInMegabytes, which returns the size of physical memory scaled
+    in megabytes.  It is recommended that code transition to using this new selector if
+    it wants to get a useful value for the amount of physical memory on the system.  Code can
+    also use the sysctl() and sysctlbyname() BSD calls to get these kinds of values.
+    
+    For compatability with code which assumed that the value in returned by the
+    gestaltPhysicalRAMSize selector would be a signed quantity of bytes, this selector will
+    now return 2 gigabytes-1 ( LONG_MAX ) if the system has 2 gigabytes of physical memory or more.
+*/
 enum {
-  gestaltPhysicalRAMSize        = 'ram ' /* physical RAM size */
+  gestaltPhysicalRAMSize        = 'ram ' /* physical RAM size, in bytes */
+};
+
+enum {
+  gestaltPhysicalRAMSizeInMegabytes = 'ramm' /* physical RAM size, scaled in megabytes */
 };
 
 enum {
@@ -1698,10 +2003,7 @@ enum {
 enum {
   gestaltSysArchitecture        = 'sysa', /* Native System Architecture */
   gestalt68k                    = 1,    /* Motorola MC68k architecture */
-  gestaltPowerPC                = 2     /* IBM PowerPC architecture */
-};
-
-enum {
+  gestaltPowerPC                = 2,    /* IBM PowerPC architecture */
   gestaltIntel                  = 10    /* Intel x86 architecture */
 };
 
@@ -1805,7 +2107,8 @@ enum {
 enum {
   gestaltTSMgrVersion           = 'tsmv', /* Text Services Mgr version, if present */
   gestaltTSMgr15                = 0x0150,
-  gestaltTSMgr20                = 0x0200
+  gestaltTSMgr20                = 0x0200,
+  gestaltTSMgr22                = 0x0220
 };
 
 enum {
@@ -1845,7 +2148,8 @@ enum {
   gestaltATSUUpdate3            = (4 << 16), /* ATSUI version 2.0 */
   gestaltATSUUpdate4            = (5 << 16), /* ATSUI version in Mac OS X - SoftwareUpdate 1-4 for Mac OS 10.0.1 - 10.0.4 */
   gestaltATSUUpdate5            = (6 << 16), /* ATSUI version 2.3 in MacOS 10.1 */
-  gestaltATSUUpdate6            = (7 << 16) /* ATSUI version 2.4 in MacOS 10.2 */
+  gestaltATSUUpdate6            = (7 << 16), /* ATSUI version 2.4 in MacOS 10.2 */
+  gestaltATSUUpdate7            = (8 << 16) /* ATSUI version 2.5 in MacOS 10.3 */
 };
 
 enum {
@@ -1867,7 +2171,14 @@ enum {
   gestaltATSUPositionToCursorFeature = 0x00000010, /* features introduced in ATSUI version 2.4 */
   gestaltATSUBatchBreakLinesFeature = 0x00000010, /* feature introduced in ATSUI version 2.4 */
   gestaltATSUTabSupportFeature  = 0x00000010, /* features introduced in ATSUI version 2.4 */
-  gestaltATSUDirectAccess       = 0x00000010 /* features introduced in ATSUI version 2.4 */
+  gestaltATSUDirectAccess       = 0x00000010, /* features introduced in ATSUI version 2.4 */
+  gestaltATSUDecimalTabFeature  = 0x00000020, /* feature introduced in ATSUI version 2.5 */
+  gestaltATSUBiDiCursorPositionFeature = 0x00000020, /* feature introduced in ATSUI version 2.5 */
+  gestaltATSUNearestCharLineBreakFeature = 0x00000020, /* feature introduced in ATSUI version 2.5 */
+  gestaltATSUHighlightColorControlFeature = 0x00000020, /* feature introduced in ATSUI version 2.5 */
+  gestaltATSUUnderlineOptionsStyleFeature = 0x00000020, /* feature introduced in ATSUI version 2.5 */
+  gestaltATSUStrikeThroughStyleFeature = 0x00000020, /* feature introduced in ATSUI version 2.5 */
+  gestaltATSUDropShadowStyleFeature = 0x00000020 /* feature introduced in ATSUI version 2.5 */
 };
 
 enum {
@@ -1955,7 +2266,21 @@ enum {
 };
 
 
-#if TARGET_OS_WIN32
+/* gestaltX86VectorUnit returns the vector unit type (if any)
+   available and supported by both the current processor and operating
+   system */
+enum {
+  gestaltX86VectorUnit          = 'x86v',
+  gestaltX86VectorUnitNone      = 0,
+  gestaltX86VectorUnitSSE2      = 4,
+  gestaltX86VectorUnitSSE       = 3,
+  gestaltX86VectorUnitMMX       = 2
+};
+
+/* gestaltX86Features is a convenience for 'cpuid' instruction.  Note
+   that even though the processor may support a specific feature, the
+   OS may not support all of these features.  These bitfields
+   correspond directly to the bits returned by cpuid */
 enum {
   gestaltX86Features            = 'x86f',
   gestaltX86HasFPU              = 0,    /* has an FPU that supports the 387 instructions*/
@@ -1968,7 +2293,6 @@ enum {
   gestaltX86HasMCE              = 7,    /* supports Machine Check Exception*/
   gestaltX86HasCX8              = 8,    /* supports CMPXCHG8 instructions (Compare Exchange 8 bytes)*/
   gestaltX86HasAPIC             = 9,    /* contains local APIC*/
-  gestaltX86Reserved10          = 10,   /* do not count on this bit value*/
   gestaltX86HasSEP              = 11,   /* supports fast system call (SysEnter Present)*/
   gestaltX86HasMTRR             = 12,   /* supports Memory Type Range Registers*/
   gestaltX86HasPGE              = 13,   /* supports Page Global Enable*/
@@ -1977,11 +2301,19 @@ enum {
                                         /* If FPU bit is also set, supports FCMOVcc and FCOMI, too*/
   gestaltX86HasPAT              = 16,   /* supports Page Attribute Table*/
   gestaltX86HasPSE36            = 17,   /* supports 36-bit Page Size Extension*/
+  gestaltX86HasPSN              = 18,   /* Processor Serial Number*/
+  gestaltX86HasCLFSH            = 19,   /* CLFLUSH Instruction supported*/
+  gestaltX86Serviced20          = 20,   /* do not count on this bit value*/
+  gestaltX86HasDS               = 21,   /* Debug Store*/
+  gestaltX86ResACPI             = 22,   /* Thermal Monitor, SW-controlled clock*/
   gestaltX86HasMMX              = 23,   /* supports MMX instructions*/
-  gestaltX86HasFXSR             = 24    /* Supports FXSAVE and FXRSTOR instructions (fast FP save/restore)*/
+  gestaltX86HasFXSR             = 24,   /* Supports FXSAVE and FXRSTOR instructions (fast FP save/restore)*/
+  gestaltX86HasSSE              = 25,   /* Streaming SIMD extensions*/
+  gestaltX86HasSSE2             = 26,   /* Streaming SIMD extensions 2*/
+  gestaltX86HasSS               = 27,   /* Self-Snoop*/
+  gestaltX86HasHTT              = 28,   /* Hyper-Threading Technology*/
+  gestaltX86HasTM               = 29    /* Thermal Monitor*/
 };
-
-#endif  /* TARGET_OS_WIN32 */
 
 enum {
   gestaltTranslationAttr        = 'xlat', /* Translation Manager attributes */

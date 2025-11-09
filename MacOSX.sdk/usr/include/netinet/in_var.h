@@ -105,7 +105,7 @@ struct	in_aliasreq {
  * Event data, internet style.
  */
 struct kev_in_data {
-        struct net_event_data   link_data;
+	struct net_event_data   link_data;
 	struct in_addr  ia_addr;
 	u_long	ia_net;			/* network number of interface */
 	u_long	ia_netmask;		/* mask of net part */
@@ -113,6 +113,13 @@ struct kev_in_data {
 	u_long	ia_subnetmask;		/* mask of subnet part */
 	struct	in_addr ia_netbroadcast; /* to recognize net broadcasts */
 	struct  in_addr ia_dstaddr;
+};
+
+struct kev_in_collision {
+	struct	net_event_data	link_data;	/* link colliding arp was received on */
+	struct	in_addr	ia_ipaddr;	/* IP address we and another node are using */
+	u_char	hw_len;	/* length of hardware address */
+	u_char	hw_addr[0];	/* variable length hardware address */
 };
 
 
@@ -128,6 +135,7 @@ struct kev_in_data {
 #define KEV_INET_SIFDSTADDR   4
 #define KEV_INET_SIFBRDADDR   5
 #define KEV_INET_SIFNETMASK   6
+#define KEV_INET_ARPCOLLISION 7	/* use kev_in_collision */
 #endif /* __APPLE__ */
 
 /*

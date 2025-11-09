@@ -3,9 +3,9 @@
  
      Contains:   Process Manager Interfaces.
  
-     Version:    HIServices-106.1~2
+     Version:    HIServices-125.6~1
  
-     Copyright:  © 1989-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1989-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -76,7 +76,7 @@ type 'SIZE' {
         unsigned longint;                                       /* minimum mem size     */
 
         // If we ever define one of the two reserved bits above, the "reserved"
-        // enumeration wouldn't appear on the newly defined bit.  By defining "reserved"
+        // enumeration wouldn't appear on the newly defined bit. By defining "reserved"
         // below, old resource SIZE declarations will still compile.
 #define reserved        false
 };

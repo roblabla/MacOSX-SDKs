@@ -11,8 +11,10 @@
 #include <CoreGraphics/CGBase.h>
 #include <CoreGraphics/CGGeometry.h>
 #include <CoreGraphics/CGError.h>
+#include <CoreGraphics/CGContext.h>
 #include <CoreFoundation/CoreFoundation.h>
 #include <stdint.h>
+#include <AvailabilityMacros.h>
 /*
  * The following construct is present to avoid problems with some Apple tools.
  * API in this module is not available in Mac OS Classic variations!
@@ -35,17 +37,18 @@ typedef uint32_t CGOpenGLDisplayMask;
 typedef uint32_t CGBeamPosition;
 typedef int32_t CGMouseDelta;
 typedef double CGRefreshRate;
+typedef uint32_t CGCaptureOptions;
 
 typedef CGError CGDisplayErr;
 #define CGDisplayNoErr kCGErrorSuccess
 
-/* A NULL value points to the main display device as a programming convention */
-#define kCGDirectMainDisplay ((CGDirectDisplayID)0)
 
 #define kCGNullDirectDisplay ((CGDirectDisplayID)0)
 
 /* Returns the display ID of the current main display */
 CGDirectDisplayID CGMainDisplayID(void);
+
+#define kCGDirectMainDisplay CGMainDisplayID()
 
 /*
  * Mechanisms used to find screen IDs
@@ -80,8 +83,8 @@ CGDisplayErr CGGetDisplaysWithOpenGLDisplayMask(CGOpenGLDisplayMask mask,
  *
  * The first display returned in the list is the main display,
  * the one with the menu bar.
- * When mirroring, this will be the largest display,
- * or if all are the same size, the one with the deepest pixel depth.
+ * When mirroring, this will be the largest drawable display in the mirror,
+ * set, or if all are the same size, the one with the deepest pixel depth.
  */
 CGDisplayErr CGGetActiveDisplayList(CGDisplayCount maxDisplays,
                              CGDirectDisplayID * activeDspys,
@@ -153,9 +156,8 @@ size_t CGDisplayPixelsHigh(CGDirectDisplayID display);
  * The key will only be present if the property applies,
  * and will be associated with a value of kCFBooleanTrue.
  * Keys not relevant to a particular display mode will not
- * appear in the mode dictionary.  Note that CFM apps do not
- * have access to the pre-initialized globals, so the CFSTR()
- * equivalent is provided as a comment.
+ * appear in the mode dictionary.
+ *
  * These strings must remain unchanged in future releases, of course.
  */
 
@@ -263,6 +265,11 @@ CGDisplayErr CGGetDisplayTransferByFormula(CGDirectDisplayID display,
                                     CGGammaValue *blueMin,
                                     CGGammaValue *blueMax,
                                     CGGammaValue *blueGamma);
+/*
+ * Returns the capacity, or nunber of entries, in the camma table for the specified
+ * display.  If 'display' is invalid, returns 0.
+ */
+CGTableCount CGDisplayGammaTableCapacity(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /*
  * Set a display gamma/transfer function using tables of data for each channel.
@@ -300,10 +307,18 @@ CGDisplayErr CGSetDisplayTransferByByteTable(CGDirectDisplayID display,
 /* Restore gamma tables of system displays to the user's ColorSync specified values */
 void CGDisplayRestoreColorSyncSettings(void);
 
+/*
+ * Options used with CGDisplayCaptureWithOptions and CGCaptureAllDisplaysWithOptions
+ */
+enum {
+    kCGCaptureNoOptions = 0,	/* Default behavior */
+    kCGCaptureNoFill = (1 << 0)	/* Disables fill with black on display capture */
+};
 
 /* Display capture and release */
 boolean_t CGDisplayIsCaptured(CGDirectDisplayID display);
 CGDisplayErr CGDisplayCapture(CGDirectDisplayID display);
+CGDisplayErr CGDisplayCaptureWithOptions(CGDirectDisplayID display, CGCaptureOptions options) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 CGDisplayErr CGDisplayRelease(CGDirectDisplayID display);
 
 /*
@@ -312,6 +327,8 @@ CGDisplayErr CGDisplayRelease(CGDirectDisplayID display);
  * to display changes only needed by your app.
  */
 CGDisplayErr CGCaptureAllDisplays(void);
+CGDisplayErr CGCaptureAllDisplaysWithOptions(CGCaptureOptions options) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
 /*
  * Release all captured displays, and restore the display modes to the
  * user's preferences.  May be used in conjunction with CGDisplayCapture()
@@ -425,6 +442,27 @@ CGDisplayErr CGDisplayWaitForBeamPositionOutsideLines( CGDirectDisplayID display
  * sweep in painting, or the driver does not implement this functionality, 0 is returned.
  */
 CGBeamPosition CGDisplayBeamPosition( CGDirectDisplayID display );
+
+/*
+ * Obtain a CGContextRef suitable for drawing to a captured display.
+ *
+ * Returns a drawing context suitable for use on the display device.
+ * The context is owned by the device, and should not be released by
+ * the caller.
+ *
+ * The context remains valid while the display is captured, and the
+ * display configuration is unchanged.  Releasing the captured display
+ * or reconfiguring the display invalidates the drawing context.
+ *
+ * An application may register a display reconfiguration callback to determine
+ * when the display configuration is changing via CGRegisterDisplayReconfigurationProc().
+ * 
+ * After a display configuration change, or on capturing a display, call this
+ * function to obtain a current drawing context.
+ *
+ * If the display has not been captured, this function returns NULL.
+ */
+CGContextRef CGDisplayGetDrawingContext(CGDirectDisplayID display) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 CG_EXTERN_C_END
 

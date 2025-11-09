@@ -3,9 +3,9 @@
  
      Contains:   Quickdraw Offscreen GWorld Interfaces.
  
-     Version:    Quickdraw-96.21~1
+     Version:    Quickdraw-150~1
  
-     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -36,6 +36,11 @@
 extern "C" {
 #endif
 
+/*
+    NOTE:  With the exception of noNewDeviceBit and nativeEndianPixMapBit,
+           he following definitions for the GWorldFlags parameter in NewGWorld
+           are all obsolete on Mac OS X, and ignored.
+*/
 enum {
   pixPurgeBit                   = 0,
   noNewDeviceBit                = 1,
@@ -45,6 +50,7 @@ enum {
   useLocalHdwrMemBit            = 5,
   pixelsPurgeableBit            = 6,
   pixelsLockedBit               = 7,
+  nativeEndianPixMapBit         = 8,
   mapPixBit                     = 16,
   newDepthBit                   = 17,
   alignPixBit                   = 18,
@@ -65,6 +71,7 @@ enum {
   useLocalHdwrMem               = 1L << useLocalHdwrMemBit,
   pixelsPurgeable               = 1L << pixelsPurgeableBit,
   pixelsLocked                  = 1L << pixelsLockedBit,
+  kNativeEndianPixMap           = 1L << nativeEndianPixMapBit,
   kAllocDirectDrawSurface       = 1L << 14,
   mapPix                        = 1L << mapPixBit,
   newDepth                      = 1L << newDepthBit,

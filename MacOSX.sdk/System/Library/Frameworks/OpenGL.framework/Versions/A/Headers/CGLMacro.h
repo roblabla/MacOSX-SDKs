@@ -1788,25 +1788,25 @@
 /*********** APPLE Extensions ***********************************************/
 
 /* GL_APPLE_vertex_program_evaluators */
-#define glEnableVertexAttribARB(index, pname) \
+#define glEnableVertexAttribAPPLE(index, pname) \
 	(*cgl_ctx->disp.enable_vertex_attrib_ARB)(cgl_ctx->rend, index, pname)
 
-#define glDisableVertexAttribARB(index, pname) \
+#define glDisableVertexAttribAPPLE(index, pname) \
 	(*cgl_ctx->disp.disable_vertex_attrib_ARB)(cgl_ctx->rend, index, pname)
 
-#define glIsVertexAttribEnabledARB(index, pname) \
+#define glIsVertexAttribEnabledAPPLE(index, pname) \
 	(*cgl_ctx->disp.is_vertex_attrib_enabled_ARB)(cgl_ctx->rend, index, pname)
 
-#define glMapVertexAttrib1dARB(index, size, u1, u2, stride, order, points) \
+#define glMapVertexAttrib1dAPPLE(index, size, u1, u2, stride, order, points) \
 	(*cgl_ctx->disp.map_vertex_attrib1d_ARB)(cgl_ctx->rend, index, size, u1, u2, stride, order, points)
 
-#define glMapVertexAttrib1fARB(index, size, u1, u2, stride, order, points) \
+#define glMapVertexAttrib1fAPPLE(index, size, u1, u2, stride, order, points) \
 	(*cgl_ctx->disp.map_vertex_attrib1f_ARB)(cgl_ctx->rend, index, size, u1, u2, stride, order, points)
 
-#define glMapVertexAttrib2dARB(index, size, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points) \
+#define glMapVertexAttrib2dAPPLE(index, size, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points) \
 	(*cgl_ctx->disp.map_vertex_attrib2d_ARB)(cgl_ctx->rend, index, size, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points)
 
-#define glMapVertexAttrib2fARB(index, size, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points) \
+#define glMapVertexAttrib2fAPPLE(index, size, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points) \
 	(*cgl_ctx->disp.map_vertex_attrib2f_ARB)(cgl_ctx->rend, index, size, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points)
 
 /* GL_APPLE_texture_range */
@@ -1873,6 +1873,17 @@
 
 #define glDrawRangeElementArrayAPPLE(mode, start, end, first, count) \
 	(*cgl_ctx->disp.draw_range_element_array_APPLE)(cgl_ctx->rend, mode, start, end, first, count)
+
+/* GL_APPLE_flush_render */
+#define glFlushRenderAPPLE() \
+	(*cgl_ctx->disp.flush_render_APPLE)(cgl_ctx->rend)
+
+#define glFinishRenderAPPLE() \
+	(*cgl_ctx->disp.finish_render_APPLE)(cgl_ctx->rend)
+
+#define glSwapAPPLE() \
+	(*cgl_ctx->disp.swap_APPLE)(cgl_ctx->rend)
+
 
 /*********** ATI Extensions *************************************************/
 

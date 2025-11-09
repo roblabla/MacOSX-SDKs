@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------------------
 //      File:           ForceFeedbackConstants.h
-//      Contains:       Public interfaces for ForceFeedback technology.
-//      Copyright:      Â© 2002 by Apple Computer, Inc. All rights reserved.
+//      Contains:       Public constants for Force Feedback technology.
+//      Copyright:      © 2002-2003 by Apple Computer, Inc. All rights reserved.
 //
 //-----------------------------------------------------------------------------
 
@@ -18,8 +18,7 @@ extern "C" {
 
 /*!	@header		ForceFeedbackConstants.h
 	@abstract	Constants used in the public interfaces to the Force Feedback implementation in Mac OS X.
-	@discussion	This header file contains the Effect type UUIDs, type definitions used in the API, force feedback
-                        constants and error values used by the API.
+	@discussion	This header file contains the Effect type UUIDs, type definitions used in the API, force feedback constants and error values used by the API.
 
 */
 
@@ -35,10 +34,26 @@ typedef SInt32 LONG;
 typedef LONG* LPLONG;
 #endif
 
-#define FF_INFINITE                 0xFFFFFFFF
+/*!
+    @defined FF_INFINITE
+	@discussion 
+ */
+#define FF_INFINITE                 0xFFFFFFFFUL
 
+/*!
+    @defined FF_DEGREES
+	@discussion 
+ */
 #define FF_DEGREES                  100
+/*!
+    @defined FF_FFNOMINALMAX
+	@discussion 
+ */
 #define FF_FFNOMINALMAX             10000
+/*!
+    @defined FF_SECONDS
+	@discussion 
+ */
 #define FF_SECONDS                  1000000
 
 
@@ -158,99 +173,120 @@ typedef LONG* LPLONG;
 // Effect definition constants
 //-----------------------------------------------------------------------------
 
-// FFEFFECT.dwFlags constants
-// IMPORTANT NOTE:  OBJECT IDS cannot be used to identify trigger buttons
-// in FFEFFECT.dwTriggerButton, and output axes in FFEFFECT.rgdwAxes[n].
-// Please use object offsets (FFJOFS_* constants), the only supported method.
-// #define FFEFF_OBJECTIDS             0x00000001
-#define FFEFF_OBJECTOFFSETS         0x00000002
+/*!
+    @defined FFEFF_OBJECTOFFSETS
+	@discussion OBJECT IDS cannot be used to identify trigger buttons in FFEFFECT.dwTriggerButton, and output axes in FFEFFECT.rgdwAxes[n]. Please use object offsets (FFJOFS_* constants), the only supported method.
+ */
+#define FFEFF_OBJECTOFFSETS         0x00000002UL
+
+/*!
+    @enum FFCoordinateSystemFlag
+    @discussion Different coordinates used by the Force Feedback framework.
+    @constant FFEFF_CARTESIAN Cartesian coordinates
+    @constant FFEFF_POLAR Polar coordinates
+    @constant FFEFF_SPHERICAL Sperical coordinates
+    */
 
 typedef UInt32		FFCoordinateSystemFlag;
 enum
 {
-    FFEFF_CARTESIAN             = 0x00000010,
-    FFEFF_POLAR                 = 0x00000020,
-    FFEFF_SPHERICAL             = 0x00000040
+    FFEFF_CARTESIAN         = 0x00000010UL,
+    FFEFF_POLAR             = 0x00000020UL,
+    FFEFF_SPHERICAL         = 0x00000040UL
 };
 
-// Effect Parameter flags for use in calls to FFEffectGetParameters() and FFEffectSetParameters()
-//
+
+/*!
+    @enum FFEffectParameterFlag
+    @discussion Effect Parameter flags for use in calls to <b>FFEffectGetParameters()</b> and <b>FFEffectSetParameters()</b>.
+    */
 typedef UInt32		FFEffectParameterFlag;
 enum
 {
-    FFEP_DURATION               = 0x00000001,
-    FFEP_SAMPLEPERIOD           = 0x00000002,
-    FFEP_GAIN                   = 0x00000004,
-    FFEP_TRIGGERBUTTON          = 0x00000008,
-    FFEP_TRIGGERREPEATINTERVAL  = 0x00000010,
-    FFEP_AXES                   = 0x00000020,
-    FFEP_DIRECTION              = 0x00000040,
-    FFEP_ENVELOPE               = 0x00000080,
-    FFEP_TYPESPECIFICPARAMS     = 0x00000100,
-    FFEP_STARTDELAY            	= 0x00000200,
-    FFEP_ALLPARAMS              = 0x000003FF,
-    FFEP_START                  = 0x20000000,
-    FFEP_NORESTART              = 0x40000000,
-    FFEP_NODOWNLOAD             = 0x80000000,
-    FFEB_NOTRIGGER              = 0xFFFFFFFF
+    FFEP_DURATION               = 0x00000001UL,
+    FFEP_SAMPLEPERIOD           = 0x00000002UL,
+    FFEP_GAIN                   = 0x00000004UL,
+    FFEP_TRIGGERBUTTON          = 0x00000008UL,
+    FFEP_TRIGGERREPEATINTERVAL  = 0x00000010UL,
+    FFEP_AXES                   = 0x00000020UL,
+    FFEP_DIRECTION              = 0x00000040UL,
+    FFEP_ENVELOPE               = 0x00000080UL,
+    FFEP_TYPESPECIFICPARAMS     = 0x00000100UL,
+    FFEP_STARTDELAY             = 0x00000200UL,
+    FFEP_ALLPARAMS              = 0x000003FFUL,
+    FFEP_START                  = 0x20000000UL,
+    FFEP_NORESTART              = 0x40000000UL,
+    FFEP_NODOWNLOAD             = 0x80000000UL,
+    FFEB_NOTRIGGER              = 0xFFFFFFFFUL
 };
 
-// Effect Parameter flags for use in calls to FFEffectStart()
-//
+
+/*!
+    @enum FFEffectStartFlag
+    @discussion Effect Parameter flags for use in calls to <b>FFEffectStart()</b>.
+    */
 typedef UInt32		FFEffectStartFlag;
 enum
 {
-    FFES_SOLO                   = 0x00000001,
-    FFES_NODOWNLOAD             = 0x80000000
+    FFES_SOLO                   = 0x00000001UL,
+    FFES_NODOWNLOAD             = 0x80000000UL
 };
 
-// Effect Parameter flags for use in calls to FFEffectGetEffectStatus()
-//
+
+/*!
+    @enum FFEffectStatusFlag
+    @discussion Effect Parameter flags for use in calls to <b>FFEffectGetEffectStatus()</b>.
+    */
 typedef UInt32		FFEffectStatusFlag;
 enum
 {
-    FFEGES_NOTPLAYING           = 0x00000000,
-    FFEGES_PLAYING              = 0x00000001,
-    FFEGES_EMULATED             = 0x00000002
+    FFEGES_NOTPLAYING           = 0x00000000UL,
+    FFEGES_PLAYING              = 0x00000001UL,
+    FFEGES_EMULATED             = 0x00000002UL
 };
 
-// command flags for FFDeviceSendForceFeedbackCommand()
-//
+
+/*!
+    @enum FFCommandFlag
+    @discussion Command flags for <b>FFDeviceSendForceFeedbackCommand()</b>.
+    */
 typedef UInt32		FFCommandFlag;
 enum
 {
-     FFSFFC_RESET            = 0x00000001,
-     FFSFFC_STOPALL          = 0x00000002,
-     FFSFFC_PAUSE            = 0x00000004,
-     FFSFFC_CONTINUE         = 0x00000008,
-     FFSFFC_SETACTUATORSON   = 0x00000010,
-     FFSFFC_SETACTUATORSOFF  = 0x00000020
+     FFSFFC_RESET            = 0x00000001UL,
+     FFSFFC_STOPALL          = 0x00000002UL,
+     FFSFFC_PAUSE            = 0x00000004UL,
+     FFSFFC_CONTINUE         = 0x00000008UL,
+     FFSFFC_SETACTUATORSON   = 0x00000010UL,
+     FFSFFC_SETACTUATORSOFF  = 0x00000020UL
 };
 
-// device state flags returned by FFDeviceGetForceFeedbackState()
-//
+/*!
+    @enum FFState
+    @discussion Device state flags returned by <b>FFDeviceGetForceFeedbackState()</b>.
+    */
 typedef UInt32		FFState;
 enum
 {
-     FFGFFS_EMPTY            = 0x00000001,
-     FFGFFS_STOPPED          = 0x00000002,
-     FFGFFS_PAUSED           = 0x00000004,
-     FFGFFS_ACTUATORSON      = 0x00000010,
-     FFGFFS_ACTUATORSOFF     = 0x00000020,
-     FFGFFS_POWERON          = 0x00000040,
-     FFGFFS_POWEROFF         = 0x00000080,
-     FFGFFS_SAFETYSWITCHON   = 0x00000100,
-     FFGFFS_SAFETYSWITCHOFF  = 0x00000200,
-     FFGFFS_USERFFSWITCHON   = 0x00000400,
-     FFGFFS_USERFFSWITCHOFF  = 0x00000800,
-     FFGFFS_DEVICELOST       = 0x80000000
+     FFGFFS_EMPTY            = 0x00000001UL,
+     FFGFFS_STOPPED          = 0x00000002UL,
+     FFGFFS_PAUSED           = 0x00000004UL,
+     FFGFFS_ACTUATORSON      = 0x00000010UL,
+     FFGFFS_ACTUATORSOFF     = 0x00000020UL,
+     FFGFFS_POWERON          = 0x00000040UL,
+     FFGFFS_POWEROFF         = 0x00000080UL,
+     FFGFFS_SAFETYSWITCHON   = 0x00000100UL,
+     FFGFFS_SAFETYSWITCHOFF  = 0x00000200UL,
+     FFGFFS_USERFFSWITCHON   = 0x00000400UL,
+     FFGFFS_USERFFSWITCHOFF  = 0x00000800UL,
+     FFGFFS_DEVICELOST       = 0x80000000UL
 };
 
 
-// axis and button "field offsets",
-// used in
-//	FFEFFECT.dwTriggerButton
-//	FFEFFECT.rgdwAxes[n]
+/*!
+    @defined FFJOFS_<i>i</i>
+    @discussion Axis and Button field offsets, used in <b>FFEFFECT.dwTriggerButton</b> and <b>FFEFFECT.rgdwAxes[<i>n</i>]</b>.
+*/
 #define FFJOFS_X            0
 #define FFJOFS_Y            4
 #define FFJOFS_Z            8
@@ -293,45 +329,70 @@ enum
 #define FFJOFS_BUTTON30     FFJOFS_BUTTON(30)
 #define FFJOFS_BUTTON31     FFJOFS_BUTTON(31)
 
-// defines for FFDeviceGetForceFeedbackProperty() and FFDeviceSetForceFeedbackProperty()
-//
+
+/*!
+    @enum FFProperty
+    @discussion Used for <b>FFDeviceGetForceFeedbackProperty()</b> and <b>FFDeviceSetForceFeedbackProperty()</b>.
+    */
 typedef UInt32		FFProperty;
 enum
 {
-    FFPROP_FFGAIN           = 1,
-    FFPROP_AUTOCENTER       = 3
+    FFPROP_FFGAIN           = 1UL,
+    FFPROP_AUTOCENTER       = 3UL
 };
 
-// flags for FFDeviceSetCooperativeLevel()
-//
+
+/*!
+    @enum FFCooperativeLevelFlag
+    @discussion flags for <b>FFDeviceSetCooperativeLevel()</b>.
+    */
 typedef UInt32		FFCooperativeLevelFlag;
 enum
 {
-    FFSCL_EXCLUSIVE     = 0x00000001,
-    FFSCL_NONEXCLUSIVE  = 0x00000002,
-    FFSCL_FOREGROUND    = 0x00000004,
-    FFSCL_BACKGROUND    = 0x00000008
+    FFSCL_EXCLUSIVE     = 0x00000001UL,
+    FFSCL_NONEXCLUSIVE  = 0x00000002UL,
+    FFSCL_FOREGROUND    = 0x00000004UL,
+    FFSCL_BACKGROUND    = 0x00000008UL
 };
 
-// types used in FFCAPABILITIES structure
-//
+/*!
+@enum FFCapabilitiesEffectType
+ @discussion Types used in the emulatedEffects or supportedEffects members of the FFCAPABILITIES structure.  Used to describe whether the particular effect type is supported or emulated by the device.
+ @constant FFCAP_ET_CONSTANTFORCE The effect represents a constant force effect.
+ @constant FFCAP_ET_RAMPFORCE The effect represents a ramp force effect.
+ @constant FFCAP_ET_SQUARE The effect represents a square force effect.
+ @constant FFCAP_ET_SINE The effect represents a sine force effect.
+ @constant FFCAP_ET_TRIANGLE The effect represents a triangle force effect.
+ @constant FFCAP_ET_SAWTOOTHUP The effect represents a sawtooth up force effect.
+ @constant FFCAP_ET_SAWTOOTHDOWN The effect represents a sawtooth down force effect.
+ @constant FFCAP_ET_SPRING The effect represents a spring force effect.
+ @constant FFCAP_ET_DAMPER The effect represents a damper force effect.
+ @constant FFCAP_ET_INERTIA The effect represents a inertia force effect.
+ @constant FFCAP_ET_FRICTION The effect represents a friction force effect.
+ @constant FFCAP_ET_CUSTOMFORCE The effect represents a custom force effect. The Force Feedback plugIn developer is required to provide additional documentation to the application writer on how the effect should be used.
+ */
 typedef UInt32		FFCapabilitiesEffectType;
 enum
 {
-    FFCAP_ET_CONSTANTFORCE	= 0x00000001,
-    FFCAP_ET_RAMPFORCE		= 0x00000002,
-    FFCAP_ET_SQUARE		= 0x00000004,
-    FFCAP_ET_SINE		= 0x00000008,
-    FFCAP_ET_TRIANGLE		= 0x00000010,
-    FFCAP_ET_SAWTOOTHUP		= 0x00000020,
-    FFCAP_ET_SAWTOOTHDOWN	= 0x00000040,
-    FFCAP_ET_SPRING		= 0x00000080,
-    FFCAP_ET_DAMPER		= 0x00000100,
-    FFCAP_ET_INERTIA		= 0x00000200,
-    FFCAP_ET_FRICTION		= 0x00000400,
-    FFCAP_ET_CUSTOMFORCE	= 0x00000800
+    FFCAP_ET_CONSTANTFORCE	= 0x00000001UL,
+    FFCAP_ET_RAMPFORCE		= 0x00000002UL,
+    FFCAP_ET_SQUARE		= 0x00000004UL,
+    FFCAP_ET_SINE		= 0x00000008UL,
+    FFCAP_ET_TRIANGLE		= 0x00000010UL,
+    FFCAP_ET_SAWTOOTHUP		= 0x00000020UL,
+    FFCAP_ET_SAWTOOTHDOWN	= 0x00000040UL,
+    FFCAP_ET_SPRING		= 0x00000080UL,
+    FFCAP_ET_DAMPER		= 0x00000100UL,
+    FFCAP_ET_INERTIA		= 0x00000200UL,
+    FFCAP_ET_FRICTION		= 0x00000400UL,
+    FFCAP_ET_CUSTOMFORCE	= 0x00000800UL
 };
 
+
+/*!
+    @enum FFCapabilitiesEffectSubType
+    @discussion Flags used to specify the subtype of an effect.
+    */
 typedef UInt32		FFCapabilitiesEffectSubType;
 enum
 {
@@ -509,7 +570,7 @@ enum
  * The effect index provided by the API in downloadID is not recognized by the
  * IOForceFeedbackLib driver.
  */
-#define FFERR_INVALIDDOWNLOADID         0x80040300
+#define FFERR_INVALIDDOWNLOADID         0x80040300L
  
 /*!
     @defined FFERR_DEVICEPAUSED
@@ -518,7 +579,7 @@ enum
  * other operations such as modifying existing effect parameters and creating 
  * new effects are not allowed.
  */
-#define FFERR_DEVICEPAUSED              0x80040301
+#define FFERR_DEVICEPAUSED              0x80040301L
 
 /*!
     @defined FFERR_INTERNAL
@@ -526,7 +587,7 @@ enum
  * The IOForceFededbackLib driver has detected an internal fault.  Often this
  * occurs because of an unexpected internal code path.
  */
-#define FFERR_INTERNAL                  0x80040302
+#define FFERR_INTERNAL                  0x80040302L
 
 /*!
     @defined FFERR_EFFECTTYPEMISMATCH
@@ -534,35 +595,35 @@ enum
  * The IOForceFededbackLib driver has received an effect modification request
  * whose basic type does not match the defined effect type for the given effect.
  */
-#define FFERR_EFFECTTYPEMISMATCH        0x80040303
+#define FFERR_EFFECTTYPEMISMATCH        0x80040303L
 
 /*!
     @defined FFERR_UNSUPPORTEDAXIS
  *  @discussion 
  * The effect includes one or more axes that the device does not support.
  */
-#define FFERR_UNSUPPORTEDAXIS           0x80040304
+#define FFERR_UNSUPPORTEDAXIS           0x80040304L
 
 /*!
     @defined FFERR_NOTINITIALIZED
  *  @discussion 
  * This object has not been initialized
  */
-#define FFERR_NOTINITIALIZED            0x80040305
+#define FFERR_NOTINITIALIZED            0x80040305L
 
 /*!
     @defined FFERR_EFFECTTYPENOTSUPPORTED
  *  @discussion 
  * The effect type requested is not explicitly supported by the particular device.
  */
-#define FFERR_EFFECTTYPENOTSUPPORTED    0x80040306
+#define FFERR_EFFECTTYPENOTSUPPORTED    0x80040306L
 
 /*!
     @defined FFERR_DEVICERELEASED
  *  @discussion 
  * The device has been released.
  */
-#define FFERR_DEVICERELEASED            0x80040307
+#define FFERR_DEVICERELEASED            0x80040307L
 
 #ifdef __cplusplus
 }       

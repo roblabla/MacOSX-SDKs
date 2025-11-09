@@ -1,5 +1,5 @@
 /*	NSPathUtilities.h
-	Copyright 1994-2002, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2003, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSString.h>
@@ -70,7 +70,7 @@ typedef enum {
 
 typedef enum {
     NSUserDomainMask = 1,	// user's home directory --- place to install user's personal items (~)
-    NSLocalDomainMask = 2,	// local to the current machine --- place to install items available to everyone on this machine (/Local)
+    NSLocalDomainMask = 2,	// local to the current machine --- place to install items available to everyone on this machine (/Library)
     NSNetworkDomainMask = 4, 	// publically available location in the local area network --- place to install items available on the network (/Network)
     NSSystemDomainMask = 8,	// provided by Apple, unmodifiable (/System)
     NSAllDomainsMask = 0x0ffff	// all domains: all of the above and future items

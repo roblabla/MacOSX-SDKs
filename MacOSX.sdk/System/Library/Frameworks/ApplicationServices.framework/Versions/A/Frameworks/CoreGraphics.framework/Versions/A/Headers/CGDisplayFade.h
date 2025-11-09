@@ -136,20 +136,20 @@ CGError CGReleaseDisplayFadeReservation(CGDisplayFadeReservationToken myToken);
  * To perform a 2 second fade to black, waiting til complete:
  *
  *	CGDisplayFade(myToken,
- *      	      2.0,			// 2 seconds
- *		      kCGDisplayBlendNormal,	// Starting state
- *		      kCGDisplayBlendSolidColor, // Ending state
- *		      0.0, 0.0, 0.0,		// black
- *		      true);			// Wait for completion
+ *      	      2.0,			// 2 seconds 
+ *		      kCGDisplayBlendNormal,	// Starting state 
+ *		      kCGDisplayBlendSolidColor, // Ending state 
+ *		      0.0, 0.0, 0.0,		// black 
+ *		      true);			// Wait for completion 
  *
  * To perform a 2 second fade from black to normal, without waiting for completion:
  *
  *	CGDisplayFade(myToken,
- *      	      2.0,			// 2 seconds
- *		      kCGDisplayBlendSolidColor, // Starting state
- *		      kCGDisplayBlendNormal,	// Ending state
- *		      0.0, 0.0, 0.0,		// black
- *		      false);			// Don't wait for completion
+ *      	      2.0,			// 2 seconds 
+ *		      kCGDisplayBlendSolidColor, // Starting state 
+ *		      kCGDisplayBlendNormal,	// Ending state 
+ *		      0.0, 0.0, 0.0,		// black 
+ *		      false);			// Don't wait for completion 
  */
 CGError CGDisplayFade(CGDisplayFadeReservationToken myToken,
                       CGDisplayFadeInterval seconds,

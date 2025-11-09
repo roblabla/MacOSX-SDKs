@@ -3,9 +3,9 @@
  
      Contains:   Color Matching Interfaces
  
-     Version:    ColorSync-98.1~196
+     Version:    ColorSync-118.2~1
  
-     Copyright:  © 1992-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1992-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -580,7 +580,7 @@ typedef STACK_UPP_TYPE(CMMIterateProcPtr)                       CMMIterateUPP;
  *  NewCMProfileIterateUPP()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -591,7 +591,7 @@ NewCMProfileIterateUPP(CMProfileIterateProcPtr userRoutine)   AVAILABLE_MAC_OS_X
  *  NewCMMIterateUPP()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -602,7 +602,7 @@ NewCMMIterateUPP(CMMIterateProcPtr userRoutine)               AVAILABLE_MAC_OS_X
  *  DisposeCMProfileIterateUPP()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -613,7 +613,7 @@ DisposeCMProfileIterateUPP(CMProfileIterateUPP userUPP)       AVAILABLE_MAC_OS_X
  *  DisposeCMMIterateUPP()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -624,7 +624,7 @@ DisposeCMMIterateUPP(CMMIterateUPP userUPP)                   AVAILABLE_MAC_OS_X
  *  InvokeCMProfileIterateUPP()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -638,7 +638,7 @@ InvokeCMProfileIterateUPP(
  *  InvokeCMMIterateUPP()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -666,7 +666,7 @@ InvokeCMMIterateUPP(
  *  CMNewProfile()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -680,7 +680,7 @@ CMNewProfile(
  *  CMOpenProfile()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -694,7 +694,7 @@ CMOpenProfile(
  *  CMCloseProfile()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -706,7 +706,7 @@ CMCloseProfile(CMProfileRef prof)                             AVAILABLE_MAC_OS_X
  *  CMUpdateProfile()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -718,7 +718,7 @@ CMUpdateProfile(CMProfileRef prof)                            AVAILABLE_MAC_OS_X
  *  CMCopyProfile()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -733,7 +733,7 @@ CMCopyProfile(
  *  CMValidateProfile()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -748,7 +748,7 @@ CMValidateProfile(
  *  CMGetProfileLocation()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -762,7 +762,7 @@ CMGetProfileLocation(
  *  NCMGetProfileLocation()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.5 and later
  */
@@ -777,7 +777,7 @@ NCMGetProfileLocation(
  *  CMFlattenProfile()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -804,7 +804,7 @@ CMFlattenProfile(
  *  CMGetProfileHeader()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -818,7 +818,7 @@ CMGetProfileHeader(
  *  CMSetProfileHeader()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -832,7 +832,7 @@ CMSetProfileHeader(
  *  CMProfileElementExists()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -847,7 +847,7 @@ CMProfileElementExists(
  *  CMCountProfileElements()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -861,7 +861,7 @@ CMCountProfileElements(
  *  CMGetProfileElement()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -877,7 +877,7 @@ CMGetProfileElement(
  *  CMSetProfileElement()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -893,7 +893,7 @@ CMSetProfileElement(
  *  CMSetProfileElementSize()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -908,7 +908,7 @@ CMSetProfileElementSize(
  *  CMSetProfileElementReference()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -923,7 +923,7 @@ CMSetProfileElementReference(
  *  CMGetPartialProfileElement()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -940,7 +940,7 @@ CMGetPartialProfileElement(
  *  CMSetPartialProfileElement()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -957,7 +957,7 @@ CMSetPartialProfileElement(
  *  CMGetIndProfileElementInfo()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -974,7 +974,7 @@ CMGetIndProfileElementInfo(
  *  CMGetIndProfileElement()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -990,7 +990,7 @@ CMGetIndProfileElement(
  *  CMRemoveProfileElement()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -1004,7 +1004,7 @@ CMRemoveProfileElement(
  *  CMGetScriptProfileDescription()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -1019,7 +1019,7 @@ CMGetScriptProfileDescription(
  *  CMGetProfileDescriptions()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.6 and later
  */
@@ -1038,7 +1038,7 @@ CMGetProfileDescriptions(
  *  CMSetProfileDescriptions()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.6 and later
  */
@@ -1057,7 +1057,7 @@ CMSetProfileDescriptions(
  *  CMCopyProfileLocalizedStringDictionary()
  *  
  *  Availability:
- *    Mac OS X:         in 3.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in ColorSyncLib 3.1 and later
  */
@@ -1072,7 +1072,7 @@ CMCopyProfileLocalizedStringDictionary(
  *  CMSetProfileLocalizedStringDictionary()
  *  
  *  Availability:
- *    Mac OS X:         in 3.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in ColorSyncLib 3.1 and later
  */
@@ -1087,7 +1087,7 @@ CMSetProfileLocalizedStringDictionary(
  *  CMCopyProfileLocalizedString()
  *  
  *  Availability:
- *    Mac OS X:         in 3.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in ColorSyncLib 3.1 and later
  */
@@ -1101,10 +1101,39 @@ CMCopyProfileLocalizedString(
 
 
 /*
+ *  CMCopyProfileDescriptionString()
+ *  
+ *  Summary:
+ *    Returns the name of a profile as a CFString.
+ *  
+ *  Discussion:
+ *    If the profile is multi-localized, the best localized name for
+ *    the current process is returned.
+ *  
+ *  Parameters:
+ *    
+ *    prof:
+ *      (in) the profile to query
+ *    
+ *    str:
+ *      (out) returns the name
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CMError 
+CMCopyProfileDescriptionString(
+  CMProfileRef   prof,
+  CFStringRef *  str)                                         AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
  *  CMCloneProfileRef()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.1 and later
  */
@@ -1116,7 +1145,7 @@ CMCloneProfileRef(CMProfileRef prof)                          AVAILABLE_MAC_OS_X
  *  CMGetProfileRefCount()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.1 and later
  */
@@ -1130,7 +1159,7 @@ CMGetProfileRefCount(
  *  CMProfileModified()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.1 and later
  */
@@ -1144,7 +1173,7 @@ CMProfileModified(
  *  CMGetProfileMD5()
  *  
  *  Availability:
- *    Mac OS X:         in 3.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -1160,7 +1189,7 @@ CMGetProfileMD5(
  *  CMGetNamedColorInfo()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.1 and later
  */
@@ -1179,7 +1208,7 @@ CMGetNamedColorInfo(
  *  CMGetNamedColorValue()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.1 and later
  */
@@ -1195,7 +1224,7 @@ CMGetNamedColorValue(
  *  CMGetIndNamedColorValue()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.1 and later
  */
@@ -1211,7 +1240,7 @@ CMGetIndNamedColorValue(
  *  CMGetNamedColorIndex()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.1 and later
  */
@@ -1226,7 +1255,7 @@ CMGetNamedColorIndex(
  *  CMGetNamedColorName()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.1 and later
  */
@@ -1243,7 +1272,7 @@ CMGetNamedColorName(
  *  NCWNewColorWorld()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -1258,7 +1287,7 @@ NCWNewColorWorld(
  *  CWConcatColorWorld()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -1272,7 +1301,7 @@ CWConcatColorWorld(
  *  CWNewLinkProfile()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -1287,7 +1316,7 @@ CWNewLinkProfile(
  *  NCWConcatColorWorld()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.6 and later
  */
@@ -1303,7 +1332,7 @@ NCWConcatColorWorld(
  *  NCWNewLinkProfile()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.6 and later
  */
@@ -1320,7 +1349,7 @@ NCWNewLinkProfile(
  *  CWDisposeColorWorld()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 1.0 and later
  */
@@ -1332,7 +1361,7 @@ CWDisposeColorWorld(CMWorldRef cw)                            AVAILABLE_MAC_OS_X
  *  CWMatchColors()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 1.0 and later
  */
@@ -1347,7 +1376,7 @@ CWMatchColors(
  *  CWCheckColors()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 1.0 and later
  */
@@ -1363,7 +1392,7 @@ CWCheckColors(
  *  CWMatchBitmap()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -1380,7 +1409,7 @@ CWMatchBitmap(
  *  CWCheckBitmap()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -1391,6 +1420,53 @@ CWCheckBitmap(
   CMBitmapCallBackUPP   progressProc,
   void *                refCon,
   CMBitmap *            resultBitmap)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/* OpenGL support */
+enum {
+  cmTextureRGBtoRGBX8           = 0     /* RGB to 8-bit RGBx texture*/
+};
+
+/*
+ *  CWFillLookupTexture()
+ *  
+ *  Summary:
+ *    Fills a 3d lookup texture from a colorworld.
+ *  
+ *  Discussion:
+ *    The resulting table is suitable for use in OpenGL to accelerate
+ *    color management in hardware.
+ *  
+ *  Parameters:
+ *    
+ *    cw:
+ *      (in) the colorworld to use
+ *    
+ *    gridPoints:
+ *      (in) number of grid points per channel in the texture
+ *    
+ *    format:
+ *      (in) format of pixels in texture (e.g. cmTextureRGBtoRGBX8)
+ *    
+ *    dataSize:
+ *      (in) size in bytes of texture data to fill
+ *    
+ *    data:
+ *      (in/out) pointer to texture data to fill
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CMError 
+CWFillLookupTexture(
+  CMWorldRef   cw,
+  UInt32       gridPoints,
+  UInt32       format,
+  UInt32       dataSize,
+  void *       data)                                          AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
 
 
 /* Quickdraw-specific matching */
@@ -1515,7 +1591,7 @@ NCMUseProfileComment(
  *  CMCreateProfileIdentifier()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.1 and later
  */
@@ -1532,7 +1608,7 @@ CMCreateProfileIdentifier(
  *  CMGetSystemProfile()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -1544,7 +1620,7 @@ CMGetSystemProfile(CMProfileRef * prof)                       AVAILABLE_MAC_OS_X
  *  CMSetSystemProfile()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -1556,7 +1632,7 @@ CMSetSystemProfile(const FSSpec * profileFileSpec)            AVAILABLE_MAC_OS_X
  *  NCMSetSystemProfile()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.6 and later
  */
@@ -1568,7 +1644,7 @@ NCMSetSystemProfile(const CMProfileLocation * profLoc)        AVAILABLE_MAC_OS_X
  *  CMGetDefaultProfileBySpace()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.5 and later
  */
@@ -1582,7 +1658,7 @@ CMGetDefaultProfileBySpace(
  *  CMSetDefaultProfileBySpace()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.5 and later
  */
@@ -1596,7 +1672,7 @@ CMSetDefaultProfileBySpace(
  *  CMGetProfileByAVID()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.5 and later
  */
@@ -1610,7 +1686,7 @@ CMGetProfileByAVID(
  *  CMSetProfileByAVID()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.5 and later
  */
@@ -1624,7 +1700,7 @@ CMSetProfileByAVID(
  *  CMGetGammaByAVID()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 3.0 and later
  */
@@ -1639,7 +1715,7 @@ CMGetGammaByAVID(
  *  CMSetGammaByAVID()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 3.0 and later
  */
@@ -1654,7 +1730,7 @@ CMSetGammaByAVID(
  *  CMGetDefaultProfileByUse()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 3.0 and later
  */
@@ -1668,7 +1744,7 @@ CMGetDefaultProfileByUse(
  *  CMSetDefaultProfileByUse()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 3.0 and later
  */
@@ -1683,7 +1759,7 @@ CMSetDefaultProfileByUse(
  *  CMNewProfileSearch()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -1699,7 +1775,7 @@ CMNewProfileSearch(
  *  CMUpdateProfileSearch()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -1714,7 +1790,7 @@ CMUpdateProfileSearch(
  *  CMDisposeProfileSearch()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -1726,7 +1802,7 @@ CMDisposeProfileSearch(CMProfileSearchRef search)             AVAILABLE_MAC_OS_X
  *  CMSearchGetIndProfile()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -1741,7 +1817,7 @@ CMSearchGetIndProfile(
  *  CMSearchGetIndProfileFileSpec()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -1756,7 +1832,7 @@ CMSearchGetIndProfileFileSpec(
  *  CMProfileIdentifierFolderSearch()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.1 and later
  */
@@ -1771,7 +1847,7 @@ CMProfileIdentifierFolderSearch(
  *  CMProfileIdentifierListSearch()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.1 and later
  */
@@ -1788,7 +1864,7 @@ CMProfileIdentifierListSearch(
  *  CMIterateColorSyncFolder()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.5 and later
  */
@@ -1804,7 +1880,7 @@ CMIterateColorSyncFolder(
  *  NCMUnflattenProfile()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.6 and later
  */
@@ -1821,7 +1897,7 @@ NCMUnflattenProfile(
  *  CMGetColorSyncFolderSpec()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -1850,7 +1926,7 @@ CMGetColorSyncFolderSpec(
  *  CMGetCWInfo()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 1.0 and later
  */
@@ -1877,7 +1953,7 @@ CMGetCWInfo(
  *  CMGetPreferredCMM()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.5 and later
  */
@@ -1891,7 +1967,7 @@ CMGetPreferredCMM(
  *  CMIterateCMMInfo()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.6 and later
  */
@@ -1906,7 +1982,7 @@ CMIterateCMMInfo(
  *  CMGetColorSyncVersion()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.6 and later
  */
@@ -1918,7 +1994,7 @@ CMGetColorSyncVersion(UInt32 * version)                       AVAILABLE_MAC_OS_X
  *  CMLaunchControlPanel()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 3.0 and later
  */
@@ -1931,7 +2007,7 @@ CMLaunchControlPanel(UInt32 flags)                            AVAILABLE_MAC_OS_X
  *  CMConvertXYZToLab()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.1 and later
  */
@@ -1947,7 +2023,7 @@ CMConvertXYZToLab(
  *  CMConvertLabToXYZ()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.1 and later
  */
@@ -1963,7 +2039,7 @@ CMConvertLabToXYZ(
  *  CMConvertXYZToLuv()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.1 and later
  */
@@ -1979,7 +2055,7 @@ CMConvertXYZToLuv(
  *  CMConvertLuvToXYZ()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.1 and later
  */
@@ -1995,7 +2071,7 @@ CMConvertLuvToXYZ(
  *  CMConvertXYZToYxy()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.1 and later
  */
@@ -2010,7 +2086,7 @@ CMConvertXYZToYxy(
  *  CMConvertYxyToXYZ()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.1 and later
  */
@@ -2025,7 +2101,7 @@ CMConvertYxyToXYZ(
  *  CMConvertRGBToHLS()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.1 and later
  */
@@ -2040,7 +2116,7 @@ CMConvertRGBToHLS(
  *  CMConvertHLSToRGB()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.1 and later
  */
@@ -2055,7 +2131,7 @@ CMConvertHLSToRGB(
  *  CMConvertRGBToHSV()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.1 and later
  */
@@ -2070,7 +2146,7 @@ CMConvertRGBToHSV(
  *  CMConvertHSVToRGB()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.1 and later
  */
@@ -2085,7 +2161,7 @@ CMConvertHSVToRGB(
  *  CMConvertRGBToGray()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.1 and later
  */
@@ -2100,7 +2176,7 @@ CMConvertRGBToGray(
  *  CMConvertXYZToFixedXYZ()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.1 and later
  */
@@ -2115,7 +2191,7 @@ CMConvertXYZToFixedXYZ(
  *  CMConvertFixedXYZToXYZ()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.1 and later
  */
@@ -2130,7 +2206,7 @@ CMConvertFixedXYZToXYZ(
  *  CMConvertXYZToXYZ()
  *  
  *  Availability:
- *    Mac OS X:         in 3.1 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.1 and later in ApplicationServices.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   not available
  */
@@ -2150,7 +2226,7 @@ CMConvertXYZToXYZ(
  *  CMGetPS2ColorSpace()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -2167,7 +2243,7 @@ CMGetPS2ColorSpace(
  *  CMGetPS2ColorRenderingIntent()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -2184,7 +2260,7 @@ CMGetPS2ColorRenderingIntent(
  *  CMGetPS2ColorRendering()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -2202,7 +2278,7 @@ CMGetPS2ColorRendering(
  *  CMGetPS2ColorRenderingVMSize()
  *  
  *  Availability:
- *    Mac OS X:         in 3.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
  */
@@ -2214,139 +2290,88 @@ CMGetPS2ColorRenderingVMSize(
   Boolean *      preferredCMMnotfound)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/* Profile makers */
 
-/* ColorSync 1.0 functions which have parallel 2.0 counterparts */
-#if TARGET_API_MAC_OS8
+typedef CALLBACK_API_C( void , CMLabToLabProcPtr )(float *L, float *a, float *b, void *refcon);
 /*
- *  CWNewColorWorld()
+ *  CMMakeProfile()
+ *  
+ *  Summary:
+ *    Make a display or abstract profile.
+ *  
+ *  Discussion:
+ *    Adds appropriate tags to a profile to make display or abstract
+ *    profile based on an specification dictionary. 
+ *    
+ *    One key in the specification dictionary must be "profileType" 
+ *    which must have a CFString value of "abstractLab", "displayRGB" 
+ *    or "displayID".  It can also contain the keys/values: 
+ *      "description"  CFString (optional) 
+ *      "copyright"    CFString (optional) 
+ *    
+ *    For profileType of "abstractLab", the dictionary 
+ *    should also contain the keys/values: 
+ *      "gridPoints"   CFNumber(SInt32) (should be odd) 
+ *      "proc"         CFNumber(SInt64) 
+ *                     (coerced from a LabToLabProcPtr) 
+ *      "refcon"       CFNumber(SInt64) (optional) 
+ *                     (coerced from a void*) 
+ *    
+ *    For profileType of "displayRGB", the dictionary 
+ *    should also contain the keys/values: 
+ *      "targetGamma"  CFNumber(Float)  (e.g. 1.8)  (optional) 
+ *      "targetWhite"  CFNumber(SInt32) (e.g. 6500) (optional) 
+ *      "gammaR"       CFNumber(Float)  (e.g. 2.5) 
+ *      "gammaG"       CFNumber(Float)  (e.g. 2.5) 
+ *      "gammaB"       CFNumber(Float)  (e.g. 2.5) 
+ *      "tableChans"   CFNumber(SInt32) (1 or 3) (optional) 
+ *      "tableEntries" CFNumber(SInt32) (e.g 16 or 255) (optional) 
+ *      "tableEntrySize" CFNumber(SInt32) (1 or 2) (optional) 
+ *      "tableData"    CFData (lut in RRRGGGBBB order) (optional) 
+ *     either 
+ *      "phosphorRx"   CFNumber(Float) 
+ *      "phosphorRy"   CFNumber(Float) 
+ *      "phosphorGx"   CFNumber(Float) 
+ *      "phosphorGy"   CFNumber(Float) 
+ *      "phosphorBx"   CFNumber(Float) 
+ *      "phosphorBy"   CFNumber(Float) 
+ *      or 
+ *      "phosphorSet"  CFString ("WideRGB", "700/525/450nm", 
+ *                      "P22-EBU", "HDTV", "CCIR709", "sRGB", 
+ *                      "AdobeRGB98" or "Trinitron") 
+ *     either 
+ *      "whitePointx"  CFNumber(Float) 
+ *      "whitePointy"  CFNumber(Float) 
+ *      or 
+ *      "whiteTemp"    CFNumber(SInt32)  (e.g. 5000, 6500, 9300) 
+ *    
+ *    For profileType of "displayID", the dictionary 
+ *    should also contain the keys/values: 
+ *      "targetGamma"  CFNumber(Float)  (e.g. 1.8)  (optional) 
+ *      "targetWhite"  CFNumber(SInt32) (e.g. 6500) (optional) 
+ *      "displayID     CFNumber(SInt32) 
+ *    Optionally, the keys/values for "displayRGB" can be 
+ *    provided to override the valuses from the display.
+ *  
+ *  Parameters:
+ *    
+ *    prof:
+ *      (in) the profile to modify
+ *    
+ *    spec:
+ *      (in) specification dictionary
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
  *    CarbonLib:        not available
- *    Non-Carbon CFM:   in ColorSyncLib 1.0 and later
+ *    Non-Carbon CFM:   not available
  */
+extern CMError 
+CMMakeProfile(
+  CMProfileRef      prof,
+  CFDictionaryRef   spec)                                     AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
-/*
- *  ConcatenateProfiles()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in ColorSyncLib 1.0 and later
- */
-
-
-/*
- *  CMBeginMatching()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in ColorSyncLib 2.0 and later
- */
-
-
-/*
- *  CMDrawMatchedPicture()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in ColorSyncLib 1.0 and later
- */
-
-
-/*
- *  CMUseProfileComment()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in ColorSyncLib 1.0 and later
- */
-
-
-/*
- *  CMGetProfileName()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in ColorSyncLib 1.0 and later
- */
-
-
-/*
- *  CMGetProfileAdditionalDataOffset()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in ColorSyncLib 1.0 and later
- */
-
-
-
-/* ProfileResponder definitions */
-enum {
-  cmSystemDevice                = 'sys ',
-  cmGDevice                     = 'gdev'
-};
-
-/* ProfileResponder functions */
-/*
- *  GetProfile()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in ColorSyncLib 1.0 and later
- */
-
-
-/*
- *  SetProfile()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in ColorSyncLib 1.0 and later
- */
-
-
-/*
- *  SetProfileDescription()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in ColorSyncLib 1.0 and later
- */
-
-
-/*
- *  GetIndexedProfile()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in ColorSyncLib 1.0 and later
- */
-
-
-/*
- *  DeleteDeviceProfile()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in ColorSyncLib 1.0 and later
- */
-
-
-
-#endif  /* TARGET_API_MAC_OS8 */
 
 
 #pragma options align=reset

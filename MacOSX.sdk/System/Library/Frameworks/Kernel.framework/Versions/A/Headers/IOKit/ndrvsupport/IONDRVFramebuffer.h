@@ -175,8 +175,6 @@ private:
     IOReturn ndrvSetDisplayPowerState( UInt32 newState );
     static IOReturn _probeAction( IONDRVFramebuffer * self, IOOptionBits options );
     IOReturn mirrorInfo( UInt32 index );
-    friend class IONDRVI2CInterface;
-    static IOReturn _iicAction( IONDRVFramebuffer * self, VDCommunicationRec * comm );
     bool searchOfflineMode( IODisplayModeID * offlineMode );
     IOReturn processConnectChange( UInt32 * value );
     IOReturn setMirror( IONDRVFramebuffer * other );
@@ -187,6 +185,7 @@ private:
     static IOReturn _doStatus( IONDRVFramebuffer * self, UInt32 code, void * params );
     static IOReturn extControl( OSObject * owner, void * code, void * params );
     static IOReturn extStatus( OSObject * owner, void * code, void * params );
+    IOReturn createI2C( void );
 
 public:
     virtual IOReturn doControl( UInt32 code, void * params );
@@ -325,6 +324,10 @@ public:
 
     virtual IOReturn setCursorImage( void * cursorImage );
     virtual IOReturn setCursorState( SInt32 x, SInt32 y, bool visible );
+
+    //// I2C calls
+
+    virtual IOReturn doI2CRequest( UInt32 bus, IOI2CBusTiming * timing, IOI2CRequest * request );
 
     //// VSL calls
 

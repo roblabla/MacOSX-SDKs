@@ -264,5 +264,6 @@ typedef integer_t	cpu_subtype_t;
 #define CPU_SUBTYPE_POWERPC_Max		((cpu_subtype_t) 10)
 #define CPU_SUBTYPE_POWERPC_SCVger	((cpu_subtype_t) 11)
 #endif
+#define CPU_SUBTYPE_POWERPC_970		((cpu_subtype_t) 100)
 
 #endif	/* _MACH_MACHINE_H_ */

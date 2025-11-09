@@ -3,9 +3,9 @@
  
      Contains:   Apple Type Services layout public structures and constants.
  
-     Version:    ATS-102.4~1
+     Version:    ATS-135~1
  
-     Copyright:  © 1994-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1994-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -176,9 +176,7 @@ enum {
  *  Summary:
  *    ATSLineLayoutOptions are normally set in an ATSUTextLayout object
  *    via the kATSULineLayoutOptionsTag layout control attribute. They
- *    can also be set in an ATSLineLayoutParams structure and passed
- *    into the ATSLayoutText function for finer control over the line
- *    layout.
+ *    can also be set in an ATSLineLayoutParams structure.
  */
 typedef UInt32 ATSLineLayoutOptions;
 enum {
@@ -320,10 +318,17 @@ enum {
   kATSLineUseDeviceMetrics      = 0x01000000,
 
   /*
+   * Specifies that line breaking should occur at the nearest
+   * character, not word.  This could cause a word to be split among
+   * multiple lines.
+   */
+  kATSLineBreakToNearestCharacter = 0x02000000,
+
+  /*
    * These bits are reserved by Apple and will result in a invalid
    * value error if attemped to set. Obsolete constants:
    */
-  kATSLineAppleReserved         = (unsigned long)0xFEE00000
+  kATSLineAppleReserved         = (unsigned long)0xFCE00000
 };
 
 /* --------------------------------------------------------------------------- */
@@ -564,7 +569,7 @@ typedef struct ATSGlyphVector*          ATSULineRef;
  *  
  *  Discussion:
  *    This callback can be set in an ATSUTextLayout object by setting
- *    the attribute tag kATSULayoutOperationOverrideUPP and passing in
+ *    the attribute tag kATSULayoutOperationOverrideTag and passing in
  *    a ATSULayoutOperationOverrideSpecifier structure into
  *    ATSUSetLayoutAttribute. This callback will be called whenever an
  *    ATSUI call triggers a re-layout for each operation it is
@@ -597,7 +602,7 @@ typedef STACK_UPP_TYPE(ATSUDirectLayoutOperationOverrideProcPtr)  ATSUDirectLayo
  *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib on Mac OS X
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ATSUDirectLayoutOperationOverrideUPP
@@ -608,7 +613,7 @@ NewATSUDirectLayoutOperationOverrideUPP(ATSUDirectLayoutOperationOverrideProcPtr
  *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib on Mac OS X
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
@@ -619,7 +624,7 @@ DisposeATSUDirectLayoutOperationOverrideUPP(ATSUDirectLayoutOperationOverrideUPP
  *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib on Mac OS X
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern OSStatus
@@ -640,7 +645,7 @@ InvokeATSUDirectLayoutOperationOverrideUPP(
  *    This structure is used to install a callback for one or more
  *    ATSUI operations. To do this, simply passed one of these
  *    structure into the ATSUSetLayoutControls call with the
- *    kATSULayoutOperationOverrideUPP tag.
+ *    kATSULayoutOperationOverrideTag tag.
  */
 struct ATSULayoutOperationOverrideSpecifier {
 

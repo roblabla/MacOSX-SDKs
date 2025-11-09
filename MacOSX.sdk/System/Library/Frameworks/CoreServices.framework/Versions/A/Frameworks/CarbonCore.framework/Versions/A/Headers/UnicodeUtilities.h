@@ -3,9 +3,9 @@
  
      Contains:   Types, constants, prototypes for Unicode Utilities (Unicode input and text utils)
  
-     Version:    CarbonCore-472~1
+     Version:    CarbonCore-545~1
  
-     Copyright:  © 1997-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1997-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -28,6 +28,7 @@
 #ifndef __TEXTCOMMON__
 #include <CarbonCore/TextCommon.h>
 #endif
+
 
 
 #include <AvailabilityMacros.h>
@@ -274,6 +275,7 @@ enum {
    CONSTANTS & DATA STRUCTURES for Unicode Collation
    -------------------------------------------------------------------------------------------------
 */
+
 /* constant for LocaleOperationClass*/
 enum {
   kUnicodeCollationClass        = 'ucol'
@@ -321,18 +323,55 @@ typedef UInt32                          UCCollationValue;
    CONSTANTS & DATA STRUCTURES for Unicode TextBreak
    -------------------------------------------------------------------------------------------------
 */
+
 /* constant for LocaleOperationClass*/
 enum {
   kUnicodeTextBreakClass        = 'ubrk'
 };
 
 typedef struct OpaqueTextBreakLocatorRef*  TextBreakLocatorRef;
+
+/*
+ *  UCTextBreakType
+ *  
+ *  Discussion:
+ *    Specifies kinds of text boundaries.
+ */
 typedef UInt32 UCTextBreakType;
 enum {
+
+  /*
+   * If the bit specified by this mask is set, boundaries of characters
+   * may be located (with surrogate pairs treated as a single
+   * character).
+   */
   kUCTextBreakCharMask          = 1L << 0,
+
+  /*
+   * If the bit specified by this mask is set, boundaries of character
+   * clusters may be located. A cluster is a group of characters that
+   * should be treated as single text element for editing operations
+   * such as cursor movement. Typically this includes groups such as a
+   * base character followed by a sequence of combining characters, for
+   * example, a Hangul syllable represented as a sequence of conjoining
+   * jamo characters or an Indic consonant cluster.
+   */
   kUCTextBreakClusterMask       = 1L << 2,
+
+  /*
+   * If the bit specified by this mask is set, boundaries of words may
+   * be located. This can be used to determine what to highlight as the
+   * result of a double-click.
+   */
   kUCTextBreakWordMask          = 1L << 4,
-  kUCTextBreakLineMask          = 1L << 6
+  kUCTextBreakLineMask          = 1L << 6,
+
+  /*
+   * If the bit specified by this mask is set, boundaries of paragraphs
+   * may be located. This just finds the next hard-line break as
+   * defined by the Unicode standard.
+   */
+  kUCTextBreakParagraphMask     = 1L << 8
 };
 
 typedef UInt32 UCTextBreakOptions;
@@ -341,6 +380,7 @@ enum {
   kUCTextBreakGoBackwardsMask   = 1L << 1,
   kUCTextBreakIterateMask       = 1L << 2
 };
+
 
 /*
    -------------------------------------------------------------------------------------------------
@@ -371,6 +411,7 @@ UCKeyTranslate(
 
 
 /* Standard collation functions*/
+
 /*
  *  UCCreateCollator()
  *  
@@ -497,7 +538,9 @@ UCCompareTextNoLocale(
   SInt32 *           order)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+
 /* Standard text break (text boundary) functions*/
+
 /*
  *  UCCreateTextBreakLocator()
  *  
@@ -543,6 +586,7 @@ UCFindTextBreak(
  */
 extern OSStatus 
 UCDisposeTextBreakLocator(TextBreakLocatorRef * breakRef)     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
 
 
 

@@ -92,8 +92,14 @@ Define the Kind IDs for Universal and Standard Printing Dialog Extensions.
 #define kPMOutputOptionsPDEKindID       CFSTR("com.apple.print.pde.OutputOptionsKind")
 #define kPMDuplexPDEKindID              CFSTR("com.apple.print.pde.DuplexKind")
 #define kPMCustomPaperSizePDEKindID     CFSTR("com.apple.print.pde.CustomPaperSizeKind")
-/* Unimplemented Universal */
 #define kPMCoverPagePDEKindID           CFSTR("com.apple.print.pde.CoverPageKind")
+#define kPMSchedulerPDEKindID           CFSTR("com.apple.print.pde.SchedulerKind")
+#define kPMImagingOptionsPDEKindID		CFSTR("com.apple.print.pde.ImagingOptionsKind")
+#define kPMFaxCoverPagePDEKindID		CFSTR("com.apple.print.pde.FaxCoverPageKind")
+#define kPMFaxModemPDEKindID			CFSTR("com.apple.print.pde.FaxModemKind")
+#define kPMPaperHandlingPDEKindID		CFSTR("com.apple.print.pde.PaperHandlingKind")
+#define kPMSummaryPanelKindID			CFSTR("com.apple.print.pde.SummaryKind")
+/* Unimplemented Universal */
 #define kPMPaperSourcePDEKindID         CFSTR("com.apple.print.pde.PaperSourceKind")
 #define kPMPriorityPDEKindID            CFSTR("com.apple.print.pde.PriorityKind")
 #define kPMRotationScalingPDEKindID     CFSTR("com.apple.print.pde.RotationScalingKind")

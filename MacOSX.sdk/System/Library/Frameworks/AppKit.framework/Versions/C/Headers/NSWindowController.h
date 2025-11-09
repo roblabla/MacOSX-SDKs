@@ -1,8 +1,8 @@
 /*
- 	NSWindowController.h
-        Application Kit
-        Copyright (c) 1997-2001, Apple Computer, Inc.
-        All rights reserved.
+	NSWindowController.h
+	Application Kit
+	Copyright (c) 1997-2003, Apple Computer, Inc.
+	All rights reserved.
 */
 
 #import <AppKit/NSResponder.h>
@@ -34,7 +34,7 @@
 - (id)initWithWindowNibName:(NSString *)windowNibName;	// self is the owner
 - (id)initWithWindowNibName:(NSString *)windowNibName owner:(id)owner;
 - (id)initWithWindowNibPath:(NSString *)windowNibPath owner:(id)owner;
-    // Insatnces init'd with the "Name" methods will eventually locate their nib file in the file's owner's class' bundle or in the app's +mainBundle using standard NSBundle API.  Use the "Path" method if your nib file is at a fixed location (which is not inside one of those bundles).
+    // Instances initialized with the "Name" methods will eventually locate their nib file in the file's owner's class' bundle or in the app's +mainBundle using standard NSBundle API.  Use the "Path" method if your nib file is at a fixed location (which is not inside one of those bundles).
 
 // -----------------------------------------------------------------------------
 // Basic properties

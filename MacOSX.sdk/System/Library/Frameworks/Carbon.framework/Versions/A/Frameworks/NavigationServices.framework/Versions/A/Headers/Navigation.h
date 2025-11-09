@@ -3,9 +3,9 @@
  
      Contains:   Navigation Services Interfaces
  
-     Version:    NavigationServices-88~217
+     Version:    NavigationServices-97.5~1
  
-     Copyright:  © 1996-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1996-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -1212,7 +1212,7 @@ struct NavDialogCreationOptions {
 
   /*
    * The initial value appearing in the edit text field for the file
-   * name to be saved (PutFile only).
+   * name to be saved (PutFile, NavAskSaveChanges only).
    */
   CFStringRef         saveFileName;
 
@@ -2073,7 +2073,8 @@ NavDialogGetSaveFileName(NavDialogRef inPutFileDialog)        AVAILABLE_MAC_OS_X
  *      Which PutFile dialog
  *    
  *    inFileName:
- *      The file name to use
+ *      The file name to use. A copy of the provided string is made for
+ *      use by Navigation Services.
  *  
  *  Result:
  *    A status code

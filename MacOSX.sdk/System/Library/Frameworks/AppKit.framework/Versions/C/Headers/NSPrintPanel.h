@@ -1,7 +1,7 @@
 /*
 	NSPrintPanel.h
 	Application Kit
-	Copyright (c) 1994-2002, Apple Computer, Inc.
+	Copyright (c) 1994-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 

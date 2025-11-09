@@ -1,7 +1,7 @@
 /*
         NSTableHeaderView.h
         Application Kit
-        Copyright (c) 1995-2001, Apple Computer, Inc.
+        Copyright (c) 1995-2003, Apple Computer, Inc.
         All rights reserved.
 */
 
@@ -18,14 +18,14 @@
     NSTableView			*_tableView;
     int				_resizedColumn;
     int				_draggedColumn;
-    int				_mayDragColumn;
+    int				_pressedColumn;
     NSImage			*_headerDragImage;
     float			_draggedDistance;
     BOOL			_isColumnResizing;
-    BOOL			_reserved2;
+    BOOL			_showHandCursorFired;
     BOOL			_reserved3;
     BOOL			_reserved4;
-    BOOL			_drawingLastColumn;
+    BOOL			_skipDrawingSeparator;
     id				_reserved;
 }
 

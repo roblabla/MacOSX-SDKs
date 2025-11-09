@@ -3,9 +3,9 @@
  
      Contains:   Definitions of controls provided by the Control Manager
  
-     Version:    HIToolbox-124.14~2
+     Version:    HIToolbox-145.33~1
  
-     Copyright:  © 1999-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -157,6 +157,7 @@
 #define kControlBevelButtonOwnedMenuRefTag  'omrf'			/*  MenuRef (control will dispose) */
 #define kControlBevelButtonKindTag 		'bebk'				/*  ThemeButtonKind ( kTheme[Small,Medium,Large,Rounded]BevelButton ) */
 
+#define kControlBevelButtonIsMultiValueMenuTag  'mult'
 #define kControlSliderProc 				48
 #define kControlSliderLiveFeedback 		0x01
 #define kControlSliderHasTickMarks 		0x02
@@ -186,6 +187,7 @@
 
 #define kControlLittleArrowsProc 		96
 #define kControlKindLittleArrows 		'larr'
+#define kControlLittleArrowsIncrementValueTag  'incr'
 #define kControlChasingArrowsProc 		112
 #define kControlKindChasingArrows 		'carr'
 #define kControlChasingArrowsAnimatingTag  'anim'			/*  Boolean */
@@ -233,6 +235,7 @@
 #define kControlGroupBoxFontStyleTag 	'font'				/*  ControlFontStyleRec */
 
 #define kControlGroupBoxTitleRectTag 	'trec'				/*  Rect. Rectangle that the title text/control is drawn in. (get only) */
+#define kControlGroupBoxFrameRectTag 	'frec'
 #define kControlImageWellProc 			176
 #define kControlKindImageWell 			'well'
 #define kControlImageWellContentTag 	'cont'				/*  ButtonContentInfo */
@@ -284,7 +287,7 @@
 #define kControlUserPaneProc 			256
 #define kControlKindUserPane 			'upan'
 #define kControlUserItemDrawProcTag 	'uidp'				/*  UserItemUPP */
-#define kControlUserPaneDrawProcTag 	'draw'				/*  ControlUserPaneDrawingUPP */
+#define kControlUserPaneDrawProcTag 	'draw'				/*  ControlUserPaneDrawUPP */
 #define kControlUserPaneHitTestProcTag 	'hitt'				/*  ControlUserPaneHitTestUPP */
 #define kControlUserPaneTrackingProcTag  'trak'				/*  ControlUserPaneTrackingUPP */
 #define kControlUserPaneIdleProcTag 	'idle'				/*  ControlUserPaneIdleUPP */
@@ -318,12 +321,13 @@
 
 #define kControlStaticTextProc 			288
 #define kControlKindStaticText 			'stxt'
-#define kControlStaticTextStyleTag 		'font'				/*  ControlFontStyleRec */
-#define kControlStaticTextTextTag 		'text'				/*  Copy of text */
-#define kControlStaticTextTextHeightTag  'thei'				/*  SInt16 */
+#define kControlStaticTextStyleTag 		'font'
+#define kControlStaticTextTextTag 		'text'
+#define kControlStaticTextTextHeightTag  'thei'
+#define kControlStaticTextTruncTag 		'trun'
+#define kControlStaticTextCFStringTag 	'cfst'
+#define kControlStaticTextIsMultilineTag  'stim'
 
-#define kControlStaticTextTruncTag 		'trun'				/*  TruncCode (-1 means no truncation) */
-#define kControlStaticTextCFStringTag 	'cfst'				/*  CFStringRef (Also available on CarbonLib 1.5) */
 #define kControlPictureProc 			304
 #define kControlPictureNoTrackProc 		305					/*  immediately returns kControlPicturePart */
 
@@ -351,6 +355,7 @@
 #define kControlWindowListViewHeaderProc  337				/*  variant for list views - no bottom line */
 
 #define kControlKindWindowHeader 		'whed'
+#define kControlWindowHeaderIsListHeaderTag  'islh'
 #define kControlListBoxProc 			352
 #define kControlListBoxAutoSizeProc 	353
 
@@ -495,14 +500,18 @@
 
 															/*  kDataBrowserTableView DataBrowserPropertyFlags  */
 #define kDataBrowserTableViewSelectionColumn  0x00010000
-															/*  kDataBrowserListView DataBrowserPropertyFlags  */
+#define kDataBrowserListViewSelectionColumn  0x00010000
 #define kDataBrowserListViewMovableColumn  0x00020000
 #define kDataBrowserListViewSortableColumn  0x00040000
-#define kDataBrowserListViewSelectionColumn  0x00010000
+#define kDataBrowserListViewTypeSelectColumn  0x00080000
 #define kDataBrowserListViewDefaultColumnFlags  0x00060000
 
 #define kControlKindEditUnicodeText 	'eutx'
-#define kControlEditTextSingleLineTag 	'sglc'
+#define kControlEditTextSingleLineTag 	'sglc'				/*  data is a Boolean; indicates whether the control should always be single-line */
+#define kControlEditTextInsertTextBufferTag  'intx'			/*  data is an array of char; get or set the control's text as WorldScript-encoded text */
+#define kControlEditTextInsertCFStringRefTag  'incf'		/*  data is a CFStringRef; get or set the control's text as a CFStringRef. Caller should release CFString if getting. */
+#define kControlEditUnicodeTextPostUpdateProcTag  'upup'	/*  data is a UnicodePostUpdateUPP; get or set the post-update proc */
+
 
 /*--------------------------ldes ¥ List Box Description Template------------------------*/
 /*  Used in conjunction with the list box control.                                    */

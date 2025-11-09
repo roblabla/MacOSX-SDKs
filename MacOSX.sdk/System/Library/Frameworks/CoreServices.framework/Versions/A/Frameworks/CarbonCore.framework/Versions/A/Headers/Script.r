@@ -3,9 +3,9 @@
  
      Contains:   Script Manager interfaces
  
-     Version:    CarbonCore-472~1
+     Version:    CarbonCore-545~1
  
-     Copyright:  © 1986-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1986-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -80,12 +80,12 @@
 #define langSpanish 					6					/*  smRoman script */
 #define langDanish 						7					/*  smRoman script */
 #define langPortuguese 					8					/*  smRoman script */
-#define langNorwegian 					9					/*  smRoman script */
+#define langNorwegian 					9					/*  (Bokmal) smRoman script */
 #define langHebrew 						10					/*  smHebrew script */
 #define langJapanese 					11					/*  smJapanese script */
 #define langArabic 						12					/*  smArabic script */
 #define langFinnish 					13					/*  smRoman script */
-#define langGreek 						14					/*  Greek script using smRoman script code */
+#define langGreek 						14					/*  Greek script (monotonic) using smRoman script code */
 #define langIcelandic 					15					/*  modified smRoman/Icelandic script */
 #define langMaltese 					16					/*  Roman script */
 #define langTurkish 					17					/*  modified smRoman/Turkish script */
@@ -195,9 +195,10 @@
 #define langManxGaelic 					145					/*  smRoman or modified smRoman/Celtic script                  */
 #define langIrishGaelicScript 			146					/*  modified smRoman/Gaelic script (using dot above)                */
 #define langTongan 						147					/*  smRoman script                                    */
-#define langGreekPoly 					148					/*  smGreek script                                    */
+#define langGreekAncient 				148					/*  Classical Greek, polytonic orthography                     */
 #define langGreenlandic 				149					/*  smRoman script                                    */
 #define langAzerbaijanRoman 			150					/*  Azerbaijani in Roman script                              */
+#define langNynorsk 					151					/*  Norwegian Nyorsk in smRoman */
 
 #define langUnspecified 				32767				/*  Special code for use in resources (such as 'itlm')            */
 #define langPortugese 					8					/*  Use langPortuguese */
@@ -212,6 +213,7 @@
 #define langIrish 						35					/*  Use langIrishGaelic                                   */
 #define langGalla 						87					/*  Use langOromo                                  */
 #define langAfricaans 					141					/*  Use langAfrikaans                                 */
+#define langGreekPoly 					148					/*  Use langGreekAncient */
 
 															/*  P/N    ISO    codes  comments */
 #define verUS 							0					/*        en_US */
@@ -226,8 +228,8 @@
 #define verDenmark 						9					/*  DK da_DK */
 #define verPortugal 					10					/*  PO pt_PT     Portuguese for Portugal */
 #define verFrCanada 					11					/*  C  fr_CA       French for Canada */
-#define verNorway 						12					/*  H  no_NO,nb_NO  BokmŒl */
-#define verIsrael 						13					/*  HB he_IL,iw_IL Hebrew */
+#define verNorway 						12					/*  H  nb_NO       Bokmål */
+#define verIsrael 						13					/*  HB he_IL     Hebrew */
 #define verJapan 						14					/*  J  ja_JP */
 #define verAustralia 					15					/*  X  en_AU       English for Australia */
 #define verArabic 						16					/*  AB ar       Arabic for N Africa, Arabian peninsula, Levant */
@@ -237,12 +239,12 @@
 #define verGreece 						20					/*  GR el_GR     Monotonic Greek (modern) */
 #define verIceland 						21					/*  IS is_IS */
 #define verMalta 						22					/*  MA mt_MT */
-#define verCyprus 						23					/*  CY   _CY     Greek or Turkish language? Checking... */
+#define verCyprus 						23					/*  CY el_CY */
 #define verTurkey 						24					/*  TU tr_TR */
-#define verYugoCroatian 				25					/*  YU          Croatian for Yugoslavia; now use verCroatia (68) */
+#define verYugoCroatian 				25					/*  YU hr_HR     Croatian for Yugoslavia; now use verCroatia (68) */
 
 #define verNetherlandsComma 			26					/*               ID for KCHR resource - Dutch */
-#define verBelgiumLuxPoint 				27					/*               ID for KCHR resource - Belgium */
+#define verFlemishPoint 				27					/*               ID for KCHR resource - Belgium */
 #define verCanadaComma 					28					/*               ID for KCHR resource - Canadian ISO */
 #define verCanadaPoint 					29					/*               ID for KCHR resource - Canadian; now unused */
 #define vervariantPortugal 				30					/*               ID for resource; now unused */
@@ -251,12 +253,12 @@
 
 #define verIndiaHindi 					33					/*        hi_IN     Hindi for India */
 #define verPakistanUrdu 				34					/*  UR ur_PK     Urdu for Pakistan                         */
-#define verTurkishModified 				35
+#define verTurkishModified 				35					/*        tr_TR */
 #define verItalianSwiss 				36					/*  ST it_CH     Italian Swiss */
-#define verInternational 				37					/*  Z  en      English for international use                */
+#define verInternational 				37					/*  Z  en-ASCII English for international use; ASCII chars only      */
 															/*               38 is unassigned */
 #define verRomania 						39					/*  RO ro_RO */
-#define verGreecePoly 					40					/*        grc      Polytonic Greek (classical)                   */
+#define verGreekAncient 				40					/*        grc      Ancient Greek, polytonic orthography           */
 #define verLithuania 					41					/*  LT lt_LT */
 #define verPoland 						42					/*  PL pl_PL */
 #define verHungary 						43					/*  MG hu_HU */
@@ -274,20 +276,20 @@
 #define verScriptGeneric 				55					/*  SS          Generic script system (no language or script)        */
 #define verCzech 						56					/*  CZ cs_CZ */
 #define verSlovak 						57					/*  SL sk_SK */
-#define verFarEastGeneric 				58					/*  FE          Generic Far East system (no language or script)    */
-#define verMagyar 						59					/*               Unused; see verHungary */
+#define verEastAsiaGeneric 				58					/*  FE          Generic East Asia system (no language or script)  */
+#define verMagyar 						59					/*        hu_HU     Unused; see verHungary */
 #define verBengali 						60					/*        bn         Bangladesh or India */
-#define verByeloRussian 				61					/*  BY be_BY */
+#define verBelarus 						61					/*  BY be_BY */
 
 #define verUkraine 						62					/*  UA uk_UA */
 															/*               63 is unassigned */
-#define verGreeceAlt 					64					/*               unused                               */
-#define verSerbian 						65					/*  SR sr_YU,sh_YU                                    */
+#define verGreeceAlt 					64					/*        el_GR     unused                               */
+#define verSerbian 						65					/*  SR sr_YU                                     */
 #define verSlovenian 					66					/*  SV sl_SI                                     */
 #define verMacedonian 					67					/*  MD mk_MK                                     */
-#define verCroatia 						68					/*  CR hr_HR,sh_HR */
+#define verCroatia 						68					/*  CR hr_HR */
 															/*               69 is unassigned */
-#define verGermanReformed 				70					/*        de_DE     Reformed orthography (used formerly unassigned 70)  */
+#define verGermanReformed 				70					/*        de-1996     Reformed orthography (used formerly unassigned 70)    */
 #define verBrazil 						71					/*  BR pt_BR     Portuguese for Brazil */
 #define verBulgaria 					72					/*  BG bg_BG */
 #define verCatalonia 					73					/*  CA ca_ES     Catalan for Spain */
@@ -298,12 +300,12 @@
 #define verNunavut 						78					/*  IU iu_CA     Inuktitut for Canada */
 #define verWelsh 						79					/*  CU cy */
 															/*               80 is ID for KCHR resource - Canadian CSA */
-#define verIrishGaelicScript 			81					/*  GS ga_IE     Irish Gaelic for Ireland (using dot above) */
+#define verIrishGaelicScript 			81					/*  GS ga-dots_IE  Irish Gaelic for Ireland (using dot above) */
 #define verEngCanada 					82					/*  V  en_CA       English for Canada */
 #define verBhutan 						83					/*  BH dz_BT     Dzongkha for Bhutan */
 #define verArmenian 					84					/*  HY hy_AM */
 #define verGeorgian 					85					/*  KR ka_GE */
-#define verSpLatinAmerica 				86					/*  LA es       Spanish for Latin America */
+#define verSpLatinAmerica 				86					/*  LA es_XL     Spanish for Latin America (private ISO 3166 code) */
 															/*               87 is ID for KCHR resource - Spanish ISO */
 #define verTonga 						88					/*  TS to_TO */
 															/*               89 is ID for KCHR resource - Polish Modified */
@@ -318,7 +320,7 @@
 
 #define verFrBelgium 					98					/*  BF fr_BE     French for Belgium                        */
 #define verUzbek 						99					/*  BD uz_UZ                                     */
-#define verSingapore 					100					/*  SG                                          */
+#define verSingapore 					100					/*  SG en_SG     (Assume English, not Chinese or Malay)                                  */
 #define verNynorsk 						101					/*  NY nn_NO     Norwegian Nynorsk                         */
 #define verAfrikaans 					102					/*  AK af_ZA                                     */
 #define verEsperanto 					103					/*        eo                                         */
@@ -332,14 +334,16 @@
 #define verBelgiumLux 					6					/*  Use verFlemish */
 #define verArabia 						16					/*  Use verArabic */
 #define verYugoslavia 					25					/*  Use verYugoCroatian (same number, now unused), or newer verCroatia */
+#define verBelgiumLuxPoint 				27					/*  Use verFlemishPoint */
 #define verIndia 						33					/*  Use verIndiaHindi */
 #define verPakistan 					34					/*  Use verPakistanUrdu                                   */
 #define verRumania 						39					/*  Alternate for verRomania                               */
-#define verGreekAncient 				40					/*  Use verGreecePoly                                 */
+#define verGreecePoly 					40					/*  Use verGreekAncient                                   */
 #define verLapland 						46					/*  Use verSami                                        */
 #define verFaeroeIsl 					47					/*  Use verFaroeIsl                                      */
-#define verGenericFE 					58					/*  Use verFarEastGeneric                               */
-#define verBelarus 						61					/*  Alternate for verByelorussian                        */
+#define verGenericFE 					58					/*  Use verEastAsiaGeneric                               */
+#define verFarEastGeneric 				58					/*  Use verEastAsiaGeneric */
+#define verByeloRussian 				61					/*  Alternate for verBelarus                               */
 #define verUkrania 						62					/*  Use verUkraine */
 #define verAlternateGr 					64					/*  Use verGreeceAlt                                    */
 #define verSerbia 						65					/*  Alternate for verSerbian                               */
@@ -352,7 +356,7 @@
 #define verAustriaGerman 				92					/*  Use verAustria                                    */
 #define verTibet 						105					/*  Use verTibetan                                    */
 
-/*----------------------------KSWP ¥ Keyboard Swapping----------------------------------*/
+/*----------------------------KSWP € Keyboard Swapping----------------------------------*/
 type 'KSWP' {
         /* The expression below that calculates the number of elements in the
            array is complicated because of the way that $$ResourceSize works.

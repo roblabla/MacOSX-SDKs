@@ -1,7 +1,7 @@
 /*
         NSMenuView.h
         Application Kit
-        Copyright (c) 1997-2001, Apple Computer, Inc.
+        Copyright (c) 1997-2003, Apple Computer, Inc.
         All rights reserved.
 */
 
@@ -23,11 +23,7 @@
     float *_extents;
     unsigned _extentsCapacity;
     int _highlightedItemIndex;
-#if NSRUNLOOP
-    NSTimer *_submenuPopupTimer;
-#else
     void *_submenuPopupTimer;
-#endif
     NSMenuView *_attachedMenuView;
     float _scrollArrowHeight;
     float _maxWinHeight;

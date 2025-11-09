@@ -1,7 +1,7 @@
 /*
 	NSClipView.h
 	Application Kit
-	Copyright (c) 1994-2001, Apple Computer, Inc.
+	Copyright (c) 1994-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -28,7 +28,10 @@
         unsigned int        drawsBackground:1;
         unsigned int        scrollInProgress:1;
         unsigned int        skipRemoveSuperviewCheck:1;
-        unsigned int        RESERVED:23;
+        unsigned int        animateCurrentScroll:1;
+        unsigned int        canAnimateScrolls:1;
+        unsigned int	    nextScrollRelativeToCurrentPosition:1;
+        unsigned int        RESERVED:20;
     } _cvFlags;
 }
 

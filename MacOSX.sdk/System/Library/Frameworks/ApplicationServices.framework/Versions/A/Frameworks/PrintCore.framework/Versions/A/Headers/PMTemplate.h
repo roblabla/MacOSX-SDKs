@@ -76,6 +76,15 @@ enum {
 #define kPMCustomPageMarginsStr      	    kPMTemplatePrelude "PMCustomPageMargins"
 #define kPMCustomPageMarginsKey        	    CFSTR( kPMCustomPageMarginsStr )            /* Will fetch the margin data for a custom page. */
 
+/* kPMDefaultReverseOutputOrderKey specifies whether the default page stacking order for the Tioga based printer is reverse.
+	If true, the default output stacking order without host intervention is N, N-1, ... 2, 1. 
+	If false, the default output stacking order without host intervention is 1, 2, ... , N-1 , N
+	If this key is not present the default value is true since the typical 
+	    Tioga printer module based raster printer stacks pages in reverse order.
+*/
+#define kPMDefaultReverseOutputOrderStr		kPMTemplatePrelude "PMDefaultReverseOutputOrder"
+#define kPMDefaultReverseOutputOrderKey        	CFSTR( kPMDefaultReverseOutputOrderStr ) 
+
 
 /* Function Prototypes */
 /* The PMTemplateRef is defined in PMTicket.h to avoid circular references, and  */

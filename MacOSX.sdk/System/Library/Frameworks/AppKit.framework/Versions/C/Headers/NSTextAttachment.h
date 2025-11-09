@@ -1,6 +1,6 @@
 /* 
 	NSTextAttachment.h
-	Copyright (c) 1994-2001, Apple Computer, Inc.
+	Copyright (c) 1994-2003, Apple Computer, Inc.
 	All rights reserved.
 
 	Classes to represent text attachments.

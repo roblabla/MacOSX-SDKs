@@ -38,6 +38,23 @@ typedef function_table_entry 	*function_table_t;
 __BeforeMigUserHeader
 #endif /* __BeforeMigUserHeader */
 
+#include <sys/cdefs.h>
+__BEGIN_DECLS
+
+
+__END_DECLS
+
+/********************** Caution **************************/
+/* The following data types should be used to calculate  */
+/* maximum message sizes only. The actual message may be */
+/* smaller, and the position of the arguments within the */
+/* message layout may vary from what is presented here.  */
+/* For example, if any of the arguments are variable-    */
+/* sized, and less than the maximum is sent, the data    */
+/* will be packed tight in the actual message to reduce  */
+/* the presence of holes.                                */
+/********************** Caution **************************/
+
 /* typedefs for all requests */
 
 #ifndef __Request__memory_object_name_subsystem__defined

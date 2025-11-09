@@ -3,9 +3,9 @@
  
      Contains:   Icon Utilities and Icon Services Interfaces.
  
-     Version:    HIServices-106.1~2
+     Version:    HIServices-125.6~1
  
-     Copyright:  © 1990-2002 by Apple Computer, Inc. All rights reserved
+     Copyright:  © 1990-2003 by Apple Computer, Inc. All rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -653,7 +653,7 @@ PlotIconMethod(
  *  GetLabel()
  *  
  *  Mac OS X threading:
- *    Not thread safe
+ *    Thread safe since version Panther
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -1047,6 +1047,7 @@ enum {
   kClippingSoundTypeIcon        = 'clps',
   kDesktopIcon                  = 'desk',
   kFinderIcon                   = 'FNDR',
+  kComputerIcon                 = 'root',
   kFontSuitcaseIcon             = 'FFIL',
   kFullTrashIcon                = 'ftrh',
   kGenericApplicationIcon       = 'APPL',
@@ -1135,38 +1136,38 @@ enum {
 /* Special folders */
 enum {
   kAppearanceFolderIcon         = 'appr',
-  kAppleExtrasFolderIcon        = 'aexÄ',
+  kAppleExtrasFolderIcon        = 0x616578C4/*'aexÄ'*/,
   kAppleMenuFolderIcon          = 'amnu',
   kApplicationsFolderIcon       = 'apps',
   kApplicationSupportFolderIcon = 'asup',
-  kAssistantsFolderIcon         = 'astÄ',
+  kAssistantsFolderIcon         = 0x617374C4/*'astÄ'*/,
   kColorSyncFolderIcon          = 'prof',
   kContextualMenuItemsFolderIcon = 'cmnu',
   kControlPanelDisabledFolderIcon = 'ctrD',
   kControlPanelFolderIcon       = 'ctrl',
-  kControlStripModulesFolderIcon = 'sdvÄ',
+  kControlStripModulesFolderIcon = 0x736476C4/*'sdvÄ'*/,
   kDocumentsFolderIcon          = 'docs',
   kExtensionsDisabledFolderIcon = 'extD',
   kExtensionsFolderIcon         = 'extn',
   kFavoritesFolderIcon          = 'favs',
   kFontsFolderIcon              = 'font',
-  kHelpFolderIcon               = 'Ählp',
-  kInternetFolderIcon           = 'intÄ',
-  kInternetPlugInFolderIcon     = 'Änet',
+  kHelpFolderIcon               = (long)0xC4686C70/*'Ählp' */,
+  kInternetFolderIcon           = 0x696E74C4/*'intÄ'*/,
+  kInternetPlugInFolderIcon     = (long)0xC46E6574/*'Änet' */,
   kInternetSearchSitesFolderIcon = 'issf',
-  kLocalesFolderIcon            = 'Äloc',
-  kMacOSReadMeFolderIcon        = 'morÄ',
+  kLocalesFolderIcon            = (long)0xC46C6F63/*'Äloc' */,
+  kMacOSReadMeFolderIcon        = 0x6D6F72C4/*'morÄ'*/,
   kPublicFolderIcon             = 'pubf',
-  kPreferencesFolderIcon        = 'prfÄ',
+  kPreferencesFolderIcon        = 0x707266C4/*'prfÄ'*/,
   kPrinterDescriptionFolderIcon = 'ppdf',
-  kPrinterDriverFolderIcon      = 'Äprd',
+  kPrinterDriverFolderIcon      = (long)0xC4707264/*'Äprd' */,
   kPrintMonitorFolderIcon       = 'prnt',
   kRecentApplicationsFolderIcon = 'rapp',
   kRecentDocumentsFolderIcon    = 'rdoc',
   kRecentServersFolderIcon      = 'rsrv',
-  kScriptingAdditionsFolderIcon = 'Äscr',
-  kSharedLibrariesFolderIcon    = 'Älib',
-  kScriptsFolderIcon            = 'scrÄ',
+  kScriptingAdditionsFolderIcon = (long)0xC4736372/*'Äscr' */,
+  kSharedLibrariesFolderIcon    = (long)0xC46C6962/*'Älib' */,
+  kScriptsFolderIcon            = 0x736372C4/*'scrÄ'*/,
   kShutdownItemsDisabledFolderIcon = 'shdD',
   kShutdownItemsFolderIcon      = 'shdf',
   kSpeakableItemsFolder         = 'spki',
@@ -1174,9 +1175,9 @@ enum {
   kStartupItemsFolderIcon       = 'strt',
   kSystemExtensionDisabledFolderIcon = 'macD',
   kSystemFolderIcon             = 'macs',
-  kTextEncodingsFolderIcon      = 'Ätex',
-  kUsersFolderIcon              = 'usrÄ',
-  kUtilitiesFolderIcon          = 'utiÄ',
+  kTextEncodingsFolderIcon      = (long)0xC4746578/*'Ätex' */,
+  kUsersFolderIcon              = 0x757372C4/*'usrÄ'*/,
+  kUtilitiesFolderIcon          = 0x757469C4/*'utiÄ'*/,
   kVoicesFolderIcon             = 'fvoc'
 };
 
@@ -1251,17 +1252,21 @@ enum {
 /*  IconServicesUsageFlags */
 typedef UInt32                          IconServicesUsageFlags;
 enum {
-  kIconServicesNormalUsageFlag  = 0
+  kIconServicesNormalUsageFlag  = 0x00000000,
+  kIconServicesNoBadgeFlag      = 0x00000001, /* available on Panther and later */
+  kIconServicesUpdateIfNeededFlag = 0x00000002 /* available on Panther and later */
 };
 
 
 /*
   kIconServicesCatalogInfoMask - Minimal bitmask for use with
     GetIconRefFromFileInfo(). Use this mask with FSGetCatalogInfo
-    before calling GetIconRefFromFileInfo().
+    before calling GetIconRefFromFileInfo(). Please note kFSCatInfoFinderXInfo flag is
+    valid only on MacOS X and must be cleared from CatalogInfoMask before
+    passing to GetIconRefFromFileInfo while running under MacOS 9 (or error will be returned)
 */
 enum {
-  kIconServicesCatalogInfoMask  = (kFSCatInfoNodeID | kFSCatInfoParentDirID | kFSCatInfoVolume | kFSCatInfoNodeFlags | kFSCatInfoFinderInfo | kFSCatInfoFinderXInfo | kFSCatInfoUserAccess)
+  kIconServicesCatalogInfoMask  = (kFSCatInfoNodeID | kFSCatInfoParentDirID | kFSCatInfoVolume | kFSCatInfoNodeFlags | kFSCatInfoFinderInfo | kFSCatInfoFinderXInfo | kFSCatInfoUserAccess | kFSCatInfoPermissions | kFSCatInfoContentMod)
 };
 
 
@@ -1719,6 +1724,97 @@ GetIconRefFromFileInfo(
   IconServicesUsageFlags   inUsageFlags,
   IconRef *                outIconRef,
   SInt16 *                 outLabel)                          AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
+
+/* GetIconRefFromTypeInfo*/
+/*
+ *  GetIconRefFromTypeInfo()
+ *  
+ *  Summary:
+ *    Create an IconRef for a type information.
+ *  
+ *  Discussion:
+ *    Creates IconRef based on provided type info. Any of the input
+ *    parameters can be zero (meaning it is unknown). Returns generic
+ *    document icon in case if all parameters are zeroes. Calling the
+ *    routine with non zero inCreator and inType and zero inExtension
+ *    and inMIMEType is equivalent to GetIconRef(kOnSystemDisk,
+ *    inCreator, inType).
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inCreator:
+ *      The creator.
+ *    
+ *    inType:
+ *      The type.
+ *    
+ *    inExtension:
+ *      The extension.
+ *    
+ *    inMIMEType:
+ *      The MIME type.
+ *    
+ *    inUsageFlags:
+ *      The usage flags for this call (use
+ *      kIconServicesNormalUsageFlag).
+ *    
+ *    outIconRef:
+ *      The output IconRef for the routine.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr 
+GetIconRefFromTypeInfo(
+  OSType                   inCreator,
+  OSType                   inType,
+  CFStringRef              inExtension,
+  CFStringRef              inMIMEType,
+  IconServicesUsageFlags   inUsageFlags,
+  IconRef *                outIconRef)                        AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+
+/* GetIconRefFromIconFamilyPtr*/
+/*
+ *  GetIconRefFromIconFamilyPtr()
+ *  
+ *  Summary:
+ *    Create an IconRef for the IconFamilyPtr.
+ *  
+ *  Discussion:
+ *    This routine creates IconRef for the IconFamilyPtr.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inIconFamilyPtr:
+ *      The icon data
+ *    
+ *    inSize:
+ *      The icon data size
+ *    
+ *    outIconRef:
+ *      The output IconRef for the routine.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+GetIconRefFromIconFamilyPtr(
+  const IconFamilyResource *  inIconFamilyPtr,
+  Size                        inSize,
+  IconRef *                   outIconRef)                     AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 /*
@@ -2228,16 +2324,18 @@ IconRefToRgn(
    in hitting the local disk or even the network to obtain the data to determine 
    which sizes/depths actually exist.
    Pass kIconServicesNormalUsageFlag as a default value for IconServicesUsageFlags.
+   
+   This call is deprecated. Please use IsDataAvailableInIconRef() instead.
 */
 
 /*
- *  GetIconSizesFromIconRef()
+ *  GetIconSizesFromIconRef()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
  */
@@ -2246,9 +2344,42 @@ GetIconSizesFromIconRef(
   IconSelectorValue        iconSelectorInput,
   IconSelectorValue *      iconSelectorOutputPtr,
   IconServicesUsageFlags   iconServicesUsageFlags,
-  IconRef                  theIconRef)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  IconRef                  theIconRef)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
 
 
+
+
+/* IsDataAvailableInIconRef*/
+/*
+ *  IsDataAvailableInIconRef()
+ *  
+ *  Summary:
+ *    Check if IconRef has specific data.
+ *  
+ *  Discussion:
+ *    This routine returns true if inIconKind icon data is availabe or
+ *    can be created.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inIconKind:
+ *      The icon data kind
+ *    
+ *    inIconRef:
+ *      The IconRef to test.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern Boolean 
+IsDataAvailableInIconRef(
+  OSType    inIconKind,
+  IconRef   inIconRef)                                        AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 /*
@@ -2267,20 +2398,20 @@ GetIconSizesFromIconRef(
 */
 
 /*
- *  FlushIconRefs()
+ *  FlushIconRefs()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe since version Jaguar
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
  */
 extern OSErr 
 FlushIconRefs(
   OSType   creator,
-  OSType   iconType)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSType   iconType)                                          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
 
 
 
@@ -2293,18 +2424,18 @@ FlushIconRefs(
 */
 
 /*
- *  FlushIconRefsByVolume()
+ *  FlushIconRefsByVolume()   *** DEPRECATED ***
  *  
  *  Mac OS X threading:
  *    Thread safe since version Jaguar
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
+ *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in IconServicesLib 8.5 and later
  */
 extern OSErr 
-FlushIconRefsByVolume(SInt16 vRefNum)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+FlushIconRefsByVolume(SInt16 vRefNum)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
 
 
 

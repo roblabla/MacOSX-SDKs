@@ -1,10 +1,8 @@
 /*	NSArchiver.h
-	Copyright 1994-2002, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2003, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSCoder.h>
-#import <Foundation/NSHashTable.h>	// imported for backwards source compat
-#import <Foundation/NSMapTable.h>	// imported for backwards source compat
 
 @class NSString, NSData, NSMutableData, NSMutableDictionary, NSMutableArray;
 

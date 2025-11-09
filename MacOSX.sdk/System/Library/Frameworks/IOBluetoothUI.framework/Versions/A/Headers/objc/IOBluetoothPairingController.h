@@ -64,12 +64,16 @@
 */
 - (void)runPanelWithAttributes:(IOBluetoothDeviceSearchAttributes *)attributes;
 
+#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_1
+
 /*!
     @method		runModal
 	@abstract	Runs the pairing panel in a modal session to allow the user to select a Bluetooth device.
 	@discussion	The controller will use the panel attributes to filter what devices the user sees.  The allowed UUIDs
 				will be used to validate the selection the user makes.  Only when a selection has been validated (or
 				the panel cancelled) and the device paired, will this method return.
+
+				NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later.
 	@result		Returns kIOBluetoothUISuccess if a successful, validated device selection was made by the user and
 				that device successfully paired.
 				Returns kIOBluetoothUIUserCanceledErr if the user cancelled the panel.  These return values are the
@@ -86,6 +90,8 @@
 				selection has been validated and the selected device paired.  If kIOBluetoothUISuccess was returned for 
 				the session, there should be valid results.  Currently only a single device is allowed to be selected, 
 				so the results array will only contain one object.  However in the future multiple selection may be supported.
+
+				NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later.
 	@result		Returns an NSArray of IOBluetoothDevice objects of devices that were paired.  If the user cancelled
 				the panel, nil will be returned.
 */
@@ -99,6 +105,8 @@
 				kIOBluetoothServiceBrowserControllerOptionsAutoStartInquiry is the only supported option.
 				In the future more options will be added to control things like whether the connection to
 				the device is closed when the controller is finished or if multiple selection is allowed.
+
+				NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later.
 	@param		options	Options to control the panel's behavior.
 */
 
@@ -107,6 +115,7 @@
 /*!
     @method		getOptions
 	@abstract	Returns the option bits that control the panel's behavior.
+	@discussion	NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later.
 	@result		Returns the option bits set by setOptions:
 */
 
@@ -118,6 +127,8 @@
 	@discussion	The device search attributes control the inquiry behavior of the panel.  They allow only devices
 				that match the specified attributes (i.e. class of device) to be displayed to the user.  Note that
 				this only covers attributes returned in an inquiry result and not actual SDP services on the device.
+
+				NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later.
 	@param		searchAttributes Attributes to control the panel's inquiry behavior.
 */
 
@@ -126,6 +137,7 @@
 /*!
     @method		getSearchAttributes
 	@abstract	Returns the search attributes that control the panel's search/inquiry behavior.
+	@discussion	NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later.
 	@result		Returns the search attributes set by setSearchAttributes:
 */
 
@@ -142,6 +154,8 @@
 				-addAllowedUUID: is the only UUID that must be present in the device's SDP service records.
 				Alternatively, all of the UUIDs in the UUID array passed to -addAllowedUUIDArray must be
 				present.
+
+				NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later.
 	@param		allowedUUID UUID that a device may contain to be selected
 */
 
@@ -158,6 +172,8 @@
 				-addAllowedUUID: is the only UUID that must be present in the device's SDP service records.
 				Alternatively, all of the UUIDs in the UUID array passed to -addAllowedUUIDArray must be
 				present.
+
+				NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later.
 	@param		allowedUUIDArray An NSArray of UUIDs that all must be present in a device for it to be selectable.
 */
 
@@ -166,6 +182,7 @@
 /*!
     @method		clearAllowedUUIDs
 	@abstract	Resets the controller back to the default state where it will accept any device the user selects.
+	@discussion	NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later.
 */
 
 - (void)clearAllowedUUIDs;
@@ -174,6 +191,8 @@
     @method		setTitle:
 	@abstract	Sets the title of the panel when not run as a sheet.
 	@discussion	The panel title should be localized for best user experience.
+
+				NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later.
 	@param		windowTitle Title of the device selector panel.
 */
 
@@ -181,6 +200,7 @@
 /*!
     @method		getTitle
 	@abstract	Returns the title of the device selector panel (i.e. what was set in -setTitle:).
+	@discussion	NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later.
 	@result		Returns the title of the device selector panel.
 */
 
@@ -190,6 +210,8 @@
     @method		setDescriptionText:
 	@abstract	Sets the description text that appears in the device selector panel.
 	@discussion	The description text should be localized for best user experience.
+
+				NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later.
 	@param		descriptionText String that appears in the description section of the device selector panel.
 */
 
@@ -198,6 +220,7 @@
 /*!
     @method		getDescriptionText
 	@abstract	Returns the description text that appears in the device selector panel (i.e. what was set in -setDescriptionText:).
+	@discussion	NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later.
 	@result		Returns the description text of the device selector panel.
 */
 
@@ -207,6 +230,8 @@
     @method		setPrompt:
 	@abstract	Sets the title of the default/select button in the device selector panel.
 	@discussion	The prompt text should be localized for best user experience.
+
+				NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later.
 	@param		prompt String that appears in the default/select button in the device selector panel.
 */
 
@@ -215,9 +240,12 @@
 /*!
     @method		getPrompt
 	@abstract	Returns the title of the default/select button in the device selector panel (i.e. what was set in -setPrompt:).
+	@discussion	NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later.
 	@result		Returns the default button title of the device selector panel.
 */
 
 - (NSString *)getPrompt;
+
+#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_1 */
 
 @end

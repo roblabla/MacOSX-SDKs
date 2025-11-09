@@ -1,13 +1,13 @@
 /*
 	NSFontManager.h
 	Application Kit
-	Copyright (c) 1994-2001, Apple Computer, Inc.
+	Copyright (c) 1994-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
-@class NSArray, NSFont, NSFontPanel, NSMenu;
+@class NSArray, NSDictionary, NSFont, NSFontPanel, NSMenu, NSFontDescriptor;
 
 typedef unsigned int NSFontTraitMask;
 
@@ -34,6 +34,15 @@ enum {
     NSUnitalicFontMask			= 0x01000000
 };
 
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+
+enum {
+   NSFontCollectionApplicationOnlyMask = 1 << 0  
+};
+
+#endif
+
 @interface NSFontManager : NSObject
 {
 /*All instance variables are private*/
@@ -48,11 +57,12 @@ enum {
 	unsigned int        multipleFont:1;
 	unsigned int        disabled:1;
 	unsigned int	    makePanelKey:1;
-	unsigned int        _RESERVED:13;
+	unsigned int        myNotification:1;
+	unsigned int        _RESERVED:12;
     }                   _fmFlags;
     unsigned short      _lastPos;
     id		        _delegate;
-    unsigned int        _reservedFMint2;
+    id			_collections;
     unsigned int        _reservedFMint3;
     unsigned int        _reservedFMint4;
 }
@@ -94,6 +104,21 @@ enum {
 
 - (NSString *) localizedNameForFamily:(NSString *)family face:(NSString *)faceKey;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void)setSelectedAttributes:(NSDictionary *)attributes isMultiple:(BOOL)flag;
+- (NSDictionary *)convertAttributes:(NSDictionary *)attributes;
+
+- (NSArray *) availableFontNamesMatchingFontDescriptor: (NSFontDescriptor *) descriptor;
+
+- (NSArray *) collectionNames;
+- (NSArray *) fontDescriptorsInCollection: (NSString *) collectionNames;
+- (BOOL) addCollection: (NSString *) collectionName options: (int) collectionOptions;
+- (BOOL) removeCollection: (NSString *) collectionName;
+
+- (void) addFontDescriptors: (NSArray *) descriptors  toCollection: (NSString *) collectionName;
+- (void) removeFontDescriptor: (NSFontDescriptor *) descriptor fromCollection: (NSString *) collection;
+#endif
+
 @end
 
 @interface NSFontManager(NSFontManagerMenuActionMethods)
@@ -111,6 +136,9 @@ enum {
 - (void)modifyFontViaPanel:(id)sender;
 - (void)modifyFont:(id)sender;
 - (void)orderFrontFontPanel:(id)sender;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void)orderFrontStylesPanel:(id)sender;
+#endif
 
 @end
 

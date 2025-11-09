@@ -1,7 +1,7 @@
 /*
 	NSColor.h
 	Application Kit
-	Copyright (c) 1994-2001, Apple Computer, Inc.
+	Copyright (c) 1994-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -120,15 +120,30 @@ Subclassers of NSColor need to implement the methods colorSpaceName, set, the va
 + (NSColor *)alternateSelectedControlTextColor;		// Similar to selectedControlTextColor; see alternateSelectedControlColor
 #endif
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
++ (NSArray *)controlAlternatingRowBackgroundColors;	// Standard colors for alternating colored rows in tables and lists (for instance, light blue/white; don't assume just two colors)
+#endif
+
 - (NSColor *)highlightWithLevel:(float)val;	// val = 0 => receiver, val = 1 => highlightColor
 - (NSColor *)shadowWithLevel:(float)val;	// val = 0 => receiver, val = 1 => shadowColor
 
 + (NSColor *)colorForControlTint:(NSControlTint)controlTint;	// pass in valid tint to get rough color matching. returns default if invalid tint
 
-/* Set the color: Sets the color in the current drawing context. If drawing to the screen, this method also sets the alpha; if the color doesn't know about alpha, it's set to 1.0. Should be implemented by subclassers.
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
++ (NSControlTint) currentControlTint;	// returns current system control tint
+#endif
+
+
+/* Set the color: Sets the fill and stroke colors in the current drawing context. If the color doesn't know about alpha, it's set to 1.0. Should be implemented by subclassers.
 */
 - (void)set;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+/* Set the fill or stroke colors individually. These should be implemented by subclassers.
+*/
+- (void)setFill;
+- (void)setStroke;
+#endif
 
 /* Get the color space of the color. Should be implemented by subclassers.
 */

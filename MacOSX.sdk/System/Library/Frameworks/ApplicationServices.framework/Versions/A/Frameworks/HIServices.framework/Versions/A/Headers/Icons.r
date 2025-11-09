@@ -3,9 +3,9 @@
  
      Contains:   Icon Utilities and Icon Services Interfaces.
  
-     Version:    HIServices-106.1~2
+     Version:    HIServices-125.6~1
  
-     Copyright:  © 1990-2002 by Apple Computer, Inc. All rights reserved
+     Copyright:  © 1990-2003 by Apple Computer, Inc. All rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -428,6 +428,7 @@ type 'kcs4' as 'ics4';                                /* Keyboard 4-bit small co
 #define kClippingSoundTypeIcon 			'clps'
 #define kDesktopIcon 					'desk'
 #define kFinderIcon 					'FNDR'
+#define kComputerIcon 					'root'
 #define kFontSuitcaseIcon 				'FFIL'
 #define kFullTrashIcon 					'ftrh'
 #define kGenericApplicationIcon 		'APPL'
@@ -595,8 +596,11 @@ type 'kcs4' as 'ics4';                                /* Keyboard 4-bit small co
 #define kBurningIcon 					'burn'
 #define kRightContainerArrowIcon 		'rcar'
 
-#define kIconServicesNormalUsageFlag 	0
-#define kIconServicesCatalogInfoMask 	0x0008181E
+#define kIconServicesNormalUsageFlag 	0x00000000
+#define kIconServicesNoBadgeFlag 		0x00000001			/*  available on Panther and later  */
+#define kIconServicesUpdateIfNeededFlag  0x00000002			/*  available on Panther and later  */
+
+#define kIconServicesCatalogInfoMask 	0x00081C5E
 #define kPlotIconRefNormalFlags 		0
 #define kPlotIconRefNoImage 			0x02
 #define kPlotIconRefNoMask 				0x04

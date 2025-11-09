@@ -210,7 +210,7 @@ extern void		zone_debug_disable(
 
 #endif	/* ZONE_DEBUG */
 
-#endif	MACH_KERNEL_PRIVATE
+#endif	/* MACH_KERNEL_PRIVATE */
 
 #endif	/* __APPLE_API_PRIVATE */
 

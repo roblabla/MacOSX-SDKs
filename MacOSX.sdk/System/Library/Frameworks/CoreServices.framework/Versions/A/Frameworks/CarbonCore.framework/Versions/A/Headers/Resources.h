@@ -3,9 +3,9 @@
  
      Contains:   Resource Manager Interfaces.
  
-     Version:    CarbonCore-472~1
+     Version:    CarbonCore-545~1
  
-     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -40,19 +40,7 @@
 extern "C" {
 #endif
 
-
-enum {
-  resSysHeap                    = 64,   /*System or application heap?*/
-  resPurgeable                  = 32,   /*Purgeable resource?*/
-  resLocked                     = 16,   /*Load it in locked?*/
-  resProtected                  = 8,    /*Protected?*/
-  resPreload                    = 4,    /*Load in on OpenResFile?*/
-  resChanged                    = 2,    /*Resource changed?*/
-  mapReadOnly                   = 128,  /*Resource file read-only*/
-  mapCompact                    = 64,   /*Compact resource file*/
-  mapChanged                    = 32    /*Write map out at update*/
-};
-
+/* Resource Attribute Bits */
 enum {
   resSysRefBit                  = 7,    /*reference to system/local reference*/
   resSysHeapBit                 = 6,    /*In system/in application heap*/
@@ -60,12 +48,34 @@ enum {
   resLockedBit                  = 4,    /*Locked/not locked*/
   resProtectedBit               = 3,    /*Protected/not protected*/
   resPreloadBit                 = 2,    /*Read in at OpenResource?*/
-  resChangedBit                 = 1,    /*Existing resource changed since last update*/
+  resChangedBit                 = 1     /*Existing resource changed since last update*/
+};
+
+/* Resource Attribute Masks*/
+enum {
+  resSysHeap                    = 64,   /*System or application heap?*/
+  resPurgeable                  = 32,   /*Purgeable resource?*/
+  resLocked                     = 16,   /*Load it in locked?*/
+  resProtected                  = 8,    /*Protected?*/
+  resPreload                    = 4,    /*Load in on OpenResFile?*/
+  resChanged                    = 2     /*Resource changed?*/
+};
+
+/* Resource Fork Attribute Bits*/
+enum {
   mapReadOnlyBit                = 7,    /*is this file read-only?*/
   mapCompactBit                 = 6,    /*Is a compact necessary?*/
   mapChangedBit                 = 5     /*Is it necessary to write map?*/
 };
 
+/* Resource Fork Attribute Masks*/
+enum {
+  mapReadOnly                   = 128,  /*Resource file read-only*/
+  mapCompact                    = 64,   /*Compact resource file*/
+  mapChanged                    = 32    /*Write map out at update*/
+};
+
+/* Resource File Ref Num constants*/
 enum {
   kResFileNotOpened             = -1,   /*ref num return as error when opening a resource file*/
   kSystemResFile                = 0     /*this is the default ref num to the system file*/
@@ -134,6 +144,9 @@ typedef CALLBACK_API( OSErr , ResourceEndianFilterPtr )(Handle theResource, Bool
 /*
  *  CloseResFile()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -145,6 +158,9 @@ CloseResFile(short refNum)                                    AVAILABLE_MAC_OS_X
 
 /*
  *  ResError()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -158,6 +174,9 @@ ResError(void)                                                AVAILABLE_MAC_OS_X
 /*
  *  CurResFile()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -169,6 +188,9 @@ CurResFile(void)                                              AVAILABLE_MAC_OS_X
 
 /*
  *  HomeResFile()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -202,6 +224,9 @@ HomeResFile(Handle theResource)                               AVAILABLE_MAC_OS_X
 /*
  *  UseResFile()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -213,6 +238,9 @@ UseResFile(short refNum)                                      AVAILABLE_MAC_OS_X
 
 /*
  *  CountTypes()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -226,6 +254,9 @@ CountTypes(void)                                              AVAILABLE_MAC_OS_X
 /*
  *  Count1Types()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -237,6 +268,9 @@ Count1Types(void)                                             AVAILABLE_MAC_OS_X
 
 /*
  *  GetIndType()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -252,6 +286,9 @@ GetIndType(
 /*
  *  Get1IndType()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -266,6 +303,9 @@ Get1IndType(
 /*
  *  SetResLoad()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -277,6 +317,9 @@ SetResLoad(Boolean load)                                      AVAILABLE_MAC_OS_X
 
 /*
  *  CountResources()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -290,6 +333,9 @@ CountResources(ResType theType)                               AVAILABLE_MAC_OS_X
 /*
  *  Count1Resources()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -301,6 +347,9 @@ Count1Resources(ResType theType)                              AVAILABLE_MAC_OS_X
 
 /*
  *  GetIndResource()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -316,6 +365,9 @@ GetIndResource(
 /*
  *  Get1IndResource()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -329,6 +381,9 @@ Get1IndResource(
 
 /*
  *  GetResource()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -344,6 +399,9 @@ GetResource(
 /*
  *  Get1Resource()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -357,6 +415,9 @@ Get1Resource(
 
 /*
  *  GetNamedResource()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -372,6 +433,9 @@ GetNamedResource(
 /*
  *  Get1NamedResource()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -385,6 +449,9 @@ Get1NamedResource(
 
 /*
  *  [Mac]LoadResource()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -401,6 +468,9 @@ MacLoadResource(Handle theResource)                           AVAILABLE_MAC_OS_X
 /*
  *  ReleaseResource()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -412,6 +482,9 @@ ReleaseResource(Handle theResource)                           AVAILABLE_MAC_OS_X
 
 /*
  *  DetachResource()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -425,6 +498,9 @@ DetachResource(Handle theResource)                            AVAILABLE_MAC_OS_X
 /*
  *  UniqueID()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -436,6 +512,9 @@ UniqueID(ResType theType)                                     AVAILABLE_MAC_OS_X
 
 /*
  *  Unique1ID()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -449,6 +528,9 @@ Unique1ID(ResType theType)                                    AVAILABLE_MAC_OS_X
 /*
  *  GetResAttrs()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -460,6 +542,9 @@ GetResAttrs(Handle theResource)                               AVAILABLE_MAC_OS_X
 
 /*
  *  GetResInfo()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -477,6 +562,9 @@ GetResInfo(
 /*
  *  SetResInfo()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -491,6 +579,9 @@ SetResInfo(
 
 /*
  *  AddResource()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -508,6 +599,9 @@ AddResource(
 /*
  *  GetResourceSizeOnDisk()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -519,6 +613,9 @@ GetResourceSizeOnDisk(Handle theResource)                     AVAILABLE_MAC_OS_X
 
 /*
  *  GetMaxResourceSize()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -542,6 +639,9 @@ GetMaxResourceSize(Handle theResource)                        AVAILABLE_MAC_OS_X
 /*
  *  SetResAttrs()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -556,6 +656,9 @@ SetResAttrs(
 /*
  *  ChangedResource()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -567,6 +670,9 @@ ChangedResource(Handle theResource)                           AVAILABLE_MAC_OS_X
 
 /*
  *  RemoveResource()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -580,6 +686,9 @@ RemoveResource(Handle theResource)                            AVAILABLE_MAC_OS_X
 /*
  *  UpdateResFile()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -591,6 +700,9 @@ UpdateResFile(short refNum)                                   AVAILABLE_MAC_OS_X
 
 /*
  *  WriteResource()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -604,6 +716,9 @@ WriteResource(Handle theResource)                             AVAILABLE_MAC_OS_X
 /*
  *  SetResPurge()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -616,6 +731,9 @@ SetResPurge(Boolean install)                                  AVAILABLE_MAC_OS_X
 /*
  *  GetResFileAttrs()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -627,6 +745,9 @@ GetResFileAttrs(short refNum)                                 AVAILABLE_MAC_OS_X
 
 /*
  *  SetResFileAttrs()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -641,6 +762,9 @@ SetResFileAttrs(
 
 /*
  *  OpenRFPerm()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -667,6 +791,9 @@ OpenRFPerm(
 /*
  *  HOpenResFile()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -683,6 +810,9 @@ HOpenResFile(
 /*
  *  HCreateResFile()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -698,6 +828,9 @@ HCreateResFile(
 /*
  *  FSpOpenResFile()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -711,6 +844,9 @@ FSpOpenResFile(
 
 /*
  *  FSpCreateResFile()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -728,6 +864,9 @@ FSpCreateResFile(
 /*
  *  ReadPartialResource()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -743,6 +882,9 @@ ReadPartialResource(
 
 /*
  *  WritePartialResource()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -760,6 +902,9 @@ WritePartialResource(
 /*
  *  SetResourceSize()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -773,6 +918,9 @@ SetResourceSize(
 
 /*
  *  GetNextFOND()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -833,6 +981,9 @@ enum {
 /*
  *  InsertResourceFile()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -850,6 +1001,9 @@ InsertResourceFile(
 */
 /*
  *  DetachResourceFile()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -869,6 +1023,9 @@ DetachResourceFile(SInt16 refNum)                             AVAILABLE_MAC_OS_X
 */
 /*
  *  FSpResourceFileAlreadyOpen()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -894,6 +1051,9 @@ FSpResourceFileAlreadyOpen(
 /*
  *  FSpOpenOrphanResFile()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -913,6 +1073,9 @@ FSpOpenOrphanResFile(
 /*
  *  GetTopResourceFile()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.0.2 and later
@@ -930,6 +1093,9 @@ GetTopResourceFile(SInt16 * refNum)                           AVAILABLE_MAC_OS_X
 */
 /*
  *  GetNextResourceFile()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -1032,6 +1198,9 @@ GetNextResourceFile(
 /*
  *  FSOpenResFile()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -1046,6 +1215,9 @@ FSOpenResFile(
 /*
  *  FSCreateResFile()
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
@@ -1057,13 +1229,16 @@ FSCreateResFile(
   UniCharCount           nameLength,
   const UniChar *        name,
   FSCatalogInfoBitmap    whichInfo,
-  const FSCatalogInfo *  catalogInfo,
-  FSRef *                newRef,
-  FSSpec *               newSpec)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  const FSCatalogInfo *  catalogInfo,       /* can be NULL */
+  FSRef *                newRef,            /* can be NULL */
+  FSSpec *               newSpec)           /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  FSResourceFileAlreadyOpen()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
@@ -1075,6 +1250,7 @@ FSResourceFileAlreadyOpen(
   const FSRef *  resourceFileRef,
   Boolean *      inChain,
   SInt16 *       refNum)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
 
 
 /*
@@ -1089,6 +1265,9 @@ FSResourceFileAlreadyOpen(
  *    the creation of data fork only files which can be used for
  *    storing resources.  Passing in a null name defaults to using the
  *    data fork.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    
@@ -1151,6 +1330,9 @@ FSCreateResourceFile(
  *    being used.  If the named fork already exists this function does
  *    nothing and returns errFSForkExists.
  *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
  *  Parameters:
  *    
  *    ref:
@@ -1188,6 +1370,9 @@ FSCreateResourceFork(
  *    This function allows any named fork of a file to be used for
  *    storing resources.  Passing in a null forkname will result in the
  *    data fork being used.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
  *  
  *  Parameters:
  *    

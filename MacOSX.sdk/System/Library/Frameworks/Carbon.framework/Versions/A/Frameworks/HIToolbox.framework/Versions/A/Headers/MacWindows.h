@@ -3,9 +3,9 @@
  
      Contains:   Window Manager Interfaces
  
-     Version:    HIToolbox-124.14~2
+     Version:    HIToolbox-145.33~1
  
-     Copyright:  © 1997-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1997-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -18,6 +18,10 @@
 
 #ifndef __APPLICATIONSERVICES__
 #include <ApplicationServices/ApplicationServices.h>
+#endif
+
+#ifndef __APPEARANCE__
+#include <HIToolbox/Appearance.h>
 #endif
 
 #ifndef __DRAG__
@@ -54,6 +58,10 @@ extern "C" {
 /* Current documentation for the Mac OS Window Manager is available on the web:                         */
 /*  <http://developer.apple.com/techpubs/macos8/HumanInterfaceToolbox/WindowManager/windowmanager.html> */
 /*                                                                                                      */
+/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+/* ¥ HIWindowRef                                                                        */
+/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+typedef WindowRef                       HIWindowRef;
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /* ¥ Property Types                                                                     */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -276,14 +284,26 @@ enum {
   kAltPlainWindowClass          = 16,
 
   /*
+   * A simple window is the simplest possible window; it has no window
+   * frame and its entire content is drawn by the application. Use any
+   * theme brush or your own custom drawing to draw the background of a
+   * simple window. Simple windows are initially placed in the document
+   * window group, given a modality of kWindowModalityNone, and given
+   * an activation scope of kWindowActivationScopeAll. Available in
+   * CarbonLib 1.5 and later, and Mac OS X 10.1 and later.
+   */
+  kSimpleWindowClass            = 18,
+
+  /*
    * A drawer window is used when implementing a drawer user interface,
-   * in which the drawer windo slides out from underneath a document
+   * in which the drawer window slides out from underneath a document
    * window. Use kThemeBrushDrawerBackground or
    * kThemeBrushDocumentWindowBackground to draw the background of
    * drawer windows. Drawer windows are initially placed in the
    * document window group, given a modality of kWindowModalityNone,
-   * and given an activation scope of kWindowActivationScopeAll.
-   * Available in Mac OS X 10.2 or later.
+   * and given an activation scope of kWindowActivationScopeAll. Drawer
+   * windows should always be created using the Compositing window
+   * attribute. Available in Mac OS X 10.2 or later.
    */
   kDrawerWindowClass            = 20,
 
@@ -372,13 +392,22 @@ enum {
   kWindowToolbarButtonAttribute = (1L << 6),
 
   /*
-   * This window uses the Metal appearance. Available for document and
-   * floating window classes on Mac OS X 10.2 and later. Drawers can
-   * also be metal, but dynamically adjust their appearance based on
-   * their parent window's appearance; it is not necessary to specify
-   * this attribute for a metal drawer.
+   * This window uses the Metal appearance. Available for document
+   * windows on Mac OS X 10.2 and later, and for floating windows on
+   * Mac OS X 10.3 and later. Drawers can also be metal, but
+   * dynamically adjust their appearance based on their parent window's
+   * appearance; it is not necessary to specify this attribute for a
+   * metal drawer.
    */
   kWindowMetalAttribute         = (1L << 8),
+
+  /*
+   * This window does not participate in window cycling invoked by
+   * cmd-~ or the "Focus on Window" hotkey defined in the Keyboards
+   * preference pane. Available for all windows on Mac OS X 10.2 and
+   * later.
+   */
+  kWindowDoesNotCycleAttribute  = (1L << 15),
 
   /*
    * This window receives no update events. Available for all windows.
@@ -421,6 +450,15 @@ enum {
    * kToolbarWindowClass.
    */
   kWindowHideOnSuspendAttribute = (1L << 24),
+
+  /*
+   * This window is marked so that the window server will drag the
+   * window automatically. Your application should not call DragWindow
+   * for this window, else it would confuse the heck out of the drag
+   * (it would fight with the window server for control). This is
+   * available on Mac OS X 10.3 or later.
+   */
+  kWindowAsyncDragAttribute     = (1L << 23),
 
   /*
    * This window has the standard Carbon window event handler
@@ -612,7 +650,7 @@ enum {
 enum {
                                         /* Proc IDs for sheet windows */
   kWindowSheetProc              = 1088, /* available in Mac OS X and CarbonLib 1.3 */
-  kWindowSheetAlertProc         = 1120  /* available in Mac OS X after 1.0, and CarbonLib 1.3 */
+  kWindowSheetAlertProc         = 1120  /* available in Mac OS X 10.1 and CarbonLib 1.3 */
 };
 
 
@@ -688,13 +726,17 @@ enum {
   kWindowCenterOnMainScreen     = 1,
 
   /*
-   * Centers the window on its parent window.
+   * Centers the window on its parent window. The parent window must be
+   * different from the positioned window.
    */
   kWindowCenterOnParentWindow   = 2,
 
   /*
    * Centers the window on the screen containing the largest portion of
-   * its parent window.
+   * its parent window. On Mac OS X 10.3 and later, the parent window
+   * may be the same as the positioned window. On CarbonLib and earlier
+   * versions of Mac OS X, the parent window must be different from the
+   * positioned window.
    */
   kWindowCenterOnParentWindowScreen = 3,
 
@@ -704,21 +746,26 @@ enum {
   kWindowCascadeOnMainScreen    = 4,
 
   /*
-   * Cascades the window on its parent window.
+   * Cascades the window on its parent window. The parent window must
+   * be different from the positioned window.
    */
   kWindowCascadeOnParentWindow  = 5,
 
   /*
    * Cascades the window on the screen containing the largest portion
-   * of its parent window.
+   * of its parent window. On Mac OS X 10.3 and later, the parent
+   * window may be the same as the positioned window. On CarbonLib and
+   * earlier versions of Mac OS X, the parent window must be different
+   * from the positioned window.
    */
   kWindowCascadeOnParentWindowScreen = 6,
 
   /*
    * Cascades the window on the screen containing the largest portion
    * of its parent window, starting below and to the right of its
-   * parent window. Available in Mac OS X after version 10.1.x and
-   * CarbonLib after 1.5.
+   * parent window. The parent window must be different from the
+   * positioned window. Available in Mac OS X 10.2 and CarbonLib 1.6
+   * and later.
    */
   kWindowCascadeStartAtParentWindowScreen = 10,
 
@@ -728,13 +775,17 @@ enum {
   kWindowAlertPositionOnMainScreen = 7,
 
   /*
-   * Puts the window into the alert position on its parent window.
+   * Puts the window into the alert position on its parent window. The
+   * parent window must be different from the positioned window.
    */
   kWindowAlertPositionOnParentWindow = 8,
 
   /*
    * Puts the window into the alert position on the screen containing
-   * the largest portion of its parent window.
+   * the largest portion of its parent window. On Mac OS X 10.3 and
+   * later, the parent window may be the same as the positioned window.
+   * On CarbonLib and earlier versions of Mac OS X, the parent window
+   * must be different from the positioned window.
    */
   kWindowAlertPositionOnParentWindowScreen = 9
 };
@@ -1114,11 +1165,7 @@ typedef struct BasicWindowDescription   BasicWindowDescription;
 enum {
   kStoredWindowSystemTag        = 'appl', /* Only Apple collection items will be of this tag*/
   kStoredBasicWindowDescriptionID = 'sbas', /* BasicWindowDescription*/
-  kStoredWindowPascalTitleID    = 's255' /* pascal title string*/
-};
-
-enum {
-  kStoredWindowUnicodeTitleID   = 'ustr', /* Unicode title string*/
+  kStoredWindowPascalTitleID    = 's255', /* pascal title string*/
   kStoredWindowTitleCFStringID  = 'cfst' /* CFString title string*/
 };
 
@@ -1825,7 +1872,7 @@ ChangeWindowAttributes(
     WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING
     WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING
     
-    SetWindowClass will disappear in the near future. Instead of SetWindowClass,
+    SetWindowClass will disappear at some point in the future. Instead of SetWindowClass,
     you should use SetWindowGroup to move a window into the group of the desired
     class. This API is very dangerous in that is actually does change the class
     of the window, but class was meant to be an immutable property of the window.
@@ -1871,6 +1918,79 @@ extern OSStatus
 SetWindowClass(
   WindowRef     inWindow,
   WindowClass   inWindowClass)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+
+/*
+ *  HIWindowChangeClass()
+ *  
+ *  Summary:
+ *    Changes the window look and feel of an existing window on the fly.
+ *  
+ *  Discussion:
+ *    HIWindowChangeClass changes the class of a window. Unlike
+ *    SetWindowClass, this call effectively changes the look and
+ *    behavior of the window all at once. Because SetWindowClass
+ *    already existed and had certain behaviour, we could not change it
+ *    to behave the way HIWindowChangeClass does. 
+ *    
+ *    This function can convert a window between document, floating,
+ *    utility, and movable modal window classes only. It cannot change
+ *    a window into a plain window, for example.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window whose class to change.
+ *    
+ *    inWindowClass:
+ *      The new window class.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIWindowChangeClass(
+  HIWindowRef   inWindow,
+  WindowClass   inWindowClass)                                AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+/*  ¥ Window Flushing                                                                   */
+/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+/*
+ *  HIWindowFlush()
+ *  
+ *  Summary:
+ *    Flushes any dirty areas a window might have.
+ *  
+ *  Discussion:
+ *    This routine allows you to manually flush dirty areas of a window
+ *    to the screen. In the past, one would use QDFlushPortBuffer, but
+ *    as we move away from grafports, that type of stuff doesn't make
+ *    much sense these days. This is the preferred routine to flush
+ *    window buffers in Mac OS X 10.3 and beyond.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window to flush.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIWindowFlush(HIWindowRef inWindow)                           AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 
@@ -1983,6 +2103,42 @@ GetWindowModality(
   WindowRef *       outUnavailableWindow)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/*
+ *  HIWindowIsDocumentModalTarget()
+ *  
+ *  Summary:
+ *    Determines if a window is currently the target window of another
+ *    document modal window, such as a sheet.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window in question.
+ *    
+ *    outOwner:
+ *      If inWindow is the target of a document modal window, outOwner
+ *      is set to the document modal window on exit. If this function
+ *      does not return true, outOwner is undefined. You may pass NULL
+ *      if you don't want the owner's window ref.
+ *  
+ *  Result:
+ *    A boolean result. A true result indicates that inWindow is
+ *    currently the target of a document modal window.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern Boolean 
+HIWindowIsDocumentModalTarget(
+  HIWindowRef    inWindow,
+  HIWindowRef *  outOwner)       /* can be NULL */            AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /* ¥ Floating Windows                                                                   */
@@ -2085,7 +2241,7 @@ enum {
   /*
    * The z-order of the contents of this group with respect to each
    * other cannot be changed. When one item changes z-order, all other
-   * items are moved simulataneously. For purposes of z-ordering, the
+   * items are moved simultaneously. For purposes of z-ordering, the
    * group and all its subgroups are effectively treated as if they
    * were a single window in the parent group of this group.
    */
@@ -2102,9 +2258,9 @@ enum {
   /*
    * When any window in this group is collapsed, all other windows in
    * this group are hidden. All subgroups of this group are also
-   * examined for the HideOnCollapse attribute, and any the windows of
-   * any subgroup with this attribute are also hidden. All windows will
-   * be shown again when the collapsed window is expanded.
+   * examined for the HideOnCollapse attribute, and any windows of any
+   * subgroup with this attribute are also hidden. All windows will be
+   * shown again when the collapsed window is expanded.
    */
   kWindowGroupAttrHideOnCollapse = 1 << 4
 };
@@ -2152,18 +2308,18 @@ enum {
 /*
  *  Summary:
  *    These are constants that can be used for the inNextGroup
- *    parameter to GetSiblingWindowGroup.
+ *    parameter to GetWindowGroupSibling.
  */
 enum {
 
   /*
-   * Indicates that GetSiblingWindowGroup should return the next deeper
+   * Indicates that GetWindowGroupSibling should return the next deeper
    * sibling group in the z-order.
    */
   kNextWindowGroup              = true,
 
   /*
-   * Indicates that GetSiblingWindowGroup should return the next higher
+   * Indicates that GetWindowGroupSibling should return the next higher
    * sibling group in the z-order.
    */
   kPreviousWindowGroup          = false
@@ -3207,6 +3363,79 @@ DebugPrintAllWindowGroups(void)                               AVAILABLE_MAC_OS_X
 
 
 
+/*----------------------------------------------------------------------------------*/
+/*  ¥ÊThemeBrush and ThemeTextColor support                                         */
+/*----------------------------------------------------------------------------------*/
+/*
+ *  SetThemeWindowBackground()
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in AppearanceLib 1.0 and later
+ */
+extern OSStatus 
+SetThemeWindowBackground(
+  WindowRef    inWindow,
+  ThemeBrush   inBrush,
+  Boolean      inUpdate)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  SetThemeTextColorForWindow()
+ *  
+ *  Summary:
+ *    Sets a text color which contrasts with a theme brush.
+ *  
+ *  Discussion:
+ *    SetThemeTextColorForWindow sets a text color in the specified
+ *    window's port which contrasts with the specified brush and also
+ *    matches the inActive parameter. Only a subset of the theme
+ *    brushes have theme text colors: currently (as of Mac OS 9 and Mac
+ *    OS X 10.1), the Alert, Dialog, ModelessDialog, and Notification
+ *    brushes have corresponding text colors. For any other brush,
+ *    SetThemeTextColorForWindow returns themeNoAppropriateBrushErr and
+ *    does not modify the text color.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window whose text color to change.
+ *    
+ *    inActive:
+ *      Whether the text color should indicate an active or inactive
+ *      state.
+ *    
+ *    inDepth:
+ *      The bit depth of the window's port.
+ *    
+ *    inColorDev:
+ *      Whether the window's port is color or black&white.
+ *  
+ *  Result:
+ *    An operating system result code, including
+ *    themeNoAppropriateBrushErr if the specified theme brush does not
+ *    have a corresponding theme text color.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.0 and later
+ *    Non-Carbon CFM:   in AppearanceLib 1.1 and later
+ */
+extern OSStatus 
+SetThemeTextColorForWindow(
+  WindowRef   inWindow,
+  Boolean     inActive,
+  SInt16      inDepth,
+  Boolean     inColorDev)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /* ¥ Background Image                                                                   */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -3678,7 +3907,7 @@ enum {
 
   /*
    * Requests the standard window menu include a Rotate Windows menu
-   * item. Available in Mac OS X after version 10.1.
+   * item. Available in Mac OS X 10.2.
    */
   kWindowMenuIncludeRotate      = 1 << 0
 };
@@ -3712,6 +3941,14 @@ enum {
  *    populated later when the menu is displayed or when
  *    GetIndMenuItemWithCommandID is called, so you will find no items
  *    in the menu unless you first call GetIndMenuItemWithCommandID.
+ *    
+ *    There is a known bug in all versions of CarbonLib which causes
+ *    the Zoom, Collapse, and Uncollapse menu items in the standard
+ *    window menu to be non-functional for windows created by the
+ *    Dialog Manager. To work around this bug, you can install your own
+ *    event handlers on the dialog window for kEventWindowZoom,
+ *    kEventWindowCollapse, and kEventWindowExpand, and handle the
+ *    event by calling the appropriate Window Manager API.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -4021,8 +4258,30 @@ GetWindowRegion(
 /*
  *  GetWindowStructureWidths()
  *  
+ *  Summary:
+ *    Returns the width of the structure region on each edge of a
+ *    window.
+ *  
+ *  Discussion:
+ *    The structure widths are the difference between the content
+ *    region and the structure region on each edge of a window. For
+ *    example, if the left edge of the structure region is at x=100,
+ *    and the left edge of the content region is at x=110, then the
+ *    structure width for the left side of the window is 10 pixels.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window for which to get structure widths.
+ *    
+ *    outRect:
+ *      On exit, contains the width of the structure region on each
+ *      side of the window; the left field of the rectangle contains
+ *      the structure width on the left side of the window, the top
+ *      field contains the width on the top side, and so on.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4034,6 +4293,42 @@ GetWindowStructureWidths(
   WindowRef   inWindow,
   Rect *      outRect)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
+
+
+/*
+ *  HIWindowChangeFeatures()
+ *  
+ *  Summary:
+ *    Changes the window features on the fly.
+ *  
+ *  Discussion:
+ *    HIWindowChangeFeatures changes the features of a window. This
+ *    should only be used by custom window definitions.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window to modify.
+ *    
+ *    inSetThese:
+ *      The feature bits to set.
+ *    
+ *    inClearThese:
+ *      The feature bits to clear.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+HIWindowChangeFeatures(
+  WindowRef   inWindow,
+  UInt64      inSetThese,
+  UInt64      inClearThese)                                   AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -4283,13 +4578,25 @@ CopyWindowTitleAsCFString(
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /* ¥ Window Proxies                                                                     */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
-/* Routines available from Mac OS 8.5 forward*/
-
 /*
  *  SetWindowProxyFSSpec()
  *  
+ *  Summary:
+ *    Set the proxy icon for a window using an FSSpec to an existing
+ *    file system object (volume, folder, or file).
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window whose proxy icon to set.
+ *    
+ *    inFile:
+ *      The file system object that the window represents. The windowÕs
+ *      proxy icon is determined by asking Icon Services for the icon
+ *      of this object.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4305,8 +4612,33 @@ SetWindowProxyFSSpec(
 /*
  *  GetWindowProxyFSSpec()
  *  
+ *  Summary:
+ *    Returns the FSSpec used to determine the proxy icon for a window.
+ *  
+ *  Discussion:
+ *    This API will return noErr and a valid FSSpec if the windowÕs
+ *    proxy icon has been specified using the SetWindowProxyFSSpec or
+ *    SetWindowProxyAlias APIs. If the window has no proxy icon, or if
+ *    the icon was specified with another SetWindowProxy API, then an
+ *    error will be returned.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window whose proxy icon FSSpec to return.
+ *    
+ *    outFile:
+ *      On exit, contains the windowÕs proxy icon FSSpec.
+ *  
+ *  Result:
+ *    noErr if the windowÕs proxy icon FSSpec has been returned;
+ *    errWindowDoesNotHaveProxy if the window does not have a proxy
+ *    icon, or if the proxy icon was specified by IconRef or
+ *    type/creator rather than by FSSpec or alias. Other operating
+ *    system error codes may also be returned.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4323,7 +4655,8 @@ GetWindowProxyFSSpec(
  *  SetWindowProxyAlias()
  *  
  *  Summary:
- *    Sets the proxy icon for a window based on an AliasHandle.
+ *    Sets the proxy icon for a window using an AliasHandle to an
+ *    existing file system object (volume, folder, or file).
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -4334,9 +4667,11 @@ GetWindowProxyFSSpec(
  *      The window whose proxy icon to set.
  *    
  *    inAlias:
- *      The alias that specifies the proxy icon. The Window Manager
- *      copies the alias data; the caller may dispose of the alias
- *      after SetWindowProxyAlias returns.
+ *      The file system object that the window represents. The windowÕs
+ *      proxy icon is determined by asking Icon Services for the icon
+ *      of this object. The Window Manager copies the alias data; the
+ *      caller may dispose of the alias after SetWindowProxyAlias
+ *      returns.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4352,8 +4687,33 @@ SetWindowProxyAlias(
 /*
  *  GetWindowProxyAlias()
  *  
+ *  Summary:
+ *    Returns the alias used to determine the proxy icon for a window.
+ *  
+ *  Discussion:
+ *    This API will return noErr and a valid alias if the windowÕs
+ *    proxy icon has been specified using the SetWindowProxyFSSpec or
+ *    SetWindowProxyAlias APIs. If the window has no proxy icon, or if
+ *    the icon was specified with another SetWindowProxy API, then an
+ *    error will be returned.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window whose proxy icon alias to return.
+ *    
+ *    alias:
+ *      On exit, contains the windowÕs proxy icon alias.
+ *  
+ *  Result:
+ *    noErr if the windowÕs proxy icon alias has been returned;
+ *    errWindowDoesNotHaveProxy if the window does not have a proxy
+ *    icon, or if the proxy icon was specified by IconRef or
+ *    type/creator rather than by FSSpec or alias. Other operating
+ *    system error codes may also be returned.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4369,8 +4729,32 @@ GetWindowProxyAlias(
 /*
  *  SetWindowProxyCreatorAndType()
  *  
+ *  Summary:
+ *    Sets the proxy icon for a window using a file type and creator.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window whose proxy icon to set.
+ *    
+ *    fileCreator:
+ *      The creator code for the file system object that the window
+ *      represents. The windowÕs proxy icon is determined by asking
+ *      Icon Services for the icon corresponding to the specified
+ *      creator code and file type, on the specified volume.
+ *    
+ *    fileType:
+ *      The file type for the file system object that the window
+ *      represents.
+ *    
+ *    vRefNum:
+ *      The volume reference number for the volume containing the file
+ *      system object that the window represents. You may pass
+ *      kOnSystemDisk for this parameter if you don't know which volume
+ *      will hold the file system object.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4388,8 +4772,19 @@ SetWindowProxyCreatorAndType(
 /*
  *  GetWindowProxyIcon()
  *  
+ *  Summary:
+ *    Returns the proxy icon of a window.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window whose proxy icon to return.
+ *    
+ *    outIcon:
+ *      On exit, contains the windowÕs proxy icon.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4405,8 +4800,20 @@ GetWindowProxyIcon(
 /*
  *  SetWindowProxyIcon()
  *  
+ *  Summary:
+ *    Sets a windowÕs proxy icon.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window whose proxy icon to set.
+ *    
+ *    icon:
+ *      The proxy icon. The Window Manager retains the IconRef; the
+ *      caller may release the IconRef after SetWindowProxyIcon returns.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4422,8 +4829,21 @@ SetWindowProxyIcon(
 /*
  *  RemoveWindowProxy()
  *  
+ *  Summary:
+ *    Removes a windowÕs proxy icon.
+ *  
+ *  Discussion:
+ *    When removing the proxy icon, the Window Manager also releases
+ *    the alias or IconRef, if any, that was used to specify the proxy
+ *    icon.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window whose proxy icon to remove.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4437,8 +4857,38 @@ RemoveWindowProxy(WindowRef window)                           AVAILABLE_MAC_OS_X
 /*
  *  BeginWindowProxyDrag()
  *  
+ *  Summary:
+ *    Creates a new drag reference that can be used to drag a windowÕs
+ *    proxy icon.
+ *  
+ *  Discussion:
+ *    This API is used by applications that need to add their own drag
+ *    flavors to the drag reference used for a proxy icon drag. Such an
+ *    application would call BeginWindowProxyDrag to create the drag
+ *    reference, add its own flavors, call
+ *    TrackWindowProxyFromExistingDrag to track the proxy icon drag,
+ *    and then EndWindowProxyDrag to release the drag
+ *    reference.
+ *    
+ *    An application which does not need to add its own drag flavors to
+ *    the drag reference can simply call TrackWindowProxyDrag.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window whose proxy icon to drag.
+ *    
+ *    outNewDrag:
+ *      On exit, contains the drag reference for the proxy icon.
+ *    
+ *    outDragOutlineRgn:
+ *      On entry, should be a valid RgnHandle; on exit, the region has
+ *      been updated with an outline of the proxy icon drag image. This
+ *      region should be passed to TrackWindowProxyFromExistingDrag;
+ *      the application may modify it first.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4455,8 +4905,19 @@ BeginWindowProxyDrag(
 /*
  *  EndWindowProxyDrag()
  *  
+ *  Summary:
+ *    Releases a drag reference created by BeginWindowProxyDrag.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window whose proxy icon drag reference to release.
+ *    
+ *    theDrag:
+ *      The drag reference to release.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4472,8 +4933,69 @@ EndWindowProxyDrag(
 /*
  *  TrackWindowProxyFromExistingDrag()
  *  
+ *  Summary:
+ *    Tracks the drag of a window proxy icon.
+ *  
+ *  Discussion:
+ *    This API is used by applications that need to add their own drag
+ *    flavors to the drag reference used for a proxy icon drag. Such an
+ *    application would call BeginWindowProxyDrag to create the drag
+ *    reference, add its own flavors, call
+ *    TrackWindowProxyFromExistingDrag to track the proxy icon drag,
+ *    and then EndWindowProxyDrag to release the drag
+ *    reference.
+ *    
+ *    An application which does not need to add its own drag flavors to
+ *    the drag reference can simply call TrackWindowProxyDrag.
+ *    
+ *    A proxy icon may only be dragged if the window represented by the
+ *    proxy icon is not modifed (as indicated by the IsWindowModified
+ *    API). This restriction is imposed because a proxy icon is a
+ *    representation of a physical file system object, and dragging the
+ *    proxy icon may result in the Finder making a copy of the file
+ *    system object. If the window is modified, then it contains user
+ *    data that has not yet been saved to disk; making a copy of the
+ *    file system object would result in a stale copy that did not
+ *    contain the userÕs current data.
+ *    
+ *    By default, all newly created windows are considered to be dirty.
+ *    The application must call SetWindowModified( window, false )
+ *    before the proxy icon will be draggable.
+ *    
+ *    In Mac OS X 10.3 and later, the proxy icon is also draggable in
+ *    dirty windows if the proxy icon was provided using the
+ *    SetWindowProxyIcon or SetWindowProxyCreatorAndType APIs. Dragging
+ *    is allowed in this case because the window does not represent an
+ *    actual file system object, and therefore there is no risk of user
+ *    data loss.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window whose proxy icon to drag.
+ *    
+ *    startPt:
+ *      The point in global coordinates where the drag originated. This
+ *      is generally the location of the mouse click in the proxy icon.
+ *    
+ *    drag:
+ *      The proxy icon drag reference.
+ *    
+ *    inDragOutlineRgn:
+ *      The outline of the proxy icon drag image, as returned by
+ *      BeginWindowProxyDrag.
+ *  
+ *  Result:
+ *    errUserWantsToDragWindow if the userÕs mouse movements indicated
+ *    that the user actually wants to drag the window instead of the
+ *    proxy icon (in this case the application should call DragWindow);
+ *    windowWrongStateErr if the window was modified and therefore the
+ *    proxy icon could not be dragged; noErr if the drag succeeded;
+ *    userCanceledErr if the user canceled the drag. Other operating
+ *    system result codes may also be returned.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4491,8 +5013,51 @@ TrackWindowProxyFromExistingDrag(
 /*
  *  TrackWindowProxyDrag()
  *  
+ *  Summary:
+ *    Tracks the drag of a window proxy icon.
+ *  
+ *  Discussion:
+ *    A proxy icon may only be dragged if the window represented by the
+ *    proxy icon is not modifed (as indicated by the IsWindowModified
+ *    API). This restriction is imposed because a proxy icon is a
+ *    representation of a physical file system object, and dragging the
+ *    proxy icon may result in the Finder making a copy of the file
+ *    system object. If the window is modified, then it contains user
+ *    data that has not yet been saved to disk; making a copy of the
+ *    file system object would result in a stale copy that did not
+ *    contain the userÕs current data.
+ *    
+ *    By default, all newly created windows are considered to be
+ *    modified. The application must call SetWindowModified( window,
+ *    false ) before the proxy icon will be draggable.
+ *    
+ *    In Mac OS X 10.3 and later, the proxy icon is also draggable in
+ *    dirty windows if the proxy icon was provided using the
+ *    SetWindowProxyIcon or SetWindowProxyCreatorAndType APIs. Dragging
+ *    is allowed in this case because the window does not represent an
+ *    actual file system object, and therefore there is no risk of user
+ *    data loss.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window whose proxy icon to drag.
+ *    
+ *    startPt:
+ *      The point in global coordinates where the drag originated. This
+ *      is generally the location of the mouse click in the proxy icon.
+ *  
+ *  Result:
+ *    errUserWantsToDragWindow if the userÕs mouse movements indicated
+ *    that the user actually wants to drag the window instead of the
+ *    proxy icon (in this case the application should call DragWindow);
+ *    windowWrongStateErr if the window was modified and therefore the
+ *    proxy icon could not be dragged; noErr if the drag succeeded;
+ *    userCanceledErr if the user canceled the drag. Other operating
+ *    system result codes may also be returned.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4508,8 +5073,25 @@ TrackWindowProxyDrag(
 /*
  *  IsWindowModified()
  *  
+ *  Summary:
+ *    Returns whether the window is considered to have unsaved content.
+ *  
+ *  Discussion:
+ *    By default, all newly created windows are considered to be
+ *    modified. The application must call SetWindowModified( window,
+ *    false ) to mark the window as unmodified. Until the window is
+ *    marked as unmodified, the proxy icon will not be draggable.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window whose modified state to return.
+ *  
+ *  Result:
+ *    true if the window has unsaved changes, or false if not.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4523,8 +5105,25 @@ IsWindowModified(WindowRef window)                            AVAILABLE_MAC_OS_X
 /*
  *  SetWindowModified()
  *  
+ *  Summary:
+ *    Sets whether the window is considered to have unsaved content.
+ *  
+ *  Discussion:
+ *    By default, all newly created windows are considered to be
+ *    modified. The application must call SetWindowModified( window,
+ *    false ) to mark the window as unmodified. Until the window is
+ *    marked as unmodified, the proxy icon will not be draggable.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window whose modified state to return.
+ *    
+ *    modified:
+ *      Whether the window has unsaved changes.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4540,8 +5139,33 @@ SetWindowModified(
 /*
  *  IsWindowPathSelectClick()
  *  
+ *  Summary:
+ *    Indicates whether an EventRecord describing a click on a windowÕs
+ *    title should cause a path selection menu to be displayed.
+ *  
+ *  Discussion:
+ *    Windows that have a proxy icon provided using an FSSpec or alias
+ *    can support a path selection menu, which displays the file system
+ *    path to the object, one menu item per directory. Making a
+ *    selection from this item will automatically open the
+ *    corresponding object in the Finder.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window on which the click occurred.
+ *    
+ *    event:
+ *      The event. IsWindowPathSelectClick will only return true for
+ *      mouseDown events.
+ *  
+ *  Result:
+ *    true if the click should cause a path selection menu to be
+ *    displayed, or false if not. If this API returns true, the
+ *    application should call the WindowPathSelect API.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4555,10 +5179,86 @@ IsWindowPathSelectClick(
 
 
 /*
- *  WindowPathSelect()
+ *  IsWindowPathSelectEvent()
+ *  
+ *  Summary:
+ *    Indicates whether a Carbon event describing a click on a windowÕs
+ *    title should cause a path selection menu to be displayed.
+ *  
+ *  Discussion:
+ *    Windows that have a proxy icon provided using an FSSpec or alias
+ *    can support a path selection menu, which displays the file system
+ *    path to the object, one menu item per directory. Making a
+ *    selection from this item will automatically open the
+ *    corresponding object in the Finder.
  *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window on which the click occurred.
+ *    
+ *    inEvent:
+ *      The event. In CarbonLib and in Mac OS X 10.2 and earlier,
+ *      IsWindowPathSelectEvent only returned true for
+ *      kEventClassMouse/ kEventMouseDown events. In Mac OS X 10.3 and
+ *      later, IsWindowPathSelectEvent returns true for any event that
+ *      has suitable kEventParamMouseLocation and
+ *      kEventParamKeyModifiers parameters.
+ *  
+ *  Result:
+ *    true if the click should cause a path selection menu to be
+ *    displayed, or false if not. If this API returns true, the
+ *    application should call the WindowPathSelect API.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.1 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern Boolean 
+IsWindowPathSelectEvent(
+  WindowRef   window,
+  EventRef    inEvent)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+/*
+ *  WindowPathSelect()
+ *  
+ *  Summary:
+ *    Displays a path selection menu for a window that has a proxy icon.
+ *  
+ *  Discussion:
+ *    If the application passes NULL for the menu parameter, and the
+ *    user selects an item from the path selection menu, the Window
+ *    Manager will automatically request the Finder to display that
+ *    item, and in CarbonLib 1.3.1 and later and Mac OS X, will also
+ *    make the Finder be the active application.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window for which to display the path selection menu.
+ *    
+ *    menu:
+ *      The menu to display. If you pass NULL, the Window Manager
+ *      automatically creates a suitable menu based on the windowÕs
+ *      proxy icon.
+ *    
+ *    outMenuResult:
+ *      On exit, the menu ID and menu item index of the selected item;
+ *      the menu ID is in the high 16 bits of the result, and the menu
+ *      item index is in the low 16 bits.
+ *  
+ *  Result:
+ *    noErr if the user selected an item from the menu; userCanceledErr
+ *    if the user closed the menu without making a selection. Other
+ *    operating system result codes may be returned.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -4570,23 +5270,6 @@ WindowPathSelect(
   WindowRef   window,
   MenuRef     menu,                /* can be NULL */
   SInt32 *    outMenuResult)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
-
-
-/*
- *  IsWindowPathSelectEvent()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        in CarbonLib 1.1 and later
- *    Non-Carbon CFM:   not available
- */
-extern Boolean 
-IsWindowPathSelectEvent(
-  WindowRef   window,
-  EventRef    inEvent)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -4650,7 +5333,20 @@ enum {
    * and Move or Resize transition actions. Available in Mac OS X, and
    * in CarbonLib 1.5 and later.
    */
-  kWindowSlideTransitionEffect  = 3
+  kWindowSlideTransitionEffect  = 3,
+
+  /*
+   * Fade the window into or out of visibility. Use with the Show or
+   * Hide transition actions. Available in Mac OS X 10.3 and later.
+   */
+  kWindowFadeTransitionEffect   = 4,
+
+  /*
+   * Use the Genie effect that the Dock uses to minimize or maximize a
+   * window to show or hide the window. Use with the Show or Hide
+   * transition actions. Available in Mac OS X 10.3 and later.
+   */
+  kWindowGenieTransitionEffect  = 5
 };
 
 
@@ -4665,18 +5361,20 @@ typedef UInt32 WindowTransitionAction;
 enum {
 
   /*
-   * Shows the window. Use with the Zoom or Sheet transition effects.
-   * The inRect parameter is the global coordinates from which to start
-   * the animation; if inRect is NULL, the animation begins at the
-   * center of the window.
+   * Shows the window. Use with the Zoom, Sheet, Fade, or Genie
+   * transition effects. For the Zoom, Sheet, and Genie effects, the
+   * inRect parameter is the global coordinates from which to start the
+   * animation; if inRect is NULL, the animation begins at the center
+   * of the window. The Fade effect does not use the inRect parameter.
    */
   kWindowShowTransitionAction   = 1,
 
   /*
-   * Hides the window. Use with the Zoom or Sheet transition effects.
-   * The inRect parameter is the global coordinates at which to end the
+   * Hides the window. Use with the Zoom, Sheet, Fade, or Genie
+   * transition effects. For the Zoom, Sheet, and Genie effects, the
+   * inRect parameter is the global coordinates at which to end the
    * animation; if inRect is NULL, the animation ends at the center of
-   * the window.
+   * the window. The Fade effect does not use the inRect parameter.
    */
   kWindowHideTransitionAction   = 2,
 
@@ -4703,6 +5401,12 @@ enum {
  *  Summary:
  *    Shows, hides, moves, or resizes a window with appropriate
  *    animation and sound.
+ *  
+ *  Discussion:
+ *    In Mac OS X 10.3 and later, this API sends
+ *    kEventWindowTransitionStarted and kEventWindowTransitionCompleted
+ *    Carbon events to the transitioning window at the start and end of
+ *    the transition.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -4749,6 +5453,12 @@ TransitionWindow(
  *    Shows or hides a window, potentially also moving a second window,
  *    with appropriate animation and sound.
  *  
+ *  Discussion:
+ *    In Mac OS X 10.3 and later, this API sends
+ *    kEventWindowTransitionStarted and kEventWindowTransitionCompleted
+ *    Carbon events to the transitioning window at the start and end of
+ *    the transition.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
@@ -4786,6 +5496,102 @@ TransitionWindowAndParent(
   WindowTransitionEffect   inEffect,
   WindowTransitionAction   inAction,
   const Rect *             inRect)               /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+
+/*
+ *  TransitionWindowOptions
+ *  
+ *  Summary:
+ *    Extensible parameter block for the TransitionWindowWithOptions
+ *    API.
+ */
+struct TransitionWindowOptions {
+
+  /*
+   * The structure version. You must put 0 in this field.
+   */
+  UInt32              version;
+
+  /*
+   * The duration of the fade, in seconds. For use with the Sheet,
+   * Slide, Fade, and Genie transition effects; ignored for other
+   * effects. You may pass 0 to use the default duration. The effect is
+   * not guaranteed to last precisely this long, but should be a close
+   * approximation.
+   */
+  EventTime           duration;
+
+  /*
+   * For use with kWindowSheetTransitionEffect. This is the parent
+   * window of the sheet.
+   */
+  WindowRef           window;
+
+  /*
+   * This value will be sent as the kEventParamUserData parameter for
+   * the kEventWindowTransitionStarted and
+   * kEventWindowTransitionCompleted events.
+   */
+  void *              userData;
+};
+typedef struct TransitionWindowOptions  TransitionWindowOptions;
+/*
+ *  TransitionWindowWithOptions()
+ *  
+ *  Summary:
+ *    Transitions a window from one state to another with appropriate
+ *    animation and sound.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window that should be transitioned.
+ *    
+ *    inEffect:
+ *      The type of visual effect to use.
+ *    
+ *    inAction:
+ *      The action to take on the window.
+ *    
+ *    inBounds:
+ *      A screen rect in global coordinates. The interpretation of the
+ *      rect is dependent on the transition action; see the
+ *      documentation for each action for details. May be NULL for some
+ *      transition actions.
+ *    
+ *    inAsync:
+ *      Whether the transition should run synchronously or
+ *      asynchronously. If inAsync is true, TransitionWindow will
+ *      return immediately, and the transition will run using an event
+ *      loop timer. You must run your event loop for the transition to
+ *      occur. If inAsync is false, TransitionWindow will block until
+ *      the transition is completed. In either case, the
+ *      kEventWindowTransitionStarted and
+ *      kEventWindowTransitionCompleted Carbon events will be sent to
+ *      the transitioning window at the start and end of the transition.
+ *    
+ *    inOptions:
+ *      Extra options that are required for some transitions. This
+ *      parameter may be NULL if the specific transition effect does
+ *      not require extra information.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+TransitionWindowWithOptions(
+  WindowRef                  inWindow,
+  WindowTransitionEffect     inEffect,
+  WindowTransitionAction     inAction,
+  const HIRect *             inBounds,        /* can be NULL */
+  Boolean                    inAsync,
+  TransitionWindowOptions *  inOptions)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 
 
@@ -4854,12 +5660,30 @@ GrowWindow(
   const Rect *  bBox)          /* can be NULL */              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-/* Note: boundsRect can only be NULL when linking to CarbonLib 1.0 forward */
 /*
  *  DragWindow()
  *  
+ *  Summary:
+ *    Allows the user to drag a window to a different position.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window to drag.
+ *    
+ *    startPt:
+ *      The point in global coordinates where the mouse was clicked on
+ *      the window.
+ *    
+ *    boundsRect:
+ *      A rect in global coordinates outside of which the window cannot
+ *      move. May be NULL in CarbonLib and Mac OS X, to indicate that
+ *      there are no restrictions on window movement. This parameter is
+ *      ignored by CarbonLib and Mac OS X 10.0 through 10.2; it is
+ *      obeyed in Mac OS X 10.3 and later.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -5357,13 +6181,34 @@ SetWindowBounds(
   const Rect *       globalBounds)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
-/* Routines available from Mac OS 8.5 forward*/
-
 /*
  *  RepositionWindow()
  *  
+ *  Summary:
+ *    Positions a window according in one of the standard window
+ *    locations.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    window:
+ *      The window to position.
+ *    
+ *    parentWindow:
+ *      For some positioning methods, the new location for the
+ *      positioned window will be calculated based on the parent
+ *      windowÕs position. On Mac OS X 10.3 and later, some positioning
+ *      methods allow this parameter to be the same as the window
+ *      parameter; CarbonLib and earlier versions of Mac OS X require
+ *      that it be different from the window parameter. See the
+ *      WindowPositionMethod documentation for details on which methods
+ *      allow the parent to be the same as the positioned window.
+ *    
+ *    method:
+ *      The window positioning method. This should be one of the
+ *      WindowPositionMethod constants.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -6030,7 +6875,7 @@ IsWindowLatentVisible(
     events for the rest of its windows as normal. Therefore, you will usually not use a modal
     event loop to handle events in a sheet. Rather, you will show the sheet window, and then
     return directly back to your main event loop. The Carbon Event Manager automatically 
-    prevents events in the sheet's parent window from reaching it; events in your application's
+    prevents events from reaching the sheet's parent window; events in your application's
     other windows are still returned to you via WaitNextEvent or your application's Carbon
     event handlers, where you can process them as normal.
     
@@ -6057,7 +6902,7 @@ IsWindowLatentVisible(
     event handling for a sheet in CarbonLib is the same as event handling for a sheet on X;
     ShowSheetWindow still returns immediately, and your application should still return back
     to its main event loop and be prepared to handle events in other windows. On CarbonLib,
-    your application will simply never receive an user input in any of your other windows;
+    your application will simply never receive any user input in any of your other windows;
     since the sheet has application modality, the Carbon Event Manager will discard events
     in any windows other than the sheet.
     
@@ -6078,10 +6923,10 @@ IsWindowLatentVisible(
     CreateWindowFromResource; the WDEF procIDs may be used with NewWindow, NewCWindow, NewDialog,
     NewColorDialog, NewFeaturesDialog, and in 'WDEF' and 'DLOG' resources.
     
-    The first release of Mac OS X only supports kSheetWindowClass and kWindowSheetProc;
+    Mac OS X 10.0 only supports kSheetWindowClass and kWindowSheetProc;
     it does not support kSheetAlertWindowClass or kWindowSheetAlertProc. The latter window
-    class and procID were added in CarbonLib 1.3 and will be added to a future version of
-    Mac OS X. A new window class and procID were necessary for CarbonLib support because
+    class and procID were added in CarbonLib 1.3 and Mac OS X 10.1. A new window class and
+    procID were necessary for CarbonLib support because
     sheets can be used for both alerts ("Do you want to save changes before closing this
     window?") and dialogs (a Navigation Services PutFile dialog). On Mac OS X, sheet windows
     have the same appearance when used for either an alert or a dialog, but on Mac OS 8 and 9,
@@ -6116,9 +6961,38 @@ IsWindowLatentVisible(
     Typically, your event handling code (whether it uses WaitNextEvent, the Dialog Manager,
     or Carbon event handlers) will receive and respond to events in the sheet until the
     user does something that should cause the sheet to close. This might be clicking in an
-    OK or Cancel button, for example. At that time, your event handling code should call
-    HideSheetWindow. The sheet window will hide, but will not be destroyed, so you can use
-    it again later if you want.
+    OK or Cancel button, for example. At that time, your event handling code must call either
+    HideSheetWindow or DetachSheetWindow. The sheet window will hide, but will not be destroyed,
+    so you can use it again later if you want.
+    
+    ¥ÊClosing a sheet
+    
+    A sheet is normally hidden by calling the HideSheetWindow API. HideSheetWindow provides the
+    visual effects of zooming the sheet back into the parent window's title bar and moving the
+    parent window back to its original position. In Mac OS X 10.3 and later, the DetachSheetWindow
+    API is also available. DetachSheetWindow ungroups the sheet from its parent, releases the
+    retain count acquired by ShowSheetWindow on the parent window, and removes all event handlers
+    installed by ShowSheetWindow, but does not hide the sheet window; an application would typically
+    call DetachSheetWindow and then HideWindow to hide the sheet window without the sheet closing
+    animation. This may be useful if, for example, the sheet were being used to ask if changes to
+    a modified document should be saved; if the user chooses "DonÕt Save", then the application
+    could use DetachSheetWindow and then hide both the sheet and the document immediately, so that
+    the document closes as quickly as possible without taking time for the closing animation.
+    The Navigation Services Save Changes dialog does this automatically.
+    
+    You _must_ call either HideSheetWindow or DetachSheetWindow before destroying a sheet that has
+    been shown with ShowSheetWindow. You may not simply dispose of a sheet window without first using
+    Hide or DetachSheetWindow; doing so will leave an extra refcount on the parent window, and will
+    leave the parent window still embedded in the sheet window group.
+    
+    ¥ Sheet Transparency
+    
+    Sheets should be transparent so that the user can see some of the document content behind
+    the sheet and remember the context in which the sheet was displayed. In Mac OS X 10.1, 
+    a sheet is made transparent by using the kThemeBrushSheetBackgroundTransparent constant for
+    the sheet windowÕs theme background brush. In Mac OS X 10.2 and later, sheets are only
+    transparent if this brush is used and if the sheet window uses compositing mode (enabled by
+    setting the kWindowCompositingAttribute window attribute when the sheet window is created).
 */
 /*
  *  ShowSheetWindow()
@@ -6134,7 +7008,15 @@ IsWindowLatentVisible(
  *    Mac OS X; instead, it shows the sheet like a standard
  *    movable-modal dialog window. Sheet windows must use the window
  *    classes kSheetWindowClass or kSheetAlertWindowClass to get the
- *    right appearance on both platforms.
+ *    right appearance on both platforms. 
+ *    
+ *    Note that ShowSheetWindow will increment the retain count of the
+ *    parent window. The retain count is decremented by HideSheetWindow
+ *    and DetachSheetWindow. You must call one of those APIs before
+ *    destroying the sheet window. 
+ *    
+ *    On Mac OS X, ShowSheetWindow sets the modality of the sheet
+ *    window to kWindowModalityWindowModal.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -6146,6 +7028,14 @@ IsWindowLatentVisible(
  *    
  *    inParentWindow:
  *      The sheet's parent window.
+ *  
+ *  Result:
+ *    An operating system result code. ShowSheetWindow checks for the
+ *    following error conditions, and returns paramErr if any occur:
+ *    the sheet window must have a window class of kSheetWindowClass or
+ *    kSheetAlertWindowClass; the sheet and parent windows must not be
+ *    the same window; the sheet must not have a parent window already;
+ *    and the parent window must not already be the target of a sheet.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -6182,6 +7072,36 @@ HideSheetWindow(WindowRef inSheet)                            AVAILABLE_MAC_OS_X
 
 
 /*
+ *  DetachSheetWindow()
+ *  
+ *  Summary:
+ *    Detaches a sheet window from its parent window without affecting
+ *    the visibility or position of the sheet or its parent.
+ *  
+ *  Discussion:
+ *    This API may be useful if you want to hide a sheet window without
+ *    an animation effect. To do that, use DetachSheetWindow to detach
+ *    the sheet from the parent, and then use HideWindow to hide the
+ *    sheet, or DisposeWindow to destroy the sheet.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inSheet:
+ *      The sheet to detach.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+DetachSheetWindow(WindowRef inSheet)                          AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
  *  GetSheetWindowParent()
  *  
  *  Summary:
@@ -6214,21 +7134,16 @@ GetSheetWindowParent(
 /*
     ¥ Drawers
     
-    Drawers are supported in Carbon by Jaguar and later. To create and use a drawer:
+    Drawers are supported in Carbon by Mac OS X 10.2 and later. To create and use a drawer:
     
-        -   Create a window using kDrawerWindowClass. You may optionally set the background
-            brush of the window to kThemeBrushDrawerBackground using the SetThemeWindowBackground
-            function.
+        -   Create a window using kDrawerWindowClass. You must also use compositing mode with
+            drawers; this mode is enabled by passing kWindowCompositingAttribute to CreateNewWindow.
             
         -   Either install the standard window event handler on the drawer window, or use
             your own Carbon event or WaitNextEvent code to handle user interaction with the
             drawer. If you do not use the standard window event handler, you should call
             ResizeWindow in response to clicks on the grow region of the drawer if you want
             the drawer to be resizable.
-            
-        -   Install a handler on the drawer window for the kEventWindowDrawContent event.
-            You must handle this event and draw your drawer's content so that the content
-            will be visible when the drawer is slid out from underneath the parent window.
             
         -   Set the drawer's parent window with the SetDrawerParent function. The parent is
             the window on which the drawer will open.
@@ -6242,7 +7157,7 @@ GetSheetWindowParent(
             opens on the parent's left side on a left-to-right system, or on the parent's right
             side on a right-to-left system.
             
-        -   Optionally, Set the drawer's offsets with the SetDrawerOffsets function. The offsets
+        -   Optionally, set the drawer's offsets with the SetDrawerOffsets function. The offsets
             control the amount of inset between the edge of the parent's content area and the edge
             of the drawer's structure. If you do not set any offsets, the drawer's edges are flush
             with the edges of the parent's content.
@@ -6320,6 +7235,7 @@ enum {
    */
   kWindowDrawerClosed           = 4
 };
+
 
 typedef UInt32                          WindowDrawerState;
 
@@ -6626,20 +7542,24 @@ GetDrawerOffsets(
  *  Discussion:
  *    ToggleDrawer opens the drawer if it is closed, opening, or
  *    closing. If the drawer is open, it closes the drawer.
- *     ToggleDrawer attemps to open the drawer on its preferred edge,
+ *    
+ *    ToggleDrawer attemps to open the drawer on its preferred edge,
  *    but if there is not enough room on that edge, it will try the
  *    opposite edge instead. If there is insufficient room on either
  *    edge, the drawer will open on the preferred edge but may extend
  *    offscreen, under the Dock, or under the menubar.
+ *    
  *    The opening or closing of the drawer is performed asynchronously;
  *    ToggleDrawer installs an event loop timer that opens or closes
  *    the drawer after ToggleDrawer returns to the caller. Therefore,
  *    the caller must be running its event loop for the drawer to open
  *    or close. To open or close the drawer synchronously, use the
  *    OpenDrawer or CloseDrawer APIs.
+ *    
  *    ToggleDrawer retains the drawer window while the drawer is
  *    opening or closing, and releases it when the drawer is fully
  *    opened or closed.
+ *    
  *    ToggleDrawer sends the kEventWindowDrawerOpening,
  *    kEventWindowDrawerOpened, kEventWindowDrawerClosing, and
  *    kEventWindowDrawerClosed events as the drawer opens or closes.
@@ -6678,8 +7598,10 @@ ToggleDrawer(WindowRef inDrawerWindow)                        AVAILABLE_MAC_OS_X
  *    therefore, the caller must be running its event loop for the
  *    drawer to open. If inAsync is false, OpenDrawer opens the drawer
  *    completely before returning to the caller.
+ *    
  *    OpenDrawer retains the drawer window while the drawer is opening,
  *    and releases it when the drawer is fully open.
+ *    
  *    OpenDrawer sends the kEventWindowDrawerOpening event to the
  *    drawer, the drawer's parent, and the application before opening
  *    the drawer. If an event handler for this event returns
@@ -6739,9 +7661,11 @@ OpenDrawer(
  *    therefore, the caller must be running its event loop for the
  *    drawer to close. If inAsync is false, CloseDrawer closes the
  *    drawer completely before returning to the caller.
+ *    
  *    CloseDrawer retains the drawer window while the drawer is
  *    closing, and releases it when the drawer is fully closed.
- *     CloseDrawer sends the kEventWindowDrawerClosing event to the
+ *    
+ *    CloseDrawer sends the kEventWindowDrawerClosing event to the
  *    drawer, the drawer's parent, and the application before closing
  *    the drawer. If an event handler for this event returns
  *    userCanceledErr, CloseDrawer will return immediately without
@@ -6783,7 +7707,7 @@ CloseDrawer(
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*
    disable and enable screen updates for changes to the current applicationÕs windows
-   (OS X only for now)
+   (OS X only)
 */
 
 /*
@@ -6872,7 +7796,7 @@ SetWindowToolbar(
  *    
  *    outToolbar:
  *      The toolbar. You do not own the toolbar reference returned by
- *      this function. Do not release it! It is possibly for the
+ *      this function. Do not release it! It is possible for the
  *      toolbar returned to be NULL, indicating there is no toolbar
  *      associated with this window. ¥¥¥ NOTE: May need to change the
  *      release strategy here.

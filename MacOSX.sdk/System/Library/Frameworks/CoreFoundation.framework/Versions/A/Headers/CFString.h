@@ -1,5 +1,5 @@
 /*	CFString.h
-	Copyright 1998-2002, Apple, Inc. All rights reserved.
+	Copyright (c) 1998-2003, Apple, Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFSTRING__)
@@ -10,6 +10,7 @@
 #include <CoreFoundation/CFData.h>
 #include <CoreFoundation/CFDictionary.h>
 #include <CoreFoundation/CFCharacterSet.h>
+#include <CoreFoundation/CFLocale.h>
 #include <stdarg.h>
 
 #if defined(__cplusplus)
@@ -322,14 +323,14 @@ typedef enum {
 
 /* The main comparison routine; compares specified range of the first string to (the full range of) the second string.
    locale == NULL indicates canonical locale.
-   kCFCompareNumerically, added in 10.2, only works if kCFCompareLocalized isn't specified
+   kCFCompareNumerically, added in 10.2, does not work if kCFCompareLocalized is specified on systems before 10.3
    kCFCompareBackwards and kCFCompareAnchored are not applicable.
 */
 CF_EXPORT
 CFComparisonResult CFStringCompareWithOptions(CFStringRef theString1, CFStringRef theString2, CFRange rangeToCompare, CFOptionFlags compareOptions);
 
 /* Comparison convenience suitable for passing as sorting functions.
-   kCFCompareNumerically, added in 10.2, only works if kCFCompareLocalized isn't specified
+   kCFCompareNumerically, added in 10.2, does not work if kCFCompareLocalized is specified on systems before 10.3
    kCFCompareBackwards and kCFCompareAnchored are not applicable.
 */
 CF_EXPORT
@@ -520,14 +521,25 @@ void CFStringTrim(CFMutableStringRef theString, CFStringRef trimString);
 CF_EXPORT
 void CFStringTrimWhitespace(CFMutableStringRef theString);
 
+#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
 CF_EXPORT
-void CFStringLowercase(CFMutableStringRef theString, const void *localeTBD);
+void CFStringLowercase(CFMutableStringRef theString, CFLocaleRef locale);
 
 CF_EXPORT
-void CFStringUppercase(CFMutableStringRef theString, const void *localeTBD);
+void CFStringUppercase(CFMutableStringRef theString, CFLocaleRef locale);
 
 CF_EXPORT
-void CFStringCapitalize(CFMutableStringRef theString, const void *localeTBD);
+void CFStringCapitalize(CFMutableStringRef theString, CFLocaleRef locale);
+#else
+CF_EXPORT
+void CFStringLowercase(CFMutableStringRef theString, const void *localeTBD); // localeTBD must be NULL on pre-10.3
+
+CF_EXPORT
+void CFStringUppercase(CFMutableStringRef theString, const void *localeTBD); // localeTBD must be NULL on pre-10.3
+
+CF_EXPORT
+void CFStringCapitalize(CFMutableStringRef theString, const void *localeTBD); // localeTBD must be NULL on pre-10.3
+#endif
 
 #if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 /*!
@@ -608,7 +620,8 @@ CFStringEncoding CFStringGetMostCompatibleMacStringEncoding(CFStringEncoding enc
    and a range in the string to look at. Then call CFStringGetCharacterFromInlineBuffer()
    as many times as you want, with a index into that range (relative to the start
    of that range). These are INLINE functions and will end up calling CFString only 
-   once in a while, to fill a buffer.  
+   once in a while, to fill a buffer.  CFStringGetCharacterFromInlineBuffer() returns 0 if
+   a location outside the original range is specified.
 */
 #define __kCFStringInlineBufferLength 64
 typedef struct {
@@ -629,9 +642,12 @@ CF_INLINE void CFStringInitInlineBuffer(CFStringRef str, CFStringInlineBuffer *b
 }
 
 CF_INLINE UniChar CFStringGetCharacterFromInlineBuffer(CFStringInlineBuffer *buf, CFIndex idx) {
-    if (buf->directBuffer) return buf->directBuffer[idx + buf->rangeToBuffer.location];
+    if (buf->directBuffer) {
+	if (idx < 0 || idx >= buf->rangeToBuffer.length) return 0;
+        return buf->directBuffer[idx + buf->rangeToBuffer.location];
+    }
     if (idx >= buf->bufferedRangeEnd || idx < buf->bufferedRangeStart) {
-	if (idx < 0 || idx > buf->rangeToBuffer.length) return 0;
+	if (idx < 0 || idx >= buf->rangeToBuffer.length) return 0;
 	if ((buf->bufferedRangeStart = idx - 4) < 0) buf->bufferedRangeStart = 0;
 	buf->bufferedRangeEnd = buf->bufferedRangeStart + __kCFStringInlineBufferLength;
 	if (buf->bufferedRangeEnd > buf->rangeToBuffer.length) buf->bufferedRangeEnd = buf->rangeToBuffer.length;
@@ -647,7 +663,7 @@ CF_INLINE UniChar CFStringGetCharacterFromInlineBuffer(CFStringInlineBuffer *buf
     do {(buf)->theString = str; (buf)->rangeToBuffer = range; (buf)->directBuffer = CFStringGetCharactersPtr(str);} while (0)
 
 #define CFStringGetCharacterFromInlineBuffer(buf, idx) \
-    ((buf)->directBuffer ? (buf)->directBuffer[(idx) + (buf)->rangeToBuffer.location] : CFStringGetCharacterAtIndex((buf)->theString, (idx) + (buf)->rangeToBuffer.location))
+    (((idx) < 0 || (idx) >= (buf)->rangeToBuffer.length) ? 0 : ((buf)->directBuffer ? (buf)->directBuffer[(idx) + (buf)->rangeToBuffer.location] : CFStringGetCharacterAtIndex((buf)->theString, (idx) + (buf)->rangeToBuffer.location)))
 
 #endif /* CF_INLINE */
 

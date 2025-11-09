@@ -1,7 +1,7 @@
 /*
         NSMenu.h
         Application Kit
-        Copyright (c) 1996-2001, Apple Computer, Inc.
+        Copyright (c) 1996-2003, Apple Computer, Inc.
         All rights reserved.
 */
 
@@ -10,7 +10,7 @@
 #import <AppKit/AppKitDefines.h>
 #import <AppKit/NSMenuItem.h>
 
-@class NSEvent, NSView;
+@class NSEvent, NSView, NSFont;
 @class NSMenu;
 @class NSMutableArray, NSArray;
 
@@ -28,7 +28,11 @@
         unsigned int suppressAutoenable:1;
         unsigned int disabled:1;
         unsigned int ownedByPopUp:1;
-        unsigned int RESERVED:26;
+	unsigned int delegateNeedsUpdate:1;
+	unsigned int delegateUpdateItem:1;
+	unsigned int delegateHasKeyEquiv:1;
+	unsigned int delegateHasAltKeyEquiv:1;
+        unsigned int RESERVED:22;
     } _mFlags;
     NSString *_name;
 }
@@ -37,6 +41,9 @@
 + (NSZone *)menuZone;
 
 + (void)popUpContextMenu:(NSMenu*)menu withEvent:(NSEvent*)event forView:(NSView*)view;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
++ (void)popUpContextMenu:(NSMenu*)menu withEvent:(NSEvent*)event forView:(NSView*)view withFont:(NSFont*)font;
+#endif
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 + (void)setMenuBarVisible:(BOOL)visible;
@@ -106,6 +113,11 @@
 
 - (void)performActionForItemAtIndex:(int)index;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void)setDelegate:(id)anObject;
+- (id)delegate;
+#endif
+
 @end
 
 @interface NSMenu(NSSubmenuAction)
@@ -116,6 +128,17 @@
 - (BOOL)validateMenuItem:(id <NSMenuItem>)menuItem;
 @end
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+@interface NSObject(NSMenuDelegate)
+- (void)menuNeedsUpdate:(NSMenu*)menu;
+- (int)numberOfItemsInMenu:(NSMenu*)menu;
+- (BOOL)menu:(NSMenu*)menu updateItem:(NSMenuItem*)item atIndex:(int)index shouldCancel:(BOOL)shouldCancel;
+    // implement either the first one or the next two to populate the menu
+- (BOOL)menuHasKeyEquivalent:(NSMenu*)menu forEvent:(NSEvent*)event target:(id*)target action:(SEL*)action;
+    // bypasses populating the menu for checking for key equivalents. set target and action on return
+@end
+#endif
+
 APPKIT_EXTERN NSString *NSMenuWillSendActionNotification;
 APPKIT_EXTERN NSString *NSMenuDidSendActionNotification;
 
@@ -123,3 +146,7 @@ APPKIT_EXTERN NSString *NSMenuDidAddItemNotification;
 APPKIT_EXTERN NSString *NSMenuDidRemoveItemNotification;
 APPKIT_EXTERN NSString *NSMenuDidChangeItemNotification;
     // All three of these have a user info key NSMenuItemIndex with a NSNumber value.
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+APPKIT_EXTERN NSString *NSMenuDidEndTrackingNotification;
+#endif

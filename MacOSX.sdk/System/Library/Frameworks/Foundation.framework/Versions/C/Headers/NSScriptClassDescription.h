@@ -1,6 +1,6 @@
 /*
 	NSScriptClassDescription.h
-	Copyright (c) 1997-2002, Apple Computer, Inc.
+	Copyright (c) 1997-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 

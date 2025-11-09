@@ -1,5 +1,5 @@
 /*	CFCharacterSet.h
-	Copyright 1999-2002, Apple, Inc. All rights reserved.
+	Copyright (c) 1999-2003, Apple, Inc. All rights reserved.
 */
 
 /*!
@@ -55,9 +55,9 @@ typedef struct __CFCharacterSet * CFMutableCharacterSetRef;
         Type of the predefined CFCharacterSet selector values.
 */
 typedef enum {
-    kCFCharacterSetControl = 1, /* Control character set (i.e. newline, tab, delete, etc) */
-    kCFCharacterSetWhitespace, /* Whitespace character set (i.e. space, tab, ideographic space ) */
-    kCFCharacterSetWhitespaceAndNewline,  /* Whitespace and Newline character set (i.e. space, tab, newline ) */
+    kCFCharacterSetControl = 1, /* Control character set (Unicode General Category Cc and Cf) */
+    kCFCharacterSetWhitespace, /* Whitespace character set (Unicode General Category Zs and U0009 CHARACTER TABULATION) */
+    kCFCharacterSetWhitespaceAndNewline,  /* Whitespace and Newline character set (Unicode General Category Z*, U000A ~ U000D, and U0085) */
     kCFCharacterSetDecimalDigit, /* Decimal digit character set */
     kCFCharacterSetLetter, /* Letter character set (Unicode General Category L* & M*) */
     kCFCharacterSetLowercaseLetter, /* Lowercase character set (Unicode General Category Ll) */
@@ -68,8 +68,10 @@ typedef enum {
     kCFCharacterSetPunctuation, /* Punctuation character set (Unicode General Category P*) */
     kCFCharacterSetIllegal /* Illegal character set */
 #if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
-    ,
-    kCFCharacterSetCapitalizedLetter /* Titlecase character set (Unicode General Category Lt) */
+    , kCFCharacterSetCapitalizedLetter /* Titlecase character set (Unicode General Category Lt) */
+#endif
+#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
+    , kCFCharacterSetSymbol /* Symbol character set (Unicode General Category S*) */
 #endif
 } CFCharacterSetPredefinedSet;
 
@@ -207,6 +209,24 @@ CF_EXPORT Boolean CFCharacterSetHasMemberInPlane(CFCharacterSetRef theSet, CFInd
 */
 CF_EXPORT
 CFMutableCharacterSetRef CFCharacterSetCreateMutable(CFAllocatorRef alloc);
+
+#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
+/*!
+	@function CFCharacterSetCreateCopy
+	Creates a new character set with the values from the given character set.  This function tries to compact the backing store where applicable.
+	@param allocator The CFAllocator which should be used to allocate
+		memory for the array and its storage for values. This
+		parameter may be NULL in which case the current default
+		CFAllocator is used. If this reference is not a valid
+		CFAllocator, the behavior is undefined.
+	@param theSet The CFCharacterSet which is to be copied.  If this
+                parameter is not a valid CFCharacterSet, the behavior is
+                undefined.
+	@result A reference to the new CFCharacterSet.
+*/
+CF_EXPORT
+CFCharacterSetRef CFCharacterSetCreateCopy(CFAllocatorRef alloc, CFCharacterSetRef theSet) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+#endif /* MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED */
 
 /*!
 	@function CFCharacterSetCreateMutableCopy

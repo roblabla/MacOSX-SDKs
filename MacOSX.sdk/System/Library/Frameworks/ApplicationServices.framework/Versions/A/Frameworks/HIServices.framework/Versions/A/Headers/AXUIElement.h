@@ -17,7 +17,7 @@ extern "C" {
 
 extern Boolean AXAPIEnabled ();
 
-typedef struct __AXUIElement *AXUIElementRef;
+typedef const struct __AXUIElement *AXUIElementRef;
 
 extern CFTypeID	AXUIElementGetTypeID (void);
 
@@ -27,6 +27,9 @@ extern AXError  AXUIElementGetAttributeValueCount (AXUIElementRef element, CFStr
 extern AXError  AXUIElementCopyAttributeValues (AXUIElementRef element, CFStringRef attribute, CFIndex index, CFIndex maxValues, CFArrayRef *values);
 extern AXError 	AXUIElementIsAttributeSettable (AXUIElementRef element, CFStringRef attribute, Boolean *settable);
 extern AXError 	AXUIElementSetAttributeValue (AXUIElementRef element, CFStringRef attribute, CFTypeRef value);
+
+extern AXError	AXUIElementCopyParameterizedAttributeNames (AXUIElementRef element, CFArrayRef *names);
+extern AXError	AXUIElementCopyParameterizedAttributeValue (AXUIElementRef element, CFStringRef parameterizedAttribute, CFTypeRef parameter, CFTypeRef *result);
 
 extern AXError 	AXUIElementCopyActionNames (AXUIElementRef element, CFArrayRef *names);
 extern AXError	AXUIElementCopyActionDescription (AXUIElementRef element, CFStringRef action, CFStringRef *description);

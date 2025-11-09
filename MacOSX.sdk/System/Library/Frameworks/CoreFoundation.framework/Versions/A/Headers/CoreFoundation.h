@@ -1,6 +1,9 @@
 /*	CoreFoundation.h
-	Copyright 1998-2002, Apple, Inc. All rights reserved.
+	Copyright (c) 1998-2003, Apple, Inc. All rights reserved.
 */
+
+#if !defined(__COREFOUNDATION_COREFOUNDATION__)
+#define __COREFOUNDATION_COREFOUNDATION__ 1
 
 #include <CoreFoundation/CFBase.h>
 #include <CoreFoundation/CFArray.h>
@@ -48,15 +51,10 @@
 
 #if defined(__STDC_VERSION__) && (199901L <= __STDC_VERSION__)
 
-//#include <complex.h>
-//#include <fenv.h>
 #include <inttypes.h>
 //#include <iso646.h>
 #include <stdbool.h>
 #include <stdint.h>
-//#include <tgmath.h>
-//#include <wchar.h>
-//#include <wctype.h>
 
 #endif
 
@@ -67,6 +65,13 @@
 #include <CoreFoundation/CFPlugIn.h>
 #include <CoreFoundation/CFURLAccess.h>
 #include <CoreFoundation/CFUUID.h>
+
+#if defined(__MACH__)
+#include <CoreFoundation/CFDateFormatter.h>
+#include <CoreFoundation/CFLocale.h>
+#include <CoreFoundation/CFNumberFormatter.h>
+#include <CoreFoundation/CFUserNotification.h>
+#endif
 
 #if defined(__MACH__) || defined(__WIN32__)
 #include <CoreFoundation/CFMachPort.h>
@@ -81,9 +86,10 @@
 #include <CoreFoundation/CFPreferences.h>
 #include <CoreFoundation/CFStream.h>
 #include <CoreFoundation/CFStringEncodingExt.h>
-#include <CoreFoundation/CFUserNotification.h>
 
 #endif /* !DARWIN */
 
 #endif
+
+#endif /* ! __COREFOUNDATION_COREFOUNDATION__ */
 

@@ -1,7 +1,7 @@
 /*
 	NSCursor.h
 	Application Kit
-	Copyright (c) 1994-2001, Apple Computer, Inc.
+	Copyright (c) 1994-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -10,13 +10,16 @@
 
 @class NSColor, NSEvent, NSImage;
 
+#define NSAppKitVersionNumberWithCursorSizeSupport 682.0
+
 @interface NSCursor : NSObject <NSCoding> {
     /*All instance variables are private*/
     NSPoint _hotSpot;
     struct _cursorFlags {
 	unsigned int onMouseExited:1;
 	unsigned int onMouseEntered:1;
-	unsigned int :30;
+        unsigned int cursorType:8;
+	unsigned int :22;
     } _flags;
     id _image;
 #ifdef WIN32
@@ -27,6 +30,19 @@
 + (NSCursor *)currentCursor;
 + (NSCursor *)arrowCursor;
 + (NSCursor *)IBeamCursor;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
++ (NSCursor *)pointingHandCursor;
++ (NSCursor *)closedHandCursor;
++ (NSCursor *)openHandCursor;
++ (NSCursor *)resizeLeftCursor;
++ (NSCursor *)resizeRightCursor;
++ (NSCursor *)resizeLeftRightCursor;
++ (NSCursor *)resizeUpCursor;
++ (NSCursor *)resizeDownCursor;
++ (NSCursor *)resizeUpDownCursor;
++ (NSCursor *)crosshairCursor;
++ (NSCursor *)disappearingItemCursor;
+#endif
 
 - (id)initWithImage:(NSImage *)newImage hotSpot:(NSPoint)aPoint;
 - (id)initWithImage:(NSImage *)newImage	foregroundColorHint:(NSColor *)fg backgroundColorHint:(NSColor *)bg hotSpot:(NSPoint)hotSpot;

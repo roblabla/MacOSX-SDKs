@@ -64,11 +64,13 @@ CG_EXTERN CFTypeID CGPatternGetTypeID(void);
 
 CG_EXTERN CGPatternRef CGPatternCreate(void *info, CGRect bounds, CGAffineTransform matrix, float xStep, float yStep, CGPatternTiling tiling, bool isColored, const CGPatternCallbacks *callbacks);
 
-/* Equivalent to `CFRetain(pattern)'. */
+/* Equivalent to `CFRetain(pattern)', except it doesn't crash (as CF does)
+ * if `pattern' is NULL. */
 
 CG_EXTERN CGPatternRef CGPatternRetain(CGPatternRef pattern);
 
-/* Equivalent to `CFRelease(pattern)'. */
+/* Equivalent to `CFRelease(pattern)', except it doesn't crash (as CF does)
+ * if `pattern' is NULL. */
 
 CG_EXTERN void CGPatternRelease(CGPatternRef pattern);
 

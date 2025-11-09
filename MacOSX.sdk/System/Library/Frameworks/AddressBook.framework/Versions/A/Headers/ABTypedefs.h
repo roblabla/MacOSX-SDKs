@@ -2,7 +2,7 @@
  *  ABTypedefs.h
  *  AddressBook Framework
  *
- *  Copyright (c) 2002 Apple Computer. All rights reserved.
+ *  Copyright (c) 2002-2003 Apple Computer. All rights reserved.
  *
  */
 
@@ -49,7 +49,10 @@ typedef enum _ABSearchComparison {
         kABContainsSubString,
         kABContainsSubStringCaseInsensitive,
         kABPrefixMatch,
-        kABPrefixMatchCaseInsensitive
+        kABPrefixMatchCaseInsensitive,
+#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
+        kABBitsInBitFieldMatch
+#endif
 } ABSearchComparison;
 
 typedef enum _ABSearchConjunction {

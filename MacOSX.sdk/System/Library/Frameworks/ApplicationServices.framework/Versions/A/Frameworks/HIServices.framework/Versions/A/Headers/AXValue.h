@@ -9,11 +9,13 @@
 #ifndef __AXVALUE__
 #define __AXVALUE__
 
+#include <AvailabilityMacros.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <HIServices/HIServices.h>
+#include <CoreServices/CoreServices.h>
 #include <CoreFoundation/CoreFoundation.h>
 
 typedef enum {
@@ -30,11 +32,15 @@ typedef enum {
 
 } AXValueType;
 
+typedef const struct __AXValue *AXValueRef;
 
-extern CFTypeRef 	AXValueCreate (AXValueType theType, const void *valuePtr);
-extern AXValueType 	AXValueGetType(CFTypeRef value);
+extern CFTypeID		AXValueGetTypeID() AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
-extern Boolean 		AXValueGetValue(CFTypeRef value, AXValueType theType, void *valuePtr);
+
+extern AXValueRef 	AXValueCreate (AXValueType theType, const void *valuePtr);
+extern AXValueType 	AXValueGetType(AXValueRef value);
+
+extern Boolean 		AXValueGetValue(AXValueRef value, AXValueType theType, void *valuePtr);
 
 
 #ifdef __cplusplus

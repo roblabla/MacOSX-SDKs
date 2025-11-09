@@ -1,7 +1,7 @@
 /*
         NSTextView.h
         Application Kit
-        Copyright (c) 1994-2001, Apple Computer, Inc.
+        Copyright (c) 1994-2003, Apple Computer, Inc.
         All rights reserved.
 */
 
@@ -12,6 +12,7 @@
 #import <AppKit/NSTextAttachment.h>
 #import <AppKit/AppKitDefines.h>
 #import <AppKit/NSDragging.h>
+#import <AppKit/NSUserInterfaceValidation.h>
 
 @class NSTextContainer;
 @class NSTextStorage;
@@ -19,6 +20,7 @@
 @class NSRulerView;
 @class NSRulerMarker;
 @class NSUndoManager;
+@class NSParagraphStyle;
 
 typedef enum _NSSelectionGranularity {
     NSSelectByCharacter = 0,
@@ -31,7 +33,19 @@ typedef enum _NSSelectionAffinity {
     NSSelectionAffinityDownstream = 1
 } NSSelectionAffinity;
 
-@interface NSTextView : NSText <NSTextInput> {
+typedef enum {
+    NSFindPanelActionShowFindPanel = 1,
+    NSFindPanelActionNext = 2,
+    NSFindPanelActionPrevious = 3,
+    NSFindPanelActionReplaceAll = 4,
+    NSFindPanelActionReplace = 5,
+    NSFindPanelActionReplaceAndFind = 6,
+    NSFindPanelActionSetFindString = 7,
+    NSFindPanelActionReplaceAllInSelection = 8
+} NSFindPanelAction;
+
+
+@interface NSTextView : NSText <NSTextInput, NSUserInterfaceValidations> {
 }
 
 /**************************** Initializing ****************************/
@@ -90,11 +104,25 @@ typedef enum _NSSelectionAffinity {
 - (void)raiseBaseline:(id)sender;
 - (void)lowerBaseline:(id)sender;
 - (void)toggleTraditionalCharacterShape:(id)sender;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void)outline:(id)sender;
+#endif
+
+/*************************** Find menu commands ***************************/
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void)performFindPanelAction:(id)sender;	// See enum NSFindPanelAction for possible tags in sender
+#endif
 
 /*************************** New Text commands ***************************/
 
 - (void)alignJustified:(id)sender;
 - (void)changeColor:(id)sender;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void)changeAttributes:(id)sender;
+- (void)changeDocumentBackgroundColor:(id)sender;
+- (void)toggleBaseWritingDirection:(id)sender;
+#endif
 
 /*************************** Ruler support ***************************/
 
@@ -114,6 +142,9 @@ typedef enum _NSSelectionAffinity {
 
 - (BOOL)shouldDrawInsertionPoint;
 - (void)drawInsertionPointInRect:(NSRect)rect color:(NSColor *)color turnedOn:(BOOL)flag;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void)drawViewBackgroundInRect:(NSRect)rect;
+#endif
 
 /*************************** Especially for subclassers ***************************/
 
@@ -129,7 +160,31 @@ typedef enum _NSSelectionAffinity {
 - (void)clickedOnLink:(id)link atIndex:(unsigned)charIndex;
     // Cause the text view to act as if someone clicked on a piece of text with link as the value of NSLinkAttributeName.  If, for instance, you have a special attachment cell that can end up following links, you can use this method to ask the text view to follow a link once you decide it should.  This method is invoked by the text view during mouse tracking if the user is clicking a link as well.  This sends the textView:clickedOnLink: delegation if the delegate responds.
 
+/************************* Speech support *************************/
+
+- (void)startSpeaking:(id)sender;
+- (void)stopSpeaking:(id)sender;
+
 @end
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+@interface NSTextView (NSCompletion)
+
+/************************* Completion support *********************/
+
+- (void)complete:(id)sender;
+    // Responder method for invoking completion.  May be invoked programmatically if autocompletion is desired.
+    
+- (NSRange)rangeForUserCompletion;
+    // Usually returns the partial range from the most recent beginning of a word up to the insertion point.  May be overridden by subclassers to alter the range to be completed.  Returning (NSNotFound, 0) suppresses completion.
+    
+- (NSArray *)completionsForPartialWordRange:(NSRange)charRange indexOfSelectedItem:(int *)index;
+    // Returns an array of potential completions, in the order to be presented, representing complete words that the user might be trying to type when starting by typing the partial word at the given range.  May be overridden by subclassers to modify or override this list.  Returning nil or a zero-length array suppresses completion.   The selected item index may optionally be set to indicate which completion should be initially selected; default is 0, and -1 indicates no selection.  This method should call the delegate method textView:completions:forPartialWordRange:indexOfSelectedItem: if implemented.
+
+- (void)insertCompletion:(NSString *)word forPartialWordRange:(NSRange)charRange movement:(int)movement isFinal:(BOOL)flag;
+    // Called with final == NO as the user moves through the potential completions, then with final == YES when a completion is definitively selected (or completion is cancelled and the original value is reinserted).  The default implementation inserts the completion into the text at the appropriate location.  The movement argument takes its values from the movement codes defined in NSText.h, and allows subclassers to distinguish between cancelling completion and selection by arrow keys, by return, by tab, or by other means such as clicking.
+@end
+#endif
 
 @interface NSTextView (NSPasteboard)
 
@@ -224,6 +279,11 @@ typedef enum _NSSelectionAffinity {
 - (void)setMarkedTextAttributes:(NSDictionary *)attributeDictionary;
 - (NSDictionary *)markedTextAttributes;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void)setLinkTextAttributes:(NSDictionary *)attributeDictionary;
+- (NSDictionary *)linkTextAttributes;
+#endif
+
 /*************************** Other NSTextView methods ***************************/
 
 - (void)setRulerVisible:(BOOL)flag;
@@ -245,6 +305,17 @@ typedef enum _NSSelectionAffinity {
 - (NSRange)rangeForUserTextChange;
 - (NSRange)rangeForUserCharacterAttributeChange;
 - (NSRange)rangeForUserParagraphAttributeChange;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void)setUsesFindPanel:(BOOL)flag;
+- (BOOL)usesFindPanel;
+
+- (void)setAllowsDocumentBackgroundColorChange:(BOOL)flag;
+- (BOOL)allowsDocumentBackgroundColorChange;
+
+- (void)setDefaultParagraphStyle:(NSParagraphStyle *)paragraphStyle;
+- (NSParagraphStyle *)defaultParagraphStyle;
+#endif
 
 /*************************** NSText methods ***************************/
 
@@ -289,10 +360,6 @@ typedef enum _NSSelectionAffinity {
 - (NSString *)smartInsertAfterStringForString:(NSString *)pasteString replacingRange:(NSRange)charRangeToReplace;
     // Java note: The second and third methods are the primitives and are the methods exposed in Java.  The first method calls the other two.  All Objective-C code calls the first method.  In either Objective-C or Java any overriding should be done for the second and third methods, not the first method.  This will all work out correctly with the exception of existing code that overrides the first method.  Existing subclasses that do this will not have their implementations available to Java developers.  Isn't Java wonderful?
 
-/************************* Speech support *************************/
-
-- (void)startSpeaking:(id)sender;
-- (void)stopSpeaking:(id)sender;
 @end
 
 // Note that all delegation messages come from the first textView
@@ -317,6 +384,16 @@ typedef enum _NSSelectionAffinity {
 
 - (void)textViewDidChangeSelection:(NSNotification *)notification;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void)textViewDidChangeTypingAttributes:(NSNotification *)notification;
+
+- (NSString *)textView:(NSTextView *)textView willDisplayToolTip:(NSString *)tooltip forCharacterAtIndex:(unsigned)characterIndex;
+    // Delegate only.  Allows delegate to modify the tooltip that will be displayed from that specified by the NSToolTipAttributeName, or to suppress display of the tooltip (by returning nil).
+
+- (NSArray *)textView:(NSTextView *)textView completions:(NSArray *)words forPartialWordRange:(NSRange)charRange indexOfSelectedItem:(int *)index;
+    // Delegate only.  Allows delegate to modify the list of completions that will be presented for the partial word at the given range.  Returning nil or a zero-length array suppresses completion.  Optionally may specify the index of the initially selected completion; default is 0, and -1 indicates no selection.
+#endif
+
 - (BOOL)textView:(NSTextView *)textView shouldChangeTextInRange:(NSRange)affectedCharRange replacementString:(NSString *)replacementString;
     // Delegate only.  If characters are changing, replacementString is what will replace the affectedCharRange.  If attributes only are changing, replacementString will be nil.
 
@@ -339,3 +416,5 @@ APPKIT_EXTERN NSString *NSTextViewWillChangeNotifyingTextViewNotification;
 
 APPKIT_EXTERN NSString *NSTextViewDidChangeSelectionNotification;
     // NSOldSelectedCharacterRange -> NSValue with old range.
+
+APPKIT_EXTERN NSString *NSTextViewDidChangeTypingAttributesNotification	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;

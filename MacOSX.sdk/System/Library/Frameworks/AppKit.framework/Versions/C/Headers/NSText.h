@@ -1,7 +1,7 @@
 /*
 	NSText.h
 	Application Kit
-	Copyright (c) 1994-2001, Apple Computer, Inc.
+	Copyright (c) 1994-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -32,7 +32,7 @@ typedef enum _NSTextAlignment {
     NSNaturalTextAlignment	= 4  /* Indicates the default alignment for script */
 } NSTextAlignment;
 
-/* Movement codes for movement between fields; these codes are the intValue of the NSTextMovement key in NSTextDidEndEditing notifications
+/* Movement codes for movement between fields; these codes are the intValue of the NSTextMovement key in NSTextDidEndEditing notifications, and are used when completions change in the NSTextView method insertCompletion:forPartialWordRange:movement:isFinal:.  Note that the value 0 is used for movements that do not fall under any of the other values, hence NSOtherTextMovement is a more appropriate name than the previous NSIllegalTextMovement.
 */
 enum {
     NSIllegalTextMovement		= 0,
@@ -43,6 +43,11 @@ enum {
     NSRightTextMovement			= 0x14,
     NSUpTextMovement			= 0x15,
     NSDownTextMovement			= 0x16
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+    ,
+    NSCancelTextMovement		= 0x17,
+    NSOtherTextMovement			= 0
+#endif
 };
 
 

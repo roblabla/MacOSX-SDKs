@@ -4,21 +4,22 @@
 
 #import <Foundation/NSObject.h>
 
-// Note: To use the APIs described in these headers, you must perform
-// a runtime check for Foundation-462.1 or later.
-#import <AvailabilityMacros.h>
-#if defined(MAC_OS_X_VERSION_10_2) && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2)
+#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
 
-@class NSString;
 @class NSDictionary;
 
-// In simple cases, for subsystems wishing to provide their error description up-front.
-FOUNDATION_EXPORT NSString * const NSLocalizedDescriptionKey;
+// Key in userInfo. In simple cases, for subsystems wishing to provide their error description up-front. Value should be a NSString.
+FOUNDATION_EXPORT NSString *const NSLocalizedDescriptionKey	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+// Key in userInfo. A recommended standard way to embed NSErrors from underlying calls. The value of this key should be an NSError.
+FOUNDATION_EXPORT NSString *const NSUnderlyingErrorKey		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
 
 // Predefined domains; value of "code" will correspond to preexisting values in these domains.
-FOUNDATION_EXPORT NSString * const NSPOSIXErrorDomain;
-FOUNDATION_EXPORT NSString * const NSOSStatusErrorDomain;
-FOUNDATION_EXPORT NSString * const NSMachErrorDomain;
+FOUNDATION_EXPORT NSString *const NSPOSIXErrorDomain		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+FOUNDATION_EXPORT NSString *const NSOSStatusErrorDomain		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+FOUNDATION_EXPORT NSString *const NSMachErrorDomain		AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
 
 @interface NSError : NSObject <NSCopying, NSCoding> {
     @private
@@ -38,7 +39,7 @@ FOUNDATION_EXPORT NSString * const NSMachErrorDomain;
 - (NSString *)domain;
 - (int)code;
 
-/* Additional info which may be used to describe the error further. Examples of keys that might be included in here are "Line Number", "Failed URL", etc. Embedding other NSErrors in here can also be used as a way to communicate underlying reasons for failures; for instance "File System Error" embedded in the userInfo of an NSError returned from a higher level document object.
+/* Additional info which may be used to describe the error further. Examples of keys that might be included in here are "Line Number", "Failed URL", etc. Embedding other errors in here can also be used as a way to communicate underlying reasons for failures; for instance "File System Error" embedded in the userInfo of an NSError returned from a higher level document object. If the embedded error information is itself NSError, the standard key NSUnderlyingErrorKey can be used.
 */
 - (NSDictionary *)userInfo;
 
@@ -49,3 +50,4 @@ FOUNDATION_EXPORT NSString * const NSMachErrorDomain;
 @end
 
 #endif
+

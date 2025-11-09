@@ -3,9 +3,9 @@
  
      Contains:   List Manager Interfaces.
  
-     Version:    HIToolbox-124.14~2
+     Version:    HIToolbox-145.33~1
  
-     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -931,9 +931,6 @@ RegisterListDefinition(
 #if OLDROUTINENAMES
 #define LDoDraw(drawIt, lHandle) LSetDrawingMode(drawIt, lHandle)
 #define LFind(offset, len, theCell, lHandle) LGetCellDataLocation(offset, len, theCell, lHandle)
-#if CGLUESUPPORTED
-#define lfind(offset, len, theCell, lHandle) lgetcelldatalocation(offset, len, theCell, lHandle)
-#endif
 #endif  /* OLDROUTINENAMES */
 
 /* Getters */

@@ -3,9 +3,9 @@
  
      Contains:   Component Manager Interfaces.
  
-     Version:    CarbonCore-472~1
+     Version:    CarbonCore-545~1
  
-     Copyright:  © 1991-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1991-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -60,6 +60,7 @@ enum {
 };
 
 enum {
+  cmpThreadSafe                 = 1L << 28, /* component is thread-safe */
   cmpIsMissing                  = 1L << 29,
   cmpWantsRegisterMessage       = 1L << 31
 };
@@ -202,7 +203,8 @@ enum {
   platformPowerPC               = 2,    /* (when gestaltComponentPlatform is not implemented, use */
   platformInterpreted           = 3,    /* gestaltSysArchitecture) */
   platformWin32                 = 4,
-  platformPowerPCNativeEntryPoint = 5
+  platformPowerPCNativeEntryPoint = 5,
+  platformIA32NativeEntryPoint  = 6
 };
 
 enum {
@@ -232,6 +234,71 @@ enum {
   cmpAliasNoFlags               = 0,
   cmpAliasOnlyThisFile          = 1
 };
+
+typedef UInt32                          CSComponentsThreadMode;
+enum {
+  kCSAcceptAllComponentsMode    = 0,
+  kCSAcceptThreadSafeComponentsOnlyMode = 1
+};
+
+/*
+ *  CSSetComponentsThreadMode()
+ *  
+ *  Summary:
+ *    Set whether or not using thread-unsafe components is allowed on
+ *    the current thread.
+ *  
+ *  Discussion:
+ *    When set to kCSAcceptThreadSafeComponentsOnlyMode, the current
+ *    thread can only make thread-safe calls. Applications and other
+ *    high-level code that wants to call QuickTime (and other) APIs
+ *    from preemptive threads should call  SetComponentsThreadMode(
+ *    kCSAcceptThreadSafeComponentsOnlyMode );  from their thread
+ *    beforehand. The safeguard flag should only be left
+ *    kCSAcceptAllComponentsMode for the main thread and other threads
+ *    that participate in cooperative locking with it (such as the
+ *    Carbon Thread Manager-style cooperative threads and application 
+ *    threads that perform private locking).
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
+ *  Parameters:
+ *    
+ *    mode:
+ *      The thread-safety mode in current thread.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in CoreServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern void 
+CSSetComponentsThreadMode(CSComponentsThreadMode mode)        AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  CSGetComponentsThreadMode()
+ *  
+ *  Summary:
+ *    Get the current thread's thread-safety mode.
+ *  
+ *  Discussion:
+ *    Returns kCSAcceptThreadSafeComponentsOnlyMode if only thread-safe
+ *    components are allowed in current thread and
+ *    kCSAcceptAllComponentsMode if all components are accepted
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.3
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in CoreServices.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern CSComponentsThreadMode 
+CSGetComponentsThreadMode(void)                               AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
 
 struct ComponentMPWorkFunctionHeaderRecord {
   UInt32              headerSize;

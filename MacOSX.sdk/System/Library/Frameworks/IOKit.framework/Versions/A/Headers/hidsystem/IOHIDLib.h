@@ -48,8 +48,9 @@ IOHIDSetCursorEnable( io_connect_t connect,
 
 enum {
     // Options for IOHIDPostEvent()
-    kIOHIDSetGlobalEventFlags = 0x00000001,
-    kIOHIDSetCursorPosition   = 0x00000002
+    kIOHIDSetGlobalEventFlags       = 0x00000001,
+    kIOHIDSetCursorPosition         = 0x00000002,
+    kIOHIDSetRelativeCursorPosition = 0x00000004
 };
 
 extern kern_return_t
@@ -104,6 +105,13 @@ extern kern_return_t
 IOHIDSetParameter( io_connect_t handle, CFStringRef key, 
 		const void * bytes, IOByteCount size );
 
+extern kern_return_t
+IOHIDCopyCFTypeParameter( io_connect_t handle, CFStringRef key,
+                CFTypeRef * parameter );
+
+extern kern_return_t
+IOHIDSetCFTypeParameter( io_connect_t handle, CFStringRef key,
+                CFTypeRef parameter );
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 

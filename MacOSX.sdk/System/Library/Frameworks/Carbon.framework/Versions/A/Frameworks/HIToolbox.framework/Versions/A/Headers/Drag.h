@@ -3,9 +3,9 @@
  
      Contains:   Drag and Drop Interfaces.
  
-     Version:    HIToolbox-124.14~2
+     Version:    HIToolbox-145.33~1
  
-     Copyright:  © 1992-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1992-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -699,6 +699,89 @@ DisposeDrag(DragRef theDrag)                                  AVAILABLE_MAC_OS_X
 /*
   _________________________________________________________________________________________________________
       
+   ¥ DRAG PASTEBOARD
+  _________________________________________________________________________________________________________
+*/
+
+/*
+ *  NewDragWithPasteboard()
+ *  
+ *  Discussion:
+ *    Creates a new Drag reference containing the pasteboard reference
+ *    provided.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inPasteboard:
+ *      A pasteboard created by the drag sender for use with the drag.
+ *      Items may be added to the pasteboard via the Pasteboard Manager
+ *      API either before or after this routine is called. It is still
+ *      possible to add data via the Drag Manager API, but only after
+ *      this routine is called. It is the drag sender's responsibility
+ *      to clear the pasteboard before adding items. It is also the
+ *      drag sender's responsibility to release the pasteboard.  This
+ *      may be done at any time after this routine is called. The
+ *      pasteboard is retained by the Drag Manager for the duration of
+ *      the drag.
+ *    
+ *    outDrag:
+ *      A drag reference which receives the newly created drag.
+ *  
+ *  Result:
+ *    An operating system result code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+NewDragWithPasteboard(
+  PasteboardRef   inPasteboard,
+  DragRef *       outDrag)                                    AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+ *  GetDragPasteboard()
+ *  
+ *  Discussion:
+ *    Returns the pasteboard reference contained within the provided
+ *    drag reference. This routine may be called by a drag sender or
+ *    receiver at any point after a valid drag reference has been
+ *    created/received.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inDrag:
+ *      The drag reference containing the requested pasteboard.
+ *    
+ *    outPasteboard:
+ *      A pasteboard reference which receives the pasteboard contained
+ *      by the drag.
+ *  
+ *  Result:
+ *    An operating system result code.
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.3 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSStatus 
+GetDragPasteboard(
+  DragRef          inDrag,
+  PasteboardRef *  outPasteboard)                             AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+  _________________________________________________________________________________________________________
+      
    ¥ ADDING DRAG ITEM FLAVORS
   _________________________________________________________________________________________________________
 */
@@ -880,7 +963,7 @@ SetDragImage(
  *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in Carbon.framework
- *    CarbonLib:        not available
+ *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
 extern OSStatus 

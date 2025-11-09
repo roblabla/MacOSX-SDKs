@@ -54,6 +54,8 @@ void PE_init_platform(
 void PE_init_kprintf(
 	boolean_t vm_initialized);
 
+unsigned int PE_init_taproot(vm_offset_t *taddr);
+
 extern void (*PE_kputc)(char c);
 
 void PE_init_printf(
@@ -109,8 +111,6 @@ void kprintf(
 
 void init_display_putc(unsigned char *baseaddr, int rowbytes, int height);
 void display_putc(char c);
-
-boolean_t PE_init_ethernet_debugger( void );
 
 enum {
     kPEReadTOD,

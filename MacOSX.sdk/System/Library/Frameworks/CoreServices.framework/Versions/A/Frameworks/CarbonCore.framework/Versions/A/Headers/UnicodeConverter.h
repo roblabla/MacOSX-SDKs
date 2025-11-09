@@ -3,9 +3,9 @@
  
      Contains:   Types, constants, and prototypes for Unicode Converter
  
-     Version:    CarbonCore-472~1
+     Version:    CarbonCore-545~1
  
-     Copyright:  © 1994-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1994-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -77,7 +77,13 @@ enum {
   kUnicodeForceASCIIRangeBit    = 9,
   kUnicodeNoHalfwidthCharsBit   = 10,
   kUnicodeTextRunHeuristicsBit  = 11,
-  kUnicodeMapLineFeedToReturnBit = 12
+  kUnicodeMapLineFeedToReturnBit = 12,  /*    if kUnicodeUseExternalEncodingFormBit is not set, */
+                                        /*    input/output UTF-16 (and UTF-32) is assumed to be in native endian. */
+                                        /*    if kUnicodeUseExternalEncodingFormBit is set, */
+                                        /*    input UTF-16 (and UTF-32) is assumed to be in big endian */
+                                        /*    unless it begins with a byte-order-mark, */
+                                        /*    and output UTF-16 (and UTF-32) will be in big endian. */
+  kUnicodeUseExternalEncodingFormBit = 13
 };
 
 enum {
@@ -92,7 +98,13 @@ enum {
   kUnicodeForceASCIIRangeMask   = 1L << kUnicodeForceASCIIRangeBit,
   kUnicodeNoHalfwidthCharsMask  = 1L << kUnicodeNoHalfwidthCharsBit,
   kUnicodeTextRunHeuristicsMask = 1L << kUnicodeTextRunHeuristicsBit,
-  kUnicodeMapLineFeedToReturnMask = 1L << kUnicodeMapLineFeedToReturnBit
+  kUnicodeMapLineFeedToReturnMask = 1L << kUnicodeMapLineFeedToReturnBit, /*    if kUnicodeUseExternalEncodingFormBit is not set, */
+                                        /*    input/output UTF-16 (and UTF-32) is assumed to be in native endian. */
+                                        /*    if kUnicodeUseExternalEncodingFormBit is set, */
+                                        /*    input UTF-16 (and UTF-32) is assumed to be in big endian */
+                                        /*    unless it begins with a byte-order-mark, */
+                                        /*    and output UTF-16 (and UTF-32) will be in big endian. */
+  kUnicodeUseExternalEncodingFormMask = 1L << kUnicodeUseExternalEncodingFormBit
 };
 
 /* Values for kUnicodeDirectionality field */
@@ -397,7 +409,7 @@ ConvertFromTextToUnicode(
   ConstLogicalAddress   iSourceStr,
   OptionBits            iControlFlags,
   ItemCount             iOffsetCount,
-  ByteOffset            iOffsetArray[],           /* can be NULL */
+  const ByteOffset      iOffsetArray[],           /* can be NULL */
   ItemCount *           oOffsetCount,             /* can be NULL */
   ByteOffset            oOffsetArray[],           /* can be NULL */
   ByteCount             iOutputBufLen,
@@ -421,7 +433,7 @@ ConvertFromUnicodeToText(
   const UniChar       iUnicodeStr[],
   OptionBits          iControlFlags,
   ItemCount           iOffsetCount,
-  ByteOffset          iOffsetArray[],           /* can be NULL */
+  const ByteOffset    iOffsetArray[],           /* can be NULL */
   ItemCount *         oOffsetCount,             /* can be NULL */
   ByteOffset          oOffsetArray[],           /* can be NULL */
   ByteCount           iOutputBufLen,
@@ -445,7 +457,7 @@ ConvertFromUnicodeToTextRun(
   const UniChar          iUnicodeStr[],
   OptionBits             iControlFlags,
   ItemCount              iOffsetCount,
-  ByteOffset             iOffsetArray[],           /* can be NULL */
+  const ByteOffset       iOffsetArray[],           /* can be NULL */
   ItemCount *            oOffsetCount,             /* can be NULL */
   ByteOffset             oOffsetArray[],           /* can be NULL */
   ByteCount              iOutputBufLen,
@@ -472,7 +484,7 @@ ConvertFromUnicodeToScriptCodeRun(
   const UniChar          iUnicodeStr[],
   OptionBits             iControlFlags,
   ItemCount              iOffsetCount,
-  ByteOffset             iOffsetArray[],           /* can be NULL */
+  const ByteOffset       iOffsetArray[],           /* can be NULL */
   ItemCount *            oOffsetCount,             /* can be NULL */
   ByteOffset             oOffsetArray[],           /* can be NULL */
   ByteCount              iOutputBufLen,

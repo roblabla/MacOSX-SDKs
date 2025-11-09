@@ -1,1 +1,1 @@
-#warning Components.k.h is not available on Mac OS X
+#include <CoreServices/Components.k.h>

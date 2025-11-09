@@ -2,7 +2,7 @@
 //  ABRecord.h
 //  AddressBook Framework
 //
-//  Copyright (c) 2002 Apple Computer. All rights reserved.
+//  Copyright (c) 2002-2003 Apple Computer. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -44,6 +44,6 @@
 @interface ABRecord(ABRecord_Convenience)
 
 - (NSString *)uniqueId;
-    // Convenience method to return the unque ID of a record.
+    // Convenience method to return the unique ID of a record.
     // Equivalent to -valueForProperty:kABUIDProperty
 @end

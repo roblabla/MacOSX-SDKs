@@ -1,5 +1,5 @@
 /*	NSCharacterSet.h
-	Copyright 1994-2002, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2003, Apple, Inc. All rights reserved.
 */
 
 #import <CoreFoundation/CFCharacterSet.h>
@@ -29,6 +29,9 @@ enum {
 + (NSCharacterSet *)punctuationCharacterSet;
 #if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
 + (NSCharacterSet *)capitalizedLetterCharacterSet;
+#endif
+#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
++ (NSCharacterSet *)symbolCharacterSet;
 #endif
 
 + (NSCharacterSet *)characterSetWithRange:(NSRange)aRange;

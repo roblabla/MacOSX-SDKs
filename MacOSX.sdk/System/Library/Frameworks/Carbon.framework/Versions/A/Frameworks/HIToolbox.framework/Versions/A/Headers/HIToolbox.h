@@ -3,9 +3,9 @@
  
      Contains:   Master include for HIToolbox private framework
  
-     Version:    HIToolbox-124.14~2
+     Version:    HIToolbox-145.33~1
  
-     Copyright:  © 1999-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -41,10 +41,6 @@
 #include <HIToolbox/HIShape.h>
 #endif
 
-#ifndef __BALLOONS__
-#include <HIToolbox/Balloons.h>
-#endif
-
 #ifndef __EVENTS__
 #include <HIToolbox/Events.h>
 #endif
@@ -63,6 +59,10 @@
 
 #ifndef __APPEARANCE__
 #include <HIToolbox/Appearance.h>
+#endif
+
+#ifndef __HITHEME__
+#include <HIToolbox/HITheme.h>
 #endif
 
 #ifndef __MACWINDOWS__

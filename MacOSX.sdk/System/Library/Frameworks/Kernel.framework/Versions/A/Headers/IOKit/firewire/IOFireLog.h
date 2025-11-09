@@ -23,8 +23,6 @@
 #ifndef _IOKIT_IOFIRELOG_H
 #define _IOKIT_IOFIRELOG_H
 
-//#define FIRELOG 0
-
 #ifdef __cplusplus
 extern "C" {
 #endif

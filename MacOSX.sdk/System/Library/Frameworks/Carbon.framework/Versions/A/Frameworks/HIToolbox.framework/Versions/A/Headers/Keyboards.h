@@ -3,9 +3,9 @@
  
      Contains:   Keyboard API.
  
-     Version:    HIToolbox-124.14~2
+     Version:    HIToolbox-145.33~1
  
-     Copyright:  © 1997-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1997-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -32,8 +32,9 @@ extern "C" {
 #endif
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
-/* Keyboard API constants                                                           */
+/*  OBSOLETE                                                                        */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+/* These are obsolete.  Carbon does not support these. */
 /* Keyboard API Trap Number. Should be moved to Traps.i */
 enum {
   _KeyboardDispatch             = 0xAA7A
@@ -59,49 +60,6 @@ enum {
   errKBFailSettingTranslationTable = -30853,
   errKBFailWritePreference      = -30854
 };
-
-
-/*
- *  PhysicalKeyboardLayoutType
- *  
- *  Summary:
- *    Physical keyboard layout types indicate the physical keyboard
- *    layout. They are returned by the KBGetLayoutType API.
- */
-typedef UInt32 PhysicalKeyboardLayoutType;
-enum {
-
-  /*
-   * A JIS keyboard layout type.
-   */
-  kKeyboardJIS                  = 'JIS ',
-
-  /*
-   * An ANSI keyboard layout type.
-   */
-  kKeyboardANSI                 = 'ANSI',
-
-  /*
-   * An ISO keyboard layout type.
-   */
-  kKeyboardISO                  = 'ISO ',
-
-  /*
-   * An unknown physical keyboard layout type.
-   */
-  kKeyboardUnknown              = kUnknownType /* '????'*/
-};
-
-
-/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
-/* Keyboard API types                                                               */
-/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
-
-
-
-/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
-/* Keyboard API routines                                                            */
-/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 
 /*
  *  KBInitialize()
@@ -193,29 +151,44 @@ enum {
  */
 
 
+/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+/* Keyboard API constants                                                           */
+/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+
 /*
- *  KBGetLayoutType()
+ *  PhysicalKeyboardLayoutType
  *  
  *  Summary:
- *    Returns the physical keyboard layout type.
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Parameters:
- *    
- *    iKeyboardType:
- *      The keyboard type ID.  LMGetKbdType().
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
- *    Non-Carbon CFM:   in KeyboardsLib 1.0 and later
+ *    Physical keyboard layout types indicate the physical keyboard
+ *    layout. They are returned by the KBGetLayoutType API.
  */
-extern OSType 
-KBGetLayoutType(SInt16 iKeyboardType)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+typedef UInt32 PhysicalKeyboardLayoutType;
+enum {
 
+  /*
+   * A JIS keyboard layout type.
+   */
+  kKeyboardJIS                  = 'JIS ',
 
+  /*
+   * An ANSI keyboard layout type.
+   */
+  kKeyboardANSI                 = 'ANSI',
+
+  /*
+   * An ISO keyboard layout type.
+   */
+  kKeyboardISO                  = 'ISO ',
+
+  /*
+   * An unknown physical keyboard layout type.
+   */
+  kKeyboardUnknown              = kUnknownType /* '????'*/
+};
+
+/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+/* Keyboard API types                                                               */
+/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 
 /*
  *  KeyboardLayoutRef
@@ -254,7 +227,7 @@ enum {
   kKLuchrData                   = 1,
 
   /*
-   * The keyboard layout identifier (SInt32).
+   * The keyboard layout identifier (KeyboardLayoutIdentifier).
    */
   kKLIdentifier                 = 2,
 
@@ -279,7 +252,7 @@ enum {
   kKLGroupIdentifier            = 6,
 
   /*
-   * The keyboard layout kind (SInt32).
+   * The keyboard layout kind (KeyboardLayoutKind).
    */
   kKLKind                       = 7
 };
@@ -321,6 +294,32 @@ typedef SInt32 KeyboardLayoutIdentifier;
 enum {
   kKLUSKeyboard                 = 0
 };
+
+/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+/* Keyboard API routines                                                            */
+/*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+/*
+ *  KBGetLayoutType()
+ *  
+ *  Summary:
+ *    Returns the physical keyboard layout type.
+ *  
+ *  Mac OS X threading:
+ *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    iKeyboardType:
+ *      The keyboard type ID.  LMGetKbdType().
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.0 and later
+ *    Non-Carbon CFM:   in KeyboardsLib 1.0 and later
+ */
+extern PhysicalKeyboardLayoutType 
+KBGetLayoutType(SInt16 iKeyboardType)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
 
 /* iterate keyboard layouts*/
 
@@ -378,23 +377,13 @@ KLGetKeyboardLayoutAtIndex(
   KeyboardLayoutRef *  oKeyboardLayout)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
-/* NOTE: "Indexed" is a wrong name, please use "AtIndex"...*/
 /*
- *  KLGetIndexedKeyboardLayout()
- *  
- *  Mac OS X threading:
- *    Not thread safe
- *  
- *  Availability:
- *    Mac OS X:         in version 10.2 and later in Carbon.framework
- *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
-KLGetIndexedKeyboardLayout(
-  CFIndex              iIndex,
-  KeyboardLayoutRef *  oKeyboardLayout)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
-
+   *** deprecated. ***
+   NOTE: "Indexed" is a wrong name, please use "AtIndex"...
+   OSStatus KLGetIndexedKeyboardLayout(
+                CFIndex                     iIndex,
+                KeyboardLayoutRef           *oKeyboardLayout    );
+*/
 
 /* get keyboard layout info*/
 
@@ -465,8 +454,8 @@ KLGetKeyboardLayoutProperty(
  */
 extern OSStatus 
 KLGetKeyboardLayoutWithIdentifier(
-  SInt32               iIdentifier,
-  KeyboardLayoutRef *  oKeyboardLayout)                       AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+  KeyboardLayoutIdentifier   iIdentifier,
+  KeyboardLayoutRef *        oKeyboardLayout)                 AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 
 
 /*
@@ -505,6 +494,12 @@ KLGetKeyboardLayoutWithName(
  *  Summary:
  *    Retrieves the current keyboard layout.
  *  
+ *  Discussion:
+ *    Retrieves the current keyboard layout for the current keyboard
+ *    script.  To retrive the current keyboard script for Roman
+ *    keyboard script, you need to call KeyScript( smRoman |
+ *    smKeyForceKeyScriptMask ) then call KLGetCurrentKeyboardLayout().
+ *  
  *  Mac OS X threading:
  *    Not thread safe
  *  
@@ -527,6 +522,15 @@ KLGetCurrentKeyboardLayout(KeyboardLayoutRef * oKeyboardLayout) AVAILABLE_MAC_OS
  *  
  *  Summary:
  *    Sets the current keyboard layout.
+ *  
+ *  Discussion:
+ *    Sets the current keyboard layout for the current keyboard script.
+ *     Returns "paramErr" when the current keyboard layout is not
+ *    Unicode and the specified keyboard layout belongs to Unicode
+ *    group.  To set Roman keyboard script's current keyboard layout to
+ *    "U.S." for example, you need to call KeyScript( smRoman |
+ *    smKeyForceKeyScriptMask ) then call KLSetCurrentKeyboardLayout(
+ *    theUSKeyboardLayoutRef ).
  *  
  *  Mac OS X threading:
  *    Not thread safe

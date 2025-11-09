@@ -3,9 +3,9 @@
  
      Contains:   Script Manager interfaces
  
-     Version:    CarbonCore-472~1
+     Version:    CarbonCore-545~1
  
-     Copyright:  © 1986-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1986-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -127,12 +127,12 @@ enum {
   langSpanish                   = 6,    /* smRoman script*/
   langDanish                    = 7,    /* smRoman script*/
   langPortuguese                = 8,    /* smRoman script*/
-  langNorwegian                 = 9,    /* smRoman script*/
+  langNorwegian                 = 9,    /* (Bokmal) smRoman script*/
   langHebrew                    = 10,   /* smHebrew script*/
   langJapanese                  = 11,   /* smJapanese script*/
   langArabic                    = 12,   /* smArabic script*/
   langFinnish                   = 13,   /* smRoman script*/
-  langGreek                     = 14,   /* Greek script using smRoman script code*/
+  langGreek                     = 14,   /* Greek script (monotonic) using smRoman script code*/
   langIcelandic                 = 15,   /* modified smRoman/Icelandic script*/
   langMaltese                   = 16,   /* Roman script*/
   langTurkish                   = 17,   /* modified smRoman/Turkish script*/
@@ -252,9 +252,10 @@ enum {
   langManxGaelic                = 145,  /* smRoman or modified smRoman/Celtic script                 */
   langIrishGaelicScript         = 146,  /* modified smRoman/Gaelic script (using dot above)               */
   langTongan                    = 147,  /* smRoman script                                   */
-  langGreekPoly                 = 148,  /* smGreek script                                   */
+  langGreekAncient              = 148,  /* Classical Greek, polytonic orthography                    */
   langGreenlandic               = 149,  /* smRoman script                                   */
-  langAzerbaijanRoman           = 150   /* Azerbaijani in Roman script                             */
+  langAzerbaijanRoman           = 150,  /* Azerbaijani in Roman script                             */
+  langNynorsk                   = 151   /* Norwegian Nyorsk in smRoman*/
 };
 
 enum {
@@ -277,7 +278,8 @@ enum {
   langFaeroese                  = 30,   /* Use langFaroese                                     */
   langIrish                     = 35,   /* Use langIrishGaelic                                  */
   langGalla                     = 87,   /* Use langOromo                                 */
-  langAfricaans                 = 141   /* Use langAfrikaans                                */
+  langAfricaans                 = 141,  /* Use langAfrikaans                                */
+  langGreekPoly                 = 148   /* Use langGreekAncient*/
 };
 
 /*
@@ -306,8 +308,8 @@ enum {
   verDenmark                    = 9,    /* DK da_DK*/
   verPortugal                   = 10,   /* PO pt_PT     Portuguese for Portugal*/
   verFrCanada                   = 11,   /* C  fr_CA       French for Canada*/
-  verNorway                     = 12,   /* H  no_NO,nb_NO  BokmŒl*/
-  verIsrael                     = 13,   /* HB he_IL,iw_IL Hebrew*/
+  verNorway                     = 12,   /* H  nb_NO       Bokmål*/
+  verIsrael                     = 13,   /* HB he_IL     Hebrew*/
   verJapan                      = 14,   /* J  ja_JP*/
   verAustralia                  = 15,   /* X  en_AU       English for Australia*/
   verArabic                     = 16,   /* AB ar       Arabic for N Africa, Arabian peninsula, Levant*/
@@ -317,14 +319,14 @@ enum {
   verGreece                     = 20,   /* GR el_GR     Monotonic Greek (modern)*/
   verIceland                    = 21,   /* IS is_IS*/
   verMalta                      = 22,   /* MA mt_MT*/
-  verCyprus                     = 23,   /* CY   _CY     Greek or Turkish language? Checking...*/
+  verCyprus                     = 23,   /* CY el_CY*/
   verTurkey                     = 24,   /* TU tr_TR*/
-  verYugoCroatian               = 25    /* YU          Croatian for Yugoslavia; now use verCroatia (68)*/
+  verYugoCroatian               = 25    /* YU hr_HR     Croatian for Yugoslavia; now use verCroatia (68)*/
 };
 
 enum {
   verNetherlandsComma           = 26,   /*              ID for KCHR resource - Dutch*/
-  verBelgiumLuxPoint            = 27,   /*              ID for KCHR resource - Belgium*/
+  verFlemishPoint               = 27,   /*              ID for KCHR resource - Belgium*/
   verCanadaComma                = 28,   /*              ID for KCHR resource - Canadian ISO*/
   verCanadaPoint                = 29,   /*              ID for KCHR resource - Canadian; now unused*/
   vervariantPortugal            = 30,   /*              ID for resource; now unused*/
@@ -335,12 +337,12 @@ enum {
 enum {
   verIndiaHindi                 = 33,   /*       hi_IN     Hindi for India*/
   verPakistanUrdu               = 34,   /* UR ur_PK     Urdu for Pakistan                        */
-  verTurkishModified            = 35,
+  verTurkishModified            = 35,   /*       tr_TR*/
   verItalianSwiss               = 36,   /* ST it_CH     Italian Swiss*/
-  verInternational              = 37,   /* Z  en      English for international use               */
+  verInternational              = 37,   /* Z  en-ASCII English for international use; ASCII chars only     */
                                         /*              38 is unassigned*/
   verRomania                    = 39,   /* RO ro_RO*/
-  verGreecePoly                 = 40,   /*       grc      Polytonic Greek (classical)                  */
+  verGreekAncient               = 40,   /*       grc      Ancient Greek, polytonic orthography          */
   verLithuania                  = 41,   /* LT lt_LT*/
   verPoland                     = 42,   /* PL pl_PL*/
   verHungary                    = 43,   /* MG hu_HU*/
@@ -358,22 +360,22 @@ enum {
   verScriptGeneric              = 55,   /* SS          Generic script system (no language or script)       */
   verCzech                      = 56,   /* CZ cs_CZ*/
   verSlovak                     = 57,   /* SL sk_SK*/
-  verFarEastGeneric             = 58,   /* FE          Generic Far East system (no language or script)   */
-  verMagyar                     = 59,   /*              Unused; see verHungary*/
+  verEastAsiaGeneric            = 58,   /* FE          Generic East Asia system (no language or script) */
+  verMagyar                     = 59,   /*       hu_HU     Unused; see verHungary*/
   verBengali                    = 60,   /*       bn         Bangladesh or India*/
-  verByeloRussian               = 61    /* BY be_BY*/
+  verBelarus                    = 61    /* BY be_BY*/
 };
 
 enum {
   verUkraine                    = 62,   /* UA uk_UA*/
                                         /*              63 is unassigned*/
-  verGreeceAlt                  = 64,   /*              unused                              */
-  verSerbian                    = 65,   /* SR sr_YU,sh_YU                                   */
+  verGreeceAlt                  = 64,   /*       el_GR     unused                              */
+  verSerbian                    = 65,   /* SR sr_YU                                    */
   verSlovenian                  = 66,   /* SV sl_SI                                    */
   verMacedonian                 = 67,   /* MD mk_MK                                    */
-  verCroatia                    = 68,   /* CR hr_HR,sh_HR*/
+  verCroatia                    = 68,   /* CR hr_HR*/
                                         /*              69 is unassigned*/
-  verGermanReformed             = 70,   /*       de_DE     Reformed orthography (used formerly unassigned 70) */
+  verGermanReformed             = 70,   /*       de-1996     Reformed orthography (used formerly unassigned 70)   */
   verBrazil                     = 71,   /* BR pt_BR     Portuguese for Brazil*/
   verBulgaria                   = 72,   /* BG bg_BG*/
   verCatalonia                  = 73,   /* CA ca_ES     Catalan for Spain*/
@@ -384,12 +386,12 @@ enum {
   verNunavut                    = 78,   /* IU iu_CA     Inuktitut for Canada*/
   verWelsh                      = 79,   /* CU cy*/
                                         /*              80 is ID for KCHR resource - Canadian CSA*/
-  verIrishGaelicScript          = 81,   /* GS ga_IE     Irish Gaelic for Ireland (using dot above)*/
+  verIrishGaelicScript          = 81,   /* GS ga-dots_IE  Irish Gaelic for Ireland (using dot above)*/
   verEngCanada                  = 82,   /* V  en_CA       English for Canada*/
   verBhutan                     = 83,   /* BH dz_BT     Dzongkha for Bhutan*/
   verArmenian                   = 84,   /* HY hy_AM*/
   verGeorgian                   = 85,   /* KR ka_GE*/
-  verSpLatinAmerica             = 86,   /* LA es       Spanish for Latin America*/
+  verSpLatinAmerica             = 86,   /* LA es_XL     Spanish for Latin America (private ISO 3166 code)*/
                                         /*              87 is ID for KCHR resource - Spanish ISO*/
   verTonga                      = 88,   /* TS to_TO*/
                                         /*              89 is ID for KCHR resource - Polish Modified*/
@@ -406,7 +408,7 @@ enum {
 enum {
   verFrBelgium                  = 98,   /* BF fr_BE     French for Belgium                       */
   verUzbek                      = 99,   /* BD uz_UZ                                    */
-  verSingapore                  = 100,  /* SG                                         */
+  verSingapore                  = 100,  /* SG en_SG     (Assume English, not Chinese or Malay)                                 */
   verNynorsk                    = 101,  /* NY nn_NO     Norwegian Nynorsk                        */
   verAfrikaans                  = 102,  /* AK af_ZA                                    */
   verEsperanto                  = 103,  /*       eo                                        */
@@ -435,14 +437,16 @@ enum {
   verBelgiumLux                 = 6,    /* Use verFlemish*/
   verArabia                     = 16,   /* Use verArabic*/
   verYugoslavia                 = 25,   /* Use verYugoCroatian (same number, now unused), or newer verCroatia*/
+  verBelgiumLuxPoint            = 27,   /* Use verFlemishPoint*/
   verIndia                      = 33,   /* Use verIndiaHindi*/
   verPakistan                   = 34,   /* Use verPakistanUrdu                                  */
   verRumania                    = 39,   /* Alternate for verRomania                              */
-  verGreekAncient               = 40,   /* Use verGreecePoly                                */
+  verGreecePoly                 = 40,   /* Use verGreekAncient                                  */
   verLapland                    = 46,   /* Use verSami                                       */
   verFaeroeIsl                  = 47,   /* Use verFaroeIsl                                     */
-  verGenericFE                  = 58,   /* Use verFarEastGeneric                              */
-  verBelarus                    = 61,   /* Alternate for verByelorussian                       */
+  verGenericFE                  = 58,   /* Use verEastAsiaGeneric                              */
+  verFarEastGeneric             = 58,   /* Use verEastAsiaGeneric*/
+  verByeloRussian               = 61,   /* Alternate for verBelarus                              */
   verUkrania                    = 62,   /* Use verUkraine*/
   verAlternateGr                = 64,   /* Use verGreeceAlt                                   */
   verSerbia                     = 65,   /* Alternate for verSerbian                              */
@@ -458,7 +462,7 @@ enum {
 
 enum {
   minCountry                    = verUS,
-  maxCountry                    = verGreenland
+  maxCountry                    = verIrelandEnglish
 };
 
 enum {

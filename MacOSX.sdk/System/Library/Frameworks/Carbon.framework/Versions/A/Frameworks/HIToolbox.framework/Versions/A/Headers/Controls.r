@@ -3,9 +3,9 @@
  
      Contains:   Control Manager interfaces
  
-     Version:    HIToolbox-124.14~2
+     Version:    HIToolbox-145.33~1
  
-     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -32,26 +32,27 @@
 #define kControlEntireControl 			0
 #define kControlStructureMetaPart 		(-1)
 #define kControlContentMetaPart 		(-2)
+#define kControlOpaqueMetaPart 			(-3)				/*  Jaguar or later */
+#define kControlClickableMetaPart 		(-4)				/*  Panther or later, only used for async window dragging. Default is structure region. */
 
 #define kControlFocusNoPart 			0					/*  tells control to clear its focus */
 #define kControlFocusNextPart 			(-1)				/*  tells control to focus on the next part */
 #define kControlFocusPrevPart 			(-2)				/*  tells control to focus on the previous part */
 
-#define kControlCollectionTagBounds 	'boun'				/*  Rect - the bounding rectangle */
-#define kControlCollectionTagValue 		'valu'				/*  SInt32 - the value */
-#define kControlCollectionTagMinimum 	'min '				/*  SInt32 - the minimum */
-#define kControlCollectionTagMaximum 	'max '				/*  SInt32 - the maximum */
-#define kControlCollectionTagViewSize 	'view'				/*  SInt32 - the view size */
-#define kControlCollectionTagVisibility  'visi'				/*  Boolean - the visible state */
-#define kControlCollectionTagRefCon 	'refc'				/*  SInt32 - the refCon */
-#define kControlCollectionTagTitle 		'titl'				/*  arbitrarily sized character array - the title */
-#define kControlCollectionTagUnicodeTitle  'uttl'			/*  bytes as received via CFStringCreateExternalRepresentation */
-#define kControlCollectionTagIDSignature  'idsi'			/*  OSType - the ControlID signature */
-#define kControlCollectionTagIDID 		'idid'				/*  SInt32 - the ControlID id */
-#define kControlCollectionTagCommand 	'cmd '				/*  UInt32 - the command */
-#define kControlCollectionTagVarCode 	'varc'				/*  SInt16 - the variant */
+#define kControlCollectionTagBounds 	'boun'
+#define kControlCollectionTagValue 		'valu'
+#define kControlCollectionTagMinimum 	'min '
+#define kControlCollectionTagMaximum 	'max '
+#define kControlCollectionTagViewSize 	'view'
+#define kControlCollectionTagVisibility  'visi'
+#define kControlCollectionTagRefCon 	'refc'
+#define kControlCollectionTagTitle 		'titl'
+#define kControlCollectionTagUnicodeTitle  'uttl'
+#define kControlCollectionTagIDSignature  'idsi'
+#define kControlCollectionTagIDID 		'idid'
+#define kControlCollectionTagCommand 	'cmd '
+#define kControlCollectionTagVarCode 	'varc'
 
-#define kControlCollectionTagSubControls  'subc'			/*  data for all of a control's subcontrols */
 #define kControlContentTextOnly 		0
 #define kControlNoContent 				0
 #define kControlContentIconSuiteRes 	1
@@ -63,6 +64,7 @@
 #define kControlContentPictHandle 		131
 #define kControlContentIconRef 			132
 #define kControlContentICON 			133
+#define kControlContentCGImageRef 		134
 
 #define kControlKeyScriptBehaviorAllowAnyScript  'any '		/*  leaves the current keyboard alone and allows user to change the keyboard. */
 #define kControlKeyScriptBehaviorPrefersRoman  'prmn'		/*  switches the keyboard to roman, but allows them to change it as desired. */
@@ -72,6 +74,7 @@
 #define kControlFontSmallSystemFont 	(-2)				/*  force to small system font */
 #define kControlFontSmallBoldSystemFont  (-3)				/*  force to small bold system font */
 #define kControlFontViewSystemFont 		(-4)				/*  force to views system font (DataBrowser control only) */
+#define kControlFontMiniSystemFont 		(-5)				/*  force to mini system font */
 
 #define kControlUseFontMask 			0x0001
 #define kControlUseFaceMask 			0x0002
@@ -95,7 +98,6 @@
 #define kControlKindTag 				'kind'
 #define kControlSizeTag 				'size'
 
-															/*  Control feature bits - returned by GetControlFeatures  */
 #define kControlSupportsGhosting 		0x01
 #define kControlSupportsEmbedding 		0x02
 #define kControlSupportsFocus 			0x04
@@ -116,6 +118,7 @@
 #define kControlSupportsContextualMenus  0x00200000			/*  Available in Carbon */
 #define kControlSupportsClickActivation  0x00400000			/*  Available in Carbon */
 #define kControlIdlesWithTimer 			0x00800000			/*  Available in Carbon - this bit indicates that the control animates automatically */
+#define kControlInvertsUpDownValueMeaning  0x01000000
 
 #define drawCntl 						0
 #define testCntl 						1
@@ -160,6 +163,7 @@
 #define kControlSizeNormal 				0
 #define kControlSizeSmall 				1
 #define kControlSizeLarge 				2
+#define kControlSizeMini 				3
 #define kControlSizeAuto 				0xFFFF
 
 #define kDrawControlEntireControl 		0

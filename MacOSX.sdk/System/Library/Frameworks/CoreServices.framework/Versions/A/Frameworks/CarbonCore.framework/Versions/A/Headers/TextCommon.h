@@ -3,9 +3,9 @@
  
      Contains:   TextEncoding-related types and constants, and prototypes for related functions
  
-     Version:    CarbonCore-472~1
+     Version:    CarbonCore-545~1
  
-     Copyright:  © 1995-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1995-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -130,24 +130,26 @@ enum {
   kTextEncodingUnicodeV2_1      = 0x0103, /* We treat both Unicode 2.0 and Unicode 2.1 as 2.1*/
   kTextEncodingUnicodeV3_0      = 0x0104,
   kTextEncodingUnicodeV3_1      = 0x0105, /* Adds characters requiring surrogate pairs in UTF-16*/
-  kTextEncodingUnicodeV3_2      = 0x0106
+  kTextEncodingUnicodeV3_2      = 0x0106,
+  kTextEncodingUnicodeV4_0      = 0x0108
 };
 
 /* ISO 8-bit and 7-bit encodings begin at 0x200*/
 enum {
-  kTextEncodingISOLatin1        = 0x0201, /* ISO 8859-1*/
-  kTextEncodingISOLatin2        = 0x0202, /* ISO 8859-2*/
-  kTextEncodingISOLatin3        = 0x0203, /* ISO 8859-3*/
-  kTextEncodingISOLatin4        = 0x0204, /* ISO 8859-4*/
+  kTextEncodingISOLatin1        = 0x0201, /* ISO 8859-1, Western European*/
+  kTextEncodingISOLatin2        = 0x0202, /* ISO 8859-2, Central European*/
+  kTextEncodingISOLatin3        = 0x0203, /* ISO 8859-3, South European (Maltese...)*/
+  kTextEncodingISOLatin4        = 0x0204, /* ISO 8859-4, North European & some Baltic*/
   kTextEncodingISOLatinCyrillic = 0x0205, /* ISO 8859-5*/
   kTextEncodingISOLatinArabic   = 0x0206, /* ISO 8859-6, = ASMO 708, =DOS CP 708*/
   kTextEncodingISOLatinGreek    = 0x0207, /* ISO 8859-7*/
   kTextEncodingISOLatinHebrew   = 0x0208, /* ISO 8859-8*/
-  kTextEncodingISOLatin5        = 0x0209, /* ISO 8859-9*/
-  kTextEncodingISOLatin6        = 0x020A, /* ISO 8859-10                           */
+  kTextEncodingISOLatin5        = 0x0209, /* ISO 8859-9, Turkish*/
+  kTextEncodingISOLatin6        = 0x020A, /* ISO 8859-10, Nordic                    */
   kTextEncodingISOLatin7        = 0x020D, /* ISO 8859-13, Baltic Rim                   */
   kTextEncodingISOLatin8        = 0x020E, /* ISO 8859-14, Celtic                    */
-  kTextEncodingISOLatin9        = 0x020F /* ISO 8859-15, 8859-1 changed for EURO & CP1252 letters  */
+  kTextEncodingISOLatin9        = 0x020F, /* ISO 8859-15, 8859-1 changed for EURO & CP1252 letters  */
+  kTextEncodingISOLatin10       = 0x0210 /* ISO 8859-16, Romanian*/
 };
 
 /* MS-DOS & Windows encodings begin at 0x400*/
@@ -189,12 +191,14 @@ enum {
 /* Various national standards begin at 0x600*/
 enum {
   kTextEncodingUS_ASCII         = 0x0600,
+  kTextEncodingANSEL            = 0x0601, /* ANSEL (ANSI Z39.47) for library use*/
   kTextEncodingJIS_X0201_76     = 0x0620, /* JIS Roman and 1-byte katakana (halfwidth)*/
   kTextEncodingJIS_X0208_83     = 0x0621,
   kTextEncodingJIS_X0208_90     = 0x0622,
   kTextEncodingJIS_X0212_90     = 0x0623,
   kTextEncodingJIS_C6226_78     = 0x0624,
   kTextEncodingShiftJIS_X0213_00 = 0x0628, /* Shift-JIS format encoding of JIS X0213 planes 1 and 2*/
+  kTextEncodingJIS_X0213_MenKuTen = 0x0629, /* JIS X0213 in plane-row-column notation (3 bytes)*/
   kTextEncodingGB_2312_80       = 0x0630,
   kTextEncodingGBK_95           = 0x0631, /* annex to GB 13000-93; for Windows 95; EUC-CN extended*/
   kTextEncodingGB_18030_2000    = 0x0632,
@@ -211,9 +215,9 @@ enum {
   kTextEncodingISO_2022_JP_2    = 0x0821, /* RFC 1554*/
   kTextEncodingISO_2022_JP_1    = 0x0822, /* RFC 2237*/
   kTextEncodingISO_2022_JP_3    = 0x0823, /* JIS X0213*/
-  kTextEncodingISO_2022_CN      = 0x0830,
-  kTextEncodingISO_2022_CN_EXT  = 0x0831,
-  kTextEncodingISO_2022_KR      = 0x0840
+  kTextEncodingISO_2022_CN      = 0x0830, /* RFC 1922*/
+  kTextEncodingISO_2022_CN_EXT  = 0x0831, /* RFC 1922*/
+  kTextEncodingISO_2022_KR      = 0x0840 /* RFC 1557*/
 };
 
 /* EUC collections begin at 0x900*/
@@ -221,17 +225,20 @@ enum {
   kTextEncodingEUC_JP           = 0x0920, /* ISO 646, 1-byte katakana, JIS 208, JIS 212*/
   kTextEncodingEUC_CN           = 0x0930, /* ISO 646, GB 2312-80*/
   kTextEncodingEUC_TW           = 0x0931, /* ISO 646, CNS 11643-1992 Planes 1-16*/
-  kTextEncodingEUC_KR           = 0x0940 /* ISO 646, KS C 5601-1987*/
+  kTextEncodingEUC_KR           = 0x0940 /* RFC 1557: ISO 646, KS C 5601-1987*/
 };
 
 /* Misc standards begin at 0xA00*/
 enum {
   kTextEncodingShiftJIS         = 0x0A01, /* plain Shift-JIS*/
-  kTextEncodingKOI8_R           = 0x0A02, /* Russian internet standard*/
+  kTextEncodingKOI8_R           = 0x0A02, /* RFC 1489, Russian internet standard*/
   kTextEncodingBig5             = 0x0A03, /* Big-5 (has variants)*/
   kTextEncodingMacRomanLatin1   = 0x0A04, /* Mac OS Roman permuted to align with ISO Latin-1*/
   kTextEncodingHZ_GB_2312       = 0x0A05, /* HZ (RFC 1842, for Chinese mail & news)*/
-  kTextEncodingBig5_HKSCS_1999  = 0x0A06 /* Big-5 with Hong Kong special char set supplement*/
+  kTextEncodingBig5_HKSCS_1999  = 0x0A06, /* Big-5 with Hong Kong special char set supplement*/
+  kTextEncodingVISCII           = 0x0A07, /* RFC 1456, Vietnamese*/
+  kTextEncodingKOI8_U           = 0x0A08, /* RFC 2319, Ukrainian*/
+  kTextEncodingBig5_E           = 0x0A09 /* Taiwan Big-5E standard*/
 };
 
 /* Other platform encodings*/
@@ -333,6 +340,13 @@ enum {
   kMacHebrewFigureSpaceVariant  = 1
 };
 
+/* Variants of kTextEncodingMacGreek*/
+enum {
+  kMacGreekDefaultVariant       = 0,    /* meta value, maps to 1 or 2 depending on System*/
+  kMacGreekNoEuroSignVariant    = 1,    /* Mac OS version < 9.2.2, 0x9C is SOFT HYPHEN, 0xFF is undefined*/
+  kMacGreekEuroSignVariant      = 2     /* Mac OS version >= 9.2.2, 0x9C is EURO SIGN, 0xFF is SOFT HYPHEN*/
+};
+
 /* Variants of kTextEncodingMacVT100                                                        */
 enum {
   kMacVT100DefaultVariant       = 0,    /* meta value, maps to 1 or 2 depending on System */
@@ -349,11 +363,96 @@ enum {
   kUnicodeHFSPlusCompVariant    = 9     /* composition based on HFS+ decomposition*/
 };
 
-/* Variants of Big-5 encoding*/
+/* Variants of kTextEncodingISOLatin1*/
+enum {
+  kISOLatin1StandardVariant     = 0,
+  kISOLatin1MusicCDVariant      = 1
+};
+
+/*
+   Variants of kTextEncodingISOLatinArabic, kTextEncodingISOLatinHebrew.
+   Per RFC 1556 and ECMA TR/53, there are three ways of handling bidirectional text
+   in the ISO character sets 8859-6 (Arabic) and 8859-8 (Hebrew).
+   1. Implicit or Logical order is "a presentation method in which the direction is
+   determined by an algorithm according to the type of characters and their position
+   relative to the adjacent characters and according to their primary direction." This
+   is the method normally used for Unicode and for the Mac OS and Windows Arabic and
+   Hebrew encodings.
+   2. Visual order assumes the text is already ordered such that it can be displayed
+   in a left-to-right display direction with no further directional processing. This
+   is equivalent to treating all characters as having strong left-right directionality.
+   This is the default assumed for internet Hebrew text encoded in ISO 8859-8, unless
+   the charset label suffix specifically indicates implicit (-i) or explicit (-e)
+   ordering.
+   3. Explicit order is "a presentation method in which the direction is explicitly
+   defined by using control sequences which are interleaved within the text and are
+   used for direction determination."
+*/
+enum {
+  kISOLatinArabicImplicitOrderVariant = 0,
+  kISOLatinArabicVisualOrderVariant = 1,
+  kISOLatinArabicExplicitOrderVariant = 2
+};
+
+enum {
+  kISOLatinHebrewImplicitOrderVariant = 0,
+  kISOLatinHebrewVisualOrderVariant = 1,
+  kISOLatinHebrewExplicitOrderVariant = 2
+};
+
+/* Variants of kTextEncodingWindowsLatin1*/
+enum {
+  kWindowsLatin1StandardVariant = 0,
+  kWindowsLatin1PalmVariant     = 1     /* PalmSource variant of cp1252*/
+};
+
+/* Variants of kTextEncodingDOSJapanese*/
+enum {
+  kDOSJapaneseStandardVariant   = 0,
+  kDOSJapanesePalmVariant       = 1     /* PalmSource variant of cp932*/
+};
+
+/*
+   Variants of EUC_CN
+   The DOSVariant is like kTextEncodingDOSChineseSimplif, but with the
+   basic EUC_CN part mapped as per kTextEncodingEUC_CN.
+*/
+enum {
+  kEUC_CN_BasicVariant          = 0,
+  kEUC_CN_DOSVariant            = 1
+};
+
+/*
+   Variants of EUC_KR
+   The DOSVariant is like kTextEncodingDOSKorean, but with the
+   basic EUC_KR part mapped as per kTextEncodingEUC_KR.
+*/
+enum {
+  kEUC_KR_BasicVariant          = 0,
+  kEUC_KR_DOSVariant            = 1
+};
+
+/*
+   Variants of ShiftJIS
+   The DOSVariant is like kTextEncodingDOSJapanese, but with the
+   basic ShiftJIS part mapped as per kTextEncodingShiftJIS.
+*/
+enum {
+  kShiftJIS_BasicVariant        = 0,
+  kShiftJIS_DOSVariant          = 1,
+  kShiftJIS_MusicCDVariant      = 2     /* MusicShiftJIS, per RIS-506 (RIAJ)*/
+};
+
+/*
+   Variants of Big-5 encoding
+   The DOSVariant is like kTextEncodingDOSChineseTrad, but with the
+   basic Big5 part mapped as per kTextEncodingBig5.
+*/
 enum {
   kBig5_BasicVariant            = 0,
   kBig5_StandardVariant         = 1,    /* 0xC6A1-0xC7FC: kana, Cyrillic, enclosed numerics*/
-  kBig5_ETenVariant             = 2     /* adds kana, Cyrillic, radicals, etc with hi bytes C6-C8,F9*/
+  kBig5_ETenVariant             = 2,    /* adds kana, Cyrillic, radicals, etc with hi bytes C6-C8,F9*/
+  kBig5_DOSVariant              = 3
 };
 
 /* Variants of MacRomanLatin1                                                               */
@@ -399,9 +498,25 @@ typedef UInt32                          TextEncodingFormat;
 enum {
                                         /* Default TextEncodingFormat for any TextEncodingBase*/
   kTextEncodingDefaultFormat    = 0,    /* Formats for Unicode & ISO 10646*/
+  kUnicodeUTF16Format           = 0,    /* UTF16 form (16-bit units), native or external byte order (see below)*/
+  kUnicodeUTF7Format            = 1,    /* UTF7 form*/
+  kUnicodeUTF8Format            = 2,    /* UTF8 form*/
+  kUnicodeUTF32Format           = 3,    /* UTF32 form (32-bit units), native or external byte order (see below)*/
+  kUnicodeUTF16BEFormat         = 4,    /* UTF16 form, explicit big-endian byte order, no BOM*/
+  kUnicodeUTF16LEFormat         = 5,    /* UTF16 form, explicit little-endian byte order, no BOM*/
+  kUnicodeUTF32BEFormat         = 6,    /* UTF32 form, explicit big-endian byte order, no BOM*/
+  kUnicodeUTF32LEFormat         = 7,    /* UTF32 form, explicit little-endian byte order, no BOM*/
+  kUnicodeSCSUFormat            = 8,    /* Std. Compression Scheme for Unicode, Unicode Tech Std. #6*/
+                                        /* Note for kUnicodeUTF16Format and kUnicodeUTF32Format:*/
+                                        /* - An array of UTF16Char (UniChar) or UTF32Char is normally understood to use "internal" or*/
+                                        /* platform-native byte ordering for kUnicodeUTF16Format and kUnicodeUTF32Format; the array MAY*/
+                                        /* begin with byte-order mark (BOM), but the BOM should match the internal ordering.*/
+                                        /* - If an array of bytes (such as char *) that can be in various encodings is specified to be*/
+                                        /* in Unicode with kUnicodeUTF16Format or kUnicodeUTF32Format (not explicitly BE or LE), then it*/
+                                        /* is assumed to use "external" byte ordering, which means: If there is a BOM at the beginning*/
+                                        /* of text, the BOM specifies the byte ordering, otherwise big-endian is assumed.*/
+                                        /* Synonyms for some Unicode formats*/
   kUnicode16BitFormat           = 0,
-  kUnicodeUTF7Format            = 1,
-  kUnicodeUTF8Format            = 2,
   kUnicode32BitFormat           = 3
 };
 
@@ -553,11 +668,13 @@ enum {
   kUnicodeNotAChar              = 0xFFFF /* not a Unicode char; may be used as a terminator*/
 };
 
+
 /*
    -------------------------------------------------------------------------------------------------
    CONSTANTS & DATA STRUCTURES for Unicode Properties
    -------------------------------------------------------------------------------------------------
 */
+
 typedef SInt32                          UCCharPropertyType;
 enum {
   kUCCharPropTypeGenlCategory   = 1,    /* requests enumeration value*/
@@ -630,6 +747,7 @@ enum {
   kUCBidiCatNonSpacingMark      = 18,   /* NSM    Non-Spacing Mark*/
   kUCBidiCatBoundaryNeutral     = 19    /* BN Boundary Neutral*/
 };
+
 
 /*
    -------------------------------------------------------------------------------------------------
@@ -771,6 +889,43 @@ RevertTextEncodingToScriptInfo(
 /*
  *  GetTextEncodingFromScriptInfo()
  *  
+ *  Summary:
+ *    Converts any combination of a Mac OS script code, a language
+ *    code, and a region code to a text encoding.
+ *  
+ *  Discussion:
+ *    This function is almost identical to
+ *    UpgradeScriptInfoToTextEncoding except it doesn't take a font
+ *    name and it is available in CoreServices.
+ *  
+ *  Parameters:
+ *    
+ *    iTextScriptID:
+ *      A valid Script Manager script code. The Mac OS Script Manager
+ *      defines constants for script codes using this format: smXxx. To
+ *      designate the system script, specify the meta-value of
+ *      smSystemScript. To indicate that you do not want to provide a
+ *      script code for this parameter, specify the constant
+ *      kTextScriptDontCare.
+ *    
+ *    iTextLanguageID:
+ *      A valid Script Manager language code. The Mac OS Script Manager
+ *      defines constants for language codes using this format:
+ *      langXxx. To indicate that you do not want to provide a language
+ *      code for this parameter, specify the constant
+ *      kTextLanguageDontCare.
+ *    
+ *    iTextRegionID:
+ *      A valid Script Manager region code. The Mac OS Script Manager
+ *      defines constants for region codes using this format: verXxx.
+ *      To indicate that you do not want to provide a region code for
+ *      this parameter, specify the constant kTextRegionDontCare.
+ *    
+ *    oEncoding:
+ *      A pointer to a value of type TextEncoding. On return, this
+ *      value holds the text encoding specification that the function
+ *      created from the other values you provided.
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
@@ -787,6 +942,39 @@ GetTextEncodingFromScriptInfo(
 /*
  *  GetScriptInfoFromTextEncoding()
  *  
+ *  Summary:
+ *    Converts the given Mac OS text encoding specification to the
+ *    corresponding script code and, if possible, language code.
+ *  
+ *  Discussion:
+ *    This function is almost identical to
+ *    RevertTextEncodingToScriptInfo except it doesn't return a font
+ *    name and it is available in CoreServices.
+ *  
+ *  Parameters:
+ *    
+ *    iEncoding:
+ *      The text encoding specification to be converted.
+ *    
+ *    oTextScriptID:
+ *      A pointer to a value of type ScriptCode. On return, a Mac OS
+ *      script code that corresponds to the text encoding specification
+ *      you identified in the iEncoding parameter. If you do not pass a
+ *      pointer for this parameter, the function returns a paramErr
+ *      result code.
+ *    
+ *    oTextLanguageID:
+ *      A pointer to a value of type LangCode. On input, if you do not
+ *      want the function to return the language code, specify NULL as
+ *      the value of this parameter. On return, the appropriate
+ *      language code, if the language can be unambiguously derived
+ *      from the text encoding specification, for example, Japanese,
+ *      and you did not set the parameter to NULL. If you do not
+ *      specify NULL on input and the language is ambiguous—that is,
+ *      the function cannot accurately derive it from the text encoding
+ *      specification—the function returns a value of
+ *      kTextLanguageDontCare.
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in CoreServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
@@ -797,6 +985,7 @@ GetScriptInfoFromTextEncoding(
   TextEncoding   iEncoding,
   ScriptCode *   oTextScriptID,
   LangCode *     oTextLanguageID)       /* can be NULL */     AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
 
 
 /*
@@ -830,11 +1019,13 @@ UCGetCharProperty(
   UCCharPropertyValue *  propValue)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+
 /*
    -------------------------------------------------------------------------------------------------
    Surrogate pair utilities
    -------------------------------------------------------------------------------------------------
 */
+
 
 
 #if !defined(UC_INLINE)

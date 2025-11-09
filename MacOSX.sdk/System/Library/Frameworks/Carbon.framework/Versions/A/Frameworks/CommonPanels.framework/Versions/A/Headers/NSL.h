@@ -3,9 +3,9 @@
  
      Contains:   Interface to API for using the NSL User Interface
  
-     Version:    CommonPanels-61~261
+     Version:    CommonPanels-70~11
  
-     Copyright:  © 1997-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1997-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -65,51 +65,51 @@ typedef STACK_UPP_TYPE(NSLEventProcPtr)                         NSLEventUPP;
  *  NewNSLURLFilterUPP()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern NSLURLFilterUPP
-NewNSLURLFilterUPP(NSLURLFilterProcPtr userRoutine);
+NewNSLURLFilterUPP(NSLURLFilterProcPtr userRoutine)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewNSLEventUPP()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern NSLEventUPP
-NewNSLEventUPP(NSLEventProcPtr userRoutine);
+NewNSLEventUPP(NSLEventProcPtr userRoutine)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeNSLURLFilterUPP()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeNSLURLFilterUPP(NSLURLFilterUPP userUPP);
+DisposeNSLURLFilterUPP(NSLURLFilterUPP userUPP)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeNSLEventUPP()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeNSLEventUPP(NSLEventUPP userUPP);
+DisposeNSLEventUPP(NSLEventUPP userUPP)                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeNSLURLFilterUPP()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -117,13 +117,13 @@ extern Boolean
 InvokeNSLURLFilterUPP(
   char *           url,
   Str255           displayString,
-  NSLURLFilterUPP  userUPP);
+  NSLURLFilterUPP  userUPP)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeNSLEventUPP()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -131,7 +131,7 @@ extern void
 InvokeNSLEventUPP(
   EventRecord *  newEvent,
   void *         userContext,
-  NSLEventUPP    userUPP);
+  NSLEventUPP    userUPP)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* <--- function returns OSStatus of the operation.  noErr will be returned if valid, kNSLUserCanceled will be returned if the user cancels */
@@ -217,7 +217,7 @@ InvokeNSLEventUPP(
  *  NSLStandardGetURL()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.1 and later
  */
@@ -228,19 +228,19 @@ NSLStandardGetURL(
   void *              eventProcContextPtr,       /* can be NULL */
   NSLURLFilterUPP     filterProc,                /* can be NULL */
   char *              serviceTypeList,
-  char **             userSelectedURL);
+  char **             userSelectedURL)                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  NSLGetDefaultDialogOptions()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.1 and later
  */
 extern OSStatus 
-NSLGetDefaultDialogOptions(NSLDialogOptions * dialogOptions);
+NSLGetDefaultDialogOptions(NSLDialogOptions * dialogOptions)  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* <--- function returns null (useful for setting variable at same time as freeing it */
@@ -249,12 +249,12 @@ NSLGetDefaultDialogOptions(NSLDialogOptions * dialogOptions);
  *  NSLFreeURL()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in NSLPPCLib 1.1 and later
  */
 extern char * 
-NSLFreeURL(char * url);
+NSLFreeURL(char * url)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /* <--- function returns kNSLErrNullPtrError, file mgr errors, or resource mgr errors */
@@ -265,7 +265,7 @@ NSLFreeURL(char * url);
  *  NSLSaveURLAliasToFolder()
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        not available
  *    Non-Carbon CFM:   in NSLPPCLib 1.1 and later
  */
@@ -273,7 +273,7 @@ extern OSErr
 NSLSaveURLAliasToFolder(
   OSType        folderSelectorType,
   const char *  url,
-  const char *  userFriendlyName);
+  const char *  userFriendlyName)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 

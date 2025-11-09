@@ -1,7 +1,7 @@
 /*
 	NSSliderCell.h
 	Application Kit
-	Copyright (c) 1994-2001, Apple Computer, Inc.
+	Copyright (c) 1994-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -13,6 +13,13 @@ typedef enum _NSTickMarkPosition {
     NSTickMarkLeft  = NSTickMarkAbove,
     NSTickMarkRight = NSTickMarkBelow
 } NSTickMarkPosition;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+typedef enum {
+    NSLinearSlider   = 0,
+    NSCircularSlider = 1
+} NSSliderType;
+#endif
 
 @interface NSSliderCell : NSActionCell
 {
@@ -31,7 +38,9 @@ typedef enum _NSTickMarkPosition {
         unsigned int isPressed:1;
         unsigned int allowsTickMarkValuesOnly:1;
         unsigned int tickMarkPosition:1;
-        unsigned int reserved2:26;
+        unsigned int sliderType:2;
+        unsigned int drawing:1;
+        unsigned int reserved2:23;
     } _scFlags;
 }
 
@@ -61,6 +70,11 @@ typedef enum _NSTickMarkPosition {
 - (void)drawKnob;
 - (void)drawBarInside:(NSRect)aRect flipped:(BOOL)flipped;
 - (NSRect)trackRect;	// Only valid while tracking the mouse!
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void) setSliderType:(NSSliderType)sliderType;
+- (NSSliderType)sliderType;
+#endif
 
 @end
 

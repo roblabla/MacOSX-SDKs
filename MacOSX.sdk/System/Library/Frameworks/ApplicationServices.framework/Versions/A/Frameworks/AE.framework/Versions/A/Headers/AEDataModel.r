@@ -3,9 +3,9 @@
  
      Contains:   AppleEvent Data Model Interfaces.
  
-     Version:    AppleEvents-242~1
+     Version:    AppleEvents-275~1
  
-     Copyright:  © 1996-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1996-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -77,6 +77,8 @@
 #define typeKernelProcessID 			'kpid'
 #define typeMachPort 					'port'
 
+/* Targeting applications by bundle ID is only available in Mac OS X 10.3 or later. */
+#define typeApplicationBundleID 		'bund'
 /* Keywords for Apple event attributes */
 #define keyTransactionIDAttr 			'tran'
 #define keyReturnIDAttr 				'rtid'
@@ -90,6 +92,7 @@
 #define keyMissedKeywordAttr 			'miss'				/*  this attribute is read only  */
 #define keyOriginalAddressAttr 			'from'				/*  new in 1.0.1  */
 #define keyAcceptTimeoutAttr 			'actm'				/*  new for Mac OS X  */
+#define keyReplyRequestedAttr 			'repq'				/*  Was a reply requested for this event - returned as typeBoolean  */
 
 /* These bits are specified in the keyXMLDebuggingAttr (an SInt32) */
 #define kAEDebugPOSTHeader 				0x01				/*  headers of the HTTP post we sent - typeChar  */
@@ -154,7 +157,7 @@
 #define keySOAPSMDType 					'sstp'				/*  "MyStructType" */
 
 /* 
- * Web Services Proxy support.  Available only on systems > 10.1.x.
+ * Web Services Proxy support.  Available only on Mac OS X 10.2 or later.
  * These constants should be added as attributes on the event that is
  * being sent (not part of the direct object.)
  */

@@ -1,7 +1,7 @@
 /*
         NSDocument.h
         Application Kit
-        Copyright (c) 1997-2001, Apple Computer, Inc.
+        Copyright (c) 1997-2003, Apple Computer, Inc.
         All rights reserved.
 */
 
@@ -54,7 +54,8 @@ typedef enum _NSSaveOperationType {
         unsigned int isRunningPrintOperation:1;
         unsigned int savePanelNameExtensionHidden:1;
         unsigned int reconciledToFileName:1;
-        unsigned int RESERVED:26;
+        unsigned int checkingDisplayName:1;
+        unsigned int RESERVED:25;
     } _docFlags;
     NSString *_savePanelSaveType;
 }
@@ -103,6 +104,13 @@ typedef enum _NSSaveOperationType {
 - (void)windowControllerWillLoadNib:(NSWindowController *)windowController;
 - (void)windowControllerDidLoadNib:(NSWindowController *)windowController;
     // These methods are called when the nib loads if the document is the nib file's owner (ie if the document implements -windowNibName).
+
+#if MAC_OS_X_VERSION_10_1 <= MAC_OS_X_VERSION_MAX_ALLOWED
+
+// Of the windows associated with this document, return the one most appropriate to use as the parent window of a document-modal sheet.  This method may return nil, in which case the invoker should present an application-modal panel.  NSDocument's implementation of this method returns the window of the first window controller, or nil if there are no window controllers or if the first window controller has no window.
+- (NSWindow *)windowForSheet;
+
+#endif
 
 // -----------------------------------------------------------------------------
 // Document dirty state management, closing, and undo management

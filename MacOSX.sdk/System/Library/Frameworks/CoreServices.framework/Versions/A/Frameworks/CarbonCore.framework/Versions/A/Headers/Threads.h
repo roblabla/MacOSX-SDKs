@@ -3,9 +3,9 @@
  
      Contains:   Thread Manager Interfaces.
  
-     Version:    CarbonCore-472~1
+     Version:    CarbonCore-545~1
  
-     Copyright:  © 1991-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1991-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -473,24 +473,24 @@ CreateThreadPool(
 
 
 /*
- *  GetFreeThreadCount()
+ *  GetFreeThreadCount()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
  */
 extern OSErr 
 GetFreeThreadCount(
   ThreadStyle   threadStyle,
-  SInt16 *      freeCount)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt16 *      freeCount)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
 
 
 /*
- *  GetSpecificFreeThreadCount()
+ *  GetSpecificFreeThreadCount()   *** DEPRECATED ***
  *  
  *  Availability:
- *    Mac OS X:         in version 10.0 and later in CoreServices.framework
+ *    Mac OS X:         in version 10.0 and later in CoreServices.framework but deprecated in 10.3
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ThreadsLib 1.0 and later
  */
@@ -498,7 +498,7 @@ extern OSErr
 GetSpecificFreeThreadCount(
   ThreadStyle   threadStyle,
   Size          stackSize,
-  SInt16 *      freeCount)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt16 *      freeCount)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_3;
 
 
 /*

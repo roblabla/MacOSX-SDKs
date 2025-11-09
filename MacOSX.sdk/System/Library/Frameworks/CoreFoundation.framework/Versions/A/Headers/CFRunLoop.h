@@ -1,5 +1,5 @@
 /*	CFRunLoop.h
-	Copyright 1998-2002, Apple, Inc. All rights reserved.
+	Copyright (c) 1998-2003, Apple, Inc. All rights reserved.
 */
 
 /*!

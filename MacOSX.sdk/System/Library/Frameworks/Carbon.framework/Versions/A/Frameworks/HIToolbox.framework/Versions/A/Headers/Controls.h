@@ -3,9 +3,9 @@
  
      Contains:   Control Manager interfaces
  
-     Version:    HIToolbox-124.14~2
+     Version:    HIToolbox-145.33~1
  
-     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -22,6 +22,10 @@
 
 #ifndef __ICONS__
 #include <HIServices/Icons.h>
+#endif
+
+#ifndef __APPEARANCE__
+#include <HIToolbox/Appearance.h>
 #endif
 
 #ifndef __HIOBJECT__
@@ -216,17 +220,17 @@ enum {
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /* Basic part codes */
 enum {
-  kControlNoPart                = 0,
-  kControlIndicatorPart         = 129,
-  kControlDisabledPart          = 254,
-  kControlInactivePart          = 255
+  kControlNoPart                = kAppearancePartMetaNone,
+  kControlIndicatorPart         = kAppearancePartIndicator,
+  kControlDisabledPart          = kAppearancePartMetaDisabled,
+  kControlInactivePart          = kAppearancePartMetaInactive
 };
 
 /* Use this constant in Get/SetControlData when the data referred to is not         */
 /* specific to a part, but rather the entire control, e.g. the list handle of a     */
 /* list box control.                                                                */
 enum {
-  kControlEntireControl         = 0
+  kControlEntireControl         = kControlNoPart
 };
 
 /*  Meta-Parts                                                                          */
@@ -243,48 +247,108 @@ enum {
 /*  of the parts. Not all controls fully support this at the time this was written.     */
 enum {
   kControlStructureMetaPart     = -1,
-  kControlContentMetaPart       = -2
+  kControlContentMetaPart       = -2,
+  kControlOpaqueMetaPart        = -3,   /* Jaguar or later*/
+  kControlClickableMetaPart     = -4    /* Panther or later, only used for async window dragging. Default is structure region.*/
 };
 
 /* focusing part codes */
 enum {
-  kControlFocusNoPart           = 0,    /* tells control to clear its focus*/
+  kControlFocusNoPart           = kControlNoPart, /* tells control to clear its focus*/
   kControlFocusNextPart         = -1,   /* tells control to focus on the next part*/
   kControlFocusPrevPart         = -2    /* tells control to focus on the previous part*/
 };
 
-typedef SInt16                          ControlFocusPart;
+typedef ControlPartCode                 ControlFocusPart;
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*  ¥ Control Collection Tags                                                                           */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*  These are standard tags that you will find in the initial data Collection that is passed in the     */
-/*  'param' parameter to the initCntl message (Carbon only).                                            */
+/*  'param' parameter to the initCntl message, and in the kEventParamInitCollection parameter to the    */
+/*  kEventControlInitialize event (Carbon only).                                                        */
 /*                                                                                                      */
-/*  All tags at ID zero in a Control's Collection are reserved for Control Manager use.                 */
+/*  All tags at ID zero in a control's Collection are reserved for Control Manager use.                 */
 /*  Custom control definitions should use other IDs.                                                    */
 /*                                                                                                      */
-/*  Most of these tags are interpreted when you call CreateCustomControl; the Control Manager will      */
-/*  put value in the right place before calling the Control Definition with the initialization message. */
+/*  Most of these tags are interpreted when you call CreateCustomControl; the Control Manager will put  */
+/*  the value in the right place before calling the control definition with the initialization message. */
+
+
+/*
+ *  Discussion:
+ *    Control Collection Tags
+ */
 enum {
-  kControlCollectionTagBounds   = 'boun', /* Rect - the bounding rectangle*/
-  kControlCollectionTagValue    = 'valu', /* SInt32 - the value*/
-  kControlCollectionTagMinimum  = 'min ', /* SInt32 - the minimum*/
-  kControlCollectionTagMaximum  = 'max ', /* SInt32 - the maximum*/
-  kControlCollectionTagViewSize = 'view', /* SInt32 - the view size*/
-  kControlCollectionTagVisibility = 'visi', /* Boolean - the visible state*/
-  kControlCollectionTagRefCon   = 'refc', /* SInt32 - the refCon*/
-  kControlCollectionTagTitle    = 'titl', /* arbitrarily sized character array - the title*/
-  kControlCollectionTagUnicodeTitle = 'uttl', /* bytes as received via CFStringCreateExternalRepresentation*/
-  kControlCollectionTagIDSignature = 'idsi', /* OSType - the ControlID signature*/
-  kControlCollectionTagIDID     = 'idid', /* SInt32 - the ControlID id*/
-  kControlCollectionTagCommand  = 'cmd ', /* UInt32 - the command*/
-  kControlCollectionTagVarCode  = 'varc' /* SInt16 - the variant*/
+
+  /*
+   * Rect - the bounding rectangle.
+   */
+  kControlCollectionTagBounds   = 'boun',
+
+  /*
+   * SInt32 - the value
+   */
+  kControlCollectionTagValue    = 'valu',
+
+  /*
+   * SInt32 - the minimum
+   */
+  kControlCollectionTagMinimum  = 'min ',
+
+  /*
+   * SInt32 - the maximum
+   */
+  kControlCollectionTagMaximum  = 'max ',
+
+  /*
+   * SInt32 - the view size
+   */
+  kControlCollectionTagViewSize = 'view',
+
+  /*
+   * Boolean - the visible state. Only interpreted on CarbonLib
+   * versions up through 1.5.x and Mac OS X versions 10.0.x. Not
+   * interpreted on CarbonLib 1.6 and later. Not interpreted on Mac OS
+   * 10.1 and later. We recommend you do not use this tag at all.
+   */
+  kControlCollectionTagVisibility = 'visi',
+
+  /*
+   * SInt32 - the refCon
+   */
+  kControlCollectionTagRefCon   = 'refc',
+
+  /*
+   * arbitrarily sized character array - the title
+   */
+  kControlCollectionTagTitle    = 'titl',
+
+  /*
+   * bytes as received via CFStringCreateExternalRepresentation
+   */
+  kControlCollectionTagUnicodeTitle = 'uttl',
+
+  /*
+   * OSType - the ControlID signature
+   */
+  kControlCollectionTagIDSignature = 'idsi',
+
+  /*
+   * SInt32 - the ControlID id
+   */
+  kControlCollectionTagIDID     = 'idid',
+
+  /*
+   * UInt32 - the command
+   */
+  kControlCollectionTagCommand  = 'cmd ',
+
+  /*
+   * SInt16 - the variant
+   */
+  kControlCollectionTagVarCode  = 'varc'
 };
 
-/*  The following are additional tags which are only interpreted by UnflattenControl. */
-enum {
-  kControlCollectionTagSubControls = 'subc' /* data for all of a control's subcontrols*/
-};
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*  ¥ Control Image Content                                                                             */
@@ -300,7 +364,8 @@ enum {
   kControlContentCIconHandle    = 130,
   kControlContentPictHandle     = 131,
   kControlContentIconRef        = 132,
-  kControlContentICON           = 133
+  kControlContentICON           = 133,
+  kControlContentCGImageRef     = 134
 };
 
 typedef SInt16                          ControlContentType;
@@ -313,6 +378,7 @@ struct ControlButtonContentInfo {
     IconRef             iconRef;
     PicHandle           picture;
     Handle              ICONHandle;
+    CGImageRef          imageRef;
   }                       u;
 };
 typedef struct ControlButtonContentInfo ControlButtonContentInfo;
@@ -351,7 +417,8 @@ enum {
   kControlFontBigSystemFont     = -1,   /* force to big system font*/
   kControlFontSmallSystemFont   = -2,   /* force to small system font*/
   kControlFontSmallBoldSystemFont = -3, /* force to small bold system font*/
-  kControlFontViewSystemFont    = -4    /* force to views system font (DataBrowser control only)*/
+  kControlFontViewSystemFont    = -4,   /* force to views system font (DataBrowser control only)*/
+  kControlFontMiniSystemFont    = -5    /* force to mini system font*/
 };
 
 /* Add these masks together to set the flags field of a ControlFontStyleRec */
@@ -379,7 +446,9 @@ enum {
 /* UseThemeFontID indicates that the font field of the ControlFontStyleRec  */
 /* should be interpreted as a ThemeFontID (see Appearance.h). In all other  */
 /* ways, specifying a ThemeFontID is just like using one of the control     */
-/* meta-fonts IDs.                                                          */
+/* meta-fonts IDs. kControlUseThemeFontIDMask and kControlUseFontMask are   */
+/* mutually exclusive; you can only specify one of them. If you specify     */
+/* both of them, the behavior is undefined.                                 */
 enum {
   kControlUseThemeFontIDMask    = 0x0080 /* Available in Mac OS X or later*/
 };
@@ -434,9 +503,14 @@ enum {
 
   /*
    * Sent with a pointer to a ControlSize.  Only valid with explicitly
-   * sizeable controls.  Currently supported by the Check Box, Combo
-   * Box, Progress Bar, Indeterminate Progress Bar, Radio Button, Round
-   * Button, Scroll Bar, Slider and the Tab.  Check your return value!
+   * sizeable controls.  Currently supported by the check box, combo
+   * box, progress bar, indeterminate progress bar, radio button, round
+   * button, scroll bar, slider and the tab.  Check your return value!
+   * As of 10.2.5, the push button and data browser accept this tag.
+   * The data browser only changes the size of its scrollbars. As of
+   * Mac OS X 10.3, chasing arrows, disclosure button, popup button,
+   * scroll view, search field and little arrows control also accept
+   * this tag. Still check your return values!
    */
   kControlSizeTag               = 'size'
 };
@@ -444,8 +518,12 @@ enum {
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
 /*  ¥ Control Feature Bits                                                                              */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+
+/*
+ *  Discussion:
+ *    Control Feature Bits - Returned by GetControlFeatures
+ */
 enum {
-                                        /* Control feature bits - returned by GetControlFeatures */
   kControlSupportsGhosting      = 1 << 0,
   kControlSupportsEmbedding     = 1 << 1,
   kControlSupportsFocus         = 1 << 2,
@@ -465,7 +543,18 @@ enum {
   kControlSupportsSetCursor     = 1 << 20, /* Available in Carbon*/
   kControlSupportsContextualMenus = 1 << 21, /* Available in Carbon*/
   kControlSupportsClickActivation = 1 << 22, /* Available in Carbon*/
-  kControlIdlesWithTimer        = 1 << 23 /* Available in Carbon - this bit indicates that the control animates automatically*/
+  kControlIdlesWithTimer        = 1 << 23, /* Available in Carbon - this bit indicates that the control animates automatically*/
+
+  /*
+   * Reported by controls that expect clients to use an action proc
+   * that increments its value when the up button is pressed and
+   * decrement its value when the down button is pressed. (Most
+   * controls, such as scroll bars and sliders, expect the opposite).
+   * This allows the Control Manager to calculate the proper amount of
+   * sleep time during a tracking loop. This is only respected in Mac
+   * OS X 10.3 and later.
+   */
+  kControlInvertsUpDownValueMeaning = 1 << 24
 };
 
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
@@ -546,9 +635,17 @@ enum {
   kControlSizeLarge             = 2,
 
   /*
+   * Use the control's miniature drawing variant. This does not apply
+   * to many of the controls, since this is a brand new control size.
+   */
+  kControlSizeMini              = 3,
+
+  /*
    * Control drawing variant determined by the control's bounds.  This
-   * ControlSize is only available with Scroll Bars to support their
-   * legacy behavior of drawing differently within different bounds.
+   * ControlSize is currently only available with Scroll Bars and Popup
+   * Buttons to support their legacy behavior of drawing differently
+   * within different bounds. It is preferred to explicitly use one of
+   * the available control sizes.
    */
   kControlSizeAuto              = 0xFFFF
 };
@@ -2219,8 +2316,28 @@ IsValidControlHandle(ControlRef theControl)                   AVAILABLE_MAC_OS_X
 /* ¥ Control IDs                                                                        */
 /* Carbon only.                                                                         */
 /*ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ*/
+
+/*
+ *  ControlID
+ *  
+ *  Summary:
+ *    A unique identifier for a control in a window.
+ */
 struct ControlID {
+
+  /*
+   * A four-character signature. When assigning a control ID to your
+   * own controls, you should typically use your application signature
+   * here, or some other signature with an uppercase character. Apple
+   * reserves signatures that contain only lowercase characters.
+   */
   OSType              signature;
+
+  /*
+   * A integer identifying the control. This value should be unique for
+   * a given control across all controls in the same window with the
+   * same signature.
+   */
   SInt32              id;
 };
 typedef struct ControlID                ControlID;
@@ -2261,8 +2378,28 @@ GetControlID(
 /*
  *  GetControlByID()
  *  
+ *  Discussion:
+ *    Find a control in a window by its unique ID. 
+ *    
+ *    HIView Notes: This call is replaced as of Mac OS X 10.3 by
+ *    HIViewFindByID. That call lets you start your search at any point
+ *    in the hierarchy, as the first parameter is a view and not a
+ *    window. Either will work, but the HIView API is preferred.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window to search.
+ *    
+ *    inID:
+ *      The ID to search for.
+ *    
+ *    outControl:
+ *      The control that was found, or NULL if no control in the window
+ *      had the ID specified.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2344,7 +2481,14 @@ enum {
  *  
  *  Discussion:
  *    GetControlKind allows you to query the kind of any control. This
- *    function is only available in Mac OS X.
+ *    function is only available in Mac OS X. 
+ *    
+ *    HIView Note: With the advent of HIView, you can just as easily
+ *    use HIObjectCopyClassID to determine what kind of control you are
+ *    looking at. This is only truly deterministic for
+ *    HIToolbox-supplied controls as of Mac OS X 10.3 or later due to
+ *    the fact that the class IDs underwent naming changes before that
+ *    release.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -2380,8 +2524,53 @@ enum {
 /*
  *  GetControlProperty()
  *  
+ *  Discussion:
+ *    Obtains a piece of data that has been previously associated with
+ *    a control.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    control:
+ *      A ControlRef to the control whose associated data you wish to
+ *      obtain.
+ *    
+ *    propertyCreator:
+ *      An OSType signature, usually the signature of your application.
+ *      Do not use all lower case signatures, as these are reserved for
+ *      use by Apple.
+ *    
+ *    propertyTag:
+ *      An OSType signature, application-defined, identifying the
+ *      property.
+ *    
+ *    bufferSize:
+ *      A value specifying the size of the data to be retrieved. If the
+ *      size of the data is unknown, use the function
+ *      GetControlPropertySize to get the dataÕs size. If the size
+ *      specified in the bufferSize parameter does not match the actual
+ *      size of the property, GetControlProperty only retrieves data up
+ *      to the size specified or up to the actual size of the property,
+ *      whichever is smaller, and an error is returned.
+ *    
+ *    actualSize:
+ *      On input, a pointer to an unsigned 32-bit integer. On return,
+ *      this value is set to the actual size of the associated data.
+ *      You may pass null for the actualSize parameter if you are not
+ *      interested in this information.
+ *    
+ *    propertyBuffer:
+ *      On input, a pointer to a buffer. This buffer must be big enough
+ *      to fit bufferSize bytes of data. On return, this buffer
+ *      contains a copy of the data that is associated with the
+ *      specified control.
+ *  
+ *  Result:
+ *    A result code indicating success or failure. Most common return
+ *    values are: noErr, paramErr, controlHandleInvalidErr,
+ *    controlPropertyInvalid and controlPropertyNotFoundErr.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2420,8 +2609,47 @@ GetControlPropertySize(
 /*
  *  SetControlProperty()
  *  
+ *  Discussion:
+ *    Obtains a piece of data that has been previously associated with
+ *    a control.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    control:
+ *      A ControlRef to the control whose associated data you wish to
+ *      obtain.
+ *    
+ *    propertyCreator:
+ *      An OSType signature, usually the signature of your application.
+ *      Do not use all lower case signatures, as these are reserved for
+ *      use by Apple.
+ *    
+ *    propertyTag:
+ *      An OSType signature, application-defined, identifying the
+ *      property.
+ *    
+ *    propertySize:
+ *      A value specifying the size of the data.
+ *    
+ *    propertyData:
+ *      On input, a pointer to data of any type. Pass a pointer to a
+ *      buffer containing the data to be associated; this buffer should
+ *      be at least as large as the value specified in the propertySize
+ *      parameter.
+ *    
+ *    propertyBuffer:
+ *      On input, a pointer to a buffer. This buffer must be big enough
+ *      to fit bufferSize bytes of data. On return, this buffer
+ *      contains a copy of the data that is associated with the
+ *      specified control.
+ *  
+ *  Result:
+ *    A result code indicating success or failure. Most common return
+ *    values are: noErr, paramErr, controlHandleInvalidErr and
+ *    controlPropertyInvalid
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2578,8 +2806,28 @@ GetControlAction(ControlRef theControl)                       AVAILABLE_MAC_OS_X
 /*
  *  SetControlReference()
  *  
+ *  Summary:
+ *    This is somewhat of a legacy API. The Set/GetControlProperty API
+ *    is a better mechanism to associate data with a control.
+ *  
+ *  Discussion:
+ *    When you create a control, you specify an initial reference
+ *    value, either in the control resource or in the refCon parameter
+ *    of the function NewControl. You can use the function
+ *    GetControlReference to obtain the current value. You can use this
+ *    value for any purpose.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    theControl:
+ *      A ControlRef to the control whose reference value you wish to
+ *      change.
+ *    
+ *    data:
+ *      The new reference value for the control.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2595,8 +2843,28 @@ SetControlReference(
 /*
  *  GetControlReference()
  *  
+ *  Summary:
+ *    This is somewhat of a legacy API. The Set/GetControlProperty API
+ *    is a better mechanism to associate data with a control.
+ *  
+ *  Discussion:
+ *    When you create a control, you specify an initial reference
+ *    value, either in the control resource or in the refCon parameter
+ *    of the function NewControl. You can use this reference value for
+ *    any purpose, and you can use the function SetControlReference to
+ *    change this value.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    theControl:
+ *      A ControlRef to the control whose reference value you wish to
+ *      retrieve.
+ *  
+ *  Result:
+ *    The current reference value for the specified control.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2671,8 +2939,16 @@ DumpControlHierarchy(
 /*
  *  CreateRootControl()
  *  
- *  Summary:
- *    Creates a new root control for a window.
+ *  Discussion:
+ *    Creates a new 'root control' for a window. This root is actually
+ *    the content area of a window, and spans all of Quickdraw space.
+ *    
+ *    
+ *    HIView Notes: In a composited window, this routine will return
+ *    errRootAlreadyExists. Technically, you cannot create a root
+ *    control in such a window. Instead you would embed views into the
+ *    content view of the window. GetRootControl will return the
+ *    content view in that situation as well.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -2705,8 +2981,35 @@ CreateRootControl(
 /*
  *  GetRootControl()
  *  
+ *  Discussion:
+ *    Returns the 'root control' for a given window. If no root exists
+ *    for the window, errNoRootControl is returned. This root control
+ *    represents the content area of the window, and spans all of
+ *    Quickdraw space. 
+ *    
+ *    HIView Notes: With the advent of HIView, this API and concept are
+ *    considered deprecated. The root of the window in a composited
+ *    window is actually the structure view, and all views (window
+ *    widgets, content view, etc.) are subviews of that top-level view.
+ *    It can be fetched with HIViewGetRoot. In a composited window,
+ *    calling GetRootControl will return the content view, not the true
+ *    root to maintain compatibility with past usage of GetRootControl.
+ *    We recommend using HIViewFindByID with the kHIViewWindowContentID
+ *    control ID to fetch the content view instead of using this call.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inWindow:
+ *      The window to query.
+ *    
+ *    outControl:
+ *      The root control, on output.
+ *  
+ *  Result:
+ *    An operating system result code.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2722,8 +3025,29 @@ GetRootControl(
 /*
  *  EmbedControl()
  *  
+ *  Discussion:
+ *    Adds a subcontrol to the given parent. 
+ *    
+ *    HIView Note: This is replaced by HIViewAddSubview in Mac OS X
+ *    10.2 and beyond. You can call either function in a composited or
+ *    non-composited window, but the HIView variant is preferred.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inControl:
+ *      The subcontrol being added.
+ *    
+ *    inContainer:
+ *      The control which will receive the new subcontrol.
+ *  
+ *  Result:
+ *    An operating system result code. 
+ *    errNeedsCompositedWindow will be returned when you try to embed
+ *    into the content view in a non-compositing window; you can only
+ *    embed into the content view in compositing windows.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2739,8 +3063,30 @@ EmbedControl(
 /*
  *  AutoEmbedControl()
  *  
+ *  Discussion:
+ *    Based on the bounds of the given control, embed it in the window
+ *    specified. It basically finds the deepest parent the control
+ *    would fit into and embeds it there. This was invented primarily
+ *    for the Dialog Manager so that hierarchies could be generated
+ *    from the flattened DITL list. 
+ *    
+ *    HIView Note: Do NOT call this API in a composited window, its
+ *    results will be unpredictable as the coordinate systems are very
+ *    different.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inControl:
+ *      The subcontrol being added.
+ *    
+ *    inWindow:
+ *      The window which will receive the new subcontrol.
+ *  
+ *  Result:
+ *    An operating system result code.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2756,8 +3102,26 @@ AutoEmbedControl(
 /*
  *  GetSuperControl()
  *  
+ *  Discussion:
+ *    Returns the parent control of the given one. 
+ *    
+ *    HIView Note: HIViewGetSuperview is the preferred API as of Mac OS
+ *    X 10.2. Either call will work in a composited or non- composited
+ *    window.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inControl:
+ *      The control to query.
+ *    
+ *    outParent:
+ *      The parent control.
+ *  
+ *  Result:
+ *    An operating system result code.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2773,8 +3137,29 @@ GetSuperControl(
 /*
  *  CountSubControls()
  *  
+ *  Discussion:
+ *    Returns the number of children a given control has. This count
+ *    can then be used for calls to GetIndexedSubControl.
+ *    
+ *    
+ *    HIView Note: As of Mac OS X 10.2, the preferred way to walk the
+ *    control hierarchy is to use HIViewGetFirstSubView followed by
+ *    repeated calls to HIViewGetNextView until NULL is returned.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inControl:
+ *      The control to query.
+ *    
+ *    outNumChildren:
+ *      A pointer to a UInt16 to receive the number of children
+ *      controls.
+ *  
+ *  Result:
+ *    An operating system result code.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2790,8 +3175,32 @@ CountSubControls(
 /*
  *  GetIndexedSubControl()
  *  
+ *  Discussion:
+ *    Returns the child control at a given index in the list of
+ *    subcontrols for the specified parent. 
+ *    
+ *    HIView Note: As of Mac OS X 10.2, the preferred way to walk the
+ *    control hierarchy is to use HIViewGetFirstSubView followed by
+ *    repeated calls to HIViewGetNextView until NULL is returned.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inControl:
+ *      The parent control to query.
+ *    
+ *    inIndex:
+ *      The index of the subcontrol to fetch.
+ *    
+ *    outSubControl:
+ *      A pointer to a control reference to receive the subcontrol. If
+ *      the index is out of range, the contents of this parameter are
+ *      undefined after the call.
+ *  
+ *  Result:
+ *    An operating system result code.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2808,8 +3217,29 @@ GetIndexedSubControl(
 /*
  *  SetControlSupervisor()
  *  
+ *  Discussion:
+ *    Allow one view to intercept clicks for another. When something
+ *    like FindControl or the like is called on the target, it will
+ *    instead return the supervisor. This is largely deprecated these
+ *    days. 
+ *    
+ *    HIView Note: As of Mac OS X 10.2, you can intercept subview
+ *    clicks by overriding the kEventControlInterceptSubviewClick event
+ *    (see CarbonEvents.h).
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inControl:
+ *      The control to intercept clicks for.
+ *    
+ *    inBoss:
+ *      The new supervisor control (can be NULL).
+ *  
+ *  Result:
+ *    An operating system result code.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -2819,7 +3249,7 @@ GetIndexedSubControl(
 extern OSErr 
 SetControlSupervisor(
   ControlRef   inControl,
-  ControlRef   inBoss)                                        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  ControlRef   inBoss)          /* can be NULL */             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -3010,8 +3440,25 @@ ClearKeyboardFocus(WindowRef inWindow)                        AVAILABLE_MAC_OS_X
 /*
  *  GetControlFeatures()
  *  
+ *  Discussion:
+ *    Returns the set of behaviors, etc. the given view supports. This
+ *    set of features is immutable before Mac OS X 10.3. As of that
+ *    release, the features can be changed with HIViewChangeFeatures.
+ *    That API is the recommended call on Mac OS X 10.3 and later.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    inControl:
+ *      The control to query.
+ *    
+ *    outFeatures:
+ *      A pointer to a 32-bit feature bitfield.
+ *  
+ *  Result:
+ *    An operating system error code.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3092,7 +3539,9 @@ GetControlDataSize(
 
 /*
  *  Discussion:
- *    DragTrackingMessage values for use with HandleControlDragTracking.
+ *    DragTrackingMessage values for use with
+ *    HandleControlDragTracking. These are deprecated in favor of the
+ *    drag Carbon Events introduced in Mac OS X 10.2 via HIView.
  */
 enum {
 
@@ -3128,7 +3577,8 @@ enum {
  *    appropriately in response to the drag. Note that in order for a
  *    control to have any chance of responding to this API, you must
  *    enable the control's drag and drop support with
- *    SetControlDragTrackingEnabled.
+ *    SetControlDragTrackingEnabled. 
+ *    <br>HIView Note: This should not be called in a composited window.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -3189,7 +3639,8 @@ HandleControlDragTracking(
  *    pull any interesting data out of the drag and insert the data
  *    into itself. Note that in order for a control to have any chance
  *    of responding to this API, you must enable the control's drag and
- *    drop support with SetControlDragTrackingEnabled.
+ *    drop support with SetControlDragTrackingEnabled. 
+ *    <br>HIView Note: This should not be called in a composited window.
  *  
  *  Mac OS X threading:
  *    Not thread safe
@@ -3512,8 +3963,27 @@ enum {
 /*
  *  GetControlBounds()
  *  
+ *  Discussion:
+ *    Returns the bounds of a control, assumed to be in port
+ *    coordinates. 
+ *    
+ *    HIView Notes: When called in a composited window, this routine
+ *    returns the view's frame, i.e. it is equivalent to calling
+ *    HIViewGetFrame.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    control:
+ *      The control to query
+ *    
+ *    bounds:
+ *      A pointer to a Quickdraw rectangle to be filled in by this call.
+ *  
+ *  Result:
+ *    A pointer to the rectangle passed in bounds.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3559,8 +4029,24 @@ GetControlHilite(ControlRef control)                          AVAILABLE_MAC_OS_X
 /*
  *  GetControlOwner()
  *  
+ *  Discussion:
+ *    Returns the window a control is bound to, or NULL if the control
+ *    is not currently attached to any window.
+ *    
+ *    HIView replacement: HIViewGetWindow (Mac OS X 10.3 or later).
+ *    Either call will work in a composited or non-composited view.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    control:
+ *      The control to query
+ *  
+ *  Result:
+ *    A window reference, or NULL if the control is not attached to a
+ *    window
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework
@@ -3638,8 +4124,26 @@ SetControlDataHandle(
 /*
  *  SetControlBounds()
  *  
+ *  Discussion:
+ *    Sets the bounds of a control, assumed to be in port coordinates.
+ *    
+ *    
+ *    HIView Notes: When called in a composited window, this routine
+ *    sets the view's frame, i.e. it is equivalent to calling
+ *    HIViewSetFrame. The view will be invalidated as necessary in a
+ *    composited window. HIViewSetFrame is the recommended call in that
+ *    environment.
+ *  
  *  Mac OS X threading:
  *    Not thread safe
+ *  
+ *  Parameters:
+ *    
+ *    control:
+ *      The control to query
+ *    
+ *    bounds:
+ *      A pointer to a Quickdraw rectangle to be used by this call.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in Carbon.framework

@@ -19,6 +19,8 @@
  * 
  * @APPLE_LICENSE_HEADER_END@
  */
+#ifndef __FENV_H__
+#define __FENV_H__
 
 #if defined (__ppc__)
 #include "architecture/ppc/fenv.h"
@@ -27,3 +29,5 @@
 #else
 #error Unknown architecture
 #endif
+
+#endif /* __FENV_H__ */

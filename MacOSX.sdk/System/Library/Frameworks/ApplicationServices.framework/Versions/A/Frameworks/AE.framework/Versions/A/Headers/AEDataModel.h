@@ -3,9 +3,9 @@
  
      Contains:   AppleEvent Data Model Interfaces.
  
-     Version:    AppleEvents-242~1
+     Version:    AppleEvents-275~1
  
-     Copyright:  © 1996-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1996-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -99,6 +99,11 @@ enum {
   typeMachPort                  = 'port'
 };
 
+/* Targeting applications by bundle ID is only available in Mac OS X 10.3 or later. */
+enum {
+  typeApplicationBundleID       = 'bund'
+};
+
 /* Keywords for Apple event attributes */
 enum {
   keyTransactionIDAttr          = 'tran',
@@ -112,7 +117,8 @@ enum {
   keyEventSourceAttr            = 'esrc', /* this attribute is read only - returned as typeShortInteger */
   keyMissedKeywordAttr          = 'miss', /* this attribute is read only */
   keyOriginalAddressAttr        = 'from', /* new in 1.0.1 */
-  keyAcceptTimeoutAttr          = 'actm' /* new for Mac OS X */
+  keyAcceptTimeoutAttr          = 'actm', /* new for Mac OS X */
+  keyReplyRequestedAttr         = 'repq' /* Was a reply requested for this event - returned as typeBoolean */
 };
 
 /* These bits are specified in the keyXMLDebuggingAttr (an SInt32) */
@@ -186,7 +192,7 @@ enum {
 };
 
 /* 
- * Web Services Proxy support.  Available only on systems > 10.1.x.
+ * Web Services Proxy support.  Available only on Mac OS X 10.2 or later.
  * These constants should be added as attributes on the event that is
  * being sent (not part of the direct object.)
  */
@@ -421,6 +427,9 @@ typedef AECoerceDescUPP                 AECoercionHandlerUPP;
 /*
  *  AEInstallCoercionHandler()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -439,6 +448,9 @@ AEInstallCoercionHandler(
 /*
  *  AERemoveCoercionHandler()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -455,6 +467,9 @@ AERemoveCoercionHandler(
 
 /*
  *  AEGetCoercionHandler()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -477,6 +492,9 @@ AEGetCoercionHandler(
 /*
  *  AECoercePtr()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -493,6 +511,9 @@ AECoercePtr(
 
 /*
  *  AECoerceDesc()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -517,6 +538,9 @@ AECoerceDesc(
 /*
  *  AEInitializeDesc()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.4 and later
@@ -537,6 +561,9 @@ AEInitializeDesc(AEDesc * desc)                               AVAILABLE_MAC_OS_X
 /*
  *  AECreateDesc()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -553,6 +580,9 @@ AECreateDesc(
 /*
  *  AEDisposeDesc()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -564,6 +594,9 @@ AEDisposeDesc(AEDesc * theAEDesc)                             AVAILABLE_MAC_OS_X
 
 /*
  *  AEDuplicateDesc()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -591,6 +624,9 @@ typedef CALLBACK_API( void , AEDisposeExternalProcPtr )(const void *dataPtr, Siz
 typedef STACK_UPP_TYPE(AEDisposeExternalProcPtr)                AEDisposeExternalUPP;
 /*
  *  AECreateDescFromExternalPtr()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
@@ -620,6 +656,9 @@ AECreateDescFromExternalPtr(
 /*
  *  AECreateList()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -636,6 +675,9 @@ AECreateList(
 /*
  *  AECountItems()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -649,6 +691,9 @@ AECountItems(
 
 /*
  *  AEPutPtr()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -667,6 +712,9 @@ AEPutPtr(
 /*
  *  AEPutDesc()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -682,6 +730,9 @@ AEPutDesc(
 /*
  *  AEGetNthPtr()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -692,15 +743,18 @@ AEGetNthPtr(
   const AEDescList *  theAEDescList,
   long                index,
   DescType            desiredType,
-  AEKeyword *         theAEKeyword,
-  DescType *          typeCode,
+  AEKeyword *         theAEKeyword,        /* can be NULL */
+  DescType *          typeCode,            /* can be NULL */
   void *              dataPtr,
   Size                maximumSize,
-  Size *              actualSize)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Size *              actualSize)          /* can be NULL */  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  AEGetNthDesc()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -712,12 +766,15 @@ AEGetNthDesc(
   const AEDescList *  theAEDescList,
   long                index,
   DescType            desiredType,
-  AEKeyword *         theAEKeyword,
+  AEKeyword *         theAEKeyword,        /* can be NULL */
   AEDesc *            result)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  AESizeOfNthItem()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -728,12 +785,15 @@ extern OSErr
 AESizeOfNthItem(
   const AEDescList *  theAEDescList,
   long                index,
-  DescType *          typeCode,
-  Size *              dataSize)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DescType *          typeCode,            /* can be NULL */
+  Size *              dataSize)            /* can be NULL */  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  AEGetArray()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -754,6 +814,9 @@ AEGetArray(
 /*
  *  AEPutArray()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -771,6 +834,9 @@ AEPutArray(
 
 /*
  *  AEDeleteItem()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -796,6 +862,9 @@ AEDeleteItem(
 ************************************************************************/
 /*
  *  AECheckIsRecord()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -835,6 +904,9 @@ AECheckIsRecord(const AEDesc * theDesc)                       AVAILABLE_MAC_OS_X
 /*
  *  AECreateAppleEvent()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -844,7 +916,7 @@ extern OSErr
 AECreateAppleEvent(
   AEEventClass           theAEEventClass,
   AEEventID              theAEEventID,
-  const AEAddressDesc *  target,
+  const AEAddressDesc *  target,                /* can be NULL */
   AEReturnID             returnID,
   AETransactionID        transactionID,
   AppleEvent *           result)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
@@ -860,6 +932,9 @@ AECreateAppleEvent(
 **************************************************************************/
 /*
  *  AEPutParamPtr()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -878,6 +953,9 @@ AEPutParamPtr(
 /*
  *  AEPutParamDesc()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -893,6 +971,9 @@ AEPutParamDesc(
 /*
  *  AEGetParamPtr()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -903,14 +984,17 @@ AEGetParamPtr(
   const AppleEvent *  theAppleEvent,
   AEKeyword           theAEKeyword,
   DescType            desiredType,
-  DescType *          typeCode,
+  DescType *          actualType,          /* can be NULL */
   void *              dataPtr,
   Size                maximumSize,
-  Size *              actualSize)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Size *              actualSize)          /* can be NULL */  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  AEGetParamDesc()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -928,6 +1012,9 @@ AEGetParamDesc(
 /*
  *  AESizeOfParam()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -937,12 +1024,15 @@ extern OSErr
 AESizeOfParam(
   const AppleEvent *  theAppleEvent,
   AEKeyword           theAEKeyword,
-  DescType *          typeCode,
-  Size *              dataSize)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DescType *          typeCode,            /* can be NULL */
+  Size *              dataSize)            /* can be NULL */  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  AEDeleteParam()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -966,6 +1056,9 @@ AEDeleteParam(
 /*
  *  AEGetAttributePtr()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -976,14 +1069,17 @@ AEGetAttributePtr(
   const AppleEvent *  theAppleEvent,
   AEKeyword           theAEKeyword,
   DescType            desiredType,
-  DescType *          typeCode,
+  DescType *          typeCode,            /* can be NULL */
   void *              dataPtr,
   Size                maximumSize,
-  Size *              actualSize)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Size *              actualSize)          /* can be NULL */  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  AEGetAttributeDesc()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -1001,6 +1097,9 @@ AEGetAttributeDesc(
 /*
  *  AESizeOfAttribute()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1010,12 +1109,15 @@ extern OSErr
 AESizeOfAttribute(
   const AppleEvent *  theAppleEvent,
   AEKeyword           theAEKeyword,
-  DescType *          typeCode,
-  Size *              dataSize)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  DescType *          typeCode,            /* can be NULL */
+  Size *              dataSize)            /* can be NULL */  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  AEPutAttributePtr()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -1033,6 +1135,9 @@ AEPutAttributePtr(
 
 /*
  *  AEPutAttributeDesc()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -1068,6 +1173,9 @@ AEPutAttributeDesc(
 /*
  *  AESizeOfFlattenedDesc()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.4 and later
@@ -1091,6 +1199,9 @@ AESizeOfFlattenedDesc(const AEDesc * theAEDesc)               AVAILABLE_MAC_OS_X
 
 /*
  *  AEFlattenDesc()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -1116,6 +1227,9 @@ AEFlattenDesc(
 /*
  *  AEUnflattenDesc()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.4 and later
@@ -1139,6 +1253,9 @@ AEUnflattenDesc(
 /*
  *  AEGetDescData()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1154,6 +1271,9 @@ AEGetDescData(
 /*
  *  AEGetDescDataSize()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
@@ -1165,6 +1285,9 @@ AEGetDescDataSize(const AEDesc * theAEDesc)                   AVAILABLE_MAC_OS_X
 
 /*
  *  AEReplaceDescData()
+ *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
  *  
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
@@ -1189,6 +1312,9 @@ AEReplaceDescData(
 /*
  *  AEGetDescDataRange()
  *  
+ *  Mac OS X threading:
+ *    Thread safe since version 10.2
+ *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
  *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
@@ -1212,7 +1338,7 @@ typedef STACK_UPP_TYPE(AEEventHandlerProcPtr)                   AEEventHandlerUP
  *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib on Mac OS X
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern AEDisposeExternalUPP
@@ -1234,7 +1360,7 @@ NewAEEventHandlerUPP(AEEventHandlerProcPtr userRoutine)       AVAILABLE_MAC_OS_X
  *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib on Mac OS X
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
@@ -1256,7 +1382,7 @@ DisposeAEEventHandlerUPP(AEEventHandlerUPP userUPP)           AVAILABLE_MAC_OS_X
  *  
  *  Availability:
  *    Mac OS X:         in version 10.2 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib on Mac OS X
+ *    CarbonLib:        not available in CarbonLib 1.x, is available on Mac OS X version 10.2 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void

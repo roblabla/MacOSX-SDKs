@@ -1,5 +1,5 @@
 /*	CFURL.h
-	Copyright 1998-2002, Apple, Inc. All rights reserved.
+	Copyright (c) 1998-2003, Apple, Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFURL__)
@@ -53,6 +53,22 @@ CFDataRef CFURLCreateData(CFAllocatorRef allocator, CFURLRef url, CFStringEncodi
 /* Any escape sequences in URLString will be interpreted via UTF-8. */
 CF_EXPORT
 CFURLRef CFURLCreateWithString(CFAllocatorRef allocator, CFStringRef URLString, CFURLRef baseURL);
+
+#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
+
+/* Create an absolute URL directly, without requiring the extra step */
+/* of calling CFURLCopyAbsoluteURL().  If useCompatibilityMode is  */
+/* true, the rules historically used on the web are used to resolve */
+/* relativeString against baseURL - these rules are generally listed */
+/* in the RFC as optional or alternate interpretations.  Otherwise, */
+/* the strict rules from the RFC are used.  The major differences are */
+/* that in compatibility mode, we are lenient of the scheme appearing */
+/* in relative portion, leading "../" components are removed from the */
+/* final URL's path, and if the relative portion contains only */
+/* resource specifier pieces (query, parameters, and fragment), then */
+/* the last path component of the base URL will not be deleted  */
+CFURLRef CFURLCreateAbsoluteURLWithBytes(CFAllocatorRef alloc, const UInt8 *relativeURLBytes, CFIndex length, CFStringEncoding encoding, CFURLRef baseURL, Boolean useCompatibilityMode) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+#endif
 
 /* filePath should be the URL's path expressed as a path of the type */
 /* fsType.  If filePath is not absolute, the resulting URL will be */
@@ -244,6 +260,97 @@ CFURLRef CFURLCreateCopyAppendingPathExtension(CFAllocatorRef allocator, CFURLRe
 CF_EXPORT
 CFURLRef CFURLCreateCopyDeletingPathExtension(CFAllocatorRef allocator, CFURLRef url);
 
+#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
+/* Fills buffer with the bytes for url, returning the number of bytes */
+/* filled.  If buffer is of insufficient size, returns -1 and no bytes */
+/* are placed in buffer.  If buffer is NULL, the needed length is */
+/* computed and returned.  The returned bytes are the original bytes */ 
+/* from which the URL was created; if the URL was created from a */
+/* string, the bytes will be the bytes of the string encoded via UTF-8  */
+CFIndex CFURLGetBytes(CFURLRef url, UInt8 *buffer, CFIndex bufferLength) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+typedef enum {
+	kCFURLComponentScheme = 1,
+	kCFURLComponentNetLocation = 2,
+	kCFURLComponentPath = 3,
+	kCFURLComponentResourceSpecifier = 4,
+
+	kCFURLComponentUser = 5,
+	kCFURLComponentPassword = 6,
+	kCFURLComponentUserInfo = 7,
+	kCFURLComponentHost = 8,
+	kCFURLComponentPort = 9,
+	kCFURLComponentParameterString = 10,
+	kCFURLComponentQuery = 11,
+	kCFURLComponentFragment = 12
+} CFURLComponentType;
+ 
+/* 
+Gets the  range of the requested component in the bytes of url, as
+returned by CFURLGetBytes().  This range is only good for use in the
+bytes returned by CFURLGetBytes!
+
+If non-NULL, rangeIncludingSeparators gives the range of component
+including the sequences that separate component from the previous and
+next components.  If there is no previous or next component, that end of
+rangeIncludingSeparators will match the range of the component itself.
+If url does not contain the given component type, (kCFNotFound, 0) is
+returned, and rangeIncludingSeparators is set to the location where the
+component would be inserted.  Some examples -
+
+For the URL http://www.apple.com/hotnews/
+
+Component           returned range      rangeIncludingSeparators
+scheme              (0, 4)              (0, 7)
+net location        (7, 13)             (4, 16)
+path                (20, 9)             (20, 9)    
+resource specifier  (kCFNotFound, 0)    (29, 0)
+user                (kCFNotFound, 0)    (7, 0)
+password            (kCFNotFound, 0)    (7, 0)
+user info           (kCFNotFound, 0)    (7, 0)
+host                (7, 13)             (4, 16)
+port                (kCFNotFound, 0)    (20, 0)
+parameter           (kCFNotFound, 0)    (29, 0)
+query               (kCFNotFound, 0)    (29, 0)
+fragment            (kCFNotFound, 0)    (29, 0)
+
+
+For the URL ./relPath/file.html#fragment
+
+Component           returned range      rangeIncludingSeparators
+scheme              (kCFNotFound, 0)    (0, 0)
+net location        (kCFNotFound, 0)    (0, 0)
+path                (0, 19)             (0, 20)
+resource specifier  (20, 8)             (19, 9)
+user                (kCFNotFound, 0)    (0, 0)
+password            (kCFNotFound, 0)    (0, 0)
+user info           (kCFNotFound, 0)    (0, 0)
+host                (kCFNotFound, 0)    (0, 0)
+port                (kCFNotFound, 0)    (0, 0)
+parameter           (kCFNotFound, 0)    (19, 0)
+query               (kCFNotFound, 0)    (19, 0)
+fragment            (20, 8)             (19, 9)
+
+
+For the URL scheme://user:pass@host:1/path/path2/file.html;params?query#fragment
+
+Component           returned range      rangeIncludingSeparators
+scheme              (0, 6)              (0, 9)
+net location        (9, 16)             (6, 19)
+path                (25, 21)            (25, 22) 
+resource specifier  (47, 21)            (46, 22)
+user                (9, 4)              (6, 8)
+password            (14, 4)             (13, 6)
+user info           (9, 9)              (6, 13)
+host                (19, 4)             (18, 6)
+port                (24, 1)             (23, 2)
+parameter           (47, 6)             (46, 8)
+query               (54, 5)             (53, 7)
+fragment            (60, 8)             (59, 9)
+*/
+CFRange CFURLGetByteRangeForComponent(CFURLRef url, CFURLComponentType component, CFRange *rangeIncludingSeparators) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+#endif
+
 /* Returns a string with any percent escape sequences that do NOT */
 /* correspond to characters in charactersToLeaveEscaped with their */
 /* equivalent.  Returns NULL on failure (if an invalid percent sequence */
@@ -254,6 +361,11 @@ CFURLRef CFURLCreateCopyDeletingPathExtension(CFAllocatorRef allocator, CFURLRef
 CF_EXPORT
 CFStringRef CFURLCreateStringByReplacingPercentEscapes(CFAllocatorRef allocator, CFStringRef originalString, CFStringRef charactersToLeaveEscaped);
 
+#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
+/* As above, but allows you to specify the encoding to use when interpreting percent escapes */
+CF_EXPORT
+CFStringRef CFURLCreateStringByReplacingPercentEscapesUsingEncoding(CFAllocatorRef allocator, CFStringRef origString, CFStringRef charsToLeaveEscaped, CFStringEncoding encoding) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+#endif
 
 /* Creates a copy or originalString, replacing certain characters with */
 /* the equivalent percent escape sequence based on the encoding specified. */

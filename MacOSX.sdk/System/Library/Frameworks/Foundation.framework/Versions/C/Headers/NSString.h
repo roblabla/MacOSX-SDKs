@@ -1,5 +1,5 @@
 /*	NSString.h
-	Copyright 1994-2002, Apple, Inc. All rights reserved.
+	Copyright (c) 1994-2003, Apple, Inc. All rights reserved.
 */
 
 typedef unsigned short unichar;
@@ -15,15 +15,17 @@ FOUNDATION_EXPORT NSString * const NSParseErrorException; // raised by -property
 
 #define NSMaximumStringLength	(INT_MAX-1)
 
+/* These options apply to the various search/find and comparison methods (except where noted).
+*/
 enum {
     NSCaseInsensitiveSearch = 1,
-    NSLiteralSearch = 2,
-    NSBackwardsSearch = 4,
-    NSAnchoredSearch = 8
+    NSLiteralSearch = 2,		/* Exact character-by-character equivalence */
+    NSBackwardsSearch = 4,		/* Search from end of source string */
+    NSAnchoredSearch = 8,		/* Search is limited to start (or end, if NSBackwardsSearch) of source string */
+    NSNumericSearch = 64		/* Added in 10.2; Numbers within strings are compared using numeric value, that is, Foo2.txt < Foo7.txt < Foo25.txt; only applies to compare methods, not find */
 };
 
-/* Note that in addition to the values explicitly listed below, NSStringEncoding
-supports encodings provided by CFString.
+/* Note that in addition to the values explicitly listed below, NSStringEncoding supports encodings provided by CFString.
 See CFStringEncodingExt.h for a list of these encodings.
 See CFString.h for functions which convert between NSStringEncoding and CFStringEncoding.
 */
@@ -114,6 +116,11 @@ FOUNDATION_EXPORT NSString * const NSCharacterConversionException;
 - (void)getLineStart:(unsigned *)startPtr end:(unsigned *)lineEndPtr contentsEnd:(unsigned *)contentsEndPtr forRange:(NSRange)range;
 - (NSRange)lineRangeForRange:(NSRange)range;
 
+#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (void)getParagraphStart:(unsigned *)startPtr end:(unsigned *)parEndPtr contentsEnd:(unsigned *)contentsEndPtr forRange:(NSRange)range;
+- (NSRange)paragraphRangeForRange:(NSRange)range;
+#endif
+
 - (NSString *)description;
 
 - (unsigned)hash;
@@ -135,13 +142,15 @@ FOUNDATION_EXPORT NSString * const NSCharacterConversionException;
 
 - (const char *)UTF8String;	// Convenience to return null-terminated UTF8 representation
 
-- (const char *)cString;
+/* The "cString" methods are discouraged and will be deprecated in the near future. These methods use [NSString defaultCStringEncoding] as the encoding to convert to, which means the results depend on the user's language and potentially other settings. This might be appropriate in some cases, but often these methods are misused, resulting in issues when running in languages other then English. UTF8String in general is a much better choice when converting arbitrary NSStrings into 8-bit representations.
+*/
+- (const char *)cString;		// Will raise if NSString cannot be converted to [NSString defaultCStringEncoding]
 - (const char *)lossyCString;
-- (unsigned)cStringLength;
-- (void)getCString:(char *)bytes;
-- (void)getCString:(char *)bytes maxLength:(unsigned)maxLength;
-- (void)getCString:(char *)bytes maxLength:(unsigned)maxLength range:(NSRange)aRange remainingRange:(NSRangePointer)leftoverRange;
-+ (NSStringEncoding)defaultCStringEncoding;
+- (unsigned)cStringLength;		// Will raise if NSString cannot be converted to [NSString defaultCStringEncoding]
+- (void)getCString:(char *)bytes;	// Will raise if NSString cannot be converted to [NSString defaultCStringEncoding]
+- (void)getCString:(char *)bytes maxLength:(unsigned)maxLength;		// Will raise if NSString cannot be converted to [NSString defaultCStringEncoding]
+- (void)getCString:(char *)bytes maxLength:(unsigned)maxLength range:(NSRange)aRange remainingRange:(NSRangePointer)leftoverRange;	// Will raise if NSString cannot be converted to [NSString defaultCStringEncoding]
++ (NSStringEncoding)defaultCStringEncoding;	
 
 - (BOOL)writeToFile:(NSString *)path atomically:(BOOL)useAuxiliaryFile;
 - (BOOL)writeToURL:(NSURL *)url atomically:(BOOL)atomically; // the atomically flag is ignored if url is not of a type that can be accessed atomically
@@ -149,6 +158,8 @@ FOUNDATION_EXPORT NSString * const NSCharacterConversionException;
 + (const NSStringEncoding *)availableStringEncodings;
 + (NSString *)localizedNameOfStringEncoding:(NSStringEncoding)encoding;
 
+/* In general creation methods in NSString do not apply to subclassers, as subclassers are assumed to provide their own init methods which create the string in the way the subclass wishes.  Designated initializers of NSString are thus init and initWithCoder:.
+*/
 + (id)string;
 + (id)stringWithString:(NSString *)string;
 + (id)stringWithCharacters:(const unichar *)characters length:(unsigned)length;
@@ -161,11 +172,12 @@ FOUNDATION_EXPORT NSString * const NSCharacterConversionException;
 + (id)localizedStringWithFormat:(NSString *)format, ...;
 
 - (id)init;
-- (id)initWithCharactersNoCopy:(unichar *)characters length:(unsigned)length freeWhenDone:(BOOL)freeBuffer;
+- (id)initWithCharactersNoCopy:(unichar *)characters length:(unsigned)length freeWhenDone:(BOOL)freeBuffer;	/* "NoCopy" is a hint */
 - (id)initWithCharacters:(const unichar *)characters length:(unsigned)length;
-- (id)initWithCStringNoCopy:(char *)bytes length:(unsigned)length freeWhenDone:(BOOL)freeBuffer;
-- (id)initWithCString:(const char *)bytes length:(unsigned)length;
-- (id)initWithCString:(const char *)bytes;
+- (id)initWithBytes:(const void *)bytes length:(unsigned)len encoding:(NSStringEncoding)encoding;
+#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (id)initWithBytesNoCopy:(void *)bytes length:(unsigned)len encoding:(NSStringEncoding)encoding freeWhenDone:(BOOL)freeBuffer;	/* "NoCopy" is a hint */
+#endif
 - (id)initWithUTF8String:(const char *)bytes;
 - (id)initWithString:(NSString *)aString;
 - (id)initWithFormat:(NSString *)format, ...;
@@ -175,6 +187,10 @@ FOUNDATION_EXPORT NSString * const NSCharacterConversionException;
 - (id)initWithData:(NSData *)data encoding:(NSStringEncoding)encoding;
 - (id)initWithContentsOfFile:(NSString *)path;
 - (id)initWithContentsOfURL:(NSURL *)url;
+
+- (id)initWithCStringNoCopy:(char *)bytes length:(unsigned)length freeWhenDone:(BOOL)freeBuffer;	/* Best to avoid this, will be removed */
+- (id)initWithCString:(const char *)bytes length:(unsigned)length;	/* Best to avoid this, will be removed */
+- (id)initWithCString:(const char *)bytes;				/* Best to avoid this, will be removed */
 
 @end
 
@@ -196,7 +212,7 @@ FOUNDATION_EXPORT NSString * const NSCharacterConversionException;
 - (id)initWithCapacity:(unsigned)capacity;
 
 #if MAC_OS_X_VERSION_10_2 <= MAC_OS_X_VERSION_MAX_ALLOWED
-/* This method replaces all occurrences of the target string with the replacement string, in the specified range of the receiver string, and returns the number of replacements. NSBackwardsSearch means the search is done from the end of the range (the results could be different); NSAnchoredSearch means only anchored (but potentially multiple) instances will be replaced. NSLiteralSearch and NSCaseInsensitiveSearch also apply. Use NSMakeRange(0, [receiver length]) to process whole string.
+/* This method replaces all occurrences of the target string with the replacement string, in the specified range of the receiver string, and returns the number of replacements. NSBackwardsSearch means the search is done from the end of the range (the results could be different); NSAnchoredSearch means only anchored (but potentially multiple) instances will be replaced. NSLiteralSearch and NSCaseInsensitiveSearch also apply. NSNumericSearch is ignored. Use NSMakeRange(0, [receiver length]) to process whole string. 
 */
 - (unsigned int)replaceOccurrencesOfString:(NSString *)target withString:(NSString *)replacement options:(unsigned)opts range:(NSRange)searchRange;
 #endif

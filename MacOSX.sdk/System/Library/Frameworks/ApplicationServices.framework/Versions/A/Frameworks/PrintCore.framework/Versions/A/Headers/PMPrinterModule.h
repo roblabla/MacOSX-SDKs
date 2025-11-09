@@ -267,6 +267,7 @@ typedef const PMInterface*  PMInterfaceRef;
 #define Invoice					CFSTR( "invoice" )
 #define USLetter				CFSTR( "na-letter" )
 #define USLegal					CFSTR( "na-legal" ) 
+#define Tabloid					CFSTR( "tabloid" )
 #define Ledger					CFSTR( "ledger" )
 #define Folio					CFSTR( "folio" )
 #define Quarto					CFSTR( "quarto" )

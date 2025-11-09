@@ -3,9 +3,9 @@
  
      Contains:   Gestalt Interfaces.
  
-     Version:    CarbonCore-472~1
+     Version:    CarbonCore-545~1
  
-     Copyright:  © 1988-2002 by Apple Computer, Inc.  All rights reserved
+     Copyright:  © 1988-2003 by Apple Computer, Inc.  All rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -93,6 +93,7 @@
 #define gestaltCFM99Present 			2					/*  True if the CFM-99 features are present.  */
 #define gestaltCFM99PresentMask 		0x0004
 
+#define gestaltProcessorCacheLineSize 	'csiz'				/*  The size, in bytes, of the processor cache line.  */
 #define gestaltCollectionMgrVersion 	'cltn'				/*  Collection Manager version  */
 #define gestaltColorMatchingAttr 		'cmta'				/*  ColorSync attributes  */
 #define gestaltHighLevelMatching 		0
@@ -151,8 +152,10 @@
 #define gestaltCPUG4 					0x010C				/*  Max  */
 #define gestaltCPUG47450 				0x0110				/*  Vger , Altivec  */
 
-#define gestaltCPUApollo 				0x0111				/*  Apollo , Altivec  */
+#define gestaltCPUApollo 				0x0111				/*  Apollo , Altivec, G4 7455  */
+#define gestaltCPUG47447 				0x0112
 #define gestaltCPU750FX 				0x0120				/*  Sahara,G3 like thing  */
+#define gestaltCPU970 					0x0139
 
 															/*  x86 CPUs all start with 'i' in the high nybble  */
 #define gestaltCPU486 					'i486'
@@ -391,6 +394,13 @@
 #define gestaltPortable2001ISOKbd 		203					/*  (0xCB) PowerBook and iBook International (ISO) Keyboard with 2nd cmd key right & function key moves.    */
 #define gestaltPortable2001JISKbd 		207					/*  (0xCF) PowerBook and iBook Japanese (JIS) Keyboard with function key moves.                    */
 
+#define gestaltUSBProF16ANSIKbd 		34					/*  (0x22) USB Pro Keyboard w/ F16 key Domestic (ANSI) Keyboard  */
+#define gestaltUSBProF16ISOKbd 			35					/*  (0x23) USB Pro Keyboard w/ F16 key International (ISO) Keyboard  */
+#define gestaltUSBProF16JISKbd 			36					/*  (0x24) USB Pro Keyboard w/ F16 key Japanese (JIS) Keyboard  */
+#define gestaltProF16ANSIKbd 			31					/*  (0x1F) Pro Keyboard w/F16 key Domestic (ANSI) Keyboard  */
+#define gestaltProF16ISOKbd 			32					/*  (0x20) Pro Keyboard w/F16 key International (ISO) Keyboard  */
+#define gestaltProF16JISKbd 			33					/*  (0x21) Pro Keyboard w/F16 key Japanese (JIS) Keyboard  */
+
 #define gestaltUDFSupport 				'kudf'				/*     Used for communication between UDF implementations */
 #define gestaltLowMemorySize 			'lmem'				/*  size of low memory area  */
 #define gestaltLogicalRAMSize 			'lram'				/*  logical ram size  */
@@ -557,6 +567,7 @@
 #define gestaltMenuMgrRetainsIconRefBit  3					/*  SetMenuItemIconHandle, when passed an IconRef, calls AcquireIconRef */
 #define gestaltMenuMgrSendsMenuBoundsToDefProcBit  4		/*  kMenuSizeMsg and kMenuPopUpMsg have menu bounding rect information */
 #define gestaltMenuMgrMoreThanFiveMenusDeepBit  5			/*  the Menu Manager supports hierarchical menus more than five deep */
+#define gestaltMenuMgrCGImageMenuTitleBit  6				/*  SetMenuTitleIcon supports CGImageRefs */
 															/*  masks for the above bits */
 #define gestaltMenuMgrPresentMask 		0x00000001
 #define gestaltMenuMgrAquaLayoutMask 	0x00000002
@@ -564,6 +575,7 @@
 #define gestaltMenuMgrRetainsIconRefMask  0x00000008
 #define gestaltMenuMgrSendsMenuBoundsToDefProcMask  0x00000010
 #define gestaltMenuMgrMoreThanFiveMenusDeepMask  0x00000020
+#define gestaltMenuMgrCGImageMenuTitleMask  0x00000040
 
 #define gestaltMultipleUsersState 		'mfdr'				/*  Gestalt selector returns MultiUserGestaltHandle (in Folders.h) */
 #define gestaltMachineIcon 				'micn'				/*  machine icon  */
@@ -672,7 +684,8 @@
 #define gestaltPCCardHasPowerControl 	2					/*     PCCardSetPowerLevel is supported */
 #define gestaltPCCardSupportsCardBus 	3					/*     CardBus is supported */
 
-#define gestaltProcClkSpeed 			'pclk'				/*  processor clock speed in hertz  */
+#define gestaltProcClkSpeed 			'pclk'				/*  processor clock speed in hertz (an unsigned long)  */
+#define gestaltProcClkSpeedMHz 			'mclk'				/*  processor clock speed in megahertz (an unsigned long)  */
 #define gestaltPCXAttr 					'pcxg'				/*  PC Exchange attributes  */
 #define gestaltPCXHas8and16BitFAT 		0					/*  PC Exchange supports both 8 and 16 bit FATs  */
 #define gestaltPCXHasProDOS 			1					/*  PC Exchange supports ProDOS  */
@@ -714,6 +727,10 @@
 #define gestaltPowerPCHasDCBAInstruction  3					/*  has dcba instruction  */
 #define gestaltPowerPCHasVectorInstructions  4				/*  has vector instructions  */
 #define gestaltPowerPCHasDataStreams 	5					/*  has dst, dstt, dstst, dss, and dssall instructions  */
+#define gestaltPowerPCHas64BitSupport 	6					/*  double word LSU/ALU, etc.  */
+#define gestaltPowerPCHasDCBTStreams 	7					/*  TH field of DCBT recognized  */
+#define gestaltPowerPCASArchitecture 	8					/*  chip uses new 'A/S' architecture  */
+#define gestaltPowerPCIgnoresDCBST 		9					/*   */
 
 #define gestaltProcessorType 			'proc'				/*  processor type  */
 #define gestalt68000 					1
@@ -788,6 +805,15 @@
 
 #define gestaltQuickTimeStreamingFeatures  'qtsf'
 #define gestaltQuickTimeStreamingVersion  'qtst'
+#define gestaltQuickTimeThreadSafeFeaturesAttr  'qtth'		/*  Quicktime thread safety attributes  */
+#define gestaltQuickTimeThreadSafeICM 	0
+#define gestaltQuickTimeThreadSafeMovieToolbox  1
+#define gestaltQuickTimeThreadSafeMovieImport  2
+#define gestaltQuickTimeThreadSafeMovieExport  3
+#define gestaltQuickTimeThreadSafeGraphicsImport  4
+#define gestaltQuickTimeThreadSafeGraphicsExport  5
+#define gestaltQuickTimeThreadSafeMoviePlayback  6
+
 #define gestaltQTVRMgrAttr 				'qtvr'				/*  QuickTime VR attributes                                */
 #define gestaltQTVRMgrPresent 			0					/*  QTVR API is present                                    */
 #define gestaltQTVRObjMoviesPresent 	1					/*  QTVR runtime knows about object movies                 */
@@ -795,7 +821,8 @@
 #define gestaltQTVRCubicPanosPresent 	3					/*  QTVR runtime knows about cubic panoramic movies        */
 
 #define gestaltQTVRMgrVers 				'qtvv'				/*  QuickTime VR version                                   */
-#define gestaltPhysicalRAMSize 			'ram '				/*  physical RAM size  */
+#define gestaltPhysicalRAMSize 			'ram '				/*  physical RAM size, in bytes  */
+#define gestaltPhysicalRAMSizeInMegabytes  'ramm'			/*  physical RAM size, scaled in megabytes  */
 #define gestaltRBVAddr 					'rbv '				/*  RBV base address   */
 #define gestaltROMSize 					'rom '				/*  rom size  */
 #define gestaltROMVersion 				'romv'				/*  rom version  */
@@ -904,8 +931,8 @@
 #define gestaltSysArchitecture 			'sysa'				/*  Native System Architecture  */
 #define gestalt68k 						1					/*  Motorola MC68k architecture  */
 #define gestaltPowerPC 					2					/*  IBM PowerPC architecture  */
-
 #define gestaltIntel 					10					/*  Intel x86 architecture  */
+
 #define gestaltSystemUpdateVersion 		'sysu'				/*  System Update version  */
 #define gestaltSystemVersion 			'sysv'				/*  system version */
 #define gestaltToolboxTable 			'tbtt'				/*   OS trap table base   */
@@ -971,6 +998,7 @@
 #define gestaltTSMgrVersion 			'tsmv'				/*  Text Services Mgr version, if present  */
 #define gestaltTSMgr15 					0x0150
 #define gestaltTSMgr20 					0x0200
+#define gestaltTSMgr22 					0x0220
 
 #define gestaltTSMgrAttr 				'tsma'				/*  Text Services Mgr attributes, if present  */
 #define gestaltTSMDisplayMgrAwareBit 	0					/*  TSM knows about display manager  */
@@ -1002,6 +1030,7 @@
 #define gestaltATSUUpdate4 				0x00050000			/*  ATSUI version in Mac OS X - SoftwareUpdate 1-4 for Mac OS 10.0.1 - 10.0.4  */
 #define gestaltATSUUpdate5 				0x00060000			/*  ATSUI version 2.3 in MacOS 10.1  */
 #define gestaltATSUUpdate6 				0x00070000			/*  ATSUI version 2.4 in MacOS 10.2  */
+#define gestaltATSUUpdate7 				0x00080000			/*  ATSUI version 2.5 in MacOS 10.3  */
 
 #define gestaltATSUFeatures 			'uisf'
 #define gestaltATSUTrackingFeature 		0x00000001			/*  feature introduced in ATSUI version 1.1  */
@@ -1022,6 +1051,13 @@
 #define gestaltATSUBatchBreakLinesFeature  0x00000010		/*  feature introduced in ATSUI version 2.4  */
 #define gestaltATSUTabSupportFeature 	0x00000010			/*  features introduced in ATSUI version 2.4  */
 #define gestaltATSUDirectAccess 		0x00000010			/*  features introduced in ATSUI version 2.4  */
+#define gestaltATSUDecimalTabFeature 	0x00000020			/*  feature introduced in ATSUI version 2.5  */
+#define gestaltATSUBiDiCursorPositionFeature  0x00000020	/*  feature introduced in ATSUI version 2.5  */
+#define gestaltATSUNearestCharLineBreakFeature  0x00000020	/*  feature introduced in ATSUI version 2.5  */
+#define gestaltATSUHighlightColorControlFeature  0x00000020	/*  feature introduced in ATSUI version 2.5  */
+#define gestaltATSUUnderlineOptionsStyleFeature  0x00000020	/*  feature introduced in ATSUI version 2.5  */
+#define gestaltATSUStrikeThroughStyleFeature  0x00000020	/*  feature introduced in ATSUI version 2.5  */
+#define gestaltATSUDropShadowStyleFeature  0x00000020		/*  feature introduced in ATSUI version 2.5  */
 
 #define gestaltUSBAttr 					'usb '				/*  USB Attributes  */
 #define gestaltUSBPresent 				0					/*  USB Support available  */
@@ -1078,7 +1114,12 @@
 #define gestaltHasSingleWindowModeBit 	8					/*  This system supports single window mode */
 #define gestaltHasSingleWindowModeMask 	0x00000100
 
-#if TARGET_OS_WIN32
+#define gestaltX86VectorUnit 			'x86v'
+#define gestaltX86VectorUnitNone 		0
+#define gestaltX86VectorUnitSSE2 		4
+#define gestaltX86VectorUnitSSE 		3
+#define gestaltX86VectorUnitMMX 		2
+
 #define gestaltX86Features 				'x86f'
 #define gestaltX86HasFPU 				0					/*  has an FPU that supports the 387 instructions */
 #define gestaltX86HasVME 				1					/*  supports Virtual-8086 Mode Extensions */
@@ -1090,7 +1131,6 @@
 #define gestaltX86HasMCE 				7					/*  supports Machine Check Exception */
 #define gestaltX86HasCX8 				8					/*  supports CMPXCHG8 instructions (Compare Exchange 8 bytes) */
 #define gestaltX86HasAPIC 				9					/*  contains local APIC */
-#define gestaltX86Reserved10 			10					/*  do not count on this bit value */
 #define gestaltX86HasSEP 				11					/*  supports fast system call (SysEnter Present) */
 #define gestaltX86HasMTRR 				12					/*  supports Memory Type Range Registers */
 #define gestaltX86HasPGE 				13					/*  supports Page Global Enable */
@@ -1099,10 +1139,18 @@
 															/*  If FPU bit is also set, supports FCMOVcc and FCOMI, too */
 #define gestaltX86HasPAT 				16					/*  supports Page Attribute Table */
 #define gestaltX86HasPSE36 				17					/*  supports 36-bit Page Size Extension */
+#define gestaltX86HasPSN 				18					/*  Processor Serial Number */
+#define gestaltX86HasCLFSH 				19					/*  CLFLUSH Instruction supported */
+#define gestaltX86Serviced20 			20					/*  do not count on this bit value */
+#define gestaltX86HasDS 				21					/*  Debug Store */
+#define gestaltX86ResACPI 				22					/*  Thermal Monitor, SW-controlled clock */
 #define gestaltX86HasMMX 				23					/*  supports MMX instructions */
 #define gestaltX86HasFXSR 				24					/*  Supports FXSAVE and FXRSTOR instructions (fast FP save/restore) */
-
-#endif  /* TARGET_OS_WIN32 */
+#define gestaltX86HasSSE 				25					/*  Streaming SIMD extensions */
+#define gestaltX86HasSSE2 				26					/*  Streaming SIMD extensions 2 */
+#define gestaltX86HasSS 				27					/*  Self-Snoop */
+#define gestaltX86HasHTT 				28					/*  Hyper-Threading Technology */
+#define gestaltX86HasTM 				29					/*  Thermal Monitor */
 
 #define gestaltTranslationAttr 			'xlat'				/*  Translation Manager attributes  */
 #define gestaltTranslationMgrExists 	0					/*  True if translation manager exists  */

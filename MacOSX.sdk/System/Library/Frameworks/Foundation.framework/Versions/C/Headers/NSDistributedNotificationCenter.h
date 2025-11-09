@@ -1,5 +1,5 @@
 /*	NSDistributedNotificationCenter.h
-	Copyright 1996-2002, Apple, Inc. All rights reserved.
+	Copyright (c) 1996-2003, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSNotification.h>
@@ -36,6 +36,17 @@ typedef enum {
 - (void)postNotificationName:(NSString *)name object:(NSString *)object userInfo:(NSDictionary *)userInfo deliverImmediately:(BOOL)deliverImmediately;
 // All other posting methods are covers of this one.  The deliverImmediately argument causes the notification to be received in the same manner as if matching registrants had registered with suspension
 // behavior NSNotificationSuspensionBehaviorDeliverImmediately.  The default in covers is deliverImmediately = NO (respect suspension behavior of registrants).
+
+#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
+
+enum {
+    NSNotificationDeliverImmediately = (1 << 0),
+    NSNotificationPostToAllSessions = (1 << 1)
+};
+
+- (void)postNotificationName:(NSString *)name object:(NSString *)object userInfo:(NSDictionary *)userInfo options:(unsigned)options;
+
+#endif
 
 - (void)setSuspended:(BOOL)suspended;
     // Called with suspended = YES, enables the variety of suspension behaviors enumerated above.  Called with suspended = NO disables them (immediate delivery of notifications is resumed).

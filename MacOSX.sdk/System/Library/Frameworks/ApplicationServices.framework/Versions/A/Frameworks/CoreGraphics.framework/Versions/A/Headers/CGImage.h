@@ -12,6 +12,7 @@ typedef struct CGImage *CGImageRef;
 #include <CoreGraphics/CGColorSpace.h>
 #include <CoreGraphics/CGDataProvider.h>
 #include <CoreFoundation/CFBase.h>
+#include <AvailabilityMacros.h>
 
 CG_EXTERN_C_BEGIN
 
@@ -22,7 +23,8 @@ enum CGImageAlphaInfo {
     kCGImageAlphaLast,               /* For example, non-premultiplied RGBA */
     kCGImageAlphaFirst,              /* For example, non-premultiplied ARGB */
     kCGImageAlphaNoneSkipLast,       /* Equivalent to kCGImageAlphaNone. */
-    kCGImageAlphaNoneSkipFirst
+    kCGImageAlphaNoneSkipFirst,
+    kCGImageAlphaOnly		     /* No color data, alpha data only */
 };
 typedef enum CGImageAlphaInfo CGImageAlphaInfo;
 
@@ -45,6 +47,13 @@ CG_EXTERN CGImageRef CGImageCreateWithJPEGDataProvider(CGDataProviderRef source,
 /* Create an image using `source', a data provider for PNG-encoded data. */
 
 CG_EXTERN CGImageRef CGImageCreateWithPNGDataProvider(CGDataProviderRef source, const float decode[], bool shouldInterpolate, CGColorRenderingIntent intent);
+
+/* Create a copy of `image', replacing the image's colorspace with
+ * `colorspace'.  Returns NULL if `image' is an image mask, or if the
+ * number of components of `colorspace' isn't the same as the number of
+ * components of the colorspace of `image'. */
+
+CG_EXTERN CGImageRef CGImageCreateCopyWithColorSpace(CGImageRef image, CGColorSpaceRef colorspace) AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /* Equivalent to `CFRetain(image)'. */
 

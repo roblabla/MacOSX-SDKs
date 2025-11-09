@@ -1,9 +1,7 @@
 /*
- * Copyright (c) 1998-2002 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2003 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
- * 
- * Copyright (c) 1999-2003 Apple Computer, Inc.  All Rights Reserved.
  * 
  * This file contains Original Code and/or Modifications of Original Code
  * as defined in and that are subject to the Apple Public Source License
@@ -22,6 +20,29 @@
  * 
  * @APPLE_LICENSE_HEADER_END@
  */
+
+#ifndef __OPEN_SOURCE__
+/*
+ *
+ *	$Id: IOUSBInterface.h,v 1.19 2003/08/20 19:41:40 nano Exp $
+ *
+ *	$Log: IOUSBInterface.h,v $
+ *	Revision 1.19  2003/08/20 19:41:40  nano
+ *	
+ *	Bug #:
+ *	New version's of Nima's USB Prober (2.2b17)
+ *	3382540  Panther: Ejecting a USB CardBus card can freeze a machine
+ *	3358482  Device Busy message with Modems and IOUSBFamily 201.2.14 after sleep
+ *	3385948  Need to implement device recovery on High Speed Transaction errors to full speed devices
+ *	3377037  USB EHCI: returnTransactions can cause unstable queue if transactions are aborted
+ *	
+ *	Also, updated most files to use the id/log functions of cvs
+ *	
+ *	Submitted by: nano
+ *	Reviewed by: rhoads/barryt/nano
+ *	
+ */
+#endif
 #ifndef _IOKIT_IOUSBINTERFACE_H
 #define _IOKIT_IOUSBINTERFACE_H
 

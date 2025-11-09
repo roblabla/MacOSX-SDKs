@@ -3,9 +3,9 @@
  
      Contains:   OSErr codes.
  
-     Version:    CarbonCore-472~1
+     Version:    CarbonCore-545~1
  
-     Copyright:  © 1985-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1985-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -340,7 +340,7 @@
 
 #define smCPUErr 						(-334)				/* Code revision is wrong */
 #define smsPointerNil 					(-335)				/* LPointer is nil From sOffsetData. If this error occurs; check sInfo rec for more information. */
-#define smNilsBlockErr 					(-336)				/* Nil sBlock error (Dont allocate and try to use a nil sBlock) */
+#define smNilsBlockErr 					(-336)				/* Nil sBlock error (Don't allocate and try to use a nil sBlock) */
 #define smSlotOOBErr 					(-337)				/* Slot out of bounds error */
 #define smSelOOBErr 					(-338)				/* Selector out of bounds error */
 #define smNewPErr 						(-339)				/* _NewPtr error */
@@ -722,6 +722,7 @@
 #define qtmlUninitialized 				(-2095)
 #define unsupportedOSErr 				(-2096)
 #define unsupportedProcessorErr 		(-2097)
+#define componentNotThreadSafeErr 		(-2098)				/*  component is not thread-safe */
 
 #define cannotFindAtomErr 				(-2101)
 #define notLeafAtomErr 					(-2102)
@@ -838,6 +839,9 @@
 #define tsmDocPropertyNotFoundErr 		(-2528)				/*  Requested TSM Document property not found  */
 #define tsmDocPropertyBufferTooSmallErr  (-2529)			/*  Buffer passed in for property value is too small  */
 #define tsmCantChangeForcedClassStateErr  (-2530)			/*  Enabled state of a TextService class has been forced and cannot be changed  */
+#define tsmComponentPropertyUnsupportedErr  (-2531)			/*  Component property unsupported (or failed to be set)  */
+#define tsmComponentPropertyNotFoundErr  (-2532)			/*  Component property not found  */
+#define tsmInputModeChangeFailedErr 	(-2533)				/*  Input Mode not changed  */
 
 															/*  Mixed Mode error codes  */
 #define mmInternalError 				(-2526)
@@ -1660,6 +1664,8 @@
 															/*     for the requested operation. */
 #define kATSUInvalidCallInsideCallbackErr  (-8904)			/*     A call was made within the context of a callback that could */
 															/*     potetially cause an infinite recursion */
+#define kATSUNoFontNameErr 				(-8905)				/*     This error is returned when either ATSUFindFontName() or ATSUGetIndFontName()  */
+															/*     function cannot find a corresponding font name given the input parameters */
 #define kATSULastErr 					(-8959)				/*     The last ATSUI error code. */
 
 #define codecErr 						(-8960)
@@ -1939,25 +1945,25 @@
 #define kModemPreferencesMissing 		(-14001)
 #define kModemScriptMissing 			(-14002)
 
-#define kTXNEndIterationErr 			(-22000)
-#define kTXNCannotAddFrameErr 			(-22001)
-#define kTXNInvalidFrameIDErr 			(-22002)
-#define kTXNIllegalToCrossDataBoundariesErr  (-22003)
-#define kTXNUserCanceledOperationErr 	(-22004)
-#define kTXNBadDefaultFileTypeWarning 	(-22005)
-#define kTXNCannotSetAutoIndentErr 		(-22006)
-#define kTXNRunIndexOutofBoundsErr 		(-22007)
-#define kTXNNoMatchErr 					(-22008)
-#define kTXNAttributeTagInvalidForRunErr  (-22009)			/* dataValue is set to this per invalid tag */
-#define kTXNSomeOrAllTagsInvalidForRunErr  (-22010)
-#define kTXNInvalidRunIndex 			(-22011)
-#define kTXNAlreadyInitializedErr 		(-22012)
-#define kTXNCannotTurnTSMOffWhenUsingUnicodeErr  (-22013)
-#define kTXNCopyNotAllowedInEchoModeErr  (-22014)
-#define kTXNDataTypeNotAllowedErr 		(-22015)
-#define kTXNATSUIIsNotInstalledErr 		(-22016)
-#define kTXNOutsideOfLineErr 			(-22017)
-#define kTXNOutsideOfFrameErr 			(-22018)
+#define kTXNEndIterationErr 			(-22000)			/*  Function was not able to iterate through the data contained by a text object */
+#define kTXNCannotAddFrameErr 			(-22001)			/*  Multiple frames are not currently supported in MLTE */
+#define kTXNInvalidFrameIDErr 			(-22002)			/*  The frame ID is invalid */
+#define kTXNIllegalToCrossDataBoundariesErr  (-22003)		/*  Offsets specify a range that crosses a data type boundary */
+#define kTXNUserCanceledOperationErr 	(-22004)			/*  A user canceled an operation before your application completed processing it */
+#define kTXNBadDefaultFileTypeWarning 	(-22005)			/*  The text file is not in the format you specified */
+#define kTXNCannotSetAutoIndentErr 		(-22006)			/*  Auto indentation is not available when word wrapping is enabled */
+#define kTXNRunIndexOutofBoundsErr 		(-22007)			/*  An index you supplied to a function is out of bounds */
+#define kTXNNoMatchErr 					(-22008)			/*  Returned by TXNFind when a match is not found */
+#define kTXNAttributeTagInvalidForRunErr  (-22009)			/*  Tag for a specific run is not valid (the tag's dataValue is set to this) */
+#define kTXNSomeOrAllTagsInvalidForRunErr  (-22010)			/*  At least one of the tags given is invalid */
+#define kTXNInvalidRunIndex 			(-22011)			/*  Index is out of range for that run */
+#define kTXNAlreadyInitializedErr 		(-22012)			/*  You already called the TXNInitTextension function */
+#define kTXNCannotTurnTSMOffWhenUsingUnicodeErr  (-22013)	/*  Your application tried to turn off the Text Services Manager when using Unicode */
+#define kTXNCopyNotAllowedInEchoModeErr  (-22014)			/*  Your application tried to copy text that was in echo mode */
+#define kTXNDataTypeNotAllowedErr 		(-22015)			/*  Your application specified a data type that MLTE does not allow */
+#define kTXNATSUIIsNotInstalledErr 		(-22016)			/*  Indicates that ATSUI is not installed on the system */
+#define kTXNOutsideOfLineErr 			(-22017)			/*  Indicates a value that is beyond the length of the line */
+#define kTXNOutsideOfFrameErr 			(-22018)			/*  Indicates a value that is outside of the text object's frame */
 
 #define printerStatusOpCodeNotSupportedErr  (-25280)
 #define errKCNotAvailable 				(-25291)
@@ -1994,6 +2000,10 @@
 
 #define kUCTSNoKeysAddedToObjectErr 	(-25342)
 #define kUCTSSearchListErr 				(-25343)
+
+#define kUCTokenizerIterationFinished 	(-25344)
+#define kUCTokenizerUnknownLang 		(-25345)
+#define kUCTokenNotFound 				(-25346)
 
 #define kMPIterationEndErr 				(-29275)
 #define kMPPrivilegedErr 				(-29276)

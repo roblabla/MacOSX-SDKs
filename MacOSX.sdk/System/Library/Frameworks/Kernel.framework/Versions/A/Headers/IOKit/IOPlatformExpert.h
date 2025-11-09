@@ -60,6 +60,8 @@ extern void PESetGMTTimeOfDay( long secs );
 #ifdef __cplusplus
 } /* extern "C" */
 
+#define kIOPlatformMapperPresentKey "IOPlatformMapperPresent"
+
 extern OSSymbol * gPlatformInterruptControllerName;
 
 class IORangeAllocator;
@@ -149,9 +151,10 @@ public:
 
     virtual IOByteCount savePanicInfo(UInt8 *buffer, IOByteCount length);
 
+    virtual OSString* createSystemSerialNumberString(OSData* myProperty);
+    
     OSMetaClassDeclareReservedUsed(IOPlatformExpert,  0);
-
-    OSMetaClassDeclareReservedUnused(IOPlatformExpert,  1);
+    OSMetaClassDeclareReservedUsed(IOPlatformExpert,  1);
     OSMetaClassDeclareReservedUnused(IOPlatformExpert,  2);
     OSMetaClassDeclareReservedUnused(IOPlatformExpert,  3);
     OSMetaClassDeclareReservedUnused(IOPlatformExpert,  4);
@@ -229,6 +232,7 @@ public:
 					       IOByteCount length);
 
     virtual IOByteCount savePanicInfo(UInt8 *buffer, IOByteCount length);
+    virtual OSString* createSystemSerialNumberString(OSData* myProperty);
 
     OSMetaClassDeclareReservedUnused(IODTPlatformExpert,  0);
     OSMetaClassDeclareReservedUnused(IODTPlatformExpert,  1);

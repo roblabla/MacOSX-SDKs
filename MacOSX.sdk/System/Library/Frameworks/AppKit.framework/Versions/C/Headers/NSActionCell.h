@@ -1,7 +1,7 @@
 /*
         NSActionCell.h
 	Application Kit
-	Copyright (c) 1994-2001, Apple Computer, Inc.
+	Copyright (c) 1994-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -34,6 +34,6 @@
 - (int)intValue;
 - (float)floatValue;
 - (double)doubleValue;
-- (void)setObjectValue:(id)obj;
+- (void)setObjectValue:(id<NSCopying>)obj;
 
 @end

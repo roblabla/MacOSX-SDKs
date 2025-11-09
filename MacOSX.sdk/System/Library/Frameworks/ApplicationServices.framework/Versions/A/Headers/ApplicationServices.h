@@ -3,9 +3,9 @@
  
      Contains:   Master include for ApplicationServices public framework
  
-     Version:    ApplicationServices-18~229
+     Version:    ApplicationServices-19~376
  
-     Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -38,6 +38,10 @@
 #include <HIServices/HIServices.h>
 #endif
 
+#ifndef __PRINTCORE__
+#include <PrintCore/PrintCore.h>
+#endif
+
 #ifndef __COREGRAPHICS__
 #include <CoreGraphics/CoreGraphics.h>
 #endif
@@ -48,10 +52,6 @@
 
 #ifndef __FINDBYCONTENT__
 #include <FindByContent/FindByContent.h>
-#endif
-
-#ifndef __PRINTCORE__
-#include <PrintCore/PrintCore.h>
 #endif
 
 #ifndef __LANGANALYSIS__

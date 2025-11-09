@@ -1,7 +1,7 @@
 /*
 	NSImageCell.h
 	Application Kit
-	Copyright (c) 1994-2001, Apple Computer, Inc.
+	Copyright (c) 1994-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -11,7 +11,7 @@
 @class NSImage;
 
 typedef enum {
-    NSScaleProportionally = 0,   // Fit propoRtionally
+    NSScaleProportionally = 0,   // Fit proportionally
     NSScaleToFit,                // Forced fit (distort if necessary)
     NSScaleNone                  // Don't scale (clip)
 } NSImageScaling;
@@ -40,9 +40,15 @@ typedef enum {
 @interface NSImageCell : NSCell <NSCopying, NSCoding>
 {
     /*All instance variables are private*/
-    NSImageAlignment _align;
-    NSImageScaling _scale;
-    NSImageFrameStyle _style;
+    id _controlView;      
+    struct __ICFlags {
+        unsigned int _unused:22;
+        unsigned int _animates:1;
+        unsigned int _align:4;
+        unsigned int _scale:2;
+        unsigned int _style:3;
+    } _icFlags;
+    struct _NSImageCellAnimationState *_animationState;
     NSImage *_scaledImage;
 }
 

@@ -44,10 +44,13 @@ CG_EXTERN CGContextRef CGPDFContextCreateWithURL(CFURLRef url, const CGRect *med
 #define kCGPDFContextCreator CFSTR("kCGPDFContextCreator")
 
 /* The document's output intent. Optional; if present, the value must be a
- * CFDictionary. The dictionary is added to the PDF document in the
+ * CFDictionaryRef. The dictionary is added to the PDF document in the
  * /OutputIntents entry in the PDF file's document catalog. The keys and
  * values contained in the dictionary must match those specified in section
- * 9.10.4 of the PDF 1.4 specification. The following keys are supported:
+ * 9.10.4 of the PDF 1.4 specification, ISO/DIS 15930-3 document published
+ * by ISO/TC 130, and Adobe Technical Note #5413.
+ *
+ * The following keys are supported:
  *
  * "S" - The output intent subtype.  This key is required; the value must
  *    be a CFString equal to "GTS_PDFX"; otherwise, the dictionary is
@@ -82,6 +85,18 @@ CG_EXTERN CGContextRef CGPDFContextCreateWithURL(CFURLRef url, const CGRect *med
  *    present, the value must be a ICC-based CGColorSpaceRef. */
 
 #define kCGPDFContextOutputIntent CFSTR("kCGPDFContextOutputIntent")
+
+/* The document's output intents. Optional; if present, the value must be a
+ * CFArrayRef containing one or more CFDictionaryRefs. The array is added
+ * to the PDF document in the /OutputIntents entry in the PDF file's
+ * document catalog.  Each dictionary in the array must be of form
+ * specified above for the "kCGPDFContextOutputIntent" key, except that
+ * only the first dictionary in the array is required to contain the "S"
+ * key with a value of "GTS_PDFX". If both the "kCGPDFContextOutputIntent"
+ * and "kCGPDFContextOutputIntents" keys are specified, the former will be
+ * ignored. */
+
+#define kCGPDFContextOutputIntents CFSTR("kCGPDFContextOutputIntents")
 
 CG_EXTERN_C_END
 

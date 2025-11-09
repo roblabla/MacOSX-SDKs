@@ -1,7 +1,7 @@
 /*
 	NSApplication.h
 	Application Kit
-	Copyright (c) 1994-2001, Apple Computer, Inc.
+	Copyright (c) 1994-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -17,6 +17,10 @@ APPKIT_EXTERN const double NSAppKitVersionNumber;
 #define NSAppKitVersionNumber10_0 577
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 #define NSAppKitVersionNumber10_1 620
+#endif
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+#define NSAppKitVersionNumber10_2 663
+#define NSAppKitVersionNumber10_2_3 663.6
 #endif
 
 /* Modes passed to NSRunLoop */
@@ -80,7 +84,8 @@ typedef struct NSThreadPrivate _NSThreadPrivate;
         unsigned int	    _pendingDidFinish:1;
         unsigned int	    _hasKeyFocus:1;
         unsigned int	    _panelsNonactivating:1;
-	unsigned int        _reserved:10;
+        unsigned int	    _hiddenOnLaunch:1;
+	unsigned int        _reserved:9;
     }                   _appFlags;
     id                  _mainMenu;
     id                  _appIcon;
@@ -180,8 +185,23 @@ typedef enum {
 - (void)reportException:(NSException *)theException;
 + (void)detachDrawingThread:(SEL)selector toTarget:(id)target withObject:(id)argument;
 
-/*  If an application delegate returns NSTerminateLater to -applicationShouldTerminate:, -replyToApplicationShouldTerminate: must be called with YES or NO once the application decides if it can terminate */
+/*  If an application delegate returns NSTerminateLater from -applicationShouldTerminate:, -replyToApplicationShouldTerminate: must be called with YES or NO once the application decides if it can terminate */
 - (void)replyToApplicationShouldTerminate:(BOOL)shouldTerminate;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+
+typedef enum NSApplicationDelegateReply {
+    NSApplicationDelegateReplySuccess = 0,
+    NSApplicationDelegateReplyCancel = 1,
+    NSApplicationDelegateReplyFailure = 2
+} NSApplicationDelegateReply;
+
+/* If an application delegate encounters an error while handling -application:openFiles: or -application:printFiles:, -replyToOpenOrPrint: should be called with NSApplicationDelegateReplyFailure.  If the user cancels the operation, NSApplicationDelegateReplyCancel should be used, and if the operation succeeds, NSApplicationDelegateReplySuccess should be used */
+- (void)replyToOpenOrPrint:(NSApplicationDelegateReply)reply;
+
+/* Opens the character palette
+*/
+- (void)orderFrontCharacterPalette:(id)sender;
+#endif
 @end
 
 @interface NSApplication(NSWindowsMenu)
@@ -229,11 +249,17 @@ typedef enum NSApplicationTerminateReply {
 */
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender;
 - (BOOL)application:(NSApplication *)sender openFile:(NSString *)filename;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void)application:(NSApplication *)sender openFiles:(NSArray *)filenames;
+#endif
 - (BOOL)application:(NSApplication *)sender openTempFile:(NSString *)filename;
 - (BOOL)applicationShouldOpenUntitledFile:(NSApplication *)sender;
 - (BOOL)applicationOpenUntitledFile:(NSApplication *)sender;
 - (BOOL)application:(id)sender openFileWithoutUI:(NSString *)filename;
 - (BOOL)application:(NSApplication *)sender printFile:(NSString *)filename;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void)application:(NSApplication *)sender printFiles:(NSArray *)filenames;
+#endif
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender;
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag;
 - (NSMenu *)applicationDockMenu:(NSApplication *)sender;
@@ -308,21 +334,14 @@ APPKIT_EXTERN int NSApplicationMain(int argc, const char *argv[]);
 APPKIT_EXTERN BOOL NSApplicationLoad(void);
 #endif
 
-/*
- * Functions to enable/disable Services Menu items.  These should usually
- * only be called by service PROVIDERS (since they are the only ones who
- * know the name of the services, requestors don't).  The itemName in the
- * two functions below is the language-independent "Menu Item:" entry in
- * the __services section (which all provided services must have).  The
- * set function returns whether it was successful.
- * NSUpdateDynamicServices() causes the services information for the
- * system to be updated.  This will only be necessary if your program
- * adds dynamic services to the system (i.e. services not found in macho
- * segments of executables).
- */
-
+/* NSShowsServicesMenuItem() always returns YES. */
 APPKIT_EXTERN BOOL NSShowsServicesMenuItem(NSString * itemName);
+
+/* NSSetShowsServicesMenuItem() has no effect, and always returns 0. */
 APPKIT_EXTERN int NSSetShowsServicesMenuItem(NSString * itemName, BOOL enabled);
+
+/* NSUpdateDynamicServices() causes the services information for the system to be updated.  This will only be necessary if your program adds dynamic services to the system (i.e. services not found in macho segments of executables).
+*/
 APPKIT_EXTERN void NSUpdateDynamicServices(void);
 APPKIT_EXTERN BOOL NSPerformService(NSString *itemName, NSPasteboard *pboard);
 

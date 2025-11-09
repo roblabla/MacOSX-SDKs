@@ -23,6 +23,7 @@
 @class NSURLRequest;
 @class NSURLResponse;
 
+
 /*!
     @header NSURLProtocol.h
 
@@ -59,94 +60,94 @@
 */
 
 /*!
-    @protocol NSURLProtocolClient
-    @discussion NSURLProtocolClient provides the interface to the URL
-    loading system that is intended for use by NSURLProtocol
-    implementors.
+@protocol NSURLProtocolClient
+@discussion NSURLProtocolClient provides the interface to the URL
+loading system that is intended for use by NSURLProtocol
+implementors.
 */
 @protocol NSURLProtocolClient <NSObject>
 
-/*! 
-    @method URLProtocol:wasRedirectedToRequest:
-    @abstract Indicates to an NSURLProtocolClient that a redirect has
-    occurred.
-    @param URLProtocol the NSURLProtocol object sending the message.
-    @param request the NSURLRequest to which the protocol implementation
-    has redirected.
+/*!
+@method URLProtocol:wasRedirectedToRequest:
+ @abstract Indicates to an NSURLProtocolClient that a redirect has
+ occurred.
+ @param URLProtocol the NSURLProtocol object sending the message.
+ @param request the NSURLRequest to which the protocol implementation
+ has redirected.
  */
 - (void)URLProtocol:(NSURLProtocol *)protocol wasRedirectedToRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse;
 
-/*! 
-    @method URLProtocol:cachedResponseIsValid:
-    @abstract Indicates to an NSURLProtocolClient that the protocol
-    implementation has examined a cached response and has
-    determined that it is valid.
-    @param URLProtocol the NSURLProtocol object sending the message.
-    @param cachedResponse the NSCachedURLResponse object that has
-    examined and is valid.
- */
+    /*!
+@method URLProtocol:cachedResponseIsValid:
+     @abstract Indicates to an NSURLProtocolClient that the protocol
+     implementation has examined a cached response and has
+     determined that it is valid.
+     @param URLProtocol the NSURLProtocol object sending the message.
+     @param cachedResponse the NSCachedURLResponse object that has
+     examined and is valid.
+     */
 - (void)URLProtocol:(NSURLProtocol *)protocol cachedResponseIsValid:(NSCachedURLResponse *)cachedResponse;
 
-/*! 
-    @method URLProtocol:didReceiveResponse:   
-    @abstract Indicates to an NSURLProtocolClient that the protocol
-    implementation has created an NSURLResponse for the current load.
-    @param URLProtocol the NSURLProtocol object sending the message.
-    @param response the NSURLResponse object the protocol implementation
-    has created.
-    @param cacheStoragePolicy The NSURLCacheStoragePolicy the protocol
-    has determined should be used for the given response if the
-    response is to be stored in a cache.
- */
-- (void)URLProtocol:(NSURLProtocol *)protocol didReceiveResponse:(NSURLResponse *)response cacheStoragePolicy:(NSURLCacheStoragePolicy)policy; 
+    /*!
+@method URLProtocol:didReceiveResponse:
+     @abstract Indicates to an NSURLProtocolClient that the protocol
+     implementation has created an NSURLResponse for the current load.
+     @param URLProtocol the NSURLProtocol object sending the message.
+     @param response the NSURLResponse object the protocol implementation
+     has created.
+     @param cacheStoragePolicy The NSURLCacheStoragePolicy the protocol
+     has determined should be used for the given response if the
+     response is to be stored in a cache.
+     */
+- (void)URLProtocol:(NSURLProtocol *)protocol didReceiveResponse:(NSURLResponse *)response cacheStoragePolicy:(NSURLCacheStoragePolicy)policy;
 
-/*! 
-    @method URLProtocol:didLoadData:
-    @abstract Indicates to an NSURLProtocolClient that the protocol
-    implementation has loaded URL data.
-    @discussion The data object must contain only new data loaded since
-    the previous call to this method (if any), not cumulative data for
-    the entire load.
-    @param URLProtocol the NSURLProtocol object sending the message.
-    @param data URL load data being made available.
- */
+    /*!
+@method URLProtocol:didLoadData:
+     @abstract Indicates to an NSURLProtocolClient that the protocol
+     implementation has loaded URL data.
+     @discussion The data object must contain only new data loaded since
+     the previous call to this method (if any), not cumulative data for
+     the entire load.
+     @param URLProtocol the NSURLProtocol object sending the message.
+     @param data URL load data being made available.
+     */
 - (void)URLProtocol:(NSURLProtocol *)protocol didLoadData:(NSData *)data;
 
-/*! 
-    @method URLProtocolDidFinishLoading:
-    @abstract Indicates to an NSURLProtocolClient that the protocol
-    implementation has finished loading successfully.
-    @param URLProtocol the NSURLProtocol object sending the message.
- */
+    /*!
+@method URLProtocolDidFinishLoading:
+     @abstract Indicates to an NSURLProtocolClient that the protocol
+     implementation has finished loading successfully.
+     @param URLProtocol the NSURLProtocol object sending the message.
+     */
 - (void)URLProtocolDidFinishLoading:(NSURLProtocol *)protocol;
 
-/*! 
-    @method URLProtocol:didFailWithError:
-    @abstract Indicates to an NSURLProtocolClient that the protocol
-    implementation has failed to load successfully.
-    @param URLProtocol the NSURLProtocol object sending the message.
-    @param error The error that caused the load to fail.
- */
+    /*!
+                @method URLProtocol:didFailWithError:
+     @abstract Indicates to an NSURLProtocolClient that the protocol
+     implementation has failed to load successfully.
+     @param URLProtocol the NSURLProtocol object sending the message.
+     @param error The error that caused the load to fail.
+     */
 - (void)URLProtocol:(NSURLProtocol *)protocol didFailWithError:(NSError *)error;
 
-/*!
-    @method URLProtocol:didReceiveAuthenticationChallenge:
-    @abstract Start authentication for the specified request
-    @param protocol The protocol object requesting authentication.
-    @param challenge The authentication challenge.
-    @discussion The protocol client guarantees that it will answer the
-    request on the same thread that called this method. It may add a
-    default credential to the challenge it issues to the connection delegate,
-    if the protocol did not provide one.
-*/
+    /*!
+@method URLProtocol:didReceiveAuthenticationChallenge:
+     @abstract Start authentication for the specified request
+     @param protocol The protocol object requesting authentication.
+     @param challenge The authentication challenge.
+     @discussion The protocol client guarantees that it will answer the
+     request on the same thread that called this method. It may add a
+     default credential to the challenge it issues to the connection delegate,
+     if the protocol did not provide one.
+     */
 - (void)URLProtocol:(NSURLProtocol *)protocol didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
 
-/*!
-    @method URLProtocol:didCancelAuthenticationChallenge:
-    @abstract Cancel authentication for the specified request
-    @param protocol The protocol object cancelling authentication.
-    @param challenge The authentication challenge.
-*/
+    /*!
+@method URLProtocol:didCancelAuthenticationChallenge:
+     @abstract Cancel authentication for the specified request
+     @param protocol The protocol object cancelling authentication.
+     @param challenge The authentication challenge.
+     */
 - (void)URLProtocol:(NSURLProtocol *)protocol didCancelAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
 
 @end
@@ -338,6 +339,7 @@
 + (void)unregisterClass:(Class)protocolClass;
 
 @end
+
 
 
 

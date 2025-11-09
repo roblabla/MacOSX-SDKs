@@ -3,9 +3,9 @@
  
      Contains:   Folder Manager Interfaces.
  
-     Version:    CarbonCore-472~1
+     Version:    CarbonCore-545~1
  
-     Copyright:  © 1995-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1995-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -31,7 +31,7 @@
 #define kUserDomain 					(-32763)			/*  Read/write. Resources that are private to the user. */
 #define kClassicDomain 					(-32762)			/*  Domain referring to the currently configured Classic System Folder */
 
-#define kLastDomainConstant 			(-32763)
+#define kLastDomainConstant 			(-32762)
 #define kCreateFolder 					1
 #define kDontCreateFolder 				0
 
@@ -128,6 +128,8 @@
 #define kISSDownloadsFolderType 		'issd'				/*  Contains Internet Search Sites downloaded from the Internet */
 #define kUserSpecificTmpFolderType 		'utmp'				/*  Contains temporary items created on behalf of the current user */
 #define kCachedDataFolderType 			'cach'				/*  Contains various cache files for different clients */
+#define kTemporaryItemsInCacheDataFolderType  'vtmp'
+#define kMagicTemporaryItemsFolderType 	'mtmp'
 #define kFrameworksFolderType 			'fram'				/*  Contains MacOS X Framework folders      */
 #define kPrivateFrameworksFolderType 	'pfrm'				/*  Contains MacOS X Private Framework folders      */
 #define kClassicDesktopFolderType 		'sdsk'				/*  MacOS 9 compatible desktop folder - same as  */
@@ -173,6 +175,7 @@
 #define kSharedUserDataFolderType 		'sdat'				/*  A Shared "Documents" folder, readable & writeable by all users  */
 #define kVolumeSettingsFolderType 		'vsfd'				/*  Volume specific user information goes here  */
 
+#define kClassicPreferencesFolderType 	'cprf'				/*  "Classic" folder in ~/Library/ for redirected preference files.  */
 #define kAppleshareAutomountServerAliasesFolderType  'srvÄ'	/*  Appleshare puts volumes to automount inside this folder.  */
 #define kPreMacOS91ApplicationsFolderType  'Œpps'			/*  The "Applications" folder, pre Mac OS 9.1  */
 #define kPreMacOS91InstallerLogsFolderType  '”lgf'			/*  The "Installer Logs" folder, pre Mac OS 9.1  */
@@ -208,12 +211,18 @@
 #define kFolderInLocalOrRemoteUserFolder  0x000000A0
 
 #define kRelativeFolder 				'relf'
+#define kRedirectedRelativeFolder 		'rrel'
 #define kSpecialFolder 					'spcf'
 
 #define kBlessedFolder 					'blsf'
 #define kRootFolder 					'rotf'
 
 #define kCurrentUserFolderLocation 		'cusf'				/*     the magic 'Current User' folder location */
+#define kDictionariesFolderType 		'dict'				/*  Dictionaries folder  */
+#define kLogsFolderType 				'logs'				/*  Logs folder  */
+#define kDeveloperApplicationsFolderType  'dapp'			/*  Contains Developer Applications */
+#define kPreferencePanesFolderType 		'ppan'				/*  PreferencePanes folder, in .../Library/  */
+
 															/*     Set this bit to 1 in the .flags field of a FindFolderUserRedirectionGlobals */
 															/*     structure if the userName in the struct should be used as the current */
 															/*     "User" name */
@@ -226,6 +235,7 @@
 #define kFindFolderRedirectionFlagsUseGivenVRefNumAndDirIDAsRemoteUserFolderBit  2
 
 #define kFolderManagerUserRedirectionGlobalsCurrentVersion  1
+															/*     These constants only work on Mac OS 9.x.  On Mac OS X, they are ignored. */
 #define kFindFolderExtendedFlagsDoNotFollowAliasesBit  0
 #define kFindFolderExtendedFlagsDoNotUseUserFolderBit  1
 #define kFindFolderExtendedFlagsUseOtherUserRecord  0x01000000

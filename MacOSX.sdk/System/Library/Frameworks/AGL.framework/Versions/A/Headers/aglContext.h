@@ -6,7 +6,7 @@
     Version:	Technology:	Mac OS 9
                 Release:	GM
  
-     Copyright:  (c) 2000 by Apple Computer, Inc., all rights reserved.
+     Copyright:  (c) 2000 - 2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

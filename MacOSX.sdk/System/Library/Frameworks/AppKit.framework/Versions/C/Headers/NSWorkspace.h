@@ -1,15 +1,35 @@
 /*
 	NSWorkspace.h
 	Application Kit
-	Copyright (c) 1994-2001, Apple Computer, Inc.
+	Copyright (c) 1994-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSGeometry.h>
+#import <Foundation/NSAppleEventDescriptor.h>
 #import <AppKit/AppKitDefines.h>
 
 @class NSArray, NSImage, NSView, NSNotificationCenter, NSURL;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+typedef unsigned int NSWorkspaceLaunchOptions;
+enum {
+     NSWorkspaceLaunchAndPrint = 0x00000002,
+     NSWorkspaceLaunchInhibitingBackgroundOnly = 0x00000080,
+     NSWorkspaceLaunchWithoutAddingToRecents = 0x00000100,
+     NSWorkspaceLaunchWithoutActivation = 0x00000200,
+     NSWorkspaceLaunchAsync = 0x00010000,
+     NSWorkspaceLaunchAllowingClassicStartup = 0x00020000,
+     NSWorkspaceLaunchPreferringClassic = 0x00040000,
+     NSWorkspaceLaunchNewInstance = 0x00080000,
+     NSWorkspaceLaunchAndHide = 0x00100000,
+     NSWorkspaceLaunchAndHideOthers = 0x00200000,
+     // NSWorkspaceLaunchAndDisplayFailures
+     NSWorkspaceLaunchDefault = NSWorkspaceLaunchAsync | 
+NSWorkspaceLaunchAllowingClassicStartup
+};
+#endif
 
 @interface NSWorkspace : NSObject {
   /*All instance variables are private*/
@@ -17,7 +37,7 @@
     NSNotificationCenter *notificationCenter;
     int deviceStatusCount;
     int applicationStatusCount;
-    int _reservedWorkspace1;
+    void *_reservedWorkspace1;
 }
 
 + (NSWorkspace *)sharedWorkspace;
@@ -71,6 +91,13 @@
 - (NSArray *)mountNewRemovableMedia;
 - (void)checkForRemovableMedia;
 
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (NSString *)absolutePathForAppBundleWithIdentifier:(NSString *)bundleIdentifier; 
+- (BOOL)launchAppWithBundleIdentifier:(NSString *)bundleIdentifier options:(NSWorkspaceLaunchOptions)options additionalEventParamDescriptor:(NSAppleEventDescriptor *)descriptor launchIdentifier:(NSNumber **)identifier;
+- (BOOL)openURLs:(NSArray *)urls withAppBundleIdentifier:(NSString *)bundleIdentifier options:(NSWorkspaceLaunchOptions)options additionalEventParamDescriptor:(NSAppleEventDescriptor *)descriptor launchIdentifiers:(NSArray **)identifiers;
+#endif
+
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 
 /* The following methods return information about an application as a dictionary containing as many of the following keys as are available:
@@ -99,6 +126,12 @@ APPKIT_EXTERN NSString *NSWorkspaceDidUnmountNotification;		//	@"NSDevicePath"
 APPKIT_EXTERN NSString *NSWorkspaceWillLaunchApplicationNotification;	//	see above
 APPKIT_EXTERN NSString *NSWorkspaceWillPowerOffNotification;
 APPKIT_EXTERN NSString *NSWorkspaceWillUnmountNotification;		//	@"NSDevicePath"
+
+APPKIT_EXTERN NSString *NSWorkspaceWillSleepNotification	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+APPKIT_EXTERN NSString *NSWorkspaceDidWakeNotification	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+APPKIT_EXTERN NSString *NSWorkspaceSessionDidBecomeActiveNotification	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+APPKIT_EXTERN NSString *NSWorkspaceSessionDidResignActiveNotification	AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
 
 /* Return values for type in getInfoForFile: 
 */

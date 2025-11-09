@@ -56,7 +56,7 @@ extern "C" {
 enum {
     kIOServiceMatching		= 100,
     kIOBSDNameMatching		= 101,
-    kIOOFPathMatching		= 102,
+    kIOOFPathMatching		= 102
 };
 
 // IOCatalogueSendData
@@ -74,7 +74,7 @@ enum {
     kIOCatalogRemoveDrivers,
     kIOCatalogRemoveDriversNoMatch,
     kIOCatalogStartMatching,
-    kIOCatalogRemoveKernelLinker,
+    kIOCatalogRemoveKernelLinker
 };
 
 // IOCatalogueGetData
@@ -83,7 +83,10 @@ enum {
     @constant kIOCatalogGetContents  Returns a snapshot of the database to the caller.
 */
 enum {
-    kIOCatalogGetContents	= 1,
+    kIOCatalogGetContents	  = 1,
+    kIOCatalogGetModuleDemandList = 2,
+    kIOCatalogGetCacheMissList	  = 3,
+    kIOCatalogGetROMMkextList     = 4
 };
 
 // IOCatalogueReset
@@ -92,7 +95,7 @@ enum {
     @constant kIOCatalogResetDefault  Removes all entries from IOCatalogue except those used for booting the system.
 */
 enum {
-    kIOCatalogResetDefault	= 1,
+    kIOCatalogResetDefault	= 1
 };
 
 // IOCatalogueTerminate
@@ -105,7 +108,7 @@ enum {
 enum {
     kIOCatalogModuleUnload      = 1,
     kIOCatalogModuleTerminate,
-    kIOCatalogServiceTerminate,
+    kIOCatalogServiceTerminate
 };
 
 enum {

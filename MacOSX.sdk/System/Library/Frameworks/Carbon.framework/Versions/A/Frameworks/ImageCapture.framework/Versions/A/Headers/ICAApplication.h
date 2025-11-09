@@ -3,9 +3,9 @@
  
      Contains:   General purpose Image Capture definitions
  
-     Version:    ImageCapture-125~203
+     Version:    ImageCapture-181~1
  
-     Copyright:  © 2000-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2000-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -51,7 +51,16 @@ enum {
   kICAInvalidObjectErr          = -9905,
   kICAInvalidPropertyErr        = -9906,
   kICAIndexOutOfRangeErr        = -9907,
-  kICAPropertyTypeNotFoundErr   = -9908
+  kICAPropertyTypeNotFoundErr   = -9908,
+  kICACannotYieldDevice         = -9909,
+  kICADataTypeNotFoundErr       = -9910,
+  kICADeviceMemoryAllocationErr = -9911,
+  kICADeviceInternalErr         = -9912,
+  kICADeviceInvalidParamErr     = -9913,
+  kICADeviceAlreadyOpenErr      = -9914,
+  kICADeviceLocationIDNotFoundErr = -9915,
+  kICADeviceGUIDNotFoundErr     = -9916,
+  kICADeviceIOServicePathNotFoundErr = -9917
 };
 
 /* ICAObject types and subtypes */
@@ -100,7 +109,9 @@ enum {
   kICAMessageConnect            = 'open',
   kICAMessageDisconnect         = 'clos',
   kICAMessageReset              = 'rese',
-  kICAMessageCheckDevice        = 'chkd'
+  kICAMessageCheckDevice        = 'chkd',
+  kICAMessageCameraReadClock    = 'rclk',
+  kICAMessageGetLastButtonPressed = 'btn?'
 };
 
 
@@ -155,16 +166,18 @@ enum {
   kICAEntireLength              = -1
 };
 
+
 /* ICADownloadFile flags */
 enum {
   kDeleteAfterDownload          = 0x00000001,
   kCreateCustomIcon             = 0x00000002,
   kAddMetaDataToFinderComment   = 0x00000004,
   kAdjustCreationDate           = 0x00000008,
-  kSetFileTypeAndCreator        = 0x00000010,
-  kEmbedColorSyncProfile        = 0x00000020,
-  kRotateImage                  = 0x00000040
+  kSetFileTypeAndCreator        = 0x00000010, /*kEmbedColorSyncProfile   = 0x00000020,*/
+  kRotateImage                  = 0x00000040,
+  kDontEmbedColorSyncProfile    = 0x00000080
 };
+
 
 /* extended notification */
 enum {
@@ -173,6 +186,16 @@ enum {
   kEventClassPTPStandard        = 'PTPs',
   kEventClassPTPVendor          = 'PTPv'
 };
+
+
+/* button types*/
+enum {
+  kICAButtonScan                = 'scan',
+  kICAButtonCopy                = 'copy',
+  kICAButtonEMail               = 'mail',
+  kICAButtonWeb                 = 'web '
+};
+
 
 /*
 --------------- Structures --------------- 
@@ -944,6 +967,83 @@ extern OSErr
 ICAScannerStart(
   ICAScannerStartPB *  pb,
   ICACompletion        completion)       /* can be NULL */    AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
+
+ 
+ 
+ 
+ 
+/* 
+--- new APIs for Panther --------------------------------------------- 
+*/
+
+/* ICADeviceYield*/
+enum {
+  kICAMessageDeviceYield        = 'yiel'
+};
+
+ 
+ 
+/* ICAImportImage*/
+enum {
+  kICAAllowMultipleImages       = 0x00000001
+};
+
+typedef CALLBACK_API_C( Boolean , ICAImportFilterProc )(CFDictionaryRef imageInfo, UInt32 refcon);
+struct ICAImportImagePB {
+  ICAHeader           header;                 /* <-- */
+  ICAObject           deviceObject;           /* <-- */
+  UInt32              flags;                  /* <-- */
+  CFArrayRef          supportedFileTypes;     /* <-- */
+  ICAImportFilterProc  filterProc;            /* <-- */
+  CFArrayRef *        importedImages;         /* --> */
+};
+typedef struct ICAImportImagePB         ICAImportImagePB;
+ 
+/*
+ *  ICAImportImage()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr 
+ICAImportImage(
+  ICAImportImagePB *  pb,
+  ICACompletion       completion)       /* can be NULL */     AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
+
+ 
+ 
+/* ICACopyObjectThumbnail*/
+
+enum {
+  kICAThumbnailFormatICA        = 'ica ',
+  kICAThumbnailFormatJPEG       = 'jpeg',
+  kICAThumbnailFormatTIFF       = 'tiff'
+};
+
+struct ICACopyObjectThumbnailPB {
+  ICAHeader           header;                 /* <-- */
+  ICAObject           object;                 /* <-- */
+  OSType              thumbnailFormat;        /* <-- */
+  CFDataRef *         thumbnailData;          /* --> */
+};
+typedef struct ICACopyObjectThumbnailPB ICACopyObjectThumbnailPB;
+/*
+ *  ICACopyObjectThumbnail()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.1 and later in Carbon.framework
+ *    CarbonLib:        in CarbonLib 1.6 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern OSErr 
+ICACopyObjectThumbnail(
+  ICACopyObjectThumbnailPB *  pb,
+  ICACompletion               completion)       /* can be NULL */ AVAILABLE_MAC_OS_X_VERSION_10_1_AND_LATER;
+
 
 
 

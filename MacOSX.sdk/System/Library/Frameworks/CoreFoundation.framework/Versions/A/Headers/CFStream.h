@@ -1,5 +1,5 @@
 /*	CFStream.h
-	Copyright 2000-2002, Apple, Inc. All rights reserved.
+	Copyright (c) 2000-2003, Apple, Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFSTREAM__)
@@ -93,6 +93,12 @@ CFWriteStreamRef CFWriteStreamCreateWithFile(CFAllocatorRef alloc, CFURLRef file
 /* Property for file write streams; value should be a CFBoolean.  Set to TRUE to append to a file, rather than to replace its contents */
 CF_EXPORT
 const CFStringRef kCFStreamPropertyAppendToFile;
+#endif
+
+#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
+
+CF_EXPORT const CFStringRef kCFStreamPropertyFileCurrentOffset AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;   // Value is a CFNumber
+
 #endif
 
 /* Socket stream properties */

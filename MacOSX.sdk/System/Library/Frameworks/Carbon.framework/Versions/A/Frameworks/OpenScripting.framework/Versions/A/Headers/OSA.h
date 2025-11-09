@@ -3,9 +3,9 @@
  
      Contains:   Open Scripting Architecture Client Interfaces.
  
-     Version:    OSA-48~15
+     Version:    OSA-62~76
  
-     Copyright:  © 1992-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1992-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -478,6 +478,15 @@ enum {
     */
 enum {
   kOSAModeDontGetDataForArguments = 0x00040000
+};
+
+/*
+        This mode flag may be passed to OSACoerceToDesc to indicate that
+        the resulting descriptor should be fully qualified (i.e. should
+        include the root application reference).
+    */
+enum {
+  kOSAModeFullyQualifyDescriptors = 0x00080000
 };
 
 /**************************************************************************
@@ -2140,6 +2149,125 @@ OSADebuggerDisposeCallFrame(
   OSADebugCallFrameRef   inCallFrame)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
+/**************************************************************************
+    OSA Script File Interface
+**************************************************************************/
+/*
+ *  OSALoadFile()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSAError 
+OSALoadFile(
+  ComponentInstance   scriptingComponent,
+  const FSRef *       scriptFile,
+  Boolean *           storable,
+  long                modeFlags,
+  OSAID *             resultingScriptID)                      AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+        This routine loads a script into the specified scripting component.
+        If "scriptFile" is a text file, the script will be compiled. If
+        "storable" is non-NULL, it will be set to indicate whether a
+        script can be stored into the script file using OSAStoreFile().
+    
+        Errors:
+            See OSALoad() and OSACompile().
+            
+        ModeFlags:
+            See OSALoad() and OSACompile().
+    */
+/*
+ *  OSAStoreFile()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSAError 
+OSAStoreFile(
+  ComponentInstance   scriptingComponent,
+  OSAID               scriptID,
+  DescType            desiredType,
+  long                modeFlags,
+  const FSRef *       scriptFile)                             AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+        This routine stores a script into the specified file.
+    
+        Errors:
+            See OSAStore().
+        
+        ModeFlags:
+            See OSAStore().
+    */
+/*
+ *  OSALoadExecuteFile()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSAError 
+OSALoadExecuteFile(
+  ComponentInstance   scriptingComponent,
+  const FSRef *       scriptFile,
+  OSAID               contextID,
+  long                modeFlags,
+  OSAID *             resultingScriptValueID)                 AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+        This routine is effectively equivalent to calling OSALoadFile followed by
+        OSAExecute.  After execution, the compiled source is disposed.  Only the
+        resulting value ID is retained.
+    
+        Errors:
+            See OSALoadExecute() and OSACompileExecute().
+    
+        ModeFlags:
+            See OSALoadExecute() and OSACompileExecute().
+    */
+/*
+ *  OSADoScriptFile()
+ *  
+ *  Availability:
+ *    Mac OS X:         in version 10.3 and later in Carbon.framework
+ *    CarbonLib:        not available
+ *    Non-Carbon CFM:   not available
+ */
+extern OSAError 
+OSADoScriptFile(
+  ComponentInstance   scriptingComponent,
+  const FSRef *       scriptFile,
+  OSAID               contextID,
+  DescType            desiredType,
+  long                modeFlags,
+  AEDesc *            resultingText)                          AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER;
+
+
+/*
+        This routine is effectively equivalent to calling OSALoadFile, followed by 
+        OSAExecute, OSADisplay, and then OSAStoreFile if the script has persistent 
+        properties.  After execution, the compiled source and the resulting value are 
+        disposed.  Only the resultingText descriptor is retained.  If a script error 
+        occurs during processing, the resultingText gets the error message of the error, 
+        and errOSAScriptError is returned.  OSAScriptError may still be used to extract 
+        more information about the particular error.
+    
+        Errors:
+            See OSALoad(), OSACompile(), OSAExecute(), OSADisplay(), and OSAStore().
+    
+        ModeFlags:
+            See OSALoad(), OSACompile(), OSAExecute(), and OSADisplay().
+    */
 
 #pragma options align=reset
 

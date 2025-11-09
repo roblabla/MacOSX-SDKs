@@ -69,6 +69,7 @@
 
 struct proc;
 struct uio;
+struct knote;
 #ifdef __APPLE_API_UNSTABLE
 
 /*
@@ -82,6 +83,7 @@ struct file {
 #define	DTYPE_SOCKET	2	/* communications endpoint */
 #define	DTYPE_PSXSHM	3	/* POSIX Shared memory */
 #define	DTYPE_PSXSEM	4	/* POSIX Semaphores */
+#define DTYPE_KQUEUE	5	/* kqueue */
 	short	f_type;		/* descriptor type */
 	short	f_count;	/* reference count */
 	short	f_msgcount;	/* references from message queue */
@@ -99,6 +101,8 @@ struct file {
 		int	(*fo_select)	__P((struct file *fp, int which,
 						void *wql, struct proc *p));
 		int	(*fo_close)	__P((struct file *fp, struct proc *p));
+		int	(*fo_kqfilter)	__P((struct file *fp, struct knote *kn,
+					     struct proc *p));
 	} *f_ops;
 	off_t	f_offset;
 	caddr_t	f_data;		/* vnode or socket or SHM or semaphore */
@@ -125,6 +129,8 @@ static __inline int fo_ioctl __P((struct file *fp, u_long com, caddr_t data,
 static __inline int fo_select __P((struct file *fp, int which, void *wql,
 	struct proc *p));
 static __inline int fo_close __P((struct file *fp, struct proc *p));
+static __inline int fo_kqfilter __P((struct file *fp, struct knote *kn,
+	struct proc *p));
 
 static __inline int
 fo_read(struct file *fp, struct uio *uio, struct ucred *cred, int flags, struct proc *p)
@@ -177,6 +183,13 @@ fo_close(struct file *fp, struct proc *p)
 
 	return ((*fp->f_ops->fo_close)(fp, p));
 }
+
+static __inline int
+fo_kqfilter(struct file *fp, struct knote *kn, struct proc *p)
+{
+        return ((*fp->f_ops->fo_kqfilter)(fp, kn, p));
+}
+
 __END_DECLS
 
 #endif /* __APPLE_API_UNSTABLE */

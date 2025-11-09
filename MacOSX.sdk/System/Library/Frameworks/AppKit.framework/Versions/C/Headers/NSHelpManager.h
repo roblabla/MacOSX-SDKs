@@ -1,7 +1,7 @@
 /*
 	NSHelpManager.h
 	Application Kit
-	Copyright (c) 1995-2001, Apple Computer, Inc.
+	Copyright (c) 1995-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -35,6 +35,11 @@
 - (NSAttributedString *)contextHelpForObject:(id)object;
 
 - (BOOL)showContextHelpForObject:(id)object locationHint:(NSPoint)pt;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void)openHelpAnchor:(NSString *)anchor inBook:(NSString *)book;
+- (void)findString:(NSString *)query inBook:(NSString *)book;
+#endif
 
 @end
 

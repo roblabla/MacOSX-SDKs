@@ -29,16 +29,33 @@ enum _CGError {
     kCGErrorNoCurrentPoint = 1009,
     kCGErrorInvalidOperation = 1010,
     kCGErrorNoneAvailable = 1011,
-    //	internal errors have taken 1012, 1013, and 1014
+    /*	internal errors have taken 1012, 1013, and 1014 */
 
 	kCGErrorApplicationRequiresNewerSystem = 1015,
-		//	the application being launched says in it's bundle info that it requires a
-		//	newer version of the system than is currently running.
+		/*	the application being launched says in it's bundle info that it requires a */
+		/*	newer version of the system than is currently running. */
 	
 	kCGErrorApplicationNotPermittedToExecute = 1016,
-		//	Macintosh Manager is active, and this application is not permitted to run
+		/*	Macintosh Manager is active, and this application is not permitted to run */
 	
-    kCGErrorLast = kCGErrorApplicationRequiresNewerSystem    
+	kCGErrorApplicationIncorrectExecutableFormatFound = 1023,
+		/*	the application being launched does not have any executable code for the */
+		/*	current system. */
+	
+	kCGErrorApplicationIsLaunching = 1024,
+		/* The application is in the process of launching, but hasn't checked in yet.
+		   Any launch data provided will be given to the application when it does
+		   check in. */
+	
+	kCGErrorApplicationAlreadyRunning = 1025,
+		/*	The application being launched was already running ( and had already checked
+		    in ) and so any launch data provided can not be delivered to in by CPS */
+
+	kCGErrorApplicationCanOnlyBeRunInOneSessionAtATime = 1026,
+		/*	The application being launched is incompatible with multiple user sessions,
+			and is already running in another session by another user. */
+
+    kCGErrorLast = kCGErrorApplicationCanOnlyBeRunInOneSessionAtATime
 };
 typedef int32_t  CGError;
 

@@ -1,1 +1,1 @@
-/* OpenTransport.r is not available on Mac OS X */
+#include <CoreServices/CoreServices.r>

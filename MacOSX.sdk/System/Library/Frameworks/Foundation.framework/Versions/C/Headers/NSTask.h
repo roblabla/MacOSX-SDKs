@@ -1,5 +1,5 @@
 /*	NSTask.h
-	Copyright 1996-2002, Apple, Inc. All rights reserved.
+	Copyright (c) 1996-2003, Apple, Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>

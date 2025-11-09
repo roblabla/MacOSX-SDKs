@@ -1304,67 +1304,67 @@
 
 #define glFogCoordf(coord) \
 	(*agl_ctx->disp.fog_coordf)(agl_ctx->rend, coord)
-	
+
 #define glFogCoordfv(coord) \
 	(*agl_ctx->disp.fog_coordfv)(agl_ctx->rend, coord)
-	
+
 #define glFogCoordd(coord) \
 	(*agl_ctx->disp.fog_coordd)(agl_ctx->rend, coord)
-	
+
 #define glFogCoorddv(coord) \
 	(*agl_ctx->disp.fog_coorddv)(agl_ctx->rend,coord)
-	
+
 #define glFogCoordPointer(type, stride, pointer) \
 	(*agl_ctx->disp.fog_coord_pointer)(agl_ctx->rend, type, stride, pointer)
 
 #define glSecondaryColor3b(red, green, blue) \
 	(*agl_ctx->disp.secondary_color3b)(agl_ctx->rend, red, green, blue)
-	
+
 #define glSecondaryColor3bv(components) \
 	(*agl_ctx->disp.secondary_color3bv)(agl_ctx->rend, components)
-	
+
 #define glSecondaryColor3d(red, green, blue) \
 	(*agl_ctx->disp.secondary_color3d)(agl_ctx->rend, red, green, blue)
-	
+
 #define glSecondaryColor3dv(components) \
 	(*agl_ctx->disp.secondary_color3dv)(agl_ctx->rend, components)
-	
+
 #define glSecondaryColor3f(red, green, blue) \
 	(*agl_ctx->disp.secondary_color3f)(agl_ctx->rend, red, green, blue)
-	
+
 #define glSecondaryColor3fv(components) \
 	(*agl_ctx->disp.secondary_color3fv)(agl_ctx->rend, components)
-	
+
 #define glSecondaryColor3i(red, green, blue) \
 	(*agl_ctx->disp.secondary_color3i)(agl_ctx->rend, red, green, blue)
-	
+
 #define glSecondaryColor3iv(components) \
 	(*agl_ctx->disp.secondary_color3iv)(agl_ctx->rend, components)
-	
+
 #define glSecondaryColor3s(red, green, blue) \
 	(*agl_ctx->disp.secondary_color3s)(agl_ctx->rend, red, green, blue)
-	
+
 #define glSecondaryColor3sv(components) \
 	(*agl_ctx->disp.secondary_color3sv)(agl_ctx->rend, components)
-	
+
 #define glSecondaryColor3ub(red, green, blue) \
 	(*agl_ctx->disp.secondary_color3ub)(agl_ctx->rend, red, green, blue)
-	
+
 #define glSecondaryColor3ubv(components) \
 	(*agl_ctx->disp.secondary_color3ubv)(agl_ctx->rend, components)
-	
+
 #define glSecondaryColor3ui(red, green, blue) \
 	(*agl_ctx->disp.secondary_color3ui)(agl_ctx->rend, red, green, blue)
-	
+
 #define glSecondaryColor3uiv(components) \
 	(*agl_ctx->disp.secondary_color3uiv)(agl_ctx->rend, components)
-	
+
 #define glSecondaryColor3us(red, green, blue) \
 	(*agl_ctx->disp.secondary_color3us)(agl_ctx->rend, red, green, blue)
-	
+
 #define glSecondaryColor3usv(components) \
 	(*agl_ctx->disp.secondary_color3usv)(agl_ctx->rend, components)
-	
+
 #define glSecondaryColorPointer(size, type, stride, pointer) \
 	(*agl_ctx->disp.secondary_color_pointer)(agl_ctx->rend, size, type, stride, pointer)
 
@@ -1439,7 +1439,7 @@
 
 #define glDeleteProgramsARB(n, programs) \
 	(*agl_ctx->disp.delete_programs_ARB)(agl_ctx->rend, n, programs)
-  
+
 #define glGenProgramsARB(n, programs) \
 	(*agl_ctx->disp.gen_programs_ARB)(agl_ctx->rend, n, programs)
 
@@ -1741,6 +1741,13 @@
 #define glActiveStencilFaceEXT(face) \
 	(*agl_ctx->disp.active_stencil_face_EXT)(agl_ctx->rend, face)
 
+/* GL_ATI_separate_stencil */
+#define glStencilOpSeparateATI(face, sfail, dpfail, dppass) \
+	(*agl_ctx->disp.stencil_op_separate_ATI)(agl_ctx->rend, face, sfail, dpfail, dppass)
+
+#define glStencilFuncSeparateATI(frontfunc, backfunc, ref, mask) \
+	(*agl_ctx->disp.stencil_func_separate_ATI)(agl_ctx->rend, frontfunc, backfunc, ref, mask)
+
 /* GL_EXT_paletted_texture */
 #define glColorTableEXT glColorTable
 #define glColorSubTableEXT glColorSubTable
@@ -1793,25 +1800,25 @@
 /*********** APPLE Extensions ***********************************************/
 
 /* GL_APPLE_vertex_program_evaluators */
-#define glEnableVertexAttribARB(index, pname) \
+#define glEnableVertexAttribAPPLE(index, pname) \
 	(*agl_ctx->disp.enable_vertex_attrib_ARB)(agl_ctx->rend, index, pname)
 
-#define glDisableVertexAttribARB(index, pname) \
+#define glDisableVertexAttribAPPLE(index, pname) \
 	(*agl_ctx->disp.disable_vertex_attrib_ARB)(agl_ctx->rend, index, pname)
 
-#define glIsVertexAttribEnabledARB(index, pname) \
+#define glIsVertexAttribEnabledAPPLE(index, pname) \
 	(*agl_ctx->disp.is_vertex_attrib_enabled_ARB)(agl_ctx->rend, index, pname)
 
-#define glMapVertexAttrib1dARB(index, size, u1, u2, stride, order, points) \
+#define glMapVertexAttrib1dAPPLE(index, size, u1, u2, stride, order, points) \
 	(*agl_ctx->disp.map_vertex_attrib1d_ARB)(agl_ctx->rend, index, size, u1, u2, stride, order, points)
 
-#define glMapVertexAttrib1fARB(index, size, u1, u2, stride, order, points) \
+#define glMapVertexAttrib1fAPPLE(index, size, u1, u2, stride, order, points) \
 	(*agl_ctx->disp.map_vertex_attrib1f_ARB)(agl_ctx->rend, index, size, u1, u2, stride, order, points)
 
-#define glMapVertexAttrib2dARB(index, size, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points) \
+#define glMapVertexAttrib2dAPPLE(index, size, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points) \
 	(*agl_ctx->disp.map_vertex_attrib2d_ARB)(agl_ctx->rend, index, size, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points)
 
-#define glMapVertexAttrib2fARB(index, size, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points) \
+#define glMapVertexAttrib2fAPPLE(index, size, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points) \
 	(*agl_ctx->disp.map_vertex_attrib2f_ARB)(agl_ctx->rend, index, size, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points)
 
 /* GL_APPLE_texture_range */
@@ -1878,6 +1885,14 @@
 
 #define glDrawRangeElementArrayAPPLE(mode, start, end, first, count) \
 	(*agl_ctx->disp.draw_range_element_array_APPLE)(agl_ctx->rend, mode, start, end, first, count)
+
+/* GL_APPLE_flush_render */
+#define glFlushRenderAPPLE() \
+	(*agl_ctx->disp.flush_render_APPLE)(agl_ctx->rend)
+
+#define glFinishRenderAPPLE() \
+	(*agl_ctx->disp.finish_render_APPLE)(agl_ctx->rend)
+
 
 /*********** ATI Extensions *************************************************/
 
@@ -1953,4 +1968,3 @@
 	(*agl_ctx->disp.get_combiner_stage_parameterfv_NV)(agl_ctx->rend, stage, pname, param)
 
 #endif /* _AGLMACRO_H */
-

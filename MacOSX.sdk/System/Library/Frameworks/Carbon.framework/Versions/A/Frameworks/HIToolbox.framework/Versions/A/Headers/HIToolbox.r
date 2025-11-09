@@ -3,9 +3,9 @@
  
      Contains:   Master include for HIToolbox private framework
  
-     Version:    HIToolbox-124.14~2
+     Version:    HIToolbox-145.33~1
  
-     Copyright:  © 1999-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -23,10 +23,6 @@
 
 #ifndef __HIVIEW_R__
 #include <HIToolbox/HIView.r>
-#endif
-
-#ifndef __BALLOONS_R__
-#include <HIToolbox/Balloons.r>
 #endif
 
 #ifndef __CONTROLS_R__
@@ -51,6 +47,10 @@
 
 #ifndef __CARBONEVENTS_R__
 #include <HIToolbox/CarbonEvents.r>
+#endif
+
+#ifndef __MACHELP_R__
+#include <HIToolbox/MacHelp.r>
 #endif
 
 #ifndef __CONTROLDEFINITIONS_R__

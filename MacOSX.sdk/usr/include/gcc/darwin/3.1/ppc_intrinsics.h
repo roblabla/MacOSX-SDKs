@@ -635,7 +635,7 @@ __fnmsubs (double  a, double c, double b)
 static inline float 
 __fres (float val)
 {
-  double estimate;
+  float estimate;
   __asm__ ("fres %0,%1" 
            /* outputs:  */ : "=f" (estimate) 
            /* inputs:   */ : "f" (val));
@@ -885,7 +885,7 @@ astrcmp (const char *in_s1, const char *in_s2)
            "\tbeq- cr1,2f\n"
            "\tbeq+ 1b\n2:"
             /* outputs: */  : "=&r" (result), "+b" (s1), "+b" (s2), "=r" (temp)
-            /* inputs: */   : "1" (s1) , "2" (s2)
+            /* inputs: */   : 
             /* clobbers: */ : "cr0", "cr1", "memory");
 
   return result;

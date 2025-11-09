@@ -16,7 +16,7 @@ extern "C" {
 typedef struct _CGLContextObject       *CGLContextObj;
 typedef struct _CGLPixelFormatObject   *CGLPixelFormatObj;
 typedef struct _CGLRendererInfoObject  *CGLRendererInfoObj;
-
+typedef struct _CGLPBufferObject       *CGLPBufferObj;
 
 /*
 ** Attribute names for CGLChoosePixelFormat and CGLDescribePixelFormat.
@@ -39,6 +39,7 @@ typedef enum _CGLPixelFormatAttribute {
 	kCGLPFASamples            =  56,	/* number of samples per multi sample buffer    */
 	kCGLPFAAuxDepthStencil    =  57,	/* each aux buffer has its own depth stencil    */
 	kCGLPFAColorFloat         =  58,	/* color buffers store floating point pixels    */
+
 	kCGLPFARendererID         =  70,	/* request renderer by ID                       */
 	kCGLPFASingleRenderer     =  71,	/* choose a single renderer for all screens     */
 	kCGLPFANoRecovery         =  72,	/* disable all failure recovery systems         */
@@ -51,7 +52,8 @@ typedef enum _CGLPixelFormatAttribute {
 	kCGLPFAMultiScreen        =  81,	/* single window can span multiple screens      */
 	kCGLPFACompliant          =  83,	/* renderer is opengl compliant                 */
 	kCGLPFADisplayMask        =  84,	/* mask limiting supported displays             */
-	kCGLPFAVirtualScreenCount = 128,	/* number of virtual screens in this format     */
+	kCGLPFAPBuffer            =  90,	/* can be used to render to a pbuffer           */
+	kCGLPFAVirtualScreenCount = 128		/* number of virtual screens in this format     */
 } CGLPixelFormatAttribute;
 
 /*
@@ -79,7 +81,7 @@ typedef enum _CGLRendererProperty {
 	kCGLRPMaxSamples          = 109,	/* maximum number of samples                     */
 	kCGLRPVideoMemory         = 120,	/* total video memory                            */
 	kCGLRPTextureMemory       = 121,	/* video memory useable for texture storage      */
-	kCGLRPRendererCount       = 128,	/* the number of renderers in this renderer info */
+	kCGLRPRendererCount       = 128 	/* the number of renderers in this renderer info */
 } CGLRendererProperty;
 
 /*
@@ -90,6 +92,7 @@ typedef enum _CGLContextEnable {
 	kCGLCESwapLimit        = 203,	/* Enable or disable the swap async limit        */
 	kCGLCERasterization    = 221,	/* Enable or disable all rasterization           */
 	kCGLCEStateValidation  = 301,	/* Validate state for multi-screen functionality */
+	kCGLCEDrawSyncBlueLine = 302 	/* Enable or disable drawing of stereo sync blue line */
 } CGLContextEnable;
 
 /*
@@ -106,7 +109,10 @@ typedef enum _CGLContextParameter {
 /*  AGL_CONTEXT_SURFACE_ID   233    */
 /*  AGL_CONTEXT_DISPLAY_ID   234    */
 	kCGLCPSurfaceOrder     = 235,   /* 1 param.   1 -> Above window, -1 -> Below Window       */
-	kCGLCPSurfaceOpacity   = 236,   /* 1 param.   1 -> Surface is opaque (default), 0 -> non-opaque */
+	kCGLCPSurfaceOpacity   = 236    /* 1 param.   1 -> Surface is opaque (default), 0 -> non-opaque */
+/*  - Used by AGL - */
+/*  AGL_CLIP_REGION          254   */
+/*  AGL_FS_CAPTURE_SINGLE    255   */
 } CGLContextParameter;
 
 /*
@@ -117,7 +123,7 @@ typedef enum _CGLGlobalOption {
 	kCGLGOClearFormatCache = 502,	/* Reset the pixel format cache if true          */
 	kCGLGORetainRenderers  = 503,	/* Whether to retain loaded renderers in memory  */
 	kCGLGOResetLibrary     = 504,	/* Do a soft reset of the CGL library if true    */
-	kCGLGOUseErrorHandler  = 505,	/* Call the Core Graphics handler on CGL errors  */
+	kCGLGOUseErrorHandler  = 505 	/* Call the Core Graphics handler on CGL errors  */
 } CGLGlobalOption;
 
 /*
@@ -141,7 +147,7 @@ typedef enum _CGLError {
 	kCGLBadAddress         = 10014,	/* invalid pointer                 */
 	kCGLBadCodeModule      = 10015,	/* invalid code module             */
 	kCGLBadAlloc           = 10016,	/* invalid memory allocation       */
-	kCGLBadConnection      = 10017,	/* invalid CoreGraphics connection */
+	kCGLBadConnection      = 10017 	/* invalid CoreGraphics connection */
 } CGLError;
 
 

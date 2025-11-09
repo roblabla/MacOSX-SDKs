@@ -3,9 +3,9 @@
  
      Contains:   Master include for CarbonCore private framework
  
-     Version:    CarbonCore-472~1
+     Version:    CarbonCore-545~1
  
-     Copyright:  © 1999-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -83,6 +83,10 @@
 
 #ifndef __FOLDERS_R__
 #include <CarbonCore/Folders.r>
+#endif
+
+#ifndef __TEXTENCODINGPLUGIN_R__
+#include <CarbonCore/TextEncodingPlugin.r>
 #endif
 
 

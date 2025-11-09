@@ -182,6 +182,8 @@
 
 - (IOReturn)write:(void *)data length:(UInt16)length;
 
+#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_2
+
 /*!
     @method		writeAsync:length:refcon:
 	@abstract	Writes the given data over the target L2CAP channel asynchronously to the remote device.
@@ -189,6 +191,8 @@
 				been successfully passed to the hardware to be transmitted, the delegate method 
 				-l2capChannelWriteComplete:refcon:status: will be called with the refcon passed 
 				into this method.
+
+				NOTE: This method is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
     @param		data	Pointer to the buffer containing the data to send.
     @param		length 	The length of the given data buffer.
 	@param		refcon	User supplied value that gets passed to the write callback.
@@ -203,12 +207,16 @@
     @discussion	The length of the data may not exceed the L2CAP channel's ougoing MTU.  This method will
 				block until the data has been successfully sent to the hardware for transmission (or an error
 				occurs).
+
+				NOTE: This method is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
     @param		data	Pointer to the buffer containing the data to send.
     @param		length 	The length of the given data buffer.
 	@result		Returns kIOReturnSuccess if the data was written successfully.
 */
 
 - (IOReturn)writeSync:(void *)data length:(UInt16)length;
+
+#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_2 */
 
 /*!
     @method		registerIncomingDataListener:refCon:
@@ -226,6 +234,8 @@
 
 - (IOReturn)registerIncomingDataListener:(IOBluetoothL2CAPChannelIncomingDataListener)listener refCon:(void *)refCon;
 
+#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_2
+
 /*!
     @method		setDelegate:
 	@abstract	Allows an object to register itself as client of the L2CAP channel.
@@ -236,11 +246,15 @@
                 A newly opened L2CAP channel will not complete its configuration process until the client
                 that opened it registers a connectionHandler.  This prevents that case where incoming
                 data is received before the client is ready. 
+
+				NOTE: This method is only available in Mac OS X 10.2.5 (Bluetooth v1.2) or later.
 	@param		channelDelegate	the object that will play the role of channel delegate.
 	@result		Returns kIOReturnSuccess if the delegate is successfully registered.
 */
 
 - (IOReturn)setDelegate:(id)channelDelegate;
+
+#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_2 */
 
 /*!
     @method		getDevice
@@ -312,6 +326,8 @@
 
 @end
 
+#if BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_2
+
 // Informal protocol to describe the L2CAP channel delegate methods:
 // If the developer wishes to take advantage of the asynchronous API in Objective C
 // these are the methods that may be implemented:
@@ -325,3 +341,4 @@
 - (void)l2capChannelQueueSpaceAvailable:(IOBluetoothL2CAPChannel*)l2capChannel;
 @end
 
+#endif /* BLUETOOTH_VERSION_MAX_ALLOWED >= BLUETOOTH_VERSION_1_2 */

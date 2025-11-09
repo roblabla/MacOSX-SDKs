@@ -1,6 +1,6 @@
 /*
         NSMovieView.h
-        Copyright (c) 1998-2001, Apple Computer, Inc. All rights reserved.
+        Copyright (c) 1998-2003, Apple Computer, Inc. All rights reserved.
 */
 
 #import <AppKit/NSView.h>
@@ -91,7 +91,11 @@ typedef struct __MVFlags {
 - (void)cut:(id)sender;
 - (void)copy:(id)sender;
 - (void)paste:(id)sender;
-- (void)clear:(id)sender;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void)delete:(id)sender;
+#endif
 - (void)selectAll:(id)sender;
+
+- (void)clear:(id)sender;	// deprecated. use delete:
 
 @end

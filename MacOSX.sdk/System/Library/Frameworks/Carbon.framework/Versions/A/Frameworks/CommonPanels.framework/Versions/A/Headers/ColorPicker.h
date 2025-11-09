@@ -3,9 +3,9 @@
  
      Contains:   Color Picker package Interfaces.
  
-     Version:    CommonPanels-61~261
+     Version:    CommonPanels-70~11
  
-     Copyright:  © 1987-2002 by Apple Computer, Inc., all rights reserved
+     Copyright:  © 1987-2003 by Apple Computer, Inc., all rights reserved
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -197,108 +197,108 @@ typedef struct NColorPickerInfo         NColorPickerInfo;
  *  Fix2SmallFract()
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern SmallFract 
-Fix2SmallFract(Fixed f);
+Fix2SmallFract(Fixed f)                                       AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  SmallFract2Fix()
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Fixed 
-SmallFract2Fix(SmallFract s);
+SmallFract2Fix(SmallFract s)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  CMY2RGB()
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
 CMY2RGB(
   const CMYColor *  cColor,
-  RGBColor *        rColor);
+  RGBColor *        rColor)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  RGB2CMY()
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
 RGB2CMY(
   const RGBColor *  rColor,
-  CMYColor *        cColor);
+  CMYColor *        cColor)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  HSL2RGB()
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
 HSL2RGB(
   const HSLColor *  hColor,
-  RGBColor *        rColor);
+  RGBColor *        rColor)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  RGB2HSL()
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
 RGB2HSL(
   const RGBColor *  rColor,
-  HSLColor *        hColor);
+  HSLColor *        hColor)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  HSV2RGB()
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
 HSV2RGB(
   const HSVColor *  hColor,
-  RGBColor *        rColor);
+  RGBColor *        rColor)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*
  *  RGB2HSV()
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
 RGB2HSV(
   const RGBColor *  rColor,
-  HSVColor *        hColor);
+  HSVColor *        hColor)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -307,7 +307,7 @@ RGB2HSV(
  *  GetColor()
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
@@ -316,7 +316,7 @@ GetColor(
   Point              where,
   ConstStr255Param   prompt,
   const RGBColor *   inColor,
-  RGBColor *         outColor);
+  RGBColor *         outColor)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -325,12 +325,12 @@ GetColor(
  *  PickColor()
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorPickerLib 2.0 and later
  */
 extern OSErr 
-PickColor(ColorPickerInfo * theColorInfo);
+PickColor(ColorPickerInfo * theColorInfo)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 /*  NPickColor() requires the Color Picker extension (version 2.1 or greater).*/
@@ -338,12 +338,12 @@ PickColor(ColorPickerInfo * theColorInfo);
  *  NPickColor()
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in ColorPickerLib 2.1 and later
  */
 extern OSErr 
-NPickColor(NColorPickerInfo * theColorInfo);
+NPickColor(NColorPickerInfo * theColorInfo)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 
@@ -354,73 +354,73 @@ NPickColor(NColorPickerInfo * theColorInfo);
  *  NewColorChangedUPP()
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ColorChangedUPP
-NewColorChangedUPP(ColorChangedProcPtr userRoutine);
+NewColorChangedUPP(ColorChangedProcPtr userRoutine)           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewNColorChangedUPP()
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern NColorChangedUPP
-NewNColorChangedUPP(NColorChangedProcPtr userRoutine);
+NewNColorChangedUPP(NColorChangedProcPtr userRoutine)         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  NewUserEventUPP()
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern UserEventUPP
-NewUserEventUPP(UserEventProcPtr userRoutine);
+NewUserEventUPP(UserEventProcPtr userRoutine)                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeColorChangedUPP()
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeColorChangedUPP(ColorChangedUPP userUPP);
+DisposeColorChangedUPP(ColorChangedUPP userUPP)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeNColorChangedUPP()
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeNColorChangedUPP(NColorChangedUPP userUPP);
+DisposeNColorChangedUPP(NColorChangedUPP userUPP)             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  DisposeUserEventUPP()
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeUserEventUPP(UserEventUPP userUPP);
+DisposeUserEventUPP(UserEventUPP userUPP)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeColorChangedUPP()
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -428,13 +428,13 @@ extern void
 InvokeColorChangedUPP(
   long             userData,
   PMColor *        newColor,
-  ColorChangedUPP  userUPP);
+  ColorChangedUPP  userUPP)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeNColorChangedUPP()
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
@@ -442,20 +442,20 @@ extern void
 InvokeNColorChangedUPP(
   long              userData,
   NPMColor *        newColor,
-  NColorChangedUPP  userUPP);
+  NColorChangedUPP  userUPP)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 /*
  *  InvokeUserEventUPP()
  *  
  *  Availability:
- *    Mac OS X:         not available
+ *    Mac OS X:         in version 10.0 and later in Carbon.framework
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern Boolean
 InvokeUserEventUPP(
   EventRecord *  event,
-  UserEventUPP   userUPP);
+  UserEventUPP   userUPP)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
 
 
 

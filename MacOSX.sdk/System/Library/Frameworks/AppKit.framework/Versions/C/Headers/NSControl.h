@@ -1,7 +1,7 @@
 /*
 	NSControl.h
 	Application Kit
-	Copyright (c) 1994-2001, Apple Computer, Inc.
+	Copyright (c) 1994-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -22,7 +22,8 @@
 	unsigned int        drawingAncestor:1;
         unsigned int	    wantsCellClipTips:1;
         unsigned int	    ibReserved:1;
-	unsigned int        reservedControl:26;
+	unsigned int        updateCellFocus:1;
+	unsigned int        reserved:25;
     } _conFlags;
 }
 
@@ -56,7 +57,7 @@
 - (void)setFont:(NSFont *)fontObj;
 - (void)setFormatter:(NSFormatter *)newFormatter;
 - (id)formatter;
-- (void)setObjectValue:(id)obj;
+- (void)setObjectValue:(id<NSCopying>)obj;
 - (void)setStringValue:(NSString *)aString;
 - (void)setIntValue:(int)anInt;
 - (void)setFloatValue:(float)aFloat;
@@ -113,6 +114,9 @@
 - (BOOL)control:(NSControl *)control isValidObject:(id)obj;
 
 - (BOOL)control:(NSControl *)control textView:(NSTextView *)textView doCommandBySelector:(SEL)commandSelector;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (NSArray *)control:(NSControl *)control textView:(NSTextView *)textView completions:(NSArray *)words forPartialWordRange:(NSRange)charRange indexOfSelectedItem:(int *)index;
+#endif
 @end
 
 								// userInfo keys:

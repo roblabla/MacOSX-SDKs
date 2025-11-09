@@ -29,6 +29,7 @@
 #define _IOKIT_IOFIREWIREPCRSPACE_H
 
 #include <IOKit/firewire/IOFWAddressSpace.h>
+#include <IOKit/avc/IOFireWireAVCTargetSpace.h>
 
 /*!
     @typedef IOFireWirePCRCallback
@@ -61,6 +62,7 @@ protected:
     
     Client fClients[64];
     UInt32 fActivations;
+	IOFireWireAVCTargetSpace *	fAVCTargetSpace;
     
 /*! @struct ExpansionData
     @discussion This structure will be used to expand the capablilties of the class in the future.
@@ -177,7 +179,17 @@ public:
     @param newVal new value to store in plug if it's current value is oldVal.
 */
     virtual IOReturn updateInputMasterPlug(UInt32 oldVal, UInt32 newVal);
-    
+
+	/*!
+		@function setAVCTargetSpacePointer
+	 */
+    virtual void setAVCTargetSpacePointer(IOFireWireAVCTargetSpace *pAVCTargetSpace);
+
+	/*!
+		@function clearAllP2PConnections
+	 */
+    virtual void clearAllP2PConnections(void);
+	
 private:
     OSMetaClassDeclareReservedUnused(IOFireWirePCRSpace, 0);
     OSMetaClassDeclareReservedUnused(IOFireWirePCRSpace, 1);

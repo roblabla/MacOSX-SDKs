@@ -1,7 +1,7 @@
 /*
 	NSButtonCell.h
 	Application Kit
-	Copyright (c) 1994-2001, Apple Computer, Inc.
+	Copyright (c) 1994-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -19,7 +19,7 @@ typedef enum _NSButtonType {
     NSOnOffButton			= 6,
     NSMomentaryPushInButton		= 7,	// was NSMomentaryLight
 
-    /* These constants were accidentaly reversed so that NSMomentaryPushButton lit and
+    /* These constants were accidentally reversed so that NSMomentaryPushButton lit and
        NSMomentaryLight pushed. These names are now deprecated */
     
     NSMomentaryPushButton		= 0,
@@ -33,8 +33,15 @@ typedef enum _NSBezelStyle {
     NSRegularSquareBezelStyle    = 2,
     NSThickSquareBezelStyle      = 3,
     NSThickerSquareBezelStyle    = 4,
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+    NSDisclosureBezelStyle       = 5,
+#endif
     NSShadowlessSquareBezelStyle = 6,
     NSCircularBezelStyle         = 7,
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+    NSTexturedSquareBezelStyle   = 8,
+    NSHelpButtonBezelStyle       = 9,
+#endif
     
     // this will be obsolete before GM
 
@@ -51,7 +58,7 @@ typedef struct __BCFlags {
     unsigned int        lightByContents:1;
     unsigned int        lightByBackground:1;
     unsigned int        lightByGray:1;
-    unsigned int        reserved:1;
+    unsigned int        drawing:1;
     unsigned int        bordered:1;
     unsigned int        imageOverlaps:1;
     unsigned int        horizontal:1;
@@ -81,7 +88,7 @@ typedef struct __BCFlags {
     unsigned int        horizontal:1;
     unsigned int        imageOverlaps:1;
     unsigned int        bordered:1;
-    unsigned int        hasAlpha:1;
+    unsigned int        drawing:1;
     unsigned int        lightByGray:1;
     unsigned int        lightByBackground:1;
     unsigned int        lightByContents:1;
@@ -95,7 +102,8 @@ typedef struct __BCFlags {
 typedef struct __BCFlags2 {
 #ifdef __BIG_ENDIAN__
     unsigned int	keyEquivalentModifierMask:24;
-    unsigned int	reserved:3;
+    unsigned int	reserved:2;
+    unsigned int	bezelStyle2:1;
     unsigned int	mouseInside:1;
     unsigned int	showsBorderOnlyWhileMouseInside:1;
     unsigned int	bezelStyle:3;
@@ -103,7 +111,8 @@ typedef struct __BCFlags2 {
     unsigned int	bezelStyle:3;
     unsigned int	showsBorderOnlyWhileMouseInside:1;
     unsigned int	mouseInside:1;
-    unsigned int	reserved:3;
+    unsigned int	bezelStyle2:1;
+    unsigned int	reserved:2;
     unsigned int	keyEquivalentModifierMask:24;
 #endif
 } _BCFlags2;

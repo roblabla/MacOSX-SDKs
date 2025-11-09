@@ -3,9 +3,9 @@
  
      Contains:   ColorSync Calibration API
  
-     Version:    CommonPanels-61~261
+     Version:    CommonPanels-70~11
  
-     Copyright:  © 1998-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1998-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -41,6 +41,7 @@ extern "C" {
 
 typedef CALLBACK_API( void , CalibrateEventProcPtr )(EventRecord * event);
 typedef STACK_UPP_TYPE(CalibrateEventProcPtr)                   CalibrateEventUPP;
+
 
 /* Interface for new ColorSync monitor calibrators (ColorSync 2.6 and greater) */
 

@@ -40,6 +40,9 @@ typedef function_table_entry 	*function_table_t;
 __BeforeMigUserHeader
 #endif /* __BeforeMigUserHeader */
 
+#include <sys/cdefs.h>
+__BEGIN_DECLS
+
 
 /* Routine host_get_boot_info */
 #ifdef	mig_external
@@ -381,6 +384,20 @@ kern_return_t host_get_UNDServer
 	host_priv_t host,
 	UNDServerRef *server
 );
+
+__END_DECLS
+
+/********************** Caution **************************/
+/* The following data types should be used to calculate  */
+/* maximum message sizes only. The actual message may be */
+/* smaller, and the position of the arguments within the */
+/* message layout may vary from what is presented here.  */
+/* For example, if any of the arguments are variable-    */
+/* sized, and less than the maximum is sent, the data    */
+/* will be packed tight in the actual message to reduce  */
+/* the presence of holes.                                */
+/********************** Caution **************************/
+
 /* typedefs for all requests */
 
 #ifndef __Request__host_priv_subsystem__defined

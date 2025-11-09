@@ -1,5 +1,5 @@
 /*	CFByteOrder.h
-	Copyright 1995-2002, Apple, Inc. All rights reserved.
+	Copyright (c) 1995-2003, Apple, Inc. All rights reserved.
 */
 
 #if !defined(__COREFOUNDATION_CFBYTEORDER__)
@@ -27,89 +27,48 @@ typedef enum __CFByteOrder {
 
 CF_INLINE CFByteOrder CFByteOrderGetCurrent(void) {
     uint32_t x = (CFByteOrderBigEndian << 24) | CFByteOrderLittleEndian;
-    return (CFByteOrder)*((UInt8 *)&x);
+    return (CFByteOrder)*((uint8_t *)&x);
 }
 
 CF_INLINE uint16_t CFSwapInt16(uint16_t arg) {
-#if defined(__i386__)
-    uint16_t result;
-    __asm__ volatile("rorw $8,%0" : "=r" (result) : "0" (arg));
-    return result;
+#if defined(__i386__) && defined(__GNUC__)
+    __asm__("xchgb %b0, %h0" : "+q" (arg));
+    return arg;
 #elif defined(__ppc__) && defined(__GNUC__)
     uint16_t result;
-    __asm__ volatile("lhbrx %0, 0, %1" : "=r" (result) : "r" (&arg) : "r0");
-    return result;
-#elif 0
-    uint16_t result;
-    result = ((arg<<8) & 0xFF00) | ((arg>>8) & 0x00FF);
+    __asm__("lhbrx %0,0,%1" : "=r" (result) : "r" (&arg), "m" (arg));
     return result;
 #else
-    union CFSwap {
-	uint16_t sv;
-	UInt8 uc[2];
-    } result, *argp = (union CFSwap *)&arg;
-    result.uc[0] = argp->uc[1];
-    result.uc[1] = argp->uc[0];
-    return result.sv;
+    uint16_t result;
+    result = ((arg << 8) & 0xFF00) | ((arg >> 8) & 0xFF);
+    return result;
 #endif
 }
 
 CF_INLINE uint32_t CFSwapInt32(uint32_t arg) {
-#if defined(__i386__)
-    uint32_t result;
-    __asm__ volatile("bswap %0" : "=r" (result) : "0" (arg));
-    return result;
+#if defined(__i386__) && defined(__GNUC__)
+    __asm__("bswap %0" : "+r" (arg));
+    return arg;
 #elif defined(__ppc__) && defined(__GNUC__)
     uint32_t result;
-    __asm__ volatile("lwbrx %0, 0, %1" : "=r" (result) : "r" (&arg) : "r0");
-    return result;
-#elif 0
-    uint32_t result;
-    result =	((arg<<24) & 0xFF000000) |
-		((arg<<8)  & 0x00FF0000) |
-		((arg>>8)  & 0x0000FF00) |
-		((arg>>24) & 0x000000FF);
+    __asm__("lwbrx %0,0,%1" : "=r" (result) : "r" (&arg), "m" (arg));
     return result;
 #else
-    union CFSwap {
-	uint32_t sv;
-	UInt8 uc[4];
-    } result, *argp = (union CFSwap *)&arg;
-    result.uc[0] = argp->uc[3];
-    result.uc[1] = argp->uc[2];
-    result.uc[2] = argp->uc[1];
-    result.uc[3] = argp->uc[0];
-    return result.sv;
+    uint32_t result;
+    result = ((arg & 0xFF) << 24) | ((arg & 0xFF00) << 8) | ((arg >> 8) & 0xFF00) | ((arg >> 24) & 0xFF);
+    return result;
 #endif
 }
 
 CF_INLINE uint64_t CFSwapInt64(uint64_t arg) {
-#if 0
-    uint64_t result;
-    result =	((arg<<56) & 0xFF00000000000000ULL) |
-		((arg<<40) & 0x00FF000000000000ULL) |
-		((arg<<24) & 0x0000FF0000000000ULL) |
-		((arg<<8)  & 0x000000FF00000000ULL) |
-		((arg>>8)  & 0x00000000FF000000ULL) |
-		((arg>>24) & 0x0000000000FF0000ULL) |
-		((arg>>40) & 0x000000000000FF00ULL) |
-		((arg>>56) & 0x00000000000000FFULL);
-    return result;
-#else
     union CFSwap {
-	uint64_t sv;
-	UInt8 uc[8];
-    } result, *argp = (union CFSwap *)&arg;
-    result.uc[0] = argp->uc[7];
-    result.uc[1] = argp->uc[6];
-    result.uc[2] = argp->uc[5];
-    result.uc[3] = argp->uc[4];
-    result.uc[4] = argp->uc[3];
-    result.uc[5] = argp->uc[2];
-    result.uc[6] = argp->uc[1];
-    result.uc[7] = argp->uc[0];
+        uint64_t sv;
+        uint32_t ul[2];
+    } tmp, result;
+    tmp.sv = arg;
+    result.ul[0] = CFSwapInt32(tmp.ul[1]); 
+    result.ul[1] = CFSwapInt32(tmp.ul[0]);
     return result.sv;
-#endif
 }
 
 CF_INLINE uint16_t CFSwapInt16BigToHost(uint16_t arg) {

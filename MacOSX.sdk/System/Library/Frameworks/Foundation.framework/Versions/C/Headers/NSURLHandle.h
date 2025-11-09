@@ -1,5 +1,5 @@
 /*	NSURLHandle.h
-	Copyright 1997-2002, Apple, Inc. All rights reserved.
+	Copyright (c) 1997-2003, Apple, Inc. All rights reserved.
 */
  
 #import <Foundation/NSObject.h>
@@ -28,6 +28,15 @@ FOUNDATION_EXPORT NSString *NSFTPPropertyActiveTransferModeKey; // NSNumber BOOL
 FOUNDATION_EXPORT NSString *NSFTPPropertyFileOffsetKey; // NSNumber - default 0
 
 #endif
+
+#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
+
+// NSDictionary containing proxy information to use in place of proxy identified in SystemConfiguration.framework
+// To avoid any proxy use, pass an empty dictionary
+FOUNDATION_EXPORT NSString *NSFTPPropertyFTPProxy;
+
+#endif
+
 
 typedef enum {
     NSURLHandleNotLoaded = 0,
@@ -66,6 +75,10 @@ typedef enum {
 
 - (NSData *)resourceData; // Blocks until all data is available
 - (NSData *)availableResourceData;  // Immediately returns whatever data is available
+
+#if MAC_OS_X_VERSION_10_3 <= MAC_OS_X_VERSION_MAX_ALLOWED
+- (long long) expectedResourceDataSize;	// Length of all of the resource data (can be queried before all data has arrived; negative if unknown)
+#endif
 
 - (void)flushCachedData;
 

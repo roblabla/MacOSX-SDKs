@@ -1,47 +1,28 @@
-/* $Copyright:
+/*
+ * Copyright 1998-2003 Massachusetts Institute of Technology.
+ * All Rights Reserved.
  *
- * Copyright 1998-2000 by the Massachusetts Institute of Technology.
- * 
- * All rights reserved.
- * 
- * Export of this software from the United States of America may require a
- * specific license from the United States Government.  It is the
- * responsibility of any person or organization contemplating export to
- * obtain such a license before exporting.
- * 
- * WITHIN THAT CONSTRAINT, permission to use, copy, modify, and distribute
- * this software and its documentation for any purpose and without fee is
- * hereby granted, provided that the above copyright notice appear in all
- * copies and that both that copyright notice and this permission notice
- * appear in supporting documentation, and that the name of M.I.T. not be
- * used in advertising or publicity pertaining to distribution of the
- * software without specific, written prior permission.  Furthermore if you
- * modify this software you must label your software as modified software
- * and not distribute it in such a fashion that it might be confused with
- * the original MIT software. M.I.T. makes no representations about the
- * suitability of this software for any purpose.  It is provided "as is"
- * without express or implied warranty.
- * 
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
- * MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- * 
- * Individual source code files are copyright MIT, Cygnus Support,
- * OpenVision, Oracle, Sun Soft, FundsXpress, and others.
- * 
- * Project Athena, Athena, Athena MUSE, Discuss, Hesiod, Kerberos, Moira,
- * and Zephyr are trademarks of the Massachusetts Institute of Technology
- * (MIT).  No commercial use of these trademarks may be made without prior
- * written permission of MIT.
- * 
- * "Commercial use" means use of a name in a product or other for-profit
- * manner.  It does NOT prevent a commercial firm from referring to the MIT
- * trademarks in order to convey information (although in doing so,
- * recognition of their trademark status should be given).
- * $
+ * Export of this software from the United States of America may
+ * require a specific license from the United States Government.
+ * It is the responsibility of any person or organization contemplating
+ * export to obtain such a license before exporting.
+ *
+ * WITHIN THAT CONSTRAINT, permission to use, copy, modify, and
+ * distribute this software and its documentation for any purpose and
+ * without fee is hereby granted, provided that the above copyright
+ * notice appear in all copies and that both that copyright notice and
+ * this permission notice appear in supporting documentation, and that
+ * the name of M.I.T. not be used in advertising or publicity pertaining
+ * to distribution of the software without specific, written prior
+ * permission.  Furthermore if you modify this software you must label
+ * your software as modified software and not distribute it in such a
+ * fashion that it might be confused with the original M.I.T. software.
+ * M.I.T. makes no representations about the suitability of
+ * this software for any purpose.  It is provided "as is" without express
+ * or implied warranty.
  */
 
-/* $Header: /cvs/kfm/KerberosFramework/CredentialsCache/Headers/Kerberos/CredentialsCache.h,v 1.36 2002/04/23 21:45:39 lxs Exp $ */
+/* $Header: /cvs/kfm/KerberosFramework/CredentialsCache/Headers/Kerberos/CredentialsCache.h,v 1.40 2003/07/03 16:13:40 lxs Exp $ */
 
 /*
  * Declarations for Credentials Cache API Library
@@ -58,14 +39,14 @@
 #define __CREDENTIALSCACHE__
 
 #if defined(macintosh) || (defined(__MACH__) && defined(__APPLE__))
-	#include <TargetConditionals.h>
-    #if TARGET_RT_MAC_CFM
-        #error "Use KfM 4.0 SDK headers for CFM compilation."
-    #endif
+#    include <TargetConditionals.h>
+#    if TARGET_RT_MAC_CFM
+#        error "Use KfM 4.0 SDK headers for CFM compilation."
+#    endif
 #endif
 
 #if TARGET_OS_MAC
-    #include <sys/types.h>
+#    include <sys/types.h>
 #endif
 
 #ifdef __cplusplus
@@ -73,13 +54,12 @@ extern "C" {
 #endif /* __cplusplus */
 
 #if TARGET_OS_MAC
-    #if defined(__MWERKS__)
-        #pragma import on
-        #pragma enumsalwaysint on
-    #endif
-    #pragma options align=mac68k
+#    if defined(__MWERKS__)
+#        pragma import on
+#    endif
+#    pragma options align=mac68k
 #endif
-
+    
 /*
  * Constants
  */
@@ -88,7 +68,8 @@ extern "C" {
 enum {
 	ccapi_version_2 = 2,
 	ccapi_version_3 = 3,
-	ccapi_version_4 = 4
+	ccapi_version_4 = 4,
+	ccapi_version_5 = 5
 };
  
 /* Errors */
@@ -123,7 +104,9 @@ enum {
 	ccErrContextNotFound,
     ccErrServerUnavailable,
     ccErrServerInsecure,
-    ccErrServerCantBecomeUID
+    ccErrServerCantBecomeUID,
+    
+    ccErrTimeOffsetNotSet				/* 226 */
 };
 
 /* Credentials versions */
@@ -173,7 +156,8 @@ enum {	/* Make sure all of these are multiples of four (for alignment sanity) */
 	cc_v4_ticket_size	= 1254
 };
 
-enum cc_string_to_key_type {
+/* cc_string_to_key_type */
+enum {
 	cc_v4_stk_afs = 0,
 	cc_v4_stk_des = 1,
 	cc_v4_stk_columbia_special = 2,
@@ -388,6 +372,18 @@ struct cc_ccache_f {
                                 cc_ccache_t ccache,
                                 cc_ccache_t compare_to,
                                 cc_uint32* equal);
+    cc_int32	(*get_kdc_time_offset) (
+                                cc_ccache_t ccache,
+                                cc_int32	credentials_version,
+                                cc_time_t*	time_offset);
+    cc_int32	(*set_kdc_time_offset) (
+                                cc_ccache_t ccache,
+                                cc_int32	credentials_version,
+                                cc_time_t	time_offset);
+                                
+    cc_int32	(*clear_kdc_time_offset) (
+                                cc_ccache_t	ccache,
+                                cc_int32	credentials_version);
 };
 
 struct cc_string_f {
@@ -492,6 +488,12 @@ cc_int32 cc_initialize (
 			((source) -> functions -> move (source, destination))
 #define		cc_ccache_compare(ccache, compare_to, equal)							\
 			((ccache) -> functions -> compare (ccache, compare_to, equal))
+#define		cc_ccache_get_kdc_time_offset(ccache, version, time)					\
+            ((ccache) -> functions -> get_kdc_time_offset (version, time))
+#define		cc_ccache_set_kdc_time_offset(ccache, version, time)					\
+            ((ccache) -> functions -> set_kdc_time_offset (version, time))
+#define		cc_ccache_clear_kdc_time_offset(ccache, version)						\
+            ((ccache) -> functions -> clear_kdc_time_offset (version))
 
 #define		cc_string_release(string)												\
 			((string) -> functions -> release (string))
@@ -510,13 +512,12 @@ cc_int32 cc_initialize (
 			((iterator) -> functions -> release (iterator))
 #define		cc_credentials_iterator_next(iterator, credentials)						\
 			((iterator) -> functions -> next (iterator, credentials))
-			
+
 #if TARGET_OS_MAC
-    #if defined(__MWERKS__)
-        #pragma enumsalwaysint reset
-        #pragma import reset
-    #endif
-	#pragma options align=reset
+#    if defined(__MWERKS__)
+#        pragma import reset
+#    endif
+#    pragma options align=reset
 #endif
 
 #ifdef __cplusplus

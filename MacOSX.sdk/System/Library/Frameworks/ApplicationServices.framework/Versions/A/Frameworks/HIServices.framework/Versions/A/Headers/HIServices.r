@@ -3,9 +3,9 @@
  
      Contains:   Master include for HIServices framework
  
-     Version:    HIServices-106.1~2
+     Version:    HIServices-125.6~1
  
-     Copyright:  © 2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 2002-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:

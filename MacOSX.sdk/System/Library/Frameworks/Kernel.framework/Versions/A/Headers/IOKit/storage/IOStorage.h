@@ -1,21 +1,22 @@
 /*
- * Copyright (c) 1998-2000 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2003 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
- * The contents of this file constitute Original Code as defined in and
- * are subject to the Apple Public Source License Version 1.1 (the
- * "License").  You may not use this file except in compliance with the
- * License.  Please obtain a copy of the License at
- * http://www.apple.com/publicsource and read it before using this file.
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this
+ * file.
  * 
- * This Original Code and all software distributed under the License are
- * distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
  * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT.  Please see the
- * License for the specific language governing rights and limitations
- * under the License.
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
+ * limitations under the License.
  * 
  * @APPLE_LICENSE_HEADER_END@
  */
@@ -34,9 +35,7 @@
 /*!
  * @defined kIOStorageClass
  * @abstract
- * kIOStorageClass is the name of the IOStorage class.
- * @discussion
- * kIOStorageClass is the name of the IOStorage class.
+ * The name of the IOStorage class.
  */
 
 #define kIOStorageClass "IOStorage"
@@ -131,13 +130,13 @@ struct IOStorageCompletion
 /*!
  * @class IOStorage
  * @abstract
- * The IOStorage class is the common base class for mass storage objects.
+ * The common base class for mass storage objects.
  * @discussion
  * The IOStorage class is the common base class for mass storage objects.  It is
  * an abstract class that defines the open/close/read/write APIs that need to be
  * implemented in a given subclass.  Synchronous versions of the read/write APIs
  * are provided here -- they are coded in such a way as to wrap the asynchronous
- * versions implmeneted in the subclass.
+ * versions implemented in the subclass.
  */
 
 class IOStorage : public IOService
@@ -181,7 +180,7 @@ protected:
      * @function handleIsOpen
      * @discussion
      * The handleIsOpen method determines whether the specified client, or any
-     * client if none is specificed, presently has an open on this object.
+     * client if none is specified, presently has an open on this object.
      * @param client
      * Client to check the open state of.  Set to zero to check the open state
      * of all clients.

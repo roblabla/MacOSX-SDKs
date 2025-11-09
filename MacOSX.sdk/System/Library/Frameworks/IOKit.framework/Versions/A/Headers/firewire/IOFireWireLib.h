@@ -59,6 +59,27 @@ IODestroyPlugInInterface(). Do not call Release() on it.
 */
 /*
 	$Log: IOFireWireLib.h,v $
+	Revision 1.31  2003/09/10 23:01:48  collin
+	*** empty log message ***
+	
+	Revision 1.30  2003/09/06 01:37:24  collin
+	*** empty log message ***
+	
+	Revision 1.29  2003/08/25 08:39:17  niels
+	*** empty log message ***
+	
+	Revision 1.28  2003/08/08 21:03:47  gecko1
+	Merge max-rec clipping code into TOT
+	
+	Revision 1.27  2003/07/21 06:53:10  niels
+	merge isoch to TOT
+	
+	Revision 1.26.14.2  2003/07/18 00:17:47  niels
+	*** empty log message ***
+	
+	Revision 1.26.14.1  2003/07/01 20:54:23  niels
+	isoch merge
+	
 	Revision 1.26  2002/11/06 23:44:21  wgulland
 	Update header doc for CreateLocalIsochPort
 	
@@ -95,7 +116,17 @@ IODestroyPlugInInterface(). Do not call Release() on it.
 // ============================================================
 
 //
-// 	version 5 interfaces
+// version 6
+//
+
+// kIOFireWireDeviceInterface_v6
+//		uuid: C2AB2F11-45E2-11D7-815C-000393470256
+#define kIOFireWireDeviceInterfaceID_v6	CFUUIDGetConstantUUIDWithBytes( kCFAllocatorDefault,\
+											0xC2, 0xAB, 0x2F, 0x11, 0x45, 0xE2, 0x11, 0xD7,\
+											0x81, 0x5C, 0x00, 0x03, 0x93, 0x47, 0x02, 0x56 )
+
+//
+// 	version 5 interfaces (obsolete)
 //
 //
 //	kIOFireWireNubInterface_v5
@@ -115,7 +146,7 @@ IODestroyPlugInInterface(). Do not call Release() on it.
 											0x9D, 0x11, 0x00, 0x03, 0x93, 0x8B, 0xEB, 0x0A )
 
 //
-// 	version 4 interfaces
+// 	version 4 interfaces (obsolete)
 //
 //		availability: 
 //				Mac OS X 10.2 "Jaguar" and later
@@ -139,7 +170,7 @@ IODestroyPlugInInterface(). Do not call Release() on it.
 											0x82, 0x99, 0x00, 0x03, 0x93, 0x3F, 0x84, 0xF0 )
 
 //
-// 	version 3 interfaces (include isochronous functions)
+// 	version 3 interfaces  (obsolete)
 //
 //		availability: 
 //				Mac OS X 10.2 "Jaguar" and later
@@ -164,7 +195,7 @@ IODestroyPlugInInterface(). Do not call Release() on it.
 											0x82, 0x9A, 0x00, 0x03, 0x93, 0x3F, 0x84, 0xF0 )
 
 //
-// 	version 2 interfaces (include isochronous functions)
+// 	version 2 interfaces (obsolete)
 //
 //		availability: 
 //				Mac OS X 10.1 and later
@@ -189,7 +220,7 @@ IODestroyPlugInInterface(). Do not call Release() on it.
 											0x8B, 0xD0, 0x00, 0x30, 0x65, 0x42, 0x34, 0x56)
 
 //
-//	version 1 interfaces
+//	version 1 interfaces  (obsolete)
 //
 //		availablity: 
 //				Mac OS X 10.0.0 and later
@@ -222,7 +253,7 @@ IODestroyPlugInInterface(). Do not call Release() on it.
 											0x8A, 0x49, 0x00, 0x03, 0x93, 0x3F, 0x84, 0xF0 )
 
 //
-//	version 1 interfaces
+//	version 1 interfaces  (obsolete)
 //
 
 //	uuid string: F8B6993A-F197-11D4-A3F1-000502072F80
@@ -328,6 +359,8 @@ typedef struct 	IOFireWireIsochPortInterface_t**			IOFireWireLibIsochPortRef ;
 typedef struct 	IOFireWireRemoteIsochPortInterface_t**		IOFireWireLibRemoteIsochPortRef ;
 typedef struct 	IOFireWireLocalIsochPortInterface_t**		IOFireWireLibLocalIsochPortRef ;
 typedef struct 	IOFireWireDCLCommandPoolInterface_t**		IOFireWireLibDCLCommandPoolRef ;
+typedef struct	IOFireWireNuDCLPoolInterface_t**			IOFireWireLibNuDCLPoolRef ;
+typedef struct	IOFireWireBufferFillIsochPortInterface_t**	IOFireWireLibBufferFillIsochPortRef ;
 
 #pragma mark -
 #pragma mark CALLBACK TYPES
@@ -610,7 +643,7 @@ public:
 		@param size Number of bytes to read
 		@param failOnReset Pass true if the command should only be executed during the FireWire bus generation
 			specified in generation. Pass false to ignore the generation parameter. The generation can be
-			obtained by calling GetGenerationAndNodeID()
+			obtained by calling GetBusGeneration()
 		@param generation The FireWire bus generation during which the command should be executed. Ignored
 			if failOnReset is false.
 		@result An IOReturn error code
@@ -635,7 +668,7 @@ public:
 		@param value A pointer to where to data should be stored
 		@param failOnReset Pass true if the command should only be executed during the FireWire bus generation
 			specified in generation. Pass false to ignore the generation parameter. The generation can be
-			obtained by calling GetGenerationAndNodeID()
+			obtained by calling GetBusGeneration()
 		@param generation The FireWire bus generation during which the command should be executed. Ignored
 			if failOnReset is false.
 		@result An IOReturn error code
@@ -659,7 +692,7 @@ public:
 		@param size Number of bytes to read
 		@param failOnReset Pass true if the command should only be executed during the FireWire bus generation
 			specified in 'generation'. Pass false to ignore the generation parameter. The generation can be
-			obtained by calling GetGenerationAndNodeID()
+			obtained by calling GetBusGeneration()
 		@param generation The FireWire bus generation during which the command should be executed. Ignored
 			if failOnReset is false.
 		@result An IOReturn error code
@@ -684,7 +717,7 @@ public:
 		@param val The value to write
 		@param failOnReset Pass true if the command should only be executed during the FireWire bus generation
 			specified in 'generation'. Pass false to ignore the generation parameter. The generation can be
-			obtained by calling GetGenerationAndNodeID()
+			obtained by calling GetBusGeneration()
 		@param generation The FireWire bus generation during which the command should be executed. Ignored
 			if failOnReset is false.
 		@result An IOReturn error code
@@ -704,7 +737,7 @@ public:
 		@param newVal Value to set
 		@param failOnReset Pass true if the command should only be executed during the FireWire bus generation
 			specified in 'generation'. Pass false to ignore the generation parameter. The generation can be
-			obtained by calling GetGenerationAndNodeID()
+			obtained by calling GetBusGeneration()
 		@param generation The FireWire bus generation during which the command should be executed. Ignored
 			if failOnReset is false.
 		@result An IOReturn error code
@@ -727,7 +760,7 @@ public:
 		@param callback Command completion callback.
 		@param failOnReset Pass true if the command should only be executed during the FireWire bus generation
 			specified in 'generation'. Pass false to ignore the generation parameter. The generation can be
-			obtained by calling GetGenerationAndNodeID()
+			obtained by calling GetBusGeneration()
 		@param generation The FireWire bus generation during which the command should be executed. Ignored
 			if failOnReset is false.
 		@result An IOFireWireLibCommandRef interface. See IOFireWireLibCommandRef.
@@ -746,7 +779,7 @@ public:
 		@param numQuads Number of quadlets to read
 		@param failOnReset Pass true if the command should only be executed during the FireWire bus generation
 			specified in 'generation'. Pass false to ignore the generation parameter. The generation can be
-			obtained by calling GetGenerationAndNodeID()
+			obtained by calling GetBusGeneration()
 		@param generation The FireWire bus generation during which the command should be executed. Ignored
 			if failOnReset is false.
 		@param 
@@ -766,7 +799,7 @@ public:
 		@param callback Command completion callback.
 		@param failOnReset Pass true if the command should only be executed during the FireWire bus generation
 			specified in 'generation'. Pass false to ignore the generation parameter. The generation can be
-			obtained by calling GetGenerationAndNodeID()
+			obtained by calling GetBusGeneration()
 		@param generation The FireWire bus generation during which the command should be executed. Ignored
 			if failOnReset is false.
 		@result An IOFireWireLibCommandRef interface. See IOFireWireLibCommandRef.*/
@@ -785,7 +818,7 @@ public:
 		@param numQuads Number of quadlets to write
 		@param failOnReset Pass true if the command should only be executed during the FireWire bus generation
 			specified in 'generation'. Pass false to ignore the generation parameter. The generation can be
-			obtained by calling GetGenerationAndNodeID()
+			obtained by calling GetBusGeneration()
 		@param generation The FireWire bus generation during which the command should be executed. Ignored
 			if failOnReset is false.
 		@result An IOFireWireLibCommandRef interface. See IOFireWireLibCommandRef.
@@ -806,7 +839,7 @@ public:
 		@param callback Command completion callback.
 		@param failOnReset Pass true if the command should only be executed during the FireWire bus generation
 			specified in 'generation'. Pass false to ignore the generation parameter. The generation can be
-			obtained by calling GetGenerationAndNodeID()
+			obtained by calling GetBusGeneration()
 		@param generation The FireWire bus generation during which the command should be executed. Ignored
 			if failOnReset is false.
 		@result An IOFireWireLibCommandRef interface. See IOFireWireLibCommandRef.	*/
@@ -1253,7 +1286,7 @@ public:
 		@param callback Command completion callback.
 		@param failOnReset Pass true if the command should only be executed during the FireWire bus generation
 			specified in 'generation'. Pass false to ignore the generation parameter. The generation can be
-			obtained by calling GetGenerationAndNodeID()
+			obtained by calling GetBusGeneration()
 		@param generation The FireWire bus generation during which the command should be executed. Ignored
 			if failOnReset is false.
 		@result An IOFireWireLibCommandRef interface. See IOFireWireLibCommandRef.	*/
@@ -1279,7 +1312,7 @@ public:
 		@param size Size in bytes of compare swap transaction to perform. Value values are 4 and 8.
 		@param failOnReset Pass true if the command should only be executed during the FireWire bus generation
 			specified in 'generation'. Pass false to ignore the generation parameter. The generation can be
-			obtained by calling GetGenerationAndNodeID()
+			obtained by calling GetBusGeneration()
 		@param generation The FireWire bus generation during which the command should be executed. Ignored
 			if failOnReset is false.
 		@result An IOReturn error code
@@ -1355,9 +1388,18 @@ public:
 			kIOFireWireBusReset if 'checkGeneration' does not match the current bus generation number.*/
 	IOReturn (*GetSpeedBetweenNodes)( IOFireWireLibDeviceRef self, UInt32 checkGeneration, UInt16 srcNodeID, UInt16 destNodeID,  IOFWSpeed* outSpeed) ;
 
+	//
 	// v5
+	//
 
 	IOReturn (*GetIRMNodeID)( IOFireWireLibDeviceRef self, UInt32 checkGeneration, UInt16* outIRMNodeID ) ;
+	
+	//
+	// v6
+	//
+	
+	IOReturn (*ClipMaxRec2K)( IOFireWireLibDeviceRef self, Boolean clipMaxRec ) ;
+	IOFireWireLibNuDCLPoolRef				(*CreateNuDCLPool)( IOFireWireLibDeviceRef self, UInt32 capacity, REFIID iid ) ;
 	
 } IOFireWireDeviceInterface, IOFireWireUnitInterface, IOFireWireNubInterface ;
 #endif // ifdef KERNEL
@@ -1944,7 +1986,7 @@ public:
 		</table>
 		@param self The command object interface of interest
 		@param generation A bus generation. The current bus generation can be obtained
-			from IOFireWireDeviceInterface::GetGenerationAndNodeID().	*/
+			from IOFireWireDeviceInterface::GetBusGeneration().	*/
 		/*
 		void				(*SetGeneration)(IOFireWireLibCommandRef self, UInt32 generation) ;
 		*/
@@ -2662,6 +2704,16 @@ public:
 	IOReturn (*GetNumEntries)					( IOFireWireLibConfigDirectoryRef self, int* outNumEntries) ;
 
 } IOFireWireConfigDirectoryInterface ;
-#endif // ifdef KERNEL
+
+CF_INLINE IOVirtualRange
+IOVirtualRangeMake( IOVirtualAddress address, IOByteCount length )
+{
+	IOVirtualRange range ;
+	range.address = address ;
+	range.length = length ;
+	return range ;
+}
+
+#endif // ifndef KERNEL
 
 #endif //__IOFireWireLib_H__

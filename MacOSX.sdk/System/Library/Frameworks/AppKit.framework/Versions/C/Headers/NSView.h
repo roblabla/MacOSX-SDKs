@@ -1,7 +1,7 @@
 /*
 	NSView.h
 	Application Kit
-	Copyright (c) 1994-2001, Apple Computer, Inc.
+	Copyright (c) 1994-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -119,6 +119,15 @@ typedef struct __NSViewAuxiliary _NSViewAuxiliary;
 - (BOOL)isDescendantOf:(NSView *)aView;
 - (NSView *)ancestorSharedWithView:(NSView *)aView;
 - (NSView *)opaqueAncestor;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void)setHidden:(BOOL)flag;
+- (BOOL)isHidden;
+- (BOOL)isHiddenOrHasHiddenAncestor;
+
+- (void)getRectsBeingDrawn:(const NSRect **)rects count:(int *)count;
+- (BOOL)needsToDrawRect:(NSRect)aRect;
+- (BOOL)wantsDefaultClipping;
+#endif
 - (void)addSubview:(NSView *)aView;
 - (void)addSubview:(NSView *)aView positioned:(NSWindowOrderingMode)place relativeTo:(NSView *)otherView;
 - (void)sortSubviewsUsingFunction:(int (*)(id, id, void *))compare context:(void *)context;
@@ -258,7 +267,18 @@ typedef struct __NSViewAuxiliary _NSViewAuxiliary;
 - (NSView *)previousKeyView;
 - (NSView *)nextValidKeyView;
 - (NSView *)previousValidKeyView;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (BOOL)canBecomeKeyView;
+#endif
+
 - (void)setKeyboardFocusRingNeedsDisplayInRect:(NSRect)rect;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void)setFocusRingType:(NSFocusRingType)focusRingType;
+- (NSFocusRingType)focusRingType;
++ (NSFocusRingType)defaultFocusRingType;
+#endif
 @end
 
 @interface NSView(NSPrinting)

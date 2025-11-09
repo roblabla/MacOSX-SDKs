@@ -1,7 +1,7 @@
 /*
 	NSForm.h
 	Application Kit
-	Copyright (c) 1994-2001, Apple Computer, Inc.
+	Copyright (c) 1994-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -27,5 +27,6 @@
 - (void)removeEntryAtIndex:(int)index;
 - (int)indexOfCellWithTag:(int)aTag;
 - (void)selectTextAtIndex:(int)index;
+- (void)setFrameSize:(NSSize)newSize;
 
 @end

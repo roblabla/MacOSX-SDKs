@@ -3,9 +3,9 @@
  
      Contains:   Internet Config interfaces
  
-     Version:    HIServices-106.1~2
+     Version:    HIServices-125.6~1
  
-     Copyright:  © 1999-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1999-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -1219,7 +1219,7 @@ ICSetPrefHandle(
    * value contained in prefh.
    * key must not be the empty string.
    * If prefh is nil then the preference value is not set.
-   * If buf is not nil then the preference value is set to the data
+   * If prefh is not nil then the preference value is set to the data
    * contained in it.
    * If attr is ICattr_no_change then the preference attributes are not set.
    * Otherwise the preference attributes are set to attr.

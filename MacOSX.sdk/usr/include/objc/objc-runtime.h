@@ -30,8 +30,14 @@
 #define _OBJC_RUNTIME_H_
 
 #import <stdarg.h>
+#import <AvailabilityMacros.h>
 #import <objc/objc.h>
 #import <objc/objc-class.h>
+
+#if !defined(AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER)
+    /* For 10.2 compatibility */
+#   define AVAILABLE_MAC_OS_X_VERSION_10_3_AND_LATER
+#endif
 
 typedef struct objc_symtab *Symtab;
 
@@ -57,28 +63,43 @@ struct objc_super {
 	Class class;
 };
 
-/* kernel operations */
+/*
+ * Messaging Primitives (prototypes)
+ */
 
 OBJC_EXPORT id objc_getClass(const char *name);
 OBJC_EXPORT id objc_getMetaClass(const char *name);
 OBJC_EXPORT id objc_msgSend(id self, SEL op, ...);
-#if defined(WINNT) || defined(__cplusplus)
-// The compiler on NT is broken when dealing with structure-returns.
-// Help out the compiler group by tweaking the prototype.
-OBJC_EXPORT id objc_msgSend_stret(id self, SEL op, ...);
-#else
-OBJC_EXPORT void objc_msgSend_stret(void * stretAddr, id self, SEL op, ...);
-#endif
 OBJC_EXPORT id objc_msgSendSuper(struct objc_super *super, SEL op, ...);
-#if defined(WINNT) || defined(__cplusplus)
-// The compiler on NT is broken when dealing with structure-returns.
-// Help out the compiler group by tweaking the prototype.
-OBJC_EXPORT id objc_msgSendSuper_stret(struct objc_super *super, SEL op, ...);
+
+
+/* Struct-returning Messaging Primitives (prototypes)
+ *
+ * For historical reasons, the prototypes for the struct-returning 
+ * messengers are unusual. The portable, correct way to call these functions 
+ * is to cast them to your desired return type first.
+ * 
+ * For example, `NSRect result = [myNSView frame]` could be written as:
+ *   NSRect (*msgSend_stret_fn)(id, SEL, ...) = (NSRect(*)(id, SEL, ...))objc_msgSend_stret;
+ *   NSRect result = (*msgSend_stret_fn)(myNSView, @selector(frame));
+ * or, without the function pointer:
+ *   NSRect result = (*(NSRect(*)(id, SEL, ...))objc_msgSend_stret)(myNSView, @selector(frame));
+ * 
+ * BE WARNED that these prototypes have changed in the past and will change 
+ * in the future. Code that uses a cast like the example above will be 
+ * unaffected. 
+ */
+
+#if defined(__cplusplus)
+  OBJC_EXPORT id objc_msgSend_stret(id self, SEL op, ...);
+  OBJC_EXPORT id objc_msgSendSuper_stret(struct objc_super *super, SEL op, ...);
 #else
-OBJC_EXPORT void objc_msgSendSuper_stret(void * stretAddr, struct objc_super *super, SEL op, ...);
+  OBJC_EXPORT void objc_msgSend_stret(void * stretAddr, id self, SEL op, ...);
+  OBJC_EXPORT void objc_msgSendSuper_stret(void * stretAddr, struct objc_super *super, SEL op, ...);
 #endif
 
-/* forwarding operations */
+
+/* Forwarding */
 
 OBJC_EXPORT id objc_msgSendv(id self, SEL op, unsigned arg_size, marg_list arg_frame);
 OBJC_EXPORT void objc_msgSendv_stret(void * stretAddr, id self, SEL op, unsigned arg_size, marg_list arg_frame);

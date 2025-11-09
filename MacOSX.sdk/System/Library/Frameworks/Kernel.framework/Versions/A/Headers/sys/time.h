@@ -130,6 +130,8 @@ struct timezone {
 		}							\
 	} while (0)
 
+#define timevalcmp(l, r, cmp)   timercmp(l, r, cmp) /* freebsd */
+
 /*
  * Names of the interval timers, and structure
  * defining a timer setting.

@@ -14,38 +14,76 @@ typedef struct CGDataProvider *CGDataProviderRef;
 
 CG_EXTERN_C_BEGIN
 
+/* This callback is called to copy `count' bytes from the sequential data
+ * stream to `buffer'. */
+
+typedef size_t (*CGDataProviderGetBytesCallback)(void *info, void *buffer, size_t count);
+
+/* This callback is called to skip `count' bytes forward in the sequential
+ * data stream. */
+
+typedef void (*CGDataProviderSkipBytesCallback)(void *info, size_t count);
+
+/* This callback is called to rewind to the beginning of sequential data
+ * stream. */
+
+typedef void (*CGDataProviderRewindCallback)(void *info);
+
+/* This callback is called to release the `info' pointer when the data
+ * provider is freed. */
+
+typedef void (*CGDataProviderReleaseInfoCallback)(void *info);
+
 /* Callbacks for sequentially accessing data.
- * `getBytes' is called to copy `count' bytes from the provider's data to
- * `buffer'.  It should return the number of bytes copied, or 0 if there's
- * no more data.
- * `skipBytes' is called to skip ahead in the provider's data by `count' bytes.
- * `rewind' is called to rewind the provider to the beginning of the data.
- * `releaseProvider', if non-NULL, is called when the provider is freed. */
+ * `getBytes' is called to copy `count' bytes from the sequential data
+ *   stream to `buffer'.  It should return the number of bytes copied, or 0
+ *   if there's no more data.
+ * `skipBytes' is called to skip ahead in the sequential data stream by
+ *   `count' bytes.
+ * `rewind' is called to rewind the sequential data stream to the beginning
+ *   of the data.
+ * `releaseProvider', if non-NULL, is called to release the `info' pointer
+ *   when the provider is freed. */
 
 struct CGDataProviderCallbacks {
-    size_t (*getBytes)(void *info, void *buffer, size_t count);
-    void (*skipBytes)(void *info, size_t count);
-    void (*rewind)(void *info);
-    void (*releaseProvider)(void *info);
+    CGDataProviderGetBytesCallback getBytes;
+    CGDataProviderSkipBytesCallback skipBytes;
+    CGDataProviderRewindCallback rewind;
+    CGDataProviderReleaseInfoCallback releaseProvider;
 };
 typedef struct CGDataProviderCallbacks CGDataProviderCallbacks;
 
+/* This callback is called to get a pointer to the entire block of data. */
+
+typedef const void *(*CGDataProviderGetBytePointerCallback)(void *info);
+
+/* This callback is called to release the pointer to entire block of
+ * data. */
+
+typedef void (*CGDataProviderReleaseBytePointerCallback)(void *info, const void *pointer);
+
+/* This callback is called to copy `count' bytes at byte offset `offset'
+ * into `buffer'. */
+
+typedef size_t (*CGDataProviderGetBytesAtOffsetCallback)(void *info, void *buffer, size_t offset, size_t count);
+
 /* Callbacks for directly accessing data.
  * `getBytePointer', if non-NULL, is called to return a pointer to the
- * provider's entire block of data.
+ *   provider's entire block of data.
  * `releaseBytePointer', if non-NULL, is called to release a pointer to
- * the provider's entire block of data.
+ *   the provider's entire block of data.
  * `getBytes', if non-NULL, is called to copy `count' bytes at offset
  * `offset' from the provider's data to `buffer'.  It should return the
- * number of bytes copied, or 0 if there's no more data.
+ *   number of bytes copied, or 0 if there's no more data.
  * `releaseProvider', if non-NULL, is called when the provider is freed.
+ *
  * At least one of `getBytePointer' or `getBytes' must be non-NULL.  */
 
 struct CGDataProviderDirectAccessCallbacks {
-    const void *(*getBytePointer)(void *info);
-    void (*releaseBytePointer)(void *info, const void *pointer);
-    size_t (*getBytes)(void *info, void *buffer, size_t offset, size_t count);
-    void (*releaseProvider)(void *info);
+    CGDataProviderGetBytePointerCallback getBytePointer;
+    CGDataProviderReleaseBytePointerCallback releaseBytePointer;
+    CGDataProviderGetBytesAtOffsetCallback getBytes;
+    CGDataProviderReleaseInfoCallback releaseProvider;
 };
 typedef struct CGDataProviderDirectAccessCallbacks CGDataProviderDirectAccessCallbacks;
 

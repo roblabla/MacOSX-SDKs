@@ -1,7 +1,7 @@
 /*
 	NSWindow.h
 	Application Kit
-	Copyright (c) 1994-2001, Apple Computer, Inc.
+	Copyright (c) 1994-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -15,6 +15,8 @@
 @class NSButton, NSButtonCell, NSColor, NSImage, NSPasteboard, NSScreen;
 @class NSNotification, NSText, NSView, NSMutableSet, NSSet, NSDate;
 @class NSToolbar;
+
+#define NSAppKitVersionNumberWithCustomSheetPosition 686.0
 
 enum {
     NSBorderlessWindowMask		= 0,
@@ -174,6 +176,10 @@ typedef struct NSWindowAuxiliary NSWindowAuxiliaryOpaque;
 + (float)minFrameWidthWithTitle:(NSString *)aTitle styleMask:(unsigned int)aStyle;
 + (NSWindowDepth)defaultDepthLimit;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (NSRect)frameRectForContentRect:(NSRect)contentRect;
+- (NSRect)contentRectForFrameRect:(NSRect)frameRect;
+#endif
 
 - (id)initWithContentRect:(NSRect)contentRect styleMask:(unsigned int)aStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag;
 - (id)initWithContentRect:(NSRect)contentRect styleMask:(unsigned int)aStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag screen:(NSScreen *)screen;
@@ -218,6 +224,13 @@ typedef struct NSWindowAuxiliary NSWindowAuxiliaryOpaque;
 - (NSSize)resizeIncrements;
 - (void)setAspectRatio:(NSSize)ratio;
 - (NSSize)aspectRatio;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void)setContentResizeIncrements:(NSSize)increments;
+- (NSSize)contentResizeIncrements;
+- (void)setContentAspectRatio:(NSSize)ratio;
+- (NSSize)contentAspectRatio;
+#endif
 
 - (void)useOptimizedDrawing:(BOOL)flag;
 - (void)disableFlushWindow;
@@ -309,6 +322,14 @@ typedef struct NSWindowAuxiliary NSWindowAuxiliaryOpaque;
 - (void)invalidateCursorRectsForView:(NSView *)aView;
 - (void)resetCursorRects;
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void)setAllowsToolTipsWhenApplicationIsInactive:(BOOL)allowWhenInactive;
+	// Default is NO. Set to YES to allow a window to display tooltips even when the application is in the background.  Note that, enabling tooltips in an inactive application will cause the app to do work any time the mouse passes over the window.  This can degrade system performance.
+
+- (BOOL)allowsToolTipsWhenApplicationIsInactive;
+	// Returns YES if this window displays tooltips even when the application is in the background.  To configure this setting you should call setAllowsToolTipsWhenApplicationIsInactive: instead of overriding -allowsToolTipsWhenApplicationIsInactive.
+#endif
+
 - (void)setBackingType:(NSBackingStoreType)bufferingType;
 - (NSBackingStoreType)backingType;
 - (void)setLevel:(int)newLevel;
@@ -350,6 +371,12 @@ typedef struct NSWindowAuxiliary NSWindowAuxiliaryOpaque;
 - (NSSize)maxSize;
 - (void)setMinSize:(NSSize)size;
 - (void)setMaxSize:(NSSize)size;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (NSSize)contentMinSize;
+- (NSSize)contentMaxSize;
+- (void)setContentMinSize:(NSSize)size;
+- (void)setContentMaxSize:(NSSize)size;
+#endif
 - (NSEvent *)nextEventMatchingMask:(unsigned int)mask;
 - (NSEvent *)nextEventMatchingMask:(unsigned int)mask untilDate:(NSDate *)expiration inMode:(NSString *)mode dequeue:(BOOL)deqFlag;
 - (void)discardEventsMatchingMask:(unsigned int)mask beforeEvent:(NSEvent *)lastEvent;
@@ -456,6 +483,9 @@ typedef struct NSWindowAuxiliary NSWindowAuxiliaryOpaque;
 - (NSRect)windowWillUseStandardFrame:(NSWindow *)window defaultFrame:(NSRect)newFrame;
 - (BOOL)windowShouldZoom:(NSWindow *)window toFrame:(NSRect)newFrame;
 - (NSUndoManager *)windowWillReturnUndoManager:(NSWindow *)window;
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (NSRect)window:(NSWindow *)window willPositionSheet:(NSWindow *)sheet usingRect:(NSRect)rect;
+#endif
 @end
 
 

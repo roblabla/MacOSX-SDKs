@@ -1,7 +1,7 @@
 /*
 	NSToolbar.h
 	Application Kit
-	Copyright (c) 2000-2001, Apple Computer, Inc.
+	Copyright (c) 2000-2003, Apple Computer, Inc.
 	All rights reserved.
 */
 
@@ -26,8 +26,8 @@ typedef enum { NSToolbarSizeModeDefault, NSToolbarSizeModeRegular, NSToolbarSize
     NSDictionary *		_initPListDatabase;
     id				_initPListTarget; 
     
-    NSToolbarDisplayMode	_toolbarDisplayMode;
-    int				_toolbarItemSizeMode;
+    NSString *			_selectedItemIdentifier;
+    int				_tbReserved1;
 
     id				_delegate;
     NSWindow *			_window;
@@ -54,7 +54,10 @@ typedef enum { NSToolbarSizeModeDefault, NSToolbarSizeModeRegular, NSToolbarSize
         unsigned int firstMoveableItemIndex:6;
         unsigned int keyboardLoopNeedsUpdating:1;
         unsigned int showHideDuringConfigurationChangeDisabled:1;
-	unsigned int RESERVED:9;
+	unsigned int displayMode:2;
+	unsigned int sizeMode:2;
+	unsigned int delegateSelectableItemIdentifiers:1;
+	unsigned int RESERVED:4;
     } _tbFlags;
 
     int				_customizationSheetWidth;
@@ -78,13 +81,19 @@ typedef enum { NSToolbarSizeModeDefault, NSToolbarSizeModeRegular, NSToolbarSize
 
 - (void)runCustomizationPalette:(id)sender;
 - (BOOL)customizationPaletteIsRunning;
-    /* Customizable toolbars (those with delegates) can show a palette which allows users to populate the toolbar with individual items or to reset the toolbar to some default set of items.  The items and item sets in the palette are specified by the delegate (-toolbarAllowedItemIdentifiers: and -toolbarDefaultItemIdenfiers:).  When the user is done configuring, they will dismiss the palette. */
+    /* Customizable toolbars (those with delegates) can show a palette which allows users to populate the toolbar with individual items or to reset the toolbar to some default set of items.  The items and item sets in the palette are specified by the delegate (-toolbarAllowedItemIdentifiers: and -toolbarDefaultItemIdentifiers:).  When the user is done configuring, they will dismiss the palette. */
 
 
 // ----- Toolbar Attributes  -----
 
 - (void)setDisplayMode:(NSToolbarDisplayMode)displayMode;
 - (NSToolbarDisplayMode)displayMode;
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (void)setSelectedItemIdentifier:(NSString *)itemIdentifier;
+- (NSString *)selectedItemIdentifier;
+    /* Sets the toolbar's selected item by identifier.  Use this to force an item identifier to be selected.  Toolbar manages selection of image items automatically.  This method can be used to select identifiers of custom view items, or to force a selection change.  (see toolbarSelectableItemIdentifiers: delegate method for more details). */
+#endif
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_2
 - (void)setSizeMode:(NSToolbarSizeMode)sizeMode;
@@ -130,13 +139,18 @@ each of the visible items.  The toolbar will iterate through the list of visible
 @interface NSObject (NSToolbarDelegate)
 
 - (NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag;
-/* Required method.  Given an item identifier, this method returns an item.  Note that, it is expected that each toolbar receives its own distinct copies.   If the item has a custom view, that view should be in place when the item is returned.  Finally, do not assume the returned item is going to be added as an active item in the toolbar.  In fact, the toolbar may ask for items here in order to construct the customization palette (it makes copies of the returned items).  if willBeInsertedIntoToolbar is YES, the returned item will be inserted, and you can expect toolbarWillAddItem: is about to be posted.  */
+    /* Required method.  Given an item identifier, this method returns an item.  Note that, it is expected that each toolbar receives its own distinct copies.   If the item has a custom view, that view should be in place when the item is returned.  Finally, do not assume the returned item is going to be added as an active item in the toolbar.  In fact, the toolbar may ask for items here in order to construct the customization palette (it makes copies of the returned items).  if willBeInsertedIntoToolbar is YES, the returned item will be inserted, and you can expect toolbarWillAddItem: is about to be posted.  */
     
 - (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar;
     /* Required method.  Returns the ordered list of items to be shown in the toolbar by default.   If during initialization, no overriding values are found in the user defaults, or if the user chooses to revert to the default items this set will be used. */
 
 - (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar;
     /* Required method.  Returns the list of all allowed items by identifier.  By default, the toolbar does not assume any items are allowed, even the separator.  So, every allowed item must be explicitly listed.  The set of allowed items is used to construct the customization palette.  The order of items does not necessarily guarantee the order of appearance in the palette.  At minimum, you should return the default item list.*/
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3
+- (NSArray *)toolbarSelectableItemIdentifiers:(NSToolbar *)toolbar;
+    /* Optional method. Those wishing to indicate item selection in a toolbar should implement this method to return a non-empty array of selectable item identifiers.  If implemented, the toolbar will remember and display the selected item with a special highlight.  A selected item is one whose item identifier matches the current selected item identifier.  Clicking on an item whose identifier is selectable will automatically update the toolbars selected item identifier when possible. (see setSelectedItemIdentifier: for more details) */
+#endif
 
 @end
 

@@ -3,9 +3,9 @@
  
      Contains:   Types, constants, and prototypes for Unicode Converter
  
-     Version:    CarbonCore-472~1
+     Version:    CarbonCore-545~1
  
-     Copyright:  © 1994-2002 by Apple Computer, Inc., all rights reserved.
+     Copyright:  © 1994-2003 by Apple Computer, Inc., all rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -32,7 +32,13 @@
 #define kUnicodeForceASCIIRangeBit 		9
 #define kUnicodeNoHalfwidthCharsBit 	10
 #define kUnicodeTextRunHeuristicsBit 	11
-#define kUnicodeMapLineFeedToReturnBit 	12
+#define kUnicodeMapLineFeedToReturnBit 	12					/*     if kUnicodeUseExternalEncodingFormBit is not set,  */
+															/*     input/output UTF-16 (and UTF-32) is assumed to be in native endian.  */
+															/*     if kUnicodeUseExternalEncodingFormBit is set,  */
+															/*     input UTF-16 (and UTF-32) is assumed to be in big endian  */
+															/*     unless it begins with a byte-order-mark,  */
+															/*     and output UTF-16 (and UTF-32) will be in big endian.  */
+#define kUnicodeUseExternalEncodingFormBit  13
 
 #define kUnicodeUseFallbacksMask 		0x00000001
 #define kUnicodeKeepInfoMask 			0x00000002
@@ -45,7 +51,13 @@
 #define kUnicodeForceASCIIRangeMask 	0x00000200
 #define kUnicodeNoHalfwidthCharsMask 	0x00000400
 #define kUnicodeTextRunHeuristicsMask 	0x00000800
-#define kUnicodeMapLineFeedToReturnMask  0x00001000
+#define kUnicodeMapLineFeedToReturnMask  0x00001000			/*     if kUnicodeUseExternalEncodingFormBit is not set,  */
+															/*     input/output UTF-16 (and UTF-32) is assumed to be in native endian.  */
+															/*     if kUnicodeUseExternalEncodingFormBit is set,  */
+															/*     input UTF-16 (and UTF-32) is assumed to be in big endian  */
+															/*     unless it begins with a byte-order-mark,  */
+															/*     and output UTF-16 (and UTF-32) will be in big endian.  */
+#define kUnicodeUseExternalEncodingFormMask  0x00002000
 
 #define kUnicodeDefaultDirection 		0
 #define kUnicodeLeftToRight 			1

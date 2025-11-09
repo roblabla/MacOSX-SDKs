@@ -18,7 +18,7 @@
 #include <unistd.h>
 
 #include <IOBluetooth/Bluetooth.h>
-
+#include <IOBluetooth/IOBluetoothUserLib.h>
 
 #ifdef	__cplusplus
 	extern "C" {
@@ -192,11 +192,13 @@ int32_t		IOBluetoothUnpackDataList( ByteCount inBufferSize, const void *inBuffer
 #pragma mark -
 #pragma mark еее Registry Stuff еее
 
-int IOBluetoothNumberOfAvailableHIDDevices();
-int IOBluetoothNumberOfPointingHIDDevices();
-int IOBluetoothNumberOfKeyboardHIDDevices();
-int IOBluetoothNumberOfTabletHIDDevices();
-int IOBluetoothFindNumberOfRegistryEntriesOfClassName( const char *deviceType );
+// $$$WARNING$$$ These really should be private, so please don't use them - they are likely to change.
+
+int IOBluetoothNumberOfAvailableHIDDevices() AVAILABLE_BLUETOOTH_VERSION_1_3_AND_LATER;
+int IOBluetoothNumberOfPointingHIDDevices() AVAILABLE_BLUETOOTH_VERSION_1_3_AND_LATER;
+int IOBluetoothNumberOfKeyboardHIDDevices() AVAILABLE_BLUETOOTH_VERSION_1_3_AND_LATER;
+int IOBluetoothNumberOfTabletHIDDevices() AVAILABLE_BLUETOOTH_VERSION_1_3_AND_LATER;
+int IOBluetoothFindNumberOfRegistryEntriesOfClassName( const char *deviceType ) AVAILABLE_BLUETOOTH_VERSION_1_3_AND_LATER;
 
 
 #ifdef	__cplusplus
