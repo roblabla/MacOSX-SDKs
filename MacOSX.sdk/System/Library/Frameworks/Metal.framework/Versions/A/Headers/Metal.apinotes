@@ -7,6 +7,10 @@ Tags:
   NSErrorDomain: MTLLibraryErrorDomain
 - Name: MTLCounterSampleBufferError
   NSErrorDomain: MTLCounterErrorDomain
+- Name: MTLDynamicLibraryError
+  NSErrorDomain: MTLDynamicLibraryDomain
+- Name: MTLBinaryArchiveError
+  NSErrorDomain: MTLBinaryArchiveDomain
 Globals:
 - Name: MTLDeviceWasAddedNotification
   SwiftName: wasAdded
@@ -218,6 +222,34 @@ Enumerators:
   SwiftName: astc_12x10_ldr
 - Name: MTLPixelFormatASTC_12x12_LDR
   SwiftName: astc_12x12_ldr
+- Name: MTLPixelFormatASTC_4x4_HDR          
+  SwiftName: astc_4x4_hdr
+- Name: MTLPixelFormatASTC_5x4_HDR          
+  SwiftName: astc_5x4_hdr
+- Name: MTLPixelFormatASTC_5x5_HDR          
+  SwiftName: astc_5x5_hdr
+- Name: MTLPixelFormatASTC_6x5_HDR          
+  SwiftName: astc_6x5_hdr
+- Name: MTLPixelFormatASTC_6x6_HDR          
+  SwiftName: astc_6x6_hdr
+- Name: MTLPixelFormatASTC_8x5_HDR          
+  SwiftName: astc_8x5_hdr
+- Name: MTLPixelFormatASTC_8x6_HDR          
+  SwiftName: astc_8x6_hdr
+- Name: MTLPixelFormatASTC_8x8_HDR          
+  SwiftName: astc_8x8_hdr
+- Name: MTLPixelFormatASTC_10x5_HDR         
+  SwiftName: astc_10x5_hdr
+- Name: MTLPixelFormatASTC_10x6_HDR         
+  SwiftName: astc_10x6_hdr
+- Name: MTLPixelFormatASTC_10x8_HDR         
+  SwiftName: astc_10x8_hdr
+- Name: MTLPixelFormatASTC_10x10_HDR        
+  SwiftName: astc_10x10_hdr
+- Name: MTLPixelFormatASTC_12x10_HDR        
+  SwiftName: astc_12x10_hdr
+- Name: MTLPixelFormatASTC_12x12_HDR        
+  SwiftName: astc_12x12_hdr
 - Name: MTLTessellationControlPointIndexTypeUInt16
   SwiftName: uint16
 - Name: MTLTessellationControlPointIndexTypeUInt32
@@ -333,6 +365,11 @@ Classes:
   - Selector: 'startCaptureWithScope:'
     SwiftName: startCapture(scope:)
     MethodKind: Instance
+- Name: MTLDynamicLibrary
+  Methods:
+  - Selector: 'serializeToURL:error:'
+    SwiftName: serialize(url:)
+    MethodKind: Instance
 - Name: MTLFunctionConstantValues
   Methods:
   - Selector: 'setConstantValue:type:atIndex:'
@@ -362,6 +399,38 @@ Classes:
   - Selector: 'getSamplePositions:count:'
     MethodKind: Instance
     SwiftPrivate: true
+- Name: MTLRasterizationRateMapDescriptor
+  Methods:
+  - Selector: 'rasterizationRateMapDescriptorWithScreenSize:layerCount:layers:'
+    MethodKind: Class
+    SwiftPrivate: true
+  - Selector: 'rasterizationRateMapDescriptorWithScreenSize:layer:'
+    MethodKind: Class
+    SwiftPrivate: true
+  - Selector: 'rasterizationRateMapDescriptorWithScreenSize:'
+    MethodKind: Class
+    SwiftPrivate: true
+- Name: MTLRasterizationRateLayerDescriptor
+  Methods:
+  - Selector: 'initWithSampleCount:horizontal:vertical:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  Properties:
+  - Name: 'horizontalSampleStorage'
+    PropertyKind: Instance
+    SwiftPrivate: true
+  - Name: 'verticalSampleStorage'
+    PropertyKind: Instance
+    SwiftPrivate: true
+- Name: MTLRasterizationRateSampleArray
+  Methods:
+  - Selector: 'objectAtIndexedSubscript:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'setObject:atIndexedSubscript:'
+    MethodKind: Instance
+    SwiftPrivate: true
+
 Protocols:
 - Name: MTLBlitCommandEncoder
   Methods:
@@ -435,11 +504,26 @@ Protocols:
   - Selector: 'computeCommandEncoder'
     SwiftName: makeComputeCommandEncoder()
     MethodKind: Instance
+  - Selector: 'computeCommandEncoderWithDescriptor:'
+    SwiftName: makeComputeCommandEncoder(descriptor:)
+    MethodKind: Instance
+  - Selector: 'blitCommandEncoderWithDescriptor:'
+    SwiftName: makeBlitCommandEncoder(descriptor:)
+    MethodKind: Instance
   - Selector: 'computeCommandEncoderWithDispatchType:'
     SwiftName: makeComputeCommandEncoder(dispatchType:)
     MethodKind: Instance
+  - Selector: 'resourceStateCommandEncoder'
+    SwiftName: makeResourceStateCommandEncoder()
+    MethodKind: Instance
+  - Selector: 'resourceStateCommandEncoderWithDescriptor'
+    SwiftName: makeResourceStateCommandEncoder(descriptor:)
+    MethodKind: Instance
   - Selector: 'parallelRenderCommandEncoderWithDescriptor:'
     SwiftName: makeParallelRenderCommandEncoder(descriptor:)
+    MethodKind: Instance
+  - Selector: 'accelerationStructureCommandEncoder'
+    SwiftName: makeAccelerationStructureCommandEncoder()
     MethodKind: Instance
   - Selector: 'encodeWaitForEvent:value:'
     SwiftName: encodeWaitForEvent(_:value:)
@@ -447,6 +531,11 @@ Protocols:
   - Selector: 'encodeSignalEvent:value:'
     SwiftName: encodeSignalEvent(_:value:)
     MethodKind: Instance
+  Properties:
+  - Name: logs
+    SwiftName: __logs
+- Name: MTLLogContainer
+  SwiftName: __MTLLogContainer
 - Name: MTLCommandQueue
   Methods:
   - Selector: 'commandBuffer'
@@ -454,6 +543,9 @@ Protocols:
     MethodKind: Instance
   - Selector: 'commandBufferWithUnretainedReferences'
     SwiftName: makeCommandBufferWithUnretainedReferences()
+    MethodKind: Instance
+  - Selector: 'commandBufferWithDescriptor:'
+    SwiftName: makeCommandBuffer(descriptor:)
     MethodKind: Instance
 - Name: MTLComputeCommandEncoder
   Methods:
@@ -524,6 +616,41 @@ Protocols:
   - Selector: 'sampleCountersInBuffer:atSampleIndex:withBarrier:'
     MethodKind: Instance
     SwiftName: sampleCounters(sampleBuffer:sampleIndex:barrier:)
+  - Selector: 'setVisibleFunctionTable:atBufferIndex:'
+    SwiftName: setVisibleFunctionTable(_:bufferIndex:)
+    MethodKind: Instance
+  - Selector: 'setVisibleFunctionTables:withBufferRange:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'setIntersectionFunctionTable:atBufferIndex:'
+    SwiftName: setIntersectionFunctionTable(_:bufferIndex:)
+    MethodKind: Instance
+  - Selector: 'setIntersectionFunctionTables:withBufferRange:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'setAccelerationStructure:atBufferIndex:'
+    SwiftName: setAccelerationStructure(_:bufferIndex:)
+    MethodKind: Instance
+  - Selector: 'executeCommandsInBuffer:withRange:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'executeCommandsInBuffer:indirectBuffer:indirectBufferOffset:'
+    MethodKind: Instance
+    SwiftPrivate: true
+- Name: MTLComputePipelineState
+  Methods:
+  - Selector: 'functionHandleWithFunction:'
+    SwiftName: functionHandle(function:)
+    MethodKind: Instance
+  - Selector: 'newComputePipelineStateWithAdditionalBinaryFunctions:error:'
+    SwiftName: makeComputePipelineStateWithAdditionalBinaryFunctions(functions:)
+    MethodKind: Instance
+  - Selector: 'newVisibleFunctionTableWithDescriptor:'
+    SwiftName: makeVisibleFunctionTable(descriptor:)
+    MethodKind: Instance
+  - Selector: 'newIntersectionFunctionTableWithDescriptor:'
+    SwiftName: makeIntersectionFunctionTable(descriptor:)
+    MethodKind: Instance
 - Name: MTLDevice
   Methods:
   - Selector: 'getDefaultSamplePositions:count:'
@@ -561,6 +688,12 @@ Protocols:
     MethodKind: Instance
   - Selector: 'newRenderPipelineStateWithDescriptor:options:reflection:error:'
     SwiftName: makeRenderPipelineState(descriptor:options:reflection:)
+    MethodKind: Instance
+  - Selector: 'newRenderPipelineStateWithTileDescriptor:options:reflection:error:'
+    SwiftName: makeRenderPipelineState(tileDescriptor:options:reflection:)
+    MethodKind: Instance
+  - Selector: 'newRenderPipelineStateWithTileDescriptor:options:completionHandler:'
+    SwiftName: makeRenderPipelineState(tileDescriptor:options:completionHandler:)
     MethodKind: Instance
   - Selector: 'newComputePipelineStateWithFunction:completionHandler:'
     SwiftName: makeComputePipelineState(function:completionHandler:)
@@ -643,12 +776,36 @@ Protocols:
   - Selector: 'newIndirectCommandBufferWithDescriptor:maxCommandCount:options:'
     SwiftName: makeIndirectCommandBuffer(descriptor:maxCommandCount:options:)
     MethodKind: Instance
+  - Selector: 'newRasterizationRateMapWithDescriptor:'
+    MethodKind: Instance
+    SwiftName: makeRasterizationRateMap(descriptor:)
+  - Selector: 'supportsRasterizationRateMapWithLayerCount:'
+    MethodKind: Instance
+    SwiftName: supportsRasterizationRateMap(layerCount:)
   - Selector: 'newCounterSampleBufferWithDescriptor:error:'
     SwiftName: makeCounterSampleBuffer(descriptor:)
     MethodKind: Instance
   - Selector: 'sampleTimestamps:gpuTimestamp:'
     MethodKind: Instance
     SwiftPrivate: true
+  - Selector: 'newDynamicLibrary:error:'
+    SwiftName: makeDynamicLibrary(library:)
+    MethodKind: Instance
+  - Selector: 'newDynamicLibraryWithURL:error:'
+    SwiftName: makeDynamicLibrary(url:)
+    MethodKind: Instance
+  - Selector: 'newBinaryArchiveWithDescriptor:error:'
+    SwiftName: makeBinaryArchive(descriptor:)
+    MethodKind: Instance
+  - Selector: 'accelerationStructureSizesWithDescriptor:'
+    SwiftName: accelerationStructureSizes(descriptor:)
+    MethodKind: Instance
+  - Selector: 'newAccelerationStructureWithSize:'
+    SwiftName: makeAccelerationStructure(size:)
+    MethodKind: Instance
+  - Selector: 'newAccelerationStructureWithDescriptor:'
+    SwiftName: makeAccelerationStructure(descriptor:)
+    MethodKind: Instance
 - Name: MTLDrawable
   Methods:
   - Selector: 'presentAtTime:'
@@ -720,6 +877,30 @@ Protocols:
   - Selector: 'setIndirectCommandBuffers:withRange:'
     MethodKind: Instance
     SwiftPrivate: true
+  - Selector: 'setComputePipelineState:atIndex:'
+    SwiftName: setComputePipelineState(_:index:)
+    MethodKind: Instance
+  - Selector: 'setComputePipelineStates:withRange:'
+    MethodKind: Instance
+    SwiftPrivate: true
+
+  - Selector: 'setAccelerationStructure:atIndex:'
+    SwiftName: setAccelerationStructure(_:index:)
+    MethodKind: Instance
+  - Selector: 'setVisibleFunctionTable:atIndex:'
+    SwiftName: setVisibleFunctionTable(_:index:)
+    MethodKind: Instance
+  - Selector: 'setVisibleFunctionTables:withRange:'
+    SwiftName: __setVisibleFunctionTables(_:withBufferRange:)
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'setIntersectionFunctionTable:atIndex:'
+    SwiftName: setIntersectionFunctionTable(_:index:)
+    MethodKind: Instance
+  - Selector: 'setIntersectionFunctionTables:withRange:'
+    SwiftName: __setIntersectionFunctionTables(_:withBufferRange:)
+    MethodKind: Instance
+    SwiftPrivate: true
 - Name: MTLLibrary
   Methods:
   - Selector: 'newFunctionWithName:'
@@ -730,6 +911,18 @@ Protocols:
     MethodKind: Instance
   - Selector: 'newFunctionWithName:constantValues:error:'
     SwiftName: makeFunction(name:constantValues:)
+    MethodKind: Instance
+  - Selector: 'newFunctionWithDescriptor:error:'
+    SwiftName: makeFunction(descriptor:)
+    MethodKind: Instance
+  - Selector: 'newFunctionWithDescriptor:completionHandler:'
+    SwiftName: makeFunction(descriptor:completionHandler:)
+    MethodKind: Instance
+  - Selector: 'newIntersectionFunctionWithDescriptor:error:'
+    SwiftName: makeIntersectionFunction(descriptor:)
+    MethodKind: Instance
+  - Selector: 'newIntersectionFunctionWithDescriptor:completionHandler:'
+    SwiftName: makeIntersectionFunction(descriptor:completionHandler:)
     MethodKind: Instance
 - Name: MTLFunction
   Methods:
@@ -750,6 +943,24 @@ Protocols:
   - Selector: 'setColorStoreActionOptions:atIndex:'
     SwiftName: setColorStoreActionOptions(_:index:)
     MethodKind: Instance
+- Name: MTLRasterizationRateMap
+  Properties:
+  - Name: 'parameterBufferSizeAndAlign'
+    PropertyKind: Instance
+    SwiftName: parameterDataSizeAndAlign
+  Methods:
+  - Selector: 'copyParameterDataToBuffer:offset:'
+    MethodKind: Instance
+    SwiftName: copyParameterData(buffer:offset:)
+  - Selector: 'physicalSizeForLayer:'
+    MethodKind: Instance
+    SwiftName: physicalSize(layer:)
+  - Selector: 'mapScreenToPhysicalCoordinates:forLayer:'
+    MethodKind: Instance
+    SwiftName: physicalCoordinates(screenCoordinates:layer:)
+  - Selector: 'mapPhysicalToScreenCoordinates:forLayer:'
+    MethodKind: Instance
+    SwiftName: screenCoordinates(physicalCoordinates:layer:)
 - Name: MTLRenderCommandEncoder
   Methods:
   - Selector: 'setViewports:count:'
@@ -824,6 +1035,39 @@ Protocols:
   - Selector: 'setColorStoreActionOptions:atIndex:'
     SwiftName: setColorStoreActionOptions(_:index:)
     MethodKind: Instance
+  - Selector: 'setTileBytes:length:atIndex:'
+    SwiftName: setTileBytes(_:length:index:)
+    MethodKind: Instance
+  - Selector: 'setTileBuffer:offset:atIndex:'
+    SwiftName: setTileBuffer(_:offset:index:)
+    MethodKind: Instance
+  - Selector: 'setTileBufferOffset:atIndex:'
+    SwiftName: setTileBufferOffset(_:index:)
+    MethodKind: Instance
+  - Selector: 'setTileTexture:atIndex:'
+    SwiftName: setTileTexture(_:index:)
+    MethodKind: Instance
+  - Selector: 'setTileSamplerState:atIndex:'
+    SwiftName: setTileSamplerState(_:index:)
+    MethodKind: Instance
+  - Selector: 'setTileSamplerState:lodMinClamp:lodMaxClamp:atIndex:'
+    SwiftName: setTileSamplerState(_:lodMinClamp:lodMaxClamp:index:)
+    MethodKind: Instance
+  - Selector: 'setThreadgroupMemoryLength:offset:atIndex:'
+    SwiftName: setThreadgroupMemoryLength(_:offset:index:)
+    MethodKind: Instance
+  - Selector: 'setTileBuffers:offsets:withRange:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'setTileTextures:withRange:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'setTileSamplerStates:withRange:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'setTileSamplerStates:lodMinClamps:lodMaxClamps:withRange:'
+    MethodKind: Instance
+    SwiftPrivate: true
   - Selector: 'setBlendColorRed:green:blue:alpha:'
     SwiftName: setBlendColor(red:green:blue:alpha:)
     MethodKind: Instance
@@ -939,6 +1183,9 @@ Protocols:
   - Selector: 'resetWithRange:'
     MethodKind: Instance
     SwiftPrivate: true
+  - Selector: 'indirectComputeCommandAtIndex:'
+    SwiftName: indirectComputeCommandAt(_:)
+    MethodKind: Instance
 - Name: MTLIndirectRenderCommand
   Methods:
   - Selector: 'setVertexBuffer:offset:atIndex:'
@@ -947,11 +1194,106 @@ Protocols:
   - Selector: 'setFragmentBuffer:offset:atIndex:'
     SwiftName: setFragmentBuffer(_:offset:at:)
     MethodKind: Instance
+- Name: MTLIndirectComputeCommand
+  Methods:
+  - Selector: 'setKernelBuffer:offset:atIndex:'
+    SwiftName: setKernelBuffer(_:offset:at:)
+    MethodKind: Instance
+  - Selector: 'setThreadgroupMemoryLength:atIndex:'
+    SwiftName: setThreadgroupMemoryLength(_:index:)
+    MethodKind: Instance
+  - Selector: 'setStageInRegion:'
+    SwiftName: setStageInRegion(_:)
+    MethodKind: Instance
 - Name: MTLCounterSampleBuffer
   Methods:
   - Selector: 'resolveCounterRange:'
     MethodKind: Instance
     SwiftPrivate: true
+- Name: MTLVisibleFunctionTable
+  Methods:
+  - Selector: 'setFunction:atIndex:'
+    SwiftName: setFunction(_:index:)
+    MethodKind: Instance
+  - Selector: 'setFunctions:withRange:'
+    MethodKind: Instance
+    SwiftPrivate: true
+- Name: MTLIntersectionFunctionTable
+  Methods:
+  - Selector: 'setFunction:atIndex:'
+    SwiftName: setFunction(_:index:)
+    MethodKind: Instance
+  - Selector: 'setFunctions:withRange:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'setBuffer:offset:atIndex:'
+    SwiftName: setBuffer(_:offset:index:)
+    MethodKind: Instance
+  - Selector: 'setBuffers:offsets:withRange:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'setVisibleFunctionTable:atBufferIndex:'
+    SwiftName: setVisibleFunctionTable(_:bufferIndex:)
+    MethodKind: Instance
+  - Selector: 'setVisibleFunctionTables:withBufferRange:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'setOpaqueTriangleIntersectionFunctionWithSignature:atIndex:'
+    SwiftName: setOpaqueTriangleIntersectionFunction(signature:index:)
+    MethodKind: Instance
+  - Selector: 'setOpaqueTriangleIntersectionFunctionWithSignature:withRange:'
+    SwiftName: setOpaqueTriangleIntersectionFunction(signature:range:)
+    MethodKind: Instance
+- Name: MTLAccelerationStructureCommandEncoder
+  Methods:
+  - Selector: 'buildAccelerationStructure:descriptor:scratchBuffer:scratchBufferOffset:'
+    SwiftName: build(accelerationStructure:descriptor:scratchBuffer:scratchBufferOffset:)
+    MethodKind: Instance
+  - Selector: 'refitAccelerationStructure:descriptor:destination:scratchBuffer:scratchBufferOffset:'
+    SwiftName: refit(sourceAccelerationStructure:descriptor:destinationAccelerationStructure:scratchBuffer:scratchBufferOffset:)
+    MethodKind: Instance
+  - Selector: 'copyAccelerationStructure:toAccelerationStructure:'
+    SwiftName: copy(sourceAccelerationStructure:destinationAccelerationStructure:)
+    MethodKind: Instance
+  - Selector: 'writeCompactedAccelerationStructureSize:toBuffer:offset:'
+    SwiftName: writeCompactedSize(accelerationStructure:buffer:offset:)
+    MethodKind: Instance
+  - Selector: 'copyAndCompactAccelerationStructure:toAccelerationStructure:'
+    SwiftName: copyAndCompact(sourceAccelerationStructure:destinationAccelerationStructure:)
+    MethodKind: Instance
+  - Selector: 'updateFence:'
+    SwiftName: updateFence(_:)
+    MethodKind: Instance
+  - Selector: 'waitForFence:'
+    SwiftName: waitForFence(_:)
+    MethodKind: Instance
+  - Selector: 'useResource:usage:'
+    SwiftName: useResource(_:usage:)
+    MethodKind: Instance
+  - Selector: 'useResources:count:usage:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'useHeap:'
+    SwiftName: useHeap(_:)
+    MethodKind: Instance
+  - Selector: 'useHeaps:count:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'sampleCountersInBuffer:atSampleIndex:withBarrier:'
+    MethodKind: Instance
+    SwiftName: sampleCounters(sampleBuffer:sampleIndex:barrier:)
+- Name: MTLBinaryArchive
+  Methods:
+  - Selector: 'addComputePipelineFunctionsWithDescriptor:error:'
+    SwiftName: addComputePipelineFunctions(descriptor:)
+    MethodKind: Instance
+  - Selector: 'addRenderPipelineFunctionsWithDescriptor:error:'
+    SwiftName: addRenderPipelineFunctions(descriptor:)
+    MethodKind: Instance
+  - Selector: 'addTileRenderPipelineFunctionsWithDescriptor:error:'
+    SwiftName: addTileRenderPipelineFunctions(descriptor:)
+    MethodKind: Instance
+
 SwiftVersions:
 - Version: 3
   Functions:

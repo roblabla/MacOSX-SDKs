@@ -1,12 +1,18 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 787C074F-FCC6-3F4D-8745-8A175D2B3EEE' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           D62D53DB-DBC9-3F2F-819E-339B893AE18C
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           53950C70-2B9A-3AA7-B6E2-8259B7A39204
 install-name:    '/usr/lib/swift/libswiftMetalKit.dylib'
-current-version: 0
+current-version: 1.2
 swift-abi-version: 7
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftMetalKit.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftMetalKit.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftMetalKit.dylib', 

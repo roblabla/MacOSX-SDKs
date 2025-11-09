@@ -13,7 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class PKDrawing, PKTool, PKCanvasView;
 
-#if !TARGET_OS_MACCATALYST
 /// The optional methods a delegate can receive from editing-related changes
 /// to a PKCanvasView.
 API_AVAILABLE(ios(13.0))
@@ -57,6 +56,15 @@ API_AVAILABLE(ios(13.0))
 @end
 
 
+typedef NS_ENUM(NSUInteger, PKCanvasViewDrawingPolicy) {
+    /// Default is: if a `PKToolPicker` is visible, respect `UIPencilInteraction.prefersPencilOnlyDrawing`,
+    /// otherwise only pencil touches draw.
+    PKCanvasViewDrawingPolicyDefault,
+    PKCanvasViewDrawingPolicyAnyInput,
+    PKCanvasViewDrawingPolicyPencilOnly
+};
+
+
 /// The view for interactively drawing, and non-interactively showing PKDrawing contents.
 API_AVAILABLE(ios(13.0))
 @interface PKCanvasView : UIScrollView <PKToolPickerObserver>
@@ -77,21 +85,12 @@ API_AVAILABLE(ios(13.0))
 /// The gesture recognizer used to draw in the canvas.
 @property (nonatomic, readonly) UIGestureRecognizer *drawingGestureRecognizer;
 
-/// Is the finger allowed to draw in the canvas.
-/// If false, only styluses will draw. If true, two-fingers are used to scroll.
-/// Defaults to YES.
-@property (nonatomic) BOOL allowsFingerDrawing;
+@property (nonatomic) BOOL allowsFingerDrawing API_DEPRECATED("Use 'drawingPolicy' property.", ios(13_0, 14_0));
+
+/// The drawing policy that controls the types of touches that are allowed to draw in the canvas.
+/// Defaults to `PKCanvasViewDrawingPolicyDefault`.
+@property (nonatomic, assign) PKCanvasViewDrawingPolicy drawingPolicy API_AVAILABLE(ios(14.0));
 
 @end
-
-#else // TARGET_OS_MACCATALYST
-API_AVAILABLE(ios(13.0))
-@interface PKCanvasView : UIScrollView
-
-/// The drawing shown on this view.
-@property (nonatomic, copy) PKDrawing *drawing;
-
-@end
-#endif
 
 NS_ASSUME_NONNULL_END

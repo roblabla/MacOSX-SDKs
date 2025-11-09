@@ -1,16 +1,20 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: D97379AA-592A-3B7A-B7EA-81827F9CAF95' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           80436972-A60C-313C-90C7-747E21DED1D2
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           CEC0D8F5-11A9-3459-9338-2FBB8EAF5CBB
 install-name:    '/System/Library/PrivateFrameworks/OSAnalyticsPrivate.framework/Versions/A/OSAnalyticsPrivate'
-exports:         
-  - archs:           [ x86_64 ]
-    symbols:         [ _OSAnalyticsPrivateVersionNumber, _OSAnalyticsPrivateVersionString, 
-                       _ns2xpc, _xpc2ns ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _OSAnalyticsPrivateVersionNumber, _OSAnalyticsPrivateVersionString ]
     objc-classes:    [ OSAEphemeralLog, OSAHttpSubmitter, OSAStreamDeflater, OSASubmissionPolicy, 
-                       OSASubmitter, OSAXPCServices, PCCBridgeEndpoint, PCCEndpoint, 
-                       PCCGroupJob, PCCJob, PCCProxiedDevice, PCCProxyingDevice, 
-                       PCCRequest ]
+                       OSASubmitter, PCCBridgeEndpoint, PCCEndpoint, PCCGroupJob, 
+                       PCCJob, PCCProxiedDevice, PCCProxyingDevice, PCCRequest ]
     objc-ivars:      [ OSASubmitter._dryRun, OSASubmitter._responseCode, OSASubmitter._responseData, 
                        OSASubmitter._responseError, OSASubmitter._responseHeaders, 
                        PCCEndpoint._delegate, PCCJob._errObj, PCCJob._package ]

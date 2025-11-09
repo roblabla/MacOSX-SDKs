@@ -1,4 +1,4 @@
-framework module BusinessChat {
+framework module BusinessChat [system] {
   umbrella header "BusinessChat.h"
 
   export *

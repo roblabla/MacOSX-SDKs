@@ -21,10 +21,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class UIImage, UIImageView, UILabel, UIColor, UIButton;
-@class UITextFieldAtomBackgroundView;
-@class UITextFieldBackgroundView;
-@class UITextFieldBorderView;
-@class UITextFieldLabel;
 @class UITextInputTraits;
 @class UITextSelectionView;
 @class UITextInteractionAssistant;

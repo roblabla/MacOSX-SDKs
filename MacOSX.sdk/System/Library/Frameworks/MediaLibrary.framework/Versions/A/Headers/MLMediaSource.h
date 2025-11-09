@@ -12,7 +12,7 @@
 @class MLMediaGroup;
 @class MLMediaObject;
 
-API_DEPRECATED_BEGIN("MediaLibrary.framework will be removed in a future OS version", macos(10.9, 10.15))
+API_DEPRECATED_BEGIN("MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.", macos(10.9, 10.15))
 
 NS_ASSUME_NONNULL_BEGIN
 @interface MLMediaSource : NSObject

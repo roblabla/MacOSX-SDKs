@@ -1,4 +1,4 @@
-framework module MediaAccessibility [extern_c] {
+framework module MediaAccessibility [system] {
   umbrella header "MediaAccessibility.h"
   export *
   module * { export * }

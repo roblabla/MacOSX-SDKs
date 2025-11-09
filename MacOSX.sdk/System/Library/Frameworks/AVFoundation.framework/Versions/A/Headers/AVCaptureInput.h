@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCapture/AVCaptureInput.h>)
 /*
     File:  AVCaptureInput.h
  
@@ -13,7 +14,7 @@
 #import <CoreMedia/CMFormatDescription.h>
 #import <CoreMedia/CMSync.h>
 #if TARGET_OS_OSX
-    #import <CoreGraphics/CGDirectDisplay.h>
+#import <CoreGraphics/CGDirectDisplay.h>
 #endif
 
 NS_ASSUME_NONNULL_BEGIN
@@ -237,7 +238,7 @@ API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  
     Note that if you manually set the device's min frame rate, max frame rate, or max exposure duration, your custom values will override the device defaults regardless of whether you've set this property to YES.
  */
-@property(nonatomic) BOOL unifiedAutoExposureDefaultsEnabled API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, tvos, watchos);
+@property(nonatomic) BOOL unifiedAutoExposureDefaultsEnabled API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos);
 
 /*!
  @method portsWithMediaType:sourceDeviceType:sourceDevicePosition:
@@ -467,3 +468,7 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHI
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCapture/AVCaptureInput.h>
+#endif

@@ -1,4 +1,4 @@
-.\"Copyright (c) 2002 Apple Computer, Inc. All Rights Reserved.
+.\"Copyright (c) 2002-2020 Apple Inc. All Rights Reserved.
 .\"The contents of this file constitute Original Code as defined in and are 
 .\"subject to the Apple Public Source License Version 1.2 (the 'License'). 
 .\"You may not use this file except in compliance with the
@@ -15,14 +15,13 @@
 .\"
 .\" Use the following line to view the manpage. Replace man_page with the path to the manpage to view.
 .\"/usr/bin/nroff -mandoc man_page | less
-.Pp
-.Dd April 16, 2002       
+.Dd July 29, 2020
 .Dt NETWORKSETUP 8
-.Os "Mac OS X"
-.Sh NAME                  
+.Os "macOS"
+.Sh NAME
 .Nm networksetup
 .Nd configuration tool for network settings in System Preferences.
-.Sh SYNOPSIS             
+.Sh SYNOPSIS
 .Nm
 .Op Fl listnetworkserviceorder
 .Op Fl listallnetworkservices
@@ -121,60 +120,47 @@
 .Op Fl createlocation Ar location [populate]
 .Op Fl deletelocation Ar location
 .Op Fl switchtolocation Ar location
-.Op Fl listalluserprofiles
-.Op Fl listloginprofiles Ar service
-.Op Fl enablesystemprofile Ar service on | off
-.Op Fl enableloginprofile Ar service profile on | off
-.Op Fl enableuserprofile Ar profile on | off
-.Op Fl import8021xProfiles Ar service path
-.Op Fl export8021xProfiles Ar service path yes | no
-.Op Fl export8021xUserProfiles Ar path yes | no
-.Op Fl export8021xLoginProfiles Ar service path yes | no
-.Op Fl export8021xSystemProfile Ar service path yes | no
-.Op Fl settlsidentityonsystemprofile Ar service path passphrase
-.Op Fl settlsidentityonuserprofile Ar profile path passphrase
-.Op Fl deletesystemprofile Ar service
-.Op Fl deleteloginprofile Ar service profile
-.Op Fl deleteuserprofile Ar profile
 .Op Fl version
 .Op Fl help
 .Op Fl printcommands
-.Pp
 .Sh DESCRIPTION
-The 
+The
 .Nm
 command is used to configure network settings typically configured in the System Preferences application.
-The 
-.Nm 
-command requires at least "admin" privileges to run. Most of the set commands require "root" privileges to run.
+The
+.Nm
+command requires at least admin privileges to change network settings.
+If the "Require an administrator password to access system-wide preferences" option is selected in System Preferences > Security & Privacy, then root privileges are required to change network settings.
 .Pp
 Any flag that takes a password will accept "-" in place of the password to indicate it should read the password from stdin.
 .Pp
 A list of flags and their descriptions:
-.Bl -tag -width indent 
+.Bl -tag -width indent
 .It Fl listnetworkserviceorder
-Displays a list of network services in the order they are contacted for a connection, along with the corresponding port and device for each. An asterisk (*) next to a service means the service is inactive.
+Displays a list of network services in the order they are contacted for a connection, along with the corresponding port and device for each.
+An asterisk (*) next to a service means the service is inactive.
 .It Fl listallnetworkservices
-Displays a list of all the network services on the server's hardware ports. An asterisk (*) denotes that a network service is disabled.
+Displays a list of all the network services on the server's hardware ports.
+An asterisk (*) denotes that a network service is disabled.
 .It Fl listallhardwareports
 Displays list of hardware ports with corresponding device name and ethernet address.
 .It Fl detectnewhardware
 Detects new network hardware and creates a default network service on the hardware.
-.Pp
 .It Fl getmacaddress Ar hardwareport
 Displays ethernet (or Wi-Fi) address for hardwareport or device specified.
-.Pp
 .It Fl getcomputername
 Displays the computer name.
 .It Fl setcomputername Ar computername
-Sets computer name to <computername>. This name is used by AFP.
-.Pp
+Sets computer name to <computername>.
+This name is used by AFP.
 .It Fl getinfo Ar networkservice
 Displays the IP address, subnet mask, router, and hardware address for the <networkservice> that you specify.
 .It Fl setmanual Ar networkservice ip subnet router
 Set the TCP/IP configuration for <networkservice> to manual with IP address set to <ip>, Subnet Mask set to <subnet>, and Router address set to <router>.
 .It Fl setdhcp Ar networkservice [clientid]
-Use this command to set the TCP/IP configuration for the specified <networkservice> to use DHCP. The client ID is optional. Specify "Empty" for [clientid] to clear the DHCP client id.
+Use this command to set the TCP/IP configuration for the specified <networkservice> to use DHCP.
+The client ID is optional.
+Specify "Empty" for [clientid] to clear the DHCP client id.
 .It Fl setbootp Ar networkservice
 Use this command to set the TCP/IP configuration for the specified <networkservice> to use BOOTP.
 .It Fl setmanualwithdhcprouter Ar networkservice ip
@@ -182,8 +168,10 @@ Use this command to specify a manual IP address to use for DHCP for the specifie
 .It Fl getadditionalroutes Ar networkservice
 Use this command to display the list of additional IPv4 routes configured for the service.
 .It Fl setadditionalroutes Ar networkservice [ dest1 mask1 gate1 ] [ dest2 mask2 gate2 ] ... [destN maskN gateN ]
-Use this command to set the list of IPv4 additional routes configured for the service. Each route is specified as a
-(destination address, subnet mask, gateway address) tuple. Specifying no tuples clears the list of routes.
+Use this command to set the list of IPv4 additional routes configured for the service.
+Each route is specified as a
+(destination address, subnet mask, gateway address) tuple.
+Specifying no tuples clears the list of routes.
 .It Fl setv4off Ar networkservice
 Use this command to turn IPv4 off on the specified <networkservice>.
 .It Fl setv6off Ar networkservice
@@ -197,65 +185,87 @@ Use this command to set IPv6 to get its addresses manually for <networkservice>.
 .It Fl getv6additionalroutes Ar networkservice
 Use this command to display the list of additional IPv6 routes configured for the service.
 .It Fl setv6additionalroutes Ar networkservice [ dest1 prefixlength1 gate1 ] [ dest2 prefixlength2 gate2 ] ... [destN prefixlengthN gateN ]
-Use this command to set the list of additional routes configured for the service. Each route is specified as a
+Use this command to set the list of additional routes configured for the service.
+Each route is specified as a
 .br
-(destination address, prefix length, gateway address) tuple. Specifying no tuples clears the list of routes.
+(destination address, prefix length, gateway address) tuple.
+Specifying no tuples clears the list of routes.
 .It Fl getdnsservers Ar networkservice
 Displays DNS info for <networkservice>.
 .It Fl setdnsservers Ar networkservice dns1 [dns2] [...]
-Use this command to specify the IP addresses of servers you want the specified <networkservice> to use to resolve domain names. You can list any number of servers (replace dns1, dns2, and so on with the IP addresses of domain name servers). If you want to clear all DNS entries for the specified network service, type "empty" in place of the DNS server names.
+Use this command to specify the IP addresses of servers you want the specified <networkservice> to use to resolve domain names.
+You can list any number of servers (replace dns1, dns2, and so on with the IP addresses of domain name servers).
+If you want to clear all DNS entries for the specified network service, type "empty" in place of the DNS server names.
 .It Fl getsearchdomains Ar networkservice
 Displays Domain Name info for <networkservice>.
 .It Fl setsearchdomains Ar networkservice domain1 [domain2] [...]
 Use this command to designate the search domain for the specified <networkservice>. You can list any number of search domains (replace domain1, domain2, and so on with the name of a local domain). If you want to clear all search domain entries for the specified network service, type “empty” in place of the domain name.
-.Pp
 .It Fl create6to4service <newnetworkservicename>
 Use this command to create a new 6 to 4 service with name <newnetworkservicename>.
 .It Fl set6to4automatic <newnetworkservicename>
 Use this command to set the 6 to 4 service such that it will get the relay address automatically.
 .It Fl set6to4manual <newnetworkservicename> <relayaddress>
-Use this command to set the 6 to 4 service such that it will get the relay address manually. Specify the <relayaddress> that you would like to set.
-.Pp
+Use this command to set the 6 to 4 service such that it will get the relay address manually.
+Specify the <relayaddress> that you would like to set.
 .It Fl getftpproxy Ar networkservice
 Displays FTP proxy (server, port, enabled value) info for <networkservice>.
 .It Fl setftpproxy Ar networkservice domain portnumber authenticated username password
-Set FTP proxy for <networkservice> with <domain> and <port number>. Turns proxy on. Optionally, specify <on> or <off> for <authenticated> to enable and disable authenticated proxy support. Specify <username> and <password> if you turn authenticated proxy support on.
+Set FTP proxy for <networkservice> with <domain> and <port number>.
+Turns proxy on.
+Optionally, specify <on> or <off> for <authenticated> to enable and disable authenticated proxy support.
+Specify <username> and <password> if you turn authenticated proxy support on.
 .It Fl setftpproxystate Ar networkservice on | off
 Set FTP proxy on <networkservice> to either <on> or <off>.
 .It Fl getwebproxy Ar networkservice
 Displays Web proxy (server, port, enabled value) info for <networkservice>.
 .It Fl setwebproxy Ar networkservice domain portnumber authenticated username password
-Set Web proxy for <networkservice> with <domain> and <port number>. Turns proxy on. Optionally, specify <on> or <off> for <authenticated> to enable and disable authenticated proxy support. Specify <username> and <password> if you turn authenticated proxy support on.
+Set Web proxy for <networkservice> with <domain> and <port number>.
+Turns proxy on.
+Optionally, specify <on> or <off> for <authenticated> to enable and disable authenticated proxy support.
+Specify <username> and <password> if you turn authenticated proxy support on.
 .It Fl setwebproxystate Ar networkservice on | off
 Set Web proxy on <networkservice> to either <on> or <off>.
 .It Fl getsecurewebproxy Ar networkservice
 Displays Secure Web proxy (server, port, enabled value) info for <networkservice>.
 .It Fl setsecurewebproxy Ar networkservice domain portnumber authenticated username password
-Set Secure Web proxy for <networkservice> with <domain> and <port number>. Turns proxy on. Optionally, specify <on> or <off> for <authenticated> to enable and disable authenticated proxy support. Specify <username> and <password> if you turn authenticated proxy support on.
+Set Secure Web proxy for <networkservice> with <domain> and <port number>.
+Turns proxy on.
+Optionally, specify <on> or <off> for <authenticated> to enable and disable authenticated proxy support.
+Specify <username> and <password> if you turn authenticated proxy support on.
 .It Fl setsecurewebproxystate Ar networkservice on | off
 Set SecureWeb proxy on <networkservice> to either <on> or <off>.
 .It Fl getstreamingproxy Ar networkservice
 Displays Streaming proxy (server, port, enabled value) info for <networkservice>.
 .It Fl setstreamingproxy Ar networkservice domain portnumber authenticated username password
-Set Streaming proxy for <networkservice> with <networkservice>. Turns proxy on. Optionally, specify <on> or <off> for <authenticated> to enable and disable authenticated proxy support. Specify <username> and <password> if you turn authenticated proxy support on.
+Set Streaming proxy for <networkservice> with <networkservice>.
+Turns proxy on.
+Optionally, specify <on> or <off> for <authenticated> to enable and disable authenticated proxy support.
+Specify <username> and <password> if you turn authenticated proxy support on.
 .It Fl setstreamingproxystate Ar networkservice on | off
 Set Streamingproxy on <networkservice> to either <on> or <off>.
 .It Fl getgopherproxy Ar networkservice
 Displays Gopher proxy (server, port, enabled value) info for <networkservice>.
 .It Fl setgopherproxy Ar networkservice domain portnumber authenticated username password
-Set Gopher proxy for <networkservice> with <domain> and <port number>. Turns proxy on. Optionally, specify <on> or <off> for <authenticated> to enable and disable authenticated proxy support. Specify <username> and <password> if you turn authenticated proxy support on.
+Set Gopher proxy for <networkservice> with <domain> and <port number>.
+Turns proxy on.
+Optionally, specify <on> or <off> for <authenticated> to enable and disable authenticated proxy support.
+Specify <username> and <password> if you turn authenticated proxy support on.
 .It Fl setgopherproxystate Ar networkservice on | off
 Set Gopher proxy on <networkservice> to either <on> or <off>.
 .It Fl getsocksfirewallproxy Ar networkservice
 Displays SOCKS Firewall proxy (server, port, enabled value) info for <networkservice>.
 .It Fl setsocksfirewallproxy Ar networkservice domain portnumber authenticated username password
-Set SOCKS Firewall proxy for <networkservice> with <domain> and <port number>. Turns proxy on. Optionally, specify <on> or <off> for <authenticated> to enable and disable authenticated proxy support. Specify <username> and <password> if you turn authenticated proxy support on.
+Set SOCKS Firewall proxy for <networkservice> with <domain> and <port number>.
+Turns proxy on.
+Optionally, specify <on> or <off> for <authenticated> to enable and disable authenticated proxy support.
+Specify <username> and <password> if you turn authenticated proxy support on.
 .It Fl setsocksfirewallproxystate Ar networkservice on | off
 Set SOCKS Firewall proxy to  either <on> or <off>.
 .It Fl getproxybypassdomains Ar networkservice
 Displays Bypass Domain Names for <networkservice>.
 .It Fl setproxybypassdomains Ar networkservice domain1 [domain2] [...]
-Set the Bypass Domain Name Servers for <networkservice> to <domain1> [domain2] [...]. Any number of Domain Name servers can be specified. Specify "Empty" for <domain1> to clear all Domain Name entries.
+Set the Bypass Domain Name Servers for <networkservice> to <domain1> [domain2] [...]. Any number of Domain Name servers can be specified.
+Specify "Empty" for <domain1> to clear all Domain Name entries.
 .It Fl getproxyautodiscovery Ar networkservice
 Displays Proxy Auto Discover for <networkservice>.
 .It Fl setproxyautodiscovery Ar networkservice on | off
@@ -298,9 +308,14 @@ Use this command to rename the specified network service <networkservice> to <ne
 .It Fl duplicatenetworkservice Ar networkservice newnetworkservicename
 Use this command to duplicate an existing network service <networkservice> and rename it to the specified name <newnetworkservicename>.
 .It Fl removenetworkservice Ar networkservice
-Use this command to delete a network service <networkservice>. You cannot use this command to delete the last remaining service for a hardware port. To do so, you use the -setnetworkserviceenabled command.
+Use this command to delete a network service <networkservice>.
+You cannot use this command to delete the last remaining service for a hardware port.
+To do so, you use the -setnetworkserviceenabled command.
 .It Fl ordernetworkservices Ar service1 [service2] [service3] [...]
-Use this command to designate the order network services are contacted on the specified hardware port. Name the network you want contacted first, then the second, and so on. Use "listnetworkserviceorder" to view current service order. Note: use quotes around service names which contain spaces (ie. "Built-in Ethernet").
+Use this command to designate the order network services are contacted on the specified hardware port.
+Name the network you want contacted first, then the second, and so on.
+Use "listnetworkserviceorder" to view current service order.
+Note: use quotes around service names which contain spaces (ie. "Built-in Ethernet").
 .It Fl setMTUAndMediaAutomatically Ar hardwarePort
 Set hardwareport or device specified back to automatically setting the MTU and Media.
 .It Fl getMTU Ar hardwareport
@@ -312,9 +327,12 @@ List the valid MTU range for hardwareport or device specified.
 .It Fl getMedia Ar hardwareport
 Show both the current setting for media and the active media on hardwareport or device specified.
 .It Fl setMedia Ar hardwareport subtype [option1] [option2] [...]
-Set media for hardwareport or device specified to subtype. Specify optional [option1] and additional options depending on subtype. Any number of valid options can be specified.
+Set media for hardwareport or device specified to subtype.
+Specify optional [option1] and additional options depending on subtype.
+Any number of valid options can be specified.
 .It Fl listValidMedia Ar hardwareport
-List valid media options for hardwareport or device name. Enumerates available subtypes and options per subtype.
+List valid media options for hardwareport or device name.
+Enumerates available subtypes and options per subtype.
 .It Fl createVLAN Ar name parentdevice tag
 Create a VLAN with the name <name> over the parent device <parentdevice> and with the tag <tag>.
 .It Fl deleteVLAN Ar name parentdevice tag
@@ -324,7 +342,8 @@ List the VLANs that have been created.
 .It Fl listdevicesthatsupportVLAN
 List the devices that support VLANs.
 .It Fl isBondSupported Ar device
-Displays YES if the device can be added to a bond. NO if it cannot.
+Displays YES if the device can be added to a bond.
+NO if it cannot.
 .It Fl createBond Ar name [device1] [device2] [...]
 Create a bond with the user-defined-name name and optionally add any listed devices if they support bonding.
 .It Fl deleteBond Ar bond
@@ -363,44 +382,17 @@ Create a set with the user-defined-name name and optionally populate it with the
 Delete the set.
 .It Fl switchtolocation Ar location
 Make the specified set the current set.
-.It Fl listalluserprofiles
-Display the names of all of the user profiles.
-.It Fl listloginprofiles Ar service
-Display the names of the loginwindow profiles for the specified service.	
-.It Fl enablesystemprofile Ar service on | off
-Enables or disables the system profile for the specified service.	
-.It Fl enableloginprofile Ar service profile on | off
-Enables or disables the specified loginwindow profile for the specified service.	
-.It Fl enableuserprofile Ar profile on | off
-Enables or disables the specified user profile.	
-.It Fl import8021xProfiles Ar service path
-Imports the 802.1x profiles for the specified service.	
-.It Fl export8021xProfiles Ar service path yes | no
-Exports all of the profiles for the specified service and optionally includes the items from the keychain.	
-.It Fl export8021xUserProfiles Ar path yes | no
-Exports only the user profiles and optionally includes the items from the keychain.	
-.It Fl export8021xLoginProfiles Ar service path yes | no
-Exports only the loginwindow profiles for the specified service	and optionally includes the items from the keychain.
-.It Fl export8021xSystemProfile Ar service path yes | no
-Exports only the system profile for the specified service and optionally includes the items from the keychain.
-.It Fl settlsidentityonsystemprofile Ar service path passphrase
-Sets the TLS identity on the system profile for the specified service. Identity must be a pkcs12 file.
-.It Fl settlsidentityonuserprofile Ar profile path passphrase
-Sets the TLS identity on the specified user profile. Identity must be a pkcs12 file.
-.It Fl deletesystemprofile Ar service
-Deletes the system profile for the specified service.
-.It Fl deleteloginprofile Ar service profile
-Deletes the specified loginwindow profile for the specified service.
-.It Fl deleteuserprofile Ar profile
-Deletes the specified user profile.
+.It Fl version
 Displays version of networksetup tool.
 .It Fl help
 Displays a list of all the commands available in the Network Setup Tool, with explanatory information.
 .It Fl printcommands
 Displays a list of commands with no detail.
-.Pp
-.El                      
-.Pp
+.El
+.Sh FILES
+.Bl -tag -width "/usr/sbin/networksetup" -compact
+.It Pa /usr/sbin/networksetup
+.El
 .Sh EXAMPLES
 .Nm
 -listallnetworkservices
@@ -446,20 +438,9 @@ Displays a list of commands with no detail.
 .Pp
 .Nm
 -createlocation Home populate
-.Pp
-.Nm
--import8021xProfiles Ethernet "/Users/MyHome/Downloads/ExportedConfigs.networkconnect"
-.Pp
-.Pp
-.Sh FILES
-.Bl -tag -width "/usr/sbin/networksetup" -compact
-.It Pa /usr/sbin/networksetup
-.Pp
-.El
-.Sh SEE ALSO 
+.Sh SEE ALSO
 .\" List links in ascending order by section, alphabetically within a section.
 .\" Please do not reference files that do not exist without filing a bug report
 .Xr systemsetup 8
-.Pp
 .\" .Sh BUGS              \" Document known, unremedied bugs 
 .\" .Sh HISTORY         \" Document history if command behaves in a unique manner

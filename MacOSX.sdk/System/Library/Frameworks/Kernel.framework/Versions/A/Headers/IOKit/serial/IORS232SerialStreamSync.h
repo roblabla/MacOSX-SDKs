@@ -163,10 +163,12 @@
 #define PD_RS232_N_TXQ	(PD_RS232_S_TXQ  << PD_RS232_N_SHIFT)
 #define PD_RS232_N_RXQ	(PD_RS232_S_RXQ  << PD_RS232_N_SHIFT)
 
-class IORS232SerialStreamSync : public IOSerialStreamSync
+__exported_push
+class __kpi_deprecated("Use DriverKit") IORS232SerialStreamSync : public IOSerialStreamSync
 {
     OSDeclareDefaultStructors(IORS232SerialStreamSync)
 };
+__exported_pop
 
 #endif /* !_SERIAL_IORS232SERIALSTREAMSYNC_H */
 

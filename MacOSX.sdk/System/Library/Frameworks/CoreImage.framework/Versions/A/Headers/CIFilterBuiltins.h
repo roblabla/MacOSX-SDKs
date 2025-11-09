@@ -232,6 +232,10 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 // CICategoryColorAdjustment
+@protocol CIColorAbsoluteDifference <CIFilter>
+  @property (nonatomic, retain, nullable) CIImage *inputImage;
+  @property (nonatomic, retain, nullable) CIImage *inputImage2;
+@end
 @protocol CIColorClamp <CIFilter>
   @property (nonatomic, retain, nullable) CIImage *inputImage;
   @property (nonatomic, retain) CIVector *minComponents;
@@ -257,6 +261,13 @@ NS_ASSUME_NONNULL_BEGIN
   @property (nonatomic, retain) CIVector *greenCoefficients;
   @property (nonatomic, retain) CIVector *blueCoefficients;
   @property (nonatomic, retain) CIVector *alphaCoefficients;
+@end
+@protocol CIColorThreshold <CIFilter>
+  @property (nonatomic, retain, nullable) CIImage *inputImage;
+  @property (nonatomic) float threshold;
+@end
+@protocol CIColorThresholdOtsu <CIFilter>
+  @property (nonatomic, retain, nullable) CIImage *inputImage;
 @end
 @protocol CIDepthToDisparity <CIFilter>
   @property (nonatomic, retain, nullable) CIImage *inputImage;
@@ -412,6 +423,114 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 @protocol CIXRay <CIFilter>
   @property (nonatomic, retain, nullable) CIImage *inputImage;
+@end
+
+// CICategoryDistortionEffect
+@protocol CIBumpDistortion <CIFilter>
+  @property (nonatomic, retain, nullable) CIImage *inputImage;
+  @property (nonatomic) CGPoint center;
+  @property (nonatomic) float radius;
+  @property (nonatomic) float scale;
+@end
+@protocol CIBumpDistortionLinear <CIFilter>
+  @property (nonatomic, retain, nullable) CIImage *inputImage;
+  @property (nonatomic) CGPoint center;
+  @property (nonatomic) float radius;
+  @property (nonatomic) float angle;
+  @property (nonatomic) float scale;
+@end
+@protocol CICircleSplashDistortion <CIFilter>
+  @property (nonatomic, retain, nullable) CIImage *inputImage;
+  @property (nonatomic) CGPoint center;
+  @property (nonatomic) float radius;
+@end
+@protocol CICircularWrap <CIFilter>
+  @property (nonatomic, retain, nullable) CIImage *inputImage;
+  @property (nonatomic) CGPoint center;
+  @property (nonatomic) float radius;
+  @property (nonatomic) float angle;
+@end
+@protocol CIDisplacementDistortion <CIFilter>
+  @property (nonatomic, retain, nullable) CIImage *inputImage;
+  @property (nonatomic, retain, nullable) CIImage *displacementImage;
+  @property (nonatomic) float scale;
+@end
+@protocol CIDroste <CIFilter>
+  @property (nonatomic, retain, nullable) CIImage *inputImage;
+  @property (nonatomic) CGPoint insetPoint0;
+  @property (nonatomic) CGPoint insetPoint1;
+  @property (nonatomic) float strands;
+  @property (nonatomic) float periodicity;
+  @property (nonatomic) float rotation;
+  @property (nonatomic) float zoom;
+@end
+@protocol CIGlassDistortion <CIFilter>
+  @property (nonatomic, retain, nullable) CIImage *inputImage;
+  @property (nonatomic, retain, nullable) CIImage *textureImage;
+  @property (nonatomic) CGPoint center;
+  @property (nonatomic) float scale;
+@end
+@protocol CIGlassLozenge <CIFilter>
+  @property (nonatomic, retain, nullable) CIImage *inputImage;
+  @property (nonatomic) CGPoint point0;
+  @property (nonatomic) CGPoint point1;
+  @property (nonatomic) float radius;
+  @property (nonatomic) float refraction;
+@end
+@protocol CIHoleDistortion <CIFilter>
+  @property (nonatomic, retain, nullable) CIImage *inputImage;
+  @property (nonatomic) CGPoint center;
+  @property (nonatomic) float radius;
+@end
+@protocol CILightTunnel <CIFilter>
+  @property (nonatomic, retain, nullable) CIImage *inputImage;
+  @property (nonatomic) CGPoint center;
+  @property (nonatomic) float rotation;
+  @property (nonatomic) float radius;
+@end
+@protocol CINinePartStretched <CIFilter>
+  @property (nonatomic, retain, nullable) CIImage *inputImage;
+  @property (nonatomic) CGPoint breakpoint0;
+  @property (nonatomic) CGPoint breakpoint1;
+  @property (nonatomic) CGPoint growAmount;
+@end
+@protocol CINinePartTiled <CIFilter>
+  @property (nonatomic, retain, nullable) CIImage *inputImage;
+  @property (nonatomic) CGPoint breakpoint0;
+  @property (nonatomic) CGPoint breakpoint1;
+  @property (nonatomic) CGPoint growAmount;
+  @property (nonatomic) bool flipYTiles;
+@end
+@protocol CIPinchDistortion <CIFilter>
+  @property (nonatomic, retain, nullable) CIImage *inputImage;
+  @property (nonatomic) CGPoint center;
+  @property (nonatomic) float radius;
+  @property (nonatomic) float scale;
+@end
+@protocol CIStretchCrop <CIFilter>
+  @property (nonatomic, retain, nullable) CIImage *inputImage;
+  @property (nonatomic) CGPoint size;
+  @property (nonatomic) float cropAmount;
+  @property (nonatomic) float centerStretchAmount;
+@end
+@protocol CITorusLensDistortion <CIFilter>
+  @property (nonatomic, retain, nullable) CIImage *inputImage;
+  @property (nonatomic) CGPoint center;
+  @property (nonatomic) float radius;
+  @property (nonatomic) float width;
+  @property (nonatomic) float refraction;
+@end
+@protocol CITwirlDistortion <CIFilter>
+  @property (nonatomic, retain, nullable) CIImage *inputImage;
+  @property (nonatomic) CGPoint center;
+  @property (nonatomic) float radius;
+  @property (nonatomic) float angle;
+@end
+@protocol CIVortexDistortion <CIFilter>
+  @property (nonatomic, retain, nullable) CIImage *inputImage;
+  @property (nonatomic) CGPoint center;
+  @property (nonatomic) float radius;
+  @property (nonatomic) float angle;
 @end
 
 // CICategoryTileEffect
@@ -804,6 +923,46 @@ NS_ASSUME_NONNULL_BEGIN
   @property (nonatomic) float amount;
 @end
 
+// CICategoryReduction
+@protocol CIAreaReductionFilter <CIFilter>
+  @property (nonatomic, retain, nullable) CIImage *inputImage;
+  @property (nonatomic) CGRect extent;
+@end
+@protocol CIAreaAverage <CIAreaReductionFilter>
+@end
+@protocol CIAreaHistogram <CIAreaReductionFilter>
+  @property (nonatomic) float scale;
+  @property (nonatomic) NSInteger count;
+@end
+@protocol CIAreaMaximum <CIAreaReductionFilter>
+@end
+@protocol CIAreaMaximumAlpha <CIAreaReductionFilter>
+@end
+@protocol CIAreaMinimum <CIAreaReductionFilter>
+@end
+@protocol CIAreaMinimumAlpha <CIAreaReductionFilter>
+@end
+@protocol CIAreaMinMax <CIAreaReductionFilter>
+@end
+@protocol CIAreaMinMaxRed <CIAreaReductionFilter>
+@end
+@protocol CIColumnAverage <CIAreaReductionFilter>
+@end
+@protocol CIHistogramDisplay <CIFilter>
+  @property (nonatomic, retain, nullable) CIImage *inputImage;
+  @property (nonatomic) float height;
+  @property (nonatomic) float highLimit;
+  @property (nonatomic) float lowLimit;
+@end
+@protocol CIKMeans <CIAreaReductionFilter>
+  @property (nonatomic, retain, nullable) CIImage *inputMeans;
+  @property (nonatomic) NSInteger count;
+  @property (nonatomic) float passes;
+  @property (nonatomic) bool perceptual;
+@end
+@protocol CIRowAverage <CIAreaReductionFilter>
+@end
+
 
 NS_CLASS_AVAILABLE(10_15, 13_0)
 @interface CIFilter (Builtins)
@@ -883,10 +1042,13 @@ NS_CLASS_AVAILABLE(10_15, 13_0)
 + (CIFilter<CICompositeOperation>*) subtractBlendModeFilter;
 
 // CICategoryColorAdjustment
++ (CIFilter<CIColorAbsoluteDifference>*) colorAbsoluteDifferenceFilter NS_AVAILABLE(11_0, 14_0);
 + (CIFilter<CIColorClamp>*) colorClampFilter;
 + (CIFilter<CIColorControls>*) colorControlsFilter;
 + (CIFilter<CIColorMatrix>*) colorMatrixFilter;
 + (CIFilter<CIColorPolynomial>*) colorPolynomialFilter;
++ (CIFilter<CIColorThreshold>*) colorThresholdFilter NS_AVAILABLE(11_0, 14_0);
++ (CIFilter<CIColorThresholdOtsu>*) colorThresholdOtsuFilter NS_AVAILABLE(11_0, 14_0);
 + (CIFilter<CIDepthToDisparity>*) depthToDisparityFilter;
 + (CIFilter<CIDisparityToDepth>*) disparityToDepthFilter;
 + (CIFilter<CIExposureAdjust>*) exposureAdjustFilter;
@@ -931,6 +1093,25 @@ NS_CLASS_AVAILABLE(10_15, 13_0)
 + (CIFilter<CIVignette>*) vignetteFilter;
 + (CIFilter<CIVignetteEffect>*) vignetteEffectFilter;
 + (CIFilter<CIXRay>*) xRayFilter;
+
+// CICategoryDistortionEffect
++ (CIFilter<CIBumpDistortion>*) bumpDistortionFilter NS_AVAILABLE(11_0, 14_0);
++ (CIFilter<CIBumpDistortionLinear>*) bumpDistortionLinearFilter NS_AVAILABLE(11_0, 14_0);
++ (CIFilter<CICircleSplashDistortion>*) circleSplashDistortionFilter NS_AVAILABLE(11_0, 14_0);
++ (CIFilter<CICircularWrap>*) circularWrapFilter NS_AVAILABLE(11_0, 14_0);
++ (CIFilter<CIDisplacementDistortion>*) displacementDistortionFilter NS_AVAILABLE(11_0, 14_0);
++ (CIFilter<CIDroste>*) drosteFilter NS_AVAILABLE(11_0, 14_0);
++ (CIFilter<CIGlassDistortion>*) glassDistortionFilter NS_AVAILABLE(11_0, 14_0);
++ (CIFilter<CIGlassLozenge>*) glassLozengeFilter NS_AVAILABLE(11_0, 14_0);
++ (CIFilter<CIHoleDistortion>*) holeDistortionFilter NS_AVAILABLE(11_0, 14_0);
++ (CIFilter<CILightTunnel>*) lightTunnelFilter NS_AVAILABLE(11_0, 14_0);
++ (CIFilter<CINinePartStretched>*) ninePartStretchedFilter NS_AVAILABLE(11_0, 14_0);
++ (CIFilter<CINinePartTiled>*) ninePartTiledFilter NS_AVAILABLE(11_0, 14_0);
++ (CIFilter<CIPinchDistortion>*) pinchDistortionFilter NS_AVAILABLE(11_0, 14_0);
++ (CIFilter<CIStretchCrop>*) stretchCropFilter NS_AVAILABLE(11_0, 14_0);
++ (CIFilter<CITorusLensDistortion>*) torusLensDistortionFilter NS_AVAILABLE(11_0, 14_0);
++ (CIFilter<CITwirlDistortion>*) twirlDistortionFilter NS_AVAILABLE(11_0, 14_0);
++ (CIFilter<CIVortexDistortion>*) vortexDistortionFilter NS_AVAILABLE(11_0, 14_0);
 
 // CICategoryTileEffect
 + (CIFilter<CIAffineClamp>*) affineClampFilter;
@@ -1013,6 +1194,20 @@ NS_CLASS_AVAILABLE(10_15, 13_0)
 + (CIFilter<CIMotionBlur>*) motionBlurFilter;
 + (CIFilter<CINoiseReduction>*) noiseReductionFilter;
 + (CIFilter<CIZoomBlur>*) zoomBlurFilter;
+
+// CICategoryReduction
++ (CIFilter<CIAreaAverage>*) areaAverageFilter NS_AVAILABLE(11_0, 14_0);
++ (CIFilter<CIAreaHistogram>*) areaHistogramFilter NS_AVAILABLE(11_0, 14_0);
++ (CIFilter<CIAreaMaximum>*) areaMaximumFilter NS_AVAILABLE(11_0, 14_0);
++ (CIFilter<CIAreaMaximumAlpha>*) areaMaximumAlphaFilter NS_AVAILABLE(11_0, 14_0);
++ (CIFilter<CIAreaMinimum>*) areaMinimumFilter NS_AVAILABLE(11_0, 14_0);
++ (CIFilter<CIAreaMinimumAlpha>*) areaMinimumAlphaFilter NS_AVAILABLE(11_0, 14_0);
++ (CIFilter<CIAreaMinMax>*) areaMinMaxFilter NS_AVAILABLE(11_0, 14_0);
++ (CIFilter<CIAreaMinMaxRed>*) areaMinMaxRedFilter NS_AVAILABLE(11_0, 14_0);
++ (CIFilter<CIColumnAverage>*) columnAverageFilter NS_AVAILABLE(11_0, 14_0);
++ (CIFilter<CIHistogramDisplay>*) histogramDisplayFilter NS_AVAILABLE(11_0, 14_0);
++ (CIFilter<CIKMeans>*) KMeansFilter NS_AVAILABLE(11_0, 14_0);
++ (CIFilter<CIRowAverage>*) rowAverageFilter NS_AVAILABLE(11_0, 14_0);
 
 @end
 

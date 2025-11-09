@@ -1,14 +1,32 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 5BDA4B59-B68A-3DF8-AE99-5B6D23F3B05A' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           A3B8DE52-ED85-3920-AB8C-6ADDF6EDEF05
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           3839BF93-279F-3536-A7C6-AFA7619A5DD2
 install-name:    '/System/Library/PrivateFrameworks/FMClient.framework/Versions/A/FMClient'
 swift-abi-version: 7
-exports:         
-  - archs:           [ x86_64 ]
-    allowable-clients: [ FMIPClientXPCService, FMIPSiriBackendPlugin, FindMyiPhoneIntentsExtension, 
-                         fmclienttool ]
-    symbols:         [ '_$s8FMClient10HttpClientC10StatusCodeV10redirectedSivau', 
+allowable-clients:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    clients:         [ FMIPClientXPCService, FMIPSiriBackendPlugin, FindMyiPhoneIntentsExtension, 
+                       fmclienttool ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ '_$s8FMClient0A13XPCConnectionC11serviceNameACSS_tcfC', '_$s8FMClient0A13XPCConnectionC11serviceNameACSS_tcfc', 
+                       '_$s8FMClient0A13XPCConnectionC14exportedObject19interruptionHandler012invalidationF0ACyp_yycyyctcfC', 
+                       '_$s8FMClient0A13XPCConnectionC14exportedObject19interruptionHandler012invalidationF0ACyp_yycyyctcfCTq', 
+                       '_$s8FMClient0A13XPCConnectionC14exportedObject19interruptionHandler012invalidationF0ACyp_yycyyctcfc', 
+                       '_$s8FMClient0A13XPCConnectionC15machServiceName7optionsACSS_So22NSXPCConnectionOptionsVtcfC', 
+                       '_$s8FMClient0A13XPCConnectionC15machServiceName7optionsACSS_So22NSXPCConnectionOptionsVtcfc', 
+                       '_$s8FMClient0A13XPCConnectionC16listenerEndpointACSo013NSXPCListenerD0C_tcfC', 
+                       '_$s8FMClient0A13XPCConnectionC16listenerEndpointACSo013NSXPCListenerD0C_tcfc', 
+                       '_$s8FMClient0A13XPCConnectionCMa', '_$s8FMClient0A13XPCConnectionCMn', 
+                       '_$s8FMClient0A13XPCConnectionCN', '_$s8FMClient0A13XPCConnectionCfD', 
+                       '_$s8FMClient10HttpClientC10StatusCodeV10redirectedSivau', 
                        '_$s8FMClient10HttpClientC10StatusCodeV10redirectedSivgZ', 
                        '_$s8FMClient10HttpClientC10StatusCodeV10redirectedSivpZ', 
                        '_$s8FMClient10HttpClientC10StatusCodeV12unauthorizedSivau', 
@@ -416,6 +434,7 @@ exports:
                        _TtC8FMClient12SearchResult, _TtC8FMClient15PlaySoundDevice, 
                        _TtC8FMClient16DiscoveredDevice, _TtC8FMClient18SearchFilterDevice, 
                        _TtC8FMClient18SearchResultDevice, _TtC8FMClient19ClientConfiguration, 
-                       _TtC8FMClient24AuthenticationCredential, _TtC8FMClient24VoiceAssistantDeviceName, 
-                       _TtC8FMClient24VoiceAssistantSyncResult, _TtC8FMClient7Session ]
+                       _TtC8FMClient21FMClientXPCConnection, _TtC8FMClient24AuthenticationCredential, 
+                       _TtC8FMClient24VoiceAssistantDeviceName, _TtC8FMClient24VoiceAssistantSyncResult, 
+                       _TtC8FMClient7Session ]
 ...

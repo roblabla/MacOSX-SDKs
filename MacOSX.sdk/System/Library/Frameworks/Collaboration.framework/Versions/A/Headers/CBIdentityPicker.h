@@ -37,7 +37,7 @@ NS_CLASS_AVAILABLE(10_5, NA)
    The didEndSelector should have the following signature:
     - (void)identityPickerDidEnd:(CBIdentityPicker *)identityPicker returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
 */
-- (void)runModalForWindow:(NSWindow *)window modalDelegate:(nullable id)delegate didEndSelector:(nullable SEL)didEndSelector contextInfo:(nullable void *)contextInfo NS_DEPRECATED(10_5, 10_11, NA, NA "Use runModalForWindow:completionHandler: instead.");
+- (void)runModalForWindow:(NSWindow *)window modalDelegate:(nullable id)delegate didEndSelector:(nullable SEL)didEndSelector contextInfo:(nullable void *)contextInfo NS_DEPRECATED(10_5, 10_11, NA, NA, "Use runModalForWindow:completionHandler: instead.");
 
 /* Run the Identity Picker as a sheet.  The completionHandler will be invoked after the return value is known but before the sheet is dismissed. */
 - (void)runModalForWindow:(NSWindow *)window completionHandler:(nullable void (^)(NSModalResponse returnCode))completionHandler;

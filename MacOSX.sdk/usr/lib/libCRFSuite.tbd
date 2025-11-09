@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 75CAE6A9-B518-3C91-8707-4F0A0C3ED2C6', 'x86_64: 75CAE6A9-B518-3C91-8707-4F0A0C3ED2C6' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           7C37B565-5A74-3453-BBFC-17129C5F838F
+  - target:          x86_64-maccatalyst
+    value:           7C37B565-5A74-3453-BBFC-17129C5F838F
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           10598098-F46E-376E-B4B9-EB47F2A56642
+  - target:          arm64e-maccatalyst
+    value:           10598098-F46E-376E-B4B9-EB47F2A56642
 install-name:    '/usr/lib/libCRFSuite.dylib'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _crf_content_copy, _crf_content_init, _crf_content_set, _crf_create_instance, 
                        _crf_data_append, _crf_data_finish, _crf_data_init, _crf_data_maxlength, 
                        _crf_data_totalitems, _crf_evaluation_init, _crf_item_append_content, 

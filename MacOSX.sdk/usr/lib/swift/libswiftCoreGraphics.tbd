@@ -1,19 +1,36 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 5FE36AC5-9C3D-3F0C-8F4A-D700BC72D775', 'x86_64: 5FE36AC5-9C3D-3F0C-8F4A-D700BC72D775' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           04780659-F0B9-3F09-A6EB-60BD7DA52026
+  - target:          x86_64-maccatalyst
+    value:           04780659-F0B9-3F09-A6EB-60BD7DA52026
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           B3984955-EFAC-3D02-B7E0-BFD3A84644CB
+  - target:          arm64e-maccatalyst
+    value:           B3984955-EFAC-3D02-B7E0-BFD3A84644CB
 install-name:    '/usr/lib/swift/libswiftCoreGraphics.dylib'
-current-version: 0
+current-version: 2
 swift-abi-version: 7
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos ]
+    symbols:         [ '_$s12CoreGraphics7CGFloatVyACs7Float80VcfC' ]
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftCoreGraphics.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftCoreGraphics.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftCoreGraphics.dylib', 
                        '$ld$install_name$os10.13$@rpath/libswiftCoreGraphics.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftCoreGraphics.dylib', 
-                       '$ld$install_name$os10.9$@rpath/libswiftCoreGraphics.dylib', 
-                       '_$s12CoreGraphics024CGAffineTransformEqualToD0ySbSo0cD0V_ADtF', 
+                       '$ld$install_name$os10.9$@rpath/libswiftCoreGraphics.dylib' ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+    symbols:         [ '_$s12CoreGraphics024CGAffineTransformEqualToD0ySbSo0cD0V_ADtF', 
                        '_$s12CoreGraphics10fpclassifyySiAA7CGFloatVF', '_$s12CoreGraphics11CGFLOAT_MAXAA7CGFloatVvg', 
                        '_$s12CoreGraphics11CGFLOAT_MINAA7CGFloatVvg', '_$s12CoreGraphics12CGPathAddArcyySo16CGMutablePathRefaSg_SPySo17CGAffineTransformVGAA7CGFloatVA4JSbtF', 
                        '_$s12CoreGraphics12CGRectDivideyySo0C0V_SpyADGAeA7CGFloatVSo0C4EdgeVtF', 
@@ -160,12 +177,11 @@ exports:
                        '_$s12CoreGraphics7CGFloatVs27ExpressibleByIntegerLiteralAAMc', 
                        '_$s12CoreGraphics7CGFloatVs7CVarArgAAMc', '_$s12CoreGraphics7CGFloatVyA2CcfC', 
                        '_$s12CoreGraphics7CGFloatVyACSdcfC', '_$s12CoreGraphics7CGFloatVyACSfcfC', 
-                       '_$s12CoreGraphics7CGFloatVyACs7Float80VcfC', '_$s12CoreGraphics7signbitySiAA7CGFloatVF', 
-                       '_$s12CoreGraphics8copysignyAA7CGFloatVAD_ADtF', '_$s12CoreGraphics8isfiniteySbAA7CGFloatVF', 
-                       '_$s12CoreGraphics8isnormalySbAA7CGFloatVF', '_$s12CoreGraphics9nearbyintyAA7CGFloatVADF', 
-                       '_$s12CoreGraphics9nextafteryAA7CGFloatVAD_ADtF', '_$sSd12CoreGraphicsEySdAA7CGFloatVcfC', 
-                       '_$sSf12CoreGraphicsEySfAA7CGFloatVcfC', '_$sSi12CoreGraphicsEySiAA7CGFloatVcfC', 
-                       '_$sSo10CGColorRefa12CoreGraphics01_A14InitTrampolineACMc', 
+                       '_$s12CoreGraphics7signbitySiAA7CGFloatVF', '_$s12CoreGraphics8copysignyAA7CGFloatVAD_ADtF', 
+                       '_$s12CoreGraphics8isfiniteySbAA7CGFloatVF', '_$s12CoreGraphics8isnormalySbAA7CGFloatVF', 
+                       '_$s12CoreGraphics9nearbyintyAA7CGFloatVADF', '_$s12CoreGraphics9nextafteryAA7CGFloatVAD_ADtF', 
+                       '_$sSd12CoreGraphicsEySdAA7CGFloatVcfC', '_$sSf12CoreGraphicsEySfAA7CGFloatVcfC', 
+                       '_$sSi12CoreGraphicsEySiAA7CGFloatVcfC', '_$sSo10CGColorRefa12CoreGraphics01_A14InitTrampolineACMc', 
                        '_$sSo10CGColorRefa12CoreGraphics01_A14InitTrampolineACWP', 
                        '_$sSo10CGColorRefa12CoreGraphicsE10componentsSayAC7CGFloatVGSgvg', 
                        '_$sSo10CGColorRefa12CoreGraphicsE10componentsSayAC7CGFloatVGSgvpMV', 

@@ -17,6 +17,9 @@
 #import <Metal/MTLDepthStencil.h>
 #import <Metal/MTLDrawable.h>
 #import <Metal/MTLRenderPass.h>
+#import <Metal/MTLComputePass.h>
+#import <Metal/MTLBlitPass.h>
+#import <Metal/MTLResourceStatePass.h>
 #import <Metal/MTLComputePipeline.h>
 #import <Metal/MTLLibrary.h>
 #import <Metal/MTLPixelFormat.h>
@@ -34,3 +37,14 @@
 #import <Metal/MTLIndirectCommandEncoder.h>
 #import <Metal/MTLFence.h>
 #import <Metal/MTLEvent.h>
+#import <Metal/MTLFunctionLog.h>
+#import <Metal/MTLResourceStateCommandEncoder.h>
+#import <Metal/MTLAccelerationStructureCommandEncoder.h>
+#import <Metal/MTLRasterizationRate.h>
+#import <Metal/MTLDynamicLibrary.h>
+#import <Metal/MTLFunctionDescriptor.h>
+#import <Metal/MTLLinkedFunctions.h>
+#import <Metal/MTLFunctionHandle.h>
+#import <Metal/MTLVisibleFunctionTable.h>
+#import <Metal/MTLBinaryArchive.h>
+#import <Metal/MTLIntersectionFunctionTable.h>

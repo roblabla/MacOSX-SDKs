@@ -17,7 +17,7 @@ NS_DEPRECATED_MAC(10_8, 10_10)
 @interface GKChallengesViewController : NSViewController <GKViewController> {
 	id _internal1,_internal2,_internal3,_internal4;
 }
-@property (assign, NS_NONATOMIC_IOSONLY) id<GKChallengesViewControllerDelegate> challengeDelegate;
+@property (weak, NS_NONATOMIC_IOSONLY) id<GKChallengesViewControllerDelegate> challengeDelegate;
 @end
 
 #pragma clang diagnostic push

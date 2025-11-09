@@ -33,10 +33,30 @@ typedef NS_ENUM(NSInteger, UIButtonType) {
     UIButtonTypeRoundedRect = UIButtonTypeSystem   // Deprecated, use UIButtonTypeSystem instead
 };
 
+typedef NS_ENUM(NSInteger, UIButtonRole) {
+    UIButtonRoleNormal,
+    UIButtonRolePrimary,
+    UIButtonRoleCancel,
+    UIButtonRoleDestructive
+} API_AVAILABLE(ios(14.0));
+
+@class UIButton, UIPointerStyle, UIPointerEffect, UIPointerShape;
+typedef UIPointerStyle *_Nullable(^UIButtonPointerStyleProvider)(UIButton *button, UIPointerEffect *proposedEffect, UIPointerShape *proposedShape) API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos);
+
 UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIButton : UIControl <NSCoding>
+
+- (instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
+
+/// Initializes a custom button, registers primaryAction for the UIControlEventPrimaryActionTriggered control event, and uses primaryAction's title & image as the button's title & image.
+- (instancetype)initWithFrame:(CGRect)frame primaryAction:(nullable UIAction *)primaryAction API_AVAILABLE(ios(14.0));
 
 + (instancetype)buttonWithType:(UIButtonType)buttonType;
 + (instancetype)systemButtonWithImage:(UIImage *)image target:(nullable id)target action:(nullable SEL)action API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0));
+/// Creates a system button, registers primaryAction for the UIControlEventPrimaryActionTriggered control event, and uses primaryAction's title & image as the button's title & image.
++ (instancetype)systemButtonWithPrimaryAction:(nullable UIAction *)primaryAction API_AVAILABLE(ios(14.0));
+/// Creates a button of the given type, registers primaryAction for the UIControlEventPrimaryActionTriggered control event, and if appropriate uses primaryAction's title & image as the button's title & image.
++ (instancetype)buttonWithType:(UIButtonType)buttonType primaryAction:(nullable UIAction *)primaryAction API_AVAILABLE(ios(14.0));
 
 @property(nonatomic)          UIEdgeInsets contentEdgeInsets UI_APPEARANCE_SELECTOR; // default is UIEdgeInsetsZero. On tvOS 10 or later, default is nonzero except for custom buttons.
 @property(nonatomic)          UIEdgeInsets titleEdgeInsets;                // default is UIEdgeInsetsZero
@@ -47,6 +67,21 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIButton : UIControl <NSCoding>
 @property(nonatomic)          BOOL         showsTouchWhenHighlighted API_UNAVAILABLE(tvos);      // default is NO. if YES, show a simple feedback (currently a glow) while highlighted
 @property(null_resettable, nonatomic,strong)   UIColor     *tintColor API_AVAILABLE(ios(5.0)); // The tintColor is inherited through the superview hierarchy. See UIView for more information.
 @property(nonatomic,readonly) UIButtonType buttonType;
+
+@property (nonatomic) UIButtonRole role API_AVAILABLE(ios(14.0));   // default is UIButtonRoleNormal. 
+
+/// Enables this button's built-in pointer interaction.
+@property (nonatomic, readwrite, assign, getter = isPointerInteractionEnabled) BOOL pointerInteractionEnabled API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos);
+
+/*!
+ * @abstract Called when the system pointer hovers over this button if its pointer interaction is enabled. The
+ *           system calls this block with a proposed UIPointerEffect and UIPointerShape. You may use them to construct
+ *           a customized version of the system provided style or return an entirely custom one.
+ */
+@property (nonatomic, readwrite, copy, nullable) UIButtonPointerStyleProvider pointerStyleProvider API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos) NS_REFINED_FOR_SWIFT;
+
+/// An optional menu for the button to display. The button will automatically enable or disable its contextMenuInteraction when a non-nil or nil menu is set. Defaults to nil.
+@property (nonatomic, readwrite, copy, nullable) UIMenu *menu API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
 
 // you can set the image, title color, title shadow color, and background image to use for each state. you can specify data
 // for a combined state by using the flags added together. in general, you should specify a value for the normal state to be used
@@ -69,7 +104,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIButton : UIControl <NSCoding>
 - (nullable NSAttributedString *)attributedTitleForState:(UIControlState)state API_AVAILABLE(ios(6.0));
 
 // these are the values that will be used for the current state. you can also use these for overrides. a heuristic will be used to
-// determine what image to choose based on the explict states set. For example, the 'normal' state value will be used for all states
+// determine what image to choose based on the explicit states set. For example, the 'normal' state value will be used for all states
 // that don't have their own image defined.
 
 @property(nullable, nonatomic,readonly,strong) NSString *currentTitle;             // normal/highlighted/selected/disabled. can return nil

@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
  The controller that implements the QLPreviewingController protocol must at least implement one of the two following methods:
  -[QLPreviewingController preparePreviewOfSearchableItemWithIdentifier:queryString:completionHandler:], to generate previews for Spotlight searchable items.
  -[QLPreviewingController preparePreviewOfFileAtURL:completionHandler:], to generate previews for file URLs.
+ 
+The main preview should be presented by the view controller implementing QLPreviewingController. Avoid presenting additional view controllers over your QLPreviewingController. For Catalyst compatibility, avoid using gesture recognizers that take interactions over large portions of the view to avoid collisions with standard macOS preview behaviors.
  */
 QL_EXPORT @protocol QLPreviewingController <NSObject>
 

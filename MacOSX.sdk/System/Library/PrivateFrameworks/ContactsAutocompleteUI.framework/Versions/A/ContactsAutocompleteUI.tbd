@@ -1,14 +1,21 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: DABBB838-F850-3B08-9F60-C877F2A18B71' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           66B0F6C9-C46D-34B4-9626-5A46F4186627
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           4EE1E8E7-84D2-315C-A274-BA3BB9DB7C69
 install-name:    '/System/Library/PrivateFrameworks/ContactsAutocompleteUI.framework/Versions/A/ContactsAutocompleteUI'
-current-version: 0
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 634
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CNAutocompleteColumnAccount, _CNAutocompleteColumnIcon, _CNAutocompleteColumnIdentifier, 
                        _CNAutocompleteColumnName, _CNAutocompleteMinWindowWidth, 
-                       _CNViewIsAutocompleteHeaderView, _MFComposeRecipientStringMatchAddress, 
+                       _CNLeadDividerMarginKey, _CNLeadLabelMarginKey, _CNTrailDividerMarginKey, 
+                       _CNTrailLabelMargin, _CNViewIsAutocompleteHeaderView, _MFComposeRecipientStringMatchAddress, 
                        _MFComposeRecipientStringMatchFirstName, _MFComposeRecipientStringMatchLastName, 
                        _MFComposeRecipientStringMatchMiddleName, _MFComposeRecipientStringMatchType ]
     objc-classes:    [ CNAutocompleteColorRepository, CNAutocompleteGroupResultNamer, 

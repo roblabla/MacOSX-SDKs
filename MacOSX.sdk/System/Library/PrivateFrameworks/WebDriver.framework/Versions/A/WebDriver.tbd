@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 449A8325-7B63-3E1F-A023-AFCC1B264EBA' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           71FC6B29-8350-3C67-9998-ED39590FE596
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           3B7C0F1C-FCE8-3630-AF9A-A4B96F1348A0
 install-name:    '/System/Library/PrivateFrameworks/WebDriver.framework/Versions/A/WebDriver'
-current-version: 608.2.6
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 610.2.11
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _DDExtractFileNameWithoutExtension, _DDIntersectionRange, 
                        _DDRangeCompare, _DDRangeFromString, _DDStringFromRange, _DDUnionRange, 
                        _GCDAsyncSocketErrorDomain, _GCDAsyncSocketException, _GCDAsyncSocketQueueName, 

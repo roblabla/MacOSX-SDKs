@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
  An ASPasswordCredentialIdentity is used to describe an identity that can use a service upon successful password based authentication.
  Use this class to save entries into ASCredentialIdentityStore.
  */
-AS_EXTERN API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macCatalyst, macos, tvos, watchos)
+AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(14.0), macos(11.0)) API_UNAVAILABLE(tvos, watchos)
 @interface ASPasswordCredentialIdentity : NSObject <NSCopying, NSSecureCoding>
 
 - (instancetype)init NS_UNAVAILABLE;

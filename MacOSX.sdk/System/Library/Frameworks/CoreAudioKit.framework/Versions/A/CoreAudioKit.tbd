@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 8B8D77F4-2689-3AD4-B660-FF197AC12083' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           EA0B5FBB-871B-336D-8C81-AF3C9D71A76D
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           31664325-7DED-3981-9DBF-C47C665EED5F
 install-name:    '/System/Library/Frameworks/CoreAudioKit.framework/Versions/A/CoreAudioKit'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _kEQViewGraphSizeChangedNotification, _kEQViewParameterChangedNotification, 
                        _kFilterControlSelectedNotification, _kGraphViewBeginGestureNotification, 
                        _kGraphViewEndGestureNotification, _kTooltipTextBeganEditingNotification, 

@@ -63,11 +63,11 @@ typedef NS_ENUM(NSUInteger, MTLSamplerMipFilter) {
 */
 typedef NS_ENUM(NSUInteger, MTLSamplerAddressMode) {
     MTLSamplerAddressModeClampToEdge = 0,
-    MTLSamplerAddressModeMirrorClampToEdge API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios) = 1,
+    MTLSamplerAddressModeMirrorClampToEdge API_AVAILABLE(macos(10.11), ios(14.0)) = 1,
     MTLSamplerAddressModeRepeat = 2,
     MTLSamplerAddressModeMirrorRepeat = 3,
     MTLSamplerAddressModeClampToZero = 4,
-    MTLSamplerAddressModeClampToBorderColor API_AVAILABLE(macos(10.12)) API_UNAVAILABLE(ios) = 5,
+    MTLSamplerAddressModeClampToBorderColor API_AVAILABLE(macos(10.12), ios(14.0)) = 5,
 } API_AVAILABLE(macos(10.11), ios(8.0));
 
 /*!
@@ -87,7 +87,7 @@ typedef NS_ENUM(NSUInteger, MTLSamplerBorderColor) {
     MTLSamplerBorderColorTransparentBlack = 0,  // {0,0,0,0}
     MTLSamplerBorderColorOpaqueBlack = 1,       // {0,0,0,1}
     MTLSamplerBorderColorOpaqueWhite = 2,       // {1,1,1,1}
-} API_AVAILABLE(macos(10.12)) API_UNAVAILABLE(ios);
+} API_AVAILABLE(macos(10.12), ios(14.0));
 
 /*!
  @class MTLSamplerDescriptor
@@ -146,7 +146,7 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
  @property borderColor
  @abstract Set the color for the MTLSamplerAddressMode to one of the predefined in the MTLSamplerBorderColor enum.
  */
-@property (nonatomic) MTLSamplerBorderColor borderColor API_AVAILABLE(macos(10.12)) API_UNAVAILABLE(ios);
+@property (nonatomic) MTLSamplerBorderColor borderColor API_AVAILABLE(macos(10.12), ios(14.0));
 
 /*!
  @property normalizedCoordinates.
@@ -174,7 +174,7 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
  @abstract If YES, an average level of detail will be used when sampling from a texture. If NO, no averaging is performed.
  @discussion lodAverage defaults to NO. This option is a performance hint. An implementation is free to ignore this property.
  */
-@property (nonatomic) BOOL lodAverage API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, macCatalyst);
+@property (nonatomic) BOOL lodAverage API_AVAILABLE(ios(9.0), macos(11.0), macCatalyst(14.0));
 
 /*!
  @property compareFunction

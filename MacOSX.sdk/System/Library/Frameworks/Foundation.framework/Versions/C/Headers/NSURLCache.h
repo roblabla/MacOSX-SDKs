@@ -50,6 +50,7 @@ typedef NS_ENUM(NSUInteger, NSURLCacheStoragePolicy)
     It is used to maintain characteristics and attributes of a cached 
     object. 
 */
+API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 @interface NSCachedURLResponse : NSObject <NSSecureCoding, NSCopying>
 {
     @private
@@ -114,6 +115,7 @@ typedef NS_ENUM(NSUInteger, NSURLCacheStoragePolicy)
 @class NSURLRequest;
 @class NSURLCacheInternal;
 
+API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 @interface NSURLCache : NSObject
 {
     @private
@@ -161,7 +163,7 @@ typedef NS_ENUM(NSUInteger, NSURLCacheStoragePolicy)
     @result an initialized NSURLCache, with the given capacity, backed
     by disk.
 */
-- (instancetype)initWithMemoryCapacity:(NSUInteger)memoryCapacity diskCapacity:(NSUInteger)diskCapacity diskPath:(nullable NSString *)path API_DEPRECATED_WITH_REPLACEMENT("initWithMemoryCapacity:diskCapacity:directoryURL:", macos(10.2,API_TO_BE_DEPRECATED), ios(2.0,API_TO_BE_DEPRECATED), watchos(2.0,API_TO_BE_DEPRECATED), tvos(9.0,API_TO_BE_DEPRECATED)) API_UNAVAILABLE(macCatalyst);
+- (instancetype)initWithMemoryCapacity:(NSUInteger)memoryCapacity diskCapacity:(NSUInteger)diskCapacity diskPath:(nullable NSString *)path API_DEPRECATED_WITH_REPLACEMENT("initWithMemoryCapacity:diskCapacity:directoryURL:", macos(10.2,API_TO_BE_DEPRECATED), ios(2.0,API_TO_BE_DEPRECATED), watchos(2.0,API_TO_BE_DEPRECATED), tvos(9.0,API_TO_BE_DEPRECATED));
 
 /*!
     @method initWithMemoryCapacity:diskCapacity:directoryURL:

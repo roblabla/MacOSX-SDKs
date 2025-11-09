@@ -1,12 +1,26 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 75564E58-E227-360A-B09E-4E4DD8491648', 'x86_64: 75564E58-E227-360A-B09E-4E4DD8491648' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           826B0348-3D1F-3F06-AB89-DE203BEFB030
+  - target:          x86_64-maccatalyst
+    value:           826B0348-3D1F-3F06-AB89-DE203BEFB030
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           AF4A9F2C-30D3-3012-ABD2-B521431DD24E
+  - target:          arm64e-maccatalyst
+    value:           AF4A9F2C-30D3-3012-ABD2-B521431DD24E
 install-name:    '/usr/lib/libpam.2.dylib'
 current-version: 3
 compatibility-version: 3
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ __openpam_debug, __openpam_log, __pam_apple_err_name, __pam_control_flag_name, 
                        __pam_err_name, __pam_facility_name, __pam_func_name, __pam_item_name, 
                        __pam_sm_func_name, _misc_conv, _openpam_borrow_cred, _openpam_clear_chains, 

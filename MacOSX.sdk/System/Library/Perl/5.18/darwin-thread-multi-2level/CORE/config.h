@@ -886,7 +886,7 @@
  *	feature tests from Configure are generally more reliable.
  */
 #define OSNAME "darwin"		/**/
-#define OSVERS "19.0"		/**/
+#define OSVERS "20.0"		/**/
 
 /* USE_CROSS_COMPILE:
  *	This symbol, if defined, indicates that Perl is being cross-compiled.
@@ -3516,7 +3516,7 @@
  *	This symbol, if defined, indicates that the finite routine is
  *	available to check whether a double is finite (non-infinity non-NaN).
  */
-#define HAS_FINITE		/**/
+/*#define HAS_FINITE		/ **/
 
 /* HAS_FINITEL:
  *	This symbol, if defined, indicates that the finitel routine is
@@ -4640,7 +4640,7 @@
  *	is either n or 32*ceil(n/32), especially many little-endians do
  *	the latter.  This is only useful if you have select(), naturally.
  */
-#define SELECT_MIN_BITS 	32	/**/
+#define SELECT_MIN_BITS 	64	/**/
 
 /* ST_INO_SIZE:
  *	This variable contains the size of struct stat's st_ino in bytes.

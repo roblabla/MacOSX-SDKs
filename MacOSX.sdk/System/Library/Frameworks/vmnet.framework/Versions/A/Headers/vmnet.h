@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013-2019 Apple Inc. All rights reserved.
+ * Copyright (c) 2013-2020 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  *
@@ -58,6 +58,7 @@ _Pragma("clang assume_nonnull begin")
  * @ignorefuncmacro OBJC_ENUM
  * @ignorefuncmacro OBJC_OPTIONS
  * @ignorefuncmacro API_AVAILABLE
+ * @ignorefuncmacro API_DEPRECATED
  */
 
 /*!
@@ -127,6 +128,7 @@ typedef OBJC_OPTIONS(uint32_t, interface_event_t) {
  * @constant VMNET_PACKET_TOO_BIG	Packet size larger than MTU.
  * @constant VMNET_BUFFER_EXHAUSTED	Buffers exhausted in kernel.
  * @constant VMNET_TOO_MANY_PACKETS 	Packet count exceeds limit.
+ * @constant VMNET_SHARING_SERVICE_BUSY	Vmnet Interface cannot be started as conflicting sharing service is in use.
 */
 typedef OBJC_ENUM(uint32_t, vmnet_return_t) {
 	VMNET_SUCCESS				= 1000,
@@ -138,6 +140,7 @@ typedef OBJC_ENUM(uint32_t, vmnet_return_t) {
 	VMNET_PACKET_TOO_BIG			= 1006,
 	VMNET_BUFFER_EXHAUSTED			= 1007,
 	VMNET_TOO_MANY_PACKETS			= 1008,
+	VMNET_SHARING_SERVICE_BUSY		= 1009,
 };
 
 /*!
@@ -288,8 +291,6 @@ vmnet_subnet_mask_key API_AVAILABLE(macos(10.15));
  * @constant vmnet_nat66_prefix_key
  * The IPv6 prefix (string) to use with VMNET_SHARED_MODE.
  * The prefix must be a ULA i.e. start with fd00::/8.
- *
- * Must be specified with vmnet_nat66_prefix_length_key.
  */
 extern const char *
 vmnet_nat66_prefix_key API_AVAILABLE(macos(10.15));
@@ -297,13 +298,12 @@ vmnet_nat66_prefix_key API_AVAILABLE(macos(10.15));
 /*!
  * @constant vmnet_nat66_prefix_length_key
  * The IPv6 prefix (uint64) to use with VMNET_SHARED_MODE.
- * The prefix_length must be greater than zero and less than or equal
- * to 64.
- *
- * Must be specified with vmnet_nat66_prefix_key.
+ * The prefix_length must be 64, and hence use of this key is
+ * deprecated.
  */
 extern const char *
-vmnet_nat66_prefix_length_key API_AVAILABLE(macos(10.15));
+vmnet_nat66_prefix_length_key API_DEPRECATED("No longer supported",
+					       macos(10.15, 11.0));
 
 /*!
  * @constant vmnet_estimated_packets_available_key
@@ -313,6 +313,67 @@ vmnet_nat66_prefix_length_key API_AVAILABLE(macos(10.15));
 extern const char *
 vmnet_estimated_packets_available_key API_AVAILABLE(macos(10.10));
 
+/*!
+ * @constant vmnet_network_identifier_key
+ * The identifier (uuid) to uniquely identify the network.
+ *
+ * This property is only applicable to a vmnet_interface in
+ * VMNET_HOST_MODE.
+ *
+ * If this property is set, the vmnet_interface is added to
+ * an isolated network with the specified identifier.
+ *
+ * No DHCP service is provided on this network.
+ */
+extern const char *
+vmnet_network_identifier_key API_AVAILABLE(macos(11.0));
+
+/*!
+ * @constant vmnet_host_ip_address_key
+ * The IPv4 address (string) to be set on the host interface.
+ *
+ * This property is only applicable if vmnet_network_identifier_key
+ * is also specified.
+ */
+extern const char *
+vmnet_host_ip_address_key API_AVAILABLE(macos(11.0));
+
+/*!
+ * @constant vmnet_host_subnet_mask_key
+ * The IPv4 subnet mask (string) to be set on the host interface.
+ *
+ * Must be specified with vmnet_host_ip_address_key.
+ */
+extern const char *
+vmnet_host_subnet_mask_key API_AVAILABLE(macos(11.0));
+
+/*!
+ * @constant vmnet_host_ipv6_address_key
+ * The IPv6 address (string) to be set on the host interface.
+ *
+ * This property is only applicable if vmnet_network_identifier_key
+ * is also specified.
+ */
+extern const char *
+vmnet_host_ipv6_address_key API_AVAILABLE(macos(11.0));
+
+/*!
+ * @constant vmnet_enable_tso_key
+ * Enable TCP segmentation offload. Note, when this is enabled, the
+ * interface may generate large (64K) TCP frames. It must also
+ * be prepared to accept large TCP frames as well.
+ */
+extern const char *
+vmnet_enable_tso_key API_AVAILABLE(macos(11.0));
+
+/*!
+ * @constant vmnet_enable_isolation_key
+ * Enable isolation for this interface. Interface isolation ensures that
+ * network communication between multiple vmnet_interface instances is
+ * not possible.
+ */
+extern const char *
+vmnet_enable_isolation_key API_AVAILABLE(macos(11.0));
 
 /*!
  *  @typedef vmnet_start_interface_completion_handler_t

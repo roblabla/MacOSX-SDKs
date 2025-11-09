@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-OS_EXPORT API_UNAVAILABLE(macos) API_UNAVAILABLE(macCatalyst)
+OS_EXPORT API_UNAVAILABLE(macos, macCatalyst)
 @interface PHEditingExtensionContext : NSExtensionContext
 
 @end

@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 90BAE50D-C605-39F4-9BEB-AB44DCDA2E0D', 'x86_64: 90BAE50D-C605-39F4-9BEB-AB44DCDA2E0D' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           19F4B384-47F4-3A4E-A45E-26858B9F5112
+  - target:          x86_64-maccatalyst
+    value:           19F4B384-47F4-3A4E-A45E-26858B9F5112
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           A08A8CDE-668F-3708-8D58-EEF6E2CE9403
+  - target:          arm64e-maccatalyst
+    value:           A08A8CDE-668F-3708-8D58-EEF6E2CE9403
 install-name:    '/System/Library/PrivateFrameworks/EmbeddedAcousticRecognition.framework/Versions/A/EmbeddedAcousticRecognition'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _EARCCCommandTaggingResultGetCommandTaggings, _EARCCommandTaggerCreate, 
                        _EARCCommandTaggerCreateCommandTaggingResults, _EARCCommandTaggerGetCommandPhraseForIndex, 
                        _EARCCommandTaggerGetParameterTagForIndex, _EARCCommandTaggerIsCommandPhraseTag, 
@@ -30,26 +44,31 @@ exports:
                        _EARCUserProfileAddWord, _EARCUserProfileCopyDataProfile, 
                        _EARCUserProfileCopyPronunciationsForOrthography, _EARCUserProfileCopySanitizedString, 
                        _EARCUserProfileCreate, _EARCUserProfileReadDataProfile, _EARCUserProfileRemoveAllWords, 
-                       _EARCWordPartCreate, _EARCWordPartGetFrequency, _EARCWordPartGetOrthography, 
-                       _EARCWordPartGetPronunciations, _EARCWordPartGetTagName, _EARErrorDomain, 
-                       _EARLanguageDetectorRequestContextFromJson, _EARLanguageDetectorRequestContextFromJsonStr, 
-                       _EARRecognitionStatisticAverageActiveTokensPerFrame, _EARRecognitionStatisticRecogCpuTime, 
-                       _QuasarCPDecTranslator_delete, _QuasarCPDecTranslator_new, 
-                       _QuasarCPDecTranslator_translate, _QuasarCSystemConfig_delete, 
-                       _QuasarCSystemConfig_new, _QuasarCSystemConfig_readJsonFile, 
+                       _EARCUserProfileSignalEndOfUserData, _EARCWordPartCreate, 
+                       _EARCWordPartGetFrequency, _EARCWordPartGetOrthography, _EARCWordPartGetPronunciations, 
+                       _EARCWordPartGetTagName, _EARErrorDomain, _EARLanguageDetectorRequestContextFromJson, 
+                       _EARLanguageDetectorRequestContextFromJsonStr, _EARRecognitionStatisticAverageActiveTokensPerFrame, 
+                       _EARRecognitionStatisticRecogCpuTime, _QuasarCPDecTranslator_delete, 
+                       _QuasarCPDecTranslator_new, _QuasarCPDecTranslator_translate, 
+                       _QuasarCSystemConfig_delete, _QuasarCSystemConfig_new, _QuasarCSystemConfig_readJsonFile, 
                        _QuasarC_setLogLevel ]
-    objc-classes:    [ EARCaesuraSilencePosteriorGenerator, EARClientSilenceFeatures, 
+    objc-classes:    [ EARAudioReader, EARAudioResult, EARAudioResultsGenerator, 
+                       EARCaesuraSilencePosteriorGenerator, EARClientSilenceFeatures, 
                        EARKeywordFinder, EARKeywordFinderResult, EARPSRAudioProcessor, 
-                       EARTokenPronounciations, EMTResult, EMTToken, EMTTokenizer, 
-                       EMTTranslator, _EARAcousticFeature, _EARAudioAnalytics, _EARCombinedResult, 
-                       _EARCommandTagger, _EARCommandTagging, _EARCommandTaggingResult, 
-                       _EARCustomLMBuilder, _EARDefaultServerEndpointFeatures, _EAREndpointFeatures, 
-                       _EAREndpointer, _EARFormatter, _EARLanguageDetector, _EARLanguageDetectorAudioBuffer, 
+                       EARSyncPSRAudioProcessor, EARTokenPronounciations, EMTResult, 
+                       EMTToken, EMTTokenizer, EMTTranslator, _EARAcousticFeature, 
+                       _EARAppLmData, _EARAudioAnalytics, _EARCombinedResult, _EARCommandTagger, 
+                       _EARCommandTagging, _EARCommandTaggingResult, _EARCustomLMBuilder, 
+                       _EARDefaultServerEndpointFeatures, _EAREndpointFeatures, _EAREndpointer, 
+                       _EARFormatter, _EARLanguageDetector, _EARLanguageDetectorAudioBuffer, 
                        _EARLanguageDetectorLoggingInfo, _EARLanguageDetectorRequestContext, 
-                       _EARLanguageDetectorResult, _EARLanguageModel, _EARNnetUtil, 
-                       _EARResultCombiner, _EARSpeechModelInfo, _EARSpeechRecognition, 
-                       _EARSpeechRecognitionAudioBuffer, _EARSpeechRecognitionResult, 
-                       _EARSpeechRecognitionResultPackage, _EARSpeechRecognitionToken, 
-                       _EARSpeechRecognizer, _EARSystemResult, _EARTransformUtil, 
-                       _EARUserProfile, _EARUserProfileBuilder, _EARWordPart ]
+                       _EARLanguageDetectorResult, _EARLanguageModel, _EARLatticeMitigatorResult, 
+                       _EARLmData, _EARLmEvaluator, _EARLmHandle, _EARLmLoader, _EARLmModel, 
+                       _EARNnetUtil, _EAROovToken, _EARPlsParser, _EARResultCombiner, 
+                       _EARSpeechModelInfo, _EARSpeechRecognition, _EARSpeechRecognitionAudioBuffer, 
+                       _EARSpeechRecognitionResult, _EARSpeechRecognitionResultPackage, 
+                       _EARSpeechRecognitionToken, _EARSpeechRecognizer, _EARSyncResultStreamHelper, 
+                       _EARSyncSpeechRecognizer, _EARSystemResult, _EARTextNormalization, 
+                       _EARTokenizer, _EARTransformUtil, _EARUserProfile, _EARUserProfileBuilder, 
+                       _EARWordPart ]
 ...

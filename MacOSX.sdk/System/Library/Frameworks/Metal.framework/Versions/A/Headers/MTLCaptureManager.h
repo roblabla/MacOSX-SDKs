@@ -39,12 +39,6 @@ typedef NS_ENUM(NSInteger, MTLCaptureDestination)
 
 MTL_EXTERN API_AVAILABLE(macos(10.15), ios(13.0))
 @interface MTLCaptureDescriptor: NSObject <NSCopying>
-{
-@private
-    id _captureObject;
-    MTLCaptureDestination _destination;
-    NSURL *_outputURL;
-}
 
 /**
     @brief The object that is captured.
@@ -71,11 +65,6 @@ MTL_EXTERN API_AVAILABLE(macos(10.15), ios(13.0))
 
 MTL_EXTERN API_AVAILABLE(macos(10.13), ios(11.0))
 @interface MTLCaptureManager : NSObject
-{
-@private
-    BOOL _isCapturing;
-    id<MTLCaptureScope> _defaultCaptureScope;
-}
 
 /** Retrieves the shared capture manager for this process. There is only one capture manager per process.
     The capture manager allows the user to create capture scopes and trigger captures from code.

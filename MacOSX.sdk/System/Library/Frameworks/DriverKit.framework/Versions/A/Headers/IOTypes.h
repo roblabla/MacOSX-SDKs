@@ -44,7 +44,11 @@ extern "C" {
 
 #ifndef NULL
 #if defined (__cplusplus)
+#if __cplusplus >= 201103L && (defined(__arm__) || defined(__arm64__))
+#define NULL nullptr
+#else
 #define NULL    0
+#endif
 #else
 #define NULL ((void *)0)
 #endif
@@ -79,8 +83,10 @@ typedef vm_address_t            IOVirtualAddress;
 
 #if !defined(__arm__) && !defined(__i386__) && !(defined(__x86_64__) && !defined(KERNEL)) && !(defined(__arm64__) && !defined(__LP64__))
 typedef IOByteCount64           IOByteCount;
+#define PRIIOByteCount                  PRIu64
 #else
 typedef IOByteCount32           IOByteCount;
+#define PRIIOByteCount                  PRIu32
 #endif
 
 typedef IOVirtualAddress    IOLogicalAddress;
@@ -179,33 +185,35 @@ enum {
 	kIOPostedWrite              = 6,
 	kIORealTimeCache            = 7,
 	kIOPostedReordered          = 8,
+	kIOPostedCombinedReordered  = 9,
 };
 
 // IOMemory mapping options
 enum {
-	kIOMapAnywhere              = 0x00000001,
+	kIOMapAnywhere                = 0x00000001,
 
-	kIOMapCacheMask             = 0x00000f00,
-	kIOMapCacheShift            = 8,
-	kIOMapDefaultCache          = kIODefaultCache       << kIOMapCacheShift,
-	kIOMapInhibitCache          = kIOInhibitCache       << kIOMapCacheShift,
-	kIOMapWriteThruCache        = kIOWriteThruCache     << kIOMapCacheShift,
-	kIOMapCopybackCache         = kIOCopybackCache      << kIOMapCacheShift,
-	kIOMapWriteCombineCache     = kIOWriteCombineCache  << kIOMapCacheShift,
-	kIOMapCopybackInnerCache    = kIOCopybackInnerCache << kIOMapCacheShift,
-	kIOMapPostedWrite           = kIOPostedWrite        << kIOMapCacheShift,
-	kIOMapRealTimeCache         = kIORealTimeCache      << kIOMapCacheShift,
-	kIOMapPostedReordered       = kIOPostedReordered    << kIOMapCacheShift,
+	kIOMapCacheMask               = 0x00000f00,
+	kIOMapCacheShift              = 8,
+	kIOMapDefaultCache            = kIODefaultCache            << kIOMapCacheShift,
+	kIOMapInhibitCache            = kIOInhibitCache            << kIOMapCacheShift,
+	kIOMapWriteThruCache          = kIOWriteThruCache          << kIOMapCacheShift,
+	kIOMapCopybackCache           = kIOCopybackCache           << kIOMapCacheShift,
+	kIOMapWriteCombineCache       = kIOWriteCombineCache       << kIOMapCacheShift,
+	kIOMapCopybackInnerCache      = kIOCopybackInnerCache      << kIOMapCacheShift,
+	kIOMapPostedWrite             = kIOPostedWrite             << kIOMapCacheShift,
+	kIOMapRealTimeCache           = kIORealTimeCache           << kIOMapCacheShift,
+	kIOMapPostedReordered         = kIOPostedReordered         << kIOMapCacheShift,
+	kIOMapPostedCombinedReordered = kIOPostedCombinedReordered << kIOMapCacheShift,
 
-	kIOMapUserOptionsMask       = 0x00000fff,
+	kIOMapUserOptionsMask         = 0x00000fff,
 
-	kIOMapReadOnly              = 0x00001000,
+	kIOMapReadOnly                = 0x00001000,
 
-	kIOMapStatic                = 0x01000000,
-	kIOMapReference             = 0x02000000,
-	kIOMapUnique                = 0x04000000,
-	kIOMapPrefault              = 0x10000000,
-	kIOMapOverwrite     = 0x20000000
+	kIOMapStatic                  = 0x01000000,
+	kIOMapReference               = 0x02000000,
+	kIOMapUnique                  = 0x04000000,
+	kIOMapPrefault                = 0x10000000,
+	kIOMapOverwrite               = 0x20000000
 };
 
 /*! @enum Scale Factors
@@ -238,5 +246,15 @@ typedef unsigned int IODeviceNumber;
 }
 #endif
 
+
+enum {
+	kIOMaxBusStall40usec = 40000,
+	kIOMaxBusStall30usec = 30000,
+	kIOMaxBusStall25usec = 25000,
+	kIOMaxBusStall20usec = 20000,
+	kIOMaxBusStall10usec = 10000,
+	kIOMaxBusStall5usec  = 5000,
+	kIOMaxBusStallNone   = 0,
+};
 
 #endif /* ! __IOKIT_IOTYPES_H */

@@ -88,6 +88,8 @@ __BEGIN_DECLS
 extern proc_t kernproc;
 
 extern int proc_is_classic(proc_t p);
+extern bool proc_is_exotic(proc_t p);
+extern bool proc_is_alien(proc_t p);
 proc_t current_proc_EXTERNAL(void);
 
 extern int      msleep(void *chan, lck_mtx_t *mtx, int pri, const char *wmesg, struct timespec * ts );
@@ -100,7 +102,9 @@ extern int proc_selfpid(void);
 /* this routine returns the pid of the parent of the current process */
 extern int proc_selfppid(void);
 /* this routine returns the csflags of the current process */
-extern int proc_selfcsflags(void);
+extern uint64_t proc_selfcsflags(void);
+/* this routine populates the given flags param with the csflags of the given process. Returns 0 on success, -1 on error. */
+extern int proc_csflags(proc_t p, uint64_t* flags);
 /* this routine returns sends a signal signum to the process identified by the pid */
 extern void proc_signal(int pid, int signum);
 /* this routine checks whether any signal identified by the mask are pending in the  process identified by the pid. The check is  on all threads of the process. */
@@ -119,6 +123,8 @@ void proc_selfname(char * buf, int size);
 
 /* find a process with a given pid. This comes with a reference which needs to be dropped by proc_rele */
 extern proc_t proc_find(int pid);
+/* find a process with a given process identity */
+extern proc_t proc_find_ident(struct proc_ident const *i);
 /* returns a handle to current process which is referenced. The reference needs to be dropped with proc_rele */
 extern proc_t proc_self(void);
 /* releases the held reference on the process */
@@ -129,8 +135,12 @@ extern int proc_pid(proc_t);
 extern int proc_ppid(proc_t);
 /* returns the original pid of the parent of a given process */
 extern int proc_original_ppid(proc_t);
+/* returns the start time of the given process */
+extern int proc_starttime(proc_t, struct timeval *);
 /* returns the platform (macos, ios, watchos, tvos, ...) of the given process */
-extern uint32_t proc_platform(proc_t);
+extern uint32_t proc_platform(const proc_t);
+/* returns the minimum sdk version used by the current process */
+extern uint32_t proc_min_sdk(proc_t);
 /* returns the sdk version used by the current process */
 extern uint32_t proc_sdk(proc_t);
 /* returns 1 if the process is marked for no remote hangs */
@@ -146,6 +156,8 @@ extern boolean_t proc_send_synchronous_EXC_RESOURCE(proc_t p);
 extern int proc_is64bit(proc_t);
 /* this routine returns 1 if the process is running with a 64bit register state, else 0 */
 extern int proc_is64bit_data(proc_t);
+/* this routine returns 1 if the process is initproc */
+extern int proc_isinitproc(proc_t);
 /* is this process exiting? */
 extern int proc_exiting(proc_t);
 /* returns whether the process has started down proc_exit() */
@@ -158,6 +170,16 @@ kauth_cred_t proc_ucred(proc_t p);
 extern int proc_issetugid(proc_t p);
 
 extern int proc_tbe(proc_t);
+
+/*!
+ *  @function proc_gettty
+ *  @abstract Copies the associated tty vnode for a given process if it exists. The caller needs to decrement the iocount of the vnode.
+ *  @return 0 on success. ENOENT if the process has no associated TTY. EINVAL if arguments are NULL or vnode_getwithvid fails.
+ */
+extern int proc_gettty(proc_t p, vnode_t *vp);
+
+/* this routine populates the associated tty device for a given process if it exists, returns 0 on success or else returns EINVAL */
+extern int proc_gettty_dev(proc_t p, dev_t *dev);
 
 /*!
  *  @function proc_selfpgrpid
@@ -178,7 +200,7 @@ pid_t proc_pgrpid(proc_t p);
  *  @function proc_sessionid
  *  @abstract Get the process session id for the passed-in process.
  *  @param p Process whose session id to grab.
- *  @return session id for "p", or -1 on failure
+ *  @return session id of current process.
  */
 pid_t proc_sessionid(proc_t p);
 

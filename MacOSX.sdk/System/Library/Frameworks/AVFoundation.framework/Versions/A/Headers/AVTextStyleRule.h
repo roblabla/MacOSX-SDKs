@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVTextStyleRule.h>)
 /*
 	File:  AVTextStyleRule.h
 
@@ -104,3 +105,7 @@ AV_INIT_UNAVAILABLE
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCore/AVTextStyleRule.h>
+#endif

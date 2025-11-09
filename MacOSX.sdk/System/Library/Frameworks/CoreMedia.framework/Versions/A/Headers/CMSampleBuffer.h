@@ -879,7 +879,7 @@ OSStatus CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer(
 																	May be NULL. */
 	size_t bufferListSize,										/*! @param bufferListSize
 																	Size of the bufferListOut allocated by the client. If bufferListOut
-																	is not NULL and bufferListSize is insufficient, kFigSampleBufferError_ArrayTooSmall
+																	is not NULL and bufferListSize is insufficient, kCMSampleBufferError_ArrayTooSmall
 																	is returned. */
 	CFAllocatorRef CM_NULLABLE blockBufferStructureAllocator,			/*! @param blockBufferStructureAllocator
 																	Allocator to use when creating the CMBlockBuffer structure. */
@@ -912,7 +912,7 @@ OSStatus CMSampleBufferGetAudioStreamPacketDescriptions(
      AudioStreamPacketDescription * CM_NULLABLE packetDescriptionsOut,/*! @param packetDescriptionsOut
 																		Allocated by the caller, receives the packet descriptions
 																		for the samples in the CMSampleBuffer. If non-NULL and
-																		packetDescriptionsSize is too small, kFigSampleBufferError_ArrayTooSmall
+																		packetDescriptionsSize is too small, kCMSampleBufferError_ArrayTooSmall
 																		is returned. */
     size_t * CM_NULLABLE packetDescriptionsSizeNeededOut )			/*! @param packetDescriptionsSizeNeededOut
 																		Used to query for the correct size required for packetDescriptionsOut. May be NULL. */

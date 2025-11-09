@@ -70,6 +70,10 @@ typedef NS_ENUM(NSInteger, AVAudioPlayerNodeCompletionCallbackType) {
  
 		In general the callbacks arrive on a non-main thread and it is the client's responsibility
 		to handle them in a thread-safe manner.
+
+		Setting or getting properties on an AVAudioPlayerNode while the AVAudioEngine is running requires
+		some synchronisation between the calling threads internally. If you want to call player node API within this
+		completion handler block, calls should be synchronised to the same thread/queue.
 */
 typedef void (^AVAudioPlayerNodeCompletionHandler)(AVAudioPlayerNodeCompletionCallbackType callbackType) API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
 

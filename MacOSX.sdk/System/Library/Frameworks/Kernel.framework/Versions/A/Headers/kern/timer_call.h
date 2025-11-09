@@ -25,8 +25,20 @@
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
+
 /*
- * Declarations for timer interrupt callouts.
+ * The timer_call system is responsible for manipulating timers that call
+ * callbacks at a given deadline (with or without some leeway for coalescing).
+ *
+ * Call timer_call_setup once on a timer_call structure to register the callback
+ * function and a context parameter that's passed to it (param0).
+ *
+ * To arm the timer to fire at a deadline, call any of the timer_call_enter
+ * functions.  If the function used accepts a parameter, it will be passed to
+ * the callback function when it fires.
+ *
+ * If the timer needs to be cancelled (like if the timer_call has been armed but
+ * now needs to be deallocated), call timer_call_cancel.
  */
 
 #ifndef _KERN_TIMER_CALL_H_

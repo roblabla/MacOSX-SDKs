@@ -1,11 +1,25 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 7375322C-E01A-310E-B2E4-DAB311A42B4F', 'x86_64: 7375322C-E01A-310E-B2E4-DAB311A42B4F' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           25152183-5832-3F77-81AC-ABFF94B87BA9
+  - target:          x86_64-maccatalyst
+    value:           25152183-5832-3F77-81AC-ABFF94B87BA9
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           1FD203A6-919D-393C-A673-40F6B026320E
+  - target:          arm64e-maccatalyst
+    value:           1FD203A6-919D-393C-A673-40F6B026320E
 install-name:    '/System/Library/PrivateFrameworks/Symptoms.framework/Frameworks/SymptomPresentationFeed.framework/Versions/A/SymptomPresentationFeed'
-current-version: 1238.0.2
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 1431.40.36
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _advisoryToString, _kDarwinNotificationHasAlternateAdvice, 
                        _kDarwinNotificationMaterialLinkQualityChange, _kEstTransferTimeConfidence, 
                        _kEstTransferTimeDLSecs, _kEstTransferTimeULSecs, _kNOIDiscretionaryInvitesWhenForegroundToo, 

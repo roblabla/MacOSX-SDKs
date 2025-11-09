@@ -5,10 +5,10 @@
 	All rights reserved.
 */
 
-
 #import <AppKit/NSCell.h>
+#import <AppKit/AppKitDefines.h>
 
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSImage;
 

@@ -8,9 +8,10 @@
 #import <AppKit/NSLayoutConstraint.h>
 #import <AppKit/AppKitDefines.h>
 #import <AppKit/NSAnimation.h>
+#import <AppKit/NSWindow.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSViewController;
 
@@ -109,6 +110,15 @@ API_AVAILABLE(macos(10.10))
 
 /// If YES, the split view item can be temporarily uncollapsed during a drag by hovering or deep clicking on its neighboring divider. Defaults to NO.
 @property (getter=isSpringLoaded) BOOL springLoaded API_AVAILABLE(macos(10.11));
+
+/// Whether or not a sidebar is allowed to be full height in the window when the `NSFullSizeContentViewWindowMask` style mask is also set. Only applies to NSSplitViewItemBehaviorSidebar. Defaults to YES
+@property BOOL allowsFullHeightLayout API_AVAILABLE(macos(11.0));
+
+/// Specifies a preference for the style of separator displayed between the titlebar and the content of the split view item.
+///
+/// For this value to be applicable, the item's view must be associated with its own titlebar section (see `NSTrackingSeparatorToolbarItem` for more info).
+/// The default value is NSTitlebarSeparatorStyleAutomatic. This value is subject to the containing window's preference and can be overridden.
+@property NSTitlebarSeparatorStyle titlebarSeparatorStyle API_AVAILABLE(macos(11.0));
 
 @end
 

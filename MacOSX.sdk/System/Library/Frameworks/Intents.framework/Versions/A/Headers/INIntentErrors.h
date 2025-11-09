@@ -2,16 +2,17 @@
 //  INIntentErrors.h
 //  Intents
 //
-//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2020 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
 #import <Intents/IntentsDefines.h>
 
-INTENTS_EXTERN NSString * const INIntentErrorDomain API_AVAILABLE(ios(10.0), watchos(3.2)) API_UNAVAILABLE(macosx);
+INTENTS_EXTERN NSString * const INIntentErrorDomain API_AVAILABLE(ios(10.0), macos(11.0), watchos(3.2), tvos(14.0));
 
 typedef NS_ENUM(NSInteger, INIntentErrorCode) {
+
     // Interactions
     INIntentErrorInteractionOperationNotSupported = 1900,
     INIntentErrorDonatingInteraction = 1901,
@@ -62,4 +63,4 @@ typedef NS_ENUM(NSInteger, INIntentErrorCode) {
     // Decoding
     INIntentErrorDecodingGeneric = 9000,
     
-} API_AVAILABLE(ios(10.0), watchos(3.2)) API_UNAVAILABLE(macosx);
+} API_AVAILABLE(ios(10.0), macos(11.0), watchos(3.2), tvos(14.0));

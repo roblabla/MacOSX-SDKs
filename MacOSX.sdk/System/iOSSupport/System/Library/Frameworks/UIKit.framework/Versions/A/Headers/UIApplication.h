@@ -81,9 +81,9 @@ typedef NS_ENUM(NSUInteger, UIBackgroundFetchResult) {
 } API_AVAILABLE(ios(7.0));
 
 typedef NS_ENUM(NSInteger, UIBackgroundRefreshStatus) {
-    UIBackgroundRefreshStatusRestricted, //< unavailable on this system due to device configuration; the user cannot enable the feature
-    UIBackgroundRefreshStatusDenied,     //< explicitly disabled by the user for this application
-    UIBackgroundRefreshStatusAvailable   //< enabled for this application
+    UIBackgroundRefreshStatusRestricted, // unavailable on this system due to device configuration; the user cannot enable the feature
+    UIBackgroundRefreshStatusDenied,     // explicitly disabled by the user for this application
+    UIBackgroundRefreshStatusAvailable   // enabled for this application
 } API_AVAILABLE(ios(7.0), tvos(11.0));
     
 typedef NS_ENUM(NSInteger, UIApplicationState) {
@@ -380,7 +380,9 @@ typedef NSString * UIApplicationOpenURLOptionsKey NS_TYPED_ENUM;
 
 - (void)applicationShouldRequestHealthAuthorization:(UIApplication *)application API_AVAILABLE(ios(9.0));
 
-- (void)application:(UIApplication *)application handleIntent:(INIntent *)intent completionHandler:(void(^)(INIntentResponse *intentResponse))completionHandler API_AVAILABLE(ios(11.0));
+- (nullable id)application:(UIApplication *)application handlerForIntent:(INIntent *)intent API_AVAILABLE(ios(14.0));
+
+- (void)application:(UIApplication *)application handleIntent:(INIntent *)intent completionHandler:(void(^)(INIntentResponse *intentResponse))completionHandler API_DEPRECATED("Use application:handlerForIntent: instead", ios(11.0, 14.0));
 
 - (void)applicationDidEnterBackground:(UIApplication *)application API_AVAILABLE(ios(4.0));
 - (void)applicationWillEnterForeground:(UIApplication *)application API_AVAILABLE(ios(4.0));
@@ -402,10 +404,14 @@ typedef NSString * UIApplicationExtensionPointIdentifier NS_TYPED_ENUM;
 #pragma mark -- State Restoration protocol adopted by UIApplication delegate --
 
 - (nullable UIViewController *) application:(UIApplication *)application viewControllerWithRestorationIdentifierPath:(NSArray<NSString *> *)identifierComponents coder:(NSCoder *)coder API_AVAILABLE(ios(6.0));
-- (BOOL) application:(UIApplication *)application shouldSaveApplicationState:(NSCoder *)coder API_AVAILABLE(ios(6.0));
-- (BOOL) application:(UIApplication *)application shouldRestoreApplicationState:(NSCoder *)coder API_AVAILABLE(ios(6.0));
-- (void) application:(UIApplication *)application willEncodeRestorableStateWithCoder:(NSCoder *)coder API_AVAILABLE(ios(6.0));
-- (void) application:(UIApplication *)application didDecodeRestorableStateWithCoder:(NSCoder *)coder API_AVAILABLE(ios(6.0));
+- (BOOL)application:(UIApplication *)application shouldSaveSecureApplicationState:(NSCoder *)coder API_AVAILABLE(ios(13.2));
+- (BOOL)application:(UIApplication *)application shouldRestoreSecureApplicationState:(NSCoder *)coder API_AVAILABLE(ios(13.2));
+- (void)application:(UIApplication *)application willEncodeRestorableStateWithCoder:(NSCoder *)coder API_AVAILABLE(ios(6.0));
+- (void)application:(UIApplication *)application didDecodeRestorableStateWithCoder:(NSCoder *)coder API_AVAILABLE(ios(6.0));
+
+// Deprecated State Restoration opt-in methods:
+- (BOOL)application:(UIApplication *)application shouldSaveApplicationState:(NSCoder *)coder API_DEPRECATED("Use application:shouldSaveSecureApplicationState: instead", ios(6.0, 13.2));
+- (BOOL)application:(UIApplication *)application shouldRestoreApplicationState:(NSCoder *)coder API_DEPRECATED("Use application:shouldRestoreSecureApplicationState: instead", ios(6.0, 13.2));
 
 #pragma mark -- User Activity Continuation protocol adopted by UIApplication delegate --
 
@@ -431,7 +437,7 @@ typedef NSString * UIApplicationExtensionPointIdentifier NS_TYPED_ENUM;
 // This will be called on the main thread after the user indicates they want to accept a CloudKit sharing invitation in your application.
 // You should use the CKShareMetadata object's shareURL and containerIdentifier to schedule a CKAcceptSharesOperation, then start using
 // the resulting CKShare and its associated record(s), which will appear in the CKContainer's shared database in a zone matching that of the record's owner.
-- (void) application:(UIApplication *)application userDidAcceptCloudKitShareWithMetadata:(CKShareMetadata *)cloudKitShareMetadata API_AVAILABLE(ios(10.0));
+- (void)application:(UIApplication *)application userDidAcceptCloudKitShareWithMetadata:(CKShareMetadata *)cloudKitShareMetadata API_AVAILABLE(ios(10.0));
 
 #pragma mark -- UIScene Support --
 // Called when the UIKit is about to create & vend a new UIScene instance to the application.

@@ -215,7 +215,8 @@ routine	kmod_control(
  * 	examples include the master device port.
  * 	There are a limited number of slots available for system servers.
  */
-routine host_get_special_port(
+routine
+host_get_special_port(
                 host_priv       : host_priv_t;
                 node            : int;
                 which           : int;
@@ -225,7 +226,8 @@ routine host_get_special_port(
  * 	Set a given special port for the local node.
  * 	See host_get_special_port.
  */
-routine host_set_special_port(
+routine
+host_set_special_port(
                 host_priv       : host_priv_t;
                 which           : int;
                 port            : mach_port_t);

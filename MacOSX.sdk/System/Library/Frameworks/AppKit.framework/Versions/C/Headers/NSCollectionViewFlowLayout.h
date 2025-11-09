@@ -7,6 +7,7 @@
 
 #import <AppKit/NSCollectionView.h>
 #import <AppKit/NSCollectionViewLayout.h>
+#import <AppKit/AppKitDefines.h>
 
 typedef NS_ENUM(NSInteger, NSCollectionViewScrollDirection) {
     NSCollectionViewScrollDirectionVertical,
@@ -14,7 +15,7 @@ typedef NS_ENUM(NSInteger, NSCollectionViewScrollDirection) {
 } API_AVAILABLE(macos(10.11));
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 APPKIT_EXTERN NSCollectionViewSupplementaryElementKind const NSCollectionElementKindSectionHeader API_AVAILABLE(macos(10.11));
 APPKIT_EXTERN NSCollectionViewSupplementaryElementKind const NSCollectionElementKindSectionFooter API_AVAILABLE(macos(10.11));

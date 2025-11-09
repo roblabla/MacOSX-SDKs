@@ -189,6 +189,16 @@ CSEXTERN bool ColorSyncProfileVerify (ColorSyncProfileRef prof, CFErrorRef* __nu
     *   returns true if profile can be used or false otherwise
     */
 
+CSEXTERN bool ColorSyncProfileIsWideGamut (ColorSyncProfileRef) CS_AVAILABLE_PUBLIC_STARTING(10.4, CS_UNAVAILABLE_PUBLIC_EMBEDDED);
+   /*
+    * A utility function estimating gamut of a display profile
+    */
+
+CSEXTERN bool ColorSyncProfileIsMatrixBased (ColorSyncProfileRef) CS_AVAILABLE_PUBLIC_STARTING(11.0, CS_UNAVAILABLE_PUBLIC_EMBEDDED);
+    /*
+     * A utility function verifying if a profile is matrix-based
+     */
+
     
 CSEXTERN float ColorSyncProfileEstimateGammaWithDisplayID (const int32_t displayID, CFErrorRef* __nullable error) CS_AVAILABLE_STARTING(10.4) CS_UNAVAILABLE_EMBEDDED;
    /*
@@ -319,18 +329,50 @@ typedef bool (*ColorSyncProfileIterateCallback)(CFDictionaryRef profileInfo, voi
     *   2. if the ColorSyncProfileIterateCallback returns false, the iteration stops
     */
 
+#define COLORSYNC_ITERATE_ASYNC
+
+CSEXTERN CFStringRef kColorSyncProfileCacheSeed;
+   /*
+    * Current cache seed (uint32_t) sent along with kColorSyncProfileRepositoryChangeNotification
+    */
+
 CSEXTERN void ColorSyncIterateInstalledProfiles (ColorSyncProfileIterateCallback __nullable callBack,
-                                        uint32_t *                               __nullable seed,
-                                        void*                                    __nullable userInfo,
-                                        CFErrorRef*                              __nullable error) CS_AVAILABLE_PUBLIC_STARTING(10.4, CS_UNAVAILABLE_PUBLIC_EMBEDDED);
+                                                 uint32_t*                       __nullable seed,
+                                                 void*                           __nullable userInfo,
+                                                 CFErrorRef*                     __nullable error) CS_AVAILABLE_PUBLIC_STARTING(10.4, CS_UNAVAILABLE_PUBLIC_EMBEDDED);
    /*
     * callBack - pointer to a client provided function (can be NULL)
     * seed     - pointer to a cache seed owned by the client (can be NULL)
     * error    - (optional) pointer to the error which will be returned in case of failure
     *
+    * Note: When called for the first time this function will return only system profiles because
+    * profile iteration is a slow process requiring multiple access to file system.
+    * Clients are advised to register for kColorSyncProfileRepositoryChangeNotification
+    * using CFNotificationCenter or NSNotificationCenter to obtain all installed profiles.
+    * Notification callback will receive, if possible, a CFDictionary containing a new seed
+    * value of the profile cache (key kColorSyncProfileCacheSeed / value kCFNumberSInt32Type).
+    * Comparing old and new seed values may prevent unnecessary calls to iterate installed
+    * profiles.
+    * Alternatively, ColorSyncIterateInstalledProfilesWithOptions can be used with kColorSyncWaitForCacheReply
+    * option set to kCFBooleanTrue to obtain all installed profiles in one call.
     */
 
-    
+
+CSEXTERN CFStringRef kColorSyncWaitForCacheReply  CS_AVAILABLE_STARTING(10.16) CS_UNAVAILABLE_EMBEDDED;
+
+CSEXTERN void ColorSyncIterateInstalledProfilesWithOptions (ColorSyncProfileIterateCallback __nullable callBack,
+                                                            uint32_t*                       __nullable seed,
+                                                            void*                           __nullable userInfo,
+                                                            CFDictionaryRef                 __nullable options,
+                                                            CFErrorRef*                     __nullable error) CS_AVAILABLE_STARTING(10.4) CS_UNAVAILABLE_EMBEDDED;
+   /*
+    * callBack - pointer to a client provided function (can be NULL)
+    * seed     - pointer to a cache seed owned by the client
+    * options  = a dictionary with iteration options, e.g. kColorSyncWaitForCacheReply to skip updates
+    * error    - (optional) pointer to the error that will be returned in case of failure
+    *
+    */
+
 CSEXTERN bool ColorSyncProfileInstall(ColorSyncProfileRef profile, CFStringRef domain, CFStringRef subpath, CFErrorRef* __nullable error) CS_AVAILABLE_STARTING(10.4) CS_UNAVAILABLE_EMBEDDED;
    /*
     * profile   - profile to be installed
@@ -553,6 +595,16 @@ extern "C" {
      *   returns true if profile can be used or false otherwise
      */
     
+    CSEXTERN bool ColorSyncProfileIsWideGamut (ColorSyncProfileRef);
+    /*
+     * A utility function estimating gamut of a display profile
+     */
+
+    CSEXTERN bool ColorSyncProfileIsMatrixBased (ColorSyncProfileRef);
+    /*
+     * A utility function verifying if a profile is matrix-based
+     */
+
     CSEXTERN float ColorSyncProfileEstimateGammaWithDisplayID (const int32_t displayID, CFErrorRef* error);
     /*
      *   displayID - system-wide unique display ID (defined by IOKIt)
@@ -681,17 +733,49 @@ extern "C" {
      *   2. if the ColorSyncProfileIterateCallback returns false, the iteration stops
      */
     
-    CSEXTERN void ColorSyncIterateInstalledProfiles (ColorSyncProfileIterateCallback callBack,
-                                                     uint32_t *                      seed,
-                                                     void*                           userInfo,
-                                                     CFErrorRef*                     error);
+    #define COLORSYNC_ITERATE_ASYNC
+
+    CSEXTERN CFStringRef kColorSyncProfileCacheSeed;
     /*
-     * callBack - pointer to a client provided function (can be NULL)
-     * seed     - pointer to a cache seed owned by the client (can be NULL)
-     * error    - (optional) pointer to the error which will be returned in case of failure
-     *
+     * Current cache seed (uint32_t) sent along with kColorSyncProfileRepositoryChangeNotification
      */
-    
+
+    CSEXTERN void ColorSyncIterateInstalledProfiles (ColorSyncProfileIterateCallback __nullable callBack,
+                                                     uint32_t*                       __nullable seed,
+                                                     void*                           __nullable userInfo,
+                                                     CFErrorRef*                     __nullable error);
+   /*
+    * callBack - pointer to a client provided function (can be NULL)
+    * seed     - pointer to a cache seed owned by the client (can be NULL)
+    * error    - (optional) pointer to the error which will be returned in case of failure
+    *
+    * Note: When called for the first time this function will return only system profiles because
+    * profile iteration is a slow process requiring multiple access to file system.
+    * Clients are advised to register for kColorSyncProfileRepositoryChangeNotification
+    * using CFNotificationCenter or NSNotificationCenter to obtain all installed profiles.
+    * Notification callback will receive, if possible, a CFDictionary containing a new seed
+    * value of the profile cache (key kColorSyncProfileCacheSeed / value kCFNumberSInt32Type).
+    * Comparing old and new seed values may prevent unnecessary calls to iterate installed
+    * profiles.
+    * Alternatively, ColorSyncIterateInstalledProfilesWithOptions can be used with kColorSyncWaitForCacheReply
+    * option set to kCFBooleanTrue to obtain all installed profiles in one call.
+    */
+
+    CSEXTERN CFStringRef kColorSyncWaitForCacheReply;
+
+    CSEXTERN void ColorSyncIterateInstalledProfilesWithOptions (ColorSyncProfileIterateCallback __nullable callBack,
+                                                                uint32_t*                       __nullable seed,
+                                                                void*                           __nullable userInfo,
+                                                                CFDictionaryRef                 __nullable options,
+                                                                CFErrorRef*                     __nullable error);
+   /*
+    * callBack - pointer to a client provided function (can be NULL)
+    * seed     - pointer to a cache seed owned by the client
+    * options  = a dictionary with iteration options, e.g. kColorSyncWaitForCacheReply to skip updates
+    * error    - (optional) pointer to the error that will be returned in case of failure
+    *
+    */
+
     CSEXTERN bool ColorSyncProfileInstall(ColorSyncProfileRef profile, CFStringRef domain, CFStringRef subpath, CFErrorRef* error);
     /*
      * profile   - profile to be installed

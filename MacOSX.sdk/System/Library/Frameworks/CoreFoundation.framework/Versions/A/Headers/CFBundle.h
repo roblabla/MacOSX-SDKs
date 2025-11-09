@@ -12,6 +12,10 @@
 #include <CoreFoundation/CFString.h>
 #include <CoreFoundation/CFURL.h>
 
+#if TARGET_OS_MAC
+#include <mach/machine.h>
+#endif
+
 CF_IMPLICIT_BRIDGING_ENABLED
 CF_EXTERN_C_BEGIN
 
@@ -241,7 +245,8 @@ enum {
     kCFBundleExecutableArchitectureI386     = 0x00000007,
     kCFBundleExecutableArchitecturePPC      = 0x00000012,
     kCFBundleExecutableArchitectureX86_64   = 0x01000007,
-    kCFBundleExecutableArchitecturePPC64    = 0x01000012
+    kCFBundleExecutableArchitecturePPC64    = 0x01000012,
+    kCFBundleExecutableArchitectureARM64 API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 0x0100000c,
 } API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 CF_EXPORT
@@ -297,6 +302,17 @@ CFURLRef CFBundleCopyAuxiliaryExecutableURL(CFBundleRef bundle, CFStringRef exec
     /* app to ship versions of the tool for each platform as it does for the */
     /* main app executable. */
 
+#if TARGET_OS_MAC
+CF_EXPORT
+Boolean CFBundleIsExecutableLoadable(CFBundleRef bundle) API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+CF_EXPORT
+Boolean CFBundleIsExecutableLoadableForURL(CFURLRef url) API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+CF_EXPORT
+Boolean CFBundleIsArchitectureLoadable(cpu_type_t arch) API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, watchos, tvos);
+#endif
+
 /* ==================== Getting a bundle's plugIn ==================== */
 
 CF_EXPORT
@@ -304,7 +320,7 @@ CFPlugInRef CFBundleGetPlugIn(CFBundleRef bundle);
 
 /* ==================== Resource Manager-Related API ==================== */
 
-#if __LP64__
+#if TARGET_RT_64_BIT
 typedef int CFBundleRefNum;
 #else
 typedef SInt16 CFBundleRefNum;

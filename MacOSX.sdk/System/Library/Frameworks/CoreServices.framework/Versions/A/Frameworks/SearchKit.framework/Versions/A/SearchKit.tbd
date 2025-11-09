@@ -1,12 +1,29 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: F3705C6E-AA86-3232-89D3-D37841357E45', 'x86_64: F3705C6E-AA86-3232-89D3-D37841357E45' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           42EEB92F-7C15-3DB0-930C-2418C5AF308F
+  - target:          x86_64-maccatalyst
+    value:           42EEB92F-7C15-3DB0-930C-2418C5AF308F
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           3574ADA0-B546-3781-9CD2-9785FCEE1C93
+  - target:          arm64e-maccatalyst
+    value:           3574ADA0-B546-3781-9CD2-9785FCEE1C93
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SearchKit.framework/Versions/A/SearchKit'
 current-version: 417.1
-parent-umbrella: CoreServices
-exports:         
-  - archs:           [ x86_64 ]
+parent-umbrella:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    umbrella:        CoreServices
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _AIATFree, _AIATGetAllocator, _AIATMalloc, _AIATRegisterReportErrorUPP, 
                        _AIATSetAllocator, _DisposeIASearchIsHitFilterUPP, _IACFDataDocAccessorCreate, 
                        _IACFDataDocAccessorDispose, _IADocKeyAccessorCreate, _IADocKeyAccessorLength, 

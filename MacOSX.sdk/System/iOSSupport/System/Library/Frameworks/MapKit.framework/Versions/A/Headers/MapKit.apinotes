@@ -55,6 +55,11 @@ Classes:
   - Selector: "convertRegion:toRectToView:"
     MethodKind: Instance
     SwiftName: "convert(_:toRectTo:)"
+- Name: MKLocalSearch
+  Methods:
+  - Selector: "initWithPointsOfInterestRequest:"
+    MethodKind: Instance
+    SwiftName: "init(request:)"
 - Name: MKOverlayRenderer
   Methods:
   - Selector: "setNeedsDisplayInMapRect:"
@@ -156,6 +161,8 @@ Globals:
   SwiftName: MKMapRect.world
 - Name: MKMapRectNull
   SwiftName: MKMapRect.null
+- Name: MKPointsOfInterestRequestMaxRadius
+  SwiftName: MKLocalPointsOfInterestRequest.maxRadius
 Tags:
 - Name: MKErrorCode
   NSErrorDomain: MKErrorDomain

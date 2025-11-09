@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCapture/AVCaptureSession.h>)
 /*
     File:  AVCaptureSession.h
  
@@ -10,7 +11,6 @@
 #import <AVFoundation/AVCaptureDevice.h>
 #import <AVFoundation/AVCaptureSessionPreset.h>
 #import <Foundation/Foundation.h>
-#import <CoreMedia/CMFormatDescription.h>
 #import <CoreMedia/CMSync.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -123,7 +123,6 @@ AVF_EXPORT NSString *const AVCaptureSessionInterruptionSystemPressureStateKey AP
  */
 AVF_EXPORT NSString *const AVCaptureSessionInterruptionEndedNotification API_AVAILABLE(macos(10.14), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 
-
 /*!
  @enum AVCaptureVideoOrientation
  @abstract
@@ -144,7 +143,6 @@ typedef NS_ENUM(NSInteger, AVCaptureVideoOrientation) {
     AVCaptureVideoOrientationLandscapeRight     = 3,
     AVCaptureVideoOrientationLandscapeLeft      = 4,
 } API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
-
 
 #pragma mark - AVCaptureSession
 
@@ -897,7 +895,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This property is only applicable to AVCaptureConnection instances involving video. On devices where the video stabilization feature is supported, only a subset of available source formats and resolutions may be available for stabilization. The videoStabilizationEnabled property returns YES if video stabilization is currently in use. This property is key-value observable. This property is deprecated. Use activeVideoStabilizationMode instead.
  */
-@property(nonatomic, readonly, getter=isVideoStabilizationEnabled) BOOL videoStabilizationEnabled API_DEPRECATED("Use activeVideoStabilizationMode instead.", ios(6.0, 8.0)) API_UNAVAILABLE(macos, macCatalyst);
+@property(nonatomic, readonly, getter=isVideoStabilizationEnabled) BOOL videoStabilizationEnabled API_DEPRECATED("Use activeVideoStabilizationMode instead.", ios(6.0, 8.0)) API_UNAVAILABLE(macos);
 
 /*!
  @property enablesVideoStabilizationWhenAvailable
@@ -907,7 +905,7 @@ AV_INIT_UNAVAILABLE
  @discussion
     This property is only applicable to AVCaptureConnection instances involving video. On devices where the video stabilization feature is supported, only a subset of available source formats and resolutions may be available for stabilization. By setting the enablesVideoStabilizationWhenAvailable property to YES, video flowing through the receiver is stabilized when available. Enabling video stabilization may introduce additional latency into the video capture pipeline. Clients may key-value observe the videoStabilizationEnabled property to know when stabilization is in use or not. The default value is NO. For apps linked before iOS 6.0, the default value is YES for a video connection attached to an AVCaptureMovieFileOutput instance. For apps linked on or after iOS 6.0, the default value is always NO. This property is deprecated. Use preferredVideoStabilizationMode instead.
  */
-@property(nonatomic) BOOL enablesVideoStabilizationWhenAvailable API_DEPRECATED("Use preferredVideoStabilizationMode instead.", ios(6.0, 8.0)) API_UNAVAILABLE(macos, macCatalyst);
+@property(nonatomic) BOOL enablesVideoStabilizationWhenAvailable API_DEPRECATED("Use preferredVideoStabilizationMode instead.", ios(6.0, 8.0)) API_UNAVAILABLE(macos);
 
 /*!
  @property cameraIntrinsicMatrixDeliverySupported
@@ -996,3 +994,7 @@ AV_INIT_UNAVAILABLE
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCapture/AVCaptureSession.h>
+#endif

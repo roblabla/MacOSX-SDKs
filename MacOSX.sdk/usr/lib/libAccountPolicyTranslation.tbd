@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 1140DD5A-25E3-3278-B02F-DFD32FAF52B8' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           299B6FE4-648D-3AFA-89B2-109FC6D7EF39
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           69E32E61-122A-383D-82BB-E5F29D0866C0
 install-name:    '/usr/lib/libAccountPolicyTranslation.dylib'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _APCategoryAndIdentifierForLegacyPolicyName, _APLegacyPoliciesWithPolicySet, 
                        _APPolicySetWithLegacyPolicies, _kAPAttributeConsecutiveCharacters, 
                        _kAPAttributeCreationTime, _kAPAttributeCurrentDate, _kAPAttributeCurrentDayOfWeek, 

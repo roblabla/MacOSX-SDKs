@@ -39,7 +39,11 @@ class OSAction;
     @abstract In kernel interface to a HID device.
 */
 
-class IOHIDInterface: public IOService
+#if defined(KERNEL) && !defined(KERNEL_PRIVATE)
+class __deprecated_msg("Use DriverKit") IOHIDInterface : public IOService
+#else
+class IOHIDInterface : public IOService
+#endif
 {
     OSDeclareDefaultStructorsWithDispatch( IOHIDInterface )
     
@@ -48,7 +52,7 @@ public:
     /*! @typedef IOHIDInterface::InterruptReportAction
         @abstract Callback to handle an asynchronous report received from 
         the HID device.
-        @discussion This callback is set when calling IOHIDInterface::open.  
+        @discussion This callback is  set when calling IOHIDInterface::open.  
         @param target Pointer to your data object.
         @param timestamp Time when the report was delivered.
         @param report A memory descriptor that describes the report. 
@@ -106,6 +110,7 @@ private:
         OSSet                     	*reportPool;
         bool                        opened;
         bool                        sleeping;
+		bool                        terminated;
     };
 
     /*! @var reserved
@@ -113,7 +118,6 @@ private:
     ExpansionData *             _reserved;
 	
     bool openGated(IOService *forClient, IOOptionBits options, OSAction *action);
-    void closeGated(IOService *forClient, IOOptionBits options);
     void handleReportGated(AbsoluteTime timestamp,
                            IOMemoryDescriptor *report,
                            IOHIDReportType type,
@@ -191,6 +195,9 @@ public:
     virtual void			close(  
 								IOService *					client,
 								IOOptionBits				options = 0 ) APPLE_KEXT_OVERRIDE;
+
+	using IOService::setProperty;
+    virtual bool 			setProperty( const OSSymbol * aKey, OSObject * anObject) APPLE_KEXT_OVERRIDE;
 
     virtual OSString *      getTransport ();
     virtual UInt32          getLocationID ();

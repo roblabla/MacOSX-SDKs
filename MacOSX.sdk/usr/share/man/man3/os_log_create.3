@@ -21,9 +21,13 @@ The behavior of log messages to this object can be configured using the
 command or with a logging configuration profile (see
 .Xr os_log 5 ) .
 .Pp
+The logging runtime maintains a global collection of all os_log_t objects, one per subsystem/category pair.
+The os_log_t for a given subsystem/category is created upon the first call to
+.Nm
+and any subsequent calls return the same object.
+These objects are never deallocated, so dynamic creation (e.g. on a per-operation basis) is generally inappropriate.
 .Sh EXAMPLES
 Create a new os_log_t object and log a message:
-.Pp
 .Bd -literal -offset indent
 #include <os/log.h>
 
@@ -33,7 +37,6 @@ os_log_t log = os_log_create("com.example.widget", "connections");
 /* log a connection related message */
 os_log(log, "connection state changed: %d interface: %s", if, interface);
 .Ed
-.Pp
 .Sh SEE ALSO
 .Xr log 1 ,
 .Xr os_log 3 ,

@@ -5,13 +5,14 @@
 //  Copyright (c) 2012 Apple Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 
 #import <GameController/GameController.h>
 #import <GameController/GCExtern.h>
+#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(7.0))
 @interface GCControllerAxisInput : GCControllerElement
 
 /**
@@ -40,7 +41,7 @@ typedef void (^GCControllerAxisValueChangedHandler)(GCControllerAxisInput *axis,
  @note If the controller's snapshot flag is set to NO, this method has no effect.
  @see value
  */
-- (void)setValue:(float)value;
+- (void)setValue:(float)value API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0));
 
 @end
 

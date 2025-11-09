@@ -1,12 +1,29 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 4F51131B-5848-354B-B818-2AE626C1AAE6', 'x86_64: 4F51131B-5848-354B-B818-2AE626C1AAE6' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           922AF8C3-6DBC-3643-87D5-71E724FD0670
+  - target:          x86_64-maccatalyst
+    value:           922AF8C3-6DBC-3643-87D5-71E724FD0670
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           D09AF9C3-D503-3088-A044-024F7C271B23
+  - target:          arm64e-maccatalyst
+    value:           D09AF9C3-D503-3088-A044-024F7C271B23
 install-name:    '/System/Library/PrivateFrameworks/AppSupport.framework/Versions/A/AppSupport'
 current-version: 29
-exports:         
-  - archs:           [ x86_64 ]
-    re-exports:      [ '/System/Library/PrivateFrameworks/CorePhoneNumbers.framework/Versions/A/CorePhoneNumbers' ]
+reexported-libraries:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    libraries:       [ '/System/Library/PrivateFrameworks/CorePhoneNumbers.framework/Versions/A/CorePhoneNumbers' ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _ALCityCountryNameKey, _ALCityCountryOverrideKey, _ALCityIdentifierKey, 
                        _ALCityLatitudeKey, _ALCityLocaleCodeKey, _ALCityLongitudeKey, 
                        _ALCityNameKey, _ALCityPropertiesCount, _ALCityTimeZoneKey, 
@@ -121,6 +138,7 @@ exports:
                        _CPRecordStoreDeleteChangesForClassToSequenceNumberWhere, 
                        _CPRecordStoreDeleteChangesForClassWithIndices, _CPRecordStoreDestroy, 
                        _CPRecordStoreGetCachedInstanceOfClassWithUID, _CPRecordStoreGetChangesAndChangeIndicesAndSequenceNumbersForClassWithBindBlockAndProperties, 
+                       _CPRecordStoreGetChangesAndChangeIndicesAndSequenceNumbersForClassWithBindBlockAndPropertiesA, 
                        _CPRecordStoreGetChangesAndChangeIndicesAndSequenceNumbersForClassWithOrderAndBindBlockAndProperties, 
                        _CPRecordStoreGetChangesAndChangeIndicesAndSequenceNumbersForClassWithProperties, 
                        _CPRecordStoreGetChangesAndChangeIndicesForClassWithBindBlockAndProperties, 
@@ -317,13 +335,27 @@ exports:
                        _ReachabilityRequest._isReachable, _ReachabilityRequest._lock, 
                        _ReachabilityRequest._observers, _ReachabilityRequest._reachability, 
                        _ReachabilityRequest._receivedAtLeastOneCallback ]
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 20A7A74F-773C-3E0F-8EED-250FEC838561', 'x86_64: 20A7A74F-773C-3E0F-8EED-250FEC838561' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           87522DE6-2EFA-3B0F-96CE-9676CA5E54FF
+  - target:          x86_64-maccatalyst
+    value:           87522DE6-2EFA-3B0F-96CE-9676CA5E54FF
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           65D229C7-606E-355E-8CBB-496A3D623445
+  - target:          arm64e-maccatalyst
+    value:           65D229C7-606E-355E-8CBB-496A3D623445
 install-name:    '/System/Library/PrivateFrameworks/CorePhoneNumbers.framework/Versions/A/CorePhoneNumbers'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CFPhoneNumberBundleCopyRulesetFileSystemPath, _CFPhoneNumberBundleCopyRulesetURL, 
                        _CFPhoneNumberBundleGetBundle, _CFPhoneNumberCopyCountryCode, 
                        _CFPhoneNumberCopyFormattedInternationalRepresentation, _CFPhoneNumberCopyFormattedRepresentation, 
@@ -331,27 +363,29 @@ exports:
                        _CFPhoneNumberCopyNumberForLocalAssist, _CFPhoneNumberCopyUnformattedInternationalRepresentation, 
                        _CFPhoneNumberCopyUnformattedRepresentation, _CFPhoneNumberCreate, 
                        _CFPhoneNumberCreateCopy, _CFPhoneNumberCreateString, _CFPhoneNumberGetITUCountryCodeForISOCountryCode, 
-                       _CFPhoneNumberGetTypeID, _CFPhoneNumberStringCreateLowercaseCopy, 
-                       _CFPhoneNumberStringIsEncodingASCII, _CFPhoneNumberStringTransformCreateCopy, 
-                       _INIT_DECOMPOSED_PHONE_NUMBER, _PNCopyBestGuessCountryCodeForNumber, 
-                       _PNCopyBestGuessNormalizedNumberForCountry, _PNCopyCompressedFormattedStringWithCountry, 
-                       _PNCopyFormattedStringWithCountry, _PNCreateFormattedStringWithCountry, 
-                       _PNDecomposeForCountry, _PNIsValidPhoneNumberForCountry, _PNPhoneNumbersEqual, 
-                       _PNSetFormatFileHeader, _UIPhoneFormatFileFirstPrefixSectionHeader, 
-                       _UIPhoneFormatFileGetCountryHeader, _UIPhoneFormatFileGetCountryLength, 
-                       _UIPhoneFormatFileNextPrefixSectionHeader, _UIPhoneFormatGetFirstFormatString, 
-                       _UIPhoneFormatGetInternationalAccessCode, _UIPhoneFormatGetNationalAccessCode, 
-                       __PNCopyAreaCodeForCountry, __PNCopyBestGuessNumberForCountry, 
-                       __PNCopyCountryCodeForInternationalCode, __PNCopyFormattedNumberForDigitsWithCountry, 
-                       __PNCopyFormattedNumberForDigitsWithCountryByRemovingAtIndex, 
+                       _CFPhoneNumberGetTypeID, _CFPhoneNumberLocaleGetNumberingSystemFromLocaleIdentifier, 
+                       _CFPhoneNumberStringCreateLowercaseCopy, _CFPhoneNumberStringIsEncodingASCII, 
+                       _CFPhoneNumberStringTransformCreateCopy, _INIT_DECOMPOSED_PHONE_NUMBER, 
+                       _PNCopyBestGuessCountryCodeForNumber, _PNCopyBestGuessNormalizedNumberForCountry, 
+                       _PNCopyCompressedFormattedStringWithCountry, _PNCopyFormattedStringWithCountry, 
+                       _PNCreateFormattedStringWithCountry, _PNDecomposeForCountry, 
+                       _PNIsValidPhoneNumberForCountry, _PNPhoneNumbersEqual, _PNSetFormatFileHeader, 
+                       _UIPhoneFormatFileFirstPrefixSectionHeader, _UIPhoneFormatFileGetCountryHeader, 
+                       _UIPhoneFormatFileGetCountryLength, _UIPhoneFormatFileNextPrefixSectionHeader, 
+                       _UIPhoneFormatGetFirstFormatString, _UIPhoneFormatGetInternationalAccessCode, 
+                       _UIPhoneFormatGetNationalAccessCode, __PNCopyAreaCodeForCountry, 
+                       __PNCopyBestGuessNumberForCountry, __PNCopyCountryCodeForInternationalCode, 
+                       __PNCopyFormattedNumberForDigitsWithCountry, __PNCopyFormattedNumberForDigitsWithCountryByRemovingAtIndex, 
                        __PNCopyFormattedNumberSuggestionForDigitsWithCountry, __PNCopyFullyQualifiedNumberForCountry, 
                        __PNCopyFullyQualifiedNumberForCountryInternal, __PNCopyIndexStringsForAddressBookSearch, 
                        __PNCopyInternationalCodeForCountry, __PNCopyLastFourDigitsOfLocalNumber, 
-                       __PNCopyNormalized, __PNCopyPrefixForCountry, __PNCopySampleNumberForCountry, 
+                       __PNCopyNationalDirectDialingPrefixForCountry, __PNCopyNormalized, 
+                       __PNCopyPrefixForCountry, __PNCopySampleNumberForCountry, 
                        __PNCopyStrippedNumberWithoutPauses, __PNCreateLocalizedStringWithString, 
                        __PNCreateStringByAddingPauses, __PNCreateStringByStrippingFormattingAndNotVisiblyAllowable, 
-                       __PNFindFormatRuleForDigitsWithCountry, __PNSetSampleNumberForCountry, 
-                       _cpn_default_log, _decomposedPhoneNumbersEqual, _kCFPhoneNumberBundleIdentifier, 
-                       _kCFPhoneNumberBundleRulesetResourceName, _kCFPhoneNumberBundleRulesetResourceType, 
-                       _kCFPhoneNumberStringTransformNormalize ]
+                       __PNFindFormatRuleForDigitsWithCountry, __PNGetITUCountryCode, 
+                       __PNSetSampleNumberForCountry, _cpn_default_log, _decomposedPhoneNumbersEqual, 
+                       _kCFPhoneNumberBundleIdentifier, _kCFPhoneNumberBundleRulesetResourceName, 
+                       _kCFPhoneNumberBundleRulesetResourceType, _kCFPhoneNumberStringTransformNormalize, 
+                       _pn_uset_basicPresentationSetContains, _pn_uset_expandedPresentationSetContains ]
 ...

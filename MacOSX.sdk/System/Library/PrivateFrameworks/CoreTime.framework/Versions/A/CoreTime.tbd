@@ -1,14 +1,29 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 3372FBEB-538B-348D-9E11-004B0567043A', 'x86_64: 3372FBEB-538B-348D-9E11-004B0567043A' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           4995323A-42FF-316C-8FEA-1F1827D13FB4
+  - target:          x86_64-maccatalyst
+    value:           4995323A-42FF-316C-8FEA-1F1827D13FB4
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           B7254502-EB44-3411-8AF6-51C40784732D
+  - target:          arm64e-maccatalyst
+    value:           B7254502-EB44-3411-8AF6-51C40784732D
 install-name:    '/System/Library/PrivateFrameworks/CoreTime.framework/Versions/A/CoreTime'
-current-version: 266
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 283
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _TMBBTimeActiveNotification, _TMConfirmTimeZone, _TMConvertTicksToSeconds, 
-                       _TMGetKernelMonotonicClock, _TMGetReferenceTime, _TMGetTrustedInterval, 
-                       _TMIsAutomaticTimeEnabled, _TMIsAutomaticTimeZoneEnabled, 
+                       _TMCopyComputedTimeZone, _TMFetchNTP, _TMGetBAFinderTime, 
+                       _TMGetKernelMonotonicClock, _TMGetRTCResetCount, _TMGetReferenceTime, 
+                       _TMGetTrustedInterval, _TMIsAutomaticTimeEnabled, _TMIsAutomaticTimeZoneEnabled, 
                        _TMIsBBTimeActive, _TMIsTimeZoneConfirmed, _TMLocationTimeZoneActiveNotification, 
                        _TMProvideBBTime, _TMProvideCellularTimeZone, _TMSetAuthenticatedSourceTime, 
                        _TMSetAutomaticTimeEnabled, _TMSetAutomaticTimeZoneEnabled, 
@@ -19,4 +34,5 @@ exports:
                        _TMSourceMobileLockdown, _TMSourceNitz, _TMSourceNtp, _TMSourceNtpLowConfidence, 
                        _TMSourceNtpPacket, _TMSourceProxBuddy, _TMSourceiTunesServer, 
                        _TMTimeZoneConfirmedNotification ]
+    objc-classes:    [ TMTime, TMTimeZone ]
 ...

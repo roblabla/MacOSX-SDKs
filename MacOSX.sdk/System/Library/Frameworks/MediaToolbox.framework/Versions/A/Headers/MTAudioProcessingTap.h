@@ -240,8 +240,6 @@ typedef void (*MTAudioProcessingTapUnprepareCallback)(MTAudioProcessingTapRef CM
 				On output, the bufferList should contain the processed audio buffers.
 	@param		numberFramesOut
 				The number of frames of audio data provided in the processed data. Can be 0.
-	@param		bufferListOut
-				The input bufferList filled in with the tap output.
 	@param		flagsOut
 				The start/end of stream flags should be set when appropriate (see Discussion, above).
 */

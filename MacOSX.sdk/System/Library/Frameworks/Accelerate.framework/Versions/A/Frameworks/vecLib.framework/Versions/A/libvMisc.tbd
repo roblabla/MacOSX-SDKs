@@ -1,12 +1,29 @@
---- !tapi-tbd-v3
-archs:           [ x86_64, x86_64h ]
-uuids:           [ 'x86_64: CB8D49B6-7E89-37FC-947A-244B99DE8FC2', 'x86_64: CB8D49B6-7E89-37FC-947A-244B99DE8FC2', 
-                   'x86_64h: D6248EC4-7772-37BB-87F7-9BAB7F5D31A0', 'x86_64h: D6248EC4-7772-37BB-87F7-9BAB7F5D31A0' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
+                   arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           16D98C0B-A405-3697-BF33-24116A846122
+  - target:          x86_64-maccatalyst
+    value:           16D98C0B-A405-3697-BF33-24116A846122
+  - target:          x86_64h-macos
+    value:           1B3FC3E8-BA28-3D11-95CB-0331D2604BA0
+  - target:          x86_64h-maccatalyst
+    value:           1B3FC3E8-BA28-3D11-95CB-0331D2604BA0
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           AB0904E4-EFDB-3205-A696-20FCAFE812F7
+  - target:          arm64e-maccatalyst
+    value:           AB0904E4-EFDB-3205-A696-20FCAFE812F7
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvMisc.dylib'
-current-version: 735
-exports:         
-  - archs:           [ x86_64, x86_64h ]
+current-version: 760.40.6
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
+                       x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
     symbols:         [ _VVACOS, _VVACOSF, _VVACOSF_, _VVACOSH, _VVACOSHF, _VVACOSHF_, 
                        _VVACOSH_, _VVACOS_, _VVASIN, _VVASINF, _VVASINF_, _VVASINH, 
                        _VVASINHF, _VVASINHF_, _VVASINH_, _VVASIN_, _VVATAN, _VVATAN2, 
@@ -35,56 +52,14 @@ exports:
                        _VVSINPIF, _VVSINPIF_, _VVSINPI_, _VVSIN_, _VVSQRT, _VVSQRTF, 
                        _VVSQRTF_, _VVSQRT_, _VVTAN, _VVTANF, _VVTANF_, _VVTANH, _VVTANHF, 
                        _VVTANHF_, _VVTANH_, _VVTANPI, _VVTANPIF, _VVTANPIF_, _VVTANPI_, 
-                       _VVTAN_, ___cblas_isamax, ___cblas_sasum, ___cblas_saxpy, 
-                       ___cblas_sgemm, ___cblas_sgemv, ___cblas_srot, ___cblas_sscal, 
-                       ___cblas_sswap, _dMultMatMat_16x16, _dMultMatMat_32x32, _dMultMatMat_4x4, 
-                       _dMultMatMat_8x8, _dMultMatVec_16x16, _dMultMatVec_32x32, 
-                       _dMultMatVec_4x4, _dMultMatVec_8x8, _dMultVecMat_16x16, _dMultVecMat_32x32, 
-                       _dMultVecMat_4x4, _dMultVecMat_8x8, _gMacBLASScalarCalls, 
-                       _gMacBLASVectorCalls, _sMultMatMat_16x16, _sMultMatMat_32x32, 
-                       _sMultMatMat_4x4, _sMultMatMat_8x8, _sMultMatVec_16x16, _sMultMatVec_32x32, 
-                       _sMultMatVec_4x4, _sMultMatVec_8x8, _sMultVecMat_16x16, _sMultVecMat_32x32, 
-                       _sMultVecMat_4x4, _sMultVecMat_8x8, _vA1024Shift, _vA128Shift, 
-                       _vA256Shift, _vA512Shift, _vA64Shift, _vA64Shift2, _vIsamax, 
-                       _vIsamin, _vIsmax, _vIsmin, _vL1024Rotate, _vL128Rotate, _vL256Rotate, 
-                       _vL512Rotate, _vL64Rotate, _vL64Rotate2, _vLL1024Shift, _vLL128Shift, 
-                       _vLL256Shift, _vLL512Shift, _vLL64Shift, _vLL64Shift2, _vLR1024Shift, 
-                       _vLR128Shift, _vLR256Shift, _vLR512Shift, _vLR64Shift, _vLR64Shift2, 
-                       _vMultMatMat_16x16, _vMultMatMat_32x32, _vMultMatMat_4x4, 
-                       _vMultMatMat_8x8, _vMultMatVec_16x16, _vMultMatVec_32x32, 
-                       _vMultMatVec_4x4, _vMultMatVec_8x8, _vMultVecMat_16x16, _vMultVecMat_32x32, 
-                       _vMultVecMat_4x4, _vMultVecMat_8x8, _vR1024Rotate, _vR128Rotate, 
-                       _vR256Rotate, _vR512Rotate, _vR64Rotate, _vR64Rotate2, _vS1024Add, 
-                       _vS1024AddS, _vS1024Divide, _vS1024HalfMultiply, _vS1024Mod, 
-                       _vS1024Neg, _vS1024Sub, _vS1024SubS, _vS128Add, _vS128AddS, 
-                       _vS128Divide, _vS128FullMultiply, _vS128HalfMultiply, _vS128Neg, 
-                       _vS128Sub, _vS128SubS, _vS16Divide, _vS16HalfMultiply, _vS256Add, 
-                       _vS256AddS, _vS256Divide, _vS256FullMultiply, _vS256HalfMultiply, 
-                       _vS256Mod, _vS256Neg, _vS256Sub, _vS256SubS, _vS32Divide, 
-                       _vS32FullMulEven, _vS32FullMulOdd, _vS32HalfMultiply, _vS512Add, 
-                       _vS512AddS, _vS512Divide, _vS512FullMultiply, _vS512HalfMultiply, 
-                       _vS512Mod, _vS512Neg, _vS512Sub, _vS512SubS, _vS64Add, _vS64AddS, 
-                       _vS64Divide, _vS64FullMulEven, _vS64FullMulOdd, _vS64HalfMultiply, 
-                       _vS64Neg, _vS64Sub, _vS64SubS, _vS8Divide, _vS8HalfMultiply, 
-                       _vSasum, _vSaxpy, _vScopy, _vSdot, _vSgeadd, _vSgemm, _vSgemtx, 
-                       _vSgemul, _vSgemv, _vSgemx, _vSgesub, _vSgetmi, _vSgetmo, 
-                       _vSgevv, _vSnaxpy, _vSndot, _vSnorm2, _vSnrm2, _vSrot, _vSscal, 
-                       _vSsum, _vSswap, _vSyax, _vSzaxpy, _vU1024Add, _vU1024AddS, 
-                       _vU1024Divide, _vU1024HalfMultiply, _vU1024Mod, _vU1024Neg, 
-                       _vU1024Sub, _vU1024SubS, _vU128Add, _vU128AddS, _vU128Divide, 
-                       _vU128FullMultiply, _vU128HalfMultiply, _vU128Neg, _vU128Sub, 
-                       _vU128SubS, _vU16Divide, _vU16HalfMultiply, _vU256Add, _vU256AddS, 
-                       _vU256Divide, _vU256FullMultiply, _vU256HalfMultiply, _vU256Mod, 
-                       _vU256Neg, _vU256Sub, _vU256SubS, _vU32Divide, _vU32FullMulEven, 
-                       _vU32FullMulOdd, _vU32HalfMultiply, _vU512Add, _vU512AddS, 
-                       _vU512Divide, _vU512FullMultiply, _vU512HalfMultiply, _vU512Mod, 
-                       _vU512Neg, _vU512Sub, _vU512SubS, _vU64Add, _vU64AddS, _vU64Divide, 
-                       _vU64FullMulEven, _vU64FullMulOdd, _vU64HalfMultiply, _vU64Neg, 
-                       _vU64Sub, _vU64SubS, _vU8Divide, _vU8HalfMultiply, _vacosf, 
-                       _vacoshf, _vasinf, _vasinhf, _vatan2f, _vatanf, _vatanhf, 
-                       _vceilf, _vclassifyf, _vcopysignf, _vcosf, _vcoshf, _vcospif, 
-                       _vdivf, _vec_sdot, _vexp2f, _vexpf, _vexpm1f, _vfabf, _vfabsf, 
-                       _vfloorf, _vfmodf, _vintf, _vipowf, _vlog10f, _vlog1pf, _vlog2f, 
+                       _VVTAN_, _vIsamax, _vIsamin, _vIsmax, _vIsmin, _vSasum, _vSaxpy, 
+                       _vScopy, _vSdot, _vSgeadd, _vSgemm, _vSgemtx, _vSgemul, _vSgemv, 
+                       _vSgemx, _vSgesub, _vSgetmi, _vSgetmo, _vSgevv, _vSnaxpy, 
+                       _vSndot, _vSnorm2, _vSnrm2, _vSrot, _vSscal, _vSsum, _vSswap, 
+                       _vSyax, _vSzaxpy, _vacosf, _vacoshf, _vasinf, _vasinhf, _vatan2f, 
+                       _vatanf, _vatanhf, _vceilf, _vclassifyf, _vcopysignf, _vcosf, 
+                       _vcoshf, _vcospif, _vdivf, _vexp2f, _vexpf, _vexpm1f, _vfabf, 
+                       _vfabsf, _vfloorf, _vfmodf, _vipowf, _vlog10f, _vlog1pf, _vlog2f, 
                        _vlogbf, _vlogf, _vnextafterf, _vnintf, _vpowf, _vrecf, _vremainderf, 
                        _vremquof, _vrsqrtf, _vscalbf, _vsignbitf, _vsincosf, _vsinf, 
                        _vsinhf, _vsinpif, _vsqrtf, _vtablelookup, _vtanf, _vtanhf, 
@@ -117,4 +92,47 @@ exports:
                        _vvsqrt_, _vvsqrtf, _vvsqrtf_, _vvtan, _vvtan_, _vvtanf, _vvtanf_, 
                        _vvtanh, _vvtanh_, _vvtanhf, _vvtanhf_, _vvtanpi, _vvtanpi_, 
                        _vvtanpif, _vvtanpif_ ]
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, arm64-macos ]
+    symbols:         [ ___cblas_isamax, ___cblas_sasum, ___cblas_saxpy, ___cblas_sgemm, 
+                       ___cblas_sgemv, ___cblas_srot, ___cblas_sscal, ___cblas_sswap, 
+                       _dMultMatMat_16x16, _dMultMatMat_32x32, _dMultMatMat_4x4, 
+                       _dMultMatMat_8x8, _dMultMatVec_16x16, _dMultMatVec_32x32, 
+                       _dMultMatVec_4x4, _dMultMatVec_8x8, _dMultVecMat_16x16, _dMultVecMat_32x32, 
+                       _dMultVecMat_4x4, _dMultVecMat_8x8, _gMacBLASScalarCalls, 
+                       _gMacBLASVectorCalls, _sMultMatMat_16x16, _sMultMatMat_32x32, 
+                       _sMultMatMat_4x4, _sMultMatMat_8x8, _sMultMatVec_16x16, _sMultMatVec_32x32, 
+                       _sMultMatVec_4x4, _sMultMatVec_8x8, _sMultVecMat_16x16, _sMultVecMat_32x32, 
+                       _sMultVecMat_4x4, _sMultVecMat_8x8, _vA1024Shift, _vA128Shift, 
+                       _vA256Shift, _vA512Shift, _vA64Shift, _vA64Shift2, _vL1024Rotate, 
+                       _vL128Rotate, _vL256Rotate, _vL512Rotate, _vL64Rotate, _vL64Rotate2, 
+                       _vLL1024Shift, _vLL128Shift, _vLL256Shift, _vLL512Shift, _vLL64Shift, 
+                       _vLL64Shift2, _vLR1024Shift, _vLR128Shift, _vLR256Shift, _vLR512Shift, 
+                       _vLR64Shift, _vLR64Shift2, _vMultMatMat_16x16, _vMultMatMat_32x32, 
+                       _vMultMatMat_4x4, _vMultMatMat_8x8, _vMultMatVec_16x16, _vMultMatVec_32x32, 
+                       _vMultMatVec_4x4, _vMultMatVec_8x8, _vMultVecMat_16x16, _vMultVecMat_32x32, 
+                       _vMultVecMat_4x4, _vMultVecMat_8x8, _vR1024Rotate, _vR128Rotate, 
+                       _vR256Rotate, _vR512Rotate, _vR64Rotate, _vR64Rotate2, _vS1024Add, 
+                       _vS1024AddS, _vS1024Divide, _vS1024HalfMultiply, _vS1024Mod, 
+                       _vS1024Neg, _vS1024Sub, _vS1024SubS, _vS128Add, _vS128AddS, 
+                       _vS128Divide, _vS128FullMultiply, _vS128HalfMultiply, _vS128Neg, 
+                       _vS128Sub, _vS128SubS, _vS16Divide, _vS16HalfMultiply, _vS256Add, 
+                       _vS256AddS, _vS256Divide, _vS256FullMultiply, _vS256HalfMultiply, 
+                       _vS256Mod, _vS256Neg, _vS256Sub, _vS256SubS, _vS32Divide, 
+                       _vS32FullMulEven, _vS32FullMulOdd, _vS32HalfMultiply, _vS512Add, 
+                       _vS512AddS, _vS512Divide, _vS512FullMultiply, _vS512HalfMultiply, 
+                       _vS512Mod, _vS512Neg, _vS512Sub, _vS512SubS, _vS64Add, _vS64AddS, 
+                       _vS64Divide, _vS64FullMulEven, _vS64FullMulOdd, _vS64HalfMultiply, 
+                       _vS64Neg, _vS64Sub, _vS64SubS, _vS8Divide, _vS8HalfMultiply, 
+                       _vU1024Add, _vU1024AddS, _vU1024Divide, _vU1024HalfMultiply, 
+                       _vU1024Mod, _vU1024Neg, _vU1024Sub, _vU1024SubS, _vU128Add, 
+                       _vU128AddS, _vU128Divide, _vU128FullMultiply, _vU128HalfMultiply, 
+                       _vU128Neg, _vU128Sub, _vU128SubS, _vU16Divide, _vU16HalfMultiply, 
+                       _vU256Add, _vU256AddS, _vU256Divide, _vU256FullMultiply, _vU256HalfMultiply, 
+                       _vU256Mod, _vU256Neg, _vU256Sub, _vU256SubS, _vU32Divide, 
+                       _vU32FullMulEven, _vU32FullMulOdd, _vU32HalfMultiply, _vU512Add, 
+                       _vU512AddS, _vU512Divide, _vU512FullMultiply, _vU512HalfMultiply, 
+                       _vU512Mod, _vU512Neg, _vU512Sub, _vU512SubS, _vU64Add, _vU64AddS, 
+                       _vU64Divide, _vU64FullMulEven, _vU64FullMulOdd, _vU64HalfMultiply, 
+                       _vU64Neg, _vU64Sub, _vU64SubS, _vU8Divide, _vU8HalfMultiply, 
+                       _vec_sdot, _vintf ]
 ...

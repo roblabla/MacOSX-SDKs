@@ -1,12 +1,18 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 70F40A57-73DA-3098-A26B-FBF486521B18' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           BC07E23F-1EA5-3897-8C68-A8AB5C037434
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           DFE5B9D3-857E-36B0-BEF4-C39D24146619
 install-name:    '/usr/lib/libnetsnmptrapd.25.dylib'
 current-version: 26.2
 compatibility-version: 26
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _SyslogTrap, _axforward_handler, _command_handler, _dropauth, 
                        _exec_format1, _exec_format2, _forward_handler, _free_trap1_fmt, 
                        _free_trap2_fmt, _init_netsnmp_trapd_auth, _netsnmp_add_default_traphandler, 

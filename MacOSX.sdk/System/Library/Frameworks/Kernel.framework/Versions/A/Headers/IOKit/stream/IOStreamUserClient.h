@@ -14,14 +14,17 @@
 
 #include <IOKit/stream/IOStreamShared.h>
 #include <IOKit/stream/IOStream.h>
+#include <sys/cdefs.h>
 
-class IOStreamUserClient : public IOUserClient
+class __exported IOStreamUserClient : public IOUserClient
 {
     OSDeclareDefaultStructors( IOStreamUserClient )
     
 protected:
     IOStream * _owner;
     task_t     _task;
+    IOWorkLoop * fWL;
+    IOCommandGate * fGate;
     
 public:
     virtual bool initWithTask(
@@ -50,7 +53,11 @@ public:
                                           IOOptionBits * options,
                                           IOMemoryDescriptor ** memory );
     
-    virtual bool start( IOService * provider );
+    virtual bool start( IOService * provider ) APPLE_KEXT_OVERRIDE;
+    virtual void stop(IOService *provider) APPLE_KEXT_OVERRIDE;
+    
+    virtual void free(void) APPLE_KEXT_OVERRIDE;
+    
     
     
 protected:
@@ -69,6 +76,10 @@ protected:
     
     virtual IOReturn inputTrap( UInt32 token );
     virtual IOReturn inputSyncTrap( UInt32 token );
+    
+    IOReturn clientMemoryForTypeGated( UInt32 memoryType, IOOptionBits * flags, IOMemoryDescriptor ** memory );
+    
+    IOReturn getTargetAndMethodForIndexGated(IOService ** targetP, UInt32 index , IOExternalMethod ** method);
 
 };
 

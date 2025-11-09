@@ -2,8 +2,6 @@
 //  ADCommonDefinitions.h
 //  iAd
 //
-//  Created by Dheeraj Goswami on 9/19/17.
-//
 
 #ifndef ADCommonDefinitions_h
 #define ADCommonDefinitions_h

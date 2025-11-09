@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: AB3F764B-735B-38FF-9368-1163EF8CFA0C' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           B6F86312-D29E-3A01-874E-DB0166DCF50D
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           3283D98F-ED29-3997-B03D-09AC6D1658E0
 install-name:    '/System/Library/Frameworks/NotificationCenter.framework/Versions/A/NotificationCenter'
-current-version: 828
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 1108
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _NCMaterialComputedStyle, _NCMaterialControlColor, _NCMaterialGetCustomAppearance, 
                        _NCMaterialGetMediumLightAppearance, _NCMaterialMakeCardLayers, 
                        _NCMaterialRegisterDelegate, _NCMaterialUnRegisterDelegate, 
@@ -23,10 +29,9 @@ exports:
                        __NCWeatherImageForConditions, __NCWeatherImageSunrise, __NCWeatherImageSunset, 
                        _kNCRemotePlugInExtensionInvalidatedNotification, _kNCRemotePlugInManagerNotificationExtension, 
                        _kNCRemotePlugInManagerWidgetExtension ]
-    objc-classes:    [ NCLineView, NCMaterialLayer, NCNotificationExtensionContext, 
-                       NCNotificationExtensionProvider, NCRemoteNotificationPlugIn, 
-                       NCRemotePlugIn, NCRemotePlugInManager, NCRemoteViewHostViewController, 
-                       NCScrollView, NCScroller, NCTexturedView, NCVerticalListController, 
+    objc-classes:    [ NCMaterialLayer, NCNotificationExtensionContext, NCNotificationExtensionProvider, 
+                       NCRemoteNotificationPlugIn, NCRemotePlugIn, NCRemotePlugInManager, 
+                       NCRemoteViewHostViewController, NCTexturedView, NCVerticalListController, 
                        NCWidgetController, NCWidgetFlippedView, NCWidgetHostViewController, 
                        NCWidgetListView, NCWidgetListViewController, NCWidgetSearchView, 
                        NCWidgetSearchViewController, _NCMachSendRight, _NCWidgetPreferences, 

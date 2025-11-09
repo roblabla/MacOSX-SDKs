@@ -63,6 +63,10 @@ API_UNAVAILABLE(tvos)
 @property(nonatomic) BOOL accessibilityIgnoresInvertColors API_AVAILABLE(ios(11_0), tvos(11_0));
 @end
 
+@interface UIColor (UIAccessibility)
+// Provides an accessible name for the UIColor for use in accessibility attribute APIs, such as when using accessibilityLabel.
+@property (nonatomic, readonly) NSString *accessibilityName API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0), macos(11.0));
+@end
 
 NS_ASSUME_NONNULL_END
 

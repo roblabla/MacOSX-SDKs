@@ -2,7 +2,7 @@
 //  Intents_Generated.h
 //  Intents
 //
-//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2020 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INAccountType.h>
@@ -22,6 +22,8 @@
 #import <Intents/INBillPayeeResolutionResult.h>
 #import <Intents/INBillType.h>
 #import <Intents/INBillTypeResolutionResult.h>
+#import <Intents/INBoatTrip.h>
+#import <Intents/INBusTrip.h>
 #import <Intents/INCallAudioRoute.h>
 #import <Intents/INCallCapability.h>
 #import <Intents/INCallCapabilityOptions.h>
@@ -29,16 +31,21 @@
 #import <Intents/INCallDestinationType.h>
 #import <Intents/INCallDestinationTypeResolutionResult.h>
 #import <Intents/INCallRecord.h>
+#import <Intents/INCallRecordFilter.h>
+#import <Intents/INCallRecordResolutionResult.h>
 #import <Intents/INCallRecordType.h>
 #import <Intents/INCallRecordTypeOptions.h>
 #import <Intents/INCallRecordTypeOptionsResolutionResult.h>
 #import <Intents/INCallRecordTypeResolutionResult.h>
+#import <Intents/INCar.h>
 #import <Intents/INCarAirCirculationMode.h>
 #import <Intents/INCarAirCirculationModeResolutionResult.h>
 #import <Intents/INCarAudioSource.h>
 #import <Intents/INCarAudioSourceResolutionResult.h>
+#import <Intents/INCarChargingConnectorType.h>
 #import <Intents/INCarDefroster.h>
 #import <Intents/INCarDefrosterResolutionResult.h>
+#import <Intents/INCarHeadUnit.h>
 #import <Intents/INCarSeat.h>
 #import <Intents/INCarSeatResolutionResult.h>
 #import <Intents/INCarSignalOptions.h>
@@ -46,6 +53,7 @@
 #import <Intents/INCurrencyAmountResolutionResult.h>
 #import <Intents/INDateSearchType.h>
 #import <Intents/INDateSearchTypeResolutionResult.h>
+#import <Intents/INDayOfWeekOptions.h>
 #import <Intents/INDeleteTasksTaskListResolutionResult.h>
 #import <Intents/INDeleteTasksTaskResolutionResult.h>
 #import <Intents/INFileResolutionResult.h>
@@ -73,6 +81,8 @@
 #import <Intents/INNoteResolutionResult.h>
 #import <Intents/INNotebookItemType.h>
 #import <Intents/INNotebookItemTypeResolutionResult.h>
+#import <Intents/INOutgoingMessageType.h>
+#import <Intents/INOutgoingMessageTypeResolutionResult.h>
 #import <Intents/INPaymentAccount.h>
 #import <Intents/INPaymentAccountResolutionResult.h>
 #import <Intents/INPaymentAmount.h>
@@ -112,12 +122,14 @@
 #import <Intents/INSendPaymentCurrencyAmountResolutionResult.h>
 #import <Intents/INSendPaymentPayeeResolutionResult.h>
 #import <Intents/INSetTaskAttributeTemporalEventTriggerResolutionResult.h>
+#import <Intents/INShortcutAvailabilityOptions.h>
 #import <Intents/INSnoozeTasksTaskResolutionResult.h>
 #import <Intents/INSortType.h>
 #import <Intents/INSpatialEvent.h>
 #import <Intents/INSpatialEventTrigger.h>
 #import <Intents/INSpatialEventTriggerResolutionResult.h>
 #import <Intents/INStartCallCallCapabilityResolutionResult.h>
+#import <Intents/INStartCallCallRecordToCallBackResolutionResult.h>
 #import <Intents/INStartCallContactResolutionResult.h>
 #import <Intents/INTask.h>
 #import <Intents/INTaskList.h>

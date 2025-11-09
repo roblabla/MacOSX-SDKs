@@ -1,11 +1,25 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 649A7D80-1B77-38AA-AE1C-9AB8D4431458', 'x86_64: 649A7D80-1B77-38AA-AE1C-9AB8D4431458' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           0FD5D5DF-382F-3AED-8B2F-EE9E1A26F48A
+  - target:          x86_64-maccatalyst
+    value:           0FD5D5DF-382F-3AED-8B2F-EE9E1A26F48A
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           0766EF51-3DD1-344E-8678-DF4202B51A0B
+  - target:          arm64e-maccatalyst
+    value:           0766EF51-3DD1-344E-8678-DF4202B51A0B
 install-name:    '/System/Library/PrivateFrameworks/iCalendar.framework/Versions/A/iCalendar'
-current-version: 800
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 833
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _ICSAppendEmoji, _ICSDecodeBase64, _ICSEncodeBase64, _ICSRedactString, 
                        _ICSTravelAdvisoryBehavior_Automatic, _ICSTravelAdvisoryBehavior_Disabled, 
                        _ICSTravelAdvisoryBehavior_Enabled, _ICSiCalendarErrorDomain, 

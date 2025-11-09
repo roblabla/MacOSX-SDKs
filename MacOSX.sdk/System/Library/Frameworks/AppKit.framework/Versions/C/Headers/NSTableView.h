@@ -14,7 +14,7 @@
 #import <AppKit/NSTextView.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSTableHeaderView, NSTableColumn, NSIndexSet, NSMutableIndexSet, NSTableRowView, NSNib, NSTableViewRowAction, NSSortDescriptor;
 
@@ -74,6 +74,23 @@ typedef NS_ENUM(NSInteger, NSTableViewRowSizeStyle) {
     NSTableViewRowSizeStyleLarge = 3,
 } API_AVAILABLE(macos(10.7));
 
+typedef NS_ENUM(NSInteger, NSTableViewStyle) {
+    // Automatically infers the effectiveStyle from the table view hierarchy.
+    NSTableViewStyleAutomatic,
+    // Edge-to-edge style with standard content padding at the ends of each row. This content padding is constant and independent of intercellSpacing.
+    NSTableViewStyleFullWidth,
+    // Inset style with rounded corners selection
+    NSTableViewStyleInset,
+    /* The source list style of NSTableView. Setting this style will have the side effect of setting the background color to "source list".
+     Additionally in NSOutlineView, the following properties may change to get the standard "source list" look: indentationPerLevel, rowHeight and intercellSpacing. After setting the style it is possible to change any of the other properties as required.
+     In 10.11, if the background color has been changed from the "source list" background color to something else, the table will no longer draw the selection as a source list blur style, and instead will draw a normal selection highlight.
+     This replaces NSTableViewSelectionHighlightStyleSourceList which is to be deprecated.
+     */
+    NSTableViewStyleSourceList,
+    // A plain style. No insets, padding or any other kind of decoration applied to the row or its background. The cells are equally spaced in the row using intercellSpacing.width.
+    NSTableViewStylePlain
+} API_AVAILABLE(macos(11.0));
+
 typedef NS_ENUM(NSInteger, NSTableViewSelectionHighlightStyle) {
     /* The highlight style to show no highlight at all. Available in MacOS 10.6 and higher.
      */
@@ -83,9 +100,8 @@ typedef NS_ENUM(NSInteger, NSTableViewSelectionHighlightStyle) {
      */
     NSTableViewSelectionHighlightStyleRegular = 0,
     
-    /* The source list style of NSTableView. On 10.10 and higher, a blur selection is used to highlight rows. Prior to that, a light blue gradient was used. Note: Cells that have a drawsBackground property should have it set to NO. Otherwise, they will draw over the highlighting that NSTableView does. Setting this style will have the side effect of setting the background color to the "source list" background color. Additionally in NSOutlineView, the following properties are changed to get the standard "source list" look: indentationPerLevel, rowHeight and intercellSpacing. After calling setSelectionHighlightStyle: one can change any of the other properties as required. In 10.11, if the background color has been changed from the "source list" background color to something else, the table will no longer draw the selection as a source list blur style, and instead will do a normal blue highlight.
-     */
-    NSTableViewSelectionHighlightStyleSourceList = 1,
+    // To be deprecated. See NSTableViewStyleSourceList.
+    NSTableViewSelectionHighlightStyleSourceList API_DEPRECATED("Set the NSTableView.style property to NSTableViewStyleSourceList instead.", macos(10.5, API_TO_BE_DEPRECATED)) = 1,
 };
 
 
@@ -350,6 +366,12 @@ typedef NSString * NSTableViewAutosaveName NS_SWIFT_BRIDGED_TYPEDEF;
  */
 
 @property BOOL allowsTypeSelect API_AVAILABLE(macos(10.5));
+
+// The table view style. Defaults to NSTableViewStyleAutomatic
+@property NSTableViewStyle style API_AVAILABLE(macos(11.0));
+
+// The effective style when style is NSTableViewStyleAutomatic. Otherwise, it returns the same value as style.
+@property (readonly) NSTableViewStyle effectiveStyle API_AVAILABLE(macos(11.0));
 
 /* Gets and sets the current selection highlight style. The default value is NSTableViewSelectionHighlightStyleRegular.
  */
@@ -734,7 +756,7 @@ APPKIT_EXTERN NSUserInterfaceItemIdentifier const NSTableViewRowViewKey API_AVAI
 
 /* Dragging Source Support - Optional for single-image dragging. Implement this method to support single-image dragging. Use the more modern tableView:pasteboardWriterForRow: to support multi-image dragging. This method is called after it has been determined that a drag should begin, but before the drag has been started.  To refuse the drag, return NO.  To start a drag, return YES and place the drag data onto the pasteboard (data, owner, etc...).  The drag image and other drag related information will be set up and provided by the table view once this call returns with YES.  'rowIndexes' contains the row indexes that will be participating in the drag.
  */
-- (BOOL)tableView:(NSTableView *)tableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard API_DEPRECATED("Use -tableView:pasteboardWriterForRow: instead", macos(10.4,API_TO_BE_DEPRECATED));
+- (BOOL)tableView:(NSTableView *)tableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard API_DEPRECATED("Use -tableView:pasteboardWriterForRow: instead", macos(10.4, 10.15));
 
 /* Dragging Destination Support - This method is used by NSTableView to determine a valid drop target. Based on the mouse position, the table view will suggest a proposed drop 'row' and 'dropOperation'. This method must return a value that indicates which NSDragOperation the data source will perform. The data source may "re-target" a drop, if desired, by calling setDropRow:dropOperation: and returning something other than NSDragOperationNone. One may choose to re-target for various reasons (eg. for better visual feedback when inserting into a sorted position).
 */

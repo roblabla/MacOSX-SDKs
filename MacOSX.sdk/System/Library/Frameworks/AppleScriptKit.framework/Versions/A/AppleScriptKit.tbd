@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 19E3D3AC-73E9-39EB-9C3D-44E1315F9488' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           30D83F24-27DF-3CD8-87F6-1682B7766C7B
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           4A2AEE5B-CE23-3DC6-B443-DEE09E05C1BC
 install-name:    '/System/Library/Frameworks/AppleScriptKit.framework/Versions/A/AppleScriptKit'
-current-version: 87
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 88
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _ASKErrorDomain, _ASKInitialize, _ASKMapTableWithWeakOrRetainedToStrongObjects, 
                        _ASKMethodSwizzle, _NSRightMouseDownNotification, _NSRightMouseDraggedNotification, 
                        _NSRightMouseUpNotification, _NSScrollWheelNotification, __ASKDocumentInitialize, 

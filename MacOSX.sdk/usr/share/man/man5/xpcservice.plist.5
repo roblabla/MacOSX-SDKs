@@ -37,8 +37,8 @@ will result in a new instance of the service being created for each application.
 However, if two applications request the same User-type service, then only one instance of 
 the service will be created for each user. 
 .Pp
-Services embedded in an application bundle will only be visible to the containing application and will be, by definition,
-Applicaton-type services. A subsequent connection request from an application to a service 
+Services embedded in an application bundle will only be visible to the containing application and will be, by default,
+Application-type services. A subsequent connection request from an application to a service
 will result in a new connection to an existing service. 
 .Sh CF Bundle Keys
 These top-level Info.plist keys are required to be defined in the Info.plist file:

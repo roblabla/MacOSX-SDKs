@@ -20,8 +20,15 @@ typedef NS_ENUM(NSInteger, PHAuthorizationStatus) {
                                             // The user cannot change this application’s status, possibly due to active restrictions
                                             //   such as parental controls being in place.
     PHAuthorizationStatusDenied,            // User has explicitly denied this application access to photos data.
-    PHAuthorizationStatusAuthorized         // User has authorized this application to access photos data.
+    PHAuthorizationStatusAuthorized,        // User has authorized this application to access photos data.
+    PHAuthorizationStatusLimited API_AVAILABLE(ios(14)), // User has authorized this application for limited photo library access. Add PHPhotoLibraryPreventAutomaticLimitedAccessAlert = YES to the application's Info.plist to prevent the automatic alert to update the users limited library selection. Use -[PHPhotoLibrary(PhotosUISupport) presentLimitedLibraryPickerFromViewController:] from PhotosUI/PHPhotoLibrary+PhotosUISupport.h to manually present the limited library picker.
 };
+
+typedef NS_ENUM(NSInteger, PHAccessLevel) {
+    PHAccessLevelAddOnly = 1,
+    PHAccessLevelReadWrite = 2,
+} API_AVAILABLE(macos(11.0), ios(14), tvos(14));
+
 
 #pragma mark -
 @protocol PHPhotoLibraryChangeObserver <NSObject>
@@ -48,8 +55,15 @@ OS_EXPORT
 
 + (PHPhotoLibrary *)sharedPhotoLibrary;
 
-+ (PHAuthorizationStatus)authorizationStatus;
-+ (void)requestAuthorization:(void(^)(PHAuthorizationStatus status))handler;
+#pragma mark - Library access authorization status
+
+/// Replaces \c +authorizationStatus to support add-only/read-write access level status
++ (PHAuthorizationStatus)authorizationStatusForAccessLevel:(PHAccessLevel)accessLevel API_AVAILABLE(macosx(11.0), ios(14), tvos(14));
++ (void)requestAuthorizationForAccessLevel:(PHAccessLevel)accessLevel handler:(void(^)(PHAuthorizationStatus status))handler API_AVAILABLE(macosx(11.0), ios(14), tvos(14));
+
+/// Deprecated and replaced by authorizationStatusForAccessLevel:, will return \c PHAuthorizationStatusAuthorized if the user has chosen limited photo library access
++ (PHAuthorizationStatus)authorizationStatus API_DEPRECATED_WITH_REPLACEMENT("+authorizationStatusForAccessLevel:", ios(8, API_TO_BE_DEPRECATED), macos(10.13, API_TO_BE_DEPRECATED), tvos(10, API_TO_BE_DEPRECATED));
++ (void)requestAuthorization:(void(^)(PHAuthorizationStatus status))handler API_DEPRECATED_WITH_REPLACEMENT("+requestAuthorizationForAccessLevel:handler:", ios(8, API_TO_BE_DEPRECATED), macos(10.13, API_TO_BE_DEPRECATED), tvos(10, API_TO_BE_DEPRECATED));
 
 #pragma mark - Library availability
 

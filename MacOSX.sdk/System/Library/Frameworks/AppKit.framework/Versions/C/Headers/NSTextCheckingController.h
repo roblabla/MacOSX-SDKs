@@ -19,7 +19,7 @@
 #import <AppKit/NSTextCheckingClient.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 API_AVAILABLE(macos(10.15))
 @interface NSTextCheckingController : NSObject

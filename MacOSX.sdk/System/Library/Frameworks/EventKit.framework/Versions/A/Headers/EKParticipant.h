@@ -10,9 +10,11 @@
 #import <EventKit/EKTypes.h>
 
 #if TARGET_OS_IPHONE
-#if !TARGET_OS_WATCH && !TARGET_OS_MACCATALYST
+#if !TARGET_OS_WATCH
 #import <AddressBook/ABPerson.h>
 #endif
+typedef CFTypeRef ABRecordRef;
+typedef CFTypeRef ABAddressBookRef;
 #else
 @class ABPerson, ABAddressBook;
 #endif
@@ -82,7 +84,7 @@ NS_CLASS_AVAILABLE(10_8, 4_0)
 @property(nonatomic, readonly) NSPredicate *contactPredicate NS_AVAILABLE(10_11, 9_0);
 
 #if TARGET_OS_IPHONE
-#if !TARGET_OS_WATCH && !TARGET_OS_MACCATALYST
+#if !TARGET_OS_WATCH
 /*!
  @method     ABRecordWithAddressBook
  @abstract   Returns the ABRecordRef that represents this participant.
@@ -90,7 +92,7 @@ NS_CLASS_AVAILABLE(10_8, 4_0)
  if a match can be found based on email address in the address book
  passed. If we cannot find the participant, nil is returned.
  */
-- (nullable ABRecordRef)ABRecordWithAddressBook:(ABAddressBookRef)addressBook NS_DEPRECATED_IOS(4_0, 9_0, "Use contactPredicate instead") CF_RETURNS_NOT_RETAINED;
+- (nullable ABRecordRef)ABRecordWithAddressBook:(ABAddressBookRef)addressBook API_AVAILABLE(ios(4.0), macCatalyst(14.0)) API_DEPRECATED("Use contactPredicate instead", ios(4.0, 9.0)) CF_RETURNS_NOT_RETAINED;
 #endif
 #else
 /*!

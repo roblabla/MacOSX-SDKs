@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: D61799BD-61F1-3D2E-8A8E-65A0D4269A35', 'x86_64: D61799BD-61F1-3D2E-8A8E-65A0D4269A35' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           B857532C-8511-3F16-95FC-B886956DBC98
+  - target:          x86_64-maccatalyst
+    value:           B857532C-8511-3F16-95FC-B886956DBC98
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           E6C0F0F5-5FE3-3171-BEF7-F31BDD6730E9
+  - target:          arm64e-maccatalyst
+    value:           E6C0F0F5-5FE3-3171-BEF7-F31BDD6730E9
 install-name:    '/System/Library/PrivateFrameworks/SDAPI.framework/Versions/A/SDAPI'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _SDApi_HasErrored, _SDApi_Initialize, _SDParamSetHolder_Delete, 
                        _SDParamSetHolder_NewFromFile, _SDParamSetParam_GetHandle, 
                        _SDParamSetParam_GetType, _SDParamSetParam_SetBoolValue, _SDParamSetParam_SetDoubleValue, 

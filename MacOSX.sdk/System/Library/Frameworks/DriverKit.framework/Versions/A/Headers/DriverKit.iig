@@ -48,9 +48,11 @@
 #include <DriverKit/IODataQueueDispatchSource.iig>
 #include <DriverKit/IOInterruptDispatchSource.iig>
 #include <DriverKit/IOTimerDispatchSource.iig>
+#include <DriverKit/IOServiceNotificationDispatchSource.iig>
 #include <DriverKit/IOMemoryDescriptor.iig>
 #include <DriverKit/IOMemoryMap.iig>
 #include <DriverKit/IOBufferMemoryDescriptor.iig>
+#include <DriverKit/IODMACommand.iig>
 #include <DriverKit/IOService.iig>
 #include <DriverKit/IOUserClient.iig>
 

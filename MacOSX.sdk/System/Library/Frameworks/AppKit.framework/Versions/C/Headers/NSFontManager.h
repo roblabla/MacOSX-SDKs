@@ -13,7 +13,7 @@
 #import <AppKit/NSMenu.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSFont, NSFontPanel, NSMenu, NSFontDescriptor;
 
@@ -150,7 +150,7 @@ typedef NS_ENUM(NSUInteger, NSFontAction) {
 /* This is the message that's propagated up the responder chain.
 */
 @interface NSObject(NSFontManagerResponderMethod)
-- (void)changeFont:(nullable id)sender API_DEPRECATED("This is now an optional method of the NSFontChanging protocol.", macos(10.0,API_TO_BE_DEPRECATED));
+- (void)changeFont:(nullable id)sender API_DEPRECATED("This is now an optional method of the NSFontChanging protocol.", macos(10.0, 11.0));
 @end
 #endif
 

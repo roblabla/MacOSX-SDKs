@@ -78,6 +78,9 @@ NS_CLASS_AVAILABLE(10_13, 11_0)
 // width, height and pixelFormat of the MTLTexture that will be returned by 'block'
 //
 // An optional MTLCommandBuffer can be specified, with which to use for rendering to the MTLTexture.
+// NOTE: Rendering to a texture initialized with a commandBuffer requires encoding all the commands to render an image into the specified buffer.
+// This may impact system responsiveness and may result in higher memory usage if the image requires many passes to render.
+// To avoid this impact, it is recommended to create a context using [CIContext contextWithMTLCommandQueue:] and create the CIRenderDestination without specifying a buffer.
 //
 // The destination's 'colorspace' property will default a CGColorSpace created with kCGColorSpaceSRGB,
 // kCGColorSpaceExtendedSRGB, or kCGColorSpaceGenericGrayGamma2_2.
@@ -227,8 +230,9 @@ NS_CLASS_AVAILABLE(10_13, 11_0)
 // MTLTexture-backed CIRenderDestinations are only supported by MTLTexture-backed CIContexts.
 // GLTexture-backed CIRenderDestinations are only supported by GLContext-backed CIContexts.
 //
-// This call will return as soon as all the work for the render is enqueued on the
+// For contexts that are initialized with a command queue, this call will return as soon as all the work for the render is enqueued on the
 // context's device.
+// Otherwise, it will return as soon as all the work is scheduled.
 //
 // In many situations, after issuing a render, the client can use the destination
 // or its backing object without waiting for the enqueued work to complete.

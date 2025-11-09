@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVPlayer.h>)
 /*
     File:  AVPlayer.h
 
@@ -431,8 +432,6 @@ typedef NS_ENUM(NSInteger, AVPlayerActionAtItemEnd)
 	@discussion		Once the completion handler is called with YES, the player's rate can be set with minimal latency.
 					The completion handler will be called with NO if the preroll is interrupted by a time change or incompatible rate change, or if preroll is not possible for some other reason.
 					Call this method only when the rate is currently zero and only after the AVPlayer's status has become AVPlayerStatusReadyToPlay.
-
-					Note that advanced rate control is not currently supported for HTTP Live Streaming.
 	@param rate		The intended rate for subsequent playback.
 	@param completionHandler
 					The block that will be called when the preroll is either completed or is interrupted.
@@ -617,7 +616,7 @@ typedef NS_ENUM(NSInteger, AVPlayerActionAtItemEnd)
 @property BOOL usesExternalPlaybackWhileExternalScreenIsActive API_AVAILABLE(ios(6.0), tvos(9.0)) API_UNAVAILABLE(macos, watchos);
 
 /* Video gravity strictly for "external playback" mode, one of AVLayerVideoGravity* defined in AVAnimation.h */
-@property (nonatomic, copy) AVLayerVideoGravity externalPlaybackVideoGravity API_AVAILABLE(ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(macos);
+@property (nonatomic, copy) AVLayerVideoGravity externalPlaybackVideoGravity API_AVAILABLE(ios(6.0), tvos(9.0)) API_UNAVAILABLE(macos, watchos);
 
 @end
 
@@ -714,7 +713,7 @@ AVF_EXPORT NSNotificationName const AVPlayerAvailableHDRModesDidChangeNotificati
  @discussion
  This property is YES if an HDR display is available and the device is capable of playing HDR content from an appropriate AVAsset, NO otherwise.  This property does not indicate whether video contains HDR content, whether HDR video is currently playing, or whether video is playing on an HDR display.  This property is not KVO observable.
  */
-@property (class, nonatomic, readonly) BOOL eligibleForHDRPlayback API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+@property (class, nonatomic, readonly) BOOL eligibleForHDRPlayback API_AVAILABLE(macos(10.15), ios(13.4), tvos(13.4)) API_UNAVAILABLE(watchos);
 
 /*!
  @constant		eligibleForHDRPlaybackDidChangeNotification
@@ -723,7 +722,7 @@ AVF_EXPORT NSNotificationName const AVPlayerAvailableHDRModesDidChangeNotificati
  @discussion
  This notification fires when eligibleForHDRPlayback changes.  This can be caused by display connection/disconnection or resource changes.
  */
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(10.15), ios(13.4), tvos(13.4)) API_UNAVAILABLE(watchos)
 AVF_EXPORT NSNotificationName const AVPlayerEligibleForHDRPlaybackDidChangeNotification;
 
 @end
@@ -749,7 +748,7 @@ AVF_EXPORT NSNotificationName const AVPlayerEligibleForHDRPlaybackDidChangeNotif
  @property   preventsDisplaySleepDuringVideoPlayback
  @abstract   Indicates whether video playback prevents display and device sleep.
  @discussion
-	 Default is YES on iOS, tvOS and in Project Catalyst apps.  Default is NO on macOS.
+	 Default is YES on iOS, tvOS and in Mac Catalyst apps.  Default is NO on macOS.
 	 Setting this property to NO does not force the display to sleep, it simply stops preventing display sleep.  Other apps or frameworks within your app may still be preventing display sleep for various reasons.
  */
 @property (nonatomic) BOOL preventsDisplaySleepDuringVideoPlayback API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0)) API_UNAVAILABLE(watchos);
@@ -882,3 +881,7 @@ API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0), watchos(1.0))
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCore/AVPlayer.h>
+#endif

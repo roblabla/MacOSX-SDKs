@@ -52,145 +52,12 @@ extern "C" {
 
 /*
    ===========================================================================================
-   This is the header file for version 2.2 of the Mac OS multiprocessing support.  This version
-   has been totally reimplemented and has significant new services.  The main goal of the
-   reimplementation has been to transfer task management into the core operating system to provide
-   much more reliable and more efficient operation, including on single processor machines.
-   The memory management has also been massively improved, it is much faster and wastes much
-   less space.  New services include POSIX style per-task storage, timers with millisecond and
-   microsecond resolutions, memory allocation at a specified alignment, and system pageable
-   and RAM resident memory pools.  See the MP API documentation for details.
-   The old "DayStar" debugging services (whose names began with an underscore) have been
-   removed from this header.  A very few are still implemented for binary compatibility, or in
-   cases where they happened to be exposed inappropriately.  (E.g. _MPIsFullyInitialized must
-   be called to see if the MP API is ReallyTrulyª usable.)  New code and recompiles of old
-   code should avoid use of these defunct services, except for _MPIsFullyInitialized.
-   ===========================================================================================
-*/
-
-
-/*
-   ===========================================================================================
-   The following services are from the original MP API and remain supported in version 2.0:
-    MPProcessors
-    MPCreateTask
-    MPTerminateTask
-    MPCurrentTaskID
-    MPYield
-    MPExit
-    MPCreateQueue
-    MPDeleteQueue
-    MPNotifyQueue
-    MPWaitOnQueue
-    MPCreateSemaphore
-    MPCreateBinarySemaphore     (In C only, a macro that calls MPCreateSemaphore.)
-    MPDeleteSemaphore
-    MPSignalSemaphore
-    MPWaitOnSemaphore
-    MPCreateCriticalRegion
-    MPDeleteCriticalRegion
-    MPEnterCriticalRegion
-    MPExitCriticalRegion
-    MPAllocate                  (Deprecated, use MPAllocateAligned for new builds.)
-    MPFree
-    MPBlockCopy
-    MPLibraryIsLoaded           (In C only, a macro.)
-    _MPIsFullyInitialized       (See comments about checking for MP API availability.)
-   ===========================================================================================
-*/
-
-
-/*
-   ===========================================================================================
-   The following services are new in version 2.0:
-    MPProcessorsScheduled
-    MPSetTaskWeight
-    MPTaskIsPreemptive
-    MPAllocateTaskStorageIndex
-    MPDeallocateTaskStorageIndex
-    MPSetTaskStorageValue
-    MPGetTaskStorageValue
-    MPSetQueueReserve
-    MPCreateEvent
-    MPDeleteEvent
-    MPSetEvent
-    MPWaitForEvent
-    UpTime
-    DurationToAbsolute
-    AbsoluteToDuration
-    MPDelayUntil
-    MPCreateTimer
-    MPDeleteTimer
-    MPSetTimerNotify
-    MPArmTimer
-    MPCancelTimer
-    MPSetExceptionHandler
-    MPThrowException
-    MPDisposeTaskException
-    MPExtractTaskState
-    MPSetTaskState
-    MPRegisterDebugger
-    MPUnregisterDebugger
-    MPAllocateAligned           (Preferred over MPAllocate.)
-    MPGetAllocatedBlockSize
-    MPBlockClear
-    MPDataToCode
-    MPRemoteCall                (Preferred over _MPRPC.)
-   ===========================================================================================
-*/
-
-
-/*
-   ===========================================================================================
-   The following services are new in version 2.1:
-    MPCreateNotification
-    MPDeleteNotification
-    MPModifyNotification
-    MPCauseNotification
-    MPGetNextTaskID
-    MPGetNextCpuID
-   ===========================================================================================
-*/
-
-
-/*
-   ===========================================================================================
-   The following services are "unofficial" extensions to the original API.  They are not in
-   the multiprocessing API documentation, but were in previous versions of this header.  They
-   remain supported in version 2.0.  They may not be supported in other environments.
-    _MPRPC                      (Deprecated, use MPRemoteCall for new builds.)
-    _MPAllocateSys              (Deprecated, use MPAllocateAligned for new builds.)
-    _MPTaskIsToolboxSafe
-    _MPLibraryVersion
-    _MPLibraryIsCompatible
-   ===========================================================================================
-*/
-
-
-/*
-   ===========================================================================================
-   The following services were in previous versions of this header for "debugging only" use.
-   They are NOT implemented in version 2.0.  For old builds they can be accessed by defining
-   the symbol MPIncludeDefunctServices to have a nonzero value.
-    _MPInitializePrintf
-    _MPPrintf
-    _MPDebugStr
-    _MPStatusPString
-    _MPStatusCString
-   ===========================================================================================
-*/
-
-
-/*
-   ¤
-   ===========================================================================================
    General Types and Constants
    ===========================
 */
 
 
-#define MPCopyrightNotice   \
-    "Copyright © 1995-2000 Apple Computer, Inc.\n"
+#define MPCopyrightNotice   "Copyright © 1995-2020 Apple Computer, Inc.\n"
 #define MPLibraryName "MPLibrary"
 #define MPLibraryCName MPLibraryName
 #define MPLibraryPName "\p" MPLibraryName
@@ -263,7 +130,7 @@ enum {
 
 
 /*
-   ¤
+   
    ===========================================================================================
    Process/Processor Services
    ==========================
@@ -283,7 +150,7 @@ enum {
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern ItemCount 
-MPProcessors(void)                                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+MPProcessors(void) __API_DEPRECATED("Use sysctl(hw.ncpu)", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 /* The physical total.*/
@@ -300,13 +167,10 @@ MPProcessors(void)                                            __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern ItemCount 
-MPProcessorsScheduled(void)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+MPProcessorsScheduled(void) __API_DEPRECATED("Use sysctl(hw.activecpu)", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
-/* Those currently in use.*/
-
-/*
-   ¤
+/*   
    ===========================================================================================
    Tasking Services
    ================
@@ -343,14 +207,14 @@ typedef CALLBACK_API_C( OSStatus , TaskProc )(void * parameter);
  */
 extern OSStatus 
 MPCreateTask(
-  TaskProc        entryPoint,
-  void *          parameter,
-  ByteCount       stackSize,
-  MPQueueID       notifyQueue,
-  void *          terminationParameter1,
-  void *          terminationParameter2,
-  MPTaskOptions   options,
-  MPTaskID *      task)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+			 TaskProc        entryPoint,
+			 void *          parameter,
+			 ByteCount       stackSize,
+			 MPQueueID       notifyQueue,
+			 void *          terminationParameter1,
+			 void *          terminationParameter2,
+			 MPTaskOptions   options,
+			 MPTaskID *      task) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -368,8 +232,8 @@ MPCreateTask(
  */
 extern OSStatus 
 MPTerminateTask(
-  MPTaskID   task,
-  OSStatus   terminationStatus)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+				MPTaskID   task,
+				OSStatus   terminationStatus) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -387,8 +251,8 @@ MPTerminateTask(
  */
 extern OSStatus 
 MPSetTaskWeight(
-  MPTaskID       task,
-  MPTaskWeight   weight)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+				MPTaskID       task,
+				MPTaskWeight   weight) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -405,7 +269,7 @@ MPSetTaskWeight(
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern Boolean 
-MPTaskIsPreemptive(MPTaskID taskID)                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+MPTaskIsPreemptive(MPTaskID taskID) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 /* May be kInvalidID.*/
@@ -422,7 +286,7 @@ MPTaskIsPreemptive(MPTaskID taskID)                           __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern void 
-MPExit(OSStatus status)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+MPExit(OSStatus status) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -439,7 +303,7 @@ MPExit(OSStatus status)                                       __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern void 
-MPYield(void)                                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+MPYield(void) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -456,7 +320,7 @@ MPYield(void)                                                 __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern MPTaskID 
-MPCurrentTaskID(void)                                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+MPCurrentTaskID(void) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -475,7 +339,7 @@ MPCurrentTaskID(void)                                         __OSX_AVAILABLE_BU
 extern OSStatus 
 MPSetTaskType(
   MPTaskID   task,
-  OSType     taskType)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_1, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
+			  OSType     taskType) __API_DEPRECATED("Use libDispatch", macos(10.0,10.8)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -501,7 +365,7 @@ MPSetTaskType(
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
-MPAllocateTaskStorageIndex(TaskStorageIndex * taskIndex)      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+MPAllocateTaskStorageIndex(TaskStorageIndex * taskIndex) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -518,7 +382,7 @@ MPAllocateTaskStorageIndex(TaskStorageIndex * taskIndex)      __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
-MPDeallocateTaskStorageIndex(TaskStorageIndex taskIndex)      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+MPDeallocateTaskStorageIndex(TaskStorageIndex taskIndex) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -537,7 +401,7 @@ MPDeallocateTaskStorageIndex(TaskStorageIndex taskIndex)      __OSX_AVAILABLE_BU
 extern OSStatus 
 MPSetTaskStorageValue(
   TaskStorageIndex   taskIndex,
-  TaskStorageValue   value)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+  TaskStorageValue   value) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -554,12 +418,12 @@ MPSetTaskStorageValue(
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern TaskStorageValue 
-MPGetTaskStorageValue(TaskStorageIndex taskIndex)             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+MPGetTaskStorageValue(TaskStorageIndex taskIndex) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
 /*
-   ¤
+   
    ===========================================================================================
    Synchronization Services
    ========================
@@ -579,7 +443,7 @@ MPGetTaskStorageValue(TaskStorageIndex taskIndex)             __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern OSStatus 
-MPCreateQueue(MPQueueID * queue)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+MPCreateQueue(MPQueueID * queue) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -596,7 +460,7 @@ MPCreateQueue(MPQueueID * queue)                              __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern OSStatus 
-MPDeleteQueue(MPQueueID queue)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+MPDeleteQueue(MPQueueID queue) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -617,7 +481,7 @@ MPNotifyQueue(
   MPQueueID   queue,
   void *      param1,
   void *      param2,
-  void *      param3)                                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+  void *      param3) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -639,7 +503,7 @@ MPWaitOnQueue(
   void **     param1,
   void **     param2,
   void **     param3,
-  Duration    timeout)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+  Duration    timeout) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -658,7 +522,7 @@ MPWaitOnQueue(
 extern OSStatus 
 MPSetQueueReserve(
   MPQueueID   queue,
-  ItemCount   count)                                          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+  ItemCount   count) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -681,7 +545,7 @@ extern OSStatus
 MPCreateSemaphore(
   MPSemaphoreCount   maximumValue,
   MPSemaphoreCount   initialValue,
-  MPSemaphoreID *    semaphore)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+  MPSemaphoreID *    semaphore) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -698,7 +562,7 @@ MPCreateSemaphore(
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern OSStatus 
-MPDeleteSemaphore(MPSemaphoreID semaphore)                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+MPDeleteSemaphore(MPSemaphoreID semaphore) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -715,7 +579,7 @@ MPDeleteSemaphore(MPSemaphoreID semaphore)                    __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern OSStatus 
-MPSignalSemaphore(MPSemaphoreID semaphore)                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+MPSignalSemaphore(MPSemaphoreID semaphore) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -734,7 +598,7 @@ MPSignalSemaphore(MPSemaphoreID semaphore)                    __OSX_AVAILABLE_BU
 extern OSStatus 
 MPWaitOnSemaphore(
   MPSemaphoreID   semaphore,
-  Duration        timeout)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+  Duration        timeout) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -757,7 +621,7 @@ MPWaitOnSemaphore(
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern OSStatus 
-MPCreateCriticalRegion(MPCriticalRegionID * criticalRegion)   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+MPCreateCriticalRegion(MPCriticalRegionID * criticalRegion) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -774,7 +638,7 @@ MPCreateCriticalRegion(MPCriticalRegionID * criticalRegion)   __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern OSStatus 
-MPDeleteCriticalRegion(MPCriticalRegionID criticalRegion)     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+MPDeleteCriticalRegion(MPCriticalRegionID criticalRegion) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -793,7 +657,7 @@ MPDeleteCriticalRegion(MPCriticalRegionID criticalRegion)     __OSX_AVAILABLE_BU
 extern OSStatus 
 MPEnterCriticalRegion(
   MPCriticalRegionID   criticalRegion,
-  Duration             timeout)                               __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+  Duration             timeout) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -810,7 +674,7 @@ MPEnterCriticalRegion(
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern OSStatus 
-MPExitCriticalRegion(MPCriticalRegionID criticalRegion)       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+MPExitCriticalRegion(MPCriticalRegionID criticalRegion) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -829,7 +693,7 @@ MPExitCriticalRegion(MPCriticalRegionID criticalRegion)       __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
-MPCreateEvent(MPEventID * event)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+MPCreateEvent(MPEventID * event) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -845,7 +709,7 @@ MPCreateEvent(MPEventID * event)                              __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
-MPDeleteEvent(MPEventID event)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+MPDeleteEvent(MPEventID event) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -864,7 +728,7 @@ MPDeleteEvent(MPEventID event)                                __OSX_AVAILABLE_BU
 extern OSStatus 
 MPSetEvent(
   MPEventID      event,
-  MPEventFlags   flags)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+  MPEventFlags   flags) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -883,11 +747,11 @@ extern OSStatus
 MPWaitForEvent(
   MPEventID       event,
   MPEventFlags *  flags,
-  Duration        timeout)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+  Duration        timeout) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 /*
-   ¤
+   
    ===========================================================================================
    Notification Services (API)
    =====================
@@ -907,7 +771,7 @@ MPWaitForEvent(
  *    Non-Carbon CFM:   in MPLibrary 2.1 and later
  */
 extern OSStatus 
-MPCreateNotification(MPNotificationID * notificationID)       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+MPCreateNotification(MPNotificationID * notificationID) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -924,7 +788,7 @@ MPCreateNotification(MPNotificationID * notificationID)       __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   in MPLibrary 2.1 and later
  */
 extern OSStatus 
-MPDeleteNotification(MPNotificationID notificationID)         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+MPDeleteNotification(MPNotificationID notificationID) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -946,7 +810,7 @@ MPModifyNotification(
   MPOpaqueID         anID,
   void *             notifyParam1,
   void *             notifyParam2,
-  void *             notifyParam3)                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+  void *             notifyParam3) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -985,12 +849,12 @@ MPModifyNotificationParameters(
  *    Non-Carbon CFM:   in MPLibrary 2.1 and later
  */
 extern OSStatus 
-MPCauseNotification(MPNotificationID notificationID)          __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+MPCauseNotification(MPNotificationID notificationID) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
 /*
-   ¤
+   
    ===========================================================================================
    Timer Services
    ==============
@@ -1025,7 +889,7 @@ enum {
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
-MPDelayUntil(AbsoluteTime * expirationTime)                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+MPDelayUntil(AbsoluteTime * expirationTime) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -1054,7 +918,7 @@ MPDelayUntil(AbsoluteTime * expirationTime)                   __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
-MPCreateTimer(MPTimerID * timerID)                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+MPCreateTimer(MPTimerID * timerID) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -1071,7 +935,7 @@ MPCreateTimer(MPTimerID * timerID)                            __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
-MPDeleteTimer(MPTimerID timerID)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+MPDeleteTimer(MPTimerID timerID) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -1093,7 +957,7 @@ MPSetTimerNotify(
   MPOpaqueID   anID,
   void *       notifyParam1,
   void *       notifyParam2,
-  void *       notifyParam3)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+  void *       notifyParam3) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -1113,7 +977,7 @@ extern OSStatus
 MPArmTimer(
   MPTimerID       timerID,
   AbsoluteTime *  expirationTime,
-  OptionBits      options)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+  OptionBits      options) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -1132,12 +996,12 @@ MPArmTimer(
 extern OSStatus 
 MPCancelTimer(
   MPTimerID       timerID,
-  AbsoluteTime *  timeRemaining)                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+  AbsoluteTime *  timeRemaining) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
 /*
-   ¤
+   
    ===========================================================================================
    Memory Services
    ===============
@@ -1195,10 +1059,7 @@ extern LogicalAddress
 MPAllocateAligned(
   ByteCount    size,
   UInt8        alignment,
-  OptionBits   options)                                       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
-
-
-/* ! MPAllocateAligned is new in version 2.0.*/
+				  OptionBits   options)  __API_DEPRECATED("Use aligned_alloc()", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 /*
  *  MPAllocate()   *** DEPRECATED ***
@@ -1212,10 +1073,8 @@ MPAllocateAligned(
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern LogicalAddress 
-MPAllocate(ByteCount size)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+MPAllocate(ByteCount size) __API_DEPRECATED("Use malloc()", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
-
-/* Use MPAllocateAligned instead.*/
 
 /*
  *  MPFree()   *** DEPRECATED ***
@@ -1229,7 +1088,7 @@ MPAllocate(ByteCount size)                                    __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
 extern void 
-MPFree(LogicalAddress object)                                 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+MPFree(LogicalAddress object) __API_DEPRECATED("Use free()", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -1246,7 +1105,7 @@ MPFree(LogicalAddress object)                                 __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern ByteCount 
-MPGetAllocatedBlockSize(LogicalAddress object)                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+MPGetAllocatedBlockSize(LogicalAddress object) __API_DEPRECATED("Use malloc_size()", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -1269,7 +1128,7 @@ extern void
 MPBlockCopy(
   LogicalAddress   source,
   LogicalAddress   destination,
-  ByteCount        size)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+			ByteCount        size) __API_DEPRECATED("Use memcpy()", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -1288,7 +1147,7 @@ MPBlockCopy(
 extern void 
 MPBlockClear(
   LogicalAddress   address,
-  ByteCount        size)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+			 ByteCount        size) __API_DEPRECATED("Use bzero()", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -1307,15 +1166,13 @@ MPBlockClear(
  */
 extern void 
 MPDataToCode(
-  LogicalAddress   address,
-  ByteCount        size)                                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+			 LogicalAddress   address,
+			 ByteCount        size) __API_DEPRECATED("Use mprotect()", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
-
-/* NOTE:    MPDataToCode is not supported for 64-bit applications. Use mprotect(2) instead.*/
 
 
 /*
-   ¤
+
    ===========================================================================================
    Exception/Debugging Services
    ============================
@@ -1463,9 +1320,14 @@ typedef struct MPTaskInfo               MPTaskInfo;
 
 
 
-/*
+
+
+/*!
  *  MPSetExceptionHandler()   *** DEPRECATED ***
- *  
+ *
+ *  As of macOS 10.16, this call always returns kMPInvalidIDErr and otherwise does nothing.  It has been deprecated since
+ *  macOS 10.7 and non functional since macOS10.13.
+ *
  *  Mac OS X threading:
  *    Thread safe
  *  
@@ -1477,9 +1339,7 @@ typedef struct MPTaskInfo               MPTaskInfo;
 extern OSStatus 
 MPSetExceptionHandler(
   MPTaskID    task,
-  MPQueueID   exceptionQ)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
-
-
+  MPQueueID   exceptionQ) __API_DEPRECATED("No longer supported.", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 /*
@@ -1495,8 +1355,8 @@ MPSetExceptionHandler(
  */
 extern OSStatus 
 MPDisposeTaskException(
-  MPTaskID     task,
-  OptionBits   action)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+					   MPTaskID     task,
+					   OptionBits   action) __API_DEPRECATED("No longer supported.", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -1514,9 +1374,9 @@ MPDisposeTaskException(
  */
 extern OSStatus 
 MPExtractTaskState(
-  MPTaskID          task,
-  MPTaskStateKind   kind,
-  void *            info)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+				   MPTaskID          task,
+				   MPTaskStateKind   kind,
+				   void *            info) __API_DEPRECATED("No longer supported.", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -1534,9 +1394,9 @@ MPExtractTaskState(
  */
 extern OSStatus 
 MPSetTaskState(
-  MPTaskID          task,
-  MPTaskStateKind   kind,
-  void *            info)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+			   MPTaskID          task,
+			   MPTaskStateKind   kind,
+			   void *            info)  __API_DEPRECATED("No longer supported.", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -1554,8 +1414,8 @@ MPSetTaskState(
  */
 extern OSStatus 
 MPThrowException(
-  MPTaskID          task,
-  MPExceptionKind   kind)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+				 MPTaskID          task,
+				 MPExceptionKind   kind) __API_DEPRECATED("No longer supported.", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -1584,8 +1444,8 @@ enum {
  */
 extern OSStatus 
 MPRegisterDebugger(
-  MPQueueID         queue,
-  MPDebuggerLevel   level)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+				   MPQueueID         queue,
+				   MPDebuggerLevel   level)  __API_DEPRECATED("No longer supported.", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
@@ -1602,12 +1462,12 @@ MPRegisterDebugger(
  *    Non-Carbon CFM:   in MPLibrary 2.0 and later
  */
 extern OSStatus 
-MPUnregisterDebugger(MPQueueID queue)                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+MPUnregisterDebugger(MPQueueID queue) __API_DEPRECATED("No longer supported.", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
 /*
-   ¤
+   
    ===========================================================================================
    Remote Call Services
    ====================
@@ -1690,7 +1550,7 @@ extern void *
 MPRemoteCall(
   MPRemoteProcedure   remoteProc,
   void *              parameter,
-  MPRemoteContext     context)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+  MPRemoteContext     context) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 /*
@@ -1752,73 +1612,9 @@ MPRemoteCall(
  */
 extern void * 
 MPRemoteCallCFM(
-  MPRemoteProcedure   remoteProc,
-  void *              parameter,
-  MPRemoteContext     context)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_4, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
-
-
-/*
-   ¤
-   ===========================================================================================
-   Checking API Availability
-   =========================
-*/
-
-
-/*
-   ===========================================================================================
-   *** WARNING: You must properly check the availability of MP services before calling them!
-   ===========================================================================================
-   
-   Checking for the availability of the MP API is rather ugly.  This is a historical problem,
-   caused by the original implementation letting itself get prepared when it really wasn't
-   usable and complicated by some important clients then depending on weak linking to "work".
-   (And further complicated by CFM not supporting "deferred" imports, which is how many
-   programmers think weak imports work.)
-   
-   The end result is that the MP API library may get prepared by CFM but be totally unusable.
-   This means that if you import from the MP API library, you cannot simply check for a
-   resolved import to decide if MP services are available.  Worse, if you explicitly prepare
-   the MP API library you cannot assume that a noErr result from GetSharedLibrary means that
-   MP services are available.
-   
-   ¥ If you import from the MP API library you MUST:
-   
-        Use the MPLibraryIsLoaded macro (or equivalent code in languages other than C) to tell
-        if the MP API services are available.  It is not sufficient to simply check that an
-        imported symbol is resolved as is commonly done for other libraries.  The macro expands
-        to the expression:
-   
-            ( ( (UInt32)_MPIsFullyInitialized != (UInt32)kUnresolvedCFragSymbolAddress ) &&
-              ( _MPIsFullyInitialized () ) )
-   
-        This checks if the imported symbol _MPIsFullyInitialized is resolved and if resolved
-        calls it.  Both parts must succeed for the MP API services to be available.
-   
-   ¥ If you explicitly prepare the MP API library you MUST:
-   
-        Use code similar to the following example to tell if the MP API services are available.
-        It is not sufficient to depend on just a noErr result from GetSharedLibrary.
-   
-            OSErr                       err;
-            Boolean                     mpIsAvailable           = false;
-            CFragConnectionID           connID                  = kInvalidID;
-            MPIsFullyInitializedProc    mpIsFullyInitialized    = NULL;
-   
-            err = GetSharedLibrary  ( "\pMPLibrary", kCompiledCFragArch, kReferenceCFrag,
-                                      &connID, NULL, NULL );
-   
-            if ( err == noErr ) {
-                err = FindSymbol    ( connID, "\p_MPIsFullyInitialized",
-                                      (Ptr *) &mpIsFullyInitialized, NULL );
-            }
-   
-            if ( err == noErr ) {
-                mpIsAvailable = (* mpIsFullyInitialized) ();
-            }
-   
-   ===========================================================================================
-*/
+				MPRemoteProcedure   remoteProc,
+				void *              parameter,
+				MPRemoteContext     context) __API_DEPRECATED("No longer supported.", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 /*
@@ -1832,15 +1628,15 @@ MPRemoteCallCFM(
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in MPLibrary 1.0 and later
  */
-extern Boolean 
-_MPIsFullyInitialized(void)                                   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+extern Boolean
+_MPIsFullyInitialized(void) __API_DEPRECATED("No longer useful (always true)", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 typedef CALLBACK_API_C( Boolean , MPIsFullyInitializedProc )(void);
 #define kMPUnresolvedCFragSymbolAddress 0
 #define MPLibraryIsLoaded()     (true)
 /*
-   ¤
+   
    ===========================================================================================
    Miscellaneous Services
    ======================
@@ -1861,11 +1657,11 @@ _MPLibraryVersion(
   UInt32 *       major,
   UInt32 *       minor,
   UInt32 *       release,
-  UInt32 *       revision)                                    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+  UInt32 *       revision) __API_DEPRECATED("No longer useful", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 /*
-   ¤
+   
    ===========================================================================================
    Unofficial Services
    ===================
@@ -1882,41 +1678,6 @@ _MPLibraryVersion(
    ===========================================================================================
 */
 
-#if CALL_NOT_IN_CARBON
-/*
- *  _MPAllocateSys()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in MPLibrary 1.0 and later
- */
-
-
-/* Use MPAllocateAligned instead.*/
-/*
- *  _MPRPC()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in MPLibrary 1.0 and later
- */
-
-
-/* Use _MPRemoteCall instead.*/
-/*
- *  _MPTaskIsToolboxSafe()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in MPLibrary 1.0 and later
- */
-
-
-#endif  /* CALL_NOT_IN_CARBON */
-
 /*
  *  _MPLibraryIsCompatible()   *** DEPRECATED ***
  *  
@@ -1931,86 +1692,14 @@ _MPLibraryIsCompatible(
   UInt32        major,
   UInt32        minor,
   UInt32        release,
-  UInt32        revision)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_7, __IPHONE_NA, __IPHONE_NA);
+  UInt32        revision) __API_DEPRECATED("Use libDispatch", macos(10.0,10.7)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 
 #define MPRPC                   _MPRPC
 #define MPTaskIsToolboxSafe     _MPTaskIsToolboxSafe
 
-/*
-   ¤
-   ===========================================================================================
-   Defunct Services
-   ================
-*/
-
-#if CALL_NOT_IN_CARBON
-#ifndef MPIncludeDefunctServices
-#define MPIncludeDefunctServices 0
-#endif  /* !defined(MPIncludeDefunctServices) */
-
-#if MPIncludeDefunctServices
-/*
- *  _MPDebugStr()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in MPLibraryObsolete 1.0 and later
- */
-
-
-/*
- *  _MPStatusPString()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in MPLibraryObsolete 1.0 and later
- */
-
-
-/*
- *  _MPStatusCString()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in MPLibraryObsolete 1.0 and later
- */
-
-
-
-#include <stdarg.h>
-typedef CALLBACK_API_C( void , MPPrintfHandler )(MPTaskID taskID, const char *format, va_list args);
-/*
- *  _MPInitializePrintf()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in MPLibraryObsolete 1.0 and later
- */
-
-
-/*
- *  _MPPrintf()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in MPLibraryObsolete 1.0 and later
- */
-
-
-#endif  /* MPIncludeDefunctServices */
-
-#endif  /* CALL_NOT_IN_CARBON */
-
 /* ===========================================================================================*/
-
-
 
 #pragma options align=reset
 

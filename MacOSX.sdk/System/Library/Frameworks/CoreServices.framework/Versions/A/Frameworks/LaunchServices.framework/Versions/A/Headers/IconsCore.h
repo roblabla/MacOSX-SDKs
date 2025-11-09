@@ -760,8 +760,6 @@ GetIconRefFromComponent(
    This routine adds a new entry to the IconRef registry. Other clients will be 
    able to access it using the (creator, iconType) pair specified here.
    Lower-case creators are reserved for the system.
-   Consider using RegisterIconRefFromResource() if possible, since the data 
-   registered using RegisterIconRefFromFamily() cannot be purged.
    The iconFamily data is copied and the caller is reponsible for disposing of it.
    This routine increments the reference count of the IconRef. Call ReleaseIconRef() 
    when you're done with it.

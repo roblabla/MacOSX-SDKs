@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: AC35AFC5-6997-3D96-980F-879A549265A5' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           B14E50DF-A13A-3E67-A0BE-052E3CBE3DA5
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           BE87FCB9-4C0B-3FA9-9365-F5D3ABE86235
 install-name:    '/System/Library/PrivateFrameworks/Lookup.framework/Versions/A/Lookup'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _LUCanConnectToService, _LULookupVersionNumber, _LULookupVersionString, 
                        _LUNotificationPopoverWillClose, _LUTermOptionDisableSearchTermIndicator, 
                        _LUTermOptionKeyClippingRect, _LUTermOptionKeyLanguage, _LUTermOptionKeyPartOfSpeech, 

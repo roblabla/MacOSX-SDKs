@@ -20,11 +20,16 @@ API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
 
 @property (nonatomic, copy) NSArray<CKUserIdentityLookupInfo *> *userIdentityLookupInfos;
 
+/*! @abstract Called once for each user identity lookup info that was successfully discovered on the server
+ *
+ *  @discussion Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
+ */
 @property (nonatomic, copy, nullable) void (^userIdentityDiscoveredBlock)(CKUserIdentity *identity, CKUserIdentityLookupInfo * lookupInfo);
 
 /*! @abstract This block is called when the operation completes.
  *
- *  @discussion The [NSOperation completionBlock] will also be called if both are set.
+ *  @discussion The @code -[NSOperation completionBlock] @endcode will also be called if both are set.
+ *  Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
  */
 @property (nonatomic, copy, nullable) void (^discoverUserIdentitiesCompletionBlock)(NSError * _Nullable operationError);
 

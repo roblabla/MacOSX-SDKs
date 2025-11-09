@@ -56,3 +56,6 @@
 #import <CoreML/MLNumericConstraint.h>
 #import <CoreML/MLParameterDescription.h>
 #import <CoreML/MLParameterKey.h>
+
+#import <CoreML/MLModelCollection.h>
+#import <CoreML/MLModelCollectionEntry.h>

@@ -29,14 +29,15 @@
 #ifndef _KERN_LOCKS_H_
 #define _KERN_LOCKS_H_
 
-#include        <sys/cdefs.h>
-#include        <sys/appleapiopts.h>
-#include        <mach/boolean.h>
-#include        <mach/mach_types.h>
-#include        <kern/kern_types.h>
-#include        <kern/lock_group.h>
-#include        <machine/locks.h>
+#include <sys/cdefs.h>
+#include <sys/appleapiopts.h>
+#include <mach/boolean.h>
+#include <mach/mach_types.h>
+#include <kern/kern_types.h>
+#include <kern/lock_group.h>
+#include <machine/locks.h>
 
+__BEGIN_DECLS
 
 typedef unsigned int            lck_sleep_action_t;
 
@@ -60,111 +61,107 @@ typedef struct __lck_attr__ lck_attr_t;
 
 #define LCK_ATTR_NULL (lck_attr_t *)NULL
 
-__BEGIN_DECLS
+extern  lck_attr_t      *lck_attr_alloc_init(void);
 
-extern  lck_attr_t              *lck_attr_alloc_init(
-	void);
-
-extern  void                    lck_attr_setdefault(
+extern  void            lck_attr_setdefault(
 	lck_attr_t              *attr);
 
-extern  void                    lck_attr_setdebug(
+extern  void            lck_attr_setdebug(
 	lck_attr_t              *attr);
 
-extern  void                    lck_attr_cleardebug(
+extern  void            lck_attr_cleardebug(
 	lck_attr_t              *attr);
 
 
-extern  void                    lck_attr_free(
+extern  void            lck_attr_free(
 	lck_attr_t              *attr);
 
 #define decl_lck_spin_data(class, name)     class lck_spin_t name
 
-extern lck_spin_t               *lck_spin_alloc_init(
+extern lck_spin_t      *lck_spin_alloc_init(
 	lck_grp_t               *grp,
 	lck_attr_t              *attr);
 
-extern void                             lck_spin_init(
+extern void             lck_spin_init(
 	lck_spin_t              *lck,
 	lck_grp_t               *grp,
 	lck_attr_t              *attr);
 
-extern void                             lck_spin_lock(
+extern void             lck_spin_lock(
 	lck_spin_t              *lck);
 
-extern void                             lck_spin_lock_grp(
+extern void             lck_spin_lock_grp(
 	lck_spin_t              *lck,
 	lck_grp_t               *grp);
 
-extern void                             lck_spin_unlock(
+extern void             lck_spin_unlock(
 	lck_spin_t              *lck);
 
-extern void                             lck_spin_destroy(
+extern void             lck_spin_destroy(
 	lck_spin_t              *lck,
 	lck_grp_t               *grp);
 
-extern void                             lck_spin_free(
+extern void             lck_spin_free(
 	lck_spin_t              *lck,
 	lck_grp_t               *grp);
 
 extern wait_result_t    lck_spin_sleep(
-	lck_spin_t                      *lck,
+	lck_spin_t              *lck,
 	lck_sleep_action_t      lck_sleep_action,
-	event_t                         event,
+	event_t                 event,
 	wait_interrupt_t        interruptible);
 
 extern wait_result_t    lck_spin_sleep_grp(
-	lck_spin_t                      *lck,
+	lck_spin_t              *lck,
 	lck_sleep_action_t      lck_sleep_action,
-	event_t                         event,
+	event_t                 event,
 	wait_interrupt_t        interruptible,
 	lck_grp_t               *grp);
 
 extern wait_result_t    lck_spin_sleep_deadline(
-	lck_spin_t                      *lck,
+	lck_spin_t              *lck,
 	lck_sleep_action_t      lck_sleep_action,
-	event_t                         event,
+	event_t                 event,
 	wait_interrupt_t        interruptible,
-	uint64_t                        deadline);
-
+	uint64_t                deadline);
 
 
 #define decl_lck_mtx_data(class, name)     class lck_mtx_t name
 
-extern lck_mtx_t                *lck_mtx_alloc_init(
+extern lck_mtx_t        *lck_mtx_alloc_init(
 	lck_grp_t               *grp,
 	lck_attr_t              *attr);
 
-extern void                             lck_mtx_init(
+extern void             lck_mtx_init(
 	lck_mtx_t               *lck,
 	lck_grp_t               *grp,
 	lck_attr_t              *attr);
-extern void                             lck_mtx_lock(
+extern void             lck_mtx_lock(
 	lck_mtx_t               *lck);
 
-extern void                             lck_mtx_unlock(
+extern void             lck_mtx_unlock(
 	lck_mtx_t               *lck);
 
-extern void                             lck_mtx_destroy(
+extern void             lck_mtx_destroy(
 	lck_mtx_t               *lck,
 	lck_grp_t               *grp);
 
-extern void                             lck_mtx_free(
+extern void             lck_mtx_free(
 	lck_mtx_t               *lck,
 	lck_grp_t               *grp);
 
 extern wait_result_t    lck_mtx_sleep(
-	lck_mtx_t                       *lck,
+	lck_mtx_t               *lck,
 	lck_sleep_action_t      lck_sleep_action,
-	event_t                         event,
+	event_t                 event,
 	wait_interrupt_t        interruptible);
 
 extern wait_result_t    lck_mtx_sleep_deadline(
-	lck_mtx_t                       *lck,
+	lck_mtx_t               *lck,
 	lck_sleep_action_t      lck_sleep_action,
-	event_t                         event,
+	event_t                 event,
 	wait_interrupt_t        interruptible,
-	uint64_t                        deadline);
+	uint64_t                deadline);
 
 
 #if DEVELOPMENT || DEBUG
@@ -183,9 +180,9 @@ extern int              lck_mtx_test_mtx_uncontended_loop_time(int iter, char* b
 extern int              lck_mtx_test_mtx_contended_loop_time(int iter, char* buffer, int buffer_size, int type);
 #endif
 
-extern void                             lck_mtx_assert(
+extern void             lck_mtx_assert(
 	lck_mtx_t               *lck,
-	unsigned int    type);
+	unsigned                int    type);
 
 #if MACH_ASSERT
 #define LCK_MTX_ASSERT(lck, type) lck_mtx_assert((lck),(type))
@@ -207,8 +204,6 @@ extern void                             lck_mtx_assert(
 #define LCK_RW_ASSERT_DEBUG(lck, type)
 #endif /* DEBUG */
 
-__END_DECLS
-
 #define LCK_ASSERT_OWNED                1
 #define LCK_ASSERT_NOTOWNED             2
 
@@ -224,73 +219,85 @@ typedef unsigned int     lck_rw_type_t;
 #define LCK_RW_TYPE_EXCLUSIVE           0x02
 
 
-__BEGIN_DECLS
-
-extern lck_rw_t                 *lck_rw_alloc_init(
+extern lck_rw_t         *lck_rw_alloc_init(
 	lck_grp_t               *grp,
 	lck_attr_t              *attr);
 
-extern void                             lck_rw_init(
+extern void             lck_rw_init(
 	lck_rw_t                *lck,
 	lck_grp_t               *grp,
 	lck_attr_t              *attr);
 
-extern void                             lck_rw_lock(
+extern void             lck_rw_lock(
 	lck_rw_t                *lck,
-	lck_rw_type_t   lck_rw_type);
+	lck_rw_type_t           lck_rw_type);
 
-extern void                             lck_rw_unlock(
+extern void             lck_rw_unlock(
 	lck_rw_t                *lck,
-	lck_rw_type_t   lck_rw_type);
+	lck_rw_type_t           lck_rw_type);
 
-extern void                             lck_rw_lock_shared(
+extern void             lck_rw_lock_shared(
 	lck_rw_t                *lck);
 
-extern void                             lck_rw_unlock_shared(
+extern void             lck_rw_unlock_shared(
 	lck_rw_t                *lck);
 
-extern boolean_t                        lck_rw_lock_yield_shared(
+extern boolean_t        lck_rw_lock_yield_shared(
 	lck_rw_t                *lck,
-	boolean_t       force_yield);
+	boolean_t               force_yield);
 
-extern void                             lck_rw_lock_exclusive(
+extern void             lck_rw_lock_exclusive(
+	lck_rw_t                *lck);
+/*
+ *	Grabs the lock exclusive.
+ *	Returns true iff the thread spun or blocked while attempting to
+ *	acquire the lock.
+ *
+ *	Note that the return value is ONLY A HEURISTIC w.r.t. the lock's
+ *	contention.
+ *
+ *	This routine IS EXPERIMENTAL.
+ *	It's only used for the vm object lock, and use for other subsystems
+ *	is UNSUPPORTED.
+ */
+extern bool                             lck_rw_lock_exclusive_check_contended(
 	lck_rw_t                *lck);
 
-extern void                             lck_rw_unlock_exclusive(
+extern void             lck_rw_unlock_exclusive(
 	lck_rw_t                *lck);
 
 
 
-extern void                             lck_rw_destroy(
+extern void             lck_rw_destroy(
 	lck_rw_t                *lck,
 	lck_grp_t               *grp);
 
-extern void                             lck_rw_free(
+extern void             lck_rw_free(
 	lck_rw_t                *lck,
 	lck_grp_t               *grp);
 
 extern wait_result_t    lck_rw_sleep(
-	lck_rw_t                        *lck,
+	lck_rw_t                *lck,
 	lck_sleep_action_t      lck_sleep_action,
-	event_t                         event,
+	event_t                 event,
 	wait_interrupt_t        interruptible);
 
 extern wait_result_t    lck_rw_sleep_deadline(
-	lck_rw_t                        *lck,
-	lck_sleep_action_t      lck_sleep_action,
-	event_t                         event,
-	wait_interrupt_t        interruptible,
-	uint64_t                        deadline);
-
-extern boolean_t                lck_rw_lock_shared_to_exclusive(
-	lck_rw_t                *lck);
-
-extern void                             lck_rw_lock_exclusive_to_shared(
-	lck_rw_t                *lck);
-
-extern boolean_t                lck_rw_try_lock(
 	lck_rw_t                *lck,
-	lck_rw_type_t   lck_rw_type);
+	lck_sleep_action_t      lck_sleep_action,
+	event_t                 event,
+	wait_interrupt_t        interruptible,
+	uint64_t                deadline);
+
+extern boolean_t        lck_rw_lock_shared_to_exclusive(
+	lck_rw_t                *lck);
+
+extern void             lck_rw_lock_exclusive_to_shared(
+	lck_rw_t                *lck);
+
+extern boolean_t        lck_rw_try_lock(
+	lck_rw_t                *lck,
+	lck_rw_type_t           lck_rw_type);
 
 
 __END_DECLS

@@ -121,6 +121,8 @@ When signing, causes
 .Nm
 to replace any existing signature on the path(s) given. Without this option,
 existing signatures will not be replaced, and the signing operation fails.
+.It Fl -remove-signature
+Removes the current code signature from the path(s) given.
 .It Fl h, -hosting
 Constructs and prints the hosting chain of a running program. The
 .Ar pid
@@ -249,6 +251,10 @@ If new data is specified explicitly, it is preferred.
 You still need to specify the -f (--force) option to enable overwriting signatures at all.
 If this option is absent, any old signature has no effect on the signing process.
 .br
+\fBNote\fR: if the
+.Ar linker-signed
+flag is present on the previous binary, then this option is ignored.
+.br
 This option takes a comma-separated list of names, which you may reasonably abbreviate:
 .Bl -tag -width requirements
 .It identifier
@@ -259,6 +265,8 @@ Preserve the entitlement data (--entitlements).
 Preserve the internal requirements (--requirements option), including any explicit Designated
 Requirement. Note that all internal requirements are preserved or regenerated as a whole; you
 cannot pick and choose individual elements with this option.
+.It flags
+Preserve the option flags (-o), see the OPTION FLAGS section below.
 .It runtime
 Preserve the hardened runtime version (-o runtime flag, --runtime-version option) instead of
 overriding or deriving the version.
@@ -519,6 +527,20 @@ On macOS versions >= 10.14.0, opts signed processes into a hardened runtime envi
 includes runtime code signing enforcement, library validation, hard, kill, and debugging restrictions.
 These restrictions can be selectively relaxed via entitlements. Note: macOS versions older than 10.14.0
 ignore the presence of this flag in the code signature.
+.It linker-signed
+Identifies a signature as signed by the linker. Linker signatures are very similar to adhoc signatures, except:
+.Bl -bullet -nested
+.It
+linker signatures can be replaced without using the
+.Ar --force
+option.
+.It
+linker signatures are never preserved regardless of the use of the
+.Ar --preserve-metadata
+option.
+.It
+linker signatures will usually not contain any embedded code requirements including a designated requirement.
+.El
 .El
 .Pp
 Note that code can set the hard and kill flags on itself at any time. The signing
@@ -536,24 +558,60 @@ can abbreviate flag names on the command lines, you must spell them out in the I
 .\".It Pa /Library/Keychains/System.keychain
 .Sh EXAMPLES
 To sign application Terminal.app with a signing identity named "authority":
-.Dl codesign -s authority Terminal.app
+.Dl codesign --sign authority Terminal.app
 .Pp
 To sign the command-line tool "helper" with the same identity, overwriting
 any existing signature, using the signing identifier "com.mycorp.helper",
 and embedding a custom designated requirement
-.Dl codesign -f -s authority --prefix=com.mycorp. -r="designated => anchor /tmp/foo" helper
+.Dl codesign -f --sign authority --prefix=com.mycorp. -r="designated => anchor /tmp/foo" helper
+.Pp
+To enable the hardened runtime on Terminal.app and sign with the signing identity
+named "authority":
+.Dl codesign --sign authority --options runtime Terminal.app
 .Pp
 To verify the signature on Terminal.app and produce some verbose output:
 .Dl codesign --verify --verbose Terminal.app
 .Pp
 To verify the dynamic validity of process 666:
-.Dl codesign --verify 666
+.Dl codesign --verify +666
 .Pp
 To display all information about Terminal.app's code signature:
 .Dl codesign --display --verbose=4 Terminal.app
 .Pp
 To extract the internal requirements from Terminal.app to standard output:
 .Dl codesign --display -r- Terminal.app
+.Pp
+To display the entitlements of a binary or bundle:
+.Dl codesign --display --entitlements :- /sbin/launchd
+.Dl codesign --display --entitlements :- Terminal.app
+.Pp
+To display the entitlements of process 666:
+.Dl codesign --display --entitlements :- +666
+.Sh TROUBLESHOOTING
+A common source of confusion when using
+.Nm
+arises from the ordering of command line options. If
+.Nm
+is not behaving as expected, consult this manual and check the ordering of your
+arguments. As a general rule
+.Nm
+follows a
+.Sy verb noun
+rule. For example
+.Fl -sign
+should be placed before
+.Fl -options
+in the invocation. This is because you are performing a
+.Qq sign
+action with a given set of options.
+.Pp
+If these are inverted and
+.Fl -options
+is provided before
+.Fl -sign
+in the invocation, the value of
+.Fl -options
+is ignored silently.
 .Sh DIAGNOSTICS
 .Nm
 exits 0 if all operations succeed. This indicates that all codes were
@@ -619,6 +677,27 @@ use the unambiguous long forms
 and
 .Ar --verify
 instead.
+.Pp
+The
+.Fl -verify
+option can take either a file or a pid. If your file path starts with a number you should prefix it
+with
+.Qq ./
+to force
+.Nm
+to interpret the argument as a path. For example:
+.Dl codesign --verify 666
+would become:
+.Dl codesign --verify ./666
+.Pp
+Prefixing a number with
+.Qq +
+will force
+.Nm
+to interpret the number as a PID. For example:
+.Dl codesign --verify 666
+would become:
+.Dl codesign --verify +666
 .Sh NOTES
 The Xcode build system invokes
 .Nm

@@ -2,7 +2,7 @@
 //  SCNView.h
 //  SceneKit
 //
-//  Copyright © 2012-2019 Apple Inc. All rights reserved.
+//  Copyright © 2012-2020 Apple Inc. All rights reserved.
 //
 
 #import <AppKit/AppKit.h>
@@ -157,7 +157,7 @@ SCN_EXPORT
  @abstract Specifies whether the drawable is resized asynchonously during a live resize operation. Defaults to YES.
  @discussion If set to YES, the actual viewport size during a live resize can be retrieved using currentViewport (see SCNSceneRenderer.h)
  */
-@property BOOL drawableResizesAsynchronously API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+@property BOOL drawableResizesAsynchronously API_AVAILABLE(macos(10.15));
 
 
 #if SCN_ENABLE_OPENGL

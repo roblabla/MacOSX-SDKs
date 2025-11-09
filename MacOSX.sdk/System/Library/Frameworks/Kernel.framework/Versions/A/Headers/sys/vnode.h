@@ -108,8 +108,8 @@ enum vtagtype   {
 	VT_HFS, VT_ZFS, VT_DEVFS, VT_WEBDAV, VT_UDF,
 	/* 21 - 25 */
 	VT_AFP, VT_CDDA, VT_CIFS, VT_OTHER, VT_APFS,
-	/* 26 */
-	VT_LOCKERFS,
+	/* 26 - 27*/
+	VT_LOCKERFS, VT_BINDFS,
 };
 
 #define HAVE_VT_LOCKERFS 1
@@ -313,6 +313,9 @@ struct vnode_fsparam {
 #define VNODE_ATTR_va_fsid64            (1LL<<41)       /* 20000000000 */
 #define VNODE_ATTR_va_write_gencount    (1LL<<42)       /* 40000000000 */
 #define VNODE_ATTR_va_private_size      (1LL<<43)       /* 80000000000 */
+#define VNODE_ATTR_va_clone_id          (1LL<<44)       /* 100000000000 */
+#define VNODE_ATTR_va_extflags          (1LL<<45)       /* 200000000000 */
+#define VNODE_ATTR_va_recursive_gencount (1LL<<46)      /* 400000000000 */
 
 #define VNODE_ATTR_BIT(n)       (VNODE_ATTR_ ## n)
 
@@ -362,7 +365,10 @@ struct vnode_fsparam {
 	                        VNODE_ATTR_BIT(va_rsrc_alloc) |         \
 	                        VNODE_ATTR_BIT(va_fsid64) |             \
 	                        VNODE_ATTR_BIT(va_write_gencount) |     \
-	                        VNODE_ATTR_BIT(va_private_size))
+	                        VNODE_ATTR_BIT(va_private_size) |       \
+	                        VNODE_ATTR_BIT(va_clone_id) |           \
+	                        VNODE_ATTR_BIT(va_extflags) |           \
+	                        VNODE_ATTR_BIT(va_recursive_gencount))
 
 /*
  * Read-only attributes.
@@ -391,8 +397,12 @@ struct vnode_fsparam {
 	                        VNODE_ATTR_BIT(va_rsrc_length) |        \
 	                        VNODE_ATTR_BIT(va_rsrc_alloc) |         \
 	                        VNODE_ATTR_BIT(va_fsid64) |             \
-	                        VNODE_ATTR_BIT(va_write_gencount) |             \
-	                        VNODE_ATTR_BIT(va_private_size))
+	                        VNODE_ATTR_BIT(va_write_gencount) |     \
+	                        VNODE_ATTR_BIT(va_private_size) |       \
+	                        VNODE_ATTR_BIT(va_clone_id) |           \
+	                        VNODE_ATTR_BIT(va_extflags) |           \
+	                        VNODE_ATTR_BIT(va_recursive_gencount))
+
 /*
  * Attributes that can be applied to a new file object.
  */
@@ -492,6 +502,9 @@ struct vnode_attr {
 	uint32_t va_write_gencount;     /* counter that increments each time the file changes */
 
 	uint64_t va_private_size; /* If the file were deleted, how many bytes would be freed immediately */
+	uint64_t va_clone_id;     /* If a file is cloned this is a unique id shared by all "perfect" clones */
+	uint64_t va_extflags;     /* extended file/directory flags */
+	uint64_t va_recursive_gencount; /* for dir-stats enabled directories */
 
 	/* add new fields here only */
 };

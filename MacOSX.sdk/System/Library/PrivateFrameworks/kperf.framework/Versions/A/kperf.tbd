@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: EB49A06C-941F-3B6A-9FE2-F0B533D6BD5C', 'x86_64: EB49A06C-941F-3B6A-9FE2-F0B533D6BD5C' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           034C827F-3FF8-3C6C-BDFC-B360F08884B3
+  - target:          x86_64-maccatalyst
+    value:           034C827F-3FF8-3C6C-BDFC-B360F08884B3
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           FA8E4CB4-1F6E-3EAF-B970-99A2A7108B46
+  - target:          arm64e-maccatalyst
+    value:           FA8E4CB4-1F6E-3EAF-B970-99A2A7108B46
 install-name:    '/System/Library/PrivateFrameworks/kperf.framework/Versions/A/kperf'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _kpc_counterbuf_alloc, _kpc_counterbuf_free, _kpc_cpu_string, 
                        _kpc_force_all_ctrs_get, _kpc_force_all_ctrs_set, _kpc_get_actionid, 
                        _kpc_get_config, _kpc_get_config_count, _kpc_get_counter_count, 

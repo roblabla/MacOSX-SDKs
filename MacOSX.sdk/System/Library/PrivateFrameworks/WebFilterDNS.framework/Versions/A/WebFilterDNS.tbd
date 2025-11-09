@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 7695DA54-C368-3AE1-8C5E-ED4CEE601E05' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           7F4A5103-7196-36DF-910E-0FABEEB01DDC
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           2639B260-5813-312A-927D-C6B88D5DC8BE
 install-name:    '/System/Library/PrivateFrameworks/WebFilterDNS.framework/Versions/A/WebFilterDNS'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _LookupNameForAddr, _NameResolvesToAddr, _NameResolvesToName, 
                        _WCFConnectionDealloc, _WCFConnectionNew, _WCFIsServerRunning, 
                        _WCFLookupNameForAddr, _WCFNameResolvesToAddr, _WCFNameResolvesToName, 

@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_OPTIONS(NSUInteger, OSLogEnumeratorOptions) {
     OSLogEnumeratorReverse                                  = 0x01,
 }
-API_AVAILABLE(macos(10.15))
+API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
 NS_SWIFT_NAME(OSLogEnumerator.Options);
 
 /*!
@@ -35,7 +35,7 @@ NS_SWIFT_NAME(OSLogEnumerator.Options);
  * @abstract
  * An enumerator that views entries in the unified logging system.
  */
-API_AVAILABLE(macos(10.15))
+API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
 OS_EXPORT
 @interface OSLogEnumerator : NSEnumerator
 

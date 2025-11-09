@@ -9,6 +9,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /*! The ITLibArtist class represents an artist, such as the performer of a song. */
+API_UNAVAILABLE(ios)
 ITLIB_EXPORT @interface ITLibArtist : NSObject
 {
 	NSString* _name;

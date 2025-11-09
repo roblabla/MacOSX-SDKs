@@ -33,6 +33,6 @@ typedef NS_ENUM(NSInteger, MKFeatureVisibility) {
     MKFeatureVisibilityAdaptive,
     MKFeatureVisibilityHidden,
     MKFeatureVisibilityVisible
-} API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(macos, watchos);
+} API_AVAILABLE(ios(11.0), tvos(11.0), macos(11.0)) API_UNAVAILABLE(watchos);
 
 NS_ASSUME_NONNULL_END

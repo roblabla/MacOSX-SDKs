@@ -2,7 +2,7 @@
  *  CTFontDescriptor.h
  *  CoreText
  *
- *  Copyright (c) 2006-2018 Apple Inc. All rights reserved.
+ *  Copyright (c) 2006-2020 Apple Inc. All rights reserved.
  *
  */
 
@@ -94,6 +94,11 @@ CT_EXPORT const CFStringRef kCTFontTraitsAttribute CT_AVAILABLE(macos(10.5), ios
     @discussion This key is used to obtain the font variation instance as a CFDictionaryRef. If specified in a font descriptor, fonts with the specified axes will be primary match candidates, if no such fonts exist, this attribute will be ignored.
 */
 CT_EXPORT const CFStringRef kCTFontVariationAttribute CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
+/*!
+    @defined    kCTFontVariationAxesAttribute
+    @discussion An array of variation axis dictionaries or null if the font does not support variations. Each variation axis dictionary contains the five kCTFontVariationAxis* keys.
+*/
+CT_EXPORT const CFStringRef kCTFontVariationAxesAttribute CT_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
 /*!
     @defined    kCTFontSizeAttribute
     @abstract   The font point size.
@@ -256,23 +261,30 @@ typedef uint32_t CTFontPriority;
 /*!
     @defined    kCTFontEnabledAttribute
     @abstract   The font enabled state.
-    @discussion This key is used to obtain the font state. The returned value is a CFNumberRef representing a boolean value. Unregistered font descriptors will return NULL, which is equivalent to false.
+    @discussion The value associated with this key is a CFBoolean. Unregistered font descriptors will return NULL, which is equivalent to false.
 */
 CT_EXPORT const CFStringRef kCTFontEnabledAttribute CT_AVAILABLE(macos(10.6), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @defined    kCTFontDownloadableAttribute
     @abstract   The font downloadable state.
-    @discussion The value associated with this key is a CFBoolean.  If it is kCFBooleanTrue, CoreText attempts to download a font if necessary when matching a descriptor.
+    @discussion The value associated with this key is a CFBoolean. If it is true, CoreText attempts to download a font if necessary when matching a descriptor.
 */
 CT_EXPORT const CFStringRef kCTFontDownloadableAttribute CT_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
 
 /*!
     @defined    kCTFontDownloadedAttribute
     @abstract   The download state.
-    @discussion The value associated with this key is a CFBoolean.  If it is kCFBooleanTrue, corresponding FontAsset has been downloaded. (but still it may be necessary to call appropriate API in order to use the font in the FontAsset.)
+    @discussion The value associated with this key is a CFBoolean. If it is true, corresponding FontAsset has been downloaded. (but still it may be necessary to call appropriate API in order to use the font in the FontAsset.)
 */
 CT_EXPORT const CFStringRef kCTFontDownloadedAttribute CT_AVAILABLE(macos(10.12), ios(7.0), watchos(2.0), tvos(9.0));
+
+/*!
+    @defined    kCTFontOpticalSizeAttribute
+    @abstract   The point size at which this font is intended to be used.
+    @discussion The value is a CFNumber used to activate size-specific (not linearly scaled) metrics. Starting with macOS 10.14 and iOS 12.0, the CFString "auto" can be used instead to request an optical size matching the point size. Starting with macOS 10.15 and iOS 13.0, the CFString "none" can be used instead to explicitly disable automatic optical sizing enabled by the font.
+*/
+CT_EXPORT const CFStringRef kCTFontOpticalSizeAttribute CT_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
 /*! --------------------------------------------------------------------------
     @group Descriptor Creation
@@ -283,12 +295,14 @@ CT_EXPORT const CFStringRef kCTFontDownloadedAttribute CT_AVAILABLE(macos(10.12)
     @abstract   Creates a new font descriptor with the provided PostScript name and size.
 
     @param      name
-                The PostScript name to be used for the font descriptor as a CFStringRef.
+                The PostScript name to be used for the font descriptor as a CFStringRef. Any font name beginning with a "." is reserved for the system and should not be used here.
 
     @param      size
                 The point size. If 0.0, the kCTFontSizeAttribute will be omitted from the font descriptor.
 
     @result     This function creates a new font descriptor reference with the given PostScript name and point size.
+
+    @discussion If you are trying to create a system UI font descriptor (with name beginning with a "."), you should create a font with CTFontCreateUIFontForLanguage() or appropriate AppKit/UIKit APIs instead, then use CTFontCopyFontDescriptor() to get its font descriptor.
 */
 CTFontDescriptorRef CTFontDescriptorCreateWithNameAndSize(
     CFStringRef         name,

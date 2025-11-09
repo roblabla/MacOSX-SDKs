@@ -1,13 +1,38 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: D495FA45-5492-335F-BB73-A01309BF1DC5', 'x86_64: D495FA45-5492-335F-BB73-A01309BF1DC5' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           4D05DA1D-6FD0-3467-B987-1AA217709A07
+  - target:          x86_64-maccatalyst
+    value:           4D05DA1D-6FD0-3467-B987-1AA217709A07
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           F1234F3D-01B2-3A5B-94B6-EB47E15CBBFF
+  - target:          arm64e-maccatalyst
+    value:           F1234F3D-01B2-3A5B-94B6-EB47E15CBBFF
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SharedFileList.framework/Versions/A/SharedFileList'
-current-version: 129
-parent-umbrella: CoreServices
-exports:         
-  - archs:           [ x86_64 ]
-    allowable-clients: [ Foundation ]
+current-version: 143
+parent-umbrella:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    umbrella:        CoreServices
+allowable-clients:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    clients:         [ Foundation ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _SFLListChangeNotification, _SFLListLaunchNotification, _SFLServiceName, 
+                       _kSFLDefaultsDomain ]
+    objc-classes:    [ SFLBookmark, SFLDefaults, SFLItem, SFLManager, SFLResolveResult, 
+                       _SFLItem, _SFLList ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _LSSharedFileListAddObserver, _LSSharedFileListAddObserverOnQueue, 
                        _LSSharedFileListCopyProperty, _LSSharedFileListCopySnapshot, 
                        _LSSharedFileListCreate, _LSSharedFileListGetSeedValue, _LSSharedFileListGetTypeID, 
@@ -21,11 +46,11 @@ exports:
                        _LSSharedFileListItemSetProperty, _LSSharedFileListItemUpdate, 
                        _LSSharedFileListRemoveAllItems, _LSSharedFileListRemoveObserver, 
                        _LSSharedFileListRemoveObserverOnQueue, _LSSharedFileListSetAuthorization, 
-                       _LSSharedFileListSetProperty, _SFLListChangeNotification, 
-                       _SFLListLaunchNotification, _SFLServiceName, __LSSharedFileListCopyListType, 
+                       _LSSharedFileListSetProperty, __LSSharedFileListCopyListType, 
                        __LSSharedFileListIsURLSharePoint, __LSSharedFileListItemCopyBinding, 
-                       __LSSharedFileListItemCopyURL, __LSSharedFileListItemSetBookmarkData, 
-                       __LSSharedFileListItemSetURL, __LSSharedFileListUpgrade, __LSSharedFileListVolumeIsVisibleInSidebar, 
+                       __LSSharedFileListItemCopyURL, __LSSharedFileListItemOpen, 
+                       __LSSharedFileListItemSetBookmarkData, __LSSharedFileListItemSetURL, 
+                       __LSSharedFileListUpgrade, __LSSharedFileListVolumeIsVisibleInSidebar, 
                        __SFLCreateSnapshot, __SFLGetRestrictedCustomFileList, __SFLIsFolderShareable, 
                        __SFLRelease, __SFLReleaseSnapshot, __kLSSharedFileListFavoriteItems, 
                        __kLSSharedFileListFavoriteVolumes, __kLSSharedFileListGlobalLoginItems, 
@@ -80,8 +105,5 @@ exports:
                        _kLSSharedFileListVolumesNetworkVisible, _kLSSharedFileListVolumesShowEjectableVolumes, 
                        _kLSSharedFileListVolumesShowEjectableVolumesExceptions, _kLSSharedFileListVolumesShowHardDrives, 
                        _kLSSharedFileListVolumesShowHardDrivesExceptions, _kLSSharedFileListVolumesShowRemovableVolumes, 
-                       _kLSSharedFileListVolumesShowRemovableVolumesExceptions, _kLSSharedFileListVolumesShowRepairing, 
-                       _kSFLDefaultsDomain ]
-    objc-classes:    [ SFLBookmark, SFLDefaults, SFLItem, SFLManager, SFLResolveResult, 
-                       _SFLItem, _SFLList ]
+                       _kLSSharedFileListVolumesShowRemovableVolumesExceptions, _kLSSharedFileListVolumesShowRepairing ]
 ...

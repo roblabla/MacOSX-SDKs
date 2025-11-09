@@ -73,43 +73,51 @@ CM_ASSUME_NONNULL_BEGIN
 		the destination pixel aspect ratio (kVTPixelTransferPropertyKey_DestinationPixelAspectRatio).
 		The destination image buffer's clean aperture and pixel aspect ratio attachments are not
 		taken into account, and will be overwritten.
-	
+ */
+VT_EXPORT const CFStringRef kVTPixelTransferPropertyKey_ScalingMode API_AVAILABLE(macosx(10.8), ios(9.0), tvos(10.2)); // Read/write, CFStringRef, one of kVTScalingMode_*
+
+/*
 	@constant	kVTScalingMode_Normal
 	@abstract
-		The full width and height of the source image buffer is stretched to the full width 
+		The full width and height of the source image buffer is stretched to the full width
 		and height of the destination image buffer.
 	@discussion
-		The source image buffer's clean aperture and pixel aspect ratio attachments are stretched 
+		The source image buffer's clean aperture and pixel aspect ratio attachments are stretched
 		the same way as the image with the image, and attached to the destination image buffer.
 		This is the default scaling mode.
-	
+ */
+VT_EXPORT const CFStringRef kVTScalingMode_Normal API_AVAILABLE(macosx(10.8), ios(9.0), tvos(10.2)); // Copy full width and height.  Write adjusted clean aperture and pixel aspect ratios to compensate for any change in dimensions.
+
+/*
 	@constant	kVTScalingMode_CropSourceToCleanAperture
 	@abstract
 		The source image buffer's clean aperture is scaled to the destination clean aperture.
 	@discussion
 		The destination pixel aspect ratio is set on the destination image buffer.
-	
+ */
+VT_EXPORT const CFStringRef kVTScalingMode_CropSourceToCleanAperture API_AVAILABLE(macosx(10.8), ios(9.0), tvos(10.2)); // Crop to remove edge processing region; scale remainder to destination clean aperture.
+
+/*
 	@constant	kVTScalingMode_Letterbox
 	@abstract
-		The source image buffer's clean aperture is scaled to a rectangle fitted inside the 
+		The source image buffer's clean aperture is scaled to a rectangle fitted inside the
 		destination clean aperture that preserves the source picture aspect ratio.
 	@discussion
 		The remainder of the destination image buffer is filled with black.
 		If a destination pixel aspect ratio is not set, the source image's pixel aspect ratio is used.
 		The pixel aspect ratio used is set on the destination image buffer.
-	
+ */
+VT_EXPORT const CFStringRef kVTScalingMode_Letterbox API_AVAILABLE(macosx(10.8), ios(9.0), tvos(10.2)); // Preserve aspect ratio of the source, and fill remaining areas with black in to fit destination dimensions
+
+/*
 	@constant	kVTScalingMode_Trim
 	@abstract
-		The source image buffer's clean aperture is scaled to a rectangle that completely fills the 
-		destination clean aperture and preserves the source picture aspect ratio.
+		The source image buffer's clean aperture is scaled to a rectangle that completely fills
+		the destination clean aperture and preserves the source picture aspect ratio.
 	@discussion
 		If a destination pixel aspect ratio is not set, the source image's pixel aspect ratio is used.
 		The pixel aspect ratio used is set on the destination image buffer.
-*/
-VT_EXPORT const CFStringRef kVTPixelTransferPropertyKey_ScalingMode API_AVAILABLE(macosx(10.8), ios(9.0), tvos(10.2)); // Read/write, CFStringRef, one of:
-VT_EXPORT const CFStringRef kVTScalingMode_Normal API_AVAILABLE(macosx(10.8), ios(9.0), tvos(10.2)); // Copy full width and height.  Write adjusted clean aperture and pixel aspect ratios to compensate for any change in dimensions.
-VT_EXPORT const CFStringRef kVTScalingMode_CropSourceToCleanAperture API_AVAILABLE(macosx(10.8), ios(9.0), tvos(10.2)); // Crop to remove edge processing region; scale remainder to destination clean aperture.
-VT_EXPORT const CFStringRef kVTScalingMode_Letterbox API_AVAILABLE(macosx(10.8), ios(9.0), tvos(10.2)); // Preserve aspect ratio of the source, and fill remaining areas with black in to fit destination dimensions
+ */
 VT_EXPORT const CFStringRef kVTScalingMode_Trim API_AVAILABLE(macosx(10.8), ios(9.0), tvos(10.2)); // Preserve aspect ratio of the source, and crop picture to fit destination dimensions
 
 /*!

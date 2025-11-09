@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 90044EEF-A53F-35D5-951E-BD7BEBEF1ABD', 'x86_64: 90044EEF-A53F-35D5-951E-BD7BEBEF1ABD' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           6E8794A3-D00A-3F07-88B1-CC1615F9C2FB
+  - target:          x86_64-maccatalyst
+    value:           6E8794A3-D00A-3F07-88B1-CC1615F9C2FB
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           5810BE6C-07C0-3CA5-A95F-7FC8C96AAEE3
+  - target:          arm64e-maccatalyst
+    value:           5810BE6C-07C0-3CA5-A95F-7FC8C96AAEE3
 install-name:    '/System/Library/Frameworks/CoreAudio.framework/Versions/A/CoreAudio'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _AudioConvertHostTimeToNanos, _AudioConvertNanosToHostTime, 
                        _AudioDeviceAddIOProc, _AudioDeviceAddPropertyListener, _AudioDeviceCreateIOProcID, 
                        _AudioDeviceCreateIOProcIDWithBlock, _AudioDeviceCreateIOProcIDWithClockedBlock, 
@@ -15,33 +29,40 @@ exports:
                        _AudioDeviceRead, _AudioDeviceRemoveIOProc, _AudioDeviceRemovePropertyListener, 
                        _AudioDeviceRun, _AudioDeviceSetProperty, _AudioDeviceStart, 
                        _AudioDeviceStartAtTime, _AudioDeviceStop, _AudioDeviceTranslateTime, 
-                       _AudioDeviceWrite, _AudioGetCurrentHostTime, _AudioGetHostClockFrequency, 
-                       _AudioGetHostClockMinimumTimeDelta, _AudioHardwareAddPropertyListener, 
-                       _AudioHardwareAddRunLoopSource, _AudioHardwareBeMaster, _AudioHardwareClaimAudioDeviceID, 
-                       _AudioHardwareClaimAudioStreamID, _AudioHardwareCreateAggregateDevice, 
-                       _AudioHardwareDestroyAggregateDevice, _AudioHardwareDevicePropertyChanged, 
-                       _AudioHardwareDevicesCreated, _AudioHardwareDevicesDied, _AudioHardwareGetProperty, 
+                       _AudioDeviceWrite, _AudioDriverPlugInClose, _AudioDriverPlugInDeviceGetProperty, 
+                       _AudioDriverPlugInDeviceGetPropertyInfo, _AudioDriverPlugInDeviceSetProperty, 
+                       _AudioDriverPlugInOpen, _AudioDriverPlugInStreamGetProperty, 
+                       _AudioDriverPlugInStreamGetPropertyInfo, _AudioDriverPlugInStreamSetProperty, 
+                       _AudioGetCurrentHostTime, _AudioGetHostClockFrequency, _AudioGetHostClockMinimumTimeDelta, 
+                       _AudioHardwareAddPropertyListener, _AudioHardwareAddRunLoopSource, 
+                       _AudioHardwareBeMaster, _AudioHardwareCreateAggregateDevice, 
+                       _AudioHardwareDestroyAggregateDevice, _AudioHardwareGetProperty, 
                        _AudioHardwareGetPropertyInfo, _AudioHardwareReloadServerSettings, 
                        _AudioHardwareRemovePropertyListener, _AudioHardwareRemoveRunLoopSource, 
-                       _AudioHardwareSetProperty, _AudioHardwareStartServer, _AudioHardwareStreamPropertyChanged, 
-                       _AudioHardwareStreamsCreated, _AudioHardwareStreamsDied, _AudioHardwareUnload, 
+                       _AudioHardwareSetProperty, _AudioHardwareStartServer, _AudioHardwareUnload, 
                        _AudioObjectAddPropertyListener, _AudioObjectAddPropertyListenerBlock, 
-                       _AudioObjectAddPropertyListenerInternal, _AudioObjectCreate, 
-                       _AudioObjectExists, _AudioObjectGetPropertyData, _AudioObjectGetPropertyDataSize, 
+                       _AudioObjectAddPropertyListenerInternal, _AudioObjectExists, 
+                       _AudioObjectGetPropertyData, _AudioObjectGetPropertyDataSize, 
                        _AudioObjectHasProperty, _AudioObjectIsOnListenerThread, _AudioObjectIsPropertySettable, 
-                       _AudioObjectPropertiesChanged, _AudioObjectRemovePropertyListener, 
-                       _AudioObjectRemovePropertyListenerBlock, _AudioObjectSetPropertyData, 
-                       _AudioObjectShow, _AudioObjectsPublishedAndDied, _AudioStreamAddPropertyListener, 
+                       _AudioObjectRemovePropertyListener, _AudioObjectRemovePropertyListenerBlock, 
+                       _AudioObjectSetPropertyData, _AudioObjectShow, _AudioServerPlugInMain, 
+                       _AudioServerPlugInRegisterRemote, _AudioStreamAddPropertyListener, 
                        _AudioStreamGetProperty, _AudioStreamGetPropertyInfo, _AudioStreamRemovePropertyListener, 
                        _AudioStreamSetProperty, __ZN4AMCP11Null_DriverC1ERNS_14System_ContextE, 
                        __ZN4AMCP11Null_DriverC2ERNS_14System_ContextE, __ZN4AMCP11Null_DriverD0Ev, 
-                       __ZN4AMCP11Null_DriverD1Ev, __ZN4AMCP11Null_DriverD2Ev, __ZN4AMCP11run_new_halEv, 
-                       __ZN4AMCP13Level_Control16set_scalar_valueEf, __ZN4AMCP13Level_Control17set_decibel_valueEf, 
-                       __ZN4AMCP13Level_Control25set_scalar_value_and_waitEf, __ZN4AMCP13Level_Control26set_decibel_value_and_waitEf, 
-                       __ZN4AMCP13Level_ControlC1ERKNS_6DeviceEjjj, __ZN4AMCP13Level_ControlC1ERNS_14System_ContextEj, 
-                       __ZN4AMCP13Level_ControlC2ERKNS_6DeviceEjjj, __ZN4AMCP13Level_ControlC2ERNS_14System_ContextEj, 
-                       __ZN4AMCP13Level_ControlD0Ev, __ZN4AMCP13Level_ControlD1Ev, 
-                       __ZN4AMCP13Level_ControlD2Ev, __ZN4AMCP14Implementation20generate_type_markerERKSt9type_info, 
+                       __ZN4AMCP11Null_DriverD1Ev, __ZN4AMCP11Null_DriverD2Ev, __ZN4AMCP13Feature_Flags11run_new_halEv, 
+                       __ZN4AMCP13Feature_Flags12host_asp_oopEv, __ZN4AMCP13Feature_Flags15set_run_new_halEb, 
+                       __ZN4AMCP13Feature_Flags16set_host_asp_oopEb, __ZN4AMCP13Feature_Flags17event_link_oop_ioEv, 
+                       __ZN4AMCP13Feature_Flags19collect_io_perfdataEv, __ZN4AMCP13Feature_Flags20internal_drivers_oopEv, 
+                       __ZN4AMCP13Feature_Flags21set_event_link_oop_ioEb, __ZN4AMCP13Feature_Flags22allow_mcp_and_hal_coexEv, 
+                       __ZN4AMCP13Feature_Flags23set_collect_io_perfdataEb, __ZN4AMCP13Feature_Flags24set_internal_drivers_oopEb, 
+                       __ZN4AMCP13Feature_Flags26set_allow_mcp_and_hal_coexEb, __ZN4AMCP13Level_Control16set_scalar_valueEf, 
+                       __ZN4AMCP13Level_Control17set_decibel_valueEf, __ZN4AMCP13Level_Control25set_scalar_value_and_waitEf, 
+                       __ZN4AMCP13Level_Control26set_decibel_value_and_waitEf, __ZN4AMCP13Level_ControlC1ERKNS_6DeviceEjjj, 
+                       __ZN4AMCP13Level_ControlC1ERNS_14System_ContextEj, __ZN4AMCP13Level_ControlC2ERKNS_6DeviceEjjj, 
+                       __ZN4AMCP13Level_ControlC2ERNS_14System_ContextEj, __ZN4AMCP13Level_ControlD0Ev, 
+                       __ZN4AMCP13Level_ControlD1Ev, __ZN4AMCP13Level_ControlD2Ev, 
+                       __ZN4AMCP14Implementation20generate_type_markerERKSt9type_info, 
                        __ZN4AMCP14Slider_Control18set_value_and_waitEj, __ZN4AMCP14Slider_Control9set_valueEj, 
                        __ZN4AMCP14Slider_ControlC1ERKNS_6DeviceEjjj, __ZN4AMCP14Slider_ControlC1ERNS_14System_ContextEj, 
                        __ZN4AMCP14Slider_ControlC2ERKNS_6DeviceEjjj, __ZN4AMCP14Slider_ControlC2ERNS_14System_ContextEj, 
@@ -107,8 +128,14 @@ exports:
                        __ZN4AMCP3BoxC1ERNS_14System_ContextEN10applesauce2CF9StringRefE, 
                        __ZN4AMCP3BoxC1ERNS_14System_ContextEj, __ZN4AMCP3BoxC2ERNS_14System_ContextEN10applesauce2CF9StringRefE, 
                        __ZN4AMCP3BoxC2ERNS_14System_ContextEj, __ZN4AMCP3BoxD0Ev, 
-                       __ZN4AMCP3BoxD1Ev, __ZN4AMCP3BoxD2Ev, __ZN4AMCP40get_boolean_control_property_traits_listEv, 
-                       __ZN4AMCP41get_selector_control_property_traits_listEv, __ZN4AMCP43get_stereo_pan_control_property_traits_listEv, 
+                       __ZN4AMCP3BoxD1Ev, __ZN4AMCP3BoxD2Ev, __ZN4AMCP3HAL25get_hal_type_code_for_mcpENS_18Property_Type_CodeE, 
+                       __ZN4AMCP3HAL31hal_property_value_is_object_idEj, __ZN4AMCP3HAL32get_hal_property_value_type_codeEj, 
+                       __ZN4AMCP3HAL34translate_hal_value_to_mcp_by_typeERKN10applesauce2CF7DataRefENS0_22HAL_Property_Type_CodeENS_18Property_Type_CodeE, 
+                       __ZN4AMCP3HAL34translate_mcp_value_to_hal_by_typeERKNS_5ThingENS_18Property_Type_CodeENS0_22HAL_Property_Type_CodeE, 
+                       __ZN4AMCP3HAL35type_code_from_custom_property_typeEj, __ZN4AMCP3HAL36get_hal_property_qualifier_type_codeEj, 
+                       __ZN4AMCP3HAL39translate_hal_control_address_to_deviceEjjjRK26AudioObjectPropertyAddress, 
+                       __ZN4AMCP40get_boolean_control_property_traits_listEv, __ZN4AMCP41get_selector_control_property_traits_listEv, 
+                       __ZN4AMCP43get_stereo_pan_control_property_traits_listEv, 
                        __ZN4AMCP4Node19get_latency_handlerEv, __ZN4AMCP4Node19set_latency_handlerERKNSt3__18functionIFxvEEE, 
                        __ZN4AMCP4Node21get_client_io_handlerEv, __ZN4AMCP4Node21get_end_cycle_handlerEv, 
                        __ZN4AMCP4Node21get_tail_time_handlerEv, __ZN4AMCP4Node21set_client_io_handlerERKNSt3__18functionIFvjRKNS_15Proc_Cycle_InfoEmPNS_11Proc_StreamEmS7_EEE, 
@@ -155,7 +182,7 @@ exports:
                        __ZN4AMCP6System11get_node_idERKN10applesauce2CF9StringRefE, 
                        __ZN4AMCP6System12modify_graphERKNS_17Graph_DescriptionERKNS_25Modify_Graph_Destroy_ListE, 
                        __ZN4AMCP6System18get_wires_for_nodeEj, __ZN4AMCP6System18node_uid_is_uniqueERKN10applesauce2CF9StringRefE, 
-                       __ZN4AMCP6System19set_volume_for_wireERKNS_15Wire_IdentifierEfN2CA9TimeStampE, 
+                       __ZN4AMCP6System18update_power_stateENS_11Power_StateE, __ZN4AMCP6System19set_volume_for_wireERKNS_15Wire_IdentifierEfN2CA9TimeStampE, 
                        __ZN4AMCP6System22Config_Change_Observer5resetEv, __ZN4AMCP6System22Config_Change_ObserverC1ERNS_14System_ContextEy, 
                        __ZN4AMCP6System22Config_Change_ObserverC1ERNS_14System_ContextEyb, 
                        __ZN4AMCP6System22Config_Change_ObserverC2ERNS_14System_ContextEy, 
@@ -204,9 +231,14 @@ exports:
                        __ZN4AMCP9IOContext21set_buffer_frame_sizeEj, __ZN4AMCP9IOContext21set_client_io_handlerERKNSt3__18functionIFvjRKNS_15Proc_Cycle_InfoEmPNS_11Proc_StreamEmS7_EEE, 
                        __ZN4AMCP9IOContext23get_io_overload_handlerEv, __ZN4AMCP9IOContext23set_io_overload_handlerERKNSt3__18functionIFvjEEE, 
                        __ZN4AMCP9IOContext24get_work_interval_handleEv, __ZN4AMCP9IOContext24set_work_interval_handleERKP13work_interval, 
-                       __ZN4AMCP9IOContext26get_end_processing_handlerEv, __ZN4AMCP9IOContext26set_end_processing_handlerERKNSt3__18functionIFvjEEE, 
+                       __ZN4AMCP9IOContext25can_play_during_dark_wakeEv, __ZN4AMCP9IOContext26get_end_processing_handlerEv, 
+                       __ZN4AMCP9IOContext26set_end_processing_handlerERKNSt3__18functionIFvjEEE, 
                        __ZN4AMCP9IOContext27get_io_thread_error_handlerEv, __ZN4AMCP9IOContext27set_io_thread_error_handlerERKNSt3__18functionIFvvEEE, 
+                       __ZN4AMCP9IOContext29set_can_play_during_dark_wakeEb, __ZN4AMCP9IOContext33can_play_during_notification_wakeEv, 
                        __ZN4AMCP9IOContext33handle_overload_with_catchup_modeEb, 
+                       __ZN4AMCP9IOContext37get_should_resume_after_config_changeEv, 
+                       __ZN4AMCP9IOContext37set_can_play_during_notification_wakeEb, 
+                       __ZN4AMCP9IOContext37set_should_resume_after_config_changeEb, 
                        __ZN4AMCP9IOContextC1ERNS_14System_ContextEN10applesauce2CF9StringRefE, 
                        __ZN4AMCP9IOContextC1ERNS_14System_ContextEj, __ZN4AMCP9IOContextC2ERNS_14System_ContextEN10applesauce2CF9StringRefE, 
                        __ZN4AMCP9IOContextC2ERNS_14System_ContextEj, __ZN4AMCP9IOContextD0Ev, 
@@ -278,11 +310,14 @@ exports:
                        __ZNK4AMCP6System12get_box_listEv, __ZNK4AMCP6System13get_node_listEv, 
                        __ZNK4AMCP6System14get_clock_listEv, __ZNK4AMCP6System15get_device_listEv, 
                        __ZNK4AMCP6System15get_driver_listEv, __ZNK4AMCP6System19get_io_context_listEv, 
-                       __ZNK4AMCP6System31wait_for_notification_quiesenceEd, __ZNK4AMCP6System33create_end_config_change_observerERKNSt3__18functionIFvjRKNS1_5tupleIJNS1_6vectorIjNS1_9allocatorIjEEEES7_N5boost9container8flat_mapIjNS3_IJNSA_INS_7AddressENS_5ThingENSB_15Is_Exact_BeforeENS9_13new_allocatorINS1_4pairISB_SC_EEEEEESI_SI_EEENS1_4lessIjEENSE_INSF_IjSJ_EEEEEEEEEEEE, 
+                       __ZNK4AMCP6System31wait_for_notification_quiesenceEd, __ZNK4AMCP6System32create_ioc_graph_update_observerERKNSt3__14pairINS1_8functionIFNS2_INS_17Graph_DescriptionENS_25Modify_Graph_Destroy_ListEEEvEEENS3_IFvRKS4_EEEEE, 
+                       __ZNK4AMCP6System33create_end_config_change_observerERKNSt3__18functionIFvjRKNS1_5tupleIJNS1_6vectorIjNS1_9allocatorIjEEEES7_N5boost9container8flat_mapIjNS3_IJNSA_INS_7AddressENS_5ThingENSB_15Is_Exact_BeforeENS9_13new_allocatorINS1_4pairISB_SC_EEEEEESI_SI_EEENS1_4lessIjEENSE_INSF_IjSJ_EEEEEEEEEEEE, 
                        __ZNK4AMCP6System33create_end_config_change_observerERKNSt3__18functionIFvjbRKNS1_5tupleIJNS1_6vectorIjNS1_9allocatorIjEEEES7_N5boost9container8flat_mapIjNS3_IJNSA_INS_7AddressENS_5ThingENSB_15Is_Exact_BeforeENS9_13new_allocatorINS1_4pairISB_SC_EEEEEESI_SI_EEENS1_4lessIjEENSE_INSF_IjSJ_EEEEEEEEEEEE, 
                        __ZNK4AMCP6System35create_begin_config_change_observerERKNSt3__18functionIFvjEEE, 
                        __ZNK4AMCP6System35create_begin_config_change_observerERKNSt3__18functionIFvjbRKNS1_5tupleIJNS1_6vectorIjNS1_9allocatorIjEEEES7_N5boost9container8flat_mapIjNS3_IJNSA_INS_7AddressENS_5ThingENSB_15Is_Exact_BeforeENS9_13new_allocatorINS1_4pairISB_SC_EEEEEESI_SI_EEENS1_4lessIjEENSE_INSF_IjSJ_EEEEEEEEEEEE, 
                        __ZNK4AMCP6System35execute_task_against_config_changesERKNSt3__18functionIFvvEEE, 
+                       __ZNK4AMCP6System38find_devices_to_stop_for_config_changeEj, 
+                       __ZNK4AMCP6System40create_continuing_config_change_observerERKNSt3__18functionIFvjbRKNS1_5tupleIJNS1_6vectorIjNS1_9allocatorIjEEEES7_N5boost9container8flat_mapIjNS3_IJNSA_INS_7AddressENS_5ThingENSB_15Is_Exact_BeforeENS9_13new_allocatorINS1_4pairISB_SC_EEEEEESI_SI_EEENS1_4lessIjEENSE_INSF_IjSJ_EEEEEEEEEEEE, 
                        __ZNK4AMCP6System41execute_task_against_config_changes_asyncERKNSt3__18functionIFvvEEE, 
                        __ZNK4AMCP7Control11get_elementEv, __ZNK4AMCP7Control12is_read_onlyEv, 
                        __ZNK4AMCP7Control9get_scopeEv, __ZNK4AMCP9IOContext11get_latencyEv, 

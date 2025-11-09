@@ -65,6 +65,13 @@ UIKIT_EXTERN API_AVAILABLE(ios(8.0)) @interface UITraitCollection : NSObject <NS
 + (UITraitCollection *)traitCollectionWithLegibilityWeight:(UILegibilityWeight)legibilityWeight API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0));
 @property (nonatomic, readonly) UILegibilityWeight legibilityWeight API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0)); // unspecified: UILegibilityWeightUnspecified
 
+/* This trait indicates whether the UI should have an 'active' appearance.
+ * On macOS, this varies based on window activation state.
+ * On other platforms, this is always .active.
+ */
++ (UITraitCollection *)traitCollectionWithActiveAppearance:(UIUserInterfaceActiveAppearance)userInterfaceActiveAppearance API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+@property (nonatomic, readonly) UIUserInterfaceActiveAppearance activeAppearance API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));  // unspecified: UIUserInterfaceActiveAppearanceUnspecified
+
 @end
 
 /*! Trait environments expose a trait collection that describes their environment. */

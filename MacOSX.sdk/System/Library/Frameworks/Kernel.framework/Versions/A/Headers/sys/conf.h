@@ -221,12 +221,12 @@ __BEGIN_DECLS
 
 
 int  bdevsw_isfree(int);
-int  bdevsw_add(int, struct bdevsw *);
-int  bdevsw_remove(int, struct bdevsw *);
+int  bdevsw_add(int, const struct bdevsw *);
+int  bdevsw_remove(int, const struct bdevsw *);
 int  cdevsw_isfree(int);
-int  cdevsw_add(int, struct cdevsw *);
-int  cdevsw_add_with_bdev(int index, struct cdevsw * csw, int bdev);
-int  cdevsw_remove(int, struct cdevsw *);
+int  cdevsw_add(int, const struct cdevsw *);
+int  cdevsw_add_with_bdev(int index, const struct cdevsw * csw, int bdev);
+int  cdevsw_remove(int, const struct cdevsw *);
 int  isdisk(dev_t, int);
 __END_DECLS
 

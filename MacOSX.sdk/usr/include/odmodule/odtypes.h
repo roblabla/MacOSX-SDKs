@@ -335,6 +335,7 @@ odm_copy_auth_information(od_module_t module, od_moduleconfig_t moduleconfig, lo
                                                                  od_moduleconfig_t moduleconfig, CFTypeRef payload)
 ODM_CALLBACK_DECL(RecordCopyPasswordPolicy);
 ODM_CALLBACK_DECL(RecordVerifyPassword);
+ODM_CALLBACK_DECL(RecordVerifyPasswordWithOptions);
 ODM_CALLBACK_DECL(RecordVerifyPasswordExtended);
 ODM_CALLBACK_DECL(RecordChangePassword);
 ODM_CALLBACK_DECL(NodeVerifyCredentialsExtended);

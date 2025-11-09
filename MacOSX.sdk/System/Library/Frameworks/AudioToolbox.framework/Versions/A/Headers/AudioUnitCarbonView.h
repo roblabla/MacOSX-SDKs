@@ -138,7 +138,7 @@ AudioUnitCarbonViewCreate(	  AudioUnitCarbonView   inView,
 /*!
 	@function	AudioUnitCarbonViewSetEventListener
 	@abstract	Add an event listener to the carbon view.
-	@deprecated	in Mac OS X version 10.4
+	@deprecated	in macOS version 10.4
 	@discussion	Use the AUEventListener functions in <AudioToolbox/AudioUnitUtilities.h> instead.
 	
 	@param		inView

@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCapture/AVCaptureVideoDataOutput.h>)
 /*
     File:  AVCaptureVideoDataOutput.h
  
@@ -176,7 +177,7 @@ API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  @discussion
     The value of this property is a CMTime specifying the minimum duration of each video frame output by the receiver, placing a lower bound on the amount of time that should separate consecutive frames. This is equivalent to the inverse of the maximum frame rate. A value of kCMTimeZero or kCMTimeInvalid indicates an unlimited maximum frame rate. The default value is kCMTimeInvalid. As of iOS 5.0, minFrameDuration is deprecated. Use AVCaptureConnection's videoMinFrameDuration property instead.
  */
-@property(nonatomic) CMTime minFrameDuration API_DEPRECATED("Use AVCaptureConnection's videoMinFrameDuration property instead.", ios(4.0, 5.0)) API_UNAVAILABLE(macos, macCatalyst);
+@property(nonatomic) CMTime minFrameDuration API_DEPRECATED("Use AVCaptureConnection's videoMinFrameDuration property instead.", ios(4.0, 5.0)) API_UNAVAILABLE(macos) ;
 
 /*!
  @property alwaysDiscardsLateVideoFrames
@@ -262,3 +263,7 @@ API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCapture/AVCaptureVideoDataOutput.h>
+#endif

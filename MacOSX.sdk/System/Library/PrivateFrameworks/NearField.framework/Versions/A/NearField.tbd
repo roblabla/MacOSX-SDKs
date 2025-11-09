@@ -1,15 +1,22 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: DD6F0D7E-5709-35A1-8DBC-CF08167EBD20' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           2429C4BE-FCA1-3804-AEB3-6C2D94188BF0
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           DA8FA999-BCC9-3273-B813-626C3025D54F
 install-name:    '/System/Library/PrivateFrameworks/NearField.framework/Versions/A/NearField'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _NFSecureElementManagerSessionECDSACertificateKey, _NFSecureElementManagerSessionRSAACertificateKey, 
-                       _NFSignedPlatformData, _NFSignedPlatformSignatureBlob, _NfRestoreCopyUniqueFDRKey, 
-                       _ObliterationDeleteAllApplets, _PTErrorInternal, _PTErrorInvalidParameters, 
-                       _PTErrorKeyAlreadyExist, _PTErrorKeyNotFound, _PTErrorNoMemory, 
-                       ___PTErrorString ]
+                       _NFSignedPlatformData, _NFSignedPlatformSignatureBlob, _NF_SECURE_XPC_EVENT_KEY_EVENT_NAME, 
+                       _NF_SECURE_XPC_EVENT_KEY_EVENT_SIMPLE_NUMBER, _NF_SECURE_XPC_EVENT_KEY_EVENT_SIMPLE_STRING, 
+                       _NfRestoreCopyUniqueFDRKey, _ObliterationDeleteAllApplets, 
+                       _PTErrorInternal, _PTErrorInvalidParameters, _PTErrorKeyAlreadyExist, 
+                       _PTErrorKeyNotFound, _PTErrorNoMemory, ___PTErrorString ]
     objc-classes:    [ NFApplet, NFContactlessPaymentEndEvent, NFContactlessPaymentSession, 
                        NFContactlessPaymentSessionCallbacks, NFContactlessPaymentSessionInterface, 
                        NFContactlessPaymentStartEvent, NFContactlessSession, NFContactlessSessionCallbacks, 
@@ -18,12 +25,12 @@ exports:
                        NFFieldDetectSession, NFFieldDetectSessionInterfaceCallbacks, 
                        NFFieldNotification, NFFieldNotificationECP1_0, NFFieldNotificationECP2_0, 
                        NFHCESession, NFHardwareControllerInfo, NFHardwareManager, 
-                       NFHardwareManagerCallbacks, NFHardwareManagerInterface, NFHardwareSecureElementInfo, 
-                       NFLoyaltyAndPaymentSession, NFNdefMessage, NFNdefRecord, NFNdefTagSession, 
-                       NFPeerPaymentEnrollmentRequest, NFPeerPaymentEnrollmentResponse, 
-                       NFPeerPaymentRequest, NFPeerPaymentResponse, NFPeerPaymentSession, 
-                       NFPeerPaymentTransferRequest, NFReaderSession, NFReaderSessionCallbacks, 
-                       NFReaderSessionInterface, NFReaderSessionInternalInterface, 
+                       NFHardwareManagerCallbacks, NFHardwareManagerInterface, NFHardwareManagerXPC, 
+                       NFHardwareSecureElementInfo, NFLoyaltyAndPaymentSession, NFNdefMessage, 
+                       NFNdefRecord, NFNdefTagSession, NFPeerPaymentEnrollmentRequest, 
+                       NFPeerPaymentEnrollmentResponse, NFPeerPaymentRequest, NFPeerPaymentResponse, 
+                       NFPeerPaymentSession, NFPeerPaymentTransferRequest, NFReaderSession, 
+                       NFReaderSessionCallbacks, NFReaderSessionInterface, NFReaderSessionInternalInterface, 
                        NFRemoteAdminCardIngestionRequest, NFRemoteAdminManager, NFRemoteAdminManagerCallbacks, 
                        NFRemoteAdminManagerInterface, NFSecureElement, NFSecureElementAndHostCardEmulationSession, 
                        NFSecureElementManagerSession, NFSecureElementManagerSessionInterface, 

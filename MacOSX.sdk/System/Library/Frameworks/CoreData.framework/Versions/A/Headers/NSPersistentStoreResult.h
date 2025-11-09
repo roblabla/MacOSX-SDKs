@@ -1,7 +1,7 @@
 /*
     NSPersistentStoreResult.h
     Core Data
-    Copyright (c) 2004-2019, Apple Inc.
+    Copyright (c) 2014-2020, Apple Inc.
     All rights reserved.
 */
 
@@ -38,12 +38,12 @@ typedef NS_ENUM(NSUInteger, NSBatchDeleteRequestResultType) {
 
 
 typedef NS_ENUM(NSInteger, NSPersistentHistoryResultType) {
-    NSPersistentHistoryResultTypeStatusOnly = 0x0,
-    NSPersistentHistoryResultTypeObjectIDs = 0x1,   // Return the object IDs of the changes objects
-    NSPersistentHistoryResultTypeCount = 0x2,       // Return the number of changes
-    NSPersistentHistoryResultTypeTransactionsOnly = 0x3,// Return the transactions since
-    NSPersistentHistoryResultTypeChangesOnly = 0x4,     // Return the changes since
-    NSPersistentHistoryResultTypeTransactionsAndChanges = 0x5,// Return the transactions and changes since
+    NSPersistentHistoryResultTypeStatusOnly = 0x0,              // Return a status boolean
+    NSPersistentHistoryResultTypeObjectIDs = 0x1,               // Return the object IDs of the changes objects
+    NSPersistentHistoryResultTypeCount = 0x2,                   // Return the number of transactions
+    NSPersistentHistoryResultTypeTransactionsOnly = 0x3,        // Return NSPersistentHistoryTransaction objects
+    NSPersistentHistoryResultTypeChangesOnly = 0x4,             // Return NSPersistentHistoryChange objects
+    NSPersistentHistoryResultTypeTransactionsAndChanges = 0x5,  // Return NSPersistentHistoryTransaction objects with related NSPersistentHistoryChange objects
 } API_AVAILABLE(macosx(10.13),ios(11.0),tvos(11.0),watchos(4.0));
 
 // Used to wrap the result of whatever is returned by the persistent store coordinator when
@@ -117,6 +117,24 @@ API_AVAILABLE(macosx(10.13),ios(11.0),tvos(11.0),watchos(4.0))
 // Return the result. See NSPersistentHistoryResultType for options
 @property (nullable, strong, readonly) id result;
 @property (readonly) NSPersistentHistoryResultType resultType;
+
+@end
+
+typedef NS_ENUM(NSInteger, NSPersistentCloudKitContainerEventResultType) {
+    NSPersistentCloudKitContainerEventResultTypeEvents = 0, //the result is an NSArray<NSPersistentCloudKitContainerEvent *>
+    NSPersistentCloudKitContainerEventResultTypeCountEvents //the result is an NSArray<NSNumber *> indicating the count of events matching the request
+} API_AVAILABLE(macosx(11.0),ios(14.0),tvos(14.0),watchos(7.0)) NS_SWIFT_NAME(NSPersistentCloudKitContainerEventResult.ResultType);
+
+// The result returned when executing an NSPersistentCloudKitContainerEventRequest
+API_AVAILABLE(macosx(11.0),ios(14.0),tvos(14.0),watchos(7.0))
+@interface NSPersistentCloudKitContainerEventResult : NSPersistentStoreResult
+
+// Return the result. See NSPersistentCloudKitContainerEventResultType for options
+@property (nullable, strong, readonly) id result;
+@property (readonly) NSPersistentCloudKitContainerEventResultType resultType;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
 
 @end
 

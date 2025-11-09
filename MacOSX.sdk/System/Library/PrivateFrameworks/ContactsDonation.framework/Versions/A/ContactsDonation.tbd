@@ -1,10 +1,25 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 7595FC60-43C3-3C9E-9CAD-D6D5E9BD0F1F', 'x86_64: 7595FC60-43C3-3C9E-9CAD-D6D5E9BD0F1F' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           A804ED44-3007-31E2-81FE-5CD6F36FD490
+  - target:          x86_64-maccatalyst
+    value:           A804ED44-3007-31E2-81FE-5CD6F36FD490
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           4B2A497A-D3ED-3171-A6F8-D87E0FBAC57E
+  - target:          arm64e-maccatalyst
+    value:           4B2A497A-D3ED-3171-A6F8-D87E0FBAC57E
 install-name:    '/System/Library/PrivateFrameworks/ContactsDonation.framework/Versions/A/ContactsDonation'
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 0
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CNDDonationsEnabledNotificationName, _CNDDonationsEnabledPreferencesKey, 
                        _CNDSIMCardItemIdentifierTransform, _CNDSIMCardItemValueTransform, 
                        _CNDonationAccountsBundleIdentifier, _CNDonationCoreRoutineBundleIdentifier, 

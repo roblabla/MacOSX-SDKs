@@ -26,11 +26,11 @@ typedef NS_OPTIONS(NSUInteger, NSDataWritingOptions) {
     NSDataWritingAtomic = 1UL << 0,	// Hint to use auxiliary file when saving; equivalent to atomically:YES
     NSDataWritingWithoutOverwriting API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0)) = 1UL << 1, // Hint to  prevent overwriting an existing file. Cannot be combined with NSDataWritingAtomic.
 
-    NSDataWritingFileProtectionNone API_AVAILABLE(ios(4.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos)                                  = 0x10000000,
-    NSDataWritingFileProtectionComplete API_AVAILABLE(ios(4.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos)                              = 0x20000000,
-    NSDataWritingFileProtectionCompleteUnlessOpen API_AVAILABLE(ios(5.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos)                    = 0x30000000,
-    NSDataWritingFileProtectionCompleteUntilFirstUserAuthentication API_AVAILABLE(ios(5.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos)  = 0x40000000,
-    NSDataWritingFileProtectionMask API_AVAILABLE(ios(4.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos)                                  = 0xf0000000,
+    NSDataWritingFileProtectionNone API_AVAILABLE(macos(11.0), ios(4.0), watchos(2.0), tvos(9.0))                                  = 0x10000000,
+    NSDataWritingFileProtectionComplete API_AVAILABLE(macos(11.0), ios(4.0), watchos(2.0), tvos(9.0))                              = 0x20000000,
+    NSDataWritingFileProtectionCompleteUnlessOpen API_AVAILABLE(macos(11.0), ios(5.0), watchos(2.0), tvos(9.0))                    = 0x30000000,
+    NSDataWritingFileProtectionCompleteUntilFirstUserAuthentication API_AVAILABLE(macos(11.0), ios(5.0), watchos(2.0), tvos(9.0))  = 0x40000000,
+    NSDataWritingFileProtectionMask API_AVAILABLE(macos(11.0), ios(4.0), watchos(2.0), tvos(9.0))                                  = 0xf0000000,
 
     // Options with old names for NSData writing methods. Please stop using these old names.
     NSAtomicWrite API_DEPRECATED_WITH_REPLACEMENT("NSDataWritingAtomic", macos(10.0, API_TO_BE_DEPRECATED), ios(2.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) = NSDataWritingAtomic	    // Deprecated name for NSDataWritingAtomic
@@ -181,8 +181,8 @@ typedef NS_ENUM(NSInteger, NSDataCompressionAlgorithm) {
 
 /* These methods first appeared in NSData.h on OS X 10.9 and iOS 7.0. They are deprecated in the same releases in favor of the methods in the NSDataBase64Encoding category. However, these methods have existed for several releases, so they may be used for applications targeting releases prior to OS X 10.9 and iOS 7.0.
 */
-- (nullable id)initWithBase64Encoding:(NSString *)base64String API_DEPRECATED("Use initWithBase64EncodedString instead", macos(10.6,10.9), ios(4.0,7.0), watchos(2.0,2.0), tvos(9.0,9.0));
-- (NSString *)base64Encoding API_DEPRECATED("Use base64EncodedStringWithOptions instead", macos(10.6,10.9), ios(4.0,7.0), watchos(2.0,2.0), tvos(9.0,9.0));
+- (nullable id)initWithBase64Encoding:(NSString *)base64String API_DEPRECATED("Use initWithBase64EncodedString:options: instead", macos(10.6,10.9), ios(4.0,7.0), watchos(2.0,2.0), tvos(9.0,9.0));
+- (NSString *)base64Encoding API_DEPRECATED("Use base64EncodedStringWithOptions: instead", macos(10.6,10.9), ios(4.0,7.0), watchos(2.0,2.0), tvos(9.0,9.0));
 
 @end
 

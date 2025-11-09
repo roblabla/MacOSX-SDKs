@@ -1,23 +1,41 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 912CD3FA-F149-31AF-8B0E-C75EE75E80CD', 'x86_64: 912CD3FA-F149-31AF-8B0E-C75EE75E80CD' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           790908AD-0BB4-380A-9F0F-A61292172ED0
+  - target:          x86_64-maccatalyst
+    value:           790908AD-0BB4-380A-9F0F-A61292172ED0
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           B6E26F09-EFF6-3001-BD91-54E99BED7E70
+  - target:          arm64e-maccatalyst
+    value:           B6E26F09-EFF6-3001-BD91-54E99BED7E70
 install-name:    '/System/Library/PrivateFrameworks/FontServices.framework/libFontParser.dylib'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
+    weak-symbols:    [ __ZTINSt3__117bad_function_callE, __ZTSNSt3__114default_deleteI10MCacheDataEE, 
+                       __ZTSNSt3__117bad_function_callE ]
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CreateFontForScaler, _FPFontCanCreatePostScriptSubset, _FPFontCopyAllNames, 
                        _FPFontCopyCharacterSet, _FPFontCopyFamilyName, _FPFontCopyFullName, 
                        _FPFontCopyGlyphBitmap, _FPFontCopyGlyphNameForGlyph, _FPFontCopyGlyphPath, 
-                       _FPFontCopyMetadata, _FPFontCopyNames, _FPFontCopyOriginalGlyphPath, 
-                       _FPFontCopyPath, _FPFontCopyPostScriptName, _FPFontCopyRegistryOrderingSupplement, 
-                       _FPFontCopySplicedStash, _FPFontCopyTable, _FPFontCopyTableTags, 
-                       _FPFontCopyURLPerRegistryOrdering, _FPFontCreateCopyWithVariation, 
-                       _FPFontCreateFontSubset, _FPFontCreateFontsFromData, _FPFontCreateFontsWithPath, 
-                       _FPFontCreatePostScriptEncoding, _FPFontCreatePostScriptSubset, 
-                       _FPFontCreateWithData, _FPFontCreateWithDataAndExtra, _FPFontGetAscent, 
-                       _FPFontGetAverageAdvance, _FPFontGetBoundingBox, _FPFontGetCIDsForGlyphs, 
-                       _FPFontGetCapHeight, _FPFontGetDefaultInstance, _FPFontGetDescent, 
-                       _FPFontGetFontInfo, _FPFontGetFormat, _FPFontGetGlyphDeviceAdvance, 
+                       _FPFontCopyMetadata, _FPFontCopyNameTablePostScriptName, _FPFontCopyNames, 
+                       _FPFontCopyOriginalGlyphPath, _FPFontCopyPath, _FPFontCopyPostScriptName, 
+                       _FPFontCopyRegistryOrderingSupplement, _FPFontCopySplicedStash, 
+                       _FPFontCopyTable, _FPFontCopyTableTags, _FPFontCopyURLPerRegistryOrdering, 
+                       _FPFontCreateCopyWithVariation, _FPFontCreateFontSubset, _FPFontCreateFontsFromData, 
+                       _FPFontCreateFontsWithPath, _FPFontCreatePostScriptEncoding, 
+                       _FPFontCreatePostScriptSubset, _FPFontCreateVariationFromPostScriptNameSuffix, 
+                       _FPFontCreateWithData, _FPFontCreateWithDataAndExtra, _FPFontCreateWithPathAndName, 
+                       _FPFontGetAscent, _FPFontGetAverageAdvance, _FPFontGetBoundingBox, 
+                       _FPFontGetCIDsForGlyphs, _FPFontGetCapHeight, _FPFontGetDefaultInstance, 
+                       _FPFontGetDescent, _FPFontGetFontInfo, _FPFontGetFormat, _FPFontGetGlyphDeviceAdvance, 
                        _FPFontGetGlyphDeviceBounds, _FPFontGetGlyphDeviceVerticalAdvance, 
                        _FPFontGetGlyphDeviceVerticalBounds, _FPFontGetGlyphForGlyphName, 
                        _FPFontGetGlyphIdealAdvanceAndSideBearing, _FPFontGetGlyphIdealAdvanceWidth, 
@@ -26,8 +44,8 @@ exports:
                        _FPFontGetGlyphNameMaxLength, _FPFontGetGlyphVerticalTranslate, 
                        _FPFontGetGlyphsForCIDs, _FPFontGetGlyphsForCharacterRange, 
                        _FPFontGetGlyphsForGlyphNames, _FPFontGetGlyphsForText, _FPFontGetGlyphsForUnichars, 
-                       _FPFontGetGlyphsXo, _FPFontGetItalicAngle, _FPFontGetLineGap, 
-                       _FPFontGetMaximumAdvance, _FPFontGetMinimumLeftSideBearing, 
+                       _FPFontGetGlyphsXo, _FPFontGetInstanceNameID, _FPFontGetItalicAngle, 
+                       _FPFontGetLineGap, _FPFontGetMaximumAdvance, _FPFontGetMinimumLeftSideBearing, 
                        _FPFontGetMinimumRightSideBearing, _FPFontGetNumberOfGlyphs, 
                        _FPFontGetOS2UnicodeRanges, _FPFontGetPostScriptName, _FPFontGetStemH, 
                        _FPFontGetStemV, _FPFontGetTrueTypeEncoding, _FPFontGetTupleCount, 
@@ -37,9 +55,10 @@ exports:
                        _FPFontGetVariationScalar, _FPFontGetVariationScalars, _FPFontGetVariationValues, 
                        _FPFontGetVersion, _FPFontGetXHeight, _FPFontIsBitmapOnly, 
                        _FPFontIsItalic, _FPFontIsMonospaced, _FPFontIsNamedInstance, 
-                       _FPFontIsSFNT, _FPFontPurgeCaches, _FPFontRelease, _FPFontRetain, 
-                       _FPFontShouldAutoHint, _FPGetFontSubsetFormat, _FPTurnOffXoMetaData, 
-                       _ReleaseFontForScaler, __Z24FPGetStandardEncodingSIDh, __Z25FPGetStandardEncodingNameh, 
+                       _FPFontIsSFNT, _FPFontIsSuitcase, _FPFontPurgeCaches, _FPFontPurgeFromCaches, 
+                       _FPFontRelease, _FPFontRetain, _FPFontShouldAutoHint, _FPGetFontSubsetFormat, 
+                       _FPTurnOffXoMetaData, _ReleaseFontForScaler, _TTScalerOpen, 
+                       __Z24FPGetStandardEncodingSIDh, __Z25FPGetStandardEncodingNameh, 
                        __Z29GenerateGlyphNameForCIDPerROSt9TAdobeROSPc, __ZN10MCacheDataD0Ev, 
                        __ZN10MCacheDataD1Ev, __ZN10MCacheDataD2Ev, __ZN10TExceptionD0Ev, 
                        __ZN10TExceptionD1Ev, __ZN10TExceptionD2Ev, __ZN11TCharString8CharDataEv, 
@@ -62,17 +81,17 @@ exports:
                        __ZN14TFontSurrogateC2ERKS_, __ZN14TFontSurrogateC2Ev, __ZN14TFontSurrogateD0Ev, 
                        __ZN14TFontSurrogateD1Ev, __ZN14TFontSurrogateD2Ev, __ZN14TFontSurrogateaSERKS_, 
                        __ZN18TFileDataSurrogateC1EPK22TFileFragmentReference, __ZN18TFileDataSurrogateC1EPK22TFileFragmentReferenceb, 
-                       __ZN18TFileDataSurrogateC1EPKcb, __ZN18TFileDataSurrogateC1ERKS_, 
+                       __ZN18TFileDataSurrogateC1EPKc8timespec, __ZN18TFileDataSurrogateC1ERKS_, 
                        __ZN18TFileDataSurrogateC1Ev, __ZN18TFileDataSurrogateC2EPK22TFileFragmentReference, 
-                       __ZN18TFileDataSurrogateC2EPK22TFileFragmentReferenceb, __ZN18TFileDataSurrogateC2EPKcb, 
+                       __ZN18TFileDataSurrogateC2EPK22TFileFragmentReferenceb, __ZN18TFileDataSurrogateC2EPKc8timespec, 
                        __ZN18TFileDataSurrogateC2ERKS_, __ZN18TFileDataSurrogateC2Ev, 
                        __ZN18TFileDataSurrogateD0Ev, __ZN18TFileDataSurrogateD1Ev, 
                        __ZN18TFileDataSurrogateD2Ev, __ZN18TFileDataSurrogateaSERKS_, 
                        __ZN18TStrikeDescriptionC1Ev, __ZN18TStrikeDescriptionC2Ev, 
                        __ZN18TStrikeDescriptionD0Ev, __ZN18TStrikeDescriptionD1Ev, 
-                       __ZN18TStrikeDescriptionD2Ev, __ZN22TResourceForkSurrogateC1EPKcb, 
+                       __ZN18TStrikeDescriptionD2Ev, __ZN22TResourceForkSurrogateC1EPKc8timespecb, 
                        __ZN22TResourceForkSurrogateC1ERK26TResourceForkFileReference, 
-                       __ZN22TResourceForkSurrogateC2EPKcb, __ZN22TResourceForkSurrogateC2ERK26TResourceForkFileReference, 
+                       __ZN22TResourceForkSurrogateC2EPKc8timespecb, __ZN22TResourceForkSurrogateC2ERK26TResourceForkFileReference, 
                        __ZN22TResourceForkSurrogateD0Ev, __ZN22TResourceForkSurrogateD1Ev, 
                        __ZN22TResourceForkSurrogateD2Ev, __ZN26TResourceFileDataSurrogateC1ERK22TResourceForkSurrogate, 
                        __ZN26TResourceFileDataSurrogateC1ERK22TResourceForkSurrogatejPKh, 
@@ -120,11 +139,9 @@ exports:
                        __ZTV18TStrikeDescription, __ZTV22TResourceForkSurrogate, 
                        __ZTV26TResourceFileDataSurrogate, __ZTV26TResourceForkFileReference, 
                        __ZTV5THeap, __ZThn24_N26TResourceForkFileReferenceD0Ev, __ZThn24_N26TResourceForkFileReferenceD1Ev, 
-                       _dFPPrintTTableCache, _kFPFontCopyrightName, _kFPFontFamilyName, 
+                       _dFPPrintCaches, _kFPFontCopyrightName, _kFPFontFamilyName, 
                        _kFPFontFullName, _kFPFontPostscriptName, _kFPFontStyleName, 
                        _kFPFontTrademarkName, _kFPFontUniqueName, _kFPFontVersionName, 
                        _kFPNameKeyKind, _kFPNameKeyLanguage, _kFPNameKeyLocaleIdentifier, 
                        _kFPNameKeyPlatform, _kFPNameKeyScript, _kFPNameKeyString ]
-    weak-def-symbols: [ __ZTINSt3__117bad_function_callE, __ZTSNSt3__114default_deleteI10MCacheDataEE, 
-                        __ZTSNSt3__117bad_function_callE ]
 ...

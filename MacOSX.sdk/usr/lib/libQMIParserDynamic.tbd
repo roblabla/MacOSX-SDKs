@@ -1,10 +1,23 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 1B19C6D4-0E9A-3166-902B-46432045F61F' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           16B10ED8-4B5C-3318-8DF6-17EDAE8E0ACB
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           4D81828A-F2E6-3114-B9D1-656F39ADED72
 install-name:    '/usr/lib/libQMIParserDynamic.dylib'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos ]
+    weak-symbols:    [ __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ __ZN3qmi11MessageBase13validateMsgIdEt, __ZN3qmi11MessageBase14validateBufferEv, 
                        __ZN3qmi11MessageBase20sParsingErrorHandlerE, __ZN3qmi11MessageBase22setParsingErrorHandlerEPFbttPKhmE, 
                        __ZN3qmi11MessageBase4swapERS0_, __ZN3qmi11MessageBase8setErrorENS_5ErrorEb, 
@@ -15,8 +28,7 @@ exports:
                        __ZN3qmi11MessageBaseD1Ev, __ZN3qmi11MessageBaseD2Ev, __ZN3qmi11fixupHeaderERKNSt3__110shared_ptrINS_17SerializedMessageEEEhh, 
                        __ZN3qmi12ResponseBaseC1EPKvm, __ZN3qmi12ResponseBaseC2EPKvm, 
                        __ZN3qmi13createRequestEhNS_11buffer_viewE, __ZN3qmi13createRequestEhhttU13block_pointerFvPhmE, 
-                       __ZN3qmi15isInternalErrorENS_5ErrorE, __ZN3qmi16createRawRequestEhNS_11buffer_viewEm, 
-                       __ZN3qmi17validateTlvFieldsERNS_21RandomMessageReporterEPKvmS3_m, 
+                       __ZN3qmi15isInternalErrorENS_5ErrorE, __ZN3qmi17validateTlvFieldsERNS_21RandomMessageReporterEPKvmS3_m, 
                        __ZN3qmi17validateTlvFieldsERNS_21RandomMessageReporterERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEESA_, 
                        __ZN3qmi17validateTlvFieldsERNS_21RandomMessageReporterERKNSt3__16vectorIhNS2_9allocatorIhEEEES8_, 
                        __ZN3qmi17validateTlvFieldsERNS_21RandomMessageReporterEaa, 
@@ -63,10 +75,4 @@ exports:
                        __ZTSN3qmi20RandomMessageContextE, __ZTSN3qmi21RandomMessageReporterE, 
                        __ZTVN3qmi20RandomMessageBuilderE, __ZTVN3qmi20RandomMessageContextE, 
                        __ZTVN3qmi21RandomMessageReporterE ]
-    weak-def-symbols: [ __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                        __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                        __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                        __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                        __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                        __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE ]
 ...

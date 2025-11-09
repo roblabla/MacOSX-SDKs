@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVAnimation.h>)
 /*
     File:  AVAnimation.h
  
@@ -45,3 +46,7 @@ AVF_EXPORT AVLayerVideoGravity const AVLayerVideoGravityResizeAspectFill API_AVA
                     property of an AVPlayerLayer or AVCaptureVideoPreviewLayer instance.
  */
 AVF_EXPORT AVLayerVideoGravity const AVLayerVideoGravityResize API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+
+#else
+#import <AVFCore/AVAnimation.h>
+#endif

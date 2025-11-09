@@ -6,7 +6,7 @@
 //
 
 #import <TargetConditionals.h>
-#if TARGET_OS_OSX
+#if TARGET_OS_OSX && !TARGET_OS_MACCATALYST
 #import <Cocoa/Cocoa.h>
 #else
 #import <UIKit/UIKit.h>
@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger, BCChatButtonStyle) { BCChatButtonStyleLight = 0, BCCh
  BCChatButton is a button allowing users to initiate a conversation with a business.
  */
 API_AVAILABLE(macos(10.13.4), ios(11.3))
-#if TARGET_OS_OSX
+#if TARGET_OS_OSX && !TARGET_OS_MACCATALYST
 @interface BCChatButton : NSControl
 #else
 @interface BCChatButton : UIControl
@@ -37,6 +37,8 @@ API_AVAILABLE(macos(10.13.4), ios(11.3))
  @return BCChatButton instance.
  */
 - (instancetype)initWithStyle:(BCChatButtonStyle)style API_AVAILABLE(macos(10.13.4), ios(11.3))NS_DESIGNATED_INITIALIZER;
+
+- (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
 @end
 

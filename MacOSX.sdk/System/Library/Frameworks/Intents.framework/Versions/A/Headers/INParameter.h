@@ -2,7 +2,7 @@
 //  INParameter.h
 //  Intents
 //
-//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2020 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INInteraction.h>
@@ -13,11 +13,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface INInteraction ()
 
-- (nullable id)parameterValueForParameter:(INParameter *)parameter API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macosx, watchos);
+- (nullable id)parameterValueForParameter:(INParameter *)parameter API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 @end
 
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macosx, watchos)
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @interface INParameter : NSObject <NSSecureCoding, NSCopying>
 
 + (instancetype)parameterForClass:(Class)aClass keyPath:(NSString *)keyPath;

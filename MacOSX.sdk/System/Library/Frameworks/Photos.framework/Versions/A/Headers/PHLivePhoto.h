@@ -49,5 +49,11 @@ OS_EXPORT API_AVAILABLE(macos(10.12))
 
 @end
 
+API_AVAILABLE(ios(14))
+API_UNAVAILABLE(macos, tvos, watchos)
+@interface PHLivePhoto (NSItemProvider) <NSItemProviderReading>
+
+@end
+
 API_AVAILABLE_END
 NS_ASSUME_NONNULL_END

@@ -1,16 +1,30 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 36D0B0EE-1560-3F2C-8319-15EE073F7913', 'x86_64: 36D0B0EE-1560-3F2C-8319-15EE073F7913' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           A7436CF0-C8CD-39E4-99AD-7F6EA93E1D5D
+  - target:          x86_64-maccatalyst
+    value:           A7436CF0-C8CD-39E4-99AD-7F6EA93E1D5D
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           974BC971-9ED1-39ED-A8BB-58130F4815B8
+  - target:          arm64e-maccatalyst
+    value:           974BC971-9ED1-39ED-A8BB-58130F4815B8
 install-name:    '/System/Library/PrivateFrameworks/ChunkingLibrary.framework/Versions/A/ChunkingLibrary'
-current-version: 302
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 334
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CK2CalculateFileSignatureWithFlags, _CK2CalculateItemSignatureWithFlags, 
-                       _CKBeginImport, _CKCalculateChunkSignatureAndEncryptionKey, 
-                       _CKCalculateFileSignature, _CKCheckChunkStoreDB, _CKChunkCoderCreate, 
-                       _CKChunkCoderFinish, _CKChunkCoderUpdate, _CKChunkCryptorCreate, 
-                       _CKChunkCryptorFinish, _CKChunkCryptorUpdate, _CKChunkDigestArgumentsBoundaryKey, 
+                       _CKCalculateChunkSignatureAndEncryptionKey, _CKCalculateFileSignature, 
+                       _CKCheckChunkStoreDB, _CKChunkCoderCreate, _CKChunkCoderFinish, 
+                       _CKChunkCoderUpdate, _CKChunkCryptorCreate, _CKChunkCryptorFinish, 
+                       _CKChunkCryptorUpdate, _CKChunkDigestArgumentsBoundaryKey, 
                        _CKChunkDigestArgumentsChunkEncrypted, _CKChunkDigestArgumentsChunkEncryptionKeyScheme, 
                        _CKChunkDigestArgumentsChunkEncryptionKeySchemeByte, _CKChunkDigestArgumentsChunkScheme, 
                        _CKChunkDigestArgumentsChunkSchemeByte, _CKChunkDigestArgumentsGetClass, 
@@ -31,21 +45,23 @@ exports:
                        _CKChunkSignatureGeneratorUpdate, _CKChunkSignatureIsValidN, 
                        _CKChunkSignatureSize, _CKChunkSignaturesEqual, _CKChunkStoreCreate, 
                        _CKChunkStoreCreateAtFilesystemPath, _CKChunkStoreCreateAtFilesystemPathWithTmpDir, 
-                       _CKChunkStoreInvalidate, _CKChunkStoreRelease, _CKChunkStoreResetTestFlags, 
+                       _CKChunkStoreDefaultProfilerType, _CKChunkStoreInvalidate, 
+                       _CKChunkStoreRelease, _CKChunkStoreResetTestFlags, _CKChunkStoreSetDefaultProfilerType, 
                        _CKChunkStoreSetTestFlags, _CKChunkStoreTestFlags, _CKChunkTypeDescription, 
                        _CKChunkerProfileTypeDescription, _CKCleanChunkStoreDBForInode, 
                        _CKCommitChunkedFile, _CKCommitDatabaseTransactions, _CKCompactStorage, 
                        _CKConvertFileToChunked, _CKConvertTemporaryChunks, _CKCopyChunkCache, 
                        _CKCopyChunkListForStoredFileToken, _CKCopyDataForChunkID, 
                        _CKCreateChunkIDsFromFD, _CKCreateChunkIDsFromFile, _CKCreateRegisteredChunk, 
-                       _CKCreateStoredFile, _CKDecryptData, _CKEncryptData, _CKEncryptionKeySize, 
-                       _CKEndImport, _CKErrorCreateWithFormat, _CKExportChunklist, 
-                       _CKExportChunks, _CKFileDigestArgumentsBoundaryKey, _CKFileDigestArgumentsFileEncrypted, 
-                       _CKFileDigestArgumentsFileKey, _CKFileDigestArgumentsFileScheme, 
-                       _CKFileDigestArgumentsFileSchemeByte, _CKFileDigestArgumentsGetClass, 
-                       _CKFileDigestArgumentsV1WithFileCreate, _CKFileDigestArgumentsV1WithPackageCreate, 
-                       _CKFileDigestArgumentsV2WithBoundaryKeyCreate, _CKFileDigestArgumentsV2WithFileKeyCreate, 
-                       _CKFileDigestResultsCreate, _CKFileDigestResultsEqual, _CKFileDigestResultsFileLength, 
+                       _CKCreateStoredFile, _CKDecryptData, _CKDefaultProfilePolicyTypeDescription, 
+                       _CKDefaultProfilePolicyTypeFromString, _CKEncryptData, _CKEncryptionKeySize, 
+                       _CKErrorCreateWithFormat, _CKFileDigestArgumentsBoundaryKey, 
+                       _CKFileDigestArgumentsFileEncrypted, _CKFileDigestArgumentsFileKey, 
+                       _CKFileDigestArgumentsFileScheme, _CKFileDigestArgumentsFileSchemeByte, 
+                       _CKFileDigestArgumentsGetClass, _CKFileDigestArgumentsV1WithFileCreate, 
+                       _CKFileDigestArgumentsV1WithPackageCreate, _CKFileDigestArgumentsV2WithBoundaryKeyCreate, 
+                       _CKFileDigestArgumentsV2WithFileKeyCreate, _CKFileDigestResultsCreate, 
+                       _CKFileDigestResultsEqual, _CKFileDigestResultsFileLength, 
                        _CKFileDigestResultsFileSignature, _CKFileDigestResultsFileVerificationKey, 
                        _CKFileDigestResultsHasFileLength, _CKFileSchemeAndSignatureCopyCString, 
                        _CKFileSchemeAndSignatureSize, _CKFileSignatureCopy, _CKFileSignatureCreateWithHexString, 
@@ -55,17 +71,19 @@ exports:
                        _CKGetCacheBlobFd, _CKGetLocationOfChunkInStorage, _CKGetRegisteredChunk, 
                        _CKGetRegisteredChunks, _CKGetRegisteredChunksForFileSignature, 
                        _CKGetRegisteredChunksForItemID, _CKGetRegisteredFileItemID, 
-                       _CKGetRegisteredFileSignature, _CKGetRegisteredItems, _CKImportChunklist, 
-                       _CKImportChunks, _CKKeyForRegisteredChunk, _CKLibraryInit, 
+                       _CKGetRegisteredFileMetadata, _CKGetRegisteredFileSignature, 
+                       _CKGetRegisteredItems, _CKKeyForRegisteredChunk, _CKLibraryInit, 
                        _CKLockChunkStore, _CKLockChunks, _CKLongReadLockChunkStore, 
-                       _CKLongReadUnlockChunkStore, _CKReadLockChunkStore, _CKRegisterChunk, 
-                       _CKRegisterChunksForFileWithHint, _CKRegisterChunksForItem, 
-                       _CKRegisterFile, _CKRegisterItemAndChunks, _CKRegisterNeededChunk, 
-                       _CKRegisterTemporaryChunk, _CKRegisterTemporaryChunks, _CKRegisteredChunkAtIndex, 
-                       _CKRegisteredChunkIsEncrypted, _CKRegisteredChunkItemID, _CKRegisteredChunkKey, 
-                       _CKRegisteredChunkKeyCopyCString, _CKRegisteredChunkLength, 
-                       _CKRegisteredChunkLocation, _CKRegisteredChunkOffset, _CKRegisteredChunkRowID, 
-                       _CKRegisteredChunkSetItemID, _CKRegisteredChunkSetLength, 
+                       _CKLongReadUnlockChunkStore, _CKProfileResultsConfigurationVersion, 
+                       _CKProfileResultsCreate, _CKProfileResultsIsDefault, _CKProfileResultsResolvedFileExtension, 
+                       _CKProfileResultsType, _CKProfileTypeDescription, _CKProfileTypeFromString, 
+                       _CKReadLockChunkStore, _CKRegisterChunk, _CKRegisterChunksForFileWithHint, 
+                       _CKRegisterChunksForItem, _CKRegisterFile, _CKRegisterItemAndChunks, 
+                       _CKRegisterNeededChunk, _CKRegisterTemporaryChunk, _CKRegisterTemporaryChunks, 
+                       _CKRegisteredChunkAtIndex, _CKRegisteredChunkIsEncrypted, 
+                       _CKRegisteredChunkItemID, _CKRegisteredChunkKey, _CKRegisteredChunkKeyCopyCString, 
+                       _CKRegisteredChunkLength, _CKRegisteredChunkLocation, _CKRegisteredChunkOffset, 
+                       _CKRegisteredChunkRowID, _CKRegisteredChunkSetItemID, _CKRegisteredChunkSetLength, 
                        _CKRegisteredChunkSetLocation, _CKRegisteredChunkSetOffset, 
                        _CKRegisteredChunkSetRowID, _CKRegisteredChunkSignature, _CKRegisteredChunkSignatureCopyCString, 
                        _CKRegisteredChunkSize, _CKRegisteredChunkSuccessorOffset, 
@@ -80,5 +98,7 @@ exports:
                        _CKUnregisterTemporaryNChunk, _CKUnregisterTemporaryTChunk, 
                        _CKValidateSignature, _kCKChunkListCacheXattrName, _kCKCustomFixedChunkFileTypeHint, 
                        _kCKFileSignatureCacheMinFileSize, _kCKFileSignatureCacheXattrName, 
-                       _kCKItemChunkLength, _kChunkingLibraryErrorDomain ]
+                       _kCKItemChunkLength, _kCKItemChunkProfileConfigurationDefaultProfilePolicy, 
+                       _kCKItemChunkProfileConfigurationFileExtensionToProfileMap, 
+                       _kCKItemChunkProfileConfigurationVersion, _kChunkingLibraryErrorDomain ]
 ...

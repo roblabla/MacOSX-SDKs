@@ -52,7 +52,7 @@ class IOMemoryDescriptor;
 //	Class Declaration
 //-----------------------------------------------------------------------------
 
-class IODVDServices : public IODVDBlockStorageDevice
+class __exported IODVDServices : public IODVDBlockStorageDevice
 {
 	
 	OSDeclareDefaultStructors ( IODVDServices )

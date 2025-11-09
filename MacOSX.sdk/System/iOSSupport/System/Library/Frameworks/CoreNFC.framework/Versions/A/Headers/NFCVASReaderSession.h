@@ -16,6 +16,22 @@ NS_ASSUME_NONNULL_BEGIN
 @class NFCVASReaderSession;
 
 /*!
+ * @enum NFCVASMode
+ *
+ * @constant NFCVASModeURLOnly     Reserved.
+ * @constant NFCVASModeNormal      Full VAS protocol.
+ */
+typedef NS_ENUM(NSInteger, NFCVASMode) {
+    NFCVASModeURLOnly API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)    = 0,
+    NFCVASModeNormal API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)     = 1,
+    
+    VASModeURLOnly API_DEPRECATED_WITH_REPLACEMENT("NFCVASModeURLOnly", ios(13.0, 14.0))    = NFCVASModeURLOnly,
+    VASModeNormal API_DEPRECATED_WITH_REPLACEMENT("NFCVASModeNormal", ios(13.0, 14.0))      = NFCVASModeNormal,
+} API_AVAILABLE(ios(13.0));
+
+typedef NFCVASMode VASMode API_DEPRECATED_WITH_REPLACEMENT("NFCVASMode", ios(13.0, 14.0));
+
+/*!
  * @class NFCVASCommandConfiguration
  *
  * @discussion Configuration for one GET VAS DATA command.
@@ -24,35 +40,24 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
 @interface NFCVASCommandConfiguration : NSObject<NSCopying>
 
 /*!
- * @enum VASMode
- *
- * @constant VASModeURLOnly     URL VAS protocol only.
- * @constant VASModeNormal      Full VAS protocol.
- */
-typedef NS_ENUM(NSInteger, VASMode) {
-    VASModeURLOnly  = 0,
-    VASModeNormal   = 1,
-};
-
-/*!
  * @property mode
  * @discussion  VAS protocol mode.
  */
-@property (nonatomic, assign) VASMode mode;
+@property (nonatomic, assign) NFCVASMode mode API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
  * @property passTypeIdentifier
  * @discussion  Wallet Pass Type Identifier of the Wallet Pass.  The string value will be used to calculate the
  *              Merchant ID value for the GET VAS DATA command.
  */
-@property (nonatomic, retain) NSString *passTypeIdentifier;
+@property (nonatomic, retain) NSString *passTypeIdentifier API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
  * @property url
  * @discussion  Merchant URL object.  Maximum length of the URL is 64 characters, including the schema.
  *              Set to nil to disable the merchant URL.
  */
-@property (nonatomic, retain, nullable) NSURL *url;
+@property (nonatomic, retain, nullable) NSURL *url API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
  * @method initWithVASMode:passTypeIdentifier:url:
@@ -61,8 +66,35 @@ typedef NS_ENUM(NSInteger, VASMode) {
  * @param passTypeIdentifier    Pass type identifier of the Wallet pass.
  * @param url                   URL for VAR URL Only mode.  Set to <i>nil</i> for VAS normal mode.
  */
-- (instancetype)initWithVASMode:(VASMode)mode passTypeIdentifier:(NSString *)passTypeIdentifier url:(NSURL * _Nullable)url NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithVASMode:(NFCVASMode)mode passTypeIdentifier:(NSString *)passTypeIdentifier url:(NSURL * _Nullable)url NS_DESIGNATED_INITIALIZER;
 @end
+
+/*!
+ * @enum NFCVASErrorCode
+ *
+ * @discussion Response APDU status word.
+ */
+typedef NS_ENUM(NSInteger, NFCVASErrorCode) {
+    NFCVASErrorCodeSuccess API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)                        = 0x9000,
+    NFCVASErrorCodeDataNotFound API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)                   = 0x6A83,
+    NFCVASErrorCodeDataNotActivated API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)               = 0x6287,
+    NFCVASErrorCodeWrongParameters API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)                = 0x6B00,
+    NFCVASErrorCodeWrongLCField API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)                   = 0x6700,
+    NFCVASErrorCodeUserIntervention API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)               = 0x6984,
+    NFCVASErrorCodeIncorrectData API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)                  = 0x6A80,
+    NFCVASErrorCodeUnsupportedApplicationVersion API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)  = 0x6340,
+    
+    VASErrorCodeSuccess API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeSuccess", ios(13.0, 14.0))                                              = NFCVASErrorCodeSuccess,
+    VASErrorCodeDataNotFound API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeDataNotFound", ios(13.0, 14.0))                                    = NFCVASErrorCodeDataNotFound,
+    VASErrorCodeDataNotActivated API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeDataNotActivated", ios(13.0, 14.0))                            = NFCVASErrorCodeDataNotActivated,
+    VASErrorCodeWrongParameters API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeWrongParameters", ios(13.0, 14.0))                              = NFCVASErrorCodeWrongParameters,
+    VASErrorCodeWrongLCField API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeWrongLCField", ios(13.0, 14.0))                                    = NFCVASErrorCodeWrongLCField,
+    VASErrorCodeUserIntervention API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeUserIntervention", ios(13.0, 14.0))                            = NFCVASErrorCodeUserIntervention,
+    VASErrorCodeIncorrectData API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeIncorrectData", ios(13.0, 14.0))                                  = NFCVASErrorCodeIncorrectData,
+    VASErrorCodeUnsupportedApplicationVersion API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCodeUnsupportedApplicationVersion", ios(13.0, 14.0))  = NFCVASErrorCodeUnsupportedApplicationVersion,
+} API_AVAILABLE(ios(13.0));
+
+typedef NFCVASErrorCode VASErrorCode API_DEPRECATED_WITH_REPLACEMENT("NFCVASErrorCode", ios(13.0, 14.0));
 
 /*!
  * @class NFCVASResponse
@@ -73,41 +105,25 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
 @interface NFCVASResponse : NSObject<NSCopying>
 
 /*!
- * @enum VASErrorCode
- *
- * @discussion Response APDU status word.
- */
-typedef NS_ENUM(NSInteger, VASErrorCode) {
-    VASErrorCodeSuccess                         = 0x9000,
-    VASErrorCodeDataNotFound                    = 0x6A83,
-    VASErrorCodeDataNotActivated                = 0x6287,
-    VASErrorCodeWrongParameters                 = 0x6B00,
-    VASErrorCodeWrongLCField                    = 0x6700,
-    VASErrorCodeUserIntervention                = 0x6984,
-    VASErrorCodeIncorrectData                   = 0x6A80,
-    VASErrorCodeUnsupportedApplicationVersion   = 0x6340,
-};
-
-/*!
  * @property status
  *
  * @discussion Response APDU status.
  */
-@property (nonatomic, assign, readonly) VASErrorCode status;
+@property (nonatomic, assign, readonly) NFCVASErrorCode status API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
  * @property vasData
  *
  * @discussion VAS data.
  */
-@property (nonatomic, retain, readonly) NSData *vasData;
+@property (nonatomic, retain, readonly) NSData *vasData API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
  * @property mobileToken
  *
  * @discussion Mobile token value.
  */
-@property (nonatomic, retain, readonly) NSData *mobileToken;
+@property (nonatomic, retain, readonly) NSData *mobileToken API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 @end
 

@@ -1,12 +1,22 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 05604AFB-3338-3FE0-B425-CC70B688F285' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           4C24C48E-1111-3B8B-856F-E45F652B9E95
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           56A4871C-85B8-33CB-9076-B4A6FDFC481B
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/QuickLookUI.framework/Versions/A/QuickLookUI'
 current-version: 0
-exports:         
-  - archs:           [ x86_64 ]
-    re-exports:      [ '/System/Library/Frameworks/QuickLook.framework/Versions/A/QuickLook' ]
+reexported-libraries:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    libraries:       [ '/System/Library/Frameworks/QuickLook.framework/Versions/A/QuickLook' ]
+exports:
+  - targets:         [ x86_64-macos ]
+    weak-symbols:    [ __ZTINSt3__117bad_function_callE, __ZTSNSt3__117bad_function_callE ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _QLAXImageAndText_Image, _QLAXImageAndText_Text, _QLDisplayBundleDisplayStateCurrentPageKey, 
                        _QLDisplayBundleDisplayStateCurrentScrollKey, _QLDisplayBundleDisplayStateCurrentTimeKey, 
                        _QLDisplayBundleErrorDomain, _QLDisplayBundleErrorHideOpenButtonKey, 
@@ -22,13 +32,11 @@ exports:
                        _QLMediaUIUpdateBindings, _QLOpenButtonAppIconKey, _QLOpenButtonAppNameKey, 
                        _QLOpenButtonAppURLKey, _QLOpenButtonInfoApplicationsBlockKey, 
                        _QLOpenButtonInfoImageKey, _QLOpenButtonInfoTightTitleKey, 
-                       _QLOpenButtonInfoTitleKey, _QLPreviewControlLargeImageRescaleKey, 
-                       _QLPreviewControlLargeImageSizeKey, _QLPreviewControlSendActionOnMouseDownKey, 
+                       _QLOpenButtonInfoTitleKey, _QLPreviewControlLargeButtonPadding, 
+                       _QLPreviewControlLargeImageRescaleKey, _QLPreviewControlSendActionOnMouseDownKey, 
                        _QLPreviewControlSmallImageRescaleKey, _QLPreviewControlSmallImageSizeKey, 
                        _QLPreviewExtensionUIServiceInterface, _QLPreviewItemGetDefaultOpenButtonInfo, 
-                       _QLPreviewItemGetItemForPreview, _QLPreviewItemGetItemForThumbnail, 
-                       _QLPreviewItemLaunchURL, _QLPreviewItemSetItemForPreview, 
-                       _QLPreviewItemSetItemForThumbnail, _QLPreviewPanelDidChangeCurrentURLNotification, 
+                       _QLPreviewItemLaunchURL, _QLPreviewPanelDidChangeCurrentURLNotification, 
                        _QLPreviewPanelWillChangeCurrentURLNotification, _QLPreviewPropertyDisplayBundleScreenshotKey, 
                        _QLPreviewTestBehavior, _QLQTUICGContextAddRoundRect, _QLQTUICGContextDrawLayerFocusRing, 
                        _QLQTUICGContextDrawLayerInnerShadow, _QLQTUICGContextDrawLayerShadow, 
@@ -67,40 +75,42 @@ exports:
                        __getSeamlessOpeningQueue, _expectedClassesForPropertiesDictionaries, 
                        _kQLQTUITimelineSliderKnobRadius, _qlUILogHandles ]
     objc-classes:    [ QLAccessibilityUIElement, QLAnimationWindowEffect, QLArchivingHelper, 
-                       QLBubble, QLCenteredTextLayer, QLControlCommon, QLControlSegment, 
-                       QLControlSegmentedControl, QLCoreSpotlightExtensionPreview, 
+                       QLBubble, QLCatalystExtensionRemoteViewController, QLCenteredTextLayer, 
+                       QLControlCommon, QLControlSegment, QLControlSegmentedControl, 
                        QLCustomTextLayer, QLDisplayBundle, QLDisplayBundleContainerView, 
                        QLDisplayBundleLoader, QLDisplayBundleViewController, QLDrawingHelpers, 
-                       QLDynamicThumbnailLayer, QLEditingUtils, QLExtensionPreview, 
-                       QLExtensionRemoteViewController, QLExtensionUIManager, QLFadeWindowEffect, 
-                       QLImageAndTextDisplayBundle, QLImageAndTextLayer, QLImageAndTextPropertySlice, 
-                       QLImageAndTextViewController, QLInlinePreviewController, QLItem, 
-                       QLLayerBasedPreviewContainerView, QLLoadingLayer, QLMediaUIAccessibilityElement, 
-                       QLMediaUIConcreteValueTiming, QLMediaUIControl, QLMediaUIScrubber, 
-                       QLMediaUIValueTiming, QLModernAquaHUDBackgroudView, QLNonVibrantTextField, 
-                       QLOverlayButtonAccessibilityElement, QLPanelPreviewPanGestureRecognizer, 
-                       QLPopWindowEffect, QLPreviewBubble, QLPreviewCustomDocument, 
-                       QLPreviewDocument, QLPreviewDocumentDisplayBundle, QLPreviewDragController, 
-                       QLPreviewExtensionContext, QLPreviewExtensionDisplayBundle, 
-                       QLPreviewExtensionViewController, QLPreviewHighlight, QLPreviewHostExtensionContext, 
-                       QLPreviewImageWindow, QLPreviewMenuItem, QLPreviewNavigationController, 
-                       QLPreviewPageLayer, QLPreviewPageLoadingLayer, QLPreviewPageNavigationView, 
-                       QLPreviewPageNumberOverlayController, QLPreviewPanel, QLPreviewPanelController, 
-                       QLPreviewPanelManager, QLPreviewPanelTouchBarController, QLPreviewParts, 
-                       QLPreviewPathOverlayController, QLPreviewScroller, QLPreviewSizingUtils, 
-                       QLPreviewSlideshow, QLPreviewTextOverlayController, QLPreviewView, 
-                       QLProgressIndicatorLayer, QLQTUISlider, QLQTUITimelineSlider, 
-                       QLQTUITimelineSliderThumb, QLQTUIVolumeSlider, QLRemoteViewController, 
-                       QLScaleWindowEffect, QLSeamlessDocumentAnimator, QLSeamlessDocumentCloser, 
-                       QLSeamlessDocumentOpener, QLSeamlessOpener, QLSeamlessOpeningFakeCloserDelegate, 
-                       QLSeamlessOpeningItemInfo, QLSpotlightSharedAppearance, QLTextLayer, 
-                       QLThumbnailLayer, QLThumbnailRequest, QLThumbnailScrubberItemView, 
-                       QLThumbnailTouchbarController, QLTimeSlider, QLTimeSliderTimeFieldAccessibilityElement, 
-                       QLTooltipTextFieldCell, QLTransformWindowEffect, QLTransitionWindow, 
-                       QLUIHelperObject, QLUIServiceBaseDisplayBundle, QLUIServiceBaseViewController, 
+                       QLDynamicThumbnailLayer, QLEditingUtils, QLExtensionRemoteViewController, 
+                       QLExtensionUIManager, QLFadeWindowEffect, QLImageAndTextDisplayBundle, 
+                       QLImageAndTextDisplayBundleViewController, QLImageAndTextLayer, 
+                       QLImageAndTextPropertySlice, QLImageAndTextViewController, 
+                       QLIndexSheetView, QLInlinePreviewController, QLItem, QLLayerBasedPreviewContainerView, 
+                       QLLoadingView, QLMediaUIAccessibilityElement, QLMediaUIConcreteValueTiming, 
+                       QLMediaUIControl, QLMediaUIScrubber, QLMediaUIValueTiming, 
+                       QLModernAquaHUDBackgroudView, QLNonVibrantTextField, QLOverlayButtonAccessibilityElement, 
+                       QLPanelPreviewPanGestureRecognizer, QLPopWindowEffect, QLPreviewBubble, 
+                       QLPreviewCustomDocument, QLPreviewDocument, QLPreviewDocumentDisplayBundle, 
+                       QLPreviewDragController, QLPreviewExtensionDisplayBundle, 
+                       QLPreviewExtensionDisplayBundleViewController, QLPreviewExtensionHostContext, 
+                       QLPreviewExtensionServiceContext_mac, QLPreviewExtensionViewController, 
+                       QLPreviewHighlight, QLPreviewImageWindow, QLPreviewMenuItem, 
+                       QLPreviewNavigationController, QLPreviewPageLayer, QLPreviewPageLoadingLayer, 
+                       QLPreviewPageNavigationView, QLPreviewPageNumberOverlayController, 
+                       QLPreviewPanel, QLPreviewPanelController, QLPreviewPanelManager, 
+                       QLPreviewPanelTouchBarController, QLPreviewParts, QLPreviewPathOverlayController, 
+                       QLPreviewScroller, QLPreviewSizingUtils, QLPreviewSlideshow, 
+                       QLPreviewTextOverlayController, QLPreviewView, QLProgressIndicatorLayer, 
+                       QLQTUISlider, QLQTUITimelineSlider, QLQTUITimelineSliderThumb, 
+                       QLQTUIVolumeSlider, QLRemoteViewController, QLScaleWindowEffect, 
+                       QLSeamlessDocumentAnimator, QLSeamlessDocumentCloser, QLSeamlessDocumentOpener, 
+                       QLSeamlessOpener, QLSeamlessOpeningFakeCloserDelegate, QLSeamlessOpeningItemInfo, 
+                       QLSpotlightSharedAppearance, QLTextLayer, QLThumbnailLayer, 
+                       QLThumbnailRequest, QLThumbnailScrubberItemView, QLThumbnailTouchbarController, 
+                       QLTimeSlider, QLTimeSliderTimeFieldAccessibilityElement, QLTooltipTextFieldCell, 
+                       QLTransformWindowEffect, QLTransitionWindow, QLUIHelperObject, 
+                       QLUIServiceBaseDisplayBundle, QLUIServiceBaseViewController, 
                        QLUIServiceEditToolbarHostViewController, QLUIServiceHostViewController, 
-                       QLUIServiceView, QLURLExtensionPreview, QLVibrantView, QLWarpingWindowEffect, 
-                       QLWindowEffect, QLWindowEffectsLibrary ]
+                       QLUIServiceView, QLVibrantView, QLWarpingWindowEffect, QLWindowEffect, 
+                       QLWindowEffectsLibrary ]
     objc-ivars:      [ QLBubble._reserved, QLControlCommon._canShowMenu, QLControlCommon._controlIdentifier, 
                        QLControlCommon._menuProvider, QLControlCommon._menuTimer, 
                        QLControlCommon._qlControl, QLControlCommon._tooltipWindow, 
@@ -212,5 +222,4 @@ exports:
                        QLTransformWindowEffect._initialTransform, QLUIHelperObject._port, 
                        QLUIHelperObject._serverPort, QLUIServiceBaseDisplayBundle._remoteViewController, 
                        QLWarpingWindowEffect._pointBlock, QLWarpingWindowEffect._setupBlock ]
-    weak-def-symbols: [ __ZTINSt3__117bad_function_callE, __ZTSNSt3__117bad_function_callE ]
 ...

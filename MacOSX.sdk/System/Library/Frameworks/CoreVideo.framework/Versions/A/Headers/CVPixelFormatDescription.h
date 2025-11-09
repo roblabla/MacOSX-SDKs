@@ -111,7 +111,7 @@ CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatQDCompatibility API_AVAILAB
 CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatCGBitmapContextCompatibility API_AVAILABLE(macosx(10.4), ios(4.0), tvos(9.0), watchos(4.0));
 CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatCGImageCompatibility API_AVAILABLE(macosx(10.4), ios(4.0), tvos(9.0), watchos(4.0));
 CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatOpenGLCompatibility API_AVAILABLE(macosx(10.4), ios(4.0), tvos(9.0), watchos(4.0));
-CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatOpenGLESCompatibility API_AVAILABLE(ios(5.0), tvos(9.0)) API_UNAVAILABLE(macosx, macCatalyst) __WATCHOS_PROHIBITED;
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatOpenGLESCompatibility API_AVAILABLE(ios(5.0), tvos(9.0)) API_UNAVAILABLE(macosx) API_UNAVAILABLE(macCatalyst) __WATCHOS_PROHIBITED;
     
 /* This callback routine implements code to handle the functionality of CVPixelBufferFillExtendedPixels.  
    For custom pixel formats where you will never need to use that call, this is not required. */
@@ -138,7 +138,11 @@ CV_EXPORT void CVPixelFormatDescriptionRegisterDescriptionWithPixelFormatType(CF
 CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatDirect3DFormat;
 CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatDirect3DType;
 CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatDirect3DInternalFormat;
-CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatDirect3DCompatibility;	
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatDirect3DCompatibility;
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatDXGICompatibility;
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatDXGIFormat;
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatDXGIType;
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatDXGIInternalFormat;
 #endif
 
 #if defined(__cplusplus)

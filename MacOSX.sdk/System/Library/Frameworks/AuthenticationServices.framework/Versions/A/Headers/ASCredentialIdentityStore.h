@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class ASCredentialIdentityStoreState;
 @class ASPasswordCredentialIdentity;
 
-AS_EXTERN API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macCatalyst, macos, tvos, watchos)
+AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(14.0), macos(11.0)) API_UNAVAILABLE(tvos, watchos)
 NSErrorDomain const ASCredentialIdentityStoreErrorDomain;
 
 /*! @enum ASCredentialIdentityStoreErrorCode
@@ -25,9 +25,9 @@ typedef NS_ERROR_ENUM(ASCredentialIdentityStoreErrorDomain, ASCredentialIdentity
     ASCredentialIdentityStoreErrorCodeInternalError = 0,
     ASCredentialIdentityStoreErrorCodeStoreDisabled = 1,
     ASCredentialIdentityStoreErrorCodeStoreBusy = 2,
-} API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macCatalyst, macos, tvos, watchos);
+} API_AVAILABLE(ios(12.0), macCatalyst(14.0), macos(11.0)) API_UNAVAILABLE(tvos, watchos);
 
-AS_EXTERN API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macCatalyst, macos, tvos, watchos)
+AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(14.0), macos(11.0)) API_UNAVAILABLE(tvos, watchos)
 @interface ASCredentialIdentityStore : NSObject
 
 @property (class, nonatomic, readonly) ASCredentialIdentityStore *sharedStore;

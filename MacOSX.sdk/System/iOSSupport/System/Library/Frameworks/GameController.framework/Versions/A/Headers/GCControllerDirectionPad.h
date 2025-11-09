@@ -5,12 +5,12 @@
 //  Copyright (c) 2012 Apple Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 
-#import <GameController/GameController.h>
+#import <GameController/GCControllerElement.h>
 
 @class GCControllerAxisInput;
 @class GCControllerButtonInput;
+#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
  A direction pad is a common grouping of 2 axis inputs where the input can also be interpreted as 2 sets of mutually exclusive button pairs.
  Only one button in each pair, {up, down} and {left, right}, can be pressed at any one time.
  */
-GAMECONTROLLER_EXPORT
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(7.0))
 @interface GCControllerDirectionPad : GCControllerElement
 
 /**
@@ -49,7 +49,7 @@ typedef void (^GCControllerDirectionPadValueChangedHandler)(GCControllerDirectio
  @see value
  @see pressed
  */
-- (void)setValueForXAxis:(float)xAxis yAxis:(float)yAxis;
+- (void)setValueForXAxis:(float)xAxis yAxis:(float)yAxis API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0));
 
 @end
 

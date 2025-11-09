@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVMetadataFormat.h>)
 /*
     File:  AVMetadataFormat.h
 
@@ -41,6 +42,7 @@ AVF_EXPORT AVMetadataKey const AVMetadataCommonKeyArtwork                       
 AVF_EXPORT AVMetadataKey const AVMetadataCommonKeyMake                                       API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 AVF_EXPORT AVMetadataKey const AVMetadataCommonKeyModel                                      API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 AVF_EXPORT AVMetadataKey const AVMetadataCommonKeySoftware                                   API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
+AVF_EXPORT AVMetadataKey const AVMetadataCommonKeyAccessibilityDescription                   API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0));
 
 // QuickTimeUserData
 AVF_EXPORT AVMetadataFormat const AVMetadataFormatQuickTimeUserData                          API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
@@ -85,6 +87,7 @@ AVF_EXPORT AVMetadataKey const AVMetadataQuickTimeUserDataKeyTrackName          
 AVF_EXPORT AVMetadataKey const AVMetadataQuickTimeUserDataKeyCredits                         API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 AVF_EXPORT AVMetadataKey const AVMetadataQuickTimeUserDataKeyPhonogramRights                 API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 AVF_EXPORT AVMetadataKey const AVMetadataQuickTimeUserDataKeyTaggedCharacteristic            API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
+AVF_EXPORT AVMetadataKey const AVMetadataQuickTimeUserDataKeyAccessibilityDescription        API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0));
 
 // ISO UserData
 AVF_EXPORT AVMetadataFormat const AVMetadataFormatISOUserData                                API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
@@ -100,6 +103,7 @@ AVF_EXPORT AVMetadataKey const AVMetadataISOUserDataKeyTaggedCharacteristic     
  @discussion	The value is date and time, formatted according to ISO 8601, when the content was created. For clips captured by recording devices, this is typically the date and time when the clip’s recording started. When stored in AV(Mutable)MetadataItem, the value type must be either NSDate or NSString. When NSString is used, the value uses one of ISO 8601 formats such as "2016-01-11T17:31:10Z".
 */
 AVF_EXPORT AVMetadataKey const AVMetadataISOUserDataKeyDate                                  API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
+AVF_EXPORT AVMetadataKey const AVMetadataISOUserDataKeyAccessibilityDescription              API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0));
 AVF_EXPORT AVMetadataKey const AVMetadata3GPUserDataKeyCopyright                             API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 AVF_EXPORT AVMetadataKey const AVMetadata3GPUserDataKeyAuthor                                API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 AVF_EXPORT AVMetadataKey const AVMetadata3GPUserDataKeyPerformer                             API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
@@ -162,6 +166,7 @@ AVF_EXPORT AVMetadataKey const AVMetadataQuickTimeMetadataKeyLocationDate       
 AVF_EXPORT AVMetadataKey const AVMetadataQuickTimeMetadataKeyDirectionFacing                 API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0));
 AVF_EXPORT AVMetadataKey const AVMetadataQuickTimeMetadataKeyDirectionMotion                 API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0));
 AVF_EXPORT AVMetadataKey const AVMetadataQuickTimeMetadataKeyContentIdentifier               API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
+AVF_EXPORT AVMetadataKey const AVMetadataQuickTimeMetadataKeyAccessibilityDescription        API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0));
 
 // iTunesMetadata
 AVF_EXPORT AVMetadataFormat const AVMetadataFormatiTunesMetadata                             API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
@@ -360,3 +365,7 @@ AVF_EXPORT AVMetadataExtraAttributeKey const AVMetadataExtraAttributeBaseURIKey 
  */
 AVF_EXPORT AVMetadataExtraAttributeKey const AVMetadataExtraAttributeInfoKey                 API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
 
+
+#else
+#import <AVFCore/AVMetadataFormat.h>
+#endif

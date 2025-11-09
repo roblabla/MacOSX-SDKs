@@ -43,6 +43,7 @@ typedef NS_ENUM(NSUInteger, NSHTTPCookieAcceptPolicy) {
     generate cookie-related HTTP header fields.
 */
 
+API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 @interface NSHTTPCookieStorage : NSObject
 {
     @private
@@ -155,12 +156,12 @@ typedef NS_ENUM(NSUInteger, NSHTTPCookieAcceptPolicy) {
     distributed notification center whenever the accept cookies
     preference is changed
 */
-FOUNDATION_EXPORT NSNotificationName const NSHTTPCookieManagerAcceptPolicyChangedNotification;
+FOUNDATION_EXPORT NSNotificationName const NSHTTPCookieManagerAcceptPolicyChangedNotification API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
     @const NSHTTPCookieManagerCookiesChangedNotification
     @abstract Notification sent when the set of cookies changes
 */
-FOUNDATION_EXPORT NSNotificationName const NSHTTPCookieManagerCookiesChangedNotification;
+FOUNDATION_EXPORT NSNotificationName const NSHTTPCookieManagerCookiesChangedNotification API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
 
 NS_ASSUME_NONNULL_END

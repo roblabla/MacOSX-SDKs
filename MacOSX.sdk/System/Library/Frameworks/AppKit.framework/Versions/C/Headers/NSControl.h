@@ -9,9 +9,10 @@
 #import <AppKit/NSView.h>
 #import <AppKit/NSText.h>
 #import <AppKit/NSCell.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSCell, NSFont, NSTextView, NSNotification, NSAttributedString, NSFormatter;
 
@@ -55,13 +56,10 @@ API_UNAVAILABLE_BEGIN(ios)
 - (void)mouseDown:(NSEvent *)event;
 - (void)performClick:(nullable id)sender;
 
-@end
-
-/* The following category applies only to controls with apparent textual content of some sort (buttons with labels, textfields, etc.).
+/* The following methods apply only to controls with apparent textual content of some sort (buttons with labels, textfields, etc.).
  */
-@interface NSControl(NSControlTextMethods)
-
 @property (nullable, copy) NSFont *font;
+
 @property BOOL usesSingleLineMode API_AVAILABLE(macos(10.10));
 
 #if !TARGET_OS_IPHONE
@@ -84,7 +82,6 @@ API_UNAVAILABLE_BEGIN(ios)
 - (void)drawWithExpansionFrame:(NSRect)contentFrame inView:(NSView *)view API_AVAILABLE(macos(10.10));
 
 @end
-
 
 /* The following category applies only to controls with editable text, like NSTextField.
  */
@@ -134,7 +131,7 @@ APPKIT_EXTERN NSNotificationName NSControlTextDidChangeNotification;		//	@"NSFie
 - (nullable __kindof NSCell *)selectedCell;
 - (NSInteger)selectedTag;
 
-- (void)setNeedsDisplay API_DEPRECATED("Use setNeedsDisplay:YES instead", macos(10.0,10.14));
+- (void)setNeedsDisplay API_DEPRECATED("Set the needsDisplay property to YES instead", macos(10.0,10.14));
 - (void)calcSize API_DEPRECATED("Override -layout instead. This method should never be called", macos(10.0,10.14));
 
 - (void)updateCell:(NSCell *)cell;
@@ -147,9 +144,9 @@ APPKIT_EXTERN NSNotificationName NSControlTextDidChangeNotification;		//	@"NSFie
 
 #if __swift__ < 40200
 @interface NSObject(NSControlSubclassNotifications)
-- (void)controlTextDidBeginEditing:(NSNotification *)obj API_DEPRECATED("This is now an optional method of the NSControlTextEditingDelegate protocol.", macos(10.0,API_TO_BE_DEPRECATED));
-- (void)controlTextDidEndEditing:(NSNotification *)obj API_DEPRECATED("This is now an optional method of the NSControlTextEditingDelegate protocol.", macos(10.0,API_TO_BE_DEPRECATED));
-- (void)controlTextDidChange:(NSNotification *)obj API_DEPRECATED("This is now an optional method of the NSControlTextEditingDelegate protocol.", macos(10.0,API_TO_BE_DEPRECATED));
+- (void)controlTextDidBeginEditing:(NSNotification *)obj API_DEPRECATED("This is now an optional method of the NSControlTextEditingDelegate protocol.", macos(10.0, 11.0));
+- (void)controlTextDidEndEditing:(NSNotification *)obj API_DEPRECATED("This is now an optional method of the NSControlTextEditingDelegate protocol.", macos(10.0, 11.0));
+- (void)controlTextDidChange:(NSNotification *)obj API_DEPRECATED("This is now an optional method of the NSControlTextEditingDelegate protocol.", macos(10.0, 11.0));
 @end
 #endif
 

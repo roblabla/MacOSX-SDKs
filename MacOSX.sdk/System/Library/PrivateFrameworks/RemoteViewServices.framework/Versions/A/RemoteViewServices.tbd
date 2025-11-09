@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 23522111-2741-3F60-B17F-4A7D9E492F6E' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           9078CCE3-F2F8-375B-9D02-5D3817B62E4C
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           9FB620E8-8F91-3EC8-8029-2D2B55F023E6
 install-name:    '/System/Library/PrivateFrameworks/RemoteViewServices.framework/Versions/A/RemoteViewServices'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _GetNSWindowDescriptionString, _NSPBOXSessionMessageSetPresentationOptionsParamKey, 
                        _NSRemotePanelOrderPlaceAndChangeKeyKey, _NSRemotePanelOrderPlaceJustOrderOutKey, 
                        _NSRemotePanelOrderPlaceKey, _NSRemotePanelReplyDelegateErrorCodeKey, 
@@ -34,8 +40,8 @@ exports:
                        _NSRemoteTitlebarRenamingSessionAutosavebuttonWindowConnectionKey, 
                        _NSRemoteTitlebarRenamingSessionAutosavebuttonWindowFrameKey, 
                        _NSRemoteTitlebarRenamingSessionAutosavebuttonWindowSizeKey, 
-                       _NSRemoteTitlebarRenamingSessionDidCancelWithSuccessKey, _NSRemoteTitlebarRenamingSessionDidCompleteNormallyKey, 
-                       _NSRemoteTitlebarRenamingSessionDocumentIconWindowConnectionKey, 
+                       _NSRemoteTitlebarRenamingSessionCentersTextKey, _NSRemoteTitlebarRenamingSessionDidCancelWithSuccessKey, 
+                       _NSRemoteTitlebarRenamingSessionDidCompleteNormallyKey, _NSRemoteTitlebarRenamingSessionDocumentIconWindowConnectionKey, 
                        _NSRemoteTitlebarRenamingSessionDocumentIconWindowFrameKey, 
                        _NSRemoteTitlebarRenamingSessionEditingModeKey, _NSRemoteTitlebarRenamingSessionEditingRangeKey, 
                        _NSRemoteTitlebarRenamingSessionFileExtensionKey, _NSRemoteTitlebarRenamingSessionFlagsKey, 
@@ -43,8 +49,9 @@ exports:
                        _NSRemoteTitlebarRenamingSessionRenameFieldAccessibilityTokenKey, 
                        _NSRemoteTitlebarRenamingSessionRequestPathKey, _NSRemoteTitlebarRenamingSessionSandboxExtensionTokenKey, 
                        _NSRemoteTitlebarRenamingSessionSelectedRangeEndKey, _NSRemoteTitlebarRenamingSessionSelectedRangeKey, 
-                       _NSRemoteTitlebarRenamingSessionSelectedRangeStartKey, _NSRemoteTitlebarRenamingSessionTitleKey, 
-                       _NSRemoteTitlebarRenamingSessionTitlebarRectKey, _NSRemoteTitlebarRenamingSessionWindowAccessibilityTokenKey, 
+                       _NSRemoteTitlebarRenamingSessionSelectedRangeStartKey, _NSRemoteTitlebarRenamingSessionTitleFontKey, 
+                       _NSRemoteTitlebarRenamingSessionTitleKey, _NSRemoteTitlebarRenamingSessionTitlebarRectKey, 
+                       _NSRemoteTitlebarRenamingSessionWindowAccessibilityTokenKey, 
                        _NSRemoteTitlebarRenamingSessionWindowFrameKey, _NSRemoteTitlebarRenamingStartDisplayNameKey, 
                        _NSRemoteTitlebarRenamingTitleWasChosenAutomaticallyKey, _NSRemoteTitlebarRenamingUniquingNumberEndKey, 
                        _NSRemoteTitlebarRenamingUniquingNumberStartKey, _NSRemoteTitlebarRenamingUserEditedDisplayNameKey, 
@@ -91,8 +98,8 @@ exports:
                        NSRVS_Deallocator._blocks, NSRemotePanel._alertInformationMessage, 
                        NSRemotePanel._alertMessage, NSRemotePanel._appearanceCustomizer, 
                        NSRemotePanel._completionHandler, NSRemotePanel._currentErrorBeingHandled, 
-                       NSRemotePanel._delegate, NSRemotePanel._orderingContext, NSRemotePanel._prompt, 
-                       NSRemotePanel._rpFlags, NSRemotePanel._semaphore, NSRemotePanel._serviceConnection, 
+                       NSRemotePanel._orderingContext, NSRemotePanel._prompt, NSRemotePanel._rpFlags, 
+                       NSRemotePanel._semaphore, NSRemotePanel._serviceConnection, 
                        NSRemotePanel._serviceQueue, NSRemotePanel._state, NSRemotePanel._title, 
                        NSRemotePanel._windowController, NSRemotePanelOrderingContext._completionHandler, 
                        NSRemotePanelOrderingContext._didOrderOnScreenNotificationToken, 

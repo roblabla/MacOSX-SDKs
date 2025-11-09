@@ -2,9 +2,6 @@
 //  ADActionViewControllerInterface.h
 //  iAd
 //
-//  Created by David Wilson on 3/28/14.
-//
-//
 
 #import <Foundation/Foundation.h>
 

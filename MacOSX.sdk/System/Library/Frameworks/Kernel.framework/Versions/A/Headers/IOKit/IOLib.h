@@ -78,8 +78,10 @@ typedef void (*IOThreadFunc)(void *argument);
  *   @param size Size of the memory requested.
  *   @result Pointer to the allocated memory, or zero on failure. */
 
+
 void * IOMalloc(vm_size_t size)      __attribute__((alloc_size(1)));
 void * IOMallocZero(vm_size_t size)  __attribute__((alloc_size(1)));
+
 
 /*! @function IOFree
  *   @abstract Frees memory allocated with IOMalloc.
@@ -98,7 +100,9 @@ void   IOFree(void * address, vm_size_t size);
  *   @param alignment Byte count of the alignment for the memory. For example, pass 256 to get memory allocated at an address with bit 0-7 zero.
  *   @result Pointer to the allocated memory, or zero on failure. */
 
+
 void * IOMallocAligned(vm_size_t size, vm_offset_t alignment) __attribute__((alloc_size(1)));
+
 
 /*! @function IOFreeAligned
  *   @abstract Frees memory allocated with IOMallocAligned.
@@ -136,6 +140,15 @@ void   IOFreeContiguous(void * address, vm_size_t size) __attribute__((deprecate
  *   @result Pointer to the allocated memory, or zero on failure. */
 
 void * IOMallocPageable(vm_size_t size, vm_size_t alignment) __attribute__((alloc_size(1)));
+
+/*! @function IOMallocPageableZero
+ *   @abstract Allocates pageable, zeroed memory in the kernel map.
+ *   @discussion Same as IOMallocPageable but guarantees the returned memory will be zeroed.
+ *   @param size Size of the memory requested.
+ *   @param alignment Byte count of the alignment for the memory. For example, pass 256 to get memory allocated at an address with bits 0-7 zero.
+ *   @result Pointer to the allocated memory, or zero on failure. */
+
+void * IOMallocPageableZero(vm_size_t size, vm_size_t alignment) __attribute__((alloc_size(1)));
 
 /*! @function IOFreePageable
  *   @abstract Frees memory allocated with IOMallocPageable.
@@ -339,7 +352,7 @@ __attribute__((format(printf, 1, 0)));
 
 #ifndef _FN_KPRINTF
 #define _FN_KPRINTF
-void kprintf(const char *format, ...);
+void kprintf(const char *format, ...) __printflike(1, 2);
 #endif
 #ifndef _FN_KPRINTF_DECLARED
 #define _FN_KPRINTF_DECLARED

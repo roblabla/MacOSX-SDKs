@@ -1,4 +1,4 @@
-#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AudioOutputUnit.h>)
+#if (defined(__USE_PUBLIC_HEADERS__) && __USE_PUBLIC_HEADERS__) || (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AudioOutputUnit.h>)
 /*!
 	@file		AudioOutputUnit.h
  	@framework	AudioToolbox.framework
@@ -9,7 +9,6 @@
 #ifndef AudioUnit_AudioOutputUnit_h
 #define AudioUnit_AudioOutputUnit_h
 
-#include <Availability.h>
 #include <AudioToolbox/AUComponent.h>
 
 CF_ASSUME_NONNULL_BEGIN

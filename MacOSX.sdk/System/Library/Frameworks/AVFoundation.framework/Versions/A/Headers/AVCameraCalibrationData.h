@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCapture/AVCameraCalibrationData.h>)
 /*
     File:  AVCameraCalibrationData.h
  
@@ -177,3 +178,7 @@ AV_INIT_UNAVAILABLE
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCapture/AVCameraCalibrationData.h>
+#endif

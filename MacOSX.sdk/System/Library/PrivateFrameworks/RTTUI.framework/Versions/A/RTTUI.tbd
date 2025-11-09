@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 244FA62F-CFA8-366F-A701-DE5D0DB4E74F' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           59E7888A-920D-3E7D-8DA9-D661DC373B06
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           A459C1D2-F6BC-339D-BBA8-0DEE06B47D75
 install-name:    '/System/Library/PrivateFrameworks/RTTUI.framework/Versions/A/RTTUI'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _RTTUIVersionNumber, _RTTUIVersionString, _ttyImageNamed ]
     objc-classes:    [ RTTUIConversationControllerCoordinator, RTTUIConversationViewController, 
                        RTTUIServiceUpdateCell, RTTUIUtilities, RTTUIUtteranceCell, 

@@ -2,7 +2,7 @@
 //  INGetCarPowerLevelStatusIntent.h
 //  Intents
 //
-//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2020 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntent.h>
@@ -14,7 +14,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 API_AVAILABLE(ios(10.3), watchos(3.2))
-API_UNAVAILABLE(macosx)
+API_UNAVAILABLE(macos, tvos)
 @interface INGetCarPowerLevelStatusIntent : INIntent
 
 - (instancetype)initWithCarName:(nullable INSpeakableString *)carName NS_DESIGNATED_INITIALIZER;
@@ -25,13 +25,15 @@ API_UNAVAILABLE(macosx)
 
 @class INGetCarPowerLevelStatusIntentResponse;
 
+@protocol INGetCarPowerLevelStatusIntentResponseObserver;
+
 /*!
  @abstract Protocol to declare support for handling an INGetCarPowerLevelStatusIntent. By implementing this protocol, a class can provide logic for resolving, confirming and handling the intent.
  @discussion The minimum requirement for an implementing class is that it should be able to handle the intent. The resolution and confirmation methods are optional. The handling method is always called last, after resolving and confirming the intent.
  */
 
 API_AVAILABLE(ios(10.3), watchos(3.2))
-API_UNAVAILABLE(macosx)
+API_UNAVAILABLE(macos, tvos)
 @protocol INGetCarPowerLevelStatusIntentHandling <NSObject>
 
 @required
@@ -50,6 +52,11 @@ API_UNAVAILABLE(macosx)
                           completion:(void (^)(INGetCarPowerLevelStatusIntentResponse *response))completion NS_SWIFT_NAME(handle(intent:completion:));
 
 @optional
+
+- (void)startSendingUpdatesForGetCarPowerLevelStatus:(INGetCarPowerLevelStatusIntent *)intent
+                                          toObserver:(id<INGetCarPowerLevelStatusIntentResponseObserver>)observer NS_SWIFT_NAME(startSendingUpdates(for:to:)) API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos);
+
+- (void)stopSendingUpdatesForGetCarPowerLevelStatus:(INGetCarPowerLevelStatusIntent *)intent NS_SWIFT_NAME(stopSendingUpdates(for:)) API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
  @abstract Confirmation method - Validate that this intent is ready for the next step (i.e. handling)
@@ -76,6 +83,14 @@ API_UNAVAILABLE(macosx)
 
 - (void)resolveCarNameForGetCarPowerLevelStatus:(INGetCarPowerLevelStatusIntent *)intent
                     withCompletion:(void (^)(INSpeakableStringResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveCarName(for:with:));
+
+@end
+
+API_AVAILABLE(ios(14.0))
+API_UNAVAILABLE(watchos, macos, tvos)
+@protocol INGetCarPowerLevelStatusIntentResponseObserver <NSObject>
+
+- (void)getCarPowerLevelStatusResponseDidUpdate:(INGetCarPowerLevelStatusIntentResponse *)response NS_SWIFT_NAME(didUpdate(getCarPowerLevelStatus:));
 
 @end
 

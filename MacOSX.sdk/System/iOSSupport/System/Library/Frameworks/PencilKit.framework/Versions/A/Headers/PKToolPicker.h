@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class PKTool, PKToolPicker;
 
-API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macCatalyst)
+API_AVAILABLE(ios(13.0))
 @protocol PKToolPickerObserver <NSObject>
 
 @optional
@@ -41,7 +41,7 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macCatalyst)
 
 
 /// A user interface for selecting a PKTool.
-API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macCatalyst)
+API_AVAILABLE(ios(13.0))
 @interface PKToolPicker : NSObject
 
 /// Add an observer for a tool picker changes.
@@ -68,6 +68,9 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macCatalyst)
 /// Is the tool picker visible.
 @property (nonatomic, readonly) BOOL isVisible;
 
+/// The name used to automatically save the tool picker's state in the defaults system.
+@property (nonatomic, copy, nullable) NSString *stateAutosaveName API_AVAILABLE(ios(14.0));
+
 /// The frame within a specific view that the tool picker covers.
 ///
 /// @param view The view in which to return the frame to avoid.
@@ -77,19 +80,32 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macCatalyst)
 
 /// Set `overrideUserInterfaceStyle` to cause this tool picker UI to have a specific user interface style.
 /// Consider if you need to set `colorUserInterfaceStyle` if you set this property.
+///
+/// By default this is `UIUserInterfaceStyleUnspecified`.
 @property (nonatomic) UIUserInterfaceStyle overrideUserInterfaceStyle;
 
 /// Set `colorUserInterfaceStyle` to cause this tool picker to create colors for a canvas view of the
 /// specified user interface style. If this tool picker is used for selecting tools for canvas views that
 /// have different user interface styles, `colorUserInterfaceStyle` should be set to the canvas's user
 /// interface style.
+///
+/// By default this is `UIUserInterfaceStyleUnspecified`.
 @property (nonatomic) UIUserInterfaceStyle colorUserInterfaceStyle;
 
-/// Returns the shared `PKToolPicker` instance for a window.
-/// The returned tool picker object is typically shared between window in the same UIWindowScene.
-+ (nullable PKToolPicker *)sharedToolPickerForWindow:(UIWindow *)window NS_SWIFT_NAME(shared(for:));
+/// If this is true the tool picker will show UI that allows the default drawing policy to be changed.
+///
+/// By default this is true.
+@property (nonatomic) BOOL showsDrawingPolicyControls API_AVAILABLE(ios(14.0));
 
-- (instancetype)init NS_UNAVAILABLE;
+/// Returns the shared `PKToolPicker` instance for a window.
+/// The returned tool picker object is typically shared between windows in the same UIWindowScene.
++ (nullable PKToolPicker *)sharedToolPickerForWindow:(UIWindow *)window NS_SWIFT_NAME(shared(for:)) API_DEPRECATED("Create individual instances instead.", ios(13_0, 14_0));
+
+/// Returns a new `PKToolPicker` instance.
+///
+/// If two tool pickers are visible for the same first responder, or the same tool picker is visible in two windows
+/// the result is deterministic, but undefined.
+- (instancetype)init API_AVAILABLE(ios(14.0));
 
 @end
 NS_ASSUME_NONNULL_END

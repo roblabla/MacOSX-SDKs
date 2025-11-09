@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2009 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2019 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -32,6 +32,7 @@
 
 #include <IOKit/IOInterrupts.h>
 #include <kern/kern_types.h>
+
 
 __BEGIN_DECLS
 #include <mach/boolean.h>
@@ -66,6 +67,11 @@ uint32_t PE_i_can_has_debugger(
 
 int PE_stub_poll_input(unsigned int options, char *c);
 
+#if defined(__arm__) || defined(__arm64__)
+boolean_t PE_panic_debugging_enabled(void);
+
+void PE_mark_hwaccess(uint64_t thread);
+#endif /* defined(__arm__) || defined(__arm64__) */
 
 /* Return the offset of the specified address into the panic region */
 uint32_t PE_get_offset_into_panic_region(
@@ -79,9 +85,10 @@ void PE_init_panicheader(
 void PE_update_panicheader_nestedpanic(
 	void);
 
+/* Invokes AppleARMIO::handlePlatformError() if present */
+bool PE_handle_platform_error(
+	vm_offset_t far);
 
-void PE_init_kprintf(
-	boolean_t vm_initialized);
 
 extern int32_t gPESerialBaud;
 
@@ -98,7 +105,27 @@ void PE_init_printf(
 
 extern void (*PE_putc)(char c);
 
+/*
+ * Perform pre-lockdown IOKit initialization.
+ * This is guaranteed to execute prior to machine_lockdown().
+ * The precise operations performed by this function depend upon
+ * the security model employed by the platform, but in general this
+ * function should be expected to at least perform basic C++ runtime
+ * and I/O registry initialization.
+ */
 void PE_init_iokit(
+	void);
+
+/*
+ * Perform post-lockdown IOKit initialization.
+ * This is guaranteed to execute after machine_lockdown().
+ * The precise operations performed by this function depend upon
+ * the security model employed by the platform.  For example, if
+ * the platform treats machine_lockdown() as a strict security
+ * checkpoint, general-purpose IOKit matching may not begin until
+ * this function is called.
+ */
+void PE_lockdown_iokit(
 	void);
 
 struct clock_frequency_info_t {
@@ -167,18 +194,11 @@ enum {
 	kPEReadTOD,
 	kPEWriteTOD
 };
-extern int (*PE_read_write_time_of_day)(
-	unsigned int options,
-	long * secs);
 
 enum {
 	kPEWaitForInput     = 0x00000001,
 	kPERawInput         = 0x00000002
 };
-extern int (*PE_write_IIC)(
-	unsigned char addr,
-	unsigned char reg,
-	unsigned char data);
 
 /* Private Stuff - eventually put in pexpertprivate.h */
 enum {
@@ -248,6 +268,7 @@ typedef struct PE_state {
 	PE_Video        video;
 	void            *deviceTreeHead;
 	void            *bootArgs;
+	vm_size_t       deviceTreeSize;
 } PE_state_t;
 
 extern PE_state_t PE_state;
@@ -290,6 +311,9 @@ extern kern_return_t PE_cpu_start(
 extern void PE_cpu_halt(
 	cpu_id_t target);
 
+extern bool PE_cpu_down(
+	cpu_id_t target);
+
 extern void PE_cpu_signal(
 	cpu_id_t source,
 	cpu_id_t target);
@@ -317,6 +341,55 @@ extern void PE_panic_hook(const char *str);
 
 extern void PE_init_cpu(void);
 
+extern void PE_handle_ext_interrupt(void);
+
+#if defined(__arm__) || defined(__arm64__)
+typedef void (*perfmon_interrupt_handler_func)(cpu_id_t source);
+extern kern_return_t PE_cpu_perfmon_interrupt_install_handler(perfmon_interrupt_handler_func handler);
+extern void PE_cpu_perfmon_interrupt_enable(cpu_id_t target, boolean_t enable);
+
+#if DEVELOPMENT || DEBUG
+extern void PE_arm_debug_enable_trace(void);
+extern void (*PE_arm_debug_panic_hook)(const char *str);
+#else
+extern void(*const PE_arm_debug_panic_hook)(const char *str);
+#endif
+#endif
+
+
+typedef enum kc_kind {
+	KCKindNone      = -1,
+	KCKindUnknown   = 0,
+	KCKindPrimary   = 1,
+	KCKindPageable  = 2,
+	KCKindAuxiliary = 3,
+	KCNumKinds      = 4,
+} kc_kind_t;
+
+typedef enum kc_format {
+	KCFormatUnknown = 0,
+	KCFormatStatic  = 1,
+	KCFormatDynamic = 2,
+	KCFormatFileset = 3,
+	KCFormatKCGEN   = 4,
+} kc_format_t;
+
+/* returns a pointer to the mach-o header for a give KC type, returns NULL if nothing's been set */
+extern void *PE_get_kc_header(kc_kind_t type);
+/* returns a pointer to the lowest VA of of the KC of the given type */
+extern void *PE_get_kc_baseaddress(kc_kind_t type);
+/* returns an array of length KCNumKinds of the lowest VAs of each KC type - members could be NULL */
+extern const void * const*PE_get_kc_base_pointers(void);
+/* returns the slide for the kext collection */
+extern uintptr_t PE_get_kc_slide(kc_kind_t type);
+/* quickly accesss the format of the primary kc */
+extern bool PE_get_primary_kc_format(kc_format_t *type);
+/* set vnode ptr for kc fileset */
+extern void PE_set_kc_vp(kc_kind_t type, void *vp);
+/* quickly set vnode ptr for kc fileset */
+void * PE_get_kc_vp(kc_kind_t type);
+/* drop reference to kc fileset vnodes */
+void PE_reset_all_kc_vp(void);
 
 
 __END_DECLS

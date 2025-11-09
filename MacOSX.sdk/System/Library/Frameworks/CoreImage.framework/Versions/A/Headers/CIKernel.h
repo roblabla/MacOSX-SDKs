@@ -76,6 +76,11 @@ NS_CLASS_AVAILABLE(10_4, 8_0)
                               outputPixelFormat:(CIFormat)format
                                           error:(NSError **)error NS_AVAILABLE(10_13, 11_0);
 
+// This method will return an array of strings corresponding to names of all of the kernels
+// contained within the underlying Metal library in the associated NSData.
++ (NSArray<NSString *> *)kernelNamesFromMetalLibraryData:(NSData *)data NS_AVAILABLE(11_0,14_0);
+
+
 /* The name of the kernel. */
 @property (atomic, readonly) NSString *name  NS_AVAILABLE(10_4, 8_0);
 

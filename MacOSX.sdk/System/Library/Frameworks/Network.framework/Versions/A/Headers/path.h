@@ -2,7 +2,7 @@
 //  path.h
 //  Network
 //
-//  Copyright (c) 2017-2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2017-2020 Apple Inc. All rights reserved.
 //
 
 #ifndef __NW_PATH_H__
@@ -75,6 +75,41 @@ typedef enum {
 API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0))
 nw_path_status_t
 nw_path_get_status(nw_path_t path);
+
+/*!
+ * @typedef nw_path_unsatisfied_reason_t
+ * @abstract
+ *		A network path unsatisfied reason may indicate the reason the path is currently unsatisfied for some conditions.
+ */
+typedef enum {
+	/*! @const nw_path_unsatisfied_reason_not_available No reason is given */
+	nw_path_unsatisfied_reason_not_available = 0,
+	/*! @const nw_path_unsatisfied_reason_not_available The user has disabled cellular */
+	nw_path_unsatisfied_reason_cellular_denied = 1,
+	/*! @const nw_path_unsatisfied_reason_not_available The user has disabled Wi-Fi */
+	nw_path_unsatisfied_reason_wifi_denied = 2,
+	/*! @const nw_path_unsatisfied_reason_not_available The user has disabled local network access */
+	nw_path_unsatisfied_reason_local_network_denied = 3,
+} nw_path_unsatisfied_reason_t;
+
+/*!
+ * @function nw_path_get_unsatisfied_reason
+ *
+ * @abstract
+ *		Retrieves a reason the path is not satisfied. In some cases, the reason helps to
+ *		determine why the path is not satisfied. While the path may be unsatisfied for more
+ *		than one reason, only the first reason will be given. In many cases, the path may be
+ *		unsatisfied with no reason available.
+ *
+ * @param path
+ *		The path object to check.
+ *
+ * @result
+ *		Returns a reason the path is unsatisfied or nw_path_unsatisfied_reason_not_available if a reason is not available.
+ */
+API_AVAILABLE(macos(11.0), ios(14.2), watchos(7.1), tvos(14.2))
+nw_path_unsatisfied_reason_t
+nw_path_get_unsatisfied_reason(nw_path_t path);
 
 #ifdef __BLOCKS__
 

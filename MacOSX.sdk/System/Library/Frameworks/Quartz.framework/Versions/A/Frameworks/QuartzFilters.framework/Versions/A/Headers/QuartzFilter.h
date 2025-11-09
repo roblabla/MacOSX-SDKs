@@ -9,6 +9,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+API_UNAVAILABLE_BEGIN(ios)
+
 @interface QuartzFilter : NSObject
 {
     id _privateData;
@@ -31,6 +33,8 @@
 - (void) removeFromContext:(CGContextRef) aContext;
 
 @end
+
+API_UNAVAILABLE_END
 
 #endif /* QUARTZFILTER_H_ */
 

@@ -37,6 +37,18 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) @interface UIAction : UIMenuElement
 /// State that can appear next to this action.
 @property (nonatomic) UIMenuElementState state;
 
+/// If available, the object on behalf of which the actionHandler is called.
+@property (nonatomic, readonly, nullable) id sender API_AVAILABLE(ios(14.0));
+
+/*!
+ * @abstract Creates a UIAction with an empty title, nil image, and automatically generated identifier
+ *
+ * @param handler  Handler block. Called when the user selects the action.
+ *
+ * @return A new UIAction.
+ */
++ (instancetype)actionWithHandler:(UIActionHandler)handler API_AVAILABLE(ios(14.0)) NS_SWIFT_UNAVAILABLE("Use init(title:image:identifier:discoverabilityTitle:attributes:state:handler:) instead.");
+
 /*!
  * @abstract Creates a UIAction with the given arguments.
  *

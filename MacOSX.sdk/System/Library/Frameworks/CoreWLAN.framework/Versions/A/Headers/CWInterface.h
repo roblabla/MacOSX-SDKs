@@ -657,7 +657,8 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * @abstract
  * Creates a computer-to-computer (IBSS) network.
  */
-- (BOOL)startIBSSModeWithSSID:(NSData *)ssidData security:(CWIBSSModeSecurity)security channel:(NSUInteger)channel password:(nullable NSString *)password error:(out NSError **)error NS_AVAILABLE_MAC(10_7);
+- (BOOL)startIBSSModeWithSSID:(NSData *)ssidData security:(CWIBSSModeSecurity)security channel:(NSUInteger)channel password:(nullable NSString *)password error:(out NSError **)error NS_DEPRECATED_MAC(10_7, 11_0);
+
 
 /*! @functiongroup Committing a Wi-Fi Configuration */
 

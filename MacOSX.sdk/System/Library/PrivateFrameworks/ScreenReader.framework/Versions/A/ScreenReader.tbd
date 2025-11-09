@@ -1,31 +1,38 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: D977D461-57D2-3FED-BFE8-6EE99DB42A7C' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           E443E44D-4B10-35FE-AC32-DA873D102833
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           FD881BA3-87F9-341D-B6E9-1AC8894252F8
 install-name:    '/System/Library/PrivateFrameworks/ScreenReader.framework/Versions/A/ScreenReader'
 current-version: 390
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _FinderColumnCellIdentifier, _SCRBundleExtrasInitialize, _SCRColorNameForValue, 
                        _SCRCompareCommandFamilies, _SCRCompareCommands, _SCRCreateCGImageFromFile, 
                        _SCRCreateImageData, _SCRDebugHumanReadableTextFromSpeechSynthesizerMessage, 
                        _SCRDigestForImageRef, _SCRDisplayTextFontIndexForFontSize, 
                        _SCRDisplayTextFontSizes, _SCRDisplayTextFontSizesCount, _SCRHIDDetectionDisable, 
-                       _SCRHIDDetectionEnable, _SCRIsCodesignedByApple, _SCRKeyboardInitialize, 
-                       _SCRKeyboardLayoutInputSourceID, _SCRKeyboardLayoutOverrideInputSourceID, 
+                       _SCRHIDDetectionEnable, _SCRHIDTrackpads, _SCRIsCodesignedByApple, 
+                       _SCRKeyboardInitialize, _SCRKeyboardLayoutInputSourceID, _SCRKeyboardLayoutOverrideInputSourceID, 
                        _SCRKeyboardPostInitialize, _SCRLocalizedSpeechStringForComposedCharacter, 
                        _SCRLocalizedStringForComposedCharacter, _SCRLocalizedStringForKey, 
-                       _SCRMovementDispositionForDirection, _SCRRemoveConfigurationPlaceholderTokens, 
-                       _SCRReorderedString, _SCRSectionsForRect, _SCRSharedBundle, 
-                       _SCRStoreImage, _SCRTitleForCommand, _SCRTitleForCommandAndElement, 
-                       _SCRTransitionValueOverTime, _kSCRAudioOutputSelector, _kSCRAudioOutputSelectorDefaultOutput, 
+                       _SCRMovementDispositionForDirection, _SCRPercentageDescription, 
+                       _SCRRemoveConfigurationPlaceholderTokens, _SCRReorderedString, 
+                       _SCRSectionsForRect, _SCRSharedBundle, _SCRStoreImage, _SCRTitleForCommand, 
+                       _SCRTitleForCommandAndElement, _SCRTransitionValueOverTime, 
+                       _kSCRAudioOutputSelector, _kSCRAudioOutputSelectorDefaultOutput, 
                        _kSCRAudioOutputSelectorHALOutput, _kSCRAudioOutputSelectorSystemOutput, 
                        _kSCRAudioRenderingQuality3D, _kSCRAudioRenderingQualityHigh, 
                        _kSCRAudioRenderingQualityNormal, _kSCRCapsLockKeyUpNotification, 
                        _kSCRCategoriesKey, _kSCRCategoryAnnouncement, _kSCRCategoryAppleScriptOutput, 
-                       _kSCRCategoryAsynchronousSound, _kSCRCategoryAutoKeyRepeat, 
-                       _kSCRCategoryBraille, _kSCRCategoryCaption, _kSCRCategoryCommand, 
-                       _kSCRCategoryContent, _kSCRCategoryElementPostFeedback, _kSCRCategoryElementPreFeedback, 
+                       _kSCRCategoryAsynchronousSound, _kSCRCategoryBraille, _kSCRCategoryBrailleTypingEcho, 
+                       _kSCRCategoryCaption, _kSCRCategoryCommand, _kSCRCategoryContent, 
+                       _kSCRCategoryElementPostFeedback, _kSCRCategoryElementPreFeedback, 
                        _kSCRCategoryElementType, _kSCRCategoryGeneralSound, _kSCRCategoryGreeting, 
                        _kSCRCategoryGuide, _kSCRCategoryIsEnabledKey, _kSCRCategoryStatus, 
                        _kSCRCategorySystemWide, _kSCRCategoryTextAttributes, _kSCRCategoryTitle, 
@@ -83,17 +90,18 @@ exports:
                        _kSCRNumberModeSpeakDigits, _kSCRNumberModeWholeWords, _kSCROutputComponentBraille, 
                        _kSCROutputComponentDeterminedByCategory, _kSCROutputComponentSound, 
                        _kSCROutputComponentSpeech, _kSCROutputComponentTextDisplay, 
-                       _kSCROutputComponentTimer, _kSCROutputSoundAnimationShake, 
-                       _kSCROutputSoundAnnouncementBasicAlert, _kSCROutputSoundAttachmentBegin, 
-                       _kSCROutputSoundAttachmentEnd, _kSCROutputSoundAttributedStringKey, 
-                       _kSCROutputSoundAutocorrectionOccurred, _kSCROutputSoundBrailleChordClockTick, 
-                       _kSCROutputSoundBrailleChordFailed, _kSCROutputSoundBrailleChordMemorized, 
-                       _kSCROutputSoundBrailleDisplayConnected, _kSCROutputSoundBrailleDisplayDisconnected, 
-                       _kSCROutputSoundBubbleAppear, _kSCROutputSoundBubbleDisappear, 
-                       _kSCROutputSoundCollaborationOccurred, _kSCROutputSoundDFRFociiNowSynched, 
-                       _kSCROutputSoundDeleteCharacter, _kSCROutputSoundDrawerClosing, 
-                       _kSCROutputSoundDrawerOpening, _kSCROutputSoundDrillIn, _kSCROutputSoundDrillOut, 
-                       _kSCROutputSoundDrop, _kSCROutputSoundElementHit, _kSCROutputSoundElementUpdatedNotification, 
+                       _kSCROutputComponentTimer, _kSCROutputSoundActionsAvailable, 
+                       _kSCROutputSoundAnimationShake, _kSCROutputSoundAnnouncementBasicAlert, 
+                       _kSCROutputSoundAttachmentBegin, _kSCROutputSoundAttachmentEnd, 
+                       _kSCROutputSoundAttributedStringKey, _kSCROutputSoundAutocorrectionOccurred, 
+                       _kSCROutputSoundBrailleChordClockTick, _kSCROutputSoundBrailleChordFailed, 
+                       _kSCROutputSoundBrailleChordMemorized, _kSCROutputSoundBrailleDisplayConnected, 
+                       _kSCROutputSoundBrailleDisplayDisconnected, _kSCROutputSoundBubbleAppear, 
+                       _kSCROutputSoundBubbleDisappear, _kSCROutputSoundCollaborationOccurred, 
+                       _kSCROutputSoundDFRFociiNowSynched, _kSCROutputSoundDeleteCharacter, 
+                       _kSCROutputSoundDrawerClosing, _kSCROutputSoundDrawerOpening, 
+                       _kSCROutputSoundDrillIn, _kSCROutputSoundDrillOut, _kSCROutputSoundDrop, 
+                       _kSCROutputSoundElementHit, _kSCROutputSoundElementUpdatedNotification, 
                        _kSCROutputSoundEmptyHit, _kSCROutputSoundEnteringInvisibleSection, 
                        _kSCROutputSoundEnteringMultiSelect, _kSCROutputSoundEnteringVisibleSection, 
                        _kSCROutputSoundEventNotHandled, _kSCROutputSoundExitingMultiSelect, 
@@ -114,7 +122,8 @@ exports:
                        _kSCROutputSoundSecureCharacter, _kSCROutputSoundSelect, _kSCROutputSoundSelectionEnded, 
                        _kSCROutputSoundSelectionSetting, _kSCROutputSoundSingleMouseClick, 
                        _kSCROutputSoundStaticTextChanged, _kSCROutputSoundStyleChange, 
-                       _kSCROutputSoundSystemAlert, _kSCROutputSoundTextAttributesChanged, 
+                       _kSCROutputSoundSystemAlert, _kSCROutputSoundSystemDialogAppeared, 
+                       _kSCROutputSoundSystemDialogReminder, _kSCROutputSoundTextAttributesChanged, 
                        _kSCROutputSoundUpperCaseCharacter, _kSCROutputSoundWebAreaLoaded, 
                        _kSCROutputSoundWindowActivated, _kSCROutputSoundWrappedBack, 
                        _kSCROutputSoundWrappedForward, _kSCROutputStringsFilePrefixUnicodeHex, 

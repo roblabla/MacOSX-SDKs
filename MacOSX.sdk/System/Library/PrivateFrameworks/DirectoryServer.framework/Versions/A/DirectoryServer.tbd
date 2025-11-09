@@ -1,24 +1,38 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 4D5337FB-BE18-3D40-BE0A-4EE16E0E49C8' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           FFC022C7-FACE-3537-83B1-452A0120B3B7
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           869B5A70-63E5-3915-86AF-4C996335307C
 install-name:    '/System/Library/PrivateFrameworks/DirectoryServer.framework/Versions/A/DirectoryServer'
-exports:         
-  - archs:           [ x86_64 ]
-    re-exports:      [ '/System/Library/PrivateFrameworks/DirectoryServer.framework/Frameworks/CFDirectoryServer.framework/Versions/A/CFDirectoryServer' ]
+reexported-libraries:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    libraries:       [ '/System/Library/PrivateFrameworks/DirectoryServer.framework/Frameworks/CFDirectoryServer.framework/Versions/A/CFDirectoryServer' ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _DSCopyFQDNForSelf, _DSRunTask, _DSRunTaskAsync, _kDefaultLocaleName, 
                        _kKeyLocaleInterfaces, _kKeyNumLocalesUsedIn, _kLdapiNodeName, 
                        _kLdapiURI, _kLocaleConfigRecName, _kLocaleGroupPrefix, _kODAttributeTypeDNSDomain, 
                        _kODAttributeTypeLocaleSubnets ]
     objc-classes:    [ DSLocale, DSLog ]
     objc-ivars:      [ DSLog.asl, DSLog.logfd ]
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 9BA7C1D8-2E46-3E3F-AB5C-79E78E8EB668' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           5AE68659-F6A0-3E49-BA69-5D6D63725D42
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           6ADA7889-4006-3FE7-903E-4FCE09D00373
 install-name:    '/System/Library/PrivateFrameworks/DirectoryServer.framework/Frameworks/CFDirectoryServer.framework/Versions/A/CFDirectoryServer'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _DSCStringCreate, _DSChangePasswordWithPolicy, _DSConfigCopyEnabledAuthMechs, 
                        _DSConfigCopyEnabledAuthMechsFromServer, _DSConfigCopyIdentityName, 
                        _DSConfigCopyServerComputerRecord, _DSConfigDisableAuthMech, 

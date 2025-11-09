@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 2467032B-EAAA-3DB9-A294-9BC7D354C32C' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           7678078E-B6B5-37BD-9986-2DE55CD86BCF
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           CAD04894-0A91-33C8-A690-40B30C5C51BF
 install-name:    '/System/Library/PrivateFrameworks/EmbeddedSensingProtocols.framework/Versions/A/EmbeddedSensingProtocols'
-current-version: 2
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 4
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _BinaryFrame_fields, _EmbeddedSensingProtocolsVersionNumber, 
                        _EmbeddedSensingProtocolsVersionString, _pb_close_string_substream, 
                        _pb_decode, _pb_decode_delimited, _pb_decode_delimited_noinit, 

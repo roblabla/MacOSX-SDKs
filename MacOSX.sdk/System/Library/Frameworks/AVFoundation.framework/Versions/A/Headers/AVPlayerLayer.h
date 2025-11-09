@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVPlayerLayer.h>)
 /*
 	File:  AVPlayerLayer.h
 
@@ -102,3 +103,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 NS_ASSUME_NONNULL_END
 
 #endif  // __has_include(<QuartzCore/CoreAnimation.h>)
+
+#else
+#import <AVFCore/AVPlayerLayer.h>
+#endif

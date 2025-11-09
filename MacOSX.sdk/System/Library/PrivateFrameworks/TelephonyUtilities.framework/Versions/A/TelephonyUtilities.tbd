@@ -1,24 +1,42 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 5C3C84D6-54EF-3F26-88CA-5B2901E5B44E', 'x86_64: 5C3C84D6-54EF-3F26-88CA-5B2901E5B44E' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           B927DF74-8172-3DD6-87E7-EBEDBC86D33E
+  - target:          x86_64-maccatalyst
+    value:           B927DF74-8172-3DD6-87E7-EBEDBC86D33E
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           09A9A0CB-8A80-3FB7-A62A-DC7F824576FC
+  - target:          arm64e-maccatalyst
+    value:           09A9A0CB-8A80-3FB7-A62A-DC7F824576FC
 install-name:    '/System/Library/PrivateFrameworks/TelephonyUtilities.framework/Versions/A/TelephonyUtilities'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _TUActiveCountryCode, _TUAddDarwinObserver, _TUAddLocalNSObserver, 
-                       _TUAddTelephonyCenterObserver, _TUAudioRouteBluetoothProductIdentifierAirPods, 
-                       _TUAudioRouteBluetoothProductIdentifierAirPods2, _TUAudioRouteBluetoothProductIdentifierBeatsSolo, 
+                       _TUAddTelephonyCenterObserver, _TUAllowLocalVideoRecording, 
+                       _TUAudioRouteBluetoothProductIdentifierAirPods, _TUAudioRouteBluetoothProductIdentifierAirPods2, 
+                       _TUAudioRouteBluetoothProductIdentifierAirPodsPro, _TUAudioRouteBluetoothProductIdentifierBeatsSolo, 
                        _TUAudioRouteBluetoothProductIdentifierBeatsSoloPro, _TUAudioRouteBluetoothProductIdentifierBeatsStudio, 
                        _TUAudioRouteBluetoothProductIdentifierBeatsStudio2, _TUAudioRouteBluetoothProductIdentifierBeatsX, 
-                       _TUAudioRouteBluetoothProductIdentifierPowerbeats, _TUAudioRouteBluetoothProductIdentifierPowerbeats2, 
+                       _TUAudioRouteBluetoothProductIdentifierBeatsX2, _TUAudioRouteBluetoothProductIdentifierPowerbeats, 
+                       _TUAudioRouteBluetoothProductIdentifierPowerbeats2, _TUAudioRouteBluetoothProductIdentifierPowerbeats4, 
                        _TUAudioRouteBluetoothProductIdentifierPowerbeatsPro, _TUAudioSystemActiveCategoryVolumeChangedNotification, 
                        _TUAudioSystemAudioPickableRoutesChanged, _TUAudioSystemDownlinkMuteStatusChangedNotification, 
                        _TUAudioSystemTTYChangedNotification, _TUAudioSystemUplinkMuteStatusChangedNotification, 
                        _TUBinaryGCD, _TUBundle, _TUBundleIdentifierCallServicesDaemon, 
                        _TUBundleIdentifierFaceTimeApplication, _TUBundleIdentifierInCallServiceApplication, 
-                       _TUBundleIdentifierMessagesApplication, _TUBundleIdentifierMobilePhoneApplication, 
-                       _TUBundleIdentifierNanoPhoneApplication, _TUBundleIdentifierTelephonyUtilitiesFramework, 
-                       _TUBundleIdentifierTinCan, _TUCTServerConnection, _TUCallAudioPropertiesChangedNotification, 
+                       _TUBundleIdentifierLivePhotoXPCService, _TUBundleIdentifierMessagesApplication, 
+                       _TUBundleIdentifierMobilePhoneApplication, _TUBundleIdentifierNanoPhoneApplication, 
+                       _TUBundleIdentifierSpringBoardApplication, _TUBundleIdentifierTelephonyUtilitiesFramework, 
+                       _TUBundleIdentifierTinCan, _TUBundleIdentifierVideoConferenceIdentifier, 
+                       _TUCTServerConnection, _TUCallAudioPropertiesChangedNotification, 
                        _TUCallCameraTypeChangedNotification, _TUCallCapabilitiesCloudCallingDevicesChangedNotification, 
                        _TUCallCapabilitiesEmergencyCallbackModeChangedNotification, 
                        _TUCallCapabilitiesEmergencyCallbackPossibleChangedNotification, 
@@ -39,7 +57,8 @@ exports:
                        _TUCallCenterCallStartedConnectingNotification, _TUCallCenterCallStatusChangedInternalNotification, 
                        _TUCallCenterCallStatusChangedNotification, _TUCallCenterCallWantsHoldMusicChangedNotification, 
                        _TUCallCenterCallerIDChangedNotification, _TUCallCenterConferenceParticipantsChangedNotification, 
-                       _TUCallCenterControlFailureNotification, _TUCallCenterInCallServiceDialRequestFailureNotification, 
+                       _TUCallCenterControlFailureNotification, _TUCallCenterInCallServiceAllowRingingCallStatusIndicatorToken, 
+                       _TUCallCenterInCallServiceDialRequestFailureNotification, 
                        _TUCallCenterInCallServiceDidAppearNotification, _TUCallCenterInCallServiceLocalVideoDidAppearNotification, 
                        _TUCallCenterInCallServiceSuppressInCallStatusBarToken, _TUCallCenterIsEmergencyChangedNotification, 
                        _TUCallCenterModelStateChangedNotification, _TUCallCenterResetCallStateNotification, 
@@ -51,12 +70,11 @@ exports:
                        _TUCallDisplayContextChangedNotification, _TUCallDowngradedToAudioNotification, 
                        _TUCallFaceTimeIDStatusChangedNotification, _TUCallFaceTimeRemoteIDSDestinationKey, 
                        _TUCallFaceTimeRemoteMomentsAvailableKey, _TUCallFaceTimeTransportTypeKey, 
-                       _TUCallFilteringPreferencesContactsOnlyKey, _TUCallHandoffActivityType, 
+                       _TUCallFilterUnknownCallerAddress, _TUCallFilteringPreferencesContactsOnlyKey, 
+                       _TUCallFilteringPreferencesMaxJunkLevelKey, _TUCallHandoffActivityType, 
                        _TUCallHardPauseDigitsStateChangedNotification, _TUCallHistoryControllerDidFinishBoostNotification, 
                        _TUCallHistoryControllerRecentCallsDidChangeNotification, 
-                       _TUCallHistoryControllerUnreadAudioCallCountDidChangeNotification, 
                        _TUCallHistoryControllerUnreadCallCountDidChangeNotification, 
-                       _TUCallHistoryControllerUnreadVideoCallCountDidChangeNotification, 
                        _TUCallIsOnHoldChangedNotification, _TUCallIsSendingAudioChangedNotification, 
                        _TUCallIsSendingVideoChangedNotification, _TUCallIsThirdPartyVideoChangedNotification, 
                        _TUCallIsUplinkMutedChangedNotification, _TUCallIsUsingBasebandChangedNotification, 
@@ -85,6 +103,9 @@ exports:
                        _TUDefaultLog, _TUDestinationIDsAreEqual, _TUDialAssistDomain, 
                        _TUDialAssistEnabledOverride, _TUDialAssistIsEnabled, _TUDialAssistUserSettingChanged, 
                        _TUDialAssistedDialRequest, _TUDialRequestOriginatingUIStringDialer, 
+                       _TUDialRequestOriginatingUIStringECG, _TUDialRequestOriginatingUIStringEmergencyDialerLockscreen, 
+                       _TUDialRequestOriginatingUIStringFallDetection, _TUDialRequestOriginatingUIStringSideButtonHold, 
+                       _TUDialRequestOriginatingUIStringSideButtonPresses, _TUDialRequestOriginatingUIStringVolumeLockHold, 
                        _TUDialRequestProviderIdentifierKey, _TUDialRequestQueryItemHandleTypeKey, 
                        _TUDialRequestQueryItemHandleTypeValueEmailAddress, _TUDialRequestQueryItemHandleTypeValueGeneric, 
                        _TUDialRequestQueryItemHandleTypeValuePhoneNumber, _TUDialRequestQueryItemNameFaceTimeAddressBookID, 
@@ -105,14 +126,16 @@ exports:
                        _TUHandlesAreCanonicallyEqual, _TUHandlesAreCanonicallyEqualUsingCountryCodes, 
                        _TUHardPauseDigitsDisplayString, _TUHomeCountryCode, _TUIDSLookupManagerStatusChangedNotification, 
                        _TUISOCountryCodeForMCC, _TUInCallRemoteAlertViewControllerClassName, 
-                       _TUIncomingInvitationTimeout, _TUIsCallHandoffActivityType, 
+                       _TUIncomingInvitationTimeout, _TUIsBareMakoAccount, _TUIsCallHandoffActivityType, 
                        _TUIsEmergencyNumber, _TUIsEmergencyNumberOrIsWhiteListed, 
                        _TUIsMMIOrUSSDNumber, _TULocalizedCarrierName, _TUMapItemForDestinationID, 
                        _TUMapItemForPhoneNumberRef, _TUMapItemForPhoneNumberRefSync, 
                        _TUMetadataCacheDidFinishUpdatingNotification, _TUMobilePhoneDomain, 
                        _TUMobilePhoneLogDialAssistKey, _TUMultiwayMaxConcurrentStreams, 
-                       _TUNetworkCountryCode, _TUNotificationFromXPCObject, _TUNumberToDial, 
-                       _TUNumberToDialOptionsSuppressLocalAssistKey, _TUNumberWithOldStylePausesTransformed, 
+                       _TUNetworkCountryCode, _TUNormalizedHandleForTUHandle, _TUNotificationCategoryIdentifierNewVoicemail, 
+                       _TUNotificationCategoryIdentifierNewVoicemailNoCallerID, _TUNotificationCategoryIdentifierNewVoicemailNoVisualVoicemail, 
+                       _TUNotificationFromXPCObject, _TUNumberToDial, _TUNumberToDialOptionsSuppressLocalAssistKey, 
+                       _TUNumberWithOldStylePausesTransformed, _TUNumbersAreEqualOrNil, 
                        _TUObjectsAreEqualOrNil, _TUOpenSensitiveURL, _TUOpenURL, 
                        _TUOpenURLWithCompletion, _TUOpenURLWithError, _TUOutgoingInvitationTimeoutForCallProvider, 
                        _TUOutgoingInvitationTimeoutForCallProviderAndIsUpgrade, _TUPrivacyRulesChangedNotification, 
@@ -139,7 +162,7 @@ exports:
                        _TUVideoMirroredChangedNotification, _TelURLAddressBookUID, 
                        _TelURLForceAssist, _TelURLOriginatingUIKey, _TelURLSuppressAssist, 
                        _TelURLWasAssistedKey, __TUAssertShouldCrashApplication, __TUDialAssistedDialRequestUsingCountryCodes, 
-                       _kFaceTimeAddressBookUIDOption, _kTUCallHistoryMarkedReadBulletinBoardMessageCallUUIDsKey, 
+                       __TUIsInternalInstall, _kFaceTimeAddressBookUIDOption, _kTUCallHistoryMarkedReadBulletinBoardMessageCallUUIDsKey, 
                        _kTUCallHistoryMarkedReadBulletinBoardMessageName, _kTUCarPlayHardwareControlButtonDelete, 
                        _kTUCarPlayHardwareControlButtonGreenTelephone, _kTUCarPlayHardwareControlButtonKey, 
                        _kTUCarPlayHardwareControlButtonKeypad, _kTUCarPlayHardwareControlButtonMute, 
@@ -157,13 +180,13 @@ exports:
                        TUCallServicesClientCapabilities, TUCallServicesInterface, 
                        TUCallSoundPlayer, TUCallSoundPlayerDescriptor, TUCarPlayHardwareControlsBroadcaster, 
                        TUCloudCallingDevice, TUContactsAutocompleteSearchModule, 
-                       TUContactsDataProvider, TUContactsDataProviderFetchRequest, 
-                       TUContactsDataProviderIgnoredHandles, TUContactsDataProviderResult, 
+                       TUContactsDataProvider, TUContactsDataProviderAppleCareHandles, 
+                       TUContactsDataProviderFetchRequest, TUContactsDataProviderResult, 
                        TUConversation, TUConversationManager, TUConversationManagerXPCClient, 
                        TUConversationMediaController, TUConversationMember, TUConversationParticipant, 
                        TUConversationParticipantPresentationContext, TUDTMFSoundPlayer, 
                        TUDialRequest, TUDiscoverabilitySignal, TUDynamicCallDisplayContext, 
-                       TUGeoLocationMetadataCacheDataProvider, TUGeoLocationMetadataWorker, 
+                       TUFeatureFlags, TUGeoLocationMetadataCacheDataProvider, TUGeoLocationMetadataWorker, 
                        TUGroupTitle, TUHandle, TUICFInterface, TUICFQueryResult, 
                        TUIDSLookupManager, TUJoinConversationRequest, TULabeledHandle, 
                        TULogging, TUMapsMetadataCacheDataProvider, TUMetadataCache, 
@@ -174,10 +197,11 @@ exports:
                        TUMutableRoute, TUNotifyObserver, TUOptionalObject, TUPhoneNumber, 
                        TUPrivacyManager, TUPrivacyRule, TUProxyAutocompleteResult, 
                        TUProxyCall, TUProxyRecentCall, TURecentsResults, TURepeatingActor, 
-                       TUReplyWithMessageStore, TUResultGroup, TURoute, TURouteController, 
-                       TUSearchController, TUSearchModuleManager, TUSearchResults, 
-                       TUSenderIdentity, TUSenderIdentityCapabilities, TUSenderIdentityCapabilitiesState, 
-                       TUSenderIdentityClient, TUSuggestionsMetadataCacheDataProvider, 
-                       TUThumperCTCapabilitiesState, TUVideoCallAttributes, TUVideoDeviceController, 
-                       TUVideoEffect ]
+                       TUReplyWithMessageStore, TUReportingControllerXPCClient, TUResultGroup, 
+                       TURoute, TURouteController, TUSearchController, TUSearchModuleManager, 
+                       TUSearchResults, TUSenderIdentity, TUSenderIdentityCapabilities, 
+                       TUSenderIdentityCapabilitiesState, TUSenderIdentityClient, 
+                       TUSuggestionsMetadataCacheDataProvider, TUThumperCTCapabilitiesState, 
+                       TUUserNotificationProviderXPCClient, TUVideoCallAttributes, 
+                       TUVideoDeviceController, TUVideoEffect ]
 ...

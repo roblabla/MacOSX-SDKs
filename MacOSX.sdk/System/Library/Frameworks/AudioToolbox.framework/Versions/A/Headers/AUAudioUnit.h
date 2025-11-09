@@ -1,4 +1,4 @@
-#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AUAudioUnit.h>)
+#if (defined(__USE_PUBLIC_HEADERS__) && __USE_PUBLIC_HEADERS__) || (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AUAudioUnit.h>)
 /*!
 	@file		AUAudioUnit.h
  	@framework	AudioToolbox.framework
@@ -247,7 +247,7 @@ typedef BOOL (^AUHostMusicalContextBlock)(double * __nullable currentTempo, doub
 */
 typedef void (^AUMIDICIProfileChangedBlock)(uint8_t cable, MIDIChannelNumber channel, MIDICIProfile *profile, BOOL enabled);
 
-/*!	@enum		AUHostTransportState
+/*!	@enum		AUHostTransportStateFlags
 	@brief		Flags describing the host's transport state.
 	@constant	AUHostTransportStateChanged
 		True if, since the callback was last called, there was a change to the state of, or
@@ -303,10 +303,10 @@ typedef BOOL (^AUHostTransportStateBlock)(AUHostTransportStateFlags * __nullable
 		
 		These are the ways in which audio unit components can be registered:
 		
-		- (v2) Packaged into a component bundle containing an AudioComponents Info.plist entry,
-		referring to an AudioComponentFactoryFunction. See AudioComponent.h.
+		- (v2) Packaged into a component bundle containing an `AudioComponents` Info.plist entry,
+		referring to an `AudioComponentFactoryFunction`. See AudioComponent.h.
 		
-		- (v2) AudioComponentRegister. Associates a component description with an
+		- (v2) AudioComponentRegister(). Associates a component description with an
 		AudioComponentFactoryFunction. See AudioComponent.h.
 		
 		- (v3) Packaged into an app extension containing an AudioComponents Info.plist entry.
@@ -700,7 +700,7 @@ API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 */
 @property (NS_NONATOMIC_IOSONLY, readonly, copy) NSArray<AUAudioUnitPreset *> *userPresets API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
-/*!	@method		saveUserPreset:userPreset:error
+/*!	@method		saveUserPreset:error
 	@brief		Persistently save the current state of the audio unit into a userPreset
 	@discussion
 		The new preset will be added to userPresets and will become selectable by assigning it
@@ -730,9 +730,9 @@ API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 		YES for success. NO in the event of a failure, in which case the error is returned in
 		outError.
  */
-- (BOOL)saveUserPreset:(AUAudioUnitPreset *)userPreset error:(NSError **) outError API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+- (BOOL)saveUserPreset:(AUAudioUnitPreset *)userPreset error:(NSError **)outError API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
-/*!	@method		deleteUserPreset:userPreset:error
+/*!	@method		deleteUserPreset:error
 	@brief		Remove a user preset.
 	@discussion
 		The user preset will be removed from userPresets and will be permanently deleted.
@@ -755,9 +755,9 @@ API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 		YES for success. NO in the event of a failure, in which case the error is returned in
 		outError.
 */
-- (BOOL)deleteUserPreset:(AUAudioUnitPreset *)userPreset error:(NSError **) outError API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+- (BOOL)deleteUserPreset:(AUAudioUnitPreset *)userPreset error:(NSError **)outError API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
-/*! @method		presetStateFor:userPreset:error
+/*! @method		presetStateFor:error
 	@brief		Retrieve the state stored in a user preset
  	@discussion
 		This method allows access to the contents of a preset without having to set that preset as
@@ -797,7 +797,7 @@ API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
  													@kAUPresetNumberKey: NSNumber,
 													@kAUPresetDataKey : NSData
 */
-- (nullable NSDictionary<NSString *, id> *)presetStateFor:(AUAudioUnitPreset *)userPreset error:(NSError **) outError API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+- (nullable NSDictionary<NSString *, id> *)presetStateFor:(AUAudioUnitPreset *)userPreset error:(NSError **)outError API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
 /*!	@property	supportsUserPresets
 	@brief		Specifies whether an audio unit supports loading and saving user presets
@@ -1012,7 +1012,7 @@ API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 */
 - (MIDICIProfileState *)profileStateForCable:(uint8_t)cable channel:(MIDIChannelNumber)channel API_AVAILABLE(macos(10.14), ios(12.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 
-/*!	@method		enableProfile:profile:cable:onChannel:error
+/*!	@method		enableProfile:cable:onChannel:error:
 	@brief		Enable a MIDI-CI Profile on the specified cable/channel.
 	@param	profile
 		The MIDI-CI profile to be enabled.
@@ -1031,7 +1031,7 @@ API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
             onChannel:(MIDIChannelNumber)channel
                 error:(NSError **)outError API_AVAILABLE(macos(10.14), ios(12.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 
-/*!	@method		disableProfile:profile:cable:onChannel:error
+/*!	@method		disableProfile:cable:onChannel:error:
 	@brief		Disable a MIDI-CI Profile on the specified cable/channel.
 	@param	profile
 		The MIDI-CI profile to be disabled.
@@ -1170,6 +1170,17 @@ typedef void (^AUInputHandler)(AudioUnitRenderActionFlags *actionFlags, const Au
 	@brief		Stops the audio hardware.
 */
 - (void)stopHardware;
+
+/*!	@property	osWorkgroup
+	@brief		The os_workgroup_t to which the input/output audio unit belongs.
+	@discussion
+		For further background, see <AudioToolbox/AudioWorkInterval.h>.
+
+		Bridged to the v2 property kAudioOutputUnitProperty_OSWorkgroup.
+*/
+@property (NS_NONATOMIC_IOSONLY, readonly) os_workgroup_t osWorkgroup
+	API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0))
+	__SWIFT_UNAVAILABLE_MSG("Swift is not supported for use with audio realtime threads");
 
 @end
 
@@ -1318,7 +1329,7 @@ API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 @property (NS_NONATOMIC_IOSONLY, readonly) AUAudioUnitBusType busType;
 
 /*! @property   ownerAudioUnit
- @brief         The audio unit that owns the bus.
+	@brief      The audio unit that owns the bus.
 */
 @property (NS_NONATOMIC_IOSONLY, readonly, assign) AUAudioUnit *ownerAudioUnit;
 

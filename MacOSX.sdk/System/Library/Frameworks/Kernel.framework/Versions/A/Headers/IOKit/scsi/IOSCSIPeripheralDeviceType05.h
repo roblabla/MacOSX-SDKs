@@ -38,8 +38,7 @@
 //-----------------------------------------------------------------------------
 //	Class Declaration
 //-----------------------------------------------------------------------------
-
-class IOSCSIPeripheralDeviceType05 : public IOSCSIMultimediaCommandsDevice
+class __exported IOSCSIPeripheralDeviceType05 : public IOSCSIMultimediaCommandsDevice
 {
 	
 	OSDeclareDefaultStructors ( IOSCSIPeripheralDeviceType05 )

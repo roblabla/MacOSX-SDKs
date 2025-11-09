@@ -128,6 +128,7 @@ __END_DECLS
 #define UID_ROOT        0
 #define UID_BIN         3
 #define UID_UUCP        66
+#define UID_LOGD        272
 
 /* XXX */
 #define GID_WHEEL       0
@@ -138,6 +139,7 @@ __END_DECLS
 #define GID_GAMES       13
 #define GID_DIALER      68
 #define GID_WINDOWSERVER 88
+#define GID_LOGD        272
 #endif /* __APPLE_API_PRIVATE */
 
 #endif /* !_MISCFS_DEVFS_DEVFS_H_ */

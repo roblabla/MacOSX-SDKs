@@ -1,7 +1,7 @@
 /*
     NSFetchIndexDescription.h
     Core Data
-    Copyright (c) 2017-2019, Apple Inc.
+    Copyright (c) 2017-2020, Apple Inc.
     All rights reserved.
 */
 
@@ -15,7 +15,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 API_AVAILABLE(macosx(10.13),ios(11.0),tvos(11.0),watchos(4.0))
-@interface NSFetchIndexDescription : NSObject <NSCoding> {
+@interface NSFetchIndexDescription : NSObject <NSCoding,NSCopying> {
 }
 
 - (instancetype)initWithName:(NSString*)name elements:(nullable NSArray <NSFetchIndexElementDescription *>*)elements;

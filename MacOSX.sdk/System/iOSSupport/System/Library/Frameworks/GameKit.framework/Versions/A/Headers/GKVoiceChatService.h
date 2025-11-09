@@ -92,11 +92,12 @@
  
 */
 
+#import <TargetConditionals.h>
 #import <Foundation/Foundation.h>
 #import <GameKit/GKDefines.h>
 #import <GameKit/GKPublicProtocols.h>
 
-// This a not a Game Center feature. To support voice chat as part of Game Center online play, see GKVoiceChat.
+/// This a not a Game Center feature. To support voice chat as part of Game Center online play, see GKVoiceChat.
 @class GKVoiceChatService;
 
 // GKVoiceChatService provides voice chat capabilities depending on your networking situation.
@@ -149,4 +150,5 @@ NS_CLASS_DEPRECATED_IOS(3_0, 7_0, "Use GKVoiceChat instead")
 @end
 
 GK_EXTERN_WEAK    NSString *  const GKVoiceChatServiceErrorDomain;
+
 

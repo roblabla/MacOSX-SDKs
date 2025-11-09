@@ -1,4 +1,4 @@
-#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AudioUnitParameters.h>)
+#if (defined(__USE_PUBLIC_HEADERS__) && __USE_PUBLIC_HEADERS__) || (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AudioUnitParameters.h>)
 /*!
 	@file		AudioUnitParameters.h
  	@framework	AudioToolbox.framework
@@ -59,7 +59,7 @@ key number plus 256. For example, the aftertouch parameter ID for MIDI key #60 (
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-The following sections specify the parameter IDs for the audio units included in Mac OS X.
+The following sections specify the parameter IDs for the audio units included in macOS.
 Host applications can use these IDs to directly address these parameters without first discovering 
 them through the AUParameterInfo mechanism (see the AudioUnitProperties.h header file)
 
@@ -103,7 +103,7 @@ CF_ENUM(AudioUnitParameterID) {
     kSpatialMixerParam_Azimuth		= 0,
     
     // Input, Degrees, -90->90, 0
-    kSpatialMixerParam_Elevation		= 1,
+    kSpatialMixerParam_Elevation	= 1,
     
     // Input, Metres, 0->10000, 0
     kSpatialMixerParam_Distance		= 2,
@@ -137,7 +137,16 @@ CF_ENUM(AudioUnitParameterID) {
     // Input, Lowpass filter attenuation at 5KHz :		decibels -100.0dB -> 0.0dB, 0.0dB
     // smaller values make direct sound more muffled; a value of 0.0 indicates no filtering
     // Obstruction is a filter applied to the "direct" part of the sound (so is post reverb send)
-    kSpatialMixerParam_ObstructionAttenuation = 11
+    kSpatialMixerParam_ObstructionAttenuation = 11,
+    
+    // Global, Degrees, -180->180, 0
+    kSpatialMixerParam_HeadYaw        = 19,
+    
+    // Global, Degrees, -90->90, 0
+    kSpatialMixerParam_HeadPitch      = 20,
+    
+    // Global, Degrees, -180->180, 0
+    kSpatialMixerParam_HeadRoll       = 21
 };
     
 // Reverb parameters applicable to AUSpatialMixer
@@ -540,6 +549,12 @@ CF_ENUM(AudioUnitParameterID) {
 	kDelayParam_LopassCutoff	 		= 3
 };
 
+// Parameters for the AUSampleDelay unit
+CF_ENUM(AudioUnitParameterID) {
+		// Global, Samples, 0->(SampleRate), 0
+	kSampleDelayParam_DelayFrames 		= 0
+};
+
 // Parameters for the AUNBandEQ unit
 // Note that the parameter IDs listed correspond to band 0 (zero) of the unit. The parameter IDs for
 // higher bands can be obtained by adding the zero-indexed band number to the corresponding band 0
@@ -568,8 +583,8 @@ CF_ENUM(AudioUnitParameterID) {
 };
 
 /*!
- @enum			AUNBandEQ filter types
- @discussion		Constants available as values for the kAUNBandEQParam_FilterType parameter defined above
+ @enum		AUNBandEQ filter types
+ @brief		Constants available as values for the kAUNBandEQParam_FilterType parameter defined above
  
  @constant		kAUNBandEQFilterType_Parametric
  Parametric filter based on Butterworth analog prototype. Uses parameterization where
@@ -641,8 +656,7 @@ CF_ENUM(AudioUnitParameterID) {
  - kAUNBandEQParam_Frequency (center frequency)
  - kAUNBandEQParam_Gain (shelf gain)
  - kAUNBandEQParam_Bandwidth
- 
- */
+*/
 CF_ENUM(long) {
 	kAUNBandEQFilterType_Parametric 						= 0,
 	kAUNBandEQFilterType_2ndOrderButterworthLowPass			= 1,
@@ -920,7 +934,7 @@ CF_ENUM(AudioUnitParameterID) {
 		// Global, dB, -120->40, 0
 	kMusicDeviceParam_ReverbVolume	= 2
 };
-// In Mac OS X v10.5, the DLSMusicDevice audio unit does not report parameters in the Group scope.
+// In macOS v10.5, the DLSMusicDevice audio unit does not report parameters in the Group scope.
 // However, parameter values can be set in Group scope that correspond to controller values defined  
 // by the MIDI specification. This includes the standard MIDI Controller values (such as Volume and
 // Mod Wheel) as well as MIDI status messages (such as Pitch Bend and Channel Pressure) and the 

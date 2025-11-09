@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: DE091C72-3E9E-35C5-A08A-3D7636494A40' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           3C727567-774E-3506-A5DE-E112EE62AC23
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           46EDACAE-BFD5-328F-B71D-FDBB5543E1A6
 install-name:    '/System/Library/PrivateFrameworks/PersonaUI.framework/Versions/A/PersonaUI'
-exports:         
-  - archs:           [ x86_64 ]
-    symbols:         [ _CGSizeFromPRLikenessCacheSize, _NSStringFromMD5, _NSStringFromPRLikenessCacheSize, 
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _CGSizeFromPRLikenessCacheSize, _NSStringFromPRLikenessCacheSize, 
                        _PRImageCreateCircularImageInRect, _PRImageCreateWithImageInRect, 
                        _PRImageForceDecompress, _PRLikenessCacheSizeClosestToSize, 
                        _PRLikenessCacheSizeGetCost, _PRLikenessSnapshotOptionCircular, 

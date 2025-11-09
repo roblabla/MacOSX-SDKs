@@ -8,7 +8,7 @@
  	Bugs?:  	For bug reports, consult the following page on
  				the World Wide Web:
  
- 					http://developer.apple.com/bugreporter/
+ 					http://feedbackassistant.apple.com/
  
 */
 
@@ -192,12 +192,47 @@ MIDISetupFromData(	CFDataRef 		data,
 
 //  -----------------------------------------------------------------------------
 /*!
+	@function		MIDIDeviceNewEntity
+
+	@discussion		Drivers call this function to specify one of the entities that
+					comprise a device.
+					
+					Non-drivers may call this function as of macOS 10.16 & iOS 14 to
+					add entities to external devices.
+	
+	@param			device
+						The device to which an entity is to be added.
+	@param			name
+						The name of the new entity.
+	@param			protocol
+						The MIDI protocol variant used by the sources and
+						destinations that comprise this entity.
+	@param			embedded
+						True if this entity is inside the device, false if the
+						entity simply consists of external connectors to which
+						other devices can be attached.
+	@param			numSourceEndpoints
+						The number of source endpoints the entity has.
+	@param			numDestinationEndpoints
+						The number of destination endpoints the entity has.
+	@param			newEntity
+						On successful return, points to the newly-created entity.
+	@result			An OSStatus result code.
+*/
+extern OSStatus
+MIDIDeviceNewEntity(MIDIDeviceRef device, CFStringRef name, MIDIProtocolID protocol,
+					Boolean embedded, ItemCount numSourceEndpoints,
+					ItemCount numDestinationEndpoints, MIDIEntityRef *newEntity)
+															API_AVAILABLE(macos(11.0), ios(14.0));
+
+//  -----------------------------------------------------------------------------
+/*!
 	@function		MIDIDeviceAddEntity
 
 	@discussion		Drivers call this function to specify one of the entities that 
 					comprise a device.
 					
-					Non-drivers may call this function as of CoreMIDI 1.1, to
+					Non-drivers may call this function as of CoreMIDI 1.1 to
 					add entities to external devices.
 	
 	@param			device
@@ -220,7 +255,7 @@ extern OSStatus
 MIDIDeviceAddEntity(MIDIDeviceRef device, CFStringRef name, 
 					Boolean embedded, ItemCount numSourceEndpoints,
 					ItemCount numDestinationEndpoints, MIDIEntityRef *newEntity)
-																API_AVAILABLE(macos(10.0), ios(4.2));
+				API_DEPRECATED_WITH_REPLACEMENT("MIDIDeviceNewEntity", macos(10.0, API_TO_BE_DEPRECATED), ios(4.2, API_TO_BE_DEPRECATED));
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -249,6 +284,9 @@ MIDIDeviceRemoveEntity(MIDIDeviceRef device, MIDIEntityRef entity)
 					or remove an entity's endpoints.
 					
 					New for CoreMIDI 1.3.
+
+					The MIDIProtocolID of new endpoints is initially the same as that of
+					the entity.
 	
 	@param			entity
 						The entity whose endpoints are to be manipulated.

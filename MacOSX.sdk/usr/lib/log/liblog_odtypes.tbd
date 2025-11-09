@@ -1,9 +1,15 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: C677E6DF-AA07-3D14-9D19-27FAC78FF423' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           E03EABA7-BE1F-3B7E-B40A-70E21B171759
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           126F710D-FCDF-3EE6-9C14-DE69246D1778
 install-name:    '/usr/lib/log/liblog_odtypes.dylib'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _OSLogCopyFormattedString ]
 ...

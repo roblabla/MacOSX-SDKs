@@ -2,7 +2,7 @@
 //  GKError.h
 //  Game Center
 //
-//  Copyright 2010-2019 Apple Inc. All rights reserved.
+//  Copyright 2010-2020 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -41,5 +41,8 @@ typedef NS_ENUM(NSInteger, GKErrorCode) {
     GKErrorMatchNotConnected                    = 28,
     GKErrorGameSessionRequestInvalid            = 29,
     GKErrorRestrictedToAutomatch                = 30,
-    GKErrorAPINotAvailable                      = 31
+    GKErrorAPINotAvailable                      = 31,
+    GKErrorNotAuthorized                        = 32,
+    GKErrorConnectionTimeout                    = 33,
+    GKErrorAPIObsolete                          = 34,
 };

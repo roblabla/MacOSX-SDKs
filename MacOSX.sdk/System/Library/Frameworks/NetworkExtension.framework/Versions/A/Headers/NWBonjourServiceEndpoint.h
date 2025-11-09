@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
  *		Bonjour service MyMusicStudio._music._tcp.local. has the name "MyMusicStudio",
  *		the type "_music._tcp", and the domain "local".
  */
-API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
+API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface NWBonjourServiceEndpoint : NWEndpoint
 
 /*!
@@ -36,25 +36,25 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
  */
 + (instancetype)endpointWithName:(NSString *)name
 							type:(NSString *)type
-						  domain:(NSString *)domain API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+						  domain:(NSString *)domain API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @property name
  * @discussion The endpoint's Bonjour service name.
  */
-@property (readonly) NSString *name API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+@property (nonatomic, readonly) NSString *name API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @property type
  * @discussion The endpoint's Bonjour service type.
  */
-@property (readonly) NSString *type API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+@property (nonatomic, readonly) NSString *type API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @property domain
  * @discussion The endpoint's Bonjour service domain.
  */
-@property (readonly) NSString *domain API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+@property (nonatomic, readonly) NSString *domain API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 @end
 

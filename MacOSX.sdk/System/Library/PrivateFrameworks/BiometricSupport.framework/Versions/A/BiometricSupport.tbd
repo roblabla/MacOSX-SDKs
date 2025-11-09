@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 54C36A59-3D09-3FC0-99A4-39BC0D03DF5C' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           CEA5ECEC-91E3-3BF3-9C98-F673829DACB6
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           DD0CC21F-47B9-3E2A-80AB-F1CA3BD8AE45
 install-name:    '/System/Library/PrivateFrameworks/BiometricSupport.framework/Versions/A/BiometricSupport'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _AppendCommentToPGM, _BKLogCode, _BKLogEvent, _DEFAULT_SNAPSHOT_TIME, 
                        _LoadRawImageAsPGM, _MCDMExtractMessageData, _RIESAdd, _RIESClear, 
                        _RIESDelete, _RIESInit, _RIESLoad, _RIESSave, _RIESUpdate, 
@@ -24,6 +30,6 @@ exports:
                        BiometricEnrollOperation, BiometricKitIdentity, BiometricKitXPCExportedClientObject, 
                        BiometricKitXPCExportedObject, BiometricKitXPCServer, BiometricMatchOperation, 
                        BiometricOperation, BiometricPreferences, BiometricPresenceDetectOperation, 
-                       BiometricSupportTools, BiometricSupportUserNotification, SystemProtectedConfig, 
-                       UserProtectedConfig ]
+                       BiometricSupportTools, BiometricSupportUserNotification, CatacombComponent, 
+                       CatacombStateCache, SystemProtectedConfig, UserProtectedConfig ]
 ...

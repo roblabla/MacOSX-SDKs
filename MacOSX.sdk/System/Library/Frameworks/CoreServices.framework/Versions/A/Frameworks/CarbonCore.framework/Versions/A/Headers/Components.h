@@ -209,7 +209,8 @@ enum {
   platformPowerPCNativeEntryPoint = 5,
   platformIA32NativeEntryPoint  = 6,
   platformPowerPC64NativeEntryPoint = 7,
-  platformX86_64NativeEntryPoint = 8
+  platformX86_64NativeEntryPoint = 8,
+  platformArm64NativeEntryPoint = 9
 };
 
 enum {

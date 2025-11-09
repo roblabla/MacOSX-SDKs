@@ -2414,7 +2414,7 @@ AESizeOfFlattenedDesc(const AEDesc * theAEDesc)               API_AVAILABLE( mac
  *    returns the amount of buffer used in actualSize. If bufferSize
  *    was too small it returns errAEBufferTooSmall (-1741) and does not
  *    fill in any of the buffer. The resulting buffer is only useful
- *    with an AEUnflattenDesc call. 
+ *    with an AEUnflattenDescFromBytes call. 
  *    Note: if you pass a NULL buffer pointer it returns noErr but
  *    fills in the actualSize field anyway.
  *  
@@ -2457,39 +2457,21 @@ AEFlattenDesc(
   Size *          actualSize)                                 API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
-/*
- *  AEUnflattenDesc()
- *  
- *  Discussion:
- *    Allocates an AEDesc (given a Null Desc) given a flattened data
- *    buffer. It assumes it was given a good buffer filled in by
- *    AEFlattenDesc. It returns paramErr if it discovers something
- *    fishy about the buffer.
- *  
- *  Mac OS X threading:
- *    Thread safe since version 10.2
- *  
- *  Parameters:
- *    
- *    buffer:
- *      A pointer to memory, allocated by the application, that
- *      contains flattened data produced by a previous call to
- *      AEFlattenDesc.
- *    
- *    result:
- *      A null descriptor. On successful completion, points to a
- *      descriptor created from the flattened data. The caller is
- *      responsible for disposing of the descriptor.
- *  
- *  Availability:
- *    Mac OS X:         in version 10.0 and later in ApplicationServices.framework
- *    CarbonLib:        in CarbonLib 1.4 and later
- *    Non-Carbon CFM:   not available
- */
-extern OSStatus 
+extern OSStatus
 AEUnflattenDesc(
   const void *  buffer,
-  AEDesc *      result)                                       API_AVAILABLE( macos(10.0) ) API_UNAVAILABLE( ios, tvos, watchos );
+  AEDesc *      result)                                       API_DEPRECATED_WITH_REPLACEMENT("AEUnflattenDescFromBytes", macos(10.0,11.0)) API_UNAVAILABLE( ios, tvos, watchos );
+
+/**
+ * Allocates an AEDesc (given a Null Desc) constructed from a flattened data
+ * buffer produced by calling AEFlattenDesc.
+ *
+ * @param buffer A pointer to data produced by `AEFlattenDesc`
+ * @param bufferLen The size of the data referenced by `buffer`
+ * @param result On successful completion, a pointer to an `AEDesc*` containing the unflattened descriptor. The caller is responsible for disposing of it.
+ * @return `noErr` on success, `paramErr` if the buffer could not be parsed, or `memFullErr` for irrational memory sizes.
+ */
+extern OSStatus AEUnflattenDescFromBytes( const void* buffer, size_t bufferLen, AEDesc* result ) API_AVAILABLE( macos(11.0) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 
 /**************************************************************************

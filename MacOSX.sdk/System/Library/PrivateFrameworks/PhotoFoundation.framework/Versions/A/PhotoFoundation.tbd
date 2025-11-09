@@ -1,23 +1,38 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 42E41BCB-32C2-30B0-8E8F-F8DC40BA1F11', 'x86_64: 42E41BCB-32C2-30B0-8E8F-F8DC40BA1F11' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           60BC1CDC-9057-3510-B0D2-77C109DE9CDF
+  - target:          x86_64-maccatalyst
+    value:           60BC1CDC-9057-3510-B0D2-77C109DE9CDF
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           6CA0805F-A6E6-3015-9ADF-9A36E4235528
+  - target:          arm64e-maccatalyst
+    value:           6CA0805F-A6E6-3015-9ADF-9A36E4235528
 install-name:    '/System/Library/PrivateFrameworks/PhotoFoundation.framework/Versions/A/PhotoFoundation'
-current-version: 101.13.100
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 311.0.120
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _LastAddRemoveTaskState, _NSStringFromPFIntPoint, _NSStringFromPFIntRect, 
                        _NSStringFromPFIntSize, _PFAspectRatioToWholeLengths, _PFCMTimeDescription, 
                        _PFCMTimeFromQTTimeString, _PFCMTimeRangeDescription, _PFCMTimeRangeFromQTTimeRangeString, 
-                       _PFConstrainPointToRect, _PFDateFormatterForTimeZone, _PFDateFormatterForTimeZoneAndFormat, 
-                       _PFDateFromGMTDateTimeZone, _PFDateFromString, _PFDateFromStringTimeZoneFormat, 
-                       _PFDateRangeStringRepresentationControllerNonExpiringTimeInterval, 
+                       _PFConstrainPointToRect, _PFCount, _PFDateFormatterForTimeZone, 
+                       _PFDateFormatterForTimeZoneAndFormat, _PFDateFromGMTDateTimeZone, 
+                       _PFDateFromString, _PFDateFromStringTimeZoneFormat, _PFDateRangeStringRepresentationControllerNonExpiringTimeInterval, 
                        _PFDispatchAsyncEnforceCurrentQoS, _PFDispatchAsyncEnforceQoS, 
                        _PFExists, _PFFileNameUniquingEmptyString, _PFFileNameUniquingFormat, 
                        _PFFileNameUniquingInitialCountString, _PFFileNameUniquingLeftDelimiter, 
                        _PFFileNameUniquingRightParen, _PFFilter, _PFFind, _PFGMTDateFromDateTimeZone, 
                        _PFGMTDateFromLocalDate, _PFGMTTimeZone, _PFGetProcessIdentifier, 
-                       _PFInitializationLogSubsystem, _PFLocalDateFromGMTDate, _PFLocalizedDateRangeLocaleOptionName, 
+                       _PFInitializationLogSubsystem, _PFInitializationSetAdditionalClasses, 
+                       _PFInvalidPerfCheckErrorStr, _PFLocalDateFromGMTDate, _PFLocalizedDateRangeLocaleOptionName, 
                        _PFLocalizedDateRangeUndefinedFromDateRepresentationOptionName, 
                        _PFLocalizedDateRangeUndefinedToDateRepresentationOptionName, 
                        _PFLogOptionAttachmentURL, _PFLogOptionAttachmentUTI, _PFLogOptionFacilityPrefix, 
@@ -25,12 +40,17 @@ exports:
                        _PFLogUserDefaultsLogDebugSubsystemsKey, _PFLogUserDefaultsLogLevelKey, 
                        _PFLogUserDefaultsLogNoStderrKey, _PFLogUserDefaultsLogTraceSubsystemsKey, 
                        _PFMainRunLoopPerformAfter, _PFMainRunLoopPerformAsync, _PFMap, 
-                       _PFMapIndexes, _PFObjc_classIsSubclassOfClass, _PFObjc_enumerateClasses, 
-                       _PFObjc_enumerateSubclasses, _PFOppositeRectPoint, _PFPointInterpolate, 
-                       _PFPointMapToRect, _PFRectAlignToPoint, _PFRectAlignWithRect, 
-                       _PFRectAreaToRectPoint, _PFRectAspectRatio, _PFRectBoundsForAreaType, 
-                       _PFRectBoundsForAreas, _PFRectCenteredScale, _PFRectCenteredScaleToContain, 
-                       _PFRectCenteredScaleToFill, _PFRectCenteredScaleToFill2, _PFRectCenteredScaleToFillByCropping, 
+                       _PFMapIndexes, _PFObjc_classIsSubclassOfClass, _PFObjc_enumerateClassNamesForImageHeader, 
+                       _PFObjc_enumerateSubclassesForHeader, _PFOppositeRectPoint, 
+                       _PFPerfCheckTypeCPUMillionInstructionsKey, _PFPerfCheckTypeCPUTimeMilliSecondsKey, 
+                       _PFPerfCheckTypeProcessMemoryCurrentKiloBytesAfterRequestKey, 
+                       _PFPerfCheckTypeProcessMemoryCurrentKiloBytesInitialKey, _PFPerfCheckTypeProcessMemoryPeakKiloBytesAfterRequestKey, 
+                       _PFPerfCheckTypeProcessMemoryPeakKiloBytesInitialKey, _PFPerfCheckTypeStorageDirtiedKey, 
+                       _PFPointInterpolate, _PFPointMapToRect, _PFRectAlignToPoint, 
+                       _PFRectAlignWithRect, _PFRectAreaToRectPoint, _PFRectAspectRatio, 
+                       _PFRectBoundsForAreaType, _PFRectBoundsForAreas, _PFRectCenteredScale, 
+                       _PFRectCenteredScaleToContain, _PFRectCenteredScaleToFill, 
+                       _PFRectCenteredScaleToFill2, _PFRectCenteredScaleToFillByCropping, 
                        _PFRectCenteredScaleToFit, _PFRectClampRect, _PFRectClosestArea, 
                        _PFRectClosestPoint, _PFRectClosestSide, _PFRectContainPoint, 
                        _PFRectContainRect, _PFRectCouldContainRect, _PFRectDifference, 
@@ -54,12 +74,11 @@ exports:
                        _PFTextRingBufferCopy, _PFTextRingBufferCreate, _PFTextRingBufferCreateWithBuffer, 
                        _PFTextRingBufferDestroy, _PFTimeZoneDateFromGMTDate, _PFZeroIntPoint, 
                        _PFZeroIntSize, _PFZlibErrorDomain, _PF_QOSClassName, _PF_QOSClassOfIndex, 
-                       _PF_QOSClassOfName, _PF_QOSIndexOfClass, _PF_configureClassForMainThreadOnlyDealloc, 
-                       _PF_dispatchAsyncToQueueWithCurrentQOS, _PF_enumerateQOSClasses, 
-                       _PF_enumerateQOSClassesReverse, _PF_enumerateQOSIndices, _PF_runOnce, 
-                       _PF_succeedOnce, _PhotoFoundationVersionNumber, _PhotoFoundationVersionString, 
-                       _ZeroRectEdge, __PFAssertContinueHandler, __PFAssertFailHandler, 
-                       __PFThreadName, __qosNameTable, _kCacheDataAccessTimeCacheEntryKey, 
+                       _PF_QOSClassOfName, _PF_QOSIndexOfClass, _PF_dispatchAsyncToQueueWithCurrentQOS, 
+                       _PF_enumerateQOSClasses, _PF_enumerateQOSClassesReverse, _PF_enumerateQOSIndices, 
+                       _PF_runOnce, _PF_succeedOnce, _PhotoFoundationVersionNumber, 
+                       _PhotoFoundationVersionString, _ZeroRectEdge, __PFAssertContinueHandler, 
+                       __PFAssertFailHandler, __PFThreadName, __qosNameTable, _kCacheDataAccessTimeCacheEntryKey, 
                        _kCacheDataFileLengthCacheEntryKey, _kCacheDataFileNameExtension, 
                        _kCacheDataFileNameTempExtension, _kCacheDataUniqueIDCacheEntryKey, 
                        _kCacheDirectoryName, _kCacheManagementDataInitialCapacity, 
@@ -78,14 +97,14 @@ exports:
                        PFBlockControl, PFBookmarkCoordinator, PFCache, PFCacheApproximateLRUCacheEntry, 
                        PFCacheApproximateLRUMaximumCountPolicy, PFCacheEntry, PFCacheLRUMaximumCountPolicy, 
                        PFCachePolicy, PFCacheStatistics, PFCanceler, PFCancelerObserver, 
-                       PFChecksum, PFCoalescer, PFCoalescer2, PFCoalescerActivityToken, 
-                       PFCoalescerContext, PFConcurrentQueue, PFConcurrentQueueClass, 
-                       PFDateRangeStringRepresentationController, PFDeferredInitialization, 
-                       PFDeferredInitializationTrigger, PFDirectMessagingMulticaster, 
-                       PFDirectoryEnumerator, PFDiskCache, PFDiskCacheExpirationPolicy, 
-                       PFDiskCacheExpirationPolicy_DiskSpaceLeft, PFDiskCacheExpirationPolicy_DiskUsage, 
-                       PFDiskCacheExpirationPolicy_TotalSize, PFDiskCacheFile, PFDiskCacheFile_PFPurgeableData, 
-                       PFDispatchQueue, PFDispatchQueueBaseClass, PFDispatchQueueBlockOnDemandExtension, 
+                       PFChecksum, PFCoalescer, PFCoalescerActivityToken, PFCoalescerContext, 
+                       PFConcurrentQueue, PFConcurrentQueueClass, PFDateRangeStringRepresentationController, 
+                       PFDeferredInitialization, PFDeferredInitializationTrigger, 
+                       PFDirectMessagingMulticaster, PFDirectoryEnumerator, PFDiskCache, 
+                       PFDiskCacheExpirationPolicy, PFDiskCacheExpirationPolicy_DiskSpaceLeft, 
+                       PFDiskCacheExpirationPolicy_DiskUsage, PFDiskCacheExpirationPolicy_TotalSize, 
+                       PFDiskCacheFile, PFDiskCacheFile_PFPurgeableData, PFDispatchQueue, 
+                       PFDispatchQueueBaseClass, PFDispatchQueueBlockOnDemandExtension, 
                        PFDispatchQueueClearingExtension, PFDispatchQueueDebugExtension, 
                        PFDispatchQueueExtension, PFDispatchQueueExtensionManager, 
                        PFDispatchQueueOSTransactionExtension, PFDispatchQueueRunBlockExtension, 
@@ -108,15 +127,14 @@ exports:
                        PFStateMachineGraph, PFStateMachineNode, PFStateMachineReturnTransition, 
                        PFStateMachineSubflowTransition, PFStateMachineTransition, 
                        PFString, PFStringUtilities, PFTaggedPointer, PFTemporaryBuffer, 
-                       PFTemporaryBufferStatistics, PFTimeIntervalCoalescer, PFURLEventHandler, 
-                       PFUtilities, PFUtilityAction, PFUuidData, PFWeakContainer, 
-                       PFWeakHash, PFWorkBatch, PFWorkContext, PFZlibDataCompression, 
+                       PFTemporaryBufferStatistics, PFTimeIntervalCoalescer, PFTimedPerfCheck, 
+                       PFURLEventHandler, PFUtilities, PFUtilityAction, PFUuidData, 
+                       PFWeakContainer, PFWeakHash, PFWorkBatch, PFWorkContext, PFZlibDataCompression, 
                        PFZlibDataCompressionOptions, PFZlibDataDecompressionOptions, 
                        _PFActionLogEvent, _PFActionLogMessage, _PFActionLogProgress, 
                        _PFActionLogStateChange, _PFDQDEBlockInfo, _PFDQDECallSite, 
                        _PFDQRBEThreadStack, _PFDeferredInitializationTriggerWorkItem, 
                        _PFFinishedLaunchingTriggerWorkItem, _PFLocalizedDateRangeFormatter, 
-                       _PFMainThreadReleaseMethods, _PFMainThreadReleaseObjectsHash, 
                        _PFMulticasterMessageReceivers, _PFMulticasterReceiverList, 
                        _PFPlaceholderMulticaster, _PFPriorityQueueExtensionBlockInfo, 
                        _PFStartupInitializationTriggerWorkItem, _PFTriggeredWorkItem, 
@@ -159,9 +177,6 @@ exports:
                        _PFDeferredInitializationTriggerWorkItem._sleepTime, _PFDeferredInitializationTriggerWorkItem._startTime, 
                        _PFDeferredInitializationTriggerWorkItem._targetPercent, _PFDeferredInitializationTriggerWorkItem._timerFired, 
                        _PFDeferredInitializationTriggerWorkItem._wakePercent, _PFDeferredInitializationTriggerWorkItem._wakeTime, 
-                       _PFMainThreadReleaseObjectsHash._highIndex, _PFMainThreadReleaseObjectsHash._lowIndex, 
-                       _PFMainThreadReleaseObjectsHash._objectCount, _PFMainThreadReleaseObjectsHash._objects, 
-                       _PFMainThreadReleaseObjectsHash._objectsClasses, _PFMainThreadReleaseObjectsHash._releaseCounts, 
                        _PFMulticasterMessageReceivers._strongReceivers, _PFMulticasterMessageReceivers._weakReceivers, 
                        _PFMulticasterReceiverList._extraReceivers, _PFMulticasterReceiverList._inlineReceivers, 
                        _PFTriggeredWorkItem._triggeredWorkItems, _PFTriggeredWorkItem._triggeredWorkItemsLock, 

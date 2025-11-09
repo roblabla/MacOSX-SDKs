@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 937B63B6-4A8E-31C7-8FA0-615F14F9107E' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           50655A34-39E1-3DA6-A2E9-2261689207DC
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           506382E5-5A22-3275-9A8F-EE102B03EFFD
 install-name:    '/System/Library/PrivateFrameworks/CloudFamilyRestrictions.framework/Versions/A/CloudFamilyRestrictions'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CFRAllowedContactEmail, _CFRAllowedContacts, _CFRAppAccessEnabledKey, 
                        _CFRAppBlackListKey, _CFRAppLimitsDomain, _CFRAppLimitsOldDomain, 
                        _CFRAppStoreDomain, _CFRAppStoreRestrictPurchaseKey, _CFRAppStoreRestrictPurchaseLimitKey, 

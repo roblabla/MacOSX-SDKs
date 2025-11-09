@@ -1,11 +1,18 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 46DA4D9A-C82E-350E-802C-26DDA0C65421' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           AC297C1C-CBDF-342D-A301-BD220980B48A
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           B050E6F9-0849-317C-A65C-9B0AC2647FDF
 install-name:    '/System/Library/PrivateFrameworks/TrustedPeers.framework/Versions/A/TrustedPeers'
-exports:         
-  - archs:           [ x86_64 ]
-    symbols:         [ _TPErrorDomain, _TPMatcherErrorDomain, _TPModelLog, _TPPBAncientEpochReadFrom, 
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _TPClassificationLog, _TPErrorDomain, _TPMachineIDStatusToString, 
+                       _TPMatcherErrorDomain, _TPModelLog, _TPPBAncientEpochReadFrom, 
                        _TPPBDictionaryMatchingRuleFieldExistsReadFrom, _TPPBDictionaryMatchingRuleFieldRegexMatchReadFrom, 
                        _TPPBDictionaryMatchingRuleReadFrom, _TPPBDispositionDisallowedMachineIDReadFrom, 
                        _TPPBDispositionDuplicateMachineIDReadFrom, _TPPBDispositionEntryReadFrom, 
@@ -19,8 +26,8 @@ exports:
                        _TPResultErrorDomain, _TrustedPeersVersionNumber, _TrustedPeersVersionString, 
                        _checkTypesafeSignature, _typesafeSignature ]
     objc-classes:    [ TPCachedViableBottles, TPCategoryRule, TPDictionaryMatchingRule, 
-                       TPECPublicKeyFactory, TPHashBuilder, TPModel, TPPBAncientEpoch, 
-                       TPPBDictionaryMatchingRule, TPPBDictionaryMatchingRuleFieldExists, 
+                       TPECPublicKeyFactory, TPHashBuilder, TPMachineID, TPMachineIDList, 
+                       TPModel, TPPBAncientEpoch, TPPBDictionaryMatchingRule, TPPBDictionaryMatchingRuleFieldExists, 
                        TPPBDictionaryMatchingRuleFieldRegexMatch, TPPBDisposition, 
                        TPPBDispositionDisallowedMachineID, TPPBDispositionDuplicateMachineID, 
                        TPPBDispositionEntry, TPPBPeerDynamicInfo, TPPBPeerPermanentInfo, 
@@ -29,7 +36,8 @@ exports:
                        TPPBPolicyModelToCategory, TPPBPolicyProhibits, TPPBPolicyRedaction, 
                        TPPBPolicySecret, TPPBUnknownMachineID, TPPBVoucher, TPPeer, 
                        TPPeerDynamicInfo, TPPeerPermanentInfo, TPPeerStableInfo, 
-                       TPPolicy, TPPolicyDocument, TPRecoveryKeyPair, TPVoucher ]
+                       TPPolicy, TPPolicyDocument, TPPolicyVersion, TPRecoveryKeyPair, 
+                       TPSyncingPolicy, TPVoucher ]
     objc-ivars:      [ TPPBAncientEpoch._candidateEpoch, TPPBAncientEpoch._has, TPPBAncientEpoch._myEpoch, 
                        TPPBDictionaryMatchingRule._ands, TPPBDictionaryMatchingRule._exists, 
                        TPPBDictionaryMatchingRule._has, TPPBDictionaryMatchingRule._match, 
@@ -46,15 +54,18 @@ exports:
                        TPPBPeerPermanentInfo._epoch, TPPBPeerPermanentInfo._has, 
                        TPPBPeerPermanentInfo._machineId, TPPBPeerPermanentInfo._modelId, 
                        TPPBPeerPermanentInfo._signingPubKey, TPPBPeerStableInfo._clock, 
-                       TPPBPeerStableInfo._deviceName, TPPBPeerStableInfo._has, TPPBPeerStableInfo._osVersion, 
-                       TPPBPeerStableInfo._policyHash, TPPBPeerStableInfo._policySecrets, 
-                       TPPBPeerStableInfo._policyVersion, TPPBPeerStableInfo._recoveryEncryptionPublicKey, 
-                       TPPBPeerStableInfo._recoverySigningPublicKey, TPPBPeerStableInfo._serialNumber, 
+                       TPPBPeerStableInfo._deviceName, TPPBPeerStableInfo._flexiblePolicyHash, 
+                       TPPBPeerStableInfo._flexiblePolicyVersion, TPPBPeerStableInfo._frozenPolicyHash, 
+                       TPPBPeerStableInfo._frozenPolicyVersion, TPPBPeerStableInfo._has, 
+                       TPPBPeerStableInfo._osVersion, TPPBPeerStableInfo._policySecrets, 
+                       TPPBPeerStableInfo._recoveryEncryptionPublicKey, TPPBPeerStableInfo._recoverySigningPublicKey, 
+                       TPPBPeerStableInfo._serialNumber, TPPBPeerStableInfo._userControllableViewStatus, 
                        TPPBPolicyCategoriesByView._categories, TPPBPolicyCategoriesByView._view, 
                        TPPBPolicyDocument._categoriesByViews, TPPBPolicyDocument._has, 
                        TPPBPolicyDocument._introducersByCategorys, TPPBPolicyDocument._keyViewMappings, 
-                       TPPBPolicyDocument._modelToCategorys, TPPBPolicyDocument._policyVersion, 
-                       TPPBPolicyDocument._redactions, TPPBPolicyIntroducersByCategory._category, 
+                       TPPBPolicyDocument._modelToCategorys, TPPBPolicyDocument._piggybackViews, 
+                       TPPBPolicyDocument._policyVersion, TPPBPolicyDocument._redactions, 
+                       TPPBPolicyDocument._userControllableViews, TPPBPolicyIntroducersByCategory._category, 
                        TPPBPolicyIntroducersByCategory._introducers, TPPBPolicyKeyViewMapping._matchingRule, 
                        TPPBPolicyKeyViewMapping._view, TPPBPolicyModelToCategory._category, 
                        TPPBPolicyModelToCategory._prefix, TPPBPolicyProhibits._candidateCategory, 

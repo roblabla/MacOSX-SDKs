@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCapture/AVSemanticSegmentationMatte.h>)
 /*
     File:  AVSemanticSegmentationMatte.h
  
@@ -38,6 +39,12 @@ AVF_EXPORT AVSemanticSegmentationMatteType const AVSemanticSegmentationMatteType
     A matting image segmenting all teeth from all persons in the visible field-of-view of an image.
  */
 AVF_EXPORT AVSemanticSegmentationMatteType const AVSemanticSegmentationMatteTypeTeeth API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+
+/*!
+ @constant AVSemanticSegmentationMatteTypeGlasses
+ A matting image segmenting all glasses ( e.g. eyeglasses, sunglasses ) from all persons wearing glasses in the visible field-of-view of an image.
+ */
+AVF_EXPORT AVSemanticSegmentationMatteType const AVSemanticSegmentationMatteTypeGlasses API_AVAILABLE(macos(11.0), ios(14.1)) API_UNAVAILABLE(watchos, tvos);
 
 
 /*!
@@ -152,3 +159,7 @@ AV_INIT_UNAVAILABLE
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCapture/AVSemanticSegmentationMatte.h>
+#endif

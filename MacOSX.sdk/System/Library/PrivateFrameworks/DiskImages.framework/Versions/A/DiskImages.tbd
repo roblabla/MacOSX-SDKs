@@ -1,16 +1,21 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: D866FDA8-43C1-34A2-89F4-B814EE12C51F' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           28EEBA6F-DF31-3B45-B63B-91A5EEDA628D
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           CA51A53B-FAE0-3AA3-86F5-2AC2B5DF13D8
 install-name:    '/System/Library/PrivateFrameworks/DiskImages.framework/Versions/A/DiskImages'
-current-version: 559.0.1
+current-version: 595.40.1
 compatibility-version: 1.0.8
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _DIAddPermission, _DIAddRunToBLKX, _DIAttachDrive, _DIAttachImage, 
-                       _DIAuthOpen, _DIBackingStoreAddRsrcFork, _DIBackingStoreAllowExpandability, 
-                       _DIBackingStoreCanEnumerateDirectory, _DIBackingStoreChangeKey, 
-                       _DIBackingStoreCloseDataFork, _DIBackingStoreCloseResourceFile, 
+                       _DIAuthOpen, _DIBackingStoreAllowExpandability, _DIBackingStoreCanEnumerateDirectory, 
+                       _DIBackingStoreChangeKey, _DIBackingStoreCloseDataFork, _DIBackingStoreCloseResourceFile, 
                        _DIBackingStoreCloseRsrcFork, _DIBackingStoreCopyAttr, _DIBackingStoreDelete, 
                        _DIBackingStoreEnumerateDirectory, _DIBackingStoreFlush, _DIBackingStoreFlushWithFlags, 
                        _DIBackingStoreGetBaseBackingStore, _DIBackingStoreGetDataForkLength, 
@@ -40,9 +45,8 @@ exports:
                        _DICopyIdentifiableFileSystemsInfo, _DICopyStrError, _DICopyStrError_real, 
                        _DICopyWriteableFileSystemsArray, _DICreateBackingStore, _DICreateDiskImage, 
                        _DICreateNewUDIFSegmentURL, _DICreatePermissionDictionary, 
-                       _DIDARTDiskImageGetDartFileHeader, _DIDeinitialize, _DIDevEntryCopyDeviceInfo, 
-                       _DIDevEntryGetInformation, _DIDevEntryToIOKitObject, _DIDevEntryToRawDevice, 
-                       _DIDiskCopy42DiskImageGetDiskCopy42Header, _DIDiskImageAttach, 
+                       _DIDeinitialize, _DIDevEntryCopyDeviceInfo, _DIDevEntryGetInformation, 
+                       _DIDevEntryToIOKitObject, _DIDevEntryToRawDevice, _DIDiskImageAttach, 
                        _DIDiskImageBurn, _DIDiskImageCalcChecksum, _DIDiskImageCallProgressCancelProc, 
                        _DIDiskImageCallProgressMessageProc, _DIDiskImageCallProgressPercentProc, 
                        _DIDiskImageCanBeAppended, _DIDiskImageCanBeBurned, _DIDiskImageCancelNow, 
@@ -67,8 +71,7 @@ exports:
                        _DIDiskImageSetProgressMessageProcPtr, _DIDiskImageSetProgressPercentProcPtr, 
                        _DIDiskImageSetSectorCount, _DIDiskImageUnmapExtents, _DIDiskImageValidateChecksum, 
                        _DIDiskImageValidateChecksumWithFlags, _DIDiskImageWriteSectors, 
-                       _DIEnableSecureMode, _DIEnumerateCarbonVolNames, _DIEnumerateMountPoints, 
-                       _DIEnumerateVRefNums, _DIEnumerateWholeDiskDevEntries, _DIGetBackingStorePluginCount, 
+                       _DIEnableSecureMode, _DIEnumerateWholeDiskDevEntries, _DIGetBackingStorePluginCount, 
                        _DIGetBundleRef, _DIGetDebugLevel, _DIGetDevEntryInTree, _DIGetDiskImagePluginCount, 
                        _DIGetDriverVersion, _DIGetFileEncodingPluginCount, _DIGetFrameworkVersion, 
                        _DIGetLocalKey, _DIGetPermission, _DIGetPluginPropertyDicts, 
@@ -81,8 +84,8 @@ exports:
                        _DIHLResizeImage, _DIIOKitObjectCopyDeviceInfo, _DIIOKitObjectToDevEntry, 
                        _DIInitialize, _DIIsInitialized, _DIIsPotentiallyValidDiskImage, 
                        _DILoadDriver, _DIMKHybridLayoutIsWritable, _DIMakeSimpleBLKX, 
-                       _DIMakeStubBLKX, _DIMediaKitCreateMKMediaRef, _DIMountPointGetInformation, 
-                       _DIPartitionSchemeScan, _DIRawDevEntryToBlockDevice, _DIResolveBackingStoreToDiskImage, 
+                       _DIMakeStubBLKX, _DIMediaKitCreateMKMediaRef, _DIPartitionSchemeScan, 
+                       _DIRawDevEntryToBlockDevice, _DIResolveBackingStoreToDiskImage, 
                        _DIResolvePathsToDiskImage, _DIResolvePathsToDiskImageWithOptions, 
                        _DIResolveURLToBackingStore, _DIResolveURLToDiskImage, _DIResourceFileAddResource, 
                        _DIResourceFileChangedResource, _DIResourceFileCopyResourcesFrom, 
@@ -100,24 +103,20 @@ exports:
                        _DIUDIFDiskImageGetBLKXStartingAt, _DIUDIFDiskImageGetImageVariant, 
                        _DIUDIFDiskImageGetUDIFFileHeader, _DIUDIFFileAccessAppendData, 
                        _DIUDIFFileAccessCloseFile, _DIUDIFFileAccessCreateWithCFURL, 
-                       _DIUDIFFileAccessDelete, _DIUDIFFileAccessDeleteFile, _DIUDIFFileAccessFlattenFile, 
-                       _DIUDIFFileAccessFlattenFileWithEmbedOptions, _DIUDIFFileAccessGetBackingStore, 
+                       _DIUDIFFileAccessDelete, _DIUDIFFileAccessDeleteFile, _DIUDIFFileAccessGetBackingStore, 
                        _DIUDIFFileAccessGetHeaderStyle, _DIUDIFFileAccessGetResourceFile, 
                        _DIUDIFFileAccessGetUDIFFileHeader, _DIUDIFFileAccessNewWithCFURL, 
                        _DIUDIFFileAccessOpenFile, _DIUDIFFileAccessSetMaxSectorsPerSegment, 
-                       _DIUDIFFileAccessUnflattenFile, _DIUDIFFileAccessUpdateHeader, 
-                       _DIUDIFFileAccessWriteResourceFile, _DIUDIFFileAccessWriteResourceFileAsCarbonResourceFork, 
-                       _DIUDIFFileAccessWriteResourceFileAsXML, _DIVRefNumGetInformation, 
+                       _DIUDIFFileAccessUpdateHeader, _DIUDIFFileAccessWriteResourceFile, 
                        _DI_kextConnect, _DI_kextCreateDiskImageIdentifierArray, _DI_kextCreateDrive, 
                        _DI_kextCreateDriveInKernel, _DI_kextDisconnect, _DI_kextDriveActivate, 
                        _DI_kextDriveConnect, _DI_kextDriveDisconnect, _DI_kextDriveFindByDriveNumber, 
                        _DI_kextDriveGetRequest, _DI_kextDrivePutReply, _DI_kextDriveRegisterClientBuffer, 
                        _DI_kextExists, _DI_kextTestNetBootHook, _DI_kextWaitQuiet, 
-                       _DI_logBuffer, _DI_logDARTHeader, _DI_logDiskCopy42Header, 
-                       _DI_logHDIChecksum, _DI_logHDIImageCreateBlock64, _DI_logHDIReply64, 
-                       _DI_logHDIRequest64, _DI_logHDISegmentID, _DI_logMDB, _DI_logMDB_to_file, 
-                       _DI_logNDIFHeader, _DI_logNDIFSegmentInfo, _DI_logUDIFFileHeader, 
-                       _DI_logUDIFPartitionList, _DI_logUDIFRun, _DI_logUDIF_pdisk_APDBlock, 
-                       _DI_logUDIF_pdisk_PartitionRecord, _DI_logUDIFblkx, _DI_logUDIFblkx_ptr, 
-                       _DI_logVH, _DI_logVH_to_file, _MKCopyDefaultLayouts, _MKCopyLayoutInfoArrayWithOverhead ]
+                       _DI_logBuffer, _DI_logHDIChecksum, _DI_logHDIImageCreateBlock64, 
+                       _DI_logHDIReply64, _DI_logHDIRequest64, _DI_logHDISegmentID, 
+                       _DI_logUDIFFileHeader, _DI_logUDIFPartitionList, _DI_logUDIFRun, 
+                       _DI_logUDIF_pdisk_APDBlock, _DI_logUDIF_pdisk_PartitionRecord, 
+                       _DI_logUDIFblkx, _DI_logUDIFblkx_ptr, _DI_logVH, _DI_logVH_to_file, 
+                       _MKCopyDefaultLayouts, _MKCopyLayoutInfoArrayWithOverhead ]
 ...

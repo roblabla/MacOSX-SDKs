@@ -1,11 +1,25 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 69E5E636-FCF4-3C3E-B3E1-43371A7A8DB0', 'x86_64: 69E5E636-FCF4-3C3E-B3E1-43371A7A8DB0' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           05848693-A579-3232-B53E-88AC7B0DF166
+  - target:          x86_64-maccatalyst
+    value:           05848693-A579-3232-B53E-88AC7B0DF166
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           C1F66C33-5ADE-370F-9A97-3849131939F0
+  - target:          arm64e-maccatalyst
+    value:           C1F66C33-5ADE-370F-9A97-3849131939F0
 install-name:    '/System/Library/PrivateFrameworks/TextureIO.framework/Versions/A/TextureIO'
 current-version: 3.10.9
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     objc-classes:    [ TXRArrayElement, TXRAssetCatalogConfig, TXRAssetCatalogFileAttributes, 
                        TXRAssetCatalogMipFileAttributes, TXRAssetCatalogSet, TXRDataConverter, 
                        TXRDataScaler, TXRDefaultBufferAllocator, TXRImage, TXRImageIndependent, 

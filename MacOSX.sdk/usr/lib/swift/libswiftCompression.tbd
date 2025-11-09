@@ -1,12 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: E63605A5-E17C-37C6-9061-D12CB65D6508', 'x86_64: E63605A5-E17C-37C6-9061-D12CB65D6508' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           AFE6161E-4163-3359-9202-4BAD829B7BE3
+  - target:          x86_64-maccatalyst
+    value:           AFE6161E-4163-3359-9202-4BAD829B7BE3
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           305C61DC-7AC6-357A-8C95-1A9A9650FE96
+  - target:          arm64e-maccatalyst
+    value:           305C61DC-7AC6-357A-8C95-1A9A9650FE96
 install-name:    '/usr/lib/swift/libswiftCompression.dylib'
-current-version: 0
 swift-abi-version: 7
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ '_$s11Compression11FilterErrorO11invalidDatayA2CmFWC', '_$s11Compression11FilterErrorO12invalidStateyA2CmFWC', 
                        '_$s11Compression11FilterErrorO2eeoiySbAC_ACtFZ', '_$s11Compression11FilterErrorO4hash4intoys6HasherVz_tF', 
                        '_$s11Compression11FilterErrorO9hashValueSivg', '_$s11Compression11FilterErrorO9hashValueSivpMV', 

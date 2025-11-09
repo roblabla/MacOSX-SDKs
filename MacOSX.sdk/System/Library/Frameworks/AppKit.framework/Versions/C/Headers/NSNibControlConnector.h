@@ -6,9 +6,12 @@
 */
 
 #import <AppKit/NSNibConnector.h>
-API_UNAVAILABLE_BEGIN(ios)
+#import <AppKit/AppKitDefines.h>
+
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @interface NSNibControlConnector : NSNibConnector
 - (void)establishConnection;
 @end
+
 API_UNAVAILABLE_END

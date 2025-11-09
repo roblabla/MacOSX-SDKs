@@ -37,6 +37,7 @@
 #include <IOKit/IOService.h>
 #include <IOKit/OSMessageNotification.h>
 #include <DriverKit/IOUserClient.h>
+#include <libkern/c++/OSPtr.h>
 
 #if IOKITSTATS
 #include <IOKit/IOStatisticsPrivate.h>
@@ -189,6 +190,7 @@ protected:
 #else
 		void *iokitstatsReserved;
 #endif
+		void *iokitFilterReserved;
 	};
 
 /*! @var reserved
@@ -217,8 +219,8 @@ private:
 	OSMetaClassDeclareReservedUnused(IOUserClient, 0);
 	OSMetaClassDeclareReservedUnused(IOUserClient, 1);
 #else
-	OSMetaClassDeclareReservedUsed(IOUserClient, 0);
-	OSMetaClassDeclareReservedUsed(IOUserClient, 1);
+	OSMetaClassDeclareReservedUsedX86(IOUserClient, 0);
+	OSMetaClassDeclareReservedUsedX86(IOUserClient, 1);
 #endif
 	OSMetaClassDeclareReservedUnused(IOUserClient, 2);
 	OSMetaClassDeclareReservedUnused(IOUserClient, 3);
@@ -234,6 +236,7 @@ private:
 	OSMetaClassDeclareReservedUnused(IOUserClient, 13);
 	OSMetaClassDeclareReservedUnused(IOUserClient, 14);
 	OSMetaClassDeclareReservedUnused(IOUserClient, 15);
+
 
 
 protected:
@@ -274,10 +277,12 @@ public:
 	static IOReturn clientHasPrivilege( void * securityToken,
 	    const char * privilegeName );
 
-	static OSObject * copyClientEntitlement( task_t task,
-	    const char * entitlement );
+	static OSPtr<OSObject>  copyClientEntitlement(task_t task, const char *entitlement);
+	static OSPtr<OSObject>  copyClientEntitlementVnode(struct vnode *vnode, off_t offset, const char *entitlement);
 
-	static OSDictionary * copyClientEntitlements(task_t task);
+	static OSPtr<OSDictionary>  copyClientEntitlements(task_t task);
+	static OSPtr<OSDictionary>  copyClientEntitlementsVnode(struct vnode *vnode, off_t offset);
+	static OSPtr<OSDictionary>  copyEntitlementsFromBlob(void *blob, size_t len);
 
 /*!
  *   @function releaseAsyncReference64
@@ -326,10 +331,14 @@ public:
 	    IOOptionBits * options,
 	    IOMemoryDescriptor ** memory );
 
+	IOReturn clientMemoryForType( UInt32 type,
+	    IOOptionBits * options,
+	    OSSharedPtr<IOMemoryDescriptor>& memory );
+
 #if !__LP64__
 private:
 	APPLE_KEXT_COMPATIBILITY_VIRTUAL
-	IOMemoryMap * mapClientMemory( IOOptionBits type,
+	OSPtr<IOMemoryMap>  mapClientMemory( IOOptionBits type,
 	    task_t task,
 	    IOOptionBits mapFlags = kIOMapAnywhere,
 	    IOVirtualAddress atAddress = 0 );
@@ -345,7 +354,7 @@ public:
  *   @param memory The memory descriptor instance previously returned by the implementation of clientMemoryForType().
  *   @result A reference to the first IOMemoryMap instance found in the list of mappings created by IOUserClient from that passed memory descriptor is returned, or zero if none exist. The caller should release this reference.
  */
-	IOMemoryMap * removeMappingForDescriptor(IOMemoryDescriptor * memory);
+	OSPtr<IOMemoryMap>  removeMappingForDescriptor(IOMemoryDescriptor * memory);
 
 /*!
  *   @function exportObjectToClient
@@ -355,7 +364,7 @@ public:
  *   @param clientObj Returned value is the client's port name.
  */
 	virtual IOReturn exportObjectToClient(task_t task,
-	    OSObject *obj, io_object_t *clientObj);
+	    LIBKERN_CONSUMED OSObject *obj, io_object_t *clientObj);
 
 
 // Old methods for accessing method vector backward compatiblility only
@@ -373,6 +382,12 @@ public:
 	virtual IOExternalAsyncMethod *
 	getAsyncTargetAndMethodForIndex(
 		LIBKERN_RETURNS_NOT_RETAINED IOService ** targetP, UInt32 index );
+	IOExternalMethod *
+	getTargetAndMethodForIndex(
+		OSSharedPtr<IOService>& targetP, UInt32 index );
+	IOExternalAsyncMethod *
+	getAsyncTargetAndMethodForIndex(
+		OSSharedPtr<IOService>& targetP, UInt32 index );
 
 // Methods for accessing trap vector - old and new style
 	virtual IOExternalTrap *

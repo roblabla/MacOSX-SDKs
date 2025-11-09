@@ -83,7 +83,7 @@ class SCSIBlockCommands;
  @superclass IOSCSIPrimaryCommandsDevice
  @discussion Implementation of the T10 device Block Commands device.
  */
-class IOSCSIBlockCommandsDevice : public IOSCSIPrimaryCommandsDevice
+class __exported IOSCSIBlockCommandsDevice : public IOSCSIPrimaryCommandsDevice
 {
 
 	OSDeclareAbstractStructors ( IOSCSIBlockCommandsDevice )

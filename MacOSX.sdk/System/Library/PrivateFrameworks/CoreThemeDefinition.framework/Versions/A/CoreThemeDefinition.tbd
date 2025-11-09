@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 187DC17A-D7F4-3190-A407-92EEE1E69C6F' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           BFE026D9-A10C-3DBF-A18E-75011BA0B9D2
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           34B3AC04-BB72-3715-947E-3CBD54842B9E
 install-name:    '/System/Library/PrivateFrameworks/CoreThemeDefinition.framework/Versions/A/CoreThemeDefinition'
-current-version: 443
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 490
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _AbortDistillKey, _CSIDataKey, _CoreThemeArtworkFormatCAAR, 
                        _CoreThemeArtworkFormatPNG, _CoreThemeArtworkFormatPSD, _CoreThemeDefinitionDataModelKey, 
                        _CoreThemeDefinitionErrorDomain, _CoreThemeDefinitionVersionNumber, 
@@ -45,14 +51,14 @@ exports:
                        TDPhotoshopElementProduction, TDPhotoshopLayer, TDPhotoshopRenditionSpec, 
                        TDProMergeableCommonAssetStorage, TDProperty, TDRadiosityImageRenditionSpec, 
                        TDRecognitionObjectProduction, TDRecognitionObjectRenditionSpec, 
-                       TDRenditionEntry, TDRenditionKeySpec, TDRenditionSpec, TDRenditionSubtype, 
-                       TDRenditionType, TDRenditionsDistiller, TDResolvedLayerReference, 
-                       TDSchemaCategory, TDSchemaDefinition, TDSchemaEffectDefinition, 
-                       TDSchemaElementDefinition, TDSchemaElementProduction, TDSchemaMaterialDefinition, 
-                       TDSchemaPartDefinition, TDSchemaRenditionSpec, TDSimpleArtworkElementProduction, 
-                       TDSimpleArtworkRenditionSpec, TDSlice, TDStringProperty, TDTag, 
-                       TDTemplateRenderingMode, TDTextStyleProduction, TDTextStyleRenditionSpec, 
-                       TDTextureAsset, TDTextureAssetInfo, TDTextureFace, TDTextureImageRenditionSpec, 
+                       TDRenditionKeySpec, TDRenditionSpec, TDRenditionSubtype, TDRenditionType, 
+                       TDRenditionsDistiller, TDResolvedLayerReference, TDSchemaCategory, 
+                       TDSchemaDefinition, TDSchemaEffectDefinition, TDSchemaElementDefinition, 
+                       TDSchemaElementProduction, TDSchemaMaterialDefinition, TDSchemaPartDefinition, 
+                       TDSchemaRenditionSpec, TDSimpleArtworkElementProduction, TDSimpleArtworkRenditionSpec, 
+                       TDSlice, TDStringProperty, TDTag, TDTemplateRenderingMode, 
+                       TDTextStyleProduction, TDTextStyleRenditionSpec, TDTextureAsset, 
+                       TDTextureAssetInfo, TDTextureFace, TDTextureImageRenditionSpec, 
                        TDTextureInterpretation, TDTextureMipLevel, TDTexturePixelFormat, 
                        TDTextureRenditionSpec, TDThemeBitSource, TDThemeCompressionType, 
                        TDThemeConstant, TDThemeDeploymentTarget, TDThemeDirection, 
@@ -111,26 +117,23 @@ exports:
                        TDDistiller._document, TDDistiller._dontPackRenditionsBeforeDistilling, 
                        TDDistiller._fileCompression, TDDistiller._mainThreadPerformRunLoopModes, 
                        TDDistiller._renditionEntries, TDDoubleProperty._doubleValue, 
-                       TDEffectRenditionSpec._sampleImage, TDHistorian.document, 
-                       TDIntegerProperty._integerValue, TDLocalization._identifier, 
+                       TDHistorian.document, TDIntegerProperty._integerValue, TDLocalization._identifier, 
                        TDLocalization._name, TDPNGAsset._exifOrientation, TDPNGAsset._fileScaleFactor, 
                        TDPacker._objectsToPack, TDPacker._sizeHandler, TDPhotoshopElementProduction._auxiliary1MetricsMask, 
                        TDPhotoshopElementProduction._auxiliary2MetricsMask, TDPhotoshopElementProduction._baselineMetricsMask, 
                        TDPhotoshopElementProduction._cachedImageDate, TDPhotoshopElementProduction._didCheckForMetricsMasks, 
                        TDPhotoshopElementProduction._edgeMetricsMask, TDPhotoshopElementProduction._textMetricsMask, 
                        TDPhotoshopElementProduction.log, TDPhotoshopElementProduction.psdImageRef, 
-                       TDProperty._name, TDRenditionEntry.key, TDRenditionEntry.keyFormat, 
-                       TDRenditionEntry.stackKey, TDRenditionKeySpec._dimension1, 
-                       TDRenditionKeySpec._dimension2, TDRenditionKeySpec._memoryClass, 
-                       TDRenditionKeySpec._nameIdentifier, TDRenditionKeySpec._scaleFactor, 
-                       TDRenditionKeySpec._scratchKey, TDRenditionKeySpec._stackScratchKey, 
-                       TDRenditionKeySpec._subtype, TDRenditionsDistiller._group, 
+                       TDProperty._name, TDRenditionKeySpec._dimension1, TDRenditionKeySpec._dimension2, 
+                       TDRenditionKeySpec._memoryClass, TDRenditionKeySpec._nameIdentifier, 
+                       TDRenditionKeySpec._scaleFactor, TDRenditionKeySpec._scratchKey, 
+                       TDRenditionKeySpec._stackScratchKey, TDRenditionKeySpec._subtype, 
+                       TDRenditionsDistiller._group, TDRenditionsDistiller.csiDataInfoOutQueue, 
                        TDRenditionsDistiller.document, TDRenditionsDistiller.inQueueLock, 
                        TDRenditionsDistiller.noMoreCSIDataInfo, TDRenditionsDistiller.noMoreRenditions, 
-                       TDRenditionsDistiller.outQueueLock, TDRenditionsDistiller.psiDataInfoOutQueue, 
-                       TDRenditionsDistiller.renditionInQueue, TDRenditionsDistiller.shouldCompressCSIDataFlag, 
-                       TDSimpleArtworkRenditionSpec._alignmentRect, TDSlice._sliceRect, 
-                       TDStringProperty._stringValue, TDThemeConstant._identifier, 
+                       TDRenditionsDistiller.outQueueLock, TDRenditionsDistiller.renditionInQueue, 
+                       TDRenditionsDistiller.shouldCompressCSIDataFlag, TDSimpleArtworkRenditionSpec._alignmentRect, 
+                       TDSlice._sliceRect, TDStringProperty._stringValue, TDThemeConstant._identifier, 
                        TDThemeLook._supportsContrastAdjustment, TDThemeSchema._doc, 
                        TDThreadMOCOrganizer.document, TDThreadMOCOrganizer.mainThread, 
                        _TDLayerStackFilterHelper._excludedDirections, _TDLayerStackFilterHelper._excludedHorizontalSizeClasses, 

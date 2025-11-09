@@ -46,26 +46,7 @@ typedef NS_OPTIONS(NSUInteger, NSXPCConnectionOptions) {
 
 // This object is the main configuration mechanism for the communication between two processes. Each NSXPCConnection instance has a private serial queue. This queue is used when sending messages to reply handlers, interruption handlers, and invalidation handlers.
 API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0))
-@interface NSXPCConnection : NSObject <NSXPCProxyCreating> {
-@private
-    void *_xconnection;
-    id _repliesExpected;
-    dispatch_queue_t _userQueue;
-    uint32_t _state;
-    uint32_t _state2;
-    void (^_interruptionHandler)(void);
-    void (^_invalidationHandler)(void);
-    id _exportInfo;
-    id _repliesRequested;
-    id _importInfo;
-    id <NSObject> _otherInfo;
-    id _reserved1;
-    NSXPCInterface *_remoteObjectInterface;
-    NSString *_serviceName;
-    NSXPCListenerEndpoint *_endpoint;
-    id _eCache;
-    id _dCache;
-}
+@interface NSXPCConnection : NSObject <NSXPCProxyCreating>
 
 // Initialize an NSXPCConnection that will connect to the specified service name. Note: Receiving a non-nil result from this init method does not mean the service name is valid or the service has been launched. The init method simply constructs the local object.
 - (instancetype)initWithServiceName:(NSString *)serviceName API_UNAVAILABLE(ios, watchos, tvos);
@@ -130,17 +111,7 @@ API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0))
 
 // Each NSXPCListener instance has a private serial queue. This queue is used when sending the delegate messages.
 API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0))
-@interface NSXPCListener : NSObject {
-@private
-    void *_xconnection;
-    dispatch_queue_t _userQueue;
-    void *reserved0;
-    id _delegate;
-    NSString *_serviceName;
-    uint64_t _state;
-    id _reserved1;
-    id _reserved2;
-}
+@interface NSXPCListener : NSObject
 
 // If your listener is an XPCService (that is, in the XPCServices folder of an application or framework), then use this method to get the shared, singleton NSXPCListener object that will await new connections. When the resume method is called on this listener, it will not return. Instead it hands over control to the object and allows it to service the listener as appropriate. This makes it ideal for use in your main() function. For more info on XPCServices, please refer to the developer documentation.
 + (NSXPCListener *)serviceListener;
@@ -202,8 +173,8 @@ API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0))
 - (nullable NSXPCInterface *)interfaceForSelector:(SEL)sel argumentIndex:(NSUInteger)arg ofReply:(BOOL)ofReply;
 
 #if __has_include(<xpc/xpc.h>)
-- (void)setXPCType:(xpc_type_t)type forSelector:(SEL)sel argumentIndex:(NSUInteger)arg ofReply:(BOOL)ofReply API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
-- (nullable xpc_type_t)XPCTypeForSelector:(SEL)sel argumentIndex:(NSUInteger)arg ofReply:(BOOL)ofReply API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
+- (void)setXPCType:(xpc_type_t)type forSelector:(SEL)sel argumentIndex:(NSUInteger)arg ofReply:(BOOL)ofReply API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+- (nullable xpc_type_t)XPCTypeForSelector:(SEL)sel argumentIndex:(NSUInteger)arg ofReply:(BOOL)ofReply API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 #endif
 
 @end

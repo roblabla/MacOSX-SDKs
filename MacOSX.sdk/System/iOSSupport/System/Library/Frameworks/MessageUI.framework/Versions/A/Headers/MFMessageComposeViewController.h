@@ -108,7 +108,7 @@ API_AVAILABLE(ios(4.0))
  @property   messageComposeDelegate
  @abstract   This property is the delegate for the MFMessageComposeViewController method callbacks.
  */
-@property (nonatomic, nullable, assign) id<MFMessageComposeViewControllerDelegate> messageComposeDelegate;
+@property (nonatomic, nullable, weak) id<MFMessageComposeViewControllerDelegate> messageComposeDelegate;
 
 /*!
  @method     disableUserAttachments;

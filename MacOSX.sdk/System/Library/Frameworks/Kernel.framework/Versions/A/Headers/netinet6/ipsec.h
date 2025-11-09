@@ -135,6 +135,10 @@ struct ipsec_wake_pkt_info {
 	u_int16_t wake_pkt_len;
 };
 
+struct ipsec_wake_pkt_event_data {
+	uuid_string_t wake_uuid;
+};
+
 
 
 #endif /* _NETINET6_IPSEC_H_ */

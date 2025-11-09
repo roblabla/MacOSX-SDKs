@@ -182,6 +182,7 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
     which can are used to perform the load of a URL, or as input to the
     NSURLConnection class method which performs synchronous loads.
 */
+API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 @interface NSURLRequest : NSObject <NSSecureCoding, NSCopying, NSMutableCopying>
 {
     @private
@@ -350,6 +351,7 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
     example.
     </ul>
 */
+API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 @interface NSMutableURLRequest : NSURLRequest
 
 /*! 

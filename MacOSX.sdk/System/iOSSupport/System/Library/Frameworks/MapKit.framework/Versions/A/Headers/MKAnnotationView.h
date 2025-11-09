@@ -33,10 +33,17 @@ static const MKFeatureDisplayPriority MKFeatureDisplayPriorityRequired NS_AVAILA
 static const MKFeatureDisplayPriority MKFeatureDisplayPriorityDefaultHigh NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0) API_UNAVAILABLE(watchos) = 750;
 static const MKFeatureDisplayPriority MKFeatureDisplayPriorityDefaultLow NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0) API_UNAVAILABLE(watchos) = 250;
 
+typedef float MKAnnotationViewZPriority NS_TYPED_EXTENSIBLE_ENUM API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0)) API_UNAVAILABLE(watchos);
+static const MKAnnotationViewZPriority MKAnnotationViewZPriorityMax API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0)) API_UNAVAILABLE(watchos) = 1000;
+static const MKAnnotationViewZPriority MKAnnotationViewZPriorityDefaultSelected API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0)) API_UNAVAILABLE(watchos) = 1000;
+static const MKAnnotationViewZPriority MKAnnotationViewZPriorityDefaultUnselected API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0)) API_UNAVAILABLE(watchos) = 500;
+static const MKAnnotationViewZPriority MKAnnotationViewZPriorityMin API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0)) API_UNAVAILABLE(watchos) = 0;
+
 typedef NS_ENUM(NSInteger, MKAnnotationViewCollisionMode) {
     MKAnnotationViewCollisionModeRectangle,
-    MKAnnotationViewCollisionModeCircle
-} NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0) API_UNAVAILABLE(watchos);
+    MKAnnotationViewCollisionModeCircle,
+    MKAnnotationViewCollisionModeNone API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0)) API_UNAVAILABLE(watchos)
+} API_AVAILABLE(ios(11.0), macos(10.13), tvos(11.0)) API_UNAVAILABLE(watchos);
 
 @protocol MKAnnotation;
 
@@ -133,6 +140,9 @@ NS_CLASS_AVAILABLE(10_9, NA)
 
 // Default is MKFeatureDisplayPriorityRequired, other values opts into collision occlusion by priority.
 @property (nonatomic) MKFeatureDisplayPriority displayPriority NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0);
+
+@property (nonatomic) MKAnnotationViewZPriority zPriority API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic) MKAnnotationViewZPriority selectedZPriority API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 
 // Default collision mode is rectangle.
 @property (nonatomic) MKAnnotationViewCollisionMode collisionMode NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0);

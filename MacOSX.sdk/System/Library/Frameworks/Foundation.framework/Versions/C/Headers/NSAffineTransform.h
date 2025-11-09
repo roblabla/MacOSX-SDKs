@@ -13,10 +13,7 @@ typedef struct {
     CGFloat tX, tY;
 } NSAffineTransformStruct;
 
-@interface NSAffineTransform : NSObject <NSCopying, NSSecureCoding> {
-    @private
-    NSAffineTransformStruct _transformStruct;
-}
+@interface NSAffineTransform : NSObject <NSCopying, NSSecureCoding>
 
 // Creation
 + (NSAffineTransform *)transform;

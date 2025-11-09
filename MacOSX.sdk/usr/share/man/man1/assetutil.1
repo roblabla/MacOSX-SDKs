@@ -8,7 +8,7 @@
 .\"man mdoc.samples for a complete listing of options
 .\"man mdoc for the short list of editing options
 .\"/usr/share/misc/mdoc.template
-.Dd Jan 14, 2019              \" DATE
+.Dd Nov 13, 2019              \" DATE
 .Dt assetutil 1      \" Program name and manual section number
 .Os Darwin
 .Sh NAME                 \" Section Header - required - don't modify 
@@ -19,7 +19,7 @@
 .Nm process asset catalog .car files
 .Sh SYNOPSIS             \" Section Header - required - don't modify
 .Nm
-.Op Fl ViotshMgpT         \" [-afmldshio]
+.Op Fl ViotshMgpTZ         \" [-afmldshio]
 .Ar inputfile            \" Underlined argument - use .Ar anywhere to underline
 .Sh DESCRIPTION          \" Section Header - required - don't modify
 .Nm 
@@ -82,6 +82,8 @@ given a comma separated list of names, any assets in the car file that
 match one of the given names are preserved. Names are compared case
 insensitivly Name == name, uses the -o --output file to save the
 resulting .car file.
+.It Fl Z
+do an integrity check of the input file.
 .El                      \" Ends the list
 .Pp
 .\" .Sh ENVIRONMENT      \" May not be needed

@@ -8,18 +8,16 @@
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
  
-                     http://developer.apple.com/bugreporter/
+                     http://feedbackassistant.apple.com/
 */
 
 #ifndef __MIDIDriver_h__
 #define __MIDIDriver_h__
 
-#include <CoreFoundation/CFPlugIn.h>
+#include <CoreMIDI/MIDIServices.h>
 #if COREFOUNDATION_CFPLUGINCOM_SEPARATE
 #include <CoreFoundation/CFPlugInCOM.h>
 #endif
-#include <CoreFoundation/CFRunLoop.h>
-#include <CoreMIDI/CoreMIDI.h>
 
 CF_ASSUME_NONNULL_BEGIN
 
@@ -30,19 +28,22 @@ CF_ASSUME_NONNULL_BEGIN
 	
 
 	MIDI drivers are CFPlugIns, installed into the following places:
-<pre>
+
+	```
     /System/Library/Extensions      -- not recommended for non-Apple drivers, but
                                     necessary for compatibility with CoreMIDI 1.0
     
     /Library/Audio/MIDI Drivers     -- starting with CoreMIDI 1.1
     
     ~/Library/Audio/MIDI Drivers    -- starting with CoreMIDI 1.1
-</pre>
+	```
+
 	Refer to the CFPlugIn documentation for more information about plug-ins.
 	
 
 	A driver's bundle settings should include settings resembling the following:
-<pre>
+
+	```
     Bundle settings:
         CFBundleIdentifier              String          com.mycompany.midi.driver.mydevice
             (note that this will be the driver's persistent ID in MIDISetup's)
@@ -55,7 +56,7 @@ CF_ASSUME_NONNULL_BEGIN
                 0                       String          [your new factory UUID]
     Build settings:
         WRAPPER_EXTENSION               plugin
-</pre>
+	```
 	
 
 	Drivers have access to most of the CoreMIDI API.  Starting in Mac OS X 10.6, drivers should link
@@ -70,7 +71,7 @@ CF_ASSUME_NONNULL_BEGIN
 	i386, and x86_64), with the ppc and i386 slices linking against CoreMIDIServer, and the x86_64
 	slice linking against CoreMIDI.
 
-	Unlike applications, drivers communicate with the server directly, not through Mach messaging. 
+	Unlike applications, drivers communicate with the server directly, not through Mach messaging.
 	This necessitates some limitations on the contexts from which a driver may call the server.
 	
 	The MIDI I/O functions MIDISend and MIDIReceived may be called from any thread.
@@ -100,25 +101,25 @@ typedef MIDIDriverInterface * __nonnull * MIDIDriverRef;
 typedef MIDIObjectRef MIDIDeviceListRef;
 
 /*!
-	@interface		MIDIDriverInterface
+	@struct		MIDIDriverInterface
 	
 	@abstract		The COM-style interface to a MIDI driver.
 	
 	@discussion
-		This is the function table interface to a MIDI driver.  Both version 1 and 2 drivers use
+		This is the function table interface to a MIDI driver.  Version 1 and 2 drivers use
 		this same table of function pointers (except as noted).
 
-		Drivers which support both the version 1 and version 2 interfaces can tell which version
-		of the server is running by checking to see whether kMIDIDriverInterface2ID or
-		kMIDIDriverInterfaceID is passed to the factory function.  If the version 1 interface is
-		requested, the driver should behave as if it is a version 1 driver.
+		Drivers which support multiple version interfaces can tell which version
+		of the server is running by checking to see whether kMIDIDriverInterface2ID
+        or kMIDIDriverInterfaceID is passed to the factory function. If the version 1 interface is
+        requested, the driver should behave as if it is a version 1 driver.
 */
 struct MIDIDriverInterface
 {
 	IUNKNOWN_C_GUTS;
 
 	/*!
-		@function FindDevices
+		@fn FindDevices
 		@discussion
 			This is only called for version 1 drivers.  The server is requesting that the driver
 			detect the devices which are present.  For each device present, the driver should
@@ -127,11 +128,11 @@ struct MIDIDriverInterface
 			MIDIDeviceListAddDevice.
 
 			The driver should not retain any references to the created devices and entities.
-	*/	
+	*/
 	OSStatus	(*FindDevices)(MIDIDriverRef __nonnull self, MIDIDeviceListRef devList);
 
 	/*!
-		@function Start
+		@fn Start
 		@discussion
 			The server is telling the driver to begin MIDI I/O.
 
@@ -160,11 +161,11 @@ struct MIDIDriverInterface
 			The provided device list remains owned by the system and can be assumed to contain
 			only devices owned by this driver.  The driver may retain references to the devices
 			in this list and any it creates while running.
-	*/					
+	*/
 	OSStatus	(*Start)(MIDIDriverRef __nonnull self, MIDIDeviceListRef devList);
 
 	/*!
-		@function Stop
+		@fn Stop
 		@discussion
 			The server is telling the driver to terminate MIDI I/O.  All I/O operations that
 			were begun in Start, or as a result of a subsequent IOKit notification, should be
@@ -173,14 +174,14 @@ struct MIDIDriverInterface
 	OSStatus	(*Stop)(MIDIDriverRef __nonnull self);
 	
 	/*!
-		@function Configure
+		@fn Configure
 		@discussion
 			not currently used
 	*/
 	OSStatus	(*Configure)(MIDIDriverRef __nonnull self, MIDIDeviceRef device);
 
 	/*!
-		@function Send
+		@fn Send
 		@discussion
 			Send a MIDIPacketList to the destination endpoint whose refCons are being passed as
 			arguments.
@@ -188,7 +189,7 @@ struct MIDIDriverInterface
 	OSStatus	(*Send)(MIDIDriverRef __nonnull self, const MIDIPacketList *pktlist, void *destRefCon1, void *destRefCon2);
 	
 	/*!
-		@function EnableSource
+		@fn EnableSource
 		@discussion
 			A client has opened or closed a connection, and now the server is telling the driver
 			that input from a particular source either does or does not have any listeners in
@@ -199,7 +200,7 @@ struct MIDIDriverInterface
 	OSStatus	(*EnableSource)(MIDIDriverRef __nonnull self, MIDIEndpointRef src, Boolean enabled);
 	
 	/*!
-		@function Flush
+		@fn Flush
 		@discussion
 			Only for version 2 drivers (new for CoreMIDI 1.1).
 
@@ -210,7 +211,7 @@ struct MIDIDriverInterface
 	OSStatus	(*Flush)(MIDIDriverRef __nonnull self, MIDIEndpointRef dest, void * __nullable destRefCon1, void * __nullable destRefCon2);
 
 	/*!
-		@function Monitor		
+		@fn Monitor
 		@discussion
 			Only for version 2 drivers (new for CoreMIDI 1.1).
 
@@ -222,6 +223,26 @@ struct MIDIDriverInterface
 			facilities.
 	*/
 	OSStatus	(*Monitor)(MIDIDriverRef __nonnull self, MIDIEndpointRef dest, const MIDIPacketList *pktlist);
+    
+	/*!
+		@fn SendPackets
+		@discussion
+	 		Only for provisional drivers.
+	 
+			Send a MIDIEventList to the destination endpoint whose refCons are being passed as
+			arguments.
+	*/
+	OSStatus	(*SendPackets)(MIDIDriverRef __nonnull self, const MIDIEventList *pktlist, void *destRefCon1, void *destRefCon2);
+    
+    /*!
+		@fn MonitorEvents
+		@discussion
+			Only for provisional drivers.
+
+			Same as Monitor but uses MIDEventList, whose protocol may vary from MIDI 1.0.
+	*/
+	OSStatus	(*MonitorEvents)(MIDIDriverRef __nonnull self, MIDIEndpointRef dest, const MIDIEventList *pktlist);
+
 };
 
 
@@ -273,9 +294,25 @@ CFPlugInTypes                   Dictionary      1 key/value pair
 /* 43C98C3C-306C-11D5-AF73-003065A8301E */
 
 /*!
+	@define			kMIDIDriverInterfaceXID
+ 
+	@abstract		The UUID for a provisional MIDI driver interface.
+ 
+	@discussion		See the description of the MIDIDriverInterface structure for
+					information about different versions of the MIDI driver interface.
+ 
+					This provisional driver interface is provided for the purpose of
+                    prototyping MIDI 2.0 driver support. This driver interface will be replaced
+                    in the future when transport specifications are defined.
+*/
+#define kMIDIDriverInterfaceXID \
+	CFUUIDGetConstantUUIDWithBytes(NULL, 0x2F, 0xD9, 0x4D, 0x0F, 0x8C, 0x2A, 0x48, 0x2A, 0x8A, 0xD8, 0x7D, 0x9E, 0xA3, 0x81, 0xC9, 0xC1)
+/* 2FD94D0F-8C2A-482A-8AD8-7D9EA381C9C1 */
+
+/*!
 	@constant		kMIDIDriverPropertyUsesSerial
 	
-	@discussion		This constant, "MIDIDriverUsesSerial", when defined to "YES" in a driver's 
+	@discussion		This constant, "MIDIDriverUsesSerial", when defined to "YES" in a driver's
 					bundle, tells MIDIServer that the driver uses serial ports and is eligible to
 					have serial ports assigned to it.
 					
@@ -319,7 +356,7 @@ extern "C" {
 	@result			An OSStatus result code.
 */
 extern OSStatus		MIDIDeviceCreate(MIDIDriverRef __nullable owner,
-							CFStringRef name, CFStringRef manufacturer, 
+							CFStringRef name, CFStringRef manufacturer,
 							CFStringRef model, MIDIDeviceRef *outDevice)
 																API_AVAILABLE(macos(10.0), ios(4.2));
 
@@ -420,7 +457,7 @@ extern OSStatus		MIDIDeviceListDispose(MIDIDeviceListRef devList)
 					These refCons are passed back to the driver in its Send() and Flush()
 					methods.
 					
-					RefCons are not persistent (i.e. they are not saved as part of a 
+					RefCons are not persistent (i.e. they are not saved as part of a
 					MIDISetup).  They need to be re-initialized in each call to Start().
 					
 					A typical use is to use one refCon to refer to a device, and a second
@@ -441,7 +478,7 @@ extern OSStatus		MIDIEndpointSetRefCons(MIDIEndpointRef endpt,
 /*!
 	@function		MIDIEndpointGetRefCons
 
-	@discussion		Obtain the refCons assigned to the endpoints 
+	@discussion		Obtain the refCons assigned to the endpoints
 	
 	@param			endpt
 						The endpoint whose refCons are to be return
@@ -451,7 +488,7 @@ extern OSStatus		MIDIEndpointSetRefCons(MIDIEndpointRef endpt,
 						On exit, the second refCon.
 	@result			An OSStatus result code.
 */
-extern OSStatus		MIDIEndpointGetRefCons(MIDIEndpointRef endpt, 
+extern OSStatus		MIDIEndpointGetRefCons(MIDIEndpointRef endpt,
 					void * __nonnull * __nullable ref1, void * __nonnull * __nullable ref2)
 																					API_AVAILABLE(macos(10.0), ios(4.2));
 
@@ -462,7 +499,7 @@ extern OSStatus		MIDIEndpointGetRefCons(MIDIEndpointRef endpt,
 	@function		MIDIGetDriverIORunLoop
 
 	@discussion		Drivers typically need to receive asynchronous I/O completion callbacks
-					on a high-priority thread.  To save drivers from the trouble of 
+					on a high-priority thread.  To save drivers from the trouble of
 					creating their own threads for this purpose, and to make efficient
 					use of system resources, the MIDIServer provides a thread which
 					drivers may use.
@@ -471,8 +508,8 @@ extern OSStatus		MIDIEndpointGetRefCons(MIDIEndpointRef endpt,
 					just dequeueing and encoding output packets, and decoding input packets
 					into MIDIPacketLists to be passed to MIDIReceived.
 	
-					This is a realtime-priority thread and shouldn't be used for anything other 
-					than I/O.  For lower-priority tasks, drivers can use the runloop which 
+					This is a realtime-priority thread and shouldn't be used for anything other
+					than I/O.  For lower-priority tasks, drivers can use the runloop which
 					was current when they were constructed.
 
 	@result			The CFRunLoopRef of the server's driver I/O thread.

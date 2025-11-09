@@ -1,8 +1,28 @@
 /*
-	SFCertificatePanel.h
-	SecurityInterface
-	Copyright (c) 2002-2004 Apple Computer, Inc.
-	All rights reserved.
+ * Copyright (c) 2002-2020 Apple Inc. All Rights Reserved.
+ *
+ * @APPLE_LICENSE_HEADER_START@
+ *
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this
+ * file.
+ *
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
+ * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
+ * limitations under the License.
+ *
+ * @APPLE_LICENSE_HEADER_END@
+ */
+
+/*!
+    @header SFCertificatePanel
 */
 
 #ifndef _SFCERTIFICATEPANEL_H_
@@ -11,11 +31,14 @@
 #import <Cocoa/Cocoa.h>
 #include <Security/SecCertificate.h>
 #include <Security/SecTrust.h>
+#import <Availability.h>
+
+API_UNAVAILABLE_BEGIN(ios, tvos, watchos, macCatalyst)
 
 @class SFCertificateView;
 
 /*!
-	@class SFCertificatePanel 
+	@class SFCertificatePanel
     @abstract SFCertificatePanel is a panel and sheet interface that displays one or more certificates.
 */
 
@@ -45,7 +68,7 @@
 	@discussion If your application can display multiple SFCertificatePanels at once,
 	you should allocate (alloc) and initialize (init) separate object instances instead of using this class method.
 */
-+ (SFCertificatePanel *)sharedCertificatePanel;
++ (SFCertificatePanel *)sharedCertificatePanel API_AVAILABLE(macos(10.3)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 /*!
     @method runModalForTrust:showGroup:
@@ -55,7 +78,7 @@
     @param trust A trust reference which contains the certificates to display.
     @param showGroup Specifies whether additional certificates (other than the leaf certificate) are displayed.
 */
-- (NSInteger)runModalForTrust:(SecTrustRef)trust showGroup:(BOOL)showGroup;
+- (NSInteger)runModalForTrust:(SecTrustRef)trust showGroup:(BOOL)showGroup API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 /*!
     @method runModalForCertificates:showGroup:
@@ -66,7 +89,7 @@
     @param showGroup Specifies whether additional certificates (other than the leaf certificate) are displayed.
 		To show only a single certificate, specify only one SecCertificateRef in the array and set showGroup to NO.
 */
-- (NSInteger)runModalForCertificates:(NSArray *)certificates showGroup:(BOOL)showGroup;
+- (NSInteger)runModalForCertificates:(NSArray *)certificates showGroup:(BOOL)showGroup API_AVAILABLE(macos(10.3)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 /*!
     @method beginSheetForWindow:modalDelegate:didEndSelector:contextInfo:trust:showGroup:
@@ -82,7 +105,7 @@
     @discussion The didEndSelector method should have the following signature:
         - (void)certificateSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
 */
-- (void)beginSheetForWindow:(NSWindow *)docWindow modalDelegate:(id)delegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo trust:(SecTrustRef)trust showGroup:(BOOL)showGroup;
+- (void)beginSheetForWindow:(NSWindow *)docWindow modalDelegate:(id)delegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo trust:(SecTrustRef)trust showGroup:(BOOL)showGroup API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 /*!
     @method beginSheetForWindow:modalDelegate:didEndSelector:contextInfo:certificates:showGroup:
@@ -97,7 +120,7 @@
     @discussion The didEndSelector method should have the following signature:
         - (void)certificateSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
 */
-- (void)beginSheetForWindow:(NSWindow *)docWindow modalDelegate:(id)delegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo certificates:(NSArray *)certificates showGroup:(BOOL)showGroup;
+- (void)beginSheetForWindow:(NSWindow *)docWindow modalDelegate:(id)delegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo certificates:(NSArray *)certificates showGroup:(BOOL)showGroup API_AVAILABLE(macos(10.3)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 /*!
     @method setPolicies:
@@ -108,64 +131,64 @@
 	@discussion Applications will typically display a SFCertificatePanel in the context of a specific usage, such as SSL or S/MIME.
 	You should set only the policy references which apply to your intended usage.
 */
-- (void)setPolicies:(id)policies;
+- (void)setPolicies:(id)policies API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 /*!
     @method policies
 	@abstract Returns an array of policies used to evaluate the status of the displayed certificates.
 	@discussion This method returns an autoreleased NSArray containing one or more SecPolicyRef instances, as set by a previous setPolicies: call.
 */
-- (NSArray *)policies;
+- (NSArray *)policies API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 /*!
     @method setDefaultButtonTitle:
     @abstract Customizes the title of the default button.
     @param title The new title for the default button.
 */
-- (void)setDefaultButtonTitle:(NSString *)title;
+- (void)setDefaultButtonTitle:(NSString *)title API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 /*!
     @method setAlternateButtonTitle:
     @abstract Customizes the title of the alternate button.
     @param title The new title for the alternate button. If title is set to nil, the button will not be shown.
 */
-- (void)setAlternateButtonTitle:(NSString *)title;
+- (void)setAlternateButtonTitle:(NSString *)title API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 /*
     @method setShowsHelp:
 	@abstract Displays a help button in the panel.
     @param showsHelp Set to YES if the help button should be displayed, NO if it should be hidden.
-    @discussion -setShowsHelp:YES adds a help button to the panel. When the help button is pressed, the delegate 
-is first consulted.  If the delegate does not implement -certificatePanelShowHelp: or returns NO, then 
--[NSHelpManager openHelpAnchor:inBook:] is called with a nil book and the anchor specified by -setHelpAnchor: 
+    @discussion -setShowsHelp:YES adds a help button to the panel. When the help button is pressed, the delegate
+is first consulted.  If the delegate does not implement -certificatePanelShowHelp: or returns NO, then
+-[NSHelpManager openHelpAnchor:inBook:] is called with a nil book and the anchor specified by -setHelpAnchor:
 (if any). An exception will be raised if the delegate returns NO and there is no help anchor set.
 */
-- (void)setShowsHelp:(BOOL)showsHelp;
+- (void)setShowsHelp:(BOOL)showsHelp API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 /*
     @method showsHelp
 	@abstract Returns YES if the help button is currently displayed, NO if hidden.
 */
-- (BOOL)showsHelp;
+- (BOOL)showsHelp API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 /*
     @method setHelpAnchor:
 	@abstract Sets the help anchor string for the modal panel.
     @param anchor The new help anchor string.
 */
-- (void)setHelpAnchor:(NSString *)anchor;
+- (void)setHelpAnchor:(NSString *)anchor API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 /*
     @method helpAnchor
 	@abstract Returns the current help anchor string for the modal panel.
 */
-- (NSString *)helpAnchor;
+- (NSString *)helpAnchor API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 /*
     @method certificateView
 	@abstract Returns the current SFCertificateView instance for the modal panel.
 */
-- (SFCertificateView *)certificateView;
+- (SFCertificateView *)certificateView API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 @end
 
@@ -174,9 +197,11 @@ is first consulted.  If the delegate does not implement -certificatePanelShowHel
     @method certificatePanelShowHelp:
 	@abstract The delegate should implement this method if custom help behavior is required.
 */
-- (BOOL)certificatePanelShowHelp:(SFCertificatePanel *)sender;
+- (BOOL)certificatePanelShowHelp:(SFCertificatePanel *)sender API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 @end
+
+API_UNAVAILABLE_END
 
 #endif /* !_SFCERTIFICATEPANEL_H_ */
 

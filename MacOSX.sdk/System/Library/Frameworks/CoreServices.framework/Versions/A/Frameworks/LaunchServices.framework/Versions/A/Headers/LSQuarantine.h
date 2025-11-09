@@ -76,7 +76,7 @@ CF_ASSUME_NONNULL_BEGIN
  *
  * kLSQuarantineDataURLKey - value type CFURLRef
  *
- *    The URL from which the data for the quarantined item data was actaully streamed
+ *    The URL from which the data for the quarantined item data was actually streamed
  *    or downloaded, if available.
  *
  *

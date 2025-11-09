@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/NSEvent.h>
 #import <AppKit/NSHapticFeedback.h>
+#import <AppKit/AppKitDefines.h>
 
 @class NSPanGestureRecognizer;
 @class NSView;
@@ -16,7 +17,7 @@
 @end
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 API_AVAILABLE(macos(10.11))
 @interface NSAlignmentFeedbackFilter : NSObject

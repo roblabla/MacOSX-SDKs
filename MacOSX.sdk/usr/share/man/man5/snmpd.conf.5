@@ -860,6 +860,7 @@ for more information about SNMPv3 notification behaviour.
 .IP "authtrapenable {1|2}"
 determines whether to generate authentication failure traps
 (\fIenabled(1)\fR) or not (\fIdisabled(2)\fR - the default).
+.RS
 Ordinarily the corresponding MIB
 object (\fCsnmpEnableAuthenTraps.0\fR) is read-write, but specifying
 this directive makes this object read-only, and attempts to set the
@@ -1458,7 +1459,6 @@ administrative information to generate a valid SNMP request
 .IP "Note:"
 The proxied request will \fInot\fR use the administrative
 settings from the original request.
-.RE
 .PP
 If a CONTEXTNAME is specified, this will register the proxy
 delegation within the named context in the local agent.

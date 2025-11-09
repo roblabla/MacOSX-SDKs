@@ -16,6 +16,20 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /*
+ *  CMDeviceMotionSensorLocation
+ *
+ *  Discussion:
+ *    CMDeviceMotionSensorLocation indicates the location of
+ *    the sensors used to compute the device motion data.
+ *
+ */
+typedef NS_ENUM(NSInteger, CMDeviceMotionSensorLocation) {
+	CMDeviceMotionSensorLocationDefault,
+	CMDeviceMotionSensorLocationHeadphoneLeft,
+	CMDeviceMotionSensorLocationHeadphoneRight
+} NS_SWIFT_NAME(CMDeviceMotion.SensorLocation);
+
+/*
  *  CMMagneticFieldCalibrationAccuracy
  *
  *  Discussion:
@@ -123,6 +137,15 @@ COREMOTION_EXPORT API_AVAILABLE(ios(4.0)) API_UNAVAILABLE(tvos)
  *
  */
 @property(readonly, nonatomic) double heading COREMOTION_EXPORT API_AVAILABLE(ios(11.0));
+
+/*
+ *  sensorLocation
+ *
+ *  Discussion:
+ *    Returns the location of the sensors used to compute the device motion data.
+ *
+ */
+@property(readonly, nonatomic) CMDeviceMotionSensorLocation sensorLocation COREMOTION_EXPORT API_AVAILABLE(ios(14.0));
 
 @end
 

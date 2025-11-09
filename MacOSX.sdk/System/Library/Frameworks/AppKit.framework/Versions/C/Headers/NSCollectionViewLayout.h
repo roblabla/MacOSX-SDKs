@@ -24,7 +24,7 @@ typedef NS_ENUM(NSInteger, NSCollectionElementCategory) {
 @class NSIndexPath;
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 typedef NSString * NSCollectionViewDecorationElementKind NS_SWIFT_BRIDGED_TYPEDEF;
 

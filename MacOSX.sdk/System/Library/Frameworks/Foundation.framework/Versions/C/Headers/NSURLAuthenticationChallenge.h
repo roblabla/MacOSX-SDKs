@@ -25,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
     in the challenge.
 */
 
+API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 @protocol NSURLAuthenticationChallengeSender <NSObject>
 
 /*!
@@ -64,6 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
     to indicate when it's done.
 */
 
+API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 @interface NSURLAuthenticationChallenge : NSObject <NSSecureCoding>
 {
 @private

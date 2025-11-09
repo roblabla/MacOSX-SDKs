@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 1B9E7C50-2E49-3C58-8D8E-F4EF31332E71' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           1012DBD7-29B0-3198-902F-20BD068C12FA
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           E528D4BC-D3C1-3710-A602-4EB87D34B485
 install-name:    '/System/Library/Frameworks/PreferencePanes.framework/Versions/A/PreferencePanes'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _LegacyPreferencePaneMain, _NSPrefPaneHelpMenuAnchorKey, _NSPrefPaneHelpMenuInfoPListKey, 
                        _NSPrefPaneHelpMenuTitleKey, _NSPrefPaneSupportsAutoLayout, 
                        _NSPreferencePaneCancelUnselectNotification, _NSPreferencePaneDidCrashNotification, 
@@ -45,24 +51,25 @@ exports:
                        NSPrefPaneBundle._bestLocale, NSPrefPaneBundle._bundle, NSPrefPaneBundle._description, 
                        NSPrefPaneBundle._devVersion, NSPrefPaneBundle._enabled, NSPrefPaneBundle._favorite, 
                        NSPrefPaneBundle._hardwareTestTool, NSPrefPaneBundle._icon, 
-                       NSPrefPaneBundle._iconLabel, NSPrefPaneBundle._iconName, NSPrefPaneBundle._identifier, 
-                       NSPrefPaneBundle._ioServiceAttributesToMatch, NSPrefPaneBundle._ioServiceToMatch, 
-                       NSPrefPaneBundle._isDisabledOnServer, NSPrefPaneBundle._largeIcon, 
-                       NSPrefPaneBundle._localizations, NSPrefPaneBundle._localizedIconLabels, 
-                       NSPrefPaneBundle._localizedNames, NSPrefPaneBundle._longName, 
-                       NSPrefPaneBundle._nameIconVariant, NSPrefPaneBundle._overrideVisible, 
-                       NSPrefPaneBundle._path, NSPrefPaneBundle._prefPaneObject, 
-                       NSPrefPaneBundle._remoteViewClass, NSPrefPaneBundle._searchAnchors, 
-                       NSPrefPaneBundle._searchGroupsPath, NSPrefPaneBundle._shortName, 
-                       NSPrefPaneBundle._shortVersion, NSPrefPaneBundle._visible, 
-                       NSPrefPaneSearchCenter.mDebug, NSPrefPaneSearchCenter.mIndexRef, 
-                       NSPrefPaneSearchCenter.mSKLock, NSPrefPaneSearchCenter.mValidated, 
-                       NSPrefPanesCenter._ioIterator, NSPrefPanesCenter._notifyPort, 
-                       NSPrefPanesCenter._numIOPrefPanes, NSPrefPanesCenter._ppBundles, 
-                       NSPrefPanesCenter._ppByIdentifier, NSPrefTabsController.fTabViewItemToSwitchTo, 
-                       NSPrefTabsController.parentLayout, NSPrefTabsController.tabView, 
-                       NSPreference._isDirty, NSPreference._isEditable, NSPreference._prefTabsController, 
-                       NSPreference._prefs, NSPreference._relevantDomains, PreferencePaneDispatch._connection, 
-                       PreferencePaneDispatch._legacyPreferencePanePath, PreferencePaneDispatch._prefPaneObject, 
-                       PreferencePaneDispatch._replyToShouldUnselectBlock, PreferencePaneDispatch._savedReplyToShouldUnselect ]
+                       NSPrefPaneBundle._iconLabel, NSPrefPaneBundle._iconName, NSPrefPaneBundle._iconNameUsesAssetCatalog, 
+                       NSPrefPaneBundle._identifier, NSPrefPaneBundle._ioServiceAttributesToMatch, 
+                       NSPrefPaneBundle._ioServiceToMatch, NSPrefPaneBundle._isDisabledOnServer, 
+                       NSPrefPaneBundle._largeIcon, NSPrefPaneBundle._localizations, 
+                       NSPrefPaneBundle._localizedIconLabels, NSPrefPaneBundle._localizedNames, 
+                       NSPrefPaneBundle._longName, NSPrefPaneBundle._nameIconVariant, 
+                       NSPrefPaneBundle._overrideVisible, NSPrefPaneBundle._path, 
+                       NSPrefPaneBundle._prefPaneObject, NSPrefPaneBundle._remoteViewClass, 
+                       NSPrefPaneBundle._searchAnchors, NSPrefPaneBundle._searchGroupsPath, 
+                       NSPrefPaneBundle._shortName, NSPrefPaneBundle._shortVersion, 
+                       NSPrefPaneBundle._visible, NSPrefPaneSearchCenter.mDebug, 
+                       NSPrefPaneSearchCenter.mIndexRef, NSPrefPaneSearchCenter.mSKLock, 
+                       NSPrefPaneSearchCenter.mValidated, NSPrefPanesCenter._ioIterator, 
+                       NSPrefPanesCenter._notifyPort, NSPrefPanesCenter._numIOPrefPanes, 
+                       NSPrefPanesCenter._ppBundles, NSPrefPanesCenter._ppByIdentifier, 
+                       NSPrefTabsController.fTabViewItemToSwitchTo, NSPrefTabsController.parentLayout, 
+                       NSPrefTabsController.tabView, NSPreference._isDirty, NSPreference._isEditable, 
+                       NSPreference._prefTabsController, NSPreference._prefs, NSPreference._relevantDomains, 
+                       PreferencePaneDispatch._connection, PreferencePaneDispatch._legacyPreferencePanePath, 
+                       PreferencePaneDispatch._prefPaneObject, PreferencePaneDispatch._replyToShouldUnselectBlock, 
+                       PreferencePaneDispatch._savedReplyToShouldUnselect ]
 ...

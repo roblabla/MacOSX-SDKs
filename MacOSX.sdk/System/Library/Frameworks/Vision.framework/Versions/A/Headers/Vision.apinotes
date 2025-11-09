@@ -71,7 +71,14 @@ Classes:
     SwiftName: "__boundingBox"
     SwiftPrivate: true
     NullabilityOfRet: N
-
+    
+- Name: VNContour
+  Properties:
+  - Name: normalizedPoints
+    PropertyKind: Instance
+    SwiftName: __normalizedPoints
+    SwiftPrivate: true
+    Nullability: N
 
 SwiftVersions:
 - Version: 4

@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UICollectionView.h>
 #import <UIKit/UITableView.h>
+#import <UIKit/NSDiffableDataSourceSectionSnapshot.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -76,8 +77,42 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0))
 
 @end
 
-typedef UICollectionViewCell * _Nullable (^UICollectionViewDiffableDataSourceCellProvider)(UICollectionView * _Nonnull,NSIndexPath * _Nonnull, id _Nonnull);
-typedef UICollectionReusableView * _Nullable (^UICollectionViewDiffableDataSourceSupplementaryViewProvider)(UICollectionView* _Nonnull, NSString * _Nonnull, NSIndexPath * _Nonnull);
+typedef UICollectionViewCell * _Nullable (^UICollectionViewDiffableDataSourceCellProvider)(UICollectionView * _Nonnull collectionView, NSIndexPath * _Nonnull indexPath, id _Nonnull itemIdentifier);
+typedef UICollectionReusableView * _Nullable (^UICollectionViewDiffableDataSourceSupplementaryViewProvider)(UICollectionView* _Nonnull collectionView, NSString * _Nonnull elementKind, NSIndexPath * _Nonnull indexPath);
+
+
+UIKIT_EXTERN API_AVAILABLE(ios(14.0),tvos(14.0))
+@interface NSDiffableDataSourceSectionTransaction<SectionIdentifierType, ItemIdentifierType> : NSObject
+@property(nonatomic,readonly) SectionIdentifierType sectionIdentifier;
+@property(nonatomic,readonly) NSDiffableDataSourceSectionSnapshot<ItemIdentifierType> *initialSnapshot;
+@property(nonatomic,readonly) NSDiffableDataSourceSectionSnapshot<ItemIdentifierType> *finalSnapshot;
+@property(nonatomic,readonly) NSOrderedCollectionDifference<ItemIdentifierType> *difference;
+@end
+
+UIKIT_EXTERN API_AVAILABLE(ios(14.0),tvos(14.0))
+@interface NSDiffableDataSourceTransaction<SectionIdentifierType, ItemIdentifierType> : NSObject
+@property(nonatomic,readonly) NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType> *initialSnapshot;
+@property(nonatomic,readonly) NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType> *finalSnapshot;
+@property(nonatomic,readonly) NSOrderedCollectionDifference<ItemIdentifierType> *difference;
+@property(nonatomic,readonly) NSArray<NSDiffableDataSourceSectionTransaction<SectionIdentifierType, ItemIdentifierType>*> *sectionTransactions;
+@end
+
+UIKIT_EXTERN API_AVAILABLE(ios(14.0),tvos(14.0))
+@interface UICollectionViewDiffableDataSourceReorderingHandlers<SectionType,ItemType> : NSObject<NSCopying>
+@property(nonatomic,copy,nullable) BOOL(^canReorderItemHandler)(ItemType);
+@property(nonatomic,copy,nullable) void(^willReorderHandler)(NSDiffableDataSourceTransaction<SectionType, ItemType> *);
+@property(nonatomic,copy,nullable) void(^didReorderHandler)(NSDiffableDataSourceTransaction<SectionType, ItemType> *);
+@end
+
+UIKIT_EXTERN API_AVAILABLE(ios(14.0),tvos(14.0))
+@interface UICollectionViewDiffableDataSourceSectionSnapshotHandlers<ItemType> : NSObject<NSCopying>
+@property(nonatomic,copy,nullable) BOOL(^shouldExpandItemHandler)(ItemType);
+@property(nonatomic,copy,nullable) void(^willExpandItemHandler)(ItemType);
+@property(nonatomic,copy,nullable) BOOL(^shouldCollapseItemHandler)(ItemType);
+@property(nonatomic,copy,nullable) void(^willCollapseItemHandler)(ItemType);
+@property(nonatomic,copy,nullable) NSDiffableDataSourceSectionSnapshot<ItemType>*(^snapshotForExpandingParentItemHandler)(ItemType, NSDiffableDataSourceSectionSnapshot<ItemType>*);
+@end
+
 
 UIKIT_EXTERN API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0))
 @interface UICollectionViewDiffableDataSource<SectionIdentifierType,ItemIdentifierType> : NSObject<UICollectionViewDataSource>
@@ -112,6 +147,18 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0))
 
 - (nullable ItemIdentifierType)itemIdentifierForIndexPath:(NSIndexPath*)indexPath;
 - (nullable NSIndexPath*)indexPathForItemIdentifier:(ItemIdentifierType)identifier;
+
+// Reordering Support
+
+@property(nonatomic,copy) UICollectionViewDiffableDataSourceReorderingHandlers<SectionIdentifierType, ItemIdentifierType> *reorderingHandlers API_AVAILABLE(ios(14.0),tvos(14.0));
+
+// Section Snapshot Support
+
+- (void)applySnapshot:(NSDiffableDataSourceSectionSnapshot<ItemIdentifierType>*)snapshot toSection:(SectionIdentifierType)sectionIdentifier animatingDifferences:(BOOL)animatingDifferences API_AVAILABLE(ios(14.0),tvos(14.0));
+- (void)applySnapshot:(NSDiffableDataSourceSectionSnapshot<ItemIdentifierType>*)snapshot toSection:(SectionIdentifierType)sectionIdentifier animatingDifferences:(BOOL)animatingDifferences completion:(void (^ _Nullable)(void))completion API_AVAILABLE(ios(14.0),tvos(14.0));
+- (NSDiffableDataSourceSectionSnapshot<ItemIdentifierType>*)snapshotForSection:(SectionIdentifierType)section API_AVAILABLE(ios(14.0),tvos(14.0));
+
+@property(nonatomic,copy) UICollectionViewDiffableDataSourceSectionSnapshotHandlers<ItemIdentifierType> *sectionSnapshotHandlers API_AVAILABLE(ios(14.0),tvos(14.0));
 
 @end
 

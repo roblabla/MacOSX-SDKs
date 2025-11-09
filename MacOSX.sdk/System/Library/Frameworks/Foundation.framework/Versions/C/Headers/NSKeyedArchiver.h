@@ -20,26 +20,7 @@ FOUNDATION_EXPORT NSExceptionName const NSInvalidUnarchiveOperationException;
 // Archives created using the class method archivedDataWithRootObject used this key for the root object in the hierarchy of encoded objects. The NSKeyedUnarchiver class method unarchiveObjectWithData: will look for this root key as well. You can also use it as the key for the root object in your own archives.
 FOUNDATION_EXPORT NSString * const NSKeyedArchiveRootObjectKey API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
-@interface NSKeyedArchiver : NSCoder {
-@private
-    void *_stream;
-    NSUInteger _flags;
-    id _delegate;
-    id _containers;
-    id _objects;
-    id _objRefMap;
-    id _replacementMap;
-    id _classNameMap;
-    id _conditionals;
-    id _classes;
-    NSUInteger _genericKey;
-    void *_cache;
-    NSUInteger _cacheSize;
-    NSUInteger _estimatedCount;
-    void *_reserved2;
-    id _visited;
-    void *_reserved0;
-}
+@interface NSKeyedArchiver : NSCoder
 
 /**
  Initializes the receiver for encoding an archive, optionally disabling secure coding.
@@ -64,7 +45,7 @@ FOUNDATION_EXPORT NSString * const NSKeyedArchiveRootObjectKey API_AVAILABLE(mac
 - (instancetype)initForWritingWithMutableData:(NSMutableData *)data API_DEPRECATED("Use -initRequiringSecureCoding: instead", macosx(10.2,10.14), ios(2.0,12.0), watchos(2.0,5.0), tvos(9.0,12.0));
 
 + (NSData *)archivedDataWithRootObject:(id)rootObject API_DEPRECATED("Use +archivedDataWithRootObject:requiringSecureCoding:error: instead", macosx(10.2,10.14), ios(2.0,12.0), watchos(2.0,5.0), tvos(9.0,12.0));
-+ (BOOL)archiveRootObject:(id)rootObject toFile:(NSString *)path API_DEPRECATED("Use +archivedDataWithRootObject:requiringSecureCoding:error: instead", macosx(10.2,10.14), ios(2.0,12.0), watchos(2.0,5.0), tvos(9.0,12.0));
++ (BOOL)archiveRootObject:(id)rootObject toFile:(NSString *)path API_DEPRECATED("Use +archivedDataWithRootObject:requiringSecureCoding:error: and -writeToURL:options:error: instead", macosx(10.2,10.14), ios(2.0,12.0), watchos(2.0,5.0), tvos(9.0,12.0));
 
 @property (nullable, assign) id <NSKeyedArchiverDelegate> delegate;
 
@@ -98,25 +79,7 @@ FOUNDATION_EXPORT NSString * const NSKeyedArchiveRootObjectKey API_AVAILABLE(mac
 
 @end
 
-@interface NSKeyedUnarchiver : NSCoder {
-@private
-    id _delegate;
-    uint32_t _flags;
-    id _objRefMap;
-    id _replacementMap;
-    id _nameClassMap;
-    id _tmpRefObjMap;
-    id _refObjMap;
-    int32_t _genericKey;
-    id _data;
-    void *_offsetData;
-    id _containers;
-    id _objects;
-    const uint8_t *_bytes;
-    uint64_t _len;
-    id _helper;
-    void *_reserved0;
-}
+@interface NSKeyedUnarchiver : NSCoder
 
 /**
  Initializes the receiver for decoding an archive previously encoded by \c NSKeyedUnarchiver.
@@ -138,6 +101,23 @@ FOUNDATION_EXPORT NSString * const NSKeyedArchiveRootObjectKey API_AVAILABLE(mac
  */
 + (nullable id)unarchivedObjectOfClass:(Class)cls fromData:(NSData *)data error:(NSError **)error API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0)) NS_REFINED_FOR_SWIFT;
 
+/**
+ Decodes the \c NSArray root object from \c data which should be an \c NSArray<cls> containing the given non-collection class (no nested arrays or arrays of dictionaries, etc) from the given archive, previously encoded by \c NSKeyedArchiver.
+ 
+ Enables \c requiresSecureCoding and sets the \c decodingFailurePolicy to \c NSDecodingFailurePolicySetErrorAndReturn.
+
+ Returns \c nil if the given data is not valid or cannot be decoded, and sets the \c error out parameter.
+ */
++ (nullable NSArray *)unarchivedArrayOfObjectsOfClass:(Class)cls fromData:(NSData *)data error:(NSError **)error API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) NS_REFINED_FOR_SWIFT;
+
+/**
+Decodes the \c NSDictionary root object from \c data which should be an \c NSDictionary<keyCls,objectCls>  with keys of type given in \c keyCls and objects of the given non-collection class \c objectCls (no nested dictionaries or other dictionaries contained in the dictionary, etc) from the given archive, previously encoded by \c NSKeyedArchiver.
+
+Enables \c requiresSecureCoding and sets the \c decodingFailurePolicy to \c NSDecodingFailurePolicySetErrorAndReturn.
+
+Returns \c nil if the given data is not valid or cannot be decoded, and sets the \c error out parameter.
+*/
++ (nullable NSDictionary *)unarchivedDictionaryWithKeysOfClass:(Class)keyCls objectsOfClass:(Class)valueCls fromData:(NSData *)data error:(NSError **)error API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) NS_REFINED_FOR_SWIFT;
 
 /**
  Decodes the root object of one of the given classes from the given archive, previously encoded by \c NSKeyedArchiver.
@@ -146,7 +126,25 @@ FOUNDATION_EXPORT NSString * const NSKeyedArchiveRootObjectKey API_AVAILABLE(mac
 
  Returns \c nil if the given data is not valid or cannot be decoded, and sets the \c error out parameter.
  */
-+ (nullable id)unarchivedObjectOfClasses:(NSSet<Class> *)classes fromData:(NSData *)data error:(NSError **)error API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0)) NS_REFINED_FOR_SWIFT;
++ (nullable id)unarchivedObjectOfClasses:(NSSet<Class> *)classes fromData:(NSData *)data error:(NSError **)error API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+
+/**
+Decodes the \c NSArray root object from \c data which should be an \c NSArray, containing the given non-collection classes in \c classes  (no nested arrays or arrays of dictionaries, etc) from the given archive, previously encoded by \c NSKeyedArchiver.
+
+Enables \c requiresSecureCoding and sets the \c decodingFailurePolicy to \c NSDecodingFailurePolicySetErrorAndReturn.
+
+Returns \c nil if the given data is not valid or cannot be decoded, and sets the \c error out parameter.
+*/
++ (nullable NSArray *)unarchivedArrayOfObjectsOfClasses:(NSSet<Class> *)classes fromData:(NSData *)data error:(NSError **)error API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) NS_REFINED_FOR_SWIFT;
+
+/**
+Decodes the \c NSDictionary root object from \c data which should be an \c NSDictionary, with keys of the types given in \c keyClasses and objects of the given non-collection classes in \c objectClasses (no nested dictionaries or other dictionaries contained in the dictionary, etc) from the given archive, previously encoded by \c NSKeyedArchiver.
+
+Enables \c requiresSecureCoding and sets the \c decodingFailurePolicy to \c NSDecodingFailurePolicySetErrorAndReturn.
+
+Returns \c nil if the given data is not valid or cannot be decoded, and sets the \c error out parameter.
+*/
++ (nullable NSDictionary *)unarchivedDictionaryWithKeysOfClasses:(NSSet<Class> *)keyClasses objectsOfClasses:(NSSet<Class> *)valueClasses fromData:(NSData *)data error:(NSError **)error API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) NS_REFINED_FOR_SWIFT;
 
 - (instancetype)init API_DEPRECATED("Use -initForReadingFromData:error: instead", macosx(10.2,10.14), ios(2.0,12.0), watchos(2.0,5.0), tvos(9.0,12.0));
 - (instancetype)initForReadingWithData:(NSData *)data API_DEPRECATED("Use -initForReadingFromData:error: instead", macosx(10.2,10.14), ios(2.0,12.0), watchos(2.0,5.0), tvos(9.0,12.0));

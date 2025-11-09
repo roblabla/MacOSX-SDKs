@@ -282,6 +282,10 @@
 	    type3, arg3, type4, arg4, type5, arg5, type6, arg6, type7, arg7) \
 	DTRACE_PROBE7(__vminfo_, name, arg1, arg2, arg3, arg4, arg5, arg6, arg7)
 
+#define DTRACE_VM8(name, type1, arg1, type2, arg2,                      \
+	    type3, arg3, type4, arg4, type5, arg5, type6, arg6, type7, arg7, type8, arg8) \
+	DTRACE_PROBE8(__vminfo_, name, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8)
+
 #define DTRACE_IP(name)                                                 \
 	DTRACE_PROBE(__ip_, name)
 
@@ -439,6 +443,7 @@
 	    type3, arg3, type4, arg4, type5, arg5)                          \
 	DTRACE_PROBE5(__kasan_, name, arg1, arg2, arg3, arg4, arg5);
 #endif /* KASAN */
+
 
 
 

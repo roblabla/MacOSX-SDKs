@@ -2,7 +2,7 @@
 //  tcp_options.h
 //  Network
 //
-//  Copyright (c) 2017-2019 Apple. All rights reserved.
+//  Copyright (c) 2017-2019 Apple Inc. All rights reserved.
 //
 
 #ifndef __NW_TCP_OPTIONS_H__

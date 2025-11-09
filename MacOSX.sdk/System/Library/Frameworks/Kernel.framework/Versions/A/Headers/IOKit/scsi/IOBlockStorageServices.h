@@ -45,8 +45,7 @@
 //-----------------------------------------------------------------------------
 //	Class Declaration
 //-----------------------------------------------------------------------------
-
-class IOBlockStorageServices : public IOBlockStorageDevice
+class __exported IOBlockStorageServices : public IOBlockStorageDevice
 {
 	
 	OSDeclareDefaultStructors ( IOBlockStorageServices )

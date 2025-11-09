@@ -84,6 +84,12 @@ typedef CHHapticEngineFinishedAction (^CHHapticEngineFinishedHandler)(NSError *_
 	@constant	CHHapticEngineStoppedReasonNotifyWhenFinished
  		The engine has stopped due to a call to a `CHHapticEngineFinishedHandler` returning `CHHapticEngineFinishedActionStopEngine`.
  
+    @constant    CHHapticEngineStoppedReasonEngineDestroyed
+        The engine has stopped because the CHHapticEngine instance was destroyed.
+
+    @constant    CHHapticEngineStoppedReasonGameControllerDisconnect
+        The engine has stopped because the Game Controller associated with this engine disconnected.
+
  	@constant	CHHapticEngineStoppedReasonSystemError
  		An error has occurred.
  */
@@ -93,6 +99,8 @@ typedef NS_ENUM(NSInteger, CHHapticEngineStoppedReason) {
 	CHHapticEngineStoppedReasonApplicationSuspended		= 2,
 	CHHapticEngineStoppedReasonIdleTimeout				= 3,
 	CHHapticEngineStoppedReasonNotifyWhenFinished		= 4,
+    CHHapticEngineStoppedReasonEngineDestroyed          = 5,
+    CHHapticEngineStoppedReasonGameControllerDisconnect = 6,
 	CHHapticEngineStoppedReasonSystemError				= -1
 };
 
@@ -122,7 +130,7 @@ typedef void (^CHHapticEngineResetHandler)(void);
 	@abstract
 		Represents the connection with the haptic server.
  */
-CH_EXPORT API_AVAILABLE(ios(13.0), macos(10.15))
+CH_EXPORT API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos)
 @interface CHHapticEngine : NSObject
 
 /*! @method capabilitiesForHardware
@@ -206,16 +214,24 @@ CH_EXPORT API_AVAILABLE(ios(13.0), macos(10.15))
 		Create an instance of the CHHapticEngine.
 	@discussion
 		More than one instance may exist within a process.  Each will function independently of the others.
+ 		CHHapticEngines created using this method will be associated with the device's internal haptics hardware system,
+ 		if one exists.  For systems without internal haptics, this method will fail with the error `CHHapticErrorCodeNotSupported`.
+ 		To access engine instances associated with external game controllers, see the GameController framework documentation
+ 		for the `hapticEngines` property on the GCController class.
  */
 - (nullable instancetype)initAndReturnError:(NSError **)error NS_DESIGNATED_INITIALIZER;
 
 /*! @method initWithAudioSession:error
 	@abstract
-		Create an instance of the CHHapticEngine and associate it with an audio session.  If 'audioSession' is nil,
+		Create an instance of an CHHapticEngine and associate it with an audio session.  If 'audioSession' is nil,
  		the engine will create its own.
 	@discussion
 		More than one instance may exist within a process.  Each will function independently of the others, but all
  		CHHapticEngines which share an audio session will have identical audio behavior with regard to interruptions, etc.
+ 		CHHapticEngines created using this method will be associated with the device's internal haptics hardware system,
+ 		if one exists.  For systems without internal haptics, this method will fail with the error `CHHapticErrorCodeNotSupported`.
+ 		To access engine instances associated with external game controllers, see the GameController framework documentation
+ 		for the `hapticEngines` property on the GCController class.
  */
 - (nullable instancetype)initWithAudioSession:(nullable AVAudioSession *)audioSession error:(NSError **)error NS_DESIGNATED_INITIALIZER;
 

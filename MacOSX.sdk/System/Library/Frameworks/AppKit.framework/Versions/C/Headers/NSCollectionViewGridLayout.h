@@ -6,11 +6,12 @@
 */
 
 #import <AppKit/NSCollectionViewLayout.h>
+#import <AppKit/AppKitDefines.h>
 
 @class NSColor;
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 /* NSCollectionView's default "Grid" layout, which matches NSCollectionView's layout behavior on OS X 10.5 through 10.10.  When you create a new NSCollectionView, its collectionViewLayout property defaults to an instance of NSCollectionViewGridLayout.
 */

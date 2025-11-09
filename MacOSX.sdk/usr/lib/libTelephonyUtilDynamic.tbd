@@ -1,22 +1,43 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 6210F555-3203-34E2-9337-6E0DA69825BF', 'x86_64: 6210F555-3203-34E2-9337-6E0DA69825BF' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           D621CAC7-7759-304E-B09E-1B9D4CDF3072
+  - target:          x86_64-maccatalyst
+    value:           D621CAC7-7759-304E-B09E-1B9D4CDF3072
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           6F602858-AE3D-393D-B28D-6EC16F9831D8
+  - target:          arm64e-maccatalyst
+    value:           6F602858-AE3D-393D-B28D-6EC16F9831D8
 install-name:    '/usr/lib/libTelephonyUtilDynamic.dylib'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst ]
+    symbols:         [ __ZN3ctu16LogMessageBuffer17vCreateWithFormatEPKcP13__va_list_tag, 
+                       __ZN3ctu16LogMessageBuffer19vCreateWithNSFormatEP8NSStringP13__va_list_tag, 
+                       __ZN3ctu16LogMessageBuffer7vprintfEPKcP13__va_list_tag ]
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _TelephonyCapabilitiesAccessoryDetectionForSupported, _TelephonyCapabilitiesAccessoryDetectionSupported, 
                        _TelephonyCapabilitiesAccessoryTypeDetectionForASupported, 
                        _TelephonyCapabilitiesAccessoryTypeDetectionForRSupported, 
                        _TelephonyCapabilitiesAutoFilingSupported, _TelephonyCapabilitiesAutomaticRadarFilingSupported, 
-                       _TelephonyCapabilitiesBBTraceVersion2Supported, _TelephonyCapabilitiesCTechDevice, 
+                       _TelephonyCapabilitiesBBTraceVersion2Supported, _TelephonyCapabilitiesBasebandStateControllerSupported, 
+                       _TelephonyCapabilitiesCTechDevice, _TelephonyCapabilitiesDataServiceSupported, 
                        _TelephonyCapabilitiesDebugTriggerStackshotOnSnapshot, _TelephonyCapabilitiesFactoryCalibrationV2Supported, 
                        _TelephonyCapabilitiesFilesystemSupported, _TelephonyCapabilitiesGetCID, 
-                       _TelephonyCapabilitiesGetFPath, _TelephonyCapabilitiesGetFPrefix, 
-                       _TelephonyCapabilitiesGetFilteringVersion, _TelephonyCapabilitiesGetHardwareModel, 
-                       _TelephonyCapabilitiesGetResetTime, _TelephonyCapabilitiesGetStartupMode, 
+                       _TelephonyCapabilitiesGetFPath, _TelephonyCapabilitiesGetFPathSuffix, 
+                       _TelephonyCapabilitiesGetFPrefix, _TelephonyCapabilitiesGetFilteringVersion, 
+                       _TelephonyCapabilitiesGetHardwareModel, _TelephonyCapabilitiesGetResetTime, 
+                       _TelephonyCapabilitiesGetStartupMode, _TelephonyCapabilitiesGetWakeReasonV2Supported, 
                        _TelephonyCapabilitiesLCounterIndicationSupported, _TelephonyCapabilitiesLTechupported, 
                        _TelephonyCapabilitiesMSupported, _TelephonyCapabilitiesRadioDMSupported, 
+                       _TelephonyCapabilitiesRadioSupportsMultiClientAWD, _TelephonyCapabilitiesSDIResetSupported, 
                        _TelephonyCapabilitiesSetHardwareModel, _TelephonyCapabilitiesSetHardwareModelFromString, 
                        _TelephonyCapabilitiesSetHardwareModelFromTelephonyProduct, 
                        _TelephonyCapabilitiesSupportsFL, _TelephonyCapabilitiesUTechSupported, 
@@ -57,7 +78,8 @@ exports:
                        __TelephonyCapabilitiesRadioPreferencesUARTReliableRetryLimit, 
                        __TelephonyUtilDebugPrint, __TelephonyUtilDebugPrintBinary, 
                        __TelephonyUtilDebugPrintBinaryVerbose, __TelephonyUtilDebugPrintError, 
-                       __TelephonyUtilDebugPrintVerbose, __TeleponyCapabilitiesRadioPreferencesDebugTriggerStackshotOnSnapshot, 
+                       __TelephonyUtilDebugPrintVerbose, __TeleponyCapabilitiesRadioPreferencesControlInput, 
+                       __TeleponyCapabilitiesRadioPreferencesDebugTriggerStackshotOnSnapshot, 
                        __TeleponyCapabilitiesRadioPreferencesHSICGetEnumerationErrorRetries, 
                        __TeleponyCapabilitiesRadioPreferencesHSICGetNotRespondingRetries, 
                        __TeleponyCapabilitiesRadioPreferencesHSICGetNumberResumeRetries, 
@@ -72,7 +94,7 @@ exports:
                        __Z27TUTestTransportGetWriteDataP26TelephonyUtilTransport_tag, 
                        __Z29TUTestTransportParametersInitP29TUTestTransportParameters_tag, 
                        __Z29TUTestTransportSetReadTimeoutP26TelephonyUtilTransport_tag, 
-                       __ZN16MockTimerService11advanceTimeENSt3__16chrono8durationIxNS0_5ratioILl1ELl1000000EEEEE, 
+                       __Z45TelephonyCapabilitiesRadioMiscGetFirmwarePathv, __ZN16MockTimerService11advanceTimeENSt3__16chrono8durationIxNS0_5ratioILl1ELl1000000EEEEE, 
                        __ZN16MockTimerService14popTimersFiredEv, __ZN16MockTimerService17scheduleAfterImplENSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEENS0_5tupleIJN3ctu8TimeTypeENS0_6chrono8durationIxNS0_5ratioILl1ELl1000000EEEEEEEEN8dispatch5queueENSG_5blockIU13block_pointerFvvEEE, 
                        __ZN16MockTimerService17scheduleAfterImplENSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEENS0_5tupleIJN3ctu8TimeTypeENS0_6chrono8durationIxNS0_5ratioILl1ELl1000000EEEEEEEENS0_8functionIFvvEEE, 
                        __ZN16MockTimerService22createOneShotTimerImplENSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEENS0_5tupleIJN3ctu8TimeTypeENS0_6chrono8durationIxNS0_5ratioILl1ELl1000000EEEEEEEE11qos_class_tN8dispatch5queueENSH_5blockIU13block_pointerFvvEEE, 
@@ -238,17 +260,14 @@ exports:
                        __ZN3ctu16LogMessageBuffer11addMetaDataENS_8MetaDataE, __ZN3ctu16LogMessageBuffer11addMetaDataENSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
                        __ZN3ctu16LogMessageBuffer12appendStringEPKc, __ZN3ctu16LogMessageBuffer12appendStringERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
                        __ZN3ctu16LogMessageBuffer12takeMetadataEv, __ZN3ctu16LogMessageBuffer16createWithFormatEPKcz, 
-                       __ZN3ctu16LogMessageBuffer17vCreateWithFormatEPKcP13__va_list_tag, 
                        __ZN3ctu16LogMessageBuffer18createWithNSFormatEP8NSStringz, 
-                       __ZN3ctu16LogMessageBuffer19vCreateWithNSFormatEP8NSStringP13__va_list_tag, 
                        __ZN3ctu16LogMessageBuffer3strEv, __ZN3ctu16LogMessageBuffer4swapERS0_, 
                        __ZN3ctu16LogMessageBuffer5mergeEOS0_, __ZN3ctu16LogMessageBuffer5mergeERKS0_, 
-                       __ZN3ctu16LogMessageBuffer7vprintfEPKcP13__va_list_tag, __ZN3ctu16LogMessageBufferC1EOS0_, 
-                       __ZN3ctu16LogMessageBufferC1ERKS0_, __ZN3ctu16LogMessageBufferC1Ev, 
-                       __ZN3ctu16LogMessageBufferC2EOS0_, __ZN3ctu16LogMessageBufferC2ERKS0_, 
-                       __ZN3ctu16LogMessageBufferC2Ev, __ZN3ctu16LogMessageBufferD1Ev, 
-                       __ZN3ctu16LogMessageBufferD2Ev, __ZN3ctu16LogMessageBufferaSES0_, 
-                       __ZN3ctu16LogMessageBuffercvRNSt3__113basic_ostreamIcNS1_11char_traitsIcEEEEEv, 
+                       __ZN3ctu16LogMessageBufferC1EOS0_, __ZN3ctu16LogMessageBufferC1ERKS0_, 
+                       __ZN3ctu16LogMessageBufferC1Ev, __ZN3ctu16LogMessageBufferC2EOS0_, 
+                       __ZN3ctu16LogMessageBufferC2ERKS0_, __ZN3ctu16LogMessageBufferC2Ev, 
+                       __ZN3ctu16LogMessageBufferD1Ev, __ZN3ctu16LogMessageBufferD2Ev, 
+                       __ZN3ctu16LogMessageBufferaSES0_, __ZN3ctu16LogMessageBuffercvRNSt3__113basic_ostreamIcNS1_11char_traitsIcEEEEEv, 
                        __ZN3ctu16LoggerCommonBase11setLogLevelENS_8LogLevelE, __ZN3ctu16LoggerCommonBase20setInheritedLogLevelENS_8LogLevelE, 
                        __ZN3ctu16LoggerCommonBaseC1ENS_12OsLogContextE, __ZN3ctu16LoggerCommonBaseC1EOS0_, 
                        __ZN3ctu16LoggerCommonBaseC1ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEP8os_log_s, 
@@ -275,7 +294,7 @@ exports:
                        __ZN3ctu17capture_backtraceEm, __ZN3ctu18ResultIsEmptyErrorC1Ev, 
                        __ZN3ctu18ResultIsEmptyErrorC2Ev, __ZN3ctu18ResultIsEmptyErrorD0Ev, 
                        __ZN3ctu18ResultIsEmptyErrorD1Ev, __ZN3ctu18ResultIsEmptyErrorD2Ev, 
-                       __ZN3ctu18XpcJetsamAssertion11addActivityENSt3__18weak_ptrINS1_12basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEEE, 
+                       __ZN3ctu18XpcJetsamAssertion11addActivityENSt3__18weak_ptrINS0_8ActivityEEE, 
                        __ZN3ctu18XpcJetsamAssertion14createActivityENSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
                        __ZN3ctu18XpcJetsamAssertion17getAssertionCountEv, __ZN3ctu18XpcJetsamAssertion21create_default_globalEv, 
                        __ZN3ctu18XpcJetsamAssertion6tidyUpEv, __ZN3ctu18XpcJetsamAssertionC1Ev, 
@@ -482,10 +501,10 @@ exports:
                        __ZN3ctu4Http11HttpSessionD2Ev, __ZN3ctu4Http12HttpResponseD0Ev, 
                        __ZN3ctu4Http12HttpResponseD1Ev, __ZN3ctu4Http12HttpResponseD2Ev, 
                        __ZN3ctu4Http8asStringENS0_11RequestTypeE, __ZN3ctu4Http8asStringENS0_9ErrorTypeE, 
-                       __ZN3ctu4Http8asStringEi, __ZN3ctu4hex0Ea, __ZN3ctu4hex0Ec, 
-                       __ZN3ctu4hex0Eh, __ZN3ctu4hex0Ei, __ZN3ctu4hex0Ej, __ZN3ctu4hex0El, 
-                       __ZN3ctu4hex0Em, __ZN3ctu4hex0Es, __ZN3ctu4hex0Et, __ZN3ctu4hex0Ex, 
-                       __ZN3ctu4hex0Ey, __ZN3ctu4llvm18getAsSignedIntegerENS0_9StringRefEjRx, 
+                       __ZN3ctu4Http8asStringENS0_9ErrorTypeEl, __ZN3ctu4Http8asStringEi, 
+                       __ZN3ctu4hex0Ea, __ZN3ctu4hex0Ec, __ZN3ctu4hex0Eh, __ZN3ctu4hex0Ei, 
+                       __ZN3ctu4hex0Ej, __ZN3ctu4hex0El, __ZN3ctu4hex0Em, __ZN3ctu4hex0Es, 
+                       __ZN3ctu4hex0Et, __ZN3ctu4hex0Ex, __ZN3ctu4hex0Ey, __ZN3ctu4llvm18getAsSignedIntegerENS0_9StringRefEjRx, 
                        __ZN3ctu4llvm20getAsUnsignedIntegerENS0_9StringRefEjRy, __ZN3ctu4llvm9StringRef4nposE, 
                        __ZN3ctu4llvmlsERNSt3__113basic_ostreamIcNS1_11char_traitsIcEEEERKNS0_9StringRefE, 
                        __ZN3ctu4rest11asOperationERKN3xpc6objectE, __ZN3ctu4rest11createReplyERKN3xpc4dictE, 
@@ -894,4 +913,7 @@ exports:
                        __ZThn8_N16MockTimerServiceD1Ev, __ZThn8_N3ctu20DispatchTimerServiceD0Ev, 
                        __ZThn8_N3ctu20DispatchTimerServiceD1Ev, ___TUAssertGetReason, 
                        ___TUAssertTrigger, _kTelephonyUtilTransportConfigMaxPacketSize ]
+  - targets:         [ arm64e-macos, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
+    symbols:         [ __ZN3ctu16LogMessageBuffer17vCreateWithFormatEPKcPc, __ZN3ctu16LogMessageBuffer19vCreateWithNSFormatEP8NSStringPc, 
+                       __ZN3ctu16LogMessageBuffer7vprintfEPKcPc ]
 ...

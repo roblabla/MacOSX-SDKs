@@ -1,5 +1,5 @@
 /*    NLTagScheme.h
-      Copyright (c) 2017-2019, Apple Inc. All rights reserved.
+      Copyright (c) 2017-2020, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/Foundation.h>
@@ -18,7 +18,7 @@ FOUNDATION_EXPORT NLTagScheme const NLTagSchemeLanguage API_AVAILABLE(macos(10.1
 FOUNDATION_EXPORT NLTagScheme const NLTagSchemeScript API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));                  /* This tag scheme tags tokens according to their script. */
 FOUNDATION_EXPORT NLTagScheme const NLTagSchemeSentimentScore API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));          /* This tag scheme classifies sentences or paragraphs according to their sentiment on a scale of -1.0 to 1.0. */
 
-/* An NLTag is a tag associated with a given tag scheme that can be returned by NLTagger. Each tag scheme has its own set of tags. For NLTagSchemeTokenType, NLTagSchemeLexicalClass, NLTagSchemeNameType, and NLTagSchemeNameTypeOrLexicalClass, tags will be taken from the lists below (clients may use == comparison). Tags for NLTagSchemeLemma are lemmas from the language. Tags for NLTagSchemeLanguage are standard language abbreviations. Tags for NLTagSchemeScript are standard script abbreviations
+/* An NLTag is a tag associated with a given tag scheme that can be returned by NLTagger. Each tag scheme has its own set of tags. For NLTagSchemeTokenType, NLTagSchemeLexicalClass, NLTagSchemeNameType, NLTagSchemeEmotionalState and NLTagSchemeNameTypeOrLexicalClass, tags will be taken from the lists below (clients may use == comparison). Tags for NLTagSchemeLemma are lemmas from the language. Tags for NLTagSchemeLanguage are standard language abbreviations. Tags for NLTagSchemeScript are standard script abbreviations
 */
 
 typedef NSString *NLTag NS_TYPED_EXTENSIBLE_ENUM;
@@ -59,4 +59,3 @@ FOUNDATION_EXPORT NLTag const NLTagOtherWhitespace API_AVAILABLE(macos(10.14), i
 FOUNDATION_EXPORT NLTag const NLTagPersonalName API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
 FOUNDATION_EXPORT NLTag const NLTagPlaceName API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
 FOUNDATION_EXPORT NLTag const NLTagOrganizationName API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
-

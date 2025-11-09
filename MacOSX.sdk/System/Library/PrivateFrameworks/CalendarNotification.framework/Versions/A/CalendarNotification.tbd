@@ -1,27 +1,32 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 4E3D5C55-BDF7-376F-ACDB-67910F4D12C5' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           BD281DE6-7725-38AF-9F24-8526C6A38954
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           2F66C049-971D-3A91-86BC-2E952122BCF2
 install-name:    '/System/Library/PrivateFrameworks/CalendarNotification.framework/Versions/A/CalendarNotification'
 current-version: 0
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CALNDefaultCalendarDirectory, _CALNStringFromNotificationPresentationOptions, 
-                       _EKEngineNS_Log, _EKEngineNS_Log_Nobo, _EKEngineNS_Log_Reminders, 
-                       _EKEngineNS_Log_Timer ]
-    objc-classes:    [ CALNBundle, CALNGEORouteHypothesizer, CALNGEORouteHypothesizerProvider, 
-                       CALNInMemoryNotificationStorage, CALNInMemoryTimeToLeaveRefreshStorage, 
-                       CALNInMemoryTriggeredEventNotificationDataStorage, CALNLogSubsystem, 
-                       CALNMutableNotificationContent, CALNMutableNotificationRecord, 
+                       _EKEngineLog, _EKEngineLogNobo, _EKEngineLogReminders, _EKEngineLogTimer ]
+    objc-classes:    [ CALNBundle, CALNCUIKIconProvider, CALNGEORouteHypothesizer, 
+                       CALNGEORouteHypothesizerProvider, CALNInMemoryNotificationStorage, 
+                       CALNInMemoryTimeToLeaveRefreshStorage, CALNInMemoryTriggeredEventNotificationDataStorage, 
+                       CALNLogSubsystem, CALNMutableNotificationContent, CALNMutableNotificationRecord, 
                        CALNMutableNotificationSound, CALNMutableTriggeredEventNotificationData, 
-                       CALNNotificationContent, CALNNotificationFilter, CALNNotificationIdentifier, 
-                       CALNNotificationIdentifierComponents, CALNNotificationRecord, 
-                       CALNNotificationSound, CALNPersistentNotificationStorage, 
+                       CALNNotificationContent, CALNNotificationFilter, CALNNotificationIconCache, 
+                       CALNNotificationIdentifier, CALNNotificationIdentifierComponents, 
+                       CALNNotificationRecord, CALNNotificationSound, CALNPersistentNotificationStorage, 
                        CALNPersistentTimeToLeaveRefreshStorage, CALNPersistentTriggeredEventNotificationDataStorage, 
                        CALNRouteHypothesisMapper, CALNTriggeredEventNotificationData, 
                        CalendarNotificationMessageTracer, EKEventCounterEngine, EKMessageEngine, 
-                       EKNotificationEngine, EKNotificationInfo, EKRemindersEngine, 
-                       EKSummaryEngine, EKTravelEngine, EKTravelEngineAgendaEntry, 
+                       EKNotificationEngine, EKNotificationInfo, EKNotificationInfoAction, 
+                       EKRemindersEngine, EKTravelEngine, EKTravelEngineAgendaEntry, 
                        EKTravelEngineOriginalEvent, EKTravelEngineThrottle ]
     objc-ivars:      [ CALNNotificationContent._body, CALNNotificationContent._categoryIdentifier, 
                        CALNNotificationContent._date, CALNNotificationContent._defaultActionURL, 

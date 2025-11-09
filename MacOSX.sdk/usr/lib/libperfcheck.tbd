@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: FE9B461B-F534-3674-8FD9-A7205A3350E1', 'x86_64: FE9B461B-F534-3674-8FD9-A7205A3350E1' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           11603DE5-FD4B-3BF0-962A-63052E11B75F
+  - target:          x86_64-maccatalyst
+    value:           11603DE5-FD4B-3BF0-962A-63052E11B75F
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           FD5228D9-1BD9-305A-A094-E4A2346C9D20
+  - target:          arm64e-maccatalyst
+    value:           FD5228D9-1BD9-305A-A094-E4A2346C9D20
 install-name:    '/usr/lib/libperfcheck.dylib'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _ep_session_begin, _ep_session_config_with_argstr, _ep_session_create, 
                        _ep_session_destroy, _ep_session_end, _ep_session_process, 
                        _ep_session_set_perfdata_file, _ep_session_set_procpid, _ep_session_set_testname, 

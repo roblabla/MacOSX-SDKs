@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVBase.h>)
 /*
 	File:  AVBase.h
 
@@ -7,6 +8,7 @@
 
  */
 
+#import <TargetConditionals.h>
 #import <Availability.h>
 #import <Foundation/NSObjCRuntime.h>
 
@@ -199,3 +201,7 @@
 #endif
 
 
+
+#else
+#import <AVFCore/AVBase.h>
+#endif

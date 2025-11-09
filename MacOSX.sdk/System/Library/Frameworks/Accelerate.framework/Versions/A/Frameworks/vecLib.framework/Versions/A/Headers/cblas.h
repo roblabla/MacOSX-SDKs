@@ -834,10 +834,10 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0), tvos(8.0));
  *
  * Instead, if you wish to change the default BLAS error handling (which is to
  * print an english error message and exit( )), you need to install your own
- * error handlger by calling SetBLASParamErrorProc.
+ * error handler by calling SetBLASParamErrorProc.
  *
  * Your error handler should adhere to the BLASParamErrorProc interface; it
- * need to terminate program execution.  If your error handler returns normally,
+ * need not terminate program execution.  If your error handler returns normally,
  * then the BLAS call will return normally following its execution without
  * performing any further processing.                                         */
 

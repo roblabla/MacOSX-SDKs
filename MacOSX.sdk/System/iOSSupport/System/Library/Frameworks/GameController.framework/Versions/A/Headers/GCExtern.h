@@ -10,5 +10,3 @@
 #else
 #define GAMECONTROLLER_EXTERN	        extern __attribute__((visibility ("default")))
 #endif
-
-#define GAMECONTROLLER_EXPORT API_AVAILABLE(macos(10.9), ios(7.0), tvos(7.0))

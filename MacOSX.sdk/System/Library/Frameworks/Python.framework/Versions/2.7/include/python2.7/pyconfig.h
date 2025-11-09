@@ -254,7 +254,7 @@
 /* #undef HAVE_FDATASYNC */
 
 /* Define to 1 if you have the `finite' function. */
-#define HAVE_FINITE 1
+/* #undef HAVE_FINITE */
 
 /* Define to 1 if you have the `flock' function. */
 #define HAVE_FLOCK 1
@@ -296,11 +296,11 @@
 #define HAVE_GAI_STRERROR 1
 
 /* Define to 1 if you have the `gamma' function. */
-#define HAVE_GAMMA 1
+/* #undef HAVE_GAMMA */
 
 /* Define if we can use gcc inline assembler to get and set x87 control word
    */
-#define HAVE_GCC_ASM_FOR_X87 1
+/* #undef HAVE_GCC_ASM_FOR_X87 */
 
 /* Define if you have the getaddrinfo function. */
 #define HAVE_GETADDRINFO 1

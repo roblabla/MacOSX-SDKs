@@ -10,6 +10,7 @@
 @class CKRecordID;
 
 NS_ASSUME_NONNULL_BEGIN
+
 API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
 @interface CKUserIdentityLookupInfo : NSObject <NSSecureCoding, NSCopying>
 - (instancetype)init NS_UNAVAILABLE;

@@ -7,6 +7,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+API_UNAVAILABLE_BEGIN(ios)
+
 @interface AMWorkspace : NSObject
 {
 	@private
@@ -23,3 +25,5 @@
 - (id)runWorkflowAtPath:(NSString *)path withInput:(id)input error:(NSError **)error;
 
 @end
+
+API_UNAVAILABLE_END

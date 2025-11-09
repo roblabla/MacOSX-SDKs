@@ -2,12 +2,13 @@
 //  CSSearchableItemAttributeSet.h
 //  CoreSpotlight
 //
-//  Copyright © 2015 Apple. All rights reserved.
+//  Copyright © 2020 Apple. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreSpotlight/CSBase.h>
 #import <CoreSpotlight/CSPerson.h>
+#import <UniformTypeIdentifiers/UniformTypeIdentifiers.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,7 +19,8 @@ CS_TVOS_UNAVAILABLE
 @interface CSSearchableItemAttributeSet : NSObject <NSCopying,NSSecureCoding>
 
 //Creates an attribute set for the given content type.
-- (instancetype)initWithItemContentType:(nonnull NSString *)itemContentType;
+- (instancetype)initWithItemContentType:(nonnull NSString *)itemContentType API_DEPRECATED("Use initWithContentType instead", macos(10.13, API_TO_BE_DEPRECATED), ios(9.0, API_TO_BE_DEPRECATED));
+- (instancetype)initWithContentType:(nonnull UTType *)contentType NS_AVAILABLE(11_0, 14_0);
 
 @end
 

@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: BA609ACC-20C3-311A-A161-7E68F68D9E00', 'x86_64: BA609ACC-20C3-311A-A161-7E68F68D9E00' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           5506282E-76F5-33FD-B576-62FAAA39C7D1
+  - target:          x86_64-maccatalyst
+    value:           5506282E-76F5-33FD-B576-62FAAA39C7D1
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           81A9602E-DE57-3008-AC79-6C8C0926F6C4
+  - target:          arm64e-maccatalyst
+    value:           81A9602E-DE57-3008-AC79-6C8C0926F6C4
 install-name:    '/usr/lib/libresolv.9.dylib'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ ___res_9_p_type_syms, __res_9_h_errno_set, __res_9_ns_flagdata, 
                        _dns_all_server_addrs, _dns_async_cancel, _dns_async_handle_reply, 
                        _dns_async_receive, _dns_async_send, _dns_async_start, _dns_class_number, 

@@ -31,43 +31,46 @@
 #include <kern/queue.h>
 #include <mach/mach_types.h>
 
+__BEGIN_DECLS
+
 #define LCK_GRP_NULL    (lck_grp_t *)NULL
 
-typedef unsigned int    lck_type_t;
-
-#define LCK_TYPE_SPIN   1
-#define LCK_TYPE_MTX    2
-#define LCK_TYPE_RW     3
+typedef enum lck_type {
+	LCK_TYPE_SPIN,
+	LCK_TYPE_MTX,
+	LCK_TYPE_RW,
+	LCK_TYPE_TICKET
+} lck_type_t;
 
 typedef struct _lck_grp_ lck_grp_t;
 
+#define LCK_GRP_ATTR_STAT       0x1
+#define LCK_GRP_ATTR_TIME_STAT  0x2
 
 typedef struct __lck_grp_attr__ lck_grp_attr_t;
 
 #define LCK_GRP_ATTR_NULL       (lck_grp_attr_t *)NULL
 
-__BEGIN_DECLS
-
 extern  lck_grp_attr_t  *lck_grp_attr_alloc_init(
 	void);
 
-extern  void                    lck_grp_attr_setdefault(
-	lck_grp_attr_t  *attr);
+extern  void            lck_grp_attr_setdefault(
+	lck_grp_attr_t          *attr);
 
-extern  void                    lck_grp_attr_setstat(
-	lck_grp_attr_t  *attr);
+extern  void            lck_grp_attr_setstat(
+	lck_grp_attr_t          *attr);
 
-extern  void                    lck_grp_attr_free(
-	lck_grp_attr_t  *attr);
+extern  void            lck_grp_attr_free(
+	lck_grp_attr_t          *attr);
 
-extern  lck_grp_t               *lck_grp_alloc_init(
+extern  lck_grp_t       *lck_grp_alloc_init(
 	const char*             grp_name,
 	lck_grp_attr_t  *attr);
 
-extern void                             lck_grp_free(
+extern void             lck_grp_free(
 	lck_grp_t               *grp);
 
-__END_DECLS
 
+__END_DECLS
 
 #endif /* _KERN_LOCK_GROUP_H */

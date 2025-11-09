@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVPlayerItemTrack.h>)
 /*
 	File:  AVPlayerItemTrack.h
 
@@ -80,3 +81,7 @@ AVF_EXPORT NSString *const AVPlayerItemTrackVideoFieldModeDeinterlaceFields API_
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCore/AVPlayerItemTrack.h>
+#endif

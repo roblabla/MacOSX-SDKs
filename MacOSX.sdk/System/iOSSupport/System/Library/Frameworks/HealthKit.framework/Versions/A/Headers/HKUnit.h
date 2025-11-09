@@ -31,6 +31,7 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0))
 // S                (siemens) [Electrical Conductance]
 // Hz               (hertz)   [Frequency]
 // mol<molar mass>  (moles)   [Mass] <molar mass> is the number of grams per mole. For example, mol<180.1558>
+// V                (volts)   [Electrical Potential Difference]
 
 // SI units can be prefixed as follows:
 // da   (deca-)   = 10                 d    (deci-)   = 1/10
@@ -39,7 +40,7 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0))
 // M    (mega-)   = 10^6               mc   (micro-)  = 10^-6
 // G    (giga-)   = 10^9               n    (nano-)   = 10^-9
 // T    (tera-)   = 10^12              p    (pico-)   = 10^-12
-
+//                                     f    (femto-)  = 10^-15
 
 // Non-SI units:
 //
@@ -54,10 +55,11 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0))
 // mi   (miles)   = 1609.34 m                           
 //
 // [Pressure]
-// mmHg (millimeters of mercury) = 133.3224 Pa          
-// cmAq (centimeters of water)   = 98.06650 Pa
-// atm  (atmospheres)            = 101325.0 Pa
-// dBASPL (sound pressure level)  = 10^(dBASPL/20) * 2.0E-05 Pa
+// mmHg (millimeters of Mercury)    = 133.3224 Pa
+// cmAq (centimeters of water)      = 98.06650 Pa
+// atm  (atmospheres)               = 101325.0 Pa
+// dBASPL (sound pressure level)    = 10^(dBASPL/20) * 2.0E-05 Pa
+// inHg (inches of Mercury)         = 3386.38816 Pa
 //
 // [Volume]
 // fl_oz_us  (US customary fluid ounces)= 0.0295735295625 L
@@ -79,9 +81,6 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0))
 // [Temperature]
 // degC (degrees Celsius)    = 1.0 K - 273.15
 // degF (degrees Fahrenheit) = 1.8 K - 459.67
-//
-// [Conductance]
-// S    (siemens)
 //
 // [Pharmacology]
 // IU   (international unit)
@@ -173,6 +172,7 @@ typedef NS_ENUM(NSInteger, HKMetricPrefix) {
 + (instancetype)centimeterOfWaterUnit;      // cmAq
 + (instancetype)atmosphereUnit;             // atm
 + (instancetype)decibelAWeightedSoundPressureLevelUnit API_AVAILABLE(ios(13.0), watchos(6.0)); // dBASPL
++ (instancetype)inchesOfMercuryUnit API_AVAILABLE(ios(14.0), watchos(7.0)); // inHg
 @end
 
 /* Time Units */
@@ -234,6 +234,12 @@ typedef NS_ENUM(NSInteger, HKMetricPrefix) {
 @interface HKUnit (Frequency)
 + (instancetype)hertzUnitWithMetricPrefix:(HKMetricPrefix)prefix API_AVAILABLE(ios(13.0), watchos(6.0));      // Hz
 + (instancetype)hertzUnit API_AVAILABLE(ios(13.0), watchos(6.0));  // Hz
+@end
+
+/* Electrical Potential Difference Units */
+@interface HKUnit (ElectricPotentialDifference)
++ (instancetype)voltUnitWithMetricPrefix:(HKMetricPrefix)prefix API_AVAILABLE(ios(14.0), watchos(7.0));      // V
++ (instancetype)voltUnit API_AVAILABLE(ios(14.0), watchos(7.0));  // V
 @end
 
 /* Mole Constants */

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2019 Apple Inc. All rights reserved.
+ * Copyright (c) 1998-2020 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -28,6 +28,7 @@
 #ifndef _IOKIT_ROOTDOMAIN_H
 #define _IOKIT_ROOTDOMAIN_H
 
+#include <libkern/c++/OSPtr.h>
 #include <IOKit/IOService.h>
 #include <IOKit/pwr_mgt/IOPM.h>
 #include <IOKit/IOBufferMemoryDescriptor.h>
@@ -145,7 +146,7 @@ public:
 
 	virtual IOReturn    setProperties( OSObject * ) APPLE_KEXT_OVERRIDE;
 	virtual bool        serializeProperties( OSSerialize * s ) const APPLE_KEXT_OVERRIDE;
-	virtual OSObject *  copyProperty( const char * aKey ) const APPLE_KEXT_OVERRIDE;
+	virtual OSPtr<OSObject>  copyProperty( const char * aKey ) const APPLE_KEXT_OVERRIDE;
 
 /*! @function systemPowerEventOccurred
  *    @abstract Other drivers may inform IOPMrootDomain of system PM events
@@ -163,10 +164,23 @@ public:
 		const OSSymbol *event,
 		OSObject *value );
 
-	void                                claimSystemWakeEvent( IOService     *device,
-	    IOOptionBits  flags,
-	    const char    *reason,
-	    OSObject      *details = NULL );
+	void                claimSystemWakeEvent(
+		IOService     *device,
+		IOOptionBits  flags,
+		const char    *reason,
+		OSObject      *details = NULL );
+
+	void                claimSystemBootEvent(
+		IOService     *device,
+		IOOptionBits  flags,
+		const char    *reason,
+		OSObject      *details = NULL );
+
+	void                claimSystemShutdownEvent(
+		IOService     *device,
+		IOOptionBits  flags,
+		const char    *reason,
+		OSObject      *details = NULL );
 
 	virtual IOReturn    receivePowerNotification( UInt32 msg );
 
@@ -175,6 +189,8 @@ public:
 	virtual IOOptionBits getSleepSupported( void );
 
 	void                wakeFromDoze( void );
+
+	void                requestUserActive(IOService *driver, const char *reason);
 
 // KEXT driver announces support of power management feature
 
@@ -201,7 +217,7 @@ public:
  *   @param whichSetting Name of the desired setting.
  *   @result OSObject value if valid, NULL otherwise. */
 
-	OSObject *          copyPMSetting( OSSymbol *whichSetting );
+	OSPtr<OSObject>           copyPMSetting( OSSymbol *whichSetting );
 
 /*! @function registerPMSettingController
  *   @abstract Register for callbacks on changes to certain PM settings.
@@ -244,7 +260,7 @@ public:
 		uintptr_t  refcon,
 		OSObject   **handle);                     // out param
 
-	virtual IONotifier * registerInterest(
+	virtual OSPtr<IONotifier> registerInterest(
 		const OSSymbol * typeOfInterest,
 		IOServiceInterestHandler handler,
 		void * target, void * ref = NULL ) APPLE_KEXT_OVERRIDE;

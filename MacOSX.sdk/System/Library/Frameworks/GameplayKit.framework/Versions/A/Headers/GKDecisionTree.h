@@ -88,7 +88,9 @@ GK_BASE_AVAILABILITY_2 @interface GKDecisionTree : NSObject <NSSecureCoding>
  *
  * @return GKDecisionTree created by learning from the provided examples for the provided attributes
  */
-- (instancetype)initWithExamples:(NSArray <NSArray <id <NSObject>>*>*)examples actions:(NSArray <id <NSObject>>*)actions attributes:(NSArray <id <NSObject>>*)attributes;
+- (instancetype)initWithExamples:(NSArray <NSArray <id <NSObject>>*>*)examples
+                         actions:(NSArray <id <NSObject>>*)actions
+                      attributes:(NSArray <id <NSObject>>*)attributes;
 
 /**
  * Initializes a decision tree from the contents of a file

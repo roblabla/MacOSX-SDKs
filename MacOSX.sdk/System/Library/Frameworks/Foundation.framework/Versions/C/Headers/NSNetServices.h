@@ -14,8 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark Error constants
 
-FOUNDATION_EXPORT NSString * const NSNetServicesErrorCode;
-FOUNDATION_EXPORT NSErrorDomain const NSNetServicesErrorDomain;
+FOUNDATION_EXPORT NSString * const NSNetServicesErrorCode API_AVAILABLE(macos(10.2), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+FOUNDATION_EXPORT NSErrorDomain const NSNetServicesErrorDomain API_AVAILABLE(macos(10.2), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, NSNetServicesError) {
     
@@ -51,6 +51,11 @@ typedef NS_ENUM(NSInteger, NSNetServicesError) {
 */
     NSNetServicesTimeoutError = -72007L,
     
+/* Missing required configuration for local network access.
+ *
+ * NSBonjourServices and NSLocalNetworkUsageDescription are required in Info.plist
+ */
+    NSNetServicesMissingRequiredConfigurationError API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos) = -72008L,
 };
 
 
@@ -79,7 +84,7 @@ typedef NS_OPTIONS(NSUInteger, NSNetServiceOptions) {
 
 #pragma mark -
 
-API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.2), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface NSNetService : NSObject {
 @private
     id _netService;
@@ -192,7 +197,7 @@ If publish: is called on an NSNetService instance initialized with this method, 
 
 #pragma mark -
 
-API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.2), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface NSNetServiceBrowser : NSObject {
 @private
     id _netServiceBrowser;
@@ -235,7 +240,7 @@ API_UNAVAILABLE(watchos)
 
 #pragma mark -
 
-API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.2), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @protocol NSNetServiceDelegate <NSObject>
 @optional
 
@@ -288,7 +293,7 @@ API_UNAVAILABLE(watchos)
 
 #pragma mark -
 
-API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.2), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @protocol NSNetServiceBrowserDelegate <NSObject>
 @optional
 

@@ -1,12 +1,26 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 9AA83303-4BDD-33DB-AD41-BB1FF30767D0', 'x86_64: 9AA83303-4BDD-33DB-AD41-BB1FF30767D0' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           057F05DF-172F-3332-847B-106A33C78308
+  - target:          x86_64-maccatalyst
+    value:           057F05DF-172F-3332-847B-106A33C78308
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           BF39B940-B304-34E8-8118-B08AF2DDE876
+  - target:          arm64e-maccatalyst
+    value:           BF39B940-B304-34E8-8118-B08AF2DDE876
 install-name:    '/System/Library/PrivateFrameworks/SiriCore.framework/Versions/A/SiriCore'
 current-version: 0
 compatibility-version: 0
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _SiriCoreAceSerializationErrorDomain, _SiriCoreAceSerializationErrorUserInfoBytesAvailableKey, 
                        _SiriCoreAceSerializationErrorUserInfoBytesNeededKey, _SiriCoreAceSerializationErrorUserInfoPlistKey, 
                        _SiriCoreConnectionTechnologyGetDescription, _SiriCoreCorrectionPronunciationReadFrom, 

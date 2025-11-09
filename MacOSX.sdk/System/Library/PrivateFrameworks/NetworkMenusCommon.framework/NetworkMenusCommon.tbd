@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 85FA9178-4CB9-3637-832C-F6A4C77D710A' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           71FBDF50-13FE-3E93-A8A1-5F3B166B1E47
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           D4578D46-F68F-34C8-B518-9BC852D71B88
 install-name:    '/System/Library/PrivateFrameworks/NetworkMenusCommon.framework/NetworkMenusCommon'
-exports:         
-  - archs:           [ x86_64 ]
-    symbols:         [ _const_notificationName_NC, _easeFunction, _gEnableLogs, _kConnectionTimerInterval, 
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _const_notificationName_NC, _easeFunction, _kConnectionTimerInterval, 
                        _kStatusCheckInterval, _limit ]
     objc-classes:    [ AppleNetworkMenuExtra, AppleNetworkMenuExtraNetworkExtensionServiceController, 
                        AppleNetworkMenuExtraServiceController, AppleNetworkMenuExtraView, 

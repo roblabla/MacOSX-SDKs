@@ -28,7 +28,7 @@ typedef NS_ENUM(NSInteger, OSLogMessageComponentArgumentCategory) {
     OSLogMessageComponentArgumentCategoryString,
     OSLogMessageComponentArgumentCategoryUInt64,
 }
-API_AVAILABLE(macos(10.15))
+API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
 NS_SWIFT_NAME(OSLogMessageComponent.ArgumentCategory);
 
 /*!
@@ -39,7 +39,7 @@ NS_SWIFT_NAME(OSLogMessageComponent.ArgumentCategory);
  * component for each placeholder in the formatString plus one
  * component for any text after the last placeholder.
  */
-API_AVAILABLE(macos(10.15))
+API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
 OS_EXPORT
 @interface OSLogMessageComponent : NSObject
 

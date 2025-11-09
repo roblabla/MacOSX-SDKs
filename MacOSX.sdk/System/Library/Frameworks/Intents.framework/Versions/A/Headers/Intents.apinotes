@@ -1,5 +1,7 @@
 ---
 Classes:
+- Name: INCarHeadUnit
+  SwiftName: INCar.HeadUnit
 - Name: INMediaDestination
   SwiftBridge: INMediaDestination
   SwiftName: INMediaDestinationReference
@@ -126,6 +128,20 @@ SwiftVersions:
     - Selector: 'resolveWorkoutNameForCancelWorkout:withCompletion:'
       MethodKind: Instance
       SwiftName: 'resolveWorkoutName(forCancelWorkout:with:)'
+  - Name: INChangeAlarmStatusIntentHandling
+    Methods:
+    - Selector: 'confirmChangeAlarmStatus:completion:'
+      MethodKind: Instance
+      SwiftName: 'confirm(changeAlarmStatus:completion:)'
+    - Selector: 'handleChangeAlarmStatus:completion:'
+      MethodKind: Instance
+      SwiftName: 'handle(changeAlarmStatus:completion:)'
+    - Selector: 'resolveAlarmsForChangeAlarmStatus:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveAlarms(forChangeAlarmStatus:with:)'
+    - Selector: 'resolveOperationForChangeAlarmStatus:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveOperation(forChangeAlarmStatus:with:)'
   - Name: INCompressFileIntentHandling
     Methods:
     - Selector: 'confirmCompressFile:completion:'
@@ -200,6 +216,23 @@ SwiftVersions:
     - Selector: 'resolveSourceTypeForCopyFile:withCompletion:'
       MethodKind: Instance
       SwiftName: 'resolveSourceType(forCopyFile:with:)'
+  - Name: INCreateAlarmIntentHandling
+    Methods:
+    - Selector: 'confirmCreateAlarm:completion:'
+      MethodKind: Instance
+      SwiftName: 'confirm(createAlarm:completion:)'
+    - Selector: 'handleCreateAlarm:completion:'
+      MethodKind: Instance
+      SwiftName: 'handle(createAlarm:completion:)'
+    - Selector: 'resolveAlarmRepeatScheduleOptionsForCreateAlarm:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveAlarmRepeatScheduleOptions(forCreateAlarm:with:)'
+    - Selector: 'resolveLabelForCreateAlarm:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveLabel(forCreateAlarm:with:)'
+    - Selector: 'resolveTimeForCreateAlarm:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveTime(forCreateAlarm:with:)'
   - Name: INCreateFileIntentHandling
     Methods:
     - Selector: 'confirmCreateFile:completion:'
@@ -271,6 +304,17 @@ SwiftVersions:
     - Selector: 'resolveTypeForCreateTimer:withCompletion:'
       MethodKind: Instance
       SwiftName: 'resolveType(forCreateTimer:with:)'
+  - Name: INDeleteAlarmIntentHandling
+    Methods:
+    - Selector: 'confirmDeleteAlarm:completion:'
+      MethodKind: Instance
+      SwiftName: 'confirm(deleteAlarm:completion:)'
+    - Selector: 'handleDeleteAlarm:completion:'
+      MethodKind: Instance
+      SwiftName: 'handle(deleteAlarm:completion:)'
+    - Selector: 'resolveAlarmsForDeleteAlarm:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveAlarms(forDeleteAlarm:with:)'
   - Name: INDeleteFilePermanentlyIntentHandling
     Methods:
     - Selector: 'confirmDeleteFilePermanently:completion:'
@@ -290,6 +334,14 @@ SwiftVersions:
     - Selector: 'resolveSampleUuidsForDeleteHealthSample:withCompletion:'
       MethodKind: Instance
       SwiftName: 'resolveSampleUuids(forDeleteHealthSample:with:)'
+  - Name: INDeleteParkingLocationIntentHandling
+    Methods:
+    - Selector: 'confirmDeleteParkingLocation:completion:'
+      MethodKind: Instance
+      SwiftName: 'confirm(deleteParkingLocation:completion:)'
+    - Selector: 'handleDeleteParkingLocation:completion:'
+      MethodKind: Instance
+      SwiftName: 'handle(deleteParkingLocation:completion:)'
   - Name: INDeleteTasksIntentHandling
     Methods:
     - Selector: 'confirmDeleteTasks:completion:'
@@ -329,6 +381,17 @@ SwiftVersions:
     - Selector: 'resolveWorkoutNameForEndWorkout:withCompletion:'
       MethodKind: Instance
       SwiftName: 'resolveWorkoutName(forEndWorkout:with:)'
+  - Name: INFindDeviceAndPlaySoundIntentHandling
+    Methods:
+    - Selector: 'confirmFindDeviceAndPlaySound:completion:'
+      MethodKind: Instance
+      SwiftName: 'confirm(findDeviceAndPlaySound:completion:)'
+    - Selector: 'handleFindDeviceAndPlaySound:completion:'
+      MethodKind: Instance
+      SwiftName: 'handle(findDeviceAndPlaySound:completion:)'
+    - Selector: 'resolveDevicesForFindDeviceAndPlaySound:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveDevices(forFindDeviceAndPlaySound:with:)'
   - Name: INGetCarLockStatusIntentHandling
     Methods:
     - Selector: 'confirmGetCarLockStatus:completion:'
@@ -385,6 +448,20 @@ SwiftVersions:
     - Selector: 'stopSendingUpdatesForGetRideStatus:'
       MethodKind: Instance
       SwiftName: 'stopSendingUpdates(forGetRideStatus:)'
+  - Name: INGetSettingIntentHandling
+    Methods:
+    - Selector: 'confirmGetSetting:completion:'
+      MethodKind: Instance
+      SwiftName: 'confirm(getSetting:completion:)'
+    - Selector: 'handleGetSetting:completion:'
+      MethodKind: Instance
+      SwiftName: 'handle(getSetting:completion:)'
+    - Selector: 'resolveConfirmationValueForGetSetting:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveConfirmationValue(forGetSetting:with:)'
+    - Selector: 'resolveSettingMetadataForGetSetting:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveSettingMetadata(forGetSetting:with:)'
   - Name: INGetVisualCodeIntentHandling
     Methods:
     - Selector: 'confirmGetVisualCode:completion:'
@@ -412,6 +489,14 @@ SwiftVersions:
     - Selector: 'handleIdentifyIncomingCaller:completion:'
       MethodKind: Instance
       SwiftName: 'handle(identifyIncomingCaller:completion:)'
+  - Name: INListCarsIntentHandling
+    Methods:
+    - Selector: 'confirmListCars:completion:'
+      MethodKind: Instance
+      SwiftName: 'confirm(listCars:completion:)'
+    - Selector: 'handleListCars:completion:'
+      MethodKind: Instance
+      SwiftName: 'handle(listCars:completion:)'
   - Name: INListRideOptionsIntentHandling
     Methods:
     - Selector: 'confirmListRideOptions:completion:'
@@ -492,6 +577,20 @@ SwiftVersions:
     - Selector: 'resolveScopeForOpenFile:withCompletion:'
       MethodKind: Instance
       SwiftName: 'resolveScope(forOpenFile:with:)'
+  - Name: INOpenSettingIntentHandling
+    Methods:
+    - Selector: 'confirmOpenSetting:completion:'
+      MethodKind: Instance
+      SwiftName: 'confirm(openSetting:completion:)'
+    - Selector: 'handleOpenSetting:completion:'
+      MethodKind: Instance
+      SwiftName: 'handle(openSetting:completion:)'
+    - Selector: 'resolveSearchQueryForOpenSetting:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveSearchQuery(forOpenSetting:with:)'
+    - Selector: 'resolveSettingMetadataForOpenSetting:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveSettingMetadata(forOpenSetting:with:)'
   - Name: INPauseTimerIntentHandling
     Methods:
     - Selector: 'confirmPauseTimer:completion:'
@@ -718,6 +817,14 @@ SwiftVersions:
     - Selector: 'resolveWorkoutNameForResumeWorkout:withCompletion:'
       MethodKind: Instance
       SwiftName: 'resolveWorkoutName(forResumeWorkout:with:)'
+  - Name: INRetrieveParkingLocationIntentHandling
+    Methods:
+    - Selector: 'confirmRetrieveParkingLocation:completion:'
+      MethodKind: Instance
+      SwiftName: 'confirm(retrieveParkingLocation:completion:)'
+    - Selector: 'handleRetrieveParkingLocation:completion:'
+      MethodKind: Instance
+      SwiftName: 'handle(retrieveParkingLocation:completion:)'
   - Name: INRunVoiceCommandIntentHandling
     Methods:
     - Selector: 'confirmRunVoiceCommand:completion:'
@@ -766,6 +873,20 @@ SwiftVersions:
     - Selector: 'resolveValuesForSaveHealthSample:withCompletion:'
       MethodKind: Instance
       SwiftName: 'resolveValues(forSaveHealthSample:with:)'
+  - Name: INSaveParkingLocationIntentHandling
+    Methods:
+    - Selector: 'confirmSaveParkingLocation:completion:'
+      MethodKind: Instance
+      SwiftName: 'confirm(saveParkingLocation:completion:)'
+    - Selector: 'handleSaveParkingLocation:completion:'
+      MethodKind: Instance
+      SwiftName: 'handle(saveParkingLocation:completion:)'
+    - Selector: 'resolveParkingLocationForSaveParkingLocation:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveParkingLocation(forSaveParkingLocation:with:)'
+    - Selector: 'resolveParkingNoteForSaveParkingLocation:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveParkingNote(forSaveParkingLocation:with:)'
   - Name: INSaveProfileInCarIntentHandling
     Methods:
     - Selector: 'confirmSaveProfileInCar:completion:'
@@ -788,6 +909,17 @@ SwiftVersions:
     - Selector: 'handleScanVisualCode:completion:'
       MethodKind: Instance
       SwiftName: 'handle(scanVisualCode:completion:)'
+  - Name: INSearchAlarmIntentHandling
+    Methods:
+    - Selector: 'confirmSearchAlarm:completion:'
+      MethodKind: Instance
+      SwiftName: 'confirm(searchAlarm:completion:)'
+    - Selector: 'handleSearchAlarm:completion:'
+      MethodKind: Instance
+      SwiftName: 'handle(searchAlarm:completion:)'
+    - Selector: 'resolveAlarmsForSearchAlarm:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveAlarms(forSearchAlarm:with:)'
   - Name: INSearchCallHistoryIntentHandling
     Methods:
     - Selector: 'confirmSearchCallHistory:completion:'
@@ -854,6 +986,17 @@ SwiftVersions:
     - Selector: 'resolveStatusForSearchForBills:withCompletion:'
       MethodKind: Instance
       SwiftName: 'resolveStatus(forSearchForBills:with:)'
+  - Name: INSearchForContactIntentHandling
+    Methods:
+    - Selector: 'confirmSearchForContact:completion:'
+      MethodKind: Instance
+      SwiftName: 'confirm(searchForContact:completion:)'
+    - Selector: 'handleSearchForContact:completion:'
+      MethodKind: Instance
+      SwiftName: 'handle(searchForContact:completion:)'
+    - Selector: 'resolveContactIdentifiersForSearchForContact:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveContactIdentifiers(forSearchForContact:with:)'
   - Name: INSearchForFilesIntentHandling
     Methods:
     - Selector: 'confirmSearchForFiles:completion:'
@@ -880,6 +1023,14 @@ SwiftVersions:
     - Selector: 'resolveScopeForSearchForFiles:withCompletion:'
       MethodKind: Instance
       SwiftName: 'resolveScope(forSearchForFiles:with:)'
+  - Name: INSearchForMeCardIntentHandling
+    Methods:
+    - Selector: 'confirmSearchForMeCard:completion:'
+      MethodKind: Instance
+      SwiftName: 'confirm(searchForMeCard:completion:)'
+    - Selector: 'handleSearchForMeCard:completion:'
+      MethodKind: Instance
+      SwiftName: 'handle(searchForMeCard:completion:)'
   - Name: INSearchForMediaIntentHandling
     Methods:
     - Selector: 'confirmSearchForMedia:completion:'
@@ -1012,6 +1163,9 @@ SwiftVersions:
     - Selector: 'resolveGroupNameForSendMessage:withCompletion:'
       MethodKind: Instance
       SwiftName: 'resolveGroupName(forSendMessage:with:)'
+    - Selector: 'resolveOutgoingMessageTypeForSendMessage:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveOutgoingMessageType(forSendMessage:with:)'
     - Selector: 'resolveRecipientsForSendMessage:completion:'
       MethodKind: Instance
       SwiftName: 'resolveRecipients(forSendMessage:with:)'
@@ -1058,6 +1212,23 @@ SwiftVersions:
     - Selector: 'resolveRelativeAudioSourceReferenceForSetAudioSourceInCar:withCompletion:'
       MethodKind: Instance
       SwiftName: 'resolveRelativeAudioSourceReference(forSetAudioSourceInCar:with:)'
+  - Name: INSetBinarySettingIntentHandling
+    Methods:
+    - Selector: 'confirmSetBinarySetting:completion:'
+      MethodKind: Instance
+      SwiftName: 'confirm(setBinarySetting:completion:)'
+    - Selector: 'handleSetBinarySetting:completion:'
+      MethodKind: Instance
+      SwiftName: 'handle(setBinarySetting:completion:)'
+    - Selector: 'resolveBinaryValueForSetBinarySetting:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveBinaryValue(forSetBinarySetting:with:)'
+    - Selector: 'resolveSettingMetadataForSetBinarySetting:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveSettingMetadata(forSetBinarySetting:with:)'
+    - Selector: 'resolveTemporalEventTriggerForSetBinarySetting:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveTemporalEventTrigger(forSetBinarySetting:with:)'
   - Name: INSetCarLockStatusIntentHandling
     Methods:
     - Selector: 'confirmSetCarLockStatus:completion:'
@@ -1133,6 +1304,23 @@ SwiftVersions:
     - Selector: 'resolveEnableForSetDefrosterSettingsInCar:withCompletion:'
       MethodKind: Instance
       SwiftName: 'resolveEnable(forSetDefrosterSettingsInCar:with:)'
+  - Name: INSetLabeledSettingIntentHandling
+    Methods:
+    - Selector: 'confirmSetLabeledSetting:completion:'
+      MethodKind: Instance
+      SwiftName: 'confirm(setLabeledSetting:completion:)'
+    - Selector: 'handleSetLabeledSetting:completion:'
+      MethodKind: Instance
+      SwiftName: 'handle(setLabeledSetting:completion:)'
+    - Selector: 'resolveLabeledValueForSetLabeledSetting:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveLabeledValue(forSetLabeledSetting:with:)'
+    - Selector: 'resolveSettingMetadataForSetLabeledSetting:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveSettingMetadata(forSetLabeledSetting:with:)'
+    - Selector: 'resolveTemporalEventTriggerForSetLabeledSetting:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveTemporalEventTrigger(forSetLabeledSetting:with:)'
   - Name: INSetMessageAttributeIntentHandling
     Methods:
     - Selector: 'confirmSetMessageAttribute:completion:'
@@ -1144,6 +1332,40 @@ SwiftVersions:
     - Selector: 'resolveAttributeForSetMessageAttribute:withCompletion:'
       MethodKind: Instance
       SwiftName: 'resolveAttribute(forSetMessageAttribute:with:)'
+  - Name: INSetNicknameIntentHandling
+    Methods:
+    - Selector: 'confirmSetNickname:completion:'
+      MethodKind: Instance
+      SwiftName: 'confirm(setNickname:completion:)'
+    - Selector: 'handleSetNickname:completion:'
+      MethodKind: Instance
+      SwiftName: 'handle(setNickname:completion:)'
+    - Selector: 'resolveTargetNicknameForSetNickname:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveTargetNickname(forSetNickname:with:)'
+  - Name: INSetNumericSettingIntentHandling
+    Methods:
+    - Selector: 'confirmSetNumericSetting:completion:'
+      MethodKind: Instance
+      SwiftName: 'confirm(setNumericSetting:completion:)'
+    - Selector: 'handleSetNumericSetting:completion:'
+      MethodKind: Instance
+      SwiftName: 'handle(setNumericSetting:completion:)'
+    - Selector: 'resolveActionForSetNumericSetting:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveAction(forSetNumericSetting:with:)'
+    - Selector: 'resolveBoundedValueForSetNumericSetting:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveBoundedValue(forSetNumericSetting:with:)'
+    - Selector: 'resolveNumericValueForSetNumericSetting:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveNumericValue(forSetNumericSetting:with:)'
+    - Selector: 'resolveSettingMetadataForSetNumericSetting:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveSettingMetadata(forSetNumericSetting:with:)'
+    - Selector: 'resolveTemporalEventTriggerForSetNumericSetting:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveTemporalEventTrigger(forSetNumericSetting:with:)'
   - Name: INSetProfileInCarIntentHandling
     Methods:
     - Selector: 'confirmSetProfileInCar:completion:'
@@ -1184,6 +1406,20 @@ SwiftVersions:
     - Selector: 'resolveStationNameForSetRadioStation:withCompletion:'
       MethodKind: Instance
       SwiftName: 'resolveStationName(forSetRadioStation:with:)'
+  - Name: INSetRelationshipIntentHandling
+    Methods:
+    - Selector: 'confirmSetRelationship:completion:'
+      MethodKind: Instance
+      SwiftName: 'confirm(setRelationship:completion:)'
+    - Selector: 'handleSetRelationship:completion:'
+      MethodKind: Instance
+      SwiftName: 'handle(setRelationship:completion:)'
+    - Selector: 'resolveContactIdentifiersForSetRelationship:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveContactIdentifiers(forSetRelationship:with:)'
+    - Selector: 'resolveTargetRelationshipForSetRelationship:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveTargetRelationship(forSetRelationship:with:)'
   - Name: INSetSeatSettingsInCarIntentHandling
     Methods:
     - Selector: 'confirmSetSeatSettingsInCar:completion:'
@@ -1242,6 +1478,26 @@ SwiftVersions:
     - Selector: 'resolveTemporalEventTriggerForSetTaskAttribute:withCompletion:'
       MethodKind: Instance
       SwiftName: 'resolveTemporalEventTrigger(forSetTaskAttribute:with:)'
+  - Name: INSetTemporalSettingIntentHandling
+    Methods:
+    - Selector: 'confirmSetTemporalSetting:completion:'
+      MethodKind: Instance
+      SwiftName: 'confirm(setTemporalSetting:completion:)'
+    - Selector: 'handleSetTemporalSetting:completion:'
+      MethodKind: Instance
+      SwiftName: 'handle(setTemporalSetting:completion:)'
+    - Selector: 'resolveActionForSetTemporalSetting:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveAction(forSetTemporalSetting:with:)'
+    - Selector: 'resolveSettingMetadataForSetTemporalSetting:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveSettingMetadata(forSetTemporalSetting:with:)'
+    - Selector: 'resolveTemporalEventTriggerForSetTemporalSetting:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveTemporalEventTrigger(forSetTemporalSetting:with:)'
+    - Selector: 'resolveTimeValueForSetTemporalSetting:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveTimeValue(forSetTemporalSetting:with:)'
   - Name: INSetTimerAttributeIntentHandling
     Methods:
     - Selector: 'confirmSetTimerAttribute:completion:'
@@ -1259,6 +1515,17 @@ SwiftVersions:
     - Selector: 'resolveToLabelForSetTimerAttribute:withCompletion:'
       MethodKind: Instance
       SwiftName: 'resolveToLabel(forSetTimerAttribute:with:)'
+  - Name: INShareETAIntentHandling
+    Methods:
+    - Selector: 'confirmShareETA:completion:'
+      MethodKind: Instance
+      SwiftName: 'confirm(shareETA:completion:)'
+    - Selector: 'handleShareETA:completion:'
+      MethodKind: Instance
+      SwiftName: 'handle(shareETA:completion:)'
+    - Selector: 'resolveRecipientsForShareETA:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveRecipients(forShareETA:with:)'
   - Name: INShareFileIntentHandling
     Methods:
     - Selector: 'confirmShareFile:completion:'
@@ -1290,6 +1557,17 @@ SwiftVersions:
     - Selector: 'resolveTimeForShowHome:withCompletion:'
       MethodKind: Instance
       SwiftName: 'resolveTime(forShowHome:with:)'
+  - Name: INSnoozeAlarmIntentHandling
+    Methods:
+    - Selector: 'confirmSnoozeAlarm:completion:'
+      MethodKind: Instance
+      SwiftName: 'confirm(snoozeAlarm:completion:)'
+    - Selector: 'handleSnoozeAlarm:completion:'
+      MethodKind: Instance
+      SwiftName: 'handle(snoozeAlarm:completion:)'
+    - Selector: 'resolveAlarmsForSnoozeAlarm:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveAlarms(forSnoozeAlarm:with:)'
   - Name: INSnoozeTasksIntentHandling
     Methods:
     - Selector: 'confirmSnoozeTasks:completion:'
@@ -1333,6 +1611,9 @@ SwiftVersions:
     - Selector: 'resolveCallCapabilityForStartCall:withCompletion:'
       MethodKind: Instance
       SwiftName: 'resolveCallCapability(forStartCall:with:)'
+    - Selector: 'resolveCallRecordToCallBackForStartCall:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveCallRecordToCallBack(forStartCall:with:)'
     - Selector: 'resolveContactsForStartCall:withCompletion:'
       MethodKind: Instance
       SwiftName: 'resolveContacts(forStartCall:with:)'
@@ -1393,6 +1674,17 @@ SwiftVersions:
     - Selector: 'resolveWorkoutNameForStartWorkout:withCompletion:'
       MethodKind: Instance
       SwiftName: 'resolveWorkoutName(forStartWorkout:with:)'
+  - Name: INStopShareETAIntentHandling
+    Methods:
+    - Selector: 'confirmStopShareETA:completion:'
+      MethodKind: Instance
+      SwiftName: 'confirm(stopShareETA:completion:)'
+    - Selector: 'handleStopShareETA:completion:'
+      MethodKind: Instance
+      SwiftName: 'handle(stopShareETA:completion:)'
+    - Selector: 'resolveRecipientsForStopShareETA:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveRecipients(forStopShareETA:with:)'
   - Name: INTransferMoneyIntentHandling
     Methods:
     - Selector: 'confirmTransferMoney:completion:'
@@ -1430,6 +1722,26 @@ SwiftVersions:
     - Selector: 'resolveEntityTypeForUncompressFile:withCompletion:'
       MethodKind: Instance
       SwiftName: 'resolveEntityType(forUncompressFile:with:)'
+  - Name: INUpdateAlarmIntentHandling
+    Methods:
+    - Selector: 'confirmUpdateAlarm:completion:'
+      MethodKind: Instance
+      SwiftName: 'confirm(updateAlarm:completion:)'
+    - Selector: 'handleUpdateAlarm:completion:'
+      MethodKind: Instance
+      SwiftName: 'handle(updateAlarm:completion:)'
+    - Selector: 'resolveAlarmForUpdateAlarm:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveAlarm(forUpdateAlarm:with:)'
+    - Selector: 'resolveOperationForUpdateAlarm:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveOperation(forUpdateAlarm:with:)'
+    - Selector: 'resolveProposedLabelForUpdateAlarm:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveProposedLabel(forUpdateAlarm:with:)'
+    - Selector: 'resolveProposedTimeForUpdateAlarm:withCompletion:'
+      MethodKind: Instance
+      SwiftName: 'resolveProposedTime(forUpdateAlarm:with:)'
   - Name: INUpdateMediaAffinityIntentHandling
     Methods:
     - Selector: 'confirmUpdateMediaAffinity:completion:'

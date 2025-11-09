@@ -1,19 +1,33 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: F4C89683-FA33-37B0-A44D-195D6E2A4EFD', 'x86_64: F4C89683-FA33-37B0-A44D-195D6E2A4EFD' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           A18632AE-509C-3098-8D82-38FCC7743DBE
+  - target:          x86_64-maccatalyst
+    value:           A18632AE-509C-3098-8D82-38FCC7743DBE
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           47062369-6FF9-3288-A187-AAB51D637277
+  - target:          arm64e-maccatalyst
+    value:           47062369-6FF9-3288-A187-AAB51D637277
 install-name:    '/usr/lib/swift/libswiftCoreMedia.dylib'
-current-version: 0
 swift-abi-version: 7
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftCoreMedia.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftCoreMedia.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftCoreMedia.dylib', 
                        '$ld$install_name$os10.13$@rpath/libswiftCoreMedia.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftCoreMedia.dylib', 
-                       '$ld$install_name$os10.9$@rpath/libswiftCoreMedia.dylib', 
-                       '_$s9CoreMedia14CMSyncProtocolMp', '_$s9CoreMedia14CMSyncProtocolP10mightDrift10relativeToSbqd___tAaBRd__lFTj', 
+                       '$ld$install_name$os10.9$@rpath/libswiftCoreMedia.dylib' ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+    symbols:         [ '_$s9CoreMedia14CMSyncProtocolMp', '_$s9CoreMedia14CMSyncProtocolP10mightDrift10relativeToSbqd___tAaBRd__lFTj', 
                        '_$s9CoreMedia14CMSyncProtocolP10mightDrift10relativeToSbqd___tAaBRd__lFTq', 
                        '_$s9CoreMedia14CMSyncProtocolP11convertTime_2toSo6CMTimeaAG_qd__tAaBRd__lFTj', 
                        '_$s9CoreMedia14CMSyncProtocolP11convertTime_2toSo6CMTimeaAG_qd__tAaBRd__lFTq', 

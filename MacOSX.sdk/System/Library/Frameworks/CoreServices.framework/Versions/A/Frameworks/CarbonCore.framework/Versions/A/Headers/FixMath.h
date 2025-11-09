@@ -77,7 +77,7 @@ extern "C" {
          _Result;
     */
 
-#elif defined __ppc__ || __ppc64__
+#elif defined __ppc__ || __ppc64__ || __arm64__
 
     #define _IntSaturate(x) ((int) (x))
 

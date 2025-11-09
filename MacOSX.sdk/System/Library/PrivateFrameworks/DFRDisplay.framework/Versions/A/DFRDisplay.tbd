@@ -1,12 +1,18 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: BCE02B03-6530-3916-BB45-9C215CE4297F' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           478D7797-1493-391B-9541-44B58390F66B
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           DB614B04-F8E3-3548-84B1-068875665D44
 install-name:    '/System/Library/PrivateFrameworks/DFRDisplay.framework/Versions/A/DFRDisplay'
-current-version: 171
+current-version: 176.40.1
 compatibility-version: 0
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _DFRDisplayClearDisplay, _DFRDisplayClearWhite, _DFRDisplayCloseInterface, 
                        _DFRDisplayCreate, _DFRDisplayDraw, _DFRDisplayDrawAsync, 
                        _DFRDisplayDrawFromIOSurfaceAsync, _DFRDisplayDrawFromIOSurfaceWithTouchTimeAsync, 

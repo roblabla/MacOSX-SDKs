@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 82CB4F67-06AE-3371-9E94-399E4BDDBB97', 'x86_64: 82CB4F67-06AE-3371-9E94-399E4BDDBB97' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           709FA13F-A623-37C7-808B-67EFCAC585B7
+  - target:          x86_64-maccatalyst
+    value:           709FA13F-A623-37C7-808B-67EFCAC585B7
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           A82A5ACE-3933-3606-B9D5-3DB477319D1D
+  - target:          arm64e-maccatalyst
+    value:           A82A5ACE-3933-3606-B9D5-3DB477319D1D
 install-name:    '/System/Library/PrivateFrameworks/AppleSRP.framework/Versions/A/AppleSRP'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _BigIntegerAdd, _BigIntegerAddInt, _BigIntegerBitLen, _BigIntegerCheckPrime, 
                        _BigIntegerCmp, _BigIntegerCmpInt, _BigIntegerDivInt, _BigIntegerFree, 
                        _BigIntegerFromBytes, _BigIntegerFromInt, _BigIntegerLShift, 

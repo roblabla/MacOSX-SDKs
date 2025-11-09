@@ -7,9 +7,10 @@
 
 #import <AppKit/AppKitDefines.h>
 #import <Foundation/Foundation.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSGraphicsContext, NSString;
 @protocol NSAnimationDelegate;

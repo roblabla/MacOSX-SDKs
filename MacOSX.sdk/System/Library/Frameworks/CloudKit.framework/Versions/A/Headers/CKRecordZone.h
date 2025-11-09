@@ -11,6 +11,7 @@
 @class CKRecordZoneID;
 
 NS_ASSUME_NONNULL_BEGIN
+
 typedef NS_OPTIONS(NSUInteger, CKRecordZoneCapabilities) {
     /*! This zone supports CKFetchRecordChangesOperation */
     CKRecordZoneCapabilityFetchChanges   = 1 << 0,
@@ -32,10 +33,11 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
 - (instancetype)initWithZoneName:(NSString *)zoneName;
 - (instancetype)initWithZoneID:(CKRecordZoneID *)zoneID;
 
-@property (nonatomic, readonly, strong) CKRecordZoneID *zoneID;
+@property (nonatomic, readonly, copy) CKRecordZoneID *zoneID;
 
 /*! Capabilities on locally-created record zones are not valid until the record zone is saved. Capabilities on record zones fetched from the server are valid. */
 @property (nonatomic, readonly, assign) CKRecordZoneCapabilities capabilities;
 
 @end
+
 NS_ASSUME_NONNULL_END

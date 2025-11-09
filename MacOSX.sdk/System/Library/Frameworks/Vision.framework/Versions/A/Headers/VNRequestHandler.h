@@ -15,6 +15,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreVideo/CVPixelBuffer.h>
 #import <ImageIO/ImageIO.h>
+#import <CoreMedia/CoreMedia.h>
 
 #import <Vision/VNDefines.h>
 #import <Vision/VNRequest.h>
@@ -45,6 +46,7 @@ VN_EXPORT VNImageOption const VNImageOptionProperties API_AVAILABLE(macos(10.13)
      0	0	1
      fx and fy are the focal length in pixels. For square pixels, they will have the same value.
      ox and oy are the coordinates of the principal point. The origin is the upper left of the frame.
+ @note When using a CMSampleBuffer as an input and that sample buffer has camera intrinsics attached to it, Vision will use the camera intrinsic from there unless overwritten by passing in as an explicit option which will take precedence.
 
  */
 VN_EXPORT VNImageOption const VNImageOptionCameraIntrinsics API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
@@ -70,7 +72,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
  @brief initWithCVPixelBuffer:options creates a VNImageRequestHandler to be used for performing requests against the image passed in as buffer.
  
  @param pixelBuffer A CVPixelBuffer containing the image to be used for performing the requests. The content of the buffer cannot be modified for the lifetime of the VNImageRequestHandler.
- 
+ @param options A dictionary with options specifying auxiliary information for the buffer/image like VNImageOptionCameraIntrinsics
  */
 - (instancetype)initWithCVPixelBuffer:(CVPixelBufferRef)pixelBuffer options:(NSDictionary<VNImageOption, id> *)options;
 
@@ -87,7 +89,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
  @brief initWithCGImage:options creates a VNImageRequestHandler to be used for performing requests against the image passed in as a CGImageRef.
  
  @param image A CGImageRef containing the image to be used for performing the requests. The content of the image cannot be modified.
- 
+ @param options A dictionary with options specifying auxiliary information for the buffer/image like VNImageOptionCameraIntrinsics
  */
 - (instancetype)initWithCGImage:(CGImageRef)image options:(NSDictionary<VNImageOption, id> *)options;
 
@@ -175,6 +177,28 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
  
  */
 - (instancetype)initWithData:(NSData *)imageData orientation:(CGImagePropertyOrientation)orientation options:(NSDictionary<VNImageOption, id> *)options;
+
+
+/*!
+ @brief Creates a VNImageRequestHandler to be used for performing requests against the image buffer contained in the CMSampleBufferRef
+ 
+ @param sampleBuffer A CMSampleBuffer containing the imageBuffer that will be used for performing the requests. Not all types of sample buffers are supported. They need to contain a CVImageBuffer, be valid and ready.
+ @param options A dictionary with options specifying auxiliary information for the buffer/image like VNImageOptionCameraIntrinsics
+ @note CMSampleBuffers can contain metadata like camera intrinsics that will be used by algorithms supporting it unless overwritten by the options.
+ */
+- (instancetype)initWithCMSampleBuffer:(CMSampleBufferRef)sampleBuffer options:(NSDictionary<VNImageOption, id> *)options API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+
+
+/*!
+ @brief Creates a VNImageRequestHandler to be used for performing requests against the image buffer contained in the CMSampleBufferRef
+ 
+ @param sampleBuffer A CMSampleBuffer containing the imageBuffer that will be used for performing the requests. Not all types of sample buffers are supported. They need to contain a CVImageBuffer, be valid and ready.
+ @param orientation The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information.
+ @param options A dictionary with options specifying auxiliary information for the buffer/image like VNImageOptionCameraIntrinsics
+ @note CMSampleBuffers can contain metadata like camera intrinsics that will be used by algorithms supporting it unless overwritten by the options.
+ @note:  Because CoreImage is unable to render certain pixel formats in the iOS simulator, request results may not be accurate in those cases.
+ */
+- (instancetype)initWithCMSampleBuffer:(CMSampleBufferRef)sampleBuffer orientation:(CGImagePropertyOrientation)orientation options:(NSDictionary<VNImageOption, id> *)options API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
 
 /*!
@@ -337,7 +361,35 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
  */
 - (BOOL)performRequests:(NSArray<VNRequest *> *)requests onImageData:(NSData*)imageData orientation:(CGImagePropertyOrientation)orientation error:(NSError **)error;
 
+
+/*!
+    @brief Perform requests on the image buffer contained in the CMSampleBufferRef.
+
+	@param	requests		The VNRequests to be performed on the image.
+
+	@param	sampleBuffer	A CMSampleBuffer containing an image that will be used for performing the requests. Not all types of sample buffers are supported. They need to contain a CVImageBuffer, be valid and ready.
+
+	@param	error			On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify NULL for this parameter if you do not want the error information.
+ */
+- (BOOL)performRequests:(NSArray<VNRequest *> *)requests onCMSampleBuffer:(CMSampleBufferRef)sampleBuffer error:(NSError **)error API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+
+
+/*!
+    @brief Perform requests on the image buffer contained in the CMSampleBufferRef.
+     
+	@param	requests		The VNRequests to be performed on the image.
+     
+	@param	sampleBuffer	A CMSampleBuffer containing an image that will be used for performing the requests. Not all types of sample buffers are supported. They need to contain a CVImageBuffer, be valid and ready.
+     
+	@param	orientation		The orientation of the image.
+     
+	@param	error			On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify NULL for this parameter if you do not want the error information.
+ */
+- (BOOL)performRequests:(NSArray<VNRequest *> *)requests onCMSampleBuffer:(CMSampleBufferRef)sampleBuffer orientation:(CGImagePropertyOrientation)orientation error:(NSError **)error API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+
 @end
+
+
 
 
 NS_ASSUME_NONNULL_END

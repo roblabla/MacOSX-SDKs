@@ -28,9 +28,9 @@ __BEGIN_DECLS
  *		An Advertise Descriptor is an abstract classification of properties
  *		that may be used to advertise a service, such as a Bonjour service type.
  */
-#ifndef NW_SERVICE_DESCRIPTOR_IMPL
+#ifndef NW_ADVERTISE_DESCRIPTOR_IMPL
 NW_OBJECT_DECL(nw_advertise_descriptor);
-#endif // NW_SERVICE_DESCRIPTOR_IMPL
+#endif // NW_ADVERTISE_DESCRIPTOR_IMPL
 
 /*!
  * @function nw_advertise_descriptor_create_bonjour_service
@@ -139,18 +139,18 @@ nw_advertise_descriptor_set_txt_record_object(nw_advertise_descriptor_t advertis
 											  _Nullable nw_txt_record_t txt_record);
 
 /*!
-* @function nw_advertise_descriptor_copy_txt_record_object
-*
-* @abstract
-*		Copies the TXT record object from the advertise descriptor.
-*
-* @param advertise_descriptor
-*		The advertise descriptor object.
-*
-* @result
-*		A copy of the TXT record object, or NULL if the advertise descriptor
-*		does not have an associated TXT record.
-*/
+ * @function nw_advertise_descriptor_copy_txt_record_object
+ *
+ * @abstract
+ *		Copies the TXT record object from the advertise descriptor.
+ *
+ * @param advertise_descriptor
+ *		The advertise descriptor object.
+ *
+ * @result
+ *		A copy of the TXT record object, or NULL if the advertise descriptor
+ *		does not have an associated TXT record.
+ */
 API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
 NW_RETURNS_RETAINED _Nullable nw_txt_record_t
 nw_advertise_descriptor_copy_txt_record_object(nw_advertise_descriptor_t advertise_descriptor);

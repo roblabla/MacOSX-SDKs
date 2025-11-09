@@ -2,7 +2,7 @@
 //  SCNLight.h
 //  SceneKit
 //
-//  Copyright © 2012-2019 Apple Inc. All rights reserved.
+//  Copyright © 2012-2020 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -312,7 +312,7 @@ SCN_EXPORT
 /*!
  @property areaPolygonVertices
  @abstract Determines the shape of light of an area light of type SCNLightAreaTypePolygon. Defaults nil.
- @discussion An array of CGPoint values corresponding to the coordinates if the polygon's vertices in the XY plane.
+ @discussion An array of CGPoint values corresponding to the coordinates of the polygon's vertices in the XY plane.
  */
 @property(nonatomic, copy, nullable) NSArray<NSValue *> *areaPolygonVertices API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
 

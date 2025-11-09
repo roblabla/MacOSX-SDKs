@@ -29,8 +29,6 @@ The rest of the verbs are currently:
 .Sy "checksum",
 .Sy "chpass",
 .Sy "erasekeys",
-.Sy "unflatten",
-.Sy "flatten",
 .Sy "imageinfo",
 .Sy "isencrypted",
 .Sy "mountvol",
@@ -611,6 +609,8 @@ be found in
 .Fl help .
 .Fl fs
 causes a filesystem of the specified type to be written to the image.
+The default file system is APFS. If -partitionType and/or -layout are specified,
+but -fs is not specified, no file system will be created.
 .Fl fs
 may change the partition scheme and type appropriately.
 .Fl fs
@@ -712,10 +712,7 @@ specify an alternate layout library.  The default is MediaKit's
 MKDrivers.bundle.
 .It Fl partitionType Ar partition_type
 .br
-Change the type of partition in a single-partition disk image.  The default
-is Apple_HFS unless
-.Ns Fl fs
-implies otherwise.
+Change the type of partition in a single-partition disk image.
 .Pp
 .It Fl ov
 overwrite an existing file.  The default is not to overwrite existing
@@ -832,24 +829,10 @@ UDSP - SPARSE (grows with content)
 UDSB - SPARSEBUNDLE (grows with content; bundle-backed)
 .It
 UFBI - UDIF entire image with MD5 checksum
-.It
-UDRo - UDIF read-only (obsolete format)
-.It
-UDCo - UDIF compressed (obsolete format)
-.It
-RdWr - NDIF read/write image (deprecated)
-.It
-Rdxx - NDIF read-only image (Disk Copy 6.3.3 format; deprecated)
-.It
-ROCo - NDIF compressed image (deprecated)
-.It
-Rken - NDIF compressed (obsolete format)
-.It
-DC42 - Disk Copy 4.2 image (obsolete format)
 .El
 .Pp
-In addition to the compression offered by some formats, the UDIF and NDIF
-read-only formats skip unused space in HFS, APFS, ExFAT, and MS-DOS (FAT, FAT32)
+In addition to the compression offered by some formats, the UDIF read-only
+format skips unused space in HFS, APFS, ExFAT, and MS-DOS (FAT, FAT32)
 filesystems.  For UDZO,
 .Fl imagekey Ar zlib-level=value
 allows the zlib compression level to be specified a la
@@ -876,8 +859,7 @@ The default is 4 (2K).
 .It Fl pmap
 add partition map.
 .br
-When converting an NDIF to any variety of UDIF, or when converting an
-unpartitioned UDIF, the default is true.
+When converting an unpartitioned UDIF, the default is true.
 .It Fl segmentSize
 .Op Ar size_spec
 .br
@@ -1337,10 +1319,6 @@ UDIF-CRC32 - CRC-32 image checksum
 .br
 UDIF-MD5 - MD5 image checksum
 .br
-DC42 - Disk Copy 4.2
-.br
-CRC28 - CRC-32 (NDIF)
-.br
 CRC32 - CRC-32
 .br
 MD5 - MD5
@@ -1389,18 +1367,6 @@ Common options:
 .Fl "plist"
 and
 .Fl "quiet".
-.\"
-.\"             -- unflatten --
-.It Sy unflatten Ar image
-.br
-.Sy unflatten
-is deprecated.
-.\"
-.\"             -- flatten --
-.It Sy flatten Ar image
-.br
-.Sy flatten
-is deprecated.
 .\"
 .\"             -- fsid --
 .It Sy fsid Ar image
@@ -1616,7 +1582,7 @@ does not modify the image.
 .br
 .Sy segment Fl o Ar firstSegname Fl segmentSize Ar size image Op opts
 .br
-segment an NDIF or UDIF disk image.  Segmented images work around
+segment an UDIF disk image.  Segmented images work around
 limitations in file size which are sometimes imposed by filesystems,
 network protocols, or media.  Note: whether or not the segments are
 encrypted is determined by the options passed to
@@ -2196,13 +2162,12 @@ or the Finder's Get Info window can be used to configure a system
 to respect the on-disk owners for a filesystem in the future.
 .\"
 .Sh COMPATIBILITY
-The DiskImages framework supports a variety of flat-file and dual-fork
-image formats, including read/write, read-only, and read-only compressed
-(which are decompressed in small chunks as I/O requests are made).  It
-automatically decodes AppleSingle and MacBinary file formats and is capable
-of mounting most images directly from http:// URLs.  Because DiskImages
-can make many requests over a single connection, responsiveness can be
-improved by modifying HTTP server settings such as apache's
+The DiskImages framework supports a variety of image formats, including
+read/write, read-only, and read-only compressed
+(which are decompressed in small chunks as I/O requests are made).  It is
+capable of mounting most images directly from http:// URLs.  Because
+DiskImages can make many requests over a single connection, responsiveness can
+be improved by modifying HTTP server settings such as apache's
 MaxKeepAliveRequests and KeepAliveTimeout.
 .Pp
 Mac OS X 10.0 supported the disk images of Disk Copy 6 on Mac OS 9.  OS X
@@ -2270,6 +2235,22 @@ Deprecated OS 9-style dual-fork file support (hdiutil flatten/unflatten).
 .It
 Removed the deprecated "hdiutil internet-enable" command and
 the IDME attach flags.
+.El
+.Pp
+macOS 11.0:
+.Bl -bullet -offset indent
+.It
+Removed support for DiskCopy42, DART and NDIF formats.
+.It
+Removed support for AppleSingle and MacBinary encodings.
+.It
+Removed the deprecated OS 9-style dual-fork file support (hdiutil
+flatten/unflatten).
+.It
+Default file system for new images has changed to APFS (instead of
+an empty disk image with no partition map). To create an empty disk image
+add "-layout NONE" to the creation flags. This change does not apply to
+images created with -srcfolder or -srcdevice arguments.
 .El
 .Sh HISTORY
 Disk images were first invented to electronically store and transmit

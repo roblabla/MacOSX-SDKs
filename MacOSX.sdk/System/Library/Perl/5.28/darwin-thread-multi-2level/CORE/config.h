@@ -1385,7 +1385,7 @@
  *	feature tests from Configure are generally more reliable.
  */
 #define OSNAME "darwin"		/**/
-#define OSVERS "19.0"		/**/
+#define OSVERS "20.0"		/**/
 
 /* CAT2:
  *	This macro concatenates 2 tokens together.
@@ -4138,7 +4138,7 @@
  *	is either n or 32*ceil(n/32), especially many little-endians do
  *	the latter.  This is only useful if you have select(), naturally.
  */
-#define SELECT_MIN_BITS	32	/**/
+#define SELECT_MIN_BITS	64	/**/
 
 /* ST_INO_SIZE:
  *	This variable contains the size of struct stat's st_ino in bytes.

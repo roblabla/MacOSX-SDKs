@@ -7,6 +7,8 @@
 
 #import <Foundation/Foundation.h> // NS_ENUM, NSString, ...
 
+API_UNAVAILABLE_BEGIN(ios)
+
 // Domain for all Automator Errors
 #define AMAutomatorErrorDomain @"com.apple.Automator"
 
@@ -54,9 +56,12 @@ typedef NS_ENUM(NSInteger, AMErrorCode)
 	AMActionXProtectError = -220, // The action could not be analyzed by XProtect
 	AMActionMalwareError = -221, // The action has been detected as malware by XProtect
 	AMActionThirdPartyActionsNotAllowedError = -222, // The is a third party action, and loading it has not been allowed by the user. The user must enabled loading of third party actions inside Automator.
+	AMActionXPCError = -223, // The remote process running the action has crashed.
 
 	// Data conversion errors
 	AMConversionNotPossibleError = -300, // Conversion not possible
 	AMConversionNoDataError = -301, // Conversion returns no data
 	AMConversionFailedError = -302 // Conversion failed (reason unknown)
 };
+
+API_UNAVAILABLE_END

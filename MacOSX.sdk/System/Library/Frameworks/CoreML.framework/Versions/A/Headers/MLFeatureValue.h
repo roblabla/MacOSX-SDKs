@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0))
 ML_EXPORT
-@interface MLFeatureValue : NSObject<NSCopying>
+@interface MLFeatureValue : NSObject<NSCopying, NSSecureCoding>
 
 /// Type of the value for which the corresponding property below is held
 @property (readonly, nonatomic) MLFeatureType type;

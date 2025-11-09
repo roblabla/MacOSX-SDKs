@@ -1,8 +1,8 @@
-#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AUComponent.h>)
+#if (defined(__USE_PUBLIC_HEADERS__) && __USE_PUBLIC_HEADERS__) || (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AUComponent.h>)
 /*!
 	@file		AUComponent.h
  	@framework	AudioUnit.framework
- 	@copyright	(c) 2002-2015 Apple, Inc. All rights reserved.
+ 	@copyright	(c) 2002-2020 Apple Inc. All rights reserved.
 	@brief		C interfaces for working with Audio Units.
 
 	@discussion
@@ -17,7 +17,7 @@
 	Apple, the Manufacturer ID should be specified by an unique identifier
 	(as registered with apple). See AudioComponentDescription.
 
-	Audio unit types are of the following (see below for more information)
+	Audio unit types are of the following types (see below for more information)
 
 		kAudioUnitType_Output					= 'auou',
 		kAudioUnitType_MusicDevice				= 'aumu',
@@ -66,9 +66,9 @@
 
 CF_ASSUME_NONNULL_BEGIN
 
-#define AU_SUPPORT_INTERAPP_AUDIO (TARGET_OS_IPHONE && !TARGET_OS_MACCATALYST)
+#define AU_SUPPORT_INTERAPP_AUDIO 1
 
-#define INTERAPP_AUDIO_DEPRECATED API_DEPRECATED("Inter-App Audio API is deprecated in favor of Audio Units", ios(7.0, 13.0), watchos(2.0, 6.0), tvos(9.0, 13.0))
+#define INTERAPP_AUDIO_DEPRECATED API_DEPRECATED("Inter-App Audio API is deprecated in favor of Audio Units", ios(7.0, 13.0), watchos(2.0, 6.0), tvos(9.0, 13.0), macCatalyst(14.0, 14.0))
 
 
 #ifdef __cplusplus
@@ -88,102 +88,101 @@ typedef AudioComponentInstance AudioUnit;
 
 /*!
     @enum           Audio Unit Types
-    @abstract		different types of audio units
-	@discussion		Audio units are classified into different types, where those types perform 
-					different roles and functions.
-					There are some general categories of functionality that apply across different 
-					types of audio units:
-					(1) Real-time usage
-						The audio unit will complete its operations in less time than is 
-						represented by the render buffer. All audio units with the exception of 
-						the OfflineEffect should meet this criteria
-					(2) Real-time I/O
-						Will request the same amount of audio input as it is being asked to 
-						produce for output. Effects, Panners, Mixers and MusicDevices are required 
-						to adhere to this restriction. FormatConverter's can with some constraints
-						be used in this situation (for instance, sample rate conversion, float-int),
-						but the host of the audio unit is responsible for insuring this.
-					(3) UI versus Programmatic usage
-						UI usage covers the case of using an audio unit in a Digital Audio 
-						Workstation (DAW) with appropriate UI (for example a filter in Garage Band 
-						or Logic). Effects, Panners, MusicDevices are all expected to be usable 
-						within this context. 
-						Programmatic usage is where an audio unit is used by a host app as part of
-						a general signal processing chain.
-						For instance, a mixer audio unit can be used to take several different 
-						audio sources in a game and mix them together. Mixers, Output units are 
-						for programmatic usage. FormatConverter and Generator types are generally
-						programmatic audio units, but if they can be used in a UI situation, they 
-						specify a custom view. The app can then use that to decide that, with 
-						appropriate constraints, the audio unit could be presented in a DAW type 
-						application. For instance, the AUConverter audio unit from apple can do 
-						sample rate conversion, etc, but has not general utility for a user in a 
-						DAW app. Apple's Varispeed or AUTimePitch audio units can be used to change
-						the playback rate and pitch and so could be used to good affect by a user 
-						in a DAW type environment, as well as just providing this general 
-						functionality to any program.
+    @abstract		Different types of audio units
+
+	Audio units are classified into different types, where those types perform different roles and
+	functions.
+
+	There are some general categories of functionality that apply across different types of audio
+	units:
+
+	1. Real-time usage.
+		The audio unit will complete its operations in less time than is represented by the render
+		buffer. All audio units with the exception of the OfflineEffect should meet this criteria.
+		
+	2. Real-time I/O.
+		Will request the same amount of audio input as it is being asked to produce for output.
+		Effects, Panners, Mixers and MusicDevices are required to adhere to this restriction.
+		FormatConverter's can with some constraints be used in this situation (for instance, sample
+		rate conversion, float-int), but the host of the audio unit is responsible for insuring
+		this.
+
+	3. UI versus Programmatic usage.
+		UI usage covers the case of using an audio unit in a Digital Audio Workstation (DAW) with
+		appropriate UI (for example a filter in Garage Band or Logic). Effects, Panners,
+		MusicDevices are all expected to be usable within this context. 
+
+		Programmatic usage is where an audio unit is used by a host app as part of a general signal
+		processing chain.
+
+		For instance, a mixer audio unit can be used to take several different audio sources in a
+		game and mix them together. Mixers, Output units are for programmatic usage. FormatConverter
+		and Generator types are generally programmatic audio units, but if they can be used in a UI
+		situation, they specify a custom view. The app can then use that to decide that, with
+		appropriate constraints, the audio unit could be presented in a DAW type application. For
+		instance, the AUConverter audio unit from apple can do sample rate conversion, etc, but has
+		not general utility for a user in a DAW app. Apple's Varispeed or AUTimePitch audio units
+		can be used to change the playback rate and pitch and so could be used to good affect by a
+		user in a DAW type environment, as well as just providing this general functionality to any
+		program.
 					
 	@constant		kAudioUnitType_Output
-					An output unit can be used as the head of an AUGraph. Apple provides a number 
-					of output units that interface directly with an audio device
+		An output unit can be used standalone or as part of an AUGraph or AVAudioEngine. Apple
+		provides a number of output units that interface directly with an audio device.
 					
 	@constant		kAudioUnitType_MusicDevice
-					Used to describe software musical instruments such as samplers and 
-					synthesisers. They respond to MIDI and create notes, which are then controlled
-					through parameters or MIDI control messages. See <AudioToolbox/MusicDevice.h>
+		A software musical instrument such as a sampler or synthesizer. They respond to MIDI and
+		create notes, which are then controlled through parameters or MIDI control messages. See
+		<AudioToolbox/MusicDevice.h>
 										
 	@constant		kAudioUnitType_MusicEffect
-					Is an effect that is also able to respond directly to MIDI control messages, 
-					typically through the mapping of these MIDI messages to different parameters 
-					of the effect's DSP algorithm.
+		An effect that is also able to respond directly to MIDI control messages, typically
+		through the mapping of these MIDI messages to different parameters of the effect's DSP
+		algorithm.
 					
 	@constant		kAudioUnitType_FormatConverter
-					A format converter is a general category for audio units that can change the 
-					format (for instance, sample rate conversion) from an input to an output, as 
-					well as other, non-I/O type manipulations (like a deferred render or varispeed 
-					type of operation). As such, a format converter can ask for as much or as 
-					little audio input to produce a given output. They are still expected to
-					complete their rendering within the time represented by the output buffer. 
-					For format converters that have some utility as an "audio effect or processor", 
-					it is quite common to provide an offline version of this audio unit as well. 
-					For instance, Apple ships a format converter (for use in a "real-time" like 
-					situation) and an offline version (for processing audio files) of the Time 
-					Pitch and Varispeed audio units.
+		A format converter is a general category for audio units that can change the format (for
+		instance, sample rate conversion) from an input to an output, as well as other, non-I/O type
+		manipulations (like a deferred render or varispeed type of operation). As such, a format
+		converter can ask for as much or as little audio input to produce a given output. They are
+		still expected to complete their rendering within the time represented by the output buffer.
+		For format converters that have some utility as an "audio effect or processor", it is quite
+		common to provide an offline version of this audio unit as well. For instance, Apple ships a
+		format converter (for use in a "real-time" like situation) and an offline version (for
+		processing audio files) of the Time Pitch and Varispeed audio units.
 					
 	@constant		kAudioUnitType_Effect
-					An audio unit that will process some x number of audio input samples to produce 
-					x number of audio output samples. The common case for an effect is to have a 
-					single input to a single output, though some effects take side-chain inputs as 
-					well. Effects can be run in "offline" contexts (such as processing a file), but 
-					they are expected to run in real-time. A delay unit or reverb is a good 
-					example of this.
+		An audio unit that will process some x number of audio input samples to produce x number of
+		audio output samples. The common case for an effect is to have a single input to a single
+		output, though some effects take side-chain inputs as well. Effects can be run in "offline"
+		contexts (such as processing a file), but they are expected to run in real-time. A delay
+		unit or reverb is a good example of this.
 					
 	@constant		kAudioUnitType_Mixer
-					An audio unit that takes some number of inputs, mixing them to provide 1 or 
-					more audio outputs. A stere mixer (mono and stereo inputs to produce one 
-					stereo output) is an example of this.
+		An audio unit that takes some number of inputs, mixing them to provide 1 or more audio
+		outputs. A stere mixer (mono and stereo inputs to produce one stereo output) is an example
+		of this.
 					
 	@constant		kAudioUnitType_Panner
-					A panner is a specialised effect that will pan a single audio input to a single
-					output. Panner units are required to support a collection of standardised 
-					parameters that specify the panning coordinates (aside from whatever custom 
-					parameters the panner may provide). A surround panner is an example of this
+		A panner is a specialised effect that will pan a single audio input to a single output.
+		Panner units are required to support a collection of standardised parameters that specify
+		the panning coordinates (aside from whatever custom parameters the panner may provide). A
+		surround panner is an example of this
 					
 	@constant		kAudioUnitType_Generator
-					A generator will have no audio input, but will just produce audio output. In 
-					some ways it is similar to a MusicDevice, except that a generator provides no 
-					MIDI input, or notion of "notes". A tone generator is a good example of this.
+		A generator will have no audio input, but will just produce audio output. In some ways it is
+		similar to a MusicDevice, except that a generator provides no MIDI input, or notion of
+		"notes". A tone generator is a good example of this.
 					
 	@constant		kAudioUnitType_OfflineEffect
-					An offline effect is used to process data from a file and is also used to 
-					publish a capability that cannot be run in real-time. For instance, the process
-					of normalisation requires seeing the entire audio input before the scalar to 
-					apply in the normalisation process can be estimated. As such, offline effects 
-					also have a notion of a priming stage that can be performed before the actual 
-					rendering/processing phase is executed.
+		An offline effect is used to process data from a file and is also used to publish a
+		capability that cannot be run in real-time. For instance, the process of normalization
+		requires seeing the entire audio input before the scalar to apply in the normalization
+		process can be estimated. As such, offline effects also have a notion of a priming stage
+		that can be performed before the actual rendering/processing phase is executed.
 
-    @constant		kAudioUnitType_MIDIProcessor
-                    Plugins of this type process midi input and produce midi output. They do not produce audio.
+	@constant		kAudioUnitType_MIDIProcessor
+		Plugins of this type process MIDI input and produce MIDI output. They do not produce audio.
 
 */
 CF_ENUM(UInt32) {
@@ -202,7 +201,7 @@ CF_ENUM(UInt32) {
 #if AU_SUPPORT_INTERAPP_AUDIO
 /*!
     @enum           Audio Unit Types (for inter-app audio)
-    @abstract		types of inter-app audio units
+    @abstract		Types of inter-app audio units.
 
     @constant       kAudioUnitType_RemoteEffect
     @constant       kAudioUnitType_RemoteGenerator
@@ -244,7 +243,7 @@ CF_ENUM(UInt32) {
 #pragma mark Apple Audio Units
 /*!
     @enum           Apple audio unit manufacturer ID.
-    @discussion		the unique ID used to identifier audio units provided by Apple, Inc.
+    @abstract		The unique ID used to identifier audio units provided by Apple Inc.
 */
 CF_ENUM(UInt32) {
 	kAudioUnitManufacturer_Apple			= 'appl'
@@ -252,16 +251,16 @@ CF_ENUM(UInt32) {
 	
 /*!
 	@enum			Apple input/output audio unit sub types
-	@discussion		These are the subtypes for the various input/output units that Apple ships. Input/output
-					units add an additional notion of Start and Stop.
-					see <AudioToolbox/AudioOutputUnit.h>
+	@abstract		Subtypes for the various input/output units that Apple ships.
+	@discussion		Input/output units add an additional notion of Start and Stop.
+					See <AudioToolbox/AudioOutputUnit.h>
 
 	@constant		kAudioUnitSubType_GenericOutput
 					A generic output unit provides the start/stop API, and provides the basic 
 					services to convert Linear PCM formats.
 
 	@constant		kAudioUnitSubType_VoiceProcessingIO
-						- Available on OS X and with iOS 3.0 or greater
+						- Available on macOS and with iOS 3.0 or greater
 					This audio unit can do input as well as output. Bus 0 is used for the output 
 					side, bus 1 is used to get audio input (thus, on the iPhone, it works in a 
 					very similar way to the Remote I/O). This audio unit does signal processing on 
@@ -275,25 +274,19 @@ CF_ENUM(UInt32) {
 
 #if !TARGET_OS_IPHONE
 /*!
-	@enum			Apple input/output audio unit sub types (OS X)
+	@enum			Apple input/output audio unit sub types (macOS)
 	@constant		kAudioUnitSubType_HALOutput			
-						- desktop only (a.k.a. "AUHAL")
-					The audio unit that interfaces to any audio device. The user specifies which 
-					audio device to track. The audio unit can do input from the device as well as 
-					output to the device. Bus 0 is used for the output side, bus 1 is used
-					to get audio input from the device.
+		(a.k.a. "AUHAL")  The audio unit that interfaces to any audio device. The user specifies
+		which audio device to track. Bus 0 is used to send audio output to the device; bus 1 is used
+		to receive audio input from the device. Available on macOS only.
 					
 	@constant		kAudioUnitSubType_DefaultOutput		
-						- desktop only
-					A specialisation of AUHAL that is used to track the user's selection of the 
-					default device as set in the Sound Prefs
+		A specialization of AUHAL that is used to track the user's selection of the default device
+		as set in the Sound Prefs. Available on macOS only.
 					
 	@constant		kAudioUnitSubType_SystemOutput		
-						- desktop only
-					A specialisation of AUHAL that is used to track the user's selection of the 
-					device to use for sound effects, alerts
-					and other UI sounds.
-
+		A specialization of AUHAL that is used to track the user's selection of the device to use
+		for sound effects, alerts and other UI sounds. Available on macOS only.
 */
 CF_ENUM(UInt32) {
 	kAudioUnitSubType_HALOutput				= 'ahal',
@@ -304,9 +297,8 @@ CF_ENUM(UInt32) {
 /*!
 	@enum			Apple input/output audio unit sub types (iOS)
 	@constant		kAudioUnitSubType_RemoteIO			
-					The audio unit that interfaces to the iOS audio system. The
-					audio unit can do input as well as output. Bus 0 is used for the output side, 
-					bus 1 is used to get audio input.
+		The audio unit that interfaces to the iOS audio system. Bus 0 is used to send audio output;
+		bus 1 is used to receive audio input.
 */
 CF_ENUM(UInt32) {
 	kAudioUnitSubType_RemoteIO				= 'rioc',
@@ -394,7 +386,7 @@ CF_ENUM(UInt32) {
 
 #if !TARGET_OS_IPHONE
 /*!
-	@enum			Apple converter audio unit sub types (OS X only)
+	@enum			Apple converter audio unit sub types (macOS only)
 	@constant		kAudioUnitSubType_TimePitch
 					An audio unit that can be used to have independent control of both playback
 					rate and pitch. It provides a generic view, so can be used in both a UI and 
@@ -419,7 +411,7 @@ CF_ENUM(UInt32) {
 
 /*!
 	@enum			Apple effect audio unit sub types 
-	@discussion		These are the subtypes for the various effect units that apple ships
+	@brief			These are the subtypes for the various effect units that apple ships
 
 	@constant		kAudioUnitSubType_Delay					
 						- desktop only
@@ -482,7 +474,7 @@ CF_ENUM(UInt32) {
 
 #if !TARGET_OS_IPHONE
 /*!
-	@enum			Apple effect audio unit sub types (OS X only)
+	@enum			Apple effect audio unit sub types (macOS only)
 	@constant		kAudioUnitSubType_GraphicEQ				
 					A 10 or 31 band Graphic EQ
 	@constant		kAudioUnitSubType_MultiBandCompressor	
@@ -553,7 +545,7 @@ CF_ENUM(UInt32) {
 
 #if !TARGET_OS_IPHONE
 /*!
-	@enum			Apple mixer audio unit sub types (OS X only)
+	@enum			Apple mixer audio unit sub types (macOS only)
 	@constant		kAudioUnitSubType_StereoMixer
 					Inputs can be mono or stereo. Single stereo output
 					
@@ -679,7 +671,7 @@ CF_ENUM(UInt32) {
 					offline rendering actions are performed. It is used for those cases where the 
 					offline process needs it (for example, with an offline unit that normalises an 
 					audio file, it needs to see all of the audio data first before it can perform 
-					its normalisation)
+					its normalization)
 					
 	@constant		kAudioOfflineUnitRenderAction_Render
 					Once an offline unit has been successfully preflighted, it is then put into 
@@ -715,7 +707,7 @@ typedef CF_OPTIONS(UInt32, AudioUnitRenderActionFlags)
 
 /*!
 	@enum			Audio unit errors
-	@discussion		These are the various errors that can be returned by AudioUnit... API calls
+	@discussion		These are the various errors that can be returned by AudioUnit API calls
 
 	@constant		kAudioUnitErr_InvalidProperty
 					The property is not supported
@@ -1103,8 +1095,8 @@ typedef void
 	@constant kAudioComponentRegistrationsChangedNotification
 	@abstract Notification generated when the set of available AudioComponents changes.
 	@discussion
-		Register for this notification name with [NSNotificationCenter defaultCenter] or
-		CFNotificationCenterGetLocalCenter(), using an object of NULL.
+		Register for this notification name with `[NSNotificationCenter defaultCenter]` or
+		`CFNotificationCenterGetLocalCenter()`, using an object of NULL.
 */
 extern const CFStringRef kAudioComponentRegistrationsChangedNotification
 												API_AVAILABLE(macos(10.11), ios(7.0), watchos(2.0), tvos(9.0));
@@ -1113,19 +1105,21 @@ extern const CFStringRef kAudioComponentRegistrationsChangedNotification
 	@constant kAudioComponentInstanceInvalidationNotification
 	@abstract Notification generated when an audio unit extension process exits abnormally.
 	@discussion
-		Register for this notification name with [NSNotificationCenter defaultCenter] or
-		CFNotificationCenterGetLocalCenter(). The "object" refers to an AUAudioUnit instance to
+		Register for this notification name with `[NSNotificationCenter defaultCenter]` or
+		`CFNotificationCenterGetLocalCenter()`. The "object" refers to an AUAudioUnit instance to
 		be observed, or can be nil to observe all instances. The notification's userInfo
 		dictionary contains a key, "audioUnit", an NSValue whose pointerValue is the
 		AudioUnit or AudioComponentInstance which is wrapping the AUAudioUnit communicating with the
 		extension process. (This may be null if there is no such component instance.) For example:
 
+	```
 	[[NSNotificationCenter defaultCenter] addObserverForName:(NSString *)kAudioComponentInstanceInvalidationNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
 		AUAudioUnit *auAudioUnit = (AUAudioUnit *)note.object;
 		NSValue *val = note.userInfo[@"audioUnit"];
 		AudioUnit audioUnit = (AudioUnit)val.pointerValue;
 		NSLog(@"Received kAudioComponentInstanceInvalidationNotification: auAudioUnit %@, audioUnit %p", auAudioUnit, audioUnit);
 	}];
+	```
 */
 extern const CFStringRef kAudioComponentInstanceInvalidationNotification
 												API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
@@ -1601,17 +1595,22 @@ AudioOutputUnitPublish(         const AudioComponentDescription *   inDesc,
                                                 API_UNAVAILABLE(macos) INTERAPP_AUDIO_DEPRECATED;
 
 
-#if defined(__OBJC__)
+#if defined(__OBJC__) && TARGET_OS_IPHONE
 @class UIImage;
 
 extern UIImage * __nullable
 AudioOutputUnitGetHostIcon(AudioUnit au, float desiredPointSize)
                                                 API_UNAVAILABLE(macos) INTERAPP_AUDIO_DEPRECATED;
+#if TARGET_OS_MACCATALYST
+CF_INLINE UIImage * __nullable AudioComponentGetIcon(AudioComponent comp, float desiredPointSize)
+												API_DEPRECATED_WITH_REPLACEMENT("AudioComponentCopyIcon", ios(7.0, 14.0), watchos(2.0, 7.0), tvos(9.0, 14.0), macCatalyst(14.0, 14.0)) { return nil; }
+#else
 extern UIImage * __nullable
 AudioComponentGetIcon(AudioComponent comp, float desiredPointSize)
-                                                API_UNAVAILABLE(macos) INTERAPP_AUDIO_DEPRECATED;
-
-#endif // __OBJC__
+												API_UNAVAILABLE(macos)
+												API_DEPRECATED_WITH_REPLACEMENT("AudioComponentCopyIcon", ios(7.0, 14.0), watchos(2.0, 7.0), tvos(9.0, 14.0), macCatalyst(14.0, 14.0));
+#endif
+#endif // __OBJC__ && TARGET_OS_IPHONE
 
 
 /*!
@@ -1629,6 +1628,49 @@ extern CFAbsoluteTime
 AudioComponentGetLastActiveTime(AudioComponent comp)
                                                 API_UNAVAILABLE(macos) INTERAPP_AUDIO_DEPRECATED;
 #endif // AU_SUPPORT_INTERAPP_AUDIO
+
+#if defined(__OBJC__)
+#if TARGET_OS_IPHONE
+/*!
+	@function       AudioComponentCopyIcon
+	@abstract       Fetches an icon representing the component.
+	@param          comp
+		The component whose icon data is to be retrieved.
+	@result
+		A retained UIImage object.
+	@discussion
+		For a component originating in an app extension, the returned icon will be that of the
+		application containing the extension.
+
+		For components loaded from bundles, the icon will be that of the bundle.
+
+		The caller is responsible to release this value when done with it.
+*/
+extern UIImage * __nullable
+AudioComponentCopyIcon(AudioComponent comp) __attribute((ns_returns_retained))
+												API_AVAILABLE(ios(14.0), watchos(7.0), tvos(14.0)) API_UNAVAILABLE(macos);
+#else
+@class NSImage;
+/*!
+	@function       AudioComponentCopyIcon
+	@abstract       Fetches an icon representing the component.
+	@param          comp
+		The component whose icon data is to be retrieved.
+	@result
+		A retained NSImage object.
+	@discussion
+		For a component originating in an app extension, the returned icon will be that of the
+		application containing the extension.
+
+		For components loaded from bundles, the icon will be that of the bundle.
+
+		The caller is responsible to release this value when done with it.
+ */
+extern NSImage * __nullable
+AudioComponentCopyIcon(AudioComponent comp) __attribute((ns_returns_retained))
+                                                API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, watchos, tvos);
+#endif
+#endif
 
 #if defined(__LP64__) || TARGET_OS_IPHONE
 /*!
@@ -1667,7 +1709,7 @@ AudioUnitExtensionCopyComponentList(CFStringRef extensionIdentifier)
 
 
 /*!
-	@enum			AudioUnitRange
+	enum			AudioUnitRange
 	@discussion		the range of selectors that are used to dispatch through to the various audio 
 					unit API
 

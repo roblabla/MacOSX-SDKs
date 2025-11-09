@@ -6,8 +6,9 @@
 */
 
 #import <Foundation/NSObject.h>
+#import <AppKit/AppKitDefines.h>
 
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 /* NSError codes for AppKit added errors in NSCocoaErrorDomain.  Foundation error codes can be found in <Foundation/FoundationErrors.h>; CoreData error codes in <CoreData/CoreDataErrors.h>.
 */

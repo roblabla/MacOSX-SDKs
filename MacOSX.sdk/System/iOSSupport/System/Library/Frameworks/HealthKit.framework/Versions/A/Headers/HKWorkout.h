@@ -29,8 +29,8 @@ typedef NS_ENUM(NSUInteger, HKWorkoutActivityType) {
     HKWorkoutActivityTypeCrossTraining, // Any mix of cardio and/or strength training. See also HKWorkoutActivityTypeCoreTraining and HKWorkoutActivityTypeFlexibility.
     HKWorkoutActivityTypeCurling,
     HKWorkoutActivityTypeCycling,
-    HKWorkoutActivityTypeDance,
-    HKWorkoutActivityTypeDanceInspiredTraining API_DEPRECATED("Use HKWorkoutActivityTypeDance, HKWorkoutActivityTypeBarre or HKWorkoutActivityTypePilates", ios(8.0, 10.0), watchos(2.0, 3.0)), // This enum remains available to access older data.
+    HKWorkoutActivityTypeDance API_DEPRECATED("Use HKWorkoutActivityTypeSocialDance or HKWorkoutActivityTypeCardioDance", ios(8.0, 14.0), watchos(2.0, 7.0)), // This enum remains available to access older data.
+    HKWorkoutActivityTypeDanceInspiredTraining API_DEPRECATED("Use HKWorkoutActivityTypeSocialDance, HKWorkoutActivityTypeCardioDance, HKWorkoutActivityTypeBarre or HKWorkoutActivityTypePilates", ios(8.0, 10.0), watchos(2.0, 3.0)), // This enum remains available to access older data.
     HKWorkoutActivityTypeElliptical,
     HKWorkoutActivityTypeEquestrianSports, // Polo, Horse Racing, Horse Riding, etc.
     HKWorkoutActivityTypeFencing,
@@ -48,7 +48,7 @@ typedef NS_ENUM(NSUInteger, HKWorkoutActivityType) {
     HKWorkoutActivityTypeMixedMetabolicCardioTraining API_DEPRECATED("Use HKWorkoutActivityTypeMixedCardio or HKWorkoutActivityTypeHighIntensityIntervalTraining", ios(8.0, 11.0), watchos(2.0, 4.0)), // This enum remains available to access older data.
     HKWorkoutActivityTypePaddleSports, // Canoeing, Kayaking, Outrigger, Stand Up Paddle Board, etc.
     HKWorkoutActivityTypePlay, // Dodge Ball, Hopscotch, Tetherball, Jungle Gym, etc.
-    HKWorkoutActivityTypePreparationAndRecovery, // Foam rolling, stretching, etc.
+    HKWorkoutActivityTypePreparationAndRecovery, // Therapeutic activities like foam rolling, self massage and flexibility moves.
     HKWorkoutActivityTypeRacquetball,
     HKWorkoutActivityTypeRowing,
     HKWorkoutActivityTypeRugby,
@@ -93,6 +93,10 @@ typedef NS_ENUM(NSUInteger, HKWorkoutActivityType) {
     HKWorkoutActivityTypeHandCycling        API_AVAILABLE(ios(11.0), watchos(4.0)),
     HKWorkoutActivityTypeDiscSports         API_AVAILABLE(ios(13.0), watchos(6.0)),
     HKWorkoutActivityTypeFitnessGaming      API_AVAILABLE(ios(13.0), watchos(6.0)),
+    HKWorkoutActivityTypeCardioDance        API_AVAILABLE(ios(14.0), watchos(7.0)),
+    HKWorkoutActivityTypeSocialDance        API_AVAILABLE(ios(14.0), watchos(7.0)),    // Dances done in social settings like swing, salsa and folk dances from different world regions.
+    HKWorkoutActivityTypePickleball         API_AVAILABLE(ios(14.0), watchos(7.0)),
+    HKWorkoutActivityTypeCooldown           API_AVAILABLE(ios(14.0), watchos(7.0)),    // Low intensity stretching and mobility exercises following a more vigorous workout type
     
     HKWorkoutActivityTypeOther = 3000,
 } API_AVAILABLE(ios(8.0), watchos(2.0));
@@ -173,9 +177,8 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0))
  @property      workoutEvents
  @abstract      An array of HKWorkoutEvents that occurred during a workout.
  @discussion    These events will be ordered by date in ascending order. All events must take place
-                between the start date and end date of the workout. The first workout event should always be a pause event
-                because it is assumed that the workout begins in a running state. A pause event can only be followed by
-                a resume event, and a resume event can only be followed by a pause event.
+                between the start date and end date of the workout. The first workout event should never be a resume event
+                because it is assumed that the workout begins in a running state.
  */
 @property (readonly, copy, nullable) NSArray<HKWorkoutEvent *> *workoutEvents;
 

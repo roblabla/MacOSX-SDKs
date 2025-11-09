@@ -60,10 +60,10 @@ API_AVAILABLE(ios(13.0)) @protocol UIMenuBuilder
 /// @param siblingIdentifier The identifier of the sibling menu to insert before.
 - (void)insertSiblingMenu:(UIMenu *)siblingMenu beforeMenuForIdentifier:(UIMenuIdentifier)siblingIdentifier NS_SWIFT_NAME(insertSibling(_:beforeMenu:));
 
-/// Insert a sibling menu before an identified sibling menu.
+/// Insert a sibling menu after an identified sibling menu.
 ///
 /// @param siblingGroup The sibling menu to insert.
-/// @param siblingIdentifier The identifier of the sibling menu to insert before.
+/// @param siblingIdentifier The identifier of the sibling menu to insert after.
 - (void)insertSiblingMenu:(UIMenu *)siblingMenu afterMenuForIdentifier:(UIMenuIdentifier)siblingIdentifier NS_SWIFT_NAME(insertSibling(_:afterMenu:));
 
 /// Insert a child menu at the start of an identified parent menu.

@@ -1,6 +1,6 @@
 //
 //  QLPreviewingController.h
-//  Mobile Quick Look
+//  Quick Look
 //
 //  Copyright 2016 Apple Inc. All rights reserved.
 //
@@ -17,6 +17,8 @@ typedef void(^QLPreviewItemLoadingBlock)(NSError * _Nullable error) API_DEPRECAT
  The controller that implements the QLPreviewingController protocol must at least implement one of the two following methods:
  -[QLPreviewingController preparePreviewOfSearchableItemWithIdentifier:queryString:completionHandler:], to generate previews for Spotlight searchable items.
  -[QLPreviewingController preparePreviewOfFileAtURL:completionHandler:], to generate previews for file URLs.
+ 
+The main preview should be presented by the view controller implementing QLPreviewingController. Avoid presenting view controllers from your QLPreviewingController. For Catalyst compatibility, avoid using gesture recognizers that take interactions over large portions of the view to avoid collisions with standard macOS preview behaviors.
  */
 QL_EXPORT @protocol QLPreviewingController <NSObject>
 

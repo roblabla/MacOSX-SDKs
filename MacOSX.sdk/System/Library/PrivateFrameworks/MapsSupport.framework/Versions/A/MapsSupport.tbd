@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 263C4FA6-933B-3770-A333-1B9F6DA97F5F', 'x86_64: 263C4FA6-933B-3770-A333-1B9F6DA97F5F' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           2777B48C-14BA-3913-8FD8-AAACF3515EE2
+  - target:          x86_64-maccatalyst
+    value:           2777B48C-14BA-3913-8FD8-AAACF3515EE2
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           241EE06B-AE41-3AD9-81A5-271EE3FB01D4
+  - target:          arm64e-maccatalyst
+    value:           241EE06B-AE41-3AD9-81A5-271EE3FB01D4
 install-name:    '/System/Library/PrivateFrameworks/MapsSupport.framework/Versions/A/MapsSupport'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _GEOConfigMSPClientRegistrationFetchPeriod, _GEOConfigMSPClientRegistrationUpdatePeriod, 
                        _GEOConfigMSPCloudSynchronizerDefaultDelayAfterError, _GEOConfigMSPCloudSynchronizerDelayAfterServiceOutage, 
                        _GEOConfigMSPCloudSynchronizerMaxDelayAfterError, _GEOConfigMSPDefaultArrivingSoonInterval, 
@@ -17,12 +31,19 @@ exports:
                        _GEOConfigMSPSenderMinimalStrategyETANearArrivalInterval, 
                        _GEOConfigMSPSenderMinimalStrategyETAUpdateIntervalThrottle, 
                        _GEOConfigMSPSenderMinimalStrategyETAUpdateNearArrivalIntervalThrottle, 
-                       _GEOConfigMSPShareETAUserEnabled, _GEOConfigMSPSharedETASenderIdentifier, 
-                       _GEOConfigMSPSharedTripServerEnabled, _GEOConfigMSPUpNextMaximumAllowableHorizontalAccuracyInMeters, 
+                       _GEOConfigMSPShareETAUserEnabled, _GEOConfigMSPShareETAUserEnabledLegacy, 
+                       _GEOConfigMSPSharedETASenderIdentifier, _GEOConfigMSPSharedTripServerEnabled, 
+                       _GEOConfigMSPUpNextMaximumAllowableHorizontalAccuracyInMeters, 
                        _GEOConfigMSPUpNextMinimumAllowableDistanceToEntryInMeters, 
-                       _GEOConfigMapsSyncCloudPushBatchSize, _GEOConfigMapsSyncMaxMergeDuration, 
+                       _GEOConfigMapsSyncCloudPushBatchSize, _GEOConfigMapsSyncEnableMapsSync, 
+                       _GEOConfigMapsSyncEnableMigrations, _GEOConfigMapsSyncForceRunCollectionsMigrator, 
+                       _GEOConfigMapsSyncHasMigratedInitial, _GEOConfigMapsSyncHasMigratedLocalDataInitial, 
+                       _GEOConfigMapsSyncMaxMergeDuration, _GEOConfigMapsSyncMigratorBatchTimeout, 
+                       _GEOConfigMapsSyncMigratorContainerTimeout, _GEOConfigMapsSyncMigratorContainerWaitInterval, 
+                       _GEOConfigMapsSyncMigratorMSPSyncReadinessTimeout, _GEOConfigMapsSyncMigratorMaxBatchSize, 
                        _GEOConfigMapsSyncRequireDeviceToDeviceEncryption, _GEOConfigMapsSyncTimerDelayForLocalChange, 
                        _GEOConfigMapsSyncTimerDelayForRefresh, _GEOConfigMapsSyncTimerDelayForRemoteChange, 
+                       _GEOConfigMapsSyncTimerDelayForRetryMax, _GEOConfigMapsSyncTimerDelayForRetryMin, 
                        _MSPBookmarkStorageArrayFromPropertyList, _MSPBookmarkStorageReadFrom, 
                        _MSPBookmarksKey, _MSPBookmarksVersionKey, _MSPBookmarksVersion_Fall2014toFall2016, 
                        _MSPBundle, _MSPCollectionItemReplicaStorageReadFrom, _MSPCollectionItemStorageReadFrom, 
@@ -44,28 +65,30 @@ exports:
                        _MSPPropertyListFromHistoryEntryStorageArray, _MSPQuerySearchReadFrom, 
                        _MSPRegionBookmarkReadFrom, _MSPReplicaEditsGetAddedDeletedOrUpdatedIdentifiers, 
                        _MSPRidesharingTripReadFrom, _MSPRouteBookmarkReadFrom, _MSPSerializedRepresentationForFavoritesArray, 
-                       _MSPSerializedRepresentationForHistoryEntriesArray, _MSPSharedTripAvailable, 
-                       _MSPSharedTripEnabled, _MSPSharedTripNetworkEnabled, _MSPSharedTripServerStartDarwinNotification, 
-                       _MSPSyncErrorDomain, _MSPTransitLineBookmarkReadFrom, _MSPTransitStorageArtworkReadFrom, 
-                       _MSPTransitStorageAttributionReadFrom, _MSPTransitStorageIconReadFrom, 
-                       _MSPTransitStorageIncidentEntityReadFrom, _MSPTransitStorageIncidentReadFrom, 
-                       _MSPTransitStorageLineItemReadFrom, _MSPTransitStorageLineReadFrom, 
-                       _MSPTransitStorageShieldReadFrom, _MSPTransitStorageSystemReadFrom, 
-                       _MapsSupportConfig_ClimateShowAirQualityIndex, _MapsSupportConfig_ClimateShowWeatherConditions, 
-                       _MapsSupportConfig_MapsSyncPolicyMinimumDeleteRatioForDataLoss, 
+                       _MSPSerializedRepresentationForHistoryEntriesArray, _MSPSharedTripEnabled, 
+                       _MSPSharedTripErrorContactsUserInfoKey, _MSPSharedTripErrorDomain, 
+                       _MSPSharedTripNetworkEnabled, _MSPSharedTripReceivingAvailable, 
+                       _MSPSharedTripServerStartDarwinNotification, _MSPSharedTripSharingAvailable, 
+                       _MSPSharedTripUserEnabled, _MSPSyncErrorDomain, _MSPTransitLineBookmarkReadFrom, 
+                       _MSPTransitStorageArtworkReadFrom, _MSPTransitStorageAttributionReadFrom, 
+                       _MSPTransitStorageIconReadFrom, _MSPTransitStorageIncidentEntityReadFrom, 
+                       _MSPTransitStorageIncidentReadFrom, _MSPTransitStorageLineItemReadFrom, 
+                       _MSPTransitStorageLineReadFrom, _MSPTransitStorageShieldReadFrom, 
+                       _MSPTransitStorageSystemReadFrom, _MapsSupportConfig_ClimateShowAirQualityIndex, 
+                       _MapsSupportConfig_ClimateShowWeatherConditions, _MapsSupportConfig_MapsSyncPolicyMinimumDeleteRatioForDataLoss, 
                        _MapsSupportConfig_MapsSyncPolicyMinimumDeletesForDataLoss, 
                        _kMSPBookmarksDataKey, _kMSPContainerErrorDomain, _kMSPContainerErrorUnkownStorageIdentifierKey, 
                        _kMSPContainerUnavailableKeysKey, _kMSPContainerUntransferableObjectKey, 
                        _kMSPDuplicateStorageIdentifierObjectsKey, _kMSPSearchResultHistoryItemDataKey, 
                        _kMSPUnderlyingErrorsKey ]
-    objc-classes:    [ MSPBookmarkStorage, MSPCloudClientRegistration, MSPCloudClientRegistrationRecord, 
-                       MSPCloudContainer, MSPCloudContainerCache, MSPCloudContainerChangeSet, 
-                       MSPCloudKitAccountAccess, MSPCloudSynchronizer, MSPCloudSynchronizerRunConditions, 
-                       MSPCollection, MSPCollectionItem, MSPCollectionItemRecord, 
-                       MSPCollectionItemReplica, MSPCollectionItemReplicaStorage, 
-                       MSPCollectionItemStorage, MSPCollectionStorage, MSPCollectionsContainer, 
-                       MSPCollectionsFileContainerPersister, MSPCollectionsQuery, 
-                       MSPCollectionsReplica, MSPCollectionsReplicaRecordFromCloudKit, 
+    objc-classes:    [ MSPAppleMediaServicesServer, MSPBookmarkStorage, MSPCloudClientRegistration, 
+                       MSPCloudClientRegistrationRecord, MSPCloudContainer, MSPCloudContainerCache, 
+                       MSPCloudContainerChangeSet, MSPCloudKitAccountAccess, MSPCloudMigrator, 
+                       MSPCloudSynchronizer, MSPCloudSynchronizerRunConditions, MSPCollection, 
+                       MSPCollectionItem, MSPCollectionItemRecord, MSPCollectionItemReplica, 
+                       MSPCollectionItemReplicaStorage, MSPCollectionItemStorage, 
+                       MSPCollectionStorage, MSPCollectionsContainer, MSPCollectionsFileContainerPersister, 
+                       MSPCollectionsQuery, MSPCollectionsReplica, MSPCollectionsReplicaRecordFromCloudKit, 
                        MSPCollectionsReplicaSimpleRecord, MSPCompanionSyncedItem, 
                        MSPContainer, MSPContainerArrayStateSnapshot, MSPContainerPersister, 
                        MSPContainerPolicyObserver, MSPDirectionsSearch, MSPDroppedPin, 
@@ -97,8 +120,9 @@ exports:
                        MSPReplicaEditInsertRecord, MSPReplicaEditRemoveTombstone, 
                        MSPReplicaEditUpdateContents, MSPReplicaMergeOptionsReapTombstones, 
                        MSPReplicaRecordFromCloudKit, MSPRidesharingInformationSource, 
-                       MSPRidesharingTrip, MSPRouteBookmark, MSPSharedTripServer, 
-                       MSPSharedTripService, MSPSynchronizedContainer, MSPTransitLineBookmark, 
+                       MSPRidesharingTrip, MSPRouteBookmark, MSPSharedTripCapabilityLevelFetcher, 
+                       MSPSharedTripContact, MSPSharedTripServer, MSPSharedTripService, 
+                       MSPSharedTripSharingIdentity, MSPSynchronizedContainer, MSPTransitLineBookmark, 
                        MSPTransitStorageArtwork, MSPTransitStorageAttribution, MSPTransitStorageIcon, 
                        MSPTransitStorageIncident, MSPTransitStorageIncidentEntity, 
                        MSPTransitStorageLine, MSPTransitStorageLineItem, MSPTransitStorageShield, 

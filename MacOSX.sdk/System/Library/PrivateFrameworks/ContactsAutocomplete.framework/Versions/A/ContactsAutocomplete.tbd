@@ -1,10 +1,25 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 455A6384-F565-32B4-9F53-F32BADF97FF7', 'x86_64: 455A6384-F565-32B4-9F53-F32BADF97FF7' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           B520A5AB-1ED2-388B-93E5-D2140353063A
+  - target:          x86_64-maccatalyst
+    value:           B520A5AB-1ED2-388B-93E5-D2140353063A
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           E7F4DEF7-6D07-3345-9658-16349F7C61EC
+  - target:          arm64e-maccatalyst
+    value:           E7F4DEF7-6D07-3345-9658-16349F7C61EC
 install-name:    '/System/Library/PrivateFrameworks/ContactsAutocomplete.framework/Versions/A/ContactsAutocomplete'
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 1152
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CNALoggingContextDebug, _CNALoggingContextPerformance, _CNALoggingContextProbes, 
                        _CNALoggingContextSorting, _CNALoggingContextTriage, _CNAutocompleteAdditionalResultsKey, 
                        _CNAutocompleteDefaultsCalendarServersEnabled, _CNAutocompleteDefaultsCoreRecentGroupsEnabled, 
@@ -16,14 +31,14 @@ exports:
                        _CNAutocompleteDefaultsRecentContactsEnabled, _CNAutocompleteDefaultsSortingLogEnabled, 
                        _CNAutocompleteDefaultsSuggestionsCharactersThreshold, _CNAutocompleteDefaultsSuggestionsEnabled, 
                        _CNAutocompleteDefaultsSupplementalContactsEnabled, _CNAutocompleteDefaultsSuppressAddressesAlreadyChosen, 
-                       _CNAutocompleteErrorDomain, _CNAutocompleteIsDebugLoggingEnabled, 
-                       _CNAutocompleteIsProbesLoggingEnabled, _CNAutocompleteIsSortingLoggingEnabled, 
-                       _CNAutocompleteProbeBatchKey, _CNAutocompleteProbeBoolKey, 
-                       _CNAutocompleteProbeBuildKey, _CNAutocompleteProbeIgnoreResultsThreshold, 
-                       _CNAutocompleteProbeKeyCommonPrefix, _CNAutocompleteProbeKeyIncludingServers, 
-                       _CNAutocompleteProbeKeyPerformanceKey, _CNAutocompleteProbeKeyPerformanceLatency, 
-                       _CNAutocompleteProbeKeyPerformanceNumberOfResultsKey, _CNAutocompleteProbeKeyServerCacheMisses, 
-                       _CNAutocompleteProbeKeyUsageMonitorConsideredSuggestionCount, 
+                       _CNAutocompleteDelegateMultipleCallbacks, _CNAutocompleteErrorDomain, 
+                       _CNAutocompleteIsDebugLoggingEnabled, _CNAutocompleteIsProbesLoggingEnabled, 
+                       _CNAutocompleteIsSortingLoggingEnabled, _CNAutocompleteProbeBatchKey, 
+                       _CNAutocompleteProbeBoolKey, _CNAutocompleteProbeBuildKey, 
+                       _CNAutocompleteProbeIgnoreResultsThreshold, _CNAutocompleteProbeKeyCommonPrefix, 
+                       _CNAutocompleteProbeKeyIncludingServers, _CNAutocompleteProbeKeyPerformanceKey, 
+                       _CNAutocompleteProbeKeyPerformanceLatency, _CNAutocompleteProbeKeyPerformanceNumberOfResultsKey, 
+                       _CNAutocompleteProbeKeyServerCacheMisses, _CNAutocompleteProbeKeyUsageMonitorConsideredSuggestionCount, 
                        _CNAutocompleteProbeKeyUsageMonitorDuetReturnedResults, _CNAutocompleteProbeKeyUsageMonitorKey, 
                        _CNAutocompleteProbeKeyUsageMonitorNoResultSelectedIndexKey, 
                        _CNAutocompleteProbeKeyUsageMonitorNoResultsFromDuet, _CNAutocompleteProbeKeyUsageMonitorNumberOfCharactersKey, 
@@ -51,7 +66,8 @@ exports:
                        _sSortRecentResultsBySendingAddressMatch, _sSortResultsByAddress, 
                        _sSortResultsByCategory, _sSortResultsByDisplayName, _sSortResultsByPreferredDomain ]
     objc-classes:    [ CNAClassKitResultTransformVisitor, CNAutocompleteCalendarQueryAssembler, 
-                       CNAutocompleteCalendarServerResult, CNAutocompleteDelegateWrapper, 
+                       CNAutocompleteCalendarServerOperationFactory, CNAutocompleteCalendarServerResult, 
+                       CNAutocompleteCalendarServerSearch, CNAutocompleteDelegateWrapper, 
                        CNAutocompleteDirectoryServerResult, CNAutocompleteDirectoryServerSearch, 
                        CNAutocompleteDuetContactResult, CNAutocompleteDuetSearch, 
                        CNAutocompleteEntitlementVerifier, CNAutocompleteExtensionResult, 

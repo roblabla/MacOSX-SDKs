@@ -1,11 +1,25 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: FCC20F6F-3209-3174-A382-B46AA188A371', 'x86_64: FCC20F6F-3209-3174-A382-B46AA188A371' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           22389DB4-BC5D-3CA7-AF30-D223CF1E9958
+  - target:          x86_64-maccatalyst
+    value:           22389DB4-BC5D-3CA7-AF30-D223CF1E9958
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           BE3682BD-BC00-3D94-947D-FFF91EF51036
+  - target:          arm64e-maccatalyst
+    value:           BE3682BD-BC00-3D94-947D-FFF91EF51036
 install-name:    '/usr/lib/libz.1.dylib'
 current-version: 1.2.11
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _adler32, _adler32_combine, _adler32_z, _compress, _compress2, 
                        _compressBound, _crc32, _crc32_combine, _crc32_z, _deflate, 
                        _deflateBound, _deflateCopy, _deflateEnd, _deflateGetDictionary, 

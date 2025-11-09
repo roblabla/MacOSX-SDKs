@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: E943BDAF-8B55-3557-9A80-79FC21EFD746' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           27625151-43B8-3D28-AF0B-61B7A1E922F6
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           838AE92B-AF63-375A-8A99-F6FA8C9BC1F0
 install-name:    '/System/Library/Frameworks/DirectoryService.framework/Versions/A/DirectoryService'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ ___DirectoryServiceVersionNumber, ___DirectoryServiceVersionString, 
                        _dsAddAttribute, _dsAddAttributeValue, _dsAddChildPIDToReference, 
                        _dsAllocAttributeValueEntry, _dsAllocStringsFromList, _dsAppendAuthBuffer, 

@@ -48,7 +48,7 @@ extern "C"
 #ifdef WIN32
 #include "../win32/win32_pcsclite.h"
 #else
-#include "pcsclite.h"
+#include <PCSC/pcsclite.h>
 #endif
 
 #ifndef __APPLE__

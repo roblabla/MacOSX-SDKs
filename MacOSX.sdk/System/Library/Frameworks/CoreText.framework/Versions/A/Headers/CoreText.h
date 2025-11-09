@@ -2,7 +2,7 @@
  *  CoreText.h
  *  CoreText
  *
- *  Copyright (c) 2006-2019 Apple Inc. All rights reserved.
+ *  Copyright (c) 2006-2020 Apple Inc. All rights reserved.
  *
  */
 
@@ -54,10 +54,11 @@ CF_EXTERN_C_BEGIN
                     }
 
     @result     The version number. This value is for comparison with the
-                constants beginning with kCTVersionNumber.
+                constants beginning with kCTVersionNumber and will not exceed
+                kCTVersionNumber11_0.
 */
 
-uint32_t CTGetCoreTextVersion( void ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
+uint32_t CTGetCoreTextVersion( void ) CT_DEPRECATED("Use -[NSProcessInfo operatingSystemVersion]", macos(10.5, 11.0), ios(3.2, 14.0), watchos(2.0, 7.0), tvos(9.0, 14.0));
 
 #define kCTVersionNumber10_5 0x00020000
 #define kCTVersionNumber10_5_2 0x00020001
@@ -73,6 +74,7 @@ uint32_t CTGetCoreTextVersion( void ) CT_AVAILABLE(macos(10.5), ios(3.2), watcho
 #define kCTVersionNumber10_13 0x000A0000
 #define kCTVersionNumber10_14 0x000B0000
 #define kCTVersionNumber10_15 0x000C0000
+#define kCTVersionNumber11_0 0x000D0000
 
 CF_EXTERN_C_END
 

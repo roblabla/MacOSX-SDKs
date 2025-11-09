@@ -1,11 +1,30 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: A1B866AA-61CB-38A1-856F-510A72361A43', 'x86_64: A1B866AA-61CB-38A1-856F-510A72361A43' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           C6B19137-0669-3841-8C8D-071BC76863FA
+  - target:          x86_64-maccatalyst
+    value:           C6B19137-0669-3841-8C8D-071BC76863FA
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           B59AE5AD-AB10-3DB8-B2A6-256CC54C9009
+  - target:          arm64e-maccatalyst
+    value:           B59AE5AD-AB10-3DB8-B2A6-256CC54C9009
 install-name:    '/System/Library/PrivateFrameworks/MFAAuthentication.framework/Versions/A/MFAAuthentication'
-exports:         
-  - archs:           [ x86_64 ]
-    symbols:         [ _MFAAAddCertDataEntryToCache, _MFAACanChargeHighVoltage, _MFAACanChargeInductive, 
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _DERDecodeItem, _DERDecodeItemPartialBuffer, _DERDecodeItemPartialBufferGetLength, 
+                       _DERDecodeSeqContentInit, _DERDecodeSeqInit, _DERDecodeSeqNext, 
+                       _DERDecodeSequenceContentWithBlock, _DERDecodeSequenceWithBlock, 
+                       _DERParseBitString, _DERParseBoolean, _DERParseBooleanWithDefault, 
+                       _DERParseInteger, _DERParseInteger64, _DERParseSequence, _DERParseSequenceContent, 
+                       _MFAAAddCertDataEntryToCache, _MFAACanChargeHighVoltage, _MFAACanChargeInductive, 
                        _MFAACanUseAccPwrLoV, _MFAACanUseAccPwrUHPM, _MFAACertificateAuthV2Class, 
                        _MFAACertificateAuthVersionNumber, _MFAACertificateManagerErrorDomain, 
                        _MFAACreateAnchorCertificateAuthorityArray, _MFAACreateCapsFromAuthCert, 
@@ -30,9 +49,9 @@ exports:
                        _MFAAUserDefaultsKey_ForceNetworkFailure, _MFAAUserDefaultsKey_ForceTokenActivationFailure, 
                        _MFAAUserDefaultsKey_ForceTokenConfirmationFailure, _MFAAUserDefaultsKey_PairingTable, 
                        _MFAAUserDefaultsKey_PairingTableVersion, _MFAAUserDefaultsKey_PairingTable_Timestamp, 
-                       _MFAAUserDefaultsKey_Server, _MFAAUserDefaultsKey_SpoofCertificateStatus, 
-                       _MFAAUserDefaultsKey_SpoofPPIDMetadata, _MFAAUserDefaultsKey_SpoofTokenActivation, 
-                       _MFAAUserDefaultsKey_StaticContentServer, _MFAAUserDefaultsNotification, 
+                       _MFAAUserDefaultsKey_PairingTokenExpirationS, _MFAAUserDefaultsKey_Server, 
+                       _MFAAUserDefaultsKey_SpoofCertificateStatus, _MFAAUserDefaultsKey_SpoofPPIDMetadata, 
+                       _MFAAUserDefaultsKey_SpoofTokenActivation, _MFAAUserDefaultsNotification, 
                        _MFAAUserDefaultsValue_Server_Custom, _MFAAUserDefaultsValue_Server_IT, 
                        _MFAAUserDefaultsValue_Server_Maint, _MFAAUserDefaultsValue_Server_Prod, 
                        _MFAAUserDefaultsValue_Server_UT, _MFAAUserDefaultsValue_SpoofCertificateStatus_Default, 

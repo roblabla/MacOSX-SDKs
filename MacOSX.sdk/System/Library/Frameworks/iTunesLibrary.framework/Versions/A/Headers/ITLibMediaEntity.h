@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@abstract	The ITLibMediaEntity class serves as the abstract superclass for ITLibMediaItem and ITLibPlaylist instances.
 				As the superclass, ITLibMediaEntity defines methods used by those subclasses.
  */
+API_UNAVAILABLE(ios)
 ITLIB_EXPORT @interface ITLibMediaEntity : NSObject
 {
 	NSMutableDictionary *	_fields;

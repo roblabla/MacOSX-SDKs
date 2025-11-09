@@ -23,6 +23,11 @@
 
 #import <DiscRecording/DiscRecording.h>
 #import <DiscRecordingUI/DRSetupPanel.h>
+#import <Availability.h>
+
+
+API_UNAVAILABLE_BEGIN(ios)
+
 
 /*!
 	@class			DREraseSetupPanel
@@ -89,3 +94,6 @@
 - (IBAction) eraseType:(id) sender;
 
 @end
+
+
+API_UNAVAILABLE_END

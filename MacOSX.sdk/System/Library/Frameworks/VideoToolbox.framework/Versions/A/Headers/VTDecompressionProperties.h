@@ -3,7 +3,7 @@
 	
 	Framework:  VideoToolbox
  
-	Copyright © 2007-2018 Apple Inc. All rights reserved.
+	Copyright © 2007-2020 Apple Inc. All rights reserved.
   
 	Standard Video Toolbox decompression properties.
 */
@@ -422,6 +422,15 @@ VT_EXPORT const CFStringRef kVTVideoDecoderSpecification_PreferredDecoderGPURegi
 		If a decoder based on a built-in GPU was used it will return NULL.  If a software decoder is used, it will return NULL
 */
 VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_UsingGPURegistryID API_AVAILABLE(macosx(10.15)) ; // CFNumberRef, Read;
+
+/*!
+	@constant    kVTDecompressionPropertyKey_PropagatePerFrameHDRDisplayMetadata
+	@abstract
+		This controls whether or not to propagate any per frame HDR
+		display metadata from the input compressed bitstream to the output pixel buffer.
+	@discussion
+*/
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_PropagatePerFrameHDRDisplayMetadata API_AVAILABLE(macosx(11.0), ios(14.0), tvos(14.0)); // Read/write, CFBoolean, Optional, default is kCFBooleanTrue
 
 
 	

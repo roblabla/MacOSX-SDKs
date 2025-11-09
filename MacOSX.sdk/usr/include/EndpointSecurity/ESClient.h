@@ -27,7 +27,7 @@ __BEGIN_DECLS
 OS_EXPORT
 API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
 es_return_t
-es_subscribe(es_client_t * _Nonnull client, es_event_type_t * _Nonnull events, uint32_t event_count);
+es_subscribe(es_client_t * _Nonnull client, const es_event_type_t * _Nonnull events, uint32_t event_count);
 
 /**
  * Unsubscribe from some set of events
@@ -40,7 +40,7 @@ es_subscribe(es_client_t * _Nonnull client, es_event_type_t * _Nonnull events, u
 OS_EXPORT
 API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
 es_return_t
-es_unsubscribe(es_client_t * _Nonnull client, es_event_type_t * _Nonnull events, uint32_t event_count);
+es_unsubscribe(es_client_t * _Nonnull client, const es_event_type_t * _Nonnull events, uint32_t event_count);
 
 /**
  * Unsubscribe from all events
@@ -122,7 +122,12 @@ es_unmute_process(es_client_t * _Nonnull client, const audit_token_t *_Nonnull a
  * @param count Out param that reports the number of audit tokens written
  * @param audit_tokens  Out param for pointer to audit_token data
  * @return es_return_t indicating success or error
- * @brief The caller takes ownership of the memory at `*audit_tokens` and must free it
+ * @brief The caller takes ownership of the memory at `*audit_tokens` and must free it.
+ *        If there are no muted processes and the call completes successfully,
+ *        `*count` is set to 0 and `*audit_token` is set to NULL.
+ * @note The audit tokens are returned in the same state as they were passed to
+ *       `es_mute_process` and may not accurately reflect the current state of the
+ *       respective processes.
  */
 OS_EXPORT
 API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
@@ -191,12 +196,13 @@ typedef void (^es_handler_block_t)(es_client_t * _Nonnull, const es_message_t * 
  *        	   Messages can be responded to out of order by returning control before calling es_respond_*.
  *			   The es_message_t is only guaranteed to live as long as the scope it is passed into.
  *			   The memory for the given es_message_t is NOT owned by clients and it must not be freed.
- *		  	   For out of order responding the handler must copy the message with es_copy_message.
+ *		  	   For out of order responding the handler must retain the message with es_retain_message.
  *		  	   Callers are required to be entitled with com.apple.developer.endpoint-security.client.
  *		  	   The application calling this interface must also be approved by users via Transparency, Consent & Control
  *		  	   (TCC) mechanisms using the Privacy Preferences pane and adding the application to Full Disk Access.
  *		  	   When a new client is successfully created, all cached results are automatically cleared.
- * @see es_copy_message
+ * @see es_retain_message
+ * @see es_release_message
  * @see es_new_client_result_t
  */
 OS_EXPORT
@@ -208,12 +214,13 @@ es_new_client(es_client_t * _Nullable * _Nonnull client, es_handler_block_t _Non
  * Destroy an es_client_t, freeing resources and disconnecting from the ES subsystem
  * @param client The client to be destroyed
  * @return  ES_RETURN_SUCCESS indicates all resources were freed.
-		   	ES_RETURN_ERROR indicates an error occured during shutdown and resources were leaked.
+ *          ES_RETURN_ERROR indicates an error occured during shutdown and resources were leaked.
+ * @note Must be called from the same thread that originally called `es_new_client`.
  */
 OS_EXPORT
 API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
 es_return_t
-es_delete_client(es_client_t * _Nonnull client);
+es_delete_client(es_client_t * _Nullable client);
 
 __END_DECLS;
 

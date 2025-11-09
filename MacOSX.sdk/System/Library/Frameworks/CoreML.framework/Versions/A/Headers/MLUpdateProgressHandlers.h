@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Allows applications to register for progress and completion handlers.
  */
 ML_EXPORT
-API_AVAILABLE(macos(10.15), ios(13.0))
+API_AVAILABLE(macos(10.15), ios(13.0), tvos(14.0))
 @interface MLUpdateProgressHandlers : NSObject
 
 - (instancetype)initForEvents:(MLUpdateProgressEvent)interestedEvents

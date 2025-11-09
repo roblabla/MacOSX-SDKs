@@ -92,12 +92,31 @@ typedef UITableViewCell * _Nullable(^UIDiffableDataSourceTableViewCellProvider)(
 typedef void(^UIDiffableDataSourceTableViewCellConfigurationHandler)(__kindof UITableViewCell  * _Nonnull , id _Nonnull identifier);
 
 @class __UIDiffableDataSourceSnapshot;
+@class _UIDiffableDataSourceSectionController;
+@class _UIDiffableDataSourceItemRenderer;
+@protocol _UICollectionViewAnimationContext;
+@class _UIDiffableDataSourceTransaction;
+@class _UIDiffableDataSourceItemRenderer;
+
+typedef BOOL (^_UIDiffableDataSourceCanReorderItemHandler)(id _Nonnull identifier);
+typedef void (^_UIDiffableDataSourceDidReorderItemsHandler)(_UIDiffableDataSourceTransaction  _Nonnull *transaction, NSArray * _Nonnull reorderedItems);
+typedef void(^__UIDiffableDataSourceCellObserver)(__kindof UICollectionViewCell * _Nonnull cell, NSIndexPath * _Nonnull indexPath, id _Nonnull identifier);
+
 
 API_AVAILABLE(ios(13.0), tvos(13.0))
 @interface __UIDiffableDataSource : NSObject
 
 - (instancetype)initWithCollectionView:(UICollectionView*)collectionView
                           cellProvider:(UIDiffableDataSourceCollectionViewCellProvider)cellProvider;
+
+- (instancetype)initWithCollectionView:(UICollectionView *)collectionView
+                    sectionControllers:(NSArray<_UIDiffableDataSourceSectionController*>*)sectionControllers
+            rendererIdentifierProvider:(id  _Nonnull (^)(id _Nonnull))rendererIdentifierProvider;
+
+
+- (instancetype)initWithCollectionView:(UICollectionView *)collectionView
+                         itemRenderers:(NSArray<_UIDiffableDataSourceItemRenderer *> *)itemRenderers
+            rendererIdentifierProvider:(id  _Nonnull (^)(id _Nonnull))rendererIdentifierProvider;
 
 - (instancetype)initWithCollectionView:(UICollectionView *)collectionView
                           cellProvider:(UIDiffableDataSourceCollectionViewCellProvider)cellProvider
@@ -107,7 +126,7 @@ API_AVAILABLE(ios(13.0), tvos(13.0))
                reuseIdentifierProvider:(UIDiffableDataSourceCellReuseIdentifierProvider)cellReuseProvider
               cellConfigurationHandler:(UIDiffableDataSourceCollectionViewCellConfigurationHandler)cellConfigurationHandler;
 
-- (NSString*)description;
+- (NSString*)description;       
 
 - (instancetype)initWithTableView:(UITableView*)tableView
                      cellProvider:(UIDiffableDataSourceTableViewCellProvider)cellProvider;
@@ -121,10 +140,9 @@ API_AVAILABLE(ios(13.0), tvos(13.0))
 @property(nonatomic,copy) UITableViewDiffableDataSourceCellProvider tableViewCellProvider;
 
 @property(nonatomic,weak,readonly,nullable) UICollectionView *collectionView;
+@property(nonatomic,weak,readonly,nullable) UICollectionView *_collectionView;  
+
 @property(nonatomic,nullable,copy) UIDiffableDataSourceSupplementaryViewProvider supplementaryViewProvider;
-
-
-- (instancetype)init NS_UNAVAILABLE;
 
 @property(nonatomic,readonly) NSInteger numberOfItems;
 @property(nonatomic,readonly) NSInteger numberOfSections;
@@ -164,6 +182,7 @@ API_AVAILABLE(ios(13.0), tvos(13.0))
 
 - (void)reloadSectionsWithIdentifiers:(NSArray*)sectionIdentifiers;
 
+
 - (nullable id)itemIdentifierForIndexPath:(NSIndexPath*)indexPath;
 - (nullable NSIndexPath*)indexPathForItemIdentifier:(id)identifier;
 
@@ -175,8 +194,8 @@ API_AVAILABLE(ios(13.0), tvos(13.0))
 - (void)applyDifferencesFromSnapshot:(__UIDiffableDataSourceSnapshot *)snapshot animatingDifferences:(BOOL)animatingDifferences;
 - (void)applyDifferencesFromSnapshot:(__UIDiffableDataSourceSnapshot *)snapshot animatingDifferences:(BOOL)animatingDifferences completion:(void(^ _Nullable)(void))completion;
 
-
-// deprecated
+- (void)_applyDifferencesFromSnapshot:(__UIDiffableDataSourceSnapshot *)snapshot customAnimationsProvider:(void(^)(id<_UICollectionViewAnimationContext> _Nonnull))customAnimationsProvider;
+- (void)_applyDifferencesFromSnapshot:(__UIDiffableDataSourceSnapshot *)snapshot viewPropertyAnimator:(UIViewPropertyAnimator*)animator customAnimationsProvider:(void(^)(id<_UICollectionViewAnimationContext> _Nonull))customAnimationsProvider;
 
 - (void)appendSectionWithIdentifier:(id)sectionIdentifier;
 - (void)insertSectionWithIdentifier:(id)sectionIdentifier beforeSectionWithIdentifier:(id)toSectionIdentifier;
@@ -188,9 +207,13 @@ API_AVAILABLE(ios(13.0), tvos(13.0))
 @property(nonatomic,nullable,copy) UIDiffableDataSourceSupplementaryViewConfigurationHandler supplementaryViewConfigurationHandler;
 
 @property(nonatomic,copy) UICollectionViewDiffableDataSourceCellProvider collectionViewCellProvider;
+@property(nonatomic,copy) __UIDiffableDataSourceCellObserver cellObserver;
 
+@property(nonatomic,readonly) NSArray<_UIDiffableDataSourceSectionController*> *sectionControllers;
 
-// helpers
+- (void)addAssociatedSectionControllerIfNeeded:(_UIDiffableDataSourceSectionController*)sectionController;
+- (nullable _UIDiffableDataSourceSectionController*)associatedSectionControllerForItemIdentifier:(id)itemIdentifier;
+- (nullable _UIDiffableDataSourceSectionController*)associatedSectionControllerForSectionIdentifier:(id)sectionIdentifier;
 
 - (NSInteger)_numberOfSectionsForCollectionView:(UICollectionView*)collectionView NS_SWIFT_NAME(_numberOfSectionsForCollectionView(_:));
 - (NSInteger)_numberOfItemsInSection:(NSInteger)section collectionView:(UICollectionView*)collectionView NS_SWIFT_NAME(_numberOfItemsInSection(_:collectionView:));
@@ -210,6 +233,13 @@ API_AVAILABLE(ios(13.0), tvos(13.0))
 - (NSInteger)_numberOfRowsInSectionDeprecatedSPI:(NSInteger)section tableView:(UITableView*)tableView NS_SWIFT_NAME(numberOfRows(inSection:tableView:));
 - (UITableViewCell*)_cellForRowAtIndexPathDeprecatedSPI:(NSIndexPath*)indexPath tableView:(UITableView*)tableView NS_SWIFT_NAME(cellForRow(at:tableView:));
 
+
+@property(nonatomic,copy,nullable) void(^willApplySnapshotHandler)(_UIDiffableDataSourceTransaction *transaction);
+@property(nonatomic,copy,nullable) void(^didApplySnapshotHandler)(_UIDiffableDataSourceTransaction *transaction);
+@property(nonatomic,copy,nullable) _UIDiffableDataSourceCanReorderItemHandler canReorderItemHandler;
+
+- (BOOL)canMoveItemAtIndexPath:(NSIndexPath*)indexPath;
+- (void)_commitReorderingForItemAtIndexPath:(NSIndexPath*)sourceIndexPath toDestinationIndexPath:(NSIndexPath*)destinationIndexPath;
 @end
 
 

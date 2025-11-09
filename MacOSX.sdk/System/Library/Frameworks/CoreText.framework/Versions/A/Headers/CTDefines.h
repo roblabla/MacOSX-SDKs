@@ -2,13 +2,14 @@
  *  CTDefines.h
  *  CoreText
  *
- *  Copyright (c) 2010-2018 Apple Inc. All rights reserved.
+ *  Copyright (c) 2010-2020 Apple Inc. All rights reserved.
  *
  */
 
 #ifndef __CTDEFINES__
 #define __CTDEFINES__
 
+#include <TargetConditionals.h>
 #include <Availability.h>
 
 #ifndef __has_feature

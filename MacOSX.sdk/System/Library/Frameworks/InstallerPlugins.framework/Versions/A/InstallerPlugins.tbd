@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 17BE2455-1EFD-33FC-8F39-CC905D602648' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           43D835FA-F39F-3C46-B181-1A83F6BD2CDC
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           5D2595EA-68FC-3CC1-A045-7E0FBE2CD833
 install-name:    '/System/Library/Frameworks/InstallerPlugins.framework/Versions/A/InstallerPlugins'
 current-version: 815
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _IS_InstallerSectionClosing_Notification, _InstallerSection_IsRunningFromInstallMedia, 
                        _InstallerState_ChoiceDictionaries, _InstallerState_Choice_CustomLocation, 
                        _InstallerState_Choice_Identifier, _InstallerState_Choice_Installed, 

@@ -63,12 +63,39 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIBarButtonItem : UIBarItem <NSC
 - (instancetype)initWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem target:(nullable id)target action:(nullable SEL)action;
 - (instancetype)initWithCustomView:(UIView *)customView;
 
-@property(nonatomic)         UIBarButtonItemStyle style;            // default is UIBarButtonItemStylePlain
-@property(nonatomic)         CGFloat              width;            // default is 0.0
-@property(nullable, nonatomic,copy)    NSSet<NSString *>   *possibleTitles;   // default is nil
-@property(nullable, nonatomic,strong)  __kindof UIView     *customView;       // default is nil
-@property(nullable, nonatomic)         SEL                  action;           // default is NULL
-@property(nullable, nonatomic,weak)    id                   target;           // default is nil
+/// Creates a bar button item for the given systemItem. The primaryAction is copied, and its title & image are ignored.
+- (instancetype)initWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem primaryAction:(nullable UIAction *)primaryAction API_AVAILABLE(ios(14.0));
+
+/// Creates a plain-style bar button item from the properties of primaryAction. primaryAction is copied.
+- (instancetype)initWithPrimaryAction:(nullable UIAction *)primaryAction API_AVAILABLE(ios(14.0));
+
+/// Creates a bar button item for the given systemItem. The constructed item will present the menu immediately when touched.
+- (instancetype)initWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem menu:(nullable UIMenu *)menu API_AVAILABLE(ios(14.0));
+
+/// Creates a plain-style bar button item with the given title. The constructed item will present the menu immediately when touched.
+- (instancetype)initWithTitle:(nullable NSString *)title menu:(nullable UIMenu *)menu API_AVAILABLE(ios(14.0));
+
+/// Creates a plain-style bar button item with the given item. The constructed item will present the menu immediately when touched.
+- (instancetype)initWithImage:(nullable UIImage *)image menu:(nullable UIMenu *)menu API_AVAILABLE(ios(14.0));
+
+/// Construct a new fixed space item with the given width.
++ (instancetype)fixedSpaceItemOfWidth:(CGFloat)width API_AVAILABLE(ios(14.0));
+
+/// Construct a new flexible space item.
++ (instancetype)flexibleSpaceItem API_AVAILABLE(ios(14.0));
+
+@property (nonatomic, readwrite, assign) UIBarButtonItemStyle style;            // default is UIBarButtonItemStylePlain
+@property (nonatomic, readwrite, assign) CGFloat              width;            // default is 0.0
+@property (nonatomic, readwrite, copy  , nullable) NSSet<NSString *>   *possibleTitles;   // default is nil
+@property (nonatomic, readwrite, strong, nullable) __kindof UIView     *customView;       // default is nil
+@property (nonatomic, readwrite, assign, nullable) SEL                  action;           // default is NULL
+@property (nonatomic, readwrite, weak  , nullable) id                   target;           // default is nil
+
+/// Set the primaryAction on this item, updating the title & image of the item if appropriate (primaryAction is non-nil, and this is not a system item). When primaryAction is non-nil, the target & action properties are ignored. If primaryAction is set to nil, the title & image properties are left unchanged.
+@property (nonatomic, readwrite, copy, nullable) UIAction *primaryAction API_AVAILABLE(ios(14.0));
+
+/// When non-nil the menu is presented, the gesture used to trigger the menu is based on if the bar button item would normally trigger an action when tapped.
+@property (nonatomic, readwrite, copy, nullable) UIMenu *menu API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
 
 //
 // Appearance modifiers

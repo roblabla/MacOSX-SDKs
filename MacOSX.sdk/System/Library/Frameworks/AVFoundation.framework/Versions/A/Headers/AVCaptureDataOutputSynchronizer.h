@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCapture/AVCaptureDataOutputSynchronizer.h>)
 /*
     File:  AVCaptureDataOutputSynchronizer.h
  
@@ -106,7 +107,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROH
  @abstract
     Called when an AVCaptureDataOutputSynchronizer instance outputs synchronized data from one or more data outputs.
  
- @param captureOutputSynchronizer
+ @param synchronizer
     The AVCaptureDataOutputSynchronizer instance delivering synchronized data.
  @param synchronizedDataCollection
     A collection of synchronized data objects indexed by data output.
@@ -352,3 +353,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROH
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCapture/AVCaptureDataOutputSynchronizer.h>
+#endif

@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCapture/AVCaptureOutput.h>)
 /*
     File:  AVCaptureOutput.h
  
@@ -16,3 +17,7 @@
 #import <AVFoundation/AVCapturePhotoOutput.h>
 #import <AVFoundation/AVCaptureStillImageOutput.h>
 #import <AVFoundation/AVCaptureVideoDataOutput.h>
+
+#else
+#import <AVFCapture/AVCaptureOutput.h>
+#endif

@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 150DE04F-11E8-3FEA-B6CE-CB86AAD05D9D' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           1C061634-7559-3D10-B549-0DB858B0EFBB
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           B768C9E2-1AFE-3D4B-97EE-BB548E282DAE
 install-name:    '/System/Library/PrivateFrameworks/Install.framework/Versions/A/Install'
 current-version: 1000
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _AddMacroToPlistMacroList, _BundleIdentifierSearch, _BundleIdentifierSearchArgs, 
                        _BundleIdentifierValidationProc, _BundleVersionFilter, _BundleVersionFilterArgs, 
                        _CStringCopy, _CStringEqual, _CStringFree, _CStringHash, _CheckPathArgs, 
@@ -51,8 +57,8 @@ exports:
                        _IFPkgFlag_DefaultLocation, _IFPkgFlag_DeleteMode, _IFPkgFlag_DeleteObsoleteLanguages, 
                        _IFPkgFlag_DisableStop, _IFPkgFlag_FastInstall, _IFPkgFlag_FlagInstalledSize, 
                        _IFPkgFlag_FollowLinks, _IFPkgFlag_ForcedReboot, _IFPkgFlag_HasBundleRelocation, 
-                       _IFPkgFlag_HostArchitectures, _IFPkgFlag_InstallFat, _IFPkgFlag_IsOperatingSystem, 
-                       _IFPkgFlag_IsRequired, _IFPkgFlag_OverwritePermissions, _IFPkgFlag_PackageDependency, 
+                       _IFPkgFlag_InstallFat, _IFPkgFlag_IsOperatingSystem, _IFPkgFlag_IsRequired, 
+                       _IFPkgFlag_OverwritePermissions, _IFPkgFlag_PackageDependency, 
                        _IFPkgFlag_PackageList, _IFPkgFlag_PackageLocation, _IFPkgFlag_PackageSelection, 
                        _IFPkgFlag_ProxyPackageLocation, _IFPkgFlag_Relocatable, _IFPkgFlag_RestartAction, 
                        _IFPkgFlag_RootVolumeOnly, _IFPkgFlag_SuppressWarnings, _IFPkgFlag_Uninstallable, 
@@ -203,14 +209,14 @@ exports:
                        IFRequirementsEvaluatorResult, IFRunnerProxy, IFScriptElement, 
                        IFSearch, IFSearchComponent, IFSearchContext, IFSearchLocator, 
                        IFSearchPathMapper, IFSearchScript, IFSecEquivalence, IFSession, 
-                       IFSessionState, IFSetupDeferredFilesElement, IFShowFileInstallAction, 
-                       IFSizeTransformer, IFTaskElement, IFUnloadKextInstallAction, 
-                       IFUpgradeHints, IFValidatePayloadElement, IFVersionUtilities, 
-                       IFVolumeCheckRequirement, IFVolumeSetupElement, IFWriteCookieInstallAction, 
-                       IFWriteFilesToRemoveElement, IFWriteReceiptElement, IFXARArchive, 
-                       IFXARFileEntry, PFCommon, PFModule, PFPKReceipt, PFPackage, 
-                       PFPackageFileParser, PFReceipt, PFScript, PathTree, SUPkgMetadata, 
-                       TreeEnumerator, TreeNode, _Node ]
+                       IFSessionState, IFShowFileInstallAction, IFSizeTransformer, 
+                       IFTaskElement, IFUnloadKextInstallAction, IFUpgradeHints, 
+                       IFValidatePayloadElement, IFVersionUtilities, IFVolumeCheckRequirement, 
+                       IFVolumeSetupElement, IFWriteCookieInstallAction, IFWriteFilesToRemoveElement, 
+                       IFWriteReceiptElement, IFXARArchive, IFXARFileEntry, PFCommon, 
+                       PFModule, PFPKReceipt, PFPackage, PFPackageFileParser, PFReceipt, 
+                       PFScript, PathTree, SUPkgMetadata, TreeEnumerator, TreeNode, 
+                       _Node ]
     objc-ivars:      [ FFPackage._archive, FFPackage._bom, FFPackage._bomBuffer, 
                        FFPackage._bomEnum, FFPackage._bomStorage, FFPackage._certificateIdentity, 
                        FFPackage._dependencies, FFPackage._fileEnumeratorLock, FFPackage._formatVersion, 
@@ -295,8 +301,8 @@ exports:
                        IFJS_IFDContext.currentBundle, IFJS_IFDContext.currentChoice, 
                        IFJS_IFDContext.destinationPath, IFJS_IFDContext.distributionController, 
                        IFJS_IFDContext.distributionScriptsPath, IFJS_IFDContext.document, 
-                       IFJS_IFDContext.evaluatorMetaInfo, IFJS_IFDContext.result, 
-                       IFJS_IFDContext.searchContext, IFJS_IFDContext.systemVersionToBeInstalled, 
+                       IFJS_IFDContext.evaluatorMetaInfo, IFJS_IFDContext.legacySystemVersion, 
+                       IFJS_IFDContext.result, IFJS_IFDContext.searchContext, IFJS_IFDContext.systemVersionToBeInstalled, 
                        IFJS_IFDContext.target, IFJS_IFDContext.targetContentIgnored, 
                        IFLocator.context, IFLocator.lock, IFMakeTempDirsElement._tempPath, 
                        IFMapScriptOnly._packageController, IFMapScriptOnly._scriptType, 

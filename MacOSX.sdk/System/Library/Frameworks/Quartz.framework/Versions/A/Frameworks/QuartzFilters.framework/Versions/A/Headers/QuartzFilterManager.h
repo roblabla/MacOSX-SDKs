@@ -7,6 +7,8 @@
 
 #import "QuartzFilter.h"
 
+API_UNAVAILABLE_BEGIN(ios)
+
 extern Boolean globalUpdateOK;
 
 @interface QuartzFilterView : NSView
@@ -68,3 +70,4 @@ extern NSString* kQuartzFilterManagerDidRemoveFilterNotification;
 extern NSString* kQuartzFilterManagerDidModifyFilterNotification;
 extern NSString* kQuartzFilterManagerDidSelectFilterNotification;
 
+API_UNAVAILABLE_END

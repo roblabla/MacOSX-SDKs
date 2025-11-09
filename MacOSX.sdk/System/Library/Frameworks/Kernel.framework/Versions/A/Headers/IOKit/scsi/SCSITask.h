@@ -25,11 +25,17 @@
 #ifndef _IOKIT_SCSI_TASK_H_
 #define _IOKIT_SCSI_TASK_H_
 
+#include <TargetConditionals.h>
 
+#if TARGET_OS_DRIVERKIT
+typedef uint8_t     UInt8;
+typedef uint64_t    UInt64;
+#else
 #if KERNEL
 #include <IOKit/IOTypes.h>
 #else
 #include <CoreFoundation/CoreFoundation.h>
+#endif
 #endif
 
 
@@ -421,10 +427,13 @@ enum
 };
 
 
-#if defined(KERNEL) && defined(__cplusplus)
-
 /* Libkern includes */
+#if defined(KERNEL) && defined(__cplusplus)
+#if TARGET_OS_DRIVERKIT
+#include <DriverKit/OSObject.h>
+#else
 #include <libkern/c++/OSObject.h>
+#endif
 
 
 /*!

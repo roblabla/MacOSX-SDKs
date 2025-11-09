@@ -53,7 +53,7 @@ struct kern_work_interval_args {
 
 struct kern_work_interval_create_args {
 	uint64_t        wica_id;          /* out param */
-	uint32_t        wica_port;        /* out param */
+	mach_port_name_t wica_port;        /* out param */
 	uint32_t        wica_create_flags;
 };
 
@@ -63,6 +63,9 @@ struct kern_work_interval_create_args {
  */
 extern kern_return_t
 kern_work_interval_create(thread_t thread, struct kern_work_interval_create_args *create_params);
+
+extern kern_return_t
+kern_work_interval_get_flags_from_port(mach_port_name_t port_name, uint32_t*flags);
 
 extern kern_return_t
 kern_work_interval_destroy(thread_t thread, uint64_t work_interval_id);

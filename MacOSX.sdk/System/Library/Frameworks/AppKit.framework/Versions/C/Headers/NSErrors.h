@@ -10,7 +10,7 @@
 @class NSString;
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 // The following strings are the names of exceptions the AppKit can raise
 

@@ -49,13 +49,14 @@ typedef function_table_entry   *function_table_t;
 #endif /* AUTOTEST */
 
 #ifndef	audit_triggers_MSG_COUNT
-#define	audit_triggers_MSG_COUNT	1
+#define	audit_triggers_MSG_COUNT	2
 #endif	/* audit_triggers_MSG_COUNT */
 
 #include <mach/std_types.h>
 #include <mach/mig.h>
 #include <mach/mig.h>
 #include <mach/mach_types.h>
+#include <mach/audit_triggers_types.h>
 
 #ifdef __BeforeMigServerHeader
 __BeforeMigServerHeader
@@ -77,6 +78,20 @@ kern_return_t audit_triggers
 (
 	mach_port_t audit_port,
 	int flags
+);
+
+/* SimpleRoutine audit_analytics */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+MIG_SERVER_ROUTINE
+kern_return_t audit_analytics
+(
+	mach_port_t audit_port,
+	string_t caller_id,
+	string_t caller_name
 );
 
 #ifdef	mig_external
@@ -105,7 +120,7 @@ extern const struct audit_triggers_subsystem {
 	unsigned int	maxsize;	/* Max msg size */
 	vm_address_t	reserved;	/* Reserved */
 	struct routine_descriptor	/*Array of routine descriptors */
-		routine[1];
+		routine[2];
 } audit_triggers_subsystem;
 
 /* typedefs for all requests */
@@ -124,6 +139,23 @@ extern const struct audit_triggers_subsystem {
 #ifdef  __MigPackStructs
 #pragma pack(pop)
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_msg_type_number_t caller_idOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t caller_idCnt;
+		char caller_id[1024];
+		mach_msg_type_number_t caller_nameOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t caller_nameCnt;
+		char caller_name[1024];
+	} __Request__audit_analytics_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
 #endif /* !__Request__audit_triggers_subsystem__defined */
 
 
@@ -133,6 +165,7 @@ extern const struct audit_triggers_subsystem {
 #define __RequestUnion__audit_triggers_subsystem__defined
 union __RequestUnion__audit_triggers_subsystem {
 	__Request__audit_triggers_t Request_audit_triggers;
+	__Request__audit_analytics_t Request_audit_analytics;
 };
 #endif /* __RequestUnion__audit_triggers_subsystem__defined */
 /* typedefs for all replies */
@@ -151,6 +184,18 @@ union __RequestUnion__audit_triggers_subsystem {
 #ifdef  __MigPackStructs
 #pragma pack(pop)
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+	} __Reply__audit_analytics_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
 #endif /* !__Reply__audit_triggers_subsystem__defined */
 
 
@@ -160,12 +205,14 @@ union __RequestUnion__audit_triggers_subsystem {
 #define __ReplyUnion__audit_triggers_subsystem__defined
 union __ReplyUnion__audit_triggers_subsystem {
 	__Reply__audit_triggers_t Reply_audit_triggers;
+	__Reply__audit_analytics_t Reply_audit_analytics;
 };
 #endif /* __ReplyUnion__audit_triggers_subsystem__defined */
 
 #ifndef subsystem_to_name_map_audit_triggers
 #define subsystem_to_name_map_audit_triggers \
-    { "audit_triggers", 123 }
+    { "audit_triggers", 123 },\
+    { "audit_analytics", 124 }
 #endif
 
 #ifdef __AfterMigServerHeader

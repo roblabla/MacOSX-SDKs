@@ -2,7 +2,7 @@
 //  INRestaurantResolutionResult.h
 //  Intents
 //
-//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2020 Apple Inc. All rights reserved.
 //
 //  This API requires you to work with Apple Maps before your application can use it. For information on how to get started, please go to MapsConnect.
 //
@@ -15,7 +15,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 API_AVAILABLE(ios(10.0))
-API_UNAVAILABLE(watchos, macosx)
+API_UNAVAILABLE(macos, watchos, tvos)
 @interface INRestaurantResolutionResult : INIntentResolutionResult
 
 // This resolution result is for when the app extension wants to proceed, with a given restaurant. The resolvedRestaurant can be different than the original restaurant. This allows app extensions to apply business logic constraints.

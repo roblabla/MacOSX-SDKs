@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCapture/AVCaptureSessionPreset.h>)
 /*
     File:  AVCaptureSessionPreset.h
  
@@ -160,3 +161,7 @@ AVF_EXPORT AVCaptureSessionPreset const AVCaptureSessionPresetiFrame1280x720 API
 AVF_EXPORT AVCaptureSessionPreset const AVCaptureSessionPresetInputPriority API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCapture/AVCaptureSessionPreset.h>
+#endif

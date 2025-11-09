@@ -100,7 +100,7 @@
 @end
 
 @interface CSSearchableItemAttributeSet (CSItemProvider)
-// The string value of type identifer can only be used by one providerTypeIdentifier array.
+// The string value of type identifier can only be used by one providerTypeIdentifier array.
 
 // An array of types identifiers that owner can provided a NSData representation.
 @property(nullable, copy) NSArray<NSString *> *providerDataTypeIdentifiers CS_AVAILABLE(10_13, 11_0) CS_TVOS_UNAVAILABLE;

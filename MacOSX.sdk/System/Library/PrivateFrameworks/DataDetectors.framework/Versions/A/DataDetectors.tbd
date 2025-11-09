@@ -1,18 +1,25 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 8FC033A8-7159-375D-A545-1D2762AF5B34' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           FA673AC7-9375-3E7B-AC12-093FC55F5A2D
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           4E15126B-985B-3279-B315-003F442DA3D3
 install-name:    '/System/Library/PrivateFrameworks/DataDetectors.framework/Versions/A/DataDetectors'
-current-version: 409
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 422
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _DDActionLogHandle, _DDActionsManagerDidRunActionNotification, 
-                       _DDActionsManagerWillRunActionNotification, _DDHighlightCreateWithRectsInVisibleRect, 
-                       _DDHighlightCreateWithRectsInVisibleRectWithStyle, _DDHighlightCreateWithRectsInVisibleRectWithStyleAndDirection, 
-                       _DDHighlightGetActionRect, _DDHighlightGetBoundingRect, _DDHighlightGetLayerWithContext, 
-                       _DDHighlightGetTrackingRects, _DDHighlightPointIsOnButton, 
-                       _DDHighlightPointIsOnHighlight, _DDHighlightSetButtonPressed, 
-                       _DDHighlightWantsRollover, _DDMapsGetBestAddressForResults, 
+                       _DDActionsManagerWillRunActionNotification, _DDHighlightCreateWithRectsInVisibleRectWithStyle, 
+                       _DDHighlightCreateWithRectsInVisibleRectWithStyleAndDirection, 
+                       _DDHighlightCreateWithRectsInVisibleRectWithStyleScaleAndDirection, 
+                       _DDHighlightGetActionRect, _DDHighlightGetAimFrameRect, _DDHighlightGetBoundingRect, 
+                       _DDHighlightGetLayerWithContext, _DDHighlightGetTrackingRects, 
+                       _DDHighlightPointIsOnButton, _DDHighlightPointIsOnHighlight, 
+                       _DDHighlightSetButtonPressed, _DDHighlightWantsRollover, _DDMapsGetBestAddressForResults, 
                        _DDMapsGetDictionaryForFullAddress, _DDMapsURLStringForAddressResult, 
                        _DDMapsURLStringForString, _DDMenuItemGetActionUTI, _DDServiceLogHandle, 
                        _DDUILogHandle, __DDUseRTLLayout, _dd_can_connect_to_service, 
@@ -27,6 +34,7 @@ exports:
                        _kDataDetectorsActionUTITrackShipment, _kDataDetectorsActionUTIURLOpen, 
                        _kDataDetectorsActionUTIURLQuickLook, _kDataDetectorsAllResultsKey, 
                        _kDataDetectorsAuthorAsEmailAddressKey, _kDataDetectorsAuthorAsStringKey, 
+                       _kDataDetectorsAuthorNameComponentsKey, _kDataDetectorsAuthorPictureKey, 
                        _kDataDetectorsCoreSpotlightUniqueIdentifier, _kDataDetectorsEventTitleKey, 
                        _kDataDetectorsHostUUIDKey, _kDataDetectorsLeadingTextKey, 
                        _kDataDetectorsMatchedStringKey, _kDataDetectorsReferenceDateKey, 

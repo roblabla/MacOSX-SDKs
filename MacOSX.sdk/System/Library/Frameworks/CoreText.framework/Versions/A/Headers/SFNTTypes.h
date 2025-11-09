@@ -19,6 +19,9 @@ typedef SInt32 Fixed;
 extern "C" {
 #endif
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wfour-char-constants"
+
 #pragma pack(push, 2)
 
 struct sfntDirectoryEntry {
@@ -472,6 +475,8 @@ struct FontVariation {
 typedef struct FontVariation            FontVariation;
 
 #pragma pack(pop)
+
+#pragma clang diagnostic pop
 
 #ifdef __cplusplus
 }

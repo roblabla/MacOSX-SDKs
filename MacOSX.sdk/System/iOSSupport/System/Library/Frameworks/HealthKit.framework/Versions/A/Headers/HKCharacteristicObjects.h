@@ -52,3 +52,14 @@ HK_EXTERN API_AVAILABLE(ios(10.0), watchos(3.0))
 @property (readonly) HKWheelchairUse wheelchairUse;
 
 @end
+
+/*!
+ @class     HKActivityMoveModeObject
+ @abstract  A wrapper object for HKActivityMoveMode enumeration.
+ */
+HK_EXTERN API_AVAILABLE(ios(14.0), watchos(7.0))
+@interface HKActivityMoveModeObject : NSObject <NSCopying, NSSecureCoding>
+
+@property (readonly) HKActivityMoveMode activityMoveMode;
+
+@end

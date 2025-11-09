@@ -1,11 +1,28 @@
---- !tapi-tbd-v3
-archs:           [ x86_64, x86_64h ]
-uuids:           [ 'x86_64: 209F179F-4FEA-38D0-8DEB-F829CAB04A82', 'x86_64: 209F179F-4FEA-38D0-8DEB-F829CAB04A82', 
-                   'x86_64h: ADB2A9A2-A79E-317A-8DCF-3C5BD8A9D663', 'x86_64h: ADB2A9A2-A79E-317A-8DCF-3C5BD8A9D663' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
+                   arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           98BABDE6-3EE4-30FF-BEA9-24FF7792226C
+  - target:          x86_64-maccatalyst
+    value:           98BABDE6-3EE4-30FF-BEA9-24FF7792226C
+  - target:          x86_64h-macos
+    value:           1199A150-ABAF-30D1-B37E-9F8F15E00929
+  - target:          x86_64h-maccatalyst
+    value:           1199A150-ABAF-30D1-B37E-9F8F15E00929
+  - target:          arm64-macos
+    value:           A46D52C3-DE71-334E-9224-D9E660C55074
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           99F0D2AF-07E0-3E2F-8020-D4F7B4562A9B
+  - target:          arm64e-maccatalyst
+    value:           99F0D2AF-07E0-3E2F-8020-D4F7B4562A9B
 install-name:    '/usr/lib/libcompression.dylib'
-exports:         
-  - archs:           [ x86_64, x86_64h ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos, x86_64h-macos, x86_64-maccatalyst, 
+                       x86_64h-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _compression_decode_buffer, _compression_decode_scratch_buffer_size, 
                        _compression_encode_buffer, _compression_encode_scratch_buffer_size, 
                        _compression_stream_destroy, _compression_stream_get_decode_state_size, 

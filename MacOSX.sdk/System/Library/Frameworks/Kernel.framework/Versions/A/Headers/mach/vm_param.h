@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2006 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2000-2020 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -160,6 +160,11 @@ mach_vm_round_page_overflow(mach_vm_offset_t in, mach_vm_offset_t *out)
 #define trunc_page_32(x) ((uint32_t)(x) & ~((uint32_t)PAGE_MASK))
 #define round_page_64(x) (((uint64_t)(x) + PAGE_MASK_64) & ~((uint64_t)PAGE_MASK_64))
 #define trunc_page_64(x) ((uint64_t)(x) & ~((uint64_t)PAGE_MASK_64))
+
+#define round_page_mask_32(x, mask) (((uint32_t)(x) + (mask)) & ~((uint32_t)(mask)))
+#define trunc_page_mask_32(x, mask) ((uint32_t)(x) & ~((uint32_t)(mask)))
+#define round_page_mask_64(x, mask) (((uint64_t)(x) + (mask)) & ~((uint64_t)(mask)))
+#define trunc_page_mask_64(x, mask) ((uint64_t)(x) & ~((uint64_t)(mask)))
 
 /*
  *      Enable the following block to find uses of xxx_32 macros that should

@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 45182A8D-516D-30EF-9D8B-3DB35419A97D' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           32EA5CEB-1E17-3E48-9B94-43327EA26689
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           B44E3A11-450C-395B-99A0-DB7DE58B5B3E
 install-name:    '/System/Library/PrivateFrameworks/ScreenSharing.framework/Versions/A/ScreenSharing'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _AskToCancelFileActiveFileTransfers, _AuthGetRandomBytes, 
                        _GetFlatInterfaceList, _InterfaceItemToSocketAddress, _RDCreateSemaphore, 
                        _RDCreateTask, _RDDeleteSemaphore, _RDMutexDestroy, _RDMutexInit, 
@@ -71,8 +77,7 @@ exports:
                        _kSSVideoEncoding_Zlib, _mt_log_screensharing_AppleIDSessionEnded, 
                        _mt_log_screensharing_addressResolutionEnded, _sockaddrEquivalent, 
                        _sockaddrPort, _sockaddrStorageEqual, _sockaddrStorageEquivalent ]
-    objc-classes:    [ BlockedInvitersManager, BlockedInvitersManagerBase, BlockedInvitersManagerYosemite, 
-                       DNSResolver, NWConnectionManager, ODHelper, PerformSelectorOnThreadManager, 
+    objc-classes:    [ DNSResolver, NWConnectionManager, ODHelper, PerformSelectorOnThreadManager, 
                        RDMutex, RDSemaphore, SSAddress, SSAddressResolver, SSApplication, 
                        SSConnectionAddressViewController, SSConnectionAuthenticationGuestlessViewController, 
                        SSConnectionAuthenticationVNCViewController, SSConnectionAuthenticationViewController, 

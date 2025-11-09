@@ -48,7 +48,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  @abstract The MTLDevice used to create Metal objects
  @discussion This must be explicitly set by the application unless it was passed into the initializer. Defaults to nil
   */
-@property (nonatomic, nullable) id <MTLDevice> device;
+@property (nonatomic, retain, nullable) id <MTLDevice> device;
 
 /*!
  @property currentDrawable

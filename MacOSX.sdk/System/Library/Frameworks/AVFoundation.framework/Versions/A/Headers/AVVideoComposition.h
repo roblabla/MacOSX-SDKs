@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVVideoComposition.h>)
 /*
     File:  AVVideoComposition.h
 
@@ -155,6 +156,8 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
  @discussion
 	The returned AVVideoComposition will cause the specified handler block to be called to filter each frame of the asset's first enabled video track. The handler block should use the properties of the provided AVAsynchronousCIImageFilteringRequest and respond using finishWithImage:context: with a "filtered" new CIImage (or the provided source image for no affect). In the event of an error, respond to the request using finishWithError:. The error can be observed via AVPlayerItemFailedToPlayToEndTimeNotification, see AVPlayerItemFailedToPlayToEndTimeErrorKey in notification payload.
  
+	NOTE: The returned AVVideoComposition's properties are private and support only CIFilter-based operations. Mutations are not supported, either in the values of properties of the AVVideoComposition itself or in its private instructions. If rotations or other transformations are desired, they must be accomplished via the application of CIFilters during the execution of your specified handler.
+
 	The video composition will also have the following values for its properties:
 
 		- The original timing of the asset's first enabled video track will be used.
@@ -815,3 +818,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCore/AVVideoComposition.h>
+#endif

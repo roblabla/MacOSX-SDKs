@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 2EB13E1C-C6E5-3BC3-A25D-DBF81DB2424C' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           46449170-0889-30A3-A413-C4827870C77C
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           140D84FA-F7B0-30B9-843A-BD924FE6BE82
 install-name:    '/System/Library/Frameworks/Collaboration.framework/Versions/A/Collaboration'
-current-version: 81
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 84
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _SidebarContacts, _SidebarNetworkGroups, _SidebarNetworkUsers, 
                        _SidebarUsersGroups, _SortABGroupsByName, _SortABPeopleByFirstName, 
                        _SortIdentitiesByFirstName ]

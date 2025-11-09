@@ -1,8 +1,28 @@
 /*
-	SFCertificateTrustPanel.h
-	SecurityInterface
-	Copyright (c) 2002-2004 Apple Computer, Inc.
-	All rights reserved.
+ * Copyright (c) 2002-2020 Apple Inc. All Rights Reserved.
+ *
+ * @APPLE_LICENSE_HEADER_START@
+ *
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this
+ * file.
+ *
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
+ * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
+ * limitations under the License.
+ *
+ * @APPLE_LICENSE_HEADER_END@
+ */
+
+/*!
+    @header SFCertificateTrustPanel
 */
 
 #ifndef _SFCERTIFICATETRUSTPANEL_H_
@@ -11,11 +31,14 @@
 #import <Cocoa/Cocoa.h>
 #import <SecurityInterface/SFCertificatePanel.h>
 #include <Security/SecTrust.h>
+#import <Availability.h>
+
+API_UNAVAILABLE_BEGIN(ios, tvos, watchos, macCatalyst)
 
 @class SFCertificateView;
 
 /*!
-    @class SFCertificateTrustPanel 
+    @class SFCertificateTrustPanel
     @abstract SFCertificateTrustPanel is a panel and sheet interface that allows a user to make trust decisions
 	when one or more certificates involved in an operation are invalid or cannot be verified. It should be used
 	whenever confirmation is required before proceeding with a certificate-related operation. It can also be
@@ -46,7 +69,7 @@
 	@discussion If your application can display multiple SFCertificateTrustPanels at once,
 	you should allocate (alloc) and initialize (init) separate object instances instead of using this class method.
 */
-+ (SFCertificateTrustPanel *)sharedCertificateTrustPanel;
++ (SFCertificateTrustPanel *)sharedCertificateTrustPanel API_AVAILABLE(macos(10.3)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 /*!
     @method runModalForTrust:message:
@@ -57,7 +80,7 @@
 	@param trust A trust reference, previously created with SecTrustCreateWithCertificates (see <Security/SecTrust.h>).
     @param message Client-defined message string to display in the panel.
 */
-- (NSInteger)runModalForTrust:(SecTrustRef)trust message:(NSString *)message;
+- (NSInteger)runModalForTrust:(SecTrustRef)trust message:(NSString *)message API_AVAILABLE(macos(10.3)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 /*!
 	@method beginSheetForWindow:trust:message:modalDelegate:didEndSelector:contextInfo:
@@ -74,7 +97,7 @@
     @param trust A trust reference, previously created with SecTrustCreateWithCertificates (see <Security/SecTrust.h>).
     @param message Client-defined message string to display in the panel.
 */
-- (void)beginSheetForWindow:(NSWindow *)docWindow modalDelegate:(id)delegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo trust:(SecTrustRef)trust message:(NSString *)message;
+- (void)beginSheetForWindow:(NSWindow *)docWindow modalDelegate:(id)delegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo trust:(SecTrustRef)trust message:(NSString *)message API_AVAILABLE(macos(10.3)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 /*!
     @method setInformativeText:
@@ -83,15 +106,17 @@
 	@discussion By default, informative text describing the current certificate trust status is displayed.
 		Call this method only if your application needs to customize the displayed informative text.
 */
-- (void)setInformativeText:(NSString *)informativeText;
+- (void)setInformativeText:(NSString *)informativeText API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 /*!
     @method informativeText
 	@abstract Returns the informative text currently displayed in the SFCertificateTrustPanel.
 */
-- (NSString *)informativeText;
+- (NSString *)informativeText API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 @end
+
+API_UNAVAILABLE_END
 
 #endif /* !_SFCERTIFICATETRUSTPANEL_H_ */
 

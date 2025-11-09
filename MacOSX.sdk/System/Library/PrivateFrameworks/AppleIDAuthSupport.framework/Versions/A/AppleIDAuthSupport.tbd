@@ -1,11 +1,25 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 102C0847-454A-371F-816C-73308569E74E', 'x86_64: 102C0847-454A-371F-816C-73308569E74E' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           4B91DE9C-D273-3783-94FF-FB4DF7B4D18B
+  - target:          x86_64-maccatalyst
+    value:           4B91DE9C-D273-3783-94FF-FB4DF7B4D18B
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           D392CB5C-F7D5-3181-AABA-CD0948109B2C
+  - target:          arm64e-maccatalyst
+    value:           D392CB5C-F7D5-3181-AABA-CD0948109B2C
 install-name:    '/System/Library/PrivateFrameworks/AppleIDAuthSupport.framework/Versions/A/AppleIDAuthSupport'
-current-version: 90.0.1
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 98
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _AppleIDAuthSupportAuthenticate, _AppleIDAuthSupportCopyAppNewAppTokensWithAuthAttribute, 
                        _AppleIDAuthSupportCopyAppToken, _AppleIDAuthSupportCopyAppTokens, 
                        _AppleIDAuthSupportCopyAppTokensOptions, _AppleIDAuthSupportCopyContextAppTokens, 
@@ -24,10 +38,10 @@ exports:
                        _AppleIDAuthSupportTokenUpdate, __AppleIDAuthSupportCreateDecryptedData, 
                        __AppleIDAuthSupportCreateEncryptedData, __AppleIDAuthSupportCreateToken, 
                        __AppleIDAuthSupportGSSetRPC, _kAppleIDAuthSupportA2k, _kAppleIDAuthSupportActionData, 
-                       _kAppleIDAuthSupportAlternateDSID, _kAppleIDAuthSupportAppleIClientID, 
-                       _kAppleIDAuthSupportAppleITeamID, _kAppleIDAuthSupportApplication, 
-                       _kAppleIDAuthSupportAuthAttribute, _kAppleIDAuthSupportB, 
-                       _kAppleIDAuthSupportBuddyML, _kAppleIDAuthSupportChecksum, 
+                       _kAppleIDAuthSupportAdditionalHeaders, _kAppleIDAuthSupportAlternateDSID, 
+                       _kAppleIDAuthSupportAppleIClientID, _kAppleIDAuthSupportAppleITeamID, 
+                       _kAppleIDAuthSupportApplication, _kAppleIDAuthSupportAuthAttribute, 
+                       _kAppleIDAuthSupportB, _kAppleIDAuthSupportBuddyML, _kAppleIDAuthSupportChecksum, 
                        _kAppleIDAuthSupportClearData, _kAppleIDAuthSupportClientInfo, 
                        _kAppleIDAuthSupportClientProvidedData, _kAppleIDAuthSupportCompanionClientInfo, 
                        _kAppleIDAuthSupportCookie, _kAppleIDAuthSupportData, _kAppleIDAuthSupportDisregardChannelBindings, 

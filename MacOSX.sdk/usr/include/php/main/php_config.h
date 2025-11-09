@@ -510,10 +510,10 @@
 #define HAVE_COMPILER_C99_VLA 1
 
 /* whether __cpuid_count is available */
-#define HAVE_CPUID_COUNT 1
+/* #undef HAVE_CPUID_COUNT */
 
 /* Define to 1 if you have the <cpuid.h> header file. */
-#define HAVE_CPUID_H 1
+/* #undef HAVE_CPUID_H */
 
 /* Define to 1 if you have the `CreateProcess' function. */
 /* #undef HAVE_CREATEPROCESS */
@@ -677,7 +677,7 @@
 #define HAVE_FCNTL_H 1
 
 /* Define to 1 if you have the `finite' function. */
-#define HAVE_FINITE 1
+/* #undef HAVE_FINITE */
 
 /* Define to 1 if you have the `flock' function. */
 #define HAVE_FLOCK 1
@@ -707,7 +707,7 @@
 /* #undef HAVE_FPSETPREC */
 
 /* whether FPU control word can be manipulated by inline assembler */
-#define HAVE_FPU_INLINE_ASM_X86 1
+/* #undef HAVE_FPU_INLINE_ASM_X86 */
 
 /* whether floatingpoint.h defines fp_except */
 /* #undef HAVE_FP_EXCEPT */
@@ -950,7 +950,7 @@
 /* #undef HAVE_IMAP_SSL */
 
 /* Define to 1 if you have the <immintrin.h> header file. */
-#define HAVE_IMMINTRIN_H 1
+/* #undef HAVE_IMMINTRIN_H */
 
 /* */
 #define HAVE_INET_ATON 1
@@ -1118,7 +1118,7 @@
 /* #undef HAVE_LIBPAM */
 
 /* Define to 1 if you have the `pq' library (-lpq). */
-#define HAVE_LIBPQ 1
+/* #undef HAVE_LIBPQ */
 
 /* */
 /* #undef HAVE_LIBRARYMANAGER_H */
@@ -1285,7 +1285,7 @@
 #define HAVE_NL_LANGINFO 1
 
 /* Define to 1 if you have the <nmmintrin.h> header file. */
-#define HAVE_NMMINTRIN_H 1
+/* #undef HAVE_NMMINTRIN_H */
 
 /* */
 /* #undef HAVE_NSLDAP */
@@ -1367,7 +1367,7 @@
 /* #undef HAVE_PDO_FIREBIRD */
 
 /* Whether to build PostgreSQL for PDO support or not */
-#define HAVE_PDO_PGSQL 1
+/* #undef HAVE_PDO_PGSQL */
 
 /* */
 /* #undef HAVE_PDO_SQLITELIB */
@@ -1376,28 +1376,28 @@
 #define HAVE_PERROR 1
 
 /* Whether to build PostgreSQL support or not */
-#define HAVE_PGSQL 1
+/* #undef HAVE_PGSQL */
 
 /* Whether libpq is compiled with --enable-multibyte */
-#define HAVE_PGSQL_WITH_MULTIBYTE_SUPPORT 1
+/* #undef HAVE_PGSQL_WITH_MULTIBYTE_SUPPORT */
 
 /* PostgreSQL 7.4 or later */
-#define HAVE_PGTRANSACTIONSTATUS 1
+/* #undef HAVE_PGTRANSACTIONSTATUS */
 
 /* Whether to have pg_config.h */
-#define HAVE_PG_CONFIG_H 1
+/* #undef HAVE_PG_CONFIG_H */
 
 /* PostgreSQL 9.3 or later */
-#define HAVE_PG_LO64 1
+/* #undef HAVE_PG_LO64 */
 
 /* PostgreSQL 8.1 or later */
-#define HAVE_PG_LO_CREATE 1
+/* #undef HAVE_PG_LO_CREATE */
 
 /* PostgreSQL 8.4 or later */
-#define HAVE_PG_LO_IMPORT_WITH_OID 1
+/* #undef HAVE_PG_LO_IMPORT_WITH_OID */
 
 /* PostgreSQL 8.3 or later */
-#define HAVE_PG_LO_TRUNCATE 1
+/* #undef HAVE_PG_LO_TRUNCATE */
 
 /* */
 /* #undef HAVE_PHPDBG */
@@ -1424,76 +1424,76 @@
 #define HAVE_POSIX_READDIR_R 1
 
 /* PostgreSQL 7.0.x or later */
-#define HAVE_PQCLIENTENCODING 1
+/* #undef HAVE_PQCLIENTENCODING */
 
 /* Broken libpq under windows */
-#define HAVE_PQCMDTUPLES 1
+/* #undef HAVE_PQCMDTUPLES */
 
 /* PostgreSQL 7.2.0 or later */
-#define HAVE_PQESCAPE 1
+/* #undef HAVE_PQESCAPE */
 
 /* PostgreSQL 9.0 or later */
-#define HAVE_PQESCAPELITERAL 1
+/* #undef HAVE_PQESCAPELITERAL */
 
 /* PostgreSQL 8.1.4 or later */
-#define HAVE_PQESCAPE_BYTEA_CONN 1
+/* #undef HAVE_PQESCAPE_BYTEA_CONN */
 
 /* PostgreSQL 8.1.4 or later */
-#define HAVE_PQESCAPE_CONN 1
+/* #undef HAVE_PQESCAPE_CONN */
 
 /* PostgreSQL 7.4 or later */
-#define HAVE_PQEXECPARAMS 1
+/* #undef HAVE_PQEXECPARAMS */
 
 /* PostgreSQL 7.4 or later */
-#define HAVE_PQEXECPREPARED 1
+/* #undef HAVE_PQEXECPREPARED */
 
 /* PostgreSQL 7.4 or later */
-#define HAVE_PQFREEMEM 1
+/* #undef HAVE_PQFREEMEM */
 
 /* PostgreSQL 7.4 or later */
-#define HAVE_PQFTABLE 1
+/* #undef HAVE_PQFTABLE */
 
 /* PostgreSQL 7.4 or later */
-#define HAVE_PQGETCOPYDATA 1
+/* #undef HAVE_PQGETCOPYDATA */
 
 /* Older PostgreSQL */
-#define HAVE_PQOIDVALUE 1
+/* #undef HAVE_PQOIDVALUE */
 
 /* PostgreSQL 7.4 or later */
-#define HAVE_PQPARAMETERSTATUS 1
+/* #undef HAVE_PQPARAMETERSTATUS */
 
 /* PostgreSQL 7.4 or later */
-#define HAVE_PQPREPARE 1
+/* #undef HAVE_PQPREPARE */
 
 /* PostgreSQL 7.4 or later */
-#define HAVE_PQPROTOCOLVERSION 1
+/* #undef HAVE_PQPROTOCOLVERSION */
 
 /* PostgreSQL 7.4 or later */
-#define HAVE_PQPUTCOPYDATA 1
+/* #undef HAVE_PQPUTCOPYDATA */
 
 /* PostgreSQL 7.4 or later */
-#define HAVE_PQPUTCOPYEND 1
+/* #undef HAVE_PQPUTCOPYEND */
 
 /* PostgreSQL 7.4 or later */
-#define HAVE_PQRESULTERRORFIELD 1
+/* #undef HAVE_PQRESULTERRORFIELD */
 
 /* PostgreSQL 7.4 or later */
-#define HAVE_PQSENDPREPARE 1
+/* #undef HAVE_PQSENDPREPARE */
 
 /* PostgreSQL 7.4 or later */
-#define HAVE_PQSENDQUERYPARAMS 1
+/* #undef HAVE_PQSENDQUERYPARAMS */
 
 /* PostgreSQL 7.4 or later */
-#define HAVE_PQSENDQUERYPREPARED 1
+/* #undef HAVE_PQSENDQUERYPREPARED */
 
 /* PostgreSQL 7.4 or later */
-#define HAVE_PQSETERRORVERBOSITY 1
+/* #undef HAVE_PQSETERRORVERBOSITY */
 
 /* PostgreSQL 7.0.x or later */
-#define HAVE_PQSETNONBLOCKING 1
+/* #undef HAVE_PQSETNONBLOCKING */
 
 /* PostgreSQL 7.3.0 or later */
-#define HAVE_PQUNESCAPEBYTEA 1
+/* #undef HAVE_PQUNESCAPEBYTEA */
 
 /* do we have prctl? */
 /* #undef HAVE_PRCTL */
@@ -2039,7 +2039,7 @@
 #define HAVE_TIME_H 1
 
 /* Define to 1 if you have the <tmmintrin.h> header file. */
-#define HAVE_TMMINTRIN_H 1
+/* #undef HAVE_TMMINTRIN_H */
 
 /* whether you have tm_gmtoff in struct tm */
 #define HAVE_TM_GMTOFF 1
@@ -2251,7 +2251,7 @@
 #define MYSQLND_SSL_SUPPORTED 1
 
 /* */
-#define NDBM_INCLUDE_FILE "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.Internal.sdk/usr/include/ndbm.h"
+#define NDBM_INCLUDE_FILE "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.Internal.sdk/usr/include/ndbm.h"
 
 /* Define to 1 if your C compiler doesn't accept -c and -o together. */
 /* #undef NO_MINUS_C_MINUS_O */
@@ -2296,7 +2296,7 @@
 /* #undef PHPDBG_DEBUG */
 
 /* PHP build date */
-#define PHP_BUILD_DATE "2019-08-13"
+#define PHP_BUILD_DATE "2020-10-19"
 
 /* Define if your system has fork/vfork/CreateProcess */
 #define PHP_CAN_SUPPORT_PROC_OPEN 1
@@ -2314,7 +2314,7 @@
 #define PHP_HAVE_AVX2_INSTRUCTIONS 0
 
 /* Whether the compiler supports avx instructions */
-#define PHP_HAVE_AVX_INSTRUCTIONS 1
+#define PHP_HAVE_AVX_INSTRUCTIONS 0
 
 /* Whether the compiler supports __builtin_clz */
 #define PHP_HAVE_BUILTIN_CLZ 1
@@ -2323,7 +2323,7 @@
 #define PHP_HAVE_BUILTIN_CPU_INIT 0
 
 /* Whether the compiler supports __builtin_cpu_supports */
-#define PHP_HAVE_BUILTIN_CPU_SUPPORTS 1
+#define PHP_HAVE_BUILTIN_CPU_SUPPORTS 0
 
 /* Whether the compiler supports __builtin_ctzl */
 #define PHP_HAVE_BUILTIN_CTZL 1
@@ -2353,10 +2353,10 @@
 #define PHP_HAVE_BUILTIN_SSUBL_OVERFLOW 1
 
 /* Whether the compiler supports sse4.2 instructions */
-#define PHP_HAVE_SSE4_2_INSTRUCTIONS 1
+#define PHP_HAVE_SSE4_2_INSTRUCTIONS 0
 
 /* Whether the compiler supports ssse3 instructions */
-#define PHP_HAVE_SSSE3_INSTRUCTIONS 1
+#define PHP_HAVE_SSSE3_INSTRUCTIONS 0
 
 /* Checked for stdint types */
 #define PHP_HAVE_STDINT_TYPES 1
@@ -2365,7 +2365,7 @@
 /* #undef PHP_HPUX_TIME_R */
 
 /* Path to iconv.h */
-#define PHP_ICONV_H_PATH </Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.Internal.sdk/usr/include/iconv.h>
+#define PHP_ICONV_H_PATH </Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.Internal.sdk/usr/include/iconv.h>
 
 /* Which iconv implementation to use */
 #define PHP_ICONV_IMPL "libiconv"
@@ -2407,7 +2407,7 @@
 #define PHP_SIGCHILD 0
 
 /* uname -a output */
-#define PHP_UNAME "Darwin osx380.sd.apple.com 19.0 Darwin Kernel Version 18.0.0: Tue Jul 9 11:12:08 PDT 2019; root:xnu-4903.201.2.100.7~1/RELEASE_X86_64 x86_64"
+#define PHP_UNAME "Darwin manhattan40.ta10.sd.apple.com 20.0 Darwin Kernel Version 19.0.0: Mon Apr 27 10:16:52 PDT 2020; root:xnu-6153.11.26.100.4~1/DEVELOPMENT_X86_64 x86_64"
 
 /* Whether PHP has to use its own crypt_r for blowfish, des and ext des */
 #define PHP_USE_PHP_CRYPT_R 1

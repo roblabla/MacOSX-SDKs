@@ -7,8 +7,9 @@
 
 #import <AppKit/NSControl.h>
 #import <AppKit/NSLevelIndicatorCell.h>
+#import <AppKit/AppKitDefines.h>
 
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 typedef NS_ENUM(NSInteger, NSLevelIndicatorPlaceholderVisibility) {
     /* Placeholders are always displayed for standalone indicators. For level indicators inside a table view, placeholders draw only in the selected row and while the control is being edited. */

@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 27786062-EAE1-3266-BEC8-4BEA12BBF01A' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           E6E754EE-C1CF-3123-B5AE-AA92939535EF
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           E048A8AC-D5B5-3528-8147-E48AD85B40EF
 install-name:    '/System/Library/PrivateFrameworks/yara.framework/Versions/A/yara'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ __yr_atoms_trim, __yr_bswap16, __yr_bswap32, __yr_bswap64, 
                        __yr_compiler_default_include_callback, __yr_compiler_define_variable, 
                        __yr_compiler_pop_file_name, __yr_compiler_push_file_name, 
@@ -151,10 +157,10 @@ exports:
                        _yr_rules_define_boolean_variable, _yr_rules_define_float_variable, 
                        _yr_rules_define_integer_variable, _yr_rules_define_string_variable, 
                        _yr_rules_destroy, _yr_rules_get_stats, _yr_rules_load, _yr_rules_load_stream, 
-                       _yr_rules_save, _yr_rules_save_stream, _yr_rules_scan_fd, 
-                       _yr_rules_scan_file, _yr_rules_scan_mem, _yr_rules_scan_mem_blocks, 
-                       _yr_rules_scan_proc, _yr_scan_verify_match, _yr_scanner_create, 
-                       _yr_scanner_define_boolean_variable, _yr_scanner_define_float_variable, 
+                       _yr_rules_reset_profiling_info, _yr_rules_save, _yr_rules_save_stream, 
+                       _yr_rules_scan_fd, _yr_rules_scan_file, _yr_rules_scan_mem, 
+                       _yr_rules_scan_mem_blocks, _yr_rules_scan_proc, _yr_scan_verify_match, 
+                       _yr_scanner_create, _yr_scanner_define_boolean_variable, _yr_scanner_define_float_variable, 
                        _yr_scanner_define_integer_variable, _yr_scanner_define_string_variable, 
                        _yr_scanner_destroy, _yr_scanner_last_error_rule, _yr_scanner_last_error_string, 
                        _yr_scanner_scan_fd, _yr_scanner_scan_file, _yr_scanner_scan_mem, 

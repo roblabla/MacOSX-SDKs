@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 6BCFAECB-F6E4-363D-8638-620382ED54C3' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           A9E9579F-3700-3B82-8C8B-CC94C80A1D2F
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           38ED9E7B-8C5A-302D-8770-3D96F89F2E56
 install-name:    '/System/Library/PrivateFrameworks/FamilyControls.framework/Versions/A/FamilyControls'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _FCAppIsSigned, _FCAppIsSignedByAppStore, _FCAppIsSignedByApple, 
                        _FCAppLaunchWasBlocked, _FCAuthorizeManagedUserLogin, _FCContentFilterPageWasBlocked, 
                        _FCCopyAppDisplayNameForUser, _FCCopyBundleIDFudgingIfNecessary, 

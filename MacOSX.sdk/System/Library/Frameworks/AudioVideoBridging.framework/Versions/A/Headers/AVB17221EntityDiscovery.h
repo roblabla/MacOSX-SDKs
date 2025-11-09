@@ -2,12 +2,10 @@
 //  AVB17221EntityDiscovery.h
 //  AudioVideoBridging
 //
-//  Copyright (c) 2010-2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2010-2020 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-
-#include <IOKit/IOKitLib.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -30,25 +28,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 API_AVAILABLE(macos(10.8))
 @interface AVB17221EntityDiscovery : NSObject
-{
-	@private
-	io_connect_t connection;
-	
-	IONotificationPortRef notificationPort;
-	
-	dispatch_queue_t callbackQueue;
-	dispatch_queue_t callbackActionQueue;
-	
-	io_iterator_t localArrivalIterator;
-	io_iterator_t localDepartureIterator;
-	io_iterator_t remoteArrivalIterator;
-	io_iterator_t remoteDepartureIterator;
-	
-	NSMutableDictionary *localEntities;
-	NSMutableDictionary *remoteEntities;
-	
-	io_object_t notification;
-}
 
 /*!
 	@property	interfaceName
@@ -60,13 +39,13 @@ API_AVAILABLE(macos(10.8))
 	@property	interface
 	@abstract	The AVBInterface object which owns this object. This may be nil if it was not created by an instance of AVBInterface
  */
-@property (readonly, assign, nullable) AVBInterface *interface;
+@property (readonly, weak, nullable) AVBInterface *interface;
 
 /*!
 	@property	discoveryDelegate
 	@abstract	The delegate, implementing the AVB17221EntityDiscoveryDelegate protocol, which will handle entities arriving, departing and changing properties.
  */
-@property (assign, nullable) id <AVB17221EntityDiscoveryDelegate> discoveryDelegate;
+@property (weak, nullable) id <AVB17221EntityDiscoveryDelegate> discoveryDelegate;
 
 /*!
 	@method		initWithInterfaceName:

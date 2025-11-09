@@ -1,11 +1,25 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 9B5B97A0-AD02-3A6E-BEC3-242C61CF7002', 'x86_64: 9B5B97A0-AD02-3A6E-BEC3-242C61CF7002' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           1DCA0B24-3675-3D4E-BABD-5F0B971D7275
+  - target:          x86_64-maccatalyst
+    value:           1DCA0B24-3675-3D4E-BABD-5F0B971D7275
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           53F055F9-1BDC-308F-802F-5D15DD955085
+  - target:          arm64e-maccatalyst
+    value:           53F055F9-1BDC-308F-802F-5D15DD955085
 install-name:    '/System/Library/PrivateFrameworks/DataDetectorsCore.framework/Versions/A/DataDetectorsCore'
-current-version: 659
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 674
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _DDAddressBookAccessAllowed, _DDAddressResultCanBeMergedWith, 
                        _DDApplyOptions, _DDBinderAIMOrEmailKey, _DDBinderAddressBookContactNameKey, 
                        _DDBinderAirlineCodeKey, _DDBinderApproxTimeKey, _DDBinderAuthCodeKey, 
@@ -39,10 +53,10 @@ exports:
                        _DDDFAScannerScanString, _DDDFAScannerScanStringWithRange, 
                        _DDDFAScannerScanUnicharArray, _DDDFAScannerScanUnicharArrayFragment, 
                        _DDDFAScannerSimulateState, _DDDataDetectorBuilderSetup, _DDDataDetectorSetUsesDebugSource, 
-                       _DDError, _DDFastIntegerExtraction, _DDForce24HrsFormatProcessWideForExtraction, 
-                       _DDInitialSetup, _DDInternalURLStringForResultIdentifier, 
-                       _DDLog, _DDLogAssertionFailure, _DDLogErrD, _DDLogHandle, 
-                       _DDLogWarnD, _DDLogv, _DDPatternLoaderCopyEnabledCategories, 
+                       _DDDateResultIsPartial, _DDError, _DDFastIntegerExtraction, 
+                       _DDForce24HrsFormatProcessWideForExtraction, _DDInitialSetup, 
+                       _DDInternalURLStringForResultIdentifier, _DDLog, _DDLogAssertionFailure, 
+                       _DDLogErrD, _DDLogHandle, _DDLogWarnD, _DDLogv, _DDPatternLoaderCopyEnabledCategories, 
                        _DDPatternLoaderCopyLoadedFileURLs, _DDPatternLoaderCreateAndLoadAllFrameworkPatterns, 
                        _DDPatternLoaderCreateCache, _DDPatternLoaderCreateFromPaths, 
                        _DDPatternLoaderCreateFromPathsWithOptions, _DDPatternLoaderCreateScanner, 
@@ -72,15 +86,16 @@ exports:
                        _DDResultIsPartialDateRangeOrTimeRange, _DDResultIsPastDate, 
                        _DDResultIsPastDateWithLocale, _DDResultNeedsMeridianGuess, 
                        _DDResultOffsetAbsoluteRange, _DDResultProximitySort, _DDResultSelectBest, 
-                       _DDResultSetAbsoluteRange, _DDResultSetContent, _DDResultSetLocaleForExtraction, 
-                       _DDResultSetMatchedString, _DDResultSetProperties, _DDResultSetSubResults, 
-                       _DDResultSetTestUrlificationRange, _DDResultSetType, _DDResultTimeIsApprox, 
-                       _DDResultTypesAreEqual, _DDScanQueryAddLineBreak, _DDScanQueryAddSeparator, 
-                       _DDScanQueryAddTextFragment, _DDScanQueryCopyRange, _DDScanQueryCreate, 
-                       _DDScanQueryCreateFromString, _DDScanQueryGetFragmentMetaData, 
-                       _DDScanQueryGetFragmentRange, _DDScanQueryGetNumberOfFragments, 
-                       _DDScanQueryHasNoLetterBeforeNextLine, _DDScanQuerySetMetadataReleaseCallback, 
-                       _DDScannerCancelScanning, _DDScannerCopyResults, _DDScannerCopyResultsCheckOverlap, 
+                       _DDResultSetAbsoluteRange, _DDResultSetContent, _DDResultSetCurrentDateForExtraction, 
+                       _DDResultSetLocaleForExtraction, _DDResultSetMatchedString, 
+                       _DDResultSetProperties, _DDResultSetSubResults, _DDResultSetTestUrlificationRange, 
+                       _DDResultSetType, _DDResultTimeIsApprox, _DDResultTypesAreEqual, 
+                       _DDScanQueryAddLineBreak, _DDScanQueryAddSeparator, _DDScanQueryAddTextFragment, 
+                       _DDScanQueryCopyRange, _DDScanQueryCreate, _DDScanQueryCreateFromString, 
+                       _DDScanQueryGetFragmentMetaData, _DDScanQueryGetFragmentRange, 
+                       _DDScanQueryGetNumberOfFragments, _DDScanQueryHasNoLetterBeforeNextLine, 
+                       _DDScanQuerySetMetadataReleaseCallback, _DDScannerCancelScanning, 
+                       _DDScannerCopyResults, _DDScannerCopyResultsCheckOverlap, 
                        _DDScannerCopyResultsOptionsForActiveUse, _DDScannerCopyResultsOptionsForPassiveUse, 
                        _DDScannerCopyResultsWithOptions, _DDScannerCopyStatsDescription, 
                        _DDScannerCreate, _DDScannerCreateFromCache, _DDScannerCreateFromCacheData, 

@@ -2,11 +2,13 @@
 //  NSFileProviderItem.h
 //  FileProvider
 //
-//  Copyright (c) 2016-2017 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2020 Apple Inc. All rights reserved.
 //
 
 #import <FileProvider/NSFileProviderDefines.h>
 #import <Foundation/Foundation.h>
+
+@class UTType;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,7 +18,7 @@ typedef NSString *NSFileProviderItemIdentifier NS_EXTENSIBLE_STRING_ENUM;
  The root of the hierarchical enumeration, i.e the container enumerated when the
  user starts browsing your file provider.
  */
-FOUNDATION_EXPORT NSFileProviderItemIdentifier const NSFileProviderRootContainerItemIdentifier NS_SWIFT_NAME(NSFileProviderItemIdentifier.rootContainer) API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+FOUNDATION_EXPORT NSFileProviderItemIdentifier const NSFileProviderRootContainerItemIdentifier NS_SWIFT_NAME(NSFileProviderItemIdentifier.rootContainer) FILEPROVIDER_API_AVAILABILITY_V2_V3;
 
 /**
  The item identifier of the working set, a synthetic container used by the
@@ -45,45 +47,56 @@ FOUNDATION_EXPORT NSFileProviderItemIdentifier const NSFileProviderRootContainer
  is listed in the materialized containers, see the documentation on
  -materializedItemsDidChangeWithCompletionHandler:.
  */
-FOUNDATION_EXPORT NSFileProviderItemIdentifier const NSFileProviderWorkingSetContainerItemIdentifier NS_SWIFT_NAME(NSFileProviderItemIdentifier.workingSet) API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
-
+FOUNDATION_EXPORT NSFileProviderItemIdentifier const NSFileProviderWorkingSetContainerItemIdentifier NS_SWIFT_NAME(NSFileProviderItemIdentifier.workingSet) FILEPROVIDER_API_AVAILABILITY_V2_V3;
 
 /**
- A version blob, used for either structure or content.
+ The container containing all the trashed items.
 
- Version blobs are limited to 128 bytes in size.
+ When an item is trashed, its `parentItemIdentifier` becomes `NSFileProviderTrashContainerItemIdentifier`.
+
+ Extension should be able to return all trashed items by supporting the creation of a NSFileProviderEnumerator
+ for the trashed items.
  */
-typedef NSData *NSFileProviderVersionData NS_TYPED_EXTENSIBLE_ENUM;
+FOUNDATION_EXPORT NSFileProviderItemIdentifier const NSFileProviderTrashContainerItemIdentifier NS_SWIFT_NAME(NSFileProviderItemIdentifier.trashContainer) FILEPROVIDER_API_AVAILABILITY_V3;
 
-API_UNAVAILABLE(watchos, tvos) API_UNAVAILABLE(ios, macos)
+FILEPROVIDER_API_AVAILABILITY_V3
 @interface NSFileProviderItemVersion : NSObject
 
 /**
  Items versions have two distinct components, one for the file contents and one
- for metadata.  Bumping the right component on a change allows for important
- optimizations.
+ for metadata.
+
+ Components are limited to 128 bytes in size.
  */
-- (instancetype)initWithContentVersion:(NSFileProviderVersionData)contentVersion
-                       metadataVersion:(NSFileProviderVersionData)metadataVersion;
+- (instancetype)initWithContentVersion:(NSData *)contentVersion
+                       metadataVersion:(NSData *)metadataVersion;
 
 /**
- Version data for the content of the file.  The system will typically ask for a
- new download of the file if this field changes and the file was already
- downloaded.
-
- This property is used to invalidate the thumbnail cache maintained by the system.
+ Version data for the content of the file.
+ 
+ This property is used by the system for two purposes: if the contentVersion changes,
+ - the system assumes that the contents have changed and will trigger a redownload if
+   necessary. The exception to this is the case where the extension accepts a content
+   sent by the system when replying to a createItemBasedOnTemplate or modifyItem call
+   with shouldFetchContent set to NO.
+ - the thumbnail cache is invalidated
 
  Note that the resource fork of the file is considered content, so this version
  data should change when either the data fork or the resource fork changes.
  */
-@property (nonatomic, readonly) NSFileProviderVersionData contentVersion;
+@property (nonatomic, readonly) NSData *contentVersion;
 
 /**
  Version data for the metadata of the item, i.e everything but the data fork and
- the resource fork.  The system will typically update a dataless representation
- of the file if this changes; but it will not ask for a new download.
+ the resource fork.
+ 
+ The system will store this version, but otherwise ignore it:
+ - metadata changes on an item will be applied even if the metadataVersion remains unchanged
+ - if the metadata version changes without any corresponding observable changes in the metadata returned
+   to the system, the system will simply store the updated metadata version (to return it as the base version
+   of a possible future change request).
  */
-@property (nonatomic, readonly) NSFileProviderVersionData metadataVersion;
+@property (nonatomic, readonly) NSData *metadataVersion;
 
 @end
 
@@ -92,7 +105,7 @@ API_UNAVAILABLE(watchos, tvos) API_UNAVAILABLE(ios, macos)
  A special value for favorite ranks, to use when no rank was set when the item
  was favorited.
  */
-FOUNDATION_EXPORT unsigned long long const NSFileProviderFavoriteRankUnranked API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+FOUNDATION_EXPORT unsigned long long const NSFileProviderFavoriteRankUnranked FILEPROVIDER_API_AVAILABILITY_V2_V3;
 
 typedef NS_OPTIONS(NSUInteger, NSFileProviderItemCapabilities) {
     /**
@@ -119,6 +132,9 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderItemCapabilities) {
     /** Indicates that the item can be deleted */
     NSFileProviderItemCapabilitiesAllowsDeleting    = 1 << 5,
 
+    /** Indicates that the item can be evicted. */
+    NSFileProviderItemCapabilitiesAllowsEvicting FILEPROVIDER_API_AVAILABILITY_V3 = 1 << 6,
+
     /**
      Indicates that items can be imported to the folder. If set on a file,
      this is equivalent to @c .allowsWriting.
@@ -138,17 +154,28 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderItemCapabilities) {
         | NSFileProviderItemCapabilitiesAllowsRenaming
         | NSFileProviderItemCapabilitiesAllowsTrashing
         | NSFileProviderItemCapabilitiesAllowsDeleting
+#if TARGET_OS_OSX
+        | NSFileProviderItemCapabilitiesAllowsEvicting
+#endif
 };
 
-@protocol NSFileProviderItemFlags <NSObject>
+FILEPROVIDER_API_AVAILABILITY_V3
+typedef NS_OPTIONS(NSUInteger, NSFileProviderFileSystemFlags) {
+    /// Item has the POSIX user-executable (u+x) permission.
+    NSFileProviderFileSystemUserExecutable      = 1 << 0,
 
-@property (nonatomic, readonly, getter=isUserExecutable) BOOL userExecutable;
-@property (nonatomic, readonly, getter=isUserReadable) BOOL userReadable;
-@property (nonatomic, readonly, getter=isUserWritable) BOOL userWritable;
+    /// Item has the POSIX user-readable (u+r) permission.
+    NSFileProviderFileSystemUserReadable        = 1 << 1,
 
-@property (nonatomic, readonly, getter=isHidden) BOOL hidden;
-@property (nonatomic, readonly, getter=isPathExtensionHidden) BOOL pathExtensionHidden;
-@end
+    /// Item has the POSIX user-writable (u+w) permission.
+    NSFileProviderFileSystemUserWritable        = 1 << 2,
+
+    /// Item should not be presented in the file viewers.
+    NSFileProviderFileSystemHidden              = 1 << 3,
+
+    /// The extension of the item should not be presented in the file viewers.
+    NSFileProviderFileSystemPathExtensionHidden = 1 << 4,
+};
 
 @protocol NSFileProviderItem <NSObject>
 
@@ -175,12 +202,34 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderItemCapabilities) {
  */
 @property (nonatomic, readonly, copy) NSString *filename;
 
-/**
- Uniform type identifier (UTI) for the item
- */
-@property (nonatomic, readonly, copy) NSString *typeIdentifier;
-
 @optional
+
+/**
+ ContentType (UTType) for the item.
+
+ On macOS, items must implement contentType.
+
+ On iOS, items must implement either contentType or typeIdentifier. Note
+ that contentType is not available on iOS 13 and earlier, so typeIdentifier
+ is required in order to target iOS 13 and earlier.
+ */
+@property (nonatomic, readonly, copy) UTType *contentType API_AVAILABLE(ios(14.0), macos(11.0));
+
+/**
+ Uniform type identifier (UTI) for the item.
+
+ This property is deprecated in favor of the "contentType" property.
+
+ On macOS, typeIdentifier is not available. Items must implement contentType
+ on macOS.
+
+ On iOS, items must implement either contentType or typeIdentifier. Note
+ that contentType is not available on iOS 13 and earlier, so typeIdentifier
+ is required in order to target iOS 13 and earlier.
+ */
+@property (nonatomic, readonly, copy) NSString *typeIdentifier
+    API_DEPRECATED_WITH_REPLACEMENT("contentType", ios(11.0, API_TO_BE_DEPRECATED))
+    API_UNAVAILABLE(macos);
 
 /**
  The capabilities of the item.  This controls the list of actions that the UI
@@ -189,10 +238,11 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderItemCapabilities) {
 @property (nonatomic, readonly) NSFileProviderItemCapabilities capabilities;
 
 /**
- The flags of the item. Flags define on-disk properties of the item but are
- also taken into account by the UI to determine item actions.
+ File System level flags.
+
+ This includes POSIX permissions and presentation options for the item.
  */
-@property (nonatomic, readonly, strong, nullable) id <NSFileProviderItemFlags> flags API_UNAVAILABLE(watchos, tvos) API_UNAVAILABLE(ios, macos);
+@property (nonatomic, readonly) NSFileProviderFileSystemFlags fileSystemFlags FILEPROVIDER_API_AVAILABILITY_V3;
 
 @property (nonatomic, readonly, copy, nullable) NSNumber *documentSize;
 @property (nonatomic, readonly, copy, nullable) NSNumber *childItemCount;
@@ -206,7 +256,10 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderItemCapabilities) {
  based on a set of rules largely inferred from the name of the extended
  attribute.  Extended attributes named with xattr_name_with_flags(XATTR_FLAG_SYNCABLE)
  will be listed in this dictionary; some extended attributes introduced before
- this API are also whitelisted for sync.
+ this API are also whitelisted for sync. The provider can declare of list of
+ attributes it wants to sync even if the system heuristic won't consider those
+ as syncable. For this, it can add a list of xattr names in the Info.plist of the
+ extension under the key NSExtensionFileProviderAdditionalSyncableExtendedAttributes.
 
  Syncable xattrs are capped in size to about 32KiB total for a given item.
  When the set of extended attributes on a file is larger than that, the system
@@ -229,10 +282,10 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderItemCapabilities) {
  them when a file is rendered dataless.  I.e extended attributes are considered
  metadata, not content.  The resource fork however is considered content and
  will not be included in this dictionary.  Local changes to the resource fork
- will be communicated under NSFileProviderItemFieldContents.  Remote changes to
+ will be communicated under NSFileProviderItemContents.  Remote changes to
  the resource fork should bump itemVersion.contentVersion.
  */
-@property (nonatomic, readonly, strong, nullable) NSDictionary <NSString *, NSData *> *extendedAttributes API_UNAVAILABLE(watchos, tvos) API_UNAVAILABLE(ios, macos);
+@property (nonatomic, readonly, strong) NSDictionary <NSString *, NSData *> *extendedAttributes FILEPROVIDER_API_AVAILABILITY_V3;
 
 
 /*
@@ -277,7 +330,7 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderItemCapabilities) {
 
  This property must not be shared between users, even if the item is.
  */
-@property (nonatomic, readonly, copy, nullable) NSNumber *favoriteRank;
+@property (nonatomic, readonly, copy, nullable) NSNumber *favoriteRank FILEPROVIDER_API_AVAILABILITY_V2;
 
 /**
  Set on a directory or a document if it should appear in the trash.
@@ -287,12 +340,20 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderItemCapabilities) {
 
  Trashed items should remain in the working set; however, children of trashed
  directories should be removed from the working set.
- */
-@property (nonatomic, readonly, getter=isTrashed) BOOL trashed;
 
-/*
- The download and upload properties below determine which of the cloud badges
- (uploading, downloading, pending) will be shown on the item.
+ Additionally, when an item is trashed, the `parentItemIdentifier` refers to the location the item was before being
+ trashed. As such, when the user decides to restore the item from trash, `parentItemIdentifier` will be used for
+ the default restore location.
+ */
+@property (nonatomic, readonly, getter=isTrashed) BOOL trashed FILEPROVIDER_API_AVAILABILITY_V2;
+
+/**
+ Uploaded and uploading are used to inform the cloud badge which will be shown on the item.
+
+ When using NSFileProviderReplicatedExtension, uploaded is used to inform whether the item may be
+ evicted from the local disk. If you choose to finish uploading items after calling the completion handler
+ of creteItem/modifyItem, you must set the uploaded flag to false, in order for the item to be excluded from
+ eviction.
  */
 @property (nonatomic, readonly, getter=isUploaded) BOOL uploaded;
 @property (nonatomic, readonly, getter=isUploading) BOOL uploading;
@@ -309,19 +370,20 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderItemCapabilities) {
  */
 @property (nonatomic, readonly, copy, nullable) NSError *uploadingError;
 
+/**
+ When using NSFileProviderExtension, downloaded and downloading are used to inform the cloud badge
+ which will be shown on the item.
+
+ When using NSFileProviderReplicatedExtension, downloaded and downloading are ignored, as they can be
+ inferred from the result of calls to fetchContentsForItemWithIdentifier.
+ */
 @property (nonatomic, readonly, getter=isDownloaded) BOOL downloaded;
 @property (nonatomic, readonly, getter=isDownloading) BOOL downloading;
-@property (nonatomic, readonly, copy, nullable) NSError *downloadingError;
 
 /**
- Indicates that the file or directory is excluded from sync, i.e that
- local changes won't be communicated to the server.
-
- \note This is reflected in the UI, but the actual sync semantics are left to
- the discretion of the file provider extension.
+ An error that occurred while downloading from your remote server.
  */
-@property (nonatomic, readonly, getter=isExcludedFromSync) BOOL excludedFromSync
-    API_UNAVAILABLE(watchos, tvos) API_UNAVAILABLE(ios, macos);
+@property (nonatomic, readonly, copy, nullable) NSError *downloadingError;
 
 @property (nonatomic, readonly, getter=isMostRecentVersionDownloaded) BOOL mostRecentVersionDownloaded;
 
@@ -343,12 +405,21 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderItemCapabilities) {
 
  This property is deprecated in favor of the "itemVersion" property.
  */
-@property (nonatomic, strong, readonly, nullable) NSData *versionIdentifier API_DEPRECATED("itemVersion", ios(11.0, 13.0)) API_UNAVAILABLE(tvos, watchos) API_UNAVAILABLE(macos);
+@property (nonatomic, strong, readonly, nullable) NSData *versionIdentifier API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos) API_UNAVAILABLE(macos);
 
 /**
  The version is used to track which version of an item has been modified when informing a provider about changes. It is also used to invalidate the thumbnail cache.
  */
-@property (nonatomic, strong, readonly, nullable) NSFileProviderItemVersion *itemVersion API_UNAVAILABLE(watchos, tvos) API_UNAVAILABLE(ios, macos);
+@property (nonatomic, strong, readonly) NSFileProviderItemVersion *itemVersion FILEPROVIDER_API_AVAILABILITY_V3;
+
+/**
+ The target of a symlink.
+
+ If a replicated extension expose an item with the typeIdentifier public.symlink (kUTTypeSymLink),
+ this field should contain the target of the symlink.
+ */
+@property (nonatomic, readonly, copy, nullable) NSString *symlinkTargetPath
+    FILEPROVIDER_API_AVAILABILITY_V3;
 
 /**
  Use this dictionary to add state information to the item. It is accessible to
@@ -362,17 +433,13 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderItemCapabilities) {
     - `ActivationRule ` *string*, the predicate.
         @parameters predicates
             - `destinationItem`: the destination item for an action (only present for Move/Import)
-            - `destinationItemHierarchy` : represents destinationItem and all its parent chain to allow for search
-                on first item in hierarchy that has a given value. (only present for Move/ImportHere)
             - `action` : the action that is being performed
                  'Move'       : moving items within the same provider
-                 'Export'     : moving items out of the provider
-                 'ImportHere' : importing item(s) into a folder/root of the provider
+                 'MoveOut' : moving items out of the provider
+                 'MoveIn'    : importing item(s) into a folder/root of the provider
                  'Trash'      : trashing item(s)
                  'Delete'     : deleting item(s)
             - `sourceItem` : current item that the predicate is evaluating (only present for Move/Export)
-            - `sourceItemHierarchy` : represents sourceItem and all its parent chain to allow for search
-                on first item in hierarchy that has a given value. (only present for Move/Export)
             - `sourceItemsCount` :
                 - In userInteraction, represents the count of sourceItems of an action operation
                 - In subUserInteraction: represents the count of items that matched the previous predicate
@@ -389,8 +456,8 @@ typedef NS_OPTIONS(NSUInteger, NSFileProviderItemCapabilities) {
             - `Continue` *string*, the string for the continue button - default value if not specified
             - `Cancel` *string*, the string for the cancel button - default value if not specified
         - `RecoveryOptions` (optional)
-            - Can only remove continue button
             - `Continue` *bool*, the boolean for whether to have a continue button - default value is YES if not specified
+            - `Destructive` *bool*, the boolean for whether continuing is a destructive action - default value is NO if not specified
     - `SubInteractions `: *dictionary* (same as `NSFileProviderUserInteractions`)
 
  For each interaction, either Alert or SubInteractions must be specified. SubInteractions will be evaluated if the main ActivationRule evaluates to

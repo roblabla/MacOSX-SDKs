@@ -1,5 +1,5 @@
 /*    NLModel.h
-      Copyright (c) 2017-2019, Apple Inc. All rights reserved.
+      Copyright (c) 2017-2020, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/Foundation.h>
@@ -25,12 +25,16 @@ NS_CLASS_AVAILABLE(10_14, 12_0)
 
 @property (readonly, copy) NLModelConfiguration *configuration API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
 
-/* For inference purposes, a model will usually be attached to an NLTagger via -setModels:forTagScheme:, and the tagger will then take care of calling the model to produce tags as appropriate. However, it is also possible to use a model to make an individual prediction, either of the label for a given pieces of text (for a classifier model), or of the labels for a given sequence of tokens (for a sequence model).
+/* For inference purposes, a model will usually be attached to an NLTagger via -setModels:forTagScheme:, and the tagger will then take care of calling the model to produce tags as appropriate. However, it is also possible to use a model to make an individual prediction, either of the label for a given pieces of text (for a classifier model), or of the labels for a given sequence of tokens (for a sequence model).  In addition, it is possible to obtain multiple hypotheses for a given label with associated probability scores.
 */
 
 - (nullable NSString *)predictedLabelForString:(NSString *)string API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
 
 - (NSArray<NSString *> *)predictedLabelsForTokens:(NSArray<NSString *> *)tokens API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
+
+- (NSDictionary<NSString *, NSNumber *> *)predictedLabelHypothesesForString:(NSString *)string maximumCount:(NSUInteger)maximumCount API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) NS_REFINED_FOR_SWIFT;
+
+- (NSArray<NSDictionary<NSString *, NSNumber *> *> *)predictedLabelHypothesesForTokens:(NSArray<NSString *> *)tokens maximumCount:(NSUInteger)maximumCount API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) NS_REFINED_FOR_SWIFT;
 
 @end
 

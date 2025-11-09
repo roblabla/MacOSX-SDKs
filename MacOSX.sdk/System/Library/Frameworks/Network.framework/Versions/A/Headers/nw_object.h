@@ -2,7 +2,7 @@
 //  nw_object.h
 //  Network
 //
-//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2020 Apple Inc. All rights reserved.
 //
 
 #ifndef __NW_OBJECT_H__
@@ -68,6 +68,12 @@
 #define NW_NOESCAPE
 #endif // noescape
 
+#if __has_attribute(objc_direct)
+#define NW_DIRECT __attribute__((objc_direct))
+#else // objc_direct
+#define NW_DIRECT
+#endif // objc_direct
+
 #if defined(__OBJC__) && __has_attribute(ns_consumed)
 #  define NW_RELEASES_ARGUMENT __attribute__((__ns_consumed__))
 #else // __OBJC__ && ns_consumed
@@ -87,12 +93,24 @@
 #endif // __OBJC__ && objc_returns_inner_pointer
 
 #ifndef NW_UNSAFE_UNRETAINED
-#  if defined(__OBJC__)
+#  if defined(__OBJC__) && OS_OBJECT_USE_OBJC
 #	  define NW_UNSAFE_UNRETAINED __unsafe_unretained
-#  else // __OBJC__
+#  else // __OBJC__ && OS_OBJECT_USE_OBJC
 #	  define NW_UNSAFE_UNRETAINED
-#  endif // __OBJC__
+#  endif // __OBJC__ && OS_OBJECT_USE_OBJC
 #endif // !NW_UNSAFE_UNRETAINED
+
+#ifndef NW_EXTERNALLY_RETAINED
+#if defined(__OBJC__) && __has_attribute(objc_externally_retained)
+#   define NW_EXTERNALLY_RETAINED              __attribute__((objc_externally_retained))
+#   define NW_ASSUME_EXTERNALLY_RETAINED_BEGIN _Pragma("clang attribute NW_ASSUME_EXTERNALLY_RETAINED.push(__attribute__((objc_externally_retained)), apply_to=any(function, block, objc_method))")
+#   define NW_ASSUME_EXTERNALLY_RETAINED_END   _Pragma("clang attribute NW_ASSUME_EXTERNALLY_RETAINED.pop")
+#else // __OBJC__ && objc_externally_retained
+#   define NW_EXTERNALLY_RETAINED
+#   define NW_ASSUME_EXTERNALLY_RETAINED_BEGIN
+#   define NW_ASSUME_EXTERNALLY_RETAINED_END
+#endif // __OBJC__ && objc_externally_retained
+#endif // !NW_EXTERNALLY_RETAINED
 
 #ifndef NW_EXPORT
 #  define NW_EXPORT __attribute__((visibility("default")))

@@ -565,7 +565,7 @@ VIMAGE_PF size_t vImageGetResamplingFilterSize(  float scale,
  *            //Calculate kernel values
  *            for( i = 0; i < count; i++ )
  *            {
- *                float unscaledResult = 1.0f - fabs( xArray[i] );    //LERP
+ *                float unscaledResult = max(xArray) - fabs( xArray[i] );    //LERP
  *                yArray[i] = unscaledResult;
  *                sum += unscaledResult;
  *            }

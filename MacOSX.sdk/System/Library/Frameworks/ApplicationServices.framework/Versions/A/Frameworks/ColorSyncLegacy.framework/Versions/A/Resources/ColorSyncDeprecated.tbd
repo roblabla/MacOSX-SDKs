@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 89604940-B33A-35DC-B38C-8AC4208960E4' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           3304C96C-A65C-3754-9168-54595566BDF1
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           1BD47B28-3F16-35E4-8B09-1E83559DA8AA
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ColorSyncLegacy.framework/Versions/A/Resources/ColorSyncDeprecated.dylib'
 current-version: 4.6
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CMCloneProfileRef, _CMCloseProfile, _CMConvertDoubleXYZToD50, 
                        _CMConvertRGBFloatBitmap, _CMConvertXYZFloatBitmap, _CMCopyProfile, 
                        _CMCopyProfileDescriptionString, _CMCopyProfileLocalizedString, 
@@ -40,4 +46,7 @@ exports:
                        _NCMGetProfileLocation, _NCWConcatColorWorld, _NCWNewColorWorld, 
                        _NCWNewLinkProfile, __CMGetProfileOfSuite, __CMLoadProfileLutsByAVID, 
                        _kCMIlluminantD50, _kCMIlluminantD65 ]
+  - targets:         [ arm64e-macos, arm64-macos ]
+    symbols:         [ _CMProfileEquivalentToProfile, _CMProfileGetProperty, _CMProfileGetTypeID, 
+                       _CMProfileSetProperty ]
 ...

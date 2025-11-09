@@ -8,20 +8,20 @@
 #ifndef __HYPERVISOR_HV__
 #define __HYPERVISOR_HV__
 
-#include <stdbool.h>
-#include <sys/types.h>
-#include <Availability.h>
+#ifdef __x86_64__
 
+#include <Hypervisor/hv_base.h>
 #include <Hypervisor/hv_error.h>
 #include <Hypervisor/hv_types.h>
 #include <Hypervisor/hv_arch_x86.h>
 
-#define __HV_10_10 __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_NA)
-#define __HV_10_15 __OSX_AVAILABLE_STARTING(__MAC_10_15, __IPHONE_NA)
+#define __HV_10_10 __API_AVAILABLE(macos(10.10))
+#define __HV_10_15 __API_AVAILABLE(macos(10.15))
+#define __HV_11_0 __API_AVAILABLE(macos(11.0))
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+OS_ASSUME_NONNULL_BEGIN
+
+__BEGIN_DECLS
 
 /*!
  * @function   hv_capability
@@ -246,10 +246,10 @@ extern hv_return_t hv_vcpu_write_fpstate(hv_vcpuid_t vcpu, void *buffer,
 
 /*!
  * @function   hv_vcpu_enable_native_msr
- * @abstract   Enables an MSR to be used natively by the VM
+ * @abstract   Enables an MSR to be used natively by the vCPU
  * @param      vcpu    vCPU ID
  * @param      msr     ID of the MSR
- * @param      enable  Enable or disable the native use of the MSR
+ * @param      enable  Enable or disable the guest use of the MSR
  * @result     0 on success or error code
  * @discussion
  *             See Documentation for a list of supported MSRs
@@ -258,6 +258,34 @@ extern hv_return_t hv_vcpu_write_fpstate(hv_vcpuid_t vcpu, void *buffer,
  */
 extern hv_return_t hv_vcpu_enable_native_msr(hv_vcpuid_t vcpu, uint32_t msr,
 	bool enable) __HV_10_10;
+
+/*!
+ * @function   hv_vcpu_enable_managed_msr
+ * @abstract   Enables an MSR to be used by the vCPU
+ * @param      vcpu    vCPU ID
+ * @param      msr     ID of the MSR
+ * @param      enable  Enable or disable the guest use of the MSR
+ * @result     0 on success or error code
+ * @discussion
+ *             See Documentation for a list of supported MSRs
+ *
+ *             Must be called by the owning thread
+ */
+extern hv_return_t hv_vcpu_enable_managed_msr(hv_vcpuid_t vcpu, uint32_t msr, bool enable) __HV_11_0;
+
+/*!
+ * @function   hv_vcpu_set_msr_access
+ * @abstract   Controls the guest access to a managed MSR
+ * @param      vcpu    vCPU ID
+ * @param      msr     ID of the MSR
+ * @param      flags   Enable or disable the guest use of the MSR
+ * @result     0 on success or error code
+ * @discussion
+ *             See Documentation for a list of supported MSRs
+ *
+ *             Must be called by the owning thread
+ */
+extern hv_return_t hv_vcpu_set_msr_access(hv_vcpuid_t vcpu, uint32_t msr, hv_msr_flags_t flags) __HV_11_0;
 
 /*!
  * @function   hv_vcpu_read_msr
@@ -310,12 +338,19 @@ extern hv_return_t hv_vcpu_invalidate_tlb(hv_vcpuid_t vcpu) __HV_10_10;
  * @abstract   Executes a vCPU
  * @param      vcpu  vCPU ID
  * @result     0 on success or error code
+ * @deprecated Use hv_vcpu_run_until(..., HV_DEADLINE_FOREVER) instead.
  * @discussion
- *             Call blocks until the next VMEXIT of the vCPU
+ *             Call blocks until the next VMEXIT of the vCPU, even if the
+ *             VMEXIT was transparently handled. vm_vcpu_run_until()
+ *             only returns on unhandled VMEXITs.
+ *
+ *             Use hv_vcpu_run_until(..., HV_DEADLINE_FOREVER) for
+ *             an alternative that does not block on transparently handled
+ *             VMEXITs instead.
  *
  *             Must be called by the owning thread
  */
-extern hv_return_t hv_vcpu_run(hv_vcpuid_t vcpu) __HV_10_10;
+extern hv_return_t hv_vcpu_run(hv_vcpuid_t vcpu);
 
 /*!
  * @function   hv_vcpu_run_until
@@ -323,13 +358,25 @@ extern hv_return_t hv_vcpu_run(hv_vcpuid_t vcpu) __HV_10_10;
  * @param      vcpu      vCPU ID
  * @param      deadline  The timer deadline in mach absolute time units.
  * @result     0 on success or error code
- *
+ * @discussion
  *             This call blocks until the next VMEXIT or until the given
- *             deadline expires. This call uses the VMX preemption timer, and
- *             returns HV_UNSUPPORTED if the hardware doesn't support it.
+ *             deadline expires. The special value HV_DEADLINE_FOREVER
+ *             specifies a deadline that never expires.
+ *
+ *             If a deadline other than HV_DEADLINE_FOREVER is specified,
+ *             this call uses the VMX preemption timer, and returns
+ *             HV_UNSUPPORTED if the hardware does not support it.
+ *
+ *             This function supersedes hv_vcpu_run(). Unlike hv_vcpu_run(),
+ *             hv_vcpu_run_until() does not return on VMEXITs that were
+ *             handled transparently (e.g. EPT violations in mapped regions).
  *
  *             Must be called by the owning thread
  */
+enum {
+    HV_DEADLINE_FOREVER = (~0ull)
+} __HV_11_0;
+
 extern hv_return_t hv_vcpu_run_until(hv_vcpuid_t vcpu,
 	uint64_t deadline) __HV_10_15;
 
@@ -350,15 +397,19 @@ extern hv_return_t hv_vcpu_interrupt(hv_vcpuid_t* vcpus,
  * @param      time  Pointer to execution time value (written on success)
  * @result     0 on success or error code
  * @discussion
- *             Must be called by the owning thread!
+ *             Must be called by the owning thread
  */
 extern hv_return_t hv_vcpu_get_exec_time(hv_vcpuid_t vcpu,
 	uint64_t *time) __HV_10_10;
 
-#ifdef __cplusplus
-}
-#endif
+__END_DECLS
+
+OS_ASSUME_NONNULL_END
 
 #undef __HV_10_10
+#undef __HV_10_15
+#undef __HV_11_0
+
+#endif /* __x86_64__ */
 
 #endif /* __HYPERVISOR_HV__ */

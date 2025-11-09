@@ -203,7 +203,7 @@
 #define CG_UNAVAILABLE_DESKTOP API_UNAVAILABLE(macos)
 #define CG_UNAVAILABLE_EMBEDDED API_UNAVAILABLE(ios, tvos, watchos)
 
-#ifdef CG_BUILDING_CG
+#if defined(CG_LINUX) || defined(TARGET_OS_LINUX)  
 # undef __OSX_AVAILABLE_STARTING
 # undef __OSX_AVAILABLE_BUT_DEPRECATED
 # undef CG_AVAILABLE_STARTING
@@ -211,6 +211,48 @@
 # undef CG_AVAILABLE_BUT_DEPRECATED
 # undef CG_UNAVAILABLE_DESKTOP
 # undef CG_UNAVAILABLE_EMBEDDED
+
+# if defined(__x86_64__)
+    typedef unsigned int    boolean_t;
+# else
+    typedef int        boolean_t;
+# endif
+
+# define CG_OS_VERSION_2020 1
+#else
+# if TARGET_OS_OSX
+#  define CG_OSX_VERSION(v) ((v) > 0 && __MAC_OS_X_VERSION_MAX_ALLOWED >= (v))
+# else
+#  define CG_OSX_VERSION(v) (0)
+#endif
+
+# if TARGET_OS_IPHONE
+#  define CG_IOS_VERSION(v) ((v) > 0 && __IPHONE_OS_VERSION_MIN_REQUIRED >= (v))
+# else
+#  define CG_IOS_VERSION(v) (0)
+# endif
+
+# if TARGET_OS_TV
+#  define CG_TV_VERSION(v) ((v) > 0 && __TV_OS_VERSION_MIN_REQUIRED >= (v))
+# else
+#  define CG_TV_VERSION(v) (0)
+# endif
+
+# if TARGET_OS_WATCH
+#  define CG_WATCH_VERSION(v) ((v) > 0 && __WATCH_OS_VERSION_MIN_REQUIRED >= (v))
+# else
+#  define CG_WATCH_VERSION(v) (0)
+# endif
+
+
+#  define CG_BRIDGE_VERSION(v) (0)
+
+
+# define CG_OS_VERSION_2020 (CG_OSX_VERSION(__MAC_10_16)     || \
+                             CG_IOS_VERSION(__IPHONE_14_0)   || \
+                             CG_TV_VERSION(__TVOS_14_0)      || \
+                             CG_WATCH_VERSION(__WATCHOS_7_0) || \
+                             CG_BRIDGE_VERSION(50000))
 #endif
 
 #ifndef __OSX_AVAILABLE_STARTING
@@ -318,7 +360,9 @@ typedef CGFLOAT_TYPE CGFloat;
 # define CG_PRIVATE_EXTERN CG_LOCAL
 #endif
 
-typedef struct  CF_BRIDGED_TYPE(id) __IOSurface *IOSurfaceRef __attribute__((swift_name("IOSurfaceRef")));
+typedef struct  CF_BRIDGED_TYPE(id) CF_BRIDGED_MUTABLE_TYPE(IOSurface) __IOSurface *IOSurfaceRef 
+__attribute__((swift_name("IOSurfaceRef")))
+;
 
 /* 'cg_nullable' will be dropped for new Swift clients. All others get currently the old behavior */
 

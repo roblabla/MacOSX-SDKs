@@ -1,9 +1,10 @@
+#if !__has_include(<AVFCore/AVPlayerItem.h>)
 /*
     File:  AVPlayerItem.h
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2019 Apple Inc. All rights reserved.
+	Copyright 2010-2020 Apple Inc. All rights reserved.
 
 */
 
@@ -73,6 +74,27 @@ typedef NS_ENUM(NSInteger, AVPlayerItemStatus) {
 	AVPlayerItemStatusUnknown = 0,
 	AVPlayerItemStatusReadyToPlay = 1,
 	AVPlayerItemStatusFailed = 2
+};
+
+/*!
+@enum AVAudioSpatializationFormats
+ @abstract
+	These constants can be used to specify values for allowedAudioSpatializationFormats.
+ 
+ @constant	 AVAudioSpatializationFormatNone
+	Indicates that no audio spatialization is allowed.
+ @constant	 AVAudioSpatializationFormatMonoAndStereo
+	Indicates that only mono and stereo formats may be used for audio spatialization.
+ @constant	 AVAudioSpatializationFormatMultichannel
+	Indicates that only multichannel layouts may be used for audio spatialization.
+ @constant	 AVAudioSpatializationFormatMonoStereoAndMultichannel
+	Indicates that mono, stereo and multichannel layouts may be used for audio spatialization.
+ */
+typedef NS_OPTIONS(NSUInteger, AVAudioSpatializationFormats) {
+	AVAudioSpatializationFormatNone = 0UL,
+	AVAudioSpatializationFormatMonoAndStereo = 0x3UL,
+	AVAudioSpatializationFormatMultichannel = 0x4UL,
+	AVAudioSpatializationFormatMonoStereoAndMultichannel = 0x7UL
 };
 
 @class AVPlayer;
@@ -500,6 +522,13 @@ AV_INIT_UNAVAILABLE
  */
 @property (copy) AVVideoApertureMode videoApertureMode API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 
+/*!
+@property	appliesPerFrameHDRDisplayMetadata
+@abstract	Controls whether or not to apply the per frame HDR display metadata of the source during playback.
+@discussion
+*/
+@property (nonatomic) BOOL appliesPerFrameHDRDisplayMetadata API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);  // default is YES
+
 @end
 
 
@@ -515,12 +544,20 @@ AV_INIT_UNAVAILABLE
 @property (copy) AVAudioTimePitchAlgorithm audioTimePitchAlgorithm API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
 /*!
- @property		audioSpatializationAllowed
- @abstract		Indicates whether audio spatialization is allowed
+ @property audioSpatializationAllowed
+ @abstract Indicates whether audio spatialization is allowed
  @discussion
- 	When audio spatialization is allowed for an AVPlayerItem, the AVPlayer may render multichannel audio if available even if the output device doesn't support multichannel audio on its own, via use of a synthetic channel layout. When audio spatialization is not allowed, the AVPlayer must render audio with a channel layout that best matches the capabilities of the output device. This property is not observable. Defaults to YES.
+   When audio spatialization is allowed for an AVPlayerItem, the AVPlayer may render multichannel audio if available even if the output device doesn't support multichannel audio on its own, via use of a synthetic channel layout. When audio spatialization is not allowed, the AVPlayer must render audio with a channel layout that best matches the capabilities of the output device. This property is not observable. Defaults to YES.
  */
-@property (nonatomic, assign, getter=isAudioSpatializationAllowed) BOOL audioSpatializationAllowed API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(tvos, watchos);
+@property (nonatomic, assign, getter=isAudioSpatializationAllowed) BOOL audioSpatializationAllowed API_DEPRECATED_WITH_REPLACEMENT("allowedAudioSpatializationFormats", macos(10.15, API_TO_BE_DEPRECATED), ios(13.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(tvos, watchos);
+
+/*!
+ @property allowedAudioSpatializationFormats
+ @abstract Indicates the source audio channel layouts allowed by the receiver for spatialization.
+ @discussion
+   Spatialization uses psychoacoustic methods to create a more immersive audio rendering when the content is played on specialized headphones and speaker arrangements. When an AVPlayerItem's allowedAudioSpatializationFormats property is set to AVAudioSpatializationFormatMonoAndStereo the AVPlayer will attempt to spatialize content tagged with a stereo channel layout, two-channel content with no layout specified as well as mono. It is considered incorrect to render a binaural recording with spatialization. A binaural recording is captured using two carefully placed microphones at each ear where the intent, when played on headphones, is to reproduce a naturally occurring spatial effect. Content tagged with a binaural channel layout will ignore this property value. When an AVPlayerItem's allowedAudioSpatializationFormats property is set to AVAudioSpatializationFormatMultichannel the AVPlayer will attempt to spatialize any decodable multichannel layout. Setting this property to AVAudioSpatializationFormatMonoStereoAndMultichannel indicates that the sender allows the AVPlayer to spatialize any decodable mono, stereo or multichannel layout. This property is not observable. The default value for this property is AVAudioSpatializationFormatMultichannel.
+ */
+@property (nonatomic, assign) AVAudioSpatializationFormats allowedAudioSpatializationFormats API_AVAILABLE(macos(11.0), ios(14.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*!
  @property audioMix
@@ -609,6 +646,22 @@ AV_INIT_UNAVAILABLE
 	It only applies to HTTP Live Streaming asset.
  */
 @property CGSize preferredMaximumResolution API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
+
+/*!
+ @property		startsOnFirstEligibleVariant
+ @abstract		Directs the player to start playback with the first eligible variant  that appears in the stream's master playlist.
+ @discussion
+   This property influences AVPlayer's algorithm for selecting which of the eligible variant streams in an HTTP Live Streaming master playlist is selected when playback first begins.
+	In all cases, AVPlayer may switch to other variants during playback.
+ 
+	On releases prior to macOS 10.15, iOS 13, tvOS 13 and watchOS 6, AVPlayer starts HLS playback with the first eligible variant in the master playlist.
+	On releases starting with macOS 10.15, iOS 13, tvOS 13 and watchOS 6, AVPlayer starts HLS playback by choosing an initial variant that optimizes the startup experience.
+	On releases starting with macOS 11.0, iOS 14, tvOS 14 and watchOS 7, applications may set this property to YES to request that AVPlayer use the previous behaviour of using the first eligible variant in the master playlist. This would be appropriate, for example, for applications which wish to control initial variant selection by ordering the variants in the master playlist.
+	
+	Note that changing this property may impact stream startup performance and quality. In order to be effective this property must be set before initial variant selection occurs.
+	This property only applies to HTTP Live Streaming assets. The default value of this property is NO.
+ */
+@property (nonatomic) BOOL startsOnFirstEligibleVariant API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0));
 
 @end
 
@@ -1193,3 +1246,7 @@ AV_INIT_UNAVAILABLE
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCore/AVPlayerItem.h>
+#endif

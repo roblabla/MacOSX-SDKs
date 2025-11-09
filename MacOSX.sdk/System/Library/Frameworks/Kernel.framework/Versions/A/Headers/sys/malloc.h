@@ -83,31 +83,21 @@
 #define M_NULL          0x0008          /* return NULL if space is unavailable*/
 
 
+#define M_PCB           4       /* protocol control block (smb) */
 #define M_RTABLE        5       /* routing tables */
 #define M_IFADDR        9       /* interface address (IOFireWireIP)*/
+#define M_SONAME        11      /* socket name (smb) */
 #define M_LOCKF         40      /* Byte-range locking structures (msdos) */
 #define M_TEMP          80      /* misc temporary data buffers */
-#define M_KAUTH         100     /* kauth subsystem (smb) */
-#define M_SONAME        11      /* socket name (smb) */
-#define M_PCB           4       /* protocol control block (smb) */
 #define M_UDFNODE       84      /* UDF inodes (udf)*/
 #define M_UDFMNT        85      /* UDF mount structures (udf)*/
-
-
-
-/*
- * The malloc/free primatives used
- * by the BSD kernel code.
- */
+#define M_KAUTH         100     /* kauth subsystem (smb) */
 
 #define MALLOC(space, cast, size, type, flags) \
 	(space) = (cast)_MALLOC(size, type, flags)
 
 #define FREE(addr, type) \
 	_FREE((void *)addr, type)
-
-#define REALLOC(space, cast, addr, size, type, flags) \
-	(space) = (cast)_REALLOC(addr, size, type, flags)
 
 #define MALLOC_ZONE(space, cast, size, type, flags) \
 	(space) = (cast)_MALLOC_ZONE(size, type, flags)
@@ -124,12 +114,6 @@ extern void     _FREE(
 	void            *addr,
 	int             type);
 
-extern void     *_REALLOC(
-	void            *addr,
-	size_t          size,
-	int             type,
-	int             flags);
-
 extern void     *_MALLOC_ZONE(
 	size_t          size,
 	int             type,
@@ -139,7 +123,6 @@ extern void     _FREE_ZONE(
 	void            *elem,
 	size_t          size,
 	int             type);
-
 
 
 

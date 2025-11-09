@@ -2,7 +2,7 @@
  *  CTFontManager.h
  *  CoreText
  *
- *  Copyright (c) 2008-2019 Apple Inc. All rights reserved.
+ *  Copyright (c) 2008-2020 Apple Inc. All rights reserved.
  *
  */
 
@@ -68,7 +68,7 @@ CFArrayRef CTFontManagerCopyAvailableFontURLs( void ) CT_AVAILABLE(macos(10.6)) 
 CFComparisonResult CTFontManagerCompareFontFamilyNames(
     const void *        family1,
     const void *        family2,
-    void * _Nullable   context ) CT_AVAILABLE(macos(10.6)) CT_UNAVAILABLE(ios, watchos, tvos);
+    void * _Nullable   context ) CT_AVAILABLE(macos(10.6)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
     @function   CTFontManagerCreateFontDescriptorsFromURL
@@ -149,7 +149,7 @@ CT_EXPORT const CFStringRef kCTFontRegistrationUserInfoAttribute CT_AVAILABLE(io
     @abstract   Registers fonts from the specified font URL with the font manager. Registered fonts participate in font descriptor matching.
 
     @param      fontURL
-                Font URL.
+                A file URL for the font or collection (TTC or OTC) to be registered. Once fonts have been registered from a file, it shouldn't be moved or renamed.
 
     @param      scope
                 Scope constant defining the availability and lifetime of the registration. See scope constants for more details.
@@ -226,7 +226,7 @@ bool CTFontManagerUnregisterGraphicsFont(
     @abstract   Registers fonts from the specified font URLs with the font manager. Registered fonts are discoverable through font descriptor matching.
 
     @param      fontURLs
-                Array of font URLs.
+                An array of file URLs for the fonts or collections (TTC or OTC) to be registered. Once fonts have been registered from a file, it shouldn't be moved or renamed.
 
     @param      scope
                 Scope constant defining the availability and lifetime of the registration. See scope constants for more details.
@@ -239,7 +239,7 @@ bool CTFontManagerUnregisterGraphicsFont(
 bool CTFontManagerRegisterFontsForURLs(
     CFArrayRef              fontURLs,
     CTFontManagerScope      scope,
-    CFArrayRef _Nullable * _Nullable errors ) API_DEPRECATED_WITH_REPLACEMENT("CTFontManagerRegisterFontURLs", macos(10.6, 10.14), ios(4.1, 12.0), watchos(2.0, 5.0), tvos(9.0, 12.0));
+    CFArrayRef _Nullable * _Nullable errors ) API_DEPRECATED_WITH_REPLACEMENT("CTFontManagerRegisterFontURLs", macos(10.6, 10.15), ios(4.1, 13.0), watchos(2.0, 6.0), tvos(9.0, 13.0));
 
 /*!
     @function   CTFontManagerUnregisterFontsForURLs
@@ -260,7 +260,7 @@ bool CTFontManagerRegisterFontsForURLs(
 bool CTFontManagerUnregisterFontsForURLs(
     CFArrayRef              fontURLs,
     CTFontManagerScope      scope,
-    CFArrayRef _Nullable * _Nullable errors ) API_DEPRECATED_WITH_REPLACEMENT("CTFontManagerUnregisterFontURLs", macos(10.6, 10.14), ios(4.1, 12.0), watchos(2.0, 5.0), tvos(9.0, 12.0));
+    CFArrayRef _Nullable * _Nullable errors ) API_DEPRECATED_WITH_REPLACEMENT("CTFontManagerUnregisterFontURLs", macos(10.6, 10.15), ios(4.1, 13.0), watchos(2.0, 6.0), tvos(9.0, 13.0));
 
 #if defined(__BLOCKS__)
 /*!
@@ -270,7 +270,7 @@ bool CTFontManagerUnregisterFontsForURLs(
 	@discussion In iOS, fonts registered with the persistent scope are not automatically available to other processes. Other process may call CTFontManagerRequestFonts to get access to these fonts.
  
 	@param      fontURLs
-				Array of font URLs.
+				A file URL for the fonts or collections (TTC or OTC) to be registered. Once fonts have been registered from a file, it shouldn't be moved or renamed.
 	
 	@param      scope
 				Scope constant defining the availability and lifetime of the registration. See scope constants for more details.
@@ -442,12 +442,14 @@ void CTFontManagerRequestFonts(
 
 /*!
     @function   CTFontManagerIsSupportedFont
-    @abstract   Determines whether the referenced font data (usually by file URL) is supported on the current platform.
+    @abstract   Determines whether a file is in a supported font format.
+
+    @discussion This function does not validate any font data, so clients using it must still be prepared to handle failed registration or font descriptor creation.
 
     @param      fontURL
-                A URL to font data.
+                A file URL.
 
-    @result     This function returns true if the URL represents a valid font that can be used on the current platform.
+    @result     This function returns true if the file is in a supported font format.
 */
 bool CTFontManagerIsSupportedFont(
     CFURLRef                fontURL ) CT_AVAILABLE(macos(10.6)) CT_UNAVAILABLE(ios, watchos, tvos);
@@ -468,7 +470,7 @@ bool CTFontManagerIsSupportedFont(
 */
 CFRunLoopSourceRef _Nullable CTFontManagerCreateFontRequestRunLoopSource(
     CFIndex         sourceOrder,
-    CFArrayRef    (^createMatchesCallback)(CFDictionaryRef requestAttributes, pid_t requestingProcess)) CT_AVAILABLE(macos(10.6)) CT_UNAVAILABLE(ios, watchos, tvos);
+    CFArrayRef    (^createMatchesCallback)(CFDictionaryRef requestAttributes, pid_t requestingProcess)) CT_DEPRECATED("This functionality will be removed in a future release", macos(10.6, 11.0)) CT_UNAVAILABLE(ios, watchos, tvos);
 #endif // defined(__BLOCKS__)
 
 /*!

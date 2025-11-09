@@ -80,7 +80,8 @@ typedef NS_ENUM( NSUInteger, ITLibDistinguishedPlaylistKind )
 	ITLibDistinguishedPlaylistKindApplications = 51,
 	ITLibDistinguishedPlaylistKindLovedSongs = 52,
 	ITLibDistinguishedPlaylistKindMusicShowsAndMovies = 53,
-};
+
+} API_UNAVAILABLE(ios);
 
 /*!
 	@enum		ITLibPlaylistKind
@@ -104,7 +105,8 @@ typedef NS_ENUM( NSUInteger, ITLibPlaylistKind )
 	ITLibPlaylistKindGenius,
 	ITLibPlaylistKindFolder,
 	ITLibPlaylistKindGeniusMix
-};
+
+} API_UNAVAILABLE(ios);
 
 @class ITLibMediaItem;
 
@@ -112,6 +114,7 @@ typedef NS_ENUM( NSUInteger, ITLibPlaylistKind )
  @abstract	A playlist is a collection of related media items. (Media items are described in ITLibMediaItem Class Reference.) 
 			Each playlist has a name, a set of attributes, and a unique identifier that persists across application launches.
 */
+API_UNAVAILABLE(ios)
 ITLIB_EXPORT @interface ITLibPlaylist : ITLibMediaEntity
 {
 	NSMutableArray * _items;

@@ -97,7 +97,7 @@ CM_ASSUME_NONNULL_BEGIN
 		the array returned by VTCopyVideoEncoderList.
 */
 VT_EXPORT const CFStringRef kVTVideoEncoderSpecification_EncoderID API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // CFString
-	
+
 CM_ASSUME_NONNULL_END
 
 CF_IMPLICIT_BRIDGING_DISABLED

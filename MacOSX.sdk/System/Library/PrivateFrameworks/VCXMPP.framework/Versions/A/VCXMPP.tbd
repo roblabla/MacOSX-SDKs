@@ -1,25 +1,41 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 4A51D942-C3DD-35A9-9209-34620806E4D6' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           9D5C6B2A-9232-33C9-B71A-187F5F25169C
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           D8E75CD8-351F-30DE-99D0-44661E6EEFBD
 install-name:    '/System/Library/PrivateFrameworks/VCXMPP.framework/Versions/A/VCXMPP'
-exports:         
-  - archs:           [ x86_64 ]
-    re-exports:      [ '/System/Library/PrivateFrameworks/VCXMPP.framework/Versions/A/Frameworks/Apollo.framework/Versions/A/Apollo', 
+reexported-libraries:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    libraries:       [ '/System/Library/PrivateFrameworks/VCXMPP.framework/Versions/A/Frameworks/Apollo.framework/Versions/A/Apollo', 
                        '/System/Library/PrivateFrameworks/VCXMPP.framework/Versions/A/Frameworks/Pear.framework/Versions/A/Pear', 
                        '/System/Library/PrivateFrameworks/VCXMPP.framework/Versions/A/Frameworks/XMPPToolkit.framework/Versions/A/XMPPToolkit', 
                        '/System/Library/PrivateFrameworks/VCXMPP.framework/Versions/A/Frameworks/uxmi.framework/Versions/0.1/uxmi', 
                        '/usr/lib/libxml2.2.dylib' ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _VCXMPPVersionNumber, _VCXMPPVersionString ]
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 149D2E15-802E-3388-9986-363EE75809AB' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           0ED664CF-FED6-3CA4-89AF-E3070D092F12
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           B3817DE3-0F76-3EDE-A3E9-64F29A869179
 install-name:    '/System/Library/PrivateFrameworks/VCXMPP.framework/Versions/A/Frameworks/Apollo.framework/Versions/A/Apollo'
-exports:         
-  - archs:           [ x86_64 ]
-    re-exports:      [ '/System/Library/PrivateFrameworks/VCXMPP.framework/Versions/A/Frameworks/XMPPToolkit.framework/Versions/A/XMPPToolkit', 
+reexported-libraries:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    libraries:       [ '/System/Library/PrivateFrameworks/VCXMPP.framework/Versions/A/Frameworks/XMPPToolkit.framework/Versions/A/XMPPToolkit', 
                        '/System/Library/PrivateFrameworks/VCXMPP.framework/Versions/A/Frameworks/uxmi.framework/Versions/0.1/uxmi' ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _ApolloCreateClientInterface, _ApolloCreateComponentInterface, 
                        _ApolloVersionNumber, _ApolloVersionString, _DNSServiceLookup, 
                        _TCPServerErrorDomain ]
@@ -101,14 +117,22 @@ exports:
                        ServerConnection.from, ServerConnection.manager, ServerConnection.outboundQueue, 
                        ServerConnection.outboundStream, ServerConnection.to, XMLStreamAuthenticator.mechanism, 
                        XMLStreamAuthenticator.previousDelegate, XMLStreamAuthenticator.xmlStream ]
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: A5749979-9866-3E91-9F5E-F1861FFEBAD2' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           F6DB3130-83A3-3A88-A2AF-A45625E4011E
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           E3B024CD-7482-31D4-BACF-CC340CC44073
 install-name:    '/System/Library/PrivateFrameworks/VCXMPP.framework/Versions/A/Frameworks/Pear.framework/Versions/A/Pear'
-exports:         
-  - archs:           [ x86_64 ]
-    re-exports:      [ '/usr/lib/libxml2.2.dylib' ]
+reexported-libraries:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    libraries:       [ '/usr/lib/libxml2.2.dylib' ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _LibXML2NodeListCreateFromPearCodecInfoList, _PearCodecInfoCopyLibXML2Node, 
                        _PearCodecInfoCopySDPString, _PearCodecInfoCreateAudioCodec, 
                        _PearCodecInfoCreateVideoCodec, _PearCodecInfoCreateWithLibXML2Node, 
@@ -200,14 +224,22 @@ exports:
                        __Z24PearMediaChannelSendRTCPP22OpaquePearMediaChannelPK8__CFData, 
                        __Z30PearMediaChannelSetInboundSSRCP22OpaquePearMediaChannelj, 
                        __Z31PearMediaChannelSetOutboundSSRCP22OpaquePearMediaChannelj ]
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 23B8C3C0-FCAA-323A-B80C-84F8B15BDBAB' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           F599ECC2-0CED-3AED-90D6-B6461C71DE2A
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           13E7B5D7-229E-3A16-97CA-9EBEC4A28780
 install-name:    '/System/Library/PrivateFrameworks/VCXMPP.framework/Versions/A/Frameworks/XMPPToolkit.framework/Versions/A/XMPPToolkit'
-exports:         
-  - archs:           [ x86_64 ]
-    re-exports:      [ '/System/Library/PrivateFrameworks/VCXMPP.framework/Versions/A/Frameworks/uxmi.framework/Versions/0.1/uxmi' ]
+reexported-libraries:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    libraries:       [ '/System/Library/PrivateFrameworks/VCXMPP.framework/Versions/A/Frameworks/uxmi.framework/Versions/0.1/uxmi' ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _NSPropertyListXMLNamespace, _NSXMPPChatStateActive, _NSXMPPChatStateComposing, 
                        _NSXMPPChatStateGone, _NSXMPPChatStateInactive, _NSXMPPChatStatePaused, 
                        _NSXMPPCreateWeakMap_, _NSXMPPDomainnameIsValid, _NSXMPPInterfaceConstruct_, 
@@ -336,13 +368,19 @@ exports:
                        XMLTreeChildEnumerator.uri, XMLTreeWriter_IMP.helper, XMLTreeWriter_IMP.i, 
                        XMLTreeWriter_IMP.node, XTInvocationQueue.arrayQueue, XTInvocationQueue.arrayQueueLock, 
                        XTInvocationQueue.delegate ]
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: FF6B1E88-FBE5-3F25-9E11-4A90D4A3A4BA' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           AA08B58D-BA79-3222-A412-0DD575BC8F37
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           24668312-A99C-3082-A2D0-24FE6C7EF83E
 install-name:    '/System/Library/PrivateFrameworks/VCXMPP.framework/Versions/A/Frameworks/uxmi.framework/Versions/0.1/uxmi'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CFUXMICreateBase64StringFromBytes, _CFUXMICreateBase64StringFromData, 
                        _CFUXMICreateDataFromBase64String, _CFUXMICreateDataFromBase64UTF8CString, 
                        _CFUXMIGetRunLoop, _CFUXMIRemoveFromRunLoop, _CFUXMIScheduleInRunLoop, 

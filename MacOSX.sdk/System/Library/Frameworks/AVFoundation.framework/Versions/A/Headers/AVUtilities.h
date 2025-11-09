@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVUtilities.h>)
 /*
     File:  AVUtilities.h
 	
@@ -23,3 +24,7 @@
  */
 
 AVF_EXPORT CGRect AVMakeRectWithAspectRatioInsideRect(CGSize aspectRatio, CGRect boundingRect) API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+
+#else
+#import <AVFCore/AVUtilities.h>
+#endif

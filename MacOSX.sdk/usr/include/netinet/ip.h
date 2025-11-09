@@ -65,9 +65,9 @@
 #define _NETINET_IP_H_
 #include <sys/appleapiopts.h>
 #include <sys/types.h>          /* XXX temporary hack to get u_ types */
+
 #include <netinet/in.h>
 #include <netinet/in_systm.h>
-
 
 /*
  * Definitions for internet protocol version 4.
@@ -106,7 +106,7 @@ struct ip {
 };
 
 #ifdef _IP_VHL
-#define IP_MAKE_VHL(v, hl)      ((v) << 4 | (hl))
+#define IP_MAKE_VHL(v, hl)      ((uint8_t)((v) << 4 | (hl)))
 #define IP_VHL_HL(vhl)          ((vhl) & 0x0f)
 #define IP_VHL_V(vhl)           ((vhl) >> 4)
 #define IP_VHL_BORING           0x45

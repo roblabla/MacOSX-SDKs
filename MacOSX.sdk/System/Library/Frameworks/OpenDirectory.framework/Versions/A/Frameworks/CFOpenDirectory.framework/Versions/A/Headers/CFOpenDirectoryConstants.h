@@ -247,6 +247,16 @@ typedef NSString *ODErrorUserInfoKeyType;
 typedef CFStringRef ODErrorUserInfoKeyType;
 #endif
 
+/*!
+   @typedef    ODOptionKeyType
+   @abstract   Type for any  keys passed in an options dictionary
+*/
+#ifdef __OBJC__
+typedef NSString *ODOptionKeyType;
+#else
+typedef CFStringRef ODOptionKeyType;
+#endif
+
 // Compatibility
 typedef ODRecordType _ODRecordType;
 typedef ODAttributeType _ODAttributeType;

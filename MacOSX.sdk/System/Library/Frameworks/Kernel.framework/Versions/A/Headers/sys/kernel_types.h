@@ -64,6 +64,9 @@ typedef struct vnode * vnode_t;
 struct proc;
 typedef struct proc * proc_t;
 
+struct proc_ident;
+typedef struct proc_ident * proc_ident_t;
+
 struct uio;
 typedef struct uio * uio_t;
 
@@ -107,6 +110,7 @@ typedef struct ucred * ucred_t;
 typedef struct mount * mount_t;
 typedef struct vnode * vnode_t;
 typedef struct proc * proc_t;
+typedef struct proc_ident * proc_ident_t;
 typedef struct uio * uio_t;
 typedef struct user_iovec * user_iovec_t;
 typedef struct vfs_context * vfs_context_t;

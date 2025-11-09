@@ -43,7 +43,7 @@
  * fsctl (vnop_ioctl) to set the callers credentials associated with the vnode's mount
  */
 struct nfs_gss_principal {
-	uint32_t        princlen;       /* length of data */
+	size_t          princlen;       /* length of data */
 	uint32_t        nametype;       /* nametype of data */
 	uint8_t         *principal;
 	uint32_t        flags;          /* Return flags */

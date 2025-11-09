@@ -1,24 +1,36 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: ED82EFFE-679F-3D01-B2C8-9A7EC26780F7', 'x86_64: ED82EFFE-679F-3D01-B2C8-9A7EC26780F7' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           A39A95E5-FF33-303F-B2C3-B11BC8453D60
+  - target:          x86_64-maccatalyst
+    value:           A39A95E5-FF33-303F-B2C3-B11BC8453D60
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           1E61A2E1-CC39-36EC-9B5C-7EB017733C91
+  - target:          arm64e-maccatalyst
+    value:           1E61A2E1-CC39-36EC-9B5C-7EB017733C91
 install-name:    '/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration'
-exports:         
-  - archs:           [ x86_64 ]
-    symbols:         [ _DAAddCallbackToSession, _DAApprovalSessionCreate, _DAApprovalSessionGetTypeID, 
-                       _DAApprovalSessionScheduleWithRunLoop, _DAApprovalSessionUnscheduleFromRunLoop, 
-                       _DACallbackCreate, _DADiskClaim, _DADiskCopyDescription, _DADiskCopyIOMedia, 
-                       _DADiskCopyWholeDisk, _DADiskCreateFromBSDName, _DADiskCreateFromIOMedia, 
-                       _DADiskCreateFromVolumePath, _DADiskEject, _DADiskGetBSDName, 
-                       _DADiskGetOptions, _DADiskGetTypeID, _DADiskIsClaimed, _DADiskMount, 
-                       _DADiskMountWithArguments, _DADiskRename, _DADiskSetOptions, 
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _DAApprovalSessionCreate, _DAApprovalSessionGetTypeID, _DAApprovalSessionScheduleWithRunLoop, 
+                       _DAApprovalSessionUnscheduleFromRunLoop, _DADiskClaim, _DADiskCopyDescription, 
+                       _DADiskCopyIOMedia, _DADiskCopyWholeDisk, _DADiskCreateFromBSDName, 
+                       _DADiskCreateFromIOMedia, _DADiskCreateFromVolumePath, _DADiskEject, 
+                       _DADiskGetBSDName, _DADiskGetOptions, _DADiskGetTypeID, _DADiskIsClaimed, 
+                       _DADiskMount, _DADiskMountWithArguments, _DADiskRename, _DADiskSetOptions, 
                        _DADiskUnclaim, _DADiskUnmount, _DADissenterCreate, _DADissenterGetProcessID, 
-                       _DADissenterGetStatus, _DADissenterGetStatusString, _DAGetCallbackFromSession, 
-                       _DARegisterDiskAppearedCallback, _DARegisterDiskDescriptionChangedCallback, 
-                       _DARegisterDiskDisappearedCallback, _DARegisterDiskEjectApprovalCallback, 
+                       _DADissenterGetStatus, _DADissenterGetStatusString, _DARegisterDiskAppearedCallback, 
+                       _DARegisterDiskDescriptionChangedCallback, _DARegisterDiskDisappearedCallback, 
+                       _DARegisterDiskEjectApprovalCallback, _DARegisterDiskListCompleteCallback, 
                        _DARegisterDiskMountApprovalCallback, _DARegisterDiskPeekCallback, 
                        _DARegisterDiskUnmountApprovalCallback, _DARegisterIdleCallback, 
-                       _DARemoveCallbackFromSession, _DARemoveCallbackFromSessionWithKey, 
                        _DASessionCreate, _DASessionGetTypeID, _DASessionScheduleWithRunLoop, 
                        _DASessionSetDispatchQueue, _DASessionUnscheduleFromRunLoop, 
                        _DAUnregisterApprovalCallback, _DAUnregisterCallback, __DADiskCreateFromSerialization, 

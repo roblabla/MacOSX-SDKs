@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCapture/AVPortraitEffectsMatte.h>)
 /*
     File:  AVPortraitMatte.h
  
@@ -119,3 +120,7 @@ AV_INIT_UNAVAILABLE
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCapture/AVPortraitEffectsMatte.h>
+#endif

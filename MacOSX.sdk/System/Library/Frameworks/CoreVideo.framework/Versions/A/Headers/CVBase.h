@@ -2,7 +2,7 @@
  *  CVBase.h
  *  CoreVideo
  *
- *  Copyright (c) 2004-2017 Apple Inc. All rights reserved.
+ *  Copyright (c) 2004-2020 Apple Inc. All rights reserved.
  *
  */
  
@@ -105,6 +105,14 @@ extern "C" {
 	#define COREVIDEO_SUPPORTS_METAL        COREVIDEO_FALSE
 #endif
 
+#ifndef COREVIDEO_SUPPORTS_PERMANENT_ALLOCATOR
+#if TARGET_OS_MAC
+    #define COREVIDEO_SUPPORTS_PERMANENT_ALLOCATOR  COREVIDEO_FALSE // set this to COREVIDEO_TRUE when this is fixed [64465605] malloc zone allocations all show up as non-object in heap
+#else
+    #define COREVIDEO_SUPPORTS_PERMANENT_ALLOCATOR  COREVIDEO_FALSE
+#endif  // TARGET_OS_MAC
+#endif  // COREVIDEO_SUPPORTS_PERMANENT_ALLOCATOR
+
 #if (__cplusplus && __cplusplus >= 201103L && (__has_extension(cxx_strong_enums) || __has_feature(objc_fixed_enum))) || (!__cplusplus && __has_feature(objc_fixed_enum))
 #define COREVIDEO_USE_DERIVED_ENUMS_FOR_CONSTANTS	COREVIDEO_TRUE
 #else
@@ -152,12 +160,10 @@ extern "C" {
 
 #define CV_INLINE CF_INLINE
 
-#if COREVIDEO_SUPPORTS_DIRECT3D
 #define CVDIRECT3DDEVICE LPDIRECT3DDEVICE9
 #define CVDIRECT3DTEXTURE LPDIRECT3DTEXTURE9
 #define CVDIRECT3DSURFACE LPDIRECT3DSURFACE9
 #define CVDIRECT3D LPDIRECT3D9
-#endif //COREVIDEO_SUPPORTS_DIRECT3D
 
 #if defined(COREVIDEO_SILENCE_GL_DEPRECATION) || \
 	defined(GL_SILENCE_DEPRECATION) || \

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2019 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2020 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -106,6 +106,9 @@ struct nd_ifinfo {
 #define ND6_IFF_REPLICATED              0x100   /* sleep proxy registered */
 #define ND6_IFF_DAD                     0x200   /* Perform DAD on the interface */
 
+extern int dad_enhanced;
+#define ND6_DAD_ENHANCED_DEFAULT        1
+
 struct in6_nbrinfo {
 	char ifname[IFNAMSIZ];  /* if name, e.g. "en0" */
 	struct in6_addr addr;   /* IPv6 address of the neighbor */
@@ -132,10 +135,11 @@ struct  in6_drlist {
 
 
 /* valid values for stateflags */
-#define NDDRF_INSTALLED 0x1     /* installed in the routing table */
-#define NDDRF_IFSCOPE   0x2     /* installed as a scoped route */
-#define NDDRF_STATIC    0x4     /* for internal use only */
-#define NDDRF_MAPPED    0x8     /* Default router addr is mapped to a different one for routing */
+#define NDDRF_INSTALLED 0x01     /* installed in the routing table */
+#define NDDRF_IFSCOPE   0x02     /* installed as a scoped route */
+#define NDDRF_STATIC    0x04     /* for internal use only */
+#define NDDRF_MAPPED    0x08     /* Default router addr is mapped to a different one for routing */
+#define NDDRF_INELIGIBLE     0x10     /* Default router entry is ineligible for default router selection */
 
 struct  in6_defrouter {
 	struct  sockaddr_in6 rtaddr;
@@ -191,7 +195,13 @@ struct  in6_ondireq {
 		u_int32_t flags;        /* Flags */
 		int recalctm;           /* BaseReacable re-calculation timer */
 		u_int8_t chlim;         /* CurHopLimit */
+		/* Number of routers learned on the  interface */
 		u_int8_t receivedra;
+		/*
+		 * The current collision count value
+		 * being used for secure address generation.
+		 */
+		u_int8_t collision_count;
 	} ndi;
 };
 

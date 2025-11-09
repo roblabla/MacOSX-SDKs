@@ -15,13 +15,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /** The key of the target object that is exported */
-CORE_IMAGE_EXPORT NSString *const kCIFilterGeneratorExportedKey;
+CORE_IMAGE_EXPORT NSString *const kCIFilterGeneratorExportedKey NS_AVAILABLE_MAC(10_5);
 
 /** Target object for the exported key */
-CORE_IMAGE_EXPORT NSString *const kCIFilterGeneratorExportedKeyTargetObject;
+CORE_IMAGE_EXPORT NSString *const kCIFilterGeneratorExportedKeyTargetObject NS_AVAILABLE_MAC(10_5);
 
 /** Name of the key under which it is exported. */
-CORE_IMAGE_EXPORT NSString *const kCIFilterGeneratorExportedKeyName;
+CORE_IMAGE_EXPORT NSString *const kCIFilterGeneratorExportedKeyName NS_AVAILABLE_MAC(10_5);
 
 
 

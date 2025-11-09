@@ -80,6 +80,9 @@
 #include <libkern/crc.h>
 #include <libkern/copyio.h>
 
+#if defined(__arm__) || defined(__arm64__)
+#include <arm/arch.h> /* for _ARM_ARCH_* */
+#endif
 
 #ifdef __APPLE_API_OBSOLETE
 /* BCD conversions. */
@@ -146,8 +149,7 @@ extern int      ffsll(unsigned long long);
 extern int      fls(unsigned int);
 extern int      flsll(unsigned long long);
 extern u_int32_t        random(void);
-extern int      scanc(u_int, u_char *, const u_char *, int);
-extern int      skpc(int, int, char *);
+extern size_t   scanc(size_t, u_char *, const u_char *, u_char);
 extern long     strtol(const char*, char **, int);
 extern u_long   strtoul(const char *, char **, int);
 extern quad_t   strtoq(const char *, char **, int);
@@ -156,7 +158,13 @@ extern char     *strsep(char **, const char *);
 extern void     *memchr(const void *, int, size_t);
 extern void     url_decode(char *str);
 
+/*
+ * NOTE: snprintf() returns the full length of the formatted string even if it
+ * couldn't fit in the supplied buffer.
+ * Use scnprintf() if you need the actual number of bytes (minus the \0)
+ */
 int     snprintf(char *, size_t, const char *, ...) __printflike(3, 4);
+int     scnprintf(char *, size_t, const char *, ...) __printflike(3, 4);
 
 /* sprintf() is being deprecated. Please use snprintf() instead. */
 int     sprintf(char *bufp, const char *, ...) __deprecated __printflike(2, 3);
@@ -180,6 +188,7 @@ int vsscanf(const char *, char const *, va_list);
 
 extern int      vprintf(const char *, va_list) __printflike(1, 0);
 extern int      vsnprintf(char *, size_t, const char *, va_list) __printflike(3, 0);
+extern int      vscnprintf(char *, size_t, const char *, va_list) __printflike(3, 0);
 
 
 /* vsprintf() is being deprecated. Please use vsnprintf() instead. */
@@ -194,8 +203,13 @@ extern void flush_dcache64(addr64_t, unsigned, int);
 static inline int
 clz(unsigned int num)
 {
+#if (__arm__ || __arm64__)
+	// On ARM, clz(0) is defined to return number of bits in the input type
+	return __builtin_clz(num);
+#else
 	// On Intel, clz(0) is undefined
 	return num ? __builtin_clz(num) : sizeof(num) * CHAR_BIT;
+#endif
 }
 
 

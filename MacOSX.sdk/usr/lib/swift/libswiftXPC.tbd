@@ -1,16 +1,31 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: C53D22CF-BE80-348B-A6EA-EB1E054A77C7', 'x86_64: C53D22CF-BE80-348B-A6EA-EB1E054A77C7' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           6D429554-F7A6-3EA0-A6CF-A9D6BA1441FF
+  - target:          x86_64-maccatalyst
+    value:           6D429554-F7A6-3EA0-A6CF-A9D6BA1441FF
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           4DEBEC88-35C5-3272-8958-C1EDBD65AE00
+  - target:          arm64e-maccatalyst
+    value:           4DEBEC88-35C5-3272-8958-C1EDBD65AE00
 install-name:    '/usr/lib/swift/libswiftXPC.dylib'
-current-version: 0
+current-version: 1.1
 swift-abi-version: 7
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftXPC.dylib', '$ld$install_name$os10.11$@rpath/libswiftXPC.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftXPC.dylib', '$ld$install_name$os10.13$@rpath/libswiftXPC.dylib', 
-                       '$ld$install_name$os10.14$@rpath/libswiftXPC.dylib', '$ld$install_name$os10.9$@rpath/libswiftXPC.dylib', 
-                       '_$s3XPC0A10_BOOL_TRUESo13OS_xpc_object_pvg', '_$s3XPC0A10_TYPE_BOOLs13OpaquePointerVvg', 
+                       '$ld$install_name$os10.14$@rpath/libswiftXPC.dylib', '$ld$install_name$os10.9$@rpath/libswiftXPC.dylib' ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+    symbols:         [ '_$s3XPC0A10_BOOL_TRUESo13OS_xpc_object_pvg', '_$s3XPC0A10_TYPE_BOOLs13OpaquePointerVvg', 
                        '_$s3XPC0A10_TYPE_DATAs13OpaquePointerVvg', '_$s3XPC0A10_TYPE_DATEs13OpaquePointerVvg', 
                        '_$s3XPC0A10_TYPE_NULLs13OpaquePointerVvg', '_$s3XPC0A10_TYPE_UUIDs13OpaquePointerVvg', 
                        '_$s3XPC0A11_BOOL_FALSESo13OS_xpc_object_pvg', '_$s3XPC0A11_TYPE_ARRAYs13OpaquePointerVvg', 

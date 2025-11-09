@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: C6644EE2-7001-3380-9EA5-0A2005768DF9', 'x86_64: C6644EE2-7001-3380-9EA5-0A2005768DF9' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           964080EE-4F6F-38D8-B64E-E0265A544A97
+  - target:          x86_64-maccatalyst
+    value:           964080EE-4F6F-38D8-B64E-E0265A544A97
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           74A2D0C4-C07D-3B93-8E16-322470289926
+  - target:          arm64e-maccatalyst
+    value:           74A2D0C4-C07D-3B93-8E16-322470289926
 install-name:    '/System/Library/Frameworks/AudioUnit.framework/Versions/A/AudioUnit'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$add$os10.10$_AudioCodecAppendInputBufferList', '$ld$add$os10.10$_AudioCodecAppendInputData', 
                        '$ld$add$os10.10$_AudioCodecGetProperty', '$ld$add$os10.10$_AudioCodecGetPropertyInfo', 
                        '$ld$add$os10.10$_AudioCodecInitialize', '$ld$add$os10.10$_AudioCodecProduceOutputBufferList', 
@@ -147,12 +161,16 @@ exports:
                        '$ld$add$os10.9$_AudioUnitUninitialize', '$ld$add$os10.9$_MusicDeviceMIDIEvent', 
                        '$ld$add$os10.9$_MusicDevicePrepareInstrument', '$ld$add$os10.9$_MusicDeviceReleaseInstrument', 
                        '$ld$add$os10.9$_MusicDeviceStartNote', '$ld$add$os10.9$_MusicDeviceStopNote', 
-                       '$ld$add$os10.9$_MusicDeviceSysEx', _AudioCodecAppendInputBufferList, 
-                       _AudioCodecAppendInputData, _AudioCodecGetProperty, _AudioCodecGetPropertyInfo, 
-                       _AudioCodecInitialize, _AudioCodecProduceOutputBufferList, 
-                       _AudioCodecProduceOutputPackets, _AudioCodecReset, _AudioCodecSetProperty, 
-                       _AudioCodecUninitialize, _AudioComponentCopyName, _AudioComponentCount, 
-                       _AudioComponentFindNext, _AudioComponentGetDescription, _AudioComponentGetVersion, 
+                       '$ld$add$os10.9$_MusicDeviceSysEx' ]
+reexports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _AudioCodecAppendInputBufferList, _AudioCodecAppendInputData, 
+                       _AudioCodecGetProperty, _AudioCodecGetPropertyInfo, _AudioCodecInitialize, 
+                       _AudioCodecProduceOutputBufferList, _AudioCodecProduceOutputPackets, 
+                       _AudioCodecReset, _AudioCodecSetProperty, _AudioCodecUninitialize, 
+                       _AudioComponentCopyName, _AudioComponentCount, _AudioComponentFindNext, 
+                       _AudioComponentGetDescription, _AudioComponentGetVersion, 
                        _AudioComponentInstanceCanDo, _AudioComponentInstanceDispose, 
                        _AudioComponentInstanceGetComponent, _AudioComponentInstanceNew, 
                        _AudioComponentRegister, _AudioOutputUnitStart, _AudioOutputUnitStop, 

@@ -340,6 +340,32 @@ struct ExceptionInformation {
 typedef struct ExceptionInformation     ExceptionInformation;
 #endif  /* TARGET_CPU_X86 || TARGET_CPU_X86_64 */
 
+#if TARGET_CPU_ARM64
+typedef struct {
+	const void*		__unusedMachineInformationField;
+} MachineInformation;
+typedef struct {
+	const void*		__unusedRegisterInformationField;
+} RegisterInformation;
+typedef struct {
+	const void*		__unusedFPUInformationField;
+} FPUInformation;
+typedef struct {
+	const void*		__unusedVectorInformationField;
+} VectorInformation;
+
+struct ExceptionInformation {
+  ExceptionKind       theKind;
+  /* XXX: Not implemented */
+  MachineInformation * machineState;
+  RegisterInformation * registerImage;
+  FPUInformation *    FPUImage;
+  ExceptionInfo       info;
+  VectorInformation * vectorImage;
+};
+typedef struct ExceptionInformation     ExceptionInformation;
+#endif  /* TARGET_CPU_ARM64 */
+
 /* 
     Note:   An ExceptionHandler is NOT a UniversalProcPtr, except in Carbon.
             It must be a PowerPC function pointer with NO routine descriptor, 
@@ -357,7 +383,7 @@ typedef STACK_UPP_TYPE(ExceptionHandlerProcPtr)                 ExceptionHandler
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern ExceptionHandlerUPP
-NewExceptionHandlerUPP(ExceptionHandlerProcPtr userRoutine)   __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
+NewExceptionHandlerUPP(ExceptionHandlerProcPtr userRoutine) __API_DEPRECATED("No longer supported", macos(10.0,10.8)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 /*
  *  DisposeExceptionHandlerUPP()
@@ -368,7 +394,7 @@ NewExceptionHandlerUPP(ExceptionHandlerProcPtr userRoutine)   __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeExceptionHandlerUPP(ExceptionHandlerUPP userUPP)       __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
+DisposeExceptionHandlerUPP(ExceptionHandlerUPP userUPP) __API_DEPRECATED("No longer supported", macos(10.0,10.8)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 /*
  *  InvokeExceptionHandlerUPP()
@@ -380,8 +406,8 @@ DisposeExceptionHandlerUPP(ExceptionHandlerUPP userUPP)       __OSX_AVAILABLE_BU
  */
 extern OSStatus
 InvokeExceptionHandlerUPP(
-  ExceptionInformation *  theException,
-  ExceptionHandlerUPP     userUPP)                            __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
+						  ExceptionInformation *  theException,
+						  ExceptionHandlerUPP     userUPP) __API_DEPRECATED("No longer supported", macos(10.0,10.8)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 #if __MACH__
   #ifdef __cplusplus
@@ -406,15 +432,18 @@ InvokeExceptionHandlerUPP(
 typedef ExceptionHandlerUPP             ExceptionHandlerTPP;
 typedef ExceptionHandlerTPP             ExceptionHandler;
 /* Routine for installing per-process exception handlers */
-/*
+/*!
  *  InstallExceptionHandler()
- *  
+ *
+ *  As of macOS 10.16, this call always returns kMPInvalidIDErr and otherwise does nothing.  It has been deprecated since
+ *  macOS 10.8 and non-functional since macOS10.13.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.0 and later in CoreServices.framework
  *    CarbonLib:        in CarbonLib 1.1 and later
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
-extern ExceptionHandlerTPP  InstallExceptionHandler(ExceptionHandlerTPP theHandler) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
+extern ExceptionHandlerTPP  InstallExceptionHandler(ExceptionHandlerTPP theHandler) __API_DEPRECATED("No longer support", macos(10.0,10.8)) __API_UNAVAILABLE(ios,watchos,tvos);
 
 
 

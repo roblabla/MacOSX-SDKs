@@ -142,6 +142,7 @@
 #import <AppKit/NSTouchBar.h>
 #import <AppKit/NSTouchBarItem.h>
 #import <AppKit/NSTrackingArea.h>
+#import <AppKit/NSTrackingSeparatorToolbarItem.h>
 #import <AppKit/NSUserActivity.h>
 #import <AppKit/NSView.h>
 #import <AppKit/NSViewController.h>
@@ -159,6 +160,7 @@
 #import <AppKit/NSTableHeaderView.h>
 #import <AppKit/NSTableRowView.h>
 #import <AppKit/NSTableView.h>
+#import <AppKit/NSTableViewDiffableDataSource.h>
 #import <AppKit/NSTableViewRowAction.h>
 #import <AppKit/NSOutlineView.h>
 #import <AppKit/NSAttributedString.h>
@@ -256,3 +258,5 @@
 #import <AppKit/NSButtonTouchBarItem.h>
 #import <AppKit/NSPickerTouchBarItem.h>
 #import <AppKit/NSStepperTouchBarItem.h>
+#import <AppKit/NSTintConfiguration.h>
+#import <AppKit/NSSearchToolbarItem.h>

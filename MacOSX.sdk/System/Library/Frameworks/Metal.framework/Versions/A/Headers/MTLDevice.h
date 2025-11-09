@@ -29,6 +29,11 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol MTLHeap;
 @protocol MTLFence;
 @protocol MTLArgumentEncoder;
+@protocol MTLRasterizationRateMap;
+@class MTLRasterizationRateLayerDescriptor;
+@class MTLRasterizationRateMapDescriptor;
+@class MTLTileRenderPipelineDescriptor;
+@class MTLTilePipelineColorAttachmentDescriptor;
 @class MTLSamplerDescriptor;
 @class MTLRenderPipelineColorAttachmentDescriptor;
 @class MTLDepthStencilDescriptor;
@@ -36,6 +41,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class MTLCompileOptions;
 @class MTLRenderPipelineDescriptor;
 @class MTLRenderPassDescriptor;
+@class MTLComputePassDescriptor;
+@class MTLBlitPassDescriptor;
 @class MTLRenderPipelineReflection;
 @class MTLComputePipelineDescriptor;
 @class MTLComputePipelineReflection;
@@ -49,6 +56,16 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol MTLEvent;
 @protocol MTLSharedEvent;
 @class MTLSharedEventHandle;
+@protocol MTLDynamicLibrary;
+@protocol MTLBinaryArchive;
+@class MTLBinaryArchiveDescriptor;
+@class MTLAccelerationStructureDescriptor;
+@protocol MTLAccelerationStructure;
+@protocol MTLFunctionHandle;
+@protocol MTLVisibleFunctionTable;
+@class MTLVisibleFunctionTableDescriptor;
+@protocol MTLIntersectionFunctionTable;
+@class MTLIntersectionFunctionTableDescriptor;
 
 /*!
  @brief Returns a reference to the preferred system default Metal device.
@@ -100,8 +117,9 @@ typedef void (^MTLDeviceNotificationHandler)(id <MTLDevice> device, MTLDeviceNot
  @brief Returns an NSArray of the current set of available Metal devices and installs a notification handler
  to be notified of any further changes (additions, removals, etc.).  The observer return value is retained by Metal and may be
  passed to MTLRemoveDeviceObserver() if the application no longer wishes to receive notifications.
+ @note The observer out parameter is returned with a +1 retain count in addition to the retain mentioned above.
 */
-MTL_EXTERN NSArray <id<MTLDevice>> *MTLCopyAllDevicesWithObserver(id <NSObject> __nullable * __nonnull observer, MTLDeviceNotificationHandler handler) API_AVAILABLE(macos(10.13)) API_UNAVAILABLE(ios) NS_RETURNS_RETAINED;
+MTL_EXTERN NSArray <id<MTLDevice>> *MTLCopyAllDevicesWithObserver(id <NSObject> __nullable __strong * __nonnull observer, MTLDeviceNotificationHandler handler) API_AVAILABLE(macos(10.13)) API_UNAVAILABLE(ios) NS_RETURNS_RETAINED;
 
 /*!
  @brief Removes a previously installed observer for device change notifications.
@@ -130,6 +148,7 @@ typedef NS_ENUM(NSUInteger, MTLFeatureSet)
     MTLFeatureSet_iOS_GPUFamily2_v5 API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, macCatalyst, tvos) = 13,
     MTLFeatureSet_iOS_GPUFamily3_v4 API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, macCatalyst, tvos) = 14,
     MTLFeatureSet_iOS_GPUFamily4_v2 API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, macCatalyst, tvos) = 15,
+    MTLFeatureSet_iOS_GPUFamily5_v1 API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, macCatalyst, tvos) = 16,
 
     MTLFeatureSet_macOS_GPUFamily1_v1 API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios) API_UNAVAILABLE(macCatalyst) = 10000,
     MTLFeatureSet_OSX_GPUFamily1_v1 API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios) = MTLFeatureSet_macOS_GPUFamily1_v1, // deprecated
@@ -151,8 +170,10 @@ typedef NS_ENUM(NSUInteger, MTLFeatureSet)
     MTLFeatureSet_tvOS_GPUFamily1_v2 API_AVAILABLE(tvos(10.0)) API_UNAVAILABLE(macos, ios) = 30001,
     
     MTLFeatureSet_tvOS_GPUFamily1_v3 API_AVAILABLE(tvos(11.0)) API_UNAVAILABLE(macos, ios) = 30002,
+    MTLFeatureSet_tvOS_GPUFamily2_v1 API_AVAILABLE(tvos(11.0)) API_UNAVAILABLE(macos, ios) = 30003,
     
     MTLFeatureSet_tvOS_GPUFamily1_v4 API_AVAILABLE(tvos(12.0)) API_UNAVAILABLE(macos, ios) = 30004,
+    MTLFeatureSet_tvOS_GPUFamily2_v2 API_AVAILABLE(tvos(12.0)) API_UNAVAILABLE(macos, ios) = 30005,
 } API_AVAILABLE(macos(10.11), ios(8.0), tvos(9.0));
 
 typedef NS_ENUM(NSInteger, MTLGPUFamily)
@@ -162,6 +183,8 @@ typedef NS_ENUM(NSInteger, MTLGPUFamily)
     MTLGPUFamilyApple3 = 1003,
     MTLGPUFamilyApple4 = 1004,
     MTLGPUFamilyApple5 = 1005,
+    MTLGPUFamilyApple6 = 1006,
+    MTLGPUFamilyApple7 = 1007,
     
     MTLGPUFamilyMac1 = 2001,
     MTLGPUFamilyMac2 = 2002,
@@ -195,7 +218,7 @@ typedef NS_OPTIONS(NSUInteger, MTLPipelineOption)
     MTLPipelineOptionNone               = 0,
     MTLPipelineOptionArgumentInfo       = 1 << 0,
     MTLPipelineOptionBufferTypeInfo     = 1 << 1,
-    
+    MTLPipelineOptionFailOnBinaryArchiveMiss API_AVAILABLE(macos(11.0), ios(14.0)) = 1 << 2,
 } API_AVAILABLE(macos(10.11), ios(8.0));
 
 /*!
@@ -219,6 +242,63 @@ typedef NS_ENUM(NSUInteger, MTLArgumentBuffersTier)
     MTLArgumentBuffersTier2 = 1,
 } API_AVAILABLE(macos(10.13), ios(11.0));
 
+/*!
+ @enum MTLSparseTextureRegionAlignmentMode
+ @abstract MTLSparseTextureRegionAlignmentMode determines type of alignment used when converting from pixel region to tile region.
+ */
+typedef NS_ENUM(NSUInteger, MTLSparseTextureRegionAlignmentMode)
+{
+    MTLSparseTextureRegionAlignmentModeOutward   = 0,
+    MTLSparseTextureRegionAlignmentModeInward    = 1,
+} API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0));
+
+/**
+ * @brief Describes the memory requirements for an acceleration structure
+ */
+typedef struct {
+    /**
+     * @brief The required size, in bytes, of the built acceleration structure
+     */
+    NSUInteger accelerationStructureSize;
+    
+    /**
+     * @brief The required size, in bytes, of the scratch buffer used to build the acceleration structure
+     */
+    NSUInteger buildScratchBufferSize;
+    
+    /**
+     * @brief The required size, in bytes, of the scratch buffer used to refit the acceleration structure
+     */
+    NSUInteger refitScratchBufferSize;
+} MTLAccelerationStructureSizes;
+
+/*!
+ @enum MTLCounterSamplingPoint
+ @abstract MTLCounterSamplingPoint determines type of sampling points that are supported on given device.
+
+ @constant MTLCounterSamplingPointAtStageBoundary
+ Counter sampling points at render, compute, and blit command encoder stage boundary are supported.
+
+ @constant MTLCounterSamplingPointAtDrawBoundary
+ Counter sampling at draw boundary is supported, render encoder method sampleCountersInBuffer can be used for sampling.
+
+ @constant MTLCounterSamplingPointAtDispatchBoundary
+ Counter sampling at compute dispatch boundary is supported, compute encoder method sampleCountersInBuffer can be used for sampling.
+
+ @constant MTLCounterSamplingPointAtTileDispatchBoundary
+ Counter sampling at tile shader dispatch boundary is supported.
+
+ @constant MTLCounterSamplingPointAtBlitBoundary
+ Counter sampling at blit boundary is supported, blit encoder method sampleCountersInBuffer can be used for sampling.
+*/
+typedef NS_ENUM(NSUInteger, MTLCounterSamplingPoint)
+{
+    MTLCounterSamplingPointAtStageBoundary,
+    MTLCounterSamplingPointAtDrawBoundary,
+    MTLCounterSamplingPointAtDispatchBoundary,
+    MTLCounterSamplingPointAtTileDispatchBoundary,
+    MTLCounterSamplingPointAtBlitBoundary
+} API_AVAILABLE(macos(11.0), ios(14.0));
 
 /*!
  @abstract Represent a memory size and alignment in bytes.
@@ -411,7 +491,40 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  */
 @property (readonly, getter=areRasterOrderGroupsSupported) BOOL rasterOrderGroupsSupported API_AVAILABLE(macos(10.13), ios(11.0));
 
+/*!
+ @property supports32BitFloatFiltering
+ @abstract Query device for 32-bit Float texture filtering support. Specifically, R32Float, RG32Float, and RGBA32Float.
+ @return BOOL value. If YES, the device supports filtering 32-bit Float textures. If NO, the device does not.
+ */
+@property(readonly) BOOL supports32BitFloatFiltering API_AVAILABLE(macos(11.0), ios(14.0));
 
+/*!
+ @property supports32BitMSAA
+ @abstract Query device for 32-bit MSAA texture support. Specifically, added support for allocating 32-bit Integer format textures (R32Uint, R32Sint, RG32Uint, RG32Sint, RGBA32Uint, and RGBA32Sint) and resolving 32-bit Float format textures (R32Float, RG32Float, and RGBA32Float).
+ @return BOOL value. If YES, the device supports these additional 32-bit MSAA texture capabilities. If NO, the devices does not.
+ */
+@property(readonly) BOOL supports32BitMSAA API_AVAILABLE(macos(11.0), ios(14.0));
+
+/*!
+@property supportsQueryTextureLOD
+@abstract Query device for whether it supports the `calculate_clampled_lod` and `calculate_unclamped_lod` Metal shading language functionality.
+@return BOOL value. If YES, the device supports the calculate LOD functionality. If NO, the device does not.
+*/
+@property (readonly) BOOL supportsQueryTextureLOD API_AVAILABLE(macos(11.0), ios(14.0));
+
+/*!
+ @property supportsBCTextureCompression
+ @abstract Query device for BC Texture format support
+ @return BOOL value. If YES, the device supports compressed BC Texture formats. If NO, the device does not.
+ */
+ @property (readonly) BOOL supportsBCTextureCompression API_AVAILABLE(macos(11.0), ios(14.0));
+
+/*!
+ @property supportsPullModelInterpolation
+ @abstract Query device for pull model interpolation support which allows a fragment shader to compute multiple interpolations (at center, at centroid, at offset, at sample) of a fragment input.
+ @return BOOL value. If YES, the device supports pull model interpolation. If NO, the device does not.
+ */
+@property(readonly) BOOL supportsPullModelInterpolation API_AVAILABLE(macos(11.0),ios(14.0));
 
 /*!
  @property barycentricsSupported
@@ -419,9 +532,12 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  @return BOOL value. If YES, the device barycentric coordinates
  */
 @property(readonly, getter=areBarycentricCoordsSupported) BOOL barycentricCoordsSupported API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
-
-@property (readonly) BOOL supportsShaderBarycentricCoordinates API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
-
+/*!
+ @property supportsShaderBarycentricCoordinates
+ @abstract Query device for Barycentric Coordinates support.
+ @return BOOL value. If YES, the device supports barycentric coordinates. If NO, the device does not.
+ */
+ @property (readonly) BOOL supportsShaderBarycentricCoordinates API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
 
 /*!
  @property currentAllocatedSize
@@ -679,6 +795,19 @@ API_AVAILABLE(macos(10.11), ios(8.0))
 
 
 /*!
+ @method newRenderPipelineStateWithTileDescriptor:options:reflection:error:
+ @abstract Create and compile a new MTLRenderPipelineState object synchronously given a MTLTileRenderPipelineDescriptor.
+ */
+- (nullable id <MTLRenderPipelineState>)newRenderPipelineStateWithTileDescriptor:(MTLTileRenderPipelineDescriptor*)descriptor options:(MTLPipelineOption)options reflection:(MTLAutoreleasedRenderPipelineReflection * __nullable)reflection error:(__autoreleasing NSError **)error API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+
+
+/*!
+ @method newRenderPipelineStateWithTileDescriptor:options:completionHandler:
+ @abstract Create and compile a new MTLRenderPipelineState object asynchronously given a MTLTileRenderPipelineDescriptor.
+ */
+- (void)newRenderPipelineStateWithTileDescriptor:(MTLTileRenderPipelineDescriptor *)descriptor options:(MTLPipelineOption)options completionHandler:(MTLNewRenderPipelineStateWithReflectionCompletionHandler)completionHandler API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+
+/*!
  @property maxThreadgroupMemoryLength
  @abstract The maximum threadgroup memory available, in bytes.
  */
@@ -715,6 +844,21 @@ API_AVAILABLE(macos(10.11), ios(8.0))
 - (nullable id <MTLArgumentEncoder>)newArgumentEncoderWithArguments:(NSArray <MTLArgumentDescriptor *> *)arguments API_AVAILABLE(macos(10.13), ios(11.0));
 
 
+/*!
+ @method supportsRasterizationRateMapWithLayerCount:
+ @abstract Query device for variable rasterization rate support with the given number of layers.
+ @param layerCount The number of layers for which to query device support.
+ @return YES if the device supports creation of rendering using a MTLRasterizationRateMap with the given number of layers.
+ */
+-(BOOL)supportsRasterizationRateMapWithLayerCount:(NSUInteger)layerCount API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4));
+
+/*!
+ @method newRasterizationRateMapWithDescriptor:
+ @abstract Creates a new variable rasterization rate map with the given descriptor.
+ @discussion If '[self supportsRasterizationRateMapWithLayerCount:descriptor.layerCount]' returns NO, or descriptor.screenSize describes an empty region, the result will always be nil.
+ @return A MTLRasterizationRateMap instance that can be used for rendering on this MTLDevice, or nil if the device does not support the combination of parameters stored in the descriptor.
+ */
+-(nullable id<MTLRasterizationRateMap>)newRasterizationRateMapWithDescriptor:(MTLRasterizationRateMapDescriptor*)descriptor API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4));
 
 /*!
  * @method newIndirectCommandBufferWithDescriptor:maxCommandCount:options
@@ -768,8 +912,42 @@ API_AVAILABLE(macos(10.11), ios(8.0))
 
 //Keep around to keep building
 
+/*!
+ * @method sparseTileSizeWithTextureType:pixelFormat:sampleCount:
+ * @abstract Returns tile size for sparse texture with given type, pixel format and sample count.
+ */
+-(MTLSize) sparseTileSizeWithTextureType:(MTLTextureType)textureType
+                             pixelFormat:(MTLPixelFormat)pixelFormat
+                             sampleCount:(NSUInteger)sampleCount API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0));
 
+/*!
+ @property sparseTileSizeInBytes
+ @abstract Returns the number of bytes required to map one sparse texture tile.
+ */
+@property (readonly) NSUInteger sparseTileSizeInBytes API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0));
 
+@optional
+/*!
+ * @method convertSparsePixelRegions:toTileRegions:withTileSize:alignmentMode:numRegions:
+ * @abstract Converts regions in pixels to regions in sparse tiles using specified alignment mode.
+   Tile size can be obtained from tileSizeWithTextureType:pixelFormat:sampleCount: method.
+ */
+-(void) convertSparsePixelRegions:(const MTLRegion[_Nonnull])pixelRegions
+                    toTileRegions:(MTLRegion[_Nonnull])tileRegions
+                     withTileSize:(MTLSize)tileSize
+                    alignmentMode:(MTLSparseTextureRegionAlignmentMode)mode
+                       numRegions:(NSUInteger)numRegions API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0));
+
+/*!
+ * @method convertSparseTileRegions:toPixelRegions:withTileSize:numRegions:
+ * @abstract Convertes region in sparse tiles to region in pixels
+   Tile size can be obtained from tileSizeWithTextureType:pixelFormat:sampleCount: method.
+ */
+-(void) convertSparseTileRegions:(const MTLRegion[_Nonnull])tileRegions
+                  toPixelRegions:(MTLRegion[_Nonnull])pixelRegions
+                    withTileSize:(MTLSize)tileSize
+                      numRegions:(NSUInteger)numRegions API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0));
+@required
 
 
 
@@ -779,7 +957,7 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  @property counterSets
  @abstract Returns the set of Counter Sets exposed by the device.
  */
-@property (readonly, nullable) NSArray<id<MTLCounterSet>>* counterSets API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
+@property (readonly, nullable) NSArray<id<MTLCounterSet>>* counterSets API_AVAILABLE(macos(10.15), ios(14.0));
 
 
 /*!
@@ -792,17 +970,84 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  */
 - (nullable id<MTLCounterSampleBuffer>) newCounterSampleBufferWithDescriptor:(MTLCounterSampleBufferDescriptor*)descriptor
                                                               error:(NSError**)error
-    API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
+    API_AVAILABLE(macos(10.15), ios(14.0));
 
+#if defined(MTL_TIMESTAMP_AS_NSUINTEGER) && MTL_TIMESTAMP_AS_NSUINTEGER
+typedef NSUInteger MTLTimestamp;
+#else
+typedef uint64_t MTLTimestamp;
+#endif
 /*!
  @method sampleTimestamps:gpuTimestamp:
  @abstract Sample the CPU and GPU timestamps as closely as possible.
  @param cpuTimestamp The timestamp on the CPU
  @param gpuTimestamp The timestamp on the GPU
  */
--(void)sampleTimestamps:(NSUInteger *)cpuTimestamp
-           gpuTimestamp:(NSUInteger *)gpuTimestamp
-    API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
+-(void)sampleTimestamps:(MTLTimestamp *)cpuTimestamp
+           gpuTimestamp:(MTLTimestamp *)gpuTimestamp
+    API_AVAILABLE(macos(10.15), ios(14.0));
+
+/*!
+ @method supportsCounterSampling:
+ @abstract Query device for counter sampling points support.
+ @param samplingPoint Query index
+ @return BOOL value. If YES, the device supports counter sampling at given point.
+*/
+- (BOOL)supportsCounterSampling:(MTLCounterSamplingPoint)samplingPoint API_AVAILABLE(macos(11.0), ios(14.0));
+
+/*!
+ @property supportsVertexAmplificationCount:
+ @abstract Query device for vertex amplification support.
+ @param count The amplification count to check
+ @return BOOL value. If YES, the device supports vertex amplification with the given count. If NO, the device does not.
+ */
+- (BOOL)supportsVertexAmplificationCount:(NSUInteger)count API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4));
+
+/*!
+ @property supportsDynamicLibraries
+ @abstract Query device support for compiling dynamic libraries.
+ @return BOOL value. If YES, the device supports compiling dynamic libraries. If NO, the devices does not.
+ */
+@property(readonly) BOOL supportsDynamicLibraries API_AVAILABLE(macos(11.0), ios(14.0));
+
+/*!
+ @method newDynamicLibrary:error:
+ @abstract Creates a MTLDynamicLibrary by compiling the code in a MTLLibrary.
+ @see MTLDynamicLibrary
+ @param library The MTLLibrary from which to compile code. This library must have .type set to MTLLibraryTypeDynamic.
+ @param error If an error occurs during creation, this parameter is updated to describe the failure.
+ @return On success, the MTLDynamicLibrary containing compiled code. On failure, nil.
+ */
+- (nullable id<MTLDynamicLibrary>) newDynamicLibrary:(id<MTLLibrary>)library error:(NSError **) error API_AVAILABLE(macos(11.0), ios(14.0));
+
+/*!
+ @method newDynamicLibraryWithURL:error:
+ @abstract Creates a MTLDynamicLibrary by loading compiled code from a file.
+ @see MTLDynamicLibrary
+ @param url The file URL from which to load. If the file contains no compiled code for this device, compilation is attempted as with newDynamicLibrary:error:
+ @param error If an error occurs during creation, this parameter is updated to describe the failure.
+ @return On success, the MTLDynamicLibrary containing compiled code (either loaded or compiled). On failure, nil.
+ */
+- (nullable id<MTLDynamicLibrary>) newDynamicLibraryWithURL:(NSURL *)url error:(NSError **) error API_AVAILABLE(macos(11.0), ios(14.0));
+/*!
+ @method newBinaryArchiveWithDescriptor:error:
+ @abstract Creates a MTLBinaryArchive using the configuration in the descriptor.
+ @see MTLBinaryArchive
+ @param descriptor The descriptor for the configuration of the binary archive to create.
+ @param error If an error occurs during creation, this parameter is updated to describe the failure.
+ @return On success, the created MTLBinaryArchive. On failure, nil.
+ */
+- (nullable id<MTLBinaryArchive>) newBinaryArchiveWithDescriptor:(MTLBinaryArchiveDescriptor*)descriptor
+                                                           error:(NSError**)error API_AVAILABLE(macos(11.0), ios(14.0));
+
+@property (readonly) BOOL supportsRaytracing API_AVAILABLE(macos(11.0), ios(14.0));
+
+- (MTLAccelerationStructureSizes)accelerationStructureSizesWithDescriptor:(MTLAccelerationStructureDescriptor *)descriptor API_AVAILABLE(macos(11.0), ios(14.0));
+
+- (nullable id <MTLAccelerationStructure>)newAccelerationStructureWithSize:(NSUInteger)size API_AVAILABLE(macos(11.0), ios(14.0));
+- (nullable id <MTLAccelerationStructure>)newAccelerationStructureWithDescriptor:(MTLAccelerationStructureDescriptor *)descriptor API_AVAILABLE(macos(11.0), ios(14.0));
+
+@property (readonly) BOOL supportsFunctionPointers API_AVAILABLE(macos(11.0), ios(14.0));
 
 
 @end

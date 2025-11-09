@@ -93,19 +93,24 @@ The default is 4096 bytes.
 .It Fl o Ar options
 Additional (undocumented) formatting options.
 .It Fl i
-Creates a case-insensitive volume. This is the default on macOS.
+Creates a case-insensitive volume.
+This is the default on macOS.
 .It Fl e
 Creates a case-sensitive volume.
 .It Fl U Ar uid
-The UID of the root volume. Defaults to current UID.
+The UID of the root volume.
+Defaults to current UID.
 .It Fl G Ar uid
-The GID of the root volume. Defaults to current GID.
+The GID of the root volume.
+Defaults to current GID.
 .It Fl q Ar volume-quota
-Places a quota, or upper limit, on the size of the volume.  If specified then no more than this much space will be used for its content,
+Places a quota, or upper limit, on the size of the volume.
+If specified then no more than this much space will be used for its content,
 even if there is additional free space in the container; however it is not guaranteed that the entire quota will always be available.
 By default a volume has no assigned quota.
 .It Fl r Ar volume-reserve
-Reserves an amount of space for this volume.  If specified it is guaranteed that at least this much space will be available for its content;
+Reserves an amount of space for this volume.
+If specified it is guaranteed that at least this much space will be available for its content;
 the volume may also grow beyond this size (up to its quota limit, if any) if additional free space in the container.
 By default a volume has no assigned reserve.
 .It Fl s Ar volume-size
@@ -135,7 +140,8 @@ may be used later to format volumes inside that container.
 Enable volume encryption.
 The volume metadata is also encrypted.
 .It Fl S Ar password
-Key used for volume encryption. If the
+Key used for volume encryption.
+If the
 .Ar password
 option is omitted for an encrypted volume, a prompt will request a password for the new volume.
 This option is unsecure because other non-privileged users (on multi-user systems) have means to see command-line arguments, including passwords, and is therefore not recommended for use
@@ -145,7 +151,8 @@ Format as a Fusion device (with the secondary device specified here).
 .It Fl R Ar role
 Set the OS
 .Qq role
-of the volume within the container.  The
+of the volume within the container.
+The
 .Ar role
 may be one of the following characters:
 .Bl -tag -width "  " -offset "  " -compact
@@ -157,7 +164,7 @@ Recovery - will contain the RecoveryOS
 VM - will contain swapfiles and hibernate image
 .El
 .El
-.Sh DIAGNOSTICS
+.Sh EXIT STATUS
 .Ex -std
 .Sh EXAMPLES
 The following formats a new container and a volume named

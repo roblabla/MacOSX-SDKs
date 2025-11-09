@@ -9,11 +9,10 @@
 #import <Foundation/NSObject.h>
 #import <Foundation/NSArray.h>
 #import <Foundation/NSDictionary.h>
-
 #import <CoreData/NSManagedObjectContext.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSString, NSError, NSAttributeDescription;
 
@@ -34,9 +33,9 @@ API_AVAILABLE(macos(10.14))
 
 @end
 
-APPKIT_EXTERN id NSMultipleValuesMarker API_DEPRECATED_WITH_REPLACEMENT("NSBindingSelectionMarker.multipleValuesSelectionMarker", macos(10.0,API_TO_BE_DEPRECATED));
-APPKIT_EXTERN id NSNoSelectionMarker API_DEPRECATED_WITH_REPLACEMENT("NSBindingSelectionMarker.noSelectionMarker", macos(10.0,API_TO_BE_DEPRECATED));
-APPKIT_EXTERN id NSNotApplicableMarker API_DEPRECATED_WITH_REPLACEMENT("NSBindingSelectionMarker.notApplicableSelectionMarker", macos(10.0,API_TO_BE_DEPRECATED));
+APPKIT_EXTERN id NSMultipleValuesMarker API_DEPRECATED_WITH_REPLACEMENT("NSBindingSelectionMarker.multipleValuesSelectionMarker", macos(10.0, 11.0));
+APPKIT_EXTERN id NSNoSelectionMarker API_DEPRECATED_WITH_REPLACEMENT("NSBindingSelectionMarker.noSelectionMarker", macos(10.0, 11.0));
+APPKIT_EXTERN id NSNotApplicableMarker API_DEPRECATED_WITH_REPLACEMENT("NSBindingSelectionMarker.notApplicableSelectionMarker", macos(10.0, 11.0));
 
 APPKIT_EXTERN BOOL NSIsControllerMarker(_Nullable id object);
 
@@ -77,8 +76,8 @@ APPKIT_EXTERN NSBindingInfoKey NSOptionsKey;
 
 @interface NSObject (NSPlaceholders)
 
-+ (void)setDefaultPlaceholder:(nullable id)placeholder forMarker:(nullable id)marker withBinding:(NSBindingName)binding API_DEPRECATED_WITH_REPLACEMENT("+[NSBindingSelectionMarker setDefaultPlaceholder:forMarker:withBinding:onClass:]", macos(10.0,API_TO_BE_DEPRECATED));
-+ (nullable id)defaultPlaceholderForMarker:(nullable id)marker withBinding:(NSBindingName)binding API_DEPRECATED_WITH_REPLACEMENT("+[NSBindingSelectionMarker defaultPlaceholder:forMarker:withBinding:onClass:]", macos(10.0,API_TO_BE_DEPRECATED));
++ (void)setDefaultPlaceholder:(nullable id)placeholder forMarker:(nullable id)marker withBinding:(NSBindingName)binding API_DEPRECATED_WITH_REPLACEMENT("+[NSBindingSelectionMarker setDefaultPlaceholder:forMarker:withBinding:onClass:]", macos(10.0, 11.0));
++ (nullable id)defaultPlaceholderForMarker:(nullable id)marker withBinding:(NSBindingName)binding API_DEPRECATED_WITH_REPLACEMENT("+[NSBindingSelectionMarker defaultPlaceholder:forMarker:withBinding:onClass:]", macos(10.0, 11.0));
 
 @end
 
@@ -115,15 +114,15 @@ If an error occurs while attempting to commit, because key-value coding validati
 
 #if __swift__ < 40200
 @interface NSObject (NSEditor)
-- (void)discardEditing API_DEPRECATED("This is now a method of the NSEditor protocol.", macos(10.0,API_TO_BE_DEPRECATED));
-- (BOOL)commitEditing API_DEPRECATED("This is now a method of the NSEditor protocol.", macos(10.0,API_TO_BE_DEPRECATED));
-- (void)commitEditingWithDelegate:(nullable id)delegate didCommitSelector:(nullable SEL)didCommitSelector contextInfo:(nullable void *)contextInfo API_DEPRECATED("This is now a method of the NSEditor protocol.", macos(10.0,API_TO_BE_DEPRECATED));
-- (BOOL)commitEditingAndReturnError:(NSError **)error API_DEPRECATED("This is now a method of the NSEditor protocol.", macos(10.7,API_TO_BE_DEPRECATED));
+- (void)discardEditing API_DEPRECATED("This is now a method of the NSEditor protocol.", macos(10.0, 11.0));
+- (BOOL)commitEditing API_DEPRECATED("This is now a method of the NSEditor protocol.", macos(10.0, 11.0));
+- (void)commitEditingWithDelegate:(nullable id)delegate didCommitSelector:(nullable SEL)didCommitSelector contextInfo:(nullable void *)contextInfo API_DEPRECATED("This is now a method of the NSEditor protocol.", macos(10.0, 11.0));
+- (BOOL)commitEditingAndReturnError:(NSError **)error API_DEPRECATED("This is now a method of the NSEditor protocol.", macos(10.7, 11.0));
 @end
 
 @interface NSObject (NSEditorRegistration)
-- (void)objectDidBeginEditing:(id<NSEditor>)editor API_DEPRECATED("This is now a method of the NSEditorRegistration protocol.", macos(10.0,API_TO_BE_DEPRECATED));
-- (void)objectDidEndEditing:(id<NSEditor>)editor API_DEPRECATED("This is now a method of the NSEditorRegistration protocol.", macos(10.0,API_TO_BE_DEPRECATED));
+- (void)objectDidBeginEditing:(id<NSEditor>)editor API_DEPRECATED("This is now a method of the NSEditorRegistration protocol.", macos(10.0, 11.0));
+- (void)objectDidEndEditing:(id<NSEditor>)editor API_DEPRECATED("This is now a method of the NSEditorRegistration protocol.", macos(10.0, 11.0));
 @end
 #endif
 

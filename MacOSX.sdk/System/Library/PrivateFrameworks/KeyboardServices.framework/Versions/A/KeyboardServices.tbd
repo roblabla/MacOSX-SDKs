@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: F0B46AEA-23A8-3BA6-80AF-1BEA53E89268', 'x86_64: F0B46AEA-23A8-3BA6-80AF-1BEA53E89268' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           0244830F-9BA4-3B97-937E-E816187619E2
+  - target:          x86_64-maccatalyst
+    value:           0244830F-9BA4-3B97-937E-E816187619E2
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           D1C42C60-71E4-3C37-88C4-4C42D30BDB12
+  - target:          arm64e-maccatalyst
+    value:           D1C42C60-71E4-3C37-88C4-4C42D30BDB12
 install-name:    '/System/Library/PrivateFrameworks/KeyboardServices.framework/KeyboardServices'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _KSCKErrorDomain, _KSCloudKitAccountDidChange, _KSCloudKitAccountDidChangeAccountChangedKey, 
                        _KSCloudKitAccountDidChangeDeviceToDeviceKey, _KSCloudKitAccountDidChangeStatusKey, 
                        _KSCloudKitAccountDidChangeUserChangedKey, _KSCloudKitAccountDidSuccessfullyCreateZone, 

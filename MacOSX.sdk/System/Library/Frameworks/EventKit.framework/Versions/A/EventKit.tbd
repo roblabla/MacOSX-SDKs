@@ -1,11 +1,25 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 088CFECD-0824-39FC-A52E-90C89E084AE6', 'x86_64: 088CFECD-0824-39FC-A52E-90C89E084AE6' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           EA502517-D07F-3D41-A453-AAA8BDADC7A1
+  - target:          x86_64-maccatalyst
+    value:           EA502517-D07F-3D41-A453-AAA8BDADC7A1
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           20E66195-BC13-31DB-A0A7-5CBFEE143B03
+  - target:          arm64e-maccatalyst
+    value:           20E66195-BC13-31DB-A0A7-5CBFEE143B03
 install-name:    '/System/Library/Frameworks/EventKit.framework/Versions/A/EventKit'
-current-version: 1358
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 1414
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _EKActionConfirmSuggestedEvent, _EKActionRejectSuggestedEvent, 
                        _EKAutoCommentPrefix, _EKAvailabilityCacheErrorDomain, _EKAvailabilitySpanTypeAsString, 
                        _EKBatchChangeInfoKey, _EKBundle, _EKCalendarModifiedNotification, 
@@ -47,10 +61,11 @@ exports:
                        _EKEventModifiedNotification, _EKEventNaturalLanguageSuggestedEventExpirationDateKey, 
                        _EKEventStoreBatchedChangeCalendarNotification, _EKEventStoreBatchedChangeEventNotification, 
                        _EKEventStoreBatchedChangeNotification, _EKEventStoreBatchedChangeReminderNotification, 
-                       _EKEventStoreChangedNotification, _EKEventStoreEventImportedNotification, 
-                       _EKEventStoreImportedObjectIdentifiers, _EKEventStoreLocaleChangedNotification, 
-                       _EKEventStoreModifiedObjectIdentifiers, _EKEventStoreReminderBecameOverdueNotification, 
-                       _EKEventStoreReminderFiredNotification, _EKEventStoreRevert, 
+                       _EKEventStoreCalendarDataChangedUserInfoKey, _EKEventStoreChangedNotification, 
+                       _EKEventStoreEventImportedNotification, _EKEventStoreImportedObjectIdentifiers, 
+                       _EKEventStoreLocaleChangedNotification, _EKEventStoreModifiedObjectIdentifiers, 
+                       _EKEventStoreReminderBecameOverdueNotification, _EKEventStoreReminderFiredNotification, 
+                       _EKEventStoreRemindersDataChangedUserInfoKey, _EKEventStoreRevert, 
                        _EKEventStoreSourceErrorStateChangedNotification, _EKEventStoreSuggestedEventChangedNotification, 
                        _EKEventStoreTimeZoneChangedNotification, _EKEventStore_DistributedNotification_AutomaticGeocodingAllowedChanged, 
                        _EKEventSuggestedEventSavedFromSyncKey, _EKEventTitleKey, 
@@ -82,11 +97,16 @@ exports:
                        _EKViewModelDisabledCalendarsKey, _EKViewModelDomain, __EKCalendarURLScheme, 
                        __EKEventURLScheme, __EKReminderURLHost, __EKReminderURLScheme, 
                        __bitmaskContainsOption, __bitmaskExclusivelyMatchesOption, 
-                       __validMoveEventRequirementsCombination, _stringFromEKEntityType ]
+                       __validMoveEventRequirementsCombination, _barrierSyncBool, 
+                       _barrierSyncIfQueueNotNil, _dispatch_async_main_if_necessary, 
+                       _dispatch_queue_create_recursive_concurrent, _dispatch_sync_recursive, 
+                       _kEKCalendarItemNotesPropertyName, _kEKCalendarItemStructuredLocationPropertyName, 
+                       _kEKCalendarItemURLPropertyName, _stringFromEKEntityType, 
+                       _syncBoolIfQueueNotNil, _syncIfQueueNotNil ]
     objc-classes:    [ EKActionsAccounting, EKAlarm, EKAttachment, EKAttendee, EKAvailabilityCache, 
                        EKAvailabilityCachedSpanRange, EKAvailabilitySpan, EKAvailabilityUtilities, 
-                       EKBackingObjectsTracker, EKBatchChangeInfo, EKBirthdayListener, 
-                       EKCalendar, EKCalendarChangeHelper, EKCalendarEventInvitationNotification, 
+                       EKBackingObjectsTracker, EKBackingStore, EKBatchChangeInfo, 
+                       EKBirthdayListener, EKCalendar, EKCalendarChangeHelper, EKCalendarEventInvitationNotification, 
                        EKCalendarEventInvitationNotificationAttendee, EKCalendarInviteReplyNotification, 
                        EKCalendarItem, EKCalendarNotification, EKCalendarPreferences, 
                        EKCalendarProposeNewTimeNotification, EKCalendarResourceChangeNotification, 
@@ -94,12 +114,14 @@ exports:
                        EKCalendarSuggestionNotification, EKCalendarVisibilityManager, 
                        EKChangeListener, EKChangeSet, EKChangeTrackingClientId, EKCompatibility, 
                        EKConferenceURLDetector, EKConflictDetails, EKConflictScanJob, 
-                       EKConflictScanner, EKCoreDataFaultDelegate, EKCredentials, 
-                       EKDataProtectionObserver, EKDebugPreferences, EKDirectoryLocation, 
+                       EKConflictScanner, EKCoreDataFaultDelegate, EKCreateEventIntent, 
+                       EKCreateEventIntentResponse, EKCredentials, EKDataProtectionObserver, 
+                       EKDebugPreferences, EKDiff, EKDirectoryLocation, EKDirectoryPerson, 
                        EKDirectoryRecord, EKDirectorySearchOperation, EKDirectorySearchQuery, 
-                       EKDirectorySearchResultSet, EKEvent, EKEventOccurrenceCache, 
-                       EKEventRangePredicate, EKEventSliceInfo, EKEventStore, EKFeatureSet, 
-                       EKFrozenAlarm, EKFrozenCalendar, EKFrozenCalendarItem, EKFrozenCalendarSource, 
+                       EKDirectorySearchResultSet, EKDuetSignalEventSerializer, EKEphemeralCacheEventStoreProvider, 
+                       EKEvent, EKEventActionHandler, EKEventOccurrenceCache, EKEventRangePredicate, 
+                       EKEventSliceInfo, EKEventStore, EKFeatureSet, EKFrozenAlarm, 
+                       EKFrozenCalendar, EKFrozenCalendarItem, EKFrozenCalendarSource, 
                        EKFrozenEvent, EKFrozenObject, EKFrozenReminder, EKICSImporter, 
                        EKInviteeAlternativeTime, EKInviteeAlternativeTimeSearcher, 
                        EKJunkInvitationProtocol_Shared, EKManagedObjectContext, EKMutableTravelEngineHypothesis, 

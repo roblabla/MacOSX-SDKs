@@ -61,28 +61,28 @@ OS_ASSUME_NONNULL_BEGIN
 /*!
  * Disambiguating intervals with signpost IDs
  *
- * Intervals with matching log handles and interval names can be in-flight
- * simultaneously. In order for data processing tools to correctly the matching
- * begin/end pairs, it is necessary to identify each interval with an
+ * Intervals with the same log handle and interval name can be in flight
+ * simultaneously. In order for tools to correctly match begin signposts with
+ * end signposts, it is necessary to identify each interval with an
  * os_signpost_id_t.
  *
- * If there will only ever be one interval with a given os_log_t and interval
- * name will be in-flight at a time, use the os_signpost_t convenience value
- * OS_SIGNPOST_ID_EXCLUSIVE.  This can avoid having to share state between
- * begin and end callsites.
+ * If only one interval with a given os_log_t and interval name will ever be in
+ * flight at a time, use the os_signpost_t convenience value
+ * OS_SIGNPOST_ID_EXCLUSIVE. This can avoid having to share state between begin
+ * and end callsites.
  *
- * If there exists some non-pointer uint64_t value which can uniquely identify
+ * If there exists some non-pointer uint64_t value that uniquely identifies
  * begin/end pairs, that value can be cast directly to an os_signpost_id_t.
- * Note that the values 'OS_SIGNPOST_ID_NULL' and 'OS_SIGNPOST_ID_INVALID' are
+ * Note that the values OS_SIGNPOST_ID_NULL and OS_SIGNPOST_ID_INVALID are
  * reserved and identical values may not be used in this manner.
  *
  * If there exists a pointer which can identify begin/end pairs, an
  * os_signpost_id_t can be generated from that pointer with
- * os_signpost_id_make_with_pointer() This approach is not applicable to
+ * os_signpost_id_make_with_pointer(). This approach is not applicable to
  * signposts that span process boundaries.
  *
  * If no existing pointer or value is applicable, a new unique value can be
- * generated using the os_signpost_id_generate() function.  The returned value
+ * generated using the os_signpost_id_generate() function. The returned value
  * is guaranteed to be unique within the matching scope specified on the log
  * handle.
  */
@@ -228,6 +228,29 @@ os_signpost_enabled(os_log_t log);
                 interval_id, name, ##__VA_ARGS__)
 
 /*!
+ * @function os_signpost_animation_interval_begin
+ *
+ * @abstract
+ * Begins a signposted interval that is tagged as an animation.
+ *
+ * @param log
+ * Log handle previously created with os_log_create.
+ *
+ * @param interval_id
+ * An ID for the event, see Signpost IDs above.
+ *
+ * @param name
+ * The name of this event. This must be a string literal.
+ *
+ * @param ... (format + arguments)
+ * Additional information to include with this signpost.  This format string
+ * must be a string literal, as with the os_log family of functions.
+ */
+#define os_signpost_animation_interval_begin(log, interval_id, name, ...) \
+        _os_signpost_animation_interval_begin(log, interval_id, name, \
+                "" __VA_ARGS__)
+
+/*!
  * @function os_signpost_interval_end
  *
  * @abstract
@@ -342,6 +365,13 @@ OS_ENUM(os_signpost_type, uint8_t,
 #ifndef __swift__
 #define OS_SIGNPOST_TYPE_MASK     0x03
 #endif
+
+#define _OS_SIGNPOST_ANIMATION_INTERVAL_TAG "isAnimation=YES"
+
+#define _os_signpost_animation_interval_begin(log, spid, name, fmt, ...) \
+        os_signpost_interval_begin(log, spid, name, \
+                fmt " " _OS_SIGNPOST_ANIMATION_INTERVAL_TAG, \
+                ##__VA_ARGS__)
 
 API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0))
 OS_EXPORT OS_NOTHROW OS_NOT_TAIL_CALLED

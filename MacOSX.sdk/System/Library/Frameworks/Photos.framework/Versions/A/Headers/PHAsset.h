@@ -46,6 +46,9 @@ OS_EXPORT
 
 @property (nonatomic, assign, readonly, getter=isFavorite) BOOL favorite;
 
+// deprecated, will always return NO for now.
+@property (nonatomic, assign, readonly, getter=isSyncFailureHidden) BOOL syncFailureHidden API_DEPRECATED("No longer supported", macos(10.14, 10.15)) API_UNAVAILABLE(ios, tvos, watchos);
+
 @property (nonatomic, strong, readonly, nullable) NSString *burstIdentifier API_AVAILABLE(macos(10.15));
 @property (nonatomic, assign, readonly) PHAssetBurstSelectionType burstSelectionTypes API_AVAILABLE(macos(10.15));
 @property (nonatomic, assign, readonly) BOOL representsBurst API_AVAILABLE(macos(10.15));
@@ -68,7 +71,7 @@ OS_EXPORT
 + (PHFetchResult<PHAsset *> *)fetchAssetsWithMediaType:(PHAssetMediaType)mediaType options:(nullable PHFetchOptions *)options API_AVAILABLE(macos(10.15));
 
 // assetURLs are URLs retrieved from ALAsset's ALAssetPropertyAssetURL
-+ (PHFetchResult<PHAsset *> *)fetchAssetsWithALAssetURLs:(NSArray<NSURL *> *)assetURLs options:(nullable PHFetchOptions *)options API_DEPRECATED("Will be removed in a future release", ios(8, 11), tvos(8, 11)) API_UNAVAILABLE(macCatalyst, macos);
++ (PHFetchResult<PHAsset *> *)fetchAssetsWithALAssetURLs:(NSArray<NSURL *> *)assetURLs options:(nullable PHFetchOptions *)options API_DEPRECATED("Will be removed in a future release", ios(8, 11), tvos(8, 11)) API_UNAVAILABLE(macos);
 
 @end
 

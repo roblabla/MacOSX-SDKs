@@ -10,11 +10,10 @@
 #import <Foundation/NSGeometry.h>
 #import <Foundation/NSObject.h>
 #import <Foundation/NSDictionary.h>
-
 #import <CoreGraphics/CGContext.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSString;
 @class NSWindow;

@@ -34,7 +34,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  * @discussion The RF discovery polling begins immediately when a reader session is activated successfully.
  *             The @link readerSession:didDetectTags: @link/ will be called when a tag is detected.
  */
-@property (nonatomic, getter=isReady, readonly) BOOL ready;
+@property (nonatomic, getter=isReady, readonly) BOOL ready API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
  * @property alertMessage
@@ -43,7 +43,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *             dynamically in any thread context as long as the session is valid.  This should be set prior to calling @link beginSession @link/ to display
  *             the correct message.  Use this string to provide additional context about the NFC reader mode operation.
  */
-@property (nonatomic, copy) NSString *alertMessage;
+@property (nonatomic, copy) NSString *alertMessage API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 
 /*!
@@ -54,14 +54,14 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *                  conformed to the @link NFCTag @link/ protocol.  @link [NFCReaderSessionDelegate readerSession:didInvalidateWithError:] will return
  *                  errors related to the session start.
  */
-- (void)beginSession;
+- (void)beginSession API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
  * @method invalidateSession
  *
  * @discussion Closes the reader session.  The session cannot be re-used.
  */
-- (void)invalidateSession;
+- (void)invalidateSession API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
  * @method invalidateSessionWithErrorMessage:
@@ -92,7 +92,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  * @discussion      Gets called when the NFC reader session has become active. RF is enabled and reader is scanning for tags.
  *                  The @link readerSession:didDetectTags: @link/ will be called when a tag is detected.
  */
-- (void)readerSessionDidBecomeActive:(NFCReaderSession *)session;
+- (void)readerSessionDidBecomeActive:(NFCReaderSession *)session API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
  * @method readerSession:didInvalidateWithError:
@@ -103,7 +103,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  * @discussion      Gets called when a session becomes invalid.  At this point the client is expected to discard
  *                  the returned session object.
  */
-- (void)readerSession:(NFCReaderSession *)session didInvalidateWithError:(NSError *)error;
+- (void)readerSession:(NFCReaderSession *)session didInvalidateWithError:(NSError *)error API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 @optional
 /*!
@@ -114,7 +114,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *
  * @discussion      Gets called when the reader detects NFC tag(s) in the polling sequence.
  */
-- (void)readerSession:(NFCReaderSession *)session didDetectTags:(NSArray<__kindof id<NFCTag>> *)tags;
+- (void)readerSession:(NFCReaderSession *)session didDetectTags:(NSArray<__kindof id<NFCTag>> *)tags API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 @end
 
@@ -129,21 +129,21 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
 API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
 @interface NFCReaderSession : NSObject<NFCReaderSession>
 
-@property (nonatomic, weak, readonly) id delegate;
+@property (nonatomic, weak, readonly) id delegate API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
  * @property readingAvailable
  *
  * @discussion YES if device supports NFC tag reading.
  */
-@property (class, nonatomic, readonly) BOOL readingAvailable;
+@property (class, nonatomic, readonly) BOOL readingAvailable API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
  * @property sessionQueue
  *
  * @discussion  The NFCReaderSessionDelegate delegate callbacks and the completion block handlers for tag operation will be dispatched on this queue.
  */
-@property (nonatomic, readonly) dispatch_queue_t sessionQueue;
+@property (nonatomic, readonly) dispatch_queue_t sessionQueue API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 - (instancetype)init NS_UNAVAILABLE;
 

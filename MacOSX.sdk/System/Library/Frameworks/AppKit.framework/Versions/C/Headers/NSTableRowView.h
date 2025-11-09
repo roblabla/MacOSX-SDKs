@@ -6,15 +6,15 @@
 */
 
 #import <Foundation/NSObject.h>
-
 #import <AppKit/NSView.h>
 #import <AppKit/NSCell.h>
 #import <AppKit/NSTableView.h>
+#import <AppKit/AppKitDefines.h>
 
 /* View Based TableView: The NSTableRowView is the view shown for a row in the table. It is responsible for drawing things associated with the row, including the selection highlight, and group row look. Properties can be changed on a row-by-row basis by using the table delegate method -tableView:didAddRowView:forRow:. Modifications of the properties are NOT reflected by the NSTableView instance; the NSTableRowView is simply a representation of the state. In other words, setting rowView.selected will NOT change the -selectedRowIndexes in NSTableView.
  */
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSLayoutConstraint;
 

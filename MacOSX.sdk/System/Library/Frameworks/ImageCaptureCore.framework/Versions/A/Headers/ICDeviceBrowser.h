@@ -28,6 +28,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NSString* ICAuthorizationStatus NS_TYPED_ENUM IC_AVAILABLE (macos (10.15), ios (13.0));
+
+#pragma mark - Contents/Control Authorization Status
+
+IMAGECAPTURE_EXTERN ICAuthorizationStatus const ICAuthorizationStatusNotDetermined IC_UNAVAILABLE(macos) IC_AVAILABLE(ios(14.0));
+IMAGECAPTURE_EXTERN ICAuthorizationStatus const ICAuthorizationStatusRestricted IC_UNAVAILABLE(macos) IC_AVAILABLE(ios(14.0));
+IMAGECAPTURE_EXTERN ICAuthorizationStatus const ICAuthorizationStatusDenied IC_UNAVAILABLE(macos) IC_AVAILABLE(ios(14.0));
+IMAGECAPTURE_EXTERN ICAuthorizationStatus const ICAuthorizationStatusAuthorized IC_UNAVAILABLE(macos) IC_AVAILABLE(ios(14.0));
+
 //------------------------------------------------------------------------------------------------------ ICDeviceBrowserDelegate
 /*!
   @protocol ICDeviceBrowserDelegate <NSObject>
@@ -82,6 +91,41 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)deviceBrowserDidEnumerateLocalDevices:(ICDeviceBrowser*) browser IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios);
 
+#pragma mark - Device Operation Queue
+
+/*!
+  @method deviceBrowserWillSuspendOperations:
+  @abstract This message is sent to the delegate to inform that operations on devices in the browser will be suspended shortly.
+  @discussion Attached devices may require time to prepare the device for suspended communication.  This delegate method is called
+    when the application is switched into the background.
+ */
+- (void)deviceBrowserWillSuspendOperations:(ICDeviceBrowser*)browser IC_UNAVAILABLE(macos) IC_AVAILABLE(ios(14.0));
+
+/*!
+ @method deviceBrowserDidSuspendOperations:
+ @abstract This message is sent to the delegate to inform that operations on devices in the browser have been suspended.
+ @discussion All communcation with the attached device will remain suspended until the application has entered the foreground.
+   In no way does this suspension modify the state of the connected device, nor does it issue a close session of any kind.  State should always be
+ managed by the application.
+ 
+*/
+- (void)deviceBrowserDidSuspendOperations:(ICDeviceBrowser*)browser IC_UNAVAILABLE(macos) IC_AVAILABLE(ios(14.0));
+
+/*!
+ @method deviceBrowserDidCancelSuspendOperations:
+ @abstract This message is sent to the delegate to inform that operations on devices in the browser have resumed before the suspension timeout.
+ @discussion All communcation with the attached device will remain available as the application was switched back to the foreground before the
+  suspension timeout.
+*/
+- (void)deviceBrowserDidCancelSuspendOperations:(ICDeviceBrowser*)browser IC_UNAVAILABLE(macos) IC_AVAILABLE(ios(14.0));
+
+/*!
+ @method deviceBrowserDidResumeOperations:
+ @abstract This message is sent to the delegate to inform that operations on devices in the browser have resumed.
+ @discussion All communcation with the attached device has been resumed as the application has now entered the foreground.
+*/
+- (void)deviceBrowserDidResumeOperations:(ICDeviceBrowser*)browser IC_UNAVAILABLE(macos) IC_AVAILABLE(ios(14.0));
+
 @end
 
 //-------------------------------------------------------------------------------------------------------------- ICDeviceBrowser
@@ -107,6 +151,12 @@ IC_AVAILABLE(macos(10.4), ios(13.0))
   @abstract Indicates whether the device browser is browsing for devices.
  */
 @property (readonly, getter = isBrowsing) BOOL browsing;
+
+/*!
+  @property suspended
+  @abstract Indicates whether the  devices in the browser have suspended communication.
+ */
+@property (readonly, getter = isSuspended) BOOL suspended IC_UNAVAILABLE(macos) IC_AVAILABLE(ios(14.0));
 
 /*!
   @property browsedDeviceTypeMask
@@ -146,6 +196,36 @@ IC_AVAILABLE(macos(10.4), ios(13.0))
   @discussion This will free all device instances that are not in use.
  */
 - (void)stop IC_AVAILABLE(macos(10.4), ios(13.0));
+
+#pragma mark - Authorization Status
+
+/*!
+ @method contentsAuthorizationStatus
+ @abstract This method returns a constant indicating whether the app has permission to acces the contents of an attached media device.
+ @discussion A constant indicating authorization status.
+*/
+- (ICAuthorizationStatus)contentsAuthorizationStatus IC_UNAVAILABLE(macos) IC_AVAILABLE(ios(14.0));
+
+/*!
+ @method requestContentsAuthorizationWithCompletion:
+ @abstract This method requests the user’s permission, if needed, for accessing the conents of an external media device.
+ @discussion A constant indicating authorization status.
+*/
+- (void)requestContentsAuthorizationWithCompletion:(void (^)(ICAuthorizationStatus status)) completion IC_UNAVAILABLE(macos) IC_AVAILABLE(ios(14.0));
+
+/*!
+ @method controlAuthorizationStatus
+ @abstract This method returns a constant indicating whether the app has permission to control the attached camera device.
+ @discussion A constant indicating authorization status.
+*/
+- (ICAuthorizationStatus)controlAuthorizationStatus IC_UNAVAILABLE(macos) IC_AVAILABLE(ios(14.0));
+
+/*!
+ @method requestControlAuthorizationWithCompletion:
+ @abstract This method requests the user’s permission, if needed, for controlling the attached camera device.
+ @discussion A constant indicating authorization status.
+*/
+- (void)requestControlAuthorizationWithCompletion:(void (^)(ICAuthorizationStatus status)) completion IC_UNAVAILABLE(macos) IC_AVAILABLE(ios(14.0));
 
 @end
 

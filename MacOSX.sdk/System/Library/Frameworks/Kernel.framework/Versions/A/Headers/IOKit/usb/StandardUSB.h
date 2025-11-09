@@ -459,7 +459,7 @@ namespace StandardUSB
         uint32_t    bmAttributes;
         uint16_t    wFunctionalitySupport;
         uint16_t    wReserved;
-        uint32_t    bmSublinkSpeedAttr[1];
+        uint32_t    bmSublinkSpeedAttr[];
         
     } __attribute__((packed));
 
@@ -748,7 +748,7 @@ namespace StandardUSB
         kSuperSpeedHubDelayMax         = kIOUSBSuperSpeedHubDelayMax
     };
     
-#ifdef __cplusplus
+#if defined(__cplusplus) && KERNEL
 #pragma mark Descriptor list parsing
     /*!
      * @brief       Get the next descriptor in a configuration descriptor

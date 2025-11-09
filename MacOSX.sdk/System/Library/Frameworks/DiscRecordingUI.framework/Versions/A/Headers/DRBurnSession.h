@@ -24,12 +24,16 @@
 #ifndef _H_DRBurnSession
 #define _H_DRBurnSession
 
+#include <Availability.h>
+
 #ifndef _H_DiscRecording
 #import <DiscRecording/DiscRecording.h>
 #endif
 
+#if TARGET_OS_OSX
 #ifndef __CARBON__
 #import <Carbon/Carbon.h>
+#endif
 #endif
 
 #include <AvailabilityMacros.h>
@@ -41,6 +45,9 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+
+API_UNAVAILABLE_BEGIN(ios)
 
 
 /*!
@@ -366,3 +373,7 @@ DRBurnSessionBeginProgressDialog(
 #endif
 
 #endif /* _H_DRBurnSession */
+
+
+API_UNAVAILABLE_END
+

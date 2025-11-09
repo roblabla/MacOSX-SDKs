@@ -2,7 +2,7 @@
 //  INIntents.h
 //  Intents
 //
-//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2020 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INSearchCallHistoryIntent.h>
@@ -13,6 +13,7 @@
 #import <Intents/INActivateCarSignalIntent.h>
 #import <Intents/INGetCarLockStatusIntent.h>
 #import <Intents/INGetCarPowerLevelStatusIntent.h>
+#import <Intents/INListCarsIntent.h>
 #import <Intents/INSaveProfileInCarIntent.h>
 #import <Intents/INSetAudioSourceInCarIntent.h>
 #import <Intents/INSetCarLockStatusIntent.h>

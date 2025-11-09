@@ -1,11 +1,25 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 2A736E71-6C33-3DC1-AA20-1C44C3CFF3FE', 'x86_64: 2A736E71-6C33-3DC1-AA20-1C44C3CFF3FE' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           5F226A72-CAE2-3C6C-9756-7F06F012BA30
+  - target:          x86_64-maccatalyst
+    value:           5F226A72-CAE2-3C6C-9756-7F06F012BA30
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           6BA535AA-34D8-3FF6-9FD4-4ECA9615D78E
+  - target:          arm64e-maccatalyst
+    value:           6BA535AA-34D8-3FF6-9FD4-4ECA9615D78E
 install-name:    '/System/Library/PrivateFrameworks/GraphicsServices.framework/Versions/A/GraphicsServices'
 current-version: 14
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _GSColorCreateColorWithDeviceRGBA, _GSColorCreateColorWithDeviceRGBAInfo, 
                        _GSColorCreateWithDeviceWhite, _GSColorGetRGBAComponents, 
                        _GSColorGetRGBAInfo, _GSCopyPurpleNamedPerPIDPort, _GSCopyPurpleNamedPort, 
@@ -40,11 +54,12 @@ exports:
                        _GSEventStopModal, _GSEventStopVibrator, _GSEventVibrateForDuration, 
                        _GSGetPurpleApplicationPort, _GSGetPurpleSystemAppPort, _GSGetPurpleSystemEventPort, 
                        _GSGetPurpleWorkspacePort, _GSGetTimeEventHandling, _GSInitialize, 
-                       _GSKeyboardCreate, _GSKeyboardGetHWKeyboardType, _GSKeyboardGetKeyCodeForChar, 
-                       _GSKeyboardGetLayout, _GSKeyboardGetLiveModifierState, _GSKeyboardGetModifierState, 
-                       _GSKeyboardGetStickyLockModifierState, _GSKeyboardGetTranslationOptions, 
-                       _GSKeyboardGetTypeID, _GSKeyboardHWKeyboardLayoutsPlist, _GSKeyboardHWKeyboardNormalizeInput, 
-                       _GSKeyboardRelease, _GSKeyboardReset, _GSKeyboardSetLayout, 
+                       _GSKeyboardCreate, _GSKeyboardCreateWithCountryCode, _GSKeyboardGetHWKeyboardType, 
+                       _GSKeyboardGetKeyCodeForChar, _GSKeyboardGetLayout, _GSKeyboardGetLiveModifierState, 
+                       _GSKeyboardGetModifierState, _GSKeyboardGetStickyLockModifierState, 
+                       _GSKeyboardGetTranslationOptions, _GSKeyboardGetTypeID, _GSKeyboardHWKeyboardLayoutsPlist, 
+                       _GSKeyboardHWKeyboardNormalizeInput, _GSKeyboardRelease, _GSKeyboardReset, 
+                       _GSKeyboardSetHardwareKeyboardAttached, _GSKeyboardSetLayout, 
                        _GSKeyboardSetTranslationOptions, _GSKeyboardTranslateKey, 
                        _GSKeyboardTranslateKeyExtended, _GSKeyboardTranslateKeyExtendedCommand, 
                        _GSKeyboardTranslateKeyWithModifiers, _GSMainScreenOrientation, 

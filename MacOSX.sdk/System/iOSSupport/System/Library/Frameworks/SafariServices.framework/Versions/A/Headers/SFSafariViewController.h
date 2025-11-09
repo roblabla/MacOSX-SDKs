@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger, SFSafariViewControllerDismissButtonStyle) {
  @class SFSafariViewController
  A view controller for displaying web content in a Safari-like interface with some of Safari’s features.
  */
-SF_EXTERN API_AVAILABLE(ios(9.0))
+SF_EXTERN API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(watchos)
 @interface SFSafariViewController : UIViewController
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -79,7 +79,7 @@ SF_EXTERN API_AVAILABLE(ios(9.0))
 
 @end
 
-API_AVAILABLE(ios(9.0))
+API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(watchos)
 @protocol SFSafariViewControllerDelegate <NSObject>
 @optional
 
@@ -114,6 +114,10 @@ API_AVAILABLE(ios(9.0))
     the web page performs additional redirects without user interaction.
  */
 - (void)safariViewController:(SFSafariViewController *)controller initialLoadDidRedirectToURL:(NSURL *)URL API_AVAILABLE(ios(11.0));
+
+/*! @abstract Called when the user opens the current page in the default browser by tapping the toolbar button.
+ */
+- (void)safariViewControllerWillOpenInBrowser:(SFSafariViewController *)controller NS_SWIFT_NAME(safariViewControllerWillOpenInBrowser(_:)) API_AVAILABLE(ios(14.0));
 
 @end
 

@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVPlayerLooper.h>)
 /*
  File:  AVPlayerLooper.h
 
@@ -175,3 +176,7 @@ AV_INIT_UNAVAILABLE
 
 NS_ASSUME_NONNULL_END
 
+
+#else
+#import <AVFCore/AVPlayerLooper.h>
+#endif

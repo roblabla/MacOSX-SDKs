@@ -7,11 +7,12 @@
 
 #import <AppKit/NSViewController.h>
 #import <AppKit/NSLayoutConstraint.h>
+#import <AppKit/AppKitDefines.h>
 
 @class NSClipView;
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 /* For use with NSWindow's API addTitlebarAccessoryViewController:, etc. */
 API_AVAILABLE(macos(10.10))
@@ -42,6 +43,14 @@ API_AVAILABLE(macos(10.10))
 
 /* Indicates whether the accessory view is actually visible in the window. This property only applies to controllers set with the top or bottom layoutAtribute. When set, this property will collapse the accessory view to 0 height (animatable) but NOT remove it from the window. That way, you can easily show and hide it without difficulty. Set through the animator object to animate it. */
 @property (getter=isHidden) BOOL hidden API_AVAILABLE(macos(10.12));
+
+/* Whether the accessory should automatically size to the standard system default sizing over the view's current frame size.
+ 
+   Only valid for accessories with a layoutAttribute of NSLayoutAttributeBottom.
+ 
+   The default value is YES.
+ */
+@property BOOL automaticallyAdjustsSize API_AVAILABLE(macos(11.0));
 
 - (void)viewWillAppear NS_REQUIRES_SUPER;
 - (void)viewDidAppear NS_REQUIRES_SUPER;

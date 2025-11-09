@@ -4,13 +4,15 @@
 	Copyright (c) 1994-2019, Apple Inc.
 	All rights reserved.
 */
+
 #import <Foundation/NSDate.h>
 #import <AppKit/NSView.h>
 #import <AppKit/NSScroller.h>
 #import <AppKit/NSTextFinder.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSColor, NSClipView, NSRulerView, NSScroller;
 
@@ -156,7 +158,7 @@ APPKIT_EXTERN NSNotificationName const NSScrollViewDidLiveScrollNotification API
 APPKIT_EXTERN NSNotificationName const NSScrollViewDidEndLiveScrollNotification API_AVAILABLE(macos(10.9));
 
 
-@interface NSScrollView(NSRulerSupport)
+@interface NSScrollView (NSRulerSupport)
 
 @property (class, null_resettable) Class rulerViewClass;
 
@@ -176,7 +178,7 @@ typedef NS_ENUM(NSInteger, NSScrollViewFindBarPosition) {
     NSScrollViewFindBarPositionBelowContent = 2
 } API_AVAILABLE(macos(10.7));
 
-@interface NSScrollView(NSFindBarSupport)
+@interface NSScrollView (NSFindBarSupport)
 
 @property NSScrollViewFindBarPosition findBarPosition API_AVAILABLE(macos(10.7));
 

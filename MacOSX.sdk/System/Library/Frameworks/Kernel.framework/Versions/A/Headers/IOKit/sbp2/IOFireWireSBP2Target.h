@@ -110,10 +110,10 @@ protected:
 	/////////////////////////////////////////
 	// private internals
 
-    virtual void free( void );	
+    virtual void free( void ) APPLE_KEXT_OVERRIDE;
     virtual IOReturn message( 	UInt32 type, 
 								IOService * provider,
-								void * argument = 0);
+								void * argument = 0) APPLE_KEXT_OVERRIDE;
     
     virtual void scanForLUNs( void );
     IOReturn createLUN( LUNInfo * info );
@@ -130,7 +130,7 @@ public:
 		@param options Options for the open, may be interpreted by the implementor of handleOpen.
 		@result Return true if the open was successful, false otherwise. */
 
-    virtual bool handleOpen( IOService * forClient, IOOptionBits options, void * arg );
+    virtual bool handleOpen( IOService * forClient, IOOptionBits options, void * arg ) APPLE_KEXT_OVERRIDE;
 	
 	/*! 
 		@function handleClose
@@ -140,7 +140,7 @@ public:
 		@param options Options for the close, may be interpreted by the implementor of handleOpen. 
 	*/
 
-	virtual void handleClose( IOService * forClient, IOOptionBits options );
+	virtual void handleClose( IOService * forClient, IOOptionBits options ) APPLE_KEXT_OVERRIDE;
 
 	/*! 
 		@function handleIsOpen
@@ -150,7 +150,7 @@ public:
 		@result Returns true if the specific, or any, client has the IOService open. 
 	*/
 	
-    virtual bool handleIsOpen(  const IOService * forClient ) const;
+    virtual bool handleIsOpen(  const IOService * forClient ) const APPLE_KEXT_OVERRIDE;
     
 	/*! 
 		@function start
@@ -159,7 +159,7 @@ public:
 		@result Return true if the start was successful, false otherwise (which will cause the instance to be detached and usually freed).
 	*/
 	
-    virtual bool start( IOService *provider );
+    virtual bool start( IOService *provider ) APPLE_KEXT_OVERRIDE;
  
 	/*! 
 		@function stop
@@ -167,7 +167,7 @@ public:
 		@discussion See IOService for discussion.
 	*/
    
-	virtual void stop( IOService *provider );
+	virtual void stop( IOService *provider ) APPLE_KEXT_OVERRIDE;
 
 	/*!
 		@function getFireWireUnit
@@ -187,7 +187,7 @@ public:
 		@result Returns false if the family considers the matching dictionary does not match in properties it understands, true otherwise.
 	*/
 	
-	virtual bool matchPropertyTable( OSDictionary * table );
+	virtual bool matchPropertyTable( OSDictionary * table ) APPLE_KEXT_OVERRIDE;
 
     virtual void setTargetFlags( UInt32 flags );
     virtual UInt32 getTargetFlags( void );
@@ -200,7 +200,7 @@ public:
 	virtual IOReturn beginIOCriticalSection( void );
 	virtual void endIOCriticalSection( void );
 
-    virtual bool finalize( IOOptionBits options );
+    virtual bool finalize( IOOptionBits options ) APPLE_KEXT_OVERRIDE;
     
     IOReturn 	synchMgmtAgentAccess( IOFWCommand * mgmtOrbCommand );
 	void		completeMgmtAgentAccess( );

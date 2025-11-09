@@ -62,6 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 loading system that is intended for use by NSURLProtocol
 implementors.
 */
+API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 @protocol NSURLProtocolClient <NSObject>
 
 /*!
@@ -158,6 +159,7 @@ implementors.
     data. Concrete subclasses handle the specifics associated with one
     or more protocols or URL schemes.
 */
+API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 @interface NSURLProtocol : NSObject
 {
     @private

@@ -1,4 +1,4 @@
-#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AudioFileComponent.h>)
+#if (defined(__USE_PUBLIC_HEADERS__) && __USE_PUBLIC_HEADERS__) || (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AudioFileComponent.h>)
 /*!
 	@file		AudioFileComponent.h
 	@framework	AudioToolbox.framework
@@ -24,9 +24,6 @@
 //==================================================================================================
 //	Includes
 //==================================================================================================
-
-#include <Availability.h>
-#include <TargetConditionals.h>
 
 #include <AudioToolbox/AudioComponent.h>
 #include <AudioToolbox/AudioFile.h>

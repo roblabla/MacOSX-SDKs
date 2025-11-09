@@ -394,12 +394,9 @@ HK_EXTERN NSString * const HKMetadataKeyBloodGlucoseMealTime API_AVAILABLE(ios(1
  @enum          HKVO2MaxTestType
  @abstract      Represents the test used to create a VO2 Max Sample.
  
- @constant      HKVO2MaxTestTypeMaxExercise               A user is exerted to their physical limit to evaluate and
-                                                          measure actual VO2Max.
- @constant      HKVO2MaxTestTypePredictionSubMaxExercise  A specific test protocol is used to calculate and correlate a
-                                                          predicted VO2Max.
- @constant      HKVO2MaxTestTypePredictionNonExercise     A non-exercise equation is used based on user metrics to
-                                                          calculate a predicted VO2Max.
+ @constant      HKVO2MaxTestTypeMaxExercise                      The user was exerted to their physical limit to evaluate and measure actual VO2Max.
+ @constant      HKVO2MaxTestTypePredictionSubMaxExercise         A specific test protocol was used to calculate and correlate a predicted VO2Max.
+ @constant      HKVO2MaxTestTypePredictionNonExercise            A non-exercise equation was used based on user metrics to calculate a predicted VO2Max.
  */
 typedef NS_ENUM(NSInteger, HKVO2MaxTestType) {
     HKVO2MaxTestTypeMaxExercise = 1,
@@ -496,6 +493,7 @@ HK_EXTERN NSString * const HKMetadataKeyCrossTrainerDistance API_AVAILABLE(ios(1
  */
 HK_EXTERN NSString * const HKMetadataKeyHeartRateEventThreshold API_AVAILABLE(ios(12.2), watchos(5.2));
 
+
 /*!
  @constant      HKMetadataKeyAverageMETs
  @abstract      Represents the average METs, or Metabolic Equivalent of Task during a workout.
@@ -511,5 +509,68 @@ HK_EXTERN NSString * const HKMetadataKeyAverageMETs API_AVAILABLE(ios(13.0), wat
                 associated with the event measured in dbASPL units.
  */
 HK_EXTERN NSString * const HKMetadataKeyAudioExposureLevel API_AVAILABLE(ios(13.0), watchos(6.0));
+
+/*!
+@constant      HKMetadataKeyAudioExposureDuration
+@abstract      Represents the duration of time that is covered by audio samples.
+@discussion    The expected value type is an HKQuantity object compatible with a time unit.
+               This key may be set on headphone audio exposure event samples to indicate
+               the duration of time that the user was actually exposed to audio through their headphones.
+*/
+HK_EXTERN NSString * const HKMetadataKeyAudioExposureDuration API_AVAILABLE(ios(14.2), watchos(7.1));
+
+/*!
+ @enum          HKAppleECGAlgorithmVersion
+ @abstract      Indicates which algorithm version number was used by the ECG app on Apple Watch.
+
+ @constant      HKAppleECGAlgorithmVersion1   Apple Watch used a version 1 algorithm to generate this ECG.
+ */
+typedef NS_ENUM(NSInteger, HKAppleECGAlgorithmVersion) {
+    HKAppleECGAlgorithmVersion1 = 1,
+} API_AVAILABLE(ios(14.0), watchos(7.0));
+
+/*!
+ @constant      HKMetadataKeyAppleECGAlgorithmVersion
+ @abstract      Represents the ECG algorithm version that was used to generate a particular HKElectrocardiogram.
+ @discussion    The expected value type is an an NSNumber containing a HKAppleECGAlgorithmVersion value.
+ */
+HK_EXTERN NSString * const HKMetadataKeyAppleECGAlgorithmVersion API_AVAILABLE(ios(14.0), watchos(7.0));
+
+/*!
+ @enum          HKDevicePlacementSide
+ @abstract      The detected placement of the device during the bout of walking
+ @constant      HKDevicePlacementSideUnknown                     Unable to determine the placement of the device
+ @constant      HKDevicePlacementSideLeft                        Device predominantly worn on left side
+ @constant      HKDevicePlacementSideRight                       Device predominantly worn on right side
+ @constant      HKDevicePlacementSideCentral                     Device predominantly worn on the middle of the body
+ */
+typedef NS_ENUM(NSInteger, HKDevicePlacementSide) {
+    HKDevicePlacementSideUnknown = 0,
+    HKDevicePlacementSideLeft,
+    HKDevicePlacementSideRight,
+    HKDevicePlacementSideCentral,
+} API_AVAILABLE(ios(14.0), watchos(7.0));
+
+/*!
+ @constant      HKMetadataKeyDevicePlacementSide
+ @abstract      Represents the detected placement of the device during the bout of walking
+ @discussion    The expected value type is an NSNumber containing a HKDevicePlacementSide value.  This key is expected to
+                be written for Walking Aymmetry Percentage.
+ */
+HK_EXTERN NSString * const HKMetadataKeyDevicePlacementSide API_AVAILABLE(ios(14.0), watchos(7.0));
+
+/*!
+@constant      HKMetadataKeyBarometricPressure
+@abstract      Represents the barometric pressure recorded at the time of a sample.
+@discussion    The expected value type is an HKQuantity representing a value in units of pressure (atmospheres, pascals, millimeters of Mercury).
+*/
+HK_EXTERN NSString * const HKMetadataKeyBarometricPressure API_AVAILABLE(ios(14.0), watchos(7.0));
+
+/*!
+ @constant      HKMetadataKeyAppleDeviceCalibrated
+ @abstract      Represents the calibration status of the devices used to generate this sample.
+ @discussion    The expected value is a boolean NSNumber indicating whether the sample value was estimated using a sufficient set of device calibration data. The calibration status of a device may vary per data type. This key is read-only.
+ */
+HK_EXTERN NSString * const HKMetadataKeyAppleDeviceCalibrated API_AVAILABLE(ios(14.0), watchos(7.0));
 
 NS_ASSUME_NONNULL_END

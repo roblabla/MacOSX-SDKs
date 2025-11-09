@@ -66,7 +66,7 @@ You can extend this functionality by introducing a new set of protocols that are
 
 /* Protocol implemented by validated objects */
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @protocol NSValidatedUserInterfaceItem
 @property (readonly, nullable) SEL action;

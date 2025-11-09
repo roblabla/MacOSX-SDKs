@@ -5,6 +5,7 @@
 #ifndef CGEVENTTYPES_H_
 #define CGEVENTTYPES_H_
 
+
 #include <CoreFoundation/CFBase.h>
 #include <CoreFoundation/CFAvailability.h>
 #include <stdint.h>
@@ -374,7 +375,11 @@ typedef CF_ENUM(uint32_t, CGEventField) {
   
   /* Added in 10.5; made public in 10.7 */
   kCGMouseEventWindowUnderMousePointer = 91,
-  kCGMouseEventWindowUnderMousePointerThatCanHandleThisEvent = 92
+  kCGMouseEventWindowUnderMousePointerThatCanHandleThisEvent = 92,
+
+  /* Unaccelerated pointer movement */
+  kCGEventUnacceleratedPointerMovementX = 170,
+  kCGEventUnacceleratedPointerMovementY = 171
 };
 
 /* Constants used with the `kCGMouseEventSubtype' event field. */
@@ -477,5 +482,6 @@ typedef uint32_t CGEventSourceKeyboardType;
 #define kCGAnyInputEventType ((CGEventType)(~0))
 
 CF_ASSUME_NONNULL_END
+
 
 #endif /* CGEVENTTYPES_H_ */

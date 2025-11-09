@@ -1,15 +1,21 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: BD72DE24-8680-3EE2-8BD1-B8566AA09409' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           D5551F0F-FA64-337F-834B-A35F5D8D6EC6
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           C9941A50-1173-3D01-88AE-7DE3BC24F320
 install-name:    '/System/Library/PrivateFrameworks/SpeechObjects.framework/Versions/A/Frameworks/DictationServices.framework/Versions/A/DictationServices'
-exports:         
-  - archs:           [ x86_64 ]
-    symbols:         [ _AdvancedCommandsStateWasModifiedNotification, _SOAudioDeviceInputSourcesChangedNotification, 
-                       _SOAudioDeviceManagerAlertVolumeChangedNotification, _SOAudioDeviceManagerClamshellModeChangedNotification, 
-                       _SOAudioDeviceManagerHardwareChangedNotification, _SOAudioDeviceManagerInputDeviceChangedNotification, 
-                       _SOAudioDeviceManagerInputVolumeChangedNotification, _SOAudioDeviceManagerMuteChangedNotification, 
-                       _SOAudioDeviceManagerNoiseCancellationChangedNotification, 
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _AdvancedCommandsStateWasModifiedNotification, _ContinueOnMainThreadOrAsyncDispatchToMainQueue, 
+                       _SOAudioDeviceInputSourcesChangedNotification, _SOAudioDeviceManagerAlertVolumeChangedNotification, 
+                       _SOAudioDeviceManagerClamshellModeChangedNotification, _SOAudioDeviceManagerHardwareChangedNotification, 
+                       _SOAudioDeviceManagerInputDeviceChangedNotification, _SOAudioDeviceManagerInputVolumeChangedNotification, 
+                       _SOAudioDeviceManagerMuteChangedNotification, _SOAudioDeviceManagerNoiseCancellationChangedNotification, 
                        _SOAudioDeviceManagerSystemDeviceChangedNotification, _SOAudioDeviceOutputSourcesChangedNotification, 
                        _SODictationCommandPropertiesRegistered, _SODictationGetOpenCommandProperties, 
                        _SODictationGetURLForOpenFileCommandProperties, _SODictationIsLoggingRealms, 
@@ -22,12 +28,11 @@ exports:
                        _kSODictationCustomCommandChangedNotification, _kSODictationCustomCommandEnabledKey, 
                        _kSODictationCustomCommandFileURLKey, _kSODictationCustomCommandIdentifierKey, 
                        _kSODictationCustomCommandTitleKey, _kSORecognitionWindowMicLayerObjectName, 
-                       _sDSRMessageTracerUtilities, _sSOCommandsWindowController, 
-                       _sSOElementClickFlashOverlayController, _sSOExternalClientDownloadAlertController, 
-                       _sSOLMAdaptationManager, _sSOLabeledElementsOverlayController, 
-                       _sSORecognitionTextBalloonController, _sSORecognitionWindowController, 
-                       _sTargetApplications ]
-    objc-classes:    [ ConfigKeyEditor, DSRMessageTracerUtilities, SOAdaptiveBackdropView, 
+                       _sDSRMessageTracerUtilities, _sDSRSiriInstrumentationUtilities, 
+                       _sSOCommandsWindowController, _sSOElementClickFlashOverlayController, 
+                       _sSOExternalClientDownloadAlertController, _sSORecognitionTextBalloonController, 
+                       _sSORecognitionWindowController, _sTargetApplications ]
+    objc-classes:    [ ConfigKeyEditor, DSRMessageTracerUtilities, DSRSiriInstrumentationUtilities, 
                        SOAddRemoveActionBar, SOAddRemoveActionBarCell, SOApplicationUtilities, 
                        SOAudioDevice, SOAudioDeviceManager, SOAudioInputDevice, SOAudioQueueRecorder, 
                        SOAudioSource, SOBigMicrophoneView, SOClassicDictationBackgroundView, 
@@ -38,7 +43,7 @@ exports:
                        SOCommandsWindow, SOCommandsWindowCollapsingCell, SOCommandsWindowController, 
                        SOCorrectionCollectionHeaderView, SOCorrectionCollectionViewItem, 
                        SOCorrectionCollectionViewItemView, SOCorrectionManager, SOCorrectionPopoverWindow, 
-                       SOCorrectionViewController, SOCorrectionWindowController, 
+                       SOCorrectionViewController, SOCyclingContainer, SOCyclingController, 
                        SODictationAdvancedCommandsFileManager, SODictationCommandGroup, 
                        SODictationCommandItem, SODictationCommandItemCell, SODictationCommandManager, 
                        SODictationCommandNounSpecifier, SODictationHotKey, SODictationHotKeyController, 
@@ -47,27 +52,22 @@ exports:
                        SOElementClickFlashOverlayWindow, SOEnableDictationPanelController, 
                        SOExternalClientDownloadAlertController, SOGridElementView, 
                        SOGridView, SOGridWindowBackgroundView, SOGridWindowController, 
-                       SOHotKeyManager, SOHotKeyTextFieldCell, SOLMAdaptationManager, 
+                       SOHotKeyManager, SOHotKeyTextFieldCell, SOLabeledBadgeView, 
                        SOLabeledBadgeWindow, SOLabeledBadgeWindowController, SOLabeledElement, 
-                       SOLabeledElementsOverlayController, SOLabeledElementsOverlayView, 
-                       SOLabeledElementsOverlayWindow, SOMicrophoneLevelMeterController, 
-                       SOMicrophonePopUpButton, SORecognitionFeedbackManager, SORecognitionTextBalloonBackgroundView, 
-                       SORecognitionTextBalloonController, SORecognitionTextBalloonWindow, 
-                       SORecognitionWindowAnimatedContentView, SORecognitionWindowAnimatedMicBackgroundView, 
-                       SORecognitionWindowAnimatedMicFillView, SORecognitionWindowController, 
-                       SORecognitionWindowDoneButton, SORecognitionWindowDoneButtonHighlightView, 
-                       SOTableView, SOVocabularyEditorWindowController, SOVocabularyListWindowController ]
+                       SOMicrophoneLevelMeterController, SOMicrophonePopUpButton, 
+                       SONamedLabeledBadgeView, SONamedLabeledElementsOverlayController, 
+                       SONumberedLabeledBadgeWindow, SONumberedLabeledElementsOverlayController, 
+                       SONumberedLabeledElementsWindowController, SORecognitionFeedbackManager, 
+                       SORecognitionTextBalloonBackgroundView, SORecognitionTextBalloonController, 
+                       SORecognitionTextBalloonWindow, SORecognitionWindowAnimatedContentView, 
+                       SORecognitionWindowAnimatedMicBackgroundView, SORecognitionWindowAnimatedMicFillView, 
+                       SORecognitionWindowController, SORecognitionWindowDoneButton, 
+                       SORecognitionWindowDoneButtonHighlightView, SOTableView, SOVocabularyEditorWindowController, 
+                       SOVocabularyListWindowController ]
     objc-ivars:      [ ConfigKeyEditor.mAllowsHighFunctionKeys, ConfigKeyEditor.mCharCode, 
                        ConfigKeyEditor.mDelegate, ConfigKeyEditor.mModifiers, ConfigKeyEditor.mNSModifiers, 
                        ConfigKeyEditor.mOperationModeEnabled, ConfigKeyEditor.mSavedHotKeyOperatingMode, 
-                       ConfigKeyEditor.mVirtualKey, DSRMessageTracerUtilities._clientIdentifier, 
-                       DSRMessageTracerUtilities._fan0FinalActualSpeed, DSRMessageTracerUtilities._fan0InitialActualSpeed, 
-                       DSRMessageTracerUtilities._hotKeyDescription, DSRMessageTracerUtilities._insertionPointLength, 
-                       DSRMessageTracerUtilities._languages, DSRMessageTracerUtilities._microphoneGain, 
-                       DSRMessageTracerUtilities._microphoneIdentifier, DSRMessageTracerUtilities._numberOfAlternativesChosen, 
-                       DSRMessageTracerUtilities._recordingTimeInterval, DSRMessageTracerUtilities._recordingTimedOut, 
-                       DSRMessageTracerUtilities._startingAffordance, DSRMessageTracerUtilities._timeIntervalSinceLastDictation, 
-                       DSRMessageTracerUtilities._usingOffline, SOAddRemoveActionBarCell._customDelegate, 
+                       ConfigKeyEditor.mVirtualKey, SOAddRemoveActionBarCell._customDelegate, 
                        SOAudioDevice._allInputStreamsMixable, SOAudioDevice._audioDeviceID, 
                        SOAudioDevice._balance, SOAudioDevice._channelCount, SOAudioDevice._channelCountComputed, 
                        SOAudioDevice._hasBalance, SOAudioDevice._hasLevel, SOAudioDevice._hasMaster, 
@@ -92,7 +92,8 @@ exports:
                        SOCommandCustomizationViewController._alertContainer, SOCommandCustomizationViewController._alertTextField, 
                        SOCommandCustomizationViewController._bottomConstraint, SOCommandCustomizationViewController._commandManager, 
                        SOCommandCustomizationViewController._commandUndoManager, 
-                       SOCommandCustomizationViewController._commandVariationsTextField, 
+                       SOCommandCustomizationViewController._commandVariationsScrollView, 
+                       SOCommandCustomizationViewController._commandVariationsTextView, 
                        SOCommandCustomizationViewController._commandsContainer, SOCommandCustomizationViewController._commandsScrollView, 
                        SOCommandCustomizationViewController._commandsTable, SOCommandCustomizationViewController._currentLocaleIdentifier, 
                        SOCommandCustomizationViewController._customBox, SOCommandCustomizationViewController._dictationPreferences, 
@@ -129,11 +130,12 @@ exports:
                        SOCommandEditingViewController._workflowOptionsView, SOCommandPreferencesViewController._awoken, 
                        SOCommandPreferencesViewController._commandAndControlCheckbox, 
                        SOCommandPreferencesViewController._constrainedWithSuperview, 
+                       SOCommandPreferencesViewController._continuousOverlayPopUpButton, 
                        SOCommandPreferencesViewController._dictationCommandsButton, 
                        SOCommandPreferencesViewController._dictationLanguagePopUpButton, 
                        SOCommandPreferencesViewController._microphonePopUpButton, 
                        SOCommandPreferencesViewController._playSoundUponRecognitionCheckbox, 
-                       SOCommandPreferencesViewController._showInMenuCheckbox, SOCommandPreferencesViewController._vocabularyButton, 
+                       SOCommandPreferencesViewController._showHintsCheckbox, SOCommandPreferencesViewController._vocabularyButton, 
                        SOCommandWithParameterValuesTableCellView._parameterValuesTextField, 
                        SOCommandsWindowCollapsingCell._button, SOCommandsWindowController._commandManager, 
                        SOCommandsWindowController._commandsTableView, SOCommandsWindowController._delegate, 
@@ -190,11 +192,6 @@ exports:
                        SOHotKeyManager._cachedSymbolicHotKeyTable, SOHotKeyManager._ioConnection, 
                        SOHotKeyManager._ourCGSConnectionID, SOHotKeyManager._registeredHotKeyArray, 
                        SOHotKeyTextFieldCell._ConfigKeyEditor, SOHotKeyTextFieldCell._hotKeyController, 
-                       SOLMAdaptationManager._delegate, SOLMAdaptationManager._isAdapting, 
-                       SOLabeledElementsOverlayView._labelImageLTRCap, SOLabeledElementsOverlayView._labelImageLTRMiddle, 
-                       SOLabeledElementsOverlayView._labelImageLTRPoint, SOLabeledElementsOverlayView._labelImageRTLCap, 
-                       SOLabeledElementsOverlayView._labelMode, SOLabeledElementsOverlayView._labeledElements, 
-                       SOLabeledElementsOverlayView._pointerToCapWidthDelta, SOLabeledElementsOverlayView._positionAtLeft, 
                        SOMicrophoneLevelMeterController._bounceMicrophoneMeter, SOMicrophoneLevelMeterController._displayLink, 
                        SOMicrophoneLevelMeterController._ignoreMinimumMeterLevel, 
                        SOMicrophoneLevelMeterController._meterValueConsumerTarget, 

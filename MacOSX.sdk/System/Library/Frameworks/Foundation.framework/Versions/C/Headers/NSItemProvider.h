@@ -66,7 +66,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0))
 @end
 
 
-typedef void (^NSItemProviderCompletionHandler)(__nullable id <NSSecureCoding> item, NSError * __null_unspecified error);
+typedef void (^NSItemProviderCompletionHandler)(__nullable __kindof id <NSSecureCoding> item, NSError * __null_unspecified error);
 typedef void (^NSItemProviderLoadHandler)(__null_unspecified NSItemProviderCompletionHandler completionHandler, __null_unspecified Class expectedValueClass, NSDictionary * __null_unspecified options);
 
 
@@ -144,13 +144,13 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 // Add representations from a class, but defer loading the object until needed.
 - (void)registerObjectOfClass:(Class<NSItemProviderWriting>)aClass
                    visibility:(NSItemProviderRepresentationVisibility)visibility
-                  loadHandler:(NSProgress * _Nullable (^)(void (^completionHandler)(id<NSItemProviderWriting> _Nullable object, NSError * _Nullable error)))loadHandler API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+                  loadHandler:(NSProgress * _Nullable (^)(void (^completionHandler)(__kindof id<NSItemProviderWriting> _Nullable object, NSError * _Nullable error)))loadHandler API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
 
 - (BOOL)canLoadObjectOfClass:(Class<NSItemProviderReading>)aClass API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
 
 // Instantiate an object using the NSItemProviderReading protocol.
 - (NSProgress *)loadObjectOfClass:(Class<NSItemProviderReading>)aClass
-                completionHandler:(void (^)(id<NSItemProviderReading> _Nullable object, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+                completionHandler:(void (^)(__kindof id<NSItemProviderReading> _Nullable object, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
 
 
 #pragma mark - Coercing interface

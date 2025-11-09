@@ -1,6 +1,6 @@
-/* iig(DriverKit-73.0.1) generated from IOMemoryDescriptor.iig */
+/* iig(DriverKit-107.40.8) generated from IOMemoryDescriptor.iig */
 
-/* IOMemoryDescriptor.iig:1-87 */
+/* IOMemoryDescriptor.iig:1-72 */
 /*
  * Copyright (c) 2019-2019 Apple Inc. All rights reserved.
  *
@@ -44,10 +44,11 @@ class IOMemoryMap;
 
 // IOMemoryDescriptor Create options
 enum {
-	kIOMemoryDirectionIn    = 0x00000001,
-	kIOMemoryDirectionOut   = 0x00000002,
-	kIOMemoryDirectionOutIn = kIOMemoryDirectionIn | kIOMemoryDirectionOut,
-	kIOMemoryDirectionInOut = kIOMemoryDirectionOutIn,
+	kIOMemoryDirectionIn         = 0x00000001,
+	kIOMemoryDirectionOut        = 0x00000002,
+	kIOMemoryDirectionOutIn      = kIOMemoryDirectionIn | kIOMemoryDirectionOut,
+	kIOMemoryDirectionInOut      = kIOMemoryDirectionOutIn,
+	kIOMemoryDisableCopyOnWrite  = 0x00000010
 };
 
 // IOMemoryDescriptor CreateMapping options
@@ -65,10 +66,15 @@ struct IOAddressSegment {
 	uint64_t length;
 };
 
-struct IOMDPrivateState {
+struct _IOMDPrivateState {
 	uint64_t length;
 	uint64_t options;
 };
+
+/* source class IOMemoryDescriptor IOMemoryDescriptor.iig:73-185 */
+
+#if __DOCUMENTATION__
+#define KERNEL IIG_KERNEL
 
 /*!
  * @class IOMemoryDescriptor
@@ -81,19 +87,119 @@ struct IOMDPrivateState {
  * Methods in this class are used for memory that was supplied as a parameter.
  *
 
-@iig implementation
-#include <DriverKit/IOService.h>
-@iig end
 */
 
-/* class IOMemoryDescriptor IOMemoryDescriptor.iig:88-155 */
+class KERNEL IOMemoryDescriptor : public OSObject
+{
+public:
+
+
+	virtual bool
+	init() override;
+
+	virtual void
+	free() override;
+
+    /*!
+     * @brief       Obtain the length of the memory described.
+     * @param       returnLength Returned length.
+     * @return      kIOReturnSuccess on success. See IOReturn.h for error codes.
+     */
+	kern_return_t
+	GetLength(
+		uint64_t * returnLength) LOCALONLY;
+
+    /*!
+     * @brief       Create a mapping of the memory in the callers address space.
+     * @param       options
+	 *              kIOMemoryMapFixedAddress map at the address requested
+	 *              kIOMemoryMapReadOnly create a read only mapping
+	 *              kIOMemoryMapCacheModeDefault default cache mode
+	 *              kIOMemoryMapCacheModeInhibit inhibited cache mode
+	 *              kIOMemoryMapCacheModeCopyback copyback cache mode
+	 *              kIOMemoryMapCacheModeWriteThrough write through cache mode
+	 * @param       address Requested address if kIOMemoryMapFixedAddress was passed
+	 * @param       offset Start offset of the mapping in the descriptor.
+	 * @param       length Pass zero to map the entire memory, or a value <= the length of the descriptor.
+	 * @param       alignment of the memory virtual mapping. Only zero for no alignment is supported.
+	 * @param       map Returned IOMemoryMap object with +1 retain count.
+	 *              It should be retained until the map is no longer required.
+     * @return      kIOReturnSuccess on success. See IOReturn.h for error codes.
+     */
+	virtual kern_return_t
+	CreateMapping(
+		uint64_t options,
+		uint64_t address,
+		uint64_t offset,
+		uint64_t length,
+		uint64_t alignment,
+		IOMemoryMap ** map);
+
+    /*!
+     * @brief       Create a memory descriptor that is a subrange of another memory
+     *              descriptor
+     * @param       memoryDescriptorCreateOptions
+	 *              kIOMemoryDirectionIn memory described will be writable
+	 *              kIOMemoryDirectionOut memory described will be readable
+	 * @param       offset Start offset of the memory relative to the descriptor ofDescriptor.
+	 * @param       length Length of the memory.
+	 * @param       ofDescriptor Memory descriptor describing source memory.
+	 * @param       memory Returned IOMemoryDescriptor object with +1 retain count.
+     * @return      kIOReturnSuccess on success. See IOReturn.h for error codes.
+     */
+	static kern_return_t
+	CreateSubMemoryDescriptor(
+	    uint64_t memoryDescriptorCreateOptions,
+	    uint64_t offset,
+	    uint64_t length,
+		IOMemoryDescriptor * ofDescriptor,
+		IOMemoryDescriptor ** memory) __attribute__((availability(driverkit,introduced=20.0)));
+
+    /*!
+     * @brief       Create a memory descriptor that is a concatenation of a set of memory
+     *              descriptors
+     * @param       memoryDescriptorCreateOptions
+	 *              kIOMemoryDirectionIn memory described will be writable. The source
+	 *              descriptors must include this direction.
+	 *              kIOMemoryDirectionOut memory described will be readable. The source
+	 *              descriptors must include this direction.
+	 * @param       withDescriptorsCount Number of valid memory descriptors being passed
+	 *              in the withDescriptors array.
+	 * @param       withDescriptors Source memory descriptor array.
+	 * @param       memory Returned IOMemoryDescriptor object with +1 retain count.
+     * @return      kIOReturnSuccess on success. See IOReturn.h for error codes.
+     */
+	static kern_return_t
+	CreateWithMemoryDescriptors(
+	    uint64_t memoryDescriptorCreateOptions,
+		uint32_t withDescriptorsCount,
+		IOMemoryDescriptor * const withDescriptors[32],
+		IOMemoryDescriptor ** memory) __attribute__((availability(driverkit,introduced=20.0)));
+
+private:
+	kern_return_t
+	Map(
+		uint64_t options,
+		uint64_t address,
+		uint64_t length,
+		uint64_t alignment,
+
+		uint64_t * returnAddress,
+		uint64_t * returnLength) LOCALONLY;
+};
+
+#undef KERNEL
+#else /* __DOCUMENTATION__ */
+
+/* generated class IOMemoryDescriptor IOMemoryDescriptor.iig:73-185 */
 
 #define IOMemoryDescriptor__CopyState_ID            0xa2c0861d4118ce5eULL
 #define IOMemoryDescriptor_CreateMapping_ID            0xc5e69b0414ff6ee5ULL
-#define IOMemoryDescriptor_PrepareForDMA_ID            0xfd78519a57b70575ULL
+#define IOMemoryDescriptor_CreateSubMemoryDescriptor_ID            0xb085b5ee60ac732fULL
+#define IOMemoryDescriptor_CreateWithMemoryDescriptors_ID            0xba1530c996c4febcULL
 
 #define IOMemoryDescriptor__CopyState_Args \
-        IOMDPrivateState * state
+        _IOMDPrivateState * state
 
 #define IOMemoryDescriptor_CreateMapping_Args \
         uint64_t options, \
@@ -103,15 +209,18 @@ struct IOMDPrivateState {
         uint64_t alignment, \
         IOMemoryMap ** map
 
-#define IOMemoryDescriptor_PrepareForDMA_Args \
-        uint64_t options, \
-        IOService * device, \
+#define IOMemoryDescriptor_CreateSubMemoryDescriptor_Args \
+        uint64_t memoryDescriptorCreateOptions, \
         uint64_t offset, \
         uint64_t length, \
-        uint64_t * flags, \
-        uint64_t * returnLength, \
-        uint32_t * segmentsCount, \
-        IOAddressSegment * segments
+        IOMemoryDescriptor * ofDescriptor, \
+        IOMemoryDescriptor ** memory
+
+#define IOMemoryDescriptor_CreateWithMemoryDescriptors_Args \
+        uint64_t memoryDescriptorCreateOptions, \
+        uint32_t withDescriptorsCount, \
+        IOMemoryDescriptor ** const withDescriptors, \
+        IOMemoryDescriptor ** memory
 
 #define IOMemoryDescriptor_Methods \
 \
@@ -125,7 +234,7 @@ public:\
 \
     kern_return_t\
     _CopyState(\
-        IOMDPrivateState * state,\
+        _IOMDPrivateState * state,\
         OSDispatchMethod supermethod = NULL);\
 \
     kern_return_t\
@@ -142,17 +251,20 @@ public:\
         IOMemoryMap ** map,\
         OSDispatchMethod supermethod = NULL);\
 \
-    kern_return_t\
-    PrepareForDMA(\
-        uint64_t options,\
-        IOService * device,\
+    static kern_return_t\
+    CreateSubMemoryDescriptor(\
+        uint64_t memoryDescriptorCreateOptions,\
         uint64_t offset,\
         uint64_t length,\
-        uint64_t * flags,\
-        uint64_t * returnLength,\
-        uint32_t * segmentsCount,\
-        IOAddressSegment * segments,\
-        OSDispatchMethod supermethod = NULL);\
+        IOMemoryDescriptor * ofDescriptor,\
+        IOMemoryDescriptor ** memory) __attribute__((availability(driverkit,introduced=20.0)));\
+\
+    static kern_return_t\
+    CreateWithMemoryDescriptors(\
+        uint64_t memoryDescriptorCreateOptions,\
+        uint32_t withDescriptorsCount,\
+        IOMemoryDescriptor ** const withDescriptors,\
+        IOMemoryDescriptor ** memory) __attribute__((availability(driverkit,introduced=20.0)));\
 \
     kern_return_t\
     Map(\
@@ -183,11 +295,15 @@ public:\
         OSMetaClassBase * target,\
         CreateMapping_Handler func);\
 \
-    typedef kern_return_t (*PrepareForDMA_Handler)(OSMetaClassBase * target, IOMemoryDescriptor_PrepareForDMA_Args);\
+    typedef kern_return_t (*CreateSubMemoryDescriptor_Handler)(IOMemoryDescriptor_CreateSubMemoryDescriptor_Args);\
     static kern_return_t\
-    PrepareForDMA_Invoke(const IORPC rpc,\
-        OSMetaClassBase * target,\
-        PrepareForDMA_Handler func);\
+    CreateSubMemoryDescriptor_Invoke(const IORPC rpc,\
+        CreateSubMemoryDescriptor_Handler func);\
+\
+    typedef kern_return_t (*CreateWithMemoryDescriptors_Handler)(IOMemoryDescriptor_CreateWithMemoryDescriptors_Args);\
+    static kern_return_t\
+    CreateWithMemoryDescriptors_Invoke(const IORPC rpc,\
+        CreateWithMemoryDescriptors_Handler func);\
 \
 
 
@@ -202,8 +318,11 @@ protected:\
     kern_return_t\
     CreateMapping_Impl(IOMemoryDescriptor_CreateMapping_Args);\
 \
-    kern_return_t\
-    PrepareForDMA_Impl(IOMemoryDescriptor_PrepareForDMA_Args);\
+    static kern_return_t\
+    CreateSubMemoryDescriptor_Impl(IOMemoryDescriptor_CreateSubMemoryDescriptor_Args);\
+\
+    static kern_return_t\
+    CreateWithMemoryDescriptors_Impl(IOMemoryDescriptor_CreateWithMemoryDescriptors_Args);\
 \
 
 
@@ -224,7 +343,10 @@ public:\
 
 
 
-/* IOMemoryDescriptor.iig:164- */
+#endif /* !__DOCUMENTATION__ */
+
+
+/* IOMemoryDescriptor.iig:194- */
 
 
 

@@ -1,23 +1,28 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: E8BE7153-B6DA-3816-A2DF-56F7C07A24E1' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           1A8823DE-3B18-3398-920A-C3AADB32A92E
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           DEAADF49-26BC-30FF-8547-A931CE23C651
 install-name:    '/System/Library/PrivateFrameworks/CalendarDraw.framework/Versions/A/CalendarDraw'
-current-version: 2377
-exports:         
-  - archs:           [ x86_64 ]
-    symbols:         [ _BirthdayCalendarColor, _BirthdayMonthCalendarColor, _CalCGColorConvertToRGBCopy, 
-                       _CalCGColorCreateBlendedWithFraction, _CalCGColorGetConstantColor, 
-                       _CalCGColorGetHue, _CalCGColorGetLuminance, _CalCGColorIsDark, 
-                       _CalCGColorIsLight, _CalCGColorSpaceGetRGB, _CalDrawColorBlack, 
-                       _CalDrawColorWhite, _CalDrawNS_Log, _CalStripedImage, _CalUICurrentContext, 
+current-version: 2389
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _CalCGColorConvertToRGBCopy, _CalCGColorCreateBlendedWithFraction, 
+                       _CalCGColorGetConstantColor, _CalCGColorGetHue, _CalCGColorGetLuminance, 
+                       _CalCGColorIsDark, _CalCGColorIsLight, _CalCGColorSpaceGetRGB, 
+                       _CalDrawColorBlack, _CalDrawColorWhite, _CalDrawNS_Log, _CalUICurrentContext, 
                        _CalUIImageScaleForUserRect, _CalUIUseiPadStyle, _CalendarTileGetTentativeBackgroundColor, 
                        _CalendarTileGetTentativeDotColor, _CalendarUIBundle, _CreateBackgroundImage, 
                        _CreateCalendarDotImageInContext, _CreateCalendarForegroundColorForCGColor, 
                        _CreateCalendarTileImageInContext, _GetRGBAComponents, __CalCGColorLoadConstantColor, 
-                       _colorNeedsTransform, _displayColorForSymbolicName, _kCalCGColorBlue, 
-                       _kCalCGColorBrown, _kCalCGColorGreen, _kCalCGColorOrange, 
-                       _kCalCGColorPurple, _kCalCGColorRed, _kCalCGColorYellow ]
+                       _colorNeedsTransform, _kCalCGColorBlue, _kCalCGColorBrown, 
+                       _kCalCGColorGreen, _kCalCGColorOrange, _kCalCGColorPurple, 
+                       _kCalCGColorRed, _kCalCGColorYellow ]
     objc-classes:    [ CalDrawAllDayListOccurrence, CalDrawColorKey, CalDrawColorUtils, 
                        CalDrawDayOccurrence, CalDrawImageCache, CalDrawImageRendering, 
                        CalDrawMonthOccurrence, CalDrawNinePartImage, CalDrawOccurrence, 

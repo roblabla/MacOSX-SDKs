@@ -1,36 +1,28 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: BA0658D1-31FD-3F53-916D-BDD828E67AE4', 'x86_64: BA0658D1-31FD-3F53-916D-BDD828E67AE4' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           6ABC8674-8F7F-3695-A5A0-3DC7681203BA
+  - target:          x86_64-maccatalyst
+    value:           6ABC8674-8F7F-3695-A5A0-3DC7681203BA
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           40CAAEDE-A680-364C-AB92-94CB49E514C0
+  - target:          arm64e-maccatalyst
+    value:           40CAAEDE-A680-364C-AB92-94CB49E514C0
 install-name:    '/System/Library/PrivateFrameworks/UIKitSystemAppServices.framework/Versions/A/UIKitSystemAppServices'
-current-version: 180
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 234
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _UIKitSystemAppServicesVersionNumber, _UIKitSystemAppServicesVersionString, 
-                       _USSAppManagerLog, _USSClientServiceLog, _USSCreateDeserializedNSSecureEncodableObjectOfClassFromXPCDictionaryWithKey, 
-                       _USSDecodeConformingObjectFromDictionary, _USSDecodeObjectFromDictionary, 
-                       _USSDeserializerWhiteListClass, _USSEncodeObject, _USSEncodeObjectToDictionary, 
-                       _USSErrorDomain, _USSGetDictionaryArray, _USSGetDictionaryData, 
-                       _USSGetDictionaryNumber, _USSGetDictionaryString, _USSGetDictionaryUUID, 
-                       _USSNewClientToServerXPCInterface, _USSNewDaemonClientToServerXPCInterface, 
-                       _USSNewServerToClientXPCInterface, _USSNotificationNameConnected, 
-                       _USSNotificationNameSceneUpdate, _USSNotificationNameTerminate, 
-                       _USSSceneUpdateNotificationKeyContextID, _USSSceneUpdateNotificationKeyIdentifier, 
-                       _USSSerializeNSSecureEncodableObjectToXPCDictionaryWithKey, 
-                       _USSServicesPayloadClassNameKey, _USSServicesPayloadKey, _USSSetDictionaryArray, 
-                       _USSTerminateNotificationKeyReason, _USSWhiteListedClasses, 
-                       _USSXPCNotificationKeyNotificationName, _kUSSAccessibilityFullKeyboardAccessEnabledKey, 
-                       _kUSSAccessibilitySettingsDifferentiateWithoutColorKey, _kUSSAccessibilitySettingsGrayscaleKey, 
-                       _kUSSAccessibilitySettingsIncreaseContrastKey, _kUSSAccessibilitySettingsInvertColorsKey, 
-                       _kUSSAccessibilitySettingsReduceMotionKey, _kUSSAccessibilitySettingsReduceTransparencyKey, 
-                       _kUSSAccessibilitySwitchControlEnabledKey, _kUSSAccessibilityVoiceControlEnabledKey, 
-                       _kUSSAccessibilityVoiceOverEnabledKey, _kUSSServicesClientServiceName, 
-                       _kUSSServicesDaemonClientServiceName ]
-    objc-classes:    [ USSAccessibilityService, USSApplicationGracefulTerminationRequest, 
-                       USSBackgroundLaunchRequest, USSConnectedNotification, USSDaemonServicesClient, 
-                       USSEnableApplicationAccessibilityRequest, USSNotification, 
-                       USSOpenURLRequest, USSRemoteNotificationReply, USSRemoteNotificationRequest, 
-                       USSSceneActiveRequest, USSSceneResizeRequest, USSSceneUpdateNotification, 
-                       USSServicesClient, USSTerminateNotification, USSUserActivityContinuationRequest, 
-                       USSUserNotificationResponseRequest ]
+                       _USSAppManagerLog, _USSErrorDomain ]
+    objc-classes:    [ USSBackgroundLaunchRequest, USSEnableApplicationAccessibilityRequest, 
+                       USSOpenURLRequest, USSSceneActiveRequest, USSSceneResizeRequest, 
+                       USSServicesClient, USSUserActivityContinuationRequest, USSUserNotificationResponseRequest ]
 ...

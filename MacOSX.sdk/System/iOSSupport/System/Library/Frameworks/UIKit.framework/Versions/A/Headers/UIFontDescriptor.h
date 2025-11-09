@@ -56,8 +56,8 @@ typedef CGFloat UIFontWeight NS_TYPED_EXTENSIBLE_ENUM;
 typedef NSString * UIFontDescriptorSystemDesign NS_TYPED_ENUM;
 UIKIT_EXTERN UIFontDescriptorSystemDesign const UIFontDescriptorSystemDesignDefault API_AVAILABLE(ios(13.0), watchos(5.2), tvos(13.0));
 UIKIT_EXTERN UIFontDescriptorSystemDesign const UIFontDescriptorSystemDesignRounded API_AVAILABLE(ios(13.0), watchos(5.2), tvos(13.0));
-UIKIT_EXTERN UIFontDescriptorSystemDesign const UIFontDescriptorSystemDesignSerif API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
-UIKIT_EXTERN UIFontDescriptorSystemDesign const UIFontDescriptorSystemDesignMonospaced API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
+UIKIT_EXTERN UIFontDescriptorSystemDesign const UIFontDescriptorSystemDesignSerif API_AVAILABLE(ios(13.0), watchos(7.0), tvos(13.0));
+UIKIT_EXTERN UIFontDescriptorSystemDesign const UIFontDescriptorSystemDesignMonospaced API_AVAILABLE(ios(13.0), watchos(7.0), tvos(13.0));
 
 @class NSMutableDictionary, NSDictionary, NSArray, NSSet, UITraitCollection;
 

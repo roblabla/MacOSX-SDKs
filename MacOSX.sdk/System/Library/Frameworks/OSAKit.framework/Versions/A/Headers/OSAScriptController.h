@@ -8,12 +8,13 @@
 
 #import <Cocoa/Cocoa.h>
 
+NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
+
 @class OSAScriptView;
 @class OSAScript;
 @class OSALanguage;
 @class OSAScriptControllerPrivate;
-
-NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, OSAScriptState)
 {
@@ -51,4 +52,5 @@ typedef NS_ENUM(NSInteger, OSAScriptState)
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

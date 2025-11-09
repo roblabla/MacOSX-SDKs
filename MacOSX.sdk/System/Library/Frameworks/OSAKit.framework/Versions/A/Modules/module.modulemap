@@ -1,4 +1,4 @@
-framework module OSAKit [extern_c] {
+framework module OSAKit [system] {
     umbrella header "OSAKit.h"
     export *
     module * { export * }

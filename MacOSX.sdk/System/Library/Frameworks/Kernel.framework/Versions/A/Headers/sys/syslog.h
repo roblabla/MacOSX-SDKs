@@ -296,7 +296,7 @@ struct reg_desc {
 
 #include <stdarg.h>
 __BEGIN_DECLS
-void    log(int, const char *, ...);
+void    log(int, const char *, ...) __printflike(2, 3);
 
 __END_DECLS
 

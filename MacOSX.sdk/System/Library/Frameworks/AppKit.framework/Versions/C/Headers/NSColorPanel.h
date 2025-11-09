@@ -7,9 +7,10 @@
 
 #import <AppKit/NSPanel.h>
 #import <AppKit/NSApplication.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSColorList, NSMutableArray;
 
@@ -70,7 +71,7 @@ typedef NS_OPTIONS(NSUInteger, NSColorPanelOptions) {
 
 #if __swift__ < 40200
 @interface NSObject(NSColorPanelResponderMethod)
-- (void)changeColor:(nullable id)sender API_DEPRECATED("This is now a method of the NSColorChanging protocol.", macos(10.0,API_TO_BE_DEPRECATED));
+- (void)changeColor:(nullable id)sender API_DEPRECATED("This is now a method of the NSColorChanging protocol.", macos(10.0, 11.0));
 @end
 #endif
 

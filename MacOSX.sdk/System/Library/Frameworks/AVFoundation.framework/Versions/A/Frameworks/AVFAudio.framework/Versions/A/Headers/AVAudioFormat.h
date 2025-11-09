@@ -5,7 +5,6 @@
 	Copyright (c) 2014-2015 Apple Inc. All Rights Reserved.
 */
 
-#import <AVFAudio/AVAudioTypes.h>
 #import <AVFAudio/AVAudioChannelLayout.h>
 
 #if __has_include(<CoreMedia/CMFormatDescription.h>)

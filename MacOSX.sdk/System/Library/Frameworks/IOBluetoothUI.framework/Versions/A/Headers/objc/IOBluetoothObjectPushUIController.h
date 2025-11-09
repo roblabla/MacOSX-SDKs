@@ -6,8 +6,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <AvailabilityMacros.h>
 
 @class IOBluetoothDevice;
+API_UNAVAILABLE_BEGIN(ios)
 
 /*!
 	An NSWindowController subclass that supports the creation of an IOBluetoothObjectPushUIController object.
@@ -147,3 +149,4 @@
 
 
 
+API_UNAVAILABLE_END

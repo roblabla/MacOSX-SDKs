@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 16090AB4-379B-3092-9B30-3FE025F3C840' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           454680B3-38FA-35BE-8DC2-93FA4E344FDA
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           04734A9A-329C-3DA9-9ABC-B48EE703056E
 install-name:    '/System/Library/PrivateFrameworks/DesktopServicesPriv.framework/Versions/A/DesktopServicesPriv'
 current-version: 0
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CloseCatalog, _CopyNodeRef, _CopyPropertyList, _CreateClientNodeRef, 
                        _CreatePropertyList, _DSMergeOldDocumentsAndDesktopToHomeDirectory, 
                        _DSMoveAsideSyncedDocumentsAndDesktopToHome, _DSMoveOldDocumentsAndDesktopToHomeDirectory, 
@@ -15,7 +21,7 @@ exports:
                        _DSSetSuppressMainThreadOpenPropertyStoreAssert, _DSSizeICloudCopyMergeStatistics, 
                        _DS_CStringICloudFaultName, _DS_CopyFaultDictionary, _DS_CopyICloudMergeDirectories, 
                        _DS_CopyLogicalFileForICloudFault, _DS_CreateFaultFile, _DS_DateIsBusyFolderDate, 
-                       _DS_DeleteItem, _DS_DeleteItemDeep, _DS_FaultFileNameForFile, 
+                       _DS_DeleteItem, _DS_DeleteItemDeep, _DS_DeleteItemsDeep, _DS_FaultFileNameForFile, 
                        _DS_IsICloudFaultFile, _DS_IsICloudFaultName, _DS_Unit_Tests, 
                        _DeleteNode, _DisposeNode, _DisposeNodeIterator, _DisposeNodeSortedNumberIterator, 
                        _DisposeNodeSortedStringIterator, _DisposePropertyList, _DisposeVolumeIterator, 
@@ -66,12 +72,12 @@ exports:
                        _NodeCreateNewVirtualChildAtIndex, _NodeCreateNewVirtualChildAtIndexWithProperties, 
                        _NodeCreateNewVirtualFolder, _NodeCreateNewVirtualNode, _NodeCreateNewVirtualQueryNode, 
                        _NodeCreateTagNameCollationKey, _NodeCreateVirtualChildAtIndexIn, 
-                       _NodeDefaultSearchCount, _NodeDiagnosticLogging, _NodeDisconnectShare, 
-                       _NodeDispatchEvent, _NodeDisposeEventQueue, _NodeDisposeIterator, 
-                       _NodeDisposeNodeQueryRef, _NodeDisposeNodeRef, _NodeDisposeNotifier, 
-                       _NodeDisposeOperation, _NodeDisposePropertyList, _NodeDisposeRequest, 
-                       _NodeDisposeTask, _NodeEventBlockUntilNextEventNew, _NodeEventCopyEvent, 
-                       _NodeEventCopyFSPermissionInfo, _NodeEventCopyHandlerDebugString, 
+                       _NodeDSCreateOperation, _NodeDefaultSearchCount, _NodeDiagnosticLogging, 
+                       _NodeDisconnectShare, _NodeDispatchEvent, _NodeDisposeEventQueue, 
+                       _NodeDisposeIterator, _NodeDisposeNodeQueryRef, _NodeDisposeNodeRef, 
+                       _NodeDisposeNotifier, _NodeDisposeOperation, _NodeDisposePropertyList, 
+                       _NodeDisposeRequest, _NodeDisposeTask, _NodeEventBlockUntilNextEventNew, 
+                       _NodeEventCopyEvent, _NodeEventCopyFSPermissionInfo, _NodeEventCopyHandlerDebugString, 
                        _NodeEventCopyNode, _NodeEventCopyRegistrationParent, _NodeEventCopyResolvedParent, 
                        _NodeEventDisposeEventQueue, _NodeEventGetActiveParent, _NodeEventGetAliasHandle, 
                        _NodeEventGetBookmarkData, _NodeEventGetChild, _NodeEventGetClientRef, 
@@ -94,7 +100,7 @@ exports:
                        _NodeGetStatus, _NodeGetVRefNum, _NodeHasChildNew, _NodeHasCustomIcon, 
                        _NodeInlineProgressCancel, _NodeIs, _NodeIsAlias, _NodeIsApplication, 
                        _NodeIsClientNodeRef, _NodeIsClipping, _NodeIsComputer, _NodeIsContainer, 
-                       _NodeIsDesktop, _NodeIsDiagnosticLoggingEnabled, _NodeIsDiagnosticLoggingSupported, 
+                       _NodeIsDiagnosticLoggingEnabled, _NodeIsDiagnosticLoggingSupported, 
                        _NodeIsFontFile, _NodeIsFullyFormed, _NodeIsLocation, _NodeIsOnReadOnlySystemVolume, 
                        _NodeIsOnSSD, _NodeIsPackage, _NodeIsQuery, _NodeIsQueryHit, 
                        _NodeIsQueryHitsContainer, _NodeIsSavedQuery, _NodeIsSymLink, 
@@ -167,10 +173,11 @@ exports:
                        __CopyCommentForName, __CopyDateAddedForName, __CopyPropertyStoreWithURL, 
                        __CreatePropertyStoreAtURL, __DS_CFURLGetPropertyForKey, __DS_CFURLSetPropertyForKey, 
                        __DS_testBackupAppendBit, __DS_testBackupImmutableBit, __DesktopServicesAPIVersion, 
-                       __EnumerateProperties, __GetNodePropertyAsStringNew, __NodeApplyPermissionsRecursively, 
-                       __NodeClearDSStoreMappings, __NodeContextOpenExtended, __NodeContextSetOptions, 
-                       __NodeCopyAttributesValues, __NodeCopyMDLabelForFinderLabel, 
-                       __NodeCopyPerfDataForPath, __NodeCopyPermissions, __NodeCopyTagDictionariesFromTagNames, 
+                       __DesktopServicesErrorName, __EnumerateProperties, __GetNodePropertyAsStringNew, 
+                       __NodeApplyPermissionsRecursively, __NodeClearDSStoreMappings, 
+                       __NodeContextOpenExtended, __NodeContextSetOptions, __NodeCopyAttributesValues, 
+                       __NodeCopyMDLabelForFinderLabel, __NodeCopyPerfDataForPath, 
+                       __NodeCopyPermissions, __NodeCopyTagDictionariesFromTagNames, 
                        __NodeCopyTagNamesFromTagDictionaries, __NodeCopyValuesForSortRecordArray, 
                        __NodeCreateBookmarkFile, __NodeCreateNewVirtualQueryNode, 
                        __NodeCreateNewVirtualQueryNodePlus, __NodeDSFeatures, __NodeDisableQueryResults, 

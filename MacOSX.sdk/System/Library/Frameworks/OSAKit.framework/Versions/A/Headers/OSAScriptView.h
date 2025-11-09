@@ -8,9 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 
-@class OSAScriptViewPrivate;
-
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
+
+@class OSAScriptViewPrivate;
 
 // OSAScriptView
 // =============
@@ -32,4 +33,5 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

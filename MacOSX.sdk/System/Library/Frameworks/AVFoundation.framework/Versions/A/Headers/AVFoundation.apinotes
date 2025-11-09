@@ -2360,14 +2360,14 @@ SwiftVersions:
       SwiftName: setActive(_:)
       MethodKind: Instance
     - Selector: 'setActive:withOptions:error:'
-      SwiftName: setActive(_:with options:)
+      SwiftName: setActive(_:with:)
       MethodKind: Instance
     # AVAudioSession setCategory
     - Selector: 'setCategory:error:'
       SwiftName: setCategory(_:)
       MethodKind: Instance
     - Selector: 'setCategory:withOptions:error:'
-      SwiftName: setCategory(_:with options:)
+      SwiftName: setCategory(_:with:)
       MethodKind: Instance
     - Selector: 'setCategory:mode:options:error:'
       SwiftName: setCategory(_:mode:options:)

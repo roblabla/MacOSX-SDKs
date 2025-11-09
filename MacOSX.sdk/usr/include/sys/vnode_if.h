@@ -84,5 +84,9 @@
 #include <mach/memory_object_types.h>
 
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
 
+
+#pragma clang diagnostic pop /* #pragma clang diagnostic ignored "-Wdocumentation" */
 #endif /* !_SYS_VNODE_IF_H_ */

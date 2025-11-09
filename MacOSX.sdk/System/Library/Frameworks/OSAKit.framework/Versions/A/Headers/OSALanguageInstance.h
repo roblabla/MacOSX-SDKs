@@ -9,10 +9,11 @@
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
 
+NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
+
 @class OSALanguage;
 @class OSALanguageInstancePrivate;
-
-NS_ASSUME_NONNULL_BEGIN
 
 // OSALanguageInstance
 // ===================
@@ -37,6 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
 
 #endif

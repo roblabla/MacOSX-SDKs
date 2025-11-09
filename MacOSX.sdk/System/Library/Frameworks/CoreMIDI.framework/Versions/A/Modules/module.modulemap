@@ -3,6 +3,7 @@ framework module CoreMIDI [extern_c] {
 
 	exclude header "MIDINetworkSession.h"
 	exclude header "MIDICapabilityInquiry.h"
+    exclude header "MIDICapabilityInquiryPriv.h"
 
 	export *
 	module * { export * }

@@ -1411,7 +1411,7 @@ VIMAGE_NON_NULL(1,2,3)   API_AVAILABLE(macos(10.9), ios(7.0), watchos(1.0), tvos
  *      kvImageBufferSizeMismatch       Sizes of the src and dest images do not match
  *      kvImageNullPointerArgument      src, dest or table pointer is NULL.
  *
- *  This routine will not work in place.
+ *  This routine will work in place.
  *
  */
 

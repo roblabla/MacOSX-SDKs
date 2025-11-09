@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 2AAE7CA2-F485-3D3F-BFBB-7C6BFFA35C94', 'x86_64: 2AAE7CA2-F485-3D3F-BFBB-7C6BFFA35C94' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           C41D6858-85EC-3D72-A3AB-BD01BC4B4C6A
+  - target:          x86_64-maccatalyst
+    value:           C41D6858-85EC-3D72-A3AB-BD01BC4B4C6A
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           63CE3947-DDD3-3946-9E32-B412C3F4B5D2
+  - target:          arm64e-maccatalyst
+    value:           63CE3947-DDD3-3946-9E32-B412C3F4B5D2
 install-name:    '/System/Library/PrivateFrameworks/RemoteConfiguration.framework/Versions/A/RemoteConfiguration'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _NSErrorRCAdditionsIsNetworkUnavailable, _NSErrorRCAdditionsShouldRetry, 
                        _RCAppBundleID, _RCAppVersion, _RCBlockConjunction, _RCBlockWithQualityOfService, 
                        _RCCFTypeCast, _RCChangeTagContentHashKey, _RCChangeTagIdentifierKey, 
@@ -31,12 +45,12 @@ exports:
                        _RCConfigurationWrapperIDKey, _RCConfigurationWrapperLastModifiedKey, 
                        _RCDebugOverridesAdditionalSegmentSetIDsKey, _RCDebugOverridesDisableAbTestingKey, 
                        _RCDebugOverridesOverrideSegmentSetIDsKey, _RCDeviceInfoAppVersionKey, 
-                       _RCDeviceInfoDeviceTypeKey, _RCDeviceInfoDstOffsetKey, _RCDeviceInfoOsVersionKey, 
-                       _RCDeviceInfoPreferredLanguagesKey, _RCDeviceInfoUtcOffsetKey, 
-                       _RCDeviceModelString, _RCDeviceOSVersion, _RCDispatchAfterWithQualityOfService, 
-                       _RCDispatchAsyncWithQualityOfService, _RCDispatchGroupIsEmpty, 
-                       _RCDispatchGroupNotifyWithQualityOfService, _RCDispatchGroupNotifyWithTimeout, 
-                       _RCDispatchGroupWrap, _RCDispatchQueueForQualityOfService, 
+                       _RCDeviceInfoCountryCodeKey, _RCDeviceInfoDeviceTypeKey, _RCDeviceInfoDstOffsetKey, 
+                       _RCDeviceInfoOsVersionKey, _RCDeviceInfoPreferredLanguagesKey, 
+                       _RCDeviceInfoUtcOffsetKey, _RCDeviceModelString, _RCDeviceOSVersion, 
+                       _RCDispatchAfterWithQualityOfService, _RCDispatchAsyncWithQualityOfService, 
+                       _RCDispatchGroupIsEmpty, _RCDispatchGroupNotifyWithQualityOfService, 
+                       _RCDispatchGroupNotifyWithTimeout, _RCDispatchGroupWrap, _RCDispatchQueueForQualityOfService, 
                        _RCDynamicCast, _RCEndpointErrorCodeKey, _RCEndpointErrorMessageKey, 
                        _RCEndpointErrorStacktraceKey, _RCErrorDomain, _RCErrorEndpointErrorsKey, 
                        _RCErrorHTTPRequestUUIDKey, _RCErrorHTTPResponseHeadersKey, 
@@ -71,8 +85,8 @@ exports:
                        _RCUserSegmentationConfigurationKey, _RCUserSegmentationConfigurationModMaxKey, 
                        _RCUserSegmentationConfigurationModThresholdKey, _RCUserSegmentationEnvironmentForEnvironmentString, 
                        _RCUserSegmentationModMaxKey, _RCUserSegmentationModThresholdKey, 
-                       _RCUserSegmentationRefreshRateKey, _RCUserSegmentationWidgetBackgroundRefreshRateKey, 
-                       _RCUserSegmentationWidgetConfigurationKey, _RCUserSegmentationWidgetForegroundRefreshRateKey, 
+                       _RCUserSegmentationRefreshRateKey, _RCUserSegmentationWidgetConfigurationKey, 
+                       _RCUserSegmentationWidgetForegroundRefreshRateKey, _RCUserSegmentationWidgetRefreshRateKey, 
                        _RCWaitUntilBlockIsInvoked, _RemoteConfigurationVersionNumber, 
                        _RemoteConfigurationVersionString ]
     objc-classes:    [ RCAsyncBlockOperation, RCAsyncOnceOperation, RCAsyncSerialQueue, 

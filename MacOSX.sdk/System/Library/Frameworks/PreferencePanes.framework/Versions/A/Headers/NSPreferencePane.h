@@ -8,13 +8,14 @@
 
 #import <Cocoa/Cocoa.h>
 
+API_UNAVAILABLE_BEGIN(ios, tvos, watchos)
+
 typedef NS_ENUM(NSUInteger, NSPreferencePaneUnselectReply)
 {
     NSUnselectCancel = 0,
     NSUnselectNow = 1,
     NSUnselectLater = 2
 };
-
 
 extern NSString * __nonnull const 	NSPreferencePaneDoUnselectNotification;
 extern NSString * __nonnull const 	NSPreferencePaneCancelUnselectNotification;
@@ -24,22 +25,22 @@ extern NSString * __nonnull const	NSPreferencePrefPaneIsAvailableNotification;
 extern NSString * __nonnull const	NSPreferencePaneUpdateHelpMenuNotification;
 
 // Help Menu support
-APPKIT_EXTERN NSString * __nonnull const				NSPrefPaneHelpMenuInfoPListKey;
-APPKIT_EXTERN NSString * __nonnull const				NSPrefPaneHelpMenuTitleKey;
-APPKIT_EXTERN NSString * __nonnull const				NSPrefPaneHelpMenuAnchorKey;
+APPKIT_EXTERN NSString * __nonnull const	NSPrefPaneHelpMenuInfoPListKey;
+APPKIT_EXTERN NSString * __nonnull const	NSPrefPaneHelpMenuTitleKey;
+APPKIT_EXTERN NSString * __nonnull const	NSPrefPaneHelpMenuAnchorKey;
 
 
 #if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_7
 
 #define kNSPrefPaneHelpMenuInfoPListKey		NSPrefPaneHelpMenuInfoPListKey	
 #define kNSPrefPaneHelpMenuTitleKey			NSPrefPaneHelpMenuTitleKey		
-#define kNSPrefPaneHelpMenuAnchorKey			NSPrefPaneHelpMenuAnchorKey		
+#define kNSPrefPaneHelpMenuAnchorKey		NSPrefPaneHelpMenuAnchorKey		
 
 #else /* MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_7 */
 
 #define	kNSPrefPaneHelpMenuInfoPListKey		@"NSPrefPaneHelpAnchors"
 #define	kNSPrefPaneHelpMenuTitleKey			@"title"		
-#define	kNSPrefPaneHelpMenuAnchorKey			@"anchor"
+#define	kNSPrefPaneHelpMenuAnchorKey		@"anchor"
 
 #endif
 
@@ -216,3 +217,4 @@ APPKIT_EXTERN NSString * __nonnull const				NSPrefPaneHelpMenuAnchorKey;
 - (void) updateHelpMenuWithArray:(nullable NSArray<NSDictionary<NSString *, NSString *> *> *)inArrayOfMenuItems;
 @end
 
+API_UNAVAILABLE_END

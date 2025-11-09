@@ -102,7 +102,7 @@ WebDAV clients must usually be configured with a full URL of the host, with a sc
 https://hostname.example.com
 .fi
 .It
-The configurable virtual host behavior provided by macOS Server is not available, so WebDAV clients may not be able to use alternate host names in their URLs.
+The configurable virtual host behavior once provided by macOS Server is not available, so WebDAV clients may not be able to use alternate host names in their URLs.
 .El
 .Sh FILES
 .Bl -tag -width indent
@@ -114,8 +114,6 @@ The parameterized Apache config file for the user-specific instances of httpd
 The Apache config file providing directives specific to each share point; dynamically generated when share points are modified by wfsctl
 .It Pa /etc/wfs/wfs.plist
 The file where admin-configurable settings for WFS are stored.
-.It Pa /Library/Server/Web/Config/apache2/WebConfigProperties.plist
-If macOS Server is installed and promoted, WebDAVSharing settings in this file take precedence over those in /etc/wfs/wfs.plist.
 .It Pa /etc/apache2/env.plist
 The file where environment variable definitions are managed automatically; these variables are passed to httpd for use in parameterized config files.
 .It Pa /Library/Logs/WebDAVFileSharing.log
@@ -130,24 +128,24 @@ The parameterized sandbox profile for user-specific httpd instances.
 The dynamically generated portion of the sandbox profile
 .El
 .Sh SERVER APP
-When macOS Server is installed and promoted, WebDAV File Sharing is reconfigured to support the WebDAV behaviors presented by Server:
+When macOS Server is installed and promoted, and the Apache instance for Profile Manager is enabled, WebDAV File Sharing is reconfigured to support the WebDAV behaviors presented by Server:
 .Bl -enum
 .It
 macOS Server provides HTTP-based services (for Profile Manager) on standard HTTP/S TCP ports 80 and 443. So to avoid port conflict, the desktop Apache configuration (including the configuration for WebDAV File Sharing) is switched to port 81, on localhost only, and WFS traffic is reverse proxied to localhost:81.
 .It
 macOS Server manages its own SSL certificates, and provides the SSL endpoint. So the desktop Apache configuration for WebDAV File Sharing is switched to non-SSL.
 .Pp
-When macOS Server is installed and promoted, it is still possible to use wfsctl to manage WebDAV share points, e. g.:
+When macOS Server is installed and promoted, and the Apache instance for Profile Manager is enabled, it is still possible to use wfsctl to manage WebDAV share points, e. g.:
 .nf
 
     sudo wfsctl share /Volumes/Data/Share1
 .fi
 
 .It
-Any share points created in the UI on versions of macOS Server that predate High Sierra remain across updates, and those that were marked as WebDAV share points should continue to be available after the update to High Sierra, whether or not macOS Server is installed.
+Any share points created in the UI on versions of macOS Server that predate High Sierra remain across updates, and those that were marked as WebDAV share points should continue to be available after the update to High Sierra or newer, whether or not macOS Server is installed.
 .El
 .Pp
-When macOS Server is removed or demoted, the port changes and SSL changes made at Server promotion time are reversed.
+When the Apache instance for Profile Manager is disabled, or when macOS Server is removed or demoted, the port changes and SSL changes described above are reversed.
 .Sh SEE ALSO
 .Xr httpd 8
 .Xr httpd-wrapper 8

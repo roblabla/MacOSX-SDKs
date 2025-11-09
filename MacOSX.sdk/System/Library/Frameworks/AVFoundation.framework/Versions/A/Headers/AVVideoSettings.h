@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVVideoSettings.h>)
 /*
 	File:  AVVideoSettings.h
 
@@ -292,3 +293,7 @@ AVF_EXPORT AVVideoApertureMode const AVVideoApertureModeProductionAperture API_A
 	The image is not cropped to the clean aperture region and is not scaled according to the pixel aspect ratio. The encoded dimensions of the image description are displayed.
  */
 AVF_EXPORT AVVideoApertureMode const AVVideoApertureModeEncodedPixels API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
+
+#else
+#import <AVFCore/AVVideoSettings.h>
+#endif

@@ -36,14 +36,14 @@ API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0))
     Given intervals a and b
         a.   |-----|
         b.      |-----|
- [a compare:b] would return NSOrderAscending because a's startDate is earlier in time than b's start date.
+ [a compare:b] would return NSOrderedAscending because a's startDate is earlier in time than b's start date.
 
  In the event that the start dates are equal, the compare method will attempt to order by duration.
  e.g.
     Given intervals c and d
         c.  |-----|
         d.  |---|
- [c compare:d] would result in NSOrderDescending because c is longer than d.
+ [c compare:d] would result in NSOrderedDescending because c is longer than d.
 
  If both the start dates and the durations are equal, then the intervals are considered equal and NSOrderedSame is returned as the result.
  */

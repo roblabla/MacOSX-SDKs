@@ -22,6 +22,7 @@ typedef NS_ENUM(NSUInteger, MTLMutability)
     MTLMutabilityImmutable = 2,
 } API_AVAILABLE(macos(10.13), ios(11.0));
 
+
 MTL_EXPORT API_AVAILABLE(macos(10.13), ios(11.0))
 @interface MTLPipelineBufferDescriptor : NSObject <NSCopying>
 

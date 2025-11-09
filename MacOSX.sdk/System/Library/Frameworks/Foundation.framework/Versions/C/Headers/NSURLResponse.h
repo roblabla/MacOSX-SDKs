@@ -30,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
     NSURLConnection and NSURLConnectionDelegate for more information
     about receiving the content data for a URL load.
 */
+API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 @interface NSURLResponse : NSObject <NSSecureCoding, NSCopying>
 {
     @package
@@ -119,6 +120,7 @@ NS_ASSUME_NONNULL_BEGIN
     provides conveniences for accessing information specific to HTTP
     protocol responses.
 */
+API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 @interface NSHTTPURLResponse : NSURLResponse 
 {
     @package

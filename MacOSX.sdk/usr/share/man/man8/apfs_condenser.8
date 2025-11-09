@@ -35,7 +35,8 @@ The
 command sequentially inserts the contents of an existing B-tree into a new B-tree to improve B-tree space utilization.
 The
 .Nm
-requires the container to be unmounted and an encrypted volume to be unlocked. The
+requires the container to be unmounted and an encrypted volume to be unlocked.
+The
 .Ar filesystem_slice
 parameter is 1-based and the
 .Ar device_path
@@ -44,13 +45,14 @@ parameter is the path of the device representing the container.
 The options are as follows:
 .Bl -tag -width 20n
 .It Fl s Ar snap_name
-If compaction succeeds, the snapshot will be deleted. Usually used in the OTA environment.
+If compaction succeeds, the snapshot will be deleted.
+Usually used in the OTA environment.
 .It Fl v
 Increase verbosity of the output.
 .It Fl w Ar timeout
 Force the compaction to abort after the supplied timeout in seconds.
 .El
-.Sh DIAGNOSTICS
+.Sh EXIT STATUS
 .Ex -std
 .Sh EXAMPLES
 The following condenses the first APFS volume with

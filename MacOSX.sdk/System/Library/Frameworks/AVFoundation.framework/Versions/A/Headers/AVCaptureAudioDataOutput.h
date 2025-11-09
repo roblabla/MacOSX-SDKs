@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCapture/AVCaptureAudioDataOutput.h>)
 /*
     File:  AVCaptureAudioDataOutput.h
  
@@ -141,3 +142,7 @@ API_AVAILABLE(macos(10.7), ios(4.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCapture/AVCaptureAudioDataOutput.h>
+#endif

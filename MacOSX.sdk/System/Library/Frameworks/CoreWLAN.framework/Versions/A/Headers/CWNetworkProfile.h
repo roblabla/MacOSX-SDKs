@@ -82,6 +82,10 @@ NS_CLASS_AVAILABLE_MAC(10_7)
     NSDate          *_addedAt;
 
     NSDate          *_wasHiddenBefore;
+    
+    NSDate          *_userPreferredOrderTimestamp;
+    
+    NSDate          *_updatedAt;
 }
 
 /*!

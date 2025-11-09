@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 5180698F-90FB-3196-8A82-DDDAEF3DC1C6' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           87B49051-BC1B-31EB-B6C3-39DD32012CD1
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           4D5C2014-195A-37B4-87B0-1725C4F8918C
 install-name:    '/System/Library/PrivateFrameworks/ConfigurationEngineModel.framework/Versions/A/ConfigurationEngineModel'
-current-version: 30.70
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 40.18
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CEMAccountLDAPDeclaration_LDAPSearchSettingsItem_LDAPSearchSettingScope_ldapSearchSettingScopeBase, 
                        _CEMAccountLDAPDeclaration_LDAPSearchSettingsItem_LDAPSearchSettingScope_ldapSearchSettingScopeOneLevel, 
                        _CEMAccountLDAPDeclaration_LDAPSearchSettingsItem_LDAPSearchSettingScope_ldapSearchSettingScopeSubtree, 
@@ -165,12 +171,9 @@ exports:
                        _CEMPolicyCategorySettingsDeclaration_DefaultBehavior_closed, 
                        _CEMPolicyCategorySettingsDeclaration_DefaultBehavior_open, 
                        _CEMPolicyCategorySettingsDeclaration_DefaultBehavior_warn, 
-                       _CEMPolicyScreenTimeDeclaration_Mode_allowed, _CEMPolicyScreenTimeDeclaration_Mode_ask, 
-                       _CEMPolicyScreenTimeDeclaration_Mode_disallowed, _CEMPolicyScreenTimeDeclaration_Mode_override, 
-                       _CEMPolicyScreenTimeDeclaration_Mode_warn, _CEMPolicyWebSiteDeclaration_Mode_allowed, 
-                       _CEMPolicyWebSiteDeclaration_Mode_ask, _CEMPolicyWebSiteDeclaration_Mode_disallowed, 
-                       _CEMPolicyWebSiteDeclaration_Mode_override, _CEMPolicyWebSiteDeclaration_Mode_warn, 
-                       _CEMPolicyWebSiteSettingsDeclaration_DefaultBehavior_ask, 
+                       _CEMPolicyWebSiteDeclaration_Mode_allowed, _CEMPolicyWebSiteDeclaration_Mode_ask, 
+                       _CEMPolicyWebSiteDeclaration_Mode_disallowed, _CEMPolicyWebSiteDeclaration_Mode_override, 
+                       _CEMPolicyWebSiteDeclaration_Mode_warn, _CEMPolicyWebSiteSettingsDeclaration_DefaultBehavior_ask, 
                        _CEMPolicyWebSiteSettingsDeclaration_DefaultBehavior_closed, 
                        _CEMPolicyWebSiteSettingsDeclaration_DefaultBehavior_open, 
                        _CEMPolicyWebSiteSettingsDeclaration_DefaultBehavior_warn, 
@@ -473,7 +476,6 @@ exports:
                        CEMPolicyAppSettingsDeclaration, CEMPolicyAppSettingsDeclaration_Status, 
                        CEMPolicyCategoryDeclaration, CEMPolicyCategoryDeclaration_Status, 
                        CEMPolicyCategorySettingsDeclaration, CEMPolicyCategorySettingsDeclaration_Status, 
-                       CEMPolicyScreenTimeDeclaration, CEMPolicyScreenTimeDeclaration_Status, 
                        CEMPolicyWebSiteDeclaration, CEMPolicyWebSiteDeclaration_Status, 
                        CEMPolicyWebSiteSettingsDeclaration, CEMPolicyWebSiteSettingsDeclaration_Status, 
                        CEMPolicyiCloudAccountDeclaration, CEMPolicyiCloudAccountDeclaration_Status, 

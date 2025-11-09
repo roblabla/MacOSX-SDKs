@@ -956,6 +956,10 @@ CF_ENUM(UInt32)
                         A CFString that contains the UID for the AudioClockDevice that is currently
                         serving as the master time base of the device. The caller is responsible
                         for releasing the returned CFObject.
+	@constant		kAudioDevicePropertyIOThreadOSWorkgroup
+						An os_workgroup_t that represents the thread workgroup the AudioDevice's
+						IO thread belongs to. The caller is responsible for releasing the returned
+						object.
 */
 CF_ENUM(AudioObjectPropertySelector)
 {
@@ -972,7 +976,8 @@ CF_ENUM(AudioObjectPropertySelector)
     kAudioDevicePropertyStreamConfiguration             = 'slay',
     kAudioDevicePropertyIOProcStreamUsage               = 'suse',
     kAudioDevicePropertyActualSampleRate                = 'asrt',
-    kAudioDevicePropertyClockDevice                     = 'apcd'
+    kAudioDevicePropertyClockDevice                     = 'apcd',
+    kAudioDevicePropertyIOThreadOSWorkgroup				= 'oswg'
 };
 
 /*!

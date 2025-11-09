@@ -9,6 +9,8 @@ Tags:
   NSErrorDomain: NETunnelProviderErrorDomain
 - Name: NEVPNError
   NSErrorDomain: NEVPNErrorDomain
+- Name: NEAppPushManagerError
+  NSErrorDomain: NEAppPushErrorDomain
 Classes:
 - Name: NEPacketTunnelNetworkSettings
   Properties:

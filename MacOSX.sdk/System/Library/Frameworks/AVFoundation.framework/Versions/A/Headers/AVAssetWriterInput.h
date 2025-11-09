@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVAssetWriterInput.h>)
 /*
 	File:  AVAssetWriterInput.h
 
@@ -859,3 +860,7 @@ AV_INIT_UNAVAILABLE
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCore/AVAssetWriterInput.h>
+#endif

@@ -104,6 +104,7 @@ NS_ASSUME_NONNULL_BEGIN
         customization of resource load, and do not allow the caller to
         respond to, e.g., authentication challenges.<p>
 */
+API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 @interface NSURLConnection : NSObject
 {
     @private
@@ -199,6 +200,7 @@ NS_ASSUME_NONNULL_BEGIN
                     compatability, but incur more latency in dealing
                     with the authentication challenge.
 */
+API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 @protocol NSURLConnectionDelegate <NSObject>
 @optional
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;
@@ -287,6 +289,7 @@ NS_ASSUME_NONNULL_BEGIN
                     connection.<p>
 */
 
+API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 @protocol NSURLConnectionDataDelegate <NSURLConnectionDelegate>
 @optional
 - (nullable NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(nullable NSURLResponse *)response;
@@ -341,6 +344,7 @@ NS_ASSUME_NONNULL_BEGIN
                     desired.
 */
 
+API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 @protocol NSURLConnectionDownloadDelegate <NSURLConnectionDelegate>
 @optional
 - (void)connection:(NSURLConnection *)connection didWriteData:(long long)bytesWritten totalBytesWritten:(long long)totalBytesWritten expectedTotalBytes:(long long) expectedTotalBytes;

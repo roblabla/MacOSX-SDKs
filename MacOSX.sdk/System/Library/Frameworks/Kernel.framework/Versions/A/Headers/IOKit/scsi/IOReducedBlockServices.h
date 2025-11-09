@@ -45,8 +45,7 @@
 //-----------------------------------------------------------------------------
 //	Class Declaration
 //-----------------------------------------------------------------------------
-
-class IOReducedBlockServices : public IOBlockStorageDevice
+class __exported IOReducedBlockServices : public IOBlockStorageDevice
 {
 	
 	OSDeclareDefaultStructors ( IOReducedBlockServices )

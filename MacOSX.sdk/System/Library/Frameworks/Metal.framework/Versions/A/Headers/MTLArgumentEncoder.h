@@ -16,7 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol MTLRenderPipelineState;
 @protocol MTLComputePipelineState;
 @protocol MTLIndirectCommandBuffer;
-
+@protocol MTLVisibleFunctionTable;
+@protocol MTLAccelerationStructure;
+@protocol MTLIntersectionFunctionTable;
 
 /*!
  * @protocol MTLArgumentEncoder
@@ -109,14 +111,25 @@ API_AVAILABLE(macos(10.13), ios(11.0))
  * @method setRenderPipelineState:atIndex
  * @brief Sets a render pipeline state at a given bind point index
  */
-- (void)setRenderPipelineState:(nullable id <MTLRenderPipelineState>)pipeline atIndex:(NSUInteger)index API_AVAILABLE(macos(10.14), macCatalyst(13.0)) API_UNAVAILABLE(ios);
+- (void)setRenderPipelineState:(nullable id <MTLRenderPipelineState>)pipeline atIndex:(NSUInteger)index API_AVAILABLE(macos(10.14), macCatalyst(13.0), ios(13.0));
 
 /*!
  * @method setRenderPipelineStates:withRange
  * @brief Set an array of render pipeline states at a given bind point index range
  */
-- (void)setRenderPipelineStates:(const id <MTLRenderPipelineState> __nullable [__nonnull])pipelines withRange:(NSRange)range API_AVAILABLE(macos(10.14), macCatalyst(13.0)) API_UNAVAILABLE(ios);
+- (void)setRenderPipelineStates:(const id <MTLRenderPipelineState> __nullable [__nonnull])pipelines withRange:(NSRange)range API_AVAILABLE(macos(10.14), macCatalyst(13.0), ios(13.0));
 
+/*!
+ * @method setComputePipelineState:atIndex
+ * @brief Sets a compute pipeline state at a given bind point index
+ */
+- (void)setComputePipelineState:(nullable id <MTLComputePipelineState>)pipeline atIndex:(NSUInteger)index API_AVAILABLE(ios(13.0),macos(11.0));
+
+/*!
+ * @method setComputePipelineStates:withRange
+ * @brief Set an array of compute pipeline states at a given bind point index range
+ */
+- (void)setComputePipelineStates:(const id <MTLComputePipelineState> __nullable [__nonnull])pipelines withRange:(NSRange)range API_AVAILABLE(ios(13.0),macos(11.0));
 
 /*!
  * @method setIndirectCommandBuffer:atIndex
@@ -130,6 +143,8 @@ API_AVAILABLE(macos(10.13), ios(11.0))
  */
 - (void)setIndirectCommandBuffers:(const id <MTLIndirectCommandBuffer> __nullable [__nonnull])buffers withRange:(NSRange)range API_AVAILABLE(macos(10.14), ios(12.0));
 
+- (void)setAccelerationStructure:(nullable id <MTLAccelerationStructure>)accelerationStructure atIndex:(NSUInteger)index  API_AVAILABLE(macos(11.0), ios(14.0));
+
 /*!
  * @method newArgumentEncoderForBufferAtIndex:
  * @brief Returns a pointer to a new MTLArgumentEncoder that can be used to encode the an argument buffer
@@ -137,6 +152,35 @@ API_AVAILABLE(macos(10.13), ios(11.0))
  * Returns nil if the resource at the given index is not an argument buffer.
  */
 - (nullable id<MTLArgumentEncoder>)newArgumentEncoderForBufferAtIndex:(NSUInteger)index API_AVAILABLE(macos(10.13), ios(11.0));
+
+
+
+
+/*!
+ * @method setVisibleFunctionTable:atIndex:
+ * @brief Set a visible function table at the given buffer index
+ */
+- (void)setVisibleFunctionTable:(nullable id <MTLVisibleFunctionTable>)visibleFunctionTable atIndex:(NSUInteger)index API_AVAILABLE(macos(11.0), ios(14.0));
+
+/*!
+ * @method setVisibleFunctionTables:withRange:
+ * @brief Set visible function tables at the given buffer index range
+ */
+- (void)setVisibleFunctionTables:(const id <MTLVisibleFunctionTable> __nullable [__nonnull])visibleFunctionTables withRange:(NSRange)range API_AVAILABLE(macos(11.0), ios(14.0));
+
+/*!
+ * @method setIntersectionFunctionTable:atIndex:
+ * @brief Set an intersection function table at the given buffer index
+ */
+- (void)setIntersectionFunctionTable:(nullable id <MTLIntersectionFunctionTable>)intersectionFunctionTable atIndex:(NSUInteger)index API_AVAILABLE(macos(11.0), ios(14.0));
+
+/*!
+ * @method setIntersectionFunctionTables:withRange:
+ * @brief Set intersection function tables at the given buffer index range
+ */
+- (void)setIntersectionFunctionTables:(const id <MTLIntersectionFunctionTable> __nullable [__nonnull])intersectionFunctionTables withRange:(NSRange)range API_AVAILABLE(macos(11.0), ios(14.0));
+
+
 
 @end
 

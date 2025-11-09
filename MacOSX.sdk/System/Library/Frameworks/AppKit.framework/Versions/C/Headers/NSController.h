@@ -6,11 +6,11 @@
  */
 
 #import <AppKit/NSKeyValueBinding.h>
+#import <AppKit/AppKitDefines.h>
 #import <CoreFoundation/CoreFoundation.h>
 
-
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSMutableArray, NSMutableDictionary, NSMutableSet;
 

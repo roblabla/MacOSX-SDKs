@@ -32,16 +32,16 @@ typedef NS_ENUM(NSInteger, NEVPNStatus) {
     NEVPNStatusReasserting = 4,
     /*! @const NEVPNStatusDisconnecting The VPN is disconnecting. */
     NEVPNStatusDisconnecting = 5,
-} API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
+} API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*! @const NEVPNStatusDidChangeNotification Name of the NSNotification that is posted when the VPN status changes. */
-NEVPN_EXPORT NSString * const NEVPNStatusDidChangeNotification API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
+NEVPN_EXPORT NSString * const NEVPNStatusDidChangeNotification API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*! @const NEVPNConnectionStartOptionUsername Specify this key in the options dictionary passed to startVPNTunnelWithOptions:returningError: to override the username saved in the configuration. The value is a string */
-NEVPN_EXPORT NSString * const NEVPNConnectionStartOptionUsername API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+NEVPN_EXPORT NSString * const NEVPNConnectionStartOptionUsername API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*! @const NEVPNConnectionStartOptionPassword Specify this key in the options dictionary passed to startVPNTunnelWithOptions:returningError: to override the password saved in the configuration. The value is a string */
-NEVPN_EXPORT NSString * const NEVPNConnectionStartOptionPassword API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+NEVPN_EXPORT NSString * const NEVPNConnectionStartOptionPassword API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @interface NEVPNConnection
@@ -49,7 +49,7 @@ NEVPN_EXPORT NSString * const NEVPNConnectionStartOptionPassword API_AVAILABLE(m
  *
  * Instances of this class are thread safe.
  */
-API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos)
+API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface NEVPNConnection : NSObject
 
 /*!
@@ -60,7 +60,7 @@ API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos)
  *    2. NEVPNErrorConfigurationDisabled
  * @return YES if the VPN tunnel was started successfully, NO if an error occurred.
  */
-- (BOOL)startVPNTunnelAndReturnError:(NSError **)error API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
+- (BOOL)startVPNTunnelAndReturnError:(NSError **)error API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @method startVPNTunnelWithOptions:andReturnError:
@@ -74,31 +74,31 @@ API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos)
  *    2. NEVPNErrorConfigurationDisabled
  * @return YES if the VPN tunnel was started successfully, NO if an error occurred.
  */
-- (BOOL)startVPNTunnelWithOptions:(nullable NSDictionary<NSString *,NSObject *> *)options andReturnError:(NSError **)error API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+- (BOOL)startVPNTunnelWithOptions:(nullable NSDictionary<NSString *,NSObject *> *)options andReturnError:(NSError **)error API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @method stopVPNTunnel:
  * @discussion This function is used to stop the VPN tunnel. The VPN tunnel disconnect process is started and this function returns immediately.
  */
-- (void)stopVPNTunnel API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
+- (void)stopVPNTunnel API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @property status
  * @discussion The current status of the VPN.
  */
-@property (readonly) NEVPNStatus status API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(watchos, tvos);
+@property (readonly) NEVPNStatus status API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @property connectedDate
  * @discussion The date and time when the connection status changed to NEVPNStatusConnected. This property is nil if the connection is not fully established.
  */
-@property (readonly, nullable) NSDate *connectedDate API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+@property (readonly, nullable) NSDate *connectedDate API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @property manager
  * @discussion The NEVPNManager associated with this NEVPNConnection.
  */
-@property (readonly) NEVPNManager *manager API_AVAILABLE(macos(10.12), ios(10.0)) API_UNAVAILABLE(watchos, tvos);
+@property (readonly) NEVPNManager *manager API_AVAILABLE(macos(10.12), ios(10.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 @end
 

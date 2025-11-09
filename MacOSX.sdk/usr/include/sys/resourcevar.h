@@ -66,6 +66,7 @@
 
 #include <sys/appleapiopts.h>
 #include <sys/resource.h>
+#include <sys/_types/_caddr_t.h>
 
 /*
  * Kernel per-process accounting / statistics
@@ -86,24 +87,6 @@ struct pstats {
 	} p_prof;
 
 	uint64_t ps_start;              /* starting time ; compat only */
-};
-
-/*
- * Kernel shareable process resource limits.  Because this structure
- * is moderately large but changes infrequently, it is normally
- * shared copy-on-write after forks.  If a group of processes
- * ("threads") share modifications, the PL_SHAREMOD flag is set,
- * and a copy must be made for the child of a new fork that isn't
- * sharing modifications to the limits.
- */
-/*
- * Modifications are done with the list lock held (p_limit as well)and access indv
- * limits can be done without limit as we keep the old copy in p_olimit. Which is
- * dropped in proc_exit. This way all access will have a valid kernel address
- */
-struct plimit {
-	struct  rlimit pl_rlimit[RLIM_NLIMITS];
-	int     pl_refcnt;              /* number of references */
 };
 
 

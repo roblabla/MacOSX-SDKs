@@ -1,4 +1,4 @@
-#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AudioFormat.h>)
+#if (defined(__USE_PUBLIC_HEADERS__) && __USE_PUBLIC_HEADERS__) || (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AudioFormat.h>)
 /*!
 	@file		AudioFormat.h
 	@framework	AudioToolbox.framework
@@ -35,7 +35,7 @@ extern "C"
 typedef UInt32	AudioFormatPropertyID;
 
 /*!
-    @enum		PanningMode
+    @enum		AudioPanningMode
     @abstract   Different panning algorithms.
     @constant   kPanningMode_SoundField
 					Sound field panning algorithm
@@ -210,11 +210,14 @@ typedef struct ExtendedAudioFormatInfo ExtendedAudioFormatInfo;
 					and mChannelsPerFrame fields set.
 					The property value is an array of AudioChannelLayoutTags for the format and number of
 					channels specified. If mChannelsPerFrame is zero, then all layouts supported by
-					the format are returned.	
+					the format are returned.
     @constant   kAudioFormatProperty_AvailableEncodeNumberChannels
 					The specifier is an AudioStreamBasicDescription with at least the mFormatID field set.
 					The property value is an array of UInt32 indicating the number of channels that can be encoded.
 					A value of 0xFFFFFFFF indicates that any number of channels may be encoded. 
+    @constant   kAudioFormatProperty_AvailableDecodeNumberChannels
+					The specifier is an AudioStreamBasicDescription with at least the mFormatID field set.
+					The property value is an array of UInt32 indicating the number of channels that can be decoded.
     @constant   kAudioFormatProperty_FormatName
 					Returns a name for a given format. The specifier is an
 					AudioStreamBasicDescription describing the format to ask about.
@@ -388,6 +391,7 @@ CF_ENUM(AudioFormatPropertyID)
 	kAudioFormatProperty_AvailableEncodeSampleRates		= 'aesr',
 	kAudioFormatProperty_AvailableEncodeChannelLayoutTags = 'aecl',
 	kAudioFormatProperty_AvailableEncodeNumberChannels		= 'avnc',
+	kAudioFormatProperty_AvailableDecodeNumberChannels		= 'adnc',
 	kAudioFormatProperty_ASBDFromMPEGPacket				= 'admp',
 
 
@@ -431,7 +435,7 @@ CF_ENUM(AudioFormatPropertyID) {
 	@enum           AudioCodecComponentType
  
 	@discussion     Collection of audio codec component types.
-					(On Mac OS X these declarations are in AudioToolbox/AudioCodec.h).
+					(On macOS these declarations are in AudioToolbox/AudioCodec.h).
  
 	@constant		kAudioDecoderComponentType
 					A codec that translates data in some other format into linear PCM.

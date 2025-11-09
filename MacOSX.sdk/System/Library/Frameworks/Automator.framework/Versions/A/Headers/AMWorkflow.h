@@ -10,6 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+API_UNAVAILABLE_BEGIN(ios)
+
 @class AMAction;
 @class AMWorkflowController;
 
@@ -18,8 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@private
 	NSString *_uuid;
 	NSURL *_fileURL;
-	id _actions;
-	id _variables;
+	NSMutableArray<__kindof AMAction *> *_actions;
 	id _connectors;
 	__weak AMWorkflowController *_controller;
 	AM_UNUSED_FOR_ANALYZER id _options;
@@ -58,10 +59,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)moveActionAtIndex:(NSUInteger)startIndex toIndex:(NSUInteger)endIndex;
 
 @property (nullable, readonly, copy) NSURL *fileURL;
-@property (readonly, strong) NSArray<__kindof AMAction *> *actions;
+@property (readonly, nonatomic, strong) NSArray<__kindof AMAction *> *actions;
 @property (nullable, strong, nonatomic) id input;
 @property (nullable, readonly, strong, nonatomic) id output AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 @end
+
+API_UNAVAILABLE_END
 
 NS_ASSUME_NONNULL_END

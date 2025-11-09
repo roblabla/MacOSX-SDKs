@@ -10,6 +10,7 @@
 #include <IOKit/IOMemoryDescriptor.h>
 #include <IOKit/IOBufferMemoryDescriptor.h>
 #include <IOKit/IOUserClient.h>
+#include <sys/cdefs.h>
 
 #include <IOKit/stream/IOStreamShared.h>
 
@@ -18,7 +19,7 @@
     Definitions for IOStream family.
  */
 
-class IOStreamBuffer;
+class __exported IOStreamBuffer;
 
 /*!
     @class IOStream
@@ -39,7 +40,7 @@ class IOStreamBuffer;
 
  */
 
-class IOStream : public IOService
+class __exported IOStream : public IOService
 {
     OSDeclareDefaultStructors(IOStream);
 
@@ -96,7 +97,7 @@ class IOStream : public IOService
      An array of IOStreamBuffer objects which will be the buffers for this stream.
      */
     virtual bool initWithBuffers(OSArray *buffers, IOStreamMode mode = kIOStreamModeOutput, IOItemCount queueLength = 0, OSDictionary *properties = 0);
-    
+
     /*!
         @function free
      */
@@ -222,9 +223,8 @@ class IOStream : public IOService
      while the stream is open, as this will change the buffer IDs of existing
      buffers.
      */
-    
     virtual IOReturn removeBuffer(IOStreamBufferID bufferID);
-    
+
     /*!
         @function removeAllBuffers
      @result
@@ -260,27 +260,26 @@ class IOStream : public IOService
      */
     
     virtual IOStreamBuffer *getBufferWithID(IOStreamBufferID bufferID);
-    
+
     /*!
         @functiongroup Managing notification ports
      */
-    
+
     /*!
         @function getInputPort
         @abstract Get the Mach port used to receive notifications
         from user space that a buffer has been added to the input queue.
      */
     virtual mach_port_t getInputPort(void);
-    
+
     /*!
         @function setInputPort
         @abstract Set the Mach port used to receive notifications from
         user space that a buffer has been added to the input queue.
         @param port
-
      */
     virtual IOReturn setInputPort(mach_port_t port);
-    
+
     /*!
         @function getOutputPort
         @abstract Get the Mach port used to send notifications to user space
@@ -324,8 +323,7 @@ class IOStream : public IOService
                                          IOByteCount dataLength = 0,
                                          IOByteCount controlOffset = 0,
                                          IOByteCount controlLength = 0);
-    
-    
+
     /*!
         @function enqueueOutputEntry
         @param entry
@@ -372,11 +370,11 @@ class IOStream : public IOService
         so no context switch is necessary.
      */
     virtual void inputSyncCallback( UInt32 token );
-    
+
     /*!
         @functiongroup Stream control
      */
-    
+
     /*!
         @function getStreamMode
      @abstract Returns the mode of the stream, either input or output.
@@ -385,7 +383,7 @@ class IOStream : public IOService
      kIOStreamModeOutput (from kernel space to user space).
      */
     virtual IOStreamMode getStreamMode(void);
-    
+
     /*!
         @function setStreamMode
      @abstract Sets the mode of the stream, either input or output.
@@ -417,11 +415,11 @@ class IOStream : public IOService
      @discussion This must be implemented by a subclass.
      */
     virtual IOReturn suspendStream(void);
-    
+
     /*!
         @functiongroup Managing user clients
      */
-    
+
     /*!
         @function newUserClient
      @abstract See the documentation for the IOService method newUserClient.
@@ -429,10 +427,10 @@ class IOStream : public IOService
     virtual IOReturn newUserClient( task_t owningTask, void * securityID,
                                     UInt32 type,  OSDictionary * properties,
                                     IOUserClient ** handler );
-    
+
 
     /* Reserved slots */
-    
+
     OSMetaClassDeclareReservedUnused(IOStream, 0);
     OSMetaClassDeclareReservedUnused(IOStream, 1);
     OSMetaClassDeclareReservedUnused(IOStream, 2);
@@ -465,7 +463,6 @@ class IOStream : public IOService
     OSMetaClassDeclareReservedUnused(IOStream, 29);
     OSMetaClassDeclareReservedUnused(IOStream, 30);
     OSMetaClassDeclareReservedUnused(IOStream, 31);
-    
 };
 
 
@@ -474,7 +471,7 @@ class IOStream : public IOService
     A class representing a data buffer that is part of an IOStream.
  */
 
-class IOStreamBuffer : public OSObject
+class __exported IOStreamBuffer : public OSObject
 {
     OSDeclareDefaultStructors(IOStreamBuffer);
 

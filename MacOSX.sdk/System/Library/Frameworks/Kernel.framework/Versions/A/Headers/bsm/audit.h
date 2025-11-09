@@ -332,6 +332,9 @@ struct au_evclass_map {
 };
 typedef struct au_evclass_map   au_evclass_map_t;
 
+
+#define __AUDIT_API_DEPRECATED
+
 /*
  * Audit system calls.
  */

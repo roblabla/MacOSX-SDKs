@@ -26,7 +26,7 @@
 #include <IOKit/IOPlatformExpert.h>           // superclass
 #include <IOKit/acpi/IOACPIPlatformDevice.h>  // children
 
-class IOACPIPlatformExpert : public IODTPlatformExpert
+class __exported IOACPIPlatformExpert : public IODTPlatformExpert
 {
     OSDeclareAbstractStructors( IOACPIPlatformExpert )
 

@@ -234,6 +234,7 @@ FOUNDATION_EXTERN NSNotificationName const NSProcessInfoPowerStateDidChangeNotif
 @interface NSProcessInfo (NSProcessInfoPlatform)
 
 @property (readonly, getter=isMacCatalystApp) BOOL macCatalystApp API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+@property (readonly, getter=isiOSAppOnMac) BOOL iOSAppOnMac API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
 
 @end
 

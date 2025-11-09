@@ -133,7 +133,7 @@
 .\" ========================================================================
 .\"
 .IX Title "Devel::Declare 3"
-.TH Devel::Declare 3 "2014-02-02" "perl v5.18.2" "User Contributed Perl Documentation"
+.TH Devel::Declare 3 "2017-03-27" "perl v5.18.4" "User Contributed Perl Documentation"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -159,6 +159,25 @@ Devel::Declare can install subroutines called declarators which locally take
 over Perl's parser, allowing the creation of new syntax.
 .PP
 This document describes how to create a simple declarator.
+.SH "WARNING"
+.IX Header "WARNING"
+\&\fBWarning:\fR Devel::Declare is a giant bag of crack
+originally implemented by mst with the goal of upsetting the perl core
+developers so much by its very existence that they implemented proper
+keyword handling in the core.
+.PP
+As of perl5 version 14, this goal has been achieved, and modules such
+as Devel::CallParser, Function::Parameters, and Keyword::Simple provide
+mechanisms to mangle perl syntax that don't require hallucinogenic
+drugs to interpret the error messages they produce.
+.PP
+If you are using something that uses Devel::Declare, please for the love
+of kittens use something else:
+.IP "\(bu" 4
+Instead of TryCatch, use Try::Tiny
+.IP "\(bu" 4
+Instead of Method::Signatures, use
+real subroutine signatures (requires perl 5.22) or Moops
 .SH "USAGE"
 .IX Header "USAGE"
 We'll demonstrate the usage of \f(CW\*(C`Devel::Declare\*(C'\fR with a motivating example: a new

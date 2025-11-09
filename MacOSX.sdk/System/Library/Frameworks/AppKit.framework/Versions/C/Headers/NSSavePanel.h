@@ -8,12 +8,14 @@
 #import <Foundation/NSArray.h>
 #import <AppKit/NSNibDeclarations.h>
 #import <AppKit/NSPanel.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSBox, NSTextField, NSTextView, NSView, NSURL, NSProgressIndicator, NSControl;
 @protocol NSOpenSavePanelDelegate;
+@class UTType;
 
 /* Return codes from the open/save panel.
 */
@@ -43,11 +45,11 @@ enum {
 */
 @property (nullable, copy) NSURL *directoryURL API_AVAILABLE(macos(10.6));
 
-/* 
-    NSSavePanel: An array of NSStrings specifying the file types the user can save the file as. The file type can be a common file extension, or a UTI. A nil value indicates that any file type can be used. If the array is not nil and the array contains no items, an exception will be raised. If no extension is given by the user, the first item in the allowedFileTypes will be used as the extension for the save panel. If the user specifies a type not in the array, and 'allowsOtherFileTypes' is YES, they will be presented with another dialog when prompted to save. The default value is 'nil'.
-    NSOpenPanel: On versions less than 10.6, this property is ignored. For applications that link against 10.6 and higher, this property will determine which files should be enabled in the open panel. Using the deprecated methods to show the open panel (the ones that take a "types:" parameter) will overwrite this value, and should not be used. The allowedFileTypes can be changed while the panel is running (ie: from an accessory view). The file type can be a common file extension, or a UTI. This is also known as the "enabled file types". A nil value indicates that all files should be enabled.
+/*
+    NSSavePanel: An array of UTTypes specifying the file types the user can save the file as. An empty value indicates that any file type can be used. If no extension is given by the user, the first preferred extension from the array will be used as the extension for the save panel. If the user specifies a type not in the array, and 'allowsOtherFileTypes' is YES, they will be presented with another dialog when prompted to save. The default value is the empty array.
+    NSOpenPanel: This property determines which files should be enabled in the open panel. Using the deprecated methods to show the open panel (the ones that take a "types:" parameter) will overwrite this value, and should not be used. The allowedContentTypes can be changed while the panel is running (ie: from an accessory view). This is also known as the "enabled file types". An empty value indicates that all files should be enabled.
 */
-@property (nullable, copy) NSArray<NSString *> *allowedFileTypes;
+@property (copy) NSArray<UTType *> *allowedContentTypes API_AVAILABLE(macos(11.0));
 
 /*  NSSavePanel: Returns a BOOL value that indicates whether the receiver allows the user to save files with an extension that's not in the list of 'allowedFileTypes'.
     NSOpenPanel: Not used.
@@ -206,6 +208,11 @@ enum {
 - (NSInteger)runModalForDirectory:(nullable NSString *)path file:(nullable NSString *)name API_DEPRECATED("Use -runModal instead. The following parameters are replaced by properties: 'path' is replaced by 'directoryURL' and 'name' by 'nameFieldStringValue'.", macos(10.0,10.6));
 - (IBAction)selectText:(nullable id)sender API_DEPRECATED("Default implementation does nothing.", macos(10.0,10.3));
 
+/*
+ NSSavePanel: An array of NSStrings specifying the file types the user can save the file as. The file type can be a common file extension, or a UTI. A nil value indicates that any file type can be used. If the array is not nil and the array contains no items, an exception will be raised. If no extension is given by the user, the first item in the allowedFileTypes will be used as the extension for the save panel. If the user specifies a type not in the array, and 'allowsOtherFileTypes' is YES, they will be presented with another dialog when prompted to save. The default value is 'nil'.
+ NSOpenPanel: On versions less than 10.6, this property is ignored. For applications that link against 10.6 and higher, this property will determine which files should be enabled in the open panel. Using the deprecated methods to show the open panel (the ones that take a "types:" parameter) will overwrite this value, and should not be used. The allowedFileTypes can be changed while the panel is running (ie: from an accessory view). The file type can be a common file extension, or a UTI. This is also known as the "enabled file types". A nil value indicates that all files should be enabled.
+ */
+@property (nullable, copy) NSArray<NSString *> *allowedFileTypes API_DEPRECATED("Use -allowedContentTypes instead", macos(10.3,API_TO_BE_DEPRECATED));
 @end
 
 

@@ -10,9 +10,10 @@
 #import <AppKit/NSCell.h>
 #import <AppKit/NSLayoutConstraint.h>
 #import <AppKit/NSApplication.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSFont, NSTabViewItem;
 @protocol NSTabViewDelegate;
@@ -98,7 +99,7 @@ typedef NS_ENUM(NSUInteger, NSTabViewBorderType) {
 - (NSTabViewItem *)tabViewItemAtIndex:(NSInteger)index;                         // May raise an NSRangeException	
 - (NSInteger)indexOfTabViewItemWithIdentifier:(id)identifier;			// NSNotFound if not found
 
-@property NSControlTint controlTint API_DEPRECATED("The controlTint property is not respected on 10.14 and later.", macos(10.0,API_TO_BE_DEPRECATED));
+@property NSControlTint controlTint API_DEPRECATED("The controlTint property is not respected on 10.14 and later.", macos(10.0, 10.14));
 
 @end
 

@@ -30,21 +30,28 @@ typedef void(^ACAccountStoreCredentialRenewalHandler)(ACAccountCredentialRenewRe
 // most notably being fetching credentials. If you really just want to open the
 // store to grab credentials, just be sure to grab the credential object and then
 // you can release the owning account and store, e.g.
+//
+// WARNING: All synchronous methods on ACAccountStore invoke xpc methods
+// on accountsd. They are not appropriate to call on a UI Application's main thread.
 
 API_AVAILABLE(ios(5.0), macos(10.8))
 @interface ACAccountStore : NSObject
 
 // An array of all the accounts in an account database
+// WARNING: Synchronous, not appropriate to call on a UI Application's main thread
 @property (readonly, weak, NS_NONATOMIC_IOSONLY) NSArray *accounts;
 
 // Returns the account matching the given account identifier
+// WARNING: Synchronous, not appropriate to call on a UI Application's main thread
 - (ACAccount *)accountWithIdentifier:(NSString *)identifier;
 
 // Returns the account type object matching the account type identifier. See
 // ACAccountType.h for well known account type identifiers
+// WARNING: Synchronous, not appropriate to call on a UI Application's main thread
 - (ACAccountType *)accountTypeWithAccountTypeIdentifier:(NSString *)typeIdentifier;
 
 // Returns the accounts matching a given account type.
+// WARNING: Synchronous, not appropriate to call on a UI Application's main thread
 - (NSArray *)accountsWithAccountType:(ACAccountType *)accountType;
 
 // Saves the account to the account database. If the account is unauthenticated and the associated account
@@ -78,8 +85,8 @@ API_AVAILABLE(ios(5.0), macos(10.8))
 @end
 
 // Notification name sent out when the database is changed by an external process, another account store
-// in the same process or by calling saveAccount: or removeAccount: on a store you are managing. When this
-// notification is received, you should consider all ACAccount instances you have to be invalid. Purge current
-// instances of ACAccount and obtain new instances using the account store. You may need to deal with accounts
-// being removed by an external process while you are using them.
-ACCOUNTS_EXTERN NSString * const ACAccountStoreDidChangeNotification API_AVAILABLE(ios(5.0), macos(10.8));
+// in the same process or by calling saveAccount: or removeAccount: on a store you are managing.
+// You may need to deal with accounts being removed by an external process while you are using them.
+// Note: ensure when you add an observer for this notification, you do so specifying this object specifically.
+// Otherwise, you will receive n notifications, one per active ACAccountStore instance in your process.
+ACCOUNTS_EXTERN NSString * const ACAccountStoreDidChangeNotification API_DEPRECATED("Public notification deprecated. Internal clients, see private header for replacement", ios(5.0, 14.0), macos(10.8, 11.0), tvos(5.0, 14.0), watchos(1.0, 6.0));

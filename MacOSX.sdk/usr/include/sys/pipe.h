@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2005 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2004-2020 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -100,7 +100,7 @@ struct pipebuf {
 	u_int   in;             /* in pointer */
 	u_int   out;            /* out pointer */
 	u_int   size;           /* size of buffer */
-	caddr_t buffer;         /* kva of buffer */
+	caddr_t buffer; /* kva of buffer */
 };
 
 

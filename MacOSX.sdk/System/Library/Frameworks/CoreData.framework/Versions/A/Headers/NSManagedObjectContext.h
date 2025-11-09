@@ -1,7 +1,7 @@
 /*
     NSManagedObjectContext.h
     Core Data
-    Copyright (c) 2004-2019, Apple Inc.
+    Copyright (c) 2004-2020, Apple Inc.
     All rights reserved.
 */
 
@@ -32,7 +32,11 @@ COREDATA_EXTERN NSString * const NSManagedObjectContextWillSaveNotification API_
 COREDATA_EXTERN NSString * const NSManagedObjectContextDidSaveNotification API_AVAILABLE(macosx(10.4),ios(3.0));
 
 // Notification when objects in a context changed:  the user info dictionary contains information about the objects that changed and what changed
-COREDATA_EXTERN NSString * const NSManagedObjectContextObjectsDidChangeNotification API_AVAILABLE(macosx(10.4),ios(3.0));    
+COREDATA_EXTERN NSString * const NSManagedObjectContextObjectsDidChangeNotification API_AVAILABLE(macosx(10.4),ios(3.0));
+
+// Notification when objects in a context changed:  the user info dictionary contains information about the objectIDs that changed
+COREDATA_EXTERN NSString * const NSManagedObjectContextDidSaveObjectIDsNotification API_AVAILABLE(macosx(10.12.4),ios(10.3),tvos(10.2),watchos(3.2));
+COREDATA_EXTERN NSString * const NSManagedObjectContextDidMergeChangesObjectIDsNotification API_AVAILABLE(macosx(10.12.4),ios(10.3),tvos(10.2),watchos(3.2));
 
 // User info keys for NSManagedObjectContextObjectsDidChangeNotification:  the values for these keys are sets of managed objects
 COREDATA_EXTERN NSString * const NSInsertedObjectsKey API_AVAILABLE(macosx(10.4),ios(3.0));
@@ -46,6 +50,14 @@ COREDATA_EXTERN NSString * const NSManagedObjectContextQueryGenerationKey API_AV
 
 // User info keys for NSManagedObjectContextObjectsDidChangeNotification:  the values for these keys are arrays of objectIDs
 COREDATA_EXTERN NSString * const NSInvalidatedAllObjectsKey API_AVAILABLE(macosx(10.5),ios(3.0)); // All objects in the context have been invalidated
+
+// User info keys for NSManagedObjectContextDidSaveObjectIDsNotification:  the values for these keys are sets of objectIDs
+COREDATA_EXTERN NSString * const NSInsertedObjectIDsKey API_AVAILABLE(macosx(10.12.4),ios(10.3),tvos(10.2),watchos(3.2));
+COREDATA_EXTERN NSString * const NSUpdatedObjectIDsKey API_AVAILABLE(macosx(10.12.4),ios(10.3),tvos(10.2),watchos(3.2));
+COREDATA_EXTERN NSString * const NSDeletedObjectIDsKey API_AVAILABLE(macosx(10.12.4),ios(10.3),tvos(10.2),watchos(3.2));
+
+COREDATA_EXTERN NSString * const NSRefreshedObjectIDsKey API_AVAILABLE(macosx(10.12.4),ios(10.3),tvos(10.2),watchos(3.2));
+COREDATA_EXTERN NSString * const NSInvalidatedObjectIDsKey API_AVAILABLE(macosx(10.12.4),ios(10.3),tvos(10.2),watchos(3.2));
 
 // Default policy for all managed object contexts - save returns with an error that contains the object IDs of the objects that had conflicts(NSInsertedObjectsKey, NSUpdatedObjectsKey).
 COREDATA_EXTERN id NSErrorMergePolicy API_AVAILABLE(macosx(10.4),ios(3.0));
@@ -105,7 +117,7 @@ API_AVAILABLE(macosx(10.4),ios(3.0))
 /* returns the object for the specified ID if it is already registered in the context, or faults the object into the context.  It might perform I/O if the data is uncached.  If the object cannot be fetched, or does not exist, or cannot be faulted, it returns nil.  Unlike -objectWithID: it never returns a fault.  */
 - (nullable __kindof NSManagedObject*)existingObjectWithID:(NSManagedObjectID*)objectID error:(NSError**)error API_AVAILABLE(macosx(10.6),ios(3.0));
 
-// method to fetch objects from the persistent stores into the context (fetch request defines the entity and predicate as well as a sort order for the objects); context will match the results from persistent stores with current changes in the context (so inserted objects are returned even if they are not persisted yet); to fetch a single object with an ID if it is not guaranteed to exist and thus -objectWithObjectID: cannot be used, one would create a predicate like [NSComparisonPredicate predicateWithLeftExpression:[NSExpression expressionForKeyPath:@"objectID"] rightExpression:[NSExpression expressionForConstantValue:<object id>] modifier:NSPredicateModifierDirect type:NSEqualToPredicateOperatorType options:0]
+// method to fetch objects from the persistent stores into the context (fetch request defines the entity and predicate as well as a sort order for the objects); context will match the results from persistent stores with current changes in the context (so inserted objects are returned even if they are not persisted yet); to fetch a single object with an ID if it is not guaranteed to exist and thus -objectWithObjectID: cannot be used, one would create a predicate like [NSComparisonPredicate predicateWithLeftExpression:[NSExpression expressionForKeyPath:@"objectID"] rightExpression:[NSExpression expressionForConstantValue:<object id>] modifier:NSDirectPredicateModifier type:NSEqualToPredicateOperatorType options:0]
 - (nullable NSArray *)executeFetchRequest:(NSFetchRequest *)request error:(NSError **)error;
 
 // returns the number of objects a fetch request would have returned if it had been passed to -executeFetchRequest:error:.   If an error occurred during the processing of the request, this method will return NSNotFound. 

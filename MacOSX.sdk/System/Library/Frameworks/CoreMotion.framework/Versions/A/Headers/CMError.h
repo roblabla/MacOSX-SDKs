@@ -24,5 +24,7 @@ typedef enum {
 	CMErrorInvalidAction,
 	CMErrorNotAvailable,
 	CMErrorNotEntitled,
-	CMErrorNotAuthorized
+	CMErrorNotAuthorized,
+	CMErrorNilData,
+	CMErrorSize
 } CMError;

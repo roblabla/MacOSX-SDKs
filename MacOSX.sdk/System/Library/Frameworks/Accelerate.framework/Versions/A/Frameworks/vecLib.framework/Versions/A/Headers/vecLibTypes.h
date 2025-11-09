@@ -3,9 +3,9 @@
  
      Contains:   Master include for vecLib framework
  
-     Version:    vecLib-735.0
+     Version:    vecLib-760.40
  
-     Copyright:  Copyright (c) 2000-2019 by Apple Inc. All rights reserved.
+     Copyright:  Copyright (c) 2000-2020 by Apple Inc. All rights reserved.
  
      Bugs:       For bug reports, consult the following page on
                  the World Wide Web:
@@ -137,7 +137,7 @@ typedef __m128                          vFloat;
     #endif /* __GNUC__ */
 #endif  /* defined(__SSE2__) */
 
-#elif defined __arm__ && defined __ARM_NEON__
+#elif ( defined __arm__ || defined __arm64__ ) && defined __ARM_NEON__
 
 	#if !defined ARM_NEON_GCC_COMPATIBILITY  
 
@@ -167,15 +167,17 @@ typedef __m128                          vFloat;
 	#endif	/* !defined ARM_NEON_GCC_COMPATIBILITY */
 
 	#include <arm_neon.h>
-	typedef unsigned char  vUInt8  __attribute__((__vector_size__(16), __aligned__(16)));
-	typedef signed char    vSInt8  __attribute__((__vector_size__(16), __aligned__(16)));
-	typedef unsigned short vUInt16 __attribute__((__vector_size__(16), __aligned__(16)));
-	typedef signed short   vSInt16 __attribute__((__vector_size__(16), __aligned__(16)));
-	typedef unsigned int   vUInt32 __attribute__((__vector_size__(16), __aligned__(16)));
-	typedef signed int     vSInt32 __attribute__((__vector_size__(16), __aligned__(16)));
-	typedef float          vFloat  __attribute__((__vector_size__(16), __aligned__(16)));
-	typedef double         vDouble __attribute__((__vector_size__(16), __aligned__(16)));
-	typedef unsigned int   vBool32 __attribute__((__vector_size__(16), __aligned__(16)));
+	typedef unsigned char  		vUInt8  __attribute__((__vector_size__(16), __aligned__(16)));
+	typedef signed char    		vSInt8  __attribute__((__vector_size__(16), __aligned__(16)));
+	typedef unsigned short 		vUInt16 __attribute__((__vector_size__(16), __aligned__(16)));
+	typedef signed short   		vSInt16 __attribute__((__vector_size__(16), __aligned__(16)));
+	typedef unsigned int   		vUInt32 __attribute__((__vector_size__(16), __aligned__(16)));
+	typedef signed int     		vSInt32 __attribute__((__vector_size__(16), __aligned__(16)));
+	typedef unsigned long long 	vUInt64 __attribute__((__vector_size__(16), __aligned__(16)));
+	typedef long long      		vSInt64 __attribute__((__vector_size__(16), __aligned__(16)));
+	typedef float          		vFloat  __attribute__((__vector_size__(16), __aligned__(16)));
+	typedef double         		vDouble __attribute__((__vector_size__(16), __aligned__(16)));
+	typedef unsigned int   		vBool32 __attribute__((__vector_size__(16), __aligned__(16)));
 
 #else
 

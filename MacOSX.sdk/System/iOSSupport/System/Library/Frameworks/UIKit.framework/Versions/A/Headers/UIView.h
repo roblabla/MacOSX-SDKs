@@ -154,6 +154,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIView : UIResponder <NSCoding, 
 @property(nonatomic,readonly) BOOL canBecomeFocused API_AVAILABLE(ios(9.0)); // NO by default
 @property (readonly, nonatomic, getter=isFocused) BOOL focused API_AVAILABLE(ios(9.0));
 
+/// The identifier of the focus group that this view belongs to. If this is nil, subviews inherit their superview's focus group.
+@property (nonatomic, readwrite, nullable, copy) NSString *focusGroupIdentifier API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos, watchos);
+
 @property (nonatomic) UISemanticContentAttribute semanticContentAttribute API_AVAILABLE(ios(9.0));
 
 // This method returns the layout direction implied by the provided semantic content attribute relative to the application-wide layout direction (as returned by UIApplication.sharedApplication.userInterfaceLayoutDirection).
@@ -176,7 +179,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIView : UIResponder <NSCoding, 
 @property(nonatomic) CGRect            bounds;      // default bounds is zero origin, frame size. animatable
 @property(nonatomic) CGPoint           center;      // center is center of frame. animatable
 @property(nonatomic) CGAffineTransform transform;   // default is CGAffineTransformIdentity. animatable. Please use this property instead of the affineTransform property on the layer
-@property(nonatomic) CATransform3D     transform3D API_AVAILABLE(ios(12.0),tvos(12.0)); // default is CATransform3DIdentity. animatable. Please use this property instead of the transform property on the layer
+@property(nonatomic) CATransform3D     transform3D API_AVAILABLE(ios(13.0),tvos(13.0)); // default is CATransform3DIdentity. animatable. Please use this property instead of the transform property on the layer
 @property(nonatomic) CGFloat           contentScaleFactor API_AVAILABLE(ios(4.0));
 
 @property(nonatomic,getter=isMultipleTouchEnabled) BOOL multipleTouchEnabled API_UNAVAILABLE(tvos);   // default is NO

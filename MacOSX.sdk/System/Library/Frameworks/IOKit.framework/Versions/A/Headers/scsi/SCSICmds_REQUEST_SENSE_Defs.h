@@ -24,11 +24,16 @@
 #ifndef _IOKIT_SCSI_CMDS_REQUEST_SENSE_H_
 #define _IOKIT_SCSI_CMDS_REQUEST_SENSE_H_
 
+#include <TargetConditionals.h>
 
+#if TARGET_OS_DRIVERKIT
+typedef uint8_t     UInt8;
+#else
 #if KERNEL
 #include <IOKit/IOTypes.h>
 #else
 #include <CoreFoundation/CoreFoundation.h>
+#endif
 #endif
 
 

@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 41D68976-995A-3B67-A31F-7FE2F5BD875B', 'x86_64: 41D68976-995A-3B67-A31F-7FE2F5BD875B' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           534705F7-165A-37E4-AC3C-68EBCD911C99
+  - target:          x86_64-maccatalyst
+    value:           534705F7-165A-37E4-AC3C-68EBCD911C99
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           91F091CF-BD03-3B2C-B375-ED735D34A2CF
+  - target:          arm64e-maccatalyst
+    value:           91F091CF-BD03-3B2C-B375-ED735D34A2CF
 install-name:    '/System/Library/PrivateFrameworks/Engram.framework/Versions/A/Engram'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _ENCypherErrorDomain, _ENGroupContextErrorDomain, _ENGroupContextErrorItemKey, 
                        _ENGroupIDErrorDomain ]
     objc-classes:    [ ENAccountIdentity, ENAsyncReducer, ENAsyncReducerState, ENCypher, 

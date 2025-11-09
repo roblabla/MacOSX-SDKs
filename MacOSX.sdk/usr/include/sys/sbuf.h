@@ -1,5 +1,5 @@
 /*-
- * Copyright (c) 2000 Poul-Henning Kamp and Dag-Erling Coïdan Smørgrav
+ * Copyright (c) 2000 Poul-Henning Kamp and Dag-Erling Co√Ødan Sm√∏rgrav
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,6 +33,7 @@
 
 #include <sys/_types.h>
 #include <stdarg.h>
+#include <stddef.h>
 
 /*
  * Structure definition
@@ -53,26 +54,6 @@ struct sbuf {
 };
 
 __BEGIN_DECLS
-/*
- * API functions
- */
-struct sbuf     *sbuf_new(struct sbuf *, char *, int, int);
-void             sbuf_clear(struct sbuf *);
-int              sbuf_setpos(struct sbuf *, int);
-int              sbuf_bcat(struct sbuf *, const void *, size_t);
-int              sbuf_bcpy(struct sbuf *, const void *, size_t);
-int              sbuf_cat(struct sbuf *, const char *);
-int              sbuf_cpy(struct sbuf *, const char *);
-int              sbuf_printf(struct sbuf *, const char *, ...) __printflike(2, 3);
-int              sbuf_vprintf(struct sbuf *, const char *, va_list) __printflike(2, 0);
-int              sbuf_putc(struct sbuf *, int);
-int              sbuf_trim(struct sbuf *);
-int              sbuf_overflowed(struct sbuf *);
-void             sbuf_finish(struct sbuf *);
-char            *sbuf_data(struct sbuf *);
-int              sbuf_len(struct sbuf *);
-int              sbuf_done(struct sbuf *);
-void             sbuf_delete(struct sbuf *);
 
 __END_DECLS
 

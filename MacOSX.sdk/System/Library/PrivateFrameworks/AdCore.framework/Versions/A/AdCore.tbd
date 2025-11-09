@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 9A20DD7E-9BDB-372A-958F-2E819CDEF57E', 'x86_64: 9A20DD7E-9BDB-372A-958F-2E819CDEF57E' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           2EEFE9E4-B777-3999-94B0-4679A66BBCCF
+  - target:          x86_64-maccatalyst
+    value:           2EEFE9E4-B777-3999-94B0-4679A66BBCCF
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           798F3640-12E2-3AB5-9B05-4B66ED35594C
+  - target:          arm64e-maccatalyst
+    value:           798F3640-12E2-3AB5-9B05-4B66ED35594C
 install-name:    '/System/Library/PrivateFrameworks/AdCore.framework/Versions/A/AdCore'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _ADAdConnectionGetStringForValue, _ADAdVectorReadFrom, _ADAdsOptions, 
                        _ADAnalyticsEventReadFrom, _ADAttributionRequestReadFrom, 
                        _ADAttributionResponseReadFrom, _ADClientSettingsRequestReadFrom, 
@@ -13,19 +27,20 @@ exports:
                        _ADConfigurationsKeychainKey, _ADCopyDataFromKeychain, _ADCoreDefaultsBundleID, 
                        _ADCoreIdentifier, _ADDefaultsBundleID, _ADEncryptString, 
                        _ADErrorDomain, _ADJingleAccountStatusToString, _ADKeyedParameterListReadFrom, 
-                       _ADLimitAdTrackingStatusToString, _ADLogAnalyticsRequestReadFrom, 
-                       _ADLogAnalyticsResponseReadFrom, _ADLogBarrier, _ADMakeMutableSecQuery, 
-                       _ADOdmlResponseReadFrom, _ADOptOutRequestReadFrom, _ADOptOutResponseReadFrom, 
-                       _ADParameterReadFrom, _ADPrivacyDaemonIdentifier, _ADRoutingInfoMessageReadFrom, 
-                       _ADSegmentUpdateRequestReadFrom, _ADSegmentUpdateResponseReadFrom, 
-                       _ADSimulateCrash, _ADSimulatedCrashKillCode_InternalWatchdog, 
+                       _ADLogAnalyticsRequestReadFrom, _ADLogAnalyticsResponseReadFrom, 
+                       _ADLogBarrier, _ADMakeMutableSecQuery, _ADOdmlResponseReadFrom, 
+                       _ADOptOutRequestReadFrom, _ADOptOutResponseReadFrom, _ADParameterReadFrom, 
+                       _ADPrivacyDaemonIdentifier, _ADRoutingInfoMessageReadFrom, 
+                       _ADSaveToPromotedContentKeychain, _ADSegmentUpdateRequestReadFrom, 
+                       _ADSegmentUpdateResponseReadFrom, _ADSimulateCrash, _ADSimulatedCrashKillCode_InternalWatchdog, 
                        _ADSponsoredSearchRequestReadFrom, _ADTrackingIDManagerMachServiceName, 
                        _ADTransparencyDetailsReadFrom, _ADUserTargetingPropertiesReadFrom, 
                        _ADUserTransparencyRequestReadFrom, _ADUserTransparencyResponseReadFrom, 
                        _ADWriteDataToKeychain, _ADXPCConnectionOptions, _AMSBagIsSponsoredAdsEnabledForAdTrackingDStringKey, 
-                       _AMSBagIsSponsoredAdsEnabledStringKey, _AdCoreVersionNumber, 
-                       _AdCoreVersionString, _AdSheetIdentifier, _AppStoreDefaultsBundleID, 
-                       _ClientTypeToString, _GetKeychainPropertyListForKey, _NewsWidgetDefaultsBundleID, 
+                       _AMSBagIsSponsoredAdsEnabledStringKey, _APResourceConnectProxyKey, 
+                       _APServerConfigurationKey, _AdCoreVersionNumber, _AdCoreVersionString, 
+                       _AdSheetIdentifier, _AppStoreDefaultsBundleID, _ClientTypeToString, 
+                       _GetKeychainPropertyListForKey, _NewsWidgetDefaultsBundleID, 
                        _PreferencesDefaultsBundleID, _PreferencesMacDefaultsBundleID, 
                        _RequestRetryDelay, _SetKeychainPropertyListForKey, _StringIsUUID, 
                        _StringIsZeroUUID, _StringMatch, __ADLog, _dumpObject, _kBagPropertyJingleRequest_OptInBagKey, 
@@ -42,7 +57,7 @@ exports:
                        ADRoutingInfoMessage, ADSegmentUpdateRequest, ADSegmentUpdateResponse, 
                        ADServer, ADSingleton, ADSponsoredSearchRequest, ADTransparencyDetails, 
                        ADUserTargetingProperties, ADUserTransparencyRequest, ADUserTransparencyResponse, 
-                       ADWatchDog, ADWatchDogManager, DSIDRecord ]
+                       ADVector, ADWatchDog, ADWatchDogManager, DSIDRecord ]
     objc-ivars:      [ ADAdVector._vectors, ADAdVector._version, ADAnalyticsEvent._event, 
                        ADAnalyticsEvent._timestamp, ADAttributionRequest._adMetadata, 
                        ADAttributionRequest._anonymousDemandiAdID, ADAttributionRequest._attributedByiTunes, 
@@ -67,9 +82,10 @@ exports:
                        ADLogAnalyticsRequest._dPID, ADLogAnalyticsRequest._events, 
                        ADLogAnalyticsRequest._iAdID, ADNetworkController._networkType, 
                        ADNetworkController._notificationTimer, ADNetworkController._store, 
-                       ADOdmlResponse._adVector, ADOdmlResponse._has, ADOdmlResponse._obfuscatedpTTR, 
-                       ADOdmlResponse._obfuscationID, ADOptOutRequest._dPID, ADOptOutRequest._has, 
-                       ADOptOutRequest._iAdID, ADOptOutRequest._optedOutStatus, ADOptOutRequest._statusChangeTimestamp, 
+                       ADOdmlResponse._adVector, ADOdmlResponse._addendum, ADOdmlResponse._has, 
+                       ADOdmlResponse._obfuscatedpTTR, ADOdmlResponse._obfuscationID, 
+                       ADOptOutRequest._dPID, ADOptOutRequest._has, ADOptOutRequest._iAdID, 
+                       ADOptOutRequest._optedOutStatus, ADOptOutRequest._statusChangeTimestamp, 
                        ADOptOutRequest._timezone, ADOptOutRequest._transmitTimestamp, 
                        ADParameter._key, ADParameter._value, ADRoutingInfoMessage._environmentURL, 
                        ADRoutingInfoMessage._protoVersion, ADRoutingInfoMessage._searchType, 
@@ -83,9 +99,9 @@ exports:
                        ADSegmentUpdateRequest._updateSentTime, ADSegmentUpdateResponse._has, 
                        ADSegmentUpdateResponse._idDebug, ADSegmentUpdateResponse._maxSegmentUpdateIntervalInSeconds, 
                        ADSegmentUpdateResponse._segmentRefreshIntervalInSeconds, 
-                       ADSponsoredSearchRequest._has, ADSponsoredSearchRequest._isBaseline, 
-                       ADSponsoredSearchRequest._isTest, ADSponsoredSearchRequest._properties, 
-                       ADTransparencyDetails._transparencyDetailsUnavailableMessage, 
+                       ADSponsoredSearchRequest._enableImagesForDupes, ADSponsoredSearchRequest._has, 
+                       ADSponsoredSearchRequest._isBaseline, ADSponsoredSearchRequest._isTest, 
+                       ADSponsoredSearchRequest._properties, ADTransparencyDetails._transparencyDetailsUnavailableMessage, 
                        ADTransparencyDetails._transparencyRendererPayload, ADTransparencyDetails._transparencyRendererURL, 
                        ADUserTargetingProperties._accountStates, ADUserTargetingProperties._accountTypes, 
                        ADUserTargetingProperties._administrativeArea, ADUserTargetingProperties._advertisingIdentifierMonthResetCount, 

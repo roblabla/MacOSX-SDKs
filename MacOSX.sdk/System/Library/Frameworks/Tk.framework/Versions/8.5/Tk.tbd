@@ -1,12 +1,18 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 34B5956A-04FC-34A9-9147-226F170E7CE8' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           BCAF4C9E-3895-3DC1-B271-3AAB240DAE7C
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           BCA57B25-B3FC-3FDE-B806-BBB95E19ADAA
 install-name:    '/System/Library/Frameworks/Tk.framework/Versions/8.5/Tk'
 current-version: 8.5.9
 compatibility-version: 8.5
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _TkAboutDlg, _TkAllocWindow, _TkBezierPoints, _TkBezierScreenPoints, 
                        _TkBindDeadWindow, _TkBindEventProc, _TkBindFree, _TkBindInit, 
                        _TkCanvasDashParseProc, _TkCanvasDashPrintProc, _TkChangeEventWindow, 

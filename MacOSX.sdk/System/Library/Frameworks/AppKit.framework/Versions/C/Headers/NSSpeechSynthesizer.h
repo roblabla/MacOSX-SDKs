@@ -12,7 +12,7 @@
 #import <Foundation/NSRange.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSString, NSURL, NSError;
 @protocol NSSpeechSynthesizerDelegate;

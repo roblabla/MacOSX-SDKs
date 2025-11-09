@@ -91,8 +91,29 @@ typedef NS_ENUM(NSUInteger, MTLDataType) {
     MTLDataTypeSampler API_AVAILABLE(macos(10.13), ios(11.0)) = 59,
     MTLDataTypePointer API_AVAILABLE(macos(10.13), ios(11.0)) = 60,
 
+    MTLDataTypeR8Unorm         API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos) = 62,
+    MTLDataTypeR8Snorm         API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos) = 63,
+    MTLDataTypeR16Unorm        API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos) = 64,
+    MTLDataTypeR16Snorm        API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos) = 65,
+    MTLDataTypeRG8Unorm        API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos) = 66,
+    MTLDataTypeRG8Snorm        API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos) = 67,
+    MTLDataTypeRG16Unorm       API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos) = 68,
+    MTLDataTypeRG16Snorm       API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos) = 69,
+    MTLDataTypeRGBA8Unorm      API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos) = 70,
+    MTLDataTypeRGBA8Unorm_sRGB API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos) = 71,
+    MTLDataTypeRGBA8Snorm      API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos) = 72,
+    MTLDataTypeRGBA16Unorm     API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos) = 73,
+    MTLDataTypeRGBA16Snorm     API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos) = 74,
+    MTLDataTypeRGB10A2Unorm    API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos) = 75,
+    MTLDataTypeRG11B10Float    API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos) = 76,
+    MTLDataTypeRGB9E5Float     API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos) = 77,
     MTLDataTypeRenderPipeline  API_AVAILABLE(macos(10.14), ios(13.0)) = 78,
+    MTLDataTypeComputePipeline API_AVAILABLE(ios(13.0),macos(11.0)) = 79,
     MTLDataTypeIndirectCommandBuffer   API_AVAILABLE(macos(10.14), ios(12.0)) = 80,
+    MTLDataTypeVisibleFunctionTable API_AVAILABLE(macos(11.0), ios(14.0)) = 115,
+    MTLDataTypeIntersectionFunctionTable API_AVAILABLE(macos(11.0), ios(14.0)) = 116,
+    MTLDataTypePrimitiveAccelerationStructure API_AVAILABLE(macos(11.0), ios(14.0)) = 117,
+    MTLDataTypeInstanceAccelerationStructure API_AVAILABLE(macos(11.0), ios(14.0)) = 118,
 } API_AVAILABLE(macos(10.11), ios(8.0));
 
 @class MTLArgument;
@@ -120,6 +141,12 @@ typedef NS_ENUM(NSUInteger, MTLArgumentType) {
     MTLArgumentTypeTexture = 2,
     MTLArgumentTypeSampler = 3,
 
+    MTLArgumentTypeImageblockData API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos)     = 16,
+    MTLArgumentTypeImageblock API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos)         = 17,
+    MTLArgumentTypeVisibleFunctionTable API_AVAILABLE(macos(11.0), ios(14.0)) = 24,
+    MTLArgumentTypePrimitiveAccelerationStructure API_AVAILABLE(macos(11.0), ios(14.0)) = 25,
+    MTLArgumentTypeInstanceAccelerationStructure API_AVAILABLE(macos(11.0), ios(14.0)) = 26,
+    MTLArgumentTypeIntersectionFunctionTable API_AVAILABLE(macos(11.0), ios(14.0)) = 27,
 } API_AVAILABLE(macos(10.11), ios(8.0));
 
 /*!

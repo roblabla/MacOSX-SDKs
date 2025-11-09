@@ -2,8 +2,7 @@
 //  SKKeyframeSequence.h
 //  SpriteKit
 //
-//  Created by Tim Oriol on 2/25/13.
-//
+//  Copyright © 2020 Apple. All rights reserved.
 //
 
 #import <SpriteKit/SpriteKitBase.h>

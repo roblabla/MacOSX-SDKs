@@ -2,7 +2,7 @@
  *  CTStringAttributes.h
  *  CoreText
  *
- *  Copyright (c) 2004-2018 Apple Inc. All rights reserved.
+ *  Copyright (c) 2004-2020 Apple Inc. All rights reserved.
  *
  */
 
@@ -188,7 +188,8 @@ CT_EXPORT const CFStringRef kCTStrokeColorAttributeName CT_AVAILABLE(macos(10.6)
                 Set a value of something other than kCTUnderlineStyleNone to draw
                 an underline. In addition, the CTUnderlineStyleModifiers can be
                 used to modify the look of the underline. The underline color
-                will be determined by the text's foreground color.
+                will be determined by the text's foreground color unless
+                otherwise specified by kCTUnderlineColorAttributeName.
 */
 
 CT_EXPORT const CFStringRef kCTUnderlineStyleAttributeName CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));

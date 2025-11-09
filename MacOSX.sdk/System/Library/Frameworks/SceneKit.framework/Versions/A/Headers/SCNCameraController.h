@@ -2,7 +2,7 @@
 //  SCNCameraController.h
 //  SceneKit
 //
-//  Copyright (c) 2017-2019 Apple Inc. All rights reserved.
+//  Copyright © 2017-2020 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SceneKitTypes.h>
@@ -85,7 +85,7 @@ SCN_EXPORT API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 @property(nonatomic) float maximumHorizontalAngle;
 
 // Translate the camera along the local X/Y/Z axis.
-- (void)translateInCameraSpaceByX:(float)deltaX Y:(float)deltaY Z:(float)deltaX;
+- (void)translateInCameraSpaceByX:(float)deltaX Y:(float)deltaY Z:(float)deltaZ;
 
 // Move the camera to a position where the bounding sphere of all nodes is fully visible.
 // Also set the camera target as the center of the bounding sphere.

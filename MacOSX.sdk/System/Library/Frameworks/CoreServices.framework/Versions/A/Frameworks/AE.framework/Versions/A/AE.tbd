@@ -1,15 +1,34 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 0DF53735-58DB-354B-9BC2-F8B0ED698782', 'x86_64: 0DF53735-58DB-354B-9BC2-F8B0ED698782' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           C7CB2D62-B4F0-37A1-A53F-5CBB01ECFB97
+  - target:          x86_64-maccatalyst
+    value:           C7CB2D62-B4F0-37A1-A53F-5CBB01ECFB97
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           EE1EBDA8-9297-3434-A3D8-EA3313BEB607
+  - target:          arm64e-maccatalyst
+    value:           EE1EBDA8-9297-3434-A3D8-EA3313BEB607
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/AE.framework/Versions/A/AE'
-current-version: 835.1
+current-version: 918
 compatibility-version: 0
-parent-umbrella: CoreServices
-exports:         
-  - archs:           [ x86_64 ]
-    allowable-clients: [ DesktopServices, Foundation, HIServices, LaunchServices, 
-                         PrintCore ]
+parent-umbrella:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    umbrella:        CoreServices
+allowable-clients:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    clients:         [ DesktopServices, Foundation, HIServices, LaunchServices, PrintCore ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _AEBuildAppleEvent, _AEBuildDesc, _AEBuildParameters, _AECallObjectAccessor, 
                        _AECheckIsRecord, _AECoerceDesc, _AECoercePtr, _AECoercionHandlersApplyFunction, 
                        _AECompareDesc, _AEConvertFromMsg, _AECountItems, _AECreateAppleEvent, 
@@ -38,22 +57,22 @@ exports:
                        _AEStreamOpenList, _AEStreamOpenRecord, _AEStreamOptionalParam, 
                        _AEStreamSetRecordType, _AEStreamWriteAEDesc, _AEStreamWriteData, 
                        _AEStreamWriteDesc, _AEStreamWriteKey, _AEStreamWriteKeyDesc, 
-                       _AEUnflattenDesc, _CreateCompDescriptor, _CreateLogicalDescriptor, 
-                       _CreateObjSpecifier, _CreateOffsetDescriptor, _CreateRangeDescriptor, 
-                       _GDBPrintAECoercionTables, _GDBPrintAEDesc, _GDBPrintAEHandlerTables, 
-                       _GDBPrintHelpDebuggingAppleEvents, __AEAddAnnotationsToAppleEvent, 
-                       __AEAppleEventMergeAnnotations, __AECanSandboxedApplicationSendAppleEvent, 
-                       __AECopyEntitlementForToken, __AECopyRegisteredMachPort, __AECreateAEReceiveMachPort, 
-                       __AECreateAEReceivePortInRunLoopWithSource, __AECreateAnnotatedAppleEvent, 
-                       __AEDescEventGetCounts, __AEDescEventIndexedAttributeItem, 
+                       _AEUnflattenDesc, _AEUnflattenDescFromBytes, _CreateCompDescriptor, 
+                       _CreateLogicalDescriptor, _CreateObjSpecifier, _CreateOffsetDescriptor, 
+                       _CreateRangeDescriptor, _GDBPrintAECoercionTables, _GDBPrintAEDesc, 
+                       _GDBPrintAEHandlerTables, _GDBPrintHelpDebuggingAppleEvents, 
+                       __AEAddAnnotationsToAppleEvent, __AEAppleEventMergeAnnotations, 
+                       __AECanSandboxedApplicationSendAppleEvent, __AECopyEntitlementForToken, 
+                       __AECopyRegisteredMachPort, __AECreateAEReceiveMachPort, __AECreateAEReceivePortInRunLoopWithSource, 
+                       __AECreateAnnotatedAppleEvent, __AEDescEventGetCounts, __AEDescEventIndexedAttributeItem, 
                        __AEDescEventIndexedParamItem, __AEDescGetAsString, __AEDescInformation, 
                        __AEDescListGetCount, __AEDescListIndexedItem, __AEDescRecordGetCount, 
                        __AEDescRecordIndexedItem, __AEDescToInternalImpl, __AEDoesAppleEventContainAnyTypesWhichRequireAnnotation, 
                        __AEEventDescGetInformation, __AEEventRequiresSecurityHandlerChecks, 
                        __AEEventSecurityHandlerDoChecks, __AEGenerateAnnotations, 
-                       __AEInstallEventHandlerBlock, __AEInstallEventSecurityHandler, 
-                       __AEInstallEventSecurityHandlerBlock, __AEIsAppleEventTargetInSandbox, 
-                       __AERegisterCurrentApplicationInfomationWithAppleEventsD, 
+                       __AEInstallAEInteractWithUserCallback, __AEInstallEventHandlerBlock, 
+                       __AEInstallEventSecurityHandler, __AEInstallEventSecurityHandlerBlock, 
+                       __AEIsAppleEventTargetInSandbox, __AERegisterCurrentApplicationInfomationWithAppleEventsD, 
                        __AERemoveAEReceivePort, __AERemoveEventSecurityHandler, __AEUnflattenDescFromBytes, 
                        __AppleEventsCheckInApp, __AppleEventsCheckInAppWithBlock, 
                        __AppleEventsCopyApplicationEntitlements, __AppleEventsCopyApplicationEntitlementsWithBlock, 
@@ -61,7 +80,9 @@ exports:
                        __AppleEventsForwardEntitlements, __AppleEventsForwardEntitlementsWithBlock, 
                        __AppleEventsHintApp, __AppleEventsHintAppWithBlock, __AppleEventsListApplications, 
                        __AppleEventsListApplicationsWithBlock, __AppleEventsLookupApplicationPort, 
-                       __AppleEventsLookupApplicationPortWithBlock, __AppleEventsRegisterXPCServicesOnQueue, 
+                       __AppleEventsLookupApplicationPortWithBlock, __AppleEventsReleaseProcessAssertion, 
+                       __AppleEventsReleaseProcessAssertionWithBlock, __AppleEventsRequestProcessAssertion, 
+                       __AppleEventsRequestProcessAssertionWithBlock, __AppleEventsSendPortRequiresProcessAssertions, 
                        __kAppleEventsScriptingEntitlementKey, _aeAddFilter, _aeAppendToImplEnd, 
                        _aeBindToArbitraryMachPort, _aeCheckMessage, _aeCheckinApp, 
                        _aeClassicCompatFlattenDesc, _aeClassicCompatSizeOfFlattenedDesc, 

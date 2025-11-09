@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <HealthKit/HKDefines.h>
+#import <HealthKit/HKElectrocardiogram.h>
 #import <HealthKit/HKFHIRResource.h>
 #import <HealthKit/HKWorkout.h>
 
@@ -162,6 +163,16 @@ typedef NS_OPTIONS(NSUInteger, HKQueryOptions) {
  @param         workout     The HKWorkout that the object was added to.
  */
 + (NSPredicate *)predicateForObjectsFromWorkout:(HKWorkout *)workout;
+
+/*!
+ @method        predicateForObjectsAssociatedWithElectrocardiogram:
+ @abstract      Creates a predicate for use with HKQuery subclasses.
+ @discussion    Creates a query predicate that matches the objects that have been added to the given electrocardiogram
+ 
+ @param         electrocardiogram     The HKElectrocardiogram that the object was added to.
+ */
++ (NSPredicate *)predicateForObjectsAssociatedWithElectrocardiogram:(HKElectrocardiogram *)electrocardiogram API_AVAILABLE(ios(14.0), watchos(7.0)) NS_SWIFT_NAME(predicateForObjectsAssociated(electrocardiogram:));
+
 
 @end
 
@@ -321,7 +332,7 @@ typedef NS_OPTIONS(NSUInteger, HKQueryOptions) {
  
  @param         resourceType    The FHIR resource type.
  */
-+ (NSPredicate *)predicateForClinicalRecordsWithFHIRResourceType:(HKFHIRResourceType)resourceType API_AVAILABLE(ios(12.0)) __WATCHOS_PROHIBITED;
++ (NSPredicate *)predicateForClinicalRecordsWithFHIRResourceType:(HKFHIRResourceType)resourceType API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @method        predicateForClinicalRecordsFromSource:withFHIRResourceType:identifier:
@@ -334,8 +345,29 @@ typedef NS_OPTIONS(NSUInteger, HKQueryOptions) {
  */
 + (NSPredicate *)predicateForClinicalRecordsFromSource:(HKSource *)source
                                       FHIRResourceType:(HKFHIRResourceType)resourceType
-                                            identifier:(NSString *)identifier API_AVAILABLE(ios(12.0)) __WATCHOS_PROHIBITED;
+                                            identifier:(NSString *)identifier API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(watchos);
 
+@end
+
+@interface HKQuery (HKElectrocardiogramPredicates)
+
+/*!
+ @method        predicateForElectrocardiogramsWithClassification:
+ @abstract      Creates a predicate for use with HKQuery subclasses.
+ @discussion    Creates a query predicate that matches HKElectrocardiograms with a specific classification.
+ 
+ @param         classification    The classification for the electrocardiogram.
+ */
++ (NSPredicate *)predicateForElectrocardiogramsWithClassification:(HKElectrocardiogramClassification)classification API_AVAILABLE(ios(14.0), watchos(7.0)) NS_SWIFT_NAME(predicateForElectrocardiograms(classification:));
+
+/*!
+ @method        predicateForElectrocardiogramsWithSymptomsStatus:
+ @abstract      Creates a predicate for use with HKQuery subclasses.
+ @discussion    Creates a query predicate that matches HKElectrocardiograms with a specificied symptoms status.
+ 
+ @param         symptomsStatus    The symptoms status for the electrocardiogram.
+ */
++ (NSPredicate *)predicateForElectrocardiogramsWithSymptomsStatus:(HKElectrocardiogramSymptomsStatus)symptomsStatus API_AVAILABLE(ios(14.0), watchos(7.0)) NS_SWIFT_NAME(predicateForElectrocardiograms(symptomsStatus:));
 @end
 
 NS_ASSUME_NONNULL_END

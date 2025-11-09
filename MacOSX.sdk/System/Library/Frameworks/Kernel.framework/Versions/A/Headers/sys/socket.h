@@ -159,8 +159,8 @@
 #define SO_ERROR        0x1007          /* get error status and clear */
 #define SO_TYPE         0x1008          /* get socket type */
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
-#define SO_LABEL        0x1010          /* socket's MAC label */
-#define SO_PEERLABEL    0x1011          /* socket's peer MAC label */
+#define SO_LABEL        0x1010          /* deprecated */
+#define SO_PEERLABEL    0x1011          /* deprecated */
 #ifdef __APPLE__
 #define SO_NREAD        0x1020          /* APPLE: get 1st-packet byte count */
 #define SO_NKE          0x1021          /* APPLE: Install socket-level NKE */
@@ -181,7 +181,7 @@
 #define SO_NET_SERVICE_TYPE     0x1116  /* Network service type */
 
 
-#define SO_NETSVC_MARKING_LEVEL 0x1119  /* Get QoS marking in effect for socket */
+#define SO_NETSVC_MARKING_LEVEL    0x1119  /* Get QoS marking in effect for socket */
 
 /*
  * Network Service Type for option SO_NET_SERVICE_TYPE
@@ -397,7 +397,8 @@ struct so_np_extensions {
 #define AF_RESERVED_36  36              /* Reserved for internal usage */
 #define AF_IEEE80211    37              /* IEEE 802.11 protocol */
 #define AF_UTUN         38
-#define AF_MAX          40
+#define AF_VSOCK        40              /* VM Sockets */
+#define AF_MAX          41
 #endif  /* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 
 /*
@@ -485,6 +486,7 @@ struct sockaddr_storage {
 #define PF_PPP          AF_PPP
 #define PF_RESERVED_36  AF_RESERVED_36
 #define PF_UTUN         AF_UTUN
+#define PF_VSOCK        AF_VSOCK
 #define PF_MAX          AF_MAX
 
 /*
@@ -575,7 +577,14 @@ struct msghdr {
 #define MSG_RCVMORE     0x4000          /* Data remains in current pkt */
 #endif
 #define MSG_NEEDSA      0x10000         /* Fail receive if socket address cannot be allocated */
-#define MSG_USEUPCALL   0x80000000 /* Inherit upcall in sock_accept */
+#endif  /* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
+
+#if __DARWIN_C_LEVEL >= 200809L
+#define MSG_NOSIGNAL    0x80000         /* do not generate SIGPIPE on EOF */
+#endif /* __DARWIN_C_LEVEL */
+
+#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
+#define MSG_USEUPCALL   0x80000000      /* Inherit upcall in sock_accept */
 #endif  /* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 
 /*
@@ -652,7 +661,7 @@ struct cmsgcred {
 #define CMSG_SPACE(l)           (__DARWIN_ALIGN32(sizeof(struct cmsghdr)) + __DARWIN_ALIGN32(l))
 #define CMSG_LEN(l)             (__DARWIN_ALIGN32(sizeof(struct cmsghdr)) + (l))
 
-#define CMSG_ALIGN(n)   __DARWIN_ALIGN32(n)
+#define CMSG_ALIGN(n)   ((typeof(n))__DARWIN_ALIGN32(n))
 #endif  /* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 
 /* "Socket"-level control message types: */
@@ -672,7 +681,7 @@ struct cmsgcred {
 #define SHUT_WR         1               /* shut down the writing side */
 #define SHUT_RDWR       2               /* shut down both sides */
 
-#if !defined(_POSIX_C_SOURCE)
+#if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 /*
  * sendfile(2) header/trailer struct
  */
@@ -709,7 +718,7 @@ struct user32_sf_hdtr {
 };
 
 
-#endif  /* !_POSIX_C_SOURCE */
+#endif  /* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
 
 
 

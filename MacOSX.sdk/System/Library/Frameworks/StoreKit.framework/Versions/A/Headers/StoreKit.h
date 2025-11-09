@@ -11,6 +11,9 @@
 #import <StoreKit/SKCloudServiceSetupViewController.h>
 #import <StoreKit/SKDownload.h>
 #import <StoreKit/SKError.h>
+#import <StoreKit/SKOverlay.h>
+#import <StoreKit/SKOverlayConfiguration.h>
+#import <StoreKit/SKOverlayTransitionContext.h>
 #import <StoreKit/SKPayment.h>
 #import <StoreKit/SKPaymentDiscount.h>
 #import <StoreKit/SKPaymentQueue.h>

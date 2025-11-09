@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 37E18623-A682-3DC3-A977-532A15F36CBD' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           4D41A5F0-25C5-3DBD-BE55-4CDF1849DD59
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           1445CD84-ABAC-3144-9950-2682792859DD
 install-name:    '/System/Library/PrivateFrameworks/DCERPC.framework/Versions/A/DCERPC'
-current-version: 69
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 71
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _dce_error_inq_text, _dcethread_SIGEMT_e, _dcethread_SIGIOT_e, 
                        _dcethread_SIGPIPE_e, _dcethread_SIGSYS_e, _dcethread_SIGTRAP_e, 
                        _dcethread_aritherr_e, _dcethread_badparam_e, _dcethread_decovf_e, 

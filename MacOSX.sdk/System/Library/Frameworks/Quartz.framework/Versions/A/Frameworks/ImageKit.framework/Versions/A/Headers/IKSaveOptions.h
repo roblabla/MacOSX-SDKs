@@ -37,25 +37,25 @@ IK_CLASS_AVAILABLE(10.5)
  @property delegate
  @abstract Delegate of the IKSaveOptions.
  */
-@property (assign) id delegate;
+@property (assign,nonatomic) id delegate;
 
 /*!
  @property imageProperties
  @abstract current imageProperties (respecting user UI selection).
  */
-@property (readonly) NSDictionary * imageProperties;
+@property (nonatomic, readonly) NSDictionary * imageProperties;
 
 /*!
  @property imageUTType
  @abstract current imageUTType (respecting user UI selection).
  */
-@property (readonly) NSString * imageUTType;
+@property (nonatomic, readonly) NSString * imageUTType;
 
 /*!
  @property userSelection
  @abstract information about the UI settings.
  */
-@property (readonly) NSDictionary * userSelection;
+@property (nonatomic, readonly) NSDictionary * userSelection;
 
 
 /*! 

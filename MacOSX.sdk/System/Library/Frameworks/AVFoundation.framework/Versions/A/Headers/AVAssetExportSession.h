@@ -1,9 +1,10 @@
+#if !__has_include(<AVFCore/AVAssetExportSession.h>)
 /*
 	File:  AVAssetExportSession.h
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2019 Apple Inc. All rights reserved.
+	Copyright 2010-2020 Apple Inc. All rights reserved.
 
 */
 
@@ -19,37 +20,6 @@
 #import <CoreGraphics/CoreGraphics.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
-/*!
-	@class		AVAssetExportSession
-
-	@abstract	An AVAssetExportSession creates a new timed media resource from the contents of an 
-				existing AVAsset in the form described by a specified export preset.
-
-	@discussion
-				Prior to initializing an instance of AVAssetExportSession, you can invoke
-				+allExportPresets to obtain the complete list of presets available. Use
-				+exportPresetsCompatibleWithAsset: to obtain a list of presets that are compatible
-				with a specific AVAsset.
-
-				To configure an export, initialize an AVAssetExportSession with an AVAsset that contains
-				the source media, an AVAssetExportPreset, the output file type, (a UTI string from 
-				those defined in AVMediaFormat.h) and the output URL.
-
-				After configuration is complete, invoke exportAsynchronouslyWithCompletionHandler: 
-				to start the export process. This method returns immediately; the export is performed 
-				asynchronously. Invoke the -progress method to check on the progress. Note that in 
-				some cases, depending on the capabilities of the device, when multiple exports are 
-				attempted at the same time some may be queued until others have been completed. When 
-				this happens, the status of a queued export will indicate that it's "waiting".
-
-				Whether the export fails, completes, or is cancelled, the completion handler you
-				supply to -exportAsynchronouslyWithCompletionHandler: will be called. Upon
-				completion, the status property indicates whether the export has completed
-				successfully. If it has failed, the value of the error property supplies additional
-				information about the reason for the failure.
-
-*/
 
 // -- Export Preset Names --
 
@@ -131,6 +101,36 @@ typedef NS_ENUM(NSInteger, AVAssetExportSessionStatus) {
     AVAssetExportSessionStatusCancelled = 5
 };
 
+/*!
+	@class		AVAssetExportSession
+
+	@abstract	An AVAssetExportSession creates a new timed media resource from the contents of an
+				existing AVAsset in the form described by a specified export preset.
+
+	@discussion
+				Prior to initializing an instance of AVAssetExportSession, you can invoke
+				+allExportPresets to obtain the complete list of presets available. Use
+				+exportPresetsCompatibleWithAsset: to obtain a list of presets that are compatible
+				with a specific AVAsset.
+
+				To configure an export, initialize an AVAssetExportSession with an AVAsset that contains
+				the source media, an AVAssetExportPreset, the output file type, (a UTI string from
+				those defined in AVMediaFormat.h) and the output URL.
+
+				After configuration is complete, invoke exportAsynchronouslyWithCompletionHandler:
+				to start the export process. This method returns immediately; the export is performed
+				asynchronously. Invoke the -progress method to check on the progress. Note that in
+				some cases, depending on the capabilities of the device, when multiple exports are
+				attempted at the same time some may be queued until others have been completed. When
+				this happens, the status of a queued export will indicate that it's "waiting".
+
+				Whether the export fails, completes, or is cancelled, the completion handler you
+				supply to -exportAsynchronouslyWithCompletionHandler: will be called. Upon
+				completion, the status property indicates whether the export has completed
+				successfully. If it has failed, the value of the error property supplies additional
+				information about the reason for the failure.
+
+*/
 API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetExportSession : NSObject
 {
@@ -172,7 +172,7 @@ AV_INIT_UNAVAILABLE
    Setting the value of this property to a file type that's not among the session's supported file types will result in an NSInvalidArgumentException. See supportedFileTypes. */
 @property (nonatomic, copy, nullable) AVFileType outputFileType;
 
-/* Indicates the URL of the export session's output. You may use UTTypeCopyPreferredTagWithClass(outputFileType, kUTTagClassFilenameExtension) to obtain an appropriate path extension for the outputFileType you have specified. For more information about UTTypeCopyPreferredTagWithClass and kUTTagClassFilenameExtension, on iOS see <MobileCoreServices/UTType.h> and on Mac OS X see <LaunchServices/UTType.h>.  */
+/* Indicates the URL of the export session's output. You may use UTTypeCopyPreferredTagWithClass(outputFileType, kUTTagClassFilenameExtension) to obtain an appropriate path extension for the outputFileType you have specified. For more information about UTTypeCopyPreferredTagWithClass and kUTTagClassFilenameExtension, on iOS see <CoreServices/UTType.h> and on Mac OS X see <LaunchServices/UTType.h>.  */
 @property (nonatomic, copy, nullable) NSURL *outputURL;
 
 /* indicates that the output file should be optimized for network use, e.g. that a QuickTime movie file should support "fast start" */
@@ -250,7 +250,7 @@ AV_INIT_UNAVAILABLE
 	@param presetName			An NSString specifying the name of the preset template for the export.
 	@param asset				An AVAsset object that is intended to be exported.
 	@param outputFileType		An AVFileType indicating a file type to check; or nil, to query whether there are any compatible types.
-	@param completionHandler	A block called with the compatibility result.
+	@param handler				A block called with the compatibility result.
  */
 + (void)determineCompatibilityOfExportPreset:(NSString *)presetName withAsset:(AVAsset *)asset outputFileType:(nullable AVFileType)outputFileType completionHandler:(void (^)(BOOL compatible))handler API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
@@ -291,7 +291,7 @@ AV_INIT_UNAVAILABLE
 	@method						estimateMaximumDurationWithCompletionHandler:
 	@abstract					Starts the asynchronous execution of estimating the maximum duration of the export based on the asset, preset, and fileLengthLimit associated with the export session.
 	@discussion 				If fileLengthLimit is not set on the export session, fileLengthLimit will be assumed to be the maximum file size specified by the preset (if any); else infinite.
-	@param						completionHandler
+	@param						handler
 								A block called with the estimated maximum duration, or kCMTimeInvalid if an error occurs.  The error parameter will be non-nil if an error occurs.
 */
 - (void)estimateMaximumDurationWithCompletionHandler:(void (^)(CMTime estimatedMaximumDuration, NSError * _Nullable error ))handler API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
@@ -300,7 +300,7 @@ AV_INIT_UNAVAILABLE
 	@method						estimateOutputFileLengthWithCompletionHandler:
 	@abstract 					Starts the asynchronous execution of estimating the output file length of the export based on the asset, preset, and timeRange associated with the export session.
 	@discussion 				If timeRange is not set on the export session, timeRange will be assumed to be the full time range of the asset.
-	@param						completionHandler
+	@param						handler
 								A block called with the estimated output file length in bytes, if it can be accurately determined; 0 otherwise.  The error parameter will be non-nil if an error occurs.
  */
 - (void)estimateOutputFileLengthWithCompletionHandler:(void (^)(int64_t estimatedOutputFileLength, NSError * _Nullable error ))handler API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
@@ -372,3 +372,7 @@ AV_INIT_UNAVAILABLE
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCore/AVAssetExportSession.h>
+#endif

@@ -49,7 +49,7 @@ typedef function_table_entry   *function_table_t;
 #endif /* AUTOTEST */
 
 #ifndef	task_MSG_COUNT
-#define	task_MSG_COUNT	54
+#define	task_MSG_COUNT	55
 #endif	/* task_MSG_COUNT */
 
 #include <mach/std_types.h>
@@ -257,7 +257,7 @@ extern
 #endif	/* mig_external */
 kern_return_t task_get_exception_ports
 (
-	task_inspect_t task,
+	task_t task,
 	exception_mask_t exception_mask,
 	exception_mask_array_t masks,
 	mach_msg_type_number_t *masksCnt,
@@ -346,7 +346,7 @@ extern
 #endif	/* mig_external */
 kern_return_t task_policy_set
 (
-	task_t task,
+	task_policy_set_t task,
 	task_policy_flavor_t flavor,
 	task_policy_t policy_info,
 	mach_msg_type_number_t policy_infoCnt
@@ -360,7 +360,7 @@ extern
 #endif	/* mig_external */
 kern_return_t task_policy_get
 (
-	task_t task,
+	task_policy_get_t task,
 	task_policy_flavor_t flavor,
 	task_policy_t policy_info,
 	mach_msg_type_number_t *policy_infoCnt,
@@ -457,7 +457,7 @@ extern
 #endif	/* mig_external */
 kern_return_t task_zone_info
 (
-	task_t target_task,
+	task_inspect_t target_task,
 	mach_zone_name_array_t *names,
 	mach_msg_type_number_t *namesCnt,
 	task_zone_info_array_t *info,
@@ -497,7 +497,7 @@ extern
 #endif	/* mig_external */
 kern_return_t task_get_assignment
 (
-	task_t task,
+	task_inspect_t task,
 	processor_set_name_t *assigned_set
 );
 
@@ -527,7 +527,7 @@ extern
 #endif	/* mig_external */
 kern_return_t task_get_state
 (
-	task_t task,
+	task_read_t task,
 	thread_state_flavor_t flavor,
 	thread_state_t old_state,
 	mach_msg_type_number_t *old_stateCnt
@@ -591,7 +591,7 @@ extern
 #endif	/* mig_external */
 kern_return_t task_purgable_info
 (
-	task_t task,
+	task_inspect_t task,
 	task_purgable_info_t *stats
 );
 
@@ -603,7 +603,7 @@ extern
 #endif	/* mig_external */
 kern_return_t task_get_mach_voucher
 (
-	task_t task,
+	task_read_t task,
 	mach_voucher_selector_t which,
 	ipc_voucher_t *voucher
 );
@@ -654,7 +654,7 @@ extern
 kern_return_t task_map_corpse_info
 (
 	task_t task,
-	task_t corspe_task,
+	task_read_t corspe_task,
 	vm_address_t *kcd_addr_begin,
 	uint32_t *kcd_size
 );
@@ -693,7 +693,7 @@ extern
 #endif	/* mig_external */
 kern_return_t task_get_dyld_image_infos
 (
-	task_inspect_t task,
+	task_read_t task,
 	dyld_kernel_image_info_array_t *dyld_images,
 	mach_msg_type_number_t *dyld_imagesCnt
 );
@@ -745,7 +745,7 @@ extern
 kern_return_t task_map_corpse_info_64
 (
 	task_t task,
-	task_t corspe_task,
+	task_read_t corspe_task,
 	mach_vm_address_t *kcd_addr_begin,
 	mach_vm_size_t *kcd_size
 );
@@ -786,6 +786,20 @@ kern_return_t task_set_exc_guard_behavior
 (
 	task_t task,
 	task_exc_guard_behavior_t behavior
+);
+
+/* Routine task_create_suid_cred */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t task_create_suid_cred
+(
+	task_t task,
+	suid_cred_path_t path,
+	suid_cred_uid_t uid,
+	suid_cred_t *delegation
 );
 
 __END_DECLS
@@ -962,7 +976,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		thread_state_flavor_t flavor;
 		mach_msg_type_number_t new_stateCnt;
-		natural_t new_state[614];
+		natural_t new_state[1296];
 	} __Request__thread_create_running_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack(pop)
@@ -1271,7 +1285,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		thread_state_flavor_t flavor;
 		mach_msg_type_number_t new_stateCnt;
-		natural_t new_state[614];
+		natural_t new_state[1296];
 	} __Request__task_set_state_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack(pop)
@@ -1511,6 +1525,21 @@ __END_DECLS
 #ifdef  __MigPackStructs
 #pragma pack(pop)
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_msg_type_number_t pathOffset; /* MiG doesn't use it */
+		mach_msg_type_number_t pathCnt;
+		char path[1024];
+		suid_cred_uid_t uid;
+	} __Request__task_create_suid_cred_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
 #endif /* !__Request__task_subsystem__defined */
 
 /* union of all requests */
@@ -1572,6 +1601,7 @@ union __RequestUnion__task_subsystem {
 	__Request__task_inspect_t Request_task_inspect;
 	__Request__task_get_exc_guard_behavior_t Request_task_get_exc_guard_behavior;
 	__Request__task_set_exc_guard_behavior_t Request_task_set_exc_guard_behavior;
+	__Request__task_create_suid_cred_t Request_task_create_suid_cred;
 };
 #endif /* !__RequestUnion__task_subsystem__defined */
 /* typedefs for all replies */
@@ -2035,7 +2065,7 @@ union __RequestUnion__task_subsystem {
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		mach_msg_type_number_t old_stateCnt;
-		natural_t old_state[614];
+		natural_t old_state[1296];
 	} __Reply__task_get_state_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack(pop)
@@ -2302,6 +2332,20 @@ union __RequestUnion__task_subsystem {
 #ifdef  __MigPackStructs
 #pragma pack(pop)
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		/* start of the kernel processed data */
+		mach_msg_body_t msgh_body;
+		mach_msg_port_descriptor_t delegation;
+		/* end of the kernel processed data */
+	} __Reply__task_create_suid_cred_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
 #endif /* !__Reply__task_subsystem__defined */
 
 /* union of all replies */
@@ -2363,6 +2407,7 @@ union __ReplyUnion__task_subsystem {
 	__Reply__task_inspect_t Reply_task_inspect;
 	__Reply__task_get_exc_guard_behavior_t Reply_task_get_exc_guard_behavior;
 	__Reply__task_set_exc_guard_behavior_t Reply_task_set_exc_guard_behavior;
+	__Reply__task_create_suid_cred_t Reply_task_create_suid_cred;
 };
 #endif /* !__RequestUnion__task_subsystem__defined */
 
@@ -2421,7 +2466,8 @@ union __ReplyUnion__task_subsystem {
     { "task_map_corpse_info_64", 3450 },\
     { "task_inspect", 3451 },\
     { "task_get_exc_guard_behavior", 3452 },\
-    { "task_set_exc_guard_behavior", 3453 }
+    { "task_set_exc_guard_behavior", 3453 },\
+    { "task_create_suid_cred", 3454 }
 #endif
 
 #ifdef __AfterMigUserHeader

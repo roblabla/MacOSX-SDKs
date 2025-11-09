@@ -7,9 +7,10 @@
 
 #import <Foundation/NSArray.h>
 #import <AppKit/NSApplication.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSDocument, NSWindow;
 
@@ -27,7 +28,7 @@ API_UNAVAILABLE_BEGIN(ios)
 @interface NSObject(NSApplicationScriptingDelegation)
 
 // Return YES if the receiving delegate object can respond to key value coding messages for a specific keyed attribute, to-one relationship, or to-many relationship.  Return NO otherwise.
-- (BOOL)application:(NSApplication *)sender delegateHandlesKey:(NSString *)key API_DEPRECATED("This is now an optional method of the NSApplicationDelegate protocol.", macos(10.0,API_TO_BE_DEPRECATED));
+- (BOOL)application:(NSApplication *)sender delegateHandlesKey:(NSString *)key API_DEPRECATED("This is now an optional method of the NSApplicationDelegate protocol.", macos(10.0, 11.0));
 
 @end
 #endif

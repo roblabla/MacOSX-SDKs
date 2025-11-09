@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 3628DBC6-D044-3876-AF40-60E9CE30BAE4' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           11EBF945-C7A5-3A00-B4E0-B9A2AEEFA6A2
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           82B2E3DE-F82D-396E-A4A5-4A2AB8B9FB64
 install-name:    '/System/Library/PrivateFrameworks/PreferencePanesSupport.framework/Versions/A/PreferencePanesSupport'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _SetSymbolicHotKeyButtonValue, _SetSymbolicHotKeyEnabled, 
                        _SetSymbolicHotKeyValue, _SetSymbolicHotModifierValue, _closeIOCOnnection, 
                        _copyAlertCautionIconImage, _copyPerHostValueForKey, _copySymbolicHotKeyPreferences, 
@@ -17,12 +23,12 @@ exports:
                        IndicatorImageView, IndicatorSecureTextField, IndicatorTextField, 
                        InputDeviceController, InputDeviceNibController, MTMouseGesturesBackEnd, 
                        MTTGestureBackEnd, MultitouchDeviceObserver, NSTickLabelsView, 
-                       NSUpActionSlider, PPFlexibleSpaceSpecifier, PPGesture, PPGestureChoicesPopupCell, 
-                       PPGestureMovieView, PPGestureRow, PPGestureView, PPGestureViewController, 
-                       PPProgressSpecifier, PPSGestureRow, PPSGestureRowView, PPSecPrivacyExtension, 
-                       PPSecPrivacyExtensionContext, PPSecPrivacyExtensionManager, 
-                       PPSecPrivacyHostExtensionContext, PPSecPrivacyViewController, 
-                       PPSharingServiceExtension, PPSharingServiceExtensionContext, 
+                       NSUpActionSlider, PPFTableRowView, PPFlexibleSpaceSpecifier, 
+                       PPGesture, PPGestureChoicesPopupCell, PPGestureMovieView, 
+                       PPGestureRow, PPGestureView, PPGestureViewController, PPProgressSpecifier, 
+                       PPSGestureRow, PPSGestureRowView, PPSecPrivacyExtension, PPSecPrivacyExtensionContext, 
+                       PPSecPrivacyExtensionManager, PPSecPrivacyHostExtensionContext, 
+                       PPSecPrivacyViewController, PPSharingServiceExtension, PPSharingServiceExtensionContext, 
                        PPSharingServiceExtensionManager, PPSharingServiceHostExtensionContext, 
                        PPSharingServiceViewController, PPSpecifier, PPSpecifierExtension, 
                        PPSpecifierExtensionContext, PPSpecifierExtensionHostManager, 
@@ -35,11 +41,11 @@ exports:
                        BTPointingDevicePairController.mBTWarningView, BTPointingDevicePairController.mBTWarningViewLabel, 
                        BTPointingDevicePairController.mBackButton, BTPointingDevicePairController.mDeviceInquiry, 
                        BTPointingDevicePairController.mDevicePair, BTPointingDevicePairController.mDevicePairAttemptsCount, 
-                       BTPointingDevicePairController.mDeviceTable, BTPointingDevicePairController.mNoDevicesTableLabel, 
-                       BTPointingDevicePairController.mPairButton, BTPointingDevicePairController.mProgressIndicator, 
-                       BTPointingDevicePairController.mProgressIndicatorLabel, BTPointingDevicePairController.mSelectedDevice, 
-                       BTPointingDevicePairController.mTopLabel, BTPointingDevicePairController.mTopLabelDescription, 
-                       BTPointingDevicePairController.mTopLabelOriginalFrame, IOServiceObserver.mIOConnectIterator, 
+                       BTPointingDevicePairController.mDeviceTable, BTPointingDevicePairController.mIsPairing, 
+                       BTPointingDevicePairController.mNoDevicesTableLabel, BTPointingDevicePairController.mPairButton, 
+                       BTPointingDevicePairController.mProgressIndicator, BTPointingDevicePairController.mProgressIndicatorLabel, 
+                       BTPointingDevicePairController.mSelectedDevice, BTPointingDevicePairController.mTopLabel, 
+                       BTPointingDevicePairController.mTopLabelDescription, IOServiceObserver.mIOConnectIterator, 
                        IOServiceObserver.mIOTerminateIterator, IOServiceObserver.mSelector, 
                        IOServiceObserver.mTarget, IndicatorImageView.mParent, IndicatorImageView.mSavedOrigin, 
                        IndicatorSecureTextField.mIdicatorImageView, IndicatorSecureTextField.mNoteField, 

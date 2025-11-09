@@ -103,7 +103,7 @@ API_AVAILABLE(macos(10.10), ios(8.0), tvos(8.0))
  @see GCController
  */
 #if !__has_feature(objc_arc)
-@property (nonatomic, readonly, assign) GCController *controller;
+@property (nonatomic, readonly, weak) GCController *controller;
 #else
 @property (nonatomic, readonly, weak) GCController *controller;
 #endif
@@ -115,45 +115,96 @@ typedef void (^GCMotionValueChangedHandler)(GCMotion *motion);
 @property (nonatomic, copy, nullable) GCMotionValueChangedHandler valueChangedHandler;
 
 /**
+ If this property is returns YES, you are responsible for setting sensorsActive to YES when you need motion data from the controller.
+ 
+ Some controllers, such as the Siri Remote, automatically activate and deactivate motion sensors. In such a case, this property
+ will return NO.
+ 
+ @see sensorsActive
+ */
+@property (nonatomic, readonly) BOOL sensorsRequireManualActivation API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+
+/**
+ Set this property to YES when you wish to receive motion data from the controller. When you set this property to NO, the motion sensors
+ will be disabled and the GCMotion profile will not be updated.
+ 
+ @note It is highly recommended that you only enable sensor during the period of time you directly need motion data. Motion sensors
+ can drain controller battery, device battery, and needlessly consume Bluetooth bandwidth.
+ 
+ @see sensorsRequireManualActivation
+*/
+@property (nonatomic) BOOL sensorsActive API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+
+/**
+ Returns YES if the controller is capable of reporting gravity and user acceleration separately.
+ 
+ @note Some controllers do not separate gravity from user acceleration, and only report the total acceleration of the controller.
+ Query whether the connected controller has the ability to separate gravity and user acceleration, and it doesn’t, use acceleration instead.
+ 
+ @see acceleration
+*/
+@property (nonatomic, readonly) BOOL hasGravityAndUserAcceleration API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+
+/**
  The gravity vector expressed in the controller's reference frame.
  
  Note that the total acceleration of the controller is equal to gravity plus userAcceleration.
  
  @see userAcceleration
+ @see acceleration
  */
-@property (nonatomic, assign, readonly) GCAcceleration gravity;
+@property (nonatomic, readonly) GCAcceleration gravity;
 
 /**
  The acceleration that the user is giving to the controller.
  
  Note that the total acceleration of the controller is equal to gravity plus userAcceleration.
  
+ @see gravity
+ @see acceleration
+ */
+@property (nonatomic, readonly) GCAcceleration userAcceleration;
+
+/**
+ The total acceleration of the controller.
+
+ @see gravity
  @see userAcceleration
  */
-@property (nonatomic, assign, readonly) GCAcceleration userAcceleration;
+@property (nonatomic, readonly) GCAcceleration acceleration API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
 /**
  The controller generating the motion data has sensors that can accurately determine the current attitude and rotation rate. If this is enabled the motion data for attitude and rotation rate are usable for inputs.
  */
-@property (nonatomic, assign, readonly) BOOL hasAttitudeAndRotationRate API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
+@property (nonatomic, readonly) BOOL hasAttitudeAndRotationRate API_DEPRECATED("hasAttitudeAndRotationRate has been deprecated, use -hasAttitude and -hasRotationRate instead", macos(10.13, 11.0), ios(11.0, 14.0), tvos(11.0, 14.0));
+
+/**
+ The controller generating the motion data has sensors that can accurately determine the current attitude. If this is enabled the motion data for attitude is usable for inputs.
+ */
+@property (nonatomic, readonly) BOOL hasAttitude API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+
+/**
+ The controller generating the motion data has sensors that can accurately determine the current rotation rate. If this is enabled the motion data for rotation rate is usable for inputs.
+ */
+@property (nonatomic, readonly) BOOL hasRotationRate API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
 /**
  The current attitude of the controller.
  
  @note Remotes without accurate attitude and rotation rate can not determine a stable attitude so the values will be (0,0,0,1) at all times.
- @see hasAttitudeAndRotationRate
+ @see hasAttitude
  @see GCMicroGamepad
  */
-@property (nonatomic, assign, readonly) GCQuaternion attitude API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
+@property (nonatomic, readonly) GCQuaternion attitude API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
 /**
  The current rotation rate of the controller.
  
  @note Remotes without accurate attitude and rotation rate can not determine a stable rotation rate so the values will be (0,0,0) at all times.
- @see hasAttitudeAndRotationRate
+ @see hasRotationRate
  @see GCMicroGamepad
  */
-@property (nonatomic, assign, readonly) GCRotationRate rotationRate API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
+@property (nonatomic, readonly) GCRotationRate rotationRate API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
 /**
  Sets the gravity vector expressed in the controller's reference frame.
@@ -170,6 +221,14 @@ typedef void (^GCMotionValueChangedHandler)(GCMotion *motion);
  @see userAcceleration
  */
 - (void)setUserAcceleration:(GCAcceleration)userAcceleration API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0));
+
+/**
+ Sets the acceleration that the user is giving to the controller.
+ 
+ @note If the controller's snapshot flag is set to NO, this method has no effect.
+ @see userAcceleration
+ */
+- (void)setAcceleration:(GCAcceleration)acceleration API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
 /**
  Sets the current rotation rate of the controller.
@@ -193,7 +252,7 @@ typedef void (^GCMotionValueChangedHandler)(GCMotion *motion);
  @note If the controller's snapshot flag is set to NO, this method has no effect.
  @see GCController.snapshot
  */
-- (void) setStateFromMotion:(GCMotion *)motion API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0));
+- (void)setStateFromMotion:(GCMotion *)motion API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0));
 
 @end
 

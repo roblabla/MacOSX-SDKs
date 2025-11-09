@@ -1,11 +1,25 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 231EE72E-60B6-3E92-B47E-C449B7EAA1A0', 'x86_64: 231EE72E-60B6-3E92-B47E-C449B7EAA1A0' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           A437390E-5C41-33FD-9947-D3662FFF6BA1
+  - target:          x86_64-maccatalyst
+    value:           A437390E-5C41-33FD-9947-D3662FFF6BA1
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           77B8B04F-9323-3DED-A595-9234E150DA13
+  - target:          arm64e-maccatalyst
+    value:           77B8B04F-9323-3DED-A595-9234E150DA13
 install-name:    '/System/Library/PrivateFrameworks/CalendarPersistence.framework/Versions/A/CalendarPersistence'
-current-version: 1031
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 1071
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CALAbbrevDateFormat, _CALAbbrevDateWithoutYearFormat, _CALAbbrevDayOfWeekFormat, 
                        _CALAbbrevDayOfWeekWithAbbrevDateFormat, _CALAbbrevDayOfWeekWithDayOfMonthFormat, 
                        _CALAbbrevDayOfWeekWithFullDateFormat, _CALAbbrevDayOfWeekWithFullDateWithoutYearFormat, 
@@ -197,16 +211,17 @@ exports:
                        _CalSubscriptionErrorDomain, _CalSubscriptionInfoAlarmFilterKey, 
                        _CalSubscriptionInfoAttachmentFilterKey, _CalSubscriptionInfoAutoProvisionedKey, 
                        _CalSubscriptionInfoAutoRefreshKey, _CalSubscriptionInfoIDKey, 
-                       _CalSubscriptionInfoLanguageCodeKey, _CalSubscriptionInfoLocationCodeKey, 
-                       _CalSubscriptionInfoNeedsRefreshKey, _CalSubscriptionInfoNotesKey, 
-                       _CalSubscriptionInfoRefreshDateKey, _CalSubscriptionInfoRefreshIntervalKey, 
-                       _CalSubscriptionInfoTaskFilterKey, _CalSubscriptionInfoTitleKey, 
-                       _CalSubscriptionInfoURLKey, _CalSubscriptionProtectionSpaceAuthenticationMethodKey, 
-                       _CalSubscriptionProtectionSpaceKey, _CalSubscriptionRefreshCompleteNotification, 
-                       _CalTasksChangedExternallyNotification, _CalTasksChangedNotification, 
-                       _CalUpdatedEventOccurrencesKey, _CalUpdatedItemsKey, _CalUpdatedRecordsKey, 
-                       _CalUpgradedEtags, _CalUserUIDKey, _CalendarCreateKeychainAccessGroup, 
-                       _CaliMIPSessionID, _DateForICSDateTimeUTCValue, _EKAutoCommentPrefix, 
+                       _CalSubscriptionInfoInsecureConnectionsAllowedKey, _CalSubscriptionInfoLanguageCodeKey, 
+                       _CalSubscriptionInfoLocationCodeKey, _CalSubscriptionInfoNeedsRefreshKey, 
+                       _CalSubscriptionInfoNotesKey, _CalSubscriptionInfoRefreshDateKey, 
+                       _CalSubscriptionInfoRefreshIntervalKey, _CalSubscriptionInfoTaskFilterKey, 
+                       _CalSubscriptionInfoTitleKey, _CalSubscriptionInfoURLKey, 
+                       _CalSubscriptionProtectionSpaceAuthenticationMethodKey, _CalSubscriptionProtectionSpaceKey, 
+                       _CalSubscriptionRefreshCompleteNotification, _CalTasksChangedExternallyNotification, 
+                       _CalTasksChangedNotification, _CalUpdatedEventOccurrencesKey, 
+                       _CalUpdatedItemsKey, _CalUpdatedRecordsKey, _CalUpgradedEtags, 
+                       _CalUserUIDKey, _CalendarCreateKeychainAccessGroup, _CaliMIPSessionID, 
+                       _ChangesMayAffectWidgetKey, _DateForICSDateTimeUTCValue, _EKAutoCommentPrefix, 
                        _EKProtocolCalendarSharedFromMe, _EKProtocolCalendarSharedToMe, 
                        _EKProtocolCalendarSharingNotSet, _EKProtocolShareeAccessLevelRead, 
                        _EKProtocolShareeAccessLevelReadWrite, _EKProtocolShareeAccessLevelReadWriteSchedule, 
@@ -293,13 +308,16 @@ exports:
                        _kCALSTR_url_prop, _kCALSTR_valuetype_param, _kCALSTR_version_prop, 
                        _kCALSTR_weekstart_param, _kCALSTR_x_prop, _kCalMDItemCompleted, 
                        _kCalMDItemCompletionDate, _kCalMDItemFullDay, _kCalMDItemRecurrenceID, 
-                       _kCalMDItemUID, _kICSSTR_alternate_time_proposal_param, _organizerFor, 
-                       _popFromArray, _popNFromArray, _principalPathKey, _recurrenceFor, 
-                       _setIsMainApp, _setViewsTimeZone, _shortCDIdentifier, _shortenCDIdentifier, 
-                       _stringForCommitStatus, _stringForRefreshType, _tempAttachmentName, 
-                       _utcTimeZone, _vcal_property_compare, _vcal_property_list, 
-                       _vcal_property_list_num, _vcal_token_compare, _vcal_tokens_list, 
-                       _vcal_tokens_list_num, _viewsTimeZone, _whitespaceAndNewlineCharacterSet ]
+                       _kCalMDItemUID, _kCalUserAlarmNotificationActionIdentifierConference, 
+                       _kCalUserAlarmNotificationActionIdentifierDirections, _kCalUserAlarmNotificationActionIdentifierMailOrganizer, 
+                       _kCalUserAlarmNotificationActionIdentifierSnooze, _kICSSTR_alternate_time_proposal_param, 
+                       _organizerFor, _popFromArray, _popNFromArray, _principalPathKey, 
+                       _recurrenceFor, _setIsMainApp, _setViewsTimeZone, _shortCDIdentifier, 
+                       _shortenCDIdentifier, _stringForCommitStatus, _stringForRefreshType, 
+                       _tempAttachmentName, _utcTimeZone, _vcal_property_compare, 
+                       _vcal_property_list, _vcal_property_list_num, _vcal_token_compare, 
+                       _vcal_tokens_list, _vcal_tokens_list_num, _viewsTimeZone, 
+                       _whitespaceAndNewlineCharacterSet ]
     objc-classes:    [ AlarmIdChangeTracker, AttendeeIdChangeTracker, CALAbstractEntity, 
                        CALAddress, CALApplePropertiesFilter, CALAttachment, CALBridgevCal, 
                        CALBusyTimeOccurrence, CALCancelFilter, CALChainedFilter, 
@@ -424,9 +442,9 @@ exports:
                        CalTruthFileRemove, CalTruthFileStore, CalUnrecognizedICSHelper, 
                        CalUserAlarmNotification, CalUserNotificationCenter, CalUserNotificationCenterCache, 
                        CalUserNotificationCenterHelper, CalUserNotificationCenterListener, 
-                       CalValidationError, CalVirtualSource, CalendarIdChangeTracker, 
-                       CalendarItemMigratePlan, CalendarModelProtocol_Shared, CalendarStore, 
-                       CaliMIPCancelOperation, CaliMIPOperation, CaliMIPPersistDetailsOperation, 
+                       CalValidationError, CalVirtualSource, CalWidgetUpdateMonitor, 
+                       CalendarIdChangeTracker, CalendarItemMigratePlan, CalendarModelProtocol_Shared, 
+                       CalendarStore, CaliMIPCancelOperation, CaliMIPOperation, CaliMIPPersistDetailsOperation, 
                        CaliMIPReplyOperation, CaliMIPRequestOperation, CaliMIPSession, 
                        CaliTIPHandler, CaliTIPMessage, CoreAlarm, CoreAlarmOccurrence, 
                        CoreAlarmOccurrenceTrigger, CoreAlarmTrigger, CoreAlarmsFilters, 

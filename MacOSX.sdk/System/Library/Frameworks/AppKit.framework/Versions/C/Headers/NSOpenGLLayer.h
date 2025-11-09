@@ -7,11 +7,11 @@
 
 #import <AppKit/NSView.h>
 #import <AppKit/NSOpenGL.h>
+#import <AppKit/AppKitDefines.h>
 #import <QuartzCore/CAOpenGLLayer.h>
 
-
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 NS_OPENGL_CLASS_DEPRECATED("Please use CAMetalLayer instead.", 10.6, 10.14)
 @interface NSOpenGLLayer : CAOpenGLLayer

@@ -243,7 +243,7 @@ struct vfsstatfs {
 #define MNT_VISFLAGMASK (MNT_RDONLY	| MNT_SYNCHRONOUS | MNT_NOEXEC	| \
 	                MNT_NOSUID	| MNT_NODEV	| MNT_UNION	| \
 	                MNT_ASYNC	| MNT_EXPORTED	| MNT_QUARANTINE | \
-	                MNT_LOCAL	| MNT_QUOTA | \
+	                MNT_LOCAL	| MNT_QUOTA | MNT_REMOVABLE | \
 	                MNT_ROOTFS	| MNT_DOVOLFS	| MNT_DONTBROWSE | \
 	                MNT_IGNORE_OWNERSHIP | MNT_AUTOMOUNTED | MNT_JOURNALED | \
 	                MNT_NOUSERXATTR | MNT_DEFWRITE	| MNT_MULTILABEL | \
@@ -324,7 +324,7 @@ struct vfsidctl {
  * New style VFS sysctls, do not reuse/conflict with the namespace for
  * private sysctls.
  */
-#define VFS_CTL_STATFS  0x00010001      /* statfs */
+#define VFS_CTL_OSTATFS 0x00010001      /* old legacy statfs */
 #define VFS_CTL_UMOUNT  0x00010002      /* unmount */
 #define VFS_CTL_QUERY   0x00010003      /* anything wrong? (vfsquery) */
 #define VFS_CTL_NEWADDR 0x00010004      /* reconnect to new address */
@@ -334,6 +334,17 @@ struct vfsidctl {
 #define VFS_CTL_DISC    0x00010008      /* server disconnected */
 #define VFS_CTL_SERVERINFO  0x00010009  /* information about fs server */
 #define VFS_CTL_NSTATUS 0x0001000A      /* netfs mount status */
+#define VFS_CTL_STATFS64 0x0001000B     /* statfs64 */
+
+/*
+ * Automatically select the correct VFS_CTL_*STATFS* flavor based
+ * on what "struct statfs" layout the client will use.
+ */
+#if __DARWIN_64_BIT_INO_T
+#define VFS_CTL_STATFS  VFS_CTL_STATFS64
+#else
+#define VFS_CTL_STATFS  VFS_CTL_OSTATFS
+#endif
 
 struct vfsquery {
 	u_int32_t       vq_flags;

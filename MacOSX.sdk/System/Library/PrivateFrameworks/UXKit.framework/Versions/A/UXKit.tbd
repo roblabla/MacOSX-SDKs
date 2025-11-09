@@ -1,13 +1,21 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 53373D01-4FF6-338C-A8E9-1BEAC20E44E1' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           B6F67701-1243-3A40-9FD1-3F74E1761376
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           8749D31F-1519-34CE-8B66-D7E5C49FA344
 install-name:    '/System/Library/PrivateFrameworks/UXKit.framework/Versions/A/UXKit'
-current-version: 101.13.100
-exports:         
-  - archs:           [ x86_64 ]
-    allowable-clients: [ AssetsLibraryServices, DCIMServices, Mondrian, PhotoPrintProduct, 
-                         Photos, PhotosUI, PhotosUICore, PlacesKit ]
+current-version: 311.0.120
+allowable-clients:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    clients:         [ AssetsLibraryServices, DCIMServices, Mondrian, PhotoPrintProduct, 
+                       Photos, PhotosUI, PhotosUIApps, PhotosUICore, PlacesKit ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _NSStringFromUXCollectionViewLayoutDropPosition, _UXCollectionElementKindCell, 
                        _UXCollectionElementKindSectionFooter, _UXCollectionElementKindSectionHeader, 
                        _UXCollectionViewDraggingPasteboardItemType, _UXCollectionViewDraggingPasteboardOptionWasPressed, 
@@ -55,11 +63,12 @@ exports:
                        _UXFlowLayoutItem, _UXFlowLayoutRow, _UXFlowLayoutSection, 
                        _UXLayoutSpacer, _UXNavigationDestination, _UXNavigationItemContainerView, 
                        _UXNavigationRequest, _UXResizableImage, _UXSettings, _UXSettingsGroup, 
-                       _UXSinglePixelLine, _UXSourceSplitView, _UXSourceSplitViewFullScreenOverlayContentView, 
-                       _UXSourceSplitViewFullScreenOverlayWindow, _UXSourceSplitViewShadowView, 
-                       _UXSourceSplitViewSpringLoadingView, _UXTableHeaderView, _UXToolbarItemsContainer, 
-                       _UXViewControllerOneToOneTransitionContext, _UXViewControllerTransitionContext, 
-                       _UXViewControllerTransitionCoordinator, _UXWindow, _UXWindowState ]
+                       _UXSinglePixelLine, _UXSourceSplitItemView, _UXSourceSplitView, 
+                       _UXSourceSplitViewFullScreenOverlayContentView, _UXSourceSplitViewFullScreenOverlayWindow, 
+                       _UXSourceSplitViewShadowView, _UXSourceSplitViewSpringLoadingView, 
+                       _UXTableHeaderView, _UXToolbarItemsContainer, _UXViewControllerOneToOneTransitionContext, 
+                       _UXViewControllerTransitionContext, _UXViewControllerTransitionCoordinator, 
+                       _UXWindow, _UXWindowState ]
     objc-ivars:      [ UXCollectionViewAnimation._animationBlock, UXCollectionViewAnimation._collectionViewAnimationFlags, 
                        UXCollectionViewAnimation._completionHandlers, UXCollectionViewAnimation._endFraction, 
                        UXCollectionViewAnimation._finalLayoutAttributes, UXCollectionViewAnimation._startFraction, 

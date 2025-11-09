@@ -147,7 +147,7 @@ API_AVAILABLE(ios(13.0))
 APPKIT_EXTERN NSNotificationName NSToolbarWillAddItemNotification API_AVAILABLE(ios(13.0));
 APPKIT_EXTERN NSNotificationName NSToolbarDidRemoveItemNotification API_AVAILABLE(ios(13.0));
 
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @interface NSToolbar(NSDeprecated)
 

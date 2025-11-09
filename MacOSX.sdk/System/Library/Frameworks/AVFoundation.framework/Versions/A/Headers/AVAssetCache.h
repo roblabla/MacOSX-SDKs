@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVAssetCache.h>)
 /*
 	File:  AVAssetCache.h
  
@@ -49,3 +50,7 @@ AV_INIT_UNAVAILABLE
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCore/AVAssetCache.h>
+#endif

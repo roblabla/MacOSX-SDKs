@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 480C0EC9-9F2B-379F-B3DB-0C213BC912D8' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           E4D15432-B381-369E-A8FA-B08E55AEEA42
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           84F19F4D-FB37-30BE-9D97-4C647B7A20FF
 install-name:    '/System/Library/PrivateFrameworks/StoreJavaScript.framework/Versions/A/StoreJavaScript'
 current-version: 379
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _FRBundleDispatchEventMessage, _FRBundleDispatchEventName, 
                        _FRBundleDispatchEventObject, _FRBundleDispatchGlobalEventMessage, 
                        _FRBundleDispatchGlobalEventName, _FRBundleDispatchGlobalEventObject, 

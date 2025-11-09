@@ -23,9 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
 typedef NS_ENUM(NSUInteger, NFCNDEFStatus) {
-    NFCNDEFStatusNotSupported   = 1,
-    NFCNDEFStatusReadWrite      = 2,
-    NFCNDEFStatusReadOnly       = 3,
+    NFCNDEFStatusNotSupported API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)  = 1,
+    NFCNDEFStatusReadWrite API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)     = 2,
+    NFCNDEFStatusReadOnly API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)      = 3,
 };
 
 /*!
@@ -45,7 +45,7 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *
  * @discussion  Check whether a detected NDEF tag is available.
  */
-@property (nonatomic, getter=isAvailable, readonly) BOOL available;
+@property (nonatomic, getter=isAvailable, readonly) BOOL available API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
  * @method queryNDEFStatusWithCompletionHandler:

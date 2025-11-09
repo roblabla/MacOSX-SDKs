@@ -24,10 +24,12 @@ extern NSErrorDomain const NFCErrorDomain;
  * @constant    NFCReaderErrorInvalidParameter                                  Input parameter is invalid.
  * @constant    NFCReaderErrorInvalidParameterLength                            Length of input parameter is invalid, i.e. size of data container.
  * @constant    NFCReaderErrorParameterOutOfBound                               Parameter value is outside of the acceptable boundary / range.
+ * @constant    NFCReaderErrorRadioDisabled                                     NFC Radio is disabled.
  * @constant    NFCReaderTransceiveErrorTagConnectionLost                       Connection to the tag is lost.
  * @constant    NFCReaderTransceiveErrorRetryExceeded                           Maximum data transmission retry has reached.
  * @constant    NFCReaderTransceiveErrorTagResponseError                        Tag response is invalid.  Additional error information may be contain in the underlying user info dictionary.
  * @constant    NFCReaderTransceiveErrorSessionInvalidated                      Session has been previously invalidated.
+ * @constant    NFCReaderTransceiveErrorPacketTooLong                           Packet length has exceeded the limit.
  * @constant    NFCReaderTransceiveErrorTagNotConnected                         Tag is not in the connected state.
  * @constant    NFCReaderSessionInvalidationErrorUserCanceled                   Session is invalidated by the user.
  * @constant    NFCReaderSessionInvalidationErrorSessionTimeout                 Session is timed out.
@@ -42,27 +44,29 @@ extern NSErrorDomain const NFCErrorDomain;
  */
 API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
 typedef NS_ERROR_ENUM(NFCErrorDomain, NFCReaderError) {
-    NFCReaderErrorUnsupportedFeature = 1,
-    NFCReaderErrorSecurityViolation,
+    NFCReaderErrorUnsupportedFeature API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)                             = 1,
+    NFCReaderErrorSecurityViolation API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos),
     NFCReaderErrorInvalidParameter API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos),
     NFCReaderErrorInvalidParameterLength API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos),
     NFCReaderErrorParameterOutOfBound API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos),
+    NFCReaderErrorRadioDisabled API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos),
 
-    NFCReaderTransceiveErrorTagConnectionLost = 100,
-    NFCReaderTransceiveErrorRetryExceeded,
-    NFCReaderTransceiveErrorTagResponseError,
+    NFCReaderTransceiveErrorTagConnectionLost API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)                    = 100,
+    NFCReaderTransceiveErrorRetryExceeded API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos),
+    NFCReaderTransceiveErrorTagResponseError API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos),
     NFCReaderTransceiveErrorSessionInvalidated API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos),
     NFCReaderTransceiveErrorTagNotConnected API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos),
+    NFCReaderTransceiveErrorPacketTooLong API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos),
 
-    NFCReaderSessionInvalidationErrorUserCanceled = 200,
-    NFCReaderSessionInvalidationErrorSessionTimeout,
-    NFCReaderSessionInvalidationErrorSessionTerminatedUnexpectedly,
-    NFCReaderSessionInvalidationErrorSystemIsBusy,
-    NFCReaderSessionInvalidationErrorFirstNDEFTagRead,
+    NFCReaderSessionInvalidationErrorUserCanceled API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)                = 200,
+    NFCReaderSessionInvalidationErrorSessionTimeout API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos),
+    NFCReaderSessionInvalidationErrorSessionTerminatedUnexpectedly API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos),
+    NFCReaderSessionInvalidationErrorSystemIsBusy API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos),
+    NFCReaderSessionInvalidationErrorFirstNDEFTagRead API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos),
 
-    NFCTagCommandConfigurationErrorInvalidParameters = 300,
+    NFCTagCommandConfigurationErrorInvalidParameters API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)             = 300,
 
-    NFCNdefReaderSessionErrorTagNotWritable API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos) = 400 ,
+    NFCNdefReaderSessionErrorTagNotWritable API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)                      = 400 ,
     NFCNdefReaderSessionErrorTagUpdateFailure API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos),
     NFCNdefReaderSessionErrorTagSizeTooSmall API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos),
     NFCNdefReaderSessionErrorZeroLengthMessage API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos),

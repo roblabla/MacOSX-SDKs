@@ -30,6 +30,10 @@
 
 #if defined(__x86_64__)
 #include <x86_64/monotonic.h>
+#elif defined(__arm64__)
+#include <arm64/monotonic.h>
+#elif defined(__arm__)
+#include <arm/monotonic.h>
 #else
 #error unsupported architecture
 #endif

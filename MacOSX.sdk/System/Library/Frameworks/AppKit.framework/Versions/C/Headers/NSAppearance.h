@@ -10,7 +10,7 @@
 #import <Foundation/NSArray.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSString, NSBundle;
 
@@ -21,8 +21,19 @@ API_AVAILABLE(macos(10.9))
 
 @property (readonly, copy) NSAppearanceName name API_AVAILABLE(macos(10.9));
 
-// Setting and identifying the current appearance in the thread.
-@property (class, null_resettable, strong) NSAppearance *currentAppearance; // setting to nil indicates the default appearance
+// Sets the current thread's appearance, which is used for drawing, resolving colors/images, and laying out views.
+// Automatically set by NSView before that view's drawRect:, updateLayer, and layout methods are invoked.
+// At other times its return value is unreliable (depending on if the previous caller restored it to a previous value after setting it).
+// This is not the correct way to determine the 'system' appearance. Use a view's, window's, or the app's effectiveAppearance.
+@property (class, null_resettable, strong) NSAppearance *currentAppearance API_DEPRECATED("Use -performAsCurrentDrawingAppearance: to temporarily set the drawing appearance, or +currentDrawingAppearance to access the currently drawing appearance.", macos(10.9, API_TO_BE_DEPRECATED));
+
+// The appearance which has been made active for drawing (usually by locking focus on a view)
+// and is used for color and asset resolution.
+@property (class, readonly, strong) NSAppearance *currentDrawingAppearance API_AVAILABLE(macos(11.0));
+
+// Make the receiver the active drawing appearance and perform the block.
+// Saves and restores the previous current appearance.
+- (void)performAsCurrentDrawingAppearance:(void (NS_NOESCAPE ^)(void))block API_AVAILABLE(macos(11.0));
 
 /* Finds and returns an NSAppearance based on the name. 
  For standard appearances such as NSAppearanceNameAqua, a built-in appearance is returned.

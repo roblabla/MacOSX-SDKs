@@ -46,7 +46,7 @@ typedef uint16_t CLBeaconMinorValue;
  *
  */
 CL_EXTERN
-API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos, macos)
+API_AVAILABLE(ios(13.0), macos(10.15)) API_UNAVAILABLE(watchos, tvos)
 @interface CLBeaconIdentityConstraint : NSObject <NSCopying, NSSecureCoding>
 
 /*

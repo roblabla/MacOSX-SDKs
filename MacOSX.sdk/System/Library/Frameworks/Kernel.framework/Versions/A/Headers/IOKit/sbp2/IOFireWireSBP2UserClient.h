@@ -64,16 +64,16 @@ protected:
 										IOExternalMethodArguments * args,
 										IOExternalMethodDispatch * dispatch, 
 										OSObject * target, 
-										void * reference );
+										void * reference ) APPLE_KEXT_OVERRIDE;
 public:
 
-	virtual bool initWithTask( task_t owningTask, void * securityToken, UInt32 type, OSDictionary * properties );
-	virtual void free ();
+	virtual bool initWithTask( task_t owningTask, void * securityToken, UInt32 type, OSDictionary * properties ) APPLE_KEXT_OVERRIDE;
+	virtual void free () APPLE_KEXT_OVERRIDE;
 				
-    virtual bool start( IOService * provider );
+    virtual bool start( IOService * provider ) APPLE_KEXT_OVERRIDE;
 
-    virtual IOReturn clientClose( void );
-    virtual IOReturn clientDied( void );
+    virtual IOReturn clientClose( void ) APPLE_KEXT_OVERRIDE;
+    virtual IOReturn clientDied( void ) APPLE_KEXT_OVERRIDE;
 
 	// IOFireWireSBP2ManagementORB friend class wrappers
 	virtual void flushAllManagementORBs( void );
@@ -88,7 +88,7 @@ public:
 
     // callbacks
 	IOReturn setMessageCallback( IOExternalMethodArguments * arguments );
-    virtual IOReturn message( UInt32 type, IOService * provider, void * arg );
+    virtual IOReturn message( UInt32 type, IOService * provider, void * arg ) APPLE_KEXT_OVERRIDE;
 
     /////////////////////////////////////////////////
     // IOFireWireSBP2Login

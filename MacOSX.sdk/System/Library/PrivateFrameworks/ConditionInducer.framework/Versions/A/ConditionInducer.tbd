@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 25F9B078-226D-3B5B-B905-3FB340CDD485' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           A14D2FB4-0E4C-39BF-9E2C-B71BFB5071B6
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           45667429-B52B-3113-985A-091CDCF6A3AB
 install-name:    '/System/Library/PrivateFrameworks/ConditionInducer.framework/Versions/A/ConditionInducer'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CODefaultSettingsPath, _ConditionInducerVersionNumber, _ConditionInducerVersionString, 
                        __copySignpostLowSeverityLogHandle, __dummySlowNetwork, _copyPOSIXSpawnAttributes, 
                        _copy_calling_process_name, _createConditionInducerError, 

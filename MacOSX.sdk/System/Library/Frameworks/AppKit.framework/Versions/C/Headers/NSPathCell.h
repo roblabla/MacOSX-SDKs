@@ -10,9 +10,10 @@
 #import <AppKit/NSActionCell.h>
 #import <AppKit/NSSavePanel.h>
 #import <AppKit/NSMenu.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSString, NSImage, NSAnimation, NSPathComponentCell, NSURL, NSPopUpButtonCell, NSNotification, NSOpenPanel;
 @protocol NSPathCellDelegate;

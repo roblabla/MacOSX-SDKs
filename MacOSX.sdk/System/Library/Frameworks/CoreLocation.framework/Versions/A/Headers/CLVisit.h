@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    during which the device was at the specified coordinate.
  */
 CL_EXTERN
-API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(watchos, tvos, macos)
+API_AVAILABLE(ios(8.0), macos(10.15)) API_UNAVAILABLE(watchos, tvos)
 @interface CLVisit : NSObject <NSSecureCoding, NSCopying>
 
 /*

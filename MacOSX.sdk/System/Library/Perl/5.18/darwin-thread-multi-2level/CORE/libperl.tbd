@@ -1,12 +1,18 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: D4504C90-9284-30F2-84F9-3EA8AB0F170B' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           71CA9590-CAB6-3785-A1E8-664A0F5ED4A7
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           3BC643A8-B340-3D03-893F-A1BAF62E158B
 install-name:    '/System/Library/Perl/5.18/darwin-thread-multi-2level/CORE/libperl.dylib'
 current-version: 5.18.4
 compatibility-version: 5.18
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _PL_No, _PL_Yes, _PL_bincompat_options, _PL_bitcount, _PL_block_type, 
                        _PL_charclass, _PL_check, _PL_check_mutex, _PL_core_reg_engine, 
                        _PL_cshname, _PL_csighandlerp, _PL_curinterp, _PL_do_undump, 

@@ -133,7 +133,7 @@
 .\" ========================================================================
 .\"
 .IX Title "autobox 3"
-.TH autobox 3 "2013-10-25" "perl v5.18.2" "User Contributed Perl Documentation"
+.TH autobox 3 "2018-04-20" "perl v5.18.4" "User Contributed Perl Documentation"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -182,10 +182,10 @@ autobox \- call methods on native types
 .Ve
 .SH "DESCRIPTION"
 .IX Header "DESCRIPTION"
-The autobox pragma allows methods to be called on integers, floats, strings, arrays,
+The \f(CW\*(C`autobox\*(C'\fR pragma allows methods to be called on integers, floats, strings, arrays,
 hashes, and code references in exactly the same manner as blessed references.
 .PP
-The autoboxing is transparent: boxed values are not blessed into their (user-defined)
+Autoboxing is transparent: values are not blessed into their (user-defined)
 implementation class (unless the method elects to bestow such a blessing) \- they simply
 use its methods as though they are.
 .PP
@@ -370,12 +370,13 @@ Thus:
 .PP
 \&\- is equivalent to:
 .PP
-.Vb 5
-\&    use autobox
+.Vb 6
+\&    use autobox {
 \&        SCALAR => \*(AqSCALAR\*(Aq,
 \&        ARRAY  => \*(AqARRAY\*(Aq,
 \&        HASH   => \*(AqHASH\*(Aq,
-\&        CODE   => \*(AqCODE\*(Aq;
+\&        CODE   => \*(AqCODE\*(Aq,
+\&    }
 .Ve
 .PP
 This facilitates one-liners and prototypes:
@@ -412,7 +413,7 @@ The following example shows the range of valid arguments:
 \&        UNIVERSAL => ...,                           # any of the 3 value types above
 \&        DEFAULT   => ...,                           # any of the 3 value types above
 \&        DEBUG     => ...                            # boolean or coderef
-\&    };
+\&    }
 .Ve
 .PP
 The \s-1INTEGER, FLOAT, NUMBER, STRING, SCALAR, ARRAY, HASH, CODE, UNDEF, DEFAULT\s0 and \s-1UNIVERSAL\s0 options can take
@@ -425,7 +426,7 @@ A class name e.g.
 .Ve
 .Sp
 This binds the specified native type to the specified class. All methods invoked on
-literals or values of type \f(CW\*(C`key\*(C'\fR will be dispatched as methods of the class specified in
+values of type \f(CW\*(C`key\*(C'\fR will be dispatched as methods of the class specified in
 the corresponding \f(CW\*(C`value\*(C'\fR.
 .IP "\(bu" 4
 A namespace: this is a class prefix (up to and including the final '::')
@@ -454,33 +455,36 @@ more class names and/or namespaces.
 .PP
 Thus:
 .PP
-.Vb 3
-\&    use autobox
+.Vb 4
+\&    use autobox {
 \&        STRING  => \*(AqMyString\*(Aq,
-\&        DEFAULT => \*(AqMyDefault\*(Aq;
+\&        DEFAULT => \*(AqMyDefault\*(Aq,
+\&    }
 .Ve
 .PP
 is equivalent to:
 .PP
-.Vb 6
-\&    use autobox
+.Vb 7
+\&    use autobox {
 \&        STRING  => \*(AqMyString\*(Aq,
 \&        SCALAR  => \*(AqMyDefault\*(Aq,
 \&        ARRAY   => \*(AqMyDefault\*(Aq,
 \&        HASH    => \*(AqMyDefault\*(Aq,
-\&        CODE    => \*(AqMyDefault\*(Aq;
+\&        CODE    => \*(AqMyDefault\*(Aq,
+\&    }
 .Ve
 .PP
 Which in turn is equivalent to:
 .PP
-.Vb 7
-\&    use autobox
+.Vb 8
+\&    use autobox {
 \&        INTEGER => \*(AqMyDefault\*(Aq,
 \&        FLOAT   => \*(AqMyDefault\*(Aq,
 \&        STRING  => [ \*(AqMyString\*(Aq, \*(AqMyDefault\*(Aq ],
 \&        ARRAY   => \*(AqMyDefault\*(Aq,
 \&        HASH    => \*(AqMyDefault\*(Aq,
-\&        CODE    => \*(AqMyDefault\*(Aq;
+\&        CODE    => \*(AqMyDefault\*(Aq,
+\&    }
 .Ve
 .PP
 Namespaces in \s-1DEFAULT\s0 values have the default type name appended, which, in the case of defaulted \s-1SCALAR\s0 types,
@@ -488,32 +492,35 @@ is \s-1SCALAR\s0 rather than \s-1INTEGER, FLOAT\s0 &c.
 .PP
 Thus:
 .PP
-.Vb 5
-\&    use autobox
+.Vb 6
+\&    use autobox {
 \&        ARRAY   => \*(AqMyArray\*(Aq,
 \&        HASH    => \*(AqMyHash\*(Aq,
 \&        CODE    => \*(AqMyCode\*(Aq,
-\&        DEFAULT => \*(AqMyNamespace::\*(Aq;
+\&        DEFAULT => \*(AqMyNamespace::\*(Aq,
+\&    }
 .Ve
 .PP
 is equivalent to:
 .PP
-.Vb 7
-\&    use autobox
+.Vb 8
+\&    use autobox {
 \&        INTEGER => \*(AqMyNamespace::SCALAR\*(Aq,
 \&        FLOAT   => \*(AqMyNamespace::SCALAR\*(Aq,
 \&        STRING  => \*(AqMyNamespace::SCALAR\*(Aq,
 \&        ARRAY   => \*(AqMyArray\*(Aq,
 \&        HASH    => \*(AqMyArray\*(Aq,
-\&        CODE    => \*(AqMyCode\*(Aq;
+\&        CODE    => \*(AqMyCode\*(Aq,
+\&    }
 .Ve
 .PP
 Any of the four default types can be exempted from defaulting to the \s-1DEFAULT\s0 value by supplying a value of undef:
 .PP
-.Vb 3
-\&    use autobox
+.Vb 4
+\&    use autobox {
 \&        HASH    => undef,
-\&        DEFAULT => \*(AqMyDefault\*(Aq;
+\&        DEFAULT => \*(AqMyDefault\*(Aq,
+\&    }
 \&
 \&    42\->foo # ok: MyDefault::foo
 \&    []\->bar # ok: MyDefault::bar
@@ -580,10 +587,11 @@ Thus:
 .PP
 is equivalent to:
 .PP
-.Vb 3
-\&    use autobox
+.Vb 4
+\&    use autobox {
 \&        INTEGER => \*(AqMyNumber\*(Aq,
-\&        FLOAT   => \*(AqMyNumber\*(Aq;
+\&        FLOAT   => \*(AqMyNumber\*(Aq,
+\&    }
 .Ve
 .PP
 And:
@@ -594,11 +602,12 @@ And:
 .PP
 is equivalent to:
 .PP
-.Vb 4
-\&    use autobox
+.Vb 5
+\&    use autobox {
 \&        INTEGER => \*(AqMyScalar\*(Aq,
 \&        FLOAT   => \*(AqMyScalar\*(Aq,
-\&        STRING  => \*(AqMyScalar\*(Aq;
+\&        STRING  => \*(AqMyScalar\*(Aq,
+\&    }
 .Ve
 .PP
 Virtual types can also be passed to \f(CW\*(C`unimport\*(C'\fR via the \f(CW\*(C`no autobox\*(C'\fR syntax. This disables autoboxing
@@ -617,11 +626,12 @@ is equivalent to:
 Virtual type bindings can be mixed with ordinary bindings to provide fine-grained control over
 inheritance and delegation. For instance:
 .PP
-.Vb 4
-\&    use autobox
+.Vb 5
+\&    use autobox {
 \&        INTEGER => \*(AqMyInteger\*(Aq,
 \&        NUMBER  => \*(AqMyNumber\*(Aq,
-\&        SCALAR  => \*(AqMyScalar\*(Aq;
+\&        SCALAR  => \*(AqMyScalar\*(Aq,
+\&    }
 .Ve
 .PP
 would result in the following bindings:
@@ -634,18 +644,20 @@ would result in the following bindings:
 .PP
 Note that \s-1DEFAULT\s0 bindings take precedence over virtual type bindings i.e.
 .PP
-.Vb 3
-\&    use autobox
+.Vb 4
+\&    use autobox {
 \&        UNIVERSAL => \*(AqMyUniversal\*(Aq,
-\&        DEFAULT   => \*(AqMyDefault\*(Aq; # default SCALAR, ARRAY, HASH and CODE before UNIVERSAL
+\&        DEFAULT   => \*(AqMyDefault\*(Aq, # default SCALAR, ARRAY, HASH and CODE before UNIVERSAL
+\&    }
 .Ve
 .PP
 is equivalent to:
 .PP
-.Vb 3
-\&  use autobox
+.Vb 4
+\&  use autobox {
 \&      INTEGER => [ \*(AqMyDefault\*(Aq, \*(AqMyUniversal\*(Aq ],
 \&      FLOAT   => [ \*(AqMyDefault\*(Aq, \*(AqMyUniversal\*(Aq ], # ... &c.
+\&  }
 .Ve
 .SS "\s-1DEBUG\s0"
 .IX Subsection "DEBUG"
@@ -766,14 +778,14 @@ used within perl). This value is used by \f(CW\*(C`autobox\*(C'\fR to associate 
 .Vb 1
 \&    use autobox::universal qw(type);
 \&
-\&    type("Hello, world!") # STRING
-\&    type(42)              # INTEGER
-\&    type([])              # ARRAY
-\&    type(sub { })         # CODE
+\&    type("42")  # STRING
+\&    type(42)    # INTEGER
+\&    type(42.0)  # FLOAT
+\&    type(undef) # UNDEF
 .Ve
 .PP
 \&\f(CW\*(C`autobox::universal\*(C'\fR is loaded automatically by \f(CW\*(C`autobox\*(C'\fR, and, as its name suggests, can be used to install
-a universal method (i.e. a method for all \f(CW\*(C`autobox\*(C'\fR types) e.g.
+a universal \f(CW\*(C`type\*(C'\fR method for autoboxed values e.g.
 .PP
 .Vb 1
 \&    use autobox UNIVERSAL => \*(Aqautobox::universal\*(Aq;
@@ -786,7 +798,7 @@ a universal method (i.e. a method for all \f(CW\*(C`autobox\*(C'\fR types) e.g.
 .IX Header "CAVEATS"
 .SS "Performance"
 .IX Subsection "Performance"
-Autoboxing comes at a price. Calling
+Calling
 .PP
 .Vb 1
 \&    "Hello, world!"\->length()
@@ -842,7 +854,7 @@ Perl's special-casing for the \f(CW\*(C`print BLOCK ...\*(C'\fR syntax (see perl
 (where the curly brackets denote an anonymous \s-1HASH\s0 ref) may require some further disambiguation:
 .PP
 .Vb 2
-\&    # this works (
+\&    # this works
 \&    print { foo => \*(Aqbar\*(Aq }\->foo();
 \&
 \&    # and this
@@ -880,7 +892,7 @@ to \f(CW\*(C`print()\*(C'\fR:
 \fIeval \s-1EXPR\s0\fR
 .IX Subsection "eval EXPR"
 .PP
-Like most pragmas, autobox performs operations at compile time, and,
+Like most pragmas, \f(CW\*(C`autobox\*(C'\fR performs operations at compile time, and,
 as a result, runtime string \f(CW\*(C`eval\*(C'\fRs are not executed within its scope i.e. this
 doesn't work:
 .PP
@@ -890,7 +902,7 @@ doesn't work:
 \&    eval "42\->foo";
 .Ve
 .PP
-The workaround is to use autobox within the \f(CW\*(C`eval\*(C'\fR e.g.
+The workaround is to use \f(CW\*(C`autobox\*(C'\fR within the \f(CW\*(C`eval\*(C'\fR e.g.
 .PP
 .Vb 4
 \&    eval <<\*(AqEOS\*(Aq;
@@ -906,9 +918,17 @@ Note that the \f(CW\*(C`eval BLOCK\*(C'\fR form works as expected:
 \&
 \&    eval { 42\->foo() }; # OK
 .Ve
+.PP
+\fIOperator Overloading\fR
+.IX Subsection "Operator Overloading"
+.PP
+Operator overloading via the overload pragma doesn't (automatically) work.
+\&\f(CW\*(C`autobox\*(C'\fR works by lexically overriding the arrow operator.
+It doesn't bless native types into objects, so overloading \- or any other kind of \*(L"magic\*(R"
+which depends on values being blessed \- doesn't apply.
 .SH "VERSION"
 .IX Header "VERSION"
-2.82
+2.86
 .SH "SEE ALSO"
 .IX Header "SEE ALSO"
 .IP "\(bu" 4
@@ -922,9 +942,9 @@ Scalar::Properties
 .SH "AUTHOR"
 .IX Header "AUTHOR"
 chocolateboy <chocolate@cpan.org>
-.SH "COPYRIGHT"
-.IX Header "COPYRIGHT"
-Copyright (c) 2003\-2013, chocolateboy.
+.SH "COPYRIGHT AND LICENSE"
+.IX Header "COPYRIGHT AND LICENSE"
+Copyright (c) 2003\-2018 by chocolateboy.
 .PP
-This module is free software. It may be used, redistributed
-and/or modified under the same terms as Perl itself.
+This library is free software; you can redistribute it and/or modify it under the
+terms of the Artistic License 2.0 <http://www.opensource.org/licenses/artistic-license-2.0.php>.

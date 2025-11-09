@@ -1,10 +1,12 @@
 /*!
 	@file		ITLibArtwork.h
-	@copyright	© 2012-2016 Apple Inc.
+	@copyright	© 2012-2020 Apple Inc.
  */
 
 #import <Foundation/Foundation.h>
 #import <iTunesLibrary/ITLibDefines.h>
+
+@class NSImage;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -41,11 +43,13 @@ typedef NS_ENUM( NSUInteger, ITLibArtworkFormat )
 	ITLibArtworkFormatBMP = 6, 
 	ITLibArtworkFormatTIFF = 7, 
 	ITLibArtworkFormatPICT = 8
-};
+
+} API_UNAVAILABLE(ios);
 
 /*!
 	@abstract The ITLibArtwork class represents a media item artwork.
  */
+API_UNAVAILABLE(ios)
 ITLIB_EXPORT @interface ITLibArtwork : NSObject
 {
 	void * _impl;

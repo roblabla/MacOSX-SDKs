@@ -6,11 +6,14 @@
 */
 
 #import <AppKit/NSView.h>
+#import <AppKit/AppKitDefines.h>
+#import <Foundation/Foundation.h>
+#import <Availability.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
-@class NSColor, NSNotification;
+@class NSColor;
 
 @interface NSClipView : NSView
 
@@ -51,7 +54,7 @@ API_UNAVAILABLE_BEGIN(ios)
 
 @interface NSClipView ()
 - (NSPoint)constrainScrollPoint:(NSPoint)newOrigin API_DEPRECATED("Use -constrainBoundsRect: instead.", macos(10.0,10.10));
-@property BOOL copiesOnScroll API_DEPRECATED("NSClipView will always minimize the area of the document view that is invalidated.  To force invalidation of the document view, use -[NSView setNeedsDisplayInRect:].", macos(10.0, API_TO_BE_DEPRECATED));
+@property BOOL copiesOnScroll API_DEPRECATED("Setting this property has no effect.  NSClipView will always minimize the area of the document view that is invalidated.  To force invalidation of the document view, use -[NSView setNeedsDisplayInRect:].", macos(10.0, 11.0));
 @end
 
 

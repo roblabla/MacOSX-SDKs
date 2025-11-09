@@ -482,7 +482,7 @@ protected:
 	// init / destroy
     virtual IOReturn getUnitInformation( void );
     virtual IOReturn allocateResources( void );
-    virtual void free( void );
+    virtual void free( void ) APPLE_KEXT_OVERRIDE;
         	
 	// orb add / remove
 	virtual IOReturn addORB( IOFireWireSBP2ORB * orb );
@@ -1019,7 +1019,7 @@ public:
         @discussion See OSObject.h for more information.  When retainCount == when then call free(). 
     */
     
-    virtual void release() const;
+    virtual void release() const APPLE_KEXT_OVERRIDE;
 	
 	/*! 
         @function setLoginRetryCountAndDelayTime

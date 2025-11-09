@@ -10,6 +10,7 @@
 @class CLLocation;
 
 NS_ASSUME_NONNULL_BEGIN
+
 API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
 @interface CKLocationSortDescriptor : NSSortDescriptor <NSSecureCoding>
 
@@ -21,4 +22,5 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
 @property (nonatomic, readonly, copy) CLLocation *relativeLocation;
 
 @end
+
 NS_ASSUME_NONNULL_END

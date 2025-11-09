@@ -11,8 +11,8 @@
 /// MPPlayableContentManagerContext represents the current state of
 /// the playable content endpoint. A context is retrievable from an instance
 /// of MPPlayableContentManager.
-MP_API(ios(8.4))
-MP_PROHIBITED(tvos, macos, watchos)
+MP_DEPRECATED("Use CarPlay framework", ios(8.4, 14.0))
+MP_UNAVAILABLE(tvos, watchos, macos)
 @interface MPPlayableContentManagerContext : NSObject
 
 /// The number of items the content server will display when content limiting is enforced.

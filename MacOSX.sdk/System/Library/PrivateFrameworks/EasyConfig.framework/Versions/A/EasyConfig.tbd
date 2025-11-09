@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: D27ED9C9-FD4A-360F-AEA1-4985FBF23D44', 'x86_64: D27ED9C9-FD4A-360F-AEA1-4985FBF23D44' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           95EF853D-9139-38EA-966F-7AD256F2EB65
+  - target:          x86_64-maccatalyst
+    value:           95EF853D-9139-38EA-966F-7AD256F2EB65
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           2C299C94-9871-3C0E-BA26-21B7E7CB6426
+  - target:          arm64e-maccatalyst
+    value:           2C299C94-9871-3C0E-BA26-21B7E7CB6426
 install-name:    '/System/Library/PrivateFrameworks/EasyConfig.framework/Versions/A/EasyConfig'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _EasyConfigCreateDictionaryFromTLV, _EasyConfigCreateTLVfromDictionary, 
                        _EasyConfigDeviceProgressNotification, _EasyConfigDeviceStoppedNotification, 
                        _EasyConfigKey_AdminPassword, _EasyConfigKey_AllowPairing, 

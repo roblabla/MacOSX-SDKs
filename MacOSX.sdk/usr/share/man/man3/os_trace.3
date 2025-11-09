@@ -29,12 +29,14 @@ Trace messages are correlated based on a new identifier assigned when an activit
 The identifier is automatically carried across GCD and XPC boundaries.
 This identifier provides a correlation point for intra and inter-process work based on that activity.
 .Pp
-Trace messages should never be done in tight loops as they may overrun the buffer pushing relevant trace messages out. Loss of those entries reduces the effectiveness of the trace mechanism.
+Trace messages should never be done in tight loops as they may overrun the buffer pushing relevant trace messages out.
+Loss of those entries reduces the effectiveness of the trace mechanism.
 .Pp
 The API was designed to prevent strings from being recorded in the buffers for performance and privacy protection.
 See
 .Xr os_log 3
-for string and object support, among other features. The os_trace API set only supports scalar types (float,double, etc.).
+for string and object support, among other features.
+The os_trace API set only supports scalar types (float,double, etc.).
 All unsupported types will emit UNSUP to the trace output.
 The format string length does not factor into the trace buffer memory, although there is a maximum supported length of 100 characters.
 .Pp
@@ -54,7 +56,6 @@ There are four (4) types of trace messages: default, debug, error, and fault.
 is a "default" trace message.
 The default category of messages are always recorded into the memory buffers regardless of the state of the process.
 Limit use to messages that would help diagnose a failure, crash, etc.
-.Pp
 .Bd -literal -offset indent
 os_trace("issue query for record type: %d, timeout: %d", recType, timeout);
 .Ed
@@ -73,11 +74,8 @@ is a "fault" trace message.
 The fault category of messages should be used when a process is about to crash or would otherwise crash but recovered.
 This call causes a collection of all buffers related to activity that triggered the fault.
 The buffers are analyzed and may be provided in crash/spin reports.
-.Pp
-.Ed
 .Sh EXAMPLES
 Example use of trace messages.
-.Pp
 .Bd -literal -offset indent
 #include <os/trace.h>
 #include <pwd.h>
@@ -97,9 +95,9 @@ if (error) {
     return error;
 }
 .Ed
-.Pp
-.Sh CAVEATS
-Please note that os_trace is printf-like, but not printf-compatible. Format specifiers should be exactly matched to the types of the arguments being used to fill them.
 .Sh SEE ALSO
 .Xr os_activity_initiate 3 ,
 .Xr os_log 3
+.Sh CAVEATS
+Please note that os_trace is printf-like, but not printf-compatible.
+Format specifiers should be exactly matched to the types of the arguments being used to fill them.

@@ -5,6 +5,7 @@
 #ifndef CGDIRECTDISPLAY_H_
 #define CGDIRECTDISPLAY_H_
 
+
 #include <CoreFoundation/CFBase.h>
 #include <CoreFoundation/CFAvailability.h>
 #include <stdint.h>
@@ -494,5 +495,6 @@ CG_EXTERN CGError CGDisplaySwitchToMode(CGDirectDisplayID display,
 CF_ASSUME_NONNULL_END
 
 CF_IMPLICIT_BRIDGING_DISABLED
+
 
 #endif /* CGDIRECTDISPLAY_H_ */

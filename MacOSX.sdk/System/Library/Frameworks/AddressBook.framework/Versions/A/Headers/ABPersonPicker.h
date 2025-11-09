@@ -4,15 +4,14 @@
 
 #import <Cocoa/Cocoa.h>
 
-#ifdef __x86_64__
-
 @protocol ABPersonPickerDelegate;
 
 /*!
  * @abstract ABPersonPicker is a popover-based person picker for choosing an ABPerson or ABPerson's value, such as a phone number or email address.
  */
 OBJC_GC_UNAVAILABLE
-API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(macCatalyst)
+API_AVAILABLE(macos(10.9))
+API_UNAVAILABLE(macCatalyst)
 @interface ABPersonPicker : NSObject
 
 /*!
@@ -37,5 +36,3 @@ API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(macCatalyst)
 - (void)close;
 
 @end
-
-#endif

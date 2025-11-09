@@ -1,9 +1,13 @@
 //
 //  GCEventViewController.h
-//  CoreController
+//  GameController
 //
 //  Copyright © 2018 Apple Inc. All rights reserved.
 //
+
+#import <TargetConditionals.h>
+
+#import <Foundation/Foundation.h>
 
 #if TARGET_OS_IPHONE
 #import <UIKit/UIViewController.h>
@@ -45,6 +49,6 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
  @see GCController
  @see UIView.userInteractionEnabled
  */
-@property (nonatomic, assign) BOOL controllerUserInteractionEnabled;
+@property (nonatomic) BOOL controllerUserInteractionEnabled;
 
 @end

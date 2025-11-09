@@ -13,7 +13,11 @@
 .Ft void
 .Fn os_activity_initiate_f "const char *description" "uint32_t flags" "void *ctx" "void function(void *ctx)"
 .Sh DESCRIPTION
-An activity is essentially an identifier that is created by the system. The identifier is transported with work via GCD, XPC and other mechanisms.  The identifier simplifies debugging programs since it correlates the trace and log messages to the area in question. Although an activity appears to have a start/end, it is only finished when no other work related to it is enqueued to be processed. Activity functions only allow constant strings for performance and privacy, similar to
+An activity is essentially an identifier that is created by the system.
+The identifier is transported with work via GCD, XPC and other mechanisms.
+The identifier simplifies debugging programs since it correlates the trace and log messages to the area in question.
+Although an activity appears to have a start/end, it is only finished when no other work related to it is enqueued to be processed.
+Activity functions only allow constant strings for performance and privacy, similar to
 .Xr os_trace 3 .
 .Pp
 Supported Activity Name:
@@ -37,7 +41,6 @@ and
 wraps the block or function with a new activity.
 .Sh EXAMPLES
 Example use of activity with a message.
-.Pp
 .Bd -literal -offset indent
 #include <os/trace.h>
 #include <os/activity.h>

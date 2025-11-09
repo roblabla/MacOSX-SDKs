@@ -16,6 +16,52 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol NFCTag, NFCNDEFTag;
 
 /*!
+ * @discussion Request code parameter for the polling command
+ */
+typedef NS_ENUM(NSInteger, NFCFeliCaPollingRequestCode) {
+    NFCFeliCaPollingRequestCodeNoRequest API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)                  = 0,
+    NFCFeliCaPollingRequestCodeSystemCode API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)                 = 1,
+    NFCFeliCaPollingRequestCodeCommunicationPerformance API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)   = 2,
+    
+    PollingRequestCodeNoRequest API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaPollingRequestCodeNoRequest", ios(13.0, 14.0))                                = NFCFeliCaPollingRequestCodeNoRequest,
+    PollingRequestCodeSystemCode API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaPollingRequestCodeSystemCode", ios(13.0, 14.0))                              = NFCFeliCaPollingRequestCodeSystemCode,
+    PollingRequestCodeCommunicationPerformance API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaPollingRequestCodeCommunicationPerformance", ios(13.0, 14.0))  = NFCFeliCaPollingRequestCodeCommunicationPerformance,
+} API_AVAILABLE(ios(14.0));
+
+typedef NFCFeliCaPollingRequestCode PollingRequestCode API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaPollingRequestCode", ios(13.0, 14.0));
+/*!
+ * @discussion Time slot parameter for the polling command
+ */
+typedef NS_ENUM(NSInteger, NFCFeliCaPollingTimeSlot) {
+    NFCFeliCaPollingTimeSlotMax1 API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)  = 0,
+    NFCFeliCaPollingTimeSlotMax2 API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)  = 1,
+    NFCFeliCaPollingTimeSlotMax4 API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)  = 3,
+    NFCFeliCaPollingTimeSlotMax8 API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)  = 7,
+    NFCFeliCaPollingTimeSlotMax16 API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos) = 15,
+    
+    PollingTimeSlotMax1 API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaPollingTimeSlotMax1", ios(13.0, 14.0))    = NFCFeliCaPollingTimeSlotMax1,
+    PollingTimeSlotMax2 API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaPollingTimeSlotMax2", ios(13.0, 14.0))    = NFCFeliCaPollingTimeSlotMax2,
+    PollingTimeSlotMax4 API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaPollingTimeSlotMax4", ios(13.0, 14.0))    = NFCFeliCaPollingTimeSlotMax4,
+    PollingTimeSlotMax8 API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaPollingTimeSlotMax18", ios(13.0, 14.0))   = NFCFeliCaPollingTimeSlotMax8,
+    PollingTimeSlotMax16 API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaPollingTimeSlotMax16", ios(13.0, 14.0))  = NFCFeliCaPollingTimeSlotMax16,
+} API_AVAILABLE(ios(14.0));
+
+typedef NFCFeliCaPollingTimeSlot PollingTimeSlot API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaPollingTimeSlot", ios(13.0, 14.0));
+
+/*!
+ * @discussion Encryption Identifier parameter in response of Request Service V2
+ */
+typedef NS_ENUM(NSInteger, NFCFeliCaEncryptionId) {
+    NFCFeliCaEncryptionIdAES API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)       = 0x4F,
+    NFCFeliCaEncryptionIdAES_DES API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)   = 0x41,
+    
+    EncryptionIdAES API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaEncryptionIdAES", ios(13.0, 14.0))            = NFCFeliCaEncryptionIdAES,
+    EncryptionIdAES_DES API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaEncryptionIdAES_DES", ios(13.0, 14.0))    = NFCFeliCaEncryptionIdAES_DES,
+};
+
+typedef NFCFeliCaEncryptionId EncryptionId API_DEPRECATED_WITH_REPLACEMENT("NFCFeliCaEncryptionId", ios(13.0, 14.0));
+
+/*!
  * @protocol NFCFeliCaTag
  *
  * @discussion  A @link NFCTagReaderSession @link/ reader session returns an instance conforming to this protocol
@@ -36,34 +82,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
 @protocol NFCFeliCaTag <NFCTag, NFCNDEFTag>
-
-/*!
- * @discussion Request code parameter for the polling command
- */
-typedef NS_ENUM(NSInteger, PollingRequestCode) {
-    PollingRequestCodeNoRequest = 0,
-    PollingRequestCodeSystemCode = 1,
-    PollingRequestCodeCommunicationPerformance = 2,
-};
-
-/*!
- * @discussion Time slot parameter for the polling command
- */
-typedef NS_ENUM(NSInteger, PollingTimeSlot) {
-    PollingTimeSlotMax1 = 0,
-    PollingTimeSlotMax2 = 1,
-    PollingTimeSlotMax4 = 3,
-    PollingTimeSlotMax8 = 7,
-    PollingTimeSlotMax16 = 15,
-};
-
-/*!
- * @discussion Encryption Identifier parameter in response of Request Service V2
- */
-typedef NS_ENUM(NSInteger, EncryptionId) {
-    EncryptionIdAES = 0x4F,
-    EncryptionIdAES_DES = 0x41,
-};
 
 @required
 
@@ -104,8 +122,8 @@ typedef NS_ENUM(NSInteger, EncryptionId) {
  *                          Polling with wildcard value in the upper or lower byte is not supported.
  */
 - (void)pollingWithSystemCode:(NSData *)systemCode
-                  requestCode:(PollingRequestCode)requestCode
-                     timeSlot:(PollingTimeSlot)timeSlot
+                  requestCode:(NFCFeliCaPollingRequestCode)requestCode
+                     timeSlot:(NFCFeliCaPollingTimeSlot)timeSlot
             completionHandler:(void(^)(NSData *pmm, NSData *requestData, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
@@ -191,7 +209,7 @@ typedef NS_ENUM(NSInteger, EncryptionId) {
  * @discussion              Request Service V2 command defined by FeliCa card specification.  Refer to the FeliCa specification for details.
  */
 - (void)requestServiceV2WithNodeCodeList:(NSArray<NSData *> *)nodeCodeList
-                       completionHandler:(void(^)(NSInteger statusFlag1, NSInteger statusFlag2, EncryptionId encryptionIdentifier, NSArray<NSData *> *nodeKeyVersionListAES, NSArray<NSData *> *nodeKeyVersionListDES, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
+                       completionHandler:(void(^)(NSInteger statusFlag1, NSInteger statusFlag2, NFCFeliCaEncryptionId encryptionIdentifier, NSArray<NSData *> *nodeKeyVersionListAES, NSArray<NSData *> *nodeKeyVersionListDES, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
  * @method requestSpecificationVersionWithCompletionHandler:

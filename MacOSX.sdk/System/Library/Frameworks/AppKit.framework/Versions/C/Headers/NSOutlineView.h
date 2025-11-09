@@ -11,50 +11,16 @@
 #import <CoreFoundation/CFDictionary.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSButtonCell;
 @class NSTableView;
 @class NSTableHeaderView;
 @class NSTableColumn;
+@class NSTintConfiguration;
 @class NSNotification;
 @class NSString;
 @protocol NSOutlineViewDelegate, NSOutlineViewDataSource;
-
-typedef struct __OvFlags {
-    unsigned int unused3:1;
-    unsigned int dataSourceObjectValueByItem:1;
-    unsigned int allowAutomaticAnimations:1;
-    unsigned int dontRedisplayOnFrameChange:1;
-    unsigned int _isSpringLoadingFlashing:1;
-    unsigned int unused2:1;
-    unsigned int delegateShouldAutoExpandItem:1;
-    unsigned int delegateAutoCollapseItem:1;
-    unsigned int delegateAutoExpandItem:1;
-    unsigned int delegateShouldShowOutlineCellForItem:1;
-    unsigned int dataSourceDraggedImageMovedTo:1;
-    unsigned int dataSourceDraggingEndedAt:1;
-    unsigned int reloadingData:1;
-    unsigned int validDataSourceMethods:1;
-    unsigned int numberOfRowsDataExpandEntered:1;
-    unsigned int delayRowEntryFreeDisabled:1;
-    unsigned int delegateHeightOfRowByItem:1;
-    unsigned int animateExpandAndCollapse:1;
-    unsigned int stronglyReferencesItems:1;
-    unsigned int selectionAdjustmentDisabled:1;
-    unsigned int subclassRowForItem:1;
-    unsigned int delegateWillDisplayOutlineCell:1;
-    unsigned int enableExpandNotifications:1;
-    unsigned int autoSaveExpandItems:1;
-    unsigned int autoresizesOutlineColumn:1;
-    unsigned int delegateShouldExpandItem:1;
-    unsigned int delegateShouldCollapseItem:1;
-    unsigned int delegateSelectionShouldChangeInOutlineView:1;
-    unsigned int delegateShouldSelectTableColumn:1;
-    unsigned int delegateShouldSelectItem:1;
-    unsigned int delegateShouldEditTableColumn:1;
-    unsigned int delegateWillDisplayCell:1;
-} _OVFlags;
 
 /* NSOutlineViewDropOnItemIndex may be used as a valid childIndex of a drop target item. In this case, the drop will happen directly on the target item.
 */
@@ -251,7 +217,7 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
 
 /* Dragging Source Support - Optional for single-image dragging. This method is called after it has been determined that a drag should begin, but before the drag has been started.  To refuse the drag, return NO.  To start a drag, return YES and place the drag data onto the pasteboard (data, owner, etc...).  The drag image and other drag related information will be set up and provided by the outline view once this call returns with YES.  The items array is the list of items that will be participating in the drag.
 */
-- (BOOL)outlineView:(NSOutlineView *)outlineView writeItems:(NSArray *)items toPasteboard:(NSPasteboard *)pasteboard API_DEPRECATED("Use -outlineView:pasteboardWriterForRow: instead", macos(10.0,API_TO_BE_DEPRECATED));
+- (BOOL)outlineView:(NSOutlineView *)outlineView writeItems:(NSArray *)items toPasteboard:(NSPasteboard *)pasteboard API_DEPRECATED("Use -outlineView:pasteboardWriterForItem: instead", macos(10.0, 10.15));
 
 /* Dragging Destination Support - Required for multi-image dragging. Implement this method to allow the table to update dragging items as they are dragged over the view. Typically this will involve calling [draggingInfo enumerateDraggingItemsWithOptions:forView:classes:searchOptions:usingBlock:] and setting the draggingItem's imageComponentsProvider to a proper image based on the content. For View Based TableViews, one can use NSTableCellView's -draggingImageComponents and -draggingImageFrame.
  */
@@ -327,6 +293,12 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
     Implement this method to support a table with varying row heights. The height returned by this method should not include intercell spacing. Returning a height of -1 will default to the rowHeight of the tableView for normal rows, and the system defined height for group rows. Performance Considerations: For large tables in particular, you should make sure that this method is efficient. NSTableView may cache the values this method returns, but this should NOT be depended on, as all values may not be cached. To signal a row height change, call -noteHeightOfRowsWithIndexesChanged:. For a given row, the same row height should always be returned until -noteHeightOfRowsWithIndexesChanged: is called, otherwise unpredicable results will happen. NSTableView automatically invalidates its entire row height cache in -reloadData, and -noteNumberOfRowsChanged.
  */
 - (CGFloat)outlineView:(NSOutlineView *)outlineView heightOfRowByItem:(id)item;
+
+/* View Based OutlineView: Optional - Item tinting customization
+    Implement this method to customize an item's tinting behavior. This is typically used for sidebars which may want custom colors. Return a non-nil `NSTintConfiguration` to specify a particular tinting behavior for the item's row, or return nil to inherit the tinting behavior from the item's parent. Items at the root of the outline inherit the default tint configuration.
+*/
+- (nullable NSTintConfiguration *)outlineView:(NSOutlineView *)outlineView tintConfigurationForItem:(id)item API_AVAILABLE(macos(11.0));
+
 
 /* Optional - Type select support
     Implement this method if you want to control the string that is used for type selection. You may want to change what is searched for based on what is displayed, or simply return nil for that row and/or column to not be searched. By default, all cells with text in them are searched. The default value when this delegate method is not implemented is [[outlineView preparedCellForColumn:tableColumn row:[outlineView rowForItem:item]] stringValue], and this value can be returned from the delegate method if desired.

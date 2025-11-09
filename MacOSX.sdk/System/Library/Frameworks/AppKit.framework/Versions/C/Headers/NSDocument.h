@@ -14,9 +14,10 @@
 #import <AppKit/NSMenu.h>
 #import <AppKit/NSPrintInfo.h>
 #import <AppKit/NSKeyValueBinding.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSData, NSDate, NSError, NSFileWrapper, NSMenuItem, NSPageLayout, NSPrintInfo, NSPrintOperation, NSSavePanel, NSSharingService, NSSharingServicePicker, NSUndoManager, NSURL, NSView, NSWindow, NSWindowController;
 

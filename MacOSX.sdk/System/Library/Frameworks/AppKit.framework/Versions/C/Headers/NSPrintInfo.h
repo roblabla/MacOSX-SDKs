@@ -9,11 +9,10 @@
 #import <Foundation/NSObject.h>
 #import <Foundation/NSDictionary.h>
 #import <AppKit/AppKitDefines.h>
-
 #import <AppKit/NSPrinter.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSPDFInfo, NSPrinter;
 
@@ -204,9 +203,9 @@ typedef NS_ENUM(NSUInteger, NSPrintingOrientation) {
 
 /* Deprecated legacy printing pagination mode constants. Prefer to use NSPrintingPaginationMode values instead.
 */
-static const NSPrintingPaginationMode NSAutoPagination API_DEPRECATED_WITH_REPLACEMENT("NSPrintingPaginationModeAutomatic", macos(10.0,API_TO_BE_DEPRECATED)) = NSPrintingPaginationModeAutomatic;
-static const NSPrintingPaginationMode NSFitPagination API_DEPRECATED_WITH_REPLACEMENT("NSPrintingPaginationModeFit", macos(10.0,API_TO_BE_DEPRECATED)) = NSPrintingPaginationModeFit;
-static const NSPrintingPaginationMode NSClipPagination API_DEPRECATED_WITH_REPLACEMENT("NSPrintingPaginationModeClip", macos(10.0,API_TO_BE_DEPRECATED)) = NSPrintingPaginationModeClip;
+static const NSPrintingPaginationMode NSAutoPagination API_DEPRECATED_WITH_REPLACEMENT("NSPrintingPaginationModeAutomatic", macos(10.0, 11.0)) = NSPrintingPaginationModeAutomatic;
+static const NSPrintingPaginationMode NSFitPagination API_DEPRECATED_WITH_REPLACEMENT("NSPrintingPaginationModeFit", macos(10.0, 11.0)) = NSPrintingPaginationModeFit;
+static const NSPrintingPaginationMode NSClipPagination API_DEPRECATED_WITH_REPLACEMENT("NSPrintingPaginationModeClip", macos(10.0, 11.0)) = NSPrintingPaginationModeClip;
 
 API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

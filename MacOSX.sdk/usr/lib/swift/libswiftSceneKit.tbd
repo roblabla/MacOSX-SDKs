@@ -1,12 +1,18 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: D05283B6-B1AF-38A3-840E-F6C5EE6CC5BA' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           2810C12A-63D5-3DE3-9DFE-DA67A71D6952
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           614B7916-483E-36FE-BB52-DD8503989C46
 install-name:    '/usr/lib/swift/libswiftSceneKit.dylib'
-current-version: 0
+current-version: 1.1
 swift-abi-version: 7
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftSceneKit.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftSceneKit.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftSceneKit.dylib', 
@@ -40,9 +46,13 @@ exports:
                        '_$sSo17SCNBoundingVolumeP8SceneKitE14boundingSphereSo10SCNVector3V6center_Sf6radiustvg', 
                        '_$sSo17SCNBoundingVolumeP8SceneKitE14boundingSphereSo10SCNVector3V6center_Sf6radiustvpMV', 
                        '_$sSo17SCNGeometrySourceC8SceneKitE18textureCoordinatesABSaySo7CGPointVG_tcfC', 
+                       '_$sSo17SCNGeometrySourceC8SceneKitE18textureCoordinatesABSaySo7CGPointVG_tcfc', 
                        '_$sSo17SCNGeometrySourceC8SceneKitE7normalsABSaySo10SCNVector3VG_tcfC', 
+                       '_$sSo17SCNGeometrySourceC8SceneKitE7normalsABSaySo10SCNVector3VG_tcfc', 
                        '_$sSo17SCNGeometrySourceC8SceneKitE8verticesABSaySo10SCNVector3VG_tcfC', 
+                       '_$sSo17SCNGeometrySourceC8SceneKitE8verticesABSaySo10SCNVector3VG_tcfc', 
                        '_$sSo18SCNGeometryElementC8SceneKitE7indices13primitiveTypeABSayxG_So0a9PrimitiveG0Vtcs17FixedWidthIntegerRzlufC', 
+                       '_$sSo18SCNGeometryElementC8SceneKitE7indices13primitiveTypeABSayxG_So0a9PrimitiveG0Vtcs17FixedWidthIntegerRzlufc', 
                        '_$ss5SIMD3V8SceneKitSdRszrlEyABySdGSo10SCNVector3VcfC', '_$ss5SIMD3V8SceneKitSfRszrlEyABySfGSo10SCNVector3VcfC', 
                        '_$ss5SIMD4V8SceneKitSdRszrlEyABySdGSo10SCNVector4VcfC', '_$ss5SIMD4V8SceneKitSfRszrlEyABySfGSo10SCNVector4VcfC', 
                        '__swift_FORCE_LOAD_$_swiftSceneKit' ]

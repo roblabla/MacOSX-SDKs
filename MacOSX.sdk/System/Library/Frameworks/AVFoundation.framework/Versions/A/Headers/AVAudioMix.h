@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVAudioMix.h>)
 /*
 	File:  AVAudioMix.h
  
@@ -208,3 +209,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 
 NS_ASSUME_NONNULL_END
 
+
+#else
+#import <AVFCore/AVAudioMix.h>
+#endif

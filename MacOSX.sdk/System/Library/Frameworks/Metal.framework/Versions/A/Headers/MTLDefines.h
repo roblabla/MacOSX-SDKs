@@ -9,6 +9,8 @@
 #import <TargetConditionals.h>
 
 #define MTL_EXPORT __attribute__((visibility ("default")))
+#define MTL_INTERN __attribute__((visibility ("hidden")))
+
 #ifdef __cplusplus
 #define MTL_EXTERN extern "C" MTL_EXPORT
 #else
@@ -16,9 +18,9 @@
 #endif
 
 #ifdef __cplusplus
-#define MTL_EXTERN_NO_EXPORT extern "C"
+#define MTL_EXTERN_NO_EXPORT extern "C" MTL_INTERN
 #else
-#define MTL_EXTERN_NO_EXPORT extern
+#define MTL_EXTERN_NO_EXPORT extern MTL_INTERN
 #endif
 
 /* Definition of 'MTL_INLINE'. */

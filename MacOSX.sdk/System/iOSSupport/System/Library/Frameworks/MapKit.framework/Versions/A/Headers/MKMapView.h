@@ -32,8 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, MKUserTrackingMode) {
 	MKUserTrackingModeNone = 0, // the user's location is not followed
 	MKUserTrackingModeFollow, // the map follows the user's location
-	MKUserTrackingModeFollowWithHeading API_UNAVAILABLE(tvos), // the map follows the user's location and heading
-} NS_ENUM_AVAILABLE(NA, 5_0) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos);
+    MKUserTrackingModeFollowWithHeading API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos), // the map follows the user's location and heading
+} API_AVAILABLE(ios(5.0), tvos(9.2), macos(11.0)) API_UNAVAILABLE(watchos);
 
 MK_EXTERN NSString * const MKMapViewDefaultAnnotationViewReuseIdentifier NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0);
 MK_EXTERN NSString * const MKMapViewDefaultClusterAnnotationViewReuseIdentifier NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0);
@@ -109,11 +109,8 @@ NS_CLASS_AVAILABLE(10_9, NA)
 @property (nonatomic, getter=isRotateEnabled) BOOL rotateEnabled NS_AVAILABLE(10_9, 7_0) API_UNAVAILABLE(tvos);
 @property (nonatomic, getter=isPitchEnabled) BOOL pitchEnabled NS_AVAILABLE(10_9, 7_0) API_UNAVAILABLE(tvos);
 
-#if TARGET_OS_OSX || TARGET_OS_MACCATALYST
+@property (nonatomic) BOOL showsPitchControl API_AVAILABLE(macos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
 @property (nonatomic) BOOL showsZoomControls API_AVAILABLE(macos(10.9), macCatalyst(13.0)) API_UNAVAILABLE(ios, watchos, tvos);
-#endif
-
-
 @property (nonatomic) BOOL showsCompass NS_AVAILABLE(10_9, 9_0) API_UNAVAILABLE(tvos);
 @property (nonatomic) BOOL showsScale NS_AVAILABLE(10_10, 9_0);
 
@@ -128,10 +125,8 @@ NS_CLASS_AVAILABLE(10_9, NA)
 // The annotation representing the user's location
 @property (nonatomic, readonly) MKUserLocation *userLocation;
 
-#if TARGET_OS_IPHONE
-@property (nonatomic) MKUserTrackingMode userTrackingMode NS_AVAILABLE(NA, 5_0);
-- (void)setUserTrackingMode:(MKUserTrackingMode)mode animated:(BOOL)animated NS_AVAILABLE(NA, 5_0);
-#endif
+@property (nonatomic) MKUserTrackingMode userTrackingMode API_AVAILABLE(ios(5.0), tvos(9.2), macos(11.0)) API_UNAVAILABLE(watchos);
+- (void)setUserTrackingMode:(MKUserTrackingMode)mode animated:(BOOL)animated API_AVAILABLE(ios(5.0), tvos(9.2), macos(11.0)) API_UNAVAILABLE(watchos);
 
 // Returns YES if the user's location is displayed within the currently visible map region.
 @property (nonatomic, readonly, getter=isUserLocationVisible) BOOL userLocationVisible;
@@ -259,9 +254,7 @@ API_UNAVAILABLE(watchos)
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view didChangeDragState:(MKAnnotationViewDragState)newState 
    fromOldState:(MKAnnotationViewDragState)oldState NS_AVAILABLE(10_9, 4_0) API_UNAVAILABLE(tvos);
 
-#if TARGET_OS_IPHONE
-- (void)mapView:(MKMapView *)mapView didChangeUserTrackingMode:(MKUserTrackingMode)mode animated:(BOOL)animated NS_AVAILABLE(NA, 5_0);
-#endif
+- (void)mapView:(MKMapView *)mapView didChangeUserTrackingMode:(MKUserTrackingMode)mode animated:(BOOL)animated API_AVAILABLE(ios(5.0), tvos(9.2), macos(11.0)) API_UNAVAILABLE(watchos);
 
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id <MKOverlay>)overlay NS_AVAILABLE(10_9, 7_0);
 - (void)mapView:(MKMapView *)mapView didAddOverlayRenderers:(NSArray<MKOverlayRenderer *> *)renderers NS_AVAILABLE(10_9, 7_0);

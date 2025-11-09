@@ -14,6 +14,22 @@
 #include <Availability.h>
 #include <AvailabilityMacros.h>
 
+// HLS Tools builds with 10.14.4 and TARGET_OS_MACCATALYST is defined, but the rest of the code has switched to TARGET_OS_MACCATALYST, so define TARGET_OS_MACCATALYST
+// Remove this once HLS Tools starts using 10.15.  See rdar://problem/58379699
+#ifndef TARGET_OS_MACCATALYST
+#define TARGET_OS_MACCATALYST TARGET_OS_MACCATALYST
+#endif
+
+// Pre-10.16, weak import
+#ifndef __AVAILABILITY_INTERNAL__MAC_10_16
+#define __AVAILABILITY_INTERNAL__MAC_10_16 __AVAILABILITY_INTERNAL_WEAK_IMPORT
+#endif
+
+// Pre- iOS 14.0 weak import
+#ifndef __AVAILABILITY_INTERNAL__IPHONE_14_0
+#define __AVAILABILITY_INTERNAL__IPHONE_14_0 __AVAILABILITY_INTERNAL_WEAK_IMPORT
+#endif
+
 // Pre-10.15, weak import
 #ifndef __AVAILABILITY_INTERNAL__MAC_10_15
 #define __AVAILABILITY_INTERNAL__MAC_10_15 __AVAILABILITY_INTERNAL_WEAK_IMPORT
@@ -43,6 +59,7 @@
 #ifndef __AVAILABILITY_INTERNAL__IPHONE_12_2
 #define __AVAILABILITY_INTERNAL__IPHONE_12_2 __AVAILABILITY_INTERNAL_WEAK_IMPORT
 #endif
+
 
 
 // Pre-10.13, weak import
@@ -223,6 +240,9 @@ typedef CFIndex CMItemIndex;
 	#define COREMEDIA_DECLARE_RETURNS_RETAINED_ON_PARAMETERS COREMEDIA_TRUE
 	#define COREMEDIA_DECLARE_RETURNS_NOT_RETAINED_ON_PARAMETERS COREMEDIA_TRUE
 #endif
+#if __has_feature(attribute_ns_returns_retained)
+	#define COREMEDIA_DECLARE_RETURNS_RETAINED_BLOCK COREMEDIA_TRUE
+#endif
 #if __has_feature(attribute_cf_consumed)
 	#define COREMEDIA_DECLARE_RELEASES_ARGUMENT COREMEDIA_TRUE
 #endif
@@ -253,6 +273,10 @@ typedef CFIndex CMItemIndex;
 #define COREMEDIA_DECLARE_RETURNS_NOT_RETAINED_ON_PARAMETERS COREMEDIA_FALSE
 #endif
 
+#ifndef COREMEDIA_DECLARE_RETURNS_RETAINED_BLOCK
+#define COREMEDIA_DECLARE_RETURNS_RETAINED_BLOCK COREMEDIA_FALSE
+#endif
+
 #ifndef COREMEDIA_DECLARE_RELEASES_ARGUMENT
 #define COREMEDIA_DECLARE_RELEASES_ARGUMENT COREMEDIA_FALSE
 #endif
@@ -278,7 +302,8 @@ typedef CFIndex CMItemIndex;
 #else
 #define CM_BRIDGED_TYPE(type)
 #endif
-	
+
+// Marks functions returning a CoreFoundation object that the caller is responsible for releasing. Blocks are Objective-C objects and functions returning them use CM_RETURNS_RETAINED_BLOCK instead.
 #if COREMEDIA_DECLARE_RETURNS_RETAINED
 #define CM_RETURNS_RETAINED		CF_RETURNS_RETAINED
 #else
@@ -295,6 +320,13 @@ typedef CFIndex CMItemIndex;
 #define CM_RETURNS_NOT_RETAINED_PARAMETER	CF_RETURNS_NOT_RETAINED
 #else
 #define CM_RETURNS_NOT_RETAINED_PARAMETER
+#endif
+
+// Marks functions returning a block that the caller is responsible for releasing.
+#if COREMEDIA_DECLARE_RETURNS_RETAINED_BLOCK
+#define CM_RETURNS_RETAINED_BLOCK		DISPATCH_RETURNS_RETAINED_BLOCK
+#else
+#define CM_RETURNS_RETAINED_BLOCK
 #endif
 
 #if COREMEDIA_DECLARE_RELEASES_ARGUMENT	// Marks function arguments which are released by the callee

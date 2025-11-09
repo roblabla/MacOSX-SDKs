@@ -1,29 +1,29 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 0E96C98D-B9BA-3606-9670-6FDE7D8A6F59', 'x86_64: 0E96C98D-B9BA-3606-9670-6FDE7D8A6F59' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           949DF61B-A248-3C40-81E8-2B9A2B40E3A6
+  - target:          x86_64-maccatalyst
+    value:           949DF61B-A248-3C40-81E8-2B9A2B40E3A6
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           E406A841-5835-3795-BCBD-A1D632313592
+  - target:          arm64e-maccatalyst
+    value:           E406A841-5835-3795-BCBD-A1D632313592
 install-name:    '/System/Library/Frameworks/Network.framework/Versions/A/Network'
-exports:         
-  - archs:           [ x86_64 ]
-    re-exports:      [ '/usr/lib/libnetwork.dylib' ]
-    symbols:         [ '$ld$install_name$os10.0$/System/Library/PrivateFrameworks/Network.framework/Network', 
-                       '$ld$install_name$os10.1$/System/Library/PrivateFrameworks/Network.framework/Network', 
-                       '$ld$install_name$os10.11$/System/Library/PrivateFrameworks/Network.framework/Versions/A/Network', 
-                       '$ld$install_name$os10.12$/System/Library/PrivateFrameworks/Network.framework/Versions/A/Network', 
-                       '$ld$install_name$os10.13$/System/Library/PrivateFrameworks/Network.framework/Versions/A/Network', 
-                       '$ld$install_name$os10.2$/System/Library/PrivateFrameworks/Network.framework/Network', 
-                       '$ld$install_name$os10.3$/System/Library/PrivateFrameworks/Network.framework/Network', 
-                       '$ld$install_name$os11.0$/System/Library/PrivateFrameworks/Network.framework/Network', 
-                       '$ld$install_name$os11.1$/System/Library/PrivateFrameworks/Network.framework/Network', 
-                       '$ld$install_name$os11.2$/System/Library/PrivateFrameworks/Network.framework/Network', 
-                       '$ld$install_name$os11.3$/System/Library/PrivateFrameworks/Network.framework/Network', 
-                       '$ld$install_name$os11.4$/System/Library/PrivateFrameworks/Network.framework/Network', 
-                       '$ld$install_name$os11.5$/System/Library/PrivateFrameworks/Network.framework/Network', 
-                       '$ld$install_name$os9.0$/System/Library/PrivateFrameworks/Network.framework/Network', 
-                       '$ld$install_name$os9.1$/System/Library/PrivateFrameworks/Network.framework/Network', 
-                       '$ld$install_name$os9.2$/System/Library/PrivateFrameworks/Network.framework/Network', 
-                       '$ld$install_name$os9.3$/System/Library/PrivateFrameworks/Network.framework/Network', 
-                       _NWCreateDispatchDataFromNSData, _NWCreateNSDataFromDispatchData, 
+reexported-libraries:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    libraries:       [ '/usr/lib/libnetwork.dylib' ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _NWCreateDispatchDataFromNSData, _NWCreateNSDataFromDispatchData, 
                        _NWMonitorStatusToString, _NWNetworkAgentStartOptionClientUUID, 
                        _NWNetworkAgentStartOptionFromKernel, _NWNetworkAgentStartOptionFromUser, 
                        _NWNetworkAgentStartOptionPID, _NWNetworkAgentStartOptionProcessUUID, 
@@ -32,14 +32,20 @@ exports:
                        _NWUtilsCreateNSStringFromSockaddr, _NWUtilsCreateXPCDictionaryFromNSDictionary, 
                        _NWUtilsStringMatchesPattern, __NWConnectionWriteCompletionIdempotent, 
                        _updateOSLogPlistFromLevel ]
-    objc-classes:    [ NWActivityEpilogueStatistics, NWActivityStatistics, NWAddressEndpoint, 
-                       NWAdvertiseDescriptor, NWBonjourBrowseDescriptor, NWBonjourServiceEndpoint, 
-                       NWBrowseDescriptor, NWBrowser, NWConnection, NWConnectionStatistics, 
-                       NWDatagramConnection, NWEndpoint, NWGenericNetworkAgent, NWHostEndpoint, 
-                       NWInboundMessage, NWInterface, NWL2Report, NWMessage, NWMessageConnection, 
-                       NWMonitor, NWNetworkAgentRegistration, NWNetworkDescription, 
-                       NWOutboundMessage, NWParameters, NWPath, NWPathEvaluator, 
-                       NWProtocolTransform, NWRemoteConnectionActor, NWRemoteConnectionDirector, 
-                       NWRemotePacketProxy, NWResolver, NWStreamConnection, NWSystemPathMonitor, 
-                       NWTCPConnection, NWTCPListener, NWUDPListener, NWUDPSession ]
+    objc-classes:    [ NWAccumulator, NWActivityEmptyTrigger, NWActivityEpilogueStatistics, 
+                       NWActivityStatistics, NWAddressEndpoint, NWAdvertiseDescriptor, 
+                       NWBonjourBrowseDescriptor, NWBonjourServiceEndpoint, NWBrowseDescriptor, 
+                       NWBrowser, NWCandidatePathMonitor, NWConnection, NWConnectionStatistics, 
+                       NWDatagramConnection, NWDeviceReport, NWEndpoint, NWGenericNetworkAgent, 
+                       NWHostEndpoint, NWInboundMessage, NWInterface, NWL2Report, 
+                       NWMessage, NWMessageConnection, NWMonitor, NWNetworkAgentRegistration, 
+                       NWNetworkDescription, NWOutboundMessage, NWParameters, NWPath, 
+                       NWPathEvaluator, NWProtocolTransform, NWRemoteConnectionActor, 
+                       NWRemoteConnectionDirector, NWRemotePacketProxy, NWResolver, 
+                       NWStreamConnection, NWSystemPathMonitor, NWTCPConnection, 
+                       NWTCPListener, NWUDPListener, NWUDPSession ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+    symbols:         [ '$ld$install_name$os10.11$/System/Library/PrivateFrameworks/Network.framework/Versions/A/Network', 
+                       '$ld$install_name$os10.12$/System/Library/PrivateFrameworks/Network.framework/Versions/A/Network', 
+                       '$ld$install_name$os10.13$/System/Library/PrivateFrameworks/Network.framework/Versions/A/Network' ]
 ...

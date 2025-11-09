@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 51551E63-5AC6-30D3-B178-8BDA782C80EA', 'x86_64: 51551E63-5AC6-30D3-B178-8BDA782C80EA' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           477C017F-95BE-3169-B2B1-30B95F5257B4
+  - target:          x86_64-maccatalyst
+    value:           477C017F-95BE-3169-B2B1-30B95F5257B4
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           3FD3E71C-815F-330F-8E53-BA3F97D5D93A
+  - target:          arm64e-maccatalyst
+    value:           3FD3E71C-815F-330F-8E53-BA3F97D5D93A
 install-name:    '/usr/lib/libheimdal-asn1.dylib'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ ___crashreporter_info__, __asn1_bmember_isset_bit, __asn1_bmember_put_bit, 
                        __asn1_copy, __asn1_copy_top, __asn1_decode, __asn1_decode_top, 
                        __asn1_encode, __asn1_free, __asn1_free_top, __asn1_length, 

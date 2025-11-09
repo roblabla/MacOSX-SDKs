@@ -1,11 +1,28 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: E85E7213-15CE-3C96-9494-7F35E99C26EE', 'x86_64: E85E7213-15CE-3C96-9494-7F35E99C26EE' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           E3EDFD24-093B-3DD3-BBC0-3F6D3C683C51
+  - target:          x86_64-maccatalyst
+    value:           E3EDFD24-093B-3DD3-BBC0-3F6D3C683C51
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           68D9276B-AFEC-32EA-B361-1D8E3CFF265B
+  - target:          arm64e-maccatalyst
+    value:           68D9276B-AFEC-32EA-B361-1D8E3CFF265B
 install-name:    '/System/Library/PrivateFrameworks/login.framework/Versions/A/login'
-exports:         
-  - archs:           [ x86_64 ]
-    re-exports:      [ '/System/Library/PrivateFrameworks/login.framework/Versions/A/Frameworks/loginsupport.framework/Versions/A/loginsupport' ]
+reexported-libraries:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    libraries:       [ '/System/Library/PrivateFrameworks/login.framework/Versions/A/Frameworks/loginsupport.framework/Versions/A/loginsupport' ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CreateSessionOwnerConnection, _JoinAuditSessionIfNeeded, 
                        _LDCFProcessIDKey, _LFCFAFPHomeDirectoryPathKey, _LFCFAuditSessionIDKey, 
                        _LFCFAuditSessionKey, _LFCFAuditTokenKey, _LFCFCanRunKey, 
@@ -24,10 +41,10 @@ exports:
                        _LFCFUserInfoKey, _LFCFUserLongNameKey, _LFCFUserNameKey, 
                        _LFCFUserRecordUpdatedKey, _LFCFValueStringKey, _LFCFVendorIDKey, 
                        _LFCFWasPanicKey, _LFDBLoggingControllerStart, _LFDBLoggingControllerStop, 
-                       _LFLogindPortName, _LFSMCloseSession, _LFSMCopyAllSessions, 
-                       _LFSMCopyCurrentSession, _LFSMCopySessionAgentEndpoint, _LFSMCopySessionForUser, 
-                       _LFSMCopySessionOwnerEndpoint, _LFSMCopySessionProperties, 
-                       _LFSMCopySessionUserInfo, _LFSMCopySessionWithCGSessionID, 
+                       _LFDiskMountCallback, _LFLWLitePortName, _LFLogindPortName, 
+                       _LFSMCloseSession, _LFSMCopyAllSessions, _LFSMCopyCurrentSession, 
+                       _LFSMCopySessionAgentEndpoint, _LFSMCopySessionForUser, _LFSMCopySessionOwnerEndpoint, 
+                       _LFSMCopySessionProperties, _LFSMCopySessionUserInfo, _LFSMCopySessionWithCGSessionID, 
                        _LFSMCreateDefaultSessionOptions, _LFSMCreateSessionTemporaryBridge, 
                        _LFSMCreateSessionWithOptionsByStartingServer, _LFSMIsThisSessionOnConsole, 
                        _LFSMLegacySessionIDKey, _LFSMMoveSessionToConsoleTemporaryBridge, 
@@ -40,7 +57,10 @@ exports:
                        _LFSMTransitionTypeUnset, _LFSessionAgentPortName, _LFSessionLogoutPortName, 
                        _LFSessionOwnerPortName, _LFUserAuthAuthorityContainsBasic, 
                        _LFUserAuthAuthorityContainsDisabled, _LFUserAuthAuthorityContainsShadowHash, 
-                       _LFUserHasAuthAuthority, _LogindRemoteObjectProxy, _LogindSetMessageHandler, 
+                       _LFUserCanLoginWithAuthAuthority, _LFUserHasAuthAuthority, 
+                       _LWLSetMessageHandler, _LWLSleep, _LWLStartProgressBar, _LWLStartTransitionPivot, 
+                       _LWLStopProgressBar, _LWLiteRemoteObjectProxy, _LWLiteSendSelector, 
+                       _LogindRemoteObjectProxy, _LogindSetMessageHandler, _SACAssertScreenLockViaTouchIDBlocked, 
                        _SACBeginLoginTransition, _SACClassroomLockNotificationHidden, 
                        _SACClassroomLockNotificationShown, _SACCloseSessionWithOptions, 
                        _SACCopyOnceMiniBuddyItem, _SACCopyOnceMiniBuddyItemForUser, 
@@ -51,10 +71,12 @@ exports:
                        _SACMessageFaceTimeMuteCall, _SACMessageLogoutStatusClientLogoutFailed, 
                        _SACMessageLogoutStatusClientLogoutSuccess, _SACMessageMiniBuddyUIShowing, 
                        _SACMiniBuddyCopyUpgradeDictionary, _SACMiniBuddySignalFinishedStage1WithOptions, 
-                       _SACRestartForUser, _SACSaveSetupUserScreenShots, _SACScreenLockEnabled, 
-                       _SACScreenLockPreferencesChanged, _SACScreenSaverCanRun, _SACScreenSaverDidFadeInBackground, 
-                       _SACScreenSaverIsRunning, _SACScreenSaverIsRunningInBackground, 
-                       _SACScreenSaverStartNow, _SACScreenSaverStopNow, _SACScreenSaverStopNowWithOptions, 
+                       _SACRemoveAssertScreenLockViaTouchIDBlocked, _SACRestartForUser, 
+                       _SACSaveSetupUserScreenShots, _SACScreenLockEnabled, _SACScreenLockPreferencesChanged, 
+                       _SACScreenLockViaTouchIDAssertionTimeout, _SACScreenSaverCanRun, 
+                       _SACScreenSaverDidFadeInBackground, _SACScreenSaverIsRunning, 
+                       _SACScreenSaverIsRunningInBackground, _SACScreenSaverStartNow, 
+                       _SACScreenSaverStopNow, _SACScreenSaverStopNowWithOptions, 
                        _SACScreenSaverTimeRemaining, _SACSetAutoLoginPassword, _SACSetClassroomLockCaption, 
                        _SACSetFinalSnapshot, _SACSetMiniBuddyItem, _SACSetMiniBuddyItemForUser, 
                        _SACSetScreenSaverCanRun, _SACShieldWindowShowing, _SACShowClassroomLock, 
@@ -65,26 +87,29 @@ exports:
                        _SAClearSoftwareUpdateOptions, _SACopyAutologinPW, _SAPrepareForSetupUserScreenShots, 
                        _SASCopyDescriptionForSessionState, _SASNotifySessionStateForUser, 
                        _SASNotifyWhenAppropriateToShowUIForUser, _SASSessionStateForUser, 
-                       _SASetAutoLoginUserScreenLocked, _SASetAutologinPW, _SASetLaunchSoftwareUpdateTrigger, 
-                       _SASetPreviousStartupWasPanic, _SASetSCDynamicStoreConsoleInformation, 
-                       _SASetSessionAuthenticatedFlag, _SASetSessionHasConsoleAccessFlag, 
-                       _SASetSessionState, _SASetSoftwareUpdateOption, _SASetSwapCompaction, 
-                       _SASystemNotifyPost, _SAWriteKeyboardType, _SLOSetMessageHandler, 
-                       _SLOStartLogoutOfType, _SOCloseSessionWithOptions, _SOStartSessionWithOptions, 
-                       _SessionAgentConnectionWithMessageHandler, _SessionAgentRemoteObjectProxy, 
-                       _SessionLogoutRemoteObjectProxy, _SessionOwnerRemoteObjectProxy, 
-                       _SharedSARemoteObjectProxy, __copyMiniBuddyItemQuery, _gLFSessionManagementEnabled, 
-                       _gLFSessionManagementEnabledOnceToken, _kLFDBFlag_IPC, _kLFDBFlag_SA_FaceTime, 
+                       _SASetAccountTrackingPref, _SASetAutoLoginUserScreenLocked, 
+                       _SASetAutologinPW, _SASetLaunchSoftwareUpdateTrigger, _SASetPreviousStartupWasPanic, 
+                       _SASetSCDynamicStoreConsoleInformation, _SASetSessionAuthenticatedFlag, 
+                       _SASetSessionHasConsoleAccessFlag, _SASetSessionState, _SASetSoftwareUpdateOption, 
+                       _SASetSwapCompaction, _SASystemNotifyPost, _SAWriteKeyboardType, 
+                       _SLOSetMessageHandler, _SLOStartLogoutOfType, _SOCloseSessionWithOptions, 
+                       _SOStartSessionWithOptions, _SessionAgentConnectionWithMessageHandler, 
+                       _SessionAgentRemoteObjectProxy, _SessionLogoutRemoteObjectProxy, 
+                       _SessionOwnerRemoteObjectProxy, _SharedSARemoteObjectProxy, 
+                       __copyMiniBuddyItemQuery, _gLFSessionManagementEnabled, _gLFSessionManagementEnabledOnceToken, 
+                       _kLFDBFlag_IPC, _kLFDBFlag_LWL_General, _kLFDBFlag_SA_FaceTime, 
                        _kLFDBFlag_SA_FastUserSwitch, _kLFDBFlag_SA_General, _kLFDBFlag_SA_ReporterCookie, 
                        _kLFDBFlag_SA_ScreenSaver, _kLFDBFlag_SA_Shutdown, _kLFDBFlag_SA_SoftwareUpdate, 
                        _kLFDBFlag_SA_Startup, _kLFDBFlag_SLI_General, _kLFDBFlag_SLO_General, 
                        _kLFDBFlag_SM_AuditSession, _kLFDBFlag_SM_CGSession, _kLFDBFlag_SM_General, 
-                       _kLFDBFlag_UserHelper, _login_signpost_handle ]
-    objc-classes:    [ LFConnection, LFListener, LFListenerDelegate, LFLogindConnection, 
-                       LFLogindListener, LFMachPortWrapper, LFSMSession, LFSessionAgentConnection, 
+                       _kLFDBFlag_UserHelper, _kLFDBFlag_Volumes, _login_signpost_handle ]
+    objc-classes:    [ LFConnection, LFLWLiteConnection, LFLWLiteDelegate, LFLWLiteListener, 
+                       LFListener, LFListenerDelegate, LFLogindConnection, LFLogindListener, 
+                       LFMachPortWrapper, LFNotify, LFSMSession, LFSessionAgentConnection, 
                        LFSessionAgentListener, LFSessionAgentListenerDelegate, LFSessionAgentMessageHandler, 
                        LFSessionLogoutConnection, LFSessionLogoutDelegate, LFSessionLogoutListener, 
-                       LFSessionOwnerConnection, LFSessionOwnerListener, LFlogindListenerDelegate ]
+                       LFSessionOwnerConnection, LFSessionOwnerListener, LFVolume, 
+                       LFlogindListenerDelegate ]
     objc-ivars:      [ LFListenerDelegate._listener, LFLogindListener._privilegedInterface, 
                        LFSessionAgentMessageHandler._faceTimeCallCallbackBlockQueue, 
                        LFSessionAgentMessageHandler._faceTimeCallCancelCallbackBlock, 
@@ -92,16 +117,31 @@ exports:
                        LFSessionAgentMessageHandler._logoutBlockQueue, LFSessionAgentMessageHandler._logoutFailureBlock, 
                        LFSessionAgentMessageHandler._logoutSuccessBlock, LFSessionAgentMessageHandler._miniBuddyCompletionBlock, 
                        LFSessionAgentMessageHandler._miniBuddyCompletionBlockQueue ]
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: FD40A145-2FC6-3401-97AB-2E382A238786', 'x86_64: FD40A145-2FC6-3401-97AB-2E382A238786' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           AA42AB32-B6FD-3C43-B5EF-60147459AF81
+  - target:          x86_64-maccatalyst
+    value:           AA42AB32-B6FD-3C43-B5EF-60147459AF81
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           27902A6C-E1CD-3D84-AC51-EA1A16C597FC
+  - target:          arm64e-maccatalyst
+    value:           27902A6C-E1CD-3D84-AC51-EA1A16C597FC
 install-name:    '/System/Library/PrivateFrameworks/login.framework/Versions/A/Frameworks/loginsupport.framework/Versions/A/loginsupport'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _DBLoggerMaxFlag, _DBLoggerStartFlag, _DBLoggingGetMaskForController, 
                        _DBLoggingLogWithFormat, _DBLoggingSetLogFileForController, 
                        _DBLoggingSetMaskForController, _DBLoggingSetSignalEnabled, 
                        _DBLoggingStartWithController, _DBLoggingStop, _DBLoggingStopController, 
-                       _gDBLoggingMasks, _kUnknownFacility, _kUnknownProcess ]
+                       _LFBootedToFVUnlock, _LFBootedToInstaller, _gDBLoggingMasks, 
+                       _kUnknownFacility, _kUnknownProcess ]
 ...

@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 1A876313-E04B-377F-9BDD-17530DC892EF' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           C6ADB401-01F3-32C6-989F-AC0B1A9EAF9B
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           A39E5998-DB05-32DC-A324-9B04F135CC45
 install-name:    '/System/Library/PrivateFrameworks/AnnotationKit.framework/Versions/A/AnnotationKit'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _AKAdornmentZPositionOffset, _AKAnnotationChangeObjectKey, 
                        _AKAnnotationLayerSetupCompleteNotification, _AKAnnotationPropertiesChangedNotification, 
                        _AKAnnotationsAddedOrRemovedNotification, _AKAttributeControllerInkDidChangeNotification, 
@@ -32,10 +38,11 @@ exports:
                        AKModelController, AKNoteAnnotation, AKOvalAnnotation, AKOverlayView, 
                        AKPageController, AKPageControllerForTesting, AKPageModelController, 
                        AKPolygonAnnotation, AKPopupAnnotation, AKRectAnnotation, 
-                       AKRectangularShapeAnnotation, AKSecureSerializationHelper, 
+                       AKRectangularShapeAnnotation, AKRedactionRectAnnotation, AKSecureSerializationHelper, 
                        AKShapeAnnotation, AKSidecarController, AKSignature, AKSignatureAnnotation, 
-                       AKSignatureView, AKSpeechBubbleAnnotation, AKStarAnnotation, 
-                       AKStarAnnotationRenderer, AKStrokedAnnotation, AKTextAnnotationAttributeHelper, 
-                       AKTextBoxAnnotation, AKTextFieldAnnotation, AKThoughtBubbleAnnotation, 
-                       AKToolbarViewController, AKTriangleAnnotation, AKUndoController ]
+                       AKSignatureView, AKSparseMutableControllerArray, AKSpeechBubbleAnnotation, 
+                       AKStarAnnotation, AKStarAnnotationRenderer, AKStrokedAnnotation, 
+                       AKTextAnnotationAttributeHelper, AKTextBoxAnnotation, AKTextFieldAnnotation, 
+                       AKThoughtBubbleAnnotation, AKToolbarViewController, AKTriangleAnnotation, 
+                       AKUndoController ]
 ...

@@ -49,7 +49,7 @@ typedef function_table_entry   *function_table_t;
 #endif /* AUTOTEST */
 
 #ifndef	thread_act_MSG_COUNT
-#define	thread_act_MSG_COUNT	28
+#define	thread_act_MSG_COUNT	29
 #endif	/* thread_act_MSG_COUNT */
 
 #include <mach/std_types.h>
@@ -84,7 +84,7 @@ extern
 #endif	/* mig_external */
 kern_return_t act_get_state
 (
-	thread_act_t target_act,
+	thread_read_t target_act,
 	int flavor,
 	thread_state_t old_state,
 	mach_msg_type_number_t *old_stateCnt
@@ -112,7 +112,7 @@ extern
 #endif	/* mig_external */
 kern_return_t thread_get_state
 (
-	thread_act_t target_act,
+	thread_read_t target_act,
 	thread_state_flavor_t flavor,
 	thread_state_t old_state,
 	mach_msg_type_number_t *old_stateCnt
@@ -195,7 +195,7 @@ extern
 #endif	/* mig_external */
 kern_return_t thread_get_special_port
 (
-	thread_act_t thr_act,
+	thread_inspect_t thr_act,
 	int which_port,
 	mach_port_t *special_port
 );
@@ -250,7 +250,7 @@ extern
 #endif	/* mig_external */
 kern_return_t thread_get_exception_ports
 (
-	thread_inspect_t thread,
+	thread_act_t thread,
 	exception_mask_t exception_mask,
 	exception_mask_array_t masks,
 	mach_msg_type_number_t *masksCnt,
@@ -378,7 +378,7 @@ extern
 #endif	/* mig_external */
 kern_return_t thread_get_assignment
 (
-	thread_act_t thread,
+	thread_inspect_t thread,
 	processor_set_name_t *assigned_set
 );
 
@@ -407,7 +407,7 @@ extern
 #endif	/* mig_external */
 kern_return_t thread_get_mach_voucher
 (
-	thread_act_t thr_act,
+	thread_read_t thr_act,
 	mach_voucher_selector_t which,
 	ipc_voucher_t *voucher
 );
@@ -435,6 +435,23 @@ kern_return_t thread_swap_mach_voucher
 	thread_act_t thr_act,
 	ipc_voucher_t new_voucher,
 	ipc_voucher_t *old_voucher
+);
+
+/* Routine thread_convert_thread_state */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t thread_convert_thread_state
+(
+	thread_act_t thread,
+	int direction,
+	thread_state_flavor_t flavor,
+	thread_state_t in_state,
+	mach_msg_type_number_t in_stateCnt,
+	thread_state_t out_state,
+	mach_msg_type_number_t *out_stateCnt
 );
 
 __END_DECLS
@@ -486,7 +503,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		int flavor;
 		mach_msg_type_number_t new_stateCnt;
-		natural_t new_state[614];
+		natural_t new_state[1296];
 	} __Request__act_set_state_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack(pop)
@@ -513,7 +530,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		thread_state_flavor_t flavor;
 		mach_msg_type_number_t new_stateCnt;
-		natural_t new_state[614];
+		natural_t new_state[1296];
 	} __Request__thread_set_state_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack(pop)
@@ -821,6 +838,22 @@ __END_DECLS
 #ifdef  __MigPackStructs
 #pragma pack(pop)
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		int direction;
+		thread_state_flavor_t flavor;
+		mach_msg_type_number_t in_stateCnt;
+		natural_t in_state[1296];
+		mach_msg_type_number_t out_stateCnt;
+	} __Request__thread_convert_thread_state_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
 #endif /* !__Request__thread_act_subsystem__defined */
 
 /* union of all requests */
@@ -856,6 +889,7 @@ union __RequestUnion__thread_act_subsystem {
 	__Request__thread_get_mach_voucher_t Request_thread_get_mach_voucher;
 	__Request__thread_set_mach_voucher_t Request_thread_set_mach_voucher;
 	__Request__thread_swap_mach_voucher_t Request_thread_swap_mach_voucher;
+	__Request__thread_convert_thread_state_t Request_thread_convert_thread_state;
 };
 #endif /* !__RequestUnion__thread_act_subsystem__defined */
 /* typedefs for all replies */
@@ -883,7 +917,7 @@ union __RequestUnion__thread_act_subsystem {
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		mach_msg_type_number_t old_stateCnt;
-		natural_t old_state[614];
+		natural_t old_state[1296];
 	} __Reply__act_get_state_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack(pop)
@@ -909,7 +943,7 @@ union __RequestUnion__thread_act_subsystem {
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		mach_msg_type_number_t old_stateCnt;
-		natural_t old_state[614];
+		natural_t old_state[1296];
 	} __Reply__thread_get_state_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack(pop)
@@ -1229,6 +1263,20 @@ union __RequestUnion__thread_act_subsystem {
 #ifdef  __MigPackStructs
 #pragma pack(pop)
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		mach_msg_type_number_t out_stateCnt;
+		natural_t out_state[1296];
+	} __Reply__thread_convert_thread_state_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
 #endif /* !__Reply__thread_act_subsystem__defined */
 
 /* union of all replies */
@@ -1264,6 +1312,7 @@ union __ReplyUnion__thread_act_subsystem {
 	__Reply__thread_get_mach_voucher_t Reply_thread_get_mach_voucher;
 	__Reply__thread_set_mach_voucher_t Reply_thread_set_mach_voucher;
 	__Reply__thread_swap_mach_voucher_t Reply_thread_swap_mach_voucher;
+	__Reply__thread_convert_thread_state_t Reply_thread_convert_thread_state;
 };
 #endif /* !__RequestUnion__thread_act_subsystem__defined */
 
@@ -1296,7 +1345,8 @@ union __ReplyUnion__thread_act_subsystem {
     { "thread_set_policy", 3624 },\
     { "thread_get_mach_voucher", 3625 },\
     { "thread_set_mach_voucher", 3626 },\
-    { "thread_swap_mach_voucher", 3627 }
+    { "thread_swap_mach_voucher", 3627 },\
+    { "thread_convert_thread_state", 3628 }
 #endif
 
 #ifdef __AfterMigUserHeader

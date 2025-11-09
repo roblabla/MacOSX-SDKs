@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 05C59CF1-8C13-3EF0-B9EC-CD379ACDA8B0' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           B7267030-CB43-3108-91FC-76BA769DF739
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           FF0674EB-A921-3F7B-ACE9-07B8985BEBDC
 install-name:    '/System/Library/PrivateFrameworks/Mondrian.framework/Versions/A/Mondrian'
-current-version: 101.13.100
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 311.0.120
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _GridRectEdgeOppositeEdge, _MOAVAssetCreateThumbnailWithURL, 
                        _MOAssetsViewCustomStyleCellRegistration, _MOAssetsViewCustomStyleDefaultCellRegistration, 
                        _MOAssetsViewCustomStyleDefaultFooterViewRegistration, _MOAssetsViewCustomStyleDefaultHeaderViewRegistration, 
@@ -104,7 +110,7 @@ exports:
                        _kMOMonitoringSystemStatsSystemCPUUsagePercentageKey, _kMOMonitoringSystemStatsVMCompressorPageCountBytesKey, 
                        _kMOMonitoringSystemStatsVMPageInBytesKey, _kMOMonitoringSystemStatsVMPageOutBytesKey, 
                        _kMOMonitoringSystemStatsVMSwapUsedBytesKey, _kMONSOperationErrorDomain, 
-                       _kMONSOperationProgressKey, _kRecommendedVisibleContentPreparationWaitDelay ]
+                       _kRecommendedVisibleContentPreparationWaitDelay ]
     objc-classes:    [ AXTextField, MOAssetsLayout, MOAssetsMediaView, MOAssetsView, 
                        MOCollectionView, MOCollectionView_NRS, MOFast2DIndex, MOImageDiskCache, 
                        MOLRUCache, MOLiveUpdateController, MOLogger, MOLoggingStore, 

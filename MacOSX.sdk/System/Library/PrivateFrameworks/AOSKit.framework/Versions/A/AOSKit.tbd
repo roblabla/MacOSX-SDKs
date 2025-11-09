@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: CD6F8A5A-7ABC-39D5-9420-95F4C6375E8C' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           D9FFC853-61C5-3418-BE72-690CE7F37C24
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           F4EE87C4-F12C-3A2E-98FA-EF3DBB1D32B7
 install-name:    '/System/Library/PrivateFrameworks/AOSKit.framework/Versions/A/AOSKit'
-current-version: 273
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 282
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _AOSAccountCacheNewAuthToken, _AOSAccountCopyAuthInfo, _AOSAccountCopyInfo, 
                        _AOSAccountCreate, _AOSAccountGetAppleID, _AOSAccountGetPassword, 
                        _AOSAccountGetProperties, _AOSAccountGetUser, _AOSAccountRefreshInfo, 
@@ -120,12 +126,12 @@ exports:
                        _kAOSFamilyMemberAppleID, _kAOSFamilyMemberPassword, _kAOSFirstNameKey, 
                        _kAOSGSServiceIdKey, _kAOSGSServiceIdsKey, _kAOSGSTokenHeaderName, 
                        _kAOSGenericDialogType, _kAOSHelpButtonLinkKey, _kAOSHttpStatusCodeKey, 
-                       _kAOSImageCropRectKey, _kAOSImageDataKey, _kAOSInfoVersionKey, 
-                       _kAOSInitNasSessionHeaderName, _kAOSIsAbsintheRequiredKey, 
-                       _kAOSIsAnisetteRequiredKey, _kAOSIsICloudLoginKey, _kAOSIsPrimaryAccountHeaderName, 
-                       _kAOSKError1, _kAOSKError2, _kAOSKErrorAttribute, _kAOSKErrorInfo, 
-                       _kAOSKErrorType, _kAOSLastNameFirstRequiredKey, _kAOSLastNameKey, 
-                       _kAOSLocalAccountUIDHeaderName, _kAOSLocalizedServiceNameKey, 
+                       _kAOSICloudExperimentalModeHeaderName, _kAOSImageCropRectKey, 
+                       _kAOSImageDataKey, _kAOSInfoVersionKey, _kAOSInitNasSessionHeaderName, 
+                       _kAOSIsAbsintheRequiredKey, _kAOSIsAnisetteRequiredKey, _kAOSIsICloudLoginKey, 
+                       _kAOSIsPrimaryAccountHeaderName, _kAOSKError1, _kAOSKError2, 
+                       _kAOSKErrorAttribute, _kAOSKErrorInfo, _kAOSKErrorType, _kAOSLastNameFirstRequiredKey, 
+                       _kAOSLastNameKey, _kAOSLocalAccountUIDHeaderName, _kAOSLocalizedServiceNameKey, 
                        _kAOSLoggedInAppleIdHeaderName, _kAOSLoginAppleIDKey, _kAOSLoginPasswordKey, 
                        _kAOSLoginRecoveryModeKey, _kAOSMDAccountDSIDHeaderName, _kAOSMDActionHeaderName, 
                        _kAOSMDDataHeaderName, _kAOSMDMachineIdHeaderName, _kAOSMDOneTimePasswordHeaderName, 

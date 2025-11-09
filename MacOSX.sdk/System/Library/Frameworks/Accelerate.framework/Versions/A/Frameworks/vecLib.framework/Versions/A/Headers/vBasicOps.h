@@ -3,9 +3,9 @@
  
      Contains:   Basic Algebraic Operations for AltiVec
  
-     Version:    vecLib-735.0
+     Version:    vecLib-760.40
  
-     Copyright:  Copyright (c) 1999-2019 by Apple Inc. All rights reserved.
+     Copyright:  Copyright (c) 1999-2020 by Apple Inc. All rights reserved.
  
      Bugs:       For bug reports, consult the following page on
                  the World Wide Web:
@@ -21,6 +21,9 @@
 #include "vecLibTypes.h"
 
 #include <os/availability.h>
+#if __has_include( <TargetConditionals.h> )
+#include <TargetConditionals.h>
+#endif
 
 #if PRAGMA_ONCE
 #pragma once
@@ -31,25 +34,36 @@ extern "C" {
 #endif
 
 
+// There are certain routines (namely vS64Add and vU64Add) with 1
+// instruction implementations. There is no point in having a function
+// call occur and then return after executing 1 instruction. Thus we
+// introduce this define to allow for certain inline
+// attributes to be defined.
+#if defined __SSE2__
+	#include <immintrin.h>
+#elif defined (__arm64__)
+	#include <arm_neon.h>
+#endif // defined __SSE2__
+#define __VBASICOPS_INLINE_ATTR__ __attribute__((__always_inline__, __nodebug__))
+
 #if !defined __has_feature
-    #define __has_feature(f)    0
+	#define __has_feature(f)    0
 #endif
 #if __has_feature(assume_nonnull)
-    _Pragma("clang assume_nonnull begin")
+	_Pragma("clang assume_nonnull begin")
 #else
-    #define __nullable
-    #define __nonnull
+	#define __nullable
+	#define __nonnull
 #endif
 
 
-#if defined(__ppc__) || defined(__ppc64__) || defined(__i386__) || defined(__x86_64__)
-#if defined _AltiVecPIMLanguageExtensionsAreEnabled || defined __SSE2__
+#if TARGET_OS_OSX
 
 /*                                                                                  
-  This section is a collection of algebraic functions that uses the AltiVec       
+  This section is a collection of algebraic functions that uses the SIMD
   instruction set, and is designed to facilitate vector processing in             
   mathematical programming. Following table indicates which functions are covered
-  by AltiVec instruction set and which ones are performed by vBasicOps library:
+  by SIMD instruction set and which ones are performed by vBasicOps library:
 
 Legend:
     H/W   = Hardware
@@ -150,27 +164,6 @@ Following is a short description of functions in this section:
       Rotate2      Rotate by two factors( only apply to 64 bit operation )     
                                                                                  
 */
-
-// There are certain routines (namely vS64Add and vU64Add) with 1
-// instruction implementations. There is no point in having a function
-// call occur and then return after executing 1 instruction. Thus we
-// introduce this conditional define to allow for certain inline
-// attributes to be defined.
-// However, as we still include these symbols in they dylib for
-// backwards compatability, they must not be inline for the tapi
-// installapi pass.
-#if defined __SSE2__
-
-#if __has_feature(assume_nonnull)
-    _Pragma("clang assume_nonnull end")
-	#include <immintrin.h>
-    _Pragma("clang assume_nonnull begin")
-#else
-	#include <immintrin.h>
-#endif
-
-#define __VBASICOPS_INLINE_ATTR__ __attribute__((__always_inline__, __nodebug__))
-#endif // defined __SSE2__
 
 
 /*
@@ -377,6 +370,11 @@ static __inline__ vUInt16 __VBASICOPS_INLINE_ATTR__
 vU16HalfMultiply(
   vUInt16   __vbasicops_vA,
   vUInt16   __vbasicops_vB) { return _mm_mullo_epi16(__vbasicops_vA, __vbasicops_vB); }
+#elif defined __arm64__ && !defined __clang_tapi__
+static __inline__ vUInt16 __VBASICOPS_INLINE_ATTR__
+vU16HalfMultiply(
+  vUInt16   __vbasicops_vA,
+  vUInt16   __vbasicops_vB) { return vmulq_u16((uint16x8_t)__vbasicops_vA, (uint16x8_t)__vbasicops_vB); }
 #else // defined __SSE2__ && !defined __clang_tapi__
 extern vUInt16 
 vU16HalfMultiply(
@@ -402,6 +400,11 @@ static __inline__ vSInt16 __VBASICOPS_INLINE_ATTR__
 vS16HalfMultiply(
   vSInt16   __vbasicops_vA,
   vSInt16   __vbasicops_vB) { return _mm_mullo_epi16(__vbasicops_vA, __vbasicops_vB); }
+#elif defined __arm64__ && !defined __clang_tapi__
+static __inline__ vSInt16 __VBASICOPS_INLINE_ATTR__
+vS16HalfMultiply(
+  vSInt16   __vbasicops_vA,
+  vSInt16   __vbasicops_vB) { return vmulq_s16((int16x8_t)__vbasicops_vA, (int16x8_t)__vbasicops_vB); }
 #else // defined __SSE2__ && !defined __clang_tapi__
 extern vSInt16 
 vS16HalfMultiply(
@@ -653,6 +656,11 @@ static __inline__ vUInt32 __VBASICOPS_INLINE_ATTR__
 vU64Sub(
   vUInt32   __vbasicops_vA,
   vUInt32   __vbasicops_vB) { return _mm_sub_epi64(__vbasicops_vA, __vbasicops_vB); }
+#elif defined __arm64__ && !defined __clang_tapi__
+static __inline__ vUInt32 __VBASICOPS_INLINE_ATTR__
+vU64Sub(
+  vUInt32   __vbasicops_vA,
+  vUInt32   __vbasicops_vB) { return vsubq_u64( (uint64x2_t)__vbasicops_vA, (uint64x2_t)__vbasicops_vB); }
 #else	//	defined __SSE2__ && !defined __clang_tapi__
 extern vUInt32 
 vU64Sub(
@@ -723,6 +731,11 @@ static __inline__ vSInt32 __VBASICOPS_INLINE_ATTR__
 vS64Sub(
   vSInt32   __vbasicops_vA,
   vSInt32   __vbasicops_vB) { return _mm_sub_epi64(__vbasicops_vA, __vbasicops_vB); }
+#elif defined __arm64__ && !defined __clang_tapi__
+static __inline__ vUInt32 __VBASICOPS_INLINE_ATTR__
+vS64Sub(
+  vUInt32   __vbasicops_vA,
+  vUInt32   __vbasicops_vB) { return vsubq_s64( (int64x2_t)__vbasicops_vA, (int64x2_t)__vbasicops_vB); }
 #else	//	defined __SSE2__ && !defined __clang_tapi__
 extern vSInt32 
 vS64Sub(
@@ -790,6 +803,11 @@ static __inline__ vUInt32 __VBASICOPS_INLINE_ATTR__
 vU64Add(
   vUInt32   __vbasicops_vA,
   vUInt32   __vbasicops_vB) { return _mm_add_epi64(__vbasicops_vA, __vbasicops_vB); }
+#elif defined __arm64__ && !defined __clang_tapi__
+static __inline__ vUInt32 __VBASICOPS_INLINE_ATTR__
+vU64Add(
+  vUInt32   __vbasicops_vA,
+  vUInt32   __vbasicops_vB) { return vaddq_u64( (uint64x2_t)__vbasicops_vA, (uint64x2_t)__vbasicops_vB); }
 #else	//	defined __SSE2__ && !defined __clang_tapi__
 extern vUInt32
 vU64Add(
@@ -855,6 +873,11 @@ static __inline__ vSInt32 __VBASICOPS_INLINE_ATTR__
 vS64Add(
   vSInt32   __vbasicops_vA,
   vSInt32   __vbasicops_vB) { return _mm_add_epi64(__vbasicops_vA, __vbasicops_vB); }
+#elif defined __arm64__ && !defined __clang_tapi__
+static __inline__ vUInt32 __VBASICOPS_INLINE_ATTR__
+vS64Add(
+  vSInt32   __vbasicops_vA,
+  vSInt32   __vbasicops_vB) { return vaddq_s64( (int64x2_t)__vbasicops_vA, (int64x2_t)__vbasicops_vB); }
 #else // defined __SSE2__ && !defined __clang_tapi__
 extern vSInt32 
 vS64Add(
@@ -1170,9 +1193,8 @@ vR128Rotate(
   vUInt8    vRotateFactor) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
-#endif  // defined _AltiVecPIMLanguageExtensionsAreEnabled || defined __SSE2__
 
-#endif  /* defined(__ppc__) || defined(__ppc64__) || defined(__i386__) || defined(__x86_64__) */
+#endif  /* TARGET_OS_OSX */
 
 
 #if __has_feature(assume_nonnull)

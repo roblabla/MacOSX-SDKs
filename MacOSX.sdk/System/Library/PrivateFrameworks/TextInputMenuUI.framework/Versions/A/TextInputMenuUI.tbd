@@ -1,20 +1,26 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 12A4D24F-3B32-34AD-B8F7-28BFB6EA1E94' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           5FF27923-A2E0-3A50-B3BE-E3A8D8ED8A2F
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           0FDFB101-5CC2-3016-9B17-0E95D23A8D23
 install-name:    '/System/Library/PrivateFrameworks/TextInputMenuUI.framework/Versions/A/TextInputMenuUI'
-current-version: 243
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 268
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _AmTargetProcess, _CarbonModifiersToAppkitModifiers, _CreateClassFromKey, 
-                       _CreateNSImageFromIconRef, _GetKeyFocusProcess, _MessageTracerLogDidSwitch, 
-                       _TISMakeRectWithAspectRatioInsideRect, __InputSwitcherIsRunning, 
-                       __InputSwitcherStart, __InputSwitcherStop, __InputSwitcherSwitch, 
-                       _alignPointToUserSpace, _alignRectToUserSpace, _createAlignedImage, 
-                       _kFloatingIndicatorIconSize, _kIMSReceiveUIServerMessagesPortName, 
-                       _kImageViewTag, _kLableViewTag, _kSCIMInputSourceID, _kTCIMInputSourceID, 
-                       _kTouchBarReceiveDisableInputMessagesPortName, _kTrackingOff, 
-                       _kTrackingOn, _kWindowHVInset, _tabID ]
+                       _CreateNSImageFromIconRef, _GetKeyFocusProcess, _ISWHotKeyDidPressedNotification, 
+                       _MessageTracerLogDidSwitch, _TISMakeRectWithAspectRatioInsideRect, 
+                       __InputSwitcherIsRunning, __InputSwitcherStart, __InputSwitcherStop, 
+                       __InputSwitcherSwitch, __ToggleInputSwitcherIfNecessary, _alignPointToUserSpace, 
+                       _alignRectToUserSpace, _createAlignedImage, _kFloatingIndicatorIconSize, 
+                       _kIMSReceiveUIServerMessagesPortName, _kImageViewTag, _kLableViewTag, 
+                       _kSCIMInputSourceID, _kTCIMInputSourceID, _kTouchBarReceiveDisableInputMessagesPortName, 
+                       _kTrackingOff, _kTrackingOn, _kWindowHVInset, _tabID ]
     objc-classes:    [ CPInputSource, HUDCollectionView, HUDCollectionViewItem, HUDController, 
                        HUDPanel, HUDRoundedContextView, HUDTextView, HUDWindowController, 
                        HandwritingInputSource, IMInputSource, ISWHotKey, InputSource, 
@@ -34,10 +40,10 @@ exports:
                        HUDController.mediumTemplateView, HUDController.recentInputs, 
                        HUDController.smallMediumTemplateView, HUDController.smallTemplateView, 
                        HUDController.sortedInputs, HUDController.templateView, HUDController.tinyTemplateView, 
-                       HUDController.visualEffectView, HUDPanel.fIsEventCaptureOurs, 
-                       HUDWindowController.fCurrentInputSource, HUDWindowController.fDisabledInputSources, 
-                       HUDWindowController.fHotKeysRegistered, HUDWindowController.fIsSecureMode, 
-                       HUDWindowController.fSourceListContainsOnlyCurrentSource, 
+                       HUDController.visualEffectView, HUDPanel.fIgnoreNextFlagChangedEvent, 
+                       HUDPanel.fIsEventCaptureOurs, HUDWindowController.fCurrentInputSource, 
+                       HUDWindowController.fDisabledInputSources, HUDWindowController.fHotKeysRegistered, 
+                       HUDWindowController.fIsSecureMode, HUDWindowController.fSourceListContainsOnlyCurrentSource, 
                        HUDWindowController.fTargetApp, HUDWindowController.fTargetDocRef, 
                        HUDWindowController.hotKeyChar, HUDWindowController.hotModifiers, 
                        HUDWindowController.hotVirtualKey, HUDWindowController.hudViewController, 

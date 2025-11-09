@@ -9,9 +9,10 @@
 #import <Foundation/NSObject.h>
 #import <Foundation/NSString.h>
 #import <AppKit/NSApplication.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 static const NSAppKitVersion NSAppKitVersionNumberWithDockTilePlugInSupport = 1001.0;
 

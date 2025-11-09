@@ -30,7 +30,6 @@
 #ifndef _SYS_EV_H_
 #define _SYS_EV_H_
 
-
 #include <sys/appleapiopts.h>
 
 #include <sys/queue.h>
@@ -74,8 +73,6 @@ int     modwatch(er_t, int);
 int     watchevent(er_t, int);
 int     waitevent(er_t, struct timeval *);
 __END_DECLS
-
-
 
 
 #endif /* _SYS_EV_H_ */

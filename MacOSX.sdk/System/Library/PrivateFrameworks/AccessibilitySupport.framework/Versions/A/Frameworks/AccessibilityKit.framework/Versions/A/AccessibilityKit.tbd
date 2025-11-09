@@ -1,13 +1,20 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 96534934-89A9-3B07-BA4A-A882B1204AB7' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           882205DC-E014-34D5-9B6C-3CF68316A46A
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           94A99749-2699-3877-90F3-CFD353059ECC
 install-name:    '/System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/Frameworks/AccessibilityKit.framework/Versions/A/AccessibilityKit'
 current-version: 2
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _AXKContrastRatioForColor, _AXKDebugPrintHierarchy, _AXKHsv2rgb, 
-                       _AXKRecommendedColorForColors, _AXKRgb2hsv, _AXKThreadingCheckAssertCurrentQueueIsAppQueueForElement, 
+                       _AXKLuminanceForColor, _AXKRecommendedColorForColors, _AXKRgb2hsv, 
+                       _AXKThreadingCheckAssertCurrentQueueIsAppQueueForElement, 
                        _AXKThreadingCheckAssertCurrentQueueIsEqual, _AXKThreadingCheckAssertCurrentQueueIsMain, 
                        _AXKThreadingCheckAssertCurrentQueueNotMain, _AXKThreadingCheckAsserturrentQueueIsAppQueueForApp, 
                        _AccessibilityKitVersionNumber, _AccessibilityKitVersionString, 
@@ -27,9 +34,10 @@ exports:
                        AXKElementDescriber, AXKElementDescriberConfiguration, AXKFocusManager, 
                        AXKFoundationAction, AXKInputMarkingSessionTracker, AXKKeyboardFocusListenerSharedKeyboardFocusElementInfo, 
                        AXKKeyboardFocusTracker, AXKOrAction, AXKRemoteSearchManager, 
-                       AXKScreenReadingElementTraversalStrategy, AXKSearchManager, 
-                       AXKSimpleStringTextProvider, AXKStringTokenizer, AXKTextElementEditListenerElementInfo, 
-                       AXKTextElementEditTracker, AXKTextNavigator, AXKWorkspaceManager, 
-                       _AXKApplicationOperation, _AXKClassPredicate, _AXKClassRegistrar, 
-                       _AXKElementCacheValue, _AXKKeyboardFocusListenerWrapper, _AXKTextElementEditListenerWrapper ]
+                       AXKResourceManager, AXKScreenReadingElementTraversalStrategy, 
+                       AXKSearchManager, AXKSimpleStringTextProvider, AXKStringTokenizer, 
+                       AXKTextElementEditListenerElementInfo, AXKTextElementEditTracker, 
+                       AXKTextNavigator, AXKWorkspaceManager, _AXKApplicationOperation, 
+                       _AXKClassPredicate, _AXKClassRegistrar, _AXKElementCacheValue, 
+                       _AXKKeyboardFocusListenerWrapper, _AXKTextElementEditListenerWrapper ]
 ...

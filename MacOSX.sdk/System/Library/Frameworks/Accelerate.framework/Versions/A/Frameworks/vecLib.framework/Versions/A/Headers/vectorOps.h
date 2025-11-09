@@ -3,9 +3,9 @@
  
      Contains:   vector and matrix functions for AltiVec
  
-     Version:    vecLib-735.0
+     Version:    vecLib-760.40
  
-     Copyright:  Copyright (c) 1999-2019 by Apple Inc. All rights reserved.
+     Copyright:  Copyright (c) 1999-2020 by Apple Inc. All rights reserved.
  
      Bugs:       For bug reports, consult the following page on
                  the World Wide Web:
@@ -61,7 +61,7 @@ extern "C" {
  Following is a list of subprograms and a short description of each one.          
 -------------------------------------------------------------------------------------
 */
-#if defined _AltiVecPIMLanguageExtensionsAreEnabled || defined __SSE__
+#if defined __arm64__ || defined __SSE__
 /*
 -------------------------------------------------------------------------------------
      Level 1
@@ -1040,10 +1040,10 @@ vSgetmo(
 	Input:
 
 		l is the number of elements in A and the number of rows in M.
-		n is the number of elements in B and the number of columns in N.
+		n is the number of elements in B and the number of columns in M.
 		A is a vector of L floating-point numbers.
 		B is a vector of M floating-point numbers.
-		M is an array with space for L*N floating-point numbers.
+		M is an array with space for l*n floating-point numbers.
 
 	Output:
 

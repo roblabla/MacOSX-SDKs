@@ -5,8 +5,9 @@
 //  Copyright (c) 2014 Apple Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <GameController/GCExtern.h>
+#import <GameController/GCPhysicalInputProfile.h>
+#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -25,7 +26,10 @@ NS_ASSUME_NONNULL_BEGIN
  and depend on, no matter the underlying hardware.
  */
 API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
-@interface GCMicroGamepad : NSObject
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunguarded-availability"
+@interface GCMicroGamepad : GCPhysicalInputProfile
+#pragma clang diagnostic pop
 
 /**
  A profile keeps a reference to the controller that this profile is mapping input from.
@@ -62,14 +66,14 @@ typedef void (^GCMicroGamepadValueChangedHandler)(GCMicroGamepad *gamepad, GCCon
 /**
  Optionally analog in the Micro profile. All the elements of this directional input are either analog or digital.
  */
-@property (nonatomic, readonly, retain) GCControllerDirectionPad *dpad;
+@property (nonatomic, readonly, strong) GCControllerDirectionPad *dpad;
 
 /**
  The Micro profile has two buttons that are optionally analog in the Micro profile.
  Button A is the primary action button, it indicates affirmative action and should be used to advance in menus
  or perform the primary action in gameplay.
  */
-@property (nonatomic, readonly, retain) GCControllerButtonInput *buttonA;
+@property (nonatomic, readonly, strong) GCControllerButtonInput *buttonA;
 
 /**
  Button X is the secondary action button, it indicates an alternate affirmative action and should be used to perform
@@ -79,7 +83,7 @@ typedef void (^GCMicroGamepadValueChangedHandler)(GCMicroGamepad *gamepad, GCCon
  used to present menu content or to retreat in a menu flow.
  @see buttonA
  */
-@property (nonatomic, readonly, retain) GCControllerButtonInput *buttonX;
+@property (nonatomic, readonly, strong) GCControllerButtonInput *buttonX;
 
 /**
  Button menu is the primary menu button, and should be used to enter the main menu and pause the game.
@@ -95,14 +99,14 @@ typedef void (^GCMicroGamepadValueChangedHandler)(GCMicroGamepad *gamepad, GCCon
  
  The default value for this property is NO, meaning a sliding window is used for the dpad.
  */
-@property (nonatomic, assign) BOOL reportsAbsoluteDpadValues;
+@property (nonatomic) BOOL reportsAbsoluteDpadValues;
 
 /**
  Allows the Micro profile to monitor the orientation of the controller, if the controller is positioned in landscape orientation, D-pad input values will be transposed 90 degrees to match the new orientation.
  
  The default value for this property is NO.
  */
-@property (nonatomic, assign) BOOL allowsRotation;
+@property (nonatomic) BOOL allowsRotation;
 
 /**
  Sets the state vector of the micro gamepad to a copy of the input micro gamepad's state vector.

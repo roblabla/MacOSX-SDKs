@@ -4,10 +4,12 @@
 */
  
 #import <Cocoa/Cocoa.h>
+#import <AvailabilityMacros.h>
 #import <IOBluetooth/objc/IOBluetoothDevice.h>
 #import <IOBluetooth/objc/IOBluetoothSDPServiceRecord.h>
 #import <IOBluetoothUI/IOBluetoothUIUserLib.h>
 
+API_UNAVAILABLE_BEGIN(ios)
 //--------------------------------------------------------------------------------------------------------------------------
 /*!	@header		IOBluetoothDeviceSelectorController.h
 	@abstract	Public Interfaces for Apple's implementation of a pairing window for Bluetooth technology.
@@ -282,3 +284,4 @@
 
 
 @end
+API_UNAVAILABLE_END

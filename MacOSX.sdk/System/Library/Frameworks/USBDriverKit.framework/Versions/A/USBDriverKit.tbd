@@ -1,22 +1,29 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 66E3209B-B835-3566-9AFE-EDE7ACB8A009' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           D905503F-6E01-3CE5-AC25-9FF7AC8D747F
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           C4620C72-EEED-382A-968D-2BF51CFB4836
 install-name:    '/System/Library/Frameworks/USBDriverKit.framework/Versions/A/USBDriverKit'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _IOUSBGetBillboardDescriptor, _IOUSBGetConfigurationMaxPowerMilliAmps, 
                        _IOUSBGetContainerIDDescriptor, _IOUSBGetEndpointAddress, 
-                       _IOUSBGetEndpointDirection, _IOUSBGetEndpointIntervalEncodedMicroframes, 
+                       _IOUSBGetEndpointBurstSize, _IOUSBGetEndpointDirection, _IOUSBGetEndpointIntervalEncodedMicroframes, 
                        _IOUSBGetEndpointIntervalFrames, _IOUSBGetEndpointIntervalMicroframes, 
                        _IOUSBGetEndpointMaxPacketSize, _IOUSBGetEndpointMaxStreams, 
-                       _IOUSBGetEndpointMaxStreamsEncoded, _IOUSBGetEndpointNumber, 
-                       _IOUSBGetEndpointType, _IOUSBGetNextAssociatedDescriptor, 
+                       _IOUSBGetEndpointMaxStreamsEncoded, _IOUSBGetEndpointMult, 
+                       _IOUSBGetEndpointNumber, _IOUSBGetEndpointType, _IOUSBGetNextAssociatedDescriptor, 
                        _IOUSBGetNextAssociatedDescriptorWithType, _IOUSBGetNextCapabilityDescriptor, 
                        _IOUSBGetNextCapabilityDescriptorWithType, _IOUSBGetNextDescriptor, 
                        _IOUSBGetNextDescriptorWithType, _IOUSBGetNextEndpointDescriptor, 
                        _IOUSBGetNextInterfaceAssociationDescriptor, _IOUSBGetNextInterfaceDescriptor, 
-                       _IOUSBGetSuperSpeedDeviceCapabilityDescriptor, _IOUSBGetUSB20ExtensionDeviceCapabilityDescriptor, 
+                       _IOUSBGetPlatformCapabilityDescriptor, _IOUSBGetSuperSpeedDeviceCapabilityDescriptor, 
+                       _IOUSBGetSuperSpeedPlusDeviceCapabilityDescriptor, _IOUSBGetUSB20ExtensionDeviceCapabilityDescriptor, 
                        _IOUSBHostDevice_Class, _IOUSBHostInterface_Class, _IOUSBHostPipe_Class, 
                        __Z23IOUSBHostFreeDescriptorPK18IOUSBBOSDescriptor, __Z23IOUSBHostFreeDescriptorPK21IOUSBDeviceDescriptor, 
                        __Z23IOUSBHostFreeDescriptorPK21IOUSBStringDescriptor, __Z23IOUSBHostFreeDescriptorPK28IOUSBConfigurationDescriptor, 
@@ -41,11 +48,14 @@ exports:
                        __ZN13IOUSBHostPipe21GetDescriptors_InvokeE5IORPCP15OSMetaClassBasePFiS2_P32IOUSBStandardEndpointDescriptors33IOUSBGetEndpointDescriptorOptionsE, 
                        __ZN13IOUSBHostPipe22CompleteAsyncIOBundledEP8OSActionjjPKjiPKiiPFiP15OSMetaClassBase5IORPCE, 
                        __ZN13IOUSBHostPipe22CompleteAsyncIO_InvokeE5IORPCP15OSMetaClassBasePFvS2_P8OSActionijyE, 
+                       __ZN13IOUSBHostPipe22CompleteAsyncIO_InvokeE5IORPCP15OSMetaClassBasePFvS2_P8OSActionijyEPK11OSMetaClass, 
                        __ZN13IOUSBHostPipe23GetDeviceAddress_InvokeE5IORPCP15OSMetaClassBasePFiS2_PhE, 
                        __ZN13IOUSBHostPipe26CreateMemoryDescriptorRingEjPFiP15OSMetaClassBase5IORPCE, 
                        __ZN13IOUSBHostPipe26SetMemoryDescriptor_InvokeE5IORPCP15OSMetaClassBasePFiS2_P18IOMemoryDescriptorjE, 
                        __ZN13IOUSBHostPipe27CompleteAsyncIsochIO_InvokeE5IORPCP15OSMetaClassBasePFvS2_P8OSActioniE, 
+                       __ZN13IOUSBHostPipe27CompleteAsyncIsochIO_InvokeE5IORPCP15OSMetaClassBasePFvS2_P8OSActioniEPK11OSMetaClass, 
                        __ZN13IOUSBHostPipe29CompleteAsyncIOBundled_InvokeE5IORPCP15OSMetaClassBasePFvS2_P8OSActionjjPKjiPKiiE, 
+                       __ZN13IOUSBHostPipe29CompleteAsyncIOBundled_InvokeE5IORPCP15OSMetaClassBasePFvS2_P8OSActionjjPKjiPKiiEPK11OSMetaClass, 
                        __ZN13IOUSBHostPipe2IOEP18IOMemoryDescriptorjPjjPFiP15OSMetaClassBase5IORPCE, 
                        __ZN13IOUSBHostPipe33CreateMemoryDescriptorRing_InvokeE5IORPCP15OSMetaClassBasePFiS2_jE, 
                        __ZN13IOUSBHostPipe5AbortEjiP9IOServicePFiP15OSMetaClassBase5IORPCE, 
@@ -83,6 +93,7 @@ exports:
                        __ZN15IOUSBHostDevice27CopyConfigurationDescriptorEh, __ZN15IOUSBHostDevice30CreateInterfaceIterator_InvokeE5IORPCP15OSMetaClassBasePFiS2_PmE, 
                        __ZN15IOUSBHostDevice31DestroyInterfaceIterator_InvokeE5IORPCP15OSMetaClassBasePFiS2_mE, 
                        __ZN15IOUSBHostDevice33CompleteAsyncDeviceRequest_InvokeE5IORPCP15OSMetaClassBasePFvS2_P8OSActionijE, 
+                       __ZN15IOUSBHostDevice33CompleteAsyncDeviceRequest_InvokeE5IORPCP15OSMetaClassBasePFvS2_P8OSActionijEPK11OSMetaClass, 
                        __ZN15IOUSBHostDevice36CopyConfigurationDescriptorWithValueEh, 
                        __ZN15IOUSBHostDevice4OpenEP9IOServicejmPFiP15OSMetaClassBase5IORPCE, 
                        __ZN15IOUSBHostDevice5CloseEP9IOServicejPFiP15OSMetaClassBase5IORPCE, 

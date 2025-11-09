@@ -10,6 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+API_UNAVAILABLE_BEGIN(ios)
+
 @class AMWorkflow;
 @class AMWorkflowController;
 
@@ -37,9 +39,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (getter=isEditable, atomic) BOOL editable;
 
-// This property was labeled "strong" in 10.12, even though it was really implemented as "assign". In 10.3 and above, this is now labeled and correctly implemented as "weak".
+// This property was labeled "strong" in 10.12, even though it was really implemented as "assign". In 10.13 and above, this is now labeled and correctly implemented as "weak".
 @property (nullable, weak, nonatomic) AMWorkflowController *workflowController;
 
 @end
+
+API_UNAVAILABLE_END
 
 NS_ASSUME_NONNULL_END

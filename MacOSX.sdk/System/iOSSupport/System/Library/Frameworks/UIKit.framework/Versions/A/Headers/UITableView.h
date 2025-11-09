@@ -17,6 +17,7 @@
 #import <UIKit/UIDataSourceTranslating.h>
 #import <UIKit/UISpringLoadedInteractionSupporting.h>
 #import <UIKit/UIDropInteraction.h>
+#import <UIKit/UIContextMenuInteraction.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -55,8 +56,6 @@ UIKIT_EXTERN const CGFloat UITableViewAutomaticDimension API_AVAILABLE(ios(5.0))
 @class UITableView, UINib, UITableViewHeaderFooterView, UIVisualEffect;
 @protocol UITableViewDataSource, UITableViewDataSourcePrefetching;
 @class UIDragItem, UIDragPreviewParameters, UIDragPreviewTarget, UITableViewDropProposal, UITableViewPlaceholder, UITableViewDropPlaceholder;
-@class UIContextMenuConfiguration, UITargetedPreview;
-@protocol UIContextMenuInteractionCommitAnimating;
 @protocol UISpringLoadedInteractionContext, UIDragSession, UIDropSession;
 @protocol UITableViewDragDelegate, UITableViewDropDelegate, UITableViewDropCoordinator, UITableViewDropItem, UITableViewDropPlaceholderContext;
 
@@ -257,9 +256,23 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @interface UITableViewFocusUpdateContext : 
  */
 - (void)tableView:(UITableView *)tableView willPerformPreviewActionForMenuWithConfiguration:(UIContextMenuConfiguration *)configuration animator:(id<UIContextMenuInteractionCommitAnimating>)animator API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos);
 
+/*!
+ * @abstract Called when the table view is about to display a menu.
+ *
+ * @param tableView       This UITableView.
+ * @param configuration   The configuration of the menu about to be displayed.
+ * @param animator        Appearance animator. Add animations to run them alongside the appearance transition.
+ */
+- (void)tableView:(UITableView *)tableView willDisplayContextMenuWithConfiguration:(UIContextMenuConfiguration *)configuration animator:(nullable id<UIContextMenuInteractionAnimating>)animator API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
 
-/// This method is deprecated and will be removed in a future seed. Please use its replacement.
-- (void)tableView:(UITableView *)tableView willCommitMenuWithAnimator:(id<UIContextMenuInteractionCommitAnimating>)animator API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) API_DEPRECATED_WITH_REPLACEMENT("tableView:willPerformPreviewActionForMenuWithConfiguration:animator:", ios(13.0, 13.0));
+/*!
+ * @abstract Called when the table view's context menu interaction is about to end.
+ *
+ * @param tableView       This UITableView.
+ * @param configuration   Ending configuration.
+ * @param animator        Disappearance animator. Add animations to run them alongside the disappearance transition.
+ */
+- (void)tableView:(UITableView *)tableView willEndContextMenuInteractionWithConfiguration:(UIContextMenuConfiguration *)configuration animator:(nullable id<UIContextMenuInteractionAnimating>)animator API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 
@@ -300,6 +313,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UITableView : UIScrollView <NSCo
 @property (nonatomic) UITableViewSeparatorInsetReference separatorInsetReference API_AVAILABLE(ios(11.0), tvos(11.0)); // Changes how custom separatorInset values are interpreted. The default value is UITableViewSeparatorInsetFromCellEdges
 
 @property (nonatomic, strong, nullable) UIView *backgroundView API_AVAILABLE(ios(3.2)); // the background view will be automatically resized to track the size of the table view.  this will be placed as a subview of the table view behind all cells and headers/footers.  default may be non-nil for some devices.
+
+@property (nonatomic, readonly, nullable) UIContextMenuInteraction *contextMenuInteraction API_UNAVAILABLE(ios) API_UNAVAILABLE(watchos, tvos);
 
 // Info
 
@@ -405,6 +420,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UITableView : UIScrollView <NSCo
 // Focus
 
 @property (nonatomic) BOOL remembersLastFocusedIndexPath API_AVAILABLE(ios(9.0)); // defaults to NO. If YES, when focusing on a table view the last focused index path is focused automatically. If the table view has never been focused, then the preferred focused index path is used.
+
+// When enabled, the table view ensures that selection is automatically triggered when focus moves to a cell.
+@property (nonatomic) BOOL selectionFollowsFocus API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
 
 // Drag & Drop
 

@@ -16,9 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol UIImagePickerControllerDelegate;
 
 typedef NS_ENUM(NSInteger, UIImagePickerControllerSourceType) {
-    UIImagePickerControllerSourceTypePhotoLibrary,
+    UIImagePickerControllerSourceTypePhotoLibrary API_DEPRECATED("Will be removed in a future release, use PHPicker.", ios(2, API_TO_BE_DEPRECATED)),
     UIImagePickerControllerSourceTypeCamera,
-    UIImagePickerControllerSourceTypeSavedPhotosAlbum
+    UIImagePickerControllerSourceTypeSavedPhotosAlbum API_DEPRECATED("Will be removed in a future release, use PHPicker.", ios(2, API_TO_BE_DEPRECATED)),
 } API_UNAVAILABLE(tvos);
 
 typedef NS_ENUM(NSInteger, UIImagePickerControllerQualityType) {
@@ -49,7 +49,7 @@ typedef NS_ENUM(NSInteger, UIImagePickerControllerCameraFlashMode) {
 typedef NS_ENUM(NSInteger, UIImagePickerControllerImageURLExportPreset) {
     UIImagePickerControllerImageURLExportPresetCompatible = 0,
     UIImagePickerControllerImageURLExportPresetCurrent
-} API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos);
+} API_DEPRECATED("Will be removed in a future release, use PHPicker.", ios(11, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(tvos);
 
 typedef NSString * UIImagePickerControllerInfoKey NS_TYPED_ENUM;
 
@@ -59,10 +59,10 @@ UIKIT_EXTERN UIImagePickerControllerInfoKey const UIImagePickerControllerOrigina
 UIKIT_EXTERN UIImagePickerControllerInfoKey const UIImagePickerControllerEditedImage API_UNAVAILABLE(tvos);    // a UIImage
 UIKIT_EXTERN UIImagePickerControllerInfoKey const UIImagePickerControllerCropRect API_UNAVAILABLE(tvos);       // an NSValue (CGRect)
 UIKIT_EXTERN UIImagePickerControllerInfoKey const UIImagePickerControllerMediaURL API_UNAVAILABLE(tvos);       // an NSURL
-UIKIT_EXTERN UIImagePickerControllerInfoKey const UIImagePickerControllerReferenceURL        API_DEPRECATED_WITH_REPLACEMENT("UIImagePickerControllerPHAsset", ios(4.1, 11.0)) API_UNAVAILABLE(tvos);  // an NSURL that references an asset in the AssetsLibrary framework
+UIKIT_EXTERN UIImagePickerControllerInfoKey const UIImagePickerControllerReferenceURL API_DEPRECATED("Will be removed in a future release, use PHPicker.", ios(4.1, 11.0)) API_UNAVAILABLE(tvos); // an NSURL that references an asset in the AssetsLibrary framework
 UIKIT_EXTERN UIImagePickerControllerInfoKey const UIImagePickerControllerMediaMetadata       API_AVAILABLE(ios(4.1)) API_UNAVAILABLE(tvos);  // an NSDictionary containing metadata from a captured photo
 UIKIT_EXTERN UIImagePickerControllerInfoKey const UIImagePickerControllerLivePhoto API_AVAILABLE(ios(9.1)) API_UNAVAILABLE(tvos);  // a PHLivePhoto
-UIKIT_EXTERN UIImagePickerControllerInfoKey const UIImagePickerControllerPHAsset API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos);  // a PHAsset
+UIKIT_EXTERN UIImagePickerControllerInfoKey const UIImagePickerControllerPHAsset API_DEPRECATED("Will be removed in a future release, use PHPicker.", ios(11.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(tvos); // a PHAsset
 UIKIT_EXTERN UIImagePickerControllerInfoKey const UIImagePickerControllerImageURL API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos);  // an NSURL
 
 UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(tvos) @interface UIImagePickerController : UINavigationController <NSCoding>
@@ -81,12 +81,12 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(tvos) @interface UIImagePic
     // default value is an array containing kUTTypeImage.
 @property(nonatomic)           BOOL                                  allowsEditing API_AVAILABLE(ios(3.1));     // replacement for -allowsImageEditing; default value is NO.
 @property(nonatomic)           BOOL                                  allowsImageEditing API_DEPRECATED("", ios(2.0, 3.1));
-@property(nonatomic)           UIImagePickerControllerImageURLExportPreset imageExportPreset API_AVAILABLE(ios(11.0));   // default value is UIImagePickerControllerImageExportPresetCompatible.
+@property(nonatomic)           UIImagePickerControllerImageURLExportPreset imageExportPreset API_DEPRECATED("Will be removed in a future release, use PHPicker.", ios(11.0, API_TO_BE_DEPRECATED));  // default value is UIImagePickerControllerImageExportPresetCompatible.
 
 // video properties apply only if mediaTypes includes kUTTypeMovie
 @property(nonatomic)           NSTimeInterval                        videoMaximumDuration API_AVAILABLE(ios(3.1)); // default value is 10 minutes.
 @property(nonatomic)           UIImagePickerControllerQualityType    videoQuality API_AVAILABLE(ios(3.1));         // default value is UIImagePickerControllerQualityTypeMedium. If the cameraDevice does not support the videoQuality, it will use the default value.
-@property(nonatomic, copy)     NSString                              *videoExportPreset API_AVAILABLE(ios(11.0));  // videoExportPreset can be used to specify the transcoding quality for videos (via a AVAssetExportPreset* string). If the value is nil (the default) then the transcodeQuality is determined by videoQuality instead. Not valid if the source type is UIImagePickerControllerSourceTypeCamera
+@property(nonatomic, copy)     NSString                              *videoExportPreset API_DEPRECATED("Will be removed in a future release, use PHPicker.", ios(11.0, API_TO_BE_DEPRECATED));  // videoExportPreset can be used to specify the transcoding quality for videos (via a AVAssetExportPreset* string). If the value is nil (the default) then the transcodeQuality is determined by videoQuality instead. Not valid if the source type is UIImagePickerControllerSourceTypeCamera
 
 
 // camera additions available only if sourceType is UIImagePickerControllerSourceTypeCamera.

@@ -2,14 +2,14 @@
 //  INIntentResolution.h
 //  Intents
 //
-//  Copyright (c) 2016-2019 Apple Inc Inc. All rights reserved.
+//  Copyright (c) 2016-2020 Apple Inc Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(10.0), watchos(3.2)) API_UNAVAILABLE(macosx)
+API_AVAILABLE(ios(10.0), macos(11.0), watchos(3.2), tvos(14.0))
 @interface INIntentResolutionResult : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;

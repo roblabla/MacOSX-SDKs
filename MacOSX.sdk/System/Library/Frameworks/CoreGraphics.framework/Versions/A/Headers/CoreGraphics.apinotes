@@ -1,6 +1,5 @@
 ---
 Name: CoreGraphics
-SwiftInferImportAsMember: true
 
 #
 # Global functions
@@ -9,14 +8,19 @@ Functions:
 # The below are inline functions that are irrelevant due to memberwise inits
 - Name: CGPointMake
   Availability: nonswift
+  SwiftName: CGPoint.init(x:y:)
 - Name: CGSizeMake
   Availability: nonswift
+  SwiftName: CGSize.init(width:height:)
 - Name: CGVectorMake
   Availability: nonswift
+  SwiftName: CGVector.init(dx:dy:)
 - Name: CGRectMake
   Availability: nonswift
+  SwiftName: CGRect.init(x:y:width:height:)
 - Name: CGAffineTransformMake
   Availability: nonswift
+  SwiftName: CGAffineTransform.init(a:b:c:d:tx:ty:)
 # The below are fixups that inference didnt quite do what we wanted, and are
 # pulled over from what used to be in the overlays
 - Name: CGRectIsNull
@@ -43,6 +47,22 @@ Functions:
   SwiftName: "CGRect.contains(self:_:)"
 - Name: CGRectIntersectsRect
   SwiftName: "CGRect.intersects(self:_:)"
+- Name: CGRectGetMinX
+  SwiftName: getter:CGRect.minX(self:)
+- Name: CGRectGetMidX
+  SwiftName: getter:CGRect.midX(self:)
+- Name: CGRectGetMaxX
+  SwiftName: getter:CGRect.maxX(self:)
+- Name: CGRectGetMinY
+  SwiftName: getter:CGRect.minY(self:)
+- Name: CGRectGetMidY
+  SwiftName: getter:CGRect.midY(self:)
+- Name: CGRectGetMaxY
+  SwiftName: getter:CGRect.maxY(self:)
+- Name: CGRectGetWidth
+  SwiftName: getter:CGRect.width(self:)
+- Name: CGRectGetHeight
+  SwiftName: getter:CGRect.height(self:)
 # The below are not available in Swift
 # FIXME: empty-argument-label pattern is currently failing SILGen
 - Name: CGColorSpaceCreateDeviceGray
@@ -60,6 +80,7 @@ Functions:
 #   Availability: nonswift
 - Name: CGColorConversionInfoCreateFromListWithArguments
   Availability: nonswift
+  SwiftName: CGColorConversionInfo.init(fromListWithArgumentsOptions:_:_:_:_:)
 
 # The below are attempts at providing better names than inference
 # CGAffineTransform
@@ -116,6 +137,8 @@ Functions:
   SwiftName: getter:CGContext.alphaInfo(self:)
 - Name: CGBitmapContextCreateImage
   SwiftName: CGContext.makeImage(self:)
+- Name: CGBitmapContextGetBitmapInfo
+  SwiftName: getter:CGContext.bitmapInfo(self:)
 
 # CGColor
 #
@@ -147,7 +170,61 @@ Functions:
 - Name: CGColorGetComponents
   SwiftName: getter:CGColor.__unsafeComponents(self:)
   SwiftPrivate: true
+- Name: CGColorCreateGenericCMYK
+  SwiftName: CGColor.init(genericCMYKCyan:magenta:yellow:black:alpha:)
+- Name: CGColorCreateGenericGrayGamma2_2
+  SwiftName: CGColor.init(genericGrayGamma2_2Gray:alpha:)
+- Name: CGColorCreateSRGB
+  SwiftName: CGColor.init(srgbRed:green:blue:alpha:)
+- Name: CGColorGetAlpha
+  SwiftName: getter:CGColor.alpha(self:)
+- Name: CGColorGetColorSpace
+  SwiftName: getter:CGColor.colorSpace(self:)
+- Name: CGColorGetNumberOfComponents
+  SwiftName: getter:CGColor.numberOfComponents(self:)
+- Name: CGColorGetPattern
+  SwiftName: getter:CGColor.pattern(self:)
+- Name: CGColorGetTypeID
+  SwiftName: getter:CGColor.typeID()
+- Name: CGColorSpaceCopyICCData
+  SwiftName: CGColorSpace.copyICCData(self:)
+- Name: CGColorSpaceCopyPropertyList
+  SwiftName: CGColorSpace.copyPropertyList(self:)
+- Name: CGColorSpaceCreateCalibratedGray
+  SwiftName: CGColorSpace.init(calibratedGrayWhitePoint:blackPoint:gamma:)
+- Name: CGColorSpaceCreateCalibratedRGB
+  SwiftName: CGColorSpace.init(calibratedRGBWhitePoint:blackPoint:gamma:matrix:)
+- Name: CGColorSpaceCreateICCBased
+  SwiftName: CGColorSpace.init(iccBasedNComponents:range:profile:alternate:)
+- Name: CGColorSpaceCreateIndexed
+  SwiftName: CGColorSpace.init(indexedBaseSpace:last:colorTable:)
+- Name: CGColorSpaceCreateLab
+  SwiftName: CGColorSpace.init(labWhitePoint:blackPoint:range:)
+- Name: CGColorSpaceCreatePattern
+  SwiftName: CGColorSpace.init(patternBaseSpace:)
+- Name: CGColorSpaceCreateWithICCData
+  SwiftName: CGColorSpace.init(iccData:)
+- Name: CGColorSpaceCreateWithPropertyList
+  SwiftName: CGColorSpace.init(propertyListPlist:)
+- Name: CGColorSpaceGetBaseColorSpace
+  SwiftName: getter:CGColorSpace.baseColorSpace(self:)
+- Name: CGColorSpaceGetModel
+  SwiftName: getter:CGColorSpace.model(self:)
+- Name: CGColorSpaceGetNumberOfComponents
+  SwiftName: getter:CGColorSpace.numberOfComponents(self:)
+- Name: CGColorSpaceGetTypeID
+  SwiftName: getter:CGColorSpace.typeID()
+- Name: CGColorSpaceIsHDR
+  SwiftName: CGColorSpace.isHDR(self:)
 
+# CGColorConversionInfo
+#
+- Name: CGColorConversionInfoCreate
+  SwiftName: CGColorConversionInfo.init(src:dst:)
+- Name: CGColorConversionInfoCreateWithOptions
+  SwiftName: CGColorConversionInfo.init(optionsSrc:dst:options:)
+- Name: CGColorConversionInfoGetTypeID
+  SwiftName: getter:CGColorConversionInfo.typeID()
 
 # CGColorSpace
 #
@@ -262,14 +339,14 @@ Functions:
   SwiftName: CGContext.setStrokeColor(self:cyan:magenta:yellow:black:alpha:)
 - Name: CGContextSetShadowWithColor
   SwiftName: CGContext.setShadow(self:offset:blur:color:)
-# - Name: CGContextSetShadow
-#   SwiftName: CGContext.setShadow(self:offset:blur:)
+- Name: CGContextSetShadow
+  SwiftName: CGContext.setShadow(self:offset:blur:)
 - Name: CGContextSetCharacterSpacing
   SwiftName: CGContext.setCharacterSpacing(self:_:)
 - Name: CGContextSetFontSize
   SwiftName: CGContext.setFontSize(self:_:)
-# - Name: CGContextBeginPage
-#   SwiftName: CGContext.beginPage(self:mediaBox:)
+- Name: CGContextBeginPage
+  SwiftName: CGContext.beginPage(self:mediaBox:)
 - Name: CGContextSetShouldAntialias
   SwiftName: CGContext.setShouldAntialias(self:_:)
 - Name: CGContextSetAllowsAntialiasing
@@ -396,14 +473,24 @@ Functions:
 #   SwiftName: CGDataConsumer.init(data:)
 
 # CGDataProvider
-# - Name: CGDataProviderCreateWithData
-#   SwiftName: CGDataProvider.init(dataInfo:data:size:releaseData:)
-# - Name: CGDataProviderCreateWithCFData
-#   SwiftName: CGDataProvider.init(data:)
-# - Name: CGDataProviderCreateWithURL
-#   SwiftName: CGDataProvider.init(url:)
+- Name: CGDataProviderCreateWithData
+  SwiftName: CGDataProvider.init(dataInfo:data:size:releaseData:)
+- Name: CGDataProviderCreateWithCFData
+  SwiftName: CGDataProvider.init(data:)
+- Name: CGDataProviderCreateWithURL
+  SwiftName: CGDataProvider.init(url:)
 - Name: CGDataProviderCopyData
   SwiftName: getter:CGDataProvider.data(self:)
+- Name: CGDataProviderGetTypeID
+  SwiftName: getter:CGDataProvider.typeID()
+- Name: CGDataProviderCreateSequential
+  SwiftName: CGDataProvider.init(sequentialInfo:callbacks:)
+- Name: CGDataProviderCreateDirect
+  SwiftName: CGDataProvider.init(directInfo:size:callbacks:)
+- Name: CGDataProviderCreateWithFilename
+  SwiftName: CGDataProvider.init(filename:)
+- Name: CGDataProviderGetInfo
+  SwiftName: getter:CGDataProvider.info(self:)
 
 # CGDirectDisplay
 - Name: CGDisplayModeCopyPixelEncoding
@@ -498,6 +585,48 @@ Functions:
   SwiftName: CGImage.masking(self:_:)
 - Name: CGImageIsMask
   SwiftName: getter:CGImage.isMask(self:)
+- Name: CGImageGetTypeID
+  SwiftName: getter:CGImage.typeID()
+- Name: CGImageCreate
+  SwiftName: CGImage.init(width:height:bitsPerComponent:bitsPerPixel:bytesPerRow:space:bitmapInfo:provider:decode:shouldInterpolate:intent:)
+- Name: CGImageMaskCreate
+  SwiftName: CGImage.init(maskWidth:height:bitsPerComponent:bitsPerPixel:bytesPerRow:provider:decode:shouldInterpolate:)
+- Name: CGImageCreateWithJPEGDataProvider
+  SwiftName: CGImage.init(jpegDataProviderSource:decode:shouldInterpolate:intent:)
+- Name: CGImageCreateWithPNGDataProvider
+  SwiftName: CGImage.init(pngDataProviderSource:decode:shouldInterpolate:intent:)
+- Name: CGImageGetWidth
+  SwiftName: getter:CGImage.width(self:)
+- Name: CGImageGetHeight
+  SwiftName: getter:CGImage.height(self:)
+- Name: CGImageGetBitsPerComponent
+  SwiftName: getter:CGImage.bitsPerComponent(self:)
+- Name: CGImageGetBitsPerPixel
+  SwiftName: getter:CGImage.bitsPerPixel(self:)
+- Name: CGImageGetBytesPerRow
+  SwiftName: getter:CGImage.bytesPerRow(self:)
+- Name: CGImageGetColorSpace
+  SwiftName: getter:CGImage.colorSpace(self:)
+- Name: CGImageGetAlphaInfo
+  SwiftName: getter:CGImage.alphaInfo(self:)
+- Name: CGImageGetDataProvider
+  SwiftName: getter:CGImage.dataProvider(self:)
+- Name: CGImageGetDecode
+  SwiftName: getter:CGImage.decode(self:)
+- Name: CGImageGetShouldInterpolate
+  SwiftName: getter:CGImage.shouldInterpolate(self:)
+- Name: CGImageGetRenderingIntent
+  SwiftName: getter:CGImage.renderingIntent(self:)
+- Name: CGImageGetBitmapInfo
+  SwiftName: getter:CGImage.bitmapInfo(self:)
+- Name: CGImageGetByteOrderInfo
+  SwiftName: getter:CGImage.byteOrderInfo(self:)
+- Name: CGImageGetPixelFormatInfo
+  SwiftName: getter:CGImage.pixelFormatInfo(self:)
+- Name: CGImageGetUTType
+  SwiftName: getter:CGImage.utType(self:)
+- Name: CGWindowListCreateImageFromArray
+  SwiftName: CGImage.init(windowListFromArrayScreenBounds:windowArray:imageOption:)
 # These are hidden so we can improve them further in the SDK overlay
 - Name: CGImageCreateWithMaskingColors
   # replaced by a version that takes an array instead of UnsafePointer
@@ -646,6 +775,394 @@ Functions:
   SwiftName: CGMutablePath.__addPath(self:transform:path:)
   SwiftPrivate: true
 
+# CGPattern
+- Name: CGPatternGetTypeID
+  SwiftName: getter:CGPattern.typeID()
+- Name: CGPatternCreate
+  SwiftName: CGPattern.init(info:bounds:matrix:xStep:yStep:tiling:isColored:callbacks:)
+
+# CGFont
+- Name: CGFontGetTypeID
+  SwiftName: getter:CGFont.typeID()
+- Name: CGFontCreateWithPlatformFont
+  SwiftName: CGFont.init(platformFontPlatformFontReference:)
+- Name: CGFontGetNumberOfGlyphs
+  SwiftName: getter:CGFont.numberOfGlyphs(self:)
+- Name: CGFontGetUnitsPerEm
+  SwiftName: getter:CGFont.unitsPerEm(self:)
+- Name: CGFontGetAscent
+  SwiftName: getter:CGFont.ascent(self:)
+- Name: CGFontGetDescent
+  SwiftName: getter:CGFont.descent(self:)
+- Name: CGFontGetLeading
+  SwiftName: getter:CGFont.leading(self:)
+- Name: CGFontGetCapHeight
+  SwiftName: getter:CGFont.capHeight(self:)
+- Name: CGFontGetXHeight
+  SwiftName: getter:CGFont.xHeight(self:)
+- Name: CGFontGetFontBBox
+  SwiftName: getter:CGFont.fontBBox(self:)
+- Name: CGFontGetItalicAngle
+  SwiftName: getter:CGFont.italicAngle(self:)
+- Name: CGFontGetStemV
+  SwiftName: getter:CGFont.stemV(self:)
+- Name: CGFontGetGlyphAdvances
+  SwiftName: CGFont.getGlyphAdvances(self:glyphs:count:advances:)
+- Name: CGFontGetGlyphBBoxes
+  SwiftName: CGFont.getGlyphBBoxes(self:glyphs:count:bboxes:)
+- Name: CGFontGetGlyphWithGlyphName
+  SwiftName: CGFont.getGlyphWithGlyphName(self:name:)
+- Name: CGFontCanCreatePostScriptSubset
+  SwiftName: CGFont.canCreatePostScriptSubset(self:_:)
+- Name: CGFontCreatePostScriptSubset
+  SwiftName: CGFont.createPostScriptSubset(self:subsetName:format:glyphs:count:encoding:)
+- Name: CGFontCreatePostScriptEncoding
+  SwiftName: CGFont.createPostScriptEncoding(self:encoding:)
+
+# CGGradient
+- Name: CGGradientGetTypeID
+  SwiftName: getter:CGGradient.typeID()
+- Name: CGGradientCreateWithColors
+  SwiftName: CGGradient.init(colorsSpace:colors:locations:)
+
+# CGPath
+- Name: CGPathGetTypeID
+  SwiftName: getter:CGPath.typeID()
+- Name: CGPathCreateMutable
+  SwiftName: CGMutablePath.init()
+- Name: CGPathCreateWithRect
+  SwiftName: CGPath.init(rect:transform:)
+- Name: CGPathCreateWithEllipseInRect
+  SwiftName: CGPath.init(ellipseIn:transform:)
+- Name: CGPathCreateWithRoundedRect
+  SwiftName: CGPath.init(roundedRect:cornerWidth:cornerHeight:transform:)
+- Name: CGPathCloseSubpath
+  SwiftName: CGMutablePath.closeSubpath(self:)
+- Name: CGPathIsRect
+  SwiftName: CGPath.isRect(self:_:)
+- Name: CGPathGetCurrentPoint
+  SwiftName: getter:CGPath.currentPoint(self:)
+- Name: CGPathGetBoundingBox
+  SwiftName: getter:CGPath.boundingBox(self:)
+- Name: CGPathApply
+  SwiftName: CGPath.apply(self:info:function:)
+- Name: CGPathApplyWithBlock
+  SwiftName: CGPath.applyWithBlock(self:_:)
+
+# CGPDFPage
+- Name: CGPDFPageGetDocument
+  SwiftName: getter:CGPDFPage.document(self:)
+- Name: CGPDFPageGetPageNumber
+  SwiftName: getter:CGPDFPage.pageNumber(self:)
+- Name: CGPDFPageGetBoxRect
+  SwiftName: CGPDFPage.getBoxRect(self:_:)
+- Name: CGPDFPageGetRotationAngle
+  SwiftName: getter:CGPDFPage.rotationAngle(self:)
+- Name: CGPDFPageGetDrawingTransform
+  SwiftName: CGPDFPage.getDrawingTransform(self:_:rect:rotate:preserveAspectRatio:)
+- Name: CGPDFPageGetDictionary
+  SwiftName: getter:CGPDFPage.dictionary(self:)
+- Name: CGPDFPageGetTypeID
+  SwiftName: getter:CGPDFPage.typeID()
+
+# CGPDFDocument
+- Name: CGPDFDocumentGetVersion
+  SwiftName: CGPDFDocument.getVersion(self:majorVersion:minorVersion:)
+- Name: CGPDFDocumentGetNumberOfPages
+  SwiftName: getter:CGPDFDocument.numberOfPages(self:)
+- Name: CGPDFDocumentGetCatalog
+  SwiftName: getter:CGPDFDocument.catalog(self:)
+- Name: CGPDFDocumentGetInfo
+  SwiftName: getter:CGPDFDocument.info(self:)
+- Name: CGPDFDocumentGetTypeID
+  SwiftName: getter:CGPDFDocument.typeID()
+- Name: CGPDFDocumentGetOutline
+  SwiftName: getter:CGPDFDocument.outline(self:)
+- Name: CGPDFDocumentGetAccessPermissions
+  SwiftName: getter:CGPDFDocument.accessPermissions(self:)
+- Name: CGPDFDocumentGetMediaBox
+  SwiftName: CGPDFDocument.getMediaBox(self:page:)
+- Name: CGPDFDocumentGetCropBox
+  SwiftName: CGPDFDocument.getCropBox(self:page:)
+- Name: CGPDFDocumentGetBleedBox
+  SwiftName: CGPDFDocument.getBleedBox(self:page:)
+- Name: CGPDFDocumentGetTrimBox
+  SwiftName: CGPDFDocument.getTrimBox(self:page:)
+- Name: CGPDFDocumentGetArtBox
+  SwiftName: CGPDFDocument.getArtBox(self:page:)
+- Name: CGPDFDocumentGetRotationAngle
+  SwiftName: CGPDFDocument.getRotationAngle(self:page:)
+
+# CGFunction
+- Name: CGFunctionGetTypeID
+  SwiftName: getter:CGFunction.typeID()
+- Name: CGFunctionCreate
+  SwiftName: CGFunction.init(info:domainDimension:domain:rangeDimension:range:callbacks:)
+
+# CGShading
+- Name: CGShadingGetTypeID
+  SwiftName: getter:CGShading.typeID()
+- Name: CGShadingCreateAxial
+  SwiftName: CGShading.init(axialSpace:start:end:function:extendStart:extendEnd:)
+- Name: CGShadingCreateRadial
+  SwiftName: CGShading.init(radialSpace:start:startRadius:end:endRadius:function:extendStart:extendEnd:)
+
+# CGContext
+- Name: CGContextGetTypeID
+  SwiftName: getter:CGContext.typeID()
+- Name: CGContextGetCTM
+  SwiftName: getter:CGContext.ctm(self:)
+- Name: CGContextSaveGState
+  SwiftName: CGContext.saveGState(self:)
+- Name: CGContextRestoreGState
+  SwiftName: CGContext.restoreGState(self:)
+- Name: CGContextSetLineCap
+  SwiftName: CGContext.setLineCap(self:_:)
+- Name: CGContextSetLineJoin
+  SwiftName: CGContext.setLineJoin(self:_:)
+- Name: CGContextSetBlendMode
+  SwiftName: CGContext.setBlendMode(self:_:)
+- Name: CGContextBeginPath
+  SwiftName: CGContext.beginPath(self:)
+- Name: CGContextClosePath
+  SwiftName: CGContext.closePath(self:)
+- Name: CGContextAddRect
+  SwiftName: CGContext.addRect(self:_:)
+- Name: CGContextAddPath
+  SwiftName: CGContext.addPath(self:_:)
+- Name: CGContextReplacePathWithStrokedPath
+  SwiftName: CGContext.replacePathWithStrokedPath(self:)
+- Name: CGContextStrokePath
+  SwiftName: CGContext.strokePath(self:)
+- Name: CGContextResetClip
+  SwiftName: CGContext.resetClip(self:)
+- Name: CGContextSetFillColorSpace
+  SwiftName: CGContext.setFillColorSpace(self:_:)
+- Name: CGContextSetStrokeColorSpace
+  SwiftName: CGContext.setStrokeColorSpace(self:_:)
+- Name: CGContextSetRenderingIntent
+  SwiftName: CGContext.setRenderingIntent(self:_:)
+- Name: CGContextGetInterpolationQuality
+  SwiftName: getter:CGContext.interpolationQuality(self:)
+- Name: CGContextSetInterpolationQuality
+  SwiftName: setter:CGContext.interpolationQuality(self:_:)
+- Name: CGContextDrawLinearGradient
+  SwiftName: CGContext.drawLinearGradient(self:_:start:end:options:)
+- Name: CGContextDrawRadialGradient
+  SwiftName: CGContext.drawRadialGradient(self:_:startCenter:startRadius:endCenter:endRadius:options:)
+- Name: CGContextDrawShading
+  SwiftName: CGContext.drawShading(self:_:)
+- Name: CGContextSetTextMatrix
+  SwiftName: setter:CGContext.textMatrix(self:_:)
+- Name: CGContextGetTextMatrix
+  SwiftName: getter:CGContext.textMatrix(self:)
+- Name: CGContextSetTextDrawingMode
+  SwiftName: CGContext.setTextDrawingMode(self:_:)
+- Name: CGContextSetFont
+  SwiftName: CGContext.setFont(self:_:)
+- Name: CGContextDrawPDFPage
+  SwiftName: CGContext.drawPDFPage(self:_:)
+- Name: CGContextEndPage
+  SwiftName: CGContext.endPage(self:)
+- Name: CGContextFlush
+  SwiftName: CGContext.flush(self:)
+- Name: CGContextSynchronize
+  SwiftName: CGContext.synchronize(self:)
+- Name: CGContextEndTransparencyLayer
+  SwiftName: CGContext.endTransparencyLayer(self:)
+- Name: CGContextGetUserSpaceToDeviceSpaceTransform
+  SwiftName: getter:CGContext.userSpaceToDeviceSpaceTransform(self:)
+- Name: CGContextSelectFont
+  SwiftName: CGContext.selectFont(self:name:size:textEncoding:)
+- Name: CGContextShowText
+  SwiftName: CGContext.showText(self:string:length:)
+- Name: CGContextShowTextAtPoint
+  SwiftName: CGContext.showTextAtPoint(self:x:y:string:length:)
+- Name: CGContextShowGlyphs
+  SwiftName: CGContext.showGlyphs(self:g:count:)
+- Name: CGContextShowGlyphsAtPoint
+  SwiftName: CGContext.showGlyphsAtPoint(self:x:y:glyphs:count:)
+- Name: CGContextShowGlyphsWithAdvances
+  SwiftName: CGContext.showGlyphsWithAdvances(self:glyphs:advances:count:)
+- Name: CGContextDrawPDFDocument
+  SwiftName: CGContext.drawPDFDocument(self:_:document:page:)
+
+# CGDataConsumer
+- Name: CGDataConsumerGetTypeID
+  SwiftName: getter:CGDataConsumer.typeID()
+- Name: CGDataConsumerCreate
+  SwiftName: CGDataConsumer.init(info:cbks:)
+- Name: CGDataConsumerCreateWithURL
+  SwiftName: CGDataConsumer.init(url:)
+- Name: CGDataConsumerCreateWithCFData
+  SwiftName: CGDataConsumer.init(data:)
+
+# CGLayer
+- Name: CGLayerGetSize
+  SwiftName: getter:CGLayer.size(self:)
+- Name: CGLayerGetContext
+  SwiftName: getter:CGLayer.context(self:)
+- Name: CGLayerGetTypeID
+  SwiftName: getter:CGLayer.typeID()
+
+# CGPDFTagType
+- Name: CGPDFTagTypeGetName
+  SwiftName: getter:CGPDFTagType.name(self:)
+
+# CGDisplayMode
+- Name: CGDisplayModeGetWidth
+  SwiftName: getter:CGDisplayMode.width(self:)
+- Name: CGDisplayModeGetHeight
+  SwiftName: getter:CGDisplayMode.height(self:)
+- Name: CGDisplayModeGetRefreshRate
+  SwiftName: getter:CGDisplayMode.refreshRate(self:)
+- Name: CGDisplayModeGetIOFlags
+  SwiftName: getter:CGDisplayMode.ioFlags(self:)
+- Name: CGDisplayModeGetIODisplayModeID
+  SwiftName: getter:CGDisplayMode.ioDisplayModeID(self:)
+- Name: CGDisplayModeIsUsableForDesktopGUI
+  SwiftName: CGDisplayMode.isUsableForDesktopGUI(self:)
+- Name: CGDisplayModeGetTypeID
+  SwiftName: getter:CGDisplayMode.typeID()
+- Name: CGDisplayModeGetPixelWidth
+  SwiftName: getter:CGDisplayMode.pixelWidth(self:)
+- Name: CGDisplayModeGetPixelHeight
+  SwiftName: getter:CGDisplayMode.pixelHeight(self:)
+
+# CGDisplayStreamUpdate
+- Name: CGDisplayStreamUpdateGetTypeID
+  SwiftName: getter:CGDisplayStreamUpdate.typeID()
+- Name: CGDisplayStreamUpdateGetRects
+  SwiftName: CGDisplayStreamUpdate.getRects(self:_:rectCount:)
+- Name: CGDisplayStreamUpdateCreateMergedUpdate
+  SwiftName: CGDisplayStreamUpdate.init(mergedUpdateFirstUpdate:secondUpdate:)
+- Name: CGDisplayStreamUpdateGetMovedRectsDelta
+  SwiftName: CGDisplayStreamUpdate.getMovedRectsDelta(self:dx:dy:)
+- Name: CGDisplayStreamUpdateGetDropCount
+  SwiftName: getter:CGDisplayStreamUpdate.dropCount(self:)
+
+# CGDisplayStream
+- Name: CGDisplayStreamGetTypeID
+  SwiftName: getter:CGDisplayStream.typeID()
+- Name: CGDisplayStreamCreate
+  SwiftName: CGDisplayStream.init(display:outputWidth:outputHeight:pixelFormat:properties:handler:)
+- Name: CGDisplayStreamCreateWithDispatchQueue
+  SwiftName: CGDisplayStream.init(dispatchQueueDisplay:outputWidth:outputHeight:pixelFormat:properties:queue:handler:)
+- Name: CGDisplayStreamStart
+  SwiftName: CGDisplayStream.start(self:)
+- Name: CGDisplayStreamStop
+  SwiftName: CGDisplayStream.stop(self:)
+- Name: CGDisplayStreamGetRunLoopSource
+  SwiftName: getter:CGDisplayStream.runLoopSource(self:)
+
+# CGEvent
+- Name: CGEventGetTypeID
+  SwiftName: getter:CGEvent.typeID()
+- Name: CGEventCreate
+  SwiftName: CGEvent.init(source:)
+- Name: CGEventCreateMouseEvent
+  SwiftName: CGEvent.init(mouseEventSource:mouseType:mouseCursorPosition:mouseButton:)
+- Name: CGEventCreateKeyboardEvent
+  SwiftName: CGEvent.init(keyboardEventSource:virtualKey:keyDown:)
+- Name: CGEventCreateScrollWheelEvent2
+  SwiftName: CGEvent.init(scrollWheelEvent2Source:units:wheelCount:wheel1:wheel2:wheel3:)
+- Name: CGEventSetSource
+  SwiftName: CGEvent.setSource(self:_:)
+- Name: CGEventGetType
+  SwiftName: getter:CGEvent.type(self:)
+- Name: CGEventSetType
+  SwiftName: setter:CGEvent.type(self:_:)
+- Name: CGEventGetTimestamp
+  SwiftName: getter:CGEvent.timestamp(self:)
+- Name: CGEventSetTimestamp
+  SwiftName: setter:CGEvent.timestamp(self:_:)
+- Name: CGEventGetLocation
+  SwiftName: getter:CGEvent.location(self:)
+- Name: CGEventGetUnflippedLocation
+  SwiftName: getter:CGEvent.unflippedLocation(self:)
+- Name: CGEventSetLocation
+  SwiftName: setter:CGEvent.location(self:_:)
+- Name: CGEventGetFlags
+  SwiftName: getter:CGEvent.flags(self:)
+- Name: CGEventSetFlags
+  SwiftName: setter:CGEvent.flags(self:_:)
+- Name: CGEventKeyboardGetUnicodeString
+  SwiftName: CGEvent.keyboardGetUnicodeString(self:maxStringLength:actualStringLength:unicodeString:)
+- Name: CGEventKeyboardSetUnicodeString
+  SwiftName: CGEvent.keyboardSetUnicodeString(self:stringLength:unicodeString:)
+- Name: CGEventGetIntegerValueField
+  SwiftName: CGEvent.getIntegerValueField(self:_:)
+- Name: CGEventSetIntegerValueField
+  SwiftName: CGEvent.setIntegerValueField(self:_:value:)
+- Name: CGEventGetDoubleValueField
+  SwiftName: CGEvent.getDoubleValueField(self:_:)
+- Name: CGEventSetDoubleValueField
+  SwiftName: CGEvent.setDoubleValueField(self:_:value:)
+- Name: CGEventTapCreate
+  SwiftName: CGEvent.tapCreate(tap:place:options:eventsOfInterest:callback:userInfo:)
+- Name: CGEventTapCreateForPSN
+  SwiftName: CGEvent.tapCreateForPSN(processSerialNumber:place:options:eventsOfInterest:callback:userInfo:)
+- Name: CGEventTapCreateForPid
+  SwiftName: CGEvent.tapCreateForPid(pid:place:options:eventsOfInterest:callback:userInfo:)
+- Name: CGEventTapEnable
+  SwiftName: CGEvent.tapEnable(tap:enable:)
+- Name: CGEventTapIsEnabled
+  SwiftName: CGEvent.tapIsEnabled(tap:)
+- Name: CGEventTapPostEvent
+  SwiftName: CGEvent.tapPostEvent(_:self:)
+- Name: CGEventPost
+  SwiftName: CGEvent.post(tap:self:)
+- Name: CGEventPostToPSN
+  SwiftName: CGEvent.postToPSN(processSerialNumber:self:)
+
+# CGEventSource
+- Name: CGEventSourceGetTypeID
+  SwiftName: getter:CGEventSource.typeID()
+- Name: CGEventSourceCreate
+  SwiftName: CGEventSource.init(stateID:)
+- Name: CGEventSourceGetKeyboardType
+  SwiftName: getter:CGEventSource.keyboardType(self:)
+- Name: CGEventSourceSetKeyboardType
+  SwiftName: setter:CGEventSource.keyboardType(self:_:)
+- Name: CGEventSourceGetPixelsPerLine
+  SwiftName: getter:CGEventSource.pixelsPerLine(self:)
+- Name: CGEventSourceSetPixelsPerLine
+  SwiftName: setter:CGEventSource.pixelsPerLine(self:_:)
+- Name: CGEventSourceGetSourceStateID
+  SwiftName: getter:CGEventSource.sourceStateID(self:)
+- Name: CGEventSourceButtonState
+  SwiftName: CGEventSource.buttonState(_:button:)
+- Name: CGEventSourceKeyState
+  SwiftName: CGEventSource.keyState(_:key:)
+- Name: CGEventSourceFlagsState
+  SwiftName: CGEventSource.flagsState(_:)
+- Name: CGEventSourceSecondsSinceLastEventType
+  SwiftName: CGEventSource.secondsSinceLastEventType(_:eventType:)
+- Name: CGEventSourceCounterForEventType
+  SwiftName: CGEventSource.counterForEventType(_:eventType:)
+- Name: CGEventSourceSetUserData
+  SwiftName: setter:CGEventSource.userData(self:_:)
+- Name: CGEventSourceGetUserData
+  SwiftName: getter:CGEventSource.userData(self:)
+- Name: CGEventSourceSetLocalEventsFilterDuringSuppressionState
+  SwiftName: CGEventSource.setLocalEventsFilterDuringSuppressionState(self:_:state:)
+- Name: CGEventSourceGetLocalEventsFilterDuringSuppressionState
+  SwiftName: CGEventSource.getLocalEventsFilterDuringSuppressionState(self:_:)
+- Name: CGEventSourceSetLocalEventsSuppressionInterval
+  SwiftName: setter:CGEventSource.localEventsSuppressionInterval(self:_:)
+- Name: CGEventSourceGetLocalEventsSuppressionInterval
+  SwiftName: getter:CGEventSource.localEventsSuppressionInterval(self:)
+
+# CGPSConverter
+- Name: CGPSConverterCreate
+  SwiftName: CGPSConverter.init(info:callbacks:options:)
+- Name: CGPSConverterConvert
+  SwiftName: CGPSConverter.convert(self:_:consumer:options:)
+- Name: CGPSConverterAbort
+  SwiftName: CGPSConverter.abort(self:)
+- Name: CGPSConverterGetTypeID
+  SwiftName: getter:CGPSConverter.typeID()
+
 #
 # Global variables
 #
@@ -654,19 +1171,29 @@ Globals:
 # reason.
 - Name: CGPointZero
   Availability: nonswift
+  SwiftName: CGPoint.zero
 - Name: CGSizeZero
   Availability: nonswift
+  SwiftName: CGSize.zero
 - Name: CGVectorZero
   Availability: nonswift
 - Name: CGRectZero
   Availability: nonswift
+  SwiftName: CGRect.zero
 - Name: CGAffineTransformIdentity
   Availability: nonswift
+  SwiftName: CGAffineTransform.identity
+- Name: CGRectNull
+  SwiftName: CGRect.null
+- Name: CGRectInfinite
+  SwiftName: CGRect.infinite
 # The below are not available in Swift
 - Name: kCGColorSpaceGenericGray
   Availability: nonswift
+  SwiftName: CGColorSpace.genericGray
 - Name: kCGColorSpaceGenericRGB
   Availability: nonswift
+  SwiftName: CGColorSpace.genericRGB
 - Name: kCGColorSpaceSRGB
   SwiftName: CGColorSpace.sRGB
 # These are actual constant colors, not color names, in the overlay
@@ -679,6 +1206,104 @@ Globals:
 - Name: kCGColorClear
   SwiftName: CGColor.__clearColorName
   SwiftPrivate: true
+- Name: kCGColorSpaceGenericCMYK
+  SwiftName: CGColorSpace.genericCMYK
+- Name: kCGColorSpaceDisplayP3
+  SwiftName: CGColorSpace.displayP3
+- Name: kCGColorSpaceGenericRGBLinear
+  SwiftName: CGColorSpace.genericRGBLinear
+- Name: kCGColorSpaceAdobeRGB1998
+  SwiftName: CGColorSpace.adobeRGB1998
+- Name: kCGColorSpaceGenericGrayGamma2_2
+  SwiftName: CGColorSpace.genericGrayGamma2_2
+- Name: kCGColorSpaceGenericXYZ
+  SwiftName: CGColorSpace.genericXYZ
+- Name: kCGColorSpaceGenericLab
+  SwiftName: CGColorSpace.genericLab
+- Name: kCGColorSpaceACESCGLinear
+  SwiftName: CGColorSpace.acescgLinear
+- Name: kCGColorSpaceITUR_709
+  SwiftName: CGColorSpace.itur_709
+- Name: kCGColorSpaceITUR_2020
+  SwiftName: CGColorSpace.itur_2020
+- Name: kCGColorSpaceROMMRGB
+  SwiftName: CGColorSpace.rommrgb
+- Name: kCGColorSpaceDCIP3
+  SwiftName: CGColorSpace.dcip3
+- Name: kCGColorSpaceExtendedITUR_2020
+  SwiftName: CGColorSpace.extendedITUR_2020
+- Name: kCGColorSpaceExtendedLinearITUR_2020
+  SwiftName: CGColorSpace.extendedLinearITUR_2020
+- Name: kCGColorSpaceExtendedDisplayP3
+  SwiftName: CGColorSpace.extendedDisplayP3
+- Name: kCGColorSpaceExtendedLinearDisplayP3
+  SwiftName: CGColorSpace.extendedLinearDisplayP3
+- Name: kCGColorSpaceITUR_2020_PQ_EOTF
+  SwiftName: CGColorSpace.itur_2020_PQ_EOTF
+- Name: kCGColorSpaceITUR_2020_PQ
+  SwiftName: CGColorSpace.itur_2020_PQ
+- Name: kCGColorSpaceDisplayP3_PQ_EOTF
+  SwiftName: CGColorSpace.displayP3_PQ_EOTF
+- Name: kCGColorSpaceDisplayP3_PQ
+  SwiftName: CGColorSpace.displayP3_PQ
+- Name: kCGColorSpaceDisplayP3_HLG
+  SwiftName: CGColorSpace.displayP3_HLG
+- Name: kCGColorSpaceITUR_2020_HLG
+  SwiftName: CGColorSpace.itur_2020_HLG
+- Name: kCGColorSpaceExtendedSRGB
+  SwiftName: CGColorSpace.extendedSRGB
+- Name: kCGColorSpaceLinearSRGB
+  SwiftName: CGColorSpace.linearSRGB
+- Name: kCGColorSpaceExtendedLinearSRGB
+  SwiftName: CGColorSpace.extendedLinearSRGB
+- Name: kCGColorSpaceExtendedGray
+  SwiftName: CGColorSpace.extendedGray
+- Name: kCGColorSpaceLinearGray
+  SwiftName: CGColorSpace.linearGray
+- Name: kCGColorSpaceExtendedLinearGray
+  SwiftName: CGColorSpace.extendedLinearGray
+- Name: kCGFontVariationAxisName
+  SwiftName: CGFont.variationAxisName
+- Name: kCGFontVariationAxisMinValue
+  SwiftName: CGFont.variationAxisMinValue
+- Name: kCGFontVariationAxisMaxValue
+  SwiftName: CGFont.variationAxisMaxValue
+- Name: kCGFontVariationAxisDefaultValue
+  SwiftName: CGFont.variationAxisDefaultValue
+- Name: kCGColorConversionBlackPointCompensation
+  SwiftName: CGColor.conversionBlackPointCompensation
+- Name: kCGColorConversionTRCSize
+  SwiftName: CGColor.conversionTRCSize
+- Name: kCGPDFTagPropertyActualText
+  SwiftName: CGPDFTagProperty.actualText
+- Name: kCGPDFTagPropertyAlternativeText
+  SwiftName: CGPDFTagProperty.alternativeText
+- Name: kCGPDFTagPropertyTitleText
+  SwiftName: CGPDFTagProperty.titleText
+- Name: kCGPDFTagPropertyLanguageText
+  SwiftName: CGPDFTagProperty.languageText
+- Name: kCGDisplayStreamSourceRect
+  SwiftName: CGDisplayStream.sourceRect
+- Name: kCGDisplayStreamDestinationRect
+  SwiftName: CGDisplayStream.destinationRect
+- Name: kCGDisplayStreamPreserveAspectRatio
+  SwiftName: CGDisplayStream.preserveAspectRatio
+- Name: kCGDisplayStreamColorSpace
+  SwiftName: CGDisplayStream.colorSpace
+- Name: kCGDisplayStreamMinimumFrameTime
+  SwiftName: CGDisplayStream.minimumFrameTime
+- Name: kCGDisplayStreamShowCursor
+  SwiftName: CGDisplayStream.showCursor
+- Name: kCGDisplayStreamQueueDepth
+  SwiftName: CGDisplayStream.queueDepth
+- Name: kCGDisplayStreamYCbCrMatrix
+  SwiftName: CGDisplayStream.yCbCrMatrix
+- Name: kCGDisplayStreamYCbCrMatrix_ITU_R_709_2
+  SwiftName: CGDisplayStream.yCbCrMatrix_ITU_R_709_2
+- Name: kCGDisplayStreamYCbCrMatrix_ITU_R_601_4
+  SwiftName: CGDisplayStream.yCbCrMatrix_ITU_R_601_4
+- Name: kCGDisplayStreamYCbCrMatrix_SMPTE_240M_1995
+  SwiftName: CGDisplayStream.yCbCrMatrix_SMPTE_240M_1995
 
 #
 # Enums

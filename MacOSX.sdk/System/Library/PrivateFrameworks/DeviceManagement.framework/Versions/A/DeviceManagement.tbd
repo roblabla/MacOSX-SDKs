@@ -1,12 +1,29 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 9B2A68FD-03BB-3E75-9A10-E4325163589E' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           66589C38-139A-3C60-ADEC-BFCB87AFC8A1
+  - target:          x86_64-maccatalyst
+    value:           66589C38-139A-3C60-ADEC-BFCB87AFC8A1
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           D0F27EFD-F784-3D2E-9279-5D70520367E5
+  - target:          arm64e-maccatalyst
+    value:           D0F27EFD-F784-3D2E-9279-5D70520367E5
 install-name:    '/System/Library/PrivateFrameworks/DeviceManagement.framework/Versions/A/DeviceManagement'
-current-version: 30.70
-exports:         
-  - archs:           [ x86_64 ]
-    re-exports:      [ '/System/Library/PrivateFrameworks/Catalyst.framework/Versions/A/Catalyst' ]
+current-version: 40.18
+reexported-libraries:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    libraries:       [ '/System/Library/PrivateFrameworks/Catalyst.framework/Versions/A/Catalyst' ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _DMFAllConfigurationOrganizationTypes, _DMFAppLog, _DMFBundleIdentifierErrorKey, 
                        _DMFCEMReasonCodeBad, _DMFCEMReasonCodeConflict, _DMFCEMReasonCodeCouldNotDecrypt, 
                        _DMFCEMReasonCodeInvalidSignature, _DMFCEMReasonCodeOtherConflict, 
@@ -69,9 +86,9 @@ exports:
                        _DMFDeviceCurrentMNCKey, _DMFDeviceDataRoamingEnabledKey, 
                        _DMFDeviceDestinationIdentifierKey, _DMFDeviceDeviceOrientationKey, 
                        _DMFDeviceDiagnosticSubmissionEnabledKey, _DMFDeviceEASIdentifierKey, 
-                       _DMFDeviceEnforcedSoftwareUpdateDelayKey, _DMFDeviceHostNameKey, 
-                       _DMFDeviceICCIDKey, _DMFDeviceIMEIKey, _DMFDeviceIdentifierKey, 
-                       _DMFDeviceInSingleAppModeKey, _DMFDeviceInstalledApplicationsKey, 
+                       _DMFDeviceEIDKey, _DMFDeviceEnforcedSoftwareUpdateDelayKey, 
+                       _DMFDeviceHostNameKey, _DMFDeviceICCIDKey, _DMFDeviceIMEIKey, 
+                       _DMFDeviceIdentifierKey, _DMFDeviceInSingleAppModeKey, _DMFDeviceInstalledApplicationsKey, 
                        _DMFDeviceInstalledExtensionsKey, _DMFDeviceInterfaceOrientationKey, 
                        _DMFDeviceIsActivationLockEnabledKey, _DMFDeviceIsAppleInternalKey, 
                        _DMFDeviceIsCloudBackupEnabledKey, _DMFDeviceIsDNDInEffectKey, 
@@ -101,18 +118,18 @@ exports:
                        _DMFDeviceVolumeKey, _DMFDeviceWiFiMACKey, _DMFDeviceXsanConfigurationKey, 
                        _DMFDeviceiTunesStoreAccountHashKey, _DMFDeviceiTunesStoreAccountIsActiveKey, 
                        _DMFEffectivePolicyTypeApplication, _DMFEffectivePolicyTypeCategory, 
-                       _DMFEffectivePolicyTypeScreenTime, _DMFEffectivePolicyTypeWeb, 
-                       _DMFEffectivePolicyTypeiCloudAccountLogout, _DMFEmergencyModeChangedNotification, 
-                       _DMFEmergencyModeLog, _DMFEmergencyModeMachServiceName, _DMFEntitlementsApplicationIdentifierKey, 
+                       _DMFEffectivePolicyTypeWeb, _DMFEffectivePolicyTypeiCloudAccountLogout, 
+                       _DMFEmergencyModeChangedNotification, _DMFEmergencyModeLog, 
+                       _DMFEmergencyModeMachServiceName, _DMFEntitlementsApplicationIdentifierKey, 
                        _DMFErrorDomain, _DMFErrorFailedConfigurationDatabaseStoreKey, 
                        _DMFErrorWithCodeAndUserInfo, _DMFHighestPolicyPriority, _DMFInterfaceOrientationIsValid, 
                        _DMFInvalidParameterErrorKey, _DMFInvalidPropertyErrorKey, 
                        _DMFItemNameErrorKey, _DMFItemPathErrorKey, _DMFLowestPolicyPriority, 
-                       _DMFMachServiceName, _DMFObjectDescription, _DMFObjectDescriptionWithProperties, 
-                       _DMFPersonalHotspotLog, _DMFPolicyLog, _DMFPolicyMachServiceName, 
-                       _DMFPolicyUnlocalizedDisplayName, _DMFProfileIdentifierErrorKey, 
-                       _DMFRMEchoStatusFail, _DMFRMEchoStatusOK, _DMFRMEchoStatusPending, 
-                       _DMFReportingRequirementsUpdateCoalescenceIntervalDefault, 
+                       _DMFMachServiceName, _DMFOSUpdateLog, _DMFObjectDescription, 
+                       _DMFObjectDescriptionWithProperties, _DMFPersonalHotspotLog, 
+                       _DMFPolicyLog, _DMFPolicyMachServiceName, _DMFPolicyUnlocalizedDisplayName, 
+                       _DMFProfileIdentifierErrorKey, _DMFRMEchoStatusFail, _DMFRMEchoStatusOK, 
+                       _DMFRMEchoStatusPending, _DMFReportingRequirementsUpdateCoalescenceIntervalDefault, 
                        _DMFSecuirtySupportsFileLevelEncryptionKey, _DMFSecurityFirewallSettingsKey, 
                        _DMFSecurityFirmwarePasswordStatusKey, _DMFSecurityFullDiskEncryptionEnabledKey, 
                        _DMFSecurityFullDiskEncryptionHasInstitutionalRecoveryKey, 
@@ -135,7 +152,7 @@ exports:
                        DMFDevice, DMFDevicePropertiesResultObject, DMFDevicePropertyNotificationSubscriptionRequest, 
                        DMFDisableLostModeRequest, DMFEchoRequest, DMFEchoResultObject, 
                        DMFEffectivePolicy, DMFEmergencyModeMonitor, DMFEnableLostModeRequest, 
-                       DMFEndTransactionRequest, DMFEraseDeviceRequest, DMFFetchActivationLockBypassCodeRequest, 
+                       DMFEndTransactionRequest, DMFFetchActivationLockBypassCodeRequest, 
                        DMFFetchActivationLockBypassCodeResultObject, DMFFetchApplicationsRequest, 
                        DMFFetchApplicationsResultObject, DMFFetchAppsRequest, DMFFetchAppsResultObject, 
                        DMFFetchAvailableOSUpdatesRequest, DMFFetchAvailableOSUpdatesResultObject, 
@@ -185,27 +202,42 @@ exports:
                        DMFRequestAirPlayMirroringRequest, DMFRequestAirPlayMirroringResultObject, 
                        DMFRestartDeviceRequest, DMFScheduleOSUpdateRequest, DMFScheduleOSUpdateResultObject, 
                        DMFSecurityInformation, DMFSendEventRequest, DMFSetAirPlayRouteRequest, 
-                       DMFSetAppAnalyticsEnabledRequest, DMFSetAppAssociatedDomainsRequest, 
-                       DMFSetAppConfigurationRequest, DMFSetAppVPNUUIDRequest, DMFSetBluetoothEnabledRequest, 
+                       DMFSetAppAnalyticsEnabledRequest, DMFSetAppAssociatedDomainsEnableDirectDownloadsRequest, 
+                       DMFSetAppAssociatedDomainsRequest, DMFSetAppConfigurationRequest, 
+                       DMFSetAppRemovabilityRequest, DMFSetAppVPNUUIDRequest, DMFSetBluetoothEnabledRequest, 
                        DMFSetDataRoamingEnabledRequest, DMFSetDeclarationsRequest, 
                        DMFSetDeviceNameRequest, DMFSetDiagnosticSubmissionEnabledRequest, 
                        DMFSetInterfaceOrientationRequest, DMFSetMaximumResidentUsersRequest, 
                        DMFSetPasscodeLockGracePeriodRequest, DMFSetPersonalHotspotEnabledRequest, 
-                       DMFSetVoiceRoamingEnabledRequest, DMFSetVolumeRequest, DMFSetWallpaperRequest, 
-                       DMFShutDownDeviceRequest, DMFStartAppLockRequest, DMFStopAirPlayMirroringRequest, 
-                       DMFStopAppLockRequest, DMFStopManagingAppRequest, DMFStopManagingBooksRequest, 
-                       DMFTaskRequest, DMFTriggerDiagnosticsRequest, DMFUpdateAppRequest, 
-                       DMFUpdateDeclarationsRequest, DMFUpdateEnqueuedCommandsRequest, 
-                       DMFUpdatePickableAirPlayRoutesRequest, DMFUser, DMFValidateApplicationsRequest, 
-                       DMFWebsitePolicyMonitor, DMFiCloudPolicyMonitor ]
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 5E7EC981-EDCD-31AF-B1CD-56F8F5DC43E3', 'x86_64: 5E7EC981-EDCD-31AF-B1CD-56F8F5DC43E3' ]
-platform:        zippered
+                       DMFSetVoiceRoamingEnabledRequest, DMFSetVolumeRequest, DMFShutDownDeviceRequest, 
+                       DMFStartAppLockRequest, DMFStopAirPlayMirroringRequest, DMFStopAppLockRequest, 
+                       DMFStopManagingAppRequest, DMFStopManagingBooksRequest, DMFTaskRequest, 
+                       DMFTriggerDiagnosticsRequest, DMFUpdateAppRequest, DMFUpdateDeclarationsRequest, 
+                       DMFUpdateEnqueuedCommandsRequest, DMFUpdatePickableAirPlayRoutesRequest, 
+                       DMFUser, DMFValidateApplicationsRequest, DMFWebsitePolicyMonitor, 
+                       DMFiCloudPolicyMonitor ]
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           3538ED44-A858-3CBE-A88F-A5A81E8439F7
+  - target:          x86_64-maccatalyst
+    value:           3538ED44-A858-3CBE-A88F-A5A81E8439F7
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           88BBBA51-DC26-36DD-958E-A4C0E0CCD502
+  - target:          arm64e-maccatalyst
+    value:           88BBBA51-DC26-36DD-958E-A4C0E0CCD502
 install-name:    '/System/Library/PrivateFrameworks/Catalyst.framework/Versions/A/Catalyst'
-current-version: 6
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 7
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CATAssertIsNotQueue, _CATAssertIsQueue, _CATErrorDomain, 
                        _CATErrorWithCodeAndUserInfo, _CATErrorWithDomainCodeAndUserInfo, 
                        _CATFormattedStringForKey, _CATGetCatalystQueue, _CATLocalizedKey, 

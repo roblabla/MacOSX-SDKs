@@ -7,13 +7,13 @@
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSArray.h>
-
+#import <AppKit/AppKitDefines.h>
 #import <AppKit/NSApplication.h>
 #import <AppKit/NSHelpManager.h>
 #import <AppKit/NSGraphics.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSTextField, NSPanel, NSWindow, NSImage, NSButton, NSError;
 @protocol NSAlertDelegate;
@@ -85,7 +85,7 @@ static const NSModalResponse NSAlertThirdButtonReturn = 1002;
  */
 @property (nullable, weak) id<NSAlertDelegate> delegate;
 
-/* -setShowsSuppressionButton: indicates whether or not the alert should contain a suppression checkbox.  The default is NO.  This checkbox is typically used to give the user an option to not show this alert again.  If shown, the suppression button will have a default localized title similar to @"Do not show this message again".  You can customize this title using [[alert suppressionButton] setTitle:].  When the alert is dismissed, you can get the state of the suppression button, using [[alert suppressionButton] state] and store the result in user defaults, for example.  This setting can then be checked before showing the alert again.  By default, the suppression button is positioned below the informative text, and above the accessory view (if any) and the alert buttons, and left-aligned with the informative text.  However do not count on the placement of this button, since it might be moved if the alert panel user interface is changed in the future. If you need a checkbox for purposes other than suppression text, it is recommended you create your own using an accessory view.
+/* -setShowsSuppressionButton: indicates whether or not the alert should contain a suppression checkbox.  The default is NO.  This checkbox is typically used to give the user an option to not show this alert again.  If shown, the suppression button will have a default localized title similar to @"Do not show this message again" (single-button alert) or @"Don't ask again" (multi-button alert).  You can customize this title using [[alert suppressionButton] setTitle:].  When the alert is dismissed, you can get the state of the suppression button, using [[alert suppressionButton] state] and store the result in user defaults, for example.  This setting can then be checked before showing the alert again.  By default, the suppression button is positioned below the informative text, and above the accessory view (if any) and the alert buttons, and left-aligned with the informative text.  However do not count on the placement of this button, since it might be moved if the alert panel user interface is changed in the future. If you need a checkbox for purposes other than suppression text, it is recommended you create your own using an accessory view.
 */
 @property BOOL showsSuppressionButton API_AVAILABLE(macos(10.5));
 

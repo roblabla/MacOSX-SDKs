@@ -1,12 +1,26 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 933429B9-4F28-3AF3-9AAD-83C7C8FF9B99', 'x86_64: 933429B9-4F28-3AF3-9AAD-83C7C8FF9B99' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           9A4974FA-2056-3E8E-AB72-CE457C94CE3A
+  - target:          x86_64-maccatalyst
+    value:           9A4974FA-2056-3E8E-AB72-CE457C94CE3A
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           0663C56B-4FA6-3A6A-B67B-E5CF8A0ADD42
+  - target:          arm64e-maccatalyst
+    value:           0663C56B-4FA6-3A6A-B67B-E5CF8A0ADD42
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices'
-current-version: 1065.2
-exports:         
-  - archs:           [ x86_64 ]
-    re-exports:      [ '/System/Library/Frameworks/CFNetwork.framework/Versions/A/CFNetwork', 
+current-version: 1122.4
+reexported-libraries:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    libraries:       [ '/System/Library/Frameworks/CFNetwork.framework/Versions/A/CFNetwork', 
                        '/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation', 
                        '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/AE.framework/Versions/A/AE', 
                        '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Versions/A/CarbonCore', 
@@ -17,26 +31,53 @@ exports:
                        '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/OSServices.framework/Versions/A/OSServices', 
                        '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SearchKit.framework/Versions/A/SearchKit', 
                        '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SharedFileList.framework/Versions/A/SharedFileList' ]
-    symbols:         [ _CoreServicesVersionNumber, _CoreServicesVersionString, __FE_DFL_DISABLE_SSE_DENORMS_ENV, 
-                       __FE_DFL_ENV, ___inf, _exp2, '_exp2$fenv_access_off', _fdim, 
-                       '_fdim$fenv_access_off', _feclearexcept, _fegetenv, _fegetexcept, 
-                       _fegetround, _feholdexcept, _feraiseexcept, _fesetenv, _fesetexcept, 
-                       _fesetround, _fetestexcept, _feupdateenv, _fmax, '_fmax$fenv_access_off', 
-                       _fmin, '_fmin$fenv_access_off', _log2, '_log2$fenv_access_off', 
-                       _modff, '_modff$fenv_access_off', _nan, _nanf, _nextafterd, 
-                       _nextafterf, _remquo, '_remquo$fenv_access_off' ]
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 0DF53735-58DB-354B-9BC2-F8B0ED698782', 'x86_64: 0DF53735-58DB-354B-9BC2-F8B0ED698782' ]
-platform:        zippered
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _CoreServicesVersionNumber, _CoreServicesVersionString ]
+reexports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
+    symbols:         [ __FE_DFL_DISABLE_SSE_DENORMS_ENV, ___inf, '_exp2$fenv_access_off', 
+                       '_fdim$fenv_access_off', _fegetexcept, _fesetexcept, '_fmax$fenv_access_off', 
+                       '_fmin$fenv_access_off', '_log2$fenv_access_off', '_modff$fenv_access_off', 
+                       _nextafterd, '_remquo$fenv_access_off' ]
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ __FE_DFL_ENV, _exp2, _fdim, _feclearexcept, _fegetenv, _fegetround, 
+                       _feholdexcept, _feraiseexcept, _fesetenv, _fesetround, _fetestexcept, 
+                       _feupdateenv, _fmax, _fmin, _log2, _modff, _nan, _nanf, _nextafterf, 
+                       _remquo ]
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           C7CB2D62-B4F0-37A1-A53F-5CBB01ECFB97
+  - target:          x86_64-maccatalyst
+    value:           C7CB2D62-B4F0-37A1-A53F-5CBB01ECFB97
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           EE1EBDA8-9297-3434-A3D8-EA3313BEB607
+  - target:          arm64e-maccatalyst
+    value:           EE1EBDA8-9297-3434-A3D8-EA3313BEB607
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/AE.framework/Versions/A/AE'
-current-version: 835.1
+current-version: 918
 compatibility-version: 0
-parent-umbrella: CoreServices
-exports:         
-  - archs:           [ x86_64 ]
-    allowable-clients: [ DesktopServices, Foundation, HIServices, LaunchServices, 
-                         PrintCore ]
+parent-umbrella:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    umbrella:        CoreServices
+allowable-clients:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    clients:         [ DesktopServices, Foundation, HIServices, LaunchServices, PrintCore ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _AEBuildAppleEvent, _AEBuildDesc, _AEBuildParameters, _AECallObjectAccessor, 
                        _AECheckIsRecord, _AECoerceDesc, _AECoercePtr, _AECoercionHandlersApplyFunction, 
                        _AECompareDesc, _AEConvertFromMsg, _AECountItems, _AECreateAppleEvent, 
@@ -65,22 +106,22 @@ exports:
                        _AEStreamOpenList, _AEStreamOpenRecord, _AEStreamOptionalParam, 
                        _AEStreamSetRecordType, _AEStreamWriteAEDesc, _AEStreamWriteData, 
                        _AEStreamWriteDesc, _AEStreamWriteKey, _AEStreamWriteKeyDesc, 
-                       _AEUnflattenDesc, _CreateCompDescriptor, _CreateLogicalDescriptor, 
-                       _CreateObjSpecifier, _CreateOffsetDescriptor, _CreateRangeDescriptor, 
-                       _GDBPrintAECoercionTables, _GDBPrintAEDesc, _GDBPrintAEHandlerTables, 
-                       _GDBPrintHelpDebuggingAppleEvents, __AEAddAnnotationsToAppleEvent, 
-                       __AEAppleEventMergeAnnotations, __AECanSandboxedApplicationSendAppleEvent, 
-                       __AECopyEntitlementForToken, __AECopyRegisteredMachPort, __AECreateAEReceiveMachPort, 
-                       __AECreateAEReceivePortInRunLoopWithSource, __AECreateAnnotatedAppleEvent, 
-                       __AEDescEventGetCounts, __AEDescEventIndexedAttributeItem, 
+                       _AEUnflattenDesc, _AEUnflattenDescFromBytes, _CreateCompDescriptor, 
+                       _CreateLogicalDescriptor, _CreateObjSpecifier, _CreateOffsetDescriptor, 
+                       _CreateRangeDescriptor, _GDBPrintAECoercionTables, _GDBPrintAEDesc, 
+                       _GDBPrintAEHandlerTables, _GDBPrintHelpDebuggingAppleEvents, 
+                       __AEAddAnnotationsToAppleEvent, __AEAppleEventMergeAnnotations, 
+                       __AECanSandboxedApplicationSendAppleEvent, __AECopyEntitlementForToken, 
+                       __AECopyRegisteredMachPort, __AECreateAEReceiveMachPort, __AECreateAEReceivePortInRunLoopWithSource, 
+                       __AECreateAnnotatedAppleEvent, __AEDescEventGetCounts, __AEDescEventIndexedAttributeItem, 
                        __AEDescEventIndexedParamItem, __AEDescGetAsString, __AEDescInformation, 
                        __AEDescListGetCount, __AEDescListIndexedItem, __AEDescRecordGetCount, 
                        __AEDescRecordIndexedItem, __AEDescToInternalImpl, __AEDoesAppleEventContainAnyTypesWhichRequireAnnotation, 
                        __AEEventDescGetInformation, __AEEventRequiresSecurityHandlerChecks, 
                        __AEEventSecurityHandlerDoChecks, __AEGenerateAnnotations, 
-                       __AEInstallEventHandlerBlock, __AEInstallEventSecurityHandler, 
-                       __AEInstallEventSecurityHandlerBlock, __AEIsAppleEventTargetInSandbox, 
-                       __AERegisterCurrentApplicationInfomationWithAppleEventsD, 
+                       __AEInstallAEInteractWithUserCallback, __AEInstallEventHandlerBlock, 
+                       __AEInstallEventSecurityHandler, __AEInstallEventSecurityHandlerBlock, 
+                       __AEIsAppleEventTargetInSandbox, __AERegisterCurrentApplicationInfomationWithAppleEventsD, 
                        __AERemoveAEReceivePort, __AERemoveEventSecurityHandler, __AEUnflattenDescFromBytes, 
                        __AppleEventsCheckInApp, __AppleEventsCheckInAppWithBlock, 
                        __AppleEventsCopyApplicationEntitlements, __AppleEventsCopyApplicationEntitlementsWithBlock, 
@@ -88,7 +129,9 @@ exports:
                        __AppleEventsForwardEntitlements, __AppleEventsForwardEntitlementsWithBlock, 
                        __AppleEventsHintApp, __AppleEventsHintAppWithBlock, __AppleEventsListApplications, 
                        __AppleEventsListApplicationsWithBlock, __AppleEventsLookupApplicationPort, 
-                       __AppleEventsLookupApplicationPortWithBlock, __AppleEventsRegisterXPCServicesOnQueue, 
+                       __AppleEventsLookupApplicationPortWithBlock, __AppleEventsReleaseProcessAssertion, 
+                       __AppleEventsReleaseProcessAssertionWithBlock, __AppleEventsRequestProcessAssertion, 
+                       __AppleEventsRequestProcessAssertionWithBlock, __AppleEventsSendPortRequiresProcessAssertions, 
                        __kAppleEventsScriptingEntitlementKey, _aeAddFilter, _aeAppendToImplEnd, 
                        _aeBindToArbitraryMachPort, _aeCheckMessage, _aeCheckinApp, 
                        _aeClassicCompatFlattenDesc, _aeClassicCompatSizeOfFlattenedDesc, 
@@ -104,16 +147,26 @@ exports:
                        _aeSuspendTheCurrentEvent, _kAERemoteProcessNameKey, _kAERemoteProcessProcessIDKey, 
                        _kAERemoteProcessURLKey, _kAERemoteProcessUserIDKey, _pushHighLevelEvent, 
                        _vAEBuildAppleEvent, _vAEBuildDesc, _vAEBuildParameters ]
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 76BF7526-6876-388B-8E14-03BED28B6041' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           62C51CCB-B5BC-3E48-935E-77B2968343BF
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           6D2990B5-62AC-36CF-8F2C-AFC7AFB75BBA
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Versions/A/CarbonCore'
-current-version: 1214
-parent-umbrella: CoreServices
-exports:         
-  - archs:           [ x86_64 ]
-    allowable-clients: [ AudioToolbox, Foundation, Metadata ]
+current-version: 1307
+parent-umbrella:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    umbrella:        CoreServices
+allowable-clients:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    clients:         [ AudioToolbox, Foundation, Metadata ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _AbsoluteDeltaToDuration, _AbsoluteDeltaToNanoseconds, _AbsoluteToDuration, 
                        _AbsoluteToNanoseconds, _AddAbsoluteToAbsolute, _AddAtomic, 
                        _AddAtomic16, _AddAtomic8, _AddCollectionItem, _AddCollectionItemHdl, 
@@ -747,15 +800,32 @@ exports:
                        _scGetServerCheckinPort, _scGetServerOptions, _scPrefsForgetKey, 
                        _scPrefsGetInteger, _scPrefsGetString, _scPrefsPostData, _scPrefsSetInteger, 
                        _scPrefsSetString, _str2dec, _x80tod, _x80told ]
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 8E9E1B77-AEB2-34CE-855D-651369E18325', 'x86_64: 8E9E1B77-AEB2-34CE-855D-651369E18325' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           665D28E5-6D14-3CF2-8657-5B7749D0DAA3
+  - target:          x86_64-maccatalyst
+    value:           665D28E5-6D14-3CF2-8657-5B7749D0DAA3
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           DA58C89D-7286-3354-BAEE-8D09A7E4332E
+  - target:          arm64e-maccatalyst
+    value:           DA58C89D-7286-3354-BAEE-8D09A7E4332E
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/DictionaryServices.framework/Versions/A/DictionaryServices'
-current-version: 321
-parent-umbrella: CoreServices
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 341
+parent-umbrella:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    umbrella:        CoreServices
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _DCSActivateDictionaryPanel, _DCSCopyActiveDictionaries, _DCSCopyAvailableDictionaries, 
                        _DCSCopyDefinitionMarkup, _DCSCopyDefinitionRecords, _DCSCopyDefinitions, 
                        _DCSCopyInactiveDictionaries, _DCSCopyLanguagesOfPreparedDefaultDictionaries, 
@@ -764,40 +834,39 @@ exports:
                        _DCSCreateHeadwordList, _DCSCreateUserDictionariesDirectory, 
                        _DCSDictionaryAssetAttributesDownloaded, _DCSDictionaryAssetAttributesWillBePurged, 
                        _DCSDictionaryAssetCopyDiagnosticLog, _DCSDictionaryAssetCopyDownloadedDictionaryIdentifiers, 
-                       _DCSDictionaryAssetCopyRemovedDictionaryIdentifiers, _DCSDictionaryAssetDownloadLinguisticDataForLanguages, 
-                       _DCSDictionaryAssetGetAssetType, _DCSDictionaryAssetGetCompatibilityVersion, 
-                       _DCSDictionaryCopyResourceURLsOfType, _DCSDictionaryCreate, 
-                       _DCSDictionaryCreateWithAssetAttributes, _DCSDictionaryCreateWithIdentifier, 
-                       _DCSDictionaryDownloadFinished, _DCSDictionaryGetAssetObj, 
-                       _DCSDictionaryGetBaseURL, _DCSDictionaryGetIdentifier, _DCSDictionaryGetLanguages, 
-                       _DCSDictionaryGetName, _DCSDictionaryGetParentDictionary, 
+                       _DCSDictionaryAssetCopyRemovedDictionaryIdentifiers, _DCSDictionaryAssetGetAssetType, 
+                       _DCSDictionaryAssetGetCompatibilityVersion, _DCSDictionaryCopyResourceURLsOfType, 
+                       _DCSDictionaryCreate, _DCSDictionaryCreateWithAssetAttributes, 
+                       _DCSDictionaryCreateWithIdentifier, _DCSDictionaryDownloadFinished, 
+                       _DCSDictionaryGetAssetObj, _DCSDictionaryGetBaseURL, _DCSDictionaryGetIdentifier, 
+                       _DCSDictionaryGetLanguages, _DCSDictionaryGetName, _DCSDictionaryGetParentDictionary, 
                        _DCSDictionaryGetPreference, _DCSDictionaryGetPreferenceHTML, 
                        _DCSDictionaryGetPrimaryLanguage, _DCSDictionaryGetShortName, 
                        _DCSDictionaryGetStyleSheetURL, _DCSDictionaryGetSubDictionaries, 
-                       _DCSDictionaryGetTypeID, _DCSDictionaryGetURL, _DCSDictionaryIsNetworkService, 
-                       _DCSDictionaryIsSupportedDefinitionStyle, _DCSDictionarySetDataHeader, 
-                       _DCSDictionarySetPreference, _DCSGetActiveDictionaries, _DCSGetDefaultDictionary, 
-                       _DCSGetDefaultThesaurus, _DCSGetLinguisticDataAssetCompatibilityVersion, 
+                       _DCSDictionaryGetTypeID, _DCSDictionaryGetURL, _DCSDictionaryIsLanguageDictionary, 
+                       _DCSDictionaryIsNetworkService, _DCSDictionaryIsSupportedDefinitionStyle, 
+                       _DCSDictionarySetDataHeader, _DCSDictionarySetPreference, 
+                       _DCSGetActiveDictionaries, _DCSGetDefaultDictionary, _DCSGetDefaultThesaurus, 
                        _DCSGetServicePresentationType, _DCSGetTermRangeInString, 
                        _DCSGetTermRangeInStringWithOptions, _DCSHasDefinitionForTerm, 
                        _DCSInvalidateDictionaryCache, _DCSNormalizeSearchString, 
-                       _DCSNormalizeSearchStringWithOptionsAndLocale, _DCSPrepareMobileAssetQuery, 
-                       _DCSRecordCopyData, _DCSRecordCopyDataURL, _DCSRecordCopyDefinition, 
-                       _DCSRecordCopyTextElements, _DCSRecordGetAnchor, _DCSRecordGetAssociatedObj, 
-                       _DCSRecordGetDictionary, _DCSRecordGetHeadword, _DCSRecordGetRawHeadword, 
-                       _DCSRecordGetString, _DCSRecordGetSubDictionary, _DCSRecordGetSupplementalHeadword, 
-                       _DCSRecordGetTitle, _DCSRecordGetTypeID, _DCSRecordSetAssociatedObj, 
-                       _DCSRecordSetHeadword, _DCSSearchFoundationCopyResults, _DCSSearchFoundationCopyResultsWithOptions, 
-                       _DCSSearchSessionCreate, _DCSSearchSessionScheduleWithRunLoop, 
-                       _DCSSearchSessionUnscheduleFromRunLoop, _DCSSetActiveDictionaries, 
-                       _DCSSetServicePresentationType, _DCSSortRecordsWithHeadword, 
-                       _IDXAddRecord, _IDXBuildIndexWithRecords, _IDXContainsMatchData, 
-                       _IDXCopyIndexNames, _IDXCreateDictionaryPackage, _IDXCreateFlattenData, 
-                       _IDXCreateIndexObject, _IDXDeleteRecord, _IDXGetDataByID, 
-                       _IDXGetDataPtrByID, _IDXGetFieldDataPtrs, _IDXGetMatchData, 
-                       _IDXGetMatchDataPtr, _IDXIndexGetTypeID, _IDXPerformSearch, 
-                       _IDXSetRequestFields, _IDXSetSearchCharacters, _IDXSetSearchString, 
-                       _IDXSupportDataPtr, _kDCSActiveDictionariesChangedNotification, 
+                       _DCSNormalizeSearchStringWithOptionsAndLocale, _DCSPreferredOrderOfDictionaryAssetAttributesForLanguages, 
+                       _DCSPrepareMobileAssetQuery, _DCSRecordCopyData, _DCSRecordCopyDataURL, 
+                       _DCSRecordCopyDefinition, _DCSRecordCopyTextElements, _DCSRecordGetAnchor, 
+                       _DCSRecordGetAssociatedObj, _DCSRecordGetDictionary, _DCSRecordGetHeadword, 
+                       _DCSRecordGetRawHeadword, _DCSRecordGetString, _DCSRecordGetSubDictionary, 
+                       _DCSRecordGetSupplementalHeadword, _DCSRecordGetTitle, _DCSRecordGetTypeID, 
+                       _DCSRecordSetAssociatedObj, _DCSRecordSetHeadword, _DCSSearchFoundationCopyResults, 
+                       _DCSSearchFoundationCopyResultsWithOptions, _DCSSearchSessionCreate, 
+                       _DCSSearchSessionScheduleWithRunLoop, _DCSSearchSessionUnscheduleFromRunLoop, 
+                       _DCSSetActiveDictionaries, _DCSSetServicePresentationType, 
+                       _DCSSortRecordsWithHeadword, _IDXAddRecord, _IDXBuildIndexWithRecords, 
+                       _IDXContainsMatchData, _IDXCopyIndexNames, _IDXCreateDictionaryPackage, 
+                       _IDXCreateFlattenData, _IDXCreateIndexObject, _IDXDeleteRecord, 
+                       _IDXGetDataByID, _IDXGetDataPtrByID, _IDXGetFieldDataPtrs, 
+                       _IDXGetMatchData, _IDXGetMatchDataPtr, _IDXIndexGetTypeID, 
+                       _IDXPerformSearch, _IDXSetRequestFields, _IDXSetSearchCharacters, 
+                       _IDXSetSearchString, _IDXSupportDataPtr, _kDCSActiveDictionariesChangedNotification, 
                        _kDCSDictionaryDescriptionLanguage, _kDCSDictionaryIndexLanguage, 
                        _kDCSFilterOptionAllowNetworkServices, _kDCSFilterOptionDescriptionLanguage, 
                        _kDCSFilterOptionIndexLanguage, _kDCSResourceTypePrivateFont, 
@@ -814,15 +883,32 @@ exports:
                        _kIDXPropertyIndexWritable, _kIDXPropertyVariableFields, _kIDXPropertyVersion, 
                        _kIDXSearchAllMatch, _kIDXSearchCommonPrefixMatch, _kIDXSearchExactMatch, 
                        _kIDXSearchPrefixMatch, _kIDXSearchWildcardMatch ]
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 78D2AB1A-9053-3D32-8C18-C1DD31FF9400', 'x86_64: 78D2AB1A-9053-3D32-8C18-C1DD31FF9400' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           F11ED9C3-A971-3D74-AFD7-261D1BC2F97C
+  - target:          x86_64-maccatalyst
+    value:           F11ED9C3-A971-3D74-AFD7-261D1BC2F97C
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           262485C9-74F6-3F3F-A78C-51978EC1C143
+  - target:          arm64e-maccatalyst
+    value:           262485C9-74F6-3F3F-A78C-51978EC1C143
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/FSEvents.framework/Versions/A/FSEvents'
-current-version: 1268.0.6
-parent-umbrella: CoreServices
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 1290.40.2
+parent-umbrella:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    umbrella:        CoreServices
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _FSEventStreamCopyDescription, _FSEventStreamCopyPathsBeingWatched, 
                        _FSEventStreamCreate, _FSEventStreamCreateRelativeToDevice, 
                        _FSEventStreamFlushAsync, _FSEventStreamFlushSync, _FSEventStreamGetDeviceBeingWatched, 
@@ -833,16 +919,36 @@ exports:
                        _FSEventStreamUnscheduleFromRunLoop, _FSEventsCopyUUIDForDevice, 
                        _FSEventsGetCurrentEventId, _FSEventsGetLastEventIdForDeviceBeforeTime, 
                        _FSEventsPurgeEventsForDeviceUpToEventId ]
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 200F66C5-EB4A-332C-A1AE-04513628C7B3', 'x86_64: 200F66C5-EB4A-332C-A1AE-04513628C7B3' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           309AC005-15D4-36A2-80F0-DC9BDCCD8542
+  - target:          x86_64-maccatalyst
+    value:           309AC005-15D4-36A2-80F0-DC9BDCCD8542
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           7E3AC159-CF7D-3749-8B1F-00332D256508
+  - target:          arm64e-maccatalyst
+    value:           7E3AC159-CF7D-3749-8B1F-00332D256508
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/LaunchServices'
-current-version: 1065.2
-parent-umbrella: CoreServices
-exports:         
-  - archs:           [ x86_64 ]
-    allowable-clients: [ Foundation ]
+current-version: 1122.4
+parent-umbrella:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    umbrella:        CoreServices
+allowable-clients:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    clients:         [ Foundation ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _AcquireIconRef, _CompositeIconRef, _GetCustomIconsEnabled, 
                        _GetIconRef, _GetIconRefFromComponent, _GetIconRefFromFileInfo, 
                        _GetIconRefFromFolder, _GetIconRefFromIconFamilyPtr, _GetIconRefFromTypeInfo, 
@@ -894,19 +1000,15 @@ exports:
                        _UTTypeEqual, _UTTypeIsDeclared, _UTTypeIsDynamic, _UTTypeShow, 
                        _UnregisterIconRef, _UpdateIconRef, __FlattenIconRef, __GDBIconRefsList, 
                        __GetIconRefFromIOKitDevice, __GetIconRefFromURL, __IconRefCopyResourceURLs, 
-                       __IconRefIsTemplate, __LASServer_DumpState, __LSASNCreate, 
-                       __LSASNCreateCopy, __LSASNCreateWithPid, __LSASNCreateWithUInt64, 
-                       __LSASNExtractHighAndLowParts, __LSASNGetTypeID, __LSASNReturnASNForPIDFromWithinCoreServicesd, 
-                       __LSASNToUInt64, __LSASServer_Dump, __LSASServer_PendingDeletionNotification, 
-                       __LSASServer_ProcessDeathNotification, __LSASServer_SessionBirthNotification, 
-                       __LSASServer_SessionDeathNotification, __LSASServer_VolumeNotification, 
+                       __IconRefIsTemplate, __LSASNCreate, __LSASNCreateCopy, __LSASNCreateWithPid, 
+                       __LSASNCreateWithUInt64, __LSASNExtractHighAndLowParts, __LSASNGetTypeID, 
+                       __LSASNReturnASNForPIDFromWithinCoreServicesd, __LSASNToUInt64, 
                        __LSAddRecentItem, __LSAddToRecentsAfterOpening, __LSAdvertisementBytesKind, 
                        __LSAgentCheckRiskLevelForURL, __LSAgentCopyDisplayNameWithLanguageCode, 
                        __LSAgentGetAuditToken, __LSAllocatePSN, __LSAnnotateAndSendAppleEvent, 
                        __LSAppStateBlockedKey, __LSAppStateInstalledKey, __LSAppStatePlaceholderKey, 
                        __LSAppStateRemovedKey, __LSAppStateRestrictedKey, __LSAppStateValidKey, 
-                       __LSApplicationCheckIn, __LSApplicationQuitting, __LSApplicationServices_XPC_listener, 
-                       __LSApplicationServices_XPC_server, __LSAssertRunningInServer, 
+                       __LSApplicationCheckIn, __LSApplicationQuitting, __LSAssertRunningInServer, 
                        __LSBindingCopyIconRef, __LSBindingCopyUTI, __LSBindingCopyVariant, 
                        __LSBindingCreateVariant, __LSBindingCreateWithBookmarkData, 
                        __LSBindingCreateWithData, __LSBindingCreateWithIconRef, __LSBindingCreateWithResourceData, 
@@ -917,6 +1019,8 @@ exports:
                        __LSBindingGetTypeID, __LSBindingGetValidationState, __LSBindingGetValidationToken, 
                        __LSBindingGetVariantFlags, __LSBindingSetLogFile, __LSBindingSetReasonTrackingEnabled, 
                        __LSBindingValidationStateIsStale, __LSBindingValidationStateIsValid, 
+                       __LSCEResultAlwaysAllowDeveloperKey, __LSCEResultSubmitMalwareReportKey, 
+                       __LSCEResultUnquarantineDiskImageKey, __LSCEResultUnquarantineServerKey, 
                        __LSCanOpenContentsOfPasteboard, __LSCanURLAcceptContentType, 
                        __LSClientSideReconnectionPhase1, __LSCompareASNs, __LSCompareASNsLong, 
                        __LSCompareHashedBytesFromAdvertisingStrings, __LSConflictResolutionContinueOpening, 
@@ -929,112 +1033,158 @@ exports:
                        __LSCopyApplicationInformationItem, __LSCopyApplicationURLsForContentType, 
                        __LSCopyApplicationURLsForItemURL, __LSCopyApplicationURLsWithInfoFlags, 
                        __LSCopyApplicationsWithPath, __LSCopyArchitecturePreferenceForApplicationURL, 
-                       __LSCopyBundleURLWithIdentifier, __LSCopyClaimedActivityIdentifiersAndDomains, 
-                       __LSCopyCurrentApplicationASN, __LSCopyDefaultSchemeHandlerURL, 
-                       __LSCopyDisplayNameForCanonicalName, __LSCopyDownloadAssessmentDictionary, 
-                       __LSCopyFrontApplication, __LSCopyFrontUIApplication, __LSCopyItemAttributesForRefInfo, 
+                       __LSCopyBundleIdentifierForRegisteredSurrogate, __LSCopyBundleIdentifierFromSurrogateData, 
+                       __LSCopyBundleURLForRegisteredSurrogate, __LSCopyBundleURLWithIdentifier, 
+                       __LSCopyClaimedActivityIdentifiersAndDomains, __LSCopyCurrentApplicationASN, 
+                       __LSCopyDefaultSchemeHandlerURL, __LSCopyDisplayNameForCanonicalName, 
+                       __LSCopyDownloadAssessmentDictionary, __LSCopyFrontApplication, 
+                       __LSCopyFrontUIApplication, __LSCopyItemAttributesForRefInfo, 
                        __LSCopyKernelPackageExtensions, __LSCopyKindStringForInfo, 
                        __LSCopyLSASNForAuditToken, __LSCopyLaunchModifiers, __LSCopyLibraryItemURLs, 
                        __LSCopyLoginItemURLWithBundleIdentifiers, __LSCopyMatchingApplications, 
                        __LSCopyMatchingApplicationsWithItems, __LSCopyMetaApplicationInformation, 
-                       __LSCopyMetaApplicationInformationItem, __LSCopyModelCodesForCurrentDevice, 
-                       __LSCopyNULLApplicationASN, __LSCopyPendingApplicationArray, 
-                       __LSCopyProcessQuarantineProperties, __LSCopyRecentItems, 
-                       __LSCopyRunningApplicationArray, __LSCopySchemesAndHandlerURLs, 
+                       __LSCopyMetaApplicationInformationItem, __LSCopyNULLApplicationASN, 
+                       __LSCopyPendingApplicationArray, __LSCopyProcessQuarantineProperties, 
+                       __LSCopyRecentItems, __LSCopyRunningApplicationArray, __LSCopySchemesAndHandlerURLs, 
                        __LSCopySystemApplicationASN, __LSCopyTypeIdentifierForItemRefInfo, 
                        __LSCopyURLOverrideForURL, __LSCopyUserActivityDomainNamesForBundleID, 
                        __LSCopyValidApplicationCategories, __LSCreateCSUIConnectionForLaunching, 
                        __LSCreateDatabaseChangeNotificationNameForCurrentUser, __LSCreateDatabaseLookupStringFromHashedBytesForAdvertising, 
                        __LSCreateDeviceTypeIdentifierWithModelCode, __LSCreateDeviceTypeIdentifierWithModelCodeAndColorComponents, 
-                       __LSCreateHashedBytesForAdvertisingFromString, __LSCreateOpenWithMenu, 
-                       __LSCreatePackageExtensionsArray, __LSCreateVisualizerForDatabaseAtURL, 
-                       __LSCreateVisualizerForDatabaseAtURLWithStore, __LSDatabaseCopyURLForUser, 
+                       __LSCreateHashedBytesForAdvertisingFromString, __LSCreatePackageExtensionsArray, 
+                       __LSCreateSurrogateDataForApplication, __LSCreateVisualizerForDatabaseAtURL, 
+                       __LSCreateVisualizerForDatabaseAtURLWithStore, __LSDataContainerPersonalityCopyInfo, 
+                       __LSDataContainerPersonalityRemoveInfo, __LSDataContainerPersonalitySetInfo, 
+                       __LSDataContainerPersonalitySetInfoWithApplicationIdentifier, 
+                       __LSDatabaseContextSetDetachProxyObjects, __LSDatabaseCopyURLForUser, 
                        __LSDebugAdvertismentValue, __LSDebugGetSharedMemoryPageAddress, 
                        __LSDeleteAllQuarantineHistory, __LSDeleteQuarantineHistoryForFileURL, 
                        __LSDeleteQuarantineHistoryInDateRange, __LSDisplayData, __LSEnumerateApplicationsFromSpotlight, 
                        __LSExceptionsGetAppStoreInfoForBundleIdentifier, __LSExceptionsIsBundleIdentifierInternallyBlocked, 
                        __LSFindApplications, __LSFindApplicationsItem, __LSGetApplicationInformationSeed, 
                        __LSGetApplicationListSeed, __LSGetBundle, __LSGetCurrentApplicationASN, 
-                       __LSGetCurrentDebugLoggingPriority, __LSGetFrontApplicationSeed, 
-                       __LSGetIconRefForURL, __LSGetMenuBarOwnerApplicationSeed, 
-                       __LSGetNotificationInformation, __LSGetRecentItemCount, __LSGetSharedMemoryPageInfoTEST, 
-                       __LSGetShowAllExtensionsPreference, __LSGetStatus, __LSGetVersionFromString, 
-                       __LSGetVisibleApplicationListSeed, __LSHandlerRankAlternate, 
-                       __LSHandlerRankDefault, __LSHandlerRankNone, __LSHandlerRankOwner, 
-                       __LSIconDictionarySupportsAssetCatalogs, __LSInstall_ocon_EventHandler, 
-                       __LSIsApplicationRunning, __LSKillApplication, __LSLaunchApplication, 
-                       __LSLog, __LSMigrateLaunchServices, __LSModifyNotification, 
-                       __LSOpen2CopyDiagnostics, __LSOpen2SetDiagnostics, __LSOpenApplicationURL, 
-                       __LSOpenCallInvokeWithXPC, __LSOpenContentsOfPasteboardWithCompletionHandler, 
+                       __LSGetFrontApplicationSeed, __LSGetIconRefForURL, __LSGetMainBundleURL, 
+                       __LSGetMenuBarOwnerApplicationSeed, __LSGetNotificationInformation, 
+                       __LSGetPointerAuthKeyStatePreferenceForCurrentApplication, 
+                       __LSGetRecentItemCount, __LSGetSharedMemoryPageInfoTEST, __LSGetShowAllExtensionsPreference, 
+                       __LSGetStatus, __LSGetVersionFromString, __LSGetVisibleApplicationListSeed, 
+                       __LSHandlerRankAlternate, __LSHandlerRankDefault, __LSHandlerRankNone, 
+                       __LSHandlerRankOwner, __LSIconDictionarySupportsAssetCatalogs, 
+                       __LSInstall_ocon_EventHandler, __LSIsApplicationRunning, __LSKillApplication, 
+                       __LSLaunchApplication, __LSLog, __LSMakeVersionNumber, __LSMigrateLaunchServices, 
+                       __LSModifyNotification, __LSOpen2CopyDiagnostics, __LSOpen2SetDiagnostics, 
+                       __LSOpenApplicationURL, __LSOpenCallInvokeWithXPC, __LSOpenContentsOfPasteboardWithCompletionHandler, 
                        __LSOpenExtractBackgroundLaunchReasonFromAppleEvent, __LSOpenURLWithCompletionHandler, 
                        __LSOpenURLsUsingASNWithCompletionHandler, __LSOpenURLsUsingBundleIdentifierWithCompletionHandler, 
-                       __LSOpenURLsWithCompletionHandler, __LSOpenWithMenuGetAssociatedUniversalLink, 
-                       __LSOrderApplications, __LSPassDownCurrentEventState, __LSPostLaunchModifiers, 
+                       __LSOpenURLsWithCompletionHandler, __LSOrderApplications, 
+                       __LSPassDownCurrentEventState, __LSPersistentIdentifierCompare, 
+                       __LSPersistentIdentifierGetDebugDescription, __LSPostLaunchModifiers, 
                        __LSQuarantinePropertiesCreateData, __LSQuarantinePropertiesCreateWithBytes, 
-                       __LSRecentItemsChanged, __LSRecentsInit, __LSRegisterAsSessionLauncherClient, 
-                       __LSRegisterExtensionPointInfo, __LSRegisterFilePropertyProvider, 
-                       __LSRegisterLibraryBundle, __LSRegisterNamedXPCConnection, 
-                       __LSRegisterPlatformExtensionPointInfo, __LSRegisterPluginURL, 
+                       __LSReCheckinApplication, __LSReRegisterNotifications, __LSRecentItemsChanged, 
+                       __LSRecentsInit, __LSRegisterAsSessionLauncherClient, __LSRegisterExtensionPointInfo, 
+                       __LSRegisterFilePropertyProvider, __LSRegisterLibraryBundle, 
+                       __LSRegisterNamedXPCConnection, __LSRegisterPlatformExtensionPointInfo, 
+                       __LSRegisterPlatformFrameworkExtensionPointInfo, __LSRegisterPluginURL, 
                        __LSRegisterURLWithOptions, __LSRemoveDefaultRoleHandlerForContentType, 
                        __LSRemoveRecentItems, __LSRequestProcessBecomeFrontmost, 
                        __LSSaveAndRefresh, __LSScheduleNotificationFunction, __LSScheduleNotificationFunctionOnQueue_f, 
                        __LSScheduleNotificationOnQueueWithBlock, __LSSendNotification, 
                        __LSServerMain, __LSSetApplicationCategories, __LSSetApplicationInformation, 
                        __LSSetApplicationInformationItem, __LSSetApplicationLaunchServicesServerConnectionStatus, 
-                       __LSSetArchitecturePreferenceForApplicationURL, __LSSetCurrentDebugLoggingPriority, 
-                       __LSSetDatabaseIsSeeded, __LSSetDefaultSchemeHandlerURL, __LSSetDefaultWebBrowserWithApplicationURL, 
-                       __LSSetDefaultWebBrowserWithBundleIdentifierAndVersion, __LSSetDefaultXPCConnection, 
-                       __LSSetFrontApplication, __LSSetFrontApplicationLong, __LSSetFrontApplicationLongWithCompletion, 
-                       __LSSetMetaApplicationInformation, __LSSetMetaApplicationInformationItem, 
+                       __LSSetArchitecturePreferenceForApplicationURL, __LSSetDatabaseIsSeeded, 
+                       __LSSetDefaultSchemeHandlerURL, __LSSetDefaultSchemeHandlerURLWaitingUntilDone, 
+                       __LSSetDefaultWebBrowserWithApplicationURL, __LSSetDefaultWebBrowserWithBundleIdentifierAndVersion, 
+                       __LSSetDefaultXPCConnection, __LSSetFrontApplication, __LSSetFrontApplicationLong, 
+                       __LSSetFrontApplicationLongWithCompletion, __LSSetMetaApplicationInformation, 
+                       __LSSetMetaApplicationInformationItem, __LSSetPointerAuthKeyStatePreferenceForCurrentApplication, 
                        __LSSetProcessQuarantineProperties, __LSSetRecentItemCount, 
                        __LSSetShowAllExtensionsPreference, __LSSetUpClientSideReconnectionServices, 
                        __LSSetWeakBindingForFileURL, __LSSetWeakBindingURLForType, 
-                       __LSSetWeakBindingURLForUTI, __LSSignalApplicationReady, __LSStartLaunchedApplication, 
-                       __LSTestingOnlySetApplicationServicesClientPort, __LSURLBindingReasonKey, 
-                       __LSUnregisterPluginsInDirectory, __LSUnregisterURL, __LSUnregisterURLsRelativeToURL, 
-                       __LSUnscheduleNotificationFunction, __LSUpdateRegistrationForURLsRelativeToURL, 
-                       __LSUseCoreApplicationServices, __LSUserActivityContainsFileProviderURLKey, 
-                       __LSUserActivityContainsUnsynchronizedCloudDocsKey, __LSUserActivityOptionInvalidateAfterFetchKey, 
-                       __LSVersionNumberCompare, __LSVersionNumberCopyStringRepresentation, 
-                       __LSVersionNumberGetBugFixComponent, __LSVersionNumberGetCurrentSystemVersion, 
-                       __LSVersionNumberGetMajorComponent, __LSVersionNumberGetMinorComponent, 
-                       __LSVersionNumberGetStringRepresentation, __LSVersionNumberHash, 
-                       __LSVersionNumberMakeWithString, __LSWaitForApplicationCheckIn, 
+                       __LSSetWeakBindingURLForUTI, __LSSharedMemoryBumpApplicationInformationSeed, 
+                       __LSSharedMemoryBumpApplicationListSeed, __LSSharedMemoryBumpFrontApplicationASNSeed, 
+                       __LSSharedMemoryBumpMenuBarOwnerASNSeed, __LSSharedMemoryBumpPendingApplicationListSeed, 
+                       __LSSharedMemoryBumpVisibleApplicationListSeed, __LSSharedMemoryClearIndexedApplicationInformation, 
+                       __LSSharedMemoryCopyForSessionID, __LSSharedMemoryCopySystemUIPresentationModeStrRef, 
+                       __LSSharedMemoryGetApplicationInformation, __LSSharedMemoryGetApplicationInformationForPid, 
+                       __LSSharedMemoryGetApplicationInformationSeed, __LSSharedMemoryGetApplicationListCount, 
+                       __LSSharedMemoryGetApplicationListSeed, __LSSharedMemoryGetCGSSessionID, 
+                       __LSSharedMemoryGetChangeCount, __LSSharedMemoryGetDebugLevel, 
+                       __LSSharedMemoryGetExpectedFrontApplicationASNLow, __LSSharedMemoryGetFrontASNLow, 
+                       __LSSharedMemoryGetFrontApplicationASNSeed, __LSSharedMemoryGetIndexedApplicationAdditionalInformation, 
+                       __LSSharedMemoryGetIndexedApplicationInformation, __LSSharedMemoryGetLaunchProgressFlags, 
+                       __LSSharedMemoryGetLaunchProgressUserActivityCount, __LSSharedMemoryGetLockCount, 
+                       __LSSharedMemoryGetMenuBarOwnerASNLow, __LSSharedMemoryGetMenuBarOwnerASNSeed, 
+                       __LSSharedMemoryGetMetaInformationFlags, __LSSharedMemoryGetNextAppToBringForwardASNLow, 
+                       __LSSharedMemoryGetPagePtr, __LSSharedMemoryGetPendingApplicationListSeed, 
+                       __LSSharedMemoryGetSessionID, __LSSharedMemoryGetSessionLauncherASNLow, 
+                       __LSSharedMemoryGetSize, __LSSharedMemoryGetSystemProcessASNLow, 
+                       __LSSharedMemoryGetSystemUIPresentationMode, __LSSharedMemoryGetSystemUIPresentationModeStrRef, 
+                       __LSSharedMemoryGetSystemUIPresentationOptions, __LSSharedMemoryGetTypeID, 
+                       __LSSharedMemoryGetVersion, __LSSharedMemoryGetVisibleApplicationListSeed, 
+                       __LSSharedMemoryIncrementLaunchProgressUserActivityCount, 
+                       __LSSharedMemoryInvalidateCachedSharedMemoryPages, __LSSharedMemoryIsApplicationInformationUsable, 
+                       __LSSharedMemoryIsLocked, __LSSharedMemoryIsUnlocked, __LSSharedMemoryLock, 
+                       __LSSharedMemoryPageCreate, __LSSharedMemorySetApplicationInformationFromToken, 
+                       __LSSharedMemorySetApplicationListCount, __LSSharedMemorySetCGSSessionID, 
+                       __LSSharedMemorySetDebugLevel, __LSSharedMemorySetExpectedFrontApplicationASNLow, 
+                       __LSSharedMemorySetFrontASNLow, __LSSharedMemorySetIndexedApplicationInformation, 
+                       __LSSharedMemorySetLaunchProgressFlags, __LSSharedMemorySetMenuBarOwnerASNLow, 
+                       __LSSharedMemorySetMetaInformationFlags, __LSSharedMemorySetNextAppToBringForwardASNLow, 
+                       __LSSharedMemorySetSessionLauncherASNLow, __LSSharedMemorySetSystemProcessASNLow, 
+                       __LSSharedMemorySetSystemUIPresentationMode, __LSSharedMemorySetSystemUIPresentationOptions, 
+                       __LSSharedMemoryUnlock, __LSSignalApplicationReady, __LSStartLaunchedApplication, 
+                       __LSURLBindingReasonKey, __LSURLIsDataContainer4IS, __LSUnregisterPluginsInDirectory, 
+                       __LSUnregisterURL, __LSUnregisterURLsRelativeToURL, __LSUnscheduleNotificationFunction, 
+                       __LSUpdateRegistrationForURLsRelativeToURL, __LSUseCoreApplicationServices, 
+                       __LSUserActivityContainsFileProviderURLKey, __LSUserActivityContainsUnsynchronizedCloudDocsKey, 
+                       __LSUserActivityOptionInvalidateAfterFetchKey, __LSVersionNumberCompare, 
+                       __LSVersionNumberCopyStringRepresentation, __LSVersionNumberGetBugFixComponent, 
+                       __LSVersionNumberGetCurrentSystemVersion, __LSVersionNumberGetMajorComponent, 
+                       __LSVersionNumberGetMinorComponent, __LSVersionNumberGetStringRepresentation, 
+                       __LSVersionNumberHash, __LSVersionNumberMakeWithString, __LSWaitForApplicationCheckIn, 
                        __LSWaitUntilSeedingComplete, __LSWriteApplicationPlaceholderToURL, 
-                       __UTCopyDeclaredTypeIdentifiers, __UTTypeCopyDescriptionLocalizationDictionary, 
-                       __UTTypeCopyDynamicIdentifiersForTags, __UTTypeCopyGlyphName, 
-                       __UTTypeCopyIconFileURL, __UTTypeCopyIconName, __UTTypeCopyKindStringDictionaryForNonMaterializedItem, 
+                       __LSWriteSurrogateForApplicationToURL, __UTCopyDeclaredTypeIdentifiers, 
+                       __UTTypeCopyDescriptionLocalizationDictionary, __UTTypeCopyDynamicIdentifiersForTags, 
+                       __UTTypeCopyGlyphName, __UTTypeCopyIconFileURL, __UTTypeCopyIconName, 
+                       __UTTypeCopyIdentifierForPromiseAtURL, __UTTypeCopyKindStringDictionaryForNonMaterializedItem, 
                        __UTTypeCopyKindStringForNonMaterializedItem, __UTTypeCopyPedigree, 
-                       __UTTypeCopyPedigreeSet, __UTTypeCreateSuggestedFilename, 
-                       __UTTypeGetStatus, __UTTypeHash, __UTTypeIdentifierIsValid, 
-                       __UTTypeIsWildcard, __UTTypePrecachePropertiesOfIdentifiers, 
+                       __UTTypeCopyPedigreeSet, __UTTypeCreateDynamicIdentifierForTaggedPointerObject, 
+                       __UTTypeCreateSuggestedFilename, __UTTypeGetStatus, __UTTypeHash, 
+                       __UTTypeIdentifierIsValid, __UTTypeIsWildcard, __UTTypePrecachePropertiesOfIdentifiers, 
                        __UnlattenIconRef, ___LSDefaultsGetSharedInstance, __kLSASNKey, 
                        __kLSASNToBringForwardAtNextApplicationExitKey, __kLSActivePageUserVisibleOriginsKey, 
                        __kLSAddToPermittedFrontASNsArrayKey, __kLSAllowedToBecomeFrontmostKey, 
                        __kLSApplicationBackgroundOnlyTypeKey, __kLSApplicationBackgroundPriorityKey, 
-                       __kLSApplicationCountKey, __kLSApplicationDesiresAttentionKey, 
-                       __kLSApplicationForegroundPriorityKey, __kLSApplicationForegroundTypeKey, 
-                       __kLSApplicationHasRegisteredKey, __kLSApplicationHasSignalledItIsReadyKey, 
-                       __kLSApplicationInSandboxKey, __kLSApplicationInStoppedStateKey, 
-                       __kLSApplicationInThrottledStateAfterLaunchKey, __kLSApplicationInformationSeedKey, 
-                       __kLSApplicationIsHiddenKey, __kLSApplicationListSeedKey, 
-                       __kLSApplicationLockedInStoppedStateKey, __kLSApplicationOverriddenBackgroundDomainNameKey, 
-                       __kLSApplicationReadyToBeFrontableKey, __kLSApplicationSandboxedInformationItemsKey, 
-                       __kLSApplicationTypeKey, __kLSApplicationTypeToRestoreKey, 
-                       __kLSApplicationUIElementTypeKey, __kLSApplicationVersionKey, 
-                       __kLSApplicationWasTerminatedByTALKey, __kLSApplicationWouldBeTerminatedByTALKey, 
-                       __kLSApplicationsRecordingAppleEventsKey, __kLSArchitectureKey, 
-                       __kLSArchitecturePowerPC64Value, __kLSArchitecturePowerPCValue, 
-                       __kLSArchitectureUnknownValue, __kLSArchitecturei386Value, 
-                       __kLSArchitecturex86_64Value, __kLSAuditTokenKey, __kLSBackgroundPriorityKey, 
-                       __kLSBackgroundPriorityOnceKey, __kLSBindingResourceInfoBadgeableKey, 
-                       __kLSBindingResourceInfoNameKey, __kLSBindingResourceInfoResourceKey, 
-                       __kLSBindingResourceInfoVariantFlagsKey, __kLSBundleIdentifierLowerCaseKey, 
-                       __kLSBundleNameLowerCaseKey, __kLSBundlePathDeviceIDKey, __kLSBundlePathINodeKey, 
-                       __kLSBundlePathKey, __kLSBundlePathLastComponentLowerCaseKey, 
-                       __kLSCheckInTimeKey, __kLSDebugLevelKey, __kLSDisableAllPostLaunchBringForwardRequestsKey, 
-                       __kLSDisplayNameKey, __kLSDoNotBFIfFrontApplicationSeedIsChangedKey, 
-                       __kLSDoNotBringAllWindowsForwardKey, __kLSDoNotSetTaskPolicyAutomaticallyKey, 
+                       __kLSApplicationCountKey, __kLSApplicationDelayLaunchUntilTimeKey, 
+                       __kLSApplicationDesiresAttentionKey, __kLSApplicationForegroundPriorityKey, 
+                       __kLSApplicationForegroundTypeKey, __kLSApplicationHasRegisteredKey, 
+                       __kLSApplicationHasSignalledItIsReadyKey, __kLSApplicationInSandboxKey, 
+                       __kLSApplicationInStoppedStateKey, __kLSApplicationInThrottledStateAfterLaunchKey, 
+                       __kLSApplicationInformationSeedKey, __kLSApplicationIsHiddenKey, 
+                       __kLSApplicationListSeedKey, __kLSApplicationLockedInStoppedStateKey, 
+                       __kLSApplicationOverriddenBackgroundDomainNameKey, __kLSApplicationReadyToBeFrontableKey, 
+                       __kLSApplicationSandboxedInformationItemsKey, __kLSApplicationTypeKey, 
+                       __kLSApplicationTypeToRestoreKey, __kLSApplicationUIElementTypeKey, 
+                       __kLSApplicationVersionKey, __kLSApplicationWasTerminatedByTALKey, 
+                       __kLSApplicationWouldBeTerminatedByTALKey, __kLSApplicationsRecordingAppleEventsKey, 
+                       __kLSArchitectureARM64Value, __kLSArchitectureKey, __kLSArchitecturePowerPC64Value, 
+                       __kLSArchitecturePowerPCValue, __kLSArchitectureUnknownValue, 
+                       __kLSArchitecturei386Value, __kLSArchitecturex86_64Value, 
+                       __kLSAuditTokenKey, __kLSBackgroundPriorityKey, __kLSBackgroundPriorityOnceKey, 
+                       __kLSBindingResourceInfoBadgeableKey, __kLSBindingResourceInfoNameKey, 
+                       __kLSBindingResourceInfoResourceKey, __kLSBindingResourceInfoVariantFlagsKey, 
+                       __kLSBringForwardDelayKey, __kLSBringForwardRequestCausedByUserIntentKey, 
+                       __kLSBringForwardRequestForcedKey, __kLSBringForwardRequestIfFrontReservationExistsKey, 
+                       __kLSBringForwardRequestImmediateKey, __kLSBringForwardRequestStandardActivationKey, 
+                       __kLSBringForwardWindowIDKey, __kLSBringNextApplicationForwardKey, 
+                       __kLSBundleIdentifierLowerCaseKey, __kLSBundleNameLowerCaseKey, 
+                       __kLSBundlePathDeviceIDKey, __kLSBundlePathINodeKey, __kLSBundlePathKey, 
+                       __kLSBundlePathLastComponentLowerCaseKey, __kLSBundlePathSandboxExtensionKey, 
+                       __kLSCheckInTimeKey, __kLSDYLDPlatformKey, __kLSDataContainerPersonalityIconKey, 
+                       __kLSDataContainerPersonalityLocalizedNameKey, __kLSDebugLevelKey, 
+                       __kLSDisableAllPostLaunchBringForwardRequestsKey, __kLSDisplayNameKey, 
+                       __kLSDoNotBFIfFrontApplicationSeedIsChangedKey, __kLSDoNotBringAllWindowsForwardKey, 
+                       __kLSDoNotBringAnyWindowsForwardKey, __kLSDoNotSetTaskPolicyAutomaticallyKey, 
                        __kLSDontDropRootPermissionsKey, __kLSErrorMessageStringKey, 
                        __kLSExecutableFilenameLowerCaseKey, __kLSExecutableFormatCFMKey, 
                        __kLSExecutableFormatKey, __kLSExecutableFormatMachOKey, __kLSExecutableFormatPoundBangKey, 
@@ -1044,8 +1194,8 @@ exports:
                        __kLSFileTypeKey, __kLSFlavorKey, __kLSForegroundPriorityKey, 
                        __kLSForegroundPriorityOnceKey, __kLSFrontASNKey, __kLSFrontApplicationSeedKey, 
                        __kLSFrontReservationExistsKey, __kLSHiddenApplicationCountKey, 
-                       __kLSKeyBeingAddedKey, __kLSKeyBeingChangedKey, __kLSKeyBeingRemovedKey, 
-                       __kLSKnownLSSessionIDsKey, __kLSLaunchBeforeTranslocationLaunchBundlePathDeviceIDKey, 
+                       __kLSIsProxiedForTALKey, __kLSKeyBeingAddedKey, __kLSKeyBeingChangedKey, 
+                       __kLSKeyBeingRemovedKey, __kLSKnownLSSessionIDsKey, __kLSLaunchBeforeTranslocationLaunchBundlePathDeviceIDKey, 
                        __kLSLaunchBeforeTranslocationLaunchBundlePathINodeKey, __kLSLaunchBeforeTranslocationLaunchBundlePathKey, 
                        __kLSLaunchBeforeTranslocationLaunchExecutablePathDeviceIDKey, 
                        __kLSLaunchBeforeTranslocationLaunchExecutablePathINodeKey, 
@@ -1075,13 +1225,13 @@ exports:
                        __kLSLaunchTimeKey, __kLSLaunchedByLaunchServicesKey, __kLSLaunchedByLaunchServicesThruForkExecKey, 
                        __kLSLaunchedByLaunchServicesThruLaunchDKey, __kLSLaunchedByLaunchServicesThruSessionLauncherKey, 
                        __kLSLaunchedInQuarantineKey, __kLSLaunchedPersonaUIDKey, 
-                       __kLSMenuBarOwnerApplicationSeedKey, __kLSMetaExpectedFrontAppsASNsKey, 
-                       __kLSMetaInfoActiveCGSSessionIDKey, __kLSMetaInfoAddUIDsToSessionKey, 
-                       __kLSMetaInfoCGSSessionIDKey, __kLSMetaMultiplyProhibitedApplicationBundleIDsArrayKey, 
-                       __kLSMetaProcessShouldNotConnectToLSServerKey, __kLSMetaRecentApplicationsArrayIntervalKey, 
-                       __kLSMetaRecentApplicationsArrayKey, __kLSMetaRecentApplicationsArraySizeKey, 
-                       __kLSModifierLaunchedForPersistenceKey, __kLSModifierRefConKey, 
-                       __kLSMouseButtonDownKey, __kLSNotificationsDelayedCountKey, 
+                       __kLSMenuBarOwnerApplicationSeedKey, __kLSMenuBarOwningASNKey, 
+                       __kLSMetaExpectedFrontAppsASNsKey, __kLSMetaInfoActiveCGSSessionIDKey, 
+                       __kLSMetaInfoAddUIDsToSessionKey, __kLSMetaInfoCGSSessionIDKey, 
+                       __kLSMetaMultiplyProhibitedApplicationBundleIDsArrayKey, __kLSMetaProcessShouldNotConnectToLSServerKey, 
+                       __kLSMetaRecentApplicationsArrayIntervalKey, __kLSMetaRecentApplicationsArrayKey, 
+                       __kLSMetaRecentApplicationsArraySizeKey, __kLSModifierLaunchedForPersistenceKey, 
+                       __kLSModifierRefConKey, __kLSMouseButtonDownKey, __kLSNotificationsDelayedCountKey, 
                        __kLSNotificationsPendingCountKey, __kLSNotificationsSentCountKey, 
                        __kLSNotifyBecameFrontmostAnotherLaunchKey, __kLSNotifyBecameFrontmostFirstActivationKey, 
                        __kLSNotifyLaunchRequestArgumentListKey, __kLSNotifyLaunchRequestLaunchModifiersKey, 
@@ -1095,13 +1245,14 @@ exports:
                        __kLSOpenOptionEnableURLOverridesKey, __kLSOpenOptionEnvironmentVariablesKey, 
                        __kLSOpenOptionForegroundLaunchKey, __kLSOpenOptionHideKey, 
                        __kLSOpenOptionHideOthersKey, __kLSOpenOptionInitialAppleEventKey, 
-                       __kLSOpenOptionLaunchSessionIDDKey, __kLSOpenOptionLaunchUIDKey, 
-                       __kLSOpenOptionLaunchedByPersistenceKey, __kLSOpenOptionOverrideBackgroundPriorityDomainNameKey, 
-                       __kLSOpenOptionPreferRunningInstanceKey, __kLSOpenOptionPrintDocumentsKey, 
-                       __kLSOpenOptionRequiresUniversalLinksKey, __kLSOpenOptionRolesMaskKey, 
-                       __kLSOpenOptionStopProcessKey, __kLSOpenOptionUIElementLaunchKey, 
-                       __kLSOpenOptionUserInfoKey, __kLSOpenWithOptionsForDefaultHandlerSelection, 
-                       __kLSOpenWithOptionsLikeFinder, __kLSOriginalExecutablePathDeviceIDKey, 
+                       __kLSOpenOptionLaunchSessionIDDKey, __kLSOpenOptionLaunchStdErrPathKey, 
+                       __kLSOpenOptionLaunchStdInPathKey, __kLSOpenOptionLaunchStdOutPathKey, 
+                       __kLSOpenOptionLaunchUIDKey, __kLSOpenOptionLaunchedByPersistenceKey, 
+                       __kLSOpenOptionOverrideBackgroundPriorityDomainNameKey, __kLSOpenOptionPreferRunningInstanceKey, 
+                       __kLSOpenOptionPrintDocumentsKey, __kLSOpenOptionRequiresUniversalLinksKey, 
+                       __kLSOpenOptionRolesMaskKey, __kLSOpenOptionStopProcessKey, 
+                       __kLSOpenOptionUIElementLaunchKey, __kLSOpenOptionUserInfoKey, 
+                       __kLSOpenOptionWaitForApplicationToCheckInKey, __kLSOriginalExecutablePathDeviceIDKey, 
                        __kLSOriginalExecutablePathINodeKey, __kLSOriginalExecutablePathKey, 
                        __kLSOriginalPIDKey, __kLSPIDKey, __kLSPIDsInSessionKey, __kLSPSNToBringForwardAtNextApplicationExitKey, 
                        __kLSParentASNKey, __kLSParentASNWasInferredKey, __kLSPermittedFrontASNsArrayKey, 
@@ -1118,35 +1269,35 @@ exports:
                        __kLSUnhiddenApplicationCountKey, __kLSUserActivityCountKey, 
                        __kLSVisibleApplicationCountKey, __kLSVisibleApplicationListSeedKey, 
                        __kLSWantsToComeForwardAtRegistrationTimeKey, __kUTTypeGlyphNameKey, 
-                       __kUTTypeIconNameKey, __kUTTypePassBundle, __kUTTypePassData, 
-                       _kLSAppleInternalLibraryBundleIdentifier, _kLSComputerRootCanonicalName, 
-                       _kLSCurrentDeviceModelCode, _kLSDefaultLocalizedValueKey, 
-                       _kLSItemContentType, _kLSItemDisplayKind, _kLSItemDisplayName, 
-                       _kLSItemExtension, _kLSItemExtensionIsHidden, _kLSItemFileCreator, 
-                       _kLSItemFileType, _kLSItemIsInvisible, _kLSItemQuarantineProperties, 
-                       _kLSItemRoleHandlerDisplayName, _kLSLocalLibraryBundleIdentifier, 
-                       _kLSMeetingRoomCanonicalName, _kLSNetworkLibraryBundleIdentifier, 
-                       _kLSNetworkRootCanonicalName, _kLSNotificationDatabaseSeedingComplete, 
-                       _kLSNotificationDatabaseSeedingStart, _kLSNotificationSystemConfigurationChange, 
-                       _kLSQuarantineAgentBundleIdentifierKey, _kLSQuarantineAgentNameKey, 
-                       _kLSQuarantineDataURLKey, _kLSQuarantineOriginURLKey, _kLSQuarantineTimeStampKey, 
-                       _kLSQuarantineTypeCalendarEventAttachment, _kLSQuarantineTypeEmailAttachment, 
-                       _kLSQuarantineTypeInstantMessageAttachment, _kLSQuarantineTypeKey, 
-                       _kLSQuarantineTypeOtherAttachment, _kLSQuarantineTypeOtherDownload, 
-                       _kLSQuarantineTypeWebDownload, _kLSRemoteDiscRootCanonicalName, 
-                       _kLSSystemLibraryBundleIdentifier, _kLSUserLibraryBundleIdentifier, 
-                       _kLSVersionNumberNull, _kUTExportedTypeDeclarationsKey, _kUTImportedTypeDeclarationsKey, 
-                       _kUTTagClassDeviceModelCode, _kUTTagClassFilenameExtension, 
-                       _kUTTagClassMIMEType, _kUTTagClassNSPboardType, _kUTTagClassOSType, 
-                       _kUTType3DContent, _kUTTypeAVIMovie, _kUTTypeAliasFile, _kUTTypeAliasRecord, 
-                       _kUTTypeAppCategory, _kUTTypeAppCategoryActionGames, _kUTTypeAppCategoryAdventureGames, 
-                       _kUTTypeAppCategoryArcadeGames, _kUTTypeAppCategoryBoardGames, 
-                       _kUTTypeAppCategoryBusiness, _kUTTypeAppCategoryCardGames, 
-                       _kUTTypeAppCategoryCasinoGames, _kUTTypeAppCategoryDeveloperTools, 
-                       _kUTTypeAppCategoryDiceGames, _kUTTypeAppCategoryEducation, 
-                       _kUTTypeAppCategoryEducationalGames, _kUTTypeAppCategoryEntertainment, 
-                       _kUTTypeAppCategoryFamilyGames, _kUTTypeAppCategoryFinance, 
-                       _kUTTypeAppCategoryGames, _kUTTypeAppCategoryGraphicsDesign, 
+                       __kUTTypeIconNameKey, __kUTTypeIconsKey, __kUTTypePassBundle, 
+                       __kUTTypePassData, _kLSAppleInternalLibraryBundleIdentifier, 
+                       _kLSComputerRootCanonicalName, _kLSCurrentDeviceModelCode, 
+                       _kLSDefaultLocalizedValueKey, _kLSItemContentType, _kLSItemDisplayKind, 
+                       _kLSItemDisplayName, _kLSItemExtension, _kLSItemExtensionIsHidden, 
+                       _kLSItemFileCreator, _kLSItemFileType, _kLSItemIsInvisible, 
+                       _kLSItemQuarantineProperties, _kLSItemRoleHandlerDisplayName, 
+                       _kLSLocalLibraryBundleIdentifier, _kLSMeetingRoomCanonicalName, 
+                       _kLSNetworkLibraryBundleIdentifier, _kLSNetworkRootCanonicalName, 
+                       _kLSNotificationDatabaseSeedingComplete, _kLSNotificationDatabaseSeedingStart, 
+                       _kLSNotificationSystemConfigurationChange, _kLSQuarantineAgentBundleIdentifierKey, 
+                       _kLSQuarantineAgentNameKey, _kLSQuarantineDataURLKey, _kLSQuarantineOriginURLKey, 
+                       _kLSQuarantineTimeStampKey, _kLSQuarantineTypeCalendarEventAttachment, 
+                       _kLSQuarantineTypeEmailAttachment, _kLSQuarantineTypeInstantMessageAttachment, 
+                       _kLSQuarantineTypeKey, _kLSQuarantineTypeOtherAttachment, 
+                       _kLSQuarantineTypeOtherDownload, _kLSQuarantineTypeWebDownload, 
+                       _kLSRemoteDiscRootCanonicalName, _kLSSystemLibraryBundleIdentifier, 
+                       _kLSUserLibraryBundleIdentifier, _kLSVersionNumberNull, _kUTExportedTypeDeclarationsKey, 
+                       _kUTImportedTypeDeclarationsKey, _kUTTagClassDeviceModelCode, 
+                       _kUTTagClassFilenameExtension, _kUTTagClassMIMEType, _kUTTagClassNSPboardType, 
+                       _kUTTagClassOSType, _kUTType3DContent, _kUTTypeAVIMovie, _kUTTypeAliasFile, 
+                       _kUTTypeAliasRecord, _kUTTypeAppCategory, _kUTTypeAppCategoryActionGames, 
+                       _kUTTypeAppCategoryAdventureGames, _kUTTypeAppCategoryArcadeGames, 
+                       _kUTTypeAppCategoryBoardGames, _kUTTypeAppCategoryBusiness, 
+                       _kUTTypeAppCategoryCardGames, _kUTTypeAppCategoryCasinoGames, 
+                       _kUTTypeAppCategoryDeveloperTools, _kUTTypeAppCategoryDiceGames, 
+                       _kUTTypeAppCategoryEducation, _kUTTypeAppCategoryEducationalGames, 
+                       _kUTTypeAppCategoryEntertainment, _kUTTypeAppCategoryFamilyGames, 
+                       _kUTTypeAppCategoryFinance, _kUTTypeAppCategoryGames, _kUTTypeAppCategoryGraphicsDesign, 
                        _kUTTypeAppCategoryHealthcareFitness, _kUTTypeAppCategoryKidsGames, 
                        _kUTTypeAppCategoryLifestyle, _kUTTypeAppCategoryMedical, 
                        _kUTTypeAppCategoryMusic, _kUTTypeAppCategoryMusicGames, _kUTTypeAppCategoryNews, 
@@ -1203,116 +1354,93 @@ exports:
                        _kUTTypeWebArchive, _kUTTypeWindowsExecutable, _kUTTypeX509Certificate, 
                        _kUTTypeXML, _kUTTypeXMLPropertyList, _kUTTypeXPCService, 
                        _kUTTypeZipArchive ]
-    objc-classes:    [ LSAppLink, LSApplicationProxy, LSApplicationWorkspace, LSApplicationWorkspaceObserver, 
-                       LSBundleInfoCachedValues, LSBundleProxy, LSCodeEvaluation, 
-                       LSCodeEvaluationInfo, LSDocumentProxy, LSEnumerator, LSExtensionPoint, 
+    objc-classes:    [ LSAppLink, LSAppTranslocationResult, LSApplicationExtensionRecord, 
+                       LSApplicationProxy, LSApplicationRecord, LSApplicationWorkspace, 
+                       LSApplicationWorkspaceObserver, LSBundleInfoCachedValues, 
+                       LSBundleProxy, LSBundleRecord, LSBundleWrapperCreator, LSBundleWrapperStagingReceipt, 
+                       LSBundleWrapperUpdater, LSClaimBinding, LSClaimBindingConfiguration, 
+                       LSClaimRecord, LSCodeEvaluation, LSCodeEvaluationInfo, LSDatabaseContext, 
+                       LSDocumentProxy, LSEnumerator, LSExtensionPoint, LSExtensionPointRecord, 
                        LSIconResource, LSOpenWithMenuConstructor, LSPlugInKitProxy, 
                        LSPlugInQuery, LSPlugInQueryWithIdentifier, LSPlugInQueryWithQueryDictionary, 
-                       LSPlugInQueryWithURL, LSResourceProxy, NSUserActivity, _LSApplicationState, 
-                       _LSDatabase, _LSDefaults, _LSDiskUsage, _LSDisplayNameConstructor, 
-                       _LSExceptions, _LSInternetLocator, _LSLazyPropertyList, _LSOpenConfiguration, 
-                       _LSQuery, _LSQueryContext, _LSQueryResult, _LSStringLocalizer, 
-                       _LSURLOverride, _UTType, _UTTypeQuery ]
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: B8982CD5-3A47-3366-A927-CDBB00D0E0A7', 'x86_64: B8982CD5-3A47-3366-A927-CDBB00D0E0A7' ]
-platform:        zippered
+                       LSPlugInQueryWithURL, LSPropertyList, LSRecord, LSResourceProxy, 
+                       LSServiceRecord, UTTypeRecord, _LSApplicationState, _LSDatabase, 
+                       _LSDefaults, _LSDiskUsage, _LSDisplayNameConstructor, _LSExceptions, 
+                       _LSInternetLocator, _LSLazyPropertyList, _LSOpenConfiguration, 
+                       _LSQuery, _LSQueryContext, _LSQueryResult, _LSRecordEnumerator, 
+                       _LSStringLocalizer, _LSURLOverride ]
+    objc-ivars:      [ _LSDatabase.schema, _LSDatabase.store ]
+reexports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    objc-classes:    [ NSUserActivity ]
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           72B54095-8CA3-3E29-B25C-24C2D7FB9D7A
+  - target:          x86_64-maccatalyst
+    value:           72B54095-8CA3-3E29-B25C-24C2D7FB9D7A
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           570E7AD4-F1EA-30D5-A295-68B2FBEE222A
+  - target:          arm64e-maccatalyst
+    value:           570E7AD4-F1EA-30D5-A295-68B2FBEE222A
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/Metadata.framework/Versions/A/Metadata'
-current-version: 2061
-parent-umbrella: CoreServices
-exports:         
-  - archs:           [ x86_64 ]
-    allowable-clients: [ Foundation ]
+current-version: 2149.5
+parent-umbrella:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    umbrella:        CoreServices
+allowable-clients:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    clients:         [ Foundation ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _MDBackupBegin, _MDBackupCancel, _MDBackupCreate, _MDBackupEnd, 
                        _MDBackupFileWasIndexed, _MDBackupFinishedForVolume, _MDBackupFlushFallbackBackup, 
-                       _MDBackupIndexFile, _MDBackupQuiescentForVolume, _MDBackupResume, 
-                       _MDBackupWriteRawAttributesToPath, _MDCopyLabelKinds, _MDCopyLabelWithID, 
-                       _MDCopyLabelWithUUID, _MDCopyLabelsMatchingExpression, _MDCopyLabelsWithKind, 
-                       _MDCopyPathForSpotlight, _MDCopySessionBegin, _MDCopySessionCancel, 
-                       _MDCopySessionCreate, _MDCopySessionEnd, _MDCopySessionEnterUserDirectory, 
-                       _MDCopySessionIndexFile, _MDCopySessionLeaveUserDirectory, 
-                       _MDItemCopyAttribute, _MDItemCopyAttributeNames, _MDItemCopyAttributes, 
-                       _MDItemCopyAttributesBulk, _MDItemCopyLabels, _MDItemCreate, 
-                       _MDItemCreateForAbsolutePaths, _MDItemCreateWithURL, _MDItemGetTypeID, 
-                       _MDItemRemoveAttribute, _MDItemRemoveAttributes, _MDItemRemoveAttributesForAbsolutePaths, 
-                       _MDItemRemoveLabel, _MDItemSetAttribute, _MDItemSetAttributes, 
-                       _MDItemSetAttributesForAbsolutePaths, _MDItemSetLabel, _MDItemSetLocalizedAttribute, 
-                       _MDItemsCopyAttributes, _MDItemsCreateWithURLs, _MDItemsSetAttributes, 
-                       _MDItemsSetAttributesNoExAttr, _MDLabelAddToItems, _MDLabelCopyAttribute, 
-                       _MDLabelCopyAttributeName, _MDLabelCreate, _MDLabelDelete, 
-                       _MDLabelGetTypeID, _MDLabelRemoveFromItems, _MDLabelSetAttributes, 
-                       _MDPlistArrayGetCount, _MDPlistArrayGetPlistObjectAtIndex, 
-                       _MDPlistArrayIterate, _MDPlistBooleanGetValue, _MDPlistBytesAddBoolean, 
-                       _MDPlistBytesAddCString, _MDPlistBytesAddData, _MDPlistBytesAddDate, 
-                       _MDPlistBytesAddInteger, _MDPlistBytesAddInternedCString, 
-                       _MDPlistBytesAddNull, _MDPlistBytesAddPlistBytes, _MDPlistBytesAddRawInternedCStringKey, 
-                       _MDPlistBytesAddRawInternedCStringKeyWithString, _MDPlistBytesAddReal, 
-                       _MDPlistBytesAddString, _MDPlistBytesAddUUID, _MDPlistBytesAppendMultiplePlistBytes, 
-                       _MDPlistBytesAppendPlist, _MDPlistBytesAppendPlistBytes, _MDPlistBytesBeginArray, 
-                       _MDPlistBytesBeginDictionary, _MDPlistBytesBeginPlist, _MDPlistBytesCopyChildPlistBytesAtIndex, 
-                       _MDPlistBytesCopyPlistAtIndex, _MDPlistBytesCopyPlistAtIndexWithAllocator, 
-                       _MDPlistBytesCopyPlistAtIndexWithCallbacks, _MDPlistBytesCopyPlistAtIndexWithCallbacksAndAllocator, 
-                       _MDPlistBytesCopyPlistBytesAtIndex, _MDPlistBytesCreate, _MDPlistBytesCreateMutable, 
-                       _MDPlistBytesCreateMutableCopy, _MDPlistBytesCreateMutableUsingMalloc, 
-                       _MDPlistBytesCreateUniquedString, _MDPlistBytesCreateWithDeallocator, 
-                       _MDPlistBytesEndArray, _MDPlistBytesEndDictionary, _MDPlistBytesEndPlist, 
-                       _MDPlistBytesGetByteVector, _MDPlistBytesGetByteVectorCount, 
-                       _MDPlistBytesGetMappedByteVector, _MDPlistBytesGetTypeID, 
-                       _MDPlistBytesSetShouldDeallocate, _MDPlistBytesSetShouldUseMalloc, 
-                       _MDPlistContainerAddBooleanValue, _MDPlistContainerAddCString, 
-                       _MDPlistContainerAddDataValue, _MDPlistContainerAddDateValue, 
-                       _MDPlistContainerAddDoubleValue, _MDPlistContainerAddFloatValue, 
-                       _MDPlistContainerAddInt32Value, _MDPlistContainerAddInt64Value, 
-                       _MDPlistContainerAddNullValue, _MDPlistContainerAddObject, 
-                       _MDPlistContainerAddPlistObject, _MDPlistContainerAddUUIDValue, 
-                       _MDPlistContainerBeginArray, _MDPlistContainerBeginContainer, 
-                       _MDPlistContainerBeginDictionary, _MDPlistContainerCopyObject, 
-                       _MDPlistContainerCopyObjectAtKeyArray, _MDPlistContainerCopyObjectAtKeyPath, 
-                       _MDPlistContainerCopyObjectsAtKeyPath, _MDPlistContainerCopyObjectsAtPlistObject, 
-                       _MDPlistContainerCopyRootObject, _MDPlistContainerCreateCopy, 
-                       _MDPlistContainerCreateMutable, _MDPlistContainerCreateMutableWithStaticBuffer, 
-                       _MDPlistContainerCreateWithBytes, _MDPlistContainerCreateWithBytesAndDeallocator, 
-                       _MDPlistContainerCreateWithCopiedBytes, _MDPlistContainerCreateWithObject, 
-                       _MDPlistContainerEndArray, _MDPlistContainerEndContainer, 
-                       _MDPlistContainerEndDictionary, _MDPlistContainerGetBytes, 
-                       _MDPlistContainerGetLength, _MDPlistContainerGetPlistObjectAtKeyArray, 
-                       _MDPlistContainerGetPlistObjectAtKeyPath, _MDPlistContainerHasObjectAtKeyPath, 
-                       _MDPlistContainerWillUseMalloc, _MDPlistDataGetBytePtr, _MDPlistDateGetValue, 
-                       _MDPlistDictionaryGetCount, _MDPlistDictionaryGetPlistObjectForKey, 
-                       _MDPlistDictionaryIterate, _MDPlistEmbeddedReferenceToPlistObject, 
-                       _MDPlistEnumerateQueryResults, _MDPlistGetPlistObjectSize, 
-                       _MDPlistGetPlistObjectType, _MDPlistGetRootPlistObject, _MDPlistNumberGetDoubleValue, 
-                       _MDPlistNumberGetIntValue, _MDPlistPlistObjectToEmbeddedReference, 
-                       _MDPlistReferenceToPlistObject, _MDPlistStringGetValue, _MDPlistUUIDGetValue, 
-                       _MDQueryCopyQueryString, _MDQueryCopySortingAttributes, _MDQueryCopyValueListAttributes, 
-                       _MDQueryCopyValuesOfAttribute, _MDQueryCreate, _MDQueryCreateForItems, 
-                       _MDQueryCreateSubset, _MDQueryDisableUpdates, _MDQueryEnableUpdates, 
-                       _MDQueryExecute, _MDQueryGetAttributeValueOfResultAtIndex, 
-                       _MDQueryGetBatchingParameters, _MDQueryGetCountOfResultsWithAttributeValue, 
-                       _MDQueryGetIndexOfResult, _MDQueryGetResultAtIndex, _MDQueryGetResultCount, 
-                       _MDQueryGetTypeID, _MDQueryIsGatheringComplete, _MDQueryIsStopped, 
-                       _MDQuerySetBatchingParameters, _MDQuerySetCreateResultFunction, 
-                       _MDQuerySetCreateValueFunction, _MDQuerySetDispatchQueue, 
-                       _MDQuerySetMatchesSupportFiles, _MDQuerySetMaxCount, _MDQuerySetSearchScope, 
-                       _MDQuerySetSortComparator, _MDQuerySetSortComparatorBlock, 
-                       _MDQuerySetSortOptionFlagsForAttribute, _MDQuerySetSortOrder, 
-                       _MDQueryStop, _MDSPathFilterDumpRawFilterInternal, _MDSchemaCopyAllAttributes, 
+                       _MDBackupIndexFile, _MDBackupPendingUnmount, _MDBackupQuiescentForVolume, 
+                       _MDBackupResume, _MDBackupWriteRawAttributesToPath, _MDCopyLabelKinds, 
+                       _MDCopyLabelWithID, _MDCopyLabelWithUUID, _MDCopyLabelsMatchingExpression, 
+                       _MDCopyLabelsWithKind, _MDCopyPathForSpotlight, _MDCopySessionBegin, 
+                       _MDCopySessionCancel, _MDCopySessionCreate, _MDCopySessionEnd, 
+                       _MDCopySessionEnterUserDirectory, _MDCopySessionIndexFile, 
+                       _MDCopySessionLeaveUserDirectory, _MDItemCopyAttribute, _MDItemCopyAttributeNames, 
+                       _MDItemCopyAttributes, _MDItemCopyAttributesBulk, _MDItemCopyLabels, 
+                       _MDItemCreate, _MDItemCreateForAbsolutePaths, _MDItemCreateWithURL, 
+                       _MDItemGetTypeID, _MDItemRemoveAttribute, _MDItemRemoveAttributes, 
+                       _MDItemRemoveAttributesForAbsolutePaths, _MDItemRemoveLabel, 
+                       _MDItemSetAttribute, _MDItemSetAttributes, _MDItemSetAttributesForAbsolutePaths, 
+                       _MDItemSetLabel, _MDItemSetLocalizedAttribute, _MDItemsCopyAttributes, 
+                       _MDItemsCreateWithURLs, _MDItemsSetAttributes, _MDItemsSetAttributesNoExAttr, 
+                       _MDLabelAddToItems, _MDLabelCopyAttribute, _MDLabelCopyAttributeName, 
+                       _MDLabelCreate, _MDLabelDelete, _MDLabelGetTypeID, _MDLabelRemoveFromItems, 
+                       _MDLabelSetAttributes, _MDQueryCopyQueryString, _MDQueryCopySortingAttributes, 
+                       _MDQueryCopyValueListAttributes, _MDQueryCopyValuesOfAttribute, 
+                       _MDQueryCreate, _MDQueryCreateForItems, _MDQueryCreateSubset, 
+                       _MDQueryDisableUpdates, _MDQueryEnableUpdates, _MDQueryExecute, 
+                       _MDQueryGetAttributeValueOfResultAtIndex, _MDQueryGetBatchingParameters, 
+                       _MDQueryGetCountOfResultsWithAttributeValue, _MDQueryGetIndexOfResult, 
+                       _MDQueryGetResultAtIndex, _MDQueryGetResultCount, _MDQueryGetTypeID, 
+                       _MDQueryIsGatheringComplete, _MDQueryIsStopped, _MDQuerySetBatchingParameters, 
+                       _MDQuerySetCreateResultFunction, _MDQuerySetCreateValueFunction, 
+                       _MDQuerySetDispatchQueue, _MDQuerySetMatchesSupportFiles, 
+                       _MDQuerySetMaxCount, _MDQuerySetSearchScope, _MDQuerySetSortComparator, 
+                       _MDQuerySetSortComparatorBlock, _MDQuerySetSortOptionFlagsForAttribute, 
+                       _MDQuerySetSortOrder, _MDQueryStop, _MDSchemaCopyAllAttributes, 
                        _MDSchemaCopyAttributesForContentType, _MDSchemaCopyDisplayDescriptionForAttribute, 
                        _MDSchemaCopyDisplayNameForAttribute, _MDSchemaCopyMetaAttributesForAttribute, 
                        _MDServiceConnectionBindChannelUUID, _MDServiceConnectionDropChannelUUID, 
                        _MDServiceConnectionGetConnection, _MDServiceConnectionGetTypeID, 
                        _MDServiceConnectionReceive, _MDServiceConnectionReceiveBlock, 
                        _MDServiceConnectionSend, _MDServiceConnectionSendEnv, _MDServiceConnectionSendReceive, 
-                       _MDStoreOIDArrayAddOID, _MDStoreOIDArrayAppendOIDArray, _MDStoreOIDArrayApplyBlock, 
-                       _MDStoreOIDArrayApplyBlockParallel, _MDStoreOIDArrayApplyFunction, 
-                       _MDStoreOIDArrayApplyParallelFunction, _MDStoreOIDArrayBeginBulkAdd, 
-                       _MDStoreOIDArrayBeginSequence, _MDStoreOIDArrayCreate, _MDStoreOIDArrayCreateMutable, 
-                       _MDStoreOIDArrayCreateMutableCopy, _MDStoreOIDArrayCreateMutableUsingMalloc, 
-                       _MDStoreOIDArrayCreateMutableWithOids, _MDStoreOIDArrayCreateWithDeallocator, 
-                       _MDStoreOIDArrayEndBulkAdd, _MDStoreOIDArrayEndSequence, _MDStoreOIDArrayGetMappedVector, 
-                       _MDStoreOIDArrayGetTypeID, _MDStoreOIDArrayGetVector, _MDStoreOIDArrayGetVectorCount, 
-                       _MDStoreOIDArrayRoom, _MDStoreOIDArraySetShouldDeallocate, 
-                       _MDStoreOIDArraySetShouldUseMalloc, _MDUniquiedStringDictCreate, 
                        _NSMetadataItemAcquisitionMakeKey, _NSMetadataItemAcquisitionModelKey, 
                        _NSMetadataItemAlbumKey, _NSMetadataItemAltitudeKey, _NSMetadataItemApertureKey, 
                        _NSMetadataItemAppleLoopDescriptorsKey, _NSMetadataItemAppleLoopsKeyFilterTypeKey, 
@@ -1388,43 +1516,45 @@ exports:
                        _SIUINT64SetAddValue, _SIUINT64SetContainsValue, _SIUINT64SetCreate, 
                        _SIUINT64SetGetTypeID, _SIUINT64SetIterate, _SIUINT64SetRemoveValue, 
                        __MDAppRankEvaluatorDeallocate, __MDAppRankOfItem, __MDBackupCatchup, 
-                       __MDConfigClearStoreUUID, __MDConfigCopyImporterInformation, 
-                       __MDConfigCopyImporterUIDs, __MDConfigCopyIndexingStorePaths, 
-                       __MDConfigCopyStoreAttributes, __MDConfigCopyStoreInformation, 
-                       __MDConfigCopyStorePaths, __MDConfigCreateStore, __MDConfigCreateVolumeIndex, 
-                       __MDConfigForceStoreSync, __MDConfigRegisterMountPoint, __MDConfigRemoveStore, 
-                       __MDConfigSetStoreAttributes, __MDConfigUnregisterMountPoint, 
-                       __MDConnectToServer, __MDCopyAltGroupNameToGroupNameDictionary, 
+                       __MDBackupDeletes, __MDBackupFileEndOfLife, __MDConfigClearStoreUUID, 
+                       __MDConfigCopyImporterInformation, __MDConfigCopyImporterUIDs, 
+                       __MDConfigCopyIndexingStorePaths, __MDConfigCopyStoreAttributes, 
+                       __MDConfigCopyStoreInformation, __MDConfigCopyStorePaths, 
+                       __MDConfigCreateStore, __MDConfigCreateVolumeIndex, __MDConfigForceStoreSync, 
+                       __MDConfigRegisterMountPoint, __MDConfigRemoveStore, __MDConfigSetStoreAttributes, 
+                       __MDConfigUnregisterMountPoint, __MDConnectToServer, __MDCopyAltGroupNameToGroupNameDictionary, 
                        __MDCopyAppleLanguages, __MDCopyAttributeSchema, __MDCopyBundlePaths, 
                        __MDCopyExclusionList, __MDCopyExtendedAttributes, __MDCopyGroupIndexToNameDictionary, 
                        __MDCopyGroupNameToGroupNumberDictionary, __MDCopyGroupNameToQueryDictionary, 
                        __MDCopyImportInfo, __MDCopyImporterPluginPathForFile, __MDCopyIndexSize, 
                        __MDCopyIndexingStatus, __MDCopyIndexingStatusForVolume, __MDCopyLabelUserUUID, 
                        __MDCopyLocalizedGroupNameDictionary, __MDCopyMDSimpleGroupingsPlist, 
-                       __MDCopyShortcutsDictionary, __MDCopyUTIToGroupNumberDictionary, 
+                       __MDCopyShortcutsDictionary, __MDCopyTextShortcutsSet, __MDCopyUTIToGroupNumberDictionary, 
                        __MDCopyVolumeFilter, __MDCopyVolumeFilterEngine, __MDCreateAppRankEvaluator, 
                        __MDCreateDictionaryByMappingXMPDictionary, __MDCreateSimpleQueryEvaluator, 
                        __MDCreateSimpleQueryEvaluatorWithBlock, __MDCreateSimpleQueryEvaluatorWithOptions, 
-                       __MDCustomizeGroupNameWithUTITypeAndTree, __MDDynamicAppRankOfItem, 
-                       __MDFilterIsItemExcludedFromIndexing, __MDFilterIsItemOut, 
-                       __MDGetAllowedTaskCount, __MDGetCurrentTaskCount, __MDGetLabelServicesConnection, 
-                       __MDGetLastUsedDate, __MDGetPrivateXattrServicesConnection, 
+                       __MDCreateSimpleQueryEvaluatorWithOptionsAndLanguages, __MDCustomizeGroupNameWithUTITypeAndTree, 
+                       __MDDynamicAppRankOfItem, __MDFilterIsItemExcludedFromIndexing, 
+                       __MDFilterIsItemOut, __MDGetAllowedTaskCount, __MDGetCurrentTaskCount, 
+                       __MDGetLabelServicesConnection, __MDGetLastUsedDate, __MDGetPrivateXattrServicesConnection, 
                        __MDGetPublicXattrServicesConnection, __MDHealthCheckDirectory, 
                        __MDIgnoreFileOperations, __MDImportDirectory, __MDImportFile, 
                        __MDImportFilesWithUTIs, __MDImportPrivateXattrsFromItems, 
-                       __MDIndexingProgress, __MDIsCustomizableGroupName, __MDIsRootVolumePath, 
-                       __MDIssueStoreCommand, __MDItemCopyCFURL, __MDItemCopyExAttrWithURL, 
-                       __MDItemCreate, __MDItemCreateFSRef, __MDItemCreateFileSystemObject, 
-                       __MDItemGetContentType, __MDItemGetDevice, __MDItemGetFileId, 
-                       __MDItemGetTextEncodingHint, __MDItemGetTextSnippets, __MDItemGetVRefNum, 
-                       __MDItemMarkAsCreated, __MDItemMarkAsDownloaded, __MDItemMarkAsModified, 
-                       __MDItemMarkAsPrinted, __MDItemMarkAsReceived, __MDItemMarkAsSent, 
-                       __MDItemMarkAsUsed, __MDItemMarkAsUsedWithAbsoluteTime, __MDItemMarkAsUsedWithPathAndCatInfo, 
+                       __MDIndexingProgress, __MDIsAppDirPath, __MDIsCompatibleArchitecture, 
+                       __MDIsCustomizableGroupName, __MDIsRootVolumePath, __MDIssueStoreCommand, 
+                       __MDItemCopyCFURL, __MDItemCopyExAttrWithURL, __MDItemCreate, 
+                       __MDItemCreateFSRef, __MDItemCreateFileSystemObject, __MDItemGetContentType, 
+                       __MDItemGetDevice, __MDItemGetFileId, __MDItemGetTextEncodingHint, 
+                       __MDItemGetTextSnippets, __MDItemGetVRefNum, __MDItemMarkAsCreated, 
+                       __MDItemMarkAsDownloaded, __MDItemMarkAsModified, __MDItemMarkAsPrinted, 
+                       __MDItemMarkAsReceived, __MDItemMarkAsSent, __MDItemMarkAsUsed, 
+                       __MDItemMarkAsUsedWithAbsoluteTime, __MDItemMarkAsUsedWithPathAndCatInfo, 
                        __MDItemMarkAsUsedWithPathAndStatBuf, __MDItemMarkAsUsedWithURL, 
                        __MDItemMarkAsUsedWithURLAndAbsoluteTime, __MDItemRemoveAttributesWithURL, 
                        __MDItemSetAttributesForAbsolutePathsNoExAttr, __MDItemSetAttributesForAbsolutePathsNoExAttrNoImport, 
-                       __MDItemSetAttributesWithURL, __MDItemSetContentType, __MDItemSetFinderColor, 
-                       __MDItemSetInSniffer, __MDItemSetPrivateAttributes, __MDItemSetTextEncodingHint, 
+                       __MDItemSetAttributesWithURL, __MDItemSetCommonAttributesForOids, 
+                       __MDItemSetContentType, __MDItemSetFinderColor, __MDItemSetInSniffer, 
+                       __MDItemSetPrivateAttributes, __MDItemSetTextEncodingHint, 
                        __MDItemsCreateWithFileIdsAndAbsolutePathsOnDevice, __MDItemsWritePrivateXattrUpdatesWithKeysAndValues, 
                        __MDLabelCopyAttributeNameForUUID, __MDLabelCopyPrivateAttrs, 
                        __MDLabelCopyPrivateAttrsForUid, __MDLabelMatchExpressionApply, 
@@ -1434,10 +1564,7 @@ exports:
                        __MDOptionGetValues, __MDOptionNamedPthreadKey, __MDPerfCopyStoreLifeCycleInfo, 
                        __MDPerfCreateFileEventMarker, __MDPerfCreateFileIndexingMarker, 
                        __MDPerfFlushAuditLog, __MDPerfSetAuditLevel, __MDPerfWaitFileIndexingMarkerProcessed, 
-                       __MDPerfWaitForStoreState, __MDPlistBytesAddObject, __MDPlistBytesAddUInt64Array, 
-                       __MDPlistBytesAddURL, __MDPlistBytesAppendChunk, __MDPlistBytesFirstChunk, 
-                       __MDPlistBytesNextChunk, __MDPlistBytesReadFromFile, __MDPlistBytesWriteToFile, 
-                       __MDPlistGetRootPlistObject, __MDPreHeatIndex, __MDPrepareForSnapshot, 
+                       __MDPerfWaitForStoreState, __MDPreHeatIndex, __MDPrepareForSnapshot, 
                        __MDPrepareForSnapshotTimeout, __MDPrepareForSoftwareUpdate, 
                        __MDPrivateXattrUUIDsGetter, __MDQueryAttributesChanged, __MDQueryClearIgnoreUpdateList, 
                        __MDQueryCopyCompletions, __MDQueryCopyDictionary, __MDQueryCopyMenuRankingQueries, 
@@ -1457,17 +1584,19 @@ exports:
                        __MDQueryGetResultCountForAllGroups, __MDQueryGetResultCountForGroup, 
                        __MDQueryGetSortFlagsForAttribute, __MDQueryIgnoreAllLastUsedUpdatesForItem, 
                        __MDQueryIgnoreNextLastUsedUpdateForItem, __MDQueryProcessUpdates, 
-                       __MDQuerySendPerformanceFeedback, __MDQuerySetCompletionQuery, 
-                       __MDQuerySetCreateResultFunctionWithKeyCallBacks, __MDQuerySetGroupComparator, 
-                       __MDQuerySetGroupingRules, __MDQuerySetHasUpdateNotification, 
-                       __MDQuerySetLabel, __MDQuerySetMDFilter, __MDQuerySetMatchesOnlyFinderFiles, 
-                       __MDQuerySetMaxCountPerGroup, __MDQuerySetMenuSortFlagsForQuery, 
-                       __MDQuerySetNoProgress, __MDQuerySetRankingTerms, __MDQuerySetSearchScopes, 
-                       __MDQuerySetSortFlagsForAttribute, __MDQuerySetSortOrder, 
-                       __MDQuerySetSortToNone, __MDQuerySortDatesDescending, __MDQueryStringCopyUserInput, 
-                       __MDQueryStringCreateForRanking, __MDQueryStringPreload, __MDQueryTotalCount, 
-                       __MDQueryUserStringFacetsApplyDoWhileBlock, __MDQueryWillSendPerformanceFeedback, 
-                       __MDRankBitForShortcut, __MDRankIsExactPhraseMatch, __MDRankIsMeaningfulForTopHit, 
+                       __MDQuerySendPerformanceFeedback, __MDQuerySetCompletionOptions, 
+                       __MDQuerySetCompletionQuery, __MDQuerySetCompletionQueryWithWeights, 
+                       __MDQuerySetCompletionResultCount, __MDQuerySetCreateResultFunctionWithKeyCallBacks, 
+                       __MDQuerySetGroupComparator, __MDQuerySetGroupingRules, __MDQuerySetHasUpdateNotification, 
+                       __MDQuerySetLabel, __MDQuerySetMDFilter, __MDQuerySetMDFilterQueries, 
+                       __MDQuerySetMatchesOnlyFinderFiles, __MDQuerySetMaxCountPerGroup, 
+                       __MDQuerySetMenuSortFlagsForQuery, __MDQuerySetNoProgress, 
+                       __MDQuerySetRankingTerms, __MDQuerySetSearchScopes, __MDQuerySetSortFlagsForAttribute, 
+                       __MDQuerySetSortOrder, __MDQuerySetSortToNone, __MDQuerySortDatesDescending, 
+                       __MDQueryStringCopyUserInput, __MDQueryStringCreateForRanking, 
+                       __MDQueryStringPreload, __MDQueryTotalCount, __MDQueryUserStringFacetsApplyDoWhileBlock, 
+                       __MDQueryWillSendPerformanceFeedback, __MDRankBitForShortcut, 
+                       __MDRankIsExactPhraseMatch, __MDRankIsMeaningfulForTopHit, 
                        __MDRankIsOnOldBootVolume, __MDRegisterMailClient, __MDRemoveExtendedAttributes, 
                        __MDRemoveExtendedAttributesForPath, __MDRemoveExtenedAttributes, 
                        __MDRemoveExtenedAttributesForPath, __MDRequestVolumeRecycle, 
@@ -1477,19 +1606,22 @@ exports:
                        __MDSetExtendedAttributesForPath, __MDSetLastUsedDate, __MDSetMailMessageAttributes, 
                        __MDSetMailMessageAttributesAtTime, __MDSimpleQueryDeallocate, 
                        __MDSimpleQueryGatherRangesForKeyAndValue, __MDSimpleQueryModifyForMatching, 
-                       __MDSimpleQueryObjectMatches, __MDSoftwareUpdateComplete, 
-                       __MDStaticAppRankOfItem, __MDStringCompareLocalized, __MDStringCopyCollationData, 
-                       __MDStringPrefixOfString, __MDSuspendIndexing, __MDSuspendIndexingDirectory, 
-                       __MDTransferExtendedAttributes, __MDUserListChange, __MDWaitForServerDeath, 
-                       ___MDItemCopyAttributesEllipsis1, ___MDItemRemoveAttributesEllipsis1, 
-                       ___MDItemSetAttributesEllipsis1, __kMDImportIsForBackup, __kMDImporterTextLimitInK, 
-                       __kMDItemAdamID, __kMDItemContentChangeDate, __kMDItemCreationDate, 
-                       __kMDItemCreatorCode, __kMDItemExportImporterAvaliable, __kMDItemFSContentType, 
+                       __MDSimpleQueryObjectMatches, __MDSimpleQuerySetWidcardAttributes, 
+                       __MDSoftwareUpdateComplete, __MDStaticAppRankOfItem, __MDStringCompareLocalized, 
+                       __MDStringCopyCollationData, __MDStringPrefixOfString, __MDSuspendIndexing, 
+                       __MDSuspendIndexingDirectory, __MDTransferExtendedAttributes, 
+                       __MDUserListChange, __MDWaitForServerDeath, ___MDItemCopyAttributesEllipsis1, 
+                       ___MDItemRemoveAttributesEllipsis1, ___MDItemSetAttributesEllipsis1, 
+                       __kMDImportIsForBackup, __kMDImporterTextLimitInK, __kMDItemAdamID, 
+                       __kMDItemContentChangeDate, __kMDItemCreationDate, __kMDItemCreatorCode, 
+                       __kMDItemExportImporterAvaliable, __kMDItemFSContentType, 
                        __kMDItemFSContentTypeTree, __kMDItemFSDisplayName, __kMDItemFileName, 
                        __kMDItemFinderFlags, __kMDItemFinderLabel, __kMDItemHasCustomIcon, 
-                       __kMDItemHasExtensionHidden, __kMDItemImporterResult, __kMDItemInvisibleFileType, 
+                       __kMDItemHasExtensionHidden, __kMDItemImporterResult, __kMDItemIncomingCounts, 
+                       __kMDItemIncomingMailCounts, __kMDItemIncomingSMSCounts, __kMDItemInvisibleFileType, 
                        __kMDItemIsEvictedFile, __kMDItemIsExtensionHidden, __kMDItemIsStationery, 
                        __kMDItemLocked, __kMDItemMailAccountsAttributesMissing, __kMDItemNodeCount, 
+                       __kMDItemOutgoingCounts, __kMDItemOutgoingMailCounts, __kMDItemOutgoingSMSCounts, 
                        __kMDItemOwnerGroupID, __kMDItemOwnerUserID, __kMDItemPrescanCandidate, 
                        __kMDItemServerVersion, __kMDItemSortIdentityAttr, __kMDItemStaticInterestScore, 
                        __kMDItemSupportFileType, __kMDItemTextContentIndexExists, 
@@ -1615,11 +1747,11 @@ exports:
                        _kMDLabelIsMutuallyExclusiveSetMember, _kMDLabelKind, _kMDLabelKindIsMutuallyExclusiveSetKey, 
                        _kMDLabelKindVisibilityKey, _kMDLabelRemovedNotification, 
                        _kMDLabelSetsFinderColor, _kMDLabelUUID, _kMDLabelVisibility, 
-                       _kMDPlistBytesDeserializationCallbacks, _kMDPrivateVisibility, 
-                       _kMDPublicVisibility, _kMDQueryAllowTranslation, _kMDQueryBatchFirstCount, 
-                       _kMDQueryBatchFirstDelay, _kMDQueryBatchProgressCount, _kMDQueryBatchProgressDelay, 
-                       _kMDQueryBatchUpdateCount, _kMDQueryBatchUpdateDelay, _kMDQueryCompletionFields, 
-                       _kMDQueryCompletionString, _kMDQueryDidFinishNotification, 
+                       _kMDPrivateVisibility, _kMDPublicVisibility, _kMDQueryAllowTranslation, 
+                       _kMDQueryBatchFirstCount, _kMDQueryBatchFirstDelay, _kMDQueryBatchProgressCount, 
+                       _kMDQueryBatchProgressDelay, _kMDQueryBatchUpdateCount, _kMDQueryBatchUpdateDelay, 
+                       _kMDQueryCompletionFields, _kMDQueryCompletionOptions, _kMDQueryCompletionResultCount, 
+                       _kMDQueryCompletionString, _kMDQueryCompletionWeights, _kMDQueryDidFinishNotification, 
                        _kMDQueryDidUpdateNotification, _kMDQueryFilters, _kMDQueryFlatScopes, 
                        _kMDQueryGroupMaxCount, _kMDQueryGroupingRules, _kMDQueryHasUpdateNotification, 
                        _kMDQueryIndexedOnly, _kMDQueryIsLive, _kMDQueryIsLowPriority, 
@@ -1643,28 +1775,107 @@ exports:
                        _kMDSDiskStorePolicy, _kMDSDiskStoreSpindleNumber, _kMDSGroupIDVectorData, 
                        _kMDSHomeDirectoryPath, _kMDSLanguageArray, _kMDSPreferencesName, 
                        _kMDSStoreDevice, _kMDSStoreHasPersistentUUID, _kMDSStoreMetaScopes, 
-                       _kMDSStorePathScopes, _kMDSStorePrivateForUser, _kMDSStoreSupportsVolFS, 
-                       _kMDSStoreURLScopes, _kMDSStoreUUID, _kMDSStoreVolFSPrefix, 
-                       _kMDSTimeoutDontWait, _kMDSTimeoutLong, _kMDSTimeoutShort, 
-                       _kMDSTimeoutWaitForever, _kMDSVolumeUUID, _kMDScopeArray, 
-                       _kMDServerPortName, _kMDServiceConnectionAdvisoryNotification, 
+                       _kMDSStorePathScopes, _kMDSStorePrivateForUser, _kMDSStoreSnapshots, 
+                       _kMDSStoreSupportsVolFS, _kMDSStoreURLScopes, _kMDSStoreUUID, 
+                       _kMDSStoreVolFSPrefix, _kMDSTimeoutDontWait, _kMDSTimeoutLong, 
+                       _kMDSTimeoutShort, _kMDSTimeoutWaitForever, _kMDSVolumeUUID, 
+                       _kMDScopeArray, _kMDServerPortName, _kMDServiceConnectionAdvisoryNotification, 
                        _kMDServiceConnectionDownNotification, _kMDServiceConnectionUpNotification, 
                        _kMDSystemFile, _mach_msg_dispatch, _mach_msg_dispatch_chain_init, 
                        _mach_msg_dispatch_gcd, _mach_msg_dispatchx, _mach_port_set_queue_limit, 
                        _mdsChannelRequest, _mdsClientCheckin, _mdsFetchAccessTokenIDForUID, 
                        _mdsManageCheckin, _mdsMarkItemsAsUsed, _mdsPeerCheckin, _mdsRequestVolume, 
                        _mdsServerBootstrap ]
-    objc-classes:    [ MDSPathFilter, MDSPathFilterGenerator, _MDLabel, _MDMutablePlistBytes, 
-                       _MDPlistBytes, _MDServiceConnection ]
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: F31A1213-B3E5-39DE-B0DD-44C476D8180B', 'x86_64: F31A1213-B3E5-39DE-B0DD-44C476D8180B' ]
-platform:        zippered
+    objc-classes:    [ MDSPathFilter, MDSPathFilterGenerator, _MDLabel, _MDServiceConnection ]
+reexports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _MDChildPlistBytesContextCreate, _MDChildPlistBytesContextDestroy, 
+                       _MDPlistArrayGetCount, _MDPlistArrayGetPlistObjectAtIndex, 
+                       _MDPlistArrayIterate, _MDPlistBooleanGetValue, _MDPlistBytesAddBoolean, 
+                       _MDPlistBytesAddCString, _MDPlistBytesAddData, _MDPlistBytesAddDate, 
+                       _MDPlistBytesAddInteger, _MDPlistBytesAddInternedCString, 
+                       _MDPlistBytesAddNull, _MDPlistBytesAddPlistBytes, _MDPlistBytesAddRawInternedCStringKey, 
+                       _MDPlistBytesAddRawInternedCStringKeyWithString, _MDPlistBytesAddReal, 
+                       _MDPlistBytesAddString, _MDPlistBytesAddUUID, _MDPlistBytesAppendMultiplePlistBytes, 
+                       _MDPlistBytesAppendPlist, _MDPlistBytesAppendPlistBytes, _MDPlistBytesBeginArray, 
+                       _MDPlistBytesBeginDictionary, _MDPlistBytesBeginPlist, _MDPlistBytesCopyChildPlistBytesAtIndex, 
+                       _MDPlistBytesCopyPlistAtIndex, _MDPlistBytesCopyPlistAtIndexWithAllocator, 
+                       _MDPlistBytesCopyPlistAtIndexWithCallbacks, _MDPlistBytesCopyPlistAtIndexWithCallbacksAndAllocator, 
+                       _MDPlistBytesCopyPlistBytesAtIndex, _MDPlistBytesCreate, _MDPlistBytesCreateMutable, 
+                       _MDPlistBytesCreateMutableCopy, _MDPlistBytesCreateMutableUsingMalloc, 
+                       _MDPlistBytesCreateUniquedString, _MDPlistBytesCreateWithDeallocator, 
+                       _MDPlistBytesEndArray, _MDPlistBytesEndDictionary, _MDPlistBytesEndPlist, 
+                       _MDPlistBytesGetByteVector, _MDPlistBytesGetByteVectorCount, 
+                       _MDPlistBytesGetMappedByteVector, _MDPlistBytesGetTypeID, 
+                       _MDPlistBytesSetShouldDeallocate, _MDPlistBytesSetShouldUseMalloc, 
+                       _MDPlistContainerAddBooleanValue, _MDPlistContainerAddCString, 
+                       _MDPlistContainerAddDataValue, _MDPlistContainerAddDateValue, 
+                       _MDPlistContainerAddDoubleValue, _MDPlistContainerAddFloatValue, 
+                       _MDPlistContainerAddInt32Value, _MDPlistContainerAddInt64Value, 
+                       _MDPlistContainerAddNullValue, _MDPlistContainerAddObject, 
+                       _MDPlistContainerAddPlistObject, _MDPlistContainerAddUUIDValue, 
+                       _MDPlistContainerBeginArray, _MDPlistContainerBeginContainer, 
+                       _MDPlistContainerBeginDictionary, _MDPlistContainerCopyObject, 
+                       _MDPlistContainerCopyObjectAtKeyArray, _MDPlistContainerCopyObjectAtKeyPath, 
+                       _MDPlistContainerCopyObjectsAtKeyPath, _MDPlistContainerCopyObjectsAtPlistObject, 
+                       _MDPlistContainerCopyRootObject, _MDPlistContainerCreateCopy, 
+                       _MDPlistContainerCreateMutable, _MDPlistContainerCreateMutableWithStaticBuffer, 
+                       _MDPlistContainerCreateWithBytes, _MDPlistContainerCreateWithBytesAndDeallocator, 
+                       _MDPlistContainerCreateWithCopiedBytes, _MDPlistContainerCreateWithObject, 
+                       _MDPlistContainerEndArray, _MDPlistContainerEndContainer, 
+                       _MDPlistContainerEndDictionary, _MDPlistContainerGetBytes, 
+                       _MDPlistContainerGetLength, _MDPlistContainerGetPlistObjectAtKeyArray, 
+                       _MDPlistContainerGetPlistObjectAtKeyPath, _MDPlistContainerHasObjectAtKeyPath, 
+                       _MDPlistContainerSetShouldDeallocate, _MDPlistContainerWillUseMalloc, 
+                       _MDPlistDataGetBytePtr, _MDPlistDateGetValue, _MDPlistDictionaryGetCount, 
+                       _MDPlistDictionaryGetPlistObjectForKey, _MDPlistDictionaryIterate, 
+                       _MDPlistEmbeddedReferenceToPlistObject, _MDPlistEnumerateQueryResults, 
+                       _MDPlistGetPlistObjectSize, _MDPlistGetPlistObjectType, _MDPlistGetRootPlistObject, 
+                       _MDPlistNumberGetDoubleValue, _MDPlistNumberGetIntValue, _MDPlistPlistObjectToEmbeddedReference, 
+                       _MDPlistReferenceToPlistObject, _MDPlistStringGetValue, _MDPlistUUIDGetValue, 
+                       _MDSPathFilterDumpRawFilterInternal, _MDStoreOIDArrayAddOID, 
+                       _MDStoreOIDArrayAppendOIDArray, _MDStoreOIDArrayApplyBlock, 
+                       _MDStoreOIDArrayApplyBlockParallel, _MDStoreOIDArrayApplyFunction, 
+                       _MDStoreOIDArrayApplyParallelFunction, _MDStoreOIDArrayBeginBulkAdd, 
+                       _MDStoreOIDArrayBeginSequence, _MDStoreOIDArrayCreate, _MDStoreOIDArrayCreateMutable, 
+                       _MDStoreOIDArrayCreateMutableCopy, _MDStoreOIDArrayCreateMutableUsingMalloc, 
+                       _MDStoreOIDArrayCreateMutableWithOids, _MDStoreOIDArrayCreateWithDeallocator, 
+                       _MDStoreOIDArrayEndBulkAdd, _MDStoreOIDArrayEndSequence, _MDStoreOIDArrayGetMappedVector, 
+                       _MDStoreOIDArrayGetTypeID, _MDStoreOIDArrayGetVector, _MDStoreOIDArrayGetVectorCount, 
+                       _MDStoreOIDArrayRoom, _MDStoreOIDArraySetShouldDeallocate, 
+                       _MDStoreOIDArraySetShouldUseMalloc, _MDUniquiedStringDictCreate, 
+                       __MDPlistBytesAddObject, __MDPlistBytesAddUInt64Array, __MDPlistBytesAddURL, 
+                       __MDPlistBytesAppendChunk, __MDPlistBytesFirstChunk, __MDPlistBytesNextChunk, 
+                       __MDPlistBytesReadFromFile, __MDPlistBytesWriteToFile, __MDPlistGetRootPlistObject, 
+                       _kMDPlistBytesDeserializationCallbacks ]
+    objc-classes:    [ _MDMutablePlistBytes, _MDPlistBytes ]
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           490D44D8-E93B-30C8-9AF9-14639F9FF92F
+  - target:          x86_64-maccatalyst
+    value:           490D44D8-E93B-30C8-9AF9-14639F9FF92F
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           C6F16ECC-86B0-3722-A2DB-CB0B89799CBF
+  - target:          arm64e-maccatalyst
+    value:           C6F16ECC-86B0-3722-A2DB-CB0B89799CBF
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/OSServices.framework/Versions/A/OSServices'
-current-version: 1065.2
-parent-umbrella: CoreServices
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 1122.4
+parent-umbrella:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    umbrella:        CoreServices
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _AlertSoundPlay, _AlertSoundPlayCustomSound, _BatteryCount, 
                        _CSGetDefaultIdentityAuthority, _CSGetLocalIdentityAuthority, 
                        _CSGetManagedIdentityAuthority, _CSIdentityAddAlias, _CSIdentityAddMember, 
@@ -1793,15 +2004,32 @@ exports:
                        _kWSXMLRPCProtocol, _kcfindapplesharepassword, _kcfindgenericpassword, 
                        _kcfindinternetpassword, _kcfindinternetpasswordwithpath, 
                        _kcgetkeychainname, _wsCFDateToISO8601String, _wsCreateDateFromISO8601 ]
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: F3705C6E-AA86-3232-89D3-D37841357E45', 'x86_64: F3705C6E-AA86-3232-89D3-D37841357E45' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           42EEB92F-7C15-3DB0-930C-2418C5AF308F
+  - target:          x86_64-maccatalyst
+    value:           42EEB92F-7C15-3DB0-930C-2418C5AF308F
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           3574ADA0-B546-3781-9CD2-9785FCEE1C93
+  - target:          arm64e-maccatalyst
+    value:           3574ADA0-B546-3781-9CD2-9785FCEE1C93
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SearchKit.framework/Versions/A/SearchKit'
 current-version: 417.1
-parent-umbrella: CoreServices
-exports:         
-  - archs:           [ x86_64 ]
+parent-umbrella:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    umbrella:        CoreServices
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _AIATFree, _AIATGetAllocator, _AIATMalloc, _AIATRegisterReportErrorUPP, 
                        _AIATSetAllocator, _DisposeIASearchIsHitFilterUPP, _IACFDataDocAccessorCreate, 
                        _IACFDataDocAccessorDispose, _IADocKeyAccessorCreate, _IADocKeyAccessorLength, 
@@ -1916,16 +2144,41 @@ exports:
                        _kSKEndTermChars, _kSKLanguageTypes, _kSKMaximumTerms, _kSKMinTermLength, 
                        _kSKProximityIndexing, _kSKStartTermChars, _kSKStopWords, 
                        _kSKSubstitutions, _kSKTermChars ]
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: D495FA45-5492-335F-BB73-A01309BF1DC5', 'x86_64: D495FA45-5492-335F-BB73-A01309BF1DC5' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           4D05DA1D-6FD0-3467-B987-1AA217709A07
+  - target:          x86_64-maccatalyst
+    value:           4D05DA1D-6FD0-3467-B987-1AA217709A07
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           F1234F3D-01B2-3A5B-94B6-EB47E15CBBFF
+  - target:          arm64e-maccatalyst
+    value:           F1234F3D-01B2-3A5B-94B6-EB47E15CBBFF
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SharedFileList.framework/Versions/A/SharedFileList'
-current-version: 129
-parent-umbrella: CoreServices
-exports:         
-  - archs:           [ x86_64 ]
-    allowable-clients: [ Foundation ]
+current-version: 143
+parent-umbrella:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    umbrella:        CoreServices
+allowable-clients:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    clients:         [ Foundation ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _SFLListChangeNotification, _SFLListLaunchNotification, _SFLServiceName, 
+                       _kSFLDefaultsDomain ]
+    objc-classes:    [ SFLBookmark, SFLDefaults, SFLItem, SFLManager, SFLResolveResult, 
+                       _SFLItem, _SFLList ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _LSSharedFileListAddObserver, _LSSharedFileListAddObserverOnQueue, 
                        _LSSharedFileListCopyProperty, _LSSharedFileListCopySnapshot, 
                        _LSSharedFileListCreate, _LSSharedFileListGetSeedValue, _LSSharedFileListGetTypeID, 
@@ -1939,11 +2192,11 @@ exports:
                        _LSSharedFileListItemSetProperty, _LSSharedFileListItemUpdate, 
                        _LSSharedFileListRemoveAllItems, _LSSharedFileListRemoveObserver, 
                        _LSSharedFileListRemoveObserverOnQueue, _LSSharedFileListSetAuthorization, 
-                       _LSSharedFileListSetProperty, _SFLListChangeNotification, 
-                       _SFLListLaunchNotification, _SFLServiceName, __LSSharedFileListCopyListType, 
+                       _LSSharedFileListSetProperty, __LSSharedFileListCopyListType, 
                        __LSSharedFileListIsURLSharePoint, __LSSharedFileListItemCopyBinding, 
-                       __LSSharedFileListItemCopyURL, __LSSharedFileListItemSetBookmarkData, 
-                       __LSSharedFileListItemSetURL, __LSSharedFileListUpgrade, __LSSharedFileListVolumeIsVisibleInSidebar, 
+                       __LSSharedFileListItemCopyURL, __LSSharedFileListItemOpen, 
+                       __LSSharedFileListItemSetBookmarkData, __LSSharedFileListItemSetURL, 
+                       __LSSharedFileListUpgrade, __LSSharedFileListVolumeIsVisibleInSidebar, 
                        __SFLCreateSnapshot, __SFLGetRestrictedCustomFileList, __SFLIsFolderShareable, 
                        __SFLRelease, __SFLReleaseSnapshot, __kLSSharedFileListFavoriteItems, 
                        __kLSSharedFileListFavoriteVolumes, __kLSSharedFileListGlobalLoginItems, 
@@ -1998,8 +2251,5 @@ exports:
                        _kLSSharedFileListVolumesNetworkVisible, _kLSSharedFileListVolumesShowEjectableVolumes, 
                        _kLSSharedFileListVolumesShowEjectableVolumesExceptions, _kLSSharedFileListVolumesShowHardDrives, 
                        _kLSSharedFileListVolumesShowHardDrivesExceptions, _kLSSharedFileListVolumesShowRemovableVolumes, 
-                       _kLSSharedFileListVolumesShowRemovableVolumesExceptions, _kLSSharedFileListVolumesShowRepairing, 
-                       _kSFLDefaultsDomain ]
-    objc-classes:    [ SFLBookmark, SFLDefaults, SFLItem, SFLManager, SFLResolveResult, 
-                       _SFLItem, _SFLList ]
+                       _kLSSharedFileListVolumesShowRemovableVolumesExceptions, _kLSSharedFileListVolumesShowRepairing ]
 ...

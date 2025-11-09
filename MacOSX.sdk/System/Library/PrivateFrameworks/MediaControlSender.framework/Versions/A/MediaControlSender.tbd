@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 89DEDF30-2C73-36F2-917A-A60E5681A884' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           DB7928C8-4F44-34C2-80BD-96DA13E31BC4
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           52963AD4-DD8C-3D58-B552-F0048A60B93E
 install-name:    '/System/Library/PrivateFrameworks/MediaControlSender.framework/Versions/A/MediaControlSender'
-exports:         
-  - archs:           [ x86_64 ]
-    symbols:         [ _APAudioFormatToASBD, _AVRouteDescription_HasFeature, _AVSystemController_CopyProperty, 
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _AVRouteDescription_HasFeature, _AVSystemController_CopyProperty, 
                        _AVSystemController_GetAirPlayInfo, _AVSystemController_GetSharedController, 
                        _AVSystemController_GetTypeID, _AVSystemController_ResumeAirPlayMirroring, 
                        _AVSystemController_SetProperty, _AVSystemController_StopAirPlay, 

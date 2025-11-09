@@ -198,7 +198,7 @@ public:
     
 	static IOFireWireSBP2LSIWorkaroundDescriptor * withDescriptor
 					( IOMemoryDescriptor * desc, IOByteCount offset = 0,  
-					  IOByteCount len = 0, IODirection direction = kIODirectionOutIn );
+					  IOByteCount len = 0, IODirection direction = kIODirectionInOut );
 	
 	// initialize with descriptor				  
 	
@@ -214,7 +214,7 @@ public:
 	*/
     
     virtual bool initWithDescriptor( IOMemoryDescriptor * desc, IOByteCount offset = 0,  
-								     IOByteCount len = 0, IODirection direction = kIODirectionOutIn );
+								     IOByteCount len = 0, IODirection direction = kIODirectionInOut );
 	
 	
 	///////////////////////////////////

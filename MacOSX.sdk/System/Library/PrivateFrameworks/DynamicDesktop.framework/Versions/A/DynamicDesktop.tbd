@@ -1,13 +1,21 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 7722E5F4-085B-37A6-AB14-6A562F3861D6' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           78C07E87-39F1-392C-A17D-884AF7D68C88
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           B07128A2-358D-39CD-866F-D3233AB792D8
 install-name:    '/System/Library/PrivateFrameworks/DynamicDesktop.framework/Versions/A/DynamicDesktop'
-current-version: 2035
+current-version: 2091
 swift-abi-version: 7
-exports:         
-  - archs:           [ x86_64 ]
-    allowable-clients: [ DesktopPictures, DesktopScreenEffectsPref, Dock, livedesktop ]
+allowable-clients:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    clients:         [ DesktopPictures, DesktopScreenEffectsPref, Dock, livedesktop ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ '_$s14DynamicDesktop010AppearanceB0V09canSelectC0Sbvg', '_$s14DynamicDesktop010AppearanceB0V09canSelectC0SbvpMV', 
                        '_$s14DynamicDesktop010AppearanceB0V17appearanceIndexess6UInt32V10lightIndex_AF04darkH0tSgvg', 
                        '_$s14DynamicDesktop010AppearanceB0V17appearanceIndexess6UInt32V10lightIndex_AF04darkH0tSgvpMV', 

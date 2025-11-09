@@ -17,9 +17,12 @@
 #if __has_include(<MapKit/MKMapView.h>)
 #import <MapKit/MKAnnotationView.h>
 #import <MapKit/MKMapView.h>
+#import <MapKit/MKMarkerAnnotationView.h>
 #import <MapKit/MKPinAnnotationView.h>
 #import <MapKit/MKUserLocation.h>
+#import <MapKit/MKUserLocationView.h>
 #import <MapKit/MKClusterAnnotation.h>
+#import <MapKit/MKCompassButton.h>
 #import <MapKit/MKOverlay.h>
 #import <MapKit/MKShape.h>
 #import <MapKit/MKPointAnnotation.h>
@@ -32,11 +35,13 @@
 #import <MapKit/MKPolygon.h>
 #import <MapKit/MKCircle.h>
 #import <MapKit/MKGeodesicPolyline.h>
+#import <MapKit/MKGradientPolylineRenderer.h>
 #import <MapKit/MKOverlayRenderer.h>
 #import <MapKit/MKOverlayPathRenderer.h>
 #import <MapKit/MKPolygonRenderer.h>
 #import <MapKit/MKPolylineRenderer.h>
 #import <MapKit/MKCircleRenderer.h>
+#import <MapKit/MKLocalPointsOfInterestRequest.h>
 #import <MapKit/MKLocalSearch.h>
 #import <MapKit/MKLocalSearchCompleter.h>
 #import <MapKit/MKLocalSearchRequest.h>
@@ -56,10 +61,11 @@
 #import <MapKit/MKMapCameraBoundary.h>
 #import <MapKit/MKPointOfInterestCategory.h>
 #import <MapKit/MKPointOfInterestFilter.h>
+#import <MapKit/MKPitchControl.h>
+#import <MapKit/MKZoomControl.h>
 
 #if TARGET_OS_IPHONE
 #import <MapKit/MKReverseGeocoder.h>
-#import <MapKit/MKMarkerAnnotationView.h>
 #import <MapKit/MKOverlayView.h>
 #import <MapKit/MKOverlayPathView.h>
 #import <MapKit/MKPolygonView.h>
@@ -69,9 +75,8 @@
 #import <MapKit/MKUserTrackingBarButtonItem.h>
 #endif // TARGET_OS_IPHONE
 
-#if TARGET_OS_IOS || TARGET_OS_MACCATALYST
-#import <MapKit/MKCompassButton.h>
+#if TARGET_OS_IOS || TARGET_OS_MACCATALYST || TARGET_OS_TV
 #import <MapKit/MKUserTrackingButton.h>
-#endif // TARGET_OS_IOS || TARGET_OS_MACCATALYST
+#endif // TARGET_OS_IOS || TARGET_OS_MACCATALYST || TARGET_OS_TV
 
 #endif // __has_include(<MapKit/MKMapView.h>)

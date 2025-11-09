@@ -273,7 +273,7 @@ nw_connection_restart(nw_connection_t connection);
  *		Cancel the connection. This will close the connection, and negotiate over the network
  *		if applicable for the protocol. The process of cancellation will be completed
  *		asynchronously, and the final callback event delivered to the caller will be a state
- *		update with a value of nw_listener_state_cancelled. Once this update is delivered, the
+ *		update with a value of nw_connection_state_cancelled. Once this update is delivered, the
  *		caller may clean up any associated memory or objects.
  *
  *		Outstanding sends and receives will receive errors before the state changes to cancelled.

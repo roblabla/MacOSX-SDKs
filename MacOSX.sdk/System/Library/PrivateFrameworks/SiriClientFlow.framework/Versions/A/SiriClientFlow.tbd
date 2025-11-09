@@ -1,11 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 130AE9A3-A08E-347A-B492-E2D59E0F9379' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           8B11973C-6A3B-3F90-9789-453C23EB67C4
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           9C5E1EBD-8CEE-336D-B07D-E5A90B8F0FCB
 install-name:    '/System/Library/PrivateFrameworks/SiriClientFlow.framework/Versions/A/SiriClientFlow'
-swift-abi-version: 7
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CFBCGetDiagnosticsSubmissionAllowedClassIdentifier, _CFBCGetDiagnosticsSubmissionAllowedResponseAllowedPListKey, 
                        _CFBCGetDiagnosticsSubmissionAllowedResponseClassIdentifier, 
                        _CFBCGetNumberFormattedStringClassIdentifier, _CFBCGetNumberFormattedStringLocalePListKey, 
@@ -64,7 +69,7 @@ exports:
                        CFPBJSONReader, CFPBJSONUtils, CFPBJSONWriter, CFPBProperty, 
                        CFPreferences, CFRequestHandler, CFScriptDownloadManager, 
                        CFSecurityUtils, CFServiceConnector, CFServiceHelper, CFUpdateScriptsCommandHandler, 
-                       CFVSGetVoiceAssetsRequest, CFVSGetVoiceAssetsResponse ]
+                       CFUtils, CFVSGetVoiceAssetsRequest, CFVSGetVoiceAssetsResponse ]
     objc-ivars:      [ CFPBProperty._convertFromString, CFPBProperty._convertToString, 
                        CFPBProperty._count, CFPBProperty._fromDictionaryReprFn, CFPBProperty._getter, 
                        CFPBProperty._has, CFPBProperty._name, CFPBProperty._setter, 

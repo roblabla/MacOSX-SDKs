@@ -1,11 +1,15 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 97A0B7E7-2F84-3FFA-BC4C-A0CBEDDD3576', 'x86_64: 97A0B7E7-2F84-3FFA-BC4C-A0CBEDDD3576' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           3146E12A-AD64-3EA9-91A9-D87EDBF10ED0
+  - target:          x86_64-maccatalyst
+    value:           3146E12A-AD64-3EA9-91A9-D87EDBF10ED0
 install-name:    '/System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/libcldcpuengine.dylib'
-current-version: 2.12.7
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 2.19
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     symbols:         [ ___printf_cl, _barrier, _glrCompBuildProgram, _glrCompCloseDevice, 
                        _glrCompCompileProgram, _glrCompCopyStream, _glrCompCreateContext, 
                        _glrCompCreateKernel, _glrCompCreateProgram, _glrCompCreateStream, 

@@ -1,4 +1,4 @@
-.\"Copyright (c) 2002 Apple Computer, Inc. All Rights Reserved.
+.\"Copyright (c) 2002-2020 Apple Inc. All Rights Reserved.
 .\"The contents of this file constitute Original Code as defined in and are 
 .\"subject to the Apple Public Source License Version 1.2 (the 'License'). 
 .\"You may not use this file except in compliance with the
@@ -15,14 +15,13 @@
 .\"
 .\" Use the following line to view the manpage. Replace man_page with the path to the manpage to view.
 .\"/usr/bin/nroff -mandoc man_page | less
-.Pp
-.Dd April 15, 2002       
-.Dt SYSTEMSETUP 8          
-.Os "Mac OS X"
-.Sh NAME                  
+.Dd July 30, 2020
+.Dt SYSTEMSETUP 8
+.Os "macOS"
+.Sh NAME
 .Nm systemsetup
 .Nd configuration tool for certain machine settings in System Preferences.
-.Sh SYNOPSIS             
+.Sh SYNOPSIS
 .Nm
 .Op Fl getdate
 .Op Fl setdate Ar mm:dd:yy
@@ -51,7 +50,7 @@
 .Op Fl setrestartpowerfailure Ar on | off
 .Op Fl getrestartfreeze
 .Op Fl setrestartfreeze Ar on | off
-.Op Fl getallowpowerbuttontosleepcomputer 
+.Op Fl getallowpowerbuttontosleepcomputer
 .Op Fl setallowpowerbuttontosleepcomputer Ar on | off
 .Op Fl getremotelogin
 .Op Fl setremotelogin Ar on | off
@@ -71,34 +70,32 @@
 .Op Fl version
 .Op Fl help
 .Op Fl printCommands
-.Pp
 .Sh DESCRIPTION
-The 
-.Nm 
+The
+.Nm
 command is used to configure certain per-machine settings typically configured in the System Preferences application.
-.
-The 
-.Nm 
+The
+.Nm
 command requires at least "admin" privileges to run.
 .Pp
 A list of flags and their descriptions:
-.Bl -tag -width indent 
+.Bl -tag -width indent
 .It Fl getdate
-Displays the current date.      
-.It Fl setdate Ar mm:dd:yy                 
+Displays the current date.
+.It Fl setdate Ar mm:dd:yy
 Use this command to set the current month, day, and year.
 .It Fl gettime
-Displays the current time in 24-hour format. 
-.It Fl settime Ar hh:mm:ss             
-Sets the current time. The provided time argument should be in 24-hour format. 
-.Pp
+Displays the current time in 24-hour format.
+.It Fl settime Ar hh:mm:ss
+Sets the current time.
+The provided time argument should be in 24-hour format.
 .It Fl gettimezone
 Displays current time zone.
 .It Fl listtimezones
 Lists all time zones supported by this machine.
 .It Fl settimezone Ar timezone
-Use this command to set the local time zone. Use "-listtimezones" to list valid timezone arguments.
-.Pp
+Use this command to set the local time zone.
+Use "-listtimezones" to list valid timezone arguments.
 .It Fl getusingnetworktime
 Displays whether network time is on or off.
 .It Fl setusingnetworktime Ar on | off
@@ -106,30 +103,34 @@ Sets whether using network time is on or off.
 .It Fl getnetworktimeserver
 Displays the currently set network time server.
 .It Fl setnetworktimeserver Ar timeserver
-Use this command to designate a network time server. Enter the IP address or DNS name for the network time server.
-.Pp
+Use this command to designate a network time server.
+Enter the IP address or DNS name for the network time server.
 .It Fl getsleep
 Displays amount of idle time until machine sleeps.
 .It Fl setsleep Ar minutes
-Sets amount of idle time until computer sleeps. Specify "Never" or "Off" for computers that should never sleep. Important: if you set the system to sleep, you will not be able to administer the server remotely while it is sleeping.
+Sets amount of idle time until computer sleeps.
+Specify "Never" or "Off" for computers that should never sleep.
+Important: if you set the system to sleep, you will not be able to administer the server remotely while it is sleeping.
 .It Fl getcomputersleep
 Display amount of idle time until computer sleeps.
 .It Fl setcomputersleep Ar minutes
-Set amount of idle time until computer sleeps. Specify "Never" or "Off" for never.
+Set amount of idle time until computer sleeps.
+Specify "Never" or "Off" for never.
 .It Fl getdisplaysleep
 Display amount of idle time until display sleeps.
 .It Fl setdisplaysleep Ar minutes
-Set amount of idle time until display sleeps. Specify "Never" or "Off" for never.
+Set amount of idle time until display sleeps.
+Specify "Never" or "Off" for never.
 .It Fl getharddisksleep
-Display amount of idle time until hard disk sleeps. Specify "Never" or "Off" for never.
+Display amount of idle time until hard disk sleeps.
+Specify "Never" or "Off" for never.
 .It Fl setharddisksleep Ar minutes
-Set amount of idle time until hard disk sleeps. Specify "Never" or "Off" for never.
-.Pp
+Set amount of idle time until hard disk sleeps.
+Specify "Never" or "Off" for never.
 .It Fl getwakeonmodem
 Displays whether wake on modem is on or off.
 .It Fl setwakeonmodem Ar on | off
 Use this command to specify whether or not the server will wake from sleep when modem activity is detected.
-.Pp
 .It Fl getwakeonnetworkaccess
 Displays whether wake on network access is on or off.
 .It Fl setwakeonnetworkaccess Ar on | off
@@ -146,15 +147,18 @@ Use this command to specify whether the server restarts automatically after the 
 Enable or disable whether the power button can sleep the computer.
 .It Fl setallowpowerbuttontosleepcomputer Ar on | off
 Enable or disable whether the power button can sleep the computer.
-.Pp
 .It Fl getremotelogin
 Displays whether remote login (SSH) is on or off.
 .It Fl setremotelogin Ar [-f] on | off
-Sets remote login (SSH) to either on or off. Important  If you turn off remote login, you won't be able to administer the server using remote command line tools and SSH. To turn remote login back on, you'll need to connect a monitor and keyboard to the server to administer it locally. Use "setremotelogin -f off" to suppress prompting when turning remote login off.
+Sets remote login (SSH) to either on or off.
+Requires Full Disk Access privileges.
+Important: If you turn off remote login, you won't be able to administer the server using remote command line tools and SSH.
+To turn remote login back on, you'll need to connect a monitor and keyboard to the server to administer it locally.
+Use "setremotelogin -f off" to suppress prompting when turning remote login off.
 .It Fl getremoteappleevents
 Displays whether remote apple events are on or off.
 .It Fl setremoteappleevents Ar on | off
-Use this command to set whether the server responds to events sent by other computers (such as AppleScripts).
+Use this command to set whether the server responds to events sent by other computers (such as AppleScripts). Requires Full Disk Access privileges.
 .It Fl getcomputername
 Displays computer name.
 .It Fl setcomputername Ar computername
@@ -163,18 +167,18 @@ Sets computer name to <computername>. This name is used by AFP.
 Display local subnet name.
 .It Fl setlocalsubnetname Ar name
 Set local subnet name to <name>.
-.Pp
 .It Fl getstartupdisk
 Displays current startup disk.
 .It Fl liststartupdisks
 Lists all valid startup disks on this computer.
 .It Fl setstartupdisk Ar path
-Sets current startup disk to the indicated path. Valid arguments can be listed using "-liststartupdisks."
-.Pp
+Sets current startup disk to the indicated path.
+Valid arguments can be listed using "-liststartupdisks."
 .It Fl getwaitforstartupafterpowerfailure
 Get the number of seconds after which the computer will start up after a power failure.
 .It Fl setwaitforstartupafterpowerfailure Ar seconds
-Set the number of seconds after which the computer will start up after a power failure. The <seconds> value must be a multiple of 30 seconds.
+Set the number of seconds after which the computer will start up after a power failure.
+The <seconds> value must be a multiple of 30 seconds.
 .It Fl getdisablekeyboardwhenenclosurelockisengaged
 Get whether or not the keyboard should be disabled when the X Serve enclosure lock is engaged.
 .It Fl setdisablekeyboardwhenenclosurelockisengaged Ar yes | no
@@ -183,17 +187,17 @@ Set whether or not the keyboard should be disabled when the X Serve enclosure lo
 Gets the Kernel Architecture setting from the com.apple.Boot.plist.
 .It Fl setkernelbootarchitecture Ar i386 | x86_64 | default
 Set the kernel to boot in 32 or 64 bit mode on next boot. default removes the setting.
-.Pp
 .It Fl version
 Displays version of systemsetup tool.
 .It Fl help
 Displays a list of all the commands available in the System Setup Tool, with explanatory information.
 .It Fl printCommands
 Displays a list of commands with no detail.
-.Pp
-.El                      
-.Pp
-.Pp
+.El
+.Sh FILES
+.Bl -tag -width "/usr/sbin/installer" -compact
+.It Pa /usr/sbin/systemsetup
+.El
 .Sh EXAMPLES
 .Nm
 -setdate 04:15:02
@@ -206,13 +210,7 @@ Displays a list of commands with no detail.
 .Pp
 .Nm
 -setnetworktimeserver time.apple.com
-.Pp
-.Sh FILES
-.Bl -tag -width "/usr/sbin/installer" -compact
-.It Pa /usr/sbin/systemsetup
-.Pp
-.El
-.Sh SEE ALSO 
+.Sh SEE ALSO
 .\" List links in ascending order by section, alphabetically within a section.
 .\" Please do not reference files that do not exist without filing a bug report
 .Xr networksetup 8

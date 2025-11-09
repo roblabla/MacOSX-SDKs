@@ -47,11 +47,12 @@ struct thread_group;
 #define THREAD_GROUP_MAX                (CONFIG_TASK_MAX + 10)
 #define THREAD_GROUP_MAXNAME            (16)
 
-#define THREAD_GROUP_SYSTEM     0       // kernel (-VM) + launchd
-#define THREAD_GROUP_BACKGROUND 1       // background daemons
-#define THREAD_GROUP_ADAPTIVE   2       // adaptive daemons
-#define THREAD_GROUP_VM         3       // kernel VM threads
-#define THREAD_GROUP_IO_STORAGE 4       // kernel io storage threads
+#define THREAD_GROUP_SYSTEM          0       // kernel (-VM) + launchd
+#define THREAD_GROUP_BACKGROUND      1       // background daemons
+#define THREAD_GROUP_ADAPTIVE        2       // adaptive daemons
+#define THREAD_GROUP_VM              3       // kernel VM threads
+#define THREAD_GROUP_IO_STORAGE      4       // kernel io storage threads
+#define THREAD_GROUP_PERF_CONTROLLER 5       // kernel CLPC threads
 
 #define THREAD_GROUP_INVALID    UINT64_MAX
 
@@ -81,7 +82,6 @@ void            thread_group_release(struct thread_group *tg);
 struct thread_group *thread_group_get(thread_t t);
 struct thread_group *thread_group_get_home_group(thread_t t);
 void            thread_group_set_bank(thread_t t, struct thread_group *tg);
-void            thread_group_set_work_interval(thread_t t, struct thread_group *tg);
 uint64_t        thread_group_get_id(struct thread_group *tg);
 uint32_t        thread_group_count(void);
 const char *    thread_group_get_name(struct thread_group *tg);
@@ -94,6 +94,8 @@ kern_return_t   thread_group_iterate_stackshot(thread_group_iterate_fn_t callout
 uint64_t kdp_thread_group_get_flags(struct thread_group *);
 boolean_t       thread_group_smp_restricted(struct thread_group *tg);
 void            thread_group_update_recommendation(struct thread_group *tg, cluster_type_t new_recommendation);
+
+void            thread_set_work_interval_thread_group(thread_t t, struct thread_group *tg, bool auto_join);
 
 
 __END_DECLS

@@ -224,7 +224,7 @@ protected:
 	UInt32					fConstraintOptions;
 
     virtual IOReturn allocateResources( void );
-    virtual void free( void );
+    virtual void free( void ) APPLE_KEXT_OVERRIDE;
 
     // orb timeout handler
     static void orbTimeoutStatic( void *refcon, IOReturn status, IOFireWireBus *bus, IOFWBusCommand *fwCmd );
@@ -249,7 +249,7 @@ public:
         @param when When retainCount == when then call free(). 
     */
        
-	virtual void release() const;
+	virtual void release() const APPLE_KEXT_OVERRIDE;
 
     /*! 
         @function getLogin

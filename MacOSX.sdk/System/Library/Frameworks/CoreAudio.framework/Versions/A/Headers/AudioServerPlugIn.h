@@ -23,51 +23,51 @@
     When loading the plug-in, the host looks for factories with the plug-in type,
     kAudioServerPlugInTypeUUID. The plug-in provides an object that conforms to the interface,
     kAudioServerPlugInDriverInterfaceUUID.
-    
+
     An AudioServerPlugIn can provide the host with information that describes the conditions that
     must be met to load the plug-in. This is done through plug-in bundle's info.plist in a key named
     "AudioServerPlugIn_LoadingConditions". The value of this key is a dictionary whose keys describe
     the loading conditions for the plug-in. Currently, the only defined key is named
     "IOService Matching" whose value is an array of IOService matching dictionaries. The host will
     load the plug-in if any of these matching dictionaries match an IOService.
-    
-    An AudioServerPlugIn operates in a limited environment. First and foremost, an AudioServerPlugIn
-    may not make any calls to the client HAL API in the CoreAudio.framework. This will result in
-    undefined (but generally bad) behavior.
-    
+
+    An AudioServerPlugIn operates in its own process separate from the system daemon. First and
+    foremost, an AudioServerPlugIn may not make any calls to the client HAL API in the
+    CoreAudio.framework. This will result in undefined (but generally bad) behavior.
+
     Further, the host process is sandboxed. As such, an AudioServerPlugIn may only read files in its
     bundle in addition to the system libraries and frameworks. It may not access user documents or
     write to any filesystem locations other than the system's cache and temporary directories as
     derived through Apple API. The host provides a means for the plug-in to store and retrieve data
     from persistent storage.
-    
+
     An AudioServerPlugIn may communicate with other processes on the system. However, the plug-in
     must list the name of the mach services to be accessed in the plug-in bundle's info.plist in a
     key named "AudioServerPlugIn_MachServices". The value of this key is an array of the names of
     the mach services that need to be accessed.
-    
+
     An AudioServerPlugIn may create user-clients via IOServiceOpen() for standard IOKit objects
     without restriction. However, if a plug-in needs to create a custom user-client, it must list
     the name of the class of the user-client in the plug-in bundle's info.plist in a key named
     "AudioServerPlugIn_IOKitUserClients". The value of this key is an array of the names of the
     classes.
-    
+
     An AudioServerPlugIn may also use network resources. However, the plug-in must declare this in
     its bundle's info.plist with the key named, "AudioServerPlugIn_Network". The value of this key
     is a boolean and must be set to true if the key is present.
-    
+
     An AudioServerPlugIn provides the same property-based object model as the HAL's client
     framework. The basic objects and properties are defined in <CoreAudio/AudioHardwareBase.h> and
     are supplemented with properties declared here. The plug-in is responsible for defining the
     AudioObjectIDs to be used as handles for the AudioObjects the plug-in provides. However, the
     AudioObjectID for the one and only AudioPlugIn object must be kAudioObjectPlugInObject.
-    
+
     When the state of an AudioObject implemented by the plug-in changes, it notifies the host using
     the host routine, PropertiesChanged(). The only exception to this is for AudioDevice objects.
     AudioDevices may call the host's PropertiesChanged() routine only for state changes that don't
     have any effect on IO or on the structure of the AudioDevice, such as a change to the value of a
     volume control.
-    
+
     For changes to an AudioDevice's state that will affect IO or its structure, the change may not
     be made without first making a call to the host's RequestDeviceConfigurationChange() routine.
     This allows the host an opportunity to stop any outstanding IO and otherwise return the device
@@ -75,18 +75,32 @@
     calling the plug-in routine, PerformDeviceConfigurationChange(). It is only at this point that
     the device can make the state change. When PerformDeviceConfigurationChange() returns, the host
     will figure out what changed and restart any outstanding IO.
-    
+
     The host is in control of IO. It tells the plug-in's AudioDevice when to start and when to stop
     the hardware. The host drives its timing using the timestamps provided by the AudioDevice's
     implementation of GetZeroTimeStamp(). The series of timestamps provides a mapping between the
     device's sample time and mach_absolute_time().
-    
+
     The host provides the plug-in's device access to several tap points into the system's mix engine
     to allow for a variety of features, including adding processing to the signal. The host breaks
     these tap points down into IO operations that the host asks the plug-in to perform at the
     appropriate time. Prior to starting IO, the host will ask the plug-in which operations are to be
     performed. Note that the IO operations are performed on a real time thread on a deadline. As
     such the plug-in must avoid avoid blocking and return as quickly as possible.
+
+    An AudioServerPlugIn can talk to a DriverKit-based Driver Extension. To do so requires adjusting
+    the packaging of the CFPlugIn bundle slightly in order to carry the required entitlements. This
+    requires turning the AudioServerPlugIn bundle into an executable. Coding the AudioServerPlugIn
+    is the same as described above but there are some additional packaging changes to make:
+        - Add the "Load As Application" key with the value of the number 1 to the
+            AudioServerPlugIn's info.plist.
+        - Export the symbol for the plug-in's factory function using a .exp file or other mechanism.
+        - Set the "Mach-O Type" build setting for the target to Executable.
+        - Add "-e _AudioServerPlugInMain" to the "Other Linker Flags" build setting and link
+        	against CoreAudio.framework.
+        - Code sign the binary such that it includes the
+            "com.apple.developer.driverkit.userclient-access" entitlements necessary for talking to
+            the Driver Extension.
 */
 
 //==================================================================================================

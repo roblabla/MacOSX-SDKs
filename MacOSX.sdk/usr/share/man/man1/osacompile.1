@@ -29,9 +29,6 @@
 .Op Fl s
 .Op Fl u
 .Bk -words
-.Op Fl a Ar arch
-.Ek
-.Bk -words
 .Op Ar file ...
 .Ek
 .Sh DESCRIPTION
@@ -77,15 +74,6 @@ The following options are only relevant when creating a new bundled applet or dr
 Stay-open applet.
 .It Fl u
 Use startup screen.
-.It Fl a Ar arch
-Create the applet or droplet for the specified target architecture
-.Ar arch .
-The allowable values are
-.Dq ppc ,
-.Dq i386 ,
-and
-.Dq x86_64 .
-The default is to create a universal binary.
 .El
 .Pp
 The following options control the packaging of the output file.

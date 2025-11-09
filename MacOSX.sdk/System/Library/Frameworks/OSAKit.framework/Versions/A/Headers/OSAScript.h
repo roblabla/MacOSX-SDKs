@@ -6,12 +6,15 @@
 */
 
 #import <Cocoa/Cocoa.h>
+#if TARGET_OS_OSX
 #import <Carbon/Carbon.h>
+#endif
 #import <OSAKit/OSALanguage.h>
 
-@class OSAScriptPrivate;
-
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
+
+@class OSAScriptPrivate;
 
 // Error Info Keys
 // ===============
@@ -119,4 +122,5 @@ typedef NS_OPTIONS(NSUInteger, OSAStorageOptions)
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

@@ -102,7 +102,7 @@ class SCSIReducedBlockCommands;
 Implementation of the T10 device Reduced Block Commands device. This is the base
 driver for all subclasses implementing peripheral device type 0xE.
 */
-class IOSCSIReducedBlockCommandsDevice : public IOSCSIPrimaryCommandsDevice
+class __exported IOSCSIReducedBlockCommandsDevice : public IOSCSIPrimaryCommandsDevice
 {
 	
 	OSDeclareAbstractStructors ( IOSCSIReducedBlockCommandsDevice );

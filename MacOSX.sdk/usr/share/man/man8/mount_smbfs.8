@@ -50,8 +50,7 @@ man page for possible options and their meanings. Additional options supported
 by the mount_smbfs are as follows:
 .Bl -tag -width indent
 .It nobrowse
-Indicate to the Carbon subsystem that this volume is not to be displayed 
-to the user.
+This option indicates that the mount point should not be visible via the GUI (i.e., appear on the Desktop as a separate volume).
 .It automounted
 Set flags on the mountpoint to indicate that the volume has been mounted 
 by the automounter.
@@ -61,6 +60,10 @@ Don't use NTFS Streams even if they are supported by the server.
 Make the mount soft.  Fail file system calls after a number of seconds.
 .It nonotification
 Turn off using notifications for this volume.
+.It nodatacache
+Turn off using file data caching for this volume.
+.It nomdatacache
+Turn off using meta data caching for this volume.
 .El
 .It Fl f Ar mode , Fl d Ar mode
 Specify permissions that should be assigned to files and directories.

@@ -1,11 +1,25 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 45110E64-78FB-3A10-81C0-DFE678846D2B', 'x86_64: 45110E64-78FB-3A10-81C0-DFE678846D2B' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           2E8EC2E5-E817-3554-83F4-EDC0DB1DB624
+  - target:          x86_64-maccatalyst
+    value:           2E8EC2E5-E817-3554-83F4-EDC0DB1DB624
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           A8F6F59A-D8E9-3339-84D1-B04179542DFA
+  - target:          arm64e-maccatalyst
+    value:           A8F6F59A-D8E9-3339-84D1-B04179542DFA
 install-name:    '/System/Library/PrivateFrameworks/SampleAnalysis.framework/Versions/A/SampleAnalysis'
-current-version: 242
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 275
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _EventTypeString, _SABinarySearchArray, _SACFAbsoluteTimeFromTimespec, 
                        _SAFormattedBytes, _SAFormattedBytesDouble, _SAFormattedSignedBytes, 
                        _SAIsAppResponsive, _SAMachAbsTimeSecondsGetCurrent, _SAMachContTimeSecondsGetCurrent, 
@@ -13,12 +27,15 @@ exports:
                        _SAMachTimeFromSecondsUsingLiveTimebase, _SAMachTimeFromSecondsUsingTimebase, 
                        _SAMessageUserAgent, _SAMessageUserAgentWithReply, _SAMessageUserAgentWithReplyAsync, 
                        _SANanosecondsFromMachTimeUsingLiveTimebase, _SANanosecondsFromMachTimeUsingTimebase, 
-                       _SASecondsFromMachTimeUsingLiveTimebase, _SASecondsFromMachTimeUsingTimebase, 
+                       _SAResampleThreads, _SASecondsFromMachTimeUsingLiveTimebase, 
+                       _SASecondsFromMachTimeUsingTimebase, _SASpawnPlatformBinary, 
                        _TracePointString ]
-    objc-classes:    [ SAAuxiliaryData, SABinary, SABinaryLoadInfo, SADispatchQueue, 
-                       SADispatchQueueState, SAFanSpeed, SAFrame, SAHIDEvent, SAHIDStep, 
-                       SAInstruction, SAKernelCache, SASamplePrintOptions, SASamplePrinter, 
-                       SASampleStore, SASharedCache, SASourceInfo, SASymbol, SATask, 
-                       SATaskState, SAThread, SAThreadState, SATimeRange, SATimestamp, 
-                       SATurnstileInfo, SAWaitInfo ]
+    objc-classes:    [ SAAuxiliaryData, SABinary, SABinaryLoadInfo, SABinaryLocator, 
+                       SACallTree, SACallTreeFrame, SACallTreeNode, SADispatchQueue, 
+                       SADispatchQueueState, SAExecutableCallTree, SAFanSpeed, SAFrame, 
+                       SAHIDEvent, SAHIDStep, SAInstruction, SAKernelCache, SASamplePrintOptions, 
+                       SASamplePrinter, SASampleStore, SASegment, SASharedCache, 
+                       SASourceInfo, SASymbol, SATask, SATaskCallTree, SATaskState, 
+                       SATaskThreadCallTrees, SAThread, SAThreadCallTree, SAThreadState, 
+                       SATimeRange, SATimestamp, SATurnstileInfo, SAWaitInfo ]
 ...

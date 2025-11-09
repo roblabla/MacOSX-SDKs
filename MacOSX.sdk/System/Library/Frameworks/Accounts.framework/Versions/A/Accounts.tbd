@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: CE39DCF4-459C-3A18-8F32-DE2740A6D999', 'x86_64: CE39DCF4-459C-3A18-8F32-DE2740A6D999' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           14CC05CB-E98C-3776-80F6-21BD97D70AAF
+  - target:          x86_64-maccatalyst
+    value:           14CC05CB-E98C-3776-80F6-21BD97D70AAF
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           24EBF9D1-C511-3EFC-B79F-D733264E589F
+  - target:          arm64e-maccatalyst
+    value:           24EBF9D1-C511-3EFC-B79F-D733264E589F
 install-name:    '/System/Library/Frameworks/Accounts.framework/Versions/A/Accounts'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _ACAccountCredentialsDidChangeNotification, _ACAccountDataclassAvailability, 
                        _ACAccountDataclassBackToMyMac, _ACAccountDataclassBackToMyMacDeprecated, 
                        _ACAccountDataclassBackup, _ACAccountDataclassBookmarks, _ACAccountDataclassCKCodeService, 
@@ -26,17 +40,19 @@ exports:
                        _ACAccountDataclassStocks, _ACAccountDataclassUbiquity, _ACAccountDataclassiWorkMailBox, 
                        _ACAccountIdentifierKey, _ACAccountPropertyAllowsInsecureAuthentication, 
                        _ACAccountPropertyAllowsRecoverableTrustCertificate, _ACAccountPropertyAuthenticationScheme, 
-                       _ACAccountPropertyAutodiscoverURL, _ACAccountPropertyConfigurationProfileIdentifier, 
-                       _ACAccountPropertyDAAccountHost, _ACAccountPropertyDisableDynamicConfiguration, 
-                       _ACAccountPropertyEWSExternalURL, _ACAccountPropertyEWSInternalURL, 
-                       _ACAccountPropertyEWSRootFolderID, _ACAccountPropertyEmailAliases, 
-                       _ACAccountPropertyEmailAliasesEditingURLString, _ACAccountPropertyFirstName, 
-                       _ACAccountPropertyFullName, _ACAccountPropertyHostname, _ACAccountPropertyIMAPHostname, 
-                       _ACAccountPropertyIMAPPortNumber, _ACAccountPropertyIMAPRequiresSSL, 
-                       _ACAccountPropertyIdentityEmailAddress, _ACAccountPropertyLastName, 
-                       _ACAccountPropertyMiddleName, _ACAccountPropertyNickname, 
-                       _ACAccountPropertyPersonaIdentifier, _ACAccountPropertyPortNumber, 
-                       _ACAccountPropertyPreventRecentsSyncing, _ACAccountPropertySMTPHostname, 
+                       _ACAccountPropertyAutodiscoverURL, _ACAccountPropertyChildCardDAVAccountIdentifier, 
+                       _ACAccountPropertyConfigurationProfileIdentifier, _ACAccountPropertyDAAccountHost, 
+                       _ACAccountPropertyDisableDynamicConfiguration, _ACAccountPropertyEWSExternalURL, 
+                       _ACAccountPropertyEWSInternalURL, _ACAccountPropertyEWSRootFolderID, 
+                       _ACAccountPropertyEmailAliases, _ACAccountPropertyEmailAliasesEditingURLString, 
+                       _ACAccountPropertyFirstName, _ACAccountPropertyFullName, _ACAccountPropertyHostname, 
+                       _ACAccountPropertyIMAPHostname, _ACAccountPropertyIMAPPortNumber, 
+                       _ACAccountPropertyIMAPRequiresSSL, _ACAccountPropertyIdentityEmailAddress, 
+                       _ACAccountPropertyLastName, _ACAccountPropertyManagingOwnerIdentifier, 
+                       _ACAccountPropertyManagingSourceName, _ACAccountPropertyMiddleName, 
+                       _ACAccountPropertyNickname, _ACAccountPropertyPersonaIdentifier, 
+                       _ACAccountPropertyPortNumber, _ACAccountPropertyPreventRecentsSyncing, 
+                       _ACAccountPropertyRemoteManagingAccountIdentifier, _ACAccountPropertySMTPHostname, 
                        _ACAccountPropertySMTPPortNumber, _ACAccountPropertySMTPRequiresSSL, 
                        _ACAccountPropertySSLEnabled, _ACAccountPropertySSLIsDirect, 
                        _ACAccountPropertySecCertificatePersistentRefs, _ACAccountPropertySecIdentityPersistentRef, 
@@ -65,16 +81,16 @@ exports:
                        _ACAccountTypeIdentifierMSO, _ACAccountTypeIdentifierMadrid, 
                        _ACAccountTypeIdentifierOSXServer, _ACAccountTypeIdentifierOSXServerDeprecated, 
                        _ACAccountTypeIdentifierOnMyDevice, _ACAccountTypeIdentifierPOP, 
-                       _ACAccountTypeIdentifierQQ, _ACAccountTypeIdentifierSMTP, 
-                       _ACAccountTypeIdentifierSinaWeibo, _ACAccountTypeIdentifierSinaWeiboDeprecated, 
-                       _ACAccountTypeIdentifierSingleSignOn, _ACAccountTypeIdentifierSubscribedCalendar, 
-                       _ACAccountTypeIdentifierTencentWeibo, _ACAccountTypeIdentifierTencentWeiboDeprecated, 
-                       _ACAccountTypeIdentifierTudou, _ACAccountTypeIdentifierTwitter, 
-                       _ACAccountTypeIdentifierTwitterDeprecated, _ACAccountTypeIdentifierVimeo, 
-                       _ACAccountTypeIdentifierYahoo, _ACAccountTypeIdentifierYahooIM, 
-                       _ACAccountTypeIdentifierYelp, _ACAccountTypeIdentifierYouku, 
-                       _ACAccountTypeIdentifieriTunesStore, _ACAccountTypeIdentifieriTunesStoreSandbox, 
-                       _ACAccountTypesDidChangeNotification, _ACAuthenticationSchemeAPOP, 
+                       _ACAccountTypeIdentifierQQ, _ACAccountTypeIdentifierRemoteManagement, 
+                       _ACAccountTypeIdentifierSMTP, _ACAccountTypeIdentifierSinaWeibo, 
+                       _ACAccountTypeIdentifierSinaWeiboDeprecated, _ACAccountTypeIdentifierSingleSignOn, 
+                       _ACAccountTypeIdentifierSubscribedCalendar, _ACAccountTypeIdentifierTencentWeibo, 
+                       _ACAccountTypeIdentifierTencentWeiboDeprecated, _ACAccountTypeIdentifierTudou, 
+                       _ACAccountTypeIdentifierTwitter, _ACAccountTypeIdentifierTwitterDeprecated, 
+                       _ACAccountTypeIdentifierVimeo, _ACAccountTypeIdentifierYahoo, 
+                       _ACAccountTypeIdentifierYahooIM, _ACAccountTypeIdentifierYelp, 
+                       _ACAccountTypeIdentifierYouku, _ACAccountTypeIdentifieriTunesStore, 
+                       _ACAccountTypeIdentifieriTunesStoreSandbox, _ACAuthenticationSchemeAPOP, 
                        _ACAuthenticationSchemeAnyPlainText, _ACBackToMyMacTokenKey, 
                        _ACChangeTypeAdded, _ACChangeTypeRemoved, _ACCloudKitContainerUserIDKey, 
                        _ACCloudKitTokenKey, _ACContinuationTokenKey, _ACCredentialTypeAppleIDAuthentication, 
@@ -100,9 +116,9 @@ exports:
                        _ACOAuthTokenKey, _ACOAuthTokenNoSyncKey, _ACOAuthTokenNoSyncSeparator, 
                        _ACOAuthTokenSecretKey, _ACOldPasswordKey, _ACPasswordKey, 
                        _ACPasswordResetTokenBackupKey, _ACPasswordResetTokenKey, 
-                       _ACPropertyKeyAccountProperties, _ACPropertyKeyAuthenticated, 
-                       _ACPropertyKeyCredential, _ACPropertyKeyDataclassProperties, 
-                       _ACPropertyKeyEnabledDataclasses, _ACPropertyKeyProvisionedDataclasses, 
+                       _ACPropertyKeyAccountProperties, _ACPropertyKeyAccountType, 
+                       _ACPropertyKeyAuthenticated, _ACPropertyKeyCredential, _ACPropertyKeyDataclassProperties, 
+                       _ACPropertyKeyEnabledDataclasses, _ACPropertyKeyParent, _ACPropertyKeyProvisionedDataclasses, 
                        _ACPurposeKey, _ACRawPasswordKey, _ACRemoteDeviceCommandAddAccount, 
                        _ACRemoteDeviceCommandDeleteAccount, _ACRemoteDeviceCommandDeleteAllAccounts, 
                        _ACRemoteDeviceCommandFetchAccounts, _ACRemoteDeviceCommandInvalidateFetchedAccountsCache, 
@@ -123,7 +139,8 @@ exports:
                        _kACDFacebookAccountsDefaultAccessEntitlement, _kACDFlickrAccountsDefaultAccessEntitlement, 
                        _kACDIDMSAccountFullAccessEntitlement, _kACDInactiveAcccountsAccessEntitlement, 
                        _kACDLinkedInAccountsDefaultAccessEntitlement, _kACDOSXServerAccountsDefaultAccessEntitlement, 
-                       _kACDShouldNotCoalesceRequests, _kACDShouldNotUseParentAccount, 
+                       _kACDRemoteManagementFullAccessEntitlement, _kACDShouldNotCoalesceRequests, 
+                       _kACDShouldNotUseParentAccount, _kACDShutdownAccountsDEntitlement, 
                        _kACDTencentWeiboAccountsDefaultAccessEntitlement, _kACDTudouAccountsDefaultAccessEntitlement, 
                        _kACDTwitterAccountsDefaultAccessEntitlement, _kACDVimeoAccountsDefaultAccessEntitlement, 
                        _kACDWeiboAccountsDefaultAccessEntitlement, _kACDYelpAccountsDefaultAccessEntitlement, 
@@ -192,8 +209,9 @@ exports:
                        ACAccountStoreClientSideListener, ACAccountType, ACCredentialItem, 
                        ACDManagedAccessOptionsKey, ACDManagedAccount, ACDManagedAccountProperty, 
                        ACDManagedAccountType, ACDManagedAuthorization, ACDManagedCredentialItem, 
-                       ACDManagedDataclass, ACDPropertyEncryption, ACDataclassAction, 
-                       ACManagedDefaults, ACMutableTrackedSet, ACOAuthSigner, ACPersonaManager, 
-                       ACRateLimiter, ACRemoteAccountStoreInterface, ACRemoteAccountStoreSession, 
-                       ACSystemConfigManager, ACTrackedSet, ACZeroingString ]
+                       ACDManagedDataclass, ACDataclassAction, ACManagedDefaults, 
+                       ACMonitoredAccountStore, ACMutableTrackedSet, ACOAuthSigner, 
+                       ACPersonaManager, ACPluginLoader, ACRateLimiter, ACRemoteAccountStoreInterface, 
+                       ACRemoteAccountStoreSession, ACSystemConfigManager, ACTimedExpirer, 
+                       ACTrackedSet, ACZeroingString ]
 ...

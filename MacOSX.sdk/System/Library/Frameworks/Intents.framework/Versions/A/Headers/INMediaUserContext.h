@@ -16,9 +16,9 @@ typedef NS_ENUM(NSInteger, INMediaUserContextSubscriptionStatus) {
     INMediaUserContextSubscriptionStatusNotSubscribed,
     /// The user is registered with a subscription (free, trial, or paid)
     INMediaUserContextSubscriptionStatusSubscribed
-} API_AVAILABLE(ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos, macosx) NS_SWIFT_NAME(INMediaUserContext.SubscriptionStatus);
+} API_AVAILABLE(ios(13.0), watchos(6.0), tvos(14.0)) API_UNAVAILABLE(macos) NS_SWIFT_NAME(INMediaUserContext.SubscriptionStatus);
 
-API_AVAILABLE(ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos, macosx)
+API_AVAILABLE(ios(13.0), watchos(6.0), tvos(14.0)) API_UNAVAILABLE(macos)
 @interface INMediaUserContext : INUserContext
 
 - (instancetype)init;

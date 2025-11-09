@@ -1,15 +1,21 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: ABE95F79-121C-37C2-AB81-3E7CBDA7972A' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           55DDA295-27A3-33AC-8EC0-2C8BDD552594
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           2495BCB8-E770-3446-A603-DDBD5791EC0D
 install-name:    '/System/Library/PrivateFrameworks/MobileAssetUpdater.framework/Versions/A/MobileAssetUpdater'
-exports:         
-  - archs:           [ x86_64 ]
-    symbols:         [ _kMobileAssetUpdaterErrorDomain ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     objc-classes:    [ MobileAssetUpdater ]
-    objc-ivars:      [ MobileAssetUpdater._asset, MobileAssetUpdater._assetDownloaded, 
-                       MobileAssetUpdater._assetType, MobileAssetUpdater._logger, 
-                       MobileAssetUpdater._overrideApplied, MobileAssetUpdater._overrideFile, 
-                       MobileAssetUpdater._purgeOverrideFile, MobileAssetUpdater._query, 
-                       MobileAssetUpdater._requireAssetMetadata ]
+    objc-ivars:      [ MobileAssetUpdater._alternateAssetTypes, MobileAssetUpdater._asset, 
+                       MobileAssetUpdater._assetDownloaded, MobileAssetUpdater._assetType, 
+                       MobileAssetUpdater._downloadOnCellularAllowed, MobileAssetUpdater._lock, 
+                       MobileAssetUpdater._logger, MobileAssetUpdater._overrideApplied, 
+                       MobileAssetUpdater._overrideFile, MobileAssetUpdater._purgeOverrideFile, 
+                       MobileAssetUpdater._query, MobileAssetUpdater._requireAssetMetadata ]
 ...

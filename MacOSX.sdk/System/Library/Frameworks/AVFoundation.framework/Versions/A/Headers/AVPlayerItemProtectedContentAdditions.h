@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVPlayerItemProtectedContentAdditions.h>)
 /*
 	File:  AVPlayerItemProtectedContentAdditions.h
  
@@ -118,3 +119,7 @@ typedef NS_ENUM(NSInteger, AVContentAuthorizationStatus){
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCore/AVPlayerItemProtectedContentAdditions.h>
+#endif

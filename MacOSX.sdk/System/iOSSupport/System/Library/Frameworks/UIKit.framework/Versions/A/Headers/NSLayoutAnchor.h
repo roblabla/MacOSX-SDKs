@@ -103,12 +103,11 @@ NSLAYOUTANCHOR_EXTERN API_AVAILABLE(macos(10.11), ios(9.0))
  where the value of the system space is determined from information available from the anchors.
  The constraint affects how far the receiver will be positioned trailing 'anchor', per the effective user interface layout direction.
  */
-- (NSLayoutConstraint *)constraintEqualToSystemSpacingAfterAnchor:(NSLayoutXAxisAnchor *)anchor multiplier:(CGFloat)multiplier __attribute__((warn_unused_result)) API_AVAILABLE(ios(11.0),tvos(11.0));
-- (NSLayoutConstraint *)constraintGreaterThanOrEqualToSystemSpacingAfterAnchor:(NSLayoutXAxisAnchor *)anchor multiplier:(CGFloat)multiplier __attribute__((warn_unused_result)) API_AVAILABLE(ios(11.0),tvos(11.0));
-- (NSLayoutConstraint *)constraintLessThanOrEqualToSystemSpacingAfterAnchor:(NSLayoutXAxisAnchor *)anchor multiplier:(CGFloat)multiplier __attribute__((warn_unused_result)) API_AVAILABLE(ios(11.0),tvos(11.0));
+- (NSLayoutConstraint *)constraintEqualToSystemSpacingAfterAnchor:(NSLayoutXAxisAnchor *)anchor multiplier:(CGFloat)multiplier __attribute__((warn_unused_result)) API_AVAILABLE(macos(11.0),ios(11.0),tvos(11.0));
+- (NSLayoutConstraint *)constraintGreaterThanOrEqualToSystemSpacingAfterAnchor:(NSLayoutXAxisAnchor *)anchor multiplier:(CGFloat)multiplier __attribute__((warn_unused_result)) API_AVAILABLE(macos(11.0),ios(11.0),tvos(11.0));
+- (NSLayoutConstraint *)constraintLessThanOrEqualToSystemSpacingAfterAnchor:(NSLayoutXAxisAnchor *)anchor multiplier:(CGFloat)multiplier __attribute__((warn_unused_result)) API_AVAILABLE(macos(11.0),ios(11.0),tvos(11.0));
 
 @end
-
 
 @interface NSLayoutYAxisAnchor (UIViewDynamicSystemSpacingSupport)
 /* Constraints of the form,
@@ -118,9 +117,9 @@ NSLAYOUTANCHOR_EXTERN API_AVAILABLE(macos(10.11), ios(9.0))
  If either the receiver or 'anchor' is the firstBaselineAnchor or lastBaselineAnchor of a view with text content
  then the spacing will depend on the fonts involved and will change when those do.
  */
-- (NSLayoutConstraint *)constraintEqualToSystemSpacingBelowAnchor:(NSLayoutYAxisAnchor *)anchor multiplier:(CGFloat)multiplier __attribute__((warn_unused_result)) API_AVAILABLE(ios(11.0),tvos(11.0));
-- (NSLayoutConstraint *)constraintGreaterThanOrEqualToSystemSpacingBelowAnchor:(NSLayoutYAxisAnchor *)anchor multiplier:(CGFloat)multiplier __attribute__((warn_unused_result)) API_AVAILABLE(ios(11.0),tvos(11.0));
-- (NSLayoutConstraint *)constraintLessThanOrEqualToSystemSpacingBelowAnchor:(NSLayoutYAxisAnchor *)anchor multiplier:(CGFloat)multiplier __attribute__((warn_unused_result)) API_AVAILABLE(ios(11.0),tvos(11.0));
+- (NSLayoutConstraint *)constraintEqualToSystemSpacingBelowAnchor:(NSLayoutYAxisAnchor *)anchor multiplier:(CGFloat)multiplier __attribute__((warn_unused_result)) API_AVAILABLE(macos(11.0),ios(11.0),tvos(11.0));
+- (NSLayoutConstraint *)constraintGreaterThanOrEqualToSystemSpacingBelowAnchor:(NSLayoutYAxisAnchor *)anchor multiplier:(CGFloat)multiplier __attribute__((warn_unused_result)) API_AVAILABLE(macos(11.0),ios(11.0),tvos(11.0));
+- (NSLayoutConstraint *)constraintLessThanOrEqualToSystemSpacingBelowAnchor:(NSLayoutYAxisAnchor *)anchor multiplier:(CGFloat)multiplier __attribute__((warn_unused_result)) API_AVAILABLE(macos(11.0),ios(11.0),tvos(11.0));
 @end
 
 NS_ASSUME_NONNULL_END

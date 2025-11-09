@@ -1,11 +1,28 @@
---- !tapi-tbd-v3
-archs:           [ x86_64, x86_64h ]
-uuids:           [ 'x86_64: 34F9366B-344C-34F6-9069-5FC15AC8A9DA', 'x86_64: 34F9366B-344C-34F6-9069-5FC15AC8A9DA', 
-                   'x86_64h: 7E77A353-24EA-3994-AC0D-3D1A747148DB', 'x86_64h: 7E77A353-24EA-3994-AC0D-3D1A747148DB' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
+                   arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           E72896CA-4B1C-3508-B0A2-1F9F4D273F4C
+  - target:          x86_64-maccatalyst
+    value:           E72896CA-4B1C-3508-B0A2-1F9F4D273F4C
+  - target:          x86_64h-macos
+    value:           6B36EA40-157E-34B2-A283-DAF4BCB6A0D2
+  - target:          x86_64h-maccatalyst
+    value:           6B36EA40-157E-34B2-A283-DAF4BCB6A0D2
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           06C33348-BBB5-37D1-A7CA-A49876C0CBA2
+  - target:          arm64e-maccatalyst
+    value:           06C33348-BBB5-37D1-A7CA-A49876C0CBA2
 install-name:    '/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libPng.dylib'
-exports:         
-  - archs:           [ x86_64, x86_64h ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, x86_64h-maccatalyst, x86_64h-macos, 
+                       arm64e-maccatalyst, arm64e-macos, arm64-macos, arm64-maccatalyst ]
     symbols:         [ __cg_png_cleanup_for_write_start_row, __cg_png_create_info_struct, 
                        __cg_png_create_read_struct, __cg_png_create_write_struct, 
                        __cg_png_destroy_info_struct, __cg_png_destroy_read_struct, 

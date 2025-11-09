@@ -1,13 +1,26 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 506E3631-F856-3A2A-9E73-3B24E8F57509' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           08ACBE3C-C75C-3F59-BDFC-4EE0A9223CB0
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           DC2A3A77-C325-3957-A313-E4E36CF2BF16
 install-name:    '/System/Library/PrivateFrameworks/WiFiPolicy.framework/Versions/A/WiFiPolicy'
-exports:         
-  - archs:           [ x86_64 ]
-    symbols:         [ _MachTimeToSecs, _TBMacAddressFromString, _TBMacAdressFromLong, 
-                       _TBPersistenceConfigurationCache, _TBPersistenceRemoteStoreServerServiceNameCache, 
+exports:
+  - targets:         [ x86_64-macos ]
+    weak-symbols:    [ __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _MachTimeToSecs, _TBCentroidDegreesToRadians, _TBCentroidRadiansToDegrees, 
+                       _TBMacAddressFromString, _TBMacAdressFromLong, _TBPersistenceConfigurationCache, 
+                       _TBPersistenceRemoteStoreServerServiceNameCache, _WCAErrorDomain, 
                        _WFLoggerTimerTmoCallBack, _WiFiPolicyVersionNumber, _WiFiPolicyVersionString, 
+                       _WiFiUsageConnectionQualityRecordConvertDisconnectReasonToGEOReason, 
                        _WiFiWalletSignedDataForRawPass, _WiFiWalletUtilAddPass, _WiFiWalletUtilAddPassFromURL, 
                        _WiFiWalletUtilRemovePass, _WiFiWalletUtilRemovePassMatchingURL, 
                        _WiFiWalletUtilRemovePassesMatchingIdentifier, __WiFiWalletUtilRemovePassMatching, 
@@ -26,32 +39,38 @@ exports:
                        __ZNK6gloria14TileCoordinate6XToLngEv, __ZNK6gloria14TileCoordinate6YToLatEv, 
                        __ZNK6gloria6TileId16GetEncodedTileIdEv, __ZNK6gloria6TileIdeqERKS0_, 
                        __ZNK6gloria6TileIdltERKS0_, __ZNK6gloria6TileIdneERKS0_, 
-                       ___WiFiManagerLocationManagerCallback, _boundingBoxes, _kDefaultWiFiAvailabilityMatchMaximumAge, 
-                       _kTBPopularityScoreDescription, _kTBQualityScoreDescription, 
-                       _mccIsoMap ]
-    objc-classes:    [ TBAccessPointMO, TBAnalytics, TBCacheAnalyticsEvent, TBCoreDataSource, 
-                       TBCoreDataStoreDescriptor, TBDataSource, TBDataSourceMediator, 
-                       TBDefaults, TBError, TBErrorFetchResponse, TBFetchAnalyticsEvent, 
-                       TBFetchedTile, TBGloriaTile, TBJoinAnalyticsEvent, TBLocalFetchRequestDescriptor, 
-                       TBLocalFetchResponse, TBLocalFetchTileItem, TBLocationFetchRequest, 
-                       TBLocationFetchRequestDescriptor, TBMutableTileFetchResponse, 
-                       TBNetworkFetchRequest, TBNetworkFetchRequestDescriptor, TBNetworkMO, 
-                       TBNetworkRemoteFetchResponse, TBPersistenceManager, TBPersistenceRemoteStoreServer, 
-                       TBPersistenceRemoteStoreServerHandlingPolicy, TBPopularityScore, 
-                       TBPreferLocalFetchDataSource, TBPreferLocalFetchOperation, 
+                       ___WiFiManagerLocationManagerVisitCallback, _boundingBoxes, 
+                       _kDefaultWiFiAvailabilityMatchMaximumAge, _kTBPopularityScoreDescription, 
+                       _kTBQualityScoreDescription, _kWiFiUsageMaxDeviceSessionDurationInSecs, 
+                       _kWiFiUsageTimeBetweenLinkRecoveryInSecs, _mccIsoMap ]
+    objc-classes:    [ TBAccessPointMO, TBAnalytics, TBCacheAnalyticsEvent, TBCentroidCalculator, 
+                       TBCoreDataSource, TBCoreDataStoreDescriptor, TBDataSource, 
+                       TBDataSourceMediator, TBDefaults, TBError, TBErrorFetchResponse, 
+                       TBFetchAnalyticsEvent, TBFetchedTile, TBGloriaTile, TBJoinAnalyticsEvent, 
+                       TBLocalFetchRequestDescriptor, TBLocalFetchResponse, TBLocalFetchTileItem, 
+                       TBLocationFetchRequest, TBLocationFetchRequestDescriptor, 
+                       TBMutableTileFetchResponse, TBNetworkFetchRequest, TBNetworkFetchRequestDescriptor, 
+                       TBNetworkMO, TBNetworkRemoteFetchResponse, TBPersistenceManager, 
+                       TBPersistenceRemoteStoreServer, TBPersistenceRemoteStoreServerHandlingPolicy, 
+                       TBPopularityScore, TBPreferLocalFetchDataSource, TBPreferLocalFetchOperation, 
                        TBQualityScore, TBRemoteDataSource, TBRemoteFetchAndCacheDataSource, 
                        TBRemoteFetchAndCacheOperation, TBRemoteFetchResponse, TBRemoteFetchTileItem, 
                        TBTileFetchRequest, TBTileFetchRequestDescriptor, TBTileItemDescriptor, 
-                       TBTileMO, TBTileRemoteFetchResponse, WFBlackListNode, WFBlacklistEngine, 
-                       WFBlacklistStateNode, WFBlacklistTriggerNode, WFLogger, WFLoggerBase, 
-                       WFLoggerCircularBuffer, WFLoggerFile, WFLoggerOsLog, WFMeasure, 
-                       WFMeasureThroughputResult, WiFi3BarsNetwork, WiFi3BarsSource, 
-                       WiFi3BarsTileFetcher, WiFiAvailabilityEngine, WiFiAvailabilityMatch, 
-                       WiFiLexicon, WiFiLocaleManager, WiFiLocationManager, WiFiWalletPass, 
-                       WiFiWalletSource ]
+                       TBTileMO, TBTileRemoteFetchResponse, WCAAsset, WCAClient, 
+                       WCAFetchKeyValuesRequest, WCAFetchKeyValuesResponse, WCAFetchRequest, 
+                       WCAFetchResponse, WCAFetchSQLiteBeaconDBRequest, WCAFetchSQLiteRequest, 
+                       WCAFetchSQLiteResponse, WCAKeyValueItem, WFBlackListNode, 
+                       WFBlacklistEngine, WFBlacklistStateNode, WFBlacklistTriggerNode, 
+                       WFLogger, WFLoggerBase, WFLoggerCircularBuffer, WFLoggerFile, 
+                       WFLoggerOsLog, WFMeasure, WFMeasureThroughputResult, WiFi3BarsNetwork, 
+                       WiFi3BarsSource, WiFi3BarsTileCacheObserver, WiFi3BarsTileFetcher, 
+                       WiFiAvailabilityEngine, WiFiAvailabilityMatch, WiFiLexicon, 
+                       WiFiLocaleManager, WiFiLocationManager, WiFiUsageApplicationSession, 
+                       WiFiUsageBssDetails, WiFiUsageConnectionQualityRecord, WiFiUsageDeviceSession, 
+                       WiFiUsageInterfaceStats, WiFiUsageLinkDataStats, WiFiUsageLinkQuality, 
+                       WiFiUsageLinkSession, WiFiUsageMonitor, WiFiUsageNetworkDetails, 
+                       WiFiUsageNetworkSession, WiFiUsagePrivacyFilter, WiFiUsageSession, 
+                       WiFiUsageSessionLQM, WiFiUsageSoftApSession, WiFiUsageUserSession, 
+                       WiFiWalletPass, WiFiWalletSource ]
     objc-ivars:      [ WFLoggerBase._ctxt, WFLoggerBase._dispatchQueue, WFLoggerBase._internalInstall ]
-    weak-def-symbols: [ __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                        __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                        __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                        __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE ]
 ...

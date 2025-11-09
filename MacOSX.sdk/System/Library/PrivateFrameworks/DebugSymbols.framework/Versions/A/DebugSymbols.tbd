@@ -1,11 +1,25 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: BA16D1EF-6701-3A85-B648-CCEC4AABA9A7', 'x86_64: BA16D1EF-6701-3A85-B648-CCEC4AABA9A7' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           2EDBEE95-B64C-3D12-9D4F-53D720C87612
+  - target:          x86_64-maccatalyst
+    value:           2EDBEE95-B64C-3D12-9D4F-53D720C87612
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           D4982E02-E37E-324C-84A1-13C0A601DD76
+  - target:          arm64e-maccatalyst
+    value:           D4982E02-E37E-324C-84A1-13C0A601DD76
 install-name:    '/System/Library/PrivateFrameworks/DebugSymbols.framework/Versions/A/DebugSymbols'
-current-version: 194
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 195.1
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _DBGAddDSYMURL, _DBGAppID, _DBGBlockPath, _DBGCopyDSYMPropertyLists, 
                        _DBGCopyDSYMURLForUUID, _DBGCopyDSYMURLForUUIDWithOptions, 
                        _DBGCopyFullDSYMURLForUUID, _DBGCopyFullDSYMURLForUUIDWithOptions, 

@@ -1,11 +1,25 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: C365640A-044F-376E-915B-B4088105DCD8', 'x86_64: C365640A-044F-376E-915B-B4088105DCD8' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           7FD4DB32-DECF-32E9-A9FA-709C4948D41B
+  - target:          x86_64-maccatalyst
+    value:           7FD4DB32-DECF-32E9-A9FA-709C4948D41B
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           DBA6801A-184B-3255-98B8-BF8927FEE3C0
+  - target:          arm64e-maccatalyst
+    value:           DBA6801A-184B-3255-98B8-BF8927FEE3C0
 install-name:    '/System/Library/PrivateFrameworks/ScreenReader.framework/Versions/A/Frameworks/ScreenReaderOutput.framework/Versions/A/ScreenReaderOutput'
 current-version: 390
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _SCROBrailleCreateTranslatePrintBrailleToBrailleCode, _SCROBrailleDisplayHistoryIsHistoryString, 
                        _SCROBrailleDisplayHistoryIsStringUnread, _SCROSerializeWrapper, 
                        _SCROUnserializeWrapper, __SCROD_BRAILLE_LOG, __SCROD_LOG, 
@@ -51,10 +65,11 @@ exports:
                        SCROBrailleDisplayStatus, SCROBrailleEvent, SCROBrailleEventDispatcher, 
                        SCROBrailleFormatter, SCROBrailleHandler, SCROBrailleKey, 
                        SCROBrailleKeyboardKey, SCROBrailleLine, SCROBrailleStealthDriver, 
-                       SCROBrailleTranslationManager, SCROCallback, SCROClient, SCROConnection, 
-                       SCROEvent, SCROHandler, SCROIOElement, SCROIOHIDElement, SCROIOSerialElement, 
-                       SCROIOUSBElement, SCROMobileBrailleDisplayInputManager, SCROScriptClient, 
-                       SCROServer, SCROStealthBrailleDisplay ]
+                       SCROBrailleSubstitutionManager, SCROBrailleTranslationManager, 
+                       SCROCallback, SCROClient, SCROConnection, SCROEvent, SCROHandler, 
+                       SCROIOElement, SCROIOHIDElement, SCROIOSerialElement, SCROIOUSBElement, 
+                       SCROMobileBrailleDisplayInputManager, SCROScriptClient, SCROServer, 
+                       SCROStealthBrailleDisplay ]
     objc-ivars:      [ SCROBrailleClient._aggregatedStatusCache, SCROBrailleClient._aggregatedStatusPending, 
                        SCROBrailleClient._connection, SCROBrailleClient._deathTimer, 
                        SCROBrailleClient._delegate, SCROBrailleClient._delegateWantsKeypresses, 
@@ -63,7 +78,8 @@ exports:
                        SCROBrailleClient._lock, SCROBrailleClient._mainStringCache, 
                        SCROBrailleClient._mainStringPending, SCROBrailleClient._needsDisplay, 
                        SCROBrailleClient._wantsDisconnectMessage, SCROBrailleClient._wantsDisplayConfigurationChanged, 
-                       SCROBrailleClient._wantsReconnectMessage, SCROBrailleDisplay._automaticBrailleTranslationEnabled, 
+                       SCROBrailleClient._wantsReconnectMessage, SCROBrailleDisplay._autoAdvanceDuration, 
+                       SCROBrailleDisplay._autoAdvanceEnabled, SCROBrailleDisplay._automaticBrailleTranslationEnabled, 
                        SCROBrailleDisplay._blinkerEventTimer, SCROBrailleDisplay._blinkingEnabled, 
                        SCROBrailleDisplay._brailleDriver, SCROBrailleDisplay._brailleInputMode, 
                        SCROBrailleDisplay._brailleLine, SCROBrailleDisplay._commandDispatcher, 
@@ -91,7 +107,8 @@ exports:
                        SCROBrailleDisplayManagedQueue._maxActiveQueueSize, SCROBrailleDisplayManagedQueue._queueStateDict, 
                        SCROBrailleDisplayManagedQueue._stateQueueMap, SCROBrailleDisplayManagedQueue._tokenDisplayMap, 
                        SCROBrailleDisplayManager._alertPriority, SCROBrailleDisplayManager._alertTimeout, 
-                       SCROBrailleDisplayManager._alertTimer, SCROBrailleDisplayManager._automaticBrailleTranslation, 
+                       SCROBrailleDisplayManager._alertTimer, SCROBrailleDisplayManager._autoAdvanceDuration, 
+                       SCROBrailleDisplayManager._autoAdvanceEnabled, SCROBrailleDisplayManager._automaticBrailleTranslation, 
                        SCROBrailleDisplayManager._blankUIString, SCROBrailleDisplayManager._bluetoothBrailleDisplay, 
                        SCROBrailleDisplayManager._currentBrailleFormatter, SCROBrailleDisplayManager._delegate, 
                        SCROBrailleDisplayManager._detectedIOElementsDict, SCROBrailleDisplayManager._displayConfigurationDict, 

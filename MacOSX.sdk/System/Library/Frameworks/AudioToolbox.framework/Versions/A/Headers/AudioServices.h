@@ -17,11 +17,10 @@
 
 #include <TargetConditionals.h>
 #include <Availability.h>
-#if !TARGET_OS_IPHONE
+#if TARGET_OS_OSX
     #include <CoreAudio/AudioHardware.h>
     #include <AudioToolbox/AudioHardwareService.h>
 #elif TARGET_OS_IOS && !TARGET_OS_MACCATALYST
-    // AudioSession.h is deprecated and unavailable in MACCATALYST.
     #include <AudioToolbox/AudioSession.h>
 #endif
 #include <CoreFoundation/CoreFoundation.h>

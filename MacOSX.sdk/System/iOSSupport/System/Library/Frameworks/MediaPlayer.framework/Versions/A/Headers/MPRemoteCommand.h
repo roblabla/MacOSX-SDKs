@@ -39,6 +39,8 @@ typedef NS_ENUM(NSInteger, MPRemoteCommandHandlerStatus) {
 MP_API(ios(7.1), tvos(7.1), macos(10.12.2), watchos(5.0))
 @interface MPRemoteCommand : NSObject
 
+MP_INIT_UNAVAILABLE
+
 /// Whether a button (for example) should be enabled and tappable for this
 /// particular command.
 @property (nonatomic, assign, getter = isEnabled) BOOL enabled;
@@ -58,9 +60,6 @@ MP_API(ios(7.1), tvos(7.1), macos(10.12.2), watchos(5.0))
 
 /// Returns an opaque object to act as the target.
 - (id)addTargetWithHandler:(MPRemoteCommandHandlerStatus(^)(MPRemoteCommandEvent *event))handler;
-
-/// Private constructor.
-- (instancetype)init NS_UNAVAILABLE;
 
 @end
 

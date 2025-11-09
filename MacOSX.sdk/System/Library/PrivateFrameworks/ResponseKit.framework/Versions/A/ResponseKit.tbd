@@ -1,20 +1,36 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 6634A9A0-C358-300E-801F-9A3CDC5752B3', 'x86_64: 6634A9A0-C358-300E-801F-9A3CDC5752B3' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           C64D8D0D-E536-3C77-B087-C4E2164FAEC8
+  - target:          x86_64-maccatalyst
+    value:           C64D8D0D-E536-3C77-B087-C4E2164FAEC8
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           8227B485-5EDC-33E4-9D94-D9F39C9A23ED
+  - target:          arm64e-maccatalyst
+    value:           8227B485-5EDC-33E4-9D94-D9F39C9A23ED
 install-name:    '/System/Library/PrivateFrameworks/ResponseKit.framework/Versions/A/ResponseKit'
-current-version: 148
-exports:         
-  - archs:           [ x86_64 ]
-    symbols:         [ _NSSubtractRange, _RKAggdScalarPrefixKey, _RKAggdStatisticsActionSelected, 
-                       _RKAggdStatisticsActionSuggested, _RKAggdStatisticsActionTriggered, 
-                       _RKAttributedTokenBirthdayType, _RKAttributedTokenChineseNewYearType, 
-                       _RKAttributedTokenCongratulationType, _RKAttributedTokenMomentType, 
-                       _RKAttributedTokenMoneyType, _RKAttributedTokenMoneyValuesQualifier, 
-                       _RKAttributedTokenNewYearType, _RKAttributedTokenPhotosharingKeywordRangesKey, 
-                       _RKAttributedTokenPhotosharingKeywordsKey, _RKAttributedTokenPhotosharingMessageKey, 
-                       _RKAttributedTokenPhotosharingType, _RKAttributedTokenSubTypeKey, 
+current-version: 164
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _NSSubtractRange, _RKAggdStatisticsActionSelected, _RKAggdStatisticsActionSuggested, 
+                       _RKAggdStatisticsActionTriggered, _RKAttributedTokenBirthdayType, 
+                       _RKAttributedTokenChineseNewYearType, _RKAttributedTokenCongratulationType, 
+                       _RKAttributedTokenMomentType, _RKAttributedTokenMoneyType, 
+                       _RKAttributedTokenMoneyValuesQualifier, _RKAttributedTokenNewYearType, 
+                       _RKAttributedTokenPhotosharingKeywordRangesKey, _RKAttributedTokenPhotosharingKeywordsKey, 
+                       _RKAttributedTokenPhotosharingMessageKey, _RKAttributedTokenPhotosharingType, 
+                       _RKAttributedTokenShootingStarType, _RKAttributedTokenSubTypeKey, 
                        _RKAttributedTokenThinkingOfYouType, _RKAttributedTokenTypeKey, 
+                       _RKCoreAnalyticsActionSelected, _RKCoreAnalyticsActionSuggested, 
+                       _RKCoreAnalyticsActionTriggered, _RKCoreAnalyticsEventName, 
                        _RKLinguisticCategoryForFSMType, _RKLinguisticCategoryFromPreferenceKey, 
                        _RKLinguisticCategoryStatementExpressEmotionString, _RKLinguisticCategoryStatementSpecialEventString, 
                        _RKLinguisticCategoryToPreferenceKey, _RKLinguisticTagDataDetected, 
@@ -25,20 +41,21 @@ exports:
                        _RKResponseKitVersionString, _RKResponseMessageKey, _RKResponseRankedCandidateListKey, 
                        _RKResponseRecipientKey, _RKResponseSetTypeDefaultStringValue, 
                        _RKResponseSetTypeSmartStringValue, _RKResponseSetTypeUserGeneratedStringValue, 
-                       _RKResponseSourceKey, _RKResponseStringKey, __chineseTokenizer, 
-                       __kMRLModelFileLocationKey, __languageRankingModel, __localeEquivalenceClass, 
-                       __localeGrammarBundlePath, __localeLangModel, __localeMessageIntentRecognizer, 
-                       _emoticonCategoryDict, _happyEmojiSet, _kAllowedPunctuations, 
-                       _kEMDash, _kEmojiPlaceholder, _kLMMaxTriggerLen, _kMaxCharRepetitionAllowed, 
-                       _kMaxCharToConsiderForEmoticonDetection, _kMaxSequenceLength, 
-                       _kMinCharToConsiderForEmoticonDetection, _multiWordOrLength, 
-                       _ninetyDaysInSeconds, _sSubclasses, _sadEmojiSet, _specialCharMapping ]
+                       _RKResponseSourceKey, _RKResponseStringKey, _RK_QUERY_ALTERNATIVE_MAX_PHRASAL_LENGTH, 
+                       __chineseTokenizer, __kMRLModelFileLocationKey, __languageRankingModel, 
+                       __localeEquivalenceClass, __localeGrammarBundlePath, __localeLangModel, 
+                       __localeMessageIntentRecognizer, _emoticonCategoryDict, _happyEmojiSet, 
+                       _kAllowedPunctuations, _kEMDash, _kEmojiPlaceholder, _kLMMaxTriggerLen, 
+                       _kMaxCharRepetitionAllowed, _kMaxCharToConsiderForEmoticonDetection, 
+                       _kMaxSequenceLength, _kMinCharToConsiderForEmoticonDetection, 
+                       _multiWordOrLength, _ninetyDaysInSeconds, _sSubclasses, _sadEmojiSet, 
+                       _specialCharMapping ]
     objc-classes:    [ RKAggdStatistics, RKAssets, RKBundleDataProvider, RKClassification, 
-                       RKConversation, RKConversationTurn, RKCurrencyAmount, RKEventIdentification, 
-                       RKEventIdentifier, RKLexicalEntity, RKLinguisticDataProvider, 
-                       RKMessage, RKMessageClassifier, RKMessageIntentRecognizer, 
-                       RKMessageResponseManager, RKMontrealModel, RKNLEventToken, 
-                       RKNLEventTokenizer, RKPaymentIdentifier, RKPersistentPersonalizer, 
+                       RKConversation, RKConversationTurn, RKCoreAnalytics, RKCurrencyAmount, 
+                       RKEventIdentification, RKEventIdentifier, RKLexicalEntity, 
+                       RKLinguisticDataProvider, RKMessage, RKMessageClassifier, 
+                       RKMessageIntentRecognizer, RKMessageResponseManager, RKMontrealModel, 
+                       RKNLEventToken, RKNLEventTokenizer, RKPaymentIdentifier, RKPersistentPersonalizer, 
                        RKProactiveGrammar, RKRankLearner, RKRankedResponse, RKRankingDataManager, 
                        RKRankingInfo, RKResponse, RKResponseCandidate, RKResponseCollection, 
                        RKResponseCountTimestampRecipient, RKResponseFeatures, RKSentenceClassifier, 

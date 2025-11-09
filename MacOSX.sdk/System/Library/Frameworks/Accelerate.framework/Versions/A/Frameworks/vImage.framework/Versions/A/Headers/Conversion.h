@@ -478,6 +478,11 @@ VIMAGE_PF vImage_Error vImageConvert_Planar8toARGB8888(const vImage_Buffer *srcA
  */
 VIMAGE_PF vImage_Error vImageConvert_PlanarFtoARGBFFFF(const vImage_Buffer *srcA, const vImage_Buffer *srcR, const vImage_Buffer *srcG, const vImage_Buffer *srcB, const vImage_Buffer *dest, vImage_Flags flags) VIMAGE_NON_NULL(1,2,3,4,5)    API_AVAILABLE(macos(10.3), ios(5.0), watchos(1.0), tvos(5.0));
 
+#define vImageConvert_PlanarFtoRGBAFFFF(_red, _green, _blue, _alpha, _dest, _flags) \
+vImageConvert_PlanarFtoARGBFFFF((_red), (_green), (_blue), (_alpha), (_dest), (_flags))
+#define vImageConvert_PlanarFtoBGRAFFFF(_blue, _green, _red, _alpha, _dest, _flags) \
+vImageConvert_PlanarFtoARGBFFFF((_blue), (_green), (_red), (_alpha), (_dest), (_flags))
+
 /*!
  @function vImageConvert_ARGB8888toPlanar8
  

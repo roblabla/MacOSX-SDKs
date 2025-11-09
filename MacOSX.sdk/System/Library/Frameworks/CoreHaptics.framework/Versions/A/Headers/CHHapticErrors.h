@@ -117,4 +117,4 @@ typedef NS_ERROR_ENUM(CoreHapticsErrorDomain, CHHapticErrorCode)
     
 	CHHapticErrorCodeUnknownError				= -4898,
 	CHHapticErrorCodeMemoryError				= -4899
-} API_AVAILABLE(ios(13.0), macos(10.15));
+} API_AVAILABLE(ios(13.0), macos(10.15),tvos(14.0));

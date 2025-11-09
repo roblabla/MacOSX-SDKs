@@ -1,23 +1,37 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 8D2530C6-FDDB-3442-AE36-5BBBB9A6111C' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           BEB62579-5537-360D-A106-1F8B0063BBDC
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           80D53374-0FF4-3896-A5B5-F084EF688005
 install-name:    '/System/Library/Frameworks/OpenDirectory.framework/Versions/A/OpenDirectory'
-exports:         
-  - archs:           [ x86_64 ]
-    re-exports:      [ '/System/Library/Frameworks/OpenDirectory.framework/Versions/A/Frameworks/CFOpenDirectory.framework/Versions/A/CFOpenDirectory' ]
+reexported-libraries:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    libraries:       [ '/System/Library/Frameworks/OpenDirectory.framework/Versions/A/Frameworks/CFOpenDirectory.framework/Versions/A/CFOpenDirectory' ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _ODFrameworkErrorDomain, _ODSessionProxyAddress, _ODSessionProxyPassword, 
                        _ODSessionProxyPort, _ODSessionProxyUsername, _ODTrustInfoCopy, 
                        _ODTrustTypeAnonymous, _ODTrustTypeJoined, _ODTrustTypeUsingCredentials ]
     objc-classes:    [ ODAttributeMap, ODConfiguration, ODContext, ODMappings, ODModuleEntry, 
                        ODNode, ODQuery, ODRecord, ODRecordMap, ODSession ]
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 1B85C064-9827-3BAF-9749-2B2DE5D5EBF9' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           1463E726-31AE-338D-B295-06651EE3940E
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           2FCDA80A-2F92-3877-B092-3F741D30CCE0
 install-name:    '/System/Library/Frameworks/OpenDirectory.framework/Versions/A/Frameworks/CFOpenDirectory.framework/Versions/A/CFOpenDirectory'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _ODContextGetTypeID, _ODConvertToLegacyErrorCode, _ODNodeAddAccountPolicy, 
                        _ODNodeCopyAccountPolicies, _ODNodeCopyCredentials, _ODNodeCopyDetails, 
                        _ODNodeCopyPolicies, _ODNodeCopyRecord, _ODNodeCopyRecordAuthenticationData, 
@@ -30,29 +44,31 @@ exports:
                        _ODNodeGetTypeID, _ODNodePasswordContentCheck, _ODNodeRemoveAccountPolicy, 
                        _ODNodeRemovePolicy, _ODNodeReplaceUserRecord, _ODNodeSetAccountPolicies, 
                        _ODNodeSetCredentials, _ODNodeSetCredentialsExtended, _ODNodeSetCredentialsUsingKerberosCache, 
-                       _ODNodeSetCredentialsWithBootstrapToken, _ODNodeSetPolicies, 
-                       _ODNodeSetPolicy, _ODNodeSetSecureTokenRecoveryCloud, _ODNodeSetSecureTokenRecoveryCloudUsingIdentity, 
-                       _ODNodeSetSecureTokenRecoveryMasterPassword, _ODNodeSetSecureTokenRecoveryPersonal, 
-                       _ODNodeSetSecureTokenRecoveryPersonalUsingKey, _ODNodeVerifyCredentialsExtended, 
-                       _ODQueryCopyResults, _ODQueryCreateWithNode, _ODQueryCreateWithNodeType, 
-                       _ODQueryGetTypeID, _ODQueryScheduleWithRunLoop, _ODQuerySetCallback, 
-                       _ODQuerySetDispatchQueue, _ODQuerySynchronize, _ODQueryUnscheduleFromRunLoop, 
-                       _ODRecordAddAccountPolicy, _ODRecordAddMember, _ODRecordAddValue, 
-                       _ODRecordAuthenticationAllowed, _ODRecordChangePassword, _ODRecordContainsMember, 
-                       _ODRecordContainsMemberRefresh, _ODRecordCopyAccountPolicies, 
-                       _ODRecordCopyDetails, _ODRecordCopyEffectivePolicies, _ODRecordCopyPasswordContentSummary, 
-                       _ODRecordCopyPasswordPolicy, _ODRecordCopyPolicies, _ODRecordCopySupportedPolicies, 
-                       _ODRecordCopyValues, _ODRecordDelete, _ODRecordEnumerateMembers, 
-                       _ODRecordEnumerateMembership, _ODRecordGetRecordName, _ODRecordGetRecordType, 
-                       _ODRecordGetTypeID, _ODRecordPasswordChangeAllowed, _ODRecordRemoveAccountPolicy, 
+                       _ODNodeSetCredentialsWithBootstrapToken, _ODNodeSetCredentialsWithSecureToken, 
+                       _ODNodeSetPolicies, _ODNodeSetPolicy, _ODNodeSetSecureTokenRecoveryCloud, 
+                       _ODNodeSetSecureTokenRecoveryCloudUsingIdentity, _ODNodeSetSecureTokenRecoveryMasterPassword, 
+                       _ODNodeSetSecureTokenRecoveryPersonal, _ODNodeSetSecureTokenRecoveryPersonalUsingKey, 
+                       _ODNodeVerifyCredentialsExtended, _ODQueryCopyResults, _ODQueryCreateWithNode, 
+                       _ODQueryCreateWithNodeType, _ODQueryGetTypeID, _ODQueryScheduleWithRunLoop, 
+                       _ODQuerySetCallback, _ODQuerySetDispatchQueue, _ODQuerySynchronize, 
+                       _ODQueryUnscheduleFromRunLoop, _ODRecordAddAccountPolicy, 
+                       _ODRecordAddMember, _ODRecordAddValue, _ODRecordAuthenticationAllowed, 
+                       _ODRecordChangePassword, _ODRecordContainsMember, _ODRecordContainsMemberRefresh, 
+                       _ODRecordCopyAccountPolicies, _ODRecordCopyDetails, _ODRecordCopyEffectivePolicies, 
+                       _ODRecordCopyPasswordContentSummary, _ODRecordCopyPasswordPolicy, 
+                       _ODRecordCopyPolicies, _ODRecordCopySupportedPolicies, _ODRecordCopyValues, 
+                       _ODRecordDelete, _ODRecordEnumerateMembers, _ODRecordEnumerateMembership, 
+                       _ODRecordGetRecordName, _ODRecordGetRecordType, _ODRecordGetTypeID, 
+                       _ODRecordPasswordChangeAllowed, _ODRecordRemoveAccountPolicy, 
                        _ODRecordRemoveMember, _ODRecordRemovePolicy, _ODRecordRemoveValue, 
                        _ODRecordSecondsUntilAuthenticationsExpire, _ODRecordSecondsUntilPasswordExpires, 
                        _ODRecordSetAccountPolicies, _ODRecordSetNodeCredentials, 
                        _ODRecordSetNodeCredentialsExtended, _ODRecordSetNodeCredentialsUsingKerberosCache, 
-                       _ODRecordSetPolicies, _ODRecordSetPolicy, _ODRecordSetValue, 
-                       _ODRecordSynchronize, _ODRecordVerifyPassword, _ODRecordVerifyPasswordExtended, 
-                       _ODRecordWillAuthenticationsExpire, _ODRecordWillPasswordExpire, 
-                       _ODSessionCopyNodeNames, _ODSessionCopySessionKeySupport, 
+                       _ODRecordSetNodeCredentialsWithBootstrapToken, _ODRecordSetPolicies, 
+                       _ODRecordSetPolicy, _ODRecordSetValue, _ODRecordSynchronize, 
+                       _ODRecordVerifyPassword, _ODRecordVerifyPasswordExtended, 
+                       _ODRecordVerifyPasswordWithOptions, _ODRecordWillAuthenticationsExpire, 
+                       _ODRecordWillPasswordExpire, _ODSessionCopyNodeNames, _ODSessionCopySessionKeySupport, 
                        _ODSessionCreate, _ODSessionCreateWithDSRef, _ODSessionGetDSRef, 
                        _ODSessionGetTypeID, _ODSessionIsProxy, _ODSessionNodeNameIsLocal, 
                        _ODSessionProxyAuthorizationForm, _ODTriggerCancel, _ODTriggerCreateForNodes, 
@@ -240,5 +256,5 @@ exports:
                        _kODRecordTypeServices, _kODRecordTypeSharePoints, _kODRecordTypeUserAuthenticationData, 
                        _kODRecordTypeUsers, _kODRecordTypeWebServer, _kODSessionDefault, 
                        _kODSessionLocalPath, _kODSessionProxyAddress, _kODSessionProxyPassword, 
-                       _kODSessionProxyPort, _kODSessionProxyUsername ]
+                       _kODSessionProxyPort, _kODSessionProxyUsername, _kODVerifyPasswordOptionAdditionalACMData ]
 ...

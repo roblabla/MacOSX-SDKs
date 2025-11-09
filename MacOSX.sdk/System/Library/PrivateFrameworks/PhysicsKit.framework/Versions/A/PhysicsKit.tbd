@@ -1,11 +1,28 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 013CFCF4-E65E-3ABA-A931-D181803B2D74', 'x86_64: 013CFCF4-E65E-3ABA-A931-D181803B2D74' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           9EAE8862-F715-3957-8D2D-DEF7B7502E8F
+  - target:          x86_64-maccatalyst
+    value:           9EAE8862-F715-3957-8D2D-DEF7B7502E8F
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           C2331CE5-D956-3201-A1DA-8EC680BD97E7
+  - target:          arm64e-maccatalyst
+    value:           C2331CE5-D956-3201-A1DA-8EC680BD97E7
 install-name:    '/System/Library/PrivateFrameworks/PhysicsKit.framework/Versions/A/PhysicsKit'
-current-version: 28
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 32
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
+    weak-symbols:    [ __ZTINSt3__117bad_function_callE, __ZTSNSt3__114default_deleteI6PKPathEE, 
+                       __ZTSNSt3__117bad_function_callE ]
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _PKArrayFromB2ChainShape, _PKArrayFromB2PolygonShape, _PKArrayFromCGPath, 
                        _PKArrayFromPKPath, _PKCGPathCreateFromArray, _PKCGPointFromString, 
                        _PKGetLinkedOnOrAfter, _PKGet_INV_PTM_RATIO, _PKGet_PTM_RATIO, 
@@ -93,6 +110,4 @@ exports:
                        PKPhysicsJointPrismatic, PKPhysicsJointRevolute, PKPhysicsJointRope, 
                        PKPhysicsJointWeld, PKPhysicsWorld, PKQuadTree, PKRegion ]
     objc-ivars:      [ PKQuadTree.quadTree ]
-    weak-def-symbols: [ __ZTINSt3__117bad_function_callE, __ZTSNSt3__114default_deleteI6PKPathEE, 
-                        __ZTSNSt3__117bad_function_callE ]
 ...

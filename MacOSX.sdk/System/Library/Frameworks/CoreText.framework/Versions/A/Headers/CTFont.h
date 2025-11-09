@@ -2,7 +2,7 @@
  *  CTFont.h
  *  CoreText
  *
- *  Copyright (c) 2006-2019 Apple Inc. All rights reserved.
+ *  Copyright (c) 2006-2020 Apple Inc. All rights reserved.
  *
  */
 
@@ -151,10 +151,10 @@ CT_EXPORT const CFStringRef kCTFontPostScriptCIDNameKey CT_AVAILABLE(macos(10.5)
     @function   CTFontCreateWithName
     @abstract   Returns a new font reference for the given name.
 
-    @discussion This function uses font descriptor matching so only registered fonts can be returned; see CTFontManager.h for more information.
+    @discussion This function uses font descriptor matching so only registered fonts can be returned; see CTFontManager.h for more information. If you are trying to create a system UI font (with name beginning with a "."), you should use CTFontCreateUIFontForLanguage() or appropriate AppKit/UIKit APIs instead.
 
     @param      name
-                The font name for which you wish to create a new font reference. A valid PostScript name is preferred, although other font name types will be matched in a fallback manner.
+                The font name for which you wish to create a new font reference. A valid PostScript name is preferred, although other font name types will be matched in a fallback manner. Any font name beginning with a "." is reserved for the system and should not be used here.
 
     @param      size
                 The point size for the font reference. If 0.0 is specified, the default font size of 12.0 will be used.
@@ -208,10 +208,10 @@ typedef CF_OPTIONS(CFOptionFlags, CTFontOptions) {
     @function   CTFontCreateWithNameAndOptions
     @abstract   Returns a new font reference for the given name.
 
-    @discussion This function uses font descriptor matching so only registered fonts can be returned; see CTFontManager.h for more information.
+    @discussion This function uses font descriptor matching so only registered fonts can be returned; see CTFontManager.h for more information. If you are trying to create a system UI font (with name beginning with a "."), you should use CTFontCreateUIFontForLanguage() or appropriate AppKit/UIKit APIs instead.
 
     @param      name
-                The font name for which you wish to create a new font reference. A valid PostScript name is preferred, although other font name types will be matched in a fallback manner.
+                The font name for which you wish to create a new font reference. A valid PostScript name is preferred, although other font name types will be matched in a fallback manner. Any font name beginning with a "." is reserved for the system and should not be used here.
 
     @param      size
                 The point size for the font reference. If 0.0 is specified, the default font size of 12.0 will be used.
@@ -877,6 +877,24 @@ CGGlyph CTFontGetGlyphWithName(
     CFStringRef         glyphName ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
+    @function   CTFontCopyNameForGlyph
+    @abstract   Returns the name for the specified glyph.
+
+    @param      font
+                The font reference.
+
+    @param      glyph
+                The glyph.
+
+    @result     The glyph name as a CFString or NULL if the glyph is invalid.
+
+    @seealso    CTFontGetGlyphWithName
+*/
+CFStringRef _Nullable CTFontCopyNameForGlyph(
+    CTFontRef           font,
+    CGGlyph             glyph ) CT_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
+
+/*!
     @function   CTFontGetBoundingRectsForGlyphs
     @abstract   Calculates the bounding rects for an array of glyphs and returns the overall bounding rect for the run.
 
@@ -1238,7 +1256,7 @@ typedef UInt32 ATSFontRef;
 
 ATSFontRef CTFontGetPlatformFont(
     CTFontRef               font,
-    CTFontDescriptorRef _Nullable * _Nullable attributes ) CT_AVAILABLE(macos(10.5)) CT_UNAVAILABLE(ios, watchos, tvos);
+    CTFontDescriptorRef _Nullable * _Nullable attributes ) CT_DEPRECATED("ATS is deprecated", macos(10.5, 11.0)) CT_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
     @function   CTFontCreateWithPlatformFont
@@ -1262,7 +1280,7 @@ CTFontRef _Nullable CTFontCreateWithPlatformFont(
     ATSFontRef                  platformFont,
     CGFloat                     size,
     const CGAffineTransform * _Nullable matrix,
-    CTFontDescriptorRef _Nullable attributes ) CT_AVAILABLE(macos(10.5)) CT_UNAVAILABLE(ios, watchos, tvos);
+    CTFontDescriptorRef _Nullable attributes ) CT_DEPRECATED("ATS is deprecated", macos(10.5, 11.0)) CT_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
     @function   CTFontCreateWithQuickdrawInstance
@@ -1293,6 +1311,9 @@ CTFontRef CTFontCreateWithQuickdrawInstance(
 /*! --------------------------------------------------------------------------
     @group Font Tables
 *///--------------------------------------------------------------------------
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wfour-char-constants"
 
 enum {
     kCTFontTableBASE    = 'BASE',   // Baseline data
@@ -1371,6 +1392,7 @@ enum {
     kCTFontTableXref    = 'xref'    // Cross-reference
 };
 typedef FourCharCode CTFontTableTag;
+#pragma clang diagnostic pop
 
 typedef CF_OPTIONS(uint32_t, CTFontTableOptions) {
     kCTFontTableOptionNoOptions = 0,

@@ -5,6 +5,7 @@
 //  Copyright (c) 2012 Apple Inc. All rights reserved.
 //
 
+#if !TARGET_OS_MACCATALYST
 #ifndef GKDialogController_h
 #define GKDialogController_h
 
@@ -30,4 +31,5 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
+#endif
 #endif

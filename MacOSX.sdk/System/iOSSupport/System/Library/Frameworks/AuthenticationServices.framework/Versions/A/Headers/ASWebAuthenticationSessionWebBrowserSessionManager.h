@@ -5,8 +5,7 @@
 //  Copyright © 2019 Apple Inc. All rights reserved.
 //
 
-#import "ASWebAuthenticationSessionWebBrowserSessionHandling.h"
-#import "ASFoundation.h"
+#import <AuthenticationServices/ASWebAuthenticationSessionWebBrowserSessionHandling.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

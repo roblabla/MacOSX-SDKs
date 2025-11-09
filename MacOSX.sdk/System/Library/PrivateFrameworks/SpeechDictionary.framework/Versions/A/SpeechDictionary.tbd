@@ -1,10 +1,19 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 6AFB21E2-03A7-3182-A920-2D3779CC461C' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           9DDA0E9D-9932-3810-8713-6861E705BED5
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           D63F4F71-5513-3F8B-B89F-F4CE785791EF
 install-name:    '/System/Library/PrivateFrameworks/SpeechDictionary.framework/Versions/A/SpeechDictionary'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos ]
+    weak-symbols:    [ __ZTI16SLMappedFileDict, __ZTI5SLPOS, __ZTI8SLPOSEng, __ZTI9SLPhonEng, 
+                       __ZTS16SLMappedFileDict, __ZTS5SLPOS, __ZTS8SLPOSEng, __ZTS9SLPhonEng ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _SLHomographCopyTune, _SLHomographGetPOS, _SLHomographGetPhonemes, 
                        _SLHomographGetTags, _SLTokenAddHomographs, _SLTokenCountHomographs, 
                        _SLTokenCreateFromBuffer, _SLTokenCreateTemp, _SLTokenGetClass, 
@@ -160,6 +169,4 @@ exports:
                        __ZTV25SLWordBuilderPhonemeProxy, __ZTV7SLLexer, __ZpLR12SLWordTagSetRKS_, 
                        _kCFTuneDurationKey, _kCFTuneLocationKey, _kCFTunePitchKey, 
                        _kCFTunePitchTargetsKey ]
-    weak-def-symbols: [ __ZTI16SLMappedFileDict, __ZTI5SLPOS, __ZTI8SLPOSEng, __ZTI9SLPhonEng, 
-                        __ZTS16SLMappedFileDict, __ZTS5SLPOS, __ZTS8SLPOSEng, __ZTS9SLPhonEng ]
 ...

@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Provides context for the update process when the progress or completion handlers are invoked.
  */
 ML_EXPORT
-API_AVAILABLE(macos(10.15), ios(13.0))
+API_AVAILABLE(macos(10.15), ios(13.0), tvos(14.0))
 @interface MLUpdateContext : NSObject
 
 // Reference to the update task that invokved the progress or completion handlers.

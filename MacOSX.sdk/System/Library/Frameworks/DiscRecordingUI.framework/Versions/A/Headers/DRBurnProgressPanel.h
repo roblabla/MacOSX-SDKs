@@ -37,6 +37,11 @@
 #import <Cocoa/Cocoa.h>
 #import <DiscRecording/DiscRecording.h>
 #import <AvailabilityMacros.h>
+#import <Availability.h>
+
+
+API_UNAVAILABLE_BEGIN(ios)
+
 
 /*!
 	@const		DRBurnProgressPanelWillBeginNotification
@@ -231,3 +236,6 @@ AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 - (BOOL) burnProgressPanel:(DRBurnProgressPanel*)theBurnPanel burnDidFinish:(DRBurn*)burn;
 
 @end
+
+
+API_UNAVAILABLE_END

@@ -12,13 +12,13 @@
 #import <AppKit/NSMenuItem.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSEvent, NSView, NSFont;
 @class NSMenu;
 @protocol NSMenuDelegate;
 
-@interface NSMenu : NSObject <NSCopying, NSCoding, NSUserInterfaceItemIdentification, NSAccessibilityElement, NSAccessibility>
+@interface NSMenu : NSObject <NSCopying, NSCoding, NSUserInterfaceItemIdentification, NSAppearanceCustomization, NSAccessibilityElement, NSAccessibility>
 
 /* Designated initializer.  If this menu is used as a submenu of an item in the application's main menu, then the title is what appears in the menu bar.  Otherwise, the title is ignored.  Do not pass nil (an exception will result), but you may pass an empty string.
  */
@@ -167,7 +167,7 @@ API_UNAVAILABLE_BEGIN(ios)
 
 #if __swift__ < 40200
 @interface NSObject (NSMenuValidation)
-- (BOOL)validateMenuItem:(NSMenuItem *)menuItem API_DEPRECATED("This is now a method of the NSMenuItemValidation protocol.", macos(10.0,API_TO_BE_DEPRECATED));
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem API_DEPRECATED("This is now a method of the NSMenuItemValidation protocol.", macos(10.0, 11.0));
 @end
 #endif
 

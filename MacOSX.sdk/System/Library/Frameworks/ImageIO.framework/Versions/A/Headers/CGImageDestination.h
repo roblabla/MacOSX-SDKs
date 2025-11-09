@@ -186,6 +186,13 @@ IMAGEIO_EXTERN const CFStringRef kCGImageDestinationDateTime IMAGEIO_AVAILABLE_S
  */
 IMAGEIO_EXTERN const CFStringRef kCGImageDestinationOrientation IMAGEIO_AVAILABLE_STARTING(10.8, 7.0);
 
+/* For CGImageDestinationAddImageFromSource: when set to kCFBooleanTrue, a HEIF-embedded GainMap will be preserved.
+ * If the destination image is scaled (using kCGImageDestinationImageMaxPixelSize), the GainMap will be scaled accordingly.
+ * The value should be kCFBooleanTrue or kCFBooleanFalse
+ * Defaults to kCFBooleanFalse
+ */
+IMAGEIO_EXTERN const CFStringRef kCGImageDestinationPreserveGainMap IMAGEIO_AVAILABLE_STARTING(11.0, 14.1);
+
 CF_ASSUME_NONNULL_END
 
 /* Losslessly copies the contents of the image source, 'isrc', to the 
@@ -208,7 +215,6 @@ IMAGEIO_EXTERN bool CGImageDestinationCopyImageSource(CGImageDestinationRef _iio
  * To add depth data to an image, call CGImageDestinationAddAuxiliaryDataInfo() after adding the CGImage to the CGImageDestinationRef.
  */
 IMAGEIO_EXTERN void CGImageDestinationAddAuxiliaryDataInfo(CGImageDestinationRef _iio_Nonnull idst, CFStringRef _iio_Nonnull auxiliaryImageDataType, CFDictionaryRef _iio_Nonnull auxiliaryDataInfoDictionary ) IMAGEIO_AVAILABLE_STARTING(10.13, 11.0);
-
 
 CF_IMPLICIT_BRIDGING_DISABLED
 

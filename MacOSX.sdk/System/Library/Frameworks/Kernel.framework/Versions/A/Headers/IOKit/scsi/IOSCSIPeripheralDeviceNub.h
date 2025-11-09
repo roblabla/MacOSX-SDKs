@@ -65,8 +65,7 @@ class SCSIPrimaryCommands;
 //-----------------------------------------------------------------------------
 //	Class Declarations
 //-----------------------------------------------------------------------------
-
-class IOSCSIPeripheralDeviceNub : public IOSCSIProtocolServices
+class __exported IOSCSIPeripheralDeviceNub : public IOSCSIProtocolServices
 {
 	
 	OSDeclareDefaultStructors ( IOSCSIPeripheralDeviceNub )
@@ -173,8 +172,7 @@ private:
 	
 };
 
-
-class IOSCSILogicalUnitNub : public IOSCSIPeripheralDeviceNub
+class __exported IOSCSILogicalUnitNub : public IOSCSIPeripheralDeviceNub
 {
 	
 	OSDeclareDefaultStructors ( IOSCSILogicalUnitNub )

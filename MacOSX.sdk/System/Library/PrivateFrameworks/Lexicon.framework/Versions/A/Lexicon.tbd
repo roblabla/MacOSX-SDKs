@@ -1,11 +1,25 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 99D152C4-84CB-31B2-8C88-EC32A5FE8C4B', 'x86_64: 99D152C4-84CB-31B2-8C88-EC32A5FE8C4B' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           C1E9C173-19E5-3251-AB51-C0A69925F103
+  - target:          x86_64-maccatalyst
+    value:           C1E9C173-19E5-3251-AB51-C0A69925F103
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           DA4C0E92-4F09-3FFA-A2AF-88EBF4967476
+  - target:          arm64e-maccatalyst
+    value:           DA4C0E92-4F09-3FFA-A2AF-88EBF4967476
 install-name:    '/System/Library/PrivateFrameworks/Lexicon.framework/Versions/A/Lexicon'
-current-version: 70
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 86.1
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _LXCompileStemSuffixTokenIDConversionMap, _LXCompileUnigramsFile, 
                        _LXCompileUnigramsFileWithError, _LXCursorConditionalProbability, 
                        _LXCursorCopyFirstEntry, _LXCursorCopyTraversedCharacters, 
@@ -25,16 +39,17 @@ exports:
                        _LXLexiconCopyEntryForTokenID, _LXLexiconCopyName, _LXLexiconCreate, 
                        _LXLexiconCreateMutable, _LXLexiconCreateRootCursor, _LXLexiconCreateTransient, 
                        _LXLexiconEnumerateEntriesForString, _LXLexiconGetFirstTokenIDForString, 
-                       _LXLexiconGetSortkeyBytes, _LXLexiconIncrementPenaltyCount, 
-                       _LXLexiconIncrementUsageCount, _LXLexiconLockMemory, _LXLexiconRemoveEntry, 
-                       _LXLexiconRepositoryAddOrUpdate, _LXLexiconRepositoryCreateView, 
-                       _LXLexiconSerializedSize, _LXLexiconSetUserBitfield, _LXLexiconUnlockMemory, 
-                       _LXLexiconUpdateMetaFlags, _LXLexiconWrite, _LXLexiconWriteDebugDump, 
-                       _LXMutableEntryGetUserBitfield, _LXMutableEntrySetMetaFlags, 
-                       _LXMutableEntryUpdateUsageCount, _LXUnigramsCompilerCopyVersion, 
-                       _kLXLexiconDataFileKey, _kLXLexiconDeltaFilesKey, _kLXLexiconEnableInternalStemSuffixKey, 
-                       _kLXLexiconLocaleKey, _kLXLexiconNameDurableNamedEntity, _kLXLexiconNameKey, 
-                       _kLXLexiconNameRecentNamedEntity, _kLXLexiconNameUserContacts, 
-                       _kLXLexiconResourceDirectoryKey, _kLXMaximumStringLength, 
-                       _kLXMinimumLogProbability, _kLXMinimumStringLength ]
+                       _LXLexiconGetSortkeyBytes, _LXLexiconGetTokenIDForUTF8String, 
+                       _LXLexiconIncrementPenaltyCount, _LXLexiconIncrementUsageCount, 
+                       _LXLexiconLockMemory, _LXLexiconRemoveEntry, _LXLexiconRepositoryAddOrUpdate, 
+                       _LXLexiconRepositoryCreateView, _LXLexiconSerializedSize, 
+                       _LXLexiconSetUserBitfield, _LXLexiconUnlockMemory, _LXLexiconUpdateMetaFlags, 
+                       _LXLexiconWrite, _LXLexiconWriteDebugDump, _LXMutableEntryGetUserBitfield, 
+                       _LXMutableEntrySetMetaFlags, _LXMutableEntryUpdateUsageCount, 
+                       _LXUnigramsCompilerCopyVersion, _kLXLexiconDataFileKey, _kLXLexiconDeltaFilesKey, 
+                       _kLXLexiconEnableInternalStemSuffixKey, _kLXLexiconLocaleKey, 
+                       _kLXLexiconNameDurableNamedEntity, _kLXLexiconNameKey, _kLXLexiconNameRecentNamedEntity, 
+                       _kLXLexiconNameUserContacts, _kLXLexiconTypeKey, _kLXLexiconTypeValuePhrases, 
+                       _kLXLexiconTypeValueUnigrams, _kLXMaximumStringLength, _kLXMinimumLogProbability, 
+                       _kLXMinimumStringLength ]
 ...

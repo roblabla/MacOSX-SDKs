@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 1EAD7EB4-E418-33D2-B85E-38C8B56DC286', 'x86_64: 1EAD7EB4-E418-33D2-B85E-38C8B56DC286' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           2805E483-081C-3EDE-84DE-C44234774119
+  - target:          x86_64-maccatalyst
+    value:           2805E483-081C-3EDE-84DE-C44234774119
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           CAB9BA44-2AD2-3DD4-AC08-AC8DD7022318
+  - target:          arm64e-maccatalyst
+    value:           CAB9BA44-2AD2-3DD4-AC08-AC8DD7022318
 install-name:    '/System/Library/PrivateFrameworks/MetricMeasurement.framework/Versions/A/MetricMeasurement'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _MXMAttributeNameOSSignpostCategory, _MXMAttributeNameOSSignpostIdentifier, 
                        _MXMAttributeNameOSSignpostName, _MXMAttributeNameOSSignpostSubsystem, 
                        _MXMAttributeNameOSSignpostTelemetryNumber1Name, _MXMAttributeNameOSSignpostTelemetryNumber2Name, 
@@ -14,8 +28,9 @@ exports:
                        _MXMAttributeNameThreadIdentifier, _MXMAutomaticDefault, _MXMCPUMetricIdentifier, 
                        _MXMDiskMetricIdentifier, _MXMInstrumentOptionEnableParallelizedSampling, 
                        _MXMInstrumentOptionIterationCount, _MXMInstrumentOptionKickOffThreadIdentifier, 
-                       _MXMInstrumentOptionScheduleKickOffOnNewThread, _MXMMemoryMetricIdentifier, 
-                       _MXMMetricIdentifierClock, _MXMMetricIdentifierOSSignpost, 
+                       _MXMInstrumentOptionPerformanceTraceEnabled, _MXMInstrumentOptionQuiesceCpuIdlePercent, 
+                       _MXMInstrumentOptionQuiesceCpuIdleTimeLimit, _MXMInstrumentOptionScheduleKickOffOnNewThread, 
+                       _MXMMemoryMetricIdentifier, _MXMMetricIdentifierClock, _MXMMetricIdentifierOSSignpost, 
                        _MXMNetworkMetricIdentifier, _MetricMeasurementVersionNumber, 
                        _MetricMeasurementVersionString, __MXMGetInstrumentsLog, __MXMGetLog, 
                        _kMXMOSLogProbeDidUpdateConnectedDevicesList ]
@@ -29,6 +44,6 @@ exports:
                        MXMSample, MXMSampleAttribute, MXMSampleAttributeFilter, MXMSampleData, 
                        MXMSampleFilter, MXMSampleSet, MXMSampleTag, MXMSampleTagFilter, 
                        MXMSampleTimeSeries, MXMSystemProbe, MXMSystemSampleTag, MXMUnitCycle, 
-                       MXMUnitInstruction, MXMUnitMemory, MXMUnitPacket, MXMUtilizationSampleTag, 
-                       MXMVirtualMachineProbe ]
+                       MXMUnitFrame, MXMUnitHitch, MXMUnitInstruction, MXMUnitMemory, 
+                       MXMUnitPacket, MXMUtilizationSampleTag, MXMVirtualMachineProbe ]
 ...

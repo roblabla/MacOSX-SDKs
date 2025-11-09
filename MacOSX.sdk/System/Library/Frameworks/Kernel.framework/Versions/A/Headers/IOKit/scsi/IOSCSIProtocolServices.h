@@ -77,7 +77,7 @@ class SCSITask;
  them to the native command type for the native protocol interface
  (e.g. SBP-2 ORB on FireWire).
  */
-class IOSCSIProtocolServices : public IOSCSIProtocolInterface
+class __exported IOSCSIProtocolServices : public IOSCSIProtocolInterface
 {
 	
 	OSDeclareAbstractStructors ( IOSCSIProtocolServices )

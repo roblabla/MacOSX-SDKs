@@ -400,6 +400,7 @@ FOUNDATION_EXPORT const float NSURLSessionTaskPriorityHigh API_AVAILABLE(macos(1
  * functionality over an NSURLSessionTask and its presence is merely
  * to provide lexical differentiation from download and upload tasks.
  */
+API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
 @interface NSURLSessionDataTask : NSURLSessionTask
 
 - (instancetype)init API_DEPRECATED("Please use -[NSURLSession dataTaskWithRequest:] or other NSURLSession methods to create instances", macos(10.9,10.15), ios(7.0,13.0), watchos(2.0,6.0), tvos(9.0,13.0));
@@ -413,6 +414,7 @@ FOUNDATION_EXPORT const float NSURLSessionTaskPriorityHigh API_AVAILABLE(macos(1
  * that may be sent referencing an NSURLSessionDataTask equally apply
  * to NSURLSessionUploadTasks.
  */
+API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
 @interface NSURLSessionUploadTask : NSURLSessionDataTask
 
 - (instancetype)init API_DEPRECATED("Please use -[NSURLSession uploadTaskWithStreamedRequest:] or other NSURLSession methods to create instances", macos(10.9,10.15), ios(7.0,13.0), watchos(2.0,6.0), tvos(9.0,13.0));
@@ -424,6 +426,7 @@ FOUNDATION_EXPORT const float NSURLSessionTaskPriorityHigh API_AVAILABLE(macos(1
  * NSURLSessionDownloadTask is a task that represents a download to
  * local storage.
  */
+API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
 @interface NSURLSessionDownloadTask : NSURLSessionTask
 
 /* Cancel the download (and calls the superclass -cancel).  If
@@ -728,8 +731,10 @@ API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
  * Allows the app to be resumed or launched in the background when tasks in background sessions complete
  * or when auth is required. This only applies to configurations created with +backgroundSessionConfigurationWithIdentifier:
  * and the default value is YES.
+ *
+ * NOTE: macOS apps based on AppKit do not support background launch.
  */
-@property BOOL sessionSendsLaunchEvents API_AVAILABLE(ios(7.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
+@property BOOL sessionSendsLaunchEvents API_AVAILABLE(macos(11.0), ios(7.0), watchos(2.0), tvos(9.0));
 
 /* The proxy dictionary, as described by <CFNetwork/CFHTTPStream.h> */
 @property (nullable, copy) NSDictionary *connectionProxyDictionary;
@@ -829,6 +834,7 @@ typedef NS_ENUM(NSInteger, NSURLSessionResponseDisposition) {
 /*
  * Messages related to the URL session as a whole
  */
+API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
 @protocol NSURLSessionDelegate <NSObject>
 @optional
 
@@ -858,13 +864,14 @@ typedef NS_ENUM(NSInteger, NSURLSessionResponseDisposition) {
  * completion handler, or to begin any internal updates that will
  * result in invoking the completion handler.
  */
-- (void)URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *)session API_AVAILABLE(ios(7.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
+- (void)URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *)session API_AVAILABLE(macos(11.0), ios(7.0), watchos(2.0), tvos(9.0));
 
 @end
 
 /*
  * Messages related to the operation of a specific task.
  */
+API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
 @protocol NSURLSessionTaskDelegate <NSURLSessionDelegate>
 @optional
 
@@ -964,6 +971,7 @@ typedef NS_ENUM(NSInteger, NSURLSessionResponseDisposition) {
  * Messages related to the operation of a task that delivers data
  * directly to the delegate.
  */
+API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
 @protocol NSURLSessionDataDelegate <NSURLSessionTaskDelegate>
 @optional
 /* The task has received a response and no further messages will be
@@ -1001,7 +1009,8 @@ typedef NS_ENUM(NSInteger, NSURLSessionResponseDisposition) {
  * connections per host.
  */
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask
-                                didBecomeStreamTask:(NSURLSessionStreamTask *)streamTask;
+                                didBecomeStreamTask:(NSURLSessionStreamTask *)streamTask
+    API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 /* Sent when data is available for the delegate to consume.  It is
  * assumed that the delegate will retain and not copy the data.  As
@@ -1027,6 +1036,7 @@ typedef NS_ENUM(NSInteger, NSURLSessionResponseDisposition) {
  * Messages related to the operation of a task that writes data to a
  * file and notifies the delegate upon completion.
  */
+API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
 @protocol NSURLSessionDownloadDelegate <NSURLSessionTaskDelegate>
 
 /* Sent when a download task that has completed a download.  The delegate should 
@@ -1055,6 +1065,7 @@ typedef NS_ENUM(NSInteger, NSURLSessionResponseDisposition) {
 
 @end
 
+API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 @protocol NSURLSessionStreamDelegate <NSURLSessionTaskDelegate>
 @optional
 
@@ -1126,6 +1137,17 @@ typedef NS_ENUM(NSInteger, NSURLSessionTaskMetricsResourceFetchType) {
     NSURLSessionTaskMetricsResourceFetchTypeServerPush,    /* The resource was pushed by the server to the client. */
     NSURLSessionTaskMetricsResourceFetchTypeLocalCache,    /* The resource was retrieved from the local storage. */
 } API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));
+
+/*
+ * DNS protocol used for domain resolution.
+ */
+typedef NS_ENUM(NSInteger, NSURLSessionTaskMetricsDomainResolutionProtocol) {
+    NSURLSessionTaskMetricsDomainResolutionProtocolUnknown,
+    NSURLSessionTaskMetricsDomainResolutionProtocolUDP,     /* Resolution used DNS over UDP. */
+    NSURLSessionTaskMetricsDomainResolutionProtocolTCP,     /* Resolution used DNS over TCP. */
+    NSURLSessionTaskMetricsDomainResolutionProtocolTLS,     /* Resolution used DNS over TLS. */
+    NSURLSessionTaskMetricsDomainResolutionProtocolHTTPS,   /* Resolution used DNS over HTTPS. */
+} API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
 
 /*
  * This class defines the performance metrics collected for a request/response transaction during the task execution.
@@ -1362,6 +1384,11 @@ API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0))
  * Whether a multipath protocol is successfully negotiated for the connection.
  */
 @property (readonly, getter=isMultipath) BOOL multipath API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/*
+ * DNS protocol used for domain resolution.
+ */
+@property (readonly) NSURLSessionTaskMetricsDomainResolutionProtocol domainResolutionProtocol API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
 
 
 - (instancetype)init API_DEPRECATED("Not supported", macos(10.12,10.15), ios(10.0,13.0), watchos(3.0,6.0), tvos(10.0,13.0));

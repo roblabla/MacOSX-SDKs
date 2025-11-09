@@ -2,7 +2,7 @@
 //  GKTurnBasedMatchmakerViewController.h
 //  Game Center
 //
-//  Copyright 2010-2019 Apple Inc. All rights reserved.
+//  Copyright 2010-2020 Apple Inc. All rights reserved.
 //
 
 @protocol GKTurnBasedMatchmakerViewControllerDelegate;
@@ -11,7 +11,7 @@
 
 @protocol GKTurnBasedMatchmakerViewControllerDelegate;
 
-// View controller to manage turn-based matches, invite friends and perform auto-matching. Present modally from the top view controller.
+/// View controller to manage turn-based matches, invite friends and perform auto-matching. Present modally from the top view controller.
 #if TARGET_OS_IPHONE
 
 #import <Foundation/Foundation.h> // NS_ASSUME_NONNULL_BEGIN
@@ -25,20 +25,14 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
 #import <GameKit/GKDialogController.h>
 NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_8, 5_0)
-@interface GKTurnBasedMatchmakerViewController : NSViewController <GKViewController> {
-    id _remoteViewController;
-    id<GKTurnBasedMatchmakerViewControllerDelegate> __weak _turnBasedMatchmakerDelegate;
-    GKMatchRequest *_matchRequest;
-    BOOL _showExistingMatches;
-    BOOL _internalFlag;
-}
+@interface GKTurnBasedMatchmakerViewController : NSViewController <GKViewController>
 @end
 #endif
 
 @interface GKTurnBasedMatchmakerViewController ()
 
 @property (nonatomic, nullable, readwrite, weak) id<GKTurnBasedMatchmakerViewControllerDelegate> turnBasedMatchmakerDelegate;
-@property (nonatomic, readwrite, assign) BOOL showExistingMatches; // defaults to YES
+@property (nonatomic, readwrite, assign) BOOL showExistingMatches; /// defaults to YES
 
 - (id)initWithMatchRequest:(GKMatchRequest *)request;
 
@@ -47,10 +41,10 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
 @protocol GKTurnBasedMatchmakerViewControllerDelegate <NSObject>
 @required
 
-// The user has cancelled
+/// The user has cancelled
 - (void)turnBasedMatchmakerViewControllerWasCancelled:(GKTurnBasedMatchmakerViewController *)viewController NS_AVAILABLE(10_8, 5_0);
 
-// Matchmaking has failed with an error
+/// Matchmaking has failed with an error
 - (void)turnBasedMatchmakerViewController:(GKTurnBasedMatchmakerViewController *)viewController didFailWithError:(NSError *)error NS_AVAILABLE(10_8, 5_0);
 
 

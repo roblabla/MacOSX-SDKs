@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: F8E39ED0-5F79-394B-8422-29830C60EF78' ]
-platform:        uikitformac
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-maccatalyst
+    value:           AF31B965-E9B2-371A-8287-1322E61EFE5D
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-maccatalyst
+    value:           02130568-A9F7-3CB4-9666-A138CB760801
 install-name:    '/System/iOSSupport/System/Library/Frameworks/SceneKit.framework/Versions/A/SceneKit'
-current-version: 540
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 557.1
+exports:
+  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _C3DGetFileDecryptionCallbacks, _C3DSetFileDecryptionCallbacks, 
                        _SCNAnimationCommitOnCompletion, _SCNBindingValueTransformerKey, 
                        _SCNCaptureDeviceOutputConsumerOptionContainsAlpha, _SCNConsistencyElementIDErrorKey, 
@@ -139,4 +145,7 @@ exports:
                        SCNSphere, SCNStatisticsProvider, SCNTechnique, SCNText, SCNTextureSource, 
                        SCNTimingFunction, SCNTorus, SCNTransaction, SCNTransformConstraint, 
                        SCNTube, SCNView, _SCNShadableCompilationIssue ]
+  - targets:         [ arm64e-maccatalyst, arm64-maccatalyst ]
+    symbols:         [ _SCNMatrix4FromGLKMatrix4, _SCNMatrix4ToGLKMatrix4, _SCNPreferredRenderingAPIKey, 
+                       _SCNViewOptionPreferredRenderingAPI ]
 ...

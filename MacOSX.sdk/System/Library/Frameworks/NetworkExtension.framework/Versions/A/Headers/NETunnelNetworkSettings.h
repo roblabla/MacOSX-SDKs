@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Instances of this class are thread safe.
  */
-API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
+API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface NETunnelNetworkSettings : NSObject <NSSecureCoding,NSCopying>
 
 /*!
@@ -31,25 +31,25 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
  * @discussion This function initializes a newly-allocated NETunnelNetworkSettings object with a given tunnel remote address.
  * @param address The address of the remote endpoint that is providing the tunnel service.
  */
-- (instancetype)initWithTunnelRemoteAddress:(NSString *)address API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+- (instancetype)initWithTunnelRemoteAddress:(NSString *)address API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @property tunnelRemoteAddress
  * @discussion A string containing the IP address of the remote endpoint that is providing the tunnel service.
  */
-@property (readonly) NSString *tunnelRemoteAddress API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+@property (readonly) NSString *tunnelRemoteAddress API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @property DNSSettings
  * @discussion An NEDNSSettings object that contains the desired tunnel DNS settings.
  */
-@property (copy, nullable) NEDNSSettings *DNSSettings API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+@property (copy, nullable) NEDNSSettings *DNSSettings API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @property proxySettings
  * @discussion An NEProxySettings object that contains the desired tunnel proxy settings.
  */
-@property (copy, nullable) NEProxySettings *proxySettings API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+@property (copy, nullable) NEProxySettings *proxySettings API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 @end
 

@@ -77,18 +77,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NSString *CHHapticEventParameterID NS_TYPED_ENUM;
 
-CH_EXPORT CHHapticEventParameterID CHHapticEventParameterIDHapticIntensity API_AVAILABLE(ios(13.0), macos(10.15));
-CH_EXPORT CHHapticEventParameterID CHHapticEventParameterIDHapticSharpness API_AVAILABLE(ios(13.0), macos(10.15));
+CH_EXPORT CHHapticEventParameterID CHHapticEventParameterIDHapticIntensity API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
+CH_EXPORT CHHapticEventParameterID CHHapticEventParameterIDHapticSharpness API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
 
-CH_EXPORT CHHapticEventParameterID CHHapticEventParameterIDAttackTime API_AVAILABLE(ios(13.0), macos(10.15));
-CH_EXPORT CHHapticEventParameterID CHHapticEventParameterIDDecayTime API_AVAILABLE(ios(13.0), macos(10.15));
-CH_EXPORT CHHapticEventParameterID CHHapticEventParameterIDReleaseTime API_AVAILABLE(ios(13.0), macos(10.15));
-CH_EXPORT CHHapticEventParameterID CHHapticEventParameterIDSustained API_AVAILABLE(ios(13.0), macos(10.15));
+CH_EXPORT CHHapticEventParameterID CHHapticEventParameterIDAttackTime API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
+CH_EXPORT CHHapticEventParameterID CHHapticEventParameterIDDecayTime API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
+CH_EXPORT CHHapticEventParameterID CHHapticEventParameterIDReleaseTime API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
+CH_EXPORT CHHapticEventParameterID CHHapticEventParameterIDSustained API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
 
-CH_EXPORT CHHapticEventParameterID CHHapticEventParameterIDAudioVolume API_AVAILABLE(ios(13.0), macos(10.15));
-CH_EXPORT CHHapticEventParameterID CHHapticEventParameterIDAudioPitch API_AVAILABLE(ios(13.0), macos(10.15));
-CH_EXPORT CHHapticEventParameterID CHHapticEventParameterIDAudioPan API_AVAILABLE(ios(13.0), macos(10.15));
-CH_EXPORT CHHapticEventParameterID CHHapticEventParameterIDAudioBrightness API_AVAILABLE(ios(13.0), macos(10.15));
+CH_EXPORT CHHapticEventParameterID CHHapticEventParameterIDAudioVolume API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
+CH_EXPORT CHHapticEventParameterID CHHapticEventParameterIDAudioPitch API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
+CH_EXPORT CHHapticEventParameterID CHHapticEventParameterIDAudioPan API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
+CH_EXPORT CHHapticEventParameterID CHHapticEventParameterIDAudioBrightness API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
 
 /*!	@enum CHHapticDynamicParameterID
 	@abstract
@@ -160,19 +160,19 @@ CH_EXPORT CHHapticEventParameterID CHHapticEventParameterIDAudioBrightness API_A
 
 typedef NSString *CHHapticDynamicParameterID NS_TYPED_ENUM;
 
-CH_EXPORT CHHapticDynamicParameterID CHHapticDynamicParameterIDHapticIntensityControl API_AVAILABLE(ios(13.0), macos(10.15));
-CH_EXPORT CHHapticDynamicParameterID CHHapticDynamicParameterIDHapticSharpnessControl API_AVAILABLE(ios(13.0), macos(10.15));
-CH_EXPORT CHHapticDynamicParameterID CHHapticDynamicParameterIDHapticAttackTimeControl API_AVAILABLE(ios(13.0), macos(10.15));
-CH_EXPORT CHHapticDynamicParameterID CHHapticDynamicParameterIDHapticDecayTimeControl API_AVAILABLE(ios(13.0), macos(10.15));
-CH_EXPORT CHHapticDynamicParameterID CHHapticDynamicParameterIDHapticReleaseTimeControl API_AVAILABLE(ios(13.0), macos(10.15));
+CH_EXPORT CHHapticDynamicParameterID CHHapticDynamicParameterIDHapticIntensityControl API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
+CH_EXPORT CHHapticDynamicParameterID CHHapticDynamicParameterIDHapticSharpnessControl API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
+CH_EXPORT CHHapticDynamicParameterID CHHapticDynamicParameterIDHapticAttackTimeControl API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
+CH_EXPORT CHHapticDynamicParameterID CHHapticDynamicParameterIDHapticDecayTimeControl API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
+CH_EXPORT CHHapticDynamicParameterID CHHapticDynamicParameterIDHapticReleaseTimeControl API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
 
-CH_EXPORT CHHapticDynamicParameterID CHHapticDynamicParameterIDAudioVolumeControl API_AVAILABLE(ios(13.0), macos(10.15));
-CH_EXPORT CHHapticDynamicParameterID CHHapticDynamicParameterIDAudioPanControl API_AVAILABLE(ios(13.0), macos(10.15));
-CH_EXPORT CHHapticDynamicParameterID CHHapticDynamicParameterIDAudioBrightnessControl API_AVAILABLE(ios(13.0), macos(10.15));
-CH_EXPORT CHHapticDynamicParameterID CHHapticDynamicParameterIDAudioPitchControl API_AVAILABLE(ios(13.0), macos(10.15));
-CH_EXPORT CHHapticDynamicParameterID CHHapticDynamicParameterIDAudioAttackTimeControl API_AVAILABLE(ios(13.0), macos(10.15));
-CH_EXPORT CHHapticDynamicParameterID CHHapticDynamicParameterIDAudioDecayTimeControl API_AVAILABLE(ios(13.0), macos(10.15));
-CH_EXPORT CHHapticDynamicParameterID CHHapticDynamicParameterIDAudioReleaseTimeControl API_AVAILABLE(ios(13.0), macos(10.15));
+CH_EXPORT CHHapticDynamicParameterID CHHapticDynamicParameterIDAudioVolumeControl API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
+CH_EXPORT CHHapticDynamicParameterID CHHapticDynamicParameterIDAudioPanControl API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
+CH_EXPORT CHHapticDynamicParameterID CHHapticDynamicParameterIDAudioBrightnessControl API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
+CH_EXPORT CHHapticDynamicParameterID CHHapticDynamicParameterIDAudioPitchControl API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
+CH_EXPORT CHHapticDynamicParameterID CHHapticDynamicParameterIDAudioAttackTimeControl API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
+CH_EXPORT CHHapticDynamicParameterID CHHapticDynamicParameterIDAudioDecayTimeControl API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
+CH_EXPORT CHHapticDynamicParameterID CHHapticDynamicParameterIDAudioReleaseTimeControl API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@class CHHapticEventParameter
@@ -180,7 +180,7 @@ CH_EXPORT CHHapticDynamicParameterID CHHapticDynamicParameterIDAudioReleaseTimeC
 		A CHHapticEventParameter contains a CHHapticEventParameterID/value pair which helps determine the initial character
 		of a haptic or audio event.
  */
-CH_EXPORT API_AVAILABLE(ios(13.0), macos(10.15))
+CH_EXPORT API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos)
 @interface CHHapticEventParameter : NSObject
 
 /*!
@@ -209,7 +209,7 @@ CH_EXPORT API_AVAILABLE(ios(13.0), macos(10.15))
 		CHHapticDynamicParameters have a relative time property to allow specifying the time relationship between parameters in a pattern.
  */
 
-CH_EXPORT API_AVAILABLE(ios(13.0), macos(10.15))
+CH_EXPORT API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos)
 @interface CHHapticDynamicParameter : NSObject
 
 /*!	@property parameterID
@@ -251,7 +251,7 @@ CH_EXPORT API_AVAILABLE(ios(13.0), macos(10.15))
  		The relativeTime property specifies the amount of time elapsed since the start of the CHHapticParameterCurve before the
  		value is reached.
  */
-CH_EXPORT API_AVAILABLE(ios(13.0), macos(10.15))
+CH_EXPORT API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos)
 @interface CHHapticParameterCurveControlPoint : NSObject
 
 @property (readwrite) NSTimeInterval	relativeTime;

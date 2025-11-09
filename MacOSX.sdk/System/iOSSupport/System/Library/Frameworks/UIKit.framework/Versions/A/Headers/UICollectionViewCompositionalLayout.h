@@ -28,12 +28,21 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol NSCollectionLayoutContainer;
 @protocol NSCollectionLayoutVisibleItem;
 
+typedef NS_ENUM(NSInteger, UIContentInsetsReference) {
+    UIContentInsetsReferenceAutomatic,               // use system defined default
+    UIContentInsetsReferenceNone,                    // no additional insets
+    UIContentInsetsReferenceSafeArea,                // honor safe area
+    UIContentInsetsReferenceLayoutMargins,           // honor layout margins
+    UIContentInsetsReferenceReadableContent,         // honor readable content
+} API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+
 
 UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
 @interface UICollectionViewCompositionalLayoutConfiguration : NSObject<NSCopying>
-@property(nonatomic) UICollectionViewScrollDirection scrollDirection;           // default is UICollectionViewScrollDirectionVertical
-@property(nonatomic) CGFloat interSectionSpacing;                               // default is 0
+@property(nonatomic) UICollectionViewScrollDirection scrollDirection;                                                       // default is UICollectionViewScrollDirectionVertical
+@property(nonatomic) CGFloat interSectionSpacing;                                                                           // default is 0
 @property(nonatomic,copy) NSArray<NSCollectionLayoutBoundarySupplementaryItem*> *boundarySupplementaryItems;
+@property(nonatomic) UIContentInsetsReference contentInsetsReference API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));    // default is UIContentInsetsReferenceSafeArea
 @end
 
 typedef NSCollectionLayoutSection * _Nullable (^UICollectionViewCompositionalLayoutSectionProvider)(NSInteger section, id<NSCollectionLayoutEnvironment>);
@@ -86,6 +95,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0))
 
 @property(nonatomic) NSDirectionalEdgeInsets contentInsets;
 @property(nonatomic) CGFloat interGroupSpacing;
+
+// default is UIContentInsetsReferenceAutomatic i.e. following the layout configuration's contentInsetsReference
+@property(nonatomic) UIContentInsetsReference contentInsetsReference API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
 
 // default is .none
 @property(nonatomic) UICollectionLayoutSectionOrthogonalScrollingBehavior orthogonalScrollingBehavior;

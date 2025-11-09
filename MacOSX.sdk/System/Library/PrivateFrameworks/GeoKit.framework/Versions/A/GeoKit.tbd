@@ -1,28 +1,34 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: C444FBE4-A362-3FBE-AD9C-43C6CE346FC8' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           3AC86327-7C17-3B36-A988-A35B23231D79
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           62AF9DF7-C0A7-3776-8F8D-8045B1C18A6F
 install-name:    '/System/Library/PrivateFrameworks/GeoKit.framework/Versions/A/GeoKit'
-exports:         
-  - archs:           [ x86_64 ]
-    symbols:         [ _GEOAlignCGPointToUserSpace, _GEOAlignCGRectToUserSpace, _GEOAlignPointToUserSpace, 
-                       _GEOAlignRectToUserSpace, _GEOBundle, _GEOCityCountryCodeKey, 
-                       _GEOCityFormatVersion, _GEOCityGeonameIDKey, _GEOCityLatitudeKey, 
-                       _GEOCityLocalizedNamesKey, _GEOCityLongitudeKey, _GEOCityMapIDKey, 
-                       _GEOCityNameKey, _GEOCityPopulationKey, _GEOCityRegionalCode, 
-                       _GEOCityTimeZoneNameKey, _GEOCopyTimeZoneMaskForTimezone, 
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _GEOAlignPointToUserSpace, _GEOAlignRectToUserSpace, _GEOBundle, 
+                       _GEOCityCountryCodeKey, _GEOCityFormatVersion, _GEOCityGeonameIDKey, 
+                       _GEOCityLatitudeKey, _GEOCityLocalizedNamesKey, _GEOCityLongitudeKey, 
+                       _GEOCityMapIDKey, _GEOCityNameKey, _GEOCityPopulationKey, 
+                       _GEOCityRegionalCode, _GEOCityTimeZoneNameKey, _GEOCopyTimeZoneMaskForTimezone, 
                        _GEOCreateBitmapContext, _GEOCreateImageFromResources, _GEODefaultManagedObjectContext, 
                        _GEODefaultManagedObjectModel, _GEODefaultPersistentStoreCoordinator, 
                        _GEOEmbargo, _GEOErrorLog, _GEOImageWithName, _GEOInvalidLocationCoordinate, 
                        _GEOLocalizableString, _GEOLog, _GEOManagedObjectContext, 
-                       _GEOManagedObjectContextWithPersistentStoreCoordinator, _GEOManagedObjectModel, 
-                       _GEONoticeLog, _GEOPersistentStoreCoordinator, _GEOPersistentStoreCoordinatorWithDatabase, 
-                       _GEOPredicateByAppendingEmbargoPredicate, _GEOResourceURL, 
-                       _GEOSetEmbargo, _GEOStringFromCoordinate, _GEOTimeZoneMaskForTimezone, 
-                       _GEOTimeZoneWhiteAreaForTimezone, _GEOWarningLog, _GEOWhiteImageFromBlack, 
-                       _MIN_LIGHT_INTENSITY, __GEOPinLayerLevel, __GEOPinShadowLayerLevel, 
-                       __GEOPulseLayerLevel, __GEOSelectedCityLayerLevel, ___GEOEmbargo, 
-                       _gLogLevel ]
+                       _GEOManagedObjectContextUsingMainThread, _GEOManagedObjectContextWithPersistentStoreCoordinator, 
+                       _GEOManagedObjectContextWithPersistentStoreCoordinatorUsingMainThread, 
+                       _GEOManagedObjectModel, _GEONoticeLog, _GEOPersistentStoreCoordinator, 
+                       _GEOPersistentStoreCoordinatorWithDatabase, _GEOPredicateByAppendingEmbargoPredicate, 
+                       _GEOResourceURL, _GEOSetEmbargo, _GEOStringFromCoordinate, 
+                       _GEOTimeZoneMaskForTimezone, _GEOTimeZoneWhiteAreaForTimezone, 
+                       _GEOWarningLog, _GEOWhiteImageFromBlack, _MIN_LIGHT_INTENSITY, 
+                       __GEOPinLayerLevel, __GEOPinShadowLayerLevel, __GEOPulseLayerLevel, 
+                       __GEOSelectedCityLayerLevel, ___GEOEmbargo, _gLogLevel ]
     objc-classes:    [ GEOCity, GEOCityName, GEOCityPickerView, GEOCityPickerViewPrivController, 
                        GEOCityProxy, GEOCountry, GEOCountryName, GEODropPinAnimation, 
                        GEOFindCityOperation, GEOPlaceName, GEOPulseLayer, GEOTimezoneHitMap, 

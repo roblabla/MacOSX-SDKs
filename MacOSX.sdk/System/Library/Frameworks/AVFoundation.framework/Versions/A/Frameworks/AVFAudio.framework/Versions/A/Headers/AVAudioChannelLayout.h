@@ -6,7 +6,6 @@
 */
 
 #import <AVFAudio/AVAudioTypes.h>
-#import <CoreAudio/CoreAudioTypes.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

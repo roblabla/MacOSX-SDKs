@@ -264,15 +264,9 @@ extern unsigned int kdebug_enable;
 	        }                                                                      \
 	} while (0)
 
-#define KERNEL_DEBUG_EARLY(x, a, b, c, d)                                 \
-	do {                                                                  \
-	        kernel_debug_early((uint32_t)(x), (uintptr_t)(a), (uintptr_t)(b), \
-	                (uintptr_t)(c), (uintptr_t)(d));                              \
-	} while (0)
 #else /* (KDEBUG_LEVEL >= KDEBUG_LEVEL_STANDARD) */
 #define KERNEL_DEBUG_CONSTANT(x, a, b, c, d, e) do {} while (0)
 #define KERNEL_DEBUG_CONSTANT1(x, a, b, c, d, e) do {} while (0)
-#define KERNEL_DEBUG_EARLY(x, a, b, c, d) do {} while (0)
 #endif /* (KDEBUG_LEVEL >= KDEBUG_LEVEL_STANDARD) */
 
 /*
@@ -294,6 +288,7 @@ extern unsigned int kdebug_enable;
 	                        (uintptr_t)(d), 0);                                           \
 	        }                                                                     \
 	} while (0)
+
 #define KERNEL_DEBUG_CONSTANT_IST1(x, a, b, c, d, e)                     \
 	do {                                                                       \
 	        if (KDBG_IMPROBABLE(kdebug_enable)) {                         \
@@ -301,9 +296,17 @@ extern unsigned int kdebug_enable;
 	                        (uintptr_t)(d), (uintptr_t)(e));                               \
 	        }                                                                      \
 	} while (0)
+
+#define KERNEL_DEBUG_EARLY(x, a, b, c, d)                                 \
+	do {                                                                  \
+	        kernel_debug_early((uint32_t)(x), (uintptr_t)(a), (uintptr_t)(b), \
+	                (uintptr_t)(c), (uintptr_t)(d));                              \
+	} while (0)
+
 #else /* (KDEBUG_LEVEL >= KDEBUG_LEVEL_IST) */
 #define KERNEL_DEBUG_CONSTANT_IST(type, x, a, b, c, d, e) do {} while (0)
 #define KERNEL_DEBUG_CONSTANT_IST1(x, a, b, c, d, e) do {} while (0)
+#define KERNEL_DEBUG_EARLY(x, a, b, c, d) do {} while (0)
 #endif /* (KDEBUG_LEVEL >= KDEBUG_LEVEL_IST) */
 
 #if NO_KDEBUG

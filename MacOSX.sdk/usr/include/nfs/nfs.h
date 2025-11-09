@@ -91,6 +91,7 @@ extern int nfs_ticks;
 #define NFS_MAXATTRTIMO 60
 #define NFS_MINDIRATTRTIMO 5            /* directory attribute cache timeout in sec */
 #define NFS_MAXDIRATTRTIMO 60
+#define NFS_MAXPORT     0xffff
 #define NFS_IOSIZE      (1024 * 1024)   /* suggested I/O size */
 #define NFS_RWSIZE      32768           /* Def. read/write data size <= 32K */
 #define NFS_WSIZE       NFS_RWSIZE      /* Def. write data size <= 32K */
@@ -124,6 +125,8 @@ extern int nfs_ticks;
 #define NFSRV_NDMAXDATA(n) \
 	        (((n)->nd_vers == NFS_VER3) ? (((n)->nd_nam2) ? \
 	         NFS_MAXDGRAMDATA : NFSRV_MAXDATA) : NFS_V2MAXDATA)
+#define NFS_PORT_INVALID(port) \
+	(((port) > NFS_MAXPORT) || ((port) < 0))
 
 /*
  * The IO_METASYNC flag should be implemented for local file systems.
@@ -219,6 +222,25 @@ extern int nfs_ticks;
 #define NFS_LOCK_MODE_DISABLED          1       /* do not support advisory file locking */
 #define NFS_LOCK_MODE_LOCAL             2       /* perform advisory file locking locally */
 
+#define NFS_STRLEN_INT(str) \
+	        (int)strnlen(str, INT_MAX)
+#define NFS_UIO_ADDIOV(a_uio, a_baseaddr, a_length) \
+	        assert(a_length <= UINT32_MAX); uio_addiov(a_uio, a_baseaddr, (uint32_t)(a_length));
+#define NFS_BZERO(off, bytes) \
+	do { \
+	        uint32_t bytes32 = bytes > UINT32_MAX ? UINT32_MAX : (uint32_t)(bytes); \
+	        bzero(off, bytes32); \
+	        if (bytes > UINT32_MAX) { \
+	                bzero(off + bytes32, (uint32_t)(bytes - UINT32_MAX)); \
+	        } \
+	} while(0);
+#define NFS_ZFREE(zone, ptr) \
+	do { \
+	        if ((ptr)) { \
+	                zfree((zone), (ptr)); \
+	                (ptr) = NULL; \
+	        } \
+	} while (0); \
 
 /* Supported encryption types for kerberos session keys */
 typedef enum  nfs_supported_kerberos_etypes {
@@ -242,7 +264,7 @@ struct nfs_etype {
 struct nfs_args {
 	int             version;        /* args structure version number */
 	struct sockaddr *addr;          /* file server address */
-	int             addrlen;        /* length of address */
+	uint8_t         addrlen;        /* length of address */
 	int             sotype;         /* Socket type */
 	int             proto;          /* and Protocol */
 	u_char          *fh;            /* File handle to be mounted */
@@ -350,7 +372,7 @@ struct nfs_exphandle {
 	uint32_t        nxh_expid;              /* Export ID */
 	uint16_t        nxh_flags;              /* export handle flags */
 	uint8_t         nxh_reserved;           /* future use */
-	uint8_t         nxh_fidlen;             /* length of File ID */
+	uint32_t        nxh_fidlen;             /* length of File ID */
 };
 
 /* nxh_flags */
@@ -427,7 +449,7 @@ struct nfs_export_args {
 /* descriptor describing following records */
 struct nfs_export_stat_desc {
 	uint32_t rec_vers;              /* version of export stat records */
-	uint32_t rec_count;             /* total record count */
+	uint64_t rec_count;             /* total record count */
 }__attribute__((__packed__));
 
 /* export stat record containing path and stat counters */
@@ -452,8 +474,8 @@ struct nfs_user_stat_user_rec {
 	uint64_t                ops;
 	uint64_t                bytes_read;
 	uint64_t                bytes_written;
-	uint32_t                tm_start;
-	uint32_t                tm_last;
+	time_t                  tm_start;
+	time_t                  tm_last;
 }__attribute__((__packed__));
 
 /* Active user list path record format */
@@ -547,11 +569,12 @@ struct nfs_testmapid {
 /*
  * fs.nfs sysctl(3) identifiers
  */
-#define NFS_NFSSTATS    1       /* struct: struct nfsstats */
-#define NFS_EXPORTSTATS 3       /* gets exported directory stats */
-#define NFS_USERSTATS   4       /* gets exported directory active user stats */
-#define NFS_USERCOUNT   5       /* gets current count of active nfs users */
-#define NFS_MOUNTINFO   6       /* gets information about an NFS mount */
+#define NFS_NFSSTATS        1       /* struct: struct nfsstats */
+#define NFS_EXPORTSTATS     3       /* gets exported directory stats */
+#define NFS_USERSTATS       4       /* gets exported directory active user stats */
+#define NFS_USERCOUNT       5       /* gets current count of active nfs users */
+#define NFS_MOUNTINFO       6       /* gets information about an NFS mount */
+#define NFS_NFSZEROSTATS    7       /* zero nfs statistics */
 
 #ifndef NFS_WDELAYHASHSIZ
 #define NFS_WDELAYHASHSIZ 16    /* and with this */

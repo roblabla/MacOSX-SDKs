@@ -1,12 +1,19 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: C0BFBAC0-EE8D-3AE8-90D6-23E1BE74CA1A' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           46CA4FB5-C9B0-3C33-951C-98E2FC3A53BE
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           B27D7A85-8BB9-31B7-894D-575B71418D22
 install-name:    '/System/Library/PrivateFrameworks/Admin.framework/Versions/A/Admin'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _NetworkTimeStartedNotification, _NetworkTimeStoppedNotification, 
-                       _SafeCFBundleGetFunctionPointerForName, _canOpenAccountsPreferencePane, 
+                       _SafeCFBundleGetFunctionPointerForName, _XMLStringFromObject, 
+                       _canOpenAccountsPreferencePane, _collectionFromXMLString, 
                        _copyKeyboardType, _coreTimeFrameworkBundle, _debugLoggingEnabled, 
                        _directorySizeAtPath, _freeSpaceAtPath, _getPIDForProcess, 
                        _isBootVolumeHCSFDE, _isInternalBuild, _isSIPDisabled, _kickMCXDForUID, 

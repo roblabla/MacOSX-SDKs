@@ -1,11 +1,25 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 01388490-A239-35A0-BF46-255DF618B89C', 'x86_64: 01388490-A239-35A0-BF46-255DF618B89C' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           10555EC6-C77B-3A95-A2AD-D1E9C448AEDB
+  - target:          x86_64-maccatalyst
+    value:           10555EC6-C77B-3A95-A2AD-D1E9C448AEDB
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           02D1EEA8-323B-34F3-959D-13854E7E8CE8
+  - target:          arm64e-maccatalyst
+    value:           02D1EEA8-323B-34F3-959D-13854E7E8CE8
 install-name:    '/System/Library/PrivateFrameworks/CalendarFoundation.framework/Versions/A/CalendarFoundation'
-current-version: 1131
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 1178
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CALAbbrevDateFormat, _CALAbbrevDateWithoutYearFormat, _CALAbbrevDayOfWeekFormat, 
                        _CALAbbrevDayOfWeekWithAbbrevDateFormat, _CALAbbrevDayOfWeekWithDayOfMonthFormat, 
                        _CALAbbrevDayOfWeekWithFullDateFormat, _CALAbbrevDayOfWeekWithFullDateWithoutYearFormat, 
@@ -20,11 +34,11 @@ exports:
                        _CALPrefDisplayBirthdaysCalendar, _CALPrefOverlayCalendarIdentifier, 
                        _CALPreferences_overlayCalendarChangedNotification, _CALReportAllNetworkErrors, 
                        _CALShortDateAndTimeFormat, _CALShortDateFormat, _CALShortMonthWithDay, 
-                       _CALShortTimeFormat, _CalAbsoluteTimeAddGregorianUnits, _CalAbsoluteTimeGetAbsoluteTimeInCalTimeZone, 
-                       _CalAbsoluteTimeGetAbsoluteTimeInTimeZone, _CalAbsoluteTimeGetDayOfWeek, 
-                       _CalAbsoluteTimeGetDaysInMonth, _CalAbsoluteTimeGetDaysInYear, 
-                       _CalAbsoluteTimeGetGregorianDate, _CalAbsoluteTimeGetGregorianDateForWeek, 
-                       _CalAbsoluteTimeGetGregorianDateWithFallbackToDefaultTimeZone, 
+                       _CALShortTimeFormat, _CALWIDGET_MAX_DAYS_PER_ENTRY, _CalAbsoluteTimeAddGregorianUnits, 
+                       _CalAbsoluteTimeGetAbsoluteTimeInCalTimeZone, _CalAbsoluteTimeGetAbsoluteTimeInTimeZone, 
+                       _CalAbsoluteTimeGetDayOfWeek, _CalAbsoluteTimeGetDaysInMonth, 
+                       _CalAbsoluteTimeGetDaysInYear, _CalAbsoluteTimeGetGregorianDate, 
+                       _CalAbsoluteTimeGetGregorianDateForWeek, _CalAbsoluteTimeGetGregorianDateWithFallbackToDefaultTimeZone, 
                        _CalAbsoluteTimeGetTimeForStartOfDay, _CalAbsoluteTimeGetWeekOfYear, 
                        _CalAbsoluteTimeGetWeeksInYear, _CalAccountActiveChangedKey, 
                        _CalAccountAuthenticatedChangedKey, _CalAccountChangedNotification, 
@@ -82,7 +96,7 @@ exports:
                        _CalLogActual, _CalLogCurrentLevel, _CalLogFileWriter_Param_Directory, 
                        _CalLogFileWriter_Param_Filename, _CalLogFlush, _CalLogInitialize, 
                        _CalLogLevelGenerateLevelVersion, _CalLogLevelGenerateStringVersion, 
-                       _CalLogWhiteList, _CalMeCardChangedNotification, _CalOAuth2Type, 
+                       _CalLogPermittedList, _CalMeCardChangedNotification, _CalOAuth2Type, 
                        _CalOAuthType, _CalPerfLog, _CalRedactURLString, _CalRoundDoubleToNearestMultiple, 
                        _CalRoundToNearestMultiple, _CalRoundWithSigFigs, _CalRouteType_Driving, 
                        _CalRouteType_Transit, _CalRouteType_Walking, _CalSessionDebugErrorKey, 
@@ -143,7 +157,7 @@ exports:
                        _mt_log_reminders_geofence, _mt_log_reminders_notification_action, 
                        _mt_log_usage, _timezonesAreEquivalent, _tzload, _tzname, 
                        _tzparse, _tzset, _tzsetwall ]
-    objc-classes:    [ CalAccountUtils, CalAccountsProvider, CalAccumulatingQueue, 
+    objc-classes:    [ CalABCReporter, CalAccountUtils, CalAccountsProvider, CalAccumulatingQueue, 
                        CalAsyncBlockQueue, CalAttachmentUtils, CalCancelableDispatchBlock, 
                        CalCancelablePerformSelector, CalCancelableRunLoopPerformBlock, 
                        CalCancellableSearch, CalChangeHistoryCollector, CalChronometry, 
@@ -165,7 +179,7 @@ exports:
                        CalSpotlightQueryController, CalSpotlightQueryResult, CalStopwatch, 
                        CalStructuredDataArchiver, CalSuggestionsProvider, CalSystemInformation, 
                        CalTimeIntervalLocalization, CalUMCalendarDataContainerProvider, 
-                       CalWellKnownPaths, CalendarColors, CaliCalendarAnonymizer, 
+                       CalWellKnownPaths, CalWidgetUtils, CalendarColors, CaliCalendarAnonymizer, 
                        CaliCalendarPRODID, EKCalendarDate, EKFoundInAppsEventTracker, 
                        EKMutableCalendarDate, EKProtocolObject_Shared, EKSuggestionsServiceLogger, 
                        EKTTLEventTracker, EKTimeZone ]

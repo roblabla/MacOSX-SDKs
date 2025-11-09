@@ -1,29 +1,19 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: B822F9F1-E866-327D-BA98-C2C7DBF2221B' ]
-platform:        uikitformac
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-maccatalyst
+    value:           2BDA4A6C-6B20-363B-B2F5-B61CE9817CE9
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-maccatalyst
+    value:           965745E1-2F11-3D8B-8F66-C43055F25742
 install-name:    '/System/iOSSupport/usr/lib/swift/libswiftSpriteKit.dylib'
-current-version: 0
+current-version: 1.1
 swift-abi-version: 7
-exports:         
-  - archs:           [ x86_64 ]
-    symbols:         [ '$ld$install_name$os10.0$@rpath/libswiftSpriteKit.dylib', 
-                       '$ld$install_name$os10.1$@rpath/libswiftSpriteKit.dylib', 
-                       '$ld$install_name$os10.2$@rpath/libswiftSpriteKit.dylib', 
-                       '$ld$install_name$os10.3$@rpath/libswiftSpriteKit.dylib', 
-                       '$ld$install_name$os11.0$@rpath/libswiftSpriteKit.dylib', 
-                       '$ld$install_name$os11.1$@rpath/libswiftSpriteKit.dylib', 
-                       '$ld$install_name$os11.2$@rpath/libswiftSpriteKit.dylib', 
-                       '$ld$install_name$os11.3$@rpath/libswiftSpriteKit.dylib', 
-                       '$ld$install_name$os11.4$@rpath/libswiftSpriteKit.dylib', 
-                       '$ld$install_name$os12.0$@rpath/libswiftSpriteKit.dylib', 
-                       '$ld$install_name$os12.1$@rpath/libswiftSpriteKit.dylib', 
-                       '$ld$install_name$os7.0$@rpath/libswiftSpriteKit.dylib', '$ld$install_name$os7.1$@rpath/libswiftSpriteKit.dylib', 
-                       '$ld$install_name$os8.0$@rpath/libswiftSpriteKit.dylib', '$ld$install_name$os8.1$@rpath/libswiftSpriteKit.dylib', 
-                       '$ld$install_name$os8.2$@rpath/libswiftSpriteKit.dylib', '$ld$install_name$os8.3$@rpath/libswiftSpriteKit.dylib', 
-                       '$ld$install_name$os8.4$@rpath/libswiftSpriteKit.dylib', '$ld$install_name$os9.0$@rpath/libswiftSpriteKit.dylib', 
-                       '$ld$install_name$os9.1$@rpath/libswiftSpriteKit.dylib', '$ld$install_name$os9.2$@rpath/libswiftSpriteKit.dylib', 
-                       '$ld$install_name$os9.3$@rpath/libswiftSpriteKit.dylib', '_$sSo11SKShapeNodeC9SpriteKitE25customPlaygroundQuickLooks01_fgH0Ovg', 
+exports:
+  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
+    symbols:         [ '_$sSo11SKShapeNodeC9SpriteKitE25customPlaygroundQuickLooks01_fgH0Ovg', 
                        '_$sSo11SKShapeNodeC9SpriteKitE25customPlaygroundQuickLooks01_fgH0OvpMV', 
                        '_$sSo11SKShapeNodeCs30_CustomPlaygroundQuickLookable9SpriteKitMc', 
                        '_$sSo12SKSpriteNodeC9SpriteKitE25customPlaygroundQuickLooks01_fgH0Ovg', 
@@ -35,6 +25,7 @@ exports:
                        '_$sSo18SKWarpGeometryGridC9SpriteKitE26replacingBySourcePositions9positionsABSays5SIMD2VySfGG_tF', 
                        '_$sSo18SKWarpGeometryGridC9SpriteKitE31replacingByDestinationPositions9positionsABSays5SIMD2VySfGG_tF', 
                        '_$sSo18SKWarpGeometryGridC9SpriteKitE7columns4rows15sourcePositions011destinationI0ABSi_SiSays5SIMD2VySfGGAKtcfC', 
+                       '_$sSo18SKWarpGeometryGridC9SpriteKitE7columns4rows15sourcePositions011destinationI0ABSi_SiSays5SIMD2VySfGGAKtcfc', 
                        '_$sSo9SKTextureC9SpriteKitE25customPlaygroundQuickLooks01_efG0Ovg', 
                        '_$sSo9SKTextureC9SpriteKitE25customPlaygroundQuickLooks01_efG0OvpMV', 
                        '_$sSo9SKTextureCs30_CustomPlaygroundQuickLookable9SpriteKitMc', 

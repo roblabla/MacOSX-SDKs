@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVVideoCompositing.h>)
 /*
 	File:  AVVideoCompositing.h
 
@@ -192,6 +193,18 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @property (nonatomic, readonly) BOOL supportsWideColorSourceFrames API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos);
 
 /*!
+ @property supportsHDRSourceFrames
+ @abstract
+	Indicates that the client's video compositor can handle frames that contain high dynamic range (HDR) properties.
+ 
+ @discussion
+	Controls whether the client will receive frames that contain HDR information.
+	If this field is omitted or set to NO, the framework will convert HDR frames to standard dynamic range (SDR) with BT.709 transfer function before sending to the client.
+	If this field is set to YES, the value of supportsWideColorSourceFrames will be ignored and assumed to be YES.
+ */
+@property (nonatomic, readonly) BOOL supportsHDRSourceFrames API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
+
+/*!
 	@method			anticipateRenderingUsingHint:
 	@abstract		Informs a custom video compositor about upcoming rendering requests.
 	@param			renderHint
@@ -344,3 +357,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCore/AVVideoCompositing.h>
+#endif

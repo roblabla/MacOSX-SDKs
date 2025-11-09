@@ -10,6 +10,7 @@
 @class CKUserIdentity;
 
 NS_ASSUME_NONNULL_BEGIN
+
 typedef NS_ENUM(NSInteger, CKShareParticipantAcceptanceStatus) {
     CKShareParticipantAcceptanceStatusUnknown,
     CKShareParticipantAcceptanceStatusPending,
@@ -49,22 +50,23 @@ typedef NS_ENUM(NSInteger, CKShareParticipantType) {
 API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
 @interface CKShareParticipant : NSObject <NSSecureCoding, NSCopying>
 
-/*! Use `CKFetchShareParticipantsOperation` to create a `CKShareParticipant` object */
+/*! Use @c CKFetchShareParticipantsOperation to create a @c CKShareParticipant object */
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 
-@property (nonatomic, readonly, strong) CKUserIdentity *userIdentity;
+@property (nonatomic, readonly, copy) CKUserIdentity *userIdentity;
 
-/*! The default participant role is `CKShareParticipantRolePrivateUser`. */
+/*! The default participant role is @c CKShareParticipantRolePrivateUser. */
 @property (nonatomic, assign) CKShareParticipantRole role API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0));
 
-/*! The default participant type is `CKShareParticipantTypePrivateUser`. */
+/*! The default participant type is @c CKShareParticipantTypePrivateUser. */
 @property (nonatomic, assign) CKShareParticipantType type API_DEPRECATED_WITH_REPLACEMENT("role", macos(10.12, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0), watchos(3.0, 5.0));
 
 @property (nonatomic, readonly, assign) CKShareParticipantAcceptanceStatus acceptanceStatus;
 
-/*! The default permission for a new participant is `CKShareParticipantPermissionReadOnly`. */
+/*! The default permission for a new participant is @c CKShareParticipantPermissionReadOnly. */
 @property (nonatomic, assign) CKShareParticipantPermission permission;
 
 @end
+
 NS_ASSUME_NONNULL_END

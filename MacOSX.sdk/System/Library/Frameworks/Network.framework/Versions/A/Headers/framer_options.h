@@ -692,6 +692,7 @@ typedef size_t (^nw_framer_parse_completion_t)(uint8_t * _Nullable buffer,
  *		A buffer provided by the caller to copy parse bytes into.
  *		If it is not NULL, it must have at least maximum_length bytes
  *		available, and any parsed bytes will be copied into the buffer.
+ *		Any data stored in temp_buffer will be overwritten.
  *		If it is NULL, the buffer provided in the completion will not
  *		copy unless a copy is required to provide the minimum bytes
  *		as a contiguous buffer. The temp_buffer allows the caller to
@@ -840,6 +841,7 @@ nw_framer_pass_through_input(nw_framer_t framer);
  *		A buffer provided by the caller to copy parse bytes into.
  *		If it is not NULL, it must have at least maximum_length bytes
  *		available, and any parsed bytes will be copied into the buffer.
+ *		Any data stored in temp_buffer will be overwritten.
  *		If it is NULL, the buffer provided in the completion will not
  *		copy unless a copy is required to provide the minimum bytes
  *		as a contiguous buffer. The temp_buffer allows the caller to

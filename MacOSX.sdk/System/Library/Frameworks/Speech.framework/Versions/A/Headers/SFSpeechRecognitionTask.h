@@ -16,7 +16,7 @@ typedef NS_ENUM(NSInteger, SFSpeechRecognitionTaskState) {
     SFSpeechRecognitionTaskStateStarting = 0,       // Speech processing (potentially including recording) has not yet begun
     SFSpeechRecognitionTaskStateRunning = 1,        // Speech processing (potentially including recording) is running
     SFSpeechRecognitionTaskStateFinishing = 2,      // No more audio is being recorded, but more recognition results may arrive
-    SFSpeechRecognitionTaskStateCanceling = 3,      // No more recognition reuslts will arrive, but recording may not have stopped yet
+    SFSpeechRecognitionTaskStateCanceling = 3,      // No more recognition results will arrive, but recording may not have stopped yet
     SFSpeechRecognitionTaskStateCompleted = 4,      // No more results will arrive, and recording is stopped.
 } API_AVAILABLE(ios(10.0), macos(10.15));
 

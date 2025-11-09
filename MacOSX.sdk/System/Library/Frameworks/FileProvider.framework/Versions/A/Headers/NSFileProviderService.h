@@ -2,7 +2,7 @@
 //  NSFileProviderService.h
 //  FileProvider
 //
-//  Copyright © 2017 Apple Inc. All rights reserved.
+//  Copyright © 2017-2020 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class NSXPCListenerEndpoint;
 
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos)
+FILEPROVIDER_API_AVAILABILITY_V2_V3
 @protocol NSFileProviderServiceSource
 
 /**
@@ -46,7 +46,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos)
  */
 @interface NSFileProviderExtension (NSFileProviderService)
 
-- (nullable NSArray <id <NSFileProviderServiceSource>> *)supportedServiceSourcesForItemIdentifier:(NSFileProviderItemIdentifier)itemIdentifier error:(NSError **)error NS_SWIFT_NAME(supportedServiceSources(for:)) API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+- (nullable NSArray <id <NSFileProviderServiceSource>> *)supportedServiceSourcesForItemIdentifier:(NSFileProviderItemIdentifier)itemIdentifier error:(NSError **)error NS_SWIFT_NAME(supportedServiceSources(for:)) FILEPROVIDER_API_AVAILABILITY_V2;
 
 @end
 

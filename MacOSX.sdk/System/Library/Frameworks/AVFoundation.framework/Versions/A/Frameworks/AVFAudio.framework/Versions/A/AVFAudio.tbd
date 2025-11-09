@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 0255960D-A702-31A9-BA52-440E0B3E4423', 'x86_64: 0255960D-A702-31A9-BA52-440E0B3E4423' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           E3E05714-1CD4-3945-AA79-708A63E38688
+  - target:          x86_64-maccatalyst
+    value:           E3E05714-1CD4-3945-AA79-708A63E38688
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           6A0201A3-19BE-38B7-9DE9-939B435BC7D3
+  - target:          arm64e-maccatalyst
+    value:           6A0201A3-19BE-38B7-9DE9-939B435BC7D3
 install-name:    '/System/Library/Frameworks/AVFoundation.framework/Versions/A/Frameworks/AVFAudio.framework/Versions/A/AVFAudio'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _AVAudioBitRateStrategy_Constant, _AVAudioBitRateStrategy_LongTermAverage, 
                        _AVAudioBitRateStrategy_Variable, _AVAudioBitRateStrategy_VariableConstrained, 
                        _AVAudioEngineConfigurationChangeNotification, _AVAudioFileTypeKey, 
@@ -27,8 +41,10 @@ exports:
                        _AVAudioSessionInterruptionWasSuspendedKey, _AVAudioSessionInterruptorNameKey, 
                        _AVAudioSessionLocationLower, _AVAudioSessionLocationUpper, 
                        _AVAudioSessionMediaServicesWereLostNotification, _AVAudioSessionMediaServicesWereResetNotification, 
-                       _AVAudioSessionModeDefault, _AVAudioSessionModeGameChat, _AVAudioSessionModeHearingAccessibility, 
-                       _AVAudioSessionModeLivePhoto, _AVAudioSessionModeLocatePhone, 
+                       _AVAudioSessionModeDefault, _AVAudioSessionModeEmergencyAlert, 
+                       _AVAudioSessionModeGameChat, _AVAudioSessionModeHapticsConstantVolume, 
+                       _AVAudioSessionModeHearingAccessibility, _AVAudioSessionModeLivePhoto, 
+                       _AVAudioSessionModeLocatePhone, _AVAudioSessionModeLowLatency, 
                        _AVAudioSessionModeMeasurement, _AVAudioSessionModeMoviePlayback, 
                        _AVAudioSessionModeRaw, _AVAudioSessionModeSOS, _AVAudioSessionModeSpatialRecording, 
                        _AVAudioSessionModeSpeechRecognition, _AVAudioSessionModeSpokenAudio, 
@@ -39,14 +55,17 @@ exports:
                        _AVAudioSessionOrientationFront, _AVAudioSessionOrientationLeft, 
                        _AVAudioSessionOrientationRight, _AVAudioSessionOrientationTop, 
                        _AVAudioSessionPickableRouteChangeNotification, _AVAudioSessionPolarPatternCardioid, 
-                       _AVAudioSessionPolarPatternOmnidirectional, _AVAudioSessionPolarPatternSubcardioid, 
+                       _AVAudioSessionPolarPatternOmnidirectional, _AVAudioSessionPolarPatternStereo, 
+                       _AVAudioSessionPolarPatternSubcardioid, _AVAudioSessionPortAVB, 
                        _AVAudioSessionPortAirPlay, _AVAudioSessionPortBluetoothA2DP, 
                        _AVAudioSessionPortBluetoothHFP, _AVAudioSessionPortBluetoothLE, 
                        _AVAudioSessionPortBuiltInMic, _AVAudioSessionPortBuiltInReceiver, 
                        _AVAudioSessionPortBuiltInSpeaker, _AVAudioSessionPortCarAudio, 
+                       _AVAudioSessionPortDisplayPort, _AVAudioSessionPortFireWire, 
                        _AVAudioSessionPortHDMI, _AVAudioSessionPortHeadphones, _AVAudioSessionPortHeadsetMic, 
-                       _AVAudioSessionPortLineIn, _AVAudioSessionPortLineOut, _AVAudioSessionPortSPDIF, 
-                       _AVAudioSessionPortUSBAudio, _AVAudioSessionRouteChangeNotification, 
+                       _AVAudioSessionPortLineIn, _AVAudioSessionPortLineOut, _AVAudioSessionPortPCI, 
+                       _AVAudioSessionPortSPDIF, _AVAudioSessionPortThunderbolt, 
+                       _AVAudioSessionPortUSBAudio, _AVAudioSessionPortVirtual, _AVAudioSessionRouteChangeNotification, 
                        _AVAudioSessionRouteChangePreviousRouteKey, _AVAudioSessionRouteChangeReasonKey, 
                        _AVAudioSessionRoutingContextChangeNotification, _AVAudioSessionSilenceSecondaryAudioHintNotification, 
                        _AVAudioSessionSilenceSecondaryAudioHintTypeKey, _AVAudioUnitComponentManagerRegistrationsChangedNotification, 
@@ -65,21 +84,21 @@ exports:
                        _AVSampleRateKey, _AVSpeechSynthesisIPANotationAttribute, 
                        _AVSpeechSynthesisVoiceIdentifierAlex, _AVSpeechUtteranceDefaultSpeechRate, 
                        _AVSpeechUtteranceMaximumSpeechRate, _AVSpeechUtteranceMinimumSpeechRate, 
-                       _AVVCStreamHandle_BuiltInStream, _AVVCStreamHandle_Invalid, 
-                       _AVVoiceActivationDeviceIDKey, _AVVoiceActivationModeKey, 
-                       _AVVoiceControllerATVRemoteInputRoute, _AVVoiceControllerAlertBehavior, 
-                       _AVVoiceControllerBluetoothDoAPRoute, _AVVoiceControllerMetricAudioSessionSetActiveTime, 
-                       _AVVoiceControllerMetricAudioSessionSetInactiveTime, _AVVoiceControllerMetricDataBeginHostTime, 
-                       _AVVoiceControllerMetricDataDurationMilliSeconds, _AVVoiceControllerMetricDataEndHostTime, 
-                       _AVVoiceControllerNoRecordRoute, _AVVoiceControllerRemoteInputJarvisRoute, 
-                       _AVVoiceControllerStartTimeKey ]
+                       _AVVCStreamHandle_BuiltInStream, _AVVCStreamHandle_ExternalInputHALStream, 
+                       _AVVCStreamHandle_Invalid, _AVVoiceActivationDeviceIDKey, 
+                       _AVVoiceActivationModeKey, _AVVoiceControllerATVRemoteInputRoute, 
+                       _AVVoiceControllerAlertBehavior, _AVVoiceControllerBluetoothDoAPRoute, 
+                       _AVVoiceControllerMetricAudioSessionSetActiveTime, _AVVoiceControllerMetricAudioSessionSetInactiveTime, 
+                       _AVVoiceControllerMetricDataBeginHostTime, _AVVoiceControllerMetricDataDurationMilliSeconds, 
+                       _AVVoiceControllerMetricDataEndHostTime, _AVVoiceControllerNoRecordRoute, 
+                       _AVVoiceControllerRemoteInputJarvisRoute, _AVVoiceControllerStartTimeKey ]
     objc-classes:    [ AVAudioBuffer, AVAudioChannelLayout, AVAudioCompressedBuffer, 
                        AVAudioConnectionPoint, AVAudioConverter, AVAudioEngine, AVAudioEnvironmentDistanceAttenuationParameters, 
                        AVAudioEnvironmentNode, AVAudioEnvironmentReverbParameters, 
                        AVAudioFile, AVAudioFormat, AVAudioIONode, AVAudioInputNode, 
                        AVAudioMixerNode, AVAudioMixingDestination, AVAudioNode, AVAudioOutputNode, 
                        AVAudioPCMBuffer, AVAudioPlayer, AVAudioPlayerNode, AVAudioRecorder, 
-                       AVAudioSequencer, AVAudioSession, AVAudioSessionChannelDescription, 
+                       AVAudioRoutingArbiter, AVAudioSequencer, AVAudioSession, AVAudioSessionChannelDescription, 
                        AVAudioSessionDataSourceDescription, AVAudioSessionPortDescription, 
                        AVAudioSessionRouteDescription, AVAudioSinkNode, AVAudioSourceNode, 
                        AVAudioTime, AVAudioUnit, AVAudioUnitComponent, AVAudioUnitComponentManager, 
@@ -87,11 +106,13 @@ exports:
                        AVAudioUnitEQ, AVAudioUnitEQFilterParameters, AVAudioUnitEffect, 
                        AVAudioUnitGenerator, AVAudioUnitMIDIInstrument, AVAudioUnitReverb, 
                        AVAudioUnitSampler, AVAudioUnitTimeEffect, AVAudioUnitTimePitch, 
-                       AVAudioUnitVarispeed, AVMIDIPlayer, AVMusicTrack, AVSpeechSynthesisVoice, 
-                       AVSpeechSynthesizer, AVSpeechUtterance, AVVCAlertInformation, 
-                       AVVCAudioBuffer, AVVCConfigureAlertBehaviorSettings, AVVCContextSettings, 
-                       AVVCPrepareRecordSettings, AVVCRecordDeviceInfo, AVVCStartRecordSettings, 
-                       AVVoiceController, AVVoiceTriggerClient ]
+                       AVAudioUnitVarispeed, AVMIDIPlayer, AVMusicTrack, AVSpeechSynthesisMarker, 
+                       AVSpeechSynthesisProviderAudioUnit, AVSpeechSynthesisProviderRequest, 
+                       AVSpeechSynthesisProviderVoice, AVSpeechSynthesisVoice, AVSpeechSynthesizer, 
+                       AVSpeechUtterance, AVVCAlertInformation, AVVCAudioBuffer, 
+                       AVVCConfigureAlertBehaviorSettings, AVVCContextSettings, AVVCPrepareRecordSettings, 
+                       AVVCRecordDeviceInfo, AVVCStartRecordSettings, AVVoiceController, 
+                       AVVoiceTriggerClient ]
     objc-ivars:      [ AVAudioBuffer._impl, AVAudioNode._impl, AVAudioSequencer._impl, 
                        AVAudioUnitComponent._impl, AVAudioUnitComponentManager._impl, 
                        AVMIDIPlayer._impl, AVMusicTrack._impl ]

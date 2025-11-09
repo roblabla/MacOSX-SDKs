@@ -110,6 +110,10 @@ Tags:
   SwiftName: GKLeaderboard.TimeScope
 - Name: GKLeaderboardPlayerScope
   SwiftName: GKLeaderboard.PlayerScope
+- Name: GKLeaderboardState
+  SwiftName: GKLeaderboard.State
+- Name: GKLeaderboardType
+  SwiftName: GKLeaderboard.LeaderboardType
 - Name: GKMatchSendDataMode
   SwiftName: GKMatch.SendDataMode
 - Name: GKPhotoSize

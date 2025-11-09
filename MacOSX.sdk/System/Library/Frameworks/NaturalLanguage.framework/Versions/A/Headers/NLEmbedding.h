@@ -1,5 +1,5 @@
 /*    NLEmbedding.h
-      Copyright (c) 2018-2019, Apple Inc. All rights reserved.
+      Copyright (c) 2018-2020, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/Foundation.h>
@@ -21,6 +21,9 @@ NS_CLASS_AVAILABLE(10_15, 13_0)
 
 + (nullable NLEmbedding *)wordEmbeddingForLanguage:(NLLanguage)language API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0)) NS_SWIFT_NAME(wordEmbedding(for:));
 + (nullable NLEmbedding *)wordEmbeddingForLanguage:(NLLanguage)language revision:(NSUInteger)revision API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0)) NS_SWIFT_NAME(wordEmbedding(for:revision:));
+
++ (nullable NLEmbedding *)sentenceEmbeddingForLanguage:(NLLanguage)language API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) NS_SWIFT_NAME(sentenceEmbedding(for:));
++ (nullable NLEmbedding *)sentenceEmbeddingForLanguage:(NLLanguage)language revision:(NSUInteger)revision API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) NS_SWIFT_NAME(sentenceEmbedding(for:revision:));
 
 + (nullable instancetype)embeddingWithContentsOfURL:(NSURL *)url error:(NSError **)error API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
@@ -47,6 +50,9 @@ NS_CLASS_AVAILABLE(10_15, 13_0)
 
 + (NSIndexSet *)supportedRevisionsForLanguage:(NLLanguage)language API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0)) NS_SWIFT_NAME(supportedRevisions(for:));
 + (NSUInteger)currentRevisionForLanguage:(NLLanguage)language API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0)) NS_SWIFT_NAME(currentRevision(for:));
+
++ (NSIndexSet *)supportedSentenceEmbeddingRevisionsForLanguage:(NLLanguage)language API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) NS_SWIFT_NAME(supportedSentenceEmbeddingRevisions(for:));
++ (NSUInteger)currentSentenceEmbeddingRevisionForLanguage:(NLLanguage)language API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) NS_SWIFT_NAME(currentSentenceEmbeddingRevision(for:));
 
 + (BOOL)writeEmbeddingForDictionary:(NSDictionary <NSString *, NSArray <NSNumber *> *> *)dictionary language:(nullable NLLanguage)language revision:(NSUInteger)revision toURL:(NSURL *)url error:(NSError **)error API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0)) NS_REFINED_FOR_SWIFT;
 

@@ -22,10 +22,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
 typedef NS_ENUM(NSUInteger, NFCTagType) {
-    NFCTagTypeISO15693 = 1,
-    NFCTagTypeFeliCa API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos) = 2,
-    NFCTagTypeISO7816Compatible API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos) = 3,
-    NFCTagTypeMiFare API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos) = 4,
+    NFCTagTypeISO15693 API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)           = 1,
+    NFCTagTypeFeliCa API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)             = 2,
+    NFCTagTypeISO7816Compatible API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)  = 3,
+    NFCTagTypeMiFare API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)             = 4,
 };
 
 @protocol NFCReaderSession;
@@ -50,14 +50,14 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  * 
  * @discussion See @link CNFCTagType @link/
  */
-@property (nonatomic, readonly, assign) NFCTagType type;
+@property (nonatomic, readonly, assign) NFCTagType type API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
  * @property    session
  *
  * @discussion  Session that provides this tag.
  */
-@property (nonatomic, weak, readonly) id<NFCReaderSession> session;
+@property (nonatomic, weak, readonly) id<NFCReaderSession> session API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
  * @property available:
@@ -67,7 +67,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *
  * @discussion  Check whether a detected tag is available.
  */
-@property (nonatomic, getter=isAvailable, readonly) BOOL available;
+@property (nonatomic, getter=isAvailable, readonly) BOOL available API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
  * @method asNFCISO15693Tag
@@ -112,12 +112,12 @@ NS_EXTENSION_UNAVAILABLE("Not available to extensions") API_AVAILABLE(ios(11.0))
 /*!
  * @discussion  Maximum number of retries.  Valid value is 0 to 256.  Default is 0.
  */
-@property (nonatomic, assign) NSUInteger maximumRetries;
+@property (nonatomic, assign) NSUInteger maximumRetries API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
  * @discussion  Delay in seconds before retry occurs.  Default is 0.
  */
-@property (nonatomic, assign) NSTimeInterval retryInterval;
+@property (nonatomic, assign) NSTimeInterval retryInterval API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 @end
 

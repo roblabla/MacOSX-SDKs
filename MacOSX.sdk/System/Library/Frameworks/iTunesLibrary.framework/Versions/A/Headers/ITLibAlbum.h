@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class ITLibArtist;
 
 /*! @abstract The ITLibAlbum class represents an album where a given media item (ITLibMediaItem) is contained. */
+API_UNAVAILABLE(ios)
 ITLIB_EXPORT @interface ITLibAlbum : NSObject
 {
 	NSString* _title;

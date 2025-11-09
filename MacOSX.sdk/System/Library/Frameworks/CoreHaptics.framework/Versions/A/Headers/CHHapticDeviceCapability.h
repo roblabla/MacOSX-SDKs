@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
  	@abstract
  		A protocol for querying mininum, maximum, and default values for a CHHapticEventParameter or CHHapticDynamicParameter.
  */
-CH_EXPORT API_AVAILABLE(ios(13.0), macos(10.15))
+CH_EXPORT API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos)
 @protocol CHHapticParameterAttributes <NSObject>
 
 /*! @property minValue
@@ -49,7 +49,7 @@ CH_EXPORT API_AVAILABLE(ios(13.0), macos(10.15))
 		A protocol which defines properties describing haptics and audio capabilities for a particular device.
 		These properties include limitations and ranges of parameters.
  */
-CH_EXPORT API_AVAILABLE(ios(13.0))
+CH_EXPORT API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos)
 @protocol CHHapticDeviceCapability
 
 /*! @property supportsHaptics

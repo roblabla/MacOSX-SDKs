@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 72AF7B2E-9E53-3045-BD2F-B313A2B0C181' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           6E1AC8CB-0EB8-30C3-8795-28B2B4E8587F
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           7E1062D9-DEF6-3796-8CE5-E9590CCD072F
 install-name:    '/System/Library/PrivateFrameworks/CDDataAccess.framework/Frameworks/DACalDAV.framework/Versions/A/DACalDAV'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CalDAVPrincipalResultType_Group, _CalDAVPrincipalResultType_Person, 
                        _CalDAVPrincipalResultType_Resource, _CalDAVPrincipalResultType_Room, 
                        _CalDAVPrincipalResultType_Unknown, _RecordCalendarDiagnostics, 

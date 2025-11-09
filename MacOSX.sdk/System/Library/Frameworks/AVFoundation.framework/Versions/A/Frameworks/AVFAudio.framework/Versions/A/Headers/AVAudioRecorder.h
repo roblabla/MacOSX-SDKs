@@ -7,11 +7,8 @@
 */
 
 #import <AVFAudio/AVAudioFormat.h>
-#import <Foundation/Foundation.h>
 #import <AVFAudio/AVAudioSettings.h>
 #import <AVFAudio/AVAudioSession.h>
-
-#import <Availability.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

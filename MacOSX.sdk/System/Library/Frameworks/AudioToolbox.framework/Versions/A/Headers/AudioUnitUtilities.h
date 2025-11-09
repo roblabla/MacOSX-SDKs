@@ -1,4 +1,4 @@
-#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AudioUnitUtilities.h>)
+#if (defined(__USE_PUBLIC_HEADERS__) && __USE_PUBLIC_HEADERS__) || (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AudioUnitUtilities.h>)
 /*!
 	@file		AudioUnitUtilities.h
 	@framework	AudioToolbox.framework
@@ -43,7 +43,6 @@ extern "C" {
 /* ============================================================================= */
 
 /*!
-    @enum       
     @constant   kAUParameterListener_AnyParameter
                     A wildcard value for an AudioUnitParameterID. Note that this is
                     only valid when sending a notification (with AUParameterListenerNotify),
@@ -454,8 +453,8 @@ AUEventListenerCreate(              AUEventListenerProc                       in
                                     void * __nullable                         inUserData,
                                     CFRunLoopRef __nullable                   inRunLoop,
                                     CFStringRef __nullable                    inRunLoopMode,
-                                    Float32                                   inNotificationInterval,     // seconds
-                                    Float32                                   inValueChangeGranularity,   // seconds
+                                    Float32                                   inNotificationInterval,
+                                    Float32                                   inValueChangeGranularity,
                                     AUEventListenerRef __nullable * __nonnull outListener)        API_AVAILABLE(macos(10.3), ios(6.0), watchos(2.0), tvos(9.0));
 
 /*!
@@ -535,7 +534,7 @@ AUEventListenerNotify(              AUEventListenerRef __nullable  inSendingList
                 The converted parameter value, in the parameter's natural units.
 */
 extern AudioUnitParameterValue
-AUParameterValueFromLinear(         Float32                     inLinearValue,      // 0-1
+AUParameterValueFromLinear(         Float32                     inLinearValue,
                                     const AudioUnitParameter *  inParameter)    API_AVAILABLE(macos(10.2), ios(6.0), watchos(2.0), tvos(9.0));
 
 /*!
@@ -569,7 +568,8 @@ AUParameterValueToLinear(           AudioUnitParameterValue     inParameterValue
     @param      inDigits
                     The resolution of the string (see example above).
     @result
-                <tt>inTextBuffer</tt>
+                `inTextBuffer`
+
     @discussion 
         Formats a floating point value into a string.  Computes a power of 10 to which the value
         will be rounded and displayed as follows:  if the the parameter is logarithmic (Hertz),
@@ -577,15 +577,16 @@ AUParameterValueToLinear(           AudioUnitParameterValue     inParameterValue
         it is inDigits - pow10(maxValue - minValue) + 1.
 
         Example for inDigits=3:
-<pre>
-        pow10   range           digits after decimal place display
-        -2      .0100-.0999     4
-        -1      .100-.999       3
-        0       1.00-9.99       2
-        1       10.0-99.9       1
-        2       100-999         0
-        3       1000-9990       -1
-        4       10000-99900     -2</pre>
+
+        pow10 | range        |  digits after decimal place display
+        ------|--------------|------------------------------------
+        -2    | .0100-.0999  |  4
+        -1    | .100-.999    |  3
+        0     | 1.00-9.99    |  2
+        1     | 10.0-99.9    |  1
+        2     | 100-999      |  0
+        3     | 1000-9990    |  -1
+        4     | 10000-99900  |  -2
 */                              
 extern char *
 AUParameterFormatValue(             Float64                     inParameterValue,

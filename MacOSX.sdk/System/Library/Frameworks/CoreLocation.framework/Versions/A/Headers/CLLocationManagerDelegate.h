@@ -63,7 +63,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    Invoked when a new heading is available.
  */
 - (void)locationManager:(CLLocationManager *)manager
-       didUpdateHeading:(CLHeading *)newHeading API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(watchos, tvos, macos);
+       didUpdateHeading:(CLHeading *)newHeading API_AVAILABLE(ios(3.0), macos(10.15), watchos(2.0)) API_UNAVAILABLE(tvos);
 
 /*
  *  locationManagerShouldDisplayHeadingCalibration:
@@ -72,7 +72,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    Invoked when a new heading is available. Return YES to display heading calibration info. The display 
  *    will remain until heading is calibrated, unless dismissed early via dismissHeadingCalibrationDisplay.
  */
-- (BOOL)locationManagerShouldDisplayHeadingCalibration:(CLLocationManager *)manager  API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(watchos, tvos, macos);
+- (BOOL)locationManagerShouldDisplayHeadingCalibration:(CLLocationManager *)manager  API_AVAILABLE(ios(3.0), macos(10.15), watchos(2.0)) API_UNAVAILABLE(tvos);
 
 /*
  *  locationManager:didDetermineState:forRegion:
@@ -96,7 +96,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)locationManager:(CLLocationManager *)manager
 		didRangeBeacons:(NSArray<CLBeacon *> *)beacons
-			   inRegion:(CLBeaconRegion *)region API_DEPRECATED_WITH_REPLACEMENT("Use locationManager:didRangeBeacons:satisfyingConstraint:", ios(7.0, 13.0)) API_UNAVAILABLE(macos, macCatalyst) API_UNAVAILABLE(watchos, tvos);
+			   inRegion:(CLBeaconRegion *)region API_DEPRECATED_WITH_REPLACEMENT("Use locationManager:didRangeBeacons:satisfyingConstraint:", ios(7.0, 13.0), macos(10.15, 10.15)) API_UNAVAILABLE(watchos, tvos);
 
 /*
  *  locationManager:rangingBeaconsDidFailForRegion:withError:
@@ -106,15 +106,15 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)locationManager:(CLLocationManager *)manager
 rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
-			  withError:(NSError *)error API_DEPRECATED_WITH_REPLACEMENT("Use locationManager:didFailRangingBeaconsForConstraint:error:", ios(7.0, 13.0)) API_UNAVAILABLE(macos, macCatalyst) API_UNAVAILABLE(watchos, tvos);
+			  withError:(NSError *)error API_DEPRECATED_WITH_REPLACEMENT("Use locationManager:didFailRangingBeaconsForConstraint:error:", ios(7.0, 13.0), macos(10.15, 10.15)) API_UNAVAILABLE(watchos, tvos);
 
 - (void)locationManager:(CLLocationManager *)manager
 		didRangeBeacons:(NSArray<CLBeacon *> *)beacons
-   satisfyingConstraint:(CLBeaconIdentityConstraint *)beaconConstraint API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos, macos);
+   satisfyingConstraint:(CLBeaconIdentityConstraint *)beaconConstraint API_AVAILABLE(ios(13.0), macos(10.15)) API_UNAVAILABLE(watchos, tvos);
 
 - (void)locationManager:(CLLocationManager *)manager
 didFailRangingBeaconsForConstraint:(CLBeaconIdentityConstraint *)beaconConstraint
-				  error:(NSError *)error API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos, macos);
+				  error:(NSError *)error API_AVAILABLE(ios(13.0), macos(10.15)) API_UNAVAILABLE(watchos, tvos);
 
 /*
  *  locationManager:didEnterRegion:
@@ -161,7 +161,16 @@ didFailRangingBeaconsForConstraint:(CLBeaconIdentityConstraint *)beaconConstrain
  *  Discussion:
  *    Invoked when the authorization status changes for this application.
  */
-- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status API_AVAILABLE(ios(4.2), macos(10.7));
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status API_DEPRECATED_WITH_REPLACEMENT("-locationManagerDidChangeAuthorization:", ios(4.2, 14.0), macos(10.7, 11.0), watchos(1.0, 7.0), tvos(9.0, 14.0));
+
+/*
+ *  locationManagerDidChangeAuthorization:
+ *
+ *  Discussion:
+ *    Invoked when either the authorizationStatus or
+ *    accuracyAuthorization properties change
+ */
+- (void)locationManagerDidChangeAuthorization:(CLLocationManager *)manager API_AVAILABLE(ios(14.0), macos(11.0), watchos(7.0), tvos(14.0));
 
 /*
  *  locationManager:didStartMonitoringForRegion:
@@ -176,7 +185,7 @@ didFailRangingBeaconsForConstraint:(CLBeaconIdentityConstraint *)beaconConstrain
  *  Discussion:
  *    Invoked when location updates are automatically paused.
  */
-- (void)locationManagerDidPauseLocationUpdates:(CLLocationManager *)manager API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(watchos, tvos, macos);
+- (void)locationManagerDidPauseLocationUpdates:(CLLocationManager *)manager API_AVAILABLE(ios(6.0), macos(10.15)) API_UNAVAILABLE(watchos, tvos);
 
 /*
  *  Discussion:
@@ -185,7 +194,7 @@ didFailRangingBeaconsForConstraint:(CLBeaconIdentityConstraint *)beaconConstrain
  *    In the event that your application is terminated while suspended, you will
  *	  not receive this notification.
  */
-- (void)locationManagerDidResumeLocationUpdates:(CLLocationManager *)manager API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(watchos, tvos, macos);
+- (void)locationManagerDidResumeLocationUpdates:(CLLocationManager *)manager API_AVAILABLE(ios(6.0), macos(10.15)) API_UNAVAILABLE(watchos, tvos);
 
 /*
  *  locationManager:didFinishDeferredUpdatesWithError:
@@ -209,7 +218,7 @@ didFailRangingBeaconsForConstraint:(CLBeaconIdentityConstraint *)beaconConstrain
  *    a location, if visit monitoring is currently started (possibly from a
  *    prior launch).
  */
-- (void)locationManager:(CLLocationManager *)manager didVisit:(CLVisit *)visit API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(watchos, tvos, macos);
+- (void)locationManager:(CLLocationManager *)manager didVisit:(CLVisit *)visit API_AVAILABLE(ios(8.0), macos(10.15)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 

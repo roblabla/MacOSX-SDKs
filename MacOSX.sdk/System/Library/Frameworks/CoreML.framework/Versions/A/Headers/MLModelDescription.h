@@ -38,12 +38,25 @@ ML_EXPORT
 /// Optional metadata describing the model
 @property (readonly, nonatomic) NSDictionary<MLModelMetadataKey, id> *metadata;
 
+/*!
+  Array to map a class index to the corresponding label, which is either Number or String.
+
+  The property is populated from the classLabels entry specified in the model's protobuf message. When the model is a pipeline, which contains one or more sub models, the property value is calculated as follows.
+
+  1. If the pipeline model's proto message specifies predictedFeatureName parameter, use classLabels property value of the sub model with the output feature with the name.
+
+  2. Otherwise, if the pipeline model has only one sub model with non-nil classLabels property, use the property value.
+
+  3. Otherwise, the property is nil.
+*/
+@property (readonly, nullable, nonatomic, copy) NSArray<id> *classLabels API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+
 @end
 
 /*!
  * Additions to model descriptions related to model update API.
  */
-API_AVAILABLE(macos(10.15), ios(13.0))
+API_AVAILABLE(macos(10.15), ios(13.0), tvos(14.0))
 @interface MLModelDescription (MLUpdateAdditions)
 
 // Indicates if the model has to been configured for updation using model update API.
@@ -57,7 +70,7 @@ API_AVAILABLE(macos(10.15), ios(13.0))
 /*!
  * Additions to model descriptions related to model parameters
  */
-API_AVAILABLE(macos(10.15), ios(13.0))
+API_AVAILABLE(macos(10.15), ios(13.0), tvos(14.0))
 @interface MLModelDescription (MLParameters)
 
 // Allows for access of each parameter as parameter description.

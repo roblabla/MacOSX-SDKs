@@ -1,11 +1,25 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 02B5989A-F392-3A09-861D-75F0243FAEBC', 'x86_64: 02B5989A-F392-3A09-861D-75F0243FAEBC' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           9DDA5475-DC0D-36EC-9056-D6769E0E3B5F
+  - target:          x86_64-maccatalyst
+    value:           9DDA5475-DC0D-36EC-9056-D6769E0E3B5F
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           0BFB2E7E-78BA-3671-BBA2-C13FA14E3A69
+  - target:          arm64e-maccatalyst
+    value:           0BFB2E7E-78BA-3671-BBA2-C13FA14E3A69
 install-name:    '/System/Library/PrivateFrameworks/CommonUtilities.framework/Versions/A/CommonUtilities'
 current-version: 800
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CUTAuditTokenTaskHasEntitlement, _CUTCreateDictionaryFromXPCObject, 
                        _CUTCreateXPCObjectFromDictionary, _CUTDataForPropertyList, 
                        _CUTGetMainBundle, _CUTGetMainBundleIdentifier, _CUTGetXPCBoolFromDictionary, 

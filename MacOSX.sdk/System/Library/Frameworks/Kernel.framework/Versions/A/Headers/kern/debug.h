@@ -202,6 +202,23 @@ struct _dyld_cache_image_text_info {
 	uint32_t    pathOffset;         // offset from start of cache file
 };
 
+#if CONFIG_X86_64_COMPAT
+/*
+ * mirrors the AotCacheHeader struct defined in SharedCacheMetadata.h from cambria source code
+ */
+#define CAMBRIA_VERSION_INFO_SIZE 32
+struct _aot_cache_header {
+	char     magic[8];
+	uint8_t  uuid[16];
+	uint8_t  x86_uuid[16];
+	uint8_t  cambria_version[CAMBRIA_VERSION_INFO_SIZE];
+	uint64_t code_signature_offset;
+	uint64_t code_signature_size;
+	uint32_t num_code_fragments;
+	uint32_t header_size;
+	// shared_file_mapping_np mappings is omitted here
+};
+#endif /* CONFIG_X86_64_COMPAT */
 
 enum micro_snapshot_flags {
 	kInterruptRecord        = 0x1,
@@ -221,17 +238,20 @@ enum generic_snapshot_flags {
 
 #define VM_PRESSURE_TIME_WINDOW 5 /* seconds */
 
-enum {
+__options_decl(stackshot_flags_t, uint64_t, {
 	STACKSHOT_GET_DQ                           = 0x01,
 	STACKSHOT_SAVE_LOADINFO                    = 0x02,
 	STACKSHOT_GET_GLOBAL_MEM_STATS             = 0x04,
 	STACKSHOT_SAVE_KEXT_LOADINFO               = 0x08,
-	STACKSHOT_GET_MICROSTACKSHOT               = 0x10,
-	STACKSHOT_GLOBAL_MICROSTACKSHOT_ENABLE     = 0x20,
-	STACKSHOT_GLOBAL_MICROSTACKSHOT_DISABLE    = 0x40,
-	STACKSHOT_SET_MICROSTACKSHOT_MARK          = 0x80,
+	/*
+	 * 0x10, 0x20, 0x40 and 0x80 are reserved.
+	 *
+	 * See microstackshot_flags_t whose members used to be part of this
+	 * declaration.
+	 */
 	STACKSHOT_ACTIVE_KERNEL_THREADS_ONLY       = 0x100,
 	STACKSHOT_GET_BOOT_PROFILE                 = 0x200,
+	STACKSHOT_DO_COMPRESS                      = 0x400,
 	STACKSHOT_SAVE_IMP_DONATION_PIDS           = 0x2000,
 	STACKSHOT_SAVE_IN_KERNEL_BUFFER            = 0x4000,
 	STACKSHOT_RETRIEVE_EXISTING_BUFFER         = 0x8000,
@@ -255,12 +275,22 @@ enum {
 	STACKSHOT_INSTRS_CYCLES                    = 0x8000000,
 	STACKSHOT_ASID                             = 0x10000000,
 	STACKSHOT_PAGE_TABLES                      = 0x20000000,
-};
+	STACKSHOT_DISABLE_LATENCY_INFO             = 0x40000000,
+});
+
+__options_decl(microstackshot_flags_t, uint32_t, {
+	STACKSHOT_GET_MICROSTACKSHOT               = 0x10,
+	STACKSHOT_GLOBAL_MICROSTACKSHOT_ENABLE     = 0x20,
+	STACKSHOT_GLOBAL_MICROSTACKSHOT_DISABLE    = 0x40,
+	STACKSHOT_SET_MICROSTACKSHOT_MARK          = 0x80,
+});
 
 #define STACKSHOT_THREAD_SNAPSHOT_MAGIC     0xfeedface
 #define STACKSHOT_TASK_SNAPSHOT_MAGIC       0xdecafbad
 #define STACKSHOT_MEM_AND_IO_SNAPSHOT_MAGIC 0xbfcabcde
 #define STACKSHOT_MICRO_SNAPSHOT_MAGIC      0x31c54011
+
+#define STACKSHOT_PAGETABLES_MASK_ALL           ~0
 
 #define KF_INITIALIZED (0x1)
 #define KF_SERIAL_OVRD (0x2)
@@ -269,6 +299,8 @@ enum {
 #define KF_STACKSHOT_OVRD (0x10)
 #define KF_COMPRSV_OVRD (0x20)
 #define KF_INTERRUPT_MASKED_DEBUG_OVRD (0x40)
+#define KF_TRAPTRACE_OVRD (0x80)
+#define KF_IOTRACE_OVRD (0x100)
 
 boolean_t kern_feature_override(uint32_t fmask);
 
@@ -316,6 +348,8 @@ struct embedded_panic_header {
 #define EMBEDDED_PANIC_HEADER_FLAG_BUTTON_RESET_PANIC            0x80
 #define EMBEDDED_PANIC_HEADER_FLAG_COPROC_INITIATED_PANIC        0x100
 #define EMBEDDED_PANIC_HEADER_FLAG_COREDUMP_FAILED               0x200
+#define EMBEDDED_PANIC_HEADER_FLAG_COMPRESS_FAILED               0x400
+#define EMBEDDED_PANIC_HEADER_FLAG_STACKSHOT_DATA_COMPRESSED     0x800
 
 #define EMBEDDED_PANIC_HEADER_CURRENT_VERSION 2
 #define EMBEDDED_PANIC_MAGIC 0x46554E4B /* FUNK */
@@ -349,6 +383,7 @@ struct macos_panic_header {
 #define MACOS_PANIC_HEADER_FLAG_COREDUMP_COMPLETE             0x100
 #define MACOS_PANIC_HEADER_FLAG_COREDUMP_FAILED               0x200
 #define MACOS_PANIC_HEADER_FLAG_STACKSHOT_KERNEL_ONLY         0x400
+#define MACOS_PANIC_HEADER_FLAG_STACKSHOT_FAILED_COMPRESS     0x800
 
 /*
  * Any change to the below structure should mirror the structure defined in MacEFIFirmware

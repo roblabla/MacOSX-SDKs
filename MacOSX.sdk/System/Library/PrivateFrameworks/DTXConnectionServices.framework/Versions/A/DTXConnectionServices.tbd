@@ -1,11 +1,25 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 5B87560B-62B8-3AB7-B78F-BCC4B3BAFD72', 'x86_64: 5B87560B-62B8-3AB7-B78F-BCC4B3BAFD72' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           F6A49760-A26A-330C-B2B6-6CB07E202EEE
+  - target:          x86_64-maccatalyst
+    value:           F6A49760-A26A-330C-B2B6-6CB07E202EEE
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           BE8117A4-FA6A-3EDB-8630-9BF2D8E457D4
+  - target:          arm64e-maccatalyst
+    value:           BE8117A4-FA6A-3EDB-8630-9BF2D8E457D4
 install-name:    '/System/Library/PrivateFrameworks/DTXConnectionServices.framework/Versions/A/DTXConnectionServices'
-current-version: 64523.185.1
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 64541.6
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CFArrayCreateWithDTXPrimitiveArray, _CFDictionaryCreateWithDTXPrimitiveDictionary, 
                        _DTXConnectionServicesVersionNumber, _DTXConnectionServicesVersionString, 
                        _DTXPrimitiveArrayAppendBuffer, _DTXPrimitiveArrayAppendValues, 
@@ -16,10 +30,11 @@ exports:
                        _DTXPrimitiveDictionaryDestroy, _DTXPrimitiveDictionaryGetSerialized, 
                        _DTXPrimitiveDictionaryReferencingSerialized, _DTXSpawnSubtask, 
                        _DTXSpawn_CPUTypeKey, _DTXSpawn_DYLDForcePlatformKey, _DTXSpawn_StderrPathKey, 
-                       _DTXSpawn_StdinPathKey, _DTXSpawn_StdoutPathKey, _DTXSpawn_TimeoutKey, 
-                       _DTXSubtaskCheckin, __DTXPrimitiveDictionaryEnumerate, __DTXPrimitiveDictionaryGetCount, 
-                       __createObjectFromPrimitiveType, _kDTXAckBarrierMessage, _kDTXBarrierMessage, 
-                       _kDTXHeartbeatMessage, _kDTXInterruptionMessage ]
+                       _DTXSpawn_StdinPathKey, _DTXSpawn_StdoutPathKey, _DTXSpawn_SuspendedKey, 
+                       _DTXSpawn_TimeoutKey, _DTXSubtaskCheckin, __DTXPrimitiveDictionaryEnumerate, 
+                       __DTXPrimitiveDictionaryGetCount, __createObjectFromPrimitiveType, 
+                       _kDTXAckBarrierMessage, _kDTXBarrierMessage, _kDTXHeartbeatMessage, 
+                       _kDTXInterruptionMessage ]
     objc-classes:    [ DTXBlockCompressorFactory, DTXBlockCompressorLibCompression, 
                        DTXChannel, DTXConnection, DTXDecompressionException, DTXFileDescriptorTransport, 
                        DTXFoundationURLTransport, DTXMachTransport, DTXMessage, DTXMessageParser, 
@@ -29,8 +44,10 @@ exports:
                        DTXTransport, _DTXProxy ]
     objc-eh-types:   [ DTXDecompressionException ]
     objc-ivars:      [ DTXBlockCompressorLibCompression._lz4ScratchBuffer, DTXBlockCompressorLibCompression._lzfseScratchBuffer, 
-                       DTXResourceTracker._acqSem, DTXResourceTracker._acquireNum, 
-                       DTXResourceTracker._log, DTXResourceTracker._maxChunk, DTXResourceTracker._parentTracker, 
-                       DTXResourceTracker._queue, DTXResourceTracker._suspendCount, 
-                       DTXResourceTracker._total, DTXResourceTracker._used, DTXResourceTracker._waiting ]
+                       DTXSendAndWaitStats._compressionTotalDataCompressed, DTXSendAndWaitStats._compressionTotalDataUncompressed, 
+                       DTXSendAndWaitStats._compressionTotalNanosToCompress, DTXSendAndWaitStats._compressionTypeSet, 
+                       DTXSendAndWaitStats._lastStatTime, DTXSendAndWaitStats._microsecondsPerUnit, 
+                       DTXSendAndWaitStats._previousSendBytes, DTXSendAndWaitStats._statsQueue, 
+                       DTXSendAndWaitStats._timeBaseInfo, DTXSendAndWaitStats._totalSendBytes, 
+                       _DTXProxy._proxyChannel ]
 ...

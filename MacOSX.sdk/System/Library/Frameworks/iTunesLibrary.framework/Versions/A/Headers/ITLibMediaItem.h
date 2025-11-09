@@ -1,6 +1,6 @@
 /*!
 	@file		ITLibMediaItem.h
-	@copyright	© 2012-2016 Apple Inc.
+	@copyright	© 2012-2020 Apple Inc.
  */
 
 #import <iTunesLibrary/ITLibMediaEntity.h>
@@ -80,7 +80,8 @@ typedef NS_ENUM( NSUInteger, ITLibMediaItemMediaKind )
     ITLibMediaItemMediaKindBook                 = 19,
     ITLibMediaItemMediaKindPDFBook              = 20,
     ITLibMediaItemMediaKindAlertTone			= 21
-};
+
+} API_UNAVAILABLE(ios);
 
 /*!
 	@enum		ITLibMediaItemLyricsContentRating
@@ -97,7 +98,8 @@ typedef NS_ENUM( NSUInteger, ITLibMediaItemLyricsContentRating )
     ITLibMediaItemLyricsContentRatingNone = 0,
     ITLibMediaItemLyricsContentRatingExplicit = 1,
     ITLibMediaItemLyricsContentRatingClean = 2
-};
+
+} API_UNAVAILABLE(ios);
 
 /*!
 	@enum		ITLibMediaItemLocationType
@@ -117,7 +119,8 @@ typedef NS_ENUM( NSUInteger, ITLibMediaItemLocationType )
     ITLibMediaItemLocationTypeFile = 1,
     ITLibMediaItemLocationTypeURL = 2,
     ITLibMediaItemLocationTypeRemote = 3
-};
+
+} API_UNAVAILABLE(ios);
 
 /*!
 	@enum		ITLibMediaItemPlayStatus
@@ -134,7 +137,8 @@ typedef NS_ENUM( NSUInteger, ITLibMediaItemPlayStatus )
     ITLibMediaItemPlayStatusNone = 0,
     ITLibMediaItemPlayStatusPartiallyPlayed = 1,
     ITLibMediaItemPlayStatusUnplayed= 2,
-};
+
+} API_UNAVAILABLE(ios);
 
 @class ITLibMediaItemData;
 
@@ -144,6 +148,7 @@ typedef NS_ENUM( NSUInteger, ITLibMediaItemPlayStatus )
 			  metadata may be accessed through its individual properties or via the ITLibMediaEntity general property accessor
 			  methods.
  */
+API_UNAVAILABLE(ios)
 ITLIB_EXPORT @interface ITLibMediaItem : ITLibMediaEntity
 {
 	ITLibMediaItemData * _data;

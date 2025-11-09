@@ -7,8 +7,9 @@
 
 #import <AppKit/NSTextField.h>
 #import <AppKit/NSTextFieldCell.h>
+#import <AppKit/AppKitDefines.h>
 
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @interface NSSecureTextField : NSTextField
 @end

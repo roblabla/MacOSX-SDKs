@@ -8,13 +8,16 @@
 #import <AppKit/NSControl.h>
 #import <AppKit/NSTextFieldCell.h>
 #import <AppKit/NSUserInterfaceValidation.h>
+#import <AppKit/AppKitDefines.h>
+#import <AppKit/NSTextContent.h>
+#import <AppKit/NSParagraphStyle.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @protocol NSTextFieldDelegate;
 
-@interface NSTextField : NSControl <NSUserInterfaceValidations, NSAccessibilityNavigableStaticText>
+@interface NSTextField : NSControl <NSUserInterfaceValidations, NSAccessibilityNavigableStaticText, NSTextContent>
 
 @property (nullable, copy) NSString *placeholderString API_AVAILABLE(macos(10.10));
 @property (nullable, copy) NSAttributedString *placeholderAttributedString API_AVAILABLE(macos(10.10));
@@ -48,6 +51,11 @@ API_UNAVAILABLE_BEGIN(ios)
 /* Maps to -[NSParagraphStyle allowsDefaultTighteningForTruncation] in rendering and sizing the text field. Ignored when the content value is an attributed string.
  */
 @property BOOL allowsDefaultTighteningForTruncation API_AVAILABLE(macos(10.11));
+
+#if !TARGET_OS_IPHONE
+/* Specifies the line break strategies that may be used for laying out the text in this text field.  If this property is not set, the default for non-editable and selectable text fields is NSLineBreakStrategyStandard and the default for editable text fields is NSLineBreakStrategyNone. If the text field contains an attributed string value with paragraph style(s) that specify a set of line break strategies, the set of strategies in the paragraph style(s) will be used instead of the set of strategies defined by this property. */
+@property NSLineBreakStrategy lineBreakStrategy API_AVAILABLE(macos(10.15));
+#endif
 
 @end
 

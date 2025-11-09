@@ -105,6 +105,8 @@
 #include <IOKit/usb/StandardUSB.h>
 #include <IOKit/usb/IOUSBHostFamilyDefinitions.h>
 
+#define __IOUSBHOSTFAMILY_DEPRECATED __kpi_deprecated("Use USBDriverKit")
+
 #pragma mark Typedefs
 
 typedef uint16_t tUSBHostDeviceAddress;
@@ -161,7 +163,7 @@ enum tDeviceRequestRecipient
 
 typedef enum tDeviceRequestRecipient tDeviceRequestRecipient;
 
-inline uint8_t makeDeviceRequestbmRequestType(tDeviceRequestDirection direction, tDeviceRequestType type, tDeviceRequestRecipient recipient)
+static inline uint8_t makeDeviceRequestbmRequestType(tDeviceRequestDirection direction, tDeviceRequestType type, tDeviceRequestRecipient recipient)
 {
     return   ((direction << kDeviceRequestDirectionPhase) & kDeviceRequestDirectionMask)
             | ((type << kDeviceRequestTypePhase) & kDeviceRequestTypeMask)
@@ -182,7 +184,7 @@ enum
  * @enum tInternalUSBHostConnectionSpeed
  * @brief Connection speeds used internally by IOUSBHostFamily
  */
-enum
+enum tInternalUSBHostConnectionSpeed
 {
     kUSBHostConnectionSpeedLow          = 0,
     kUSBHostConnectionSpeedFull         = 1,
@@ -209,6 +211,7 @@ enum
 #define kUSBHostMessageNonInterruptIsochFrame         iokit_usbhost_msg(0x108)      // 0xe0005108  Apple Internal use only. 
 #define kUSBHostMessageInterfaceAlternateSetting      iokit_usbhost_msg(0x109)      // 0xe0005109  Apple Internal use only.  IOUSBHostInterface -> IOUSBInterface to update interface properties after an alternate setting is selected
 #define kUSBHostMessageDeviceLegacyCapture            iokit_usbhost_msg(0x10A)      // 0xe000510A  Apple Internal use only.  IOUSBHostDevice -> IOUSBDevice to relay user space re-enumeration for capturing/releasing devices
+#define kUSBHostMessageControllerInterrupt            iokit_usbhost_msg(0x10B)      // 0xe000510B  Apple Internal use only.  Source -> AppleUSBHostController to indicate an interrupt is ready for consumption
 
 // User Message Support
 
@@ -216,6 +219,7 @@ enum
 #define kUSBLegacyMessagePortHasBeenResumed           iokit_usblegacy_err_msg(0x0b) // 0xe000400b  Apple Internal use only. Message sent by an IOUSBDevice indicating the completion of a power change on the compatibility service
 #define kUSBHostMessageOvercurrentCondition           iokit_usblegacy_err_msg(0x13) // 0xe0004013  Apple Internal use only.  Message sent to the clients of the device's hub parent, when a device causes an overcurrent condition.  The message argument contains the locationID of the device
 #define kUSBHostMessageNotEnoughPower                 iokit_usblegacy_err_msg(0x14) // 0xe0004014  Apple Internal use only.  Message sent to the clients of the device's hub parent, when a device causes an low power notice to be displayed.  The message argument contains the locationID of the device
+#define kIOUSBHostMessageReallocateExtraCurrent       iokit_usblegacy_err_msg(0x18) // 0xe0004018  Message to ask any clients using extra current to attempt to allocate it some more
 #define kUSBHostMessageEndpointCountExceeded          iokit_usblegacy_err_msg(0x19) // 0xe0004019  Apple Internal use only.  Message sent to a device when endpoints cannot be created because the USB controller ran out of resources
 #define kUSBHostMessageDeviceCountExceeded            iokit_usblegacy_err_msg(0x1a) // 0xe000401a  Apple Internal use only.  Message sent by a hub when a device cannot be enumerated because the USB controller ran out of resources
 #define kUSBHostMessageUnsupportedConfiguration       iokit_usblegacy_err_msg(0x1c) // 0xe000401c  Apple Internal use only.  Message sent to the clients of the device when a device is not supported in the current configuration.  The message argument contains the locationID of the device
@@ -235,12 +239,12 @@ enum
  */
 enum tUSBHostPortType
 {
-    kUSBHostPortTypeStandard = 0,
-    kUSBHostPortTypeCaptive,
-    kUSBHostPortTypeInternal,
-    kUSBHostPortTypeAccessory,
-    kUSBHostPortTypeExpressCard,
-    kUSBHostPortTypeCount
+    kUSBHostPortTypeStandard    = kIOUSBHostPortTypeStandard,
+    kUSBHostPortTypeCaptive     = kIOUSBHostPortTypeCaptive,
+    kUSBHostPortTypeInternal    = kIOUSBHostPortTypeInternal,
+    kUSBHostPortTypeAccessory   = kIOUSBHostPortTypeAccessory,
+    kUSBHostPortTypeExpressCard = kIOUSBHostPortTypeExpressCard,
+    kUSBHostPortTypeCount       = kIOUSBHostPortTypeCount
 };
 
 /*!
@@ -299,27 +303,27 @@ enum
  */
 enum tUSBHostPortStatus
 {
-    kUSBHostPortStatusPortTypeMask               = StandardUSBBitRange(0, 3),
-    kUSBHostPortStatusPortTypePhase              = StandardUSBBitRangePhase(0, 3),
-    kUSBHostPortStatusPortTypeStandard           = (kUSBHostPortTypeStandard << StandardUSBBitRangePhase(0, 3)),
-    kUSBHostPortStatusPortTypeCaptive            = (kUSBHostPortTypeCaptive << StandardUSBBitRangePhase(0, 3)),
-    kUSBHostPortStatusPortTypeInternal           = (kUSBHostPortTypeInternal << StandardUSBBitRangePhase(0, 3)),
-    kUSBHostPortStatusPortTypeAccessory          = (kUSBHostPortTypeAccessory << StandardUSBBitRangePhase(0, 3)),
-    kUSBHostPortStatusPortTypeReserved           = StandardUSBBitRange(4, 7),
-    kUSBHostPortStatusConnectedSpeedMask         = StandardUSBBitRange(8, 10),
-    kUSBHostPortStatusConnectedSpeedPhase        = StandardUSBBitRangePhase(8, 10),
-    kUSBHostPortStatusConnectedSpeedNone         = (kUSBHostPortConnectionSpeedNone << StandardUSBBitRangePhase(8, 10)),
-    kUSBHostPortStatusConnectedSpeedFull         = (kUSBHostPortConnectionSpeedFull << StandardUSBBitRangePhase(8, 10)),
-    kUSBHostPortStatusConnectedSpeedLow          = (kUSBHostPortConnectionSpeedLow << StandardUSBBitRangePhase(8, 10)),
-    kUSBHostPortStatusConnectedSpeedHigh         = (kUSBHostPortConnectionSpeedHigh << StandardUSBBitRangePhase(8, 10)),
-    kUSBHostPortStatusConnectedSpeedSuper        = (kUSBHostPortConnectionSpeedSuper << StandardUSBBitRangePhase(8, 10)),
-    kUSBHostPortStatusConnectedSpeedSuperPlus    = (kUSBHostPortConnectionSpeedSuperPlus << StandardUSBBitRangePhase(8, 10)),
-    kUSBHostPortStatusConnectedSpeedSuperPlusBy2 = (kUSBHostPortConnectionSpeedSuperPlusBy2 << StandardUSBBitRangePhase(8, 10)),
-    kUSBHostPortStatusResetting                  = StandardUSBBit(11),
-    kUSBHostPortStatusEnabled                    = StandardUSBBit(12),
-    kUSBHostPortStatusSuspended                  = StandardUSBBit(13),
-    kUSBHostPortStatusOvercurrent                = StandardUSBBit(14),
-    kUSBHostPortStatusTestMode                   = StandardUSBBit(15)
+    kUSBHostPortStatusPortTypeMask               = kIOUSBHostPortStatusPortTypeMask,
+    kUSBHostPortStatusPortTypePhase              = kIOUSBHostPortStatusPortTypePhase,
+    kUSBHostPortStatusPortTypeStandard           = kIOUSBHostPortStatusPortTypeStandard,
+    kUSBHostPortStatusPortTypeCaptive            = kIOUSBHostPortStatusPortTypeCaptive,
+    kUSBHostPortStatusPortTypeInternal           = kIOUSBHostPortStatusPortTypeInternal,
+    kUSBHostPortStatusPortTypeAccessory          = kIOUSBHostPortStatusPortTypeAccessory,
+    kUSBHostPortStatusPortTypeReserved           = kIOUSBHostPortStatusPortTypeReserved,
+    kUSBHostPortStatusConnectedSpeedMask         = kIOUSBHostPortStatusConnectedSpeedMask,
+    kUSBHostPortStatusConnectedSpeedPhase        = kIOUSBHostPortStatusConnectedSpeedPhase,
+    kUSBHostPortStatusConnectedSpeedNone         = kIOUSBHostPortStatusConnectedSpeedNone,
+    kUSBHostPortStatusConnectedSpeedFull         = kIOUSBHostPortStatusConnectedSpeedFull,
+    kUSBHostPortStatusConnectedSpeedLow          = kIOUSBHostPortStatusConnectedSpeedLow,
+    kUSBHostPortStatusConnectedSpeedHigh         = kIOUSBHostPortStatusConnectedSpeedHigh,
+    kUSBHostPortStatusConnectedSpeedSuper        = kIOUSBHostPortStatusConnectedSpeedSuper,
+    kUSBHostPortStatusConnectedSpeedSuperPlus    = kIOUSBHostPortStatusConnectedSpeedSuperPlus,
+    kUSBHostPortStatusConnectedSpeedSuperPlusBy2 = kIOUSBHostPortStatusConnectedSpeedSuperPlusBy2,
+    kUSBHostPortStatusResetting                  = kIOUSBHostPortStatusResetting,
+    kUSBHostPortStatusEnabled                    = kIOUSBHostPortStatusEnabled,
+    kUSBHostPortStatusSuspended                  = kIOUSBHostPortStatusSuspended,
+    kUSBHostPortStatusOvercurrent                = kIOUSBHostPortStatusOvercurrent,
+    kUSBHostPortStatusTestMode                   = kIOUSBHostPortStatusTestMode
 };
 
 /*!

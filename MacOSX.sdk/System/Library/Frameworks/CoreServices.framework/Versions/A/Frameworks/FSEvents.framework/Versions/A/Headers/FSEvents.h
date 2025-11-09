@@ -291,7 +291,20 @@ enum {
    * kFSEventStreamEventExtendedData*Key definitions for the set of keys
    * that may be set in the dictionary.  (See also FSEventStreamCallback.)
    */
-  kFSEventStreamCreateFlagUseExtendedData __OSX_AVAILABLE_STARTING(__MAC_10_13, __IPHONE_11_0) = 0x00000040
+  kFSEventStreamCreateFlagUseExtendedData __OSX_AVAILABLE_STARTING(__MAC_10_13, __IPHONE_11_0) = 0x00000040,
+
+  /*
+   * When requesting historical events it is possible that some events
+   * may get skipped due to the way they are stored.  With this flag
+   * all historical events in a given chunk are returned even if their
+   * event-id is less than the sinceWhen id.  Put another way, deliver
+   * all the events in the first chunk of historical events that contains
+   * the sinceWhen id so that none are skipped even if their id is less
+   * than the sinceWhen id.  This overlap avoids any issue with missing
+   * events that happened at/near the time of an unclean restart of the
+   * client process.
+   */
+  kFSEventStreamCreateFlagFullHistory __OSX_AVAILABLE_STARTING(__MAC_10_15, __IPHONE_13_0) = 0x00000080,
 };
 
 /*

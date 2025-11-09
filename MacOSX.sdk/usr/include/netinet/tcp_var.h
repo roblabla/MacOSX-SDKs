@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2019 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2020 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -104,7 +104,7 @@ struct tcpcb {
 #define TF_REQ_TSTMP    0x00080         /* have/will request timestamps */
 #define TF_RCVD_TSTMP   0x00100         /* a timestamp was received in SYN */
 #define TF_SACK_PERMIT  0x00200         /* other side said I could SACK */
-#define TF_NEEDSYN      0x00400         /* send SYN (implicit state) */
+#define TF_NEEDSYN      0x00400         /* send SYN (implicit state) - unused but needed for backwards compatibility */
 #define TF_NEEDFIN      0x00800         /* send FIN (implicit state) */
 #define TF_NOPUSH       0x01000         /* don't push */
 #define TF_REQ_CC       0x02000         /* have/will request CC */
@@ -295,14 +295,6 @@ struct  tcpstat {
 	u_int32_t       tcps_rxtfindrop;        /* drop conn after retransmitting FIN */
 	u_int32_t       tcps_fcholdpacket;      /* packets withheld because of flow control */
 
-	/* LRO related stats */
-	u_int32_t       tcps_coalesced_pack;    /* number of coalesced packets */
-	u_int32_t       tcps_flowtbl_full;      /* times flow table was full */
-	u_int32_t       tcps_flowtbl_collision; /* collisions in flow tbl */
-	u_int32_t       tcps_lro_twopack;       /* 2 packets coalesced */
-	u_int32_t       tcps_lro_multpack;      /* 3 or 4 pkts coalesced */
-	u_int32_t       tcps_lro_largepack;     /* 5 or more pkts coalesced */
-
 	u_int32_t       tcps_limited_txt;       /* Limited transmit used */
 	u_int32_t       tcps_early_rexmt;       /* Early retransmit used */
 	u_int32_t       tcps_sack_ackadv;       /* Cumulative ack advanced along with sack */
@@ -316,9 +308,9 @@ struct  tcpstat {
 	u_int32_t       tcps_snd_swcsum_bytes;  /* tcp swcksum (outbound), bytes */
 	u_int32_t       tcps_snd6_swcsum;       /* tcp6 swcksum (outbound), packets */
 	u_int32_t       tcps_snd6_swcsum_bytes; /* tcp6 swcksum (outbound), bytes */
-	u_int32_t       tcps_msg_unopkts;       /* unordered packet on TCP msg stream */
-	u_int32_t       tcps_msg_unoappendfail; /* failed to append unordered pkt */
-	u_int32_t       tcps_msg_sndwaithipri; /* send is waiting for high priority data */
+	u_int32_t       tcps_unused_1;
+	u_int32_t       tcps_unused_2;
+	u_int32_t       tcps_unused_3;
 
 	/* MPTCP Related stats */
 	u_int32_t       tcps_invalid_mpcap;     /* Invalid MPTCP capable opts */
@@ -498,7 +490,7 @@ struct  xtcpcb {
 	u_quad_t        xt_alignment_hack;
 };
 
-#if !CONFIG_EMBEDDED
+#if XNU_TARGET_OS_OSX || !(TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR)
 
 struct  xtcpcb64 {
 	u_int32_t               xt_len;
@@ -579,7 +571,7 @@ struct  xtcpcb64 {
 	u_quad_t                xt_alignment_hack;
 };
 
-#endif /* !CONFIG_EMBEDDED */
+#endif /* XNU_TARGET_OS_OSX || !(TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR) */
 
 
 #pragma pack()

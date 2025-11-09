@@ -5,7 +5,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "TKTLVRecord.h"
+#import <CryptoTokenKit/TKTLVRecord.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

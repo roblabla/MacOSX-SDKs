@@ -1,16 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 296DD73E-2C8A-3242-8939-41BD65DB9A6B' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           6AD1E54D-72FD-34B6-B717-F77640D6A9F6
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           15966619-AEB9-3804-80E6-F63A35BA9496
 install-name:    '/System/Library/PrivateFrameworks/IASUtilities.framework/Versions/A/IASUtilities'
 current-version: 119
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _IASAttachLoggingToFile, _IASAttachLoggingToFileIgnoringExistingBuffer, 
-                       _IASAuthenticationErrorDomain, _IASBootTimeInstallManagerAlternateStatusKey, 
-                       _IASBootTimeInstallManagerErrorDomain, _IASBootTimeInstallManagerPrimaryStatusKey, 
-                       _IASBootTimeInstallableItemErrorDomain, _IASChunklistChunkNotFound, 
-                       _IASChunklistDefaultChunkSize, _IASChunklistErrorDomain, _IASChunklistFileSettingDefaultChunkSize, 
+                       _IASAuthenticationDidFinish, _IASAuthenticationErrorDomain, 
+                       _IASAuthenticationWillStartWithUINotification, _IASAuthenticationWillStartWithoutUINotification, 
+                       _IASBootTimeInstallManagerAlternateStatusKey, _IASBootTimeInstallManagerErrorDomain, 
+                       _IASBootTimeInstallManagerPrimaryStatusKey, _IASBootTimeInstallableItemErrorDomain, 
+                       _IASChunklistChunkNotFound, _IASChunklistDefaultChunkSize, 
+                       _IASChunklistErrorDomain, _IASChunklistFileSettingDefaultChunkSize, 
                        _IASChunklistFileSettingExpectedChunkCount, _IASChunklistFileSettingSetSignatureHeaderOnly, 
                        _IASChunklistOptionsAllowDevSignatureKey, _IASChunklistOptionsInternalAllowNoSignature, 
                        _IASChunklistOptionsRequireSignatureKey, _IASDataFromBytesArray, 
@@ -34,7 +42,7 @@ exports:
                        _instlog_is_active, _instlog_is_shared, _instlog_stringValue, 
                        _instlogd_attach_to_file, _instlogd_client_attach_to_file, 
                        _instlogd_client_detach_from_file, _instlogd_detach_from_file, 
-                       _kIASAreaCodeKey, _kIASAreaCodesKey, _kIASAuthInstallServiceID, 
+                       _kACMAppID, _kIASAreaCodeKey, _kIASAreaCodesKey, _kIASAuthInstallServiceID, 
                        _kIASCallingCodeKey, _kIASChunklistChunkFormatV1, _kIASChunklistEFIModulusLength, 
                        _kIASChunklistEFIRSASignatureLength, _kIASChunklistFileVersionV1, 
                        _kIASChunklistIntegrityOnlySignatureLength, _kIASChunklistMagic, 
@@ -46,23 +54,23 @@ exports:
                        _uncompressedDataRequested ]
     objc-classes:    [ IASAuthenticationAgentController, IASAuthenticationManager, 
                        IASBZIP2InputStream, IASBZIP2OutputStream, IASBlessUtilities, 
-                       IASBootTimeInstallManager, IASBootTimeInstallableItem, IASBottomMagicPocketView, 
-                       IASChunklist, IASCommonViewBasedTableDelegate, IASCountryCodePopUpView, 
-                       IASCountryCodesArray, IASDMGUtilities, IASDeviceIconManager, 
-                       IASDeviceStringManager, IASDiskImageInstallMedia, IASFakeLinkButton, 
-                       IASFilesystemUtils, IASFirstResponderDisablingTextView, IASInputStream, 
-                       IASInstallMedia, IASKeyableWindow, IASLZMAInputStream, IASLZMAOutputStream, 
-                       IASLeftMagicPocketView, IASLocalSecretPrompt, IASLogDataSource, 
-                       IASLogWindowController, IASMagicPocketClipView, IASMagicPocketScrollView, 
-                       IASMagicPocketView, IASMessageTracing, IASMutableChunklist, 
-                       IASNightInstallSupport, IASOutputStream, IASParallelCompressionInputStream, 
-                       IASParallelCompressionOutputStream, IASPickerViewController, 
-                       IASRightMagicPocketView, IASServerSupport, IASSizeLimitedInputStream, 
-                       IASStandaloneTextView, IASStreamError, IASStreamFIFOQueue, 
-                       IASSystemInformation, IASSystemSize, IASThreadSafeEvent, IASTimeRemainingFormatter, 
-                       IASTopMagicPocketView, IASZLIBInputStream, IASZLIBOutputStream, 
-                       ILCBaseConnection, ILCConnection, InstlogRemoteLogging, UAULaunch, 
-                       _IASBootTimeInstallProgressObserver ]
+                       IASBootTimeInstallClient, IASBootTimeInstallManager, IASBootTimeInstallableItem, 
+                       IASBottomMagicPocketView, IASChunklist, IASCommonViewBasedTableDelegate, 
+                       IASCountryCodePopUpView, IASCountryCodesArray, IASDMGUtilities, 
+                       IASDeviceIconManager, IASDeviceStringManager, IASDiskImageInstallMedia, 
+                       IASFakeLinkButton, IASFilesystemUtils, IASFirstResponderDisablingTextView, 
+                       IASInputStream, IASInstallMedia, IASKeyableWindow, IASLZMAInputStream, 
+                       IASLZMAOutputStream, IASLeftMagicPocketView, IASLocalSecretPrompt, 
+                       IASLogDataSource, IASLogWindowController, IASMagicPocketClipView, 
+                       IASMagicPocketScrollView, IASMagicPocketView, IASMessageTracing, 
+                       IASMutableChunklist, IASNightInstallSupport, IASOutputStream, 
+                       IASParallelCompressionInputStream, IASParallelCompressionOutputStream, 
+                       IASPickerViewController, IASRightMagicPocketView, IASServerSupport, 
+                       IASSizeLimitedInputStream, IASStandaloneTextView, IASStreamError, 
+                       IASStreamFIFOQueue, IASSystemInformation, IASSystemSize, IASThreadSafeEvent, 
+                       IASTimeRemainingFormatter, IASTopMagicPocketView, IASZLIBInputStream, 
+                       IASZLIBOutputStream, ILCBaseConnection, ILCConnection, InstlogRemoteLogging, 
+                       UAULaunch ]
     objc-ivars:      [ IASLogDataSource._buf, IASLogDataSource._currentLogFilter, 
                        IASLogDataSource._last_seen_offset, IASLogDataSource._lineIndex, 
                        IASLogDataSource._lineNumbers, IASLogDataSource._lnCol, IASLogDataSource._logView, 
@@ -73,6 +81,6 @@ exports:
                        IASLogWindowController._logDataSource, IASLogWindowController._logDetailLevelPopUpButton, 
                        IASLogWindowController._resourcesBundle, IASLogWindowController._toolbarIDList, 
                        IASLogWindowController._toolbarItems, IASLogWindowController.sendLogCommentTxt, 
-                       IASLogWindowController.sendLogContactTxt, IASLogWindowController.sendLogSheet, 
-                       IASLogWindowController.uiLogView, IASLogWindowController.window ]
+                       IASLogWindowController.sendLogContactTxt, IASLogWindowController.uiLogView, 
+                       IASLogWindowController.window ]
 ...

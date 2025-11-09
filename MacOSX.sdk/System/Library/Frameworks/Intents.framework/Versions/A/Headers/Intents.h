@@ -2,7 +2,7 @@
 //  Intents.h
 //  Intents
 //
-//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2020 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -29,6 +29,8 @@ FOUNDATION_EXPORT const unsigned char IntentsVersionString[];
 #import <Intents/INInteraction.h>
 #import <Intents/INSpeakable.h>
 #import <Intents/INParameter.h>
+#import <Intents/INObjectSection.h>
+#import <Intents/INObjectCollection.h>
 
 // Intents & Intent Responses
 #import <Intents/INIntents.h>
@@ -76,6 +78,7 @@ FOUNDATION_EXPORT const unsigned char IntentsVersionString[];
 
 // Messages Domain
 #import <Intents/INMessage.h>
+#import <Intents/INSendMessageAttachment.h>
 
 // Payments Domain
 #import <Intents/INBalanceAmount.h>
@@ -94,17 +97,18 @@ FOUNDATION_EXPORT const unsigned char IntentsVersionString[];
 #import <Intents/INReservation.h>
 #import <Intents/INReservationAction.h>
 
-// Flight Reservation
+// Reservations
 #import <Intents/INFlightReservation.h>
-
-// Restaurant Booking
-#import <Intents/INIntentRestaurantReservation.h>
-
 #import <Intents/INLodgingReservation.h>
 #import <Intents/INRentalCarReservation.h>
 #import <Intents/INRestaurantReservation.h>
 #import <Intents/INTicketedEventReservation.h>
 #import <Intents/INTrainReservation.h>
+#import <Intents/INBusReservation.h>
+#import <Intents/INBoatReservation.h>
+
+// Restaurant Booking
+#import <Intents/INIntentRestaurantReservation.h>
 
 // User Vocabulary
 #import <Intents/INVocabulary.h>
@@ -146,6 +150,7 @@ FOUNDATION_EXPORT const unsigned char IntentsVersionString[];
 #import <Intents/INSaveProfileInCarIntent_Deprecated.h>
 #import <Intents/INSearchCallHistoryIntent_Deprecated.h>
 #import <Intents/INStartAudioCallIntent_Deprecated.h>
+#import <Intents/INStartCallIntent_Deprecated.h>
 #import <Intents/INSearchForMessagesIntent_Deprecated.h>
 #import <Intents/INSendMessageIntent_Deprecated.h>
 #import <Intents/INSetProfileInCarIntent_Deprecated.h>

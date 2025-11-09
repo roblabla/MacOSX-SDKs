@@ -35,7 +35,7 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
-/*! Use `[NSPredicate predicateWithValue:YES]` / `NSPredicate(value: true)` if you want to query for all records of a given type. */
+/*! Use @code [NSPredicate predicateWithValue:YES] / NSPredicate(value: true) @endcode if you want to query for all records of a given type. */
 - (instancetype)initWithRecordType:(CKRecordType)recordType predicate:(NSPredicate *)predicate NS_DESIGNATED_INITIALIZER;
 
 @property (nonatomic, readonly, copy) CKRecordType recordType;
@@ -44,4 +44,5 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
 @property (nonatomic, copy, nullable) NSArray<NSSortDescriptor *> *sortDescriptors;
 
 @end
+
 NS_ASSUME_NONNULL_END

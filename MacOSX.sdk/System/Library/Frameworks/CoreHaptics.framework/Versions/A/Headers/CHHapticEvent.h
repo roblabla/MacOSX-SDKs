@@ -51,13 +51,13 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NSString *CHHapticEventType NS_TYPED_ENUM;
 
 CH_EXPORT
-CHHapticEventType CHHapticEventTypeHapticTransient API_AVAILABLE(ios(13.0), macos(10.15));
+CHHapticEventType CHHapticEventTypeHapticTransient API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
 CH_EXPORT
-CHHapticEventType CHHapticEventTypeHapticContinuous API_AVAILABLE(ios(13.0), macos(10.15));
+CHHapticEventType CHHapticEventTypeHapticContinuous API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
 CH_EXPORT
-CHHapticEventType CHHapticEventTypeAudioContinuous API_AVAILABLE(ios(13.0), macos(10.15));
+CHHapticEventType CHHapticEventTypeAudioContinuous API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
 CH_EXPORT
-CHHapticEventType CHHapticEventTypeAudioCustom API_AVAILABLE(ios(13.0), macos(10.15));
+CHHapticEventType CHHapticEventTypeAudioCustom API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
 
 /*!	@typedef CHHapticAudioResourceID
 	@abstract
@@ -72,7 +72,7 @@ typedef NSUInteger	CHHapticAudioResourceID;
 	@discussion
 		CHHapticEvents have a relative time property to allow specifying the time relationship between events in a pattern.
  */
-CH_EXPORT API_AVAILABLE(ios(13.0), macos(10.15))
+CH_EXPORT API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos)
 @interface CHHapticEvent : NSObject
 
 /*!	@property type

@@ -1,12 +1,22 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: F013D67F-30D6-30A2-AC5E-2A203529C6F6' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           D07744F7-48DC-3DD3-A14D-12068C65C21E
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           4FCED9D8-F8E5-3374-B372-06802F4DC9F8
 install-name:    '/usr/lib/libapr-1.0.dylib'
 current-version: 5.8
 compatibility-version: 5
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos ]
+    symbols:         [ '_apr_dir_open$INODE64', '_apr_dir_read$INODE64', '_apr_dir_rewind$INODE64', 
+                       '_apr_file_info_get$INODE64', '_apr_file_info_get_locked$INODE64', 
+                       '_apr_stat$INODE64' ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _apr__SHA256_Data, _apr__SHA256_End, _apr__SHA256_Final, _apr__SHA256_Init, 
                        _apr__SHA256_Transform, _apr__SHA256_Update, _apr_allocator_alloc, 
                        _apr_allocator_create, _apr_allocator_destroy, _apr_allocator_free, 
@@ -20,18 +30,16 @@ exports:
                        _apr_atomic_xchg32, _apr_atomic_xchgptr, _apr_collapse_spaces, 
                        _apr_cpystrn, _apr_crypto_sha256_new, _apr_ctime, _apr_day_snames, 
                        _apr_dir_close, _apr_dir_make, _apr_dir_make_recursive, _apr_dir_open, 
-                       '_apr_dir_open$INODE64', _apr_dir_read, '_apr_dir_read$INODE64', 
-                       _apr_dir_remove, _apr_dir_rewind, '_apr_dir_rewind$INODE64', 
-                       _apr_dso_error, _apr_dso_load, _apr_dso_sym, _apr_dso_unload, 
-                       _apr_env_delete, _apr_env_get, _apr_env_set, _apr_escape_echo, 
-                       _apr_escape_entity, _apr_escape_hex, _apr_escape_path, _apr_escape_path_segment, 
+                       _apr_dir_read, _apr_dir_remove, _apr_dir_rewind, _apr_dso_error, 
+                       _apr_dso_load, _apr_dso_sym, _apr_dso_unload, _apr_env_delete, 
+                       _apr_env_get, _apr_env_set, _apr_escape_echo, _apr_escape_entity, 
+                       _apr_escape_hex, _apr_escape_path, _apr_escape_path_segment, 
                        _apr_escape_shell, _apr_escape_urlencoded, _apr_file_append, 
                        _apr_file_attrs_set, _apr_file_buffer_set, _apr_file_buffer_size_get, 
                        _apr_file_close, _apr_file_copy, _apr_file_data_get, _apr_file_data_set, 
                        _apr_file_datasync, _apr_file_dup, _apr_file_dup2, _apr_file_eof, 
                        _apr_file_flags_get, _apr_file_flush, _apr_file_flush_locked, 
-                       _apr_file_getc, _apr_file_gets, _apr_file_info_get, '_apr_file_info_get$INODE64', 
-                       _apr_file_info_get_locked, '_apr_file_info_get_locked$INODE64', 
+                       _apr_file_getc, _apr_file_gets, _apr_file_info_get, _apr_file_info_get_locked, 
                        _apr_file_inherit_set, _apr_file_inherit_unset, _apr_file_link, 
                        _apr_file_lock, _apr_file_mktemp, _apr_file_mtime_set, _apr_file_name_get, 
                        _apr_file_namedpipe_create, _apr_file_open, _apr_file_open_flags_stderr, 
@@ -134,12 +142,12 @@ exports:
                        _apr_socket_send, _apr_socket_sendfile, _apr_socket_sendto, 
                        _apr_socket_sendv, _apr_socket_shutdown, _apr_socket_timeout_get, 
                        _apr_socket_timeout_set, _apr_socket_type_get, _apr_stat, 
-                       '_apr_stat$INODE64', _apr_strerror, _apr_strfsize, _apr_strftime, 
-                       _apr_strnatcasecmp, _apr_strnatcmp, _apr_strtoff, _apr_strtoi64, 
-                       _apr_strtok, _apr_table_add, _apr_table_addn, _apr_table_clear, 
-                       _apr_table_clone, _apr_table_compress, _apr_table_copy, _apr_table_do, 
-                       _apr_table_elts, _apr_table_get, _apr_table_getm, _apr_table_make, 
-                       _apr_table_merge, _apr_table_mergen, _apr_table_overlap, _apr_table_overlay, 
+                       _apr_strerror, _apr_strfsize, _apr_strftime, _apr_strnatcasecmp, 
+                       _apr_strnatcmp, _apr_strtoff, _apr_strtoi64, _apr_strtok, 
+                       _apr_table_add, _apr_table_addn, _apr_table_clear, _apr_table_clone, 
+                       _apr_table_compress, _apr_table_copy, _apr_table_do, _apr_table_elts, 
+                       _apr_table_get, _apr_table_getm, _apr_table_make, _apr_table_merge, 
+                       _apr_table_mergen, _apr_table_overlap, _apr_table_overlay, 
                        _apr_table_set, _apr_table_setn, _apr_table_unset, _apr_table_vdo, 
                        _apr_temp_dir_get, _apr_terminate, _apr_terminate2, _apr_thread_cond_broadcast, 
                        _apr_thread_cond_create, _apr_thread_cond_destroy, _apr_thread_cond_pool_get, 

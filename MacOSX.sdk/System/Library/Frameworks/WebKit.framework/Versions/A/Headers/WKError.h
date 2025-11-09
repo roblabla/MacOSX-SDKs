@@ -45,6 +45,8 @@ WK_EXTERN NSString * const WKErrorDomain API_AVAILABLE(macos(10.10), ios(8.0));
  @constant WKErrorContentRuleListStoreVersionMismatch  Indicates that the WKUserContentRuleList version did not match the latest.
  @constant WKErrorAttributedStringContentFailedToLoad  Indicates that the attributed string content failed to load.
  @constant WKErrorAttributedStringContentLoadTimedOut  Indicates that loading attributed string content timed out.
+ @constant WKErrorNavigationAppBoundDomain  Indicates that a navigation failed due to an app-bound domain restriction.
+ @constant WKErrorJavaScriptAppBoundDomain  Indicates that JavaScript execution failed due to an app-bound domain restriction.
  */
 typedef NS_ENUM(NSInteger, WKErrorCode) {
     WKErrorUnknown = 1,
@@ -58,6 +60,9 @@ typedef NS_ENUM(NSInteger, WKErrorCode) {
     WKErrorContentRuleListStoreVersionMismatch API_AVAILABLE(macos(10.13), ios(11.0)),
     WKErrorAttributedStringContentFailedToLoad API_AVAILABLE(macos(10.15), ios(13.0)),
     WKErrorAttributedStringContentLoadTimedOut API_AVAILABLE(macos(10.15), ios(13.0)),
+    WKErrorJavaScriptInvalidFrameTarget API_AVAILABLE(macos(11.0), ios(14.0)),
+    WKErrorNavigationAppBoundDomain API_AVAILABLE(macos(11.0), ios(14.0)),
+    WKErrorJavaScriptAppBoundDomain API_AVAILABLE(macos(11.0), ios(14.0)),
 } API_AVAILABLE(macos(10.10), ios(8.0));
 
 NS_ASSUME_NONNULL_END

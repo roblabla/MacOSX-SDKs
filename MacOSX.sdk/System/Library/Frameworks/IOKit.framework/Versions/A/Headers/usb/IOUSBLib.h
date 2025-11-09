@@ -4651,18 +4651,9 @@ typedef IOUSBInterfaceInterface942 IOUSBInterfaceInterface;
 // The undecorated interface ID is the oldest version
 #define kIOUSBInterfaceInterfaceID kIOUSBInterfaceInterfaceID100
 
-#if !__OPEN_SOURCE__ && TARGET_OS_IPHONE && !TARGET_OS_MACCATALYST
-#define kIOUSBDeviceClassName           kIOUSBHostDeviceClassName
-#define kIOUSBInterfaceClassName        kIOUSBHostInterfaceClassName
-#else
-#if MAC_OS_X_VERSION_MIN_REQUIRED <= MAC_OS_X_VERSION_10_14
 #define kIOUSBDeviceClassName           "IOUSBDevice"
 #define kIOUSBInterfaceClassName        "IOUSBInterface"
-#else
-#define kIOUSBDeviceClassName           kIOUSBHostDeviceClassName
-#define kIOUSBInterfaceClassName        kIOUSBHostInterfaceClassName
-#endif /* MAC_OS_X_VERSION_MIN_REQUIRED <= MAC_OS_X_VERSION_10_14 */
-#endif
+
 __END_DECLS
 
 #endif /* ! _IOUSBLIB_H */

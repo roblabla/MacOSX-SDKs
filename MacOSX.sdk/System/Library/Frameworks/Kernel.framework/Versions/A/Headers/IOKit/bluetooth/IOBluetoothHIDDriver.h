@@ -11,7 +11,10 @@
 #import <IOKit/bluetooth/Bluetooth.h>
 
 #import "IOKit/pwr_mgt/RootDomain.h"
-
+#define TARGET_OS_HAS_USBDRIVERKIT_IOUSBHOSTDEVICE __has_include(<BluetoothHIDDriverKit/IOBluetoothHIDDriver.h>)
+#if TARGET_OS_HAS_USBDRIVERKIT_IOUSBHOSTDEVICE
+#include <BluetoothHIDDriverKit/IOBluetoothHIDDriver.h>
+#endif
 //===========================================================================================================================
 // Macros
 //===========================================================================================================================
@@ -35,7 +38,7 @@ class IOWorkQueue;
 
 class IOBluetoothHIDDriver : public IOHIDDevice
 {
-	OSDeclareDefaultStructors( IOBluetoothHIDDriver )
+    OSDeclareDefaultStructors(IOBluetoothHIDDriver)
 
     IOWorkLoop*					_workLoop;
 	IOCommandGate*				_commandGate;

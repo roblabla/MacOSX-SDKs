@@ -24,7 +24,10 @@
 #import <Cocoa/Cocoa.h>
 #import <DiscRecording/DiscRecording.h>
 #import <AvailabilityMacros.h>
+#import <Availability.h>
 
+
+API_UNAVAILABLE_BEGIN(ios)
 
 
 /*!
@@ -249,3 +252,6 @@ extern NSString* const DRSetupPanelSelectedDeviceKey					AVAILABLE_MAC_OS_X_VERS
 - (BOOL) setupPanel:(DRSetupPanel*)aPanel deviceContainsSuitableMedia:(DRDevice*)device promptString:(NSString**)prompt;
 
 @end
+
+
+API_UNAVAILABLE_END

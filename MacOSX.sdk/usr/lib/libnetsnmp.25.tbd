@@ -1,12 +1,18 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: BBFC1D4D-ED12-354E-A7B7-32CEB2AEBD04' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           8408ED6F-6316-38DD-85FA-6B57594F9A9D
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           9A69FDA3-56B0-313C-823C-AFB292942148
 install-name:    '/usr/lib/libnetsnmp.25.dylib'
 current-version: 26.2
 compatibility-version: 26
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _File, _MDbegin, _MDchecksum, _MDget, _MDreverse, _MDsign, 
                        _MDupdate, _Mib, _RFC1213_MIB, _Sessions, __mibindex_add, 
                        __mibindexes, __netsnmp_udp_sockopt_set, __pm_save_everything, 

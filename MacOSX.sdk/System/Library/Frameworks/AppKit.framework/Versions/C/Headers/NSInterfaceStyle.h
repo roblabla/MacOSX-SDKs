@@ -8,7 +8,7 @@
 #import <AppKit/NSResponder.h>
 #import <AppKit/AppKitDefines.h>
 
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 enum {
     NSNoInterfaceStyle API_DEPRECATED("", macos(10.0,10.8)) = 0,    // Default value for a window's interfaceStyle

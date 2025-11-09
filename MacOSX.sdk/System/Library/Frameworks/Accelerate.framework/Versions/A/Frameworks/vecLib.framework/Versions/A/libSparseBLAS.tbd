@@ -1,12 +1,32 @@
---- !tapi-tbd-v3
-archs:           [ x86_64, x86_64h ]
-uuids:           [ 'x86_64: 804F0A17-36ED-3FA3-A1C6-695525A793D2', 'x86_64: 804F0A17-36ED-3FA3-A1C6-695525A793D2', 
-                   'x86_64h: 85C9E356-92E7-33EE-9890-A5781B79FBC2', 'x86_64h: 85C9E356-92E7-33EE-9890-A5781B79FBC2' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
+                   arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           FC68529C-BE65-367A-B4A3-B4496ACE7F9D
+  - target:          x86_64-maccatalyst
+    value:           FC68529C-BE65-367A-B4A3-B4496ACE7F9D
+  - target:          x86_64h-macos
+    value:           E4E152C7-43BF-3706-B695-512852B35E46
+  - target:          x86_64h-maccatalyst
+    value:           E4E152C7-43BF-3706-B695-512852B35E46
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           E9A9237A-BE86-3A4C-93B8-65740A952DF4
+  - target:          arm64e-maccatalyst
+    value:           E9A9237A-BE86-3A4C-93B8-65740A952DF4
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libSparseBLAS.dylib'
-exports:         
-  - archs:           [ x86_64, x86_64h ]
-    allowable-clients: [ Sparse, vecLib ]
+allowable-clients:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+    clients:         [ Sparse, vecLib ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
+                       x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
     symbols:         [ _sparse_commit, _sparse_elementwise_norm_double, _sparse_elementwise_norm_float, 
                        _sparse_extract_block_double, _sparse_extract_block_float, 
                        _sparse_extract_sparse_column_double, _sparse_extract_sparse_column_float, 

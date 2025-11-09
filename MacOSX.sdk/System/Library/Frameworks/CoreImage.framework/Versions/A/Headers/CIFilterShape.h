@@ -29,7 +29,7 @@ NS_CLASS_AVAILABLE(10_4, 9_0)
 /* Create a shape from the result of transforming the shape by 'm'. If
  * 'flag' is false the new shape will contain all pixels in the
  * transformed shape (and possibly some outside the transformed shape).
- * If 'flag' is false the new shape will contain a subset of the pixels
+ * If 'flag' is true the new shape will contain a subset of the pixels
  * in the transformed shape (but none of those outside the transformed
  * shape). */
 - (CIFilterShape *)transformBy:(CGAffineTransform)m interior:(BOOL)flag;

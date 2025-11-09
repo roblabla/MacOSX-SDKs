@@ -44,6 +44,11 @@ const char *_swift_stdlib_strtod_clocale(const char *nptr, double *outResult);
 /// overflow.
 SWIFT_RUNTIME_STDLIB_API
 const char *_swift_stdlib_strtof_clocale(const char *nptr, float *outResult);
+/// Call strtof_l with the C locale, swapping argument and return
+/// types so we can operate consistently on Float80.  Return NULL on
+/// overflow.
+SWIFT_RUNTIME_STDLIB_API
+const char *_swift_stdlib_strtof16_clocale(const char *nptr, __fp16 *outResult);
 
 SWIFT_RUNTIME_STDLIB_API
 void _swift_stdlib_immortalize(void *obj);
@@ -57,7 +62,7 @@ SWIFT_RUNTIME_STDLIB_API
 int _swift_stdlib_putc_stderr(int C);
 
 SWIFT_RUNTIME_STDLIB_API
-__swift_size_t _swift_stdlib_getHardwareConcurrency();
+__swift_size_t _swift_stdlib_getHardwareConcurrency(void);
 
 /// Manually allocated memory is at least 16-byte aligned in Swift.
 ///

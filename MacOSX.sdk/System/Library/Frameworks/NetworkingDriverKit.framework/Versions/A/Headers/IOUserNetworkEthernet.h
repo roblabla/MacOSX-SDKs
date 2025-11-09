@@ -1,6 +1,34 @@
-/* iig(DriverKit-73.0.1) generated from IOUserNetworkEthernet.iig */
+/* iig(DriverKit-107.40.8) generated from IOUserNetworkEthernet.iig */
 
-/* IOUserNetworkEthernet.iig:1-24 */
+/* IOUserNetworkEthernet.iig:1-44 */
+/*
+ * Copyright (c) 2019-2020 Apple, Inc. All rights reserved.
+ *
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
+ *
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. The rights granted to you under the License
+ * may not be used to create, or enable the creation or redistribution of,
+ * unlawful or unlicensed copies of an Apple operating system, or to
+ * circumvent, violate, or enable the circumvention or violation of, any
+ * terms of an Apple operating system software license agreement.
+ *
+ * Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this file.
+ *
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
+ * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
+ * limitations under the License.
+ *
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
+ */
+
 #ifndef _IOUSERNETWORKETHERNET_IIG
 #define _IOUSERNETWORKETHERNET_IIG
 
@@ -14,19 +42,112 @@
 #include <NetworkingDriverKit/IOUserNetworkPacketBufferPool.h>  /* .iig include */
 
 struct _IOUserNetworkEthernetInterfaceDescriptor;
+struct nicproxy_limits_info_s;
+struct offload_info_s;
+
+/* source class IOUserNetworkEthernet IOUserNetworkEthernet.iig:45-140 */
+
+#if __DOCUMENTATION__
+#define KERNEL IIG_KERNEL
 
 /*!
-@iig implementation
-#if KERNEL
-#include <NetworkingDriverKit/IOUserNetworkPacketBufferPool_kext.h>
-#include <NetworkingDriverKit/IOUserNetworkPacketQueue_kext.h>
-#include <NetworkingDriverKit/IOUserNetworkEthernet_kext.h>
-#endif
-@iig end
 */
 
-/* class IOUserNetworkEthernet IOUserNetworkEthernet.iig:25-91 */
+class KERNEL IOUserNetworkEthernet : public IOService
+{
+public:
+    virtual bool
+    init() override;
 
+    virtual void
+    free() override;
+
+    kern_return_t
+    SetTxPacketHeadroom(uint16_t numBytes) LOCALONLY;
+
+    kern_return_t
+    SetTxPacketTailroom(uint16_t numBytes) LOCALONLY;
+
+    kern_return_t
+    SetWakeOnMagicPacketSupport(bool isSupported) LOCALONLY;
+
+    kern_return_t
+    SetSoftwareVlanSupport(bool isSupported) LOCALONLY;
+
+    virtual kern_return_t
+    RegisterEthernetInterface(
+        IOUserNetworkMACAddress macAddress,
+        IOUserNetworkPacketBufferPool * pool,
+        IOUserNetworkPacketQueue ** queues,
+        uint32_t queueCount) LOCALONLY;
+
+    virtual kern_return_t
+    ReportLinkStatus(
+        IOUserNetworkLinkStatus linkStatus,
+        IOUserNetworkMediaType  activeMediaType);
+
+    virtual kern_return_t
+    ReportLinkQuality(IOUserNetworkLinkQuality linkQuality);
+
+    virtual kern_return_t
+    ReportDataBandwidths(
+        uint64_t    maxInputBandwidth,
+        uint64_t    maxOutputBandwidth,
+        uint64_t    effectiveInputBandwidth,
+        uint64_t    effectiveOutputBandwidth);
+
+    virtual kern_return_t
+    SetInterfaceEnable(bool isEnable) = 0;
+
+    virtual kern_return_t
+    SetPromiscuousModeEnable(bool enable) = 0;
+
+    virtual kern_return_t
+    SetMulticastAddresses(
+        const IOUserNetworkMACAddress * addresses,
+        uint32_t count) = 0;
+
+    virtual kern_return_t
+    SetAllMulticastModeEnable(bool enable) = 0;
+
+    virtual kern_return_t
+    ReportAvailableMediaTypes(
+        const IOUserNetworkMediaType * mediaTypes,
+        uint32_t count) LOCALONLY;
+
+    virtual kern_return_t
+    SelectMediaType(IOUserNetworkMediaType mediaType) = 0;
+
+    virtual kern_return_t
+    SetWakeOnMagicPacketEnable(bool enable) = 0;
+
+    virtual kern_return_t
+    SetMTU( uint32_t mtu ) LOCAL = 0;
+
+    virtual kern_return_t
+    GetMaxTransferUnit( uint32_t *mtu ) LOCAL = 0;
+    
+    virtual kern_return_t
+    SetHardwareAssists( uint32_t hardwareAssists ) LOCAL = 0;
+
+    virtual kern_return_t
+    GetHardwareAssists( uint32_t *hardwareAssists ) LOCAL = 0;
+
+    virtual kern_return_t
+    ReportNicProxyLimits(nicproxy_limits_info_s nicproxy_limits_info);
+    
+    virtual kern_return_t SetPowerState(uint32_t powerstate) override;
+
+    virtual void hwConfigNicProxyData(offload_info_s *handoff) LOCALONLY;
+};
+
+#undef KERNEL
+#else /* __DOCUMENTATION__ */
+
+/* generated class IOUserNetworkEthernet IOUserNetworkEthernet.iig:45-140 */
+
+#define IOUserNetworkEthernet_ReleaseNicProxyData_ID            0x9f4819c35f444e74ULL
+#define IOUserNetworkEthernet_RetainNicProxyData_ID            0xaa273d9e353db313ULL
 #define IOUserNetworkEthernet__DataAvailable_ID            0xf1fe93bc0f089f02ULL
 #define IOUserNetworkEthernet__ReportAvailableMediaTypes_ID            0xb48b4ba3f53fbc2aULL
 #define IOUserNetworkEthernet__SetMulticastAddresses_ID            0xfce8a9ef10e7e262ULL
@@ -40,6 +161,17 @@ struct _IOUserNetworkEthernetInterfaceDescriptor;
 #define IOUserNetworkEthernet_SetAllMulticastModeEnable_ID            0xe042a87972611225ULL
 #define IOUserNetworkEthernet_SelectMediaType_ID            0xc3e63ac546ebd1feULL
 #define IOUserNetworkEthernet_SetWakeOnMagicPacketEnable_ID            0xb23ee0228705fb95ULL
+#define IOUserNetworkEthernet_SetMTU_ID            0xed7ce2ca0df8ed0eULL
+#define IOUserNetworkEthernet_GetMaxTransferUnit_ID            0xa49568f23ee8efd5ULL
+#define IOUserNetworkEthernet_SetHardwareAssists_ID            0xe397b741b15a61d6ULL
+#define IOUserNetworkEthernet_GetHardwareAssists_ID            0xe77a9aa5db9c706cULL
+#define IOUserNetworkEthernet_ReportNicProxyLimits_ID            0xa4ee315532585173ULL
+
+#define IOUserNetworkEthernet_ReleaseNicProxyData_Args \
+
+
+#define IOUserNetworkEthernet_RetainNicProxyData_Args \
+        uint64_t * handoff
 
 #define IOUserNetworkEthernet__DataAvailable_Args \
         OSAction * action
@@ -91,6 +223,24 @@ struct _IOUserNetworkEthernetInterfaceDescriptor;
 #define IOUserNetworkEthernet_SetWakeOnMagicPacketEnable_Args \
         bool enable
 
+#define IOUserNetworkEthernet_SetMTU_Args \
+        uint32_t mtu
+
+#define IOUserNetworkEthernet_GetMaxTransferUnit_Args \
+        uint32_t * mtu
+
+#define IOUserNetworkEthernet_SetHardwareAssists_Args \
+        uint32_t hardwareAssists
+
+#define IOUserNetworkEthernet_GetHardwareAssists_Args \
+        uint32_t * hardwareAssists
+
+#define IOUserNetworkEthernet_ReportNicProxyLimits_Args \
+        nicproxy_limits_info_s nicproxy_limits_info
+
+#define IOUserNetworkEthernet_SetPowerState_Args \
+        uint32_t powerstate
+
 #define IOUserNetworkEthernet_Methods \
 \
 public:\
@@ -100,6 +250,15 @@ public:\
 \
     static kern_return_t\
     _Dispatch(IOUserNetworkEthernet * self, const IORPC rpc);\
+\
+    kern_return_t\
+    ReleaseNicProxyData(\
+        OSDispatchMethod supermethod = NULL);\
+\
+    kern_return_t\
+    RetainNicProxyData(\
+        uint64_t * handoff,\
+        OSDispatchMethod supermethod = NULL);\
 \
     kern_return_t\
     CreateAction_DataAvailable(size_t referenceSize, OSAction ** action);\
@@ -191,6 +350,31 @@ public:\
         bool enable,\
         OSDispatchMethod supermethod = NULL);\
 \
+    kern_return_t\
+    SetMTU(\
+        uint32_t mtu,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    kern_return_t\
+    GetMaxTransferUnit(\
+        uint32_t * mtu,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    kern_return_t\
+    SetHardwareAssists(\
+        uint32_t hardwareAssists,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    kern_return_t\
+    GetHardwareAssists(\
+        uint32_t * hardwareAssists,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    kern_return_t\
+    ReportNicProxyLimits(\
+        nicproxy_limits_info_s nicproxy_limits_info,\
+        OSDispatchMethod supermethod = NULL);\
+\
 \
 protected:\
     /* _Impl methods */\
@@ -198,9 +382,24 @@ protected:\
     kern_return_t\
     _SetMulticastAddresses_Impl(IOUserNetworkEthernet__SetMulticastAddresses_Args);\
 \
+    kern_return_t\
+    SetPowerState_Impl(IOService_SetPowerState_Args);\
+\
 \
 public:\
     /* _Invoke methods */\
+\
+    typedef kern_return_t (*ReleaseNicProxyData_Handler)(OSMetaClassBase * targetIOUserNetworkEthernet_ReleaseNicProxyData_Args);\
+    static kern_return_t\
+    ReleaseNicProxyData_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        ReleaseNicProxyData_Handler func);\
+\
+    typedef kern_return_t (*RetainNicProxyData_Handler)(OSMetaClassBase * target, IOUserNetworkEthernet_RetainNicProxyData_Args);\
+    static kern_return_t\
+    RetainNicProxyData_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        RetainNicProxyData_Handler func);\
 \
     typedef kern_return_t (*_ReportAvailableMediaTypes_Handler)(OSMetaClassBase * target, IOUserNetworkEthernet__ReportAvailableMediaTypes_Args);\
     static kern_return_t\
@@ -274,12 +473,48 @@ public:\
         OSMetaClassBase * target,\
         SetWakeOnMagicPacketEnable_Handler func);\
 \
+    typedef kern_return_t (*SetMTU_Handler)(OSMetaClassBase * target, IOUserNetworkEthernet_SetMTU_Args);\
+    static kern_return_t\
+    SetMTU_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        SetMTU_Handler func);\
+\
+    typedef kern_return_t (*GetMaxTransferUnit_Handler)(OSMetaClassBase * target, IOUserNetworkEthernet_GetMaxTransferUnit_Args);\
+    static kern_return_t\
+    GetMaxTransferUnit_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        GetMaxTransferUnit_Handler func);\
+\
+    typedef kern_return_t (*SetHardwareAssists_Handler)(OSMetaClassBase * target, IOUserNetworkEthernet_SetHardwareAssists_Args);\
+    static kern_return_t\
+    SetHardwareAssists_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        SetHardwareAssists_Handler func);\
+\
+    typedef kern_return_t (*GetHardwareAssists_Handler)(OSMetaClassBase * target, IOUserNetworkEthernet_GetHardwareAssists_Args);\
+    static kern_return_t\
+    GetHardwareAssists_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        GetHardwareAssists_Handler func);\
+\
+    typedef kern_return_t (*ReportNicProxyLimits_Handler)(OSMetaClassBase * target, IOUserNetworkEthernet_ReportNicProxyLimits_Args);\
+    static kern_return_t\
+    ReportNicProxyLimits_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        ReportNicProxyLimits_Handler func);\
+\
 
 
 #define IOUserNetworkEthernet_KernelMethods \
 \
 protected:\
     /* _Impl methods */\
+\
+    kern_return_t\
+    ReleaseNicProxyData_Impl(IOUserNetworkEthernet_ReleaseNicProxyData_Args);\
+\
+    kern_return_t\
+    RetainNicProxyData_Impl(IOUserNetworkEthernet_RetainNicProxyData_Args);\
 \
     void\
     _DataAvailable_Impl(IOUserNetworkEthernet__DataAvailable_Args);\
@@ -298,6 +533,9 @@ protected:\
 \
     kern_return_t\
     ReportDataBandwidths_Impl(IOUserNetworkEthernet_ReportDataBandwidths_Args);\
+\
+    kern_return_t\
+    ReportNicProxyLimits_Impl(IOUserNetworkEthernet_ReportNicProxyLimits_Args);\
 \
 
 
@@ -324,6 +562,10 @@ public:\
     ReportAvailableMediaTypes(\
         const IOUserNetworkMediaType * mediaTypes,\
         uint32_t count) APPLE_KEXT_OVERRIDE;\
+\
+    virtual void\
+    hwConfigNicProxyData(\
+        offload_info_s * handoff) APPLE_KEXT_OVERRIDE;\
 \
 
 
@@ -358,6 +600,9 @@ public:
     ReportAvailableMediaTypes(const IOUserNetworkMediaType * mediaTypes,
         uint32_t count) = 0;
 
+    virtual void
+    hwConfigNicProxyData(offload_info_s * handoff) = 0;
+
 };
 
 struct IOUserNetworkEthernet_IVars;
@@ -389,19 +634,117 @@ public:
 #endif /* !KERNEL */
 
 
-/* IOUserNetworkEthernet.iig:116- */
+#define OSAction_IOUserNetworkEthernet__DataAvailable_Methods \
+\
+public:\
+\
+    virtual kern_return_t\
+    Dispatch(const IORPC rpc) APPLE_KEXT_OVERRIDE;\
+\
+    static kern_return_t\
+    _Dispatch(OSAction_IOUserNetworkEthernet__DataAvailable * self, const IORPC rpc);\
+\
+\
+protected:\
+    /* _Impl methods */\
+\
+\
+public:\
+    /* _Invoke methods */\
+\
 
-enum {
-    kIOUserNetworkFeatureFlagWOMP = 0x01,
-    kIOUserNetworkFeatureFlagSoftwareVlan = 0x02,
+
+#define OSAction_IOUserNetworkEthernet__DataAvailable_KernelMethods \
+\
+protected:\
+    /* _Impl methods */\
+\
+
+
+#define OSAction_IOUserNetworkEthernet__DataAvailable_VirtualMethods \
+\
+public:\
+\
+
+
+#if !KERNEL
+
+extern OSMetaClass          * gOSAction_IOUserNetworkEthernet__DataAvailableMetaClass;
+extern const OSClassLoadInformation OSAction_IOUserNetworkEthernet__DataAvailable_Class;
+
+class OSAction_IOUserNetworkEthernet__DataAvailableMetaClass : public OSMetaClass
+{
+public:
+    virtual kern_return_t
+    New(OSObject * instance) override;
+    virtual kern_return_t
+    Dispatch(const IORPC rpc) override;
 };
+
+#endif /* !KERNEL */
+
+class OSAction_IOUserNetworkEthernet__DataAvailableInterface : public OSInterface
+{
+public:
+};
+
+struct OSAction_IOUserNetworkEthernet__DataAvailable_IVars;
+struct OSAction_IOUserNetworkEthernet__DataAvailable_LocalIVars;
+
+class OSAction_IOUserNetworkEthernet__DataAvailable : public OSAction, public OSAction_IOUserNetworkEthernet__DataAvailableInterface
+{
+#if KERNEL
+    OSDeclareDefaultStructorsWithDispatch(OSAction_IOUserNetworkEthernet__DataAvailable);
+#endif /* KERNEL */
+
+#if !KERNEL
+    friend class OSAction_IOUserNetworkEthernet__DataAvailableMetaClass;
+#endif /* !KERNEL */
+
+public:
+    union
+    {
+        OSAction_IOUserNetworkEthernet__DataAvailable_IVars * ivars;
+        OSAction_IOUserNetworkEthernet__DataAvailable_LocalIVars * lvars;
+    };
+#if !KERNEL
+    virtual const OSMetaClass *
+    getMetaClass() const APPLE_KEXT_OVERRIDE { return OSTypeID(OSAction_IOUserNetworkEthernet__DataAvailable); };
+#endif /* KERNEL */
+
+    using super = OSAction;
+
+#if !KERNEL
+    OSAction_IOUserNetworkEthernet__DataAvailable_Methods
+#endif /* !KERNEL */
+
+    OSAction_IOUserNetworkEthernet__DataAvailable_VirtualMethods
+};
+
+#endif /* !__DOCUMENTATION__ */
+
+
+/* IOUserNetworkEthernet.iig:171- */
 
 struct _IOUserNetworkEthernetInterfaceDescriptor {
     IOUserNetworkMACAddress     macAddress;
-    uint8_t                 featureFlags;
-    uint8_t                 _reserved;
+    uint32_t                featureFlags;
+    uint32_t                 _reserved;
     uint16_t                txPacketHeadroomBytes;
     uint16_t                txPacketTailroomBytes;
 } __attribute__((packed));
+
+typedef struct nicproxy_limits_info_s {
+    uint8_t ipv4_cnt;
+    uint8_t ipv6_cnt;
+    uint16_t kaIPv4Count;
+    uint16_t kaIPv6Count;
+    uint16_t wakeUDPCount;
+    uint16_t wakeTCPCount;
+    uint16_t rr_cnt;
+    uint8_t mDnsMaxDomainLen;
+    uint8_t ethCount;
+    uint16_t rr_buf_size;
+} __attribute__((packed)) nicproxy_limits_info_t;
 
 #endif /* ! _IOUSERNETWORKETHERNET_H */

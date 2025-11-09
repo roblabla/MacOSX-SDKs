@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: F8D83A8F-FEE0-32A5-AB70-E55CAE52D3B9' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           765EF19E-9517-3F22-89D4-82447EB43275
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           1F2645FA-04D9-3F4F-82AC-613CBF83E6FA
 install-name:    '/System/Library/PrivateFrameworks/MiniSoftwareUpdate.framework/Versions/A/MiniSoftwareUpdate'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _MSUCatalogAppleCatalogURLKey, _MSUCatalogApplePostURLKey, 
                        _MSUCatalogBaseURLStringKey, _MSUCatalogErrorDomain, _MSUCatalogIndexDateKey, 
                        _MSUCatalogOverrideBaseURLStringKey, _MSUCatalogPackageDigestStringKey, 

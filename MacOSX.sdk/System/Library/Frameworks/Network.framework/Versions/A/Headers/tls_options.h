@@ -2,7 +2,7 @@
 //  tls_options.h
 //  Network
 //
-//  Copyright (c) 2017-2019 Apple. All rights reserved.
+//  Copyright (c) 2017-2019 Apple Inc. All rights reserved.
 //
 
 #ifndef __NW_TLS_OPTIONS_H__
@@ -112,4 +112,4 @@ NW_ASSUME_NONNULL_END
 
 __END_DECLS
 
-#endif // __NW_UDP_OPTIONS_H__
+#endif // __NW_TLS_OPTIONS_H__

@@ -9,7 +9,7 @@
 #import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 typedef NSString * NSStoryboardName NS_SWIFT_BRIDGED_TYPEDEF;
 typedef NSString * NSStoryboardSceneIdentifier NS_SWIFT_BRIDGED_TYPEDEF;

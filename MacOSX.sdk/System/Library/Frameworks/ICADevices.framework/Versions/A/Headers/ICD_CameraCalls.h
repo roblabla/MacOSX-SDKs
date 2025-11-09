@@ -16,6 +16,12 @@
 #include <IOBluetooth/Bluetooth.h>
 #include <ICADevices/ICADevice.h>
 
+#ifndef __AVAILABILITYMACROS__
+#include <AvailabilityMacros.h>
+#endif
+
+API_UNAVAILABLE_BEGIN(ios)
+
 //------------------------------------------------------------------------------------------------------------------------------
 
 #ifdef __cplusplus
@@ -147,6 +153,9 @@ typedef CALLBACK_API_C(ICAError, __ICD_WriteDataToFileDescriptor)
 
 typedef CALLBACK_API_C(ICAError, __ICD_WriteDataToFileDescriptor64)
                                     (const ObjectInfo* objectInfo, int fd);
+
+typedef CALLBACK_API_C(ICAError, __ICD_ReadFileData64)
+                                    (const ObjectInfo* objectInfo, UInt32 dataType, Ptr buffer, UInt64 offset, UInt64* length);
 	
 // camera related callBacks into the ICADevices.framework:
 
@@ -224,6 +233,7 @@ typedef struct ICD_callback_functions
     __ICD_OpenMassStorageDevice             f_ICD_OpenMassStorageDevice;
     __ICD_WriteDataToFileDescriptor         f_ICD_WriteDataToFileDescriptor;
 	__ICD_WriteDataToFileDescriptor64       f_ICD_WriteDataToFileDescriptor64;
+    __ICD_ReadFileData64                    f_ICD_ReadFileData64;
 } ICD_callback_functions;
 
 extern ICD_callback_functions gICDCallbackFunctions;
@@ -236,4 +246,4 @@ extern ICD_callback_functions gICDCallbackFunctions;
 }
 #endif
 
-//------------------------------------------------------------------------------------------------------------------------------
+API_UNAVAILABLE_END

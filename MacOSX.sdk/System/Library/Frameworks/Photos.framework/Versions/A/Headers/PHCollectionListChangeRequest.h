@@ -41,6 +41,9 @@ OS_EXPORT
 // to add, remove or rearrange child collections in a collection list, passing in the fetched collections in that collection list will ensure that the child collection positions are tracked correctly in the case that the collection list has been externally edited after the fetch, but before this change is applied
 + (nullable instancetype)changeRequestForCollectionList:(PHCollectionList *)collectionList childCollections:(PHFetchResult<__kindof PHCollection *> *)childCollections;
 
+// to add, remove or rearrange child collections in the TOP LEVEL collection list, passing in the fetched collections in that collection list will ensure that the child collection positions are tracked correctly in the case that the collection list has been externally edited after the fetch, but before this change is applied
++ (nullable instancetype)changeRequestForTopLevelCollectionListUserCollections:(PHFetchResult<__kindof PHCollection *> *)childCollections API_AVAILABLE(macos(11), ios(14.2), tvos(14));
+
 @property (nonatomic, strong, readwrite) NSString *title;
 
 #pragma mark - Mutating child collections

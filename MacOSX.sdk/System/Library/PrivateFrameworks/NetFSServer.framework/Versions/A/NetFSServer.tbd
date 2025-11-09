@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: A3B9E8BB-B19B-33F4-BD7A-B21B7AEA6B31' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           78E66096-D73C-3298-8FB6-922ED36B739C
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           533F3C94-7889-36D1-A2DC-6368981B61A4
 install-name:    '/System/Library/PrivateFrameworks/NetFSServer.framework/Versions/A/NetFSServer'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _nsc_server_disable, _nsc_server_enable, _nsc_server_guest_access, 
                        _nsc_server_isenabled, _nsc_server_isrunning, _nsc_server_shutdown, 
                        _nsc_server_shutdown_cancel, _nsc_server_shutdown_delay, _nsc_server_status, 

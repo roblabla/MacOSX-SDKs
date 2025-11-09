@@ -1,12 +1,20 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: F181016B-4E60-3ED8-B82D-5EAA25A1D50B' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           DF7F49CB-8964-3711-9B9E-CB17939CC869
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           6AF98F8F-31F6-3586-8544-64E45C95C01E
 install-name:    '/System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/CommerceKit'
 current-version: 379
-exports:         
-  - archs:           [ x86_64 ]
-    re-exports:      [ '/System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/Frameworks/CommerceCore.framework/Versions/A/CommerceCore' ]
+reexported-libraries:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    libraries:       [ '/System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/Frameworks/CommerceCore.framework/Versions/A/CommerceCore' ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _AMSBagKeyPasswordSettingsURL, _CKAcceptLanguageHeader, _CKAccountPasswordSettingsAlways, 
                        _CKAccountPasswordSettingsFreeDownloadKey, _CKAccountPasswordSettingsKey, 
                        _CKAccountPasswordSettingsNever, _CKAccountPasswordSettingsPaidDownloadKey, 
@@ -85,8 +93,7 @@ exports:
                        CKStoreResponse, CKTouchIDSession, CKUpdateController, CKUpdateControllerClient, 
                        CommerceClient, ISProcessPropertyListOperation, SSMutableURLRequestProperties, 
                        SSRemoteNotification, SSRestoreContentItem, SSURLRequestProperties, 
-                       ServiceProxy, SetupAssistantPlugin, _CKDAAPBuffer, _CKDAAPParser, 
-                       _CKPurchaseQueueDelegateWrapper ]
+                       ServiceProxy, _CKDAAPBuffer, _CKDAAPParser, _CKPurchaseQueueDelegateWrapper ]
     objc-ivars:      [ CKAppStoreLauncher._validURLs, CKClientDispatch.agentConnectionLock, 
                        CKClientDispatch.agentXPCConnection, CKClientDispatch.mQueue, 
                        CKClientDispatch.serviceConnectionLock, CKClientDispatch.serviceXPCConnection, 
@@ -107,14 +114,20 @@ exports:
                        ISProcessPropertyListOperation._dataProvider, ISProcessPropertyListOperation._preParserBlock, 
                        ISProcessPropertyListOperation._propertyList, ISProcessPropertyListOperation._propertyListURL, 
                        _CKDAAPBuffer._data ]
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 82E13F91-ECEB-3EC0-B0CC-570CA17AE0A4' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           6E40EB37-8C13-3F48-AFF0-69931AD90A6C
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           13646E6D-201D-315F-B92E-E871A5629CA3
 install-name:    '/System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/Frameworks/CommerceCore.framework/Versions/A/CommerceCore'
 current-version: 379
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CKAdoptionInfoPlistPath, _CKCheckBookDownloadQueue, _CKCreateCriticalUpdateTimeStamp, 
                        _CKCriticalUpdateTimeStamp, _CKDownloadDirectory, _CKInstallPathForIAP, 
                        _CKInstallPathForSharedIAP, _CKMDMDownloadOptionAllowRedownload, 
@@ -138,12 +151,13 @@ exports:
                        __Z12CKCrypto_EndP15CKCryptoContextPhPm, __Z13CKCrypto_InitP15CKCryptoContext17CKCryptoOperation, 
                        __Z14CKCrypto_BeginP15CKCryptoContext, __Z16CKCrypto_Decrypt17CKCryptoAlgorithm12CKCryptoMode15CKCryptoPaddingPKvhPvS3_mS4_mPm, 
                        __Z16CKCrypto_Encrypt17CKCryptoAlgorithm12CKCryptoMode15CKCryptoPaddingPKvhPvS3_mS4_mPm, 
-                       __Z20CKCrypto_ProcessDataP15CKCryptoContextPKhmPhPm, __setCriticalUpdateTimeStamp, 
-                       _b64_decode, _b64_decode2, _b64_encode, _b64_encode2, _b64_getErrorString, 
-                       _b64_getErrorStringLength, _get_mac_address, _kCKVPPErrorDomain, 
-                       _kCKVPPInviteMetadataOrgNameKey, _kCKVPPInviteOrgNamePreferencesKey, 
-                       _kCKVPPInviteURLPreferencesKey, _kCheckQueueDSID, _kCheckQueuePurchasedItems, 
-                       _parseISO8601, _sAppleROOTCert, _sWWDRCACert ]
+                       __Z20CKCrypto_ProcessDataP15CKCryptoContextPKhmPhPm, __containerIdentifierForAppSigningId, 
+                       __setCriticalUpdateTimeStamp, _b64_decode, _b64_decode2, _b64_encode, 
+                       _b64_encode2, _b64_getErrorString, _b64_getErrorStringLength, 
+                       _get_mac_address, _kCKVPPErrorDomain, _kCKVPPInviteMetadataOrgNameKey, 
+                       _kCKVPPInviteOrgNamePreferencesKey, _kCKVPPInviteURLPreferencesKey, 
+                       _kCheckQueueDSID, _kCheckQueuePurchasedItems, _parseISO8601, 
+                       _sAppleROOTCert, _sWWDRCACert ]
     objc-classes:    [ EncryptedBuffer, ISPurchaseReceipt, asn1IntegerToken, asn1OSToken, 
                        asn1ReceiptToken, asn1SequenceToken, asn1SetToken, asn1Token ]
     objc-ivars:      [ ISPurchaseReceipt._createdFromCoder, ISPurchaseReceipt.mAdamID, 

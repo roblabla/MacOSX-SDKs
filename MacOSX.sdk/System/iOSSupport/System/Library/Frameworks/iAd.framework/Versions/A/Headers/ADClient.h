@@ -26,29 +26,45 @@ extern NSString * const ADClientErrorDomain NS_AVAILABLE(10_14, 7_1);
  * @enum ADClientError
  *
  * @const ADClientErrorUnknown
- * General errors that aren't covered by one of the more specific error reasons.
- * This is generally related to connectivity issues.
+ * This is not used and should never be returned.
+ *
+ * @const ADClientErrorTrackingRestrictedOrDenied
+ * The user is restricted or has denied tracking for the calling application.
  *
  * @const ADClientErrorLimitAdTracking
- * The device has Limit Ad Tracking enabled. It will not be possible to recieve
- * attribution details for app purchases made on this device.
+ * This is deprecated, please use ADClientErrorTrackingRestrictedOrDenied.
  *
  * @const ADClientErrorMissingData
- * The downloaded app received a payload lacking enough data to perform an
- * Attribution Check.
+ * The downloaded app received a payload lacking enough data to perform an attribution check.
  *
  * @const ADClientErrorCorruptResponse
  * The response received from the Attribution Server was corrupt.
  *
+ * @const ADClientErrorRequestClientError
+ * The response received from the Attribution Server had an HTTP 4xx status code.
+ *
+ * @const ADClientErrorRequestServerError
+ * The response received from the Attribution Server had an HTTP 5xx status code.
+ *
+ * @const ADClientErrorRequestNetworkError
+ * The communication with the  Attribution Server had a network error. The underlying error will be provided in the user info dictionary if available.
+ *
+ * @const ADClientErrorUnsupportedPlatform
+ * The attribution API was called on an unsupported platform. Only iOS and iPadOS are supported.
+ *
  * @discussion
- * Error codes for NSErrors passed to the completionHandler block
- * when calling the requestAttributionDetailsWithBlock method.
+ * Error codes for NSErrors passed to the completionHandler block when calling the requestAttributionDetailsWithBlock: method.
  */
 typedef NS_ENUM(NSInteger, ADClientError) {
-    ADClientErrorUnknown = 0,
-    ADClientErrorLimitAdTracking = 1,
+    ADClientErrorUnknown __deprecated_enum_msg("ADClientErrorUnknown is not used and never returned.") = 0,
+    ADClientErrorTrackingRestrictedOrDenied = 1,
+    ADClientErrorLimitAdTracking __deprecated_enum_msg("ADClientErrorLimitAdTracking has been deprecated use ADClientErrorTrackingRestrictedOrDenied.") = ADClientErrorTrackingRestrictedOrDenied,
     ADClientErrorMissingData = 2,
-    ADClientErrorCorruptResponse = 3
+    ADClientErrorCorruptResponse = 3,
+    ADClientErrorRequestClientError = 4,
+    ADClientErrorRequestServerError = 5,
+    ADClientErrorRequestNetworkError = 6,
+    ADClientErrorUnsupportedPlatform = 7
 } NS_ENUM_AVAILABLE(10_14, 7_1);
 
 NS_CLASS_AVAILABLE(10_14, 7_1) @interface ADClient : NSObject
@@ -72,7 +88,8 @@ NS_CLASS_AVAILABLE(10_14, 7_1) @interface ADClient : NSObject
  * attribution status has been determined. If this installation of the app is
  * attributed to an iAd impression, the completion handler will be called with
  * YES. Otherwise, or if the user has enabled Limit Ad Tracking, the completion
- * handler will be called with NO.
+ * handler will be called with NO. For iOS 14 and later, the completion
+ * handler will always be called with NO.
  *
  * The handler will be called on an arbitrary queue.
  *
@@ -129,6 +146,7 @@ NS_CLASS_AVAILABLE(10_14, 7_1) @interface ADClient : NSObject
  * @discussion
  * Enables apps to add users to custom segments owned and defined by the calling
  * application.  If Limit Ad Tracking is enabled on the device, this method will
+ * have no effect. For iOS 14 and later, and macOS 11 and later, this method will
  * have no effect.
  */
 - (void)addClientToSegments:(NSArray<NSString *> *)segmentIdentifiers replaceExisting:(BOOL)replaceExisting NS_DEPRECATED(10_14, 10_14, 8_0, 13_0);

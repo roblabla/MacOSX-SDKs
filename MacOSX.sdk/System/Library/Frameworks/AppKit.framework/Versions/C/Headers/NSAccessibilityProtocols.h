@@ -8,11 +8,12 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/NSAccessibilityConstants.h>
 #import <AppKit/NSAccessibilityCustomAction.h>
+#import <AppKit/AppKitDefines.h>
 
 @class NSAccessibilityCustomRotor;
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 NS_PROTOCOL_REQUIRES_EXPLICIT_IMPLEMENTATION
 @protocol NSAccessibilityElement <NSObject>

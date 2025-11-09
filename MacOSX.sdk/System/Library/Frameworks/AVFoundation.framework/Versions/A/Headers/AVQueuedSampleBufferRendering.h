@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVQueuedSampleBufferRendering.h>)
 /*
 	File:  AVQueuedSampleBufferRendering.h
 
@@ -115,3 +116,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCore/AVQueuedSampleBufferRendering.h>
+#endif

@@ -23,10 +23,11 @@
 #import <Foundation/NSObject.h>
 #import <Foundation/NSArray.h>
 #import <AppKit/NSWorkspace.h>
+#import <AppKit/AppKitDefines.h>
 
 /* The following flags are for activateWithOptions:. */
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 typedef NS_OPTIONS(NSUInteger, NSApplicationActivationOptions) {
     /* By default, activation brings only the main and key windows forward.  If you specify NSApplicationActivateAllWindows, all of the application's windows are brought forward. */
@@ -143,4 +144,3 @@ API_AVAILABLE(macos(10.6))
 
 API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
-

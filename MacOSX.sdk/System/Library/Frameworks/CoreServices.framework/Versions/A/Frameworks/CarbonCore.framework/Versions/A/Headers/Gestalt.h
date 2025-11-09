@@ -713,7 +713,12 @@ enum {
   gestaltCPUPentiumPro          = 'i5pr',
   gestaltCPUPentiumII           = 'i5ii',
   gestaltCPUX86                 = 'ixxx',
-  gestaltCPUPentium4            = 'i5iv'
+  gestaltCPUPentium4            = 'i5iv',
+};
+
+enum {
+	gestaltCPUARMFamily			= 'arm ',
+	gestaltCPUARM64				= 'ax64'
 };
 
 enum {
@@ -2038,7 +2043,8 @@ enum {
   gestaltSysArchitecture        = 'sysa', /* Native System Architecture */
   gestalt68k                    = 1,    /* Motorola MC68k architecture */
   gestaltPowerPC                = 2,    /* IBM PowerPC architecture */
-  gestaltIntel                  = 10    /* Intel x86 architecture */
+  gestaltIntel                  = 10,   /* Intel x86 architecture */
+  gestaltArm                    = 20    /* Arm architecture */
 };
 
 enum {

@@ -10,6 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+API_UNAVAILABLE_BEGIN(ios)
+
 @class NSImage;
 
 typedef NS_ENUM(NSUInteger, AMLogLevel)
@@ -46,11 +48,6 @@ NS_CLASS_AVAILABLE_MAC(10_4)
 // Construction
 - (nullable instancetype)initWithDefinition:(NSDictionary<NSString *, id> *__nullable)dict fromArchive:(BOOL)archived;
 - (nullable instancetype)initWithContentsOfURL:(NSURL *)fileURL error:(NSError **)outError AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
-
-// Accessors
-#ifndef __LP64__
-- (NSMutableDictionary<NSString *, id> *)definition AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER_BUT_DEPRECATED;
-#endif
 
 @property (readonly, strong, nonatomic) NSString *name AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
 @property (readonly, nonatomic) BOOL ignoresInput AVAILABLE_MAC_OS_X_VERSION_10_5_AND_LATER;
@@ -90,5 +87,7 @@ NS_CLASS_AVAILABLE_MAC(10_4)
 @property (readonly, nonatomic, getter=isStopped) BOOL stopped;
 
 @end
+
+API_UNAVAILABLE_END
 
 NS_ASSUME_NONNULL_END

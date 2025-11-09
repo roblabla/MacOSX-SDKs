@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2019 Apple Inc. All rights reserved.
+ * Copyright (c) 1998-2020 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -54,6 +54,7 @@
 #include <IOKit/IOServicePM.h>
 #include <IOKit/IOReportTypes.h>
 #include <DriverKit/IOService.h>
+#include <libkern/c++/OSPtr.h>
 
 extern "C" {
 #include <kern/thread_call.h>
@@ -136,7 +137,6 @@ extern const OSSymbol *     gIOUserClassKey;
 extern const OSSymbol *     gIOUserServerClassKey;
 extern const OSSymbol *     gIOUserServerNameKey;
 extern const OSSymbol *     gIOUserServerTagKey;
-extern const OSSymbol *     gIOUserServerCDHashKey;
 extern const OSSymbol *     gIOUserUserClientKey;
 
 extern const OSSymbol *     gIOKitDebugKey;
@@ -162,6 +162,12 @@ extern const OSSymbol *     gIODeviceMemoryKey;
 extern const OSSymbol *     gIOInterruptControllersKey;
 extern const OSSymbol *     gIOInterruptSpecifiersKey;
 
+extern const OSSymbol *     gIOSupportedPropertiesKey;
+extern const OSSymbol *     gIOUserServicePropertiesKey;
+extern const OSSymbol *     gIOCompatibilityMatchKey;
+extern const OSSymbol *     gIOCompatibilityPropertiesKey;
+extern const OSSymbol *     gIOPathKey;
+
 extern const OSSymbol *     gIOBSDKey;
 extern const OSSymbol *     gIOBSDNameKey;
 extern const OSSymbol *     gIOBSDMajorKey;
@@ -171,7 +177,10 @@ extern const OSSymbol *     gIOBSDUnitKey;
 extern const OSSymbol *     gIODriverKitEntitlementKey;
 extern const OSSymbol *     gIOServiceDEXTEntitlementsKey;
 extern const OSSymbol *     gIODriverKitUserClientEntitlementsKey;
+extern const OSSymbol *     gIODriverKitUserClientEntitlementAllowAnyKey;
 extern const OSSymbol *     gIOMatchDeferKey;
+extern const OSSymbol *     gIOAllCPUInitializedKey;
+
 
 extern SInt32 IOServiceOrdering( const OSMetaClassBase * inObj1, const OSMetaClassBase * inObj2, void * ref );
 
@@ -219,9 +228,15 @@ typedef IOReturn (^IOServiceInterestHandlerBlock)( uint32_t messageType, IOServi
 
 typedef void (*IOServiceApplierFunction)(IOService * service, void * context);
 typedef void (*OSObjectApplierFunction)(OSObject * object, void * context);
+#ifdef __BLOCKS__
+typedef void (^IOServiceApplierBlock)(IOService * service);
+typedef void (^OSObjectApplierBlock)(OSObject * object);
+#endif /* __BLOCKS__ */
+
 
 class IOUserClient;
 class IOPlatformExpert;
+class IOUserServerCheckInToken;
 
 /*! @class IOService
  *   @abstract The base class for most I/O Kit families, devices, and drivers.
@@ -474,8 +489,8 @@ public:
 
 private:
 #if __LP64__
-	OSMetaClassDeclareReservedUsed(IOService, 0);
-	OSMetaClassDeclareReservedUsed(IOService, 1);
+	OSMetaClassDeclareReservedUsedX86(IOService, 0);
+	OSMetaClassDeclareReservedUsedX86(IOService, 1);
 	OSMetaClassDeclareReservedUnused(IOService, 2);
 	OSMetaClassDeclareReservedUnused(IOService, 3);
 	OSMetaClassDeclareReservedUnused(IOService, 4);
@@ -483,14 +498,14 @@ private:
 	OSMetaClassDeclareReservedUnused(IOService, 6);
 	OSMetaClassDeclareReservedUnused(IOService, 7);
 #else
-	OSMetaClassDeclareReservedUsed(IOService, 0);
-	OSMetaClassDeclareReservedUsed(IOService, 1);
-	OSMetaClassDeclareReservedUsed(IOService, 2);
-	OSMetaClassDeclareReservedUsed(IOService, 3);
-	OSMetaClassDeclareReservedUsed(IOService, 4);
-	OSMetaClassDeclareReservedUsed(IOService, 5);
-	OSMetaClassDeclareReservedUsed(IOService, 6);
-	OSMetaClassDeclareReservedUsed(IOService, 7);
+	OSMetaClassDeclareReservedUsedX86(IOService, 0);
+	OSMetaClassDeclareReservedUsedX86(IOService, 1);
+	OSMetaClassDeclareReservedUsedX86(IOService, 2);
+	OSMetaClassDeclareReservedUsedX86(IOService, 3);
+	OSMetaClassDeclareReservedUsedX86(IOService, 4);
+	OSMetaClassDeclareReservedUsedX86(IOService, 5);
+	OSMetaClassDeclareReservedUsedX86(IOService, 6);
+	OSMetaClassDeclareReservedUsedX86(IOService, 7);
 #endif
 
 	OSMetaClassDeclareReservedUnused(IOService, 8);
@@ -783,7 +798,7 @@ public:
  *   @param priority A constant ordering all notifications of a each type.
  *   @result An instance of an IONotifier object that can be used to control or destroy the notification request. */
 
-	static IONotifier * addNotification(
+	static OSPtr<IONotifier>  addNotification(
 		const OSSymbol * type, OSDictionary * matching,
 		IOServiceNotificationHandler handler,
 		void * target, void * ref = NULL,
@@ -839,8 +854,9 @@ public:
  *   @param timeout The maximum time to wait in nanoseconds. Default is to wait forever.
  *   @result A published IOService object matching the supplied dictionary. waitForMatchingService returns a reference to the IOService which should be released by the caller. (Differs from waitForService() which does not retain the returned object.) */
 
-	static IOService * waitForMatchingService( OSDictionary * matching,
+	static OSPtr<IOService>  waitForMatchingService( OSDictionary * matching,
 	    uint64_t timeout = UINT64_MAX);
+
 
 /*! @function getMatchingServices
  *   @abstract Finds the set of current published IOService objects matching a matching dictionary.
@@ -848,7 +864,7 @@ public:
  *   @param matching The matching dictionary describing the desired IOService objects.
  *   @result An instance of an iterator over a set of IOService objects. To be released by the caller. */
 
-	static OSIterator * getMatchingServices( OSDictionary * matching );
+	static OSPtr<OSIterator> getMatchingServices( OSDictionary * matching );
 
 /*! @function copyMatchingService
  *   @abstract Finds one of the current published IOService objects matching a matching dictionary.
@@ -856,7 +872,7 @@ public:
  *   @param matching The matching dictionary describing the desired IOService object.
  *   @result The IOService object or NULL. To be released by the caller. */
 
-	static IOService * copyMatchingService( OSDictionary * matching );
+	static OSPtr<IOService>  copyMatchingService( OSDictionary * matching );
 
 public:
 /* Helpers to make matching dictionaries for simple cases,
@@ -869,7 +885,7 @@ public:
  *   @param table If zero, <code>serviceMatching</code> creates a matching dictionary and returns a reference to it, otherwise the matching properties are added to the specified dictionary.
  *   @result The matching dictionary created, or passed in, is returned on success, or zero on failure. */
 
-	static OSDictionary * serviceMatching( const char * className,
+	static OSPtr<OSDictionary>  serviceMatching( const char * className,
 	    OSDictionary * table = NULL );
 
 /*! @function serviceMatching
@@ -879,7 +895,7 @@ public:
  *   @param table If zero, <code>serviceMatching</code> creates a matching dictionary and returns a reference to it, otherwise the matching properties are added to the specified dictionary.
  *   @result The matching dictionary created, or passed in, is returned on success, or zero on failure. */
 
-	static OSDictionary * serviceMatching( const OSString * className,
+	static OSPtr<OSDictionary>  serviceMatching( const OSString * className,
 	    OSDictionary * table = NULL );
 
 /*! @function nameMatching
@@ -889,7 +905,7 @@ public:
  *   @param table If zero, <code>nameMatching</code> creates a matching dictionary and returns a reference to it, otherwise the matching properties are added to the specified dictionary.
  *   @result The matching dictionary created, or passed in, is returned on success, or zero on failure. */
 
-	static OSDictionary * nameMatching( const char * name,
+	static OSPtr<OSDictionary>  nameMatching( const char * name,
 	    OSDictionary * table = NULL );
 
 /*! @function nameMatching
@@ -899,7 +915,7 @@ public:
  *   @param table If zero, <code>nameMatching</code> creates a matching dictionary and returns a reference to it, otherwise the matching properties are added to the specified dictionary.
  *   @result The matching dictionary created, or passed in, is returned on success, or zero on failure. */
 
-	static OSDictionary * nameMatching( const OSString* name,
+	static OSPtr<OSDictionary>  nameMatching( const OSString* name,
 	    OSDictionary * table = NULL );
 
 /*! @function resourceMatching
@@ -909,7 +925,7 @@ public:
  *   @param table If zero, <code>resourceMatching</code> creates a matching dictionary and returns a reference to it, otherwise the matching properties are added to the specified dictionary.
  *   @result The matching dictionary created, or passed in, is returned on success, or zero on failure. */
 
-	static OSDictionary * resourceMatching( const char * name,
+	static OSPtr<OSDictionary>  resourceMatching( const char * name,
 	    OSDictionary * table = NULL );
 
 /*! @function resourceMatching
@@ -919,7 +935,7 @@ public:
  *   @param table If zero, <code>resourceMatching</code> creates a matching dictionary and returns a reference to it, otherwise the matching properties are added to the specified dictionary.
  *   @result The matching dictionary created, or passed in, is returned on success, or zero on failure. */
 
-	static OSDictionary * resourceMatching( const OSString * name,
+	static OSPtr<OSDictionary>  resourceMatching( const OSString * name,
 	    OSDictionary * table = NULL );
 
 
@@ -931,7 +947,7 @@ public:
  *   @param table If zero, nameMatching will create a matching dictionary and return a reference to it, otherwise the matching properties are added to the specified dictionary.
  *   @result The matching dictionary created, or passed in, is returned on success, or zero on failure. */
 
-	static OSDictionary * propertyMatching( const OSSymbol * key, const OSObject * value,
+	static OSPtr<OSDictionary>  propertyMatching( const OSSymbol * key, const OSObject * value,
 	    OSDictionary * table = NULL );
 
 /*! @function registryEntryIDMatching
@@ -951,7 +967,7 @@ public:
  *   @param table The matching properties are added to the specified dictionary, which must be non-zero.
  *   @result The location matching dictionary created is returned on success, or zero on failure. */
 
-	static OSDictionary * addLocation( OSDictionary * table );
+	static OSPtr<OSDictionary>  addLocation( OSDictionary * table );
 
 /* Helpers for matching dictionaries. */
 
@@ -1020,14 +1036,14 @@ public:
  *   @discussion For those few IOService objects that obtain service from multiple providers, this method supplies an iterator over a client's providers.
  *   @result An iterator over the providers of the client, or zero if there is a resource failure. The iterator must be released when the iteration is finished. All objects returned by the iteration are retained while the iterator is valid, though they may no longer be attached during the iteration. */
 
-	virtual OSIterator * getProviderIterator( void ) const;
+	virtual OSPtr<OSIterator> getProviderIterator( void ) const;
 
 /*! @function getOpenProviderIterator
  *   @abstract Returns an iterator over an client's providers that are currently opened by the client.
  *   @discussion For those few IOService objects that obtain service from multiple providers, this method supplies an iterator over a client's providers, locking each in turn with @link lockForArbitration lockForArbitration@/link and returning those that have been opened by the client.
  *   @result An iterator over the providers the client has open, or zero if there is a resource failure. The iterator must be released when the iteration is finished. All objects returned by the iteration are retained while the iterator is valid, and the current entry in the iteration is locked with <code>lockForArbitration</code>, protecting it from state changes. */
 
-	virtual OSIterator * getOpenProviderIterator( void ) const;
+	virtual OSPtr<OSIterator> getOpenProviderIterator( void ) const;
 
 /*! @function getClient
  *   @abstract Returns an IOService object's primary client.
@@ -1041,14 +1057,14 @@ public:
  *   @discussion For IOService objects that may have multiple clients, this method supplies an iterator over a provider's clients.
  *   @result An iterator over the clients of the provider, or zero if there is a resource failure. The iterator must be released when the iteration is finished. All objects returned by the iteration are retained while the iterator is valid, though they may no longer be attached during the iteration. */
 
-	virtual OSIterator * getClientIterator( void ) const;
+	virtual OSPtr<OSIterator> getClientIterator( void ) const;
 
 /*! @function getOpenClientIterator
  *   @abstract Returns an iterator over a provider's clients that currently have opened the provider.
  *   @discussion For IOService objects that may have multiple clients, this method supplies an iterator over a provider's clients, locking each in turn with @link lockForArbitration lockForArbitration@/link and returning those that have opened the provider.
  *   @result An iterator over the clients that have opened the provider, or zero if there is a resource failure. The iterator must be released when the iteration is finished. All objects returned by the iteration are retained while the iterator is valid, and the current entry in the iteration is locked with <code>lockForArbitration</code>, protecting it from state changes. */
 
-	virtual OSIterator * getOpenClientIterator( void ) const;
+	virtual OSPtr<OSIterator> getOpenClientIterator( void ) const;
 
 /*! @function callPlatformFunction
  *   @abstract Calls the platform function with the given name.
@@ -1272,12 +1288,12 @@ public:
 	virtual IOReturn messageClients( UInt32 type,
 	    void * argument = NULL, vm_size_t argSize = 0 );
 
-	virtual IONotifier * registerInterest( const OSSymbol * typeOfInterest,
+	virtual OSPtr<IONotifier> registerInterest( const OSSymbol * typeOfInterest,
 	    IOServiceInterestHandler handler,
 	    void * target, void * ref = NULL );
 
 #ifdef __BLOCKS__
-	IONotifier * registerInterest(const OSSymbol * typeOfInterest,
+	OSPtr<IONotifier>  registerInterest(const OSSymbol * typeOfInterest,
 	    IOServiceInterestHandlerBlock handler);
 #endif /* __BLOCKS__ */
 
@@ -1286,6 +1302,11 @@ public:
 
 	virtual void applyToClients( IOServiceApplierFunction applier,
 	    void * context );
+
+#ifdef __BLOCKS__
+	void applyToProviders(IOServiceApplierBlock applier);
+	void applyToClients(IOServiceApplierBlock applier);
+#endif /* __BLOCKS__ */
 
 	virtual void applyToInterested( const OSSymbol * typeOfInterest,
 	    OSObjectApplierFunction applier,
@@ -1313,6 +1334,14 @@ public:
 	virtual IOReturn newUserClient( task_t owningTask, void * securityID,
 	    UInt32 type,
 	    LIBKERN_RETURNS_RETAINED IOUserClient ** handler );
+
+	IOReturn newUserClient( task_t owningTask, void * securityID,
+	    UInt32 type, OSDictionary * properties,
+	    OSSharedPtr<IOUserClient>& handler );
+
+	IOReturn newUserClient( task_t owningTask, void * securityID,
+	    UInt32 type,
+	    OSSharedPtr<IOUserClient>& handler );
 
 /* Return code utilities */
 
@@ -1344,8 +1373,8 @@ public:
 /* overrides */
 	virtual bool serializeProperties( OSSerialize * s ) const APPLE_KEXT_OVERRIDE;
 
-	void   requireMaxBusStall(UInt32 ns);
-	void   requireMaxInterruptDelay(uint32_t ns);
+	IOReturn   requireMaxBusStall(UInt32 ns);
+	IOReturn   requireMaxInterruptDelay(uint32_t ns);
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /* * * * * * * * * * * * Internals * * * * * * * * * * * */
@@ -1359,7 +1388,7 @@ private:
 	bool checkResource( OSObject * matching );
 
 	APPLE_KEXT_COMPATIBILITY_VIRTUAL
-	void probeCandidates( OSOrderedSet * matches );
+	void probeCandidates( LIBKERN_CONSUMED OSOrderedSet * matches );
 	APPLE_KEXT_COMPATIBILITY_VIRTUAL
 	bool startCandidate( IOService * candidate );
 
@@ -1385,16 +1414,16 @@ private:
 	bool matchInternal(OSDictionary * table, uint32_t options, unsigned int * did);
 	static bool instanceMatch(const OSObject * entry, void * context);
 
-	static OSObject * copyExistingServices( OSDictionary * matching,
+	static OSPtr<OSObject>  copyExistingServices( OSDictionary * matching,
 	    IOOptionBits inState, IOOptionBits options = 0 );
 
-	static IONotifier * setNotification(
+	static OSPtr<IONotifier>  setNotification(
 		const OSSymbol * type, OSDictionary * matching,
 		IOServiceMatchingNotificationHandler handler,
 		void * target, void * ref,
 		SInt32 priority = 0 );
 
-	static IONotifier * doInstallNotification(
+	static OSPtr<IONotifier>  doInstallNotification(
 		const OSSymbol * type, OSDictionary * matching,
 		IOServiceMatchingNotificationHandler handler,
 		void * target, void * ref,
@@ -1403,11 +1432,15 @@ private:
 	static bool syncNotificationHandler( void * target, void * ref,
 	    IOService * newService, IONotifier * notifier  );
 
+	static void userServerCheckInTokenNotificationHandler(
+		IOUserServerCheckInToken * token,
+		void * ref);
+
 	APPLE_KEXT_COMPATIBILITY_VIRTUAL
 	void deliverNotification( const OSSymbol * type,
 	    IOOptionBits orNewState, IOOptionBits andNewState );
 
-	OSArray * copyNotifiers(const OSSymbol * type,
+	OSPtr<OSArray>  copyNotifiers(const OSSymbol * type,
 	    IOOptionBits orNewState, IOOptionBits andNewState);
 
 	bool invokeNotifiers(OSArray * willSend[]);
@@ -1853,5 +1886,6 @@ public:
 
 	virtual void powerChangeDone( unsigned long stateNumber );
 };
+
 
 #endif /* ! _IOKIT_IOSERVICE_H */

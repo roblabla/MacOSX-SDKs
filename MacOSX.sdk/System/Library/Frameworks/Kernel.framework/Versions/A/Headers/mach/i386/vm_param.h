@@ -90,10 +90,12 @@
 #ifndef _MACH_I386_VM_PARAM_H_
 #define _MACH_I386_VM_PARAM_H_
 
+
 #define BYTE_SIZE               8               /* byte size in bits */
 
 #define I386_PGBYTES            4096            /* bytes per 80386 page */
 #define I386_PGSHIFT            12              /* bitshift for pages */
+
 
 #define PAGE_SIZE               I386_PGBYTES
 #define PAGE_SHIFT              I386_PGSHIFT
@@ -130,7 +132,6 @@
 #define i386_round_page(x)      ((((pmap_paddr_t)(x)) + I386_PGBYTES - 1) & \
 	                                ~(I386_PGBYTES-1))
 #define i386_trunc_page(x)      (((pmap_paddr_t)(x)) & ~(I386_PGBYTES-1))
-
 
 
 #define VM_MIN_ADDRESS64        ((user_addr_t) 0x0000000000000000ULL)

@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 92A4306C-28EE-3069-9A6D-2BB7F09C2A92' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           E04EB289-C1CC-339E-82D2-E1BF853E0057
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           69A7AAD0-B860-36C6-9464-617FF8977B1A
 install-name:    '/System/Library/PrivateFrameworks/Tourist.framework/Versions/A/Tourist'
-current-version: 1.0.64
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 1.0.67
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _TouristDefinitionABTestCasesKey, _TouristDefinitionAllowQAPaths, 
                        _TouristDefinitionBoardIDKey, _TouristDefinitionBoardIDsKey, 
                        _TouristDefinitionCachedMessageTracerTestPath, _TouristDefinitionCachedTourPath, 

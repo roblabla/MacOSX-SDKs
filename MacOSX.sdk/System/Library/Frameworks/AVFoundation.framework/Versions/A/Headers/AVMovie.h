@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVMovie.h>)
 /*
 	File:			AVMovie.h
 
@@ -750,3 +751,7 @@ API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCore/AVMovie.h>
+#endif

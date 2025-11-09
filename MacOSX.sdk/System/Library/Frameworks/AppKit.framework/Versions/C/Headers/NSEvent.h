@@ -6,6 +6,7 @@
 */
 
 #import <AppKit/NSTouch.h>
+#import <AppKit/AppKitDefines.h>
 #import <ApplicationServices/ApplicationServices.h>
 #import <Foundation/NSObjCRuntime.h>
 #import <Foundation/NSObject.h>
@@ -16,7 +17,7 @@
 #import <limits.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSGraphicsContext, NSWindow, NSTrackingArea;
 
@@ -541,8 +542,8 @@ typedef NS_ENUM(NSInteger, NSPressureBehavior) {
    
    To remove the event monitor, under both garbage collection and non-GC, pass the return value from the +add API to +removeMonitor.
 */
-+ (nullable id)addGlobalMonitorForEventsMatchingMask:(NSEventMask)mask handler:(void (^)(NSEvent*))block API_AVAILABLE(macos(10.6));
-+ (nullable id)addLocalMonitorForEventsMatchingMask:(NSEventMask)mask handler:(NSEvent* _Nullable (^)(NSEvent*))block API_AVAILABLE(macos(10.6));
++ (nullable id)addGlobalMonitorForEventsMatchingMask:(NSEventMask)mask handler:(void (^)(NSEvent *event))block API_AVAILABLE(macos(10.6));
++ (nullable id)addLocalMonitorForEventsMatchingMask:(NSEventMask)mask handler:(NSEvent* _Nullable (^)(NSEvent *event))block API_AVAILABLE(macos(10.6));
 + (void)removeMonitor:(id)eventMonitor API_AVAILABLE(macos(10.6));
 
 @end

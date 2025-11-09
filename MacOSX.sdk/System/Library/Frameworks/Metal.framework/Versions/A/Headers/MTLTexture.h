@@ -30,7 +30,7 @@ typedef NS_ENUM(NSUInteger, MTLTextureType)
     MTLTextureTypeCube = 5,
     MTLTextureTypeCubeArray API_AVAILABLE(macos(10.11), ios(11.0)) = 6,
     MTLTextureType3D = 7,
-    MTLTextureType2DMultisampleArray API_AVAILABLE(macos(10.14)) API_UNAVAILABLE(ios) = 8,
+    MTLTextureType2DMultisampleArray API_AVAILABLE(macos(10.14), ios(14.0)) = 8,
     MTLTextureTypeTextureBuffer API_AVAILABLE(macos(10.14), ios(12.0)) = 9
 } API_AVAILABLE(macos(10.11), ios(8.0));
 
@@ -371,6 +371,22 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  */
 @property (readonly, getter = isFramebufferOnly) BOOL framebufferOnly;
 
+@optional
+/*!
+ @property firstMipmapInTail
+ @abstract For sparse textures this property returns index of first mipmap that is packed in tail.
+ Mapping this mipmap level will map all subsequent mipmap levels.
+ */
+@property (readonly) NSUInteger firstMipmapInTail API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0));
+
+/*!
+ @property tailSizeInBytes
+ @abstract Amount of memory in bytes required to map sparse texture tail.
+ */
+@property (readonly) NSUInteger tailSizeInBytes API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0));
+
+@property (readonly) BOOL isSparse API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0));
+@required
 
 /*!
  @property allowGPUOptimizedContents

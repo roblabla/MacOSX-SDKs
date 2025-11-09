@@ -1,7 +1,7 @@
 /*
     NSBatchDeleteRequest.h
     Core Data
-    Copyright (c) 2015-2019, Apple Inc.
+    Copyright (c) 2015-2020, Apple Inc.
     All rights reserved.
 */
 

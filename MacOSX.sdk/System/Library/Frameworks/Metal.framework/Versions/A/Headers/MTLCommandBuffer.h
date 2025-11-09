@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Metal/MTLDefines.h>
-
+    
 NS_ASSUME_NONNULL_BEGIN
 @protocol MTLDevice;
 @protocol MTLCommandQueue;
@@ -19,8 +19,13 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol MTLDrawable;
 @protocol MTLCommandBuffer;
 @protocol MTLEvent;
+@protocol MTLLogContainer;
+@protocol MTLResourceStateCommandEncoder;
+@protocol MTLAccelerationStructureCommandEncoder;
 @class MTLRenderPassDescriptor;
-
+@class MTLComputePassDescriptor;
+@class MTLBlitPassDescriptor;
+@class MTLResourceStatePassDescriptor;
 /*!
  @enum MTLCommandBufferStatus
  
@@ -102,9 +107,100 @@ typedef NS_ENUM(NSUInteger, MTLCommandBufferError)
     MTLCommandBufferErrorNotPermitted = 7,
     MTLCommandBufferErrorOutOfMemory = 8,
     MTLCommandBufferErrorInvalidResource = 9,
-    MTLCommandBufferErrorMemoryless API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos, macCatalyst) = 10,
+    MTLCommandBufferErrorMemoryless API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(10.0)) = 10,
     MTLCommandBufferErrorDeviceRemoved API_AVAILABLE(macos(10.13)) API_UNAVAILABLE(ios) = 11,
 } API_AVAILABLE(macos(10.11), ios(8.0));
+
+/*!
+ @abstract Key in the userInfo for MTLCommandBufferError NSErrors. Value is an NSArray of MTLCommandBufferEncoderInfo objects in recorded order if an appropriate MTLCommandBufferErrorOption was set, otherwise the key will not exist in the userInfo dictionary.
+ */
+API_AVAILABLE(macos(11.0), ios(14.0))
+MTL_EXTERN NSErrorUserInfoKey const MTLCommandBufferEncoderInfoErrorKey;
+
+/*!
+ @abstract Options for controlling the error reporting for Metal command buffer objects.
+ 
+ @constant MTLCommandBufferErrorOptionNone
+ No special error reporting.
+ 
+ @constant MTLCommandBufferErrorOptionEncoderExecutionStatus
+ Provide the execution status of the individual encoders within the command buffer. In the event of a command buffer error, populate the `userInfo` dictionary of the command buffer's NSError parameter, see MTLCommandBufferEncoderInfoErrorKey and MTLCommandBufferEncoderInfo. Note that enabling this error reporting option may increase CPU, GPU, and/or memory overhead on some platforms; testing for impact is suggested.
+ */
+typedef NS_OPTIONS(NSUInteger, MTLCommandBufferErrorOption) {
+    MTLCommandBufferErrorOptionNone = 0,
+    MTLCommandBufferErrorOptionEncoderExecutionStatus = 1 << 0,
+} API_AVAILABLE(macos(11.0), ios(14.0));
+
+/*!
+ @abstract The error states for a Metal command encoder after command buffer execution.
+ 
+ @constant MTLCommandEncoderErrorStateUnknown
+ The state of the commands associated with the encoder is unknown (the error information was likely not requested).
+ 
+ @constant MTLCommandEncoderErrorStateCompleted
+ The commands associated with the encoder were completed.
+ 
+ @constant MTLCommandEncoderErrorStateAffected
+ The commands associated with the encoder were affected by an error, which may or may not have been caused by the commands themselves, and failed to execute in full.
+ 
+ @constant MTLCommandEncoderErrorStatePending
+ The commands associated with the encoder never started execution.
+ 
+ @constant MTLCommandEncoderErrorStateFaulted
+ The commands associated with the encoder caused an error.
+ */
+typedef NS_ENUM(NSInteger, MTLCommandEncoderErrorState) {
+    MTLCommandEncoderErrorStateUnknown = 0,
+    MTLCommandEncoderErrorStateCompleted = 1,
+    MTLCommandEncoderErrorStateAffected = 2,
+    MTLCommandEncoderErrorStatePending = 3,
+    MTLCommandEncoderErrorStateFaulted = 4,
+} API_AVAILABLE(macos(11.0), ios(14.0));
+
+/*!
+ @class MTLCommandBufferDescriptor
+ @abstract An object that you use to configure new Metal command buffer objects.
+*/
+MTL_EXPORT API_AVAILABLE(macos(11.0), ios(14.0))
+@interface MTLCommandBufferDescriptor : NSObject <NSCopying>
+
+/*!
+ @property retainedReferences
+ @abstract If YES, the created command buffer holds strong references to objects needed for it to execute. If NO, the created command buffer does not hold strong references to objects needed for it to execute.
+*/
+@property (readwrite, nonatomic) BOOL retainedReferences;
+
+/*!
+ @property errorOptions
+ @abstract A set of options to influence the error reporting of the created command buffer. See MTLCommandBufferErrorOption.
+*/
+@property (readwrite, nonatomic) MTLCommandBufferErrorOption errorOptions;
+
+@end // MTLCommandBufferDescriptor
+
+/*!
+ @abstract Provides execution status information for a Metal command encoder.
+ */
+API_AVAILABLE(macos(11.0), ios(14.0))
+@protocol MTLCommandBufferEncoderInfo <NSObject>
+
+/*!
+ @abstract The debug label given to the associated Metal command encoder at command buffer submission.
+*/
+@property (readonly, nonatomic) NSString* label;
+
+/*!
+ @abstract The debug signposts inserted into the associated Metal command encoder.
+*/
+@property (readonly, nonatomic) NSArray<NSString*>* debugSignposts;
+
+/*!
+ @abstract The error state of the associated Metal command encoder.
+*/
+@property (readonly, nonatomic) MTLCommandEncoderErrorState errorState;
+
+@end // MTLCommandBufferEncoderInfo
+
 
 typedef void (^MTLCommandBufferHandler)(id <MTLCommandBuffer>);
 
@@ -151,6 +247,11 @@ API_AVAILABLE(macos(10.11), ios(8.0))
 @property (readonly) BOOL retainedReferences;
 
 /*!
+ @abstract The set of options configuring the error reporting of the created command buffer.
+*/
+@property (readonly) MTLCommandBufferErrorOption errorOptions API_AVAILABLE(macos(11.0), ios(14.0));
+
+/*!
  @property label
  @abstract A string to help identify this object.
  */
@@ -158,6 +259,12 @@ API_AVAILABLE(macos(10.11), ios(8.0))
 
 @property (readonly) CFTimeInterval kernelStartTime API_AVAILABLE(macos(10.15), macCatalyst(13.0), ios(10.3));
 @property (readonly) CFTimeInterval kernelEndTime API_AVAILABLE(macos(10.15), macCatalyst(13.0), ios(10.3));
+
+/*!
+@property logs
+@abstract Logs generated by the command buffer during execution of the GPU commands. Valid after GPU execution is completed
+*/
+@property (readonly) id<MTLLogContainer> logs API_AVAILABLE(macos(11.0), ios(14.0));
 
 /*!
  @property GPUStartTime
@@ -202,6 +309,15 @@ API_AVAILABLE(macos(10.11), ios(8.0))
 */
 - (void)presentDrawable:(id <MTLDrawable>)drawable atTime:(CFTimeInterval)presentationTime;
 
+/*!
+ @method presentDrawable:afterMinimumDuration:
+ @abstract Add a drawable present for a specific host time that allows previous frame to be on screen for at least duration time.
+ @param drawable The drawable to be presented
+ @param duration The minimum time that previous frame should be displayed. The time is double preceision floating point in the unit of seconds.
+ @discussion The difference of this API versus presentDrawable:atTime is that this API defers calculation of the presentation time until the previous frame's actual presentation time is known, thus to be able to maintain a more consistent and stable frame time. This also provides an easy way to set frame rate.
+    The submission thread will be lock stepped with present call been serviced by window server 
+ */
+- (void)presentDrawable:(id <MTLDrawable>)drawable afterMinimumDuration:(CFTimeInterval)duration API_AVAILABLE(macos(10.15.4), ios(10.3), macCatalyst(13.4));
 
 /*!
  @method waitUntilScheduled
@@ -246,6 +362,17 @@ API_AVAILABLE(macos(10.11), ios(8.0))
 - (nullable id <MTLRenderCommandEncoder>)renderCommandEncoderWithDescriptor:(MTLRenderPassDescriptor *)renderPassDescriptor;
 
 /*!
+ @method computeCommandEncoderWithDescriptor:
+ @abstract returns a compute command endcoder to encode into this command buffer.
+ */
+- (nullable id <MTLComputeCommandEncoder>)computeCommandEncoderWithDescriptor:(MTLComputePassDescriptor *)computePassDescriptor API_AVAILABLE(macos(11.0), ios(14.0));
+
+/*!
+ @method blitCommandEncoderWithDescriptor:
+ @abstract returns a blit command endcoder to encode into this command buffer.
+ */
+- (nullable id <MTLBlitCommandEncoder>)blitCommandEncoderWithDescriptor:(MTLBlitPassDescriptor *)blitPassDescriptor API_AVAILABLE(macos(11.0), ios(14.0));
+/*!
  @method computeCommandEncoder
  @abstract returns a compute command encoder to encode into this command buffer.
  */
@@ -278,6 +405,10 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  */
 - (nullable id <MTLParallelRenderCommandEncoder>)parallelRenderCommandEncoderWithDescriptor:(MTLRenderPassDescriptor *)renderPassDescriptor;
 
+- (nullable id<MTLResourceStateCommandEncoder>) resourceStateCommandEncoder API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0));
+- (nullable id<MTLResourceStateCommandEncoder>) resourceStateCommandEncoderWithDescriptor:(MTLResourceStatePassDescriptor *) resourceStatePassDescriptor API_AVAILABLE(macos(11.0), ios(14.0));
+
+- (nullable id <MTLAccelerationStructureCommandEncoder>)accelerationStructureCommandEncoder API_AVAILABLE(macos(11.0), ios(14.0));
 
 /*!
  @method pushDebugGroup:

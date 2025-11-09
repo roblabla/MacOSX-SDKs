@@ -1,12 +1,18 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 5C22EF63-67DE-3A46-8C71-F6F583E8AC99' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           71097EA1-CC08-391E-82B1-FF4ED8FB9C6B
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           84CFC1D9-1D57-3105-B532-DAD783DC1786
 install-name:    '/System/Library/Perl/5.28/darwin-thread-multi-2level/CORE/libperl.dylib'
 current-version: 5.28.2
 compatibility-version: 5.28
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _ASCII_TO_NEED, _NATIVE_TO_NEED, _PL_AboveLatin1, _PL_Assigned_invlist, 
                        _PL_C_locale_obj, _PL_GCB_invlist, _PL_HasMultiCharFold, _PL_LB_invlist, 
                        _PL_Latin1, _PL_No, _PL_NonL1NonFinalFold, _PL_SB_invlist, 
@@ -540,7 +546,7 @@ exports:
                        _XS_DynaLoader_dl_find_symbol, _XS_DynaLoader_dl_install_xsub, 
                        _XS_DynaLoader_dl_load_file, _XS_DynaLoader_dl_undef_symbols, 
                        _XS_DynaLoader_dl_unload_file, _XS_Internals_SvREADONLY, _XS_Internals_SvREFCNT, 
-                       _XS_Internals_hv_clear_placehold, _XS_PerlIO__Layer__NoWarnings, 
+                       _XS_Internals_getcwd, _XS_Internals_hv_clear_placehold, _XS_PerlIO__Layer__NoWarnings, 
                        _XS_PerlIO__Layer__find, _XS_PerlIO_get_layers, _XS_UNIVERSAL_DOES, 
                        _XS_UNIVERSAL_can, _XS_UNIVERSAL_isa, _XS_constant__make_const, 
                        _XS_mro_method_changed_in, _XS_re_is_regexp, _XS_re_regexp_pattern, 

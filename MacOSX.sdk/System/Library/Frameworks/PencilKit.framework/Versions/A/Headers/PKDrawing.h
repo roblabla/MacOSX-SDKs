@@ -23,6 +23,8 @@ extern const CFStringRef PKAppleDrawingTypeIdentifier API_AVAILABLE(ios(13.0), m
 }
 #endif
 
+@class PKStroke;
+
 /// The data model object for storing drawing data created from PKCanvasView.
 NS_REFINED_FOR_SWIFT
 API_AVAILABLE(ios(13.0), macos(10.15))
@@ -30,6 +32,9 @@ API_AVAILABLE(ios(13.0), macos(10.15))
 
 /// Initializes and returns a blank drawing.
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
+
+/// Initializes a drawing with an array of strokes.
+- (instancetype)initWithStrokes:(NSArray<PKStroke *> *)strokes API_AVAILABLE(ios(14.0), macos(11.0));
 
 /// Initializes and returns the drawing with the specified data.
 ///
@@ -44,6 +49,9 @@ API_AVAILABLE(ios(13.0), macos(10.15))
 ///
 /// @return A NSData object containing a representation of the drawing.
 - (NSData *)dataRepresentation;
+
+/// The strokes that this drawing contains.
+@property (nonatomic, readonly) NSArray<PKStroke *> *strokes API_AVAILABLE(ios(14.0), macos(11.0));
 
 /// The bounds of the drawing's contents, taking into account the rendered width of all content.
 /// If these bounds are used to render an image with `imageFromRect:scale:`, no contents will be cropped.
@@ -72,6 +80,13 @@ API_AVAILABLE(ios(13.0), macos(10.15))
 /// @param drawing The drawing to append.
 /// @return A new copy of this drawing with `drawing` appended onto it.
 - (PKDrawing *)drawingByAppendingDrawing:(PKDrawing *)drawing;
+
+/// Create a new drawing by appending an array of strokes to this drawing.
+/// This is a convenience method, to quickly add strokes to a drawing.
+///
+/// @param strokes The strokes to append.
+/// @return A new copy of this drawing with `strokes` appended onto it.
+- (PKDrawing *)drawingByAppendingStrokes:(NSArray<PKStroke *> *)strokes API_AVAILABLE(ios(14.0), macos(11.0));
 
 @end
 

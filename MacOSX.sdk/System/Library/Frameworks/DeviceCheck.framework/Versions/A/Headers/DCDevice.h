@@ -9,6 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+DC_EXPORT
 API_AVAILABLE(ios(11.0), macos(10.15), tvos(11.0)) API_UNAVAILABLE(watchos)
 @interface DCDevice : NSObject
 

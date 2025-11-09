@@ -1,11 +1,28 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: EBF2CBAD-A0E3-3CB4-99A4-FF2C27565CE7', 'x86_64: EBF2CBAD-A0E3-3CB4-99A4-FF2C27565CE7' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           43E12DA6-AFDF-30F4-B1E0-ECB36FD77AF9
+  - target:          x86_64-maccatalyst
+    value:           43E12DA6-AFDF-30F4-B1E0-ECB36FD77AF9
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           711172AD-E170-3AAD-BAF6-F22EAD81EBAE
+  - target:          arm64e-maccatalyst
+    value:           711172AD-E170-3AAD-BAF6-F22EAD81EBAE
 install-name:    '/usr/lib/system/libsystem_info.dylib'
-parent-umbrella: System
-exports:         
-  - archs:           [ x86_64 ]
+parent-umbrella:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    umbrella:        System
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _LI_get_thread_item, _LI_get_thread_list, _LI_ils_create, 
                        _LI_set_thread_item, _LI_set_thread_list, ___dn_skipname, 
                        __authenticate, __ds_running, __gai_nat64_can_v4_address_be_synthesized, 

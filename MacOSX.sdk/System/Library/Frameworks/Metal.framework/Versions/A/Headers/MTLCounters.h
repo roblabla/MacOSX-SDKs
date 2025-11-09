@@ -38,22 +38,22 @@ NS_ASSUME_NONNULL_BEGIN
  @constant MTLCommonCounterFragmentCycles The amount of cycles the fragment shader was running.
  @constant MTLCommonCounterRenderTargetWriteCycles The amount of cycles spent writing to the render targets.
  */
-typedef NSString * const MTLCommonCounter NS_TYPED_ENUM API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
-MTL_EXTERN MTLCommonCounter MTLCommonCounterTimestamp API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
-MTL_EXTERN MTLCommonCounter MTLCommonCounterTessellationInputPatches API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
-MTL_EXTERN MTLCommonCounter MTLCommonCounterVertexInvocations API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
-MTL_EXTERN MTLCommonCounter MTLCommonCounterPostTessellationVertexInvocations API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
-MTL_EXTERN MTLCommonCounter MTLCommonCounterClipperInvocations API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
-MTL_EXTERN MTLCommonCounter MTLCommonCounterClipperPrimitivesOut API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
-MTL_EXTERN MTLCommonCounter MTLCommonCounterFragmentInvocations API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
-MTL_EXTERN MTLCommonCounter MTLCommonCounterFragmentsPassed API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
-MTL_EXTERN MTLCommonCounter MTLCommonCounterComputeKernelInvocations API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
-MTL_EXTERN MTLCommonCounter MTLCommonCounterTotalCycles API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
-MTL_EXTERN MTLCommonCounter MTLCommonCounterVertexCycles API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
-MTL_EXTERN MTLCommonCounter MTLCommonCounterTessellationCycles API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
-MTL_EXTERN MTLCommonCounter MTLCommonCounterPostTessellationVertexCycles API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
-MTL_EXTERN MTLCommonCounter MTLCommonCounterFragmentCycles API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
-MTL_EXTERN MTLCommonCounter MTLCommonCounterRenderTargetWriteCycles API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
+typedef NSString * const MTLCommonCounter NS_TYPED_ENUM API_AVAILABLE(macos(10.15), ios(14.0));
+MTL_EXTERN MTLCommonCounter MTLCommonCounterTimestamp API_AVAILABLE(macos(10.15), ios(14.0));
+MTL_EXTERN MTLCommonCounter MTLCommonCounterTessellationInputPatches API_AVAILABLE(macos(10.15), ios(14.0));
+MTL_EXTERN MTLCommonCounter MTLCommonCounterVertexInvocations API_AVAILABLE(macos(10.15), ios(14.0));
+MTL_EXTERN MTLCommonCounter MTLCommonCounterPostTessellationVertexInvocations API_AVAILABLE(macos(10.15), ios(14.0));
+MTL_EXTERN MTLCommonCounter MTLCommonCounterClipperInvocations API_AVAILABLE(macos(10.15), ios(14.0));
+MTL_EXTERN MTLCommonCounter MTLCommonCounterClipperPrimitivesOut API_AVAILABLE(macos(10.15), ios(14.0));
+MTL_EXTERN MTLCommonCounter MTLCommonCounterFragmentInvocations API_AVAILABLE(macos(10.15), ios(14.0));
+MTL_EXTERN MTLCommonCounter MTLCommonCounterFragmentsPassed API_AVAILABLE(macos(10.15), ios(14.0));
+MTL_EXTERN MTLCommonCounter MTLCommonCounterComputeKernelInvocations API_AVAILABLE(macos(10.15), ios(14.0));
+MTL_EXTERN MTLCommonCounter MTLCommonCounterTotalCycles API_AVAILABLE(macos(10.15), ios(14.0));
+MTL_EXTERN MTLCommonCounter MTLCommonCounterVertexCycles API_AVAILABLE(macos(10.15), ios(14.0));
+MTL_EXTERN MTLCommonCounter MTLCommonCounterTessellationCycles API_AVAILABLE(macos(10.15), ios(14.0));
+MTL_EXTERN MTLCommonCounter MTLCommonCounterPostTessellationVertexCycles API_AVAILABLE(macos(10.15), ios(14.0));
+MTL_EXTERN MTLCommonCounter MTLCommonCounterFragmentCycles API_AVAILABLE(macos(10.15), ios(14.0));
+MTL_EXTERN MTLCommonCounter MTLCommonCounterRenderTargetWriteCycles API_AVAILABLE(macos(10.15), ios(14.0));
 
 /*!
  @enum MTLCommonCounterSet
@@ -64,15 +64,15 @@ MTL_EXTERN MTLCommonCounter MTLCommonCounterRenderTargetWriteCycles API_AVAILABL
  @constant MTLCommonCounterSetStageUtilization A counter set containing utilization per stage.
  @constant MTLCommonCounterSetStatistic A counter set containing various statistics.
  */
-typedef NSString * const MTLCommonCounterSet NS_TYPED_ENUM API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
-MTL_EXTERN MTLCommonCounterSet MTLCommonCounterSetTimestamp API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
-MTL_EXTERN MTLCommonCounterSet MTLCommonCounterSetStageUtilization API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
-MTL_EXTERN MTLCommonCounterSet MTLCommonCounterSetStatistic API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
+typedef NSString * const MTLCommonCounterSet NS_TYPED_ENUM API_AVAILABLE(macos(10.15), ios(14.0));
+MTL_EXTERN MTLCommonCounterSet MTLCommonCounterSetTimestamp API_AVAILABLE(macos(10.15), ios(14.0));
+MTL_EXTERN MTLCommonCounterSet MTLCommonCounterSetStageUtilization API_AVAILABLE(macos(10.15), ios(14.0));
+MTL_EXTERN MTLCommonCounterSet MTLCommonCounterSetStatistic API_AVAILABLE(macos(10.15), ios(14.0));
 
 typedef struct
 {
     uint64_t timestamp;
-} MTLCounterResultTimestamp API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
+} MTLCounterResultTimestamp API_AVAILABLE(macos(10.15), ios(14.0));
 
 typedef struct
 {
@@ -82,7 +82,7 @@ typedef struct
     uint64_t postTessellationVertexCycles;
     uint64_t fragmentCycles;
     uint64_t renderTargetCycles;
-} MTLCounterResultStageUtilization API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
+} MTLCounterResultStageUtilization API_AVAILABLE(macos(10.15), ios(14.0));
 
 typedef struct
 {
@@ -94,15 +94,15 @@ typedef struct
     uint64_t fragmentInvocations;
     uint64_t fragmentsPassed;
     uint64_t computeKernelInvocations;
-} MTLCounterResultStatistic API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
+} MTLCounterResultStatistic API_AVAILABLE(macos(10.15), ios(14.0));
 
 /*!
  @protocol MTLCounter
  @abstract A descriptor for a single counter.
  */
-MTL_EXPORT API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios)
+MTL_EXPORT API_AVAILABLE(macos(10.15), ios(14.0))
 @protocol MTLCounter <NSObject>
-@property (readonly, copy) NSString *name API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
+@property (readonly, copy) NSString *name API_AVAILABLE(macos(10.15), ios(14.0));
 @end
 
 /*!
@@ -110,12 +110,12 @@ MTL_EXPORT API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios)
  @abstract A collection of MTLCounters that the device can capture in
  a single pass.
  */
-MTL_EXPORT API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios)
+MTL_EXPORT API_AVAILABLE(macos(10.15), ios(14.0))
 @protocol MTLCounterSet <NSObject>
 /*!
  @property name The name of the counter set.
  */
-@property (readonly, copy) NSString *name API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
+@property (readonly, copy) NSString *name API_AVAILABLE(macos(10.15), ios(14.0));
 
 /*!
  @property counters The set of counters captured by the counter set.
@@ -125,7 +125,7 @@ MTL_EXPORT API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios)
  they appear in the corresponding resolved counter structure.  Instead
  MTLCounterErrorValue will be written in the resolved buffer.
  */
-@property (readonly, copy) NSArray<id<MTLCounter>>* counters API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
+@property (readonly, copy) NSArray<id<MTLCounter>>* counters API_AVAILABLE(macos(10.15), ios(14.0));
 
 @end
 
@@ -133,27 +133,27 @@ MTL_EXPORT API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios)
  @interface MTLCounterSampleBufferDescriptor
  @abstract Object to represent the counter state.
  */
-MTL_EXPORT API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios)
+MTL_EXPORT API_AVAILABLE(macos(10.15), ios(14.0))
 @interface MTLCounterSampleBufferDescriptor : NSObject <NSCopying>
 /*!
  @property counterSet The counterset to be sampled for this counter sample buffer
  */
-@property (readwrite, retain) id<MTLCounterSet> counterSet API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
+@property (nullable, readwrite, retain) id<MTLCounterSet> counterSet API_AVAILABLE(macos(10.15), ios(14.0));
 /*!
  @property label A label to identify the sample buffer in debugging tools.
  */
-@property (readwrite, copy) NSString *label API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
+@property (readwrite, copy) NSString *label API_AVAILABLE(macos(10.15), ios(14.0));
 /*!
  @property storageMode The storage mode for the sample buffer.  Only
  MTLStorageModeShared and MTLStorageModePrivate may be used.
  */
-@property (readwrite) MTLStorageMode storageMode API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
+@property (readwrite) MTLStorageMode storageMode API_AVAILABLE(macos(10.15), ios(14.0));
 
 /*!
  @property sampleCount The number of samples that may be stored in the
  counter sample buffer.
  */
-@property (readwrite) NSUInteger sampleCount API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
+@property (readwrite) NSUInteger sampleCount API_AVAILABLE(macos(10.15), ios(14.0));
 @end
 
 /*!
@@ -161,23 +161,23 @@ MTL_EXPORT API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios)
  @abstract The Counter Sample Buffer contains opaque counter samples as well
  as state needed to request a sample from the API.
  */
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios)
+API_AVAILABLE(macos(10.15), ios(14.0))
 @protocol MTLCounterSampleBuffer <NSObject>
 /*!
  @property device The device that created the sample buffer.  It is only valid
  to use the sample buffer with this device.
  */
-@property (readonly) id<MTLDevice> device API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
+@property (readonly) id<MTLDevice> device API_AVAILABLE(macos(10.15), ios(14.0));
 
 /*!
  @property label The label for the sample buffer.  This is set by the label
  property of the descriptor that is used to create the sample buffer.
  */
-@property (readonly) NSString *label API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
+@property (readonly) NSString *label API_AVAILABLE(macos(10.15), ios(14.0));
 /*!
  @property sampleCount The number of samples that may be stored in this sample buffer.
  */
-@property (readonly) NSUInteger sampleCount API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
+@property (readonly) NSUInteger sampleCount API_AVAILABLE(macos(10.15), ios(14.0));
 
 /*!
  @method resolveCounterRange:
@@ -190,14 +190,14 @@ API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios)
  MTLCounterErrorValue.
  */
 -(nullable NSData *)resolveCounterRange:(NSRange)range
-    API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
+    API_AVAILABLE(macos(10.15), ios(14.0));
 @end
 
 /*!
  @constant MTLCounterErrorDomain
  @abstract NSErrors raised when creating a counter sample buffer.
  */
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios)
+API_AVAILABLE(macos(10.15), ios(14.0))
 MTL_EXTERN NSErrorDomain const MTLCounterErrorDomain;
 
 /*!
@@ -205,14 +205,18 @@ MTL_EXTERN NSErrorDomain const MTLCounterErrorDomain;
  @constant MTLCounterSampleBufferErrorOutOfMemory
  There wasn't enough memory available to allocate the counter sample buffer.
  
+ @constant MTLCounterSampleBufferErrorInvalid
+ Invalid parameter passed while creating counter sample buffer.
+
  @constant MTLCounterSampleBufferErrorInternal
  There was some other error in allocating the counter sample buffer.
  */
 typedef NS_ENUM(NSInteger, MTLCounterSampleBufferError)
 {
     MTLCounterSampleBufferErrorOutOfMemory,
+    MTLCounterSampleBufferErrorInvalid,
     MTLCounterSampleBufferErrorInternal,
-} API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
+} API_AVAILABLE(macos(10.15), ios(14.0));
 
 
 NS_ASSUME_NONNULL_END

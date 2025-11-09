@@ -2,7 +2,7 @@
 //  AVB1722ControlInterface.h
 //  AudioVideoBridging
 //
-//  Copyright (c) 2010-2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2010-2020 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -21,15 +21,14 @@ NS_ASSUME_NONNULL_BEGIN
  */
 API_AVAILABLE(macos(10.8))
 @interface AVB1722ControlInterface : NSObject
-{
-}
+
 
 @property (readonly, copy) NSString *interfaceName;
 /*!
  @property	interface
  @abstract	The AVBInterface object which owns this object. This may be nil if it was not created by an instance of AVBInterface
  */
-@property (readonly, assign, nullable) AVBInterface *interface;
+@property (readonly, weak, nullable) AVBInterface *interface;
 
 - (instancetype)init NS_UNAVAILABLE;
 

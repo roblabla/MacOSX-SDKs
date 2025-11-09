@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVPlayerItemOutput.h>)
 /*
     File:  AVPlayerItemOutput.h
 
@@ -538,3 +539,7 @@ API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0))
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCore/AVPlayerItemOutput.h>
+#endif

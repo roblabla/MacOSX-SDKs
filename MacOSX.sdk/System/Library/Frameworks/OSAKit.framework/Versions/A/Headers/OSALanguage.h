@@ -6,13 +6,16 @@
 */
 
 #import <Cocoa/Cocoa.h>
-#include <Carbon/Carbon.h>
+#if TARGET_OS_OSX
+#import <Carbon/Carbon.h>
+#endif
+
+NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @class OSAScript;
 @class OSALanguageInstance;
 @class OSALanguagePrivate;
-
-NS_ASSUME_NONNULL_BEGIN
 
 // Language Options
 // ================
@@ -63,4 +66,5 @@ typedef NS_OPTIONS(NSUInteger, OSALanguageFeatures)
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

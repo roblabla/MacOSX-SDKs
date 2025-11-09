@@ -464,15 +464,6 @@ CB_EXTERN_CLASS @interface CBPeripheralManager : CBManager
 - (void)peripheralManager:(CBPeripheralManager *)peripheral didUnpublishL2CAPChannel:(CBL2CAPPSM)PSM error:(nullable NSError *)error;
 
 /*!
- *  @method peripheral:didOpenL2CAPChannel:error:
- *
- *  @param peripheral		The peripheral providing this information.
- *  @param channel			A <code>CBL2CAPChannel</code> object.
- *	@param error			If an error occurred, the cause of the failure.
- *
- *  @discussion				This method returns the result of a @link openL2CAPChannel: @link call.
- */
-/*!
  *  @method peripheralManager:didOpenL2CAPChannel:error:
  *
  *  @param peripheral   	The peripheral manager requesting this information.

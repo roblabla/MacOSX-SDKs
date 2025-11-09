@@ -4,7 +4,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
+#import <AvailabilityMacros.h>
 
 @class IOBluetoothDevice;
 
@@ -15,6 +15,7 @@ typedef enum {
     kBluetoothKeyboardNoReturn
 } BluetoothKeyboardReturnType;
 
+API_UNAVAILABLE_BEGIN(ios)
 @interface IOBluetoothPasskeyDisplay : NSView
 {
 	IBOutlet NSImageView *		mReturnImageView;
@@ -75,3 +76,4 @@ typedef enum {
 @interface IOBluetoothAccessibilityIgnoredImageCell: NSImageCell {}
 @end
 
+API_UNAVAILABLE_END

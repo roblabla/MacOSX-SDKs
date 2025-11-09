@@ -1,11 +1,25 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 412B8F80-FC07-33B7-B759-6515296C357F', 'x86_64: 412B8F80-FC07-33B7-B759-6515296C357F' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           86958BCF-B34E-3C9F-BA60-B0191A6392DF
+  - target:          x86_64-maccatalyst
+    value:           86958BCF-B34E-3C9F-BA60-B0191A6392DF
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           5C4DDF5C-0FE1-3A52-BE6C-A7F84EF039B3
+  - target:          arm64e-maccatalyst
+    value:           5C4DDF5C-0FE1-3A52-BE6C-A7F84EF039B3
 install-name:    '/System/Library/PrivateFrameworks/IMFoundation.framework/Versions/A/IMFoundation'
 current-version: 800
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CopyKeychainSearchList, _ExtractURLQueries, _FZAVErrorDomain, 
                        _FZRelayParameter_ConnectionID, _FZRelayParameter_PeerBlob, 
                        _FZRelayParameter_PeerID, _FZRelayParameter_PeerNatIP, _FZRelayParameter_PeerNatType, 
@@ -71,22 +85,22 @@ exports:
                        _IMDAuditTokenTaskCopyValueForEntitlement, _IMDAuditTokenTaskCopyValuesForEntitlements, 
                        _IMDAuditTokenTaskHasEntitlement, _IMDDScanAttributedStringWithContext, 
                        _IMDDScanAttributedStringWithExtendedContext, _IMDaemonRequestConnection, 
-                       _IMDaemonRequestPlugInConnection, _IMDataDetectedAttributeName, 
-                       _IMDataDetectorResultAttributeName, _IMDeleteItemsForService, 
-                       _IMDispatchForNotify, _IMEnumerateArrayInRange, _IMErrorPostedNotification, 
-                       _IMFileBookmarkAttributeName, _IMFileLocationTrimFileName, 
-                       _IMFileTransferGUIDAttributeName, _IMFilenameAttributeName, 
-                       _IMFlushAppPreferences, _IMFontFamilyAttributeName, _IMFontSizeAttributeName, 
-                       _IMForegroundColorAttributeName, _IMFormatPhoneNumber, _IMFormattedDisplayStringForID, 
-                       _IMFormattedDisplayStringForIDWithCountryCode, _IMFormattedDisplayStringForNumber, 
-                       _IMFormattedNumberForUnformattedNumber, _IMFormattedPhoneNumberForCFPhoneNumberRef, 
-                       _IMGenerateLoginID, _IMGenericErrorDomain, _IMGetAppBoolForKey, 
-                       _IMGetAppByHostBoolForKey, _IMGetAppByHostIntForKey, _IMGetAppByHostValueForKey, 
-                       _IMGetAppIntForKey, _IMGetAppValueForKey, _IMGetAssertionFailureHandler, 
-                       _IMGetCachedDomainBoolForKey, _IMGetCachedDomainBoolForKeyWithDefaultValue, 
-                       _IMGetCachedDomainIntForKey, _IMGetCachedDomainIntForKeyWithDefaultValue, 
-                       _IMGetCachedDomainValueForKey, _IMGetCallingSettings, _IMGetConferenceSettings, 
-                       _IMGetDomainBoolForKey, _IMGetDomainBoolForKeyWithDefaultValue, 
+                       _IMDaemonRequestConnectionWithSync, _IMDaemonRequestPlugInConnection, 
+                       _IMDataDetectedAttributeName, _IMDataDetectorResultAttributeName, 
+                       _IMDeleteItemsForService, _IMDispatchForNotify, _IMEnumerateArrayInRange, 
+                       _IMErrorPostedNotification, _IMFileBookmarkAttributeName, 
+                       _IMFileLocationTrimFileName, _IMFileTransferGUIDAttributeName, 
+                       _IMFilenameAttributeName, _IMFlushAppPreferences, _IMFontFamilyAttributeName, 
+                       _IMFontSizeAttributeName, _IMForegroundColorAttributeName, 
+                       _IMFormatPhoneNumber, _IMFormattedDisplayStringForID, _IMFormattedDisplayStringForIDWithCountryCode, 
+                       _IMFormattedDisplayStringForNumber, _IMFormattedNumberForUnformattedNumber, 
+                       _IMFormattedPhoneNumberForCFPhoneNumberRef, _IMGenerateLoginID, 
+                       _IMGenericErrorDomain, _IMGetAppBoolForKey, _IMGetAppByHostBoolForKey, 
+                       _IMGetAppByHostIntForKey, _IMGetAppByHostValueForKey, _IMGetAppIntForKey, 
+                       _IMGetAppValueForKey, _IMGetAssertionFailureHandler, _IMGetCachedDomainBoolForKey, 
+                       _IMGetCachedDomainBoolForKeyWithDefaultValue, _IMGetCachedDomainIntForKey, 
+                       _IMGetCachedDomainIntForKeyWithDefaultValue, _IMGetCachedDomainValueForKey, 
+                       _IMGetConferenceSettings, _IMGetDomainBoolForKey, _IMGetDomainBoolForKeyWithDefaultValue, 
                        _IMGetDomainIntForKey, _IMGetDomainValueForKey, _IMGetEnvironmentName, 
                        _IMGetHostUUID, _IMGetIDSSettings, _IMGetInlineImagePath, 
                        _IMGetKeychainAuthToken, _IMGetKeychainData, _IMGetKeychainDataProtectionClassFromSecAttrDataProtectionClass, 
@@ -179,10 +193,11 @@ exports:
                        _IMUserScopedNotification, _IMWarnString_V, _IMWeakLinkClass, 
                        _IMWeakLinkSymbol, _IMXPCConfigureConnection, _IMXPCCreateConnectionForService, 
                        _IMXPCCreateConnectionForServiceWithQueue, _IMXPCCreateServerConnection, 
-                       _IMiMessageMaxFileSizeForUTI, _IMiMessageMaxTransferAudioFileSizeForWifi, 
-                       _IMiMessageMaxTransferFileSizeForWifi, _IMiMessageMaxTransferVideoFileSizeForWifi, 
-                       _IMiMessageShouldSendLowResolutionOnly, _IMiMessageSizeLimitsForTransferType, 
-                       _IsPersonalFirewallBlockingPort, _IsPersonalFirewallOn, _JWCopyCodableObjectStandardWhitelist, 
+                       _IMXPCCreateServerConnectionWithQueue, _IMiMessageMaxFileSizeForUTI, 
+                       _IMiMessageMaxTransferAudioFileSizeForWifi, _IMiMessageMaxTransferFileSizeForWifi, 
+                       _IMiMessageMaxTransferVideoFileSizeForWifi, _IMiMessageShouldSendLowResolutionOnly, 
+                       _IMiMessageSizeLimitsForTransferType, _IsPersonalFirewallBlockingPort, 
+                       _IsPersonalFirewallOn, _JWCopyCodableObjectStandardWhitelist, 
                        _JWCopyInvocationArguments, _JWCreateInvocationFromXPCObject, 
                        _JWCreateXPCObjectFromInvocation, _JWDecodeArray, _JWDecodeCodableObjectWithStandardWhitelist, 
                        _JWDecodeDictionary, _JWDecodeKeyedCodableObject, _JWDecodeKeyedCodableObjectWithSecureCoding, 
@@ -190,10 +205,11 @@ exports:
                        _JWEncodeKeyedCodableObject, _JWUUIDPushObjectToString, _MachineNameString, 
                        _MobileMeBrandName, _MobileMeSuffix, _OSLogHandleForFaceTimeCategory, 
                        _OSLogHandleForIDSCategory, _OSLogHandleForIMEventCategory, 
-                       _OSLogHandleForIMFoundationCategory, _OSLogHandleForRegistrationCategory, 
-                       _OSLogHandleForTransportCategory, _OpenSystemPreferencePaneAnchor, 
-                       _SecureRandomBytes, _SecureRandomUInt, _StringGUID, _TemporaryImagePath, 
-                       _TemporaryTransfersPath, _ValidMobileMeDomains, __AddDDPhotoSharingIntentResultToAttributedString, 
+                       _OSLogHandleForIMFoundationCategory, _OSLogHandleForPDSCategory, 
+                       _OSLogHandleForRegistrationCategory, _OSLogHandleForTransportCategory, 
+                       _OpenSystemPreferencePaneAnchor, _SecureRandomBytes, _SecureRandomUInt, 
+                       _StringGUID, _TemporaryImagePath, _TemporaryTransfersPath, 
+                       _ValidMobileMeDomains, __AddDDPhotoSharingIntentResultToAttributedString, 
                        __FezLogElapsedTimeWithTag, __FezStartTime, __IMAlwaysLog, 
                        __IMAlwaysLogV, __IMDaemonIsRunning, __IMDebugLog, __IMFastCreateFormatString, 
                        __IMFrameworkBundle, __IMGetAVAgentRemoteObject, __IMGetTimeoutDefault, 
@@ -251,8 +267,9 @@ exports:
                        _kFZInvisibleState, _kFZIsIgnoredChatParticipantProperty, 
                        _kFZJoinBlobChatProperty, _kFZListenerCapAVChatInfo, _kFZListenerCapAVObserver, 
                        _kFZListenerCapAccounts, _kFZListenerCapAppleAC, _kFZListenerCapAppleLegacyVC, 
-                       _kFZListenerCapAppleVC, _kFZListenerCapAuxInput, _kFZListenerCapBuddyList, 
-                       _kFZListenerCapChatCountsObserver, _kFZListenerCapChats, _kFZListenerCapDatabaseUpdateObserver, 
+                       _kFZListenerCapAppleVC, _kFZListenerCapAuxInput, _kFZListenerCapBlackholedChatRegistry, 
+                       _kFZListenerCapBuddyList, _kFZListenerCapChatCountsObserver, 
+                       _kFZListenerCapChats, _kFZListenerCapDatabaseUpdateObserver, 
                        _kFZListenerCapEvenMoreTruncatedChatRegistry, _kFZListenerCapFileTransfers, 
                        _kFZListenerCapIDQueries, _kFZListenerCapManageStatus, _kFZListenerCapMessageHistory, 
                        _kFZListenerCapModifyReadState, _kFZListenerCapNotifications, 
@@ -354,22 +371,14 @@ exports:
                        IMRKResponse, IMReachability, IMRemoteObject, IMRemoteObjectBroadcaster, 
                        IMRemoteURLConnection, IMRemoteURLConnectionMockScheduler, 
                        IMScheduledUpdater, IMSystemMonitor, IMSystemProxySettingsFetcher, 
-                       IMTimer, IMTimingCollection, IMURLResponseToPlist, IMUserDefaults, 
-                       IMUserNotification, IMUserNotificationCenter, IMWeakObjectCache, 
-                       IMWeakReference, NetworkChangeNotifier, OSLogHandleManager ]
+                       IMTimer, IMTimingCollection, IMURLResponseToPlist, IMURLSession, 
+                       IMUserDefaults, IMUserNotification, IMUserNotificationCenter, 
+                       IMWeakObjectCache, IMWeakReference, NetworkChangeNotifier, 
+                       OSLogHandleManager ]
     objc-ivars:      [ IMLocalObject._internal, IMMacNotificationCenterManager._center, 
                        IMMacNotificationCenterManager._connection, IMMacNotificationCenterManager._identifier, 
                        IMMacNotificationCenterManager._topics, IMManualUpdater._action, 
-                       IMManualUpdater._needsUpdate, IMManualUpdater._target, IMMessageContext._boost, 
-                       IMMessageContext._context, IMMessageContext._localObject, 
-                       IMMessageContext._voucher, IMMessageContext._xpcMessage, IMMultiDict._count, 
-                       IMMultiDict._dictionary, IMMultiQueue._queue, IMMultiQueue._queueMap, 
-                       IMNetworkAvailability._completionBlock, IMNetworkAvailability._context, 
-                       IMNetworkAvailability._flags, IMNetworkAvailability._guid, 
-                       IMNetworkAvailability._options, IMNetworkAvailability._startTime, 
-                       IMNetworkAvailability._timeout, IMNetworkAvailability._timer, 
-                       IMNetworkAvailability._wifiTimeout, IMPowerAssertion._assertion, 
-                       IMPowerAssertion._identifier, IMRemoteObject._internal, IMRemoteObjectBroadcaster._queue, 
-                       IMScheduledUpdater._holdingUpdatesKeys, IMUserNotification._reserved, 
-                       IMWeakReference._object, IMWeakReference._objectAddress ]
+                       IMManualUpdater._needsUpdate, IMManualUpdater._target, IMRemoteObject._internal, 
+                       IMRemoteObjectBroadcaster._queue, IMScheduledUpdater._holdingUpdatesKeys, 
+                       IMUserNotification._reserved ]
 ...

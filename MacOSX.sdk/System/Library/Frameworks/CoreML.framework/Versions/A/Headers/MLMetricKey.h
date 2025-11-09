@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
  * A class to specify list of supported model update metrics.
  */
 ML_EXPORT
-API_AVAILABLE(macos(10.15), ios(13.0))
+API_AVAILABLE(macos(10.15), ios(13.0), tvos(14.0))
 @interface MLMetricKey : MLKey
 
 // Float metric indicating the current loss

@@ -3,7 +3,7 @@
 	
 	Framework:  VideoToolbox
 	
-	Copyright 2007-2018 Apple Inc. All rights reserved.
+	Copyright 2007-2020 Apple Inc. All rights reserved.
 	
 	Standard Video Toolbox compression properties.
 */
@@ -251,6 +251,19 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MoreFramesBeforeStart API_
 */
 VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MoreFramesAfterEnd API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFBoolean, Optional
 
+/*!
+	@constant	kVTCompressionPropertyKey_PrioritizeEncodingSpeedOverQuality
+	@abstract
+		Hint for the video encoder that it should maximize its speed during encode, sacrificing quality if needed
+	@discussion
+		Clients may set this property to kCFBooleanTrue to indicate that
+		the encoder can take steps to maximize its speed by reducing quality.
+		Setting the property to NULL is equivalent to setting it to kCFBooleanFalse.
+		Not all video encoders support this property
+		By default, this property is NULL.
+*/
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_PrioritizeEncodingSpeedOverQuality API_AVAILABLE(macosx(11.0), ios(14.0), tvos(14.0)); // CFBoolean, Optional
+
 #pragma mark Bitstream configuration
 
 /*!
@@ -317,6 +330,21 @@ VT_EXPORT const CFStringRef kVTProfileLevel_H263_Profile0_Level10 API_AVAILABLE(
 VT_EXPORT const CFStringRef kVTProfileLevel_H263_Profile0_Level45 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
 VT_EXPORT const CFStringRef kVTProfileLevel_H263_Profile3_Level45 API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
 
+/*!
+    @constant    kVTCompressionPropertyKey_HDRMetadataInsertionMode
+    @abstract
+        The mode for HDR metadata in the output bitstream.
+    @discussion
+        If set to kVTHDRMetadataInsertionMode_None, no HDR metadata will
+        be present in the output bitstream.  For other modes,
+        VTCompressionSession will determine what type of HDR metadata
+        to insert based on the output color space.  e.g. DolbyVision, HDR10, etc.
+        This property has no effect if the output color space is not HDR, or if
+        there is currently no underlying support for the HDR format.
+*/
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_HDRMetadataInsertionMode API_AVAILABLE(macosx(11.0), ios(14.0), tvos(14.0), watchos(7.0)); // Read/write, CFString, Optional, default is kVTHDRMetadataInsertionMode_Auto
+    VT_EXPORT const CFStringRef kVTHDRMetadataInsertionMode_None API_AVAILABLE(macosx(11.0), ios(14.0), tvos(14.0), watchos(7.0));
+    VT_EXPORT const CFStringRef kVTHDRMetadataInsertionMode_Auto API_AVAILABLE(macosx(11.0), ios(14.0), tvos(14.0), watchos(7.0));
 
 /*!
 	 @constant	kVTCompressionPropertyKey_H264EntropyMode
@@ -762,6 +790,19 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MultiPassStorage API_AVAIL
 		Matches the value specified in kVTVideoEncoderSpecification_EncoderID, and the kVTVideoEncoderList_EncoderID value returned from VTCopyVideoEncoderList.
 */
 VT_EXPORT const CFStringRef kVTCompressionPropertyKey_EncoderID API_AVAILABLE(macosx(10.13), ios(11.0), tvos(11.0)); // CFStringRef
+
+/*!
+	@constant	kVTCompressionPropertyKey_PreserveDynamicHDRMetadata
+	@abstract
+		Controls whether or not to preserve any dynamic HDR metadata on the input pixel buffer
+	@discussion
+		If set to false, and kVTCompressionPropertyKey_HDRMetadataInsertionMode is not
+		kVTHDRMetadataInsertionMode_None, then VTCompressionSession will generate the
+		dynamic HDR metadata for the pixel buffer, if the HDR format is supported.
+*/
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_PreserveDynamicHDRMetadata // CFBoolean, Write, Optional
+							API_AVAILABLE(macosx(11.0), ios(14.0), tvos(14.0));
+
 
 	
 CM_ASSUME_NONNULL_END

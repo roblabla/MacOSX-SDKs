@@ -34,6 +34,7 @@ typedef NS_ENUM(NSInteger, UIPencilPreferredAction) {
 UIKIT_EXTERN API_AVAILABLE(ios(12.1)) API_UNAVAILABLE(watchos, tvos) @interface UIPencilInteraction : NSObject <UIInteraction>
 
 @property (class, nonatomic, readonly) UIPencilPreferredAction preferredTapAction;
+@property (class, nonatomic, readonly) BOOL prefersPencilOnlyDrawing;
 
 @property (nonatomic, weak, nullable) id <UIPencilInteractionDelegate> delegate;
 

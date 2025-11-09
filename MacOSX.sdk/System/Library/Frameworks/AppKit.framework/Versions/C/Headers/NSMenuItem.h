@@ -14,7 +14,7 @@
 #import <AppKit/NSCell.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSMenu;
 @class NSImage, NSAttributedString, NSView;

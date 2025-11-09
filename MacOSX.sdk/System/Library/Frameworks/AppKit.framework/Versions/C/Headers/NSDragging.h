@@ -11,13 +11,13 @@
 #import <Foundation/NSDictionary.h>
 #import <Foundation/NSGeometry.h>
 #import <limits.h>
-
 #import <AppKit/NSPasteboard.h>
+#import <AppKit/AppKitDefines.h>
 
 @protocol NSPasteboardWriting;
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSDraggingItem, NSDraggingSession, NSImage, NSPasteboard, NSView, NSWindow;
 @class NSURL;
@@ -75,7 +75,7 @@ typedef NS_ENUM(NSInteger, NSSpringLoadingHighlight) {
 /* Returns the current location of the current composited dragging image’s origin in NSDraggingFormationNone translated to the base coordinate system of the destination object’s window
 */
 @property (readonly) NSPoint draggedImageLocation;
-@property (nullable, readonly) NSImage *draggedImage API_DEPRECATED("Use NSDraggingItem objects instead", macos(10.0,API_TO_BE_DEPRECATED));
+@property (nullable, readonly) NSImage *draggedImage API_DEPRECATED("Use NSDraggingItem objects instead", macos(10.0, 11.0));
 @property (readonly) NSPasteboard *draggingPasteboard;
 @property (nullable, readonly) id draggingSource;
 @property (readonly) NSInteger draggingSequenceNumber;

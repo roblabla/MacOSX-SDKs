@@ -1,17 +1,26 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 15261E0D-60B0-3768-8177-0247E943E155' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           2812FF10-DA35-3256-8943-24067B125747
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           E9E6BC5C-C794-3C84-94A6-01E04CE0CC51
 install-name:    '/System/Library/PrivateFrameworks/MailCore.framework/Versions/A/MailCore'
-current-version: 3578.1
-exports:         
-  - archs:           [ x86_64 ]
-    allowable-clients: [ CoreSuggestionsTests, DebugBundle, EmailAuthenticationPlugin, 
-                         EmailNotificationPlugin, EmailUIPlugin, IMAP, Mail, MailCacheDelete, 
-                         MailMigratorPlugin, MailQuickLookExtension, MailService, 
-                         MailShareExtension, MailStorageManagement, MailUI, MailUIWebBundle, 
-                         MailWebPlugIn, TestSuggestions, com.apple.MailServiceAgent, 
-                         migrationhelper ]
+current-version: 3654.0.3
+allowable-clients:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    clients:         [ CoreSuggestionsTests, DebugBundle, EmailAuthenticationPlugin, 
+                       EmailFunctionalTests, EmailNotificationPlugin, EmailUIPlugin, 
+                       IMAP, IMAPFunctionalTests, Mail, MailCacheDelete, MailMigratorPlugin, 
+                       MailNotificationContentExtension, MailQuickLookExtension, 
+                       MailService, MailShareExtension, MailStorageManagement, MailTests, 
+                       MailUI, MailUIWebBundle, MailWebPlugIn, TestSuggestions, WebDocumentViewTestApp, 
+                       com.apple.MailServiceAgent, migrationhelper ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _DefaultsKeyUserOptedIntoAttachmentSending, _ECMessageHeaderKeyReceivedSpf, 
                        _MCAccountBecameReachableNotification, _MCAccountTypeEWS, 
                        _MCAccountTypeIMAP, _MCAccountTypePOP, _MCAccountTypeSMTP, 
@@ -25,15 +34,14 @@ exports:
                        _MCDefaultsKeyColorQuotedText, _MCDefaultsKeyCustomHeaders, 
                        _MCDefaultsKeyHeaderDetail, _MCDefaultsKeyLogBodyHash, _MCDefaultsKeyQuotingColorList, 
                        _MCDeleteLogsAndDiagnostics, _MCDescriptionForMessageFlags, 
-                       _MCDirectoryNameSavedAttachments, _MCDisplayNameDidChangeNotification, 
-                       _MCErrorKeyExpirationDate, _MCErrorKeySMIMESignerStatus, _MCErrorKeySMIMETrustEvaluation, 
+                       _MCDescriptionForMessagePriority, _MCDirectoryNameSavedAttachments, 
+                       _MCDisplayNameDidChangeNotification, _MCErrorKeyExpirationDate, 
+                       _MCErrorKeySMIMESignerStatus, _MCErrorKeySMIMETrustEvaluation, 
                        _MCErrorKeyServerResponse, _MCExchangeMessageTracerIdentifier, 
                        _MCFileWrapperKeyArchiveData, _MCFileWrapperKeyArchiveType, 
-                       _MCFileWrapperKeyChildren, _MCFileWrapperKeyContentID, _MCFileWrapperKeyData, 
-                       _MCFileWrapperKeyDestination, _MCFileWrapperKeyFileAttributes, 
-                       _MCFileWrapperKeyIcon, _MCFileWrapperKeyLocalFileSize, _MCFileWrapperKeyName, 
-                       _MCFileWrapperKeyPartNumber, _MCFileWrapperKeyPathToCopy, 
-                       _MCFileWrapperKeyPlaceholder, _MCFileWrapperKeyPreferredFilename, 
+                       _MCFileWrapperKeyChildren, _MCFileWrapperKeyData, _MCFileWrapperKeyDestination, 
+                       _MCFileWrapperKeyFileAttributes, _MCFileWrapperKeyIcon, _MCFileWrapperKeyName, 
+                       _MCFileWrapperKeyPartNumber, _MCFileWrapperKeyPlaceholder, 
                        _MCFileWrapperKeyPrivateData, _MCFileWrapperKeyRemoteURL, 
                        _MCFileWrapperKeyRemotelyAccessed, _MCFileWrapperKeyType, 
                        _MCFlagChangeDictionaryForFlagChange, _MCFlagChangeDictionaryStrippingServerFlags, 
@@ -141,8 +149,9 @@ exports:
                        _MCV2ComplexMigrationTracerIdentifier, _MCV2SimpleMigrationTracerExternalIdentifier, 
                        _MCV2SimpleMigrationTracerIdentifier, _MCVerifyCredentialsKeyDiscoverBestSettings, 
                        _MFOldRangeOfBytes, _MFRangeOfBytes, _MimePartOptionParseTextOnly, 
-                       _StringWriterNewString, _createInternetMessageDateFormatter, 
-                       _mf_stat, _sCommandSpecTable, _sStringKeyMimeAttachmentFilename ]
+                       _StringWriterNewString, __ef_log_MCProgressGroup, _createInternetMessageDateFormatter, 
+                       _kQuotingColorListExpectedCount, _mf_stat, _sCommandSpecTable, 
+                       _sStringKeyMimeAttachmentFilename ]
     objc-classes:    [ MCActivity, MCActivityAggregate, MCActivityAggregator, MCActivityMonitor, 
                        MCActivityUpdater, MCAddressManager, MCAggregablePowerLog, 
                        MCAggregateActivity, MCAppleScriptAttachment, MCArchiveFileWrapper, 
@@ -154,28 +163,28 @@ exports:
                        MCDiscretionaryWorkScheduler, MCDisplayNameInfo, MCDisplayNameManager, 
                        MCDownloadingMessagesProgressEntry, MCFileTypeInfo, MCFileURLAttachmentDataSource, 
                        MCFileWrapper, MCFileWrapperAttachmentDataSource, MCImageJunkMetadata, 
-                       MCInvocationQueue, MCJunkRecorder, MCKeychainManager, MCLargeAttachmentFileWrapper, 
-                       MCMainThreadInvocationOperation, MCMemoryDataSource, MCMessage, 
-                       MCMessageAttachmentMetadatum, MCMessageBody, MCMessageGenerator, 
-                       MCMessageHeaders, MCMessageTracer, MCMessageURLProtocol, MCMimeCharset, 
-                       MCMimeDataEncoding, MCMimePart, MCMimePartAttachmentDataSource, 
-                       MCMonitoredInvocation, MCMonitoredOperation, MCMovingMessagesProgressEntry, 
-                       MCMutableMessageHeaders, MCMutableMessageHeadersFactory, MCNetworkController, 
-                       MCOutgoingMessage, MCPlaceholderArchiveFileWrapper, MCPlaceholderFileWrapper, 
-                       MCPowerLog, MCPowerSourceManager, MCPreparingToCopyProgressEntry, 
-                       MCPreparingToMoveProgressEntry, MCPriorityInvocation, MCProgressEntry, 
-                       MCProgressGroup, MCProgressManager, MCQOSInvocation, MCQuotaUsage, 
-                       MCRemoteMessage, MCRemotePlaceholderFileWrapper, MCRemoteURLAttachmentDataSource, 
-                       MCResultTaskOperation, MCSavingDraftProgressEntry, MCSendingMessagesProgressEntry, 
-                       MCSharedPreferencesController, MCSocket, MCSubdata, MCTask, 
-                       MCTaskHandler, MCTaskHandlerOperation, MCTaskList, MCTaskManager, 
-                       MCTaskOperation, MCThrowingInvocationOperation, MCTransferringMessagesProgressEntry, 
-                       MCURLMatch, MCURLifier, MCWorkerThread, MailCoreFramework, 
-                       _FormatFlowedWriter, _MCActivityAggregateArrayController, 
+                       MCInvocationQueue, MCJunkRecorder, MCKeychainManager, MCMainThreadInvocationOperation, 
+                       MCMemoryDataSource, MCMessage, MCMessageAttachmentMetadatum, 
+                       MCMessageBody, MCMessageGenerator, MCMessageHeaders, MCMessageTracer, 
+                       MCMessageURLProtocol, MCMimeCharset, MCMimeDataEncoding, MCMimePart, 
+                       MCMimePartAttachmentDataSource, MCMonitoredInvocation, MCMonitoredOperation, 
+                       MCMovingMessagesProgressEntry, MCMutableMessageHeaders, MCMutableMessageHeadersFactory, 
+                       MCNetworkController, MCOutgoingMessage, MCPlaceholderArchiveFileWrapper, 
+                       MCPlaceholderFileWrapper, MCPowerLog, MCPowerSourceManager, 
+                       MCPreparingToCopyProgressEntry, MCPreparingToMoveProgressEntry, 
+                       MCPriorityInvocation, MCProgressEntry, MCProgressGroup, MCProgressManager, 
+                       MCQOSInvocation, MCQuotaUsage, MCRemoteMessage, MCRemotePlaceholderFileWrapper, 
+                       MCRemoteURLAttachmentDataSource, MCResultTaskOperation, MCSavingDraftProgressEntry, 
+                       MCSendingMessagesProgressEntry, MCSharedPreferencesController, 
+                       MCSocket, MCSubdata, MCTask, MCTaskHandler, MCTaskHandlerOperation, 
+                       MCTaskList, MCTaskManager, MCTaskOperation, MCThrowingInvocationOperation, 
+                       MCTransferringMessagesProgressEntry, MCURLMatch, MCURLifier, 
+                       MCWorkerThread, MailCoreFramework, _FormatFlowedWriter, _MCActivityAggregateArrayController, 
                        _MCActivityMonitorMultiTarget, _MCBatchingTimer, _MCCompositeImageRep, 
-                       _MCConnectionAttempt, _MCDisplayNameInfoCacheItem, _MCInvocationOperation, 
-                       _MCMemoryMessage, _MCMimeEnrichedReader, _MCMimeEnrichedReaderCommandStackEntry, 
-                       _MCMimeEnrichedState, _MCMimeEnrichedWriter, _MCMimeEnrichedWriterCommandStackEntry, 
+                       _MCConnectionAttempt, _MCCredentialRenewalResult, _MCDisplayNameInfoCacheItem, 
+                       _MCInvocationOperation, _MCMemoryMessage, _MCMimeEnrichedReader, 
+                       _MCMimeEnrichedReaderCommandStackEntry, _MCMimeEnrichedState, 
+                       _MCMimeEnrichedWriter, _MCMimeEnrichedWriterCommandStackEntry, 
                        _MCMimeHeaderScanContext ]
     objc-ivars:      [ MCMessage._bccRecipients, MCMessage._ccRecipients, MCMessage._dateLastViewedInterval, 
                        MCMessage._dateReceivedInterval, MCMessage._dateSentInterval, 

@@ -1,12 +1,18 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 4165D15C-8EA5-3F6A-8D55-44815B8BF90F' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           F7A8EB95-3593-3599-AE1B-AF12312F390C
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           33CC462B-1FE9-3CC5-94F8-1E4C0FFB5674
 install-name:    '/usr/lib/swift/libswiftGLKit.dylib'
-current-version: 0
+current-version: 1.1
 swift-abi-version: 7
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftGLKit.dylib', '$ld$install_name$os10.11$@rpath/libswiftGLKit.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftGLKit.dylib', '$ld$install_name$os10.13$@rpath/libswiftGLKit.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftGLKit.dylib', '$ld$install_name$os10.9$@rpath/libswiftGLKit.dylib', 

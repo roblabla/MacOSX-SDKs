@@ -1267,6 +1267,8 @@ Tags:
   SwiftName: URLSession.AuthChallengeDisposition
 - Name: NSURLSessionResponseDisposition
   SwiftName: URLSession.ResponseDisposition
+- Name: NSURLSessionTaskMetricsDomainResolutionProtocol
+  SwiftName: URLSessionTaskMetrics.DomainResolutionProtocol
 - Name: NSURLSessionTaskMetricsResourceFetchType
   SwiftName: URLSessionTaskMetrics.ResourceFetchType
 - Name: NSURLSessionWebSocketMessageType
@@ -1788,6 +1790,14 @@ Enumerators:
   SwiftName: avStreaming
 - Name: NSURLNetworkServiceTypeResponsiveAV
   SwiftName: responsiveAV
+- Name: NSURLSessionTaskMetricsDomainResolutionProtocolUDP
+  SwiftName: udp
+- Name: NSURLSessionTaskMetricsDomainResolutionProtocolTCP
+  SwiftName: tcp
+- Name: NSURLSessionTaskMetricsDomainResolutionProtocolTLS
+  SwiftName: tls
+- Name: NSURLSessionTaskMetricsDomainResolutionProtocolHTTPS
+  SwiftName: https
 - Name: NSXMLEntityGeneralKind
   SwiftName: general
 - Name: NSXMLEntityParsedKind

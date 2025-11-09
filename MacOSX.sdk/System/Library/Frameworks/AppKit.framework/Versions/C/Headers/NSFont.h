@@ -12,7 +12,7 @@
 #import <AppKit/NSFontDescriptor.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSFontDescriptor, NSAffineTransform, NSGraphicsContext;
 
@@ -64,6 +64,9 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 
 /* Returns current default monospaced font for system UI. Clients of this API should be aware that the monospaced system font has a similar coverage of default system UI font, which includes Latin and common symbols used for displaying text like source code. For the characters it does not cover, the subtituted fonts are usually not the same width as the monospaced system font, they can be wider, narrower, or variable. To ensure fixed advances in text layout, clients can consider using string attributes like NSFontFixedAdvanceAttribute. */
 + (NSFont *)monospacedSystemFontOfSize:(CGFloat)fontSize weight:(NSFontWeight)weight API_AVAILABLE(macos(10.15));
+
+// Use instead of -[NSFontManager convertFont:toSize:].
+- (NSFont *)fontWithSize:(CGFloat)fontSize API_AVAILABLE(macos(10.15));
 
 /* UI font size settings
 */
@@ -176,7 +179,10 @@ APPKIT_EXTERN NSInteger NSConvertGlyphsToPackedGlyphs(NSGlyph * _Nonnull glBuf, 
 @property (readonly) NSFontRenderingMode renderingMode;
 @end
 
+@interface NSFont (NSFont_TextStyles)
+// Returns an instance of the font associated with the text style. See NSFontDescriptor.h for the complete list.
++ (NSFont *)preferredFontForTextStyle:(NSFontTextStyle)style options:(NSDictionary<NSFontTextStyleOptionKey, id> *)options API_AVAILABLE(macos(11.0));
+@end
+
 API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END
-
-// The remaining portion is deprecated on Mac OS X 10.4 and Later.

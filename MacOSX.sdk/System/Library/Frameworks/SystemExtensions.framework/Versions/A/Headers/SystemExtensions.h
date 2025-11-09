@@ -1,5 +1,5 @@
 //  SystemExtensions.h
-//  Copyright © 2019 Apple Inc. All rights reserved.
+//  Copyright © 2019-2020 Apple Inc. All rights reserved.
 
 #ifndef __SYSTEM_EXTENSIONS_H__
 #define __SYSTEM_EXTENSIONS_H__
@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol OSSystemExtensionRequestDelegate;
 
-OS_EXPORT API_AVAILABLE(macos(10.15))
+OS_EXPORT API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
 NSErrorDomain const OSSystemExtensionErrorDomain;
 
 /*!
@@ -21,7 +21,7 @@ NSErrorDomain const OSSystemExtensionErrorDomain;
  @discussion The 'OSBundleUsageDescription' key is required in your Driver
  Extension if your app uses APIs that install them.
  */
-OS_EXPORT API_AVAILABLE(macos(10.15))
+OS_EXPORT API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
 NSString* const OSBundleUsageDescriptionKey;
 
 /*!
@@ -31,7 +31,7 @@ NSString* const OSBundleUsageDescriptionKey;
  @discussion The 'NSSystemExtensionUsageDescription' key is required in your
  System Extension if your app uses APIs that install them.
  */
-OS_EXPORT API_AVAILABLE(macos(10.15))
+OS_EXPORT API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
 NSString* const NSSystemExtensionUsageDescriptionKey;
 
 typedef NS_ERROR_ENUM(OSSystemExtensionErrorDomain, OSSystemExtensionErrorCode) {
@@ -69,7 +69,7 @@ typedef NS_ENUM(NSInteger, OSSystemExtensionRequestResult) {
     OSSystemExtensionRequestWillCompleteAfterReboot,
 } NS_SWIFT_NAME(OSSystemExtensionRequest.Result) NS_ENUM_AVAILABLE_MAC(10.15);
 
-OS_EXPORT API_AVAILABLE(macos(10.15))
+OS_EXPORT API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface OSSystemExtensionRequest : NSObject
 
 /*!
@@ -101,7 +101,7 @@ OS_EXPORT API_AVAILABLE(macos(10.15))
  The most recently activated extension will then become active when the system
  is next rebooted.
  */
-+ (instancetype)activationRequestForExtension:(NSString *)identifier queue:(dispatch_queue_t)queue NS_SWIFT_NAME(activationRequest(forExtensionWithIdentifier:queue:));
++ (instancetype)activationRequestForExtension:(NSString *)identifier queue:(dispatch_queue_t)queue NS_SWIFT_NAME(activationRequest(forExtensionWithIdentifier:queue:)) API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  @brief Creates a request to deactivate a System Extension.
@@ -118,45 +118,45 @@ OS_EXPORT API_AVAILABLE(macos(10.15))
  deactivated. If a request succeeds and indicates a reboot is required, the
  extension may still appear to be operational until that time.
  */
-+ (instancetype)deactivationRequestForExtension:(NSString *)identifier queue:(dispatch_queue_t)queue NS_SWIFT_NAME(deactivationRequest(forExtensionWithIdentifier:queue:));
++ (instancetype)deactivationRequestForExtension:(NSString *)identifier queue:(dispatch_queue_t)queue NS_SWIFT_NAME(deactivationRequest(forExtensionWithIdentifier:queue:)) API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  @brief A delegate to receive updates about the progress of a request
  */
-@property (weak, nonatomic) id<OSSystemExtensionRequestDelegate> delegate;
+@property (weak, nonatomic) id<OSSystemExtensionRequestDelegate> delegate API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  @brief The bundle identifier of the target extension
  */
-@property (readonly, nonatomic) NSString *identifier;
+@property (readonly, nonatomic) NSString *identifier API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @end
 
-OS_EXPORT API_AVAILABLE(macos(10.15))
+OS_EXPORT API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface OSSystemExtensionProperties : NSObject
 /*!
  @brief The file URL locating an indicating the extension bundle these properties
  were retreived from.
  */
-@property (strong, readonly) NSURL *URL;
+@property (strong, readonly) NSURL *URL API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  @brief The bundle identifier of the extension (CFBundleIdentifier)
  */
-@property (strong, readonly) NSString *bundleIdentifier;
+@property (strong, readonly) NSString *bundleIdentifier API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  @brief The bundle version of the extension (CFBundleVersion)
  */
-@property (strong, readonly) NSString *bundleVersion;
+@property (strong, readonly) NSString *bundleVersion API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  @brief The bundle short version string of the extension (CFBundleShortVersionString)
  */
-@property (strong, readonly) NSString *bundleShortVersion;
+@property (strong, readonly) NSString *bundleShortVersion API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 @end
 
-API_AVAILABLE(macos(10.15))
+API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
 @protocol OSSystemExtensionRequestDelegate <NSObject>
 @required
 /*!
@@ -186,7 +186,7 @@ API_AVAILABLE(macos(10.15))
  to `request:didFailWithError:` with the OSSystemExtensionErrorRequestCanceled
  error code.
  */
-- (OSSystemExtensionReplacementAction)request:(OSSystemExtensionRequest *)request actionForReplacingExtension:(OSSystemExtensionProperties *)existing withExtension:(OSSystemExtensionProperties *)ext;
+- (OSSystemExtensionReplacementAction)request:(OSSystemExtensionRequest *)request actionForReplacingExtension:(OSSystemExtensionProperties *)existing withExtension:(OSSystemExtensionProperties *)ext API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  @brief Called when the target extension requires user approval to be activated.
@@ -197,7 +197,7 @@ API_AVAILABLE(macos(10.15))
  triggered and the activation request will remain pending until user approves,
  or until the application exits.
  */
-- (void)requestNeedsUserApproval:(OSSystemExtensionRequest *)request;
+- (void)requestNeedsUserApproval:(OSSystemExtensionRequest *)request API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  @brief Called when the target extension request has completed.
@@ -213,28 +213,28 @@ API_AVAILABLE(macos(10.15))
  reboot, a given extension will be in the state dictated by the most recently
  processed request.
  */
-- (void)request:(OSSystemExtensionRequest *)request didFinishWithResult:(OSSystemExtensionRequestResult)result NS_SWIFT_NAME(request(_:didFinishWithResult:));
+- (void)request:(OSSystemExtensionRequest *)request didFinishWithResult:(OSSystemExtensionRequestResult)result NS_SWIFT_NAME(request(_:didFinishWithResult:)) API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  @abstract Called when the target extension request failed.
  */
-- (void)request:(OSSystemExtensionRequest *)request didFailWithError:(NSError *)error;
+- (void)request:(OSSystemExtensionRequest *)request didFailWithError:(NSError *)error API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 @end
 
-OS_EXPORT API_AVAILABLE(macos(10.15))
+OS_EXPORT API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface OSSystemExtensionManager : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)new NS_UNAVAILABLE;
 
-@property (class, readonly) OSSystemExtensionManager *sharedManager;
+@property (class, readonly) OSSystemExtensionManager *sharedManager API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  @abstract Submits a System Extension request to the manager.
 
  @param request The request to process.
  */
-- (void)submitRequest:(OSSystemExtensionRequest *)request;
+- (void)submitRequest:(OSSystemExtensionRequest *)request API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @end
 

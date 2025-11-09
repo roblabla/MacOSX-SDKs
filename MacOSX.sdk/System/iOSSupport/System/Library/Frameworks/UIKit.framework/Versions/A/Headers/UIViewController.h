@@ -13,6 +13,7 @@
 #import <UIKit/UIStateRestoration.h>
 #import <UIKit/UITraitCollection.h>
 #import <UIKit/UIFocus.h>
+#import <UIKit/UIPointerLockState.h>
 
 /*
   UIViewController is a generic controller base class that manages a view.  It has methods that are called
@@ -600,6 +601,21 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @protocol UIViewControllerPreviewingDelegat
 
 @end
 
+
+@interface UIViewController (UIPointerLockSupport)
+
+// Override to return a child view controller or nil. If non-nil, that view controller's preferred pointer lock value will be used. If nil, self is used. Whenever the return value changes, setNeedsUpdateOfPrefersPointerLocked() should be called.
+@property (nonatomic, readonly, nullable) UIViewController *childViewControllerForPointerLock API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
+
+// Whether the pointer should be locked to a given scene when this view controller is shown.
+// The default is NO. This preference may or may not be honored.
+// See UIPointerLockState.locked for the current pointer lock state as determined by the system.
+@property (nonatomic, readonly) BOOL prefersPointerLocked API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
+
+// This should be called whenever the view controller's preferred pointer lock value has changed.
+- (void)setNeedsUpdateOfPrefersPointerLocked API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
+
+@end
 
 @protocol UIPreviewActionItem;
 

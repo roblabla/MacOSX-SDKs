@@ -2,14 +2,14 @@
 	File:		AVAudioTypes.h
 	Framework:	AVFoundation
 	
-	Copyright (c) 2014-2015 Apple Inc. All Rights Reserved.
+	Copyright (c) 2014-2020 Apple Inc. All Rights Reserved.
 */
 
 #ifndef __AVAudioTypes_h__
 #define __AVAudioTypes_h__
 
 #import <Foundation/Foundation.h>
-#import <CoreAudio/CoreAudioTypes.h>
+#import <CoreAudioTypes/CoreAudioTypes.h>
 
 /*! @typedef AVAudioFramePosition
 	@abstract A position in an audio file or stream.
@@ -18,23 +18,11 @@ typedef int64_t		AVAudioFramePosition;
 
 /*!	@typedef AVAudioFrameCount
 	@abstract A number of audio sample frames.
-	
-	@discussion
-		Rationale: making this a potentially larger-than-32-bit type like NSUInteger would open the
-		door to a large set of runtime failures due to underlying implementations' use of UInt32.
-		
-		TODO: Remove rationales.
 */
 typedef uint32_t	AVAudioFrameCount;
 
 /*!	@typedef AVAudioPacketCount
 	@abstract A number of packets of compressed audio data.
-	
-	@discussion
-		Rationale: making this a potentially larger-than-32-bit type like NSUInteger would open the
-		door to a large set of runtime failures due to underlying implementations' use of UInt32.
-		
-		TODO: Remove rationales.
 */
 typedef uint32_t	AVAudioPacketCount;
 
@@ -93,8 +81,8 @@ NS_INLINE AVAudio3DPoint AVAudioMake3DPoint(float x, float y, float z) {
 /*!	@typedef AVAudio3DVector
     @abstract Struct representing a vector in 3D space
     @discussion
-        This struct is used by classes dealing with 3D audio such as @link AVAudioMixing @/link
-        and @link AVAudioEnvironmentNode @/link and represents a vector in 3D space.
+        This struct is used by classes dealing with 3D audio such as `AVAudioMixing`
+        and `AVAudioEnvironmentNode`.
 */
 typedef struct AVAudio3DPoint AVAudio3DVector;
 

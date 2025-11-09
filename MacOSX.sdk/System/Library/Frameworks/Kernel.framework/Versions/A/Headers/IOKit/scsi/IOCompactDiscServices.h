@@ -51,8 +51,7 @@ class IOMemoryDescriptor;
 //-----------------------------------------------------------------------------
 //	Class Declaration
 //-----------------------------------------------------------------------------
-
-class IOCompactDiscServices : public IOCDBlockStorageDevice
+class __exported IOCompactDiscServices : public IOCDBlockStorageDevice
 {
 	
 	OSDeclareDefaultStructors ( IOCompactDiscServices )
@@ -216,7 +215,6 @@ private:
     OSMetaClassDeclareReservedUnused ( IOCompactDiscServices, 8 );
 	
 };
-
 #endif	/* defined(KERNEL) && defined(__cplusplus) */
 
 #endif /* _IOKIT_IO_COMPACT_DISC_SERVICES_H_ */

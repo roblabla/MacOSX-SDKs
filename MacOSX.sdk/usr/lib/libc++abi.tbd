@@ -1,15 +1,26 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 34B06C48-C88F-3F9C-8E24-003F3A2D1731', 'x86_64: 34B06C48-C88F-3F9C-8E24-003F3A2D1731' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           A7561525-620A-3565-B7AB-DF3D1E257690
+  - target:          x86_64-maccatalyst
+    value:           A7561525-620A-3565-B7AB-DF3D1E257690
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           183ABA66-94E0-386D-B2C6-078D70D77627
+  - target:          arm64e-maccatalyst
+    value:           183ABA66-94E0-386D-B2C6-078D70D77627
 install-name:    '/usr/lib/libc++abi.dylib'
-current-version: 800.7
-exports:         
-  - archs:           [ x86_64 ]
-    symbols:         [ __ZN10__cxxabiv119__getExceptionClassEPK17_Unwind_Exception, 
-                       __ZN10__cxxabiv119__setExceptionClassEP17_Unwind_Exceptiony, 
-                       __ZN10__cxxabiv121__isOurExceptionClassEPK17_Unwind_Exception, 
-                       __ZNKSt10bad_typeid4whatEv, __ZNKSt11logic_error4whatEv, __ZNKSt13bad_exception4whatEv, 
+current-version: 904.4
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ __ZNKSt10bad_typeid4whatEv, __ZNKSt11logic_error4whatEv, __ZNKSt13bad_exception4whatEv, 
                        __ZNKSt13runtime_error4whatEv, __ZNKSt20bad_array_new_length4whatEv, 
                        __ZNKSt8bad_cast4whatEv, __ZNKSt9bad_alloc4whatEv, __ZNKSt9exception4whatEv, 
                        __ZNSt10bad_typeidC1Ev, __ZNSt10bad_typeidC2Ev, __ZNSt10bad_typeidD0Ev, 
@@ -100,13 +111,13 @@ exports:
                        ___cxa_vec_cctor, ___cxa_vec_cleanup, ___cxa_vec_ctor, ___cxa_vec_delete, 
                        ___cxa_vec_delete2, ___cxa_vec_delete3, ___cxa_vec_dtor, ___cxa_vec_new, 
                        ___cxa_vec_new2, ___cxa_vec_new3, ___dynamic_cast, ___gxx_personality_v0 ]
-    weak-def-symbols: [ __ZTISt11range_error, __ZTISt12domain_error, __ZTISt12length_error, 
-                        __ZTISt12out_of_range, __ZTISt14overflow_error, __ZTISt15underflow_error, 
-                        __ZTISt16invalid_argument, __ZdaPv, __ZdaPvRKSt9nothrow_t, 
-                        __ZdaPvSt11align_val_t, __ZdaPvSt11align_val_tRKSt9nothrow_t, 
-                        __ZdaPvm, __ZdaPvmSt11align_val_t, __ZdlPv, __ZdlPvRKSt9nothrow_t, 
-                        __ZdlPvSt11align_val_t, __ZdlPvSt11align_val_tRKSt9nothrow_t, 
-                        __ZdlPvm, __ZdlPvmSt11align_val_t, __Znam, __ZnamRKSt9nothrow_t, 
-                        __ZnamSt11align_val_t, __ZnamSt11align_val_tRKSt9nothrow_t, 
-                        __Znwm, __ZnwmRKSt9nothrow_t, __ZnwmSt11align_val_t, __ZnwmSt11align_val_tRKSt9nothrow_t ]
+    weak-symbols:    [ __ZTISt11range_error, __ZTISt12domain_error, __ZTISt12length_error, 
+                       __ZTISt12out_of_range, __ZTISt14overflow_error, __ZTISt15underflow_error, 
+                       __ZTISt16invalid_argument, __ZdaPv, __ZdaPvRKSt9nothrow_t, 
+                       __ZdaPvSt11align_val_t, __ZdaPvSt11align_val_tRKSt9nothrow_t, 
+                       __ZdaPvm, __ZdaPvmSt11align_val_t, __ZdlPv, __ZdlPvRKSt9nothrow_t, 
+                       __ZdlPvSt11align_val_t, __ZdlPvSt11align_val_tRKSt9nothrow_t, 
+                       __ZdlPvm, __ZdlPvmSt11align_val_t, __Znam, __ZnamRKSt9nothrow_t, 
+                       __ZnamSt11align_val_t, __ZnamSt11align_val_tRKSt9nothrow_t, 
+                       __Znwm, __ZnwmRKSt9nothrow_t, __ZnwmSt11align_val_t, __ZnwmSt11align_val_tRKSt9nothrow_t ]
 ...

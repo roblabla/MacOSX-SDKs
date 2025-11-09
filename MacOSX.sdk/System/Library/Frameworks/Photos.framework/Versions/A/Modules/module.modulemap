@@ -1,4 +1,4 @@
-framework module Photos [extern_c] {
+framework module Photos [extern_c] [system] {
   umbrella header "Photos.h"
   export *
   module * { export * }

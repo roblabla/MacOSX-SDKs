@@ -2,12 +2,11 @@
 //  NSFileProviderEnumerating.h
 //  FileProvider
 //
-//  Copyright (c) 2014-2017 Apple Inc. All rights reserved.
+//  Copyright (c) 2014-2020 Apple Inc. All rights reserved.
 //
 
 #import <FileProvider/NSFileProviderExtension.h>
 #import <FileProvider/NSFileProviderItem.h>
-#import <FileProvider/NSFileProviderSearchQuery.h>
 #if TARGET_OS_OSX
 #import <CoreGraphics/CoreGraphics.h>
 #endif
@@ -31,9 +30,9 @@ typedef NSData *NSFileProviderSyncAnchor NS_TYPED_EXTENSIBLE_ENUM;
  */
 typedef NSData *NSFileProviderPage NS_TYPED_EXTENSIBLE_ENUM;
 
-FOUNDATION_EXPORT API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos)
+FOUNDATION_EXPORT FILEPROVIDER_API_AVAILABILITY_V2_V3
 NSFileProviderPage const NSFileProviderInitialPageSortedByDate;
-FOUNDATION_EXPORT API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos)
+FOUNDATION_EXPORT FILEPROVIDER_API_AVAILABILITY_V2_V3
 NSFileProviderPage const NSFileProviderInitialPageSortedByName;
 
 @protocol NSFileProviderEnumerationObserver <NSObject>
@@ -52,6 +51,20 @@ NSFileProviderPage const NSFileProviderInitialPageSortedByName;
  */
 - (void)finishEnumeratingUpToPage:(nullable NSFileProviderPage)nextPage NS_SWIFT_NAME(finishEnumerating(upTo:));
 - (void)finishEnumeratingWithError:(NSError *)error;
+
+@optional
+/**
+ Size of the page suggested by the system for better performance.
+
+ The system will set that property to the value it considers is best suited for the current enumeration. The
+ system can enumerate a container in various cases (container presenter in the UI, file opened in an application,
+ materialization of the folder by the system, ...). Each case has its own performance profile.
+
+ By taking into account the suggested size, the enumeration will guarantee the best user experience possible. The
+ system does not enforce the size of the page.
+ */
+@property (nonatomic, readonly) NSInteger suggestedPageSize FILEPROVIDER_API_AVAILABILITY_V3;
+
 @end
 
 @protocol NSFileProviderChangeObserver <NSObject>
@@ -93,6 +106,24 @@ NSFileProviderPage const NSFileProviderInitialPageSortedByName;
  nil.
  */
 - (void)finishEnumeratingWithError:(NSError *)error;
+
+@optional
+/**
+ Size of the batch suggested by the system for better performance.
+
+ The system will set that property to the value it considers is best suited for the current enumeration. The
+ system can enumerate changes on a container in various cases (container presenter in the UI, file opened in an
+ application, ...). Each case has its own performance profile.
+
+ In case the enumerator has already more than suggestedBatchSize pending changes ready to enumerate, it is suggested
+ it split the list of changes into several batches. If the enumerator does not have suggestedBatchSize ready to
+ enumerator, the enumerator should finish immediately and not wait for more incoming changes to enumerate.
+
+ By taking into account the suggested size, the enumeration will guarantee the best user experience possible. The
+ system does not enforce the size of the batch.
+ */
+@property (nonatomic, readonly) NSInteger suggestedBatchSize FILEPROVIDER_API_AVAILABILITY_V3;
+
 @end
 
 
@@ -204,26 +235,6 @@ NSFileProviderPage const NSFileProviderInitialPageSortedByName;
  */
 - (nullable id<NSFileProviderEnumerator>)enumeratorForContainerItemIdentifier:(NSFileProviderItemIdentifier)containerItemIdentifier
                                                                         error:(NSError **)error NS_SWIFT_NAME(enumerator(for:));
-
-/**
- Create an enumerator for all items matching a given search query.
-
- In order to be invoked to perform a remote search a provider needs to specify
- in its plist an array of supported search filters under the property name
- NSExtensionFileProviderSupportedSearchCapabilities. The allowed values are:
-   - NSExtensionFileProviderSearchByFilename
-   - NSExtensionFileProviderSearchByContentType
-   - NSExtensionFileProviderSearchScopedToDirectory
-
- NSExtensionFileProviderSearchByFilename is always assumed to be available.
-
- The enumerator returned will be invalidated when the search results are
- discarded.
-
- If returning nil, you must set the error out parameter.
- */
-- (nullable id<NSFileProviderEnumerator>)enumeratorForSearchQuery:(NSFileProviderSearchQuery *)searchQuery
-                                                            error:(NSError **)error API_UNAVAILABLE(watchos, tvos) API_UNAVAILABLE(ios, macos);
 
 @end
 

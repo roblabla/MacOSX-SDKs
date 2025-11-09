@@ -38,8 +38,7 @@
 //-----------------------------------------------------------------------------
 //	Class Declaration
 //-----------------------------------------------------------------------------
-
-class IOSCSIPeripheralDeviceType07 : public IOSCSIBlockCommandsDevice
+class __exported IOSCSIPeripheralDeviceType07 : public IOSCSIBlockCommandsDevice
 {
 	
 	OSDeclareDefaultStructors ( IOSCSIPeripheralDeviceType07 )

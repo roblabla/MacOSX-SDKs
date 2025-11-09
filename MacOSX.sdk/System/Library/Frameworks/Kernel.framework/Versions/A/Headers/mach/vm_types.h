@@ -70,10 +70,12 @@ typedef uint32_t ppnum_t;               /* Physical page number */
 
 
 
-typedef mach_port_t             vm_map_t;
+typedef mach_port_t             vm_map_t, vm_map_read_t, vm_map_inspect_t;
 
 
 #define VM_MAP_NULL             ((vm_map_t) NULL)
+#define VM_MAP_INSPECT_NULL     ((vm_map_inspect_t) NULL)
+#define VM_MAP_READ_NULL        ((vm_map_read_t) NULL)
 
 /*
  * Evolving definitions, likely to change.

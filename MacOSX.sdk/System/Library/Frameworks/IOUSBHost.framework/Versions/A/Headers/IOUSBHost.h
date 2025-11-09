@@ -17,3 +17,9 @@ extern const unsigned char IOUSBHostVersionString[];
 #import <IOUSBHost/IOUSBHostIOSource.h>
 #import <IOUSBHost/IOUSBHostPipe.h>
 #import <IOUSBHost/IOUSBHostStream.h>
+#import <IOUSBHost/IOUSBHostControllerInterface.h>
+#import <IOUSBHost/IOUSBHostCIControllerStateMachine.h>
+#import <IOUSBHost/IOUSBHostCIPortStateMachine.h>
+#import <IOUSBHost/IOUSBHostCIDeviceStateMachine.h>
+#import <IOUSBHost/IOUSBHostCIEndpointStateMachine.h>
+#import <IOUSBHost/IOUSBHostControllerInterfaceHelpers.h>

@@ -1,19 +1,34 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 3C849200-BE8C-3E32-B998-C215BE958219', 'x86_64: 3C849200-BE8C-3E32-B998-C215BE958219' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           89A71C2A-2B33-3FFC-985C-41AA4FB5929E
+  - target:          x86_64-maccatalyst
+    value:           89A71C2A-2B33-3FFC-985C-41AA4FB5929E
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           F95509A0-8D03-3900-B146-60BF8A47C104
+  - target:          arm64e-maccatalyst
+    value:           F95509A0-8D03-3900-B146-60BF8A47C104
 install-name:    '/usr/lib/swift/libswiftCoreAudio.dylib'
-current-version: 0
+current-version: 1.1
 swift-abi-version: 7
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftCoreAudio.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftCoreAudio.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftCoreAudio.dylib', 
                        '$ld$install_name$os10.13$@rpath/libswiftCoreAudio.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftCoreAudio.dylib', 
-                       '$ld$install_name$os10.9$@rpath/libswiftCoreAudio.dylib', 
-                       '_$s9CoreAudio013UnsafeMutableB17BufferListPointerV06unsafeG0SPySo0beF0VGvg', 
+                       '$ld$install_name$os10.9$@rpath/libswiftCoreAudio.dylib' ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+    symbols:         [ '_$s9CoreAudio013UnsafeMutableB17BufferListPointerV06unsafeG0SPySo0beF0VGvg', 
                        '_$s9CoreAudio013UnsafeMutableB17BufferListPointerV06unsafeG0SPySo0beF0VGvpMV', 
                        '_$s9CoreAudio013UnsafeMutableB17BufferListPointerV06unsafedG0SpySo0beF0VGvM', 
                        '_$s9CoreAudio013UnsafeMutableB17BufferListPointerV06unsafedG0SpySo0beF0VGvg', 

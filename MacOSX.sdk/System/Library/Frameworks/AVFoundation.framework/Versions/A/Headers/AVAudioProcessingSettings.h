@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVAudioProcessingSettings.h>)
 /*
     File:  AVAudioProcessingSettings.h
  
@@ -47,3 +48,7 @@ AVF_EXPORT AVAudioTimePitchAlgorithm const AVAudioTimePitchAlgorithmLowQualityZe
 AVF_EXPORT AVAudioTimePitchAlgorithm const AVAudioTimePitchAlgorithmTimeDomain API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 AVF_EXPORT AVAudioTimePitchAlgorithm const AVAudioTimePitchAlgorithmSpectral API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 AVF_EXPORT AVAudioTimePitchAlgorithm const AVAudioTimePitchAlgorithmVarispeed API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
+
+#else
+#import <AVFCore/AVAudioProcessingSettings.h>
+#endif

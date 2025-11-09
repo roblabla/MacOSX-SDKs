@@ -1,9 +1,10 @@
+#if !__has_include(<AVFCore/AVAssetImageGenerator.h>)
 /*
 	File:  AVAssetImageGenerator.h
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2018 Apple Inc. All rights reserved.
+	Copyright 2010-2020 Apple Inc. All rights reserved.
 
 */
 
@@ -157,7 +158,12 @@ AV_INIT_UNAVAILABLE
 	@param			outError
 					An error object describing the reason for failure, in the event that this method returns NULL.
 	@result			A CGImageRef.
-	@discussion		Returns the CGImage synchronously. Ownership follows the Create Rule.
+	@discussion
+		Returns the CGImage synchronously. Ownership follows the Create Rule.
+		
+		Because of the nature of timed audiovisual media, generating an image may take significant time. AVAssetImageGenerator may have to block the calling thread in order to do so.  In order to avoid blocking, clients can use -generateCGImagesAsynchronouslyForTimes:completionHandler: to request that one or more images be generated asynchronously and to be notified when they become available.
+ 
+		On iOS and tvOS, it is particularly important to avoid blocking.  To preserve responsiveness, a synchronous request that blocks for too long (eg, a request to generate an image from an asset on a slow HTTP server) may lead to media services being reset.
 */
 - (nullable CGImageRef)copyCGImageAtTime:(CMTime)requestedTime actualTime:(nullable CMTime *)actualTime error:(NSError * _Nullable * _Nullable)outError CF_RETURNS_RETAINED;
 
@@ -189,3 +195,7 @@ typedef void (^AVAssetImageGeneratorCompletionHandler)(CMTime requestedTime, CGI
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCore/AVAssetImageGenerator.h>
+#endif

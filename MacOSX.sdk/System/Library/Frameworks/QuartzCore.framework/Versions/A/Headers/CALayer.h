@@ -64,9 +64,6 @@ API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
     int32_t refcount;
     uint32_t magic;
     void *layer;
-#if TARGET_OS_MAC && !TARGET_RT_64_BIT
-    void * _Nonnull unused1[8];
-#endif
   } _attr;
 }
 

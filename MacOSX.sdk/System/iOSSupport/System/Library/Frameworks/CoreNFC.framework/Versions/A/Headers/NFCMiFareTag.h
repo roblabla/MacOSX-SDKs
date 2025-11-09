@@ -26,10 +26,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
 typedef NS_ENUM(NSUInteger, NFCMiFareFamily) {
-    NFCMiFareUnknown        = 1,
-    NFCMiFareUltralight     = 2,
-    NFCMiFarePlus           = 3,
-    NFCMiFareDESFire        = 4,
+    NFCMiFareUnknown API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)       = 1,
+    NFCMiFareUltralight API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)    = 2,
+    NFCMiFarePlus API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)          = 3,
+    NFCMiFareDESFire API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)       = 4,
 };
 
 
@@ -54,17 +54,17 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
 /*!
  * @discussion The hardware UID of the tag.
  */
-@property (nonatomic, readonly, copy) NSData *identifier;
+@property (nonatomic, readonly, copy) NSData *identifier API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
  * @discussion The optional historical bytes extracted from the Answer To Select response.
  */
-@property (nonatomic, readonly, copy, nullable) NSData *historicalBytes;
+@property (nonatomic, readonly, copy, nullable) NSData *historicalBytes API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
  * @method sendMiFareCommand:completionHandler:
  *
- * @param command           The complete MiFare command.  The CRC bytes shall be included for MiFare UltraLight commands.
+ * @param command           The complete MiFare command.  CRC bytes are calculated and inserted automatically to the provided packet data frame.
  * @param completionHandler Completion handler called when the operation is completed.  error is nil if operation succeeds. A @link NFCErrorDomain @link/ error
  *                          is returned when there is a communication issue with the tag. Successfully read data blocks will be returned from the NSData object.
  *

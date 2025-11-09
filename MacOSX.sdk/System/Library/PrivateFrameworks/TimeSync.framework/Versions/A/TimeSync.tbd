@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 8D910305-9C4C-3CA6-8357-CD3509C26159', 'x86_64: 8D910305-9C4C-3CA6-8357-CD3509C26159' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           98B21B11-A0FA-3C4E-806B-95679063C652
+  - target:          x86_64-maccatalyst
+    value:           98B21B11-A0FA-3C4E-806B-95679063C652
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           A7881D94-5CF1-36A5-857D-BA2960BDA242
+  - target:          arm64e-maccatalyst
+    value:           A7881D94-5CF1-36A5-857D-BA2960BDA242
 install-name:    '/System/Library/PrivateFrameworks/TimeSync.framework/Versions/A/TimeSync'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _TSASCapableKey, _TSAllowedLostResponsesExceededCounterKey, 
                        _TSAnnounceReceiptTimeoutCounterKey, _TSAttemptedAnnounceCounterKey, 
                        _TSAttemptedDelayRequestCounterKey, _TSAttemptedDelayResponseCounterKey, 
@@ -42,17 +56,18 @@ exports:
                        _TSRemoteFrequencyStabilityKey, _TSRemoteFrequencyToleranceKey, 
                        _TSRemoteLinkTypeKey, _TSRemotePDelayLogMeanIntervalKey, _TSRemotePortNumberKey, 
                        _TSRemoteSyncLogMeanIntervalKey, _TSRemoteTimestampingModeKey, 
-                       _TSStepsRemovedKey, _TSSyncFilterShift, _TSSyncPPMDenominator, 
-                       _TSSyncPPMLimit, _TSSyncPPMNumerator, _TSSyncReceiptTimeoutCounterKey, 
-                       _TSSystemDomainIdentifierKey, _TSTimeSourceKey, _TSTimestampingTypeKey, 
-                       _TSTransmittedAnnounceCounterKey, _TSTransmittedDelayRequestCounterKey, 
-                       _TSTransmittedDelayResponseCounterKey, _TSTransmittedEgressTimedCounterKey, 
-                       _TSTransmittedEgressTimedFailedCounterKey, _TSTransmittedEgressTimedSuccededCounterKey, 
-                       _TSTransmittedFollowUpCounterKey, _TSTransmittedPDelayRequestCounterKey, 
-                       _TSTransmittedPDelayResponseCounterKey, _TSTransmittedPDelayResponseFollowUpCounterKey, 
-                       _TSTransmittedPacketDiscardCounterKey, _TSTransmittedSignalCounterKey, 
-                       _TSTransmittedSyncCounterKey, _TSTryingForCapableKey, _TimeSyncAddgPTPServices, 
-                       _TimeSyncAddgPTPServicesSync, _TimeSyncClockAddAWDLPort, _TimeSyncClockAddAWDLPortAndGetIdentity, 
+                       _TSStepsRemovedKey, _TSSupersededDelayCounterKey, _TSSupersededSyncCounterKey, 
+                       _TSSyncFilterShift, _TSSyncPPMDenominator, _TSSyncPPMLimit, 
+                       _TSSyncPPMNumerator, _TSSyncReceiptTimeoutCounterKey, _TSSystemDomainIdentifierKey, 
+                       _TSTimeSourceKey, _TSTimestampingTypeKey, _TSTransmittedAnnounceCounterKey, 
+                       _TSTransmittedDelayRequestCounterKey, _TSTransmittedDelayResponseCounterKey, 
+                       _TSTransmittedEgressTimedCounterKey, _TSTransmittedEgressTimedFailedCounterKey, 
+                       _TSTransmittedEgressTimedSuccededCounterKey, _TSTransmittedFollowUpCounterKey, 
+                       _TSTransmittedPDelayRequestCounterKey, _TSTransmittedPDelayResponseCounterKey, 
+                       _TSTransmittedPDelayResponseFollowUpCounterKey, _TSTransmittedPacketDiscardCounterKey, 
+                       _TSTransmittedSignalCounterKey, _TSTransmittedSyncCounterKey, 
+                       _TSTryingForCapableKey, _TimeSyncAddgPTPServices, _TimeSyncAddgPTPServicesSync, 
+                       _TimeSyncClockAddAWDLPort, _TimeSyncClockAddAWDLPortAndGetIdentity, 
                        _TimeSyncClockAddTimestamps, _TimeSyncClockAddUDPv4EndToEndPort, 
                        _TimeSyncClockAddUDPv4EndToEndPortAndGetIdentity, _TimeSyncClockAddUDPv6EndToEndPort, 
                        _TimeSyncClockAddUDPv6EndToEndPortAndGetIdentity, _TimeSyncClockCreateAudioClockDeviceUID, 
@@ -99,7 +114,7 @@ exports:
                        TSgPTPNetworkPort, TSgPTPPort, TSgPTPPortStatistics, TSgPTPTime, 
                        TSgPTPUnicastLinkLayerEtEPort, TSgPTPUnicastLinkLayerPtPPort, 
                        TSgPTPUnicastUDPv4EtEPort, TSgPTPUnicastUDPv4PtPPort, TSgPTPUnicastUDPv6EtEPort, 
-                       TSgPTPUnicastUDPv6PtPPort, __TSKernelClockNotification, __TSgPTPPortNotification ]
+                       TSgPTPUnicastUDPv6PtPPort ]
     objc-ivars:      [ TSAudioTimeErrorCorrelator._maxCorrelationLength, TSAudioTimeErrorCorrelator._samplingRate, 
                        TSAudioTimeErrorCorrelator._upscaleFactor, TSAudioTimeErrorCorrelatorResampler._channelABuffer, 
                        TSAudioTimeErrorCorrelatorResampler._channelBBuffer, TSAudioTimeErrorCorrelatorResampler._correlationBuffer, 

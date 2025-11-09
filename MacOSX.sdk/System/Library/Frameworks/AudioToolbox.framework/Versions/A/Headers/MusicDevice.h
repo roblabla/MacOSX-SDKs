@@ -1,4 +1,4 @@
-#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/MusicDevice.h>)
+#if (defined(__USE_PUBLIC_HEADERS__) && __USE_PUBLIC_HEADERS__) || (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/MusicDevice.h>)
 /*!
 	@file		MusicDevice.h
 	@framework	AudioToolbox.framework
@@ -63,7 +63,7 @@ extern "C" {
 typedef UInt32                          MusicDeviceInstrumentID;
 
 /*!
-	@typedef MusicDeviceStdNoteParams
+	@struct MusicDeviceStdNoteParams
 	@abstract convenience struct for specifying a note and velocity
 	
 	@discussion This struct is the common usage for MusicDeviceStartNote, as most synths that implement this functionality 
@@ -86,7 +86,7 @@ struct MusicDeviceStdNoteParams
 typedef struct MusicDeviceStdNoteParams		MusicDeviceStdNoteParams;
 
 /*!
-	@typedef NoteParamsControlValue
+	@struct NoteParamsControlValue
 	@abstract used to describe a control and value
 	
 	@discussion This struct is used to describe a parameterID (a control in MIDI terminology, though it is not limited to 
@@ -105,7 +105,7 @@ struct NoteParamsControlValue
 typedef struct NoteParamsControlValue		NoteParamsControlValue;
 
 /*!
-	@typedef MusicDeviceNoteParams
+	@struct MusicDeviceNoteParams
 	@abstract Used to hold the value of the inParams parameter for the MusicDeviceStartNote function.
 	
 	@discussion The generic version of this structure describes an arg count (which is the number of mControls values 
@@ -133,7 +133,7 @@ struct MusicDeviceNoteParams
 typedef struct MusicDeviceNoteParams    MusicDeviceNoteParams;
 
 /*!
-	@enum	MusicNoteEvent
+	enum	MusicNoteEvent
 	@discussion This is used to signify that the patch used to start a note (its sound) is defined by the current 
 					selection for the group ID; this is the normal usage in MIDI as any notes started on a given channel 
 					(group ID) use the sound (patch) defined for that channel. See MusicDeviceStartNote

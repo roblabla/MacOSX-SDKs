@@ -1,11 +1,25 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 2DBEAA3A-82CC-35CC-923B-ADF61DA377C8', 'x86_64: 2DBEAA3A-82CC-35CC-923B-ADF61DA377C8' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           5FF225BE-66F9-3DA6-B1C1-9A21ADCE56E6
+  - target:          x86_64-maccatalyst
+    value:           5FF225BE-66F9-3DA6-B1C1-9A21ADCE56E6
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           B74898C0-F762-38A5-BF06-9A3671FFE719
+  - target:          arm64e-maccatalyst
+    value:           B74898C0-F762-38A5-BF06-9A3671FFE719
 install-name:    '/usr/lib/libcoretls.dylib'
-current-version: 167
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 169
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CipherSuiteCount, _CurvesCount, _KnownCipherSuites, _KnownCurves, 
                        _KnownSigAlgs, _SigAlgsCount, _Ssl3Callouts, _Tls12Callouts, 
                        _Tls1Callouts, _sslCipherSuiteGetKeyExchangeMethod, _sslCipherSuiteGetKeydataSize, 

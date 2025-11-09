@@ -1,11 +1,26 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: CF4BFC58-3CB1-37AA-861E-02AA1F74AB61', 'x86_64: CF4BFC58-3CB1-37AA-861E-02AA1F74AB61' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           A035FE16-6D6B-3AC8-AE2E-0CC98E940D3A
+  - target:          x86_64-maccatalyst
+    value:           A035FE16-6D6B-3AC8-AE2E-0CC98E940D3A
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           D50C9829-6D4C-38D8-8EEB-5FD52CE1652E
+  - target:          arm64e-maccatalyst
+    value:           D50C9829-6D4C-38D8-8EEB-5FD52CE1652E
 install-name:    '/System/Library/Frameworks/CoreMediaIO.framework/Versions/A/CoreMediaIO'
-exports:         
-  - archs:           [ x86_64 ]
-    symbols:         [ _CMIOAddAtExitListener, _CMIODeviceProcessAVCCommand, _CMIODeviceProcessRS422Command, 
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _CMIOAddAtExitListener, _CMIOAnalyticsRegisterDevice, _CMIOAnalyticsSendStart, 
+                       _CMIODeviceProcessAVCCommand, _CMIODeviceProcessRS422Command, 
                        _CMIODeviceStartStream, _CMIODeviceStopStream, _CMIOFileWritingControlTokenAllVolumesAreOutOfDiskSpace, 
                        _CMIOFileWritingControlTokenBufferIsIncompatibleWithCurrentFile, 
                        _CMIOFileWritingControlTokenCreate, _CMIOFileWritingControlTokenCreateOutputPathToCapturePathDictionary, 

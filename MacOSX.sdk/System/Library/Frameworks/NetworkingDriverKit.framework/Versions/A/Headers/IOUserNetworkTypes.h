@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Apple, Inc. All rights reserved.
+ * Copyright (c) 2019-2020 Apple, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -25,6 +25,7 @@
  * 
  * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
+
 #ifndef _IOUSERNETWORKTYPES_H
 #define _IOUSERNETWORKTYPES_H
 
@@ -113,4 +114,10 @@ enum {
     kIOUserNetworkMediaEthernetMask         = 0x00000fff,
 };
 
+enum {
+    kIOUserNetworkFeatureFlagSoftwareVlan = 0x00020000,
+    kIOUserNetworkFeatureFlagWOMP = 0x04000000,
+    kIOUserNetworkFeatureFlagNicProxy = 0x08000000,
+};
+ 
 #endif /* !_IOUSERNETWORKTYPES_H */

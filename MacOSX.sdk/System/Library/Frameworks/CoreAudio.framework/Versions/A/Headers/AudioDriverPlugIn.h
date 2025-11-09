@@ -44,8 +44,6 @@ extern "C"
 {
 #endif
 
-#pragma GCC visibility push(hidden)
-
 //==================================================================================================
 #pragma mark    Types
 
@@ -348,8 +346,6 @@ AudioDriverPlugInStreamSetProperty( AudioDeviceID                       inDevice
                                     const void*                         inPropertyData);
 
 //==================================================================================================
-
-#pragma GCC visibility pop
 
 #if defined(__cplusplus)
 }

@@ -1,9 +1,10 @@
+#if !__has_include(<AVFCore/AVError.h>)
 /*
     File:  AVError.h
  
 	Framework:  AVFoundation
  
-	Copyright 2010-2018 Apple Inc. All rights reserved.
+	Copyright 2010-2020 Apple Inc. All rights reserved.
 
  */
 
@@ -93,9 +94,7 @@ typedef NS_ERROR_ENUM(AVFoundationErrorDomain, AVError) {
     AVErrorAirPlayControllerRequiresInternet API_AVAILABLE(macos(10.10), ios(8.3), tvos(9.0), watchos(1.3)) = -11856,
     AVErrorAirPlayReceiverRequiresInternet API_AVAILABLE(macos(10.10), ios(8.3), tvos(9.0), watchos(1.3)) = -11857,
     AVErrorVideoCompositorFailed API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0)) = -11858,
-#if TARGET_OS_IPHONE
-    AVErrorRecordingAlreadyInProgress API_AVAILABLE(ios(9.0), tvos(9.0), watchos(2.0)) API_UNAVAILABLE(macos) = -11859, // on iOS, AVCaptureMovieFileOutput only supports one recording at a time
-#endif
+	AVErrorRecordingAlreadyInProgress API_AVAILABLE(ios(9.0), tvos(9.0), watchos(2.0)) API_UNAVAILABLE(macos) = -11859, // on iOS, AVCaptureMovieFileOutput only supports one recording at a time
 	AVErrorCreateContentKeyRequestFailed API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos, watchos) = -11860,
 	AVErrorUnsupportedOutputSettings API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0)) = -11861,
 	AVErrorOperationNotAllowed API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0)) = -11862,
@@ -108,6 +107,14 @@ typedef NS_ERROR_ENUM(AVFoundationErrorDomain, AVError) {
 	AVErrorNoSourceTrack API_AVAILABLE(macos(10.13.2), ios(11.2), tvos(11.2), watchos(4.2)) = -11869,
 	AVErrorExternalPlaybackNotSupportedForAsset API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0)) = -11870,
 	AVErrorOperationNotSupportedForPreset API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0)) = -11871,
-	AVErrorSessionHardwareCostOverage API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos) = -11872,
-	AVErrorUnsupportedDeviceActiveFormat API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos) = -11873,
+	AVErrorSessionHardwareCostOverage API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos) = -11872,
+	AVErrorUnsupportedDeviceActiveFormat API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos) = -11873,
+	AVErrorIncorrectlyConfigured API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0)) = -11875,
+	AVErrorSegmentStartedWithNonSyncSample API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0)) = -11876,
+	AVErrorRosettaNotInstalled API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0)) = -11877,
+
 };
+
+#else
+#import <AVFCore/AVError.h>
+#endif

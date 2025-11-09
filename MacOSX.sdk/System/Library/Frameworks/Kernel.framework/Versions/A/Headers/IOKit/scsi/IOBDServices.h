@@ -48,7 +48,7 @@ class IOMemoryDescriptor;
 //	Class Declaration
 //-----------------------------------------------------------------------------
 
-class IOBDServices : public IOBDBlockStorageDevice
+class __exported IOBDServices : public IOBDBlockStorageDevice
 {
 	
 	OSDeclareDefaultStructors ( IOBDServices )

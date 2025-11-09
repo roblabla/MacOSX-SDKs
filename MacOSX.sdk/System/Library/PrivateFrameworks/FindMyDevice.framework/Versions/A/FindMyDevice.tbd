@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 6BDE9A67-95EA-317A-987E-FE6C3B210322' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           365C0004-19E8-3EE3-BB13-E52642376A9D
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           AD11588A-11DE-3A1D-97B1-73982EDACF43
 install-name:    '/System/Library/PrivateFrameworks/FindMyDevice.framework/Versions/A/FindMyDevice'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _FMDFMIPManagerUnregisterErrorDomain, _FMDFMMManagerUnregisterErrorDomain, 
                        _fmdFMMLastOperationResult, _kAccessoriesChangedNotification, 
                        _kActivationLockAllowedMayHaveChangedNotification, _kActivationLockStateDidChangeNotification, 
@@ -24,8 +30,8 @@ exports:
                        _kFindMyDeviceIdentityXPCInterfaceErrorDomain, _kLostModeChangedNotification, 
                        _kStopLostModeAlarmNotification ]
     objc-classes:    [ FMDAccessoryIdentifier, FMDActivationLockContext, FMDActivationLockInfo, 
-                       FMDBAAAttestation, FMDDeviceIdentityFactory, FMDEraseProxy, 
-                       FMDFMMAccountInfo, FMDFMMManager, FMDIdentitySigningRequest, 
+                       FMDBAAAttestation, FMDDeviceIdentityFactory, FMDEraseOptions, 
+                       FMDEraseProxy, FMDFMMAccountInfo, FMDFMMManager, FMDIdentitySigningRequest, 
                        FMDVolatileMetaDataRecord, FMNSXPCConnection, FMNSXPCConnectionCache, 
                        FMNSXPCConnectionConfiguration ]
 ...

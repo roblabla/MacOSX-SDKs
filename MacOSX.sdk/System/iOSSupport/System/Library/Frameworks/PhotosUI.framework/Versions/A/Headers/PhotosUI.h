@@ -15,5 +15,8 @@
 #import <PhotosUI/PHContentEditingController.h>
 #import <PhotosUI/PHEditingExtensionContext.h>
 
+#import <PhotosUI/PHPicker.h>
+#import <PhotosUI/PHPhotoLibrary+PhotosUISupport.h>
 
-#endif
+
+#endif // PhotosUI_PhotosUI_h

@@ -2,7 +2,7 @@
 //  GameKit.h
 //  Game Center
 //
-//  Copyright 2010-2019 Apple Inc. All rights reserved.
+//  Copyright 2010-2020 Apple Inc. All rights reserved.
 //
 
 #import <TargetConditionals.h>
@@ -23,23 +23,24 @@
 #import <ReplayKit/ReplayKit.h>
 
 #import <GameKit/GKDefines.h>
+#import <GameKit/GKAccessPoint.h>
 #import <GameKit/GKAchievement.h>
 #import <GameKit/GKAchievementDescription.h>
 #import <GameKit/GKAchievementViewController.h>
 #import <GameKit/GKBasePlayer.h>
 #import <GameKit/GKChallenge.h>
 #import <GameKit/GKChallengeEventHandler.h>
-#import <GameKit/GKChallengesViewController.h>
 #import <GameKit/GKCloudPlayer.h>
 #import <GameKit/GKError.h>
 #import <GameKit/GKEventListener.h>
-#import <GameKit/GKFriendRequestComposeViewController.h>
 #import <GameKit/GKGameCenterViewController.h>
 #import <GameKit/GKGameSession.h>
 #import <GameKit/GKGameSessionError.h>
 #import <GameKit/GKGameSessionEventListener.h>
 #import <GameKit/GKGameSessionSharingViewController.h>
 #import <GameKit/GKLeaderboard.h>
+#import <GameKit/GKLeaderboardEntry.h>
+#import <GameKit/GKLeaderboardScore.h>
 #import <GameKit/GKLeaderboardSet.h>
 #import <GameKit/GKLeaderboardViewController.h>
 #import <GameKit/GKLocalPlayer.h>
@@ -47,6 +48,7 @@
 #import <GameKit/GKMatchmaker.h>
 #import <GameKit/GKMatchmakerViewController.h>
 #import <GameKit/GKNotificationBanner.h>
+#import <GameKit/GKPeerPickerController.h>
 #import <GameKit/GKPlayer.h>
 #import <GameKit/GKPublicConstants.h>
 #import <GameKit/GKPublicProtocols.h>

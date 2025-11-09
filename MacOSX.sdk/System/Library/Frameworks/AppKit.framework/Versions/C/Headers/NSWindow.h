@@ -24,7 +24,7 @@
 #import <ApplicationServices/ApplicationServices.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSButton, NSButtonCell, NSColor, NSImage, NSScreen, NSNotification, NSText, NSView, NSMutableSet, NSSet, NSDate, NSToolbar, NSGraphicsContext, NSURL, NSColorSpace, NSDockTile, NSViewController, NSTitlebarAccessoryViewController, NSEvent, NSWindowController, NSWindowTab, NSWindowTabGroup;
     
@@ -42,7 +42,7 @@ typedef NS_OPTIONS(NSUInteger, NSWindowStyleMask) {
     
     /* Specifies a window with textured background. Textured windows generally don't draw a top border line under the titlebar/toolbar. To get that line, use the NSUnifiedTitleAndToolbarWindowMask mask.
      */
-    NSWindowStyleMaskTexturedBackground API_DEPRECATED("Textured window style should no longer be used", macos(10.2,API_TO_BE_DEPRECATED)) = 1 << 8,
+    NSWindowStyleMaskTexturedBackground API_DEPRECATED("Textured window style should no longer be used", macos(10.2, 11.0)) = 1 << 8,
     
     /* Specifies a window whose titlebar and toolbar have a unified look - that is, a continuous background. Under the titlebar and toolbar a horizontal separator line will appear.
      */
@@ -163,6 +163,19 @@ typedef NS_ENUM(NSInteger, NSWindowTitleVisibility) {
     NSWindowTitleHidden = 1,
 } API_AVAILABLE(macos(10.10));
 
+typedef NS_ENUM(NSInteger, NSWindowToolbarStyle) {
+    // The default value. The style will be determined by the window's given configuration
+    NSWindowToolbarStyleAutomatic,
+    // The toolbar will appear below the window title
+    NSWindowToolbarStyleExpanded,
+    // The toolbar will appear below the window title and the items in the toolbar will attempt to have equal widths when possible
+    NSWindowToolbarStylePreference,
+    // The window title will appear inline with the toolbar when visible
+    NSWindowToolbarStyleUnified,
+    // Same as NSWindowToolbarStyleUnified, but with reduced margins in the toolbar allowing more focus to be on the contents of the window
+    NSWindowToolbarStyleUnifiedCompact
+} API_AVAILABLE(macos(11.0));
+
 static const NSTimeInterval NSEventDurationForever = DBL_MAX;
 
 typedef NS_ENUM(NSInteger, NSWindowUserTabbingPreference) {
@@ -177,6 +190,12 @@ typedef NS_ENUM(NSInteger, NSWindowTabbingMode) {
     NSWindowTabbingModeDisallowed // The window explicitly should not prefer to tab when shown
 }  API_AVAILABLE(macos(10.12));
 
+typedef NS_ENUM(NSInteger, NSTitlebarSeparatorStyle) {
+    NSTitlebarSeparatorStyleAutomatic,
+    NSTitlebarSeparatorStyleNone,
+    NSTitlebarSeparatorStyleLine,
+    NSTitlebarSeparatorStyleShadow
+} API_AVAILABLE(macos(11.0));
 
 typedef NSString * NSWindowFrameAutosaveName NS_SWIFT_BRIDGED_TYPEDEF;
 typedef NSString * NSWindowPersistableFrameDescriptor NS_SWIFT_BRIDGED_TYPEDEF;
@@ -198,6 +217,12 @@ typedef NSString * NSWindowTabbingIdentifier NS_SWIFT_BRIDGED_TYPEDEF;
 
 @property (copy) NSString *title;
 
+/*
+ Secondary text that may be displayed adjacent to or below the primary title depending on the configuration of the window.
+ A value of empty string will remove the subtitle from the window layout.
+*/
+@property (copy) NSString *subtitle API_AVAILABLE(macos(11.0));
+
 /* See the enum values for how this property works.
  */
 @property NSWindowTitleVisibility titleVisibility API_AVAILABLE(macos(10.10)); // Default value is NSWindowTitleVisible
@@ -205,6 +230,10 @@ typedef NSString * NSWindowTabbingIdentifier NS_SWIFT_BRIDGED_TYPEDEF;
 /* When YES, the titlebar doesn't draw its background, allowing all buttons to show through, and "click through" to happen. In general, this is only useful when NSFullSizeContentViewWindowMask is set.
  */
 @property BOOL titlebarAppearsTransparent API_AVAILABLE(macos(10.10));
+
+/* Specifies how the titlebar area of the window should appear when the window displays an NSToolbar
+ */
+@property NSWindowToolbarStyle toolbarStyle API_AVAILABLE(macos(11.0));
 
 /* The contentLayoutRect will return the area inside the window that is for non-obscured content. Typically, this is the same thing as the contentView's frame. However, for windows with the NSFullSizeContentViewWindowMask set, there needs to be a way to determine the portion that is not under the toolbar. The contentLayoutRect returns the portion of the layout that is not obscured under the toolbar. contentLayoutRect is in window coordinates. It is KVO compliant. */
 @property (readonly) NSRect contentLayoutRect API_AVAILABLE(macos(10.10));
@@ -509,6 +538,12 @@ If the url represents a filename or other resource with a known icon, that icon 
 
 @property (readonly) NSWindowOcclusionState occlusionState API_AVAILABLE(macos(10.9));
 
+/* Specifies the style of separator displayed between the window's titlebar and content.
+ 
+    The default value is NSTitlebarSeparatorStyleAutomatic. Changing this value will override any preference made by `NSSplitViewItem`.
+ */
+@property NSTitlebarSeparatorStyle titlebarSeparatorStyle API_AVAILABLE(macos(11.0));
+
 
 #pragma mark - NSViewController Support
 
@@ -658,6 +693,7 @@ If the url represents a filename or other resource with a known icon, that icon 
 /* Tells the delegate that the window is about to show a sheet, and gives the delegate a chance to customize the location of the sheet.
  */
 - (NSRect)window:(NSWindow *)window willPositionSheet:(NSWindow *)sheet usingRect:(NSRect)rect;
+
 /* If a window has a representedURL, the window will by default show a path popup menu for a command-click on a rectangle containing the window document icon button and the window title.  The window delegate may implement -window:shouldPopupDocumentPathMenu: to override NSWindow's default behavior for path popup menu.  A return of NO will prevent the menu from being shown.  A return of YES will cause the window to show the menu passed to this method, which by default will contain a menuItem for each path component of the representedURL.  If the representedURL has no path components, the menu will have no menu items.  Before returning YES, the window delegate may customize the menu by changing the menuItems.  menuItems may be added or deleted, and each menuItem title, action, or target may be modified. 
 */
 - (BOOL)window:(NSWindow *)window shouldPopUpDocumentPathMenu:(NSMenu *)menu API_AVAILABLE(macos(10.5));

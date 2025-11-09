@@ -8,11 +8,6 @@ framework module Quartz [extern_c] {
         export *
         module * { export * }
     }
-    framework module PDFKit {
-        umbrella header "PDFKit.h"
-        export *
-        module * { export * }
-    }
     framework module QuartzComposer {
         umbrella header "QuartzComposer.h"
         export *

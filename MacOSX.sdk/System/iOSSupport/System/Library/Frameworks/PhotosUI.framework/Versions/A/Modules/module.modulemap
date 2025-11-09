@@ -1,4 +1,4 @@
-framework module PhotosUI {
+framework module PhotosUI [system] {
   umbrella header "PhotosUI.h"
 
   export *

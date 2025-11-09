@@ -1,6 +1,6 @@
 .\" see 'man mdoc' for syntax examples
 .\" this should go in /usr/share/man/man1/
-.Dd June 18, 2019
+.Dd November 14, 2019
 .Dt profiles 1
 .Os macOS
 .Sh NAME
@@ -12,14 +12,9 @@
 .Op Ar options
 .Sh DESCRIPTION
 .Nm
-is used to install, remove, list, or otherwise handle various profile types on macOS.
-.Pp
-Note that the command parameters have changed starting in version 5.0 of this tool, but the older options are still valid and can also be used.  Use the man profiles.old(1) page to view the old parameters.  These older style options will not be updated to provide support for some of the newer profiles tool features, so it's suggested you move to use the new parameter structure.
-.Pp
-To prevent unintended installations, profiles containing certain payloads (specifically com.apple.Safari) will require a manual verification even when running as root.
-.Pp
-WARNING: In the future, some features in this tool may be removed in favor of using user approved, high level UI to install configuration profiles.  Clients should instead use the Profiles System Preferences pane to install configuration profiles.
-.Pp
+is used to handle various profile types on macOS.   Starting with macOS 10.16 (profiles tool 8.0 or later), this tool cannot be
+    used to install configuration profiles.  You should add your profiles using the System Preferences Profiles
+    preference pane.    Additionally, startup profiles are no longer supported.
 .Sh VERBS
 Each command verb is listed with its description and optional individual arguments.   Most commands use the -type option to determine which kind of profile should be used in the command.  For those commands, if no type is specified, the default will be to use the configuration profile type.
 .\"
@@ -37,7 +32,7 @@ Shows abbreviated help
 .Sy -user Ar user_name
 .Sy -output Ar output_path
 .br
-List profiles for a user or when running as root, the device.  When listing startup profiles, only profiles that have not yet been installed will be shown.
+List profiles for a user or when running as root, the device.
 .Pp
 .\"             -- show --
 .It Sy show
@@ -46,16 +41,6 @@ List profiles for a user or when running as root, the device.  When listing star
 .Sy -output Ar output_path
 .br
 Show expanded information for profiles.   For an enrollment, this will show the current DEP configuration.
-.Pp
-.\"             -- install --
-.It Sy install
-.Sy -type Ar profile_type
-.Sy -user Ar user_name
-.Sy -enrolledUser Ar enrollment_user_name
-.Sy -path Ar file_path
-.Sy -forced
-.br
-Install profiles.   Installing a startup profile only sets up the profile for installation at restart time.   The profile type "enrollment" cannot be used in this command.
 .Pp
 .\"             -- remove --
 .It Sy remove
@@ -67,7 +52,7 @@ Install profiles.   Installing a startup profile only sets up the profile for in
 .Sy -forced
 .Sy -all
 .br
-Remove profiles.  Startup profiles can only be removed before they are fully installed as a profile, at which point you must use the configuration profile type to remove it.   Attempting to remove a configuration profile requring a removal password without the correct password will fail.
+Remove profiles. Attempting to remove a configuration profile requring a removal password without the correct password will fail.
 .Pp
 .\"             -- status --
 .It Sy status
@@ -108,7 +93,7 @@ Displays current tool version.
 .Bl -tag -width indent
 .Pp
 .It Fl type Ar profile_type
-The profile_type can be one of either: "configuration", "provisioning", "startup", "bootstraptoken", or "enrollment" (DEP).  If a command requires a profile type and none is specified, "configuration" will be used.
+The profile_type can be one of either: "configuration", "provisioning", "bootstraptoken", or "enrollment" (DEP).  If a command requires a profile type and none is specified, "configuration" will be used.
 .It Fl path Ar file_path
 A file path or "-" to represent stdout.   When used by the remove command for startup profiles, this should only contain the file name of the profile.
 .It Fl user Ar user_name
@@ -119,12 +104,10 @@ A canonical form UUID to specify a profile's PayloadUUID, such as 5A15247B-899C-
 A profile identifier (PayloadIdentifier) to specify a profile.
 .It Fl output Ar output_path
 The output path location.  The output_path argument must be specified to use this option, Use 'stdout' to send this informaton to the console.  File output will be written as an XML plist file, or you can use 'stdout-xml' to write XML to the console.  The toplevel key of the dictionary will contain either the user name, or _computerLevel for device or provisioning profile information.
-.It Fl enrolledUser Ar enrollment_user_name
-The user name specified when installing an enrollment profile.
 .It Fl password Ar password
 An optional password used when removing a configuration profile which requires the password removal option.
 .It Fl forced
-For startup profiles, this option will force a retry to occur at every boot until the profile is successfully installed.   For other profiles, this will prevent confirmation requests, and when trying to remove all configuration profles for a user, it will ignore any errors during removal.
+This will prevent confirmation requests, and when trying to remove all configuration profles for a user, it will ignore any errors during removal.
 .It Fl all
 For configuration profiles, when running as root, the use of this option with the list or show commands will display all profiles installed on the system.   When removing profiles, using this option will remove all profiles for that user (or device).
 .It Fl verbose
@@ -140,17 +123,13 @@ A configuration profile.
 A provisioning profile.
 .It enrollment
 A device enrollment program (DEP) or mobile device management (MDM) enrollment profile or feature.
-.It startup
-A startup-enabled configuration profile.
 .It bootstraptoken
-Bootstrap Token options.   Requires DEP enrolled MDM client.
+Bootstrap Token options.   Requires MDM supervised client.
 .El
 .Pp
 .Sh EXAMPLES
 .Pp
 .Bl -tag -width -indent  \" Differs from above in tag removed
-.It profiles install -path /testfile.mobileconfig
-Installs the configuration profile file 'testfile.mobileconfig' into current user.
 .It profiles remove -path /profiles/testfile2.mobileconfig
 Removes the configuration profile file '/profiles/testfile2.mobileconfig' into the current user.
 .It profiles list -type provisioning
@@ -163,8 +142,6 @@ Displays extended information for installed configuration profiles for the curre
 Displays information on whether or not startup profiles are set up.
 .It profiles remove -identifier com.example.profile1 -password pass
 Removes any installed profiles with the identifier com.example.profile1 in the current user and using a removal password of 'pass'.
-.It profiles install -type startup -path /startupprofile.mobileconfig -forced
-Sets up the profile as a startup profile to be triggered at the next system startup time.   If the profile can't be installed, it will try again at next startup time.
 .It profiles show -type enrollment
 Displays the current DEP configuration information.
 .It profiles renew -type enrollment

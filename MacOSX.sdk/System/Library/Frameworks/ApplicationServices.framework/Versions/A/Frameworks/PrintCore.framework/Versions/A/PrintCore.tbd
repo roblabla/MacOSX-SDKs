@@ -1,12 +1,20 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: CDEAF06D-0C81-3975-8285-2708E7AD66C8' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           FF71E3E8-C31D-3356-86C9-3407EBF5B108
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           ED110C04-0159-3748-890F-EB8D3648CB97
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/PrintCore.framework/Versions/A/PrintCore'
-current-version: 516
-parent-umbrella: ApplicationServices
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 531
+parent-umbrella:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    umbrella:        ApplicationServices
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _CPLAutoSelectCancel, _CPLAutoSelectCreateContext, _CPLAutoSelectGetInfo, 
                        _CPLAutoSelectHasNewPPD, _CPLAutoSelectInstallableOptions, 
                        _CPLAutoSelectPPD, _CPLAutoSelectReleaseContext, _CPLAutoSelectSetIsBinaryOK, 
@@ -40,9 +48,10 @@ exports:
                        _PJCSessionHasApplicationSetPrinter, _PJCSessionSetHideFileExtension, 
                        _PJCSetPresetPrintingPref, _PJCSetPrintingPref, _PJCTicketGetSrcImageableArea, 
                        _PJCTicketGetSrcOrientation, _PJCTicketGetSrcPaperSize, _PJCTicketGetSrcResolution, 
-                       _PJCTicketGetSrcScaling, _PMBackendExecIO, _PMCFEqual, _PMCGImageCreateWithEPSDataProvider, 
-                       _PMConvertFile, _PMCopyAvailablePPDs, _PMCopyLocalizedPPD, 
-                       _PMCopyPPDData, _PMCopyPageFormat, _PMCopyPrintSettings, _PMCopyUserDefaultPaperSize, 
+                       _PJCTicketGetSrcScaling, _PMAnalyticsSendEventLazy, _PMBackendExecIO, 
+                       _PMCFEqual, _PMCGImageCreateWithEPSDataProvider, _PMConvertFile, 
+                       _PMCopyAvailablePPDs, _PMCopyLocalizedPPD, _PMCopyPPDData, 
+                       _PMCopyPageFormat, _PMCopyPrintSettings, _PMCopyUserDefaultPaperSize, 
                        _PMCreateCFArrayForPMObjects, _PMCreateGenericPrinter, _PMCreatePageFormat, 
                        _PMCreatePageFormatWithPMPaper, _PMCreatePaperInfoTicketFromPPDPaperName, 
                        _PMCreatePrintSettings, _PMCreatePrinter, _PMCreateProxy, 

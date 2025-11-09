@@ -175,12 +175,12 @@ enum
  						For Tilt Speed low number indicates slow speed and high number indicates higher speed.
  	@constant       kCMIOZoomRelativeControlClassID
  						A CMIOFeatureControl that controls the zoom focal length relatively as powered zoom.
- 						It is 4 byte control. First byte specifies whether zoom lens group is stopped or direction
+ 						It is 3 byte control. First byte specifies whether zoom lens group is stopped or direction
  						of zoom lens. Value of 0 indicates that zoom lens is stopped, 1 indicates that zoom lens
  						is moved towards the telephoto direction and 0xff indicates that zoom lens is moved towards
  						the wide-angle direction. Second 1 byte specifies whether digital zoom is enabled or disabled.
  						Third 1 byte represent speed of control change where low number specifies low speed and
- 						higher number specifies higher speed. Last 1 byte is padding byte.
+ 						higher number specifies higher speed.
  	@constant kCMIORollAbsoluteControlClassID
  						A CMIOFeratureControl that control rotate degree of camera image. Value ranges from
  						+180 to -180 degree with default value set to zero determining no rotation. Positive

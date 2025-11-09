@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVTime.h>)
 /*
 	File:  AVTime.h
 
@@ -51,3 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCore/AVTime.h>
+#endif

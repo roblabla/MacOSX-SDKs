@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 2123E4F6-591D-34BD-8D01-D1310A2D03F8' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           41FE57FB-DC99-340B-9C1D-9A46EB6ABD02
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           2CFEAE2A-3401-3E55-9E2A-0A19E5D8BDDA
 install-name:    '/System/Library/PrivateFrameworks/Slideshows.framework/Versions/A/Frameworks/OpusKit.framework/Versions/A/OpusKit'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _OKErrorDomain, _OKPlatformDescriptionATV, _OKPlatformDescriptionDekstop, 
                        _OKPlatformDescriptionPad, _OKPlatformDescriptionPhone, _OKPlatformDescriptionWeb, 
                        _OKResolutionSize1024x768, _OKResolutionSize768x1024, _OKResolutionSizeDefault, 

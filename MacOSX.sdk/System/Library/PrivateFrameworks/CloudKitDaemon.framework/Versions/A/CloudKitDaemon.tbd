@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 5A0B4E9C-55F5-358F-88C9-52BD0DEC6CFB' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           27D9F003-A7F2-3F51-91CA-C7700197D1F2
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           F2D42272-0E98-3EA4-8B1A-669DEC367429
 install-name:    '/System/Library/PrivateFrameworks/CloudKitDaemon.framework/Versions/A/CloudKitDaemon'
-current-version: 836
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 962
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CKAdoptPersonaID, _CKCurrentPersonaID, _CKDAssetCacheDbSchema, 
                        _CKDMMCSRegisterOptionDescription, _CKDPDateStatisticsReadFrom, 
                        _CKDPNotificationSyncResponsePushMessageReadFrom, _CKDPNotificationSyncResponseReadFrom, 
@@ -23,22 +29,36 @@ exports:
                        _CKDPShareIdentifierReadFrom, _CKDPShareMetadataReadFrom, 
                        _CKDPShareReadFrom, _CKDPushConnectionDidReceivePublicTokenNotification, 
                        _CKDRecordCacheSchema, _CKDaemonOperationTypeForClass, _CKGetCacheDir, 
-                       _CKGetEnterpriseVolumeCacheDirectory, _CKGetHomeCacheDir, 
+                       _CKGetDataSeparatedVolumeCacheDirectory, _CKGetHomeCacheDir, 
                        _CKGetPersonaAwareCacheDirectory, _CKGetPersonaAwareHomeCacheDirectory, 
                        _CKIsPowerLoggingEnabled, _CKIsRunningInSyncBubble, _CKLLogErrorDomain, 
                        _CKLinkCheck48d9728e8c354416a38f82379cbb35e3, _CKMuckingWithPersonas, 
                        _CKRegisterRepeatingXPCActivity, _CKServerOwnerDefaultName, 
-                       _CKThreadIsInEnterprisePersonaContext, _CKVerifyFilters, _compareVersionStrings, 
-                       _gSystemUnlockedGlobalCallback, _kCKTCCDatabaseChangedNotificationName, 
+                       _CKThreadIsInDataSeparatedPersonaContext, _CKVerifyFilters, 
+                       _compareVersionStrings, _gSystemUnlockedGlobalCallback, _kCKDAssetCommandArrayIndexKey, 
+                       _kCKDAssetCommandDataKey, _kCKDAssetCommandOffsetKey, _kCKDAssetCommandRecordKeyKey, 
+                       _kCKFrameworkCachesDirectoryName, _kCKTCCDatabaseChangedNotificationName, 
                        _kCKTemporaryDirectoryName, _stringFromCKDTrafficLogType ]
-    objc-classes:    [ CKDAccountManateeObserver, CKDAccountNotifier, CKDAssetCache, 
-                       CKDAssetHandle, CKDAssetRequestPlanner, CKDBackingAccount, 
-                       CKDClientContext, CKDClientProxy, CKDCloudDatabaseServer, 
+    objc-classes:    [ CKDAccount, CKDAccountManateeObserver, CKDAccountNotifier, 
+                       CKDAppContainerAccountTuple, CKDAppContainerIntersectionMetadata, 
+                       CKDAppContainerTuple, CKDApplicationID, CKDApplicationMetadata, 
+                       CKDAssetCache, CKDAssetDirectoryContext, CKDAssetHandle, CKDAssetRequestPlanner, 
+                       CKDAssetVolume, CKDBackingAccount, CKDBatchGetUserPrivacySettingsOperation, 
+                       CKDCachePurger, CKDClientContext, CKDClientProxy, CKDCloudDatabaseServer, 
+                       CKDContainerPrivacySettings, CKDDaemonProcess, CKDDeviceManager, 
                        CKDDirectoryPurger, CKDDiscoverAllUserIdentitiesOperation, 
                        CKDDiscoverUserIdentitiesOperation, CKDFetchShareParticipantsOperation, 
-                       CKDFileWatcher, CKDJSONResponseBodyParser, CKDLongLivedClientProxy, 
-                       CKDMetadataCache, CKDOperationInfoCache, CKDOperationInfoMetadata, 
-                       CKDOperationMetricsCache, CKDPDateStatistics, CKDPNotificationSyncResponse, 
+                       CKDFetchTranscodeServerPublicKeyOperation, CKDFileWatcher, 
+                       CKDFlowControlManager, CKDGetRecordsURLRequest, CKDGlobalConfigurationOperation, 
+                       CKDJSONResponseBodyParser, CKDLongLivedClientProxy, CKDLongLivedOperationPersistedCallback, 
+                       CKDMMCS, CKDMMCSClientProxyItemReader, CKDMMCSEngineContext, 
+                       CKDMMCSGetOperationInfo, CKDMMCSItem, CKDMMCSItemCommandWriter, 
+                       CKDMMCSItemGroup, CKDMMCSItemGroupContext, CKDMMCSItemGroupSet, 
+                       CKDMMCSItemGroupSetContext, CKDMMCSItemReader, CKDMMCSPackageSignatureGenerator, 
+                       CKDMMCSTestEncryptedItemReader, CKDMetadataCache, CKDOperation, 
+                       CKDOperationCombinedMetrics, CKDOperationInfoCache, CKDOperationInfoHolderOperation, 
+                       CKDOperationInfoMetadata, CKDOperationMetrics, CKDOperationMetricsCache, 
+                       CKDPCSIdentityManager, CKDPDSClient, CKDPDateStatistics, CKDPNotificationSyncResponse, 
                        CKDPNotificationSyncResponsePushMessage, CKDPOperation, CKDPParticipant, 
                        CKDPRecord, CKDPRecordChainParent, CKDPRecordField, CKDPRecordFieldIdentifier, 
                        CKDPRecordFieldValue, CKDPRecordStableUrl, CKDPRecordType, 
@@ -49,15 +69,19 @@ exports:
                        CKDPResponseOperationResultErrorAuxiliaryErrorErrorUserInfoValue, 
                        CKDPResponseOperationResultErrorClient, CKDPResponseOperationResultErrorExtension, 
                        CKDPResponseOperationResultErrorServer, CKDPShare, CKDPShareIdentifier, 
-                       CKDPShareMetadata, CKDPackageDirectoryPurger, CKDPipeliningInfo, 
-                       CKDPlaintextResponseBodyParser, CKDPlistResponseBodyParser, 
+                       CKDPShareMetadata, CKDPackageDirectoryPurger, CKDPackageManifest, 
+                       CKDPipeliningInfo, CKDPlaintextResponseBodyParser, CKDPlistResponseBodyParser, 
                        CKDPowerLogger, CKDPrivacyManager, CKDProtobufResponseBodyParser, 
-                       CKDProtocolTranslator, CKDPushConnection, CKDRecordCachePool, 
-                       CKDResponseBodyParser, CKDSystemAvailabilityMonitor, CKDTokenRegistrationScheduler, 
-                       CKDTrafficLogger, CKDTrafficMetadata, CKDVolumeManager, CKLEventFilter, 
-                       CKLLog, CKLStatusFilter, CKLStreamLogMessageObserver, CKLStreamLogStatsObserver, 
-                       CKLStreamObserver, CKLStreamRawMessageObserver, CKLStreamTrafficConsoleLogObserver, 
-                       CKLStreamTrafficObserver, CKLTrafficLogMessage ]
+                       CKDProtobufStreamWriter, CKDProtocolTranslator, CKDPushConnection, 
+                       CKDRecordCache, CKDRecordCachePool, CKDRegisterOperationInfo, 
+                       CKDResponseBodyParser, CKDServerConfiguration, CKDServerConfigurationManager, 
+                       CKDSignedServerPublicKeyURLRequest, CKDSystemAvailabilityMonitor, 
+                       CKDTokenRegistrationScheduler, CKDTrafficLogger, CKDTrafficMetadata, 
+                       CKDURLRequest, CKDVolumeManager, CKFetchTranscodeServerPublicKeyOperationInfo, 
+                       CKLEventFilter, CKLLog, CKLStatusFilter, CKLStreamLogMessageObserver, 
+                       CKLStreamLogStatsObserver, CKLStreamObserver, CKLStreamRawMessageObserver, 
+                       CKLStreamTrafficConsoleLogObserver, CKLStreamTrafficObserver, 
+                       CKLTrafficLogMessage ]
     objc-ivars:      [ CKDPDateStatistics._creation, CKDPDateStatistics._modification, 
                        CKDPNotificationSyncResponse._changeID, CKDPNotificationSyncResponse._has, 
                        CKDPNotificationSyncResponse._moreAvailable, CKDPNotificationSyncResponse._pushMessages, 
@@ -121,8 +145,9 @@ exports:
                        CKDPRequestOperation._userRetrieveRequest, CKDPRequestOperation._webAuthTokenRetrieveRequest, 
                        CKDPRequestOperation._zoneDeleteRequest, CKDPRequestOperation._zoneRetrieveChangesRequest, 
                        CKDPRequestOperation._zoneRetrieveRequest, CKDPRequestOperation._zoneSaveRequest, 
-                       CKDPRequestOperationHeader._applicationBundle, CKDPRequestOperationHeader._applicationConfigVersion, 
-                       CKDPRequestOperationHeader._applicationContainer, CKDPRequestOperationHeader._applicationContainerEnvironment, 
+                       CKDPRequestOperationHeader._activeThrottlingLabels, CKDPRequestOperationHeader._applicationBundle, 
+                       CKDPRequestOperationHeader._applicationConfigVersion, CKDPRequestOperationHeader._applicationContainer, 
+                       CKDPRequestOperationHeader._applicationContainerEnvironment, 
                        CKDPRequestOperationHeader._applicationVersion, CKDPRequestOperationHeader._assetAuthorizeGetRequestOptions, 
                        CKDPRequestOperationHeader._clientChangeToken, CKDPRequestOperationHeader._deviceAssignedName, 
                        CKDPRequestOperationHeader._deviceFlowControlBudget, CKDPRequestOperationHeader._deviceFlowControlBudgetCap, 
@@ -130,8 +155,9 @@ exports:
                        CKDPRequestOperationHeader._deviceHardwareID, CKDPRequestOperationHeader._deviceHardwareVersion, 
                        CKDPRequestOperationHeader._deviceIdentifier, CKDPRequestOperationHeader._deviceLibraryName, 
                        CKDPRequestOperationHeader._deviceLibraryVersion, CKDPRequestOperationHeader._deviceProtocolVersion, 
-                       CKDPRequestOperationHeader._deviceSoftwareIsAppleInternal, 
-                       CKDPRequestOperationHeader._deviceSoftwareVersion, CKDPRequestOperationHeader._globalConfigVersion, 
+                       CKDPRequestOperationHeader._deviceSerialNumber, CKDPRequestOperationHeader._deviceSoftwareIsAppleInternal, 
+                       CKDPRequestOperationHeader._deviceSoftwareVersion, CKDPRequestOperationHeader._deviceUDID, 
+                       CKDPRequestOperationHeader._entitlementsValidated, CKDPRequestOperationHeader._globalConfigVersion, 
                        CKDPRequestOperationHeader._has, CKDPRequestOperationHeader._isolationLevel, 
                        CKDPRequestOperationHeader._locale, CKDPRequestOperationHeader._mmcsProtocolVersion, 
                        CKDPRequestOperationHeader._operationGroupName, CKDPRequestOperationHeader._operationGroupQuantity, 

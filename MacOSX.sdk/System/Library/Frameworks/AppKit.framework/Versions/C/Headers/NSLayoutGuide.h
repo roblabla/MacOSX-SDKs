@@ -9,6 +9,7 @@
 #import <AppKit/NSLayoutConstraint.h>
 #import <AppKit/NSLayoutAnchor.h>
 #import <AppKit/NSUserInterfaceItemIdentification.h>
+#import <AppKit/AppKitDefines.h>
 
 @class NSLayoutXAxisAnchor;
 @class NSLayoutYAxisAnchor;
@@ -16,7 +17,7 @@
 @class NSLayoutConstraint;
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 /* NSLayoutGuides will not show up in the view hierarchy, but may be used as items in an NSLayoutConstraint and represent a rectangle in the layout engine.
  */

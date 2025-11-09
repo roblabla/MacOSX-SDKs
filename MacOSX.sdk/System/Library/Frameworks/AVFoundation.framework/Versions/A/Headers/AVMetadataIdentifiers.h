@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVMetadataIdentifiers.h>)
 /*
     File:		AVMetadataIdentifiers.h
 
@@ -36,6 +37,7 @@ AVF_EXPORT AVMetadataIdentifier const AVMetadataCommonIdentifierArtwork         
 AVF_EXPORT AVMetadataIdentifier const AVMetadataCommonIdentifierMake                                       API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 AVF_EXPORT AVMetadataIdentifier const AVMetadataCommonIdentifierModel                                      API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 AVF_EXPORT AVMetadataIdentifier const AVMetadataCommonIdentifierSoftware                                   API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
+AVF_EXPORT AVMetadataIdentifier const AVMetadataCommonIdentifierAccessibilityDescription                   API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0));
 
 // QuickTimeUserData
 AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeUserDataAlbum                           API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
@@ -76,11 +78,13 @@ AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeUserDataTrack
 AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeUserDataCredits                         API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeUserDataPhonogramRights                 API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeUserDataTaggedCharacteristic            API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
+AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeUserDataAccessibilityDescription        API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0));
 
 // ISO UserData (includes 3GPP)
 AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierISOUserDataCopyright                             API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierISOUserDataDate                                  API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
 AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierISOUserDataTaggedCharacteristic                  API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
+AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierISOUserDataAccessibilityDescription              API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0));
 AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifier3GPUserDataCopyright                             API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifier3GPUserDataAuthor                                API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifier3GPUserDataPerformer                             API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
@@ -146,6 +150,7 @@ AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataDetec
 AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataDetectedSalientObject           API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(tvos, watchos);
 AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataVideoOrientation                API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
 AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataContentIdentifier               API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
+AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataAccessibilityDescription        API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0));
 
 /*!
  @constant AVMetadataIdentifierQuickTimeMetadataAutoLivePhoto
@@ -186,6 +191,14 @@ AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataSpati
     The version of the algorithm that provided the spatial over capture quality score.
 */
 AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScoringVersion API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+
+/*!
+ @constant AVMetadataIdentifierQuickTimeMetadataLocationHorizontalAccuracyInMeters
+ @abstract A value of type kCMMetadataBaseDataType_Float32.
+ @discussion
+    The horizontal accuracy of the provided location data (usually specified by AVMetadataIdentifierQuickTimeMetadataLocationISO6709).
+*/
+AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataLocationHorizontalAccuracyInMeters API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0));
 
 // iTunesMetadata
 AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifieriTunesMetadataAlbum                              API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
@@ -335,3 +348,7 @@ AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierID3MetadataUserURL    
 AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierIcyMetadataStreamTitle                           API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierIcyMetadataStreamURL                             API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 
+
+#else
+#import <AVFCore/AVMetadataIdentifiers.h>
+#endif

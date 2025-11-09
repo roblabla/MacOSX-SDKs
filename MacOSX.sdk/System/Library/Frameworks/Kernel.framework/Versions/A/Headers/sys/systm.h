@@ -131,6 +131,7 @@ int     enosys(void);
 int     enxio(void);
 int     eopnotsupp(void);
 void    *hashinit(int count, int type, u_long *hashmask);
+void    hashdestroy(void *, int type, u_long hashmask);
 void    ovbcopy(const void *from, void *to, size_t len);
 int     fubyte(user_addr_t addr);
 int     fuibyte(user_addr_t addr);

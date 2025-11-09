@@ -12,9 +12,8 @@
 #import <Foundation/NSSet.h>
 #import <AppKit/AppKitDefines.h>
 
-
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 /* Symbolic Font Traits */
 typedef uint32_t NSFontSymbolicTraits; // Deprecated. Use NSFontDescriptorSymbolicTraits instead
@@ -30,6 +29,8 @@ typedef NS_OPTIONS(uint32_t, NSFontDescriptorSymbolicTraits) {
     NSFontDescriptorTraitTightLeading = 1u << 15,
     NSFontDescriptorTraitLooseLeading = 1u << 16,
     
+    NSFontDescriptorTraitEmphasized API_UNAVAILABLE(macos) = NSFontDescriptorTraitBold,
+
     NSFontDescriptorClassMask = 0xF0000000,
     
     NSFontDescriptorClassUnknown = 0u << 28,
@@ -53,6 +54,8 @@ typedef NSString * NSFontDescriptorVariationKey NS_TYPED_ENUM;
 typedef NSString * NSFontDescriptorFeatureKey NS_TYPED_EXTENSIBLE_ENUM;
 typedef CGFloat NSFontWeight NS_TYPED_EXTENSIBLE_ENUM;
 typedef NSString * NSFontDescriptorSystemDesign NS_TYPED_ENUM;
+typedef NSString * NSFontTextStyle NS_TYPED_ENUM API_AVAILABLE(macos(11.0));
+typedef NSString * NSFontTextStyleOptionKey NS_TYPED_ENUM API_AVAILABLE(macos(11.0));
 
 @interface NSFontDescriptor: NSObject <NSCopying, NSSecureCoding>
 
@@ -175,6 +178,18 @@ APPKIT_EXTERN NSFontDescriptorSystemDesign const NSFontDescriptorSystemDesignSer
 APPKIT_EXTERN NSFontDescriptorSystemDesign const NSFontDescriptorSystemDesignMonospaced API_AVAILABLE(macos(10.15));
 APPKIT_EXTERN NSFontDescriptorSystemDesign const NSFontDescriptorSystemDesignRounded API_AVAILABLE(macos(10.15));
 
+APPKIT_EXTERN NSFontTextStyle const NSFontTextStyleLargeTitle API_AVAILABLE(macos(11.0));
+APPKIT_EXTERN NSFontTextStyle const NSFontTextStyleTitle1 API_AVAILABLE(macos(11.0));
+APPKIT_EXTERN NSFontTextStyle const NSFontTextStyleTitle2 API_AVAILABLE(macos(11.0));
+APPKIT_EXTERN NSFontTextStyle const NSFontTextStyleTitle3 API_AVAILABLE(macos(11.0));
+APPKIT_EXTERN NSFontTextStyle const NSFontTextStyleHeadline API_AVAILABLE(macos(11.0));
+APPKIT_EXTERN NSFontTextStyle const NSFontTextStyleSubheadline API_AVAILABLE(macos(11.0));
+APPKIT_EXTERN NSFontTextStyle const NSFontTextStyleBody API_AVAILABLE(macos(11.0));
+APPKIT_EXTERN NSFontTextStyle const NSFontTextStyleCallout API_AVAILABLE(macos(11.0));
+APPKIT_EXTERN NSFontTextStyle const NSFontTextStyleFootnote API_AVAILABLE(macos(11.0));
+APPKIT_EXTERN NSFontTextStyle const NSFontTextStyleCaption1 API_AVAILABLE(macos(11.0));
+APPKIT_EXTERN NSFontTextStyle const NSFontTextStyleCaption2 API_AVAILABLE(macos(11.0));
+
 // Deprecated
 typedef uint32_t NSFontFamilyClass; // Deprecated. Use NSFontDescriptorSymbolicTraits instead
 
@@ -208,6 +223,11 @@ enum {
 };
 
 APPKIT_EXTERN NSString * NSFontColorAttribute 			API_DEPRECATED("", macos(10.3,10.4)); // This attribute is obsolete. Use NSForegroundColorAttributeName instead.
+
+@interface NSFontDescriptor (NSFontDescriptor_TextStyles)
+// Returns a font descriptor containing the text style.
++ (NSFontDescriptor *)preferredFontDescriptorForTextStyle:(NSFontTextStyle)style options:(NSDictionary<NSFontTextStyleOptionKey, id> *)options API_AVAILABLE(macos(11.0));
+@end
 
 
 

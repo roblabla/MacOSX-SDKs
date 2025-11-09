@@ -7,6 +7,7 @@
 #import <iTunesLibrary/ITLibDefines.h>
 
 /*! @abstract The ITLibMediaItemVideoInfo class encapsulates the video information of a video media item. */
+API_UNAVAILABLE(ios)
 ITLIB_EXPORT @interface ITLibMediaItemVideoInfo : NSObject
 {
 	NSString*	_series;

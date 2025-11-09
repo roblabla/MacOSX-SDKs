@@ -213,8 +213,6 @@ bool ODNodeSetCredentialsUsingKerberosCache(ODNodeRef node, CFStringRef cacheNam
                 CFDataRef or CFStringRef.  If additional kODAttributeTypeRecordName are to be set, they can be passed in the 
                 inAttributes list.  This parameter is optional and can be NULL.  If any of the attributes passed
                 fail to be set, the record will be deleted and outError will be set with the appropriate error.
-                If a password is not supplied with a user account, then a random password will be set automatically.  If
-                an empty password is expected, then the kODAttributeTypePassword should be set to an empty CFArray.
     @param      error an optional CFErrorRef reference for error details
     @result     returns a valid ODRecordRef.  If the add fails, outError can be checked for details.
 */

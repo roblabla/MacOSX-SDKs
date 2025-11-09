@@ -42,14 +42,14 @@ API_DEPRECATED_WITH_REPLACEMENT("TKTokenObjectID", macos(10.12, 10.15));
 /// InstanceID is Typically implemented by some kind of serial number of the target hardware, for example SmartCard serial number.
 typedef NSString *TKTokenInstanceID
 NS_SWIFT_NAME(TKToken.InstanceID) NS_SWIFT_BRIDGED_TYPEDEF
-API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+API_AVAILABLE(macos(10.15), ios(14.0), tvos(14.0), watchos(7.0));
 
 /// TKTokenDriverClassID ClassID of the token driver.
 ///
 /// Identical with @p com.apple.ctk.class-id token extension attribute. Typically in the RDN form (com.company.id).
 typedef NSString *TKTokenDriverClassID
 NS_SWIFT_NAME(TKTokenDriver.ClassID) NS_SWIFT_BRIDGED_TYPEDEF
-API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+API_AVAILABLE(macos(10.15), ios(14.0), tvos(14.0), watchos(7.0));
 
 /*!
  @enum TKTokenOperation enumerates operations which can be performed with objects (keys and certificates) on the token.
@@ -224,7 +224,7 @@ API_AVAILABLE(macos(10.12), ios(10.0), tvos(11.0), watchos(4.0))
  Token configuration associated with this token instance.
  */
 @property (readonly) TKTokenConfiguration *configuration
-API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+API_AVAILABLE(macos(10.15), ios(14.0), tvos(14.0), watchos(7.0));
 
 /*!
  @discussion Keychain contents (certificate and key items) representing this token.
@@ -283,7 +283,7 @@ API_AVAILABLE(macos(10.12), ios(10.0), tvos(11.0), watchos(4.0))
  @discussion Creates new token for specified configuration. SmartCard token drivers should not implement this method.
  */
 - (nullable TKToken *)tokenDriver:(TKTokenDriver *)driver tokenForConfiguration:(TKTokenConfiguration *)configuration error:(NSError **)error
-API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
+API_AVAILABLE(macos(10.15), ios(14.0), tvos(14.0), watchos(7.0));
 
 /*!
  @discussion Terminates previously created token, should release all resources associated with it.

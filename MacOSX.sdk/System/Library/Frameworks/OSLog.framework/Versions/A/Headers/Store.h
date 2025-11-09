@@ -9,7 +9,6 @@
 #error "Please use <OSLog/OSLog.h> instead of directly using this file."
 #endif
 
-typedef NS_OPTIONS(NSUInteger, OSLogEnumeratorOptions);
 @class OSLogEnumerator;
 @class OSLogPosition;
 
@@ -28,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
  * instances; one store can support multiple OSLogEnumerator
  * instances concurrently.
  */
-API_AVAILABLE(macos(10.15))
+API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
 OS_EXPORT
 @interface OSLogStore : NSObject
 
@@ -53,6 +52,7 @@ OS_EXPORT
  * entitlement.
  */
 + (nullable instancetype)localStoreAndReturnError:(NSError **)error
+API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
 NS_SWIFT_NAME(local());
 
 /*!
@@ -71,7 +71,8 @@ NS_SWIFT_NAME(local());
  * to a pointer to an error object that describes the reason.
  */
 + (nullable instancetype)storeWithURL:(NSURL *)url
-                                error:(NSError **)error;
+                                error:(NSError **)error
+API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
  * @method entriesEnumeratorWithOptions
@@ -103,6 +104,7 @@ NS_SWIFT_NAME(local());
                                                   position:(nullable OSLogPosition *)position
                                                  predicate:(nullable NSPredicate *)predicate
                                                      error:(NSError **)error
+API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
 NS_REFINED_FOR_SWIFT;
 
 /*!
@@ -117,6 +119,7 @@ NS_REFINED_FOR_SWIFT;
  * to a pointer to an error object that describes the reason.
  */
 - (nullable OSLogEnumerator *)entriesEnumeratorAndReturnError:(NSError **)error
+API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
 NS_SWIFT_UNAVAILABLE("Use `entries` method");
 
 /*!
@@ -134,6 +137,7 @@ NS_SWIFT_UNAVAILABLE("Use `entries` method");
  * --- the earliest occurrence is used.
  */
 - (OSLogPosition *)positionWithDate:(NSDate *)date
+API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
 NS_SWIFT_NAME(position(date:));
 
 /*!
@@ -147,6 +151,7 @@ NS_SWIFT_NAME(position(date:));
  * The seconds to add to the last time point in the range of entries.
  */
 - (OSLogPosition *)positionWithTimeIntervalSinceEnd:(NSTimeInterval)seconds
+API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
 NS_SWIFT_NAME(position(timeIntervalSinceEnd:));
 
 /*!
@@ -164,6 +169,7 @@ NS_SWIFT_NAME(position(timeIntervalSinceEnd:));
  * this function asserts that the interval is positive.
  */
 - (OSLogPosition *)positionWithTimeIntervalSinceLatestBoot:(NSTimeInterval)seconds
+API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
 NS_SWIFT_NAME(position(timeIntervalSinceLatestBoot:));
 
 @end

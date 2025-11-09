@@ -2,7 +2,7 @@
 //  parameters.h
 //  Network
 //
-//  Copyright (c) 2014-2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2014-2020 Apple Inc. All rights reserved.
 //
 
 #ifndef __NW_PARAMETERS_H__
@@ -15,6 +15,7 @@
 #include <Network/protocol_options.h>
 #include <Network/interface.h>
 #include <Network/endpoint.h>
+#include <Network/privacy_context.h>
 #include <Network/nw_object.h>
 
 #include <stdint.h>
@@ -213,6 +214,28 @@ nw_parameters_create(void);
 API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0))
 NW_RETURNS_RETAINED nw_parameters_t
 nw_parameters_copy(nw_parameters_t parameters);
+
+/*!
+ * @function nw_parameters_set_privacy_context
+ *
+ * @abstract
+ *		Set a privacy context on the parameters, which will be associated
+ *		with connections and listeners. The privacy context allows
+ *		using separate caches for different sets of connections, as well as
+ *		restricting how connection-specific information is logged and shared
+ *		on the network.
+ *
+ * @param parameters
+ *		The parameters object to configure
+ *
+ * @param privacy_context
+ *		The privacy context to associate with connections and listeners that use
+ *		these parameters.
+ */
+API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0))
+void
+nw_parameters_set_privacy_context(nw_parameters_t parameters,
+								  nw_privacy_context_t privacy_context);
 
 #pragma mark - Path Selection
 
@@ -595,9 +618,15 @@ nw_parameters_get_include_peer_to_peer(nw_parameters_t parameters);
  *		protocol level. Use of fast open requires that the caller send
  *		idempotent data on the connection before the connection may move
  *		into the ready state. As a side effect, this may implicitly enable
- *		fast open for protocols in the stack, even if they did not have
- *		fast open explicitly enabled on them (such as the option to enable
+ *		fast open or early data for protocols in the stack, even if they did not
+ *		have fast open explicitly enabled on them (such as the option to enable
  *		TCP Fast Open).
+ *
+ *		NOTE: Use of this API may have security implications for application data.
+ *		In particular, TLS early data is replayable by a network attacker. Callers must
+ *		account for this when sending data before the handshake is confirmed. See
+ *		RFC 8446 for more information. Callers MUST NOT enable fast open without
+ *		a specific application profile that defines its use.
  *
  * @param parameters
  *		The parameters object to configure

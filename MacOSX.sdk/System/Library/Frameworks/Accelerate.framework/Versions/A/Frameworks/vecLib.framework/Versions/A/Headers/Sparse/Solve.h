@@ -375,6 +375,9 @@ typedef struct {
  *  column.
  *  If the blockSize is 1, then this format is exactly equivalent to standard
  *  CSC format.
+ *  CSR format data can be simulated by using a blockSize of 1 and setting
+ *  the transpose attribute (strictly this is still a transposed CSC matrix, so
+ *  rowCount and columnCount will be transposed compared to true CSR).
  *
  *  @field rowCount Number of (block) rows in matrix.
  *

@@ -38,6 +38,15 @@
 
 #include <IOKit/IOTypes.h>
 #include <libkern/c++/OSContainers.h>
+#include <libkern/c++/OSPtr.h>
+
+#if defined(IOKIT_ENABLE_SHARED_PTR)
+/*! @parseOnly */
+#define APPLE_KEXT_DEPRECATED_WITH_SHARED_PTR  __attribute__((deprecated))
+#else
+/*! @parseOnly */
+#define APPLE_KEXT_DEPRECATED_WITH_SHARED_PTR
+#endif /* IOKIT_ENABLE_SHARED_PTR */
 
 
 extern const OSSymbol * gIONameKey;
@@ -95,7 +104,7 @@ public:
  *   @param options kIORegistryIterateRecursively may be set to recurse automatically into the registry hierarchy. Without this option, this method degenerates into the standard getProperty() call. kIORegistryIterateParents may be set to iterate the parents of the entry, in place of the children.
  *   @result The property value found, or zero. A reference on any found property is returned to caller, which should be released. */
 
-	virtual OSObject * copyProperty( const char *           aKey,
+	virtual OSPtr<OSObject> copyProperty( const char *           aKey,
 	    const IORegistryPlane * plane,
 	    IOOptionBits            options =
 	    kIORegistryIterateRecursively |
@@ -109,7 +118,7 @@ public:
  *   @param options kIORegistryIterateRecursively may be set to recurse automatically into the registry hierarchy. Without this option, this method degenerates into the standard getProperty() call. kIORegistryIterateParents may be set to iterate the parents of the entry, in place of the children.
  *   @result The property value found, or zero. A reference on any found property is returned to caller, which should be released. */
 
-	virtual OSObject * copyProperty( const OSString *        aKey,
+	virtual OSPtr<OSObject> copyProperty( const OSString *        aKey,
 	    const IORegistryPlane * plane,
 	    IOOptionBits            options =
 	    kIORegistryIterateRecursively |
@@ -123,7 +132,7 @@ public:
  *   @param options kIORegistryIterateRecursively may be set to recurse automatically into the registry hierarchy. Without this option, this method degenerates into the standard getProperty() call. kIORegistryIterateParents may be set to iterate the parents of the entry, in place of the children.
  *   @result The property value found, or zero. A reference on any found property is returned to caller, which should be released. */
 
-	virtual OSObject * copyProperty( const OSSymbol *        aKey,
+	virtual OSPtr<OSObject> copyProperty( const OSSymbol *        aKey,
 	    const IORegistryPlane * plane,
 	    IOOptionBits            options =
 	    kIORegistryIterateRecursively |
@@ -135,7 +144,7 @@ public:
  *   @param plane The plane object.
  *   @result Returns the first parent of the registry entry, or zero if the entry is not attached into the registry in that plane. A reference on the entry is returned to caller, which should be released. */
 
-	virtual IORegistryEntry * copyParentEntry( const IORegistryPlane * plane ) const;
+	virtual OSPtr<IORegistryEntry> copyParentEntry( const IORegistryPlane * plane ) const;
 
 /*! @function copyChildEntry
  *   @abstract Returns an registry entry's first child entry in a plane. Available in Mac OS X 10.1 or later.
@@ -143,7 +152,7 @@ public:
  *   @param plane The plane object.
  *   @result Returns the first child of the registry entry, or zero if the entry is not attached into the registry in that plane. A reference on the entry is returned to caller, which should be released. */
 
-	virtual IORegistryEntry * copyChildEntry( const IORegistryPlane * plane ) const;
+	virtual OSPtr<IORegistryEntry> copyChildEntry( const IORegistryPlane * plane ) const;
 
 /* method available in Mac OS X 10.4 or later */
 /*!
@@ -178,6 +187,11 @@ public:
 	    void *arg0 = NULL, void *arg1 = NULL,
 	    void *arg2 = NULL, void *arg3 = NULL);
 
+#ifdef __BLOCKS__
+	typedef IOReturn (^ActionBlock)(void);
+	IOReturn runPropertyActionBlock(ActionBlock block);
+#endif /* __BLOCKS__ */
+
 private:
 #if __LP64__
 	OSMetaClassDeclareReservedUnused(IORegistryEntry, 0);
@@ -187,12 +201,12 @@ private:
 	OSMetaClassDeclareReservedUnused(IORegistryEntry, 4);
 	OSMetaClassDeclareReservedUnused(IORegistryEntry, 5);
 #else
-	OSMetaClassDeclareReservedUsed(IORegistryEntry, 0);
-	OSMetaClassDeclareReservedUsed(IORegistryEntry, 1);
-	OSMetaClassDeclareReservedUsed(IORegistryEntry, 2);
-	OSMetaClassDeclareReservedUsed(IORegistryEntry, 3);
-	OSMetaClassDeclareReservedUsed(IORegistryEntry, 4);
-	OSMetaClassDeclareReservedUsed(IORegistryEntry, 5);
+	OSMetaClassDeclareReservedUsedX86(IORegistryEntry, 0);
+	OSMetaClassDeclareReservedUsedX86(IORegistryEntry, 1);
+	OSMetaClassDeclareReservedUsedX86(IORegistryEntry, 2);
+	OSMetaClassDeclareReservedUsedX86(IORegistryEntry, 3);
+	OSMetaClassDeclareReservedUsedX86(IORegistryEntry, 4);
+	OSMetaClassDeclareReservedUsedX86(IORegistryEntry, 5);
 #endif
 	OSMetaClassDeclareReservedUnused(IORegistryEntry, 6);
 	OSMetaClassDeclareReservedUnused(IORegistryEntry, 7);
@@ -370,7 +384,7 @@ public:
  *   @param aKey The property's name as an OSSymbol.
  *   @result The property value found, or zero. */
 
-	virtual OSObject * getProperty( const OSSymbol * aKey) const;
+	virtual OSObject * getProperty( const OSSymbol * aKey) const APPLE_KEXT_DEPRECATED_WITH_SHARED_PTR;
 
 /*! @function getProperty
  *   @abstract Synchronized method to obtain a property from a registry entry's property table.
@@ -378,7 +392,7 @@ public:
  *   @param aKey The property's name as an OSString.
  *   @result The property value found, or zero. */
 
-	virtual OSObject * getProperty( const OSString * aKey) const;
+	virtual OSObject * getProperty( const OSString * aKey) const APPLE_KEXT_DEPRECATED_WITH_SHARED_PTR;
 
 /*! @function getProperty
  *   @abstract Synchronized method to obtain a property from a registry entry's property table.
@@ -386,7 +400,61 @@ public:
  *   @param aKey The property's name as a C-string.
  *   @result The property value found, or zero. */
 
-	virtual OSObject * getProperty( const char * aKey) const;
+	virtual OSObject * getProperty( const char * aKey) const APPLE_KEXT_DEPRECATED_WITH_SHARED_PTR;
+
+/*! @function propertyExists
+ *   @abstract Synchronized method to check if a property exists in a registry entry's property table.
+ *   @discussion This method will check if a property exists in a registry entry's property table. This method is synchronized with other IORegistryEntry accesses to the property table.
+ *   @param aKey The property's name as an OSSymbol.
+ *   @result True if the property value found. */
+
+	bool propertyExists(const OSSymbol * aKey);
+
+/*! @function propertyExists
+ *   @abstract Synchronized method to check if a property exists in a registry entry's property table.
+ *   @discussion This method will check if a property exists in a registry entry's property table. This method is synchronized with other IORegistryEntry accesses to the property table.
+ *   @param aKey The property's name as an OSString.
+ *   @result True if the property value found. */
+
+	bool propertyExists(const OSString * aKey);
+
+/*! @function propertyExists
+ *   @abstract Synchronized method to check if a property exists in a registry entry's property table.
+ *   @discussion This method will check if a property exists in a registry entry's property table. This method is synchronized with other IORegistryEntry accesses to the property table.
+ *   @param aKey The property's name as a C-string.
+ *   @result True if the property value found. */
+
+	bool propertyExists(const char * aKey);
+
+/*! @function propertyHasValue
+ *   @abstract Synchronized method to check if a property in a registry entry's property table has a given value.
+ *   @discussion This method will check if a property exists in a registry entry's property table and compares with isEqualTo() the supplied value. This method is synchronized with other IORegistryEntry accesses to the property table.
+ *   @param aKey The property's name as an OSSymbol.
+ *   @param value The property's value to be compared.
+ *   @result True if the property value was found and isEqualTo() the supplied value. */
+
+	bool propertyHasValue(const OSSymbol * aKey,
+	    const OSObject * value);
+
+/*! @function propertyHasValue
+ *   @abstract Synchronized method to check if a property in a registry entry's property table has a given value.
+ *   @discussion This method will check if a property exists in a registry entry's property table and compares with isEqualTo() the supplied value. This method is synchronized with other IORegistryEntry accesses to the property table.
+ *   @param aKey The property's name as an OSString.
+ *   @param value The property's value to be compared.
+ *   @result True if the property value was found and isEqualTo() the supplied value. */
+
+	bool propertyHasValue(const OSString * aKey,
+	    const OSObject * value);
+
+/*! @function propertyHasValue
+ *   @abstract Synchronized method to check if a property in a registry entry's property table has a given value.
+ *   @discussion This method will check if a property exists in a registry entry's property table and compares with isEqualTo() the supplied value. This method is synchronized with other IORegistryEntry accesses to the property table.
+ *   @param aKey The property's name as a C-string.
+ *   @param value The property's value to be compared.
+ *   @result True if the property value was found and isEqualTo() the supplied value. */
+
+	bool propertyHasValue(const char * aKey,
+	    const OSObject * value);
 
 /*! @function getProperty
  *   @abstract Synchronized method to obtain a property from a registry entry or one of its parents (or children) in the hierarchy.
@@ -400,7 +468,7 @@ public:
 	    const IORegistryPlane * plane,
 	    IOOptionBits            options =
 	    kIORegistryIterateRecursively |
-	    kIORegistryIterateParents) const;
+	    kIORegistryIterateParents) const APPLE_KEXT_DEPRECATED_WITH_SHARED_PTR;
 
 /*! @function getProperty
  *   @abstract Synchronized method to obtain a property from a registry entry or one of its parents (or children) in the hierarchy.
@@ -414,7 +482,7 @@ public:
 	    const IORegistryPlane * plane,
 	    IOOptionBits            options =
 	    kIORegistryIterateRecursively |
-	    kIORegistryIterateParents) const;
+	    kIORegistryIterateParents) const APPLE_KEXT_DEPRECATED_WITH_SHARED_PTR;
 
 /*! @function getProperty
  *   @abstract Synchronized method to obtain a property from a registry entry or one of its parents (or children) in the hierarchy.
@@ -428,7 +496,98 @@ public:
 	    const IORegistryPlane * plane,
 	    IOOptionBits            options =
 	    kIORegistryIterateRecursively |
+	    kIORegistryIterateParents) const APPLE_KEXT_DEPRECATED_WITH_SHARED_PTR;
+
+/*! @function propertyExists
+ *   @abstract Synchronized method to check if a property exists from a registry entry or one of its parents (or children) in the hierarchy.
+ *   @discussion This method will search for a property, starting first with this registry entry's property table, then iterating recusively through either the parent registry entries or the child registry entries of this entry. Once the first occurrence is found, it will return true. The iteration keeps track of entries that have been recursed into previously to avoid loops. This method is synchronized with other IORegistryEntry accesses to the property table(s).
+ *   @param aKey The property's name as an OSSymbol.
+ *   @param plane The plane to iterate over, eg. gIOServicePlane.
+ *   @param options kIORegistryIterateRecursively may be set to recurse automatically into the registry hierarchy. Without this option, this method degenerates into the standard propertyExists() call. kIORegistryIterateParents may be set to iterate the parents of the entry, in place of the children.
+ *   @result True if the property was found. */
+
+	bool propertyExists( const OSSymbol *        aKey,
+	    const IORegistryPlane * plane,
+	    uint32_t                options =
+	    kIORegistryIterateRecursively |
 	    kIORegistryIterateParents) const;
+
+/*! @function propertyExists
+ *   @abstract Synchronized method to check if a property exists from a registry entry or one of its parents (or children) in the hierarchy.
+ *   @discussion This method will search for a property, starting first with this registry entry's property table, then iterating recusively through either the parent registry entries or the child registry entries of this entry. Once the first occurrence is found, it will return true. The iteration keeps track of entries that have been recursed into previously to avoid loops. This method is synchronized with other IORegistryEntry accesses to the property table(s).
+ *   @param aKey The property's name as an OSString.
+ *   @param plane The plane to iterate over, eg. gIOServicePlane.
+ *   @param options kIORegistryIterateRecursively may be set to recurse automatically into the registry hierarchy. Without this option, this method degenerates into the standard propertyExists() call. kIORegistryIterateParents may be set to iterate the parents of the entry, in place of the children.
+ *   @result True if the property was found. */
+
+	bool propertyExists( const OSString *        aKey,
+	    const IORegistryPlane * plane,
+	    uint32_t                options =
+	    kIORegistryIterateRecursively |
+	    kIORegistryIterateParents) const;
+
+/*! @function propertyExists
+ *   @abstract Synchronized method to check if a property exists from a registry entry or one of its parents (or children) in the hierarchy.
+ *   @discussion This method will search for a property, starting first with this registry entry's property table, then iterating recusively through either the parent registry entries or the child registry entries of this entry. Once the first occurrence is found, it will return true. The iteration keeps track of entries that have been recursed into previously to avoid loops. This method is synchronized with other IORegistryEntry accesses to the property table(s).
+ *   @param aKey The property's name as a C-string.
+ *   @param plane The plane to iterate over, eg. gIOServicePlane.
+ *   @param options kIORegistryIterateRecursively may be set to recurse automatically into the registry hierarchy. Without this option, this method degenerates into the standard propertyExists() call. kIORegistryIterateParents may be set to iterate the parents of the entry, in place of the children.
+ *   @result True if the property was found. */
+
+	bool propertyExists( const char *            aKey,
+	    const IORegistryPlane * plane,
+	    uint32_t                options =
+	    kIORegistryIterateRecursively |
+	    kIORegistryIterateParents) const;
+
+/*! @function propertyHasValue
+ *   @abstract Synchronized method to check if a property has a given value from a registry entry or one of its parents (or children) in the hierarchy.
+ *   @discussion This method will search for a property, starting first with this registry entry's property table, then iterating recusively through either the parent registry entries or the child registry entries of this entry. Once the first occurrence is found, it will return true if the property isEqualTo() the supplied value. The iteration keeps track of entries that have been recursed into previously to avoid loops. This method is synchronized with other IORegistryEntry accesses to the property table(s).
+ *   @param aKey The property's name as an OSSymbol.
+ *   @param value The property value to be compared.
+ *   @param plane The plane to iterate over, eg. gIOServicePlane.
+ *   @param options kIORegistryIterateRecursively may be set to recurse automatically into the registry hierarchy. Without this option, this method degenerates into the standard propertyExists() call. kIORegistryIterateParents may be set to iterate the parents of the entry, in place of the children.
+ *   @result True if the property was found and isEqualTo() the supplied value. */
+
+	bool propertyHasValue( const OSSymbol *        aKey,
+	    const OSObject        * value,
+	    const IORegistryPlane * plane,
+	    uint32_t                options =
+	    kIORegistryIterateRecursively |
+	    kIORegistryIterateParents) const;
+
+/*! @function propertyHasValue
+ *   @abstract Synchronized method to check if a property has a given value from a registry entry or one of its parents (or children) in the hierarchy.
+ *   @discussion This method will search for a property, starting first with this registry entry's property table, then iterating recusively through either the parent registry entries or the child registry entries of this entry. Once the first occurrence is found, it will return true if the property isEqualTo() the supplied value. The iteration keeps track of entries that have been recursed into previously to avoid loops. This method is synchronized with other IORegistryEntry accesses to the property table(s).
+ *   @param aKey The property's name as an OSString.
+ *   @param value The property value to be compared.
+ *   @param plane The plane to iterate over, eg. gIOServicePlane.
+ *   @param options kIORegistryIterateRecursively may be set to recurse automatically into the registry hierarchy. Without this option, this method degenerates into the standard propertyExists() call. kIORegistryIterateParents may be set to iterate the parents of the entry, in place of the children.
+ *   @result True if the property was found and isEqualTo() the supplied value. */
+
+	bool propertyHasValue( const OSString *        aKey,
+	    const OSObject        * value,
+	    const IORegistryPlane * plane,
+	    uint32_t                options =
+	    kIORegistryIterateRecursively |
+	    kIORegistryIterateParents) const;
+
+/*! @function propertyHasValue
+ *   @abstract Synchronized method to check if a property has a given value from a registry entry or one of its parents (or children) in the hierarchy.
+ *   @discussion This method will search for a property, starting first with this registry entry's property table, then iterating recusively through either the parent registry entries or the child registry entries of this entry. Once the first occurrence is found, it will return true if the property isEqualTo() the supplied value. The iteration keeps track of entries that have been recursed into previously to avoid loops. This method is synchronized with other IORegistryEntry accesses to the property table(s).
+ *   @param aKey The property's name as a C-string.
+ *   @param value The property value to be compared.
+ *   @param plane The plane to iterate over, eg. gIOServicePlane.
+ *   @param options kIORegistryIterateRecursively may be set to recurse automatically into the registry hierarchy. Without this option, this method degenerates into the standard propertyExists() call. kIORegistryIterateParents may be set to iterate the parents of the entry, in place of the children.
+ *   @result True if the property was found and isEqualTo() the supplied value. */
+
+	bool propertyHasValue( const char *            aKey,
+	    const OSObject        * value,
+	    const IORegistryPlane * plane,
+	    uint32_t                options =
+	    kIORegistryIterateRecursively |
+	    kIORegistryIterateParents) const;
+
 
 /*! @function copyProperty
  *   @abstract Synchronized method to obtain a property from a registry entry's property table.
@@ -436,7 +595,7 @@ public:
  *   @param aKey The property's name as an OSSymbol.
  *   @result The property value found, or zero. It should be released by the caller. */
 
-	virtual OSObject * copyProperty( const OSSymbol * aKey) const;
+	virtual OSPtr<OSObject> copyProperty( const OSSymbol * aKey) const;
 
 /*! @function copyProperty
  *   @abstract Synchronized method to obtain a property from a registry entry's property table.
@@ -444,7 +603,7 @@ public:
  *   @param aKey The property's name as an OSString.
  *   @result The property value found, or zero. It should be released by the caller. */
 
-	virtual OSObject * copyProperty( const OSString * aKey) const;
+	virtual OSPtr<OSObject> copyProperty( const OSString * aKey) const;
 
 /*! @function copyProperty
  *   @abstract Synchronized method to obtain a property from a registry entry's property table.
@@ -452,14 +611,14 @@ public:
  *   @param aKey The property's name as a C-string.
  *   @result The property value found, or zero. It should be released by the caller. */
 
-	virtual OSObject * copyProperty( const char * aKey) const;
+	virtual OSPtr<OSObject> copyProperty( const char * aKey) const;
 
 /*! @function dictionaryWithProperties
  *   @abstract Synchronized method to obtain copy a registry entry's property table.
  *   @discussion This method will copy a registry entry's property table, using the OSDictionary::withDictionary semantics. This method is synchronized with other IORegistryEntry accesses to the property table. Since OSDictionary will only copy property values by reference, synchronization is not guaranteed to any collection values.
  *   @result The created dictionary, or zero on a resource value. It should be released by the caller. */
 
-	virtual OSDictionary * dictionaryWithProperties( void ) const;
+	virtual OSPtr<OSDictionary> dictionaryWithProperties( void ) const;
 
 /*! @function serializeProperties
  *   @abstract Synchronized method to serialize a registry entry's property table.
@@ -496,7 +655,7 @@ public:
  *   @param plane The plane object.
  *   @result Returns an iterator over the parents of the registry entry, or zero if there is a resource failure. The iterator must be released when the iteration is finished. All objects returned by the iteration are retained while the iterator is valid, though they may no longer be attached during the iteration. */
 
-	virtual OSIterator * getParentIterator( const IORegistryPlane * plane )
+	virtual OSPtr<OSIterator> getParentIterator( const IORegistryPlane * plane )
 	const;
 	virtual void applyToParents( IORegistryEntryApplierFunction applier,
 	    void * context,
@@ -516,7 +675,7 @@ public:
  *   @param plane The plane object.
  *   @result Returns an iterator over the children of the entry, or zero if there is a resource failure. The iterator must be released when the iteration is finished. All objects returned by the iteration are retained while the iterator is valid, though they may no longer be attached during the iteration. */
 
-	virtual OSIterator * getChildIterator( const IORegistryPlane * plane )
+	virtual OSPtr<OSIterator> getChildIterator( const IORegistryPlane * plane )
 	const;
 
 
@@ -642,7 +801,7 @@ public:
  *   @param plane The plane object, or zero for the global name.
  *   @result A reference to an OSSymbol for the name, which should be released by the caller. */
 
-	virtual const OSSymbol * copyName(
+	virtual OSPtr<const OSSymbol> copyName(
 		const IORegistryPlane * plane = NULL ) const;
 
 /*! @function compareNames
@@ -654,6 +813,8 @@ public:
 
 	virtual bool compareNames( OSObject * name, OSString ** matched = NULL ) const;
 
+	bool compareNames( OSObject * name, OSSharedPtr<OSString>& matched) const;
+
 /*! @function compareName
  *   @abstract Compares the name of the entry with one name, and optionally returns the matching name.
  *   @discussion This method is called during IOService name matching and elsewhere from the compareNames method. It should be overridden to provide non-standard name matching.
@@ -662,6 +823,8 @@ public:
  *   @result True if the name compared true with the entry's global name. */
 
 	virtual bool compareName( OSString * name, OSString ** matched = NULL ) const;
+
+	bool compareName( OSString * name, OSSharedPtr<OSString>& matched) const;
 
 /*! @function setName
  *   @abstract Sets a name for the registry entry, in a particular plane, or globally.
@@ -695,7 +858,7 @@ public:
  *   @param plane The plane object, or zero for the global name.
  *   @result A reference to an OSSymbol for the location if one exists, which should be released by the caller, or zero. */
 
-	virtual const OSSymbol * copyLocation(
+	virtual OSPtr<const OSSymbol> copyLocation(
 		const IORegistryPlane * plane = NULL ) const;
 
 /*! @function setLocation
@@ -741,7 +904,7 @@ public:
  *   @param fromEntry The lookup will proceed rooted at this entry if non-zero, otherwise it proceeds from the root of the plane.
  *   @result A retained registry entry is returned on success, or zero on failure. The caller should release the entry. */
 
-	static IORegistryEntry * fromPath(  const char * path,
+	static OSPtr<IORegistryEntry> fromPath(  const char * path,
 	    const IORegistryPlane * plane = NULL,
 	    char * residualPath = NULL,
 	    int * residualLength = NULL,
@@ -756,7 +919,7 @@ public:
  *   @param residualLength See IORegistryEntry::fromPath.
  *   @result See IORegistryEntry::fromPath. */
 
-	virtual IORegistryEntry * childFromPath( const char * path,
+	virtual OSPtr<IORegistryEntry> childFromPath( const char * path,
 	    const IORegistryPlane * plane = NULL,
 	    char * residualPath = NULL,
 	    int * residualLength = NULL );
@@ -777,7 +940,7 @@ public:
  *   @param name A C-string name for the new plane, to be copied.
  *   @result A new instance of an IORegistryPlane, or zero on failure. */
 
-	static const IORegistryPlane * makePlane( const char * name );
+	static OSPtr<const IORegistryPlane> makePlane( const char * name );
 
 /*!    @abstract Returns an ID for the registry entry that is global to all tasks.
  *   @discussion The entry ID returned by getRegistryEntryID can be used to identify a registry entry across all tasks. A registry entry may be looked up by its entry ID by creating a matching dictionary with IORegistryEntryIDMatching() in user space, or <code>IOService::registryEntryIDMatching()</code> in the kernel, to be used with the IOKit matching functions. The ID is valid only until the machine reboots.
@@ -864,7 +1027,7 @@ public:
  *   @param options kIORegistryIterateRecursively may be set to recurse automatically into each entry as it is returned. This option affects the behaviour of the getNextObject method, which is defined in the OSIterator superclass. Other methods will override this behaviour. kIORegistryIterateParents may be set to iterate the parents of each entry, by default the children are iterated.
  *   @result A created IORegistryIterator instance, to be released by the caller when it has finished with it. */
 
-	static IORegistryIterator * iterateOver( IORegistryEntry * start,
+	static OSPtr<IORegistryIterator> iterateOver( IORegistryEntry * start,
 	    const IORegistryPlane * plane,
 	    IOOptionBits options = 0 );
 
@@ -875,7 +1038,7 @@ public:
  *   @param options kIORegistryIterateRecursively may be set to recurse automatically into each entry as it is returned. This option affects the behaviour of the getNextObject method, which is defined in the OSIterator superclass. Other methods will override this behaviour. kIORegistryIterateParents may be set to iterate the parents of each entry, by default the children are iterated.
  *   @result A created IORegistryIterator instance, to be released by the caller when it has finished with it. */
 
-	static IORegistryIterator * iterateOver( const IORegistryPlane * plane,
+	static OSPtr<IORegistryIterator> iterateOver( const IORegistryPlane * plane,
 	    IOOptionBits options = 0 );
 
 /*! @function getNextObject
@@ -944,7 +1107,7 @@ public:
  *   @discussion This method will reset, then iterate all entries in the iteration (with getNextObject).
  *   @result A set of entries returned by the iteration. The caller should release the set when it has finished with it. Zero is returned on a resource failure. */
 
-	virtual OSOrderedSet * iterateAll( void );
+	virtual OSPtr<OSOrderedSet> iterateAll( void );
 };
 
 #endif /* _IOKIT_IOREGISTRYENTRY_H */

@@ -5,11 +5,22 @@
 //  Copyright (c) 2012 Apple Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <TargetConditionals.h>
+
 #import <GameController/GameController.h>
 #import <GameController/GCExtern.h>
+#import <GameController/GCColor.h>
+
+#if TARGET_OS_OSX
+#import <IOKit/hid/IOHIDBase.h>
+#endif
 
 @class GCMotion;
+@class CHHapticEngine;
+@class GCDeviceHaptics;
+@class GCDeviceLight;
+@class GCDeviceBattery;
+#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -35,8 +46,29 @@ NS_ASSUME_NONNULL_BEGIN
  @see NSNotificationCenter
  @see GCController.controllers
  */
-GAMECONTROLLER_EXTERN NSString *const GCControllerDidConnectNotification;
-GAMECONTROLLER_EXTERN NSString *const GCControllerDidDisconnectNotification;
+GAMECONTROLLER_EXTERN NSString *const GCControllerDidConnectNotification API_AVAILABLE(macos(10.9), ios(7.0), tvos(7.0));
+GAMECONTROLLER_EXTERN NSString *const GCControllerDidDisconnectNotification API_AVAILABLE(macos(10.9), ios(7.0), tvos(7.0));
+
+/**
+Use these constants with NSNotificationCenter to listen to a controller becoming the most recently used controller.
+This is a good time to swap out UI to match the new current controller, and unregister any handlers with
+ the old current controller.
+
+The 'object' property of the notification will contain the GCController that became the current controller.
+For example:
+
+- (void)controllerDidBecomeCurrent:(NSNotification *)note {
+
+GCController *controller = note.object;
+
+...
+}
+
+@see NSNotificationCenter
+@see GCController.controllers
+*/
+GAMECONTROLLER_EXTERN NSString *const GCControllerDidBecomeCurrentNotification API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+GAMECONTROLLER_EXTERN NSString *const GCControllerDidStopBeingCurrentNotification API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
 /**
  This is the player index that a connected controller will have if it has never been assigned a player index on the current system.
@@ -51,6 +83,7 @@ typedef NS_ENUM(NSInteger, GCControllerPlayerIndex) {
     GCControllerPlayerIndex4,
 };
 
+
 /**
  Controllers are available to an application that links to GameController.framework. There are 2 ways to access controllers
  paired to the system, adopt both to ensure the best user experience:
@@ -58,12 +91,12 @@ typedef NS_ENUM(NSInteger, GCControllerPlayerIndex) {
  1: Querying for the the current array or controllers using [GCController controllers].
  2: Registering for Connection/Disconnection notifications from NSNotificationCenter.
  
- Only controllers that support one of the allowed profiles, such as GCGamepad, will be enumerated. Check for the profile
+ Only controllers that support one of the allowed profiles, such as GCExtendedGamepad, will be enumerated. Check for the profile
  supported before using a controller in your application. Ignore a controller that doesn't support a profile that suits
  your application, as the user will expect their controller to either be fully supported or not supported at all.
   */
-GAMECONTROLLER_EXPORT
-@interface GCController : NSObject
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(7.0))
+@interface GCController : NSObject<GCDevice>
 
 /**
  Set this block to be notified when a user intends to suspend or resume the current game state. A controller will have a button
@@ -80,33 +113,15 @@ GAMECONTROLLER_EXPORT
  */
 @property (nonatomic, copy, nullable) void (^controllerPausedHandler)(GCController *controller) API_DEPRECATED("controllerPausedHandler has been deprecated. Use the Menu button found on the controller's profile, if it exists.", macos(10.9, 10.15), ios(7.0, 13.0), tvos(9.0, 13.0));
 
+
 /**
- The dispatch queue that element value change handlers are submitted on. The default queue is main, and setting this to any
- other queue will make value change handlers dispatch async on the given queue. This is useful if the main game loop
- of the application is not on main, or if input logic is handled on another thread from the main game loop.
+ The most recently used game controller. If a user actuates a game controller input, that controller will become the current one.
  
- @see GCControllerAxisInput.valueChangedHandler
- @see GCControllerButtonInput.valueChangedHandler
- @see GCControllerButtonInput.pressedChangedHandler
- @see GCControllerDirectionPad.valueChangedHandler
- @see GCMotion.valueChangedHandler
+ @note This is useful for single player games where you only care about whether an input is pressed, and not where it came from. You
+ will still need to register for changes to GCController.current so that your UI can remain up-to-date with the current controller.
  */
-#if defined(OS_OBJECT_USE_OBJC) && OS_OBJECT_USE_OBJC==1
-@property (nonatomic, retain) dispatch_queue_t handlerQueue;
-#else
-@property (nonatomic, assign) dispatch_queue_t handlerQueue;
-#endif
+@property (class, atomic, strong, readonly, nullable) GCController *current API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
-/**
- A vendor supplied name. May be nil, and is not guaranteed to be unique. This should not be used as a key in a dictionary,
- but simply as a way to present some basic information about the controller in testing or to the user.
- */
-@property (nonatomic, readonly, copy, nullable) NSString *vendorName;
-
-/**
- The product category the controller belongs to. This is useful for setting appropriate UI elements based on what type of controller is connected.
- */
-@property (nonatomic, readonly) NSString * productCategory API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0));
 
 /**
  A controller may be form fitting or otherwise closely attached to the device. This closeness to other inputs on the device
@@ -140,6 +155,14 @@ GAMECONTROLLER_EXPORT
 @property (nonatomic) GCControllerPlayerIndex playerIndex;
 
 /**
+ Gets the battery information if controller supports one
+ 
+ This property is useful when you try to notify your user to change or charge controller before it runs out of battery life
+ or simply display the current battery level and status.
+ */
+@property (nonatomic, copy, readonly, nullable) GCDeviceBattery *battery API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+
+/**
  Gets the profile for the controller that suits current application.
  
  There are several supported profiles, with an additional optional profile for motion as well.
@@ -155,9 +178,10 @@ GAMECONTROLLER_EXPORT
  application requires a specific kind of profile.
  @see motion
  */
-@property (nonatomic, retain, readonly, nullable) GCGamepad *gamepad API_DEPRECATED_WITH_REPLACEMENT("-extendedGamepad", macos(10.9, 10.12), ios(7.0, 10.0), tvos(7.0, 10.0));
-@property (nonatomic, retain, readonly, nullable) GCMicroGamepad *microGamepad;
-@property (nonatomic, retain, readonly, nullable) GCExtendedGamepad *extendedGamepad;
+@property (nonatomic, strong, readonly, nullable) GCGamepad *gamepad API_DEPRECATED_WITH_REPLACEMENT("extendedGamepad", macos(10.9, 10.12), ios(7.0, 10.0), tvos(7.0, 10.0));
+@property (nonatomic, strong, readonly, nullable) GCMicroGamepad *microGamepad;
+@property (nonatomic, strong, readonly, nullable) GCExtendedGamepad *extendedGamepad;
+
 
 /**
  Gets the motion input profile. This profile is optional and may be available if the controller is attached to a device that supports motion.
@@ -165,7 +189,25 @@ GAMECONTROLLER_EXPORT
  @see gamepad
  @see extendedGamepad
  */
-@property (nonatomic, retain, readonly, nullable) GCMotion *motion API_AVAILABLE(macos(10.10), ios(8.0), tvos(8.0));
+@property (nonatomic, strong, readonly, nullable) GCMotion *motion API_AVAILABLE(macos(10.10), ios(8.0), tvos(8.0));
+
+/**
+ Gets the light for the controller, if one exists.
+ 
+ A controller's light can be used to signal information to the player, such as using different light colors based on the player
+ index. It can also be used to react to in-game events and enhance user immersion.
+ */
+@property (nonatomic, retain, readonly, nullable) GCDeviceLight *light API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+
+/**
+ Gets the haptics for the controller, if one exists.
+ 
+ Use this property to create CHHapticEngine instances according to your needs. 
+ 
+ @note Haptics are a drain on the controller's battery, and can be distracting when used excessively. 
+ */
+@property (nonatomic, retain, readonly, nullable) GCDeviceHaptics *haptics API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+
 
 /**
  Polls the state vector of the controller and saves it to a new and writable instance of GCController.
@@ -176,7 +218,7 @@ GAMECONTROLLER_EXPORT
  @see snapshot
  @return A new controller with the duplicated state vector of the current controller
  */
-- (GCController *) capture API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0));
+- (GCController *)capture API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0));
 
 /**
  Get a list of controllers currently attached to the system.
@@ -185,6 +227,7 @@ GAMECONTROLLER_EXPORT
  @see GCControllerDidDisconnectNotification
  */
 + (NSArray<GCController *> *)controllers;
+
 
 /**
  Start discovery of new wireless controllers that are discoverable. This is an asynchronous and the supplied completionHandler
@@ -230,7 +273,7 @@ GAMECONTROLLER_EXPORT
  @see snapshot
  @return A new controller with a micro gamepad profile
  */
-+ (GCController *) controllerWithMicroGamepad API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0));
++ (GCController *)controllerWithMicroGamepad API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0));
 
 /**
  Creates a controller with an extended gamepad profile.
@@ -240,7 +283,16 @@ GAMECONTROLLER_EXPORT
  @see snapshot
  @return A new controller with an extended gamepad profile
  */
-+ (GCController *) controllerWithExtendedGamepad API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0));
++ (GCController *)controllerWithExtendedGamepad API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0));
+
+#if TARGET_OS_OSX
+/**
+ Returns YES if the given HID device is supported by the Game Controller framework, and will have an associated GCController instance.
+ 
+ @note This is not cheap, be sure to cache the result
+ */
++ (BOOL)supportsHIDDevice:(IOHIDDeviceRef)device API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
+#endif
 
 @end
 

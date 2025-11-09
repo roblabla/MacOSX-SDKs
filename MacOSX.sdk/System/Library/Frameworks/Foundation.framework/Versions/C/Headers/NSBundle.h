@@ -16,16 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /* Because NSBundle caches allocated instances, subclasses should be prepared
    to receive an already initialized object back from [super initWithPath:] */
-@interface NSBundle : NSObject {
-@private
-    NSUInteger		_flags;
-    id		        _cfBundle;
-    NSUInteger		_reserved2;
-    Class		_principalClass;
-    id                  _initialPath;
-    id                  _resolvedPath;
-    NSString           *_firstClassName;
-}
+@interface NSBundle : NSObject
 
 /* Methods for creating or retrieving bundle instances. */
 @property (class, readonly, strong) NSBundle *mainBundle;
@@ -120,7 +111,8 @@ enum {
     NSBundleExecutableArchitectureI386      = 0x00000007,
     NSBundleExecutableArchitecturePPC       = 0x00000012,
     NSBundleExecutableArchitectureX86_64    = 0x01000007,
-    NSBundleExecutableArchitecturePPC64     = 0x01000012
+    NSBundleExecutableArchitecturePPC64     = 0x01000012,
+    NSBundleExecutableArchitectureARM64 API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 0x0100000c
 };
 
 @property (nullable, readonly, copy) NSArray<NSNumber *> *executableArchitectures API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));

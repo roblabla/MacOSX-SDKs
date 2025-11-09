@@ -1,16 +1,30 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: B8A44E22-A143-3360-BC26-D2341900DC4B', 'x86_64: B8A44E22-A143-3360-BC26-D2341900DC4B' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           CF03947C-B9AF-3C64-89A4-96183CCC3824
+  - target:          x86_64-maccatalyst
+    value:           CF03947C-B9AF-3C64-89A4-96183CCC3824
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           637BF456-BDC7-3F36-9AF2-D49B1F2976DD
+  - target:          arm64e-maccatalyst
+    value:           637BF456-BDC7-3F36-9AF2-D49B1F2976DD
 install-name:    '/usr/lib/swift/libswiftModelIO.dylib'
-current-version: 0
 swift-abi-version: 7
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftModelIO.dylib', '$ld$install_name$os10.11$@rpath/libswiftModelIO.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftModelIO.dylib', '$ld$install_name$os10.13$@rpath/libswiftModelIO.dylib', 
-                       '$ld$install_name$os10.14$@rpath/libswiftModelIO.dylib', '$ld$install_name$os10.9$@rpath/libswiftModelIO.dylib', 
-                       '_$sSo16MDLAnimatedValueC7ModelIOE5timesSaySdGvg', '_$sSo16MDLAnimatedValueC7ModelIOE5timesSaySdGvpMV', 
+                       '$ld$install_name$os10.14$@rpath/libswiftModelIO.dylib', '$ld$install_name$os10.9$@rpath/libswiftModelIO.dylib' ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+    symbols:         [ '_$sSo16MDLAnimatedValueC7ModelIOE5timesSaySdGvg', '_$sSo16MDLAnimatedValueC7ModelIOE5timesSaySdGvpMV', 
                        '_$sSo17MDLAnimatedScalarC7ModelIOE10floatArraySaySfGvg', 
                        '_$sSo17MDLAnimatedScalarC7ModelIOE10floatArraySaySfGvpMV', 
                        '_$sSo17MDLAnimatedScalarC7ModelIOE11doubleArraySaySdGvg', 

@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 4C501E0F-94B9-3C15-A848-46C56B0E1D93', 'x86_64: 4C501E0F-94B9-3C15-A848-46C56B0E1D93' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           88920839-79B8-33F6-9E0E-539EA0D28CBD
+  - target:          x86_64-maccatalyst
+    value:           88920839-79B8-33F6-9E0E-539EA0D28CBD
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           FBF032F3-6BC9-3470-A1AC-0A1A8CABF9D4
+  - target:          arm64e-maccatalyst
+    value:           FBF032F3-6BC9-3470-A1AC-0A1A8CABF9D4
 install-name:    '/usr/lib/libsysdiagnose.dylib'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _metricCompression, _metricGetLogCopying, _metricGetLogGeneration, 
                        _metricGetOSLogArchive, _metricGetTimeSensitive, _metricLogCopying, 
                        _metricLogGeneration, _metricOSLogarchiveGeneration, _metricStartToTar, 

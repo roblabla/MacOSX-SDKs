@@ -1,11 +1,28 @@
---- !tapi-tbd-v3
-archs:           [ x86_64, x86_64h ]
-uuids:           [ 'x86_64: C1C9EB6B-D607-3CDE-8633-18D82B06B006', 'x86_64: C1C9EB6B-D607-3CDE-8633-18D82B06B006', 
-                   'x86_64h: CEA74186-263F-3C2D-98FA-174E38E61737', 'x86_64h: CEA74186-263F-3C2D-98FA-174E38E61737' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
+                   arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           1448B586-C2FA-3914-9514-7286C83E0530
+  - target:          x86_64-maccatalyst
+    value:           1448B586-C2FA-3914-9514-7286C83E0530
+  - target:          x86_64h-macos
+    value:           40E3401F-2949-369B-9756-A6B04A75992D
+  - target:          x86_64h-maccatalyst
+    value:           40E3401F-2949-369B-9756-A6B04A75992D
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           611B307F-E1E6-3813-909A-5C1C69C1628E
+  - target:          arm64e-maccatalyst
+    value:           611B307F-E1E6-3813-909A-5C1C69C1628E
 install-name:    '/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libJP2.dylib'
-exports:         
-  - archs:           [ x86_64, x86_64h ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, x86_64h-maccatalyst, x86_64h-macos, 
+                       arm64e-maccatalyst, arm64e-macos, arm64-macos, arm64-maccatalyst ]
     symbols:         [ __cg_JP2CompressorProcessImage, __cg_JP2CompressorSetDisplayResolution, 
                        __cg_JP2CompressorSetup, __cg_JP2CompressorTearDown, __cg_JP2DecompressBand, 
                        __cg_JP2DecompressBlock, __cg_JP2DecompressLayer, __cg_JP2GetDisplayResolution, 

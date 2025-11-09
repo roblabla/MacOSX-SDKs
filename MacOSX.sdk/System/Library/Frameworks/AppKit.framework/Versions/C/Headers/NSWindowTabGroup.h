@@ -7,9 +7,10 @@
 
 #import <Foundation/Foundation.h>
 #import <AppKit/NSWindow.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 /* NSWindowTabGroup represents a group of windows that are shown together in one tab group. See NSWindow's tabGroup property.
  */

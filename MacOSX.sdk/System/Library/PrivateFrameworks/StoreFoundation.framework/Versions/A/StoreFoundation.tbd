@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 71D31157-B40C-3052-9AAA-4552F8050AD4' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           99596CB1-CBAC-3879-AE80-463BB7A3094A
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           E693C138-31A4-327A-90DC-AE2977DB7D66
 install-name:    '/System/Library/PrivateFrameworks/StoreFoundation.framework/Versions/A/StoreFoundation'
 current-version: 379
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CKAppStoreVersion, _CKBooksStoreVersion, _CKConfiguratorAppVersion, 
                        _CKCurrentUserIsGuestUser, _CKDefaultDownloadLocation, _CKDownloadLocationForAdamID, 
                        _CKDownloadLocationForIdentifier, _CKHumanReadableSerialNumber, 

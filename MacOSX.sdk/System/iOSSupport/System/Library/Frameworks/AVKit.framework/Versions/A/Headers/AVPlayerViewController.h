@@ -36,6 +36,12 @@ API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @property (nonatomic) BOOL showsPlaybackControls;
 
 /*!
+ 	@property	showsTimecodes
+ 	@abstract	Controls whether timecodes can be displayed in the playback UI when playing media with embedded timecodes. Default NO.
+ */
+@property (nonatomic) BOOL showsTimecodes API_AVAILABLE(ios(13.0));
+
+/*!
 	@property	videoGravity
 	@abstract	A string defining how the video is displayed within an AVPlayerLayer bounds rect.
 	@discussion	Options are AVLayerVideoGravityResizeAspect, AVLayerVideoGravityResizeAspectFill and AVLayerVideoGravityResize. AVLayerVideoGravityResizeAspect is default.
@@ -85,6 +91,13 @@ API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos, watchos, tvos)
 	@discussion	If multiple player items have been enqueued, the receiver exits fullscreen once no more items are remaining in the queue.
  */
 @property (nonatomic) BOOL exitsFullScreenWhenPlaybackEnds API_AVAILABLE(ios(11.0));
+
+/*!
+    @property    requiresLinearPlayback
+    @abstract    Disables certain user operations (fast forward, forward skip, and scrubbing).
+    @discussion  This can be used to enforce playback of mandatory content (such as legalese or advertisements).
+ */
+@property (nonatomic) BOOL requiresLinearPlayback API_AVAILABLE(ios(11.0));
 
 /*!
  	@property	pixelBufferAttributes

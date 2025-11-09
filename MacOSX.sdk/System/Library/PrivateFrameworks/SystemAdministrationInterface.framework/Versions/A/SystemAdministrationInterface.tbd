@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 045A96E9-5B06-3132-8BAD-92468BD4AED9' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           3518CD87-AB37-3AB3-A005-77D467E59D5D
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           4029011C-3218-3598-A3F7-DA35D5017F7E
 install-name:    '/System/Library/PrivateFrameworks/SystemAdministrationInterface.framework/Versions/A/SystemAdministrationInterface'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _LAContextClass, _SecRequiresGracePeriod, _eEccountType, _isApplePayEnabled, 
                        _isComputerUnlockEnabled, _isStorePurchaseEnabled ]
     objc-classes:    [ ADMAddRecordController, ADMAutoLoginController, ADMChangePasswordController, 

@@ -1,13 +1,28 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: F530D38D-00F4-34C2-8BEF-376EFF896E44', 'x86_64: F530D38D-00F4-34C2-8BEF-376EFF896E44' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           7D0D1A32-100E-3D0F-BB78-D8620754B2E1
+  - target:          x86_64-maccatalyst
+    value:           7D0D1A32-100E-3D0F-BB78-D8620754B2E1
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           57B3C430-59D1-3AD3-95F6-21DE63613588
+  - target:          arm64e-maccatalyst
+    value:           57B3C430-59D1-3AD3-95F6-21DE63613588
 install-name:    '/System/Library/PrivateFrameworks/MetalTools.framework/Versions/A/MetalTools'
 current-version: 0
 compatibility-version: 0
-exports:         
-  - archs:           [ x86_64 ]
-    symbols:         [ __Z14MTLGPUDebugLogv, __Z19emitKernelTelemetryP18MTLTelemetryDevice, 
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _MTLToolsGetAssociatedObject, _MTLToolsSetAssociatedObject, 
+                       __Z14MTLGPUDebugLogv, __Z19emitKernelTelemetryP18MTLTelemetryDevice, 
                        __Z20emitBlitDistributionP18MTLTelemetryDeviceNSt3__113unordered_mapI14MTLPixelFormat28MTLTelemetryBlitDistributionNS1_4hashIyEENS1_8equal_toIS3_EENS1_9allocatorINS1_4pairIKS3_S4_EEEEEE, 
                        __Z20emitDrawDistributionP18MTLTelemetryDeviceP31MTLTelemetryDrawDistributionRec, 
                        __Z22emitAnisoClippedCountsP18MTLTelemetryDeviceP33MTLTelemetryAnisoClippedCountsRec, 
@@ -25,46 +40,74 @@ exports:
                        __Z28emitRenderTargetDistributionP18MTLTelemetryDeviceNSt3__113unordered_mapI14MTLPixelFormat36MTLTelemetryRenderTargetDistributionNS1_4hashIyEENS1_8equal_toIS3_EENS1_9allocatorINS1_4pairIKS3_S4_EEEEEE, 
                        __Z29emitCommandBufferDistributionP18MTLTelemetryDeviceP34MTLTelemetryCommandBufferCounttRec, 
                        __Z38emitParallellRenderEncoderDistributionP18MTLTelemetryDevice26MTLTelemetryStatisticUIRec, 
-                       __ZN19ILayerLockingPolicyD0Ev, __ZN19ILayerLockingPolicyD1Ev, 
-                       __ZN19ILayerLockingPolicyD2Ev, __ZN20NoLayerLockingPolicy4lockEv, 
-                       __ZN20NoLayerLockingPolicy6unlockEv, __ZNK20NoLayerLockingPolicy5cloneEv, 
-                       __ZTI19ILayerLockingPolicy, __ZTI20NoLayerLockingPolicy, __ZTS19ILayerLockingPolicy, 
-                       __ZTS20NoLayerLockingPolicy, __ZTV19ILayerLockingPolicy, __ZTV20NoLayerLockingPolicy ]
+                       __ZN11MetalBuffer12getMTLBufferEv, __ZN11MetalBuffer4freeEv, 
+                       __ZN11MetalBufferC1EP15MetalBufferHeapj, __ZN11MetalBufferC2EP15MetalBufferHeapj, 
+                       __ZN15MetalBufferHeap10freeBufferEO11MetalBuffer, __ZN15MetalBufferHeap11allocBufferEv, 
+                       __ZN15MetalBufferHeap4growEj, __ZN15MetalBufferHeap4initEP17MTLGPUDebugDevicey, 
+                       __ZN15MetalBufferHeapD1Ev, __ZN15MetalBufferHeapD2Ev, __ZN24GlobalResidentBufferList10useBuffersEP31MTLGPUDebugRenderCommandEncoder, 
+                       __ZN24GlobalResidentBufferList10useBuffersEP32MTLGPUDebugComputeCommandEncoder, 
+                       __ZN24GlobalResidentBufferList12removeBufferEPU19objcproto9MTLBuffer11objc_object, 
+                       __ZN24GlobalResidentBufferList9addBufferEPU19objcproto9MTLBuffer11objc_object, 
+                       __ZN27GPUDebugConstantBufferCache13releaseBufferERNS_13KeyBufferPairE, 
+                       __ZN27GPUDebugConstantBufferCache17getOrCreateBufferEP6NSData, 
+                       __ZN27GPUDebugConstantBufferCache4initEP17MTLGPUDebugDevice, 
+                       __ZN28GPUDebugBufferDescriptorHeap12createHandleEP17MTLGPUDebugBuffer, 
+                       __ZN28GPUDebugBufferDescriptorHeap16freeBufferHandleEy, __ZN28GPUDebugBufferDescriptorHeap4initEP17MTLGPUDebugDevicej, 
+                       __ZN29GPUDebugArgumentEncoderLayoutC1EP13MTLStructTypeP17MTLGPUDebugDevice, 
+                       __ZN29GPUDebugArgumentEncoderLayoutC2EP13MTLStructTypeP17MTLGPUDebugDevice, 
+                       __ZN29GPUDebugArgumentEncoderLayoutD1Ev, __ZN29GPUDebugArgumentEncoderLayoutD2Ev, 
+                       __ZNK29GPUDebugArgumentEncoderLayout9sublayoutEj, _checkAccelerationStructure, 
+                       _checkAccelerationStructureDescriptor, _unwrapAccelerationStructureDescriptor ]
     objc-classes:    [ MTLCountersBlitCommandEncoder, MTLCountersCommandBuffer, MTLCountersCommandQueue, 
                        MTLCountersComputeCommandEncoder, MTLCountersDevice, MTLCountersParallelRenderCommandEncoder, 
-                       MTLCountersRenderCommandEncoder, MTLDebugArgumentEncoder, 
-                       MTLDebugBlitCommandEncoder, MTLDebugBuffer, MTLDebugBufferMarker, 
-                       MTLDebugCommandBuffer, MTLDebugCommandQueue, MTLDebugComputeCommandEncoder, 
-                       MTLDebugComputePipelineState, MTLDebugCounterSampleBuffer, 
-                       MTLDebugDepthStencilState, MTLDebugDevice, MTLDebugFunction, 
-                       MTLDebugHeap, MTLDebugIndirectCommandBuffer, MTLDebugIndirectRenderCommand, 
+                       MTLCountersRenderCommandEncoder, MTLCountersResourceStateCommandEncoder, 
+                       MTLDebugAccelerationStructure, MTLDebugAccelerationStructureCommandEncoder, 
+                       MTLDebugArgumentEncoder, MTLDebugBinaryArchive, MTLDebugBlitCommandEncoder, 
+                       MTLDebugBuffer, MTLDebugBufferMarker, MTLDebugCommandBuffer, 
+                       MTLDebugCommandQueue, MTLDebugComputeCommandEncoder, MTLDebugComputePipelineState, 
+                       MTLDebugCounterSampleBuffer, MTLDebugDepthStencilState, MTLDebugDevice, 
+                       MTLDebugDynamicLibrary, MTLDebugEvent, MTLDebugFunction, MTLDebugFunctionHandle, 
+                       MTLDebugHeap, MTLDebugIndirectCommandBuffer, MTLDebugIndirectComputeCommand, 
+                       MTLDebugIndirectRenderCommand, MTLDebugIntersectionFunctionTable, 
                        MTLDebugLibrary, MTLDebugMotionEstimationPipeline, MTLDebugParallelRenderCommandEncoder, 
                        MTLDebugPipelineLibrary, MTLDebugRenderCommandEncoder, MTLDebugRenderPipelineState, 
-                       MTLDebugResource, MTLDebugSamplerState, MTLDebugSharedEvent, 
-                       MTLDebugTexture, MTLDebugVideoCommandEncoder, MTLGPUDebugCommandBuffer, 
-                       MTLGPUDebugCommandQueue, MTLGPUDebugComputeCommandEncoder, 
-                       MTLGPUDebugComputePipelineState, MTLGPUDebugDevice, MTLGPUDebugParallelRenderCommandEncoder, 
+                       MTLDebugResource, MTLDebugResourceStateCommandEncoder, MTLDebugSamplerState, 
+                       MTLDebugSharedEvent, MTLDebugTexture, MTLDebugTextureLayout, 
+                       MTLDebugVideoCommandEncoder, MTLDebugVisibleFunctionTable, 
+                       MTLGPUDebugArgumentEncoder, MTLGPUDebugBinaryArchive, MTLGPUDebugBlitCommandEncoder, 
+                       MTLGPUDebugBuffer, MTLGPUDebugCommandBuffer, MTLGPUDebugCommandQueue, 
+                       MTLGPUDebugComputeCommandEncoder, MTLGPUDebugComputePipelineState, 
+                       MTLGPUDebugDevice, MTLGPUDebugFunction, MTLGPUDebugHeap, MTLGPUDebugIndirectCommandBuffer, 
+                       MTLGPUDebugIndirectComputeCommand, MTLGPUDebugIndirectRenderCommand, 
+                       MTLGPUDebugLibrary, MTLGPUDebugParallelRenderCommandEncoder, 
                        MTLGPUDebugRenderCommandEncoder, MTLGPUDebugRenderPipelineState, 
                        MTLTelemetryBlitCommandEncoder, MTLTelemetryBuffer, MTLTelemetryCommandBuffer, 
                        MTLTelemetryCommandQueue, MTLTelemetryComputeCommandEncoder, 
                        MTLTelemetryComputePipelineState, MTLTelemetryDepthStencilState, 
                        MTLTelemetryDevice, MTLTelemetryHeap, MTLTelemetryParallelRenderCommandEncoder, 
                        MTLTelemetryRenderCommandEncoder, MTLTelemetryRenderPipelineState, 
-                       MTLTelemetrySamplerState, MTLTelemetryTexture, MTLToolsArgumentEncoder, 
-                       MTLToolsBlitCommandEncoder, MTLToolsBuffer, MTLToolsCommandBuffer, 
-                       MTLToolsCommandEncoder, MTLToolsCommandQueue, MTLToolsComputeCommandEncoder, 
-                       MTLToolsComputePipelineState, MTLToolsCounterSampleBuffer, 
-                       MTLToolsDepthStencilState, MTLToolsDevice, MTLToolsEvent, 
-                       MTLToolsFence, MTLToolsFunction, MTLToolsHeap, MTLToolsIndirectCommandBuffer, 
-                       MTLToolsIndirectRenderCommand, MTLToolsLibrary, MTLToolsMotionEstimationPipeline, 
+                       MTLTelemetrySamplerState, MTLTelemetryTexture, MTLToolsAccelerationStructure, 
+                       MTLToolsAccelerationStructureCommandEncoder, MTLToolsArgumentEncoder, 
+                       MTLToolsBinaryArchive, MTLToolsBlitCommandEncoder, MTLToolsBuffer, 
+                       MTLToolsCommandBuffer, MTLToolsCommandEncoder, MTLToolsCommandQueue, 
+                       MTLToolsComputeCommandEncoder, MTLToolsComputePipelineState, 
+                       MTLToolsCounterSampleBuffer, MTLToolsDepthStencilState, MTLToolsDevice, 
+                       MTLToolsDynamicLibrary, MTLToolsEvent, MTLToolsFence, MTLToolsFunction, 
+                       MTLToolsFunctionHandle, MTLToolsHeap, MTLToolsIndirectCommandBuffer, 
+                       MTLToolsIndirectComputeCommand, MTLToolsIndirectRenderCommand, 
+                       MTLToolsIntersectionFunctionTable, MTLToolsLibrary, MTLToolsMotionEstimationPipeline, 
                        MTLToolsObject, MTLToolsParallelRenderCommandEncoder, MTLToolsPipelineLibrary, 
-                       MTLToolsRenderCommandEncoder, MTLToolsRenderPipelineState, 
-                       MTLToolsResource, MTLToolsSamplerState, MTLToolsSharedEvent, 
-                       MTLToolsTexture, MTLToolsVideoCommandEncoder ]
+                       MTLToolsRasterizationRateMap, MTLToolsRenderCommandEncoder, 
+                       MTLToolsRenderPipelineState, MTLToolsResource, MTLToolsResourceStateCommandEncoder, 
+                       MTLToolsSamplerState, MTLToolsSharedEvent, MTLToolsTexture, 
+                       MTLToolsTextureLayout, MTLToolsVideoCommandEncoder, MTLToolsVisibleFunctionTable ]
     objc-ivars:      [ MTLDebugBuffer._common, MTLDebugCommandBuffer._currentEncoder, 
-                       MTLDebugHeap._historyLock, MTLDebugRenderCommandEncoder._attachmentInfo, 
-                       MTLDebugRenderCommandEncoder._dirtyBits, MTLDebugRenderCommandEncoder._openGLModeEnabled, 
-                       MTLDebugRenderCommandEncoder._vertexBuiltinArguments, MTLGPUDebugDevice.bufferHeap, 
+                       MTLDebugRenderCommandEncoder._attachmentInfo, MTLDebugRenderCommandEncoder._dirtyBits, 
+                       MTLDebugRenderCommandEncoder._openGLModeEnabled, MTLDebugRenderCommandEncoder._previousRenderPipelineStateWithWritesToImageBlock, 
+                       MTLDebugRenderCommandEncoder._resolvedRasterSampleCount, MTLDebugRenderCommandEncoder._vertexBuiltinArguments, 
+                       MTLGPUDebugDevice.boundsCheckOptions, MTLGPUDebugDevice.bufferHeap, 
+                       MTLGPUDebugDevice.constantBufferCache, MTLGPUDebugDevice.deviceOptions, 
+                       MTLGPUDebugDevice.globalBufferHeap, MTLGPUDebugDevice.globalICBBufferResidentList, 
                        MTLTelemetryCommandBuffer.anisoClippedCounts, MTLTelemetryCommandBuffer.attachmentCount, 
                        MTLTelemetryCommandBuffer.blitEncoderBlitDistribution, MTLTelemetryCommandBuffer.blitMap, 
                        MTLTelemetryCommandBuffer.cbBlits, MTLTelemetryCommandBuffer.cbDispatches, 
@@ -102,6 +145,6 @@ exports:
                        MTLTelemetryRenderPipelineState.hasAnisoConstantSampler, MTLTelemetryRenderPipelineState.uniqueID, 
                        MTLTelemetrySamplerState.isAniso, MTLTelemetryTexture.mipmapClipType, 
                        MTLToolsCommandBuffer._flags, MTLToolsDevice._deviceWrapper, 
+                       MTLToolsObject._baseObject, MTLToolsObject._device, MTLToolsObject._parent, 
                        MTLToolsResource._options ]
-    weak-def-symbols: [ __ZTI24UniqueMutexLockingPolicy, __ZTS24UniqueMutexLockingPolicy ]
 ...

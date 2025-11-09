@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 5D2FE3D5-F8A2-3B1E-88E1-6B71F3E7CC34' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           9C5E85C6-1625-37DE-B3CE-E45C9AA32B1D
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           2D3D5C52-F16B-3392-A803-AC76102ED82F
 install-name:    '/usr/lib/libodmodule.dylib'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CFArrayAppendServer, _ODModuleMsgKeyAccountName, _ODModuleMsgKeyAdditionalInfo, 
                        _ODModuleMsgKeyAuthInformationType, _ODModuleMsgKeyConnectionFlags, 
                        _ODModuleMsgKeyConnectionOptions, _ODModuleMsgKeyConnectionTimeout, 
@@ -216,7 +222,8 @@ exports:
                        _kODRecordTypeServices, _kODRecordTypeSharePoints, _kODRecordTypeUsers, 
                        _kODRecordTypeWebServer, _kODSessionLocalPath, _kODSessionProxyAddress, 
                        _kODSessionProxyPassword, _kODSessionProxyPort, _kODSessionProxyUsername, 
-                       _log_level_enabled, _od_cstr_from_cfstring, _od_cstr_from_cfstring_or_cfdata, 
+                       _kODVerifyPasswordOptionAdditionalACMData, _log_level_enabled, 
+                       _od_cstr_from_cfstring, _od_cstr_from_cfstring_or_cfdata, 
                        _od_object_queue, _od_object_rbtree, _od_predicate_create_ldapfilter, 
                        _od_release, _od_retain, _odarray_apply, _odarray_enumerate, 
                        _odarray_get_array, _odarray_get_data, _odarray_get_dictionary, 
@@ -244,15 +251,17 @@ exports:
                        _odproplist_get_bool, _odproplist_get_data, _odproplist_get_date, 
                        _odproplist_get_dictionary, _odproplist_get_int32, _odproplist_get_int64, 
                        _odproplist_get_pointer, _odproplist_get_string, _odproplist_read_file, 
-                       _odproplist_read_fileURL, _odproplist_set_cstring, _odproplist_set_int64, 
-                       _odproplist_write_file, _odproplist_write_fileURL, _odrequest_log_message, 
-                       _odrequest_respond_authentication_continuation, _odrequest_respond_customfunction, 
-                       _odrequest_respond_error, _odrequest_respond_policy, _odrequest_respond_query_result, 
+                       _odproplist_read_fileURL, _odproplist_set_bool, _odproplist_set_cstring, 
+                       _odproplist_set_int32, _odproplist_set_int64, _odproplist_write_file, 
+                       _odproplist_write_fileURL, _odrequest_log_message, _odrequest_respond_authentication_continuation, 
+                       _odrequest_respond_customfunction, _odrequest_respond_error, 
+                       _odrequest_respond_policy, _odrequest_respond_query_result, 
                        _odrequest_respond_query_start, _odrequest_respond_query_sync, 
                        _odrequest_respond_recordcopy, _odrequest_respond_recordcreate, 
-                       _odrequest_respond_success, _odset_enumerate, _odxobject_create_internal, 
-                       _odxobject_finalize, _osvtables, _xpc_array_append_cftype, 
-                       _xpc_dictionary_set_cftype, _xpctype_to_cftype ]
+                       _odrequest_respond_success, _odset_enumerate, _odstring_get_uuid, 
+                       _oduuid_create_string, _odxobject_create_internal, _odxobject_finalize, 
+                       _osvtables, _xpc_array_append_cftype, _xpc_dictionary_set_cftype, 
+                       _xpctype_to_cftype ]
     objc-classes:    [ OS_odx_connection, OS_odx_context, OS_odx_credential, OS_odx_module, 
                        OS_odx_moduleconfig, OS_odx_node, OS_odx_nodeconfig, OS_odx_object, 
                        OS_odx_request, OS_odx_response, OS_odx_session ]

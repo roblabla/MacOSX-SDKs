@@ -1,10 +1,12 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 8DE55F5E-D52D-383E-B6D0-7BB9A091B4EE' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           4048305C-D4B6-323C-8DE1-3CA63464139D
 install-name:    '/System/Library/Frameworks/QTKit.framework/Versions/A/QTKit'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos ]
     symbols:         [ _QTAddImageCodecQuality, _QTAddImageCodecType, _QTAlternates_AlternateTrack, 
                        _QTAlternates_FallbackTrack, _QTAlternates_LanguageCodeEncoding_ISO_639_2T, 
                        _QTAlternates_LanguageCodeEncoding_MacType_LangCode, _QTAlternates_LanguageCodeEncoding_RFC_4646, 

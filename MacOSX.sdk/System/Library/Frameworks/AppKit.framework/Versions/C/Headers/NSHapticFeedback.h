@@ -7,9 +7,10 @@
 
 #import <Foundation/NSObjCRuntime.h>
 #import <Foundation/NSObject.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 typedef NS_ENUM(NSInteger, NSHapticFeedbackPattern) {
     NSHapticFeedbackPatternGeneric = 0, // when none of the other options apply

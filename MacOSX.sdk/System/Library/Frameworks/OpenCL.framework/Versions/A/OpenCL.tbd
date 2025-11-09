@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: E555082E-CE37-35D9-BE66-96A6BEDA0800', 'x86_64: E555082E-CE37-35D9-BE66-96A6BEDA0800' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           C3E4E699-AFD2-3BEE-9D5B-B56023F7C6A6
+  - target:          x86_64-maccatalyst
+    value:           C3E4E699-AFD2-3BEE-9D5B-B56023F7C6A6
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           78CE21D7-AEE9-3AE2-B21A-69D13EE138EB
+  - target:          arm64e-maccatalyst
+    value:           78CE21D7-AEE9-3AE2-B21A-69D13EE138EB
 install-name:    '/System/Library/Frameworks/OpenCL.framework/Versions/A/OpenCL'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _clBuildProgram, _clCompileProgram, _clCreateBuffer, _clCreateCommandQueue, 
                        _clCreateCommandQueueWithPropertiesAPPLE, _clCreateContext, 
                        _clCreateContextAndCommandQueueAPPLE, _clCreateContextFromType, 

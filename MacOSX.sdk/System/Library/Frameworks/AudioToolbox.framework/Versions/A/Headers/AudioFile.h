@@ -1,4 +1,4 @@
-#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AudioFile.h>)
+#if (defined(__USE_PUBLIC_HEADERS__) && __USE_PUBLIC_HEADERS__) || (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AudioFile.h>)
 /*!
 	@file		AudioFile.h
 	@framework	AudioToolbox.framework
@@ -31,7 +31,7 @@ extern "C"
 typedef UInt32 AudioFileTypeID;
 
 /*!
-    @enum Audio File Types
+    Audio File Types
     @abstract   Constants for the built-in audio file types.
     @discussion These constants are used to indicate the type of file to be written, or as a hint to
 					what type of file to expect from data provided.
@@ -43,6 +43,10 @@ typedef UInt32 AudioFileTypeID;
 					Microsoft WAVE
     @constant   kAudioFileRF64Type
                     File Format specified in EBU Tech 3306
+    @constant   kAudioFileBW64Type
+                    File Format specified in ITU-R BS.2088
+    @constant   kAudioFileWave64Type
+                    Sony Pictures Digital Wave 64
     @constant   kAudioFileSoundDesigner2Type
 					Sound Designer II
     @constant   kAudioFileNextType
@@ -76,6 +80,8 @@ CF_ENUM(AudioFileTypeID) {
         kAudioFileAIFCType				= 'AIFC',
         kAudioFileWAVEType				= 'WAVE',
         kAudioFileRF64Type              = 'RF64',
+        kAudioFileBW64Type              = 'BW64',
+        kAudioFileWave64Type            = 'W64f',
         kAudioFileSoundDesigner2Type	= 'Sd2f',
         kAudioFileNextType				= 'NeXT',
         kAudioFileMP3Type				= 'MPG3',	// mpeg layer 3
@@ -95,7 +101,7 @@ CF_ENUM(AudioFileTypeID) {
 };
 
 /*!
-    @enum AudioFile error codes
+    AudioFile error codes
     @abstract   These are the error codes returned from the AudioFile API.
     @constant   kAudioFileUnspecifiedError 
 		An unspecified error has occurred.
@@ -196,7 +202,7 @@ typedef	struct OpaqueAudioFileID	*AudioFileID;
 typedef UInt32			AudioFilePropertyID;
 
 /*!
-    @enum		AudioFileLoopDirection
+    enum		AudioFileLoopDirection
     @abstract   These constants describe the playback direction of a looped segment of a file.
     @constant   kAudioFileLoopDirection_NoLooping
 					The segment is not looped.
@@ -240,9 +246,10 @@ typedef struct AudioFile_SMPTE_Time AudioFile_SMPTE_Time;
 
 
 /*!
-    @enum		AudioFileMarkerType
+    enum		AudioFileMarkerType
     @abstract   constants for types of markers within a file. Used in the mType field of AudioFileMarker.
-    @constant   kAudioFileMarkerType_Generic		A generic marker. See CAFFile.h for marker types specific to CAF files.
+    @constant   kAudioFileMarkerType_Generic
+    				A generic marker. See CAFFile.h for marker types specific to CAF files.
 */
 CF_ENUM(UInt32) {
 	kAudioFileMarkerType_Generic			= 0,
@@ -1125,8 +1132,11 @@ AudioFileRemoveUserData ( AudioFileID		inAudioFile,
 					Returns the bit rate for the audio data as a UInt32. For some formats this will be approximate.
 	@constant	kAudioFilePropertyID3Tag
 					A void * pointing to memory set up by the caller to contain a fully formatted ID3 tag (get/set v2.2, v2.3, or v2.4, v1 get only).
-					The ID3 tag is not manipulated in anyway either for read or write. 
+					The ID3 tag is not manipulated in any way either for read or write.
 					When setting, this property must be called before calling AudioFileWritePackets.
+	@constant	kAudioFilePropertyID3TagOffset
+					Returns the offset of a leading ID3v2 tag, if present, and otherwise the offset of a trailing ID3v1 tag, if present, as an SInt64. (get property only)
+					Note that for some file formats the offset of a leading ID3v2 tag when present may not be 0.
 	@constant	kAudioFilePropertySourceBitDepth
 					For encoded data this property returns the bit depth of the source as an SInt32, if known.
 					The bit depth is expressed as a negative number if the source was floating point, e.g. -32 for float, -64 for double.
@@ -1173,6 +1183,7 @@ CF_ENUM(AudioFilePropertyID)
 	kAudioFilePropertyEstimatedDuration		=	'edur',
 	kAudioFilePropertyBitRate				=	'brat',
 	kAudioFilePropertyID3Tag				=	'id3t',
+	kAudioFilePropertyID3TagOffset			=	'id3o',
 	kAudioFilePropertySourceBitDepth		=	'sbtd',
 	kAudioFilePropertyAlbumArtwork			=	'aart',
     kAudioFilePropertyAudioTrackCount       =   'atct',
@@ -1416,7 +1427,7 @@ struct FSRef;
     @param outNewFileRef	if successful, the FSRef of the newly created file.
     @param outAudioFile		if successful, an AudioFileID that can be used for subsequent AudioFile calls.
     @result					returns noErr if successful.
-	@deprecated				in Mac OS X 10.6, see AudioFileCreateWithURL
+	@deprecated				in macOS 10.6, see AudioFileCreateWithURL
 */
 extern OSStatus	
 AudioFileCreate (	const struct FSRef					*inParentRef, 
@@ -1440,7 +1451,7 @@ AudioFileCreate (	const struct FSRef					*inParentRef,
     @param outAudioFile		upon success, an AudioFileID that can be used for subsequent
 							AudioFile calls.
     @result					returns noErr if successful.
-	@deprecated				in Mac OS X 10.6, see AudioFileCreateWithURL
+	@deprecated				in macOS 10.6, see AudioFileCreateWithURL
 */
 extern OSStatus	
 AudioFileInitialize (	const struct FSRef					*inFileRef,
@@ -1462,7 +1473,7 @@ AudioFileInitialize (	const struct FSRef					*inFileRef,
     @param outAudioFile		upon success, an AudioFileID that can be used for subsequent
 							AudioFile calls.
     @result					returns noErr if successful.
-	@deprecated				in Mac OS X 10.6, see AudioFileOpenURL
+	@deprecated				in macOS 10.6, see AudioFileOpenURL
 */
 extern OSStatus	
 AudioFileOpen (	const struct FSRef		*inFileRef,

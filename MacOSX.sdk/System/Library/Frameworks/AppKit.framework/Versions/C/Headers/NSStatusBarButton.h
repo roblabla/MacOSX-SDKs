@@ -6,8 +6,9 @@
 */
 
 #import <AppKit/NSButton.h>
+#import <AppKit/AppKitDefines.h>
 
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 /*!
  * StatusBarButtons are the visual representation of NSStatusItems, and are primarily displayed on the right side of the menu bar.

@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVAsset.h>)
 /*
 	File:  AVAsset.h
 
@@ -159,7 +160,7 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
   @property		referenceRestrictions
   @abstract		Indicates the reference restrictions being used by the receiver.
   @discussion
-	For AVURLAsset, this property reflects the value passed in for AVURLAssetReferenceRestrictionsKey, if any. See AVURLAssetReferenceRestrictionsKey below for a full discussion of reference restrictions. The default value for this property is AVAssetReferenceRestrictionForbidNone.
+	For AVURLAsset, this property reflects the value passed in for AVURLAssetReferenceRestrictionsKey, if any. See AVURLAssetReferenceRestrictionsKey below for a full discussion of reference restrictions. The default value for this property is AVAssetReferenceRestrictionForbidLocalReferenceToRemote.
 */
 @property (nonatomic, readonly) AVAssetReferenceRestrictions referenceRestrictions API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
@@ -340,8 +341,6 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
 /*!
   @property		allMediaSelections
   @abstract		Provides an array of all permutations of AVMediaSelection for this asset.
-  @discussion
-	Becomes callable without blocking when the key @"availableMediaCharacteristicsWithMediaSelectionOptions" has been loaded.
 */
 @property (nonatomic, readonly) NSArray <AVMediaSelection *> *allMediaSelections API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
@@ -408,13 +407,9 @@ typedef NS_OPTIONS(NSUInteger, AVAssetReferenceRestrictions) {
 */
 @property (nonatomic, readonly, getter=isComposable) BOOL composable API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0));
 
-#if TARGET_OS_IPHONE
-
 /* indicates whether the receiver can be written to the saved photos album
 */
-@property (nonatomic, readonly, getter=isCompatibleWithSavedPhotosAlbum) BOOL compatibleWithSavedPhotosAlbum API_AVAILABLE(ios(5.0), tvos(9.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(macos);
-
-#endif	// TARGET_OS_IPHONE
+@property (nonatomic, readonly, getter=isCompatibleWithSavedPhotosAlbum) BOOL compatibleWithSavedPhotosAlbum API_AVAILABLE(ios(5.0), tvos(9.0)) API_UNAVAILABLE(macos, watchos);
 
 /*!
   @property		compatibleWithAirPlayVideo
@@ -610,6 +605,17 @@ AV_INIT_UNAVAILABLE
 */
 - (nullable AVAssetTrack *)compatibleTrackForCompositionTrack:(AVCompositionTrack *)compositionTrack;
 
+@end
+
+
+/*!
+ @category		AVURLAssetNSItemProvider
+ @discussion
+	AVURLAssets can be shared through any interface that supports passing NSItemProviders. Note that only AVURLAssets with file URLs can be added to NSItemProviders. Attempting to share assets with non file URLs will result in an error.
+ 
+	AVURLAssets can be retrieved from NSItemProviders by directly requesting an AVURLAsset through -[NSItemProvider loadObjectOfClass:completionHandler:]. Requesting data representations of AVURLAssets is not supported. File representations of AVURLAssets will be sent without copying the underlying media and the receiver will be extended readonly sandbox access to the sender's original URL until the AVURLAsset is deallocated. Use of NSFileCoordinator and NSFilePresenter is recommended for both the sender and receive to coordinate possible changes in the file's state once sharing has been completed.
+*/
+@interface AVURLAsset (AVURLAssetNSItemProvider) <NSItemProviderReading, NSItemProviderWriting>
 @end
 
 #pragma mark --- AVAsset change notifications ---
@@ -813,3 +819,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCore/AVAsset.h>
+#endif

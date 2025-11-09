@@ -15,10 +15,12 @@
 #import <PhotosUI/PHContentEditingController.h>
 #import <PhotosUI/PHEditingExtensionContext.h>
 
+
 #import <PhotosUI/PhotosUITypes.h>
 #import <PhotosUI/PHProjectExtensionContext.h>
 #import <PhotosUI/PHProjectExtensionController.h>
 #import <PhotosUI/PHProjectInfo.h>
 #import <PhotosUI/PHProjectTypeDescription.h>
+#import <PhotosUI/PHProjectTypeDescriptionDataSource.h>
 
-#endif
+#endif // PhotosUI_PhotosUI_h

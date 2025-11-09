@@ -23,79 +23,79 @@ NS_ASSUME_NONNULL_BEGIN
     @const NSHTTPCookieName
     @discussion Key for cookie name
 */
-FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieName;
+FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieName API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
     @const NSHTTPCookieValue
     @discussion Key for cookie value
 */
-FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieValue;
+FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieValue API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
     @const NSHTTPCookieOriginURL
     @discussion Key for cookie origin URL
 */
-FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieOriginURL;
+FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieOriginURL API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
     @const NSHTTPCookieVersion
     @discussion Key for cookie version
 */
-FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieVersion;
+FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieVersion API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
     @const NSHTTPCookieDomain
     @discussion Key for cookie domain
 */
-FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieDomain;
+FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieDomain API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
     @const NSHTTPCookiePath
     @discussion Key for cookie path
 */
-FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookiePath;
+FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookiePath API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
     @const NSHTTPCookieSecure
     @discussion Key for cookie secure flag
 */
-FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieSecure;
+FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieSecure API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
     @const NSHTTPCookieExpires
     @discussion Key for cookie expiration date
 */
-FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieExpires;
+FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieExpires API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
     @const NSHTTPCookieComment
     @discussion Key for cookie comment text
 */
-FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieComment;
+FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieComment API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
     @const NSHTTPCookieCommentURL
     @discussion Key for cookie comment URL
 */
-FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieCommentURL;
+FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieCommentURL API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
     @const NSHTTPCookieDiscard
     @discussion Key for cookie discard (session-only) flag
 */
-FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieDiscard;
+FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieDiscard API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
     @const NSHTTPCookieMaximumAge
     @discussion Key for cookie maximum age (an alternate way of specifying the expiration)
 */
-FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieMaximumAge;
+FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookieMaximumAge API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
     @const NSHTTPCookiePort
     @discussion Key for cookie ports
 */
-FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookiePort;
+FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookiePort API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
  @const NSHTTPCookieSameSitePolicy
@@ -126,6 +126,7 @@ FOUNDATION_EXPORT NSHTTPCookieStringPolicy const NSHTTPCookieSameSiteStrict API_
     attributes of a cookie.
 */
 
+API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 @interface NSHTTPCookie : NSObject
 {
 @private

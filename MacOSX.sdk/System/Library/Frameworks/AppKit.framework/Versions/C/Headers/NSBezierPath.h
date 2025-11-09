@@ -8,9 +8,10 @@
 #import <Foundation/NSObject.h>
 #import <Foundation/NSGeometry.h>
 #import <AppKit/NSFont.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSAffineTransform;
 
@@ -172,27 +173,27 @@ typedef NS_ENUM(NSUInteger, NSBezierPathElement) {
 
 /* Deprecated legacy line cap style constants. Prefer to use NSLineCapStyle values instead.
 */
-static const NSLineCapStyle NSButtLineCapStyle API_DEPRECATED_WITH_REPLACEMENT("NSLineCapStyleButt", macos(10.0,API_TO_BE_DEPRECATED)) = NSLineCapStyleButt;
-static const NSLineCapStyle NSRoundLineCapStyle API_DEPRECATED_WITH_REPLACEMENT("NSLineCapStyleRound", macos(10.0,API_TO_BE_DEPRECATED)) = NSLineCapStyleRound;
-static const NSLineCapStyle NSSquareLineCapStyle API_DEPRECATED_WITH_REPLACEMENT("NSLineCapStyleSquare", macos(10.0,API_TO_BE_DEPRECATED)) = NSLineCapStyleSquare;
+static const NSLineCapStyle NSButtLineCapStyle API_DEPRECATED_WITH_REPLACEMENT("NSLineCapStyleButt", macos(10.0, 11.0)) = NSLineCapStyleButt;
+static const NSLineCapStyle NSRoundLineCapStyle API_DEPRECATED_WITH_REPLACEMENT("NSLineCapStyleRound", macos(10.0, 11.0)) = NSLineCapStyleRound;
+static const NSLineCapStyle NSSquareLineCapStyle API_DEPRECATED_WITH_REPLACEMENT("NSLineCapStyleSquare", macos(10.0, 11.0)) = NSLineCapStyleSquare;
 
 /* Deprecated legacy line join style constants. Prefer to use NSLineJoinStyle values instead.
 */
-static const NSLineJoinStyle NSMiterLineJoinStyle API_DEPRECATED_WITH_REPLACEMENT("NSLineJoinStyleMiter", macos(10.0,API_TO_BE_DEPRECATED)) = NSLineJoinStyleMiter;
-static const NSLineJoinStyle NSRoundLineJoinStyle API_DEPRECATED_WITH_REPLACEMENT("NSLineJoinStyleRound", macos(10.0,API_TO_BE_DEPRECATED)) = NSLineJoinStyleRound;
-static const NSLineJoinStyle NSBevelLineJoinStyle API_DEPRECATED_WITH_REPLACEMENT("NSLineJoinStyleBevel", macos(10.0,API_TO_BE_DEPRECATED)) = NSLineJoinStyleBevel;
+static const NSLineJoinStyle NSMiterLineJoinStyle API_DEPRECATED_WITH_REPLACEMENT("NSLineJoinStyleMiter", macos(10.0, 11.0)) = NSLineJoinStyleMiter;
+static const NSLineJoinStyle NSRoundLineJoinStyle API_DEPRECATED_WITH_REPLACEMENT("NSLineJoinStyleRound", macos(10.0, 11.0)) = NSLineJoinStyleRound;
+static const NSLineJoinStyle NSBevelLineJoinStyle API_DEPRECATED_WITH_REPLACEMENT("NSLineJoinStyleBevel", macos(10.0, 11.0)) = NSLineJoinStyleBevel;
 
 /* Deprecated legacy winding rule constants. Prefer to use NSWindingRule values instead.
 */
-static const NSWindingRule NSNonZeroWindingRule API_DEPRECATED_WITH_REPLACEMENT("NSWindingRuleNonZero", macos(10.0,API_TO_BE_DEPRECATED)) = NSWindingRuleNonZero;
-static const NSWindingRule NSEvenOddWindingRule API_DEPRECATED_WITH_REPLACEMENT("NSWindingRuleEvenOdd", macos(10.0,API_TO_BE_DEPRECATED)) = NSWindingRuleEvenOdd;
+static const NSWindingRule NSNonZeroWindingRule API_DEPRECATED_WITH_REPLACEMENT("NSWindingRuleNonZero", macos(10.0, 11.0)) = NSWindingRuleNonZero;
+static const NSWindingRule NSEvenOddWindingRule API_DEPRECATED_WITH_REPLACEMENT("NSWindingRuleEvenOdd", macos(10.0, 11.0)) = NSWindingRuleEvenOdd;
 
 /* Deprecated legacy Bezier path element constants. Prefer to use NSBezierPathElement values instead.
 */
-static const NSBezierPathElement NSMoveToBezierPathElement API_DEPRECATED_WITH_REPLACEMENT("NSBezierPathElementMoveTo", macos(10.0,API_TO_BE_DEPRECATED)) = NSBezierPathElementMoveTo;
-static const NSBezierPathElement NSLineToBezierPathElement API_DEPRECATED_WITH_REPLACEMENT("NSBezierPathElementLineTo", macos(10.0,API_TO_BE_DEPRECATED)) = NSBezierPathElementLineTo;
-static const NSBezierPathElement NSCurveToBezierPathElement API_DEPRECATED_WITH_REPLACEMENT("NSBezierPathElementCurveTo", macos(10.0,API_TO_BE_DEPRECATED)) = NSBezierPathElementCurveTo;
-static const NSBezierPathElement NSClosePathBezierPathElement API_DEPRECATED_WITH_REPLACEMENT("NSBezierPathElementClosePath", macos(10.0,API_TO_BE_DEPRECATED)) = NSBezierPathElementClosePath;
+static const NSBezierPathElement NSMoveToBezierPathElement API_DEPRECATED_WITH_REPLACEMENT("NSBezierPathElementMoveTo", macos(10.0, 11.0)) = NSBezierPathElementMoveTo;
+static const NSBezierPathElement NSLineToBezierPathElement API_DEPRECATED_WITH_REPLACEMENT("NSBezierPathElementLineTo", macos(10.0, 11.0)) = NSBezierPathElementLineTo;
+static const NSBezierPathElement NSCurveToBezierPathElement API_DEPRECATED_WITH_REPLACEMENT("NSBezierPathElementCurveTo", macos(10.0, 11.0)) = NSBezierPathElementCurveTo;
+static const NSBezierPathElement NSClosePathBezierPathElement API_DEPRECATED_WITH_REPLACEMENT("NSBezierPathElementClosePath", macos(10.0, 11.0)) = NSBezierPathElementClosePath;
 
 API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

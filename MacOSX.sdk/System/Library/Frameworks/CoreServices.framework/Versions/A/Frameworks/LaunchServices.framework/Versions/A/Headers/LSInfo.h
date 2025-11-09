@@ -55,7 +55,7 @@ CF_ENUM(OSStatus) {
   kLSAttributeNotFoundErr       = -10662, /* An item attribute value could not be found with the specified name*/
   kLSAttributeNotSettableErr    = -10663, /* The attribute is not settable*/
   kLSIncompatibleApplicationVersionErr = -10664, /* The app is incompatible with the current OS*/
-  kLSNoRosettaEnvironmentErr    = -10665, /* The Rosetta environment was required not available*/
+  kLSNoRosettaEnvironmentErr    = -10665, /* PowerPC apps are no longer supported */
   kLSGarbageCollectionUnsupportedErr = -10666, /* Objective-C garbage collection is no longer supported*/
   kLSUnknownErr                 = -10810, /* Unexpected internal error*/
   kLSNotAnApplicationErr        = -10811, /* Item needs to be an application, but is not*/

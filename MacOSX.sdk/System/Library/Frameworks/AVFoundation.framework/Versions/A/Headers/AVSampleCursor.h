@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVSampleCursor.h>)
 /*
 	File:  AVSampleCursor.h
 
@@ -217,7 +218,7 @@ typedef struct {
  				the number of steps back you have taken.  This implies that if the current sample (before this walk) is independently decodable, with an
  				audioSampleRefreshCount of zero, no walk is required.
 */
-@property (nonatomic, readonly) AVSampleCursorAudioDependencyInfo currentSampleAudioDependencyInfo;
+@property (nonatomic, readonly) AVSampleCursorAudioDependencyInfo currentSampleAudioDependencyInfo API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos);
 
 /*!
 	@property		samplesRequiredForDecoderRefresh
@@ -316,3 +317,7 @@ NS_ASSUME_NONNULL_END
 
 #endif // !TARGET_OS_IPHONE
 
+
+#else
+#import <AVFCore/AVSampleCursor.h>
+#endif

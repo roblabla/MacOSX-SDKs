@@ -1,12 +1,26 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: DFB78276-4C8B-309A-ADFE-7B51C9348452', 'x86_64: DFB78276-4C8B-309A-ADFE-7B51C9348452' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           519D0981-BCB3-3C74-ADCB-C3BF7638BDEA
+  - target:          x86_64-maccatalyst
+    value:           519D0981-BCB3-3C74-ADCB-C3BF7638BDEA
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           6BC08F3E-E761-3A3C-98B6-20C9BF1329D5
+  - target:          arm64e-maccatalyst
+    value:           6BC08F3E-E761-3A3C-98B6-20C9BF1329D5
 install-name:    '/System/Library/PrivateFrameworks/MessageSecurity.framework/Versions/A/MessageSecurity'
 current-version: 0
 compatibility-version: 0
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _MSCMSAttributeTypeAppleHashAgility, _MSCMSAttributeTypeCountersignature, 
                        _MSCMSAttributeTypeSigningTime, _MSCMSContentTypeAuthData, 
                        _MSCMSContentTypeAuthEnvelopedData, _MSCMSContentTypeData, 

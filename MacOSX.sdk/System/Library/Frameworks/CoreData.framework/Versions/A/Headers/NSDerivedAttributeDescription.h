@@ -1,7 +1,7 @@
 /*
     NSDerivedAttributeDescription.h
     Core Data
-    Copyright (c) 2018-2019, Apple Inc.
+    Copyright (c) 2018-2020, Apple Inc.
     All rights reserved.
 */
 
@@ -21,8 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
  * creating a 'relationshipCount' attribute reflecting the number of objects in
  a relationship and so avoid having to do a join during fetching
  
- IMPORTANT: Derived attributes will be recomputed during save, so unsaved changes
- will not be reflected in a managed object's property until after a save+refresh. */
+ IMPORTANT: Derived attributes will be recomputed during save, recomputed values will not be reflected in a managed object's property until after a save.
+ 
+ NOTE: Prior to macOS 10.16, iOS 14.0, tvOS 14.0, and watchOS 7.0 a refresh of the object is required after a save to reflect recomputed values
+ */
 
 API_AVAILABLE(macosx(10.15),ios(13.0),tvos(13.0),watchos(6.0))
 @interface NSDerivedAttributeDescription : NSAttributeDescription

@@ -18,6 +18,7 @@
  * @APPLE_APACHE_LICENSE_HEADER_END@
  */
 
+
 #ifndef __OS_OBJECT__
 #define __OS_OBJECT__
 
@@ -199,4 +200,5 @@ os_release(void *object);
 
 __END_DECLS
 
-#endif
+#endif /* OS_OBJECT file guard */
+

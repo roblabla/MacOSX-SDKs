@@ -16,6 +16,12 @@
 #include <IOBluetooth/Bluetooth.h>
 #include <ICADevices/ICADevice.h>
 
+#ifndef __AVAILABILITYMACROS__
+#include <AvailabilityMacros.h>
+#endif
+
+API_UNAVAILABLE_BEGIN(ios)
+
 //------------------------------------------------------------------------------------------------------------------------------
 
 #ifdef __cplusplus
@@ -195,6 +201,9 @@ typedef CALLBACK_API_C(ICAError, __ICD_ScannerSetPropertyData)
 typedef CALLBACK_API_C(ICAError, __ICD_ScannerReadFileData)
                                     (const ScannerObjectInfo* objectInfo, UInt32 dataType, Ptr buffer, UInt32 offset, UInt32* length);
 
+typedef CALLBACK_API_C(ICAError, __ICD_ScannerReadFileData64)
+                                    (const ScannerObjectInfo* objectInfo, UInt32 dataType, Ptr buffer, UInt64 offset, UInt64* length);
+
 typedef CALLBACK_API_C(ICAError, __ICD_ScannerWriteFileData)
                                     (const ScannerObjectInfo* parentInfo, const char* filename, UInt32 dataType, Ptr buffer, UInt32 offset, UInt32* length);
 
@@ -328,4 +337,4 @@ ICAError ICDScannerDisconnectTCPIPDevice(CFDictionaryRef params);
 }
 #endif
 
-//------------------------------------------------------------------------------------------------------------------------------
+API_UNAVAILABLE_END

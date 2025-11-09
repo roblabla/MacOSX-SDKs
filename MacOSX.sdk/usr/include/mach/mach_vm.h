@@ -130,7 +130,7 @@ extern
 #endif	/* mig_external */
 kern_return_t mach_vm_read
 (
-	vm_map_t target_task,
+	vm_map_read_t target_task,
 	mach_vm_address_t address,
 	mach_vm_size_t size,
 	vm_offset_t *data,
@@ -145,7 +145,7 @@ extern
 #endif	/* mig_external */
 kern_return_t mach_vm_read_list
 (
-	vm_map_t target_task,
+	vm_map_read_t target_task,
 	mach_vm_read_entry_t data_list,
 	natural_t count
 );
@@ -186,7 +186,7 @@ extern
 #endif	/* mig_external */
 kern_return_t mach_vm_read_overwrite
 (
-	vm_map_t target_task,
+	vm_map_read_t target_task,
 	mach_vm_address_t address,
 	mach_vm_size_t size,
 	mach_vm_address_t data,
@@ -286,7 +286,7 @@ extern
 #endif	/* mig_external */
 kern_return_t mach_vm_page_query
 (
-	vm_map_t target_map,
+	vm_map_read_t target_map,
 	mach_vm_offset_t offset,
 	integer_t *disposition,
 	integer_t *ref_count
@@ -300,7 +300,7 @@ extern
 #endif	/* mig_external */
 kern_return_t mach_vm_region_recurse
 (
-	vm_map_t target_task,
+	vm_map_read_t target_task,
 	mach_vm_address_t *address,
 	mach_vm_size_t *size,
 	natural_t *nesting_depth,
@@ -316,7 +316,7 @@ extern
 #endif	/* mig_external */
 kern_return_t mach_vm_region
 (
-	vm_map_t target_task,
+	vm_map_read_t target_task,
 	mach_vm_address_t *address,
 	mach_vm_size_t *size,
 	vm_region_flavor_t flavor,
@@ -363,7 +363,7 @@ extern
 #endif	/* mig_external */
 kern_return_t mach_vm_page_info
 (
-	vm_map_t target_task,
+	vm_map_read_t target_task,
 	mach_vm_address_t address,
 	vm_page_info_flavor_t flavor,
 	vm_page_info_t info,
@@ -378,7 +378,7 @@ extern
 #endif	/* mig_external */
 kern_return_t mach_vm_page_range_query
 (
-	vm_map_t target_map,
+	vm_map_read_t target_map,
 	mach_vm_offset_t address,
 	mach_vm_size_t size,
 	mach_vm_address_t dispositions,

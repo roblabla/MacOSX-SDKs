@@ -1,11 +1,25 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 7676C46F-D42E-3D4A-AF7D-3A446AD46726', 'x86_64: 7676C46F-D42E-3D4A-AF7D-3A446AD46726' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           7F637E00-ECBE-368F-AC33-4952BDF46EE4
+  - target:          x86_64-maccatalyst
+    value:           7F637E00-ECBE-368F-AC33-4952BDF46EE4
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           8195C58F-15AC-3962-A25F-502DC4EC7E75
+  - target:          arm64e-maccatalyst
+    value:           8195C58F-15AC-3962-A25F-502DC4EC7E75
 install-name:    '/System/Library/PrivateFrameworks/CallHistory.framework/Versions/A/CallHistory'
 current-version: 2
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CHCallerIdAvailabilityAsString, _DeserializeTransactions, 
                        _HandleInteractionsForDeserializedTransactions, _createBackgroundTaskAssertion, 
                        _createDirectoryAtPath, _createLogDirectoryAtPath, _dumpLogs, 
@@ -28,13 +42,14 @@ exports:
                        _kCHCallTypeFaceTime, _kCHCallTypeFaceTimeAudio, _kCHCallTypeFaceTimeVideo, 
                        _kCHCallTypeNormal, _kCHCallTypeTelephony, _kCHCallTypeUnknown, 
                        _kCHCallTypeVOIP, _kCHCallTypeVoicemail, _kCHCoalescingStrategyCollapseIfEqual, 
-                       _kCHCoalescingStrategyRecents, _kCHLimitCallKindsKey, _kCHLimitCallTypeKey, 
-                       _kCHLimitEndDateKey, _kCHLimitMediaTypeKey, _kCHLimitServiceProviderKey, 
-                       _kCHLimitStartDateKey, _kCHLimitTTYTypeKey, _kCHServiceProviderFaceTime, 
-                       _kCHServiceProviderTelephony, _kCHTimerIncomingKey, _kCHTimerLifetimeKey, 
-                       _kCHTimerOutgoingKey, _kCallDBDirName, _kCallDBMLogDomain, 
-                       _kCallDBPropertiesEntity, _kCallDBSharedUtilDomain, _kCallHistoryDBName, 
-                       _kCallHistoryDataStoreExtension, _kCallHistoryDatabaseChangedNotification, 
+                       _kCHCoalescingStrategyRecents, _kCHConfigurationCloudKitEnabled, 
+                       _kCHLimitCallKindsKey, _kCHLimitCallTypeKey, _kCHLimitEndDateKey, 
+                       _kCHLimitMediaTypeKey, _kCHLimitServiceProviderKey, _kCHLimitStartDateKey, 
+                       _kCHLimitTTYTypeKey, _kCHServiceProviderFaceTime, _kCHServiceProviderTelephony, 
+                       _kCHTimerIncomingKey, _kCHTimerLifetimeKey, _kCHTimerOutgoingKey, 
+                       _kCallDBDirName, _kCallDBMLogDomain, _kCallDBPropertiesEntity, 
+                       _kCallDBSharedUtilDomain, _kCallHistoryDBName, _kCallHistoryDataStoreExtension, 
+                       _kCallHistoryDatabaseChangedNotification, _kCallHistoryDatabaseChangedTokenKey, 
                        _kCallHistoryDatabaseInitializedKey, _kCallHistoryDatabasePluginUpdateNotification, 
                        _kCallHistoryDatabaseRemoteUpdateReadNotification, _kCallHistoryObjectModelResourceExtension, 
                        _kCallHistoryTempDBName, _kCallHistoryTimersChangedNotification, 
@@ -45,9 +60,10 @@ exports:
                        _kShowsFaceTimeVideoCallsKey, _kShowsTelephonyCallsKey, _kSyncHelperServiceIdentifier, 
                        _kTmpDBLocationKey, _maybeAppendStringWithSeparator, _maybeLogVersionInfo, 
                        _notifyClientsOfEvent ]
-    objc-classes:    [ CHHandle, CHLogger, CHManager, CHMigrator, CHPhoneNumber, 
-                       CHPluginHelper, CHRecentCall, CHSynchronizable, CHSynchronizedLoggable, 
-                       CHTransaction, CallDBManager, CallDBManagerServer, CallHistoryDBClientHandle, 
+    objc-classes:    [ CHConfiguration, CHConfigurationAggregator, CHHandle, CHLogger, 
+                       CHManager, CHMigrator, CHPhoneNumber, CHPluginHelper, CHRecentCall, 
+                       CHSynchronizable, CHSynchronizedLoggable, CHTransaction, CHUserConfiguration, 
+                       CallDBManager, CallDBManagerServer, CallHistoryDBClientHandle, 
                        CallHistoryDBHandle, DBManager, DBMigrationResult, DeserializedTransaction, 
                        GateKeeper ]
     objc-ivars:      [ CHLogger._logHandle, CallHistoryDBClientHandle._observerCallRecordRef, 

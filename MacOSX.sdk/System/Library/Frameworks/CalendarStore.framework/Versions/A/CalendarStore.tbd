@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 9375E52E-D837-373F-AB52-5562D57E3159' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           83A9E5C5-39ED-3823-99EA-1970948F0866
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           0FEFE6BA-82F8-32C9-BDC0-CF0B8E7E7585
 install-name:    '/System/Library/Frameworks/CalendarStore.framework/Versions/A/CalendarStore'
-current-version: 2023
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 2033
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _CalAlarmActionDisplay, _CalAlarmActionEmail, _CalAlarmActionProcedure, 
                        _CalAlarmActionSound, _CalAttendeeStatusAccepted, _CalAttendeeStatusDeclined, 
                        _CalAttendeeStatusNeedsAction, _CalAttendeeStatusTentative, 

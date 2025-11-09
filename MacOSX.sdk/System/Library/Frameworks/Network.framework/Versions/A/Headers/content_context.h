@@ -79,7 +79,7 @@ nw_content_context_get_identifier(nw_content_context_t context);
 /*!
  * @function nw_content_context_get_is_final
  * @discussion Check if this is the final context for a connection. When receiving,
- *		once this context is complete, the connection is "read closed" and will not
+ *		once a final context is complete, the connection is "read closed" and will not
  *		receive more content. See nw_content_context_set_is_final() for a description
  *		of how to set is_final for sending contexts.
  * @param context The context object

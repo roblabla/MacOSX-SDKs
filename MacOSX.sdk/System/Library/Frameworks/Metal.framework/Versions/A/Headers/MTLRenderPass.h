@@ -10,6 +10,7 @@
 
 
 
+@protocol MTLRasterizationRateMap;
 
 #import <Metal/MTLTypes.h>
 
@@ -219,6 +220,65 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 
 @end
 
+MTL_EXPORT API_AVAILABLE(macos(11.0), ios(14.0))
+@interface MTLRenderPassSampleBufferAttachmentDescriptor : NSObject<NSCopying>
+/*!
+@property sampleBuffer
+@abstract The sample buffer to store samples for the render-pass defined samples.
+If sampleBuffer is non-nil, the sample indices will be used to store samples into
+the sample buffer.  If no sample buffer is provided, no samples will be taken.
+If any of the sample indices are specified as MTLCounterDontSample, no sample
+will be taken for that action.
+*/
+@property (nullable, nonatomic, retain) id<MTLCounterSampleBuffer> sampleBuffer API_AVAILABLE(macos(11.0), ios(14.0));
+
+/*!
+ @property startOfVertexSampleIndex
+ @abstract The sample index to use to store the sample taken at the start of
+ vertex processing.  Setting the value to MTLCounterDontSample will cause
+ this sample to be omitted.
+ @discussion On devices where MTLCounterSamplingPointAtStageBoundary is unsupported,
+ this sample index is invalid and must be set to MTLCounterDontSample or creation of a render pass will fail.
+ */
+@property (nonatomic) NSUInteger startOfVertexSampleIndex API_AVAILABLE(macos(11.0), ios(14.0));
+/*!
+ @property endOfVertexSampleIndex
+ @abstract The sample index to use to store the sample taken at the end of
+ vertex processing.  Setting the value to MTLCounterDontSample will cause
+ this sample to be omitted.
+ @discussion On devices where MTLCounterSamplingPointAtStageBoundary is unsupported,
+ this sample index is invalid and must be set to MTLCounterDontSample or creation of a render pass will fail.
+ */
+@property (nonatomic) NSUInteger endOfVertexSampleIndex API_AVAILABLE(macos(11.0), ios(14.0));
+/*!
+ @property startOfFragmentSampleIndex
+ @abstract The sample index to use to store the sample taken at the start of
+ fragment processing.  Setting the value to MTLCounterDontSample will cause
+ this sample to be omitted.
+ @discussion On devices where MTLCounterSamplingPointAtStageBoundary is unsupported,
+ this sample index is invalid and must be set to MTLCounterDontSample or creation of a render pass will fail.
+ */
+@property (nonatomic) NSUInteger startOfFragmentSampleIndex API_AVAILABLE(macos(11.0), ios(14.0));
+/*!
+ @property endOfFragmentSampleIndex
+ @abstract The sample index to use to store the sample taken at the end of
+ fragment processing.  Setting the value to MTLCounterDontSample will cause
+ this sample to be omitted.
+ @discussion On devices where MTLCounterSamplingPointAtStageBoundary is unsupported,
+ this sample index is invalid and must be set to MTLCounterDontSample or creation of a render pass will fail.
+ */
+@property (nonatomic) NSUInteger endOfFragmentSampleIndex API_AVAILABLE(macos(11.0), ios(14.0));
+@end
+
+MTL_EXPORT API_AVAILABLE(macos(11.0), ios(14.0))
+@interface MTLRenderPassSampleBufferAttachmentDescriptorArray : NSObject
+/* Individual attachment state access */
+- (MTLRenderPassSampleBufferAttachmentDescriptor *)objectAtIndexedSubscript:(NSUInteger)attachmentIndex;
+
+/* This always uses 'copy' semantics.  It is safe to set the attachment state at any legal index to nil, which resets that attachment descriptor state to default vaules. */
+- (void)setObject:(nullable MTLRenderPassSampleBufferAttachmentDescriptor *)attachment atIndexedSubscript:(NSUInteger)attachmentIndex;
+
+@end
 
 /*!
  @class MTLRenderPassDescriptor
@@ -252,7 +312,31 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @property (nonatomic) NSUInteger renderTargetArrayLength API_AVAILABLE(macos(10.11), ios(12.0)) API_UNAVAILABLE(tvos);
 
 
+/*!
+ @property imageblockSampleLength:
+ @abstract The per sample size in bytes of the largest explicit imageblock layout in the renderPass.
+ */
+@property (nonatomic) NSUInteger imageblockSampleLength API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
 
+/*!
+ @property threadgroupMemoryLength:
+ @abstract The per tile size in bytes of the persistent threadgroup memory allocation.
+ */
+@property (nonatomic) NSUInteger threadgroupMemoryLength API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+
+/*!
+ @property tileWidth:
+ @abstract The width in pixels of the tile.
+ @discssion Defaults to 0. Zero means Metal chooses a width that fits within the local memory.
+ */
+@property (nonatomic) NSUInteger tileWidth API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+
+/*!
+ @property tileHeight:
+ @abstract The height in pixels of the tile.
+ @discssion Defaults to 0. Zero means Metal chooses a height that fits within the local memory.
+ */
+@property (nonatomic) NSUInteger tileHeight API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @property defaultRasterSampleCount:
@@ -292,7 +376,18 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 - (NSUInteger)getSamplePositions:(MTLSamplePosition * _Nullable)positions count:(NSUInteger)count API_AVAILABLE(macos(10.13), ios(11.0));
 
 
+/*!
+ @property rasterizationRateMap
+ @abstract The variable rasterization rate map to use when rendering this pass, or nil to not use variable rasterization rate.
+ @discussion The default value is nil. Enabling variable rasterization rate allows for decreasing the rasterization rate in unimportant regions of screen space.
+ */
+@property (nullable, nonatomic, strong) id<MTLRasterizationRateMap> rasterizationRateMap API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4));
 
+/*!
+ @property sampleBufferAttachments
+ @abstract An array of sample buffers and associated sample indices.
+ */
+@property (readonly) MTLRenderPassSampleBufferAttachmentDescriptorArray * sampleBufferAttachments API_AVAILABLE(macos(11.0), ios(14.0));
 
 @end
 

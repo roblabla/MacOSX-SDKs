@@ -66,14 +66,17 @@
 #ifndef _KERN_SCHED_PRIM_H_
 #define _KERN_SCHED_PRIM_H_
 
+#include <sys/cdefs.h>
 #include <mach/boolean.h>
 #include <mach/machine/vm_types.h>
 #include <mach/kern_return.h>
 #include <kern/clock.h>
 #include <kern/kern_types.h>
+#include <kern/percpu.h>
 #include <kern/thread.h>
-#include <sys/cdefs.h>
 #include <kern/block_hint.h>
+
+extern int              thread_get_current_cpuid(void);
 
 
 __BEGIN_DECLS

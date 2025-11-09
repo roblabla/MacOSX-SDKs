@@ -1,12 +1,18 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 0A95B948-DE59-3D09-BDC2-AD1704EB11AA' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           527723DA-D4A7-3598-B6F6-A67D56E5BB7C
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           3808DD29-AE69-3822-A17F-58FA0D08F6CB
 install-name:    '/System/Library/PrivateFrameworks/WebInspector.framework/Versions/A/WebInspector'
-current-version: 608.2.6
-exports:         
-  - archs:           [ x86_64 ]
-    symbols:         [ _RWIAutomationAvailabilityFromString, _RWINSStringFromAutomationAvailability, 
+current-version: 610.2.11
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _RWIAutomationAvailabilityFromString, _RWIErrorDomain, _RWINSStringFromAutomationAvailability, 
                        _RWIProtocolInspectorFrontendConnectedNotification, _RWIProtocolInspectorFrontendDisconnectedNotification, 
                        __Z24RWIStringFromDeviceClass14RWIDeviceClass, __Z27RWIStringFromDebuggableType17RWIDebuggableType, 
                        __Z28RWIStringFromPairingProgress18RWIPairingProgress, __ZN9Inspector17toJSONDoubleArrayEP7NSArray, 
@@ -19,17 +25,19 @@ exports:
                        __ZN9Inspector18toObjCIntegerArrayERKN3WTF8JSONImpl5ArrayE, 
                        __ZN9Inspector22toJSONStringArrayArrayEP7NSArray ]
     objc-classes:    [ RWIApplication, RWIChannel, RWIDebuggable, RWIDevice, RWIDrivable, 
-                       RWIDriver, RWIDriverInterface, RWIInspector, RWIMachine, RWIManager, 
+                       RWIDriver, RWIDriverConfiguration, RWIDriverInterface, RWIDriverState, 
+                       RWIInspector, RWIInspectorConfiguration, RWIMachine, RWIManager, 
                        RWINotificationWaiter, RWIProtocolCSSComputedStyleProperty, 
-                       RWIProtocolCSSDomainEventDispatcher, RWIProtocolCSSInheritedStyleEntry, 
-                       RWIProtocolCSSMedia, RWIProtocolCSSProperty, RWIProtocolCSSPropertyInfo, 
-                       RWIProtocolCSSPseudoIdMatches, RWIProtocolCSSRule, RWIProtocolCSSRuleId, 
-                       RWIProtocolCSSRuleMatch, RWIProtocolCSSSelector, RWIProtocolCSSSelectorList, 
-                       RWIProtocolCSSShorthandEntry, RWIProtocolCSSSourceRange, RWIProtocolCSSStyle, 
-                       RWIProtocolCSSStyleAttribute, RWIProtocolCSSStyleId, RWIProtocolCSSStyleSheetBody, 
-                       RWIProtocolCSSStyleSheetHeader, RWIProtocolConfiguration, 
-                       RWIProtocolConsoleCallFrame, RWIProtocolConsoleChannel, RWIProtocolConsoleDomainEventDispatcher, 
-                       RWIProtocolConsoleMessage, RWIProtocolConsoleStackTrace, RWIProtocolDOMAccessibilityProperties, 
+                       RWIProtocolCSSDomainEventDispatcher, RWIProtocolCSSGrouping, 
+                       RWIProtocolCSSInheritedStyleEntry, RWIProtocolCSSProperty, 
+                       RWIProtocolCSSPropertyInfo, RWIProtocolCSSPseudoIdMatches, 
+                       RWIProtocolCSSRule, RWIProtocolCSSRuleId, RWIProtocolCSSRuleMatch, 
+                       RWIProtocolCSSSelector, RWIProtocolCSSSelectorList, RWIProtocolCSSShorthandEntry, 
+                       RWIProtocolCSSSourceRange, RWIProtocolCSSStyle, RWIProtocolCSSStyleAttribute, 
+                       RWIProtocolCSSStyleId, RWIProtocolCSSStyleSheetBody, RWIProtocolCSSStyleSheetHeader, 
+                       RWIProtocolConfiguration, RWIProtocolConsoleCallFrame, RWIProtocolConsoleChannel, 
+                       RWIProtocolConsoleDomainEventDispatcher, RWIProtocolConsoleMessage, 
+                       RWIProtocolConsoleStackTrace, RWIProtocolDOMAccessibilityProperties, 
                        RWIProtocolDOMDataBinding, RWIProtocolDOMDomainEventDispatcher, 
                        RWIProtocolDOMEventListener, RWIProtocolDOMHighlightConfig, 
                        RWIProtocolDOMNode, RWIProtocolDOMRGBAColor, RWIProtocolDOMStorageDomainEventDispatcher, 
@@ -57,8 +65,4 @@ exports:
                        RWIProtocolRuntimeTypeLocation, RWIProtocolRuntimeTypeSet, 
                        RWIProtocolSecurity, RWIProtocolSecurityCertificate, RWIProtocolSecurityConnection, 
                        RWIRelay, RWIRelayDelegateMac, RWISimulator, RWITarget ]
-    objc-ivars:      [ RWITarget._applications, RWITarget._buildVersion, RWITarget._connection, 
-                       RWITarget._delegate, RWITarget._drivers, RWITarget._manager, 
-                       RWITarget._name, RWITarget._productVersion, RWITarget._readyState, 
-                       RWITarget._supportsRemoteWebInspector, RWITarget._udid ]
 ...

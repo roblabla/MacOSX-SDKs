@@ -1,12 +1,26 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 26E8F246-E4EA-32FB-A6DC-42BD82CCA9F7', 'x86_64: 26E8F246-E4EA-32FB-A6DC-42BD82CCA9F7' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           C422744E-6364-37BE-91B9-5DB5CB2F78B4
+  - target:          x86_64-maccatalyst
+    value:           C422744E-6364-37BE-91B9-5DB5CB2F78B4
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           6B354D7A-512C-3105-9AB2-0A8C67E67A5B
+  - target:          arm64e-maccatalyst
+    value:           6B354D7A-512C-3105-9AB2-0A8C67E67A5B
 install-name:    '/usr/lib/libxml2.2.dylib'
 current-version: 10.9
 compatibility-version: 10
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _UTF8ToHtml, _UTF8Toisolat1, ___docbDefaultSAXHandler, ___htmlDefaultSAXHandler, 
                        ___oldXMLWDcompatibility, ___xmlBufferAllocScheme, ___xmlDefaultBufferSize, 
                        ___xmlDefaultSAXHandler, ___xmlDefaultSAXLocator, ___xmlDeregisterNodeDefaultValue, 

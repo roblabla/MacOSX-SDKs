@@ -13,3 +13,15 @@ Classes:
 - Name: PKInkingTool
   SwiftName: PKInkingToolReference
   SwiftBridge: PKInkingTool
+- Name: PKStroke
+  SwiftName: PKStrokeReference
+  SwiftBridge: PKStroke
+- Name: PKStrokePath
+  SwiftName: PKStrokePathReference
+  SwiftBridge: PKStrokePath
+- Name: PKStrokePoint
+  SwiftName: PKStrokePointReference
+  SwiftBridge: PKStrokePoint
+- Name: PKInk
+  SwiftName: PKInkReference
+  SwiftBridge: PKInk

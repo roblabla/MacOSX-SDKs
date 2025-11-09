@@ -1,12 +1,26 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 2F6C11A6-8732-3F20-BA5C-B49C649E2380', 'x86_64: 2F6C11A6-8732-3F20-BA5C-B49C649E2380' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           8E117BE7-0CEB-3D05-8C53-DD4311578C7B
+  - target:          x86_64-maccatalyst
+    value:           8E117BE7-0CEB-3D05-8C53-DD4311578C7B
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           E2228C45-AD07-3E89-BA63-CAE27246CFC7
+  - target:          arm64e-maccatalyst
+    value:           E2228C45-AD07-3E89-BA63-CAE27246CFC7
 install-name:    '/usr/lib/libFosl_dynamic.dylib'
 current-version: 0
 compatibility-version: 0
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _fosl_filter_addChild, _fosl_filter_addLibraryFunction, _fosl_filter_assignRoot, 
                        _fosl_filter_createConstant, _fosl_filter_createCoordinateTransform, 
                        _fosl_filter_createGraph, _fosl_filter_createImage, _fosl_filter_createKernel, 

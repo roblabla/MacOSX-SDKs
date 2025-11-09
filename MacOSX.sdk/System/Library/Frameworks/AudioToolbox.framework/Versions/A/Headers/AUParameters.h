@@ -1,4 +1,4 @@
-#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AUParameters.h>)
+#if (defined(__USE_PUBLIC_HEADERS__) && __USE_PUBLIC_HEADERS__) || (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AUParameters.h>)
 /*!
 	@file		AUParameters.h
  	@framework	AudioToolbox.framework
@@ -11,7 +11,6 @@
 #define AudioToolbox_AUParameters_h
 #ifdef __OBJC2__
 
-#import <AudioToolbox/AUComponent.h>
 #import <AudioToolbox/AudioUnitProperties.h>
 #import <Foundation/Foundation.h>
 
@@ -175,6 +174,11 @@ API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 		
 		An audio unit's implementation should interact with the parameter object via
 		implementorValueObserver and implementorValueProvider.
+
+		Parameter observers are bound to a specific parameter instance. If this parameter is
+		destroyed, e.g. if the parameter tree is re-constructed, the previously set parameter
+		observers will no longer be valid. Clients can observe changes to the parameter tree
+		via KVO. See the discussion of -[AUAudioUnit parameterTree].
 	@param observer
 		A block to call after the value of a parameter has changed.
 	@return
@@ -328,10 +332,17 @@ API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 /// The parameter's current value.
 @property (NS_NONATOMIC_IOSONLY) AUValue value;
 
-/// Set the parameter's value, avoiding redundant notifications to the originator.
+///
+/*!	@brief	Set the parameter's value, avoiding redundant notifications to the originator.
+	@discussion
+			Bridged to the v2 function AudioUnitSetParameter.
+*/
 - (void)setValue:(AUValue)value originator:(AUParameterObserverToken __nullable)originator;
 
-/// Convenience for setValue:originator:atHostTime:eventType:
+/*!	@brief	Convenience for setValue:originator:atHostTime:eventType:
+	@discussion
+			Bridged to the v2 function AudioUnitSetParameter.
+*/
 - (void)setValue:(AUValue)value originator:(AUParameterObserverToken __nullable)originator atHostTime:(uint64_t)hostTime;
 
 /*!	@brief	Set the parameter's value, preserving the host time of the gesture that initiated the
@@ -344,6 +355,8 @@ API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 
 		From an audio playback engine, a host should schedule automated parameter changes through
 		AUAudioUnit's scheduleParameterBlock.
+ 
+		Bridged to the v2 function AudioUnitSetParameter.
 */
 - (void)setValue:(AUValue)value originator:(AUParameterObserverToken __nullable)originator atHostTime:(uint64_t)hostTime eventType:(AUParameterAutomationEventType)eventType API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 

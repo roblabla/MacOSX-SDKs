@@ -1,17 +1,34 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 4EED4C64-EA8B-3F69-BE0A-AC8B33EA8531', 'x86_64: 4EED4C64-EA8B-3F69-BE0A-AC8B33EA8531' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           3FD52E0B-60F2-379E-A84B-39581B3067A1
+  - target:          x86_64-maccatalyst
+    value:           3FD52E0B-60F2-379E-A84B-39581B3067A1
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           4B58E10C-C69B-3F22-AB40-BB0BD761D406
+  - target:          arm64e-maccatalyst
+    value:           4B58E10C-C69B-3F22-AB40-BB0BD761D406
 install-name:    '/System/Library/PrivateFrameworks/MailSupport.framework/Versions/A/MailSupport'
-current-version: 3578.1
-exports:         
-  - archs:           [ x86_64 ]
-    allowable-clients: [ EmailTests, IMAP, MIME, Mail, MailCompositionService, MailIntentsExtension, 
-                         MailNotificationContentExtension, MailQuickLookExtension, 
-                         MailUI, MailUnitTests, MailWebProcessSupport, Message, MessageUI, 
-                         MessageUITests, MobileMail, MobileMailInternalSettings, 
-                         MobileMailUI, NLPLearner, NLPLearnerTests, NanoMailBridgeSettings, 
-                         NanoMailKitClient, PFLTests, POP, QuickTypeDESPlugin, maild ]
+current-version: 3654.0.3
+allowable-clients:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    clients:         [ EmailFunctionalTests, EmailTests, IMAP, MIME, Mail, MailCompositionService, 
+                       MailIntentsExtension, MailNotificationContentExtension, MailQuickLookExtension, 
+                       MailUI, MailUnitTests, MailWebProcessBundle, MailWebProcessSupport, 
+                       Message, MessageUI, MessageUITests, MobileMail, MobileMailInternalSettings, 
+                       MobileMailUI, NLPLearner, NLPLearnerTests, NanoMailBridgeSettings, 
+                       NanoMailKitClient, PFLTests, POP, QuickTypeDESPlugin, maild ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _AWDMailAutoFetchReportReadFrom, _AWDMailCannotGetMailErrorReportReadFrom, 
                        _AWDMailComposeAttachmentReportReadFrom, _AWDMailErrorReadFrom, 
                        _AWDMailFeatureEngagementReportReadFrom, _AWDMailMessageBodyReadFrom, 
@@ -23,12 +40,11 @@ exports:
                        _MSAccessibilityIdentifierAddContactButton, _MSAccessibilityIdentifierBCCField, 
                        _MSAccessibilityIdentifierCCBCCMultiField, _MSAccessibilityIdentifierCCField, 
                        _MSAccessibilityIdentifierCancelSendButton, _MSAccessibilityIdentifierComposeContainerView, 
-                       _MSAccessibilityIdentifierComposeTextView, _MSAccessibilityIdentifierContentVariationButton, 
-                       _MSAccessibilityIdentifierContentVariationField, _MSAccessibilityIdentifierFilterCard, 
-                       _MSAccessibilityIdentifierFilterCardFilterBar, _MSAccessibilityIdentifierFilterCardMailboxPicker, 
-                       _MSAccessibilityIdentifierFilterCardVIPs, _MSAccessibilityIdentifierImageSizeLabel, 
-                       _MSAccessibilityIdentifierImageSizeView, _MSAccessibilityIdentifierLargeTitleAccessoryView, 
-                       _MSAccessibilityIdentifierLargeTitleAccessoryViewCompose, 
+                       _MSAccessibilityIdentifierComposeTextView, _MSAccessibilityIdentifierContentVariationField, 
+                       _MSAccessibilityIdentifierFilterCard, _MSAccessibilityIdentifierFilterCardFilterBar, 
+                       _MSAccessibilityIdentifierFilterCardMailboxPicker, _MSAccessibilityIdentifierFilterCardVIPs, 
+                       _MSAccessibilityIdentifierImageSizeLabel, _MSAccessibilityIdentifierImageSizeView, 
+                       _MSAccessibilityIdentifierLargeTitleAccessoryView, _MSAccessibilityIdentifierLargeTitleAccessoryViewCompose, 
                        _MSAccessibilityIdentifierLargeTitleAccessoryViewEdit, _MSAccessibilityIdentifierLargeTitleAccessoryViewMore, 
                        _MSAccessibilityIdentifierMailHeaderMessageCount, _MSAccessibilityIdentifierMailMessageCell, 
                        _MSAccessibilityIdentifierMailMessageCellFooterView, _MSAccessibilityIdentifierMailMessageCellFooterViewReplyAllButton, 
@@ -55,6 +71,7 @@ exports:
                        _MSAccessibilityIdentifierMailMessageViewSubjectLabel, _MSAccessibilityIdentifierMailMessageViewUnread, 
                        _MSAccessibilityIdentifierMailMessageViewUnreadVIPFlagged, 
                        _MSAccessibilityIdentifierMailMessageViewUpArrow, _MSAccessibilityIdentifierMailMessageViewVIP, 
+                       _MSAccessibilityIdentifierMailboxList, _MSAccessibilityIdentifierMailboxListCell, 
                        _MSAccessibilityIdentifierMoreActionsButton, _MSAccessibilityIdentifierNotifyButton, 
                        _MSAccessibilityIdentifierSendButton, _MSAccessibilityIdentifierSubjectField, 
                        _MSAccessibilityIdentifierTextFormatBoldButton, _MSAccessibilityIdentifierTextFormatCloseButton, 
@@ -68,17 +85,28 @@ exports:
                        _MSAccessibilityIdentifierTextFormatListNumberButton, _MSAccessibilityIdentifierTextFormatStrikethroughButton, 
                        _MSAccessibilityIdentifierTextFormatTextColorButton, _MSAccessibilityIdentifierTextFormatTitle, 
                        _MSAccessibilityIdentifierTextFormatUnderlineButton, _MSAccessibilityIdentifierToField, 
-                       _MSComposeBodyFieldExceptionKeyCallStackSymbols, _MSComposeBodyFieldExceptionKeyJavaScriptStack, 
+                       _MSBlobURLScheme, _MSComposeBodyFieldExceptionKeyCallStackSymbols, 
+                       _MSComposeBodyFieldExceptionKeyJavaScriptStack, _MSContentIDURLScheme, 
                        _MSCopyClosestMatchingExistingContactUsingAddressesAndDisplayName, 
                        _MSCopyClosestMatchingExistingContactUsingAddressesAndDisplayNameUnified, 
-                       _MSDescriptorForRequiredKeysForCompositeName, _MSFetchNonUnifiedContactsForPredicate, 
+                       _MSDataURLScheme, _MSDescriptorForRequiredKeysForCompositeName, 
+                       _MSFetchNonUnifiedContactsForPredicate, _MSFileURLScheme, 
                        _MSMailAccountStatisticsKindAOL, _MSMailAccountStatisticsKindExchange, 
                        _MSMailAccountStatisticsKindGmail, _MSMailAccountStatisticsKindHotmail, 
                        _MSMailAccountStatisticsKindICloud, _MSMailAccountStatisticsKindIMAP, 
                        _MSMailAccountStatisticsKindNetease, _MSMailAccountStatisticsKindPOP, 
                        _MSMailAccountStatisticsKindQQ, _MSMailAccountStatisticsKindYahoo, 
+                       _MSMailNotificationActionIdentifierPrefix, _MSNewNotificationSound, 
+                       _MSNewNotificationSoundKeyAccountIDOfSoundToPlay, _MSNewNotificationSoundKeyAlertContexts, 
+                       _MSNewNotificationSoundKeyLoudestState, _MSNewNotificationSoundKeySuppressionContexts, 
                        _MSPreferredAbbreviatedNameForAddressAndDisplayName, _MSPreferredCompositeNameForAddressAndDisplayName, 
-                       _MSPreferredCompositeNameForContact, _MSSharedContactStore ]
+                       _MSPreferredCompositeNameForContact, _MSSharedContactStore, 
+                       _MSUserNotificationCenterTopicFavoriteMailboxes, _MSUserNotificationCenterTopicNotifiedThreads, 
+                       _MSUserNotificationCenterTopicVIP, _MSUserNotificationContentKeyAccountReference, 
+                       _MSUserNotificationContentKeyMessageReference, _MSUserNotificationContentKeyMissingSummary, 
+                       _MSUserNotificationContentKeyNanoFlags, _MSUserNotificationContentKeyNanoMessageId, 
+                       _MSUserNotificationContentKeySenderAddress, _MSUserNotificationContentKeySuppressionContext, 
+                       _MSUserNotificationsLog ]
     objc-classes:    [ AWDMailAutoFetchReport, AWDMailCannotGetMailErrorReport, AWDMailComposeAttachmentReport, 
                        AWDMailError, AWDMailFeatureEngagementReport, AWDMailMessage, 
                        AWDMailMessageBody, AWDMailMessageDisplayErrorReport, AWDMailMessageLoadingReport, 

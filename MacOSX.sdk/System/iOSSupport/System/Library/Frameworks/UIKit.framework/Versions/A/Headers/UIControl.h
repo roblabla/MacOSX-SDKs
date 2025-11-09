@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIView.h>
 #import <UIKit/UIKitDefines.h>
+#import <UIKit/UIContextMenuInteraction.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -24,7 +25,8 @@ typedef NS_OPTIONS(NSUInteger, UIControlEvents) {
     UIControlEventTouchCancel                                       = 1 <<  8,
 
     UIControlEventValueChanged                                      = 1 << 12,     // sliders, etc.
-    UIControlEventPrimaryActionTriggered API_AVAILABLE(ios(9.0)) = 1 << 13,     // semantic action: for buttons, etc.
+    UIControlEventPrimaryActionTriggered API_AVAILABLE(ios(9.0))    = 1 << 13,     // semantic action: for buttons, etc.
+    UIControlEventMenuActionTriggered API_AVAILABLE(ios(14.0))      = 1 << 14,     // triggered when the menu gesture fires but before the menu presents
 
     UIControlEventEditingDidBegin                                   = 1 << 16,     // UITextField
     UIControlEventEditingChanged                                    = 1 << 17,
@@ -71,6 +73,11 @@ typedef NS_OPTIONS(NSUInteger, UIControlState) {
 
 UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIControl : UIView
 
+- (instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
+
+/// Initializes the control and adds primaryAction for the UIControlEventPrimaryActionTriggered control event. Subclasses of UIControl may alter or add behaviors around the usage of primaryAction, see subclass documentation of this initializer for additional information.
+- (instancetype)initWithFrame:(CGRect)frame primaryAction:(nullable UIAction *)primaryAction API_AVAILABLE(ios(14.0));
 
 @property(nonatomic,getter=isEnabled) BOOL enabled;                                  // default is YES. if NO, ignores touch events and subclasses may draw differently
 @property(nonatomic,getter=isSelected) BOOL selected;                                // default is NO may be used by some subclasses or by application
@@ -96,17 +103,68 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UIControl : UIView
 // remove the target/action for a set of events. pass in NULL for the action to remove all actions for that target
 - (void)removeTarget:(nullable id)target action:(nullable SEL)action forControlEvents:(UIControlEvents)controlEvents;
 
+/// Adds the UIAction to a given event. UIActions are uniqued based on their identifier, and subsequent actions with the same identifier replace previously added actions. You may add multiple UIActions for corresponding controlEvents, and you may add the same action to multiple controlEvents.
+- (void)addAction:(UIAction *)action forControlEvents:(UIControlEvents)controlEvents API_AVAILABLE(ios(14.0));
+/// Removes the action from the set of passed control events.
+- (void)removeAction:(UIAction *)action forControlEvents:(UIControlEvents)controlEvents API_AVAILABLE(ios(14.0));
+/// Removes the action with the provided identifier from the set of passed control events.
+- (void)removeActionForIdentifier:(UIActionIdentifier)actionIdentifier forControlEvents:(UIControlEvents)controlEvents API_AVAILABLE(ios(14.0));
+
 // get info about target & actions. this makes it possible to enumerate all target/actions by checking for each event kind
 @property(nonatomic,readonly) NSSet *allTargets;                                           // set may include NSNull to indicate at least one nil target
 @property(nonatomic,readonly) UIControlEvents allControlEvents;                            // list of all events that have at least one action
 
 - (nullable NSArray<NSString *> *)actionsForTarget:(nullable id)target forControlEvent:(UIControlEvents)controlEvent;    // single event. returns NSArray of NSString selector names. returns nil if none
 
-// send the action. the first method is called for the event and is a point at which you can observe or override behavior. it is called repeately by the second.
+/// Iterate over the event handlers installed on this control at the time this method is called. For each call, either actionHandler or action will be non-nil. controlEvents is always non-zero. Setting *stop to YES will terminate the enumeration early. It is legal to manipulate the control's event handlers within the block.
+- (void)enumerateEventHandlers:(void (NS_NOESCAPE ^)(UIAction * _Nullable actionHandler, id _Nullable target, SEL _Nullable action, UIControlEvents controlEvents, BOOL *stop))iterator API_AVAILABLE(ios(14.0));
+
+/// Dispatch the target-action pair. This method is called repeatedly by -sendActionsForControlEvents: and is a point at which you can observe or override behavior.
 - (void)sendAction:(SEL)action to:(nullable id)target forEvent:(nullable UIEvent *)event;
-- (void)sendActionsForControlEvents:(UIControlEvents)controlEvents;                        // send all actions associated with events
+/// Like -sendAction:to:forEvent:, this method is called by -sendActionsForControlEvents:. You may override this method to observe or modify behavior. If you override this method, you should call super precisely once to dispatch the action, or not call super to suppress sending that action.
+- (void)sendAction:(UIAction *)action API_AVAILABLE(ios(14.0));
+/// send all actions associated with the given control events
+- (void)sendActionsForControlEvents:(UIControlEvents)controlEvents;
+
+/// Returns a UIContextMenuInteraction with this control set as its delegate. Before constructing the UIContextMenuInteraction, UIControl verifies 'self' is a viable delegate. See 'Implementing UIControl Menus' below for more details.
+@property (nonatomic, readonly, strong, nullable) UIContextMenuInteraction *contextMenuInteraction API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
+/// Specifies if the context menu interaction is enabled. NO by default.
+@property (nonatomic, readwrite, assign, getter = isContextMenuInteractionEnabled) BOOL contextMenuInteractionEnabled API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
+/// If the contextMenuInteraction is the primary action of the control, invoked on touch-down. NO by default.
+@property (nonatomic, readwrite, assign) BOOL showsMenuAsPrimaryAction API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
+
+/// Return a point in this control's coordinate space to which to attach the given configuration's menu.
+- (CGPoint)menuAttachmentPointForConfiguration:(UIContextMenuConfiguration *)configuration API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
+
+#if TARGET_OS_IOS
+
+/// Implementing UIControl Menus
+/// UIControl will only create a UIContextMenuInteraction if you've created a subclass of UIControl with a minimum viable delegate implementation. UIControl extends the contract of UIContextMenuInteractionDelegate for these methods, see each method for more detail.
+@interface UIControl() <UIContextMenuInteractionDelegate>
+
+/// An override is required for UIControl to create a UIContextMenuInteraction. Direct UIControl subclasses do not need to call super.
+- (nullable UIContextMenuConfiguration *)contextMenuInteraction:(UIContextMenuInteraction *)interaction configurationForMenuAtLocation:(CGPoint)location API_AVAILABLE(ios(14.0));
+
+/// Direct UIControl subclasses do not need to call super.
+- (nullable UITargetedPreview *)contextMenuInteraction:(UIContextMenuInteraction *)interaction previewForHighlightingMenuWithConfiguration:(UIContextMenuConfiguration *)configuration API_AVAILABLE(ios(14.0));
+
+/// Direct UIControl subclasses do not need to call super.
+- (nullable UITargetedPreview *)contextMenuInteraction:(UIContextMenuInteraction *)interaction previewForDismissingMenuWithConfiguration:(UIContextMenuConfiguration *)configuration API_AVAILABLE(ios(14.0));
+
+/// UIControl subclasses should always call super.
+- (void)contextMenuInteraction:(UIContextMenuInteraction *)interaction willDisplayMenuForConfiguration:(UIContextMenuConfiguration *)configuration animator:(nullable id<UIContextMenuInteractionAnimating>)animator NS_REQUIRES_SUPER API_AVAILABLE(ios(14.0));
+
+/// UIControl subclasses should always call super.
+- (void)contextMenuInteraction:(UIContextMenuInteraction *)interaction willEndForConfiguration:(UIContextMenuConfiguration *)configuration animator:(nullable id<UIContextMenuInteractionAnimating>)animator NS_REQUIRES_SUPER API_AVAILABLE(ios(14.0));
+
+/// UIControl based menus do not display previews, so this method will not be called even if implemented. UIControl does not have an implementation.
+- (void)contextMenuInteraction:(UIContextMenuInteraction *)interaction willPerformPreviewActionForMenuWithConfiguration:(UIContextMenuConfiguration *)configuration animator:(id<UIContextMenuInteractionCommitAnimating>)animator NS_UNAVAILABLE;
+
+@end
+
+#endif
 
 NS_ASSUME_NONNULL_END
 

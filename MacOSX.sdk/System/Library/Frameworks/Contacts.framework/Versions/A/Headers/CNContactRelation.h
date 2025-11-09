@@ -258,13 +258,14 @@ CONTACTS_EXTERN NSString * const CNLabelContactRelationGrandnephewSistersGrandso
 CONTACTS_EXTERN NSString * const CNLabelContactRelationGrandnephewBrothersGrandson                                  NS_AVAILABLE(10_15, 13_0);
 
 CONTACTS_EXTERN NSString * const CNLabelContactRelationStepparent                                                   NS_AVAILABLE(10_15, 13_0);
-CONTACTS_EXTERN NSString * const CNLabelContactRelationStepfather                                                   NS_AVAILABLE(10_15, 13_0);
 CONTACTS_EXTERN NSString * const CNLabelContactRelationStepmother                                                   NS_AVAILABLE(10_15, 13_0);
+CONTACTS_EXTERN NSString * const CNLabelContactRelationStepfather                                                   NS_AVAILABLE(10_15, 13_0);
 CONTACTS_EXTERN NSString * const CNLabelContactRelationStepchild                                                    NS_AVAILABLE(10_15, 13_0);
-CONTACTS_EXTERN NSString * const CNLabelContactRelationStepson                                                      NS_AVAILABLE(10_15, 13_0);
 CONTACTS_EXTERN NSString * const CNLabelContactRelationStepdaughter                                                 NS_AVAILABLE(10_15, 13_0);
-CONTACTS_EXTERN NSString * const CNLabelContactRelationStepbrother                                                  NS_AVAILABLE(10_15, 13_0);
+CONTACTS_EXTERN NSString * const CNLabelContactRelationStepson                                                      NS_AVAILABLE(10_15, 13_0);
 CONTACTS_EXTERN NSString * const CNLabelContactRelationStepsister                                                   NS_AVAILABLE(10_15, 13_0);
+CONTACTS_EXTERN NSString * const CNLabelContactRelationStepbrother                                                  NS_AVAILABLE(10_15, 13_0);
+
 
 // Additional international labels consisting of conjunctions of English terms:
 CONTACTS_EXTERN NSString * const CNLabelContactRelationMotherInLawOrStepmother                                      NS_AVAILABLE(10_15, 13_0);
@@ -275,6 +276,8 @@ CONTACTS_EXTERN NSString * const CNLabelContactRelationCousinOrSiblingsChild    
 CONTACTS_EXTERN NSString * const CNLabelContactRelationNieceOrCousin                                                NS_AVAILABLE(10_15, 13_0);
 CONTACTS_EXTERN NSString * const CNLabelContactRelationNephewOrCousin                                               NS_AVAILABLE(10_15, 13_0);
 CONTACTS_EXTERN NSString * const CNLabelContactRelationGrandchildOrSiblingsChild                                    NS_AVAILABLE(10_15, 13_0);
+CONTACTS_EXTERN NSString * const CNLabelContactRelationGranddaughterOrNiece                                         NS_AVAILABLE(11_0, 14_0);
+CONTACTS_EXTERN NSString * const CNLabelContactRelationGrandsonOrNephew                                             NS_AVAILABLE(11_0, 14_0);
 CONTACTS_EXTERN NSString * const CNLabelContactRelationGreatGrandchildOrSiblingsGrandchild                          NS_AVAILABLE(10_15, 13_0);
 CONTACTS_EXTERN NSString * const CNLabelContactRelationDaughterInLawOrSisterInLaw                                   NS_AVAILABLE(10_15, 13_0);
 CONTACTS_EXTERN NSString * const CNLabelContactRelationSonInLawOrBrotherInLaw                                       NS_AVAILABLE(10_15, 13_0);

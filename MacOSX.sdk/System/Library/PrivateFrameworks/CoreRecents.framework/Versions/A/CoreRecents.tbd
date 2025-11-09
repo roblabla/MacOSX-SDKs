@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: A4A4271B-E375-35DD-867B-5396A5CC6D01', 'x86_64: A4A4271B-E375-35DD-867B-5396A5CC6D01' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           C2F4FCA8-97AA-37A9-869C-B063B328115F
+  - target:          x86_64-maccatalyst
+    value:           C2F4FCA8-97AA-37A9-869C-B063B328115F
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           A6C6C77C-60C4-3DCE-9374-FAD4ECEBEB0E
+  - target:          arm64e-maccatalyst
+    value:           A6C6C77C-60C4-3DCE-9374-FAD4ECEBEB0E
 install-name:    '/System/Library/PrivateFrameworks/CoreRecents.framework/Versions/A/CoreRecents'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CRAddressKindEmail, _CRAddressKindGroup, _CRAddressKindInstantMessage, 
                        _CRAddressKindMapLocation, _CRAddressKindPhoneNumber, _CRAddressKindURL, 
                        _CRIsInternalDevice, _CRRecentContactMetadataCreationTime, 

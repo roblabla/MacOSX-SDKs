@@ -87,6 +87,16 @@ typedef NSString * CIImageOption NS_TYPED_ENUM;
  * If [NSNull null] then dont color manage the image. */
 CORE_IMAGE_EXPORT CIImageOption const kCIImageColorSpace;
 
+/* A boolean value specifying whether an image returned by [CIImage with...] should have kernels
+ * applied that will tone map to standard dynamic range (SDR).
+ * The option will only have an effect if the image has a CGColorSpace that is high dynamic range (HDR).
+ * This option can be useful if further usage of an image is not prepared for HDR values.
+ *   If the value for this option is @YES, then the HDR input image will be tone mapped to working space SDR.
+ *   If the value for this option is @NO, then the HDR  input image will be linearized to unclamped working space.
+ *   If this option is not specified, then it will behave as if @NO was specified.
+ */
+CORE_IMAGE_EXPORT CIImageOption const kCIImageToneMapHDRtoSDR NS_AVAILABLE(11_0, 14_1);
+
 /* A boolean value specifying whether the image should sampled using "nearest neighbor" 
  * behavior.  If not specified, the image will be sampled using "linear sampling" */
 CORE_IMAGE_EXPORT CIImageOption const kCIImageNearestSampling NS_AVAILABLE(10_13, 11_0);
@@ -128,6 +138,8 @@ CORE_IMAGE_EXPORT CIImageOption const kCIImageAuxiliaryPortraitEffectsMatte NS_A
 CORE_IMAGE_EXPORT CIImageOption const kCIImageAuxiliarySemanticSegmentationSkinMatte NS_AVAILABLE(10_15, 13_0);
 CORE_IMAGE_EXPORT CIImageOption const kCIImageAuxiliarySemanticSegmentationHairMatte NS_AVAILABLE(10_15, 13_0);
 CORE_IMAGE_EXPORT CIImageOption const kCIImageAuxiliarySemanticSegmentationTeethMatte NS_AVAILABLE(10_15, 13_0);
+
+CORE_IMAGE_EXPORT CIImageOption const kCIImageAuxiliarySemanticSegmentationGlassesMatte NS_AVAILABLE(11_0, 14_1);
 
 
 /* Creates a new image from the contents of 'image'. */

@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 427C4806-DDE2-327F-A416-E1AF0A2ADCAF' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           780AA820-2CA0-386A-B393-E807ECDF7ADB
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           A78EE9CF-C06C-35E0-8B75-D7A5097E87EC
 install-name:    '/System/Library/PrivateFrameworks/InternetAccounts.framework/Versions/A/InternetAccounts'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _AOSAccountsFramework, _AOSShimAccountCopyProperty, _AOSShimAccountRefreshLoggedIn, 
                        _AOSShimCopyAccountIDFromMailAlias, _AOSShimCopyAccountType, 
                        _AOSShimCopyLoggedInAccount, _AOSShimGetStringConst, _AOSShimServiceCopyProperty, 
@@ -118,12 +124,12 @@ exports:
                        IAApplication, IACalDAVAccountSetupInput, IACalDAVAccountSetupResult, 
                        IACardDAVAccountSetupInput, IACardDAVAccountSetupResult, IAChatAccountSetupInput, 
                        IAChatAccountSetupResult, IAChatService, IAClickableImageView, 
-                       IAClickableTextField, IACrossAppSetupViewController, IADNSCache, 
-                       IADNSService, IADataPlugin, IADataPluginController, IADataPluginNotificationEvent, 
-                       IADefaults, IADeleteUIController, IAEWSAccountSetupResult, 
-                       IAExtensionManager, IAGoogleAuthTokenManager, IALDAPAccountSetupInput, 
-                       IALDAPAccountSetupResult, IAMailAccountCreator, IAMailAccountSetupInput, 
-                       IAMailAccountSetupResult, IANewAccountChooserController, IANewAccountChooserRadioCollection, 
+                       IAClickableTextField, IADNSCache, IADNSService, IADataPlugin, 
+                       IADataPluginController, IADataPluginNotificationEvent, IADefaults, 
+                       IADeleteUIController, IAEWSAccountSetupResult, IAExtensionManager, 
+                       IAGoogleAuthTokenManager, IALDAPAccountSetupInput, IALDAPAccountSetupResult, 
+                       IAMailAccountCreator, IAMailAccountSetupInput, IAMailAccountSetupResult, 
+                       IANewAccountChooserController, IANewAccountChooserRadioCollection, 
                        IANewAccountChooserRadioRowItem, IANewAccountTableBogusButton, 
                        IANewAccountTableItem, IANewAccountTableRowView, IANewAccountTableView, 
                        IANoHitImageView, IANoHitTextField, IANotesAccountCreator, 
@@ -196,14 +202,6 @@ exports:
                        IAChatService._showKerberosCheckbox, IAChatService._showPasswordField, 
                        IAChatService._showServerHostField, IAChatService._showServerPortField, 
                        IAChatService._showUseSSLCheckbox, IAChatService._showUsernameField, 
-                       IACrossAppSetupViewController._accountID, IACrossAppSetupViewController._appBundleID, 
-                       IACrossAppSetupViewController._apps, IACrossAppSetupViewController._checkbox1, 
-                       IACrossAppSetupViewController._checkbox2, IACrossAppSetupViewController._checkbox3, 
-                       IACrossAppSetupViewController._checkbox4, IACrossAppSetupViewController._checkbox5, 
-                       IACrossAppSetupViewController._checkboxes, IACrossAppSetupViewController._contextInfo, 
-                       IACrossAppSetupViewController._delegate, IACrossAppSetupViewController._existingAccounts, 
-                       IACrossAppSetupViewController._providerID, IACrossAppSetupViewController._settings, 
-                       IACrossAppSetupViewController._topLevelObjects2, IACrossAppSetupViewController._view, 
                        IADNSCache._cacheDict, IADNSCache._lastSyncDate, IADNSService._mailServers, 
                        IADNSService._readResultsFromCache, IADNSService._semaphore, 
                        IADNSService._serverAddress, IADNSService._writeResultsToCache, 

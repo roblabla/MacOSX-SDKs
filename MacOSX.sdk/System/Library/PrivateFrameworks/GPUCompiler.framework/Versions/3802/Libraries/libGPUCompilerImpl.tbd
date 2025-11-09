@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 55DC9160-171E-3015-9EB7-58CD35BE2CC0' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           8C65933D-FD8E-3A72-BAB4-6EFC35B86463
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           3113B5A7-E52C-39A1-B856-D40AC962FEAB
 install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/3802/Libraries/libGPUCompilerImpl.dylib'
 current-version: 802.6
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ __Z14error_categoryv, __Z20createAIRUpgradePassv, __Z22createAIRLegalizerPassv, 
                        __Z30createAIRTargetInfoWrapperPassv, __ZN10llvm_utils17getMangledTypeStrEPN4llvm4TypeE, 
                        __ZN10llvm_utils21lookupIntrinsicByNameEN4llvm8ArrayRefIPKcEENS0_9StringRefE, 
@@ -350,6 +356,5 @@ exports:
                        __ZTVN4llvm3air54AIRDiagnosticInfoDuplicatedRenderTargetAttachmentIndexE, 
                        __ZTVN4llvm3air55AIRDiagnosticInfoWritableTextureInNonVoidVertexFunctionE, 
                        __ZTVN4llvm3air56AIRDiagnosicInfoInvalidAliasImplicitImageblockConstraintE ]
-    weak-def-symbols: [ __ZN4llvm15callDefaultCtorINS_3air20AIRTargetInfoWrapperEEEPNS_4PassEv, 
-                        __ZNSt3__117__call_once_proxyINS_5tupleIJRFPvRN4llvm12PassRegistryEEONS_17reference_wrapperIS4_EEEEEEEvS2_ ]
+    weak-symbols:    [ __ZN4llvm15callDefaultCtorINS_3air20AIRTargetInfoWrapperEEEPNS_4PassEv ]
 ...

@@ -8,9 +8,10 @@
 #import <Foundation/NSArray.h>
 #import <AppKit/NSControl.h>
 #import <AppKit/NSUserInterfaceValidation.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSColor;
 @protocol NSMatrixDelegate;

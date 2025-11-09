@@ -42,9 +42,23 @@ VN_EXPORT bool VNNormalizedRectIsIdentityRect(CGRect normalizedRect) API_AVAILAB
 
 	@param	imageHeight				The pixel height of the image.
 
-	@return the point in normalized coordinates.
+	@return the point in image coordinates.
 */
 VN_EXPORT CGPoint VNImagePointForNormalizedPoint(CGPoint normalizedPoint, size_t imageWidth, size_t imageHeight) API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
+
+
+/*!
+ @discussion    Returns a point in normalized coordinate space that is projected from a point in a image coordinates
+ 
+ @param    imagePoint                  The point in image coordinate space.
+ 
+ @param    imageWidth                  The pixel width of the image.
+ 
+ @param    imageHeight                The pixel height of the image.
+ 
+ @return the point in normalized coordinates.
+ */
+VN_EXPORT CGPoint VNNormalizedPointForImagePoint(CGPoint imagePoint, size_t imageWidth, size_t imageHeight) API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
 
 /*!

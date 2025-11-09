@@ -30,6 +30,7 @@ typedef NS_ENUM(NSInteger, MTLHeapType)
 {
     MTLHeapTypeAutomatic = 0,
     MTLHeapTypePlacement = 1,
+    MTLHeapTypeSparse API_AVAILABLE(macos(11.0), macCatalyst(14.0)) = 2 ,
 } API_AVAILABLE(macos(10.15), ios(13.0));
 
 /*!

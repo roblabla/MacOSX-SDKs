@@ -69,6 +69,8 @@ mach_bridge_compute_timestamp(uint64_t local_ts_ns, struct bt_params *params)
 }
 
 uint64_t mach_bridge_remote_time(uint64_t);
+
+
 __END_DECLS
 
 #endif /* REMOTE_TIME_H */

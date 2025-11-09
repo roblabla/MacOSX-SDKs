@@ -2,7 +2,7 @@
 //  INPerson.h
 //  Intents
 //
-//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2020 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -14,7 +14,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(10.0), watchos(3.2)) API_UNAVAILABLE(macosx)
+API_AVAILABLE(ios(10.0), macos(11.0), watchos(3.2))
+API_UNAVAILABLE(tvos)
 @interface INPerson : NSObject <NSCopying, NSSecureCoding>
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -32,7 +33,15 @@ API_AVAILABLE(ios(10.0), watchos(3.2)) API_UNAVAILABLE(macosx)
                                image:(nullable INImage *)image
                    contactIdentifier:(nullable NSString *)contactIdentifier
                     customIdentifier:(nullable NSString *)customIdentifier
-                                isMe:(BOOL)isMe NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(12.0), watchos(5.0), macosx(10.14));
+                        relationship:(nullable INPersonRelationship)relationship API_AVAILABLE(ios(14.0), watchos(7.0));
+
+- (instancetype)initWithPersonHandle:(INPersonHandle *)personHandle
+                      nameComponents:(nullable NSPersonNameComponents *)nameComponents
+                         displayName:(nullable NSString *)displayName
+                               image:(nullable INImage *)image
+                   contactIdentifier:(nullable NSString *)contactIdentifier
+                    customIdentifier:(nullable NSString *)customIdentifier
+                                isMe:(BOOL)isMe NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(12.0), watchos(5.0));
 
 // The identity of the person in the application
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INPersonHandle *personHandle;
@@ -54,15 +63,15 @@ API_AVAILABLE(ios(10.0), watchos(3.2)) API_UNAVAILABLE(macosx)
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSString *customIdentifier;
 
 // This person's relationship to the user
-@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INPersonRelationship relationship API_AVAILABLE(ios(10.2)) API_UNAVAILABLE(macosx);
+@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INPersonRelationship relationship API_AVAILABLE(ios(10.2));
 
 @end
 
 typedef NS_ENUM(NSInteger, INPersonSuggestionType) {
-    INPersonSuggestionTypeNone API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macosx) = 0,
+    INPersonSuggestionTypeNone API_AVAILABLE(ios(12.0), watchos(5.0)),
     INPersonSuggestionTypeSocialProfile,
     INPersonSuggestionTypeInstantMessageAddress
-};
+} API_AVAILABLE(ios(10.0), macos(11.0), watchos(3.2)) API_UNAVAILABLE(tvos);
 
 @interface INPerson (INInteraction)
 

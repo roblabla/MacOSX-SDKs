@@ -218,7 +218,8 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * @abstract
  * Set the preference to require an administrator password to change networks.
  */
-@property BOOL requireAdministratorForIBSSMode NS_AVAILABLE_MAC(10_7);
+@property BOOL requireAdministratorForIBSSMode NS_DEPRECATED_MAC(10_7, 11_0);
+
 
 /*!
  * @property

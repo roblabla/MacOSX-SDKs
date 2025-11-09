@@ -141,7 +141,12 @@ typedef CF_ENUM(int, CFNetServicesError) {
    * The given CFNetServiceResolveWithTimeout has hit the timeout
    * before a successful resolve.
    */
-  kCFNetServicesErrorTimeout	= -72007L
+  kCFNetServicesErrorTimeout	= -72007L,
+
+  /*
+   * Missing required configuration for local network access.
+   */
+  kCFNetServicesErrorMissingRequiredConfiguration API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos) = -72008L,
 };
 
 

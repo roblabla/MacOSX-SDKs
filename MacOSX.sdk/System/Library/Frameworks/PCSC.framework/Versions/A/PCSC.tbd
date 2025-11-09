@@ -1,10 +1,18 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 9FC4F214-9B07-32CE-B2AC-38E16A1FA3B6' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           B4DB229A-B9E1-3EBC-9207-600F7C434D55
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           F5E9B144-CAE1-328F-BC5C-83AAAA29BA4E
 install-name:    '/System/Library/Frameworks/PCSC.framework/Versions/A/PCSC'
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 487.40.10
+compatibility-version: 0
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _DebugLogCategory, _DebugLogSetCategory, _DebugLogSetLevel, 
                        _DebugLogSetLogType, _MSCBeginTransaction, _MSCCancelEventWait, 
                        _MSCChangePIN, _MSCClearReset, _MSCComputeCrypt, _MSCCreateObject, 

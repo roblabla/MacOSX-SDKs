@@ -10,9 +10,9 @@
 #import <CloudKit/CKDatabase.h>
 #import <CloudKit/CKOperation.h>
 
-NS_ASSUME_NONNULL_BEGIN
+@class CKRecordID, CKUserIdentity, CKShareParticipant, CKShare, CKShareMetadata;
 
-@class CKDatabase, CKRecordID, CKUserIdentity, CKShareParticipant, CKDiscoveredUserInfo, CKShare, CKShareMetadata;
+NS_ASSUME_NONNULL_BEGIN
 
 /*! Stand-in for the current user's ID; most often used in RecordZoneID->ownerName */
 CK_EXTERN NSString * const CKCurrentUserDefaultName API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
@@ -37,19 +37,19 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
 /*! @abstract Convenience method that uses the calling process' "iCloud.\(application-identifier)" as the container identifier
  *
  *  @discussion
- *  application-identifier is the calling process' `application-identifier` entitlement on iOS / tvOS / watchOS.
- *  application-identifier is the calling process' `com.apple.application-identifier` entitlement on macOS.
- *  On all OSes, if an `com.apple.developer.associated-application-identifier` entitlement is present, its value will be preferred over the `application-identifier` variants.
+ *  application-identifier is the calling process' @c application-identifier entitlement on iOS / tvOS / watchOS.
+ *  application-identifier is the calling process' @c com.apple.application-identifier entitlement on macOS.
+ *  On all OSes, if an @c com.apple.developer.associated-application-identifier entitlement is present, its value will be preferred over the @c application-identifier variants.
  */
 + (CKContainer *)defaultContainer;
 
 /*! @abstract Obtain a CKContainer for the given containerIdentifier
  *
- *  @discussion If the application is in production mode (aka, `com.apple.developer.icloud-container-environment` is set to Production in your entitlements plist, and you have no override in `com.apple.developer.icloud-container-development-container-identifiers`), then the production environment is used.
+ *  @discussion If the application is in production mode (aka, @c com.apple.developer.icloud-container-environment is set to Production in your entitlements plist, and you have no override in @c com.apple.developer.icloud-container-development-container-identifiers), then the production environment is used.
  */
 + (CKContainer *)containerWithIdentifier:(NSString *)containerIdentifier;
 
-@property (nonatomic, readonly, nullable) NSString *containerIdentifier;
+@property (nonatomic, readonly, copy, nullable) NSString *containerIdentifier;
 
 - (void)addOperation:(CKOperation *)operation;
 
@@ -100,7 +100,7 @@ typedef NS_ENUM(NSInteger, CKAccountStatus) {
 
 /*! @abstract This local notification is posted when there has been any change to the logged in iCloud account.
  *
- *  @discussion On receipt, an updated account status should be obtained by calling `accountStatusWithCompletionHandler:`
+ *  @discussion On receipt, an updated account status should be obtained by calling @c accountStatusWithCompletionHandler:
  */
 CK_EXTERN NSString * const CKAccountChangedNotification API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0));
 
@@ -139,24 +139,20 @@ typedef void(^CKApplicationPermissionBlock)(CKApplicationPermissionStatus applic
 
 @interface CKContainer (UserRecords)
 
-/*! @discussion If there is no iCloud account configured, or if access is restricted, a `CKErrorNotAuthenticated` error will be returned.
+/*! @discussion If there is no iCloud account configured, or if access is restricted, a @c CKErrorNotAuthenticated error will be returned.
  *
- *  This work is treated as having `NSQualityOfServiceUserInitiated` quality of service.
+ *  This work is treated as having @c NSQualityOfServiceUserInitiated quality of service.
  */
 - (void)fetchUserRecordIDWithCompletionHandler:(void (^)(CKRecordID * _Nullable recordID, NSError * _Nullable error))completionHandler;
 
 /*! @abstract Fetches all user records that match an entry in the user's address book.
  *
- *  @discussion `CKDiscoverAllContactsOperation` and `CKDiscoverUserIdentityOperation` are the more configurable, CKOperation-based alternatives to these methods
+ *  @discussion @c CKDiscoverUserIdentityOperation is the more configurable, @c CKOperation -based alternatives to these methods
  */
 - (void)discoverAllIdentitiesWithCompletionHandler:(void (^)(NSArray<CKUserIdentity *> * _Nullable userIdentities, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0)) API_UNAVAILABLE(tvos);
 - (void)discoverUserIdentityWithEmailAddress:(NSString *)email completionHandler:(void (^)(CKUserIdentity * _Nullable userInfo, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
 - (void)discoverUserIdentityWithPhoneNumber:(NSString *)phoneNumber completionHandler:(void (^)(CKUserIdentity * _Nullable userInfo, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
 - (void)discoverUserIdentityWithUserRecordID:(CKRecordID *)userRecordID completionHandler:(void (^)(CKUserIdentity * _Nullable userInfo, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
-
-- (void)discoverAllContactUserInfosWithCompletionHandler:(void (^)(NSArray<CKDiscoveredUserInfo *> * _Nullable userInfos, NSError * _Nullable error))completionHandler API_DEPRECATED("Use -[CKContainer discoverAllIdentitiesWithCompletionHandler:]", macos(10.10, 10.12), ios(8.0, 10.0), watchos(3.0, 3.0));
-- (void)discoverUserInfoWithEmailAddress:(NSString *)email completionHandler:(void (^)(CKDiscoveredUserInfo * _Nullable userInfo, NSError * _Nullable error))completionHandler API_DEPRECATED("Use -[CKContainer discoverUserIdentityWithEmailAddress:completionHandler:]", macos(10.10, 10.12), ios(8.0, 10.0), tvos(9.0, 10.0), watchos(3.0, 3.0));
-- (void)discoverUserInfoWithUserRecordID:(CKRecordID *)userRecordID completionHandler:(void (^)(CKDiscoveredUserInfo * _Nullable userInfo, NSError * _Nullable error))completionHandler API_DEPRECATED("Use -[CKContainer discoverUserIdentityWithUserRecordID:completionHandler:]", macos(10.10, 10.12), ios(8.0, 10.0), tvos(9.0, 10.0), watchos(3.0, 3.0));
 
 @end
 
@@ -164,7 +160,7 @@ typedef void(^CKApplicationPermissionBlock)(CKApplicationPermissionStatus applic
 
 /*! @abstract Fetches share participants matching the provided info.
  *
- *  @discussion `CKFetchShareParticipantsOperation` is the more configurable, `CKOperation`-based alternative to these methods.
+ *  @discussion @c CKFetchShareParticipantsOperation is the more configurable, @c CKOperation -based alternative to these methods.
  */
 - (void)fetchShareParticipantWithEmailAddress:(NSString *)emailAddress completionHandler:(void (^)(CKShareParticipant * _Nullable shareParticipant, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
 - (void)fetchShareParticipantWithPhoneNumber:(NSString *)phoneNumber completionHandler:(void (^)(CKShareParticipant * _Nullable shareParticipant, NSError *_Nullable error))completionHandler API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
@@ -184,4 +180,5 @@ typedef void(^CKApplicationPermissionBlock)(CKApplicationPermissionStatus applic
 - (void)fetchAllLongLivedOperationIDsWithCompletionHandler:(void (^)(NSArray<CKOperationID> * _Nullable outstandingOperationIDs, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.12), ios(9.3), tvos(9.2), watchos(3.0));
 - (void)fetchLongLivedOperationWithID:(CKOperationID)operationID completionHandler:(void (^)(CKOperation * _Nullable outstandingOperation, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.12), ios(9.3), tvos(9.2), watchos(3.0));
 @end
+
 NS_ASSUME_NONNULL_END

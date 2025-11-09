@@ -1,12 +1,18 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 2D5C2070-03D9-3304-A65A-DF21C461192E' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           E1392CE8-3B30-33FD-A34A-53D198099A41
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           3A862A12-AAB5-320F-8F63-D05D4353DB6A
 install-name:    '/usr/lib/libnetsnmpagent.25.dylib'
 current-version: 26.2
 compatibility-version: 26
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ __init_default_iquery_session, __netsnmp_stash_cache_free, 
                        __netsnmp_stash_cache_load, __netsnmp_tdata_generate_index_oid, 
                        __netsnmp_tdata_helper_handler, __tweak_default_iquery_session, 

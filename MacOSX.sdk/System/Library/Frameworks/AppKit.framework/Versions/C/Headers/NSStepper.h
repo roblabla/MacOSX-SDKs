@@ -6,8 +6,9 @@
 */
 
 #import <AppKit/NSControl.h>
+#import <AppKit/AppKitDefines.h>
 
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @interface NSStepper : NSControl <NSAccessibilityStepper>
 

@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVSampleBufferAudioRenderer.h>)
 /*
 	File:  AVSampleBufferAudioRenderer.h
 
@@ -142,3 +143,7 @@ AVF_EXPORT NSNotificationName const AVSampleBufferAudioRendererWasFlushedAutomat
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCore/AVSampleBufferAudioRenderer.h>
+#endif

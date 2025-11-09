@@ -1,11 +1,25 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 83D29DD1-6692-3056-AD93-E542ED42F8F9', 'x86_64: 83D29DD1-6692-3056-AD93-E542ED42F8F9' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           01700550-21F5-3722-9168-A0ABC28A82C0
+  - target:          x86_64-maccatalyst
+    value:           01700550-21F5-3722-9168-A0ABC28A82C0
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           A4AD8711-03AB-3D4D-8032-79227EB9E8A0
+  - target:          arm64e-maccatalyst
+    value:           A4AD8711-03AB-3D4D-8032-79227EB9E8A0
 install-name:    '/usr/lib/libmarisa.dylib'
-current-version: 16
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 19
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ __ZN6marisa4Trie3mapEPKvm, __ZN6marisa4Trie4loadEPKc, __ZN6marisa4Trie4mmapEPKc, 
                        __ZN6marisa4Trie4readEi, __ZN6marisa4Trie4swapERS0_, __ZN6marisa4Trie5buildERNS_6KeysetEi, 
                        __ZN6marisa4Trie5clearEv, __ZN6marisa4TrieC1Ev, __ZN6marisa4TrieC2Ev, 

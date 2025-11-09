@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <MetricKit/MXMetricPayload.h>
+#import <MetricKit/MXDiagnosticPayload.h>
 #import <os/log.h>
 #import <os/availability.h>
 
@@ -29,6 +30,12 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos)
  @abstract      A list of past metric payloads received.
  */
 @property (readonly, nonnull, strong) NSArray<MXMetricPayload *> *pastPayloads;
+
+/*!
+ @property      pastDiagnosticPayloads
+ @abstract      A list of past diagnostic payloads received.
+ */
+@property (readonly, nonnull, strong) NSArray<MXDiagnosticPayload *> *pastDiagnosticPayloads API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, tvos, watchos);
 
 /*!
  @property      sharedManager
@@ -87,6 +94,18 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos)
 - (void)didReceiveMetricPayloads:(NSArray<MXMetricPayload *> * _Nonnull)payloads;
 
 @optional
+
+/*!
+ @method        didReceiveDiagnosticPayloads:payloads
+ @abstract      This method is invoked when a new MXDiagnosticPayload has been received.
+ @param         payloads
+ An NSArray of MXDiagnosticPayload objects. This array of payloads contains diagnostics from previous usage sessions.
+ @discussion    You can expect for this method to be invoked atleast once per day when the app is running and subscribers are available.
+ @discussion    If no subscribers are available, this method will not be invoked.
+ @discussion    Atleast one subscriber must be available to receive diagnostics.
+ @discussion    This method is invoked on a background queue.
+ */
+- (void)didReceiveDiagnosticPayloads:(NSArray<MXDiagnosticPayload *> * _Nonnull)payloads API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, tvos, watchos);
 
 @end
 

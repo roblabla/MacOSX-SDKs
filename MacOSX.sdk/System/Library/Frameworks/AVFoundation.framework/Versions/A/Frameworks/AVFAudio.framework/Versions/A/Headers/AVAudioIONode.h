@@ -86,6 +86,8 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 /*! @method setVoiceProcessingEnabled:error:
     @abstract
         Enable or disable voice processing on the IO node.
+	@param enabled
+		Whether voice processing is to be enabled.
     @param outError
         On exit, if the IO node cannot enable or diable voice processing, a description of the error
     @return

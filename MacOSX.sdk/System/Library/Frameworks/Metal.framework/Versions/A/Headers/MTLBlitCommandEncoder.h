@@ -9,10 +9,12 @@
 #import <Metal/MTLDefines.h>
 #import <Metal/MTLTypes.h>
 #import <Metal/MTLCommandEncoder.h>
+#import <Metal/MTLResourceStateCommandEncoder.h>
 #import <Metal/MTLBuffer.h>
 #import <Metal/MTLTexture.h>
 #import <Metal/MTLFence.h>
 #import <Metal/MTLRenderPass.h>
+#import <Metal/MTLBlitPass.h>
 
 NS_ASSUME_NONNULL_BEGIN
 /*!
@@ -29,7 +31,7 @@ typedef NS_OPTIONS(NSUInteger, MTLBlitOption)
     MTLBlitOptionNone                       = 0,
     MTLBlitOptionDepthFromDepthStencil      = 1 << 0,
     MTLBlitOptionStencilFromDepthStencil    = 1 << 1,
-    MTLBlitOptionRowLinearPVRTC API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, macCatalyst) = 1 << 2,
+    MTLBlitOptionRowLinearPVRTC API_AVAILABLE(ios(9.0), macos(11.0), macCatalyst(14.0)) = 1 << 2,
 } API_AVAILABLE(macos(10.11), ios(9.0));
 
 
@@ -158,6 +160,28 @@ API_AVAILABLE(macos(10.11), ios(8.0))
 - (void)waitForFence:(id <MTLFence>)fence API_AVAILABLE(macos(10.13), ios(10.0));
 
 
+@optional
+/*!
+ @method getTextureAccessCounters:region:mipLevel:slice:type:resetCounters:countersBuffer:countersBufferOffset
+ @abstract Copies tile access counters within specified region into provided buffer
+ */
+-(void) getTextureAccessCounters:(id<MTLTexture>)texture
+                          region:(MTLRegion)region
+                        mipLevel:(NSUInteger)mipLevel
+                           slice:(NSUInteger)slice
+                   resetCounters:(BOOL)resetCounters
+                  countersBuffer:(id<MTLBuffer>)countersBuffer
+            countersBufferOffset:(NSUInteger)countersBufferOffset API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0));
+
+/*!
+ @method resetTextureAccessCounters:region:mipLevel:slice:type:
+ @abstract Resets tile access counters within specified region
+ */
+-(void) resetTextureAccessCounters:(id<MTLTexture>)texture
+                            region:(MTLRegion)region
+                          mipLevel:(NSUInteger)mipLevel
+                             slice:(NSUInteger)slice API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0));
+@required
 
 
 
@@ -220,10 +244,12 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  In general, passing YES will lead to more repeatable counter results but
  may negatively impact performance.  Passing NO will generally be higher performance
  but counter results may not be repeatable.
+ @discussion On devices where MTLCounterSamplingPointAtBlitBoundary is unsupported,
+ this method is not available and will generate an error if called.
  */
 -(void)sampleCountersInBuffer:(id<MTLCounterSampleBuffer>)sampleBuffer
                 atSampleIndex:(NSUInteger)sampleIndex
-                  withBarrier:(BOOL)barrier API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
+                  withBarrier:(BOOL)barrier API_AVAILABLE(macos(10.15), ios(14.0));
 
 /*!
  @method resolveCounters:inRange:destinationBuffer:destinationOffset:
@@ -239,6 +265,6 @@ API_AVAILABLE(macos(10.11), ios(8.0))
 -(void)resolveCounters:(id<MTLCounterSampleBuffer>)sampleBuffer
                inRange:(NSRange)range
      destinationBuffer:(id<MTLBuffer>)destinationBuffer
-     destinationOffset:(NSUInteger)destinationOffset API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
+     destinationOffset:(NSUInteger)destinationOffset API_AVAILABLE(macos(10.15), ios(14.0));
 @end
 NS_ASSUME_NONNULL_END

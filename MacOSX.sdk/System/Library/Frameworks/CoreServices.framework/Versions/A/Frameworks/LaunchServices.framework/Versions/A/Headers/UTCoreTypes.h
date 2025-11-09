@@ -40,7 +40,7 @@ CF_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Abstract base types
 /*
- *  kUTTypeItem
+ *  kUTTypeItem   *** DEPRECATED ***
  *
  *    generic base type for most things
  *    (files, directories)
@@ -48,7 +48,7 @@ CF_ASSUME_NONNULL_BEGIN
  *    UTI: public.item
  *
  *
- *  kUTTypeContent
+ *  kUTTypeContent   *** DEPRECATED ***
  *
  *    base type for anything containing user-viewable document content
  *    (documents, pasteboard data, and document packages.) Types describing
@@ -58,7 +58,7 @@ CF_ASSUME_NONNULL_BEGIN
  *    UTI: public.content
  *
  *
- *  kUTTypeCompositeContent
+ *  kUTTypeCompositeContent   *** DEPRECATED ***
  *
  *    base type for content formats supporting mixed embedded content
  *    (i.e., compound documents)
@@ -67,45 +67,45 @@ CF_ASSUME_NONNULL_BEGIN
  *    conforms to: public.content
  *
  *
- *  kUTTypeMessage
+ *  kUTTypeMessage   *** DEPRECATED ***
  *
  *    base type for messages (email, IM, etc.)
  *
  *    UTI: public.message
  *
  *
- *  kUTTypeContact
+ *  kUTTypeContact   *** DEPRECATED ***
  *
  *    contact information, e.g. for a person, group, organization
  *
  *    UTI: public.contact
  *
  *
- *  kUTTypeArchive
+ *  kUTTypeArchive   *** DEPRECATED ***
  *
  *    an archive of files and directories
  *
  *    UTI: public.archive
  *
  *
- *  kUTTypeDiskImage
+ *  kUTTypeDiskImage   *** DEPRECATED ***
  *
  *    a data item mountable as a volume
  *
  *    UTI: public.disk-image
  *
  */
-extern const CFStringRef kUTTypeItem                                 API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeContent                              API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeCompositeContent                     API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeMessage                              API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeContact                              API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeArchive                              API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeDiskImage                            API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeItem                                 API_DEPRECATED_WITH_REPLACEMENT("UTTypeItem", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeContent                              API_DEPRECATED_WITH_REPLACEMENT("UTTypeContent", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeCompositeContent                     API_DEPRECATED_WITH_REPLACEMENT("UTTypeCompositeContent", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeMessage                              API_DEPRECATED_WITH_REPLACEMENT("UTTypeMessage", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeContact                              API_DEPRECATED_WITH_REPLACEMENT("UTTypeContact", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeArchive                              API_DEPRECATED_WITH_REPLACEMENT("UTTypeArchive", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeDiskImage                            API_DEPRECATED_WITH_REPLACEMENT("UTTypeDiskImage", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
 
 #pragma mark - Concrete base types
 /*
- *  kUTTypeData
+ *  kUTTypeData   *** DEPRECATED ***
  *
  *    base type for any sort of simple byte stream,
  *    including files and in-memory data
@@ -114,7 +114,7 @@ extern const CFStringRef kUTTypeDiskImage                            API_AVAILAB
  *    conforms to: public.item
  *
  *
- *  kUTTypeDirectory
+ *  kUTTypeDirectory   *** DEPRECATED ***
  *
  *    file system directory 
  *    (includes packages AND folders)
@@ -123,14 +123,14 @@ extern const CFStringRef kUTTypeDiskImage                            API_AVAILAB
  *    conforms to: public.item
  *
  *
- *  kUTTypeResolvable
+ *  kUTTypeResolvable   *** DEPRECATED ***
  *
  *    symlink and alias file types conform to this UTI
  *
  *    UTI: com.apple.resolvable
  *
  *
- *  kUTTypeSymLink
+ *  kUTTypeSymLink   *** DEPRECATED ***
  *
  *    a symbolic link
  *
@@ -138,14 +138,14 @@ extern const CFStringRef kUTTypeDiskImage                            API_AVAILAB
  *    conforms to: public.item, com.apple.resolvable
  *
  *
- *  kUTTypeExecutable
+ *  kUTTypeExecutable   *** DEPRECATED ***
  *
  *    an executable item
  *    UTI: public.executable
  *    conforms to: public.item
  *
  *
- *  kUTTypeMountPoint
+ *  kUTTypeMountPoint   *** DEPRECATED ***
  *
  *    a volume mount point (resolvable, resolves to the root dir of a volume)
  *
@@ -153,7 +153,7 @@ extern const CFStringRef kUTTypeDiskImage                            API_AVAILAB
  *    conforms to: public.item, com.apple.resolvable
  *
  *
- *  kUTTypeAliasFile
+ *  kUTTypeAliasFile   *** DEPRECATED ***
  *
  *    a fully-formed alias file
  *
@@ -161,7 +161,7 @@ extern const CFStringRef kUTTypeDiskImage                            API_AVAILAB
  *    conforms to: public.data, com.apple.resolvable
  *
  *
- *  kUTTypeAliasRecord
+ *  kUTTypeAliasRecord   *** DEPRECATED ***
  *
  *    raw alias data
  *
@@ -169,7 +169,7 @@ extern const CFStringRef kUTTypeDiskImage                            API_AVAILAB
  *    conforms to: public.data, com.apple.resolvable
  *
  *
- *  kUTTypeURLBookmarkData
+ *  kUTTypeURLBookmarkData   *** DEPRECATED ***
  *
  *    URL bookmark
  *
@@ -177,19 +177,19 @@ extern const CFStringRef kUTTypeDiskImage                            API_AVAILAB
  *    conforms to: public.data, com.apple.resolvable
  *
  */
-extern const CFStringRef kUTTypeData                                 API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeDirectory                            API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeResolvable                           API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeSymLink                              API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeExecutable                           API_AVAILABLE( ios(8.0), macos(10.5), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeMountPoint                           API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeAliasFile                            API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeAliasRecord                          API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeURLBookmarkData                      API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeData                                 API_DEPRECATED_WITH_REPLACEMENT("UTTypeData", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeDirectory                            API_DEPRECATED_WITH_REPLACEMENT("UTTypeDirectory", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeResolvable                           API_DEPRECATED_WITH_REPLACEMENT("UTTypeResolvable", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeSymLink                              API_DEPRECATED_WITH_REPLACEMENT("UTTypeSymLink", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeExecutable                           API_DEPRECATED_WITH_REPLACEMENT("UTTypeExecutable", ios(8.0, API_TO_BE_DEPRECATED), macos(10.5, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeMountPoint                           API_DEPRECATED_WITH_REPLACEMENT("UTTypeMountPoint", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeAliasFile                            API_DEPRECATED_WITH_REPLACEMENT("UTTypeAliasFile", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeAliasRecord                          API_DEPRECATED("The Alias Manager is obsolete.", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeURLBookmarkData                      API_DEPRECATED_WITH_REPLACEMENT("UTTypeURLBookmarkData", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
 
 #pragma mark - URL types
 /*
- *  kUTTypeURL
+ *  kUTTypeURL   *** DEPRECATED ***
  *
  *    The bytes of a URL
  *    (OSType 'url ')
@@ -198,7 +198,7 @@ extern const CFStringRef kUTTypeURLBookmarkData                      API_AVAILAB
  *    conforms to: public.data
  *
  *
- *  kUTTypeFileURL
+ *  kUTTypeFileURL   *** DEPRECATED ***
  *
  *    The text of a "file:" URL 
  *    (OSType 'furl')
@@ -207,12 +207,12 @@ extern const CFStringRef kUTTypeURLBookmarkData                      API_AVAILAB
  *    conforms to: public.url
  *
  */
-extern const CFStringRef kUTTypeURL                                  API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeFileURL                              API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeURL                                  API_DEPRECATED_WITH_REPLACEMENT("UTTypeURL", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeFileURL                              API_DEPRECATED_WITH_REPLACEMENT("UTTypeFileURL", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
 
 #pragma mark - Text types
 /*
- *  kUTTypeText
+ *  kUTTypeText   *** DEPRECATED ***
  *
  *    base type for all text-encoded data, 
  *    including text with markup (HTML, RTF, etc.)
@@ -221,7 +221,7 @@ extern const CFStringRef kUTTypeFileURL                              API_AVAILAB
  *    conforms to: public.data, public.content
  *
  *
- *  kUTTypePlainText
+ *  kUTTypePlainText   *** DEPRECATED ***
  *
  *    text with no markup, unspecified encoding
  *
@@ -229,7 +229,7 @@ extern const CFStringRef kUTTypeFileURL                              API_AVAILAB
  *    conforms to: public.text
  *
  *
- *  kUTTypeUTF8PlainText
+ *  kUTTypeUTF8PlainText   *** DEPRECATED ***
  *
  *    plain text, UTF-8 encoding
  *    (OSType 'utf8', NSPasteboardType "NSStringPBoardType")
@@ -238,7 +238,7 @@ extern const CFStringRef kUTTypeFileURL                              API_AVAILAB
  *    conforms to: public.plain-text
  *
  *
- *  kUTTypeUTF16ExternalPlainText
+ *  kUTTypeUTF16ExternalPlainText   *** DEPRECATED ***
  *
  *    plain text, UTF-16 encoding, with BOM, or if BOM 
  *    is not present, has "external representation" 
@@ -249,7 +249,7 @@ extern const CFStringRef kUTTypeFileURL                              API_AVAILAB
  *    conforms to: public.plain-text
  *
  *
- *  kUTTypeUTF16PlainText
+ *  kUTTypeUTF16PlainText   *** DEPRECATED ***
  *
  *    plain text, UTF-16 encoding, native byte order, optional BOM
  *    (OSType 'utxt')
@@ -258,7 +258,7 @@ extern const CFStringRef kUTTypeFileURL                              API_AVAILAB
  *    conforms to: public.plain-text
  *
  *
- *  kUTTypeDelimitedText
+ *  kUTTypeDelimitedText   *** DEPRECATED ***
  *
  *    text containing delimited values
  *
@@ -266,7 +266,7 @@ extern const CFStringRef kUTTypeFileURL                              API_AVAILAB
  *    conforms to: public.text
  *
  *
- *  kUTTypeCommaSeparatedText
+ *  kUTTypeCommaSeparatedText   *** DEPRECATED ***
  *
  *    text containing comma-separated values (.csv)
  *
@@ -274,7 +274,7 @@ extern const CFStringRef kUTTypeFileURL                              API_AVAILAB
  *    conforms to: public.delimited-values-text
  *
  *
- *  kUTTypeTabSeparatedText
+ *  kUTTypeTabSeparatedText   *** DEPRECATED ***
  *
  *    text containing tab-separated values
  *
@@ -282,7 +282,7 @@ extern const CFStringRef kUTTypeFileURL                              API_AVAILAB
  *    conforms to: public.delimited-values-text
  *
  *
- *  kUTTypeUTF8TabSeparatedText
+ *  kUTTypeUTF8TabSeparatedText   *** DEPRECATED ***
  *
  *    UTF-8 encoded text containing tab-separated values
  *
@@ -290,7 +290,7 @@ extern const CFStringRef kUTTypeFileURL                              API_AVAILAB
  *    conforms to: public.tab-separated-values-text, public.utf8-plain-text
  *
  *
- *  kUTTypeRTF
+ *  kUTTypeRTF   *** DEPRECATED ***
  *
  *    Rich Text Format
  *
@@ -298,20 +298,20 @@ extern const CFStringRef kUTTypeFileURL                              API_AVAILAB
  *    conforms to: public.text
  *
  */
-extern const CFStringRef kUTTypeText                                 API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypePlainText                            API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeUTF8PlainText                        API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeUTF16ExternalPlainText               API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeUTF16PlainText                       API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeDelimitedText                        API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeCommaSeparatedText                   API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeTabSeparatedText                     API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeUTF8TabSeparatedText                 API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeRTF                                  API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeText                                 API_DEPRECATED_WITH_REPLACEMENT("UTTypeText", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypePlainText                            API_DEPRECATED_WITH_REPLACEMENT("UTTypePlainText", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeUTF8PlainText                        API_DEPRECATED_WITH_REPLACEMENT("UTTypeUTF8PlainText", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeUTF16ExternalPlainText               API_DEPRECATED_WITH_REPLACEMENT("UTTypeUTF16ExternalPlainText", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeUTF16PlainText                       API_DEPRECATED_WITH_REPLACEMENT("UTTypeUTF16PlainText", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeDelimitedText                        API_DEPRECATED_WITH_REPLACEMENT("UTTypeDelimitedText", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeCommaSeparatedText                   API_DEPRECATED_WITH_REPLACEMENT("UTTypeCommaSeparatedText", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeTabSeparatedText                     API_DEPRECATED_WITH_REPLACEMENT("UTTypeTabSeparatedText", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeUTF8TabSeparatedText                 API_DEPRECATED_WITH_REPLACEMENT("UTTypeUTF8TabSeparatedText", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeRTF                                  API_DEPRECATED_WITH_REPLACEMENT("UTTypeRTF", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
 
 #pragma mark - Markup languages
 /*
- *  kUTTypeHTML
+ *  kUTTypeHTML   *** DEPRECATED ***
  *
  *    HTML, any version
  *
@@ -319,7 +319,7 @@ extern const CFStringRef kUTTypeRTF                                  API_AVAILAB
  *    conforms to: public.text
  *
  *
- *  kUTTypeXML
+ *  kUTTypeXML   *** DEPRECATED ***
  *
  *    generic XML
  *
@@ -327,12 +327,12 @@ extern const CFStringRef kUTTypeRTF                                  API_AVAILAB
  *    conforms to: public.text
  *
  */
-extern const CFStringRef kUTTypeHTML                                 API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeXML                                  API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeHTML                                 API_DEPRECATED_WITH_REPLACEMENT("UTTypeHTML", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeXML                                  API_DEPRECATED_WITH_REPLACEMENT("UTTypeXML", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
 
 #pragma mark - Programming languages
 /*
- *  kUTTypeSourceCode
+ *  kUTTypeSourceCode   *** DEPRECATED ***
  *
  *    abstract type for source code (any language)
  *
@@ -340,7 +340,7 @@ extern const CFStringRef kUTTypeXML                                  API_AVAILAB
  *    conforms to: public.plain-text
  *
  *
- *  kUTTypeAssemblyLanguageSource
+ *  kUTTypeAssemblyLanguageSource   *** DEPRECATED ***
  *
  *    assembly language source (.s)
  *
@@ -348,7 +348,7 @@ extern const CFStringRef kUTTypeXML                                  API_AVAILAB
  *    conforms to: public.source-code
  *
  *
- *  kUTTypeCSource
+ *  kUTTypeCSource   *** DEPRECATED ***
  *
  *    C source code (.c)
  *
@@ -356,7 +356,7 @@ extern const CFStringRef kUTTypeXML                                  API_AVAILAB
  *    conforms to: public.source-code
  *
  *
- *  kUTTypeObjectiveCSource
+ *  kUTTypeObjectiveCSource   *** DEPRECATED ***
  *
  *    Objective-C source code (.m)
  *
@@ -364,7 +364,7 @@ extern const CFStringRef kUTTypeXML                                  API_AVAILAB
  *    conforms to: public.source-code
  *
  *
- *  kUTTypeSwiftSource
+ *  kUTTypeSwiftSource   *** DEPRECATED ***
  *
  *    Swift source code (.swift)
  *
@@ -372,7 +372,7 @@ extern const CFStringRef kUTTypeXML                                  API_AVAILAB
  *    conforms to: public.source-code
  *
  *
- *  kUTTypeCPlusPlusSource
+ *  kUTTypeCPlusPlusSource   *** DEPRECATED ***
  *
  *    C++ source code (.cp, etc.)
  *
@@ -380,7 +380,7 @@ extern const CFStringRef kUTTypeXML                                  API_AVAILAB
  *    conforms to: public.source-code
  *
  *
- *  kUTTypeObjectiveCPlusPlusSource
+ *  kUTTypeObjectiveCPlusPlusSource   *** DEPRECATED ***
  *
  *    Objective-C++ source code
  *
@@ -388,7 +388,7 @@ extern const CFStringRef kUTTypeXML                                  API_AVAILAB
  *    conforms to: public.source-code
  *
  *
- *  kUTTypeCHeader
+ *  kUTTypeCHeader   *** DEPRECATED ***
  *
  *    C header
  *
@@ -396,7 +396,7 @@ extern const CFStringRef kUTTypeXML                                  API_AVAILAB
  *    conforms to: public.source-code
  *
  *
- *  kUTTypeCPlusPlusHeader
+ *  kUTTypeCPlusPlusHeader   *** DEPRECATED ***
  *
  *    C++ header
  *
@@ -404,7 +404,7 @@ extern const CFStringRef kUTTypeXML                                  API_AVAILAB
  *    conforms to: public.source-code
  *
  *
- *  kUTTypeJavaSource
+ *  kUTTypeJavaSource   *** DEPRECATED ***
  *
  *    Java source code
  *
@@ -412,20 +412,20 @@ extern const CFStringRef kUTTypeXML                                  API_AVAILAB
  *    conforms to: public.source-code
  *
  */
-extern const CFStringRef kUTTypeSourceCode                           API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeAssemblyLanguageSource               API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeCSource                              API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeObjectiveCSource                     API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeSwiftSource                          API_AVAILABLE( ios(9.0), macos(10.11), tvos(9.0), watchos(2.0) );
-extern const CFStringRef kUTTypeCPlusPlusSource                      API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeObjectiveCPlusPlusSource             API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeCHeader                              API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeCPlusPlusHeader                      API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeJavaSource                           API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeSourceCode                           API_DEPRECATED_WITH_REPLACEMENT("UTTypeSourceCode", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeAssemblyLanguageSource               API_DEPRECATED_WITH_REPLACEMENT("UTTypeAssemblyLanguageSource", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeCSource                              API_DEPRECATED_WITH_REPLACEMENT("UTTypeCSource", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeObjectiveCSource                     API_DEPRECATED_WITH_REPLACEMENT("UTTypeObjectiveCSource", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeSwiftSource                          API_DEPRECATED_WITH_REPLACEMENT("UTTypeSwiftSource", ios(9.0, API_TO_BE_DEPRECATED), macos(10.11, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeCPlusPlusSource                      API_DEPRECATED_WITH_REPLACEMENT("UTTypeCPlusPlusSource", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeObjectiveCPlusPlusSource             API_DEPRECATED_WITH_REPLACEMENT("UTTypeObjectiveCPlusPlusSource", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeCHeader                              API_DEPRECATED_WITH_REPLACEMENT("UTTypeCHeader", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeCPlusPlusHeader                      API_DEPRECATED_WITH_REPLACEMENT("UTTypeCPlusPlusHeader", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeJavaSource                           API_DEPRECATED("Java support is no longer provided by this operating system. Install a JDK to use Java.", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
 
 #pragma mark - Scripting languages
 /*
- *  kUTTypeScript
+ *  kUTTypeScript   *** DEPRECATED ***
  *
  *    scripting language source
  *
@@ -433,7 +433,7 @@ extern const CFStringRef kUTTypeJavaSource                           API_AVAILAB
  *    conforms to: public.source-code
  *
  *
- *  kUTTypeAppleScript
+ *  kUTTypeAppleScript   *** DEPRECATED ***
  *
  *    AppleScript text format (.applescript)
  *
@@ -441,7 +441,7 @@ extern const CFStringRef kUTTypeJavaSource                           API_AVAILAB
  *    conforms to: public.script
  *
  *
- *  kUTTypeOSAScript
+ *  kUTTypeOSAScript   *** DEPRECATED ***
  *
  *    Open Scripting Architecture script binary format (.scpt)
  *
@@ -449,7 +449,7 @@ extern const CFStringRef kUTTypeJavaSource                           API_AVAILAB
  *    conforms to: public.data, public.script
  *
  *
- *  kUTTypeOSAScriptBundle
+ *  kUTTypeOSAScriptBundle   *** DEPRECATED ***
  *
  *    Open Scripting Architecture script bundle format (.scptd)
  *
@@ -457,7 +457,7 @@ extern const CFStringRef kUTTypeJavaSource                           API_AVAILAB
  *    conforms to: com.apple.bundle, com.apple.package, public.script
  *
  *
- *  kUTTypeJavaScript
+ *  kUTTypeJavaScript   *** DEPRECATED ***
  *
  *    JavaScript source code
  *
@@ -465,7 +465,7 @@ extern const CFStringRef kUTTypeJavaSource                           API_AVAILAB
  *    conforms to: public.source-code, public.executable
  *
  *
- *  kUTTypeShellScript
+ *  kUTTypeShellScript   *** DEPRECATED ***
  *
  *    base type for shell scripts
  *
@@ -473,7 +473,7 @@ extern const CFStringRef kUTTypeJavaSource                           API_AVAILAB
  *    conforms to: public.script
  *
  *
- *  kUTTypePerlScript
+ *  kUTTypePerlScript   *** DEPRECATED ***
  *
  *    Perl script
  *
@@ -481,7 +481,7 @@ extern const CFStringRef kUTTypeJavaSource                           API_AVAILAB
  *    conforms to: public.shell-script
  *
  *
- *  kUTTypePythonScript
+ *  kUTTypePythonScript   *** DEPRECATED ***
  *
  *    Python script
  *
@@ -489,7 +489,7 @@ extern const CFStringRef kUTTypeJavaSource                           API_AVAILAB
  *    conforms to: public.shell-script
  *
  *
- *  kUTTypeRubyScript
+ *  kUTTypeRubyScript   *** DEPRECATED ***
  *
  *    Ruby script
  *
@@ -497,7 +497,7 @@ extern const CFStringRef kUTTypeJavaSource                           API_AVAILAB
  *    conforms to: public.shell-script
  *
  *
- *  kUTTypePHPScript
+ *  kUTTypePHPScript   *** DEPRECATED ***
  *
  *    PHP script
  *
@@ -505,20 +505,20 @@ extern const CFStringRef kUTTypeJavaSource                           API_AVAILAB
  *    conforms to: public.shell-script
  *
  */
-extern const CFStringRef kUTTypeScript                               API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeAppleScript                          API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeOSAScript                            API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeOSAScriptBundle                      API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeJavaScript                           API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeShellScript                          API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypePerlScript                           API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypePythonScript                         API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeRubyScript                           API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypePHPScript                            API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeScript                               API_DEPRECATED_WITH_REPLACEMENT("UTTypeScript", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeAppleScript                          API_DEPRECATED_WITH_REPLACEMENT("UTTypeAppleScript", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeOSAScript                            API_DEPRECATED_WITH_REPLACEMENT("UTTypeOSAScript", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeOSAScriptBundle                      API_DEPRECATED_WITH_REPLACEMENT("UTTypeOSAScriptBundle", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeJavaScript                           API_DEPRECATED_WITH_REPLACEMENT("UTTypeJavaScript", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeShellScript                          API_DEPRECATED_WITH_REPLACEMENT("UTTypeShellScript", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypePerlScript                           API_DEPRECATED_WITH_REPLACEMENT("UTTypePerlScript", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypePythonScript                         API_DEPRECATED_WITH_REPLACEMENT("UTTypePythonScript", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeRubyScript                           API_DEPRECATED_WITH_REPLACEMENT("UTTypeRubyScript", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypePHPScript                            API_DEPRECATED_WITH_REPLACEMENT("UTTypePHPScript", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
 
 #pragma mark - Serialized data types
 /*
- *  kUTTypeJSON
+ *  kUTTypeJSON   *** DEPRECATED ***
  *
  *    JavaScript object notation (JSON) data
  *    NOTE: JSON almost but doesn't quite conform to
@@ -528,7 +528,7 @@ extern const CFStringRef kUTTypePHPScript                            API_AVAILAB
  *    conforms to: public.text
  *
  *
- *  kUTTypePropertyList
+ *  kUTTypePropertyList   *** DEPRECATED ***
  *
  *    base type for property lists
  *
@@ -536,7 +536,7 @@ extern const CFStringRef kUTTypePHPScript                            API_AVAILAB
  *    conforms to: public.data
  *
  *
- *  kUTTypeXMLPropertyList
+ *  kUTTypeXMLPropertyList   *** DEPRECATED ***
  *
  *    XML property list
  *
@@ -544,7 +544,7 @@ extern const CFStringRef kUTTypePHPScript                            API_AVAILAB
  *    conforms to: public.xml, com.apple.property-list
  *
  *
- *  kUTTypeBinaryPropertyList
+ *  kUTTypeBinaryPropertyList   *** DEPRECATED ***
  *
  *    XML property list
  *
@@ -552,14 +552,14 @@ extern const CFStringRef kUTTypePHPScript                            API_AVAILAB
  *    conforms to: com.apple.property-list
  *
  */
-extern const CFStringRef kUTTypeJSON                                 API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypePropertyList                         API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeXMLPropertyList                      API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeBinaryPropertyList                   API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeJSON                                 API_DEPRECATED_WITH_REPLACEMENT("UTTypeJSON", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypePropertyList                         API_DEPRECATED_WITH_REPLACEMENT("UTTypePropertyList", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeXMLPropertyList                      API_DEPRECATED_WITH_REPLACEMENT("UTTypeXMLPropertyList", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeBinaryPropertyList                   API_DEPRECATED_WITH_REPLACEMENT("UTTypeBinaryPropertyList", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
 
 #pragma mark - Composite content types
 /*
- *  kUTTypePDF
+ *  kUTTypePDF   *** DEPRECATED ***
  *
  *    Adobe PDF
  *
@@ -567,7 +567,7 @@ extern const CFStringRef kUTTypeBinaryPropertyList                   API_AVAILAB
  *    conforms to: public.data, public.composite-content
  *
  *
- *  kUTTypeRTFD
+ *  kUTTypeRTFD   *** DEPRECATED ***
  *
  *    Rich Text Format Directory 
  *    (RTF with content embedding, on-disk format)
@@ -576,7 +576,7 @@ extern const CFStringRef kUTTypeBinaryPropertyList                   API_AVAILAB
  *    conforms to: com.apple.package, public.composite-content
  *
  *
- *  kUTTypeFlatRTFD
+ *  kUTTypeFlatRTFD   *** DEPRECATED ***
  *
  *    Flattened RTFD (pasteboard format)
  *
@@ -584,7 +584,7 @@ extern const CFStringRef kUTTypeBinaryPropertyList                   API_AVAILAB
  *    conforms to: public.data, public.composite-content
  *
  *
- *  kUTTypeTXNTextAndMultimediaData
+ *  kUTTypeTXNTextAndMultimediaData   *** DEPRECATED ***
  *
  *    MLTE (Textension) format for mixed text & multimedia data
  *    (OSType 'txtn')
@@ -593,23 +593,23 @@ extern const CFStringRef kUTTypeBinaryPropertyList                   API_AVAILAB
  *    conforms to: public.data, public.composite-content
  *
  *
- *  kUTTypeWebArchive
+ *  kUTTypeWebArchive   *** DEPRECATED ***
  *
  *    The WebKit webarchive format
  *
  *    UTI: com.apple.webarchive
  *    conforms to: public.data, public.composite-content
  */
-extern const CFStringRef kUTTypePDF                                  API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeRTFD                                 API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeFlatRTFD                             API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeTXNTextAndMultimediaData             API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeWebArchive                           API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypePDF                                  API_DEPRECATED_WITH_REPLACEMENT("UTTypePDF", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeRTFD                                 API_DEPRECATED_WITH_REPLACEMENT("UTTypeRTFD", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeFlatRTFD                             API_DEPRECATED_WITH_REPLACEMENT("UTTypeFlatRTFD", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeTXNTextAndMultimediaData             API_DEPRECATED("The Multilingual Text Engine is obsolete.", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeWebArchive                           API_DEPRECATED_WITH_REPLACEMENT("UTTypeWebArchive", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
 
 
 #pragma mark - Image content types
 /*
- *  kUTTypeImage
+ *  kUTTypeImage   *** DEPRECATED ***
  *
  *    abstract image data
  *
@@ -617,7 +617,7 @@ extern const CFStringRef kUTTypeWebArchive                           API_AVAILAB
  *    conforms to: public.data, public.content
  *
  *
- *  kUTTypeJPEG
+ *  kUTTypeJPEG   *** DEPRECATED ***
  *
  *    JPEG image
  *
@@ -625,7 +625,7 @@ extern const CFStringRef kUTTypeWebArchive                           API_AVAILAB
  *    conforms to: public.image
  *
  *
- *  kUTTypeJPEG2000
+ *  kUTTypeJPEG2000   *** DEPRECATED ***
  *
  *    JPEG-2000 image
  *
@@ -633,7 +633,7 @@ extern const CFStringRef kUTTypeWebArchive                           API_AVAILAB
  *    conforms to: public.image
  *
  *
- *  kUTTypeTIFF
+ *  kUTTypeTIFF   *** DEPRECATED ***
  *
  *    TIFF image
  *
@@ -641,7 +641,7 @@ extern const CFStringRef kUTTypeWebArchive                           API_AVAILAB
  *    conforms to: public.image
  *
  *
- *  kUTTypePICT
+ *  kUTTypePICT   *** DEPRECATED ***
  *
  *    Quickdraw PICT format
  *
@@ -649,7 +649,7 @@ extern const CFStringRef kUTTypeWebArchive                           API_AVAILAB
  *    conforms to: public.image
  *
  *
- *  kUTTypeGIF
+ *  kUTTypeGIF   *** DEPRECATED ***
  *
  *    GIF image
  *
@@ -657,7 +657,7 @@ extern const CFStringRef kUTTypeWebArchive                           API_AVAILAB
  *    conforms to: public.image
  *
  *
- *  kUTTypePNG
+ *  kUTTypePNG   *** DEPRECATED ***
  *
  *    PNG image
  *
@@ -665,7 +665,7 @@ extern const CFStringRef kUTTypeWebArchive                           API_AVAILAB
  *    conforms to: public.image
  *
  *
- *  kUTTypeQuickTimeImage
+ *  kUTTypeQuickTimeImage   *** DEPRECATED ***
  *
  *    QuickTime image format (OSType 'qtif')
  *
@@ -673,7 +673,7 @@ extern const CFStringRef kUTTypeWebArchive                           API_AVAILAB
  *    conforms to: public.image
  *
  *
- *  kUTTypeAppleICNS
+ *  kUTTypeAppleICNS   *** DEPRECATED ***
  *
  *    Apple icon data
  *
@@ -681,7 +681,7 @@ extern const CFStringRef kUTTypeWebArchive                           API_AVAILAB
  *    conforms to: public.image
  *
  *
- *  kUTTypeBMP
+ *  kUTTypeBMP   *** DEPRECATED ***
  *
  *    Windows bitmap
  *
@@ -689,7 +689,7 @@ extern const CFStringRef kUTTypeWebArchive                           API_AVAILAB
  *    conforms to: public.image
  *
  *
- *  kUTTypeICO
+ *  kUTTypeICO   *** DEPRECATED ***
  *
  *    Windows icon data
  *
@@ -697,7 +697,7 @@ extern const CFStringRef kUTTypeWebArchive                           API_AVAILAB
  *    conforms to: public.image
  *
  *
- *  kUTTypeRawImage
+ *  kUTTypeRawImage   *** DEPRECATED ***
  *
  *    base type for raw image data (.raw)
  *
@@ -705,14 +705,14 @@ extern const CFStringRef kUTTypeWebArchive                           API_AVAILAB
  *    conforms to: public.image
  *
  *
- *  kUTTypeScalableVectorGraphics
+ *  kUTTypeScalableVectorGraphics   *** DEPRECATED ***
  *
  *    SVG image
  *
  *    UTI: public.svg-image
  *    conforms to: public.image
  *
- *  kUTTypeLivePhoto
+ *  kUTTypeLivePhoto   *** DEPRECATED ***
  *
  *    Live Photo
  *
@@ -720,24 +720,24 @@ extern const CFStringRef kUTTypeWebArchive                           API_AVAILAB
  *
  *
  */
-extern const CFStringRef kUTTypeImage                                API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeJPEG                                 API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeJPEG2000                             API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeTIFF                                 API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypePICT                                 API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeGIF                                  API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypePNG                                  API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeQuickTimeImage                       API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeAppleICNS                            API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeBMP                                  API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeICO                                  API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeRawImage                             API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeScalableVectorGraphics               API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeLivePhoto                            API_AVAILABLE( ios(9.1), macos(10.12), tvos(9.0), watchos(2.1) );
+extern const CFStringRef kUTTypeImage                                API_DEPRECATED_WITH_REPLACEMENT("UTTypeImage", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeJPEG                                 API_DEPRECATED_WITH_REPLACEMENT("UTTypeJPEG", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeJPEG2000                             API_DEPRECATED("JPEG2000 is no longer supported by this operating system.", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeTIFF                                 API_DEPRECATED_WITH_REPLACEMENT("UTTypeTIFF", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypePICT                                 API_DEPRECATED("QuickDraw is obsolete.", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeGIF                                  API_DEPRECATED_WITH_REPLACEMENT("UTTypeGIF", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypePNG                                  API_DEPRECATED_WITH_REPLACEMENT("UTTypePNG", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeQuickTimeImage                       API_DEPRECATED("The QuickTime Image file format is obsolete.", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeAppleICNS                            API_DEPRECATED_WITH_REPLACEMENT("UTTypeICNS", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeBMP                                  API_DEPRECATED_WITH_REPLACEMENT("UTTypeBMP", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeICO                                  API_DEPRECATED_WITH_REPLACEMENT("UTTypeICO", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeRawImage                             API_DEPRECATED_WITH_REPLACEMENT("UTTypeRAWImage", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeScalableVectorGraphics               API_DEPRECATED_WITH_REPLACEMENT("UTTypeSVG", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeLivePhoto                            API_DEPRECATED_WITH_REPLACEMENT("UTTypeLivePhoto", ios(9.1, API_TO_BE_DEPRECATED), macos(10.12, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(2.1, API_TO_BE_DEPRECATED));
 
 #pragma mark - Audiovisual content types
 /*
- *  kUTTypeAudiovisualContent
+ *  kUTTypeAudiovisualContent   *** DEPRECATED ***
  *
  *    audio and/or video content
  *
@@ -745,7 +745,7 @@ extern const CFStringRef kUTTypeLivePhoto                            API_AVAILAB
  *    conforms to: public.data, public.content
  *
  *
- *  kUTTypeMovie
+ *  kUTTypeMovie   *** DEPRECATED ***
  *
  *    A media format which may contain both video and audio
  *    Corresponds to what users would label a "movie"
@@ -754,7 +754,7 @@ extern const CFStringRef kUTTypeLivePhoto                            API_AVAILAB
  *    conforms to: public.audiovisual-content
  *
  *
- *  kUTTypeVideo
+ *  kUTTypeVideo   *** DEPRECATED ***
  *
  *    pure video (no audio)
  *
@@ -762,7 +762,7 @@ extern const CFStringRef kUTTypeLivePhoto                            API_AVAILAB
  *    conforms to: public.movie
  *
  *
- *  kUTTypeAudio
+ *  kUTTypeAudio   *** DEPRECATED ***
  *
  *    pure audio (no video)
  *
@@ -770,7 +770,7 @@ extern const CFStringRef kUTTypeLivePhoto                            API_AVAILAB
  *    conforms to: public.audiovisual-content
  *
  *
- *  kUTTypeQuickTimeMovie
+ *  kUTTypeQuickTimeMovie   *** DEPRECATED ***
  *
  *    QuickTime movie
  *
@@ -778,7 +778,7 @@ extern const CFStringRef kUTTypeLivePhoto                            API_AVAILAB
  *    conforms to: public.movie
  *
  *
- *  kUTTypeMPEG
+ *  kUTTypeMPEG   *** DEPRECATED ***
  *
  *    MPEG-1 or MPEG-2 movie
  *
@@ -786,7 +786,7 @@ extern const CFStringRef kUTTypeLivePhoto                            API_AVAILAB
  *    conforms to: public.movie
  *
  *
- *  kUTTypeMPEG2Video
+ *  kUTTypeMPEG2Video   *** DEPRECATED ***
  *
  *    MPEG-2 video
  *
@@ -794,7 +794,7 @@ extern const CFStringRef kUTTypeLivePhoto                            API_AVAILAB
  *    conforms to: public.video
  *
  *
- *  kUTTypeMPEG2TransportStream
+ *  kUTTypeMPEG2TransportStream   *** DEPRECATED ***
  *
  *    MPEG-2 Transport Stream movie format
  *
@@ -802,7 +802,7 @@ extern const CFStringRef kUTTypeLivePhoto                            API_AVAILAB
  *    conforms to: public.movie
  *
  *
- *  kUTTypeMP3
+ *  kUTTypeMP3   *** DEPRECATED ***
  *
  *    MP3 audio
  *
@@ -810,7 +810,7 @@ extern const CFStringRef kUTTypeLivePhoto                            API_AVAILAB
  *    conforms to: public.audio
  *
  *
- *  kUTTypeMPEG4
+ *  kUTTypeMPEG4   *** DEPRECATED ***
  *
  *    MPEG-4 movie
  *
@@ -818,7 +818,7 @@ extern const CFStringRef kUTTypeLivePhoto                            API_AVAILAB
  *    conforms to: public.movie
  *
  *
- *  kUTTypeMPEG4Audio
+ *  kUTTypeMPEG4Audio   *** DEPRECATED ***
  *
  *    MPEG-4 audio layer
  *
@@ -826,7 +826,7 @@ extern const CFStringRef kUTTypeLivePhoto                            API_AVAILAB
  *    conforms to: public.mpeg-4, public.audio
  *
  *
- *  kUTTypeAppleProtectedMPEG4Audio
+ *  kUTTypeAppleProtectedMPEG4Audio   *** DEPRECATED ***
  *
  *    Apple protected MPEG4 format
  *    (.m4p, iTunes music store format)
@@ -835,7 +835,7 @@ extern const CFStringRef kUTTypeLivePhoto                            API_AVAILAB
  *    conforms to: public.audio
  *
  *
- *  kUTTypeAppleProtectedMPEG4Video
+ *  kUTTypeAppleProtectedMPEG4Video   *** DEPRECATED ***
  *
  *    Apple protected MPEG-4 movie
  *
@@ -843,7 +843,7 @@ extern const CFStringRef kUTTypeLivePhoto                            API_AVAILAB
  *    conforms to: com.apple.m4v-video
  *
  *
- *  kUTTypeAVIMovie
+ *  kUTTypeAVIMovie   *** DEPRECATED ***
  *
  *    Audio Video Interleaved (AVI) movie format
  *
@@ -851,7 +851,7 @@ extern const CFStringRef kUTTypeLivePhoto                            API_AVAILAB
  *    conforms to: public.movie
  *
  *
- *  kUTTypeAudioInterchangeFileFormat
+ *  kUTTypeAudioInterchangeFileFormat   *** DEPRECATED ***
  *
  *    AIFF audio format
  *
@@ -859,7 +859,7 @@ extern const CFStringRef kUTTypeLivePhoto                            API_AVAILAB
  *    conforms to: public.aifc-audio
  *
  *
- *  kUTTypeWaveformAudio
+ *  kUTTypeWaveformAudio   *** DEPRECATED ***
  *
  *    Waveform audio format (.wav)
  *
@@ -867,7 +867,7 @@ extern const CFStringRef kUTTypeLivePhoto                            API_AVAILAB
  *    conforms to: public.audio
  *
  *
- *  kUTTypeMIDIAudio
+ *  kUTTypeMIDIAudio   *** DEPRECATED ***
  *
  *    MIDI audio format
  *
@@ -876,33 +876,33 @@ extern const CFStringRef kUTTypeLivePhoto                            API_AVAILAB
  *
  *
  */
-extern const CFStringRef kUTTypeAudiovisualContent                   API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeMovie                                API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeVideo                                API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeAudio                                API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeQuickTimeMovie                       API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeMPEG                                 API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeMPEG2Video                           API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeMPEG2TransportStream                 API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeMP3                                  API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeMPEG4                                API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeMPEG4Audio                           API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeAppleProtectedMPEG4Audio             API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeAppleProtectedMPEG4Video             API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeAVIMovie                             API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeAudioInterchangeFileFormat           API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeWaveformAudio                        API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeMIDIAudio                            API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeAudiovisualContent                   API_DEPRECATED_WITH_REPLACEMENT("UTTypeAudiovisualContent", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeMovie                                API_DEPRECATED_WITH_REPLACEMENT("UTTypeMovie", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeVideo                                API_DEPRECATED_WITH_REPLACEMENT("UTTypeVideo", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeAudio                                API_DEPRECATED_WITH_REPLACEMENT("UTTypeAudio", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeQuickTimeMovie                       API_DEPRECATED_WITH_REPLACEMENT("UTTypeQuickTimeMovie", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeMPEG                                 API_DEPRECATED_WITH_REPLACEMENT("UTTypeMPEG", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeMPEG2Video                           API_DEPRECATED_WITH_REPLACEMENT("UTTypeMPEG2Video", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeMPEG2TransportStream                 API_DEPRECATED_WITH_REPLACEMENT("UTTypeMPEG2TransportStream", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeMP3                                  API_DEPRECATED_WITH_REPLACEMENT("UTTypeMP3", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeMPEG4                                API_DEPRECATED_WITH_REPLACEMENT("UTTypeMPEG4Video", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeMPEG4Audio                           API_DEPRECATED_WITH_REPLACEMENT("UTTypeMPEG4Audio", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeAppleProtectedMPEG4Audio             API_DEPRECATED_WITH_REPLACEMENT("UTTypeAppleProtectedMPEG4Audio", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeAppleProtectedMPEG4Video             API_DEPRECATED_WITH_REPLACEMENT("UTTypeAppleProtectedMPEG4Video", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeAVIMovie                             API_DEPRECATED_WITH_REPLACEMENT("UTTypeAVI", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeAudioInterchangeFileFormat           API_DEPRECATED_WITH_REPLACEMENT("UTTypeAIFF", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeWaveformAudio                        API_DEPRECATED_WITH_REPLACEMENT("UTTypeWAV", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeMIDIAudio                            API_DEPRECATED_WITH_REPLACEMENT("UTTypeMIDI", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
 
 /*
- *  kUTTypePlaylist
+ *  kUTTypePlaylist   *** DEPRECATED ***
  *
  *    base type for playlists
  *
  *    UTI: public.playlist
  *
  *
- *  kUTTypeM3UPlaylist
+ *  kUTTypeM3UPlaylist   *** DEPRECATED ***
  *
  *    M3U or M3U8 playlist
  *
@@ -910,12 +910,12 @@ extern const CFStringRef kUTTypeMIDIAudio                            API_AVAILAB
  *    conforms to: public.text, public.playlist
  *
  */
-extern const CFStringRef kUTTypePlaylist                             API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeM3UPlaylist                          API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypePlaylist                             API_DEPRECATED_WITH_REPLACEMENT("UTTypePlaylist", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeM3UPlaylist                          API_DEPRECATED_WITH_REPLACEMENT("UTTypeM3UPlaylist", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
 
 #pragma mark - Directory types
 /*
- *  kUTTypeFolder
+ *  kUTTypeFolder   *** DEPRECATED ***
  *
  *    a user-browsable directory (i.e., not a package)
  *
@@ -923,7 +923,7 @@ extern const CFStringRef kUTTypeM3UPlaylist                          API_AVAILAB
  *    conforms to: public.directory
  *
  *
- *  kUTTypeVolume
+ *  kUTTypeVolume   *** DEPRECATED ***
  *
  *    the root folder of a volume/mount point
  *
@@ -931,7 +931,7 @@ extern const CFStringRef kUTTypeM3UPlaylist                          API_AVAILAB
  *    conforms to: public.folder
  *
  *
- *  kUTTypePackage
+ *  kUTTypePackage   *** DEPRECATED ***
  *
  *    a packaged directory
  *
@@ -939,7 +939,7 @@ extern const CFStringRef kUTTypeM3UPlaylist                          API_AVAILAB
  *    conforms to: public.directory
  *
  *
- *  kUTTypeBundle
+ *  kUTTypeBundle   *** DEPRECATED ***
  *
  *    a directory conforming to one of the CFBundle layouts
  *
@@ -947,7 +947,7 @@ extern const CFStringRef kUTTypeM3UPlaylist                          API_AVAILAB
  *    conforms to: public.directory
  *
  *
- *  kUTTypePluginBundle
+ *  kUTTypePluginBundle   *** DEPRECATED ***
  *
  *    base type for bundle-based plugins
  *
@@ -955,7 +955,7 @@ extern const CFStringRef kUTTypeM3UPlaylist                          API_AVAILAB
  *    conforms to: com.apple.bundle, com.apple.package
  *
  *
- *  kUTTypeSpotlightImporter
+ *  kUTTypeSpotlightImporter   *** DEPRECATED ***
  *
  *    a Spotlight metadata importer
  *
@@ -963,7 +963,7 @@ extern const CFStringRef kUTTypeM3UPlaylist                          API_AVAILAB
  *    conforms to: com.apple.plugin
  *
  *
- *  kUTTypeQuickLookGenerator
+ *  kUTTypeQuickLookGenerator   *** DEPRECATED ***
  *
  *    a QuickLook preview generator
  *
@@ -971,7 +971,7 @@ extern const CFStringRef kUTTypeM3UPlaylist                          API_AVAILAB
  *    conforms to: com.apple.plugin
  *
  *
- *  kUTTypeXPCService
+ *  kUTTypeXPCService   *** DEPRECATED ***
  *
  *    an XPC service
  *
@@ -979,7 +979,7 @@ extern const CFStringRef kUTTypeM3UPlaylist                          API_AVAILAB
  *    conforms to: com.apple.bundle, com.apple.package
  *
  *
- *  kUTTypeFramework
+ *  kUTTypeFramework   *** DEPRECATED ***
  *
  *    a Mac OS X framework
  *
@@ -987,20 +987,20 @@ extern const CFStringRef kUTTypeM3UPlaylist                          API_AVAILAB
  *    conforms to: com.apple.bundle
  *
  */
-extern const CFStringRef kUTTypeFolder                               API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeVolume                               API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypePackage                              API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeBundle                               API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypePluginBundle                         API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeSpotlightImporter                    API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeQuickLookGenerator                   API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeXPCService                           API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeFramework                            API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeFolder                               API_DEPRECATED_WITH_REPLACEMENT("UTTypeFolder", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeVolume                               API_DEPRECATED_WITH_REPLACEMENT("UTTypeVolume", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypePackage                              API_DEPRECATED_WITH_REPLACEMENT("UTTypePackage", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeBundle                               API_DEPRECATED_WITH_REPLACEMENT("UTTypeBundle", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypePluginBundle                         API_DEPRECATED_WITH_REPLACEMENT("UTTypePluginBundle", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeSpotlightImporter                    API_DEPRECATED_WITH_REPLACEMENT("UTTypeSpotlightImporter", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeQuickLookGenerator                   API_DEPRECATED_WITH_REPLACEMENT("UTTypeQuickLookGenerator", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeXPCService                           API_DEPRECATED_WITH_REPLACEMENT("UTTypeXPCService", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeFramework                            API_DEPRECATED_WITH_REPLACEMENT("UTTypeFramework", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
 
 
 #pragma mark - Application and executable types
 /*
- *  kUTTypeApplication
+ *  kUTTypeApplication   *** DEPRECATED ***
  *
  *    base type for OS X applications, launchable items
  *
@@ -1008,7 +1008,7 @@ extern const CFStringRef kUTTypeFramework                            API_AVAILAB
  *    conforms to: public.executable
  *
  *
- *  kUTTypeApplicationBundle
+ *  kUTTypeApplicationBundle   *** DEPRECATED ***
  *
  *    a bundled application
  *
@@ -1016,7 +1016,7 @@ extern const CFStringRef kUTTypeFramework                            API_AVAILAB
  *    conforms to: com.apple.application, com.apple.bundle, com.apple.package
  *
  *
- *  kUTTypeApplicationFile
+ *  kUTTypeApplicationFile   *** DEPRECATED ***
  *
  *    a single-file Carbon/Classic application 
  *
@@ -1024,7 +1024,7 @@ extern const CFStringRef kUTTypeFramework                            API_AVAILAB
  *    conforms to: com.apple.application, public.data
  *
  *
- *  kUTTypeUnixExecutable
+ *  kUTTypeUnixExecutable   *** DEPRECATED ***
  *
  *    a UNIX executable (flat file)
  *
@@ -1032,7 +1032,7 @@ extern const CFStringRef kUTTypeFramework                            API_AVAILAB
  *    conforms to: public.data, public.executable
  *
  *
- *  kUTTypeWindowsExecutable
+ *  kUTTypeWindowsExecutable   *** DEPRECATED ***
  *
  *    a Windows executable (.exe files)
  *
@@ -1040,7 +1040,7 @@ extern const CFStringRef kUTTypeFramework                            API_AVAILAB
  *    conforms to: public.data, public.executable
  *
  *
- *  kUTTypeJavaClass
+ *  kUTTypeJavaClass   *** DEPRECATED ***
  *
  *    a Java class
  *
@@ -1048,7 +1048,7 @@ extern const CFStringRef kUTTypeFramework                            API_AVAILAB
  *    conforms to: public.data, public.executable
  *
  *
- *  kUTTypeJavaArchive
+ *  kUTTypeJavaArchive   *** DEPRECATED ***
  *
  *    a Java archive (.jar)
  *
@@ -1056,7 +1056,7 @@ extern const CFStringRef kUTTypeFramework                            API_AVAILAB
  *    conforms to: public.zip-archive, public.executable
  *
  *
- *  kUTTypeSystemPreferencesPane
+ *  kUTTypeSystemPreferencesPane   *** DEPRECATED ***
  *
  *    a System Preferences pane
  *
@@ -1065,22 +1065,22 @@ extern const CFStringRef kUTTypeFramework                            API_AVAILAB
  *
  */
 // Abstract executable types
-extern const CFStringRef kUTTypeApplication                          API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeApplicationBundle                    API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeApplicationFile                      API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeUnixExecutable                       API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeApplication                          API_DEPRECATED_WITH_REPLACEMENT("UTTypeApplication", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeApplicationBundle                    API_DEPRECATED_WITH_REPLACEMENT("UTTypeApplicationBundle", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeApplicationFile                      API_DEPRECATED_WITH_REPLACEMENT("Classic applications are obsolete.", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeUnixExecutable                       API_DEPRECATED_WITH_REPLACEMENT("UTTypeUnixExecutable", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
 
 // Other platform binaries
-extern const CFStringRef kUTTypeWindowsExecutable                    API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeJavaClass                            API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeJavaArchive                          API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeWindowsExecutable                    API_DEPRECATED_WITH_REPLACEMENT("UTTypeEXE", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeJavaClass                            API_DEPRECATED("Java support is no longer provided by this operating system. Install a JDK to use Java.", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeJavaArchive                          API_DEPRECATED("Java support is no longer provided by this operating system. Install a JDK to use Java.", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
 
 // Misc. binaries
-extern const CFStringRef kUTTypeSystemPreferencesPane                API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeSystemPreferencesPane                API_DEPRECATED_WITH_REPLACEMENT("UTTypeSystemPreferencesPane", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
 
 #pragma mark - Archival and compression types
 /*
- *  kUTTypeGNUZipArchive
+ *  kUTTypeGNUZipArchive   *** DEPRECATED ***
  *
  *    a GNU zip archive (gzip)
  *
@@ -1088,7 +1088,7 @@ extern const CFStringRef kUTTypeSystemPreferencesPane                API_AVAILAB
  *    conforms to: public.data, public.archive
  *
  *
- *  kUTTypeBzip2Archive
+ *  kUTTypeBzip2Archive   *** DEPRECATED ***
  *
  *    a bzip2 archive (.bz2)
  *
@@ -1096,7 +1096,7 @@ extern const CFStringRef kUTTypeSystemPreferencesPane                API_AVAILAB
  *    conforms to: public.data, public.archive
  *
  *
- *  kUTTypeZipArchive
+ *  kUTTypeZipArchive   *** DEPRECATED ***
  *
  *    a zip archive
  *
@@ -1104,14 +1104,14 @@ extern const CFStringRef kUTTypeSystemPreferencesPane                API_AVAILAB
  *    conforms to: com.pkware.zip-archive
  *
  */
-extern const CFStringRef kUTTypeGNUZipArchive                        API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeBzip2Archive                         API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeZipArchive                           API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeGNUZipArchive                        API_DEPRECATED_WITH_REPLACEMENT("UTTypeGZIP", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeBzip2Archive                         API_DEPRECATED_WITH_REPLACEMENT("UTTypeBZ2", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeZipArchive                           API_DEPRECATED_WITH_REPLACEMENT("UTTypeZIP", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
 
 
 #pragma mark - Document types
 /*
- *  kUTTypeSpreadsheet
+ *  kUTTypeSpreadsheet   *** DEPRECATED ***
  *
  *    base spreadsheet document type
  *
@@ -1119,7 +1119,7 @@ extern const CFStringRef kUTTypeZipArchive                           API_AVAILAB
  *    conforms to: public.content
  *
  *
- *  kUTTypePresentation
+ *  kUTTypePresentation   *** DEPRECATED ***
  *
  *    base presentation document type
  *
@@ -1127,21 +1127,21 @@ extern const CFStringRef kUTTypeZipArchive                           API_AVAILAB
  *    conforms to: public.composite-content
  *
  *
- *  kUTTypeDatabase
+ *  kUTTypeDatabase   *** DEPRECATED ***
  *
  *    a database store
  *
  *    UTI: public.database
  *
  */
-extern const CFStringRef kUTTypeSpreadsheet                          API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypePresentation                         API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeDatabase                             API_AVAILABLE( ios(8.0), macos(10.4), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeSpreadsheet                          API_DEPRECATED_WITH_REPLACEMENT("UTTypeSpreadsheet", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypePresentation                         API_DEPRECATED_WITH_REPLACEMENT("UTTypePresentation", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeDatabase                             API_DEPRECATED_WITH_REPLACEMENT("UTTypeDatabase", ios(8.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
 
 
 #pragma mark - Messages, contacts, and calendar types
 /*
- *  kUTTypeVCard
+ *  kUTTypeVCard   *** DEPRECATED ***
  *
  *    VCard format
  *
@@ -1149,21 +1149,21 @@ extern const CFStringRef kUTTypeDatabase                             API_AVAILAB
  *    conforms to: public.text, public.contact
  *
  *
- *  kUTTypeToDoItem
+ *  kUTTypeToDoItem   *** DEPRECATED ***
  *
  *    to-do item
  *
  *    UTI: public.to-do-item
  *
  *
- *  kUTTypeCalendarEvent
+ *  kUTTypeCalendarEvent   *** DEPRECATED ***
  *
  *    calendar event
  *
  *    UTI: public.calendar-event
  *
  *
- *  kUTTypeEmailMessage
+ *  kUTTypeEmailMessage   *** DEPRECATED ***
  *
  *    e-mail message
  *
@@ -1171,14 +1171,14 @@ extern const CFStringRef kUTTypeDatabase                             API_AVAILAB
  *    conforms to: public.message
  *
  */
-extern const CFStringRef kUTTypeVCard                                API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeToDoItem                             API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeCalendarEvent                        API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeEmailMessage                         API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeVCard                                API_DEPRECATED_WITH_REPLACEMENT("UTTypeVCard", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeToDoItem                             API_DEPRECATED_WITH_REPLACEMENT("UTTypeToDoItem", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeCalendarEvent                        API_DEPRECATED_WITH_REPLACEMENT("UTTypeCalendarEvent", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeEmailMessage                         API_DEPRECATED_WITH_REPLACEMENT("UTTypeEmailMessage", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
 
 #pragma mark - Internet locations
 /*
- *  kUTTypeInternetLocation
+ *  kUTTypeInternetLocation   *** DEPRECATED ***
  *
  *    base type for Apple Internet locations
  *
@@ -1186,12 +1186,12 @@ extern const CFStringRef kUTTypeEmailMessage                         API_AVAILAB
  *    conforms to: public.data
  *
  */
-extern const CFStringRef kUTTypeInternetLocation                     API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeInternetLocation                     API_DEPRECATED_WITH_REPLACEMENT("UTTypeInternetLocation", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
 
 
 #pragma mark - Miscellaneous types
 /*
- *  kUTTypeInkText
+ *  kUTTypeInkText   *** DEPRECATED ***
  *
  *    Opaque InkText data
  *
@@ -1199,21 +1199,21 @@ extern const CFStringRef kUTTypeInternetLocation                     API_AVAILAB
  *    conforms to: public.data
  *
  *
- *  kUTTypeFont
+ *  kUTTypeFont   *** DEPRECATED ***
  *
  *    base type for fonts
  *
  *    UTI: public.font
  *
  *
- *  kUTTypeBookmark
+ *  kUTTypeBookmark   *** DEPRECATED ***
  *
  *    bookmark
  *
  *    UTI: public.bookmark
  *
  *
- *  kUTType3DContent
+ *  kUTType3DContent   *** DEPRECATED ***
  *
  *    base type for 3D content
  *
@@ -1221,7 +1221,7 @@ extern const CFStringRef kUTTypeInternetLocation                     API_AVAILAB
  *    conforms to: public.content
  *
  *
- *  kUTTypePKCS12
+ *  kUTTypePKCS12   *** DEPRECATED ***
  *
  *    PKCS#12 format
  *
@@ -1229,7 +1229,7 @@ extern const CFStringRef kUTTypeInternetLocation                     API_AVAILAB
  *    conforms to: public.data
  *
  *
- *  kUTTypeX509Certificate
+ *  kUTTypeX509Certificate   *** DEPRECATED ***
  *
  *    X.509 certificate format
  *
@@ -1237,7 +1237,7 @@ extern const CFStringRef kUTTypeInternetLocation                     API_AVAILAB
  *    conforms to: public.data
  *
  *
- *  kUTTypeElectronicPublication
+ *  kUTTypeElectronicPublication   *** DEPRECATED ***
  *
  *    ePub format
  *
@@ -1245,21 +1245,21 @@ extern const CFStringRef kUTTypeInternetLocation                     API_AVAILAB
  *    conforms to: public.data, public.composite-content
  *
  *
- *  kUTTypeLog
+ *  kUTTypeLog   *** DEPRECATED ***
  *
  *    console log
  *
  *    UTI: public.log
  *
  */
-extern const CFStringRef kUTTypeInkText                              API_AVAILABLE( ios(3.0), macos(10.4), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeFont                                 API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeBookmark                             API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTType3DContent                            API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypePKCS12                               API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeX509Certificate                      API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeElectronicPublication                API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
-extern const CFStringRef kUTTypeLog                                  API_AVAILABLE( ios(8.0), macos(10.10), tvos(9.0), watchos(1.0) );
+extern const CFStringRef kUTTypeInkText                              API_DEPRECATED("The Ink framework is obsolete.", ios(3.0, API_TO_BE_DEPRECATED), macos(10.4, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeFont                                 API_DEPRECATED_WITH_REPLACEMENT("UTTypeFont", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeBookmark                             API_DEPRECATED_WITH_REPLACEMENT("UTTypeBookmark", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTType3DContent                            API_DEPRECATED_WITH_REPLACEMENT("UTType3DContent", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypePKCS12                               API_DEPRECATED_WITH_REPLACEMENT("UTTypePKCS12", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeX509Certificate                      API_DEPRECATED_WITH_REPLACEMENT("UTTypeX509Certificate", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeElectronicPublication                API_DEPRECATED_WITH_REPLACEMENT("UTTypeEPUB", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+extern const CFStringRef kUTTypeLog                                  API_DEPRECATED_WITH_REPLACEMENT("UTTypeLog", ios(8.0, API_TO_BE_DEPRECATED), macos(10.10, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
 
 
 

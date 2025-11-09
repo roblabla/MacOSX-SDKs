@@ -240,6 +240,9 @@ typedef NS_OPTIONS(NSUInteger, NSStringEnumerationOptions) {
     NSStringEnumerationByComposedCharacterSequences = 2,  // Equivalent to rangeOfComposedCharacterSequencesForRange:
     NSStringEnumerationByWords = 3,
     NSStringEnumerationBySentences = 4,
+    NSStringEnumerationByCaretPositions API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 5, // Enumerate text editing cursor positions. It could separate characters within a grapheme cluster.
+    NSStringEnumerationByDeletionClusters API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 6, //  Enumerate text editing positions for backwards deletion. It could separate characters within a grapheme cluster.
+
     // ...and combine any of the desired additional options:
     NSStringEnumerationReverse = 1UL << 8,
     NSStringEnumerationSubstringNotRequired = 1UL << 9,
@@ -363,6 +366,7 @@ FOUNDATION_EXPORT NSStringTransform const NSStringTransformStripDiacritics      
 /* In general creation methods in NSString do not apply to subclassers, as subclassers are assumed to provide their own init methods which create the string in the way the subclass wishes.  Designated initializers of NSString are thus init and initWithCoder:.
 */
 - (instancetype)initWithCharactersNoCopy:(unichar *)characters length:(NSUInteger)length freeWhenDone:(BOOL)freeBuffer;	/* "NoCopy" is a hint */
+- (instancetype)initWithCharactersNoCopy:(unichar *)chars length:(NSUInteger)len deallocator:(void(^_Nullable)(unichar *, NSUInteger))deallocator;
 - (instancetype)initWithCharacters:(const unichar *)characters length:(NSUInteger)length;
 - (nullable instancetype)initWithUTF8String:(const char *)nullTerminatedCString;
 - (instancetype)initWithString:(NSString *)aString;
@@ -373,6 +377,7 @@ FOUNDATION_EXPORT NSStringTransform const NSStringTransformStripDiacritics      
 - (nullable instancetype)initWithData:(NSData *)data encoding:(NSStringEncoding)encoding;
 - (nullable instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)len encoding:(NSStringEncoding)encoding;
 - (nullable instancetype)initWithBytesNoCopy:(void *)bytes length:(NSUInteger)len encoding:(NSStringEncoding)encoding freeWhenDone:(BOOL)freeBuffer;	/* "NoCopy" is a hint */
+- (nullable instancetype)initWithBytesNoCopy:(void *)bytes length:(NSUInteger)len encoding:(NSStringEncoding)encoding deallocator:(void(^_Nullable)(void *, NSUInteger))deallocator;
 
 + (instancetype)string;
 + (instancetype)stringWithString:(NSString *)string;

@@ -77,25 +77,29 @@ Generally, use the OS_LOG_DEFAULT constant to perform logging using the system d
 Create a custom log object when you want to tag messages with a specific subsystem and category for the purpose of filtering, or to customize the logging behavior of your subsystem with a profile for debugging purposes.
 .Pp
 .Nm os_log
-is a "default" type of log message that is always captured in memory and on disk.  Limit use to messages that would help diagnose a failure, crash, etc. for production installations.
+is a "default" type of log message that is always captured in memory and on disk.
+Limit use to messages that would help diagnose a failure, crash, etc. for production installations.
 .Pp
 .Nm os_log_info
-is an "info" type of log message used for additional information.  Depending on configuration these messages may be enabled and only captured in memory.  They can be optionally configured to persist to disk using a profile or via the
+is an "info" type of log message with a short lifetime.
+These entries are normally appended to a global memory buffer, and
+the most recent ones are written out at collection time.
+(They can be optionally configured to persist to disk using a profile or via the
 .Xr log 1
-command-line tool.
+command-line tool.)
 .Pp
 .Nm os_log_debug
-is a "debug" type of log message that is only recorded when it is specifically requested by tools or configured as such.  Debug messages should be used for development use, i.e., additional information that is typically only useful during code development.
+is a "debug" type of log message that is only recorded when it is specifically requested by tools or configured as such.
+Debug messages should be used for development use, i.e., additional information that is typically only useful during code development.
 .Pp
 .Nm os_log_error
-is an "error" type of log message that is related to the local process or framework.  If a specific os_activity_id_t is present on the thread, that activity will be captured with all messages available and saved as a snapshot of the error event.
+is an "error" type of log message that is related to the local process or framework.
 .Pp
 .Nm os_log_fault
-is a "fault" type of log message that may involve system-services or multiple processes.  If a specific os_activity_id_t is present on a thread, that activity will be captured with all messages available from all involved processes and saved as a snapshot of the fault event.
-.Pp
+is a "fault" type of log message that indicates a bug in the code.
+For example, it can be used to give context to a violated assumption.
 .Sh EXAMPLES
 Example use of log messages.
-.Pp
 .Bd -literal
 #include <os/log.h>
 #include <pwd.h>
@@ -111,13 +115,15 @@ int main(int argc, const char * argv[])
 
     struct passwd *pwd = getpwuid(uid);
     if (pwd == NULL) {
-        os_log_error(OS_LOG_DEFAULT, "failed to lookup user %d", uid);
-        return ENOENT;
+        /* Like most library functions, os_log does not preserve errno. */
+        int err = errno;
+        os_log_error(OS_LOG_DEFAULT,
+                "failed to lookup user %d: %{darwin.errno}d", uid, err);
+        return err;
     }
 }
 
 .Ed
-.Pp
 .Sh SEE ALSO
 .Xr log 1 ,
 .Xr os_activity_initiate 3 ,

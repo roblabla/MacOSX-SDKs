@@ -8,6 +8,7 @@
 #import <Foundation/NSArray.h>
 #import <AppKit/NSTextFieldCell.h>
 #import <AppKit/NSSearchField.h>
+#import <AppKit/AppKitDefines.h>
 
 // Search menu template tags. Special items in the search menu are tagged so when the actual dynamic search menu is constructed, we know which items to show or hide.
 
@@ -24,7 +25,7 @@ static const NSInteger NSSearchFieldClearRecentsMenuItemTag = 1002;
 static const NSInteger NSSearchFieldNoRecentsMenuItemTag = 1003;
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSButtonCell, NSMenu, NSMutableArray, NSTimer, NSImage;
 

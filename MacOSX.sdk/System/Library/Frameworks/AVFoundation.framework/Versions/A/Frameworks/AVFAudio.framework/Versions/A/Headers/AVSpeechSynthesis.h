@@ -43,6 +43,7 @@ extern NSString *const AVSpeechSynthesisIPANotationAttribute API_AVAILABLE(ios(1
 
 typedef void (^AVSpeechSynthesizerBufferCallback)(AVAudioBuffer *buffer) NS_SWIFT_NAME(AVSpeechSynthesizer.BufferCallback);
 
+
 @protocol AVSpeechSynthesizerDelegate;
 
 /*!
@@ -127,6 +128,11 @@ NS_CLASS_AVAILABLE(10_14, 7_0)
 @property(nonatomic) float pitchMultiplier;  // [0.5 - 2] Default = 1
 @property(nonatomic) float volume;           // [0-1] Default = 1
 
+/* If an assistive technology is on, like VoiceOver, the user's selected voice, rate and other settings will be used for this speech utterance instead of the default values.
+   If no assistive technologies are on, then the values of the properties on AVSpeechUtterance will be used.
+   Note that querying the properties will not refect the user's settings. */
+@property(nonatomic) BOOL prefersAssistiveTechnologySettings API_AVAILABLE(ios(14.0), watchos(7.0), tvos(14.0), macos(11.0));
+
 @property(nonatomic) NSTimeInterval preUtteranceDelay;    // Default is 0.0
 @property(nonatomic) NSTimeInterval postUtteranceDelay;   // Default is 0.0
 
@@ -172,7 +178,7 @@ NS_CLASS_AVAILABLE(10_14, 7_0)
    The AVSpeechSynthesizer will use a separate AVAudioSession for playback when set to NO. Additionally, the audio session will mix and duck other audio, and its active state will be managed automatically.
    The separate audio session will use AVAudioSessionRouteSharingPolicyDefault, which means that it may have a different route from the app’s shared instance session.
    Default is YES. */
-@property(nonatomic, assign) BOOL usesApplicationAudioSession API_AVAILABLE(ios(13.0), watchos(6.0), tvos(13.0)) API_UNAVAILABLE( macCatalyst, macos);
+@property(nonatomic, assign) BOOL usesApplicationAudioSession API_AVAILABLE(ios(13.0), watchos(6.0), tvos(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos) ;
 
 // Set to YES to send synthesized speech into an outgoing telephony audio stream.
 // If there's no active call, setting this property has no effect.
@@ -196,6 +202,7 @@ NS_CLASS_AVAILABLE(10_14, 7_0)
 
 - (void)speechSynthesizer:(AVSpeechSynthesizer *)synthesizer willSpeakRangeOfSpeechString:(NSRange)characterRange utterance:(AVSpeechUtterance *)utterance API_AVAILABLE(ios(7.0), watchos(1.0), tvos(7.0), macos(10.14));
 @end
+
 
 NS_ASSUME_NONNULL_END
 

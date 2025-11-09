@@ -2,7 +2,7 @@
 //  SCNAnimation.h
 //  SceneKit
 //
-//  Copyright © 2012-2019 Apple Inc. All rights reserved.
+//  Copyright © 2012-2020 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SceneKitTypes.h>
@@ -257,7 +257,7 @@ SCN_EXPORT API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 
 /**
  The relative delay to start the animation, in relation to its parent animation if applicable. Defaults to 0.
- @discussion This property is bridged with CoreAnimations's beginTime. However, for top level animations, startDelay relative to the current time (unlike CAAnimation's beginTime that is absolute). So if a CAAnimation has a non-zero beginTime, startDelay is initialized as caAnimation.beginTime - CACurrentMediaTime().
+ @discussion This property is bridged with CoreAnimations's beginTime. However, for top level animations, startDelay is relative to the current time (unlike CAAnimation's beginTime that is absolute). So if a CAAnimation has a non-zero beginTime, startDelay is initialized as caAnimation.beginTime - CACurrentMediaTime().
  */
 @property(nonatomic) NSTimeInterval startDelay;
 

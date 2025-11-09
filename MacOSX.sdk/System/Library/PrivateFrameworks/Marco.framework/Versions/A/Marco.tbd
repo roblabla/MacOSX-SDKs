@@ -1,11 +1,25 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 8B559AF5-C80C-38E3-9CCC-78DB70C49C7A', 'x86_64: 8B559AF5-C80C-38E3-9CCC-78DB70C49C7A' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           8B2D0E42-E431-3C69-A2D4-6552840C60E1
+  - target:          x86_64-maccatalyst
+    value:           8B2D0E42-E431-3C69-A2D4-6552840C60E1
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           C64AE68F-146F-3FDA-9C5D-7AD43775EF4B
+  - target:          arm64e-maccatalyst
+    value:           C64AE68F-146F-3FDA-9C5D-7AD43775EF4B
 install-name:    '/System/Library/PrivateFrameworks/Marco.framework/Versions/A/Marco'
 current-version: 800
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _MarcoAction, _MarcoActionWithUserInfo, _MarcoAddCallMetric, 
                        _MarcoAddCallMetric_Double, _MarcoAddCallMetric_Float, _MarcoAddCallMetric_Int, 
                        _MarcoAddCallMetric_Short, _MarcoAddLogFile, _MarcoBeginSession, 

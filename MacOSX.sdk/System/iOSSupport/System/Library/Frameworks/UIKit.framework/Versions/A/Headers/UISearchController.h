@@ -27,10 +27,15 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)presentSearchController:(UISearchController *)searchController;
 @end
 
+@protocol UISearchSuggestion;
+
 @protocol UISearchResultsUpdating <NSObject>
 @required
 // Called when the search bar's text or scope has changed or when the search bar becomes first responder.
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController;
+@optional
+// Called when user selects one of the search suggestion buttons displayed under the keyboard on tvOS.
+- (void)updateSearchResultsForSearchController:(nonnull UISearchController *)searchController selectingSearchSuggestion:(nonnull id<UISearchSuggestion>)searchSuggestion API_AVAILABLE(tvos(14.0)) API_UNAVAILABLE(ios, watchos);
 @end
 
 UIKIT_EXTERN API_AVAILABLE(ios(8.0)) @interface UISearchController : UIViewController <UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning>
@@ -84,6 +89,13 @@ UIKIT_EXTERN API_AVAILABLE(ios(8.0)) @interface UISearchController : UIViewContr
  will change the UISearchController's automaticallyShowsScopeBar property to NO.
  */
 @property (nonatomic) BOOL automaticallyShowsScopeBar API_AVAILABLE(ios(13.0)); // Defaults to YES
+
+// List of search hint objects to be displayed under keyboard on tvOS. Assigning with new array immediately updates the list on screen. This becomes nil once user selects one of the hints.
+@property (nonatomic, copy, nullable) NSArray<id<UISearchSuggestion>> *searchSuggestions API_AVAILABLE(tvos(14.0)) API_UNAVAILABLE(ios, watchos);
+
+// A scroll view this search controller tracks to scroll its view elements with. Set this property to the full screen scroll view in your results view on the results view controller, if one exists. If search controller is embedded inside a tab controller, this will forward the scroll view to the tab controller as `tabBarObservedScrollView`.
+@property(nullable, nonatomic, strong) UIScrollView *searchControllerObservedScrollView API_AVAILABLE(tvos(14.0)) API_UNAVAILABLE(ios, watchos);
+
 @end
 
 NS_ASSUME_NONNULL_END

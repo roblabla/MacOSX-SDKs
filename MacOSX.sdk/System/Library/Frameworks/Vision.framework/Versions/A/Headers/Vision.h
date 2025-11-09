@@ -36,8 +36,15 @@
 #import <Vision/VNTrackRectangleRequest.h>
 #import <Vision/VNDetectHumanRectanglesRequest.h>
 #import <Vision/VNRecognizeAnimalsRequest.h>
-#import <Vision/VNDeprecated.h>
-
+#import <Vision/VNGenerateOpticalFlowRequest.h>
+#import <Vision/VNVideoProcessor.h>
+#import <Vision/VNDetectedPoint.h>
+#import <Vision/VNDetectHumanBodyPoseRequest.h>
+#import <Vision/VNDetectHumanHandPoseRequest.h>
+#import <Vision/VNDetectContoursRequest.h>
+#import <Vision/VNGeometry.h>
+#import <Vision/VNGeometryUtils.h>
+#import <Vision/VNDetectTrajectoriesRequest.h>
 
 /* The version of the Vision framework */
 VN_EXPORT double VNVisionVersionNumber API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));

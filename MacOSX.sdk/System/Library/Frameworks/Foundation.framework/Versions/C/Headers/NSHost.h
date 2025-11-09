@@ -8,6 +8,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface NSHost : NSObject {
 @private
     NSArray 	*names;

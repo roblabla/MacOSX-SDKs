@@ -1,9 +1,10 @@
+#if !__has_include(<AVFCore/AVMediaFormat.h>)
 /*
     File:  AVMediaFormat.h
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2018 Apple Inc. All rights reserved.
+	Copyright 2010-2020 Apple Inc. All rights reserved.
 
 */
 
@@ -104,6 +105,16 @@ AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicFrameBased  API_AVAI
  A wide color space such as AVVideo*_P3_D65 contains additional dynamic range that may benefit from special treatment when compositing. Care should be taken to avoid clamping. Non-wide spaces include AVVideo*_ITU_R_709_2 and AVVideo*_SMPTE_C.
 */
 AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicUsesWideGamutColorSpace API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
+
+/*!
+ @constant AVMediaCharacteristicContainsHDRVideo
+ @abstract A media characteristic that indicates that a track contains HDR video.
+ @discussion
+ HDR video contains extended dynamic range that requires explicit support when compositing.
+ The value of this characteristic is @“public.contains-hdr-video".
+ Note for content authors: the presence of this characteristic is strictly inferred from the format description of the associated track.
+ */
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicContainsHDRVideo API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @constant AVMediaCharacteristicContainsAlphaChannel
@@ -506,3 +517,26 @@ AVF_EXPORT NSString * const AVStreamingKeyDeliveryContentKeyType API_AVAILABLE(m
 AVF_EXPORT NSString * const AVStreamingKeyDeliveryPersistentContentKeyType API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
 
 
+// File type profiles
+typedef NSString * AVFileTypeProfile NS_TYPED_ENUM;
+
+/*!
+ @constant AVFileTypeProfileMPEG4AppleHLS
+ @abstract Apple HTTP Live Streaming profile
+ @discussion
+ The profile that is suitable for Apple HTTP Live Streaming.
+ */
+AVF_EXPORT AVFileTypeProfile const AVFileTypeProfileMPEG4AppleHLS API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0));
+
+/*!
+ @constant AVFileTypeProfileMPEG4CMAFCompliant
+ @abstract CMAF compliant profile
+ @discussion
+ The profile that is compliance with CMAF format.
+ */
+AVF_EXPORT AVFileTypeProfile const AVFileTypeProfileMPEG4CMAFCompliant API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0));
+
+
+#else
+#import <AVFCore/AVMediaFormat.h>
+#endif

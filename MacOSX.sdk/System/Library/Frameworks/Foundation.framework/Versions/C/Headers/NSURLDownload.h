@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
     is reported via the NSURLDownloadDelegate protocol. Note: The word "download" is used to refer to the process
     of loading data off a network, decoding the data if necessary and saving the data to a file.
 */
+API_AVAILABLE(macos(10.2)) API_UNAVAILABLE(watchos, ios, tvos)
 @interface NSURLDownload : NSObject
 {
     @private
@@ -114,6 +115,7 @@ NS_ASSUME_NONNULL_BEGIN
     @protocol NSURLDownloadDelegate
     @discussion The NSURLDownloadDelegate delegate is used to report the progress of the download.
 */
+API_AVAILABLE(macos(10.2)) API_UNAVAILABLE(watchos, ios, tvos)
 @protocol NSURLDownloadDelegate <NSObject>
 
 @optional

@@ -4,10 +4,12 @@
         Copyright (c) 1995-2019, Apple Inc.
         All rights reserved.
 */
+
 #import <AppKit/NSTextFieldCell.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @interface NSTableHeaderCell : NSTextFieldCell
 

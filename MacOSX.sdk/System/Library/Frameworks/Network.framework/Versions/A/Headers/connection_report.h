@@ -2,7 +2,7 @@
 //  connection_report.h
 //  Network
 //
-//  Copyright (c) 2018-2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2018-2020 Apple Inc. All rights reserved.
 //
 
 #ifndef __NW_CONNECTION_REPORT_H__
@@ -179,7 +179,18 @@ API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
 NW_RETURNS_RETAINED _Nullable nw_endpoint_t
 nw_establishment_report_copy_proxy_endpoint(nw_establishment_report_t report);
 
-#ifdef __BLOCKS__
+/*!
+ * @typedef nw_resolution_report_t
+ * @abstract
+ *		A Resolution Report contains information about one step
+ *		of endpoint resolution performed during connection establishment.
+ *
+ *		This type supports ARC and the -[description] method. In non-ARC files, use
+ *		nw_retain() and nw_release() to retain and release the object.
+ */
+#ifndef NW_RESOLUTION_REPORT_IMPL
+NW_OBJECT_DECL(nw_resolution_report);
+#endif // NW_RESOLUTION_REPORT_IMPL
 
 /*!
  * @typedef nw_report_resolution_source_t
@@ -195,6 +206,122 @@ typedef enum {
 	/*! @const nw_report_resolution_source_expired_cache An expired entry in the local cache was used */
 	nw_report_resolution_source_expired_cache = 3,
 } nw_report_resolution_source_t;
+
+/*!
+ * @function nw_resolution_report_get_source
+ *
+ * @abstract
+ *		Check the source of a resolution, such as query or cache.
+ *
+ * @param resolution_report
+ *		A resolution report.
+ *
+ * @result
+ *		The source of the resolution (query or cache).
+ */
+API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0))
+nw_report_resolution_source_t
+nw_resolution_report_get_source(nw_resolution_report_t resolution_report);
+
+/*!
+ * @function nw_resolution_report_get_milliseconds
+ *
+ * @abstract
+ *		Get the number of milliseconds spent on this resolution step.
+ *
+ * @param resolution_report
+ *		A resolution report.
+ *
+ * @result
+ *		The number of milliseconds spent on this resolution step.
+ */
+API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0))
+uint64_t
+nw_resolution_report_get_milliseconds(nw_resolution_report_t resolution_report);
+
+/*!
+ * @function nw_resolution_report_get_endpoint_count
+ *
+ * @abstract
+ *		Get the number of resolved endpoints discovered by the resolution step.
+ *
+ * @param resolution_report
+ *		A resolution report.
+ *
+ * @result
+ *		The number of resolved endpoints discovered by the resolution step.
+ */
+API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0))
+uint32_t
+nw_resolution_report_get_endpoint_count(nw_resolution_report_t resolution_report);
+
+/*!
+ * @function nw_resolution_report_copy_successful_endpoint
+ *
+ * @abstract
+ *		Copy the resolved endpoint that led to a successful connection.
+ *
+ * @param resolution_report
+ *		A resolution report.
+ *
+ * @result
+ *		The resolved endpoint that led to a successful connection.
+ */
+API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0))
+NW_RETURNS_RETAINED nw_endpoint_t
+nw_resolution_report_copy_successful_endpoint(nw_resolution_report_t resolution_report);
+
+/*!
+ * @function nw_resolution_report_copy_preferred_endpoint
+ *
+ * @abstract
+ *		Copy first resolved endpoint attempted, which may be the same as the successful endpoint.
+ *
+ * @param resolution_report
+ *		A resolution report.
+ *
+ * @result
+ *		The first resolved endpoint attempted.
+ */
+API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0))
+NW_RETURNS_RETAINED nw_endpoint_t
+nw_resolution_report_copy_preferred_endpoint(nw_resolution_report_t resolution_report);
+
+/*!
+ * @typedef nw_report_resolution_protocol_t
+ * @abstract
+ *		The protocol used for endpoint resolution.
+ */
+typedef enum {
+	/*! @const nw_report_resolution_protocol_unknown The protocol used is not known, or not applicable */
+	nw_report_resolution_protocol_unknown = 0,
+	/*! @const nw_report_resolution_protocol_udp Resolution used DNS over UDP */
+	nw_report_resolution_protocol_udp = 1,
+	/*! @const nw_report_resolution_protocol_tcp Resolution used DNS over TCP  */
+	nw_report_resolution_protocol_tcp = 2,
+	/*! @const nw_report_resolution_protocol_tls Resolution used DNS over TLS  */
+	nw_report_resolution_protocol_tls = 3,
+	/*! @const nw_report_resolution_protocol_https Resolution used DNS over HTTPS  */
+	nw_report_resolution_protocol_https = 4,
+} nw_report_resolution_protocol_t;
+
+/*!
+ * @function nw_resolution_report_get_protocol
+ *
+ * @abstract
+ *		Check the protocol used for endpoint resolution.
+ *
+ * @param resolution_report
+ *		A resolution report.
+ *
+ * @result
+ *		The protocol used for endpoint resolution.
+ */
+API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0))
+nw_report_resolution_protocol_t
+nw_resolution_report_get_protocol(nw_resolution_report_t resolution_report);
+
+#ifdef __BLOCKS__
 
 typedef bool (^nw_report_resolution_enumerator_t)(nw_report_resolution_source_t source,
 												  uint64_t milliseconds,
@@ -231,6 +358,34 @@ API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
 void
 nw_establishment_report_enumerate_resolutions(nw_establishment_report_t report,
 											  NW_NOESCAPE nw_report_resolution_enumerator_t enumerate_block);
+
+typedef bool (^nw_report_resolution_report_enumerator_t)(nw_resolution_report_t resolution_report);
+
+/*!
+ * @function nw_establishment_report_enumerate_resolution_reports
+ *
+ * @abstract
+ *		Enumerate the steps of connection establishment that involved endpoint
+ *		resolution, such as DNS hostname resolution and Bonjour service resolution.
+ *		This variant provides resolution report objects, which allow more detailed
+ *		access to information.
+ *
+ *		The provided block will be called inline zero or more times.
+ *
+ * @param report
+ *		An establishment report.
+ *
+ * @param enumerate_block
+ *		A block to be invoked zero or more times, once for each step of resolution
+ *		used during connection establishment. Each block contains a nw_resolution_report_t.
+ *
+ *		Returning true from the block indicates that the enumeration should continue.
+ *		Returning false indicates that the enumeration should stop.
+ */
+API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0))
+void
+nw_establishment_report_enumerate_resolution_reports(nw_establishment_report_t report,
+													 NW_NOESCAPE nw_report_resolution_report_enumerator_t enumerate_block);
 
 typedef bool (^nw_report_protocol_enumerator_t)(nw_protocol_definition_t protocol,
 												uint64_t handshake_milliseconds,

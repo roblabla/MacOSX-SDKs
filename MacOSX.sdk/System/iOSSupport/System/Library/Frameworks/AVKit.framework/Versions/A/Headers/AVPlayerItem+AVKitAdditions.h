@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
  	@abstract 	Supplements metadata contained in the asset.
  	@discussion AVPlayerViewController will publish this metadata as now playing info when AVPlayerViewController.updatesNowPlayingInfoCenter is YES.
  */
-@property (nonatomic, copy) NSArray<AVMetadataItem *> *externalMetadata API_AVAILABLE(ios(12.0));
+@property (nonatomic, copy) NSArray<AVMetadataItem *> *externalMetadata API_AVAILABLE(ios(12.2));
 
 @end
 

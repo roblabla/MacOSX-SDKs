@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVSampleBufferGenerator.h>)
 /*
 	File:  AVSampleBufferGenerator.h
 
@@ -127,3 +128,7 @@ AV_INIT_UNAVAILABLE
 
 NS_ASSUME_NONNULL_END
 
+
+#else
+#import <AVFCore/AVSampleBufferGenerator.h>
+#endif

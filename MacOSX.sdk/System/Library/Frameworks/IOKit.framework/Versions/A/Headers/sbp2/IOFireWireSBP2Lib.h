@@ -70,7 +70,7 @@ enum IODirection
     kIODirectionNone  = 0,
     kIODirectionIn    = 1,	// User land 'read'
     kIODirectionOut   = 2,	// User land 'write'
-    kIODirectionOutIn = 3
+    kIODirectionInOut = 3
 };
 
 /*! Virtual address range for SBP2. */

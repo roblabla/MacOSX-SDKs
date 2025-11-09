@@ -294,6 +294,7 @@ typedef enum dtrace_probespec {
 #define	DIF_VAR_ARGS		0x0000	/* arguments array */
 #define	DIF_VAR_REGS		0x0001	/* registers array */
 #define	DIF_VAR_UREGS		0x0002	/* user registers array */
+#define	DIF_VAR_VMREGS		0x0003	/* virtual machine registers array */
 #define	DIF_VAR_CURTHREAD	0x0100	/* thread pointer */
 #define	DIF_VAR_TIMESTAMP	0x0101	/* timestamp */
 #define	DIF_VAR_VTIMESTAMP	0x0102	/* virtual timestamp */
@@ -330,12 +331,13 @@ typedef enum dtrace_probespec {
 #if defined(__APPLE__)
 #define DIF_VAR_PTHREAD_SELF	0x0200	/* Apple specific PTHREAD_SELF (Not currently supported!) */
 #define DIF_VAR_DISPATCHQADDR	0x0201	/* Apple specific dispatch queue addr */
-#define DIF_VAR_MACHTIMESTAMP	0x0202	/* mach_absolute_timestamp() */
+#define DIF_VAR_MACHTIMESTAMP	0x0202	/* mach_absolute_time() */
 #define DIF_VAR_CPU		0x0203	/* cpu number */
 #define DIF_VAR_CPUINSTRS	0x0204	/* cpu instructions */
 #define DIF_VAR_CPUCYCLES	0x0205	/* cpu cycles */
 #define DIF_VAR_VINSTRS		0x0206	/* virtual instructions */
 #define DIF_VAR_VCYCLES		0x0207	/* virtual cycles */
+#define DIF_VAR_MACHCTIMESTAMP	0x0208	/* mach_continuous_time() */
 #endif /* __APPLE __ */
 
 #define	DIF_SUBR_RAND			0
@@ -395,7 +397,11 @@ typedef enum dtrace_probespec {
 #define DIF_SUBR_VM_KERNEL_ADDRPERM	200
 #define DIF_SUBR_KDEBUG_TRACE		201
 #define DIF_SUBR_KDEBUG_TRACE_STRING	202
-#define DIF_SUBR_APPLE_MAX		202      /* max apple-specific subroutine value */
+#define DIF_SUBR_MTONS			203
+#define DIF_SUBR_PHYSMEM_READ		204
+#define DIF_SUBR_PHYSMEM_WRITE		205
+#define DIF_SUBR_KVTOPHYS		206
+#define DIF_SUBR_APPLE_MAX		206      /* max apple-specific subroutine value */
 #endif /* __APPLE__ */
 
 typedef uint32_t dif_instr_t;
@@ -1451,6 +1457,7 @@ typedef struct dtrace_module_symbols {
 } dtrace_module_symbols_t;
 
 #define DTRACE_MODULE_SYMBOLS_SIZE(count) (sizeof(dtrace_module_symbols_t) + ((count - 1) * sizeof(dtrace_symbol_t)))
+#define DTRACE_MODULE_SYMBOLS_COUNT(size) ((size - sizeof(dtrace_module_symbols_t)) / sizeof(dtrace_symbol_t) + 1)
 
 typedef struct dtrace_module_uuids_list {
 	uint64_t	dtmul_count;
@@ -2506,6 +2513,9 @@ extern int (*dtrace_return_probe_ptr)(struct regs *);
 #if defined (__i386__) || defined(__x86_64__)
 extern int (*dtrace_pid_probe_ptr)(x86_saved_state_t *regs);
 extern int (*dtrace_return_probe_ptr)(x86_saved_state_t* regs);
+#elif defined (__arm__) || defined(__arm64__)
+extern int (*dtrace_pid_probe_ptr)(arm_saved_state_t *regs);
+extern int (*dtrace_return_probe_ptr)(arm_saved_state_t *regs);
 #else
 #error architecture not supported
 #endif
@@ -2558,6 +2568,15 @@ extern void *dtrace_invop_callsite_pre;
 extern void *dtrace_invop_callsite_post;
 #endif
 
+#if defined(__arm__)
+extern int dtrace_instr_size(uint32_t instr, int thumb_mode);
+#endif
+#if defined(__arm__) || defined(__arm64__)
+extern void dtrace_invop_add(int (*)(uintptr_t, uintptr_t *, uintptr_t));    
+extern void dtrace_invop_remove(int (*)(uintptr_t, uintptr_t *, uintptr_t));
+extern void *dtrace_invop_callsite_pre;
+extern void *dtrace_invop_callsite_post;
+#endif
 
 #undef proc_t
 
@@ -2584,6 +2603,13 @@ extern void *dtrace_invop_callsite_post;
 
 #endif
 
+#if defined(__arm__) || defined(__arm64__)
+
+#define DTRACE_INVOP_NOP                4
+#define DTRACE_INVOP_RET                5
+#define DTRACE_INVOP_B			6
+
+#endif
 
 #ifdef  __cplusplus
 }

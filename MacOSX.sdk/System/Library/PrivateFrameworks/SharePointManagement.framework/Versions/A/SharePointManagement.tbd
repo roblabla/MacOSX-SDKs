@@ -1,11 +1,25 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 6BB7114D-A415-390B-8F31-A43F8F3C1131', 'x86_64: 6BB7114D-A415-390B-8F31-A43F8F3C1131' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           BFBED32E-062E-33AF-B9C6-7AD42807EF68
+  - target:          x86_64-maccatalyst
+    value:           BFBED32E-062E-33AF-B9C6-7AD42807EF68
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           F287567C-5D10-3909-BEE0-85A72B257791
+  - target:          arm64e-maccatalyst
+    value:           F287567C-5D10-3909-BEE0-85A72B257791
 install-name:    '/System/Library/PrivateFrameworks/SharePointManagement.framework/Versions/A/SharePointManagement'
 current-version: 104
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _SharePointManagementVersionNumber, _SharePointManagementVersionString, 
                        __kSharePointPropertyAFPGuestAccessKey, __kSharePointPropertyAFPNameKey, 
                        __kSharePointPropertyAFPSharedKey, __kSharePointPropertyAFPUseParentOwnerKey, 

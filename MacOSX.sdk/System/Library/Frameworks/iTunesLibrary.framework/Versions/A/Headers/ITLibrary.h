@@ -29,7 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM( NSUInteger, ITLibExportFeature )
 {
     ITLibExportFeatureNone = 0
-};
+
+} API_UNAVAILABLE(ios);
 
 /*!
  @enum           ITLibInitOptions
@@ -43,11 +44,13 @@ typedef NS_ENUM( NSUInteger, ITLibInitOptions )
 	
 	/*! ITLibrary will be initialized but no iTunes library data will be loaded. Data will be lazy-loaded upon request. */
 	ITLibInitOptionLazyLoadData = 1
-};
+
+} API_UNAVAILABLE(ios);
 
 /*! 
 	@abstract A class representing an iTunes library whose metadata is being queried.
 */
+API_UNAVAILABLE(ios)
 ITLIB_EXPORT @interface ITLibrary : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;

@@ -68,9 +68,12 @@ Options passed to
 .Xr mount 2
 are specified with the 
 .Fl o 
-option followed by a comma separated string of options. See the 
+option followed by a comma separated string of options.
+See the
 .Xr mount 8 
 man page for possible options and their meanings.
+All listed options are
+currently supported except for the ``force, sync and [no]async'' options.
 .It Fl u Ar user
 Set the owner of the files in the file system to
 .Pa user .
@@ -93,7 +96,7 @@ In this usage
 .Pa pathname
 is the mounted root directory of the base volume containing the snapshot.
 .El
-.Sh DIAGNOSTICS
+.Sh EXIT STATUS
 .Ex -std
 .Sh SEE ALSO
 .Xr mount 2 ,

@@ -1,12 +1,18 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 64CB9FE4-3A93-37C7-8556-90081C95D602' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           9B3B2FAB-B253-3AEC-9A42-3625F75F02D5
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           D6987A69-29EA-36E0-BD13-4D139B27DC51
 install-name:    '/System/Library/PrivateFrameworks/TuriCore.framework/Versions/A/TuriCore'
 current-version: 0
 compatibility-version: 0
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _tc_v1_binary_op_ff, _tc_v1_binary_op_fs, _tc_v1_binary_op_sf, 
                        _tc_v1_binary_op_ss, _tc_v1_datetime_create_empty, _tc_v1_datetime_create_from_posix_highres_timestamp, 
                        _tc_v1_datetime_create_from_posix_timestamp, _tc_v1_datetime_create_from_string, 
@@ -136,4 +142,10 @@ exports:
                        _tc_v1_variant_is_string, _tc_v1_variant_model, _tc_v1_variant_parameters, 
                        _tc_v1_variant_sarray, _tc_v1_variant_sframe, _tc_v1_variant_string_data, 
                        _tc_v1_variant_string_length ]
+    objc-classes:    [ TCActivityClassifierTrainer, TCActivityClassifierTrainerOptions, 
+                       TCComputeDevice, TCComputeDeviceManager, TCHumanActionRecognitionTrainer, 
+                       TCHumanActionRecognitionTrainerSTGCNOptions, TCModelTrainerBackendGraphs, 
+                       TCModelTrainerBackendGraphsWithSplitLoss, TCObjectDetectorTrainer, 
+                       TCObjectDetectorTrainerDarknetYOLOOptions, TCObjectDetectorTrainerSceneNetOptions, 
+                       TCPreferences ]
 ...

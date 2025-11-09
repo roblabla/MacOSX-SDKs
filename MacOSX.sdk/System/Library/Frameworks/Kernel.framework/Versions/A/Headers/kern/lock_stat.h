@@ -54,64 +54,70 @@
 /*
  * DTrace lockstat probe definitions
  *
- * Spinlocks
  */
-#define LS_LCK_SPIN_LOCK_ACQUIRE        0
-#define LS_LCK_SPIN_LOCK_SPIN           1
-#define LS_LCK_SPIN_UNLOCK_RELEASE      2
 
-/*
- * Mutexes can also have interlock-spin events, which are
- * unique to our lock implementation.
- */
-#define LS_LCK_MTX_LOCK_ACQUIRE                 3
-#define LS_LCK_MTX_LOCK_BLOCK                   5
-#define LS_LCK_MTX_LOCK_SPIN                    6
-#define LS_LCK_MTX_LOCK_ILK_SPIN                7
-#define LS_LCK_MTX_TRY_LOCK_ACQUIRE             8
-#define LS_LCK_MTX_TRY_SPIN_LOCK_ACQUIRE        9
-#define LS_LCK_MTX_UNLOCK_RELEASE               10
+enum lockstat_probe_id {
+	/* Spinlocks */
+	LS_LCK_SPIN_LOCK_ACQUIRE,
+	LS_LCK_SPIN_LOCK_SPIN,
+	LS_LCK_SPIN_UNLOCK_RELEASE,
 
-#define LS_LCK_MTX_LOCK_SPIN_ACQUIRE            39
-/*
- * Provide a parallel set for indirect mutexes
- */
-#define LS_LCK_MTX_EXT_LOCK_ACQUIRE                     17
-#define LS_LCK_MTX_EXT_LOCK_BLOCK                       18
-#define LS_LCK_MTX_EXT_LOCK_SPIN                        19
-#define LS_LCK_MTX_EXT_LOCK_ILK_SPIN            20
-#define LS_LCK_MTX_TRY_EXT_LOCK_ACQUIRE         21
-#define LS_LCK_MTX_EXT_UNLOCK_RELEASE           22
+	/*
+	 * Mutexes can also have interlock-spin events, which are
+	 * unique to our lock implementation.
+	 */
+	LS_LCK_MTX_LOCK_ACQUIRE,
+	LS_LCK_MTX_LOCK_BLOCK,
+	LS_LCK_MTX_LOCK_SPIN,
+	LS_LCK_MTX_LOCK_ILK_SPIN,
+	LS_LCK_MTX_TRY_LOCK_ACQUIRE,
+	LS_LCK_MTX_TRY_SPIN_LOCK_ACQUIRE,
+	LS_LCK_MTX_UNLOCK_RELEASE,
+	LS_LCK_MTX_LOCK_SPIN_ACQUIRE,
 
-/*
- * Reader-writer locks support a blocking upgrade primitive, as
- * well as the possibility of spinning on the interlock.
- */
-#define LS_LCK_RW_LOCK_SHARED_ACQUIRE           23
-#define LS_LCK_RW_LOCK_SHARED_BLOCK             24
-#define LS_LCK_RW_LOCK_SHARED_SPIN              25
+	/*
+	 * Provide a parallel set for indirect mutexes
+	 */
+	LS_LCK_MTX_EXT_LOCK_ACQUIRE,
+	LS_LCK_MTX_EXT_LOCK_BLOCK,
+	LS_LCK_MTX_EXT_LOCK_SPIN,
+	LS_LCK_MTX_EXT_LOCK_ILK_SPIN,
+	LS_LCK_MTX_EXT_UNLOCK_RELEASE,
 
-#define LS_LCK_RW_LOCK_EXCL_ACQUIRE             26
-#define LS_LCK_RW_LOCK_EXCL_BLOCK               27
-#define LS_LCK_RW_LOCK_EXCL_SPIN                28
+	/*
+	 * Reader-writer locks support a blocking upgrade primitive, as
+	 * well as the possibility of spinning on the interlock.
+	 */
+	LS_LCK_RW_LOCK_SHARED_ACQUIRE,
+	LS_LCK_RW_LOCK_SHARED_BLOCK,
+	LS_LCK_RW_LOCK_SHARED_SPIN,
 
-#define LS_LCK_RW_DONE_RELEASE                  29
+	LS_LCK_RW_LOCK_EXCL_ACQUIRE,
+	LS_LCK_RW_LOCK_EXCL_BLOCK,
+	LS_LCK_RW_LOCK_EXCL_SPIN,
 
-#define LS_LCK_RW_TRY_LOCK_SHARED_ACQUIRE       30
-#define LS_LCK_RW_TRY_LOCK_SHARED_SPIN          31
+	LS_LCK_RW_DONE_RELEASE,
 
-#define LS_LCK_RW_TRY_LOCK_EXCL_ACQUIRE         32
-#define LS_LCK_RW_TRY_LOCK_EXCL_ILK_SPIN        33
+	LS_LCK_RW_TRY_LOCK_SHARED_ACQUIRE,
+	LS_LCK_RW_TRY_LOCK_SHARED_SPIN,
 
-#define LS_LCK_RW_LOCK_SHARED_TO_EXCL_UPGRADE   34
-#define LS_LCK_RW_LOCK_SHARED_TO_EXCL_SPIN      35
-#define LS_LCK_RW_LOCK_SHARED_TO_EXCL_BLOCK     36
+	LS_LCK_RW_TRY_LOCK_EXCL_ACQUIRE,
+	LS_LCK_RW_TRY_LOCK_EXCL_ILK_SPIN,
 
-#define LS_LCK_RW_LOCK_EXCL_TO_SHARED_DOWNGRADE 37
-#define LS_LCK_RW_LOCK_EXCL_TO_SHARED_ILK_SPIN  38
+	LS_LCK_RW_LOCK_SHARED_TO_EXCL_UPGRADE,
+	LS_LCK_RW_LOCK_SHARED_TO_EXCL_SPIN,
+	LS_LCK_RW_LOCK_SHARED_TO_EXCL_BLOCK,
 
-#define LS_NPROBES                      40
-#define LS_LCK_INVALID                  LS_NPROBES
+	LS_LCK_RW_LOCK_EXCL_TO_SHARED_DOWNGRADE,
+	LS_LCK_RW_LOCK_EXCL_TO_SHARED_ILK_SPIN,
+
+	/* Ticket lock */
+	LS_LCK_TICKET_LOCK_ACQUIRE,
+	LS_LCK_TICKET_LOCK_RELEASE,
+	LS_LCK_TICKET_LOCK_SPIN,
+
+	LS_NPROBES
+};
 
 #if CONFIG_DTRACE
 extern uint32_t lockstat_probemap[LS_NPROBES];

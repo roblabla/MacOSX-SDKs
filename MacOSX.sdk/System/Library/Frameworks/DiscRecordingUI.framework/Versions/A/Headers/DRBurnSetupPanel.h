@@ -23,6 +23,11 @@
 
 #import <DiscRecording/DiscRecording.h>
 #import <DiscRecordingUI/DRSetupPanel.h>
+#import <Availability.h>
+
+
+API_UNAVAILABLE_BEGIN(ios)
+
 
 /*!
 	@class		DRBurnSetupPanel
@@ -158,3 +163,6 @@
 				default button title.
 */ 
 extern NSString* const DRBurnSetupPanelDefaultButtonDefaultTitle AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+API_UNAVAILABLE_END

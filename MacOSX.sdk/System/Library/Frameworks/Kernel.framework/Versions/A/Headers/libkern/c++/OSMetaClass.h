@@ -151,20 +151,29 @@ class OSInterface
 /*! @parseOnly */
 #define APPLE_KEXT_COMPATIBILITY
 
+
+/* No xnu-private defines outside of xnu */
+
 #include <TargetConditionals.h>
-
-#if (TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR)
+#if TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR
 #define APPLE_KEXT_VTABLE_PADDING   0
-#else /* (TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR) */
-/*! @parseOnly */
+#else /* TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR */
 #define APPLE_KEXT_VTABLE_PADDING   1
-#endif /* (TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR) */
+#endif /* TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR */
 
 
+
+#if TARGET_OS_OSX && defined(__arm64__)
+#define APPLE_KEXT_ALIGN_CONTAINERS      1
+#else /* TARGET_OS_OSX && defined(__arm64__) */
 #define APPLE_KEXT_ALIGN_CONTAINERS     (0 == APPLE_KEXT_VTABLE_PADDING)
+#endif /* TARGET_OS_OSX && defined(__arm64__) */
+
 
 #if defined(__LP64__)
 /*! @parseOnly */
+#define APPLE_KEXT_LEGACY_ABI  0
+#elif defined(__arm__) && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 2))
 #define APPLE_KEXT_LEGACY_ABI  0
 #else
 #define APPLE_KEXT_LEGACY_ABI  1
@@ -314,7 +323,7 @@ public:
  * <code>@link //apple_ref/cpp/macro/OSCheckTypeInst OSCheckTypeInst@/link</code>.
  */
 #define OSTypeID(type)   (type::metaClass)
-#define OSMTypeID(type)  ((OSMetaClass *) type::metaClass)
+#define OSMTypeID(type)  (const_cast<OSMetaClass *>(type::metaClass))
 
 
 /*!
@@ -428,15 +437,18 @@ public:
 
 	typedef void (*_ptf_t)(void);
 
-#if   defined(__i386__) || defined(__x86_64__)
+#if defined(__arm__) || defined(__arm64__)
+
+	static _ptf_t _ptmf2ptf(const OSMetaClassBase * self, void (OSMetaClassBase::*func)(void));
+
+#elif defined(__i386__) || defined(__x86_64__)
 
 // Slightly less arcane and slightly less evil code to do
 // the same for kexts compiled with the standard Itanium C++
 // ABI
 
 	static inline _ptf_t
-	_ptmf2ptf(const OSMetaClassBase *self, void (OSMetaClassBase::*func)(void),
-	    uintptr_t typeDisc __attribute__((unused)))
+	_ptmf2ptf(const OSMetaClassBase *self, void (OSMetaClassBase::*func)(void))
 	{
 		union {
 			void (OSMetaClassBase::*fIn)(void);
@@ -481,6 +493,10 @@ public:
  *                 you wish to cache.
  * @param func     The pointer to the member function itself,
  *                 something like <code>&Class::function</code>.
+ *                 It should be an explicit member function pointer constant,
+ *                 rather than a variable.
+ *                 Don't pass a <code>NULL</code> member function pointer.
+ *                 Instead, directly use a <code>NULL</code> function pointer.
  *
  * @result
  * A pointer to a function of the given type referencing <code>self</code>.
@@ -494,10 +510,16 @@ public:
  * This function will panic if an attempt is made to call it
  * with a multiply-inheriting class.
  */
+#if __has_builtin(__builtin_load_member_function_pointer)
+#define OSMemberFunctionCast(cptrtype, self, func)                       \
+     ((cptrtype) __builtin_load_member_function_pointer(*self, func) ? : \
+      (cptrtype) OSMetaClassBase::                                       \
+	  _ptmf2ptf(self, (void (OSMetaClassBase::*)(void)) func))
+#else
 #define OSMemberFunctionCast(cptrtype, self, func)         \
     (cptrtype) OSMetaClassBase::                           \
-	_ptmf2ptf(self, (void (OSMetaClassBase::*)(void)) func,  \
-	          ptrauth_type_discriminator(__typeof__(func)))
+	_ptmf2ptf(self, (void (OSMetaClassBase::*)(void)) func)
+#endif
 
 protected:
 	OSMetaClassBase();
@@ -884,11 +906,17 @@ public:
 private:
 #if APPLE_KEXT_VTABLE_PADDING
 // Virtual Padding
+#if defined(__arm64__) || defined(__arm__)
+	virtual void _RESERVEDOSMetaClassBase0();
+	virtual void _RESERVEDOSMetaClassBase1();
+	virtual void _RESERVEDOSMetaClassBase2();
+	virtual void _RESERVEDOSMetaClassBase3();
+#endif /* defined(__arm64__) || defined(__arm__) */
 	virtual void _RESERVEDOSMetaClassBase4();
 	virtual void _RESERVEDOSMetaClassBase5();
 	virtual void _RESERVEDOSMetaClassBase6();
 	virtual void _RESERVEDOSMetaClassBase7();
-#endif
+#endif /* APPLE_KEXT_VTABLE_PADDING */
 } APPLE_KEXT_COMPATIBILITY;
 
 
@@ -1703,19 +1731,24 @@ public:
     static const OSMetaClass * const superClass;                \
     public:                                                     \
     static const OSMetaClass * const metaClass;                 \
-	static class MetaClass : public OSMetaClass {           \
-	public:                                                 \
-	    MetaClass();                                        \
-	    virtual OSObject *alloc() const APPLE_KEXT_OVERRIDE;\
-	    _OS_ADD_METAMETHODS(dispatch);                      \
-	} gMetaClass;                                           \
-	friend class className ::MetaClass;                     \
+	static class MetaClass : public OSMetaClass {                 \
+	public:                                                       \
+	    MetaClass();                                              \
+	    virtual OSObject *alloc() const APPLE_KEXT_OVERRIDE;      \
+	    _OS_ADD_METAMETHODS(dispatch);                            \
+	} gMetaClass;                                                 \
+	friend class className ::MetaClass;                           \
 	virtual const OSMetaClass * getMetaClass() const APPLE_KEXT_OVERRIDE; \
     protected:                                                  \
     className (const OSMetaClass *);                            \
     virtual ~ className () APPLE_KEXT_OVERRIDE;                 \
     _OS_ADD_METHODS(className, dispatch)
 
+#define _OS_ADD_OPERATOR_PROTO                                  \
+    public:                                                     \
+    static void *operator new(size_t size);                     \
+    protected:                                                  \
+    static void operator delete(void *mem, size_t size);
 
 /*!
  * @define OSDeclareDefaultStructors
@@ -1733,18 +1766,18 @@ public:
  * immediately after the opening brace in a class declaration.
  * It leaves the current privacy state as <code>protected:</code>.
  */
-#define _OSDeclareDefaultStructors(className, dispatch)    \
-    OSDeclareCommonStructors(className, dispatch);        \
-    public:                                     \
-    className (void);                           \
+#define _OSDeclareDefaultStructors(className, dispatch)         \
+	OSDeclareCommonStructors(className, dispatch);              \
+	public:                                                     \
+	className (void);                                           \
+	_OS_ADD_OPERATOR_PROTO                                      \
     protected:
 
+#define OSDeclareDefaultStructors(className)                    \
+	_OSDeclareDefaultStructors(className, )
 
-#define OSDeclareDefaultStructors(className)   \
-_OSDeclareDefaultStructors(className, )
-
-#define OSDeclareDefaultStructorsWithDispatch(className)   \
-_OSDeclareDefaultStructors(className, dispatch)
+#define OSDeclareDefaultStructorsWithDispatch(className)        \
+	_OSDeclareDefaultStructors(className, dispatch)
 
 
 /*!
@@ -1764,17 +1797,25 @@ _OSDeclareDefaultStructors(className, dispatch)
  * immediately after the opening brace in a class declaration.
  * It leaves the current privacy state as <code>protected:</code>.
  */
-#define _OSDeclareAbstractStructors(className, dispatch)                        \
-    OSDeclareCommonStructors(className, dispatch);                              \
-    private:                                                                    \
-    className (void); /* Make primary constructor private in abstract */            \
-    protected:
+#define _OSDeclareAbstractStructors(className, dispatch)        \
+	OSDeclareCommonStructors(className, dispatch)               \
+    private:                                                    \
+	/* Make primary constructor private in abstract */          \
+	className (void);                                           \
+    protected:                                                  \
 
-#define OSDeclareAbstractStructors(className)                                   \
-_OSDeclareAbstractStructors(className, )
+#define OSDeclareAbstractStructors(className)                   \
+	_OSDeclareAbstractStructors(className, )                    \
+	_OS_ADD_OPERATOR_PROTO
 
-#define OSDeclareAbstractStructorsWithDispatch(className)                       \
-_OSDeclareAbstractStructors(className, dispatch)
+#define OSDeclareAbstractStructorsWithDispatch(className)       \
+	_OSDeclareAbstractStructors(className, dispatch)            \
+	_OS_ADD_OPERATOR_PROTO
+
+#define OSDeclareAbstractStructorsWithDispatchAndNoOperators(   \
+		className)                                              \
+	_OSDeclareAbstractStructors(className, dispatch)
+
 
 /*!
  * @define OSDeclareFinalStructors
@@ -1801,18 +1842,17 @@ _OSDeclareAbstractStructors(className, dispatch)
  * <b>Warning:</b> Changing a class from "Default" to "Final" will break
  * binary compatibility.
  */
-#define _OSDeclareFinalStructors(className, dispatch)                           \
-	_OSDeclareDefaultStructors(className, dispatch)                         \
-    private:                                                                    \
-	void __OSFinalClass(void);                                              \
+#define _OSDeclareFinalStructors(className, dispatch)           \
+	_OSDeclareDefaultStructors(className, dispatch)             \
+    private:                                                    \
+	void __OSFinalClass(void);                                  \
     protected:
 
+#define OSDeclareFinalStructors(className)                      \
+	_OSDeclareFinalStructors(className, )
 
-#define OSDeclareFinalStructors(className)                                      \
-_OSDeclareFinalStructors(className, )
-
-#define OSDeclareFinalStructorsWithDispatch(className)                          \
-_OSDeclareFinalStructors(className, dispatch)
+#define OSDeclareFinalStructorsWithDispatch(className)          \
+	_OSDeclareFinalStructors(className, dispatch)
 
 
 /* Not to be included in headerdoc.
@@ -1831,24 +1871,37 @@ _OSDeclareFinalStructors(className, dispatch)
  *                       <i>not</i> a string or macro.
  * @param init           A function to call in the constructor
  *                       of the class's OSMetaClass.
+ *
+ * @discussion
+ * <b>Note:</b> Needs to be followed by
+ * <code>OSMetaClassConstructorInit</code> or
+ * <code>OSMetaClassConstructorInitWithZone</code> for initialization
+ * of class's <code>OSMetaClass</code> constructor.
  */
-#define OSDefineMetaClassWithInit(className, superclassName, init)            \
-	/* Class global data */                                                   \
-    className ::MetaClass className ::gMetaClass;                             \
-    const OSMetaClass * const className ::metaClass =                         \
-	& className ::gMetaClass;                                             \
-    const OSMetaClass * const className ::superClass =                        \
-	& superclassName ::gMetaClass;                                        \
-	/* Class member functions */                                              \
-    className :: className(const OSMetaClass *meta)                           \
-	: superclassName (meta) { }                                           \
-    className ::~ className() { }                                             \
-    const OSMetaClass * className ::getMetaClass() const                      \
-	{ return &gMetaClass; }                                               \
-	/* The ::MetaClass constructor */                                         \
-    className ::MetaClass::MetaClass()                                        \
-	: OSMetaClass(#className, className::superClass, sizeof(className))   \
+#define OSMetaClassConstructorInit(className, superclassName,   \
+	    init)                                                   \
+	/* The ::MetaClass constructor */                           \
+	className ::MetaClass::MetaClass()                          \
+	: OSMetaClass(#className, className::superClass,            \
+	                sizeof(className))                          \
 	{ init; }
+
+
+
+#define OSDefineMetaClassWithInit(className, superclassName,    \
+	    init)                                                   \
+	/* Class global data */                                     \
+	className ::MetaClass className ::gMetaClass;               \
+	const OSMetaClass * const className ::metaClass =           \
+	& className ::gMetaClass;                                   \
+	const OSMetaClass * const className ::superClass =          \
+	& superclassName ::gMetaClass;                              \
+	/* Class member functions */                                \
+	className :: className(const OSMetaClass *meta)             \
+	: superclassName (meta) { }                                 \
+	className ::~ className() { }                               \
+	const OSMetaClass * className ::getMetaClass() const        \
+	{ return &gMetaClass; }
 
 
 /* Not to be included in headerdoc.
@@ -1866,7 +1919,7 @@ _OSDeclareFinalStructors(className, dispatch)
  *                       as a raw token,
  *                       <i>not</i> a string or macro.
  */
-#define OSDefineAbstractStructors(className, superclassName)        \
+#define OSDefineAbstractStructors(className, superclassName)    \
     OSObject * className ::MetaClass::alloc() const { return NULL; }
 
 
@@ -1885,11 +1938,23 @@ _OSDeclareFinalStructors(className, dispatch)
  *                       as a raw token,
  *                       <i>not</i> a string or macro.
  */
+#define OSDefineBasicStructors(className, superclassName)       \
+	OSObject * className ::MetaClass::alloc() const             \
+	{ return new className; }                                   \
+	className :: className () : superclassName (&gMetaClass)    \
+	{ gMetaClass.instanceConstructed(); }
+
+#define OSDefineOperatorMethods(className)                      \
+	void * className::operator new(size_t size)                 \
+	{ return OSObject::operator new(size); }                    \
+	void className::operator delete(void *mem, size_t size)     \
+	{ return OSObject::operator delete(mem, size); }
+
+
 #define OSDefineDefaultStructors(className, superclassName)     \
-    OSObject * className ::MetaClass::alloc() const             \
-    { return new className; }                                   \
-    className :: className () : superclassName (&gMetaClass)    \
-    { gMetaClass.instanceConstructed(); }
+	OSDefineBasicStructors(className, superclassName)           \
+	OSDefineOperatorMethods(className)
+
 
 /* Not to be included in headerdoc.
  *
@@ -1906,8 +1971,8 @@ _OSDeclareFinalStructors(className, dispatch)
  *                       as a raw token,
  *                       <i>not</i> a string or macro.
  */
-#define OSDefineFinalStructors(className, superclassName)               \
-    OSDefineDefaultStructors(className, superclassName)                 \
+#define OSDefineFinalStructors(className, superclassName)       \
+    OSDefineBasicStructors(className, superclassName)           \
     void className ::__OSFinalClass(void) { }
 
 
@@ -1928,9 +1993,11 @@ _OSDeclareFinalStructors(className, dispatch)
  * @param init           A function to call in the constructor
  *                       of the class's OSMetaClass.
  */
-#define OSDefineMetaClassAndStructorsWithInit(className, superclassName, init) \
-    OSDefineMetaClassWithInit(className, superclassName, init)        \
-    OSDefineDefaultStructors(className, superclassName)
+#define OSDefineMetaClassAndStructorsWithInit(className,        \
+	    superclassName, init)                                   \
+	OSDefineMetaClassWithInit(className, superclassName, init)  \
+	OSMetaClassConstructorInit(className, superclassName, init) \
+	OSDefineDefaultStructors(className, superclassName)
 
 
 /* Not to be included in headerdoc.
@@ -1950,9 +2017,12 @@ _OSDeclareFinalStructors(className, dispatch)
  * @param init           A function to call in the constructor
  *                       of the class's OSMetaClass.
  */
-#define OSDefineMetaClassAndAbstractStructorsWithInit(className, superclassName, init) \
-    OSDefineMetaClassWithInit(className, superclassName, init)        \
-    OSDefineAbstractStructors(className, superclassName)
+#define OSDefineMetaClassAndAbstractStructorsWithInit(          \
+		className, superclassName, init)                        \
+	OSDefineMetaClassWithInit(className, superclassName, init)  \
+	OSMetaClassConstructorInit(className, superclassName, init) \
+	OSDefineAbstractStructors(className, superclassName)        \
+	OSDefineOperatorMethods(className)
 
 
 /* Not to be included in headerdoc.
@@ -1972,9 +2042,12 @@ _OSDeclareFinalStructors(className, dispatch)
  * @param init           A function to call in the constructor
  *                       of the class's OSMetaClass.
  */
-#define OSDefineMetaClassAndFinalStructorsWithInit(className, superclassName, init) \
-    OSDefineMetaClassWithInit(className, superclassName, init)                      \
-    OSDefineFinalStructors(className, superclassName)
+#define OSDefineMetaClassAndFinalStructorsWithInit(className,   \
+	    superclassName, init)                                   \
+	OSDefineMetaClassWithInit(className, superclassName, init)  \
+	OSMetaClassConstructorInit(className, superclassName, init) \
+	OSDefineFinalStructors(className, superclassName)           \
+	OSDefineOperatorMethods(className)
 
 
 /* Helpers */
@@ -1997,7 +2070,9 @@ _OSDeclareFinalStructors(className, dispatch)
  *                       of the class's OSMetaClass.
  */
 #define OSDefineMetaClass(className, superclassName)            \
-    OSDefineMetaClassWithInit(className, superclassName, )
+	OSDefineMetaClassWithInit(className, superclassName, )      \
+	OSMetaClassConstructorInit(className, superclassName, )     \
+	OSDefineOperatorMethods(className)
 
 
 /*!
@@ -2019,8 +2094,9 @@ _OSDeclareFinalStructors(className, dispatch)
  * at the beginning of their implementation files,
  * before any function implementations for the class.
  */
-#define OSDefineMetaClassAndStructors(className, superclassName)    \
-    OSDefineMetaClassAndStructorsWithInit(className, superclassName, )
+#define OSDefineMetaClassAndStructors(className, superclassName) \
+	OSDefineMetaClassAndStructorsWithInit(className,            \
+	                superclassName, )
 
 
 /*!
@@ -2043,8 +2119,10 @@ _OSDeclareFinalStructors(className, dispatch)
  * at the beginning of their implementation files,
  * before any function implementations for the class.
  */
-#define OSDefineMetaClassAndAbstractStructors(className, superclassName) \
-    OSDefineMetaClassAndAbstractStructorsWithInit (className, superclassName, )
+#define OSDefineMetaClassAndAbstractStructors(className,        \
+	    superclassName)                                         \
+	OSDefineMetaClassAndAbstractStructorsWithInit (className,   \
+	                superclassName, )
 
 
 /*!
@@ -2076,8 +2154,11 @@ _OSDeclareFinalStructors(className, dispatch)
  * <b>Warning:</b> Changing a class from "Default" to "Final" will break
  * binary compatibility.
  */
-#define OSDefineMetaClassAndFinalStructors(className, superclassName)   \
-    OSDefineMetaClassAndFinalStructorsWithInit(className, superclassName, )
+#define OSDefineMetaClassAndFinalStructors(className,           \
+	    superclassName)                                         \
+	OSDefineMetaClassAndFinalStructorsWithInit(className,       \
+	                superclassName, )
+
 
 
 // Dynamic vtable patchup support routines and types
@@ -2116,8 +2197,7 @@ _OSDeclareFinalStructors(className, dispatch)
  *       OSMetaClassDeclareReservedUsed@/link</code>.
  */
 #if APPLE_KEXT_VTABLE_PADDING
-#define OSMetaClassDeclareReservedUnused(className, index)        \
-    private:                                                      \
+#define OSMetaClassDeclareReservedUnused(className, index)      \
     virtual void _RESERVED ## className ## index ()
 #else
 #define OSMetaClassDeclareReservedUnused(className, index)
@@ -2145,6 +2225,7 @@ _OSDeclareFinalStructors(className, dispatch)
  *       OSMetaClassDeclareReservedUnused@/link</code>.
  */
 #define OSMetaClassDeclareReservedUsed(className, index)
+#define OSMetaClassDeclareReservedUsedARM(className, x86index, armindex)
 
 
 /*!
@@ -2210,6 +2291,20 @@ void className ::_RESERVED ## className ## index ()             \
  *       OSMetaClassDefineReservedUnused@/link</code>.
  */
 #define OSMetaClassDefineReservedUsed(className, index)
+#define OSMetaClassDefineReservedUsedARM(className, x86index, armindex)
+
+/*
+ * OSMetaClassDeclareReservedUsedX86 needs to be placed with the unused vtable
+ * slots since it will unused on arm targets.
+ */
+#if defined(__arm64__) || defined(__arm__)
+#define OSMetaClassDeclareReservedUsedX86               OSMetaClassDeclareReservedUnused
+#define OSMetaClassDefineReservedUsedX86                OSMetaClassDefineReservedUnused
+#else
+#define OSMetaClassDeclareReservedUsedX86               OSMetaClassDeclareReservedUsed
+#define OSMetaClassDefineReservedUsedX86                OSMetaClassDefineReservedUsed
+
+#endif
 
 // I/O Kit debug internal routines.
 	static void printInstanceCounts();

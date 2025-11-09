@@ -30,6 +30,8 @@
 
 #if defined (__i386__) || defined(__x86_64__)
 #include "pexpert/i386/boot.h"
+#elif defined (__arm64__)
+#elif defined (__arm__)
 #else
 #error architecture not supported
 #endif

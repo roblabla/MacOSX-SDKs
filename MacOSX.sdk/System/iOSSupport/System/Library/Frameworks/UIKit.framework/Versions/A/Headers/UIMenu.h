@@ -18,6 +18,7 @@ typedef NS_OPTIONS(NSUInteger, UIMenuOptions) {
 
     /// Indicates whether the menu should be rendered with a destructive appearance in its parent
     UIMenuOptionsDestructive    = 1 << 1,
+    
 } NS_SWIFT_NAME(UIMenu.Options) API_AVAILABLE(ios(13.0));
 
 NS_ASSUME_NONNULL_BEGIN
@@ -30,8 +31,17 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) @interface UIMenu : UIMenuElement
 /// Options.
 @property (nonatomic, readonly) UIMenuOptions options;
 
-/// The menu's sub-elements and sub-menus. All children are immutable.
+/// The menu's sub-elements and sub-menus. On iOS 14.0, elements of your own menus are mutable, -copying a menu will produce mutable elements, and UIKit will take immutable copies of menus it receives. Prior to iOS 14.0, menus are always fully immutable.
 @property (nonatomic, readonly) NSArray<UIMenuElement *> *children;
+
+/*!
+ * @abstract Creates a UIMenu with an empty title, nil image, automatically generated identifier, and default options.
+ *
+ * @param children    The menu's action-based sub-elements and sub-menus.
+ *
+ * @return A new UIMenu.
+ */
++ (UIMenu *)menuWithChildren:(NSArray<UIMenuElement *> *)children API_AVAILABLE(ios(14.0)) NS_SWIFT_UNAVAILABLE("Use init(title:image:identifier:options:children:) instead");
 
 /*!
  * @abstract Creates a UIMenu with the given arguments.
@@ -118,6 +128,9 @@ UIKIT_EXTERN const UIMenuIdentifier UIMenuQuit API_AVAILABLE(ios(13.0));
 
 /// New scene menu
 UIKIT_EXTERN const UIMenuIdentifier UIMenuNewScene API_AVAILABLE(ios(13.0));
+
+/// Open Recent menu
+UIKIT_EXTERN const UIMenuIdentifier UIMenuOpenRecent API_AVAILABLE(ios(14.0));
 
 /// Close menu
 UIKIT_EXTERN const UIMenuIdentifier UIMenuClose API_AVAILABLE(ios(13.0));

@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVSampleBufferRenderSynchronizer.h>)
 /*
 	File:  AVSampleBufferRenderSynchronizer.h
 
@@ -179,3 +180,7 @@ AVF_EXPORT NSNotificationName const AVSampleBufferRenderSynchronizerRateDidChang
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCore/AVSampleBufferRenderSynchronizer.h>
+#endif

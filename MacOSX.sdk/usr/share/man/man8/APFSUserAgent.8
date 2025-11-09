@@ -22,7 +22,6 @@
 .Nm APFSUserAgent
 .Nd APFS new container observer
 .Sh DESCRIPTION
-.Pp
 The
 .Nm
 watches for IOKit notifications about new APFS containers appearing.
@@ -31,6 +30,6 @@ watches for IOKit notifications about new APFS containers appearing.
 checks APFS containers for encrypted volumes.
 .Pp
 If found, pops up a DiskUnlock dialog to ask user for volume unlock password.
-.Sh EXIT VALUES
+.Sh EXIT STATUS
 .Nm
-always returns 0.
+always exits with 0.

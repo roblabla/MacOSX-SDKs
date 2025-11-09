@@ -406,7 +406,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), watchos(1.0), tvos(7.0));
  *          kvImageUnknownFlagsBit              flags must be kvImageNoFlags or kvImageNoAllocate
  *          kvImageMemoryAllocationError        Not enough memory to allocate buf->data
  *          kvImageInvalidParameter             format->bitmapInfo has unknown bits set
- *          kvImageInvalidParameter             format->version is not 0
+ *          kvImageInvalidParameter             format->version is not 0 or 1
  *          kvImageInvalidParameter             format->decode is not NULL
  *          kvImageInvalidParameter             format->bitsPerComponent is not in {0,1,2,4,5,8,16,32}
  *          kvImageInvalidImageFormat           format->renderingIntent is not a known value
@@ -825,6 +825,105 @@ VIMAGE_PF vImageConverterRef vImageConverter_CreateWithColorSyncCodeFragment( CF
 VIMAGE_NON_NULL(1,2)
 API_AVAILABLE(macos(10.9), ios(7.0), watchos(1.0), tvos(7.0));
 
+
+/*!
+* @function vImageConverter_CreateWithCGColorConversionInfo
+* @abstract Create a vImageConverterRef substituting in CGColorConversionInfo for the one vImage usually generates for the color conversion steps.
+* @discussion vImageConverter_CreateWithCGColorConversionInfo is like vImageConverter_CreateWithCGImageFormat, except that
+*  instead of creating its own colorspace transform for any colorspace conversions, it uses the one you pass in through CGColorConversionInfo.
+*  This gives you greater control over the fine details of colorspace conversion, for exacting color fidelity.
+*  The colorspaces for source and destination images must refer to colorspaces that have the same number of channels
+*  as the codeFragment is designed to accept / produce.
+*
+*  See Apple Sample Code "Converting an Image with Black Point Compensation" https://developer.apple.com/library/mac/samplecode/convertImage/Introduction/Intro.html
+*  for an example of usage.
+*
+*  @param colorConversionInfoRef    CGColorConversionInfo described in CGColorConversionInfo.h
+*
+*  @param srcFormat    A pointer to a populated vImage_CGImageFormat struct describing the image format
+*                      of the source image. CGColorSpaceRef will be ignored since vImage will get color space conversion
+*                      information through CGColorConversionInfo.
+*
+*  @param destFormat   A pointer to a populated vImage_CGImageFormat struct describing the image format
+*                      of the destination image. CGColorSpaceRef will be ignored since vImage will get color space conversion
+*                      information through CGColorConversionInfo.
+*
+*  @param  backgroundColor Points to an array of floats to be used as a background color if one is needed. The
+*                      backgroundColor range is assumed to be [0,1]. The channel ordering and number of color
+*                      channels must match the natural order of the destination colorSpace (e.g. RGB or CMYK).
+*                      The backgroundColor may be NULL if no background color is needed.
+*
+*                      A background color is used when the image is converted from an alpha-containing format
+*                      to an alpha-none format, in which case the alpha is removed by compositing against the
+*                      opaque background color pointed to by this parameter. If the image is instead converted
+*                      from one alpha containing format to another, then the image will be premultiplied or
+*                      unpremultiplied as necessary and no background color is necessary. (For unpremultiplication,
+*                      the result color value for pixels with alpha 0 is 0.)  Likewise, when converting between
+*                      alpha-none formats, a background color is not use. In the case of kCGImageAlphaNone ->
+*                      kCGImageAlphaNoneSkipFirst/Last, the vacant alpha channel is filled in with 1.0. If NULL
+*                      is passed here, then 0 will be used for the color channels.
+*
+*                      The vImageConverter will contain a copy of the data passed in this field.
+*
+*  @param flags        Any of the following flags are allowed:
+*
+*  <pre>@textblock
+*           kvImagePrintDiagnosticsToConsole    In the event of a problem, print out some helpful debug
+*                                               messages.
+*
+*           kvImageDoNotTile                    A converter created with this flag will operate as if
+*                                               kvImageDoNotTile was passed to vImageConvert_AnyToAny
+*                                               whether it was or not.
+*  @/textblock </pre>
+*
+*  @param error        May be NULL.  If not NULL, then a vImage_Error is returned at the address pointed to by error.
+*                      The vImage_Error will be less than 0 if an error condition occurred. Checking the vImageConverter
+*                      returned to make sure it is non-NULL is sufficient to verify success or failure of the function.
+*
+*                      Some possible error values that can occur are :
+*  <pre>@textblock
+*      kvImageNoError                      Success.
+*
+*      kvImageNullPointerArgument          srcFormat and/or destFormat is NULL.
+*
+*      kvImageUnknownFlagsBit              Currently only kvImagePrintDiagnosticsToConsole and kvImageDoNotTile are
+*                                                              allowed. All other bits in the flags field must be 0.
+*
+*      kvImageInvalidParameter             backgroundColor is NULL and the conversion needed a backgroundColor
+*
+*      kvImageInvalidImageFormat           The base colorspace must be grayscale for destination images using indexed color.
+*      kvImageInvalidImageFormat           The colorspace may be indexed color for images only if it is {1,2,4,8} bitsPerComponent
+*                                          and kCGImageAlphaNone.
+*      kvImageInvalidImageFormat           vImage_CGImageFormat.bitmapInfo & kCGBitmapAlphaInfoMask  does not encode a valid alpha
+*      kvImageInvalidImageFormat           floating point formats must be 16 or 32 bits per component. 16-bit floats are
+*                                          IEEE-754-2008 binary16 interchange format  (a.k.a. OpenEXR half float). 32-bit floats
+*                                          are the standard IEEE-754-2008 binary32 interchange format. (a.k.a float in C/C++/ObjC)
+*      kvImageInvalidImageFormat           format->renderingIntent is not a known value
+*      kvImageInvalidImageFormat           The conversion called for conversion to an input-only colorspace. Some color profiles
+*                                          (e.g. those arising from a scanner) are described as input only, because the device can
+*                                          not produce image output.
+*
+*      kvImageInvalidImageFormat           CGColorConversionInfo was found to be otherwise invalid / unusable
+*
+*      kvImageInternalError                The converter was unable to find a path from the source format to the destination format.
+*                                          This should not happen and indicates incorrect operation of the function. Please file a bug.
+*                                          The kvImagePrintDiagnosticsToConsole flag will provide additional diagnostic info.
+*  @/textblock </pre>
+*
+*          In cases where the error code is not sufficient to quickly determine the problem, the kvImagePrintDiagnosticsToConsole flag
+*          should provide additional diagnostic info.
+*
+*  @return  A vImageConverter object with reference count of 1 is created. If the call fails due to an error, then NULL
+*  will be returned. Use vImageConverter_Release to release your reference to it and allow the resources used
+*  by the converter to be returned to the system.
+*
+*  If error is not NULL, an error code will be written to that address on return.
+*
+*/
+
+VIMAGE_PF vImageConverterRef vImageConverter_CreateWithCGColorConversionInfo(CGColorConversionInfoRef colorConversionInfoRef, const vImage_CGImageFormat *sFormat, const vImage_CGImageFormat *dFormat, const CGFloat *bg, vImage_Flags flags, vImage_Error *error)
+VIMAGE_NON_NULL(1,2,3)
+API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
 
 /*!
  * @function  vImageConverter_MustOperateOutOfPlace

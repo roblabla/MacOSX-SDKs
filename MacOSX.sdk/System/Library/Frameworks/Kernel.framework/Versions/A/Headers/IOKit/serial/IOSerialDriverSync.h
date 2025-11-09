@@ -36,7 +36,8 @@
 
 #include <IOKit/IOService.h>
 
-class IOSerialDriverSync : public IOService
+__exported_push
+class __kpi_deprecated("Use DriverKit") IOSerialDriverSync : public IOService
 {
     OSDeclareAbstractStructors(IOSerialDriverSync);
 
@@ -87,5 +88,6 @@ OSMetaClassDeclareReservedUnused(IOSerialDriverSync, 14);
 OSMetaClassDeclareReservedUnused(IOSerialDriverSync, 15);
 
 };
+__exported_pop
 
 #endif /* !_SERIAL_IOSERIALDRIVERSYNC_H */

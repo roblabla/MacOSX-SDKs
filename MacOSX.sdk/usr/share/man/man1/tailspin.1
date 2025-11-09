@@ -17,15 +17,15 @@
 .\"
 .It Nm Cm set buffer-size Ar buffer-size-mb
 .br .RE
-.Cm ktrace-filter-descriptor Ar filter-desc
+.Cm ktrace-filter-descriptor Ar (add:|remove:)filter-desc
 .br .RE
-.Cm oncore-sampling-period Ar period-in-ns
+.Cm oncore-sampling-period Ar period-in-ns|disabled
 .br .RE
-.Cm full-system-sampling-period Ar period-in-ns
+.Cm full-system-sampling-period Ar period-in-ns|disabled
 .El
 .Bl -hang -compact -width "tailspin -"
 .\"
-.It Nm Cm reset
+.It Nm Cm reset Op buffer-size-mb|ktrace-filter-descriptor|oncore-sampling-period|full-system-sampling-period
 .\"
 .It Nm Cm save
 .Op Fl r Ar reason-string
@@ -84,24 +84,24 @@ Set up the kernel trace buffer to be
 .Ar buffer-size-mb
 big.
 .Pp
-.It Cm ktrace-filter-descriptor Ar filter-desc
+.It Cm ktrace-filter-descriptor Ar (add:|remove:)filter-desc
 Apply the
 .Ar filter-desc
 to the tailspin configuration, thereby controlling which events are traced by tailspin.  See
 .Sx FILTER DESCRIPTIONS
-on the syntax of a filter.
+on the syntax of a filter. The filter may be prefixed with "add:" or "remove:" to modify an existing filter rather than replace it entirely
 .It Cm oncore-sampling-period Ar period-in-ns
 Set up a timer in the tailspin configuration to sample the threads that are on the CPU when the timer fires every
 .Ar period-in-ns .
-The minimum period allowed is 1 ms.
+The minimum period allowed is 1 ms. "disabled" may be used to disable the oncore sampling timer.
 .It Cm full-system-sampling-period Ar period-in-ns
 Set up a timer in the tailspin configuration to sample all threads of all processes when the timer fires every
 .Ar period-in-ns .
-The minimum period allowed is 10 ms.
+The minimum period allowed is 10 ms. "disabled" may be used to disable the full sampling timer.
 .El
 .\" RESET
-.It Cm reset
-Remove all custom configuration of tailspin and reset to system default.
+.It Cm reset Op buffer-size-mb|ktrace-filter-descriptor|oncore-sampling-period|full-system-sampling-period
+Remove all custom configuration of tailspin and reset to system default, or reset specific setting to the system default.
 .\" SAVE
 .It Cm save Oo Fl r Ar reason-string Oc Oo Fl l Ar num-seconds Oc Oo Fl n Oc Oo Ar path-to-file Oc
 .Pp

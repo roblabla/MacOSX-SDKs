@@ -1,4 +1,4 @@
-#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AUAudioUnitImplementation.h>)
+#if (defined(__USE_PUBLIC_HEADERS__) && __USE_PUBLIC_HEADERS__) || (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AUAudioUnitImplementation.h>)
 /*!
 	@file		AUAudioUnitImplementation.h
  	@framework	AudioToolbox.framework
@@ -12,7 +12,7 @@
 @page AUExtensionPackaging Audio Unit Extension Packaging
 @discussion
 
-Audio Unit app extensions are available beginning with Mac OS X 10.11 and iOS 9.0.
+Audio Unit app extensions are available beginning with macOS 10.11 and iOS 9.0.
 For background on app extensions, see "App Extension Programming Guide."
 
 There are two types of audio unit extensions: UI, and non-UI. The principal class of an
@@ -27,7 +27,7 @@ The Info.plist of the .appex bundle describes the type of extension and the prin
 It also contains an AudioComponents array (see AudioComponent.h), and an optional
 AudioComponentBundle entry, for example:
 
-@textblock
+```
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionAttributes</key>
@@ -67,7 +67,7 @@ AudioComponentBundle entry, for example:
 		<key>NSExtensionPrincipalClass</key>
 		<string>____</string>
 	</dict>
-@/textblock
+```
 
 NSExtensionPointIdentifier
 : `com.apple.AudioUnit` or `com.apple.AudioUnit-UI`.
@@ -89,7 +89,7 @@ AudioComponents
 	if the AU is implemented using AUAudioUnitV2Bridge.
 	See AudioComponent.h.
 
-Note that as of OS X version 10.12, the system has special support for installing both version 2
+Note that as of macOS version 10.12, the system has special support for installing both version 2
 (bundle-based) and version 3 (extension) implementations of the same audio unit. When two components
 are registered with the same type/subtype/manufacturer and version, normally the first one found
 is used. But if one is an audio unit extension and the other is not, then the audio unit extension's
@@ -181,13 +181,13 @@ typedef union AURenderEvent {
 		cycles.
 */
 typedef AUAudioUnitStatus (^AUInternalRenderBlock)(
-	AudioUnitRenderActionFlags *		actionFlags,
-	const AudioTimeStamp *				timestamp,
-	AUAudioFrameCount					frameCount,
-	NSInteger							outputBusNumber,
-	AudioBufferList *					outputData,
-	const AURenderEvent *__nullable 	realtimeEventListHead,
-	AURenderPullInputBlock __nullable	pullInputBlock);
+	AudioUnitRenderActionFlags *							actionFlags,
+	const AudioTimeStamp *									timestamp,
+	AUAudioFrameCount										frameCount,
+	NSInteger												outputBusNumber,
+	AudioBufferList *										outputData,
+	const AURenderEvent *__nullable 						realtimeEventListHead,
+	AURenderPullInputBlock __nullable __unsafe_unretained	pullInputBlock);
 
 // =================================================================================================
 
@@ -207,6 +207,18 @@ typedef AUAudioUnitStatus (^AUInternalRenderBlock)(
 
 /// Block which subclassers must provide (via a getter) to implement rendering.
 @property (nonatomic, readonly) AUInternalRenderBlock internalRenderBlock;
+
+/*!	@property	renderContextObserver
+	@brief		Block called by the OS when the rendering context changes.
+	
+	Audio Units which create auxiliary realtime rendering threads should implement this property to
+	return a block which will be called by the OS when the render context changes. Audio Unit hosts
+	must not attempt to interact with the AudioUnit through this block; it is for the exclusive use
+	of the OS. See <AudioToolbox/AudioWorkInterval.h> for more information.
+*/
+@property (nonatomic, readonly) AURenderContextObserver renderContextObserver
+	API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0))
+	__SWIFT_UNAVAILABLE_MSG("Swift is not supported for use with audio realtime threads");
 
 /*! @property	MIDIOutputBufferSizeHint
 	@brief		Hint to control the size of the allocated buffer for outgoing MIDI events.

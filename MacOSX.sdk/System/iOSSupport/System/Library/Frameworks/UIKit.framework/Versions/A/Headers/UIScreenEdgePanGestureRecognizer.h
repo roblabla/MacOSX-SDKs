@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*! This subclass of UIPanGestureRecognizer only recognizes if the user slides their finger
     in from the bezel on the specified edge. */
 UIKIT_EXTERN API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(tvos) @interface UIScreenEdgePanGestureRecognizer : UIPanGestureRecognizer
-@property (readwrite, nonatomic, assign) UIRectEdge edges; //< The edges on which this gesture recognizes, relative to the current interface orientation
+@property (readwrite, nonatomic, assign) UIRectEdge edges; // The edges on which this gesture recognizes, relative to the current interface orientation
 @end
 
 NS_ASSUME_NONNULL_END

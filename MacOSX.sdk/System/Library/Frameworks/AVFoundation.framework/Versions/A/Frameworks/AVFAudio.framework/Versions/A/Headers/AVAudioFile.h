@@ -5,7 +5,6 @@
 	Copyright (c) 2014-2015 Apple Inc. All Rights Reserved.
 */
 
-#import <AVFAudio/AVAudioTypes.h>
 #import <AVFAudio/AVAudioFormat.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -16,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
 	@class AVAudioFile
 	@abstract
-		AVAudioFile represents an audio file opened for reading or writing.
+		An audio file opened for reading or writing.
 	@discussion
 		Regardless of the file's actual format, reading and writing the file is done via 
 		`AVAudioPCMBuffer` objects, containing samples in an `AVAudioCommonFormat`,
@@ -60,7 +59,9 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 	@param fileURL
 		the path at which to create the file
 	@param settings
-		the format of the file to create (See `AVAudioRecorder`.)
+		the format of the file to create (See `AVAudioRecorder`.)  For linear PCM,
+		only interleaved formats are supported for the saved file, non interleaved setting will be
+		ignored and a warning is shown.
 	@param outError
 		on exit, if an error occurs, a description of the error
 	@discussion
@@ -76,9 +77,11 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 	@param fileURL
 		the path at which to create the file
 	@param settings
-		the format of the file to create (See `AVAudioRecorder`.)
+		the format of the file to create (See `AVAudioRecorder`.) For linear PCM,
+		only interleaved formats are supported for the saved file, non interleaved setting will be
+		ignored and a warning is shown.
 	@param format
-		the processing format to use when writing to the file
+		the processing format to use when writing to the file.
 	@param interleaved
 		whether to use an interleaved processing format
 	@param outError

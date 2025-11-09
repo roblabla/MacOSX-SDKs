@@ -1,12 +1,29 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 77C4B489-1CF2-3F76-93B4-3CB85F537A17', 'x86_64: 77C4B489-1CF2-3F76-93B4-3CB85F537A17' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           9C741CBA-F346-3858-9C09-1C214E133FE6
+  - target:          x86_64-maccatalyst
+    value:           9C741CBA-F346-3858-9C09-1C214E133FE6
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           6A7108FA-2FE3-3666-895D-B72E42717672
+  - target:          arm64e-maccatalyst
+    value:           6A7108FA-2FE3-3666-895D-B72E42717672
 install-name:    '/usr/lib/system/libsystem_configuration.dylib'
-current-version: 1061.0.2
-parent-umbrella: System
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 1109.40.9
+parent-umbrella:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    umbrella:        System
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ __dns_configuration_ack, __libSC_info_fork_child, __libSC_info_fork_parent, 
                        __libSC_info_fork_prepare, __nwi_config_agent_copy_data, __nwi_state_ack, 
                        __nwi_state_force_refresh, _config_agent_copy_dns_information, 

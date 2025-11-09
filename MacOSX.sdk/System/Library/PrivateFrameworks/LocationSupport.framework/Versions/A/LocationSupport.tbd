@@ -1,11 +1,25 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 70C4BB1D-2183-3EEF-9533-2623A2954998', 'x86_64: 70C4BB1D-2183-3EEF-9533-2623A2954998' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           D2C8CDAF-BD23-3A2B-95D5-F1576578A92A
+  - target:          x86_64-maccatalyst
+    value:           D2C8CDAF-BD23-3A2B-95D5-F1576578A92A
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           3C368E78-ED10-3A7B-8517-C593EFDB9711
+  - target:          arm64e-maccatalyst
+    value:           3C368E78-ED10-3A7B-8517-C593EFDB9711
 install-name:    '/System/Library/PrivateFrameworks/LocationSupport.framework/Versions/A/LocationSupport'
-current-version: 2387.0.8
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 2420.8.10
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CLISP_ME_TOKEN, _CLProfilingIdentify, _CLProfilingIdentifySiloInvocation, 
                        _CLWriteStackshot, __ZN12CLConnection10isEntitledERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE, 
                        __ZN12CLConnection11sendMessageENSt3__110shared_ptrI19CLConnectionMessageEE, 
@@ -14,9 +28,8 @@ exports:
                        __ZN12CLConnection13handleMessageENSt3__110shared_ptrI19CLConnectionMessageEE, 
                        __ZN12CLConnection14deferredDeleteEv, __ZN12CLConnection15sendMessageSyncENSt3__110shared_ptrI19CLConnectionMessageEEb, 
                        __ZN12CLConnection16resetAllHandlersEv, __ZN12CLConnection18handleInterruptionEv, 
-                       __ZN12CLConnection19connectionFinalizerEPv, __ZN12CLConnection19handleDisconnectionEv, 
-                       __ZN12CLConnection19sendMessageInternalENSt3__110shared_ptrI19CLConnectionMessageEEU13block_pointerFvPU24objcproto13OS_xpc_object8NSObjectE, 
-                       __ZN12CLConnection20setHandlerForMessageENSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEU13block_pointerFvNS0_10shared_ptrI19CLConnectionMessageEEE, 
+                       __ZN12CLConnection18resetReplyHandlersEv, __ZN12CLConnection19connectionFinalizerEPv, 
+                       __ZN12CLConnection19handleDisconnectionEv, __ZN12CLConnection20setHandlerForMessageENSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEU13block_pointerFvNS0_10shared_ptrI19CLConnectionMessageEEE, 
                        __ZN12CLConnection20setHandlerForMessageEP8NSStringU13block_pointerFvNSt3__110shared_ptrI19CLConnectionMessageEEE, 
                        __ZN12CLConnection22setInterruptionHandlerEU13block_pointerFvvE, 
                        __ZN12CLConnection23initializeConnection_nlEv, __ZN12CLConnection23setDisconnectionHandlerEU13block_pointerFvvE, 
@@ -46,7 +59,7 @@ exports:
                        __ZN18CLConnectionServerC2ENSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEPU28objcproto17OS_dispatch_queue8NSObjectU13block_pointerFvNS0_10unique_ptrI12CLConnection19CLConnectionDeleterEENS0_10shared_ptrI19CLConnectionMessageEEE, 
                        __ZN18CLConnectionServerD1Ev, __ZN18CLConnectionServerD2Ev, 
                        __ZN19CLConnectionMessage10isEntitledERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE, 
-                       __ZN19CLConnectionMessage15createXPCObjectEPU25objcproto14NSSecureCoding11objc_object, 
+                       __ZN19CLConnectionMessage10isReplyingEv, __ZN19CLConnectionMessage15createXPCObjectEPU25objcproto14NSSecureCoding11objc_object, 
                        __ZN19CLConnectionMessage16createXPCMessageEv, __ZN19CLConnectionMessage17setFileDescriptorEi, 
                        __ZN19CLConnectionMessage18setFileDescriptorsEPKii, __ZN19CLConnectionMessage7isReplyEv, 
                        __ZN19CLConnectionMessage9sendReplyEPU25objcproto14NSSecureCoding11objc_object, 
@@ -65,15 +78,16 @@ exports:
                        __ZN28CLConnectionEntitlementCacheC1E13audit_token_t, __ZN28CLConnectionEntitlementCacheC2E13audit_token_t, 
                        __ZNK19CLConnectionMessage13getDictionaryEv, __ZNK19CLConnectionMessage13getRawPayloadEv, 
                        __ZNK19CLConnectionMessage16getObjectOfClassEP10objc_class, 
-                       __ZNK19CLConnectionMessage18copyFileDescriptorEm, __ZNK19CLConnectionMessage18getObjectOfClassesEP5NSSet, 
-                       __ZNK19CLConnectionMessage22getDictionaryOfClassesEP5NSSet, 
-                       __ZNK19CLConnectionMessage26getNumberOfFileDescriptorsEv, 
+                       __ZNK19CLConnectionMessage18copyFileDescriptorEm, __ZNK19CLConnectionMessage18getFileDescriptorsEv, 
+                       __ZNK19CLConnectionMessage18getObjectOfClassesEP5NSSet, __ZNK19CLConnectionMessage22getDictionaryOfClassesEP5NSSet, 
+                       __ZNK19CLConnectionMessage22replyHandlerIdentifierEv, __ZNK19CLConnectionMessage26getNumberOfFileDescriptorsEv, 
                        __ZNK19CLConnectionMessage4nameEv, __ZNK28CLConnectionEntitlementCache7getNameEv ]
     objc-classes:    [ CLCppContainer, CLCppEncodableDataContainer, CLDispatchSilo, 
                        CLIntersiloInterface, CLIntersiloInterfaceSelectorInfo, CLIntersiloProxy, 
                        CLIntersiloService, CLIntersiloServiceMock, CLIntersiloServiceMockPayload, 
-                       CLIntersiloUniverse, CLRunLoopSilo, CLServiceVendor, CLSettingsDictionary, 
-                       CLSettingsManagerInternal, CLSettingsMirror, CLSilo, CLTimer ]
+                       CLIntersiloUniverse, CLPermissiveTimer, CLRunLoopSilo, CLServiceVendor, 
+                       CLSettingsDictionary, CLSettingsManagerInternal, CLSettingsMirror, 
+                       CLSilo, CLTimer ]
     objc-ivars:      [ CLIntersiloUniverse._silo, CLIntersiloUniverse._vendor, CLSettingsDictionary._internal, 
                        CLSilo._identifier ]
 ...

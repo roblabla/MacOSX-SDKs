@@ -27,10 +27,32 @@ CF_ASSUME_NONNULL_BEGIN
 typedef NSString* ICCameraItemMetadataOption NS_TYPED_ENUM IC_AVAILABLE(macos(10.15), ios(13.0));
 typedef NSString* ICCameraItemThumbnailOption NS_TYPED_ENUM IC_AVAILABLE(macos(10.15), ios(13.0));
 
+/*!
+  @const ICCameraItemThumbnailOption
+ 
+  @enum ICImageSourceShouldCache
+ 
+    Use of this key will override any custom thumbnail size requested, ignoring the ICImageSourceThumbnailMaxPixelSize
+    option entirely.
+ 
+  @enum ICImageSourceThumbnailMaxPixelSize
+ 
+    Use of this key will be ignored if ICImageSourceShouldCache has also been passed in.  Custom thumbnail requests will never be
+    cached.
+ 
+  @discussion Only the embedded EXIF thumbnail, or a created thumbnail of EXIF standard size (160x120) will
+    be cached. Use of the ICImageSourceShouldCache flag is discouraged, as the framework shall not act as a
+    backing store out of convienence.
+ 
+    If use of this flag is required, it is highly recommeded to only keep the image cached within the framework temporarily,
+    using the method -[ICCameraItem flushThumbnailCache] to evict the thumbnail.
+    
+    Multiple calls to both cache the EXIF thumbnail, and subsequently retrieve a larger thumbnail will work as defined.
+ */
 IMAGECAPTURE_EXTERN ICCameraItemThumbnailOption const ICImageSourceThumbnailMaxPixelSize IC_AVAILABLE(macos(10.15), ios(13.0));
 IMAGECAPTURE_EXTERN ICCameraItemThumbnailOption const ICImageSourceShouldCache IC_AVAILABLE(macos(10.15), ios(13.0));
 
-typedef NSString* ICDownloadOption NS_TYPED_ENUM IC_AVAILABLE(macos(10.15), ios(13.0));
+typedef NSString* ICDownloadOption NS_TYPED_ENUM IC_AVAILABLE(macos(10.4), ios(13.0));
 
 //------------------------------------------------------------------------------------------------------------------------------
 // Allowed keys in the options dictionary used when downloading a file from the camera
@@ -84,6 +106,14 @@ IMAGECAPTURE_EXTERN ICDownloadOption const ICDeleteAfterSuccessfulDownload IC_AV
 */
 IMAGECAPTURE_EXTERN ICDownloadOption const ICDownloadSidecarFiles IC_AVAILABLE(macos(10.4), ios(13.0));
 
+/*!
+  @const      ICTruncateAfterSuccessfulDownload
+  @discussion The value for this key should be an NSNumber object representing a boolean value. If this value is YES, and the file is a JPG converted from HEIC on device,
+  the padding will be stripped from the end of the file.  Note that the file size property of the ICCameraItem object will not be updated to reflect the newly truncated image.  This
+  option has no effect for images coming from devices without the ability to convert from HEIC to JPG.
+*/
+IMAGECAPTURE_EXTERN ICDownloadOption const ICTruncateAfterSuccessfulDownload IC_AVAILABLE(macos(11.0), ios(14.0));
+
 //----------------------------------------------------------------------------------------------------------------- ICCameraItem
 /*!
  @class ICCameraItem
@@ -123,7 +153,7 @@ IC_AVAILABLE(macos(10.4), ios(13.0))
   @property fileSystemPath
   @abstract ￼The file system path of the item for items on a device with transportType of ICTransportTypeMassStorage.
 */
-@property (nonatomic, readonly, nullable) NSString* fileSystemPath IC_AVAILABLE(macos(10.4),ios(13.0));
+@property (nonatomic, readonly, nullable) NSString* fileSystemPath IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios);
 
 /*!
   @property locked
@@ -201,51 +231,39 @@ IC_AVAILABLE(macos(10.4), ios(13.0))
  @abstract ￼Metadata for the file if one is readily available. If one is not readily available, accessing this property will send a message to the device requesting metadata for the file. The delegate of the device will be notified via method "cameraDevice:didReceiveMetadata:forItem:error:", if this method is implemented by the delegate.
  @note Execution of the delegate callback will occur on the main thread.
 */
-- (void)requestMetadata  IC_AVAILABLE(macos(10.15), ios(13.0));
+- (void)requestMetadata IC_AVAILABLE(macos(10.15), ios(13.0));
 
 /*!
  @method flushThumbnailCache
  @abstract ￼Deletes cached thumbnail for the item.
 */
-- (void)flushThumbnailCache  IC_AVAILABLE(macos(10.15), ios(13.0));
+- (void)flushThumbnailCache IC_AVAILABLE(macos(10.15), ios(13.0));
 
 /*!
- @method flushMetadataCache
- @abstract ￼Deletes cached metadata for the item.
-*/
-- (void)flushMetadataCache IC_AVAILABLE(macos(10.15), ios(13.0));
+   @method flushMetadataCache
+   @abstract ￼Deletes cached metadata for the item.
+ */
+- (void) flushMetadataCache IC_AVAILABLE(macos(10.15), ios(13.0));
 
 #pragma mark - Deprecated
 
 /*!
  @property thumbnailIfAvailable
- @abstract ￼Thumbnail for the item if one is readily available. If one is not readily available, accessing this property will
- send a message to the device requesting a thumbnail for the file. The delegate of the device will be notified via method
- "cameraDevice:didReceiveThumbnailForItem:", if this method is implemented on by the delegate.
- @note Execution of the delegate callback will occur on the main thread.
 */
 @property (nullable, readonly) CGImageRef thumbnailIfAvailable IC_DEPRECATED_WITH_REPLACEMENT(
-    "Use requestThumbnail, or requestThumbnailWithOptions:completion", macos(10.4,10.15));
+    "Use requestThumbnail, or requestThumbnailDataWithOptions:completion", macos(10.4,10.15));
 
 /*!
  @property largeThumbnailIfAvailable
- @abstract Large thumbnail for the item if one is readily available. If one is not readily available, accessing this property
- will send a message to the device requesting a thumbnail for the file. The delegate of the device will be notified via method
- "cameraDevice:didReceiveThumbnailForItem:", if this method is implemented on by the delegate.
- @note Execution of the delegate callback will occur on the main thread.
  */
 @property (nullable, readonly) CGImageRef largeThumbnailIfAvailable IC_DEPRECATED_WITH_REPLACEMENT(
-    "Use requestThumbnail, or requestThumbnailWithOptions:completion", macos(10.4, 10.15));
+    "Use requestThumbnail, or requestThumbnailDataWithOptions:completion", macos(10.4, 10.15));
 
 /*!
  @property metadataIfAvailable
- @abstract ￼Metadata for the file if one is readily available. If one is not readily available, accessing this property will
- send a message to the device requesting metadata for the file. The delegate of the device will be notified via method
- "cameraDevice:didReceiveMetadataForItem:", if this method is implemented on by the delegate.
- @note Execution of the delegate callback will occur on the main thread.
 */
 @property (nullable, readonly) NSDictionary<NSString*, id>* metadataIfAvailable IC_DEPRECATED_WITH_REPLACEMENT(
-    "Use requestMetadata for the delegate based API, or requestMetadataDictionaryWithOptions:completion", macos(10.4, 10.15));
+    "Use requestMetadata, or requestMetadataDictionaryWithOptions:completion", macos(10.4, 10.15));
 
 @end
 

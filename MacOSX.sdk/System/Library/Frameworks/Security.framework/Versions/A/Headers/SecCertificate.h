@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2017 Apple Inc. All Rights Reserved.
+ * Copyright (c) 2002-2020 Apple Inc. All Rights Reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  *
@@ -156,6 +156,12 @@ __nullable CF_RETURNS_RETAINED
 SecKeyRef SecCertificateCopyKey(SecCertificateRef certificate)
     API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
 
+#if TARGET_OS_OSX && TARGET_CPU_ARM64
+#define SEC_SUFFIX_LEGACYMAC(symbol) __asm("_" __STRING(symbol) "$LEGACYMAC")
+#else
+#define SEC_SUFFIX_LEGACYMAC(symbol) /**/
+#endif
+
 #if TARGET_OS_IPHONE
 /*!
  @function SecCertificateCopyPublicKey
@@ -179,6 +185,7 @@ SecKeyRef SecCertificateCopyPublicKey(SecCertificateRef certificate)
  @discussion NOTE: Deprecated in macOS 10.14; use SecCertificateCopyKey instead for cross-platform availability.
  */
 OSStatus SecCertificateCopyPublicKey(SecCertificateRef certificate, SecKeyRef * __nonnull CF_RETURNS_RETAINED key)
+    SEC_SUFFIX_LEGACYMAC(SecCertificateCopyPublicKey)
     API_DEPRECATED_WITH_REPLACEMENT("SecCertificateCopyKey", macos(10.3, 10.14)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 #endif
 
@@ -191,7 +198,7 @@ OSStatus SecCertificateCopyPublicKey(SecCertificateRef certificate, SecKeyRef * 
  */
 __nullable
 CFDataRef SecCertificateCopySerialNumberData(SecCertificateRef certificate, CFErrorRef *error)
-    __OSX_AVAILABLE_STARTING(__MAC_10_13, __IPHONE_11_0);
+    API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
 
 #if TARGET_OS_IPHONE
 /*!
@@ -215,6 +222,7 @@ CFDataRef SecCertificateCopySerialNumber(SecCertificateRef certificate)
  */
 __nullable
 CFDataRef SecCertificateCopySerialNumber(SecCertificateRef certificate, CFErrorRef *error)
+    SEC_SUFFIX_LEGACYMAC(SecCertificateCopySerialNumber)
     API_DEPRECATED_WITH_REPLACEMENT("SecCertificateCopySerialNumberData", macos(10.7, 10.13)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 #endif
 

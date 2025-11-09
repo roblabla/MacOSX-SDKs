@@ -1,7 +1,7 @@
 /*
     CoreData.h
     Core Data
-    Copyright (c) 2004-2019, Apple Inc.
+    Copyright (c) 2004-2020, Apple Inc.
     All rights reserved.
 */
 
@@ -55,13 +55,13 @@
 #import <CoreData/NSPersistentStoreDescription.h>
 #import <CoreData/NSPersistentContainer.h>
 
-#import <CoreData/NSFetchIndexDescription.h>
-#import <CoreData/NSFetchIndexElementDescription.h>
 #import <CoreData/NSPersistentHistoryChange.h>
 #import <CoreData/NSPersistentHistoryChangeRequest.h>
 #import <CoreData/NSPersistentHistoryToken.h>
 #import <CoreData/NSPersistentHistoryTransaction.h>
 #import <CoreData/NSPersistentCloudKitContainer.h>
 #import <CoreData/NSPersistentCloudKitContainerOptions.h>
+#import <CoreData/NSPersistentCloudKitContainerEvent.h>
+#import <CoreData/NSPersistentCloudKitContainerEventRequest.h>
 
 #import <CoreData/NSCoreDataCoreSpotlightDelegate.h>

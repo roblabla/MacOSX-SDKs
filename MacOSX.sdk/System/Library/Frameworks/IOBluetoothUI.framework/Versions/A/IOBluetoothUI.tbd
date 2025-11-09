@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 29DACC6A-66D3-320D-A713-9F749F869A07' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           6E0AB907-B749-3424-A3F7-B088337EC8E5
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           A9103469-40CB-31A3-974F-E9E84E3AA2BD
 install-name:    '/System/Library/Frameworks/IOBluetoothUI.framework/Versions/A/IOBluetoothUI'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _BluetoothInquiryCacheTimeout, _BluetoothPreferencesChanged, 
                        _DeviceControllerHCIControllerNotificationHandler, _IOBluetoothAlertHCIControllerPublished, 
                        _IOBluetoothAlertHCIPowerStateOn, _IOBluetoothDecodeCommand, 
@@ -22,16 +28,18 @@ exports:
                        _IOBluetoothServiceBrowserControllerBrowseDevices, _IOBluetoothServiceBrowserControllerBrowseDevicesAsSheet, 
                        _IOBluetoothServiceBrowserControllerCreate, _IOBluetoothServiceBrowserControllerDiscover, 
                        _IOBluetoothServiceBrowserControllerDiscoverAsSheet, _IOBluetoothServiceBrowserControllerDiscoverWithDeviceAttributes, 
-                       _IOBluetoothServiceBrowserControllerSetOptions, _IOBluetoothValidateHardware, 
-                       _IOBluetoothValidateHardwareWithDescription, _ISCopyDeviceIconPath, 
-                       _ISShouldProposeToAddDeviceToISync, _ImageForTypeStr, _ObjectTableDataSource_ColumnSorter, 
-                       _TypeForModelStr, __IOBluetoothUI_AlignCGPointToUserSpace, 
-                       __IOBluetoothUI_AlignCGRectToUserSpace, __IOBluetoothUI_AlignPointToUserSpace, 
-                       __IOBluetoothUI_AlignRectToUserSpace, _gAppleObjectPushServiceClassUUID, 
-                       _isDebugLogEnabled, _registerValueTransformers, _sOBEXObjectPushSupportFormatsListNameMapping ]
-    objc-classes:    [ AssetHelper, AudioOptions, AudioOptionsViewController, AudioOptionsViewDoubleTap, 
-                       AudioOptionsViewDoubleTapExtended, AudioOptionsViewInEarDetection, 
-                       AudioOptionsViewListeningMode, AudioOptionsViewMicSwitching, 
+                       _IOBluetoothServiceBrowserControllerSetOptions, _IOBluetoothUICollectionViewLog, 
+                       _IOBluetoothValidateHardware, _IOBluetoothValidateHardwareWithDescription, 
+                       _ISCopyDeviceIconPath, _ISShouldProposeToAddDeviceToISync, 
+                       _ImageForTypeStr, _ObjectTableDataSource_ColumnSorter, _TypeForModelStr, 
+                       _closeButtonIconColor, _closeButtonIconColorPushed, _closeButtonImage, 
+                       _gAppleObjectPushServiceClassUUID, _isDebugLogEnabled, _registerValueTransformers, 
+                       _sOBEXObjectPushSupportFormatsListNameMapping ]
+    objc-classes:    [ AssetHelper, AudioOptions, AudioOptionsViewClickHold, AudioOptionsViewController, 
+                       AudioOptionsViewDoubleTap, AudioOptionsViewDoubleTapExtended, 
+                       AudioOptionsViewInEarDetection, AudioOptionsViewListeningMode, 
+                       AudioOptionsViewMagneticEarbudsControl, AudioOptionsViewMicSwitching, 
+                       AudioOptionsViewNoiseControl, AudioOptionsViewSmartRouting, 
                        FauxUIElement, IOBluetoothAccessibilityIgnoredImageCell, IOBluetoothAccessibilityIgnoredTextFieldCell, 
                        IOBluetoothConcreteDeviceController, IOBluetoothConcreteDeviceSelectorController, 
                        IOBluetoothConcreteObjectPush, IOBluetoothConcretePairingController, 
@@ -130,17 +138,11 @@ exports:
                        IOBluetoothTransferProgressUI.mTransferType, IOBluetoothTransferProgressUI.mUsesFileNameField, 
                        IOBluetoothTransferProgressUI.mWindowFrames, IOBluetoothUICollectionView.mAutoAdjustButtonSize, 
                        IOBluetoothUICollectionView.mUserPasscode, IOBluetoothUI_BatteryControl.batteryImage, 
-                       IOBluetoothUI_BatteryControl.batteryState, IOBluetoothUI_BatteryControl.floatVal, 
-                       IOBluetoothUI_BatteryControl.floatValue, IOBluetoothUI_BatteryControl.isUsingRedLevel, 
-                       IOBluetoothUI_BatteryControl.levelImage0, IOBluetoothUI_BatteryControl.levelImage1, 
-                       IOBluetoothUI_BatteryControl.levelImage2, IOBluetoothUI_BatteryControl.mBT_Row, 
-                       IOBluetoothUI_BatteryControl.mDeviceName, IOBluetoothUI_BatteryControl.mDrawNow, 
-                       IOBluetoothUI_BatteryControl.mSelected, IOBluetoothUI_BatteryControl.receivedValue, 
-                       IOBluetoothUI_BatteryControl.redLevelThreshold, IOBluetoothUI_BatteryControl.scalesWhenResized, 
-                       IOBluetooth_HIDNameFormatter._maxLength, ObjectTableDataSource._comparisonType, 
-                       ObjectTableDataSource._data, ObjectTableDataSource._delegate, 
-                       ObjectTableDataSource._descendingSort, ObjectTableDataSource._lastSortHeader, 
-                       ObjectTableDataSource._readOnly, PlainFormatter._allowDashesAndUnderscores, 
-                       PlainFormatter._allowDigits, PlainFormatter._allowLetters, 
-                       PlainFormatter._characterSet, PlainFormatter._maxChars ]
+                       IOBluetoothUI_BatteryControl.levelFillImage, IOBluetooth_HIDNameFormatter._maxLength, 
+                       ObjectTableDataSource._comparisonType, ObjectTableDataSource._data, 
+                       ObjectTableDataSource._delegate, ObjectTableDataSource._descendingSort, 
+                       ObjectTableDataSource._lastSortHeader, ObjectTableDataSource._readOnly, 
+                       PlainFormatter._allowDashesAndUnderscores, PlainFormatter._allowDigits, 
+                       PlainFormatter._allowLetters, PlainFormatter._characterSet, 
+                       PlainFormatter._maxChars ]
 ...

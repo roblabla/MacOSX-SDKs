@@ -99,9 +99,9 @@ NS_ERROR_ENUM(NSCocoaErrorDomain) {
     NSBundleErrorMinimum API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = 4992,
     NSBundleErrorMaximum API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = 5119,
     
-    NSBundleOnDemandResourceOutOfSpaceError API_AVAILABLE(ios(9.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos) = 4992, // There was not enough space available to download the requested On Demand Resources.
-    NSBundleOnDemandResourceExceededMaximumSizeError API_AVAILABLE(ios(9.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos) = 4993, // The application exceeded the amount of On Demand Resources content in use at one time
-    NSBundleOnDemandResourceInvalidTagError API_AVAILABLE(ios(9.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos) = 4994, // The application specified a tag which the system could not find in the application tag manifest
+    NSBundleOnDemandResourceOutOfSpaceError API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = 4992, // There was not enough space available to download the requested On Demand Resources.
+    NSBundleOnDemandResourceExceededMaximumSizeError API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = 4993, // The application exceeded the amount of On Demand Resources content in use at one time
+    NSBundleOnDemandResourceInvalidTagError API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = 4994, // The application specified a tag which the system could not find in the application tag manifest
     
     NSCloudSharingNetworkFailureError API_AVAILABLE(macosx(10.12), ios(10.0)) API_UNAVAILABLE(watchos, tvos) = 5120,        // Sharing failed due to a network failure.
     NSCloudSharingQuotaExceededError API_AVAILABLE(macosx(10.12), ios(10.0)) API_UNAVAILABLE(watchos, tvos) = 5121,         // The user doesn't have enough storage space available to share the requested items.

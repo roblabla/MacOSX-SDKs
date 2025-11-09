@@ -1,12 +1,26 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 563A63EE-9C54-3190-A462-B796C423DF07', 'x86_64: 563A63EE-9C54-3190-A462-B796C423DF07' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           C99A8C7B-92D9-3A70-ADA6-F20837AF4D00
+  - target:          x86_64-maccatalyst
+    value:           C99A8C7B-92D9-3A70-ADA6-F20837AF4D00
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           CFB41FC0-D61D-3BC6-9081-3CD85CF1BB5C
+  - target:          arm64e-maccatalyst
+    value:           CFB41FC0-D61D-3BC6-9081-3CD85CF1BB5C
 install-name:    '/usr/lib/libform.5.4.dylib'
 current-version: 5.4
 compatibility-version: 5.4
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _TYPE_ALNUM, _TYPE_ALPHA, _TYPE_ENUM, _TYPE_INTEGER, _TYPE_IPV4, 
                        _TYPE_NUMERIC, _TYPE_REGEXP, __nc_Copy_Argument, __nc_Copy_Type, 
                        __nc_Default_Field, __nc_Default_FieldType, __nc_Default_Form, 

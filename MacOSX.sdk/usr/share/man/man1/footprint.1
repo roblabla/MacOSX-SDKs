@@ -24,6 +24,9 @@
 .Ar process-name | pid | memgraph
 .Op ...
 .Nm
+.Fl -sample Ar interval
+.Ar ...
+.Nm
 .Fl h , Fl -help
 .Sh DESCRIPTION
 The
@@ -89,6 +92,12 @@ or Activity Monitor.app. However, it can provide insight into dirty memory that 
 The
 .Fl -vmObjectDirty
 mode was the default in versions prior to macOS 10.15.
+.It Fl -sample Ar interval
+Start
+.Nm
+in sampling mode, gathering data every
+.Ar interval
+seconds (which can be fractional like 0.5). Text output will be a concatenation of usual text output with added timestamps. JSON output will contain a "samples" array with many of the same key/values that would normally be at the top level. All other command line options are also supported in sampling mode.
 .It Fl h , Fl -help
 display help and exit
 .El
@@ -190,6 +199,8 @@ The exact definition of this 'physical footprint' ledger is complicated and subj
 aims to present an accurate memory breakdown that matches the value reported by the ledger. Most other diagnostic tools, such as the 'MEM' column in
 .Xr top 1 ,
 the 'Memory' column in Activity Monitor.app, and the Memory Debug Gauge in Xcode.app, query this ledger to populate their metrics.
+.Pp
+Physical footprint can be potentially be split into multiple subcategories, such as network related memory, graphics, etc. When a memory allocation (either directly mapped into a process, or owned but unmapped) has such a classification, footprint will append it to the category name such as 'IOKit (graphics)' or 'Owned physical footprint (unmapped) (media)'.
 .Sh SEE ALSO
 .Xr vmmap 1 ,
 .Xr heap 1 ,

@@ -34,6 +34,7 @@ typedef NS_ENUM(NSInteger, UIUserInterfaceIdiom) {
     UIUserInterfaceIdiomPad API_AVAILABLE(ios(3.2)), // iPad style UI
     UIUserInterfaceIdiomTV API_AVAILABLE(ios(9.0)), // Apple TV style UI
     UIUserInterfaceIdiomCarPlay API_AVAILABLE(ios(9.0)), // CarPlay style UI
+    UIUserInterfaceIdiomMac API_AVAILABLE(ios(14.0)) = 5, // Optimized for Mac UI
 };
 
 static inline BOOL UIDeviceOrientationIsPortrait(UIDeviceOrientation orientation)  API_UNAVAILABLE(tvos) {

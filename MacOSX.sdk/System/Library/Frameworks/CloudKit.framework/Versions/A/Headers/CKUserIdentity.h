@@ -13,11 +13,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
 @interface CKUserIdentity : NSObject <NSSecureCoding, NSCopying>
-/*! Use `CKDiscoverUserIdentitiesOperation` or `CKFetchShareParticipantsOperation` to create a `CKUserIdentity` */
+/*! Use @c CKDiscoverUserIdentitiesOperation or @c CKFetchShareParticipantsOperation to create a @c CKUserIdentity */
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 
-/*! This is the `lookupInfo` you passed in to `CKDiscoverUserIdentitiesOperation` or `CKFetchShareParticipantsOperation` */
+/*! This is the @c lookupInfo you passed in to @c CKDiscoverUserIdentitiesOperation or @c CKFetchShareParticipantsOperation */
 @property (nonatomic, readonly, copy, nullable) CKUserIdentityLookupInfo *lookupInfo;
 
 @property (nonatomic, readonly, copy, nullable) NSPersonNameComponents *nameComponents;
@@ -25,11 +25,11 @@ API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
 
 /*! @abstract Link to the Contacts database.
  *
- *  @discussion Identities discovered via `CKDiscoverAllUserIdentitiesOperation` correspond to entries in the local Contacts database.  These identities will have `contactIdentifiers` filled out, which your app may use to get additional information about the contacts that were discovered.  Multiple `contactIdentifiers` may exist for a single discovered user, as multiple contacts may contain the same email addresses or phone numbers.
+ *  @discussion Identities discovered via @c CKDiscoverAllUserIdentitiesOperation correspond to entries in the local Contacts database.  These identities will have @c contactIdentifiers filled out, which your app may use to get additional information about the contacts that were discovered.  Multiple @c contactIdentifiers may exist for a single discovered user, as multiple contacts may contain the same email addresses or phone numbers.
  *
  *  @return individual, non-unified contacts.
  *
- *  @discussion To transform these identifiers into an array of unified contact identifiers, pass a `CNContact.predicateForContacts(withIdentifiers:)` predicate into `CNContactStore.unifiedContacts(matching:keysToFetch:)`
+ *  @discussion To transform these identifiers into an array of unified contact identifiers, pass a @c CNContact.predicateForContacts(withIdentifiers:) predicate into @c CNContactStore.unifiedContacts(matching:keysToFetch:)
  *
  *  @see Contacts.framework and CNContact.identifier
  */

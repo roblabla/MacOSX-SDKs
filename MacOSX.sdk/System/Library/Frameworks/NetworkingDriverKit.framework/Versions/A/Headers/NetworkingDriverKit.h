@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Apple, Inc. All rights reserved.
+ * Copyright (c) 2019-2020 Apple, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -25,6 +25,7 @@
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
  */
+
 #ifndef _NETWORKINGDRIVERKIT_H
 #define _NETWORKINGDRIVERKIT_H
 

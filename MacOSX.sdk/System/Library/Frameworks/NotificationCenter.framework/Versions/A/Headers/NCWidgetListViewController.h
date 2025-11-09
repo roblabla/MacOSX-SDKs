@@ -9,8 +9,9 @@
 @protocol NCWidgetListViewDelegate;
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
-NS_CLASS_AVAILABLE_MAC(10_10)
+API_DEPRECATED("Use WidgetKit instead. Today View extensions have been deprecated.", macos(10.10, 11.0))
 @interface NCWidgetListViewController : NSViewController
 
 @property (nullable, weak) IBOutlet id<NCWidgetListViewDelegate> delegate;
@@ -52,7 +53,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 
 @end
 
-NS_AVAILABLE_MAC(10_10)
+API_DEPRECATED("Use WidgetKit instead. Today View extensions have been deprecated.", macos(10.10, 11.0))
 @protocol NCWidgetListViewDelegate <NSObject>
 
 /* Required delegate method to create new content view controllers. */
@@ -88,4 +89,5 @@ NS_AVAILABLE_MAC(10_10)
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

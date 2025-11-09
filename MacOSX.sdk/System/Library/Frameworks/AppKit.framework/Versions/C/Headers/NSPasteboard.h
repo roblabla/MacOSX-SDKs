@@ -14,7 +14,7 @@
 #import <CoreFoundation/CFBase.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSData, NSFileWrapper, NSMutableDictionary, NSPasteboard;
 @protocol NSPasteboardWriting;
@@ -174,8 +174,8 @@ Example: there are five items on the pasteboard, two contain TIFF data, two cont
 
 #if __swift__ < 40200
 @interface NSObject(NSPasteboardOwner)
-- (void)pasteboard:(NSPasteboard *)sender provideDataForType:(NSPasteboardType)type API_DEPRECATED("This is now a method of the NSPasteboardTypeOwner protocol.", macos(10.0,API_TO_BE_DEPRECATED));
-- (void)pasteboardChangedOwner:(NSPasteboard *)sender API_DEPRECATED("This is now an optional method of the NSPasteboardTypeOwner protocol.", macos(10.0,API_TO_BE_DEPRECATED));
+- (void)pasteboard:(NSPasteboard *)sender provideDataForType:(NSPasteboardType)type API_DEPRECATED("This is now a method of the NSPasteboardTypeOwner protocol.", macos(10.0, 11.0));
+- (void)pasteboardChangedOwner:(NSPasteboard *)sender API_DEPRECATED("This is now an optional method of the NSPasteboardTypeOwner protocol.", macos(10.0, 11.0));
 @end
 #endif
 

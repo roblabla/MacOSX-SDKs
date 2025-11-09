@@ -8,6 +8,9 @@
 
 
 #import <Foundation/Foundation.h>
+
+#if TARGET_OS_OSX
+
 #import <CoreImage/CIPlugInInterface.h>
 #import <CoreImage/CoreImageDefines.h>
 
@@ -48,3 +51,5 @@ NS_CLASS_AVAILABLE_MAC(10_4)
 + (void)loadNonExecutablePlugIn:(NSURL *)url NS_AVAILABLE_MAC(10_15);
 
 @end
+
+#endif

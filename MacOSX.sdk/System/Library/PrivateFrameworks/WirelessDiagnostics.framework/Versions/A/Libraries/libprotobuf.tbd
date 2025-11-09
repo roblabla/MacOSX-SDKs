@@ -1,11 +1,33 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: D5D2F58B-EE99-3A87-8040-8ADA70E20C62', 'x86_64: D5D2F58B-EE99-3A87-8040-8ADA70E20C62' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           5304752C-C740-3462-B42F-C31C6D07E120
+  - target:          x86_64-maccatalyst
+    value:           5304752C-C740-3462-B42F-C31C6D07E120
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           995FADDF-C2EA-368A-81FC-60196F976215
+  - target:          arm64e-maccatalyst
+    value:           995FADDF-C2EA-368A-81FC-60196F976215
 install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libprotobuf.dylib'
-exports:         
-  - archs:           [ x86_64 ]
-    re-exports:      [ '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libprotobuf-lite.dylib' ]
+reexported-libraries:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    libraries:       [ '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libprotobuf-lite.dylib' ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
+    weak-symbols:    [ __ZTIN20wireless_diagnostics6google8protobuf10TextFormat6Parser10ParserImpl20ParserErrorCollectorE, 
+                       __ZTIN20wireless_diagnostics6google8protobuf17DescriptorBuilder17OptionInterpreter21AggregateOptionFinderE, 
+                       __ZTSN20wireless_diagnostics6google8protobuf10TextFormat6Parser10ParserImpl20ParserErrorCollectorE, 
+                       __ZTSN20wireless_diagnostics6google8protobuf17DescriptorBuilder17OptionInterpreter21AggregateOptionFinderE ]
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ __ZN20wireless_diagnostics6google8protobuf10ReflectionD0Ev, 
                        __ZN20wireless_diagnostics6google8protobuf10ReflectionD1Ev, 
                        __ZN20wireless_diagnostics6google8protobuf10ReflectionD2Ev, 
@@ -1346,17 +1368,29 @@ exports:
                        __ZTVN20wireless_diagnostics6google8protobuf7MessageE, __ZTVN20wireless_diagnostics6google8protobuf8internal26GeneratedMessageReflectionE, 
                        __ZTVN20wireless_diagnostics6google8protobuf8internal27UnknownFieldSetFieldSkipperE, 
                        __ZTVN20wireless_diagnostics6google8protobuf8internal29DescriptorPoolExtensionFinderE ]
-    weak-def-symbols: [ __ZTIN20wireless_diagnostics6google8protobuf10TextFormat6Parser10ParserImpl20ParserErrorCollectorE, 
-                        __ZTIN20wireless_diagnostics6google8protobuf17DescriptorBuilder17OptionInterpreter21AggregateOptionFinderE, 
-                        __ZTSN20wireless_diagnostics6google8protobuf10TextFormat6Parser10ParserImpl20ParserErrorCollectorE, 
-                        __ZTSN20wireless_diagnostics6google8protobuf17DescriptorBuilder17OptionInterpreter21AggregateOptionFinderE ]
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: F1969C44-92AC-3240-9CA8-A2F636A3BABA', 'x86_64: F1969C44-92AC-3240-9CA8-A2F636A3BABA' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           6A509EB3-7A1C-372A-B68B-FBE85A35267F
+  - target:          x86_64-maccatalyst
+    value:           6A509EB3-7A1C-372A-B68B-FBE85A35267F
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           244F7375-3D9F-3B5D-9501-5AB9A4984EFD
+  - target:          arm64e-maccatalyst
+    value:           244F7375-3D9F-3B5D-9501-5AB9A4984EFD
 install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libprotobuf-lite.dylib'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
+    symbols:         [ __ZN20wireless_diagnostics6google8protobuf13StringAppendVEPNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEPKcP13__va_list_tag ]
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ __ZN20wireless_diagnostics6google8protobuf11LogSilencerC1Ev, 
                        __ZN20wireless_diagnostics6google8protobuf11LogSilencerC2Ev, 
                        __ZN20wireless_diagnostics6google8protobuf11LogSilencerD1Ev, 
@@ -1379,7 +1413,6 @@ exports:
                        __ZN20wireless_diagnostics6google8protobuf13SStringPrintfEPNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEPKcz, 
                        __ZN20wireless_diagnostics6google8protobuf13SetLogHandlerEPFvNS1_8LogLevelEPKciRKNSt3__112basic_stringIcNS5_11char_traitsIcEENS5_9allocatorIcEEEEE, 
                        __ZN20wireless_diagnostics6google8protobuf13StringAppendFEPNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEPKcz, 
-                       __ZN20wireless_diagnostics6google8protobuf13StringAppendVEPNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEPKcP13__va_list_tag, 
                        __ZN20wireless_diagnostics6google8protobuf14FatalExceptionD0Ev, 
                        __ZN20wireless_diagnostics6google8protobuf14FatalExceptionD1Ev, 
                        __ZN20wireless_diagnostics6google8protobuf14FatalExceptionD2Ev, 
@@ -1829,4 +1862,6 @@ exports:
                        __ZTVN20wireless_diagnostics6google8protobuf8internal15ExtensionFinderE, 
                        __ZTVN20wireless_diagnostics6google8protobuf8internal16FunctionClosure0E, 
                        __ZTVN20wireless_diagnostics6google8protobuf8internal24GeneratedExtensionFinderE ]
+  - targets:         [ arm64e-maccatalyst, arm64e-macos, arm64-macos, arm64-maccatalyst ]
+    symbols:         [ __ZN20wireless_diagnostics6google8protobuf13StringAppendVEPNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEPKcPc ]
 ...

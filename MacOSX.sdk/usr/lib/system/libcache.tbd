@@ -1,12 +1,29 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 22FC61F4-538B-3A51-A821-0449BE269B4C', 'x86_64: 22FC61F4-538B-3A51-A821-0449BE269B4C' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           7ECE72CB-A376-39F9-9B0D-F2F2CF3AAE99
+  - target:          x86_64-maccatalyst
+    value:           7ECE72CB-A376-39F9-9B0D-F2F2CF3AAE99
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           B4CF769F-1B73-3626-8670-485E4355B89A
+  - target:          arm64e-maccatalyst
+    value:           B4CF769F-1B73-3626-8670-485E4355B89A
 install-name:    '/usr/lib/system/libcache.dylib'
 current-version: 83
-parent-umbrella: System
-exports:         
-  - archs:           [ x86_64 ]
+parent-umbrella:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    umbrella:        System
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _cache_create, _cache_destroy, _cache_get, _cache_get_and_retain, 
                        _cache_get_cost_hint, _cache_get_count_hint, _cache_get_info, 
                        _cache_get_info_for_key, _cache_get_info_for_keys, _cache_get_minimum_values_hint, 

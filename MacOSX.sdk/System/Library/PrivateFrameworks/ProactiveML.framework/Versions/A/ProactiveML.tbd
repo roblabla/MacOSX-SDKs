@@ -1,14 +1,28 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 810357B6-15BA-379B-876B-30582F06B871', 'x86_64: 810357B6-15BA-379B-876B-30582F06B871' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           0653FCCA-0124-318E-9875-7A2394BF04E7
+  - target:          x86_64-maccatalyst
+    value:           0653FCCA-0124-318E-9875-7A2394BF04E7
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           874B2C00-0D57-3B18-9050-41DAEDCADEB5
+  - target:          arm64e-maccatalyst
+    value:           874B2C00-0D57-3B18-9050-41DAEDCADEB5
 install-name:    '/System/Library/PrivateFrameworks/ProactiveML.framework/Versions/A/ProactiveML'
-current-version: 1052
-exports:         
-  - archs:           [ x86_64 ]
-    symbols:         [ _AWDProactiveModelFittingAvailableSessionsReadFrom, _AWDProactiveModelFittingEvalMetricsReadFrom, 
-                       _AWDProactiveModelFittingEvaluationReadFrom, _AWDProactiveModelFittingLabelSupportPairReadFrom, 
-                       _AWDProactiveModelFittingLinRegFeatureMatrixReadFrom, _AWDProactiveModelFittingLinRegObjectiveFeaturesReadFrom, 
+current-version: 1115.255.1
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _AWDProactiveModelFittingEvalMetricsReadFrom, _AWDProactiveModelFittingEvaluationReadFrom, 
+                       _AWDProactiveModelFittingLabelSupportPairReadFrom, _AWDProactiveModelFittingLinRegFeatureMatrixReadFrom, 
+                       _AWDProactiveModelFittingLinRegObjectiveFeaturesReadFrom, 
                        _AWDProactiveModelFittingLogRegGradientReadFrom, _AWDProactiveModelFittingLogRegWeightsReadFrom, 
                        _AWDProactiveModelFittingMinibatchStatsReadFrom, _AWDProactiveModelFittingModelInfoReadFrom, 
                        _AWDProactiveModelFittingModelInfoStatsPairReadFrom, _AWDProactiveModelFittingParsecFeedbackEnvelopeReadFrom, 
@@ -18,51 +32,48 @@ exports:
                        _AWDProactiveModelFittingSparseFloatVectorReadFrom, _PMLBuildChunkFile, 
                        _PMLErrorDomain, _PMLReadChunkData, _PMLReadChunkFile, _PMLWriteChunkFile, 
                        _PML_LogHandle, _PML_PLIST_CLASS_NAME, _ProactiveMLVersionNumber, 
-                       _ProactiveMLVersionString ]
-    objc-classes:    [ AWDProactiveModelFittingAvailableSessions, AWDProactiveModelFittingEvalMetrics, 
-                       AWDProactiveModelFittingEvaluation, AWDProactiveModelFittingLabelSupportPair, 
-                       AWDProactiveModelFittingLinRegFeatureMatrix, AWDProactiveModelFittingLinRegObjectiveFeatures, 
-                       AWDProactiveModelFittingLogRegGradient, AWDProactiveModelFittingLogRegWeights, 
-                       AWDProactiveModelFittingMinibatchStats, AWDProactiveModelFittingModelInfo, 
-                       AWDProactiveModelFittingModelInfoStatsPair, AWDProactiveModelFittingParsecFeedbackEnvelope, 
-                       AWDProactiveModelFittingPrecisionAtKPair, AWDProactiveModelFittingQuantizedDenseVector, 
-                       AWDProactiveModelFittingQuantizedSparseMatrix, AWDProactiveModelFittingQuantizedSparseVector, 
-                       AWDProactiveModelFittingSession, AWDProactiveModelFittingSparseFloatMatrix, 
-                       AWDProactiveModelFittingSparseFloatVector, PMLAWDAvailableSessionsTracker, 
-                       PMLAWDAvailableSessionsTrackerMock, PMLAWDBaseTracker, PMLAWDEvaluationTrackerMock, 
-                       PMLAWDLinearRegTrackerMock, PMLAWDLogisticRegTrackerMock, 
-                       PMLAWDSessionTracker, PMLAWDSessionTrackerMock, PMLAppleDirectory, 
-                       PMLChunkFileUtilities, PMLClassificationEvaluationMetrics, 
-                       PMLDataChunk, PMLDataChunkDenseDoubleVector, PMLDataChunkDenseFloatVector, 
-                       PMLDataChunkPlist, PMLDataChunkRaw, PMLDenseMatrix, PMLDenseVector, 
-                       PMLDiffPrivacyNoiseStrategy, PMLFidesTracker, PMLGaussianSampler, 
+                       _ProactiveMLVersionString, _kPFLIdentifierContacts, _kPFLIdentifierQuickResponses, 
+                       _kPMLErrorUserInfoNoiseStrategy, _kPMLErrorUserInfoPlanClass ]
+    objc-classes:    [ AWDProactiveModelFittingEvalMetrics, AWDProactiveModelFittingEvaluation, 
+                       AWDProactiveModelFittingLabelSupportPair, AWDProactiveModelFittingLinRegFeatureMatrix, 
+                       AWDProactiveModelFittingLinRegObjectiveFeatures, AWDProactiveModelFittingLogRegGradient, 
+                       AWDProactiveModelFittingLogRegWeights, AWDProactiveModelFittingMinibatchStats, 
+                       AWDProactiveModelFittingModelInfo, AWDProactiveModelFittingModelInfoStatsPair, 
+                       AWDProactiveModelFittingParsecFeedbackEnvelope, AWDProactiveModelFittingPrecisionAtKPair, 
+                       AWDProactiveModelFittingQuantizedDenseVector, AWDProactiveModelFittingQuantizedSparseMatrix, 
+                       AWDProactiveModelFittingQuantizedSparseVector, AWDProactiveModelFittingSession, 
+                       AWDProactiveModelFittingSparseFloatMatrix, AWDProactiveModelFittingSparseFloatVector, 
+                       PMLAWDAvailableSessionsTracker, PMLAWDBaseTracker, PMLAWDEvaluationTrackerMock, 
+                       PMLAWDLogisticRegTrackerMock, PMLAWDSessionTracker, PMLAWDSessionTrackerMock, 
+                       PMLClassificationEvaluationMetrics, PMLDataChunk, PMLDataChunkDenseDoubleVector, 
+                       PMLDataChunkDenseFloatVector, PMLDataChunkPlist, PMLDataChunkRaw, 
+                       PMLDenseMatrix, PMLDenseVector, PMLDiffPrivacyNoiseStrategy, 
+                       PMLEspressoDataProvider, PMLEspressoTrainingPlan, PMLEspressoTrainingVariables, 
+                       PMLFastTextVectorizer, PMLFidesTracker, PMLGaussianSampler, 
                        PMLGradientSolver, PMLHashingVectorizer, PMLImmutableLogisticRegressionModel, 
                        PMLInMemoryCachedStore, PMLLabelLimitRowId, PMLLaplaceSampler, 
-                       PMLLinRegTrainingPlan, PMLLinearRegressionModel, PMLLogRegEvaluationPlan, 
-                       PMLLogRegTrainingPlan, PMLLogisticRegressionModel, PMLMockPlan, 
-                       PMLModelDescriptor, PMLModelFullyConnectedLayer, PMLModelLearningRates, 
-                       PMLModelRegressor, PMLModelWeights, PMLMultiLabelLogisticRegressionModel, 
-                       PMLMultiLabelRegressionEvaluationPlan, PMLMutableDenseVector, 
-                       PMLNaiveBayesEvaluationPlan, PMLNaiveBayesModel, PMLNaiveBayesSolver, 
-                       PMLNoNoiseStrategy, PMLPassThroughTracker, PMLPlanDescriptor, 
-                       PMLPlanSerialization, PMLPlanSimulator, PMLPlanWrapper, PMLPlistClassWrapper, 
-                       PMLProtoBufTracker, PMLSeparatedDPNoiseStrategy, PMLSessionDescriptor, 
-                       PMLSparseMatrix, PMLSparseVector, PMLSpotlightReference, PMLTrackerAWDAdapter, 
+                       PMLLexicon, PMLLogRegEvaluationPlan, PMLLogRegTrainingPlan, 
+                       PMLLogisticRegressionModel, PMLMetaTrainingVariables, PMLMockPlan, 
+                       PMLModelRegressor, PMLModelWeights, PMLMultiLabelEspressoClassifier, 
+                       PMLMultiLabelLogisticRegressionModel, PMLMultiLabelRegressionEvaluationPlan, 
+                       PMLMutableDenseVector, PMLNoNoiseStrategy, PMLPassThroughTracker, 
+                       PMLPlanDescriptor, PMLPlanSerialization, PMLPlanSimulator, 
+                       PMLPlanWrapper, PMLPlistClassWrapper, PMLProtoBufTracker, 
+                       PMLSeparatedDPNoiseStrategy, PMLSessionDescriptor, PMLSparseMatrix, 
+                       PMLSparseVector, PMLSpotlightReference, PMLTrackerAWDAdapter, 
                        PMLTrackerMockAdapter, PMLTrackerParsecAdapter, PMLTraining, 
                        PMLTrainingDatabaseMigrations, PMLTrainingLogEntry, PMLTrainingMock, 
                        PMLTrainingStore, PMLTrainingStoredSessionBatch ]
-    objc-ivars:      [ AWDProactiveModelFittingAvailableSessions._has, AWDProactiveModelFittingAvailableSessions._perModelStats, 
-                       AWDProactiveModelFittingAvailableSessions._timestamp, AWDProactiveModelFittingEvalMetrics._f1, 
-                       AWDProactiveModelFittingEvalMetrics._falseNegatives, AWDProactiveModelFittingEvalMetrics._falsePositives, 
-                       AWDProactiveModelFittingEvalMetrics._has, AWDProactiveModelFittingEvalMetrics._negativeScores, 
-                       AWDProactiveModelFittingEvalMetrics._positiveScores, AWDProactiveModelFittingEvalMetrics._rmse, 
-                       AWDProactiveModelFittingEvalMetrics._secsToExecute, AWDProactiveModelFittingEvalMetrics._trueNegatives, 
-                       AWDProactiveModelFittingEvalMetrics._truePositives, AWDProactiveModelFittingEvaluation._evaluationMetrics, 
-                       AWDProactiveModelFittingEvaluation._has, AWDProactiveModelFittingEvaluation._minibatchStats, 
-                       AWDProactiveModelFittingEvaluation._modelInfo, AWDProactiveModelFittingEvaluation._precisionAtKs, 
-                       AWDProactiveModelFittingEvaluation._timestamp, AWDProactiveModelFittingLabelSupportPair._has, 
-                       AWDProactiveModelFittingLabelSupportPair._label, AWDProactiveModelFittingLabelSupportPair._support, 
-                       AWDProactiveModelFittingLinRegFeatureMatrix._featureMatrixL2norm, 
+    objc-ivars:      [ AWDProactiveModelFittingEvalMetrics._f1, AWDProactiveModelFittingEvalMetrics._falseNegatives, 
+                       AWDProactiveModelFittingEvalMetrics._falsePositives, AWDProactiveModelFittingEvalMetrics._has, 
+                       AWDProactiveModelFittingEvalMetrics._negativeScores, AWDProactiveModelFittingEvalMetrics._positiveScores, 
+                       AWDProactiveModelFittingEvalMetrics._rmse, AWDProactiveModelFittingEvalMetrics._secsToExecute, 
+                       AWDProactiveModelFittingEvalMetrics._trueNegatives, AWDProactiveModelFittingEvalMetrics._truePositives, 
+                       AWDProactiveModelFittingEvaluation._evaluationMetrics, AWDProactiveModelFittingEvaluation._has, 
+                       AWDProactiveModelFittingEvaluation._minibatchStats, AWDProactiveModelFittingEvaluation._modelInfo, 
+                       AWDProactiveModelFittingEvaluation._precisionAtKs, AWDProactiveModelFittingEvaluation._timestamp, 
+                       AWDProactiveModelFittingLabelSupportPair._has, AWDProactiveModelFittingLabelSupportPair._label, 
+                       AWDProactiveModelFittingLabelSupportPair._support, AWDProactiveModelFittingLinRegFeatureMatrix._featureMatrixL2norm, 
                        AWDProactiveModelFittingLinRegFeatureMatrix._featureMatrixScaleFactor, 
                        AWDProactiveModelFittingLinRegFeatureMatrix._has, AWDProactiveModelFittingLinRegFeatureMatrix._minibatchStats, 
                        AWDProactiveModelFittingLinRegFeatureMatrix._modelInfo, AWDProactiveModelFittingLinRegFeatureMatrix._sparseFloatFeatureMatrix, 

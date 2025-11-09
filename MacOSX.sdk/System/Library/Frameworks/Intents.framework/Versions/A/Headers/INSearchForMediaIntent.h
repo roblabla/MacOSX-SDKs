@@ -2,7 +2,7 @@
 //  INSearchForMediaIntent.h
 //  Intents
 //
-//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2020 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntent.h>
@@ -15,8 +15,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(13.0), watchos(6.0))
-API_UNAVAILABLE(macosx)
+API_AVAILABLE(ios(13.0), watchos(6.0), tvos(14.0))
+API_UNAVAILABLE(macos)
 @interface INSearchForMediaIntent : INIntent
 
 - (instancetype)initWithMediaItems:(nullable NSArray<INMediaItem *> *)mediaItems
@@ -35,8 +35,8 @@ API_UNAVAILABLE(macosx)
  @discussion The minimum requirement for an implementing class is that it should be able to handle the intent. The resolution and confirmation methods are optional. The handling method is always called last, after resolving and confirming the intent.
  */
 
-API_AVAILABLE(ios(13.0), watchos(6.0))
-API_UNAVAILABLE(macosx)
+API_AVAILABLE(ios(13.0), watchos(6.0), tvos(14.0))
+API_UNAVAILABLE(macos)
 @protocol INSearchForMediaIntentHandling <NSObject>
 
 @required

@@ -1,11 +1,25 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 4E3FDA20-2CD9-31AE-A8A6-3957B070CD6A', 'x86_64: 4E3FDA20-2CD9-31AE-A8A6-3957B070CD6A' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           438A19B2-04A6-31E0-A0C8-8863396CA6EA
+  - target:          x86_64-maccatalyst
+    value:           438A19B2-04A6-31E0-A0C8-8863396CA6EA
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           F6AF9218-B891-36AE-8410-AB5BC01085A0
+  - target:          arm64e-maccatalyst
+    value:           F6AF9218-B891-36AE-8410-AB5BC01085A0
 install-name:    '/System/Library/Frameworks/ColorSync.framework/Versions/A/ColorSync'
 current-version: 4.7
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 
                        '$ld$install_name$os10.11$/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 
                        '$ld$install_name$os10.12$/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 
@@ -16,9 +30,8 @@ exports:
                        '$ld$install_name$os10.8$/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 
                        '$ld$install_name$os10.9$/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 
                        _CGDisplayCreateUUIDFromDisplayID, _CGDisplayGetDisplayIDFromUUID, 
-                       _CMProfileFromColorSyncProfile, _ColorSyncCMMCopyCMMIdentifier, 
-                       _ColorSyncCMMCopyLocalizedName, _ColorSyncCMMCreate, _ColorSyncCMMGetBundle, 
-                       _ColorSyncCMMGetTypeID, _ColorSyncCodeFragmentGetMD5, _ColorSyncConvertDoubleXYZToD50, 
+                       _CMProfileFromColorSyncProfile, _ColorSyncCodeFragmentGetMD5, 
+                       _ColorSyncConvertDoubleXYZFromD50, _ColorSyncConvertDoubleXYZToD50, 
                        _ColorSyncConvertXYZToXYZWithChromaticAdaptationMatrix, _ColorSyncCreateCodeFragment, 
                        _ColorSyncCreateCodeFragmentPriv, _ColorSyncCreateGammaTablesFromVCGT, 
                        _ColorSyncCreateInputPoppyProfile, _ColorSyncCreateOutputPoppyProfile, 
@@ -29,12 +42,13 @@ exports:
                        _ColorSyncGetAdaptationMtx, _ColorSyncGetDisplayTransferFormulaFromVCGT, 
                        _ColorSyncGetFourCharCodeFromSignature, _ColorSyncGetMainDisplayID, 
                        _ColorSyncGetUInt32FromUUID, _ColorSyncIterateDeviceProfiles, 
-                       _ColorSyncIterateInstalledCMMs, _ColorSyncIterateInstalledProfiles, 
-                       _ColorSyncIterateInstalledProfilesWithOptions, _ColorSyncMakeProfile, 
-                       _ColorSyncMatrixGetFunction, _ColorSyncMatrixGetOptions, _ColorSyncMatrixGetProperties, 
-                       _ColorSyncMatrixGetRange, _ColorSyncMatrixGetTypeID, _ColorSyncNxMGetFunction, 
-                       _ColorSyncNxMGetOptions, _ColorSyncNxMGetProperties, _ColorSyncNxMGetRange, 
-                       _ColorSyncNxMGetTypeID, _ColorSyncProfileContainsTag, _ColorSyncProfileCopyASCIIDescriptionString, 
+                       _ColorSyncIterateInstalledProfiles, _ColorSyncIterateInstalledProfilesWithOptions, 
+                       _ColorSyncMakeProfile, _ColorSyncMatrixGetFunction, _ColorSyncMatrixGetInputRange, 
+                       _ColorSyncMatrixGetOptions, _ColorSyncMatrixGetOutputRange, 
+                       _ColorSyncMatrixGetProperties, _ColorSyncMatrixGetTypeID, 
+                       _ColorSyncNxMGetFunction, _ColorSyncNxMGetInputRange, _ColorSyncNxMGetOptions, 
+                       _ColorSyncNxMGetOutputRange, _ColorSyncNxMGetProperties, _ColorSyncNxMGetTypeID, 
+                       _ColorSyncProfileContainsTag, _ColorSyncProfileCopyASCIIDescriptionString, 
                        _ColorSyncProfileCopyData, _ColorSyncProfileCopyDescriptionString, 
                        _ColorSyncProfileCopyHeader, _ColorSyncProfileCopyLocalizedDescriptionString, 
                        _ColorSyncProfileCopyLocalizedStringDictionary, _ColorSyncProfileCopyTag, 
@@ -47,23 +61,25 @@ exports:
                        _ColorSyncProfileEstimateGammaWithDisplayID, _ColorSyncProfileFromCMProfile, 
                        _ColorSyncProfileGetData, _ColorSyncProfileGetDisplayTransferFormulaFromVCGT, 
                        _ColorSyncProfileGetMD5, _ColorSyncProfileGetTypeID, _ColorSyncProfileGetURL, 
-                       _ColorSyncProfileInstall, _ColorSyncProfileIsWideGamut, _ColorSyncProfileProducesMatrixTransform, 
+                       _ColorSyncProfileInstall, _ColorSyncProfileIsMatrixBased, 
+                       _ColorSyncProfileIsWideGamut, _ColorSyncProfileProducesMatrixTransform, 
                        _ColorSyncProfileRemoveTag, _ColorSyncProfileSetDescriptionTag, 
                        _ColorSyncProfileSetHeader, _ColorSyncProfileSetLocalizedStringDictionary, 
                        _ColorSyncProfileSetParametricTRCTag, _ColorSyncProfileSetTag, 
                        _ColorSyncProfileStreamPS2Definition, _ColorSyncProfileUninstall, 
-                       _ColorSyncProfileVerify, _ColorSyncProfileWriteToFile, _ColorSyncPureGammaOriginalTRC, 
+                       _ColorSyncProfileUsesITU_R709OETF, _ColorSyncProfileVerify, 
+                       _ColorSyncProfileWriteToFile, _ColorSyncPureGammaOriginalTRC, 
                        _ColorSyncRegisterDevice, _ColorSyncSwapProfileHeader, _ColorSyncTRCGetFunction, 
-                       _ColorSyncTRCGetGammaID, _ColorSyncTRCGetOptions, _ColorSyncTRCGetProperties, 
-                       _ColorSyncTRCGetRange, _ColorSyncTRCGetTypeID, _ColorSyncTransformConvert, 
-                       _ColorSyncTransformCopyProperty, _ColorSyncTransformCreate, 
-                       _ColorSyncTransformCreateWithName, _ColorSyncTransformGetTypeID, 
-                       _ColorSyncTransformIterate, _ColorSyncTransformSetProperty, 
-                       _ColorSyncUnregisterDevice, _ColorSyncVerifyAdobeRGBData, 
-                       _ColorSyncVerifyDisplayP3Data, _ColorSyncVerifyGenericGrayGamma2_2Data, 
-                       _ColorSyncVerifyGenericLabData, _ColorSyncVerifyICC_DataByName, 
-                       _ColorSyncVerifySRGBData, _kCMMApplyTransformProcName, _kCMMCreateTransformPropertyProcName, 
-                       _kCMMInitializeLinkProfileProcName, _kCMMInitializeTransformProcName, 
+                       _ColorSyncTRCGetGammaID, _ColorSyncTRCGetInputRange, _ColorSyncTRCGetOptions, 
+                       _ColorSyncTRCGetOutputRange, _ColorSyncTRCGetProperties, _ColorSyncTRCGetTypeID, 
+                       _ColorSyncTransformConvert, _ColorSyncTransformCopyProperty, 
+                       _ColorSyncTransformCreate, _ColorSyncTransformCreateWithName, 
+                       _ColorSyncTransformGetTypeID, _ColorSyncTransformIterate, 
+                       _ColorSyncTransformSetProperty, _ColorSyncUnregisterDevice, 
+                       _ColorSyncVerifyAdobeRGBData, _ColorSyncVerifyCoreVideo709Data, 
+                       _ColorSyncVerifyDisplayP3Data, _ColorSyncVerifyDisplayP3ITU709Data, 
+                       _ColorSyncVerifyGenericGrayGamma2_2Data, _ColorSyncVerifyGenericLabData, 
+                       _ColorSyncVerifyICC_DataByName, _ColorSyncVerifySRGBData, 
                        _kColorSyncACESCGLinearProfile, _kColorSyncAdobeRGB1998Profile, 
                        _kColorSyncBadDescription, _kColorSyncBestQuality, _kColorSyncBlackPointCompensation, 
                        _kColorSyncCameraDeviceClass, _kColorSyncConversion1DLut, 
@@ -72,30 +88,36 @@ exports:
                        _kColorSyncConversionMatrix, _kColorSyncConversionNDLut, _kColorSyncConversionOutChan, 
                        _kColorSyncConversionParamCurve0, _kColorSyncConversionParamCurve1, 
                        _kColorSyncConversionParamCurve2, _kColorSyncConversionParamCurve3, 
-                       _kColorSyncConversionParamCurve4, _kColorSyncConvertQuality, 
+                       _kColorSyncConversionParamCurve4, _kColorSyncConversionParamHLGInvOETF, 
+                       _kColorSyncConversionParamHLGOETF, _kColorSyncConversionParamPQEOTF, 
+                       _kColorSyncConversionParamPQInvEOTF, _kColorSyncConvertQuality, 
                        _kColorSyncConvertThreadCount, _kColorSyncConvertUseExtendedRange, 
-                       _kColorSyncConvertUseVectorUnit, _kColorSyncCustomProfiles, 
-                       _kColorSyncDCIP3Profile, _kColorSyncDeviceClass, _kColorSyncDeviceDefaultProfileID, 
-                       _kColorSyncDeviceDescription, _kColorSyncDeviceDescriptions, 
-                       _kColorSyncDeviceHostScope, _kColorSyncDeviceID, _kColorSyncDeviceModeDescription, 
-                       _kColorSyncDeviceModeDescriptions, _kColorSyncDeviceProfileID, 
-                       _kColorSyncDeviceProfileIsCurrent, _kColorSyncDeviceProfileIsDefault, 
-                       _kColorSyncDeviceProfileIsFactory, _kColorSyncDeviceProfileURL, 
-                       _kColorSyncDeviceProfilesNotification, _kColorSyncDeviceRegisteredNotification, 
-                       _kColorSyncDeviceUnregisteredNotification, _kColorSyncDeviceUserScope, 
-                       _kColorSyncDisplayDeviceClass, _kColorSyncDisplayDeviceProfilesNotification, 
-                       _kColorSyncDisplayP3Profile, _kColorSyncDoNotValidateProfiles, 
-                       _kColorSyncDraftQuality, _kColorSyncFactoryProfiles, _kColorSyncFixedPointRange, 
-                       _kColorSyncGenericCMYKProfile, _kColorSyncGenericGrayGamma22Profile, 
-                       _kColorSyncGenericGrayProfile, _kColorSyncGenericLabProfile, 
-                       _kColorSyncGenericRGBProfile, _kColorSyncGenericXYZProfile, 
-                       _kColorSyncITUR2020Profile, _kColorSyncITUR2020_PQProfile, 
+                       _kColorSyncConvertUseVectorUnit, _kColorSyncCoreVideo709Profile, 
+                       _kColorSyncCustomProfiles, _kColorSyncDCIP3Profile, _kColorSyncDeviceClass, 
+                       _kColorSyncDeviceDefaultProfileID, _kColorSyncDeviceDescription, 
+                       _kColorSyncDeviceDescriptions, _kColorSyncDeviceHostScope, 
+                       _kColorSyncDeviceID, _kColorSyncDeviceModeDescription, _kColorSyncDeviceModeDescriptions, 
+                       _kColorSyncDeviceProfileID, _kColorSyncDeviceProfileIsCurrent, 
+                       _kColorSyncDeviceProfileIsDefault, _kColorSyncDeviceProfileIsFactory, 
+                       _kColorSyncDeviceProfileURL, _kColorSyncDeviceProfilesNotification, 
+                       _kColorSyncDeviceRegisteredNotification, _kColorSyncDeviceUnregisteredNotification, 
+                       _kColorSyncDeviceUserScope, _kColorSyncDisplayDeviceClass, 
+                       _kColorSyncDisplayDeviceProfilesNotification, _kColorSyncDisplayP3Profile, 
+                       _kColorSyncDisplayP3_709OETFProfile, _kColorSyncDisplayP3_HLGProfile, 
+                       _kColorSyncDisplayP3_PQProfile, _kColorSyncDoNotValidateProfiles, 
+                       _kColorSyncDraftQuality, _kColorSyncExtendedRange, _kColorSyncFactoryProfiles, 
+                       _kColorSyncFixedPointRange, _kColorSyncGenericCMYKProfile, 
+                       _kColorSyncGenericGrayGamma22Profile, _kColorSyncGenericGrayProfile, 
+                       _kColorSyncGenericLabProfile, _kColorSyncGenericRGBProfile, 
+                       _kColorSyncGenericXYZProfile, _kColorSyncITUR2020Profile, 
+                       _kColorSyncITUR2020_HLGProfile, _kColorSyncITUR2020_PQProfile, 
+                       _kColorSyncITUR2100_HLGProfile, _kColorSyncITUR2100_PQProfile, 
                        _kColorSyncITUR709Profile, _kColorSyncMainDisplayProfile, 
                        _kColorSyncMaxProfileDataSize, _kColorSyncMissingDescription, 
                        _kColorSyncNormalQuality, _kColorSyncPerceptualStandardRGBProfile, 
                        _kColorSyncPreferredCMM, _kColorSyncPrinterDeviceClass, _kColorSyncProfile, 
-                       _kColorSyncProfileASCIIDescription, _kColorSyncProfileClass, 
-                       _kColorSyncProfileColorSpace, _kColorSyncProfileComputerDomain, 
+                       _kColorSyncProfileASCIIDescription, _kColorSyncProfileCacheSeed, 
+                       _kColorSyncProfileClass, _kColorSyncProfileColorSpace, _kColorSyncProfileComputerDomain, 
                        _kColorSyncProfileDescription, _kColorSyncProfileHeader, _kColorSyncProfileHostScope, 
                        _kColorSyncProfileMD5Digest, _kColorSyncProfilePCS, _kColorSyncProfileRepositoryChangeNotification, 
                        _kColorSyncProfileURL, _kColorSyncProfileUserDomain, _kColorSyncProfileUserScope, 
@@ -123,11 +145,20 @@ exports:
                        _kColorSyncTransformAdobeRGBTosRGB, _kColorSyncTransformCodeFragmentMD5, 
                        _kColorSyncTransformCodeFragmentType, _kColorSyncTransformCreator, 
                        _kColorSyncTransformDeviceToDevice, _kColorSyncTransformDeviceToPCS, 
+                       _kColorSyncTransformDeviceToSceneLinearPCS, _kColorSyncTransformDisplayLinearToPCS, 
                        _kColorSyncTransformDstSpace, _kColorSyncTransformFullConversionData, 
                        _kColorSyncTransformGammaID, _kColorSyncTransformGamutCheck, 
                        _kColorSyncTransformInfo, _kColorSyncTransformPCSToDevice, 
-                       _kColorSyncTransformPCSToPCS, _kColorSyncTransformParametricConversionData, 
-                       _kColorSyncTransformPureGammaOriginalTRC, _kColorSyncTransformSimplifiedConversionData, 
+                       _kColorSyncTransformPCSToDisplayLinear, _kColorSyncTransformPCSToPCS, 
+                       _kColorSyncTransformPCSToSceneLinear, _kColorSyncTransformParametricConversionData, 
+                       _kColorSyncTransformPureGammaOriginalTRC, _kColorSyncTransformSceneLinearPCSToDevice, 
+                       _kColorSyncTransformSceneLinearToPCS, _kColorSyncTransformSimplifiedConversionData, 
                        _kColorSyncTransformSrcSpace, _kColorSyncTransformTRCSize, 
-                       _kColorSyncTransformTag ]
+                       _kColorSyncTransformTag, _kColorSyncWaitForCacheReply ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+    symbols:         [ _ColorSyncCMMCopyCMMIdentifier, _ColorSyncCMMCopyLocalizedName, 
+                       _ColorSyncCMMCreate, _ColorSyncCMMGetBundle, _ColorSyncCMMGetTypeID, 
+                       _ColorSyncIterateInstalledCMMs, _kCMMApplyTransformProcName, 
+                       _kCMMCreateTransformPropertyProcName, _kCMMInitializeLinkProfileProcName, 
+                       _kCMMInitializeTransformProcName ]
 ...

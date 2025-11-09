@@ -9,10 +9,11 @@
 #import <AppKit/NSWindow.h>
 #import <AppKit/NSImage.h>
 #import <AppKit/NSCell.h>
+#import <AppKit/AppKitDefines.h>
 #import <Foundation/NSObjCRuntime.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 /// The main material that this view displays.  Materials are dynamic, and their exact look depends on the view's effectiveAppearance, blendingMode, state, emphasized, and possibly other factors.
 typedef NS_ENUM(NSInteger, NSVisualEffectMaterial) {
@@ -59,13 +60,13 @@ typedef NS_ENUM(NSInteger, NSVisualEffectMaterial) {
     NSVisualEffectMaterialUnderPageBackground API_AVAILABLE(macos(10.14)) = 22,
     
     /// A default material appropriate for the view's effectiveAppearance.  You should instead choose an appropriate semantic material.
-    NSVisualEffectMaterialAppearanceBased API_DEPRECATED("Use a specific semantic material instead.", macos(10.10,API_TO_BE_DEPRECATED)) = 0,
+    NSVisualEffectMaterialAppearanceBased API_DEPRECATED("Use a specific semantic material instead.", macos(10.10, 10.14)) = 0,
     
     // Materials with specific looks.  You should instead choose an appropriate semantic material.
-    NSVisualEffectMaterialLight API_DEPRECATED("Use a semantic material instead.  To force the appearance of a view hierarchy, set the `appearance` property to an appropriate NSAppearance value.", macos(10.10,API_TO_BE_DEPRECATED)) = 1,
-    NSVisualEffectMaterialDark API_DEPRECATED("Use a semantic material instead.  To force the appearance of a view hierarchy, set the `appearance` property to an appropriate NSAppearance value.", macos(10.10,API_TO_BE_DEPRECATED)) = 2,
-    NSVisualEffectMaterialMediumLight API_DEPRECATED("Use a semantic material instead.  To force the appearance of a view hierarchy, set the `appearance` property to an appropriate NSAppearance value.", macos(10.11,API_TO_BE_DEPRECATED)) = 8,
-    NSVisualEffectMaterialUltraDark API_DEPRECATED("Use a semantic material instead.  To force the appearance of a view hierarchy, set the `appearance` property to an appropriate NSAppearance value.", macos(10.11,API_TO_BE_DEPRECATED)) = 9,
+    NSVisualEffectMaterialLight API_DEPRECATED("Use a semantic material instead.  To force the appearance of a view hierarchy, set the `appearance` property to an appropriate NSAppearance value.", macos(10.10, 10.14)) = 1,
+    NSVisualEffectMaterialDark API_DEPRECATED("Use a semantic material instead.  To force the appearance of a view hierarchy, set the `appearance` property to an appropriate NSAppearance value.", macos(10.10, 10.14)) = 2,
+    NSVisualEffectMaterialMediumLight API_DEPRECATED("Use a semantic material instead.  To force the appearance of a view hierarchy, set the `appearance` property to an appropriate NSAppearance value.", macos(10.11, 10.14)) = 8,
+    NSVisualEffectMaterialUltraDark API_DEPRECATED("Use a semantic material instead.  To force the appearance of a view hierarchy, set the `appearance` property to an appropriate NSAppearance value.", macos(10.11, 10.14)) = 9,
 } API_AVAILABLE(macos(10.10));
                 
 typedef NS_ENUM(NSInteger, NSVisualEffectBlendingMode) {

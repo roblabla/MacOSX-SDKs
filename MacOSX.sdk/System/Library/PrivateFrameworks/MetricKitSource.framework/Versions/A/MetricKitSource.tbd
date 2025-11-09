@@ -1,10 +1,18 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 5F0CD99F-97A5-35EA-9BDC-A84A50741505' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           AFD97D04-3EC2-37C5-A8F3-DC607D877318
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           7F21BECC-2B88-37B7-8A40-200CC7F7368A
 install-name:    '/System/Library/PrivateFrameworks/MetricKitSource.framework/Versions/A/MetricKitSource'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _MetricKitSourceVersionNumber, _MetricKitSourceVersionString ]
-    objc-classes:    [ MXPowerlogData, MXSourceData, MXSourceManager, MXSourceXPCPayload ]
+    objc-classes:    [ MXHangTracerData, MXPowerlogData, MXReportCrashData, MXSampleAnalysisParser, 
+                       MXSourceData, MXSourceManager, MXSourceUtilities, MXSourceXPCPayload, 
+                       MXSpinTracerData ]
 ...

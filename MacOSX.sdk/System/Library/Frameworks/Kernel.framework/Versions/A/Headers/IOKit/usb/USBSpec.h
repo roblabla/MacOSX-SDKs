@@ -33,23 +33,29 @@
 #include <IOKit/usb/AppleUSBDefinitions.h>
 #include <IOKit/usb/IOUSBHostFamilyDefinitions.h>
 
-#if !__OPEN_SOURCE__ && TARGET_OS_IPHONE && !TARGET_OS_MACCATALYST
-// these headers were previously exported for iOS clients
+#if defined(__has_include)
+
+#if __has_include(<IOKit/usb/IOUSBHostFamily.h>)
 #include <IOKit/usb/IOUSBHostFamily.h>
-#include <IOKit/usb/StandardUSB.h>
 #endif
 
+#if __has_include(<IOKit/usb/StandardUSB.h>)
+#include <IOKit/usb/StandardUSB.h>
 
 #ifdef __cplusplus
-
-#if !__OPEN_SOURCE__ && TARGET_OS_IPHONE && !TARGET_OS_MACCATALYST
 using namespace StandardUSB;
 #endif
+#endif
 
+#endif
+
+#ifdef __cplusplus
 extern "C" {
 #endif
 
-#if !__OPEN_SOURCE__ && TARGET_OS_IPHONE && !TARGET_OS_MACCATALYST
+#if TARGET_OS_OSX || TARGET_OS_MACCATALYST
+/* Nothing to define */
+#else
 /* @enum Feature constants
    @discussion Used with SET_FEATURE requests
  */
@@ -76,7 +82,6 @@ enum
 
     kUSBPipeStatusHalt = IOUSBEndpointStatusHalt
 };
-
 #endif
 
 /*!
@@ -653,11 +658,7 @@ enum
 #define kUSBDeviceContainerID       kUSBContainerID
 #define kUSBContainerID             kUSBHostDevicePropertyContainerID
 
-#if !__OPEN_SOURCE__ && TARGET_OS_IPHONE && !TARGET_OS_MACCATALYST
-#define kUSBProductString           kUSBHostDevicePropertyProductString
-#define kUSBVendorString            kUSBHostDevicePropertyVendorString
-#define kUSBSerialNumberString      kUSBHostDevicePropertySerialNumberString
-#else
+#if TARGET_OS_OSX || TARGET_OS_MACCATALYST
 #if MAC_OS_X_VERSION_MIN_REQUIRED <= MAC_OS_X_VERSION_10_14
 #define kUSBProductString           "USB Product Name"
 #define kUSBVendorString            "USB Vendor Name"
@@ -667,6 +668,10 @@ enum
 #define kUSBVendorString            kUSBHostDevicePropertyVendorString
 #define kUSBSerialNumberString      kUSBHostDevicePropertySerialNumberString
 #endif /* MAC_OS_X_VERSION_MIN_REQUIRED <= MAC_OS_X_VERSION_10_14 */
+#else
+#define kUSBProductString           kUSBHostDevicePropertyProductString
+#define kUSBVendorString            kUSBHostDevicePropertyVendorString
+#define kUSBSerialNumberString      kUSBHostDevicePropertySerialNumberString
 #endif
 
 /*!

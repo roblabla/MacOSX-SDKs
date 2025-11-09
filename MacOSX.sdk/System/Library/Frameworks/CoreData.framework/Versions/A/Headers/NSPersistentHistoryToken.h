@@ -1,7 +1,7 @@
 /*
     NSPersistentHistoryToken.h
     Core Data
-    Copyright (c) 2017-2019, Apple Inc.
+    Copyright (c) 2017-2020, Apple Inc.
     All rights reserved.
 */
 

@@ -1,18 +1,27 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 04163CFC-5F1E-385C-8F85-9202F683DE2A' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           516750B3-61A1-3BC0-B886-4EE9FEF2B5E4
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           68CF989C-1303-3F33-98FB-B51A7F0F773B
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/OpenScripting.framework/Versions/A/OpenScripting'
-parent-umbrella: Carbon
-exports:         
-  - archs:           [ x86_64 ]
+parent-umbrella:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    umbrella:        Carbon
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _ASCopySourceAttributes, _ASGetSourceStyleNames, _ASGetSourceStyles, 
                        _ASInit, _ASSetSourceAttributes, _ASSetSourceStyles, _OSAAddStorageType, 
-                       _OSAAuthorizeEvent, _OSAAvailableDialectCodeList, _OSAAvailableDialects, 
-                       _OSACoerceFromDesc, _OSACoerceToDesc, _OSACompile, _OSACompileExecute, 
-                       _OSACopyDisplayString, _OSACopyID, _OSACopyScript, _OSACopyScriptingDefinition, 
-                       _OSACopyScriptingDefinitionFromFile, _OSACopyScriptingDefinitionFromURL, 
-                       _OSACopySourceString, _OSACopyURLForLibraryInDomainURL, _OSACopyURLForLibraryInFolderURL, 
+                       _OSAAppletShowStartupScreenKey, _OSAAppletStayOpenKey, _OSAAuthorizeEvent, 
+                       _OSAAvailableDialectCodeList, _OSAAvailableDialects, _OSACoerceFromDesc, 
+                       _OSACoerceToDesc, _OSACompile, _OSACompileExecute, _OSACopyDisplayString, 
+                       _OSACopyID, _OSACopyScript, _OSACopyScriptingDefinition, _OSACopyScriptingDefinitionFromFile, 
+                       _OSACopyScriptingDefinitionFromURL, _OSACopySourceString, 
+                       _OSACopyURLForLibraryInDomainURL, _OSACopyURLForLibraryInFolderURL, 
                        _OSACopyURLForLibraryInScriptURL, _OSACopyURLForLibraryName, 
                        _OSACreateFile, _OSADebuggerCreateSession, _OSADebuggerDisposeCallFrame, 
                        _OSADebuggerDisposeSession, _OSADebuggerGetBreakpoint, _OSADebuggerGetCallFrameState, 

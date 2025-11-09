@@ -15,9 +15,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, UISplitViewControllerDisplayMode) {
     UISplitViewControllerDisplayModeAutomatic,
-    UISplitViewControllerDisplayModePrimaryHidden,
-    UISplitViewControllerDisplayModeAllVisible,
-    UISplitViewControllerDisplayModePrimaryOverlay,
+    UISplitViewControllerDisplayModeSecondaryOnly,
+    UISplitViewControllerDisplayModeOneBesideSecondary, // Two tiled columns. Leading will be UISplitViewControllerColumnSupplementary for UISplitViewControllerStyleTripleColumn, Primary otherwise
+    UISplitViewControllerDisplayModeOneOverSecondary, // Supplementary column overlaid on Secondary column for UISplitViewControllerStyleTripleColumn, Primary overlaid otherwise
+    
+    // For triple-column style only. Three different ways to lay out primary, supplementary, and secondary columns with the secondary more or less visible, and an additional layout that hides the secondary.
+    UISplitViewControllerDisplayModeTwoBesideSecondary NS_ENUM_AVAILABLE_IOS(14_0), // All three columns fully displayed side-by-side and interactive
+    UISplitViewControllerDisplayModeTwoOverSecondary NS_ENUM_AVAILABLE_IOS(14_0), // primary and supplementary columns side-by-side in overlay on top of partially visible detail column (detail column has dimming view). For widths too narrow to see much of the detail when the primary and supplementary columns are tiled.
+    UISplitViewControllerDisplayModeTwoDisplaceSecondary NS_ENUM_AVAILABLE_IOS(14_0), // primary, supplementary and detail columns side-by-side, but the dimmed, noninteractive detail has been displaced toward and cropped on the trailing edge. For wider widths than in TwoOverSecondary but still too narrow for TwoBesideSecondary
+
+    UISplitViewControllerDisplayModePrimaryHidden API_DEPRECATED_WITH_REPLACEMENT("UISplitViewControllerDisplayModeSecondaryOnly", ios(8.0, 14.0)) = UISplitViewControllerDisplayModeSecondaryOnly,
+    UISplitViewControllerDisplayModeAllVisible API_DEPRECATED_WITH_REPLACEMENT("UISplitViewControllerDisplayModeOneBesideSecondary", ios(8.0, 14.0)) = UISplitViewControllerDisplayModeOneBesideSecondary,
+    UISplitViewControllerDisplayModePrimaryOverlay API_DEPRECATED_WITH_REPLACEMENT("UISplitViewControllerDisplayModeOneOverSecondary", ios(8.0, 14.0)) = UISplitViewControllerDisplayModeOneOverSecondary,
 } API_AVAILABLE(ios(8.0));
 
 typedef NS_ENUM(NSInteger, UISplitViewControllerPrimaryEdge) {
@@ -30,13 +39,77 @@ typedef NS_ENUM(NSInteger, UISplitViewControllerBackgroundStyle) {
     UISplitViewControllerBackgroundStyleSidebar,
 } API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos);
 
+typedef NS_ENUM(NSInteger, UISplitViewControllerStyle) {
+    UISplitViewControllerStyleUnspecified,
+    UISplitViewControllerStyleDoubleColumn,
+    UISplitViewControllerStyleTripleColumn,
+} API_AVAILABLE(ios(14.0));
+
+typedef NS_ENUM(NSInteger, UISplitViewControllerColumn) {
+    UISplitViewControllerColumnPrimary,
+    UISplitViewControllerColumnSupplementary, // Valid for UISplitViewControllerStyleTripleColumn only
+    UISplitViewControllerColumnSecondary,
+    UISplitViewControllerColumnCompact, // If a vc is set for this column, it will be used when the UISVC is collapsed, instead of stacking the vc’s for the Primary, Supplementary, and Secondary columns
+} API_AVAILABLE(ios(14.0));
+
+// Allowed displayModes depend on the splitBehavior
+// Tile behavior allows SecondaryOnly, OneBesideSecondary, and TwoBesideSecondary display modes
+// Overlay behavior allows SecondaryOnly, OneOverSecondary, and TwoOverSecondary display modes
+// Displace behavior allows SecondaryOnly, OneBesideSecondary, and TwoDisplaceSecondary display modes
+typedef NS_ENUM(NSInteger, UISplitViewControllerSplitBehavior) {
+    UISplitViewControllerSplitBehaviorAutomatic,
+    UISplitViewControllerSplitBehaviorTile,
+    UISplitViewControllerSplitBehaviorOverlay,
+    UISplitViewControllerSplitBehaviorDisplace,
+} API_AVAILABLE(ios(14.0));
+
 // This constant can be used with any sizing-related `UISplitViewController` properties to get the default system behavior.
 UIKIT_EXTERN CGFloat const UISplitViewControllerAutomaticDimension API_AVAILABLE(ios(8.0));
 
 UIKIT_EXTERN API_AVAILABLE(ios(3.2)) @interface UISplitViewController : UIViewController
 
-@property (nonatomic, copy) NSArray<__kindof UIViewController *> *viewControllers;
+- (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil bundle:(nullable NSBundle *)nibBundleOrNil NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithStyle:(UISplitViewControllerStyle)style NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(14.0));
+@property(nonatomic, readonly) UISplitViewControllerStyle style API_AVAILABLE(ios(14.0)); // For information only, will not be called from UIKit code
 @property (nullable, nonatomic, weak) id <UISplitViewControllerDelegate> delegate;
+
+// Default NO. The secondary-only shortcut button is applicable only for UISplitViewControllerStyleTripleColumn
+@property(nonatomic) BOOL showsSecondaryOnlyButton API_AVAILABLE(ios(14.0));
+
+// Controls allowed display modes
+@property(nonatomic) UISplitViewControllerSplitBehavior preferredSplitBehavior API_AVAILABLE(ios(14.0)); // default Automatic, actual behavior will be determined by width buckets and view aspect ration
+@property(nonatomic, readonly) UISplitViewControllerSplitBehavior splitBehavior API_AVAILABLE(ios(14.0));
+
+- (void)setViewController:(nullable UIViewController *)vc forColumn:(UISplitViewControllerColumn)column API_AVAILABLE(ios(14.0)); // If the vc is not a UINavigationController, one will be created, except for UISplitViewControllerColumnCompact.
+- (nullable __kindof UIViewController *)viewControllerForColumn:(UISplitViewControllerColumn)column API_AVAILABLE(ios(14.0));
+
+/*
+-hideColumn: and -showColumn: do not accept the Compact column
+Collapsed:
+   -hideColumn:
+       always ignored for the Primary column, or if the requested column is not on top;
+       otherwise the column is popped
+   -showColumn:
+       pushes the column (and any intervening columns) if the column is not in the stack;
+       does nothing if the column is on top;
+       pops any covering columns if the column is in the stack but not on top
+Expanded:
+   -hideColumn:
+       ignored for the Secondary column;
+       ignored when the column is not visible in the current displayMode;
+       otherwise animates to the nearest displayMode where the column is not visible
+   -showColumn:
+       ignored for the Secondary column;
+       ignored when the column is already visible in the current displayMode;
+       otherwise animates to the nearest displayMode where the column is visible
+
+If an animation is started due to -show/hideColumn:, the transitionCoordinator for the UISplitViewController is available following the -show/hideColumn: message.
+*/
+- (void)hideColumn:(UISplitViewControllerColumn)column API_AVAILABLE(ios(14.0));
+- (void)showColumn:(UISplitViewControllerColumn)column API_AVAILABLE(ios(14.0));
+
+@property (nonatomic, copy) NSArray<__kindof UIViewController *> *viewControllers; // -setViewController:forColumn:/-viewControllerForColumn: recommended for column-style UISplitViewController
 
 // If 'YES', hidden view can be presented and dismissed via a swipe gesture. Defaults to 'YES'.
 @property (nonatomic) BOOL presentsWithGesture API_AVAILABLE(ios(5.1));
@@ -56,6 +129,10 @@ UIKIT_EXTERN API_AVAILABLE(ios(3.2)) @interface UISplitViewController : UIViewCo
 // An animatable property that can be used to adjust the relative width of the primary view controller in the split view controller. This preferred width will be limited by the maximum and minimum properties (and potentially other system heuristics).
 @property(nonatomic, assign) CGFloat preferredPrimaryColumnWidthFraction API_AVAILABLE(ios(8.0)); // default: UISplitViewControllerAutomaticDimension
 
+// Allow setting the primary column width with point values. This is especially useful in Catalyst where the window may be resized more often.
+// If set to non-Automatic, takes precedence over preferredPrimaryColumnWidthFraction.
+@property(nonatomic, assign) CGFloat preferredPrimaryColumnWidth API_AVAILABLE(ios(14.0)); // default: UISplitViewControllerAutomaticDimension
+
 // An animatable property that can be used to adjust the minimum absolute width of the primary view controller in the split view controller.
 @property(nonatomic, assign) CGFloat minimumPrimaryColumnWidth API_AVAILABLE(ios(8.0)); // default: UISplitViewControllerAutomaticDimension
 
@@ -64,6 +141,14 @@ UIKIT_EXTERN API_AVAILABLE(ios(3.2)) @interface UISplitViewController : UIViewCo
 
 // The current primary view controller's column width.
 @property(nonatomic,readonly) CGFloat primaryColumnWidth API_AVAILABLE(ios(8.0));
+
+// Same as the "Primary" versions but applying to the Supplementary column for the triple-column style UISplitViewController
+@property(nonatomic, assign) CGFloat preferredSupplementaryColumnWidthFraction API_AVAILABLE(ios(14.0));
+@property(nonatomic, assign) CGFloat preferredSupplementaryColumnWidth API_AVAILABLE(ios(14.0));
+@property(nonatomic, assign) CGFloat minimumSupplementaryColumnWidth API_AVAILABLE(ios(14.0));
+@property(nonatomic, assign) CGFloat maximumSupplementaryColumnWidth API_AVAILABLE(ios(14.0));
+
+@property(nonatomic, readonly) CGFloat supplementaryColumnWidth API_AVAILABLE(ios(14.0));
 
 // The edge of the UISplitViewController where the primary view controller should be positioned
 @property(nonatomic) UISplitViewControllerPrimaryEdge primaryEdge API_AVAILABLE(ios(11.0), tvos(11.0)); // default: UISplitViewControllerPrimaryEdgeLeading
@@ -138,6 +223,14 @@ UIKIT_EXTERN API_AVAILABLE(ios(3.2)) @interface UISplitViewController : UIViewCo
 // (This method is only called on the leftmost view controller and only discriminates portrait from landscape.)
 - (BOOL)splitViewController:(UISplitViewController *)svc shouldHideViewController:(UIViewController *)vc inOrientation:(UIInterfaceOrientation)orientation  API_DEPRECATED_WITH_REPLACEMENT("preferredDisplayMode", ios(5.0, 8.0)) API_UNAVAILABLE(tvos);
 
+- (UISplitViewControllerColumn)splitViewController:(UISplitViewController *)svc topColumnForCollapsingToProposedTopColumn:(UISplitViewControllerColumn)proposedTopColumn API_AVAILABLE(ios(14.0));
+- (UISplitViewControllerDisplayMode)splitViewController:(UISplitViewController *)svc displayModeForExpandingToProposedDisplayMode:(UISplitViewControllerDisplayMode)proposedDisplayMode API_AVAILABLE(ios(14.0));
+- (void)splitViewControllerDidCollapse:(UISplitViewController *)svc API_AVAILABLE(ios(14.0));
+- (void)splitViewControllerDidExpand:(UISplitViewController *)svc API_AVAILABLE(ios(14.0));
+- (void)splitViewController:(UISplitViewController *)svc willShowColumn:(UISplitViewControllerColumn)column API_AVAILABLE(ios(14.0));
+- (void)splitViewController:(UISplitViewController *)svc willHideColumn:(UISplitViewControllerColumn)column API_AVAILABLE(ios(14.0));
+- (void)splitViewControllerInteractivePresentationGestureWillBegin:(UISplitViewController *)svc API_AVAILABLE(ios(14.0));
+- (void)splitViewControllerInteractivePresentationGestureDidEnd:(UISplitViewController *)svc API_AVAILABLE(ios(14.0));
 
 @end
 

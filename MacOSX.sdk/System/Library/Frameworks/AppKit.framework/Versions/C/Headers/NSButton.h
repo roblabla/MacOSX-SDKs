@@ -9,11 +9,12 @@
 #import <AppKit/NSButtonCell.h>
 #import <AppKit/NSUserInterfaceValidation.h>
 #import <AppKit/NSUserInterfaceCompression.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
-@class NSSound;
+@class NSSound, NSImageSymbolConfiguration;
 
 @interface NSButton : NSControl <NSUserInterfaceValidations, NSAccessibilityButton, NSUserInterfaceCompression>
 
@@ -82,6 +83,9 @@ API_UNAVAILABLE_BEGIN(ios)
 /*! The alternate title, expressed as an attributed string. */
 @property (copy) NSAttributedString *attributedAlternateTitle;
 
+/*! Indicates whether the button's action has a destructive effect on user data.  AppKit may guard a destructive-actioned button against accidental presses, and may give the button a special appearance in certain contexts to caution against unintentional use.  Defaults to NO. */
+@property BOOL hasDestructiveAction API_AVAILABLE(macos(11.0));
+
 /*! The sound that plays when the user clicks the button, or nil if the button should not play a sound. The default value is nil. */
 @property (nullable, strong) NSSound *sound;
 
@@ -125,6 +129,11 @@ API_UNAVAILABLE_BEGIN(ios)
 
 /*! A Boolean value that determines how the button's image and title are positioned together within the button bezel. If false, the image is positioned according to the imagePosition property at the edge of the button bezel, and the title is positioned within the remaining space. If true, the button’s image is positioned directly adjacent to the title based on the imagePosition property, and the image and title are positioned within the button bezel as a single unit. */
 @property BOOL imageHugsTitle API_AVAILABLE(macos(10.12));
+
+/*!
+ Specifies a combination of point size, weight, and scale to use when sizing and displaying symbol images. If a symbol configuration isn't provided, the symbol is matched to the button's `font` property. The default value is nil.
+ */
+@property (nullable, copy) NSImageSymbolConfiguration *symbolConfiguration API_AVAILABLE(macos(11));
 
 /*! Applies a custom color to the button's bezel, in appearances that support it. A nil value indicates an unmodified button appearance. The default value is nil. */
 @property (nullable, copy) NSColor *bezelColor API_AVAILABLE(macos(10.12.2));

@@ -18,17 +18,18 @@ CK_EXTERN NSString * const CKErrorDomain API_AVAILABLE(macos(10.10), ios(8.0), w
  */
 CK_EXTERN NSString * const CKPartialErrorsByItemIDKey API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0));
 
-/*! If the server rejects a record save because it has been modified since the last time it was read, a `CKErrorServerRecordChanged` error will be returned and it will contain versions of the record in its userInfo dictionary. Apply your custom conflict resolution logic to the server record under `CKServerRecordKey` and attempt a save of that record. */
+/*! If the server rejects a record save because it has been modified since the last time it was read, a @c CKErrorServerRecordChanged error will be returned and it will contain versions of the record in its userInfo dictionary. Apply your custom conflict resolution logic to the server record under @c CKServerRecordKey and attempt a save of that record. */
 CK_EXTERN NSString * const CKRecordChangedErrorAncestorRecordKey API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0));
 CK_EXTERN NSString * const CKRecordChangedErrorServerRecordKey API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0));
 CK_EXTERN NSString * const CKRecordChangedErrorClientRecordKey API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0));
 
-/*! On some errors, the userInfo dictionary may contain a NSNumber instance that specifies the period of time in seconds after which the client may retry the request. For example, this key will be on `CKErrorServiceUnavailable`, `CKErrorRequestRateLimited`, and other errors for which the recommended resolution is to retry after a delay.
+/*! On some errors, the userInfo dictionary may contain a NSNumber instance that specifies the period of time in seconds after which the client may retry the request. For example, this key will be on @c CKErrorServiceUnavailable, @c CKErrorRequestRateLimited, and other errors for which the recommended resolution is to retry after a delay.
  */
 CK_EXTERN NSString * const CKErrorRetryAfterKey API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0));
 
 typedef NS_ENUM(NSInteger, CKErrorCode) {
-    /*! CloudKit.framework encountered an error.  This is a non-recoverable error. */    CKErrorInternalError                  = 1,
+    /*! CloudKit.framework encountered an error.  This is a non-recoverable error. */
+    CKErrorInternalError                  = 1,
     
     /*! Some items failed, but the operation succeeded overall. Check CKPartialErrorsByItemIDKey in the userInfo dictionary for more details. */
     CKErrorPartialFailure                 = 2,

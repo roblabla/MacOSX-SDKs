@@ -49,8 +49,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(tvos) @interface UIPrintInt
 
 @property(nullable,nonatomic,strong) UIPrintPageRenderer *printPageRenderer;  // calls class to render each page
 @property(nullable,nonatomic,strong) UIPrintFormatter    *printFormatter;     // uses a single formatter to fill the pages
-@property(nullable,nonatomic,copy)   id                   printingItem;       // single NSData, NSURL, UIImage, ALAsset
-@property(nullable,nonatomic,copy)   NSArray             *printingItems;      // array of NSData, NSURL, UIImage, ALAsset. does not support page range
+@property(nullable,nonatomic,copy)   id                   printingItem;       // single NSData, NSURL, UIImage
+@property(nullable,nonatomic,copy)   NSArray             *printingItems;      // array of NSData, NSURL, UIImage. does not support page range
 
 - (BOOL)presentAnimated:(BOOL)animated completionHandler:(nullable UIPrintInteractionCompletionHandler)completion;                                                // iPhone
 - (BOOL)presentFromRect:(CGRect)rect inView:(UIView *)view animated:(BOOL)animated completionHandler:(nullable UIPrintInteractionCompletionHandler)completion;    // iPad

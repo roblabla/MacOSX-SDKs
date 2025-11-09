@@ -6,6 +6,9 @@
 //
 
 #if __OBJC__
+#import <AvailabilityMacros.h>
+
+API_UNAVAILABLE_BEGIN(ios)
 
 	// Objective C API (Preferred for IOBluetoothUI.framework use)
 
@@ -22,6 +25,7 @@
 	#if defined(__cplusplus)
 	}
 	#endif
-	
+
+API_UNAVAILABLE_END
 #endif
 

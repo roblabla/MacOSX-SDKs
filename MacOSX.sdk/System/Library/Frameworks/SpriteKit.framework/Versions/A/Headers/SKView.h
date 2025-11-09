@@ -83,6 +83,8 @@ SK_EXPORT @interface SKView : NSView <NSSecureCoding>
  Actual rate maybe be limited by hardware or other software. */
 @property (nonatomic) NSInteger preferredFramesPerSecond API_AVAILABLE(ios(10.0), tvos(10.0), watchos(3.0), macos(10.12));
 
+/* If true SKView will not allocate a depth/stencil buffer */
+@property (nonatomic) BOOL disableDepthStencilBuffer;
 
 /**
  Optional view delegate, see SKViewDelegate.

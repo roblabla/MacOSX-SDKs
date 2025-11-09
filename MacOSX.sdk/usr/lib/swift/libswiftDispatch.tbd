@@ -1,18 +1,34 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: F7E8CBB6-D733-3C25-89B8-1058C1076A7A', 'x86_64: F7E8CBB6-D733-3C25-89B8-1058C1076A7A' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           8F5F2022-B166-3BBD-9110-4B60AC10CE9E
+  - target:          x86_64-maccatalyst
+    value:           8F5F2022-B166-3BBD-9110-4B60AC10CE9E
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           F8F25240-2C56-3C82-B8FD-4130652A4CF6
+  - target:          arm64e-maccatalyst
+    value:           F8F25240-2C56-3C82-B8FD-4130652A4CF6
 install-name:    '/usr/lib/swift/libswiftDispatch.dylib'
-current-version: 0
+current-version: 4.40.2
 swift-abi-version: 7
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftDispatch.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftDispatch.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftDispatch.dylib', 
                        '$ld$install_name$os10.13$@rpath/libswiftDispatch.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftDispatch.dylib', 
-                       '$ld$install_name$os10.9$@rpath/libswiftDispatch.dylib', '_$s8Dispatch024dispatch_io_create_with_C0ySo03OS_b1_C0CSu_ADSo0f1_B6_queueCys5Int32VXEtF', 
+                       '$ld$install_name$os10.9$@rpath/libswiftDispatch.dylib' ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+    symbols:         [ '_$s8Dispatch024dispatch_io_create_with_C0ySo03OS_b1_C0CSu_ADSo0f1_B6_queueCys5Int32VXEtF', 
                        '_$s8Dispatch0A11SpecificKeyCACyxGycfC', '_$s8Dispatch0A11SpecificKeyCACyxGycfCTj', 
                        '_$s8Dispatch0A11SpecificKeyCACyxGycfCTq', '_$s8Dispatch0A11SpecificKeyCACyxGycfc', 
                        '_$s8Dispatch0A11SpecificKeyCMa', '_$s8Dispatch0A11SpecificKeyCMn', 
@@ -221,9 +237,13 @@ exports:
                        '_$sSo14OS_dispatch_ioC8DispatchE4read18fromFileDescriptor9maxLength16runningHandlerOn7handlerys5Int32V_SiSo0a1_B6_queueCyAC0D4DataV_AJtctFZ', 
                        '_$sSo14OS_dispatch_ioC8DispatchE4read6offset6length5queue0C7Handlerys5Int64V_SiSo0a1_b1_H0CySb_AC0D4DataVSgs5Int32VtctF', 
                        '_$sSo14OS_dispatch_ioC8DispatchE4type0C05queue14cleanupHandlerA2bCE10StreamTypeO_ABSo0a1_b1_F0Cys5Int32VctcfC', 
+                       '_$sSo14OS_dispatch_ioC8DispatchE4type0C05queue14cleanupHandlerA2bCE10StreamTypeO_ABSo0a1_b1_F0Cys5Int32Vctcfc', 
                        '_$sSo14OS_dispatch_ioC8DispatchE4type14fileDescriptor5queue14cleanupHandlerA2bCE10StreamTypeO_s5Int32VSo0a1_b1_H0CyAKctcfC', 
+                       '_$sSo14OS_dispatch_ioC8DispatchE4type14fileDescriptor5queue14cleanupHandlerA2bCE10StreamTypeO_s5Int32VSo0a1_b1_H0CyAKctcfc', 
                        '_$sSo14OS_dispatch_ioC8DispatchE4type4path5oflag4mode5queue14cleanupHandlerA2bCE10StreamTypeO_SPys4Int8VGs5Int32Vs6UInt16VSo0a1_b1_I0CyAPctcfC', 
+                       '_$sSo14OS_dispatch_ioC8DispatchE4type4path5oflag4mode5queue14cleanupHandlerA2bCE10StreamTypeO_SPys4Int8VGs5Int32Vs6UInt16VSo0a1_b1_I0CyAPctcfc', 
                        '_$sSo14OS_dispatch_ioC8DispatchE4type4path5oflag4mode5queue14cleanupHandlerABSgAbCE10StreamTypeO_SPys4Int8VGs5Int32Vs6UInt16VSo0a1_b1_I0CyAQctcfC', 
+                       '_$sSo14OS_dispatch_ioC8DispatchE4type4path5oflag4mode5queue14cleanupHandlerABSgAbCE10StreamTypeO_SPys4Int8VGs5Int32Vs6UInt16VSo0a1_b1_I0CyAQctcfc', 
                        '_$sSo14OS_dispatch_ioC8DispatchE5close5flagsyAbCE10CloseFlagsV_tF', 
                        '_$sSo14OS_dispatch_ioC8DispatchE5write16toFileDescriptor4data16runningHandlerOn7handlerys5Int32V_AC0D4DataVSo0a1_B6_queueCyALSg_AJtctFZ', 
                        '_$sSo14OS_dispatch_ioC8DispatchE5write6offset4data5queue0C7Handlerys5Int64V_AC0D4DataVSo0a1_b1_H0CySb_ALSgs5Int32VtctF', 
@@ -250,6 +270,7 @@ exports:
                        '_$sSo17OS_dispatch_queueC8DispatchE11getSpecific3keyxSgAC0dF3KeyCyxG_tlF', 
                        '_$sSo17OS_dispatch_queueC8DispatchE11getSpecific3keyxSgAC0dF3KeyCyxG_tlFZ', 
                        '_$sSo17OS_dispatch_queueC8DispatchE11setSpecific3key5valueyAC0dF3KeyCyxG_xSgtlF', 
+                       '_$sSo17OS_dispatch_queueC8DispatchE12asyncAndWait7executeyAC0D8WorkItemC_tF', 
                        '_$sSo17OS_dispatch_queueC8DispatchE16SchedulerOptionsV3qos5flags5groupAeC0D3QoSV_AC0D13WorkItemFlagsVSo0a1_b1_I0CSgtcfC', 
                        '_$sSo17OS_dispatch_queueC8DispatchE16SchedulerOptionsV3qosAC0D3QoSVvM', 
                        '_$sSo17OS_dispatch_queueC8DispatchE16SchedulerOptionsV3qosAC0D3QoSVvg', 
@@ -367,6 +388,7 @@ exports:
                        '_$sSo17OS_dispatch_queueC8DispatchE5async5group7executeySo0a1_b1_F0C_AC0D8WorkItemCtF', 
                        '_$sSo17OS_dispatch_queueC8DispatchE5async7executeyAC0D8WorkItemC_tF', 
                        '_$sSo17OS_dispatch_queueC8DispatchE5label3qos10attributes20autoreleaseFrequency6targetABSS_AC0D3QoSVAbCE10AttributesVAbCE011AutoreleaseI0OABSgtcfC', 
+                       '_$sSo17OS_dispatch_queueC8DispatchE5label3qos10attributes20autoreleaseFrequency6targetABSS_AC0D3QoSVAbCE10AttributesVAbCE011AutoreleaseI0OABSgtcfc', 
                        '_$sSo17OS_dispatch_queueC8DispatchE5labelSSvg', '_$sSo17OS_dispatch_queueC8DispatchE5labelSSvpMV', 
                        '_$sSo17OS_dispatch_queueC8DispatchE6global3qosAbC0D3QoSV0G6SClassO_tFZ', 
                        '_$sSo17OS_dispatch_queueC8DispatchE6global8priorityA2bCE19GlobalQueuePriorityO_tFZ', 
@@ -507,5 +529,5 @@ exports:
                        '_$sSo33OS_dispatch_source_memorypressureP8DispatchE4dataSo0a1_b1_C0CACE19MemoryPressureEventVvpMV', 
                        '_$sSo33OS_dispatch_source_memorypressureP8DispatchE4maskSo0a1_b1_C0CACE19MemoryPressureEventVvg', 
                        '_$sSo33OS_dispatch_source_memorypressureP8DispatchE4maskSo0a1_b1_C0CACE19MemoryPressureEventVvpMV', 
-                       '__swift_FORCE_LOAD_$_swiftDispatch', __swift_dispatch_source_create_abort ]
+                       '__swift_FORCE_LOAD_$_swiftDispatch' ]
 ...

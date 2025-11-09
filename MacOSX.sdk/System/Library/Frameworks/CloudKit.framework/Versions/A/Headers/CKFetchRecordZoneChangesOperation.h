@@ -15,8 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /*! @abstract This operation will fetch records changes across the given record zones
  *
- *  @discussion For each `previousServerChangeToken` passed in with a `CKFetchRecordZoneChangesConfiguration`, only records that have changed since that anchor will be fetched.
- *  If this is your first fetch of a zone or if you wish to re-fetch all records within a zone, do not include a `previousServerChangeToken`.
+ *  @discussion For each @c previousServerChangeToken passed in with a @c CKFetchRecordZoneChangesConfiguration, only records that have changed since that anchor will be fetched.
+ *  If this is your first fetch of a zone or if you wish to re-fetch all records within a zone, do not include a @c previousServerChangeToken.
  *  Change tokens are opaque tokens and clients should not infer any behavior based on their content.
  */
 API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
@@ -30,30 +30,35 @@ API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
 
 /*! @abstract Determines if the opertaion should fetch all changes from the server before completing.
  *
- *  @discussion When set to YES, this operation will send repeated requests to the server until all record changes have been fetched. `recordZoneChangeTokensUpdatedBlock` will be invoked periodically, to give clients an updated change token so that already-fetched record changes don't need to be re-fetched on a subsequent operation. `recordZoneFetchCompletionBlock` will only be called once and `moreComing` will always be NO.
+ *  @discussion When set to YES, this operation will send repeated requests to the server until all record changes have been fetched. @c recordZoneChangeTokensUpdatedBlock will be invoked periodically, to give clients an updated change token so that already-fetched record changes don't need to be re-fetched on a subsequent operation. @c recordZoneFetchCompletionBlock will only be called once and @c moreComing will always be NO.
  *
- *  When set to NO, it is the responsibility of the caller to issue subsequent fetch-changes operations when `moreComing` is YES in a `recordZoneFetchCompletionBlock` invocation.
+ *  When set to NO, it is the responsibility of the caller to issue subsequent fetch-changes operations when @c moreComing is YES in a @c recordZoneFetchCompletionBlock invocation.
  *
- *  `fetchAllChanges` is YES by default
+ *  @c fetchAllChanges is YES by default
  */
 @property (nonatomic, assign) BOOL fetchAllChanges;
 
+//! @discussion Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
 @property (nonatomic, copy, nullable) void (^recordChangedBlock)(CKRecord *record);
+
+//! @discussion Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
 @property (nonatomic, copy, nullable) void (^recordWithIDWasDeletedBlock)(CKRecordID *recordID, CKRecordType recordType);
 
-/*! @discussion Clients are responsible for saving this per-recordZone `serverChangeToken` and passing it in to the next call to `CKFetchRecordZoneChangesOperation`.
+/*! @discussion Clients are responsible for saving this per-recordZone @c serverChangeToken and passing it in to the next call to @c CKFetchRecordZoneChangesOperation.
  *  Note that a fetch can fail partway. If that happens, an updated change token may be returned in this block so that already fetched records don't need to be re-downloaded on a subsequent operation.
- *  `recordZoneChangeTokensUpdatedBlock` will not be called after the last batch of changes in a zone; the `recordZoneFetchCompletionBlock` block will be called instead.
- *  The `clientChangeTokenData` from the most recent `CKModifyRecordsOperation` issued on this zone is also returned, or nil if none was provided.
- *  If the server returns a `CKErrorChangeTokenExpired` error, the `serverChangeToken` used for this record zone when initting this operation was too old and the client should toss its local cache and re-fetch the changes in this record zone starting with a nil `serverChangeToken`.
- *  `recordZoneChangeTokensUpdatedBlock` will not be called if `fetchAllChanges` is NO.
+ *  @c recordZoneChangeTokensUpdatedBlock will not be called after the last batch of changes in a zone; the @c recordZoneFetchCompletionBlock block will be called instead.
+ *  The @c clientChangeTokenData from the most recent @c CKModifyRecordsOperation issued on this zone is also returned, or nil if none was provided.
+ *  If the server returns a @c CKErrorChangeTokenExpired error, the @c serverChangeToken used for this record zone when initting this operation was too old and the client should toss its local cache and re-fetch the changes in this record zone starting with a nil @c serverChangeToken.
+ *  @c recordZoneChangeTokensUpdatedBlock will not be called if @c fetchAllChanges is NO.
+ *  Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
  */
 @property (nonatomic, copy, nullable) void (^recordZoneChangeTokensUpdatedBlock)(CKRecordZoneID *recordZoneID, CKServerChangeToken * _Nullable serverChangeToken, NSData * _Nullable clientChangeTokenData);
 @property (nonatomic, copy, nullable) void (^recordZoneFetchCompletionBlock)(CKRecordZoneID *recordZoneID, CKServerChangeToken * _Nullable serverChangeToken, NSData * _Nullable clientChangeTokenData, BOOL moreComing, NSError * _Nullable recordZoneError);
 
 /*! @abstract This block is called when the operation completes.
  *
- *  @discussion `serverChangeToken`s previously returned via a `recordZoneChangeTokensUpdatedBlock` or `recordZoneFetchCompletionBlock` invocation, along with the record changes that preceded it, are valid even if there is a subsequent `operationError`
+ *  @discussion @c serverChangeToken-s previously returned via a @c recordZoneChangeTokensUpdatedBlock or @c recordZoneFetchCompletionBlock invocation, along with the record changes that preceded it, are valid even if there is a subsequent @c operationError
+ *  Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
  */
 @property (nonatomic, copy, nullable) void (^fetchRecordZoneChangesCompletionBlock)(NSError * _Nullable operationError);
 
@@ -79,7 +84,7 @@ API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0))
 /*! @abstract Declares which user-defined keys should be fetched and added to the resulting CKRecords.
  *
  *  @discussion If nil, declares the entire record should be downloaded. If set to an empty array, declares that no user fields should be downloaded.
- *  Defaults to nil.
+ *  Defaults to @c nil.
  */
 @property (nonatomic, copy, nullable) NSArray<CKRecordFieldKey> *desiredKeys;
 @end
@@ -92,4 +97,5 @@ API_DEPRECATED_WITH_REPLACEMENT("CKFetchRecordZoneChangesConfiguration", macos(1
 @property (nonatomic, assign) NSUInteger resultsLimit;
 @property (nonatomic, copy, nullable) NSArray<CKRecordFieldKey> *desiredKeys;
 @end
+
 NS_ASSUME_NONNULL_END

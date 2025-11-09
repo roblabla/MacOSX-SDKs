@@ -2,14 +2,15 @@
 //  GKTurnBasedMatch.h
 //  Game Center
 //
-//  Copyright 2010-2019 Apple Inc. All rights reserved.
+//  Copyright 2010-2020 Apple Inc. All rights reserved.
 //
 
 #import <GameKit/GKPlayer.h>
+#import <GameKit/GKLeaderboardScore.h>
 
 @class GKMatchRequest, GKTurnBasedMatch, GKTurnBasedExchange, GKTurnBasedExchangeReply, GKScore, GKAchievement;
 
-// Constants that describe the state of the overall match
+/// Constants that describe the state of the overall match
 typedef NS_ENUM(NSInteger, GKTurnBasedMatchStatus) {
     GKTurnBasedMatchStatusUnknown   = 0,
     GKTurnBasedMatchStatusOpen      = 1,
@@ -17,7 +18,7 @@ typedef NS_ENUM(NSInteger, GKTurnBasedMatchStatus) {
     GKTurnBasedMatchStatusMatching  = 3
 };
 
-// Constants that describe the state of individual participants in the match
+/// Constants that describe the state of individual participants in the match
 typedef NS_ENUM(NSInteger, GKTurnBasedParticipantStatus) {
     // Statuses that are set by GameKit
     GKTurnBasedParticipantStatusUnknown     = 0,
@@ -28,7 +29,7 @@ typedef NS_ENUM(NSInteger, GKTurnBasedParticipantStatus) {
     GKTurnBasedParticipantStatusDone        = 5,    // a participant is done with this session
 };
 
-// Constants that describe the game result for a given participant who has reached the done state.  The developer is free to use these constants or add additional ones
+/// Constants that describe the game result for a given participant who has reached the done state.  The developer is free to use these constants or add additional ones
 typedef NS_ENUM(NSInteger, GKTurnBasedMatchOutcome) {
     GKTurnBasedMatchOutcomeNone         = 0,        // Participants who are not done with a match have this state
     GKTurnBasedMatchOutcomeQuit         = 1,        // Participant quit
@@ -45,59 +46,60 @@ typedef NS_ENUM(NSInteger, GKTurnBasedMatchOutcome) {
     
 };
 
-// GKTurnBasedMatch represents an ongoing turn-based game among the matched group of participants
-// Existing matches can be shown and new matches created using GKTurnBasedMatchmakerViewController
-// A list of existing matches can be retrieved using +loadMatchesWithCompletionHandler:
-//
-// By default turn based events will badge your app.  To opt out of this add GKGameCenterBadgingDisabled  with a boolean value of YES to your info plist
-
+/// GKTurnBasedMatch represents an ongoing turn-based game among the matched group of participants
+/// Existing matches can be shown and new matches created using GKTurnBasedMatchmakerViewController
+/// A list of existing matches can be retrieved using +loadMatchesWithCompletionHandler:
+///
+/// By default turn based events will badge your app.  To opt out of this add GKGameCenterBadgingDisabled  with a boolean value of YES to your info plist
 
 NS_CLASS_AVAILABLE(10_8, 5_0) __WATCHOS_AVAILABLE(3_0)
 @interface GKTurnBasedParticipant : NSObject
 
-@property(readonly, nullable, retain, NS_NONATOMIC_IOSONLY) GKPlayer            *player NS_AVAILABLE(10_10, 8_0) __WATCHOS_AVAILABLE(3_0);
+@property(readonly, nullable, strong, NS_NONATOMIC_IOSONLY) GKPlayer            *player NS_AVAILABLE(10_10, 8_0) __WATCHOS_AVAILABLE(3_0);
 @property(readonly, nullable, copy, NS_NONATOMIC_IOSONLY) NSDate                *lastTurnDate;
 @property(readonly, NS_NONATOMIC_IOSONLY)       GKTurnBasedParticipantStatus    status;
 @property(assign, NS_NONATOMIC_IOSONLY)         GKTurnBasedMatchOutcome         matchOutcome;
 @property(readonly, nullable, copy, NS_NONATOMIC_IOSONLY) NSDate                *timeoutDate NS_AVAILABLE(10_8, 6_0) __WATCHOS_AVAILABLE(3_0);
 
-// Deprecated
-@property(readonly, nullable, copy, NS_NONATOMIC_IOSONLY) NSString              *playerID NS_DEPRECATED(10_8, 10_10, 5_0, 8_0, "use player") ;
+@end
 
+@interface GKTurnBasedParticipant (Obsoleted)
+/*** This property is obsolete. ***/
+@property(readonly, nullable, copy, NS_NONATOMIC_IOSONLY) NSString              *playerID NS_DEPRECATED(10_8, 10_10, 5_0, 8_0, "use player") ;
 @end
 
 NS_ASSUME_NONNULL_BEGIN
 @protocol GKTurnBasedEventListener
 @optional
 
-// If Game Center initiates a match the developer should create a GKTurnBasedMatch from playersToInvite and present a GKTurnbasedMatchmakerViewController.
+/// If Game Center initiates a match the developer should create a GKTurnBasedMatch from playersToInvite and present a GKTurnbasedMatchmakerViewController.
 - (void)player:(GKPlayer *)player didRequestMatchWithOtherPlayers:(NSArray<GKPlayer *> *)playersToInvite NS_AVAILABLE(10_10, 8_0) API_UNAVAILABLE(watchos);
 
-// called when it becomes this player's turn.  It also gets called under the following conditions:
-//      the player's turn has a timeout and it is about to expire.
-//      the player accepts an invite from another player.
-// when the game is running it will additionally recieve turn events for the following:
-//      turn was passed to another player
-//      another player saved the match data
-// Because of this the app needs to be prepared to handle this even while the player is taking a turn in an existing match.  The boolean indicates whether this event launched or brought to forground the app.
+/// called when it becomes this player's turn.  It also gets called under the following conditions:
+///      the player's turn has a timeout and it is about to expire.
+///      the player accepts an invite from another player.
+/// when the game is running it will additionally recieve turn events for the following:
+///      turn was passed to another player
+///      another player saved the match data
+/// Because of this the app needs to be prepared to handle this even while the player is taking a turn in an existing match.  The boolean indicates whether this event launched or brought to forground the app.
 - (void)player:(GKPlayer *)player receivedTurnEventForMatch:(GKTurnBasedMatch *)match didBecomeActive:(BOOL)didBecomeActive NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
 
-// called when the match has ended.
+/// called when the match has ended.
 - (void)player:(GKPlayer *)player matchEnded:(GKTurnBasedMatch *)match;
 
-// this is called when a player receives an exchange request from another player.
+/// this is called when a player receives an exchange request from another player.
 - (void)player:(GKPlayer *)player receivedExchangeRequest:(GKTurnBasedExchange *)exchange forMatch:(GKTurnBasedMatch *)match NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
 
-// this is called when an exchange is canceled by the sender.
+/// this is called when an exchange is canceled by the sender.
 - (void)player:(GKPlayer *)player receivedExchangeCancellation:(GKTurnBasedExchange *)exchange forMatch:(GKTurnBasedMatch *)match NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
 
-// called when all players either respond or timeout responding to this request.  This is sent to both the turn holder and the initiator of the exchange
+/// called when all players either respond or timeout responding to this request.  This is sent to both the turn holder and the initiator of the exchange
 - (void)player:(GKPlayer *)player receivedExchangeReplies:(NSArray<GKTurnBasedExchangeReply *> *)replies forCompletedExchange:(GKTurnBasedExchange *)exchange forMatch:(GKTurnBasedMatch *)match NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
 
-// Called when a player chooses to quit a match and that player has the current turn.  The developer should call participantQuitInTurnWithOutcome:nextParticipants:turnTimeout:matchData:completionHandler: on the match passing in appropriate values.  They can also update matchOutcome for other players as appropriate.
+/// Called when a player chooses to quit a match and that player has the current turn.  The developer should call participantQuitInTurnWithOutcome:nextParticipants:turnTimeout:matchData:completionHandler: on the match passing in appropriate values.  They can also update matchOutcome for other players as appropriate.
 - (void)player:(GKPlayer *)player wantsToQuitMatch:(GKTurnBasedMatch *)match NS_AVAILABLE(10_11, 9_0) __WATCHOS_AVAILABLE(3_0);
 
-// Deprecated
+/// Deprecated
 - (void)player:(GKPlayer *)player didRequestMatchWithPlayers:(NSArray<NSString *> *)playerIDsToInvite NS_DEPRECATED_IOS(7_0, 8_0, "use didRequestMatchWithOtherPlayers") ;
 
 @end
@@ -107,21 +109,20 @@ NS_ASSUME_NONNULL_BEGIN
 extern NSTimeInterval        GKTurnTimeoutDefault NS_AVAILABLE(10_9, 6_0) __WATCHOS_AVAILABLE(3_0);    // use a default timeout of one week
 extern NSTimeInterval        GKTurnTimeoutNone NS_AVAILABLE(10_9, 6_0) __WATCHOS_AVAILABLE(3_0);
 
-
 NS_CLASS_AVAILABLE(10_8, 5_0) __WATCHOS_AVAILABLE(3_0)
 @interface GKTurnBasedMatch : NSObject
 
-@property(readonly, nullable, retain, NS_NONATOMIC_IOSONLY)  NSString                           *matchID;
-@property(readonly, nullable, retain, NS_NONATOMIC_IOSONLY)  NSDate                             *creationDate;
-@property(readonly, nullable, retain, NS_NONATOMIC_IOSONLY)  NSArray<GKTurnBasedParticipant *>  *participants;          // array of GKTurnBasedParticipant objects
+@property(readonly, nullable, strong, NS_NONATOMIC_IOSONLY)  NSString                           *matchID;
+@property(readonly, nullable, strong, NS_NONATOMIC_IOSONLY)  NSDate                             *creationDate;
+@property(readonly, nullable, strong, NS_NONATOMIC_IOSONLY)  NSArray<GKTurnBasedParticipant *>  *participants;          // array of GKTurnBasedParticipant objects
 @property(readonly, NS_NONATOMIC_IOSONLY)                    GKTurnBasedMatchStatus             status;
 
 // This indicates the participant who has the current turn.  This is set by passing the next participant into endTurnWithNextParticipant:matchData:completionHandler:
-@property(readonly, nullable, retain, NS_NONATOMIC_IOSONLY)  GKTurnBasedParticipant  *currentParticipant;
+@property(readonly, nullable, strong, NS_NONATOMIC_IOSONLY)  GKTurnBasedParticipant  *currentParticipant;
 
 // Developer-defined data representing the current state of the game. This property is nil until loaded by loadMatchDataWithCompletionHandler:
 // The developer can submit updated matchData by passing it into endTurnWithNextParticipant:matchData:completionHandler: or endMatchInTurnWithMatchData:completionHandler:
-@property(readonly, nullable, retain, NS_NONATOMIC_IOSONLY)  NSData                  *matchData;
+@property(readonly, nullable, strong, NS_NONATOMIC_IOSONLY)  NSData                  *matchData;
 
 // If the developer wishes to display a message in GKTurnBasedMatchmakerViewController at the end of a turn or end of the match.  Only the current participant can set this.
 // Sets a localizable mesage that will be localized on the receiver side if the game is installed and on the sender side as a fallback.
@@ -141,13 +142,13 @@ NS_CLASS_AVAILABLE(10_8, 5_0) __WATCHOS_AVAILABLE(3_0)
 @property(readonly, NS_NONATOMIC_IOSONLY)          NSUInteger              matchDataMaximumSize NS_AVAILABLE(10_8, 6_0) __WATCHOS_AVAILABLE(3_0);
 
 // exchanges that are in progress on this match.  Once an exchange has completed and has been resolved by merging it into the match data by the current turn holder then it will be removed from this list
-@property(readonly, nullable, retain, NS_NONATOMIC_IOSONLY)  NSArray<GKTurnBasedExchange *>                 *exchanges NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
+@property(readonly, nullable, strong, NS_NONATOMIC_IOSONLY)  NSArray<GKTurnBasedExchange *>                 *exchanges NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
 
 // returns the exchanges that currently await a reply from the local player
-@property(readonly, nullable, retain, NS_NONATOMIC_IOSONLY)  NSArray<GKTurnBasedExchange *>                 *activeExchanges NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
+@property(readonly, nullable, strong, NS_NONATOMIC_IOSONLY)  NSArray<GKTurnBasedExchange *>                 *activeExchanges NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
 
 // returns the exchanges that have been completed and need to be merged by the local participant.  This will be nil unless the local participant is the current turn holder for this match
-@property(readonly, nullable, retain, NS_NONATOMIC_IOSONLY)  NSArray<GKTurnBasedExchange *>                 *completedExchanges NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
+@property(readonly, nullable, strong, NS_NONATOMIC_IOSONLY)  NSArray<GKTurnBasedExchange *>                 *completedExchanges NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
 
 // maximum data allowed for exchange data
 @property(readonly, NS_NONATOMIC_IOSONLY)          NSUInteger              exchangeDataMaximumSize NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
@@ -211,7 +212,9 @@ NS_CLASS_AVAILABLE(10_8, 5_0) __WATCHOS_AVAILABLE(3_0)
 - (void)endMatchInTurnWithMatchData:(NSData*)matchData completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler;
 
 // This will end the match and submit scores and achievements for all participants. Scores should be submitted for all involved players, and multiple scores may be submitted for each to different leaderboards. Earned achievements may also be submitted for any participants. You must set each participant’s matchOutcome before calling this method. All completed exchanges must be resolved or canceled before calling this.
-- (void)endMatchInTurnWithMatchData:(NSData*)matchData scores:(nullable NSArray<GKScore *> *)scores achievements:(nullable NSArray<GKAchievement *> *)achievements completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
+- (void)endMatchInTurnWithMatchData:(NSData*)matchData scores:(nullable NSArray<GKScore *> *)scores achievements:(nullable NSArray<GKAchievement *> *)achievements completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler NS_DEPRECATED(10_10, 11_0, 6_0, 14_0, "pass GKLeaderboardScore to endMatchInTurnWithMatchData:scores:completionHandler instead");
+
+- (void)endMatchInTurnWithMatchData:(NSData*)matchData leaderboardScores:(NSArray<GKLeaderboardScore *> *)scores achievements:(NSArray *)achievements completionHandler:(void(^)(NSError * __nullable error))completionHandler NS_AVAILABLE(11_0, 14_0);
 
 // saves the matchData for the current turn without ending the turn.  If other players have the game running they will receive a handleTurnEventForMatch to indicate that the matchData has changed.  This is useful to initialize the game state for the first player when they take their turn or for updating the turn data due to the user taking an irreversible action within their turn.  All completed exchanges must be resolved or canceled before calling this. If you are using exchanges use saveMergedMatchData instead.  
 - (void)saveCurrentTurnWithMatchData:(NSData *)matchData completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler NS_AVAILABLE(10_8, 6_0) __WATCHOS_AVAILABLE(3_0);
@@ -234,7 +237,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0) __WATCHOS_AVAILABLE(3_0)
              localizableMessageKey:(NSString *)key
                          arguments:(NSArray<NSString *> *)arguments
                  completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
-                 
+
 // deprecated methods
 - (void)endTurnWithNextParticipant:(GKTurnBasedParticipant *)nextParticipant matchData:(NSData*)matchData completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler NS_DEPRECATED(10_8, 10_9, 5_0, 6_0, "Use endTurnWithNextParticipants:... instead") ;
 - (void)participantQuitInTurnWithOutcome:(GKTurnBasedMatchOutcome)matchOutcome nextParticipant:(GKTurnBasedParticipant *)nextParticipant matchData:(NSData*)matchData completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler NS_DEPRECATED(10_8, 10_9, 5_0, 6_0, "Use participantQuitInTurnWithOutcome:nextParticipants:turnTimeout:... instead") ;
@@ -312,7 +315,7 @@ NS_CLASS_DEPRECATED(10_8, 10_10, 5_0, 7_0, "Use registerListener on GKLocalPlaye
 
 + (GKTurnBasedEventHandler *)sharedTurnBasedEventHandler NS_DEPRECATED(10_8, 10_10, 5_0, 7_0);
 
-@property (assign, NS_NONATOMIC_IOSONLY)         NSObject<GKTurnBasedEventHandlerDelegate>    *delegate NS_DEPRECATED(10_8, 10_10, 5_0, 7_0);
+@property (weak, NS_NONATOMIC_IOSONLY)         NSObject<GKTurnBasedEventHandlerDelegate>    *delegate NS_DEPRECATED(10_8, 10_10, 5_0, 7_0);
 
 @end
 

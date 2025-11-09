@@ -1,12 +1,18 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 7D298FF7-DCF8-310A-8612-2CD0D3A40B0A' ]
-platform:        uikitformac
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-maccatalyst
+    value:           6D4D20FD-5A5C-3C1D-B3B3-E2A0C870DB4E
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-maccatalyst
+    value:           E361D306-B6DA-3774-88E6-0BA37299C9A0
 install-name:    '/System/iOSSupport/System/Library/Frameworks/EventKitUI.framework/Versions/A/EventKitUI'
 current-version: 0
 compatibility-version: 0
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _AdjustedColorForBackgroundColor, _AdjustedColorForColor, 
                        _BackgroundColorForCalendarColorWithOpaqueForStyle, _BirthdayImage, 
                        _BirthdayMonthCalendarColor, _BirthdayPadDayViewImage, _BirthdayPadWeekViewImage, 
@@ -16,8 +22,9 @@ exports:
                        _CalDateIntervalShortMonthDayYear, _CalDateIntervalShortMonthYear, 
                        _CalDateIntervalVeryShortMonthDay, _CalDayLongMonthStringForDate, 
                        _CalDetailStringsForCalendarEvent, _CalDetermineWeekStart, 
-                       _CalDisplayStringForAvailability, _CalDisplayStringForNotificationIdentity, 
-                       _CalDisplayStringForTravelTimeUsingShortFormat, _CalDisplayStringLocationUsingFirstCommaSeparatedFragment, 
+                       _CalDisableFocusRingForView, _CalDisplayStringForAvailability, 
+                       _CalDisplayStringForNotificationIdentity, _CalDisplayStringForTravelTimeUsingShortFormat, 
+                       _CalDisplayStringLocationUsingFirstCommaSeparatedFragment, 
                        _CalDisplayStringLocationUsingFirstLine, _CalDisplayStringTravelTimeAndDuration, 
                        _CalDisplayStringTravelToLocationWithRoutingModeAndDuration, 
                        _CalDisplayedStoreTypeTitleForSource, _CalDisplayedTitleForCalendar, 
@@ -68,8 +75,7 @@ exports:
                        _CalStringForTimeWithTZIfDivergent, _CalStringForTimeWithoutDesignator, 
                        _CalStringForWeekdayNoYear, _CalStringForYear, _CalStringMonthDayYearTime, 
                        _CalStringMonthDayYearWithComma, _CalStringVeryShortAbbreviationForMonth, 
-                       _CalStripInlineExchangeAttachmentsFromNotes, _CalStripedImage, 
-                       _CalStripedImageWithLineThickness, _CalSwitchViewToSuperview, 
+                       _CalStripInlineExchangeAttachmentsFromNotes, _CalSwitchViewToSuperview, 
                        _CalTimeDirectionIsLeftToRight, _CalTimeIntervalStringForDates, 
                        _CalTimezoneClarificationStringForDates, _CalTimezonesDivergeAtDate, 
                        _CalTodayChangedNotification, _CalTodayComponents, _CalTodayDate, 
@@ -111,13 +117,13 @@ exports:
                        _EKEventEditViewControllerDidAppear, _EKEventParticipantStatusForDisplay, 
                        _EKEventViewControllerDidAppearNotification, _EKUIApplicationFrame, 
                        _EKUIAttendeeUtils_AttendeeHasResponded, _EKUIAttendeeUtils_ShouldConsiderAttendeeForConflictChecking, 
-                       _EKUIAttendeeUtils_ShouldCountAttendeeAsConflicted, _EKUIContainedControllerIdealWidth, 
-                       _EKUICurrentHeightSizeClassIsCompact, _EKUICurrentHeightSizeClassIsRegular, 
-                       _EKUICurrentWidthSizeClassIsCompact, _EKUICurrentWidthSizeClassIsCompactInViewHierarchy, 
-                       _EKUICurrentWidthSizeClassIsRegular, _EKUICurrentWidthSizeClassIsRegularInViewHierarchy, 
-                       _EKUICurrentWindowHeight, _EKUICurrentWindowHeightWithViewHierarchy, 
-                       _EKUICurrentWindowInterfaceParadigm, _EKUICurrentWindowSize, 
-                       _EKUICurrentWindowSizeParadigm, _EKUICurrentWindowSizeParadigmForViewHierarchy, 
+                       _EKUIAttendeeUtils_ShouldCountAttendeeAsConflicted, _EKUICatalyst, 
+                       _EKUIContainedControllerIdealWidth, _EKUICurrentHeightSizeClassIsCompact, 
+                       _EKUICurrentHeightSizeClassIsRegular, _EKUICurrentWidthSizeClassIsCompact, 
+                       _EKUICurrentWidthSizeClassIsCompactInViewHierarchy, _EKUICurrentWidthSizeClassIsRegular, 
+                       _EKUICurrentWidthSizeClassIsRegularInViewHierarchy, _EKUICurrentWindowHeight, 
+                       _EKUICurrentWindowHeightWithViewHierarchy, _EKUICurrentWindowInterfaceParadigm, 
+                       _EKUICurrentWindowSize, _EKUICurrentWindowSizeParadigm, _EKUICurrentWindowSizeParadigmForViewHierarchy, 
                        _EKUICurrentWindowWidth, _EKUICurrentWindowWidthWithViewHierarchy, 
                        _EKUIDebugPreferences_Notification_ShowInviteesAndMoreRegion, 
                        _EKUIDebugPreferences_Notification_ShowReportAProblemNotificationButton, 
@@ -145,19 +151,21 @@ exports:
                        _EKUIStringForDateInTimeZone, _EKUIStringForRepeatTypeDetail, 
                        _EKUIStringForTimeInTimeZone, _EKUIStringForWeekdayNoYearInTimeZone, 
                        _EKUIStringMonthDayYearTimeInTimeZone, _EKUITimeZoneForChoice, 
+                       _EKUIUnscaledCatalyst, _EKUIUnscaledCatalystTableRowHeightDefault, 
                        _EKUIUseLargeFormatPhoneUI, _EKUIUserFriendlyStringForCLLocation, 
                        _EKUIUsesLargeTextLayout, _EKUIUsesLargeTextYearView, _EKUIUsesRoundedRectsInsteadOfCircles, 
                        _EKUIWidthForWindowSizeParadigm, _EKUIWidthSizeClassForViewHierarchy, 
                        _EKUIWindowInterfaceParadigmForWindowSize, _EKUIWindowSizeParadigmForWindowSize, 
-                       _EventKitUIBundle, _FreeImage, _ImageForAvailabilityType, 
-                       _LightColorForColorWithOpaque, _LightStripeColorForColor, 
-                       _PreferencesTableDoubleRowHeight, _PreferencesTableTripleRowHeight, 
-                       _PresentJunkAlertControllerForEvent, _PresentJunkAlertControllerWithHandler, 
-                       _PresentJunkAlertDialogForEvent, _PresentValidationAlert, 
-                       _PresentValidationAlertWithDefaultTitle, _ScaledCalendarColorDonutImageForColor, 
-                       _ScaledCalendarColorDotImageForColor, _ScaledCalendarColorDotImageForColorNeue, 
-                       _ScaledCalendarColorDotImageForColor_SuggestedEvent, _ScaledCalendarInvitationDot, 
-                       _ScaledCalendarNeedsReplyDot, _ScaledNewTimeProposedDot, _SuggestedLocationDismissImage, 
+                       _EventKitUIBundle, _FreeImage, _IdentityNameFromRecipient, 
+                       _ImageForAvailabilityType, _LightColorForColorWithOpaque, 
+                       _LightStripeColorForColor, _PreferencesTableDoubleRowHeight, 
+                       _PreferencesTableTripleRowHeight, _PresentJunkAlertControllerForEvent, 
+                       _PresentJunkAlertControllerWithHandler, _PresentJunkAlertDialogForEvent, 
+                       _PresentValidationAlert, _PresentValidationAlertWithDefaultTitle, 
+                       _ScaledCalendarColorDonutImageForColor, _ScaledCalendarColorDotImageForColor, 
+                       _ScaledCalendarColorDotImageForColorNeue, _ScaledCalendarColorDotImageForColor_SuggestedEvent, 
+                       _ScaledCalendarInvitationDot, _ScaledCalendarNeedsReplyDot, 
+                       _ScaledNewTimeProposedDot, _SuggestedLocationDismissImage, 
                        _SuggestedLocationDismissImageColor, _TableViewCheckmarkImage, 
                        _TableViewDisclosureIndicatorImage, _TextColorForCalendarColorForStyle, 
                        _TransitImage, _TransitImage_Occurrences, _WalkmanImage, _WalkmanImage_Occurrences, 
@@ -182,20 +190,21 @@ exports:
                        CrossFadeView, EKCalendarChooser, EKCalendarChooserCell, EKCalendarInfo, 
                        EKCurrentTimeMarkerView, EKDayOccurrenceContentPayload, EKDayOccurrencePayloadProvider, 
                        EKDayOccurrenceResizeHandleView, EKDayOccurrenceState, EKDayOccurrenceStringGenerator, 
-                       EKDayOccurrenceTravelTimeView, EKDayOccurrenceView, EKDayOccurrenceViewIterator, 
-                       EKDayPreviewController, EKDayTimeView, EKDayView, EKDayViewContent, 
-                       EKDayViewContentItem, EKDayViewController, EKDayViewItemPath, 
-                       EKEventDetailCell, EKEventEditViewController, EKEventEditor, 
-                       EKEventGestureController, EKEventViewController, EKExpandingTextView, 
-                       EKGroupInfo, EKICSPreviewController, EKLazyDrawingLayer, EKLegacyUIListHeaderCell, 
-                       EKLegacyUIListHeaderCellContentView, EKParticipantForDisplay, 
-                       EKShareePickerViewController, EKShareeViewController, EKStrikethroughLabel, 
-                       EKStringFactory, EKTextViewWithLabelTextMetrics, EKUIAccountErrorDisplayer, 
-                       EKUIAccountErrorsPETTracker, EKUIAccountRefresher, EKUIAutocompletePendingSearch, 
-                       EKUIAutocompleteSearchResult, EKUIBlurryView, EKUICellContentView, 
-                       EKUICellContentViewWithPrimaryAndSecondaryFonts, EKUICenteredTextTableViewCell, 
-                       EKUIConstrainedFontUtilities, EKUIConstrainedFontsTableViewCell, 
-                       EKUICreateEventIntent, EKUICreateEventIntentResponse, EKUICustomRecurrenceViewController, 
+                       EKDayOccurrenceTravelTimeView, EKDayOccurrenceView, EKDayOccurrenceViewFontUtils, 
+                       EKDayOccurrenceViewIterator, EKDayPreviewController, EKDayTimeView, 
+                       EKDayView, EKDayViewContent, EKDayViewContentItem, EKDayViewController, 
+                       EKDayViewItemPath, EKEventDetailCell, EKEventEditViewController, 
+                       EKEventEditor, EKEventGestureController, EKEventViewController, 
+                       EKExpandingTextView, EKGroupInfo, EKICSPreviewController, 
+                       EKLazyDrawingLayer, EKLegacyUIListHeaderCell, EKLegacyUIListHeaderCellContentView, 
+                       EKParticipantForDisplay, EKShareePickerViewController, EKShareeViewController, 
+                       EKStrikethroughLabel, EKStringFactory, EKTextViewWithLabelTextMetrics, 
+                       EKUIAccountErrorDisplayer, EKUIAccountErrorsPETTracker, EKUIAccountRefresher, 
+                       EKUIAutocompletePendingSearch, EKUIAutocompleteSearchResult, 
+                       EKUIBlurryView, EKUICellContentView, EKUICellContentViewWithPrimaryAndSecondaryFonts, 
+                       EKUICenteredTextTableViewCell, EKUIConstrainedFontUtilities, 
+                       EKUIConstrainedFontsTableViewCell, EKUICreateEventIntent, 
+                       EKUICreateEventIntentResponse, EKUICustomRecurrenceViewController, 
                        EKUIDebugPreferences, EKUIDeclineCommentController, EKUIEventActionHandler, 
                        EKUIEventDescriptionGenerator, EKUIEventStatusButtonsView, 
                        EKUIIOSMacUtils, EKUIInviteesViewAlternativeTimeSection, EKUIInviteesViewMessageSendingViewController, 

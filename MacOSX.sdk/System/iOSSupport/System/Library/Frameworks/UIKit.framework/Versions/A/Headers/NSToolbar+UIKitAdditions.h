@@ -21,10 +21,33 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+UIKIT_EXTERN NSToolbarItemIdentifier NSToolbarPrimarySidebarTrackingSeparatorItemIdentifier API_AVAILABLE(ios(14.0));
+UIKIT_EXTERN NSToolbarItemIdentifier NSToolbarSupplementarySidebarTrackingSeparatorItemIdentifier API_AVAILABLE(ios(14.0));
+
+typedef NS_ENUM(NSInteger, UITitlebarSeparatorStyle) {
+    UITitlebarSeparatorStyleAutomatic,
+    UITitlebarSeparatorStyleNone,
+    UITitlebarSeparatorStyleLine,
+    UITitlebarSeparatorStyleShadow
+} API_AVAILABLE(macCatalyst(14.0));
+
 typedef NS_ENUM(NSInteger, UITitlebarTitleVisibility) {
     UITitlebarTitleVisibilityVisible,   // The title will be visible on top of the toolbar if there is one
     UITitlebarTitleVisibilityHidden     // No title will be visible. Window chrome will only appear if there is a toolbar
 } API_AVAILABLE(macCatalyst(13.0));
+
+typedef NS_ENUM(NSInteger, UITitlebarToolbarStyle) {
+    // The default value. The style will be determined by the window's given configuration
+    UITitlebarToolbarStyleAutomatic,
+    // The toolbar will appear below the window title
+    UITitlebarToolbarStyleExpanded,
+    // The toolbar will appear below the window title and the items in the toolbar will attempt to have equal widths when possible
+    UITitlebarToolbarStylePreference,
+    // The window title will appear inline with the toolbar when visible
+    UITitlebarToolbarStyleUnified,
+    // Same as NSWindowToolbarStyleUnified, but with reduced margins in the toolbar allowing more focus to be on the contents of the window
+    UITitlebarToolbarStyleUnifiedCompact
+} API_AVAILABLE(macCatalyst(14.0));
 
 @interface UIWindowScene (NSToolbarAdditions)
 @property (nonatomic, readonly, nullable) UITitlebar *titlebar API_AVAILABLE(macCatalyst(13.0));
@@ -39,6 +62,17 @@ API_AVAILABLE(macCatalyst(13.0))
  Defaults to UITitlebarVisiblityVisible.
  */
 @property UITitlebarTitleVisibility titleVisibility;
+
+/*
+ Specifies how the titlebar area of the window should appear when the window displays an NSToolbar
+ */
+@property (nonatomic) UITitlebarToolbarStyle toolbarStyle API_AVAILABLE(macCatalyst(14.0));
+
+/*
+ Specifies the style of separator displayed between the titlebar and the window's content.
+ The default value is UITitlebarSeparatorStyleAutomatic.
+ */
+@property (nonatomic) UITitlebarSeparatorStyle separatorStyle API_AVAILABLE(macCatalyst(14.0));
 
 /*
  Sets and gets the NSToolbar displayed at the top of the NSWindow associated with this scene

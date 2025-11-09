@@ -73,7 +73,7 @@ struct OSObject_Instantiate_Rpl_Content {
 	kern_return_t __result;
 	uint32_t      __pad;
 	uint64_t      flags;
-	char          classname[64];
+	char          classname[128];
 	uint64_t      methods[0];
 };
 

@@ -23,6 +23,7 @@ UIKIT_EXTERN NSAttributedStringKey const NSForegroundColorAttributeName API_AVAI
 UIKIT_EXTERN NSAttributedStringKey const NSBackgroundColorAttributeName API_AVAILABLE(macos(10.0), ios(6.0));     // UIColor, default nil: no background
 UIKIT_EXTERN NSAttributedStringKey const NSLigatureAttributeName API_AVAILABLE(macos(10.0), ios(6.0));            // NSNumber containing integer, default 1: default ligatures, 0: no ligatures
 UIKIT_EXTERN NSAttributedStringKey const NSKernAttributeName API_AVAILABLE(macos(10.0), ios(6.0));                // NSNumber containing floating point value, in points; amount to modify default kerning. 0 means kerning is disabled.
+UIKIT_EXTERN NSAttributedStringKey const NSTrackingAttributeName API_AVAILABLE(macos(11.0), ios(14.0));          // NSNumber containing floating point value, in points; amount to modify default tracking. 0 means tracking is disabled.
 UIKIT_EXTERN NSAttributedStringKey const NSStrikethroughStyleAttributeName API_AVAILABLE(macos(10.0), ios(6.0));  // NSNumber containing integer, default 0: no strikethrough
 UIKIT_EXTERN NSAttributedStringKey const NSUnderlineStyleAttributeName API_AVAILABLE(macos(10.0), ios(6.0));      // NSNumber containing integer, default 0: no underline
 UIKIT_EXTERN NSAttributedStringKey const NSStrokeColorAttributeName API_AVAILABLE(macos(10.0), ios(6.0));         // UIColor, default nil: same as foreground color

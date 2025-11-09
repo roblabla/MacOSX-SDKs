@@ -26,7 +26,6 @@
 #import <CloudKit/CKShareMetadata.h>
 #import <CloudKit/CKShareParticipant.h>
 #import <CloudKit/CKSubscription.h>
-#import <CloudKit/CKDiscoveredUserInfo.h>
 #import <CloudKit/CKUserIdentity.h>
 #import <CloudKit/CKUserIdentityLookupInfo.h>
 
@@ -46,8 +45,6 @@
 #import <CloudKit/CKModifyRecordZonesOperation.h>
 #import <CloudKit/CKFetchRecordZonesOperation.h>
 #import <CloudKit/CKFetchWebAuthTokenOperation.h>
-#import <CloudKit/CKDiscoverUserInfosOperation.h>
-#import <CloudKit/CKDiscoverAllContactsOperation.h>
 #import <CloudKit/CKDiscoverUserIdentitiesOperation.h>
 #import <CloudKit/CKDiscoverAllUserIdentitiesOperation.h>
 #import <CloudKit/CKFetchShareParticipantsOperation.h>

@@ -31,7 +31,7 @@ typedef NS_ENUM(NSInteger, NWPathStatus) {
 	/*! @const NWPathStatusSatisfiable The path may become satisfied upon
 	 *		a connection attempt. */
 	NWPathStatusSatisfiable = 3,
-} API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+} API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @interface NWPath
@@ -39,27 +39,33 @@ typedef NS_ENUM(NSInteger, NWPathStatus) {
  *		properties of the path that a networking connection will take on the device. For example,
  *		if the path status is NWPathStatusSatisfied, then a connection could use that path.
  */
-API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
+API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface NWPath : NSObject
 
 /*!
  * @property status
  * @discussion The evaluated NWPathStatus of the NWPath.
  */
-@property (readonly) NWPathStatus status API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+@property (nonatomic, readonly) NWPathStatus status API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @property expensive
- * @discussion Returns YES is the path is considered expensive, as when using a cellular data plan.
+ * @discussion Returns YES if the path is considered expensive, as when using a cellular data plan.
  */
-@property (readonly, getter=isExpensive) BOOL expensive API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+@property (nonatomic, readonly, getter=isExpensive) BOOL expensive API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+
+/*!
+ * @property constrained
+ * @discussion Returns YES if the path is considered constrained, as when it is in save data mode.
+ */
+@property (nonatomic, readonly, getter=isConstrained) BOOL constrained API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
 
 /*!
  * @method isEqualToPath:
  * @param path An NWPath object to compare.
  * @return YES if the two path objects have the same content, NO otherwise.
  */
-- (BOOL)isEqualToPath:(NWPath *)path API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+- (BOOL)isEqualToPath:(NWPath *)path API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 @end
 

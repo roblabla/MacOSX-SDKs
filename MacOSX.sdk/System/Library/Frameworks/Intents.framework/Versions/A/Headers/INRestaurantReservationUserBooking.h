@@ -2,7 +2,7 @@
 //  INRestaurantReservationUserBooking.h
 //  Intents
 //
-//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2020 Apple Inc. All rights reserved.
 //
 // This API requires you to work with Apple Maps before your application can use it. For information on how to get started, please go to MapsConnect.
 //
@@ -19,9 +19,10 @@ typedef NS_ENUM (NSUInteger, INRestaurantReservationUserBookingStatus) {
     INRestaurantReservationUserBookingStatusDenied
 };
 
-API_AVAILABLE(ios(10.0))
-API_UNAVAILABLE(macosx, watchos)
 NS_ASSUME_NONNULL_BEGIN
+
+API_AVAILABLE(ios(10.0))
+API_UNAVAILABLE(macos, watchos, tvos)
 @interface INRestaurantReservationUserBooking : INRestaurantReservationBooking <NSCopying>
 
 - (instancetype)initWithRestaurant:(INRestaurant *)restaurant bookingDate:(NSDate *)bookingDate partySize:(NSUInteger)partySize bookingIdentifier:(NSString *)bookingIdentifier guest:(INRestaurantGuest *)guest status:(INRestaurantReservationUserBookingStatus)status dateStatusModified:(NSDate *)dateStatusModified;
@@ -34,4 +35,5 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy, NS_NONATOMIC_IOSONLY) NSDate *dateStatusModified; // date indicating when the status was updated to its current value
 
 @end
+
 NS_ASSUME_NONNULL_END

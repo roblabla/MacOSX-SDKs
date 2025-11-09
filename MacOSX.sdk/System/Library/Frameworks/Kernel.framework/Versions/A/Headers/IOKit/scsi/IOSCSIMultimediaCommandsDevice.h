@@ -204,8 +204,7 @@ class SCSIBlockCommands;
 //-----------------------------------------------------------------------------
 //	Class Declaration
 //-----------------------------------------------------------------------------
-
-class IOSCSIMultimediaCommandsDevice : public IOSCSIPrimaryCommandsDevice
+class __exported IOSCSIMultimediaCommandsDevice : public IOSCSIPrimaryCommandsDevice
 {
 	
 	OSDeclareAbstractStructors ( IOSCSIMultimediaCommandsDevice )

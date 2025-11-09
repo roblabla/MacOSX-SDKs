@@ -1,16 +1,31 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 1254D488-81FE-3018-B6FE-F581B5EFBF6D', 'x86_64: 1254D488-81FE-3018-B6FE-F581B5EFBF6D' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           3EA44751-C9A2-3003-AFF5-6EB19C4D802C
+  - target:          x86_64-maccatalyst
+    value:           3EA44751-C9A2-3003-AFF5-6EB19C4D802C
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           E9EC496B-985D-3C1C-8F28-0E8647F1E303
+  - target:          arm64e-maccatalyst
+    value:           E9EC496B-985D-3C1C-8F28-0E8647F1E303
 install-name:    '/usr/lib/swift/libswiftsimd.dylib'
-current-version: 0
+current-version: 1.3
 swift-abi-version: 7
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftsimd.dylib', '$ld$install_name$os10.11$@rpath/libswiftsimd.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftsimd.dylib', '$ld$install_name$os10.13$@rpath/libswiftsimd.dylib', 
-                       '$ld$install_name$os10.14$@rpath/libswiftsimd.dylib', '$ld$install_name$os10.9$@rpath/libswiftsimd.dylib', 
-                       '_$s4simd10reduce_addySds5SIMD2VySdGF', '_$s4simd10reduce_addySds5SIMD3VySdGF', 
+                       '$ld$install_name$os10.14$@rpath/libswiftsimd.dylib', '$ld$install_name$os10.9$@rpath/libswiftsimd.dylib' ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+    symbols:         [ '_$s4simd10reduce_addySds5SIMD2VySdGF', '_$s4simd10reduce_addySds5SIMD3VySdGF', 
                        '_$s4simd10reduce_addySds5SIMD4VySdGF', '_$s4simd10reduce_addySfs5SIMD2VySfGF', 
                        '_$s4simd10reduce_addySfs5SIMD3VySfGF', '_$s4simd10reduce_addySfs5SIMD4VySfGF', 
                        '_$s4simd10reduce_addys5Int32Vs5SIMD2VyADGF', '_$s4simd10reduce_addys5Int32Vs5SIMD3VyADGF', 

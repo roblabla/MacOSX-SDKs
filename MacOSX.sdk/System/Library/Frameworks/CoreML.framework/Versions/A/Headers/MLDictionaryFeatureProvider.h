@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0))
 ML_EXPORT
-@interface MLDictionaryFeatureProvider : NSObject<MLFeatureProvider, NSFastEnumeration>
+@interface MLDictionaryFeatureProvider : NSObject<MLFeatureProvider, NSFastEnumeration, NSSecureCoding>
 
 /// Dictionary holding the feature values
 @property (readonly, nonatomic) NSDictionary<NSString *, MLFeatureValue *> *dictionary;

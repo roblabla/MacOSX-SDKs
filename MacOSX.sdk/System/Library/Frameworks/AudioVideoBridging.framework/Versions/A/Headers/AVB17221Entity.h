@@ -2,7 +2,7 @@
 //  AVB17221Entity.h
 //  AudioVideoBridging
 //
-//  Copyright (c) 2010-2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2010-2020 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -29,12 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 API_AVAILABLE(macos(10.8))
 @interface AVB17221Entity : NSObject
-{
-	@private
-	io_service_t service;
-	io_object_t interestNotficiation;
-	IONotificationPortRef notificationPort;
-}
+
 
 /*!
 	@property	localEntity
@@ -128,7 +123,7 @@ API_AVAILABLE(macos(10.8))
 	@property	entityDiscovery
 	@abstract	The AVB17221EntityDiscovery object which discovered the entity.
  */
-@property (assign, nullable) AVB17221EntityDiscovery *entityDiscovery;
+@property (weak, nullable) AVB17221EntityDiscovery *entityDiscovery;
 
 @end
 

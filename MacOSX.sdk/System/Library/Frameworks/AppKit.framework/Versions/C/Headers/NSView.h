@@ -24,10 +24,10 @@
 @protocol NSDraggingSource;
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSBitmapImageRep, NSCursor, NSDraggingSession, NSGestureRecognizer, NSGraphicsContext, NSImage, NSScrollView, NSTextInputContext, NSWindow, NSAttributedString;
-@class CIFilter, CALayer, NSScreen, NSShadow, NSTrackingArea;
+@class CIFilter, CALayer, NSScreen, NSShadow, NSTrackingArea, NSLayoutGuide;
 
 // Bitset options for the autoresizingMask
 typedef NS_OPTIONS(NSUInteger, NSAutoresizingMaskOptions) {
@@ -400,7 +400,7 @@ typedef NSInteger NSToolTipTag;
 
 #if __swift__ < 40200
 @interface NSObject (NSLayerDelegateContentsScaleUpdating)
-- (BOOL)layer:(CALayer *)layer shouldInheritContentsScale:(CGFloat)newScale fromWindow:(NSWindow *)window API_DEPRECATED("This is now a method of the NSViewLayerContentScaleDelegate protocol.", macos(10.7,API_TO_BE_DEPRECATED)); // added in 10.7.3
+- (BOOL)layer:(CALayer *)layer shouldInheritContentsScale:(CGFloat)newScale fromWindow:(NSWindow *)window API_DEPRECATED("This is now a method of the NSViewLayerContentScaleDelegate protocol.", macos(10.7, 11.0)); // added in 10.7.3
 @end
 #endif
 
@@ -410,7 +410,7 @@ typedef NSInteger NSToolTipTag;
 
 #if __swift__ < 40200
 @interface NSObject(NSToolTipOwner)
-- (NSString *)view:(NSView *)view stringForToolTip:(NSToolTipTag)tag point:(NSPoint)point userData:(nullable void *)data API_DEPRECATED("This is now a method of the NSViewToolTipOwner protocol.", macos(10.0,API_TO_BE_DEPRECATED));
+- (NSString *)view:(NSView *)view stringForToolTip:(NSToolTipTag)tag point:(NSPoint)point userData:(nullable void *)data API_DEPRECATED("This is now a method of the NSViewToolTipOwner protocol.", macos(10.0, 11.0));
 @end
 #endif
 
@@ -543,6 +543,25 @@ APPKIT_EXTERN NSDefinitionPresentationType const NSDefinitionPresentationTypeDic
 @interface NSView (NSTouchBar)
 /* Defaults to NSTouchTypeDirect if linked on or after 10_12, 0 otherwise */
 @property NSTouchTypeMask allowedTouchTypes API_AVAILABLE(macos(10.12.2));
+@end
+
+@interface NSView (NSSafeAreas)
+
+/* Indicates the potentially-obscured distance from each edge of the view (e.g, not behind the window title bar, etc., if present). */
+@property (readonly) NSEdgeInsets safeAreaInsets API_AVAILABLE(macos(11.0));
+
+/* Configurable insets added to insets inherited from the superview (if any), and contributing to self.safeAreaInsets. */
+@property NSEdgeInsets additionalSafeAreaInsets API_AVAILABLE(macos(11.0));
+
+/* This layout guide reflects the safe area for this view (i.e., the frame minus safeAreaInsets), and provides a convenient way to arrange content relative to the safe area using auto layout. */
+@property(readonly, strong) NSLayoutGuide *safeAreaLayoutGuide API_AVAILABLE(macos(11.0));
+
+/* The safe area for this view expressed as a rectangle in the view's coordinate space. */
+@property (readonly) NSRect safeAreaRect API_AVAILABLE(macos(11.0));
+
+/* This layout guide provides the recommended amount of padding for content inside a view. */
+@property (readonly, strong) NSLayoutGuide *layoutMarginsGuide API_AVAILABLE(macos(11.0));
+
 @end
 
 @interface NSView(NSDeprecated)

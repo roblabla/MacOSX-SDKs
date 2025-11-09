@@ -2,7 +2,7 @@
 //  INRelevantShortcut.h
 //  Intents
 //
-//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2020 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INRelevanceProvider.h>
@@ -28,13 +28,13 @@ typedef NS_ENUM(NSInteger, INRelevantShortcutRole) {
      @abstract The relevant shortcut represents information that the user may want to glance at.
      */
     INRelevantShortcutRoleInformation,
-} API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macosx);
+} API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @abstract Lets you provide relevant shortcut to Siri, for display on the Siri Watch Face.
  @discussion Including relevance information allows Siri to make suggestions for shortcuts that the user might be interested in but has not previously performed.
  */
-API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macosx)
+API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macos, tvos)
 @interface INRelevantShortcut : NSObject <NSSecureCoding, NSCopying>
 
 /*!

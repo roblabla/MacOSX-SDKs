@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  * All possible states an MLTask can be in.
  */
-API_AVAILABLE(macos(10.15), ios(13.0))
+API_AVAILABLE(macos(10.15), ios(13.0), tvos(14.0))
 typedef NS_ENUM(NSInteger, MLTaskState) {
     MLTaskStateSuspended = 1,
     MLTaskStateRunning = 2,
@@ -26,7 +26,7 @@ typedef NS_ENUM(NSInteger, MLTaskState) {
  * Class that abstracts state transitions and basic task controls.
  */
 ML_EXPORT
-API_AVAILABLE(macos(10.15), ios(13.0))
+API_AVAILABLE(macos(10.15), ios(13.0), tvos(14.0))
 @interface MLTask : NSObject
 
 // Unique identifier for the task.

@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
 	@class		AVRoutePickerView
 	@abstract	AVRoutePickerView is a subclass of UIView that displays controls for picking playback routes.
+	@discussion	Media from AVPlayer or AVSampleBufferAudioRenderer can be routed to compatible AirPlay destinations.
  */
 
 API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(macos, watchos)
@@ -55,7 +56,7 @@ typedef NS_ENUM(NSInteger, AVRoutePickerViewButtonStyle) {
 
 /*!
  	@property	prioritizesVideoDevices
- 	@abstract	Whether or not the route picker should sort video capable output devices to the top of the list.
+ 	@abstract	Whether or not the route picker should sort video capable output devices to the top of the list. Setting this to YES will cause the route picker view to show a videocentric icon.
  */
 @property (nonatomic) BOOL prioritizesVideoDevices API_AVAILABLE(ios(13.0), tvos(13.0));
 

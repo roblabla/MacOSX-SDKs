@@ -23,32 +23,32 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
 /*!
  * @property instructionClass   Class (CLA) byte.
  */
-@property (nonatomic, readonly, assign) uint8_t instructionClass;
+@property (nonatomic, readonly, assign) uint8_t instructionClass API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
  * @property instructionCode    Instruction (INS) byte.
  */
-@property (nonatomic, readonly, assign) uint8_t instructionCode;
+@property (nonatomic, readonly, assign) uint8_t instructionCode API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
  * @property p1Parameter     P1 parameter.
  */
-@property (nonatomic, readonly, assign) uint8_t p1Parameter;
+@property (nonatomic, readonly, assign) uint8_t p1Parameter API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
  * @property p2Parameter     P2 parameter.
  */
-@property (nonatomic, readonly, assign) uint8_t p2Parameter;
+@property (nonatomic, readonly, assign) uint8_t p2Parameter API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
  * @property data   Data field; nil if data field is absent
  */
-@property (nonatomic, readonly, copy, nullable) NSData *data;
+@property (nonatomic, readonly, copy, nullable) NSData *data API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
  * @property expectedResponseLength     Expected response length (Le).  -1 means no response data field is expected.
  */
-@property (readonly, assign, nonatomic) NSInteger expectedResponseLength;
+@property (readonly, assign, nonatomic) NSInteger expectedResponseLength API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -73,7 +73,7 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
                              p1Parameter:(uint8_t)p1Parameter
                              p2Parameter:(uint8_t)p2Parameter
                                     data:(NSData *)data
-                  expectedResponseLength:(NSInteger)expectedResponseLength;
+                  expectedResponseLength:(NSInteger)expectedResponseLength API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
  * @method initWithData:
@@ -82,7 +82,7 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *
  * @return nil if input data does not contain a valid APDU.
  */
-- (_Nullable instancetype)initWithData:(NSData *)data;
+- (_Nullable instancetype)initWithData:(NSData *)data API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 @end
 
@@ -119,23 +119,23 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
 /*!
  * @discussion The hardware UID of the tag.
  */
-@property (nonatomic, readonly, copy) NSData *identifier;
+@property (nonatomic, readonly, copy) NSData *identifier API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
  * @discussion The optional historical bytes extracted from the Type A Answer To Select response.
  */
-@property (nonatomic, readonly, copy, nullable) NSData *historicalBytes;
+@property (nonatomic, readonly, copy, nullable) NSData *historicalBytes API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
  * @discussion The optional Application Data bytes extracted from the Type B Answer To Request response.
  */
-@property (nonatomic, readonly, copy, nullable) NSData *applicationData;
+@property (nonatomic, readonly, copy, nullable) NSData *applicationData API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
  * @discussion Indicates if @link applicationData @link/ follows proprietary data coding.  If false, the format of the application data is
  *             defined in the ISO14443-3 specification.
  */
-@property (nonatomic, readonly) BOOL proprietaryApplicationDataCoding;
+@property (nonatomic, readonly) BOOL proprietaryApplicationDataCoding API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 /*!
  * @method sendCommandAPDU:completionHandler:

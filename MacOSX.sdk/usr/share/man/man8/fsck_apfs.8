@@ -15,7 +15,6 @@
 .Op Fl o
 .Ar device
 .Sh DESCRIPTION
-.Pp
 The
 .Nm
 utility verifies and repairs APFS containers and volumes.
@@ -39,7 +38,8 @@ to quickly check whether the device is `clean'. If
 .Ar device
 is an APFS volume,
 .Nm
-will quickly check the APFS container and the specified APFS volume. If
+will quickly check the APFS container and the specified APFS volume.
+If
 .Ar device
 is an APFS container,
 .Nm
@@ -50,7 +50,8 @@ Never attempt to repair any damage that is found.
 .It Fl y
 Always attempt to repair any damage that is found.
 .It Fl l
-Enable live verification mode. This makes it possible to check an APFS
+Enable live verification mode.
+This makes it possible to check an APFS
 container which is currently mounted read-write, although no
 repairs can be made.
 .It Fl s
@@ -61,9 +62,9 @@ repairs can be made.
 .It Fl o
 Repair overallocations; please do not run an older fsck_apfs on newer systems with this option.
 .El
-.Sh EXIT VALUES
+.Sh EXIT STATUS
 .Nm
-exits 0 on success, and >0 if error occurs.
+exits with 0 on success, and >0 if error occurs.
 .Sh SEE ALSO
 .Xr fsck 8
 .\".Sh BUGS

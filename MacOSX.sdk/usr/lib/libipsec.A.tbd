@@ -1,11 +1,25 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 1D3D0EF5-D414-3B86-BB3E-8628D77696A8', 'x86_64: 1D3D0EF5-D414-3B86-BB3E-8628D77696A8' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           8410E208-ADEF-3A11-B4D7-3C9311AC4274
+  - target:          x86_64-maccatalyst
+    value:           8410E208-ADEF-3A11-B4D7-3C9311AC4274
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           292E2621-4E3D-3F0B-B5ED-888761E840F3
+  - target:          arm64e-maccatalyst
+    value:           292E2621-4E3D-3F0B-B5ED-888761E840F3
 install-name:    '/usr/lib/libipsec.A.dylib'
 current-version: 300
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ ___ipsec_errcode, ___ipsec_set_strerror, ___libipsec_create_buffer, 
                        ___libipsec_delete_buffer, ___libipsec_flex_debug, ___libipsec_flush_buffer, 
                        ___libipsec_scan_buffer, ___libipsec_scan_bytes, ___libipsec_scan_string, 

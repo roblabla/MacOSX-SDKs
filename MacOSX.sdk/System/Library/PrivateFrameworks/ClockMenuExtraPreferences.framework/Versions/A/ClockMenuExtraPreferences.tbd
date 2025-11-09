@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: BD189F1C-F2AC-306A-902E-3B59590949F8' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           729C4063-938A-35D0-9293-55BC48735475
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           AC4A9E90-5688-38BE-8A02-36ED5D99D7DC
 install-name:    '/System/Library/PrivateFrameworks/ClockMenuExtraPreferences.framework/Versions/A/ClockMenuExtraPreferences'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CLKAppendAMPMLegacyKey, _CLKAppleDatePreferencesChangedNotification, 
                        _CLKDisplaySecondsLegacyKey, _CLKErrorLog, _CLKFlashSeparatorsLegacyKey, 
                        _CLKIsDigitalClockLegacyKey, _CLKLegacyPreferencesDomainName, 

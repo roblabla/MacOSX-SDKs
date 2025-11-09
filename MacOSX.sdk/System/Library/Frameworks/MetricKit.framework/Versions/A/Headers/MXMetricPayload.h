@@ -20,6 +20,8 @@
 #import <MetricKit/MXDiskIOMetric.h>
 #import <MetricKit/MXMemoryMetric.h>
 #import <MetricKit/MXDisplayMetric.h>
+#import <MetricKit/MXAnimationMetric.h>
+#import <MetricKit/MXAppExitMetric.h>
 #import <MetricKit/MXSignpostMetric.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -130,6 +132,18 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos)
 @property (readonly, strong, nullable) MXDisplayMetric *displayMetrics;
 
 /*!
+ @property      animationMetrics
+ @abstract      An object containing animation metrics for this application.
+ */
+@property (readonly, strong, nullable) MXAnimationMetric *animationMetrics API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, tvos, watchos);
+
+/*!
+ @property      applicationExitMetrics
+ @abstract      An object containing exit metrics for this application.
+ */
+@property (readonly, strong, nullable) MXAppExitMetric *applicationExitMetrics API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, tvos, watchos);
+
+/*!
  @property      signpostMetrics
  @abstract      An array containing signpost metrics for this application.
  */
@@ -153,8 +167,14 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos)
  @abstract      Convenience method to return a NSDictionary representation of this payload.
  @result        An NSDictionary object containing the dictionary representation
  */
-- (NSDictionary *)DictionaryRepresentation;
+- (NSDictionary *)DictionaryRepresentation API_DEPRECATED_WITH_REPLACEMENT("Use dictionaryRepresentation", ios(13.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(macos, tvos, watchos);
 
+/*!
+@method        dictionaryRepresentation
+@abstract      Convenience method to return a NSDictionary representation of this payload.
+@result        An NSDictionary object containing the dictionary representation
+*/
+- (NSDictionary *)dictionaryRepresentation API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, tvos, watchos) NS_REFINED_FOR_SWIFT;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -139,6 +139,8 @@ Globals:
   SwiftName: auxiliarySemanticSegmentationHairMatte
 - Name: kCIImageAuxiliarySemanticSegmentationTeethMatte
   SwiftName: auxiliarySemanticSegmentationTeethMatte
+- Name: kCIImageAuxiliarySemanticSegmentationGlassesMatte
+  SwiftName: auxiliarySemanticSegmentationGlassesMatte
 
 # CIImageOptions - Private
 - Name: kCIImageFlipped
@@ -179,6 +181,8 @@ Globals:
   SwiftName: AVPortraitEffectsMatte
 - Name: kCIImageTextScaleFactor
   SwiftName: textScaleFactor
+- Name: kCIImageAuxiliaryHDRGainMap
+  SwiftName: auxiliaryHDRGainMap
 
 # CIContextOption
 - Name: kCIContextOutputColorSpace
@@ -199,6 +203,8 @@ Globals:
   SwiftName: priorityRequestLow
 - Name: kCIContextAllowLowPower
   SwiftName: allowLowPower
+- Name: kCIContextName
+  SwiftName: name
 
 # CIContextOption - Private
 - Name: kCIContextDisableSoftwareFallback
@@ -227,8 +233,6 @@ Globals:
   SwiftName: priorityRequestHigh
 - Name: kCIContextAllowHalfPrecision
   SwiftName: allowHalfPrecision
-- Name: kCIContextName
-  SwiftName: name
 
 # CIImageAutoAdjustmentOption
 - Name: kCIImageAutoAdjustEnhance

@@ -2,7 +2,7 @@
 //  SCNTechnique.h
 //  SceneKit
 //
-//  Copyright © 2014-2019 Apple Inc. All rights reserved.
+//  Copyright © 2014-2020 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SCNShadable.h>
@@ -278,7 +278,7 @@ The values can be a single string referencing a symbol or a semantic or a target
  @property library
  @abstract The Metal library to use to load the Metal programs specified in the technique description. Defaults to nil which corresponds to the default Metal library.
  */
-@property(nonatomic, strong, nullable) id<MTLLibrary> library API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0));
+@property(nonatomic, strong, nullable) id <MTLLibrary> library API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0)) API_UNAVAILABLE(watchos);
 #endif
 
 @end

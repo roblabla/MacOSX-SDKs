@@ -12,9 +12,10 @@
 #import <AppKit/NSParagraphStyle.h>
 #import <AppKit/NSUserInterfaceItemIdentification.h>
 #import <AppKit/NSAccessibilityProtocols.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSAttributedString, NSDraggingImageComponent, NSEvent, NSFont, NSFormatter, NSImage, NSMenu, NSText, NSTextView, NSView;
 
@@ -43,7 +44,6 @@ typedef NS_ENUM(NSUInteger, NSCellAttribute) {
     NSCellIsInsetButton          = 15,
     NSCellAllowsMixedState       = 16
 };
-
 
 typedef NS_ENUM(NSUInteger, NSCellImagePosition) {
     NSNoImage       = 0,
@@ -89,9 +89,10 @@ typedef NS_ENUM(NSUInteger, NSControlTint) {
 };
 
 typedef NS_ENUM(NSUInteger, NSControlSize) {
-    NSControlSizeRegular,
-    NSControlSizeSmall,
-    NSControlSizeMini,
+    NSControlSizeRegular = 0,
+    NSControlSizeSmall = 1,
+    NSControlSizeMini = 2,
+    NSControlSizeLarge API_AVAILABLE(macos(11.0)) = 3
 };
 
 @interface NSCell : NSObject <NSCopying, NSCoding, NSUserInterfaceItemIdentification, NSAccessibilityElement, NSAccessibility>
@@ -323,7 +324,7 @@ APPKIT_EXTERN void NSDrawNinePartImage(NSRect frame, NSImage * _Nullable topLeft
 
 @interface NSCell (NSDeprecated)
 
-@property NSControlTint controlTint API_DEPRECATED("The controlTint property is not respected on 10.14 and later. For custom cells, use +[NSColor controlAccentColor] to respect the user's preferred accent color when drawing.", macos(10.0,API_TO_BE_DEPRECATED));
+@property NSControlTint controlTint API_DEPRECATED("The controlTint property is not respected on 10.14 and later. For custom cells, use +[NSColor controlAccentColor] to respect the user's preferred accent color when drawing.", macos(10.0, 11.0));
 
 // Use formatters instead.  See -[NSCell formatter] and -[NSCell setFormatter:].
 - (NSInteger)entryType API_DEPRECATED("", macos(10.0,10.0));
@@ -341,9 +342,9 @@ APPKIT_EXTERN void NSDrawNinePartImage(NSRect frame, NSImage * _Nullable topLeft
 @end
 
 /* In some appearances, NSBackgroundStyleLight may refer to a state where the background is actually a dark color. Use NSBackgroundStyleNormal instead. */
-static const NSBackgroundStyle NSBackgroundStyleLight API_DEPRECATED_WITH_REPLACEMENT("NSBackgroundStyleNormal", macos(10.5,API_TO_BE_DEPRECATED)) = NSBackgroundStyleNormal;
+static const NSBackgroundStyle NSBackgroundStyleLight API_DEPRECATED_WITH_REPLACEMENT("NSBackgroundStyleNormal", macos(10.5, 11.0)) = NSBackgroundStyleNormal;
 /* NSBackgroundStyleDark is not a reliable indicator of background states with visually dark or saturated colors. Use NSBackgroundStyleEmphasized instead. */
-static const NSBackgroundStyle NSBackgroundStyleDark API_DEPRECATED_WITH_REPLACEMENT("NSBackgroundStyleEmphasized", macos(10.5,API_TO_BE_DEPRECATED)) = NSBackgroundStyleEmphasized;
+static const NSBackgroundStyle NSBackgroundStyleDark API_DEPRECATED_WITH_REPLACEMENT("NSBackgroundStyleEmphasized", macos(10.5, 11.0)) = NSBackgroundStyleEmphasized;
 
 typedef NSControlStateValue NSCellStateValue API_DEPRECATED_WITH_REPLACEMENT("NSControlStateValue", macos(10.0,10.14));
 static const NSControlStateValue NSMixedState API_DEPRECATED_WITH_REPLACEMENT("NSControlStateValueMixed", macos(10.0,10.14)) = NSControlStateValueMixed;
@@ -354,7 +355,7 @@ static const NSControlSize NSRegularControlSize API_DEPRECATED_WITH_REPLACEMENT(
 static const NSControlSize NSSmallControlSize API_DEPRECATED_WITH_REPLACEMENT("NSControlSizeSmall", macos(10.0,10.12)) = NSControlSizeSmall;
 static const NSControlSize NSMiniControlSize API_DEPRECATED_WITH_REPLACEMENT("NSControlSizeMini", macos(10.0,10.12)) = NSControlSizeMini;
 
-APPKIT_EXTERN NSNotificationName NSControlTintDidChangeNotification API_DEPRECATED("Changes to the accent color can be manually observed by implementing -viewDidChangeEffectiveAppearance in a NSView subclass, or by Key-Value Observing the -effectiveAppearance property on NSApplication. Views are automatically redisplayed when the accent color changes.", macos(10.0,API_TO_BE_DEPRECATED));
+APPKIT_EXTERN NSNotificationName NSControlTintDidChangeNotification API_DEPRECATED("Changes to the accent color can be manually observed by implementing -viewDidChangeEffectiveAppearance in a NSView subclass, or by Key-Value Observing the -effectiveAppearance property on NSApplication. Views are automatically redisplayed when the accent color changes.", macos(10.0, 11.0));
 
 enum {
     NSAnyType API_DEPRECATED("Use formatters instead", macos(10.0,10.0)) = 0,

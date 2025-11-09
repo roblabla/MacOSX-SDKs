@@ -9,14 +9,14 @@
 #import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSColor, NSView;
 
 /* Operation types for composite operators */
 typedef NS_ENUM(NSUInteger, NSCompositingOperation) {
     /* Porter-Duff compositing operations */
-    /* http://www.w3.org/TR/2014/CR-compositing-1-20140220/#porterduffcompositingoperators */
+    /* https://www.w3.org/TR/compositing-1/#porterduffcompositingoperators */
     NSCompositingOperationClear,
     NSCompositingOperationCopy,
     NSCompositingOperationSourceOver,
@@ -33,7 +33,7 @@ typedef NS_ENUM(NSUInteger, NSCompositingOperation) {
     NSCompositingOperationPlusLighter,
     
     /* Separable blend-modes */
-    /* http://www.w3.org/TR/2014/CR-compositing-1-20140220/#blendingseparable */
+    /* https://www.w3.org/TR/compositing-1/#blendingseparable */
     NSCompositingOperationMultiply	API_AVAILABLE(macos(10.10)),
     NSCompositingOperationScreen	API_AVAILABLE(macos(10.10)),
     NSCompositingOperationOverlay	API_AVAILABLE(macos(10.10)),
@@ -47,7 +47,7 @@ typedef NS_ENUM(NSUInteger, NSCompositingOperation) {
     NSCompositingOperationExclusion	API_AVAILABLE(macos(10.10)),
     
     /* Non-separable blend-modes */
-    /* http://www.w3.org/TR/2014/CR-compositing-1-20140220/#blendingnonseparable */
+    /* https://www.w3.org/TR/compositing-1/#blendingnonseparable */
     NSCompositingOperationHue		API_AVAILABLE(macos(10.10)),
     NSCompositingOperationSaturation	API_AVAILABLE(macos(10.10)),
     NSCompositingOperationColor		API_AVAILABLE(macos(10.10)),

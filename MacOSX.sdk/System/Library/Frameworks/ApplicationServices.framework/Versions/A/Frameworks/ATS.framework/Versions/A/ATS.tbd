@@ -1,12 +1,29 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: BEBCC736-639C-32A7-9A69-5B322A4F6FF4', 'x86_64: BEBCC736-639C-32A7-9A69-5B322A4F6FF4' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           3852F25E-FED8-3D8F-B42B-2C9D3A245CC5
+  - target:          x86_64-maccatalyst
+    value:           3852F25E-FED8-3D8F-B42B-2C9D3A245CC5
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           C3B726B0-B58B-3561-88D5-4894AE8829F5
+  - target:          arm64e-maccatalyst
+    value:           C3B726B0-B58B-3561-88D5-4894AE8829F5
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/ATS'
 current-version: 236
-parent-umbrella: ApplicationServices
-exports:         
-  - archs:           [ x86_64 ]
+parent-umbrella:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    umbrella:        ApplicationServices
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _AGAddAttribute, _AGBeginIteration, _AGComputeByteCapacity, 
                        _AGComputeByteCapacityV, _AGComputeChecksum, _AGComputeIncrementalCapacity, 
                        _AGComputeIncrementalCapacityV, _AGCongruent, _AGFindAttribute, 

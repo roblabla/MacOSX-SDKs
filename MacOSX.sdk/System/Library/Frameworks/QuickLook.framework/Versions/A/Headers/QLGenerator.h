@@ -55,7 +55,7 @@ typedef struct CF_BRIDGED_TYPE(id) __QLThumbnailRequest *QLThumbnailRequestRef;
  *      @function QLThumbnailRequestGetTypeID
  *      @abstract Returns the CoreFoundation type ID for QLThumbnailRequests.
  */
-QL_EXPORT CFTypeID QLThumbnailRequestGetTypeID() API_DEPRECATED("Use a QLFileThumbnailRequest in a Thumbnail Extension to provide thumbnails for your file types.", macos(10.0, API_TO_BE_DEPRECATED));
+QL_EXPORT CFTypeID QLThumbnailRequestGetTypeID(void) API_DEPRECATED("Use a QLFileThumbnailRequest in a Thumbnail Extension to provide thumbnails for your file types.", macos(10.0, API_TO_BE_DEPRECATED));
 
 /*!
  *      @function QLThumbnailRequestCopyURL
@@ -224,7 +224,7 @@ typedef struct CF_BRIDGED_TYPE(id) __QLPreviewRequest *QLPreviewRequestRef;
  *      @function QLPreviewRequestGetTypeID
  *      @abstract Returns the CoreFoundation type ID for QLPreviewRequests.
  */
-QL_EXPORT CFTypeID QLPreviewRequestGetTypeID() API_DEPRECATED("Use a QLPreviewingController in a Preview Extension to provide previews for your file types.", macos(10.0, API_TO_BE_DEPRECATED));
+QL_EXPORT CFTypeID QLPreviewRequestGetTypeID(void) API_DEPRECATED("Use a QLPreviewingController in a Preview Extension to provide previews for your file types.", macos(10.0, API_TO_BE_DEPRECATED));
 
 /*!
  *      @constant kQLPreviewPropertyDisplayNameKey

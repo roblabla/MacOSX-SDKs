@@ -2,7 +2,7 @@
 //  NSFileProviderDomain.h
 //  FileProvider
 //
-//  Copyright © 2017 Apple Inc. All rights reserved.
+//  Copyright © 2017-2020 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -33,7 +33,7 @@ typedef NSString *NSFileProviderDomainIdentifier NS_EXTENSIBLE_STRING_ENUM;
  common directory. That directory path is indicated by the
  @p pathRelativeToDocumentStorage property.
  */
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos)
+FILEPROVIDER_API_AVAILABILITY_V2_V3
 @interface NSFileProviderDomain : NSObject
 
 /**
@@ -48,7 +48,18 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos)
  @param pathRelativeToDocumentStorage a path relative to
  @c NSFileProviderExtension.documentStorageURL.
  */
-- (instancetype)initWithIdentifier:(NSFileProviderDomainIdentifier)identifier displayName:(NSString *)displayName pathRelativeToDocumentStorage:(NSString *)pathRelativeToDocumentStorage;
+- (instancetype)initWithIdentifier:(NSFileProviderDomainIdentifier)identifier displayName:(NSString *)displayName pathRelativeToDocumentStorage:(NSString *)pathRelativeToDocumentStorage FILEPROVIDER_API_AVAILABILITY_V2;
+
+/**
+ Initialize a new NSFileProviderDomain
+
+ The file provider extension implementation can pick any @c identifier as it sees
+ fit to identify the group of items.
+
+ @param displayName a user visible string representing the group of items the
+ file provider extension is using.
+ */
+- (instancetype)initWithIdentifier:(NSFileProviderDomainIdentifier)identifier displayName:(NSString *)displayName FILEPROVIDER_API_AVAILABILITY_V3;
 
 /**
  The identifier - as provided by the file provider extension.
@@ -64,25 +75,47 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos)
  The path relative to the document storage of the file provider extension.
  Files belonging to this domains should be stored under this path.
  */
-@property (readonly, copy) NSString *pathRelativeToDocumentStorage;
+@property (readonly, copy) NSString *pathRelativeToDocumentStorage FILEPROVIDER_API_AVAILABILITY_V2;
 
 
-/* If set, the domain is present, but disconnected from its extension.
+/** If set, the domain is present, but disconnected from its extension.
  In this state, the user continues to be able to browse the domain's contents,
  but the extension doesn't receive updates on modifications to the files, nor is
  it consulted to update folder's contents.
 
- The disconnected state can be modified on an existing domain by recreating a domain
- with the same identifier, then passing it to addDomain.
+ The disconnected state can be modified on an existing domain via the disconnectWithReason method
+ on NSFileProviderManager.
  */
-@property (readwrite, getter=isDisconnected) BOOL disconnected API_UNAVAILABLE(watchos, tvos) API_UNAVAILABLE(ios, macos);
+@property (readonly, getter=isDisconnected) BOOL disconnected FILEPROVIDER_API_AVAILABILITY_V3;
+
+/** If user has disabled this domain from Files.app on iOS or System Preferences on macOS, this will bet set
+ to NO.
+*/
+@property (readonly) BOOL userEnabled FILEPROVIDER_API_AVAILABILITY_V3;
+
+/** If this domain is not user visible.
+
+ Typically, this can be used for dry-run migration. The files are still on disk though.
+*/
+@property (readwrite, assign, getter=isHidden) BOOL hidden FILEPROVIDER_API_AVAILABILITY_V3;
 
 @end
 
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos)
+FILEPROVIDER_API_AVAILABILITY_V2
 @interface NSFileProviderExtension (NSFileProviderDomain)
 @property(nonatomic, readonly, nullable) NSFileProviderDomain *domain;
 @end
+
+/** Posted when any domain changed.
+
+Interested client should then call `+[NSFileProviderManager getDomainsWithCompletionHandler:]` and see
+ what changed.
+
+ Note, this notification starts to be posted only after `+[NSFileProviderManager getDomainsWithCompletionHandler:]` is
+ called.
+ */
+FOUNDATION_EXPORT NSNotificationName const NSFileProviderDomainDidChange
+FILEPROVIDER_API_AVAILABILITY_V3;
 
 NS_ASSUME_NONNULL_END
 

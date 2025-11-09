@@ -1,19 +1,22 @@
+#if !__has_include(<AVFCore/AVAssetWriter.h>)
 /*
 	File:  AVAssetWriter.h
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2018 Apple Inc. All rights reserved.
+	Copyright 2010-2020 Apple Inc. All rights reserved.
 
 */
 
 #import <AVFoundation/AVBase.h>
 #import <AVFoundation/AVMediaFormat.h>
 #import <AVFoundation/AVMediaSelectionGroup.h>
+#import <AVFoundation/AVAssetSegmentReport.h>
 #import <Foundation/Foundation.h>
 #import <CoreMedia/CMBase.h>
 #import <CoreMedia/CMTime.h>
 #import <CoreMedia/CMSampleBuffer.h>
+#import <UniformTypeIdentifiers/UTType.h>
 
 @class AVAssetWriterInput;
 @class AVMetadataItem;
@@ -109,11 +112,30 @@ AV_INIT_UNAVAILABLE
 - (nullable instancetype)initWithURL:(NSURL *)outputURL fileType:(AVFileType)outputFileType error:(NSError * _Nullable * _Nullable)outError NS_DESIGNATED_INITIALIZER;
 
 /*!
+ @method initWithContentType:
+ @abstract
+	Creates an instance of AVAssetWriter configured to output segment data in a specified container format.
+
+ @param outputContentType
+	A UTType indicating the format of the segment data to be output.
+ @result
+	An instance of AVAssetWriter.
+
+ @discussion
+	Clients that want to receive segment data through the -assetWriter:didOutputSegmentData:segmentType:segmentReport: or -assetWriter:didOutputSegmentData:segmentType: delegate method should use this initializer instead of -initWithURL:fileType:error:.
+
+	Clients may use +typeWithIdentifier: with a UTI to create an instance of UTType. See <UniformTypeIdentifiers/UTType.h>.
+
+	UTIs for container formats that can be output are declared in AVMediaFormat.h.
+ */
+- (instancetype)initWithContentType:(UTType *)outputContentType NS_DESIGNATED_INITIALIZER API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
+
+/*!
  @property outputURL
  @abstract
 	The location of the file for which the instance of AVAssetWriter was initialized for writing.
  @discussion
-	You may use UTTypeCopyPreferredTagWithClass(outputFileType, kUTTagClassFilenameExtension) to obtain an appropriate path extension for the outputFileType you have specified. For more information about UTTypeCopyPreferredTagWithClass and kUTTagClassFilenameExtension, on iOS see <MobileCoreServices/UTType.h> and on Mac OS X see <LaunchServices/UTType.h>.
+	You may use UTTypeCopyPreferredTagWithClass(outputFileType, kUTTagClassFilenameExtension) to obtain an appropriate path extension for the outputFileType you have specified. For more information about UTTypeCopyPreferredTagWithClass and kUTTagClassFilenameExtension, on iOS see <CoreServices/UTType.h> and on Mac OS X see <LaunchServices/UTType.h>.
  */
 @property (nonatomic, copy, readonly) NSURL *outputURL;
 
@@ -374,6 +396,36 @@ AV_INIT_UNAVAILABLE
 @property (nonatomic) CMTime movieFragmentInterval;
 
 /*!
+ @property initialMovieFragmentSequenceNumber
+ @abstract
+	For file types that support movie fragments, specifies the initial movie fragment sequence number.
+
+ @discussion
+	The value must be equal to or greater than 1.
+
+	The default value is 1.
+
+	Note that if you combine movie fragments produced by an instance of AVAssetWriter with additional movie fragments, produced either by a different instance of AVAssetWriter or by some other means, it is necessary to ensure that movie fragment sequence numbers increase monotonically across the entire combined collection, in temporal order.
+
+	This property cannot be set after writing has started.
+ */
+@property (nonatomic) NSInteger initialMovieFragmentSequenceNumber API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
+
+/*!
+ @property producesCombinableFragments
+ @abstract
+	For file types that support fragmented MPEG-4, specifies whether the movie fragments should be produced in way that makes them suitable for combining with movie fragments produced by one or more other instances of AVAssetWriter into a single fragment stream of uniform encoding.
+
+ @discussion
+	The default value is NO.
+
+	When multiple instances of AVAssetWriter are used to produce distinct streams that complement each other, for example to create HLS encoding or bitrate variants, it’s not necessary to set this property to YES.
+
+	This property cannot be set after writing has started.
+ */
+@property (nonatomic) BOOL producesCombinableFragments API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
+
+/*!
  @property overallDurationHint
  @abstract
 	For file types that support movie fragments, provides a hint of the final duration of the file to be written
@@ -519,4 +571,144 @@ AV_INIT_UNAVAILABLE
 
 @end
 
+
+@protocol AVAssetWriterDelegate;
+
+@interface AVAssetWriter (AVAssetWriterSegmentation)
+
+/*!
+ @property preferredOutputSegmentInterval
+ @abstract
+	Specifies preferred segment interval.
+
+ @discussion
+	The default value is kCMTimeInvalid, which means that the receiver will choose an appropriate default value. The value can be set to positive numeric or kCMTimeIndefinite.
+	If the value is kCMTimeIndefinite, every time a client calls -flushSegment the receiver outputs a segment data.
+
+	This property cannot be set after writing has started.
+ */
+@property (nonatomic) CMTime preferredOutputSegmentInterval API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
+
+/*!
+ @property initialSegmentStartTime
+ @abstract
+	Specifies start time of initial segment.
+
+ @discussion
+	A numeric time must be set if the value of preferredOutputSegmentInterval property is positive numeric. If not, this property is irrelevant.
+
+	This property cannot be set after writing has started.
+ */
+@property (nonatomic) CMTime initialSegmentStartTime API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
+
+/*!
+ @property outputFileTypeProfile
+ @abstract
+	Specifies a file type profile for the specified file type.
+
+ @discussion
+	The default value is nil, which means that the receiver will choose an appropriate default profile based on the specified file type.
+
+	Clients that want to receive segment data that is suitable for streaming through the -assetWriter:didOutputSegmentData:segmentType:segmentReport: or -assetWriter:didOutputSegmentData:segmentType: delegate method should set AVFileTypeProfileMPEG4AppleHLS, or AVFileTypeProfileMPEG4CMAFCompliant to require output that is specifically compliant with CMAF format, with AVFileTypeMPEG4 file type.
+
+	File type profiles are declared in AVMediaFormat.h.
+
+	This property cannot be set after writing has started.
+ */
+
+@property (nonatomic, copy, nullable) AVFileTypeProfile outputFileTypeProfile API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
+
+/*!
+ @property delegate
+ @abstract
+	An object that implements one or more of the methods in the AVAssetWriterDelegate protocol.
+
+ @discussion
+	This property cannot be set after writing has started.
+ */
+@property (weak, nullable) id <AVAssetWriterDelegate> delegate API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
+
+/*!
+ @method flushSegment
+ @abstract
+	Closes the current segment and outputs it to the -assetWriter:didOutputSegmentData:segmentType:segmentReport: or -assetWriter:didOutputSegmentData:segmentType: delegate method.
+
+ @discussion
+	Use this method only when the value of preferredOutputSegmentInterval property is set to kCMTimeIndefinite.
+ */
+- (void)flushSegment API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
+
+@end
+
+API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos)
+@protocol AVAssetWriterDelegate <NSObject>
+@optional
+
+/*!
+ @method assetWriter:didOutputSegmentData:segmentType:segmentReport:
+ @abstract
+	A method invoked when a segment data is output.
+
+ @param writer
+	An AVAssetWriter instance.
+ @param segmentData
+	An instance of NSData containing a segment data.
+ @param segmentType
+	A segment type of the segment data. Segment types are declared in AVAssetSegmentReport.h.
+ @param segmentReport
+	An AVAssetSegmentReport instance.
+
+ @discussion
+	If this method is implemented, normal file writing will be suppressed. The instance of AVAssetWriter must be initialized by -initWithContentType: initializer.
+	Then, clients append media data to AVAssetWriterInputs added to the receiver, call -markAsFinished for each input to mark the input as finished and call -finishWritingWithCompletionHandler: to finish writing as is the case in normal file writing.
+
+	Do not use the movieFragmentInterval or shouldOptimizeForNetworkUse properties, as these properties are ignored in this mode of operation.
+
+	Clients that need to reference the NSData outside of the scope of this method must retain or copy it and then release it when they are finished with it.
+
+	The segmentReport provides information on the segment data. If there is no information available to report, the segmentReport may be nil.
+	Clients that do not need information on consecutive segment data should implement the -assetWriter:didOutputSegmentData:segmentType: method instead of this one for greater efficiency, as this will signal the receiver to skip the preparation of segment reports.
+	See more detailed description of AVAssetSegmentReport in AVAssetSegmentReport.h.
+
+	If the file type is AVFileTypeMPEG4 and the outputFileTypeProfile is AVFileTypeProfileMPEG4AppleHLS or AVFileTypeProfileMPEG4CMAFCompliant, when the segmentType is AVAssetSegmentTypeInitialization, the segment contains a 'moov' atom that does not contain any sample tables other than the sample descriptions, and is suitable for use as an initialization segment for the following segment data sequences.
+	When the segmentType is AVAssetSegmentTypeSeparable, the segment contains a 'moof' atom  that contains one 'moof' atom followed by one 'mdat' atom.
+
+	1. If the value of preferredOutputSegmentInterval property is positive numeric, when (a sample's output PTS - InitialSegmentStartTime) >= (interval * N) (N = 1, 2, 3...), the receiver waits for next sync sample and outputs a segment data that includes all samples appended since the previous interval to the delegate method when the sync sample appears, so that the next segment can start with the sync sample.
+	In this configuration, passthrough (by passing nil to output settings for AVAssetWriterInputs) and compression are available. The media type of input can be AVMediaTypeVideo or AVMediaTypeAudio.
+	Only one input of each media type can be added for compression and when (a sample's PTS - InitialSegmentStartTime) >= (interval * N) (N = 1, 2, 3...), the sample will be forced to be encoded as sync sample so that the current segment will be closed immediately.
+	For passthrough, only one input can be added.
+
+	2. If the value of preferredOutputSegmentInterval property is kCMTimeIndefinite, every time a client calls -flushSegment the receiver outputs a segment data that includes all samples appended since the previous call to the delegate method.
+	The delegate method may be called asynchronously, on a different thread from the one that calls -flushSegment.
+	In this configuration, only passthrough is available. The media type of input can be AVMediaTypeVideo or AVMediaTypeAudio.
+	Only one input of each media type can be added.
+	The client should call -flushSegment prior to a sync sample so that the next segment can start with the sync sample. Otherwise, it is an error.
+ */
+- (void)assetWriter:(AVAssetWriter *)writer didOutputSegmentData:(NSData *)segmentData segmentType:(AVAssetSegmentType)segmentType segmentReport:(nullable AVAssetSegmentReport *)segmentReport;
+
+/*!
+ @method assetWriter:didOutputSegmentData:segmentType:
+ @abstract
+	A method invoked when a segment data is output.
+
+ @param writer
+	An AVAssetWriter instance.
+ @param segmentData
+	An instance of NSData containing a segment data.
+ @param segmentType
+	A segment type of the segment data. Segment types are declared in AVAssetSegmentReport.h.
+
+ @discussion
+	The usage of this method is same as -assetWriter:didOutputSegmentData:segmentType:segmentReport: except that this method does not deliver AVAssetSegmentReport.
+
+	If clients implement the -assetWriter:didOutputSegmentData:segmentType:segmentReport: method, that method is called instead of this one.
+ */
+- (void)assetWriter:(AVAssetWriter *)writer didOutputSegmentData:(NSData *)segmentData segmentType:(AVAssetSegmentType)segmentType;
+
+@end
+
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCore/AVAssetWriter.h>
+#endif

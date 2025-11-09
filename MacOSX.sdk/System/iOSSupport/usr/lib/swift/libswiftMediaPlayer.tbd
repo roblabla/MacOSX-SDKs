@@ -1,35 +1,20 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: E10123B4-2C41-31FF-80EE-50C67262EE37' ]
-platform:        uikitformac
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-maccatalyst
+    value:           6AA798D4-2D6A-3B78-A9FA-3FC0A19983CC
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-maccatalyst
+    value:           E806A9EB-14EB-3A20-84FF-671D0D93E774
 install-name:    '/System/iOSSupport/usr/lib/swift/libswiftMediaPlayer.dylib'
-current-version: 0
+current-version: 1.1
 swift-abi-version: 7
-exports:         
-  - archs:           [ x86_64 ]
-    symbols:         [ '$ld$install_name$os10.0$@rpath/libswiftMediaPlayer.dylib', 
-                       '$ld$install_name$os10.1$@rpath/libswiftMediaPlayer.dylib', 
-                       '$ld$install_name$os10.2$@rpath/libswiftMediaPlayer.dylib', 
-                       '$ld$install_name$os10.3$@rpath/libswiftMediaPlayer.dylib', 
-                       '$ld$install_name$os11.0$@rpath/libswiftMediaPlayer.dylib', 
-                       '$ld$install_name$os11.1$@rpath/libswiftMediaPlayer.dylib', 
-                       '$ld$install_name$os11.2$@rpath/libswiftMediaPlayer.dylib', 
-                       '$ld$install_name$os11.3$@rpath/libswiftMediaPlayer.dylib', 
-                       '$ld$install_name$os11.4$@rpath/libswiftMediaPlayer.dylib', 
-                       '$ld$install_name$os12.0$@rpath/libswiftMediaPlayer.dylib', 
-                       '$ld$install_name$os12.1$@rpath/libswiftMediaPlayer.dylib', 
-                       '$ld$install_name$os7.0$@rpath/libswiftMediaPlayer.dylib', 
-                       '$ld$install_name$os7.1$@rpath/libswiftMediaPlayer.dylib', 
-                       '$ld$install_name$os8.0$@rpath/libswiftMediaPlayer.dylib', 
-                       '$ld$install_name$os8.1$@rpath/libswiftMediaPlayer.dylib', 
-                       '$ld$install_name$os8.2$@rpath/libswiftMediaPlayer.dylib', 
-                       '$ld$install_name$os8.3$@rpath/libswiftMediaPlayer.dylib', 
-                       '$ld$install_name$os8.4$@rpath/libswiftMediaPlayer.dylib', 
-                       '$ld$install_name$os9.0$@rpath/libswiftMediaPlayer.dylib', 
-                       '$ld$install_name$os9.1$@rpath/libswiftMediaPlayer.dylib', 
-                       '$ld$install_name$os9.2$@rpath/libswiftMediaPlayer.dylib', 
-                       '$ld$install_name$os9.3$@rpath/libswiftMediaPlayer.dylib', 
-                       '_$sSo27MPMusicPlayerPlayParametersC05MediaB0E4fromABs7Decoder_p_tKcfC', 
+exports:
+  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
+    symbols:         [ '_$sSo27MPMusicPlayerPlayParametersC05MediaB0E4fromABs7Decoder_p_tKcfC', 
+                       '_$sSo27MPMusicPlayerPlayParametersC05MediaB0E4fromABs7Decoder_p_tKcfc', 
                        '_$sSo27MPMusicPlayerPlayParametersC05MediaB0E6encode2toys7Encoder_p_tKF', 
                        '_$sSo27MPMusicPlayerPlayParametersCSE05MediaB0Mc', '_$sSo27MPMusicPlayerPlayParametersCSe05MediaB0Mc', 
                        '__swift_FORCE_LOAD_$_swiftMediaPlayer' ]

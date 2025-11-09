@@ -11,13 +11,13 @@
 .\" The following lines are read in generating the apropos(man -k) database. Use only key
 .\" words here as the database is built based on the words here and in the .ND line. 
 .\" Use .Nm macro to designate other names for the documented program.
-.Nd create share points for afp and smb services.
+.Nd create share points for smb services.
 .Sh SYNOPSIS             \" Section Header - required - don't modify
 .Nm
 .Op Fl a Ar <path> [options]                    \" [-a <path>]
 .Op Fl e Ar <share point name> [options]        \" [-a <sharePoint name>]
 .Op Fl r Ar <share point name> \" [-r <sharePoint name>]
-.Op Fl l \" [-l list share poimts]
+.Op Fl l \" [-l list share points]
 .Sh DESCRIPTION          \" Section Header - required - don't modify
 .Pp                      \" Inserts a space
 A list of flags and their descriptions:
@@ -34,32 +34,30 @@ List all existing share point records.
 .Pp
 The following options modify share point record attributes:
 .Bl -tag -width -indent  \" Differs from above in tag removed 
-.It Fl A Ar <afp name> 
-Use customized name <afp name> when using share point with afp.
 .It Fl S Ar <smb name>
 Use customized name <smb name> when using share points with smb.
 .It Fl s Ar <flags> 
-Use this option to enable and disable sharing via afp and smb.
-By default a share point is enabled for afp and smb protocols.
-To enable and disable particular services, combine (binary AND) the following flags as required: \
-100 (enable sharing for afp) and 001 (enable sharing for smb).
+Use this option to enable and disable sharing via smb.
+By default a share point is enabled for smb protocol.
+To enable and disable services, use the following flags as required: \
+001 (enable sharing for smb).
 Specify 000 to turn off sharing of a share point altogether.
 .It Fl g Ar <guest flag> 
-Use this option to enable and disable guest access for afp and smb.
-By default guest access is enabled for afp and smb.
-To enable and disable guest access to particular services, combine (binary AND) the following flags as required: \
-100 (enable guest for afp) and 001 (enable guest for smb).
+Use this option to enable and disable guest access for smb.
+By default guest access is enabled for smb.
+To enable and disable guest access services, use the following flags as required: \
+001 (enable guest for smb).
 Specify 000 to turn off guest access for a share point altogether.
-.It Fl i Ar <inherit privileges flag> 
-Use this option to enable and disable the "inherit privileges" attribute for afp.
-By default "inherit privileges" is enabled for afp.
-To enable "inherit privileges", combine (binary AND) the following flags as required: \
-10 ("inherit privileges" for afp).
-Specify 00 to turn off "inherit privileges" for a share point altogether.
 .It Fl n Ar <customized record name>
 Specify a <customized record name> to be used as the share point record name.
 By default the record name is the name of the directory pointed to by the share point record. 
 This directory is specified by the <path> when the record is created.
+.It Fl R Ar <0/1>
+Make share read only for smb. Specify 1 to enable read only. Specify 0 to disable read only.
+.It Fl E Ar <0/1>
+Make share encrypted for smb v3 and later. Specify 1 to enable encryption. Specify 0 to disable encryption.
+.It Fl f Ar <format>
+Only used when listing share points and only json format is supported.
 .El                      \" Ends the list
 .Pp
 .Sh EXAMPLES
@@ -69,12 +67,11 @@ This directory is specified by the <path> when the record is created.
 .Ed
 This example shows how to create a share point for the directory "/SomePath/ShareThisDirectory":
 .Bd -literal -offset indent
-/usr/sbin/sharing -e ShareThisDirectory -A SP1 -g 101
+/usr/sbin/sharing -e ShareThisDirectory -S SP1 -g 001
 
 .Ed
 This example shows how to edit the share point record created above, 
-adding a customized name "SP1" for afp servies, and enabling guest access only 
-for afp and smb.
+adding a customized name "SP1" for smb services, and enabling guest access for smb.
 .\" .Sh ENVIRONMENT      \" May not be needed
 .\" .Bl -tag -width "ENV_VAR_1" -indent \" ENV_VAR_1 is width of the string ENV_VAR_1
 .\" .It Ev ENV_VAR_1

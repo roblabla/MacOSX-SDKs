@@ -1,10 +1,12 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 82A0263D-4F0D-32F0-8391-1DD1866EB402' ]
-platform:        macosx
-install-name:    '/BuildRoot/Library/Caches/com.apple.xbs/Binaries/GPUDriversNvidia/install/TempContent/Root/System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/NVPTX.dylib'
-exports:         
-  - archs:           [ x86_64 ]
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           82C11138-61B5-3CFA-861F-8A883B929D21
+install-name:    '/AppleInternal/BuildRoot/Library/Caches/com.apple.xbs/Binaries/GPUDriversNvidia/install/TempContent/Root/System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/NVPTX.dylib'
+exports:
+  - targets:         [ x86_64-macos ]
     symbols:         [ _LLVMInitializeNVPTXAsmPrinter, _LLVMInitializeNVPTXBackendAsmPrinter, 
                        _LLVMInitializeNVPTXTarget, _LLVMInitializeNVPTXTargetInfo, 
                        _LLVMInitializeNVPTXTargetMC, _RegAllocNilUsed, __ZN4llvm10LineReader8readLineEj, 
@@ -190,44 +192,44 @@ exports:
                        _createNVCLImageOptimizerPass, _createNVPTXAIRIntrinsicConversionPass, 
                        _createNVPTXAddressSpaceRemapPass, _createNVPTXAppleIRConversionPass, 
                        _createNVPTXReflect, _createNVVMPrintfLoweringPass ]
-    weak-def-symbols: [ __ZN4llvm14object_creatorINSt3__13mapIPKNS_6ModuleENS2_IPKNS_11GlobalValueENS2_INS1_12basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEENS1_6vectorIjNSC_IjEEEENS1_4lessISE_EENSC_INS1_4pairIKSE_SH_EEEEEENSI_IS8_EENSC_INSK_IKS8_SO_EEEEEENSI_IS5_EENSC_INSK_IKS5_ST_EEEEEEEEPvv, 
-                        __ZN4llvm15callDefaultCtorINS_19NVPTXAllocaHoistingEEEPNS_4PassEv, 
-                        __ZTI24AddressSpaceTypeRemapper, __ZTIN4llvm14NVPTXSubtargetE, 
-                        __ZTIN4llvm18ValueMapCallbackVHIPKNS_5ValueENS_6WeakVHENS_14ValueMapConfigIS3_EEEE, 
-                        __ZTIN4llvm18ValueMapCallbackVHIPNS_14GlobalVariableES2_NS_14ValueMapConfigIS2_EEEE, 
-                        __ZTIN4llvm18ValueMapCallbackVHIPNS_8ConstantEPNS_5ValueENS_14ValueMapConfigIS2_EEEE, 
-                        __ZTIN4llvm24NVPTXMachineFunctionInfoE, __ZTIN4llvm2cl11OptionValueINS_5NVPTX12DrvInterfaceEEE, 
-                        __ZTIN4llvm2cl11OptionValueIbEE, __ZTIN4llvm2cl11OptionValueIiEE, 
-                        __ZTIN4llvm2cl11opt_storageINS_5NVPTX12DrvInterfaceELb0ELb0EEE, 
-                        __ZTIN4llvm2cl11opt_storageIbLb1ELb0EEE, __ZTIN4llvm2cl12list_storageINSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEbEE, 
-                        __ZTIN4llvm2cl15OptionValueBaseINS_5NVPTX12DrvInterfaceELb0EEE, 
-                        __ZTIN4llvm2cl15OptionValueBaseIbLb0EEE, __ZTIN4llvm2cl15OptionValueBaseIiLb0EEE, 
-                        __ZTIN4llvm2cl15OptionValueCopyINS_5NVPTX12DrvInterfaceEEE, 
-                        __ZTIN4llvm2cl15OptionValueCopyIbEE, __ZTIN4llvm2cl15OptionValueCopyIiEE, 
-                        __ZTIN4llvm2cl3optINS_5NVPTX12DrvInterfaceELb0ENS0_6parserIS3_EEEE, 
-                        __ZTIN4llvm2cl3optIbLb1ENS0_6parserIbEEEE, __ZTIN4llvm2cl4listINSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEbNS0_6parserIS8_EEEE, 
-                        __ZTIN4llvm2cl6parserINS_5NVPTX12DrvInterfaceEEE, __ZTINSt3__113__vector_baseINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE, 
-                        __ZTINSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTINSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, 
-                        __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                        __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                        __ZTINSt3__120__vector_base_commonILb1EEE, __ZTINSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE, 
-                        __ZTS24AddressSpaceTypeRemapper, __ZTSN4llvm14NVPTXSubtargetE, 
-                        __ZTSN4llvm18ValueMapCallbackVHIPKNS_5ValueENS_6WeakVHENS_14ValueMapConfigIS3_EEEE, 
-                        __ZTSN4llvm18ValueMapCallbackVHIPNS_14GlobalVariableES2_NS_14ValueMapConfigIS2_EEEE, 
-                        __ZTSN4llvm18ValueMapCallbackVHIPNS_8ConstantEPNS_5ValueENS_14ValueMapConfigIS2_EEEE, 
-                        __ZTSN4llvm24NVPTXMachineFunctionInfoE, __ZTSN4llvm2cl11OptionValueINS_5NVPTX12DrvInterfaceEEE, 
-                        __ZTSN4llvm2cl11OptionValueIbEE, __ZTSN4llvm2cl11OptionValueIiEE, 
-                        __ZTSN4llvm2cl11opt_storageINS_5NVPTX12DrvInterfaceELb0ELb0EEE, 
-                        __ZTSN4llvm2cl11opt_storageIbLb1ELb0EEE, __ZTSN4llvm2cl12list_storageINSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEbEE, 
-                        __ZTSN4llvm2cl15OptionValueBaseINS_5NVPTX12DrvInterfaceELb0EEE, 
-                        __ZTSN4llvm2cl15OptionValueBaseIbLb0EEE, __ZTSN4llvm2cl15OptionValueBaseIiLb0EEE, 
-                        __ZTSN4llvm2cl15OptionValueCopyINS_5NVPTX12DrvInterfaceEEE, 
-                        __ZTSN4llvm2cl15OptionValueCopyIbEE, __ZTSN4llvm2cl15OptionValueCopyIiEE, 
-                        __ZTSN4llvm2cl3optINS_5NVPTX12DrvInterfaceELb0ENS0_6parserIS3_EEEE, 
-                        __ZTSN4llvm2cl3optIbLb1ENS0_6parserIbEEEE, __ZTSN4llvm2cl4listINSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEbNS0_6parserIS8_EEEE, 
-                        __ZTSN4llvm2cl6parserINS_5NVPTX12DrvInterfaceEEE, __ZTSNSt3__113__vector_baseINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE, 
-                        __ZTSNSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTSNSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, 
-                        __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                        __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                        __ZTSNSt3__120__vector_base_commonILb1EEE, __ZTSNSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE ]
+    weak-symbols:    [ __ZN4llvm14object_creatorINSt3__13mapIPKNS_6ModuleENS2_IPKNS_11GlobalValueENS2_INS1_12basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEENS1_6vectorIjNSC_IjEEEENS1_4lessISE_EENSC_INS1_4pairIKSE_SH_EEEEEENSI_IS8_EENSC_INSK_IKS8_SO_EEEEEENSI_IS5_EENSC_INSK_IKS5_ST_EEEEEEEEPvv, 
+                       __ZN4llvm15callDefaultCtorINS_19NVPTXAllocaHoistingEEEPNS_4PassEv, 
+                       __ZTI24AddressSpaceTypeRemapper, __ZTIN4llvm14NVPTXSubtargetE, 
+                       __ZTIN4llvm18ValueMapCallbackVHIPKNS_5ValueENS_6WeakVHENS_14ValueMapConfigIS3_EEEE, 
+                       __ZTIN4llvm18ValueMapCallbackVHIPNS_14GlobalVariableES2_NS_14ValueMapConfigIS2_EEEE, 
+                       __ZTIN4llvm18ValueMapCallbackVHIPNS_8ConstantEPNS_5ValueENS_14ValueMapConfigIS2_EEEE, 
+                       __ZTIN4llvm24NVPTXMachineFunctionInfoE, __ZTIN4llvm2cl11OptionValueINS_5NVPTX12DrvInterfaceEEE, 
+                       __ZTIN4llvm2cl11OptionValueIbEE, __ZTIN4llvm2cl11OptionValueIiEE, 
+                       __ZTIN4llvm2cl11opt_storageINS_5NVPTX12DrvInterfaceELb0ELb0EEE, 
+                       __ZTIN4llvm2cl11opt_storageIbLb1ELb0EEE, __ZTIN4llvm2cl12list_storageINSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEbEE, 
+                       __ZTIN4llvm2cl15OptionValueBaseINS_5NVPTX12DrvInterfaceELb0EEE, 
+                       __ZTIN4llvm2cl15OptionValueBaseIbLb0EEE, __ZTIN4llvm2cl15OptionValueBaseIiLb0EEE, 
+                       __ZTIN4llvm2cl15OptionValueCopyINS_5NVPTX12DrvInterfaceEEE, 
+                       __ZTIN4llvm2cl15OptionValueCopyIbEE, __ZTIN4llvm2cl15OptionValueCopyIiEE, 
+                       __ZTIN4llvm2cl3optINS_5NVPTX12DrvInterfaceELb0ENS0_6parserIS3_EEEE, 
+                       __ZTIN4llvm2cl3optIbLb1ENS0_6parserIbEEEE, __ZTIN4llvm2cl4listINSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEbNS0_6parserIS8_EEEE, 
+                       __ZTIN4llvm2cl6parserINS_5NVPTX12DrvInterfaceEEE, __ZTINSt3__113__vector_baseINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE, 
+                       __ZTINSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTINSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, 
+                       __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTINSt3__120__vector_base_commonILb1EEE, __ZTINSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE, 
+                       __ZTS24AddressSpaceTypeRemapper, __ZTSN4llvm14NVPTXSubtargetE, 
+                       __ZTSN4llvm18ValueMapCallbackVHIPKNS_5ValueENS_6WeakVHENS_14ValueMapConfigIS3_EEEE, 
+                       __ZTSN4llvm18ValueMapCallbackVHIPNS_14GlobalVariableES2_NS_14ValueMapConfigIS2_EEEE, 
+                       __ZTSN4llvm18ValueMapCallbackVHIPNS_8ConstantEPNS_5ValueENS_14ValueMapConfigIS2_EEEE, 
+                       __ZTSN4llvm24NVPTXMachineFunctionInfoE, __ZTSN4llvm2cl11OptionValueINS_5NVPTX12DrvInterfaceEEE, 
+                       __ZTSN4llvm2cl11OptionValueIbEE, __ZTSN4llvm2cl11OptionValueIiEE, 
+                       __ZTSN4llvm2cl11opt_storageINS_5NVPTX12DrvInterfaceELb0ELb0EEE, 
+                       __ZTSN4llvm2cl11opt_storageIbLb1ELb0EEE, __ZTSN4llvm2cl12list_storageINSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEbEE, 
+                       __ZTSN4llvm2cl15OptionValueBaseINS_5NVPTX12DrvInterfaceELb0EEE, 
+                       __ZTSN4llvm2cl15OptionValueBaseIbLb0EEE, __ZTSN4llvm2cl15OptionValueBaseIiLb0EEE, 
+                       __ZTSN4llvm2cl15OptionValueCopyINS_5NVPTX12DrvInterfaceEEE, 
+                       __ZTSN4llvm2cl15OptionValueCopyIbEE, __ZTSN4llvm2cl15OptionValueCopyIiEE, 
+                       __ZTSN4llvm2cl3optINS_5NVPTX12DrvInterfaceELb0ENS0_6parserIS3_EEEE, 
+                       __ZTSN4llvm2cl3optIbLb1ENS0_6parserIbEEEE, __ZTSN4llvm2cl4listINSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEEbNS0_6parserIS8_EEEE, 
+                       __ZTSN4llvm2cl6parserINS_5NVPTX12DrvInterfaceEEE, __ZTSNSt3__113__vector_baseINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE, 
+                       __ZTSNSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTSNSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, 
+                       __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTSNSt3__120__vector_base_commonILb1EEE, __ZTSNSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE ]
 ...

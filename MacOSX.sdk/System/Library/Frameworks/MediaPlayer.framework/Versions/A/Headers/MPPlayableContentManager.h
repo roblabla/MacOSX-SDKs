@@ -17,16 +17,16 @@ NS_ASSUME_NONNULL_BEGIN
 /// provides the content manager with a data source, which allows the media player
 /// to browse the media content offered by the application, as well as a delegate,
 /// which allows the media player to relay non-media remote playback commands to the application.
-MP_API(ios(7.1))
-MP_PROHIBITED(tvos, macos, watchos)
+MP_DEPRECATED("Use CarPlay framework", ios(7.1, 14.0))
+MP_UNAVAILABLE(tvos, macos, watchos)
 @interface MPPlayableContentManager : NSObject
 
 @property (nonatomic, weak, nullable) id<MPPlayableContentDataSource> dataSource;
 @property (nonatomic, weak, nullable) id<MPPlayableContentDelegate>   delegate;
-@property (nonatomic, readonly) MPPlayableContentManagerContext *context MP_API(ios(8.4));
+@property (nonatomic, readonly) MPPlayableContentManagerContext *context MP_DEPRECATED("Use CarPlay framework", ios(8.4, 14.0));
 
 /// Tells the content manager which MPContentItems are currently playing based on their identifiers.
-@property (nonatomic, copy) NSArray<NSString *> *nowPlayingIdentifiers MP_API(ios(10.0));
+@property (nonatomic, copy) NSArray<NSString *> *nowPlayingIdentifiers MP_DEPRECATED("Use CarPlay framework", ios(10.0, 14.0));
 
 /// Returns the application's instance of the content manager.
 + (instancetype)sharedContentManager;

@@ -27,7 +27,7 @@ API_AVAILABLE(ios(10.0), macos(10.15))
 // String which can be used to identify the receiver by the developer
 @property (nonatomic, copy, nullable) NSString *interactionIdentifier;
 
-// If true, speech recogition will not send any audio over the Internet
+// If true, speech recognition will not send any audio over the Internet
 // This will reduce accuracy but enables certain applications where it is
 // inappropriate to transmit user speech to a remote service.
 // Default is false

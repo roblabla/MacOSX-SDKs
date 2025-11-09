@@ -12,7 +12,7 @@
 #import <AppKit/NSToolbar.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 typedef NS_ENUM(NSInteger, NSTabViewControllerTabStyle) {
     /// Uses an NSSegmentedControl to show the UI for the tabs. The control is on the top of the view.

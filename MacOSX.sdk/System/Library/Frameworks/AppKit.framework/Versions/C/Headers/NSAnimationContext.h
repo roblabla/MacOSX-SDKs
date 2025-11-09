@@ -8,14 +8,16 @@
 #import <AppKit/AppKitDefines.h>
 #import <Foundation/NSObject.h>
 #import <Foundation/NSDate.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class CAMediaTimingFunction;
 
 API_AVAILABLE(macos(10.5))
 @interface NSAnimationContext : NSObject
+
 + (void)runAnimationGroup:(void (NS_NOESCAPE ^)(NSAnimationContext * context))changes completionHandler:(nullable void (^)(void))completionHandler API_AVAILABLE(macos(10.7));
 
 + (void)runAnimationGroup:(void (NS_NOESCAPE ^)(NSAnimationContext * context))changes API_AVAILABLE(macos(10.12));

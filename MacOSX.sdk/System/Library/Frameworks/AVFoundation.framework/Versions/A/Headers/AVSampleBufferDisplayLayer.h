@@ -1,9 +1,10 @@
+#if !__has_include(<AVFCore/AVSampleBufferDisplayLayer.h>)
 /*
 	File:  AVSampleBufferDisplayLayer.h
 
 	Framework:  AVFoundation
  
-	Copyright 2011-2018 Apple Inc. All rights reserved.
+	Copyright 2011-2020 Apple Inc. All rights reserved.
 
 */
 
@@ -28,6 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 AVF_EXPORT NSString *const AVSampleBufferDisplayLayerFailedToDecodeNotification API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos); // decode failed, see NSError in notification payload
 AVF_EXPORT NSString *const AVSampleBufferDisplayLayerFailedToDecodeNotificationErrorKey API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos); // NSError
+
+AVF_EXPORT NSNotificationName const AVSampleBufferDisplayLayerRequiresFlushToResumeDecodingDidChangeNotification API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos); // see requiresFlushToResumeDecoding property
 
 API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos)
 @interface AVSampleBufferDisplayLayer : CALayer
@@ -105,7 +108,11 @@ API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos)
 					CMSampleBufferGetSampleAttachmentsArray and CFDictionarySetValue. 
 					Attachments with the kCMSampleBufferAttachmentKey_ prefix must be set via
 					CMSetAttachment.
-*/
+ 
+					IMPORTANT NOTE:  When using CMSampleBuffers that wrap CVPixelBuffer, it is important that such CVPixelBuffers be IOSurface-backed.
+					CoreVideo allocates IOSurface-backed CVPixelBuffers when the pixel buffer attribute dictionary passed to CVPixelBufferPoolCreate contains
+					an entry with key kCVPixelBufferIOSurfacePropertiesKey and value being a dictionary (which can be an empty dictionary).
+ */
 - (void)enqueueSampleBuffer:(CMSampleBufferRef)sampleBuffer;
 
 /*!
@@ -126,6 +133,16 @@ API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos)
 					(also known as a key frame or sync sample).
 */
 - (void)flushAndRemoveImage;
+
+/*!
+	@property		requiresFlushToResumeDecoding
+	@abstract		Indicates that the receiver is in a state where it requires a call to -flush to continue decoding frames.
+	@discussion		When the application enters a state where use of video decoder resources is not permissible, the value of this property changes to YES along with the display layer's status changing to AVQueuedSampleBufferRenderingStatusFailed.
+					To resume rendering sample buffers using the display layer after this property's value is YES, clients must first reset the display layer's status to AVQueuedSampleBufferRenderingStatusUnknown. This can be achieved by invoking -flush on the display layer.
+					Clients can track changes to this property via AVSampleBufferDisplayLayerRequiresFlushToResumeDecodingDidChangeNotification.
+					This property is not key value observable.
+*/
+@property (nonatomic, readonly) BOOL requiresFlushToResumeDecoding API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@property		readyForMoreMediaData
@@ -208,3 +225,7 @@ API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos)
 NS_ASSUME_NONNULL_END
 
 #endif  // __has_include(<QuartzCore/CoreAnimation.h>)
+
+#else
+#import <AVFCore/AVSampleBufferDisplayLayer.h>
+#endif

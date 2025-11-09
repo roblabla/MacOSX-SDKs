@@ -136,8 +136,17 @@ extern void             task_deallocate(
 extern void             task_name_deallocate(
 	task_name_t             task_name);
 
+extern void             task_policy_set_deallocate(
+	task_policy_set_t       task_policy_set);
+
+extern void             task_policy_get_deallocate(
+	task_policy_get_t       task_policy_get);
+
 extern void             task_inspect_deallocate(
 	task_inspect_t          task_inspect);
+
+extern void             task_read_deallocate(
+	task_read_t          task_read);
 
 extern void             task_suspension_token_deallocate(
 	task_suspension_token_t token);
@@ -150,6 +159,10 @@ extern void task_ledgers_footprint(ledger_t ledger,
 extern void task_set_memory_ownership_transfer(
 	task_t task,
 	boolean_t value);
+
+#if CONFIG_X86_64_COMPAT
+extern boolean_t task_is_translated(task_t task);
+#endif
 
 __END_DECLS
 

@@ -87,7 +87,7 @@ CF_ENUM(AEEventID) {
 };
 
 
-/*
+/**
  * AEEventSource is defined as an SInt8 for compatability with pascal.
  * Important note: keyEventSourceAttr is returned by AttributePtr as a typeShortInteger.
  * Be sure to pass at least two bytes of storage to AEGetAttributePtr - the result can be
@@ -498,7 +498,7 @@ AERemoteProcessResolverGetProcesses(
 typedef CALLBACK_API( void , AERemoteProcessResolverCallback )(AERemoteProcessResolverRef ref, void *info);
 /*
  *  AERemoteProcessResolverScheduleWithRunLoop()
- *  
+ *
  *  Discussion:
  *    Schedules a resolver for execution on a given runloop in a given
  *    mode.   The resolver will move through various internal states as
@@ -506,30 +506,30 @@ typedef CALLBACK_API( void , AERemoteProcessResolverCallback )(AERemoteProcessRe
  *    completes, either with success or an error condition, the
  *    callback is executed.  There is no explicit unschedule of the
  *    resolver; you must dispose of it to remove it from the run loop.
- *  
+ *
  *  Mac OS X threading:
  *    Thread safe since version 10.3
- *  
+ *
  *  Parameters:
- *    
+ *
  *    ref:
  *      The AERemoteProcessResolverRef to scheduile
- *    
+ *
  *    runLoop:
  *      a CFRunLoop
- *    
+ *
  *    runLoopMode:
  *      a CFString specifying the run loop mode
- *    
+ *
  *    callback:
  *      a callback to be executed when the reolver completes
- *    
+ *
  *    ctx:
  *      a AERemoteProcessResolverContext.  If this parameter is not
  *      NULL, the info field of this structure will be passed to the
  *      callback (otherwise, the callback info parameter will
  *      explicitly be NULL.)
- *  
+ *
  *  Availability:
  *    Mac OS X:         in version 10.3 and later in ApplicationServices.framework
  *    CarbonLib:        not available
@@ -543,63 +543,55 @@ AERemoteProcessResolverScheduleWithRunLoop(
   AERemoteProcessResolverCallback         callback,
   const AERemoteProcessResolverContext *  ctx)               /* can be NULL */ API_AVAILABLE( macos(10.3) ) API_UNAVAILABLE( ios, tvos, watchos );
 
-/*
- *  AEDeterminePermissionToAutomateTarget()
- *
- *  Discussion:
- *    Determines whether the current application is able to send an AppleEvent with the given eventClass and eventID to the
- *	  application described as targetAddressDesc.
- *
- *    Mac OS 10.14 and later impose additional requirements on applications when they send AppleEvents to other applications in order
- *	  to insure that users are aware of and consent to allowing such control or information exchange.  Generally this involves
- *	  the user being prompted in a secure fashion the first time an application attempts to send an AppleEvent to another application.
- *    If the user consents then this application can send events to the target.  If the user does not consent then any future
- *    attempts to send AppleEvents will result in a failure with errAEEventNotPermitted being returned.
- *
- *    Certain AppleEvents are allowed to be sent without prompting the user.  Pass typeWildCard for the eventClass and eventID
- *    to determine if every event is allowed to be sent from this application to the target.
- *
- *    Applications can determine, without sending an AppleEvent to a target application, whether they are allowed to send AppleEvents
- *    to the target with this function.  If askUserIfNeeded is true, and this application does not yet have permission to send
- *    AppleEvents to the target, then the user will be asked if permission can be granted; if askUserIfNeeded is false and permission
- *    has not been granted, then errAEEventWouldRequireUserConsent will be returned.
- *
- *    The target AEAddressDesc must refer to an already running application.
- *
- *  Results
- *
- *    If the current application is permitted to send the given AppleEvent to the target, then noErr will be returned.  If the
- *    current application is not permitted to send the event, errAEEventNotPermitted will be returned.  If the target application
- *    is not running, then procNotFound will be returned.  If askUserIfNeeded is false, and this application is not yet permitted
- *    to send AppleEvents to the target, then errAEEventWouldRequireUserConsent will be returned.
- *
- *  Mac OS X threading:
- *    Thread safe since version 10.14.  Do not call this function on your main thread because it may take arbitrarily long
- *    to return if the user needs to be prompted for consent.
- *
- *  Parameters:
- *
- *    target:
- *      A pointer to an address descriptor. Before calling AEDeterminePermissionToAutomateTarget, you set the descriptor to identify
- *      the target application for the Apple event.  The target address descriptor must refer to a running application.  If
- *      the target application is on another machine, then Remote AppleEvents must be enabled on that machine for the user.
- *
- *    theAEEventClass:
- *      The event class of the Apple event to determine permission for.
- *
- *    theAEEventID:
- *      The event ID of the Apple event to determine permission for.
- *
- *    askUserIfNeeded:
- *      a Boolean; if true, and if this application does not yet have permission to send events to the target application, then
- *		prompt the user to obtain permission.  If false, do not prompt the user.
+/**
+ Determines whether the current application is able to send an AppleEvent with the given eventClass and eventID to the application described as targetAddressDesc.
+
+ Mac OS 10.14 and later impose additional requirements on applications when they send AppleEvents to other applications in order
+ to insure that users are aware of and consent to allowing such control or information exchange.  Generally this involves
+ the user being prompted in a secure fashion the first time an application attempts to send an AppleEvent to another application.
+ If the user consents then this application can send events to the target.  If the user does not consent then any future
+ attempts to send AppleEvents will result in a failure with errAEEventNotPermitted being returned.
+
+ Certain AppleEvents are allowed to be sent without prompting the user.  Pass typeWildCard for the eventClass and eventID
+ to determine if every event is allowed to be sent from this application to the target.
+
+ Applications can determine, without sending an AppleEvent to a target application, whether they are allowed to send AppleEvents
+ to the target with this function.  If askUserIfNeeded is true, and this application does not yet have permission to send
+ AppleEvents to the target, then the user will be asked if permission can be granted; if askUserIfNeeded is false and permission
+ has not been granted, then errAEEventWouldRequireUserConsent will be returned.
+
+ The target AEAddressDesc must refer to an already running application.
+
+ @subsection macOS Threading
+ Thread safe since version 10.14.  Do not call this function on your main thread because it may take arbitrarily long
+ to return if the user needs to be prompted for consent.
+
+ @param target
+    A pointer to an address descriptor. Before calling AEDeterminePermissionToAutomateTarget, you set the descriptor to identify
+    the target application for the Apple event.  The target address descriptor must refer to a running application.  If
+    the target application is on another machine, then Remote AppleEvents must be enabled on that machine for the user.
+
+ @param theAEEventClass
+    The event class of the Apple event to determine permission for.
+
+ @param theAEEventID
+    The event ID of the Apple event to determine permission for.
+
+ @param askUserIfNeeded
+    a Boolean; if true, and if this application does not yet have permission to send events to the target application, then
+	prompt the user to obtain permission.  If false, do not prompt the user.
+
+ @returns If the current application is permitted to send the given AppleEvent to the target, then noErr will be returned.  If the
+ current application is not permitted to send the event, errAEEventNotPermitted will be returned.  If the target application
+ is not running, then procNotFound will be returned.  If askUserIfNeeded is false, and this application is not yet permitted
+ to send AppleEvents to the target, then errAEEventWouldRequireUserConsent will be returned.
  */
 extern OSStatus AEDeterminePermissionToAutomateTarget( const AEAddressDesc* target, AEEventClass theAEEventClass, AEEventID theAEEventID, Boolean askUserIfNeeded ) API_AVAILABLE( macos(10.14) ) API_UNAVAILABLE( ios, tvos, watchos );
 
 #if defined(__MAC_10_14) && __MAC_OS_X_VERSION_MIN_REQUIRED >= __MAC_10_14
-	
+
 	enum {
-		errAEEventWouldRequireUserConsent = -1744, /* Determining whether this can be sent would require prompting the user, and the AppleEvent was sent with kAEDoNotPromptForPermission */
+		errAEEventWouldRequireUserConsent = -1744, ///< Determining whether this can be sent would require prompting the user, and the AppleEvent was sent with kAEDoNotPromptForPermission
 	};
 	
 	/*

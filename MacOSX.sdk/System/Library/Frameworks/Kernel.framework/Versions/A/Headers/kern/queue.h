@@ -198,7 +198,18 @@ struct queue_entry {
 	struct queue_entry      *next;          /* next element */
 	struct queue_entry      *prev;          /* previous element */
 
+#if __arm__ && (__BIGGEST_ALIGNMENT__ > 4)
+/* For the newer ARMv7k ABI where 64-bit types are 64-bit aligned, but pointers
+ * are 32-bit:
+ * Since this type is so often cast to various 64-bit aligned types
+ * aligning it to 64-bits will avoid -wcast-align without needing
+ * to disable it entirely. The impact on memory footprint should be
+ * negligible.
+ */
+} __attribute__ ((aligned(8)));
+#else
 };
+#endif
 
 typedef struct queue_entry      *queue_t;
 typedef struct queue_entry      queue_head_t;
@@ -318,14 +329,7 @@ static __inline__ void
 remque(
 	queue_entry_t elt)
 {
-	queue_entry_t   next_elt, prev_elt;
-
-	__QUEUE_ELT_VALIDATE(elt);
-	next_elt = elt->next;
-	prev_elt = elt->prev; /* next_elt may equal prev_elt (and the queue head) if elt was the only element */
-	next_elt->prev = prev_elt;
-	prev_elt->next = next_elt;
-	__DEQUEUE_ELT_CLEANUP(elt);
+	remqueue(elt);
 }
 
 /*
@@ -492,6 +496,14 @@ re_queue_tail(queue_t que, queue_entry_t elt)
 	     &((elt)->field) != (head); \
 	     elt = _nelt, _nelt = qe_element((elt)->field.next, typeof(*(elt)), field)) \
 
+
+/*
+ *	Macro:		QUEUE_HEAD_INITIALIZER()
+ *	Function:
+ *		Static queue head initializer
+ */
+#define QUEUE_HEAD_INITIALIZER(name) \
+	{ &name, &name }
 
 /*
  *	Macro:		queue_init

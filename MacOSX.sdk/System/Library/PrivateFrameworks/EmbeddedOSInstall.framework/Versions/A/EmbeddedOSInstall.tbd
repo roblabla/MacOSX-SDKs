@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: C3116187-8C90-3372-923A-D24D7376037A' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           29278D2D-BE93-3C2F-B410-38B84C511616
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           DB8C46AD-BF14-35CA-9D40-65B6D37D6131
 install-name:    '/System/Library/PrivateFrameworks/EmbeddedOSInstall.framework/Versions/A/EmbeddedOSInstall'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos ]
     symbols:         [ _AMAuthInstallApAddTag, _AMAuthInstallApApplyRequestRules, 
                        _AMAuthInstallApCopyDescription, _AMAuthInstallApCopyDeviceEntryFromDeviceMap, 
                        _AMAuthInstallApCopyImageTag, _AMAuthInstallApCopyParameters, 
@@ -444,9 +450,7 @@ exports:
                        _DERRSAKeyPairItemSpecs, _DERRSAPrivKeyCRTItemSpecs, _DERRSAPubKeyAppleItemSpecs, 
                        _DERRSAPubKeyPKCS1ItemSpecs, _DERRevokedCertItemSpecs, _DERSignedCertCrlItemSpecs, 
                        _DERSubjPubKeyInfoItemSpecs, _DERTBSCertItemSpecs, _DERTBSCrlItemSpecs, 
-                       _DERUserNoticeItemSpecs, _DERValidityItemSpecs, _EOSErrorDomain, 
-                       _EOSLogObject, _EOSSerialLogObject, _EmbeddedOSInstallVersionNumber, 
-                       _EmbeddedOSInstallVersionString, _FlsParserAddGenericHeader, 
+                       _DERUserNoticeItemSpecs, _DERValidityItemSpecs, _FlsParserAddGenericHeader, 
                        _FlsParserCopyAsData, _FlsParserCopyEbl, _FlsParserCopyFlashPsi, 
                        _FlsParserCopyModemStack, _FlsParserCopyRamPsi, _FlsParserCreate, 
                        _FlsParserReadFromData, _FlsParserReadFromURL, _FlsParserReplaceEbl, 
@@ -576,16 +580,15 @@ exports:
                        __base64encode, __bsdNameForInternalEFISystemPartition, __check_all_are_optional, 
                        __check_is_optional, __digestChunks, __legacy_AMRestoreGetDeviceMapEntryForHardware, 
                        __locationIDToDevice, __mountPointForDevNode, __pathIsRemote, 
-                       __reachability_callback, __writeCombinedBootImage, __writeCombinedBootImageBuf, 
-                       _amai_fclose_file_func, _amai_ferror_file_func, _amai_fill_fopen_filefunc, 
-                       _amai_fopen_file_func, _amai_fread_file_func, _amai_fseek_file_func, 
-                       _amai_ftell_file_func, _amai_fwrite_file_func, _amai_unzClose, 
-                       _amai_unzCloseCurrentFile, _amai_unzGetCurrentFileInfo, _amai_unzGetFilePos, 
-                       _amai_unzGetGlobalComment, _amai_unzGetGlobalInfo, _amai_unzGetLocalExtrafield, 
-                       _amai_unzGetOffset, _amai_unzGoToFilePos, _amai_unzGoToFirstFile, 
-                       _amai_unzGoToNextFile, _amai_unzLocateFile, _amai_unzOpen, 
-                       _amai_unzOpen2, _amai_unzOpenCurrentFile, _amai_unzOpenCurrentFile2, 
-                       _amai_unzOpenCurrentFile3, _amai_unzOpenCurrentFilePassword, 
+                       __writeCombinedBootImage, __writeCombinedBootImageBuf, _amai_fclose_file_func, 
+                       _amai_ferror_file_func, _amai_fill_fopen_filefunc, _amai_fopen_file_func, 
+                       _amai_fread_file_func, _amai_fseek_file_func, _amai_ftell_file_func, 
+                       _amai_fwrite_file_func, _amai_unzClose, _amai_unzCloseCurrentFile, 
+                       _amai_unzGetCurrentFileInfo, _amai_unzGetFilePos, _amai_unzGetGlobalComment, 
+                       _amai_unzGetGlobalInfo, _amai_unzGetLocalExtrafield, _amai_unzGetOffset, 
+                       _amai_unzGoToFilePos, _amai_unzGoToFirstFile, _amai_unzGoToNextFile, 
+                       _amai_unzLocateFile, _amai_unzOpen, _amai_unzOpen2, _amai_unzOpenCurrentFile, 
+                       _amai_unzOpenCurrentFile2, _amai_unzOpenCurrentFile3, _amai_unzOpenCurrentFilePassword, 
                        _amai_unzReadCurrentFile, _amai_unzSetOffset, _amai_unzStringFileNameCompare, 
                        _amai_unz_copyright, _amai_unzeof, _amai_unztell, _amai_zipClose, 
                        _amai_zipCloseFileInZip, _amai_zipCloseFileInZipRaw, _amai_zipOpen, 
@@ -852,35 +855,39 @@ exports:
                        _oidSubjectAltName, _oidSubjectInfoAccess, _oidSubjectKeyIdentifier, 
                        _restored_message_copy_uuid, _restored_message_set_uuid, _restored_message_type_equals, 
                        _set_archive_logger, _sha1_digest_info, _sha384_digest_info, 
-                       _standardErrorDateFormatter, _swapPlatformPathStyle, _tss_add_client_info, 
-                       _tss_close_session, _tss_create_session, _tss_do_log, _tss_err_map, 
-                       _tss_get_hash, _tss_get_hash_from_file, _tss_get_partial_hash, 
-                       _tss_get_partial_hash_from_file, _tss_get_partial_hash_with_phash, 
-                       _tss_image_is_finalized, _tss_image_is_img3, _tss_last_error, 
-                       _tss_lookup_error, _tss_reset_session, _tss_reverse_bytes, 
-                       _tss_sha1, _tss_show_verbose, _tss_stitch_img3, _tss_stitch_img3_from_file, 
-                       _tss_stitch_img3_from_file_to_file, _tss_stitch_img3_to_file, 
-                       _tss_strip_img3_signature, _tss_submit, _tssclient_version ]
+                       _swapPlatformPathStyle, _tss_add_client_info, _tss_close_session, 
+                       _tss_create_session, _tss_do_log, _tss_err_map, _tss_get_hash, 
+                       _tss_get_hash_from_file, _tss_get_partial_hash, _tss_get_partial_hash_from_file, 
+                       _tss_get_partial_hash_with_phash, _tss_image_is_finalized, 
+                       _tss_image_is_img3, _tss_last_error, _tss_lookup_error, _tss_reset_session, 
+                       _tss_reverse_bytes, _tss_sha1, _tss_show_verbose, _tss_stitch_img3, 
+                       _tss_stitch_img3_from_file, _tss_stitch_img3_from_file_to_file, 
+                       _tss_stitch_img3_to_file, _tss_strip_img3_signature, _tss_submit, 
+                       _tssclient_version ]
     objc-classes:    [ AMSupportURLConnectionDelegate, EOSAppleSMC, EOSBootDiagnostics, 
                        EOSBootTagRestoreOperation, EOSBootstrapRecoveryRestoreOperation, 
-                       EOSCleanUpOperation, EOSDevice, EOSDeviceHost, EOSDeviceModeHelper, 
-                       EOSDeviceMonitor, EOSDeviceType, EOSDiagnosticSummary, EOSEFISystemPartition, 
-                       EOSEFISystemPartitionLite, EOSESPInstallationOperation, EOSError, 
-                       EOSFDRData, EOSFDRManager, EOSForceResetRestoreOperation, 
-                       EOSHealingController, EOSLocatePreflightContainerRestoreOperation, 
-                       EOSLogBuffer, EOSMachineSupport, EOSMembootESPRestoreOperation, 
-                       EOSNVRAM, EOSNetworkReachabilityCheckOperation, EOSNetworkReachabilityController, 
+                       EOSCleanUpOperation, EOSDevice, EOSDeviceModeHelper, EOSDeviceMonitor, 
+                       EOSDeviceType, EOSDiagnosticSummary, EOSEFISystemPartition, 
+                       EOSEFISystemPartitionLite, EOSESPInstallationOperation, EOSFDRData, 
+                       EOSForceResetRestoreOperation, EOSHealingController, EOSLocatePreflightContainerRestoreOperation, 
+                       EOSLogBuffer, EOSMembootESPRestoreOperation, EOSNVRAM, EOSNetworkReachabilityCheckOperation, 
                        EOSOperation, EOSPackagePreflightController, EOSPersonalizationRestoreOperation, 
                        EOSPreflightContainer, EOSPreflightContainerManager, EOSPreflightFDRRestoreOperation, 
                        EOSPrepareDeviceRestoreOperation, EOSPurgePreflightContainersOperation, 
-                       EOSRecoveryModeRestoreOperation, EOSRestoreAnalyzer, EOSRestoreBuddyController, 
-                       EOSRestoreBundle, EOSRestoreBundleComparison, EOSRestoreBundleSpecifier, 
-                       EOSRestoreController, EOSRestoreLoginwindowController, EOSRestoreModeRestoreOperation, 
-                       EOSRestoreOSTestAgentController, EOSRestoreOperation, EOSRestoreOperationController, 
-                       EOSRestorePhaseHelper, EOSRestoreRequest, EOSRestoreServiceController, 
-                       EOSSerialLog, EOSStashPreflightContainerOperation, EOSUtilities, 
-                       EOSWaitForBootRestoreOperation ]
+                       EOSRecoveryModeRestoreOperation, EOSRestoreAnalyzer, EOSRestoreBundle, 
+                       EOSRestoreBundleComparison, EOSRestoreBundleSpecifier, EOSRestoreController, 
+                       EOSRestoreModeRestoreOperation, EOSRestoreOperation, EOSRestoreOperationController, 
+                       EOSRestorePhaseHelper, EOSRestoreRequest, EOSSerialLog, EOSStashPreflightContainerOperation, 
+                       EOSUtilities, EOSWaitForBootRestoreOperation ]
     objc-ivars:      [ AMSupportURLConnectionDelegate._data, AMSupportURLConnectionDelegate._error, 
                        AMSupportURLConnectionDelegate.options, AMSupportURLConnectionDelegate.requestComplete, 
                        AMSupportURLConnectionDelegate.response ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _EOSErrorDomain, _EOSLogObject, _EOSSerialLogObject, _EmbeddedOSInstallVersionNumber, 
+                       _EmbeddedOSInstallVersionString, __reachability_callback, 
+                       _standardErrorDateFormatter ]
+    objc-classes:    [ EOSDeviceHost, EOSError, EOSFDRManager, EOSMachineSupport, 
+                       EOSNetworkReachabilityController, EOSRestoreBuddyController, 
+                       EOSRestoreLoginwindowController, EOSRestoreOSTestAgentController, 
+                       EOSRestoreServiceController ]
 ...

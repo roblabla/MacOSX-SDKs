@@ -43,18 +43,18 @@ API_AVAILABLE(macos(10.8))
 	@property	entityDiscovery
 	@abstract	The IEEE Std 1722.1™-2013 entity discovery for the interface.
  */
-@property (retain, readonly, nullable) AVB17221EntityDiscovery *entityDiscovery;
+@property (strong, readonly, nullable) AVB17221EntityDiscovery *entityDiscovery;
 
 /*!
 	@property	aecp
 	@abstract	The IEEE Std 1722.1™-2013 AECP interface for the interface.
  */
-@property (retain, readonly, nullable) AVB17221AECPInterface *aecp;
+@property (strong, readonly, nullable) AVB17221AECPInterface *aecp;
 /*!
 	@property	acmp
 	@abstract	The IEEE Std 1722.1™-2013 ACMP interface for the interface.
  */
-@property (retain, readonly, nullable) AVB17221ACMPInterface *acmp;
+@property (strong, readonly, nullable) AVB17221ACMPInterface *acmp;
 
 /*!
  @method		macAddressForInterfaceNamed:

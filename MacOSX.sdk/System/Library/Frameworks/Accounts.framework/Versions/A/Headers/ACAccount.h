@@ -42,6 +42,7 @@ API_AVAILABLE(ios(5.0), macos(10.8))
 
 // The credential for the account. This property can be set and saved during account creation. It is
 // inaccessible once the account has been saved.
+// WARNING: Backed by a synchronous xpc call to accountsd, not appropriate to call on a UI Application's main thread
 @property (strong, NS_NONATOMIC_IOSONLY)   ACAccountCredential *credential;
 
 @end

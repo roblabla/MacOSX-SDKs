@@ -1,5 +1,5 @@
 /*    NLTagger.h
-      Copyright (c) 2017-2019, Apple Inc. All rights reserved.
+      Copyright (c) 2017-2020, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/Foundation.h>
@@ -45,6 +45,10 @@ NS_CLASS_AVAILABLE(10_14, 12_0)
 */
 - (NSRange)tokenRangeAtIndex:(NSUInteger)characterIndex unit:(NLTokenUnit)unit API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0)) NS_REFINED_FOR_SWIFT;
 
+/* Returns the smallest range covering all tokens for the given unit intersecting the given range.  If range.length == 0, this is equivalent to tokenRangeAtIndex:unit:.
+*/
+- (NSRange)tokenRangeForRange:(NSRange)range unit:(NLTokenUnit)unit API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) NS_REFINED_FOR_SWIFT;
+
 /* Returns the top identified language (if any) for the entire string. Convenience for tagAtIndex: with NLTagSchemeLanguage and NLTaggerUnitDocument.
 */
 @property (nullable, readonly, copy, nonatomic) NLLanguage dominantLanguage API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
@@ -55,7 +59,11 @@ NS_CLASS_AVAILABLE(10_14, 12_0)
 - (nullable NLTag)tagAtIndex:(NSUInteger)characterIndex unit:(NLTokenUnit)unit scheme:(NLTagScheme)scheme tokenRange:(nullable NSRangePointer)tokenRange API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0)) NS_REFINED_FOR_SWIFT;
 - (NSArray<NLTag> *)tagsInRange:(NSRange)range unit:(NLTokenUnit)unit scheme:(NLTagScheme)scheme options:(NLTaggerOptions)options tokenRanges:(NSArray<NSValue *> * _Nullable * _Nullable)tokenRanges API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0)) NS_REFINED_FOR_SWIFT;
 
-/* If clients know the language or orthography for a given portion of the string, they may supply it to the tagger. Otherwise, the tagger will infer the language from the contents of the text. In each case, the range passed in must not extend beyond the end of the tagger's string, or the methods will raise an exception.
+/* In addition, it is possible to obtain multiple hypotheses for a given tag with associated probability scores.  Not all tag schemes will produce more than one hypothesis. */
+
+- (NSDictionary<NLTag, NSNumber *> *)tagHypothesesAtIndex:(NSUInteger)characterIndex unit:(NLTokenUnit)unit scheme:(NLTagScheme)scheme maximumCount:(NSUInteger)maximumCount tokenRange:(nullable NSRangePointer)tokenRange API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) NS_REFINED_FOR_SWIFT;
+
+/* If clients know the language or orthography for a given portion of the string, they may supply it to the tagger (after setting the string itself via 'string' @property). Otherwise, the tagger will infer the language from the contents of the text. In each case, the range passed in must not extend beyond the end of the tagger's string, or the methods will raise an exception. When a new string is set, it resets any language or orthography settings.
 */
 - (void)setLanguage:(NLLanguage)language range:(NSRange)range API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0)) NS_REFINED_FOR_SWIFT;
 - (void)setOrthography:(NSOrthography *)orthography range:(NSRange)range API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0)) NS_REFINED_FOR_SWIFT;

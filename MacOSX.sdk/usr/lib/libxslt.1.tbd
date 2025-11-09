@@ -1,12 +1,26 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: CD9E79B0-159A-3055-B62A-57AB2B445912', 'x86_64: CD9E79B0-159A-3055-B62A-57AB2B445912' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           E35EA0C3-E03B-3350-B261-40BE0392D12A
+  - target:          x86_64-maccatalyst
+    value:           E35EA0C3-E03B-3350-B261-40BE0392D12A
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           14B0EA75-EB11-3F97-81C9-E875CEAE2FF7
+  - target:          arm64e-maccatalyst
+    value:           14B0EA75-EB11-3F97-81C9-E875CEAE2FF7
 install-name:    '/usr/lib/libxslt.1.dylib'
 current-version: 3.26
 compatibility-version: 3
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _xslAddCall, _xslDebugStatus, _xslDropCall, _xslHandleDebugger, 
                        _xsltAddKey, _xsltAddStackElemList, _xsltAddTemplate, _xsltAllocateExtra, 
                        _xsltAllocateExtraCtxt, _xsltApplyAttributeSet, _xsltApplyImports, 
@@ -17,19 +31,17 @@ exports:
                        _xsltCheckExtURI, _xsltCheckRead, _xsltCheckWrite, _xsltChoose, 
                        _xsltCleanupGlobals, _xsltCleanupTemplates, _xsltComment, 
                        _xsltCompileAttr, _xsltCompilePattern, _xsltComputeSortResult, 
-                       _xsltComputingGlobalVarMarker, _xsltCopy, _xsltCopyNamespace, 
-                       _xsltCopyNamespaceList, _xsltCopyOf, _xsltCopyTextString, 
-                       _xsltCopyTree, _xsltCreateRVT, _xsltDebug, _xsltDebugDumpExtensions, 
+                       _xsltCopy, _xsltCopyNamespace, _xsltCopyNamespaceList, _xsltCopyOf, 
+                       _xsltCopyTextString, _xsltCreateRVT, _xsltDebug, _xsltDebugDumpExtensions, 
                        _xsltDebugGetDefaultTrace, _xsltDebugSetDefaultTrace, _xsltDecimalFormatGetByName, 
-                       _xsltDefaultSortFunction, _xsltDefaultTrace, _xsltDoSortFunction, 
-                       _xsltDocDefaultLoader, _xsltDocumentComp, _xsltDocumentElem, 
-                       _xsltDocumentFunction, _xsltDocumentSortFunction, _xsltElement, 
-                       _xsltElementAvailableFunction, _xsltEngineVersion, _xsltEvalAVT, 
-                       _xsltEvalAttrValueTemplate, _xsltEvalGlobalVariables, _xsltEvalOneUserParam, 
-                       _xsltEvalStaticAttrValueTemplate, _xsltEvalTemplateString, 
-                       _xsltEvalUserParams, _xsltEvalXPathPredicate, _xsltEvalXPathString, 
-                       _xsltEvalXPathStringNs, _xsltExtElementLookup, _xsltExtMarker, 
-                       _xsltExtModuleElementLookup, _xsltExtModuleElementPreComputeLookup, 
+                       _xsltDefaultSortFunction, _xsltDoSortFunction, _xsltDocDefaultLoader, 
+                       _xsltDocumentComp, _xsltDocumentElem, _xsltDocumentFunction, 
+                       _xsltDocumentSortFunction, _xsltElement, _xsltElementAvailableFunction, 
+                       _xsltEngineVersion, _xsltEvalAVT, _xsltEvalAttrValueTemplate, 
+                       _xsltEvalGlobalVariables, _xsltEvalOneUserParam, _xsltEvalStaticAttrValueTemplate, 
+                       _xsltEvalTemplateString, _xsltEvalUserParams, _xsltEvalXPathPredicate, 
+                       _xsltEvalXPathString, _xsltEvalXPathStringNs, _xsltExtElementLookup, 
+                       _xsltExtMarker, _xsltExtModuleElementLookup, _xsltExtModuleElementPreComputeLookup, 
                        _xsltExtModuleFunctionLookup, _xsltExtModuleTopLevelLookup, 
                        _xsltExtensionInstructionResultFinalize, _xsltExtensionInstructionResultRegister, 
                        _xsltFindDocument, _xsltFindElemSpaceHandling, _xsltFindTemplate, 

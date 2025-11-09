@@ -1,12 +1,18 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 986879EB-03B3-3CC8-B954-0D08F0F458FD' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           55CD334A-24F5-3C55-BEA1-08CCDDFFBA9B
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           4A186DCA-71DE-3141-B5B3-8B3B90A5F1D9
 install-name:    '/System/Library/PrivateFrameworks/BookCoverUtility.framework/Versions/A/BookCoverUtility'
-current-version: 1266
+current-version: 1460
 compatibility-version: 0
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _BCUCoverEffectsFilterInfoAlternativeAppearanceKey, _BCUCoverEffectsFilterInfoContentRTLKey, 
                        _BCUCoverEffectsFilterInfoCoverEffectStyleKey, _BCUCoverEffectsFilterOptionMinificationFilter, 
                        _BCUCoverEffectsIdentifierAudiobook, _BCUCoverEffectsIdentifierAudiobookNight, 

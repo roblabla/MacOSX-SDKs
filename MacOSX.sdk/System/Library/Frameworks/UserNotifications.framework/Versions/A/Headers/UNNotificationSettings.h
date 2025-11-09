@@ -20,7 +20,10 @@ typedef NS_ENUM(NSInteger, UNAuthorizationStatus) {
     UNAuthorizationStatusAuthorized,
     
     // The application is authorized to post non-interruptive user notifications.
-    UNAuthorizationStatusProvisional __API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0))
+    UNAuthorizationStatusProvisional __API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0)),
+    
+    // The application is temporarily authorized to post notifications. Only available to app clips.
+    UNAuthorizationStatusEphemeral __API_AVAILABLE(ios(14.0)) __API_UNAVAILABLE(macos, watchos, tvos)
 } __API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0), tvos(10.0));
 
 typedef NS_ENUM(NSInteger, UNShowPreviewsSetting) {

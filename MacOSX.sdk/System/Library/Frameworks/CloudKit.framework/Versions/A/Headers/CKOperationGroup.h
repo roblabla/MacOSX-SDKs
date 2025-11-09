@@ -43,7 +43,7 @@ typedef NS_ENUM(NSInteger, CKOperationGroupTransferSize) {
  *  - doing an incremental fetch of data in response to a push notification
  *  - saving several records due to a user saving a calendar event
  *
- *  You associate CKOperationGroups with CKOperations by setting the CKOperation.group property.  Create a new CKOperationGroup instance for each distinct user action.
+ *  You associate @c CKOperationGroup s with@c  CKOperation s by setting the @c CKOperation.group property.  Create a new @c CKOperationGroup instance for each distinct user action.
  */
 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 @interface CKOperationGroup : NSObject <NSSecureCoding>
@@ -51,9 +51,9 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
-/*! @abstract This is an identifier unique to this CKOperationGroup
+/*! @abstract This is an identifier unique to this @c CKOperationGroup
  *
- *  @discussion This value is chosen by the system, and will be unique to this instance of a CKOperationGroup.  This identifier will be sent to Apple's servers, and can be used to identify any server-side logging associated with this operation group.
+ *  @discussion This value is chosen by the system, and will be unique to this instance of a @c CKOperationGroup.  This identifier will be sent to Apple's servers, and can be used to identify any server-side logging associated with this operation group.
  */
 @property (nonatomic, readonly, copy) NSString *operationGroupID;
  
@@ -65,39 +65,40 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 
 /*! @abstract Describes the user action attributed to the operation group.
  *
- *  @discussion `name` should describe the type of work being done.  Some examples:
+ *  @discussion @c name should describe the type of work being done.  Some examples:
  *  "Initial Fetch"
  *  "Incremental Fetch"
  *  "Saving User-Entered Record"
- *  This string will be sent to Apple servers to provide aggregate reporting for CKOperationGroups and therefore must not include personally identifying data.
-*/
+ *  This string will be sent to Apple servers to provide aggregate reporting for @c CKOperationGroup s and therefore must not include personally identifying data.
+ */
 @property (atomic, copy, nullable) NSString *name;
 
 /*! @abstract Describes an application-specific "number of elements" associated with the operation group.
  *
- *  @discussion `quantity` is intended to show the app-specific count of items contained within the operation group.  It is your job to assign meaning to this value.  For example, if an app created an operation group to save 3 calendar events the user had created, the app might want to set this to "3".  This value is not shown to your users, it's meant to aid your development and debugging.  This value will be reported in the CloudKit Dashboard's log entries for all operations associated with this operation group.
+ *  @discussion @c quantity is intended to show the app-specific count of items contained within the operation group.  It is your job to assign meaning to this value.  For example, if an app created an operation group to save 3 calendar events the user had created, the app might want to set this to "3".  This value is not shown to your users, it's meant to aid your development and debugging.  This value will be reported in the CloudKit Dashboard's log entries for all operations associated with this operation group.
  */
 @property (atomic, assign) NSUInteger quantity;
 
 /*! @abstract Estimated size of traffic being uploaded to the CloudKit Server
  *
- *  @discussion Inform the system how much data you plan on transferring.  Obviously, these won't be exact.  Be as accurate as possible, but even an order-of-magnitude estimate is better than no value.  The system will consult these values when scheduling discretionary network requests (see the description of CKOperationConfiguration -> qualityOfService).
+ *  @discussion Inform the system how much data you plan on transferring.  Obviously, these won't be exact.  Be as accurate as possible, but even an order-of-magnitude estimate is better than no value.  The system will consult these values when scheduling discretionary network requests (see the description of @c CKOperationConfiguration.qualityOfService).
  *  Overestimating your workload means that an operation group issuing discretionary network requests may be delayed until network conditions are good.
  *  Underestimating your workload may cause the system to oversaturate a constrained connection, leading to network failures.
- *  You may update after the CKOperationGroup is created.  If it is increased, then subsequent CKOperations associated with this operation group may be delayed until network conditions are good.
- *  Defaults to CKOperationGroupTransferSizeUnknown
+ *  You may update after the @c CKOperationGroup is created.  If it is increased, then subsequent @c CKOperation s associated with this operation group may be delayed until network conditions are good.
+ *  Defaults to @c CKOperationGroupTransferSizeUnknown
  */
 @property (atomic, assign) CKOperationGroupTransferSize expectedSendSize;
 
 /*! @abstract Estimated size of traffic being downloaded from the CloudKit Server
  *
- *  @discussion Inform the system how much data you plan on transferring.  Obviously, these won't be exact.  Be as accurate as possible, but even an order-of-magnitude estimate is better than no value.  The system will consult these values when scheduling discretionary network requests (see the description of CKOperationConfiguration -> qualityOfService).
+ *  @discussion Inform the system how much data you plan on transferring.  Obviously, these won't be exact.  Be as accurate as possible, but even an order-of-magnitude estimate is better than no value.  The system will consult these values when scheduling discretionary network requests (see the description of @c CKOperationConfiguration.qualityOfService).
  *  Overestimating your workload means that an operation group issuing discretionary network requests may be delayed until network conditions are good.
  *  Underestimating your workload may cause the system to oversaturate a constrained connection, leading to network failures.
- *  You may update after the CKOperationGroup is created.  If it is increased, then subsequent CKOperations associated with this operation group may be delayed until network conditions are good.
- *  Defaults to CKOperationGroupTransferSizeUnknown
+ *  You may update after the @c CKOperationGroup is created.  If it is increased, then subsequent @c CKOperation s associated with this operation group may be delayed until network conditions are good.
+ *  Defaults to @c CKOperationGroupTransferSizeUnknown
  */
 @property (atomic, assign) CKOperationGroupTransferSize expectedReceiveSize;
 
 @end
+
 NS_ASSUME_NONNULL_END

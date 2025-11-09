@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 2D5B3D05-70C1-30CF-8107-7FDD76029E4B' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           4ED02ABF-EB02-371D-ABBC-624CA2A96E9F
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           2BF32397-381C-32E9-B2CD-AD6CBE50350E
 install-name:    '/System/Library/PrivateFrameworks/BridgeOSInstall.framework/Versions/A/BridgeOSInstall'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _BOSErrorDomain, _BOSErrorIsNetworkingRelated, _BOSErrorIsTATSUDeclinedAuthorization, 
                        _BOSErrorRecoverySuggestionURL, _BOSErrorUserInfoRecoverySuggestionURLKey, 
                        _BOSErrorUserInfoUpdateBundleIdentifierKey, _BOSLogObject, 
@@ -21,7 +27,8 @@ exports:
                        _BridgeOSInstallOptionLoopbackEnabled, _BridgeOSInstallOptionMinimumRequiredBridgeOSVersion, 
                        _BridgeOSInstallOptionPersonalizationServerURL, _BridgeOSInstallOptionPredicateProductOriginatingCatalogURL, 
                        _BridgeOSInstallOptionShowUI, _BridgeOSInstallOptionTestModeEnabled, 
-                       _BridgeOSInstallStatusKeyEstimatedTimeRemaining, _BridgeOSInstallStatusKeyPercentComplete, 
+                       _BridgeOSInstallStatusKeyDownloadedBytes, _BridgeOSInstallStatusKeyEstimatedTimeRemaining, 
+                       _BridgeOSInstallStatusKeyPercentComplete, _BridgeOSInstallStatusKeyTotalBytes, 
                        _BridgeOSInstallVersionNumber, _BridgeOSInstallVersionString, 
                        __bos_safe_bridge_version_parse, __weak_BOSReporterServiceController, 
                        _standardErrorDateFormatter ]

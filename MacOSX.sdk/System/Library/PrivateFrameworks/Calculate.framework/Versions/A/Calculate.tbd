@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 84F00636-AD8F-3E1E-96FD-500E188D7997' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           B365298B-EEBD-33E7-96DD-E590984B58BC
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           865271F9-3F46-3F08-88AD-036061931E1E
 install-name:    '/System/Library/PrivateFrameworks/Calculate.framework/Versions/A/Calculate'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CalculateExpression, _CalculateExpressionError, _CalculateInternationalExpression, 
                        _CalculatePerformExpression ]
     objc-classes:    [ Converter, CurrencyCache ]

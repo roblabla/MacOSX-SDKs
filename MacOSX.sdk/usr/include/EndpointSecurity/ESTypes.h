@@ -5,10 +5,19 @@
 #include <stdint.h>
 #include <os/base.h>
 
+typedef struct {
+	uint8_t reserved[32];
+} es_event_id_t;
+
 typedef enum {
-	ES_ACTION_TYPE_AUTH
+    ES_ACTION_TYPE_AUTH
   , ES_ACTION_TYPE_NOTIFY
 } es_action_type_t;
+
+typedef enum {
+    ES_SET
+  , ES_CLEAR
+} es_set_or_clear_t;
 
 /**
  * The valid event types recognized by EndpointSecurity
@@ -23,7 +32,8 @@ typedef enum {
  * must use es_respond_auth_result.
  */
 typedef enum {
-	ES_EVENT_TYPE_AUTH_EXEC
+    // The following events are available beginning in macOS 10.15
+    ES_EVENT_TYPE_AUTH_EXEC
   , ES_EVENT_TYPE_AUTH_OPEN
   , ES_EVENT_TYPE_AUTH_KEXTLOAD
   , ES_EVENT_TYPE_AUTH_MMAP
@@ -68,6 +78,68 @@ typedef enum {
   , ES_EVENT_TYPE_AUTH_LINK
   , ES_EVENT_TYPE_NOTIFY_LOOKUP
   , ES_EVENT_TYPE_AUTH_CREATE
+  , ES_EVENT_TYPE_AUTH_SETATTRLIST
+  , ES_EVENT_TYPE_AUTH_SETEXTATTR
+  , ES_EVENT_TYPE_AUTH_SETFLAGS
+  , ES_EVENT_TYPE_AUTH_SETMODE
+  , ES_EVENT_TYPE_AUTH_SETOWNER
+    // The following events are available beginning in macOS 10.15.1
+  , ES_EVENT_TYPE_AUTH_CHDIR
+  , ES_EVENT_TYPE_NOTIFY_CHDIR
+  , ES_EVENT_TYPE_AUTH_GETATTRLIST
+  , ES_EVENT_TYPE_NOTIFY_GETATTRLIST
+  , ES_EVENT_TYPE_NOTIFY_STAT
+  , ES_EVENT_TYPE_NOTIFY_ACCESS
+  , ES_EVENT_TYPE_AUTH_CHROOT
+  , ES_EVENT_TYPE_NOTIFY_CHROOT
+  , ES_EVENT_TYPE_AUTH_UTIMES
+  , ES_EVENT_TYPE_NOTIFY_UTIMES
+  , ES_EVENT_TYPE_AUTH_CLONE
+  , ES_EVENT_TYPE_NOTIFY_CLONE
+  , ES_EVENT_TYPE_NOTIFY_FCNTL
+  , ES_EVENT_TYPE_AUTH_GETEXTATTR
+  , ES_EVENT_TYPE_NOTIFY_GETEXTATTR
+  , ES_EVENT_TYPE_AUTH_LISTEXTATTR
+  , ES_EVENT_TYPE_NOTIFY_LISTEXTATTR
+  , ES_EVENT_TYPE_AUTH_READDIR
+  , ES_EVENT_TYPE_NOTIFY_READDIR
+  , ES_EVENT_TYPE_AUTH_DELETEEXTATTR
+  , ES_EVENT_TYPE_NOTIFY_DELETEEXTATTR
+  , ES_EVENT_TYPE_AUTH_FSGETPATH
+  , ES_EVENT_TYPE_NOTIFY_FSGETPATH
+  , ES_EVENT_TYPE_NOTIFY_DUP
+  , ES_EVENT_TYPE_AUTH_SETTIME
+  , ES_EVENT_TYPE_NOTIFY_SETTIME
+  , ES_EVENT_TYPE_NOTIFY_UIPC_BIND
+  , ES_EVENT_TYPE_AUTH_UIPC_BIND
+  , ES_EVENT_TYPE_NOTIFY_UIPC_CONNECT
+  , ES_EVENT_TYPE_AUTH_UIPC_CONNECT
+  , ES_EVENT_TYPE_AUTH_EXCHANGEDATA
+  , ES_EVENT_TYPE_AUTH_SETACL
+  , ES_EVENT_TYPE_NOTIFY_SETACL
+	// The following events are available beginning in macOS 10.15.4
+  , ES_EVENT_TYPE_NOTIFY_PTY_GRANT
+  , ES_EVENT_TYPE_NOTIFY_PTY_CLOSE
+  , ES_EVENT_TYPE_AUTH_PROC_CHECK
+  , ES_EVENT_TYPE_NOTIFY_PROC_CHECK
+  , ES_EVENT_TYPE_AUTH_GET_TASK
+	// The following events are available beginning in macOS 11.0
+  , ES_EVENT_TYPE_AUTH_SEARCHFS
+  , ES_EVENT_TYPE_NOTIFY_SEARCHFS
+  , ES_EVENT_TYPE_AUTH_FCNTL
+  , ES_EVENT_TYPE_AUTH_IOKIT_OPEN
+  , ES_EVENT_TYPE_AUTH_PROC_SUSPEND_RESUME
+  , ES_EVENT_TYPE_NOTIFY_PROC_SUSPEND_RESUME
+  , ES_EVENT_TYPE_NOTIFY_CS_INVALIDATED
+  , ES_EVENT_TYPE_NOTIFY_GET_TASK_NAME
+  , ES_EVENT_TYPE_NOTIFY_TRACE
+  , ES_EVENT_TYPE_NOTIFY_REMOTE_THREAD_CREATE
+  , ES_EVENT_TYPE_AUTH_REMOUNT
+  , ES_EVENT_TYPE_NOTIFY_REMOUNT
+    // ES_EVENT_TYPE_LAST is not a valid event type but a convenience
+    // value for operating on the range of defined event types.
+    // This value may change between releases and was available
+    // beginning in macOS 10.15
   , ES_EVENT_TYPE_LAST
 } es_event_type_t;
 
@@ -132,6 +204,8 @@ typedef enum {
   , ES_NEW_CLIENT_RESULT_ERR_NOT_PERMITTED
 	///The caller is not running as root
   , ES_NEW_CLIENT_RESULT_ERR_NOT_PRIVILEGED
+	/// The caller has reached the maximum number of allowed simultaneously connected clients
+  , ES_NEW_CLIENT_RESULT_ERR_TOO_MANY_CLIENTS
 } es_new_client_result_t;
 
 /**
@@ -155,7 +229,7 @@ typedef struct {
 } es_token_t;
 
 /**
- * @brief Structure for handling packed blobs of serialized data
+ * @brief Structure for handling strings
  */
 typedef struct {
 	// Length of the `data` field. Equivalent to strlen().

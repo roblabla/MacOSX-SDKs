@@ -241,7 +241,7 @@ extern CFStringRef kCMIOSampleBufferAttachmentKey_MuxedSourcePresentationTimeSta
 	@const		kCMIOSampleBufferAttachmentKey_HostTime
 	@discussion	A CFNumber of kCFNumberSInt64Type. Attached to buffers that are
 				associated with a realtime source or destination that is related
-				to the CPU's hosttime in some way.
+				to the CPU's hosttime in nanoseconds.
 */
 extern CFStringRef kCMIOSampleBufferAttachmentKey_HostTime API_AVAILABLE(macos(10.7));
 

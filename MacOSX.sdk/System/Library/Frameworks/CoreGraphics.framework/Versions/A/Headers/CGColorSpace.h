@@ -42,6 +42,8 @@ typedef CF_ENUM (int32_t,  CGColorSpaceModel) {
 
 CF_ASSUME_NONNULL_BEGIN
 
+#define CG_HDR_BT_2100 1
+
 /* The name of the "Generic" Gray color space. It is a legacy
    color space so use it only if you definitely know that you
    need it. If you need just a reasonable monochrome color space,
@@ -101,8 +103,8 @@ CG_EXTERN const CFStringRef kCGColorSpaceGenericXYZ
 
 /* The name of the "Generic" L*a*b* color space. This is the same as
  L*a*b* colorspace created by `CGColorSpaceCreateLab' with
- white_point[0.9505, 1.0, 1.0890] (i.e. D65), black_point[0.0, 0.0, 0.0]
- and range [-128, 127, -128, 127]. */
+ white_point[0.9642, 1.0, 0.8249] (i.e. D50), black_point[0.0, 0.0, 0.0]
+ and range [-128, 128, -128, 128]. */
 
 CG_EXTERN const CFStringRef kCGColorSpaceGenericLab
 CG_AVAILABLE_STARTING(10.13, 11.0);
@@ -122,24 +124,41 @@ CG_AVAILABLE_STARTING(10.11, 9.0);
 CG_EXTERN const CFStringRef kCGColorSpaceDCIP3
 CG_AVAILABLE_STARTING(10.11, 9.0);
 
+CG_EXTERN const CFStringRef kCGColorSpaceExtendedITUR_2020
+CG_AVAILABLE_STARTING(11.0, 14.0);
+
 CG_EXTERN const CFStringRef kCGColorSpaceExtendedLinearITUR_2020
 CG_AVAILABLE_STARTING(10.14.3, 12.3);
+
+CG_EXTERN const CFStringRef kCGColorSpaceExtendedDisplayP3
+CG_AVAILABLE_STARTING(11.0, 14.0);
 
 CG_EXTERN const CFStringRef kCGColorSpaceExtendedLinearDisplayP3
 CG_AVAILABLE_STARTING(10.14.3, 12.3);
 
-CG_EXTERN const CFStringRef kCGColorSpaceITUR_2020_PQ_EOTF
-CG_AVAILABLE_STARTING(10.14, 12.0);
+CG_EXTERN const CFStringRef kCGColorSpaceITUR_2100_PQ
+CG_AVAILABLE_STARTING(11.0, 14.0);
 
-CG_EXTERN const CFStringRef kCGColorSpaceDisplayP3_PQ_EOTF
-CG_AVAILABLE_STARTING(10.14.6, 13);
+CG_EXTERN const CFStringRef kCGColorSpaceITUR_2100_HLG
+CG_AVAILABLE_STARTING(11.0, 14.0);
+
+CG_EXTERN const CFStringRef kCGColorSpaceDisplayP3_PQ
+CG_AVAILABLE_STARTING(10.15.4, 13.4);
 
 CG_EXTERN const CFStringRef kCGColorSpaceDisplayP3_HLG
-CG_AVAILABLE_STARTING(10.14.6, 13);
+CG_AVAILABLE_STARTING(10.14.6, 12.6);
+
+CG_EXTERN const CFStringRef kCGColorSpaceITUR_2020_PQ
+CG_AVAILABLE_BUT_DEPRECATED(10.15.4, 11.0, 13.4, 14.0);   // Use kCGColorSpaceITUR_2100_PQ.
 
 CG_EXTERN const CFStringRef kCGColorSpaceITUR_2020_HLG
-CG_AVAILABLE_STARTING(10.14.6, 13);
+CG_AVAILABLE_BUT_DEPRECATED(10.15.6, 11.0, 12.6, 14.0);   // Use kCGColorSpaceITUR_2100_HLG.
 
+CG_EXTERN const CFStringRef kCGColorSpaceDisplayP3_PQ_EOTF
+CG_AVAILABLE_BUT_DEPRECATED(10.14.6, 10.15.4, 12.6, 13.4);
+
+CG_EXTERN const CFStringRef kCGColorSpaceITUR_2020_PQ_EOTF
+CG_AVAILABLE_BUT_DEPRECATED(10.14.6, 10.15.4, 12.6, 13.4); // Use kCGColorSpaceITUR_2100_PQ.
 
 /*  The name of the extended sRGB color space.
     The extended sRGB color space allows to specify colors beyond the range of [0.0, 1.0],
@@ -238,7 +257,7 @@ CG_EXTERN CGColorSpaceRef __nullable CGColorSpaceCreateLab(const CGFloat whitePo
 /* Create an ICC-based color space using the ICC profile raw data specified by
    `data' which can be either CFDataRef or CGDataProviderRef */
 
-CG_EXTERN CGColorSpaceRef CGColorSpaceCreateWithICCData(CFTypeRef cg_nullable data)
+CG_EXTERN CGColorSpaceRef __nullable CGColorSpaceCreateWithICCData(CFTypeRef cg_nullable data)
   CG_AVAILABLE_STARTING(10.12, 10.0);
 
 /* Create an ICC-based color space. `nComponents' specifies the number of
@@ -377,11 +396,16 @@ CG_AVAILABLE_STARTING(10.12, 10.0);
 CG_EXTERN bool CGColorSpaceIsWideGamutRGB(CGColorSpaceRef)
 CG_AVAILABLE_STARTING(10.12, 10.0);
 
-/* Return true if color space is HDR */
+/* Return true if color space uses transfer functions defined in ITU Rec.2100
+   Please use CGColorSpaceUsesITUR_2100TF instead */
 
 CG_EXTERN bool CGColorSpaceIsHDR(CGColorSpaceRef)
-CG_AVAILABLE_STARTING(10.15, 13.0);
+CG_AVAILABLE_BUT_DEPRECATED(10.15, 10.15.4, 13.0, 13.4);
 
+/* Return true if color space uses transfer functions defined in ITU Rec.2100 */
+
+CG_EXTERN bool CGColorSpaceUsesITUR_2100TF(CGColorSpaceRef)
+CG_AVAILABLE_STARTING(11.0, 14.0);
 
 /* Return true if `space' can be used as a destination color space; false
  otherwise. */
@@ -396,6 +420,27 @@ CG_AVAILABLE_STARTING(10.12, 10.0);
 CG_EXTERN CGColorSpaceRef __nullable
 CGColorSpaceCreateWithPropertyList(CFPropertyListRef plist)
 CG_AVAILABLE_STARTING(10.12, 10.0);
+
+/* Return true if `space' uses extended range [-Inf, +Inf]; false
+ otherwise. */
+
+CG_EXTERN bool CGColorSpaceUsesExtendedRange(CGColorSpaceRef space)
+CG_AVAILABLE_STARTING(10.12, 10.0);
+
+/* Create a linearized copy of the color space if the color space is matrix based.
+   Return NULL if otherwise */
+CG_EXTERN CGColorSpaceRef  __nullable CGColorSpaceCreateLinearized(CGColorSpaceRef space)
+CG_AVAILABLE_STARTING(11.0, 14.0);
+
+/* Create a copy of the color space which uses extended range [-Inf, +Inf] if the color space is
+   matrix based. Return NULL if otherwise */
+CG_EXTERN CGColorSpaceRef  __nullable CGColorSpaceCreateExtended(CGColorSpaceRef space)
+CG_AVAILABLE_STARTING(11.0, 14.0);
+
+/* Create a linearized copy of the color space which uses extended range [-Inf, +Inf]
+   if the color space is matrix based. Return NULL if otherwise */
+CG_EXTERN CGColorSpaceRef  __nullable CGColorSpaceCreateExtendedLinearized(CGColorSpaceRef space)
+CG_AVAILABLE_STARTING(11.0, 14.0);
 
 
 /* Deprecated functions */

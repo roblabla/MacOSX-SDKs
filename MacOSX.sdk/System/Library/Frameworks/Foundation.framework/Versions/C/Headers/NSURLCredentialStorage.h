@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
     @discussion NSURLCredentialStorage implements a singleton object (shared instance) which manages the shared credentials cache. Note: Whereas in Mac OS X any application can access any credential with a persistence of NSURLCredentialPersistencePermanent provided the user gives permission, in iPhone OS an application can access only its own credentials.
 */
 
+API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 @interface NSURLCredentialStorage : NSObject
 {
     @private
@@ -118,7 +119,7 @@ NS_ASSUME_NONNULL_BEGIN
     @abstract This notification is sent on the main thread whenever
     the set of stored credentials changes.
 */
-FOUNDATION_EXPORT NSNotificationName const NSURLCredentialStorageChangedNotification;
+FOUNDATION_EXPORT NSNotificationName const NSURLCredentialStorageChangedNotification API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*
  *  NSURLCredentialStorageRemoveSynchronizableCredentials - (NSNumber value)

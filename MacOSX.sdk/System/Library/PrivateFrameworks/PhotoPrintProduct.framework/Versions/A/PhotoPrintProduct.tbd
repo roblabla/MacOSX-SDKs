@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: DEE346F9-5DF3-32EE-976E-C63CC9CFE434' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           950D1927-EA36-348A-979F-F88D48825B72
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           C6B6F334-E3AE-3C6F-AB3E-E2C44742E1C5
 install-name:    '/System/Library/PrivateFrameworks/PhotoPrintProduct.framework/Versions/A/PhotoPrintProduct'
-current-version: 684
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 690
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CGAffineTransformConcatPhotoOrientation, _CGContextDrawSelectionInRect, 
                        _CGContextDrawStringInRoundedRect, _CGContextMakeRoundedRect, 
                        _CGFloatEquivalentToFloat, _CGPointApplyTranslation, _CGPointDifference, 
@@ -426,27 +432,28 @@ exports:
                        _KHStoreBridgeContextUtilizeCachedProductsKey, _KHStoreBridgeCountryExplicitlySetByUserKey, 
                        _KHStoreBridgeNeedsLoadProductsNotification, _KHStringValue, 
                        _KHTargetMinImageDPIPrefKey, _KHTearFromPanEnabledPrefKey, 
-                       _KHTemporaryFileExtension, _KHTestOrdersEnabledPrefKey, _KHTextDebugEnabledPrefKey, 
-                       _KHTextFrameAutoColor, _KHTextFrameColumns, _KHTextFrameFieldNavigationEnabled, 
-                       _KHTextFrameForceDefaultTextColor, _KHTextFrameForceDefaultTextStyle, 
-                       _KHTextFrameForceTextAlignment, _KHTextFrameHasBoilerplateText, 
-                       _KHTextFrameHasClippedText, _KHTextFrameHasUserEditedColor, 
-                       _KHTextFrameHorizontalAlignment, _KHTextFrameKerning, _KHTextFrameLeading, 
-                       _KHTextFrameLineSpacing, _KHTextFrameMaxFrameSize, _KHTextFrameMinFrameSize, 
-                       _KHTextFramePlaceholderOnHoverOnly, _KHTextFramePlaceholderText, 
-                       _KHTextFramePrimaryText, _KHTextFrameRawText, _KHTextFrameResizable, 
-                       _KHTextFrameResizeAnchor, _KHTextFrameRichText, _KHTextFrameSecondaryText, 
-                       _KHTextFrameTextColor, _KHTextFrameTextOnlyBehavior, _KHTextFrameTextStyle, 
-                       _KHTextFrameTextStyleName, _KHTextFrameTextType, _KHTextFrameTextUsageMask, 
-                       _KHTextFrameTreatment, _KHTextFrameUppercase, _KHTextFrameUsageTag, 
-                       _KHTextFrameVerticalAlignment, _KHTextLoremIpsumPrefix, _KHTextNonFillLoremIpsumPrefix, 
-                       _KHTextPlaceholder, _KHTextStyleConversionName, _KHTextStyleDefaultMapStyle, 
-                       _KHTextStyleLabel, _KHTextStyleLocalizationFont, _KHTextStyleLocalizationFontSize, 
-                       _KHTextStyleLocalizationKerning, _KHTextStyleLocalizationLanguageCode, 
-                       _KHTextStyleLocalizationLeading, _KHTextStyleLocalizationLineSpacing, 
-                       _KHTextStyleLocalizationProductID, _KHTextStyleLocalizationStyleId, 
-                       _KHTextStyleSmallTextStyleId, _KHTextureLayerAsset, _KHTextureLayerPhaseOffsetX, 
-                       _KHTextureLayerPhaseOffsetY, _KHTextureLayerTileHeight, _KHTextureLayerTileMethodLegacy, 
+                       _KHTemporaryFileExtension, _KHTestOrdersEnabledPrefKey, _KHTextAlignmentFromNS, 
+                       _KHTextAlignmentToNS, _KHTextDebugEnabledPrefKey, _KHTextFrameAutoColor, 
+                       _KHTextFrameColumns, _KHTextFrameFieldNavigationEnabled, _KHTextFrameForceDefaultTextColor, 
+                       _KHTextFrameForceDefaultTextStyle, _KHTextFrameForceTextAlignment, 
+                       _KHTextFrameHasBoilerplateText, _KHTextFrameHasClippedText, 
+                       _KHTextFrameHasUserEditedColor, _KHTextFrameHorizontalAlignment, 
+                       _KHTextFrameKerning, _KHTextFrameLeading, _KHTextFrameLineSpacing, 
+                       _KHTextFrameMaxFrameSize, _KHTextFrameMinFrameSize, _KHTextFramePlaceholderOnHoverOnly, 
+                       _KHTextFramePlaceholderText, _KHTextFramePrimaryText, _KHTextFrameRawText, 
+                       _KHTextFrameResizable, _KHTextFrameResizeAnchor, _KHTextFrameRichText, 
+                       _KHTextFrameSecondaryText, _KHTextFrameTextColor, _KHTextFrameTextOnlyBehavior, 
+                       _KHTextFrameTextStyle, _KHTextFrameTextStyleName, _KHTextFrameTextType, 
+                       _KHTextFrameTextUsageMask, _KHTextFrameTreatment, _KHTextFrameUppercase, 
+                       _KHTextFrameUsageTag, _KHTextFrameVerticalAlignment, _KHTextLoremIpsumPrefix, 
+                       _KHTextNonFillLoremIpsumPrefix, _KHTextPlaceholder, _KHTextStyleConversionName, 
+                       _KHTextStyleDefaultMapStyle, _KHTextStyleLabel, _KHTextStyleLocalizationFont, 
+                       _KHTextStyleLocalizationFontSize, _KHTextStyleLocalizationKerning, 
+                       _KHTextStyleLocalizationLanguageCode, _KHTextStyleLocalizationLeading, 
+                       _KHTextStyleLocalizationLineSpacing, _KHTextStyleLocalizationProductID, 
+                       _KHTextStyleLocalizationStyleId, _KHTextStyleSmallTextStyleId, 
+                       _KHTextureLayerAsset, _KHTextureLayerPhaseOffsetX, _KHTextureLayerPhaseOffsetY, 
+                       _KHTextureLayerTileHeight, _KHTextureLayerTileMethodLegacy, 
                        _KHTextureLayerTileWidth, _KHTextureLayerTilingMethod, _KHTextureLayerTopRowOnly, 
                        _KHThemeAllowEmptyFrames, _KHThemeBundleExtension, _KHThemeCatalogBundleExtension, 
                        _KHThemeCategories, _KHThemeCategoryId, _KHThemeConfigurationConfigurationId, 

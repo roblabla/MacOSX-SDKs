@@ -30,7 +30,6 @@
 #ifndef _SYS_EV_H_
 #define _SYS_EV_H_
 
-
 #include <sys/appleapiopts.h>
 
 #include <sys/queue.h>
@@ -66,8 +65,6 @@ typedef struct eventreq *er_t;
 #define EV_RESET   0x10000
 #define EV_TIMEOUT 0x20000
 #define EV_DMASK   0xffffff00
-
-
 
 
 

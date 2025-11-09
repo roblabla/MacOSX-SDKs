@@ -1,10 +1,31 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 2DF5C5D9-155A-3938-A644-BC578691948B', 'x86_64: 2DF5C5D9-155A-3938-A644-BC578691948B' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           0AE98EB5-81E2-32C5-BB89-68DDCB49162D
+  - target:          x86_64-maccatalyst
+    value:           0AE98EB5-81E2-32C5-BB89-68DDCB49162D
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           38B4706D-681E-3FBD-B97D-D1275051B435
+  - target:          arm64e-maccatalyst
+    value:           38B4706D-681E-3FBD-B97D-D1275051B435
 install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libAWDSupport.dylib'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
+    weak-symbols:    [ __ZTI17AwdMetadataLoader, __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTS17AwdMetadataLoader, __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE ]
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ __Z14sDumpMetricLogNSt3__110shared_ptrI17AwdMetadataLoaderEEPKvm10DumpFormat, 
                        __Z14sGetMetricNameRKNSt3__110shared_ptrI17AwdMetadataLoaderEEj, 
                        __Z15sDumpMetricFileNSt3__110shared_ptrI17AwdMetadataLoaderEEPKvm10DumpFormat, 
@@ -82,12 +103,4 @@ exports:
                        __ZTS25AwdMetadataLoaderDelegate, __ZTS32BestChoiceMetadataLoaderDelegate, 
                        __ZTV25AwdMetadataLoaderDelegate, __ZTV32BestChoiceMetadataLoaderDelegate, 
                        _createDescriptionForMetriclogFile, _setupAWDConnection, _teardownAWDConnection ]
-    weak-def-symbols: [ __ZTI17AwdMetadataLoader, __ZTIN5boost6system14error_category12std_categoryE, 
-                        __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                        __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                        __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                        __ZTS17AwdMetadataLoader, __ZTSN5boost6system14error_category12std_categoryE, 
-                        __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                        __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                        __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE ]
 ...

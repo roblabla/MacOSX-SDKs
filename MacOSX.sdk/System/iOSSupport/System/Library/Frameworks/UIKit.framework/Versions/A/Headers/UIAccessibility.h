@@ -439,6 +439,10 @@ UIKIT_EXTERN NSNotificationName const UIAccessibilityGuidedAccessStatusDidChange
 UIKIT_EXTERN BOOL UIAccessibilityIsBoldTextEnabled(void) API_AVAILABLE(ios(8.0));
 UIKIT_EXTERN NSNotificationName const UIAccessibilityBoldTextStatusDidChangeNotification API_AVAILABLE(ios(8.0));
 
+// Returns whether the system preference for button shapes is enabled
+UIKIT_EXTERN BOOL UIAccessibilityButtonShapesEnabled(void) API_AVAILABLE(ios(14.0), tvos(14.0));
+UIKIT_EXTERN NSNotificationName const UIAccessibilityButtonShapesEnabledStatusDidChangeNotification API_AVAILABLE(ios(14.0), tvos(14.0));
+
 // Returns whether the system preference for grayscale is enabled
 UIKIT_EXTERN BOOL UIAccessibilityIsGrayscaleEnabled(void) API_AVAILABLE(ios(8.0));
 UIKIT_EXTERN NSNotificationName const UIAccessibilityGrayscaleStatusDidChangeNotification API_AVAILABLE(ios(8.0));
@@ -450,6 +454,10 @@ UIKIT_EXTERN NSNotificationName const UIAccessibilityReduceTransparencyStatusDid
 // Returns whether the system preference for reduce motion is enabled
 UIKIT_EXTERN BOOL UIAccessibilityIsReduceMotionEnabled(void) API_AVAILABLE(ios(8.0));
 UIKIT_EXTERN NSNotificationName const UIAccessibilityReduceMotionStatusDidChangeNotification API_AVAILABLE(ios(8.0));
+
+// Returns whether the system preference for redcue motion: prefer cross-fade transitions is enabled
+UIKIT_EXTERN BOOL UIAccessibilityPrefersCrossFadeTransitions(void) API_AVAILABLE(ios(14.0), tvos(14.0));
+UIKIT_EXTERN NSNotificationName const UIAccessibilityPrefersCrossFadeTransitionsStatusDidChangeNotification API_AVAILABLE(ios(14.0), tvos(14.0));
 
 // Returns whether the system preference for auto-play videos is enabled
 UIKIT_EXTERN BOOL UIAccessibilityIsVideoAutoplayEnabled(void) API_AVAILABLE(ios(13.0), tvos(13.0));

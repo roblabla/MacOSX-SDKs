@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 44259EDE-D5FA-37A8-80A2-293ECFE9A42D', 'x86_64: 44259EDE-D5FA-37A8-80A2-293ECFE9A42D' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           173D4FF5-E6D3-3845-8D87-0C74DA38E976
+  - target:          x86_64-maccatalyst
+    value:           173D4FF5-E6D3-3845-8D87-0C74DA38E976
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           E8A2B18F-86F1-3ED6-AC98-9944F77EC9DB
+  - target:          arm64e-maccatalyst
+    value:           E8A2B18F-86F1-3ED6-AC98-9944F77EC9DB
 install-name:    '/System/Library/PrivateFrameworks/GPUSupport.framework/Versions/A/Libraries/libGPUSupportMercury.dylib'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _gldAttachDrawable, _gldBufferSubData, _gldClearFence, _gldCopyBufferSubData, 
                        _gldCopyTexSubImage, _gldCopyTextureData, _gldCreateBuffer, 
                        _gldCreateComputeModule, _gldCreateComputeProgram, _gldCreateContext, 

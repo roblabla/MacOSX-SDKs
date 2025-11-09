@@ -81,7 +81,7 @@ TCL_DL_LIBS=''
 
 # Flags to pass to the compiler when linking object files into
 # an executable tclsh or tcltest binary.
-TCL_LD_FLAGS=' -headerpad_max_install_names -Wl,-search_paths_first '
+TCL_LD_FLAGS=' -prebind -headerpad_max_install_names -Wl,-search_paths_first '
 
 # Flags to pass to ld, such as "-R /usr/local/tcl/lib", that tell the
 # run-time dynamic linker where to look for shared libraries such as
@@ -137,7 +137,7 @@ TCL_UNSHARED_LIB_SUFFIX='${VERSION}.a'
 # different place than the directory containing the source files, this
 # points to the location of the sources, not the location where Tcl was
 # compiled.
-TCL_SRC_DIR='/Library/Caches/com.apple.xbs/Sources/tcl/tcl-128/tcl/tcl'
+TCL_SRC_DIR='/Library/Caches/com.apple.xbs/Sources/tcl/tcl-129.40.1/tcl/tcl'
 
 # List of standard directories in which to look for packages during
 # "package require" commands.  Contains the "prefix" directory plus also

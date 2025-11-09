@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class TKTokenConfiguration;
 
 /// Holds configuration of one class of tokens
-API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0))
+API_AVAILABLE(macos(10.15), ios(14.0), tvos(14.0), watchos(7.0))
 NS_SWIFT_NAME(TKTokenDriver.Configuration)
 @interface TKTokenDriverConfiguration : NSObject
 
@@ -43,7 +43,7 @@ NS_SWIFT_NAME(removeTokenConfiguration(for:));
 @end
 
 /// Holds configuration of one token identified by unique token's instanceID
-API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0))
+API_AVAILABLE(macos(10.15), ios(14.0), tvos(14.0), watchos(7.0))
 NS_SWIFT_NAME(TKToken.Configuration)
 @interface TKTokenConfiguration : NSObject
 

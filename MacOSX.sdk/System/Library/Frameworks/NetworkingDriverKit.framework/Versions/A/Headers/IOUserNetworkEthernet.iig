@@ -1,3 +1,31 @@
+/*
+ * Copyright (c) 2019-2020 Apple, Inc. All rights reserved.
+ *
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
+ *
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. The rights granted to you under the License
+ * may not be used to create, or enable the creation or redistribution of,
+ * unlawful or unlicensed copies of an Apple operating system, or to
+ * circumvent, violate, or enable the circumvention or violation of, any
+ * terms of an Apple operating system software license agreement.
+ *
+ * Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this file.
+ *
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
+ * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
+ * limitations under the License.
+ *
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
+ */
+
 #ifndef _IOUSERNETWORKETHERNET_IIG
 #define _IOUSERNETWORKETHERNET_IIG
 
@@ -11,6 +39,8 @@
 #include <NetworkingDriverKit/IOUserNetworkPacketBufferPool.iig>
 
 struct _IOUserNetworkEthernetInterfaceDescriptor;
+struct nicproxy_limits_info_s;
+struct offload_info_s;
 
 /*!
 @iig implementation
@@ -89,6 +119,25 @@ public:
 
     virtual kern_return_t
     SetWakeOnMagicPacketEnable(bool enable) = 0;
+
+    virtual kern_return_t
+    SetMTU( uint32_t mtu ) LOCAL = 0;
+
+    virtual kern_return_t
+    GetMaxTransferUnit( uint32_t *mtu ) LOCAL = 0;
+    
+    virtual kern_return_t
+    SetHardwareAssists( uint32_t hardwareAssists ) LOCAL = 0;
+
+    virtual kern_return_t
+    GetHardwareAssists( uint32_t *hardwareAssists ) LOCAL = 0;
+
+    virtual kern_return_t
+    ReportNicProxyLimits(nicproxy_limits_info_s nicproxy_limits_info);
+    
+    virtual kern_return_t SetPowerState(uint32_t powerstate) override;
+
+    virtual void hwConfigNicProxyData(offload_info_s *handoff) LOCALONLY;
 };
 
 class EXTENDS (IOUserNetworkEthernet) IOUserNetworkEthernetPrivate
@@ -112,19 +161,33 @@ class EXTENDS (IOUserNetworkEthernet) IOUserNetworkEthernetPrivate
     virtual void
     _DataAvailable(
         OSAction * action) TYPE(IODataQueueDispatchSource::DataAvailable);
-};
+    
+    virtual kern_return_t
+    RetainNicProxyData(uint64_t *handoff);
 
-enum {
-    kIOUserNetworkFeatureFlagWOMP = 0x01,
-    kIOUserNetworkFeatureFlagSoftwareVlan = 0x02,
+    virtual kern_return_t
+    ReleaseNicProxyData();
 };
 
 struct _IOUserNetworkEthernetInterfaceDescriptor {
     IOUserNetworkMACAddress     macAddress;
-    uint8_t                 featureFlags;
-    uint8_t                 _reserved;
+    uint32_t                featureFlags;
+    uint32_t                 _reserved;
     uint16_t                txPacketHeadroomBytes;
     uint16_t                txPacketTailroomBytes;
 } __attribute__((packed));
+
+typedef struct nicproxy_limits_info_s {
+    uint8_t ipv4_cnt;
+    uint8_t ipv6_cnt;
+    uint16_t kaIPv4Count;
+    uint16_t kaIPv6Count;
+    uint16_t wakeUDPCount;
+    uint16_t wakeTCPCount;
+    uint16_t rr_cnt;
+    uint8_t mDnsMaxDomainLen;
+    uint8_t ethCount;
+    uint16_t rr_buf_size;
+} __attribute__((packed)) nicproxy_limits_info_t;
 
 #endif /* ! _IOUSERNETWORKETHERNET_H */

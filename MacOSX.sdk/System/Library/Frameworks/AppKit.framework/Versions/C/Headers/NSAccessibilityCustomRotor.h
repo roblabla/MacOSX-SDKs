@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AppKit/NSAccessibilityProtocols.h>
+#import <AppKit/AppKitDefines.h>
 
 /*!
  * @discussion NSAccessibilityCustomRotor:
@@ -23,7 +24,7 @@
  */
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSAccessibilityCustomRotor;
 @class NSAccessibilityCustomRotorItemResult;

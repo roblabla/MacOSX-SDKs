@@ -9,13 +9,14 @@
 
 #import <AppKit/NSCollectionViewLayout.h>
 #import <AppKit/NSCollectionViewFlowLayout.h> // for NSCollectionViewScrollDirection
+#import <AppKit/AppKitDefines.h>
 
 @protocol NSCollectionLayoutEnvironment;
 @protocol NSCollectionLayoutContainer;
 @protocol NSCollectionLayoutVisibleItem;
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSCollectionLayoutSection;
 @class NSCollectionLayoutGroup;

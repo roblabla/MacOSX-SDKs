@@ -63,6 +63,15 @@ CFN_EXPORT const CFStringRef kCFHTTPVersion1_1 CF_AVAILABLE(10_1, 2_0);
 CFN_EXPORT const CFStringRef kCFHTTPVersion2_0 CF_AVAILABLE(10_10, 8_0);
 
 /*
+ *  kCFHTTPVersion3_0
+ *
+ *  Discussion:
+ *	Version string for HTTP 3.0.
+ *
+ */
+CFN_EXPORT const CFStringRef kCFHTTPVersion3_0 CF_AVAILABLE(10_15, 13_0);
+
+/*
  *  kCFHTTPAuthenticationSchemeBasic
  *  
  *  Discussion:

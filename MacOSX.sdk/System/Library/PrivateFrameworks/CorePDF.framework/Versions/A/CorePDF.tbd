@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 8BCD0838-D7E0-3CBC-8B2A-A825301DA064' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           B559BC48-9239-3658-AFBA-FB94A1FBB7BC
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           54818DA8-B246-3C7E-9181-9CA14A8ECD99
 install-name:    '/System/Library/PrivateFrameworks/CorePDF.framework/Versions/A/CorePDF'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CGPDFArchiveAddSelection, _CGPDFArchiveCreate, _CGPDFArchiveGetHTML, 
                        _CGPDFArchiveGetPlainText, _CGPDFArchiveGetRTFDData, _CGPDFArchiveGetStructuredString, 
                        _CGPDFArchiveGetWebArchiveData, _CGPDFArchiveRelease, _CGPDFArchiveRetain, 

@@ -1,12 +1,18 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 4726DA45-9879-3485-A209-6CAE3EA87046' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           8A609F60-9944-3E22-BE2A-329F05DFEAD0
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           CE8FB25F-636C-3947-BFF4-419D098108E9
 install-name:    '/System/Library/Frameworks/SyncServices.framework/Versions/A/SyncServices'
-current-version: 727
+current-version: 729
 compatibility-version: 48
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _ISDArrayAsGlobalIds, _ISDAsGlobalId, _ISDAvailabilityChangedNotification, 
                        _ISDBadNewsException, _ISDCleanupExtraLogFiles, _ISDCleanupLogFiles, 
                        _ISDDefaultDoublePrecision, _ISDEnableAllFacilities, _ISDEnableFacility, 

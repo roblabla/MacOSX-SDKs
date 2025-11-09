@@ -2,7 +2,7 @@
 //  SCNGeometry.h
 //  SceneKit
 //
-//  Copyright © 2012-2019 Apple Inc. All rights reserved.
+//  Copyright © 2012-2020 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SceneKitTypes.h>
@@ -246,13 +246,13 @@ SCN_EXPORT
 /*!
  @method geometrySourceWithBuffer:semantic:vectorCount:floatComponents:componentsPerVector:bytesPerComponent:dataOffset:dataStride:
  @abstract Creates and returns a geometry source from the given data and parameters.
- @param mtlBuffer A metal buffer.
+ @param buffer A Metal buffer.
  @param vertexFormat The vertex format.
  @param semantic The semantic of the geometry source.
  @param vertexCount The number of vertex.
  @param offset The offset from the beginning of the data. In bytes.
  @param stride The number of bytes from a vector to the next one in the data.
- @discussion Attempting to modify the metal buffer outside the SCNSceneRenderer delegate callbacks is undefined.
+ @discussion Attempting to modify the Metal buffer outside the SCNSceneRenderer delegate callbacks is undefined.
  The typical usage it to modify the MTLBuffer within the willRenderScene callback, using a compute kernel or a vertex function in the user own command buffer. So something like:
 
  - (void)renderer:(id <SCNSceneRenderer>)aRenderer willRenderScene:(SCNScene *)scene atTime:(NSTimeInterval)time
@@ -274,7 +274,7 @@ SCN_EXPORT
  }
  
  */
-+ (instancetype)geometrySourceWithBuffer:(id <MTLBuffer>)mtlBuffer vertexFormat:(MTLVertexFormat)vertexFormat semantic:(SCNGeometrySourceSemantic)semantic vertexCount:(NSInteger)vertexCount dataOffset:(NSInteger)offset dataStride:(NSInteger)stride API_AVAILABLE(macos(10.11), ios(9.0));
++ (instancetype)geometrySourceWithBuffer:(id <MTLBuffer>)buffer vertexFormat:(MTLVertexFormat)vertexFormat semantic:(SCNGeometrySourceSemantic)semantic vertexCount:(NSInteger)vertexCount dataOffset:(NSInteger)offset dataStride:(NSInteger)stride API_AVAILABLE(macos(10.11), ios(9.0));
 #endif
 
 /*! 
@@ -346,6 +346,21 @@ SCN_EXPORT
  @param bytesPerIndex The number of bytes that represent a single index value in the data.
  */
 + (instancetype)geometryElementWithData:(nullable NSData *)data primitiveType:(SCNGeometryPrimitiveType)primitiveType primitiveCount:(NSInteger)primitiveCount bytesPerIndex:(NSInteger)bytesPerIndex;
+
+#if SCN_ENABLE_METAL
+/*!
+@method geometryElementWithBuffer:primitiveType:primitiveCount:bytesPerIndex
+@abstract Creates and returns a geometry element from the given Metal buffer and parameters.
+@param buffer The buffer that contains element indexes.
+@param primitiveType The primitive type, as listed in the SCNGeometryPrimitiveType enumeration.
+@param primitiveCount The number of primitives in the data.
+@param bytesPerIndex The number of bytes that represent a single index value in the data.
+*/
++ (instancetype)geometryElementWithBuffer:(id <MTLBuffer>)buffer
+                            primitiveType:(SCNGeometryPrimitiveType)primitiveType
+                           primitiveCount:(NSInteger)primitiveCount
+                            bytesPerIndex:(NSInteger)bytesPerIndex API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0));
+#endif
 
 /*!
  @property data

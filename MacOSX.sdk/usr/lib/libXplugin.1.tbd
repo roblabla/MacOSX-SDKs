@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 39B66B66-37C5-3926-BB3A-353CE6B9F266' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           EE7DFECC-8203-392E-9E49-E944331AF804
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           C5BD2AD4-A469-3641-BEFB-0ECEE2D44E75
 install-name:    '/usr/lib/libXplugin.1.dylib'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _xp_api_version, _xp_attach_gl_context, _xp_composite_area_threshold, 
                        _xp_composite_pixels, _xp_configure_surface, _xp_configure_window, 
                        _xp_copy_bytes, _xp_copy_bytes_threshold, _xp_copy_window, 

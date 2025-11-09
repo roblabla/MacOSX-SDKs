@@ -7,10 +7,11 @@
 #import <AppKit/AppKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 @protocol NCWidgetSearchViewDelegate;
 
-NS_CLASS_AVAILABLE_MAC(10_10)
+API_DEPRECATED("Use WidgetKit instead. Today View extensions have been deprecated.", macos(10.10, 11.0))
 @interface NCWidgetSearchViewController : NSViewController
 
 /* The delegate is responsible for performing the search based on the
@@ -35,7 +36,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 
 @end
 
-NS_AVAILABLE_MAC(10_10)
+API_DEPRECATED("Use WidgetKit instead. Today View extensions have been deprecated.", macos(10.10, 11.0))
 @protocol NCWidgetSearchViewDelegate <NSObject>
 
 /* Called as new search terms are typed.
@@ -52,5 +53,5 @@ NS_AVAILABLE_MAC(10_10)
 - (void)widgetSearch:(NCWidgetSearchViewController *)controller resultSelected:(id)object;
 
 @end
-
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

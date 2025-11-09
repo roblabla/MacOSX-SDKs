@@ -11,6 +11,7 @@
 #import <Vision/VNRequestHandler.h>
 
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 @class CIImage;
@@ -248,6 +249,50 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 	@param	completionHandler	The block that is invoked when the request has been performed.
 */
 - (instancetype) initWithTargetedImageData:(NSData *)imageData orientation:(CGImagePropertyOrientation)orientation options:(NSDictionary<VNImageOption, id> *)options completionHandler:(nullable VNRequestCompletionHandler)completionHandler;
+
+
+
+#pragma mark • Targeting CMSampleBuffer
+
+
+/*!
+    @brief Create a new request with a targeted CMSampleBuffer.
+    
+    @param sampleBuffer The CMSampleBuffer containing the CVImageBuffer to be used by the request.
+    @param options A dictionary with options specifying auxiliary information for the image.
+*/
+- (instancetype) initWithTargetedCMSampleBuffer:(CMSampleBufferRef)sampleBuffer options:(NSDictionary<VNImageOption, id> *)options API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+
+
+/*!
+    @brief Create a new request with a targeted CMSampleBuffer.
+    
+    @param sampleBuffer The CMSampleBuffer containing the CVImageBuffer to be used by the request.
+    @param options A dictionary with options specifying auxiliary information for the image.
+    @param completionHandler The block that is invoked after the request has been performed.
+*/
+- (instancetype) initWithTargetedCMSampleBuffer:(CMSampleBufferRef)sampleBuffer options:(NSDictionary<VNImageOption, id> *)options completionHandler:(nullable VNRequestCompletionHandler)completionHandler API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+
+
+/*!
+    @brief Create a new request with a targeted CMSampleBuffer.
+    
+    @param sampleBuffer The CMSampleBuffer containing the CVImageBuffer to be used by the request.
+    @param orientation The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information.
+    @param options A dictionary with options specifying auxiliary information for the image.
+*/
+- (instancetype) initWithTargetedCMSampleBuffer:(CMSampleBufferRef)sampleBuffer orientation:(CGImagePropertyOrientation)orientation options:(NSDictionary<VNImageOption, id> *)options API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+
+
+/*!
+    @brief Create a new request with a targeted CMSampleBuffer.
+    
+    @param sampleBuffer The CMSampleBuffer containing the CVImageBuffer to be used by the request.
+    @param orientation The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information.
+    @param options A dictionary with options specifying auxiliary information for the image.
+    @param completionHandler The block that is invoked after the request has been performed.
+*/
+- (instancetype) initWithTargetedCMSampleBuffer:(CMSampleBufferRef)sampleBuffer orientation:(CGImagePropertyOrientation)orientation options:(NSDictionary<VNImageOption, id> *)options completionHandler:(nullable VNRequestCompletionHandler)completionHandler API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
 
 @end

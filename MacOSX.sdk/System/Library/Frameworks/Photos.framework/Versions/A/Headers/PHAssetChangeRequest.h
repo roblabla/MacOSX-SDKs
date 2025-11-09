@@ -63,6 +63,8 @@ OS_EXPORT
 
 @property (nonatomic, strong, readwrite, nullable) PHContentEditingOutput *contentEditingOutput;
 
+// Reverting requires that all original resources are downloaded to the device first and this must be performed manually by the client if the original resources aren't already local.
+// Use PHAssetResourceManager to ensure that original asset content is downloaded to the current device before making this request.
 - (void)revertAssetContentToOriginal;
 
 @end

@@ -24,7 +24,11 @@
 #import <HealthKit/HKDiscreteQuantitySample.h>
 #import <HealthKit/HKDocumentQuery.h>
 #import <HealthKit/HKDocumentSample.h>
+#import <HealthKit/HKElectrocardiogram.h>
+#import <HealthKit/HKElectrocardiogramQuery.h>
+#import <HealthKit/HKFHIRRelease.h>
 #import <HealthKit/HKFHIRResource.h>
+#import <HealthKit/HKFHIRVersion.h>
 #import <HealthKit/HKHealthStore.h>
 #import <HealthKit/HKHeartbeatSeriesBuilder.h>
 #import <HealthKit/HKHeartbeatSeriesQuery.h>

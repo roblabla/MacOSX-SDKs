@@ -2,7 +2,7 @@
 //  path_monitor.h
 //  Network
 //
-//  Copyright (c) 2017-2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2017-2020 Apple Inc. All rights reserved.
 //
 
 #ifndef __NW_PATH_MONITOR_H__
@@ -74,6 +74,24 @@ API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0))
 NW_RETURNS_RETAINED nw_path_monitor_t
 nw_path_monitor_create_with_type(nw_interface_type_t required_interface_type);
 
+/*!
+ * @function nw_path_monitor_prohibit_interface_type
+ *
+ * @abstract
+ *		Prohibit this path monitor from using the provided network interface type.
+ *		Call before calling nw_path_monitor_start.
+ *
+ * @param monitor
+ *		The path monitor object.
+ *
+ * @param interface_type
+ *		The interface type to prohibit for the path monitor.
+ */
+API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0))
+void
+nw_path_monitor_prohibit_interface_type(nw_path_monitor_t monitor,
+										nw_interface_type_t interface_type);
+
 #ifdef __BLOCKS__
 
 /*!
@@ -144,7 +162,8 @@ nw_path_monitor_set_update_handler(nw_path_monitor_t monitor,
  */
 API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0))
 void
-nw_path_monitor_set_queue(nw_path_monitor_t monitor, dispatch_queue_t queue);
+nw_path_monitor_set_queue(nw_path_monitor_t monitor,
+						  dispatch_queue_t queue);
 
 /*!
  * @function nw_path_monitor_start

@@ -1,26 +1,41 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 0A685DAA-9FC6-3C87-83F1-1D11FC87C1F4', 'x86_64: 0A685DAA-9FC6-3C87-83F1-1D11FC87C1F4' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           AA45C628-4557-3FF0-AE6A-B04F9D468C1F
+  - target:          x86_64-maccatalyst
+    value:           AA45C628-4557-3FF0-AE6A-B04F9D468C1F
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           30A3877D-39EE-3F74-9367-391C2546339A
+  - target:          arm64e-maccatalyst
+    value:           30A3877D-39EE-3F74-9367-391C2546339A
 install-name:    '/usr/lib/libapple_nghttp2.dylib'
-current-version: 1.39.2
-exports:         
-  - archs:           [ x86_64 ]
-    symbols:         [ _nghttp2_check_header_name, _nghttp2_check_header_value, _nghttp2_hd_deflate_bound, 
-                       _nghttp2_hd_deflate_change_table_size, _nghttp2_hd_deflate_del, 
-                       _nghttp2_hd_deflate_get_dynamic_table_size, _nghttp2_hd_deflate_get_max_dynamic_table_size, 
-                       _nghttp2_hd_deflate_get_num_table_entries, _nghttp2_hd_deflate_get_table_entry, 
-                       _nghttp2_hd_deflate_hd, _nghttp2_hd_deflate_hd_vec, _nghttp2_hd_deflate_new, 
-                       _nghttp2_hd_deflate_new2, _nghttp2_hd_inflate_change_table_size, 
-                       _nghttp2_hd_inflate_del, _nghttp2_hd_inflate_end_headers, 
-                       _nghttp2_hd_inflate_get_dynamic_table_size, _nghttp2_hd_inflate_get_max_dynamic_table_size, 
-                       _nghttp2_hd_inflate_get_num_table_entries, _nghttp2_hd_inflate_get_table_entry, 
-                       _nghttp2_hd_inflate_hd, _nghttp2_hd_inflate_hd2, _nghttp2_hd_inflate_new, 
-                       _nghttp2_hd_inflate_new2, _nghttp2_http2_strerror, _nghttp2_is_fatal, 
-                       _nghttp2_nv_compare_name, _nghttp2_option_del, _nghttp2_option_new, 
-                       _nghttp2_option_set_builtin_recv_extension_type, _nghttp2_option_set_max_deflate_dynamic_table_size, 
-                       _nghttp2_option_set_max_outbound_ack, _nghttp2_option_set_max_reserved_remote_streams, 
-                       _nghttp2_option_set_max_send_header_block_length, _nghttp2_option_set_no_auto_ping_ack, 
+current-version: 1.41
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _nghttp2_check_authority, _nghttp2_check_header_name, _nghttp2_check_header_value, 
+                       _nghttp2_hd_deflate_bound, _nghttp2_hd_deflate_change_table_size, 
+                       _nghttp2_hd_deflate_del, _nghttp2_hd_deflate_get_dynamic_table_size, 
+                       _nghttp2_hd_deflate_get_max_dynamic_table_size, _nghttp2_hd_deflate_get_num_table_entries, 
+                       _nghttp2_hd_deflate_get_table_entry, _nghttp2_hd_deflate_hd, 
+                       _nghttp2_hd_deflate_hd_vec, _nghttp2_hd_deflate_new, _nghttp2_hd_deflate_new2, 
+                       _nghttp2_hd_inflate_change_table_size, _nghttp2_hd_inflate_del, 
+                       _nghttp2_hd_inflate_end_headers, _nghttp2_hd_inflate_get_dynamic_table_size, 
+                       _nghttp2_hd_inflate_get_max_dynamic_table_size, _nghttp2_hd_inflate_get_num_table_entries, 
+                       _nghttp2_hd_inflate_get_table_entry, _nghttp2_hd_inflate_hd, 
+                       _nghttp2_hd_inflate_hd2, _nghttp2_hd_inflate_new, _nghttp2_hd_inflate_new2, 
+                       _nghttp2_http2_strerror, _nghttp2_is_fatal, _nghttp2_nv_compare_name, 
+                       _nghttp2_option_del, _nghttp2_option_new, _nghttp2_option_set_builtin_recv_extension_type, 
+                       _nghttp2_option_set_max_deflate_dynamic_table_size, _nghttp2_option_set_max_outbound_ack, 
+                       _nghttp2_option_set_max_reserved_remote_streams, _nghttp2_option_set_max_send_header_block_length, 
+                       _nghttp2_option_set_max_settings, _nghttp2_option_set_no_auto_ping_ack, 
                        _nghttp2_option_set_no_auto_window_update, _nghttp2_option_set_no_closed_streams, 
                        _nghttp2_option_set_no_http_messaging, _nghttp2_option_set_no_http_semantics, 
                        _nghttp2_option_set_no_recv_client_magic, _nghttp2_option_set_peer_max_concurrent_streams, 

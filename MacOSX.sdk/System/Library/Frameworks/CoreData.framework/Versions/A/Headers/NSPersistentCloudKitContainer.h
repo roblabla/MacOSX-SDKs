@@ -1,7 +1,7 @@
 /*
     NSPersistentCloudKitContainer.h
     Core Data
-    Copyright (c) 2018-2019, Apple Inc.
+    Copyright (c) 2018-2020, Apple Inc.
     All rights reserved.
 */
 
@@ -40,6 +40,7 @@ typedef NS_OPTIONS(NSUInteger, NSPersistentCloudKitContainerSchemaInitialization
  */
 @class CKRecord;
 @class CKRecordID;
+
 API_AVAILABLE(macosx(10.15),ios(13.0),tvos(13.0),watchos(6.0))
 @interface NSPersistentCloudKitContainer : NSPersistentContainer
 
@@ -67,6 +68,33 @@ API_AVAILABLE(macosx(10.15),ios(13.0),tvos(13.0),watchos(6.0))
 - (NSDictionary<NSManagedObjectID *, CKRecord *> *)recordsForManagedObjectIDs:(NSArray<NSManagedObjectID *> *)managedObjectIDs;
 - (nullable CKRecordID *)recordIDForManagedObjectID:(NSManagedObjectID *)managedObjectID;
 - (NSDictionary<NSManagedObjectID *, CKRecordID *> *)recordIDsForManagedObjectIDs:(NSArray<NSManagedObjectID *> *)managedObjectIDs;
+
+/*
+ canUpdateRecordForManagedObjectWithID / canDeleteRecordForManagedObjectWithID indicate whether or not a given object assigned the provided NSManagedObjectID is mutable with respect to the instance of CKRecord that backs it with CloudKit.
+ 
+ In order for canUpdateRecordForManagedObjectWithID / canDeleteRecordForManagedObjectWithID to return YES, -[NSPersistentCloudKitContainer canModifyManagedObjectsInStore] must also be YES.
+ 
+ Returns YES if any of the following conditions are true:
+ - The provided objectID is a temporary objectID
+ - The provided objectID is assigned to a store not backed by a CKDatabase
+ - The provided objectID is assigned to a store backed by the Private CKDatabase
+ - The provided objectID is assigned to a store backed by the Public CKDatabase AND one of the following conditions is met:
+     - The object has yet to be uploaded to CloudKit (it will be assigned to the current user)
+     - The object has already been uploaded to CloudKit and is owned (indicated by CKRecord.creatorUserRecordID) by the current user
+ */
+- (BOOL)canUpdateRecordForManagedObjectWithID:(NSManagedObjectID *)objectID NS_SWIFT_NAME(canUpdateRecord(forManagedObjectWith:)) API_AVAILABLE(macosx(11.0),ios(14.0),tvos(14.0),watchos(7.0));
+- (BOOL)canDeleteRecordForManagedObjectWithID:(NSManagedObjectID *)objectID NS_SWIFT_NAME(canDeleteRecord(forManagedObjectWith:)) API_AVAILABLE(macosx(11.0),ios(14.0),tvos(14.0),watchos(7.0));
+
+/*
+ canModifyManagedObjectsInStore indicates whether or not a given store is mutable when used with CloudKit.
+ 
+ This method return YES if the current user has write permissions to the CKDatabase that backs the store.
+ 
+ For example:
+ - When using the Public database, devices without an iCloud account can read data but not write any.
+ - When using the Private database, this method always returns YES, even if no iCloud account is present on the device.
+ */
+- (BOOL)canModifyManagedObjectsInStore:(NSPersistentStore *)store API_AVAILABLE(macosx(11.0),ios(14.0),tvos(14.0),watchos(7.0));
 
 @end
 

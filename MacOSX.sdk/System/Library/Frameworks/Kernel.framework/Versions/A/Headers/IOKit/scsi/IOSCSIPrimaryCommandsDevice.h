@@ -90,7 +90,7 @@ class SCSIPrimaryCommands;
 //	Class Declaration
 //-----------------------------------------------------------------------------
 
-class IOSCSIPrimaryCommandsDevice : public IOSCSIProtocolInterface
+class __exported IOSCSIPrimaryCommandsDevice : public IOSCSIProtocolInterface
 {
 	
 	OSDeclareAbstractStructors ( IOSCSIPrimaryCommandsDevice )

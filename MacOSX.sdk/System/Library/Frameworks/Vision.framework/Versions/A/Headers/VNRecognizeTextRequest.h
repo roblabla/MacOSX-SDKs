@@ -64,8 +64,18 @@ API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0))
 
 @end
 
+/*
+ @brief VNRecognizeTextRequestRevision1 only supports English
+ */
+
 API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0))
 static const NSUInteger VNRecognizeTextRequestRevision1 = 1;
+
+/*
+ @brief VNRecognizeTextRequestRevision2 supports English, Chinese, Portuguese, French, Italian, German and Spanish in the accurate recognition level. The fast recognition level supports English, Portuguese, French, Italian, German and Spanish. Best practice is to use supportedRecognitionLanguagesForTextRecognitionLevel to check for supported languages. As the underlying engine has changed from VNRecognizeTextRequestRevision1, results can differ but are generally more accurate. 
+ */
+API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
+static const NSUInteger VNRecognizeTextRequestRevision2 = 2;
 
 
 NS_ASSUME_NONNULL_END

@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVAssetDownloadTask.h>)
 /*
 	File:  AVAssetDownloadTask.h
 
@@ -23,7 +24,15 @@ NS_ASSUME_NONNULL_BEGIN
 				The value for this key should be a NSNumber.
  @discussion	By default, the highest media bitrate will be selected for download.
 */
-AVF_EXPORT NSString *const AVAssetDownloadTaskMinimumRequiredMediaBitrateKey API_AVAILABLE(macos(15.0), ios(9.0)) API_UNAVAILABLE(tvos, watchos);
+AVF_EXPORT NSString *const AVAssetDownloadTaskMinimumRequiredMediaBitrateKey API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos, watchos);
+
+/*!
+ @constant		AVAssetDownloadTaskMinimumRequiredPresentationSizeKey
+ @abstract		The lowest media presentation size greater than or equal to this value will be selected. If no suitable media presentation size is found, the highest media presentation size will be selected.
+				The value for this key should be a NSValue of CGSize.
+ @discussion	By default, the highest media presentation size will be selected for download.
+*/
+AVF_EXPORT NSString *const AVAssetDownloadTaskMinimumRequiredPresentationSizeKey API_AVAILABLE(macos(11.0), ios(14.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*!
  @constant		AVAssetDownloadTaskMediaSelectionKey
@@ -31,7 +40,7 @@ AVF_EXPORT NSString *const AVAssetDownloadTaskMinimumRequiredMediaBitrateKey API
 				The value for this key should be an AVMediaSelection.
  @discussion	By default, media selections for AVAssetDownloadTask will be automatically selected.
 */
-AVF_EXPORT NSString *const AVAssetDownloadTaskMediaSelectionKey API_AVAILABLE(macos(15.0), ios(9.0)) API_UNAVAILABLE(tvos, watchos);
+AVF_EXPORT NSString *const AVAssetDownloadTaskMediaSelectionKey API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*!
  @constant		AVAssetDownloadTaskMediaSelectionPrefersMultichannelKey
@@ -39,7 +48,15 @@ AVF_EXPORT NSString *const AVAssetDownloadTaskMediaSelectionKey API_AVAILABLE(ma
  				The value for this key should be an NSNumber representing a BOOL.
  @discussion	By default AVAssetDownloadTask will prefer multichannel by downloading the most capable multichannel rendition available in additon to stereo.
 */
-AVF_EXPORT NSString *const AVAssetDownloadTaskMediaSelectionPrefersMultichannelKey API_AVAILABLE(macos(15.0), ios(13.0)) API_UNAVAILABLE(tvos, watchos);
+AVF_EXPORT NSString *const AVAssetDownloadTaskMediaSelectionPrefersMultichannelKey API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(tvos, watchos);
+
+/*!
+@constant		AVAssetDownloadTaskPrefersHDRKey
+@abstract		Download the specified media selections with or without HDR content.
+				The value for this key should be an NSNumber representing a BOOL.
+@discussion		By default AVAssetDownloadTask will prefer HDR content.
+ */
+AVF_EXPORT NSString *const AVAssetDownloadTaskPrefersHDRKey API_AVAILABLE(macos(11.0), ios(14.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*!
  @class			AVAssetDownloadTask
@@ -289,3 +306,7 @@ AV_INIT_UNAVAILABLE
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCore/AVAssetDownloadTask.h>
+#endif

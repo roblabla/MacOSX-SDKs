@@ -1,12 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: DDEE002F-F489-3AEC-8C63-7D214096BA28', 'x86_64: DDEE002F-F489-3AEC-8C63-7D214096BA28' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           44ADABC5-2A22-33F4-A567-5A7FF17E4E27
+  - target:          x86_64-maccatalyst
+    value:           44ADABC5-2A22-33F4-A567-5A7FF17E4E27
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           00D78A12-88C2-36EB-A83F-66260BE4D1FA
+  - target:          arm64e-maccatalyst
+    value:           00D78A12-88C2-36EB-A83F-66260BE4D1FA
 install-name:    '/usr/lib/swift/libswiftOSLog.dylib'
-current-version: 0
 swift-abi-version: 7
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ '_$sSo10OSLogStoreC0A0E10getEntries4with2at8matchings11AnySequenceVySo0A5EntryCGSo0A17EnumeratorOptionsV_So0A8PositionCSgSo11NSPredicateCSgtKF', 
                        '_$sSo21OSLogMessageComponentC0A0E8ArgumentO4datayAE10Foundation4DataVcAEmFWC', 
                        '_$sSo21OSLogMessageComponentC0A0E8ArgumentO6doubleyAESdcAEmFWC', 

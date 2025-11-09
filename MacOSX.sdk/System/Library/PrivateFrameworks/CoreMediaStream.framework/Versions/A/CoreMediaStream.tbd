@@ -1,14 +1,29 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 350C1A72-9E48-3EF8-B789-C4A3E068B0C5', 'x86_64: 350C1A72-9E48-3EF8-B789-C4A3E068B0C5' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           0BF5B7A8-D1D1-3F88-8F70-BD836EA75EA5
+  - target:          x86_64-maccatalyst
+    value:           0BF5B7A8-D1D1-3F88-8F70-BD836EA75EA5
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           CA409B7F-3E73-3F34-8F5C-C43A6968BD21
+  - target:          arm64e-maccatalyst
+    value:           CA409B7F-3E73-3F34-8F5C-C43A6968BD21
 install-name:    '/System/Library/PrivateFrameworks/CoreMediaStream.framework/Versions/A/CoreMediaStream'
-current-version: 101.13.100
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 311.0.120
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CoreMediaStreamVersionNumber, _CoreMediaStreamVersionString, 
-                       _MPSStateRequestReadFrom, _MPSStateResponseReadFrom, _MSASInitialize, 
-                       _MSASPlatform, _MSASPlatformIsDebugLoggingEnabled, _MSCFCopyLocalizedString, 
+                       _CreateDirectoryAtPathIfNonNil, _MPSStateRequestReadFrom, 
+                       _MPSStateResponseReadFrom, _MSASInitialize, _MSASPlatform, 
+                       _MSASPlatformIsDebugLoggingEnabled, _MSCFCopyLocalizedString, 
                        _MSCFCreateLocalizedFormat, _MSCoreMediaStreamInitialize, 
                        _MSDSPCSendDeletionRequestAsync, _MSLog, _MSLogFile, _MSLogSqliteError, 
                        _MSMMCSHashForData, _MSMMCSHashForFD, _MSMMCSHashForFileAtPath, 
@@ -46,10 +61,11 @@ exports:
                        __MSSPCForcedProtocolVersionString, _createSHA1StringOfUDID, 
                        _kMMCSKitErrorDomain, _kMSASAccessControlGUIDKey, _kMSASAccessControlKey, 
                        _kMSASAlbumGUIDKey, _kMSASAlbumKey, _kMSASAlbumMetadataAllowMultipleContributorsKey, 
-                       _kMSASAlbumMetadataCreationDateKey, _kMSASAlbumMetadataIsPublicKey, 
-                       _kMSASAlbumMetadataNameKey, _kMSASAlbumMetadataPhoneTokenKey, 
-                       _kMSASAlbumStateKey, _kMSASAlbumsKey, _kMSASAssetCollectionGUIDKey, 
-                       _kMSASAssetCollectionGUIDsKey, _kMSASAssetCollectionKey, _kMSASAssetCollectionMediaAssetTypeUnknown, 
+                       _kMSASAlbumMetadataCreationDateKey, _kMSASAlbumMetadataInviterAddressKey, 
+                       _kMSASAlbumMetadataIsPublicKey, _kMSASAlbumMetadataNameKey, 
+                       _kMSASAlbumMetadataPhoneTokenKey, _kMSASAlbumStateKey, _kMSASAlbumsKey, 
+                       _kMSASAssetCollectionGUIDKey, _kMSASAssetCollectionGUIDsKey, 
+                       _kMSASAssetCollectionKey, _kMSASAssetCollectionMediaAssetTypeUnknown, 
                        _kMSASAssetCollectionMediaAssetTypeVideo, _kMSASAssetCollectionMetadataBatchDateCreated, 
                        _kMSASAssetCollectionMetadataBatchGUID, _kMSASAssetCollectionMetadataDateCreated, 
                        _kMSASAssetCollectionMetadataIrisGroupIdentifier, _kMSASAssetCollectionMetadataIrisStillDisplayTime, 
@@ -80,13 +96,13 @@ exports:
                        _kMSASModelAddAccessControlsFn, _kMSASModelAddAlbumFn, _kMSASModelAddAssetCollectionsFn, 
                        _kMSASModelAddCommentsToAssetCollectionWithGUIDFn, _kMSASModelAlbumGUIDsFn, 
                        _kMSASModelAlbumWithGUIDFn, _kMSASModelAssetCollectionGUIDsFn, 
-                       _kMSASModelAssetCollectionWithGUIDFn, _kMSASModelAssetsInDownloadQueueCountFn, 
-                       _kMSASModelCommentGUIDsFn, _kMSASModelCommentWithGUIDFn, _kMSASModelDeleteAlbumWithGUIDFn, 
+                       _kMSASModelAssetCollectionWithGUIDFn, _kMSASModelCommentGUIDsFn, 
+                       _kMSASModelCommentWithGUIDFn, _kMSASModelDeleteAlbumWithGUIDFn, 
                        _kMSASModelDeleteAssetCollectionWithGUIDFn, _kMSASModelDeleteAssetCollectionsWithGUIDsFn, 
                        _kMSASModelDeleteCommentWithGUIDFn, _kMSASModelDidUpdateServerCommunicationBackoffDateNotification, 
                        _kMSASModelErrorDomain, _kMSASModelForgetEverythingFn, _kMSASModelInvitationGUIDsFn, 
                        _kMSASModelInvitationWithGUIDFn, _kMSASModelIsAssetCollectionMarkedAsViewedFn, 
-                       _kMSASModelIsBusyFn, _kMSASModelMarkAlbumGUIDAsViewedFn, _kMSASModelMarkAsSpamAlbumWithGUIDFn, 
+                       _kMSASModelMarkAlbumGUIDAsViewedFn, _kMSASModelMarkAsSpamAlbumWithGUIDFn, 
                        _kMSASModelMarkAsSpamInvitationWithGUIDFn, _kMSASModelMarkAsSpamInvitationWithTokenFn, 
                        _kMSASModelMarkCommentsForAssetCollectionWithGUIDAsViewedFn, 
                        _kMSASModelModifyAlbumMetadataFn, _kMSASModelRefreshAccessControlListOfAlbumWithGUIDFn, 
@@ -106,8 +122,9 @@ exports:
                        _kMSASPVPendingRootCtagKey, _kMSASPVRootCtagKey, _kMSASPVRootCtagRetriesKey, 
                        _kMSASParamsKey, _kMSASPersonIDKey, _kMSASPersonInfoEmailKey, 
                        _kMSASPersonInfoFirstNameKey, _kMSASPersonInfoFullNameKey, 
-                       _kMSASPersonInfoLastNameKey, _kMSASProtocolErrorDomain, _kMSASPushFn, 
-                       _kMSASResetSyncKey, _kMSASRetryOutstandingActivitiesFn, _kMSASRetryOutstandingActivitiesForPersonIDFn, 
+                       _kMSASPersonInfoLastNameKey, _kMSASPhoneInvitationDebugFakeAlbumUUIDDefaultsKey, 
+                       _kMSASProtocolErrorDomain, _kMSASPushFn, _kMSASResetSyncKey, 
+                       _kMSASRetryOutstandingActivitiesFn, _kMSASRetryOutstandingActivitiesForPersonIDFn, 
                        _kMSASRetvalKey, _kMSASScaleFactorKey, _kMSASServerSideConfigAPIVersionKey, 
                        _kMSASServerSideConfigDefaultRetryAfterTimeKey, _kMSASServerSideConfigDidChangeNotification, 
                        _kMSASServerSideConfigDownloadMMCSBatchSizeKey, _kMSASServerSideConfigDownloadMMCSErrorRetriesKey, 

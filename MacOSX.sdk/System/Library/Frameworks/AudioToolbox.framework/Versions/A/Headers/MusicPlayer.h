@@ -58,18 +58,29 @@ extern "C"
 #endif
 
 /*!
-	@enum MusicEventType
-	@abstract music event types, including both MIDI and "extended" protocol
-	@constant kMusicEventType_NULL	
-	@constant kMusicEventType_ExtendedNote	note with variable number of arguments (non-MIDI)
-	@constant kMusicEventType_ExtendedTempo	tempo change in BPM
-	@constant kMusicEventType_User			user defined data
-	@constant kMusicEventType_Meta			standard MIDI file meta event
-	@constant kMusicEventType_MIDINoteMessage		MIDI note-on with duration (for note-off)
-	@constant kMusicEventType_MIDIChannelMessage	MIDI channel messages (other than note-on/off)
-	@constant kMusicEventType_MIDIRawData			for MIDI system exclusive data
-	@constant kMusicEventType_Parameter		general purpose AudioUnit parameter, added in 10.2
-	@constant kMusicEventType_AUPreset		the AU's user preset CFDictionaryRef (the ClassInfo property), added 10.3
+	enum MusicEventType
+	@abstract Music event types, including both MIDI and "extended" protocol
+	
+	@constant kMusicEventType_NULL
+		
+	@constant kMusicEventType_ExtendedNote
+		Note with variable number of arguments (non-MIDI).
+	@constant kMusicEventType_ExtendedTempo
+		Tempo change in BPM.
+	@constant kMusicEventType_User
+		User defined data.
+	@constant kMusicEventType_Meta
+		Standard MIDI File meta-event.
+	@constant kMusicEventType_MIDINoteMessage
+		MIDI note-on with duration (for note-off).
+	@constant kMusicEventType_MIDIChannelMessage
+		MIDI channel message (other than note-on/off).
+	@constant kMusicEventType_MIDIRawData
+		For MIDI system exclusive data.
+	@constant kMusicEventType_Parameter
+		General purpose AudioUnit parameter, added in macOS 10.2.
+	@constant kMusicEventType_AUPreset
+		An AudioUnit's user preset CFDictionaryRef (the ClassInfo property), added 10.3.
 */
 CF_ENUM(UInt32)
 {
@@ -290,6 +301,15 @@ typedef struct AUPresetEvent
 	@struct		CABarBeatTime
 	@abstract	A display representation of a musical time in beats.
 	
+	A clock's internal representation of musical time is in beats based on the
+	beginning of the timeline. Normally, such times should be displayed to the user
+	in terms of bars, beats, and subbeats (sometimes called "units" or "parts per
+	quarter" [PPQ]). This data structure is such a display representation.
+
+	By convention, bar 1 is the beginning of the sequence. Beat 1 is the first beat
+	of the measure. In 4/4 time, beat will have a value from 1 to 4. Music
+	applications often use beat divisions such as 480 and 960.
+
 	@var  	bar
 				A measure number.
 	@var  	beat
@@ -300,15 +320,6 @@ typedef struct AUPresetEvent
 				The denominator of the fractional number of beats.
 	@var  	reserved
 				Must be 0.
-	@discussion
-				A clock's internal representation of musical time is in beats based on the
-				beginning of the timeline. Normally, such times should be displayed to the user
-				in terms of bars, beats, and subbeats (sometimes called "units" or "parts per
-				quarter" [PPQ]). This data structure is such a display representation.
-
-				By convention, bar 1 is the beginning of the sequence. Beat 1 is the first beat
-				of the measure. In 4/4 time, beat will have a value from 1 to 4. Music
-				applications often use beat divisions such as 480 and 960.
 */
 struct CABarBeatTime {
 	SInt32				bar;
@@ -337,7 +348,7 @@ typedef void (*MusicSequenceUserCallback)(	void * __nullable			inClientData,
 											MusicTimeStamp				inEndSliceBeat);
 
 /*!
-	@enum MusicPlayerErrors
+	enum MusicPlayerErrors
 	@constant	kAudioToolboxErr_InvalidSequenceType
 	@constant	kAudioToolboxErr_TrackIndexError
 	@constant	kAudioToolboxErr_TrackNotFound
@@ -365,7 +376,7 @@ CF_ENUM(OSStatus)
 };
 
 /*!
-	@enum MusicTrackProperties
+	enum MusicTrackProperties
 	@discussion Property values are always get and set by reference
 	
 	@constant	kSequenceTrackProperty_LoopInfo
@@ -750,7 +761,7 @@ MusicSequenceSetAUGraph(	MusicSequence 	   inSequence,
 	@abstract	Gets the graph currently associated with a sequence
 	@discussion	By default if no graph is assigned to a sequence then the sequence will create a default graph. 
 				This default graph contains a MusicDevice and a DynamicsProcessor and all tracks will be targeted
-				to the MusicDevice.  On Mac OS X, this MusicDevice is an instance of a software synthesizer that is 
+				to the MusicDevice.  On macOS, this MusicDevice is an instance of a software synthesizer that is 
 				compatible with the GM and GS MIDI standards.  On iOS, it is an instance of a monotimbral software 
 				synthesizer designed to render events from a single MIDI channel.  To render multi-track GM MIDI
  				sequences on iOS, create a custom graph with a MIDISynth audio unit as the MusicDevice.
@@ -823,14 +834,14 @@ MusicSequenceGetSequenceType(	MusicSequence		inSequence,
 	@discussion	This function will parse the file referenced by the URL and add the events to the sequence.
 	@param		inSequence		the sequence
 	@param		inFileRef		a file:// URL that references a file
-	@param		inFileTypeHint	provides a hint to the sequence on the file type being imported
+	@param		inFileTypeHint	provides a hint to the sequence on the file type being imported. Can be zero in many cases.
 	@param		inFlags			flags that can control how the data is parsed in the file and laid out in the tracks
 								that will be created and added to the sequence in this operation
 */
 extern OSStatus
-MusicSequenceFileLoad (MusicSequence				inSequence,
+MusicSequenceFileLoad(MusicSequence					inSequence,
 						CFURLRef					inFileRef,
-						MusicSequenceFileTypeID		inFileTypeHint, // can be zero in many cases
+						MusicSequenceFileTypeID		inFileTypeHint,
 						MusicSequenceLoadFlags		inFlags)					API_AVAILABLE(macos(10.5), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
@@ -840,14 +851,14 @@ MusicSequenceFileLoad (MusicSequence				inSequence,
 				be of a particular file type as specified by the fileTypeHint.
 	@param		inSequence		the sequence
 	@param		inData			the contents of a valid file loaded into a CFData object
-	@param		inFileTypeHint	provides a hint to the sequence on the file type being imported
+	@param		inFileTypeHint	provides a hint to the sequence on the file type being imported. Can be zero in many cases.
 	@param		inFlags			flags that can control how the data is parsed in the file and laid out in the tracks
 								that will be created and added to the sequence in this operation
 */
 extern OSStatus
-MusicSequenceFileLoadData (MusicSequence			inSequence,
+MusicSequenceFileLoadData(MusicSequence				inSequence,
 						CFDataRef					inData,
-						MusicSequenceFileTypeID		inFileTypeHint, // can be zero in many cases
+						MusicSequenceFileTypeID		inFileTypeHint,
 						MusicSequenceLoadFlags		inFlags)					API_AVAILABLE(macos(10.5), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!

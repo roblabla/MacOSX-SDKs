@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 3F206AEF-218A-31A4-BCC5-9F8D05C1B64B', 'x86_64: 3F206AEF-218A-31A4-BCC5-9F8D05C1B64B' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           5A4E62FC-A23B-3664-A0D1-661BBD8FE172
+  - target:          x86_64-maccatalyst
+    value:           5A4E62FC-A23B-3664-A0D1-661BBD8FE172
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           670D2E7A-96CB-3A32-8086-459302089ED5
+  - target:          arm64e-maccatalyst
+    value:           670D2E7A-96CB-3A32-8086-459302089ED5
 install-name:    '/System/Library/PrivateFrameworks/NetAuth.framework/Versions/A/NetAuth'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _DictionaryCreateFromBytesAndLength, _GetNetAuthAuthAgentPort, 
                        _GetNetAuthUserAgentPort, _NAAA_GetCredentials_CloseSession, 
                        _NAAA_GetCredentials_OpenSession, _NAAA_GetCredentials_ReportError, 

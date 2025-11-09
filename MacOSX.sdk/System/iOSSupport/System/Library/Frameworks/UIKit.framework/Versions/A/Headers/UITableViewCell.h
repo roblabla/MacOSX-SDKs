@@ -16,6 +16,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class UIImage, UIColor, UILabel, UIImageView, UIButton, UITextField, UITableView, UILongPressGestureRecognizer;
+@class UICellConfigurationState;
+@class UIBackgroundConfiguration;
+@protocol UIContentConfiguration;
+@class UIListContentConfiguration;
 
 typedef NS_ENUM(NSInteger, UITableViewCellStyle) {
     UITableViewCellStyleDefault,	// Simple cell with text label and optional image view (behavior of UITableViewCell in iPhoneOS 2.x)
@@ -76,22 +80,50 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UITableViewCell : UIView <NSCodi
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(nullable NSString *)reuseIdentifier API_AVAILABLE(ios(3.0)) NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
-// Content.  These properties provide direct access to the internal label and image views used by the table view cell.  These should be used instead of the content properties below.
-@property (nonatomic, readonly, strong, nullable) UIImageView *imageView API_AVAILABLE(ios(3.0));   // default is nil.  image view will be created if necessary.
+/// Returns the current configuration state for the cell.
+/// To add your own custom state(s), override the getter and call super to obtain an instance with the
+/// system properties set, then set your own custom states as desired.
+@property (nonatomic, readonly) UICellConfigurationState *configurationState API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
 
-@property (nonatomic, readonly, strong, nullable) UILabel *textLabel API_AVAILABLE(ios(3.0));   // default is nil.  label will be created if necessary.
-@property (nonatomic, readonly, strong, nullable) UILabel *detailTextLabel API_AVAILABLE(ios(3.0)); // default is nil.  label will be created if necessary (and the current style supports a detail label).
+/// Requests the cell update its configuration for its current state. This method is called automatically
+/// when the cell's `configurationState` may have changed, as well as in other circumstances where an
+/// update may be required. Multiple requests may be coalesced into a single update at the appropriate time.
+- (void)setNeedsUpdateConfiguration API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
 
-// If you want to customize cells by simply adding additional views, you should add them to the content view so they will be positioned appropriately as the cell transitions into and out of editing mode.
+/// Subclasses should override this method and update the cell's configuration using the state provided.
+/// This method should not be called directly, use `setNeedsUpdateConfiguration` to request an update.
+- (void)updateConfigurationUsingState:(UICellConfigurationState *)state API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+
+/// Returns a default list content configuration for the cell's style.
+- (UIListContentConfiguration *)defaultContentConfiguration API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+
+/// Setting a content configuration replaces the existing contentView of the cell with a new content view instance from the configuration,
+/// or directly applies the configuration to the existing content view if the configuration is compatible with the existing content view type.
+/// The default value is nil. After a configuration has been set, setting this property to nil will replace the current content view with a new content view.
+@property (nonatomic, copy, nullable) id<UIContentConfiguration> contentConfiguration API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+/// When YES, the cell will automatically call -updatedConfigurationForState: on its `contentConfiguration` when the cell's
+/// configuration state changes, and apply the updated configuration back to the cell. The default value is YES.
+@property (nonatomic) BOOL automaticallyUpdatesContentConfiguration API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+
+// Custom subviews should be added to the content view.
 @property (nonatomic, readonly, strong) UIView *contentView;
 
-// Default is nil for cells in UITableViewStylePlain, and non-nil for UITableViewStyleGrouped. The 'backgroundView' will be added as a subview behind all other views.
+// These properties will always return nil when a non-nil `contentConfiguration` is set.
+@property (nonatomic, readonly, strong, nullable) UIImageView *imageView API_DEPRECATED("Use UIListContentConfiguration instead, this property will be deprecated in a future release.", ios(3.0, API_TO_BE_DEPRECATED));   // default is nil.  image view will be created if necessary.
+@property (nonatomic, readonly, strong, nullable) UILabel *textLabel API_DEPRECATED("Use UIListContentConfiguration instead, this property will be deprecated in a future release.", ios(3.0, API_TO_BE_DEPRECATED)); // default is nil.  label will be created if necessary.
+@property (nonatomic, readonly, strong, nullable) UILabel *detailTextLabel API_DEPRECATED("Use UIListContentConfiguration instead, this property will be deprecated in a future release.", ios(3.0, API_TO_BE_DEPRECATED)); // default is nil.  label will be created if necessary (and the current style supports a detail label).
+
+/// Setting a background configuration supersedes the cell's backgroundView, selectedBackgroundView, and multipleSelectionBackgroundView. The default value is nil.
+@property (nonatomic, copy, nullable) UIBackgroundConfiguration *backgroundConfiguration API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+/// When YES, the cell will automatically call -updatedConfigurationForState: on its `backgroundConfiguration` when the cell's
+/// configuration state changes, and apply the updated configuration back to the cell. The default value is YES.
+@property (nonatomic) BOOL automaticallyUpdatesBackgroundConfiguration API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+
+// Always nil when a non-nil `backgroundConfiguration` is set. The 'backgroundView' will be added as a subview behind all other views.
 @property (nonatomic, strong, nullable) UIView *backgroundView;
-
-// Default is nil for cells in UITableViewStylePlain, and non-nil for UITableViewStyleGrouped. The 'selectedBackgroundView' will be added as a subview directly above the backgroundView if not nil, or behind all other views. It is added as a subview only when the cell is selected. Calling -setSelected:animated: will cause the 'selectedBackgroundView' to animate in and out with an alpha fade.
+// Always nil when a non-nil `backgroundConfiguration` is set. The 'selectedBackgroundView' will be added as a subview directly above the backgroundView if not nil, or behind all other views. It is added as a subview only when the cell is selected. Calling -setSelected:animated: will cause the 'selectedBackgroundView' to animate in and out with an alpha fade.
 @property (nonatomic, strong, nullable) UIView *selectedBackgroundView;
-
-// If not nil, takes the place of the selectedBackgroundView when using multiple selection.
+// Always nil when a non-nil `backgroundConfiguration` is set. If not nil, takes the place of the selectedBackgroundView when using multiple selection.
 @property (nonatomic, strong, nullable) UIView *multipleSelectionBackgroundView API_AVAILABLE(ios(5.0));
 
 @property (nonatomic, readonly, copy, nullable) NSString *reuseIdentifier;

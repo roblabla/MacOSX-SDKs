@@ -1,8 +1,28 @@
 /*
-	SFKeychainSavePanel.h
-	SecurityInterface
-	Copyright (c) 2002-2004 Apple Computer, Inc.
-	All rights reserved.
+ * Copyright (c) 2002-2020 Apple Inc. All Rights Reserved.
+ *
+ * @APPLE_LICENSE_HEADER_START@
+ *
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this
+ * file.
+ *
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
+ * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
+ * limitations under the License.
+ *
+ * @APPLE_LICENSE_HEADER_END@
+ */
+
+/*!
+    @header SFKeychainSavePanel.h
 */
 
 #ifndef _SFKEYCHAINSAVEPANEL_H_
@@ -10,6 +30,9 @@
 
 #import <AppKit/AppKit.h>
 #include <Security/SecKeychain.h>
+#import <Availability.h>
+
+API_UNAVAILABLE_BEGIN(ios, tvos, watchos, macCatalyst)
 
 #ifndef __APPLE_CC__
 #define __strong
@@ -33,9 +56,9 @@
 	NSString *_startPath;
 	NSString *_keychainFileName;
     __strong SecKeychainRef _returnedKeychain;
-	NSWindow *_parentWindowForSheet;	
+	NSWindow *_parentWindowForSheet;
     SEL	_clientDidEndSelector;
-	id	_clientDelegate;			
+	id	_clientDelegate;
 	void *_contextInfo;
     OSStatus _result;
     id _reserved_SFKeychainSavePanel;
@@ -46,7 +69,7 @@
     @method sharedKeychainSavePanel
     @abstract Returns a global instance of SFKeychainSavePanel object.
 */
-+ (SFKeychainSavePanel *)sharedKeychainSavePanel;
++ (SFKeychainSavePanel *)sharedKeychainSavePanel API_AVAILABLE(macos(10.3)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 /*!
     @method runModalForDirectory:file:
@@ -55,28 +78,28 @@
     @param name The keychain name to be automatically filled out in the NSSave panel.
     @result a result code returned by NSSavePanel's runModalForDirectory method.
 */
-- (NSInteger)runModalForDirectory:(NSString *)path file:(NSString *)name;
+- (NSInteger)runModalForDirectory:(NSString *)path file:(NSString *)name API_AVAILABLE(macos(10.3)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 /*!
 	@method setPassword:
     @abstract Specifies the password for the keychain that will be created.
     @param The password string object.
 */
-- (void)setPassword:(NSString *)password;
+- (void)setPassword:(NSString *)password API_AVAILABLE(macos(10.3)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 /*!
     @method keychain
     @abstract Returns the keychain created by the SFKeychainSavePanel.
     @result The keychain object.
 */
-- (SecKeychainRef)keychain;
+- (SecKeychainRef)keychain API_AVAILABLE(macos(10.3)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 /*!
     @method error
     @abstract Returns the last error encountered by SFKeychainSavePanel.
     @result The error object.
 */
-- (NSError *)error;
+- (NSError *)error API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 /*!
     @method beginSheetForDirectory:file:modalForWindow:modalDelegate:didEndSelector:contextInfo:
@@ -89,9 +112,10 @@
 	- (void)createPanelDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void  *)contextInfo;
     @param contextInfo Client-defined context pointer.
 */
-- (void)beginSheetForDirectory:(NSString *)path file:(NSString *)name modalForWindow:(NSWindow *)docWindow modalDelegate:(id)delegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo;
+- (void)beginSheetForDirectory:(NSString *)path file:(NSString *)name modalForWindow:(NSWindow *)docWindow modalDelegate:(id)delegate didEndSelector:(SEL)didEndSelector contextInfo:(void *)contextInfo API_AVAILABLE(macos(10.3)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
 @end
 
-#endif /* !_SFKEYCHAINSAVEPANEL_H_ */
+API_UNAVAILABLE_END
 
+#endif /* !_SFKEYCHAINSAVEPANEL_H_ */

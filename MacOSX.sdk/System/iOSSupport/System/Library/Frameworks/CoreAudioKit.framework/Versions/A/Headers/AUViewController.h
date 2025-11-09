@@ -71,7 +71,7 @@ API_AVAILABLE(macos(10.13), ios(11.0)) API_UNAVAILABLE(watchos)
 
 @end
 
-API_AVAILABLE(macos(10.12), ios(10.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.12), ios(9.0)) API_UNAVAILABLE(watchos)
 @interface AUAudioUnit (AUAudioUnit_ViewController)
 /*!	@method	requestViewControllerWithCompletionHandler:
 	@brief	Obtains an audio unit's view controller (and thereby a view).

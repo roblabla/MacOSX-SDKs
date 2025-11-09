@@ -158,6 +158,9 @@
 /* Define to 1 if you have the <openssl/engine.h> header file. */
 #define HAVE_OPENSSL_ENGINE_H 1
 
+/* Define to 1 if you have the `OPENSSL_init_ssl' function. */
+#define HAVE_OPENSSL_INIT_SSL 1
+
 /* Define to 1 if you have the `port_create' function. */
 /* #undef HAVE_PORT_CREATE */
 
@@ -196,6 +199,12 @@
 
 /* Define to 1 if you have the `syslog' function. */
 #define HAVE_SYSLOG 1
+
+/* Define if systemd is supported */
+/* #undef HAVE_SYSTEMD */
+
+/* Define to 1 if you have the <systemd/sd-daemon.h> header file. */
+/* #undef HAVE_SYSTEMD_SD_DAEMON_H */
 
 /* Define to 1 if you have the <sys/ipc.h> header file. */
 #define HAVE_SYS_IPC_H 1

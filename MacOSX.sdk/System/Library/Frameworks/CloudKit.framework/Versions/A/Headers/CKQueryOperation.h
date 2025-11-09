@@ -9,14 +9,15 @@
 #import <CloudKit/CKDatabaseOperation.h>
 #import <CloudKit/CKRecord.h>
 
+@class CKQuery, CKRecord, CKRecordZoneID;
+
 NS_ASSUME_NONNULL_BEGIN
+
 API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
 @interface CKQueryCursor : NSObject <NSCopying, NSSecureCoding>
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 @end
-
-@class CKQuery, CKRecord, CKRecordZoneID;
 
 /*! @discussion Query operations have a dynamically defined maximum number of results.  If the results of a query exceed this max, your completion block will invoked with a cursor.
  *  Issue a new query with that cursor to fetch the next batch of results.
@@ -40,32 +41,35 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
  */
 @property (nonatomic, copy, nullable) CKRecordZoneID *zoneID;
 
-/*! @discussion Defaults to `CKQueryOperationMaximumResults`.
- *  Queries may return fewer than `resultsLimit` in some scenarios:
- *  - There are legitimately fewer than `resultsLimit` number of records matching the query (and visible to the current user).
+/*! @discussion Defaults to @c CKQueryOperationMaximumResults.
+ *  Queries may return fewer than @c resultsLimit in some scenarios:
+ *  - There are legitimately fewer than @c resultsLimit number of records matching the query (and visible to the current user).
  *  - During the process of querying and fetching the results, some records were deleted, or became un-readable by the current user.
- *  When determining if there are more records to fetch, always check for the presence of a cursor in `queryCompletionBlock`.
+ *  When determining if there are more records to fetch, always check for the presence of a cursor in @c queryCompletionBlock.
  */
 @property (nonatomic, assign) NSUInteger resultsLimit;
 
 /*! @abstract Declares which user-defined keys should be fetched and added to the resulting CKRecords.
  *
  *  @discussion If nil, declares the entire record should be downloaded. If set to an empty array, declares that no user fields should be downloaded.
- *  Defaults to nil.
+ *  Defaults to @c nil.
  */
 @property (nonatomic, copy, nullable) NSArray<CKRecordFieldKey> *desiredKeys;
 
 /*! @abstract This block will be called once for every record that is returned as a result of the query.
  *
  *  @discussion The callbacks will happen in the order that the results were sorted in.
+ *  Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
  */
 @property (nonatomic, copy, nullable) void (^recordFetchedBlock)(CKRecord *record);
 
 /*! @abstract This block is called when the operation completes.
  *
- *  @discussion The [NSOperation completionBlock] will also be called if both are set.
+ *  @discussion The @code -[NSOperation completionBlock] @endcode will also be called if both are set.
+ *  Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
  */
 @property (nonatomic, copy, nullable) void (^queryCompletionBlock)(CKQueryCursor * _Nullable cursor, NSError * _Nullable operationError);
 
 @end
+
 NS_ASSUME_NONNULL_END

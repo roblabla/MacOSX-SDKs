@@ -13,10 +13,12 @@
 #import <AppKit/NSAccessibilityProtocols.h>
 #import <AppKit/NSAccessibilityElement.h>
 #import <AppKit/NSAccessibilityCustomRotor.h>
+// #import <AppKit/NSAccessibilityColor.h> - this caused a build failure (60459719), and needs to be disabled until 60467092 is addressed
 #import <AppKit/NSWorkspace.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSString, NSArray, NSView;
 

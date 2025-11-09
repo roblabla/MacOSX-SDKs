@@ -30,6 +30,8 @@
 
 #if defined (__x86_64__)
 #include "x86_64/machine_remote_time.h"
+#elif defined (__arm64__)
+#include "arm64/machine_remote_time.h"
 #endif
 
 #define BT_SLEEP_SENTINEL_TS  (~1ULL)

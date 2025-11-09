@@ -51,13 +51,13 @@ typedef NS_ENUM(NSInteger, NWTCPConnectionState) {
 	 *		the cancellation method.
 	 */
 	NWTCPConnectionStateCancelled		= 5,
-} API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+} API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @interface NWTCPConnection
  * @discussion Establish TCP connections to an endpoint, and send and receive data on the TCP connection.
  */
-API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
+API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @interface NWTCPConnection : NSObject
 
 /*!
@@ -81,19 +81,19 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
  * @param connection The original connection from which the caller will upgrade
  * @return An initialized NWTCPConnection
  */
-- (instancetype)initWithUpgradeForConnection:(NWTCPConnection *)connection API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+- (instancetype)initWithUpgradeForConnection:(NWTCPConnection *)connection API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @property state
  * @discussion The status of the connection. Use KVO to watch this property to get updates.
  */
-@property (readonly) NWTCPConnectionState state API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+@property (nonatomic, readonly) NWTCPConnectionState state API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @property viable
  * @discussion YES if the connection can read and write data, NO otherwise. Use KVO to watch this property.
  */
-@property (readonly, getter=isViable) BOOL viable API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+@property (nonatomic, readonly, getter=isViable) BOOL viable API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @property hasBetterPath
@@ -102,13 +102,13 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
  *		be done using the convenience upgrade initializer method.
  *		Use KVO to watch this property to get updates.
  */
-@property (readonly) BOOL hasBetterPath API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+@property (nonatomic, readonly) BOOL hasBetterPath API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @property endpoint
  * @discussion The destination endpoint with which this connection was created.
  */
-@property (readonly) NWEndpoint *endpoint API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+@property (nonatomic, readonly) NWEndpoint *endpoint API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @property connectedPath
@@ -119,19 +119,19 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
  * 		for this connection only. As a result, some underlying properties might change in time and
  * 		might not reflect the path for other connections that might be established at different times.
  */
-@property (readonly, nullable) NWPath *connectedPath API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+@property (nonatomic, readonly, nullable) NWPath *connectedPath API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @property localAddress
  * @discussion The IP address endpoint from which the connection was connected.
  */
-@property (readonly, nullable) NWEndpoint *localAddress API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+@property (nonatomic, readonly, nullable) NWEndpoint *localAddress API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @property remoteAddress
  * @discussion The IP address endpoint to which the connection was connected.
  */
-@property (readonly, nullable) NWEndpoint *remoteAddress API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+@property (nonatomic, readonly, nullable) NWEndpoint *remoteAddress API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @property txtRecord
@@ -139,21 +139,21 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
  * 		with the Bonjour service is available via this property. Beware that the value comes from
  * 		the network. Care must be taken when parsing this potentially malicious value.
  */
-@property (readonly, nullable) NSData *txtRecord API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+@property (nonatomic, readonly, nullable) NSData *txtRecord API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @property error
  * @discussion The connection-wide error property indicates any fatal error that occurred while
  * 		processing the connection or performing data reading or writing.
  */
-@property (readonly, nullable) NSError *error API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+@property (nonatomic, readonly, nullable) NSError *error API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @method cancel:
  * @discussion Cancel the connection. This will clean up the resources associated with this object
  * 		and transition this object to NWTCPConnectionStateCancelled state.
  */
-- (void)cancel API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+- (void)cancel API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @method readLength:completionHandler:
@@ -162,7 +162,7 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
  * @param length The exact number of bytes the application wants to read
  * @param completion The completion handler to be invoked when there is data to read or an error occurred
  */
-- (void)readLength:(NSUInteger)length completionHandler:(void (^)(NSData * __nullable data, NSError * __nullable error))completion API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+- (void)readLength:(NSUInteger)length completionHandler:(void (^)(NSData * _Nullable data, NSError * _Nullable error))completion API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @method readMinimumLength:maximumLength:completionHandler:
@@ -189,7 +189,7 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
  * @param maximum The maximum number of bytes the caller wants to read
  * @param completion The completion handler to be invoked when there is data to read or an error occurred
  */
-- (void)readMinimumLength:(NSUInteger)minimum maximumLength:(NSUInteger)maximum completionHandler:(void (^)(NSData * __nullable data, NSError * __nullable error))completion API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+- (void)readMinimumLength:(NSUInteger)minimum maximumLength:(NSUInteger)maximum completionHandler:(void (^)(NSData * _Nullable data, NSError * _Nullable error))completion API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @method write:completionHandler:
@@ -199,7 +199,7 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
  * @param completion The completion handler to be invoked when the data content has been written or an error has occurred.
  * 		If the error is nil, the write succeeded and the caller can write more data.
  */
-- (void)write:(NSData *)data completionHandler:(void (^)(NSError * __nullable error))completion API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+- (void)write:(NSData *)data completionHandler:(void (^)(NSError * _Nullable error))completion API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @method writeClose:
@@ -208,7 +208,7 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
  * 		When the connection's read side and write side are closed, the connection is considered
  * 		disconnected and will transition to the appropriate state.
  */
-- (void)writeClose API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
+- (void)writeClose API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 @end
 
@@ -216,6 +216,7 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
  * @protocol NWTCPConnectionAuthenticationDelegate
  * @discussion Allows the caller to take custom actions on some connection events.
  */
+API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
 @protocol NWTCPConnectionAuthenticationDelegate <NSObject>
 @optional
 
@@ -229,7 +230,7 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
  * @return YES to provide the identity for this connection, in which case, the delegate method
  *		provideIdentityForConnection:completionHandler: will be called.
  */
-- (BOOL)shouldProvideIdentityForConnection:(NWTCPConnection *)connection;
+- (BOOL)shouldProvideIdentityForConnection:(NWTCPConnection *)connection API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @method provideIdentityForConnection:completionHandler:
@@ -246,7 +247,7 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
  *		completion handler invocation.
  */
 - (void)provideIdentityForConnection:(NWTCPConnection *)connection
-				   completionHandler:(void (^)(SecIdentityRef identity, NSArray<id> *certificateChain))completion;
+				   completionHandler:(void (^)(SecIdentityRef identity, NSArray<id> *certificateChain))completion API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @method shouldEvaluateTrustForConnection:
@@ -258,7 +259,7 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
  * @return YES to take over the default trust evaluation, in which case, the delegate method
  *		evaluateTrustForConnection:peerCertificateChain:completionHandler: will be called.
  */
-- (BOOL)shouldEvaluateTrustForConnection:(NWTCPConnection *)connection;
+- (BOOL)shouldEvaluateTrustForConnection:(NWTCPConnection *)connection API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 /*!
  * @method evaluateTrustForConnection:peerCertificateChain:completionHandler:
@@ -275,7 +276,7 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
  */
 - (void)evaluateTrustForConnection:(NWTCPConnection *)connection
 			  peerCertificateChain:(NSArray<id> *)peerCertificateChain
-				 completionHandler:(void (^)(SecTrustRef trust))completion;
+				 completionHandler:(void (^)(SecTrustRef trust))completion API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
 
 @end
 

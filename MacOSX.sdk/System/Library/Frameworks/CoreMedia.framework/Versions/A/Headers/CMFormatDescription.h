@@ -3,7 +3,7 @@
 
 	Framework:  CoreMedia
  
-	Copyright © 2005-2019 Apple Inc. All rights reserved.
+	Copyright © 2005-2020 Apple Inc. All rights reserved.
 
 */
 
@@ -615,6 +615,7 @@ enum
 	kCMVideoCodecType_MPEG4Video       = 'mp4v',
 	kCMVideoCodecType_MPEG2Video       = 'mp2v',
 	kCMVideoCodecType_MPEG1Video       = 'mp1v',
+	kCMVideoCodecType_VP9              = 'vp09',
 
 	kCMVideoCodecType_DVCNTSC          = 'dvc ',
 	kCMVideoCodecType_DVCPAL           = 'dvcp',
@@ -783,6 +784,7 @@ CM_EXPORT const CFStringRef kCMFormatDescriptionChromaLocation_DV420 API_AVAILAB
 /* MPEG-2-conformant formats */
 CM_EXPORT const CFStringRef kCMFormatDescriptionConformsToMPEG2VideoProfile			// CFNumber specifying a kCMMPEG2VideoProfile_*
 							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_ProtectedContentOriginalFormat API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0)); // CNNumberRef as FourCharCode
 
 #if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
 enum : int32_t

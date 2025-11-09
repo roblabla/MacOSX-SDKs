@@ -83,6 +83,10 @@ typedef struct {
     uint32_t baseInstance;
 } MTLDrawIndexedPrimitivesIndirectArguments;
 
+typedef struct {
+    uint32_t viewportArrayIndexOffset;
+    uint32_t renderTargetArrayIndexOffset;
+} MTLVertexAmplificationViewMapping API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4));
 
 typedef struct {
     uint32_t patchCount;
@@ -209,6 +213,14 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  */
 - (void)setFrontFacingWinding:(MTLWinding)frontFacingWinding;
 
+/*!
+ @method setVertexAmplificationCount:
+ @brief Specifies the vertex amplification count and associated view mappings for each amplification ID.
+ @param count the amplification count. The maximum value is currently 2.
+ @param viewMappings an array of mapping elements.
+ @discussion Each mapping element describes how to route the corresponding amplification ID to a specific viewport and render target array index by using offsets from the base array index provided by the [[render_target_array_index]] and/or [[viewport_array_index]] output attributes in the vertex shader. This allows a modicum of programmability for each amplified vertex to be routed to a different [[render_target_array_index]] and [[viewport_array_index]] even though these attribytes cannot be amplified themselves.
+ */
+- (void)setVertexAmplificationCount:(NSUInteger)count viewMappings:(nullable const MTLVertexAmplificationViewMapping *)viewMappings API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4));
 
 /*!
  @method setCullMode:
@@ -513,6 +525,94 @@ API_AVAILABLE(macos(10.11), ios(8.0))
 
 -(void)drawIndexedPatches:(NSUInteger)numberOfPatchControlPoints patchIndexBuffer:(nullable id <MTLBuffer>)patchIndexBuffer patchIndexBufferOffset:(NSUInteger)patchIndexBufferOffset controlPointIndexBuffer:(id <MTLBuffer>)controlPointIndexBuffer controlPointIndexBufferOffset:(NSUInteger)controlPointIndexBufferOffset indirectBuffer:(id <MTLBuffer>)indirectBuffer indirectBufferOffset:(NSUInteger)indirectBufferOffset API_AVAILABLE(macos(10.12), ios(12.0)) API_UNAVAILABLE(tvos);
 
+/*!
+ @property tileWidth:
+ @abstract The width of the tile for this render pass.
+ */
+@property (readonly) NSUInteger tileWidth API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+
+
+/*!
+ @property tileHeight:
+ @abstract The height of the tile for this render pass.
+ */
+@property (readonly) NSUInteger tileHeight API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+
+/* Tile Resources */
+
+/*!
+ @method setTileBytes:length:atIndex:
+ @brief Set the data (by copy) for a given tile buffer binding point.  This will remove any existing MTLBuffer from the binding point.
+ */
+- (void)setTileBytes:(const void *)bytes length:(NSUInteger)length atIndex:(NSUInteger)index API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+
+/*!
+ @method setTileBuffer:offset:atIndex:
+ @brief Set a global buffer for all tile shaders at the given bind point index.
+ */
+- (void)setTileBuffer:(nullable id <MTLBuffer>)buffer offset:(NSUInteger)offset atIndex:(NSUInteger)index API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+
+/*!
+ @method setTileBufferOffset:atIndex:
+ @brief Set the offset within the current global buffer for all tile shaders at the given bind point index.
+ */
+- (void)setTileBufferOffset:(NSUInteger)offset atIndex:(NSUInteger)index API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+
+/*!
+ @method setTileBuffers:offsets:withRange:
+ @brief Set an array of global buffers for all tile shaders with the given bind point range.
+ */
+- (void)setTileBuffers:(const id <MTLBuffer> __nullable [__nonnull])buffers offsets:(const NSUInteger [__nonnull])offsets withRange:(NSRange)range API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+
+/*!
+ @method setTileTexture:atIndex:
+ @brief Set a global texture for all tile shaders at the given bind point index.
+ */
+- (void)setTileTexture:(nullable id <MTLTexture>)texture atIndex:(NSUInteger)index API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+
+/*!
+ @method setTileTextures:withRange:
+ @brief Set an array of global textures for all tile shaders with the given bind point range.
+ */
+- (void)setTileTextures:(const id <MTLTexture> __nullable [__nonnull])textures withRange:(NSRange)range API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+
+/*!
+ @method setTileSamplerState:atIndex:
+ @brief Set a global sampler for all tile shaders at the given bind point index.
+ */
+- (void)setTileSamplerState:(nullable id <MTLSamplerState>)sampler atIndex:(NSUInteger)index API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+
+/*!
+ @method setTileSamplerStates:withRange:
+ @brief Set an array of global samplers for all fragment shaders with the given bind point range.
+ */
+- (void)setTileSamplerStates:(const id <MTLSamplerState> __nullable [__nonnull])samplers withRange:(NSRange)range API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+
+/*!
+ @method setTileSamplerState:lodMinClamp:lodMaxClamp:atIndex:
+ @brief Set a global sampler for all tile shaders at the given bind point index.
+ */
+- (void)setTileSamplerState:(nullable id <MTLSamplerState>)sampler lodMinClamp:(float)lodMinClamp lodMaxClamp:(float)lodMaxClamp atIndex:(NSUInteger)index API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+
+
+/*!
+ @method setTileSamplerStates:lodMinClamps:lodMaxClamps:withRange:
+ @brief Set an array of global samplers for all tile shaders with the given bind point range.
+ */
+- (void)setTileSamplerStates:(const id <MTLSamplerState> __nullable [__nonnull])samplers lodMinClamps:(const float [__nonnull])lodMinClamps lodMaxClamps:(const float [__nonnull])lodMaxClamps withRange:(NSRange)range API_AVAILABLE(ios(11.0), macos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
+
+/*!
+ @method dispatchThreadsPerTile:
+ @brief dispatch threads to perform a mid-render compute operation.
+ */
+- (void)dispatchThreadsPerTile:(MTLSize)threadsPerTile API_AVAILABLE(macos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
+
+/*!
+ @method setThreadgroupMemoryLength:offset:atIndex:
+ @brief Set the size of the threadgroup memory argument at the given bind point index and offset.
+ */
+- (void)setThreadgroupMemoryLength:(NSUInteger)length offset:(NSUInteger)offset atIndex:(NSUInteger)index API_AVAILABLE(macos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
+
 
 /*!
  * @method useResource:usage:
@@ -597,7 +697,7 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  * @param indirectBufferOffset The byte offset within indirectBuffer where the execution range parameter is located. Must be a multiple of 4 bytes.
  * @discussion The same indirect command buffer may be executed any number of times within the same encoder.
  */
-- (void)executeCommandsInBuffer:(id<MTLIndirectCommandBuffer>)indirectCommandbuffer indirectBuffer:(id<MTLBuffer>)indirectRangeBuffer indirectBufferOffset:(NSUInteger)indirectBufferOffset API_AVAILABLE(macos(10.14), macCatalyst(13.0)) API_UNAVAILABLE(ios);
+- (void)executeCommandsInBuffer:(id<MTLIndirectCommandBuffer>)indirectCommandbuffer indirectBuffer:(id<MTLBuffer>)indirectRangeBuffer indirectBufferOffset:(NSUInteger)indirectBufferOffset API_AVAILABLE(macos(10.14), macCatalyst(13.0), ios(13.0));
 
 
 /*!
@@ -633,6 +733,6 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  */
 -(void)sampleCountersInBuffer:(id<MTLCounterSampleBuffer>)sampleBuffer
                 atSampleIndex:(NSUInteger)sampleIndex
-                  withBarrier:(BOOL)barrier API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
+                  withBarrier:(BOOL)barrier API_AVAILABLE(macos(10.15), ios(14.0));
 @end
 NS_ASSUME_NONNULL_END

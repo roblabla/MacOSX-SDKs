@@ -1,12 +1,26 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 8A8391F0-917A-383E-AF13-024D32FF5D7B', 'x86_64: 8A8391F0-917A-383E-AF13-024D32FF5D7B' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           5CD1B615-A2CE-3647-A4A5-5750603EF1AC
+  - target:          x86_64-maccatalyst
+    value:           5CD1B615-A2CE-3647-A4A5-5750603EF1AC
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           67337FE4-8B9F-3187-8BC5-DB990C2C761B
+  - target:          arm64e-maccatalyst
+    value:           67337FE4-8B9F-3187-8BC5-DB990C2C761B
 install-name:    '/usr/lib/libarchive.2.dylib'
 current-version: 9.2
 compatibility-version: 9
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _archive_bzlib_version, _archive_clear_error, _archive_compression, 
                        _archive_compression_name, _archive_copy_error, _archive_entry_acl, 
                        _archive_entry_acl_add_entry, _archive_entry_acl_add_entry_w, 

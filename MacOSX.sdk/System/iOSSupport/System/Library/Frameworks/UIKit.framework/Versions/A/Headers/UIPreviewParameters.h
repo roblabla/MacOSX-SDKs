@@ -37,6 +37,10 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) @interface 
  */
 @property (nonatomic, copy, nullable) UIBezierPath *visiblePath;
 
+/* Bezier path to be used to draw the preview's shadow. If nil, the visiblePath is used.
+ */
+@property (nonatomic, copy, nullable) UIBezierPath *shadowPath API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
+
 /* The background color that the preview draws behind the specified view.
  * Set this to `nil` to reset to the default value.
  */

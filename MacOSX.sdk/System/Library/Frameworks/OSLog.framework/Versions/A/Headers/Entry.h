@@ -65,7 +65,7 @@ typedef NS_ENUM(NSInteger, OSLogEntryStoreCategory) {
     OSLogEntryStoreCategoryLongTerm14,
     OSLogEntryStoreCategoryLongTerm30,
 }
-API_AVAILABLE(macos(10.15))
+API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
 NS_SWIFT_NAME(OSLogEntry.StoreCategory);
 
 /*!
@@ -74,7 +74,7 @@ NS_SWIFT_NAME(OSLogEntry.StoreCategory);
  * @abstract
  * A single entry from the unified logging system.
  */
-API_AVAILABLE(macos(10.15))
+API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
 OS_EXPORT
 @interface OSLogEntry : NSObject
 
@@ -112,7 +112,7 @@ OS_EXPORT
  * that are generated from a process; they have metadata about
  * the originator.
  */
-API_AVAILABLE(macos(10.15))
+API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
 OS_EXPORT
 @protocol OSLogEntryFromProcess
 
@@ -165,7 +165,7 @@ OS_EXPORT
  * Entry subclasses conforming to this protocol represent
  * entries that were made using a handle and a format string.
  */
-API_AVAILABLE(macos(10.15))
+API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
 OS_EXPORT
 @protocol OSLogEntryWithPayload
 

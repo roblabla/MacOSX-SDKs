@@ -1,11 +1,25 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 88AB7DBB-F590-3B95-92B3-8A76A7A9252B', 'x86_64: 88AB7DBB-F590-3B95-92B3-8A76A7A9252B' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           AE811F57-EE76-3BFA-9175-CD71F272A02A
+  - target:          x86_64-maccatalyst
+    value:           AE811F57-EE76-3BFA-9175-CD71F272A02A
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           9C50C9EC-FC71-3491-ABD6-0F7671F6E31B
+  - target:          arm64e-maccatalyst
+    value:           9C50C9EC-FC71-3491-ABD6-0F7671F6E31B
 install-name:    '/System/Library/PrivateFrameworks/MobileIcons.framework/Versions/A/MobileIcons'
 current-version: 372
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _LIBytesNeededForGhostlyImageOfSize, _LIBytesPerRowForGhostlyImageOfWidth, 
                        _LICopyBestImageForVariantFromBundle, _LICopyBestImageForVariantFromImages, 
                        _LICopyIconPathsFromBundle, _LICopyIconPathsFromBundleForStyles, 
@@ -24,7 +38,5 @@ exports:
                        _MGCopyAnswer, __LICGPathCreateContinuousRoundedRect, __LICreateIconDataForBundleURLWithIconName, 
                        __LICreateIconDataForBundleURLWithIconNameWithOptions, __LICreateIconDataForContainersWithIconsDictionary, 
                        __LICreateIconDataForContainersWithIconsDictionaryAndPreferredIconNameWithOptions, 
-                       __LICreateIconForBundleWithIconsDictionaryAndContainers, __Z10x_align_tomm, 
-                       __Z14x_power_of_twom, __Z21CA_CFDictionaryCreatev, __Z21CA_CFDictionarySetIntP14__CFDictionaryPK10__CFStringi, 
-                       __Z22CA_CFDictionarySetBoolP14__CFDictionaryPK10__CFStringb ]
+                       __LICreateIconForBundleWithIconsDictionaryAndContainers ]
 ...

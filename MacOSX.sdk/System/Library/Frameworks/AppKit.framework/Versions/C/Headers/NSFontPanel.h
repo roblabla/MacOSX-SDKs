@@ -6,9 +6,10 @@
 */
 
 #import <AppKit/NSPanel.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSFontPanel, NSMutableDictionary, NSFontManager, NSMutableArray, NSTableView, NSFontDescriptor, NSFont;
 
@@ -38,7 +39,7 @@ typedef NS_OPTIONS(NSUInteger, NSFontPanelModeMask) {
 
 #if __swift__ < 40200
 @interface NSObject (NSFontPanelValidationAdditions)
-- (NSFontPanelModeMask)validModesForFontPanel:(NSFontPanel *)fontPanel API_DEPRECATED("This is now an optional method of the NSFontChanging protocol.", macos(10.0,API_TO_BE_DEPRECATED));
+- (NSFontPanelModeMask)validModesForFontPanel:(NSFontPanel *)fontPanel API_DEPRECATED("This is now an optional method of the NSFontChanging protocol.", macos(10.0, 11.0));
 @end
 #endif
 

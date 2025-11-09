@@ -2,7 +2,7 @@
 //  INStartCallIntent.h
 //  Intents
 //
-//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2020 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntent.h>
@@ -15,6 +15,9 @@
 
 @class INCallCapabilityResolutionResult;
 @class INCallDestinationTypeResolutionResult;
+@class INCallRecord;
+@class INCallRecordFilter;
+@class INCallRecordResolutionResult;
 @class INPerson;
 @class INPersonResolutionResult;
 @class INStartCallCallCapabilityResolutionResult;
@@ -23,22 +26,25 @@
 NS_ASSUME_NONNULL_BEGIN
 
 API_AVAILABLE(ios(13.0), watchos(6.0))
-API_UNAVAILABLE(macosx)
+API_UNAVAILABLE(macos, tvos)
 @interface INStartCallIntent : INIntent
 
-- (instancetype)initWithAudioRoute:(INCallAudioRoute)audioRoute
-                   destinationType:(INCallDestinationType)destinationType
-                          contacts:(nullable NSArray<INPerson *> *)contacts
-            recordTypeForRedialing:(INCallRecordType)recordTypeForRedialing
-                    callCapability:(INCallCapability)callCapability NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCallRecordFilter:(nullable INCallRecordFilter *)callRecordFilter
+                    callRecordToCallBack:(nullable INCallRecord *)callRecordToCallBack
+                              audioRoute:(INCallAudioRoute)audioRoute
+                         destinationType:(INCallDestinationType)destinationType
+                                contacts:(nullable NSArray<INPerson *> *)contacts
+                          callCapability:(INCallCapability)callCapability NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(14.0), watchos(7.0), macosx(11.0));
+
+@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INCallRecordFilter *callRecordFilter API_AVAILABLE(ios(14.0), watchos(7.0)) API_UNAVAILABLE(macos);
+
+@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INCallRecord *callRecordToCallBack API_AVAILABLE(ios(14.0), watchos(7.0)) API_UNAVAILABLE(macos);
 
 @property (readonly, assign, NS_NONATOMIC_IOSONLY) INCallAudioRoute audioRoute;
 
 @property (readonly, assign, NS_NONATOMIC_IOSONLY) INCallDestinationType destinationType;
 
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSArray<INPerson *> *contacts;
-
-@property (readonly, assign, NS_NONATOMIC_IOSONLY) INCallRecordType recordTypeForRedialing;
 
 @property (readonly, assign, NS_NONATOMIC_IOSONLY) INCallCapability callCapability;
 
@@ -52,7 +58,7 @@ API_UNAVAILABLE(macosx)
  */
 
 API_AVAILABLE(ios(13.0), watchos(6.0))
-API_UNAVAILABLE(macosx)
+API_UNAVAILABLE(macos, tvos)
 @protocol INStartCallIntentHandling <NSObject>
 
 @required
@@ -94,6 +100,9 @@ API_UNAVAILABLE(macosx)
 
  @see INIntentResolutionResult
  */
+
+- (void)resolveCallRecordToCallBackForStartCall:(INStartCallIntent *)intent
+                    withCompletion:(void (^)(INCallRecordResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveCallRecordToCallBack(for:with:)) API_AVAILABLE(ios(14.0), watchos(7.0)) API_UNAVAILABLE(macos);
 
 - (void)resolveDestinationTypeForStartCall:(INStartCallIntent *)intent
                     withCompletion:(void (^)(INCallDestinationTypeResolutionResult *resolutionResult))completion NS_SWIFT_NAME(resolveDestinationType(for:with:));

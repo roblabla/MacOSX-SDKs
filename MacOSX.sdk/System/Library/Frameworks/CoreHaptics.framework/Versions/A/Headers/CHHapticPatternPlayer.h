@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 		Instances of these objects are created via the factory methods such as
         `CHHapticEngine(createPlayerWithPattern:error)`.
  */
-CH_EXPORT API_AVAILABLE(ios(13.0), macos(10.15))
+CH_EXPORT API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos)
 @protocol CHHapticPatternPlayer <NSObject>
 
 /*! @method startAtTime:error
@@ -103,7 +103,7 @@ typedef void (^CHHapticAdvancedPatternPlayerCompletionHandler)(NSError *_Nullabl
 	@discussion
 		Instances of these objects are created via the factory methods such as `CHHapticEngine(createAdvancedPlayerWithPattern:error)`.
  */
-CH_EXPORT API_AVAILABLE(ios(13.0), macos(10.15))
+CH_EXPORT API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos)
 @protocol CHHapticAdvancedPatternPlayer<CHHapticPatternPlayer>
 
 /*! @method pauseAtTime:error

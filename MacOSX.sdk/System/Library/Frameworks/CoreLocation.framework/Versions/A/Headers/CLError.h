@@ -36,6 +36,7 @@ typedef NS_ENUM(NSInteger, CLError) {
     kCLErrorDeferredCanceled,             // Deferred mode request canceled a previous request
 	kCLErrorRangingUnavailable,           // Ranging cannot be performed
 	kCLErrorRangingFailure,               // General ranging failure
+	kCLErrorPromptDeclined,               // Authorization request not presented to user
 };
 
 /*

@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVMovieTrack.h>)
 /*
 	File:			AVMovieTrack.h
 
@@ -268,7 +269,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 	@param			startTime
 					The time in the target track at which the media is to be inserted.
 	@param			copySampleData
-                    A BOOL value that indicates whether sample data is to be copied form the source to the destination during edits.
+                    A BOOL value that indicates whether sample data is to be copied from the source to the destination during edits.
 					If YES, the sample data is written to the file specified by the track property mediaDataStorage if non-nil,
 					or else by the movie property defaultMediaDataStorage if non-nil; if both are nil, the method will fail and return NO.
 					If NO, sample data will not be written and sample references to the samples in their original container will be added
@@ -455,3 +456,7 @@ API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCore/AVMovieTrack.h>
+#endif

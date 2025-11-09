@@ -24,7 +24,7 @@ QL_EXTERN_C_BEGIN
 
 typedef struct CF_BRIDGED_TYPE(id) __QLThumbnail *QLThumbnailRef;
 
-QL_EXPORT CFTypeID QLThumbnailGetTypeID() API_DEPRECATED("Use QuickLookThumbnailing for thumbnails.", macos(10.6, API_TO_BE_DEPRECATED));
+QL_EXPORT CFTypeID QLThumbnailGetTypeID(void) API_DEPRECATED("Use QuickLookThumbnailing for thumbnails.", macos(10.6, API_TO_BE_DEPRECATED));
 
 /*
  @function QLThumbnailCreate

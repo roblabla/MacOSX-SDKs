@@ -1,13 +1,19 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: E3188D98-8AC5-3312-8F8D-767A9A4FD413' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           85C42B08-9D6A-363D-96DF-7E40F73FF46B
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           71A7E9B9-4C29-3E9C-B5F3-15D66A0A388D
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Carbon'
-current-version: 162
+current-version: 164
 compatibility-version: 2
-exports:         
-  - archs:           [ x86_64 ]
-    re-exports:      [ '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 
+reexported-libraries:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    libraries:       [ '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 
                        '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/CommonPanels.framework/Versions/A/CommonPanels', 
                        '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/HIToolbox', 
                        '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Help.framework/Versions/A/Help', 
@@ -17,17 +23,29 @@ exports:
                        '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Print.framework/Versions/A/Print', 
                        '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/SecurityHI.framework/Versions/A/SecurityHI', 
                        '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/SpeechRecognition.framework/Versions/A/SpeechRecognition' ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CarbonVersionNumber, _CarbonVersionString ]
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: DE39DC10-C506-3249-BEE3-FF952E3B511B' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           A277B29A-8180-3030-A325-5EB0CBF60ADD
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           335D2F7E-DDB9-3971-9F66-5D7076C79F6F
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/CommonPanels.framework/Versions/A/CommonPanels'
 current-version: 101
-parent-umbrella: Carbon
-exports:         
-  - archs:           [ x86_64 ]
-    allowable-clients: [ AppKit ]
+parent-umbrella:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    umbrella:        Carbon
+allowable-clients:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    clients:         [ AppKit ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CCP_FontPanelClose, _CCP_FontPanelGetSelection, _CCP_FontPanelIsVisible, 
                        _CCP_FontPanelOpen, _CCP_FontPanelSelectFonts, _CCP_NPickColor, 
                        _CMCalibrateDisplay, _Call_CommonCocoaPanels_NPickColor, _CommonPanelsVersionNumber, 
@@ -52,19 +70,28 @@ exports:
                        _kFontPanelDocumentAttributesKey, _kFontPanelFeatureSelectorsKey, 
                        _kFontPanelFeatureTypesKey, _kFontPanelMouseTrackingState, 
                        _kFontPanelVariationAxesKey, _kFontPanelVariationValuesKey ]
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 354DF29C-98AB-3E73-A313-1EC13C41CD40' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           3B0B2A37-5174-3E0D-8799-C423B6C09B4F
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           E120EACE-3808-3A0C-B37C-DFEF0B36828E
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/HIToolbox'
-current-version: 986
-parent-umbrella: Carbon
-exports:         
-  - archs:           [ x86_64 ]
-    allowable-clients: [ AGL, AppKit, AppleShareClient, Backup, DesktopServices, 
-                         DesktopServicesPriv, Dock, Finder, FinderKit, ImageKit, 
-                         Printing_UI, QTKit, QTKitServer, RemoteViewServices, Shortcut, 
-                         Suggestions, ViewBridge, loginwindow ]
+current-version: 1059
+parent-umbrella:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    umbrella:        Carbon
+allowable-clients:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    clients:         [ AGL, AppKit, AppleShareClient, Backup, Dock, Finder, FinderKit, 
+                       ImageKit, Printing_UI, QTKit, QTKitServer, RemoteViewServices, 
+                       Shortcut, Suggestions, UIKitMacHelper, ViewBridge, loginwindow ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _AEGetInteractionAllowed, _AEGetTheCurrentEvent, _AEInteractWithUser, 
                        _AEProcessAppleEvent, _AEProcessEvent, _AEResetTimer, _AEResumeTheCurrentEvent, 
                        _AESend, _AESetInteractionAllowed, _AESetTheCurrentEvent, 
@@ -302,9 +329,9 @@ exports:
                        _SetWindowModality, _SetWindowModified, _SetWindowProperty, 
                        _SetWindowProxyAlias, _SetWindowProxyIcon, _SetWindowResizeLimits, 
                        _SetWindowTitleWithCFString, _SetWindowToolbar, _ShowControl, 
-                       _ShowHide, _ShowHideProcess, _ShowHideWindowToolbar, _ShowMenuBar, 
-                       _ShowSheetWindow, _ShowWindow, _SizeControl, _SizeWindow, 
-                       _StdFilterProc, _SyncWindowToCGSWindow, _TISCapsLockSwitchShouldKeyboardLayoutUseAlternateForModifiers, 
+                       _ShowHide, _ShowHideWindowToolbar, _ShowMenuBar, _ShowSheetWindow, 
+                       _ShowWindow, _SizeControl, _SizeWindow, _StdFilterProc, _SyncWindowToCGSWindow, 
+                       _TISCapsLockSwitchShouldKeyboardLayoutUseAlternateForModifiers, 
                        _TISCopyCurrentASCIICapableKeyboardInputSource, _TISCopyCurrentASCIICapableKeyboardLayoutInputSource, 
                        _TISCopyCurrentKeyboardInputSource, _TISCopyCurrentKeyboardLayoutInputSource, 
                        _TISCopyCurrentNonRomanInputSourceForRomanSwitch, _TISCopyInputMethodKeyboardLayoutOverride, 
@@ -316,7 +343,7 @@ exports:
                        _TISDeselectInputSource, _TISDisableInputSource, _TISEnableInputSource, 
                        _TISGetAppleKeyLayoutCount, _TISGetAppleKeyLayoutIndexForKeyLayoutName, 
                        _TISGetAppleKeyLayoutIndexForNumericID, _TISGetAppleKeyLayoutKLPropertyAtIndex, 
-                       _TISGetDictationShouldAutoEnable, _TISGetGestureHandwritingState, 
+                       _TISGetDictationShouldAutoEnable, _TISGetFnUsageType, _TISGetGestureHandwritingState, 
                        _TISGetInputSourceProperty, _TISHardwareSupportsGestureHandwriting, 
                        _TISInputMethodDataFileReaderCreateBasicProperties, _TISInputMethodDataFileReaderCreatePropertyListAndWordList, 
                        _TISInputSourceGetTypeID, _TISIsKeyboardLayoutCapsLockSwitchAllowed, 
@@ -327,8 +354,8 @@ exports:
                        _TISRegisterInputSource, _TISSelectInputSource, _TISSetDefaultAsciiCapableKeyboardLayoutInputSource, 
                        _TISSetDictationShouldAutoEnable, _TISSetExtensionsForIntlFileCacheUpdate, 
                        _TISSetGestureHandwritingState, _TISSetInputMethodKeyboardLayoutOverride, 
-                       _TISSetRomanSwitchState, _TISUpdateIntlFileCache, _TISUpdaterEnsureKotoeriHiraganaModeForSUMavericks, 
-                       _TISUpdaterMigrateDictationAutoEnableFromSpeechRecognition, 
+                       _TISSetRomanSwitchState, _TISUpdateFnUsageType, _TISUpdateIntlFileCache, 
+                       _TISUpdaterEnsureKotoeriHiraganaModeForSUMavericks, _TISUpdaterMigrateDictationAutoEnableFromSpeechRecognition, 
                        _TISUpdaterMigrateKotoeriToJapaneseIM, _TISUpdaterMigratePrefsFromByHostDomain, 
                        _TISWriteKeyLayoutCollection, _TSMCanChangeInputSourceEnabledState, 
                        _TSMCopyTextInputGlobalProperty, _TSMCreateInputSourceForKeyboardLayoutRef, 
@@ -383,16 +410,18 @@ exports:
                        __HIMenuBarPositionUnlock, __HIMenuBarRequestVisibility, __HIMenuBarSetAppearanceOverride, 
                        __HIMenuBarSetAutoHideHeight, __HIMenuBarSetAutoShowDelay, 
                        __HIMenuBarSetTransitionDuration, __HIMenuBarShowAsPopupFromKeyboard, 
-                       __HIMenuCopyItemViewClass, __HIMenuDisableAutoDismissal, __HIMenuEnableAutoDismissal, 
+                       __HIMenuCopyItemViewClass, __HIMenuCreateConfiguredMarkImage, 
+                       __HIMenuDisableAutoDismissal, __HIMenuEnableAutoDismissal, 
                        __HIMenuGetBackgroundBleed, __HIMenuGetCommandKey, __HIMenuGetContentDirectionality, 
-                       __HIMenuGetDefaultMenuBarHeightForDisplay, __HIMenuGetEffectiveDirectionality, 
-                       __HIMenuGetItemView, __HIMenuGetMenuBarHeight, __HIMenuGetMenuBarHeightForDisplay, 
-                       __HIMenuGetNewItemsCount, __HIMenuIsCarbonMenuKeyEvent, __HIMenuIsDark, 
-                       __HIMenuPerformKeyboardNavigation, __HIMenuSendItemSelectedEvent, 
-                       __HIMenuSetCommandKey, __HIMenuSetContentDirectionality, __HIMenuSetEventProc, 
-                       __HIMenuSetIndentWidth, __HIMenuSetItemIndent, __HIMenuSetItemViewClass, 
-                       __HIMenuSetNSImageInterface, __HIMenuSetNewItemsCount, __HIMenuUseBackdrops, 
-                       __HIMenuViewRegisterClass, __HIPopupButtonRegisterClass, __HIPresentationInstanceCreateForFullScreenSpace, 
+                       __HIMenuGetContentSize, __HIMenuGetDefaultMenuBarHeightForDisplay, 
+                       __HIMenuGetEffectiveDirectionality, __HIMenuGetItemView, __HIMenuGetMenuBarHeight, 
+                       __HIMenuGetMenuBarHeightForDisplay, __HIMenuGetNewItemsCount, 
+                       __HIMenuIsCarbonMenuKeyEvent, __HIMenuIsDark, __HIMenuPerformKeyboardNavigation, 
+                       __HIMenuSendItemSelectedEvent, __HIMenuSetCommandKey, __HIMenuSetContentDirectionality, 
+                       __HIMenuSetContentSize, __HIMenuSetEventProc, __HIMenuSetIndentWidth, 
+                       __HIMenuSetItemIndent, __HIMenuSetItemViewClass, __HIMenuSetNSImageInterface, 
+                       __HIMenuSetNewItemsCount, __HIMenuUseBackdrops, __HIMenuViewRegisterClass, 
+                       __HIPopupButtonRegisterClass, __HIPresentationInstanceCreateForFullScreenSpace, 
                        __HIPresentationInstanceDisplayDidChange, __HIPresentationInstanceRelease, 
                        __HIPresentationInstanceSetSpace, __HIPresentationInstanceSetUIMode, 
                        __HIPresentationModeStartMenuBarAnimation, __HIProgressBarRegisterClass, 
@@ -421,35 +450,37 @@ exports:
                        __IsFullTabbingEnabled, __IsMenuAlreadyPopulated, __IsMenuItemEnabledU, 
                        __IsSymbolicHotKeyEvent, __LoadPerformanceMenu, __MenuIterCreate, 
                        __MenuIterFirst, __MenuIterNext, __MenuIterRelease, __NotifyEventLoopObservers, 
-                       __OpenMenuWithOptions, __OpenSubmenuFromItem, __PostCGEventToQueue, 
-                       __PushMouseCoalescingState, __QuitAppModalLoop, __RegisterSharedDockClientWithRunLoop, 
-                       __RemoveCGEventFromQueue, __RemoveEventLoopObserver, __RemoveMouseCoalescingState, 
-                       __RequestBackgroundMouseMovedEvents, __RunAppModalLoop, __SetAppleMenuEnabled, 
-                       __SetAppleMenuInstallerMode, __SetBaroloFullScreenModeUIMode, 
-                       __SetCGEventAssociatedData, __SetCGEventConversionFilter, 
-                       __SetDefaultMenuFont, __SetFullTabbingEnabled, __SetJavaThreadHook, 
-                       __SetMenuCallout, __SetMenuItemIconSize, __SetMenuMinimumWidth, 
-                       __SetMenuTrackingShouldReraiseNSExceptions, __SetMenuWindowLevel, 
-                       __SetOpenMenuOrigin, __SetWindowCGOrderingEnabled, __SetWindowReshapingEnabled, 
-                       __SetWindowZOrderingEnabled, __SimulateMenuClosed, __SimulateMenuOpening, 
-                       __SimulateMenuSelection, __SimulateMenuSelectionU, __StartSystemUIModeMenuBarAnimation, 
+                       __OpenMenuWithOptions, __OpenSubmenuFromItem, __OpenSubmenuFromItemWithOptions, 
+                       __PostCGEventToQueue, __PushMouseCoalescingState, __QuitAppModalLoop, 
+                       __RegisterSharedDockClientWithRunLoop, __RemoveCGEventFromQueue, 
+                       __RemoveEventLoopObserver, __RemoveMouseCoalescingState, __RequestBackgroundMouseMovedEvents, 
+                       __RunAppModalLoop, __SetAppleMenuEnabled, __SetAppleMenuInstallerMode, 
+                       __SetBaroloFullScreenModeUIMode, __SetCGEventAssociatedData, 
+                       __SetCGEventConversionFilter, __SetDefaultMenuFont, __SetFullTabbingEnabled, 
+                       __SetJavaThreadHook, __SetMenuCallout, __SetMenuItemIconSize, 
+                       __SetMenuMinimumWidth, __SetMenuTrackingShouldReraiseNSExceptions, 
+                       __SetMenuWindowLevel, __SetOpenMenuOrigin, __SetWindowCGOrderingEnabled, 
+                       __SetWindowReshapingEnabled, __SetWindowZOrderingEnabled, 
+                       __SimulateMenuClosed, __SimulateMenuOpening, __SimulateMenuSelection, 
+                       __SimulateMenuSelectionU, __StartSystemUIModeMenuBarAnimation, 
                        __SyncWindowWithCGAfterMove, __TISCopyParentInputMethodForInputSource, 
-                       __TISRestrictToReadOnlyMachinePrefs, __TSMCopySelectableInputSourcesInUIOrder, 
-                       __TSMInvalidateDocumentClient, __TSMIsRemoteViewAccessoryView, 
-                       __TSMIsRemoteViewKeyEquivalentHandling, __TSMParentInputMethodInputSourceForInputModeCreate, 
-                       __TSMRegisterRemoteViewClient, __TSMRemoteViewActivationIsOn, 
-                       __TSMSetRemoteViewActivation, __TSMSetRemoteViewIsAccessoryView, 
-                       __TSMSetRemoteViewKeyEquivalentHandling, __TSMWouldEventBeProcessedByPressAndHold, 
-                       ___CDCreateScreenFramesDictionaryRepresentation, ___CoreDragAnimateOrderOut, 
-                       ___CoreDragAutoScaleSourceDragComponents, ___CoreDragBeginDropAnimationTransaction, 
-                       ___CoreDragBeginFlockingAnimation, ___CoreDragBeginSlideBackAnimation, 
-                       ___CoreDragBeginUnflockingAnimation, ___CoreDragCancelDropAnimationTransaction, 
-                       ___CoreDragCancelOutstandingFlockingAnimation, ___CoreDragClearAllImageOverrides, 
-                       ___CoreDragCommitDropAnimationTransaction, ___CoreDragCreateCFStringFromCGEvent, 
-                       ___CoreDragCreateDictionaryRepOfLayerTree, ___CoreDragCreateImageData, 
-                       ___CoreDragCreateImageDataFromCFDictionary, ___CoreDragCreateImageDataWithComponentsBlock, 
-                       ___CoreDragCreateImageDataWithImage, ___CoreDragGetValueForKey, 
-                       ___CoreDragHasImageOverrides, ___CoreDragImageDataCreateDictionaryRepresentation, 
+                       __TISCreateEnabledInputSourcePrefs, __TISGetPhysicalKeyboardLanguage, 
+                       __TISRestrictToReadOnlyMachinePrefs, __TISUpdateEnabledInputSourcePrefs, 
+                       __TSMCopySelectableInputSourcesInUIOrder, __TSMInvalidateDocumentClient, 
+                       __TSMIsRemoteViewAccessoryView, __TSMIsRemoteViewKeyEquivalentHandling, 
+                       __TSMParentInputMethodInputSourceForInputModeCreate, __TSMRegisterRemoteViewClient, 
+                       __TSMRemoteViewActivationIsOn, __TSMSetRemoteViewActivation, 
+                       __TSMSetRemoteViewIsAccessoryView, __TSMSetRemoteViewKeyEquivalentHandling, 
+                       __TSMWouldEventBeProcessedByPressAndHold, ___CDCreateScreenFramesDictionaryRepresentation, 
+                       ___CoreDragAnimateOrderOut, ___CoreDragAutoScaleSourceDragComponents, 
+                       ___CoreDragBeginDropAnimationTransaction, ___CoreDragBeginFlockingAnimation, 
+                       ___CoreDragBeginSlideBackAnimation, ___CoreDragBeginUnflockingAnimation, 
+                       ___CoreDragCancelDropAnimationTransaction, ___CoreDragCancelOutstandingFlockingAnimation, 
+                       ___CoreDragClearAllImageOverrides, ___CoreDragCommitDropAnimationTransaction, 
+                       ___CoreDragCreateCFStringFromCGEvent, ___CoreDragCreateDictionaryRepOfLayerTree, 
+                       ___CoreDragCreateImageData, ___CoreDragCreateImageDataFromCFDictionary, 
+                       ___CoreDragCreateImageDataWithComponentsBlock, ___CoreDragCreateImageDataWithImage, 
+                       ___CoreDragGetValueForKey, ___CoreDragHasImageOverrides, ___CoreDragImageDataCreateDictionaryRepresentation, 
                        ___CoreDragImageDataDeleteSlotForCAContext, ___CoreDragImageDataGetComponentsBlock, 
                        ___CoreDragImageDataGetItemRef, ___CoreDragImageDataSet, ___CoreDragItemGetImageComponents, 
                        ___CoreDragItemGetImageData, ___CoreDragItemGetScreenFrame, 
@@ -473,25 +504,26 @@ exports:
                        _kHIObjectCustomDataSuperClassIDKey, _kHIObjectInitParamDescription, 
                        _kHIObjectInitParamEventName, _kHIObjectInitParamEventType, 
                        _kHIObjectInitParamUserName, _kHITextViewClassID, _kHIToolboxVersionNumber, 
-                       _kHIViewWindowContentID, _kHIViewWindowGrowBoxID, _kIMKRequestInputMethodsCheckinEndpoints, 
-                       _kIMKXPCPrivateRunLoopMode, _kTISAppleCharacterPaletteInputSourceID, 
-                       _kTISAppleChineseHandwritingInputSourceID, _kTISAppleEmojiDFRPaletteInputSourceID, 
-                       _kTISAppleJapaneseKanaPaletteInputSourceID, _kTISAppleKeyboardViewerPaletteInputSourceID, 
-                       _kTISApplePressAndHoldInputSourceID, _kTISAppleSyntheticRomanModeInputSourceID, 
-                       _kTISCategoryInkInputSource, _kTISCategoryKeyboardInputSource, 
-                       _kTISCategoryPaletteInputSource, _kTISIterationPropertyPreferredInputSourceLocalePart, 
-                       _kTISNotifyEnabledKeyboardInputSourcesChanged, _kTISNotifyEnabledNonKeyboardInputSourcesChanged, 
-                       _kTISNotifyHandwritingInputSourceChanged, _kTISNotifyInstalledInputSourcesChanged, 
-                       _kTISNotifyIronwoodAutoEnableChanged, _kTISNotifySelectedKeyboardInputSourceChanged, 
-                       _kTISPlistKeyCapsLockIsSwitch, _kTISPlistKeyCapsLockIsSwitchToIMRomanMode, 
-                       _kTISPlistKeyDoubleSpaceSubstitution, _kTISPlistKeyHandwritingLanguages, 
-                       _kTISPlistKeyIconLabels, _kTISPlistKeyIconShouldBeTemplate, 
-                       _kTISPlistKeyInputSourceID, _kTISPlistKeyIntendedLanguage, 
-                       _kTISPlistKeyParticipatesInTouchBar, _kTISPropertyAlternateIconImage, 
-                       _kTISPropertyBundleID, _kTISPropertyDataFileProperties, _kTISPropertyDataFileWordList, 
-                       _kTISPropertyHandwritingLanguages, _kTISPropertyHandwritingLocalizedNames, 
-                       _kTISPropertyIconFamilyOrURL, _kTISPropertyIconImage, _kTISPropertyIconImageURL, 
-                       _kTISPropertyIconRef, _kTISPropertyIconShouldBeTemplate, _kTISPropertyInputModeID, 
+                       _kHIViewMenuContentID, _kHIViewWindowContentID, _kHIViewWindowGrowBoxID, 
+                       _kIMKRequestInputMethodsCheckinEndpoints, _kIMKXPCPrivateRunLoopMode, 
+                       _kTISAppleCharacterPaletteInputSourceID, _kTISAppleChineseHandwritingInputSourceID, 
+                       _kTISAppleEmojiDFRPaletteInputSourceID, _kTISAppleJapaneseKanaPaletteInputSourceID, 
+                       _kTISAppleKeyboardViewerPaletteInputSourceID, _kTISApplePressAndHoldInputSourceID, 
+                       _kTISAppleSyntheticRomanModeInputSourceID, _kTISCategoryInkInputSource, 
+                       _kTISCategoryKeyboardInputSource, _kTISCategoryPaletteInputSource, 
+                       _kTISIterationPropertyPreferredInputSourceLocalePart, _kTISNotifyEnabledKeyboardInputSourcesChanged, 
+                       _kTISNotifyEnabledNonKeyboardInputSourcesChanged, _kTISNotifyHandwritingInputSourceChanged, 
+                       _kTISNotifyInstalledInputSourcesChanged, _kTISNotifyIronwoodAutoEnableChanged, 
+                       _kTISNotifySelectedKeyboardInputSourceChanged, _kTISPlistKeyCapsLockIsSwitch, 
+                       _kTISPlistKeyCapsLockIsSwitchToIMRomanMode, _kTISPlistKeyDoubleSpaceSubstitution, 
+                       _kTISPlistKeyHandwritingLanguages, _kTISPlistKeyIconLabels, 
+                       _kTISPlistKeyIconShouldBeTemplate, _kTISPlistKeyInputSourceID, 
+                       _kTISPlistKeyIntendedLanguage, _kTISPlistKeyParticipatesInTouchBar, 
+                       _kTISPropertyAlternateIconImage, _kTISPropertyBundleID, _kTISPropertyDataFileProperties, 
+                       _kTISPropertyDataFileWordList, _kTISPropertyHandwritingLanguages, 
+                       _kTISPropertyHandwritingLocalizedNames, _kTISPropertyIconFamilyOrURL, 
+                       _kTISPropertyIconImage, _kTISPropertyIconImageURL, _kTISPropertyIconRef, 
+                       _kTISPropertyIconShouldBeTemplate, _kTISPropertyInputModeID, 
                        _kTISPropertyInputSourceCategory, _kTISPropertyInputSourceDoesCapsLockSwitch, 
                        _kTISPropertyInputSourceDoesCapsLockSwitchToRomanMode, _kTISPropertyInputSourceDoubleSpaceSubstitution, 
                        _kTISPropertyInputSourceID, _kTISPropertyInputSourceIconLabels, 
@@ -509,16 +541,29 @@ exports:
                        _kTISTypeKeyboardInputMethodWithoutModes, _kTISTypeKeyboardInputMode, 
                        _kTISTypeKeyboardLayout, _kTISTypeKeyboardSyntheticRomanMode, 
                        _kTISTypeKeyboardViewer ]
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 08284EF4-0759-3A29-AF89-B7CF6D257B67' ]
-platform:        macosx
+reexports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _ShowHideProcess ]
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           A2F7F48B-1A9E-3128-9FDD-3BCE4CA98863
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           30F3CED6-6596-3DCC-80FB-4F7FADF702D2
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Help.framework/Versions/A/Help'
-current-version: 68
-parent-umbrella: Carbon
-exports:         
-  - archs:           [ x86_64 ]
-    allowable-clients: [ PrintingUI ]
+current-version: 71
+parent-umbrella:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    umbrella:        Carbon
+allowable-clients:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    clients:         [ PrintingUI ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _AHGotoApplicationHelp, _AHGotoMainTOC, _AHGotoPage, _AHLookupAnchor, 
                        _AHRegisterHelpBook, _AHRegisterHelpBookWithURL, _AHSearch, 
                        _AppendEncodingHint, _CFStringToCString, _CopyBookDetails, 
@@ -526,15 +571,23 @@ exports:
                        _CreateBookDetailsWithBookNameAndID, _EscapeMacCharacters, 
                        _MacPathToURLPath, _kANCHOR, _kBOOKID, _kDEFAULT_BUNDLE_ID, 
                        _kFILE, _kOPENBOOK, _kSEARCH, _kSEARCHALL, _kSTRING ]
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 96798C26-3B90-36C8-B3CE-916AA17D6505' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           5186503C-6D3E-327F-B0E0-56DE819EB5CE
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           CD76A2A9-FB78-3AC4-975D-98F07074E148
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/ImageCapture.framework/Versions/A/ImageCapture'
 current-version: 5
-parent-umbrella: Carbon
-exports:         
-  - archs:           [ x86_64 ]
+parent-umbrella:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    umbrella:        Carbon
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _ICACloseSession, _ICAConvertJPEGDataToICADataInPlace, _ICAConvertTIFFDataToICADataInPlace, 
                        _ICACopyMatchingDeviceDictionaries, _ICACopyObjectData, _ICACopyObjectPropertyDictionary, 
                        _ICACopyObjectThumbnail, _ICACopyParameterBlockPtrForAsyncCall, 
@@ -638,15 +691,23 @@ exports:
                        _kICAUSBTransportType, _kICAUSBVendorIDKey, _kICAUserAssignedDeviceNameKey, 
                        _kICAVendorNameKey, _kICAVideoCodecsKey, _kICAVideoFolderKey, 
                        _kICAWMCVersionKey, _kMetaDataDictionaryKey ]
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 32CDFAC2-D1E7-3B8D-BE6D-835C8AAD97AC' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           D052522E-D9DB-3219-9501-195F88F9BB23
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           F87FC07B-2862-342E-B4FD-6DCBEEA2B20F
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Ink.framework/Versions/A/Ink'
 current-version: 227
-parent-umbrella: Carbon
-exports:         
-  - archs:           [ x86_64 ]
+parent-umbrella:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    umbrella:        Carbon
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _InkAddStrokeToCurrentPhrase, _InkIsPhraseInProgress, _InkSetApplicationRecognitionMode, 
                        _InkSetApplicationWritingMode, _InkSetDrawingMode, _InkSetPhraseTerminationMode, 
                        _InkStrokeGetPointCount, _InkStrokeGetPoints, _InkStrokeGetTypeID, 
@@ -654,21 +715,30 @@ exports:
                        _InkTextCopy, _InkTextCreateCFString, _InkTextCreateFromCFData, 
                        _InkTextDraw, _InkTextFlatten, _InkTextGetStroke, _InkTextGetStrokeCount, 
                        _InkTextGetTypeID, _InkTextKeyModifiers, _InkUserWritingMode ]
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 04163CFC-5F1E-385C-8F85-9202F683DE2A' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           516750B3-61A1-3BC0-B886-4EE9FEF2B5E4
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           68CF989C-1303-3F33-98FB-B51A7F0F773B
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/OpenScripting.framework/Versions/A/OpenScripting'
-parent-umbrella: Carbon
-exports:         
-  - archs:           [ x86_64 ]
+parent-umbrella:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    umbrella:        Carbon
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _ASCopySourceAttributes, _ASGetSourceStyleNames, _ASGetSourceStyles, 
                        _ASInit, _ASSetSourceAttributes, _ASSetSourceStyles, _OSAAddStorageType, 
-                       _OSAAuthorizeEvent, _OSAAvailableDialectCodeList, _OSAAvailableDialects, 
-                       _OSACoerceFromDesc, _OSACoerceToDesc, _OSACompile, _OSACompileExecute, 
-                       _OSACopyDisplayString, _OSACopyID, _OSACopyScript, _OSACopyScriptingDefinition, 
-                       _OSACopyScriptingDefinitionFromFile, _OSACopyScriptingDefinitionFromURL, 
-                       _OSACopySourceString, _OSACopyURLForLibraryInDomainURL, _OSACopyURLForLibraryInFolderURL, 
+                       _OSAAppletShowStartupScreenKey, _OSAAppletStayOpenKey, _OSAAuthorizeEvent, 
+                       _OSAAvailableDialectCodeList, _OSAAvailableDialects, _OSACoerceFromDesc, 
+                       _OSACoerceToDesc, _OSACompile, _OSACompileExecute, _OSACopyDisplayString, 
+                       _OSACopyID, _OSACopyScript, _OSACopyScriptingDefinition, _OSACopyScriptingDefinitionFromFile, 
+                       _OSACopyScriptingDefinitionFromURL, _OSACopySourceString, 
+                       _OSACopyURLForLibraryInDomainURL, _OSACopyURLForLibraryInFolderURL, 
                        _OSACopyURLForLibraryInScriptURL, _OSACopyURLForLibraryName, 
                        _OSACreateFile, _OSADebuggerCreateSession, _OSADebuggerDisposeCallFrame, 
                        _OSADebuggerDisposeSession, _OSADebuggerGetBreakpoint, _OSADebuggerGetCallFrameState, 
@@ -703,23 +773,41 @@ exports:
                        __OSACopyDisplayString, __OSACopyScriptingDefinitionFromFile, 
                        __OSACopySourceString, __OSACreateURL, __OSADoScriptURL, __OSALoadExecuteURL, 
                        __OSALoadURL, __OSAStoreScriptDataToURL, __OSAStoreURL ]
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: D0911F1C-38A3-32FC-A553-9E37B3993F22' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           8C2CE3D8-6486-31D0-8039-798647858507
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           81D632D2-2E1C-3868-AC0F-A7FD78FFFE7F
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Print.framework/Versions/A/Print'
-current-version: 271
-parent-umbrella: Carbon
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: E4AC3FB2-EEBE-3AED-B705-CA02C714ECD0' ]
-platform:        macosx
+current-version: 272
+parent-umbrella:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    umbrella:        Carbon
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           55E37C82-A04C-3436-B934-30B32FF6D601
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           1D21360E-AD72-3CDA-BDDA-87444A84574B
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/SecurityHI.framework/Versions/A/SecurityHI'
 current-version: 55008
-parent-umbrella: Carbon
-exports:         
-  - archs:           [ x86_64 ]
-    allowable-clients: [ AppleShareClient ]
+parent-umbrella:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    umbrella:        Carbon
+allowable-clients:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    clients:         [ AppleShareClient ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _DisposeURLNotifyUPP, _DisposeURLSystemEventUPP, _InvokeURLNotifyUPP, 
                        _InvokeURLSystemEventUPP, _KCAddAppleSharePassword, _KCAddGenericPassword, 
                        _KCAddInternetPassword, _KCAddInternetPasswordWithPath, _KCAddItem, 
@@ -729,15 +817,25 @@ exports:
                        _SecEditTrustAsSheet, _kcaddapplesharepassword, _kcaddgenericpassword, 
                        _kcaddinternetpassword, _kcaddinternetpasswordwithpath, _kccreatekeychain, 
                        _kcunlock ]
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: A131311E-D40C-3052-BC0D-631BE62A5CAE' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           B8F02DB3-2C04-3B50-BD1A-29AB29BFF6EF
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           81661BC1-EA52-313F-8EFB-FBE195CE9F82
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/SpeechRecognition.framework/Versions/A/SpeechRecognition'
-parent-umbrella: Carbon
-exports:         
-  - archs:           [ x86_64 ]
-    allowable-clients: [ AppKit, LatentSemanticMapping ]
+parent-umbrella:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    umbrella:        Carbon
+allowable-clients:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    clients:         [ AppKit, LatentSemanticMapping ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _DisposeSRCallBackUPP, _InvokeSRCallBackUPP, _NewSRCallBackUPP, 
                        _SFSAvatarCaptionVisible, _SFSCopyActiveRecognizer, _SFSCopyCurrentAvatarIdentifier, 
                        _SFSCopyIndAvatarInfo, _SFSCopyIndRecognizerPluginBundleRef, 

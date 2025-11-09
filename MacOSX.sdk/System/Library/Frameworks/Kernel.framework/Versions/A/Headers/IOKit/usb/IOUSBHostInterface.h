@@ -152,14 +152,30 @@ while(deviceCandidate != NULL)
 #ifndef IOUSBHostFamily_IOUSBHostInterface_h
 #define IOUSBHostFamily_IOUSBHostInterface_h
 
+#include <TargetConditionals.h>
 #include <IOKit/IOService.h>
 #include <libkern/c++/OSData.h>
 
 #include <IOKit/usb/IOUSBHostFamily.h>
 #include <IOKit/usb/IOUSBHostDevice.h>
 
-#if TARGET_OS_OSX
+#define TARGET_OS_HAS_USBDRIVERKIT_IOUSBHOSTINTERFACE __has_include(<USBDriverKit/IOUSBHostInterface.h>)
+
+#if TARGET_OS_HAS_USBDRIVERKIT_IOUSBHOSTINTERFACE
 #include <USBDriverKit/IOUSBHostInterface.h>
+#endif
+
+#if TARGET_CPU_ARM64 || TARGET_CPU_ARM
+/*!
+* @class       IOUSBInterface
+* @brief       A compatibility base class to faciliate service discovery for legacy projects.
+* @discussion  New software should not reference this class.
+*/
+class __IOUSBHOSTFAMILY_DEPRECATED IOUSBInterface : public IOService
+{
+    typedef IOService super;
+    OSDeclareAbstractStructors(IOUSBInterface)
+};
 #endif
 
 /*!
@@ -167,9 +183,13 @@ while(deviceCandidate != NULL)
  * @brief       The IOService object representing a USB interface
  * @discussion  This class provides functionality to send control requests to the default control endpoint, as well as create IOUSBHostPipe objects to transfer data.  Function drivers should not subclass IOUSBHostInterface.
  */
-class IOUSBHostInterface : public IOService
+#if TARGET_CPU_ARM64 || TARGET_CPU_ARM
+class __IOUSBHOSTFAMILY_DEPRECATED IOUSBHostInterface : public IOUSBInterface
+#else
+class __IOUSBHOSTFAMILY_DEPRECATED IOUSBHostInterface : public IOService
+#endif
 {
-#if TARGET_OS_OSX
+#if TARGET_OS_HAS_USBDRIVERKIT_IOUSBHOSTINTERFACE
     OSDeclareDefaultStructorsWithDispatch(IOUSBHostInterface)
 #else
     OSDeclareDefaultStructors(IOUSBHostInterface)
@@ -543,6 +563,7 @@ protected:
     {
         uint16_t _persistentOutEndpointMask;
         uint16_t _persistentInEndpointMask;
+        bool     _allPipesDestroyed;
     };
     tExpansionData* _expansionData;
 };

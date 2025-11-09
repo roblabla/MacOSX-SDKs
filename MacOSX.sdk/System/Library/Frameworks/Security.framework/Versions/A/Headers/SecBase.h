@@ -336,6 +336,7 @@ CF_ENUM(OSStatus)
     errSecCoreFoundationUnknown              = -4960,
 
     errSecMissingEntitlement                 = -34018,    /* A required entitlement isn't present. */
+    errSecRestrictedAPI                      = -34020,    /* Client is restricted and is not permitted to perform this operation. */
 
     errSecNotAvailable                       = -25291,    /* No keychain is available. You may need to restart your computer. */
     errSecReadOnly                           = -25292,    /* This keychain cannot be modified. */
@@ -704,6 +705,7 @@ CF_ENUM(OSStatus)
     errSecCertificatePolicyNotAllowed        = -67899,    /* The requested policy is not allowed for this certificate. */
     errSecCertificateNameNotAllowed          = -67900,    /* The requested name is not allowed for this certificate. */
     errSecCertificateValidityPeriodTooLong   = -67901,    /* The validity period in the certificate exceeds the maximum allowed. */
+    errSecCertificateIsCA                    = -67902,    /* The verified certificate is a CA rather than an end-entity */
 };
 
 
@@ -785,6 +787,7 @@ CF_ENUM(OSStatus)
  @constant errSSLATSLeafCertificateHashAlgorithmViolation ATS violation: peer leaf certificate hash algorithm is not ATS compliant
  @constant errSSLATSCertificateHashAlgorithmViolation ATS violation: peer certificate hash algorithm is not ATS compliant
  @constant errSSLATSCertificateTrustViolation ATS violation: peer certificate is not issued by trusted peer
+ @constant errSSLEarlyDataRejected Early application data rejected by peer
  */
 
 /*
@@ -883,6 +886,9 @@ CF_ENUM(OSStatus) {
     errSSLATSLeafCertificateHashAlgorithmViolation  = -9884,    /* ATS violation: peer leaf certificate hash algorithm is not ATS compliant */
     errSSLATSCertificateHashAlgorithmViolation      = -9885,    /* ATS violation: peer certificate hash algorithm is not ATS compliant */
     errSSLATSCertificateTrustViolation              = -9886,    /* ATS violation: peer certificate is not issued by trusted peer */
+
+    /* early data errors */
+    errSSLEarlyDataRejected                         = -9890,    /* Early application data rejected by peer */
 };
 
 CF_IMPLICIT_BRIDGING_DISABLED

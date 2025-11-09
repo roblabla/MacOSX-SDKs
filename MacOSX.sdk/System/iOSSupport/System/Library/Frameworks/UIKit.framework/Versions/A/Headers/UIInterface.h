@@ -75,6 +75,12 @@ typedef NS_ENUM(NSInteger, UIUserInterfaceLevel) {
     UIUserInterfaceLevelElevated
 } API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
+typedef NS_ENUM(NSInteger, UIUserInterfaceActiveAppearance) {
+    UIUserInterfaceActiveAppearanceUnspecified = -1,
+    UIUserInterfaceActiveAppearanceInactive,
+    UIUserInterfaceActiveAppearanceActive,
+} API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
+
 // System colors
 
 @interface UIColor (UIColorSystemColors)
@@ -218,6 +224,8 @@ typedef NS_ENUM(NSInteger, UIUserInterfaceLevel) {
 @property(class, nonatomic, readonly) CGFloat buttonFontSize API_UNAVAILABLE(tvos);
 @property(class, nonatomic, readonly) CGFloat smallSystemFontSize API_UNAVAILABLE(tvos);
 @property(class, nonatomic, readonly) CGFloat systemFontSize API_UNAVAILABLE(tvos);
+@property(class, nonatomic, readonly) CGFloat defaultFontSize API_UNAVAILABLE(macos, ios, tvos, watchos);
+@property(class, nonatomic, readonly) CGFloat systemMinimumFontSize API_UNAVAILABLE(macos, ios, tvos, watchos);
 @end
 
 NS_ASSUME_NONNULL_END

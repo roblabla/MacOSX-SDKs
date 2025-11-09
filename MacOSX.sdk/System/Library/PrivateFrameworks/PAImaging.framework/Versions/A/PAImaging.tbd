@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 491B1105-A819-3C72-B12E-AAAC07ACB4F6' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           DA171EE3-9E15-3837-89B0-9D4471A9CE1D
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           C84A1281-EA52-32E5-B87D-86F3E12766E4
 install-name:    '/System/Library/PrivateFrameworks/PAImaging.framework/Versions/A/PAImaging'
-current-version: 101.13.100
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 311.0.120
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CATransform3DFromNSString, _CGAffineTransformFromNSString, 
                        _CGVectorEqualWithAbsError, _NSStringFromCATransform3D, _PAAnimationDuration, 
                        _PACanvasItemViewFrameSizeDidChangeNotification, _PAImageItemViewDidChangeDisplayNotification, 
@@ -32,7 +38,8 @@ exports:
                        _kPAHistogramExtendedRange, _kPAHistogramStandardLuminanceWeights, 
                        _kPAImageKeyBackground, _kPAImageKeyDefault, _kPAImageKeyForeground, 
                        _kPAImageKeyPreview, _kPAImageKeyRender, _kPAImageKeyThumbnail, 
-                       _kPAImageTransformKey, _logRect, _sViewModeLogger, _weightedValueInInterval ]
+                       _kPAImageTransformKey, _kPALayerLog, _logRect, _sViewModeLogger, 
+                       _weightedValueInInterval ]
     objc-classes:    [ CropAspectContext, CropInteractionContext, CropRotationContext, 
                        CropZoomContext, DGDescriptionCompositionProvider, IPAVideoPlaybackSettingsCompositionProvider, 
                        PA2DBufferBackingTile, PAAVAssetRequest, PAAVAssetRequestService, 
@@ -62,18 +69,20 @@ exports:
                        PAKeyFrame, PALayerAnimationFactory, PAMultiLevelImage, PAMultiLevelImageDrawer, 
                        PAMultipleImageDrawingDelegate, PAMutableBuffer, PAMutableBufferImageBackingTile, 
                        PAMutableMultiLevelImage, PAMutableTiledImage, PANUImageTile, 
-                       PANUTiledImageBacking, PAOpenGLColorCube, PAOpenGLContext, 
-                       PAOpenGLContextPool, PAOpenGLDevice, PAOpenGLLayer, PAOpenGLProgram, 
-                       PAOperationEditController, PAOperationFactory, PAOperationFactoryParameters, 
-                       PAPhotoEditSource, PAPlatform, PAPreviewImageAsset, PAPreviewImageAssetClient, 
+                       PANUTiledImageBacking, PANeutrinoImage, PANeutrinoImageLayer, 
+                       PAOpenGLColorCube, PAOpenGLContext, PAOpenGLContextPool, PAOpenGLDevice, 
+                       PAOpenGLLayer, PAOpenGLProgram, PAOperationEditController, 
+                       PAOperationFactory, PAOperationFactoryParameters, PAPhotoEditSource, 
+                       PAPlatform, PAPreviewImageAsset, PAPreviewImageAssetClient, 
                        PAProxyOpenGLContext, PAPurgeableBufferImageBacking, PARAWImageRequestSourceNode, 
-                       PARenderedImageAsset, PARenderedImageAssetClient, PATexture, 
-                       PATextureImageBacking, PATextureImageTile, PATextureProxy, 
+                       PARenderedImageAsset, PARenderedImageAssetClient, PASnapshotLayer, 
+                       PATexture, PATextureImageBacking, PATextureImageTile, PATextureProxy, 
                        PATextureRetainingCIImage, PAThumbnailImageAsset, PAThumbnailImageAssetClient, 
                        PATiledImage, PAUnsupportedItem, PAUnsupportedItemController, 
                        PAUnsupportedItemView, PAUnsupportedItemViewController, PAVideoComplementVisibility, 
                        PAWhiteBalanceController, RKImaging, _IPAStreamingVideoPlaybackSettings, 
-                       _PAAutoAccessTiledImage, _PALowPriorityCPUDevice, _PALowPriorityOpenGLDevice ]
+                       _PAAutoAccessTiledImage, _PALowPriorityCPUDevice, _PALowPriorityOpenGLDevice, 
+                       _PASlotId ]
     objc-ivars:      [ PABuffer._bytes, PABuffer._bytesPerRow, PABuffer._format, 
                        PABuffer._size, PABufferImageBacking._buffer, PABufferImageBacking._queue, 
                        PABufferImageBacking._validRegion, PABufferImageBackingTile._buffer, 
@@ -91,12 +100,13 @@ exports:
                        PAGLTexture._wrapMode, PAGLUtilities._reportErrors, PAImageAsset._geometry, 
                        PAImageAsset._geometryStatus, PAImageAsset._propertyQueue, 
                        PAImageAsset._stateQueue, PAImageAssetClient._currentROI, 
-                       PAImageAssetClient._currentScale, PAImageAssetClient._image, 
-                       PAImageAssetClient._imageQueue, PAImageAssetClient._notificationQueue, 
-                       PAImageAssetClient._stateQueue, PAImageAssetType._imageType, 
-                       PAImageAssetType._key, PAImageCacheEntry._buffer, PAImageCacheEntry._cacheKey, 
-                       PAImageCacheEntry._cgImageProperties, PAImageCacheEntry._colorProfile, 
-                       PAImageCacheEntry._error, PAImageCacheEntry._format, PAImageCacheEntry._imageRequest, 
+                       PAImageAssetClient._currentScale, PAImageAssetClient._delegateFlags, 
+                       PAImageAssetClient._image, PAImageAssetClient._imageQueue, 
+                       PAImageAssetClient._notificationQueue, PAImageAssetClient._stateQueue, 
+                       PAImageAssetType._imageType, PAImageAssetType._key, PAImageCacheEntry._buffer, 
+                       PAImageCacheEntry._cacheKey, PAImageCacheEntry._cgImageProperties, 
+                       PAImageCacheEntry._colorProfile, PAImageCacheEntry._error, 
+                       PAImageCacheEntry._format, PAImageCacheEntry._imageRequest, 
                        PAImageCacheEntry._invalidationKey, PAImageCacheEntry._masterToRasterOrientation, 
                        PAImageCacheEntry._rasterToDisplayOrientation, PAImageCacheEntry._requestedSubsampleFactor, 
                        PAImageCacheEntry._scaled, PAImageCacheEntry._sharedValid, 
@@ -123,8 +133,7 @@ exports:
                        PARenderedImageAssetClient._lastBackfillOrientation, PARenderedImageAssetClient._lastZoomDisplay, 
                        PARenderedImageAssetClient._lastZoomGeometry, PARenderedImageAssetClient._lastZoomImage, 
                        PARenderedImageAssetClient._lastZoomOrientation, PARenderedImageAssetClient._orientation, 
-                       PARenderedImageAssetClient._queue, PARenderedImageAssetClient._usedStandInGeometry, 
-                       PARenderedImageAssetClient._waitingForUpdateFromGeometryChanged, 
+                       PARenderedImageAssetClient._queue, PARenderedImageAssetClient._waitingForUpdateFromGeometryChanged, 
                        PARenderedImageAssetClient._zoomRenderRequest, PARenderedImageAssetClient._zoomUpdateNumber, 
                        PATexture._alignedBytesPerRow, PATexture._bitsPerComponent, 
                        PATexture._buffer, PATexture._bufferSize, PATexture._colorSpace, 

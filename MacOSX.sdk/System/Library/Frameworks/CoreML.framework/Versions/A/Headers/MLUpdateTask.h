@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Main class for setting up and controlling a model update. It provides some utility class methods for performing an update synchronously as well as class constructors for configuring an update and give developers control for the execution of that update.
  */
 ML_EXPORT
-API_AVAILABLE(macos(10.15), ios(13.0))
+API_AVAILABLE(macos(10.15), ios(13.0), tvos(14.0))
 @interface MLUpdateTask : MLTask
 
 // Update via task control with completion handler
@@ -26,12 +26,25 @@ API_AVAILABLE(macos(10.15), ios(13.0))
                                completionHandler:(void (^)(MLUpdateContext * context))completionHandler
                                            error:(NSError * _Nullable * _Nullable)error;
 
+// Update via task control with completion handler supplying default configuration
++ (nullable instancetype)updateTaskForModelAtURL:(NSURL *)modelURL
+                           trainingData:(id<MLBatchProvider>)trainingData
+                      completionHandler:(void (^)(MLUpdateContext * _Nonnull))completionHandler
+                                  error:(NSError * _Nullable __autoreleasing *)error API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+                                  
 // Update via task control and custom progress callbacks
 + (nullable instancetype)updateTaskForModelAtURL:(NSURL *)modelURL
                                     trainingData:(id<MLBatchProvider>)trainingData
                                    configuration:(nullable MLModelConfiguration *)configuration
                                 progressHandlers:(MLUpdateProgressHandlers *)progressHandlers
                                            error:(NSError * _Nullable * _Nullable)error;
+
+// Update via task control and custom progress callbacks supplying default configuration
++ (nullable instancetype)updateTaskForModelAtURL:(NSURL *)modelURL
+                           trainingData:(id<MLBatchProvider>)trainingData
+                       progressHandlers:(MLUpdateProgressHandlers *)progressHandlers
+                                  error:(NSError * _Nullable __autoreleasing *)error API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+
 
 // Request a resume with new parameters. Should be used within a progressHandler
 - (void)resumeWithParameters:(NSDictionary<MLParameterKey *, id> *)updateParameters;

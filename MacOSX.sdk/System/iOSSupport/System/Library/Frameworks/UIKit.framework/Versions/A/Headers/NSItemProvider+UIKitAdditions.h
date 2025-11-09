@@ -28,7 +28,7 @@ typedef NS_ENUM(NSInteger, UIPreferredPresentationStyle) {
 // Estimated presentation size, in points. CGSizeZero value indicates this information is not available.
 @property (nonatomic) CGSize preferredPresentationSize API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos);
 
-@property (nonatomic) UIPreferredPresentationStyle preferredPresentationStyle;
+@property (nonatomic) UIPreferredPresentationStyle preferredPresentationStyle API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 

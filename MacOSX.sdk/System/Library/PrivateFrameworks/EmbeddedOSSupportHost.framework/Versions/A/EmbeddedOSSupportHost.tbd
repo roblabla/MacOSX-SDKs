@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: BEC0E11B-DB8D-3D6F-B4FD-0BC49A1477E7' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           1329E717-3EC6-3B2F-8DE6-61F848E09FAE
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           401B8B4B-CBDB-3B04-BCB7-2130BE73F051
 install-name:    '/System/Library/PrivateFrameworks/EmbeddedOSSupportHost.framework/Versions/A/EmbeddedOSSupportHost'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ __eos_endpoint_connect, __eos_endpoint_connect_with_deadline, 
                        __eos_endpoint_get_addr_in6, __eos_endpoint_get_ifindex, __eos_endpoint_get_ifname, 
                        __eos_endpoint_get_port, __eos_endpoint_init, __eos_endpoint_init_sockaddr_in6, 

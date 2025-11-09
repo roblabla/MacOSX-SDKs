@@ -1,11 +1,13 @@
 /*
 	ScreenSaverView.h
 	ScreenSaver
-	Copyright (c) 2000-2016, Apple Inc.
+	Copyright (c) 2000-2020, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/AppKit.h>
+
+API_UNAVAILABLE_BEGIN(ios, tvos, watchos)
 
 #include <stdlib.h>
 #include <limits.h>
@@ -72,3 +74,5 @@ static __inline__ NSRect SSCenteredRectInRect(NSRect innerRect, NSRect outerRect
 #endif
     return innerRect;
 }
+
+API_UNAVAILABLE_END

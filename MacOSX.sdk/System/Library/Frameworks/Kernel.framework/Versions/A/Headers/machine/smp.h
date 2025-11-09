@@ -31,6 +31,7 @@
 
 #if defined (__x86_64__)
 #include "i386/smp.h"
+#elif defined (__arm__) || defined (__arm64__)
 #else
 #error architecture not supported
 #endif

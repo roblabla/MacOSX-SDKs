@@ -50,8 +50,7 @@ CG_EXTERN void CGPDFContextClose(CGContextRef cg_nullable context)
 /* Begin a new page in the PDF context `context'. */
 
 CG_EXTERN void CGPDFContextBeginPage(CGContextRef cg_nullable context,
-  CFDictionaryRef __nullable pageInfo)
-  CG_AVAILABLE_STARTING(10.4, 2.0);
+  CFDictionaryRef __nullable pageInfo) CG_AVAILABLE_STARTING(10.4, 2.0);
 
 /* End the current page in the PDF context `context'. */
 
@@ -78,15 +77,13 @@ CG_EXTERN void CGPDFContextSetURLForRect(CGContextRef cg_nullable context, CFURL
    the PDF context `context'. */
 
 CG_EXTERN void CGPDFContextAddDestinationAtPoint(CGContextRef cg_nullable context,
-  CFStringRef  name, CGPoint point)
-  CG_AVAILABLE_STARTING(10.4, 2.0);
+  CFStringRef  name, CGPoint point) CG_AVAILABLE_STARTING(10.4, 2.0);
 
 /* Specify a destination named `name' to jump to when clicking in `rect' of
    the current page of the PDF context `context'. */
 
 CG_EXTERN void CGPDFContextSetDestinationForRect(CGContextRef cg_nullable context,
-  CFStringRef  name, CGRect rect)
-  CG_AVAILABLE_STARTING(10.4, 2.0);
+  CFStringRef  name, CGRect rect) CG_AVAILABLE_STARTING(10.4, 2.0);
 
 /*** Keys for the auxiliary info dictionary or the page info dictionary. ***/ 
 
@@ -101,49 +98,42 @@ CG_EXTERN const CFStringRef  kCGPDFContextMediaBox
    the value of this key must be a CFData containing a CGRect (stored by
    value, not by reference). */
 
-CG_EXTERN const CFStringRef  kCGPDFContextCropBox
-  CG_AVAILABLE_STARTING(10.4, 2.0);
+CG_EXTERN const CFStringRef  kCGPDFContextCropBox CG_AVAILABLE_STARTING(10.4, 2.0);
 
 /* The bleed box for the document or for a given page. Optional; if present,
    the value of this key must be a CFData containing a CGRect (stored by
    value, not by reference). */
 
-CG_EXTERN const CFStringRef  kCGPDFContextBleedBox
-  CG_AVAILABLE_STARTING(10.4, 2.0);
+CG_EXTERN const CFStringRef  kCGPDFContextBleedBox CG_AVAILABLE_STARTING(10.4, 2.0);
 
 /* The trim box for the document or for a given page. Optional; if present,
    the value of this key must be a CFData containing a CGRect (stored by
    value, not by reference). */
 
-CG_EXTERN const CFStringRef  kCGPDFContextTrimBox
-  CG_AVAILABLE_STARTING(10.4, 2.0);
+CG_EXTERN const CFStringRef  kCGPDFContextTrimBox CG_AVAILABLE_STARTING(10.4, 2.0);
 
 /* The art box for the document or for a given page. Optional; if present,
    the value of this key must be a CFData containing a CGRect (stored by
    value, not by reference). */
 
-CG_EXTERN const CFStringRef  kCGPDFContextArtBox
-  CG_AVAILABLE_STARTING(10.4, 2.0);
+CG_EXTERN const CFStringRef  kCGPDFContextArtBox CG_AVAILABLE_STARTING(10.4, 2.0);
 
 /*** Keys for auxiliary info dictionary. ***/
 
 /* The document's title. Optional; if present, the value of this key must be
    a CFString. */
 
-CG_EXTERN const CFStringRef  kCGPDFContextTitle
-  CG_AVAILABLE_STARTING(10.4, 2.0);
+CG_EXTERN const CFStringRef  kCGPDFContextTitle CG_AVAILABLE_STARTING(10.4, 2.0);
 
 /* The name of the person who created this document. Optional; if present,
    the value of this key must be a CFString. */
 
-CG_EXTERN const CFStringRef  kCGPDFContextAuthor
-  CG_AVAILABLE_STARTING(10.4, 2.0);
+CG_EXTERN const CFStringRef  kCGPDFContextAuthor CG_AVAILABLE_STARTING(10.4, 2.0);
 
 /* The subject of a document. Optional; if present, the value of this key
    must be a CFString. */
 
-CG_EXTERN const CFStringRef  kCGPDFContextSubject
-  CG_AVAILABLE_STARTING(10.5, 2.0);
+CG_EXTERN const CFStringRef  kCGPDFContextSubject CG_AVAILABLE_STARTING(10.5, 2.0);
 
 /* The keywords for this document. This key is optional. If the value of
    this key is a CFString, the /Keywords entry will be the specified string.
@@ -155,15 +145,13 @@ CG_EXTERN const CFStringRef  kCGPDFContextSubject
    strings. The value of this key must be in one of the above forms;
    otherwise, this key is ignored. */
 
-CG_EXTERN const CFStringRef  kCGPDFContextKeywords
-  CG_AVAILABLE_STARTING(10.5, 2.0);
+CG_EXTERN const CFStringRef  kCGPDFContextKeywords CG_AVAILABLE_STARTING(10.5, 2.0);
 
 /* The name of the application that created the original data used to create
    this document. Optional; if present, the value of this key must be a
    CFString. */
 
-CG_EXTERN const CFStringRef  kCGPDFContextCreator
-  CG_AVAILABLE_STARTING(10.4, 2.0);
+CG_EXTERN const CFStringRef  kCGPDFContextCreator CG_AVAILABLE_STARTING(10.4, 2.0);
 
 /* The "owner password" of the PDF document. If this key is specified, the
    document will be encrypted using the value as the owner password;
@@ -175,8 +163,7 @@ CG_EXTERN const CFStringRef  kCGPDFContextCreator
    If the value of this key cannot be represented in ASCII, the document
    will not be created and the creation function will return NULL. */
 
-CG_EXTERN const CFStringRef  kCGPDFContextOwnerPassword
-  CG_AVAILABLE_STARTING(10.4, 2.0);
+CG_EXTERN const CFStringRef  kCGPDFContextOwnerPassword CG_AVAILABLE_STARTING(10.4, 2.0);
 
 /* The "user password" of the PDF document. If the document is encrypted,
    then the value of this key will be the user password for the document; if
@@ -187,8 +174,7 @@ CG_EXTERN const CFStringRef  kCGPDFContextOwnerPassword
    If the value of this key cannot be represented in ASCII, the document
    will not be created and the creation function will return NULL. */
 
-CG_EXTERN const CFStringRef  kCGPDFContextUserPassword
-  CG_AVAILABLE_STARTING(10.4, 2.0);
+CG_EXTERN const CFStringRef  kCGPDFContextUserPassword CG_AVAILABLE_STARTING(10.4, 2.0);
 
 /* Specifies the encryption key length in bits; see Table 3.18 "Entries
    common to all encryption dictionaries", PDF Reference: Adobe PDF version
@@ -197,22 +183,19 @@ CG_EXTERN const CFStringRef  kCGPDFContextUserPassword
    128, inclusive. If this key is absent or invalid, the encryption key
    length defaults to 40 bits. */
 
-CG_EXTERN const CFStringRef  kCGPDFContextEncryptionKeyLength
-  CG_AVAILABLE_STARTING(10.5, 2.0);
+CG_EXTERN const CFStringRef  kCGPDFContextEncryptionKeyLength CG_AVAILABLE_STARTING(10.5, 2.0);
 
 /* Used to specify whether the document allows printing when unlocked with
    the user password. The value of this key must be a CFBooleanRef. The
    default value of this key is "kCFBooleanTrue". */
 
-CG_EXTERN const CFStringRef  kCGPDFContextAllowsPrinting
-  CG_AVAILABLE_STARTING(10.4, 2.0);
+CG_EXTERN const CFStringRef  kCGPDFContextAllowsPrinting CG_AVAILABLE_STARTING(10.4, 2.0);
 
 /* Used to specify whether the document allows copying when unlocked with
    the user password. The value of this key must be a CFBooleanRef. The
    default value of this key is "kCFBooleanTrue". */
 
-CG_EXTERN const CFStringRef  kCGPDFContextAllowsCopying
-  CG_AVAILABLE_STARTING(10.4, 2.0);
+CG_EXTERN const CFStringRef  kCGPDFContextAllowsCopying CG_AVAILABLE_STARTING(10.4, 2.0);
 
 /* The document's PDF/X output intent. Optional; if present, the value of
    this key must be a CFDictionaryRef. The dictionary is added to the
@@ -221,8 +204,7 @@ CG_EXTERN const CFStringRef  kCGPDFContextAllowsCopying
    9.10.4 of the PDF 1.4 specification, ISO/DIS 15930-3 document published
    by ISO/TC 130, and Adobe Technical Note #5413. */
 
-CG_EXTERN const CFStringRef  kCGPDFContextOutputIntent
-  CG_AVAILABLE_STARTING(10.4) CG_UNAVAILABLE_EMBEDDED;
+CG_EXTERN const CFStringRef  kCGPDFContextOutputIntent CG_AVAILABLE_STARTING(10.4, 14.0);
 
 /* The following keys are supported in the output intent dictionary:
 
@@ -230,8 +212,7 @@ CG_EXTERN const CFStringRef  kCGPDFContextOutputIntent
    required; the value of this key must be a CFString equal to "GTS_PDFX";
    otherwise, the dictionary is ignored. */
 
-CG_EXTERN const CFStringRef  kCGPDFXOutputIntentSubtype
-  CG_AVAILABLE_STARTING(10.4) CG_UNAVAILABLE_EMBEDDED;
+CG_EXTERN const CFStringRef  kCGPDFXOutputIntentSubtype CG_AVAILABLE_STARTING(10.4, 14.0);
 
 /* kCGPDFXOutputConditionIdentifier ("OutputConditionIdentifier"): A string
    identifying the intended output device or production condition in a
@@ -239,16 +220,14 @@ CG_EXTERN const CFStringRef  kCGPDFXOutputIntentSubtype
    key must be a CFString. For best results, the string should be
    representable losslessly in ASCII encoding. */
 
-CG_EXTERN const CFStringRef  kCGPDFXOutputConditionIdentifier
-  CG_AVAILABLE_STARTING(10.4) CG_UNAVAILABLE_EMBEDDED;
+CG_EXTERN const CFStringRef  kCGPDFXOutputConditionIdentifier CG_AVAILABLE_STARTING(10.4, 14.0);
 
 /* kCGPDFXOutputCondition ("OutputCondition"): A text string identifying the
    intended output device or production condition in a human-readable form.
    This key is optional; if present, the value of this key must be a
    CFString. */
 
-CG_EXTERN const CFStringRef  kCGPDFXOutputCondition
-  CG_AVAILABLE_STARTING(10.4) CG_UNAVAILABLE_EMBEDDED;
+CG_EXTERN const CFStringRef  kCGPDFXOutputCondition CG_AVAILABLE_STARTING(10.4, 14.0);
 
 /* kCGPDFXRegistryName ("RegistryName"): A string identifying the registry
    in which the condition designated by `kCGPDFXOutputConditionIdentifier'
@@ -256,8 +235,7 @@ CG_EXTERN const CFStringRef  kCGPDFXOutputCondition
    be a CFString. For best results, the string should be representable
    losslessly in ASCII encoding. */
 
-CG_EXTERN const CFStringRef  kCGPDFXRegistryName
-  CG_AVAILABLE_STARTING(10.4) CG_UNAVAILABLE_EMBEDDED;
+CG_EXTERN const CFStringRef  kCGPDFXRegistryName CG_AVAILABLE_STARTING(10.4, 14.0);
 
 /* kCGPDFXInfo ("Info"): A human-readable text string containing additional
    information about the intended target device or production condition.
@@ -265,8 +243,7 @@ CG_EXTERN const CFStringRef  kCGPDFXRegistryName
    does not specify a standard production condition; it is optional
    otherwise. If present, the value of this key must be a CFString. */
 
-CG_EXTERN const CFStringRef  kCGPDFXInfo
-  CG_AVAILABLE_STARTING(10.4) CG_UNAVAILABLE_EMBEDDED;
+CG_EXTERN const CFStringRef  kCGPDFXInfo CG_AVAILABLE_STARTING(10.4, 14.0);
 
 /* kCGPDFXDestinationOutputProfile ("DestOutputProfile"): An ICC profile
    stream defining the transformation from the PDF document's source colors
@@ -275,8 +252,7 @@ CG_EXTERN const CFStringRef  kCGPDFXInfo
    condition; it is optional otherwise. If present, the value of this key
    must be a ICC-based CGColorSpaceRef. */
 
-CG_EXTERN const CFStringRef  kCGPDFXDestinationOutputProfile
-  CG_AVAILABLE_STARTING(10.4) CG_UNAVAILABLE_EMBEDDED;
+CG_EXTERN const CFStringRef  kCGPDFXDestinationOutputProfile CG_AVAILABLE_STARTING(10.4, 14.0);
 
 /* The document's output intents. Optional; if present, the value must be a
    CFArrayRef containing one or more CFDictionaryRefs. The array is added to
@@ -288,19 +264,27 @@ CG_EXTERN const CFStringRef  kCGPDFXDestinationOutputProfile
    and `kCGPDFContextOutputIntents' keys are specified, the former is
    ignored. */
 
-CG_EXTERN const CFStringRef  kCGPDFContextOutputIntents
-  CG_AVAILABLE_STARTING(10.4) CG_UNAVAILABLE_EMBEDDED;
+CG_EXTERN const CFStringRef  kCGPDFContextOutputIntents CG_AVAILABLE_STARTING(10.4, 14.0);
 
 /* The document's access permissions, expressed as a CFNumber. The number is
    defined by ORing together the desired CGPDFAccessPermissions values. */
 
-CG_EXTERN const CFStringRef  kCGPDFContextAccessPermissions
-  CG_AVAILABLE_STARTING(10.13, 11.0);
+CG_EXTERN const CFStringRef  kCGPDFContextAccessPermissions CG_AVAILABLE_STARTING(10.13, 11.0);
 
 /* Set the outline in the PDF created by a CGPDFContext (no effect in other types of CGContexts). */
 
 CG_EXTERN void CGPDFContextSetOutline(CGContextRef context, __nullable CFDictionaryRef outline)
   CG_AVAILABLE_STARTING(10.13, 11.0);
+
+/* Output a linearized PDF */
+
+CG_EXTERN const CFStringRef kCGPDFContextCreateLinearizedPDF
+  CG_AVAILABLE_STARTING(11.0, 14.0);
+
+/* Output a PDF that conforms to PDF/A-2u (ISO 19005-2). The value of this key
+   must be a CFBooleanRef. The default value of this key is "kCFBooleanFalse".  */
+
+CG_EXTERN const CFStringRef  kCGPDFContextCreatePDFA CG_AVAILABLE_STARTING(11.0, 14.0);
 
 /* Tagged PDF Authoring */
 
@@ -405,27 +389,23 @@ typedef CFStringRef CGPDFTagProperty CF_TYPED_ENUM;
    "...useful when extracting the document’s contents in support of accessibility..."
    This can be used to more precisely control what string is extracted by a user when
    they copy and paste from a document. */
-CG_EXTERN const CGPDFTagProperty _Nonnull kCGPDFTagPropertyActualText
-  CG_AVAILABLE_STARTING(10.15, 13.0);
+CG_EXTERN const CGPDFTagProperty _Nonnull kCGPDFTagPropertyActualText CG_AVAILABLE_STARTING(10.15, 13.0);
 
 /* Alternative text, defined on page 860:
    "An alternate description of the structure element and its children in human-readable form".
    This is typically used for graphical content, like an image. */
-CG_EXTERN const CGPDFTagProperty _Nonnull kCGPDFTagPropertyAlternativeText
-  CG_AVAILABLE_STARTING(10.15, 13.0);
+CG_EXTERN const CGPDFTagProperty _Nonnull kCGPDFTagPropertyAlternativeText CG_AVAILABLE_STARTING(10.15, 13.0);
 
 /* Title, defined on page 859:
    Title of the node in a human-readable form. This should *not* be used for accessibility,
    but can be useful when presenting the structure of a tagged node tree. */
-CG_EXTERN const CGPDFTagProperty _Nonnull kCGPDFTagPropertyTitleText
-  CG_AVAILABLE_STARTING(10.15, 13.0);
+CG_EXTERN const CGPDFTagProperty _Nonnull kCGPDFTagPropertyTitleText CG_AVAILABLE_STARTING(10.15, 13.0);
 
 /* Language of text content, defined on page 860:
    Typically you should use the document's catalog to get its language, but if a section
    of text is not the same language as the document, this may be set and allow you to
    look at what language it is hinting at. */
-CG_EXTERN const CGPDFTagProperty _Nonnull kCGPDFTagPropertyLanguageText
-  CG_AVAILABLE_STARTING(10.15, 13.0);
+CG_EXTERN const CGPDFTagProperty _Nonnull kCGPDFTagPropertyLanguageText CG_AVAILABLE_STARTING(10.15, 13.0);
 
 /* General usage of CGPDFContextBeginTag(...) and CGPDFContextEndTag(...):
  
@@ -440,10 +420,7 @@ CG_EXTERN const CGPDFTagProperty _Nonnull kCGPDFTagPropertyLanguageText
    a tag structure tree.
  
  - When saving the context to a file, the file will be authored with marked content sequences in the page's content-
-   stream, as well as the implicitly built tagged structure three.
- - If you would like to associate an annotation with a node, add the annotation to a page as you normally would via
-   CGPDFPageAddAnnotation(...), but within the appropriate push / pop tag call. NOTE: CGPDFPageAddAnnotation is SPI, so
-   we cannot support this publicly. */
+   stream, as well as the implicitly built tagged structure there. */
 
 /* Sets the current tag to the given tagType with an associated tagProperties dictionary. The previous tag will be pushed
    to a tag-stack. The previous tag can be restored through CGPDFContextEndTag(...). This new tag will record any future
@@ -458,8 +435,7 @@ CG_EXTERN void CGPDFContextBeginTag(CGContextRef _Nonnull context, CGPDFTagType 
 
 /* Pop the current tag. Sets the current tag to the previous tag on the tag-stack. If there was no previous tag, then the
    current tag will be set to the root document tag (of type CGPDFTagTypeDocument). */
-CG_EXTERN void CGPDFContextEndTag(CGContextRef _Nonnull context)
-  CG_AVAILABLE_STARTING(10.15, 13.0);
+CG_EXTERN void CGPDFContextEndTag(CGContextRef _Nonnull context) CG_AVAILABLE_STARTING(10.15, 13.0);
 
 CF_ASSUME_NONNULL_END
 

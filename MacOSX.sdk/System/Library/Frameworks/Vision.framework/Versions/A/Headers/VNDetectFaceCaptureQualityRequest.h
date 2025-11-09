@@ -27,5 +27,7 @@ API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0))
 API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0))
 static const NSUInteger VNDetectFaceCaptureQualityRequestRevision1 = 1;
 
+API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
+static const NSUInteger VNDetectFaceCaptureQualityRequestRevision2 = 2;
 
 NS_ASSUME_NONNULL_END

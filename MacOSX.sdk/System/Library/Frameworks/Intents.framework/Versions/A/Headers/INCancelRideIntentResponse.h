@@ -2,7 +2,7 @@
 //  INCancelRideIntentResponse.h
 //  Intents
 //
-//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2020 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntentResponse.h>
@@ -14,12 +14,12 @@ typedef NS_ENUM(NSInteger, INCancelRideIntentResponseCode) {
     INCancelRideIntentResponseCodeReady,
     INCancelRideIntentResponseCodeSuccess,
     INCancelRideIntentResponseCodeFailure,
-} API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos);
+} API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 NS_ASSUME_NONNULL_BEGIN
 
 API_AVAILABLE(ios(11.0))
-API_UNAVAILABLE(watchos, macos)
+API_UNAVAILABLE(watchos, macos, tvos)
 @interface INCancelRideIntentResponse : INIntentResponse
 
 - (instancetype)init NS_UNAVAILABLE;

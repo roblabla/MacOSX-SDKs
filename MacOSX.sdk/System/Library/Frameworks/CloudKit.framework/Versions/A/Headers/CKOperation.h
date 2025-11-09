@@ -38,21 +38,23 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
 /*! @abstract This callback is called after a long lived operation has begun running and is persisted.
  *
  *  @discussion Once this callback is called the operation will continue running even if the current process exits.
+ *  Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
  */
-@property (nonatomic, strong, nullable) void (^longLivedOperationWasPersistedBlock)(void) API_AVAILABLE(macos(10.12), ios(9.3), tvos(9.2), watchos(3.0));
+@property (nonatomic, copy, nullable) void (^longLivedOperationWasPersistedBlock)(void) API_AVAILABLE(macos(10.12), ios(9.3), tvos(9.2), watchos(3.0));
 
 @end
 
 /*! @class CKOperationConfiguration
  *
  *  @discussion An operation configuration is a set of properties that describes how your operation should behave.  All properties have a default value.  When determining what properties to apply to an operation, we consult the operation's configuration property, as well as the operation->group->defaultConfiguration property.  We combine them following these rules:
+ *  @code
  *   Group Default Configuration Value | Operation Configuration Value |        Value Applied To Operation
  *  -----------------------------------+-------------------------------+-----------------------------------------
  *             default value           |         default value         |                  default value
  *             default value           |         explicit value        |       operation.configuration explicit value
  *             explicit value          |         default value         | operation.group.defaultConfiguration explicit value
  *             explicit value          |         explicit value        |       operation.configuration explicit value
- *
+ *  @endcode
  *  For example:
  *  CKOperationGroup -> defaultConfiguration -> allowsCellularAccess explicitly set to NO
  *  + CKOperation -> configuration -> allowsCellularAccess has default value of YES
@@ -70,6 +72,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 
 /*! @discussion CKOperations behave differently depending on how you set qualityOfService.
  *
+ *  @code
  *  Quality of Service | timeoutIntervalForResource | Network Error Behavior | Discretionary Behavior
  *  -------------------+----------------------------+------------------------+-----------------------
  *  UserInteractive    | -1 (no enforcement)        | fail                   | nonDiscretionary
@@ -77,7 +80,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
  *  Default            | 1 week                     | fail                   | discretionary when app backgrounded
  *  Utility            | 1 week                     | internally retried     | discretionary when app backgrounded
  *  Background         | 1 week                     | internally retried     | discretionary
- *
+ *  @endcode
  * timeoutIntervalForResource
  * - the timeout interval for any network resources retrieved by this operation
  * - this can be overridden via CKOperationConfiguration's timeoutIntervalForResource property
@@ -94,12 +97,12 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 @property (nonatomic, assign) NSQualityOfService qualityOfService;
 
 
-/*! Defaults to YES */
+/*! Defaults to @c YES */
 @property (nonatomic, assign) BOOL allowsCellularAccess;
 
 /*! @discussion Long lived operations will continue running even if your process exits. If your process remains alive for the lifetime of the long lived operation its behavior is the same as a regular operation.
  *
- *  Long lived operations can be fetched and replayed from the container via the `fetchAllLongLivedOperations:` and `fetchLongLivedOperationsWithIDs:` APIs.
+ *  Long lived operations can be fetched and replayed from the container via the @c fetchAllLongLivedOperations: and @c fetchLongLivedOperationsWithIDs: APIs.
  *
  *  Long lived operations persist until their -[NSOperation completionBlock] returns or until the operation is cancelled.
  *  Long lived operations may be garbage collected 24 hours after they finish running if no client has replayed them.
@@ -112,11 +115,11 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
  *  The default value is 60.
  *
  * @see NSURLSessionConfiguration.timeoutIntervalForRequest
-*/
+ */
 @property (nonatomic, assign) NSTimeInterval timeoutIntervalForRequest;
 
 /*! @discussion If set, overrides the timeout interval for any network resources retrieved by this operation.
- *  If not explicitly set, defaults to a value based on the operation's qualityOfService
+ *  If not explicitly set, defaults to a value based on the operation's @c qualityOfService
  *
  * @see NSURLSessionConfiguration.timeoutIntervalForResource
  */
@@ -135,5 +138,6 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 @property (nonatomic, assign) NSTimeInterval timeoutIntervalForRequest  API_DEPRECATED("Use CKOperationConfiguration", macos(10.12, 10.13), ios(10.0, 11.0), tvos(10.0, 11.0), watchos(3.0, 4.0));
 @property (nonatomic, assign) NSTimeInterval timeoutIntervalForResource API_DEPRECATED("Use CKOperationConfiguration", macos(10.12, 10.13), ios(10.0, 11.0), tvos(10.0, 11.0), watchos(3.0, 4.0));
 @end
+
 NS_ASSUME_NONNULL_END
 

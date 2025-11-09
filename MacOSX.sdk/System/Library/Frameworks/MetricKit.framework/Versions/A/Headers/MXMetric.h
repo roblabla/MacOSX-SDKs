@@ -30,7 +30,14 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos)
  @abstract      Convenience method to return a NSDictionary representation of this metric.
  @result        An NSDictionary object containing the dictionary representation
  */
-- (NSDictionary *)DictionaryRepresentation;
+- (NSDictionary *)DictionaryRepresentation API_DEPRECATED_WITH_REPLACEMENT("Use dictionaryRepresentation", ios(13.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(macos, tvos, watchos);
+
+/*!
+@method        dictionaryRepresentation
+@abstract      Convenience method to return a NSDictionary representation of this metric.
+@result        An NSDictionary object containing the dictionary representation
+*/
+- (NSDictionary *)dictionaryRepresentation API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, tvos, watchos) NS_REFINED_FOR_SWIFT;
 
 @end
 

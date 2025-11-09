@@ -49,11 +49,11 @@ CF_ASSUME_NONNULL_BEGIN
 					00:00:00:00, corresponding to a timeline position of 0 seconds.
 	@constant	kCAClockProperty_MIDIClockDestinations
 					Type: array of MIDIEndpointRef. When non-empty, the clock will transmit
-					MIDI beat clock to the MIDI endpoints in this list. (As of MacOS X 10.6,
+					MIDI beat clock to the MIDI endpoints in this list. (As of macOS 10.6,
 					the endpoints may be virtual sources. Previously, they had to be destinations.)
 	@constant	kCAClockProperty_MTCDestinations
 					Type: array of MIDIEndpointRef. When non-empty, the clock will transmit
-					MIDI Time Code to the MIDI endpoints in this list. (As of MacOS X 10.6,
+					MIDI Time Code to the MIDI endpoints in this list. (As of macOS 10.6,
 					the endpoints may be virtual sources. Previously, they had to be destinations.)
 	@constant	kCAClockProperty_MTCFreewheelTime
 					Type: CAClockSeconds. When the sync mode is MIDI Time Code, this controls
@@ -76,7 +76,7 @@ CF_ASSUME_NONNULL_BEGIN
 	@constant	kCAClockProperty_SendMIDISPP
 					Type: UInt32. Specifies whether MIDI Song Position Pointer messages are
 					sent to the clock's MIDI clock destinations (if any). Available starting
-					in MacOS X 10.6.
+					in macOS 10.6.
 */
 typedef CF_ENUM(UInt32, CAClockPropertyID) {
 	kCAClockProperty_InternalTimebase   = 'intb',
@@ -157,11 +157,10 @@ typedef CF_ENUM(UInt32, CAClockSyncMode) {
 	@typedef		CAClockSMPTEFormat
 	@abstract		A SMPTE format, specifying the frames per second (fps) and
 					whether it is drop frame.
-	@discussion		
-					The possible values of a CAClockSMPTEFormat are found in
-					<code>&lt;CoreAudioTypes/CoreAudioTypes.h&gt;</code>. Values include
-					kSMPTETimeType30, kSMPTETimeType30Drop, etc. Note that formats with more
-					than 30 fps are not usable with MIDI Time Code.
+
+	The possible values of a CAClockSMPTEFormat are found in <CoreAudioTypes/CoreAudioTypes.h>.
+	Values include kSMPTETimeType30, kSMPTETimeType30Drop, etc. Note that formats with more than 30
+	fps are not usable with MIDI Time Code.
 */
 typedef SMPTETimeType		CAClockSMPTEFormat;
 
@@ -322,14 +321,13 @@ typedef struct CAClockTime CAClockTime;
 	@struct 	CATempoMapEntry
 	@abstract	A tempo change event.
 	
+	The clock's tempo map defines the correspondence between seconds and musical
+	beats, and is used in conversions between the two.
+
 	@var  	beats
 				The beat time at which the tempo changes.
 	@var  	tempoBPM
 				The new tempo as of that time.
-	
-	@discussion
-				The clock's tempo map defines the correspondence between seconds and musical
-				beats, and is used in conversions between the two.
 */
 struct CATempoMapEntry {
 	CAClockBeats		beats;
@@ -341,6 +339,9 @@ typedef struct CATempoMapEntry CATempoMapEntry;
 	@struct		CAMeterTrackEntry
 	@abstract	A time signature change event.
 	
+	The meter track is used for converting between beats as floating-point
+	numbers (CAClockBeats) and their display representations (CABarBeatTime).
+
 	@var  	beats
 				The beat time at which the time signature (meter) changes.
 	@var  	meterNumer
@@ -348,9 +349,6 @@ typedef struct CATempoMapEntry CATempoMapEntry;
 	@var  	meterDenom
 				The denominator of the new time signature (1, 2, 4, 8, etc.).
 
-	@discussion
-				The meter track is used for converting between beats as floating-point
-				numbers (CAClockBeats) and their display representations (CABarBeatTime).
 */
 struct CAMeterTrackEntry {
 	CAClockBeats		beats;
@@ -539,10 +537,9 @@ CAClockRemoveListener(		CAClockRef			inCAClock,
 
 	@abstract		Sets the clock's current position on the media timeline.
 
-	@discussion		
-					Call this to specify where on the media timeline playback will begin. The
-					supplied time must be in seconds, beats, or SMPTE (not host time or audio
-					samples). Must only be called when stopped.					
+	Call this to specify where on the media timeline playback will begin. The
+	supplied time must be in seconds, beats, or SMPTE (not host time or audio
+	samples). Must only be called when stopped.					
 	
 	@param			inCAClock
 						The clock object.
@@ -662,13 +659,12 @@ CAClockStop(				CAClockRef			inCAClock)					API_AVAILABLE(macos(10.4)) API_UNAVA
 
 	@abstract		Allow received sync messages to start the clock.
 
-	@discussion		
-					If a clock is slaved to an external transport (e.g. MIDI Time Code), 
-					call this to indicate that the client is ready to start its transport in response
-					to the external transport having started.
-					
-					The external time source will set the clock's start position and start
-					the clock.
+	If a clock is following and being controlled by an external transport
+	(e.g. MIDI Time Code), call this to indicate that the client is ready to
+	start its transport in response to the external transport having started.
+
+	The external time source will set the clock's start position and start
+	the clock.
 						
 	@param			inCAClock
 						The clock object.
@@ -698,9 +694,8 @@ CAClockDisarm(				CAClockRef			inCAClock)					API_AVAILABLE(macos(10.4)) API_UNA
 
 	@abstract		Alter the clock's playback rate.
 
-	@discussion		
-					Adjusts the ratio between the timebase and media time; e.g. at 0.5, the 
-					media time will move half as quickly as timebase time.
+	Adjusts the ratio between the timebase and media time; e.g. at 0.5, the 
+	media time will move half as quickly as timebase time.
 						
 	@param			inCAClock
 						The clock object.
@@ -720,12 +715,11 @@ CAClockSetPlayRate(			CAClockRef			inCAClock,
 
 	@abstract		Obtain the clock's playback rate.
 
-	@discussion		
-					Returns the clock's current play rate. If the clock is internally synced,
-					this will be the last rate set by CAClockSetPlayRate. If the clock is
-					externally synced, it will be the rate of the external sync source, where
-					1.0 means that it is running at exactly the same rate as the clock's
-					timebase. (2.0 means twice as fast).
+	Returns the clock's current play rate. If the clock is internally synced,
+	this will be the last rate set by CAClockSetPlayRate. If the clock is
+	externally synced, it will be the rate of the external sync source, where
+	1.0 means that it is running at exactly the same rate as the clock's
+	timebase. (2.0 means twice as fast).
 	
 	@param			inCAClock
 						The clock object.
@@ -745,14 +739,13 @@ CAClockGetPlayRate(			CAClockRef			inCAClock,
 	
 	@abstract		Obtain the clock's current musical tempo.
 
-	@discussion		
-					Returns the current instantaneous tempo and a timestamp indicating where on the
-					timeline the tempo most recently changed.
+	Returns the current instantaneous tempo and a timestamp indicating where on the
+	timeline the tempo most recently changed.
 
-					If the clock is externally synced, the returned tempo will not reflect the
-					effective tempo; this routine always reflects the client-specified tempo. To
-					obtain the effective tempo, multiply the current tempo by the current play
-					rate.
+	If the clock is externally synced, the returned tempo will not reflect the
+	effective tempo; this routine always reflects the client-specified tempo. To
+	obtain the effective tempo, multiply the current tempo by the current play
+	rate.
 	
 	@param			inCAClock
 						The clock object.
@@ -776,9 +769,8 @@ CAClockGetCurrentTempo(		CAClockRef					inCAClock,
 	
 	@abstract		Manually override the clock's musical tempo during playback.
 
-	@discussion		
-					Effects a manual override of the tempo map while running. After stopping and
-					restarting, the original tempo map will be used again.
+	Effects a manual override of the tempo map while running. After stopping and
+	restarting, the original tempo map will be used again.
 						
 	@param			inCAClock
 						The clock object.
@@ -805,10 +797,9 @@ CAClockSetCurrentTempo(		CAClockRef						inCAClock,
 	
 	@abstract		Converts seconds to a SMPTE time representation.
 
-	@discussion		
-					Converts seconds on the media timeline to a SMPTE time. The clock's current
-					SMPTE format and offset must be set appropriately.
-		
+	Converts seconds on the media timeline to a SMPTE time. The clock's current
+	SMPTE format and offset must be set appropriately.
+
 	@param			inCAClock
 						The clock object.
 	
@@ -835,10 +826,9 @@ CAClockSecondsToSMPTETime(	CAClockRef			inCAClock,
 	
 	@abstract		Converts a SMPTE time representation to seconds.
 
-	@discussion		
-					Converts SMPTE time to seconds on the media timeline. The clock's current
-					SMPTE format and offset must be set appropriately.
-	
+	Converts SMPTE time to seconds on the media timeline. The clock's current
+	SMPTE format and offset must be set appropriately.
+
 	@param			inCAClock
 						The clock object.
 	
@@ -861,20 +851,16 @@ CAClockSMPTETimeToSeconds(	CAClockRef			inCAClock,
 	
 	@abstract		Converts a number of beats to a CABarBeatTime structure.
 
-	@discussion		
-					Converts a beat position on the media timeline to a CABarBeatTime, using the
-					clock's meter track. Examples using 4/4 time and a subbeat divisor of 480:
-					<table border="1">
-					<tr>
-						<th>inBeats</th>
-						<th>outBarBeatTime: bars . beats . units</th>
-					</tr>
-					<tr><td align="center">0</td>		<td align="center">1.1.0</td></tr>
-					<tr><td align="center">1</td>		<td align="center">1.2.0</td></tr>
-					<tr><td align="center">4</td>		<td align="center">2.1.0</td></tr>
-					<tr><td align="center">4.5</td>		<td align="center">2.1.240</td></tr>
-					</table>
-	
+	Converts a beat position on the media timeline to a CABarBeatTime, using the
+	clock's meter track. Examples using 4/4 time and a subbeat divisor of 480:
+
+	inBeats | outBarBeatTime: bars . beats . units
+	--------|-------------------------------------
+	0		| 1.1.0
+	1		| 1.2.0
+	4		| 2.1.0
+	4.5		| 2.1.240
+
 	@param			inCAClock
 						The clock object.
 	
@@ -901,9 +887,8 @@ CAClockBeatsToBarBeatTime(	CAClockRef			inCAClock,
 	
 	@abstract		Converts a CABarBeatTime structure to a number of beats.
 
-	@discussion		
-					Converts a CABarBeatTime structure (bars/beats/subbeats) to a beat
-					position, using the clock's meter track.
+	Converts a CABarBeatTime structure (bars/beats/subbeats) to a beat
+	position, using the clock's meter track.
 	
 	@param			inCAClock
 						The clock object.
@@ -927,11 +912,10 @@ CAClockBarBeatTimeToBeats(	CAClockRef			inCAClock,
 	
 	@abstract		Provides MIDI messages to a clock without using CoreMIDI
 
-	@discussion		
-					In some situations, a client may wish to drive a clock using MIDI Time Code or
-					beat clock obtained from a source other than Core MIDI. To do so,
-					construct MIDIPacketLists containing the timecode or beat clock messages,
-					and pass them to this function.
+	In some situations, a client may wish to drive a clock using MIDI Time Code or
+	beat clock obtained from a source other than Core MIDI. To do so,
+	construct MIDIPacketLists containing the timecode or beat clock messages,
+	and pass them to this function.
 	
 	@param			inCAClock
 						The clock object.

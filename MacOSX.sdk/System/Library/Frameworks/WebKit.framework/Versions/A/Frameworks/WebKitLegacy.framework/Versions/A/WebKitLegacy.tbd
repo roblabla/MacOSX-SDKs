@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 30301C44-B3CF-3AA9-AD90-077F4A665184' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           29A3A6E9-86ED-3DB0-A1D5-B48C91BAB595
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           FC18DD13-F2DA-33F3-ADDE-42CB85209B40
 install-name:    '/System/Library/Frameworks/WebKit.framework/Versions/A/Frameworks/WebKitLegacy.framework/Versions/A/WebKitLegacy'
-current-version: 608.2.6
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 610.2.11
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _DOMEventException, _DOMException, _DOMRangeException, _DOMXPathException, 
                        _WebActionButtonKey, _WebActionElementKey, _WebActionFormKey, 
                        _WebActionModifierFlagsKey, _WebActionNavigationTypeKey, _WebActionOriginalURLKey, 

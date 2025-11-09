@@ -2263,18 +2263,7 @@ enum
         kBluetoothHCISubEventLEScanTimeout                              = 0x11,
         kBluetoothHCISubEventLEAdvertisingSetTerminated                 = 0x12,
         kBluetoothHCISubEventLEScanRequestReceived                      = 0x13,
-        kBluetoothHCISubEventLEChannelSelectionAlgorithm                = 0x14,
-
-    LE_EXTENDED_ADVERTISING_REPORT_SUBEVENT					= 0x0d,
-    LE_PERIODIC_ADVERTISING_SYNC_ESTABLISHED_SUBEVENT		= 0x0e,
-    LE_PERIODIC_ADVERTISING_REPORT_SUBEVENT					= 0x0f,
-    LE_PERIODIC_ADVERTISING_SYNC_LOST_SUBEVENT				= 0x10,
-    LE_SCAN_TIMEOUT_SUBEVENT								= 0x11,
-    LE_ADVERTISING_SET_TERMINATED_SUBEVENT					= 0x12,
-    LE_SCAN_REQUEST_RECEIVED_SUBEVENT						= 0x13,
-    LE_CHANNEL_SELECTION_ALGORITHM_SUBEVENT					= 0x14,
-
-    
+        kBluetoothHCISubEventLEChannelSelectionAlgorithm                = 0x14,    
     
     
 	// [v3.0]

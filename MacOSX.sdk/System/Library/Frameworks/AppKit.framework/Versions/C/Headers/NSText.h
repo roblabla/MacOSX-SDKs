@@ -8,6 +8,7 @@
 
 #import <AppKit/NSView.h>
 #import <AppKit/NSSpellProtocol.h>
+#import <AppKit/AppKitDefines.h>
 
 @class NSColor, NSFont, NSNotification;
 @protocol NSTextDelegate;
@@ -38,7 +39,7 @@ typedef NS_ENUM(NSInteger, NSWritingDirection) {
 } API_AVAILABLE(macos(10.0), ios(6.0), watchos(2.0), tvos(9.0));
 #endif // !TARGET_OS_IPHONE
 
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 @interface NSText : NSView <NSChangeSpelling, NSIgnoreMisspelledWords>
 
 - (instancetype)initWithFrame:(NSRect)frameRect NS_DESIGNATED_INITIALIZER;

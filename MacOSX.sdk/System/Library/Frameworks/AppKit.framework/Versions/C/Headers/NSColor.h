@@ -47,10 +47,11 @@
 #import <AppKit/NSCell.h>
 #import <AppKit/NSColorList.h>
 #import <AppKit/NSPasteboard.h>
+#import <AppKit/AppKitDefines.h>
 #import <CoreImage/CIColor.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSImage, NSColorSpace, NSAppearance;
 
@@ -249,7 +250,7 @@ typedef NS_ENUM(NSInteger, NSColorSystemEffect) {
 @property (class, strong, readonly) NSColor *controlAccentColor API_AVAILABLE(macos(10.14));
 
 @property (class, readonly) NSControlTint currentControlTint;   // returns current system control tint
-+ (NSColor *)colorForControlTint:(NSControlTint)controlTint API_DEPRECATED("NSControlTint does not describe the full range of available control accent colors. Use +[NSColor controlAccentColor] instead.", macos(10.0,API_TO_BE_DEPRECATED));
++ (NSColor *)colorForControlTint:(NSControlTint)controlTint API_DEPRECATED("NSControlTint does not describe the full range of available control accent colors. Use +[NSColor controlAccentColor] instead.", macos(10.0, 11.0));
 
 @property (class, strong, readonly) NSColor *highlightColor; // Highlight color for UI elements (this is abstract and defines the color all highlights tend toward)
 @property (class, strong, readonly) NSColor *shadowColor;    // Shadow color for UI elements (this is abstract and defines the color all shadows tend toward)
@@ -370,34 +371,34 @@ This method provides a global approach to removing alpha which might not always 
 @interface NSColor (NSDeprecated)
 
 /// Historically used as the inner border highlight color for beveled buttons. No longer used.
-@property (class, strong, readonly) NSColor *controlHighlightColor API_DEPRECATED("Use a color that matches the semantics being used, such as `separatorColor`", macos(10.0,API_TO_BE_DEPRECATED));
+@property (class, strong, readonly) NSColor *controlHighlightColor API_DEPRECATED("Use a color that matches the semantics being used, such as `separatorColor`", macos(10.0, 11.0));
 /// Historically used as the outer border highlight color for beveled buttons. No longer used.
-@property (class, strong, readonly) NSColor *controlLightHighlightColor API_DEPRECATED("Use a color that matches the semantics being used, such as `separatorColor`", macos(10.0,API_TO_BE_DEPRECATED));
+@property (class, strong, readonly) NSColor *controlLightHighlightColor API_DEPRECATED("Use a color that matches the semantics being used, such as `separatorColor`", macos(10.0, 11.0));
 /// Historically used as the inner border shadow color for beveled buttons. No longer used.
-@property (class, strong, readonly) NSColor *controlShadowColor API_DEPRECATED("Use a color that matches the semantics being used, such as `separatorColor`", macos(10.0,API_TO_BE_DEPRECATED));
+@property (class, strong, readonly) NSColor *controlShadowColor API_DEPRECATED("Use a color that matches the semantics being used, such as `separatorColor`", macos(10.0, 11.0));
 /// Historically used as the outer border shadow color for beveled buttons. No longer used.
-@property (class, strong, readonly) NSColor *controlDarkShadowColor API_DEPRECATED("Use a color that matches the semantics being used, such as `separatorColor`", macos(10.0,API_TO_BE_DEPRECATED));
+@property (class, strong, readonly) NSColor *controlDarkShadowColor API_DEPRECATED("Use a color that matches the semantics being used, such as `separatorColor`", macos(10.0, 11.0));
 
 /// Historically used as the color of scroll bars. No longer used.
-@property (class, strong, readonly) NSColor *scrollBarColor API_DEPRECATED("Use NSScroller instead", macos(10.0,API_TO_BE_DEPRECATED));
+@property (class, strong, readonly) NSColor *scrollBarColor API_DEPRECATED("Use NSScroller instead", macos(10.0, 11.0));
 /// Historically used as the color of scroll bar knobs. No longer used.
-@property (class, strong, readonly) NSColor *knobColor API_DEPRECATED("Use NSScroller instead", macos(10.0,API_TO_BE_DEPRECATED));
+@property (class, strong, readonly) NSColor *knobColor API_DEPRECATED("Use NSScroller instead", macos(10.0, 11.0));
 /// Historically used as the color of scroll bar knobs being dragged. No longer used.
-@property (class, strong, readonly) NSColor *selectedKnobColor API_DEPRECATED("Use NSScroller instead", macos(10.0,API_TO_BE_DEPRECATED));
+@property (class, strong, readonly) NSColor *selectedKnobColor API_DEPRECATED("Use NSScroller instead", macos(10.0, 11.0));
 
 /// Historically used as the color of the window chrome, which is no longer able to be represented by a color. No longer used.
-@property (class, strong, readonly) NSColor *windowFrameColor API_DEPRECATED("Use NSVisualEffectMaterialTitlebar", macos(10.0,API_TO_BE_DEPRECATED));
+@property (class, strong, readonly) NSColor *windowFrameColor API_DEPRECATED("Use NSVisualEffectMaterialTitlebar", macos(10.0, 11.0));
 /// Historically used as the color of selected menu items, which is no longer a color but a tinted blur effect. No longer used.
-@property (class, strong, readonly) NSColor *selectedMenuItemColor API_DEPRECATED("Use NSVisualEffectMaterialSelection", macos(10.0,API_TO_BE_DEPRECATED));
+@property (class, strong, readonly) NSColor *selectedMenuItemColor API_DEPRECATED("Use NSVisualEffectMaterialSelection", macos(10.0, 11.0));
 /// Historically used as the color of table headers, which is no longer a color but a tinted blur effect.
-@property (class, strong, readonly) NSColor *headerColor API_DEPRECATED("Use NSVisualEffectMaterialHeaderView", macos(10.0,API_TO_BE_DEPRECATED));
+@property (class, strong, readonly) NSColor *headerColor API_DEPRECATED("Use NSVisualEffectMaterialHeaderView", macos(10.0, 11.0));
 
 /// The background color of selected content or text that is unemphasized. Older alias for +unemphasizedSelectedContentBackgroundColor and +unemphasizedSelectedTextBackgroundColor
-@property (class, strong, readonly) NSColor *secondarySelectedControlColor API_DEPRECATED_WITH_REPLACEMENT("unemphasizedSelectedContentBackgroundColor", macos(10.1,API_TO_BE_DEPRECATED));
+@property (class, strong, readonly) NSColor *secondarySelectedControlColor API_DEPRECATED_WITH_REPLACEMENT("unemphasizedSelectedContentBackgroundColor", macos(10.1, 11.0));
 /// The background color of selected and emphasized (focused) content: table views rows, collection views, etc. Older alias for +selectedContentBackgroundColor
-@property (class, strong, readonly) NSColor *alternateSelectedControlColor API_DEPRECATED_WITH_REPLACEMENT("selectedContentBackgroundColor", macos(10.2,API_TO_BE_DEPRECATED));
+@property (class, strong, readonly) NSColor *alternateSelectedControlColor API_DEPRECATED_WITH_REPLACEMENT("selectedContentBackgroundColor", macos(10.2, 11.0));
 /// The background colors for alternating content items: such as table view rows, collection view items. Older alias for +alternatingContentBackgroundColors
-@property (class, strong, readonly) NSArray<NSColor *> *controlAlternatingRowBackgroundColors API_DEPRECATED_WITH_REPLACEMENT("alternatingContentBackgroundColors", macos(10.3,API_TO_BE_DEPRECATED));
+@property (class, strong, readonly) NSArray<NSColor *> *controlAlternatingRowBackgroundColors API_DEPRECATED_WITH_REPLACEMENT("alternatingContentBackgroundColors", macos(10.3, 11.0));
 
 /* Get the color space name of the color. Note that here "color space name" doesn't refer to the name of an NSColorSpace, but rather an older way to distinguish the color type of different types of colors, as described at the top of this file. Should be implemented by subclassers for code destined to run on 10.12 or earlier. Newer code can choose to implement type instead.
  */

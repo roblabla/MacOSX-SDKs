@@ -23,6 +23,7 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0))
 @property (readonly, strong) NSDate *startDate;
 @property (readonly, strong) NSDate *endDate;
 
+
 @end
 
 // Sort Identifiers

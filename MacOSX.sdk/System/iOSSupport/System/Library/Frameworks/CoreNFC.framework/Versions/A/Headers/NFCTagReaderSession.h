@@ -92,9 +92,9 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)
  * @constant NFCPollingISO18092     NFCTagTypeFeliCa tag will be discovered.
  */
 typedef NS_OPTIONS(NSInteger, NFCPollingOption) {
-    NFCPollingISO14443      = 0x1,
-    NFCPollingISO15693      = 0x2,
-    NFCPollingISO18092      = 0x4,
+    NFCPollingISO14443 API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)     = 0x1,
+    NFCPollingISO15693 API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)     = 0x2,
+    NFCPollingISO18092 API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos)     = 0x4,
 };
 
 - (instancetype)init NS_UNAVAILABLE;

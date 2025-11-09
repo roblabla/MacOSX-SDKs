@@ -125,7 +125,9 @@
 #include <IOKit/usb/IOUSBHostIOSource.h>
 #include <IOKit/usb/IOUSBHostStream.h>
 
-#if TARGET_OS_OSX
+#define TARGET_OS_HAS_USBDRIVERKIT_IOUSBHOSTPIPE __has_include(<USBDriverKit/IOUSBHostPipe.h>)
+
+#if TARGET_OS_HAS_USBDRIVERKIT_IOUSBHOSTPIPE
 #include <USBDriverKit/IOUSBHostPipe.h>
 #endif
 
@@ -137,14 +139,14 @@ class AppleUSBHostController;
  * @brief       The OSObject representing a USB endpoint
  * @discussion  This class provides functionality to transfer data across USB.  Function drivers should not subclass IOUSBHostPipe.
  */
-class IOUSBHostPipe : public IOUSBHostIOSource
+class __IOUSBHOSTFAMILY_DEPRECATED IOUSBHostPipe : public IOUSBHostIOSource
 {
     friend class IOUSBHostInterface;
     friend class IOUSBHostDevice;
     friend class AppleUSBHostController;
     friend class AppleUSBIORequest;
 
-#if TARGET_OS_OSX
+#if TARGET_OS_HAS_USBDRIVERKIT_IOUSBHOSTPIPE
     OSDeclareDefaultStructorsWithDispatch(IOUSBHostPipe)
 #else
     OSDeclareDefaultStructors(IOUSBHostPipe)
@@ -489,7 +491,7 @@ public:
 protected:
     virtual IOReturn isochronousIoGated(tInternalDataTransferParameters& parameters);
 
-#if TARGET_OS_OSX
+#if TARGET_OS_HAS_USBDRIVERKIT_IOUSBHOSTPIPE
     static void asyncIOCompletionCallback(void* owner, void* parameter, IOReturn status, uint32_t bytesTransferred);
     static void asyncIOCompletionCallbackBundled(void *owner, uint32_t ioCompletionCount, IOMemoryDescriptor** dataBufferArray, void** parameterArray, IOReturn* statusArray, uint32_t* actualByteCountArray);
     static void asyncIsochIOCompletionCallback(void* owner, void* parameter, IOReturn status, IOUSBHostIsochronousFrame* frameList);

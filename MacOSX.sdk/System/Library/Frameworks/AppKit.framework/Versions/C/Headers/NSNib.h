@@ -16,9 +16,8 @@ As are all NSObjects, instantiated nib objects are allocated in a memory zone (N
 #import <AppKit/AppKitDefines.h>
 #import <Foundation/Foundation.h>
 
-
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 typedef NSString * NSNibName NS_SWIFT_BRIDGED_TYPEDEF;
 

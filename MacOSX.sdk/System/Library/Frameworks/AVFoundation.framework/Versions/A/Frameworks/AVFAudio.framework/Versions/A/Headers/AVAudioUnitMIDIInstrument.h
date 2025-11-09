@@ -48,7 +48,8 @@ API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
     specifies the volume with which the note is played.
     Range: 0 -> 127
  @param channel
-    the channel number to which the event is sent.
+    the channel number to which the event is sent
+	Range: 0 -> 15
  */
 - (void)startNote:(uint8_t)note withVelocity:(uint8_t)velocity onChannel:(uint8_t)channel;
 
@@ -58,8 +59,9 @@ API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
     the note number (key) to stop
     Range: 0 -> 127
  @param channel
-    the channel number to which the event is sent. 
-
+    the channel number to which the event is sent.
+	Range: 0 -> 15
+ 
  */
 - (void)stopNote:(uint8_t)note onChannel:(uint8_t)channel;
 
@@ -72,8 +74,9 @@ API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
     value for the controller. 
     Range: 0 -> 127
  @param channel
-    the channel number to which the event is sent. 
- 
+    the channel number to which the event is sent.
+	Range: 0 -> 15
+
  */
 - (void)sendController:(uint8_t)controller withValue:(uint8_t)value onChannel:(uint8_t)channel;
 
@@ -83,8 +86,9 @@ API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
     value of the pitchbend
     Range: 0 -> 16383
  @param channel
-    the channel number to which the pitch bend message is sent
- 
+    the channel number to which the event is sent.
+	Range: 0 -> 15
+
  */
 - (void)sendPitchBend:(uint16_t)pitchbend onChannel:(uint8_t)channel;
 
@@ -94,7 +98,8 @@ API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
     value of the pressure.
     Range: 0 -> 127
  @param channel
-    the channel number to which the event is sent. 
+    the channel number to which the event is sent.
+	Range: 0 -> 15
 
  */
 - (void)sendPressure:(uint8_t)pressure onChannel:(uint8_t)channel;
@@ -108,7 +113,8 @@ API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
     value of the pressure
     Range: 0 -> 127
  @param channel
-    channel number to which the event is sent. 
+    the channel number to which the event is sent.
+	Range: 0 -> 15
 
  */
 - (void)sendPressureForKey:(uint8_t)key withValue:(uint8_t)value onChannel:(uint8_t)channel;
@@ -119,7 +125,8 @@ API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
     the program number.
     Range: 0 -> 127
  @param channel
-    channel number to which the event is sent.
+    the channel number to which the event is sent.
+	Range: 0 -> 15
  @discussion
     the instrument will be loaded from the bank that has been previous set by MIDI Bank Select
     controller messages (0 and 31). If none has been set, bank 0 will be used. 
@@ -138,7 +145,8 @@ API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
     specifies the least significant byte value for the bank to select.
     Range: 0 -> 127
  @param channel
-    channel number to which the events are sent.
+    the channel number to which the event is sent.
+	Range: 0 -> 15
  */
 - (void)sendProgramChange:(uint8_t)program bankMSB:(uint8_t)bankMSB bankLSB:(uint8_t)bankLSB onChannel:(uint8_t)channel;
 

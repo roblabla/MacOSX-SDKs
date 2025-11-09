@@ -5,6 +5,10 @@
 //  Copyright (c) 2014 Apple Inc. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
 #ifndef CK_EXTERN
 #ifdef __cplusplus
 #define CK_EXTERN   extern "C" __attribute__((visibility ("default")))
@@ -24,3 +28,5 @@
 #define CK_EXTERN_HIDDEN   extern __attribute__((visibility ("hidden")))
 #endif
 #endif
+
+NS_ASSUME_NONNULL_END

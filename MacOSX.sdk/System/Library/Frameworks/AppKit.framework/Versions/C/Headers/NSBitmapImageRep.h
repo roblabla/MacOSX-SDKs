@@ -8,10 +8,11 @@
 #import <Foundation/NSArray.h>
 #import <Foundation/NSDictionary.h>
 #import <AppKit/NSImageRep.h>
+#import <AppKit/AppKitDefines.h>
 #import <ApplicationServices/ApplicationServices.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class CIImage;
 @class NSColor;

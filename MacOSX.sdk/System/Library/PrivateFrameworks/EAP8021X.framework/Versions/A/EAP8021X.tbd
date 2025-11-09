@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 44C738A7-A763-3299-8484-35B0087233EC', 'x86_64: 44C738A7-A763-3299-8484-35B0087233EC' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           654E77FA-C649-3622-BC48-38DBFD6028D2
+  - target:          x86_64-maccatalyst
+    value:           654E77FA-C649-3622-BC48-38DBFD6028D2
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           DD8474D2-6A5B-3F71-9C2B-42F0464D7EC3
+  - target:          arm64e-maccatalyst
+    value:           DD8474D2-6A5B-3F71-9C2B-42F0464D7EC3
 install-name:    '/System/Library/PrivateFrameworks/EAP8021X.framework/Versions/A/EAP8021X'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _AKAAuthResultsInit, _AKAAuthResultsRelease, _AKAAuthResultsSetAUTS, 
                        _AKAAuthResultsSetCK, _AKAAuthResultsSetIK, _AKAAuthResultsSetRES, 
                        _EAPCFDataArrayCreateSecCertificateArray, _EAPClientConfigurationCopyAndImport, 
@@ -69,25 +83,30 @@ exports:
                        _EAPPacketSetLength, _EAPPacketValid, _EAPSSLCopyPeerCertificates, 
                        _EAPSSLErrorString, _EAPSSLMemoryIORead, _EAPSSLMemoryIOWrite, 
                        _EAPSecCertificateArrayCreateCFDataArray, _EAPSecCertificateCopyAttributesDictionary, 
-                       _EAPSecCertificateCopyUserNameString, _EAPSecIdentityCreateTrustChain, 
-                       _EAPSecIdentityHandleCreate, _EAPSecIdentityHandleCreateSecIdentity, 
-                       _EAPSecIdentityHandleCreateSecIdentityTrustChain, _EAPSecIdentityListCreate, 
-                       _EAPSecKeychainPasswordItemCopy, _EAPSecKeychainPasswordItemCopy2, 
-                       _EAPSecKeychainPasswordItemCreate, _EAPSecKeychainPasswordItemCreateUnique, 
-                       _EAPSecKeychainPasswordItemCreateUniqueWithAccess, _EAPSecKeychainPasswordItemCreateWithAccess, 
-                       _EAPSecKeychainPasswordItemRemove, _EAPSecKeychainPasswordItemSet, 
-                       _EAPSecKeychainPasswordItemSet2, _EAPSecPolicyCopy, _EAPSecurityErrorString, 
-                       _EAPTLSComputeKeyData, _EAPTLSCopyIdentityTrustChain, _EAPTLSLengthIncludedPacketGetMessageLength, 
-                       _EAPTLSLengthIncludedPacketSetMessageLength, _EAPTLSMemIOContextCreate, 
-                       _EAPTLSPacketCopyDescription, _EAPTLSPacketCreate, _EAPTLSPacketCreate2, 
-                       _EAPTLSSecTrustEvaluate, _EAPTLSVerifyServerCertificateChain, 
+                       _EAPSecCertificateCopySHA1DigestString, _EAPSecCertificateCopyUserNameString, 
+                       _EAPSecIdentityCreateTrustChain, _EAPSecIdentityHandleCreate, 
+                       _EAPSecIdentityHandleCreateSecIdentity, _EAPSecIdentityHandleCreateSecIdentityTrustChain, 
+                       _EAPSecIdentityListCreate, _EAPSecKeychainPasswordItemCopy, 
+                       _EAPSecKeychainPasswordItemCopy2, _EAPSecKeychainPasswordItemCreate, 
+                       _EAPSecKeychainPasswordItemCreateUnique, _EAPSecKeychainPasswordItemCreateUniqueWithAccess, 
+                       _EAPSecKeychainPasswordItemCreateWithAccess, _EAPSecKeychainPasswordItemRemove, 
+                       _EAPSecKeychainPasswordItemSet, _EAPSecKeychainPasswordItemSet2, 
+                       _EAPSecPolicyCopy, _EAPSecurityErrorString, _EAPTLSComputeKeyData, 
+                       _EAPTLSCopyIdentityTrustChain, _EAPTLSCopyTrustExceptionBindings, 
+                       _EAPTLSLengthIncludedPacketGetMessageLength, _EAPTLSLengthIncludedPacketSetMessageLength, 
+                       _EAPTLSMemIOContextCreate, _EAPTLSPacketCopyDescription, _EAPTLSPacketCreate, 
+                       _EAPTLSPacketCreate2, _EAPTLSRemoveTrustExceptionsBindings, 
+                       _EAPTLSSecTrustApplyExceptionsBinding, _EAPTLSSecTrustEvaluate, 
+                       _EAPTLSSecTrustSaveExceptionsBinding, _EAPTLSSetTrustExceptionBindings, 
+                       _EAPTLSTrustExceptionsCopy, _EAPTLSVerifyServerCertificateChain, 
                        _EAPTypeStr, _LinkAddresses_count, _LinkAddresses_create, 
                        _LinkAddresses_element, _LinkAddresses_free, _LinkAddresses_lookup, 
                        _MSChap, _MSChap2, _MSChap2AuthResponseValid, _MSChap2_MPPEGetAsymetricStartKey, 
                        _MSChap2_MPPEGetMasterKey, _MSChapFillWithRandom, _MSChap_MPPE, 
                        _NTPasswordBlockEncryptNewPasswordWithOldHash, _NTPasswordHashEncryptOldWithNew, 
                        _NTSessionKey16, _SIMAuthenticateAKA, _SIMAuthenticateGSM, 
-                       _SIMCopyEncryptedIMSIInfo, _SIMCopyIMSI, _SIMCopyRealm, _SIMReportDecryptionError, 
+                       _SIMCopyEncryptedIMSIInfo, _SIMCopyIMSI, _SIMCopyOOBPseudonym, 
+                       _SIMCopyRealm, _SIMIsOOBPseudonymSupported, _SIMReportDecryptionError, 
                        _chap_md5, _eapaka_introspect, _eapfast_introspect, _eapgtc_introspect, 
                        _eapmschapv2_introspect, _eapol_socket, _eapsim_introspect, 
                        _eaptls_introspect, _eapttls_introspect, _fprint_bytes, _fprint_data, 

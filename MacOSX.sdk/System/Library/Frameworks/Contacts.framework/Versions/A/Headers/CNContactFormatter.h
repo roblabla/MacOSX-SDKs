@@ -51,6 +51,24 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  */
 + (id<CNKeyDescriptor>)descriptorForRequiredKeysForStyle:(CNContactFormatterStyle)style;
 
+/*!
+ * @abstract The contact key descriptor required for the name order.
+ *
+ * @discussion Use to fetch all contact keys required for +nameOrderForContact:. Can combine key descriptors for different formatter styles in the fetch.
+ *
+ * @return The contact key descriptor for the name order.
+ */
+@property (class, readonly) id<CNKeyDescriptor> descriptorForRequiredKeysForNameOrder;
+
+/*!
+ * @abstract The contact key descriptor required for the name delimiter.
+ *
+ * @discussion Use to fetch all contact keys required for +delimiterForContact:. Can combine key descriptors for different formatter styles in the fetch.
+ *
+ * @return The contact key descriptor for the name delimiter.
+ */
+@property (class, readonly) id<CNKeyDescriptor> descriptorForRequiredKeysForDelimiter;
+
 
 /*!
  * @abstract Formats the contact name.

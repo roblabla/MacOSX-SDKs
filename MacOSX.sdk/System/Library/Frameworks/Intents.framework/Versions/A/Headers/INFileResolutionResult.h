@@ -2,7 +2,7 @@
 //  INFileResolutionResult.h
 //  Intents
 //
-//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2020 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntentResolutionResult.h>
@@ -11,8 +11,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(13.0), watchos(6.0))
-API_UNAVAILABLE(macosx)
+API_AVAILABLE(ios(13.0), macos(11.0), watchos(6.0))
+API_UNAVAILABLE(tvos)
 @interface INFileResolutionResult : INIntentResolutionResult
 
 // This resolution result is for when the app extension wants to tell Siri to proceed, with a given INFile. The resolvedFile can be different than the original INFile. This allows app extensions to apply business logic constraints.

@@ -61,8 +61,10 @@ __API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0), tvos(10.0))
 // Notification requests can be scheduled to notify the user via time and location. See UNNotificationTrigger for more information. Calling -addNotificationRequest: will replace an existing notification request with the same identifier. A notification request with the identifier as an existing delivered notifications will alert for the new notification request and replace the existing delivered notification when it is triggered. The number of pending notification requests that may be scheduled by an application at any one time is limited by the system.
 - (void)addNotificationRequest:(UNNotificationRequest *)request withCompletionHandler:(nullable void(^)(NSError *__nullable error))completionHandler;
 
-// Notification requests that are waiting for their trigger to fire
+// Notification requests that have been scheduled for a future time or location and are waiting for their trigger to fire
 - (void)getPendingNotificationRequestsWithCompletionHandler:(void(^)(NSArray<UNNotificationRequest *> *requests))completionHandler;
+
+// Removes notifications that have been scheduled for a future time or location and are waiting for their trigger to fire. There is no reason to call these methods to remove push notifications or notification requests with no trigger.
 - (void)removePendingNotificationRequestsWithIdentifiers:(NSArray<NSString *> *)identifiers;
 - (void)removeAllPendingNotificationRequests;
 
@@ -76,7 +78,9 @@ __API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0), tvos(10.0))
 typedef NS_OPTIONS(NSUInteger, UNNotificationPresentationOptions) {
     UNNotificationPresentationOptionBadge   = (1 << 0),
     UNNotificationPresentationOptionSound   = (1 << 1),
-    UNNotificationPresentationOptionAlert   = (1 << 2),
+    UNNotificationPresentationOptionAlert __API_DEPRECATED("Use UNNotificationPresentationOptionList | UNNotificationPresentationOptionBanner", macos(10.14, 11.0), ios(10.0, 14.0), watchos(3.0, 7.0), tvos(10.0, 14.0)) = (1 << 2),
+    UNNotificationPresentationOptionList __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = (1 << 3),
+    UNNotificationPresentationOptionBanner __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = (1 << 4),
 } __API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0), tvos(10.0));
 
 static const UNNotificationPresentationOptions UNNotificationPresentationOptionNone NS_SWIFT_UNAVAILABLE("Use [] instead.") __API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0), tvos(10.0)) = 0;

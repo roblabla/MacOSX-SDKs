@@ -9,7 +9,7 @@
 #define __ATS_AVAILIBILITY__
 
 // The "_R" variation of the macros is for "retroactive"
-// Functions declared with it were not deprecated until macOSLiberty, though they should have been by 10.4
+// Functions declared with it were not deprecated until Mojave, though they should have been by Tiger
 
 #undef ATS_AVAILABLE_BUT_DEPRECATED
 

@@ -550,4 +550,5 @@ typedef struct EFI_SYSTEM_TABLE_64 {
 	EFI_PTR64                     ConfigurationTable;
 } __attribute__((aligned(8))) EFI_SYSTEM_TABLE_64;
 
+
 #endif /* _PEXPERT_I386_EFI_H */

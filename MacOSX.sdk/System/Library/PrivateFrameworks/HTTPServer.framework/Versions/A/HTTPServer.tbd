@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 0C0FB922-ECBD-3FEA-B5C5-0BB2B28C4BF4' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           06DAA689-50A9-3AC0-9896-229A272A589D
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           848F5470-7DB2-3785-8291-CE2104E02A0A
 install-name:    '/System/Library/PrivateFrameworks/HTTPServer.framework/Versions/A/HTTPServer'
-current-version: 37
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 38
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _DDExtractFileNameWithoutExtension, _DDIntersectionRange, 
                        _DDRangeCompare, _DDRangeFromString, _DDStringFromRange, _DDUnionRange, 
                        _GCDAsyncSocketErrorDomain, _GCDAsyncSocketException, _GCDAsyncSocketQueueName, 

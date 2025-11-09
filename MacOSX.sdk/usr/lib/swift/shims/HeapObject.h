@@ -20,7 +20,7 @@
 #define SWIFT_ABI_HEAP_OBJECT_HEADER_SIZE_64 16
 #define SWIFT_ABI_HEAP_OBJECT_HEADER_SIZE_32 8
 
-#ifdef __cplusplus
+#ifndef __swift__
 #include <type_traits>
 #include "swift/Basic/type_traits.h"
 
@@ -35,6 +35,15 @@ typedef struct HeapMetadata HeapMetadata;
 typedef struct HeapObject HeapObject;
 #endif
 
+// Hack: Clang doesn't define __ptrauth_objc_isa_pointer in phase 1 to avoid
+// triggering auth-on-load in projects using the qualifier. However, we need the
+// definition in phase 1, so create our own little copy of it.
+#if !defined(__swift__) && __has_feature(ptrauth_calls) && SWIFT_PTRAUTH_SIGN_ISA
+#include <ptrauth.h>
+#define __ptrauth_swift_runtime_isa \
+  __ptrauth(ptrauth_key_process_independent_data, 1, 0x6AE1)
+#endif
+
 // The members of the HeapObject header that are not shared by a
 // standard Objective-C instance
 #define SWIFT_HEAPOBJECT_NON_OBJC_MEMBERS       \
@@ -43,12 +52,23 @@ typedef struct HeapObject HeapObject;
 /// The Swift heap-object header.
 /// This must match RefCountedStructTy in IRGen.
 struct HeapObject {
-  /// This is always a valid pointer to a metadata object.
+#ifdef __swift__
   HeapMetadata const *metadata;
+#else
+  /// This is always a valid pointer to a metadata object.
+private:
+  HeapMetadata const *
+#if SWIFT_PTRAUTH && SWIFT_PTRAUTH_SIGN_ISA
+  __ptrauth_swift_runtime_isa
+#endif
+  metadata;
+
+public:
+#endif // ifdef __swift
 
   SWIFT_HEAPOBJECT_NON_OBJC_MEMBERS;
 
-#ifdef __cplusplus
+#ifndef __swift__
   HeapObject() = default;
 
   // Initialize a HeapObject header as appropriate for a newly-allocated object.
@@ -60,15 +80,27 @@ struct HeapObject {
   // Initialize a HeapObject header for an immortal object
   constexpr HeapObject(HeapMetadata const *newMetadata,
                        InlineRefCounts::Immortal_t immortal)
-  : metadata(newMetadata)
+    : metadata(newMetadata)
   , refCounts(InlineRefCounts::Immortal)
   { }
+
+  HeapMetadata const *getMetadata() const {
+#if SWIFT_PTRAUTH_AUTH_ISA
+    return metadata;
+#else
+    return __ptrauth_swift_isa_strip(*(HeapMetadata const * const *)&metadata);
+#endif
+  }
+
+  void setMetadata(HeapMetadata const *newMetadata) {
+    metadata = newMetadata;
+  }
 
 #ifndef NDEBUG
   void dump() const LLVM_ATTRIBUTE_USED;
 #endif
 
-#endif // __cplusplus
+#endif // ndef __swift__
 };
 
 #ifdef __cplusplus
@@ -92,7 +124,7 @@ __swift_size_t swift_weakRetainCount(HeapObject *obj);
 } // extern "C"
 #endif
 
-#ifdef __cplusplus
+#ifndef __swift__
 static_assert(std::is_trivially_destructible<HeapObject>::value,
               "HeapObject must be trivially destructible");
 

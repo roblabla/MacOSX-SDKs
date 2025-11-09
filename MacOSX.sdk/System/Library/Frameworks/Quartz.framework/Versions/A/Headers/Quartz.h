@@ -6,6 +6,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import <QuartzComposer/QuartzComposer.h>
 #import <QuartzFilters/QuartzFilters.h>
-#import <PDFKit/PDFKit.h>
+#import <Quartz/PDFKit.h>
 #import <ImageKit/ImageKit.h>
 #import <QuickLookUI/QuickLookUI.h>

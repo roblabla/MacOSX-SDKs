@@ -395,6 +395,18 @@ CG_EXTERN CGError CGGetEventTapList(uint32_t maxNumberOfTaps,
     uint32_t * __nullable eventTapCount)
     CG_AVAILABLE_STARTING(10.4);
 
+/* Checks whether the current process already has event listening access */
+CG_EXTERN bool CGPreflightListenEventAccess(void) CG_AVAILABLE_STARTING(10.15);
+
+/* Requests event listening access if absent, potentially prompting */
+CG_EXTERN bool CGRequestListenEventAccess(void) CG_AVAILABLE_STARTING(10.15);
+
+/* Checks whether the current process already has event synthesizing access */
+CG_EXTERN bool CGPreflightPostEventAccess(void) CG_AVAILABLE_STARTING(10.15);
+
+/* Requests event synthesizing access if absent, potentially prompting */
+CG_EXTERN bool CGRequestPostEventAccess(void) CG_AVAILABLE_STARTING(10.15);
+
 CF_ASSUME_NONNULL_END
 
 CF_IMPLICIT_BRIDGING_DISABLED

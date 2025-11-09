@@ -1,23 +1,13 @@
 module MachO [system] [extern_c] {
+
+  extern module dyld "dyld.modulemap"
+
+  extern module compact_unwind_encoding "compact_unwind_encoding.modulemap"
+
   export *
-  
+
   module arch {
     header "arch.h"
-    export *
-  }
-
-  module compact_unwind_encoding {
-    header "compact_unwind_encoding.h"
-    export *
-  }
-  
-  module dyld {
-    header "dyld.h"
-    export *
-  }
-
-  module dyld_images {
-    header "dyld_images.h"
     export *
   }
 

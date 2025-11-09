@@ -75,12 +75,20 @@ enum
   kCVPixelFormatType_422YpCbCr_4A_8BiPlanar = 'a2vy', /* First plane: Video-range Component Y'CbCr 8-bit 4:2:2, ordered Cb Y'0 Cr Y'1; second plane: alpha 8-bit 0-255 */
   kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange = '420v', /* Bi-Planar Component Y'CbCr 8-bit 4:2:0, video-range (luma=[16,235] chroma=[16,240]).  baseAddr points to a big-endian CVPlanarPixelBufferInfo_YCbCrBiPlanar struct */
   kCVPixelFormatType_420YpCbCr8BiPlanarFullRange  = '420f', /* Bi-Planar Component Y'CbCr 8-bit 4:2:0, full-range (luma=[0,255] chroma=[1,255]).  baseAddr points to a big-endian CVPlanarPixelBufferInfo_YCbCrBiPlanar struct */ 
+  kCVPixelFormatType_422YpCbCr8BiPlanarVideoRange = '422v', /* Bi-Planar Component Y'CbCr 8-bit 4:2:2, video-range (luma=[16,235] chroma=[16,240]).  baseAddr points to a big-endian CVPlanarPixelBufferInfo_YCbCrBiPlanar struct */
+  kCVPixelFormatType_422YpCbCr8BiPlanarFullRange  = '422f', /* Bi-Planar Component Y'CbCr 8-bit 4:2:2, full-range (luma=[0,255] chroma=[1,255]).  baseAddr points to a big-endian CVPlanarPixelBufferInfo_YCbCrBiPlanar struct */
+  kCVPixelFormatType_444YpCbCr8BiPlanarVideoRange = '444v', /* Bi-Planar Component Y'CbCr 8-bit 4:4:4, video-range (luma=[16,235] chroma=[16,240]).  baseAddr points to a big-endian CVPlanarPixelBufferInfo_YCbCrBiPlanar struct */
+  kCVPixelFormatType_444YpCbCr8BiPlanarFullRange  = '444f', /* Bi-Planar Component Y'CbCr 8-bit 4:4:4, full-range (luma=[0,255] chroma=[1,255]).  baseAddr points to a big-endian CVPlanarPixelBufferInfo_YCbCrBiPlanar struct */
   kCVPixelFormatType_422YpCbCr8_yuvs = 'yuvs',     /* Component Y'CbCr 8-bit 4:2:2, ordered Y'0 Cb Y'1 Cr */
   kCVPixelFormatType_422YpCbCr8FullRange = 'yuvf', /* Component Y'CbCr 8-bit 4:2:2, full range, ordered Y'0 Cb Y'1 Cr */
   kCVPixelFormatType_OneComponent8  = 'L008',     /* 8 bit one component, black is zero */
   kCVPixelFormatType_TwoComponent8  = '2C08',     /* 8 bit two component, black is zero */
   kCVPixelFormatType_30RGBLEPackedWideGamut = 'w30r', /* little-endian RGB101010, 2 MSB are zero, wide-gamut (384-895) */
   kCVPixelFormatType_ARGB2101010LEPacked = 'l10r',     /* little-endian ARGB2101010 full-range ARGB */
+  kCVPixelFormatType_OneComponent10      = 'L010',     /* 10 bit little-endian one component, stored as 10 MSBs of 16 bits, black is zero */
+  kCVPixelFormatType_OneComponent12      = 'L012',     /* 12 bit little-endian one component, stored as 12 MSBs of 16 bits, black is zero */
+  kCVPixelFormatType_OneComponent16      = 'L016',     /* 16 bit little-endian one component, black is zero */
+  kCVPixelFormatType_TwoComponent16      = '2C16',     /* 16 bit little-endian two component, black is zero */
   kCVPixelFormatType_OneComponent16Half  = 'L00h',     /* 16 bit one component IEEE half-precision float, 16-bit little-endian samples */
   kCVPixelFormatType_OneComponent32Float = 'L00f',     /* 32 bit one component IEEE float, 32-bit little-endian samples */
   kCVPixelFormatType_TwoComponent16Half  = '2C0h',     /* 16 bit two component IEEE half-precision float, 16-bit little-endian samples */
@@ -102,6 +110,8 @@ enum
   kCVPixelFormatType_422YpCbCr10BiPlanarFullRange  = 'xf22', /* 2 plane YCbCr10 4:2:2, each 10 bits in the MSBs of 16bits, full-range (Y range 0-1023) */
   kCVPixelFormatType_444YpCbCr10BiPlanarFullRange  = 'xf44', /* 2 plane YCbCr10 4:4:4, each 10 bits in the MSBs of 16bits, full-range (Y range 0-1023) */
   kCVPixelFormatType_420YpCbCr8VideoRange_8A_TriPlanar   = 'v0a8', /* first and second planes as per 420YpCbCr8BiPlanarVideoRange (420v), alpha 8 bits in third plane full-range.  No CVPlanarPixelBufferInfo struct. */
+  kCVPixelFormatType_16VersatileBayer    = 'bp16',   /* Single plane Bayer 16-bit little-endian sensor element ("sensel") samples from full-size decoding of ProRes RAW images; Bayer pattern (sensel ordering) and other raw conversion information is described via buffer attachments */
+  kCVPixelFormatType_64RGBA_DownscaledProResRAW    = 'bp64',   /* Single plane 64-bit RGBA (16-bit little-endian samples) from downscaled decoding of ProRes RAW images; components--which may not be co-sited with one another--are sensel values and require raw conversion, information for which is described via buffer attachments */
 };
 
 	
@@ -160,10 +170,87 @@ CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferCGImageCompatibilityKey API
 	CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferOpenGLCompatibilityKey API_AVAILABLE(macosx(10.4), ios(4.0), tvos(9.0), watchos(4.0));   // CFBoolean
 CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferPlaneAlignmentKey API_AVAILABLE(macosx(10.6), ios(4.0), tvos(9.0), watchos(4.0));		    // CFNumber
 CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferIOSurfacePropertiesKey API_AVAILABLE(macosx(10.6), ios(4.0), tvos(9.0), watchos(4.0));     // CFDictionary; presence requests buffer allocation via IOSurface
-CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferOpenGLESCompatibilityKey API_AVAILABLE(ios(6.0), tvos(9.0)) API_UNAVAILABLE(macosx, macCatalyst) __WATCHOS_PROHIBITED;	    // CFBoolean
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferOpenGLESCompatibilityKey API_AVAILABLE(ios(6.0), tvos(9.0)) API_UNAVAILABLE(macosx) API_UNAVAILABLE(macCatalyst) __WATCHOS_PROHIBITED;	    // CFBoolean
 CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferMetalCompatibilityKey API_AVAILABLE(macosx(10.11), ios(8.0), tvos(9.0), watchos(4.0));	    // CFBoolean
 CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferOpenGLTextureCacheCompatibilityKey API_AVAILABLE(macosx(10.11)) API_UNAVAILABLE(ios, tvos, watchos);
-CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferOpenGLESTextureCacheCompatibilityKey API_AVAILABLE(ios(9.0), tvos(9.0)) API_UNAVAILABLE(macosx, macCatalyst) __WATCHOS_PROHIBITED;
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferOpenGLESTextureCacheCompatibilityKey API_AVAILABLE(ios(9.0), tvos(9.0)) API_UNAVAILABLE(macosx) API_UNAVAILABLE(macCatalyst) __WATCHOS_PROHIBITED;
+
+/*!
+    @const      kCVPixelBufferVersatileBayerKey_BayerPattern
+    @abstract   Buffer attachment key for code indicating Bayer pattern (sensel arrangement).
+    @discussion Associated attachment is a CFNumber of type kCFNumberSInt32Type.  The value follows the semantics of the ProRes RAW bayer_pattern bitstream syntax element, namely 0, 1, 2, or 3, where 0 means the top-left sensel of the frame is red-filtered ("RGGB"); 1 means the top-left sensel of the frame is green-filtered, with the top row alternating between green- and red-filtered sensels ("GRBG"); 2 means the top-left sensel of the frame is green- filtered, with the top row alternating between green- and blue-filtered sensels ("GBRG"); and 3 means the top-left sensel of the frame is blue-filtered ("BGGR").  This attachment applies only to buffers with VersatileBayer formats.
+*/
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferVersatileBayerKey_BayerPattern API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macosx) API_UNAVAILABLE(macCatalyst) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+
+enum {
+	kCVVersatileBayer_BayerPattern_RGGB = 0,
+	kCVVersatileBayer_BayerPattern_GRBG = 1,
+	kCVVersatileBayer_BayerPattern_GBRG = 2,
+	kCVVersatileBayer_BayerPattern_BGGR = 3,
+};
+
+/*!
+    @const      kCVPixelBufferProResRAWKey_SenselSitingOffsets
+    @abstract   Buffer attachment key for siting offsets, relative to pixel center, of individual sensels/components constituting each pixel.
+    @discussion Associated attachment is CFData containing an array of 8 32-bit floats.  The eight CFData array elements specify, in order, the following sensel/component offsets from pixel center: red horizontal offset, red vertical offset, green horizontal offset, green vertical offset, blue horizontal offset, blue vertical offset, alpha horizontal offset, and alpha vertical offset.  A positive offset value indicates that the sensel/component lies to the right of or below the center of its pixel, while a negative value indicates that the sensel/component lies to the left of or above the center of its pixel.  Horizontal and vertical offset magnitudes are respectively in terms of the spacing between horizontally- and vertically-adjacent pixel centers.  This attachment applies only to buffers with the bp64 format, and is optional for those buffers; if not present, all offsets are considered to be 0.
+*/
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferProResRAWKey_SenselSitingOffsets API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macosx) API_UNAVAILABLE(macCatalyst) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+
+/*!
+    @const      kCVPixelBufferProResRAWKey_BlackLevel
+    @abstract   Buffer attachment key for sensel black level.
+    @discussion Associated attachment is a CFNumber of type kCFNumberSInt32Type.  The value is the sensel level corresponding to no light exposure.  This attachment is required for buffers with either the bp16 or bp64 format.
+*/
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferProResRAWKey_BlackLevel API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macosx) API_UNAVAILABLE(macCatalyst) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+
+/*!
+    @const      kCVPixelBufferProResRAWKey_WhiteLevel
+    @abstract   Buffer attachment key for sensel white level.
+    @discussion Associated attachment is a CFNumber of type kCFNumberSInt32Type.  The value is the sensel level corresponding to sensor (or camera A-to-D converter) saturation.  This attachment is required for buffers with either the bp16 or bp64 format.
+*/
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferProResRAWKey_WhiteLevel API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macosx) API_UNAVAILABLE(macCatalyst) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+
+/*!
+    @const      kCVPixelBufferProResRAWKey_WhiteBalanceCCT
+    @abstract   Buffer attachment key for illuminant correlated color temperature.
+    @discussion Associated attachment is a CFNumber of type kCFNumberSInt32Type.  The value is the illuminant correlated color temperature (CCT), in kelvins, selected at the time of capture.  May be 0, indicating that the CCT is unknown or unspecified.  This attachment is optional for buffers with either the bp16 or bp64 format; if not present, the CCT is considered unknown or unspecified.
+*/
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferProResRAWKey_WhiteBalanceCCT API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macosx) API_UNAVAILABLE(macCatalyst) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+
+/*!
+    @const      kCVPixelBufferProResRAWKey_WhiteBalanceRedFactor
+    @abstract   Buffer attachment key for white balance red factor.
+    @discussion Associated attachment is a CFNumber of type kCFNumberFloat32Type.  The value is the white balance multiplication factor for red-filtered sensels.  This attachment is required for buffers with either the bp16 or bp64 format.
+*/
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferProResRAWKey_WhiteBalanceRedFactor API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macosx) API_UNAVAILABLE(macCatalyst) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+
+/*!
+    @const      kCVPixelBufferProResRAWKey_WhiteBalanceBlueFactor
+    @abstract   Buffer attachment key for white balance blue factor.
+    @discussion Associated attachment is a CFNumber of type kCFNumberFloat32Type.  The value is the white balance multiplication factor for blue-filtered sensels.  This attachment is required for buffers with either the bp16 or bp64 format.
+*/
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferProResRAWKey_WhiteBalanceBlueFactor API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macosx) API_UNAVAILABLE(macCatalyst) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+
+/*!
+    @const      kCVPixelBufferProResRAWKey_ColorMatrix
+    @abstract   Buffer attachment key for color translation matrix.
+    @discussion Associated attachment is CFData containing an array of 9 32-bit floats.  The value is a 3x3 matrix which transforms linear RGB pixel values in the camera native color space to CIE 1931 XYZ values relative to the D65 illuminant, where the matrix entries are stored in the CFData in row-major order.  This attachment is required for buffers with either the bp16 or bp64 format.
+*/
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferProResRAWKey_ColorMatrix API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macosx) API_UNAVAILABLE(macCatalyst) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+
+/*!
+    @const      kCVPixelBufferProResRAWKey_GainFactor
+    @abstract   Buffer attachment key for gain factor.
+    @discussion Associated attachment is a CFNumber of type kCFNumberFloat32Type.  The value is the overall gain factor for raw conversion.  This attachment is required for buffers with either the bp16 or bp64 format.
+*/
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferProResRAWKey_GainFactor API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macosx) API_UNAVAILABLE(macCatalyst) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+
+/*!
+    @const      kCVPixelBufferProResRAWKey_RecommendedCrop
+    @abstract   Buffer attachment key for recommended number of pixels/rows to discard from the sides of the image after raw conversion.
+    @discussion Associated attachment is CFData containing an array of 4 32-bit floats.  The four CFData array elements specify, in order, the recommended number of: pixels to discard from the start (left) of each row of the image; pixels to discard from the end (right) of each row of the image; rows of pixels to discard from the top of the image; and rows of pixels to discard from the bottom of the image.  (Pixels/rows are discarded after raw conversion.)  This attachment is optional for buffers with either the bp16 or bp64 format; if not present, the recommended crop values are considered to be 0.  For buffers with the bp64 format, the values may be nonintegral due to downscaling, in which case the handling of fractional parts is implementation-dependent.
+*/
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferProResRAWKey_RecommendedCrop API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macosx) API_UNAVAILABLE(macCatalyst) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*!
     @typedef	CVPixelBufferRef

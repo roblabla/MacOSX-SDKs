@@ -32,7 +32,7 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
 
 /*! @abstract Describes the notification that will be sent when the subscription fires.
  *
- *  @discussion This property must be set to a non-nil value before saving the `CKSubscription`.
+ *  @discussion This property must be set to a non-nil value before saving the @c CKSubscription.
  */
 @property (nonatomic, copy, nullable) CKNotificationInfo *notificationInfo API_AVAILABLE(watchos(6.0));
 
@@ -50,13 +50,14 @@ typedef NS_OPTIONS(NSUInteger, CKQuerySubscriptionOptions) {
  *
  *  @abstract A subscription that fires whenever a change matching the predicate occurs.
  *
- *  @discussion `CKQuerySubscriptions` are not supported in a `sharedCloudDatabase`
+ *  @discussion @c CKQuerySubscriptions are not supported in a @c sharedCloudDatabase
  */
 API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(6.0))
 @interface CKQuerySubscription : CKSubscription <NSSecureCoding, NSCopying>
 
 - (instancetype)initWithRecordType:(CKRecordType)recordType predicate:(NSPredicate *)predicate options:(CKQuerySubscriptionOptions)querySubscriptionOptions;
 - (instancetype)initWithRecordType:(CKRecordType)recordType predicate:(NSPredicate *)predicate subscriptionID:(CKSubscriptionID)subscriptionID options:(CKQuerySubscriptionOptions)querySubscriptionOptions NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 /*! The record type that this subscription watches */
 @property (nonatomic, readonly, copy) CKRecordType recordType;
@@ -70,9 +71,9 @@ API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(6.0))
 /*! @abstract Options flags describing the firing behavior subscription.
  *
  *  @discussion One of
- *  `CKQuerySubscriptionOptionsFiresOnRecordCreation`,
- *  `CKQuerySubscriptionOptionsFiresOnRecordUpdate`, or
- *  `CKQuerySubscriptionOptionsFiresOnRecordDeletion` must be specified or an `NSInvalidArgumentException` will be thrown.
+ *  @c CKQuerySubscriptionOptionsFiresOnRecordCreation,
+ *  @c CKQuerySubscriptionOptionsFiresOnRecordUpdate, or
+ *  @c CKQuerySubscriptionOptionsFiresOnRecordDeletion must be specified or an @c NSInvalidArgumentException will be thrown.
  */
 @property (nonatomic, readonly, assign) CKQuerySubscriptionOptions querySubscriptionOptions;
 
@@ -83,14 +84,15 @@ API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(6.0))
  *
  *  @abstract A subscription that fires whenever any change happens in the indicated Record Zone.
  *
- *  @discussion The RecordZone must have the capability `CKRecordZoneCapabilityFetchChanges`
- *  `CKRecordZoneSubscriptions` are not supported in a `sharedCloudDatabase`
+ *  @discussion The RecordZone must have the capability @c CKRecordZoneCapabilityFetchChanges
+ *  @c CKRecordZoneSubscriptions are not supported in a @c sharedCloudDatabase
  */
 API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(6.0))
 @interface CKRecordZoneSubscription : CKSubscription <NSSecureCoding, NSCopying>
 
 - (instancetype)initWithZoneID:(CKRecordZoneID *)zoneID;
 - (instancetype)initWithZoneID:(CKRecordZoneID *)zoneID subscriptionID:(CKSubscriptionID)subscriptionID NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 @property (nonatomic, readonly, copy) CKRecordZoneID *zoneID;
 
@@ -104,7 +106,7 @@ API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(6.0))
  *
  *  @abstract A subscription fires whenever any change happens in the database that this subscription was saved in.
  *
- *  @discussion `CKDatabaseSubscription` is only supported in the Private and Shared databases.
+ *  @discussion @c CKDatabaseSubscription is only supported in the Private and Shared databases.
  */
 API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(6.0))
 @interface CKDatabaseSubscription : CKSubscription <NSSecureCoding, NSCopying>
@@ -112,6 +114,7 @@ API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(6.0))
 - (instancetype)init;
 + (instancetype)new OBJC_SWIFT_UNAVAILABLE("use object initializers instead");
 - (instancetype)initWithSubscriptionID:(CKSubscriptionID)subscriptionID NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 /*! Optional property. If set, a database subscription is scoped to record changes for this record type */
 @property (nonatomic, copy, nullable) CKRecordType recordType;
@@ -121,9 +124,9 @@ API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(6.0))
 
 /*! @class CKNotificationInfo
  *
- *  @discussion The payload of a push notification delivered in the UIApplication `application:didReceiveRemoteNotification:` delegate method contains information about the firing subscription.
+ *  @discussion The payload of a push notification delivered in the UIApplication @c application:didReceiveRemoteNotification: delegate method contains information about the firing subscription.
  *
- *  Use `+[CKNotification notificationFromRemoteNotificationDictionary:]` to parse that payload.
+ *  Use @code +[CKNotification notificationFromRemoteNotificationDictionary:] @endcode to parse that payload.
  *  On tvOS, alerts, badges, sounds, and categories are not handled in push notifications. However, CKSubscriptions remain available to help you avoid polling the server.
  */
 API_AVAILABLE(macos(10.10), ios(8.0), watchos(6.0))
@@ -176,18 +179,18 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(6.0))
  */
 @property (nonatomic, copy, nullable) NSArray<CKRecordFieldKey> *desiredKeys;
 
-/*! Indicates that the notification should increment the app's badge count. Default value is NO. */
+/*! Indicates that the notification should increment the app's badge count. Default value is @c NO. */
 @property (nonatomic, assign) BOOL shouldBadge API_AVAILABLE(tvos(10.0));
 
 /*! @abstract Indicates that the notification should be sent with the "content-available" flag to allow for background downloads in the application.
  *
- *  @discussion Default value is NO.
+ *  @discussion Default value is @c NO.
  */
 @property (nonatomic, assign) BOOL shouldSendContentAvailable;
 
 /*! @abstract Indicates that the notification should be sent with the "mutable-content" flag to allow a Notification Service app extension to modify or replace the push payload.
  *
- *  @discussion Default value is NO.
+ *  @discussion Default value is @c NO.
  */
 @property (nonatomic, assign) BOOL shouldSendMutableContent API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
@@ -207,36 +210,5 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(6.0))
 @property (nonatomic, copy, nullable) NSString *collapseIDKey API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
 @end
-
-#pragma mark - Deprecated CKSubscription
-
-/*! Replaced with CKQuerySubscriptionOptions */
-typedef NS_OPTIONS(NSUInteger, CKSubscriptionOptions) {
-    CKSubscriptionOptionsFiresOnRecordCreation     = 1 << 0,
-    CKSubscriptionOptionsFiresOnRecordUpdate       = 1 << 1,
-    CKSubscriptionOptionsFiresOnRecordDeletion     = 1 << 2,
-    CKSubscriptionOptionsFiresOnce                 = 1 << 3,
-} API_DEPRECATED("Use CKQuerySubscriptionOptions instead", macos(10.10, 10.12), ios(8.0, 10.0), tvos(9.0, 10.0)) __WATCHOS_PROHIBITED;
-
-@interface CKSubscription (CKSubscriptionDeprecated)
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder API_DEPRECATED("Init the appropriate CKSubscription subclass", macos(10.10, 10.12), ios(8.0, 10.0), tvos(9.0, 10.0)) __WATCHOS_PROHIBITED;
-
-/*! Replaced with CKQuerySubscription */
-- (instancetype)initWithRecordType:(CKRecordType)recordType predicate:(NSPredicate *)predicate options:(CKSubscriptionOptions)subscriptionOptions API_DEPRECATED("Use CKQuerySubscription instead", macos(10.10, 10.12), ios(8.0, 10.0), tvos(9.0, 10.0)) __WATCHOS_PROHIBITED;
-- (instancetype)initWithRecordType:(CKRecordType)recordType predicate:(NSPredicate *)predicate subscriptionID:(CKSubscriptionID)subscriptionID options:(CKSubscriptionOptions)subscriptionOptions API_DEPRECATED("Use CKQuerySubscription instead", macos(10.10, 10.12), ios(8.0, 10.0), tvos(9.0, 10.0)) __WATCHOS_PROHIBITED;
-@property (nonatomic, readonly, copy, nullable) CKRecordType recordType API_DEPRECATED("Use CKQuerySubscription instead", macos(10.10, 10.12), ios(8.0, 10.0), tvos(9.0, 10.0), watchos(6.0, 6.0));
-@property (nonatomic, readonly, copy, nullable) NSPredicate *predicate API_DEPRECATED("Use CKQuerySubscription instead", macos(10.10, 10.12), ios(8.0, 10.0), tvos(9.0, 10.0)) __WATCHOS_PROHIBITED;
-
-/*! Replaced with CKQuerySubscriptionOptions */
-@property (nonatomic, readonly, assign) CKSubscriptionOptions subscriptionOptions API_DEPRECATED("Use CKQuerySubscriptionOptions instead", macos(10.10, 10.12), ios(8.0, 10.0), tvos(9.0, 10.0)) __WATCHOS_PROHIBITED;
-
-/*! Replaced with CKRecordZoneSubscription */
-- (instancetype)initWithZoneID:(CKRecordZoneID *)zoneID options:(CKSubscriptionOptions)subscriptionOptions API_DEPRECATED("Use CKRecordZoneSubscription instead", macos(10.10, 10.12), ios(8.0, 10.0), tvos(9.0, 10.0)) __WATCHOS_PROHIBITED;
-- (instancetype)initWithZoneID:(CKRecordZoneID *)zoneID subscriptionID:(CKSubscriptionID)subscriptionID options:(CKSubscriptionOptions)subscriptionOptions API_DEPRECATED("Use CKRecordZoneSubscription instead", macos(10.10, 10.12), ios(8.0, 10.0), tvos(9.0, 10.0)) __WATCHOS_PROHIBITED;
-@property (nonatomic, copy, nullable) CKRecordZoneID *zoneID API_DEPRECATED("Use CKRecordZoneSubscription instead", macos(10.10, 10.12), ios(8.0, 10.0), tvos(9.0, 10.0)) __WATCHOS_PROHIBITED;
-
-@end
-
 
 NS_ASSUME_NONNULL_END

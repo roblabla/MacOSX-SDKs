@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: C1CB77C8-6CD9-3B8D-BDA2-6D761E6AC555', 'x86_64: C1CB77C8-6CD9-3B8D-BDA2-6D761E6AC555' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           760C7B5A-643B-37C7-98E8-1B68F7F27BAB
+  - target:          x86_64-maccatalyst
+    value:           760C7B5A-643B-37C7-98E8-1B68F7F27BAB
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           CAFC4086-078F-3519-A699-862A7A858661
+  - target:          arm64e-maccatalyst
+    value:           CAFC4086-078F-3519-A699-862A7A858661
 install-name:    '/usr/lib/libbsm.0.dylib'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _au_bsm_to_domain, _au_bsm_to_errno, _au_bsm_to_fcntl_cmd, 
                        _au_bsm_to_socket_type, _au_close, _au_close_buffer, _au_close_token, 
                        _au_close_with_errors, _au_domain_to_bsm, _au_errno_to_bsm, 

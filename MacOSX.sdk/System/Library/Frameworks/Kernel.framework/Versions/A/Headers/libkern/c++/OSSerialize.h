@@ -31,6 +31,7 @@
 #define _OS_OSSERIALIZE_H
 
 #include <libkern/c++/OSObject.h>
+#include <libkern/c++/OSPtr.h>
 
 class OSCollection;
 class OSSet;
@@ -39,10 +40,10 @@ class OSArray;
 class OSData;
 
 class OSSerializer;
-typedef OSPtr<OSSerializer> OSSerializerPtr;
+typedef OSSerializer* OSSerializerPtr;
 
 class OSSerialize;
-typedef OSPtr<OSSerialize> OSSerializePtr;
+typedef OSSerialize* OSSerializePtr;
 
 /*!
  * @header
@@ -99,7 +100,7 @@ private:
 	unsigned int   capacity;       // of container
 	unsigned int   capacityIncrement;// of container
 
-	OSArray * tags;                    // tags for all objects seen
+	OSPtr<OSArray> tags;                    // tags for all objects seen
 
 	typedef void * Editor;
 
@@ -107,12 +108,12 @@ private:
 	bool     endCollection;
 	Editor   editor;
 	void   * editRef;
-	OSData * indexData;
+	OSPtr<OSData> indexData;
 
 	bool binarySerialize(const OSMetaClassBase *o);
 	bool binarySerializeInternal(const OSMetaClassBase *o);
 	bool addBinary(const void * data, size_t size);
-	bool addBinaryObject(const OSMetaClassBase * o, uint32_t key, const void * _bits, size_t size,
+	bool addBinaryObject(const OSMetaClassBase * o, uint32_t key, const void * _bits, uint32_t size,
 	    uint32_t * startCollection);
 	void endBinaryCollection(uint32_t startCollection);
 
@@ -134,9 +135,9 @@ public:
  * @discussion
  * The serializer will grow as needed to accommodate more data.
  */
-	static OSSerializePtr withCapacity(unsigned int capacity);
+	static OSPtr<OSSerialize> withCapacity(unsigned int capacity);
 
-	static OSSerializePtr binaryWithCapacity(unsigned int inCapacity, Editor editor = NULL, void * reference = NULL);
+	static OSPtr<OSSerialize> binaryWithCapacity(unsigned int inCapacity, Editor editor = NULL, void * reference = NULL);
 	void setIndexed(bool index);
 
 /*!
@@ -332,13 +333,13 @@ class OSSerializer : public OSObject
 
 public:
 
-	static OSSerializerPtr forTarget(
+	static OSPtr<OSSerializer> forTarget(
 		void * target,
 		OSSerializerCallback callback,
 		void * ref = NULL);
 
 #ifdef __BLOCKS__
-	static OSSerializerPtr withBlock(
+	static OSPtr<OSSerializer> withBlock(
 		OSSerializerBlock callback);
 #endif
 

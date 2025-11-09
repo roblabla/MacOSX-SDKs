@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 944EAE84-E3F7-37A4-B758-C47E61519942', 'x86_64: 944EAE84-E3F7-37A4-B758-C47E61519942' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           2223C16E-401F-347B-B564-1D21172E5426
+  - target:          x86_64-maccatalyst
+    value:           2223C16E-401F-347B-B564-1D21172E5426
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           2FAC0949-3EF5-337E-9726-F27310CDB3CA
+  - target:          arm64e-maccatalyst
+    value:           2FAC0949-3EF5-337E-9726-F27310CDB3CA
 install-name:    '/System/Library/Frameworks/CoreWLAN.framework/Versions/A/CoreWLAN'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _ACInterfaceCreate, _ACInterfaceDeviceNameCopy, _ACInterfaceGetPower, 
                        _ACInterfaceSetPower, _ACNetworkAssociate, _ACNetworkCopyBroadcastScanResults, 
                        _ACNetworkCopyDirectedScanResult, _ACNetworkDisassociate, 
@@ -66,16 +80,17 @@ exports:
                        _CWSystemKeychainSetEAPIdentity, _CWSystemKeychainSetEAPUsernameAndPassword, 
                        _CWSystemKeychainSetHostAPModePassword, _CWSystemKeychainSetPassword, 
                        _CWUpdateCloudWiFiProfile, _CWUpdateNetworkProfile, _CWUpdateNetworkProfileWithID, 
-                       _CWUpdatePasspointNetworkProfile, _CWValidLengthComputerNameSSIDWithEncoding, 
-                       _CWValidLengthSSIDWithEncoding, _CWWiFiUIProxyEventXPCInterface, 
-                       _CWWiFiUIProxyRequestXPCInterface, _CWWiFiXPCEventProtocolInterface, 
-                       _CWWiFiXPCRequestProtocolInterface, _CoreWLANFrameworkBundleID, 
-                       _EAPOLErrorDomain, _EAPOLSupplicantStateDidChangeNotification, 
-                       _WiFiDeviceClientCopyCurrentNetwork, _WiFiDeviceClientCopyProperty, 
-                       _WiFiDeviceClientDisassociate, _WiFiDeviceClientGetInterfaceName, 
-                       _WiFiDeviceClientGetPower, _WiFiDeviceClientIsInterfaceAWDL, 
-                       _WiFiDeviceClientRegisterDeviceAvailableCallback, _WiFiDeviceClientRegisterExtendedLinkCallback, 
-                       _WiFiDeviceClientRegisterPowerCallback, _WiFiDeviceClientRegisterVirtualInterfaceStateChangeCallback, 
+                       _CWUpdatePasspointNetworkProfile, _CWUpdatePreferredOrderTimestamps, 
+                       _CWValidLengthComputerNameSSIDWithEncoding, _CWValidLengthSSIDWithEncoding, 
+                       _CWWiFiUIProxyEventXPCInterface, _CWWiFiUIProxyRequestXPCInterface, 
+                       _CWWiFiXPCEventProtocolInterface, _CWWiFiXPCRequestProtocolInterface, 
+                       _CoreWLANFrameworkBundleID, _EAPOLErrorDomain, _EAPOLSupplicantStateDidChangeNotification, 
+                       _WiFiDeviceClientCopyAirplayStatistics, _WiFiDeviceClientCopyCurrentNetwork, 
+                       _WiFiDeviceClientCopyProperty, _WiFiDeviceClientDisassociate, 
+                       _WiFiDeviceClientGetInterfaceName, _WiFiDeviceClientGetPower, 
+                       _WiFiDeviceClientIsInterfaceAWDL, _WiFiDeviceClientRegisterDeviceAvailableCallback, 
+                       _WiFiDeviceClientRegisterExtendedLinkCallback, _WiFiDeviceClientRegisterPowerCallback, 
+                       _WiFiDeviceClientRegisterVirtualInterfaceStateChangeCallback, 
                        _WiFiDeviceClientScanAsync, _WiFiDeviceClientTrafficRegistration, 
                        _WiFiErrorDomain, _WiFiGetNetworkChannel, _WiFiManagerClientCopyDevices, 
                        _WiFiManagerClientCopyInterfaces, _WiFiManagerClientCopyNetworks, 
@@ -162,6 +177,6 @@ exports:
                        CWInterface, CWInterfaceManager, CWJoinStatistics, CWLocationChannel, 
                        CWLocationClient, CWMessageTracerCache, CWMutableConfiguration, 
                        CWMutableNetworkProfile, CWNetwork, CWNetworkProfile, CWPasswordSharingSimulator, 
-                       CWRoamStatistics, CWTetherDevice, CWTrimmedNetwork, CWUnlockSimulator, 
-                       CWWiFiClient, CWWiFiUIProxyClient ]
+                       CWRecommendationItem, CWRoamStatistics, CWTetherDevice, CWTrimmedNetwork, 
+                       CWUnlockSimulator, CWWiFiClient, CWWiFiUIProxyClient ]
 ...

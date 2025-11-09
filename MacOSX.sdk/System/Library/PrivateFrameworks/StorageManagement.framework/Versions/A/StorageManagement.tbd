@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 2C05B1FA-361C-38ED-9BA1-8E68E66A99ED' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           4759BAEE-A692-337C-B13F-2432EB4F0BF8
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           A2E3CCE3-28F8-3A79-B446-3C4F9CBB613A
 install-name:    '/System/Library/PrivateFrameworks/StorageManagement.framework/Versions/A/StorageManagement'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _STMExtensionOperationErrorDomain, _STMExtensionTotalSpaceUsedGreaterThanZero, 
                        _STMExtensionTotalSpaceUsedUnknown, _STMLog, _STMLogDuration, 
                        _STMLogSize, _STMOpaqueExtensionAddedResourcesKey, _STMOpaqueExtensionBytesUsedDidChangeNotification, 

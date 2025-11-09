@@ -21,7 +21,7 @@
 @protocol NSUserActivityRestoring;
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSDate, NSDictionary, NSError, NSException, NSNotification;
 @class NSGraphicsContext, NSImage, NSPasteboard, NSWindow;
@@ -81,6 +81,7 @@ static const NSAppKitVersion NSAppKitVersionNumber10_14_2 = 1671.2;
 static const NSAppKitVersion NSAppKitVersionNumber10_14_3 = 1671.3;
 static const NSAppKitVersion NSAppKitVersionNumber10_14_4 = 1671.4;
 static const NSAppKitVersion NSAppKitVersionNumber10_14_5 = 1671.5;
+static const NSAppKitVersion NSAppKitVersionNumber10_15 = 1894;
 
 /* Modes passed to NSRunLoop */
 APPKIT_EXTERN NSRunLoopMode NSModalPanelRunLoopMode;
@@ -132,8 +133,6 @@ typedef NS_OPTIONS(NSInteger, NSWindowListOptions) {
 
 /* Information used by the system during modal sessions */
 typedef struct _NSModalSession *NSModalSession;
-// threading information
-typedef struct NSThreadPrivate _NSThreadPrivate;
 
 @interface NSApplication : NSResponder <NSUserInterfaceValidations, NSMenuItemValidation, NSAccessibilityElement, NSAccessibility>
 

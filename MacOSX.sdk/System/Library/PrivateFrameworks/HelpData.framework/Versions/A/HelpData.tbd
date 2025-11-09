@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 97F56E8C-A6F4-3D32-BA20-52A74D92BDE9' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           5BF99582-5D78-3128-B083-C0D06074C572
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           2F6B8B8B-5563-3F64-B01E-6D7830A7D661
 install-name:    '/System/Library/PrivateFrameworks/HelpData.framework/Versions/A/HelpData'
-current-version: 199
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 200
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _DDMAppleConnectEnvironmentAssetKey, _DDMAppleConnectEnvironmentContentKey, 
                        _DDMAppleConnectEnvironmentKey, _DDMAppleConnectEnvironmentsKey, 
                        _DDMAppleDomain, _DDMAssetURLProtocolRequest, _DDMBookConfigKeyAppBundleID, 

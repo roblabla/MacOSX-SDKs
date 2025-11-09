@@ -6,13 +6,14 @@
 */
 
 #import <Foundation/NSObject.h>
+#import <AppKit/AppKitDefines.h>
 
 /*
 SpellCheckable objects can respond to this method if they want to support not only spell-checking, but spell correction.  This message is sent down the responder chain.  The receiver should ask the sender for its selectedCell's stringValue (the correct spelling of the word) and replace its selection if appropriate.
 */
  
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @protocol NSChangeSpelling
 - (void)changeSpelling:(nullable id)sender;

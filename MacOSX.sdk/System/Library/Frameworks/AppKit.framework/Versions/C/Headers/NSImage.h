@@ -14,12 +14,18 @@
 #import <AppKit/NSBitmapImageRep.h>
 #import <AppKit/NSPasteboard.h>
 #import <AppKit/NSLayoutConstraint.h>
+#import <AppKit/NSFontDescriptor.h>
+#import <AppKit/AppKitDefines.h>
 #import <ApplicationServices/ApplicationServices.h>
 
-NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
 
-@class NSColor, NSImageRep, NSGraphicsContext, NSURL;
+#define NSIMAGE_UNAVAILABLE_MACCATALYST TARGET_OS_IPHONE
+
+
+NS_ASSUME_NONNULL_BEGIN
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
+
+@class NSColor, NSImageRep, NSGraphicsContext, NSURL, NSImageSymbolConfiguration;
 @protocol NSImageDelegate;
 
 typedef NSString * NSImageName NS_SWIFT_BRIDGED_TYPEDEF API_AVAILABLE(ios(13.0));
@@ -54,19 +60,21 @@ typedef NS_ENUM(NSInteger, NSImageResizingMode) {
 } API_AVAILABLE(macos(10.10));
 
 API_AVAILABLE(ios(13.0))
-#if TARGET_OS_IPHONE
+#if NSIMAGE_UNAVAILABLE_MACCATALYST
 __attribute__((objc_subclassing_restricted))
-#endif /* TARGET_OS_IPHONE */
+#endif /* NSIMAGE_UNAVAILABLE_MACCATALYST */
 @interface NSImage : NSObject
 
-#if TARGET_OS_IPHONE
+#if NSIMAGE_UNAVAILABLE_MACCATALYST
 - (instancetype)init API_UNAVAILABLE(ios);
 + (instancetype)new API_UNAVAILABLE(ios);
 + (instancetype)allocWithZone:(nullable NSZone *)zone API_UNAVAILABLE(ios);
 + (instancetype)alloc API_UNAVAILABLE(ios);
-#endif /* TARGET_OS_IPHONE */
+#endif /* NSIMAGE_UNAVAILABLE_MACCATALYST */
 
 + (nullable NSImage *)imageNamed:(NSImageName)name;	/* If this finds & creates the image, only name is saved when archived */
+
++ (nullable instancetype)imageWithSystemSymbolName:(NSString *)symbolName accessibilityDescription:(nullable NSString *)description API_AVAILABLE(macos(11.0));
 
 - (instancetype)initWithSize:(NSSize)size NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
@@ -197,12 +205,13 @@ __attribute__((objc_subclassing_restricted))
 @property NSEdgeInsets capInsets API_AVAILABLE(macos(10.10));
 @property NSImageResizingMode resizingMode API_AVAILABLE(macos(10.10));
 
+- (nullable NSImage *)imageWithSymbolConfiguration:(NSImageSymbolConfiguration *)configuration API_AVAILABLE(macos(11.0));
 @end
 
-#if !TARGET_OS_IPHONE
+#if !NSIMAGE_UNAVAILABLE_MACCATALYST
 @interface NSImage () <NSCopying, NSSecureCoding, NSPasteboardReading, NSPasteboardWriting>
 @end
-#endif /* !TARGET_OS_IPHONE */
+#endif /* !NSIMAGE_UNAVAILABLE_MACCATALYST */
 
 @protocol NSImageDelegate <NSObject>
 @optional
@@ -238,7 +247,7 @@ __attribute__((objc_subclassing_restricted))
 + (NSArray<NSPasteboardType> *)imagePasteboardTypes API_DEPRECATED("Use +imageTypes instead", macos(10.0,10.10));
 
 #if TARGET_OS_OSX
-- (instancetype)initWithIconRef:(IconRef)iconRef API_DEPRECATED("Use -[NSWorkspace iconForFile:], -[NSWorkspace iconForFiles:], -[NSWorkspace iconForFileType:], or +[NSImage imageNamed:] instead.", macos(10.5, API_TO_BE_DEPRECATED));
+- (instancetype)initWithIconRef:(IconRef)iconRef API_DEPRECATED("Use -[NSWorkspace iconForFile:], -[NSWorkspace iconForFiles:], -[NSWorkspace iconForFileType:], or +[NSImage imageNamed:] instead.", macos(10.5, 11.0));
 #endif // TARGET_OS_OSX
 
 - (void)setFlipped:(BOOL)flag API_DEPRECATED("The concept of flippedness for NSImage is deprecated.  Please see the AppKit 10.6 release notes for a discussion of why and for how to replace existing usage.", macos(10.0,10.6));
@@ -473,6 +482,21 @@ APPKIT_EXTERN NSImageName const NSImageNameTouchBarVolumeUpTemplate API_AVAILABL
 /* If you have an NSTouchBarItem with a seekable media control, NSImageNameTouchBarPlayheadTemplate is suitable for use in displaying the playhead.
  */
 APPKIT_EXTERN NSImageName const NSImageNameTouchBarPlayheadTemplate API_AVAILABLE(macos(10.12.2));
+
+typedef NS_ENUM(NSInteger, NSImageSymbolScale) {
+    NSImageSymbolScaleSmall = 1,
+    NSImageSymbolScaleMedium = 2,
+    NSImageSymbolScaleLarge = 3,
+} NS_SWIFT_NAME(NSImage.SymbolScale) API_AVAILABLE(macos(11.0));
+
+API_AVAILABLE(macos(11.0)) NS_SWIFT_NAME(NSImage.SymbolConfiguration)
+@interface NSImageSymbolConfiguration : NSObject <NSCopying>
++ (NSImageSymbolConfiguration *)configurationWithPointSize:(CGFloat)pointSize weight:(NSFontWeight)weight scale:(NSImageSymbolScale)scale;
++ (NSImageSymbolConfiguration *)configurationWithPointSize:(CGFloat)pointSize weight:(NSFontWeight)weight;
++ (NSImageSymbolConfiguration *)configurationWithTextStyle:(NSFontTextStyle)style scale:(NSImageSymbolScale)scale;
++ (NSImageSymbolConfiguration *)configurationWithTextStyle:(NSFontTextStyle)style;
++ (NSImageSymbolConfiguration *)configurationWithScale:(NSImageSymbolScale)scale;
+@end
 
 API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

@@ -1,13 +1,23 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: DE39DC10-C506-3249-BEE3-FF952E3B511B' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           A277B29A-8180-3030-A325-5EB0CBF60ADD
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           335D2F7E-DDB9-3971-9F66-5D7076C79F6F
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/CommonPanels.framework/Versions/A/CommonPanels'
 current-version: 101
-parent-umbrella: Carbon
-exports:         
-  - archs:           [ x86_64 ]
-    allowable-clients: [ AppKit ]
+parent-umbrella:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    umbrella:        Carbon
+allowable-clients:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    clients:         [ AppKit ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CCP_FontPanelClose, _CCP_FontPanelGetSelection, _CCP_FontPanelIsVisible, 
                        _CCP_FontPanelOpen, _CCP_FontPanelSelectFonts, _CCP_NPickColor, 
                        _CMCalibrateDisplay, _Call_CommonCocoaPanels_NPickColor, _CommonPanelsVersionNumber, 

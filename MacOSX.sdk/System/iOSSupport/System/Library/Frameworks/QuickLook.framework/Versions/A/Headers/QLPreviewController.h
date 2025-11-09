@@ -82,7 +82,7 @@ QL_EXPORT @protocol QLPreviewControllerDataSource
 
 /*!
  * @abstract Returns the item that the preview controller should preview.
- * @param panel The Preview Controller.
+ * @param controller The Preview Controller.
  * @param index The index of the item to preview.
  * @result An item conforming to the QLPreviewItem protocol.
  */

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2015, 2017-2019 Apple Inc.
+ * Copyright (c) 2014-2015, 2017-2020 Apple Inc.
  * All rights reserved.
  */
 
@@ -19,6 +19,7 @@
 #import <NetworkExtension/NEDNSProxyProvider.h>
 #import <NetworkExtension/NEDNSProxyProviderProtocol.h>
 #import <NetworkExtension/NEDNSSettings.h>
+#import <NetworkExtension/NEDNSSettingsManager.h>
 #import <NetworkExtension/NEFilterControlProvider.h>
 #import <NetworkExtension/NEFilterDataProvider.h>
 #import <NetworkExtension/NEFilterFlow.h>
@@ -29,6 +30,7 @@
 #import <NetworkExtension/NEFilterRule.h>
 #import <NetworkExtension/NEFilterSettings.h>
 #import <NetworkExtension/NEFlowMetaData.h>
+#import <NetworkExtension/NEHotspotNetwork.h>
 #import <NetworkExtension/NEHotspotHelper.h>
 #import <NetworkExtension/NEHotspotConfigurationManager.h>
 #import <NetworkExtension/NEIPv4Settings.h>
@@ -43,6 +45,7 @@
 #import <NetworkExtension/NEProxySettings.h>
 #import <NetworkExtension/NETransparentProxyManager.h>
 #import <NetworkExtension/NETransparentProxyNetworkSettings.h>
+#import <NetworkExtension/NETransparentProxyProvider.h>
 #import <NetworkExtension/NETunnelProvider.h>
 #import <NetworkExtension/NETunnelProviderManager.h>
 #import <NetworkExtension/NETunnelProviderSession.h>
@@ -52,6 +55,8 @@
 #import <NetworkExtension/NEVPNProtocol.h>
 #import <NetworkExtension/NEVPNProtocolIKEv2.h>
 #import <NetworkExtension/NEVPNProtocolIPSec.h>
+#import <NetworkExtension/NEAppPushManager.h>
+#import <NetworkExtension/NEAppPushProvider.h>
 
 #import <NetworkExtension/NWEndpoint.h>
 #import <NetworkExtension/NWHostEndpoint.h>

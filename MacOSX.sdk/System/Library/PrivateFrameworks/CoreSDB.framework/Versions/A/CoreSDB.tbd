@@ -1,11 +1,25 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: A490412F-84CD-3A9C-A9D4-22BDF429D2F3', 'x86_64: A490412F-84CD-3A9C-A9D4-22BDF429D2F3' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           C12EA68D-678B-3AD3-BA86-962717D4AD49
+  - target:          x86_64-maccatalyst
+    value:           C12EA68D-678B-3AD3-BA86-962717D4AD49
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           0B5A024B-1F63-3FB4-B5A1-A01AA071144E
+  - target:          arm64e-maccatalyst
+    value:           0B5A024B-1F63-3FB4-B5A1-A01AA071144E
 install-name:    '/System/Library/PrivateFrameworks/CoreSDB.framework/Versions/A/CoreSDB'
 current-version: 800
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CSDBCheckResultWithStatement, _CSDBCreateDirectoriesToPath, 
                        _CSDBCreateDirectoriesToPathWithOwnership, _CSDBCreateThreadedRecordStore, 
                        _CSDBCreateThreadedRecordStoreWithQOSClass, _CSDBCreateThreadedRecordStoreWithQOSClassAndLookAsideBufferConfig, 

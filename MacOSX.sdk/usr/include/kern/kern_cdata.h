@@ -55,4 +55,9 @@
 #define kcdata_get_data_with_desc(buf, desc, data) kcdata_iter_get_data_with_desc(KCDATA_ITEM_ITER(buf),desc,data,NULL)
 /* Do not use these macros! */
 
+__options_decl(kcd_compression_type_t, uint64_t, {
+	KCDCT_NONE = 0x00,
+	KCDCT_ZLIB = 0x01,
+});
+
 #endif /* _KERN_CDATA_H_ */

@@ -2,7 +2,7 @@
 	@file		DefaultAudioOutput.h
 	@framework	AudioToolbox.framework
 	@copyright	(c) 2000-2015 by Apple, Inc., all rights reserved.
-	@abstract	Deprecated.
+	@deprecated	Contains deprecated API's.
 */
 
 #ifndef AudioToolbox_DefaultAudioOutput_h

@@ -1,12 +1,18 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: EF7A607A-F23B-37A0-BF04-B3ADC0F14E64' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           18AF9E4D-50EB-3788-9570-5C6453061A06
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           37931414-F75B-3938-8BFC-DBDE8F4EC590
 install-name:    '/System/Library/PrivateFrameworks/Slideshows.framework/Versions/A/Slideshows'
 current-version: 4.5
 compatibility-version: 4.5
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _Antialias1D, _AppendIntToString, _Bounce, _CGPointFromCAMLString, 
                        _CGRectFromCAMLString, _CenterRectOverPoint, _CenterRectOverRect, 
                        _ComputeAnimationTimeBounds, _ComputeGaussian, _ComputeNumberOfSegments, 

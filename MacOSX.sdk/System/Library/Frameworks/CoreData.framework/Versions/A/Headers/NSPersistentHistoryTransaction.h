@@ -1,7 +1,7 @@
 /*
     NSPersistentHistoryTransaction.h
     Core Data
-    Copyright (c) 2016-2019, Apple Inc.
+    Copyright (c) 2016-2020, Apple Inc.
     All rights reserved.
 */
 
@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSPersistentHistoryChange;
 @class NSEntityDescription;
 @class NSFetchRequest;
-@class NSManagedObjectConext;
+@class NSManagedObjectContext;
 
 API_AVAILABLE(macosx(10.13),ios(11.0),tvos(11.0),watchos(4.0))
 @interface NSPersistentHistoryTransaction : NSObject <NSCopying>

@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: B3C87B39-F9C8-362C-BD36-7EA35AAC51B0' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           809D70D5-85DA-3A21-B8C8-7C1473D74E14
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           002B75B3-939C-3354-B35C-3A70752D02CC
 install-name:    '/System/Library/PrivateFrameworks/MailWebProcessSupport.framework/Versions/A/MailWebProcessSupport'
-current-version: 3578.1
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 3654.0.3
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _kBodyFieldSource, _kBodyFieldSourceLength, _kConstantsSource, 
                        _kConstantsSourceLength, _kDocumentExtrasSource, _kDocumentExtrasSourceLength, 
                        _kElementExtrasSource, _kElementExtrasSourceLength, _kHTMLDocumentExtrasSource, 

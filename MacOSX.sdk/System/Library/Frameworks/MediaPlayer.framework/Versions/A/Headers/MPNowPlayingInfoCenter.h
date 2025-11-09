@@ -55,8 +55,8 @@ MP_API(ios(5.0), tvos(5.0), macos(10.12.2), watchos(5.0))
 /// Returns the default now playing info center.
 /// The default center holds now playing info about the current application.
 + (MPNowPlayingInfoCenter *)defaultCenter;
-+ (instancetype)new NS_UNAVAILABLE;
-- (instancetype)init NS_UNAVAILABLE;
+
+MP_INIT_UNAVAILABLE
 
 /// The current now playing info for the center.
 /// Setting the info to nil will clear it.

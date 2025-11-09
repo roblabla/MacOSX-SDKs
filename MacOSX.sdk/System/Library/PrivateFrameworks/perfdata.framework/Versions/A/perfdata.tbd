@@ -1,12 +1,26 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 54667BAA-3FA6-3345-B170-D271C8852A3B', 'x86_64: 54667BAA-3FA6-3345-B170-D271C8852A3B' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           32F9BFC0-866E-3D4D-9A9A-D7D2545223E1
+  - target:          x86_64-maccatalyst
+    value:           32F9BFC0-866E-3D4D-9A9A-D7D2545223E1
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           58AE73DE-623B-3D99-A955-1993F4707339
+  - target:          arm64e-maccatalyst
+    value:           58AE73DE-623B-3D99-A955-1993F4707339
 install-name:    '/System/Library/PrivateFrameworks/perfdata.framework/Versions/A/perfdata'
-current-version: 51
+current-version: 67.40.1
 compatibility-version: 0
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _json_end_array, _json_end_object, _json_key, _json_member_bool, 
                        _json_member_dbl, _json_member_int, _json_member_start_array, 
                        _json_member_start_object, _json_member_str, _json_member_strf, 

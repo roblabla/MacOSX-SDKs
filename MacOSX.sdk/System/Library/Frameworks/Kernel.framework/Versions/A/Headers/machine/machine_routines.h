@@ -28,10 +28,60 @@
 #ifndef _MACHINE_MACHINE_ROUTINES_H
 #define _MACHINE_MACHINE_ROUTINES_H
 
+#include <sys/cdefs.h>
+
 #if defined (__i386__) || defined(__x86_64__)
 #include "i386/machine_routines.h"
+#elif defined (__arm__) || defined (__arm64__)
+#include "arm/machine_routines.h"
 #else
 #error architecture not supported
 #endif
+
+__BEGIN_DECLS
+
+
+/*!
+ * @enum     cpu_event
+ * @abstract Broadcast events allowing clients to hook CPU state transitions.
+ * @constant CPU_BOOT_REQUESTED      Called from processor_start(); may block.
+ * @constant CPU_BOOTED              Called from platform code on the newly-booted CPU; may not block.
+ * @constant CPU_ACTIVE              Called from scheduler code; may block.
+ * @constant CLUSTER_ACTIVE          Called from platform code; may not block.
+ * @constant CPU_EXIT_REQUESTED      Called from processor_exit(); may block.
+ * @constant CPU_DOWN                Called from platform code on the disabled CPU; may not block.
+ * @constant CLUSTER_EXIT_REQUESTED  Called from platform code; may not block.
+ * @constant CPU_EXITED              Called after CPU is stopped; may block.
+ */
+enum cpu_event {
+	CPU_BOOT_REQUESTED = 0,
+	CPU_BOOTED,
+	CPU_ACTIVE,
+	CLUSTER_ACTIVE,
+	CPU_EXIT_REQUESTED,
+	CPU_DOWN,
+	CLUSTER_EXIT_REQUESTED,
+	CPU_EXITED,
+};
+
+typedef bool (*cpu_callback_t)(void *param, enum cpu_event event, unsigned int cpu_or_cluster);
+
+/*!
+ * @function              cpu_event_register_callback
+ * @abstract              Register a function to be called on CPU state changes.
+ * @param fn              Function to call on state change events.
+ * @param param           Optional argument to be passed to the callback (e.g. object pointer).
+ */
+void cpu_event_register_callback(cpu_callback_t fn, void *param);
+
+/*!
+ * @function              cpu_event_unregister_callback
+ * @abstract              Unregister a previously-registered callback function.
+ * @param fn              Function pointer previously passed to cpu_event_register_callback().
+ */
+void cpu_event_unregister_callback(cpu_callback_t fn);
+
+
+__END_DECLS
 
 #endif /* _MACHINE_MACHINE_ROUTINES_H */

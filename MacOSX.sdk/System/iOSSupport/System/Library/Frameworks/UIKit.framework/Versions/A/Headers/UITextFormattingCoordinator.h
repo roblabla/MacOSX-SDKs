@@ -38,7 +38,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0))
 - (void)setSelectedAttributes:(NSDictionary<NSAttributedStringKey, id> *)attributes
                    isMultiple:(BOOL)flag;
 
-// iOS Mac only, toggle standard Font Panel visibility for macOS.
+// On macOS only, will toggle standard system Font Panel visibility.
 + (void)toggleFontPanel:(id)sender;
 
 @end

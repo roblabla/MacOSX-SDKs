@@ -1,12 +1,18 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 0D24EA89-0BCA-3948-B868-C96CE3C6EB02' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           C92FE723-7929-3D5C-91E1-E6C7C2C16070
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           B0047264-283E-3B5E-99EF-54CC080C08F4
 install-name:    '/System/Library/PrivateFrameworks/IMDaemonCore.framework/Versions/A/IMDaemonCore'
 current-version: 800
-exports:         
-  - archs:           [ x86_64 ]
-    symbols:         [ _CKNicknameRecordType, _CKRecordFileTransferAssetKey, _CKRecordFileTransferAttachmentCompressedMetadataKey, 
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _CKRecordFileTransferAssetKey, _CKRecordFileTransferAttachmentCompressedMetadataKey, 
                        _CKRecordFileTransferAttachmentGuidKey, _CKRecordFileTransferAttachmentMetadataKey, 
                        _CKRecordFileTransferAttributionInfoKey, _CKRecordFileTransferAuxVideoAssetKey, 
                        _CKRecordFileTransferAuxVideoLastPathComponentKey, _CKRecordFileTransferCreatedDateKey, 
@@ -17,12 +23,13 @@ exports:
                        _CKRecordFileTransferTotalBytesKey, _CKRecordFileTransferTransferNameKey, 
                        _CKRecordFileTransferTypeKey, _CKRecordFileTransferUserInfoKey, 
                        _CKRecordFileTransferVersionKey, _CKRecordIMItemBalloonBundleID, 
-                       _CKRecordIMItemBody, _CKRecordIMItemCompressedProtobuf, _CKRecordIMItemErrorCode, 
-                       _CKRecordIMItemExpressiveSendStyleID, _CKRecordIMItemFlags, 
-                       _CKRecordIMItemGUID, _CKRecordIMItemParentChatID, _CKRecordIMItemPayloadData, 
-                       _CKRecordIMItemService, _CKRecordIMItemSubClassType, _CKRecordIMItemSubject, 
-                       _CKRecordIMItemSummaryInfo, _CKRecordIMItemTime, _CKRecordIMItemTimeDelivered, 
-                       _CKRecordIMItemTimePlayed, _CKRecordIMItemTimeRead, _CKRecordIMItemUnencryptedTime, 
+                       _CKRecordIMItemBody, _CKRecordIMItemCompressedProtobuf, _CKRecordIMItemCompressedProtobufP2, 
+                       _CKRecordIMItemErrorCode, _CKRecordIMItemExpressiveSendStyleID, 
+                       _CKRecordIMItemFlags, _CKRecordIMItemGUID, _CKRecordIMItemParentChatID, 
+                       _CKRecordIMItemPayloadData, _CKRecordIMItemService, _CKRecordIMItemSubClassType, 
+                       _CKRecordIMItemSubject, _CKRecordIMItemSummaryInfo, _CKRecordIMItemTime, 
+                       _CKRecordIMItemTimeDelivered, _CKRecordIMItemTimePlayed, _CKRecordIMItemTimeRead, 
+                       _CKRecordIMItemUnencryptedTime, _CKRecordIMMessageIncompatibleDeleteNotification, 
                        _CKRecordKeyChatClientGroupID, _CKRecordKeyChatDisplayName, 
                        _CKRecordKeyChatGuid, _CKRecordKeyChatIdentifier, _CKRecordKeyChatIsFiltered, 
                        _CKRecordKeyChatLastAddressedHandle, _CKRecordKeyChatOriginalGroupID, 
@@ -36,18 +43,20 @@ exports:
                        _IMBackupDisabledSuccessfullKeyrollNotification, _IMBackupDisabledTestToggledKeyroll, 
                        _IMBackupDisabledUserToggledKeyroll, _IMCrashDuringFirstSync, 
                        _IMCreateIMDChatFromIMDChatRecordRef, _IMCreateIMDChatRecordRefWithIMDChat, 
-                       _IMDAttachmentRecordRefFromIMFileTransfer, _IMDCKAttachmentSyncErrorDomain, 
-                       _IMDCKCacheDeleteAutoCaptureSubtype, _IMDCKChatSyncControllerErrorDomain, 
-                       _IMDCKMessageSyncControllerErrorDomain, _IMDCKUtilitiesABCSubtype, 
-                       _IMDCKUtilitiesErrorDomain, _IMDCreateIMMessageItemFromIMDMessageRecordLoadAttachmentIfNeededRef, 
+                       _IMDAttachmentRecordRefFromIMFileTransfer, _IMDCKAllAliases, 
+                       _IMDCKAttachmentSyncErrorDomain, _IMDCKCacheDeleteAutoCaptureSubtype, 
+                       _IMDCKChatSyncControllerErrorDomain, _IMDCKMessageSyncControllerErrorDomain, 
+                       _IMDCKSelectedAliases, _IMDCKUtilitiesABCSubtype, _IMDCKUtilitiesErrorDomain, 
+                       _IMDCreateIMMessageItemFromIMDMessageRecordLoadAttachmentIfNeededRef, 
                        _IMDCreateIMMessageItemFromIMDMessageRecordRef, _IMDFileTransferAcceptedNotification, 
                        _IMDFileTransferArchiveFailedNotification, _IMDFileTransferArchiveSucceededNotification, 
                        _IMDFileTransferCreatedNotification, _IMDFileTransferHighQualityDownloadCompletedFileURLKey, 
                        _IMDFileTransferHighQualityDownloadCompletedNotification, 
                        _IMDFileTransferHighQualityDownloadCompletedSuccessKey, _IMDFileTransferHighQualityDownloadInitiatedNotification, 
                        _IMDFileTransferRemovedNotification, _IMDFileTransferStoppedNotification, 
-                       _IMDInconsistencyResolved, _IMDManagedPreferencesChangedNotification, 
-                       _IMDMeCardUpdatedNotification, _IMDMessageHistorySyncNotifyCKChatSyncControllerWantsSync, 
+                       _IMDFileTransferUpdatedNotification, _IMDInconsistencyResolved, 
+                       _IMDManagedPreferencesChangedNotification, _IMDMeCardUpdatedNotification, 
+                       _IMDMessageHistorySyncNotifyCKChatSyncControllerWantsSync, 
                        _IMDMessageHistorySyncNotifyIDSTransactionLogWantsSync, _IMDMessageHistorySyncNotifyReplayControllerWantsSync, 
                        _IMDMessageStoreHandleCanonicalIDKey, _IMDMessageStoreHandleCountryCodeKey, 
                        _IMDMessageStoreHandleUnformattedIDKey, _IMDNoticedInconsistenty, 
@@ -89,13 +98,15 @@ exports:
                        _MessageDictionaryPendingNicknameUpdatesHandlesKey, _MessageDictionaryPendingNicknameUpdatesVersionKey, 
                        _MessageDictionaryPersonalNicknameDecryptKeyKey, _MessageDictionaryPersonalNicknameRecordIDKey, 
                        _NSStringFromAKAppleIDSecurityLevel, _NSStringFromIMDCKAccountStatus, 
-                       __IMDHashParticipants, __IMDShouldSaveAttachment, _kIMDCKAnalyticBagKey, 
-                       _kIMDCKAnalyticDetailsBagKey, _kIMDCKClientVersion, _kIMDCKMetricBagKey, 
-                       _kMaxCloudKitRetries ]
-    objc-classes:    [ CKRecordUtilities, IMDAccount, IMDAccountController, IMDAppleServiceSession, 
-                       IMDAttachmentStore, IMDBadgeUtilities, IMDCKAbstractSyncController, 
-                       IMDCKAttachmentSyncCKOperationFactory, IMDCKAttachmentSyncController, 
-                       IMDCKCacheDeleteManager, IMDCKChatSyncCKOperationFactory, 
+                       __IMDHashParticipants, __IMDShouldSaveAttachment, __IMDShouldSaveAttachmentStoreAtExternalLocation, 
+                       _kIMDAliasesPropertyKey, _kIMDCKAnalyticBagKey, _kIMDCKAnalyticDetailsBagKey, 
+                       _kIMDCKClientVersion, _kIMDCKMetricBagKey, _kMaxCloudKitRetries ]
+    objc-classes:    [ CKRecordUtilities, IMAssociatedMessageProcessingPipelineComponent, 
+                       IMAudioMessageProcessingPipelineComponent, IMBalloonPluginProcessingPipelineComponent, 
+                       IMBlastdoor, IMConvergeGroupPipelineComponent, IMDAccount, 
+                       IMDAccountController, IMDAppleServiceSession, IMDAttachmentStore, 
+                       IMDBadgeUtilities, IMDCKAbstractSyncController, IMDCKAttachmentSyncCKOperationFactory, 
+                       IMDCKAttachmentSyncController, IMDCKCacheDeleteManager, IMDCKChatSyncCKOperationFactory, 
                        IMDCKChatSyncController, IMDCKDatabaseManager, IMDCKExitManager, 
                        IMDCKMessageSyncCKOperationFactory, IMDCKMessageSyncController, 
                        IMDCKRampManager, IMDCKRecordSaltManager, IMDCKSyncController, 
@@ -103,24 +114,47 @@ exports:
                        IMDChatRegistry, IMDChatStore, IMDChatVocabularyUpdater, IMDFileTransferCenter, 
                        IMDHandle, IMDIDSAccount, IMDIDSService, IMDInternalPhishingController, 
                        IMDInvocationForwarder, IMDLegactDTController, IMDLocationSharingController, 
-                       IMDMessageHistoryCKChatSyncTask, IMDMessageHistoryFirstUnlockReplaySyncTask, 
-                       IMDMessageHistoryIDSTransactionLogSyncTask, IMDMessageHistorySyncController, 
-                       IMDMessageHistorySyncTaskLiveFactory, IMDMessagePTask, IMDMessagePTaskXPCStore, 
-                       IMDMessageProcessingController, IMDMessageSortOrderAssigner, 
-                       IMDMessageStore, IMDNicknameController, IMDNotificationResponseUtilities, 
-                       IMDOneTimeCodeManager, IMDQuickSwitchController, IMDRecordZoneManager, 
+                       IMDMessageActiveDevice, IMDMessageFromStorageController, IMDMessageHistoryCKChatSyncTask, 
+                       IMDMessageHistoryFirstUnlockReplaySyncTask, IMDMessageHistoryIDSTransactionLogSyncTask, 
+                       IMDMessageHistorySyncController, IMDMessageHistorySyncTaskLiveFactory, 
+                       IMDMessagePTask, IMDMessagePTaskXPCStore, IMDMessageProcessingController, 
+                       IMDMessageSortOrderAssigner, IMDMessageStore, IMDMessageSuppressionController, 
+                       IMDNicknameController, IMDNotificationResponseUtilities, IMDOneTimeCodeManager, 
+                       IMDQuickSwitchController, IMDRecentsController, IMDRecordZoneManager, 
                        IMDReplayController, IMDReplayStorageController, IMDReplayStorageIterationContext, 
-                       IMDScreenTimeEnablementController, IMDService, IMDServiceController, 
-                       IMDServiceSession, IMDSoundUtilities, IMDSpamController, IMDSpamMessageCreator, 
-                       IMDSpotlightIndexDelegate, IMDStickerRegistry, IMDXPCEventStreamHandler, 
-                       IMTunesController ]
-    objc-ivars:      [ IMDChatStore._lastModificationStamp, IMDLocationSharingController._session, 
-                       IMDMessageStore._cachedLastFailedMessageDate, IMDMessageStore._cachedUnreadMessageCount, 
-                       IMDMessageStore._modificationStamp, IMDMessageStore._pendingDBUpdatePost, 
-                       IMDMessageStore._suppressedUpdates, IMDMessageStore._suppressedUpdatesTimer, 
-                       IMDServiceSession._buddies, IMDServiceSession._password, IMDServiceSession._proxyAccount, 
+                       IMDService, IMDServiceController, IMDServiceSession, IMDSoundUtilities, 
+                       IMDSpamController, IMDSpamMessageCreator, IMDSpotlightIndexDelegate, 
+                       IMDStickerRegistry, IMDXPCEventStreamHandler, IMDeliveryReceiptPipelineParameter, 
+                       IMDeliveryReceiptProcessingPipelineComponent, IMDiMessageIDSDelegate, 
+                       IMDiMessageIDSTrustedData, IMDiMessageIncomingMessageHandler, 
+                       IMDiMessagePipelineResources, IMFindChatProcessingPipelineComponent, 
+                       IMMessageFromStoragePipelineComponent, IMMessageLegacyProcessingPipelineComponent, 
+                       IMMessagesToTrack, IMPlayedReceiptPipelineParameter, IMPlayedReceiptProcessingPipelineComponent, 
+                       IMReadReceiptPipelineParameter, IMReadReceiptProcessingPipelineComponent, 
+                       IMStickerMessageProcessingPipelineComponent, IMTextMessagePipelineParameter, 
+                       IMTextMessageProcessingPipelineComponent, IMTunesController, 
+                       IMTypingIndicatorProcessingPipelineComponent ]
+    objc-ivars:      [ IMConvergeGroupPipelineComponent._account, IMConvergeGroupPipelineComponent._idsTrustedData, 
+                       IMConvergeGroupPipelineComponent._serviceSession, IMDChatStore._lastModificationStamp, 
+                       IMDLocationSharingController._session, IMDMessageStore._cachedLastFailedMessageDate, 
+                       IMDMessageStore._cachedUnreadMessageCount, IMDMessageStore._modificationStamp, 
+                       IMDMessageStore._pendingDBUpdatePost, IMDMessageStore._suppressedUpdates, 
+                       IMDMessageStore._suppressedUpdatesTimer, IMDMessageSuppressionController._chatSuppressionFlagMap, 
+                       IMDMessageSuppressionController._chatSuppressionTimerMap, 
+                       IMDMessageSuppressionController._suppressedMessages, IMDServiceSession._buddies, 
+                       IMDServiceSession._password, IMDServiceSession._proxyAccount, 
                        IMDServiceSession._proxyHost, IMDServiceSession._proxyPassword, 
                        IMDServiceSession._proxyPort, IMDServiceSession._proxyType, 
                        IMDServiceSession._serverHost, IMDServiceSession._serverPort, 
-                       IMDServiceSession._service, IMDServiceSession._useSSL ]
+                       IMDServiceSession._service, IMDServiceSession._useSSL, IMDeliveryReceiptProcessingPipelineComponent._messageStore, 
+                       IMFindChatProcessingPipelineComponent._account, IMFindChatProcessingPipelineComponent._chatRegistry, 
+                       IMMessageFromStoragePipelineComponent._broadcaster, IMMessageFromStoragePipelineComponent._processingType, 
+                       IMMessageFromStoragePipelineComponent._service, IMMessageFromStoragePipelineComponent._storageController, 
+                       IMMessageLegacyProcessingPipelineComponent._account, IMMessageLegacyProcessingPipelineComponent._idsTrustedData, 
+                       IMMessageLegacyProcessingPipelineComponent._messageContext, 
+                       IMMessageLegacyProcessingPipelineComponent._serviceSession, 
+                       IMReadReceiptProcessingPipelineComponent._chatRegistry, IMReadReceiptProcessingPipelineComponent._messageStore, 
+                       IMReadReceiptProcessingPipelineComponent._messageSuppressionController, 
+                       IMReadReceiptProcessingPipelineComponent._recents, IMReadReceiptProcessingPipelineComponent._service, 
+                       IMTextMessageProcessingPipelineComponent._account, IMTextMessageProcessingPipelineComponent._messageStore ]
 ...

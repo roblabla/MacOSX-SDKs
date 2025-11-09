@@ -364,8 +364,15 @@ enum
 	This is used to support multiple paths to a logical unit
 	by creating a IOSCSIMultipathedLogicalUnit object.
 	*/
-	kSCSIProtocolFeature_MultiPathing						= 16
-	
+	kSCSIProtocolFeature_MultiPathing						= 16,
+
+    /*!
+    kSCSIProtocolFeature_ProtocolSpecificLinkRetrain:
+    If the SCSI Protocol Services layer supports link retrain, then the protocol
+    services layer should report true.
+    */
+    kSCSIProtocolFeature_ProtocolSpecificLinkRetrain        = 17
+
 };
 
 
@@ -409,7 +416,7 @@ This class defines the public SCSI Protocol Layer API for any class that
 provides Protocol services or needs to provide the Protocol Service API
 for passing service requests to a Protocol Service driver.
 */
-class IOSCSIProtocolInterface : public IOService
+class __exported IOSCSIProtocolInterface : public IOService
 {
 	
 	OSDeclareAbstractStructors ( IOSCSIProtocolInterface )

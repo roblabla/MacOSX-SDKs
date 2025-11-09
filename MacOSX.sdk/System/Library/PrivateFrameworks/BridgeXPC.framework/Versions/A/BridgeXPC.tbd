@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 4AD486C6-3CC0-37D2-96D4-7A0684F2CA48' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           D29FB8F3-0E9B-333E-B5F5-57D62CC49623
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           FC0BB53A-6A41-334D-9227-56284DD20018
 install-name:    '/System/Library/PrivateFrameworks/BridgeXPC.framework/Versions/A/BridgeXPC'
 current-version: 37
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _bridge_xpc_connection_activate, _bridge_xpc_connection_cancel, 
                        _bridge_xpc_connection_create_connected_pair, _bridge_xpc_connection_create_for_remote_service, 
                        _bridge_xpc_connection_create_listener_for_remote_service, 

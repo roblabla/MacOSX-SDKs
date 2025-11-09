@@ -27,12 +27,12 @@ API_AVAILABLE(macos(10.12.2), ios(13.0))
 @property (strong) NSSlider *slider API_UNAVAILABLE(ios);
 
 /// The double value of the control
-@property double doubleValue API_UNAVAILABLE(ios);
+@property double doubleValue API_AVAILABLE(macos(10.15), ios(13.0));
 
 /// The width boundaries of the slider track of this item.
 /// The system defines the default minimum. The maximum defaults to MAXFLOAT
-@property CGFloat minimumSliderWidth API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
-@property CGFloat maximumSliderWidth API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios);
+@property CGFloat minimumSliderWidth API_AVAILABLE(macos(10.15), ios(13.0));
+@property CGFloat maximumSliderWidth API_AVAILABLE(macos(10.15), ios(13.0));
 
 /// The text label displayed along with the slider. If set to nil, the label will not have space reserved in the item.
 @property (nullable, copy) NSString *label;

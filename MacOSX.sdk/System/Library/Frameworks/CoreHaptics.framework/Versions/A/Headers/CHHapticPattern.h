@@ -85,31 +85,31 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NSString *CHHapticPatternKey NS_TYPED_ENUM;
 
 CH_EXPORT
-CHHapticPatternKey CHHapticPatternKeyVersion API_AVAILABLE(ios(13.0), macos(10.15));
+CHHapticPatternKey CHHapticPatternKeyVersion API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
 CH_EXPORT
-CHHapticPatternKey CHHapticPatternKeyPattern API_AVAILABLE(ios(13.0), macos(10.15));
+CHHapticPatternKey CHHapticPatternKeyPattern API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
 CH_EXPORT
-CHHapticPatternKey CHHapticPatternKeyEvent  API_AVAILABLE(ios(13.0), macos(10.15));
+CHHapticPatternKey CHHapticPatternKeyEvent  API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
 CH_EXPORT
-CHHapticPatternKey CHHapticPatternKeyEventType API_AVAILABLE(ios(13.0), macos(10.15));
+CHHapticPatternKey CHHapticPatternKeyEventType API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
 CH_EXPORT
-CHHapticPatternKey CHHapticPatternKeyTime API_AVAILABLE(ios(13.0), macos(10.15));
+CHHapticPatternKey CHHapticPatternKeyTime API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
 CH_EXPORT
-CHHapticPatternKey CHHapticPatternKeyEventDuration API_AVAILABLE(ios(13.0), macos(10.15));
+CHHapticPatternKey CHHapticPatternKeyEventDuration API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
 CH_EXPORT
-CHHapticPatternKey CHHapticPatternKeyEventWaveformPath API_AVAILABLE(ios(13.0), macos(10.15));
+CHHapticPatternKey CHHapticPatternKeyEventWaveformPath API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
 CH_EXPORT
-CHHapticPatternKey CHHapticPatternKeyEventParameters API_AVAILABLE(ios(13.0), macos(10.15));
+CHHapticPatternKey CHHapticPatternKeyEventParameters API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
 CH_EXPORT
-CHHapticPatternKey CHHapticPatternKeyParameter API_AVAILABLE(ios(13.0), macos(10.15));
+CHHapticPatternKey CHHapticPatternKeyParameter API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
 CH_EXPORT
-CHHapticPatternKey CHHapticPatternKeyParameterID API_AVAILABLE(ios(13.0), macos(10.15));
+CHHapticPatternKey CHHapticPatternKeyParameterID API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
 CH_EXPORT
-CHHapticPatternKey CHHapticPatternKeyParameterValue API_AVAILABLE(ios(13.0), macos(10.15));
+CHHapticPatternKey CHHapticPatternKeyParameterValue API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
 CH_EXPORT
-CHHapticPatternKey CHHapticPatternKeyParameterCurve API_AVAILABLE(ios(13.0), macos(10.15));
+CHHapticPatternKey CHHapticPatternKeyParameterCurve API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
 CH_EXPORT
-CHHapticPatternKey CHHapticPatternKeyParameterCurveControlPoints API_AVAILABLE(ios(13.0), macos(10.15));
+CHHapticPatternKey CHHapticPatternKeyParameterCurveControlPoints API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos);
 
 /*!	@class CHHapticPattern
 	@abstract
@@ -118,7 +118,7 @@ CHHapticPatternKey CHHapticPatternKeyParameterCurveControlPoints API_AVAILABLE(i
 		The passed-in arrays' contents are not owned by the pattern object.  Changes made to those arrays
 		after a CHHapticPattern object is created have no effect on that object.
  */
-CH_EXPORT API_AVAILABLE(ios(13.0), macos(10.15))
+CH_EXPORT API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos)
 @interface CHHapticPattern : NSObject
 
 /*!	@property duration

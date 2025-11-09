@@ -24,6 +24,10 @@
 #include <os/object.h>
 #include <os/object_private.h>
 
+#ifndef __ptrauth_objc_isa_pointer
+#define __ptrauth_objc_isa_pointer
+#endif
+
 #if OS_OBJECT_USE_OBJC
 #define OD_DECL_INTERNAL_SUBCLASS(name, super) OS_OBJECT_DECL_SUBCLASS(name, super)
 #define OD_DECL_INTERNAL(name) OD_DECL_INTERNAL_SUBCLASS(name, od_object))
@@ -96,7 +100,8 @@ extern const struct od_##super##_vtable_s _od_##name##_vtable
   void (*const odo_dispose)(struct od_##x##_s *)
 
 #define OD_STRUCT_HEADER(x) \
-  _OS_OBJECT_HEADER( const struct od_##x##_vtable_s *odo_vtable, odo_ref_cnt, odo_xref_cnt); \
+  _OS_OBJECT_HEADER( const struct od_##x##_vtable_s *__ptrauth_objc_isa_pointer odo_vtable, \
+      odo_ref_cnt, odo_xref_cnt); \
   void *odo_finalizer;
 
 #define OD_OBJECT_GLOBAL_REFCNT		_OS_OBJECT_GLOBAL_REFCNT

@@ -10,6 +10,7 @@
 #import <UIKit/UIView.h>
 #import <UIKit/UIImage.h>
 #import <UIKit/UIBarItem.h>
+#import <UIKit/UIAlertController.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -28,6 +29,12 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface UIBarItem (UIAccessibility) <UIAccessibilityIdentification>
+@end
+
+@interface UIAlertAction (UIAccessibility) <UIAccessibilityIdentification>
+@end
+
+@interface UIMenuElement (UIAccessibility) <UIAccessibilityIdentification>
 @end
 
 /*

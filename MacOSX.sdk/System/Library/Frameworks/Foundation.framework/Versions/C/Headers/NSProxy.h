@@ -10,7 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ROOT_CLASS
 @interface NSProxy <NSObject> {
-    Class	isa;
+    __ptrauth_objc_isa_pointer Class	isa;
 }
 
 + (id)alloc;

@@ -24,8 +24,19 @@ API_UNAVAILABLE(tvos)
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 
+/*! @abstract Called once for each successfully-discovered user identity from the device's address book.
+ *
+ *  @discussion Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
+ */
 @property (nonatomic, copy, nullable) void (^userIdentityDiscoveredBlock)(CKUserIdentity *identity);
+
+/*! @abstract This block is called when the operation completes.
+ *
+ *  @discussion The @code -[NSOperation completionBlock] @endcode will also be called if both are set.
+ *  Each @c CKOperation instance has a private serial queue. This queue is used for all callback block invocations.
+ */
 @property (nonatomic, copy, nullable) void (^discoverAllUserIdentitiesCompletionBlock)(NSError * _Nullable operationError);
 
 @end
+
 NS_ASSUME_NONNULL_END

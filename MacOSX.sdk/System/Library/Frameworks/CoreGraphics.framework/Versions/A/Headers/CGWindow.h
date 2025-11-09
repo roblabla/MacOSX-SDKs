@@ -286,6 +286,13 @@ CG_EXTERN CGImageRef __nullable CGWindowListCreateImageFromArray(
 /* CFNumberRef encoding appropriate for use with CGWindowBackingType */
 #define kCGWindowBackingCFNumberType kCFNumberSInt32Type
 
+/* Checks whether the current process already has screen capture access */
+CG_EXTERN bool CGPreflightScreenCaptureAccess(void) CG_AVAILABLE_STARTING(10.15);
+
+/* Requests event listening access if absent, potentially prompting */
+CG_EXTERN bool CGRequestScreenCaptureAccess(void) CG_AVAILABLE_STARTING(10.15);
+
+
 CF_ASSUME_NONNULL_END
 
 CF_IMPLICIT_BRIDGING_DISABLED

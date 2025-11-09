@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCapture/AVCaptureAudioPreviewOutput.h>)
 /*
     File:  AVCaptureAudioPreviewOutput.h
  
@@ -56,3 +57,7 @@ API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, watchos, tvos)
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCapture/AVCaptureAudioPreviewOutput.h>
+#endif

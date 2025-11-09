@@ -9,9 +9,10 @@
 #import <Foundation/NSObject.h>
 #import <AppKit/NSEvent.h>
 #import <AppKit/NSView.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 API_AVAILABLE(macos(10.10.3))
 @interface NSPressureConfiguration : NSObject

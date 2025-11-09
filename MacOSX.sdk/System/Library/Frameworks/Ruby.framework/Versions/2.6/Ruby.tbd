@@ -1,12 +1,20 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 71C73DF6-8DA6-3180-81A9-7D42AE47A13F' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           EAEE4BDA-E417-33C0-A990-97A7CAD09F67
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           DDD49B1F-B27D-3CEA-8A15-A2F55B609B9E
 install-name:    '/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/libruby.2.6.dylib'
 current-version: 2.6.3
 compatibility-version: 2.6
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos ]
+    symbols:         [ _backtrace ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _InitVM_Enumerator, _InitVM_Math, _InitVM_Object, _InitVM_Random, 
                        _InitVM_Struct, _InitVM_process, _InitVM_transcode, _Init_Array, 
                        _Init_BareVM, _Init_Bignum, _Init_Binding, _Init_Comparable, 
@@ -31,8 +39,8 @@ exports:
                        _OnigEncodingUTF_8, _OnigSyntaxASIS, _OnigSyntaxEmacs, _OnigSyntaxGnuRegex, 
                        _OnigSyntaxGrep, _OnigSyntaxJava, _OnigSyntaxPerl, _OnigSyntaxPerl58, 
                        _OnigSyntaxPerl58_NG, _OnigSyntaxPosixBasic, _OnigSyntaxPosixExtended, 
-                       _OnigSyntaxPython, _OnigSyntaxRuby, _RUBY_NODE_LMASK, _backtrace, 
-                       _dln_find_exe_r, _dln_find_file_r, _dln_load, _eaccess, _explicit_bzero, 
+                       _OnigSyntaxPython, _OnigSyntaxRuby, _RUBY_NODE_LMASK, _dln_find_exe_r, 
+                       _dln_find_file_r, _dln_load, _eaccess, _explicit_bzero, _finite, 
                        _mjit_add_class_serial, _mjit_add_iseq_to_process, _mjit_call_p, 
                        _mjit_child_after_fork, _mjit_compile, _mjit_cont_free, _mjit_cont_new, 
                        _mjit_enabled, _mjit_finish, _mjit_free_iseq, _mjit_gc_finish_hook, 
@@ -705,4 +713,6 @@ exports:
                        _st_numcmp, _st_numhash, _st_reserved_hash_substitution_val, 
                        _st_reserved_hash_val, _st_shift, _st_update, _st_values, 
                        _st_values_check ]
+  - targets:         [ arm64e-macos, arm64-macos ]
+    symbols:         [ _rb_gc_set_stack_end ]
 ...

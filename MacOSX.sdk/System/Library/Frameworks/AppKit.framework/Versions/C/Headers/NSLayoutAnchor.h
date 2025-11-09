@@ -65,6 +65,15 @@ NSLAYOUTANCHOR_EXTERN API_AVAILABLE(macos(10.11), ios(9.0))
 // A composite anchor for creating constraints relating horizontal distances between locations.
 - (NSLayoutDimension *)anchorWithOffsetToAnchor:(NSLayoutXAxisAnchor *)otherAnchor API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0));
 
+/* Constraints of the form,
+ receiver [= | ≥ | ≤] 'anchor' + 'multiplier' * system space,
+ where the value of the system space is determined from information available from the anchors.
+ The constraint affects how far the receiver will be positioned trailing 'anchor', per the effective user interface layout direction.
+ */
+- (NSLayoutConstraint *)constraintEqualToSystemSpacingAfterAnchor:(NSLayoutXAxisAnchor *)anchor multiplier:(CGFloat)multiplier __attribute__((warn_unused_result)) API_AVAILABLE(macos(11.0), ios(11.0), tvos(11.0));
+- (NSLayoutConstraint *)constraintGreaterThanOrEqualToSystemSpacingAfterAnchor:(NSLayoutXAxisAnchor *)anchor multiplier:(CGFloat)multiplier __attribute__((warn_unused_result)) API_AVAILABLE(macos(11.0), ios(11.0), tvos(11.0));
+- (NSLayoutConstraint *)constraintLessThanOrEqualToSystemSpacingAfterAnchor:(NSLayoutXAxisAnchor *)anchor multiplier:(CGFloat)multiplier __attribute__((warn_unused_result)) API_AVAILABLE(macos(11.0), ios(11.0), tvos(11.0));
+
 @end
 
 NSLAYOUTANCHOR_EXTERN API_AVAILABLE(macos(10.11), ios(9.0))
@@ -72,6 +81,15 @@ NSLAYOUTANCHOR_EXTERN API_AVAILABLE(macos(10.11), ios(9.0))
 
 // A composite anchor for creating constraints relating vertical distances between locations.
 - (NSLayoutDimension *)anchorWithOffsetToAnchor:(NSLayoutYAxisAnchor *)otherAnchor API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0));
+
+/* Constraints of the form,
+ receiver [= | ≥ | ≤] 'anchor' + 'multiplier' * system space,
+ where the value of the system space is determined from information available from the anchors.
+ The constraint affects how far the receiver will be positioned below 'anchor'.
+ */
+- (NSLayoutConstraint *)constraintEqualToSystemSpacingBelowAnchor:(NSLayoutYAxisAnchor *)anchor multiplier:(CGFloat)multiplier __attribute__((warn_unused_result)) API_AVAILABLE(macos(11.0), ios(11.0), tvos(11.0));
+- (NSLayoutConstraint *)constraintGreaterThanOrEqualToSystemSpacingBelowAnchor:(NSLayoutYAxisAnchor *)anchor multiplier:(CGFloat)multiplier __attribute__((warn_unused_result)) API_AVAILABLE(macos(11.0), ios(11.0), tvos(11.0));
+- (NSLayoutConstraint *)constraintLessThanOrEqualToSystemSpacingBelowAnchor:(NSLayoutYAxisAnchor *)anchor multiplier:(CGFloat)multiplier __attribute__((warn_unused_result)) API_AVAILABLE(macos(11.0), ios(11.0), tvos(11.0));
 
 @end
 

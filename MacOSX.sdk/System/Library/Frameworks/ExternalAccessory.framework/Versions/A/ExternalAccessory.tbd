@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 84984EE7-8A1E-3B80-B7A5-D53ECD3E1D0F', 'x86_64: 84984EE7-8A1E-3B80-B7A5-D53ECD3E1D0F' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           2707B27A-7069-30EC-9422-7B05E36E2485
+  - target:          x86_64-maccatalyst
+    value:           2707B27A-7069-30EC-9422-7B05E36E2485
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           FF2080C8-793B-3755-96AB-C40D6754547E
+  - target:          arm64e-maccatalyst
+    value:           FF2080C8-793B-3755-96AB-C40D6754547E
 install-name:    '/System/Library/Frameworks/ExternalAccessory.framework/ExternalAccessory'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _EAAccessoryAccessibilityActionKey, _EAAccessoryAccessibilityContextKey, 
                        _EAAccessoryAccessibilityHeightKey, _EAAccessoryAccessibilityItemPropertyKey, 
                        _EAAccessoryAccessibilityPointXKey, _EAAccessoryAccessibilityPointYKey, 
@@ -54,15 +68,26 @@ exports:
                        _EASessionOpenCompletedNotification, _EATimeSyncInfoMeasurementInterval, 
                        _EATimeSyncInfoOffsetEstimate, _EATimeSyncInfoOffsetUncertainty, 
                        _EATimeSyncInfoUncertaintyThreshold, _EATimeSyncOffsetMeasurementInterval, 
-                       _EATimeSyncOffsetUncertaintyThreshold, _EAVehicleInfoDisplayNameKey, 
-                       _EAVehicleInfoEngineTypeBitmaskKey, _EAVehicleInfoHasLowDistanceRangeCNGKey, 
-                       _EAVehicleInfoHasLowDistanceRangeDieselKey, _EAVehicleInfoHasLowDistanceRangeElectricKey, 
-                       _EAVehicleInfoHasLowDistanceRangeGasolineKey, _EAVehicleInfoHasLowDistanceRangeKey, 
-                       _EAVehicleInfoInsideTemperatureKey, _EAVehicleInfoIsColdTemperatureIndicatorOnKey, 
+                       _EATimeSyncOffsetUncertaintyThreshold, _EAVehicleInfoActiveConnectorKey, 
+                       _EAVehicleInfoChargingParameterKey, _EAVehicleInfoConsumptionParameterKey, 
+                       _EAVehicleInfoCurrentBatteryChargeKey, _EAVehicleInfoDisplayNameKey, 
+                       _EAVehicleInfoDisplayedBatteryPercentageKey, _EAVehicleInfoEngineTypeBitmaskKey, 
+                       _EAVehicleInfoHasLowDistanceRangeCNGKey, _EAVehicleInfoHasLowDistanceRangeDieselKey, 
+                       _EAVehicleInfoHasLowDistanceRangeElectricKey, _EAVehicleInfoHasLowDistanceRangeGasolineKey, 
+                       _EAVehicleInfoHasLowDistanceRangeKey, _EAVehicleInfoInsideTemperatureKey, 
+                       _EAVehicleInfoIsChargingKey, _EAVehicleInfoIsColdTemperatureIndicatorOnKey, 
                        _EAVehicleInfoIsVehicleParkedKey, _EAVehicleInfoMakeKey, _EAVehicleInfoMapsDisplayNameKey, 
+                       _EAVehicleInfoMaxBatteryChargeKey, _EAVehicleInfoMaxRangeCNGKey, 
+                       _EAVehicleInfoMaxRangeDieselKey, _EAVehicleInfoMaxRangeElectricKey, 
+                       _EAVehicleInfoMaxRangeGasolineKey, _EAVehicleInfoMinBatteryChargeKey, 
                        _EAVehicleInfoModelKey, _EAVehicleInfoOutsideTemperatureKey, 
+                       _EAVehicleInfoPowerForConnectorTypeCCS1Key, _EAVehicleInfoPowerForConnectorTypeCCS2Key, 
+                       _EAVehicleInfoPowerForConnectorTypeCHAdeMOKey, _EAVehicleInfoPowerForConnectorTypeGBT_ACKey, 
+                       _EAVehicleInfoPowerForConnectorTypeGBT_DCKey, _EAVehicleInfoPowerForConnectorTypeJ1772Key, 
+                       _EAVehicleInfoPowerForConnectorTypeMennekesKey, _EAVehicleInfoPowerForConnectorTypeTeslaKey, 
                        _EAVehicleInfoRangeCNGKey, _EAVehicleInfoRangeDieselKey, _EAVehicleInfoRangeElectricKey, 
                        _EAVehicleInfoRangeGasolineKey, _EAVehicleInfoRangeKey, _EAVehicleInfoSiriNameKey, 
+                       _EAVehicleInfoSupportedChargingConnectorsBitMaskKey, _EAVehicleInfoVehicleColorHexCodeKey, 
                        _EAVehicleInfoYearKey, _GetEAAccesoryManager, _kCFAccessoryDestinationSharingOptionsKey, 
                        _kCFAccessoryPortA2DPIn, _kCFAccessoryPortA2DPOut, _kCFAccessoryPortDisplayPort, 
                        _kCFAccessoryPortHFP, _kCFAccessoryPortLineIn, _kCFAccessoryPortLineOut, 

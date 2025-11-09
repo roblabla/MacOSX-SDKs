@@ -1,11 +1,28 @@
---- !tapi-tbd-v3
-archs:           [ x86_64, x86_64h ]
-uuids:           [ 'x86_64: 1A4A48E2-7B05-3059-878F-F1DC496C8063', 'x86_64: 1A4A48E2-7B05-3059-878F-F1DC496C8063', 
-                   'x86_64h: 4AE05373-3C01-3D63-BA37-CA575864AF3B', 'x86_64h: 4AE05373-3C01-3D63-BA37-CA575864AF3B' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
+                   arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           D35D632A-73D4-3582-A2E8-3C35B91187B9
+  - target:          x86_64-maccatalyst
+    value:           D35D632A-73D4-3582-A2E8-3C35B91187B9
+  - target:          x86_64h-macos
+    value:           EE1BB498-7124-3929-BC51-7BFA10E389A0
+  - target:          x86_64h-maccatalyst
+    value:           EE1BB498-7124-3929-BC51-7BFA10E389A0
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           24184F57-EA4F-372D-BC9C-3F2C4B82E5C1
+  - target:          arm64e-maccatalyst
+    value:           24184F57-EA4F-372D-BC9C-3F2C4B82E5C1
 install-name:    '/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libGIF.dylib'
-exports:         
-  - archs:           [ x86_64, x86_64h ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, x86_64h-maccatalyst, x86_64h-macos, 
+                       arm64e-maccatalyst, arm64e-macos, arm64-macos, arm64-maccatalyst ]
     symbols:         [ __cg_DGifCloseFile, __cg_DGifExtensionToGCB, __cg_DGifGetCode, 
                        __cg_DGifGetCodeNext, __cg_DGifGetExtension, __cg_DGifGetExtensionNext, 
                        __cg_DGifGetImageDesc, __cg_DGifGetLZCodes, __cg_DGifGetLine, 

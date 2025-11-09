@@ -10,11 +10,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NSString * ASAuthorizationProviderAuthorizationOperation API_AVAILABLE(ios(13.0), macos(10.15)) API_UNAVAILABLE(macCatalyst, watchos, tvos) NS_TYPED_EXTENSIBLE_ENUM;
+typedef NSString * ASAuthorizationProviderAuthorizationOperation API_AVAILABLE(ios(13.0), macCatalyst(14.0), macos(10.15)) API_UNAVAILABLE(watchos, tvos) NS_TYPED_EXTENSIBLE_ENUM;
+
+/*! @abstract Operation which is invoked when the extension configuration is removed from the system.
+*/
+AS_EXTERN ASAuthorizationProviderAuthorizationOperation const ASAuthorizationProviderAuthorizationOperationConfigurationRemoved API_AVAILABLE(ios(14.0), macos(11.0)) API_UNAVAILABLE(watchos, tvos);
 
 @class ASAuthorizationProviderExtensionAuthorizationRequest;
 
-AS_EXTERN API_AVAILABLE(ios(13.0), macos(10.15)) API_UNAVAILABLE(macCatalyst, watchos, tvos)
+AS_EXTERN API_AVAILABLE(ios(13.0), macCatalyst(14.0), macos(10.15)) API_UNAVAILABLE(watchos, tvos)
 @protocol ASAuthorizationProviderExtensionAuthorizationRequestHandler <NSObject>
 
 /*! @abstract Called to begin the authorization. It’s called on the main thread.
@@ -29,7 +33,7 @@ AS_EXTERN API_AVAILABLE(ios(13.0), macos(10.15)) API_UNAVAILABLE(macCatalyst, wa
 
 @end
 
-AS_EXTERN API_AVAILABLE(ios(13.0), macos(10.15)) API_UNAVAILABLE(macCatalyst, watchos, tvos)
+AS_EXTERN API_AVAILABLE(ios(13.0), macCatalyst(14.0), macos(10.15)) API_UNAVAILABLE(watchos, tvos)
 @interface ASAuthorizationProviderExtensionAuthorizationRequest : NSObject
 
 /*! @abstract Call when authorization was not handled.
@@ -91,6 +95,18 @@ AS_EXTERN API_AVAILABLE(ios(13.0), macos(10.15)) API_UNAVAILABLE(macCatalyst, wa
 /*! @abstract Authorization options.
  */
 @property (nonatomic, readonly) NSDictionary *authorizationOptions;
+
+/*! @abstract Indicates whether the calling application is managed.
+ */
+@property (nonatomic, readonly, getter=isCallerManaged) BOOL callerManaged API_AVAILABLE(ios(14.0), macos(11.0)) API_UNAVAILABLE(watchos, tvos);
+
+/*! @abstract Team identifier of the calling application.
+ */
+@property (nonatomic, readonly) NSString *callerTeamIdentifier API_AVAILABLE(ios(14.0), macos(11.0)) API_UNAVAILABLE(watchos, tvos);
+
+/*! @abstract Localized display name of the calling application.
+ */
+@property (nonatomic, readonly) NSString *localizedCallerDisplayName API_AVAILABLE(ios(14.0), macos(11.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 

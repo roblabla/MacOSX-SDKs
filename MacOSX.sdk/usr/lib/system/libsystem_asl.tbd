@@ -1,12 +1,29 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: A125594C-D9F3-3D17-8BBC-E949DDB49C46', 'x86_64: A125594C-D9F3-3D17-8BBC-E949DDB49C46' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           08A39A7C-1C44-3CCA-ACE8-CE91B9595D98
+  - target:          x86_64-maccatalyst
+    value:           08A39A7C-1C44-3CCA-ACE8-CE91B9595D98
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           8D2E5F70-5F8C-3AF1-8C60-7CE1824591C1
+  - target:          arm64e-maccatalyst
+    value:           8D2E5F70-5F8C-3AF1-8C60-7CE1824591C1
 install-name:    '/usr/lib/system/libsystem_asl.dylib'
-current-version: 377.0.1
-parent-umbrella: System
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 385
+parent-umbrella:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    umbrella:        System
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _ASL_LEVEL_TO_STRING, __asl_evaluate_send, __asl_fork_child, 
                        __asl_lib_log, __asl_log_args_to_xpc, __asl_msg_dump, __asl_mt_shim_fork_child, 
                        __asl_mt_shim_send_message, __asl_server_cancel_direct_watch, 

@@ -11,7 +11,7 @@
 #import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 API_AVAILABLE(macos(10.13))
 @interface NSUserInterfaceCompressionOptions : NSObject <NSCopying, NSCoding>
@@ -71,7 +71,7 @@ API_AVAILABLE(macos(10.13))
 @property (class, readonly, copy) NSUserInterfaceCompressionOptions *hideTextOption;
 
 /*
- Option specifying views should reduce their internal metrics when possible to reduce padding around contents. The system will handle this for system controls when available.
+ Option specifying views should reduce their internal metrics when possible to reduce padding around contents.
  */
 @property (class, readonly, copy) NSUserInterfaceCompressionOptions *reduceMetricsOption;
 

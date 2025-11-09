@@ -1,4 +1,4 @@
-#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AudioFileStream.h>)
+#if (defined(__USE_PUBLIC_HEADERS__) && __USE_PUBLIC_HEADERS__) || (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AudioFileStream.h>)
 /*!
 	@file		AudioFileStream.h
 	@framework	AudioToolbox.framework
@@ -33,8 +33,6 @@
 //	Includes
 //=============================================================================
 
-#include <Availability.h>
-#include <CoreAudioTypes/CoreAudioTypes.h>
 #include <AudioToolbox/AudioFile.h>
 
 CF_ASSUME_NONNULL_BEGIN
@@ -99,11 +97,11 @@ typedef void (*AudioFileStream_PropertyListenerProc)(
 											AudioFileStreamPropertyFlags *	ioFlags);
 
 typedef void (*AudioFileStream_PacketsProc)(
-											void *							inClientData,
-											UInt32							inNumberBytes,
-											UInt32							inNumberPackets,
-											const void *					inInputData,
-											AudioStreamPacketDescription	*inPacketDescriptions);
+											void *										inClientData,
+											UInt32										inNumberBytes,
+											UInt32										inNumberPackets,
+											const void *								inInputData,
+											AudioStreamPacketDescription * __nullable	inPacketDescriptions);
 
 //=============================================================================
 //	AudioFileStream error codes

@@ -1,4 +1,4 @@
-/* iig(DriverKit-73.0.1) generated from IOHIDDevice.iig */
+/* iig(DriverKit-107.40.8) generated from IOHIDDevice.iig */
 
 /* IOHIDDevice.iig:1-44 */
 /*
@@ -45,19 +45,118 @@
 
 class IOMemoryDescriptor;
 
-/* class IOHIDDevice IOHIDDevice.iig:45-134 */
+/* source class IOHIDDevice IOHIDDevice.iig:45-133 */
 
-#define IOHIDDevice_KernelStart_ID            0xff0b791163823830ULL
-#define IOHIDDevice_KernelCompleteReport_ID            0xdb01a9b43a5e9a30ULL
+#if __DOCUMENTATION__
+#define KERNEL IIG_KERNEL
+
+class KERNEL IOHIDDevice : public IOService
+{
+
+public:
+
+    /*!
+     * @function handleReport
+     * @abstract Handle an asynchronous report received from the HID device.
+     * @param report A memory descriptor that describes the report.
+     * @param reportType The type of report.
+     * @param options Options to specify the request. No options are
+     * currently defined, and the default value is 0.
+     * @result kIOReturnSuccess on success, or an error return otherwise.
+     */
+
+    virtual kern_return_t handleReport(uint64_t                  timestamp,
+                                       IOMemoryDescriptor        *report,
+                                       uint32_t                  reportLength,
+                                       IOHIDReportType           reportType = kIOHIDReportTypeInput,
+                                       IOOptionBits              options    = 0) LOCALONLY;
+
+
+    
+    /*!
+     * @function getReport
+     * @abstract Get a report from the HID device.
+     * @param report A memory descriptor that describes the memory to store
+     * the report read from the HID device.
+     * @param reportType The report type.
+     * @param options The lower 8 bits will represent the Report ID.  The
+     * other 24 bits are options to specify the request.
+     * @param completionTimeout Specifies an amount of time (in ms) after which
+     * the command will be aborted if the entire command has not been completed.
+     * @param action OSAction to call CompleteReport when request completes. If omitted then
+     * getReport() executes synchronously, blocking until the request is complete.
+     * @result kIOReturnSuccess on success, or an error return otherwise.
+     */
+    
+    virtual kern_return_t getReport(IOMemoryDescriptor      * report,
+                                    IOHIDReportType         reportType,
+                                    IOOptionBits            options,
+                                    uint32_t                completionTimeout,
+                                    OSAction                * action) LOCALONLY;
+    
+    
+    /*!
+     * @function setReport
+     * @abstract Send a report to the HID device.
+     * @param report A memory descriptor that describes the report to send
+     * to the HID device.
+     * @param reportType The report type.
+     * @param options The lower 8 bits will represent the Report ID.  The
+     * other 24 bits are options to specify the request.
+     * @param completionTimeout Specifies an amount of time (in ms) after which
+     * the command will be aborted if the entire command has not been completed.
+     * @param action OSAction to call CompleteReport when request completes. If omitted then
+     * setReport() executes synchronously, blocking until the request is complete.
+     * @result kIOReturnSuccess on success, or an error return otherwise.
+     */
+    
+    virtual kern_return_t setReport(IOMemoryDescriptor      * report,
+                                    IOHIDReportType         reportType,
+                                    IOOptionBits            options,
+                                    uint32_t                completionTimeout,
+                                    OSAction                * action) LOCALONLY;
+
+    
+protected:
+
+    /*!
+     * @brief       Complete async requests made with GetReport/SetReport
+     * @discussion  method should be called upon completion of GetReport/SetReport.
+     * @param       action   passed to GetReport/SetReport.
+     * @param       status   status of the completion.
+     * @param       actualByteCount   used buffer size of the buffer submitted with SetReport/GetReport.
+     * @return      none
+     */
+
+    virtual void  CompleteReport (OSAction            * action TARGET,
+                                  IOReturn            status,
+                                  uint32_t            actualByteCount) LOCAL = 0;
+
+    
+
+    virtual void setProperty (OSObject * key, OSObject * value) LOCALONLY;
+    
+
+public:
+  
+};
+
+#undef KERNEL
+#else /* __DOCUMENTATION__ */
+
+/* generated class IOHIDDevice IOHIDDevice.iig:45-133 */
+
+#define IOHIDDevice__Start_ID            0xd844e4e02f7103bbULL
+#define IOHIDDevice__CompleteReport_ID            0xdc4ef5129e3a9d08ULL
 #define IOHIDDevice__ProcessReport_ID            0xd539b835ea14880fULL
 #define IOHIDDevice__HandleReport_ID            0xad138a788e1f3247ULL
 #define IOHIDDevice__SetProperty_ID            0xa6ee936a6065f6baULL
 #define IOHIDDevice_CompleteReport_ID            0xf2d80ecf6d8c6cb5ULL
 
-#define IOHIDDevice_KernelStart_Args \
+#define IOHIDDevice__Start_Args \
         IOService * provider
 
-#define IOHIDDevice_KernelCompleteReport_Args \
+#define IOHIDDevice__CompleteReport_Args \
         OSAction * action, \
         IOReturn status, \
         uint32_t actualByteCount
@@ -96,12 +195,12 @@ public:\
     _Dispatch(IOHIDDevice * self, const IORPC rpc);\
 \
     kern_return_t\
-    KernelStart(\
+    _Start(\
         IOService * provider,\
         OSDispatchMethod supermethod = NULL);\
 \
     kern_return_t\
-    CreateActionKernelCompleteReport(size_t referenceSize, OSAction ** action);\
+    CreateAction_CompleteReport(size_t referenceSize, OSAction ** action);\
 \
     void\
     _ProcessReport(\
@@ -148,11 +247,11 @@ protected:\
 public:\
     /* _Invoke methods */\
 \
-    typedef kern_return_t (*KernelStart_Handler)(OSMetaClassBase * target, IOHIDDevice_KernelStart_Args);\
+    typedef kern_return_t (*_Start_Handler)(OSMetaClassBase * target, IOHIDDevice__Start_Args);\
     static kern_return_t\
-    KernelStart_Invoke(const IORPC rpc,\
+    _Start_Invoke(const IORPC rpc,\
         OSMetaClassBase * target,\
-        KernelStart_Handler func);\
+        _Start_Handler func);\
 \
     typedef void (*_ProcessReport_Handler)(OSMetaClassBase * target, IOHIDDevice__ProcessReport_Args);\
     static kern_return_t\
@@ -176,6 +275,12 @@ public:\
     static kern_return_t\
     CompleteReport_Invoke(const IORPC rpc,\
         OSMetaClassBase * target,\
+        CompleteReport_Handler func,\
+        const OSMetaClass * targetActionClass);\
+\
+    static kern_return_t\
+    CompleteReport_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
         CompleteReport_Handler func);\
 \
 
@@ -186,10 +291,10 @@ protected:\
     /* _Impl methods */\
 \
     kern_return_t\
-    KernelStart_Impl(IOHIDDevice_KernelStart_Args);\
+    _Start_Impl(IOHIDDevice__Start_Args);\
 \
     void\
-    KernelCompleteReport_Impl(IOHIDDevice_KernelCompleteReport_Args);\
+    _CompleteReport_Impl(IOHIDDevice__CompleteReport_Args);\
 \
     kern_return_t\
     _HandleReport_Impl(IOHIDDevice__HandleReport_Args);\
@@ -308,7 +413,97 @@ public:
 #endif /* !KERNEL */
 
 
-/* IOHIDDevice.iig:191- */
+#define OSAction_IOHIDDevice__CompleteReport_Methods \
+\
+public:\
+\
+    virtual kern_return_t\
+    Dispatch(const IORPC rpc) APPLE_KEXT_OVERRIDE;\
+\
+    static kern_return_t\
+    _Dispatch(OSAction_IOHIDDevice__CompleteReport * self, const IORPC rpc);\
+\
+\
+protected:\
+    /* _Impl methods */\
+\
+\
+public:\
+    /* _Invoke methods */\
+\
+
+
+#define OSAction_IOHIDDevice__CompleteReport_KernelMethods \
+\
+protected:\
+    /* _Impl methods */\
+\
+
+
+#define OSAction_IOHIDDevice__CompleteReport_VirtualMethods \
+\
+public:\
+\
+
+
+#if !KERNEL
+
+extern OSMetaClass          * gOSAction_IOHIDDevice__CompleteReportMetaClass;
+extern const OSClassLoadInformation OSAction_IOHIDDevice__CompleteReport_Class;
+
+class OSAction_IOHIDDevice__CompleteReportMetaClass : public OSMetaClass
+{
+public:
+    virtual kern_return_t
+    New(OSObject * instance) override;
+    virtual kern_return_t
+    Dispatch(const IORPC rpc) override;
+};
+
+#endif /* !KERNEL */
+
+class OSAction_IOHIDDevice__CompleteReportInterface : public OSInterface
+{
+public:
+};
+
+struct OSAction_IOHIDDevice__CompleteReport_IVars;
+struct OSAction_IOHIDDevice__CompleteReport_LocalIVars;
+
+class OSAction_IOHIDDevice__CompleteReport : public OSAction, public OSAction_IOHIDDevice__CompleteReportInterface
+{
+#if KERNEL
+    OSDeclareDefaultStructorsWithDispatch(OSAction_IOHIDDevice__CompleteReport);
+#endif /* KERNEL */
+
+#if !KERNEL
+    friend class OSAction_IOHIDDevice__CompleteReportMetaClass;
+#endif /* !KERNEL */
+
+public:
+    union
+    {
+        OSAction_IOHIDDevice__CompleteReport_IVars * ivars;
+        OSAction_IOHIDDevice__CompleteReport_LocalIVars * lvars;
+    };
+#if !KERNEL
+    virtual const OSMetaClass *
+    getMetaClass() const APPLE_KEXT_OVERRIDE { return OSTypeID(OSAction_IOHIDDevice__CompleteReport); };
+#endif /* KERNEL */
+
+    using super = OSAction;
+
+#if !KERNEL
+    OSAction_IOHIDDevice__CompleteReport_Methods
+#endif /* !KERNEL */
+
+    OSAction_IOHIDDevice__CompleteReport_VirtualMethods
+};
+
+#endif /* !__DOCUMENTATION__ */
+
+
+/* IOHIDDevice.iig:190- */
 
 
 #endif /* ! _HIDDRIVERKIT_IOHIDDEVICE_H */

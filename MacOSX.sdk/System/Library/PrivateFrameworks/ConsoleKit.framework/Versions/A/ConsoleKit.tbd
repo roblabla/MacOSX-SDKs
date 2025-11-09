@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 9FE54189-2892-3547-9919-BB9F34876432' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           83C22235-6D98-32F8-945A-4488BF6D4B34
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           14B8671F-03E5-332E-B062-530E5F722115
 install-name:    '/System/Library/PrivateFrameworks/ConsoleKit.framework/Versions/A/ConsoleKit'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _ConsoleKitVersionNumber, _ConsoleKitVersionString, _HashBytes, 
                        _benchmarkBlock, _kCSKDBItemActivityID, _kCSKDBItemCreatorAID, 
                        _kCSKDBItemCreatorPUID, _kCSKDBItemEventKind, _kCSKDBItemIdentifier, 
@@ -52,17 +58,10 @@ exports:
                        CSKStreamObserverTask, CSKStreamSQLActivitiesObserver, CSKStreamSQLMessagesObserver, 
                        CSKStreamSQLSource, CSKStreamSortedData, CSKStreamSource, 
                        CSKStreamTask, CSKStreamTaskOperation, CSKStreamTasksScheduler, 
-                       CSKStreamViewController, CSKStringsIndexer, CSKStringsIndexerMarker, 
-                       CSKTabItem, CSKTabViewController, CSKTableColumnLayout, CSKTableHeaderView, 
-                       CSKTableViewController, CSKTextFinder, CSKTextRelationIndicatorTableCellView, 
-                       CSKTextTableCellView, CSKTextViewController, CSKToken, CSKTokenAttachmentCell, 
-                       CSKTokenField, CSKTokenFieldCell, CSKTokenFieldController ]
-    objc-ivars:      [ CSKAuthenticationController.errorTextField, CSKAuthenticationController.iconImageView, 
-                       CSKAuthenticationController.messageDetailTextField, CSKAuthenticationController.messageTitleTextField, 
-                       CSKAuthenticationController.passwordAuthenticationSheet, CSKAuthenticationController.passwordLabel, 
-                       CSKAuthenticationController.passwordSecureTextField, CSKAuthenticationController.topErrorConstraint, 
-                       CSKAuthenticationController.topPasswordConstraint, CSKAuthenticationController.topSecureTextFieldErrorConstraint, 
-                       CSKAuthenticationController.topSecureTextFieldMessageConstraint, 
-                       CSKAuthenticationController.topsecureTextFieldConstraint, 
-                       CSKAuthenticationController.userNameTextField ]
+                       CSKStreamView, CSKStreamViewController, CSKStringsIndexer, 
+                       CSKStringsIndexerMarker, CSKTabItem, CSKTabViewController, 
+                       CSKTableColumnLayout, CSKTableHeaderView, CSKTableViewController, 
+                       CSKTextFinder, CSKTextRelationIndicatorTableCellView, CSKTextTableCellView, 
+                       CSKTextViewController, CSKToken, CSKTokenAttachmentCell, CSKTokenField, 
+                       CSKTokenFieldCell, CSKTokenFieldController ]
 ...

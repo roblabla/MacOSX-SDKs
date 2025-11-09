@@ -140,6 +140,7 @@ enum {
 	kIODKDisableDextTag    = 0x00002000ULL,
 	kIODKDisableCDHashChecking  = 0x00004000ULL,
 	kIODKDisableEntitlementChecking = 0x00008000ULL,
+	kIODKDisableCheckInTokenVerification = 0x00010000ULL,
 };
 
 

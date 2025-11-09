@@ -39,7 +39,8 @@ typedef NS_ENUM(NSInteger, PDFMarkupType)
 {
     kPDFMarkupTypeHighlight = 0,
     kPDFMarkupTypeStrikeOut = 1,
-    kPDFMarkupTypeUnderline = 2
+    kPDFMarkupTypeUnderline = 2,
+    kPDFMarkupTypeRedact    = 3
 };
 
 // Type of control.

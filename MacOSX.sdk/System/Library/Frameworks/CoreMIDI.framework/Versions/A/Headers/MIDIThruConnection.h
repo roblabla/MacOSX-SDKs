@@ -8,7 +8,7 @@
     Bugs?:      For bug reports, consult the following page on
                 the World Wide Web:
  
-                    http://developer.apple.com/bugreporter/
+                    http://feedbackassistant.apple.com/
  
 */
 
@@ -37,17 +37,13 @@ CF_ASSUME_NONNULL_BEGIN
 */
 //  -----------------------------------------------------------------------------
 
-/*!
-    @typedef        MIDIThruConnectionRef
-    
-    @discussion     An opaque reference to a play-through connection.
-*/
+/// An opaque reference to a play-through connection.
 typedef MIDIObjectRef MIDIThruConnectionRef;
 
 /*!
     @struct         MIDIValueMap
     
-    @discussion     A custom mapping function to transform MIDI 7-bit values,
+    @abstract       A custom mapping function to transform MIDI 7-bit values,
                     as contained in note numbers, velocities, control values,
                     etc.  y = value[x], where x is the input MIDI value, y the
                     output.
@@ -60,7 +56,7 @@ typedef struct MIDIValueMap MIDIValueMap;
 /*!
     @enum           MIDITransformType
     
-    @brief          Values specifying a type of MIDI transformation, as found in the transform member of MIDITransform.
+    @abstract       Values specifying a type of MIDI transformation, as found in the transform member of MIDITransform.
     
     @constant   kMIDITransform_None
         no transformation (param unused)
@@ -97,7 +93,8 @@ enum {
 /*!
     @enum       MIDITransformControlType
     
-    @discussion Specifies how control numbers are interpreted.
+    @abstract   Specifies how control numbers are interpreted.
+
     @constant   kMIDIControlType_7Bit
         control numbers may be 0-127
     @constant   kMIDIControlType_14Bit
@@ -120,7 +117,9 @@ typedef CF_ENUM(UInt8, MIDITransformControlType) {
 /*!
     @struct     MIDITransform
     @abstract   Describes how a single type of MIDI event is transformed.
-    @discussion This structure controls the transformation of various MIDI events other than control changes.
+
+	This structure controls the transformation of various MIDI events other than control changes.
+
     @field      transform   The type of transformation to be applied to the event values.
     @field      param       An argument to the transformation method (see description of MIDITransformType).
 */
@@ -134,27 +133,28 @@ typedef struct MIDITransform MIDITransform;
     @struct     MIDIControlTransform
     @abstract   Describes a transformation of MIDI control change events.
 
+	A single MIDIThruConnectionParams may describe any number of transformations to control
+	events. It is important that multiple transformations are ordered correctly: filter out,
+	remap, then alter values.
+	
+	All transformations are done internally using 14-bit values, so for example, when doing
+	an add/min/max transform on a 7-bit control value, the parameter must be a 14-bit value.
+	For example, to add 10 to a control value, param must be (10 << 7) = 1280.
+
+	As per the MIDI specification, a number of controls are interpreted specially:
+
+	Control | Function
+	--------|---------
+	32-63   | the LSBs of 0-31
+	6/38    | data entry
+	96, 97  | data increment, decrement
+	98-101  | NRPN/RPN
+
     @field  controlType         The type of control specified by controlNumber
     @field  remappedControlType If transform is kMIDITransform_MapControl, the output control type
     @field  controlNumber       The control number to be affected.
     @field  transform           The type of transformation to be applied to the event values.
     @field  param               An argument to the transformation method (see description of MIDITransformType).
-
-    @discussion
-        A single MIDIThruConnectionParams may describe any number of transformations to control
-        events. It is important that multiple transformations are ordered correctly: filter out,
-        remap, then alter values.
-        
-        All transformations are done internally using 14-bit values, so for example, when doing
-        an add/min/max transform on a 7-bit control value, the parameter must be a 14-bit value.
-        For example, to add 10 to a control value, param must be (10 << 7) = 1280.
-
-        As per the MIDI specification, a number of controls are interpreted specially:
-
-        32-63 are the LSBs of 0-31
-        6/38 is data entry
-        96,97 are data increment, decrement
-        98-101 are NRPN/RPN
 */
 struct MIDIControlTransform {
     MIDITransformControlType    controlType;
@@ -168,14 +168,15 @@ typedef struct MIDIControlTransform MIDIControlTransform;
 /*!
     @struct     MIDIThruConnectionEndpoint
     @abstract   Describes a source or destination in a MIDIThruConnection.
+
+	When creating one of these, you can leave uniqueID 0 if the endpoint exists and you are passing
+	its MIDIEndpointRef.
+	
+	When obtaining one of these from CoreMIDI, endpointRef may be NULL if it doesn't exist, but the
+	uniqueID will always be non-zero.
+
     @field  endpointRef     The endpoint specified as a MIDIEndpointRef.
     @field  uniqueID        The endpoint specified by its uniqueID.
-    @discussion
-        When creating one of these, you can leave uniqueID 0 if the endpoint exists and you are passing
-        its MIDIEndpointRef.
-        
-        When obtaining one of these from CoreMIDI, endpointRef may be NULL if it doesn't exist, but the
-        uniqueID will always be non-zero.
 */
 struct MIDIThruConnectionEndpoint {
     MIDIEndpointRef         endpointRef;
@@ -186,6 +187,10 @@ typedef struct MIDIThruConnectionEndpoint MIDIThruConnectionEndpoint;
 /*!
     @struct     MIDIThruConnectionParams
     @abstract   Describes a set of MIDI routings and transformations.
+
+	The remainder of the structure is variably-sized. It contains numControlTransform instances of
+	MIDIControlTransform, followed by numMaps instances of MIDIValueMap.
+
     @field      version     Version of this structure; must be 0.
     @field      numSources  The number of valid sources in the following array.
     @field      sources     All MIDI generated by these sources is routed into this connection for processing
@@ -217,10 +222,6 @@ typedef struct MIDIThruConnectionEndpoint MIDIThruConnectionEndpoint;
     @field      numControlTransforms    The number of control transformations in the variable-length portion of the struct.
     @field      numMaps                 The number of MIDIValueMaps in the variable-length portion of the struct.
     @field      reserved3       Must be 0.
-    
-    @discussion
-        The remainder of the structure is variably-sized. It contains numControlTransform instances of 
-        MIDIControlTransform, followed by numMaps instances of MIDIValueMap.
 */
 struct MIDIThruConnectionParams {
     UInt32                      version;
@@ -260,8 +261,9 @@ typedef struct MIDIThruConnectionParams MIDIThruConnectionParams;
 /*!
     @defined    MIDIThruConnectionParamsSize
     @abstract   Returns the size of a MIDIThruConnectionParams.
-    @discussion Accounts for the variable-length elements in the structure and returns its true
-                size in bytes.
+
+	Accounts for the variable-length elements in the structure and returns its true
+	size in bytes.
 */
 CF_INLINE size_t MIDIThruConnectionParamsSize(const MIDIThruConnectionParams *ptr)
 {
@@ -277,16 +279,15 @@ CF_INLINE size_t MIDIThruConnectionParamsSize(const MIDIThruConnectionParams *pt
 #ifdef __cplusplus
 extern "C" {
 #endif
+
 /*!
     @function   MIDIThruConnectionParamsInitialize
     @abstract   Fills a MIDIThruConnectionParams with default values.
     @param      inConnectionParams  The struct to be initialized.
-    @result     An OSStatus result code.
-    @discussion
-        This convenience function fills the connection structure with default values:
-no endpoints, no transformations (mostly zeroes except for the channel map).
-Then, just filling in the source and adding one destination will create a simple, 
-unmodified thru connection.
+
+	This convenience function fills the connection structure with default values: no endpoints,
+	no transformations (mostly zeroes except for the channel map). Then, just filling in the
+	source and adding one destination will create a simple, unmodified thru connection.
 */
 extern void
 MIDIThruConnectionParamsInitialize(
@@ -305,7 +306,6 @@ MIDIThruConnectionParamsInitialize(
     @param      outConnection
                     On successful return, a reference to the newly-created connection.
     @result     An OSStatus result code.
-    @discussion
 */
 extern OSStatus
 MIDIThruConnectionCreate(   CFStringRef __nullable          inPersistentOwnerID,
@@ -319,7 +319,6 @@ MIDIThruConnectionCreate(   CFStringRef __nullable          inPersistentOwnerID,
     @param      connection
                     The connection to be disposed
     @result     An OSStatus result code.
-    @discussion
 */
 extern OSStatus
 MIDIThruConnectionDispose(  MIDIThruConnectionRef           connection )
@@ -333,9 +332,9 @@ MIDIThruConnectionDispose(  MIDIThruConnectionRef           connection )
     @param      outConnectionParams
                     On successful return, the connection's MIDIThruConnectionParams in a CFDataRef
     @result     An OSStatus result code.
-    @discussion
-        The returned CFDataRef contains a MIDIThruConnectionParams structure. The caller is responsible
-        for releasing it.
+
+	The returned CFDataRef contains a MIDIThruConnectionParams structure. The caller is responsible
+	for releasing it.
 */
 extern OSStatus
 MIDIThruConnectionGetParams(MIDIThruConnectionRef           connection,
@@ -350,7 +349,6 @@ MIDIThruConnectionGetParams(MIDIThruConnectionRef           connection,
     @param      inConnectionParams
                     The connection's new MIDIThruConnectionParams in a CFDataRef
     @result     An OSStatus result code.
-    @discussion
 */
 extern OSStatus
 MIDIThruConnectionSetParams(MIDIThruConnectionRef           connection,
@@ -365,7 +363,6 @@ MIDIThruConnectionSetParams(MIDIThruConnectionRef           connection,
     @param      outConnectionList
                     On successful return, a CFDataRef containing an array of MIDIThruConnectionRef's.
     @result     An OSStatus result code.
-    @discussion
 */
 extern OSStatus
 MIDIThruConnectionFind(     CFStringRef                     inPersistentOwnerID,

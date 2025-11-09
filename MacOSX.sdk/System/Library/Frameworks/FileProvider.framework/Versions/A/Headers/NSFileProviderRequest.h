@@ -2,28 +2,33 @@
 //  NSFileProviderRequest.h
 //  FileProvider
 //
-//  Copyright © 2018 Apple Inc. All rights reserved.
+//  Copyright © 2018-2020 Apple Inc. All rights reserved.
 //
 
-#import <FileProvider/NSFileProviderExtension.h>
+#import <Foundation/Foundation.h>
+#import <FileProvider/NSFileProviderDefines.h>
 #import <FileProvider/NSFileProviderManager.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_UNAVAILABLE(watchos, tvos) API_UNAVAILABLE(ios, macos)
+FILEPROVIDER_API_AVAILABILITY_V3
 @interface NSFileProviderRequest : NSObject
 /**
- An identifier for the application. The identifier is system-specific and may
- change between different installations of the application.
+ The request was made by the sync system, e.g. to update a file to its latest version after a remote update was pushed.
  */
-@property (nonatomic, readonly, strong) NSUUID *requestingApplicationIdentifier;
+@property (nonatomic, readonly) BOOL isSystemRequest;
+
+/**
+ The request was made by Finder or one of its helpers.
+ */
+@property (nonatomic, readonly) BOOL isFileViewerRequest;
+
+/**
+ The URL of the requesting executable. This will always be nil unless both an MDM profile key is set, and the
+ provider's application is installed by an MDM profile.
+*/
+@property (nonatomic, readonly, copy, nullable) NSURL *requestingExecutable API_UNAVAILABLE(ios);
 
 @end
-
-@interface NSFileProviderExtension (Request)
-- (nullable NSFileProviderRequest *)currentRequest API_UNAVAILABLE(watchos, tvos) API_UNAVAILABLE(ios, macos);
-@end
-
-
 
 NS_ASSUME_NONNULL_END

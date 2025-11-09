@@ -10,6 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+API_UNAVAILABLE_BEGIN(ios)
+
 @class NSView;
 
 // AMBundleAction
@@ -39,5 +41,7 @@ NS_CLASS_AVAILABLE_MAC(10_4)
 @property (nullable, strong, nonatomic) NSMutableDictionary<NSString *, id> *parameters;
 
 @end
+
+API_UNAVAILABLE_END
 
 NS_ASSUME_NONNULL_END

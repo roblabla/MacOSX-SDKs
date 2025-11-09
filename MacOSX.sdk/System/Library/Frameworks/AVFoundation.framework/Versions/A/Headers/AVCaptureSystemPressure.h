@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCapture/AVCaptureSystemPressure.h>)
 /*
     File:  AVCaptureSystemPressure.h
  
@@ -106,3 +107,7 @@ AV_INIT_UNAVAILABLE
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCapture/AVCaptureSystemPressure.h>
+#endif

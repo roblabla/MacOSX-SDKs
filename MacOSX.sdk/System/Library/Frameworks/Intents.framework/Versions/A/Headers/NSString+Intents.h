@@ -2,14 +2,14 @@
 //  NSString+Intents.h
 //  Intents
 //
-//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2020 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(12.0), watchos(5.0), macosx(10.14))
+API_AVAILABLE(ios(12.0), macos(10.14), watchos(5.0), tvos(14.0))
 @interface NSString (Intents)
 
 // Reads the string from the Localizable.strings file in the main app's bundle

@@ -60,7 +60,7 @@ These are described respectively in the
 and
 .Xr au_user 3
 manual pages.
-.Ss Audit Event Stream Interfaces
+.Ss Audit Event Stream Interfaces (NOW DEPRECATED)
 Audit event stream interfaces support interaction with file-backed audit
 event streams:
 .Xr au_close 3 ,
@@ -69,7 +69,7 @@ event streams:
 .Xr au_open 3 ,
 .Xr au_write 3 ,
 .Xr audit_submit 3 .
-.Ss Audit Class Interfaces
+.Ss Audit Class Interfaces (NOW DEPRECATED)
 Audit class interfaces support the look up of information from the
 .Xr audit_class 5
 database:
@@ -79,7 +79,7 @@ database:
 .Xr getauclassnam 3 ,
 .Xr getauclassnam_r 3 ,
 .Xr setauclass 3 .
-.Ss Audit Control Interfaces
+.Ss Audit Control Interfaces (NOW DEPRECATED)
 Audit control interfaces support the look up of information from the
 .Xr audit_control 5
 database:
@@ -93,7 +93,7 @@ database:
 .Xr getacpol 3 ,
 .Xr au_poltostr 3 ,
 .Xr au_strtopol 3 .
-.Ss Audit Event Interfaces
+.Ss Audit Event Interfaces (NOW DEPRECATED)
 Audit event interfaces support the look up of information from the
 .Xr audit_event 5
 database:
@@ -107,13 +107,13 @@ database:
 .Xr getauevnonam_r 3 ,
 .Xr getauevnum 3 ,
 .Xr getauevnum_r 3 .
-.Ss Audit I/O Interfaces
+.Ss Audit I/O Interfaces (NOW DEPRECATED)
 Audit I/O interfaces support the processing and printing of tokens, as well
 as the reading of audit records:
 .Xr au_fetch_tok 3 ,
 .Xr au_print_tok 3 ,
 .Xr au_read_rec 3 .
-.Ss Audit Mask Interfaces
+.Ss Audit Mask Interfaces (NOW DEPRECATED)
 Audit mask interfaces convert support the conversion between strings and
 .Vt au_mask_t
 values.
@@ -122,14 +122,14 @@ by a mask:
 .Xr au_preselect 3 ,
 .Xr getauditflagsbin 3 ,
 .Xr getauditflagschar 3 .
-.Ss Audit Notification Interfaces
+.Ss Audit Notification Interfaces (NOW DEPRECATED)
 Audit notification routines track audit state in a form permitting efficient
 update, avoiding frequent system calls to check the kernel audit state:
 .Xr au_get_state 3 ,
 .Xr au_notify_initialize 3 ,
 .Xr au_notify_terminate 3 .
 These interfaces are implemented only for Darwin/Mac OS X.
-.Ss Audit Token Interface
+.Ss Audit Token Interface (NOW DEPRECATED)
 Audit token interfaces permit the creation of tokens for use in creating
 audit records for submission to event streams.
 Each interface converts a C type to its
@@ -180,7 +180,7 @@ representation:
 .Xr au_to_text 3 ,
 .Xr au_to_trailer 3 ,
 .Xr au_to_zonename 3 .
-.Ss Audit User Interfaces
+.Ss Audit User Interfaces (NOW DEPRECATED)
 Audit user interfaces support the look up of information from the
 .Xr audit_user 5
 database:
@@ -192,7 +192,7 @@ database:
 .Xr getauusernam 3 ,
 .Xr getauusernam_r 3 ,
 .Xr getfauditflags 3 .
-.Ss Audit Constant Conversion Interfaces
+.Ss Audit Constant Conversion Interfaces (NOW DEPRECATED)
 These functions convert between BSM and local constants, including the
 .Xr errno 2
 number, socket type, and protocol famil spaces, and must be used to generate

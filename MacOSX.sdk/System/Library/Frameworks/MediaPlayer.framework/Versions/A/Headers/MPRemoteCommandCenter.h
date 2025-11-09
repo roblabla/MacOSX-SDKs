@@ -58,7 +58,8 @@ MP_API(ios(7.1), tvos(7.1), macos(10.12.2), watchos(5.0))
 @property (nonatomic, readonly) MPFeedbackCommand *bookmarkCommand;
 
 + (MPRemoteCommandCenter *)sharedCommandCenter;
-- (instancetype)init NS_UNAVAILABLE;
+
+MP_INIT_UNAVAILABLE
 
 @end
 

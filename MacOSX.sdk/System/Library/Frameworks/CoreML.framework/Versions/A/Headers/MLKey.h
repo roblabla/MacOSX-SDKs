@@ -13,7 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  * A class representing key used to store any value against
  */
-API_AVAILABLE(macos(10.15), ios(13.0))
+ML_EXPORT
+API_AVAILABLE(macos(10.15), ios(13.0), tvos(14.0))
 @interface MLKey : NSObject <NSCopying, NSSecureCoding>
 
 // Name of the key

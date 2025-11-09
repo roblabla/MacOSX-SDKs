@@ -18,9 +18,9 @@ typedef NS_ENUM(NSInteger, NSUserNotificationActivationType) {
     NSUserNotificationActivationTypeActionButtonClicked = 2,
     NSUserNotificationActivationTypeReplied API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, watchos, tvos) = 3,
     NSUserNotificationActivationTypeAdditionalActionClicked API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos) = 4,
-  } API_DEPRECATED("All NSUserNotifications API should be replaced with UserNotifications.frameworks API", macos(10.8, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, watchos, tvos);
+  } API_DEPRECATED("All NSUserNotifications API should be replaced with UserNotifications.frameworks API", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
-API_DEPRECATED("All NSUserNotifications API should be replaced with UserNotifications.frameworks API", macos(10.8, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, watchos, tvos)
+API_DEPRECATED("All NSUserNotifications API should be replaced with UserNotifications.frameworks API", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface NSUserNotification : NSObject <NSCopying> {
 @private
     id _internal;
@@ -99,7 +99,7 @@ API_DEPRECATED("All NSUserNotifications API should be replaced with UserNotifica
 @end
 
 // An action shown to the user as part of a NSUserNotification in the additionalActions property.
-API_DEPRECATED("All NSUserNotifications API should be replaced with UserNotifications.frameworks API", macos(10.10, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, watchos, tvos)
+API_DEPRECATED("All NSUserNotifications API should be replaced with UserNotifications.frameworks API", macos(10.10, 11.0)) API_UNAVAILABLE(ios, watchos, tvos)
 
 @interface NSUserNotificationAction : NSObject <NSCopying>
 
@@ -112,9 +112,9 @@ API_DEPRECATED("All NSUserNotifications API should be replaced with UserNotifica
 
 @end
 
-FOUNDATION_EXPORT NSString * const NSUserNotificationDefaultSoundName API_DEPRECATED("All NSUserNotifications API should be replaced with UserNotifications.frameworks API", macos(10.8, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString * const NSUserNotificationDefaultSoundName API_DEPRECATED("All NSUserNotifications API should be replaced with UserNotifications.frameworks API", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
-API_DEPRECATED("All NSUserNotifications API should be replaced with UserNotifications.frameworks API", macos(10.8, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, watchos, tvos)
+API_DEPRECATED("All NSUserNotifications API should be replaced with UserNotifications.frameworks API", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface NSUserNotificationCenter : NSObject {
 @private
     id _internal;
@@ -163,14 +163,14 @@ API_DEPRECATED("All NSUserNotifications API should be replaced with UserNotifica
 @optional
 
 // Sent to the delegate when a notification delivery date has arrived. At this time, the notification has either been presented to the user or the notification center has decided not to present it because your application was already frontmost.
-- (void)userNotificationCenter:(NSUserNotificationCenter *)center didDeliverNotification:(NSUserNotification *)notification API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+- (void)userNotificationCenter:(NSUserNotificationCenter *)center didDeliverNotification:(NSUserNotification *)notification API_DEPRECATED("All NSUserNotifications API should be replaced with UserNotifications.frameworks API", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 // Sent to the delegate when a user clicks on a notification in the notification center. This would be a good time to take action in response to user interacting with a specific notification.
 // Important: If want to take an action when your application is launched as a result of a user clicking on a notification, be sure to implement the applicationDidFinishLaunching: method on your NSApplicationDelegate. The notification parameter to that method has a userInfo dictionary, and that dictionary has the NSApplicationLaunchUserNotificationKey key. The value of that key is the NSUserNotification that caused the application to launch. The NSUserNotification is delivered to the NSApplication delegate because that message will be sent before your application has a chance to set a delegate for the NSUserNotificationCenter.
-- (void)userNotificationCenter:(NSUserNotificationCenter *)center didActivateNotification:(NSUserNotification *)notification API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+- (void)userNotificationCenter:(NSUserNotificationCenter *)center didActivateNotification:(NSUserNotification *)notification API_DEPRECATED("All NSUserNotifications API should be replaced with UserNotifications.frameworks API", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 // Sent to the delegate when the Notification Center has decided not to present your notification, for example when your application is front most. If you want the notification to be displayed anyway, return YES.
-- (BOOL)userNotificationCenter:(NSUserNotificationCenter *)center shouldPresentNotification:(NSUserNotification *)notification API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+- (BOOL)userNotificationCenter:(NSUserNotificationCenter *)center shouldPresentNotification:(NSUserNotification *)notification API_DEPRECATED("All NSUserNotifications API should be replaced with UserNotifications.frameworks API", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @end
 

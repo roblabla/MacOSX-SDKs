@@ -2,7 +2,7 @@
 //  INRelevanceProvider.h
 //  Intents
 //
-//  Copyright (c) 2016-2019 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2020 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -56,28 +56,28 @@ typedef NS_ENUM(NSInteger, INDailyRoutineSituation) {
     /*!
      @abstract A situation that occurs when the user is commuting, for example driving into work.
      */
-    INDailyRoutineSituationCommute API_AVAILABLE(ios(13.0), watchos(6.0)) API_UNAVAILABLE(macosx),
+    INDailyRoutineSituationCommute API_AVAILABLE(ios(13.0), watchos(6.0)) API_UNAVAILABLE(macos),
     
     /*!
      @abstract A situation that occurs when the user connects headphones.
      */
-    INDailyRoutineSituationHeadphonesConnected API_AVAILABLE(ios(13.0), watchos(6.0)) API_UNAVAILABLE(macosx),
+    INDailyRoutineSituationHeadphonesConnected API_AVAILABLE(ios(13.0), watchos(6.0)) API_UNAVAILABLE(macos),
     
     /*!
      @abstract A situation that occurs when the user is currently in a workout.
      */
-    INDailyRoutineSituationActiveWorkout API_AVAILABLE(ios(13.0), watchos(6.0)) API_UNAVAILABLE(macosx),
+    INDailyRoutineSituationActiveWorkout API_AVAILABLE(ios(13.0), watchos(6.0)) API_UNAVAILABLE(macos),
     
     /*!
      @abstract A situation that occurs when the user is expected to perform more physical activity during the day.
      */
-    INDailyRoutineSituationPhysicalActivityIncomplete API_AVAILABLE(ios(13.0), watchos(6.0)) API_UNAVAILABLE(macosx),
-} NS_SWIFT_NAME(INDailyRoutineRelevanceProvider.Situation) API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macosx);
+    INDailyRoutineSituationPhysicalActivityIncomplete API_AVAILABLE(ios(13.0), watchos(6.0)) API_UNAVAILABLE(macos),
+} NS_SWIFT_NAME(INDailyRoutineRelevanceProvider.Situation) API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macos, tvos);
 
 /*!
  @abstract A relevance provider represents a piece of relevance information that can be used by Siri when predicting relevant shortcuts.
  */
-API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macosx)
+API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macos, tvos)
 @interface INRelevanceProvider : NSObject <NSCopying, NSSecureCoding>
 
 /*!
@@ -90,7 +90,7 @@ API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macosx)
 /*!
  @abstract A relevance provider to indicate relevance at a date or date interval.
  */
-API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macosx)
+API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macos, tvos)
 @interface INDateRelevanceProvider : INRelevanceProvider
 
 /*!
@@ -115,7 +115,7 @@ API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macosx)
  @abstract A relevance provider to indicate relevance at a specific location.
  @note Your app needs Always or When in Use location authorization to use this relevance provider.
  */
-API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macosx)
+API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macos, tvos)
 @interface INLocationRelevanceProvider : INRelevanceProvider
 
 /*!
@@ -135,7 +135,7 @@ API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macosx)
  @abstract A relevance provider that specifies relevance during a specific situation.
  @seealso INDailyRoutineSituation
  */
-API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macosx)
+API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macos, tvos)
 @interface INDailyRoutineRelevanceProvider : INRelevanceProvider
 
 /*!

@@ -1,19 +1,35 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 8F08AEF6-A380-3811-BAF0-D80E7C84B5AD', 'x86_64: 8F08AEF6-A380-3811-BAF0-D80E7C84B5AD' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           68E993AB-A3D1-3750-A25E-9DF0391BC51B
+  - target:          x86_64-maccatalyst
+    value:           68E993AB-A3D1-3750-A25E-9DF0391BC51B
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           5C61F77F-4052-3072-9342-5C045AE474C1
+  - target:          arm64e-maccatalyst
+    value:           5C61F77F-4052-3072-9342-5C045AE474C1
 install-name:    '/System/Library/PrivateFrameworks/CoreNLP.framework/Versions/A/CoreNLP'
-current-version: 211
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 245
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _NLCNNModelCopyFeatureRepresentation, _NLCNNModelCopyFeatureRepresentationLayers, 
                        _NLCNNModelCreateCharacterBasedModel, _NLCNNModelCreateWordBasedModel, 
                        _NLEmbeddingCopyAllWordVectors, _NLEmbeddingCopyNeighbors, 
                        _NLEmbeddingCopyNeighborsWithDistances, _NLEmbeddingCopyVersion, 
                        _NLEmbeddingCopyWordClusterIDs, _NLEmbeddingCopyWordVector, 
-                       _NLEmbeddingGetDistance, _NLGazetteerCopyAvailableLabels, 
-                       _NLGazetteerCopyCompressedModel, _NLGazetteerCopyLabel, _NLGazetteerCopyLocale, 
-                       _NLGazetteerCreate, _NLGazetteerSaveCompressedModel, _NLJapaneseTokenStorageClose, 
+                       _NLEmbeddingGetDistance, _NLEmotionAnger, _NLEmotionFear, 
+                       _NLEmotionHappiness, _NLEmotionLove, _NLEmotionNeutral, _NLEmotionSadness, 
+                       _NLEmotionSurprise, _NLGazetteerCopyAvailableLabels, _NLGazetteerCopyCompressedModel, 
+                       _NLGazetteerCopyLabel, _NLGazetteerCopyLocale, _NLGazetteerCreate, 
+                       _NLGazetteerSaveCompressedModel, _NLJapaneseTokenStorageClose, 
                        _NLJapaneseTokenStorageCopyPlistAtIndex, _NLJapaneseTokenStorageGetFileID, 
                        _NLJapaneseTokenStorageGetRecordCount, _NLJapaneseTokenStorageOpen, 
                        _NLLanguageIdentifierConsumeCharacters, _NLLanguageIdentifierConsumeString, 
@@ -36,14 +52,16 @@ exports:
                        _NLModelContainerCreateWithContainerData, _NLModelContainerCreateWithContentsOfURL, 
                        _NLModelContainerCreateWithSplitContainerData, _NLModelContainerGetModelDataCount, 
                        _NLModelContainerGetRevision, _NLModelContainerGetSubtype, 
-                       _NLModelContainerGetType, _NLModelContainerWriteToURL, _NLModelCopyExtractedFeatures, 
-                       _NLModelCopyModelData, _NLModelCopyPredictedLabels, _NLModelCreate, 
-                       _NLModelTrainerCreate, _NLModelTrainerTrainAndCopyModelData, 
-                       _NLNamedEntityOrganizationName, _NLNamedEntityPersonalName, 
-                       _NLNamedEntityPlaceName, _NLStringEmbeddingCopyAllWordVectors, 
-                       _NLStringEmbeddingCopyModelLocale, _NLStringEmbeddingCopyNeighbors, 
-                       _NLStringEmbeddingCopyNeighborsForVector, _NLStringEmbeddingCopyNeighborsForVectorWithDistances, 
-                       _NLStringEmbeddingCopyNeighborsWithDistances, _NLStringEmbeddingCopySupportedVersions, 
+                       _NLModelContainerGetType, _NLModelContainerWriteToURL, _NLModelCopyContainer, 
+                       _NLModelCopyModelData, _NLModelCopyPredictedLabels, _NLModelCopyPredictedLabelsAndProbabilities, 
+                       _NLModelCreate, _NLModelCreateWithContainer, _NLModelTrainerCreate, 
+                       _NLModelTrainerTrainAndCopyContainer, _NLModelTrainerTrainAndCopyContainerAndPredictedLabels, 
+                       _NLModelTrainerTrainAndCopyModelData, _NLNamedEntityOrganizationName, 
+                       _NLNamedEntityPersonalName, _NLNamedEntityPlaceName, _NLStringEmbeddingCopyAllWordVectors, 
+                       _NLStringEmbeddingCopyCurrentVersion, _NLStringEmbeddingCopyModelLocale, 
+                       _NLStringEmbeddingCopyNeighbors, _NLStringEmbeddingCopyNeighborsForVector, 
+                       _NLStringEmbeddingCopyNeighborsForVectorWithDistances, _NLStringEmbeddingCopyNeighborsWithDistances, 
+                       _NLStringEmbeddingCopySupportedVersions, _NLStringEmbeddingCopyVector, 
                        _NLStringEmbeddingCopyVersion, _NLStringEmbeddingCopyWordClusterIDs, 
                        _NLStringEmbeddingCopyWordVector, _NLStringEmbeddingCreate, 
                        _NLStringEmbeddingCreateFromData, _NLStringEmbeddingCreateFromFile, 
@@ -57,6 +75,7 @@ exports:
                        _NLStringTokenizerGetCurrentTokenRange, _NLStringTokenizerGetTypeID, 
                        _NLStringTokenizerGoToTokenAtIndex, _NLStringTokenizerSetString, 
                        _NLStringTokenizerSetStringWithOptions, _NLTaggerCopyAvailableTagSchemes, 
+                       _NLTaggerCopyHypothesesAtIndex, _NLTaggerCopyHypothesesForCurrentToken, 
                        _NLTaggerCopyLanguageMapAtIndex, _NLTaggerCopyTagAtIndex, 
                        _NLTaggerCopyTagForCurrentToken, _NLTaggerCreate, _NLTaggerEnumerateSubTokens, 
                        _NLTaggerEnumerateTokens, _NLTaggerGetTokenAtIndex, _NLTaggerSetGazetteers, 
@@ -84,18 +103,29 @@ exports:
                        _kNLGazetteerCompressedModelData, _kNLGazetteerCompressedModelURL, 
                        _kNLGazetteerEntities, _kNLGazetteerFalsePositiveRate, _kNLGazetteerLocale, 
                        _kNLModelAuthorKey, _kNLModelContainerErrorDomain, _kNLModelCreationDateKey, 
-                       _kNLModelDescriptionKey, _kNLModelInputLabelArrayKey, _kNLModelLanguageKey, 
-                       _kNLModelLicenseKey, _kNLModelOutputLabelArrayKey, _kNLModelSampleDataFeatureArrayKey, 
-                       _kNLModelSampleDataLabelArrayKey, _kNLModelSampleDataRangeLengthArrayKey, 
-                       _kNLModelSampleDataRangeLocationArrayKey, _kNLModelSampleDataTextKey, 
-                       _kNLModelTrainerFeatureCategoryKey, _kNLModelTrainerLanguageKey, 
-                       _kNLModelTrainerMaxIterationNumberKey, _kNLModelTrainerRegularizationCoefficientKey, 
-                       _kNLModelUnknownRevision, _kNLModelVersionStringKey, _kNLStringEmbeddingModelData, 
-                       _kNLStringEmbeddingModelLocale, _kNLStringEmbeddingModelPath, 
-                       _kNLStringEmbeddingModelType, _kNLStringEmbeddingModelTypeCompressedWordEmbedding, 
-                       _kNLStringEmbeddingModelTypeContextualWordEmbedding, _kNLStringEmbeddingModelVersion, 
+                       _kNLModelDescriptionKey, _kNLModelGoldTrainingLabelsKey, _kNLModelGoldValidationLabelsKey, 
+                       _kNLModelInputLabelArrayKey, _kNLModelLanguageKey, _kNLModelLicenseKey, 
+                       _kNLModelOutputLabelArrayKey, _kNLModelPredictedTrainingLabelsKey, 
+                       _kNLModelPredictedValidationLabelsKey, _kNLModelSampleDataFeatureArrayKey, 
+                       _kNLModelSampleDataLabelArrayKey, _kNLModelSampleDataLabelTypesArrayKey, 
+                       _kNLModelSampleDataLabelsArrayKey, _kNLModelSampleDataProbabilitiesArrayKey, 
+                       _kNLModelSampleDataRangeLengthArrayKey, _kNLModelSampleDataRangeLocationArrayKey, 
+                       _kNLModelSampleDataTextKey, _kNLModelTrainerFeatureCategoryKey, 
+                       _kNLModelTrainerLanguageKey, _kNLModelTrainerMaxIterationNumberKey, 
+                       _kNLModelTrainerModelDataArrayKey, _kNLModelTrainerModelDataKey, 
+                       _kNLModelTrainerModelDeviceTypeKey, _kNLModelTrainerModelMetadataKey, 
+                       _kNLModelTrainerModelMethodTypeKey, _kNLModelTrainerModelParamsKey, 
+                       _kNLModelTrainerRegularizationCoefficientKey, _kNLModelTrainingSentenceIdsKey, 
+                       _kNLModelTrainingSentencesKey, _kNLModelTrainingTokenLengthsKey, 
+                       _kNLModelTrainingTokenLocationsKey, _kNLModelUnknownRevision, 
+                       _kNLModelValidationSentenceIdsKey, _kNLModelValidationSentencesKey, 
+                       _kNLModelValidationTokenLengthsKey, _kNLModelValidationTokenLocationsKey, 
+                       _kNLModelVersionStringKey, _kNLStringEmbeddingModelData, _kNLStringEmbeddingModelLocale, 
+                       _kNLStringEmbeddingModelPath, _kNLStringEmbeddingModelType, 
+                       _kNLStringEmbeddingModelTypeCompressedWordEmbedding, _kNLStringEmbeddingModelTypeContextualWordEmbedding, 
+                       _kNLStringEmbeddingModelTypeSentenceEmbedding, _kNLStringEmbeddingModelVersion, 
                        _kNLStringEmbeddingNumberOfTrees, _kNLStringEmbeddingSubDimension, 
-                       _kNLTagSchemeDerivedSubToken, _kNLTagSchemeInternalClass, 
+                       _kNLTagSchemeDerivedSubToken, _kNLTagSchemeEmotion, _kNLTagSchemeInternalClass, 
                        _kNLTagSchemeLanguage, _kNLTagSchemeLemma, _kNLTagSchemeLexicalClass, 
                        _kNLTagSchemeNamedEntity, _kNLTagSchemeNamedEntityOrLexicalClass, 
                        _kNLTagSchemeScript, _kNLTagSchemeSentiment, _kNLTagSchemeTokenType, 
@@ -104,5 +134,6 @@ exports:
                        _kNLTaggerOptionCustomModelPropertyGazetteerPathKey, _kNLTaggerOptionCustomModelPropertyLanguageKey, 
                        _kNLTaggerOptionCustomModelPropertyModelPathKey, _kNLTaggerOptionCustomModelPropertySchemeKey, 
                        _kNLTaggerOptionLSTMLanguageIdentifierKey, _kNLTaggerOptionLegacyTokenBreakKey, 
-                       _kNLTaggerOptionLineBreakKey ]
+                       _kNLTaggerOptionLineBreakKey, _kNLTaggerOptionRetainStringKey ]
+    objc-classes:    [ NLResourceWrapper ]
 ...

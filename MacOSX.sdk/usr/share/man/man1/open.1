@@ -20,6 +20,10 @@
 .Op Fl s Ar sdk
 .Op Fl b Ar bundle_identifier
 .Op Fl a Ar application
+.Op Fl Fl env Ar VAR
+.Op Fl Fl stderr Ar PATH
+.Op Fl Fl stdin Ar PATH
+.Op Fl Fl stdout Ar PATH
 .Ar
 .Op Fl Fl args Ar arg1 ...
 .Sh DESCRIPTION
@@ -79,6 +83,21 @@ For -h, partial or full SDK name to use; if supplied, only SDKs whose names cont
 All remaining arguments are passed to the opened application in the argv parameter to main().  These arguments are not opened or interpreted by the
 .Nm
 tool.
+.It Fl Fl env Ar VAR
+Adds
+.Ar VAR
+to the environment of the launched application. 
+.Ar VAR
+should be formatted NAME=VALUE or NAME.
+.It Fl Fl stdin Ar PATH
+Launches the application with stdin connected to
+.Ar PATH .
+.It Fl Fl stdout Ar PATH
+Launches the application with stdout connected to
+.Ar PATH .
+.It Fl Fl stderr Ar PATH
+Launches the application with stderr connected to
+.Ar PATH .
 .El
 .Sh EXAMPLES
 "open '/Volumes/Macintosh HD/foo.txt'" opens the document in the default application for its type (as determined by LaunchServices).
@@ -102,6 +121,8 @@ tool.
 "open -h NSView" lists headers whose names contain NSView and allows you to choose which ones to open.
 .Pp
 "open -h NSView.h" immediately opens NSView.h.
+.Pp
+"open --env MallocStackLogging=YES -b com.apple.TextEdit" launches TextEdit with the environment variable "MallocStackLogging" set to "YES"
 .Pp
 "open -h NSView -s OSX10.12" lists headers whose names contain NSView in the MacOSX 10.12 SDK and allows you to choose which ones to open.
 .Pp

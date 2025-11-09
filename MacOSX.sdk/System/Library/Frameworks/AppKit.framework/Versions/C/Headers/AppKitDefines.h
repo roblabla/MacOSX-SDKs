@@ -44,5 +44,9 @@
 #define APPKIT_IVAR DEPRECATED_MSG_ATTRIBUTE("AppKit instance variables are private, and the ability to access them will be removed in a future release.")
 #endif
 
+
+#define APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST API_UNAVAILABLE_BEGIN(ios)
+
+
 #endif // _APPKITDEFINES_H
 

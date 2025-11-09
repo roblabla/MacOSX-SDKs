@@ -7,6 +7,7 @@
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
+API_UNAVAILABLE_BEGIN(ios)
 
 /* The NCWidgetController provides an interface available to both the widget
    and the providing app can coordinate whether there is widget content
@@ -18,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
    Later, should the providing app determine that the widget should have content
    it can update the widget, even if the widget is no longer running. */
 
-NS_CLASS_AVAILABLE_MAC(10_10)
+API_DEPRECATED("Use WidgetKit instead. Today View extensions have been deprecated.", macos(10.10, 11.0))
 @interface NCWidgetController : NSObject
 
 + (instancetype)widgetController;
@@ -33,4 +34,5 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 
 @end
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

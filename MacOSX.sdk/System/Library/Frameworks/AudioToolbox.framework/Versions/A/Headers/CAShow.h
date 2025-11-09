@@ -1,4 +1,4 @@
-#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/CAShow.h>)
+#if (defined(__USE_PUBLIC_HEADERS__) && __USE_PUBLIC_HEADERS__) || (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/CAShow.h>)
 /*!
 	@file		CAShow.h
 	@framework	AudioToolbox.framework
@@ -12,6 +12,7 @@
 #include <Availability.h>
 #include <CoreFoundation/CFBase.h>
 #include <os/base.h>
+#include <stdio.h>
 
 CF_ASSUME_NONNULL_BEGIN
 

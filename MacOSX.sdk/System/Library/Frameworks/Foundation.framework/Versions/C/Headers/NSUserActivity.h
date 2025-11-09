@@ -103,10 +103,10 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 
 @property (getter=isEligibleForPrediction) BOOL eligibleForPrediction API_AVAILABLE( ios(12.0), watchos(5.0) ) API_UNAVAILABLE( macos, tvos );
 
-@property (copy, nullable) NSUserActivityPersistentIdentifier persistentIdentifier  API_AVAILABLE( macos(15.0), ios(12.0), watchos(5.0) ) API_UNAVAILABLE( tvos );
+@property (copy, nullable) NSUserActivityPersistentIdentifier persistentIdentifier  API_AVAILABLE( macos(10.15), ios(12.0), watchos(5.0) ) API_UNAVAILABLE( tvos );
 
-+(void) deleteSavedUserActivitiesWithPersistentIdentifiers:(NSArray<NSUserActivityPersistentIdentifier>*) persistentIdentifiers completionHandler:(void(^)(void))handler API_AVAILABLE( macos(15.0), ios(12.0), watchos(5.0) ) API_UNAVAILABLE( tvos );
-+(void) deleteAllSavedUserActivitiesWithCompletionHandler:(void(^)(void))handler API_AVAILABLE( macos(15.0), ios(12.0), watchos(5.0) ) API_UNAVAILABLE( tvos );
++(void) deleteSavedUserActivitiesWithPersistentIdentifiers:(NSArray<NSUserActivityPersistentIdentifier>*) persistentIdentifiers completionHandler:(void(^)(void))handler API_AVAILABLE( macos(10.15), ios(12.0), watchos(5.0) ) API_UNAVAILABLE( tvos );
++(void) deleteAllSavedUserActivitiesWithCompletionHandler:(void(^)(void))handler API_AVAILABLE( macos(10.15), ios(12.0), watchos(5.0) ) API_UNAVAILABLE( tvos );
 
 @end
 

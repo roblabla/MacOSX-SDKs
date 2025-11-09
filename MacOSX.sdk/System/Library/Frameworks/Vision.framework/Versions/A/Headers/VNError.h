@@ -30,5 +30,6 @@ typedef NS_ENUM(NSInteger, VNErrorCode)
     VNErrorInvalidArgument,
     VNErrorInvalidModel,
     VNErrorUnsupportedRevision API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0)),
-    VNErrorDataUnavailable  API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0))
+    VNErrorDataUnavailable  API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)),
+    VNErrorTimeStampNotFound  API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 };

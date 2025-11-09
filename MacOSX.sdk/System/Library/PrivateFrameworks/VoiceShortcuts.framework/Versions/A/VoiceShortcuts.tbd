@@ -1,44 +1,56 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 14CE48BF-FE83-36CA-9C3A-BAF37BE515A4' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           898086B6-FA3C-3D12-BB5E-33CDF6843EFA
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           68F682A9-E536-3D9F-909D-8A601FE75C81
 install-name:    '/System/Library/PrivateFrameworks/VoiceShortcuts.framework/Versions/A/VoiceShortcuts'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _VCAccessSyncServiceState, _VCAssertUniqueMessageTypes, _VCClearSyncServiceState, 
                        _VCDarwinNotificationStateUserInfoKey, _VCDescriptionForChange, 
                        _VCDescriptionForChangeType, _VCDescriptionForMessageType, 
-                       _VCIntentDefinitionChangeAppInfoFilename, _VCLSDatabaseSequenceNumberKey, 
-                       _VCLSDatabaseUUIDKey, _VCLatestUniqueChanges, _VCLocaleIsRTL, 
+                       _VCGetLocalSpotlightState, _VCIntentDefinitionChangeAppInfoFilename, 
+                       _VCLSDatabaseSequenceNumberKey, _VCLSDatabaseUUIDKey, _VCLatestUniqueChanges, 
+                       _VCLocalSpotlightStateFileURL, _VCLocaleIsRTL, _VCNotificationTitleForTriggerWithPendingCount, 
                        _VCOSTransactionWithName, _VCPBChangeReadFrom, _VCPBChangeTypeFromSYChangeType, 
                        _VCPBIntentDefinitionChangeReadFrom, _VCPBIntentDefinitionFileReadFrom, 
                        _VCPBIntentDefinitionReadFrom, _VCPBSpotlightBookmarkReadFrom, 
-                       _VCPBSpotlightPairReadFrom, _VCPBVoiceShortcutChangeReadFrom, 
-                       _VCPBVoiceShortcutReadFrom, _VCPBWorkflowReadFrom, _VCPartitionMessages, 
+                       _VCPBSpotlightPairReadFrom, _VCPBWorkflowReadFrom, _VCPartitionMessages, 
                        _VCSYChangeClassFromMessageType, _VCSpotlightDomainIdentifier, 
-                       _VCXPCEventAssistantPreferencesDidChange, _VCXPCEventFirstUnlock, 
-                       _VCXPCEventLaunchServicesApplicationRegistered, _VCXPCEventLaunchServicesApplicationStateChanged, 
-                       _VCXPCEventLaunchServicesApplicationUnregistered, _VCXPCEventPairedDeviceDidChangeVersion, 
-                       _VCXPCEventStreamDarwinNotifications, _VCXPCEventStreamDistributedNotifications, 
-                       _VoiceShortcutsVersionNumber, _VoiceShortcutsVersionString ]
-    objc-classes:    [ VCCKNotificationCenter, VCCKVoiceShortcutFetcher, VCCoreDataStore, 
-                       VCCoreDuetListener, VCDaemon, VCDaemonDatabaseProvider, VCDaemonSyncDataEndpoint, 
-                       VCDaemonXPCEventHandler, VCDailyMetricCheckIn, VCDailyMetricSubmitter, 
-                       VCDatabaseChange, VCDatabaseSyncDataHandler, VCGuardedPreferencesManager, 
-                       VCIDApplicationSyncState, VCIntentDefinitionChange, VCIntentDefinitionManager, 
-                       VCIntentDefinitionSyncDataHandler, VCIntentDefinitionSyncState, 
+                       _VCVoiceShortcutFromWorkflow, _VCVoiceShortcutsFromWorkflows, 
+                       _VCWorkflowReferencesForAccessSpecifier, _VCXPCEventAssistantPreferencesDidChange, 
+                       _VCXPCEventFirstUnlock, _VCXPCEventLaunchServicesApplicationRegistered, 
+                       _VCXPCEventLaunchServicesApplicationStateChanged, _VCXPCEventLaunchServicesApplicationUnregistered, 
+                       _VCXPCEventPairedDeviceDidChangeVersion, _VCXPCEventStreamDarwinNotifications, 
+                       _VCXPCEventStreamDistributedNotifications, _VCXPCEventTimeChange, 
+                       _VCXPCEventTimezoneChange, _VoiceShortcutsVersionNumber, _VoiceShortcutsVersionString, 
+                       _WFDialogNotificationUserInfoRunningContextKey, _WFDialogXPCHostInterface, 
+                       _WFDialogXPCInterface, _WFEventInfoKeyNewValue, _WFEventInfoKeyOldValue, 
+                       _WFLogCategoryDefaultShortcuts, _WFLogCategoryUserNotificationManager, 
+                       _WFWorkflowRunCoordinatorErrorDomain ]
+    objc-classes:    [ VCCKApplicationStateObserver, VCCKShortcutSyncCoordinator, 
+                       VCCKShortcutSyncService, VCCKSyncEngine, VCCoreDuetListener, 
+                       VCDaemon, VCDaemonDatabaseProvider, VCDaemonSyncDataEndpoint, 
+                       VCDaemonXPCEventHandler, VCDailyMetricSubmitter, VCDatabaseChange, 
+                       VCDatabaseSyncDataHandler, VCGuardedPreferencesManager, VCIDApplicationSyncState, 
+                       VCIntentDefinitionChange, VCIntentDefinitionManager, VCIntentDefinitionSyncDataHandler, 
+                       VCIntentDefinitionSyncState, VCMetricCheckIn, VCMetricSubmitter, 
                        VCPBChange, VCPBIntentDefinition, VCPBIntentDefinitionChange, 
                        VCPBIntentDefinitionFile, VCPBSpotlightBookmark, VCPBSpotlightPair, 
-                       VCPBVoiceShortcut, VCPBVoiceShortcutChange, VCPBWorkflow, 
-                       VCRealmDataStore, VCRecordZoneParser, VCSYChangeEnumerator, 
-                       VCShareSheetWorkflowStatusUpdater, VCShortcutsAssetUpdater, 
-                       VCSpotlightState, VCSpotlightSyncOperation, VCSpotlightSyncService, 
-                       VCSyncDataHandler, VCUserDefaults, VCUserNotificationManager, 
-                       VCVoiceShortcutBlacklist, VCVoiceShortcutChange, VCVoiceShortcutManagedObject, 
-                       VCVoiceShortcutManager, VCVoiceShortcutManagerAccessWrapper, 
-                       VCVoiceShortcutPeaceMigrator, VCVoiceShortcutSuggestionListManagedObject, 
-                       VCVoiceShortcutSyncStateManagedObject, VCWorkflowChange, VCWorkflowSyncDataHandler, 
-                       VCXPCServer ]
+                       VCPBWorkflow, VCSYChangeEnumerator, VCSpotlightState, VCSpotlightSyncOperation, 
+                       VCSpotlightSyncService, VCSyncDataHandler, VCTriggerEventQueue, 
+                       VCTriggerEventRunner, VCTriggerNotificationDebouncer, VCTriggerNotificationDebouncerItem, 
+                       VCUserDefaults, VCUserNotificationManager, VCVoiceShortcutManager, 
+                       VCVoiceShortcutManagerAccessWrapper, VCWeeklyMetricSubmitter, 
+                       VCWorkflowChange, VCWorkflowSyncDataHandler, VCXPCServer, 
+                       WFDialogNotificationManager, WFDialogPresentationManager, 
+                       WFPresentedDialog, WFQueuedRunRequest, WFShareSheetWorkflowProvider, 
+                       WFUserNotificationManager, WFWorkflowRunCoordinator, WFXPCActivityScheduler ]
     objc-ivars:      [ VCPBChange._changeType, VCPBChange._message, VCPBChange._messageType, 
                        VCPBChange._uniqueID, VCPBIntentDefinition._associatedBundleID, 
                        VCPBIntentDefinition._files, VCPBIntentDefinitionChange._associatedBundleID, 
@@ -46,18 +58,12 @@ exports:
                        VCPBIntentDefinitionFile._data, VCPBIntentDefinitionFile._name, 
                        VCPBSpotlightBookmark._identifier, VCPBSpotlightBookmark._pairs, 
                        VCPBSpotlightPair._spotlightHash, VCPBSpotlightPair._workflowID, 
-                       VCPBVoiceShortcut._associatedAppBundleIdentifier, VCPBVoiceShortcut._dateCreated, 
-                       VCPBVoiceShortcut._dateLastModified, VCPBVoiceShortcut._identifier, 
-                       VCPBVoiceShortcut._keyImageData, VCPBVoiceShortcut._phrase, 
-                       VCPBVoiceShortcut._serializedWorkflowData, VCPBVoiceShortcut._shortcutDescription, 
-                       VCPBVoiceShortcut._shortcutName, VCPBVoiceShortcutChange._changeType, 
-                       VCPBVoiceShortcutChange._syncMetadata, VCPBVoiceShortcutChange._voiceShortcut, 
-                       VCPBVoiceShortcutChange._voiceShortcutIdentifier, VCPBWorkflow._accessResourcePerWorkflowStateData, 
-                       VCPBWorkflow._actionsData, VCPBWorkflow._creationDate, VCPBWorkflow._has, 
-                       VCPBWorkflow._iconColor, VCPBWorkflow._iconGlyph, VCPBWorkflow._importQuestionsData, 
+                       VCPBWorkflow._accessResourcePerWorkflowStateData, VCPBWorkflow._actionsData, 
+                       VCPBWorkflow._creationDate, VCPBWorkflow._has, VCPBWorkflow._iconColor, 
+                       VCPBWorkflow._iconGlyph, VCPBWorkflow._importQuestionsData, 
                        VCPBWorkflow._inputClasses, VCPBWorkflow._integerLastMigratedClientVersion, 
                        VCPBWorkflow._integerMinimumClientVersion, VCPBWorkflow._lastMigratedClientVersion, 
                        VCPBWorkflow._minimumClientVersion, VCPBWorkflow._modificationDate, 
                        VCPBWorkflow._name, VCPBWorkflow._remoteQuarantineStatus, 
-                       VCPBWorkflow._workflowTypes ]
+                       VCPBWorkflow._subtitle, VCPBWorkflow._workflowTypes ]
 ...

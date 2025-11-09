@@ -10,6 +10,7 @@
 @class CKRecordZoneID;
 
 NS_ASSUME_NONNULL_BEGIN
+
 API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
 @interface CKRecordID : NSObject <NSSecureCoding, NSCopying>
 
@@ -23,8 +24,9 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
 
 - (instancetype)initWithRecordName:(NSString *)recordName zoneID:(CKRecordZoneID *)zoneID NS_DESIGNATED_INITIALIZER;
 
-@property (nonatomic, readonly, strong) NSString *recordName;
-@property (nonatomic, readonly, strong) CKRecordZoneID *zoneID;
+@property (nonatomic, readonly, copy) NSString *recordName;
+@property (nonatomic, readonly, copy) CKRecordZoneID *zoneID;
 
 @end
+
 NS_ASSUME_NONNULL_END

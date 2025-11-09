@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVAssetReader.h>)
 /*
 	File:  AVAssetReader.h
 
@@ -208,3 +209,7 @@ AV_INIT_UNAVAILABLE
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCore/AVAssetReader.h>
+#endif

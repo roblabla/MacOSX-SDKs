@@ -41,6 +41,9 @@ Protocols:
       - Selector: "lockDFSIDWithRequestFlag:completionHandler:"
         MethodKind: Instance
         SwiftName: "lockDFSID(requestFlags:completionHandler:)"
+      - Selector: "lockDSFIDWithRequestFlag:completionHandler:"
+        MethodKind: Instance
+        SwiftName: "lockDSFID(requestFlags:completionHandler:)"
       - Selector: "getSystemInfoWithRequestFlag:completionHandler:"
         MethodKind: Instance
         SwiftName: "getSystemInfo(requestFlags:completionHandler:)"
@@ -59,9 +62,40 @@ Protocols:
       - Selector: "extendedLockBlockWithRequestFlags:blockNumber:completionHandler:"
         MethodKind: Instance
         SwiftName: "extendedLockBlock(requestFlags:blockNumber:completionHandler:)"
+      - Selector: "fastReadMultipleBlocksWithRequestFlag:blockRange:completionHandler:"
+        MethodKind: Instance
+        SwiftPrivate: true
       - Selector: "extendedReadMultipleBlocksWithRequestFlags:blockRange:completionHandler:"
         MethodKind: Instance
-        SwiftName: "extendedReadMultipleBlocks(requestFlags:blockRange:completionHandler:)"      
+        SwiftName: "extendedReadMultipleBlocks(requestFlags:blockRange:completionHandler:)"
+      - Selector: "extendedWriteMultipleBlocksWithRequestFlags:blockRange:dataBlocks:completionHandler:"
+        MethodKind: Instance
+        SwiftPrivate: true
+      - Selector: "authenticateWithRequestFlags:cryptoSuiteIdentifier:message:completionHandler:"
+        MethodKind: Instance
+        SwiftPrivate: true
+      - Selector: "keyUpdateWithRequestFlags:keyIdentifier:message:completionHandler:"
+        MethodKind: Instance
+        SwiftPrivate: true
+      - Selector: "challengeWithRequestFlags:cryptoSuiteIdentifier:message:completionHandler:"
+        MethodKind: Instance
+        SwiftPrivate: true
+      - Selector: "readBufferWithRequestFlags:completionHandler:"
+        MethodKind: Instance
+        SwiftPrivate: true
+      - Selector: "extendedGetMultipleBlockSecurityStatusWithRequestFlag:blockRange:completionHandler:"
+        MethodKind: Instance
+        SwiftPrivate: true
+      - Selector: "extendedFastReadMultipleBlocksWithRequestFlag:blockRange:completionHandler:"
+        MethodKind: Instance
+        SwiftPrivate: true
+      - Selector: "sendRequestWithFlag:commandCode:data:completionHandler:"
+        MethodKind: Instance
+        SwiftPrivate: true
+      - Selector: "getSystemInfoAndUIDWithRequestFlag:completionHandler:"
+        MethodKind: Instance
+        SwiftPrivate: true
+
   - Name: NFCISO7816Tag
     Methods:
       - Selector: "sendCommandAPDU:completionHandler:"
@@ -171,9 +205,9 @@ Classes:
     SwiftPrivate: true
 
 Tags:
-  - Name: VASMode
+  - Name: NFCVASMode
     SwiftName: NFCVASCommandConfiguration.Mode
-  - Name: VASErrorCode
+  - Name: NFCVASErrorCode
     SwiftName: NFCVASResponse.ErrorCode
   - Name: NFCPollingOption
     SwiftName: NFCTagReaderSession.PollingOption

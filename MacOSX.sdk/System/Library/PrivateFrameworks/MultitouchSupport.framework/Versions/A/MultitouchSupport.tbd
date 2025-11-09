@@ -1,11 +1,25 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 6874A93E-331E-34BA-984F-C2BC40938D9F', 'x86_64: 6874A93E-331E-34BA-984F-C2BC40938D9F' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           77F15940-B11B-3D52-94F1-4F1CA57908C6
+  - target:          x86_64-maccatalyst
+    value:           77F15940-B11B-3D52-94F1-4F1CA57908C6
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           071DD621-C30F-3F19-9EAC-720F406254F7
+  - target:          arm64e-maccatalyst
+    value:           071DD621-C30F-3F19-9EAC-720F406254F7
 install-name:    '/System/Library/PrivateFrameworks/MultitouchSupport.framework/Versions/A/MultitouchSupport'
-current-version: 3400.33
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 4400.28
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _MTAbsoluteTimeGetCurrent, _MTActuationActuate, _MTActuationCreateFromDictionary, 
                        _MTActuatorActuate, _MTActuatorClose, _MTActuatorCreateFromDeviceID, 
                        _MTActuatorCreateFromService, _MTActuatorGetDeviceID, _MTActuatorGetMTDevice, 
@@ -58,11 +72,11 @@ exports:
                        _MTDeviceSetZephyrParameter, _MTDeviceShouldDispatchNormalizedVelocity, 
                        _MTDeviceShouldResetOnButton, _MTDeviceStart, _MTDeviceStop, 
                        _MTDeviceSupportsActuation, _MTDeviceSupportsForce, _MTDeviceSupportsSilentClick, 
-                       _MTDeviceSupportsTapToWake, _MTDeviceSupportsUSBChargingNotification, 
-                       _MTDeviceSupportsWirelessChargingNotification, _MTDeviceUpdateDynamicCalibration, 
-                       _MTDeviceUpdatePowerStatistics, _MTDeviceUseContextualPower, 
-                       _MTDriverCreateResetInfo, _MTEasyInstallPrintCallbacks, _MTGetDetectableInputs, 
-                       _MTGetGenericParameterValue, _MTGetImageProcessingStepName, 
+                       _MTDeviceSupportsTapToWake, _MTDeviceSupportsTouchReadyNotification, 
+                       _MTDeviceSupportsUSBChargingNotification, _MTDeviceSupportsWirelessChargingNotification, 
+                       _MTDeviceUpdateDynamicCalibration, _MTDeviceUpdatePowerStatistics, 
+                       _MTDeviceUseContextualPower, _MTDriverCreateResetInfo, _MTEasyInstallPrintCallbacks, 
+                       _MTGetDetectableInputs, _MTGetGenericParameterValue, _MTGetImageProcessingStepName, 
                        _MTGetImageRegionName, _MTGetInputsThatSuppressFingers, _MTGetPathFrame, 
                        _MTGetPathStageName, _MTImagePrintCallback, _MTInputDetectionSetEnabled, 
                        _MTParseSensorRegionParam, _MTPathPrintCallback, _MTPath_getBreakContact, 

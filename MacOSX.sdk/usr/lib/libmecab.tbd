@@ -1,11 +1,25 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 4193E26E-BA7C-35D3-9910-B026D8012E8B', 'x86_64: 4193E26E-BA7C-35D3-9910-B026D8012E8B' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           3B8BB9E6-B761-3F9B-9A67-CD1514AE528F
+  - target:          x86_64-maccatalyst
+    value:           3B8BB9E6-B761-3F9B-9A67-CD1514AE528F
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           321B8B9B-230D-3D13-BB07-2CF1CD990167
+  - target:          arm64e-maccatalyst
+    value:           321B8B9B-230D-3D13-BB07-2CF1CD990167
 install-name:    '/usr/lib/libmecab.dylib'
-current-version: 878
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 927
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _mecab_cost_train, _mecab_destroy, _mecab_dict_gen, _mecab_dict_index, 
                        _mecab_dictionary_info, _mecab_do, _mecab_format_node, _mecab_get_feature, 
                        _mecab_get_input_code, _mecab_get_lastname_length, _mecab_get_lattice_level, 

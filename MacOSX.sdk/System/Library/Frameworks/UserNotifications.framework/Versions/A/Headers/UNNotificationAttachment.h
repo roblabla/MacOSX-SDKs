@@ -42,4 +42,3 @@ extern NSString * const UNNotificationAttachmentOptionsThumbnailClippingRectKey 
 extern NSString * const UNNotificationAttachmentOptionsThumbnailTimeKey __API_AVAILABLE(macos(10.14), ios(10.0), watchos(3.0)) __API_UNAVAILABLE(tvos);
 
 NS_ASSUME_NONNULL_END
- 

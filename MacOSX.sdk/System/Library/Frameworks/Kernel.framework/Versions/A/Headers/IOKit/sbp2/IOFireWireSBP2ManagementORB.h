@@ -189,11 +189,11 @@ protected:
     // init / destroy
     virtual IOReturn getUnitInformation( void );
     virtual IOReturn allocateResources( void );
-    virtual void free( void );
+    virtual void free( void ) APPLE_KEXT_OVERRIDE;
         
     // command execution
-    virtual IOReturn execute( void );
-    virtual IOReturn complete( IOReturn state );
+    virtual IOReturn execute( void ) APPLE_KEXT_OVERRIDE;
+    virtual IOReturn complete( IOReturn state ) APPLE_KEXT_OVERRIDE;
 
     // write complete handler
     static void writeCompleteStatic( 	void *refcon, 
@@ -320,7 +320,7 @@ public:
         @param when When retainCount == when then call free(). 
     */
     
-	virtual void release() const;
+	virtual void release() const APPLE_KEXT_OVERRIDE;
 
 protected:
 

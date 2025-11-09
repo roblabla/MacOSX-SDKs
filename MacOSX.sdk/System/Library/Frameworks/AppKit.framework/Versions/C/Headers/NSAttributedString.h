@@ -29,6 +29,7 @@ APPKIT_EXTERN NSAttributedStringKey  NSForegroundColorAttributeName API_AVAILABL
 APPKIT_EXTERN NSAttributedStringKey  NSBackgroundColorAttributeName API_AVAILABLE(macos(10.0), ios(6.0), watchos(2.0), tvos(9.0));     // NSColor, default nil: no background
 APPKIT_EXTERN NSAttributedStringKey  NSLigatureAttributeName API_AVAILABLE(macos(10.0), ios(6.0), watchos(2.0), tvos(9.0));            // NSNumber containing integer, default 1: default ligatures, 0: no ligatures
 APPKIT_EXTERN NSAttributedStringKey  NSKernAttributeName API_AVAILABLE(macos(10.0), ios(6.0), watchos(2.0), tvos(9.0));                // NSNumber containing floating point value, in points; amount to modify default kerning. 0 means kerning is disabled.
+APPKIT_EXTERN NSAttributedStringKey  NSTrackingAttributeName API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));         // NSNumber containing floating point value, in points; amount to modify default tracking. 0 means tracking is disabled.
 APPKIT_EXTERN NSAttributedStringKey  NSStrikethroughStyleAttributeName API_AVAILABLE(macos(10.0), ios(6.0), watchos(2.0), tvos(9.0));  // NSNumber containing integer, default 0: no strikethrough
 APPKIT_EXTERN NSAttributedStringKey  NSUnderlineStyleAttributeName API_AVAILABLE(macos(10.0), ios(6.0), watchos(2.0), tvos(9.0));      // NSNumber containing integer, default 0: no underline
 APPKIT_EXTERN NSAttributedStringKey  NSStrokeColorAttributeName API_AVAILABLE(macos(10.0), ios(6.0), watchos(2.0), tvos(9.0));         // NSColor, default nil: same as foreground color

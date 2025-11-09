@@ -7,11 +7,10 @@
 */
 
 #import <AVFAudio/AVAudioFormat.h>
-#import <Foundation/Foundation.h>
 #import <AVFAudio/AVAudioSettings.h>
+#if __has_include(<AVFAudio/AVAudioSession.h>)
 #import <AVFAudio/AVAudioSession.h>
-
-#import <Availability.h>
+#endif
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -38,13 +37,24 @@ API_AVAILABLE(macos(10.7), ios(2.2), watchos(3.0), tvos(9.0))
 - (nullable instancetype)initWithContentsOfURL:(NSURL *)url fileTypeHint:(NSString * __nullable)utiString error:(NSError **)outError API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 - (nullable instancetype)initWithData:(NSData *)data fileTypeHint:(NSString * __nullable)utiString error:(NSError **)outError API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
-/* transport control */
-/* methods that return BOOL return YES on success and NO on failure. */
-- (BOOL)prepareToPlay;	/* get ready to play the sound. happens automatically on play. */
-- (BOOL)play;			/* sound is played asynchronously. */
-- (BOOL)playAtTime:(NSTimeInterval)time API_AVAILABLE(macos(10.7), ios(4.0), watchos(2.0), tvos(9.0)); /* play a sound some time in the future. time is an absolute time based on and greater than deviceCurrentTime. */
-- (void)pause;			/* pauses playback, but remains ready to play. */
-- (void)stop;			/* stops playback. no longer ready to play. */
+/* Transport control */
+/* Methods that return BOOL return YES on success and NO on failure. */
+/* Get ready to play the sound. This happens automatically on play. */
+- (BOOL)prepareToPlay;
+
+/* This method starts the audio hardware synchronously (if not already running), and triggers the sound playback which is streamed asynchronously. */
+- (BOOL)play;
+
+/* This method starts the audio hardware synchronously (if not already running), and triggers the sound playback which is streamed asynchronously at the specified time in the future.
+ Time is an absolute time based on and greater than deviceCurrentTime. */
+- (BOOL)playAtTime:(NSTimeInterval)time API_AVAILABLE(macos(10.7), ios(4.0), watchos(2.0), tvos(9.0));
+
+/* Pauses playback, but remains ready to play. */
+- (void)pause;
+
+/* Synchronously stops playback, no longer ready to play.
+ NOTE: - This will block while releasing the audio hardware that was acquired upon calling play() or prepareToPlay() */
+- (void)stop;
 
 /* properties */
 

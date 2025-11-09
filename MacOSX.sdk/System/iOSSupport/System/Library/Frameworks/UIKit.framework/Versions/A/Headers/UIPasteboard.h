@@ -16,6 +16,17 @@ typedef NSString * UIPasteboardName NS_TYPED_EXTENSIBLE_ENUM;
 UIKIT_EXTERN UIPasteboardName const UIPasteboardNameGeneral API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 UIKIT_EXTERN NSString *const UIPasteboardNameFind API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) API_DEPRECATED("The Find pasteboard is no longer available.", ios(3.0, 10.0));
 
+typedef NSString * UIPasteboardDetectionPattern NS_TYPED_ENUM API_AVAILABLE(ios(14.0));
+
+/// NSString value, suitable for implementing "Paste and Go"
+UIKIT_EXTERN UIPasteboardDetectionPattern const UIPasteboardDetectionPatternProbableWebURL API_AVAILABLE(ios(14.0));
+
+/// NSString value, suitable for implementing "Paste and Search"
+UIKIT_EXTERN UIPasteboardDetectionPattern const UIPasteboardDetectionPatternProbableWebSearch API_AVAILABLE(ios(14.0));
+
+/// NSNumber value
+UIKIT_EXTERN UIPasteboardDetectionPattern const UIPasteboardDetectionPatternNumber API_AVAILABLE(ios(14.0));
+
 @class UIColor, UIImage;
 
 UIKIT_EXTERN API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) @interface UIPasteboard : NSObject
@@ -94,6 +105,46 @@ UIKIT_EXTERN UIPasteboardOption const UIPasteboardOptionLocalOnly API_UNAVAILABL
 @property (nonatomic, readonly) BOOL hasURLs API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) API_AVAILABLE(ios(10.0));
 @property (nonatomic, readonly) BOOL hasImages API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) API_AVAILABLE(ios(10.0));
 @property (nonatomic, readonly) BOOL hasColors API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) API_AVAILABLE(ios(10.0));
+
+// Detection
+
+/// Detects patterns in the first pasteboard item.
+///
+/// @param patterns Detect only these patterns.
+/// @param completionHandler Receives which patterns were detected, or an error.
+- (void)detectPatternsForPatterns:(NSSet<UIPasteboardDetectionPattern> *)patterns
+                completionHandler:(void(^)(NSSet<UIPasteboardDetectionPattern> * _Nullable,
+                                           NSError * _Nullable))completionHandler NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(14.0));
+            
+/// Detects patterns in the specified pasteboard items.
+///
+/// @param patterns Detect only these patterns.
+/// @param itemSet Specifies which pasteboard items by their position. Nil means all items.
+/// @param completionHandler Receives which patterns were detected per item specified,
+///                          or an error.
+- (void)detectPatternsForPatterns:(NSSet<UIPasteboardDetectionPattern> *)patterns
+                        inItemSet:(NSIndexSet * _Nullable)itemSet
+                completionHandler:(void(^)(NSArray<NSSet<UIPasteboardDetectionPattern> *> * _Nullable,
+                                           NSError * _Nullable))completionHandler NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(14.0));
+                 
+/// Detects patterns and corresponding values in the first pasteboard item.
+///
+/// @param patterns Detect only these patterns.
+/// @param completionHandler Receives which patterns and values were detected, or an error.
+- (void)detectValuesForPatterns:(NSSet<UIPasteboardDetectionPattern> *)patterns
+              completionHandler:(void(^)(NSDictionary<UIPasteboardDetectionPattern, id> * _Nullable,
+                                         NSError * _Nullable))completionHandler NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(14.0));
+            
+/// Detects patterns and corresponding values in the specified pasteboard items.
+///
+/// @param patterns Detect only these patterns.
+/// @param itemSet Specifies which pasteboard items by their position. Nil means all items.
+/// @param completionHandler Receives which patterns and values were detected per item specified,
+///                          or an error.
+- (void)detectValuesForPatterns:(NSSet<UIPasteboardDetectionPattern> *)patterns
+                      inItemSet:(NSIndexSet * _Nullable)itemSet
+              completionHandler:(void(^)(NSArray<NSDictionary<UIPasteboardDetectionPattern, id> *> * _Nullable,
+                                         NSError * _Nullable))completionHandler NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(14.0));
 
 @end
 

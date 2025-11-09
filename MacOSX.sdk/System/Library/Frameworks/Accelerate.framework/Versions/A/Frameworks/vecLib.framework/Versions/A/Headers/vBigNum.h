@@ -3,9 +3,9 @@
  
      Contains:   Algebraic and logical operations on large operands.
  
-     Version:    vecLib-735.0
+     Version:    vecLib-760.40
  
-     Copyright:  Copyright (c) 1999-2019 by Apple Inc. All rights reserved.
+     Copyright:  Copyright (c) 1999-2020 by Apple Inc. All rights reserved.
  
      Bugs:       For bug reports, consult the following page on
                  the World Wide Web:
@@ -26,6 +26,9 @@
 #include "vecLibTypes.h"
 
 #include <os/availability.h>
+#if __has_include( <TargetConditionals.h> )
+#include <TargetConditionals.h>
+#endif
 
 #if PRAGMA_ONCE
 #pragma once
@@ -49,7 +52,7 @@ extern "C" {
 
 #pragma options align=power
 
-#if defined(__ppc__) || defined(__ppc64__) || defined(__i386__) || defined(__x86_64__)
+#if TARGET_OS_OSX
 /************************************************************************************
 *                                                                                   *
 *  This library provides a set of subroutines for basic algebraic and some logical  *
@@ -127,7 +130,7 @@ extern "C" {
 *  Following are a set of structures for vector data types and scalar data types    *
 *                                                                                   *
 ************************************************************************************/
-#if defined _AltiVecPIMLanguageExtensionsAreEnabled
+#if _AltiVecPIMLanguageExtensionsAreEnabled
 union vU128 {
   vUInt32             v;
   struct {
@@ -342,7 +345,7 @@ union vS1024 {
   }                       s;
 };
 typedef union vS1024                    vS1024;
-#elif (defined(__i386__) || defined(__x86_64__)) && defined(__SSE2__)
+#elif TARGET_OS_OSX
 union vU128 {
   vUInt32             v;
   struct {
@@ -557,9 +560,8 @@ union vS1024 {
   }                       s;
 };
 typedef union vS1024                    vS1024;
-#endif  /*  */
+#endif /*  */
 
-#if defined _AltiVecPIMLanguageExtensionsAreEnabled || defined __SSE2__
 /************************************************************************************
 *                                                                                   *
 *                                Division operations                                *
@@ -1654,11 +1656,7 @@ vR1024Rotate(
   uint32_t        rotateAmount,
   vU1024 *        result) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios);
 
-
-#endif  // defined _AltiVecPIMLanguageExtensionsAreEnabled || defined __SSE2__
-
-#endif  /* defined(__ppc__) || defined(__ppc64__) || defined(__i386__) || defined(__x86_64__) */
-
+#endif // #if TARGET_OS_OSX
 
 #pragma options align=reset
 

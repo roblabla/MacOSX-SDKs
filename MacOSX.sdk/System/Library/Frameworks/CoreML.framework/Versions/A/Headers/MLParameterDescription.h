@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Describes a model parameter along with a default value and any applicable constaint on the values.
  */
 ML_EXPORT
-API_AVAILABLE(macos(10.15), ios(13.0))
+API_AVAILABLE(macos(10.15), ios(13.0), tvos(14.0))
 @interface MLParameterDescription : NSObject<NSSecureCoding>
 
 // Name and type of the parameter

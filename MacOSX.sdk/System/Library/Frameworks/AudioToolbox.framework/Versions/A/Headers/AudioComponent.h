@@ -1,38 +1,38 @@
-#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AudioComponent.h>)
+#if (defined(__USE_PUBLIC_HEADERS__) && __USE_PUBLIC_HEADERS__) || (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/AudioComponent.h>)
 /*!
 	@file		AudioComponent.h
  	@framework	AudioToolbox.framework
- 	@copyright	(c) 2007-2015 Apple, Inc. All rights reserved.
+ 	@copyright	(c) 2007-2020 Apple Inc. All rights reserved.
 	@brief		API's to locate, get information about, and open audio components.
 
 	@discussion
 
-	This file defines a collection of APIs to find, get information about, and open
+	This header file defines a collection of APIs to find, get information about, and open
 	audio components (such as audio units, audio codecs, and audio file components).
 
 	Originally, CoreServices' Component Manager was used for the registration, discovery, and
 	packaging of these loadable code modules. However, in order to provide an API that will be
-	supported going forward from Mac OS X 10.6 and iOS 2.0, it is advised that applications use the
+	supported going forward from macOS 10.6 and iOS 2.0, it is advised that applications use the
 	Audio Component APIs to find and load (open) audio components such as audio units.
 
 	The type "AudioComponent" or "AudioComponentInstance" should be seen and used as a distinct type
 	from the Component Manager types of "Component" and "ComponentInstance". It is never safe to
 	assume a direct cast is compatible between this type and the other.
 
-	Beginning with Mac OS X 10.7, AudioComponents can be registered and used directly without
+	Beginning with macOS 10.7, AudioComponents can be registered and used directly without
 	involving the Component Manager. The system scans certain directories for bundles with names
 	ending in ".audiocomp" or ".component" (the latter permits registering plug-ins in a single
 	bundle with both the Component Manager and the Audio Component system). These directories are
 	scanned non-recursively:
 
-		~/Library/Audio/Plug-Ins/Components
-		/Library/Audio/Plug-Ins/Components
-		/System/Library/Components
+	- ~/Library/Audio/Plug-Ins/Components
+	- /Library/Audio/Plug-Ins/Components
+	- /System/Library/Components
 
 	Bundles' Info.plist dictionaries should contain an "AudioComponents" item whose value
 	is an array of dictionaries, e.g.
 
-	@textblock
+	```
 		<key>AudioComponents</key>
 		<array>
 			<dict>
@@ -83,7 +83,7 @@
 				</array>
 			</dict>
 		</array>
-	@/textblock
+	```
 
 	The type, subtype and manufacturer keys correspond to the OSType fields of the
 	AudioComponentDescription structure. They can be strings if they are 4 ASCII characters;
@@ -92,7 +92,8 @@
 	The "factoryFunction" is the name of a AudioComponentFactoryFunction in the bundle's binary.
 
 
-	SANDBOX-SAFETY
+	Sandbox-Safety
+	--------------
 
 	The "sandboxSafe" key is used to indicate whether or not an AudioComponent can be loaded
 	directly into a sandboxed process. This key is reflected in the componentFlags field of the the
@@ -139,7 +140,8 @@
 	the unsafe AudioComponent to be opened and used.
 
 
-	TAGS
+	Tags
+	----
 
 	The "tags" key is an array of tags associated with the defined AudioComponent. The following are
 	the set of predefined standard tags that are localized and can be used in the audio unit
@@ -173,6 +175,9 @@ CF_ASSUME_NONNULL_BEGIN
 #pragma mark Constants
 
 /*!
+	@enum		AudioComponentFlags
+	@brief		Flags found in AudioComponentDescription.componentFlags.
+	
 	@constant	kAudioComponentFlag_Unsearchable
 
 	When this bit in AudioComponentDescription's componentFlags is set, AudioComponentFindNext
@@ -220,7 +225,7 @@ typedef CF_OPTIONS(UInt32, AudioComponentFlags) {
         extension, since an extension's main binary cannot be dynamically loaded into another
         process.
         
-        An OS X host may request in-process loading of such audio units using
+        A macOS host may request in-process loading of such audio units using
         kAudioComponentInstantiation_LoadInProcess.
 
         kAudioComponentFlag_IsV3AudioUnit specifies whether an audio unit is implemented using API
@@ -231,7 +236,7 @@ typedef CF_OPTIONS(UInt32, AudioComponentFlags) {
     @constant kAudioComponentInstantiation_LoadOutOfProcess
         Attempt to load the component into a separate extension process.
     @constant kAudioComponentInstantiation_LoadInProcess
-        Attempt to load the component into the current process. Only available on OS X.
+        Attempt to load the component into the current process. Only available on macOS.
 */
 typedef CF_OPTIONS(UInt32, AudioComponentInstantiationOptions) {
     kAudioComponentInstantiation_LoadOutOfProcess   CF_ENUM_AVAILABLE(10_11,  9_0) = 1,
@@ -244,17 +249,18 @@ typedef CF_OPTIONS(UInt32, AudioComponentInstantiationOptions) {
 
 /*!
     @struct         AudioComponentDescription
-    @discussion     A structure used to describe the unique and identifying IDs of an audio component 
+    @discussion     A structure describing the unique and identifying IDs of an audio component
     @var            componentType
-                        A unique 4-byte code identifying the generic type of an audio component
+                        A 4-char code identifying the generic type of an audio component.
     @var            componentSubType
-                        the particular flavor of this instance
+                        A 4-char code identifying the a specific individual component. type/
+                        subtype/manufacturer triples must be globally unique.
     @var            componentManufacturer
-                        vendor identification
+                        Vendor identification.
     @var            componentFlags
-                        must be set to zero unless a known specific value is requested
+                        Must be set to zero unless a known specific value is requested.
     @var            componentFlagsMask
-                        must be set to zero unless a known specific value is requested
+                        Must be set to zero unless a known specific value is requested.
 */
 #pragma pack(push, 4)
 typedef struct AudioComponentDescription {
@@ -330,12 +336,13 @@ typedef OSStatus (*AudioComponentMethod)(void *self, ...);
     @var            reserved
                         must be NULL
 */
-typedef struct AudioComponentPlugInInterface {
+struct AudioComponentPlugInInterface {
 	OSStatus						(*Open)(void *self, AudioComponentInstance mInstance);
 	OSStatus						(*Close)(void *self);
 	AudioComponentMethod __nullable	(* __nonnull Lookup)(SInt16 selector);
 	void * __nullable				reserved;
-} AudioComponentPlugInInterface;
+};
+typedef struct AudioComponentPlugInInterface AudioComponentPlugInInterface;
 
 /*!
     @typedef        AudioComponentFactoryFunction
@@ -462,8 +469,7 @@ AudioComponentGetVersion(   AudioComponent                      inComponent,
         For components loaded from bundles, the icon will be that of the bundle.
 */
 extern NSImage * __nullable
-AudioComponentGetIcon(AudioComponent comp)
-                                                                            API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios, watchos, tvos);
+AudioComponentGetIcon(AudioComponent comp) API_DEPRECATED_WITH_REPLACEMENT("AudioComponentCopyIcon", macos(10.11, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 #endif
 
 /*!

@@ -45,7 +45,7 @@ A volume currently being backed up by Time Machine.
 .\" - - - - - - - - - - - - - - -  BACKUP DISK  - - - - - - - - - - - - - - - -
 .It Em backup disk
 .br
-The HFS+ volume that contains Time Machine backups.
+The HFS+ or APFS volume that contains Time Machine backups.
 .\" - - - - - - - - - - - - - - BACKUP DESTINATION  - - - - - - - - - - - - - -
 .It Em backup destination
 .br
@@ -59,27 +59,41 @@ A sparsebundle that, when mounted, is the backing store for a volume that is a b
 .\" - - - - - - - - - - - - - - - BACKUP STORE  - - - - - - - - - - - - - - - -
 .It Em backup store
 .br
-The top-level "Backups.backupdb" directory at the root of a backup disk. E.g.,
+The top-level "Backups.backupdb" directory at the root of an HFS+ backup disk. E.g.,
 .Pp
 /Volumes/Chronoton/Backups.backupdb
+.Pp
+n.b. APFS backup disks do not have backup stores.
 .\" - - - - - - - - - - - - - - MACHINE DIRECTORY - - - - - - - - - - - - - - -
 .It Em machine directory
 .br
-A directory inside a backup store that contains all the backups for a particular computer. For local destinations, a backup store can contain multiple machine directories, all for separate computers. E.g.,
+On HFS+, a directory inside a backup store that contains all the backups for a particular computer. On APFS, the root of the backup disk is a machine directory. For local HFS+ destinations, a backup store can contain multiple machine directories, all for separate computers. E.g.,
 .Pp
 /Volumes/Chronoton/Backups.backupdb/thermopylae
-.\" - - - - - - - - - - - - - - - - SNAPSHOT  - - - - - - - - - - - - - - - - - 
-.It Em snapshot
+.\" - - - - - - - - - - - - - - - - BACKUP  - - - - - - - - - - - - - - - - -
+.It Em backup
 .br
-A directory inside a machine directory that represents a single initial or incremental backup of one computer. The word "snapshot", in most contexts, is a generic term and is not to be confused with a "local Time Machine snapshot", which is simply a snapshot stored locally on the computer. E.g.,
+A directory inside a machine directory or APFS backup volume snapshot that represents a single initial or incremental backup of one computer. E.g.,
 .Pp
 /Volumes/Chronoton/Backups.backupdb/thermopylae/2011-07-03-123456
-.\" - - - - - - - - - - - - - - SNAPSHOT VOLUME - - - - - - - - - - - - - - - - 
-.It Em snapshot volume
+.Pp
+com.apple.TimeMachine.2011-07-03-123456.backup
+.\" - - - - - - - - - - - - - - - - LOCAL SNAPSHOT  - - - - - - - - - - - - - - - - -
+.It Em local snapshot
+(or
+.Em snapshot)
 .br
-A directory inside a snapshot that represents a single initial or incremental backup of one backup source. E.g.,
+An APFS snapshot of an APFS source volume included in the backup. E.g.,
+.Pp
+com.apple.TimeMachine.2011-07-03-123456.local
+.\" - - - - - - - - - - - - - - VOLUME STORE - - - - - - - - - - - - - - - -
+.It Em volume store
+.br
+A directory inside a backup that represents a single initial or incremental backup of one backup source. E.g.,
 .Pp
 /Volumes/Chronoton/Backups.backupdb/thermopylae/2011-07-03-123456/Mac HD
+.Pp
+/Volumes/.timemachine/*/2011-07-03-123456.backup/2011-07-03-123456.backup/Mac HD
 .El
 .\" --------------------------- END TERMINOLOGY LIST ---------------------------
 .\" ----------------------------------------------------------------------------
@@ -98,7 +112,7 @@ Each verb is listed with its description and individual arguments.
 .It Sy setdestination Op Fl ap
 .Ar arg
 .br
-Configure a local HFS+ volume, AFP share, or SMB share as a backup destination. Requires root privileges.
+Configure a local HFS+ or APFS volume, AFP share, or SMB share as a backup destination. Requires root privileges.
 .Pp
 When the
 .Fl Sy a
@@ -109,7 +123,7 @@ will be added to the list of destinations. Time Machine will automatically choos
 option is not provided, the current list of destinations will be replaced by
 .Ar arg.
 .Pp
-If you wish to set an HFS+ volume as the backup destination,
+If you wish to set an HFS+ or APFS volume as the backup destination,
 .Ar arg
 should be the mount point of the volume in question. When setting an AFP or SMB destination
 .Ar arg
@@ -256,15 +270,15 @@ Cancel a backup currently in progress.
 .It Sy compare Op Fl @acdefglmnstuEUX
 .Op Fl D Ar depth
 .Op Fl I Ar name
-.Op Ar snapshot_path | path1 path2
+.Op Ar backup_path | path1 path2
 .br
 Perform a backup diff.
 .Pp
 If no arguments are provided,
 .Nm
-will compare the computer to the latest snapshot. If a snapshot path is provided as the sole argument,
+will compare the computer to the latest backup. If a backup path is provided as the sole argument,
 .Nm
-will compare the computer to the specified snapshot. If two path arguments are provided,
+will compare the computer to the specified backup. If two path arguments are provided,
 .Nm
 will compare those two items to each other.
 .Nm
@@ -317,7 +331,7 @@ Ignore paths with a path component equal to
 .Ar name
 during iteration. This may be specified multiple times.
 .It Fl U
-Ignore logical volume identity (volume UUIDs) when directly comparing a local volume or snapshot volume to a snapshot volume.
+Ignore logical volume identity (volume UUIDs) when directly comparing a local volume or volume store to a volume store.
 .It Fl X
 Print output in XML property list format.
 .El
@@ -343,14 +357,14 @@ The file's recorded checksum is invalid.
 .\" - - - - - - - - - END VERIFYCHECKSUMS LEGEND LIST - - - - - - - - - - - - -
 .\" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 .Pp
-Beginning in OS X 10.11, Time Machine records checksums of files copied into snapshots. Checksums are not retroactively computed for files that were copied by earlier releases of OS X.
+Beginning in OS X 10.11, Time Machine records checksums of files copied into backups. Checksums are not retroactively computed for files that were copied by earlier releases of OS X.
 .\" - - - - - - - - - - - - - - - - RESTORE - - - - - - - - - - - - - - - - - -
 .It Sy restore Op Fl v
 .Ar src ... dst
 .br
 Restore the item
 .Ar src Ns
-, which is inside a snapshot, to the location
+, which is inside a backup, to the location
 .Ar dst Ns
 \&. The
 .Ar dst
@@ -376,17 +390,28 @@ or
 .Sy tmutil
 as root, ownership of the restored items will match the state of the items in the backup.
 .\" - - - - - - - - - - - - - - - - DELETE  - - - - - - - - - - - - - - - - - -
-.It Sy delete Ar path ...
+.It Sy delete Op Fl d Ar backup_mount_point Fl t Ar timestamp ...
+.Op Ar path ...
 .br
-Delete one or more snapshots, machine directories, or backup stores. This verb can delete items from backups that were not made by, or are not claimed by, the current machine. Requires root privileges.
+Delete one or more backups, machine directories, or backup stores. This verb can delete items from backups that were not made by, or are not claimed by, the current machine. Requires root privileges.
+.\" - - - - - - - - - - - - - - - - DELETEINPROGRESS  - - - - - - - - - - - - - - - - - -
+.It Sy deleteinprogress Ar machine_directory
+.br
+Delete all in-progress backups for a machine directory. On APFS backup destinations, this reverts the destination volume to the last backup.
 .\" - - - - - - - - - - - - - - LATESTBACKUP  - - - - - - - - - - - - - - - - - 
 .It Sy latestbackup
 .br
-Print the path to the most recent snapshot for this computer.
+Print information about the most recent backup for this computer.
 .\" - - - - - - - - - - - - - - LISTBACKUPS - - - - - - - - - - - - - - - - - - 
-.It Sy listbackups
+.It Sy listbackups Op Fl d Ar backup_mount_point Op Fl m
 .br
-Print paths for all of this computer's completed snapshots.
+Print information about all of this computer's completed backups. The
+.Fl Sy d
+option specifies a backup volume to list backups from. When
+.Fl Sy m
+is provided,
+. Sy listbackups
+will attempt to mount backups and list their mounted paths. This option requires root privileges.
 .\" - - - - - - - - - - - - - MACHINEDIRECTORY  - - - - - - - - - - - - - - - - 
 .It Sy machinedirectory
 .br
@@ -395,14 +420,14 @@ Print the path to the current machine directory for this computer.
 .It Sy calculatedrift
 .Ar machine_directory
 .br
-Analyze the snapshots in a machine directory and determine the amount of change between each. Averages are printed after all snapshots have been analyzed. This may require root privileges, depending on the contents of the machine directory.
+Analyze the backups in an HFS machine directory and determine the amount of change between each. Averages are printed after all backups have been analyzed. This may require root privileges, depending on the contents of the machine directory.
 .\" - - - - - - - - - - - - - -  UNIQUESIZE - - - - - - - - - - - - - - - - - - 
 .It Sy uniquesize
 .Ar path ...
 .br
-Analyze the specified path and determine its unique size. The figure reported by
+Analyze the specified path in an HFS+ backup or path to an APFS backup and determine its unique size. The figure reported by
 .Sy uniquesize
-represents things that only exist in the specified path; things that are hard-linked in other places are not tallied.
+represents things that only exist in the specified path; things that are present in other backups are not tallied.
 .\" - - - - - - - - - - - - - -  INHERITBACKUP  - - - - - - - - - - - - - - - - 
 .It Sy inheritbackup
 .Ar {machine_directory | sparsebundle}
@@ -423,12 +448,12 @@ One machine can own multiple machine directories and sparsebundles, but it is il
 .Sy inheritbackup
 will attempt to detect possible identity collisions before making changes.
 .\" - - - - - - - - - - - - - -  ASSOCIATEDISK  - - - - - - - - - - - - - - - - 
-.It Sy associatedisk Op Fl a
+.It Sy associatedisk
 .Ar mount_point snapshot_volume
 .br
-Bind a snapshot volume directory to the specified local disk, thereby reconfiguring the backup history. Requires root privileges.
+Bind a volume store directory to the specified local disk, thereby reconfiguring the backup history. Requires root privileges.
 .Pp
-In Mac OS X, HFS+ volumes have a persistent UUID that is assigned when the file system is created. Time Machine uses this identifier to make an association between a source volume and a snapshot volume. Erasing the source volume creates a new file system on the disk, and the previous UUID is not retained. The new UUID causes the source volume -> snapshot volume association to be broken. If one were just erasing the volume and starting over, it would likely be of no real consequence, and the new UUID would not be a concern; when erasing a volume in order to clone another volume to it, recreating the association may be desired.
+In Mac OS X, HFS+ and APFS volumes have a persistent UUID that is assigned when the file system is created. Time Machine uses this identifier to make an association between a source volume and a volume store. Erasing the source volume creates a new file system on the disk, and the previous UUID is not retained. The new UUID causes the source volume -> volume store association to be broken. If one were just erasing the volume and starting over, it would likely be of no real consequence, and the new UUID would not be a concern; when erasing a volume in order to clone another volume to it, recreating the association may be desired.
 .Pp
 A concrete example of when and how you would use
 .Sy associatedisk Ns
@@ -440,15 +465,15 @@ to reconfigure the backup so it appears that this volume has been backed up prev
 .Pp
 thermopylae:~ thoth$ sudo tmutil associatedisk [-a] "/Volumes/MyNewStuffDisk" "/Volumes/Chronoton/Backups.backupdb/thermopylae/Latest/MyStuff"
 .Pp
-The result of the above command would associate the snapshot volume
+The result of the above command would associate the volume store
 .Pa MyStuff
-in the specified snapshot with the source volume
+in the specified backup with the source volume
 .Pa "MyNewStuffDisk" Ns
-\&. The snapshot volume would also be renamed to match. The
+\&. The volume store would also be renamed to match. The
 .Fl Sy a
 option tells
 .Sy associatedisk
-to find all snapshot volumes in the same machine directory that match the identity of
+to find all volume stores in the same machine directory that match the identity of
 .Pa MyStuff Ns
 , and then perform the association on all of them.
 .\" - - - - - - - - - - - - - - - - APFS  - - - - - - - - - - - - - - - - -
@@ -470,7 +495,7 @@ to list snapshot creation dates from a specific volume.
 .Pp
 Listed dates are formatted YYYY-MM-DD-HHMMSS.
 .It Sy deletelocalsnapshots
-.Ar {mountPoint | date}
+.Ar {mount_point | date}
 .br
 If a date is specified, delete all local Time Machine snapshots on all mounted disks for the specified
 .Ar date

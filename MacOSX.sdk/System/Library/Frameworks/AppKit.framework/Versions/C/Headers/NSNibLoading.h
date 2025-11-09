@@ -8,9 +8,10 @@
 #import <Foundation/NSArray.h>
 #import <Foundation/NSBundle.h>
 #import <AppKit/NSNib.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSString, NSDictionary;
 

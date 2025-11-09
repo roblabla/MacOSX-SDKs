@@ -130,6 +130,7 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 
 @property (nullable, readonly) NSArray <MTLArgument *> *vertexArguments;
 @property (nullable, readonly) NSArray <MTLArgument *> *fragmentArguments;
+@property (nullable, readonly) NSArray <MTLArgument *> *tileArguments API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
 @end
 
 MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
@@ -150,6 +151,7 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @property (readwrite, nonatomic, getter = isRasterizationEnabled) BOOL rasterizationEnabled;
 
 
+@property (readwrite, nonatomic) NSUInteger maxVertexAmplificationCount API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4));
 
 @property (readonly) MTLRenderPipelineColorAttachmentDescriptorArray *colorAttachments;
 
@@ -172,6 +174,14 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @property (readwrite, nonatomic) BOOL supportIndirectCommandBuffers API_AVAILABLE(macos(10.14), ios(12.0));
 
 /*!
+ @property binaryArchives
+ @abstract The set of MTLBinaryArchive to search for compiled code when creating the pipeline state.
+ @discussion Accelerate pipeline state creation by providing archives of compiled code such that no compilation needs to happen on the fast path.
+ @see MTLBinaryArchive
+ */
+@property (readwrite, nullable, nonatomic, copy) NSArray<id<MTLBinaryArchive>> *binaryArchives API_AVAILABLE(macos(11.0), ios(14.0));
+
+/*!
  @method reset
  @abstract Restore all pipeline descriptor properties to their default values.
  */
@@ -191,8 +201,31 @@ API_AVAILABLE(macos(10.11), ios(8.0))
 @property (nullable, readonly) NSString *label;
 @property (readonly) id <MTLDevice> device;
 
+/*!
+ @property maxTotalThreadsPerThreadgroup
+ @abstract The maximum total number of threads that can be in a single threadgroup.
+ */
+@property (readonly) NSUInteger maxTotalThreadsPerThreadgroup API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+
+/*!
+ @property threadgroupSizeMatchesTileSize
+ @abstract Returns true when the pipeline state requires a threadgroup size equal to the tile size
+ */
+@property (readonly) BOOL threadgroupSizeMatchesTileSize API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
 
 
+
+/*!
+ @property imageblockSampleLength
+ @brief Returns imageblock memory length used by a single sample when rendered using this pipeline.
+ */
+@property (readonly) NSUInteger imageblockSampleLength API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
+
+/*!
+ @method imageblockMemoryLengthForDimensions:sampleCount:
+ @brief Returns imageblock memory length for given image block dimensions. Dimensions must be valid tile dimensions.
+ */
+- (NSUInteger)imageblockMemoryLengthForDimensions:(MTLSize)imageblockDimensions API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos);
 
 
 @property (readonly) BOOL supportIndirectCommandBuffers API_AVAILABLE(macos(10.14), ios(12.0));
@@ -207,6 +240,75 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 
 /* This always uses 'copy' semantics.  It is safe to set the attachment state at any legal index to nil, which resets that attachment descriptor state to default vaules. */
 - (void)setObject:(nullable MTLRenderPipelineColorAttachmentDescriptor *)attachment atIndexedSubscript:(NSUInteger)attachmentIndex;
+
+@end
+
+
+MTL_EXPORT API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos)
+@interface MTLTileRenderPipelineColorAttachmentDescriptor : NSObject <NSCopying>
+
+/*! Pixel format.  Defaults to MTLPixelFormatInvalid */
+@property (nonatomic) MTLPixelFormat pixelFormat;
+
+@end
+
+MTL_EXPORT API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos)
+@interface MTLTileRenderPipelineColorAttachmentDescriptorArray : NSObject
+
+/* Individual tile attachment state access */
+- (MTLTileRenderPipelineColorAttachmentDescriptor*)objectAtIndexedSubscript:(NSUInteger)attachmentIndex;
+
+/* This always uses 'copy' semantics.  It is safe to set the attachment state at any legal index to nil, which resets that attachment descriptor state to default vaules. */
+- (void)setObject:(MTLTileRenderPipelineColorAttachmentDescriptor*)attachment atIndexedSubscript:(NSUInteger)attachmentIndex;
+
+@end
+
+MTL_EXPORT API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0)) API_UNAVAILABLE(tvos)
+@interface MTLTileRenderPipelineDescriptor : NSObject <NSCopying>
+
+/*!
+ @property label:
+ @abstract The descriptor label.
+ */
+@property (copy, nonatomic, nullable) NSString *label;
+
+/*!
+ @property tileFunction:
+ @abstract  The kernel or fragment function that serves as the tile shader for this pipeline.
+ @discussion Both kernel-based and fragment-based tile pipelines dispatches will barrier against previous
+ draws and other dispatches. Kernel-based pipelines will wait until all prior access to the tile completes.
+ Fragment-based pipelines will only wait until all prior access to the fragment's location completes.
+ */
+@property (readwrite, nonatomic, strong) id <MTLFunction> tileFunction;
+
+/* Rasterization and visibility state */
+@property (readwrite, nonatomic) NSUInteger rasterSampleCount;
+@property (readonly) MTLTileRenderPipelineColorAttachmentDescriptorArray *colorAttachments;
+
+/*!
+ @property threadgroupSizeMatchesTileSize:
+ @abstract Whether all threadgroups associated with this pipeline will cover tiles entirely.
+ @discussion Metal can optimize code generation for this case.
+ */
+@property (readwrite, nonatomic) BOOL threadgroupSizeMatchesTileSize;
+
+@property (readonly) MTLPipelineBufferDescriptorArray *tileBuffers API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0));
+
+/*!
+ @property maxTotalThreadsPerThreadgroup
+ @abstract Optional property. Set the maxTotalThreadsPerThreadgroup. If it is not set, returns zero.
+ */
+@property (readwrite, nonatomic) NSUInteger maxTotalThreadsPerThreadgroup API_AVAILABLE(macos(10.15), ios(12.0));
+
+/*!
+ @property binaryArchives
+ @abstract The set of MTLBinaryArchive to search for compiled code when creating the pipeline state.
+ @discussion Accelerate pipeline state creation by providing archives of compiled code such that no compilation needs to happen on the fast path.
+ @see MTLBinaryArchive
+ */
+@property (readwrite, nullable, nonatomic, copy) NSArray<id<MTLBinaryArchive>> *binaryArchives API_AVAILABLE(macos(11.0), ios(14.0));
+
+- (void)reset;
 
 @end
 

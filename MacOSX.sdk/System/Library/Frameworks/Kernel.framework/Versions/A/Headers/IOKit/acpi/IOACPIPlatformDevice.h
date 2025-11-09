@@ -29,7 +29,7 @@
 
 class IOACPIPlatformExpert;
 
-class IOACPIPlatformDevice : public IOPlatformDevice
+class __exported IOACPIPlatformDevice : public IOPlatformDevice
 {
     OSDeclareDefaultStructors( IOACPIPlatformDevice )
 

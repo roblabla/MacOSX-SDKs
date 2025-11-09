@@ -1,15 +1,22 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 65EFF12B-F179-3C9E-9587-3345E2AFC55E' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           2424170C-5736-3CEB-8433-A2C0FEF6AF43
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           E983D393-6FFB-3BCA-B9DD-95E638CE6642
 install-name:    '/System/Library/PrivateFrameworks/AMPDevices.framework/Versions/A/AMPDevices'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _AMPDeviceAppsCategoryKey, _AMPDeviceAskUserAlertStyleKey, 
                        _AMPDeviceAskUserCancelButtonTitleKey, _AMPDeviceAskUserCheckboxTitleKey, 
                        _AMPDeviceAskUserCheckboxValueKey, _AMPDeviceAskUserExplanationKey, 
                        _AMPDeviceAskUserMessageKey, _AMPDeviceAskUserOKButtonTitleKey, 
-                       _AMPDeviceAskUserOtherButtonTitleKey, _AMPDeviceAskUserTimeoutExplanationKey, 
+                       _AMPDeviceAskUserOtherButtonShouldDismissKey, _AMPDeviceAskUserOtherButtonTitleKey, 
+                       _AMPDeviceAskUserOtherButtonURLKey, _AMPDeviceAskUserTimeoutExplanationKey, 
                        _AMPDeviceAskUserTimeoutSecondsKey, _AMPDeviceAskUserUUIDKey, 
                        _AMPDeviceAudioCategoryKey, _AMPDeviceBackupBuildVersionKey, 
                        _AMPDeviceBackupContainsAppDataKey, _AMPDeviceBackupDeviceNameKey, 
@@ -25,38 +32,40 @@ exports:
                        _AMPDeviceBackupTargetTypeKey, _AMPDeviceBackupUniqueIdentifierKey, 
                        _AMPDeviceBooksCategoryKey, _AMPDeviceCategoriesKey, _AMPDeviceCategoryBytesKey, 
                        _AMPDeviceCategoryItemsKey, _AMPDeviceCategorySecondsKey, 
-                       _AMPDeviceClassAppleTV, _AMPDeviceClassIPad, _AMPDeviceClassIPhone, 
-                       _AMPDeviceClassIPod, _AMPDeviceClassWatch, _AMPDeviceErrorMoreInfoURLKey, 
-                       _AMPDeviceErrorReportCancelButtonTitleKey, _AMPDeviceErrorReportDefaultFileNameKey, 
-                       _AMPDeviceErrorReportErrors, _AMPDeviceErrorReportHideSaveButtonKey, 
-                       _AMPDeviceErrorReportOKButtonTitleKey, _AMPDeviceErrorReportUUIDKey, 
-                       _AMPDeviceErrorReportWindowTitleKey, _AMPDeviceFreeCategoryKey, 
-                       _AMPDeviceGamesCategoryKey, _AMPDeviceLogsCategoryKey, _AMPDeviceMobileBackupErrorDomain, 
-                       _AMPDeviceObjectAlbumIDKey, _AMPDeviceObjectArtistIDKey, _AMPDeviceObjectLibraryIDKey, 
-                       _AMPDeviceObjectPlaylistIDKey, _AMPDeviceObjectPlaylistItemIDKey, 
-                       _AMPDeviceObjectTrackIDKey, _AMPDeviceObjectTrackInstanceIDKey, 
-                       _AMPDeviceOpenPanelAllowedFileTypesKey, _AMPDeviceOpenPanelAllowsMultipleSelectionKey, 
-                       _AMPDeviceOpenPanelCanChooseDirectoriesKey, _AMPDeviceOpenPanelCanChooseFilesKey, 
-                       _AMPDeviceOpenPanelCanCreateDirectoriesKey, _AMPDeviceOpenPanelDirectoryURLKey, 
-                       _AMPDeviceOpenPanelExtensionHiddenKey, _AMPDeviceOpenPanelPromptKey, 
-                       _AMPDeviceOpenPanelTitleKey, _AMPDeviceOpenPanelTreatsFilePackagesAsDirectoriesKey, 
-                       _AMPDeviceOpenPanelUUIDKey, _AMPDeviceOtherCategoryKey, _AMPDevicePhotosCategoryKey, 
-                       _AMPDevicePromptForPasswordCancelButtonTitleKey, _AMPDevicePromptForPasswordCheckboxTitleKey, 
-                       _AMPDevicePromptForPasswordCheckboxValueKey, _AMPDevicePromptForPasswordDefaultPasswordKey, 
-                       _AMPDevicePromptForPasswordDefaultUserNameKey, _AMPDevicePromptForPasswordExplanationKey, 
-                       _AMPDevicePromptForPasswordHideCheckboxKey, _AMPDevicePromptForPasswordHideUserNameKey, 
-                       _AMPDevicePromptForPasswordLockUserNameKey, _AMPDevicePromptForPasswordMessageKey, 
-                       _AMPDevicePromptForPasswordOKButtonTitleKey, _AMPDevicePromptForPasswordPasswordLabelKey, 
-                       _AMPDevicePromptForPasswordUUIDKey, _AMPDevicePromptForPasswordUserNameLabelKey, 
-                       _AMPDevicePromptForPasswordVerifyLabelKey, _AMPDevicePromptForPasswordVerifyPasswordKey, 
-                       _AMPDevicePurgeableCategoryKey, _AMPDeviceReportCancelButtonTitleKey, 
-                       _AMPDeviceReportDefaultFileNameKey, _AMPDeviceReportHideSaveButtonKey, 
-                       _AMPDeviceReportOKButtonTitleKey, _AMPDeviceReportReportHeightKey, 
-                       _AMPDeviceReportReportWidthKey, _AMPDeviceReportRichTextKey, 
-                       _AMPDeviceReportSafetyInfoKey, _AMPDeviceReportUUIDKey, _AMPDeviceReportWindowTitleKey, 
-                       _AMPDeviceReservedCategoryKey, _AMPDeviceSyncErrorDetailsKey, 
-                       _AMPDeviceSyncErrorExplanationKey, _AMPDeviceSyncErrorLearnMoreURLKey, 
-                       _AMPDeviceSyncErrorMessageKey, _AMPDeviceSyncErrorUUIDKey, 
+                       _AMPDeviceClassAppleTV, _AMPDeviceClassAudioAccessory, _AMPDeviceClassIPad, 
+                       _AMPDeviceClassIPhone, _AMPDeviceClassIPod, _AMPDeviceClassWatch, 
+                       _AMPDeviceErrorMoreInfoURLKey, _AMPDeviceErrorReportCancelButtonTitleKey, 
+                       _AMPDeviceErrorReportDefaultFileNameKey, _AMPDeviceErrorReportErrors, 
+                       _AMPDeviceErrorReportHideSaveButtonKey, _AMPDeviceErrorReportOKButtonTitleKey, 
+                       _AMPDeviceErrorReportUUIDKey, _AMPDeviceErrorReportWindowTitleKey, 
+                       _AMPDeviceFreeCategoryKey, _AMPDeviceGamesCategoryKey, _AMPDeviceLogsCategoryKey, 
+                       _AMPDeviceMobileBackupErrorDomain, _AMPDeviceObjectAlbumIDKey, 
+                       _AMPDeviceObjectArtistIDKey, _AMPDeviceObjectBookKitAssetIDKey, 
+                       _AMPDeviceObjectLibraryIDKey, _AMPDeviceObjectPlaylistIDKey, 
+                       _AMPDeviceObjectPlaylistItemIDKey, _AMPDeviceObjectTrackIDKey, 
+                       _AMPDeviceObjectTrackInstanceIDKey, _AMPDeviceOpenPanelAllowedFileTypesKey, 
+                       _AMPDeviceOpenPanelAllowsMultipleSelectionKey, _AMPDeviceOpenPanelCanChooseDirectoriesKey, 
+                       _AMPDeviceOpenPanelCanChooseFilesKey, _AMPDeviceOpenPanelCanCreateDirectoriesKey, 
+                       _AMPDeviceOpenPanelDirectoryURLKey, _AMPDeviceOpenPanelExtensionHiddenKey, 
+                       _AMPDeviceOpenPanelPromptKey, _AMPDeviceOpenPanelTitleKey, 
+                       _AMPDeviceOpenPanelTreatsFilePackagesAsDirectoriesKey, _AMPDeviceOpenPanelUUIDKey, 
+                       _AMPDeviceOtherCategoryKey, _AMPDevicePhotosCategoryKey, _AMPDevicePromptForPasswordCancelButtonTitleKey, 
+                       _AMPDevicePromptForPasswordCheckboxTitleKey, _AMPDevicePromptForPasswordCheckboxValueKey, 
+                       _AMPDevicePromptForPasswordDefaultPasswordKey, _AMPDevicePromptForPasswordDefaultUserNameKey, 
+                       _AMPDevicePromptForPasswordExplanationKey, _AMPDevicePromptForPasswordHideCheckboxKey, 
+                       _AMPDevicePromptForPasswordHideUserNameKey, _AMPDevicePromptForPasswordLockUserNameKey, 
+                       _AMPDevicePromptForPasswordMessageKey, _AMPDevicePromptForPasswordOKButtonTitleKey, 
+                       _AMPDevicePromptForPasswordPasswordLabelKey, _AMPDevicePromptForPasswordUUIDKey, 
+                       _AMPDevicePromptForPasswordUserNameLabelKey, _AMPDevicePromptForPasswordVerifyLabelKey, 
+                       _AMPDevicePromptForPasswordVerifyPasswordKey, _AMPDevicePurgeableCategoryKey, 
+                       _AMPDeviceReportCancelButtonTitleKey, _AMPDeviceReportDefaultFileNameKey, 
+                       _AMPDeviceReportHideSaveButtonKey, _AMPDeviceReportOKButtonTitleKey, 
+                       _AMPDeviceReportReportHeightKey, _AMPDeviceReportReportWidthKey, 
+                       _AMPDeviceReportRichTextKey, _AMPDeviceReportSafetyInfoKey, 
+                       _AMPDeviceReportUUIDKey, _AMPDeviceReportWindowTitleKey, _AMPDeviceReservedCategoryKey, 
+                       _AMPDeviceSyncErrorDetailsKey, _AMPDeviceSyncErrorExplanationKey, 
+                       _AMPDeviceSyncErrorLearnMoreURLKey, _AMPDeviceSyncErrorMessageKey, 
+                       _AMPDeviceSyncErrorOSStatusKey, _AMPDeviceSyncErrorUUIDKey, 
                        _AMPDeviceTotalBytesKey, _AMPDeviceUserDataCategoryKey, _AMPDeviceVideoCategoryKey, 
                        _AMPDeviceViewModeActivation, _AMPDeviceViewModeAudiobooks, 
                        _AMPDeviceViewModeBooks, _AMPDeviceViewModeDefault, _AMPDeviceViewModeDisabled, 
@@ -64,7 +73,7 @@ exports:
                        _AMPDeviceViewModeRecovery, _AMPDeviceViewModeTVShows, _AMPDeviceViewModeUnpaired, 
                        _AMPDeviceViewModeVideo, _GetNSImageForDeviceProperties ]
     objc-classes:    [ AMPDevice, AMPDeviceAccessibilityPrefs, AMPDeviceAutoFillPrefs, 
-                       AMPDeviceBatteryInfo, AMPDeviceInfo, AMPDeviceSoftwareInfo, 
+                       AMPDeviceBatteryInfo, AMPDeviceInfo, AMPDeviceSetupInfo, AMPDeviceSoftwareInfo, 
                        AMPDeviceSyncPrefs, AMPDevicesClient, AMPPhotoSyncPrefs, BluePlaceholderView, 
                        BrownPlaceholderView, DarkGrayPlaceholderView, DeviceCollection, 
                        DeviceErrorReportViewController, DeviceReportViewController, 

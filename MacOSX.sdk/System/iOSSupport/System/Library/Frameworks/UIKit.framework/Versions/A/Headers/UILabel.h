@@ -56,6 +56,11 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UILabel : UIView <NSCoding, UICo
 // The maximum amount of tightening performed is determined by the system based on contexts such as font, line width, etc.
 @property(nonatomic) BOOL allowsDefaultTighteningForTruncation API_AVAILABLE(ios(9.0)); // default is NO
 
+// Specifies the line break strategies that may be used for laying out the text in this label.
+// If this property is not set, the default value is NSLineBreakStrategyStandard.
+// If the label contains an attributed text with paragraph style(s) that specify a set of line break strategies, the set of strategies in the paragraph style(s) will be used instead of the set of strategies defined by this property.
+@property(nonatomic) NSLineBreakStrategy lineBreakStrategy;
+
 // override points. can adjust rect before calling super.
 // label has default content mode of UIViewContentModeRedraw
 

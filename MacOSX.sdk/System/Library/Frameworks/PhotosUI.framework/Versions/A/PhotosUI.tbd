@@ -1,22 +1,22 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: A0D8B326-0C4D-3975-A196-91A45F6DA3FE' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           0F23774D-D44D-30C4-ACBB-9414D7ED997B
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           C32E3FAE-9580-3BAD-99D9-F9BC755BC9CA
 install-name:    '/System/Library/Frameworks/PhotosUI.framework/Versions/A/PhotosUI'
-current-version: 101.13.100
-exports:         
-  - archs:           [ x86_64 ]
-    symbols:         [ _PHProjectCategoryBook, _PHProjectCategoryCalendar, _PHProjectCategoryCard, 
-                       _PHProjectCategoryOther, _PHProjectCategoryPrints, _PHProjectCategorySlideshow, 
-                       _PHProjectCategoryUndefined, _PHProjectCategoryWallDecor, 
-                       _PHProjectTypeUndefined, _PUBoundingRectForPoints, _PUEditingInitialPayloadTypeIdentifier, 
-                       _PUErrorDomain, _PULineDistanceBetweenPoints, _PULineDistanceToPoint, 
-                       _PULineIntersection, _PUPointApplyPerspectiveTransform, _PUPointIsOnLineSegmentBetweenPoints, 
-                       _PUProjectExtensionPointIdentifier, _PUQuadApplyPerspectiveTransform, 
-                       _PUQuadApplyScaleFactor, _PUQuadContainsPoint, _PUQuadContainsRect, 
-                       _PUQuadForRect, _PUQuadGetBoundingRect, _PUQuadGetCentroid, 
-                       _PUQuadImageCreate, _PUQuadScaleFactorToFillRect, _PURectContainsPoint, 
-                       _pu_dispatch_on_main_queue ]
+current-version: 311.0.120
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+    symbols:         [ _PHObjectReferenceCookieType, _PHProjectCategoryBook, _PHProjectCategoryCalendar, 
+                       _PHProjectCategoryCard, _PHProjectCategoryOther, _PHProjectCategoryPrints, 
+                       _PHProjectCategorySlideshow, _PHProjectCategoryUndefined, 
+                       _PHProjectCategoryWallDecor, _PHProjectTypeUndefined, _PUEditingInitialPayloadTypeIdentifier, 
+                       _PUErrorDomain, _PUProjectExtensionPointIdentifier, _pu_dispatch_on_main_queue ]
     objc-classes:    [ PHEditingExtensionContext, PHEditingRemoteViewController, 
                        PHEditingServiceViewController, PHExtensionHostViewPreferredSizes, 
                        PHExtensionRemoteViewController, PHExtensionServiceViewController, 
@@ -28,6 +28,7 @@ exports:
                        PHProjectTypeDescription, PHProjectTypeDescriptionSourceClient, 
                        PHProjectTypeDescriptionSourceInvalidatorProxy, PHProjectTypeDescriptionSourceService, 
                        PHProjectTypeDescriptionStaticDataSource, PUEditingExtensionHostContext, 
-                       PUEditingInitialPayload, PUPerspectiveTransformVideoCompositionInstruction, 
-                       PUPerspectiveTransformVideoCompositor, PUProjectExtensionHostContext ]
+                       PUEditingExtensionUndoAdapter, PUEditingExtensionUndoProxyExtensionSide, 
+                       PUEditingExtensionUndoProxyHostSide, PUEditingInitialPayload, 
+                       PUProjectExtensionHostContext ]
 ...

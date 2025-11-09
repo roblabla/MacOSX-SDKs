@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: DBD9FD74-9F17-358B-A7E9-58B965A6E16C', 'x86_64: DBD9FD74-9F17-358B-A7E9-58B965A6E16C' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           05626933-8FBB-3241-BD87-A820FE527365
+  - target:          x86_64-maccatalyst
+    value:           05626933-8FBB-3241-BD87-A820FE527365
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           DE93126C-4CBB-3B8C-96FE-F251272711E3
+  - target:          arm64e-maccatalyst
+    value:           DE93126C-4CBB-3B8C-96FE-F251272711E3
 install-name:    '/System/Library/PrivateFrameworks/PersistentConnection.framework/Versions/A/PersistentConnection'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _PCForceDemoMaxKeepAliveIntervalKey, _PCForceMinKeepAliveIntervalKey, 
                        _PCIntervalCacheAddressFamilyKey, _PCIntervalCacheChangedNotification, 
                        _PCIntervalCacheDateKey, _PCIntervalCacheKeepAliveIntervalKey, 
@@ -18,8 +32,8 @@ exports:
                        _PCSettingsSetStyle, _PCTimerFireEarlyToCoalesceKey, _PCWiFiInterfaceNameKey, 
                        __PCSettingsGetStyle ]
     objc-classes:    [ PCCarrierBundleHelper, PCConnectionManager, PCInterfaceMonitor, 
-                       PCLog, PCLogging, PCPersistentInterfaceManager, PCPersistentTimer, 
-                       PCSimpleTimer ]
+                       PCKeepAliveState, PCLog, PCLogging, PCPersistentInterfaceManager, 
+                       PCPersistentTimer, PCSimpleTimer ]
     objc-ivars:      [ PCCarrierBundleHelper._bundle, PCCarrierBundleHelper._ctClient, 
                        PCCarrierBundleHelper._currentDataContext, PCCarrierBundleHelper._delegates, 
                        PCCarrierBundleHelper._queue, PCConnectionManager._alwaysWantsInterfaceChangeCallbacks, 

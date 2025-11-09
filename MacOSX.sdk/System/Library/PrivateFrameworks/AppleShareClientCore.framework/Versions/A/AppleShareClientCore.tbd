@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: DF2FF364-AA9F-30BC-8F3F-B107E7EF3B12' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           2B682669-1883-3531-B91A-75CB8CEF1EB1
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           4C98FE82-45E1-3907-BCA4-996F47FFCF24
 install-name:    '/System/Library/PrivateFrameworks/AppleShareClientCore.framework/Versions/A/AppleShareClientCore'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _AFPCopyPString, _AFPCopyPtoCString, _AFPGetTagFromBuffer, 
                        _AFPHexDump, _AFPLoadModules, _AFPMountURL, _AFPResolveDNS, 
                        _DSCloseSession, _DSCommand, _DSGetParms, _DSGetSessionInfo, 

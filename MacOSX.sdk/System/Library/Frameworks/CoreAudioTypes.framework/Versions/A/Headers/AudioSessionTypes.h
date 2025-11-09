@@ -9,6 +9,7 @@
 #define CoreAudioTypes_AudioSessionTypes_h
 
 #include <CoreFoundation/CFAvailability.h>
+#include <stdint.h>
 
 // Types which are binary-compatible with NS(U)Integer but without pulling in objc headers.
 #if __LP64__ || 0 || NS_BUILD_32_LIKE_64
@@ -25,8 +26,14 @@ typedef unsigned int AVAudioUInteger;
 #endif
 
 /*!
-    @enum    AVAudioSessionErrorCode
-    @brief    Error codes returned from the AVAudioSession API.
+	@typedef	AudioSessionID
+	@brief		Defines a unique identifier for an audio session.
+*/
+typedef uint32_t AudioSessionID;
+
+/*!
+    @enum		AVAudioSessionErrorCode
+    @brief		Error codes returned from the AVAudioSession API.
     @var        AVAudioSessionErrorCodeNone
         Operation succeeded.
     @var        AVAudioSessionErrorCodeMediaServicesFailed

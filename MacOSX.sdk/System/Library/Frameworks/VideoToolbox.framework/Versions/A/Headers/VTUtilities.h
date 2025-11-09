@@ -14,6 +14,7 @@
 #include <CoreVideo/CoreVideo.h>
 #include <CoreGraphics/CoreGraphics.h>
 #include <CoreMedia/CMBase.h>
+#include <CoreMedia/CMFormatDescription.h>
 
 #if defined(__cplusplus)
 extern "C"
@@ -45,6 +46,18 @@ VTCreateCGImageFromCVPixelBuffer(
 	CM_NONNULL CVPixelBufferRef			pixelBuffer,
 	CM_NULLABLE CFDictionaryRef			options,
 	CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE CGImageRef * CM_NONNULL imageOut ) API_AVAILABLE(macosx(10.11), ios(9.0), tvos(10.2));
+
+
+/*!
+	@function	VTRegisterSupplementalVideoDecoderIfAvailable
+	@abstract	Requests that a video decoder, if available, be registered for the specified CMVideoCodecType
+	@param	codecType
+		The CMVideoCodecType corresponding the format being requested
+	@discussion
+		This call will find and register a video decoder for the provided CMVideoCodecType if
+		such a decoder is available on the system but not registered by default.
+*/
+VT_EXPORT void VTRegisterSupplementalVideoDecoderIfAvailable( CMVideoCodecType codecType ) API_AVAILABLE(macosx(11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 #pragma pack(pop)

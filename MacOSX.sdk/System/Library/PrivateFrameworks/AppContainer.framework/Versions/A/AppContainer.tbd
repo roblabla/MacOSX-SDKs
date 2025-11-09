@@ -1,40 +1,39 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: ABCB3316-717C-3CFE-ABAE-3DB804B3B3E6', 'x86_64: ABCB3316-717C-3CFE-ABAE-3DB804B3B3E6' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           2D661C18-9DCC-3555-9277-7E3B77D737E5
+  - target:          x86_64-maccatalyst
+    value:           2D661C18-9DCC-3555-9277-7E3B77D737E5
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           7FD3BD9E-1754-3792-8A4C-BD99A7967980
+  - target:          arm64e-maccatalyst
+    value:           7FD3BD9E-1754-3792-8A4C-BD99A7967980
 install-name:    '/System/Library/PrivateFrameworks/AppContainer.framework/Versions/A/AppContainer'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _ASBBundleIdPassesSanityCheck, _ASBContainerErrorsIsOtherReportableError, 
                        _ASBContainerErrorsIsPermissionsError, _ASBContainerErrorsRecordPermissionsError, 
                        _ASBContainerErrorsUpdateError, _containerSetError, _kASBContainerErrorDomain, 
                        _kASBContainerErrorsHasPermissionsDataKey, _kASBContainerIdentityKey, 
                        _kASBContainerSandboxProfileDataKey, _kASBContainerSandboxProfileDataValidationInfoKey, 
-                       _kASBContainerVersionKey, _recordPermissionsError, _restorePermissions ]
-    objc-classes:    [ ASBAtomicFileHandle, ASBContainer, ASBContainerACL, ASBContainerAction, 
-                       ASBContainerActionBackupExclude, ASBContainerActionCopy, ASBContainerActionCopyContents, 
-                       ASBContainerActionMkdir, ASBContainerActionMove, ASBContainerActionMoveContents, 
-                       ASBContainerActionStopBackupExclude, ASBContainerActionSymlink, 
-                       ASBContainerActionUnlink, ASBContainerActionUnsharePreferenceDomain, 
-                       ASBContainerArchivedFile, ASBContainerFileManager, ASBContainerSchema, 
-                       ASBContainerUpgradeScript, ASBEnterpriseContainerSchema, ASBGroupContainer, 
-                       ASBMutableContainer, ASBPersonalContainerSchema ]
-    objc-ivars:      [ ASBAtomicFileHandle._backingHandle, ASBAtomicFileHandle._destFilePath, 
-                       ASBAtomicFileHandle._tempFilePath, ASBContainer._acl, ASBContainer._containerPath, 
-                       ASBContainer._dataPath, ASBContainer._homeDirPath, ASBContainer._metadata, 
-                       ASBContainer._metadataPath, ASBContainer._personaVolume, ASBContainer._schema, 
-                       ASBContainerACL._requirements, ASBContainerActionBackupExclude._pathSpec, 
-                       ASBContainerActionCopy._destSpec, ASBContainerActionCopy._sourceSpec, 
-                       ASBContainerActionCopyContents._destSpec, ASBContainerActionCopyContents._sourceSpec, 
-                       ASBContainerActionMkdir._pathSpec, ASBContainerActionMove._destSpec, 
+                       _recordPermissionsError, _restorePermissions ]
+    objc-classes:    [ ASBContainer, ASBContainerACL, ASBContainerAction, ASBContainerActionMove, 
+                       ASBContainerActionMoveContents, ASBContainerActionSymlink, 
+                       ASBContainerActionUnlink, ASBContainerFileManager, ASBContainerUpgradeScript, 
+                       ASBMutableContainer, ASBMutableContainerSynchronization ]
+    objc-ivars:      [ ASBContainer._acl, ASBContainer._containerPath, ASBContainer._dataPath, 
+                       ASBContainer._homeDirPath, ASBContainer._metadata, ASBContainer._personaVolume, 
+                       ASBContainerACL._requirements, ASBContainerActionMove._destSpec, 
                        ASBContainerActionMove._sourceSpec, ASBContainerActionMoveContents._destSpec, 
-                       ASBContainerActionMoveContents._sourceSpec, ASBContainerActionStopBackupExclude._pathSpec, 
-                       ASBContainerActionSymlink._destSpec, ASBContainerActionSymlink._linkSpec, 
-                       ASBContainerActionUnlink._pathSpec, ASBContainerActionUnsharePreferenceDomain._domain, 
-                       ASBContainerArchivedFile._absolutePath, ASBContainerArchivedFile._container, 
-                       ASBContainerArchivedFile._creationDate, ASBContainerArchivedFile._modificationDate, 
-                       ASBContainerArchivedFile._relativePath, ASBContainerArchivedFile._sb, 
-                       ASBContainerSchema._currentVersion, ASBContainerSchema._monitorSource, 
-                       ASBContainerSchema._schema, ASBContainerSchema._schemaFile, 
-                       ASBContainerSchema._schemaURL, ASBContainerUpgradeScript._actions ]
+                       ASBContainerActionMoveContents._sourceSpec, ASBContainerActionSymlink._destSpec, 
+                       ASBContainerActionSymlink._linkSpec, ASBContainerActionUnlink._pathSpec, 
+                       ASBContainerUpgradeScript._actions ]
 ...

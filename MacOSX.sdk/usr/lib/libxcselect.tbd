@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: B5C02BFD-B626-3375-9FD4-A4BF6811A2D2', 'x86_64: B5C02BFD-B626-3375-9FD4-A4BF6811A2D2' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           73DBE344-CD11-35C4-BFF2-009BD995EBBE
+  - target:          x86_64-maccatalyst
+    value:           73DBE344-CD11-35C4-BFF2-009BD995EBBE
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           3EE24E70-A01B-3A3E-90E5-351B947EA08D
+  - target:          arm64e-maccatalyst
+    value:           3EE24E70-A01B-3A3E-90E5-351B947EA08D
 install-name:    '/usr/lib/libxcselect.dylib'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _xcselect_bundle_is_developer_tool, _xcselect_developer_dir_matches_path, 
                        _xcselect_find_developer_contents_from_path, _xcselect_get_developer_dir_path, 
                        _xcselect_get_manpaths, _xcselect_get_version, _xcselect_host_sdk_path, 

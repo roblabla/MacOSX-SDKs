@@ -3,9 +3,9 @@
  
      Contains:   Basic Algebraic Operations for AltiVec
  
-     Version:    vecLib-735.0
+     Version:    vecLib-760.40
  
-     Copyright:  Copyright (c) 1999-2019 by Apple Inc. All rights reserved.
+     Copyright:  Copyright (c) 1999-2020 by Apple Inc. All rights reserved.
  
      Bugs:       For bug reports, consult the following page on
                  the World Wide Web:
@@ -21,6 +21,9 @@
 #include "vecLibTypes.h"
 
 #include <os/availability.h>
+#if __has_include( <TargetConditionals.h> )
+#include <TargetConditionals.h>
+#endif
 
 #if PRAGMA_ONCE
 #pragma once
@@ -31,25 +34,36 @@ extern "C" {
 #endif
 
 
+// There are certain routines (namely vS64Add and vU64Add) with 1
+// instruction implementations. There is no point in having a function
+// call occur and then return after executing 1 instruction. Thus we
+// introduce this define to allow for certain inline
+// attributes to be defined.
+#if defined __SSE2__
+	#include <immintrin.h>
+#elif defined (__arm64__)
+	#include <arm_neon.h>
+#endif // defined __SSE2__
+#define __VBASICOPS_INLINE_ATTR__ __attribute__((__always_inline__, __nodebug__))
+
 #if !defined __has_feature
-    #define __has_feature(f)    0
+	#define __has_feature(f)    0
 #endif
 #if __has_feature(assume_nonnull)
-    _Pragma("clang assume_nonnull begin")
+	_Pragma("clang assume_nonnull begin")
 #else
-    #define __nullable
-    #define __nonnull
+	#define __nullable
+	#define __nonnull
 #endif
 
 
-#if defined(__ppc__) || defined(__ppc64__) || defined(__i386__) || defined(__x86_64__)
-#if defined _AltiVecPIMLanguageExtensionsAreEnabled || defined __SSE2__
+#if TARGET_OS_OSX
 
 /*                                                                                  
-  This section is a collection of algebraic functions that uses the AltiVec       
+  This section is a collection of algebraic functions that uses the SIMD
   instruction set, and is designed to facilitate vector processing in             
   mathematical programming. Following table indicates which functions are covered
-  by AltiVec instruction set and which ones are performed by vBasicOps library:
+  by SIMD instruction set and which ones are performed by vBasicOps library:
 
 Legend:
     H/W   = Hardware
@@ -330,9 +344,8 @@ extern vUInt32
 vA128Shift(
   vUInt32   vA,
   vUInt8    vShiftFactor) API_AVAILABLE(macos(10.0)) API_UNAVAILABLE(ios, watchos, tvos);
-#endif  // defined _AltiVecPIMLanguageExtensionsAreEnabled || defined __SSE2__
 
-#endif  /* defined(__ppc__) || defined(__ppc64__) || defined(__i386__) || defined(__x86_64__) */
+#endif  /* TARGET_OS_OSX */
 
 
 #if __has_feature(assume_nonnull)

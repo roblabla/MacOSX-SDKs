@@ -1,11 +1,25 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: F2400744-3DF1-3DF5-9816-2A906D08A95D', 'x86_64: F2400744-3DF1-3DF5-9816-2A906D08A95D' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           022DF4FA-FAB7-3CF0-A16B-A86032AEDB1B
+  - target:          x86_64-maccatalyst
+    value:           022DF4FA-FAB7-3CF0-A16B-A86032AEDB1B
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           B2DA9161-E256-3650-B88C-AEDCE22C304C
+  - target:          arm64e-maccatalyst
+    value:           B2DA9161-E256-3650-B88C-AEDCE22C304C
 install-name:    '/System/Library/PrivateFrameworks/CalDAV.framework/Versions/A/CalDAV'
-current-version: 787
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 795
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CalDAVComplianceClass_AutoSchedule, _CalDAVComplianceClass_CalendarAudit, 
                        _CalDAVComplianceClass_CalendarAvailability, _CalDAVComplianceClass_CalendarHomeSync, 
                        _CalDAVComplianceClass_CalendarManagedAttachments, _CalDAVComplianceClass_CalendarNoTimezone, 
@@ -17,6 +31,8 @@ exports:
                        _CalDAVComplianceClass_SubscriptionCalendars, _CalDAVComplianceClass_Telephone, 
                        _CalDAVErrorDomain, _CalDAVHTTPHeader_IfScheduleTagMatch, 
                        _CalDAVHTTPHeader_ScheduleReply, _CalDAVHTTPHeader_ScheduleTag, 
+                       _CalDAVPrincipalRecordType_Groups, _CalDAVPrincipalRecordType_Locations, 
+                       _CalDAVPrincipalRecordType_Resources, _CalDAVPrincipalRecordType_Users, 
                        _CalDAVPrincipalResultType_Group, _CalDAVPrincipalResultType_Person, 
                        _CalDAVPrincipalResultType_Resource, _CalDAVPrincipalResultType_Room, 
                        _CalDAVPrincipalResultType_Unknown, _DAVHTTPSScheme, _DAVHTTPScheme, 

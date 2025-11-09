@@ -1,24 +1,33 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: F31F5A62-686F-30B9-A25C-D021B501ABDA' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           BF210154-3401-3C6E-81EA-1FDB102C39B0
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           2A4D92DC-3793-3A05-931A-805475896EF7
 install-name:    '/System/Library/PrivateFrameworks/IMAP.framework/Versions/A/IMAP'
-current-version: 3578.1
-exports:         
-  - archs:           [ x86_64 ]
-    allowable-clients: [ Mail, com.apple.MailServiceAgent, migrationhelper ]
+current-version: 3654.0.3
+allowable-clients:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    clients:         [ EmailFunctionalTests, IMAPFunctionalTests, Mail, MailTests, 
+                       com.apple.MailServiceAgent, migrationhelper ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _IMAPCreateArrayForMessageFlags, _IMAPGmailLabelChangeKeyAdd, 
                        _IMAPGmailLabelChangeKeyRemove, _IMAPIdAddress, _IMAPIdArguments, 
                        _IMAPIdCommand, _IMAPIdDate, _IMAPIdEnvironment, _IMAPIdName, 
                        _IMAPIdOS, _IMAPIdOSVersion, _IMAPIdSupportURL, _IMAPIdVendor, 
                        _IMAPIdVersion, _IMAPLineEnding, _IMAPLineEndingLength, _IMAPLineEndingString, 
                        _IMAPMailboxKeyAttributes, _IMAPMailboxKeyChildren, _IMAPMailboxKeyName, 
-                       _IMAPMailboxUserInfoKeySupportsCustomFlags, _IMAPMaxCommandsToWriteAtOnce, 
-                       _IMAPMaxUIDsPerCommand, _IMAPMessageFlagAnswered, _IMAPMessageFlagColorBit0, 
-                       _IMAPMessageFlagColorBit1, _IMAPMessageFlagColorBit2, _IMAPMessageFlagDeleted, 
-                       _IMAPMessageFlagDollarForwarded, _IMAPMessageFlagDollarJunk, 
-                       _IMAPMessageFlagDollarNotJunk, _IMAPMessageFlagDraft, _IMAPMessageFlagFlagged, 
-                       _IMAPMessageFlagForwarded, _IMAPMessageFlagJunk, _IMAPMessageFlagJunkMailLevelRecorded, 
+                       _IMAPMaxCommandsToWriteAtOnce, _IMAPMaxUIDsPerCommand, _IMAPMessageFlagAnswered, 
+                       _IMAPMessageFlagColorBit0, _IMAPMessageFlagColorBit1, _IMAPMessageFlagColorBit2, 
+                       _IMAPMessageFlagDeleted, _IMAPMessageFlagDollarForwarded, 
+                       _IMAPMessageFlagDollarJunk, _IMAPMessageFlagDollarNotJunk, 
+                       _IMAPMessageFlagDraft, _IMAPMessageFlagFlagged, _IMAPMessageFlagForwarded, 
+                       _IMAPMessageFlagJunk, _IMAPMessageFlagJunkMailLevelRecorded, 
                        _IMAPMessageFlagMDNSent, _IMAPMessageFlagNotJunk, _IMAPMessageFlagRecent, 
                        _IMAPMessageFlagRedirected, _IMAPMessageFlagSeen, _IMAPMessageFlagSubmitPending, 
                        _IMAPMessageFlagSubmitted, _IMAPMessageFlagsFromArray, _IMAPMessageInfoKeyDestinationUidSet, 

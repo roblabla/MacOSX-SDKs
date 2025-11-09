@@ -2,7 +2,7 @@
 //  ip_options.h
 //  Network
 //
-//  Copyright (c) 2017-2019 Apple. All rights reserved.
+//  Copyright (c) 2017-2019 Apple Inc. All rights reserved.
 //
 
 #ifndef __NW_IP_OPTIONS_H__
@@ -178,6 +178,28 @@ API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
 void
 nw_ip_options_set_local_address_preference(nw_protocol_options_t options,
 										   nw_ip_local_address_preference_t preference);
+
+/*!
+ * @function nw_ip_options_set_disable_multicast_loopback
+ *
+ * @abstract
+ *		If a multicast packet is sent to a group to which the sending host itself
+ *		belongs (on the outgoing interface), a copy of the datagram is, by default,
+ *		looped back by the IP layer for local delivery.
+ *		Setting the disable_multicast_loopback option disables this behavior and,
+ *		if set, multicast packets will not be looped back to the sender.
+ *		Only applies to multicast packets.
+ *
+ * @param options
+ *		An IP protocol options object.
+ *
+ * @param disable_multicast_loopback
+ *		If multicast loopback should be disabled.
+ */
+API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0))
+void
+nw_ip_options_set_disable_multicast_loopback(nw_protocol_options_t options,
+											 bool disable_multicast_loopback);
 
 #pragma mark - Metadata
 

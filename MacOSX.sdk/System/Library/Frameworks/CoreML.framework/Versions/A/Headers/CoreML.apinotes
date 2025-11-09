@@ -15,6 +15,8 @@ Globals:
     SwiftName: author
   - Name: MLModelLicenseKey
     SwiftName: license
+  - Name: MLModelCollectionDidChangeNotification
+    SwiftName: MLModelCollection.didChangeNotification
 Classes:
   - Name: MLFeatureValue
     Methods:
@@ -48,6 +50,13 @@ Classes:
     - Selector: 'initWithFeatureProviderArray:'
       SwiftName: init(array:)
       MethodKind: Instance
+  - Name: MLMultiArray
+    Methods:
+    - Selector: 'multiArrayByConcatenatingMultiArrays:alongAxis:dataType:'
+      SwiftName: init(concatenating:axis:dataType:)
+      MethodKind: Class
+  - Name: MLModelCollectionEntry
+    SwiftName: MLModelCollection.Entry
 Protocols:
   - Name: MLFeatureProvider
     Methods:

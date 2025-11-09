@@ -30,18 +30,17 @@ CG_EXTERN CGColorRef __nullable CGColorCreate(CGColorSpaceRef cg_nullable space,
 /* Create a color in the "Generic" gray color space. */
 
 CG_EXTERN CGColorRef  CGColorCreateGenericGray(CGFloat gray, CGFloat alpha)
-  CG_AVAILABLE_STARTING(10.5) CG_UNAVAILABLE_EMBEDDED;
+  CG_AVAILABLE_STARTING(10.5, 13.0);
 
 /* Create a color in the "Generic" RGB color space. */
 
 CG_EXTERN CGColorRef  CGColorCreateGenericRGB(CGFloat red, CGFloat green,
-  CGFloat blue, CGFloat alpha) CG_AVAILABLE_STARTING(10.5) CG_UNAVAILABLE_EMBEDDED;
+  CGFloat blue, CGFloat alpha) CG_AVAILABLE_STARTING(10.5, 13.0);
 
 /* Create a color in the "Generic" CMYK color space. */
 
 CG_EXTERN CGColorRef  CGColorCreateGenericCMYK(CGFloat cyan, CGFloat magenta,
-  CGFloat yellow, CGFloat black, CGFloat alpha)
-  CG_AVAILABLE_STARTING(10.5) CG_UNAVAILABLE_EMBEDDED;
+  CGFloat yellow, CGFloat black, CGFloat alpha) CG_AVAILABLE_STARTING(10.5, 13.0);
 
 /* Create a color in the "Generic Gray Gamma 2.2 color space. */
 
@@ -60,7 +59,7 @@ CG_EXTERN CGColorRef  CGColorCreateSRGB(CGFloat red, CGFloat green,
    CF type. */
 
 CG_EXTERN CGColorRef __nullable CGColorGetConstantColor(CFStringRef cg_nullable colorName)
-  CG_AVAILABLE_STARTING(10.5) CG_UNAVAILABLE_EMBEDDED;
+  CG_AVAILABLE_STARTING(10.5, 14.0);
 
 /* Create a color in color space `space' with pattern `pattern' and
    components `components'. `space' must be a pattern color space. */
@@ -139,13 +138,13 @@ CG_EXTERN CFTypeID CGColorGetTypeID(void)
 /* Colors in the "Generic" gray color space. */
 
 CG_EXTERN const CFStringRef  kCGColorWhite
-  CG_AVAILABLE_STARTING(10.5) CG_UNAVAILABLE_EMBEDDED;
+CG_AVAILABLE_STARTING(10.5, 14.0);
 
 CG_EXTERN const CFStringRef  kCGColorBlack
-  CG_AVAILABLE_STARTING(10.5) CG_UNAVAILABLE_EMBEDDED;
+  CG_AVAILABLE_STARTING(10.5, 14.0);
 
 CG_EXTERN const CFStringRef  kCGColorClear
-  CG_AVAILABLE_STARTING(10.5) CG_UNAVAILABLE_EMBEDDED;
+  CG_AVAILABLE_STARTING(10.5, 14.0);
 
 CF_ASSUME_NONNULL_END
 

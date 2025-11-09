@@ -614,5 +614,13 @@ NS_ASSUME_NONNULL_END
 
 #endif
 
+#if __has_include(<ptrauth.h>)
+#include <ptrauth.h>
+#endif
+
+#ifndef __ptrauth_objc_isa_pointer
+#define __ptrauth_objc_isa_pointer
+#endif
+
 #endif
 

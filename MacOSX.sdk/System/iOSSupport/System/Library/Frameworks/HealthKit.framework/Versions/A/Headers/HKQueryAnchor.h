@@ -2,7 +2,6 @@
 //  HKQueryAnchor.h
 //  HealthKit
 //
-//  Created by Allan Shortlidge on 2/21/19.
 //  Copyright © 2019 Apple. All rights reserved.
 //
 

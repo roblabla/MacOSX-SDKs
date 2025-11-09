@@ -80,7 +80,7 @@ typedef NS_ENUM( NSUInteger, ICDeviceLocationTypeMask )
 
 CF_ASSUME_NONNULL_BEGIN
 
-typedef NSString* ICDeviceTransport NS_TYPED_ENUM IC_AVAILABLE(macos(10.15), ios(13.0));
+typedef NSString* ICDeviceTransport NS_TYPED_ENUM IC_AVAILABLE(macos(10.4), ios(13.0));
 
 //------------------------------------------------------------------------------------------------------------------------------
 // Constants used to identify the transport type used by a device.
@@ -220,15 +220,21 @@ IC_AVAILABLE(macos(10.4), ios(13.0))
 
 /*!
  @property productKind
- @abstract ￼Type of the device. Possible values are: @"iPhone", @"iPod", @"Camera".
+ @abstract ￼Type of the device. Possible values are: @"iPhone", @"iPod", @"iPad", @"Camera", @"Scanner"
  */
 @property (nonatomic, readonly, copy, nullable) NSString* productKind IC_AVAILABLE(macos(10.4), ios(13.0));
 
 /*!
  @property icon
- @abstract ￼Icon image for the device.
+ @abstract ￼Icon image for the device class.  If there is no custom icon present from a device manufacturer, this will be a rendered version of the system symbol for the device class.  Using a rendered system symbol instead of the systemSymbolName is discouraged.
  */
 @property (nonatomic, readonly, nullable) CGImageRef icon IC_AVAILABLE(macos(10.4), ios(13.0));
+
+/*!
+@property systemSymbolName
+@abstract ￼Standard system symbol used to represent the device class.  Using the symbol to render an appropriate device icon will ensure proper scaling for high resolution devices.
+*/
+@property (nonatomic, readonly, copy, nullable) NSString* systemSymbolName IC_AVAILABLE(macos(11.0)) IC_UNAVAILABLE(ios);
 
 /*!
  @property transportType
@@ -335,7 +341,7 @@ IC_AVAILABLE(macos(10.4), ios(13.0))
  @method requestOpenSessionWithOptions:completion
  @abstract This message requests to open a session on the device.
  @discussion This request will execute the completion handler provided upon return.
- @note Execution of the completion block will occur on the thread initially called from.
+ @note The completion block will execute on an any available queue, often this will not be the main queue.
  */
 - (void)requestOpenSessionWithOptions:(NSDictionary<ICSessionOptions, id>* _Nullable)options
                            completion:(void (^)(NSError* _Nullable error))completion IC_AVAILABLE(macos(10.15), ios(13.0));
@@ -344,7 +350,7 @@ IC_AVAILABLE(macos(10.4), ios(13.0))
  @method requestCloseSessionWithOptions:completion
  @abstract This message requests to close a previously opened session on this device.
  @discussion This request will execute the completion handler provided upon return.
- @note Execution of the completion block will occur on the thread initially called from.
+ @note The completion block will execute on an any available queue, often this will not be the main queue.
  */
 - (void)requestCloseSessionWithOptions:(NSDictionary<ICSessionOptions, id>* _Nullable)options
                             completion:(void (^)(NSError* _Nullable error))completion IC_AVAILABLE(macos(10.15), ios(13.0));
@@ -353,7 +359,7 @@ IC_AVAILABLE(macos(10.4), ios(13.0))
  @method requestEjectWithCompletion:
  @abstract Eject the media, or disconnect the device - if permitted by the device.
  @discussion This request will execute the completion handler provided upon return.
- @note Execution of the completion block will occur on the thread initially called from.
+ @note The completion block will execute on an any available queue, often this will not be the main queue.
  */
 - (void)requestEjectWithCompletion:(void (^)(NSError* _Nullable error))completion IC_AVAILABLE(macos(10.15), ios(13.0));
 
@@ -435,7 +441,7 @@ IC_AVAILABLE(macos(10.4), ios(13.0))
  @discussion This message completes the process initiated by the message "requestCloseSession" sent to the device object. This message is also sent if the device module in control of the device ceases to control the device.
  @note Execution of the delegate callback will occur on the main thread.
  */
-- (void)device:(ICDevice*)device didCloseSessionWithError:(NSError*)error IC_AVAILABLE(macos(10.4),ios(13.0));
+- (void)device:(ICDevice*)device didCloseSessionWithError:(NSError* _Nullable)error IC_AVAILABLE(macos(10.4),ios(13.0));
 
 /*!
  @method didRemoveDevice:

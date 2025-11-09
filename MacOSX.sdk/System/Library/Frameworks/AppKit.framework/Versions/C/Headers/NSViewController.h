@@ -14,11 +14,12 @@
 #import <AppKit/NSStoryboard.h>
 #import <AppKit/NSStoryboardSegue.h>
 #import <AppKit/NSUserInterfaceItemIdentification.h>
+#import <AppKit/AppKitDefines.h>
 
 @protocol NSExtensionRequestHandling;
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSBundle, NSPointerArray, NSView;
 @protocol NSViewControllerPresentationAnimator;

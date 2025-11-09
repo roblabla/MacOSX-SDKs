@@ -546,10 +546,14 @@ typedef SInt32 OSSpinLock;
  * @discussion
  * The OSSynchronizeIO routine ensures orderly load and store operations to noncached memory mapped I/O devices. It executes the eieio instruction on PowerPC processors.
  */
+#if defined(__arm__) || defined(__arm64__)
+extern void OSSynchronizeIO(void);
+#else
 static __inline__ void
 OSSynchronizeIO(void)
 {
 }
+#endif
 
 
 #if defined(__cplusplus)

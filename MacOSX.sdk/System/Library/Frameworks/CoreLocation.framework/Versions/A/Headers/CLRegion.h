@@ -39,7 +39,7 @@ typedef NS_ENUM(NSInteger, CLProximity) {
 	CLProximityImmediate,
 	CLProximityNear,
 	CLProximityFar
-} API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(watchos, tvos);
+} API_AVAILABLE(ios(7.0), macos(10.15)) API_UNAVAILABLE(watchos, tvos);
 
 /*
  *  CLRegion

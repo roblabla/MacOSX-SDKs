@@ -22,6 +22,11 @@
 
 #import <Cocoa/Cocoa.h>
 #import <AvailabilityMacros.h>
+#include <Availability.h>
+
+
+API_UNAVAILABLE_BEGIN(ios)
+
 
 /*!
 	@const		DRBurnIcon
@@ -36,3 +41,7 @@ extern NSString* const DRBurnIcon		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
 	@discussion	The icon is available to applications through the @link //apple_ref/occ/instm/NSImage/imageNamed: -[NSImage imageNamed:] @/link method.
 */
 extern NSString* const DREraseIcon		AVAILABLE_MAC_OS_X_VERSION_10_2_AND_LATER;
+
+
+API_UNAVAILABLE_END
+

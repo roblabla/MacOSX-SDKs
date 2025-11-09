@@ -16,6 +16,12 @@
 #import <ICADevices/ICAApplication.h>
 #import <CoreGraphics/CGColorSpace.h>
 
+#ifndef __AVAILABILITYMACROS__
+#include <AvailabilityMacros.h>
+#endif
+
+API_UNAVAILABLE_BEGIN(ios)
+
 //------------------------------------------------------------------------------------------------------------------------------
 
 #ifdef __cplusplus
@@ -62,4 +68,4 @@ ICAError        ICDSendNotificationAndWaitForReply( ICASendNotificationPB* pb );
 }
 #endif
 
-//------------------------------------------------------------------------------------------------------------------------------
+API_UNAVAILABLE_END

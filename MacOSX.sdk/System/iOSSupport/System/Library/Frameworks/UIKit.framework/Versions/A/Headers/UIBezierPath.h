@@ -10,7 +10,7 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <UIKit/UIKitDefines.h>
 
-#import "UIGeometry.h"
+#import <UIKit/UIGeometry.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

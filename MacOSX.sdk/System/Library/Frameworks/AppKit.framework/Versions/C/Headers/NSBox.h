@@ -6,9 +6,10 @@
 */
 
 #import <AppKit/NSView.h>
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSFont;
 
@@ -70,17 +71,17 @@ typedef NS_ENUM(NSUInteger, NSBoxType) {
 
 @interface NSBox (NSDeprecated)
 
-@property NSBorderType borderType API_DEPRECATED("borderType is only applicable to NSBoxOldStyle, which is deprecated. To replace a borderType of NSNoBorder, use the `transparent` property.", macos(10.0,API_TO_BE_DEPRECATED));
+@property NSBorderType borderType API_DEPRECATED("borderType is only applicable to NSBoxOldStyle, which is deprecated. To replace a borderType of NSNoBorder, use the `transparent` property.", macos(10.0, 10.15));
 
 /* Mnemonics are deprecated in 10.8. Historically they have not done anything. For compatability, this method still calls setTitle: with the ampersand stripped from it. */
 - (void)setTitleWithMnemonic:(null_unspecified NSString *)stringWithAmpersand API_DEPRECATED("", macos(10.0,10.8));
 @end
 
 /* The Secondary box type has been identical to Primary since Mac OS X 10.3. Use NSBoxPrimary instead. */
-static const NSBoxType NSBoxSecondary API_DEPRECATED_WITH_REPLACEMENT("NSBoxPrimary", macos(10.0,API_TO_BE_DEPRECATED)) = (NSBoxType)1;
+static const NSBoxType NSBoxSecondary API_DEPRECATED_WITH_REPLACEMENT("NSBoxPrimary", macos(10.0, 10.15)) = (NSBoxType)1;
 
 /* Draws a border in the style of Mac OS X 10.2 and earlier. This style is not recommended. */
-static const NSBoxType NSBoxOldStyle API_DEPRECATED("NSBoxOldStyle is discouraged in modern application design. It should be replaced with either NSBoxPrimary or NSBoxCustom.", macos(10.0,API_TO_BE_DEPRECATED)) = (NSBoxType)3;
+static const NSBoxType NSBoxOldStyle API_DEPRECATED("NSBoxOldStyle is discouraged in modern application design. It should be replaced with either NSBoxPrimary or NSBoxCustom.", macos(10.0, 10.15)) = (NSBoxType)3;
 
 
 

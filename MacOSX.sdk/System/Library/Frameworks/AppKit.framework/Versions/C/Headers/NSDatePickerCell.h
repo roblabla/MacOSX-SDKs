@@ -7,10 +7,10 @@
 
 #import <Foundation/NSDate.h>
 #import <AppKit/NSActionCell.h>
-
+#import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 typedef NS_ENUM(NSUInteger, NSDatePickerStyle) {
     NSDatePickerStyleTextFieldAndStepper    = 0,
@@ -93,23 +93,23 @@ typedef NS_OPTIONS(NSUInteger, NSDatePickerElementFlags) {
 
 /* Deprecated legacy date picker style constants. Prefer to use NSDatePickerStyle values instead.
 */
-static const NSDatePickerStyle NSTextFieldAndStepperDatePickerStyle API_DEPRECATED_WITH_REPLACEMENT("NSDatePickerStyleTextFieldAndStepper", macos(10.0,API_TO_BE_DEPRECATED)) = NSDatePickerStyleTextFieldAndStepper;
-static const NSDatePickerStyle NSClockAndCalendarDatePickerStyle API_DEPRECATED_WITH_REPLACEMENT("NSDatePickerStyleClockAndCalendar", macos(10.0,API_TO_BE_DEPRECATED)) = NSDatePickerStyleClockAndCalendar;
-static const NSDatePickerStyle NSTextFieldDatePickerStyle API_DEPRECATED_WITH_REPLACEMENT("NSDatePickerStyleTextField", macos(10.0,API_TO_BE_DEPRECATED)) = NSDatePickerStyleTextField;
+static const NSDatePickerStyle NSTextFieldAndStepperDatePickerStyle API_DEPRECATED_WITH_REPLACEMENT("NSDatePickerStyleTextFieldAndStepper", macos(10.0, 11.0)) = NSDatePickerStyleTextFieldAndStepper;
+static const NSDatePickerStyle NSClockAndCalendarDatePickerStyle API_DEPRECATED_WITH_REPLACEMENT("NSDatePickerStyleClockAndCalendar", macos(10.0, 11.0)) = NSDatePickerStyleClockAndCalendar;
+static const NSDatePickerStyle NSTextFieldDatePickerStyle API_DEPRECATED_WITH_REPLACEMENT("NSDatePickerStyleTextField", macos(10.0, 11.0)) = NSDatePickerStyleTextField;
 
 /* Deprecated legacy date picker mode constants. Prefer to use NSDatePickerMode values instead.
 */
-static const NSDatePickerMode NSSingleDateMode API_DEPRECATED_WITH_REPLACEMENT("NSDatePickerModeSingle", macos(10.0,API_TO_BE_DEPRECATED)) = NSDatePickerModeSingle;
-static const NSDatePickerMode NSRangeDateMode API_DEPRECATED_WITH_REPLACEMENT("NSDatePickerModeRange", macos(10.0,API_TO_BE_DEPRECATED)) = NSDatePickerModeRange;
+static const NSDatePickerMode NSSingleDateMode API_DEPRECATED_WITH_REPLACEMENT("NSDatePickerModeSingle", macos(10.0, 11.0)) = NSDatePickerModeSingle;
+static const NSDatePickerMode NSRangeDateMode API_DEPRECATED_WITH_REPLACEMENT("NSDatePickerModeRange", macos(10.0, 11.0)) = NSDatePickerModeRange;
 
 /* Deprecated legacy date picker element flag constants. Prefer to use NSDatePickerElementFlags values instead.
 */
-static const NSDatePickerElementFlags NSHourMinuteDatePickerElementFlag API_DEPRECATED_WITH_REPLACEMENT("NSDatePickerElementFlagHourMinute", macos(10.0,API_TO_BE_DEPRECATED)) = NSDatePickerElementFlagHourMinute;
-static const NSDatePickerElementFlags NSHourMinuteSecondDatePickerElementFlag API_DEPRECATED_WITH_REPLACEMENT("NSDatePickerElementFlagHourMinuteSecond", macos(10.0,API_TO_BE_DEPRECATED)) = NSDatePickerElementFlagHourMinuteSecond;
-static const NSDatePickerElementFlags NSTimeZoneDatePickerElementFlag API_DEPRECATED_WITH_REPLACEMENT("NSDatePickerElementFlagTimeZone", macos(10.0,API_TO_BE_DEPRECATED)) = NSDatePickerElementFlagTimeZone;
-static const NSDatePickerElementFlags NSYearMonthDatePickerElementFlag API_DEPRECATED_WITH_REPLACEMENT("NSDatePickerElementFlagYearMonth", macos(10.0,API_TO_BE_DEPRECATED)) = NSDatePickerElementFlagYearMonth;
-static const NSDatePickerElementFlags NSYearMonthDayDatePickerElementFlag API_DEPRECATED_WITH_REPLACEMENT("NSDatePickerElementFlagYearMonthDay", macos(10.0,API_TO_BE_DEPRECATED)) = NSDatePickerElementFlagYearMonthDay;
-static const NSDatePickerElementFlags NSEraDatePickerElementFlag API_DEPRECATED_WITH_REPLACEMENT("NSDatePickerElementFlagEra", macos(10.0,API_TO_BE_DEPRECATED)) = NSDatePickerElementFlagEra;
+static const NSDatePickerElementFlags NSHourMinuteDatePickerElementFlag API_DEPRECATED_WITH_REPLACEMENT("NSDatePickerElementFlagHourMinute", macos(10.0, 11.0)) = NSDatePickerElementFlagHourMinute;
+static const NSDatePickerElementFlags NSHourMinuteSecondDatePickerElementFlag API_DEPRECATED_WITH_REPLACEMENT("NSDatePickerElementFlagHourMinuteSecond", macos(10.0, 11.0)) = NSDatePickerElementFlagHourMinuteSecond;
+static const NSDatePickerElementFlags NSTimeZoneDatePickerElementFlag API_DEPRECATED_WITH_REPLACEMENT("NSDatePickerElementFlagTimeZone", macos(10.0, 11.0)) = NSDatePickerElementFlagTimeZone;
+static const NSDatePickerElementFlags NSYearMonthDatePickerElementFlag API_DEPRECATED_WITH_REPLACEMENT("NSDatePickerElementFlagYearMonth", macos(10.0, 11.0)) = NSDatePickerElementFlagYearMonth;
+static const NSDatePickerElementFlags NSYearMonthDayDatePickerElementFlag API_DEPRECATED_WITH_REPLACEMENT("NSDatePickerElementFlagYearMonthDay", macos(10.0, 11.0)) = NSDatePickerElementFlagYearMonthDay;
+static const NSDatePickerElementFlags NSEraDatePickerElementFlag API_DEPRECATED_WITH_REPLACEMENT("NSDatePickerElementFlagEra", macos(10.0, 11.0)) = NSDatePickerElementFlagEra;
 
 API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

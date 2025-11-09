@@ -1,12 +1,26 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 7042B124-AEEA-3E42-87A8-426015A3CEF7', 'x86_64: 7042B124-AEEA-3E42-87A8-426015A3CEF7' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           58FA6D7E-39BB-31EF-A8F5-0595E986C37D
+  - target:          x86_64-maccatalyst
+    value:           58FA6D7E-39BB-31EF-A8F5-0595E986C37D
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           C3106AE6-3438-3C76-AE34-D84F003BDB1E
+  - target:          arm64e-maccatalyst
+    value:           C3106AE6-3438-3C76-AE34-D84F003BDB1E
 install-name:    '/usr/lib/libncurses.5.4.dylib'
 current-version: 5.4
 compatibility-version: 5.4
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _BC, _COLORS, _COLOR_PAIR, _COLOR_PAIRS, _COLS, _ESCDELAY, 
                        _LINES, _PAIR_NUMBER, _PC, _SP, _TABSIZE, _UP, __nc_access, 
                        __nc_add_to_try, __nc_align_termtype, __nc_basename, __nc_baudrate, 

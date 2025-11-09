@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2018 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2019 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -94,6 +94,7 @@
 #ifndef _NETINET_ICMP6_H_
 #define _NETINET_ICMP6_H_
 #include <sys/appleapiopts.h>
+#include <sys/types.h>
 
 #define ICMPV6_PLD_MAXLEN       1232    /* IPV6_MMTU - sizeof(struct ip6_hdr)
 	                                 *  - sizeof(struct icmp6_hdr) */
@@ -169,9 +170,10 @@ struct icmp6_hdr {
 #define ICMP6_TIME_EXCEED_TRANSIT       0       /* ttl==0 in transit */
 #define ICMP6_TIME_EXCEED_REASSEMBLY    1       /* ttl==0 in reass */
 
-#define ICMP6_PARAMPROB_HEADER          0       /* erroneous header field */
-#define ICMP6_PARAMPROB_NEXTHEADER      1       /* unrecognized next header */
-#define ICMP6_PARAMPROB_OPTION          2       /* unrecognized option */
+#define ICMP6_PARAMPROB_HEADER                   0       /* erroneous header field */
+#define ICMP6_PARAMPROB_NEXTHEADER               1       /* unrecognized next header */
+#define ICMP6_PARAMPROB_OPTION                   2       /* unrecognized option */
+#define ICMP6_PARAMPROB_FIRSTFRAG_INCOMP_HDR     3       /* first fragment has incomplete IPv6 Header Chain */
 
 #define ICMP6_INFOMSG_MASK              0x80    /* all informational messages */
 
@@ -244,10 +246,7 @@ struct nd_router_advert {       /* router advertisement */
 #define ND_RA_FLAG_OTHER        0x40
 #define ND_RA_FLAG_HA           0x20
 
-/*
- * Router preference values based on draft-draves-ipngwg-router-selection-01.
- * These are non-standard definitions.
- */
+/* Router preference values based on RFC 4191 */
 #define ND_RA_FLAG_RTPREF_MASK  0x18 /* 00011000 */
 
 #define ND_RA_FLAG_RTPREF_HIGH  0x08 /* 00001000 */
@@ -314,10 +313,10 @@ struct nd_opt_hdr {             /* Neighbor discovery option header */
 #define ND_OPT_REDIRECTED_HEADER        4
 #define ND_OPT_MTU                      5
 #define ND_OPT_NONCE                    14      /* RFC 3971 */
+#define ND_OPT_ROUTE_INFO               24      /* RFC 4191 */
 #define ND_OPT_RDNSS                    25      /* RFC 6106 */
 #define ND_OPT_DNSSL                    31      /* RFC 6106 */
-
-#define ND_OPT_ROUTE_INFO               200     /* draft-ietf-ipngwg-router-preference, not officially assigned yet */
+#define ND_OPT_CAPTIVE_PORTAL           37      /* RFC 7710 */
 
 struct nd_opt_prefix_info {     /* prefix information */
 	u_int8_t        nd_opt_pi_type;
@@ -633,6 +632,7 @@ struct icmp6stat {
 	u_quad_t icp6s_badra;           /* bad router advertisement */
 	u_quad_t icp6s_badredirect;     /* bad redirect message */
 	u_quad_t icp6s_rfc6980_drop;    /* NDP packet dropped based on RFC 6980 */
+	u_quad_t icp6s_badpkttoobig;    /* bad packet too big */
 };
 
 /*

@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVMediaSelectionGroup.h>)
 /*
 	File:  AVMediaSelectionGroup.h
 
@@ -283,3 +284,7 @@ API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0))
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCore/AVMediaSelectionGroup.h>
+#endif

@@ -26,6 +26,7 @@
 #import <AppKit/NSCandidateListTouchBarItem.h>
 #import <AppKit/NSColorPanel.h>
 #import <AppKit/NSMenu.h>
+#import <AppKit/NSTextContent.h>
 
 @protocol NSTextViewDelegate;
 @protocol NSTextLayoutOrientationProvider;
@@ -33,7 +34,7 @@
 @protocol QLPreviewItem;
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSTextContainer;
 @class NSTextStorage;
@@ -68,7 +69,7 @@ APPKIT_EXTERN NSString * NSAllRomanInputSourcesLocaleIdentifier API_AVAILABLE(ma
 #if MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_12
 NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 #endif
-@interface NSTextView : NSText <NSColorChanging, NSMenuItemValidation, NSUserInterfaceValidations, NSTextInputClient, NSTextLayoutOrientationProvider, NSDraggingSource, NSStandardKeyBindingResponding, NSTextInput, NSAccessibilityNavigableStaticText>
+@interface NSTextView : NSText <NSColorChanging, NSMenuItemValidation, NSUserInterfaceValidations, NSTextInputClient, NSTextLayoutOrientationProvider, NSDraggingSource, NSStandardKeyBindingResponding, NSTextInput, NSAccessibilityNavigableStaticText, NSTextContent>
 
 /**************************** Initializing ****************************/
 

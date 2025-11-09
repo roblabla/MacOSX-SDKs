@@ -469,7 +469,7 @@ IMAGEIO_EXTERN bool CGImageMetadataRemoveTagWithPath(CGMutableImageMetadataRef _
 
 
 #ifdef __BLOCKS__
-///*! @functiongroup Iterating through tags of CGImageMetadataRef */
+/*  Iterating through tags of CGImageMetadataRef */
 /*!
  * @typedef CGImageMetadataTagBlock
  * @abstract The block type used by CGImageMetadataEnumerateTagsUsingBlock

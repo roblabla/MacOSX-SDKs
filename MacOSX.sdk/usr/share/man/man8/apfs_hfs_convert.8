@@ -70,7 +70,8 @@ Estimate the APFS metadata size after conversion.
 .It Fl v | Fl -verbose
 Increase verbosity of the output.
 .It Fl s | Fl -force-case-sensitive
-Force the converted volume to be case-sensitive. By default, the converted volume will have the same case-sensitivity as the original HFS volume.
+Force the converted volume to be case-sensitive.
+By default, the converted volume will have the same case-sensitivity as the original HFS volume.
 .It Fl S Ar path | Fl -stats Ar path
 Print statistics about the conversion to the supplied
 .Ar path .
@@ -78,7 +79,8 @@ If the path is
 .Ar -
 then the statistics are printed to standard output.
 .It Fl n | Fl -dry-run
-Do not finalize the conversion to APFS. Volume remains HFS.
+Do not finalize the conversion to APFS.
+Volume remains HFS.
 .It Fl f | Fl -force
 Force conversion if volume is dirty (journal is non-empty, volume had inconsistencies, or volume is not journaled and not unmounted cleanly).
 .It Fl F Ar index | Fl -fixed Ar index
@@ -97,8 +99,20 @@ NX or APFS format options.
 If conversion succeeds, modify the GPT UUID. 
 .It Fl D | Fl -skip-single-dirlinks
 Convert all former and current directory hardlinks to files/aliases. 
+.It Fl -feature-format
+Allow for one-off specific formatting features to be toggled on or off during the conversion to APFS.
+Values must be specified in a CSV string.
+For example
+"feature=value,feature2=value2,..."
+.Pp
+.Cm dirents=unhashed
+is a feature format flag that will specify to the converter that it should produce
+a volume with legacy (non-standard) directory entries.
+That is, the resulting volume will have file names that are both
+normalization-sensitive and case-sensitive.
+This is not recommended in most cases.
 .El
-.Sh DIAGNOSTICS
+.Sh EXIT STATUS
 .Ex -std
 .Sh EXAMPLES
 The following converts the HFS file system
@@ -106,7 +120,6 @@ on the
 .Pa /dev/disk1s2
 device:
 .Dl Nm Fl v Pa /dev/disk1s2
-.Pp
 .Sh SEE ALSO
 .Xr mount_apfs 8
 ,

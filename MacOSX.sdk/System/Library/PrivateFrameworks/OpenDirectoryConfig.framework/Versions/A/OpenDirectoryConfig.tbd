@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 8C233057-0413-345B-9F8F-E9C57CE54BCD' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           3580A724-8E6B-3E5B-9966-AF4FE0161177
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           A7744526-0708-3CBA-B226-BE318F362E30
 install-name:    '/System/Library/PrivateFrameworks/OpenDirectoryConfig.framework/Versions/A/OpenDirectoryConfig'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _ODCActionErrorActionsKey, _ODCActionErrorDomain, _ODCActionFinishedNotification, 
                        _ODCActionStartedNotification, _ODCAddODServerStep1, _ODCAddODServerStep2, 
                        _ODCAddODServerStep3, _ODCAddODServerStep4, _ODCAddODServerStep5, 

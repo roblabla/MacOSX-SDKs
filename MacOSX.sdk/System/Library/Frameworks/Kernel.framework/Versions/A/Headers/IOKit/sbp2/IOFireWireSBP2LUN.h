@@ -86,7 +86,7 @@ public:
         @result false if the provider is inactive or on a resource failure, otherwise true. 
     */
     
-    virtual bool attach( IOService *provider );
+    virtual bool attach( IOService *provider ) APPLE_KEXT_OVERRIDE;
 
 	/*! @function handleOpen
 		@abstract Overrideable method to control the open / close behaviour of an IOService.
@@ -97,7 +97,7 @@ public:
 
     virtual bool handleOpen(  IOService *	  forClient,
                               IOOptionBits	  options,
-                              void *		  arg );
+                              void *		  arg ) APPLE_KEXT_OVERRIDE;
 	/*! 
 		@function handleClose
 		@abstract Overrideable method to control the open / close behaviour of an IOService.
@@ -107,7 +107,7 @@ public:
 	*/
 
     virtual void handleClose(   IOService *		forClient,
-                                IOOptionBits	options );
+                                IOOptionBits	options ) APPLE_KEXT_OVERRIDE;
     
  	/*! 
 		@function matchPropertyTable
@@ -117,7 +117,7 @@ public:
 		@result Returns false if the family considers the matching dictionary does not match in properties it 			understands, true otherwise.
 	*/
     	
-	virtual bool matchPropertyTable(OSDictionary * table);
+	virtual bool matchPropertyTable(OSDictionary * table) APPLE_KEXT_OVERRIDE;
 																	
 protected:
 
@@ -137,8 +137,8 @@ protected:
 	// private methods
 	
 	// IOService methods
-    virtual void free( void );
-    virtual IOReturn message( UInt32 type, IOService * provider, void * argument = 0 );
+    virtual void free( void ) APPLE_KEXT_OVERRIDE;
+    virtual IOReturn message( UInt32 type, IOService * provider, void * argument = 0 ) APPLE_KEXT_OVERRIDE;
     
 	// create management orb internals
 	static IOReturn staticCreateManagementORBAction( OSObject *self,
@@ -249,7 +249,7 @@ public:
     	
 	virtual OSObject * getDiagnostics( void );
 
-    virtual bool finalize( IOOptionBits options );
+    virtual bool finalize( IOOptionBits options ) APPLE_KEXT_OVERRIDE;
 
 protected:
 

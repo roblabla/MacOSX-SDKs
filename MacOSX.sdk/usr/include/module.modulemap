@@ -470,9 +470,13 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
     export Darwin.POSIX.sys.select
    }
 
+   module _select {
+    header "sys/_select.h"
+    export *
+   }
+
    module select {
     header "sys/select.h"
-    textual header "sys/_select.h"
     export *
    }
 
@@ -506,7 +510,6 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
 
    module time {
     header "sys/time.h"
-    textual header "sys/_select.h"
     export *
    }
 
@@ -685,6 +688,7 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
  }
 
  module Availability {
+        header "AvailabilityVersions.h"
   header "Availability.h"
   header "os/availability.h"
   header "AvailabilityMacros.h"
@@ -800,7 +804,6 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
    header "mach/host_special_ports.h"
    export *
   }
-
   module kern_return {
    header "mach/kern_return.h"
    export *
@@ -1189,12 +1192,6 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
    header "libkern/OSByteOrder.h"
    header "libkern/_OSByteOrder.h"
    export *
-
-
-
-
-   header "libkern/i386/_OSByteOrder.h"
-
   }
  }
 
@@ -1734,6 +1731,14 @@ module os [system] [extern_c] {
  module object {
   export os_object
  }
+ module overflow {
+  header "os/overflow.h"
+  export *
+ }
+ module workgroup {
+  header "os/_workgroup.h"
+  export *
+ }
  module trace_base {
   header "os/trace_base.h"
   export *
@@ -1756,6 +1761,17 @@ module os [system] [extern_c] {
 module os_object [system] [extern_c] {
  header "os/object.h"
  export *
+}
+
+module os_workgroup [system] [extern_c] {
+ module workgroup {
+  header "os/workgroup.h"
+  header "os/workgroup_base.h"
+  header "os/workgroup_interval.h"
+  header "os/workgroup_object.h"
+  header "os/workgroup_parallel.h"
+  export *
+ }
 }
 
 module libkern [system] [extern_c] {
@@ -1851,240 +1867,6 @@ module krb5 [system] [extern_c] {
 module kcdata [system] [extern_c] {
     header "kern/kcdata.h"
     export *
-}
-
-module xml2 [system] [extern_c] {
-    module HTMLparser {
-        header "libxml/HTMLparser.h"
-        export *
-    }
-
-    module HTMLtree {
-        header "libxml/HTMLtree.h"
-        export *
-    }
-
-    module SAX {
-        header "libxml/SAX.h"
-        export *
-    }
-
-    module SAX2 {
-        header "libxml/SAX2.h"
-        export *
-    }
-
-    module c14n {
-        header "libxml/c14n.h"
-        export *
-    }
-
-    module catalog {
-        header "libxml/catalog.h"
-        export *
-    }
-
-    module chvalid {
-        header "libxml/chvalid.h"
-        export *
-    }
-
-    module debugXML {
-        header "libxml/debugXML.h"
-        export *
-    }
-
-    module dict {
-        header "libxml/dict.h"
-        export *
-    }
-
-    module encoding {
-        header "libxml/encoding.h"
-        export *
-    }
-
-    module entities {
-        header "libxml/entities.h"
-        export *
-    }
-
-    module globals {
-        header "libxml/globals.h"
-        export *
-    }
-
-    module hash {
-        header "libxml/hash.h"
-        export *
-    }
-
-    module list {
-        header "libxml/list.h"
-        export *
-    }
-
-    module nanoftp {
-        header "libxml/nanoftp.h"
-        export *
-    }
-
-    module nanohttp {
-        header "libxml/nanohttp.h"
-        export *
-    }
-
-    module parser {
-        header "libxml/parser.h"
-        export *
-    }
-
-    module parserInternals {
-        header "libxml/parserInternals.h"
-        export *
-    }
-
-    module pattern {
-        header "libxml/pattern.h"
-        export *
-    }
-
-    module relaxng {
-        header "libxml/relaxng.h"
-        export *
-    }
-
-    module schemasInternals {
-        header "libxml/schemasInternals.h"
-        export *
-    }
-
-    module schematron {
-        header "libxml/schematron.h"
-        export *
-    }
-
-    module threads {
-        header "libxml/threads.h"
-        export *
-    }
-
-    module tree {
-        header "libxml/tree.h"
-        export *
-    }
-
-    module uri {
-        header "libxml/uri.h"
-        export *
-    }
-
-    module valid {
-        header "libxml/valid.h"
-        export *
-    }
-
-    module xinclude {
-        header "libxml/xinclude.h"
-        export *
-    }
-
-    module xlink {
-        header "libxml/xlink.h"
-        export *
-    }
-
-    module xmlIO {
-        header "libxml/xmlIO.h"
-        export *
-    }
-
-    module xmlautomata {
-        header "libxml/xmlautomata.h"
-        export *
-    }
-
-    module xmlerror {
-        header "libxml/xmlerror.h"
-        export *
-    }
-
-    module xmlexports {
-        header "libxml/xmlexports.h"
-        export *
-    }
-
-    module xmlmemory {
-        header "libxml/xmlmemory.h"
-        export *
-    }
-
-    module xmlmodule {
-        header "libxml/xmlmodule.h"
-        export *
-    }
-
-    module xmlreader {
-        header "libxml/xmlreader.h"
-        export *
-    }
-
-    module xmlregexp {
-        header "libxml/xmlregexp.h"
-        export *
-    }
-
-    module xmlsave {
-        header "libxml/xmlsave.h"
-        export *
-    }
-
-    module xmlschemas {
-        header "libxml/xmlschemas.h"
-        export *
-    }
-
-    module xmlschemastypes {
-        header "libxml/xmlschemastypes.h"
-        export *
-    }
-
-    module xmlstring {
-        header "libxml/xmlstring.h"
-        export *
-    }
-
-    module xmlunicode {
-        header "libxml/xmlunicode.h"
-        export *
-    }
-
-    module xmlversion {
-        header "libxml/xmlversion.h"
-        export *
-    }
-
-    module xmlwriter {
-        header "libxml/xmlwriter.h"
-        export *
-    }
-
-    module xpath {
-        header "libxml/xpath.h"
-        export *
-    }
-
-    module xpathInternals {
-        header "libxml/xpathInternals.h"
-        export *
-    }
-
-    module xpointer {
-        header "libxml/xpointer.h"
-        export *
-    }
-
-    exclude header "libxml2/libxml/DOCBparser.h" // deprecated
 }
 
 module zlib [system] [extern_c] {

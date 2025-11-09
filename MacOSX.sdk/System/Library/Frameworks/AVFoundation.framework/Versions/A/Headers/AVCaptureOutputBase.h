@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCapture/AVCaptureOutputBase.h>)
 /*
     File:  AVCaptureOutputBase.h
  
@@ -138,3 +139,7 @@ typedef NS_ENUM(NSInteger, AVCaptureOutputDataDroppedReason) {
 } API_AVAILABLE(macos(10.15), ios(11.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCapture/AVCaptureOutputBase.h>
+#endif

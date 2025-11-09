@@ -1,11 +1,19 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: A1AFC19C-A9A2-3320-ABA9-E2867CD5DF79' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           45A4F4D7-C096-3002-BBF0-9C60276F7871
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           C1E692C4-C88C-3FC2-AA16-06A91E05ABD4
 install-name:    '/System/Library/PrivateFrameworks/DisplayServices.framework/Versions/A/DisplayServices'
-exports:         
-  - archs:           [ x86_64 ]
-    re-exports:      [ '/usr/lib/libobjc.A.dylib' ]
+reexported-libraries:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    libraries:       [ '/usr/lib/libobjc.A.dylib' ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CreateNotificationKeyFromNameAndDisplayID, _DSDisplayIDKey, 
                        _DSLogClose, _DSNotificationNameKey, _DisplayServicesAmbientLightCompensationEnabled, 
                        _DisplayServicesAmbientLightResetChanged, _DisplayServicesBezelButtonsLocked, 

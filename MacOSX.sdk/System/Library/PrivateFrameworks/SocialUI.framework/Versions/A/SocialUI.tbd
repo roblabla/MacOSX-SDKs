@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 100C6D67-C920-3422-AD10-76345887449E' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           1CF8DDB7-DD04-3D13-AF70-DB6649CE6C40
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           204830A5-C6C5-3D56-B135-2C69558997ED
 install-name:    '/System/Library/PrivateFrameworks/SocialUI.framework/Versions/A/SocialUI'
 current-version: 5500
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _AcknowledgmentPickerDOMProviderMaximumBubbleXPosition, _AcknowledgmentPickerDOMProviderPickerButtonAnimationClass, 
                        _AcknowledgmentPickerDOMProviderPickerButtonContainerElementType, 
                        _AcknowledgmentPickerDOMProviderPickerButtonElementType, _AcknowledgmentPickerDOMProviderPickerButtonGlyphElementType, 
@@ -47,8 +53,7 @@ exports:
                        _IMPluginMessageStatusChatItemStatusContainer, _IMPluginMessageStatusChatItemStatusContainerElementType, 
                        _IMPluginMessageStatusChatItemStatusItem, _IMPluginMessageStatusChatItemStatusItemElementType, 
                        _IMPluginMessageStatusChatItemStatusItemIconElementType, _MyBuddyPictureDidChangeNotification, 
-                       _OpenLinkFromDelegateTextViewCallback, _PersonPictureChangedNotification, 
-                       _RecipientBarBottomBaselineToBottomSendingTextContainerDelta, 
+                       _OpenLinkFromDelegateTextViewCallback, _RecipientBarBottomBaselineToBottomSendingTextContainerDelta, 
                        _RecipientBarRecipientActionsToBottomToBaselineDelta, _RecipientBarTopToToLabelToBaselineDelta, 
                        _RegisterAMRNBEncoder, _SOAVPopUpSegmentedCellCircleDiameter, 
                        _SOAVPopUpSegmentedCellCircleStrokeWidth, _SOAcknowledgementTouchBarItemIdentifier, 
@@ -60,7 +65,8 @@ exports:
                        _SOBalloonPluginPasteboardType, _SOBalloonPluginTranscriptGuidKey, 
                        _SOBundleImageNamed, _SOBusinessNameDidResolveNotification, 
                        _SOChatDetailsContentWidth, _SOChatDetailsPopoverPreferredMinimumMaximumHeight, 
-                       _SOChatDetailsPopoverWidth, _SOChatDetailsSideMargin, _SOChatDisplayControllerChatDidChangeNotification, 
+                       _SOChatDetailsPopoverWidth, _SOChatDetailsSideMargin, _SOChatDisplayControllerAllowedByScreenTimeDidChangeNotification, 
+                       _SOChatDisplayControllerAllowedByScreenTimeKey, _SOChatDisplayControllerChatDidChangeNotification, 
                        _SOChatDisplayControllerChatWillChangeNotification, _SOChatDisplayControllerInputLineContentRestorableDataKey, 
                        _SOChatDisplayControllerInputLineSelectedRangesKey, _SOChatDisplayControllerLastActivityDateDidChangeNotification, 
                        _SOChatDisplayControllerNewChatKey, _SOChatDisplayControllerOldChatKey, 

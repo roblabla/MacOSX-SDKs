@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKitDefines.h>
+#import "UIImage.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,15 +16,26 @@ UIKIT_EXTERN API_AVAILABLE(ios(8.0)) @interface UIAccessibilityCustomAction : NS
 
 - (instancetype)initWithName:(NSString *)name target:(nullable id)target selector:(SEL)selector;
 - (instancetype)initWithAttributedName:(NSAttributedString *)attributedName target:(nullable id)target selector:(SEL)selector API_AVAILABLE(ios(11.0), tvos(11.0));
+- (instancetype)initWithName:(NSString *)name image:(nullable UIImage *)image target:(nullable id)target selector:(SEL)selector API_AVAILABLE(ios(14.0), tvos(14.0));
+- (instancetype)initWithAttributedName:(NSAttributedString *)attributedName image:(nullable UIImage *)image target:(nullable id)target selector:(SEL)selector API_AVAILABLE(ios(14.0), tvos(14.0));
+
 
 typedef BOOL(^UIAccessibilityCustomActionHandler)(UIAccessibilityCustomAction *customAction);
 - (instancetype)initWithName:(NSString *)name actionHandler:(UIAccessibilityCustomActionHandler)actionHandler API_AVAILABLE(ios(13.0), tvos(13.0));
 - (instancetype)initWithAttributedName:(NSAttributedString *)attributedName actionHandler:(UIAccessibilityCustomActionHandler)actionHandler API_AVAILABLE(ios(13.0), tvos(13.0));
+- (instancetype)initWithName:(NSString *)name image:(nullable UIImage *)image actionHandler:(UIAccessibilityCustomActionHandler)actionHandler API_AVAILABLE(ios(14.0), tvos(14.0));
+- (instancetype)initWithAttributedName:(NSAttributedString *)attributedName image:(nullable UIImage *)image actionHandler:(UIAccessibilityCustomActionHandler)actionHandler API_AVAILABLE(ios(14.0), tvos(14.0));
+
 
 /*
  A localized name that describes the action.
  */
 @property (nonatomic, copy) NSString *name;
+
+/*
+ An image representing the action to be shown with some assistive technologies such as Switch Control.
+ */
+@property (nullable, nonatomic, strong) UIImage *image;
 
 /*
  Underlying attributed version of the "name" property. Setting this property will change the

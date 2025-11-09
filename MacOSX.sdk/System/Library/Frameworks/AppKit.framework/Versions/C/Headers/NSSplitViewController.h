@@ -9,11 +9,11 @@
 #import <AppKit/NSSplitViewItem.h>
 #import <AppKit/AppKitDefines.h>
 #import <AppKit/NSSplitView.h>
-
+#import <AppKit/AppKitDefines.h>
 #import <Foundation/NSArray.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 /// This constant can be used with any sizing related \c NSSplitViewController properties to get the default system behavior.
 APPKIT_EXTERN const CGFloat NSSplitViewControllerAutomaticDimension API_AVAILABLE(macos(10.11));

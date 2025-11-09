@@ -39,4 +39,5 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
 @property (nonatomic, readonly, copy) CKRecordID *recordID;
 
 @end
+
 NS_ASSUME_NONNULL_END

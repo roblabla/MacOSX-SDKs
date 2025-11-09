@@ -1,12 +1,26 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 63F0D476-38D8-319F-9834-FF669DB28B5D', 'x86_64: 63F0D476-38D8-319F-9834-FF669DB28B5D' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           C5C6775F-712E-36DB-922E-2ABC90DBA78A
+  - target:          x86_64-maccatalyst
+    value:           C5C6775F-712E-36DB-922E-2ABC90DBA78A
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           613BE178-610B-382B-85EE-26FCA0E6DB41
+  - target:          arm64e-maccatalyst
+    value:           613BE178-610B-382B-85EE-26FCA0E6DB41
 install-name:    '/System/Library/Frameworks/Kerberos.framework/Versions/A/Kerberos'
 current-version: 6
 compatibility-version: 5
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _FSp_krb_get_svc_in_tkt, _FSp_profile_init, _FSp_profile_init_path, 
                        _FSp_put_svc_key, _FSp_read_service_key, _GSS_C_NT_ANONYMOUS, 
                        _GSS_C_NT_EXPORT_NAME, _GSS_C_NT_HOSTBASED_SERVICE, _GSS_C_NT_HOSTBASED_SERVICE_X, 

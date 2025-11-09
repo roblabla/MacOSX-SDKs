@@ -5,7 +5,10 @@
 #ifndef	_PERLDTRACE_H_IN
 #define	_PERLDTRACE_H_IN
 
+#if !defined(DTRACE_PROBES_DISABLED) || !DTRACE_PROBES_DISABLED
 #include <unistd.h>
+
+#endif /* !defined(DTRACE_PROBES_DISABLED) || !DTRACE_PROBES_DISABLED */
 
 #ifdef	__cplusplus
 extern "C" {

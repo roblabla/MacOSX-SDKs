@@ -1,12 +1,18 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: EF8F9E63-A51C-385C-84CF-5CBD637FA44C' ]
-platform:        uikitformac
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-maccatalyst
+    value:           F9414157-3C5D-3662-8A9C-5D284ECBB6EA
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-maccatalyst
+    value:           81FC9D1F-1AE4-33B9-AA57-93F44C114B27
 install-name:    '/System/iOSSupport/usr/lib/swift/libswiftCoreNFC.dylib'
-current-version: 0
+current-version: 1.1
 swift-abi-version: 7
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
     symbols:         [ '_$s7CoreNFC27NFCTagReaderSessionDelegateMp', '_$s7CoreNFC27NFCTagReaderSessionDelegateP03tagdE0_22didInvalidateWithErrorySo0cdE0C_s0K0_ptFTj', 
                        '_$s7CoreNFC27NFCTagReaderSessionDelegateP03tagdE0_22didInvalidateWithErrorySo0cdE0C_s0K0_ptFTq', 
                        '_$s7CoreNFC27NFCTagReaderSessionDelegateP03tagdE0_9didDetectySo0cdE0C_SayAA0C0OGtFTj', 
@@ -22,6 +28,7 @@ exports:
                        '_$sSo19NFCTagReaderSessionC7CoreNFCE12connectedTagAC0A0OSgvg', 
                        '_$sSo19NFCTagReaderSessionC7CoreNFCE12connectedTagAC0A0OSgvpMV', 
                        '_$sSo19NFCTagReaderSessionC7CoreNFCE13pollingOption8delegate5queueABSgSo010NFCPollingG0V_AC0abC8Delegate_pSo012OS_dispatch_I0CSgtcfC', 
+                       '_$sSo19NFCTagReaderSessionC7CoreNFCE13pollingOption8delegate5queueABSgSo010NFCPollingG0V_AC0abC8Delegate_pSo012OS_dispatch_I0CSgtcfc', 
                        '_$sSo19NFCTagReaderSessionC7CoreNFCE7connect2to17completionHandleryAC0A0O_ys5Error_pSgctF', 
                        '__swift_FORCE_LOAD_$_swiftCoreNFC' ]
 ...

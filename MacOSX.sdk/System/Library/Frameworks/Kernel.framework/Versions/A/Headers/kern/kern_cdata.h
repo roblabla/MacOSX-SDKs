@@ -55,6 +55,10 @@
 #define kcdata_get_data_with_desc(buf, desc, data) kcdata_iter_get_data_with_desc(KCDATA_ITEM_ITER(buf),desc,data,NULL)
 /* Do not use these macros! */
 
+__options_decl(kcd_compression_type_t, uint64_t, {
+	KCDCT_NONE = 0x00,
+	KCDCT_ZLIB = 0x01,
+});
 
 
 typedef void * kcdata_descriptor_t;
@@ -62,6 +66,7 @@ typedef void * kcdata_descriptor_t;
 
 uint32_t kcdata_estimate_required_buffer_size(uint32_t num_items, uint32_t payload_size);
 uint64_t kcdata_memory_get_used_bytes(kcdata_descriptor_t kcd);
+uint64_t kcdata_memory_get_uncompressed_bytes(kcdata_descriptor_t kcd);
 kern_return_t kcdata_memcpy(kcdata_descriptor_t data, mach_vm_address_t dst_addr, const void * src_addr, uint32_t size);
 kern_return_t kcdata_bzero(kcdata_descriptor_t data, mach_vm_address_t dst_addr, uint32_t size);
 kern_return_t kcdata_get_memory_addr(kcdata_descriptor_t data, uint32_t type, uint32_t size, mach_vm_address_t * user_addr);

@@ -30,12 +30,9 @@
 #include <IOKit/usb/IOUSBHostFamilyDefinitions.h>
 #include <IOKit/usb/AppleUSBDefinitions.h>
 
-
-#if !__OPEN_SOURCE__ && TARGET_OS_IPHONE && !TARGET_OS_MACCATALYST
-//these headers were previously exported for iOS clients
-#include <IOKit/usb/IOUSBHostFamily.h>
-#include <IOKit/usb/StandardUSB.h>
-
+#if TARGET_OS_OSX || TARGET_OS_MACCATALYST
+/* Nothing to define */
+#else
 // These are for Apple internal use only
 #define kIOUSBMessageUpdateIdlePolicy    kUSBHostMessageUpdateIdlePolicy
 #define kIOUSBMessageRemoteWake          kUSBHostMessageRemoteWake
@@ -406,12 +403,12 @@ typedef struct IOUSBLowLatencyIsocCompletion
 #define kIOUSBInvalidSSEndpoint                             iokit_usb_err(0x43)     // 0xe0004043  An endpoint found in a SuperSpeed device is invalid (usually because there is no Endpoint Companion Descriptor)
 #define kIOUSBTooManyTransactionsPending                    iokit_usb_err(0x42)     // 0xe0004042  The transaction cannot be submitted because it would exceed the allowed number of pending transactions
 
-#if !__OPEN_SOURCE__ && TARGET_OS_IPHONE && !TARGET_OS_MACCATALYST
-#define kIOUSBTransactionReturned                           kIOReturnAborted
-#define kIOUSBTransactionTimeout                            kIOReturnTimeout
-#else
+#if TARGET_OS_OSX || TARGET_OS_MACCATALYST
 #define kIOUSBTransactionReturned                           iokit_usb_err(0x50)     // 0xe0004050  The transaction has been returned to the caller
 #define kIOUSBTransactionTimeout                            iokit_usb_err(0x51)     // 0xe0004051  Transaction timed out
+#else
+#define kIOUSBTransactionReturned                           kIOReturnAborted
+#define kIOUSBTransactionTimeout                            kIOReturnTimeout
 #endif
 
 /*!
@@ -481,10 +478,10 @@ typedef struct IOUSBLowLatencyIsocCompletion
 
 #define kIOUSBMessageRenegotiateCurrent                 kUSBHostMessageRenegotiateCurrent
 
-#if !__OPEN_SOURCE__ && TARGET_OS_IPHONE && !TARGET_OS_MACCATALYST
-#define kIOUSBMessageConfigurationSet               kUSBHostMessageConfigurationSet
-#else
+#if TARGET_OS_OSX || TARGET_OS_MACCATALYST
 #define kIOUSBMessageConfigurationSet               iokit_usb_msg(0x22)     // 0xe0004022  Message sent upon a SetConfiguration call
+#else
+#define kIOUSBMessageConfigurationSet               kUSBHostMessageConfigurationSet
 #endif
 
 // Obsolete
@@ -1051,7 +1048,6 @@ enum
 #define kUSBDeviceRemoteWakeOverride                kUSBHostDevicePropertyRemoteWakeOverride
 #define kUSBDeviceConfigurationCurrentOverride      kUSBHostDevicePropertyConfigurationCurrentOverride
 #define kUSBDeviceResetDurationOverride             kUSBHostDevicePropertyResetDurationOverride
-#define kUSBDeviceDataToggleResetOverride           kUSBHostPropertyDataToggleResetOverride
 #define kUSBDeviceFailedRequestedPower              kUSBHostDevicePropertyFailedRequestedPower
 #define kUSBPropertyRemovable                       kUSBHostPortPropertyRemovable
 #define kUSBPropertyTestMode                        kUSBHostPortPropertyTestMode
@@ -1067,13 +1063,7 @@ enum
 #define kUSBUserClientEntitlementRequired          "UsbUserClientEntitlementRequired"
 #define kUSBDevicePropertySpeed                    "Device Speed"
 
-#if !__OPEN_SOURCE__ && TARGET_OS_IPHONE && !TARGET_OS_MACCATALYST
-#define kUSBDevicePropertyAddress                   kUSBHostDevicePropertyAddress
-#define kUSBPreferredConfiguration                  kUSBHostDevicePropertyPreferredConfiguration
-#define kUSBControllerNeedsContiguousMemoryForIsoch kUSBHostControllerPropertyIsochronousRequiresContiguous
-#define kUSBHubDontAllowLowPower                    kUSBHostHubPropertyIdlePolicy
-#define kConfigurationDescriptorOverride            kUSBHostDevicePropertyConfigurationDescriptorOverride
-#else
+#if TARGET_OS_OSX || TARGET_OS_MACCATALYST
 #if MAC_OS_X_VERSION_MIN_REQUIRED <= MAC_OS_X_VERSION_10_14
 #define kUSBDevicePropertyAddress                   "USB Address"
 #define kUSBPreferredConfiguration                  "Preferred Configuration"
@@ -1087,6 +1077,12 @@ enum
 #define kUSBHubDontAllowLowPower                    kUSBHostHubPropertyIdlePolicy
 #define kConfigurationDescriptorOverride            kUSBHostDevicePropertyConfigurationDescriptorOverride
 #endif /* MAC_OS_X_VERSION_MIN_REQUIRED <= MAC_OS_X_VERSION_10_14 */
+#else
+#define kUSBDevicePropertyAddress                   kUSBHostDevicePropertyAddress
+#define kUSBPreferredConfiguration                  kUSBHostDevicePropertyPreferredConfiguration
+#define kUSBControllerNeedsContiguousMemoryForIsoch kUSBHostControllerPropertyIsochronousRequiresContiguous
+#define kUSBHubDontAllowLowPower                    kUSBHostHubPropertyIdlePolicy
+#define kConfigurationDescriptorOverride            kUSBHostDevicePropertyConfigurationDescriptorOverride
 #endif
 
 

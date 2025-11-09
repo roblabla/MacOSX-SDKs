@@ -1,3 +1,4 @@
+#if (defined(USE_VISIONKIT_PUBLIC_HEADERS) && USE_VISIONKIT_PUBLIC_HEADERS) || !__has_include(<DocumentCamera/VNDocumentCameraViewController.h>)
 //
 //  VNDocumentCameraViewController.h
 //  VisionKit
@@ -44,3 +45,7 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos)
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <DocumentCamera/VNDocumentCameraViewController.h>
+#endif

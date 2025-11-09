@@ -10,7 +10,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 #import <QuickLookThumbnailing/QLThumbnailingBase.h>
-
+#import <UniformTypeIdentifiers/UniformTypeIdentifiers.h>
 
 @class QLThumbnailRepresentation;
 
@@ -40,6 +40,11 @@ QLT_EXPORT NS_SWIFT_NAME(QLThumbnailGenerator.Request) @interface QLThumbnailGen
                              size:(CGSize)size
                             scale:(CGFloat)scale
               representationTypes:(QLThumbnailGenerationRequestRepresentationTypes)representationTypes;
+
+/**
+The content type of the file being thumbnailed is used to determine the provider of the thumbnail and the icon styles applied if iconMode is requested. By default the content type is derived from the file extension. Setting this property will override the derived content type. This is useful for files that don't have meaningful extensions but for which you may already know the content type. 
+ */
+@property (nonatomic, copy, null_resettable) UTType *contentType API_AVAILABLE(ios(14.0), macos(11.0));
 
 /**
  Defaults to 0. If set, the thumbnail will have a width and height greater or equal to minimumDimension * scale.

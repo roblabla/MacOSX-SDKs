@@ -40,6 +40,10 @@
 .Op Fl t Ar tokenid
 .Op Fl u
 .Nm
+.Ar verifypin
+.Op Fl t Ar tokenid
+.Op Fl p Ar PIN
+.Nm
 .Ar enable_for_login
 .Fl c Ar class-id
 .Sh SYNOPSIS - legacy             \" Section Header - required - don't modify
@@ -86,6 +90,8 @@ List all identities on all SmartCards and display appropriate associations with 
 List all public keys associated with a user.
 .It Ar changepin
 Change or unblock SmartCard PIN.  This command works only for Personal Identity Verification (PIV) SmartCards. With -u argument, PIN can be unblocked using PUK and without the -u argument, PIN can be changed. Optional -t argument allows specifying tokenID.
+.It Ar verifypin
+Verify SmartCard PIN. This command works only for Personal Identity Verification (PIV) SmartCards. Optional -t argument allows specifying tokenID. Optional -p argument allows specifying PIN.
 .It Ar enable_for_login
 Enable the app extension for login and make the token available to the system for authentication.
 .El                      \" Ends the list
@@ -121,6 +127,8 @@ Force to display pairing dialog
 Specifies a token by tokenID
 .It Fl c Ar class-id
 Specifies a token by  'com.apple.ctk.class-id' from Info.plist
+.It Fl p Ar PIN
+Specifies a PIN
 .El                      \" Ends the list
 .Sh NOTES
 .Nm

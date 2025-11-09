@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVRouteDetector.h>)
 /*
 	File:  AVRouteDetector.h
  
@@ -53,3 +54,7 @@ AVF_EXPORT NSNotificationName const AVRouteDetectorMultipleRoutesDetectedDidChan
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCore/AVRouteDetector.h>
+#endif

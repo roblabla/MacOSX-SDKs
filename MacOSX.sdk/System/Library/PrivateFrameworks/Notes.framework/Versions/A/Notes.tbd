@@ -1,17 +1,29 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 7D6B20C6-87B7-3F6E-9EBD-ACADB81F7CFF' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           180C4793-3AA7-3ABE-A46B-2831D97B6108
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           9DF63961-F143-3659-9B8E-5952C581D570
 install-name:    '/System/Library/PrivateFrameworks/Notes.framework/Versions/A/Notes'
-current-version: 351
-exports:         
-  - archs:           [ x86_64 ]
-    allowable-clients: [ Notes, NotesAccountNotificationPlugin, NotesAccountSetup, 
-                         NotesIAAccountMigratorPlugin, NotesImporter, NotesShared, 
-                         NotesTests, NotesUI, com.apple.NotesMigratorService ]
+current-version: 1778
+allowable-clients:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    clients:         [ AvatarStack.2.preview-thunk, MacUIFrameworkTests, NoteWidgetView.2.preview-thunk, 
+                       Notes, NotesAccountNotificationPlugin, NotesFolderWidgetView.2.preview-thunk, 
+                       NotesIAAccountMigratorPlugin, NotesShared, NotesTests, NotesUI, 
+                       NotesWidgetExtensionPreview, WidgetHeader.2.preview-thunk, 
+                       com.apple.Notes.QuickLookExtension, com.apple.Notes.SharingExtension, 
+                       com.apple.Notes.SpotlightIndexExtension, com.apple.NotesImporter, 
+                       notestool ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _DefaultsKeyUserOptedIntoAttachmentSending, _ICAssertBreakpoint, 
-                       _ICNFMCAccountAccountID, _ICNFMCAccountAccountIDv2Format, 
-                       _ICNFMCAccountAccounts, _ICNFMCAccountAuthenticationScheme, 
+                       _ICEnableSandboxMode, _ICIsSandboxModeEnabled, _ICNFMCAccountAccountID, 
+                       _ICNFMCAccountAccountIDv2Format, _ICNFMCAccountAccounts, _ICNFMCAccountAuthenticationScheme, 
                        _ICNFMCAccountBecameReachableNotification, _ICNFMCAccountClass, 
                        _ICNFMCAccountDeliveryAccounts, _ICNFMCAccountEmailAddressDomain, 
                        _ICNFMCAccountExternalURL, _ICNFMCAccountIdentifier, _ICNFMCAccountInternalURL, 
@@ -172,7 +184,8 @@ exports:
                        _ICNFMCSubjectAttributeName, _ICNFMCSubjectWithoutPII, _ICNFMCUnifiedFractionDoneIndeterminateValue, 
                        _ICNFMCUnifiedFractionDoneInvisibleValue, _ICNFMCWhiteMailboxNameGmail, 
                        _ICNFMCWhiteMailboxNameGoogleMail, _ICNFMCWhiteMailboxNameGoogleSpaceMail, 
-                       _ICNoteBundleIdentifier, _IMAPCreateArrayForMessageFlags, 
+                       _ICNoteBundleIdentifier, _ICSearchableIndexName, _ICUseCoreDataCoreSpotlightIntegration, 
+                       _ICVerboseSearchLogging, _IMAPCreateArrayForMessageFlags, 
                        _IMAPIdAddress, _IMAPIdArguments, _IMAPIdCommand, _IMAPIdDate, 
                        _IMAPIdEnvironment, _IMAPIdName, _IMAPIdOS, _IMAPIdOSVersion, 
                        _IMAPIdSupportURL, _IMAPIdVendor, _IMAPIdVersion, _IMAPLineEnding, 
@@ -216,16 +229,23 @@ exports:
                        _NFEntityNameNoteBody, _NFEntityNameOfflineAction, _NFEntityNameTrashFolder, 
                        _NFEntityNameUpdateFolderAction, _NFEntityNameUpdateNoteAction, 
                        _NFPasswordsDidChange, _NFPrimaryFolderName, _NFStringKeyInvalidFolderNameError, 
-                       _NFStringKeyNewNoteTitle, _NotesVersionNumber, _NotesVersionString, 
-                       _createInternetMessageDateFormatter, _lookupFlag, _mf_stat, 
+                       _NFStringKeyNewNoteTitle, _NotesAccountsDidChangeNotification, 
+                       _NotesVersionNumber, _NotesVersionString, _createInternetMessageDateFormatter, 
+                       _kICInternalSettingsEnableCSAttributeEvaluator, _kICSearchInternalEnableFuzzySearch, 
+                       _kICSearchInternalSettingsDisableSpellCheckLimits, _kICSearchInternalSettingsDisableSpellCheckSPI, 
+                       _kICSearchInternalSettingsRelatedWords, _kICSearchInternalSettingsRelatedWordsMaxCount, 
+                       _kICSearchInternalSettingsRelatedWordsMaxDistance, _kICSearchInternalSettingsSpellCheckerAPI, 
+                       _kICSearchInternalSettingsUseCoreDataCoreSpotlightIntegration, 
+                       _kICSearchInternalVerboseSearchLogging, _lookupFlag, _mf_stat, 
                        _sIMAPCapabilityNames, _sKeyPathDateEdited, _sKeyPathIMAPUID, 
                        _sKeyPathMIMEDataSize, _sKeyPathSubject, _sStringKeyIMAPAccountDescription, 
                        _sStringKeyLocalAccountDescription, _sStringKeyMimeAttachmentFilename ]
-    objc-classes:    [ ICAssert, ICManagedObjectContextUpdater, ICNFIMAPAccountProxy, 
-                       ICNFIMAPAggregateClientOperation, ICNFIMAPAggregateFetchUIDOperation, 
-                       ICNFIMAPAggregateGetQuotaRootOperation, ICNFIMAPAggregateStatusOperation, 
-                       ICNFIMAPAttachmentsDownload, ICNFIMAPBadResponse, ICNFIMAPBasicResponse, 
-                       ICNFIMAPBodyFetchResult, ICNFIMAPBodyHeaderFetchResult, ICNFIMAPBodySectionFetchResult, 
+    objc-classes:    [ ICAssert, ICCDCSIReindexer, ICCoreDataCoreSpotlightDelegate, 
+                       ICManagedObjectContextUpdater, ICNFIMAPAccountProxy, ICNFIMAPAggregateClientOperation, 
+                       ICNFIMAPAggregateFetchUIDOperation, ICNFIMAPAggregateGetQuotaRootOperation, 
+                       ICNFIMAPAggregateStatusOperation, ICNFIMAPAttachmentsDownload, 
+                       ICNFIMAPBadResponse, ICNFIMAPBasicResponse, ICNFIMAPBodyFetchResult, 
+                       ICNFIMAPBodyHeaderFetchResult, ICNFIMAPBodySectionFetchResult, 
                        ICNFIMAPBodyStructureFetchResult, ICNFIMAPBodyTextFetchResult, 
                        ICNFIMAPByeResponse, ICNFIMAPCapabilityResponse, ICNFIMAPClientAppendOperation, 
                        ICNFIMAPClientAuthenticateOperation, ICNFIMAPClientCapabilityOperation, 
@@ -289,10 +309,12 @@ exports:
                        ICNFMCSAXHTMLParsing, ICNFMCSaslClient, ICNFMCSharedPreferencesController, 
                        ICNFMCSocket, ICNFMCStringRenderContext, ICNFMCSubdata, ICNFMCSubjectParser, 
                        ICNFMCTaskOperation, ICNFMCThrowingInvocationOperation, ICNFMCURLMatch, 
-                       ICNFMCURLifier, ICNFMCWorkerThread, ICRadarUtilities, ICSelectorDelayer, 
-                       NFAccount, NFAosImapAccountProxy, NFAttachment, NFCrossProcessChangeCoordinator, 
-                       NFEWSAccount, NFEWSAccountProxy, NFEWSFolder, NFEWSFolderProxy, 
-                       NFEWSNote, NFFolder, NFFolderAction, NFIMAPAccount, NFIMAPAccountProxy, 
+                       ICNFMCURLifier, ICNFMCWorkerThread, ICRadarUtilities, ICSearchIndexConfiguration, 
+                       ICSelectorDelayer, ICURLSecureUnarchiveFromDataTransformer, 
+                       ICUUIDSecureUnarchiveFromDataTransformer, NFAccount, NFAosImapAccountProxy, 
+                       NFAttachment, NFCrossProcessChangeCoordinator, NFEWSAccount, 
+                       NFEWSAccountProxy, NFEWSFolder, NFEWSFolderProxy, NFEWSNote, 
+                       NFFolder, NFFolderAction, NFIMAPAccount, NFIMAPAccountProxy, 
                        NFIMAPFolder, NFIMAPFolderProxy, NFIMAPNote, NFInsertFolderAction, 
                        NFInsertNoteAction, NFLocalAccount, NFLocalToEWSPusher, NFLocalToIMAPPusher, 
                        NFLocalToRemotePusher, NFMoveFolderAction, NFMoveNoteAction, 

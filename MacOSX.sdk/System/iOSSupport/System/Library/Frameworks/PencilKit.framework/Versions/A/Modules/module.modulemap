@@ -1,4 +1,4 @@
-framework module PencilKit {
+framework module PencilKit [system] {
   umbrella header "PencilKit.h"
 
   export *

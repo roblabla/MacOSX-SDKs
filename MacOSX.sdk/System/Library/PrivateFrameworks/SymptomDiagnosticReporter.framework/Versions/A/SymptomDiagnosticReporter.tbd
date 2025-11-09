@@ -1,14 +1,44 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: BE499ACD-18B5-3D45-95B3-BE9A98FB099D', 'x86_64: BE499ACD-18B5-3D45-95B3-BE9A98FB099D' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           4E157766-54A4-31A3-B847-254549B1AD68
+  - target:          x86_64-maccatalyst
+    value:           4E157766-54A4-31A3-B847-254549B1AD68
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           EDCB26EA-4971-3AD2-AE37-0933D24D6141
+  - target:          arm64e-maccatalyst
+    value:           EDCB26EA-4971-3AD2-AE37-0933D24D6141
 install-name:    '/System/Library/PrivateFrameworks/SymptomDiagnosticReporter.framework/Versions/A/SymptomDiagnosticReporter'
-current-version: 1238.0.2
-exports:         
-  - archs:           [ x86_64 ]
-    symbols:         [ _SDRGetAllLogFileURLs, _diagnosticErrorStringForCode, _kAutoBugCaptureStatusKeyAPNSEnable, 
+current-version: 0
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _SDRGetAllLogFileURLs, __SDRGetAllLogFileURLs, _diagnosticErrorStringForCode, 
+                       _kAutoBugCaptureConfigCarrierBuild, _kAutoBugCaptureConfigCustomerBuild, 
+                       _kAutoBugCaptureConfigInternalBuild, _kAutoBugCaptureConfigSeedBuild, 
+                       _kAutoBugCaptureConfigVendorBuild, _kAutoBugCaptureOverrideKeyCarrierSeedFlag, 
+                       _kAutoBugCaptureOverrideKeyDisableDampening, _kAutoBugCaptureOverrideKeyDisableInternalBuild, 
+                       _kAutoBugCaptureOverrideKeyNPIFlag, _kAutoBugCaptureOverrideKeySeedBuildFlag, 
+                       _kAutoBugCaptureOverrideKeyVendorBuildFlag, _kAutoBugCaptureStatusKeyAPIRateLimit, 
+                       _kAutoBugCaptureStatusKeyAPIRateLimitWindow, _kAutoBugCaptureStatusKeyAPNSEnable, 
                        _kAutoBugCaptureStatusKeyAPNSEnvironment, _kAutoBugCaptureStatusKeyAPNSToken, 
-                       _kDebuggabilityPath, _kDiagnosticCaseSummaryKeyAttachments, 
+                       _kAutoBugCaptureStatusKeyAverageCasesPerDay, _kAutoBugCaptureStatusKeyCloudKitCaseSummaryMaxPerSubmission, 
+                       _kAutoBugCaptureStatusKeyCloudKitCaseSummarySubmittedRetentionDays, 
+                       _kAutoBugCaptureStatusKeyCloudKitCaseSummaryUnsubmittedRetentionDays, 
+                       _kAutoBugCaptureStatusKeyCloudKitContainerID, _kAutoBugCaptureStatusKeyCloudKitEnabled, 
+                       _kAutoBugCaptureStatusKeyCloudKitEnvironment, _kAutoBugCaptureStatusKeyCloudKitInvernessServiceID, 
+                       _kAutoBugCaptureStatusKeyCloudKitTimeoutIntervalForRequest, 
+                       _kAutoBugCaptureStatusKeyCloudKitTimeoutIntervalForResource, 
+                       _kAutoBugCaptureStatusKeyCloudKitUploadFallbackLogCount, _kAutoBugCaptureStatusKeyDailyCaseLimit, 
+                       _kAutoBugCaptureStatusKeyHasOpenCases, _kAutoBugCaptureStatusKeyServiceEnabled, 
+                       _kAutoBugCaptureStatusKeyServiceState, _kDiagnosticCaseSummaryKeyAttachments, 
                        _kDiagnosticCaseSummaryKeyCaseIdentifier, _kDiagnosticCaseSummaryKeyCaseStatus, 
                        _kDiagnosticCaseSummaryKeyCaseStatusCaseClosedTime, _kDiagnosticCaseSummaryKeyCaseStatusCaseClosedTimestamp, 
                        _kDiagnosticCaseSummaryKeyCaseStatusCaseOpenedTime, _kDiagnosticCaseSummaryKeyCaseStatusCaseOpenedTimestamp, 
@@ -23,9 +53,8 @@ exports:
                        _kDiagnosticCaseSummaryKeySystemPropertiesBuildVariant, _kDiagnosticCaseSummaryKeySystemPropertiesBuildVersion, 
                        _kDiagnosticCaseSummaryKeySystemPropertiesProductName, _kDiagnosticCaseSummaryKeySystemPropertiesProductType, 
                        _kDiagnosticCaseSummaryKeySystemPropertiesProductVersion, 
-                       _kExpertSystemStatusKeyActiveCases, _kExpertSystemStatusKeyAutoBugCaptureAdministrator, 
-                       _kExpertSystemStatusKeyAverageCasesPerDay, _kExpertSystemStatusKeyCLIPSModules, 
-                       _kExpertSystemStatusKeyFailedToLoadDefaultRules, _kExpertSystemStatusKeyHasOpenCases, 
+                       _kDiagnosticCaseSummaryKeySystemPropertiesSerialNumber, _kExpertSystemStatusKeyAutoBugCaptureAdministrator, 
+                       _kExpertSystemStatusKeyCLIPSModules, _kExpertSystemStatusKeyFailedToLoadDefaultRules, 
                        _kExpertSystemStatusKeyLoadedCLIPSRulesAndFacts, _kExpertSystemStatusKeySymptomExpertSystemHandler, 
                        _kExpertSystemStatusKeyTriggeringSymptom, _kStateMachineStatusKeyAdminState, 
                        _kStateMachineStatusKeyState, _kSymptomDiagnosticActionCancel, 
@@ -66,6 +95,7 @@ exports:
                        _kSymptomDiagnosticKeyEventStatus, _kSymptomDiagnosticKeyEventValue, 
                        _kSymptomDiagnosticKeyIDSMessageIdentifier, _kSymptomDiagnosticKeyIDSRemoteTrigger, 
                        _kSymptomDiagnosticKeyPayloadDEParameters, _kSymptomDiagnosticKeyPayloadPath, 
+                       _kSymptomDiagnosticKeyPayloadPathSandboxExtensionTokenDict, 
                        _kSymptomDiagnosticKeyTimestamp, _kSymptomDiagnosticKeyType, 
                        _kSymptomDiagnosticPayloadTypeCrashAndSpinLogs, _kSymptomDiagnosticPayloadTypeDEArchive, 
                        _kSymptomDiagnosticPayloadTypeFile, _kSymptomDiagnosticPayloadTypeGetNetworkInfo, 

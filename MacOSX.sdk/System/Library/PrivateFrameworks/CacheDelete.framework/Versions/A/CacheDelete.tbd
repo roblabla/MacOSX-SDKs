@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 96CBAA8E-F616-39A2-919B-A2585F9707E9', 'x86_64: 96CBAA8E-F616-39A2-919B-A2585F9707E9' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           7EA258BD-6892-3EF9-A9B5-6CDAC30012B9
+  - target:          x86_64-maccatalyst
+    value:           7EA258BD-6892-3EF9-A9B5-6CDAC30012B9
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           A203791A-42C0-39AA-BF0B-92B1852B4CAD
+  - target:          arm64e-maccatalyst
+    value:           A203791A-42C0-39AA-BF0B-92B1852B4CAD
 install-name:    '/System/Library/PrivateFrameworks/CacheDelete.framework/Versions/A/CacheDelete'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CDGetLogHandle, _CDGetLowDiskSignpostHighSeverityLogHandle, 
                        _CDGetLowDiskSignpostLowSeverityLogHandle, _CDGetLowDiskSignpostMediumSeverityLogHandle, 
                        _CDSimulateCrash, _CDVEnumerationFlagsAll, _CacheDeleteAllowAutoPurge, 
@@ -14,8 +28,8 @@ exports:
                        _CacheDeleteCopyPurgeableSpaceWithInfo, _CacheDeleteCurrentCacheableSpace, 
                        _CacheDeleteCurrentCacheableSpaceForVolume, _CacheDeleteDoNotAutoPurge, 
                        _CacheDeleteDoNotPurgeUserManagedAssets, _CacheDeleteEnumerateRemovedFiles, 
-                       _CacheDeleteEnumerateRemovedFilesInDirectories, _CacheDeleteErrorDomain, 
-                       _CacheDeleteGetSetting, _CacheDeleteInitPurgeMarker, _CacheDeletePerformOperation, 
+                       _CacheDeleteEnumerateRemovedFilesInDirectories, _CacheDeleteGetSetting, 
+                       _CacheDeleteInitPurgeMarker, _CacheDeletePerformOperation, 
                        _CacheDeletePurgeAsync, _CacheDeletePurgeSpace, _CacheDeletePurgeSpaceWithInfo, 
                        _CacheDeletePurgeSpaceWithInfoSync, _CacheDeletePurgeUserManagedAssets, 
                        _CacheDeletePurgeableSpace, _CacheDeleteRegister, _CacheDeleteRegisterCallback, 
@@ -27,23 +41,23 @@ exports:
                        _CacheDeleteServiceRequest, _CacheDeleteSetCacheable, _CacheDeleteSyncDone, 
                        _CacheDeleteUpdatePurgeable, _CacheDeleteUpdatePurgeableSync, 
                        _CacheDeleteUpdateSetting, _CacheDeleteUserManagedAssetsPurgeable, 
-                       _CacheManagementEnumerateAssets, _CacheManagementErrorDomain, 
-                       _CacheManagementRemove, _CallCacheD, _CallCacheDPublic, _VolUUID, 
-                       __CacheDeleteAbortWithMessage, __CacheDeleteEnumerateRemovedFiles, 
-                       _allowNoBrowse, _breadcrumbs, _cdAppSuptPath, _cdCachesPath, 
-                       _connectionIsEntitled, _containerUserManagedAssetsPath, _copyNANDSizeBytes, 
-                       _createCacheDeleteToken, _diskUsageList, _dropBreadcrumb, 
-                       _enumerateNotifiedVolumes, _evaluateBoolProperty, _evaluateNumberProperty, 
-                       _evaluateStringProperty, _evaluateUrgency, _fast_size_directory, 
-                       _flattenedAssetDescription, _fsPurgeableTypeForService, _fsPurgeableTypeToServiceMap, 
+                       _CacheManagementEnumerateAssets, _CacheManagementRemove, _CallCacheD, 
+                       _CallCacheDPublic, _VolUUID, __CacheDeleteAbortWithMessage, 
+                       __CacheDeleteEnumerateRemovedFiles, _allowNoBrowse, _breadcrumbs, 
+                       _cdAppSuptPath, _cdCachesPath, _connectionIsEntitled, _containerUserManagedAssetsPath, 
+                       _copyNANDSizeBytes, _createCacheDeleteToken, _did_fast_size_directory, 
+                       _diskUsageList, _dropBreadcrumb, _enumerateNotifiedVolumes, 
+                       _evaluateBoolProperty, _evaluateNumberProperty, _evaluateStringProperty, 
+                       _evaluateUrgency, _fast_size_directory, _flattenedAssetDescription, 
+                       _fsPurgeableTypeForService, _fsPurgeableTypeToServiceMap, 
                        _gTimebaseConversion, _getAllVolumes, _getCacheDeleteXattr, 
                        _getFunc, _getLocalVolumes, _getRootVolume, _getbacktrace, 
-                       _humanReadableNumber, _is_first_boot, _lowSpaceVolumes, _mapVolume, 
-                       _markNotifiedVolume, _normalizePath, _paddingForVolume, _pruneFile, 
-                       _removeBreadcrumb, _sentinelDir, _serviceForFSPurgeableType, 
-                       _set_first_boot_work_completed, _stringForFSPurgeableType, 
-                       _tallyDict, _thresholdsForMountPoint, _timeStamp, _traverse_directory, 
-                       _validateTimestamp, _volumeForUUID, _writeToCacheFile ]
+                       _getbacktrace_short, _humanReadableNumber, _is_first_boot, 
+                       _lowSpaceVolumes, _mapVolume, _markNotifiedVolume, _normalizePath, 
+                       _nuke_dir, _paddingForVolume, _pruneFile, _removeBreadcrumb, 
+                       _sentinelDir, _serviceForFSPurgeableType, _set_first_boot_work_completed, 
+                       _tallyDict, _thresholdsForMountPoint, _timeStamp, _traverse_dir_with_state, 
+                       _traverse_directory, _validateTimestamp, _volumeForUUID, _writeToCacheFile ]
     objc-classes:    [ CacheDeleteHostExtensionContext, CacheDeleteListener, CacheDeleteRemoteExtensionContext, 
                        CacheDeleteServiceInfo, CacheDeleteServiceListener, CacheDeleteVolume, 
                        CacheManagementAsset ]

@@ -33,10 +33,12 @@
 
 #include <IOKit/serial/IOSerialStreamSync.h>
 
-class IOModemSerialStreamSync : public IOSerialStreamSync
+__exported_push
+class __kpi_deprecated("Use DriverKit") IOModemSerialStreamSync : public IOSerialStreamSync
 {
     OSDeclareDefaultStructors(IOModemSerialStreamSync)
 };
+__exported_pop
 
 #endif /* !_SERIAL_IOMODEMSERIALSTREAMSYNC_H */
 

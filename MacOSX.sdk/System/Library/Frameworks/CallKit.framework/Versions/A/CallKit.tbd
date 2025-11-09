@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 66A05571-2125-32DF-ADE7-B50EB73368F9', 'x86_64: 66A05571-2125-32DF-ADE7-B50EB73368F9' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           C4FC5205-E9B7-3DEC-A068-F7FA51AF1189
+  - target:          x86_64-maccatalyst
+    value:           C4FC5205-E9B7-3DEC-A068-F7FA51AF1189
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           2672983D-2175-3F8E-A135-B733E28B4F1A
+  - target:          arm64e-maccatalyst
+    value:           2672983D-2175-3F8E-A135-B733E28B4F1A
 install-name:    '/System/Library/Frameworks/CallKit.framework/Versions/A/CallKit'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CXCallDirectoryDefaultHostBundleIdentifier, _CXCallDirectoryDefaultHostServiceName, 
                        _CXCallDirectoryMaintenanceHostBundleIdentifier, _CXCallDirectoryMaintenanceHostServiceName, 
                        _CXCallDirectoryManagerIdentificationEntriesChangedNotification, 
@@ -24,9 +38,11 @@ exports:
                        CXCallFailureContext, CXCallObserver, CXCallSource, CXCallSourceManager, 
                        CXCallUpdate, CXEndCallAction, CXExtensionCallSource, CXExtensionProvider, 
                        CXHandle, CXHandoffContext, CXInProcessCallSource, CXInProcessProvider, 
-                       CXJoinCallAction, CXLabeledHandle, CXPlayDTMFCallAction, CXProvider, 
-                       CXProviderConfiguration, CXProviderExtensionContext, CXProviderExtensionHostContext, 
-                       CXProviderExtensionVendorContext, CXPullCallAction, CXRemoveVoicemailAction, 
+                       CXJoinCallAction, CXLabeledHandle, CXNetworkExtensionMessageController, 
+                       CXNetworkExtensionMessageControllerHost, CXPlayDTMFCallAction, 
+                       CXProvider, CXProviderConfiguration, CXProviderExtensionContext, 
+                       CXProviderExtensionHostContext, CXProviderExtensionVendorContext, 
+                       CXPullCallAction, CXRemoveVoicemailAction, CXSandboxExtendedURL, 
                        CXSendMMIOrUSSDCodeAction, CXSenderIdentity, CXSetGroupCallAction, 
                        CXSetHeldCallAction, CXSetMutedCallAction, CXSetPlayedVoicemailAction, 
                        CXSetRelayingCallAction, CXSetSendingVideoCallAction, CXSetTTYTypeCallAction, 

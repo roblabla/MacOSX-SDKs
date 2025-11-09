@@ -34,7 +34,9 @@
 #pragma once
 #endif
 
+#if defined(__x86_64__)
 #pragma pack(push, 2)
+#endif
 
 /*
   ####################################################################################
@@ -303,7 +305,9 @@ typedef CALLBACK_API_C( TECPluginDispatchTable *, TECPluginGetPluginDispatchTabl
 
 
 
+#if defined(__x86_64__)
 #pragma pack(pop)
+#endif
 
 
 #endif /* __TEXTENCODINGPLUGIN__ */

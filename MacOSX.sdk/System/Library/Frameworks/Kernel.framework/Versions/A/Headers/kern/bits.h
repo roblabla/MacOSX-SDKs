@@ -35,12 +35,13 @@
 #include <kern/kalloc.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include <stdatomic.h>
 
 typedef unsigned int                    uint;
 
 #define BIT(b)                          (1ULL << (b))
 
-#define mask(width)                     (width >= 64 ? -1 : (BIT(width) - 1))
+#define mask(width)                     (width >= 64 ? -1ULL : (BIT(width) - 1))
 #define extract(x, shift, width)        ((((uint64_t)(x)) >> (shift)) & mask(width))
 #define bits(x, hi, lo)                 extract((x), (lo), (hi) - (lo) + 1)
 
@@ -51,15 +52,26 @@ typedef unsigned int                    uint;
 inline static uint64_t
 bit_ror64(uint64_t bitmap, uint n)
 {
+#if defined(__arm64__)
+	uint64_t result;
+	uint64_t _n = (uint64_t)n;
+	asm volatile ("ror %0, %1, %2" : "=r" (result) : "r" (bitmap), "r" (_n));
+	return result;
+#else
 	n = n & 63;
 	return (bitmap >> n) | (bitmap << (64 - n));
+#endif
 }
 
 inline static uint64_t
 bit_rol64(uint64_t bitmap, uint n)
 {
+#if defined(__arm64__)
+	return bit_ror64(bitmap, 64U - n);
+#else
 	n = n & 63;
 	return (bitmap << n) | (bitmap >> (64 - n));
+#endif
 }
 
 /* Non-atomically clear the bit and returns whether the bit value was changed */
@@ -84,7 +96,13 @@ bit_set_if_clear(uint64_t bitmap, int bit)
 inline static int
 bit_first(uint64_t bitmap)
 {
+#if defined(__arm64__)
+	int64_t result;
+	asm volatile ("clz %0, %1" : "=r" (result) : "r" (bitmap));
+	return 63 - (int)result;
+#else
 	return (bitmap == 0) ? -1 : 63 - __builtin_clzll(bitmap);
+#endif
 }
 
 
@@ -113,7 +131,7 @@ bit_next(uint64_t bitmap, int previous_bit)
 inline static int
 lsb_first(uint64_t bitmap)
 {
-	return __builtin_ffsll(bitmap) - 1;
+	return __builtin_ffsll((long long)bitmap) - 1;
 }
 
 /* Returns the least significant '1' bit that is more significant than previous_bit,
@@ -188,7 +206,39 @@ bitmap_zero(bitmap_t *map, uint nbits)
 inline static bitmap_t *
 bitmap_full(bitmap_t *map, uint nbits)
 {
-	return (bitmap_t *)memset((void *)map, ~0, BITMAP_SIZE(nbits));
+	uint i;
+
+	for (i = 0; i < bitmap_index(nbits - 1); i++) {
+		map[i] = ~((uint64_t)0);
+	}
+
+	uint nbits_filled = i * 64;
+
+	if (nbits > nbits_filled) {
+		map[i] = mask(nbits - nbits_filled);
+	}
+
+	return map;
+}
+
+inline static bool
+bitmap_is_full(bitmap_t *map, uint nbits)
+{
+	uint i;
+
+	for (i = 0; i < bitmap_index(nbits - 1); i++) {
+		if (map[i] != ~((uint64_t)0)) {
+			return false;
+		}
+	}
+
+	uint nbits_filled = i * 64;
+
+	if (nbits > nbits_filled) {
+		return map[i] == mask(nbits - nbits_filled);
+	}
+
+	return true;
 }
 
 inline static bitmap_t *
@@ -234,7 +284,7 @@ atomic_bitmap_clear(_Atomic bitmap_t *map, uint n, int mem_order)
 }
 
 inline static bool
-bitmap_test(bitmap_t *map, uint n)
+bitmap_test(const bitmap_t *map, uint n)
 {
 	return bit_test(map[bitmap_index(n)], bitmap_bit(n));
 }
@@ -252,6 +302,42 @@ bitmap_first(bitmap_t *map, uint nbits)
 	return -1;
 }
 
+inline static void
+bitmap_not(bitmap_t *out, const bitmap_t *in, uint nbits)
+{
+	for (uint i = 0; i <= bitmap_index(nbits - 1); i++) {
+		out[i] = ~in[i];
+	}
+}
+
+inline static void
+bitmap_and(bitmap_t *out, const bitmap_t *in1, const bitmap_t *in2, uint nbits)
+{
+	for (uint i = 0; i <= bitmap_index(nbits - 1); i++) {
+		out[i] = in1[i] & in2[i];
+	}
+}
+
+inline static void
+bitmap_and_not(bitmap_t *out, const bitmap_t *in1, const bitmap_t *in2, uint nbits)
+{
+	for (uint i = 0; i <= bitmap_index(nbits - 1); i++) {
+		out[i] = in1[i] & ~in2[i];
+	}
+}
+
+inline static bool
+bitmap_equal(const bitmap_t *in1, const bitmap_t *in2, uint nbits)
+{
+	for (uint i = 0; i <= bitmap_index(nbits - 1); i++) {
+		if (in1[i] != in2[i]) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
 inline static int
 bitmap_and_not_mask_first(bitmap_t *map, bitmap_t *mask, uint nbits)
 {
@@ -266,7 +352,7 @@ bitmap_and_not_mask_first(bitmap_t *map, bitmap_t *mask, uint nbits)
 }
 
 inline static int
-bitmap_lsb_first(bitmap_t *map, uint nbits)
+bitmap_lsb_first(const bitmap_t *map, uint nbits)
 {
 	for (uint i = 0; i <= bitmap_index(nbits - 1); i++) {
 		if (map[i] == 0) {
@@ -279,7 +365,7 @@ bitmap_lsb_first(bitmap_t *map, uint nbits)
 }
 
 inline static int
-bitmap_next(bitmap_t *map, uint prev)
+bitmap_next(const bitmap_t *map, uint prev)
 {
 	if (prev == 0) {
 		return -1;
@@ -302,7 +388,7 @@ bitmap_next(bitmap_t *map, uint prev)
 }
 
 inline static int
-bitmap_lsb_next(bitmap_t *map, uint nbits, uint prev)
+bitmap_lsb_next(const bitmap_t *map, uint nbits, uint prev)
 {
 	if ((prev + 1) >= nbits) {
 		return -1;

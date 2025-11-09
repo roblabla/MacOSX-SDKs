@@ -1,11 +1,30 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: A6644450-9F88-332D-B004-E6B4EED93EC1', 'x86_64: A6644450-9F88-332D-B004-E6B4EED93EC1' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           B71CBE24-C78C-34BD-BB85-CDB506F5F407
+  - target:          x86_64-maccatalyst
+    value:           B71CBE24-C78C-34BD-BB85-CDB506F5F407
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           A3DA8B3E-2857-3E3B-9661-618C4A116BD6
+  - target:          arm64e-maccatalyst
+    value:           A3DA8B3E-2857-3E3B-9661-618C4A116BD6
 install-name:    '/System/Library/PrivateFrameworks/ProtocolBuffer.framework/Versions/A/ProtocolBuffer'
-current-version: 274.20.7
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 285.20.8
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
+    weak-symbols:    [ __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE ]
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _PBDataWriterPlaceMark, _PBDataWriterRecallMark, _PBDataWriterWriteBOOLField, 
                        _PBDataWriterWriteBareVarint, _PBDataWriterWriteDataField, 
                        _PBDataWriterWriteDoubleField, _PBDataWriterWriteFixed32Field, 
@@ -73,8 +92,4 @@ exports:
                        PBTextReader._tagNameCharacterSet, PBTextReader._whitespaceAndNewlineCharacterSet, 
                        PBTextWriter._cachedObjectTypes, PBTextWriter._dest, PBTextWriter._indent, 
                        PBTextWriter._newlinesPrinted ]
-    weak-def-symbols: [ __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                        __ZTINSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                        __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                        __ZTSNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE ]
 ...

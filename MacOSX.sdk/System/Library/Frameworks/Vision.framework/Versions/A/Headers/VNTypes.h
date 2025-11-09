@@ -56,3 +56,10 @@ typedef NS_ENUM(NSUInteger, VNElementType)
 	VNElementTypeFloat   = 1,		// IEEE 754 single-precision floating point value
 	VNElementTypeDouble  = 2,		// IEEE 754 double-precision floating point value
 };
+
+
+
+
+typedef NSString* VNVideoProcessingOption NS_STRING_ENUM API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+VN_EXPORT VNVideoProcessingOption const VNVideoProcessingOptionFrameCadence API_DEPRECATED_WITH_REPLACEMENT("use VNVideoProcessorRequestProcessingOptions", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));
+VN_EXPORT VNVideoProcessingOption const VNVideoProcessingOptionTimeInterval API_DEPRECATED_WITH_REPLACEMENT("use VNVideoProcessorRequestProcessingOptions", macos(11.0, 11.0), ios(14.0, 14.0), tvos(14.0, 14.0));

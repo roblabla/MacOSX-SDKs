@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 API_AVAILABLE(macos(10.14), ios(12.0))
 @protocol MTLIndirectRenderCommand <NSObject>
-- (void)setRenderPipelineState:(id <MTLRenderPipelineState>)pipelineState API_AVAILABLE(macos(10.14), macCatalyst(13.0)) API_UNAVAILABLE(ios);
+- (void)setRenderPipelineState:(id <MTLRenderPipelineState>)pipelineState API_AVAILABLE(macos(10.14), macCatalyst(13.0), ios(13.0));
 
 - (void)setVertexBuffer:(id <MTLBuffer>)buffer offset:(NSUInteger)offset atIndex:(NSUInteger)index;
 - (void)setFragmentBuffer:(id <MTLBuffer>)buffer offset:(NSUInteger)offset atIndex:(NSUInteger)index;
@@ -43,6 +43,30 @@ tessellationFactorBufferOffset:(NSUInteger)offset tessellationFactorBufferInstan
 
 @end
 
+API_AVAILABLE(ios(13.0),macos(11.0))
+@protocol MTLIndirectComputeCommand <NSObject>
+- (void)setComputePipelineState:(id <MTLComputePipelineState>)pipelineState API_AVAILABLE(ios(13.0),macos(11.0));
+
+- (void)setKernelBuffer:(id <MTLBuffer>)buffer offset:(NSUInteger)offset atIndex:(NSUInteger)index;
+
+
+- (void)concurrentDispatchThreadgroups:(MTLSize)threadgroupsPerGrid
+                 threadsPerThreadgroup:(MTLSize)threadsPerThreadgroup;
+- (void)concurrentDispatchThreads:(MTLSize)threadsPerGrid
+            threadsPerThreadgroup:(MTLSize)threadsPerThreadgroup;
+
+- (void)setBarrier;
+
+- (void)clearBarrier;
+
+- (void)setImageblockWidth:(NSUInteger)width height:(NSUInteger)height API_AVAILABLE(ios(14.0), macos(11.0));
+
+- (void)reset;
+
+
+- (void)setThreadgroupMemoryLength:(NSUInteger)length atIndex:(NSUInteger)index;
+- (void)setStageInRegion:(MTLRegion)region;
+@end
 
 NS_ASSUME_NONNULL_END
 

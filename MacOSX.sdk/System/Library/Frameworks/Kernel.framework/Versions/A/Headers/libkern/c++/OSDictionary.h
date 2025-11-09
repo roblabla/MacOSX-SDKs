@@ -40,13 +40,14 @@
 #include <libkern/c++/OSCollection.h>
 #include <libkern/c++/OSArray.h>
 #include <libkern/c++/OSPtr.h>
+#include <os/base.h>
 
 class OSArray;
 class OSSymbol;
 class OSString;
 class OSDictionary;
 
-typedef OSPtr<OSDictionary> OSDictionaryPtr;
+typedef OSDictionary* OSDictionaryPtr;
 
 /*!
  * @header
@@ -128,19 +129,19 @@ protected:
 	unsigned int   capacity;
 	unsigned int   capacityIncrement;
 	struct dictEntry {
-		OSCollectionTaggedPtr<const OSSymbol>        key;
-		OSCollectionTaggedPtr<const OSMetaClassBase> value;
+		OSTaggedPtr<const OSSymbol>        key;
+		OSTaggedPtr<const OSMetaClassBase> value;
 	};
-	dictEntry    * dictionary;
+	dictEntry    * OS_PTRAUTH_SIGNED_PTR("OSDictionary.dictionary") dictionary;
 
 #else /* APPLE_KEXT_ALIGN_CONTAINERS */
 
 protected:
 	struct dictEntry {
-		OSCollectionTaggedPtr<const OSSymbol>        key;
-		OSCollectionTaggedPtr<const OSMetaClassBase> value;
+		OSTaggedPtr<const OSSymbol>        key;
+		OSTaggedPtr<const OSMetaClassBase> value;
 	};
-	dictEntry    * dictionary;
+	dictEntry    * OS_PTRAUTH_SIGNED_PTR("OSDictionary.dictionary") dictionary;
 	unsigned int   count;
 	unsigned int   capacity;
 	unsigned int   capacityIncrement;
@@ -178,7 +179,7 @@ public:
  * (<i>unlike</i> @link //apple_ref/doc/uid/20001497 CFMutableDictionary@/link,
  * for which the initial capacity is a hard limit).
  */
-	static OSDictionaryPtr withCapacity(unsigned int capacity);
+	static OSPtr<OSDictionary> withCapacity(unsigned int capacity);
 
 
 /*!
@@ -213,7 +214,7 @@ public:
  * @link //apple_ref/doc/uid/20001497 CFMutableDictionary@/link,
  * for which the initial capacity is a hard limit).
  */
-	static OSDictionaryPtr withObjects(
+	static OSPtr<OSDictionary> withObjects(
 		const OSObject * objects[],
 		const OSSymbol * keys[],
 		unsigned int     count,
@@ -251,7 +252,7 @@ public:
  * @link //apple_ref/doc/uid/20001497 CFMutableDictionary@/link,
  * for which the initial capacity is a hard limit).
  */
-	static OSDictionaryPtr withObjects(
+	static OSPtr<OSDictionary> withObjects(
 		const OSObject * objects[],
 		const OSString * keys[],
 		unsigned int     count,
@@ -292,7 +293,7 @@ public:
  * in the new OSDictionary,
  * not copied.
  */
-	static OSDictionaryPtr withDictionary(
+	static OSPtr<OSDictionary> withDictionary(
 		const OSDictionary * dict,
 		unsigned int         capacity = 0);
 
@@ -597,6 +598,10 @@ public:
 		const OSSymbol        * aKey,
 		const OSMetaClassBase * anObject);
 
+	bool setObject(
+		OSSharedPtr<const OSSymbol> const& aKey,
+		OSSharedPtr<const OSMetaClassBase> const& anObject);
+
 
 /*!
  * @function setObject
@@ -619,6 +624,10 @@ public:
 	virtual bool setObject(
 		const OSString        * aKey,
 		const OSMetaClassBase * anObject);
+
+	bool setObject(
+		const OSString        * aKey,
+		OSSharedPtr<const OSMetaClassBase> const& anObject);
 
 
 /*!
@@ -643,6 +652,10 @@ public:
 	virtual bool setObject(
 		const char            * aKey,
 		const OSMetaClassBase * anObject);
+
+	bool setObject(
+		const char            * aKey,
+		OSSharedPtr<const OSMetaClassBase> const& anObject);
 
 
 /*!
@@ -923,7 +936,7 @@ public:
  * Objects that are not derived from OSCollection are retained
  * rather than copied.
  */
-	OSCollectionPtr copyCollection(OSDictionary * cycleDict = NULL) APPLE_KEXT_OVERRIDE;
+	OSPtr<OSCollection> copyCollection(OSDictionary * cycleDict = NULL) APPLE_KEXT_OVERRIDE;
 
 
 

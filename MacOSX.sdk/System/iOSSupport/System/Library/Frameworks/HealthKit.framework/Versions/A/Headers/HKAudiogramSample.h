@@ -2,10 +2,7 @@
 //  HKAudiogramSample.h
 //  HealthKit
 //
-//  Created by David Harrison on 12/18/17.
 //  Copyright © 2017 Apple. All rights reserved.
-//
-//  Sample for capturing the results of a hearing test.
 //
 
 #import <HealthKit/HKQuantity.h>

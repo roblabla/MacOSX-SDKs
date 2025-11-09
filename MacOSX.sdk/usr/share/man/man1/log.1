@@ -36,6 +36,7 @@
 .Cm show
 .Op Fl -archive Ar archive | Fl -file Ar file
 .Op Fl -predicate Ar filter
+.Op Fl -process Ar pid | process
 .Op Fl -source
 .Op Fl -style Ar default | compact | json | ndjson | syslog
 .Op Fl -color Ar auto | always | none
@@ -58,8 +59,8 @@
 .Nm
 .Cm stream
 .Op Fl -level Ar default | info | debug
-.Op Fl -process Ar pid | process
 .Op Fl -predicate Ar filter
+.Op Fl -process Ar pid | process
 .Op Fl -source
 .Op Fl -style Ar default | compact | json | syslog
 .Op Fl -color Ar auto | always | none
@@ -67,7 +68,7 @@
 .Op Fl -type Ar activity | log | trace
 .Sh DESCRIPTION
 .Nm
-is used to access system wide log messages created by os_log, os_trace and other logging systems. 
+is used to access system wide log messages created by os_log, os_trace and other logging systems.
 Some commands require root privileges.
 .Pp
 Available commands and their options:
@@ -79,7 +80,6 @@ Collect the system logs into a .logarchive that can be viewed later with tools s
 .Nm
 or Console.
 If an output path is not specified, system_logs.logarchive will be created in the current directory.
-.Pp
 .Bl -tag -width "--archive path "
 .It Fl -output Ar path
 Save the archive to the specified path or file.
@@ -92,8 +92,9 @@ The following date/time formats are accepted:
 "YYYY-MM-DD HH:MM:SS",
 "YYYY-MM-DD HH:MM:SSZZZZZ"
 .It Fl -last Ar num Op m|h|d
-Limits the captured events to the period starting at the given interval ago from the current time. Time is assumed
-in seconds unless specified. Example: "--last 2m" or "--last 3h"
+Limits the captured events to the period starting at the given interval ago from the current time.
+Time is assumed in seconds unless specified.
+Example: "--last 2m" or "--last 3h"
 .It Fl -size Ar num Op k|m
 The amount of data to be captured in kilobytes or megabytes.
 This is an approximation, as the actual size may be more than requested.
@@ -126,7 +127,8 @@ If category is supplied, subsystem is required.
 .It Fl -process Ar pid
 Set mode for a specified pid.
 .It Fl -mode Ar mode(s)
-Will enable given mode.  Modes include:
+Will enable given mode.
+Modes include:
 .Pp
 level: {off | default | info | debug} The level is a hierarchy, e.g. debug implies debug, info, and default.
 .Pp
@@ -141,56 +143,63 @@ Deletes main log datastore, and inflight log data as well as time-to-live data (
 .It Fl -ttl
 Deletes time-to-live log content.
 .El
-.Pp
 .It Cm show
 Shows contents of the system log datastore, archive or a specific tracev3 file.
 If a file or archive is not specified, the system datastore will be shown.
 If it is from a future system version that log cannot understand,
-it exists with EX_DATAERR (65) and an error message.
+it exits with EX_DATAERR (65) and an error message.
 The output contains only default level messages unless --info and/or --debug are specified.
 The output does not contain signposts unless --signpost is specified.
 .Bl -tag -width "--archive path "
 .It Fl -archive Ar archive
-Display events stored in the given archive. The archive must be a valid log archive bundle with the suffix
+Display events stored in the given archive.
+The archive must be a valid log archive bundle with the suffix
 \fB.logarchive\fR.
 .It Fl -file Ar file
-Display events stored in the given \fB.tracev3\fR file. In order to be decoded, the file must be contained
-within a valid \fB.logarchive\fR bundle, or part of the system logs directory.
+Display events stored in the given \fB.tracev3\fR file.
+In order to be decoded, the file must be contained within a valid
+\fB.logarchive\fR bundle, or part of the system logs directory.
 .It Fl -[no-]pager
 Enable or disable pagination of output via less.
 .It Fl -predicate Ar filter
 Filters messages based on the provided predicate, based on NSPredicate.
 A compound predicate or multiple predicates can be provided.
 See section \fB"PREDICATE-BASED FILTERING"\fR below.
+.It Fl -process Ar pid | process
+The process on which to operate.
+This option can be passed more than once to operate on multiple processes.
 .It Fl -source
 Include symbol names and source line numbers for messages, if available.
 .It Fl -style Ar style
 Control the output formatting of events:
 .Bl -tag -width "default "
 .It Ar default
-Human readable output. ISO-8601 date (microsecond precision and timezone 
-offset), thread ID, log type, activity ID, process ID, TTL, process, subsystem,
-category and message content.
+Human readable output.
+ISO-8601 date (microsecond precision and timezone offset), thread ID, log type,
+activity ID, process ID, TTL, process, subsystem, category and message content.
 .It Ar compact
-Compact human readable output. ISO-8601 date (millisecond precision), 
-abbreviated log type, process, processID, thread ID, subsystem, category and 
-message content.  This output uses less horizontal space to indicate event 
-metadata than the
+Compact human readable output.
+ISO-8601 date (millisecond precision), abbreviated log type, process, processID,
+thread ID, subsystem, category and message content.
+This output uses less horizontal space to indicate event metadata than the
 .Ar default
 style.
 .It Ar json
-JSON output. Event data is synthesized as an array of JSON dictionaries.
+JSON output.
+Event data is synthesized as an array of JSON dictionaries.
 .It Ar ndjson
-Line-delimited JSON output. Event data is synthesized as JSON dictionaries,
-each emitted on a single line. A trailing record, identified by the inclusion
-of a "finished" field, is emitted to indicate the end of events.
+Line-delimited JSON output.
+Event data is synthesized as JSON dictionaries, each emitted on a single line.
+A trailing record, identified by the inclusion of a "finished" field, is emitted
+to indicate the end of events.
 .It Ar syslog
 syslog-style output intended to be more compatible with the output format used by
 .Xr syslog 1 .
 .El
 .It Fl -color Ar auto | always | none
-Control the display of colorized output. By default,
-.Xr log 1
+Control the display of colorized output.
+By default,
+.Nm
 will disable colorized output when not directed to a terminal, unless overidden
 using
 .Ar always .
@@ -207,9 +216,10 @@ The following date/time formats are accepted:
 "YYYY-MM-DD HH:MM:SS",
 "YYYY-MM-DD HH:MM:SSZZZZZ"
 .It Fl -last Ar time Ns Oo m|h|d Oc | boot
-Shows events that occurred within the given time relative to the end of the log archive, or
-beginning at the last boot contained within the log archive. Time may be specified as minutes, 
-hours or days. Time is assumed in seconds unless specified.
+Shows events that occurred within the given time relative to the end of the log
+archive, or beginning at the last boot contained within the log archive.
+Time may be specified as minutes, hours or days.
+Time is assumed in seconds unless specified.
 Example: "--last 2m" or "--last 3h"
 .It Fl -timezone Ar local | timezone
 Displays content in the local timezone, or a specified timezone (see
@@ -227,12 +237,13 @@ Disable or enable display of signposts in the output.
 (By default signposts are not displayed.)
 .El
 .It Cm stats
-Shows a breakdown of the events contained within a log datastore or archive. The
-following options can be supplied to all modes of \fBlog stats\fR:
+Shows a breakdown of the events contained within a log datastore or archive.
+The following options can be supplied to all modes of \fBlog stats\fR:
 .Bl -tag -width "--sort events | bytes "
 .It Fl -archive Ar archive
-Display statistics for events stored in the given archive. The archive must be a valid log archive 
-bundle with the suffix \fB.logarchive\fR.
+Display statistics for events stored in the given archive.
+The archive must be a valid log archive bundle with the suffix
+\fB.logarchive\fR.
 .It Fl -sort Ar events | bytes
 Sort tabulated data output by number of events, or number of bytes.
 .It Fl -count Ar count | all
@@ -263,7 +274,8 @@ Specifying a process id with the --process option will narrow the results.
 .Bl -tag -width "--archive path "
 .It Fl -level Ar default | info | debug
 Shows messages at specified level and below.
-The level is a hierarchy. Specifying debug implies debug, info and default.
+The level is a hierarchy.
+Specifying debug implies debug, info and default.
 .It Fl -predicate Ar filter
 Filters messages using the provided predicate based on NSPredicate.
 A compound predicate or multiple predicates can be provided.
@@ -274,8 +286,8 @@ This option can be passed more than once to operate on multiple processes.
 .It Fl -style Ar default | compact | json | syslog
 Output the content as a different style.
 .It Fl -color Ar auto | always | none
-Highlight certain types of log messages. In auto, highlighting will be disabled
-if the output is detected to be non-TTY.
+Highlight certain types of log messages.
+In auto, highlighting will be disabled if the output is detected to be non-TTY.
 .It Fl -source
 Include symbol names and source line numbers for messages, if available.
 .It Fl -timeout Ar time Op m|h|d
@@ -289,7 +301,6 @@ Pass an appropriate
 for each requested type of event.
 .El
 .El
-.Pp
 .Sh PREDICATE-BASED FILTERING
 Using predicate-based filters via the
 .Fl -predicate
@@ -302,7 +313,6 @@ The
 argument defines one or more pattern clauses following NSPredicate rules.
 See \fBlog help predicates\fR for the full list of supported keys.
 Supported keys include:
-.Pp
 .Bl -tag -width "processImagePath "
 .It \fBeventType\fR
 The type of event: \fBactivityCreateEvent\fR, \fBactivityTransitionEvent\fR, \fBlogEvent\fR, \fBsignpostEvent\fR, \fBstateEvent\fR, \fBtimesyncEvent\fR, \fBtraceEvent\fR and \fBuserActionEvent\fR.
@@ -327,7 +337,7 @@ APIs.
 The category used to log an event.
 Only works with log messages generated with
 .Xr os_log 3
-APIs.  
+APIs.
 When category is used, the \fBsubsystem\fR filter should also be provided.
 .El
 .Sh PREDICATE-BASED FILTERING EXAMPLES
@@ -369,7 +379,8 @@ Timestamp                       Thread     Type        Activity     PID
 The following environment variables affect the execution of \fBlog\fR:
 .Bl -tag -width "OS_ACTIVITY_PROPAGATE_MODE "
 .It Ev LOG_COLORS
-Controls the color of text output from \fBlog show\fR. This string is a concatenation of pairs of the format
+Controls the color of text output from \fBlog show\fR.
+This string is a concatenation of pairs of the format
 .Ar f Ns Ar b ,
 where
 .Ar f
@@ -458,7 +469,7 @@ i.e. bold magenta process name, yellow sender, green subsystem, bold blue catego
 Control the default output style of \fBlog show\fR: default, compact, json or syslog.
 .It Ev OS_ACTIVITY_MODE
 Change the mode of launched processes to:
-.Bl -tag -compact
+.Bl -tag -width "debug " -compact
 .It Fa info
 Enables info level messages.
 Does not override logging Preferences that have info level disabled.
@@ -468,7 +479,7 @@ Does not override logging Preferences that have info level or debug level disabl
 .El
 .It Ev OS_ACTIVITY_STREAM
 Change the type of streaming enabled.
-.Bl -tag -compact
+.Bl -tag -width "debug " -compact
 .It Fa live
 Live streaming from the process using IPC.
 .El
@@ -549,7 +560,6 @@ The
 is delimited by single quotes, but
 adjacent quoted elements are "glued" together;
 this helps in making long predicates easier to read and write.
-.Pp
 .Sh SEE ALSO
 .Xr os_log 3 ,
 .Xr os_trace 3

@@ -3612,6 +3612,8 @@ SwiftVersions:
     SwiftName: NSToolbarShowColorsItemIdentifier
   - Name: NSToolbarShowFontsItemIdentifier
     SwiftName: NSToolbarShowFontsItemIdentifier
+  - Name: NSToolbarSidebarTrackingSeparatorItemIdentifier
+    SwiftName: NSToolbarSidebarTrackingSeparatorItemIdentifier
   - Name: NSToolbarSpaceItemIdentifier
     SwiftName: NSToolbarSpaceItemIdentifier
   - Name: NSToolbarToggleSidebarItemIdentifier
@@ -4892,9 +4894,19 @@ Classes:
   - Selector: "bestMatchFromAppearancesWithNames:"
     MethodKind: Instance
     SwiftName: bestMatch(from:)
+  - Selector: "performAsCurrentDrawingAppearance:"
+    MethodKind: Instance
+    SwiftName: performAsCurrentDrawingAppearance(_:)
   - Selector: "setCurrentAppearance:"
     MethodKind: Class
     SwiftName: setCurrent(_:)
+  - Selector: currentDrawingAppearance
+    MethodKind: Class
+    ResultType: "NSAppearance * _Nonnull"
+  Properties:
+  - Name: currentDrawingAppearance
+    PropertyKind: Class
+    SwiftImportAsAccessors: true
 - Name: NSApplication
   Methods:
   - Selector: "activateIgnoringOtherApps:"
@@ -5634,6 +5646,28 @@ Classes:
   - Selector: init
     MethodKind: Instance
     DesignatedInit: true
+- Name: NSLayoutXAxisAnchor
+  Methods:
+  - Selector: "constraintEqualToSystemSpacingAfterAnchor:multiplier:"
+    MethodKind: Instance
+    SwiftName: constraint(equalToSystemSpacingAfter:multiplier:)
+  - Selector: "constraintGreaterThanOrEqualToSystemSpacingAfterAnchor:multiplier:"
+    MethodKind: Instance
+    SwiftName: constraint(greaterThanOrEqualToSystemSpacingAfter:multiplier:)
+  - Selector: "constraintLessThanOrEqualToSystemSpacingAfterAnchor:multiplier:"
+    MethodKind: Instance
+    SwiftName: constraint(lessThanOrEqualToSystemSpacingAfter:multiplier:)
+- Name: NSLayoutYAxisAnchor
+  Methods:
+  - Selector: "constraintEqualToSystemSpacingBelowAnchor:multiplier:"
+    MethodKind: Instance
+    SwiftName: constraint(equalToSystemSpacingBelow:multiplier:)
+  - Selector: "constraintGreaterThanOrEqualToSystemSpacingBelowAnchor:multiplier:"
+    MethodKind: Instance
+    SwiftName: constraint(greaterThanOrEqualToSystemSpacingBelow:multiplier:)
+  - Selector: "constraintLessThanOrEqualToSystemSpacingBelowAnchor:multiplier:"
+    MethodKind: Instance
+    SwiftName: constraint(lessThanOrEqualToSystemSpacingBelow:multiplier:)
 - Name: NSMatrix
   Methods:
   - Selector: "acceptsFirstMouse:"
@@ -5991,6 +6025,8 @@ Classes:
   - Selector: "makeViewWithIdentifier:owner:"
     MethodKind: Instance
     SwiftName: "makeView(withIdentifier:owner:)"
+- Name: NSTableViewDiffableDataSource
+  SwiftName: NSTableViewDiffableDataSourceReference
 - Name: NSTextBlock
   Methods:
   - Selector: init
@@ -6405,6 +6441,9 @@ Classes:
   - Selector: "absolutePathForAppBundleWithIdentifier:"
     MethodKind: Instance
     SwiftName: absolutePathForApplication(withBundleIdentifier:)
+  - Selector: "iconForContentType:"
+    MethodKind: Instance
+    SwiftName: "icon(for:)"
   - Selector: "launchAppWithBundleIdentifier:options:additionalEventParamDescriptor:launchIdentifier:"
     MethodKind: Instance
     SwiftName: launchApplication(withBundleIdentifier:options:additionalEventParamDescriptor:launchIdentifier:)
@@ -6676,6 +6715,8 @@ Tags:
   SwiftName: NSLevelIndicator.Style
 - Name: NSLineBreakMode
   SwiftName: NSLineBreakMode
+- Name: NSLineBreakStrategy
+  SwiftName: NSParagraphStyle.LineBreakStrategy
 - Name: NSLineCapStyle
   SwiftName: NSBezierPath.LineCapStyle
 - Name: NSLineJoinStyle
@@ -6708,10 +6749,10 @@ Tags:
   SwiftName: NSPasteboard.WritingOptions
 - Name: NSPathStyle
   SwiftName: NSPathControl.Style
-- Name: NSPickerTouchBarItemSelectionMode
-  SwiftName: NSPickerTouchBarItem.SelectionMode
 - Name: NSPickerTouchBarItemControlRepresentation
   SwiftName: NSPickerTouchBarItem.ControlRepresentation
+- Name: NSPickerTouchBarItemSelectionMode
+  SwiftName: NSPickerTouchBarItem.SelectionMode
 - Name: NSPointingDeviceType
   SwiftName: NSEvent.PointingDeviceType
 - Name: NSPopUpArrowPosition
@@ -6832,6 +6873,8 @@ Tags:
   SwiftName: NSTableView.RowSizeStyle
 - Name: NSTableViewSelectionHighlightStyle
   SwiftName: NSTableView.SelectionHighlightStyle
+- Name: NSTableViewStyle
+  SwiftName: NSTableView.Style
 - Name: NSTextBlockDimension
   SwiftName: NSTextBlock.Dimension
 - Name: NSTextBlockLayer
@@ -6928,6 +6971,8 @@ Tags:
   SwiftName: NSWindow.TabbingMode
 - Name: NSWindowTitleVisibility
   SwiftName: NSWindow.TitleVisibility
+- Name: NSWindowToolbarStyle
+  SwiftName: NSWindow.ToolbarStyle
 - Name: NSWindowUserTabbingPreference
   SwiftName: NSWindow.UserTabbingPreference
 - Name: NSWorkspaceAuthorization
@@ -6971,8 +7016,6 @@ Tags:
 - Name: __TvFlags
   Availability: nonswift
 - Name: __VFlags
-  Availability: nonswift
-- Name: __VFlags2
   Availability: nonswift
 - Name: __aFlags
   Availability: nonswift
@@ -7173,6 +7216,10 @@ Typedefs:
   SwiftName: NSFontDescriptor.TraitKey
 - Name: NSFontDescriptorVariationKey
   SwiftName: NSFontDescriptor.VariationKey
+- Name: NSFontTextStyle
+  SwiftName: NSFont.TextStyle
+- Name: NSFontTextStyleOptionKey
+  SwiftName: NSFont.TextStyleOptionKey
 - Name: NSFontWeight
   SwiftName: NSFont.Weight
 - Name: NSGraphicsContextAttributeKey
@@ -7279,6 +7326,12 @@ Typedefs:
   SwiftName: NSStoryboardSegue.Identifier
 - Name: NSTableViewAutosaveName
   SwiftName: NSTableView.AutosaveName
+- Name: NSTableViewDiffableDataSourceCellProvider
+  SwiftName: NSTableViewDiffableDataSourceReferenceCellProvider
+- Name: NSTableViewDiffableDataSourceRowProvider
+  SwiftName: NSTableViewDiffableDataSourceReferenceRowProvider
+- Name: NSTableViewDiffableDataSourceSectionHeaderViewProvider
+  SwiftName: NSTableViewDiffableDataSourceReferenceSectionHeaderViewProvider
 - Name: NSTableViewReusableViewIdentifier
   SwiftName: NSTableView.ReusableViewIdentifier
 - Name: NSTextCheckingOptionKey
@@ -10146,6 +10199,8 @@ Globals:
   SwiftName: showColors
 - Name: NSToolbarShowFontsItemIdentifier
   SwiftName: showFonts
+- Name: NSToolbarSidebarTrackingSeparatorItemIdentifier
+  SwiftName: sidebarTrackingSeparator
 - Name: NSToolbarSpaceItemIdentifier
   SwiftName: space
 - Name: NSToolbarToggleSidebarItemIdentifier
@@ -10158,6 +10213,8 @@ Globals:
   SwiftName: tornOffMenu
 - Name: NSTouchEventSubtype
   Availability: nonswift
+- Name: NSTrackingAttributeName
+  SwiftName: tracking
 - Name: NSTransparentBinding
   SwiftName: transparent
 - Name: NSURLPboardType

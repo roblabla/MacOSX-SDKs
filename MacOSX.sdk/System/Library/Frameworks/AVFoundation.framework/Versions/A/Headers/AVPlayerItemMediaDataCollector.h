@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVPlayerItemMediaDataCollector.h>)
 /*
  File:  AVPlayerItemMediaDataCollector.h
 
@@ -113,3 +114,7 @@ API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.3), watchos(2.3))
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCore/AVPlayerItemMediaDataCollector.h>
+#endif

@@ -34,7 +34,7 @@ namespace swift { extern "C" {
 // This declaration might not be universally correct.
 // We verify its correctness for the current platform in the runtime code.
 #if defined(__linux__)
-# if defined(__ANDROID__) && !defined(__aarch64__)
+# if defined(__ANDROID__) && !(defined(__aarch64__) || defined(__x86_64__))
 typedef __swift_uint16_t __swift_mode_t;
 # else
 typedef __swift_uint32_t __swift_mode_t;
@@ -43,6 +43,10 @@ typedef __swift_uint32_t __swift_mode_t;
 typedef __swift_uint16_t __swift_mode_t;
 #elif defined(_WIN32)
 typedef __swift_int32_t __swift_mode_t;
+#elif defined(__wasi__)
+typedef __swift_uint32_t __swift_mode_t;
+#elif defined(__OpenBSD__)
+typedef __swift_uint32_t __swift_mode_t;
 #else  // just guessing
 typedef __swift_uint16_t __swift_mode_t;
 #endif
@@ -105,10 +109,10 @@ static inline __swift_size_t _swift_stdlib_malloc_size(const void *ptr) {
   return malloc_size(ptr);
 }
 #elif defined(__linux__) || defined(__CYGWIN__) || defined(__ANDROID__) \
-   || defined(__HAIKU__) || defined(__FreeBSD__)
+   || defined(__HAIKU__) || defined(__FreeBSD__) || defined(__wasi__)
 static inline __swift_size_t _swift_stdlib_malloc_size(const void *ptr) {
 #if defined(__ANDROID__)
-#if __ANDROID_API__ >= 17
+#if !defined(__ANDROID_API__) || __ANDROID_API__ >= 17
   extern __swift_size_t malloc_usable_size(const void *ptr);
 #endif
 #else

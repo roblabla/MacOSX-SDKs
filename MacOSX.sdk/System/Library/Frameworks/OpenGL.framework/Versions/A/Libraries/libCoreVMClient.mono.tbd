@@ -1,10 +1,14 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 755BF43F-7069-3FC7-8F67-24BC600CDEE1', 'x86_64: 755BF43F-7069-3FC7-8F67-24BC600CDEE1' ]
-platform:        zippered
-install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries//libCoreVMClient.mono.dylib'
-exports:         
-  - archs:           [ x86_64 ]
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           C2FD81AC-DC6D-3A8D-AB9A-FCB93F214BBC
+  - target:          x86_64-maccatalyst
+    value:           C2FD81AC-DC6D-3A8D-AB9A-FCB93F214BBC
+install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libCoreVMClient.mono.dylib'
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     symbols:         [ __cvmsIsAssert, __cvmsIsMonolithic, _cvms_connection_control, 
                        _cvms_connection_create, _cvms_connection_has_service, _cvms_connection_release, 
                        _cvms_connection_retain, _cvms_content_get_function_pointer, 

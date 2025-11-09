@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVAsynchronousKeyValueLoading.h>)
 /*
     File:  AVAsynchronousKeyValueLoading.h
  
@@ -60,7 +61,7 @@ typedef NS_ENUM(NSInteger, AVKeyValueStatus) {
   @abstract		Directs the target to load the values of any of the specified keys that are not already loaded.
   @param		keys
     An instance of NSArray, containing NSStrings for the specified keys.
-  @param		completionHandler
+  @param		handler
     The block to be invoked when loading succeeds, fails, or is cancelled.
 */
 - (void)loadValuesAsynchronouslyForKeys:(NSArray<NSString *> *)keys completionHandler:(nullable void (^)(void))handler;
@@ -68,3 +69,7 @@ typedef NS_ENUM(NSInteger, AVKeyValueStatus) {
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCore/AVAsynchronousKeyValueLoading.h>
+#endif

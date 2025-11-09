@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVAssetDownloadStorageManager.h>)
 /*
 	File:  AVAssetDownloadStorageManager.h
  
@@ -125,3 +126,7 @@ API_AVAILABLE(macos(10.15), ios(11.0)) API_UNAVAILABLE(tvos, watchos)
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCore/AVAssetDownloadStorageManager.h>
+#endif

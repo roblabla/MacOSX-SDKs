@@ -1,7 +1,7 @@
 /*
     NSSaveChangesRequest.h
     Core Data
-    Copyright (c) 2004-2019, Apple Inc.
+    Copyright (c) 2004-2020, Apple Inc.
     All rights reserved.
 */
 

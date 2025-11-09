@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: D1E5F12E-8253-38BA-B3CC-BEA1B6D3EBC7' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           914FCC1B-2720-331A-9CB9-F14ED828ACBB
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           C928B5FC-5CF1-32AC-9F86-5624EBF2F526
 install-name:    '/System/Library/PrivateFrameworks/MultiverseSupport.framework/Versions/A/MultiverseSupport'
-current-version: 99
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 109.40.1
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _MultibootErrorDomain, _multiboot_add_whitelist_version, _multiverse_device_connect, 
                        _multiverse_device_connect_with_timeout, _multiverse_device_event_to_string, 
                        _multiverse_device_get_ecid, _multiverse_device_get_ifindex, 

@@ -17,13 +17,13 @@ NS_ASSUME_NONNULL_BEGIN
  *             from NFC Forum.
  */
 typedef NS_ENUM(uint8_t, NFCTypeNameFormat) {
-    NFCTypeNameFormatEmpty             = 0x00,
-    NFCTypeNameFormatNFCWellKnown      = 0x01,
-    NFCTypeNameFormatMedia             = 0x02,
-    NFCTypeNameFormatAbsoluteURI       = 0x03,
-    NFCTypeNameFormatNFCExternal       = 0x04,
-    NFCTypeNameFormatUnknown           = 0x05,
-    NFCTypeNameFormatUnchanged         = 0x06
+    NFCTypeNameFormatEmpty API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)            = 0x00,
+    NFCTypeNameFormatNFCWellKnown API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)     = 0x01,
+    NFCTypeNameFormatMedia API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)            = 0x02,
+    NFCTypeNameFormatAbsoluteURI API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)      = 0x03,
+    NFCTypeNameFormatNFCExternal API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)      = 0x04,
+    NFCTypeNameFormatUnknown API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)          = 0x05,
+    NFCTypeNameFormatUnchanged API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)        = 0x06
 };
 
 /*!
@@ -35,10 +35,10 @@ typedef NS_ENUM(uint8_t, NFCTypeNameFormat) {
 NS_EXTENSION_UNAVAILABLE("Not available to extensions") API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
 @interface NFCNDEFPayload : NSObject<NSSecureCoding>
 
-@property (nonatomic, assign) NFCTypeNameFormat typeNameFormat;
-@property (nonatomic, copy) NSData *type;
-@property (nonatomic, copy) NSData *identifier;
-@property (nonatomic, copy) NSData *payload;
+@property (nonatomic, assign) NFCTypeNameFormat typeNameFormat API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
+@property (nonatomic, copy) NSData *type API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
+@property (nonatomic, copy) NSData *identifier API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
+@property (nonatomic, copy) NSData *payload API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos);
 
 - (instancetype)init NS_UNAVAILABLE;
 

@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 94E9F693-BD9C-3095-805E-3CC4E0ABE45C', 'x86_64: 94E9F693-BD9C-3095-805E-3CC4E0ABE45C' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           34E70D41-7903-3735-BCD5-4543F37C2689
+  - target:          x86_64-maccatalyst
+    value:           34E70D41-7903-3735-BCD5-4543F37C2689
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           4496B20B-266E-3D83-8E22-5532917D94E7
+  - target:          arm64e-maccatalyst
+    value:           4496B20B-266E-3D83-8E22-5532917D94E7
 install-name:    '/System/Library/PrivateFrameworks/CoreDuetContext.framework/Versions/A/CoreDuetContext'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CoreDuetContextVersionNumber, _CoreDuetContextVersionString, 
                        __CDCircularRegionsDidChangeNotification, __CDClientContextConnectionInterrupted, 
                        __CDClientContextContextChanged, __CDClientContextContextChangedInfoKey, 
@@ -17,11 +31,11 @@ exports:
                        __CDInformativeContextualChangeOldValueKey, __CDInformativeContextualChangeRemoval, 
                        __CDInformativeContextualChangeReplacement, __CDMDCSEventPublisherEventStreamName, 
                        __CDMDCSProxyTokenUpdated, __CDNotificationEventPublisherEventStreamName, 
-                       __CDSystemTimeCallbackDateKey, __CDSystemTimeCallbackNotification, 
-                       _kCDErrorDomain, _kCDFailedToArchiveObjectError, _kCDInternalFailureError, 
-                       _kCDInvalidArgumentError, _kCDInvalidEventError, _kCDMissingDelegateError, 
-                       _kCDMissingPublisherError, _kCDTemporaryError, _kCDUnknownClientError, 
-                       _kCDUnknownProxyError, _kCDXPCSendError ]
+                       __CDRedactedObjectForKeyPath, __CDSystemTimeCallbackDateKey, 
+                       __CDSystemTimeCallbackNotification, _kCDErrorDomain, _kCDFailedToArchiveObjectError, 
+                       _kCDInternalFailureError, _kCDInvalidArgumentError, _kCDInvalidEventError, 
+                       _kCDMissingDelegateError, _kCDMissingPublisherError, _kCDTemporaryError, 
+                       _kCDUnknownClientError, _kCDUnknownProxyError, _kCDXPCSendError ]
     objc-classes:    [ _CDClientContext, _CDContextMonitorManager, _CDContextPredictionQueries, 
                        _CDContextQueries, _CDContextValue, _CDContextualChangeRegistration, 
                        _CDContextualChangeRegistrationMO, _CDContextualKeyPath, _CDContextualKeyPathAndValue, 

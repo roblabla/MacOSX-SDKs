@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCore/AVCompositionTrack.h>)
 /*
 	File:  AVCompositionTrack.h
 
@@ -272,3 +273,7 @@ API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0))
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCore/AVCompositionTrack.h>
+#endif

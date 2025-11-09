@@ -5,6 +5,7 @@
 	All rights reserved.
 */
 
+#import <AppKit/AppKitDefines.h>
 #import <AppKit/NSWindow.h>
 #import <AppKit/NSControl.h>
 #import <AppKit/NSView.h>
@@ -16,6 +17,8 @@
 #import <AppKit/NSLayoutAnchor.h>
 
 NS_ASSUME_NONNULL_BEGIN
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
+
 #if !TARGET_OS_IPHONE
 
 /* Where AppKit's use of priority levels interacts with the user's use, we must define the priority levels involved.  Note that most of the time there is no interaction.  The use of priority levels is likely to be local to one sub-area of the window that is under the control of one author.  
@@ -240,6 +243,8 @@ NSLAYOUTCONSTRAINT_EXTERN NSDictionary<NSString *, id> *_NSDictionaryOfVariableB
 
 @end
 
+#endif // !TARGET_OS_IPHONE
+
 #pragma mark Core Layout Methods
 
 /* To render a window, the following passes will occur, if necessary.  
@@ -328,11 +333,13 @@ APPKIT_EXTERN const CGFloat NSViewNoIntrinsicMetric API_AVAILABLE(macos(10.11));
 @property (readonly) NSSize intrinsicContentSize API_AVAILABLE(macos(10.7));
 - (void)invalidateIntrinsicContentSize API_AVAILABLE(macos(10.7)); // call this when something changes that affects the intrinsicContentSize.  Otherwise AppKit won't notice that it changed.  
 
+#if !TARGET_OS_IPHONE
 - (NSLayoutPriority)contentHuggingPriorityForOrientation:(NSLayoutConstraintOrientation)orientation API_AVAILABLE(macos(10.7));
 - (void)setContentHuggingPriority:(NSLayoutPriority)priority forOrientation:(NSLayoutConstraintOrientation)orientation API_AVAILABLE(macos(10.7));
 
 - (NSLayoutPriority)contentCompressionResistancePriorityForOrientation:(NSLayoutConstraintOrientation)orientation API_AVAILABLE(macos(10.7));
 - (void)setContentCompressionResistancePriority:(NSLayoutPriority)priority forOrientation:(NSLayoutConstraintOrientation)orientation API_AVAILABLE(macos(10.7));
+#endif // !TARGET_OS_IPHONE
 
 // A boolean value that controls whether the receiver's horizontal content size constraint is active.  As an optimization, if the constraint is inactive, Auto Layout may avoid measuring the view's intrinsic content size.  Defaults to YES.
 @property (getter=isHorizontalContentSizeConstraintActive) BOOL horizontalContentSizeConstraintActive API_AVAILABLE(macos(10.15));
@@ -351,10 +358,12 @@ APPKIT_EXTERN const CGFloat NSViewNoIntrinsicMetric API_AVAILABLE(macos(10.11));
 #pragma mark Window anchoring
 
 @interface NSWindow (NSConstraintBasedLayoutAnchoring)
-/* If changes in the interior content (and thus, constraints) of a window force the window to get smaller or larger, what part of the window stays motionless?  By default, the top left corner of the window is anchored in place.  
+#if !TARGET_OS_IPHONE
+/* If changes in the interior content (and thus, constraints) of a window force the window to get smaller or larger, what part of the window stays motionless?  By default, the top left corner of the window is anchored in place.
  */
 - (NSLayoutAttribute)anchorAttributeForOrientation:(NSLayoutConstraintOrientation)orientation;
 - (void)setAnchorAttribute:(NSLayoutAttribute)attr forOrientation:(NSLayoutConstraintOrientation)orientation;
+#endif // !TARGET_OS_IPHONE
 @end
 
 #pragma mark Size To Fit
@@ -374,10 +383,12 @@ APPKIT_EXTERN const CGFloat NSViewNoIntrinsicMetric API_AVAILABLE(macos(10.11));
  */
 @interface NSView (NSConstraintBasedLayoutDebugging)
 
+#if !TARGET_OS_IPHONE
 /* This returns a list of all the constraints that are affecting the current location of the receiver.  The constraints do not necessarily involve the receiver, they may affect the frame indirectly.
  Pass NSLayoutConstraintOrientationHorizontal for the constraints affecting NSMinX([self frame]) and NSWidth([self frame]), or NSLayoutConstraintOrientationVertical for the constraints affecting NSMinY([self frame]) and NSHeight([self frame]).
  */
 - (NSArray<NSLayoutConstraint *> *)constraintsAffectingLayoutForOrientation:(NSLayoutConstraintOrientation)orientation API_AVAILABLE(macos(10.7));
+#endif // !TARGET_OS_IPHONE
 
 /* If there aren't enough constraints in the system to uniquely determine layout, we say the layout is ambiguous.  For example, if the only constraint in the system was x = y + 100, then there are lots of different possible values for x and y.  This situation is not automatically detected by AppKit, due to performance considerations and details of the algorithm used for layout.  
  The symptom of ambiguity is that views sometimes jump from place to place, or possibly are just in the wrong place.
@@ -389,12 +400,14 @@ APPKIT_EXTERN const CGFloat NSViewNoIntrinsicMetric API_AVAILABLE(macos(10.11));
 @end
 
 @interface NSWindow (NSConstraintBasedLayoutDebugging)
-/* This draws a visual representation of the given constraints in the receiver window.  It's a nice way to understand exactly what a collection of constraints specifies.  
+#if !TARGET_OS_IPHONE
+/* This draws a visual representation of the given constraints in the receiver window.  It's a nice way to understand exactly what a collection of constraints specifies.
  */
 - (void)visualizeConstraints:(nullable NSArray<NSLayoutConstraint *> *)constraints API_AVAILABLE(macos(10.7));
+#endif // !TARGET_OS_IPHONE
 @end
 
 
-#endif // !TARGET_OS_IPHONE
 
+API_UNAVAILABLE_END
 NS_ASSUME_NONNULL_END

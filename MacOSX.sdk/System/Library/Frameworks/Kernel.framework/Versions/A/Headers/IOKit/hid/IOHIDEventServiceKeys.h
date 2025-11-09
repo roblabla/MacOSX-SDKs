@@ -80,4 +80,53 @@
  */
 #define kIOHIDScrollAccelerationTypeKey "HIDScrollAccelerationType"
 
+/*!
+ * @define kIOHIDDigitizerTipThresholdKey
+ *
+ * @abstract
+ * Number property that describes the threshold percentage for when the tip
+ * pressure of a digitizer stylus should change from hovering to dragging.
+ *
+ * @discussion
+ * If a digitizer stylus supports the kHIDUsage_Dig_TipPressure (0x30) usage,
+ * the service may optionally publish this key to describe the value at which
+ * the pressure should change the pointer behavior from hovering to dragging.
+ * The value is a percentage from 0 to 100, where 100 percent is equal to the
+ * logical max that the stylus dispatches. If no value is provided, the default
+ * value of 75 will be used.
+ */
+#define kIOHIDDigitizerTipThresholdKey "DigitizerTipThreshold"
+
+/*!
+ * @define kIOHIDSurfaceDimensionsKey
+ *
+ * @abstract
+ * Dictionary property published on a service that describes the surface
+ * dimensions for services that publish absolute X/Y values, such as digitizer
+ * and pointer devices. The dictionary will contain the kIOHIDWidthKey and
+ * kIOHIDHeightKey keys described below. Value is in millimeter represented
+ * as IOFixed.
+ */
+#define kIOHIDSurfaceDimensionsKey "SurfaceDimensions"
+
+/*!
+ * @define kIOHIDWidthKey
+ *
+ * @abstract
+ * Number property used in the surface dimensions dictionary described above.
+ * Default value represents the physical max - physical min of the absolute
+ * X value.
+ */
+#define kIOHIDWidthKey "Width"
+
+/*!
+ * @define kIOHIDHeightKey
+ *
+ * @abstract
+ * Number property used in the surface dimensions dictionary described above.
+ * Default value represents the physical max - physical min of the absolute
+ * Y value.
+ */
+#define kIOHIDHeightKey "Height"
+
 #endif /* IOHIDDeviceTypes_h */

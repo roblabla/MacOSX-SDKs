@@ -1,3 +1,4 @@
+#if !__has_include(<AVFCapture/AVCaptureMetadataOutput.h>)
 /*
     File:  AVCaptureMetadataOutput.h
  
@@ -141,3 +142,7 @@ API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(macos) __WATCHOS_PROHIBITED __TVOS_PROHI
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCapture/AVCaptureMetadataOutput.h>
+#endif

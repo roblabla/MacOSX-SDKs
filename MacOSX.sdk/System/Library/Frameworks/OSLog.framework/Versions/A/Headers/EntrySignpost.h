@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger, OSLogEntrySignpostType) {
     OSLogEntrySignpostTypeIntervalEnd,
     OSLogEntrySignpostTypeEvent,
 }
-API_AVAILABLE(macos(10.15))
+API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
 NS_SWIFT_NAME(OSLogEntrySignpost.SignpostType);
 
 /*!
@@ -32,7 +32,7 @@ NS_SWIFT_NAME(OSLogEntrySignpost.SignpostType);
  * @abstract
  * Entries made by the os_signpost API.
  */
-API_AVAILABLE(macos(10.15))
+API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos, watchos)
 OS_EXPORT
 @interface OSLogEntrySignpost : OSLogEntry <OSLogEntryFromProcess, OSLogEntryWithPayload>
 

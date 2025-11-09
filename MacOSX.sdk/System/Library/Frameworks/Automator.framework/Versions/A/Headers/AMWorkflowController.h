@@ -13,6 +13,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+API_UNAVAILABLE_BEGIN(ios)
+
 @class AMAction;
 @class AMWorkflow;
 @class AMWorkflowView;
@@ -109,5 +111,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)workflowController:(AMWorkflowController *)controller didError:(NSError *)error NS_DEPRECATED_MAC(10_4, 10_13, "Use AMWorkflowControllerDelegate protocol.");
 
 @end
+
+API_UNAVAILABLE_END
 
 NS_ASSUME_NONNULL_END

@@ -27,83 +27,83 @@ typedef NSString *IOSurfacePropertyKey NS_STRING_ENUM;
 /* IOSurfacePropertyKeyAllocSize    - NSNumber of the total allocation size of the buffer including all planes.    
    Defaults to BufferHeight * BytesPerRow if not specified.   Must be specified for
    dimensionless buffers. */
-extern IOSurfacePropertyKey IOSurfacePropertyKeyAllocSize                   IOSFC_AVAILABLE_STARTING(__MAC_10_14, __IPHONE_12_0);
+extern IOSurfacePropertyKey IOSurfacePropertyKeyAllocSize                   API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
 
 /* IOSurfacePropertyKeyWidth  - NSNumber for the width of the IOSurface buffer in pixels.   Required for planar IOSurfaces. */
-extern IOSurfacePropertyKey IOSurfacePropertyKeyWidth                       IOSFC_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
+extern IOSurfacePropertyKey IOSurfacePropertyKeyWidth                       API_AVAILABLE(macos(10.12), ios(11.0), watchos(4.0), tvos(11.0));
 
 /* IOSurfacePropertyKeyHeight - NSNumber for the height of the IOSurface buffer in pixels.  Required for planar IOSurfaces. */
-extern IOSurfacePropertyKey IOSurfacePropertyKeyHeight                      IOSFC_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
+extern IOSurfacePropertyKey IOSurfacePropertyKeyHeight                      API_AVAILABLE(macos(10.12), ios(11.0), watchos(4.0), tvos(11.0));
 
 /* IOSurfacePropertyKeyBytesPerRow - NSNumber for the bytes per row of the buffer.   If not specified, IOSurface will first calculate
    the number full elements required on each row (by rounding up), multiplied by the bytes per element for this surface.
    That value will then be appropriately aligned. */
-extern IOSurfacePropertyKey IOSurfacePropertyKeyBytesPerRow                 IOSFC_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
+extern IOSurfacePropertyKey IOSurfacePropertyKeyBytesPerRow                 API_AVAILABLE(macos(10.12), ios(11.0), watchos(4.0), tvos(11.0));
 
 /* Optional properties for non-planar two dimensional images */
  
 /* IOSurfacePropertyKeyBytesPerElement - NSNumber for the total number of bytes in an element.  Default to 1. */
-extern IOSurfacePropertyKey IOSurfacePropertyKeyBytesPerElement             IOSFC_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
+extern IOSurfacePropertyKey IOSurfacePropertyKeyBytesPerElement             API_AVAILABLE(macos(10.12), ios(11.0), watchos(4.0), tvos(11.0));
 
 /* IOSurfacePropertyKeyElementWidth   - NSNumber for how many pixels wide each element is.   Defaults to 1. */ 
-extern IOSurfacePropertyKey IOSurfacePropertyKeyElementWidth                IOSFC_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
+extern IOSurfacePropertyKey IOSurfacePropertyKeyElementWidth                API_AVAILABLE(macos(10.12), ios(11.0), watchos(4.0), tvos(11.0));
 
 /* IOSurfacePropertyKeyElementHeight  - NSNumber for how many pixels high each element is.   Defaults to 1. */ 
-extern IOSurfacePropertyKey IOSurfacePropertyKeyElementHeight               IOSFC_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
+extern IOSurfacePropertyKey IOSurfacePropertyKeyElementHeight               API_AVAILABLE(macos(10.12), ios(11.0), watchos(4.0), tvos(11.0));
 
 /* IOSurfacePropertyKeyOffset - NSNumber for the starting offset into the buffer.  Defaults to 0. */
-extern IOSurfacePropertyKey IOSurfacePropertyKeyOffset                      IOSFC_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
+extern IOSurfacePropertyKey IOSurfacePropertyKeyOffset                      API_AVAILABLE(macos(10.12), ios(11.0), watchos(4.0), tvos(11.0));
 
 /* Properties for planar surface buffers */
 
 /* IOSurfacePropertyKeyPlaneInfo    - NSArray describing each image plane in the buffer as a CFDictionary.   The CFArray must have at least one entry. */
-extern IOSurfacePropertyKey IOSurfacePropertyKeyPlaneInfo                   IOSFC_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
+extern IOSurfacePropertyKey IOSurfacePropertyKeyPlaneInfo                   API_AVAILABLE(macos(10.12), ios(11.0), watchos(4.0), tvos(11.0));
 
 /* IOSurfacePropertyKeyPlaneWidth  - NSNumber for the width of this plane in pixels.  Required for image planes. */
-extern IOSurfacePropertyKey IOSurfacePropertyKeyPlaneWidth                  IOSFC_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
+extern IOSurfacePropertyKey IOSurfacePropertyKeyPlaneWidth                  API_AVAILABLE(macos(10.12), ios(11.0), watchos(4.0), tvos(11.0));
 
 /* IOSurfacePropertyKeyPlaneHeight  - NSNumber for the height of this plane in pixels.  Required for image planes. */
-extern IOSurfacePropertyKey IOSurfacePropertyKeyPlaneHeight                 IOSFC_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
+extern IOSurfacePropertyKey IOSurfacePropertyKeyPlaneHeight                 API_AVAILABLE(macos(10.12), ios(11.0), watchos(4.0), tvos(11.0));
 
 /* IOSurfacePropertyKeyPlaneBytesPerRow    - NSNumber for the bytes per row of this plane.  If not specified, IOSurface will first calculate
    the number full elements required on each row (by rounding up), multiplied by the bytes per element for this plane.  
    That value will then be appropriately aligned. */
-extern IOSurfacePropertyKey IOSurfacePropertyKeyPlaneBytesPerRow            IOSFC_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
+extern IOSurfacePropertyKey IOSurfacePropertyKeyPlaneBytesPerRow            API_AVAILABLE(macos(10.12), ios(11.0), watchos(4.0), tvos(11.0));
 
 /* IOSurfacePropertyKeyPlaneOffset  - NSNumber for the offset into the buffer for this plane.  If not specified then IOSurface
    will lay out each plane sequentially based on the previous plane's allocation size. */
-extern IOSurfacePropertyKey IOSurfacePropertyKeyPlaneOffset                 IOSFC_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
+extern IOSurfacePropertyKey IOSurfacePropertyKeyPlaneOffset                 API_AVAILABLE(macos(10.12), ios(11.0), watchos(4.0), tvos(11.0));
 
 /* IOSurfacePropertyKeyPlaneSize    - NSNumber for the total data size of this plane.  Defaults to plane height * plane bytes per row if not specified. */
-extern IOSurfacePropertyKey IOSurfacePropertyKeyPlaneSize                   IOSFC_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
+extern IOSurfacePropertyKey IOSurfacePropertyKeyPlaneSize                   API_AVAILABLE(macos(10.12), ios(11.0), watchos(4.0), tvos(11.0));
 
 /* Optional properties for planar surface buffers */
 
 /* IOSurfacePropertyKeyPlaneBase    - NSNumber for the base offset into the buffer for this plane. Optional, defaults to the plane offset */
-extern IOSurfacePropertyKey IOSurfacePropertyKeyPlaneBase                   IOSFC_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
+extern IOSurfacePropertyKey IOSurfacePropertyKeyPlaneBase                   API_AVAILABLE(macos(10.12), ios(11.0), watchos(4.0), tvos(11.0));
 
 /* IOSurfacePropertyKeyPlaneBytesPerElement    - NSNumber for the bytes per element of this plane.  Optional, default is 1. */
-extern IOSurfacePropertyKey IOSurfacePropertyKeyPlaneBytesPerElement        IOSFC_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
+extern IOSurfacePropertyKey IOSurfacePropertyKeyPlaneBytesPerElement        API_AVAILABLE(macos(10.12), ios(11.0), watchos(4.0), tvos(11.0));
 
 /* IOSurfacePropertyKeyPlaneElementWidth    - NSNumber for the element width of this plane.  Optional, default is 1. */
-extern IOSurfacePropertyKey IOSurfacePropertyKeyPlaneElementWidth           IOSFC_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
+extern IOSurfacePropertyKey IOSurfacePropertyKeyPlaneElementWidth           API_AVAILABLE(macos(10.12), ios(11.0), watchos(4.0), tvos(11.0));
 
 /* IOSurfacePropertyKeyPlaneElementHeight   - NSNumber for the element height of this plane.  Optional, default is 1. */
-extern IOSurfacePropertyKey IOSurfacePropertyKeyPlaneElementHeight          IOSFC_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
+extern IOSurfacePropertyKey IOSurfacePropertyKeyPlaneElementHeight          API_AVAILABLE(macos(10.12), ios(11.0), watchos(4.0), tvos(11.0));
 
 /* Optional properties global to the entire IOSurface */
 
 /* IOSurfacePropertyKeyCacheMode        - NSNumber for the CPU cache mode to be used for the allocation.  Default is kIOMapDefaultCache. */
-extern IOSurfacePropertyKey IOSurfacePropertyKeyCacheMode                   IOSFC_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
+extern IOSurfacePropertyKey IOSurfacePropertyKeyCacheMode                   API_AVAILABLE(macos(10.12), ios(11.0), watchos(4.0), tvos(11.0));
 
 /* IOSurfacePropertyKeyPixelFormat - NSNumber   A 32-bit unsigned integer that stores the traditional Mac OS X buffer format  */
-extern IOSurfacePropertyKey IOSurfacePropertyKeyPixelFormat                 IOSFC_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
+extern IOSurfacePropertyKey IOSurfacePropertyKeyPixelFormat                 API_AVAILABLE(macos(10.12), ios(11.0), watchos(4.0), tvos(11.0));
 
 /* IOSurfacePropertyKeyPixelSizeCastingAllowed - If false the creator promises that there will be no pixel size casting when used on the GPU.  Default is true.  */
-extern IOSurfacePropertyKey IOSurfacePropertyKeyPixelSizeCastingAllowed     IOSFC_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
+extern IOSurfacePropertyKey IOSurfacePropertyKeyPixelSizeCastingAllowed     API_AVAILABLE(macos(10.12), ios(11.0), watchos(4.0), tvos(11.0));
 
 // Note: IOSurface objects are "toll free bridged" to IOSurfaceRef objects
-IOSFC_CLASS_AVAILABLE(10_12, 10_0)
+API_AVAILABLE(macos(10.12), ios(11.0), watchos(4.0), tvos(11.0))
 @interface IOSurface : NSObject <NSSecureCoding>
 {
 @package
@@ -209,12 +209,13 @@ value must be an exact match. */
 
 /* See comments in IOSurfaceAPI.h */
 - (kern_return_t)setPurgeable:(IOSurfacePurgeabilityState)newState oldState:(IOSurfacePurgeabilityState * __nullable)oldState
-    IOSFC_AVAILABLE_STARTING(__MAC_10_13, __IPHONE_11_0);
+    API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
 
 @end 
 
 // This key was misnamed.
-extern IOSurfacePropertyKey IOSurfacePropertyAllocSizeKey                   IOSFC_AVAILABLE_BUT_DEPRECATED(__MAC_10_12, __MAC_10_14, __IPHONE_10_0, __IPHONE_12_0);
+extern IOSurfacePropertyKey IOSurfacePropertyAllocSizeKey
+    API_DEPRECATED_WITH_REPLACEMENT("IOSurfacePropertyKeyAllocSize",macos(10.12,10.14),ios(11.0,12.0),watchos(4.0,5.0),tvos(11.0,12.0));
 
 NS_ASSUME_NONNULL_END
 

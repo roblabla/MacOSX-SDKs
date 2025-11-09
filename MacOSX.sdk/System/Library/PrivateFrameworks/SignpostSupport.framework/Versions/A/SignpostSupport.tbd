@@ -1,16 +1,35 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 26C11D4C-EADD-38B6-9739-F8282A906694', 'x86_64: 26C11D4C-EADD-38B6-9739-F8282A906694' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           03B0962F-A425-33AD-AE05-001DC0ED0D1E
+  - target:          x86_64-maccatalyst
+    value:           03B0962F-A425-33AD-AE05-001DC0ED0D1E
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           E8FD44B9-6CBD-3023-BF30-A73494882D42
+  - target:          arm64e-maccatalyst
+    value:           E8FD44B9-6CBD-3023-BF30-A73494882D42
 install-name:    '/System/Library/PrivateFrameworks/SignpostSupport.framework/Versions/A/SignpostSupport'
-current-version: 40
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 53
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _IsPerfLoggingInterval, _PassesPerfLoggingWhitelist, _SSCAEventTypeForSignpost, 
                        _SSCAIntervalTypeForSignpostInterval, _SSCAIsCAMetadataSubsystemCategory, 
                        _SSCAIsCAWindowServerInMemorySubsystemCategory, _SignpostPlatformForDevice, 
-                       _SignpostPlatformForString, _SignpostReporterShouldUseWhitelist, 
-                       _SignpostReporterWhitelistedStringSet, _SignpostSupportAverageDurationMachContinuousTimeForIntervals, 
+                       _SignpostPlatformForString, _SignpostReporterCrossPlatformAppleAccountWhitelist, 
+                       _SignpostReporterCrossPlatformAppleIDAuthenticationWhitelist, 
+                       _SignpostReporterCrossPlatformAuthKitWhitelist, _SignpostReporterCrossPlatformSiriAudioStringPasslist, 
+                       _SignpostReporterCrossPlatformSiriPlaybackControlsStringPasslist, 
+                       _SignpostReporterCrossPlatformSiriVideoUTSOperationRequestStringPasslist, 
+                       _SignpostReporterShouldUseWhitelist, _SignpostReporterWhitelistedStringSet, 
+                       _SignpostSupportAverageDurationMachContinuousTimeForIntervals, 
                        _SignpostSupportAverageDurationNsForIntervals, _SignpostSupportAverageDurationOfLongestIntervalsInMachContinuousTime, 
                        _SignpostSupportAverageDurationOfLongestIntervalsInNs, _SignpostSupportAverageDurationOfShortestIntervalsInMachContinuousTime, 
                        _SignpostSupportAverageDurationOfShortestIntervalsInNs, _SignpostSupportDeserializationEnumerateObjectArrayFromData, 

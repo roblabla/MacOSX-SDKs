@@ -26,6 +26,22 @@ typedef NS_ENUM(NSUInteger, NSLineBreakMode) {
     NSLineBreakByTruncatingMiddle    // Truncate middle of line:  "ab...yz"
 } API_AVAILABLE(macos(10.0), ios(6.0), watchos(2.0), tvos(9.0));
 
+// Line break strategy describes a collection of options that can affect where line breaks are placed in a paragraph.
+// This is independent from line break mode, which describes what happens when text is too long to fit within its container.
+// These options won't have any effect when used with line break modes that don't support multiple lines, like clipping or truncating middle.
+typedef NS_OPTIONS(NSUInteger, NSLineBreakStrategy) {
+    // Don't use any line break strategies
+    NSLineBreakStrategyNone = 0,
+    // Use the push out line break strategy.
+    // This strategy allows the text system to "push out" individual lines by some number of words to avoid an orphan word on the last line of the paragraph.
+    // The current implementation usually pushes out the last line by a single word.
+    NSLineBreakStrategyPushOut API_AVAILABLE(macos(10.11), ios(9.0)) = 1 << 0,
+    // When specified, it prohibits breaking between Hangul characters. It is the preferable typesetting strategy for the modern Korean documents suitable for UI strings.
+    NSLineBreakStrategyHangulWordPriority API_AVAILABLE(macos(11.0), ios(14.0)) = 1 << 1,
+    // Use the same configuration of line break strategies that the system uses for standard UI labels. This set of line break strategies is optimized for displaying shorter strings that are common in UI labels and may not be suitable for large amounts of text.
+    NSLineBreakStrategyStandard API_AVAILABLE(macos(11.0), ios(14.0)) = 0xFFFF
+};
+
 // NSTextTab
 typedef NSString * NSTextTabOptionKey NS_TYPED_ENUM;
 APPKIT_EXTERN NSTextTabOptionKey  NSTabColumnTerminatorsAttributeName API_AVAILABLE(macos(10.0), ios(7.0), watchos(2.0), tvos(9.0)); // An attribute for NSTextTab options.  The value is NSCharacterSet.  The character set is used to determine the tab column terminating character.  The tab and newline characters are implied even if not included in the character set.
@@ -87,6 +103,9 @@ API_AVAILABLE(macos(10.0), ios(6.0), watchos(2.0), tvos(9.0)) @interface NSParag
 
 // Specifies whether the paragraph is to be treated as a header for purposes of HTML generation.  Should be set to 0 (the default value) if the paragraph is not a header, or from 1 through 6 if the paragraph is to be treated as a header.
 @property (readonly) NSInteger headerLevel;
+
+// Specifies the line break strategies that may be used for laying out the paragraph.  The default value is NSLineBreakStrategyNone.
+@property (readonly) NSLineBreakStrategy lineBreakStrategy API_AVAILABLE(macos(10.11), ios(9.0));
 @end
 
 
@@ -118,6 +137,7 @@ API_AVAILABLE(macos(10.0), ios(6.0), watchos(2.0), tvos(9.0)) @interface NSMutab
 @property (copy) NSArray<__kindof NSTextBlock *> *textBlocks;
 @property (copy) NSArray<NSTextList *> *textLists;
 @property NSInteger headerLevel;
+@property NSLineBreakStrategy lineBreakStrategy API_AVAILABLE(macos(10.11), ios(9.0));
 @end
 
 /************************ Deprecated ************************/

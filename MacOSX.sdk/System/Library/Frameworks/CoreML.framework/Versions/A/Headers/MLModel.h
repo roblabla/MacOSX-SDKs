@@ -41,6 +41,19 @@ ML_EXPORT
                                   configuration:(MLModelConfiguration *)configuration
                                           error:(NSError * _Nullable __autoreleasing *)error API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0));
 
+/*!
+  Construct a model asynchronously given the location of its on-disk representation and configuration.
+
+  Model loading may take time when the model content is not immediately available (e.g. encrypted model). Use this factory method especially when the caller is on the main thread.
+
+  @param url the location of its on-disk representation (.mlmodelc directory).
+  @param configuration The model configuration
+  @param handler When the model load completes successfully or unsuccessfully, the completion handler is invoked with a valid MLModel instance or NSError object.
+*/
++ (void)loadContentsOfURL:(NSURL *)url
+            configuration:(MLModelConfiguration *)configuration
+        completionHandler:(void (^)(MLModel * _Nullable model, NSError * _Nullable error))handler API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) NS_REFINED_FOR_SWIFT;
+
 /// All models can predict on a specific set of input features.
 - (nullable id<MLFeatureProvider>)predictionFromFeatures:(id<MLFeatureProvider>)input
                                                    error:(NSError **)error;

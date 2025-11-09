@@ -10,6 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+API_UNAVAILABLE_BEGIN(ios)
+
 NS_CLASS_AVAILABLE_MAC(10_4)
 @interface AMShellScriptAction : AMBundleAction
 
@@ -26,5 +28,7 @@ NS_CLASS_AVAILABLE_MAC(10_4)
 @property (readonly, copy, atomic) NSString *outputFieldSeparator;
 
 @end
+
+API_UNAVAILABLE_END
 
 NS_ASSUME_NONNULL_END

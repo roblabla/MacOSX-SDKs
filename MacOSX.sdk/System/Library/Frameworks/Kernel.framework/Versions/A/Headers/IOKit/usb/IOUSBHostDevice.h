@@ -213,12 +213,15 @@ if(   stringDescriptor != NULL
 #ifndef IOUSBHostFamily_IOUSBHostDevice_h
 #define IOUSBHostFamily_IOUSBHostDevice_h
 
+#include <TargetConditionals.h>
 #include <IOKit/usb/StandardUSB.h>
 #include <IOKit/usb/IOUSBHostFamily.h>
 #include <IOKit/usb/IOUSBHostPipe.h>
 #include <IOKit/IOBufferMemoryDescriptor.h>
 
-#if TARGET_OS_OSX
+#define TARGET_OS_HAS_USBDRIVERKIT_IOUSBHOSTDEVICE __has_include(<USBDriverKit/IOUSBHostDevice.h>)
+
+#if TARGET_OS_HAS_USBDRIVERKIT_IOUSBHOSTDEVICE
 #include <USBDriverKit/IOUSBHostDevice.h>
 #endif
 
@@ -237,12 +240,37 @@ class AppleUSBHostPort;
 class AppleUSBDescriptorCache;
 class AppleUSBHostResources;
 
+#if TARGET_CPU_ARM64 || TARGET_CPU_ARM
 /*!
- * @class       IOUSBHostDevice
- * @brief       The IOService object representing a USB device
- * @discussion  This class provides functionality to send control requests to the default control endpoint, as well as create IOUSBHostInterface objects to represent the interfaces contained in the selected configuration.  Function drivers should not subclass IOUSBHostDevice.
- */
-class IOUSBHostDevice : public IOService
+* @class       IOUSBDevice
+* @brief       A compatibility base class to faciliate service discovery for legacy projects.
+* @discussion  New software should not reference this class.
+*/
+class __IOUSBHOSTFAMILY_DEPRECATED IOUSBDevice : public IOService
+{
+    typedef IOService super;
+    OSDeclareAbstractStructors(IOUSBDevice)
+    
+public:
+    virtual bool start(IOService* provider);
+    
+    virtual void stop(IOService* provider);
+    
+protected:
+    static const IORegistryPlane* gIOUSBPlane;
+};
+#endif
+
+/*!
+* @class       IOUSBHostDevice
+* @brief       The IOService object representing a USB device
+* @discussion  This class provides functionality to send control requests to the default control endpoint, as well as create IOUSBHostInterface objects to represent the interfaces contained in the selected configuration.  Function drivers should not subclass IOUSBHostDevice.
+*/
+#if TARGET_CPU_ARM64 || TARGET_CPU_ARM
+class __IOUSBHOSTFAMILY_DEPRECATED IOUSBHostDevice : public IOUSBDevice
+#else
+class __IOUSBHOSTFAMILY_DEPRECATED IOUSBHostDevice : public IOService
+#endif
 {
     friend class AppleUSBHostController;
     friend class IOUSBHostInterface;
@@ -252,7 +280,7 @@ class IOUSBHostDevice : public IOService
     friend class AppleUSBIORequest;
     friend class AppleUSBHostDeviceIdler;
 
-#if TARGET_OS_OSX
+#if TARGET_OS_HAS_USBDRIVERKIT_IOUSBHOSTDEVICE
     OSDeclareDefaultStructorsWithDispatch(IOUSBHostDevice)
 #else
     OSDeclareDefaultStructors(IOUSBHostDevice)
@@ -783,7 +811,7 @@ protected:
     OSMetaClassDeclareReservedUnused(IOUSBHostDevice, 98);
     OSMetaClassDeclareReservedUnused(IOUSBHostDevice, 99);
     
-#if TARGET_OS_OSX
+#if TARGET_OS_HAS_USBDRIVERKIT_IOUSBHOSTDEVICE
     static void asyncDeviceRequestCompletionCallback(void *owner, void *parameter, IOReturn status, uint32_t bytesTransferred);
 #endif
 

@@ -6,7 +6,6 @@
 */
 
 #import <AppKit/AppKitDefines.h>
-
 #import <Foundation/Foundation.h>
 
 typedef NSString * NSTouchBarItemIdentifier NS_TYPED_EXTENSIBLE_ENUM API_AVAILABLE(ios(13.0));
@@ -15,7 +14,7 @@ typedef NSString * NSTouchBarItemIdentifier NS_TYPED_EXTENSIBLE_ENUM API_AVAILAB
 @class NSString;
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 typedef float NSTouchBarItemPriority NS_TYPED_EXTENSIBLE_ENUM API_AVAILABLE(macos(10.12.2), ios(13.0));
 

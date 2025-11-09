@@ -13,7 +13,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol UIDocumentBrowserViewControllerDelegate;
-@class UIImage, UIColor, UIActivity, UIActivityViewController, UIDocumentBrowserAction, UIDocumentBrowserTransitionController;
+@class UIImage, UIColor, UIActivity, UTType, UIActivityViewController, UIDocumentBrowserAction, UIDocumentBrowserTransitionController;
 
 extern NSErrorDomain const UIDocumentBrowserErrorDomain API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos,tvos);
 typedef NS_ERROR_ENUM(UIDocumentBrowserErrorDomain, UIDocumentBrowserErrorCode) {
@@ -41,7 +41,10 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos,tvos)
 @interface UIDocumentBrowserViewController : UIViewController <NSCoding>
 
 /// @param allowedContentTypes  The document types that the user should be able to open. If nil, the types specified via the CFBundleDocumentTypes key in the application plist will be used instead.
-- (instancetype)initForOpeningFilesWithContentTypes:(nullable NSArray <NSString *> *)allowedContentTypes NS_DESIGNATED_INITIALIZER;
+- (instancetype)initForOpeningFilesWithContentTypes:(nullable NSArray <NSString *> *)allowedContentTypes NS_DESIGNATED_INITIALIZER API_DEPRECATED_WITH_REPLACEMENT("use initForOpeningContentTypes: instead", ios(11.0,14.0));
+
+/// @param contentTypes  The content types that the user should be able to open. If nil, the types specified via the CFBundleDocumentTypes key in the application plist will be used instead.
+- (instancetype)initForOpeningContentTypes:(nullable NSArray <UTType *> *)contentTypes NS_DESIGNATED_INITIALIZER NS_SWIFT_NAME(init(forOpening:)) API_AVAILABLE(ios(14.0));
 
 /// Please use the designated initializers above instead.
 - (instancetype)initWithNibName:(nullable NSString *)nibName bundle:(nullable NSBundle *)bundle NS_UNAVAILABLE;
@@ -57,13 +60,19 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos,tvos)
 /// Defaults to NO
 @property (assign, nonatomic) BOOL allowsPickingMultipleItems;
 
-@property (readonly, copy, nonatomic) NSArray<NSString *> *allowedContentTypes;
+@property (readonly, copy, nonatomic) NSArray<NSString *> *allowedContentTypes API_DEPRECATED("allowedContentTypes is no longer supported", ios(11.0, 14.0));
 
 /// Array of content types supported for Recents documents.
 /// Default is same as allowedContentTypes.
 /// Can be defined via the 'UIDocumentBrowserRecentDocumentContentTypes' key in the app Info.plist.
 /// Note that the recentDocumentsContentTypes must be a subset conforming to the types declared in allowedContentTypes.
-@property (readonly, copy, nonatomic) NSArray<NSString *> *recentDocumentsContentTypes API_AVAILABLE(ios(13.0));
+@property (readonly, copy, nonatomic) NSArray<NSString *> *recentDocumentsContentTypes API_DEPRECATED_WITH_REPLACEMENT("use contentTypesForRecentDocuments instead", ios(11.0,14.0));
+
+/// Array of content types supported for Recents documents.
+/// Default is same as content types passed in the designated initializer or as CFBundleDocumentTypes  in the app Info.plist.
+/// Can be defined via the 'UIDocumentBrowserRecentDocumentContentTypes' key in the app Info.plist.
+/// Note that the contentTypesForRecentDocuments must be a subset conforming to the types passed in the initializer or Info.plist.
+@property (readonly, copy, nonatomic) NSArray<UTType *> *contentTypesForRecentDocuments API_AVAILABLE(ios(14.0));
 
 /// Force the display of file extensions (default: NO).
 @property (assign, nonatomic) BOOL shouldShowFileExtensions API_AVAILABLE(ios(13.0));

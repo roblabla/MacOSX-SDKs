@@ -1,6 +1,6 @@
 #if (defined(USE_UIKIT_PUBLIC_HEADERS) && USE_UIKIT_PUBLIC_HEADERS) || !__has_include(<UIKitCore/UIImageSymbolConfiguration.h>)
 //
-//  UIImageSymbolConfiguration_Private.h
+//  UIImageSymbolConfiguration.h
 //  UIKit
 //
 //  Copyright © 2019 Apple Inc. All rights reserved.

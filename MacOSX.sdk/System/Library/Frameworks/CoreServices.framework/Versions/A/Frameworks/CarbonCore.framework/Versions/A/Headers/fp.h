@@ -1307,7 +1307,7 @@ extern relop  relation(double_t x, double_t y)                                  
 *   dec2l       Similar to dec2num except a long is returned.                   *
 *                                                                               *
 ********************************************************************************/
-#if TARGET_CPU_PPC || TARGET_CPU_X86 || TARGET_CPU_PPC64 || TARGET_CPU_X86_64
+#if TARGET_CPU_PPC || TARGET_CPU_X86 || TARGET_CPU_PPC64 || TARGET_CPU_X86_64 || TARGET_CPU_ARM64
     #define SIGDIGLEN      36  
 #endif
 #define      DECSTROUTLEN   80               /* max length for dec2str output */

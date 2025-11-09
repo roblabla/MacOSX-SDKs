@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: F2CEDB7D-4C46-3E80-9BEC-9016B0866102' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           740B6B63-17BF-3D98-8431-6AF302DFD5BA
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           CD9094E9-6569-3D8F-BA62-2BB536851D1A
 install-name:    '/System/Library/PrivateFrameworks/IMAVCore.framework/Versions/A/IMAVCore'
 current-version: 800
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _IMAVCallManagerCallStateChangedNotification, _IMAVCallManagerCallStateKey, 
                        _IMAVCallManagerPreviousCallStateKey, _IMAVChatCameraAspectRatioKey, 
                        _IMAVChatCameraContentRectKey, _IMAVChatCameraOrientationKey, 
@@ -27,18 +33,18 @@ exports:
                        _IMAVChatParticipantVideoQualityChangedNotification, _IMAVChatParticipantWasRemovedNotification, 
                        _IMAVChatParticipantsToBeRemovedKey, _IMAVChatParticipantsWillBeRemovedNotification, 
                        _IMAVChatPauseStateKey, _IMAVChatSendingAudioChangedNotification, 
-                       _IMAVChatStateChangedNotification, _IMAVChatStateIsActive, 
-                       _IMAVChatStateKey, _IMAVChatVideoDegradedKey, _IMAVControllerAudioClientBundleIdentifier, 
-                       _IMAVControllerPendingACInvitationRequestComplete, _IMAVControllerPendingAVInvitationRequestComplete, 
-                       _IMAVControllerVideoClientBundleIdentifier, _IMAVDaemonDidConnectNotification, 
-                       _IMAVInterfaceReadyNotification, _IMAVLocalIPChangeNewBlobKey, 
-                       _IMAVVideoCapabilitesChangedNotification, _IMGKErrorDomain, 
-                       _IsIMAVChatEndedReasonACallFailure, _ShouldAutoAcceptInvitations, 
-                       __IMAVCallManagerCallStateChangedNotification, __IMAVCallManagerCallTypeKey, 
-                       __NSStringDescriptionForIMAVChatEndedReason, __NSStringDescriptionForIMAVChatError, 
-                       __NSStringDescriptionForIMAVChatParticipantState, __NSStringDescriptionForIMAVChatState, 
-                       __NSStringDescriptionForIMAVResponse ]
+                       _IMAVChatStateChangedNotification, _IMAVChatStateKey, _IMAVChatVideoDegradedKey, 
+                       _IMAVControllerAudioClientBundleIdentifier, _IMAVControllerPendingACInvitationRequestComplete, 
+                       _IMAVControllerPendingAVInvitationRequestComplete, _IMAVControllerVideoClientBundleIdentifier, 
+                       _IMAVDaemonDidConnectNotification, _IMAVLocalIPChangeNewBlobKey, 
+                       _IMAVVideoCapabilitesChangedNotification, _IsIMAVChatEndedReasonACallFailure, 
+                       _ShouldAutoAcceptInvitations, __IMAVCallManagerCallStateChangedNotification, 
+                       __IMAVCallManagerCallTypeKey, __NSStringDescriptionForIMAVChatEndedReason, 
+                       __NSStringDescriptionForIMAVChatError, __NSStringDescriptionForIMAVChatParticipantState, 
+                       __NSStringDescriptionForIMAVChatState, __NSStringDescriptionForIMAVResponse ]
     objc-classes:    [ IMAVCallManager, IMAVChat, IMAVChatParticipant, IMAVController, 
-                       IMAVDaemonController, IMAVInterface, IMAVLocalPreviewClient, 
+                       IMAVDaemonController, IMAVDaemonListener, IMAVInterface, IMAVLocalPreviewClient, 
                        IMAVTelephonyManager ]
+    objc-ivars:      [ IMAVDaemonListener._handlers, IMAVDaemonListener._postedSetupComplete, 
+                       IMAVDaemonListener._setupComplete ]
 ...

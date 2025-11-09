@@ -307,7 +307,7 @@ const CFIndex * _Nullable CTRunGetStringIndicesPtr(
 
 /*!
     @function   CTRunGetStringIndices
-    @abstract   Copies a range of string indices int o a user-provided buffer.
+    @abstract   Copies a range of string indices into a user-provided buffer.
 
     @discussion The indices are the character indices that originally spawned the
                 glyphs that make up the run. They can be used to map the glyphs

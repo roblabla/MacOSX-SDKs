@@ -7,7 +7,7 @@
 
 #import <AppKit/AppKitDefines.h>
 
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 typedef NS_ENUM(NSInteger, NSUserInterfaceLayoutDirection) {
     NSUserInterfaceLayoutDirectionLeftToRight = 0,

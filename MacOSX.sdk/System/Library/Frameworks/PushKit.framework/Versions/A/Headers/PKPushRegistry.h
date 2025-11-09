@@ -13,8 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 /* PKPushType constants can be used to register for a PKPushType-specific push token or to identify received push
    notifications.
  */
-PK_EXPORT PKPushType const PKPushTypeVoIP API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, macCatalyst, watchos, tvos);
-PK_EXPORT PKPushType const PKPushTypeComplication API_AVAILABLE(watchos(6.0)) API_DEPRECATED("Complication pushes are supported directly on watchOS now, so this should no longer be used on iOS.", ios(9.0, 13.0))  API_UNAVAILABLE(macos, macCatalyst, tvos);
+PK_EXPORT PKPushType const PKPushTypeVoIP API_AVAILABLE(ios(9.0), macCatalyst(14.0)) API_UNAVAILABLE(macos, watchos, tvos);
+PK_EXPORT PKPushType const PKPushTypeComplication API_AVAILABLE(watchos(6.0)) API_DEPRECATED("Complication pushes are supported directly on watchOS now, so this should no longer be used on iOS.", ios(9.0, 13.0), macCatalyst(9.0, 13.0))  API_UNAVAILABLE(macos, tvos);
 PK_EXPORT PKPushType const PKPushTypeFileProvider API_AVAILABLE(macos(10.15), ios(11.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos, tvos);
 
 @protocol PKPushRegistryDelegate;
@@ -102,7 +102,7 @@ API_AVAILABLE(macos(10.15), macCatalyst(13.0), ios(8.0), watchos(6.0), tvos(13.0
  @param         type
                 This is a PKPushType constant which is present in [registry desiredPushTypes].
  */
-- (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(PKPushType)type API_DEPRECATED_WITH_REPLACEMENT("-pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(PKPushType)type withCompletionHandler:(void(^)(void))completion", ios(8.0, 11.0)) API_UNAVAILABLE(macos, watchos, tvos);
+- (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(PKPushType)type API_DEPRECATED_WITH_REPLACEMENT("-pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(PKPushType)type withCompletionHandler:(void(^)(void))completion", ios(8.0, 11.0), macCatalyst(8.0, 11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  @method        pushRegistry:didReceiveIncomingPushWithPayload:forType:withCompletionHandler:

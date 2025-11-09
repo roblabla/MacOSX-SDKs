@@ -159,11 +159,9 @@ See the section OUTPUT OPTIONS in the
 There are two configuration variables that work together to control
 when queued traps are logged to the MySQL database. A non-zero
 value must be specified for sqlSaveInterval to enable MySQL logging.
-.RE
 .IP "sqlMaxQueue max"
 specifies the maximum number of traps to queue before a forced flush
 to the MySQL database.
-.RE
 .IP "sqlSaveInterval seconds"
 specified the number of seconds between periodic queue flushes.
 A value of 0 for will disable MySQL logging.
@@ -245,7 +243,6 @@ in the
 .I snmpd(8)
 manual page for more information about the format of listening
 addresses.
-.RE
 .SH NOTES
 .IP o
 The daemon blocks while executing the \fItraphandle\fR commands.

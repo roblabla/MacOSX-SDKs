@@ -1,4 +1,4 @@
-#if (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/ExtendedAudioFile.h>)
+#if (defined(__USE_PUBLIC_HEADERS__) && __USE_PUBLIC_HEADERS__) || (defined(USE_AUDIOTOOLBOX_PUBLIC_HEADERS) && USE_AUDIOTOOLBOX_PUBLIC_HEADERS) || !__has_include(<AudioToolboxCore/ExtendedAudioFile.h>)
 /*!
 	@file		ExtendedAudioFile.h
 	@framework	AudioToolbox.framework
@@ -15,8 +15,6 @@
 #ifndef AudioToolbox_ExtendedAudioFile_h
 #define AudioToolbox_ExtendedAudioFile_h
 
-#include <Availability.h>
-#include <CoreFoundation/CoreFoundation.h>
 #include <AudioToolbox/AudioFile.h>
 
 #ifdef __cplusplus
@@ -35,12 +33,19 @@ CF_ASSUME_NONNULL_BEGIN
 typedef struct OpaqueExtAudioFile *	ExtAudioFileRef;
 
 
+typedef SInt32 ExtAudioFilePacketTableInfoOverride;
+
+CF_ENUM(ExtAudioFilePacketTableInfoOverride) {
+	kExtAudioFilePacketTableInfoOverride_UseFileValue			= -1,
+	kExtAudioFilePacketTableInfoOverride_UseFileValueIfValid	= -2
+};
+
 //==================================================================================================
 //	Properties
 
 typedef UInt32						ExtAudioFilePropertyID;
 /*!
-    @enum           ExtAudioFilePropertyID
+    enum            ExtAudioFilePropertyID
     @constant       kExtAudioFileProperty_FileDataFormat
                         An AudioStreamBasicDescription. Represents the file's actual
 						data format. Read-only.
@@ -79,7 +84,7 @@ typedef UInt32						ExtAudioFilePropertyID;
 						to choose between a hardware or software encoder, by specifying 
 						kAppleHardwareAudioCodecManufacturer or kAppleSoftwareAudioCodecManufacturer.
 						
-						Available starting on Mac OS X version 10.7 and iOS version 4.0.
+						Available starting on macOS version 10.7 and iOS version 4.0.
 	@constant		kExtAudioFileProperty_AudioConverter
 						AudioConverterRef. The underlying AudioConverterRef, if any. Read-only.
 						
@@ -89,11 +94,11 @@ typedef UInt32						ExtAudioFilePropertyID;
 						sufficient. This will ensure that the output file's data format is consistent
 						with the format being produced by the converter.
 						
-						<pre>
-							CFArrayRef config = NULL;
-							err = ExtAudioFileSetProperty(myExtAF, kExtAudioFileProperty_ConverterConfig, 
-							  sizeof(config), &config);
-						</pre>
+						```
+						CFArrayRef config = NULL;
+						err = ExtAudioFileSetProperty(myExtAF, kExtAudioFileProperty_ConverterConfig,
+						  sizeof(config), &config);
+						```
 	@constant		kExtAudioFileProperty_AudioFile
 						The underlying AudioFileID. Read-only.
 	@constant		kExtAudioFileProperty_FileMaxPacketSize
@@ -123,25 +128,28 @@ typedef UInt32						ExtAudioFilePropertyID;
 						subsequently set the kExtAudioFileProperty_IOBufferSizeBytes property. Note
 						that a pointer to a pointer should be passed to ExtAudioFileSetProperty.
 	@constant		kExtAudioFileProperty_PacketTable
-						This AudioFilePacketTableInfo can be used to both override the priming and
+						This AudioFilePacketTableInfo can be used both to override the priming and
 						remainder information in an audio file and to retrieve the current priming
 						and remainder frames information for a given ExtAudioFile object. If the
 						underlying file type does not provide packet table info, the Get call will
 						return an error.
 						
 						If you set this, then you can override the setting for these values in the
-						file to ones that you want to use. When setting this, you can use a value of
-						-1 for either the priming or remainder frames to use the value that is
-						currently stored in the file. If you set this to a non-negative number (or
-						zero) then that value will override whatever value is stored in the file
-						that you are reading. Retrieving the value of the property will always
-						retrieve the value the ExtAudioFile object is using (whether this is derived
-						from the file, or from your override). If you want to determine what the
-						value is in the file, you should use the AudioFile property:
+						file to ones that you want to use. When setting this, you can use
+						kExtAudioFilePacketTableInfoOverride_UseFileValue (-1) for either the
+						priming or remainder frames to signal that the value currently stored in
+						the file should be used. If you set this to a non-negative number (or zero)
+						then that value will override whatever value is stored in the file that
+						you are reading. Retrieving the value of the property will always retrieve
+						the value the ExtAudioFile object is using (whether this is derived from
+						the file, or from your override). If you want to determine what the value
+						is in the file, you should use the AudioFile property:
 						kAudioFilePropertyPacketTableInfo
 
-						When the property is set, only the remaining and priming values are used.
-						You should set the mNumberValidFrames to zero.
+						If the value of mNumberValidFrames is positive, it will be used to override
+						the count of valid frames stored in the file. If you wish to override only
+						the priming and remainder frame values, you should set mNumberValidFrames
+						to zero.
 
 						For example, a file encoded using AAC may have 2112 samples of priming at
 						the start of the file and a remainder of 823 samples at the end. When
@@ -152,6 +160,15 @@ typedef UInt32						ExtAudioFilePropertyID;
 						you would retrieve an additional 2112 samples of silence from the start of
 						the file and 823 samples of silence at the end of the file (silence, because
 						the encoders use silence to pad out these priming and remainder samples)
+
+						A value of kExtAudioFilePacketTableInfoOverride_UseFileValueIfValid (-2)
+						for priming, remainder, or valid frames will cause the corresponding value
+						stored in the file to be used if the total number of frames produced by the
+						file matches the total frames accounted for by the packet table info stored
+						in the file. If these do not match, for priming or remainder frames a value
+						of 0 will be used instead, and for valid frames a value will be calculated
+						that causes the total frames accounted for by the overriding packet table
+						info to match the count of frames produced by the file.
 */
 CF_ENUM(ExtAudioFilePropertyID) {
 	kExtAudioFileProperty_FileDataFormat		= 'ffmt',   // AudioStreamBasicDescription

@@ -16,7 +16,7 @@ API_AVAILABLE(ios(10.0), macos(10.15))
 
 @property (nonatomic, readonly, copy) SFTranscription *bestTranscription;
 
-// Hypotheses for possible transcriptions, sorted in decending order of confidence (more likely first)
+// Hypotheses for possible transcriptions, sorted in descending order of confidence (more likely first)
 @property (nonatomic, readonly, copy) NSArray<SFTranscription *> *transcriptions;
 
 // True if the hypotheses will not change; speech processing is complete.

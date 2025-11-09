@@ -5,6 +5,7 @@
 //  Copyright 2008 Apple. All rights reserved.
 //
 
+#pragma once
 
 /*!
  @header IKImageBrowserCell

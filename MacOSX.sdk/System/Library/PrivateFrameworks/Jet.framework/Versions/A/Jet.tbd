@@ -1,11 +1,19 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 6D54B9CE-E230-32F4-B54A-E195AA26026A' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           7874691B-5412-3BB8-B1A6-00623E52C380
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           FF679D6C-2474-3962-B3BF-92964355FA39
 install-name:    '/System/Library/PrivateFrameworks/Jet.framework/Versions/A/Jet'
-current-version: 8.14
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 8.21
+exports:
+  - targets:         [ x86_64-macos ]
+    weak-symbols:    [ __ZTINSt3__117bad_function_callE, __ZTSNSt3__117bad_function_callE ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ __Z10jet_assertbP8NSString, __Z13xglCheckErrorv, __Z13xglPrintErrorv, 
                        __Z13xglPrintFloatPKcj, __Z13xglPrintStatev, __Z14jet_util_isPOTjj, 
                        __Z14xglLinkProgramj, __Z15xglPrintBooleanPKcj, __Z15xglPrintIntegerPKcj, 
@@ -126,14 +134,14 @@ exports:
                        __ZN17jet_context_Metal17set_vertex_bufferEP10jet_bufferi, 
                        __ZN17jet_context_Metal18create_buffer_poolE18jet_component_typejj, 
                        __ZN17jet_context_Metal18create_render_modeEP11jet_program14jet_blend_mode18jet_texture_formatS3_S3_bbbbj, 
-                       __ZN17jet_context_Metal18get_Metal_DrawableEP11jet_texture, 
+                       __ZN17jet_context_Metal18ensureCommandQueueEv, __ZN17jet_context_Metal18get_Metal_DrawableEP11jet_texture, 
                        __ZN17jet_context_Metal18set_vertex_samplerEP11jet_sampleri, 
                        __ZN17jet_context_Metal18set_vertex_textureEP11jet_texturei, 
                        __ZN17jet_context_Metal18set_wireframe_modeEb, __ZN17jet_context_Metal19create_stencil_modeE19jet_compare_fuction14jet_stencil_opS1_S1_jj, 
-                       __ZN17jet_context_Metal19set_vertex_constantEP12jet_constanti, 
+                       __ZN17jet_context_Metal19ensureCommandBufferEb, __ZN17jet_context_Metal19set_vertex_constantEP12jet_constanti, 
                        __ZN17jet_context_Metal20set_fragment_samplerEP11jet_sampleri, 
                        __ZN17jet_context_Metal20set_fragment_textureEP11jet_texturei, 
-                       __ZN17jet_context_Metal21set_fragment_constantEP12jet_constanti, 
+                       __ZN17jet_context_Metal21getNativeCommandQueueEv, __ZN17jet_context_Metal21set_fragment_constantEP12jet_constanti, 
                        __ZN17jet_context_Metal21set_scheduled_handlerENSt3__18functionIFvvEEE, 
                        __ZN17jet_context_Metal21submit_command_bufferEP18jet_command_buffer, 
                        __ZN17jet_context_Metal22use_depth_stencil_modeEP22jet_depth_stencil_mode, 
@@ -214,5 +222,4 @@ exports:
                        __ZTV15jet_buffer_pool, __ZTV15jet_framebuffer, __ZTV15jet_render_mode, 
                        __ZTV16jet_stencil_mode, __ZTV17jet_context_Metal, __ZTV18jet_context_OpenGL, 
                        __ZTV22jet_depth_stencil_mode, __ZTV9jet_fence ]
-    weak-def-symbols: [ __ZTINSt3__117bad_function_callE, __ZTSNSt3__117bad_function_callE ]
 ...

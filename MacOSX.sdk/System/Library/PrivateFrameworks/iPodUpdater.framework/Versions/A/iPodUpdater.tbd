@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 81FFB59C-B69E-389E-963C-DD4378CBACB5' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           08DB82C1-2EC0-3688-9659-92ABA41599EF
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           B0433574-8972-30DB-A9BD-23A8AB6EB44D
 install-name:    '/System/Library/PrivateFrameworks/iPodUpdater.framework/Versions/A/iPodUpdater'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _VVVCreatePodController, _VVVCreatePodWithID, _VVVDeletePod, 
                        _VVVDeletePodController, _VVVGetBreadCrumb, _VVVGetCompletionInstructions, 
                        _VVVGetNumberOfBreadCrumbs, _VVVGetPodUpdaterLibraryVersion, 

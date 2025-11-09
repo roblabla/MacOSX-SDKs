@@ -86,7 +86,7 @@ typedef NS_OPTIONS(NSUInteger, UIGuidedAccessAccessibilityFeature) {
     UIGuidedAccessAccessibilityFeatureGrayscaleDisplay = 1 << 4,
 } API_AVAILABLE(ios(12.2)) API_UNAVAILABLE(watchos, tvos);
 
-UIKIT_EXTERN void UIGuidedAccessConfigureAccessibilityFeatures(UIGuidedAccessAccessibilityFeature features, BOOL enabled, void (^completion)(BOOL success, NSError *error)) API_AVAILABLE(ios(12.2)) API_UNAVAILABLE(watchos, tvos);
+UIKIT_EXTERN void UIGuidedAccessConfigureAccessibilityFeatures(UIGuidedAccessAccessibilityFeature features, BOOL enabled, void (^completion)(BOOL success, NSError * _Nullable error)) API_AVAILABLE(ios(12.2)) API_UNAVAILABLE(watchos, tvos);
 
 NS_ASSUME_NONNULL_END
 

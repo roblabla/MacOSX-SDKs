@@ -1,19 +1,27 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 67555CB3-E3F7-3239-8822-862BB8D6008E' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           73216791-349C-34C2-833C-783BF90E9EF5
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           CE82E310-BF87-379C-995D-C275278D0EE5
 install-name:    '/System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/Frameworks/AccessibilityFoundation.framework/Versions/A/AccessibilityFoundation'
 current-version: 2
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _AXEGetLog, _AXFAnnouncementRequestedNotification, _AXFApplicationActivatedNotification, 
                        _AXFApplicationDeactivatedNotification, _AXFApplicationHiddenNotification, 
-                       _AXFApplicationIdentifierDashboard, _AXFApplicationIdentifierDock, 
-                       _AXFApplicationIdentifierFinder, _AXFApplicationIdentifierMail, 
+                       _AXFApplicationIdentifierControlCenter, _AXFApplicationIdentifierDashboard, 
+                       _AXFApplicationIdentifierDock, _AXFApplicationIdentifierFinder, 
+                       _AXFApplicationIdentifierIWorkPrefix, _AXFApplicationIdentifierMail, 
                        _AXFApplicationIdentifierNotificationCenterUI, _AXFApplicationIdentifierSpotlight, 
                        _AXFApplicationIdentifierSystemUIServer, _AXFApplicationIdentifierTerminal, 
                        _AXFApplicationShownNotification, _AXFBundleIdentifierFromPID, 
-                       _AXFBundlePathFromPID, _AXFCopyStringToUChar32Array, _AXFCopyStringToUniCharArray, 
+                       _AXFBundlePathFromPID, _AXFContainerTypeFromiOSAXContainerType, 
+                       _AXFCopyStringToUChar32Array, _AXFCopyStringToUniCharArray, 
                        _AXFCreateLog, _AXFCreatedNotification, _AXFDebugPrintHierarchy, 
                        _AXFDrawerCreatedNotification, _AXFElementBusyChangedNotification, 
                        _AXFElementTransportKey, _AXFFilter, _AXFFlatMap, _AXFFocusedUIElementChangedNotification, 
@@ -81,28 +89,31 @@ exports:
                        _AXFValueChangedNotification, _AXFWindowCreatedNotification, 
                        _AXFWindowDeminiaturizedNotification, _AXFWindowMiniaturizedNotification, 
                        _AXFWindowMovedNotification, _AXFWindowResizedNotification, 
-                       _AXKGetLog, _AXVGetLog, _AccessibilityFoundationVersionNumber, 
-                       _AccessibilityFoundationVersionString, _AccessibilityLoggingSubsystem, 
-                       _KAGetLog, _SCGetLog, _VOGetLog, _ZMGetLog, __AXFApplicationBackgroundOnlyKey, 
-                       __AXFApplicationComAppleWebKitPrefix, __AXFApplicationViewBridgeServiceKey, 
-                       __AXFGeometryCreateCGRegionFromRects, __AXFGeometryPackSortedRects, 
-                       __AXFGeometrySubregionRectsFromRegion, __AXFSelectorCopyDescription, 
-                       __AXFStringPropertyValueFromPID, __runningApplications ]
+                       _AXKGetLog, _AXLanguageCanonicalFormToGeneralLanguage, _AXSpeechLanguageCanonicalFormToGeneralLanguage, 
+                       _AXVGetLog, _AccessibilityFoundationVersionNumber, _AccessibilityFoundationVersionString, 
+                       _AccessibilityLoggingSubsystem, _KAGetLog, _SCGetLog, _VOGetLog, 
+                       _ZMGetLog, __AXFApplicationBackgroundOnlyKey, __AXFApplicationComAppleWebKitPrefix, 
+                       __AXFApplicationViewBridgeServiceKey, __AXFGeometryCreateCGRegionFromRects, 
+                       __AXFGeometryPackSortedRects, __AXFGeometrySubregionRectsFromRegion, 
+                       __AXFSelectorCopyDescription, __AXFStringPropertyValueFromPID, 
+                       __runningApplications ]
     objc-classes:    [ AXFApplicationManager, AXFComposedCharacter, AXFConcurrentDictionary, 
-                       AXFCountedQueue, AXFDispatchGroup, AXFDispatchQueue, AXFDispatchSemaphore, 
-                       AXFDispatchWorkItem, AXFMarshal, AXFMouse, AXFMouseCursorImage, 
-                       AXFMouseTest, AXFObserver, AXFObserverManager, AXFObserverManagerIPC, 
-                       AXFRemoteSearchManager, AXFRotorItemResult, AXFRotorManager, 
-                       AXFRunLoopThread, AXFScreen, AXFScreenCaptureManager, AXFScreenManager, 
-                       AXFScreenSourceTest, AXFTargetSelector, AXFTextPosition, AXFTextRange, 
-                       AXFThrottler, AXFUIElement, AXFUserSessionObserver, _AXFAction, 
-                       _AXFAttributedStringProxy, _AXFComposedCharacterEnumerator, 
-                       _AXFEventProvider, _AXFEventProviderSystem, _AXFFaultingArray, 
-                       _AXFFaultingElementArray, _AXFInvalidTextPosition, _AXFLaunchServicesProvider, 
-                       _AXFLaunchServicesProviderSystem, _AXFMouseHardware, _AXFObserverGroupIPC, 
-                       _AXFObserverGroupIPCFiringCopy, _AXFObserverIPC, _AXFScreenSourceHardware, 
-                       _AXFSelectorMap, _AXFTextPositionIndexBased, _AXFTextPositionMarkerBased, 
-                       _AXFUIElementArchiver, _AXFUIElementDataProvider, _AXFUIElementDataProviderApplication, 
+                       AXFCountedQueue, AXFDialectMap, AXFDispatchGroup, AXFDispatchQueue, 
+                       AXFDispatchSemaphore, AXFDispatchWorkItem, AXFLanguageLoader, 
+                       AXFLanguageManager, AXFLanguageMap, AXFLanguageTag, AXFLanguageTagger, 
+                       AXFMarshal, AXFMouse, AXFMouseCursorImage, AXFMouseTest, AXFObserver, 
+                       AXFObserverManager, AXFObserverManagerIPC, AXFRemoteSearchManager, 
+                       AXFRotorItemResult, AXFRotorManager, AXFRunLoopThread, AXFScreen, 
+                       AXFScreenCaptureManager, AXFScreenManager, AXFScreenSourceTest, 
+                       AXFTargetSelector, AXFTextPosition, AXFTextRange, AXFThrottler, 
+                       AXFUIElement, AXFUserSessionObserver, _AXFAction, _AXFAttributedStringProxy, 
+                       _AXFComposedCharacterEnumerator, _AXFEventProvider, _AXFEventProviderSystem, 
+                       _AXFFaultingArray, _AXFFaultingElementArray, _AXFInvalidTextPosition, 
+                       _AXFLaunchServicesProvider, _AXFLaunchServicesProviderSystem, 
+                       _AXFMouseHardware, _AXFObserverGroupIPC, _AXFObserverGroupIPCFiringCopy, 
+                       _AXFObserverIPC, _AXFScreenSourceHardware, _AXFSelectorMap, 
+                       _AXFTextPositionIndexBased, _AXFTextPositionMarkerBased, _AXFUIElementArchiver, 
+                       _AXFUIElementDataProvider, _AXFUIElementDataProviderApplication, 
                        _AXFUIElementDataProviderIPC, _AXFUIElementDataProviderInvalid, 
                        _AXFUIElementDataProviderSystemWide, _AXFUIElementDataProviderTest ]
     objc-ivars:      [ _AXFFaultingArray._elements ]

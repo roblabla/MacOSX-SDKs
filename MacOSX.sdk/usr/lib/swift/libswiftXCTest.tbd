@@ -1,12 +1,26 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 334158F0-3E19-3112-931C-0CBBA2FA97E5', 'x86_64: 334158F0-3E19-3112-931C-0CBBA2FA97E5' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           D54538DC-EC65-37BA-9157-E19F6F9514A7
+  - target:          x86_64-maccatalyst
+    value:           D54538DC-EC65-37BA-9157-E19F6F9514A7
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           85A4D17A-0FB1-3D7E-9CBC-21B4A086BB4E
+  - target:          arm64e-maccatalyst
+    value:           85A4D17A-0FB1-3D7E-9CBC-21B4A086BB4E
 install-name:    '/usr/lib/swift/libswiftXCTest.dylib'
 current-version: 0
 swift-abi-version: 7
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ '_$s6XCTest12XCTAssertNil__4file4lineyypSgyKXK_SSyXKs12StaticStringVSutF', 
                        '_$s6XCTest13XCTAssertTrue__4file4lineySbyKXK_SSyXKs12StaticStringVSutF', 
                        '_$s6XCTest14XCTAssertEqual__8accuracy_4file4lineyxyKXK_xyKXKxSSyXKs12StaticStringVSutSFRzlF', 

@@ -6,6 +6,8 @@
  *
  */
 
+#if TARGET_OS_OSX
+
 /*!
     @header CIPlugInInterface
     @abstract   Definition of the plug-in registration protocol
@@ -28,3 +30,5 @@
 - (BOOL)load:(void *)host;
 
 @end
+
+#endif

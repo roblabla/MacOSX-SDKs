@@ -17,7 +17,7 @@ typedef NS_ENUM(NSInteger, UINotificationFeedbackType) {
 };
 
 // UINotificationFeedbackGenerator is used to give user feedback when an notification is displayed
-UIKIT_CLASS_AVAILABLE_IOS_ONLY(10_0) @interface UINotificationFeedbackGenerator : UIFeedbackGenerator
+UIKIT_EXTERN API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(tvos, watchos) @interface UINotificationFeedbackGenerator : UIFeedbackGenerator
 
 /// call when a notification is displayed, passing the corresponding type
 - (void)notificationOccurred:(UINotificationFeedbackType)notificationType;

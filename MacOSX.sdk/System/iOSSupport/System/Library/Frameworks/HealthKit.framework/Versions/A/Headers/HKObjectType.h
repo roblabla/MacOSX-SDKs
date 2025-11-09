@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class HKCharacteristicType;
 @class HKCorrelationType;
 @class HKDocumentType;
+@class HKElectrocardiogramType;
 @class HKQuantityType;
 @class HKSeriesType;
 @class HKUnit;
@@ -47,6 +48,7 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0))
 + (HKWorkoutType *)workoutType;
 + (HKActivitySummaryType *)activitySummaryType API_AVAILABLE(ios(9.3), watchos(2.2));
 + (HKAudiogramSampleType *)audiogramSampleType API_AVAILABLE(ios(13.0), watchos(6.0));
++ (HKElectrocardiogramType *)electrocardiogramType API_AVAILABLE(ios(14.0), watchos(7.0));
 
 @end
 
@@ -69,7 +71,7 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0))
  @property      isMaximumDurationRestricted
  @abstract      Returns YES if the start and end date for samples of this type are restricted by a maximum duration.
  */
-@property (nonatomic, readonly) BOOL isMaximumDurationRestricted;
+@property (nonatomic, readonly) BOOL isMaximumDurationRestricted API_AVAILABLE(ios(13.0), watchos(6.0));
 
 /*!
  @property      maximumAllowedDuration
@@ -77,13 +79,13 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0))
                 calculated as the difference between end and start dates.
  @discussion    Throws an exception if there is no maximum restriction on duration for samples of this type.
  */
-@property (nonatomic, readonly) NSTimeInterval maximumAllowedDuration;
+@property (nonatomic, readonly) NSTimeInterval maximumAllowedDuration API_AVAILABLE(ios(13.0), watchos(6.0));
 
 /*!
  @property      isMinimumDurationRestricted
  @abstract      Returns YES if the start and end date for samples of this type are restricted by a minimum duration.
  */
-@property (nonatomic, readonly) BOOL isMinimumDurationRestricted;
+@property (nonatomic, readonly) BOOL isMinimumDurationRestricted API_AVAILABLE(ios(13.0), watchos(6.0));
 
 /*!
  @property      minimumAllowedDuration
@@ -91,7 +93,7 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0))
                 calculated as the difference between end and start dates.
  @discussion    Throws an exception if there is no minimum restriction on duration for samples of this type.
  */
-@property (nonatomic, readonly) NSTimeInterval minimumAllowedDuration;
+@property (nonatomic, readonly) NSTimeInterval minimumAllowedDuration API_AVAILABLE(ios(13.0), watchos(6.0));
 
 @end
 
@@ -173,6 +175,12 @@ HK_EXTERN API_AVAILABLE(ios(13.0), watchos(6.0))
 @interface HKAudiogramSampleType : HKSampleType
 @end
 
-
+/*!
+ @class    HKElectrocardiogramType
+ @abstract Represents an electrocardiogram sample.
+ */
+HK_EXTERN API_AVAILABLE(ios(14.0), watchos(7.0))
+@interface HKElectrocardiogramType : HKSampleType
+@end
 
 NS_ASSUME_NONNULL_END

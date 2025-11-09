@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: E9913E51-79E1-34BF-86AE-2CCD03230D07' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           8016C411-FBDC-31CF-88B9-0C6B8BE3F941
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           5A2D8000-F327-39A0-B55B-DE748F51E583
 install-name:    '/System/Library/Frameworks/ICADevices.framework/Versions/A/ICADevices'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _DisconnectFWDevice, _DisconnectFWDeviceWithIORegPath, _DisconnectMassStorageDevice, 
                        _DisconnectUSBDevice, _DisconnectUSBDeviceWithIORegPath, _FWDeviceSendScanEventNotification, 
                        _ICACloseSession, _ICAConvertJPEGDataToICADataInPlace, _ICAConvertTIFFDataToICADataInPlace, 
@@ -76,12 +82,14 @@ exports:
                        _NewUSBDevice, _NewUSBDeviceWithIORegPath, _SendDeviceArrivalNotification, 
                        _SendDeviceLoadFailedNotification, _SendDeviceLoadFailedNotificationWithError, 
                        _SendDeviceRemovedNotification, _SendDeviceResetNotification, 
-                       _USBDeviceSendScanEventNotification, ___ICLogDateString, ___ICLogTypeEnabled, 
-                       ___ICOSLogCreate, ___ICReadPrefs, __gDiskArbSession, __gExecutableArchitecture, 
+                       _USBDeviceSendScanEventNotification, ___ICAddDecodedErrorToDict, 
+                       ___ICErrorValueDict, ___ICLogDateString, ___ICLogTypeEnabled, 
+                       ___ICLongValueToErrorString, ___ICOSLogCreate, ___ICReadPrefs, 
+                       ___ICValueToErrorString, __gDiskArbSession, __gExecutableArchitecture, 
                        __gICOSLog, _gArgc, _gArgv, _gFilenamePrefix, _gICDCallbackFunctions, 
-                       _gICDScannerCallbackFunctions, _gIsCameraModule, _gNextFilenameCount, 
-                       _gQuitWhenLastDeviceIsDisconnected, _gTimerCalledCount, _gTimerValueInSeconds, 
-                       _kICAActualByteCountKey, _kICAAddMetaDataToFinderCommentKey, 
+                       _gICDScannerCallbackFunctions, _gIsCameraModule, _gModuleSpecificPrefs, 
+                       _gNextFilenameCount, _gQuitWhenLastDeviceIsDisconnected, _gTimerCalledCount, 
+                       _gTimerValueInSeconds, _kICAActualByteCountKey, _kICAAddMetaDataToFinderCommentKey, 
                        _kICAAdjustCreationDateKey, _kICAAppNameKey, _kICAAudioCodecsKey, 
                        _kICABIPVersionKey, _kICABluetoothAddressKey, _kICABluetoothTransportType, 
                        _kICABonjourDevicesKey, _kICABonjourServiceNameKey, _kICABonjourServiceTypeKey, 

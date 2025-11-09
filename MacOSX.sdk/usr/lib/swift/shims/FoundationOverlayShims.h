@@ -26,6 +26,7 @@
 #import "NSDataShims.h"
 #import "NSDictionaryShims.h"
 #import "NSErrorShims.h"
+#import "NSFileHandleShims.h"
 #import "NSFileManagerShims.h"
 #import "NSIndexPathShims.h"
 #import "NSIndexSetShims.h"
@@ -75,3 +76,8 @@ static inline _Bool _withStackOrHeapBuffer(size_t amount, void (__attribute__((n
 @protocol _NSKVOCompatibilityShim <NSObject>
 + (void)_noteProcessHasUsedKVOSwiftOverlay;
 @end
+
+
+// Exported by libswiftCore:
+extern bool _swift_isObjCTypeNameSerializable(Class theClass);
+extern void _swift_reportToDebugger(uintptr_t flags, const char *message, void *details);

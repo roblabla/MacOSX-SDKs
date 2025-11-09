@@ -36,50 +36,50 @@ FOUNDATION_EXPORT NSString * const NSURLProtectionSpaceFTP API_AVAILABLE(macos(1
     @const NSURLProtectionSpaceHTTPProxy
     @abstract The proxy type for http proxies
 */
-FOUNDATION_EXPORT NSString * const NSURLProtectionSpaceHTTPProxy;
+FOUNDATION_EXPORT NSString * const NSURLProtectionSpaceHTTPProxy API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
     @const NSURLProtectionSpaceHTTPSProxy
     @abstract The proxy type for https proxies
 */
-FOUNDATION_EXPORT NSString * const NSURLProtectionSpaceHTTPSProxy;
+FOUNDATION_EXPORT NSString * const NSURLProtectionSpaceHTTPSProxy API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
     @const NSURLProtectionSpaceFTPProxy
     @abstract The proxy type for ftp proxies
 */
-FOUNDATION_EXPORT NSString * const NSURLProtectionSpaceFTPProxy;
+FOUNDATION_EXPORT NSString * const NSURLProtectionSpaceFTPProxy API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
     @const NSURLProtectionSpaceSOCKSProxy
     @abstract The proxy type for SOCKS proxies
 */
-FOUNDATION_EXPORT NSString * const NSURLProtectionSpaceSOCKSProxy;
+FOUNDATION_EXPORT NSString * const NSURLProtectionSpaceSOCKSProxy API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
     @const NSURLAuthenticationMethodDefault
     @abstract The default authentication method for a protocol
 */
-FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodDefault;
+FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodDefault API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
     @const NSURLAuthenticationMethodHTTPBasic
     @abstract HTTP basic authentication. Equivalent to
     NSURLAuthenticationMethodDefault for http.
 */
-FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodHTTPBasic;
+FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodHTTPBasic API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
     @const NSURLAuthenticationMethodHTTPDigest
     @abstract HTTP digest authentication.
 */
-FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodHTTPDigest;
+FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodHTTPDigest API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
     @const NSURLAuthenticationMethodHTMLForm
     @abstract HTML form authentication. Applies to any protocol.
 */
-FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodHTMLForm;
+FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodHTMLForm API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
    @const NSURLAuthenticationMethodNTLM
@@ -112,6 +112,7 @@ FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodServerTrust API_AVAI
     @discussion This class represents a protection space requiring authentication.
 */
 
+API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
 @interface NSURLProtectionSpace : NSObject <NSSecureCoding, NSCopying>
 {
 @private

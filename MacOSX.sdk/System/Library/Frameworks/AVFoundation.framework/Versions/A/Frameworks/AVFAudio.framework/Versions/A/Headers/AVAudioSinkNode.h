@@ -37,8 +37,13 @@ typedef OSStatus (^AVAudioSinkNodeReceiverBlock)(const AudioTimeStamp *timestamp
     @discussion
         AVAudioSinkNode is restricted to be used in the input chain and does not support format
         conversion. Hence when connecting to an AVAudioSinkNode node, the format for the connection
-        should be the output scope format of the input node.
+        should be the output scope format of the input node (essentialy the format should match the input hardware
+ 		sample rate).
 
+		The voice processing IO unit is an exception to the above as it supports sample rate conversion. 
+        The input scope format (HW format) and output scope format (client format) of the input node can differ 
+        in that case.
+        
         This node is only supported when the engine is rendering to the audio device and not in
         manual rendering mode.
 

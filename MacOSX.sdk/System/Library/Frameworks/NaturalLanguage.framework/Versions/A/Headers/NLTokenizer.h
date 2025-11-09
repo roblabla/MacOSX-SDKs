@@ -1,5 +1,5 @@
 /*    NLTokenizer.h
-      Copyright (c) 2017-2019, Apple Inc. All rights reserved.
+      Copyright (c) 2017-2020, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/Foundation.h>
@@ -43,6 +43,10 @@ NS_CLASS_AVAILABLE(10_14, 12_0)
 /* Returns the range corresponding to the token for the tokenizer's unit that contains the given character index. The index must not extend beyond the end of the tokenizer's string, or the method will raise an exception.
 */
 - (NSRange)tokenRangeAtIndex:(NSUInteger)characterIndex API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0)) NS_REFINED_FOR_SWIFT;
+
+/* Returns the smallest range covering all tokens for the tokenizer's unit intersecting the given range.  If range.length == 0, this is equivalent to tokenRangeAtIndex:.
+*/
+- (NSRange)tokenRangeForRange:(NSRange)range API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) NS_REFINED_FOR_SWIFT;
 
 /* Returns the ranges corresponding to the tokens for the tokenizer's unit that intersect the given range.
 */

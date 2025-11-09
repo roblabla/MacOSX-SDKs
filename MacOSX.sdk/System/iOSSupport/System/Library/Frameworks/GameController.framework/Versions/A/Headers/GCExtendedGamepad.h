@@ -5,8 +5,9 @@
 //  Copyright (c) 2012 Apple Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <GameController/GCExtern.h>
+#import <GameController/GCPhysicalInputProfile.h>
+#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -27,8 +28,11 @@ NS_ASSUME_NONNULL_BEGIN
  A profile maps the hardware notion of a controller into a logical controller. One that a developer can
  design for and depend on, no matter the underlying hardware.
  */
-GAMECONTROLLER_EXPORT
-@interface GCExtendedGamepad : NSObject
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(7.0))
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunguarded-availability"
+@interface GCExtendedGamepad : GCPhysicalInputProfile
+#pragma clang diagnostic pop
 
 /**
  A profile keeps a reference to the controller that this profile is mapping input from.
@@ -90,6 +94,11 @@ typedef void (^GCExtendedGamepadValueChangedHandler)(GCExtendedGamepad *gamepad,
  Button options is the secondary menu button. It should be used to enter a secondary menu, such as graphics and sound configuration, and pause the game.
  */
 @property (nonatomic, readonly, nullable) GCControllerButtonInput *buttonOptions API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0));
+
+/**
+ Button home is a special menu button. If the system does not consume button home events, they will be passed to your application and should be used to enter a secondary menu, and pause the game.
+*/
+@property (nonatomic, readonly, nullable) GCControllerButtonInput *buttonHome API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
 /**
  A thumbstick is a 2-axis control that is physically required to be analog. All the elements of this directional input are thus analog.

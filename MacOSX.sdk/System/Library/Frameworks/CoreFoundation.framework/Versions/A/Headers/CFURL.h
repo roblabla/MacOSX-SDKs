@@ -286,7 +286,13 @@ CFURLRef CFURLCreateCopyDeletingPathExtension(CFAllocatorRef allocator, CFURLRef
 /* are placed in buffer.  If buffer is NULL, the needed length is */
 /* computed and returned.  The returned bytes are the original bytes */ 
 /* from which the URL was created; if the URL was created from a */
-/* string, the bytes will be the bytes of the string encoded via UTF-8  */
+/* string, the bytes will be the bytes of the string encoded via UTF-8. */
+/* */
+/* Note: Due to incompatibilities between encodings, it might be impossible to */
+/* generate bytes from the base URL in the encoding of the relative URL or relative bytes, */
+/* which will cause this method to fail and return -1, even if a NULL buffer is passed.  */
+/* To avoid this scenario, use UTF-8, UTF-16, or UTF-32 encodings exclusively, or */
+/* use one non-Unicode encoding exclusively. */
 CF_EXPORT
 CFIndex CFURLGetBytes(CFURLRef url, UInt8 *buffer, CFIndex bufferLength);
 
@@ -483,8 +489,7 @@ Boolean CFURLGetFSRef(CFURLRef url, struct FSRef *fsRef) API_DEPRECATED("Not sup
 #endif
 #endif
 
-
-#if TARGET_OS_MAC || CF_BUILDING_CF || NSBUILDINGFOUNDATION
+#if TARGET_OS_MAC || CF_BUILDING_CF || NSBUILDINGFOUNDATION || DEPLOYMENT_TARGET_SWIFT
 CF_IMPLICIT_BRIDGING_DISABLED
 
 /* Resource access
@@ -754,6 +759,26 @@ const CFStringRef kCFURLAttributeModificationDateKey API_AVAILABLE(macos(10.6), 
     /* The time the resource's attributes were last modified (Read-only, value type CFDate) */
 
 CF_EXPORT
+const CFStringRef kCFURLFileContentIdentifierKey API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+    /* A 64-bit value assigned by APFS that identifies a file's content data stream. Only cloned files and their originals can have the same identifier. (CFNumber) */
+
+CF_EXPORT
+const CFStringRef kCFURLMayShareFileContentKey API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+    /* True for cloned files and their originals that may share all, some, or no data blocks. (CFBoolean) */
+
+CF_EXPORT
+const CFStringRef kCFURLMayHaveExtendedAttributesKey API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+    /* True if the file has extended attributes. False guarantees there are none. (CFBoolean) */
+
+CF_EXPORT
+const CFStringRef kCFURLIsPurgeableKey API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+    /* True if the file can be deleted by the file system when asked to free space. (CFBoolean) */
+
+CF_EXPORT
+const CFStringRef kCFURLIsSparseKey API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+    /* True if the file has sparse regions. (CFBoolean) */
+
+CF_EXPORT
 const CFStringRef kCFURLLinkCountKey API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
     /* Number of hard links to the resource (Read-only, value type CFNumber) */
 
@@ -766,7 +791,7 @@ const CFStringRef kCFURLVolumeURLKey API_AVAILABLE(macos(10.6), ios(4.0), watcho
     /* URL of the volume on which the resource is stored (Read-only, value type CFURL) */
 
 CF_EXPORT
-const CFStringRef kCFURLTypeIdentifierKey API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
+const CFStringRef kCFURLTypeIdentifierKey API_DEPRECATED("Use NSURLContentTypeKey instead", macos(10.6, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED));
     /* Uniform type identifier (UTI) for the resource (Read-only, value type CFString) */
 
 CF_EXPORT
@@ -1092,6 +1117,10 @@ CF_EXPORT
 const CFStringRef kCFURLVolumeSupportsAccessPermissionsKey API_AVAILABLE(macosx(10.13), ios(11.0), watchos(4.0), tvos(11.0));
     /* true if the volume supports setting POSIX access permissions with the kCFURLFileSecurityKey property (Read-only, value type CFBoolean) */
 
+CF_EXPORT
+const CFStringRef kCFURLVolumeSupportsFileProtectionKey API_AVAILABLE(macosx(11.0), ios(14.0), watchos(7.0), tvos(14.0));
+    /* true if the volume supports data protection for files (see kCFURLFileProtectionKey). (Read-only, value type CFBoolean) */
+
 /* UbiquitousItem Properties */
 
 CF_EXPORT
@@ -1152,12 +1181,13 @@ CF_EXPORT
 const CFStringRef kCFURLUbiquitousItemDownloadingStatusCurrent API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
     /* there is a local version of this item and it is the most up-to-date version known to this device. */
 
+#if !DEPLOYMENT_TARGET_SWIFT
 
 typedef CF_OPTIONS(CFOptionFlags, CFURLBookmarkCreationOptions) {
     kCFURLBookmarkCreationMinimalBookmarkMask = ( 1UL << 9 ), // creates bookmark data with "less" information, which may be smaller but still be able to resolve in certain ways
     kCFURLBookmarkCreationSuitableForBookmarkFile = ( 1UL << 10 ), // include the properties required by CFURLWriteBookmarkDataToFile() in the bookmark data created
-    kCFURLBookmarkCreationWithSecurityScope API_AVAILABLE(macos(10.7))  API_UNAVAILABLE(ios, watchos, tvos) = ( 1UL << 11 ), // Mac OS X 10.7.3 and later, include information in the bookmark data which allows the same sandboxed process to access the resource after being relaunched
-    kCFURLBookmarkCreationSecurityScopeAllowOnlyReadAccess API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, watchos, tvos) = ( 1UL << 12 ), // Mac OS X 10.7.3 and later, if used with kCFURLBookmarkCreationWithSecurityScope, at resolution time only read access to the resource will be granted
+    kCFURLBookmarkCreationWithSecurityScope API_AVAILABLE(macos(10.7), macCatalyst(13.0))  API_UNAVAILABLE(ios, watchos, tvos) = ( 1UL << 11 ), // Mac OS X 10.7.3 and later, include information in the bookmark data which allows the same sandboxed process to access the resource after being relaunched
+    kCFURLBookmarkCreationSecurityScopeAllowOnlyReadAccess API_AVAILABLE(macos(10.7), macCatalyst(13.0)) API_UNAVAILABLE(ios, watchos, tvos) = ( 1UL << 12 ), // Mac OS X 10.7.3 and later, if used with kCFURLBookmarkCreationWithSecurityScope, at resolution time only read access to the resource will be granted
     
     // deprecated
     kCFURLBookmarkCreationPreferFileIDResolutionMask
@@ -1167,7 +1197,7 @@ typedef CF_OPTIONS(CFOptionFlags, CFURLBookmarkCreationOptions) {
 typedef CF_OPTIONS(CFOptionFlags, CFURLBookmarkResolutionOptions) {
     kCFURLBookmarkResolutionWithoutUIMask = ( 1UL << 8 ), // don't perform any user interaction during bookmark resolution
     kCFURLBookmarkResolutionWithoutMountingMask = ( 1UL << 9 ), // don't mount a volume during bookmark resolution
-    kCFURLBookmarkResolutionWithSecurityScope API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, watchos, tvos) = ( 1UL << 10 ), // Mac OS X 10.7.3 and later, use the secure information included at creation time to provide the ability to access the resource in a sandboxed process.
+    kCFURLBookmarkResolutionWithSecurityScope API_AVAILABLE(macos(10.7), macCatalyst(13.0)) API_UNAVAILABLE(ios, watchos, tvos) = ( 1UL << 10 ), // Mac OS X 10.7.3 and later, use the secure information included at creation time to provide the ability to access the resource in a sandboxed process.
     
     kCFBookmarkResolutionWithoutUIMask = kCFURLBookmarkResolutionWithoutUIMask,
     kCFBookmarkResolutionWithoutMountingMask = kCFURLBookmarkResolutionWithoutMountingMask,
@@ -1210,7 +1240,7 @@ Boolean CFURLWriteBookmarkDataToFile( CFDataRef bookmarkRef, CFURLRef fileURL, C
 /* Returns bookmark data derived from an alias record.
  */
 CF_EXPORT
-CFDataRef CFURLCreateBookmarkDataFromAliasRecord ( CFAllocatorRef allocatorRef, CFDataRef aliasRecordDataRef ) API_AVAILABLE(macos(10.6)) API_UNAVAILABLE(ios, watchos, tvos);
+CFDataRef CFURLCreateBookmarkDataFromAliasRecord ( CFAllocatorRef allocatorRef, CFDataRef aliasRecordDataRef ) API_DEPRECATED("The Carbon Alias Manager is deprecated. This function should only be used to convert Carbon AliasRecords to bookmark data.", macos(10.6,11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 CF_IMPLICIT_BRIDGING_ENABLED
 
@@ -1224,7 +1254,8 @@ Boolean CFURLStartAccessingSecurityScopedResource(CFURLRef url) API_AVAILABLE(ma
 CF_EXPORT
 void CFURLStopAccessingSecurityScopedResource(CFURLRef url) API_AVAILABLE(macos(10.7), ios(8.0), watchos(2.0), tvos(9.0)); // On OSX, available in MacOS X 10.7.3 and later
 
-#endif
+#endif /* !DEPLOYMENT_TARGET_SWIFT */
+#endif /* TARGET_OS_MAC || CF_BUILDING_CF || NSBUILDINGFOUNDATION || DEPLOYMENT_TARGET_SWIFT */
 
 CF_EXTERN_C_END
 CF_IMPLICIT_BRIDGING_DISABLED

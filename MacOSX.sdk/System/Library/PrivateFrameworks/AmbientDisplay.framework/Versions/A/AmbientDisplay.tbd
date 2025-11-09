@@ -1,11 +1,17 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 0D3D28C7-9C5B-39A6-A184-B000050F4B63' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           DE793297-1F31-31DD-8881-AC9A3626B39B
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           C7E4A4E1-8344-3BE0-AF7C-5E7EEB6AE6CC
 install-name:    '/System/Library/PrivateFrameworks/AmbientDisplay.framework/Versions/A/AmbientDisplay'
 current-version: 110
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _ALSHIDManager_start, _ALSHIDManager_stop, _AMBDCreateIntentionContext, 
                        _AMBDDestroyIntentionContext, _AMBDEnableHDR, _AMBDGetCurrentDisplayBrightness, 
                        _AMBDGetTargetDisplayBrightness, _AMBDInitializeDisplayHDRState, 
@@ -80,16 +86,17 @@ exports:
                        _copyToWarpedLUT, _copyUserIntentionForDisplay, _copyUserIntentionForDisplayLegacy, 
                        _copyUserPrefsIntentionForDisplay, _copyUserPrefsIntentionForDisplayLegacy, 
                        _create3VectorBlackpoint, _createAddMatrix, _createAndAddDeviceContextByDeviceID, 
-                       _createAndAddDeviceContextByDeviceIDLegacy, _createContainerIDstringRefByDisplayID, 
-                       _createDisplayNitsScaledXYZ, _createGammaTable, _createIOPmatrix, 
-                       _createIdentityMatrix, _createIntentionWithBlackPointAndCurrentIntention, 
-                       _createIntentionWithBlackPointAndCurrentIntentionLegacy, _createIntentionWithGammaAndCurrentIntention, 
-                       _createIntentionWithGammaAndCurrentIntentionLegacy, _createInvertedMatrix3, 
-                       _createLERPedIntention, _createLERPedIntentionLegacy, _createLeakedLightXYZnits, 
-                       _createLinearRGBasMatrixedtoXYZ, _createLinearizationTable, 
-                       _createLinearizationTableWithType, _createMatrix3Matrix3Multiply, 
-                       _createMatrix3Vector3Multiply, _createMatrix3scalarMultiply, 
-                       _createMatrixScalarMultiply, _createMatrixfromPointer, _createMonoPiecewisePurePowerTable, 
+                       _createAndAddDeviceContextByDeviceIDLegacy, _createContainerIDstringRefByDisplayIDusingIOservice, 
+                       _createContainerIDstringRefByDisplayIDusingSkylight, _createDisplayNitsScaledXYZ, 
+                       _createGammaTable, _createIOPmatrix, _createIdentityMatrix, 
+                       _createIntentionWithBlackPointAndCurrentIntention, _createIntentionWithBlackPointAndCurrentIntentionLegacy, 
+                       _createIntentionWithGammaAndCurrentIntention, _createIntentionWithGammaAndCurrentIntentionLegacy, 
+                       _createInvertedMatrix3, _createLERPedIntention, _createLERPedIntentionLegacy, 
+                       _createLeakedLightXYZnits, _createLinearRGBasMatrixedtoXYZ, 
+                       _createLinearizationTable, _createLinearizationTableWithType, 
+                       _createMatrix3Matrix3Multiply, _createMatrix3Vector3Multiply, 
+                       _createMatrix3scalarMultiply, _createMatrixScalarMultiply, 
+                       _createMatrixfromPointer, _createMonoPiecewisePurePowerTable, 
                        _createMonoPurePowerScaledTable, _createMonoPurePowerTable, 
                        _createNormalizedXYZtoReference, _createNormalizedXYZvector, 
                        _createPedestalAffectedXYZnits, _createRGBscaledGammaTable, 
@@ -115,8 +122,7 @@ exports:
                        _getCoreDisplayDesiredWhitePointModeLegacy, _getCustomWhitePointXYZ, 
                        _getCustomWhitePointXYZLegacy, _getHIDserviceContainerID, 
                        _getHIDserviceLocation, _getIODisplayServiceForDisplayID, 
-                       _getIODisplayServiceForDisplayIDLegacy, _getIOFrameBufferServiceForDisplayID, 
-                       _getIOFrameBufferServiceForDisplayIDLegacy, _getInstanteneousAdaptationLux, 
+                       _getIODisplayServiceForDisplayIDLegacy, _getInstanteneousAdaptationLux, 
                        _getInstanteneousAdaptationLuxLegacy, _getInternalDisplayID, 
                        _getInternalDisplayIDLegacy, _getMostRecentLuxValuesForDisplayIDviaHID, 
                        _getMostRecentLuxValuesForHIDservice, _getPrimariesFromColorSyncProfileRef, 
@@ -162,13 +168,13 @@ exports:
                        _saveSettingsToPreferencesByDisplayID, _saveSettingsToPreferencesByDisplayIDLegacy, 
                        _saveSettingsToPreferencesByDisplayUUID, _saveSettingsToPreferencesByDisplayUUIDLegacy, 
                        _scalarBlackPoint, _setALSLMUdataPort, _setALSLMUdataPortLegacy, 
-                       _setALSserviceForDisplayID, _setAllowableAdaptationOverDisplayBrightnessRatio, 
-                       _setAndAnimateToGammaHelper, _setAndAnimateToGammaHelperLegacy, 
-                       _setAndApplyALSluxToAllDevicesLegacy, _setAndApplyALSluxToDevice, 
-                       _setAndApplyALSluxToDeviceWithDisplayID, _setBlackPointAndGammaOnCurrentIntention, 
-                       _setBlackPointAndGammaOnCurrentIntentionLegacy, _setCompensationFlagOnDisplayID, 
-                       _setCompensationFlagOnDisplayIDLegacy, _setDisplayParameters, 
-                       _setDisplayParametersLegacy, _setDisplayRemovedStateAndUnregisterCallbacks, 
+                       _setALSluxOnDeviceWithDisplayID, _setALSserviceForDisplayID, 
+                       _setAllowableAdaptationOverDisplayBrightnessRatio, _setAndAnimateToGammaHelper, 
+                       _setAndAnimateToGammaHelperLegacy, _setAndApplyALSluxToAllDevicesLegacy, 
+                       _setAndApplyALSluxToDevice, _setAndApplyALSluxToDeviceWithDisplayID, 
+                       _setBlackPointAndGammaOnCurrentIntention, _setBlackPointAndGammaOnCurrentIntentionLegacy, 
+                       _setCompensationFlagOnDisplayID, _setCompensationFlagOnDisplayIDLegacy, 
+                       _setDisplayParameters, _setDisplayParametersLegacy, _setDisplayRemovedStateAndUnregisterCallbacks, 
                        _setDisplayRemovedStateLegacy, _setHIDserviceController, _setIntention, 
                        _setIntentionLegacy, _setLuxSourceHIDlegacy, _setNativeWhitePoint, 
                        _setNativeWhitePointLegacy, _setOptimizationMode, _setOptimizationModeLegacy, 
@@ -177,7 +183,7 @@ exports:
                        _setSystemGammaModeHelperLegacy, _setTuning, _setTuningLegacy, 
                        _setWhitePointKelvinAndAnimate, _setWhitePointKelvinAndAnimateLegacy, 
                        _setWhitePointMode, _setWhitePointModeLegacy, _setWhitePointXYZandAnimate, 
-                       _setWhitePointXYZandAnimateLegacy, _setupIOP, _showUI, _showUILegacy, 
+                       _setWhitePointXYZandAnimateLegacy, _showUI, _showUILegacy, 
                        _stopAccessingLUT, _stopAccessingLUTLegacy, _storeBackLightToDeviceContextList, 
                        _storeBackLightToDeviceContextListLegacy, _storeLUXtoDeviceContextListLegacy, 
                        _subtractMatrix, _sumAbsVector, _systemGammaBasedOnSystemGammaMode, 

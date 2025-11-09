@@ -1,12 +1,29 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 37B5A035-F6C3-3E0B-BB0A-3F0CAC981C1F', 'x86_64: 37B5A035-F6C3-3E0B-BB0A-3F0CAC981C1F' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           E47E4F13-174D-3791-A235-3AD81586CCB9
+  - target:          x86_64-maccatalyst
+    value:           E47E4F13-174D-3791-A235-3AD81586CCB9
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           16FB73BF-C144-3E54-878E-DCD40CF23BF2
+  - target:          arm64e-maccatalyst
+    value:           16FB73BF-C144-3E54-878E-DCD40CF23BF2
 install-name:    '/usr/lib/system/libsystem_malloc.dylib'
-current-version: 283
-parent-umbrella: System
-exports:         
-  - archs:           [ x86_64 ]
+current-version: 317.40.8
+parent-umbrella:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    umbrella:        System
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ ___mach_stack_logging_copy_uniquing_table, ___mach_stack_logging_enumerate_records, 
                        ___mach_stack_logging_frames_for_uniqued_stack, ___mach_stack_logging_get_frames, 
                        ___mach_stack_logging_get_frames_for_stackid, ___mach_stack_logging_set_file_path, 
@@ -37,10 +54,10 @@ exports:
                        _malloc_zone_memalign, _malloc_zone_pressure_relief, _malloc_zone_print, 
                        _malloc_zone_print_ptr_info, _malloc_zone_realloc, _malloc_zone_register, 
                        _malloc_zone_statistics, _malloc_zone_unregister, _malloc_zone_valloc, 
-                       _malloc_zones, _mstats, _posix_memalign, _realloc, '_reallocarray$DARWIN_EXTSN', 
-                       '_reallocarrayf$DARWIN_EXTSN', _scalable_zone_info, _scalable_zone_statistics, 
-                       _set_malloc_singlethreaded, _stack_logging_enable_logging, 
-                       _szone_check_counter, _szone_check_modulo, _szone_check_start, 
-                       _tiny_print_region_free_list, _turn_off_stack_logging, _turn_on_stack_logging, 
-                       _valloc, _vfree, _zeroify_scalable_zone ]
+                       _malloc_zones, _mstats, _pgm_diagnose_fault_from_crash_reporter, 
+                       _posix_memalign, _realloc, '_reallocarray$DARWIN_EXTSN', '_reallocarrayf$DARWIN_EXTSN', 
+                       _scalable_zone_info, _scalable_zone_statistics, _set_malloc_singlethreaded, 
+                       _stack_logging_enable_logging, _szone_check_counter, _szone_check_modulo, 
+                       _szone_check_start, _tiny_print_region_free_list, _turn_off_stack_logging, 
+                       _turn_on_stack_logging, _valloc, _vfree, _zeroify_scalable_zone ]
 ...

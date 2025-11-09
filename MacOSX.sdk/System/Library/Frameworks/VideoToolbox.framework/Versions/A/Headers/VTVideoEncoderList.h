@@ -45,6 +45,7 @@ VT_EXPORT const CFStringRef kVTVideoEncoderList_PerformanceRating API_AVAILABLE(
 VT_EXPORT const CFStringRef kVTVideoEncoderList_QualityRating API_AVAILABLE(macosx(10.14), ios(13.0), tvos(13.0)); // optional. CFNumber.  If present, indicates a Quality Rating value for the encoder relative to other encoders of the same format.  This is a highly generalized value and different encoders may have strengths at different resolutions and bitrates.
 VT_EXPORT const CFStringRef kVTVideoEncoderList_InstanceLimit API_AVAILABLE(macosx(10.14), ios(13.0), tvos(13.0)); // optional. CFBoolean.  If present and set to kCFBooleanTrue, there is a global instance limit cap on this encoder.  Indicates that an encoder is a scarce resource which may potentially be unavailable.
 VT_EXPORT const CFStringRef kVTVideoEncoderList_IsHardwareAccelerated API_AVAILABLE(macosx(10.14), ios(13.0), tvos(13.0)); // optional. CFBoolean.  If present and set to kCFBooleanTrue, indicates that the encoder is hardware accelerated.
+VT_EXPORT const CFStringRef kVTVideoEncoderList_SupportsFrameReordering API_AVAILABLE(macosx(11.0), ios(14.0), tvos(14.0)); // optional. CFBoolean.  By default, this is assumed to be true if not present.  If present and set to kCFBooleanFalse, indicates that the encoder will not use B frames.
 CM_ASSUME_NONNULL_END
 
 /*!

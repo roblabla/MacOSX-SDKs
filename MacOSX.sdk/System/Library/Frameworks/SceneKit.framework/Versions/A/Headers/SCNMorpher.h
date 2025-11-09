@@ -2,7 +2,7 @@
 //  SCNMorpher.h
 //  SceneKit
 //
-//  Copyright © 2013-2019 Apple Inc. All rights reserved.
+//  Copyright © 2013-2020 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

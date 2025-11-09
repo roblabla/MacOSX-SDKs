@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 0CCB8685-F7DA-3D0B-BB73-4D15BC024E26' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           598D8F84-24CC-3F97-9DE2-8E01D29A8124
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           BA61F7D1-1C53-3B6E-BCBC-DFB33DC62DCF
 install-name:    '/System/Library/PrivateFrameworks/ExpansionSlotSupport.framework/Versions/A/ExpansionSlotSupport'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _BG_DI_GetDIMMType, _BG_DI_GetMemoryProperty, _BG_DI_GetNumberOfDIMMs, 
                        _BG_DI_GetNumberOfDIMMsPopulated, _BG_DI_GetSizeOfDIMMs, _BG_DI_InitializeIOUtils, 
                        _BG_DI_ReleaseIOUtils, _CloseUserClient, _Combinatorics_main, 

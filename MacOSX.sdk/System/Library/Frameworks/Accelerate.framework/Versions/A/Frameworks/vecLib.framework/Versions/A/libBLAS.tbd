@@ -1,52 +1,69 @@
---- !tapi-tbd-v3
-archs:           [ x86_64, x86_64h ]
-uuids:           [ 'x86_64: B0AA4597-2A1D-3FD0-8AEF-B0C5C7AAEED3', 'x86_64: B0AA4597-2A1D-3FD0-8AEF-B0C5C7AAEED3', 
-                   'x86_64h: ABAB4AF1-CFFC-3D84-8C65-F796E912DA90', 'x86_64h: ABAB4AF1-CFFC-3D84-8C65-F796E912DA90' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
+                   arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           DEEF9FAE-9E02-325D-AB15-E1C44B8BD5E4
+  - target:          x86_64-maccatalyst
+    value:           DEEF9FAE-9E02-325D-AB15-E1C44B8BD5E4
+  - target:          x86_64h-macos
+    value:           3877D05B-AE41-3EBE-854E-BBA921648D1D
+  - target:          x86_64h-maccatalyst
+    value:           3877D05B-AE41-3EBE-854E-BBA921648D1D
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           B1BF72D8-D046-3FE5-AEE7-1ACCC28B7D41
+  - target:          arm64e-maccatalyst
+    value:           B1BF72D8-D046-3FE5-AEE7-1ACCC28B7D41
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib'
-exports:         
-  - archs:           [ x86_64, x86_64h ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
+                       x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
     symbols:         [ _APL_dgemm, _APL_dgemm_LU, _APL_dgemm_QR, _APL_dsyrk, _APL_dtrsm, 
                        _APL_sgemm, _APL_sgemm_LU, _APL_sgemm_QR, _APL_ssyrk, _APL_strsm, 
-                       _APPLE_NTHREADS, _ATLU_DestroyThreadMemory, _CAXPY, _CAXPY_, 
-                       _CCOPY, _CCOPY_, _CDOTC, _CDOTC_, _CDOTU, _CDOTU_, _CGBMV, 
-                       _CGBMV_, _CGEMM, _CGEMM_, _CGEMV, _CGEMV_, _CGERC, _CGERC_, 
-                       _CGERU, _CGERU_, _CHBMV, _CHBMV_, _CHEMM, _CHEMM_, _CHEMV, 
-                       _CHEMV_, _CHER, _CHER2, _CHER2K, _CHER2K_, _CHER2_, _CHERK, 
-                       _CHERK_, _CHER_, _CHPMV, _CHPMV_, _CHPR, _CHPR2, _CHPR2_, 
-                       _CHPR_, _CROTG, _CROTG_, _CSCAL, _CSCAL_, _CSROT, _CSROT_, 
-                       _CSSCAL, _CSSCAL_, _CSWAP, _CSWAP_, _CSYMM, _CSYMM_, _CSYR2K, 
-                       _CSYR2K_, _CSYRK, _CSYRK_, _CTBMV, _CTBMV_, _CTBSV, _CTBSV_, 
-                       _CTPMV, _CTPMV_, _CTPSV, _CTPSV_, _CTRMM, _CTRMM_, _CTRMV, 
-                       _CTRMV_, _CTRSM, _CTRSM_, _CTRSV, _CTRSV_, _DASUM, _DASUM_, 
-                       _DAXPY, _DAXPY_, _DCABS1, _DCABS1_, _DCOPY, _DCOPY_, _DDOT, 
-                       _DDOT_, _DGBMV, _DGBMV_, _DGEMM, _DGEMM_, _DGEMV, _DGEMV_, 
-                       _DGER, _DGER_, _DNRM2, _DNRM2_, _DROT, _DROTG, _DROTG_, _DROTM, 
-                       _DROTMG, _DROTMG_, _DROTM_, _DROT_, _DSBMV, _DSBMV_, _DSCAL, 
-                       _DSCAL_, _DSDOT, _DSDOT_, _DSPMV, _DSPMV_, _DSPR, _DSPR2, 
-                       _DSPR2_, _DSPR_, _DSWAP, _DSWAP_, _DSYMM, _DSYMM_, _DSYMV, 
-                       _DSYMV_, _DSYR, _DSYR2, _DSYR2K, _DSYR2K_, _DSYR2_, _DSYRK, 
-                       _DSYRK_, _DSYR_, _DTBMV, _DTBMV_, _DTBSV, _DTBSV_, _DTPMV, 
-                       _DTPMV_, _DTPSV, _DTPSV_, _DTRMM, _DTRMM_, _DTRMV, _DTRMV_, 
-                       _DTRSM, _DTRSM_, _DTRSV, _DTRSV_, _DZASUM, _DZASUM_, _DZNRM2, 
-                       _DZNRM2_, _ICAMAX, _ICAMAX_, _IDAMAX, _IDAMAX_, _ISAMAX, _ISAMAX_, 
-                       _IZAMAX, _IZAMAX_, _SASUM, _SASUM_, _SAXPY, _SAXPY_, _SCASUM, 
-                       _SCASUM_, _SCNRM2, _SCNRM2_, _SCOPY, _SCOPY_, _SDOT, _SDOT_, 
-                       _SDSDOT, _SDSDOT_, _SGBMV, _SGBMV_, _SGEMM, _SGEMM_, _SGEMV, 
-                       _SGEMV_, _SGER, _SGER_, _SNRM2, _SNRM2_, _SROT, _SROTG, _SROTG_, 
-                       _SROTM, _SROTMG, _SROTMG_, _SROTM_, _SROT_, _SSBMV, _SSBMV_, 
-                       _SSCAL, _SSCAL_, _SSPMV, _SSPMV_, _SSPR, _SSPR2, _SSPR2_, 
-                       _SSPR_, _SSWAP, _SSWAP_, _SSYMM, _SSYMM_, _SSYMV, _SSYMV_, 
-                       _SSYR, _SSYR2, _SSYR2K, _SSYR2K_, _SSYR2_, _SSYRK, _SSYRK_, 
-                       _SSYR_, _STBMV, _STBMV_, _STBSV, _STBSV_, _STPMV, _STPMV_, 
-                       _STPSV, _STPSV_, _STRMM, _STRMM_, _STRMV, _STRMV_, _STRSM, 
-                       _STRSM_, _STRSV, _STRSV_, _SetBLASParamErrorProc, _XERBLA, 
-                       _XERBLA_, _ZAXPY, _ZAXPY_, _ZCOPY, _ZCOPY_, _ZDOTC, _ZDOTC_, 
-                       _ZDOTU, _ZDOTU_, _ZDROT, _ZDROT_, _ZDSCAL, _ZDSCAL_, _ZGBMV, 
-                       _ZGBMV_, _ZGEMM, _ZGEMM_, _ZGEMV, _ZGEMV_, _ZGERC, _ZGERC_, 
-                       _ZGERU, _ZGERU_, _ZHBMV, _ZHBMV_, _ZHEMM, _ZHEMM_, _ZHEMV, 
-                       _ZHEMV_, _ZHER, _ZHER2, _ZHER2K, _ZHER2K_, _ZHER2_, _ZHERK, 
-                       _ZHERK_, _ZHER_, _ZHPMV, _ZHPMV_, _ZHPR, _ZHPR2, _ZHPR2_, 
+                       _APPLE_NTHREADS, _ATLU_DestroyThreadMemory, _BLASStateRelease, 
+                       _BLASStateRetain, _CAXPY, _CAXPY_, _CCOPY, _CCOPY_, _CDOTC, 
+                       _CDOTC_, _CDOTU, _CDOTU_, _CGBMV, _CGBMV_, _CGEMM, _CGEMM_, 
+                       _CGEMV, _CGEMV_, _CGERC, _CGERC_, _CGERU, _CGERU_, _CHBMV, 
+                       _CHBMV_, _CHEMM, _CHEMM_, _CHEMV, _CHEMV_, _CHER, _CHER2, 
+                       _CHER2K, _CHER2K_, _CHER2_, _CHERK, _CHERK_, _CHER_, _CHPMV, 
+                       _CHPMV_, _CHPR, _CHPR2, _CHPR2_, _CHPR_, _CROTG, _CROTG_, 
+                       _CSCAL, _CSCAL_, _CSROT, _CSROT_, _CSSCAL, _CSSCAL_, _CSWAP, 
+                       _CSWAP_, _CSYMM, _CSYMM_, _CSYR2K, _CSYR2K_, _CSYRK, _CSYRK_, 
+                       _CTBMV, _CTBMV_, _CTBSV, _CTBSV_, _CTPMV, _CTPMV_, _CTPSV, 
+                       _CTPSV_, _CTRMM, _CTRMM_, _CTRMV, _CTRMV_, _CTRSM, _CTRSM_, 
+                       _CTRSV, _CTRSV_, _DASUM, _DASUM_, _DAXPY, _DAXPY_, _DCABS1, 
+                       _DCABS1_, _DCOPY, _DCOPY_, _DDOT, _DDOT_, _DGBMV, _DGBMV_, 
+                       _DGEMM, _DGEMM_, _DGEMV, _DGEMV_, _DGER, _DGER_, _DNRM2, _DNRM2_, 
+                       _DROT, _DROTG, _DROTG_, _DROTM, _DROTMG, _DROTMG_, _DROTM_, 
+                       _DROT_, _DSBMV, _DSBMV_, _DSCAL, _DSCAL_, _DSDOT, _DSDOT_, 
+                       _DSPMV, _DSPMV_, _DSPR, _DSPR2, _DSPR2_, _DSPR_, _DSWAP, _DSWAP_, 
+                       _DSYMM, _DSYMM_, _DSYMV, _DSYMV_, _DSYR, _DSYR2, _DSYR2K, 
+                       _DSYR2K_, _DSYR2_, _DSYRK, _DSYRK_, _DSYR_, _DTBMV, _DTBMV_, 
+                       _DTBSV, _DTBSV_, _DTPMV, _DTPMV_, _DTPSV, _DTPSV_, _DTRMM, 
+                       _DTRMM_, _DTRMV, _DTRMV_, _DTRSM, _DTRSM_, _DTRSV, _DTRSV_, 
+                       _DZASUM, _DZASUM_, _DZNRM2, _DZNRM2_, _ICAMAX, _ICAMAX_, _IDAMAX, 
+                       _IDAMAX_, _ISAMAX, _ISAMAX_, _IZAMAX, _IZAMAX_, _SASUM, _SASUM_, 
+                       _SAXPY, _SAXPY_, _SCASUM, _SCASUM_, _SCNRM2, _SCNRM2_, _SCOPY, 
+                       _SCOPY_, _SDOT, _SDOT_, _SDSDOT, _SDSDOT_, _SGBMV, _SGBMV_, 
+                       _SGEMM, _SGEMM_, _SGEMV, _SGEMV_, _SGER, _SGER_, _SNRM2, _SNRM2_, 
+                       _SROT, _SROTG, _SROTG_, _SROTM, _SROTMG, _SROTMG_, _SROTM_, 
+                       _SROT_, _SSBMV, _SSBMV_, _SSCAL, _SSCAL_, _SSPMV, _SSPMV_, 
+                       _SSPR, _SSPR2, _SSPR2_, _SSPR_, _SSWAP, _SSWAP_, _SSYMM, _SSYMM_, 
+                       _SSYMV, _SSYMV_, _SSYR, _SSYR2, _SSYR2K, _SSYR2K_, _SSYR2_, 
+                       _SSYRK, _SSYRK_, _SSYR_, _STBMV, _STBMV_, _STBSV, _STBSV_, 
+                       _STPMV, _STPMV_, _STPSV, _STPSV_, _STRMM, _STRMM_, _STRMV, 
+                       _STRMV_, _STRSM, _STRSM_, _STRSV, _STRSV_, _SetBLASParamErrorProc, 
+                       _XERBLA, _XERBLA_, _ZAXPY, _ZAXPY_, _ZCOPY, _ZCOPY_, _ZDOTC, 
+                       _ZDOTC_, _ZDOTU, _ZDOTU_, _ZDROT, _ZDROT_, _ZDSCAL, _ZDSCAL_, 
+                       _ZGBMV, _ZGBMV_, _ZGEMM, _ZGEMM_, _ZGEMV, _ZGEMV_, _ZGERC, 
+                       _ZGERC_, _ZGERU, _ZGERU_, _ZHBMV, _ZHBMV_, _ZHEMM, _ZHEMM_, 
+                       _ZHEMV, _ZHEMV_, _ZHER, _ZHER2, _ZHER2K, _ZHER2K_, _ZHER2_, 
+                       _ZHERK, _ZHERK_, _ZHER_, _ZHPMV, _ZHPMV_, _ZHPR, _ZHPR2, _ZHPR2_, 
                        _ZHPR_, _ZROTG, _ZROTG_, _ZSCAL, _ZSCAL_, _ZSWAP, _ZSWAP_, 
                        _ZSYMM, _ZSYMM_, _ZSYR2K, _ZSYR2K_, _ZSYRK, _ZSYRK_, _ZTBMV, 
                        _ZTBMV_, _ZTBSV, _ZTBSV_, _ZTPMV, _ZTPMV_, _ZTPSV, _ZTPSV_, 

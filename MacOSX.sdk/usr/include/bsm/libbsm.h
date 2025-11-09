@@ -813,179 +813,179 @@ struct tokenstr {
 typedef struct tokenstr tokenstr_t;
 
 int audit_submit(short au_event, au_id_t auid, char status, int reterr, const char *fmt, ...)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * Functions relating to querying audit class information.
  */
 void setauclass(void)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 void endauclass(void)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 struct au_class_ent *getauclassent(void)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 struct au_class_ent *getauclassent_r(au_class_ent_t *class_int)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 struct au_class_ent *getauclassnam(const char *name)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 struct au_class_ent *getauclassnam_r(au_class_ent_t *class_int, const char *name)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 struct au_class_ent *getauclassnum(au_class_t class_number)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 struct au_class_ent *getauclassnum_r(au_class_ent_t *class_int, au_class_t class_number)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * Functions relating to querying audit control information.
  */
 void setac(void)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 void endac(void)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int getacdir(char *name, int len)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int getacmin(int *min_val)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int getacfilesz(size_t *size_val)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int getacflg(char *auditstr, int len)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int getacna(char *auditstr, int len)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int getacpol(char *auditstr, size_t len)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int getacsflagsmask(const char *which, char *auditstr, size_t len)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int getachost(char *auditstr, size_t len)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int getacexpire(int *andflg, time_t *age, size_t *size)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int getauditflagsbin(char *auditstr, au_mask_t *masks)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int getauditflagschar(char *auditstr, au_mask_t *masks, int verbose)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int au_preselect(au_event_t event, au_mask_t *mask_p, int sorf, int flag)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 ssize_t au_poltostr(int policy, size_t maxsize, char *buf)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int au_strtopol(const char *polstr, int *policy)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 ssize_t au_sflagstostr(uint64_t flags, size_t maxsize, char *buf)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int au_strtosflags(const char *sflagsstr, uint64_t *flags)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * Functions relating to querying audit event information.
  */
 void setauevent(void)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 void endauevent(void)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 struct au_event_ent *getauevent(void)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 struct au_event_ent *getauevent_r(struct au_event_ent *e)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 struct au_event_ent *getauevnam(const char *name)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 struct au_event_ent *getauevnam_r(struct au_event_ent *e, const char *name)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 struct au_event_ent *getauevnum(au_event_t event_number)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 struct au_event_ent *getauevnum_r(struct au_event_ent *e, au_event_t event_number)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 au_event_t *getauevnonam(const char *event_name)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 au_event_t *getauevnonam_r(au_event_t *ev, const char *event_name)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * Functions relating to querying audit user information.
  */
 void setauuser(void)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 void endauuser(void)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 struct au_user_ent *getauuserent(void)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 struct au_user_ent *getauuserent_r(struct au_user_ent *u)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 struct au_user_ent *getauusernam(const char *name)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 struct au_user_ent *getauusernam_r(struct au_user_ent *u, const char *name)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int au_user_mask(char *username, au_mask_t *mask_p)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int getfauditflags(au_mask_t *usremask, au_mask_t *usrdmask, au_mask_t *lastmask)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * Functions for reading and printing records and tokens from audit trails.
  */
 int au_read_rec(FILE *fp, u_char **buf)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int au_fetch_tok(tokenstr_t *tok, u_char *buf, int len)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 //XXX The following interface has different prototype from BSM
 void au_print_tok(FILE *outfp, tokenstr_t *tok, char *del, char raw, char sfrm)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 void au_print_flags_tok(FILE *outfp, tokenstr_t *tok, char *del, int oflags)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 void au_print_tok_xml(FILE *outfp, tokenstr_t *tok, char *del, char raw, char sfrm)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /* 
  * Functions relating to XML output.
  */
 void au_print_xml_header(FILE *outfp)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 void au_print_xml_footer(FILE *outfp)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * BSM library routines for converting between local and BSM constant spaces.
@@ -993,31 +993,31 @@ void au_print_xml_footer(FILE *outfp)
  * the FreeBSD and Mac OS X kernels)
  */
 int au_bsm_to_domain(u_short bsm_domain, int *local_domainp)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int au_bsm_to_errno(u_char bsm_error, int *errorp)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int au_bsm_to_fcntl_cmd(u_short bsm_fcntl_cmd, int *local_fcntl_cmdp)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int au_bsm_to_socket_type(u_short bsm_socket_type, int *local_socket_typep)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 u_short au_domain_to_bsm(int local_domain)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 u_char au_errno_to_bsm(int local_errno)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 u_short au_fcntl_cmd_to_bsm(int local_fcntl_command)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 u_short au_socket_type_to_bsm(int local_socket_type)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 const char *au_strerror(u_char bsm_error)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 __END_DECLS
 
@@ -1112,7 +1112,7 @@ __BEGIN_DECLS
  * XXXRW: In Apple's bsm-8, these are marked __APPLE_API_PRIVATE.
  */
 void au_free_token(token_t *tok)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * Lightweight check to determine if auditing is enabled.  If a client
@@ -1129,14 +1129,14 @@ void au_free_token(token_t *tok)
  * XXXRW: In Apple's bsm-8, these are marked __APPLE_API_PRIVATE.
  */
 int au_get_state(void)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * Initialize the audit notification.  If it has not already been initialized
  * it will automatically on the first call of au_get_state().
  */
 uint32_t au_notify_initialize(void)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * Cancel audit notification and free the resources associated with it.
@@ -1144,13 +1144,13 @@ uint32_t au_notify_initialize(void)
  * this.
  */
 int au_notify_terminate(void)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 __END_DECLS
 
 /* OpenSSH compatibility */
 int cannot_audit(int)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 __BEGIN_DECLS
 /*
@@ -1235,7 +1235,7 @@ int audit_set_terminal_id(au_tid_t *tid)
  * XXXRW: In Apple's bsm-8, these are marked __APPLE_API_PRIVATE.
  */
 int audit_write(short event_code, token_t *subject, token_t *misctok, char retval, int errcode)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * audit_write_success_ex()
@@ -1286,12 +1286,12 @@ int audit_write(short event_code, token_t *subject, token_t *misctok, char retva
 int audit_write_success_ex(short event_code, token_t *misctok, au_id_t auid,
 	uid_t euid, gid_t egid, uid_t ruid, gid_t rgid, pid_t pid,
 	au_asid_t sid, au_tid_addr_t *tid)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int audit_write_success(short event_code, token_t *misctok, au_id_t auid,
 	uid_t euid, gid_t egid, uid_t ruid, gid_t rgid, pid_t pid,
 	au_asid_t sid, au_tid_t *tid)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * audit_write_success_self()
@@ -1313,7 +1313,7 @@ int audit_write_success(short event_code, token_t *misctok, au_id_t auid,
  * XXXRW: In Apple's bsm-8, these are marked __APPLE_API_PRIVATE.
  */
 int audit_write_success_self(short event_code, token_t *misctok)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * audit_write_failure_ex()
@@ -1365,12 +1365,12 @@ int audit_write_success_self(short event_code, token_t *misctok)
 int audit_write_failure_ex(short event_code, char *errmsg, int errret,
 	au_id_t auid, uid_t euid, gid_t egid, uid_t ruid, gid_t rgid,
 	pid_t pid, au_asid_t sid, au_tid_addr_t *tid)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int audit_write_failure(short event_code, char *errmsg, int errret,
 	au_id_t auid, uid_t euid, gid_t egid, uid_t ruid, gid_t rgid,
 	pid_t pid, au_asid_t sid, au_tid_t *tid)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * audit_write_failure_self()
@@ -1395,7 +1395,7 @@ int audit_write_failure(short event_code, char *errmsg, int errret,
  * XXXRW: In Apple's bsm-8, these are marked __APPLE_API_PRIVATE.
  */
 int audit_write_failure_self(short event_code, char *errmsg, int errret)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * audit_write_failure_na_ex()
@@ -1433,11 +1433,11 @@ int audit_write_failure_self(short event_code, char *errmsg, int errret)
  */
 int audit_write_failure_na_ex(short event_code, char *errmsg, int errret,
 	uid_t euid, gid_t egid, pid_t pid, au_tid_addr_t *tid)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int audit_write_failure_na(short event_code, char *errmsg, int errret,
 	uid_t euid, gid_t egid, pid_t pid, au_tid_t *tid)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /* END au_write() WRAPPERS */
 
@@ -1615,91 +1615,91 @@ int audit_token_to_pidversion(audit_token_t atoken)
  * Wrapper functions to auditon(2).
  */
 int audit_get_car(char *path, size_t sz)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int audit_get_class(au_evclass_map_t *evc_map, size_t sz)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int audit_set_class(au_evclass_map_t *evc_map, size_t sz)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int audit_get_cond(int *cond)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int audit_set_cond(int *cond)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int audit_get_cwd(char *path, size_t sz)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int audit_get_fsize(au_fstat_t *fstat, size_t sz)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int audit_set_fsize(au_fstat_t *fstat, size_t sz)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int audit_get_kmask(au_mask_t *kmask, size_t sz)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int audit_set_kmask(au_mask_t *kmask, size_t sz)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int audit_get_kaudit(auditinfo_addr_t *aia, size_t sz)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int audit_set_kaudit(auditinfo_addr_t *aia, size_t sz)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int audit_set_pmask(auditpinfo_t *api, size_t sz)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int audit_get_pinfo(auditpinfo_t *api, size_t sz)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int audit_get_pinfo_addr(auditpinfo_addr_t *apia, size_t sz)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int audit_get_policy(int *policy)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int audit_set_policy(int *policy)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int audit_get_qctrl(au_qctrl_t *qctrl, size_t sz)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int audit_set_qctrl(au_qctrl_t *qctrl, size_t sz)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int audit_get_sflags(uint64_t *flags)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int audit_set_sflags(uint64_t flags)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int audit_get_sflags_mask(const char *which, uint64_t *mask)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int audit_set_sflags_mask(const char *which, uint64_t mask)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int audit_get_sinfo_addr(auditinfo_addr_t *aia, size_t sz)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int audit_get_stat(au_stat_t *stats, size_t sz)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int audit_set_stat(au_stat_t *stats, size_t sz)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int audit_send_trigger(int *trigger)
-	API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int audit_get_ctlmode(au_ctlmode_t *mode, size_t sz)
-	API_AVAILABLE(macos(10.14)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 int audit_get_expire_after(au_expire_after_t *expire, size_t sz)
-	API_AVAILABLE(macos(10.14)) API_UNAVAILABLE(ios, watchos, tvos);
+	API_DEPRECATED("audit is deprecated", macos(10.8, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 __END_DECLS
 

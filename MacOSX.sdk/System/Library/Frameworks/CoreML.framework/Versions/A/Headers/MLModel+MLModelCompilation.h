@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param modelURL URL file path to .mlmodel file you wish to compile
  * @param error Any errors are surfaced here
  *
- * @returns a URL to the compiled .mlmodelc bundle if successful
+ * @returns a URL to the compiled .mlmodelc directory if successful
  * The model is compiled to a temporary location on disk
  * You must move the compiled model to a permenant location if you wish to keep it
  *

@@ -99,6 +99,7 @@
 #include <sys/cdefs.h>
 
 
+
 __BEGIN_DECLS
 
 extern void thread_mtx_lock(thread_t thread);
@@ -128,6 +129,7 @@ __END_DECLS
 __BEGIN_DECLS
 
 
+
 /*! @function thread_has_thread_name
  *   @abstract Checks if a thread has a name.
  *   @discussion This function takes one input, a thread, and returns a boolean value indicating if that thread already has a name associated with it.
@@ -143,6 +145,7 @@ extern boolean_t thread_has_thread_name(thread_t th);
  *   @param name The name to apply to the thread.
  */
 extern void thread_set_thread_name(thread_t th, const char* name);
+
 
 /*! @function kernel_thread_start
  *   @abstract Create a kernel thread.

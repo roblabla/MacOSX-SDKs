@@ -26,6 +26,14 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos)
  */
 @property (readonly, strong, nonnull) NSMeasurement<NSUnitDuration *> *cumulativeCPUTime;
 
+/*!
+ @property      cumulativeCPUInstructions
+ @abstract      CPU instructions retired aggregated cumulatively.
+ @discussion    The data here represents the total number of CPU instructions an application retired over the date range of the containing payload.
+ @discussion    Dimensionless.
+ */
+@property (readonly, strong, nonnull) NSMeasurement<NSUnit *> *cumulativeCPUInstructions API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, tvos, watchos);
+
 @end
 
 NS_ASSUME_NONNULL_END

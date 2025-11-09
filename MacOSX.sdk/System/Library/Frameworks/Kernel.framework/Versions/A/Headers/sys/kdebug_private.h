@@ -144,7 +144,11 @@ extern unsigned int kdebug_enable;
  * Ensure that both LP32 and LP64 variants of arm64 use the same kd_buf
  * structure.
  */
+#if defined(__arm64__)
+typedef uint64_t kd_buf_argtype;
+#else
 typedef uintptr_t kd_buf_argtype;
+#endif
 
 typedef struct {
 	uint64_t timestamp;
@@ -293,7 +297,11 @@ typedef struct {
 
 typedef struct {
 	/* the thread ID */
+#if defined(__arm64__)
+	uint64_t thread;
+#else
 	uintptr_t thread;
+#endif
 	/* 0 for invalid, otherwise the PID (or 1 for kernel_task) */
 	int valid;
 	/* the name of the process owning the thread */

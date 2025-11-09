@@ -1,9 +1,10 @@
+#if !__has_include(<AVFCore/AVAssetResourceLoader.h>)
 /*
 	File:  AVAssetResourceLoader.h
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2019 Apple Inc. All rights reserved.
+	Copyright 2010-2020 Apple Inc. All rights reserved.
 
 */
 
@@ -389,7 +390,8 @@ AV_INIT_UNAVAILABLE
  @abstract		Provides data to the receiver.
  @param			data
  				An instance of NSData containing some or all of the requested bytes.
- @discussion	May be invoked multiple times on the same instance of AVAssetResourceLoadingDataRequest to provide the full range of requested data incrementally. Upon each invocation, the value of currentOffset will be updated to accord with the amount of data provided. When calling this method, the application releases ownership of the data object; buffer reuse is not allowed.
+ @discussion	May be invoked multiple times on the same instance of AVAssetResourceLoadingDataRequest to provide the full range of requested data incrementally. Upon each invocation, the value of currentOffset will be updated to accord with the amount of data provided.
+				The instance of NSData that you provide may be retained for use in parsing or other processing for an indefinite period of time after this method returns. For this reason, if you are providing an instance of NSMutableData, you should avoid mutating it further after sharing its contents. If you are managing your own memory pool for I/O and resource loading, consider using -[NSData initWithBytesNoCopy:length:deallocator:] in order to receive notification of the earliest opportunity for safe recycling of the underlying memory.
 */
 - (void)respondWithData:(NSData *)data;
 
@@ -463,8 +465,12 @@ AVF_EXPORT NSString *const AVAssetResourceLoadingRequestStreamingContentKeyReque
 					-[AVAssetResourceLoadingDataRequest respondWithData:] to provide data, and
 					-[AVAssetResourceLoadingRequest finishLoading] to indicate that loading is finished.
 */
-- (void)finishLoadingWithResponse:(nullable NSURLResponse *)response data:(nullable NSData *)data redirect:(nullable NSURLRequest *)redirect API_DEPRECATED("No longer supported", ios(6.0, 7.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(macos);
+- (void)finishLoadingWithResponse:(nullable NSURLResponse *)response data:(nullable NSData *)data redirect:(nullable NSURLRequest *)redirect API_DEPRECATED("No longer supported", macos(10.15, 10.15), ios(6.0, 7.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos);
 
 @end
 
 NS_ASSUME_NONNULL_END
+
+#else
+#import <AVFCore/AVAssetResourceLoader.h>
+#endif

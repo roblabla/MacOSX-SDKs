@@ -2,7 +2,7 @@
 //  SCNSceneRenderer.h
 //  SceneKit
 //
-//  Copyright © 2012-2019 Apple Inc. All rights reserved.
+//  Copyright © 2012-2020 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SceneKitTypes.h>
@@ -129,7 +129,7 @@ typedef NS_OPTIONS(NSUInteger, SCNDebugOptions) {
  @method projectPoint
  @abstract Projects a point in the world coordinate system using the receiver's current point of view and viewport.
  @param point The world position to be projected.
- @discussion A point projected from the near (resp. far) clip plane will have a z component of 0 (resp. 1).
+ @discussion A point projected from the near (resp. far) clip plane will have a z component of 0 (resp. 1). Starting in macOS 11.0, iOS 14, tvOS 14 and watchOS 7 the range of z component will be reversed (from 1 to 0) if the receiver uses 'reverseZ'.
  */
 - (SCNVector3)projectPoint:(SCNVector3)point API_AVAILABLE(macos(10.9));
 
@@ -137,7 +137,7 @@ typedef NS_OPTIONS(NSUInteger, SCNDebugOptions) {
  @method unprojectPoint
  @abstract Unprojects a screenspace 2D point with depth info using the receiver's current point of view and viewport.
  @param point The screenspace position to be unprojected.
- @discussion A point whose z component is 0 (resp. 1) is unprojected on the near (resp. far) clip plane.
+ @discussion A point whose z component is 0 (resp. 1) is unprojected on the near (resp. far) clip plane. Starting in macOS 11.0, iOS 14, tvOS 14 and watchOS 7 the range of the z component will be reversed (from 1 to 0) if the receiver uses 'reverseZ'.
  */
 - (SCNVector3)unprojectPoint:(SCNVector3)point API_AVAILABLE(macos(10.9));
 
@@ -177,9 +177,9 @@ typedef NS_OPTIONS(NSUInteger, SCNDebugOptions) {
 
 /*!
  @property temporalAntialiasingEnabled
- @abstract Specifies whether the receiver should reduce aliasing artifacts in real time based on temporal coherency.
+ @abstract Specifies whether the receiver should reduce aliasing artifacts in real time based on temporal coherency. Defaults to NO.
  */
-@property(nonatomic, getter=isTemporalAntialiasingEnabled) BOOL temporalAntialiasingEnabled API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));;
+@property(nonatomic, getter=isTemporalAntialiasingEnabled) BOOL temporalAntialiasingEnabled API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
 
 /*!
  @method prepareObject:shouldAbortBlock:
@@ -239,9 +239,15 @@ typedef NS_OPTIONS(NSUInteger, SCNDebugOptions) {
 
 /*!
  @property currentRenderCommandEncoder
- @abstract The current render command encoder if any. This property is only valid within the SCNSceneRendererDelegate methods and when renderering with Metal. Otherwise it is set to nil.
+ @abstract The current render command encoder if any. This property is only valid within the SCNSceneRendererDelegate methods and when rendering with Metal. Otherwise it is set to nil.
  */
 @property(nonatomic, readonly, nullable) id <MTLRenderCommandEncoder> currentRenderCommandEncoder API_AVAILABLE(macos(10.11), ios(9.0));
+
+/*!
+ @property currentRenderPassDescriptor
+ @abstract The render pass descriptor of the receiver. This property is only valid within the SCNSceneRendererDelegate methods and when rendering with Metal. Otherwise it is set to nil.
+ */
+@property(nonatomic, readonly) MTLRenderPassDescriptor *currentRenderPassDescriptor API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property device

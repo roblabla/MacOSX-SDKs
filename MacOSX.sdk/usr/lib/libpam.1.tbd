@@ -1,10 +1,16 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 67F2AC3A-3FD9-3D86-AE0A-24C25C3ED175' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           920162BA-1F25-3CF0-9A9A-FF9668B7FA01
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           2396053A-78C1-36D2-81CC-6EC91CD217EB
 install-name:    '/usr/lib/libpam.1.dylib'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _dlfailure, _libopenpam, _misc_conv, _pam_acct_mgmt, _pam_authenticate, 
                        _pam_chauthtok, _pam_close_session, _pam_end, _pam_get_data, 
                        _pam_get_item, _pam_get_pass, _pam_get_user, _pam_getenv, 

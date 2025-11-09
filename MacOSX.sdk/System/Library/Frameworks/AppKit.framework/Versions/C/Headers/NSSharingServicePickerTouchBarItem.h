@@ -7,11 +7,19 @@
 
 #import <AppKit/NSTouchBarItem.h>
 #import <AppKit/NSSharingService.h>
+#import <AppKit/AppKitDefines.h>
+#import <TargetConditionals.h>
+
+#if !TARGET_OS_IPHONE
+@class NSImage;
+#else
+@class UIImage;
+#endif
 
 @protocol NSSharingServicePickerTouchBarItemDelegate;
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 API_AVAILABLE(macos(10.12.2), ios(10.13))
 @interface NSSharingServicePickerTouchBarItem : NSTouchBarItem

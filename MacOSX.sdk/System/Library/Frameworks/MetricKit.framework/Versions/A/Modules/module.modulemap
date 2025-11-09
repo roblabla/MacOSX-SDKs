@@ -1,4 +1,4 @@
-framework module MetricKit [extern_c] [system] {
+framework module MetricKit [system] {
     umbrella header "MetricKit.h"
 
     export *

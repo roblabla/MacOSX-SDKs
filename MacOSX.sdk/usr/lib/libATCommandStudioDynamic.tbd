@@ -1,10 +1,54 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 4224D4B7-C35F-3FE0-9C6E-C7B737FFB9A2' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           A4BD7CB2-E33F-3375-B109-B4B6AA918A1E
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           B4584987-F2B0-3B37-93D2-682088139525
 install-name:    '/usr/lib/libATCommandStudioDynamic.dylib'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos ]
+    symbols:         [ __ZN14_ATCSException15constructCommonEPKcjS1_P13__va_list_tag, 
+                       __ZN14_ATCSException6appendEPKcP13__va_list_tag ]
+    weak-symbols:    [ __ZTIN3ctu10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEE, 
+                       __ZTIN3ctu14SharedLoggableIN3qmi11ClientProxy5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
+                       __ZTIN3ctu14SharedLoggableIN3qmi18QMuxServerAccepter5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
+                       __ZTIN3ctu14SharedLoggableIN3qmi6Client5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
+                       __ZTIN3ctu14SharedLoggableIN3qmi6Server5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
+                       __ZTIN3ctu8LoggableIN3qmi11ClientProxy5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
+                       __ZTIN3ctu8LoggableIN3qmi18QMuxServerAccepter5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
+                       __ZTIN3ctu8LoggableIN3qmi6Client5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
+                       __ZTIN3ctu8LoggableIN3qmi6Server5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
+                       __ZTIN3qmi15QMuxClientIfaceE, __ZTIN3qmi18MutableMessageBase14TlvWrapperBaseE, 
+                       __ZTIN3qmi6Server8AccepterE, __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTINSt3__117bad_function_callE, __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTINSt3__123enable_shared_from_thisI10QMIControlEE, __ZTINSt3__123enable_shared_from_thisIN3qmi11ClientProxy5StateEEE, 
+                       __ZTINSt3__123enable_shared_from_thisIN3qmi18QMuxServerAccepter5StateEEE, 
+                       __ZTINSt3__123enable_shared_from_thisIN3qmi6Client5StateEEE, 
+                       __ZTINSt3__123enable_shared_from_thisIN3qmi6Server5StateEEE, 
+                       __ZTINSt3__123enable_shared_from_thisIN4QMux5StateEEE, __ZTSN10QMIControl7DeleterE, 
+                       __ZTSN3ctu10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEE, 
+                       __ZTSN3ctu14SharedLoggableIN3qmi11ClientProxy5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
+                       __ZTSN3ctu14SharedLoggableIN3qmi18QMuxServerAccepter5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
+                       __ZTSN3ctu14SharedLoggableIN3qmi6Client5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
+                       __ZTSN3ctu14SharedLoggableIN3qmi6Server5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
+                       __ZTSN3ctu8LoggableIN3qmi11ClientProxy5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
+                       __ZTSN3ctu8LoggableIN3qmi18QMuxServerAccepter5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
+                       __ZTSN3ctu8LoggableIN3qmi6Client5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
+                       __ZTSN3ctu8LoggableIN3qmi6Server5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
+                       __ZTSN3qmi15QMuxClientIfaceE, __ZTSN3qmi16TransactionQueue5State7DeleterE, 
+                       __ZTSN3qmi18MutableMessageBase14TlvWrapperBaseE, __ZTSN3qmi6Server8AccepterE, 
+                       __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTSNSt3__117bad_function_callE, __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
+                       __ZTSNSt3__123enable_shared_from_thisI10QMIControlEE, __ZTSNSt3__123enable_shared_from_thisIN3qmi11ClientProxy5StateEEE, 
+                       __ZTSNSt3__123enable_shared_from_thisIN3qmi18QMuxServerAccepter5StateEEE, 
+                       __ZTSNSt3__123enable_shared_from_thisIN3qmi6Client5StateEEE, 
+                       __ZTSNSt3__123enable_shared_from_thisIN3qmi6Server5StateEEE, 
+                       __ZTSNSt3__123enable_shared_from_thisIN4QMux5StateEEE, __ZTSPFvPN3xpc4dictEE ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _ATCSThreadJoin, _ATCSThreadKill, _ATCSThreadSpawn, _DEFAULT_XPC_CLIENT_SERVICE, 
                        __ZN10ATCSLogger10fsInstanceE, __ZN10ATCSLogger10logCommandE12ATCSLogGroupPKcS2_jPKNS_16CommandFormatterE, 
                        __ZN10ATCSLogger11getInstanceEv, __ZN10ATCSLogger11instantiateEPS_, 
@@ -76,16 +120,16 @@ exports:
                        __ZN13QMIWakeReason3setEN3qmi11buffer_viewEy, __ZN13QMIWakeReason5resetEv, 
                        __ZN13QMIWakeReasonC1Ev, __ZN13QMIWakeReasonC2Ev, __ZN13QMuxQueueItemC1EN3qmi11ServiceTypeEhRKNSt3__110shared_ptrINS0_17SerializedMessageEEE, 
                        __ZN13QMuxQueueItemC2EN3qmi11ServiceTypeEhRKNSt3__110shared_ptrINS0_17SerializedMessageEEE, 
-                       __ZN13QMuxQueueItemD1Ev, __ZN13QMuxQueueItemD2Ev, __ZN14_ATCSException15constructCommonEPKcjS1_P13__va_list_tag, 
-                       __ZN14_ATCSException16triggerAssertionEPKcjS1_S1_S1_, __ZN14_ATCSException16triggerAssertionEPKcjS1_S1_S1_S1_z, 
+                       __ZN13QMuxQueueItemD1Ev, __ZN13QMuxQueueItemD2Ev, __ZN14_ATCSException16triggerAssertionEPKcjS1_S1_S1_, 
+                       __ZN14_ATCSException16triggerAssertionEPKcjS1_S1_S1_S1_z, 
                        __ZN14_ATCSException16triggerAssertionEPKcjS1_S1_S1_mm, __ZN14_ATCSException16triggerAssertionEPKcjS1_S1_S1_mmS1_z, 
-                       __ZN14_ATCSException19setExceptionHandlerEPFvRS_E, __ZN14_ATCSException6appendEPKcP13__va_list_tag, 
-                       __ZN14_ATCSExceptionC1EPKcjS1_z, __ZN14_ATCSExceptionC1ERKS_, 
-                       __ZN14_ATCSExceptionC2EPKcjS1_z, __ZN14_ATCSExceptionC2ERKS_, 
-                       __ZN15ATCSTimerDriver14setNextTimeoutEi, __ZN15ATCSTimerDriver15timerDispatcherEv, 
-                       __ZN15ATCSTimerDriver24startATCSTimerDispatcherEPv, __ZN15ATCSTimerDriver6createEv, 
-                       __ZN15ATCSTimerDriverC1Ev, __ZN15ATCSTimerDriverC2Ev, __ZN15ATCSTimerDriverD0Ev, 
-                       __ZN15ATCSTimerDriverD1Ev, __ZN15ATCSTimerDriverD2Ev, __ZN21ATCSThreadedIPCDriver10readWorkerEv, 
+                       __ZN14_ATCSException19setExceptionHandlerEPFvRS_E, __ZN14_ATCSExceptionC1EPKcjS1_z, 
+                       __ZN14_ATCSExceptionC1ERKS_, __ZN14_ATCSExceptionC2EPKcjS1_z, 
+                       __ZN14_ATCSExceptionC2ERKS_, __ZN15ATCSTimerDriver14setNextTimeoutEi, 
+                       __ZN15ATCSTimerDriver15timerDispatcherEv, __ZN15ATCSTimerDriver24startATCSTimerDispatcherEPv, 
+                       __ZN15ATCSTimerDriver6createEv, __ZN15ATCSTimerDriverC1Ev, 
+                       __ZN15ATCSTimerDriverC2Ev, __ZN15ATCSTimerDriverD0Ev, __ZN15ATCSTimerDriverD1Ev, 
+                       __ZN15ATCSTimerDriverD2Ev, __ZN21ATCSThreadedIPCDriver10readWorkerEv, 
                        __ZN21ATCSThreadedIPCDriver11writeWorkerEv, __ZN21ATCSThreadedIPCDriver16readWorkerStaticEPv, 
                        __ZN21ATCSThreadedIPCDriver16tearDownInternalEv, __ZN21ATCSThreadedIPCDriver17bootstrapInternalEb, 
                        __ZN21ATCSThreadedIPCDriver17writeWorkerStaticEPv, __ZN21ATCSThreadedIPCDriver19stopWorkersInternalEv, 
@@ -373,41 +417,8 @@ exports:
                        __ZThn104_N3qmi18QMuxServerAccepter5State6acceptERKN3xpc4dictERKN8dispatch5queueE, 
                        __ZThn104_N3qmi18QMuxServerAccepter5StateD0Ev, __ZThn104_N3qmi18QMuxServerAccepter5StateD1Ev, 
                        _asString, _getMessageIdFromBuffer ]
-    weak-def-symbols: [ __ZGVN3ctu9SingletonINS_9LogServerEN4atcs9LogServerENS_23PthreadMutexGuardPolicyIS1_EEE9sInstanceE, 
-                        __ZN3ctu9SingletonINS_9LogServerEN4atcs9LogServerENS_23PthreadMutexGuardPolicyIS1_EEE9sInstanceE, 
-                        __ZTIN3ctu10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEE, 
-                        __ZTIN3ctu14SharedLoggableIN3qmi11ClientProxy5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
-                        __ZTIN3ctu14SharedLoggableIN3qmi18QMuxServerAccepter5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
-                        __ZTIN3ctu14SharedLoggableIN3qmi6Client5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
-                        __ZTIN3ctu14SharedLoggableIN3qmi6Server5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
-                        __ZTIN3ctu8LoggableIN3qmi11ClientProxy5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
-                        __ZTIN3ctu8LoggableIN3qmi18QMuxServerAccepter5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
-                        __ZTIN3ctu8LoggableIN3qmi6Client5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
-                        __ZTIN3ctu8LoggableIN3qmi6Server5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
-                        __ZTIN3qmi15QMuxClientIfaceE, __ZTIN3qmi18MutableMessageBase14TlvWrapperBaseE, 
-                        __ZTIN3qmi6Server8AccepterE, __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                        __ZTINSt3__117bad_function_callE, __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                        __ZTINSt3__123enable_shared_from_thisI10QMIControlEE, __ZTINSt3__123enable_shared_from_thisIN3qmi11ClientProxy5StateEEE, 
-                        __ZTINSt3__123enable_shared_from_thisIN3qmi18QMuxServerAccepter5StateEEE, 
-                        __ZTINSt3__123enable_shared_from_thisIN3qmi6Client5StateEEE, 
-                        __ZTINSt3__123enable_shared_from_thisIN3qmi6Server5StateEEE, 
-                        __ZTINSt3__123enable_shared_from_thisIN4QMux5StateEEE, __ZTSN10QMIControl7DeleterE, 
-                        __ZTSN3ctu10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEE, 
-                        __ZTSN3ctu14SharedLoggableIN3qmi11ClientProxy5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
-                        __ZTSN3ctu14SharedLoggableIN3qmi18QMuxServerAccepter5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
-                        __ZTSN3ctu14SharedLoggableIN3qmi6Client5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
-                        __ZTSN3ctu14SharedLoggableIN3qmi6Server5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
-                        __ZTSN3ctu8LoggableIN3qmi11ClientProxy5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
-                        __ZTSN3ctu8LoggableIN3qmi18QMuxServerAccepter5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
-                        __ZTSN3ctu8LoggableIN3qmi6Client5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
-                        __ZTSN3ctu8LoggableIN3qmi6Server5StateENS_10LoggerBaseINSt3__110shared_ptrINS_9LogServerEEEEEEE, 
-                        __ZTSN3qmi15QMuxClientIfaceE, __ZTSN3qmi16TransactionQueue5State7DeleterE, 
-                        __ZTSN3qmi18MutableMessageBase14TlvWrapperBaseE, __ZTSN3qmi6Server8AccepterE, 
-                        __ZTSNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                        __ZTSNSt3__117bad_function_callE, __ZTSNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
-                        __ZTSNSt3__123enable_shared_from_thisI10QMIControlEE, __ZTSNSt3__123enable_shared_from_thisIN3qmi11ClientProxy5StateEEE, 
-                        __ZTSNSt3__123enable_shared_from_thisIN3qmi18QMuxServerAccepter5StateEEE, 
-                        __ZTSNSt3__123enable_shared_from_thisIN3qmi6Client5StateEEE, 
-                        __ZTSNSt3__123enable_shared_from_thisIN3qmi6Server5StateEEE, 
-                        __ZTSNSt3__123enable_shared_from_thisIN4QMux5StateEEE, __ZTSPFvPN3xpc4dictEE ]
+    weak-symbols:    [ __ZGVN3ctu9SingletonINS_9LogServerEN4atcs9LogServerENS_23PthreadMutexGuardPolicyIS1_EEE9sInstanceE, 
+                       __ZN3ctu9SingletonINS_9LogServerEN4atcs9LogServerENS_23PthreadMutexGuardPolicyIS1_EEE9sInstanceE ]
+  - targets:         [ arm64e-macos, arm64-macos ]
+    symbols:         [ __ZN14_ATCSException15constructCommonEPKcjS1_Pc, __ZN14_ATCSException6appendEPKcPc ]
 ...

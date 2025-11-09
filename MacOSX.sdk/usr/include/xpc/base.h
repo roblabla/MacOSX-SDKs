@@ -29,6 +29,8 @@ __BEGIN_DECLS
 #include <Availability.h>
 #endif // __has_include(<xpc/availability.h>)
 
+#include <os/availability.h>
+
 #ifndef __XPC_INDIRECT__
 #error "Please #include <xpc/xpc.h> instead of this file directly."
 #endif // __XPC_INDIRECT__ 
@@ -87,10 +89,9 @@ __BEGIN_DECLS
 
 #if defined(__XPC_TEST__) && __XPC_TEST__
 #define XPC_TESTSTATIC
-#define XPC_TESTEXTERN(x) extern x
+#define XPC_TESTEXTERN extern
 #else // defined(__XPC_TEST__) && __XPC_TEST__
 #define XPC_TESTSTATIC static
-#define XPC_TESTEXTERN(x)
 #endif // defined(__XPC_TEST__) && __XPC_TEST__
 
 #if __has_feature(objc_arc)

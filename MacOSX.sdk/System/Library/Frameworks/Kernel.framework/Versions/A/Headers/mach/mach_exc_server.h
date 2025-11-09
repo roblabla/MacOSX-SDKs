@@ -189,7 +189,7 @@ extern const struct catch_mach_exc_subsystem {
 		int64_t code[2];
 		int flavor;
 		mach_msg_type_number_t old_stateCnt;
-		natural_t old_state[614];
+		natural_t old_state[1296];
 	} __Request__mach_exception_raise_state_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack(pop)
@@ -211,7 +211,7 @@ extern const struct catch_mach_exc_subsystem {
 		int64_t code[2];
 		int flavor;
 		mach_msg_type_number_t old_stateCnt;
-		natural_t old_state[614];
+		natural_t old_state[1296];
 	} __Request__mach_exception_raise_state_identity_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack(pop)
@@ -255,7 +255,7 @@ union __RequestUnion__catch_mach_exc_subsystem {
 		kern_return_t RetCode;
 		int flavor;
 		mach_msg_type_number_t new_stateCnt;
-		natural_t new_state[614];
+		natural_t new_state[1296];
 	} __Reply__mach_exception_raise_state_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack(pop)
@@ -270,7 +270,7 @@ union __RequestUnion__catch_mach_exc_subsystem {
 		kern_return_t RetCode;
 		int flavor;
 		mach_msg_type_number_t new_stateCnt;
-		natural_t new_state[614];
+		natural_t new_state[1296];
 	} __Reply__mach_exception_raise_state_identity_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack(pop)

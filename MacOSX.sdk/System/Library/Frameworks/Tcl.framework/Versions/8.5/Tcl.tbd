@@ -1,12 +1,18 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: BDE30ED5-D91C-30BB-AE79-9D469CE2692A' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           A02E535B-0EB3-39EF-A30F-395C0F938521
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           28207B3F-CF07-35D0-B57C-13C36E466D62
 install-name:    '/System/Library/Frameworks/Tcl.framework/Versions/8.5/Tcl'
 current-version: 8.5.9
 compatibility-version: 8.5
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _TclAddLiteralObj, _TclAllocateFreeObjects, _TclBN_epoch, 
                        _TclBN_fast_s_mp_mul_digs, _TclBN_fast_s_mp_sqr, _TclBN_mp_add, 
                        _TclBN_mp_add_d, _TclBN_mp_and, _TclBN_mp_clamp, _TclBN_mp_clear, 

@@ -25,10 +25,10 @@ NS_ASSUME_NONNULL_BEGIN
  				Highlighted state of the active picker. The picker has this state when it is highlighted and AirPlay is active.
  */
 typedef NS_ENUM(NSInteger, AVRoutePickerViewButtonState) {
-	AVRoutePickerViewButtonStateNormal,
-	AVRoutePickerViewButtonStateNormalHighlighted,
-	AVRoutePickerViewButtonStateActive,
-	AVRoutePickerViewButtonStateActiveHighlighted
+	AVRoutePickerViewButtonStateNormal = 0,
+	AVRoutePickerViewButtonStateNormalHighlighted = 1,
+	AVRoutePickerViewButtonStateActive = 2,
+	AVRoutePickerViewButtonStateActiveHighlighted = 3
 } NS_SWIFT_NAME(AVRoutePickerView.ButtonState) API_AVAILABLE(macos(10.15));
 
 /*!
@@ -74,7 +74,7 @@ API_AVAILABLE(macos(10.15))
  	@property 	player
  	@abstract	The player for which to perform routing operations.
  */
-@property (nonatomic, nullable) AVPlayer *player;
+@property (nonatomic, strong, nullable) AVPlayer *player;
 
 @end
 

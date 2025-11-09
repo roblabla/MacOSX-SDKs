@@ -47,7 +47,6 @@ NW_OBJECT_DECL(nw_browser);
  * @typedef nw_browser_state_t
  * @abstract
  *		Browser states sent by nw_browser_set_state_changed_handler.
- *		States progress forward and do not move backwards.
  */
 typedef enum {
 
@@ -75,6 +74,13 @@ typedef enum {
 	 *		browser to restart it. Instead, create a new browser object.
 	 */
 	nw_browser_state_cancelled = 3,
+
+	/*! @const nw_browser_state_waiting The browser is waiting for connectivity.
+	 *		Results will not be delivered until the browser moves into the ready
+	 *		state. A browser can move from the ready state into the waiting state.
+	 *		The associated error indicates why the browser is unable to browse.
+	 */
+	nw_browser_state_waiting = 4,
 } nw_browser_state_t;
 
 /*!

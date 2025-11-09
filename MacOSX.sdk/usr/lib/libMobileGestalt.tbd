@@ -1,10 +1,24 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 0004FCE7-5945-32BE-8CD5-06867AC5A8AD', 'x86_64: 0004FCE7-5945-32BE-8CD5-06867AC5A8AD' ]
-platform:        zippered
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           8A8B70AA-A9CC-3B95-8A19-7D9AE4F13350
+  - target:          x86_64-maccatalyst
+    value:           8A8B70AA-A9CC-3B95-8A19-7D9AE4F13350
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           E443B429-DACF-34B1-9418-0248E3CD5F16
+  - target:          arm64e-maccatalyst
+    value:           E443B429-DACF-34B1-9418-0248E3CD5F16
 install-name:    '/usr/lib/libMobileGestalt.dylib'
-exports:         
-  - archs:           [ x86_64 ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
     symbols:         [ _MGCancelNotifications, _MGCopyAnswer, _MGCopyAnswerWithError, 
                        _MGCopyMultipleAnswers, _MGGetBoolAnswer, _MGGetFloat32Answer, 
                        _MGGetProductType, _MGGetSInt32Answer, _MGGetSInt64Answer, 
@@ -14,8 +28,9 @@ exports:
                        __MGCacheValid, __MGClearInProcessCache, __MGCopyDeviceDescription, 
                        __MGCopyIteratedDeviceDescription, __MGGetFastPathLog, __MGIterateDevices, 
                        __MGLog, __MGPrintIteratedDeviceDescription, __MGRebuildCache, 
-                       __MGServerCopyAnswerWithError, __MGServerQuestionIsPlatform, 
-                       __MGSetServer, __MGWaitForDevices, __MGWriteCache, _kMGQDiskUsageAmountDataAvailable, 
+                       __MGRebuildCache4PurpleRestore, __MGServerCopyAnswerWithError, 
+                       __MGServerQuestionIsPlatform, __MGSetServer, __MGWaitForDevices, 
+                       __MGWriteCache, __MGWriteCacheOnHelper, _is_restore_os, _kMGQDiskUsageAmountDataAvailable, 
                        _kMGQDiskUsageAmountDataReserved, _kMGQDiskUsageAmountRestoreAvailable, 
                        _kMGQDiskUsageTotalDataAvailable, _kMGQDiskUsageTotalDataCapacity, 
                        _kMGQDiskUsageTotalDiskCapacity, _kMGQDiskUsageTotalSystemAvailable, 

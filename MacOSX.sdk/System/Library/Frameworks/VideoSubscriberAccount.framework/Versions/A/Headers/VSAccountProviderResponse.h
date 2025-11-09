@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// An opaque protocol name, to be coordinated with specific account providers.
-typedef NSString *VSAccountProviderAuthenticationScheme NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString *VSAccountProviderAuthenticationScheme NS_EXTENSIBLE_STRING_ENUM API_UNAVAILABLE(macCatalyst);
 
 /// The authentication scheme for responses that use the SAML protocol.
 VS_EXTERN VSAccountProviderAuthenticationScheme const VSAccountProviderAuthenticationSchemeSAML

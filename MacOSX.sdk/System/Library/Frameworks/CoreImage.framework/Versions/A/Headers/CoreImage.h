@@ -27,10 +27,8 @@
 #import <CoreImage/CIRAWFilter.h>
 #import <CoreImage/CIRenderDestination.h>
 #import <CoreImage/CIBarcodeDescriptor.h>
-#if !TARGET_OS_IPHONE
 #import <CoreImage/CIFilterGenerator.h>
 #import <CoreImage/CIPlugIn.h>
-#endif
 
 #endif /* __OBJC__ */
 

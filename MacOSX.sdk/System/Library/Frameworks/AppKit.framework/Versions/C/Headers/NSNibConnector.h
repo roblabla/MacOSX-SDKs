@@ -9,11 +9,11 @@
 #import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @interface NSNibConnector : NSObject <NSCoding>
-@property (nullable, assign) id source;
-@property (nullable, assign) id destination;
+@property (nullable, weak) id source;
+@property (nullable, weak) id destination;
 @property (copy) NSString *label;
 - (void)replaceObject:(id)oldObject withObject:(id)newObject;
 - (void)establishConnection;

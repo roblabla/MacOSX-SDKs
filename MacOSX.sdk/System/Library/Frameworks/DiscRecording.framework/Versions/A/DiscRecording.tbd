@@ -1,11 +1,19 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 35184B42-9A41-37CB-9FE8-B6A0C5025E26' ]
-platform:        macosx
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           0655CEF5-866F-318E-84D2-A71A06721028
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           9A5DC481-580C-35AA-874B-1E843E4B17FE
 install-name:    '/System/Library/Frameworks/DiscRecording.framework/Versions/A/DiscRecording'
-exports:         
-  - archs:           [ x86_64 ]
-    re-exports:      [ '/usr/lib/libobjc.A.dylib' ]
+reexported-libraries:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    libraries:       [ '/usr/lib/libobjc.A.dylib' ]
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
     symbols:         [ _DRAbstractFile, _DRAccessDate, _DRAllFilesystems, _DRApplicationIdentifier, 
                        _DRAttributeModificationDate, _DRAudioFourChannelKey, _DRAudioPreEmphasisKey, 
                        _DRAudioTrackCreate, _DRAudioTrackCreateWithURL, _DRBackupDate, 

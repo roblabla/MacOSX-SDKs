@@ -651,7 +651,7 @@ CF_ENUM(UInt32)
                         their clock domain as well.
     @constant       kAudioDevicePropertyDeviceIsAlive
                         A UInt32 where a value of 1 means the device is ready and available and 0
-                        means the device is usable and will most likely go away shortly.
+                        means the device is unusable and will most likely go away shortly.
     @constant       kAudioDevicePropertyDeviceIsRunning
                         A UInt32 where a value of 0 means the AudioDevice is not performing IO and
                         a value of 1 means that it is. Note that the device can be running even if

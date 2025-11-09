@@ -1,4 +1,4 @@
-framework module DiscRecording [extern_c] {
+framework module DiscRecording [system] {
     umbrella header "DiscRecording.h"
     export *
     module * { export * }

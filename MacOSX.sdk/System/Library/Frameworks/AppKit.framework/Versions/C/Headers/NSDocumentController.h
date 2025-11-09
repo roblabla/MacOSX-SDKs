@@ -8,11 +8,12 @@
 #import <AppKit/NSNibDeclarations.h>
 #import <AppKit/NSMenu.h>
 #import <AppKit/NSUserInterfaceValidation.h>
+#import <AppKit/AppKitDefines.h>
 #import <Foundation/NSArray.h>
 #import <Foundation/NSDate.h>
 
 NS_ASSUME_NONNULL_BEGIN
-API_UNAVAILABLE_BEGIN(ios)
+APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @class NSDocument, NSError, NSMenuItem, NSMutableDictionary, NSOpenPanel, NSURL, NSWindow;
 
