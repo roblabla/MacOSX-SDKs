@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4AC87ABD-6057-378F-BE34-49B1EB62947E
+    value:           E98F6470-B439-339B-B571-00D1FE746A80
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A66BCC85-0C60-3415-A362-0067EF756AA7
+    value:           B8EF922B-2C0E-3F95-B6F7-1F324CF94CEE
 install-name:    '/System/Library/PrivateFrameworks/PowerUI.framework/Versions/A/PowerUI'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -28,17 +28,20 @@ exports:
                        _kIdlingFloorCheckInterval, _kLocationPredictionDeadlineOverride, 
                        _kMaximumPredictedDuration, _kMinDurationForDesktopEvaluation, 
                        _kMinWaitInterval, _kMinimumPredictedDuration, _kMinimumVisitsForLOIPrediction, 
-                       _kOBCDefaultsDomain, _kRemoteOBCDeadlineKey, _kRemoteOBCOriginalDeadlineKey, 
-                       _kStartingRemoteLocationKey, _kTestModeKey ]
+                       _kOBCDefaultsDomain, _kPendingSyncDuration, _kPendingSyncStateDefaultsKey, 
+                       _kRemoteOBCDeadlineKey, _kRemoteOBCOriginalDeadlineKey, _kStartingRemoteLocationKey, 
+                       _kTestModeKey ]
     objc-classes:    [ PowerUIBatteryMitigationManager, PowerUICECGridDataManager, 
                        PowerUICECManager, PowerUICECPredictedTimeManager, PowerUICalendarSignalMonitor, 
                        PowerUIChargingController, PowerUIDefines, PowerUIDesktopModePredictor, 
-                       PowerUILocationSignalMonitor, PowerUIMLAudioAccessoryModelPredictor, 
-                       PowerUIMLMacPredictor, PowerUIMLPhonePredictor, PowerUIMLRelevantDrainPredictor, 
+                       PowerUIIntelligenceManager, PowerUILocationSignalMonitor, 
+                       PowerUIMLAudioAccessoryModelPredictor, PowerUIMLMacPredictor, 
+                       PowerUIMLPhonePredictor, PowerUIMLRelevantDrainPredictor, 
                        PowerUIMLTwoStageModelPredictor, PowerUIMLWatchPredictor, 
                        PowerUIModelPredictionContainer, PowerUINotificationManager, 
                        PowerUIPredictorHelper, PowerUIRelevantDrainPredictionResult, 
-                       PowerUIRemoteLocationMonitor, PowerUISleepWakeMonitor, PowerUISmartChargeClient, 
-                       PowerUISmartChargeManager, PowerUISmartChargeManagerUnsupported, 
-                       PowerUISmartChargeUtilities, PowerUITrialManager, PowerUIWakeRequestSignalMonitor ]
+                       PowerUIRemoteLocationMonitor, PowerUISleepBasedPredictor, 
+                       PowerUISleepWakeMonitor, PowerUISmartChargeClient, PowerUISmartChargeManager, 
+                       PowerUISmartChargeManagerUnsupported, PowerUISmartChargeUtilities, 
+                       PowerUITrialManager, PowerUIWakeRequestSignalMonitor ]
 ...

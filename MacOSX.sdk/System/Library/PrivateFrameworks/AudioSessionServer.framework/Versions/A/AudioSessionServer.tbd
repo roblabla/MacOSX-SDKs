@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4671B795-F2A9-38E3-A5ED-082ED9CBB909
+    value:           17EA6884-242F-36A7-A9B4-65D3D470CA6C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1F8B620F-5001-3796-8BFB-8A22EE86CF92
+    value:           FE441E84-B931-3D02-B5DB-5A6525215699
 install-name:    '/System/Library/PrivateFrameworks/AudioSessionServer.framework/Versions/A/AudioSessionServer'
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

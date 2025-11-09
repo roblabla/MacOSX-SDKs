@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7E1AE389-AC7E-3B83-B5BF-62B9C28D41A1
+    value:           0F8F1A1A-E66E-3A3D-8BB8-7367A528876D
   - target:          x86_64-maccatalyst
-    value:           7E1AE389-AC7E-3B83-B5BF-62B9C28D41A1
+    value:           0F8F1A1A-E66E-3A3D-8BB8-7367A528876D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           77AD21CD-939B-37C0-A813-028FF1289482
+    value:           AC3ACCEE-A06B-3CE2-958E-B342CFC30F21
   - target:          arm64e-maccatalyst
-    value:           77AD21CD-939B-37C0-A813-028FF1289482
+    value:           AC3ACCEE-A06B-3CE2-958E-B342CFC30F21
 install-name:    '/System/Library/PrivateFrameworks/AppleMediaServices.framework/Versions/A/AppleMediaServices'
 swift-abi-version: 7
 exports:
@@ -112,6 +112,7 @@ exports:
                        '_$s18AppleMediaServices8FlagKeysO15AgeVerificationyA2CmFWC', 
                        '_$s18AppleMediaServices8FlagKeysO15ServerDataCacheyA2CmFWC', 
                        '_$s18AppleMediaServices8FlagKeysO15StorageDatabaseyA2CmFWC', 
+                       '_$s18AppleMediaServices8FlagKeysO17TextEncapsulationyA2CmFWC', 
                        '_$s18AppleMediaServices8FlagKeysO18BiometricsRefactoryA2CmFWC', 
                        '_$s18AppleMediaServices8FlagKeysO18iTunesStoreMetricsyA2CmFWC', 
                        '_$s18AppleMediaServices8FlagKeysO19GlobalCookieCleanupyA2CmFWC', 
@@ -292,12 +293,14 @@ exports:
                        _AMSNetworkQualityInquiryReportKeyRadioTechnology, _AMSNetworkTypeCellular, 
                        _AMSNetworkTypeNone, _AMSNetworkTypeWiFi, _AMSODISessionIdentifierApplicationCreate, 
                        _AMSODISessionIdentifierApplicationSubmit, _AMSODISessionIdentifierIdUpdate, 
-                       _AMSPaymentSheetContentItemSizeAttribute, _AMSPaymentSheetContentItemSizeAttributeLargeValue, 
-                       _AMSPaymentSheetContentItemSpacingAfterAttribute, _AMSPaymentSheetContentItemSpacingAttributeLargeValue, 
-                       _AMSPaymentSheetContentItemSpacingAttributeMediumValue, _AMSPaymentSheetContentItemSpacingAttributeSmallValue, 
-                       _AMSPaymentSheetContentItemSpacingBeforeAttribute, _AMSPaymentSheetDesignVersion_1_0, 
+                       _AMSPaymentSheetContentItemMPAARating, _AMSPaymentSheetContentItemSizeAttribute, 
+                       _AMSPaymentSheetContentItemSizeAttributeLargeValue, _AMSPaymentSheetContentItemSpacingAfterAttribute, 
+                       _AMSPaymentSheetContentItemSpacingAttributeLargeValue, _AMSPaymentSheetContentItemSpacingAttributeMediumValue, 
+                       _AMSPaymentSheetContentItemSpacingAttributeSmallValue, _AMSPaymentSheetContentItemSpacingBeforeAttribute, 
+                       _AMSPaymentSheetContentItemTextEncapsulation, _AMSPaymentSheetDesignVersion_1_0, 
                        _AMSPaymentSheetDesignVersion_2_0, _AMSPaymentSheetPaymentRequest, 
                        _AMSPaymentSheetPaymentRequestMetadata, _AMSPaymentSheetPaymentRequestMetadataKeyRequestor, 
+                       _AMSPaymentSheetPaymentRequestMetadataKeySecondaryContentRange, 
                        _AMSPushActionTypeAlertNotification, _AMSPushActionTypeBadging, 
                        _AMSPushActionTypeEngagement, _AMSPushActionTypeFetchDataCache, 
                        _AMSPushActionTypeFollowUp, _AMSPushActionTypeGenericNotification, 

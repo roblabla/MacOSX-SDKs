@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           484DC7DA-B328-3D6B-8C70-A1C504B3D18E
+    value:           6C7B67DF-67D7-3170-94FD-128738F3E82C
   - target:          x86_64-maccatalyst
-    value:           484DC7DA-B328-3D6B-8C70-A1C504B3D18E
+    value:           6C7B67DF-67D7-3170-94FD-128738F3E82C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AF1BD737-1D84-3979-A8B8-E94C3BBBBBBF
+    value:           32A5538B-95D5-359A-81A9-2EE0F78E3480
   - target:          arm64e-maccatalyst
-    value:           AF1BD737-1D84-3979-A8B8-E94C3BBBBBBF
+    value:           32A5538B-95D5-359A-81A9-2EE0F78E3480
 install-name:    '/System/Library/PrivateFrameworks/TextInput.framework/Versions/A/TextInput'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -24,10 +24,10 @@ exports:
                        _IXASessionAlignmentLogFacility, _IXASessionDetailsLogFacility, 
                        _IXASessionEventsLogFacility, _IXATypingEffortLogFacility, 
                        _IXA_IS_INTERNAL_INSTALL, _TIAccessibilityServiceName, _TIAddressBookChangedNotification, 
-                       _TIAnalyticsDomain, _TIAnalyticsErrorDomain, _TIAnalyticsFieldErrorDomain, 
-                       _TIAppleKeyboardsExpandedPreference, _TIAppleKeyboardsIncludeIntlPreference, 
-                       _TIAppleKeyboardsPreference, _TIAppleLanguagesPreference, 
-                       _TIAppleLocalePreference, _TIApplePasscodeKeyboardsPreference, 
+                       _TIAnalyticsErrorDomain, _TIAnalyticsFieldErrorDomain, _TIAnalyticsInputAnalyticsDomain, 
+                       _TIAnalyticsKeyboardDomain, _TIAppleKeyboardsExpandedPreference, 
+                       _TIAppleKeyboardsIncludeIntlPreference, _TIAppleKeyboardsPreference, 
+                       _TIAppleLanguagesPreference, _TIAppleLocalePreference, _TIApplePasscodeKeyboardsPreference, 
                        _TIAutofillServiceName, _TIAutomaticMinimizationEnabledPreference, 
                        _TIBundleForInputMode, _TIBundlePathForInputMode, _TICachedResourcePathForInputMode, 
                        _TICandidateAcceptedTriggerUnknown, _TICandidateAcceptedTriggerUserBeganContinuousPath, 

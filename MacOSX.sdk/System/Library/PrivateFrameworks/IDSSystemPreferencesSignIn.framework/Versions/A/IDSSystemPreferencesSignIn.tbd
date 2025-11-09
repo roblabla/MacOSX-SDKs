@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DB427B32-FB4A-3836-81B7-4F5870A0CC68
+    value:           2722868A-3247-3FB6-B34C-593028D33DF0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7C30BB23-830D-3062-821F-AEA36DDA65E7
+    value:           B79D8CC8-50E2-31ED-9F64-51F9ABAFF3E0
 install-name:    '/System/Library/PrivateFrameworks/IDSSystemPreferencesSignIn.framework/Versions/A/IDSSystemPreferencesSignIn'
 current-version: 800
 exports:

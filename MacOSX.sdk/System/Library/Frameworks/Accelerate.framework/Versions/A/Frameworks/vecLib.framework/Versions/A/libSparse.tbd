@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E25A877E-12CB-3CC1-9F57-24FA5F261CF5
+    value:           23C0EF43-6628-3267-AE5C-E5AC89725E7A
   - target:          x86_64-maccatalyst
-    value:           E25A877E-12CB-3CC1-9F57-24FA5F261CF5
+    value:           23C0EF43-6628-3267-AE5C-E5AC89725E7A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           28381740-530E-3769-BF8A-5778048AC137
+    value:           BA06CDB6-62BB-3E9F-ACEF-92BE7E9BA40D
   - target:          arm64e-maccatalyst
-    value:           28381740-530E-3769-BF8A-5778048AC137
+    value:           BA06CDB6-62BB-3E9F-ACEF-92BE7E9BA40D
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libSparse.dylib'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

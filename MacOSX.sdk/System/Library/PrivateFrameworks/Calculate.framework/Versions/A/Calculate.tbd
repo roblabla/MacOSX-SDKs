@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           34E8CDEE-13F2-3065-91EA-41EE878A4C67
+    value:           274E5997-93C4-3F7C-99E0-681ACAF16AE9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7ACFBC8D-FE99-3237-A488-9EA2DA68655F
+    value:           97EAC1D3-5DEE-3EDB-BF09-092DE38228B2
 install-name:    '/System/Library/PrivateFrameworks/Calculate.framework/Versions/A/Calculate'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

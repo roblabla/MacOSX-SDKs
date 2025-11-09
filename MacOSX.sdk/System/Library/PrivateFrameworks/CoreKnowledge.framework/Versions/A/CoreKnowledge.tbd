@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           37134728-C4C8-3037-9490-F92CF9E6D3BB
+    value:           4D3E89A6-3586-3C5B-9DF3-3F0C5F6CA429
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B1B10B82-41C7-323A-98BA-7E02F226E5DA
+    value:           0B40434D-999F-376E-B637-6D7148D0197A
 install-name:    '/System/Library/PrivateFrameworks/CoreKnowledge.framework/Versions/A/CoreKnowledge'
 swift-abi-version: 7
 exports:
@@ -1383,16 +1383,17 @@ exports:
                        _CKVNLV3OntologyLabelPhotoMemoryName, _CKVNLV3OntologyLabelPhotoTags, 
                        _CKVNLV3OntologyLabelPlaylistTitle, _CKVNLV3OntologyLabelRelatedPerson, 
                        _CKVNLV3OntologyLabelSMSGroupName, _CKVNLV3OntologyLabelShowTitle, 
-                       _CKVNLV3OntologyLabelVoiceCommandName, _CKVNLV4IdentifierNamespaceAutoShortcutBaseTemplate, 
-                       _CKVNLV4IdentifierNamespaceAutoShortcutProperty, _CKVNLV4OntologyLabelAppEntity, 
-                       _CKVOntologyNamespaceMediaAudiobookAuthor, _CKVOntologyNamespaceMediaAudiobookTitle, 
-                       _CKVOntologyNamespaceMediaMusicArtistName, _CKVOntologyNamespaceMediaPlaylistTitle, 
-                       _CKVOntologyNamespaceMediaShowTitle, _CKVRawSpeechProfileWordTagFromString, 
-                       _CKVRegisterIndexMaintenanceActivity, _CKVRegisterPostOSInstallMigrationActivity, 
-                       _CKVSQLiteDatabaseExtendedErrorCode, _CKVSandboxErrorDomain, 
-                       _CKVSnapshotCapture, _CKVSnapshotCaptureToFile, _CKVSnapshotStringify, 
-                       _CKVSpeechProfileUpdateResultTypeDescription, _CKVSpeechProfileUpdateTypeDescription, 
-                       _CKVTaskIdDescription, _CKVUserProfileToolsErrorDomain, _CKVXBSProjectNameAndSourceVersion, 
+                       _CKVNLV3OntologyLabelVoiceCommandName, _CKVNLV3OntologyLabelWorkoutInstructorName, 
+                       _CKVNLV4IdentifierNamespaceAutoShortcutBaseTemplate, _CKVNLV4IdentifierNamespaceAutoShortcutProperty, 
+                       _CKVNLV4OntologyLabelAppEntity, _CKVOntologyNamespaceMediaAudiobookAuthor, 
+                       _CKVOntologyNamespaceMediaAudiobookTitle, _CKVOntologyNamespaceMediaMusicArtistName, 
+                       _CKVOntologyNamespaceMediaPlaylistTitle, _CKVOntologyNamespaceMediaShowTitle, 
+                       _CKVRawSpeechProfileWordTagFromString, _CKVRegisterIndexMaintenanceActivity, 
+                       _CKVRegisterPostOSInstallMigrationActivity, _CKVSQLiteDatabaseExtendedErrorCode, 
+                       _CKVSandboxErrorDomain, _CKVSnapshotCapture, _CKVSnapshotCaptureToFile, 
+                       _CKVSnapshotStringify, _CKVSpeechProfileUpdateResultTypeDescription, 
+                       _CKVSpeechProfileUpdateTypeDescription, _CKVTaskIdDescription, 
+                       _CKVUserProfileToolsErrorDomain, _CKVXBSProjectNameAndSourceVersion, 
                        _CKVocabularyAdministratorResultDescription, _CKVocabularyDonateResultDescription, 
                        _CoreKnowledgeVersionNumber, _CoreKnowledgeVersionString, 
                        __Z13_isEntityNodeNSt3__117reference_wrapperIN4siri8ontology12UsoGraphNodeEEE, 
@@ -1421,19 +1422,20 @@ exports:
                        CKVDictionaryLog, CKVDiffUpdateCache, CKVDispatcher, CKVDonateConnection, 
                        CKVDonateConnectionFactory, CKVDonateRequest, CKVDonateRequestValidator, 
                        CKVDonateTask, CKVDonateTaskFactory, CKVDonationManager, CKVDonatorFactory, 
-                       CKVFTSRecord, CKVFTSRecordUpdater, CKVFTSResult, CKVFilesystemBase, 
-                       CKVGlobalInfoLog, CKVHomeManagerBridge, CKVIndexManager, CKVIndexUpdater, 
-                       CKVIndexUpdaterFactory, CKVInstanceInfoLog, CKVIntentVocabularyAuthorization, 
-                       CKVIntentVocabularyDatasetBridge, CKVIntentVocabularyMultiDatasetBridge, 
-                       CKVIntentVocabularyStoreManager, CKVItemMetaRecord, CKVItemRecord, 
-                       CKVItemRecordUpdater, CKVLanguageModelBridge, CKVLanguageModelMultiDatasetBridge, 
-                       CKVLaunchServicesBridge, CKVLinkSpeechItemCapacityAllocation, 
-                       CKVLocalization, CKVMatchingSpan, CKVMatchingSpanMetadata, 
-                       CKVMatchingSpanNLV3, CKVMatchingSpanPriorInfo, CKVMediaLibraryBridge, 
-                       CKVOntologyMapper, CKVOriginApp, CKVPodcastsBridge, CKVPortraitEntitiesBridge, 
-                       CKVQueue, CKVQueueNode, CKVRawSpeechProfileConverterAppInfo, 
+                       CKVEvaluationProfileBuilder, CKVFTSRecord, CKVFTSRecordUpdater, 
+                       CKVFTSResult, CKVFilesystemBase, CKVGlobalInfoLog, CKVHomeManagerBridge, 
+                       CKVIndexManager, CKVIndexUpdater, CKVIndexUpdaterFactory, 
+                       CKVInstanceInfoLog, CKVIntentVocabularyAuthorization, CKVIntentVocabularyDatasetBridge, 
+                       CKVIntentVocabularyMultiDatasetBridge, CKVIntentVocabularyStoreManager, 
+                       CKVItemMetaRecord, CKVItemRecord, CKVItemRecordUpdater, CKVLanguageModelBridge, 
+                       CKVLanguageModelMultiDatasetBridge, CKVLaunchServicesBridge, 
+                       CKVLinkSpeechItemCapacityAllocation, CKVLocalization, CKVMatchingSpan, 
+                       CKVMatchingSpanMetadata, CKVMatchingSpanNLV3, CKVMatchingSpanPriorInfo, 
+                       CKVMediaLibraryBridge, CKVOntologyMapper, CKVOriginApp, CKVPodcastsBridge, 
+                       CKVPortraitEntitiesBridge, CKVQueue, CKVQueueNode, CKVRawSpeechProfileConverterAppInfo, 
                        CKVRawSpeechProfileConverterContact, CKVRawSpeechProfileConverterCustomTerm, 
-                       CKVRawSpeechProfileConverterHomeEntity, CKVRawSpeechProfileEntityMetadata, 
+                       CKVRawSpeechProfileConverterHomeEntity, CKVRawSpeechProfileConverterMediaEntity, 
+                       CKVRawSpeechProfileConverterPodcasts, CKVRawSpeechProfileEntityMetadata, 
                        CKVRawSpeechProfileExtractor, CKVRawSpeechProfileMetadataExtractor, 
                        CKVRawSpeechProfileUtilities, CKVRawSpeechProfileWord, CKVSQLCommandClause, 
                        CKVSQLCommandCriterion, CKVSQLCommandGenerator, CKVSQLCommandOrder, 
@@ -1446,11 +1448,10 @@ exports:
                        CKVSpeechItemRanker, CKVSpeechItemRanker_AutoShortcuts, CKVSpeechItemRanker_Contact, 
                        CKVSpeechItemRanker_Link, CKVSpeechProfileLog, CKVSpeechProfileUpdater, 
                        CKVSpeechProfileUpdaterFactory, CKVTaskCoalescenceManager, 
-                       CKVTaskController, CKVTaskHandler, CKVToken, CKVTokenChain, 
-                       CKVTokenChainBuilder, CKVUserProfileTools, CKVXPCServiceBridge, 
-                       CKVocabularyAdminEventSimulator, CKVocabularyAdministrator, 
-                       CKVocabularyDonator, CKVocabularySandbox, CKVocabularySearchResult, 
-                       CKVocabularySearcher, _TtC13CoreKnowledge21CoreKnowledgeXPCUtils, 
+                       CKVTaskHandler, CKVToken, CKVTokenChain, CKVTokenChainBuilder, 
+                       CKVUserProfileTools, CKVXPCServiceBridge, CKVocabularyAdminEventSimulator, 
+                       CKVocabularyAdministrator, CKVocabularyDonator, CKVocabularySandbox, 
+                       CKVocabularySearchResult, CKVocabularySearcher, _TtC13CoreKnowledge21CoreKnowledgeXPCUtils, 
                        _TtC13CoreKnowledge22CKDeviceKnowledgeStore ]
   - targets:         [ arm64-macos, arm64e-macos ]
     symbols:         [ __Z24_equivalentUsoGraphNodesNSt3__16vectorINS_17reference_wrapperIN4siri8ontology12UsoGraphNodeEEENS_9allocatorIS5_EEEES8_b, 

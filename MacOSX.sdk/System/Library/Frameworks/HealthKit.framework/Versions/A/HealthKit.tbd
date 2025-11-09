@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D27D3813-6ED4-34BB-A0F1-A243E447E0EA
+    value:           434F5794-ECE7-320B-AE98-28B64382FC02
   - target:          x86_64-maccatalyst
-    value:           D27D3813-6ED4-34BB-A0F1-A243E447E0EA
+    value:           434F5794-ECE7-320B-AE98-28B64382FC02
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4A6C66F1-5F16-30D4-848A-67605D995950
+    value:           C43E8D08-65A0-31F6-A7F0-9B05B98BF66A
   - target:          arm64e-maccatalyst
-    value:           4A6C66F1-5F16-30D4-848A-67605D995950
+    value:           C43E8D08-65A0-31F6-A7F0-9B05B98BF66A
 install-name:    '/System/Library/Frameworks/HealthKit.framework/Versions/A/HealthKit'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
@@ -50,6 +50,10 @@ exports:
                        _HKAnalyticsBoundedIntegerErrorSentinel, _HKAnalyticsDecadeBucketedAgeForAge, 
                        _HKAnalyticsDecadeBucketedAgeForAgeWithBoundsAndBucketRange, 
                        _HKAnalyticsDecadeBucketedAgeForAgeWithMinimumAge, _HKAnalyticsDecadeBucketedAgeForAgeWithMinimumAgeAndMaximumAge, 
+                       _HKAnalyticsErrorCategoryForFeatureAvailabilityOnboardingEligibility, 
+                       _HKAnalyticsErrorCategoryForFeatureAvailabilityOnboardingIneligibilityReasons, 
+                       _HKAnalyticsErrorDetailsForFeatureAvailabilityOnboardingEligibility, 
+                       _HKAnalyticsErrorDetailsForFeatureAvailabilityOnboardingIneligibilityReasons, 
                        _HKAnalyticsPropertyAreHealthNotificationsAuthorized, _HKAnalyticsPropertyNameActiveWatchProductType, 
                        _HKAnalyticsPropertyNameAge, _HKAnalyticsPropertyNameAreHealthNotificationsAuthorized, 
                        _HKAnalyticsPropertyNameBiologicalSex, _HKAnalyticsPropertyNameIsImproveHealthAndActivityAllowed, 
@@ -302,7 +306,8 @@ exports:
                        _HKElectrocardiogramFirstRecordingCompletedDefaultKey, _HKElectrocardiogramIsAvailableForGeolocatedCountryCode, 
                        _HKElectrocardiogramOnboardingCountryCodeKey, _HKElectrocardiogramOnboardingHistoryKey, 
                        _HKElectrocardiogramOnboardingVersionCompletedDefaultKey, 
-                       _HKElectrocardiogramSupportedCountries, _HKElectrocardiogramSymptomsStatusFromPrivateElectrocardiogramSymptoms, 
+                       _HKElectrocardiogramRemoteDisabledSupportURL, _HKElectrocardiogramSupportedCountries, 
+                       _HKElectrocardiogramSymptomsStatusFromPrivateElectrocardiogramSymptoms, 
                        _HKElectrocardiogramV1ToV2UpgradeAlertDismissed, _HKElectrocardiogramV1ToV2UpgradeBackgroundDelivered, 
                        _HKElectrocardiogramWatchAppInstallIsAllowed, _HKEntitlementEntryCloudControl, 
                        _HKEntitlementEntryCloudObserver, _HKEntitlementEntryCloudParticipant, 
@@ -312,10 +317,10 @@ exports:
                        _HKEntityValidationDataIdKey, _HKEntityValidationTableNameKey, 
                        _HKEntityValidationUUIDKey, _HKEntityValidationValueDescriptionKey, 
                        _HKErrorClassKey, _HKErrorCloudSyncDeviceNameKey, _HKErrorCloudSyncProductTypeKey, 
-                       _HKErrorConceptPrefetchUnresolvedIdentifiersKey, _HKErrorDomain, 
-                       _HKErrorParameterKey, _HKErrorSelectorKey, _HKExternalSyncObjectCodeHKObject, 
-                       _HKFHIRReleaseDSTU2, _HKFHIRReleaseFromNSString, _HKFHIRReleaseR4, 
-                       _HKFHIRReleaseUnknown, _HKFHIRResourceTypeAllergyIntolerance, 
+                       _HKErrorConceptPrefetchUnresolvedIdentifiersKey, _HKErrorContextKey, 
+                       _HKErrorDomain, _HKErrorParameterKey, _HKErrorSelectorKey, 
+                       _HKExternalSyncObjectCodeHKObject, _HKFHIRReleaseDSTU2, _HKFHIRReleaseFromNSString, 
+                       _HKFHIRReleaseR4, _HKFHIRReleaseUnknown, _HKFHIRResourceTypeAllergyIntolerance, 
                        _HKFHIRResourceTypeCondition, _HKFHIRResourceTypeCoverage, 
                        _HKFHIRResourceTypeImmunization, _HKFHIRResourceTypeMedicationDispense, 
                        _HKFHIRResourceTypeMedicationOrder, _HKFHIRResourceTypeMedicationRequest, 
@@ -343,7 +348,6 @@ exports:
                        _HKFeatureAvailabilityRequirementIdentifierFeatureIsNotRemotelyDisabled, 
                        _HKFeatureAvailabilityRequirementIdentifierFeatureIsOn, _HKFeatureAvailabilityRequirementIdentifierHealthAppIsNotHidden, 
                        _HKFeatureAvailabilityRequirementIdentifierHeartRateIsEnabledInPrivacy, 
-                       _HKFeatureAvailabilityRequirementIdentifierLiveOnTermsAcknowledged, 
                        _HKFeatureAvailabilityRequirementIdentifierMutuallyExclusiveFeatureIsOff, 
                        _HKFeatureAvailabilityRequirementIdentifierNotAgeGatedForUserDefaultsKey, 
                        _HKFeatureAvailabilityRequirementIdentifierNotInStoreDemoMode, 
@@ -423,7 +427,8 @@ exports:
                        _HKKeyValueLocalReadWriteEntitlement, _HKKeyValueProtectedLocalReadWriteEntitlement, 
                        _HKKeyValueProtectedUbiquitousReadWriteEntitlement, _HKKeyValueUbiquitousReadWriteEntitlement, 
                        _HKLastDayOfWeekForWeeklyGoalCalculations, _HKLegacySourceOverrideEntitlement, 
-                       _HKLinkedOnOrAfter, _HKLocalDeviceSourceEntitlement, _HKLocalizedStringsURLForLocale, 
+                       _HKLinkedOnOrAfter, _HKLocalDeviceHardwareSupportsWristTemperatureMeasurements, 
+                       _HKLocalDeviceSourceEntitlement, _HKLocalizedStringsURLForLocale, 
                        _HKLogActivity, _HKLogActivityCache, _HKLogAnalytics, _HKLogAssertions, 
                        _HKLogAuthorization, _HKLogBackgroundUpdates, _HKLogCameraAccess, 
                        _HKLogCoaching, _HKLogConceptIndex, _HKLogDataCollection, 
@@ -517,12 +522,13 @@ exports:
                        _HKNSOperatingSystemVersionCompare, _HKNSOperatingSystemVersionFromString, 
                        _HKNSOperatingSystemVersionIsUnknown, _HKNSOperatingSystemVersionString, 
                        _HKNSOperatingSystemVersionUnknown, _HKNSOperatingSystemVersionsEqual, 
-                       _HKNanoAuthorizationMachServiceName, _HKNanoSyncControlClientInterface, 
-                       _HKNanoSyncControlServerInterface, _HKNikeFuelSourceEntitlement, 
-                       _HKNotificationDomainIsDeprecated, _HKNotificationStoreClientInterface, 
-                       _HKNotificationStoreServerInterface, _HKOAuth2ErrorBearerAuthenticateResponseErrorKey, 
-                       _HKOAuth2ErrorDomain, _HKOAuth2ErrorHTTPStatusCodeErrorKey, 
-                       _HKOAuth2ErrorResponseErrorDescriptionErrorKey, _HKOAuth2ErrorResponseErrorNameErrorKey, 
+                       _HKNanoAuthorizationMachServiceName, _HKNanoMedicationsAppBundleID, 
+                       _HKNanoSyncControlClientInterface, _HKNanoSyncControlServerInterface, 
+                       _HKNikeFuelSourceEntitlement, _HKNotificationDomainIsDeprecated, 
+                       _HKNotificationStoreClientInterface, _HKNotificationStoreServerInterface, 
+                       _HKOAuth2ErrorBearerAuthenticateResponseErrorKey, _HKOAuth2ErrorDomain, 
+                       _HKOAuth2ErrorHTTPStatusCodeErrorKey, _HKOAuth2ErrorResponseErrorDescriptionErrorKey, 
+                       _HKOAuth2ErrorResponseErrorNameErrorKey, _HKOTAFeatureAvailabilityNamespace, 
                        _HKObjectAuthorizationStatusForNumber, _HKObjectForNanoPreferencesUserDefaultsKey, 
                        _HKObjectSortIdentifierDataID, _HKObjectValidationConfigurationMake, 
                        _HKObjectValidationConfigurationWithOptions, _HKObliterationEntitlement, 
@@ -859,10 +865,11 @@ exports:
                        __HKPrivateMetadataKeyWorkoutAverageCadence, __HKPrivateMetadataKeyWorkoutAveragePace, 
                        __HKPrivateMetadataKeyWorkoutAveragePower, __HKPrivateMetadataKeyWorkoutAverageSpeed, 
                        __HKPrivateMetadataKeyWorkoutDaytime, __HKPrivateMetadataKeyWorkoutElevationAscended, 
-                       __HKPrivateMetadataKeyWorkoutInstantaneousCadence, __HKPrivateMetadataKeyWorkoutInstantaneousPower, 
-                       __HKPrivateMetadataKeyWorkoutLocationSeriesIsSmoothed, __HKPrivateMetadataKeyWorkoutMachineBrand, 
-                       __HKPrivateMetadataKeyWorkoutMachineType, __HKPrivateMetadataKeyWorkoutStepCount, 
-                       __HKPrivateMetadataKeyWorkoutStrideCount, __HKPrivateMetadataKeyWorkoutWeatherLocationCoordinatesLatitude, 
+                       __HKPrivateMetadataKeyWorkoutExtendedMode, __HKPrivateMetadataKeyWorkoutInstantaneousCadence, 
+                       __HKPrivateMetadataKeyWorkoutInstantaneousPower, __HKPrivateMetadataKeyWorkoutLocationSeriesIsSmoothed, 
+                       __HKPrivateMetadataKeyWorkoutMachineBrand, __HKPrivateMetadataKeyWorkoutMachineType, 
+                       __HKPrivateMetadataKeyWorkoutStepCount, __HKPrivateMetadataKeyWorkoutStrideCount, 
+                       __HKPrivateMetadataKeyWorkoutWeatherLocationCoordinatesLatitude, 
                        __HKPrivateMetadataKeyWorkoutWeatherLocationCoordinatesLongitude, 
                        __HKPrivateMetadataKeyWorkoutWeatherSourceName, __HKPrivateWorkoutBuilderSnapshotMetadataFinalWorkoutUUIDStringKey, 
                        __HKQueryValidationFailureException, __HKRequiredCalendarUnitsForCacheIndexDateComponents, 

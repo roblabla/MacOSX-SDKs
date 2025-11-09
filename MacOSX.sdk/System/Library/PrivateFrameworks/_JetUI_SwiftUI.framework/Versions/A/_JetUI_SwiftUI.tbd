@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C19D2BB4-2989-3057-AC1F-3F03B6C01C27
+    value:           1802E5B4-A1C6-3B8B-A55E-484797D66241
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FF3171E3-7A3E-36A4-B89A-CB4A84673E6A
+    value:           E28B5F0C-DF7F-376E-8030-A4488035F349
 install-name:    '/System/Library/PrivateFrameworks/_JetUI_SwiftUI.framework/Versions/A/_JetUI_SwiftUI'
 swift-abi-version: 7
 exports:
@@ -37,5 +37,7 @@ exports:
                        '_$s012_JetUI_SwiftB015JUComponentViewVyxG0cB00E0AAMc', '_$s012_JetUI_SwiftB015JUComponentViewVyxG0cB019NSViewRepresentableAAMc', 
                        '_$s012_JetUI_SwiftB015JUComponentViewVyxGAA0aE13RepresentableAAMc', 
                        '_$s5JetUI11JUComponentP01_ab6_SwiftB0E9componentQrvgZ', '_$s5JetUI11JUComponentP01_ab6_SwiftB0E9componentQrvpZQOMQ', 
+                       '_$s7SwiftUI4ViewP04_Jetb1_aB0E16visualizeMetrics4isOnQrAA7BindingVySbG_tF', 
+                       '_$s7SwiftUI4ViewP04_Jetb1_aB0E16visualizeMetrics4isOnQrAA7BindingVySbG_tFQOMQ', 
                        '_$s8ViewType012_JetUI_SwiftD00cA13RepresentablePTl' ]
 ...

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6AEC55AD-EC70-33FB-971C-C5650B7ADF6B
+    value:           3AB5603D-9560-381D-A883-D5C0DF02760F
   - target:          x86_64-maccatalyst
-    value:           6AEC55AD-EC70-33FB-971C-C5650B7ADF6B
+    value:           3AB5603D-9560-381D-A883-D5C0DF02760F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6AAAAD8B-A58B-343A-8D02-D9E07067C55B
+    value:           837DD8AA-9D1B-34E7-8311-C8CDE4551DEC
   - target:          arm64e-maccatalyst
-    value:           6AAAAD8B-A58B-343A-8D02-D9E07067C55B
+    value:           837DD8AA-9D1B-34E7-8311-C8CDE4551DEC
 install-name:    '/System/Library/PrivateFrameworks/RTTUtilities.framework/Versions/A/RTTUtilities'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

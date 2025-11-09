@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BC796641-7238-3ADF-9DE7-ACE99300EF3C
+    value:           512C44D0-555C-395B-9399-6DF73841EBD8
   - target:          x86_64-maccatalyst
-    value:           BC796641-7238-3ADF-9DE7-ACE99300EF3C
+    value:           512C44D0-555C-395B-9399-6DF73841EBD8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           35709CA2-0A9F-3670-BDBD-3AFDA8C42EF2
+    value:           AAA59D24-2BB4-3C58-BAE1-512232EC5978
   - target:          arm64e-maccatalyst
-    value:           35709CA2-0A9F-3670-BDBD-3AFDA8C42EF2
+    value:           AAA59D24-2BB4-3C58-BAE1-512232EC5978
 install-name:    '/System/Library/PrivateFrameworks/MusicLibrary.framework/Versions/A/MusicLibrary'
 current-version: 18
 exports:
@@ -298,21 +298,21 @@ exports:
                        _ML3TrackPropertyStoreCloudPlaybackEndpointType, _ML3TrackPropertyStoreCloudStatus, 
                        _ML3TrackPropertyStoreCloudUniversalLibraryID, _ML3TrackPropertyStoreComposerID, 
                        _ML3TrackPropertyStoreDatePurchased, _ML3TrackPropertyStoreDownloaderAccountID, 
-                       _ML3TrackPropertyStoreExtendedPlaybackAttribute, _ML3TrackPropertyStoreExtrasURL, 
-                       _ML3TrackPropertyStoreFamilyAccountID, _ML3TrackPropertyStoreFlavor, 
-                       _ML3TrackPropertyStoreGenreID, _ML3TrackPropertyStoreIsArtistUploadedContent, 
-                       _ML3TrackPropertyStoreIsMasteredForiTunes, _ML3TrackPropertyStoreIsSubscription, 
-                       _ML3TrackPropertyStoreItemID, _ML3TrackPropertyStoreKeyID, 
-                       _ML3TrackPropertyStoreKeyID2, _ML3TrackPropertyStoreKeyPlatformID, 
-                       _ML3TrackPropertyStoreKeyVersions, _ML3TrackPropertyStoreLinkID, 
-                       _ML3TrackPropertyStoreLyricsAvailable, _ML3TrackPropertyStoreMatchedStatus, 
-                       _ML3TrackPropertyStoreNeedsReporting, _ML3TrackPropertyStorePlaybackEndpointType, 
-                       _ML3TrackPropertyStorePlaylistID, _ML3TrackPropertyStoreProtectionType, 
-                       _ML3TrackPropertyStoreRadioStationID, _ML3TrackPropertyStoreRedownloadParameters, 
-                       _ML3TrackPropertyStoreRedownloadedStatus, _ML3TrackPropertyStoreSagaID, 
-                       _ML3TrackPropertyStoreStoreKind, _ML3TrackPropertyStoreStorefrontID, 
-                       _ML3TrackPropertyStoreSyncInMyLibrary, _ML3TrackPropertyStoreURL, 
-                       _ML3TrackPropertyStoreXID, _ML3TrackPropertySubscriptionStoreItemID, 
+                       _ML3TrackPropertyStoreExtendedLyricsAttribute, _ML3TrackPropertyStoreExtendedPlaybackAttribute, 
+                       _ML3TrackPropertyStoreExtrasURL, _ML3TrackPropertyStoreFamilyAccountID, 
+                       _ML3TrackPropertyStoreFlavor, _ML3TrackPropertyStoreGenreID, 
+                       _ML3TrackPropertyStoreIsArtistUploadedContent, _ML3TrackPropertyStoreIsMasteredForiTunes, 
+                       _ML3TrackPropertyStoreIsSubscription, _ML3TrackPropertyStoreItemID, 
+                       _ML3TrackPropertyStoreKeyID, _ML3TrackPropertyStoreKeyID2, 
+                       _ML3TrackPropertyStoreKeyPlatformID, _ML3TrackPropertyStoreKeyVersions, 
+                       _ML3TrackPropertyStoreLinkID, _ML3TrackPropertyStoreLyricsAvailable, 
+                       _ML3TrackPropertyStoreMatchedStatus, _ML3TrackPropertyStoreNeedsReporting, 
+                       _ML3TrackPropertyStorePlaybackEndpointType, _ML3TrackPropertyStorePlaylistID, 
+                       _ML3TrackPropertyStoreProtectionType, _ML3TrackPropertyStoreRadioStationID, 
+                       _ML3TrackPropertyStoreRedownloadParameters, _ML3TrackPropertyStoreRedownloadedStatus, 
+                       _ML3TrackPropertyStoreSagaID, _ML3TrackPropertyStoreStoreKind, 
+                       _ML3TrackPropertyStoreStorefrontID, _ML3TrackPropertyStoreSyncInMyLibrary, 
+                       _ML3TrackPropertyStoreURL, _ML3TrackPropertyStoreXID, _ML3TrackPropertySubscriptionStoreItemID, 
                        _ML3TrackPropertySubtitleLanguage, _ML3TrackPropertySubtitleTrackIndex, 
                        _ML3TrackPropertySyncID, _ML3TrackPropertySyncRedownloadParams, 
                        _ML3TrackPropertyTimeSyncedLyricsAvailable, _ML3TrackPropertyTitle, 

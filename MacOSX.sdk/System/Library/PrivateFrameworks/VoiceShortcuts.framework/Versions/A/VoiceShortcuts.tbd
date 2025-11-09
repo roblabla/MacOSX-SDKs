@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C0659B65-6C3B-37A0-A02B-772B8BF44223
+    value:           9A6F0FDA-063B-3F23-AD11-C37643984EF4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           97E97D2D-AEB1-3E5E-886E-6E428A2A86A9
+    value:           293C4542-9197-374A-AA1C-7AAA58BFFC8E
 install-name:    '/System/Library/PrivateFrameworks/VoiceShortcuts.framework/Versions/A/VoiceShortcuts'
 swift-abi-version: 7
 exports:
@@ -53,20 +53,21 @@ exports:
                        _VCWorkflowReferencesForAccessSpecifier, _VCXPCEventAssistantPreferencesDidChange, 
                        _VCXPCEventFirstUnlock, _VCXPCEventLaunchServicesApplicationRegistered, 
                        _VCXPCEventLaunchServicesApplicationStateChanged, _VCXPCEventLaunchServicesApplicationUnregistered, 
-                       _VCXPCEventPairedDeviceDidChangeVersion, _VCXPCEventStreamDarwinNotifications, 
-                       _VCXPCEventStreamDistributedNotifications, _VCXPCEventTimeChange, 
-                       _VCXPCEventTimezoneChange, _VoiceShortcutsVersionNumber, _VoiceShortcutsVersionString, 
-                       _WFDatabaseChangesContainObjectType, _WFDialogNotificationUserInfoRunningContextKey, 
-                       _WFDialogXPCHostInterface, _WFDialogXPCInterface, _WFEventInfoKeyNewValue, 
-                       _WFEventInfoKeyOldValue, _WFLogCategoryApplicationTerminationMonitor, 
-                       _WFLogCategoryDefaultShortcuts, _WFLogCategoryRunQueue, _WFLogCategoryUserNotificationManager, 
+                       _VCXPCEventPairedDeviceDidChangeVersion, _VCXPCEventRunnerPrewarmRequest, 
+                       _VCXPCEventStreamDarwinNotifications, _VCXPCEventStreamDistributedNotifications, 
+                       _VCXPCEventTimeChange, _VCXPCEventTimezoneChange, _VoiceShortcutsVersionNumber, 
+                       _VoiceShortcutsVersionString, _WFDatabaseChangesContainObjectType, 
+                       _WFDialogNotificationUserInfoRunningContextKey, _WFDialogXPCHostInterface, 
+                       _WFDialogXPCInterface, _WFEventInfoKeyNewValue, _WFEventInfoKeyOldValue, 
+                       _WFLogCategoryApplicationTerminationMonitor, _WFLogCategoryDefaultShortcuts, 
+                       _WFLogCategoryRunQueue, _WFLogCategoryRunnerPrewarm, _WFLogCategoryUserNotificationManager, 
                        _WFServiceEntryForWorkflow, _WFTimeIntervalForNotificationLevel, 
                        _WFTimeIntervalForNotificationLevelFromDate, _WFTriggerIdentifierFromXPCActivityIdentifier, 
                        _WFTriggerNotificationLevelMigrationPerformedKey, _WFWorkflowRunCoordinatorErrorDomain, 
                        _WFWorkflowStatusHostXPCInterface, _WFWorkflowStatusXPCInterface, 
                        _WFXPCActivityIdentifierFromTriggerIdentifier, _getWFApplicationTerminationMonitorLogObject, 
                        _getWFDefaultShortcutsLogObject, _getWFRunQueueLogObject, 
-                       _getWFUserNotificationManagerLogObject ]
+                       _getWFRunnerPrewarmLogObject, _getWFUserNotificationManagerLogObject ]
     objc-classes:    [ VCCKApplicationStateObserver, VCCKShortcutSyncCoordinator, 
                        VCCKShortcutSyncService, VCCKSyncEngine, VCCoreDuetListener, 
                        VCDaemonDatabaseProvider, VCDaemonSyncDataEndpoint, VCDaemonXPCEventHandler, 
@@ -83,11 +84,11 @@ exports:
                        VCXPCServer, WFApplicationTerminationMonitor, WFBiomeListener, 
                        WFContextualActionSpotlightSyncService, WFDialogNotificationManager, 
                        WFDialogPresentationManager, WFOnScreenContentManager, WFPresentedDialog, 
-                       WFQueuedRunRequest, WFShareSheetWorkflowProvider, WFSiriWorkflowVocabularyUpdater, 
-                       WFSystemSurfaceWorkflowStatusUpdater, WFTriggerBootManager, 
-                       WFTriggerNotificationScheduler, WFTriggerRegistrar, WFUserNotificationManager, 
-                       WFWorkflowRunCoordinator, WFWorkflowRunQueue, WFWorkflowRunQueueDescriptor, 
-                       WFWorkflowStatusPresenter, WFXPCActivityScheduler ]
+                       WFQueuedRunRequest, WFRunnerPrewarmManager, WFShareSheetWorkflowProvider, 
+                       WFSiriWorkflowVocabularyUpdater, WFSystemSurfaceWorkflowStatusUpdater, 
+                       WFTriggerBootManager, WFTriggerNotificationScheduler, WFTriggerRegistrar, 
+                       WFUserNotificationManager, WFWorkflowRunCoordinator, WFWorkflowRunQueue, 
+                       WFWorkflowRunQueueDescriptor, WFWorkflowStatusPresenter, WFXPCActivityScheduler ]
     objc-ivars:      [ VCPBChange._changeType, VCPBChange._message, VCPBChange._messageType, 
                        VCPBChange._uniqueID, VCPBIntentDefinition._associatedBundleID, 
                        VCPBIntentDefinition._files, VCPBIntentDefinitionChange._associatedBundleID, 

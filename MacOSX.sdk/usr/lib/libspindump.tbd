@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CB0CAFB1-5A0A-39D0-BB19-1B304C4BAF6F
+    value:           DC82CFD0-C5E1-3204-BF36-0284192FB057
   - target:          x86_64-maccatalyst
-    value:           CB0CAFB1-5A0A-39D0-BB19-1B304C4BAF6F
+    value:           DC82CFD0-C5E1-3204-BF36-0284192FB057
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CBC7F34F-4242-350D-AC51-0DB32DB48BC0
+    value:           A6A24F96-92A0-34AF-B31F-EBE320701F01
   - target:          arm64e-maccatalyst
-    value:           CBC7F34F-4242-350D-AC51-0DB32DB48BC0
+    value:           A6A24F96-92A0-34AF-B31F-EBE320701F01
 install-name:    '/usr/lib/libspindump.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

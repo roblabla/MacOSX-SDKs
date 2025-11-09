@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           0A7509A7-7825-36F6-9F08-23F094902CD3
+    value:           225AA6C6-634F-39E6-979B-AB76950745C0
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           7F319614-E23A-304F-87B2-A1D126D28442
+    value:           B6FE71B7-B994-3EA5-8929-417A144148E3
 install-name:    '/System/iOSSupport/System/Library/Frameworks/Charts.framework/Versions/A/Charts'
-current-version: 1.1.14
+current-version: 1.1.15
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           480D0E51-15AC-37F1-83E1-6322903A5206
+    value:           FA72B25A-40C1-3842-A4CE-BCCA97797C9D
   - target:          x86_64-maccatalyst
-    value:           480D0E51-15AC-37F1-83E1-6322903A5206
+    value:           FA72B25A-40C1-3842-A4CE-BCCA97797C9D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F7E23BE1-139B-3A53-A5E8-14225CF1953E
+    value:           23555842-6967-366A-A872-71F7E0BF93A6
   - target:          arm64e-maccatalyst
-    value:           F7E23BE1-139B-3A53-A5E8-14225CF1953E
+    value:           23555842-6967-366A-A872-71F7E0BF93A6
 install-name:    '/usr/lib/libIOAccessoryManager.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

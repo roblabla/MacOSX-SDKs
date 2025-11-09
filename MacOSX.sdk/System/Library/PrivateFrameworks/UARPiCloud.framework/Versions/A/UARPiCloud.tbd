@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           83368AE0-90C0-3BE5-A807-CD068E9DA518
+    value:           9D68CD1D-FD69-3B3F-B187-0F65217F3413
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AD958A4B-0C96-394E-8739-14CD31A2C9CC
+    value:           107BE20C-EE4A-340D-B250-23FC0E8F53FF
 install-name:    '/System/Library/PrivateFrameworks/UARPiCloud.framework/Versions/A/UARPiCloud'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

@@ -76,5 +76,6 @@ NS_ASSUME_NONNULL_END
 #endif // __PKERROR_H
 
 #else
+#import <TargetConditionals.h>
 #import <PassKitCore/PKError.h>
 #endif

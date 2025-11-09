@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CDA15093-0BD8-3BB6-9DFD-AF9F2C12827A
+    value:           9315ADAA-3FEA-3166-BC9C-BEA92A80701C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B35DCDE9-A3B0-3177-BA7E-986244885D06
+    value:           A84A8CBD-AE65-314B-883A-F5155412FE76
 install-name:    '/System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/AccessibilitySupport'
 current-version: 0
 compatibility-version: 0
@@ -25,11 +25,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5E0047C0-4BEB-3716-8625-459925F63574
+    value:           3698191C-D414-3F32-A7C6-9E67FB551BFF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           186F5472-160B-3540-943A-2E3A42C254DB
+    value:           FBAE522F-65E5-36C5-8771-C97F6B347BDD
 install-name:    '/System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/Frameworks/AccessibilityEvents.framework/Versions/A/AccessibilityEvents'
 current-version: 2
 compatibility-version: 0
@@ -68,11 +68,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EC398BC9-74A0-36C8-AB5C-5F869D42D128
+    value:           B25A6969-E026-3DA2-A41B-8232D1FE39CC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           52935CA5-8F81-3E60-B643-876E2430EC4F
+    value:           294EFA4D-6186-36FB-A44C-AB1646C9611E
 install-name:    '/System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/Frameworks/AccessibilityFoundation.framework/Versions/A/AccessibilityFoundation'
 current-version: 2
 compatibility-version: 0
@@ -96,7 +96,7 @@ exports:
                        _AXFElementBusyChangedNotification, _AXFElementTransportKey, 
                        _AXFFeatureIsVoiceOverBooksExperienceV2Enabled, _AXFFilter, 
                        _AXFFlatMap, _AXFFocusedUIElementChangedNotification, _AXFFocusedWindowChangedNotification, 
-                       _AXFGZIPData, _AXFGeometryAngleFromXAxisToSegmentConnectingPoints, 
+                       _AXFFormattedString, _AXFGZIPData, _AXFGeometryAngleFromXAxisToSegmentConnectingPoints, 
                        _AXFGeometryCenterOfRect, _AXFGeometryCentroidOfPoints, _AXFGeometryClosestRectToPointInRects, 
                        _AXFGeometryClosestRectToRectInRects, _AXFGeometryDenormalizePointRelativeToRect, 
                        _AXFGeometryDistanceBetweenPoints, _AXFGeometryDistanceBetweenRectAndPoint, 
@@ -196,11 +196,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           280EE3DA-78B1-35C1-9493-7179CDE67CAD
+    value:           F9AB6A80-FF3B-36F1-906E-C95916205FE9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           04B4B544-3671-35E1-9850-134BC2593486
+    value:           856FCE00-3DB0-3BAA-A505-19ACA22787EA
 install-name:    '/System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/Frameworks/AccessibilityKit.framework/Versions/A/AccessibilityKit'
 current-version: 2
 compatibility-version: 0
@@ -238,11 +238,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BFBE6763-0507-3199-BD7A-7DF717C8003E
+    value:           E5AEBA58-A552-3891-A151-F9F7525C28CF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3D1640A8-6A24-3973-A189-BF5591D1EAC3
+    value:           F597E0A7-361A-3F7D-B238-B7CB4E966064
 install-name:    '/System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/Frameworks/AccessibilityVisuals.framework/Versions/A/AccessibilityVisuals'
 current-version: 2
 compatibility-version: 0

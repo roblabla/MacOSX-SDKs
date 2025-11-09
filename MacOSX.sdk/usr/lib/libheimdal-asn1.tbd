@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           472953E4-FF1F-3EB9-80B9-627E40237C22
+    value:           8D03AD28-8D97-3993-AFC6-976875D22EFB
   - target:          x86_64-maccatalyst
-    value:           472953E4-FF1F-3EB9-80B9-627E40237C22
+    value:           8D03AD28-8D97-3993-AFC6-976875D22EFB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ABDD8031-C556-35D9-80BD-EBCA4750ED32
+    value:           CE377D64-96FB-37C5-B1D0-808D153B1CBE
   - target:          arm64e-maccatalyst
-    value:           ABDD8031-C556-35D9-80BD-EBCA4750ED32
+    value:           CE377D64-96FB-37C5-B1D0-808D153B1CBE
 install-name:    '/usr/lib/libheimdal-asn1.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

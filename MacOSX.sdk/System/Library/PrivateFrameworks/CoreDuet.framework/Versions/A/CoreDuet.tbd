@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           08A4498E-33AC-3494-9C37-9D564F268CB6
+    value:           08F924EF-CF18-304D-9E5D-8B88852BA93E
   - target:          x86_64-maccatalyst
-    value:           08A4498E-33AC-3494-9C37-9D564F268CB6
+    value:           08F924EF-CF18-304D-9E5D-8B88852BA93E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A5467E4F-84D3-3213-82E6-8C725C454851
+    value:           398DBE24-B039-3233-B0A5-70FD631537E9
   - target:          arm64e-maccatalyst
-    value:           A5467E4F-84D3-3213-82E6-8C725C454851
+    value:           398DBE24-B039-3233-B0A5-70FD631537E9
 install-name:    '/System/Library/PrivateFrameworks/CoreDuet.framework/Versions/A/CoreDuet'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -182,7 +182,7 @@ exports:
                        _CDSpotlightItemRecorder, _CDSpotlightItemRecorderOperation, 
                        _CDSpotlightItemUtils, _CDSpotlightQuerier, _CDStringTokenizer, 
                        _CDSuggestedPerson, _CDTemporalInteractionAdvisor, _CDTopicMetadataKey, 
-                       _CDVersionRecord, _CDVisionSignalGradingDataCollectionTask, 
+                       _CDUserActivityCache, _CDVersionRecord, _CDVisionSignalGradingDataCollectionTask, 
                        _CDXPCCodecs, _CDXPCEventPublisher, _CDXPCEventSubscriber, 
                        _DKActivityThrottler, _DKAirPlayPredictionCategory, _DKAirPlayPredictionMetadataKey, 
                        _DKAlarmMetadataKey, _DKAlarmStateCategory, _DKAnyDoubleQuantity, 

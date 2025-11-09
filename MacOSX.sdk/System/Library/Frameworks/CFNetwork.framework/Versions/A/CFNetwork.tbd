@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A0D23D24-26F2-3180-A05B-61AC1175D230
+    value:           7FD3DE97-F5C9-3169-AD7A-04FD106C51CC
   - target:          x86_64-maccatalyst
-    value:           A0D23D24-26F2-3180-A05B-61AC1175D230
+    value:           7FD3DE97-F5C9-3169-AD7A-04FD106C51CC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           86C036E0-4A25-3600-A5B5-31B1CAEDBE4A
+    value:           27318610-36D7-3519-9036-B9BCC00FE916
   - target:          arm64e-maccatalyst
-    value:           86C036E0-4A25-3600-A5B5-31B1CAEDBE4A
+    value:           27318610-36D7-3519-9036-B9BCC00FE916
 install-name:    '/System/Library/Frameworks/CFNetwork.framework/Versions/A/CFNetwork'
-current-version: 1399.4
+current-version: 1402.0.8
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ '$ld$hide$os10.9$_NSHTTPCookieComment', '$ld$hide$os10.9$_NSHTTPCookieCommentURL', 

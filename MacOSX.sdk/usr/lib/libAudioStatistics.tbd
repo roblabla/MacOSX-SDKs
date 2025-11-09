@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F6336145-FCC0-32EE-8386-1E674F8CCAC4
+    value:           373AF6CE-6D59-39E9-AB5D-5BDF71268527
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7FE4DF1A-BFE8-32DD-A256-58EEAD1E3756
+    value:           A8E81CED-38C2-3C4B-8129-8A97F095777B
 install-name:    '/usr/lib/libAudioStatistics.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

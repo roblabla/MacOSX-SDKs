@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D86A8222-9CC8-365F-9393-EBDDEC161941
+    value:           28587A38-B656-3154-B8E4-CD76A7796F4A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DE8B9DC0-D14D-323E-AA4C-5491206EA53B
+    value:           6162236A-E0B3-3700-9CA3-3CE09EA9F840
 install-name:    '/System/Library/Frameworks/StoreKit.framework/Versions/A/StoreKit'
 current-version: 379
 swift-abi-version: 7
@@ -687,14 +687,15 @@ exports:
                        _SKStoreProductParameterAffiliateToken, _SKStoreProductParameterAppleCampaignIdentifier, 
                        _SKStoreProductParameterCampaignIdentifier, _SKStoreProductParameterCampaignToken, 
                        _SKStoreProductParameterCustomProductPageIdentifier, _SKStoreProductParameterHighlightedITunesItemIdentifier, 
-                       _SKStoreProductParameterITunesItemIdentifier, _SKStoreProductParameterPopoverSourceRect, 
-                       _SKStoreProductParameterProductIdentifier, _SKStoreProductParameterProviderToken, 
-                       _SKStoreProductParameterQToken, _SKStorefrontCountryCodeDidChangeNotification, 
-                       _SKStorefrontIdentifierDidChangeNotification, _SKTerminateForInvalidReceipt, 
-                       _SKUIServiceNavigationOptionBackButtonHidden, _SKUIServiceNavigationOptionBackButtonTitle, 
-                       _SKUIServiceNavigationOptionRightButtonEnabled, _SKUIServiceNavigationOptionRightButtonStyle, 
-                       _SKUIServiceNavigationOptionRightButtonTitle, _SKUIServiceNavigationOptionTitle, 
-                       _SKUIServiceReviewSandboxMode, __SKCloudServiceSetupOptionsAudioAccessorySerialNumberKey, 
+                       _SKStoreProductParameterITunesItemIdentifier, _SKStoreProductParameterIsViewOnly, 
+                       _SKStoreProductParameterPopoverSourceRect, _SKStoreProductParameterProductIdentifier, 
+                       _SKStoreProductParameterProviderToken, _SKStoreProductParameterQToken, 
+                       _SKStorefrontCountryCodeDidChangeNotification, _SKStorefrontIdentifierDidChangeNotification, 
+                       _SKTerminateForInvalidReceipt, _SKUIServiceNavigationOptionBackButtonHidden, 
+                       _SKUIServiceNavigationOptionBackButtonTitle, _SKUIServiceNavigationOptionRightButtonEnabled, 
+                       _SKUIServiceNavigationOptionRightButtonStyle, _SKUIServiceNavigationOptionRightButtonTitle, 
+                       _SKUIServiceNavigationOptionTitle, _SKUIServiceReviewSandboxMode, 
+                       __SKCloudServiceSetupOptionsAudioAccessorySerialNumberKey, 
                        __SKCloudServiceSetupOptionsAudioAccessoryUniqueDeviceIdentifierKey ]
     objc-classes:    [ SKAccountPageSpecifierProvider, SKAccountPageViewController, 
                        SKAdImpression, SKAdNetwork, SKArcadeService, SKCloudServiceController, 

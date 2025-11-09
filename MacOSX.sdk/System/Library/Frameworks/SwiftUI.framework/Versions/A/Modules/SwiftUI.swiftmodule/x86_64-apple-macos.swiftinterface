@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target x86_64-apple-macos13.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -library-level api -module-name SwiftUI
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 4.1.17.405
+// swift-module-flags: -target x86_64-apple-macos13.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -library-level api -module-name SwiftUI
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 4.2.11.400
 import Accessibility
 import AppKit
 import Combine
@@ -1627,6 +1627,7 @@ public protocol NSViewRepresentable : SwiftUI.View where Self.Body == Swift.Neve
   @available(macOS 13.0, *)
   @_Concurrency.MainActor(unsafe) static func _layoutOptions(_ provider: Self.NSViewType) -> Self.LayoutOptions
   typealias Context = SwiftUI.NSViewRepresentableContext<Self>
+  @available(macOS 13.0, *)
   typealias LayoutOptions = SwiftUI._PlatformViewRepresentableLayoutOptions
 }
 @available(macOS 10.15, *)
@@ -2887,6 +2888,7 @@ public protocol NSViewControllerRepresentable : SwiftUI.View where Self.Body == 
   @available(macOS 13.0, *)
   @_Concurrency.MainActor(unsafe) static func _layoutOptions(_ provider: Self.NSViewControllerType) -> Self.LayoutOptions
   typealias Context = SwiftUI.NSViewControllerRepresentableContext<Self>
+  @available(macOS 13.0, *)
   typealias LayoutOptions = SwiftUI._PlatformViewRepresentableLayoutOptions
 }
 @available(macOS 10.15, *)
@@ -6948,6 +6950,19 @@ extension SwiftUI.View {
 extension SwiftUI.View {
   public func _colorMatrix(_ matrix: SwiftUI._ColorMatrix) -> some SwiftUI.View
   
+}
+@available(macCatalyst 16.2, *)
+@available(iOS, unavailable)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@usableFromInline
+internal struct NavigationSplitViewOpaqueBackgroundTraitKey : SwiftUI._ViewTraitKey {
+  @inlinable internal static var defaultValue: Swift.Bool {
+    get { false }
+  }
+  @usableFromInline
+  internal typealias Value = Swift.Bool
 }
 @available(macOS 10.15, *)
 @available(iOS, unavailable)
@@ -13201,12 +13216,58 @@ public struct Table<Value, Rows, Columns> : SwiftUI.View where Value == Rows.Tab
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension SwiftUI.Table {
-  public init(@SwiftUI.TableColumnBuilder<Value, Swift.Never> columns: () -> Columns, @SwiftUI.TableRowBuilder<Value> rows: () -> Rows)
-  public init(selection: SwiftUI.Binding<Value.ID?>, @SwiftUI.TableColumnBuilder<Value, Swift.Never> columns: () -> Columns, @SwiftUI.TableRowBuilder<Value> rows: () -> Rows)
-  public init(selection: SwiftUI.Binding<Swift.Set<Value.ID>>, @SwiftUI.TableColumnBuilder<Value, Swift.Never> columns: () -> Columns, @SwiftUI.TableRowBuilder<Value> rows: () -> Rows)
+  @_alwaysEmitIntoClient public init(of valueType: Value.Type, @SwiftUI.TableColumnBuilder<Value, Swift.Never> columns: () -> Columns, @SwiftUI.TableRowBuilder<Value> rows: () -> Rows) {
+        // Call into the original deprecated initializer for back deploying.
+        self.init(columns: columns, rows: rows)
+    }
+  @_alwaysEmitIntoClient public init(of valueType: Value.Type, selection: SwiftUI.Binding<Value.ID?>, @SwiftUI.TableColumnBuilder<Value, Swift.Never> columns: () -> Columns, @SwiftUI.TableRowBuilder<Value> rows: () -> Rows) {
+        // Call into the original deprecated initializer for back deploying.
+        self.init(selection: selection, columns: columns, rows: rows)
+    }
+  @_alwaysEmitIntoClient public init(of valueType: Value.Type, selection: SwiftUI.Binding<Swift.Set<Value.ID>>, @SwiftUI.TableColumnBuilder<Value, Swift.Never> columns: () -> Columns, @SwiftUI.TableRowBuilder<Value> rows: () -> Rows) {
+        // Call into the original deprecated initializer for back deploying.
+        self.init(selection: selection, columns: columns, rows: rows)
+    }
   public init<Sort>(sortOrder: SwiftUI.Binding<[Sort]>, @SwiftUI.TableColumnBuilder<Value, Sort> columns: () -> Columns, @SwiftUI.TableRowBuilder<Value> rows: () -> Rows) where Sort : Foundation.SortComparator, Columns.TableRowValue == Sort.Compared
+  @_alwaysEmitIntoClient public init<Sort>(of valueType: Value.Type, sortOrder: SwiftUI.Binding<[Sort]>, @SwiftUI.TableColumnBuilder<Value, Sort> columns: () -> Columns, @SwiftUI.TableRowBuilder<Value> rows: () -> Rows) where Sort : Foundation.SortComparator, Columns.TableRowValue == Sort.Compared {
+        self.init(sortOrder: sortOrder, columns: columns, rows: rows)
+    }
   public init<Sort>(selection: SwiftUI.Binding<Value.ID?>, sortOrder: SwiftUI.Binding<[Sort]>, @SwiftUI.TableColumnBuilder<Value, Sort> columns: () -> Columns, @SwiftUI.TableRowBuilder<Value> rows: () -> Rows) where Sort : Foundation.SortComparator, Columns.TableRowValue == Sort.Compared
+  @_alwaysEmitIntoClient public init<Sort>(of valueType: Value.Type, selection: SwiftUI.Binding<Value.ID?>, sortOrder: SwiftUI.Binding<[Sort]>, @SwiftUI.TableColumnBuilder<Value, Sort> columns: () -> Columns, @SwiftUI.TableRowBuilder<Value> rows: () -> Rows) where Sort : Foundation.SortComparator, Columns.TableRowValue == Sort.Compared {
+        self.init(
+            selection: selection,
+            sortOrder: sortOrder,
+            columns: columns,
+            rows: rows)
+    }
   public init<Sort>(selection: SwiftUI.Binding<Swift.Set<Value.ID>>, sortOrder: SwiftUI.Binding<[Sort]>, @SwiftUI.TableColumnBuilder<Value, Sort> columns: () -> Columns, @SwiftUI.TableRowBuilder<Value> rows: () -> Rows) where Sort : Foundation.SortComparator, Columns.TableRowValue == Sort.Compared
+  @_alwaysEmitIntoClient public init<Sort>(of valueType: Value.Type, selection: SwiftUI.Binding<Swift.Set<Value.ID>>, sortOrder: SwiftUI.Binding<[Sort]>, @SwiftUI.TableColumnBuilder<Value, Sort> columns: () -> Columns, @SwiftUI.TableRowBuilder<Value> rows: () -> Rows) where Sort : Foundation.SortComparator, Columns.TableRowValue == Sort.Compared {
+        self.init(
+            selection: selection,
+            sortOrder: sortOrder,
+            columns: columns,
+            rows: rows)
+    }
+}
+@available(iOS 16.0, macOS 12.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension SwiftUI.Table {
+  @available(iOS, introduced: 16.0, deprecated: 16.2, renamed: "init(of:columns:rows:)", message: "Please specify the Value type of the Table by adding the `of valueType:` parameter. Including this explicit type parameter improves compilation performance and diagnostic messages for this initializer, by avoiding the need to infer a shared `Value` type from the bodies of the `columns:` and `rows:` closures. This warning will become an error in a future release.")
+  @available(macOS, introduced: 12.0, deprecated: 13.1, renamed: "init(of:columns:rows:)", message: "Please specify the Value type of the Table by adding the `of valueType:` parameter. Including this explicit type parameter improves compilation performance and diagnostic messages for this initializer, by avoiding the need to infer a shared `Value` type from the bodies of the `columns:` and `rows:` closures. This warning will become an error in a future release.")
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  public init(@SwiftUI.TableColumnBuilder<Value, Swift.Never> columns: () -> Columns, @SwiftUI.TableRowBuilder<Value> rows: () -> Rows)
+  @available(iOS, introduced: 16.0, deprecated: 16.2, renamed: "init(of:selection:columns:rows:)", message: "Please specify the Value type of the Table by adding the `of valueType:` parameter. Including this explicit type parameter improves compilation performance and diagnostic messages for this initializer, by avoiding the need to infer a shared `Value` type from the bodies of the `columns:` and `rows:` closures. This warning will become an error in a future release.")
+  @available(macOS, introduced: 12.0, deprecated: 13.1, renamed: "init(of:selection:columns:rows:)", message: "Please specify the Value type of the Table by adding the `of valueType:` parameter. Including this explicit type parameter improves compilation performance and diagnostic messages for this initializer, by avoiding the need to infer a shared `Value` type from the bodies of the `columns:` and `rows:` closures. This warning will become an error in a future release.")
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  public init(selection: SwiftUI.Binding<Value.ID?>, @SwiftUI.TableColumnBuilder<Value, Swift.Never> columns: () -> Columns, @SwiftUI.TableRowBuilder<Value> rows: () -> Rows)
+  @available(iOS, introduced: 16.0, deprecated: 16.2, renamed: "init(of:selection:columns:rows:)", message: "Please specify the Value type of the Table by adding the `of valueType:` parameter. Including this explicit type parameter improves compilation performance and diagnostic messages for this initializer, by avoiding the need to infer a shared `Value` type from the bodies of the `columns:` and `rows:` closures. This warning will become an error in a future release.")
+  @available(macOS, introduced: 12.0, deprecated: 13.1, renamed: "init(of:selection:columns:rows:)", message: "Please specify the Value type of the Table by adding the `of valueType:` parameter. Including this explicit type parameter improves compilation performance and diagnostic messages for this initializer, by avoiding the need to infer a shared `Value` type from the bodies of the `columns:` and `rows:` closures. This warning will become an error in a future release.")
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  public init(selection: SwiftUI.Binding<Swift.Set<Value.ID>>, @SwiftUI.TableColumnBuilder<Value, Swift.Never> columns: () -> Columns, @SwiftUI.TableRowBuilder<Value> rows: () -> Rows)
 }
 @available(iOS 16.0, macOS 12.0, *)
 @available(tvOS, unavailable)
@@ -18890,6 +18951,11 @@ public struct NavigationView<Content> : SwiftUI.View where Content : SwiftUI.Vie
     get {
       guard let store = _store else { error() }
       return store
+    }
+  }
+  @inlinable @_Concurrency.MainActor(unsafe) internal var optionalWrappedValue: ObjectType? {
+    get {
+        _store
     }
   }
   @usableFromInline

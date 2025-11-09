@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E5540690-141F-3E3F-8B64-41F07685A72C
+    value:           5B3D5A94-F26C-3FA6-8348-933C69B58A4F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           53841D73-D909-3663-9F4A-CACCDC63CEDE
+    value:           90404D46-3194-3192-9ED2-C08754351744
 install-name:    '/System/Library/PrivateFrameworks/IMDaemonCore.framework/Versions/A/IMDaemonCore'
 current-version: 800
 swift-abi-version: 7
@@ -130,6 +130,7 @@ exports:
                        '_$s12IMDaemonCore27PlainTextTapbackInterpreterCMa', '_$s12IMDaemonCore27PlainTextTapbackInterpreterCMn', 
                        '_$s12IMDaemonCore27PlainTextTapbackInterpreterCMo', '_$s12IMDaemonCore27PlainTextTapbackInterpreterCMu', 
                        '_$s12IMDaemonCore27PlainTextTapbackInterpreterCN', '_$s12IMDaemonCore27PlainTextTapbackInterpreterCfD', 
+                       '_$s12IMDaemonCore28PersistedCollaborationNoticeC10dateViewed10Foundation4DateVSgvpMV', 
                        '_$s12IMDaemonCore28PersistedCollaborationNoticeC10guidStringSSSgvpMV', 
                        '_$s12IMDaemonCore28PersistedCollaborationNoticeC12fetchRequestSo07NSFetchG0CyACGyFZ', 
                        '_$s12IMDaemonCore28PersistedCollaborationNoticeC12senderHandleSSSgvpMV', 
@@ -357,16 +358,16 @@ exports:
                        IMDiMessageIDSTrustedData, IMDiMessageIncomingMessageHandler, 
                        IMDiMessagePipelineResources, IMEditMessageCommandPipelineParameter, 
                        IMEditMessageCommandProcessingPipelineComponent, IMFindChatProcessingPipelineComponent, 
-                       IMMarkUnreadRequestPipelineParameter, IMMarkUnreadRequestProcessingPipelineComponent, 
-                       IMMessageFromStoragePipelineComponent, IMMessageLegacyProcessingPipelineComponent, 
-                       IMMessageMomentShareProcessingPipelineComponent, IMMessagesToTrack, 
-                       IMNotifyRecipientCommandPipelineParameter, IMNotifyRecipientCommandProcessingPipelineComponent, 
-                       IMPlayedReceiptPipelineParameter, IMPlayedReceiptProcessingPipelineComponent, 
-                       IMReadReceiptPipelineParameter, IMReadReceiptProcessingPipelineComponent, 
-                       IMTextMessageAttributedStringContent, IMTextMessagePipelineParameter, 
-                       IMTextMessageProcessingPipelineComponent, _IMDInternalWorkQueue, 
-                       _TtC12IMDaemonCore28PersistedCollaborationNotice, __IMDBackwardCompatibilityMessageIdentifier, 
-                       __IMDPlainTextTapbackInterpreterImpl ]
+                       IMJunkMessageProcessingPipelineComponent, IMMarkUnreadRequestPipelineParameter, 
+                       IMMarkUnreadRequestProcessingPipelineComponent, IMMessageFromStoragePipelineComponent, 
+                       IMMessageLegacyProcessingPipelineComponent, IMMessageMomentShareProcessingPipelineComponent, 
+                       IMMessagesToTrack, IMNotifyRecipientCommandPipelineParameter, 
+                       IMNotifyRecipientCommandProcessingPipelineComponent, IMPlayedReceiptPipelineParameter, 
+                       IMPlayedReceiptProcessingPipelineComponent, IMReadReceiptPipelineParameter, 
+                       IMReadReceiptProcessingPipelineComponent, IMTextMessageAttributedStringContent, 
+                       IMTextMessagePipelineParameter, IMTextMessageProcessingPipelineComponent, 
+                       _IMDInternalWorkQueue, _TtC12IMDaemonCore28PersistedCollaborationNotice, 
+                       __IMDBackwardCompatibilityMessageIdentifier, __IMDPlainTextTapbackInterpreterImpl ]
     objc-ivars:      [ IMChatSessionCloseProcessingPipelineComponent._account, IMChatSessionCloseProcessingPipelineComponent._chatRegistry, 
                        IMChatSessionCloseProcessingPipelineComponent._idsTrustedData, 
                        IMChatSessionCloseProcessingPipelineComponent._messageStore, 

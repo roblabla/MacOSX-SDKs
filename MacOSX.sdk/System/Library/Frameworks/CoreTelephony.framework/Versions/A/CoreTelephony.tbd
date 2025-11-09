@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           33914F63-DD15-3D09-AAF8-2774C43FAB4D
+    value:           824A0DCF-1AC8-3856-A1CF-05228A41A4CE
   - target:          x86_64-maccatalyst
-    value:           33914F63-DD15-3D09-AAF8-2774C43FAB4D
+    value:           824A0DCF-1AC8-3856-A1CF-05228A41A4CE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           48AF02FB-65F0-3107-A438-0CE07F730AD9
+    value:           5C02D112-3144-302A-9BD4-E91313D228B8
   - target:          arm64e-maccatalyst
-    value:           48AF02FB-65F0-3107-A438-0CE07F730AD9
+    value:           5C02D112-3144-302A-9BD4-E91313D228B8
 install-name:    '/System/Library/Frameworks/CoreTelephony.framework/Versions/A/CoreTelephony'
 current-version: 0
 exports:

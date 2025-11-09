@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A0441D57-26F7-3EB2-90FC-E697CF79C71A
+    value:           2EF7E431-3678-3E18-A54D-404A50AB46E1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C5A231C5-D584-3F87-A06E-4D03C3473A02
+    value:           273F4CBC-5163-3F86-8570-7E8357DE2237
 install-name:    '/System/Library/PrivateFrameworks/Focus.framework/Versions/A/Focus'
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

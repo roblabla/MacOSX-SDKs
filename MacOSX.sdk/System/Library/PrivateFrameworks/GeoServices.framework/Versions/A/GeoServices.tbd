@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F734EE86-69D3-3803-B5B5-6980D6B5CAB4
+    value:           97C03347-45AB-3690-B401-B55EB7A58A07
   - target:          x86_64-maccatalyst
-    value:           F734EE86-69D3-3803-B5B5-6980D6B5CAB4
+    value:           97C03347-45AB-3690-B401-B55EB7A58A07
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           79873CDC-DC10-3BF0-B34B-39E9E00C5EF3
+    value:           CA7BB719-C607-3FA4-A4F7-40190C50779D
   - target:          arm64e-maccatalyst
-    value:           79873CDC-DC10-3BF0-B34B-39E9E00C5EF3
+    value:           CA7BB719-C607-3FA4-A4F7-40190C50779D
 install-name:    '/System/Library/PrivateFrameworks/GeoServices.framework/Versions/A/GeoServices'
-current-version: 1889.20.7
+current-version: 1889.22.9
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -1485,8 +1485,10 @@ exports:
                        _GEORPRapQueryParametersReadFrom, _GEORPRatingValueIsValid, 
                        _GEORPRatingValueReadAllFrom, _GEORPRatingValueReadFrom, _GEORPResolutionIsDirty, 
                        _GEORPResolutionIsValid, _GEORPResolutionReadAllFrom, _GEORPResolutionReadFrom, 
-                       _GEORPScorecardIsDirty, _GEORPScorecardIsValid, _GEORPScorecardReadAllFrom, 
-                       _GEORPScorecardReadFrom, _GEORPScorecardUpdateIsValid, _GEORPScorecardUpdateReadAllFrom, 
+                       _GEORPRunningTrackFeedbackIsValid, _GEORPRunningTrackFeedbackReadAllFrom, 
+                       _GEORPRunningTrackFeedbackReadFrom, _GEORPScorecardIsDirty, 
+                       _GEORPScorecardIsValid, _GEORPScorecardReadAllFrom, _GEORPScorecardReadFrom, 
+                       _GEORPScorecardUpdateIsValid, _GEORPScorecardUpdateReadAllFrom, 
                        _GEORPScorecardUpdateReadFrom, _GEORPSearchCommonContextIsDirty, 
                        _GEORPSearchCommonContextIsValid, _GEORPSearchCommonContextReadAllFrom, 
                        _GEORPSearchCommonContextReadFrom, _GEORPSearchFeedbackClearSensitiveFields, 
@@ -2071,15 +2073,18 @@ exports:
                        _GeoAnalyticsConfig_AnalyticsPipelineMaxPersist, _GeoAnalyticsConfig_AnalyticsPipelineStorageBatchCount, 
                        _GeoAnalyticsConfig_AnalyticsPipelineStorageBatchTimeInSeconds, 
                        _GeoAnalyticsConfig_AnalyticsPipelineUploadHolddownTimeInSeconds, 
-                       _GeoAnalyticsConfig_AnalyticsShortSessionMaxSeqNo, _GeoAnalyticsConfig_AppIdsForFunctionAppGroupSafari, 
-                       _GeoAnalyticsConfig_AppIdsForFunctionAppGroupSiri, _GeoAnalyticsConfig_AppIdsForFunctionAppGroupSpotlight, 
-                       _GeoAnalyticsConfig_ChildSuppressionEnabled, _GeoAnalyticsConfig_CompressionOutputBufferSize, 
-                       _GeoAnalyticsConfig_CountsAggregationDaemonIds, _GeoAnalyticsConfig_CountsAggregationInterval, 
-                       _GeoAnalyticsConfig_CountsAggregationLastRunTime, _GeoAnalyticsConfig_CurrentMetro, 
-                       _GeoAnalyticsConfig_Deanonymize, _GeoAnalyticsConfig_DeanonymizedUUID, 
-                       _GeoAnalyticsConfig_DeanonymizedUserId, _GeoAnalyticsConfig_DisableUsage, 
-                       _GeoAnalyticsConfig_EVDirectionsFeedbackToggle, _GeoAnalyticsConfig_FallbackCountry, 
-                       _GeoAnalyticsConfig_FallbackMetro, _GeoAnalyticsConfig_FifteenMonthDeviceSessionConfiguredEpoch, 
+                       _GeoAnalyticsConfig_AnalyticsShortSessionMaxSeqNo, _GeoAnalyticsConfig_AppIdsForFindMyPunchIn, 
+                       _GeoAnalyticsConfig_AppIdsForFunctionAppGroupSafari, _GeoAnalyticsConfig_AppIdsForFunctionAppGroupSiri, 
+                       _GeoAnalyticsConfig_AppIdsForFunctionAppGroupSpotlight, _GeoAnalyticsConfig_AppIdsForSMSPunchIn, 
+                       _GeoAnalyticsConfig_AppIdsForSafariPunchIn, _GeoAnalyticsConfig_AppIdsForSiriPunchIn, 
+                       _GeoAnalyticsConfig_AppIdsForSpotlightPunchIn, _GeoAnalyticsConfig_ChildSuppressionEnabled, 
+                       _GeoAnalyticsConfig_CompressionOutputBufferSize, _GeoAnalyticsConfig_CountsAggregationDaemonIds, 
+                       _GeoAnalyticsConfig_CountsAggregationInterval, _GeoAnalyticsConfig_CountsAggregationLastRunTime, 
+                       _GeoAnalyticsConfig_CurrentMetro, _GeoAnalyticsConfig_Deanonymize, 
+                       _GeoAnalyticsConfig_DeanonymizedUUID, _GeoAnalyticsConfig_DeanonymizedUserId, 
+                       _GeoAnalyticsConfig_DisableUsage, _GeoAnalyticsConfig_EVDirectionsFeedbackToggle, 
+                       _GeoAnalyticsConfig_FallbackCountry, _GeoAnalyticsConfig_FallbackMetro, 
+                       _GeoAnalyticsConfig_FifteenMonthDeviceSessionConfiguredEpoch, 
                        _GeoAnalyticsConfig_FifteenMonthDeviceSessionData, _GeoAnalyticsConfig_FifteenMonthDeviceSessionEpoch, 
                        _GeoAnalyticsConfig_FifteenMonthPreSyncDeviceSessionData, 
                        _GeoAnalyticsConfig_FifteenMonthPreSyncDeviceSessionDataHasMigrated, 
@@ -3023,7 +3028,8 @@ exports:
                        GEOManeuverData, GEOMapAccess, GEOMapDataSubscription, GEOMapDataSubscriptionManager, 
                        GEOMapDataSubscriptionState, GEOMapFeatureAccess, GEOMapFeatureBuilding, 
                        GEOMapFeatureBuildingSection, GEOMapFeatureJunction, GEOMapFeatureLine, 
-                       GEOMapFeatureMultiSegmentRoad, GEOMapFeatureRoad, GEOMapFeatureTransitAccessPoint, 
+                       GEOMapFeatureMultiSegmentRoad, GEOMapFeatureRoad, GEOMapFeatureRunningTrack, 
+                       GEOMapFeatureRunningTrackLane, GEOMapFeatureTransitAccessPoint, 
                        GEOMapFeatureTransitHall, GEOMapFeatureTransitLink, GEOMapFeatureTransitPoint, 
                        GEOMapFeatureTransitStation, GEOMapFeatureTransitStop, GEOMapItemAdditionalPlaceInfo, 
                        GEOMapItemAddressBookAttributes, GEOMapItemAssistant, GEOMapItemAttribution, 
@@ -3215,11 +3221,11 @@ exports:
                        GEORPProblemProvider, GEORPProblemRequest, GEORPProblemResponse, 
                        GEORPProblemStatus, GEORPProblemStatusRequest, GEORPProblemStatusResponse, 
                        GEORPRapInfo, GEORPRapProfileInfo, GEORPRapQueryParameters, 
-                       GEORPRatingValue, GEORPResolution, GEORPScorecard, GEORPScorecardUpdate, 
-                       GEORPSearchCommonContext, GEORPSearchFeedback, GEORPSearchFeedbackContext, 
-                       GEORPSearchFeedbackCorrections, GEORPSiriContext, GEORPSourceInfo, 
-                       GEORPStreetFeedback, GEORPSuggestedRouteIndex, GEORPSuggestionEntry, 
-                       GEORPSuggestionList, GEORPTdmInfo, GEORPThirdPartyPhotoSharingPreference, 
+                       GEORPRatingValue, GEORPResolution, GEORPRunningTrackFeedback, 
+                       GEORPScorecard, GEORPScorecardUpdate, GEORPSearchCommonContext, 
+                       GEORPSearchFeedback, GEORPSearchFeedbackContext, GEORPSearchFeedbackCorrections, 
+                       GEORPSiriContext, GEORPSourceInfo, GEORPStreetFeedback, GEORPSuggestedRouteIndex, 
+                       GEORPSuggestionEntry, GEORPSuggestionList, GEORPTdmInfo, GEORPThirdPartyPhotoSharingPreference, 
                        GEORPThirdPartyPhotoSharingPreferenceUpdate, GEORPThirdPartyPhotoSharingPreferenceUpdateResult, 
                        GEORPTileFeedback, GEORPTimestamp, GEORPTransitLineTileInfo, 
                        GEORPTransitPoiCorrections, GEORPTransitPoiFeedback, GEORPUpdatedLabel, 
@@ -3253,22 +3259,22 @@ exports:
                        GEOResultRefinementMultiSelectElement, GEOResultRefinementSection, 
                        GEOResultRefinementSort, GEOResultRefinementSortElement, GEOResultRefinementToggle, 
                        GEOResultRefinementView, GEOResultTypeAutocompleteFilter, 
-                       GEOResultTypeSearchFilter, GEORetainedSearchMetadata, GEORevealedPlaceCardModule, 
-                       GEORevealedPlaceCardModuleButton, GEORevealedPlaceCardModuleTypeHours, 
-                       GEORevealedPlaceCardModuleTypeInfos, GEORevealedPlaceCardModuleTypePhotos, 
-                       GEORevealedPlaceCardModuleTypeShowcase, GEORevealedPlaceCardModuleTypeTitle, 
-                       GEORevealedPlaceCardModuleTypeUnifiedActionRow, GEORideBookingIntentResponseFailure, 
-                       GEORoadAccessPoint, GEORoadComplexity, GEORoadDescription, 
-                       GEORoadEdge, GEORoadMatch, GEORoadMatcher, GEORoute, GEORouteAnnotation, 
-                       GEORouteAttributes, GEORouteDetails, GEORouteDisplayHints, 
-                       GEORouteHypothesis, GEORouteHypothesisCache, GEORouteHypothesisKey, 
-                       GEORouteHypothesisMonitor, GEORouteHypothesisRequest, GEORouteHypothesisResponse, 
-                       GEORouteHypothesisValue, GEORouteHypothesizer, GEORouteIncident, 
-                       GEORouteInitializerData, GEORouteLegRange, GEORouteLineStyleInfo, 
-                       GEORouteMatch, GEORouteMatcher, GEORouteName, GEORoutePlanningInfo, 
-                       GEORoutePreloader, GEORoutePreloaderStatistics, GEORouteRestrictionZoneID, 
-                       GEORouteRestrictionZoneInfo, GEORouteTrafficBuilder, GEORouteTrafficDetail, 
-                       GEORoutingSettingsCyclingPrefs, GEORoutingSettingsDrivingPrefs, 
+                       GEOResultTypeSearchFilter, GEOResumeRouteHandle, GEORetainedSearchMetadata, 
+                       GEORevealedPlaceCardModule, GEORevealedPlaceCardModuleButton, 
+                       GEORevealedPlaceCardModuleTypeHours, GEORevealedPlaceCardModuleTypeInfos, 
+                       GEORevealedPlaceCardModuleTypePhotos, GEORevealedPlaceCardModuleTypeShowcase, 
+                       GEORevealedPlaceCardModuleTypeTitle, GEORevealedPlaceCardModuleTypeUnifiedActionRow, 
+                       GEORideBookingIntentResponseFailure, GEORoadAccessPoint, GEORoadComplexity, 
+                       GEORoadDescription, GEORoadEdge, GEORoadMatch, GEORoadMatcher, 
+                       GEORoute, GEORouteAnnotation, GEORouteAttributes, GEORouteDetails, 
+                       GEORouteDisplayHints, GEORouteHypothesis, GEORouteHypothesisCache, 
+                       GEORouteHypothesisKey, GEORouteHypothesisMonitor, GEORouteHypothesisRequest, 
+                       GEORouteHypothesisResponse, GEORouteHypothesisValue, GEORouteHypothesizer, 
+                       GEORouteIncident, GEORouteInitializerData, GEORouteLegRange, 
+                       GEORouteLineStyleInfo, GEORouteMatch, GEORouteMatcher, GEORouteName, 
+                       GEORoutePlanningInfo, GEORoutePreloader, GEORoutePreloaderStatistics, 
+                       GEORouteRestrictionZoneID, GEORouteRestrictionZoneInfo, GEORouteTrafficBuilder, 
+                       GEORouteTrafficDetail, GEORoutingSettingsCyclingPrefs, GEORoutingSettingsDrivingPrefs, 
                        GEORoutingSettingsVirtualGarageSetttings, GEOS2MapTileRequester, 
                        GEOSPRMetroAvailabilityFetcher, GEOSQLiteDB, GEOScoreCategory, 
                        GEOScreenDimension, GEOSearchAttribution, GEOSearchAttributionManifestManager, 
@@ -3805,19 +3811,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           02ABAECC-6343-3EE0-90B7-95439DA2B965
+    value:           532D6D32-A744-3C81-84E4-18D9ECB9D889
   - target:          x86_64-maccatalyst
-    value:           02ABAECC-6343-3EE0-90B7-95439DA2B965
+    value:           532D6D32-A744-3C81-84E4-18D9ECB9D889
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2B59FFBA-2C09-3CDA-86D4-F0E4A8F31446
+    value:           3AF7BB5C-25AB-377F-887E-B0A799886912
   - target:          arm64e-maccatalyst
-    value:           2B59FFBA-2C09-3CDA-86D4-F0E4A8F31446
+    value:           3AF7BB5C-25AB-377F-887E-B0A799886912
 install-name:    '/System/Library/PrivateFrameworks/GeoServicesCore.framework/Versions/A/GeoServicesCore'
-current-version: 1889.20.7
+current-version: 1889.22.9
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

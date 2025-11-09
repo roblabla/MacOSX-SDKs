@@ -3,15 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           451C3F2D-1C2D-389C-8083-1292E473BA75
+    value:           DF8E5E07-5DB5-3080-BC3D-5B0158E7F5A4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           00071040-75B0-3D77-8241-4B168C5AE736
+    value:           23CF5DED-761A-39A9-9F79-B7F245C333FD
 install-name:    '/System/Library/PrivateFrameworks/ViewBridge.framework/Versions/A/ViewBridge'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _NSServiceViewControllerDidAdvanceToRunPhaseNotification, 
+    symbols:         [ _NSRemoteViewControllerServiceViewReceivedLeftMouseDownNotification, 
+                       _NSServiceViewControllerDidAdvanceToRunPhaseNotification, 
                        _NSServiceViewControllerWillAdvanceToRunPhaseNotification, 
                        _NSViewBridgeErrorDomain, _NSViewServiceApplicationMain, _NSViewServiceMain, 
                        _NSXPCSharedListenerErrorDomain, _ViewBridgeAuxiliaryMain ]

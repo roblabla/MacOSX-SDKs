@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3EA50F16-29DB-3DA1-BF11-C70E9717DBFE
+    value:           FA93E94F-E347-3A53-9060-B19DFFADAB33
   - target:          x86_64-maccatalyst
-    value:           3EA50F16-29DB-3DA1-BF11-C70E9717DBFE
+    value:           FA93E94F-E347-3A53-9060-B19DFFADAB33
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BB382555-56F2-3C1D-AE8E-B955079EFD90
+    value:           8F846A0A-CDD0-3B33-A8D0-788E5449D2E1
   - target:          arm64e-maccatalyst
-    value:           BB382555-56F2-3C1D-AE8E-B955079EFD90
+    value:           8F846A0A-CDD0-3B33-A8D0-788E5449D2E1
 install-name:    '/System/Library/PrivateFrameworks/BiomeStreams.framework/Versions/A/BiomeStreams'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -354,7 +354,8 @@ exports:
                        BMPBNowPlayingEvent._absoluteTimestamp, BMPBNowPlayingEvent._album, 
                        BMPBNowPlayingEvent._artist, BMPBNowPlayingEvent._bundleId, 
                        BMPBNowPlayingEvent._duration, BMPBNowPlayingEvent._elapsed, 
-                       BMPBNowPlayingEvent._genre, BMPBNowPlayingEvent._has, BMPBNowPlayingEvent._iTunesStoreIdentifier, 
+                       BMPBNowPlayingEvent._genre, BMPBNowPlayingEvent._has, BMPBNowPlayingEvent._iTunesAlbumIdentifier, 
+                       BMPBNowPlayingEvent._iTunesArtistIdentifier, BMPBNowPlayingEvent._iTunesStoreIdentifier, 
                        BMPBNowPlayingEvent._iTunesSubscriptionIdentifier, BMPBNowPlayingEvent._isAirPlayVideo, 
                        BMPBNowPlayingEvent._mediaType, BMPBNowPlayingEvent._outputDevices, 
                        BMPBNowPlayingEvent._playbackState, BMPBNowPlayingEvent._title, 
@@ -409,7 +410,8 @@ exports:
                        BMPBRankableSocialHighlight._resolvedUrl, BMPBRankableSocialHighlight._resourceUrl, 
                        BMPBRankableSocialHighlight._score, BMPBRankableSocialHighlight._sender, 
                        BMPBRankableSocialHighlight._sourceBundleId, BMPBRankableSocialHighlight._syndicationSecondsSinceReferenceDate, 
-                       BMPBReadMessageEvent._idsHandle, BMPBRemindersContentEvent._absoluteTimestamp, 
+                       BMPBReadMessageEvent._has, BMPBReadMessageEvent._idsHandle, 
+                       BMPBReadMessageEvent._markedUnread, BMPBRemindersContentEvent._absoluteTimestamp, 
                        BMPBRemindersContentEvent._completionDateTimestamp, BMPBRemindersContentEvent._contentProtection, 
                        BMPBRemindersContentEvent._domainId, BMPBRemindersContentEvent._dueDateTimestamp, 
                        BMPBRemindersContentEvent._has, BMPBRemindersContentEvent._isAllDay, 
@@ -489,7 +491,7 @@ exports:
                        BMPBUserFocusComputedModeEvent._modeUpdateReason, BMPBUserFocusComputedModeEvent._modeUpdateSource, 
                        BMPBUserFocusComputedModeEvent._semanticModeIdentifier, BMPBUserFocusComputedModeEvent._starting, 
                        BMPBUserProofingEvent._absoluteTimestamp, BMPBUserProofingEvent._age, 
-                       BMPBUserProofingEvent._deviceLanguage, BMPBUserProofingEvent._ethnicity, 
+                       BMPBUserProofingEvent._deviceLanguage, BMPBUserProofingEvent._field, 
                        BMPBUserProofingEvent._gender, BMPBUserProofingEvent._has, 
                        BMPBUserProofingEvent._issuer, BMPBUserProofingEvent._proofingDecision, 
                        BMPBUserProofingEvent._skinTone, BMPBUserStatusChangeEvent._idsHandle, 

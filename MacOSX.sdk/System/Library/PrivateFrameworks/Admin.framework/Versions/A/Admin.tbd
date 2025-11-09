@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           16EE4C4B-89F3-350C-8144-B4841445B988
+    value:           4AB27722-4A98-36B8-9FF8-DB97E5800204
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CA3B0C30-2680-3C84-9DE0-B6429C24B59C
+    value:           4ECB0D80-0556-3DC3-A2CC-0565F52788E1
 install-name:    '/System/Library/PrivateFrameworks/Admin.framework/Versions/A/Admin'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

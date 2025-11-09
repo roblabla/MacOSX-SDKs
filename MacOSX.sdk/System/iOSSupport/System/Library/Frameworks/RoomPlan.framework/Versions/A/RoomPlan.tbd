@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           3C1DE739-C103-3A13-963E-AFB87BDE73BD
+    value:           C5997694-F285-3809-B9F2-8B16BA7A9147
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           399F0707-7195-3C2D-88C6-F189E97867D5
+    value:           658661EF-E2B5-3533-9D22-111FCB57A45E
 install-name:    '/System/iOSSupport/System/Library/Frameworks/RoomPlan.framework/Versions/A/RoomPlan'
 swift-abi-version: 7
 exports:

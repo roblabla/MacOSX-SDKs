@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FC65F05D-58C2-3AB4-8269-7D28FC7A1960
+    value:           C9EB6308-E540-3F28-8E71-7B7D0AC6C857
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F3CCD826-E59A-3ED6-905B-CEFE3B9AE1C5
+    value:           E944BA04-4A6E-319C-8E1A-4AD571F41C3B
 install-name:    '/System/Library/PrivateFrameworks/CoreUARP.framework/Versions/A/CoreUARP'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

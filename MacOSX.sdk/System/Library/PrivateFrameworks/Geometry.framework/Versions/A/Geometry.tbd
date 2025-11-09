@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E91385F8-8D90-3B46-8C66-365CEE418740
+    value:           33222449-C2BE-3924-9EAB-37E923B2118E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AC6BEC52-AE3C-3577-BDA9-59848503ECD1
+    value:           E6CE1381-23F5-36CA-A899-7FB57C78AA68
 install-name:    '/System/Library/PrivateFrameworks/Geometry.framework/Versions/A/Geometry'
 swift-abi-version: 7
 exports:

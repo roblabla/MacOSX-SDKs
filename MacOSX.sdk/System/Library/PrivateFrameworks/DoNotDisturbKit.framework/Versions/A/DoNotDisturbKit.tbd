@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           12660C52-4788-358D-88C7-3ECB064011B9
+    value:           22CBEC64-DBCB-398D-AAFA-A8DC5A04E89B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B48EC173-3BB9-30BD-89DE-D4C41A6609FE
+    value:           0DD7E4E6-CE5F-31E2-AF04-E72045350F4E
 install-name:    '/System/Library/PrivateFrameworks/DoNotDisturbKit.framework/Versions/A/DoNotDisturbKit'
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

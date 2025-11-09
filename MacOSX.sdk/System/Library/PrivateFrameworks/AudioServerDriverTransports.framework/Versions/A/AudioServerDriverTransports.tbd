@@ -5,7 +5,7 @@ uuids:
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0820EA1A-0545-30D1-A314-EE14A3D12214
+    value:           05287C69-707F-31F9-BBBF-024D15DFB899
 install-name:    '/System/Library/PrivateFrameworks/AudioServerDriverTransports.framework/Versions/A/AudioServerDriverTransports'
 exports:
   - targets:         [ arm64-macos, arm64e-macos ]

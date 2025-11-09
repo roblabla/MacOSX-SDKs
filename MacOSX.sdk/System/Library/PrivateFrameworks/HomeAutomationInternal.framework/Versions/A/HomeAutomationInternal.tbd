@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F4232E9A-004A-393E-ABF3-E4C56E5E0823
+    value:           8B78E87E-7953-3FB6-85FC-3D6ABF631335
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           57D54CE3-EDC8-3338-B4D4-97D1EEC2E7D1
+    value:           B20024F5-B255-3F2D-8EA1-E7474D6DECEE
 install-name:    '/System/Library/PrivateFrameworks/HomeAutomationInternal.framework/Versions/A/HomeAutomationInternal'
 swift-abi-version: 7
 allowable-clients:
@@ -70,6 +70,9 @@ exports:
                        '_$s22HomeAutomationInternal04ShowA11RCHStrategyCMn', '_$s22HomeAutomationInternal04ShowA11RCHStrategyCMo', 
                        '_$s22HomeAutomationInternal04ShowA11RCHStrategyCMu', '_$s22HomeAutomationInternal04ShowA11RCHStrategyCN', 
                        '_$s22HomeAutomationInternal04ShowA11RCHStrategyCfD', '_$s22HomeAutomationInternal04ShowA11RCHStrategyCfd', 
+                       '_$s22HomeAutomationInternal04ShowA13IntentHandlerC14resolveFilters3forSayAA0daH16ResolutionResultCGAA0daE0C_tYaFTj', 
+                       '_$s22HomeAutomationInternal04ShowA13IntentHandlerC14resolveFilters3forSayAA0daH16ResolutionResultCGAA0daE0C_tYaFTjTu', 
+                       '_$s22HomeAutomationInternal04ShowA13IntentHandlerC14resolveFilters3forSayAA0daH16ResolutionResultCGAA0daE0C_tYaFTq', 
                        '_$s22HomeAutomationInternal04ShowA13IntentHandlerC6handle6intentAA0daE8ResponseCAA0daE0C_tYaFTj', 
                        '_$s22HomeAutomationInternal04ShowA13IntentHandlerC6handle6intentAA0daE8ResponseCAA0daE0C_tYaFTjTu', 
                        '_$s22HomeAutomationInternal04ShowA13IntentHandlerC6handle6intentAA0daE8ResponseCAA0daE0C_tYaFTq', 
@@ -116,6 +119,25 @@ exports:
                        '_$s22HomeAutomationInternal04ShowA20IntentHandleDelegatePxycfCTj', 
                        '_$s22HomeAutomationInternal04ShowA20IntentHandleDelegatePxycfCTq', 
                        '_$s22HomeAutomationInternal04ShowA20IntentHandleDelegateTL', 
+                       '_$s22HomeAutomationInternal04ShowA23FiltersResolutionResultC11unsupported9forReasonACXDAA0dae11UnsupportedJ0O_tFZTj', 
+                       '_$s22HomeAutomationInternal04ShowA23FiltersResolutionResultC11unsupported9forReasonACXDAA0dae11UnsupportedJ0O_tFZTq', 
+                       '_$s22HomeAutomationInternal04ShowA23FiltersResolutionResultC14JSONDictionary6intentACSgSDySSypG_So8INIntentCtcfC', 
+                       '_$s22HomeAutomationInternal04ShowA23FiltersResolutionResultC14JSONDictionary6intentACSgSDySSypG_So8INIntentCtcfc', 
+                       '_$s22HomeAutomationInternal04ShowA23FiltersResolutionResultCMa', 
+                       '_$s22HomeAutomationInternal04ShowA23FiltersResolutionResultCMn', 
+                       '_$s22HomeAutomationInternal04ShowA23FiltersResolutionResultCMo', 
+                       '_$s22HomeAutomationInternal04ShowA23FiltersResolutionResultCMu', 
+                       '_$s22HomeAutomationInternal04ShowA23FiltersResolutionResultCN', 
+                       '_$s22HomeAutomationInternal04ShowA23FiltersResolutionResultCfD', 
+                       '_$s22HomeAutomationInternal04ShowA24FiltersUnsupportedReasonO8rawValueACSgSi_tcfC', 
+                       '_$s22HomeAutomationInternal04ShowA24FiltersUnsupportedReasonO8rawValueSivg', 
+                       '_$s22HomeAutomationInternal04ShowA24FiltersUnsupportedReasonO8rawValueSivpMV', 
+                       '_$s22HomeAutomationInternal04ShowA24FiltersUnsupportedReasonOMa', 
+                       '_$s22HomeAutomationInternal04ShowA24FiltersUnsupportedReasonOMn', 
+                       '_$s22HomeAutomationInternal04ShowA24FiltersUnsupportedReasonON', 
+                       '_$s22HomeAutomationInternal04ShowA24FiltersUnsupportedReasonOSHAAMc', 
+                       '_$s22HomeAutomationInternal04ShowA24FiltersUnsupportedReasonOSQAAMc', 
+                       '_$s22HomeAutomationInternal04ShowA24FiltersUnsupportedReasonOSYAAMc', 
                        '_$s22HomeAutomationInternal04ShowA4FlowC07SiriKitE0011EnvironmentE0AAMc', 
                        '_$s22HomeAutomationInternal04ShowA4FlowC07SiriKitE00E0AAMc', 
                        '_$s22HomeAutomationInternal04ShowA4FlowC13SiriUtilities0F19EnvironmentLocatingAAMc', 
@@ -3237,6 +3259,7 @@ exports:
                        '_$s22HomeAutomationInternal8SignpostO4NameO12blockRequests12StaticStringVvgZ', 
                        '_$s22HomeAutomationInternal8SignpostO4NameO12removeRecords12StaticStringVvgZ', 
                        '_$s22HomeAutomationInternal8SignpostO4NameO13confirmIntents12StaticStringVvgZ', 
+                       '_$s22HomeAutomationInternal8SignpostO4NameO13getEndpointIds12StaticStringVvgZ', 
                        '_$s22HomeAutomationInternal8SignpostO4NameO13homeKitWarmUps12StaticStringVvgZ', 
                        '_$s22HomeAutomationInternal8SignpostO4NameO13modifyRequests12StaticStringVvgZ', 
                        '_$s22HomeAutomationInternal8SignpostO4NameO14getTrialFactors12StaticStringVvgZ', 
@@ -3247,11 +3270,13 @@ exports:
                        '_$s22HomeAutomationInternal8SignpostO4NameO15resolveUserTasks12StaticStringVvgZ', 
                        '_$s22HomeAutomationInternal8SignpostO4NameO15syncDataVersions12StaticStringVvgZ', 
                        '_$s22HomeAutomationInternal8SignpostO4NameO16createAceCommands12StaticStringVvgZ', 
+                       '_$s22HomeAutomationInternal8SignpostO4NameO16getCurrentDevices12StaticStringVvgZ', 
                        '_$s22HomeAutomationInternal8SignpostO4NameO16intentGenerations12StaticStringVvgZ', 
                        '_$s22HomeAutomationInternal8SignpostO4NameO16intentValidations12StaticStringVvgZ', 
                        '_$s22HomeAutomationInternal8SignpostO4NameO16openHKConnections12StaticStringVvgZ', 
                        '_$s22HomeAutomationInternal8SignpostO4NameO16sendAsyncCommands12StaticStringVvgZ', 
                        '_$s22HomeAutomationInternal8SignpostO4NameO16sendBatchRequests12StaticStringVvgZ', 
+                       '_$s22HomeAutomationInternal8SignpostO4NameO17getLocalAccessorys12StaticStringVvgZ', 
                        '_$s22HomeAutomationInternal8SignpostO4NameO17handleAsyncDialogs12StaticStringVvgZ', 
                        '_$s22HomeAutomationInternal8SignpostO4NameO17roomInitilizations12StaticStringVvgZ', 
                        '_$s22HomeAutomationInternal8SignpostO4NameO18createBatchRequests12StaticStringVvgZ', 
@@ -3282,6 +3307,7 @@ exports:
                        '_$s22HomeAutomationInternal8SignpostO4NameO24intentPrioritizationSteps12StaticStringVvgZ', 
                        '_$s22HomeAutomationInternal8SignpostO4NameO24optimizedEntityRetrievals12StaticStringVvgZ', 
                        '_$s22HomeAutomationInternal8SignpostO4NameO24sceneActionInitilizations12StaticStringVvgZ', 
+                       '_$s22HomeAutomationInternal8SignpostO4NameO25getLocalDeviceInformations12StaticStringVvgZ', 
                        '_$s22HomeAutomationInternal8SignpostO4NameO27creatingIdentifierListFilers12StaticStringVvgZ', 
                        '_$s22HomeAutomationInternal8SignpostO4NameO27setNLParametersFromUSOParses12StaticStringVvgZ', 
                        '_$s22HomeAutomationInternal8SignpostO4NameO6handles12StaticStringVvgZ', 
@@ -3631,11 +3657,12 @@ exports:
                        DiscoverHomeIntent, DiscoverHomeIntentResponse, DiscoveryTypeResolutionResult, 
                        HomeDeviceTypeResolutionResult, HomeEntity, HomeEntityResolutionResult, 
                        HomeEntityTypeResolutionResult, HomeFilter, HomeFilterResolutionResult, 
-                       HomeSceneTypeResolutionResult, ShowHomeIntent, ShowHomeIntentResponse, 
-                       Trigger, TriggerEventResolutionResult, TriggerResolutionResult, 
-                       TriggerTypeResolutionResult, TriggerValue, TriggerValueResolutionResult, 
-                       _TtC22HomeAutomationInternal15NativeHomeStore, _TtC22HomeAutomationInternal16TimeTriggerValue, 
-                       _TtC22HomeAutomationInternal17ControlHomeIntent, _TtC22HomeAutomationInternal17EventTriggerValue, 
-                       _TtC22HomeAutomationInternal21ShowHomeIntentHandler, _TtC22HomeAutomationInternal24ControlHomeIntentHandler, 
-                       _TtC22HomeAutomationInternal25AutomateHomeIntentHandler, _TtC22HomeAutomationInternal25DiscoverHomeIntentHandler ]
+                       HomeSceneTypeResolutionResult, ShowHomeFiltersResolutionResult, 
+                       ShowHomeIntent, ShowHomeIntentResponse, Trigger, TriggerEventResolutionResult, 
+                       TriggerResolutionResult, TriggerTypeResolutionResult, TriggerValue, 
+                       TriggerValueResolutionResult, _TtC22HomeAutomationInternal15NativeHomeStore, 
+                       _TtC22HomeAutomationInternal16TimeTriggerValue, _TtC22HomeAutomationInternal17ControlHomeIntent, 
+                       _TtC22HomeAutomationInternal17EventTriggerValue, _TtC22HomeAutomationInternal21ShowHomeIntentHandler, 
+                       _TtC22HomeAutomationInternal24ControlHomeIntentHandler, _TtC22HomeAutomationInternal25AutomateHomeIntentHandler, 
+                       _TtC22HomeAutomationInternal25DiscoverHomeIntentHandler ]
 ...

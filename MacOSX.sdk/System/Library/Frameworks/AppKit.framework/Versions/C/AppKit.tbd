@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3E3E9537-B477-3F90-A020-FFDDE4C24D9A
+    value:           93BF8535-B50A-3B6E-9E2E-EBF535F22B94
   - target:          x86_64-maccatalyst
-    value:           3E3E9537-B477-3F90-A020-FFDDE4C24D9A
+    value:           93BF8535-B50A-3B6E-9E2E-EBF535F22B94
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3BE38C77-1B00-3DCA-81FF-A822CE8FF81C
+    value:           6CB39B23-EFB5-3657-B907-A8B964549BA1
   - target:          arm64e-maccatalyst
-    value:           3BE38C77-1B00-3DCA-81FF-A822CE8FF81C
+    value:           6CB39B23-EFB5-3657-B907-A8B964549BA1
 install-name:    '/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit'
-current-version: 2297
+current-version: 2299.30.112
 compatibility-version: 45
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -322,14 +322,14 @@ exports:
                        _NSAppleMenuSubmenuName, _NSAppleNoRedisplayAppearancePreferenceChanged, 
                        _NSApplicationDidBecomeActiveNotification, _NSApplicationDidChangeAccessibilityEnhancedUserInterfaceNotification, 
                        _NSApplicationDidChangeFocusedUIElementNotification, _NSApplicationDidChangeOcclusionStateNotification, 
-                       _NSApplicationDidChangeScreenParametersNotification, _NSApplicationDidFinishLaunchingNotification, 
-                       _NSApplicationDidFinishRestoringWindowsNotification, _NSApplicationDidHideNotification, 
-                       _NSApplicationDidResignActiveNotification, _NSApplicationDidUnhideNotification, 
-                       _NSApplicationDidUpdateNotification, _NSApplicationDockDidRestartNotification, 
-                       _NSApplicationExtensionSessionMain, _NSApplicationFileType, 
-                       _NSApplicationLaunchIsDefaultLaunchKey, _NSApplicationLaunchRemoteNotificationKey, 
-                       _NSApplicationLaunchUserNotificationKey, _NSApplicationLoad, 
-                       _NSApplicationMain, _NSApplicationProtectedDataDidBecomeAvailableNotification, 
+                       _NSApplicationDidChangeSafeVisibleFrameNotification, _NSApplicationDidChangeScreenParametersNotification, 
+                       _NSApplicationDidFinishLaunchingNotification, _NSApplicationDidFinishRestoringWindowsNotification, 
+                       _NSApplicationDidHideNotification, _NSApplicationDidResignActiveNotification, 
+                       _NSApplicationDidUnhideNotification, _NSApplicationDidUpdateNotification, 
+                       _NSApplicationDockDidRestartNotification, _NSApplicationExtensionSessionMain, 
+                       _NSApplicationFileType, _NSApplicationLaunchIsDefaultLaunchKey, 
+                       _NSApplicationLaunchRemoteNotificationKey, _NSApplicationLaunchUserNotificationKey, 
+                       _NSApplicationLoad, _NSApplicationMain, _NSApplicationProtectedDataDidBecomeAvailableNotification, 
                        _NSApplicationProtectedDataWillBecomeUnavailableNotification, 
                        _NSApplicationTestingNotificationTestNameKey, _NSApplicationTestingNotificationTestResultsKey, 
                        _NSApplicationTestingStartIsStrictKey, _NSApplicationTestingTestFinishedNotification, 
@@ -1352,17 +1352,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8E813D94-B09B-39D9-8736-90BEDAA160FE
+    value:           F0C56B35-F24B-310D-801A-D58BE1A34B10
   - target:          x86_64-maccatalyst
-    value:           8E813D94-B09B-39D9-8736-90BEDAA160FE
+    value:           F0C56B35-F24B-310D-801A-D58BE1A34B10
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C1B15449-BED9-3FC6-B07E-55FD41DB23B3
+    value:           C948B66D-DF09-3EBA-8F45-CEE8DD8098AB
   - target:          arm64e-maccatalyst
-    value:           C1B15449-BED9-3FC6-B07E-55FD41DB23B3
+    value:           C948B66D-DF09-3EBA-8F45-CEE8DD8098AB
 install-name:    '/System/Library/PrivateFrameworks/CollectionViewCore.framework/Versions/A/CollectionViewCore'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -1382,19 +1382,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9AAE8F4E-D8AA-3D1B-A67A-AB7C4F7639A9
+    value:           157284E2-7C0D-31CC-938C-DE5A9FA68516
   - target:          x86_64-maccatalyst
-    value:           9AAE8F4E-D8AA-3D1B-A67A-AB7C4F7639A9
+    value:           157284E2-7C0D-31CC-938C-DE5A9FA68516
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6B5DCD6A-9C35-30E4-8A02-6A73A39D985E
+    value:           77A93BFC-BF19-308D-AA8B-8FA41389A5FE
   - target:          arm64e-maccatalyst
-    value:           6B5DCD6A-9C35-30E4-8A02-6A73A39D985E
+    value:           77A93BFC-BF19-308D-AA8B-8FA41389A5FE
 install-name:    '/System/Library/PrivateFrameworks/UIFoundation.framework/Versions/A/UIFoundation'
-current-version: 855
+current-version: 856.3
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

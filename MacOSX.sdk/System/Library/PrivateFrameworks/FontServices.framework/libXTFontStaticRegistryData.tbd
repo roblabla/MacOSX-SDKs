@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           51755B02-2105-325A-A7D9-FD7ED54B5AB6
+    value:           449491C7-667B-3179-82B3-3ACB6EA0D592
   - target:          x86_64-maccatalyst
-    value:           51755B02-2105-325A-A7D9-FD7ED54B5AB6
+    value:           449491C7-667B-3179-82B3-3ACB6EA0D592
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9CC1D0C6-ACA7-3B48-BC1E-AE1B50D13B4F
+    value:           39536F41-F7EC-3FDE-BD8E-0F3E0E3746AC
   - target:          arm64e-maccatalyst
-    value:           9CC1D0C6-ACA7-3B48-BC1E-AE1B50D13B4F
+    value:           39536F41-F7EC-3FDE-BD8E-0F3E0E3746AC
 install-name:    '/System/Library/PrivateFrameworks/FontServices.framework/libXTFontStaticRegistryData.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

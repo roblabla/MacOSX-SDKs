@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           46A84EF6-3C99-33BB-B0E5-D42CC90E5DC2
+    value:           C63A3F1F-0305-3D3D-BF87-145D936E8015
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           23F49330-D777-3D7B-81EE-18FA818A4E12
+    value:           4BD63241-154C-3592-9FF7-763A9CEB54E0
 install-name:    '/System/Library/PrivateFrameworks/MobileInstallation.framework/Versions/A/MobileInstallation'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -40,11 +40,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A5B7789F-6B1C-397C-AFD9-26D1959F9D47
+    value:           2CCA0BBF-7DE7-3803-A042-7A00439079BD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           46AB7D22-4234-3B02-A140-A78E068C3E9B
+    value:           BA0BF465-F2E2-38A4-B8C7-0AAA427ABBB0
 install-name:    '/System/Library/PrivateFrameworks/InstalledContentLibrary.framework/Versions/A/InstalledContentLibrary'
 current-version: 0
 compatibility-version: 0

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           460A533C-D0EA-30E0-A484-BC6C3152F5F0
+    value:           B87E1A4C-D6D1-30D5-939C-4D19A426E2A9
   - target:          x86_64-maccatalyst
-    value:           460A533C-D0EA-30E0-A484-BC6C3152F5F0
+    value:           B87E1A4C-D6D1-30D5-939C-4D19A426E2A9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6E910D76-7627-3BEC-9072-1F5642731ED7
+    value:           4B993E57-B27D-3DC9-B434-DACE8670CFFF
   - target:          arm64e-maccatalyst
-    value:           6E910D76-7627-3BEC-9072-1F5642731ED7
+    value:           4B993E57-B27D-3DC9-B434-DACE8670CFFF
 install-name:    '/System/Library/PrivateFrameworks/iTunesCloud.framework/Versions/A/iTunesCloud'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -362,27 +362,28 @@ exports:
                        ICSecureKeyDeliveryResponse, ICSecurityInfo, ICSetParentalControlRequestOperation, 
                        ICSharedListeningContainer, ICSharedListeningItem, ICSharedListeningQueue, 
                        ICSharedTracklistPosition, ICSiriAddToAccousticHistoryRequest, 
-                       ICSongDownloadDoneRequest, ICStorageManager, ICStoreArtworkInfo, 
-                       ICStoreArtworkSizeInfo, ICStoreDialogResponse, ICStoreDialogResponseButton, 
-                       ICStoreDialogResponseButtonAction, ICStoreDialogResponseHandler, 
-                       ICStoreDialogResponseHandlerConfiguration, ICStoreFileAssetFairPlayInfo, 
-                       ICStoreFileAssetInfo, ICStoreFinanceItemMetadata, ICStoreHLSAssetInfo, 
-                       ICStoreMediaResponseItem, ICStorePlatformMetadata, ICStorePlatformOffer, 
-                       ICStorePlatformOfferAsset, ICStorePlatformRequest, ICStorePlatformRequestOperation, 
-                       ICStorePlatformResponse, ICStoreRadioStreamAssetInfo, ICStoreRequestContext, 
-                       ICStoreURLRequest, ICStoreURLRequestBuilderProperties, ICStoreURLResponseAuthenticationProvider, 
+                       ICSongDownloadDoneRequest, ICStorageManager, ICStoreArtworkGradientInfo, 
+                       ICStoreArtworkInfo, ICStoreArtworkSizeInfo, ICStoreDialogResponse, 
+                       ICStoreDialogResponseButton, ICStoreDialogResponseButtonAction, 
+                       ICStoreDialogResponseHandler, ICStoreDialogResponseHandlerConfiguration, 
+                       ICStoreFileAssetFairPlayInfo, ICStoreFileAssetInfo, ICStoreFinanceItemMetadata, 
+                       ICStoreHLSAssetInfo, ICStoreMediaResponseItem, ICStorePlatformMetadata, 
+                       ICStorePlatformOffer, ICStorePlatformOfferAsset, ICStorePlatformRequest, 
+                       ICStorePlatformRequestOperation, ICStorePlatformResponse, 
+                       ICStoreRadioStreamAssetInfo, ICStoreRequestContext, ICStoreURLRequest, 
+                       ICStoreURLRequestBuilderProperties, ICStoreURLResponseAuthenticationProvider, 
                        ICStoreURLResponseHandler, ICStoreVideoArtworkInfo, ICSubscriptionRedownloadRequest, 
                        ICSuzeLeaseSession, ICSuzeLeaseSessionConfiguration, ICTVUserState, 
-                       ICURLBag, ICURLBagEnhancedAudioConfiguration, ICURLBagLibraryDAAPConfiguration, 
-                       ICURLBagMescalConfiguration, ICURLBagMonitor, ICURLBagProvider, 
-                       ICURLBagRadioConfiguration, ICURLPerformanceMetrics, ICURLRequest, 
-                       ICURLResponse, ICURLResponseAuthenticationProvider, ICURLResponseHandler, 
-                       ICURLSession, ICURLSessionManager, ICUnfairLock, ICUpdateAutomaticDownloadMediaKindsRequest, 
-                       ICUserAuthenticationValidationRequest, ICUserCredentialProvider, 
-                       ICUserCredentialRequest, ICUserCredentialResponse, ICUserIdentity, 
-                       ICUserIdentityContext, ICUserIdentityProperties, ICUserIdentityStore, 
-                       ICUserIdentityStoreACAccountBackend, ICUserIdentityStoreTestingBackend, 
-                       ICUserNotificationBuilder, ICUserNotificationManager, ICUserVerificationContext, 
-                       ICUserVerificationOperation, ICUserVerificationRequest, ICValueHistory, 
-                       ICWiFiManager ]
+                       ICURLAggregatedPerformanceMetrics, ICURLBag, ICURLBagEnhancedAudioConfiguration, 
+                       ICURLBagLibraryDAAPConfiguration, ICURLBagMescalConfiguration, 
+                       ICURLBagMonitor, ICURLBagProvider, ICURLBagRadioConfiguration, 
+                       ICURLPerformanceMetrics, ICURLRequest, ICURLResponse, ICURLResponseAuthenticationProvider, 
+                       ICURLResponseHandler, ICURLSession, ICURLSessionManager, ICUnfairLock, 
+                       ICUpdateAutomaticDownloadMediaKindsRequest, ICUserAuthenticationValidationRequest, 
+                       ICUserCredentialProvider, ICUserCredentialRequest, ICUserCredentialResponse, 
+                       ICUserIdentity, ICUserIdentityContext, ICUserIdentityProperties, 
+                       ICUserIdentityStore, ICUserIdentityStoreACAccountBackend, 
+                       ICUserIdentityStoreTestingBackend, ICUserNotificationBuilder, 
+                       ICUserNotificationManager, ICUserVerificationContext, ICUserVerificationOperation, 
+                       ICUserVerificationRequest, ICValueHistory, ICWiFiManager ]
 ...

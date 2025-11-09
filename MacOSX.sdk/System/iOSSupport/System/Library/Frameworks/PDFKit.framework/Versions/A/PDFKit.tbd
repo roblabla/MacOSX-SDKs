@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           7E37F6A6-7D41-3A42-B881-4D6F5C7CD2BB
+    value:           87CE9530-7D97-39F5-ADD8-5D43BE60EC14
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           8D3CD7B1-2832-3A8C-92B5-E03CA521F7CB
+    value:           3BCC6D18-C126-36F0-9616-334D76C67068
 install-name:    '/System/iOSSupport/System/Library/Frameworks/PDFKit.framework/Versions/A/PDFKit'
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]

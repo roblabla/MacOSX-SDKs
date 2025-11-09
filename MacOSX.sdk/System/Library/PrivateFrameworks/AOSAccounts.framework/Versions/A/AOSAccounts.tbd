@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E0F752AD-4009-3DD5-96E6-F98A8DC53D51
+    value:           3F4F5E5B-6C3F-3F50-84FA-CFC01757DC76
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CF6C5007-25F2-371E-B8D3-839241AEF2AB
+    value:           C3B96C26-F67A-371D-AAB2-5560D7AB0A20
 install-name:    '/System/Library/PrivateFrameworks/AOSAccounts.framework/Versions/A/AOSAccounts'
 current-version: 1.9.95
 exports:
@@ -187,13 +187,14 @@ exports:
                        _kMMServiceFailureTypeDisable, _kMMServiceFailureTypeEnable, 
                        _kMMServiceFailureTypeKey, _kMMServiceIDBookMarks, _kMMServiceIDCalendars, 
                        _kMMServiceIDCloudDesktop, _kMMServiceIDContacts, _kMMServiceIDFMM, 
-                       _kMMServiceIDFamily, _kMMServiceIDHome, _kMMServiceIDKeychainSync, 
-                       _kMMServiceIDMail, _kMMServiceIDMediaStream, _kMMServiceIDMessages, 
-                       _kMMServiceIDNews, _kMMServiceIDNotes, _kMMServiceIDPhotoServiceCloudPhotos, 
-                       _kMMServiceIDPhotoServiceMediaStream, _kMMServiceIDPhotoServiceSharedStream, 
-                       _kMMServiceIDPhotos, _kMMServiceIDReminders, _kMMServiceIDSettingsSync, 
-                       _kMMServiceIDSharedStreams, _kMMServiceIDSiri, _kMMServiceIDStocks, 
-                       _kMMServiceIDWallet, _kMMServiceListChangedNotification, _kMMServiceMobileDocuments, 
+                       _kMMServiceIDFamily, _kMMServiceIDFreeform, _kMMServiceIDHome, 
+                       _kMMServiceIDKeychainSync, _kMMServiceIDMail, _kMMServiceIDMediaStream, 
+                       _kMMServiceIDMessages, _kMMServiceIDNews, _kMMServiceIDNotes, 
+                       _kMMServiceIDPhotoServiceCloudPhotos, _kMMServiceIDPhotoServiceMediaStream, 
+                       _kMMServiceIDPhotoServiceSharedStream, _kMMServiceIDPhotos, 
+                       _kMMServiceIDReminders, _kMMServiceIDSettingsSync, _kMMServiceIDSharedStreams, 
+                       _kMMServiceIDSiri, _kMMServiceIDStocks, _kMMServiceIDWallet, 
+                       _kMMServiceListChangedNotification, _kMMServiceMobileDocuments, 
                        _kMMServicePropertiesChangedNotification, _kMMServiceStatusChangedNotification, 
                        _kVettingEmailNotification, _keychainErrorCodeFromSecureBackupErrorCode, 
                        _kiCloudAccountRenewCredentialsComplete, _kiCloudAccountRenewCredentialsDSID, 

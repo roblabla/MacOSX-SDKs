@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EBBC2D44-0BD2-3BCF-9305-EBFDDDBE60F5
+    value:           ECEEE5F9-B143-39BC-84AA-06B9B7DB6AA6
   - target:          x86_64-maccatalyst
-    value:           EBBC2D44-0BD2-3BCF-9305-EBFDDDBE60F5
+    value:           ECEEE5F9-B143-39BC-84AA-06B9B7DB6AA6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1A9B60C1-12EB-3E1D-904C-7370B5DEC557
+    value:           F42B2B7B-88B2-3B1A-A276-5B49007F680A
   - target:          arm64e-maccatalyst
-    value:           1A9B60C1-12EB-3E1D-904C-7370B5DEC557
+    value:           F42B2B7B-88B2-3B1A-A276-5B49007F680A
 install-name:    '/System/Library/Frameworks/CoreMedia.framework/Versions/A/CoreMedia'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -313,12 +313,13 @@ exports:
                        _FigCFArrayAppendInt32, _FigCFArrayAppendInt64, _FigCFArrayApplyFunction, 
                        _FigCFArrayContainsInt, _FigCFArrayContainsInt16, _FigCFArrayContainsInt32, 
                        _FigCFArrayContainsInt64, _FigCFArrayContainsValue, _FigCFArrayCreateConcatenationOfTwoArrays, 
-                       _FigCFArrayCreateMutableCopy, _FigCFArrayForEach2, _FigCFArrayGetCFIndexAtIndex, 
-                       _FigCFArrayGetCGFloatAtIndex, _FigCFArrayGetCGRectAtIndex, 
-                       _FigCFArrayGetCGSizeAtIndex, _FigCFArrayGetCMTimeAtIndex, 
-                       _FigCFArrayGetDoubleAtIndex, _FigCFArrayGetFloat32AtIndex, 
-                       _FigCFArrayGetFloatAtIndex, _FigCFArrayGetInt16AtIndex, _FigCFArrayGetInt32AtIndex, 
-                       _FigCFArrayGetInt64AtIndex, _FigCFArrayGetIntAtIndex, _FigCFAttributedStringSetDouble, 
+                       _FigCFArrayCreateCopy, _FigCFArrayCreateMutableCopy, _FigCFArrayForEach2, 
+                       _FigCFArrayGetCFIndexAtIndex, _FigCFArrayGetCGFloatAtIndex, 
+                       _FigCFArrayGetCGRectAtIndex, _FigCFArrayGetCGSizeAtIndex, 
+                       _FigCFArrayGetCMTimeAtIndex, _FigCFArrayGetDoubleAtIndex, 
+                       _FigCFArrayGetFloat32AtIndex, _FigCFArrayGetFloatAtIndex, 
+                       _FigCFArrayGetInt16AtIndex, _FigCFArrayGetInt32AtIndex, _FigCFArrayGetInt64AtIndex, 
+                       _FigCFArrayGetIntAtIndex, _FigCFAttributedStringSetDouble, 
                        _FigCFBundleIDResourceSubdirExists, _FigCFCopyCFErrorAsPropertyList, 
                        _FigCFCopyCompactDescription, _FigCFCopyPropertyAsTime, _FigCFCreateCombinedDictionary, 
                        _FigCFCreateExtendedDictionary, _FigCFCreatePropertyListFromBundleIdentifier, 
@@ -326,18 +327,19 @@ exports:
                        _FigCFDateCreateFromString, _FigCFDictionaryAddEntriesToDictionaryWithRecursion, 
                        _FigCFDictionaryCopyArrayOfKeys, _FigCFDictionaryCopyArrayOfValues, 
                        _FigCFDictionaryCreateMappedArray, _FigCFDictionaryCreateMutableCopy, 
-                       _FigCFDictionaryFindAnyKeyForValue, _FigCFDictionaryGetBooleanIfPresent, 
-                       _FigCFDictionaryGetCFIndexIfPresent, _FigCFDictionaryGetCGFloatIfPresent, 
-                       _FigCFDictionaryGetCGRectIfPresent, _FigCFDictionaryGetCGSizeIfPresent, 
-                       _FigCFDictionaryGetCMTimeIfPresent, _FigCFDictionaryGetCount, 
-                       _FigCFDictionaryGetDoubleIfPresent, _FigCFDictionaryGetFloat32IfPresent, 
-                       _FigCFDictionaryGetFloatIfPresent, _FigCFDictionaryGetInt16IfPresent, 
-                       _FigCFDictionaryGetInt32IfPresent, _FigCFDictionaryGetInt64IfPresent, 
-                       _FigCFDictionaryGetIntIfPresent, _FigCFDictionaryGetValue, 
-                       _FigCFDictionaryGetValueForCaseInsensitiveKeyIfPresent, _FigCFDictionaryGetValueIfPresent, 
-                       _FigCFDictionarySetAllValuesFromDictionary, _FigCFDictionarySetBase64Data, 
-                       _FigCFDictionarySetCFIndex, _FigCFDictionarySetCGFloat, _FigCFDictionarySetCGRect, 
-                       _FigCFDictionarySetCGSize, _FigCFDictionarySetCMTime, _FigCFDictionarySetCMTimeRange, 
+                       _FigCFDictionaryCreateMutableCopyWithCFTypeCallbacks, _FigCFDictionaryFindAnyKeyForValue, 
+                       _FigCFDictionaryGetBooleanIfPresent, _FigCFDictionaryGetCFIndexIfPresent, 
+                       _FigCFDictionaryGetCGFloatIfPresent, _FigCFDictionaryGetCGRectIfPresent, 
+                       _FigCFDictionaryGetCGSizeIfPresent, _FigCFDictionaryGetCMTimeIfPresent, 
+                       _FigCFDictionaryGetCount, _FigCFDictionaryGetDoubleIfPresent, 
+                       _FigCFDictionaryGetFloat32IfPresent, _FigCFDictionaryGetFloatIfPresent, 
+                       _FigCFDictionaryGetInt16IfPresent, _FigCFDictionaryGetInt32IfPresent, 
+                       _FigCFDictionaryGetInt64IfPresent, _FigCFDictionaryGetIntIfPresent, 
+                       _FigCFDictionaryGetValue, _FigCFDictionaryGetValueForCaseInsensitiveKeyIfPresent, 
+                       _FigCFDictionaryGetValueIfPresent, _FigCFDictionarySetAllValuesFromDictionary, 
+                       _FigCFDictionarySetBase64Data, _FigCFDictionarySetCFIndex, 
+                       _FigCFDictionarySetCGFloat, _FigCFDictionarySetCGRect, _FigCFDictionarySetCGSize, 
+                       _FigCFDictionarySetCMTime, _FigCFDictionarySetCMTimeRange, 
                        _FigCFDictionarySetDouble, _FigCFDictionarySetFloat, _FigCFDictionarySetFloat32, 
                        _FigCFDictionarySetInt, _FigCFDictionarySetInt16, _FigCFDictionarySetInt32, 
                        _FigCFDictionarySetInt64, _FigCFDictionarySetValue, _FigCFDictionarySetValueFromKeyInDict, 
@@ -1524,18 +1526,19 @@ exports:
                        _kFigEndpointPlaybackSessionKey_MovPkgPath, _kFigEndpointPlaybackSessionKey_Options, 
                        _kFigEndpointPlaybackSessionKey_OutOfBandAlternateTracks, 
                        _kFigEndpointPlaybackSessionKey_Path, _kFigEndpointPlaybackSessionKey_PlaybackRestrictions, 
-                       _kFigEndpointPlaybackSessionKey_PurchasedMediaKind, _kFigEndpointPlaybackSessionKey_Rate, 
-                       _kFigEndpointPlaybackSessionKey_ReferenceRestrictions, _kFigEndpointPlaybackSessionKey_RequestContext, 
-                       _kFigEndpointPlaybackSessionKey_SnapTimeToPausePlayback, _kFigEndpointPlaybackSessionKey_StartDate, 
-                       _kFigEndpointPlaybackSessionKey_StartEstimatedDate, _kFigEndpointPlaybackSessionKey_StartPosition, 
-                       _kFigEndpointPlaybackSessionKey_StartPositionInLegacyTime, 
+                       _kFigEndpointPlaybackSessionKey_PreviouslySetTime, _kFigEndpointPlaybackSessionKey_PurchasedMediaKind, 
+                       _kFigEndpointPlaybackSessionKey_Rate, _kFigEndpointPlaybackSessionKey_ReferenceRestrictions, 
+                       _kFigEndpointPlaybackSessionKey_RequestContext, _kFigEndpointPlaybackSessionKey_SnapTimeToPausePlayback, 
+                       _kFigEndpointPlaybackSessionKey_StartDate, _kFigEndpointPlaybackSessionKey_StartEstimatedDate, 
+                       _kFigEndpointPlaybackSessionKey_StartPosition, _kFigEndpointPlaybackSessionKey_StartPositionInLegacyTime, 
                        _kFigEndpointPlaybackSessionKey_TextMarkupArray, _kFigEndpointPlaybackSessionKey_TimeToPauseBuffering, 
                        _kFigEndpointPlaybackSessionKey_TimeToPausePlayback, _kFigEndpointPlaybackSessionKey_TimeToSwapPlayback, 
-                       _kFigEndpointPlaybackSessionKey_UUID, _kFigEndpointPlaybackSessionKey_UserAgent, 
-                       _kFigEndpointPlaybackSessionKey_Value, _kFigEndpointPlaybackSessionKey_VideoID, 
-                       _kFigEndpointPlaybackSessionMediaType_File, _kFigEndpointPlaybackSessionMediaType_FormatReader, 
-                       _kFigEndpointPlaybackSessionMediaType_Streaming, _kFigEndpointPlaybackSessionMediaType_Unknown, 
-                       _kFigEndpointPlaybackSessionNotification_Invalidated, _kFigEndpointPlaybackSessionPlaybackInfoKey_AbsoluteTime, 
+                       _kFigEndpointPlaybackSessionKey_TrackID, _kFigEndpointPlaybackSessionKey_UUID, 
+                       _kFigEndpointPlaybackSessionKey_UserAgent, _kFigEndpointPlaybackSessionKey_Value, 
+                       _kFigEndpointPlaybackSessionKey_VideoID, _kFigEndpointPlaybackSessionMediaType_File, 
+                       _kFigEndpointPlaybackSessionMediaType_FormatReader, _kFigEndpointPlaybackSessionMediaType_Streaming, 
+                       _kFigEndpointPlaybackSessionMediaType_Unknown, _kFigEndpointPlaybackSessionNotification_Invalidated, 
+                       _kFigEndpointPlaybackSessionPlaybackInfoKey_AbsoluteTime, 
                        _kFigEndpointPlaybackSessionPlaybackInfoKey_Date, _kFigEndpointPlaybackSessionPlaybackInfoKey_Duration, 
                        _kFigEndpointPlaybackSessionPlaybackInfoKey_EstimatedDate, 
                        _kFigEndpointPlaybackSessionPlaybackInfoKey_InterstitialInfo, 

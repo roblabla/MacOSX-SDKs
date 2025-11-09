@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D8170F9E-1364-3875-A4FC-04C5D7C0B333
+    value:           2074ABD9-C1D7-3CFC-8614-260EE51BA088
   - target:          x86_64-maccatalyst
-    value:           D8170F9E-1364-3875-A4FC-04C5D7C0B333
+    value:           2074ABD9-C1D7-3CFC-8614-260EE51BA088
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           813B8A35-CA37-3E92-A693-5B247C7DEF72
+    value:           DA69FF3F-004F-3052-9E65-12B09B011EEC
   - target:          arm64e-maccatalyst
-    value:           813B8A35-CA37-3E92-A693-5B247C7DEF72
+    value:           DA69FF3F-004F-3052-9E65-12B09B011EEC
 install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libCoreFSCache.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

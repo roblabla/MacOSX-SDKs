@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EB0612F7-87A7-3454-BFC1-7852C2482275
+    value:           808307AC-17E1-3C18-95DD-A66ACCFD6A85
   - target:          x86_64-maccatalyst
-    value:           EB0612F7-87A7-3454-BFC1-7852C2482275
+    value:           808307AC-17E1-3C18-95DD-A66ACCFD6A85
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F56279CF-5742-3C2B-ABD6-7D955CFB340C
+    value:           65A8D314-D7EC-3988-A3F8-8E47BBA7F335
   - target:          arm64e-maccatalyst
-    value:           F56279CF-5742-3C2B-ABD6-7D955CFB340C
+    value:           65A8D314-D7EC-3988-A3F8-8E47BBA7F335
 install-name:    '/System/Library/PrivateFrameworks/FamilyCircle.framework/Versions/A/FamilyCircle'
 swift-abi-version: 7
 exports:

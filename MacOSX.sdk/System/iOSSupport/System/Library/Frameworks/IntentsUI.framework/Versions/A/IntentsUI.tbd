@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           355F6AAE-8B1F-3184-8C49-37D6699801E2
+    value:           ECCCE9D9-23CB-39BC-9D2D-9EE007589687
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           D9358465-7EF6-3D22-9A48-344F440DAE42
+    value:           4042AC42-90FA-3165-826A-E824CDB887B4
 install-name:    '/System/iOSSupport/System/Library/Frameworks/IntentsUI.framework/Versions/A/IntentsUI'
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]

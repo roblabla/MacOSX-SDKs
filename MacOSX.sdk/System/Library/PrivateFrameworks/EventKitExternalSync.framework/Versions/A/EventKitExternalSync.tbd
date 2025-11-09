@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8A1F51AF-4CC3-35CB-93C6-29FD10F4B25D
+    value:           8A0AAD0E-C108-341F-8F68-9E2D6B725FC4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FC6D9E03-49A4-3F13-9D03-13FFF9D868E3
+    value:           50BB1F11-1780-3481-982F-C8AE0A8EB1FE
 install-name:    '/System/Library/PrivateFrameworks/EventKitExternalSync.framework/Versions/A/EventKitExternalSync'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

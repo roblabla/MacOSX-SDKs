@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target x86_64-apple-ios16.1-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftPhotos -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name Photos
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 511.0.170
+// swift-module-flags: -target x86_64-apple-ios16.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftPhotos -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name Photos
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 520.0.240
 @_exported import Photos
 import Swift
 import _Concurrency

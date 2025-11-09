@@ -29,5 +29,6 @@ API_AVAILABLE(ios(11.3), watchos(4.3))
 NS_ASSUME_NONNULL_END
 
 #else
+#import <TargetConditionals.h>
 #import <PassKitCore/PKTransitPassProperties.h>
 #endif

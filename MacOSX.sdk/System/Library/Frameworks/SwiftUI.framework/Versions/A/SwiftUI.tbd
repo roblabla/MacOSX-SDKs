@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8E805A6A-5FB1-3CBE-BC59-1C179049986D
+    value:           5DA67A68-DDFC-3E79-A227-719EF3730202
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           599B5EB8-FBAA-3B4E-82E3-DB6656283EE5
+    value:           EC516C7C-A622-3030-ABE2-72E824C47BD0
 install-name:    '/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI'
-current-version: 4.1.17
+current-version: 4.2.11
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos ]
@@ -4016,6 +4016,8 @@ exports:
                        '_$s7SwiftUI17EnvironmentObjectV14projectedValueAC7WrapperVyx_Gvg', 
                        '_$s7SwiftUI17EnvironmentObjectV14projectedValueAC7WrapperVyx_GvpMV', 
                        '_$s7SwiftUI17EnvironmentObjectV18_propertyBehaviorss6UInt32VvgZ', 
+                       '_$s7SwiftUI17EnvironmentObjectV20optionalWrappedValuexSgvg', 
+                       '_$s7SwiftUI17EnvironmentObjectV20optionalWrappedValuexSgvpMV', 
                        '_$s7SwiftUI17EnvironmentObjectV5_seedSivM', '_$s7SwiftUI17EnvironmentObjectV5_seedSivg', 
                        '_$s7SwiftUI17EnvironmentObjectV5_seedSivpMV', '_$s7SwiftUI17EnvironmentObjectV5_seedSivs', 
                        '_$s7SwiftUI17EnvironmentObjectV5errors5NeverOyF', '_$s7SwiftUI17EnvironmentObjectV6_storexSgvM', 
@@ -9291,6 +9293,12 @@ exports:
                        '_$s7SwiftUI3TabVyxq_q0_GAA14SelectableTabsAASHRzAA4ViewR_AaFR0_rlWP', 
                        '_$s7SwiftUI3TabVyxq_q0_GAA4TabsA2A08ImplicitC10IdentifierVRszAA4ViewR_AaHR0_rlMc', 
                        '_$s7SwiftUI3TabVyxq_q0_GAA4TabsA2A08ImplicitC10IdentifierVRszAA4ViewR_AaHR0_rlWP', 
+                       '_$s7SwiftUI43NavigationSplitViewOpaqueBackgroundTraitKeyV12defaultValueSbvgZ', 
+                       '_$s7SwiftUI43NavigationSplitViewOpaqueBackgroundTraitKeyVAA01_ehI0AAMc', 
+                       '_$s7SwiftUI43NavigationSplitViewOpaqueBackgroundTraitKeyVAA01_ehI0AAWP', 
+                       '_$s7SwiftUI43NavigationSplitViewOpaqueBackgroundTraitKeyVMa', 
+                       '_$s7SwiftUI43NavigationSplitViewOpaqueBackgroundTraitKeyVMn', 
+                       '_$s7SwiftUI43NavigationSplitViewOpaqueBackgroundTraitKeyVN', 
                        '_$s7SwiftUI45_AccessibilityIgnoresInvertColorsViewModifierV05_makeG08modifier6inputs4bodyAA01_G7OutputsVAA11_GraphValueVyACG_AA01_G6InputsVAiA01_N0V_ANtctFZ', 
                        '_$s7SwiftUI45_AccessibilityIgnoresInvertColorsViewModifierV6activeACSb_tcfC', 
                        '_$s7SwiftUI45_AccessibilityIgnoresInvertColorsViewModifierV6activeSbvM', 
@@ -9754,6 +9762,8 @@ exports:
                        '_$s7SwiftUI4ViewPAAE015navigationSplitC11ColumnWidth3min5ideal3maxQr12CoreGraphics7CGFloatVSg_AjKtFQOMQ', 
                        '_$s7SwiftUI4ViewPAAE015navigationSplitC11ColumnWidthyQr12CoreGraphics7CGFloatVF', 
                        '_$s7SwiftUI4ViewPAAE015navigationSplitC11ColumnWidthyQr12CoreGraphics7CGFloatVFQOMQ', 
+                       '_$s7SwiftUI4ViewPAAE015navigationSplitC16OpaqueBackgroundQryF', 
+                       '_$s7SwiftUI4ViewPAAE015navigationSplitC16OpaqueBackgroundQryFQOMQ', 
                        '_$s7SwiftUI4ViewPAAE015navigationSplitC5StyleyQrqd__AA010NavigationecF0Rd__lF', 
                        '_$s7SwiftUI4ViewPAAE015navigationSplitC5StyleyQrqd__AA010NavigationecF0Rd__lFQOMQ', 
                        '_$s7SwiftUI4ViewPAAE03tabC5StyleyQrqd__AA03TabcE0Rd__lF', 
@@ -11350,6 +11360,9 @@ exports:
                        '_$s7SwiftUI5StateVAAs23ExpressibleByNilLiteralRzlEACyxGycfC', 
                        '_$s7SwiftUI5StateVMa', '_$s7SwiftUI5StateVMn', '_$s7SwiftUI5StateVyxGAA15DynamicPropertyAAMc', 
                        '_$s7SwiftUI5StateVyxGAA15DynamicPropertyAAWP', '_$s7SwiftUI5TableV13_makeViewList4view6inputsAA01_eF7OutputsVAA11_GraphValueVyACyxq_q0_GG_AA01_eF6InputsVtFZ', 
+                       '_$s7SwiftUI5TableV3for7columns4rowsACyxq_q0_Gxm_q0_yXEq_yXEtcfC', 
+                       '_$s7SwiftUI5TableV3for9selection7columns4rowsACyxq_q0_Gxm_AA7BindingVy2IDQzSgGq0_yXEq_yXEtcfC', 
+                       '_$s7SwiftUI5TableV3for9selection7columns4rowsACyxq_q0_Gxm_AA7BindingVyShy2IDQzGGq0_yXEq_yXEtcfC', 
                        '_$s7SwiftUI5TableV7columns4rowsACyxq_q0_Gq0_yXE_q_yXEtcfC', 
                        '_$s7SwiftUI5TableV9selection7columns4rowsACyxq_q0_GAA7BindingVy2IDQzSgG_q0_yXEq_yXEtcfC', 
                        '_$s7SwiftUI5TableV9selection7columns4rowsACyxq_q0_GAA7BindingVyShy2IDQzGG_q0_yXEq_yXEtcfC', 

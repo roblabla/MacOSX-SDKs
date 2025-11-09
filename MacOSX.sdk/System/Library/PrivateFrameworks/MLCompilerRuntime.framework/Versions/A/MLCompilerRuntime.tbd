@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D2D74B52-215C-3EE2-899A-8A70AD652F4E
+    value:           87086C2F-6835-357D-A158-323076FD1B82
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           12C0FBA8-0987-388C-87C1-8940F7977DB4
+    value:           B6A89CF5-ECD8-3E6C-A36C-7E66DB2E9DF2
 install-name:    '/System/Library/PrivateFrameworks/MLCompilerRuntime.framework/Versions/A/MLCompilerRuntime'
 current-version: 0
 compatibility-version: 0

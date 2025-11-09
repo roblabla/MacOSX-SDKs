@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4F0BA87D-B186-34E2-A506-D06D19BB2A64
+    value:           5113BF5D-0B78-3E82-AF73-5105F6D237D8
   - target:          x86_64-maccatalyst
-    value:           4F0BA87D-B186-34E2-A506-D06D19BB2A64
+    value:           5113BF5D-0B78-3E82-AF73-5105F6D237D8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AA3028EE-238C-3842-A833-C769120906C8
+    value:           E6A4277A-F3A4-3F40-99E2-5E673B3B6327
   - target:          arm64e-maccatalyst
-    value:           AA3028EE-238C-3842-A833-C769120906C8
+    value:           E6A4277A-F3A4-3F40-99E2-5E673B3B6327
 install-name:    '/System/Library/PrivateFrameworks/EmbeddedAcousticRecognition.framework/Versions/A/EmbeddedAcousticRecognition'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -87,9 +87,9 @@ exports:
                        _EARArtifact, _EARAudioAnalytics, _EARCombinedResult, _EARCommandTagger, 
                        _EARCommandTagging, _EARCommandTaggingResult, _EARContextualData, 
                        _EARCustomLMBuilder, _EARCustomPronData, _EARDefaultServerEndpointFeatures, 
-                       _EAREmojiRecognition, _EAREndpointFeatures, _EAREndpointer, 
-                       _EARFormatter, _EARGeoLMHelper, _EARInterpolator, _EARJitProfile, 
-                       _EARLMTGlobalNNLM, _EARLMTKaldiVocab, _EARLanguageDetector, 
+                       _EAREditDistance, _EAREmojiRecognition, _EAREndpointFeatures, 
+                       _EAREndpointer, _EARFormatter, _EARGeoLMHelper, _EARInterpolator, 
+                       _EARJitProfile, _EARLMTGlobalNNLM, _EARLMTKaldiVocab, _EARLanguageDetector, 
                        _EARLanguageDetectorAudioBuffer, _EARLanguageDetectorLoggingInfo, 
                        _EARLanguageDetectorRequestContext, _EARLanguageDetectorResult, 
                        _EARLanguageModel, _EARLatticeMitigatorResult, _EARLmBuilder, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DD1A0FBB-F725-3E63-903B-6E6BA021FA4C
+    value:           29486293-FE89-32F3-8E98-6B252CFDA6F8
   - target:          x86_64-maccatalyst
-    value:           DD1A0FBB-F725-3E63-903B-6E6BA021FA4C
+    value:           29486293-FE89-32F3-8E98-6B252CFDA6F8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FB6C73BD-5E1F-3E88-B952-CAAAED8960C9
+    value:           50267433-66BF-375F-97FE-B6F2E7A53DF9
   - target:          arm64e-maccatalyst
-    value:           FB6C73BD-5E1F-3E88-B952-CAAAED8960C9
+    value:           50267433-66BF-375F-97FE-B6F2E7A53DF9
 install-name:    '/System/Library/Frameworks/CoreVideo.framework/Versions/A/CoreVideo'
 current-version: 1.5
 compatibility-version: 1.2
@@ -131,19 +131,19 @@ exports:
                        _kCVImageBufferChromaSubsampling_420, _kCVImageBufferChromaSubsampling_422, 
                        _kCVImageBufferCleanApertureHeightKey, _kCVImageBufferCleanApertureHorizontalOffsetKey, 
                        _kCVImageBufferCleanApertureKey, _kCVImageBufferCleanApertureVerticalOffsetKey, 
-                       _kCVImageBufferCleanApertureWidthKey, _kCVImageBufferColorPrimariesKey, 
-                       _kCVImageBufferColorPrimaries_DCI_P3, _kCVImageBufferColorPrimaries_EBU_3213, 
-                       _kCVImageBufferColorPrimaries_ITU_R_2020, _kCVImageBufferColorPrimaries_ITU_R_709_2, 
-                       _kCVImageBufferColorPrimaries_P22, _kCVImageBufferColorPrimaries_P3_D65, 
-                       _kCVImageBufferColorPrimaries_SMPTE_C, _kCVImageBufferContentLightLevelInfoKey, 
-                       _kCVImageBufferDisplayDimensionsKey, _kCVImageBufferDisplayHeightKey, 
-                       _kCVImageBufferDisplayWidthKey, _kCVImageBufferDolbyVisionRPUDataKey, 
-                       _kCVImageBufferFieldCountKey, _kCVImageBufferFieldDetailKey, 
-                       _kCVImageBufferFieldDetailSpatialFirstLineEarly, _kCVImageBufferFieldDetailSpatialFirstLineLate, 
-                       _kCVImageBufferFieldDetailTemporalBottomFirst, _kCVImageBufferFieldDetailTemporalTopFirst, 
-                       _kCVImageBufferGammaLevelKey, _kCVImageBufferHDR10PlusDataKey, 
-                       _kCVImageBufferHDRImageStatisticsInfoFilteredKey, _kCVImageBufferHDRImageStatisticsInfoRawKey, 
-                       _kCVImageBufferHDRImageStatisticsInfoTransferFunctionKey, 
+                       _kCVImageBufferCleanApertureWidthKey, _kCVImageBufferColorInfoGuessedByKey, 
+                       _kCVImageBufferColorPrimariesKey, _kCVImageBufferColorPrimaries_DCI_P3, 
+                       _kCVImageBufferColorPrimaries_EBU_3213, _kCVImageBufferColorPrimaries_ITU_R_2020, 
+                       _kCVImageBufferColorPrimaries_ITU_R_709_2, _kCVImageBufferColorPrimaries_P22, 
+                       _kCVImageBufferColorPrimaries_P3_D65, _kCVImageBufferColorPrimaries_SMPTE_C, 
+                       _kCVImageBufferContentLightLevelInfoKey, _kCVImageBufferDisplayDimensionsKey, 
+                       _kCVImageBufferDisplayHeightKey, _kCVImageBufferDisplayWidthKey, 
+                       _kCVImageBufferDolbyVisionRPUDataKey, _kCVImageBufferFieldCountKey, 
+                       _kCVImageBufferFieldDetailKey, _kCVImageBufferFieldDetailSpatialFirstLineEarly, 
+                       _kCVImageBufferFieldDetailSpatialFirstLineLate, _kCVImageBufferFieldDetailTemporalBottomFirst, 
+                       _kCVImageBufferFieldDetailTemporalTopFirst, _kCVImageBufferGammaLevelKey, 
+                       _kCVImageBufferHDR10PlusDataKey, _kCVImageBufferHDRImageStatisticsInfoFilteredKey, 
+                       _kCVImageBufferHDRImageStatisticsInfoRawKey, _kCVImageBufferHDRImageStatisticsInfoTransferFunctionKey, 
                        _kCVImageBufferHDRImageStatisticsInfo_AnchorPQKey, _kCVImageBufferHDRImageStatisticsInfo_AnchorPowerKey, 
                        _kCVImageBufferHDRImageStatisticsInfo_AverageKey, _kCVImageBufferHDRImageStatisticsInfo_AverageOffsetKey, 
                        _kCVImageBufferHDRImageStatisticsInfo_DolbyMetadataVersionKey, 

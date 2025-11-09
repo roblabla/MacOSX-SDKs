@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3B1E9E50-C1E0-3B66-81C0-4880EFD7F90C
+    value:           089D00E2-DF2B-3B0A-8734-D88A5F397199
   - target:          x86_64-maccatalyst
-    value:           3B1E9E50-C1E0-3B66-81C0-4880EFD7F90C
+    value:           089D00E2-DF2B-3B0A-8734-D88A5F397199
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A99741A4-6427-3D7C-93F6-521869678C06
+    value:           D6BC0F81-712A-331F-9629-795C78F7E0AC
   - target:          arm64e-maccatalyst
-    value:           A99741A4-6427-3D7C-93F6-521869678C06
+    value:           D6BC0F81-712A-331F-9629-795C78F7E0AC
 install-name:    '/System/Library/Frameworks/AudioUnit.framework/Versions/A/AudioUnit'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

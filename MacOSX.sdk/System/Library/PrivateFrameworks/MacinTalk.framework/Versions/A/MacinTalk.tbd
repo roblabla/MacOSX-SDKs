@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FB6DB8E5-CAAC-3C39-95D1-F70B11A320DB
+    value:           49766872-729B-384D-8480-B8079AA9E73F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           93FC123C-3346-3C69-AC3A-E2731DA8785D
+    value:           5F05E19E-6F4E-3F10-A293-17FFC11E300A
 install-name:    '/System/Library/PrivateFrameworks/MacinTalk.framework/Versions/A/MacinTalk'
 swift-abi-version: 7
 exports:

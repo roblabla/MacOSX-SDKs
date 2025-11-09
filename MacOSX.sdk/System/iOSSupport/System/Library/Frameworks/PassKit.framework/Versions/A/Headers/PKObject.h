@@ -18,5 +18,6 @@
 #endif // __PKOBJECT_H
 
 #else
+#import <TargetConditionals.h>
 #import <PassKitCore/PKObject.h>
 #endif

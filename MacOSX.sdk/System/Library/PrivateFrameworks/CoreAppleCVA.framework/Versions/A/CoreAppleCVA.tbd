@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           64630A84-8D25-371C-A686-41F2AF873A1C
+    value:           F6ABDDBD-F3F4-33C1-8993-EE2048CD8C70
   - target:          x86_64-maccatalyst
-    value:           64630A84-8D25-371C-A686-41F2AF873A1C
+    value:           F6ABDDBD-F3F4-33C1-8993-EE2048CD8C70
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CD2AD781-234C-3704-9608-559063560D1E
+    value:           3F10697D-93C6-3A4F-A1FB-CD5AE53929C4
   - target:          arm64e-maccatalyst
-    value:           CD2AD781-234C-3704-9608-559063560D1E
+    value:           3F10697D-93C6-3A4F-A1FB-CD5AE53929C4
 install-name:    '/System/Library/PrivateFrameworks/CoreAppleCVA.framework/Versions/A/CoreAppleCVA'
 current-version: 4
 compatibility-version: 4

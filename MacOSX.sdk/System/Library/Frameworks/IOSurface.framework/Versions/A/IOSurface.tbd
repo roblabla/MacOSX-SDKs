@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1C9FCF38-4333-30D0-9D9B-16BB55B0A0C6
+    value:           E6ADB76E-C280-3915-917D-2155C6DEDBE4
   - target:          x86_64-maccatalyst
-    value:           1C9FCF38-4333-30D0-9D9B-16BB55B0A0C6
+    value:           E6ADB76E-C280-3915-917D-2155C6DEDBE4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E7B2C4D4-30BA-3A1A-A30B-5923B046A43E
+    value:           8BAEF854-75D7-3F3A-AFB9-095441FD54C5
   - target:          arm64e-maccatalyst
-    value:           E7B2C4D4-30BA-3A1A-A30B-5923B046A43E
+    value:           8BAEF854-75D7-3F3A-AFB9-095441FD54C5
 install-name:    '/System/Library/Frameworks/IOSurface.framework/Versions/A/IOSurface'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EAA05C45-A63A-300A-B097-69874B2C5B69
+    value:           6976BFBE-6804-38BC-976D-01EB79357D6A
   - target:          x86_64-maccatalyst
-    value:           EAA05C45-A63A-300A-B097-69874B2C5B69
+    value:           6976BFBE-6804-38BC-976D-01EB79357D6A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D20FA6AE-FED2-3110-A538-6F3E389CB270
+    value:           52C4C8DB-9B97-3FBE-B91A-2DFA3C4B4198
   - target:          arm64e-maccatalyst
-    value:           D20FA6AE-FED2-3110-A538-6F3E389CB270
+    value:           52C4C8DB-9B97-3FBE-B91A-2DFA3C4B4198
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices'
 current-version: 1228
 reexported-libraries:
@@ -53,17 +53,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4BF2BD12-F6B5-3B8C-8BA6-1F325044A8E7
+    value:           769381C9-E6F5-3DFC-9B8B-2810B71A487E
   - target:          x86_64-maccatalyst
-    value:           4BF2BD12-F6B5-3B8C-8BA6-1F325044A8E7
+    value:           769381C9-E6F5-3DFC-9B8B-2810B71A487E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AA8D41E3-5EA7-3C16-A0D4-5C2213CB31BA
+    value:           2370B854-34D9-3E85-8EA6-C5E2C032D47E
   - target:          arm64e-maccatalyst
-    value:           AA8D41E3-5EA7-3C16-A0D4-5C2213CB31BA
+    value:           2370B854-34D9-3E85-8EA6-C5E2C032D47E
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/AE.framework/Versions/A/AE'
 current-version: 946
 compatibility-version: 0
@@ -153,11 +153,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           088A4A48-97D0-3E44-B951-E8659FDA9A30
+    value:           2B9E1AC4-8848-364E-B156-FFA612021B3D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           342ECCF9-B492-3865-A6B5-6A469EB22FAA
+    value:           6A70DC09-F6A9-3303-B782-7EAEF8220EF2
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Versions/A/CarbonCore'
 current-version: 1333
 parent-umbrella:
@@ -807,17 +807,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7995A7CA-3822-363C-A445-86CE866D3A89
+    value:           B37CE800-1ED8-3656-98A8-7FD1E619C3BA
   - target:          x86_64-maccatalyst
-    value:           7995A7CA-3822-363C-A445-86CE866D3A89
+    value:           B37CE800-1ED8-3656-98A8-7FD1E619C3BA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BC698C17-D69A-3101-BF26-E8A5693B8967
+    value:           7A6DD0E2-596F-346D-85A7-D4DA501BF6BC
   - target:          arm64e-maccatalyst
-    value:           BC698C17-D69A-3101-BF26-E8A5693B8967
+    value:           7A6DD0E2-596F-346D-85A7-D4DA501BF6BC
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/DictionaryServices.framework/Versions/A/DictionaryServices'
 current-version: 355
 parent-umbrella:
@@ -890,17 +890,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4E6D6D07-738A-3EF6-ABF4-92742958C9EE
+    value:           A6DCA847-22B1-3F2D-BF74-11802EDAC016
   - target:          x86_64-maccatalyst
-    value:           4E6D6D07-738A-3EF6-ABF4-92742958C9EE
+    value:           A6DCA847-22B1-3F2D-BF74-11802EDAC016
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EEFBB039-9737-333A-A2FA-6D242FB99F70
+    value:           24D4220E-9746-35CA-801F-0ED2D73E9AF1
   - target:          arm64e-maccatalyst
-    value:           EEFBB039-9737-333A-A2FA-6D242FB99F70
+    value:           24D4220E-9746-35CA-801F-0ED2D73E9AF1
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/FSEvents.framework/Versions/A/FSEvents'
 current-version: 1355
 parent-umbrella:
@@ -926,17 +926,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           47B59788-9452-3B26-90E4-BF7D0ADF9DB1
+    value:           B5327042-6DE2-3EC8-87B6-9AE405A8D478
   - target:          x86_64-maccatalyst
-    value:           47B59788-9452-3B26-90E4-BF7D0ADF9DB1
+    value:           B5327042-6DE2-3EC8-87B6-9AE405A8D478
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C7D9763E-2460-3838-89AD-A59EE5468B02
+    value:           D02DC733-402B-3D7C-84EC-4A21B09782A9
   - target:          arm64e-maccatalyst
-    value:           C7D9763E-2460-3838-89AD-A59EE5468B02
+    value:           D02DC733-402B-3D7C-84EC-4A21B09782A9
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/LaunchServices'
 current-version: 1141.1
 parent-umbrella:
@@ -1284,34 +1284,34 @@ exports:
                        _kLSAllowedToLaunchInOtherSessionsEntitlement, _kLSAllowedToLaunchWithArgumentsEntitlement, 
                        _kLSAllowedToLaunchWithEnvironmentVariablesEntitlement, _kLSAllowedToLaunchWithKnownArgumentsEntitlement, 
                        _kLSAllowedToLaunchWithSTDIOEntitlement, _kLSAllowedToSetLauncherAuditTokenEntitlement, 
-                       _kLSAppleInternalLibraryBundleIdentifier, _kLSComputerRootCanonicalName, 
-                       _kLSCurrentDeviceModelCode, _kLSDefaultLocalizedValueKey, 
-                       _kLSItemContentType, _kLSItemDisplayKind, _kLSItemDisplayName, 
-                       _kLSItemExtension, _kLSItemExtensionIsHidden, _kLSItemFileCreator, 
-                       _kLSItemFileType, _kLSItemIsInvisible, _kLSItemQuarantineProperties, 
-                       _kLSItemRoleHandlerDisplayName, _kLSLocalLibraryBundleIdentifier, 
-                       _kLSMeetingRoomCanonicalName, _kLSNetworkLibraryBundleIdentifier, 
-                       _kLSNetworkRootCanonicalName, _kLSNotificationDatabaseSeedingComplete, 
-                       _kLSNotificationDatabaseSeedingStart, _kLSNotificationSystemConfigurationChange, 
-                       _kLSQuarantineAgentBundleIdentifierKey, _kLSQuarantineAgentNameKey, 
-                       _kLSQuarantineDataURLKey, _kLSQuarantineOriginURLKey, _kLSQuarantineTimeStampKey, 
-                       _kLSQuarantineTypeCalendarEventAttachment, _kLSQuarantineTypeEmailAttachment, 
-                       _kLSQuarantineTypeInstantMessageAttachment, _kLSQuarantineTypeKey, 
-                       _kLSQuarantineTypeOtherAttachment, _kLSQuarantineTypeOtherDownload, 
-                       _kLSQuarantineTypeWebDownload, _kLSRemoteDiscRootCanonicalName, 
-                       _kLSSystemLibraryBundleIdentifier, _kLSUserLibraryBundleIdentifier, 
-                       _kLSVersionNumberNull, _kUTExportedTypeDeclarationsKey, _kUTImportedTypeDeclarationsKey, 
-                       _kUTTagClassDeviceModelCode, _kUTTagClassFilenameExtension, 
-                       _kUTTagClassMIMEType, _kUTTagClassNSPboardType, _kUTTagClassOSType, 
-                       _kUTType3DContent, _kUTTypeAVIMovie, _kUTTypeAliasFile, _kUTTypeAliasRecord, 
-                       _kUTTypeAppCategory, _kUTTypeAppCategoryActionGames, _kUTTypeAppCategoryAdventureGames, 
-                       _kUTTypeAppCategoryArcadeGames, _kUTTypeAppCategoryBoardGames, 
-                       _kUTTypeAppCategoryBusiness, _kUTTypeAppCategoryCardGames, 
-                       _kUTTypeAppCategoryCasinoGames, _kUTTypeAppCategoryDeveloperTools, 
-                       _kUTTypeAppCategoryDiceGames, _kUTTypeAppCategoryEducation, 
-                       _kUTTypeAppCategoryEducationalGames, _kUTTypeAppCategoryEntertainment, 
-                       _kUTTypeAppCategoryFamilyGames, _kUTTypeAppCategoryFinance, 
-                       _kUTTypeAppCategoryGames, _kUTTypeAppCategoryGraphicsDesign, 
+                       _kLSAppleInternalLibraryBundleIdentifier, _kLSClientEntitledToAccessOtherSessions, 
+                       _kLSComputerRootCanonicalName, _kLSCurrentDeviceModelCode, 
+                       _kLSDefaultLocalizedValueKey, _kLSItemContentType, _kLSItemDisplayKind, 
+                       _kLSItemDisplayName, _kLSItemExtension, _kLSItemExtensionIsHidden, 
+                       _kLSItemFileCreator, _kLSItemFileType, _kLSItemIsInvisible, 
+                       _kLSItemQuarantineProperties, _kLSItemRoleHandlerDisplayName, 
+                       _kLSLocalLibraryBundleIdentifier, _kLSMeetingRoomCanonicalName, 
+                       _kLSNetworkLibraryBundleIdentifier, _kLSNetworkRootCanonicalName, 
+                       _kLSNotificationDatabaseSeedingComplete, _kLSNotificationDatabaseSeedingStart, 
+                       _kLSNotificationSystemConfigurationChange, _kLSQuarantineAgentBundleIdentifierKey, 
+                       _kLSQuarantineAgentNameKey, _kLSQuarantineDataURLKey, _kLSQuarantineOriginURLKey, 
+                       _kLSQuarantineTimeStampKey, _kLSQuarantineTypeCalendarEventAttachment, 
+                       _kLSQuarantineTypeEmailAttachment, _kLSQuarantineTypeInstantMessageAttachment, 
+                       _kLSQuarantineTypeKey, _kLSQuarantineTypeOtherAttachment, 
+                       _kLSQuarantineTypeOtherDownload, _kLSQuarantineTypeWebDownload, 
+                       _kLSRemoteDiscRootCanonicalName, _kLSSystemLibraryBundleIdentifier, 
+                       _kLSUserLibraryBundleIdentifier, _kLSVersionNumberNull, _kUTExportedTypeDeclarationsKey, 
+                       _kUTImportedTypeDeclarationsKey, _kUTTagClassDeviceModelCode, 
+                       _kUTTagClassFilenameExtension, _kUTTagClassMIMEType, _kUTTagClassNSPboardType, 
+                       _kUTTagClassOSType, _kUTType3DContent, _kUTTypeAVIMovie, _kUTTypeAliasFile, 
+                       _kUTTypeAliasRecord, _kUTTypeAppCategory, _kUTTypeAppCategoryActionGames, 
+                       _kUTTypeAppCategoryAdventureGames, _kUTTypeAppCategoryArcadeGames, 
+                       _kUTTypeAppCategoryBoardGames, _kUTTypeAppCategoryBusiness, 
+                       _kUTTypeAppCategoryCardGames, _kUTTypeAppCategoryCasinoGames, 
+                       _kUTTypeAppCategoryDeveloperTools, _kUTTypeAppCategoryDiceGames, 
+                       _kUTTypeAppCategoryEducation, _kUTTypeAppCategoryEducationalGames, 
+                       _kUTTypeAppCategoryEntertainment, _kUTTypeAppCategoryFamilyGames, 
+                       _kUTTypeAppCategoryFinance, _kUTTypeAppCategoryGames, _kUTTypeAppCategoryGraphicsDesign, 
                        _kUTTypeAppCategoryHealthcareFitness, _kUTTypeAppCategoryKidsGames, 
                        _kUTTypeAppCategoryLifestyle, _kUTTypeAppCategoryMedical, 
                        _kUTTypeAppCategoryMusic, _kUTTypeAppCategoryMusicGames, _kUTTypeAppCategoryNews, 
@@ -1396,19 +1396,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A4ADF79F-2840-38D0-B54B-8DA98AE7159B
+    value:           F8F24EEC-C959-3505-8CED-A3AF6767FFD6
   - target:          x86_64-maccatalyst
-    value:           A4ADF79F-2840-38D0-B54B-8DA98AE7159B
+    value:           F8F24EEC-C959-3505-8CED-A3AF6767FFD6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           067F9A5B-F3D3-3C93-BF88-EAC56E1C0211
+    value:           C03BDE17-399F-3E6C-A0C5-51576C5C85DC
   - target:          arm64e-maccatalyst
-    value:           067F9A5B-F3D3-3C93-BF88-EAC56E1C0211
+    value:           C03BDE17-399F-3E6C-A0C5-51576C5C85DC
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/Metadata.framework/Versions/A/Metadata'
-current-version: 2230.2
+current-version: 2230.7
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -1880,17 +1880,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           90D4DAFE-A84A-3DC6-B29A-A18308EC6CED
+    value:           EAA4C252-A2E6-3FB3-82B4-0F49181B5C63
   - target:          x86_64-maccatalyst
-    value:           90D4DAFE-A84A-3DC6-B29A-A18308EC6CED
+    value:           EAA4C252-A2E6-3FB3-82B4-0F49181B5C63
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C38B8CFF-1D22-386F-958E-C6CDAF474CBE
+    value:           D7EEEC0D-2101-39DC-9248-7B5839AC09BE
   - target:          arm64e-maccatalyst
-    value:           C38B8CFF-1D22-386F-958E-C6CDAF474CBE
+    value:           D7EEEC0D-2101-39DC-9248-7B5839AC09BE
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/OSServices.framework/Versions/A/OSServices'
 current-version: 1141.1
 parent-umbrella:
@@ -2034,17 +2034,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9D7909CA-09DD-33C0-BE8F-32DA2A586C96
+    value:           CC6AF2FB-CD68-35A6-9CA0-0E985C7C93A1
   - target:          x86_64-maccatalyst
-    value:           9D7909CA-09DD-33C0-BE8F-32DA2A586C96
+    value:           CC6AF2FB-CD68-35A6-9CA0-0E985C7C93A1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3F61D787-FA4C-3F09-8E89-B417757A9034
+    value:           4664089A-9C82-3AC7-A060-E0659143357D
   - target:          arm64e-maccatalyst
-    value:           3F61D787-FA4C-3F09-8E89-B417757A9034
+    value:           4664089A-9C82-3AC7-A060-E0659143357D
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SearchKit.framework/Versions/A/SearchKit'
 current-version: 417.1
 parent-umbrella:
@@ -2174,17 +2174,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B1D4773E-9FCE-3D48-B209-9FF2E140755B
+    value:           B62E2A1C-BC67-33B7-879D-E324CB47B8DF
   - target:          x86_64-maccatalyst
-    value:           B1D4773E-9FCE-3D48-B209-9FF2E140755B
+    value:           B62E2A1C-BC67-33B7-879D-E324CB47B8DF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A5F49039-DEB3-32C0-BE87-8F628C88CF6D
+    value:           2689B4F0-E199-3090-93C2-29B10D8D31F9
   - target:          arm64e-maccatalyst
-    value:           A5F49039-DEB3-32C0-BE87-8F628C88CF6D
+    value:           2689B4F0-E199-3090-93C2-29B10D8D31F9
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SharedFileList.framework/Versions/A/SharedFileList'
 current-version: 225
 parent-umbrella:

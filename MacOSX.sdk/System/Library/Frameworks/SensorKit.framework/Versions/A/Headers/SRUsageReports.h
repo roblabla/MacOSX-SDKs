@@ -98,6 +98,13 @@ SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos
  */
 @property (readonly, copy) NSArray<SRTextInputSession *> *textInputSessions API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos);
 
+/*!
+ * @property supplementalCategories
+ *
+ * @brief
+ * Additional categories that describe this app
+ */
+@property (readonly, copy) NSArray<SRSupplementalCategory *> *supplementalCategories API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos);
 @end
 
 typedef NS_ENUM(NSInteger, SRNotificationEvent) {

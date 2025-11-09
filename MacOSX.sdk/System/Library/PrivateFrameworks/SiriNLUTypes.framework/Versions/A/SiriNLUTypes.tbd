@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2E9F4D70-6CFE-36C6-BA90-4C13CE69F678
+    value:           92BAC4EE-EBAF-3923-9AB1-C4B5EC3017EE
   - target:          x86_64-maccatalyst
-    value:           2E9F4D70-6CFE-36C6-BA90-4C13CE69F678
+    value:           92BAC4EE-EBAF-3923-9AB1-C4B5EC3017EE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C384D972-C53F-3096-B9D3-F91A751B7CF8
+    value:           83D6AD74-C4E3-3493-9EAF-9747FE4D744F
   - target:          arm64e-maccatalyst
-    value:           C384D972-C53F-3096-B9D3-F91A751B7CF8
+    value:           83D6AD74-C4E3-3493-9EAF-9747FE4D744F
 install-name:    '/System/Library/PrivateFrameworks/SiriNLUTypes.framework/Versions/A/SiriNLUTypes'
 swift-abi-version: 7
 exports:

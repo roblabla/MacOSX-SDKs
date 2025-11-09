@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DA639C93-0067-385B-82C3-5A9958C12731
+    value:           447F6A84-2936-3DEE-9CB6-DF8389247D7D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EC2FA90C-9908-3F1D-87A3-70C40212C39E
+    value:           AFFA4C53-7F5A-3EB3-A36B-7AD8303FE523
 install-name:    '/System/Library/PrivateFrameworks/SystemStatusServer.framework/Versions/A/SystemStatusServer'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

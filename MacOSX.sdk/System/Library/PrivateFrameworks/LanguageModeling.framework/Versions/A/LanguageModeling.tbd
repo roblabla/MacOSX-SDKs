@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9496DC4C-C351-3B3D-A41B-A01D4923808E
+    value:           B44E6F7C-9125-383D-9229-EAC1E1FC22EE
   - target:          x86_64-maccatalyst
-    value:           9496DC4C-C351-3B3D-A41B-A01D4923808E
+    value:           B44E6F7C-9125-383D-9229-EAC1E1FC22EE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           073CB24A-5831-3C3E-889E-EA8E930AF097
+    value:           263DB5EF-C5E5-367A-A9E5-D5B4AC06DC0F
   - target:          arm64e-maccatalyst
-    value:           073CB24A-5831-3C3E-889E-EA8E930AF097
+    value:           263DB5EF-C5E5-367A-A9E5-D5B4AC06DC0F
 install-name:    '/System/Library/PrivateFrameworks/LanguageModeling.framework/Versions/A/LanguageModeling'
 current-version: 323.2
 exports:

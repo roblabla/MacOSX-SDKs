@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5136451A-0F19-3D35-B280-37513B393F96
+    value:           B3F01B33-63EA-3604-A5B8-9C678D20C97D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CE1E117E-7BAE-3614-B509-8A80C233CC37
+    value:           E9A54E0F-D62D-31FA-AA60-3D28208C9A99
 install-name:    '/System/Library/PrivateFrameworks/WorkflowUI.framework/Versions/A/WorkflowUI'
 swift-abi-version: 7
 allowable-clients:
@@ -792,6 +792,24 @@ exports:
                        '_$s10WorkflowUI13GalleryLoaderCMn', '_$s10WorkflowUI13GalleryLoaderCMo', 
                        '_$s10WorkflowUI13GalleryLoaderCMu', '_$s10WorkflowUI13GalleryLoaderCN', 
                        '_$s10WorkflowUI13GalleryLoaderCfD', '_$s10WorkflowUI13GalleryLoaderCfd', 
+                       '_$s10WorkflowUI13GlyphRegistryC10categoriesSayAA15WFGlyphCategoryVGvMTj', 
+                       '_$s10WorkflowUI13GlyphRegistryC10categoriesSayAA15WFGlyphCategoryVGvMTq', 
+                       '_$s10WorkflowUI13GlyphRegistryC10categoriesSayAA15WFGlyphCategoryVGvgTj', 
+                       '_$s10WorkflowUI13GlyphRegistryC10categoriesSayAA15WFGlyphCategoryVGvgTq', 
+                       '_$s10WorkflowUI13GlyphRegistryC10categoriesSayAA15WFGlyphCategoryVGvpMV', 
+                       '_$s10WorkflowUI13GlyphRegistryC10categoriesSayAA15WFGlyphCategoryVGvsTj', 
+                       '_$s10WorkflowUI13GlyphRegistryC10categoriesSayAA15WFGlyphCategoryVGvsTq', 
+                       '_$s10WorkflowUI13GlyphRegistryC16filterCategories4withSaySo16WFGlyphCharacterVGSS_tFTj', 
+                       '_$s10WorkflowUI13GlyphRegistryC16filterCategories4withSaySo16WFGlyphCharacterVGSS_tFTq', 
+                       '_$s10WorkflowUI13GlyphRegistryC19useSystemGlyphsOnly0e7OutlinegH016hiddenCategoriesACSb_SbSaySSGtcfC', 
+                       '_$s10WorkflowUI13GlyphRegistryC19useSystemGlyphsOnly0e7OutlinegH016hiddenCategoriesACSb_SbSaySSGtcfCTj', 
+                       '_$s10WorkflowUI13GlyphRegistryC19useSystemGlyphsOnly0e7OutlinegH016hiddenCategoriesACSb_SbSaySSGtcfCTq', 
+                       '_$s10WorkflowUI13GlyphRegistryC19useSystemGlyphsOnly0e7OutlinegH016hiddenCategoriesACSb_SbSaySSGtcfc', 
+                       '_$s10WorkflowUI13GlyphRegistryC7Combine16ObservableObjectAAMc', 
+                       '_$s10WorkflowUI13GlyphRegistryCMa', '_$s10WorkflowUI13GlyphRegistryCMm', 
+                       '_$s10WorkflowUI13GlyphRegistryCMn', '_$s10WorkflowUI13GlyphRegistryCMo', 
+                       '_$s10WorkflowUI13GlyphRegistryCMu', '_$s10WorkflowUI13GlyphRegistryCN', 
+                       '_$s10WorkflowUI13GlyphRegistryCfD', '_$s10WorkflowUI13GlyphRegistryCfd', 
                        '_$s10WorkflowUI13InspectorPaneO18accessibilityLabelSSvg', 
                        '_$s10WorkflowUI13InspectorPaneO18accessibilityLabelSSvpMV', 
                        '_$s10WorkflowUI13InspectorPaneO23accessibilityIdentifierSSvg', 
@@ -2754,8 +2772,17 @@ exports:
                        '_$s10WorkflowUI15ShortcutChicletV9runActionyycSgvM', '_$s10WorkflowUI15ShortcutChicletV9runActionyycSgvg', 
                        '_$s10WorkflowUI15ShortcutChicletV9runActionyycSgvpMV', '_$s10WorkflowUI15ShortcutChicletV9runActionyycSgvs', 
                        '_$s10WorkflowUI15ShortcutChicletVMa', '_$s10WorkflowUI15ShortcutChicletVMn', 
-                       '_$s10WorkflowUI15ShortcutChicletVN', '_$s10WorkflowUI16ConflictLocationO2eeoiySbAC_ACtFZ', 
-                       '_$s10WorkflowUI16ConflictLocationO4hash4intoys6HasherVz_tF', 
+                       '_$s10WorkflowUI15ShortcutChicletVN', '_$s10WorkflowUI15WFGlyphCategoryV14localizedTitle6glyphsACSS_SayAA0C0VGtcfC', 
+                       '_$s10WorkflowUI15WFGlyphCategoryV14localizedTitleSSvg', '_$s10WorkflowUI15WFGlyphCategoryV14localizedTitleSSvpMV', 
+                       '_$s10WorkflowUI15WFGlyphCategoryV2eeoiySbAC_ACtFZ', '_$s10WorkflowUI15WFGlyphCategoryV2id10Foundation4UUIDVvg', 
+                       '_$s10WorkflowUI15WFGlyphCategoryV2id10Foundation4UUIDVvpMV', 
+                       '_$s10WorkflowUI15WFGlyphCategoryV4hash4intoys6HasherVz_tF', 
+                       '_$s10WorkflowUI15WFGlyphCategoryV6glyphsSayAA0C0VGvg', '_$s10WorkflowUI15WFGlyphCategoryV6glyphsSayAA0C0VGvpMV', 
+                       '_$s10WorkflowUI15WFGlyphCategoryV9hashValueSivg', '_$s10WorkflowUI15WFGlyphCategoryV9hashValueSivpMV', 
+                       '_$s10WorkflowUI15WFGlyphCategoryVMa', '_$s10WorkflowUI15WFGlyphCategoryVMn', 
+                       '_$s10WorkflowUI15WFGlyphCategoryVN', '_$s10WorkflowUI15WFGlyphCategoryVSHAAMc', 
+                       '_$s10WorkflowUI15WFGlyphCategoryVSQAAMc', '_$s10WorkflowUI15WFGlyphCategoryVs12IdentifiableAAMc', 
+                       '_$s10WorkflowUI16ConflictLocationO2eeoiySbAC_ACtFZ', '_$s10WorkflowUI16ConflictLocationO4hash4intoys6HasherVz_tF', 
                        '_$s10WorkflowUI16ConflictLocationO9hashValueSivg', '_$s10WorkflowUI16ConflictLocationO9hashValueSivpMV', 
                        '_$s10WorkflowUI16ConflictLocationOMa', '_$s10WorkflowUI16ConflictLocationOMn', 
                        '_$s10WorkflowUI16ConflictLocationON', '_$s10WorkflowUI16ConflictLocationOSHAAMc', 
@@ -6579,6 +6606,14 @@ exports:
                        '_$s10WorkflowUI7TipTypeO9hashValueSivpMV', '_$s10WorkflowUI7TipTypeOMa', 
                        '_$s10WorkflowUI7TipTypeOMn', '_$s10WorkflowUI7TipTypeON', 
                        '_$s10WorkflowUI7TipTypeOSHAAMc', '_$s10WorkflowUI7TipTypeOSQAAMc', 
+                       '_$s10WorkflowUI7WFGlyphV2eeoiySbAC_ACtFZ', '_$s10WorkflowUI7WFGlyphV2id10Foundation4UUIDVvg', 
+                       '_$s10WorkflowUI7WFGlyphV2id10Foundation4UUIDVvpMV', '_$s10WorkflowUI7WFGlyphV4hash4intoys6HasherVz_tF', 
+                       '_$s10WorkflowUI7WFGlyphV9characterACSo0C9CharacterV_tcfC', 
+                       '_$s10WorkflowUI7WFGlyphV9characterSo0C9CharacterVvg', '_$s10WorkflowUI7WFGlyphV9characterSo0C9CharacterVvpMV', 
+                       '_$s10WorkflowUI7WFGlyphV9hashValueSivg', '_$s10WorkflowUI7WFGlyphV9hashValueSivpMV', 
+                       '_$s10WorkflowUI7WFGlyphVMa', '_$s10WorkflowUI7WFGlyphVMn', 
+                       '_$s10WorkflowUI7WFGlyphVN', '_$s10WorkflowUI7WFGlyphVSHAAMc', 
+                       '_$s10WorkflowUI7WFGlyphVSQAAMc', '_$s10WorkflowUI7WFGlyphVs12IdentifiableAAMc', 
                        '_$s10WorkflowUI8RootViewMp', '_$s10WorkflowUI8RootViewP03runA04from6sourceySo25WFWorkflowControllerStateC_So0H9RunSourceaSgtFTj', 
                        '_$s10WorkflowUI8RootViewP03runA04from6sourceySo25WFWorkflowControllerStateC_So0H9RunSourceaSgtFTq', 
                        '_$s10WorkflowUI8RootViewP04showC04withyAA0C17NavigationContextVSg_tFTj', 

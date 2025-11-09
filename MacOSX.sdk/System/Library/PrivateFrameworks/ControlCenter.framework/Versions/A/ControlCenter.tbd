@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           10312A84-D624-3757-ACE3-B9EEFAC98113
+    value:           AA4E57FB-C676-34CB-BD96-B3968D5B4A4D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           04B3B97E-C2EF-3FE3-8D10-E3EA81685CA2
+    value:           F0228F69-FF64-3AE9-855D-DBFAF73C20C4
 install-name:    '/System/Library/PrivateFrameworks/ControlCenter.framework/Versions/A/ControlCenter'
-current-version: 309
+current-version: 309.3
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

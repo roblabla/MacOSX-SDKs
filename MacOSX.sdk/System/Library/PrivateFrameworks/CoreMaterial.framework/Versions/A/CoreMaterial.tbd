@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           28938867-E292-36F1-9035-670EC1B6ED9D
+    value:           530BEEA6-D568-3E84-958D-D64464713BDE
   - target:          x86_64-maccatalyst
-    value:           28938867-E292-36F1-9035-670EC1B6ED9D
+    value:           530BEEA6-D568-3E84-958D-D64464713BDE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0716CE88-80DE-369B-8F58-4B42DC264BDD
+    value:           518584C8-A153-39F7-BA61-37DC02E79E2F
   - target:          arm64e-maccatalyst
-    value:           0716CE88-80DE-369B-8F58-4B42DC264BDD
+    value:           518584C8-A153-39F7-BA61-37DC02E79E2F
 install-name:    '/System/Library/PrivateFrameworks/CoreMaterial.framework/Versions/A/CoreMaterial'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -90,14 +90,14 @@ exports:
                        _kMTCAFilterPropertyNameInputColorLighten, _kMTCAFilterPropertyNameInputColorMap, 
                        _kMTCAFilterPropertyNameInputColorMatrix, _kMTCAFilterPropertyNameInputDarkenAll, 
                        _kMTCAFilterPropertyNameInputDarkenShadowHighlights, _kMTCAFilterPropertyNameInputDarkenShadows, 
-                       _kMTCAFilterPropertyNameInputDither, _kMTCAFilterPropertyNameInputIncreaseSaturation, 
-                       _kMTCAFilterPropertyNameInputMaskImage, _kMTCAFilterPropertyNameInputNormalizeEdges, 
-                       _kMTCAFilterPropertyNameInputQuality, _kMTCAFilterPropertyNameInputRadius, 
-                       _kMTCAFilterPropertyNameInputRedGreenContrast, _kMTCAFilterPropertyNameInputReversed, 
-                       _kMTCAFilterPropertyNameInputSaturationAdjustment, _kMTCAFilterPropertyNameType, 
-                       _kMTCAFilterPropertyNameinputValues, _kMTCoreMaterialStyleNamePlatformColorsDark, 
-                       _kMTCoreMaterialStyleNamePlatformColorsLight, _kMTDictionaryRepresentationOptionsBundleKey, 
-                       _kMTDictionaryRepresentationOptionsIncludeOptimizationsKey, 
+                       _kMTCAFilterPropertyNameInputDither, _kMTCAFilterPropertyNameInputHardEdges, 
+                       _kMTCAFilterPropertyNameInputIncreaseSaturation, _kMTCAFilterPropertyNameInputMaskImage, 
+                       _kMTCAFilterPropertyNameInputNormalizeEdges, _kMTCAFilterPropertyNameInputQuality, 
+                       _kMTCAFilterPropertyNameInputRadius, _kMTCAFilterPropertyNameInputRedGreenContrast, 
+                       _kMTCAFilterPropertyNameInputReversed, _kMTCAFilterPropertyNameInputSaturationAdjustment, 
+                       _kMTCAFilterPropertyNameType, _kMTCAFilterPropertyNameinputValues, 
+                       _kMTCoreMaterialStyleNamePlatformColorsDark, _kMTCoreMaterialStyleNamePlatformColorsLight, 
+                       _kMTDictionaryRepresentationOptionsBundleKey, _kMTDictionaryRepresentationOptionsIncludeOptimizationsKey, 
                        _kMTDictionaryRepresentationOptionsReduceTransparencyKey, 
                        _kMTDictionaryRepresentationOptionsUserInterfaceLevelKey ]
     objc-classes:    [ MTColor, MTCoreMaterialVisualStyling, MTCoreMaterialVisualStylingProvider, 

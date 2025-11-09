@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           54EF1390-FAAE-302D-AE58-D87D0EEF1E98
+    value:           E585EDFA-1808-3409-9A58-2FD5CC960501
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           67BF980E-E914-36E2-BC3F-52BDDDA5AF8E
+    value:           F370B8AA-0597-3553-9959-6669D122EBFA
 install-name:    '/System/iOSSupport/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/JavaScriptCore'
-current-version: 614.2.9
+current-version: 614.3.7
 exports:
   - targets:         [ x86_64-maccatalyst ]
     symbols:         [ __ZN3JSC11CompilationC1ENS_21MacroAssemblerCodeRefILN3WTF6PtrTagE2367EEENSt3__110unique_ptrINS_16OpaqueByproductsENS5_14default_deleteIS7_EEEE, 
@@ -1694,7 +1694,7 @@ exports:
                        __ZN3WTF22equalIgnoringASCIICaseEPKNS_10StringImplES2_, __ZN3WTF22equalRespectingNullityENS_10StringViewES0_, 
                        __ZN3WTF22isMainThreadOrGCThreadEv, __ZN3WTF22logFootprintComparisonERKNSt3__15arrayINS_7TagInfoELm256EEES5_, 
                        __ZN3WTF22numberOfProcessorCoresEv, __ZN3WTF22protocolIsInHTTPFamilyENS_10StringViewE, 
-                       __ZN3WTF22removeProcessPrivilegeENS_16ProcessPrivilegeE, __ZN3WTF22setSDKAlignedBehaviorsENS_6BitmapILm63EjEE, 
+                       __ZN3WTF22removeProcessPrivilegeENS_16ProcessPrivilegeE, __ZN3WTF22setSDKAlignedBehaviorsENS_6BitmapILm64EjEE, 
                        __ZN3WTF22userPreferredLanguagesENS_23ShouldMinimizeLanguagesE, 
                        __ZN3WTF23callOnMainThreadAndWaitEONS_8FunctionIFvvEEE, __ZN3WTF23dataForURLComponentTypeEP5NSURL18CFURLComponentType, 
                        __ZN3WTF23fastCommitAlignedMemoryEPvm, __ZN3WTF23openLatin1UTextProviderEPNS_15UTextWithBufferEPKhjP10UErrorCode, 

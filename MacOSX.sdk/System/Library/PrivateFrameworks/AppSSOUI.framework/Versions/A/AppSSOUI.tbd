@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C613D320-1400-3664-A564-956685276CF0
+    value:           40CECCD2-4F92-31A9-B095-CAA26EFAE951
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CBDE3FD9-EB5C-3E97-A52E-5E253071641A
+    value:           34A414AE-4383-353F-9039-3B7F358A3C93
 install-name:    '/System/Library/PrivateFrameworks/AppSSOUI.framework/Versions/A/AppSSOUI'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

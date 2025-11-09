@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D2EC180D-6C1A-3270-81F5-52E8BE292ED8
+    value:           7A300FFD-D6B8-3707-943E-A88E98B1DAF1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           54B17C2B-A754-36D4-B0B5-ECE506A40649
+    value:           D1D90D3E-5E9D-38E3-9C3B-8FA60F9AA61B
 install-name:    '/System/Library/PrivateFrameworks/PrivateFederatedLearning.framework/Versions/A/PrivateFederatedLearning'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

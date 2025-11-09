@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9D90A9DD-D965-318B-9882-4F3EB534E61A
+    value:           BAD93C99-2E37-35FA-A45B-60508AF52C24
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DC26AD26-4B98-3509-8935-03EA8C087E09
+    value:           BEEBE542-83C9-33C7-806F-45449775F962
 install-name:    '/System/Library/PrivateFrameworks/SiriFlowEnvironment.framework/Versions/A/SiriFlowEnvironment'
 swift-abi-version: 7
 exports:

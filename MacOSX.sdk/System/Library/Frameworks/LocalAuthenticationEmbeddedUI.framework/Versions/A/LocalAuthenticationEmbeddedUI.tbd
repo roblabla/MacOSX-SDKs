@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FB1EA6A4-092F-34B4-81F4-EC229779F7E3
+    value:           4C1EB042-1E4E-3F13-A149-DA6F4B752553
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F04CFC08-E8C3-3877-9092-90871136F19B
+    value:           6241166A-0B00-3EE8-8284-B59D696EF49B
 install-name:    '/System/Library/Frameworks/LocalAuthenticationEmbeddedUI.framework/Versions/A/LocalAuthenticationEmbeddedUI'
-current-version: 1131.40.25
+current-version: 1131.60.22
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     objc-classes:    [ LAAuthenticationView, LAContextUITrampoline ]

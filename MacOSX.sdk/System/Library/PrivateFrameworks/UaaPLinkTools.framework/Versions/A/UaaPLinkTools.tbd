@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           67DC35FF-3EAC-3D4C-B6C0-6E918526EF4B
+    value:           F6FE99ED-EC66-374A-B329-32914208074C
   - target:          x86_64-maccatalyst
-    value:           67DC35FF-3EAC-3D4C-B6C0-6E918526EF4B
+    value:           F6FE99ED-EC66-374A-B329-32914208074C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0E5D4DC2-8321-3D9D-BE08-021E6EE23FB6
+    value:           44373E9E-5A10-30EA-8DB6-80723C45587B
   - target:          arm64e-maccatalyst
-    value:           0E5D4DC2-8321-3D9D-BE08-021E6EE23FB6
+    value:           44373E9E-5A10-30EA-8DB6-80723C45587B
 install-name:    '/System/Library/PrivateFrameworks/UaaPLinkTools.framework/Versions/A/UaaPLinkTools'
 current-version: 0
 compatibility-version: 0

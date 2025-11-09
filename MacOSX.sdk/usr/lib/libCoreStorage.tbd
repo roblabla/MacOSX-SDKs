@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8EAC2343-6028-3841-A718-0BE39BA1D2D5
+    value:           CAFA7B9A-C7CE-38E7-AAC1-54451B71C02E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           95D5D753-AF39-3FE8-A82D-8BCB919DA8DC
+    value:           72C3F854-9E20-371D-AC05-2CE26E24EAE3
 install-name:    '/usr/lib/libCoreStorage.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

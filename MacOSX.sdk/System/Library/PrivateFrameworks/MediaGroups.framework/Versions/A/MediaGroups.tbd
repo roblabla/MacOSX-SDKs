@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4B479860-3937-3291-9A03-679E1AC01A14
+    value:           4B14BEA6-2CBE-3632-ACC8-9B19A5B6B786
   - target:          x86_64-maccatalyst
-    value:           4B479860-3937-3291-9A03-679E1AC01A14
+    value:           4B14BEA6-2CBE-3632-ACC8-9B19A5B6B786
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8605E474-C1AF-36A7-9495-E92DB47414B7
+    value:           EE73484C-157C-3B1F-B51D-AA85CA41FD19
   - target:          arm64e-maccatalyst
-    value:           8605E474-C1AF-36A7-9495-E92DB47414B7
+    value:           EE73484C-157C-3B1F-B51D-AA85CA41FD19
 install-name:    '/System/Library/PrivateFrameworks/MediaGroups.framework/Versions/A/MediaGroups'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

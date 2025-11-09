@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           856C1420-EFAC-309F-A130-34B6611FD347
+    value:           5E541CC4-E00B-37DA-9089-71449B87C088
   - target:          x86_64-maccatalyst
-    value:           856C1420-EFAC-309F-A130-34B6611FD347
+    value:           5E541CC4-E00B-37DA-9089-71449B87C088
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C6A39372-85ED-30EB-9640-8A6E154CDB23
+    value:           89C7668F-F87B-3038-AC55-1FB448C0569E
   - target:          arm64e-maccatalyst
-    value:           C6A39372-85ED-30EB-9640-8A6E154CDB23
+    value:           89C7668F-F87B-3038-AC55-1FB448C0569E
 install-name:    '/System/Library/PrivateFrameworks/SpotlightFoundation.framework/Versions/A/SpotlightFoundation'
-current-version: 2230.2
+current-version: 2230.7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -27,8 +27,8 @@ exports:
                        _resultIsLocalType, _resultIsSuggestionType, _searchResultWithTopicIdentifier, 
                        _topicIdentifierWithContactIdentifierAndDetail, _topicIdentifierWithContactInfoAndDetail, 
                        _topicIdentifierWithIdentifierAndDetail, _topicIdentifierWithPersonQueryIdentifierAndDetail, 
-                       _topicIdentifierWithTitleAndType, _truncatedSearchString, 
-                       _truncatedTitle ]
+                       _topicIdentifierWithTitleAndType, _topicIsCoreSuggestion, 
+                       _truncatedSearchString, _truncatedTitle ]
     objc-classes:    [ SPCacheManager, SPCachedResult, SPLocalTopic, SPProactiveTopic, 
                        SPRecentTopic, SPSpotlightRecentsCache ]
 ...

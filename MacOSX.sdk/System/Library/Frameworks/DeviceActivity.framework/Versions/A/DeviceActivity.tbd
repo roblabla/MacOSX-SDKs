@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2FCF3109-C309-31B1-9B6F-B27AAE857462
+    value:           272F3570-628C-31ED-8CCC-3911EE94DC93
   - target:          x86_64-maccatalyst
-    value:           2FCF3109-C309-31B1-9B6F-B27AAE857462
+    value:           272F3570-628C-31ED-8CCC-3911EE94DC93
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C8696670-6A3C-3637-95C8-AAA7DE6F1986
+    value:           D52BC597-BF57-3243-AD8E-222A29C33707
   - target:          arm64e-maccatalyst
-    value:           C8696670-6A3C-3637-95C8-AAA7DE6F1986
+    value:           D52BC597-BF57-3243-AD8E-222A29C33707
 install-name:    '/System/Library/Frameworks/DeviceActivity.framework/Versions/A/DeviceActivity'
 current-version: 280
 swift-abi-version: 7

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6BA18326-4167-3C62-9CC4-8ACBA7D00B52
+    value:           FFC584AC-1DDE-3346-B4F6-E8DCE86B201A
   - target:          x86_64-maccatalyst
-    value:           6BA18326-4167-3C62-9CC4-8ACBA7D00B52
+    value:           FFC584AC-1DDE-3346-B4F6-E8DCE86B201A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7393CAFB-BDF9-3995-B8C6-AF87437B9B03
+    value:           B3693FB9-E645-3EDD-B900-1A56170BAA57
   - target:          arm64e-maccatalyst
-    value:           7393CAFB-BDF9-3995-B8C6-AF87437B9B03
+    value:           B3693FB9-E645-3EDD-B900-1A56170BAA57
 install-name:    '/System/Library/PrivateFrameworks/Coordination.framework/Versions/A/Coordination'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

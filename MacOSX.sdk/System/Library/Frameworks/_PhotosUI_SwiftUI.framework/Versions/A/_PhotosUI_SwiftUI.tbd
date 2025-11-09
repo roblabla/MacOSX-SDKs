@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F1FA36C5-651B-3888-872E-75472089F0C3
+    value:           1F377B39-6501-3F26-A1A1-01FF9F441A7B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4C7260BE-5A6B-3C65-A9C0-7490FA464322
+    value:           CE82E8A0-0B17-364F-915E-F70CBBE75879
 install-name:    '/System/Library/Frameworks/_PhotosUI_SwiftUI.framework/Versions/A/_PhotosUI_SwiftUI'
-current-version: 511.0.170
+current-version: 520.0.240
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

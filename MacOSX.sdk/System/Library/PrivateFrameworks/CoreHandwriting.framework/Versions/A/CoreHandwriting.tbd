@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B53BD35A-F0F9-3C0D-A20D-0435D209AA6C
+    value:           11C035C9-E223-345C-BE92-C9E428B0A43A
   - target:          x86_64-maccatalyst
-    value:           B53BD35A-F0F9-3C0D-A20D-0435D209AA6C
+    value:           11C035C9-E223-345C-BE92-C9E428B0A43A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5D5F08E2-5552-3608-A4FA-B4B006649895
+    value:           B8585E3A-BEDF-3171-BF75-BE0C9E0C10FF
   - target:          arm64e-maccatalyst
-    value:           5D5F08E2-5552-3608-A4FA-B4B006649895
+    value:           B8585E3A-BEDF-3171-BF75-BE0C9E0C10FF
 install-name:    '/System/Library/PrivateFrameworks/CoreHandwriting.framework/Versions/A/CoreHandwriting'
 current-version: 0
 exports:

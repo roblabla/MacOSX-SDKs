@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           844BCD2C-2B42-3FC8-AF9B-28DAE2EB6DEC
+    value:           FD1B1E6E-57BB-3316-896B-A44991C3B7F0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3C0C08C2-3158-375A-8E9F-B7CB9C3467B8
+    value:           029FBE14-7CC5-380A-96B6-445A763F750B
 install-name:    '/System/Library/PrivateFrameworks/XprotectFramework.framework/Versions/A/XprotectFramework'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

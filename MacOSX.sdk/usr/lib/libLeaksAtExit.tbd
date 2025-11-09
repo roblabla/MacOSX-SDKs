@@ -3,12 +3,12 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8D475E9E-01F7-3226-B6F7-89901B9309DA
+    value:           D34E5CD7-1026-3BF3-A0E6-5C4DB230F0EC
   - target:          x86_64-maccatalyst
-    value:           8D475E9E-01F7-3226-B6F7-89901B9309DA
+    value:           D34E5CD7-1026-3BF3-A0E6-5C4DB230F0EC
   - target:          arm64e-macos
-    value:           A785EF3B-9467-3379-A756-36E4E21CC248
+    value:           91E7BAA5-AAE8-316B-A091-4E17B7874D5D
   - target:          arm64e-maccatalyst
-    value:           A785EF3B-9467-3379-A756-36E4E21CC248
+    value:           91E7BAA5-AAE8-316B-A091-4E17B7874D5D
 install-name:    '/usr/lib/libLeaksAtExit.dylib'
 ...

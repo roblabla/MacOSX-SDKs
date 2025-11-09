@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A06D8959-6495-3FC4-A347-B97B65FA9EF2
+    value:           A9667170-4358-3C90-876D-FBD2D19547E9
   - target:          x86_64-maccatalyst
-    value:           A06D8959-6495-3FC4-A347-B97B65FA9EF2
+    value:           A9667170-4358-3C90-876D-FBD2D19547E9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D621C133-2CD3-3654-8D52-BA0DA70E733C
+    value:           DA4C0A93-E066-3E33-9FBC-30B2B73A109F
   - target:          arm64e-maccatalyst
-    value:           D621C133-2CD3-3654-8D52-BA0DA70E733C
+    value:           DA4C0A93-E066-3E33-9FBC-30B2B73A109F
 install-name:    '/usr/lib/libThaiTokenizer.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

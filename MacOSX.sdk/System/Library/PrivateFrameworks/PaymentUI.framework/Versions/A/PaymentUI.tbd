@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A09EFB7F-3B9A-31F7-81DA-ADAA45D63715
+    value:           EA1126E4-CB1C-354A-9105-77E260403D4C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           73A09ED1-F434-3B7E-8FCC-C79AAFAC52BC
+    value:           40FE381D-5D2F-3337-853F-306DCA24BD64
 install-name:    '/System/Library/PrivateFrameworks/PaymentUI.framework/Versions/A/PaymentUI'
 swift-abi-version: 7
 exports:
@@ -90,6 +90,7 @@ exports:
                        '_$s9PaymentUI18WalletSettingsViewV4bodyQrvpQOMQ', '_$s9PaymentUI18WalletSettingsViewVMa', 
                        '_$s9PaymentUI18WalletSettingsViewVMn', '_$s9PaymentUI18WalletSettingsViewVyxG05SwiftB00E0AAMc', 
                        '_$s9PaymentUI19WalletSettingsModelC07refreshA8DefaultsyyF', 
+                       '_$s9PaymentUI19WalletSettingsModelC10removePass4passyAA07WrappedG0O_tF', 
                        '_$s9PaymentUI19WalletSettingsModelC13isDefaultPass8uniqueIDSbSS_tF', 
                        '_$s9PaymentUI19WalletSettingsModelC15unwrappedPassesSaySo6PKPassCGSgvg', 
                        '_$s9PaymentUI19WalletSettingsModelC15unwrappedPassesSaySo6PKPassCGSgvpMV', 
@@ -107,8 +108,8 @@ exports:
                        '_$s9PaymentUI20LocalizedStringTableO04peerA0yA2CmFWC', '_$s9PaymentUI20LocalizedStringTableO11virtualCardyA2CmFWC', 
                        '_$s9PaymentUI20LocalizedStringTableO12paymentSheetyA2CmFWC', 
                        '_$s9PaymentUI20LocalizedStringTableO14merchantTokensyA2CmFWC', 
-                       '_$s9PaymentUI20LocalizedStringTableO3ccsyA2CmFWC', '_$s9PaymentUI20LocalizedStringTableO8payLateryA2CmFWC', 
-                       '_$s9PaymentUI20LocalizedStringTableO8rawValueACSgSS_tcfC', 
+                       '_$s9PaymentUI20LocalizedStringTableO3ccsyA2CmFWC', '_$s9PaymentUI20LocalizedStringTableO7savingsyA2CmFWC', 
+                       '_$s9PaymentUI20LocalizedStringTableO8payLateryA2CmFWC', '_$s9PaymentUI20LocalizedStringTableO8rawValueACSgSS_tcfC', 
                        '_$s9PaymentUI20LocalizedStringTableO8rawValueSSvg', '_$s9PaymentUI20LocalizedStringTableO8rawValueSSvpMV', 
                        '_$s9PaymentUI20LocalizedStringTableO8settingsyA2CmFWC', '_$s9PaymentUI20LocalizedStringTableOMa', 
                        '_$s9PaymentUI20LocalizedStringTableOMn', '_$s9PaymentUI20LocalizedStringTableON', 
@@ -193,8 +194,10 @@ exports:
                        '_$sSo6NSMenuC9PaymentUIE5title_ABSS_SaySo0A4ItemCGyXEtcfC', 
                        '_$sSo6NSMenuC9PaymentUIEyABSaySo0A4ItemCGyXEcfC', '_$sSo8NSBundleC9PaymentUIE07paymentC0ABvgZ', 
                        _PaymentUIVersionNumber, _PaymentUIVersionString ]
-    objc-classes:    [ PKAccountPromotionCollectionViewCell, PKAccountRewardsSummaryCollectionViewCell, 
-                       PKPaymentRequestViewInterface, PKPaymentRequestViewInterfaceConfiguration, 
-                       PKSettingsPaymentSheet, _TtC9PaymentUI17TransactionsModel, 
-                       _TtC9PaymentUI27PaymentRequestViewInterface, _TtC9PaymentUI34PaymentRequestViewInterfaceFactory ]
+    objc-classes:    [ PKAccountDocumentsViewInterfaceConfiguration, PKAccountModuleView, 
+                       PKAccountPromotionCollectionViewCell, PKAccountRewardsSummaryCollectionViewCell, 
+                       PKAccountViewInterfaceConfiguration, PKPaymentRequestViewInterface, 
+                       PKPaymentRequestViewInterfaceConfiguration, PKSettingsPaymentSheet, 
+                       _TtC9PaymentUI17TransactionsModel, _TtC9PaymentUI27PaymentRequestViewInterface, 
+                       _TtC9PaymentUI34PaymentRequestViewInterfaceFactory ]
 ...

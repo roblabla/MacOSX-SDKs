@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           90D643B2-E286-3277-960E-5468790677FD
+    value:           C11A23FD-3A93-36EA-80CB-6A65D967E06B
   - target:          x86_64-maccatalyst
-    value:           90D643B2-E286-3277-960E-5468790677FD
+    value:           C11A23FD-3A93-36EA-80CB-6A65D967E06B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E3376020-40E6-3949-9A2E-86A73FC8F76A
+    value:           FD0895D2-82CF-37D5-AA65-838C699C03CE
   - target:          arm64e-maccatalyst
-    value:           E3376020-40E6-3949-9A2E-86A73FC8F76A
+    value:           FD0895D2-82CF-37D5-AA65-838C699C03CE
 install-name:    '/System/Library/PrivateFrameworks/SiriVirtualDeviceResolution.framework/Versions/A/SiriVirtualDeviceResolution'
 swift-abi-version: 7
 exports:

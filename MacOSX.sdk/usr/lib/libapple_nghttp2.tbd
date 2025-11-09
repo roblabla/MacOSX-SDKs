@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EC4E4D1C-C587-3280-89C1-B9DAC528E065
+    value:           7196269F-382E-3B78-AFE2-41E8CF7B8803
   - target:          x86_64-maccatalyst
-    value:           EC4E4D1C-C587-3280-89C1-B9DAC528E065
+    value:           7196269F-382E-3B78-AFE2-41E8CF7B8803
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4697388B-DCFF-3D0C-8019-8D6153785140
+    value:           ABA1454B-8F21-3CA3-A341-D1A443041487
   - target:          arm64e-maccatalyst
-    value:           4697388B-DCFF-3D0C-8019-8D6153785140
+    value:           ABA1454B-8F21-3CA3-A341-D1A443041487
 install-name:    '/usr/lib/libapple_nghttp2.dylib'
 current-version: 1.47
 exports:

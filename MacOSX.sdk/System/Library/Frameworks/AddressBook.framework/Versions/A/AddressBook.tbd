@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6AEFFFAB-4A70-355C-AF66-55B2D8DB4ACE
+    value:           B97C1FCF-DE8D-32B3-AEFF-B49B17FBD380
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ABC03EBD-2B48-36AF-AC3A-75FA65ADCCCE
+    value:           2EC6189B-EC58-3F5D-A075-FC84F4078A23
 install-name:    '/System/Library/Frameworks/AddressBook.framework/Versions/A/AddressBook'
-current-version: 2535
+current-version: 2538.1
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/PrivateFrameworks/AddressBookCore.framework/Versions/A/AddressBookCore', 
@@ -250,18 +250,18 @@ exports:
                        ABShadowTextViewPostalAddressValuePasteHelper, ABShowAsCommand, 
                        ABShowAuthorizationPaneUIAction, ABSimpleLinkTextField, ABSmartGroupBrowsingGroupEntry, 
                        ABSmartGroupsHeaderGroupEntry, ABSocialProfileCollectionViewItem, 
-                       ABSourceSyncPeriodicTaskScheduler, ABStopWatch, ABSubscribedPerson, 
-                       ABSuggestedEntriesFetcher, ABSuggestedValueSnippet, ABSuggestedValueViewController, 
-                       ABSuggestedValueViewControllerSnippetHelper, ABSuggestionsTracing, 
-                       ABTableEntry, ABTableHeaderView, ABTelURLHelper, ABTemplatePreferencesSaving, 
-                       ABTemplateViewStyleProvider, ABTextContainer, ABTextStorage, 
-                       ABThrottledTrackingAreaMonitor, ABTrackingArea, ABTypesetter, 
-                       ABURLCollectionViewItem, ABUndoableCommandVisitor, ABUnlinkPeopleCommand, 
-                       ABUserActivityRestoration, ABUserActivityScore, ABUserActivityScoring, 
-                       ABUserActivitySerialization, ABUserDefaultsCNAdapter, ABVCardFilenameExpander, 
-                       ABView, ABWhiteView, ABWidthLimitingStackView, ABWindowController, 
-                       ABXMLParseNode, AKCardViewDataSource, AKCardViewDataSourceFactory, 
-                       AKCardViewImageDataSource, AKInstantMessageAddressValueTransformer, 
+                       ABSourceSyncPeriodicTaskScheduler, ABStaticIdentityFieldStyleProvider, 
+                       ABStopWatch, ABSubscribedPerson, ABSuggestedEntriesFetcher, 
+                       ABSuggestedValueSnippet, ABSuggestedValueViewController, ABSuggestedValueViewControllerSnippetHelper, 
+                       ABSuggestionsTracing, ABTableEntry, ABTableHeaderView, ABTelURLHelper, 
+                       ABTemplatePreferencesSaving, ABTemplateViewStyleProvider, 
+                       ABTextContainer, ABTextStorage, ABThrottledTrackingAreaMonitor, 
+                       ABTrackingArea, ABTypesetter, ABURLCollectionViewItem, ABUndoableCommandVisitor, 
+                       ABUnlinkPeopleCommand, ABUserActivityRestoration, ABUserActivityScore, 
+                       ABUserActivityScoring, ABUserActivitySerialization, ABUserDefaultsCNAdapter, 
+                       ABVCardFilenameExpander, ABView, ABWhiteView, ABWidthLimitingStackView, 
+                       ABWindowController, ABXMLParseNode, AKCardViewDataSource, 
+                       AKCardViewDataSourceFactory, AKCardViewImageDataSource, AKInstantMessageAddressValueTransformer, 
                        AKSocialProfileValueTransformer, CNCollectionUserActionItem, 
                        CNContactLabelSanitizer, CNRestrictedURLOpener, CNUIAddContactCommand, 
                        CNUIAddressBookToContactsConversions, CNUIAggregateUndoableCommand, 
@@ -698,19 +698,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CB03BB47-B039-3A08-88E1-B1CEB44AF9E2
+    value:           F9C38C87-8679-3FF9-B17D-4163A5E86693
   - target:          x86_64-maccatalyst
-    value:           CB03BB47-B039-3A08-88E1-B1CEB44AF9E2
+    value:           F9C38C87-8679-3FF9-B17D-4163A5E86693
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EF06D8DC-39FA-3D09-ADCB-AAE3CEA6B56E
+    value:           FE864D62-3001-3207-8742-76D6A7C96605
   - target:          arm64e-maccatalyst
-    value:           EF06D8DC-39FA-3D09-ADCB-AAE3CEA6B56E
+    value:           FE864D62-3001-3207-8742-76D6A7C96605
 install-name:    '/System/Library/PrivateFrameworks/AddressBookCore.framework/Versions/A/AddressBookCore'
-current-version: 2535
+current-version: 2538.1
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -1404,17 +1404,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A78538C6-03CC-3C58-808E-A7E4AE66EA35
+    value:           4AA37EFE-6193-3939-BB66-03265E8E1362
   - target:          x86_64-maccatalyst
-    value:           A78538C6-03CC-3C58-808E-A7E4AE66EA35
+    value:           4AA37EFE-6193-3939-BB66-03265E8E1362
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A9BD6426-9973-3137-AF92-10FC57B5ADCE
+    value:           ADE442EE-4598-307E-89B1-B0A06537A2AB
   - target:          arm64e-maccatalyst
-    value:           A9BD6426-9973-3137-AF92-10FC57B5ADCE
+    value:           ADE442EE-4598-307E-89B1-B0A06537A2AB
 install-name:    '/System/Library/PrivateFrameworks/ContactsPersistence.framework/Versions/A/ContactsPersistence'
 swift-abi-version: 7
 exports:
@@ -1620,7 +1620,7 @@ exports:
                        CNCDRemotePersistentStoreEndpointFactory, CNCDRemotePersistentStoreEndpointFetchRequest, 
                        CNCDRemotePersistentStoreEndpointFetchResponse, CNCDService, 
                        CNCDTestManagedObjectContextSession, CNCDTestPersistenceStack, 
-                       CNCDURLAddress, CNCDUnifiedContactInfo, CNCDVCardSerialization, 
+                       CNCDURLAddress, CNCDURLVerifier, CNCDUnifiedContactInfo, CNCDVCardSerialization, 
                        CNCustomPropertyMigrationTask, CNDelegateAccessAccountCollection, 
                        CNEWSContactFolder, CNEWSContactMapping, CNEWSItemMapping, 
                        CNEWSMapping, CNEmptyAccountCollection, CNOnDiskAccountCollection, 
@@ -1659,7 +1659,13 @@ exports:
                        CNPersistentStoreDescription._modelFuture, CNPersistentStoreDescription._modelName, 
                        CNPersistentStoreDescription._version ]
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s19ContactsPersistence19CNCDFileSystemPhotoC20supportsSecureCodingSbvMZ', 
+    symbols:         [ '_$s19ContactsPersistence11URLVerifierC25isExistingPersistentStoreySb10Foundation3URLVFZTj', 
+                       '_$s19ContactsPersistence11URLVerifierC25isExistingPersistentStoreySb10Foundation3URLVFZTq', 
+                       '_$s19ContactsPersistence11URLVerifierCACycfC', '_$s19ContactsPersistence11URLVerifierCACycfc', 
+                       '_$s19ContactsPersistence11URLVerifierCMa', '_$s19ContactsPersistence11URLVerifierCMn', 
+                       '_$s19ContactsPersistence11URLVerifierCMo', '_$s19ContactsPersistence11URLVerifierCMu', 
+                       '_$s19ContactsPersistence11URLVerifierCN', '_$s19ContactsPersistence11URLVerifierCfD', 
+                       '_$s19ContactsPersistence19CNCDFileSystemPhotoC20supportsSecureCodingSbvMZ', 
                        '_$s19ContactsPersistence19CNCDFileSystemPhotoC20supportsSecureCodingSbvgZ', 
                        '_$s19ContactsPersistence19CNCDFileSystemPhotoC20supportsSecureCodingSbvsZ', 
                        '_$s19ContactsPersistence19CNCDFileSystemPhotoC4copy4withyp10ObjectiveC6NSZoneVSg_tFTj', 
@@ -1699,14 +1705,15 @@ exports:
                        '_$s19ContactsPersistence31CNOpenDirectoryFacadeTestDoubleCMu', 
                        '_$s19ContactsPersistence31CNOpenDirectoryFacadeTestDoubleCN', 
                        '_$s19ContactsPersistence31CNOpenDirectoryFacadeTestDoubleCfD', 
-                       '_OBJC_CLASS_$__TtC19ContactsPersistence19CNCDFileSystemPhoto', 
+                       '_OBJC_CLASS_$__CNCDURLVerifier', '_OBJC_CLASS_$__TtC19ContactsPersistence19CNCDFileSystemPhoto', 
                        '_OBJC_CLASS_$__TtC19ContactsPersistence21CNOpenDirectoryFacade', 
                        '_OBJC_CLASS_$__TtC19ContactsPersistence27CNCDFileSystemPhotoMigrator', 
                        '_OBJC_CLASS_$__TtC19ContactsPersistence31CNOpenDirectoryFacadeTestDouble', 
-                       '_OBJC_METACLASS_$__TtC19ContactsPersistence19CNCDFileSystemPhoto', 
+                       '_OBJC_METACLASS_$__CNCDURLVerifier', '_OBJC_METACLASS_$__TtC19ContactsPersistence19CNCDFileSystemPhoto', 
                        '_OBJC_METACLASS_$__TtC19ContactsPersistence21CNOpenDirectoryFacade', 
                        '_OBJC_METACLASS_$__TtC19ContactsPersistence27CNCDFileSystemPhotoMigrator', 
                        '_OBJC_METACLASS_$__TtC19ContactsPersistence31CNOpenDirectoryFacadeTestDouble' ]
-    objc-classes:    [ _TtC19ContactsPersistence19CNCDFileSystemPhoto, _TtC19ContactsPersistence21CNOpenDirectoryFacade, 
-                       _TtC19ContactsPersistence27CNCDFileSystemPhotoMigrator, _TtC19ContactsPersistence31CNOpenDirectoryFacadeTestDouble ]
+    objc-classes:    [ _CNCDURLVerifier, _TtC19ContactsPersistence19CNCDFileSystemPhoto, 
+                       _TtC19ContactsPersistence21CNOpenDirectoryFacade, _TtC19ContactsPersistence27CNCDFileSystemPhotoMigrator, 
+                       _TtC19ContactsPersistence31CNOpenDirectoryFacadeTestDouble ]
 ...

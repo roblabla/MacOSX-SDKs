@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3E79EDB7-EF1A-32E5-A5C3-4A8AC07EED7D
+    value:           FA3BBCCD-7157-3936-B776-3E99056692F8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7114ED1B-228A-334E-AD2C-A7FF53114AE0
+    value:           82D62963-FB58-32E5-BD7F-6E7DE7C22BF6
 install-name:    '/System/Library/PrivateFrameworks/SpotlightReceiver.framework/Versions/A/SpotlightReceiver'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

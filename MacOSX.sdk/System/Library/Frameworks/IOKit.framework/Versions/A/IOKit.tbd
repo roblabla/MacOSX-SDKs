@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           566F0167-D3BC-32EC-BDAA-21D669451FDD
+    value:           07D95C28-6BD6-3088-B2AC-019581C88565
   - target:          x86_64-maccatalyst
-    value:           566F0167-D3BC-32EC-BDAA-21D669451FDD
+    value:           07D95C28-6BD6-3088-B2AC-019581C88565
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9A639069-DFCA-3245-909D-102B926275D0
+    value:           76BB257B-DDBE-3DDB-A901-3A06BDCC38A5
   - target:          arm64e-maccatalyst
-    value:           9A639069-DFCA-3245-909D-102B926275D0
+    value:           76BB257B-DDBE-3DDB-A901-3A06BDCC38A5
 install-name:    '/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit'
 current-version: 275
 exports:

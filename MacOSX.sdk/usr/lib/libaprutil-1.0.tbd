@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C3BAAD66-E81D-318B-AEE9-74C3DF271272
+    value:           EC3F35D5-5FF4-36B0-B680-72F4A687A56A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B0E4D9A7-D44C-3054-94F8-0B5997B3D844
+    value:           32BA89E8-59CC-3FBA-B6BE-5E218602E6EC
 install-name:    '/usr/lib/libaprutil-1.0.dylib'
 current-version: 4
 compatibility-version: 4

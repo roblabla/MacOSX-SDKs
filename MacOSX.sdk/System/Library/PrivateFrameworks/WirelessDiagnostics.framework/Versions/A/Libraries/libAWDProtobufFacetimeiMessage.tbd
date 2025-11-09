@@ -3,12 +3,12 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0A737B82-4081-36B3-81F9-06B48E94DB7D
+    value:           788FC62F-44A2-308D-AF63-3DC79A36EDD1
   - target:          x86_64-maccatalyst
-    value:           0A737B82-4081-36B3-81F9-06B48E94DB7D
+    value:           788FC62F-44A2-308D-AF63-3DC79A36EDD1
   - target:          arm64e-macos
-    value:           ECB11EED-2F7E-3DAB-9793-DE69D1D69E12
+    value:           C9D54EB9-71E5-3CDD-A441-C0D55FB804A5
   - target:          arm64e-maccatalyst
-    value:           ECB11EED-2F7E-3DAB-9793-DE69D1D69E12
+    value:           C9D54EB9-71E5-3CDD-A441-C0D55FB804A5
 install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libAWDProtobufFacetimeiMessage.dylib'
 ...

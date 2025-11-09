@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3680BF2D-318F-3B63-B7F7-C87B5DD8DC88
+    value:           8BD57A9D-F8A3-3DD9-BC1F-F7E05ADDA322
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F6F5EC32-24EC-3C9B-99E9-34BA141C5A71
+    value:           265A677C-56EA-3856-8AD5-8AF90E28F886
 install-name:    '/System/Library/PrivateFrameworks/CoreFollowUp.framework/Versions/A/CoreFollowUp'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -15,7 +15,7 @@ exports:
                        _FLError, _FLErrorDomain, _FLFollowUpActionIsDestructiveKey, 
                        _FLFollowUpActionLaunchArgumentsKey, _FLFollowUpBridgeBundleIdentifier, 
                        _FLFollowUpBridgeUrlPrefix, _FLFollowUpHomeBundleIdentifier, 
-                       _FLFollowUpItemsKey, _FLFollowUpNotificationBundleIdentifier, 
+                       _FLFollowUpItemsKey, _FLFollowUpNDOBundleIdentifier, _FLFollowUpNotificationBundleIdentifier, 
                        _FLFollowUpNotificationDefaultCategory, _FLFollowUpNotificationSampleCategory, 
                        _FLFollowUpNotifyingAppIdKey, _FLFollowUpPhotosBundleIdentifier, 
                        _FLFollowUpPreferencesBundleIdentifier, _FLFollowUpPreferencesIdentifierPrefix, 
@@ -32,11 +32,12 @@ exports:
                        _FLNotificationOptionExtensionForNotification, _FLNotificationOptionForce, 
                        _FLNotificationOptionKeepOnLockscreen, _FLNotificationOptionLockscreen, 
                        _FLNotificationOptionNotificationCenter, _FLNotificationOptionSpringboardAlert, 
-                       _FLUserInfoPropertyAbsoluteFormatKey, _FLUserInfoPropertyAdjustExpirationToMidnightKey, 
-                       _FLUserInfoPropertyDontDisplayDate, _FLUserInfoPropertyRelativeIsCeilingKey, 
-                       _FLUserInfoPropertyRelativePluralDaysFormatKey, _FLUserInfoPropertyRelativeSingleDayKey, 
-                       _FLUserInfoPropertyRelativeZeroDayKey, _FLUserInfoPropertySettingsExtensionIDToLoad, 
-                       __FLLogSystem, __FLLogSystemQuery, __FLSignpostCreate, __FLSignpostGetNanoseconds, 
+                       _FLNotificationOptionSpringboardAlertActionOnly, _FLUserInfoPropertyAbsoluteFormatKey, 
+                       _FLUserInfoPropertyAdjustExpirationToMidnightKey, _FLUserInfoPropertyDontDisplayDate, 
+                       _FLUserInfoPropertyRelativeIsCeilingKey, _FLUserInfoPropertyRelativePluralDaysFormatKey, 
+                       _FLUserInfoPropertyRelativeSingleDayKey, _FLUserInfoPropertyRelativeZeroDayKey, 
+                       _FLUserInfoPropertySettingsExtensionIDToLoad, __FLLogSystem, 
+                       __FLLogSystemQuery, __FLSignpostCreate, __FLSignpostGetNanoseconds, 
                        __FLSignpostLogSystem ]
     objc-classes:    [ FLApprovedItemsDecorator, FLApprovedItemsFilter, FLConstants, 
                        FLDaemon, FLEnvironment, FLExtensionHostContext, FLFollowUpAction, 

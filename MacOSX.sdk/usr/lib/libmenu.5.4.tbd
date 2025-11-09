@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           30D51D73-CA2D-3197-9A25-4C699BFF267C
+    value:           945DD5FC-AFAE-351D-8E86-F4118E0C78B6
   - target:          x86_64-maccatalyst
-    value:           30D51D73-CA2D-3197-9A25-4C699BFF267C
+    value:           945DD5FC-AFAE-351D-8E86-F4118E0C78B6
   - target:          arm64e-macos
-    value:           480E031D-69BC-32F7-BEE6-3602D4234B74
+    value:           9630142E-D590-3F41-9408-8399F17F01F8
   - target:          arm64e-maccatalyst
-    value:           480E031D-69BC-32F7-BEE6-3602D4234B74
+    value:           9630142E-D590-3F41-9408-8399F17F01F8
 install-name:    '/usr/lib/libmenu.5.4.dylib'
 current-version: 5.4
 compatibility-version: 5.4

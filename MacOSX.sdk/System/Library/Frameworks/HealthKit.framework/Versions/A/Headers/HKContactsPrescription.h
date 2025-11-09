@@ -60,6 +60,11 @@ HK_EXTERN API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0))
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
++ (instancetype)prescriptionWithType:(HKVisionPrescriptionType)type
+                          dateIssued:(NSDate *)dateIssued
+                      expirationDate:(nullable NSDate *)expirationDate
+                              device:(nullable HKDevice *)device
+                            metadata:(nullable NSDictionary<NSString *, id> *)metadata NS_UNAVAILABLE;
 
 @end
 

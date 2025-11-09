@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2D6A4EDB-9AC0-335F-8A2C-17D724FB11A9
+    value:           D4483A5C-8D00-32F9-A2DA-48E5E3446256
   - target:          x86_64-maccatalyst
-    value:           2D6A4EDB-9AC0-335F-8A2C-17D724FB11A9
+    value:           D4483A5C-8D00-32F9-A2DA-48E5E3446256
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1A3FEE9A-B53B-3B0D-9B60-7733F1CA5070
+    value:           9B8C37B0-A01E-3321-BCE0-6B2679B72D94
   - target:          arm64e-maccatalyst
-    value:           1A3FEE9A-B53B-3B0D-9B60-7733F1CA5070
+    value:           9B8C37B0-A01E-3321-BCE0-6B2679B72D94
 install-name:    '/System/Library/PrivateFrameworks/EmailFoundation.framework/Versions/A/EmailFoundation'
-current-version: 3731.200.110
+current-version: 3731.255.101
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -26,13 +26,14 @@ exports:
                        _EFAtomicObjectSetIfIdentical, _EFAtomicObjectSetIfNil, _EFBundleIdentifierForXPCConnection, 
                        _EFComparatorFromSortDescriptors, _EFContentProtectionDumpDiagnosticState, 
                        _EFContentProtectionGetDeviceLockState, _EFContentProtectionGetObservedState, 
-                       _EFContentProtectionSimulateState, _EFCopyResponseDataForURLRequest, 
-                       _EFDecodeCacheableInstance, _EFDefaultsKeyLogWithPII, _EFDeviceUnlockedSinceBoot, 
-                       _EFEmailMessageUTType, _EFEncodeCacheableInstance, _EFErrorDomain, 
-                       _EFFetchSignpostLog, _EFFrameworkVersion, _EFHEICImageUTType, 
-                       _EFIsCustomerBuild, _EFIsNotNull, _EFIsNull, _EFIsRunningUnitTests, 
-                       _EFIsSeedBuild, _EFLogRegisterStateCaptureBlock, _EFMurmurHash3Mix, 
-                       _EFNonContainerizedHomeDirectory, _EFObjectsAreEqual, _EFPerformSyncWithProtectedDataAvailability, 
+                       _EFContentProtectionSimulateState, _EFContentProtectionStateDescription, 
+                       _EFCopyResponseDataForURLRequest, _EFDecodeCacheableInstance, 
+                       _EFDefaultsKeyLogWithPII, _EFDeviceUnlockedSinceBoot, _EFEmailMessageUTType, 
+                       _EFEncodeCacheableInstance, _EFErrorDomain, _EFFetchSignpostLog, 
+                       _EFFrameworkVersion, _EFHEICImageUTType, _EFIsCustomerBuild, 
+                       _EFIsNotNull, _EFIsNull, _EFIsRunningUnitTests, _EFIsSeedBuild, 
+                       _EFLogRegisterStateCaptureBlock, _EFMurmurHash3Mix, _EFNonContainerizedHomeDirectory, 
+                       _EFObjectsAreEqual, _EFPerformSyncWithProtectedDataAvailability, 
                        _EFPostUTF8FormData, _EFPriorityDesignatorKey, _EFProductName, 
                        _EFProtectedDataAvailable, _EFPublicErrorInfoKey, _EFRegisterContentProtectionObserver, 
                        _EFRoundUnsignedInteger, _EFSQLSchemaColumnNameRowID, _EFSQLSchemaDatabaseNameMain, 

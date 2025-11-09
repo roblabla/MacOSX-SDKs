@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           08E567D7-A8D9-3DF8-9182-AEF9EDDB1304
+    value:           BA3BA77B-7200-317B-9322-E3F864FA3FDA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FC9E303F-B1C6-3645-BD84-D53F5EB42673
+    value:           B34963D6-DEB9-3B9B-BA3D-DC21FC4434BB
 install-name:    '/System/Library/Frameworks/IOUSBHost.framework/Versions/A/IOUSBHost'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

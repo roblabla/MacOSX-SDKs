@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E0A23E43-E44C-3F6F-9009-040FA393CE93
+    value:           844B3D92-3A92-3E13-BFC1-EB642CC55D21
   - target:          x86_64-maccatalyst
-    value:           E0A23E43-E44C-3F6F-9009-040FA393CE93
+    value:           844B3D92-3A92-3E13-BFC1-EB642CC55D21
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3916C08C-C7FE-3396-8841-745FC1AE2233
+    value:           EBB960F1-6892-39C7-AA61-26463AF2D45C
   - target:          arm64e-maccatalyst
-    value:           3916C08C-C7FE-3396-8841-745FC1AE2233
+    value:           EBB960F1-6892-39C7-AA61-26463AF2D45C
 install-name:    '/System/Library/PrivateFrameworks/Symbolication.framework/Versions/A/Symbolication'
 current-version: 64556.3.1
 exports:

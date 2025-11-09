@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1710DBF0-EA5C-3166-9F0B-54021CA9D5C1
+    value:           688BEB06-323B-3B36-BBC8-5AD920F6D8BA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5BDFD8E1-754D-3E16-B92D-4783D769DC2A
+    value:           187408C0-BB7F-32F9-BF8F-5484ECAC2B68
 install-name:    '@rpath/AppleMediaServicesUIDynamic.framework/Versions/A/AppleMediaServicesUIDynamic'
 swift-abi-version: 7
 exports:

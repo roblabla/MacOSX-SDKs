@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           29A85CB4-F8CD-38DB-B574-30DCB41A7BE5
+    value:           EA3186DB-110A-3453-B10D-66D79EA656BE
   - target:          x86_64-maccatalyst
-    value:           29A85CB4-F8CD-38DB-B574-30DCB41A7BE5
+    value:           EA3186DB-110A-3453-B10D-66D79EA656BE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EAEB643F-52CF-3064-B448-4E50A39FA280
+    value:           45511753-FC99-3ABC-A531-74D7E7325DB5
   - target:          arm64e-maccatalyst
-    value:           EAEB643F-52CF-3064-B448-4E50A39FA280
+    value:           45511753-FC99-3ABC-A531-74D7E7325DB5
 install-name:    '/System/Library/PrivateFrameworks/SPOwner.framework/Versions/A/SPOwner'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -31,11 +31,11 @@ exports:
                        _SPBeaconTaskNameAccessoryFirmwareUpdate, _SPBeaconTaskNameBeginBTFinding, 
                        _SPBeaconTaskNameBeginLeashing, _SPBeaconTaskNameBeginRanging, 
                        _SPBeaconTaskNameConnect, _SPBeaconTaskNameDeclineShare, _SPBeaconTaskNameDisableLostMode, 
-                       _SPBeaconTaskNameDisableNotifyWhenFound, _SPBeaconTaskNameEnableLostMode, 
-                       _SPBeaconTaskNameEnableNotifyWhenFound, _SPBeaconTaskNameEndBTFinding, 
-                       _SPBeaconTaskNameEndLeashing, _SPBeaconTaskNameEndRanging, 
-                       _SPBeaconTaskNameFetchFirmwareVersion, _SPBeaconTaskNameLocating, 
-                       _SPBeaconTaskNamePlaySound, _SPBeaconTaskNamePlaySoundInitiated, 
+                       _SPBeaconTaskNameDisableNotifyWhenFound, _SPBeaconTaskNameDisconnect, 
+                       _SPBeaconTaskNameEnableLostMode, _SPBeaconTaskNameEnableNotifyWhenFound, 
+                       _SPBeaconTaskNameEndBTFinding, _SPBeaconTaskNameEndLeashing, 
+                       _SPBeaconTaskNameEndRanging, _SPBeaconTaskNameFetchFirmwareVersion, 
+                       _SPBeaconTaskNameLocating, _SPBeaconTaskNamePlaySound, _SPBeaconTaskNamePlaySoundInitiated, 
                        _SPBeaconTaskNameRename, _SPBeaconTaskNameSetObfuscatedIdentifier, 
                        _SPBeaconTaskNameStartSharing, _SPBeaconTaskNameStopSharing, 
                        _SPBeaconTaskNameStopSound, _SPBeaconTaskNameUnknown, _SPBeaconTaskNameUnpair, 
@@ -103,11 +103,12 @@ exports:
                        SPOfflineAdvertisingKeys, SPOwnedDeviceKeyRecord, SPOwnerInterface, 
                        SPOwnerSession, SPOwnerSessionState, SPPairingConfiguration, 
                        SPPairingManager, SPPairingSession, SPPairingState, SPPeripheral, 
-                       SPRawSearchResult, SPSafeLocation, SPScannedObject, SPSecureLocation, 
-                       SPSecureLocationsManager, SPSecureLocationsSubscriptionContext, 
-                       SPSecureLocationsSubscriptionResult, SPSettingsConfiguration, 
-                       SPSimpleBeacon, SPSimpleBeaconContext, SPStandaloneBeacon, 
-                       SPTagUserStats, SPUnauthorizedTrackingAdvertisement, SPUnauthorizedTrackingObservation, 
-                       SPUnknownBeacon, SPUnknownDiscoverySession, SPUnknownDiscoverySessionState, 
-                       SPUnknownProductInfo, SPUnknownProductMetadata ]
+                       SPRawAccessoryMetadata, SPRawSearchResult, SPSafeLocation, 
+                       SPScannedObject, SPSecureLocation, SPSecureLocationsManager, 
+                       SPSecureLocationsSubscriptionContext, SPSecureLocationsSubscriptionResult, 
+                       SPSettingsConfiguration, SPSimpleBeacon, SPSimpleBeaconContext, 
+                       SPStandaloneBeacon, SPTagUserStats, SPTrackingAvoidancePolicy, 
+                       SPTrackingAvoidanceResult, SPUnauthorizedTrackingAdvertisement, 
+                       SPUnauthorizedTrackingObservation, SPUnknownBeacon, SPUnknownDiscoverySession, 
+                       SPUnknownDiscoverySessionState, SPUnknownProductInfo, SPUnknownProductMetadata ]
 ...

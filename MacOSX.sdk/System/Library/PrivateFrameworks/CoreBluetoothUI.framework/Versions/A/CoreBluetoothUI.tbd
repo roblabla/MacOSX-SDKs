@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           16751C22-AD3C-3D91-9CCC-A8A0EB48980E
+    value:           C9AAF746-0717-3700-B970-8DC08DAB2EAC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FE28B64F-9366-3B8B-88F0-66C7B5E6B132
+    value:           4B188FF3-961A-3847-A513-028B187BA947
 install-name:    '/System/Library/PrivateFrameworks/CoreBluetoothUI.framework/Versions/A/CoreBluetoothUI'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

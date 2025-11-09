@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           663B161A-C74B-36C6-90C6-7FAF0898776D
+    value:           93D18B18-B1C4-3701-A0AE-C72FC0A2A1A7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9216138D-5CF7-362A-A8CB-E2B26EC1AB4D
+    value:           4046716D-8436-35A8-997A-32E83858182C
 install-name:    '/System/Library/PrivateFrameworks/CorePhotogrammetry.framework/Versions/A/CorePhotogrammetry'
 current-version: 2.23.6
 compatibility-version: 2.23.6

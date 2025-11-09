@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A8B4B810-EA35-3CDF-84E3-A171F3CB130C
+    value:           80B33482-38E2-343B-A5CA-2FEE66BE370B
   - target:          x86_64-maccatalyst
-    value:           A8B4B810-EA35-3CDF-84E3-A171F3CB130C
+    value:           80B33482-38E2-343B-A5CA-2FEE66BE370B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           10ECB5FD-B527-3C4B-BCC2-21A4BEE9056A
+    value:           B13B71F1-3CDE-3F94-A1E2-183CC736D128
   - target:          arm64e-maccatalyst
-    value:           10ECB5FD-B527-3C4B-BCC2-21A4BEE9056A
+    value:           B13B71F1-3CDE-3F94-A1E2-183CC736D128
 install-name:    '/System/Library/Frameworks/CoreTransferable.framework/Versions/A/CoreTransferable'
 swift-abi-version: 7
 exports:
@@ -30,6 +30,8 @@ exports:
                        '_$s10Foundation3URLV16CoreTransferableE22transferRepresentationQrvgZ', 
                        '_$s10Foundation3URLV16CoreTransferableE22transferRepresentationQrvpZQOMQ', 
                        '_$s10Foundation4DataV16CoreTransferable0D0ADMc', '_$s10Foundation4DataV16CoreTransferable0D0ADWP', 
+                       '_$s10Foundation4DataV16CoreTransferable0D8CurrencyADMc', 
+                       '_$s10Foundation4DataV16CoreTransferable0D8CurrencyADWP', 
                        '_$s10Foundation4DataV16CoreTransferableE22transferRepresentationQrvgZ', 
                        '_$s10Foundation4DataV16CoreTransferableE22transferRepresentationQrvpZQOMQ', 
                        '_$s14Representation16CoreTransferable0C0PTl', '_$s16CoreTransferable0B0Mp', 
@@ -49,6 +51,7 @@ exports:
                        '_$s16CoreTransferable0B5ErrorOMa', '_$s16CoreTransferable0B5ErrorOMn', 
                        '_$s16CoreTransferable0B5ErrorON', '_$s16CoreTransferable0B5ErrorOSHAAMc', 
                        '_$s16CoreTransferable0B5ErrorOSQAAMc', '_$s16CoreTransferable0B5ErrorOs0C0AAMc', 
+                       '_$s16CoreTransferable0B8CurrencyMp', '_$s16CoreTransferable0B8CurrencyTL', 
                        '_$s16CoreTransferable18DataRepresentationV019_decomposedTransferD0_6inputsAA01_fD7OutputsVAA01_fD5ValueVyACyxGG_AA01_fD6InputsVtFZ', 
                        '_$s16CoreTransferable18DataRepresentationV11contentType9exporting9importingACyxG07UniformF11Identifiers6UTTypeV_10Foundation0C0VxYaYbKcxAMYaYbKctcfC', 
                        '_$s16CoreTransferable18DataRepresentationV19exportedContentType9exportingACyxG07UniformG11Identifiers6UTTypeV_10Foundation0C0VxYaYbKctcfC', 
@@ -77,6 +80,8 @@ exports:
                        '_$s16CoreTransferable19SentTransferredFileV022allowAccessingOriginalE0SbvpMV', 
                        '_$s16CoreTransferable19SentTransferredFileV4file10Foundation3URLVvg', 
                        '_$s16CoreTransferable19SentTransferredFileV4file10Foundation3URLVvpMV', 
+                       '_$s16CoreTransferable19SentTransferredFileVAA0B8CurrencyAAMc', 
+                       '_$s16CoreTransferable19SentTransferredFileVAA0B8CurrencyAAWP', 
                        '_$s16CoreTransferable19SentTransferredFileVMa', '_$s16CoreTransferable19SentTransferredFileVMn', 
                        '_$s16CoreTransferable19SentTransferredFileVN', '_$s16CoreTransferable19SentTransferredFileV_022allowAccessingOriginalE0AC10Foundation3URLV_SbtcfC', 
                        '_$s16CoreTransferable21CodableRepresentationV019_decomposedTransferD0_6inputsAA01_fD7OutputsVAA01_fD5ValueVyACyxq_q0_GG_AA01_fD6InputsVtFZ', 
@@ -101,6 +106,8 @@ exports:
                        '_$s16CoreTransferable23ReceivedTransferredFileV010isOriginalE0SbvpMV', 
                        '_$s16CoreTransferable23ReceivedTransferredFileV4file10Foundation3URLVvg', 
                        '_$s16CoreTransferable23ReceivedTransferredFileV4file10Foundation3URLVvpMV', 
+                       '_$s16CoreTransferable23ReceivedTransferredFileVAA0B8CurrencyAAMc', 
+                       '_$s16CoreTransferable23ReceivedTransferredFileVAA0B8CurrencyAAWP', 
                        '_$s16CoreTransferable23ReceivedTransferredFileVMa', '_$s16CoreTransferable23ReceivedTransferredFileVMn', 
                        '_$s16CoreTransferable23ReceivedTransferredFileVN', '_$s16CoreTransferable26DataTransferRepresentationV011_decomposeddE0_6inputsAA01_dE7OutputsVAA01_dE5ValueVyACyxGG_AA01_dE6InputsVtFZ', 
                        '_$s16CoreTransferable26DataTransferRepresentationV11contentType8exporter8importerACyxG07UniformG11Identifiers6UTTypeV_10Foundation0C0VxYaYbKcxAMYaYbKctcfC', 
@@ -137,6 +144,7 @@ exports:
                        '_$s16CoreTransferable27TupleTransferRepresentationVyxq_GAA0dE0AAWP', 
                        '_$s16CoreTransferable28_TransferRepresentationValueVMa', 
                        '_$s16CoreTransferable28_TransferRepresentationValueVMn', 
+                       '_$s16CoreTransferable28_TransferRepresentationValueVyACyxGxcfC', 
                        '_$s16CoreTransferable29CodableTransferRepresentationV011_decomposeddE0_6inputsAA01_dE7OutputsVAA01_dE5ValueVyACyxq_q0_GG_AA01_dE6InputsVtFZ', 
                        '_$s16CoreTransferable29CodableTransferRepresentationV3for11contentType7encoder7decoderACyxq_q0_Gxm_07UniformH11Identifiers6UTTypeVq_q0_tcfC', 
                        '_$s16CoreTransferable29CodableTransferRepresentationV3for11contentTypeACyx10Foundation11JSONEncoderCAF11JSONDecoderCGxm_07UniformH11Identifiers6UTTypeVtcAHRs_AJRs0_rlufC', 
@@ -147,9 +155,23 @@ exports:
                        '_$s16CoreTransferable29TransferRepresentationBuilderV15buildExpressionyAA07CodableD0Vyxqd__qd_0_GAGSeRzSERz7Combine15TopLevelEncoderRd__AH0jK7DecoderRd_0_10Foundation4DataV6OutputRtd__AM5InputRtd_0_r0_lFZ', 
                        '_$s16CoreTransferable29TransferRepresentationBuilderVMa', 
                        '_$s16CoreTransferable29TransferRepresentationBuilderVMn', 
+                       '_$s16CoreTransferable29_TransferRepresentationInputsVACycfC', 
                        '_$s16CoreTransferable29_TransferRepresentationInputsVMa', 
                        '_$s16CoreTransferable29_TransferRepresentationInputsVMn', 
                        '_$s16CoreTransferable29_TransferRepresentationInputsVN', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationV9exportingAA0B8Currency_pAA0B0_pYaYbKcSgvM', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationV9exportingAA0B8Currency_pAA0B0_pYaYbKcSgvg', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationV9exportingAA0B8Currency_pAA0B0_pYaYbKcSgvpMV', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationV9exportingAA0B8Currency_pAA0B0_pYaYbKcSgvs', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationV9importingAA0B0_pAA0B8Currency_pYaYbKcSgvM', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationV9importingAA0B0_pAA0B8Currency_pYaYbKcSgvg', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationV9importingAA0B0_pAA0B8Currency_pYaYbKcSgvpMV', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationV9importingAA0B0_pAA0B8Currency_pYaYbKcSgvs', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationVMa', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationVMn', 
+                       '_$s16CoreTransferable30ResolvedTransferRepresentationVN', 
+                       '_$s16CoreTransferable30_TransferRepresentationOutputsV7storageSayAA08ResolvedcD0VGvg', 
+                       '_$s16CoreTransferable30_TransferRepresentationOutputsV7storageSayAA08ResolvedcD0VGvpMV', 
                        '_$s16CoreTransferable30_TransferRepresentationOutputsVMa', 
                        '_$s16CoreTransferable30_TransferRepresentationOutputsVMn', 
                        '_$s16CoreTransferable30_TransferRepresentationOutputsVN', 
@@ -171,6 +193,8 @@ exports:
                        '_$sSS16CoreTransferable0B0AAMc', '_$sSS16CoreTransferable0B0AAWP', 
                        '_$sSS16CoreTransferableE22transferRepresentationQrvgZ', '_$sSS16CoreTransferableE22transferRepresentationQrvpZQOMQ', 
                        '_$sSo14NSItemProviderC16CoreTransferableE04loadD04type17completionHandlerSo10NSProgressCxm_ys6ResultOyxs5Error_pGYbctAC0D0RzlF', 
+                       '_$sSo14NSItemProviderC16CoreTransferableE08registerD0yyxyYbXAYaAC0D0RzlF', 
+                       '_$sSo14NSItemProviderC16CoreTransferableE08registerD0yyxyYbXAYaAC0D0RzlFTu', 
                        '_$sSo14NSItemProviderC16CoreTransferableE12transferableABxyYbXA_tcAC0D0RzlufC', 
                        '_$sSo14NSItemProviderC16CoreTransferableE12transferableABxyYbXA_tcAC0D0Rzlufc', 
                        '_$sSo14NSItemProviderC16CoreTransferableE8registeryyxyYbXAAC0D0RzlF', 

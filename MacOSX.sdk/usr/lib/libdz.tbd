@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BEB81112-1CF8-3A66-9697-D70A5E23092D
+    value:           948F2497-1F09-3F0E-B3A4-59584833A514
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           60820BE9-8AB0-3DCB-A444-9F157D1877A8
+    value:           F683FD58-911A-30BF-90A7-74EABCF97A31
 install-name:    '/usr/lib/libdz.dylib'
-current-version: 258
+current-version: 258.60.2
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ __dz_init, __dzglobals, _dz_check_policy_exec, _dz_check_policy_kext_load, 

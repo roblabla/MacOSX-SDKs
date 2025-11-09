@@ -5,6 +5,8 @@
 //  Copyright (c) 2016-2022 Apple Inc. All rights reserved.
 //
 
+#import <Intents/INAnswerCallIntent.h>
+#import <Intents/INHangUpCallIntent.h>
 #import <Intents/INSearchCallHistoryIntent.h>
 #import <Intents/INStartAudioCallIntent.h>
 #import <Intents/INStartCallIntent.h>

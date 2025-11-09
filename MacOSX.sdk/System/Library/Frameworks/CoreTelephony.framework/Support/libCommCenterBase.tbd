@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EA0743ED-EDAB-3B3F-B1D6-8C48593862E9
+    value:           AA45279E-04E2-3E84-B97D-F4118B20098D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           553931DB-60B3-3D82-BF74-8A2DE744658C
+    value:           F54179E1-2CA4-3A87-B183-21095BE0C028
 install-name:    '/System/Library/Frameworks/CoreTelephony.framework/Support/libCommCenterBase.dylib'
 exports:
   - targets:         [ x86_64-macos ]

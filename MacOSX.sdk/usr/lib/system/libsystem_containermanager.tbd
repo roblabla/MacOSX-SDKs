@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B94F5292-7CDC-368F-8D91-0CD73AE80924
+    value:           D44E0845-001C-3C46-B3A7-E4926DAEF6B3
   - target:          x86_64-maccatalyst
-    value:           B94F5292-7CDC-368F-8D91-0CD73AE80924
+    value:           D44E0845-001C-3C46-B3A7-E4926DAEF6B3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D48AD081-4875-3F66-ABE1-9B646DD03B9C
+    value:           2694748C-A452-3438-BB47-161D7B220AE2
   - target:          arm64e-maccatalyst
-    value:           D48AD081-4875-3F66-ABE1-9B646DD03B9C
+    value:           2694748C-A452-3438-BB47-161D7B220AE2
 install-name:    '/usr/lib/system/libsystem_containermanager.dylib'
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

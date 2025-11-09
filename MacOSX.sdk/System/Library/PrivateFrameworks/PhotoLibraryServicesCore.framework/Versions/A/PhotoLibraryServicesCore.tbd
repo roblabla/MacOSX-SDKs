@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           93C72DEA-A10F-34CD-94FC-36954882F909
+    value:           3E37AE14-4231-37E8-BEB3-D596ABDB2FCF
   - target:          x86_64-maccatalyst
-    value:           93C72DEA-A10F-34CD-94FC-36954882F909
+    value:           3E37AE14-4231-37E8-BEB3-D596ABDB2FCF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DDEC0DBF-DEF5-3BB7-8EFC-1CAE29B7CD94
+    value:           0B2E5CB6-EA35-3FF0-8E1E-16D903FC886C
   - target:          arm64e-maccatalyst
-    value:           DDEC0DBF-DEF5-3BB7-8EFC-1CAE29B7CD94
+    value:           0B2E5CB6-EA35-3FF0-8E1E-16D903FC886C
 install-name:    '/System/Library/PrivateFrameworks/PhotoLibraryServicesCore.framework/Versions/A/PhotoLibraryServicesCore'
-current-version: 511.0.170
+current-version: 520.0.240
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -185,10 +185,11 @@ exports:
                        _PLCoreAnalyticsLibrarySummaryDuplicateSharedLibraryAssetCountKey, 
                        _PLCoreAnalyticsLibrarySummaryEvent, _PLCoreAnalyticsLibrarySummaryFaceCountKey, 
                        _PLCoreAnalyticsLibrarySummaryFavoriteCountKey, _PLCoreAnalyticsLibrarySummaryFileSystemIsInternalKey, 
-                       _PLCoreAnalyticsLibrarySummaryFileSystemIsNetworkKey, _PLCoreAnalyticsLibrarySummaryHeifCountKey, 
-                       _PLCoreAnalyticsLibrarySummaryImportedByCameraKey, _PLCoreAnalyticsLibrarySummaryIsActiveKey, 
-                       _PLCoreAnalyticsLibrarySummaryJpegCountKey, _PLCoreAnalyticsLibrarySummaryJunkCountKey, 
-                       _PLCoreAnalyticsLibrarySummaryLivePhotoCountKey, _PLCoreAnalyticsLibrarySummaryLocalMediumOrOriginalPercentKey, 
+                       _PLCoreAnalyticsLibrarySummaryFileSystemIsNetworkKey, _PLCoreAnalyticsLibrarySummaryFinderSyncedAssetCountKey, 
+                       _PLCoreAnalyticsLibrarySummaryHeifCountKey, _PLCoreAnalyticsLibrarySummaryImportedByCameraKey, 
+                       _PLCoreAnalyticsLibrarySummaryIsActiveKey, _PLCoreAnalyticsLibrarySummaryJpegCountKey, 
+                       _PLCoreAnalyticsLibrarySummaryJunkCountKey, _PLCoreAnalyticsLibrarySummaryLivePhotoCountKey, 
+                       _PLCoreAnalyticsLibrarySummaryLocalMediumOrOriginalPercentKey, 
                        _PLCoreAnalyticsLibrarySummaryLocalMediumOrOriginalPercentPhotoKey, 
                        _PLCoreAnalyticsLibrarySummaryLocalMediumOrOriginalPercentVideoKey, 
                        _PLCoreAnalyticsLibrarySummaryLocationCountKey, _PLCoreAnalyticsLibrarySummaryManuallyAddedSharedLibraryAssetCountKey, 
@@ -349,8 +350,8 @@ exports:
                        _PLIsInternalTool, _PLIsLimitedLibraryClient, _PLIsLockdownMode, 
                        _PLIsLowDiskSpaceError, _PLIsMercuryBase64String, _PLIsMigrationService, 
                        _PLIsMobileSlideShow, _PLIsNotificationTypeEnabledForKey, 
-                       _PLIsPTPD, _PLIsPeopleViewService, _PLIsPhotoPicker, _PLIsPhotosMessagesApp, 
-                       _PLIsPhotosReliveWidget, _PLIsProcessWithAppleBundleIdentifier, 
+                       _PLIsPTPD, _PLIsPeopleViewService, _PLIsPhotoPicker, _PLIsPhotosApp, 
+                       _PLIsPhotosMessagesApp, _PLIsPhotosReliveWidget, _PLIsProcessWithAppleBundleIdentifier, 
                        _PLIsReallyAssetsd, _PLIsRotatedExifOrientation, _PLIsSharedLibraryAssetTrashedByParticipantsNotificationEnabled, 
                        _PLIsSharedLibrarySuggestionsEnabled, _PLIsSpotlight, _PLIsSpringboard, 
                        _PLIsSuppressingLogsForUnitTesting, _PLIsSystemLibraryAccessProhibited, 

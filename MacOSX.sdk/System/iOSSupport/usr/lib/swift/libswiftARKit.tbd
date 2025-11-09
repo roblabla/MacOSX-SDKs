@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           0D8A7BAA-1FAE-33C7-988C-D771D388B42E
+    value:           E3C23E2C-AFA8-3143-B7BC-7363B3BF7AC5
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           B9F4DBFB-808B-37D4-8FB6-B1D01B90C6FE
+    value:           E5AF10DF-0234-3DB6-9B43-53EB2E2298A1
 install-name:    '/System/iOSSupport/usr/lib/swift/libswiftARKit.dylib'
 current-version: 381.26
 swift-abi-version: 7

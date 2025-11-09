@@ -28,5 +28,6 @@ API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos)
 NS_ASSUME_NONNULL_END
 
 #else
+#import <TargetConditionals.h>
 #import <PassKitCore/PKAddCarKeyPassConfiguration.h>
 #endif

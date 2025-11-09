@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           389A5E6F-37AB-3E4B-A696-8CA46980A292
+    value:           97618F7B-C79E-3222-A00F-0C91EAD43C1B
   - target:          arm64-macos
-    value:           4814494A-B947-33CC-BE45-71C92B7A8CAC
+    value:           C9B8EC8D-6E3E-3864-A384-CF5BB67F4AED
   - target:          arm64e-macos
-    value:           98B99D90-7A5E-3F68-B082-7E54749665E7
+    value:           11BB5942-1784-3CC9-A7F7-6CB05AAF6B93
 install-name:    '/System/Library/PrivateFrameworks/GPUToolsCapture.framework/Versions/A/GPUToolsCapture'
 current-version: 0
 compatibility-version: 0

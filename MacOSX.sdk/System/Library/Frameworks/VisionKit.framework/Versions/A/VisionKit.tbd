@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2C72A05A-50ED-381F-976A-1B73C303D6AB
+    value:           EE5F5896-65D0-334A-AB06-62290DE0DCE7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0C921993-8179-3CAE-9E60-BF21B6F885F9
+    value:           F0437FF1-DC8C-37F8-A633-428684ABE520
 install-name:    '/System/Library/Frameworks/VisionKit.framework/Versions/A/VisionKit'
 swift-abi-version: 7
 reexported-libraries:
@@ -160,13 +160,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           270C58B9-C8CD-378B-84D0-A0E740657E3C
+    value:           D8053DD9-FF36-3391-856A-C938D0E0CF2D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           96AA70FB-0C71-339F-98A1-DBC49AC61EFF
+    value:           C7544786-EAEB-3D03-B61D-C9950779C0E7
 install-name:    '/System/Library/PrivateFrameworks/DocumentCamera.framework/Versions/A/DocumentCamera'
-current-version: 110
+current-version: 115
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DCScanWasDeletedNotification, _DCTransformFromImageOrientation, 

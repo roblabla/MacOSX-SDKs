@@ -38,5 +38,6 @@ API_AVAILABLE(ios(10.1), watchos(3.1))
 NS_ASSUME_NONNULL_END
 
 #else
+#import <TargetConditionals.h>
 #import <PassKitCore/PKSuicaPassProperties.h>
 #endif

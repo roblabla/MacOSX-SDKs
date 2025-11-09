@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8AD79499-B84F-3EA9-B8B4-98497F784289
+    value:           247EDDFC-6CE1-3AA8-8046-6928B26F0CD4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           00673911-5FE8-3546-B2CF-F12C3A8CD8FC
+    value:           1AB2D5A2-F295-3694-ACC8-EEBBE60E2A65
 install-name:    '/System/Library/PrivateFrameworks/Suggestions.framework/Versions/A/Suggestions'
 current-version: 331
 exports:

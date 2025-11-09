@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D9D08951-A61A-366E-A9FA-79D142AFC5DE
+    value:           F247DFFE-9825-3A5F-B6FF-1E5371521BAB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           36048872-DABD-3115-BC09-1175832C557E
+    value:           DC523A4F-6ACD-3EFC-B89B-74213460759C
 install-name:    '/System/Library/PrivateFrameworks/PreferencePanesSupport.framework/Versions/A/PreferencePanesSupport'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

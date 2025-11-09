@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           15597FAC-E2E0-3901-9EF4-918E0F702052
+    value:           318B6D43-A0BB-34D2-BEF5-8069FF14FFE1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E6F04DED-6175-3D18-A279-C8A79724A306
+    value:           B29BCB7B-6EF1-3F96-B6CA-A9D7755F4D0C
 install-name:    '/System/Library/PrivateFrameworks/HDRProcessing.framework/Versions/A/HDRProcessing'
 exports:
   - targets:         [ x86_64-macos ]

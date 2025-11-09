@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E1C91483-F2FB-354A-873C-83264FF23143
+    value:           FC3BFBB2-0ADE-3F5D-B48D-93FEFFA41068
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8E5BA776-07C3-3D19-B94B-409766C18542
+    value:           7F711195-0701-3BEE-9099-317A05886E8C
 install-name:    '/System/Library/PrivateFrameworks/DataAccess.framework/Versions/A/DataAccess'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DD05595D-1E99-335B-9F85-E913EE13115D
+    value:           0A23C237-F2C9-307C-826D-16517BDCB0C7
   - target:          x86_64-maccatalyst
-    value:           DD05595D-1E99-335B-9F85-E913EE13115D
+    value:           0A23C237-F2C9-307C-826D-16517BDCB0C7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FE6CF20D-C4AA-3750-8C9F-32255273A760
+    value:           CB25E078-52C8-3C25-B031-13E20C90DD21
   - target:          arm64e-maccatalyst
-    value:           FE6CF20D-C4AA-3750-8C9F-32255273A760
+    value:           CB25E078-52C8-3C25-B031-13E20C90DD21
 install-name:    '/System/Library/PrivateFrameworks/TextComposer.framework/Versions/A/TextComposer'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

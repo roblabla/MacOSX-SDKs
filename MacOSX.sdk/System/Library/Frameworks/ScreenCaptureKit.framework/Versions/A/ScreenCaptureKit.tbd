@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E56A6A96-DBA5-3359-993E-ACF5C190D8D3
+    value:           82295E18-D081-3A97-8935-6C63888728ED
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9B25E218-983B-34FB-A51D-1B5A5EDDD863
+    value:           57C352D9-549E-35C2-AB79-9850D6BC18C6
 install-name:    '/System/Library/Frameworks/ScreenCaptureKit.framework/Versions/A/ScreenCaptureKit'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -18,7 +18,8 @@ exports:
                        _SCRemoteQueue_UpdateReceiverQueue, _SCStreamErrorDomain, 
                        _SCStreamFrameInfoContentRect, _SCStreamFrameInfoContentScale, 
                        _SCStreamFrameInfoDirtyRects, _SCStreamFrameInfoDisplayTime, 
-                       _SCStreamFrameInfoScaleFactor, _SCStreamFrameInfoStatus, _SCStream_UpdateLatency ]
+                       _SCStreamFrameInfoScaleFactor, _SCStreamFrameInfoScreenRect, 
+                       _SCStreamFrameInfoStatus, _SCStream_UpdateLatency ]
     objc-classes:    [ RPFeatureFlagUtility, SCContentFilter, SCContentFilterAppsAndWindowsPinnedToDisplayInformation, 
                        SCContentFilterDesktopIndependentWindowInformation, SCContentFilterDisplayInformation, 
                        SCContentSharingNotification, SCContentSharingSession, SCContentSharingSessionManager, 

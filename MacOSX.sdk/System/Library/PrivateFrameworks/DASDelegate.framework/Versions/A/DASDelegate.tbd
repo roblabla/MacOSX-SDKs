@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A19123B7-0D36-3C31-A220-25805304CB8A
+    value:           4AA9DCD7-001F-301C-BB55-83BF4EB96266
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0DE979A7-835F-3F9B-B1A2-2C6891E73208
+    value:           EC992EE2-A062-37EC-B527-6FEEC48E59E7
 install-name:    '/System/Library/PrivateFrameworks/DASDelegate.framework/Versions/A/DASDelegate'
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

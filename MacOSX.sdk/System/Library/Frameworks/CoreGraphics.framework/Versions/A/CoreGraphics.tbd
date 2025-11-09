@@ -4,23 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2FDCB859-0ECD-333F-89F8-1C1668EDB5DB
+    value:           8411605B-6046-3A76-BB79-0AA088BCADFC
   - target:          x86_64-maccatalyst
-    value:           2FDCB859-0ECD-333F-89F8-1C1668EDB5DB
+    value:           8411605B-6046-3A76-BB79-0AA088BCADFC
   - target:          x86_64h-macos
-    value:           62479CD0-4B4F-3563-8136-6111398B36F4
+    value:           5029B729-27ED-3BAF-B14D-EC5868C410E5
   - target:          x86_64h-maccatalyst
-    value:           62479CD0-4B4F-3563-8136-6111398B36F4
+    value:           5029B729-27ED-3BAF-B14D-EC5868C410E5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5BDE9EB5-9997-3CE2-B966-3B9181A3C356
+    value:           4164117A-3586-3412-97EF-9851D97A3F4D
   - target:          arm64e-maccatalyst
-    value:           5BDE9EB5-9997-3CE2-B966-3B9181A3C356
+    value:           4164117A-3586-3412-97EF-9851D97A3F4D
 install-name:    '/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics'
-current-version: 1690
+current-version: 1690.3.3
 compatibility-version: 64
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 

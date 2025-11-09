@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3041965F-9EBE-364E-BB39-B2DE43ED75F3
+    value:           2BFE979E-2B7B-3A0E-A9EF-EFD53F6D0727
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C657F748-DDC7-3246-A7C4-5CF01B565BF7
+    value:           56740D7C-F3FE-3507-8E24-7CA96E5221FC
 install-name:    '/System/Library/PrivateFrameworks/MultiverseSupport.framework/Versions/A/MultiverseSupport'
 current-version: 113
 exports:

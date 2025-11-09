@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8D43AB9B-4358-31F4-9A3D-3B4CDAA98BAF
+    value:           FAE138C8-3ECD-3D80-A735-027227ED1EF1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CEEC56BE-75D3-39D9-98CE-08C93FAA536A
+    value:           9B6C749E-7700-31BE-A721-7D23DB31E212
 install-name:    '/usr/lib/updaters/libAppleTypeCRetimerUpdater.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

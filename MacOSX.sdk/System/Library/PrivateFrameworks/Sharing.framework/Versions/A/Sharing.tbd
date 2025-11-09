@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4AF14964-71DB-351D-B241-BE50A3B1A72B
+    value:           81E8EAF9-72C3-395E-AAAF-8BE239D88656
   - target:          x86_64-maccatalyst
-    value:           4AF14964-71DB-351D-B241-BE50A3B1A72B
+    value:           81E8EAF9-72C3-395E-AAAF-8BE239D88656
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           48E7CADF-D544-33D1-BBC9-C1876143AC34
+    value:           A821BFA2-8BA6-3D71-8CC2-942D3D5BDA08
   - target:          arm64e-maccatalyst
-    value:           48E7CADF-D544-33D1-BBC9-C1876143AC34
+    value:           A821BFA2-8BA6-3D71-8CC2-942D3D5BDA08
 install-name:    '/System/Library/PrivateFrameworks/Sharing.framework/Versions/A/Sharing'
-current-version: 1847.1.2
+current-version: 1853
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -129,10 +129,11 @@ exports:
                        _SFIsMusicStoreLink, _SFIsNewsLink, _SFIsNote, _SFIsPDF, _SFIsPass, 
                        _SFIsPasskeyCredentialLink, _SFIsPhoneLink, _SFIsPhotosApp, 
                        _SFIsPhotosAssetBundle, _SFIsPlainText, _SFIsPlaygroundItem, 
-                       _SFIsPodcastsLink, _SFIsRangingSupported, _SFIsSharediCloudDocumentsLink, 
-                       _SFIsVideo, _SFIsVoiceMemo, _SFIsWebLink, _SFIsWiFiEnabled, 
-                       _SFIsePub, _SFIsiBooksLink, _SFIsiCloudDriveEnabled, _SFIsiCloudFamilyLink, 
-                       _SFIsiTunesULink, _SFIsiWorkLink, _SFJoinDataChunks, _SFLocalizePhoneNumber, 
+                       _SFIsPodcastsLink, _SFIsPureGreenTeaDevice, _SFIsRangingSupported, 
+                       _SFIsSharediCloudDocumentsLink, _SFIsVideo, _SFIsVoiceMemo, 
+                       _SFIsWebLink, _SFIsWiFiEnabled, _SFIsePub, _SFIsiBooksLink, 
+                       _SFIsiCloudDriveEnabled, _SFIsiCloudFamilyLink, _SFIsiTunesULink, 
+                       _SFIsiWorkLink, _SFJoinDataChunks, _SFLocalizePhoneNumber, 
                        _SFLocalizedNameForBluetoothProductID, _SFLocalizedStringEx, 
                        _SFLocalizedStringForKey, _SFLocalizedStringForKeyInStringsFileNamed, 
                        _SFLostMode, _SFMainQueue, _SFMeasureCPUDuration, _SFMetricsLog, 
@@ -209,19 +210,19 @@ exports:
                        _SFServiceIdentifierWHASetup, _SFServiceIdentifieriOSSetup, 
                        _SFServiceTypeToUUID, _SFSharablePasswordAirDropURLEncryptedString, 
                        _SFSharablePasswordForEncryptedAirDropURL, _SFSharablePasswordForURL, 
-                       _SFShareSheetActivityTypeLegacyMessage, _SFShareSheetActivityTypeMail, 
-                       _SFShareSheetActivityTypeMessage, _SFShareSheetMachServiceName, 
-                       _SFShareSheetManagerConnectionStateConnected, _SFShareSheetManagerConnectionStateConnecting, 
-                       _SFShareSheetManagerConnectionStateDisconnected, _SFShareablePasswordForSSID, 
-                       _SFSharediCloudDocumentsLinkToAppName, _SFSharediCloudDocumentsLinkToFileName, 
-                       _SFShortHashArrayDescription, _SFShouldShowRepairProxCard, 
-                       _SFSplitDataChunks, _SFStoreDemoMode, _SFStringComponentsFromTimeInterval, 
-                       _SFStringContainsOnlyPhoneNumberCharacters, _SFStringFromTimeInterval, 
-                       _SFStringIsJSON, _SFStringToDateRFC3339, _SFTestFlagsFromString, 
-                       _SFTextInputDataForRTIDataPayload, _SFTextInputDataLogString, 
-                       _SFTruncateAirDropFilenameForUI, _SFTruncateAirDropSenderNameForUI, 
-                       _SFUnlockErrorDomian, _SFUpTicksDiffFromNowToString, _SFWiFiChannelToIndex, 
-                       _SFWiFiIndexToChannel, _SFWiFiPasswordSharingAdvertisingBegan, 
+                       _SFShareSheetActivityTypeFaceTimeCollaboration, _SFShareSheetActivityTypeLegacyMessage, 
+                       _SFShareSheetActivityTypeMail, _SFShareSheetActivityTypeMessage, 
+                       _SFShareSheetMachServiceName, _SFShareSheetManagerConnectionStateConnected, 
+                       _SFShareSheetManagerConnectionStateConnecting, _SFShareSheetManagerConnectionStateDisconnected, 
+                       _SFShareablePasswordForSSID, _SFSharediCloudDocumentsLinkToAppName, 
+                       _SFSharediCloudDocumentsLinkToFileName, _SFShortHashArrayDescription, 
+                       _SFShouldShowRepairProxCard, _SFSplitDataChunks, _SFStoreDemoMode, 
+                       _SFStringComponentsFromTimeInterval, _SFStringContainsOnlyPhoneNumberCharacters, 
+                       _SFStringFromTimeInterval, _SFStringIsJSON, _SFStringToDateRFC3339, 
+                       _SFTestFlagsFromString, _SFTextInputDataForRTIDataPayload, 
+                       _SFTextInputDataLogString, _SFTruncateAirDropFilenameForUI, 
+                       _SFTruncateAirDropSenderNameForUI, _SFUnlockErrorDomian, _SFUpTicksDiffFromNowToString, 
+                       _SFWiFiChannelToIndex, _SFWiFiIndexToChannel, _SFWiFiPasswordSharingAdvertisingBegan, 
                        _SFWiFiPasswordSharingAdvertisingEnded, _SFiTunesStoreLinkType, 
                        __SFIsWiFiEnabled, __SFNodeCreateWithXPCObject, __SFNodeUpdateCachedChildNode, 
                        __SFNodeUpdateCachedParentNode, __SFNodeXPCObjectCreate, _airdrop_log, 

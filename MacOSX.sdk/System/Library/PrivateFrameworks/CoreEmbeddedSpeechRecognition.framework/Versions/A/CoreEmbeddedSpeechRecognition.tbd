@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D37BE62E-9DC5-3BD4-812A-1FCC878D6AA3
+    value:           F5DE32B4-6249-3E62-9CB1-75D228F829A1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CEF7D375-12AF-390E-B254-9EDA72C1132E
+    value:           F06AF7D5-EA6E-30E5-AECD-74F178089BB8
 install-name:    '/System/Library/PrivateFrameworks/CoreEmbeddedSpeechRecognition.framework/Versions/A/CoreEmbeddedSpeechRecognition'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

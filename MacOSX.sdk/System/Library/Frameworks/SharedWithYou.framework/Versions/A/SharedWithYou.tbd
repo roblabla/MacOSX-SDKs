@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BB8359EB-CEAC-386F-9A35-B0F5269FD2E0
+    value:           20028FB7-A8AB-3D09-A160-484493D625E1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3C19B5A7-01BB-3E36-9D01-7E799BA33511
+    value:           B4FB7E22-83A0-39DC-BAF1-4AD33E5AD095
 install-name:    '/System/Library/Frameworks/SharedWithYou.framework/Versions/A/SharedWithYou'
 swift-abi-version: 7
 reexported-libraries:
@@ -117,6 +117,8 @@ exports:
                        '_$sSo19SWCollaborationViewC13SharedWithYouE06buttonB0AC01_a6ButtonB4ImplCvpMV', 
                        '_$sSo19SWCollaborationViewC13SharedWithYouE09setDetailB11ListContentyyx7SwiftUI0B0RzlF', 
                        '_$sSo19SWCollaborationViewC13SharedWithYouE09setDetailB11ListContentyyxyXE7SwiftUI0B0RzlF', 
+                       '_$sSo19SWCollaborationViewC13SharedWithYouE22menuFormRepresentationSo10NSMenuItemCvg', 
+                       '_$sSo19SWCollaborationViewC13SharedWithYouE22menuFormRepresentationSo10NSMenuItemCvpMV', 
                        '_$sSo23NSToolbarItemIdentifiera13SharedWithYouE11collaborateABvgZ', 
                        '_$sSo23SWCollaborationMetadataC13SharedWithYouE22transferRepresentationQrvgZ', 
                        '_$sSo23SWCollaborationMetadataC13SharedWithYouE22transferRepresentationQrvpZQOMQ', 

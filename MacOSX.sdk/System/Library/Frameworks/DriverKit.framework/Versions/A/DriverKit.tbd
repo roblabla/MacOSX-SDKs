@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C63A56E2-95EB-3551-BFB4-6800C08A4A6C
+    value:           387F7847-09E9-3BC6-93B0-E262FC86245E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6C8E4FB9-9648-391E-B9C4-44048A7FF582
+    value:           F669093F-FE25-3D6F-836D-2FB7643A3AD4
 install-name:    '/System/Library/Frameworks/DriverKit.framework/Versions/A/DriverKit'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

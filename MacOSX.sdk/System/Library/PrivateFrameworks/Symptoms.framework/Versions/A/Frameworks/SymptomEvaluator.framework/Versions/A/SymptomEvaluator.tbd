@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9D36A260-2E33-3038-845F-2177AD5733BF
+    value:           4BF45FC8-5DAF-383C-A46F-42C2410CDB37
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           85E285F5-7475-3445-A9A7-7ABC78A86C2E
+    value:           BD5ABC3A-C4CD-35BD-BDC3-67736607E294
 install-name:    '/System/Library/PrivateFrameworks/Symptoms.framework/Frameworks/SymptomEvaluator.framework/Versions/A/SymptomEvaluator'
-current-version: 1732
+current-version: 1732.60.4
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AlgosPackScore, _AlgosUnpackScore, _CLIPS_BASEBAND_BEDF_MODULE, 
@@ -183,6 +183,6 @@ exports:
                        SFCache, SFEntitlements, SemiDailyMaintenanceActivity, ServiceImpl, 
                        StateWatcher, StopWatch, SymptomEvaluator, SymptomExpertSystemHandler, 
                        SystemProperties, SystemSettingsRelay, TCPProgressProbe, TraceRecorder, 
-                       WeeklyMaintenanceActivity ]
+                       WeeklyMaintenanceActivity, WiFiStateRelay ]
     objc-ivars:      [ AnalyticsEngineCore.workspace ]
 ...

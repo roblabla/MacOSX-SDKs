@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7F74B512-A0F9-3127-B3F8-65BA232899A5
+    value:           182A59BE-FD2B-3E82-8502-711C406D83F0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4456612A-9922-3BA7-A85B-4B7ED5C8CBEA
+    value:           742D27F1-8C68-318E-BBB0-02CF32218F04
 install-name:    '/usr/lib/usd/libMaterialXCore.dylib'
 current-version: 0
 compatibility-version: 0

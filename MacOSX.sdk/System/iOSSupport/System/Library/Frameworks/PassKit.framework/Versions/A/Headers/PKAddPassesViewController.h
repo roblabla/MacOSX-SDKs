@@ -1,3 +1,4 @@
+#if !__has_include(<PassKitUI/PKAddPassesViewController.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKAddPassesViewController.h
 //  PassKit
@@ -40,5 +41,12 @@ API_AVAILABLE(ios(6.0))
 
 NS_ASSUME_NONNULL_END
 
+#endif
+#endif
+
+#else
+#if !TARGET_OS_OSX 
+#import <TargetConditionals.h>
+#import <PassKitUI/PKAddPassesViewController.h>
 #endif
 #endif

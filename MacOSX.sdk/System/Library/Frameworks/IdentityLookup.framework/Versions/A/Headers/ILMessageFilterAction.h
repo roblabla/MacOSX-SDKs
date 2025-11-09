@@ -75,6 +75,6 @@ typedef NS_ENUM(NSInteger, ILMessageFilterSubAction) {
     /// Prevent the message from being shown normally, filtered as Coupons message.
     ILMessageFilterSubActionPromotionalCoupons = 20002,
         
-} API_AVAILABLE(ios(16.0), macCatalyst(18.0)) API_UNAVAILABLE( tvos) API_UNAVAILABLE(macos, watchos);
+} API_AVAILABLE(ios(16.0), macCatalyst(16.0)) API_UNAVAILABLE( tvos) API_UNAVAILABLE(macos, watchos);
 
 NS_ASSUME_NONNULL_END

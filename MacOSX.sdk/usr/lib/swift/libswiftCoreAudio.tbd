@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B6EFAE83-EC59-3293-A6E0-EC0F100A8811
+    value:           BA32EA2A-E625-3476-BA0B-171833BAD8A6
   - target:          x86_64-maccatalyst
-    value:           B6EFAE83-EC59-3293-A6E0-EC0F100A8811
+    value:           BA32EA2A-E625-3476-BA0B-171833BAD8A6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5510F5E1-6DF9-372F-BC56-6E77CBBAD804
+    value:           22A19D56-6253-30FE-8EE0-C688D5E3C1AA
   - target:          arm64e-maccatalyst
-    value:           5510F5E1-6DF9-372F-BC56-6E77CBBAD804
+    value:           22A19D56-6253-30FE-8EE0-C688D5E3C1AA
 install-name:    '/usr/lib/swift/libswiftCoreAudio.dylib'
 current-version: 1.1
 swift-abi-version: 7

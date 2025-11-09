@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           829FB8C3-DB8C-3797-BEE0-F5A02A969236
+    value:           D31D6C8C-ED05-36E5-B207-F234B3B8ACEC
   - target:          x86_64-maccatalyst
-    value:           829FB8C3-DB8C-3797-BEE0-F5A02A969236
+    value:           D31D6C8C-ED05-36E5-B207-F234B3B8ACEC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E8BD87EF-A741-3B27-875A-553632277C20
+    value:           DBFEB67B-C94B-3423-8BEA-091907E6F1AA
   - target:          arm64e-maccatalyst
-    value:           E8BD87EF-A741-3B27-875A-553632277C20
+    value:           DBFEB67B-C94B-3423-8BEA-091907E6F1AA
 install-name:    '/System/Library/PrivateFrameworks/RenderBox.framework/Versions/A/RenderBox'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

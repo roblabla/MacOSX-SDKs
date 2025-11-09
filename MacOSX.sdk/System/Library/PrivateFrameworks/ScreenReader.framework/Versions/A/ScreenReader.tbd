@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3EB71E4C-4EB1-3CFA-B893-FCEAC631B18A
+    value:           B0F9C15D-9255-36C3-A45C-3305D8E82595
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           32281414-0EC0-39B9-90F4-28FF45F8BC10
+    value:           54F86E8C-47F3-37D0-A2AC-8E3924ADE3BA
 install-name:    '/System/Library/PrivateFrameworks/ScreenReader.framework/Versions/A/ScreenReader'
 current-version: 390
 exports:
@@ -40,29 +40,28 @@ exports:
                        _kSCRDeleteCharModeSpeak, _kSCRDeleteCharModeTone, _kSCRDeleteCharacterModeKey, 
                        _kSCRDesiredRequestRunnerNameKey, _kSCRDisplayNameKey, _kSCRExcludedVoiceIdentifiersKey, 
                        _kSCRFallbackVoiceIdentifierKey, _kSCRHIDDetectionDeviceConnectedNotification, 
-                       _kSCRHIDDetectionDeviceDisconnectedNotification, _kSCRIntonationAsPercentKey, 
-                       _kSCRKeyboardKeyBackspace, _kSCRKeyboardKeyClear, _kSCRKeyboardKeyDelete, 
-                       _kSCRKeyboardKeyDownArrow, _kSCRKeyboardKeyEnd, _kSCRKeyboardKeyEnter, 
-                       _kSCRKeyboardKeyEscape, _kSCRKeyboardKeyF1, _kSCRKeyboardKeyF10, 
-                       _kSCRKeyboardKeyF11, _kSCRKeyboardKeyF12, _kSCRKeyboardKeyF13, 
-                       _kSCRKeyboardKeyF14, _kSCRKeyboardKeyF15, _kSCRKeyboardKeyF16, 
-                       _kSCRKeyboardKeyF17, _kSCRKeyboardKeyF18, _kSCRKeyboardKeyF19, 
-                       _kSCRKeyboardKeyF2, _kSCRKeyboardKeyF3, _kSCRKeyboardKeyF4, 
-                       _kSCRKeyboardKeyF5, _kSCRKeyboardKeyF6, _kSCRKeyboardKeyF7, 
-                       _kSCRKeyboardKeyF8, _kSCRKeyboardKeyF9, _kSCRKeyboardKeyForwardDelete, 
-                       _kSCRKeyboardKeyHelp, _kSCRKeyboardKeyHome, _kSCRKeyboardKeyLeftArrow, 
-                       _kSCRKeyboardKeyNull, _kSCRKeyboardKeyPageDown, _kSCRKeyboardKeyPageUp, 
-                       _kSCRKeyboardKeyPipe, _kSCRKeyboardKeyReturn, _kSCRKeyboardKeyRightArrow, 
-                       _kSCRKeyboardKeySpace, _kSCRKeyboardKeyTab, _kSCRKeyboardKeyUpArrow, 
-                       _kSCRKeyboardModifierCapsLock, _kSCRKeyboardModifierCommand, 
-                       _kSCRKeyboardModifierControl, _kSCRKeyboardModifierKeyCommand, 
-                       _kSCRKeyboardModifierKeyControl, _kSCRKeyboardModifierKeyLeftCommand, 
-                       _kSCRKeyboardModifierKeyLeftOption, _kSCRKeyboardModifierKeyNull, 
-                       _kSCRKeyboardModifierKeyOption, _kSCRKeyboardModifierKeyRightCommand, 
-                       _kSCRKeyboardModifierKeyRightOption, _kSCRKeyboardModifierKeySecondaryFn, 
-                       _kSCRKeyboardModifierKeyShift, _kSCRKeyboardModifierLeftCommand, 
-                       _kSCRKeyboardModifierLeftOption, _kSCRKeyboardModifierNull, 
-                       _kSCRKeyboardModifierOption, _kSCRKeyboardModifierRightCommand, 
+                       _kSCRHIDDetectionDeviceDisconnectedNotification, _kSCRKeyboardKeyBackspace, 
+                       _kSCRKeyboardKeyClear, _kSCRKeyboardKeyDelete, _kSCRKeyboardKeyDownArrow, 
+                       _kSCRKeyboardKeyEnd, _kSCRKeyboardKeyEnter, _kSCRKeyboardKeyEscape, 
+                       _kSCRKeyboardKeyF1, _kSCRKeyboardKeyF10, _kSCRKeyboardKeyF11, 
+                       _kSCRKeyboardKeyF12, _kSCRKeyboardKeyF13, _kSCRKeyboardKeyF14, 
+                       _kSCRKeyboardKeyF15, _kSCRKeyboardKeyF16, _kSCRKeyboardKeyF17, 
+                       _kSCRKeyboardKeyF18, _kSCRKeyboardKeyF19, _kSCRKeyboardKeyF2, 
+                       _kSCRKeyboardKeyF3, _kSCRKeyboardKeyF4, _kSCRKeyboardKeyF5, 
+                       _kSCRKeyboardKeyF6, _kSCRKeyboardKeyF7, _kSCRKeyboardKeyF8, 
+                       _kSCRKeyboardKeyF9, _kSCRKeyboardKeyForwardDelete, _kSCRKeyboardKeyHelp, 
+                       _kSCRKeyboardKeyHome, _kSCRKeyboardKeyLeftArrow, _kSCRKeyboardKeyNull, 
+                       _kSCRKeyboardKeyPageDown, _kSCRKeyboardKeyPageUp, _kSCRKeyboardKeyPipe, 
+                       _kSCRKeyboardKeyReturn, _kSCRKeyboardKeyRightArrow, _kSCRKeyboardKeySpace, 
+                       _kSCRKeyboardKeyTab, _kSCRKeyboardKeyUpArrow, _kSCRKeyboardModifierCapsLock, 
+                       _kSCRKeyboardModifierCommand, _kSCRKeyboardModifierControl, 
+                       _kSCRKeyboardModifierKeyCommand, _kSCRKeyboardModifierKeyControl, 
+                       _kSCRKeyboardModifierKeyLeftCommand, _kSCRKeyboardModifierKeyLeftOption, 
+                       _kSCRKeyboardModifierKeyNull, _kSCRKeyboardModifierKeyOption, 
+                       _kSCRKeyboardModifierKeyRightCommand, _kSCRKeyboardModifierKeyRightOption, 
+                       _kSCRKeyboardModifierKeySecondaryFn, _kSCRKeyboardModifierKeyShift, 
+                       _kSCRKeyboardModifierLeftCommand, _kSCRKeyboardModifierLeftOption, 
+                       _kSCRKeyboardModifierNull, _kSCRKeyboardModifierOption, _kSCRKeyboardModifierRightCommand, 
                        _kSCRKeyboardModifierRightOption, _kSCRKeyboardModifierSecondaryFn, 
                        _kSCRKeyboardModifierShift, _kSCRKeyboardNumKey1, _kSCRKeyboardNumKey2, 
                        _kSCRKeyboardNumKey3, _kSCRKeyboardNumKey4, _kSCRKeyboardNumKey5, 

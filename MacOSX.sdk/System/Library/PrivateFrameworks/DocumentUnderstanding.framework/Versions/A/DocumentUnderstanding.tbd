@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           09E69B29-6EA9-3D10-95E5-221ABD8B6CDF
+    value:           320514A3-FA6E-3C87-9E67-A2CBBD80EBC4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8B9ECE90-9A31-3104-B3F0-0DE3D892A119
+    value:           0DDE2F12-BFC4-3468-A85D-59DB2EBC4E29
 install-name:    '/System/Library/PrivateFrameworks/DocumentUnderstanding.framework/Versions/A/DocumentUnderstanding'
 swift-abi-version: 7
 exports:

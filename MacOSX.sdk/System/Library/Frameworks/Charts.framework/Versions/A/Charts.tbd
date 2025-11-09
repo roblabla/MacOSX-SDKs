@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CF55CE45-BEE6-3E83-90B5-16034143748A
+    value:           14563CE5-2754-30EF-8077-472DF4727CCC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           33818EA9-127E-3235-9CD4-FEDDE0DCE00A
+    value:           5EDCC687-B9B9-362B-AA37-48E030C392A9
 install-name:    '/System/Library/Frameworks/Charts.framework/Versions/A/Charts'
-current-version: 1.1.14
+current-version: 1.1.15
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

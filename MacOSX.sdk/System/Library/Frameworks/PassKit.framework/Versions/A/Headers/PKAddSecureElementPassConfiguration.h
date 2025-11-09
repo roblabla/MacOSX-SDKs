@@ -25,5 +25,6 @@ NS_ASSUME_NONNULL_END
 
 
 #else
+#import <TargetConditionals.h>
 #import <PassKitCore/PKAddSecureElementPassConfiguration.h>
 #endif

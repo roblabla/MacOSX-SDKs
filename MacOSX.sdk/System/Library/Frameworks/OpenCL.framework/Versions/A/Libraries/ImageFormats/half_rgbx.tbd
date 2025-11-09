@@ -3,9 +3,9 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           34A729D1-9E9D-3F04-997C-B69F24BA3D9B
+    value:           567F9284-0F8F-3E7D-A9D4-A5A00C2C2213
   - target:          x86_64-maccatalyst
-    value:           34A729D1-9E9D-3F04-997C-B69F24BA3D9B
+    value:           567F9284-0F8F-3E7D-A9D4-A5A00C2C2213
 install-name:    '/System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/ImageFormats/half_rgbx.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]

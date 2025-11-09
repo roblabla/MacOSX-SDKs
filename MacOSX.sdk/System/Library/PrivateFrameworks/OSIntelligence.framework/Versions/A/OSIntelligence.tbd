@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B8863EDB-1FB2-305D-9D80-648CAC0DC16E
+    value:           986D45AE-947F-3679-BF0F-667F5FF9C558
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           02084800-46FD-3418-BFF3-ADC83710D43F
+    value:           06FAE829-B00A-33FB-9221-E75A96896B45
 install-name:    '/System/Library/PrivateFrameworks/OSIntelligence.framework/Versions/A/OSIntelligence'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

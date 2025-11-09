@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4D9D24A9-2FC4-32CF-A85A-DC5EC039E30D
+    value:           8985EA50-59C3-3136-BEAB-E33174CE5815
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2293BD66-8EA4-37C5-A755-A3A4A1A6C252
+    value:           AEC24F13-3E7A-3595-AD72-2BA5A4F0BABE
 install-name:    '/System/Library/PrivateFrameworks/MobileSystemServices.framework/Versions/A/MobileSystemServices'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

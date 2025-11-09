@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FB5321CF-4F41-3EDC-80E5-3995D4089247
+    value:           D320295A-7D8F-3874-80C5-905A0100F0CB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1BD0E1EA-2134-346B-846A-BDA57DC19387
+    value:           17FA80DD-54B4-39D7-A86E-340CAD6689DE
 install-name:    '/System/Library/PrivateFrameworks/Transparency.framework/Versions/A/Transparency'
 current-version: 0
 compatibility-version: 0
@@ -27,37 +27,41 @@ exports:
                        _kTransparencyAuditorReportAccountKey, _kTransparencyAuditorReportApplication, 
                        _kTransparencyAuditorReportConsistencyFailed, _kTransparencyAuditorReportGossip, 
                        _kTransparencyAuditorReportInclusionFailed, _kTransparencyAuditorReportMMDFailed, 
-                       _kTransparencyAuditorReportNSError, _kTransparencyAuditorReportQueryRequest, 
-                       _kTransparencyAuditorReportQueryResponse, _kTransparencyAuditorReportRequestTime, 
-                       _kTransparencyAuditorReportResponseTime, _kTransparencyAuditorReportRevision, 
-                       _kTransparencyAuditorReportSMT, _kTransparencyAuditorReportSTH, 
-                       _kTransparencyAuditorReportServerHint, _kTransparencyAuditorReportServerLoggableDatas, 
-                       _kTransparencyAuditorReportSignatureFailed, _kTransparencyAuditorReportTreeEpoch, 
-                       _kTransparencyAuditorReportTrustedLoggableDatas, _kTransparencyAuditorReportType, 
-                       _kTransparencyAuditorReportTypeEnroll, _kTransparencyAuditorReportTypePeer, 
-                       _kTransparencyAuditorReportTypeSLH, _kTransparencyAuditorReportTypeSMH, 
-                       _kTransparencyAuditorReportTypeSMT, _kTransparencyAuditorReportTypeSelf, 
-                       _kTransparencyAuditorReportURI, _kTransparencyAuditorReportUUID, 
-                       _kTransparencyBAACertKeychainAccessGroup, _kTransparencyBAACertKeychainLabelKey, 
-                       _kTransparencyDefaultConfigRequestTimeout, _kTransparencyDefaultNetworkTimeout, 
-                       _kTransparencyDefaultQueryCacheTimeout, _kTransparencyErrorAccount, 
-                       _kTransparencyErrorAlloc, _kTransparencyErrorDatabase, _kTransparencyErrorDecode, 
-                       _kTransparencyErrorFile, _kTransparencyErrorGossip, _kTransparencyErrorInterface, 
-                       _kTransparencyErrorInternal, _kTransparencyErrorNetwork, _kTransparencyErrorServer, 
-                       _kTransparencyErrorStaticKey, _kTransparencyErrorUnknown, 
-                       _kTransparencyErrorVerify, _kTransparencyErrorXPC, _kTransparencyFlagDisableAsyncValidation, 
-                       _kTransparencyFlagDisablePinning, _kTransparencyFlagDisableVerifyBagCertificate, 
-                       _kTransparencyFlagDisableVerifyBagSignature, _kTransparencyFlagDisableVerifyKeyStoreCertificates, 
-                       _kTransparencyFlagEnableTranscript, _kTransparencyFlagSwitchAsyncToSync, 
-                       _kTransparencyFlagUseQAConfig, _kTransparencyFlagUseTestConfig, 
-                       _kTransparencyMaxmimumDownloadRecordLifetime, _kTransparencyNotificationCloudKitOptInStateChanged, 
-                       _kTransparencyNotificationFaceTimeOptInStateChanged, _kTransparencyNotificationIDSOptInStateChanged, 
-                       _kTransparencyNotificationMultiplexOptInStateChanged, _kTransparencyOverrideReversePushPercentage, 
-                       _kTransparencyProtocolVersion, _kTransparencySPIFlagForceValidateUUID, 
-                       _kTransparencyThirtyDaysInMs, _kTransparencyUserAgent ]
-    objc-classes:    [ KTAccountKey, KTAccountPublicID, KTLoggableData, KTOptInManager, 
-                       KTStatus, KTVerifier, KTVerifierResult, TransparencyAnalytics, 
-                       TransparencyApplication, TransparencyAuditorReport, TransparencyError, 
+                       _kTransparencyAuditorReportNSError, _kTransparencyAuditorReportPCSIdentity, 
+                       _kTransparencyAuditorReportQueryRequest, _kTransparencyAuditorReportQueryResponse, 
+                       _kTransparencyAuditorReportRequestTime, _kTransparencyAuditorReportResponseTime, 
+                       _kTransparencyAuditorReportRevision, _kTransparencyAuditorReportSMT, 
+                       _kTransparencyAuditorReportSTH, _kTransparencyAuditorReportServerHint, 
+                       _kTransparencyAuditorReportServerLoggableDatas, _kTransparencyAuditorReportSignatureFailed, 
+                       _kTransparencyAuditorReportTreeEpoch, _kTransparencyAuditorReportTrustedLoggableDatas, 
+                       _kTransparencyAuditorReportType, _kTransparencyAuditorReportTypeEnroll, 
+                       _kTransparencyAuditorReportTypePeer, _kTransparencyAuditorReportTypeSLH, 
+                       _kTransparencyAuditorReportTypeSMH, _kTransparencyAuditorReportTypeSMT, 
+                       _kTransparencyAuditorReportTypeSelf, _kTransparencyAuditorReportURI, 
+                       _kTransparencyAuditorReportUUID, _kTransparencyAuditorReportUsedReversePush, 
+                       _kTransparencyAuditorReportsSysdiagnoseKey, _kTransparencyBAACertKeychainAccessGroup, 
+                       _kTransparencyBAACertKeychainLabelKey, _kTransparencyBackgroundNetworkTimeout, 
+                       _kTransparencyDefaultNetworkTimeout, _kTransparencyDefaultQueryCacheTimeout, 
+                       _kTransparencyErrorAccount, _kTransparencyErrorAlloc, _kTransparencyErrorDatabase, 
+                       _kTransparencyErrorDecode, _kTransparencyErrorFile, _kTransparencyErrorGossip, 
+                       _kTransparencyErrorInterface, _kTransparencyErrorInternal, 
+                       _kTransparencyErrorNetwork, _kTransparencyErrorServer, _kTransparencyErrorStaticKey, 
+                       _kTransparencyErrorUnknown, _kTransparencyErrorVerify, _kTransparencyErrorXPC, 
+                       _kTransparencyFlagDisableAsyncValidation, _kTransparencyFlagDisablePinning, 
+                       _kTransparencyFlagDisableVerifyBagCertificate, _kTransparencyFlagDisableVerifyBagSignature, 
+                       _kTransparencyFlagDisableVerifyKeyStoreCertificates, _kTransparencyFlagEnableTranscript, 
+                       _kTransparencyFlagSwitchAsyncToSync, _kTransparencyFlagUseQAConfig, 
+                       _kTransparencyFlagUseTestConfig, _kTransparencyMaxmimumDownloadRecordLifetime, 
+                       _kTransparencyNotificationCloudKitOptInStateChanged, _kTransparencyNotificationFaceTimeOptInStateChanged, 
+                       _kTransparencyNotificationIDSOptInStateChanged, _kTransparencyNotificationMultiplexOptInStateChanged, 
+                       _kTransparencyOverrideReversePushPercentage, _kTransparencyProtocolVersion, 
+                       _kTransparencySPIFlagForceValidateUUID, _kTransparencyThirtyDaysInMs, 
+                       _kTransparencyUIBlockingNetworkTimeout, _kTransparencyUserAgent ]
+    objc-classes:    [ KTAccountKey, KTAccountPublicID, KTDeviceStatus, KTIDMSDevice, 
+                       KTLoggableData, KTOptInManager, KTSelfVerificationHealableErrors, 
+                       KTSelfVerificationInfo, KTStatus, KTVerificationInfo, KTVerifier, 
+                       KTVerifierResult, TransparencyAnalytics, TransparencyApplication, 
+                       TransparencyAuditorReport, TransparencyDaemon, TransparencyError, 
                        TransparencyGossip, TransparencySFAnalytics, TransparencySettings, 
                        TransparencyXPCConnection, TransparencyXPCIDSInterface, TransparencyXPCInterface ]
 ...

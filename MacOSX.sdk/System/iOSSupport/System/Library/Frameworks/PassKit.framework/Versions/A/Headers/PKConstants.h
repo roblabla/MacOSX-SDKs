@@ -101,5 +101,6 @@ typedef NS_OPTIONS(NSUInteger, PKRadioTechnology) {
 #endif // PKCONSTANTS_H
 
 #else
+#import <TargetConditionals.h>
 #import <PassKitCore/PKConstants.h>
 #endif

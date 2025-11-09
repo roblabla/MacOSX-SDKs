@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C36F115D-3AC5-3F67-B336-E26247FC6C33
+    value:           BF6ABAF8-5383-3A7F-9027-8E93FA549682
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A6CBB509-AE9F-346E-B4A1-31BC714BC83E
+    value:           A546F2C8-595C-364B-84B9-C6D20232C019
 install-name:    '/System/Library/PrivateFrameworks/SoftwareUpdateMacController.framework/Versions/A/SoftwareUpdateMacController'
 current-version: 0
 compatibility-version: 0
@@ -176,28 +176,30 @@ exports:
                        _SUMAC_E_ScanForUpdates, _SUMAC_E_ScanMajorBridgeOSCompleted, 
                        _SUMAC_E_ScanMinorBridgeOSCompleted, _SUMAC_E_ScanNothingRequired, 
                        _SUMAC_E_ScanProgress, _SUMAC_E_ScanRequiresBridgeOS, _SUMAC_E_ScanRequiresRecovery, 
-                       _SUMAC_E_ScanRequiresRosetta, _SUMAC_E_ScanRequiresSFR, _SUMAC_E_ScanSucceeded, 
-                       _SUMAC_E_SetupControllerInstance, _SUMAC_E_SetupPrepareUpdate, 
+                       _SUMAC_E_ScanRequiresRosetta, _SUMAC_E_ScanRequiresSFR, _SUMAC_E_ScanSemiSplatActive, 
+                       _SUMAC_E_ScanSucceeded, _SUMAC_E_SetupControllerInstance, 
+                       _SUMAC_E_SetupPrepareUpdate, _SUMAC_E_SoftwareUpdateApplied, 
                        _SUMAC_E_SplatRollbackBrainFailed, _SUMAC_E_SplatRollbackBrainLoaded, 
                        _SUMAC_E_SplatRollbackCompleted, _SUMAC_E_SplatRollbackFailed, 
-                       _SUMAC_E_SplatRollbackNoUpdates, _SUMAC_E_SplatRollbackNotPresent, 
-                       _SUMAC_E_SplatRollbackPresent, _SUMAC_E_SplatRollbackRequest, 
-                       _SUMAC_E_SplatRollbackUpdate, _SUMAC_E_SplatRollbackUpdateFailed, 
-                       _SUMAC_E_SplatRollbackUpdateFound, _SUMAC_E_SplatUpdateApplied, 
-                       _SUMAC_E_StartPendingScan, _SUMAC_E_StashCommitted, _SUMAC_E_StashFailed, 
-                       _SUMAC_E_SupportingNothingRequired, _SUMAC_E_SupportingRequiresBridgeOS, 
-                       _SUMAC_E_SupportingRequiresRosetta, _SUMAC_E_SupportingRequiresSFR, 
-                       _SUMAC_E_TargetPhaseReached, _SUMAC_E_UpdateApplied, _SUMAC_E_UpdateAttemptFailed, 
-                       _SUMAC_E_UpdatePrepared, _SUMAC_E_UpdateRecoveryOSComplete, 
-                       _SUMAC_E_UpdateRecoveryOSFailed, _SUMAC_E_UpdateRecoveryOSFailureReported, 
-                       _SUMAC_E_UpdateRecoveryOSSuccess, _SUMAC_E_UpdateResumeFailed, 
-                       _SUMAC_E_UpdateResumed, _SUMAC_E_ValidUpdateFound, _SUMAC_E_WaitForControllerSetup, 
-                       _SUMAC_S_AppliedWaitingForReboot, _SUMAC_S_Applying, _SUMAC_S_CancelCurrentState, 
-                       _SUMAC_S_CancelingBridgeOSUpdate, _SUMAC_S_CancelingMSUUpdate, 
-                       _SUMAC_S_CancelingRecoveryOSUpdate, _SUMAC_S_CancelingRosettaPrepare, 
-                       _SUMAC_S_CancelingSUCoreUpdate, _SUMAC_S_CancellingCommitStash, 
-                       _SUMAC_S_CancellingRecoveryOSScan, _SUMAC_S_CancellingResumeUpdate, 
-                       _SUMAC_S_CancellingScan, _SUMAC_S_CheckingPreviousState, _SUMAC_S_CommittingStash, 
+                       _SUMAC_E_SplatRollbackIsSemiSplat, _SUMAC_E_SplatRollbackNoUpdates, 
+                       _SUMAC_E_SplatRollbackNotPresent, _SUMAC_E_SplatRollbackPresent, 
+                       _SUMAC_E_SplatRollbackRequest, _SUMAC_E_SplatRollbackUpdate, 
+                       _SUMAC_E_SplatRollbackUpdateFailed, _SUMAC_E_SplatRollbackUpdateFound, 
+                       _SUMAC_E_SplatUpdateApplied, _SUMAC_E_StartPendingScan, _SUMAC_E_StashCommitted, 
+                       _SUMAC_E_StashFailed, _SUMAC_E_SupportingNothingRequired, 
+                       _SUMAC_E_SupportingRequiresBridgeOS, _SUMAC_E_SupportingRequiresRosetta, 
+                       _SUMAC_E_SupportingRequiresSFR, _SUMAC_E_TargetPhaseReached, 
+                       _SUMAC_E_UpdateApplied, _SUMAC_E_UpdateAttemptFailed, _SUMAC_E_UpdatePrepared, 
+                       _SUMAC_E_UpdateRecoveryOSComplete, _SUMAC_E_UpdateRecoveryOSFailed, 
+                       _SUMAC_E_UpdateRecoveryOSFailureReported, _SUMAC_E_UpdateRecoveryOSSuccess, 
+                       _SUMAC_E_UpdateResumeFailed, _SUMAC_E_UpdateResumed, _SUMAC_E_ValidUpdateFound, 
+                       _SUMAC_E_WaitForControllerSetup, _SUMAC_S_AppliedWaitingForReboot, 
+                       _SUMAC_S_Applying, _SUMAC_S_CancelCurrentState, _SUMAC_S_CancelingBridgeOSUpdate, 
+                       _SUMAC_S_CancelingMSUUpdate, _SUMAC_S_CancelingRecoveryOSUpdate, 
+                       _SUMAC_S_CancelingRosettaPrepare, _SUMAC_S_CancelingSUCoreUpdate, 
+                       _SUMAC_S_CancellingCommitStash, _SUMAC_S_CancellingRecoveryOSScan, 
+                       _SUMAC_S_CancellingResumeUpdate, _SUMAC_S_CancellingScan, 
+                       _SUMAC_S_CheckingPreviousState, _SUMAC_S_CommittingStash, 
                        _SUMAC_S_DownloadedSFRUpdate, _SUMAC_S_DownloadedUpdate, _SUMAC_S_DownloadingBridgeOSUpdate, 
                        _SUMAC_S_DownloadingRosettaUpdate, _SUMAC_S_DownloadingSFRUpdate, 
                        _SUMAC_S_DownloadingUpdate, _SUMAC_S_DownloadingUpdateBrain, 
@@ -308,6 +310,8 @@ exports:
                        _SUMacControllerStateCurrentFSMStateKey, _SUMacControllerStateCurrentOverridesKey, 
                        _SUMacControllerStateCurrentProgressStateEnumKey, _SUMacControllerStateCurrentProgressStateNameKey, 
                        _SUMacControllerStateCurrentUUIDKey, _SUMacControllerStateCurrentUpdateInBackgroundKey, 
+                       _SUMacControllerStateHasSemiSplatActiveKey, _SUMacControllerStateHasSplatRollbackAvailableKey, 
+                       _SUMacControllerStateHasSplatUpdateInstalledKey, _SUMacControllerStateIsPerformingSemiSplatKey, 
                        _SUMacControllerStateMachineName, _SUMacControllerStatePendingEventKey, 
                        _SUMacControllerStateReachedPhaseKey, _SUMacControllerStateRecoveryOSManagerStateKey, 
                        _SUMacControllerStateScannerStateKey, _SUMacControllerStateTargetingPhaseKey, 

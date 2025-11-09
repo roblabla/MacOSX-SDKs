@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           048F2054-5F13-3787-B995-BEFCE8DDDFD2
+    value:           D02BDE33-3731-3FD7-9228-F0A674BCBCDA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FBC2BEFA-7121-36DE-83B2-1613089C6EF2
+    value:           A3C00AEE-3AFC-37C0-97A8-46D8831DDB6D
 install-name:    '/usr/lib/libcupolicy.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           896BA565-7826-328D-9416-D0B3464D8FA2
+    value:           73EE30D3-794E-34A3-81C0-6CA1D5FCE373
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           30CACFD2-4EDE-3CD8-A824-C4836477B37D
+    value:           FAAF1CFC-C73E-3DD3-B087-3E20D1282766
 install-name:    '/System/Library/PrivateFrameworks/MMCSServices.framework/Versions/A/MMCSServices'
 current-version: 800
 exports:

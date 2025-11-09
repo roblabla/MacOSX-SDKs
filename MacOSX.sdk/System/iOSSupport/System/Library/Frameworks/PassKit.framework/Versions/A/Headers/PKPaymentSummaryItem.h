@@ -45,5 +45,6 @@ NS_ASSUME_NONNULL_END
 #endif // __PKPAYMENTSUMMARYITEM_H__
 
 #else
+#import <TargetConditionals.h>
 #import <PassKitCore/PKPaymentSummaryItem.h>
 #endif

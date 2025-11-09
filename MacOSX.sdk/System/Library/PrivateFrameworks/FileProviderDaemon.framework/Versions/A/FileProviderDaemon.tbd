@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4219A330-5035-336F-9E40-01F6108AC079
+    value:           44DA4D0A-1D58-34B5-BEB1-DC5F88CDB3B2
   - target:          x86_64-maccatalyst
-    value:           4219A330-5035-336F-9E40-01F6108AC079
+    value:           44DA4D0A-1D58-34B5-BEB1-DC5F88CDB3B2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           977BAC2C-9D5D-3949-816D-FF1D913A7B28
+    value:           A11FF64C-8529-39E9-94C7-4AA65683FA2C
   - target:          arm64e-maccatalyst
-    value:           977BAC2C-9D5D-3949-816D-FF1D913A7B28
+    value:           A11FF64C-8529-39E9-94C7-4AA65683FA2C
 install-name:    '/System/Library/PrivateFrameworks/FileProviderDaemon.framework/Versions/A/FileProviderDaemon'
 current-version: 0
 compatibility-version: 0

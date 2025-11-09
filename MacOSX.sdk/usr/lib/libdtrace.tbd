@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C43A563C-84B4-38F1-ADE8-7988240818F0
+    value:           75E98730-EDA9-310C-BE02-82A3EB753FBC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DD08EB7F-8A36-30F8-9DFB-5AF6E2CFF8F7
+    value:           D78BE272-CEAB-3D30-A7BC-B4EC3BF35FBF
 install-name:    '/usr/lib/libdtrace.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

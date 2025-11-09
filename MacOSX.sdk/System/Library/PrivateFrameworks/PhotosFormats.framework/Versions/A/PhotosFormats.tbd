@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EFD762EB-8351-39D7-AC47-C95CA916FE76
+    value:           554ABFD7-BAD0-39C5-ABA1-688C2D87A53E
   - target:          x86_64-maccatalyst
-    value:           EFD762EB-8351-39D7-AC47-C95CA916FE76
+    value:           554ABFD7-BAD0-39C5-ABA1-688C2D87A53E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EB92D521-4740-3FAD-906D-6DD002062139
+    value:           D59213EB-5928-36E2-953C-206289DF56E3
   - target:          arm64e-maccatalyst
-    value:           EB92D521-4740-3FAD-906D-6DD002062139
+    value:           D59213EB-5928-36E2-953C-206289DF56E3
 install-name:    '/System/Library/PrivateFrameworks/PhotosFormats.framework/Versions/A/PhotosFormats'
-current-version: 511.0.170
+current-version: 520.0.240
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTIN2pf17ArchiveLineParserE, __ZTIN5boost12interprocess14lock_exceptionE, 
@@ -206,11 +206,9 @@ exports:
                        _PFPosterShuffleFrequencyDescription, _PFPosterShuffleFrequencyStringWithFrequency, 
                        _PFPosterShuffleSmartAlbumsDescription, _PFPosterShuffleTypeDescription, 
                        _PFPosterShuffleTypeStringWithType, _PFReadImageDisplayTimeFromVideoFileAtPath, 
-                       _PFReadMetadataFromVideoAVAsset, _PFReadMetadataFromVideoAtPath, 
                        _PFReadPairingIdentifierFromCGImageProperties, _PFReadPairingIdentifierFromImageAtPath, 
-                       _PFReadPairingIdentifierFromVideoAtPath, _PFReadVideoDurationFromVideoFileAtPath, 
-                       _PFRectByFlippingHorizontallyInRect, _PFRectCompareForHorizontalMovementInVerticalLayout, 
-                       _PFRectCompareForVerticalMovementInVerticalLayoutWithSourceRect, 
+                       _PFReadPairingIdentifierFromVideoAtPath, _PFRectByFlippingHorizontallyInRect, 
+                       _PFRectCompareForHorizontalMovementInVerticalLayout, _PFRectCompareForVerticalMovementInVerticalLayoutWithSourceRect, 
                        _PFRectDiff, _PFRectIntersectWithBasicRemainders, _PFRectUnit, 
                        _PFRemovePairingIdentifierFromCGImageProperties, _PFSceneGeographyPOINotFound, 
                        _PFSceneTaxonomyEnumerateTopologicallyOrderedNodes, _PFSceneTaxonomyFillNodeData, 
@@ -269,14 +267,15 @@ exports:
                        _PFVideoAVCFObjectBuilderDefaultVideoAdjustments, _PFVideoAVCFObjectBuilderGetAudioMix, 
                        _PFVideoAVCFObjectBuilderGetMutableComposition, _PFVideoAVCFObjectBuilderGetTypeID, 
                        _PFVideoComplementFileExtension, _PFVideoComplementImagePathKey, 
+                       _PFVideoComplementMetadataForVideoAVAsset, _PFVideoComplementMetadataForVideoAtPath, 
                        _PFVideoComplementMetadataKey, _PFVideoComplementMetadataPairingIdentifierKey, 
                        _PFVideoComplementMetadataTimingInfoKey, _PFVideoComplementMetadataVersionKey, 
                        _PFVideoComplementVideoPathKey, _PFVideoExportErrorDomain, 
                        _PFVideoExportErrorStateKey, _PFVideoSharingOperationErrorDomain, 
                        _PFZlibErrorDomain, _PFiPhotoLibraryExtension, _StolenFigCaptureMetadataUtilitiesCreateQuickTimeMovieStillImageTimeSampleBuffer, 
-                       _UTTypeForBundlePathKey, __PFDiffRanges, __PFStoryRecipeAssetEnumerationIsConsistentForAssetKind, 
-                       __PFStoryRecipeAssetIdentifiersAreUnique, __PFStoryRecipeCurrentStyleRefersToExistingSongAsset, 
-                       __PFStoryRecipeDisplayAssetNormalizationDataFromMediaAnalysisDictionaryRev0, 
+                       _UTTypeForBundlePathKey, __PFDiffRanges, __PFReadMetadataFromVideoAVAsset, 
+                       __PFStoryRecipeAssetEnumerationIsConsistentForAssetKind, __PFStoryRecipeAssetIdentifiersAreUnique, 
+                       __PFStoryRecipeCurrentStyleRefersToExistingSongAsset, __PFStoryRecipeDisplayAssetNormalizationDataFromMediaAnalysisDictionaryRev0, 
                        __PLFigCreateImageFromImageSource, __ZN2pf23SceneTaxonomyLineParser14parseDetectorsEPc, 
                        __ZN2pf23SceneTaxonomyLineParser8finalizeEv, __ZN2pf23SceneTaxonomyLineParser8parseSHAEPc, 
                        __ZN2pf23SceneTaxonomyLineParser9parseEdgeEPc, __ZN2pf23SceneTaxonomyLineParser9parseLineEPcm, 
@@ -364,12 +363,13 @@ exports:
                        PFStoryRecipeFactory, PFStoryRecipeLibraryFactory, PFStoryRecipeSongAssetFactory, 
                        PFStoryRecipeStyleFactory, PFStoryRecipeUnarchiver, PFTimeZoneLookup, 
                        PFUniformTypeUtilities, PFVideoAVObjectBuilder, PFVideoAdjustments, 
-                       PFVideoComplement, PFVideoEncoding, PFVideoExport, PFVideoExportRangeCoordinator, 
-                       PFVideoExportRangeWaitingCaller, PFVideoMetadata, PFVideoMetadataAudioTrackFormatInfo, 
-                       PFVideoMetadataBuilder, PFVideoMetadataVideoTrackFormatInfo, 
-                       PFVideoSharingOperation, PFXMPMetadataBuilder, PFZlibDataCompression, 
-                       PFZlibDataCompressionOptions, PFZlibDataDecompressionOptions, 
-                       _PFStoryRecipeDisplayAssetNormalizationDataV1, _PFStoryRecipeDisplayAssetNormalizationDataV2 ]
+                       PFVideoComplement, PFVideoComplementMetadataRecord, PFVideoEncoding, 
+                       PFVideoExport, PFVideoExportRangeCoordinator, PFVideoExportRangeWaitingCaller, 
+                       PFVideoMetadata, PFVideoMetadataAudioTrackFormatInfo, PFVideoMetadataBuilder, 
+                       PFVideoMetadataVideoTrackFormatInfo, PFVideoSharingOperation, 
+                       PFXMPMetadataBuilder, PFZlibDataCompression, PFZlibDataCompressionOptions, 
+                       PFZlibDataDecompressionOptions, _PFStoryRecipeDisplayAssetNormalizationDataV1, 
+                       _PFStoryRecipeDisplayAssetNormalizationDataV2 ]
     objc-ivars:      [ PFAppleArchiveStream._compressionStream, PFAppleArchiveStream._inputStream, 
                        PFAppleArchiveStream._outputStream, PFCameraAdjustments._cinematicVideoRenderingVersion, 
                        PFCameraAdjustments._cropRect, PFCameraAdjustments._depthEnabled, 

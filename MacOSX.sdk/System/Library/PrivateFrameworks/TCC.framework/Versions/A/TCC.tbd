@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FACFBE06-22EC-3C7C-AB64-F6F10A3988E4
+    value:           EF67173F-A373-38F1-A379-C5D72FDD9B41
   - target:          x86_64-maccatalyst
-    value:           FACFBE06-22EC-3C7C-AB64-F6F10A3988E4
+    value:           EF67173F-A373-38F1-A379-C5D72FDD9B41
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7649A276-A825-358F-8A07-B5D912279A23
+    value:           001B107A-517F-3AB7-8CAD-C8DB0AB11623
   - target:          arm64e-maccatalyst
-    value:           7649A276-A825-358F-8A07-B5D912279A23
+    value:           001B107A-517F-3AB7-8CAD-C8DB0AB11623
 install-name:    '/System/Library/PrivateFrameworks/TCC.framework/Versions/A/TCC'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

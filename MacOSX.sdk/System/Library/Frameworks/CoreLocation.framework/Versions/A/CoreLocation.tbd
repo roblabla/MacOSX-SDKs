@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FB046E37-7802-3ACE-81F1-68D783C6D7AF
+    value:           49C336A8-96E0-3107-AE12-0D44CC3F8915
   - target:          x86_64-maccatalyst
-    value:           FB046E37-7802-3ACE-81F1-68D783C6D7AF
+    value:           49C336A8-96E0-3107-AE12-0D44CC3F8915
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6074BF83-1B15-3BAA-93E2-C820BC22F86B
+    value:           CC8B3362-6089-3E15-9D9B-9A60309B147E
   - target:          arm64e-maccatalyst
-    value:           6074BF83-1B15-3BAA-93E2-C820BC22F86B
+    value:           CC8B3362-6089-3E15-9D9B-9A60309B147E
 install-name:    '/System/Library/Frameworks/CoreLocation.framework/Versions/A/CoreLocation'
-current-version: 2780.0.16
+current-version: 2780.0.27
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -62,7 +62,7 @@ exports:
                        _CLLocationDistanceMax, _CLLocationPushServiceErrorDomain, 
                        _CLPassKitNotifyPayment, _CLPingDaemon, _CLSetClientTransientAuthorizationInfo, 
                        _CLSetLocationDefault, _CLSetMapMatchingRouteHint, _CLSetRouteHintsForMapMatching, 
-                       _CLShouldDisplayEEDUI, _CLShouldDisplayStatusBarIconChangedNotification, 
+                       _CLSetTrackRunHint, _CLShouldDisplayEEDUI, _CLShouldDisplayStatusBarIconChangedNotification, 
                        _CLStartStopAdvertisingBeacon, _CLTechStatusChangedNotification, 
                        _CLTimeIntervalMax, _CLWeatherNotifyForecast, _UTDegradationReasonSignificantLocationsOffKey, 
                        _UTDegradationReasonWifiOffKey, _UTDisableReasonAirplaneModeOnKey, 
@@ -70,8 +70,9 @@ exports:
                        _UTDisableReasonLocationServicesOffKey, _UTDisableReasonTrackingNotificationsDisallowedKey, 
                        _UTEnablementStatusKey, __CLLinkedOnOrAfter, _kCLClientDistanceFilterNone, 
                        _kCLClientHeadingFilterNone, _kCLCommonLocationAlwaysAndWhenInUseUsageDescriptionKey, 
-                       _kCLCommonLocationAlwaysUsageDescriptionKey, _kCLCommonLocationDefaultAccuracyReducedKey, 
-                       _kCLCommonLocationInterestZonesKey, _kCLCommonLocationTemporaryUsageDescriptionDictionaryKey, 
+                       _kCLCommonLocationAlwaysUsageDescriptionKey, _kCLCommonLocationAuthorizationPurposeDescriptionDictionaryKey, 
+                       _kCLCommonLocationDefaultAccuracyReducedKey, _kCLCommonLocationInterestZonesKey, 
+                       _kCLCommonLocationTemporaryUsageDescriptionDictionaryKey, 
                        _kCLCommonLocationUsageDescriptionKey, _kCLCommonLocationWhenInUseUsageDescriptionKey, 
                        _kCLCommonLocationWildernessSafetyUsageDescriptionDictionaryKey, 
                        _kCLCommonNSWidgetWantsLocationKey, _kCLCommonWKRunsIndependentlyOfCompanionAppKey, 
@@ -102,16 +103,16 @@ exports:
                        CLFloor, CLGeocoder, CLGnssDisablementAssertion, CLHeading, 
                        CLLocation, CLLocationGnssOdometerInfo, CLLocationManager, 
                        CLLocationManagerRoutine, CLLocationMatchInfo, CLLocationSourceInformation, 
-                       CLPair, CLPlacemark, CLPlatformInfoPrivate, CLRacingRouteParameters, 
-                       CLRacingRoutePerformanceResults, CLRacingRouteState, CLRacingRouteVariables, 
-                       CLReductiveFilterOptions, CLReductiveFilterSuite, CLRegion, 
-                       CLRegulatoryConfig, CLRouteBoundingBox, CLRoutePoint, CLSimulationManager, 
-                       CLStateTracker, CLVisit, _CLLSLHeading, _CLLSLHeadingEstimation, 
-                       _CLLSLHeadingSupplInfo, _CLLSLLocation, _CLLSLLocationCoordinate, 
-                       _CLLSLMapRoadSegment, _CLLocationFusionInfo, _CLLocationGroundAltitude, 
-                       _CLMicroLocationClusterIdAndClusterData, _CLMicroLocationSourceIdAndSourceData, 
-                       _CLMicroLocationSourcesStatisticsResult, _CLPlaceInference, 
-                       _CLPolygonalRegion, _CLRangingPeer, _CLRangingPeerDistance, 
+                       CLLocationTrackRunInfo, CLPair, CLPlacemark, CLPlatformInfoPrivate, 
+                       CLRacingRouteParameters, CLRacingRoutePerformanceResults, 
+                       CLRacingRouteState, CLRacingRouteVariables, CLReductiveFilterOptions, 
+                       CLReductiveFilterSuite, CLRegion, CLRegulatoryConfig, CLRouteBoundingBox, 
+                       CLRoutePoint, CLSimulationManager, CLStateTracker, CLVisit, 
+                       _CLLSLHeading, _CLLSLHeadingEstimation, _CLLSLHeadingSupplInfo, 
+                       _CLLSLLocation, _CLLSLLocationCoordinate, _CLLSLMapRoadSegment, 
+                       _CLLocationFusionInfo, _CLLocationGroundAltitude, _CLMicroLocationClusterIdAndClusterData, 
+                       _CLMicroLocationSourceIdAndSourceData, _CLMicroLocationSourcesStatisticsResult, 
+                       _CLPlaceInference, _CLPolygonalRegion, _CLRangingPeer, _CLRangingPeerDistance, 
                        _CLSignificantRegion, _CLVIOEstimation, _CLVLLocalizationDebugInfo, 
                        _CLVLLocalizationMaps488Details, _CLVLLocalizationResult, 
                        _CLVertex ]

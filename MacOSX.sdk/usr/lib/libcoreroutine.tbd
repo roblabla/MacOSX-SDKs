@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           29BEB7B9-5EE0-305F-81B1-A16AEA665847
+    value:           BCC01822-BE53-33CD-A106-B182F13F4FCF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           344D6A46-CBD9-3A90-9CE5-2DFAEDCC1A21
+    value:           EA6614D6-FC01-33C4-A5AB-0917BD1A47D0
 install-name:    '/usr/lib/libcoreroutine.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -142,6 +142,9 @@ exports:
                        _kNumWeeksForPred, _kOOStForecastBias, _kOnFootThresClass, 
                        _kOutlierIndependenceThres, _kOutlierThresIndep, _kPosDateLineThresDeg, 
                        _kRTBuildingPolygonManagerMinimumNumberOfVertices, _kRTDTWRadius, 
+                       _kRTDeviceMetricCharging, _kRTDeviceMetricDataConnectivityCell, 
+                       _kRTDeviceMetricDataConnectivityNone, _kRTDeviceMetricDataConnectivityWiFi, 
+                       _kRTDeviceMetricScreenLock, _kRTDeviceMetricStationaryMotion, 
                        _kRTDuetKnowledgeStreamDefaultFetchBatchSize, _kRTEventModelMetricKeyCorrects, 
                        _kRTEventModelMetricKeyIncorrects, _kRTEventModelMetricKeyInvalids, 
                        _kRTEventModelMetricKeyKeyword, _kRTEventModelMetricKeyPrecision, 
@@ -341,12 +344,12 @@ exports:
                        RTDataProtectionManagerNotificationUnlockedSinceBoot, RTDefaultsManager, 
                        RTDefaultsManagerNotificationDefaultsChanged, RTDelayedLocationRequester, 
                        RTDeletionRequestRecordIDTransformer, RTDevice, RTDeviceLocationPredictor, 
-                       RTDeviceMO, RTDiagnostics, RTDistanceCalculator, RTDuetKnowledgeStore, 
-                       RTDuetKnowledgeStream, RTEntitlementProvider, RTEntityDeletionRequestMO, 
-                       RTEventAgentManager, RTEventLocationIdentifier, RTEventLocationIdentifierMO, 
-                       RTEventManager, RTEventModelProvider, RTEventModelUserInteractionMO, 
-                       RTException, RTFMCScoreBoard, RTFavoritePlace, RTFingerprintMO, 
-                       RTFingerprintManager, RTFingerprintManagerNotificationAvailabilityDidChange, 
+                       RTDeviceMO, RTDeviceMetricManager, RTDiagnostics, RTDistanceCalculator, 
+                       RTDuetKnowledgeStore, RTDuetKnowledgeStream, RTEntitlementProvider, 
+                       RTEntityDeletionRequestMO, RTEventAgentManager, RTEventLocationIdentifier, 
+                       RTEventLocationIdentifierMO, RTEventManager, RTEventModelProvider, 
+                       RTEventModelUserInteractionMO, RTException, RTFMCScoreBoard, 
+                       RTFavoritePlace, RTFingerprintMO, RTFingerprintManager, RTFingerprintManagerNotificationAvailabilityDidChange, 
                        RTFingerprintManagerNotificationMonitorFingerprints, RTFingerprintStore, 
                        RTFixedSizeQueue, RTFusedInferredMapItem, RTFusionMetrics, 
                        RTGEOMapItemTransformer, RTHealthKitManager, RTHealthKitManagerNewWorkoutNotification, 

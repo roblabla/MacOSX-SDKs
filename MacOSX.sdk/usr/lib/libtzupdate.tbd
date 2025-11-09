@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           829FC31B-D71A-3FEC-BB11-F5E1A7A4A332
+    value:           831D0C9F-0F5F-3588-9D04-C8DFCFE33680
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           04664A1F-31EC-3C7D-BAEA-762A592F51C7
+    value:           6B954691-1E44-3FA2-8EA2-BCAF60AE6F57
 install-name:    '/usr/lib/libtzupdate.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

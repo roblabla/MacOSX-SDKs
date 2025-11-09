@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7D6E72EA-32E8-3D52-880A-B850CC70B3F7
+    value:           6B78C08A-CBDB-36E9-95A8-32945E56D28A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C49D011A-2213-3198-BE81-BE8F2A220D4E
+    value:           719B9A97-DFD1-352F-B6C6-81640519B903
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Resources/libATSServer.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A064D0A7-139F-33E5-959C-7067CF94DC2E
+    value:           D199B283-8F09-3F2F-A17E-274BFF7733BE
   - target:          x86_64-maccatalyst
-    value:           A064D0A7-139F-33E5-959C-7067CF94DC2E
+    value:           D199B283-8F09-3F2F-A17E-274BFF7733BE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3ADBD543-3E57-332F-972C-A958D9E4FBF8
+    value:           3680811A-78F7-361A-ABBE-8E783165AC81
   - target:          arm64e-maccatalyst
-    value:           3ADBD543-3E57-332F-972C-A958D9E4FBF8
+    value:           3680811A-78F7-361A-ABBE-8E783165AC81
 install-name:    '/usr/lib/system/libsystem_sandbox.dylib'
-current-version: 1845.41.2
+current-version: 1845.60.12
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

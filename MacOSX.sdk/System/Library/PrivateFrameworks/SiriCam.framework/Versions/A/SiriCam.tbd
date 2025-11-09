@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B5B11062-9774-36CD-B407-944619BAAE7E
+    value:           9AC6CFA8-18BB-3F13-93A0-4DD1846117AF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B9A75AC3-C6EE-3F11-BE00-04A6CD560D30
+    value:           170D4854-DE1F-3EA7-94A8-5A65EF0CA2E3
 install-name:    '/System/Library/PrivateFrameworks/SiriCam.framework/Versions/A/SiriCam'
 swift-abi-version: 7
 allowable-clients:

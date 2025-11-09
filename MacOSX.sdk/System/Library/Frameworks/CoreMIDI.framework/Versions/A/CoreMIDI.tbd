@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8F0740A4-85B4-3CBB-A3AB-80048D694B2D
+    value:           020D42AD-39C0-3666-AB51-3F5704515410
   - target:          x86_64-maccatalyst
-    value:           8F0740A4-85B4-3CBB-A3AB-80048D694B2D
+    value:           020D42AD-39C0-3666-AB51-3F5704515410
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C145596B-CF7A-3936-9393-DE2B54049197
+    value:           1E620293-4712-35EE-9552-E972365CCF78
   - target:          arm64e-maccatalyst
-    value:           C145596B-CF7A-3936-9393-DE2B54049197
+    value:           1E620293-4712-35EE-9552-E972365CCF78
 install-name:    '/System/Library/Frameworks/CoreMIDI.framework/Versions/A/CoreMIDI'
 current-version: 69
 exports:

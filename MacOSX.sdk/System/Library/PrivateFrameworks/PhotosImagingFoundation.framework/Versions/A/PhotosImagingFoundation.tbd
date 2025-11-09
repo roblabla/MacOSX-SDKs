@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           02DAE686-70FF-3E4B-837F-FD2E4FFB11D4
+    value:           FA029627-D557-3456-ADC6-37A524DE61EE
   - target:          x86_64-maccatalyst
-    value:           02DAE686-70FF-3E4B-837F-FD2E4FFB11D4
+    value:           FA029627-D557-3456-ADC6-37A524DE61EE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ACF041CA-D012-3522-86D7-72F9649A8A0D
+    value:           996E6375-49DC-3442-934C-E0C0BCA62020
   - target:          arm64e-maccatalyst
-    value:           ACF041CA-D012-3522-86D7-72F9649A8A0D
+    value:           996E6375-49DC-3442-934C-E0C0BCA62020
 install-name:    '/System/Library/PrivateFrameworks/PhotosImagingFoundation.framework/Versions/A/PhotosImagingFoundation'
-current-version: 511.0.170
+current-version: 520.0.240
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

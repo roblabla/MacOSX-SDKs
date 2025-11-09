@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           404C7A83-71C1-3842-92D6-6401E017D1AE
+    value:           73F4FDF2-6E88-3A78-AC7B-E7A429F31D45
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           10CB485F-04BF-399A-8E9E-1128C3C1A555
+    value:           90892461-C4A1-3612-BFB5-7A1454DBCCF4
 install-name:    '/System/Library/PrivateFrameworks/NotesSupport.framework/Versions/A/NotesSupport'
-current-version: 2163
+current-version: 2185
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ICACAccountPropertyDidChooseToMigrate, _ICACAccountPropertyDidFinishMigration, 
@@ -34,8 +34,9 @@ exports:
                        _ICHashWithObject, _ICHashWithOrderedSet, _ICHashWithSet, 
                        _ICImportGroupContainerIdentifier, _ICIntentsExtensionBundleIdentifier, 
                        _ICInternalPreferencesChangedNotification, _ICInternalSettingsDefaultToPaperKitAttachments, 
-                       _ICInternalSettingsDomain, _ICInternalSettingsIsAlexandriaDemoModeEnabled, 
-                       _ICInternalSettingsIsAlexandriaEnabled, _ICInternalSettingsIsAutomaticallyShowLatestUpdatesEnabled, 
+                       _ICInternalSettingsDomain, _ICInternalSettingsIsAberdeenSyncEngineEnabled, 
+                       _ICInternalSettingsIsAlexandriaDemoModeEnabled, _ICInternalSettingsIsAlexandriaEnabled, 
+                       _ICInternalSettingsIsAutomaticallyShowLatestUpdatesEnabled, 
                        _ICInternalSettingsIsMentionNotificationsDisabled, _ICInternalSettingsIsPageViewControllerCrashWorkaroundDisabled, 
                        _ICInternalSettingsIsSystemPaperEnabled, _ICInternalSettingsIsTracingEnabled, 
                        _ICInternalSettingsSmartFoldersCanIncludeRecentlyDeletedNotes, 
@@ -133,13 +134,13 @@ exports:
                        _kICDefaultsKeyDidChooseToMigrateLocalAccount, _kICDefaultsKeyDidMigrateLocalAccount, 
                        _kICDidAlertAboutUnsupportedPencilMode, _kICDidAlertAboutUpdatingDrawingsCurrentRelease, 
                        _kICDidAlertAboutUpdatingDrawingsFall2021, _kICDidAlertAboutUpdatingDrawingsFall2022, 
-                       _kICDisablePageViewControllerCrashWorkaroundDefaultsKey, _kICEnableAutomaticallyShowLatestUpdatesKey, 
-                       _kICEnableDocCamArchiveExportDefaultsKey, _kICEnableDuplicateNoteDefaultsKey, 
-                       _kICEnableForcediCloudMigrationDefaultsKey, _kICEnableLinkPresentationDefaultsKey, 
-                       _kICEnableSmartTagsDefaultsKey, _kICEnableXPCPreviewGenerationDefaultsKey, 
-                       _kICInternalSettingsDebugModeEnabledDefaultKey, _kICInternalSettingsDisableMentionNotifications, 
-                       _kICInternalSettingsDisableNoteModificationDateUpdates, _kICInternalSettingsDisableSingleLineA, 
-                       _kICInternalSettingsDisableTextViewContentOffsetWorkaround, 
+                       _kICDisablePageViewControllerCrashWorkaroundDefaultsKey, _kICEnableAbderdeenSyncEngine, 
+                       _kICEnableAutomaticallyShowLatestUpdatesKey, _kICEnableDocCamArchiveExportDefaultsKey, 
+                       _kICEnableDuplicateNoteDefaultsKey, _kICEnableForcediCloudMigrationDefaultsKey, 
+                       _kICEnableLinkPresentationDefaultsKey, _kICEnableSmartTagsDefaultsKey, 
+                       _kICEnableXPCPreviewGenerationDefaultsKey, _kICInternalSettingsDebugModeEnabledDefaultKey, 
+                       _kICInternalSettingsDisableMentionNotifications, _kICInternalSettingsDisableNoteModificationDateUpdates, 
+                       _kICInternalSettingsDisableSingleLineA, _kICInternalSettingsDisableTextViewContentOffsetWorkaround, 
                        _kICInternalSettingsDisableTextViewEmptyLastLineWorkaround, 
                        _kICInternalSettingsDrawingMarkerImageKey, _kICInternalSettingsDrawingPencilImageKey, 
                        _kICInternalSettingsDrawingTouchPredictionPoints, _kICInternalSettingsDrawingTouchPredictionPointsOverride, 

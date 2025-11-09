@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           33E9F2F0-B843-3E01-8149-9C6F2CE26DCC
+    value:           DCEE2776-1956-30F0-8D03-20A529737C69
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           520C402E-24D2-3BEB-A712-04F3AAAB44B4
+    value:           CE84D123-A562-3D17-ACDF-A8AAFB0BF5BF
 install-name:    '/System/Library/PrivateFrameworks/RemindersUICore.framework/Versions/A/RemindersUICore'
-current-version: 2715
+current-version: 2745
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -1052,6 +1052,9 @@ exports:
                        '_$s15RemindersUICore15TTRAccesibilityO0A4ListO6ActionO19ShowSmallThumbnailsSSvau', 
                        '_$s15RemindersUICore15TTRAccesibilityO0A4ListO6ActionO19ShowSmallThumbnailsSSvgZ', 
                        '_$s15RemindersUICore15TTRAccesibilityO0A4ListO6ActionO19ShowSmallThumbnailsSSvpZ', 
+                       '_$s15RemindersUICore15TTRAccesibilityO0A4ListO6ActionO19ShowSuggestionsHelpSSvau', 
+                       '_$s15RemindersUICore15TTRAccesibilityO0A4ListO6ActionO19ShowSuggestionsHelpSSvgZ', 
+                       '_$s15RemindersUICore15TTRAccesibilityO0A4ListO6ActionO19ShowSuggestionsHelpSSvpZ', 
                        '_$s15RemindersUICore15TTRAccesibilityO0A4ListO6ActionO7AddNoteSSvau', 
                        '_$s15RemindersUICore15TTRAccesibilityO0A4ListO6ActionO7AddNoteSSvgZ', 
                        '_$s15RemindersUICore15TTRAccesibilityO0A4ListO6ActionO7AddNoteSSvpZ', 
@@ -1441,10 +1444,6 @@ exports:
                        '_$s15RemindersUICore15TTRUserDefaultsC03allA13ShowCompletedSbvpMV', 
                        '_$s15RemindersUICore15TTRUserDefaultsC03allA13ShowCompletedSbvs', 
                        '_$s15RemindersUICore15TTRUserDefaultsC04userD033_39AC9311353E6C87A3BD9840BFFEE925LLSo06NSUserD0CSgvpfi', 
-                       '_$s15RemindersUICore15TTRUserDefaultsC056shouldCheckIsAuthorizedForPreciseLocationAfterRequestingK6AccessSbvM', 
-                       '_$s15RemindersUICore15TTRUserDefaultsC056shouldCheckIsAuthorizedForPreciseLocationAfterRequestingK6AccessSbvg', 
-                       '_$s15RemindersUICore15TTRUserDefaultsC056shouldCheckIsAuthorizedForPreciseLocationAfterRequestingK6AccessSbvpMV', 
-                       '_$s15RemindersUICore15TTRUserDefaultsC056shouldCheckIsAuthorizedForPreciseLocationAfterRequestingK6AccessSbvs', 
                        '_$s15RemindersUICore15TTRUserDefaultsC07appUserD0ACvau', 
                        '_$s15RemindersUICore15TTRUserDefaultsC07appUserD0ACvgZ', 
                        '_$s15RemindersUICore15TTRUserDefaultsC07appUserD0ACvpZ', 
@@ -1461,6 +1460,10 @@ exports:
                        '_$s15RemindersUICore15TTRUserDefaultsC17ShowCompletedTypeON', 
                        '_$s15RemindersUICore15TTRUserDefaultsC17ShowCompletedTypeOSHAAMc', 
                        '_$s15RemindersUICore15TTRUserDefaultsC17ShowCompletedTypeOSQAAMc', 
+                       '_$s15RemindersUICore15TTRUserDefaultsC17activitySessionIdSSSgvM', 
+                       '_$s15RemindersUICore15TTRUserDefaultsC17activitySessionIdSSSgvg', 
+                       '_$s15RemindersUICore15TTRUserDefaultsC17activitySessionIdSSSgvpMV', 
+                       '_$s15RemindersUICore15TTRUserDefaultsC17activitySessionIdSSSgvs', 
                        '_$s15RemindersUICore15TTRUserDefaultsC17setShowsCompleted5value7forTypeySb_AC04ShowgJ0OtF', 
                        '_$s15RemindersUICore15TTRUserDefaultsC18todayListIsGroupedSbvM', 
                        '_$s15RemindersUICore15TTRUserDefaultsC18todayListIsGroupedSbvg', 
@@ -1504,6 +1507,10 @@ exports:
                        '_$s15RemindersUICore15TTRUserDefaultsC23SmartListVersionWarningVSEAAMc', 
                        '_$s15RemindersUICore15TTRUserDefaultsC23SmartListVersionWarningVSeAAMc', 
                        '_$s15RemindersUICore15TTRUserDefaultsC23showingLargeAttachments7forTypeSbAC07ShowingfgI0O_tF', 
+                       '_$s15RemindersUICore15TTRUserDefaultsC24activitySessionBeginTime10Foundation4DateVSgvM', 
+                       '_$s15RemindersUICore15TTRUserDefaultsC24activitySessionBeginTime10Foundation4DateVSgvg', 
+                       '_$s15RemindersUICore15TTRUserDefaultsC24activitySessionBeginTime10Foundation4DateVSgvpMV', 
+                       '_$s15RemindersUICore15TTRUserDefaultsC24activitySessionBeginTime10Foundation4DateVSgvs', 
                        '_$s15RemindersUICore15TTRUserDefaultsC24animationSlowModeEnabledSbvM', 
                        '_$s15RemindersUICore15TTRUserDefaultsC24animationSlowModeEnabledSbvg', 
                        '_$s15RemindersUICore15TTRUserDefaultsC24animationSlowModeEnabledSbvpMV', 
@@ -2719,7 +2726,7 @@ exports:
                        '_$s15RemindersUICore21TTRGeoLocationServiceC017addressToResolvedD5Cache33_EEC78A8609A99C6D707CCFA0A2C32692LLSDyAA0cdehD0O7AddressOAGGvpfP', 
                        '_$s15RemindersUICore21TTRGeoLocationServiceC018currentlyGeocodingD033_EEC78A8609A99C6D707CCFA0A2C32692LLAA0cde8ResolvedD0OSgvpfi', 
                        '_$s15RemindersUICore21TTRGeoLocationServiceC018locationToResolvedD5Cache33_EEC78A8609A99C6D707CCFA0A2C32692LLSDySo10CLLocationCAA0cdehD0OGvpfP', 
-                       '_$s15RemindersUICore21TTRGeoLocationServiceC020startUpdatingCurrentD8IfNeeded11forcePromptySb_tF', 
+                       '_$s15RemindersUICore21TTRGeoLocationServiceC020startUpdatingCurrentD8IfNeededyyF', 
                        '_$s15RemindersUICore21TTRGeoLocationServiceC021publisherForResolvingD03for7Combine12AnyPublisherVySo11CLPlacemarkCs5Error_pGAA0cde8ResolvedD0O7AddressO_tF', 
                        '_$s15RemindersUICore21TTRGeoLocationServiceC022isAuthorizedForPreciseD0Sbvg', 
                        '_$s15RemindersUICore21TTRGeoLocationServiceC022isAuthorizedForPreciseD0SbvpMV', 
@@ -2731,6 +2738,7 @@ exports:
                        '_$s15RemindersUICore21TTRGeoLocationServiceC07currentD9Publisher7Combine03AnyG0VySo11CLPlacemarkCs5Error_pGvg', 
                        '_$s15RemindersUICore21TTRGeoLocationServiceC07currentD9Publisher7Combine03AnyG0VySo11CLPlacemarkCs5Error_pGvpMV', 
                        '_$s15RemindersUICore21TTRGeoLocationServiceC07maximumD12UpdatingTime33_EEC78A8609A99C6D707CCFA0A2C32692LLSdvpfi', 
+                       '_$s15RemindersUICore21TTRGeoLocationServiceC07requestD13AuthorizationyyF', 
                        '_$s15RemindersUICore21TTRGeoLocationServiceC07resolveD03forAA0cde8ResolvedD0OAG7AddressO_tF', 
                        '_$s15RemindersUICore21TTRGeoLocationServiceC14resolveAddress3forAA0cde8ResolvedD0OSo10CLLocationC_tF', 
                        '_$s15RemindersUICore21TTRGeoLocationServiceC15locationManagerACSo010CLLocationG0C_tcfC', 
@@ -2739,7 +2747,6 @@ exports:
                        '_$s15RemindersUICore21TTRGeoLocationServiceC15locationManager_18didUpdateLocationsySo010CLLocationG0C_SaySo0K0CGtF', 
                        '_$s15RemindersUICore21TTRGeoLocationServiceC26locationAccuraceUpperBound33_EEC78A8609A99C6D707CCFA0A2C32692LLSdvpfi', 
                        '_$s15RemindersUICore21TTRGeoLocationServiceC28publisherForResolvingAddress3for7Combine12AnyPublisherVySo11CLPlacemarkCs5Error_pGSo10CLLocationC_tF', 
-                       '_$s15RemindersUICore21TTRGeoLocationServiceC32askForInUseAuthorizationIfNeededyyF', 
                        '_$s15RemindersUICore21TTRGeoLocationServiceC32hasDeterminedAuthorizationStatusSbvg', 
                        '_$s15RemindersUICore21TTRGeoLocationServiceC32hasDeterminedAuthorizationStatusSbvpMV', 
                        '_$s15RemindersUICore21TTRGeoLocationServiceC37locationManagerDidChangeAuthorizationyySo010CLLocationG0CF', 

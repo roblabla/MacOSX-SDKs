@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           80240DB5-2808-37D0-874E-67000FFB3242
+    value:           8AD58D65-078B-3557-B693-409C7C299D5B
   - target:          x86_64-maccatalyst
-    value:           80240DB5-2808-37D0-874E-67000FFB3242
+    value:           8AD58D65-078B-3557-B693-409C7C299D5B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4CF465B2-B62D-3027-A900-02521ED5F5A6
+    value:           09E10E69-7070-3AD5-BC6E-338C12664432
   - target:          arm64e-maccatalyst
-    value:           4CF465B2-B62D-3027-A900-02521ED5F5A6
+    value:           09E10E69-7070-3AD5-BC6E-338C12664432
 install-name:    '/System/Library/PrivateFrameworks/PersonalizationPortraitInternals.framework/Versions/A/PersonalizationPortraitInternals'
-current-version: 1193.8
+current-version: 1193.8.6
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -193,8 +193,8 @@ exports:
                        _kPPUnusualStartTime, _kPPUnusualStartTimeFeatures, _kPPValueKey, 
                        _kPPWeightKey, _newGEONavigationListener, _setGeoNavigationListenerFactoryForTesting ]
     objc-classes:    [ PPAllowancePolicyGuardedData, PPAppLaunchMonitor, PPAppLaunchMonitorGuardedData, 
-                       PPAppLaunchMonitorRegistrationContext, PPAugmentedGazetteer, 
-                       PPAugmentedGazetteerGuardedData, PPAugmentedGazetteerMetadata, 
+                       PPAppLaunchMonitorRegistrationContext, PPAppLinkCacheGuardedData, 
+                       PPAugmentedGazetteer, PPAugmentedGazetteerGuardedData, PPAugmentedGazetteerMetadata, 
                        PPBaseScoreInputSet, PPBundleAlgorithmCount, PPBundleIdAllowancePolicy, 
                        PPCoalescedScoredNamedEntity, PPCoalescedScoredTopic, PPCollaborativeFilteringSampler, 
                        PPCombinedScoreInputSet, PPConfigServerDelegate, PPConfigServerHandler, 
@@ -308,8 +308,9 @@ exports:
                        PPAllowancePolicyGuardedData.searchableItemAllowlist, PPAllowancePolicyGuardedData.searchableItemBlocklist, 
                        PPAppLaunchMonitorGuardedData.clientContext, PPAppLaunchMonitorGuardedData.handlers, 
                        PPAppLaunchMonitorGuardedData.isRegistered, PPAppLaunchMonitorGuardedData.nextToken, 
-                       PPAugmentedGazetteerGuardedData.sentenceTokenizer, PPAugmentedGazetteerGuardedData.tagger, 
-                       PPConfigurationGuardedData.analyticsMaximumNumberOfRecords, 
+                       PPAppLinkCacheGuardedData._enabledAppIDs, PPAppLinkCacheGuardedData._mutableURLToAppID, 
+                       PPAppLinkCacheGuardedData._urlToAppID, PPAugmentedGazetteerGuardedData.sentenceTokenizer, 
+                       PPAugmentedGazetteerGuardedData.tagger, PPConfigurationGuardedData.analyticsMaximumNumberOfRecords, 
                        PPConfigurationGuardedData.analyticsSamplingRate, PPConfigurationGuardedData.availableVariantNames, 
                        PPConfigurationGuardedData.contactsLabelScoringMap, PPConfigurationGuardedData.customTaggerMaxTokenCount, 
                        PPConfigurationGuardedData.decayedFeedbackCountsHalfLifeDays, 

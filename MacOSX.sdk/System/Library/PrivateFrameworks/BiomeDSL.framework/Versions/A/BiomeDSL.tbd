@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           53E2E86D-016F-3D49-8BBD-DA17D60CEEDA
+    value:           CA91261A-2280-3622-9DB1-CD7C56202DA3
   - target:          x86_64-maccatalyst
-    value:           53E2E86D-016F-3D49-8BBD-DA17D60CEEDA
+    value:           CA91261A-2280-3622-9DB1-CD7C56202DA3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EDB5F462-5F2B-36DC-8934-D8EBC1D443C6
+    value:           481E4FA4-5989-3939-9511-12247BE7CA4C
   - target:          arm64e-maccatalyst
-    value:           EDB5F462-5F2B-36DC-8934-D8EBC1D443C6
+    value:           481E4FA4-5989-3939-9511-12247BE7CA4C
 install-name:    '/System/Library/PrivateFrameworks/BiomeDSL.framework/Versions/A/BiomeDSL'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

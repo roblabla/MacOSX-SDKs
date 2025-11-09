@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           62ACF731-79DC-3A6A-9BF4-71942346EE58
+    value:           7E6B48F4-EC4C-373A-A1EC-0F852B2FA8F5
   - target:          x86_64-maccatalyst
-    value:           62ACF731-79DC-3A6A-9BF4-71942346EE58
+    value:           7E6B48F4-EC4C-373A-A1EC-0F852B2FA8F5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2D02D8D2-4482-311A-AE33-41B9252C482B
+    value:           65F37A4A-B8B9-3961-AA9D-313829C91A87
   - target:          arm64e-maccatalyst
-    value:           2D02D8D2-4482-311A-AE33-41B9252C482B
+    value:           65F37A4A-B8B9-3961-AA9D-313829C91A87
 install-name:    '/System/Library/Frameworks/Photos.framework/Versions/A/Photos'
-current-version: 511.0.170
+current-version: 520.0.240
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

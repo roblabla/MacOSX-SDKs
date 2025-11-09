@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7D089E5F-5467-343B-9B42-04064ED4DE9C
+    value:           C04F9CD1-31A5-3722-B767-CD7B26D61231
   - target:          x86_64-maccatalyst
-    value:           7D089E5F-5467-343B-9B42-04064ED4DE9C
+    value:           C04F9CD1-31A5-3722-B767-CD7B26D61231
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CA409F9D-4C60-3B99-9873-33424EC1F5E1
+    value:           44EF764A-9EB6-3D6F-B9CA-CAEBB359ABAB
   - target:          arm64e-maccatalyst
-    value:           CA409F9D-4C60-3B99-9873-33424EC1F5E1
+    value:           44EF764A-9EB6-3D6F-B9CA-CAEBB359ABAB
 install-name:    '/usr/lib/swift/libswiftFileProvider.dylib'
-current-version: 730.40.50
+current-version: 730.61.2
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E4BE4530-1924-3843-B8B7-A37F35F824EC
+    value:           23ECAA94-1209-3E51-9F2F-B4BABBF8A544
   - target:          x86_64-maccatalyst
-    value:           E4BE4530-1924-3843-B8B7-A37F35F824EC
+    value:           23ECAA94-1209-3E51-9F2F-B4BABBF8A544
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E350913B-C235-3661-B828-1AAE6C99F48A
+    value:           94C403BF-13DC-399E-9F39-B3F162AB05AC
   - target:          arm64e-maccatalyst
-    value:           E350913B-C235-3661-B828-1AAE6C99F48A
+    value:           94C403BF-13DC-399E-9F39-B3F162AB05AC
 install-name:    '/System/Library/PrivateFrameworks/VisualIntelligence.framework/Versions/A/VisualIntelligence'
 swift-abi-version: 7
 exports:
@@ -24,8 +24,8 @@ exports:
                        '_$s18VisualIntelligence003xfhoiySdAA7S2PointV_ADtF', '_$s18VisualIntelligence003xfhoiySdAA8R2VectorV_ADtF', 
                        '_$s18VisualIntelligence0A12SearchResultV13regionResultsSayAA06RegioncD0VGvg', 
                        '_$s18VisualIntelligence0A12SearchResultV13regionResultsSayAA06RegioncD0VGvpMV', 
-                       '_$s18VisualIntelligence0A12SearchResultV19userFeedbackPayload10Foundation4DataVvg', 
-                       '_$s18VisualIntelligence0A12SearchResultV19userFeedbackPayload10Foundation4DataVvpMV', 
+                       '_$s18VisualIntelligence0A12SearchResultV19userFeedbackPayload10Foundation4DataVSgvg', 
+                       '_$s18VisualIntelligence0A12SearchResultV19userFeedbackPayload10Foundation4DataVSgvpMV', 
                        '_$s18VisualIntelligence0A12SearchResultV19visualUnderstandingAA0aF0Vvg', 
                        '_$s18VisualIntelligence0A12SearchResultV19visualUnderstandingAA0aF0VvpMV', 
                        '_$s18VisualIntelligence0A12SearchResultVMa', '_$s18VisualIntelligence0A12SearchResultVMn', 
@@ -156,7 +156,10 @@ exports:
                        '_$s18VisualIntelligence0A6DomainVMn', '_$s18VisualIntelligence0A6DomainVN', 
                        '_$s18VisualIntelligence0A6DomainVSEAAMc', '_$s18VisualIntelligence0A6DomainVSHAAMc', 
                        '_$s18VisualIntelligence0A6DomainVSQAAMc', '_$s18VisualIntelligence0A6DomainVSYAAMc', 
-                       '_$s18VisualIntelligence0A6DomainVSeAAMc', '_$s18VisualIntelligence0aB17ServiceCompatibleC10clearCache11cacheOptionySo07VICacheH0V_tFTj', 
+                       '_$s18VisualIntelligence0A6DomainVSeAAMc', '_$s18VisualIntelligence0aB12ServiceErrorO6failedyACSScACmFWC', 
+                       '_$s18VisualIntelligence0aB12ServiceErrorOMa', '_$s18VisualIntelligence0aB12ServiceErrorOMn', 
+                       '_$s18VisualIntelligence0aB12ServiceErrorON', '_$s18VisualIntelligence0aB12ServiceErrorOs0D0AAMc', 
+                       '_$s18VisualIntelligence0aB17ServiceCompatibleC10clearCache11cacheOptionySo07VICacheH0V_tFTj', 
                        '_$s18VisualIntelligence0aB17ServiceCompatibleC10clearCache11cacheOptionySo07VICacheH0V_tFTq', 
                        '_$s18VisualIntelligence0aB17ServiceCompatibleC11parseCached11visualQuery13cachedResults10completionSo15VIQueryHandling_pSo08VIVisualH0C_So6NSDataCSgySo13VIParseResultCSg_AMs5Error_pSgtctFTj', 
                        '_$s18VisualIntelligence0aB17ServiceCompatibleC11parseCached11visualQuery13cachedResults10completionSo15VIQueryHandling_pSo08VIVisualH0C_So6NSDataCSgySo13VIParseResultCSg_AMs5Error_pSgtctFTq', 
@@ -193,7 +196,7 @@ exports:
                        '_$s18VisualIntelligence0aB6LoggerCfD', '_$s18VisualIntelligence0aB7ServiceC13VIErrorDomainSSvgZ', 
                        '_$s18VisualIntelligence0aB7ServiceC14parseAndSearch5image16regionOfInterest7domains10annotation12queryContext10completionSo15VIQueryHandling_pSo14VIImageContent_p_AA14NormalizedRectVShyAA0A6DomainVGSo12VIAnnotationCSgSo0pN0CSgys6ResultOyAA0afX0Vs5Error_pGctF', 
                        '_$s18VisualIntelligence0aB7ServiceC14serviceOptions13responseQueueA2C0E0V_So17OS_dispatch_queueCSgtcfC', 
-                       '_$s18VisualIntelligence0aB7ServiceC18submitUserFeedback5image7payload16reportIdentifier11environment9container10completionSo15VIQueryHandling_pSo14VIImageContent_p_10Foundation4DataVSSSo22CKContainerEnvironmentVSgSSSgys5Error_pSgctF', 
+                       '_$s18VisualIntelligence0aB7ServiceC18submitUserFeedback5image7request6report0I10Identifier11environment9container10completionSo15VIQueryHandling_pSo14VIImageContent_p_10Foundation4DataVSgAQSSSgSo22CKContainerEnvironmentVSgARys5Error_pSgctF', 
                        '_$s18VisualIntelligence0aB7ServiceC23feedbackTestContainerIdSSvgZ', 
                        '_$s18VisualIntelligence0aB7ServiceC25VIErrorUserFeedbackDomainSSvgZ', 
                        '_$s18VisualIntelligence0aB7ServiceC29feedbackProductionContainerIdSSvgZ', 

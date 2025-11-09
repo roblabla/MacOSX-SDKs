@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           89D5B896-C514-33DE-AAB3-FC7C01CF6E8A
+    value:           305E8397-9729-3021-BDA7-B0B46B24B189
   - target:          x86_64-maccatalyst
-    value:           89D5B896-C514-33DE-AAB3-FC7C01CF6E8A
+    value:           305E8397-9729-3021-BDA7-B0B46B24B189
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D693DE9B-0EFC-35DE-A698-628585217027
+    value:           233FE7EA-B278-352B-93C8-0656E8C5A9DC
   - target:          arm64e-maccatalyst
-    value:           D693DE9B-0EFC-35DE-A698-628585217027
+    value:           233FE7EA-B278-352B-93C8-0656E8C5A9DC
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Resources/libFontRegistryUI.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

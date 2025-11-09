@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D2F4DA85-A588-332F-9315-F0048C12798F
+    value:           6358A855-1EC4-327F-97FE-2EF2DEBD9DFA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F344664B-A659-3315-8DCD-9FC7278D2A96
+    value:           6AC498C8-A49E-36D1-8579-DA2A4BC86B41
 install-name:    '/usr/lib/libpcre.0.dylib'
 current-version: 1.1
 exports:

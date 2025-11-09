@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C0AE809C-3B35-3CB6-8A78-2BC302965732
+    value:           4FCF8F14-EBDE-3820-81BC-A56495E65CF1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C032B218-5908-3FC8-90E4-D329C42C1912
+    value:           298B894F-B9C1-30DB-A043-5619D577FD72
 install-name:    '/System/Library/PrivateFrameworks/SiriInferenceIntents.framework/Versions/A/SiriInferenceIntents'
 swift-abi-version: 7
 exports:

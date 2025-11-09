@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           14D231AD-D9A0-3F0F-A979-7B50535E2349
+    value:           86C391FA-55B5-334C-996F-96EAD49D3636
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F6B2A3A2-EF63-33BB-8E65-7CD83F2EAD18
+    value:           852152CB-E0AC-36F3-B3EF-C5BE5FBB65FA
 install-name:    '/System/Library/PrivateFrameworks/AppleCVA.framework/Versions/A/AppleCVA'
 current-version: 203.3.3
 compatibility-version: 203.3

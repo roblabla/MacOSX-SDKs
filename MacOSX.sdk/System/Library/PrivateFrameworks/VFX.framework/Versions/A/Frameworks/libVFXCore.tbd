@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0A575AE8-E0C1-3650-ACDE-98F573BF9DFA
+    value:           D2B7A430-F0C2-3AE1-A857-276D3027A7E7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           067E61DB-D3BF-3389-83CE-5B884AD8F812
+    value:           701B44AD-3F3B-3646-980E-2FCB9E712945
 install-name:    '/System/Library/PrivateFrameworks/VFX.framework/Versions/A/Frameworks/libVFXCore.dylib'
 swift-abi-version: 7
 exports:

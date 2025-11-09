@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           059F2EF9-82EC-36C6-BC73-AF140D84BB10
+    value:           FC7240A8-F6F8-3B53-8A64-9ADDE0FFAD67
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AA4220F7-9699-313E-A6EC-23B18CF8A698
+    value:           CE5C91BE-DB83-3384-958D-6ACEDCD435A4
 install-name:    '/System/Library/PrivateFrameworks/PrintingPrivate.framework/Versions/A/Plugins/PMBrowser.framework/Versions/A/PMBrowser'
 current-version: 0
 compatibility-version: 0

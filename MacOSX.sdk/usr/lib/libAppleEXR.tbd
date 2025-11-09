@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           54431EAF-B259-32E5-A42B-02730B2BA6EE
+    value:           B1542D34-DF3F-3BBB-8642-4593DECAF321
   - target:          x86_64-maccatalyst
-    value:           54431EAF-B259-32E5-A42B-02730B2BA6EE
+    value:           B1542D34-DF3F-3BBB-8642-4593DECAF321
   - target:          x86_64h-macos
-    value:           7AC5BCB7-9B13-3240-AE99-008538F6A7D9
+    value:           83E4626D-EFB5-3E22-82F4-45E3A49F08C9
   - target:          x86_64h-maccatalyst
-    value:           7AC5BCB7-9B13-3240-AE99-008538F6A7D9
+    value:           83E4626D-EFB5-3E22-82F4-45E3A49F08C9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D0AFB7AA-C6BC-3636-91D5-3F9FC5AFB481
+    value:           B8A36033-B217-3440-8236-0D920F277D82
   - target:          arm64e-maccatalyst
-    value:           D0AFB7AA-C6BC-3636-91D5-3F9FC5AFB481
+    value:           B8A36033-B217-3440-8236-0D920F277D82
 install-name:    '/usr/lib/libAppleEXR.dylib'
 current-version: 3.0.3
 exports:

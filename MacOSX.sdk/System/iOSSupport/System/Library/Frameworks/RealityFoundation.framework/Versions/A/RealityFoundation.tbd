@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           10118742-97E9-3F52-ADE9-3370002758EB
+    value:           98F1452A-7AA2-3F20-AE2F-D2E0F60106FF
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           C2852608-5258-3148-A056-97805F57F002
+    value:           44CCC0A0-1C9F-329F-9204-35F97A37C6A3
 install-name:    '/System/iOSSupport/System/Library/Frameworks/RealityFoundation.framework/Versions/A/RealityFoundation'
 current-version: 225.123
 swift-abi-version: 7

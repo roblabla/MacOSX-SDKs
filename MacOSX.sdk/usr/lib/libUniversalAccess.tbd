@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2053DC4A-5A62-3B0D-8A6B-CF23BC42FFF1
+    value:           0B38C05A-3361-38C2-A755-BA7B091A7774
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9E5976EC-DA52-3D72-B224-6518B41F05F5
+    value:           7696715F-DA74-372D-A910-4AE1016E5725
 install-name:    '/usr/lib/libUniversalAccess.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

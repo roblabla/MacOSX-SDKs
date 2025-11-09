@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           05C82C58-2AF0-34EB-BF90-400828A051C7
+    value:           437B0BD9-23BF-3635-9EF5-705772980D57
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           4C74D299-5085-34A5-B053-9003F0619274
+    value:           DC52ADD8-6248-3244-A23E-702D93F7F531
 install-name:    '/System/iOSSupport/System/Library/Frameworks/CoreAudioKit.framework/Versions/A/CoreAudioKit'
 swift-abi-version: 7
 exports:

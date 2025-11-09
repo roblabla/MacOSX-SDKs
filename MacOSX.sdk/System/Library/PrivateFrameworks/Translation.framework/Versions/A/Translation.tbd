@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C16C22D0-85FA-34BE-8AD2-3A935CC049D3
+    value:           64DBE260-4FD9-3DDF-9EA9-C65ED82A70DA
   - target:          x86_64-maccatalyst
-    value:           C16C22D0-85FA-34BE-8AD2-3A935CC049D3
+    value:           64DBE260-4FD9-3DDF-9EA9-C65ED82A70DA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1113C168-74CF-34E5-A5C1-E5E7EA404800
+    value:           D2766080-F5C1-32B7-8856-18CED3BE15C4
   - target:          arm64e-maccatalyst
-    value:           1113C168-74CF-34E5-A5C1-E5E7EA404800
+    value:           D2766080-F5C1-32B7-8856-18CED3BE15C4
 install-name:    '/System/Library/PrivateFrameworks/Translation.framework/Versions/A/Translation'
-current-version: 216.4
+current-version: 216.8
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -28,8 +28,8 @@ exports:
                        __LTTranslationErrorDomain, __LTTranslationModelTaskString, 
                        __LTTranslationServiceDelegateXPCInterface, __LTTranslationServiceXPCInterface, 
                        _kLTUnknownLanguageCode ]
-    objc-classes:    [ _LTASRStateEventLog, _LTAlignment, _LTBatchEventLog, _LTBatchTextTranslationRequest, 
-                       _LTCombinedEngine, _LTCombinedRouteParagraphTranslationRequest, 
+    objc-classes:    [ _LTASRStateEventLog, _LTActivityLogger, _LTAlignment, _LTBatchEventLog, 
+                       _LTBatchTextTranslationRequest, _LTCombinedEngine, _LTCombinedRouteParagraphTranslationRequest, 
                        _LTDaemon, _LTInstallRequest, _LTInvocationEventContext, _LTInvocationEventLog, 
                        _LTLanguageDetectionResult, _LTLanguageDetector, _LTLanguageDetectorFeatureCombinationModel, 
                        _LTLanguageInstallationStatus, _LTLanguageManager, _LTLanguagePairOfflineAvailability, 

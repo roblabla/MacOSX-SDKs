@@ -1,3 +1,4 @@
+#if !__has_include(<PassKitUI/PKPaymentButton.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKPaymentButton.h
 //  PassKit
@@ -38,4 +39,11 @@ API_AVAILABLE(macos(11.0), ios(8.3))
 @end
 
 NS_ASSUME_NONNULL_END
+#endif // __PKPAYMENTBUTTON_H
+
+#else
+#if !TARGET_OS_OSX 
+#import <TargetConditionals.h>
+#import <PassKitUI/PKPaymentButton.h>
+#endif
 #endif

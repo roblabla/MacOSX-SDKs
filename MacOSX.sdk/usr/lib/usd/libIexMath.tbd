@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CE84B415-2F60-3EE9-989B-C898A8BC0D55
+    value:           3D44D17A-F2B9-3BE9-8898-5C94BD568CDC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           263D4F56-FFFC-3B7A-8D88-4477B8BB8D82
+    value:           FEDEF14F-436D-34C4-BE6A-6F2060D37B5E
 install-name:    '/usr/lib/usd/libIexMath.dylib'
-current-version: 20.1.3
+current-version: 20.102.2
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos ]

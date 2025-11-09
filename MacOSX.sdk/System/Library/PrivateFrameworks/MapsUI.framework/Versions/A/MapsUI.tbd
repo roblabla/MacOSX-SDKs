@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           ACD1004F-E635-325A-B0DD-F6FFEAA81C10
+    value:           1B2C211E-BB83-3104-91DD-4436E18EF4FA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4660499D-7830-3F4D-A7A7-D4AF8E6B8BD2
+    value:           6D3B1C7A-F83C-3DD0-AD46-0C3305760637
 install-name:    '/System/Library/PrivateFrameworks/MapsUI.framework/Versions/A/MapsUI'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

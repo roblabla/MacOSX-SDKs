@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4F919E38-6B6A-3BCD-8931-66C4AC2F7CCF
+    value:           03F719E8-3BCF-30A8-B96E-84FC63FD2447
   - target:          x86_64-maccatalyst
-    value:           4F919E38-6B6A-3BCD-8931-66C4AC2F7CCF
+    value:           03F719E8-3BCF-30A8-B96E-84FC63FD2447
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C002E46F-2E6F-3314-BF80-05025FA4D108
+    value:           38DC0874-2094-3A93-B853-3AD6859A0833
   - target:          arm64e-maccatalyst
-    value:           C002E46F-2E6F-3314-BF80-05025FA4D108
+    value:           38DC0874-2094-3A93-B853-3AD6859A0833
 install-name:    '/System/Library/PrivateFrameworks/iWorkXPC.framework/Versions/A/iWorkXPC'
 current-version: 18
 exports:

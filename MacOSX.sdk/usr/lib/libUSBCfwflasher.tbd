@@ -5,7 +5,7 @@ uuids:
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           33C7CF5C-57FA-3522-BF8C-246C0F0149B0
+    value:           0257DF91-ED48-3609-A1DB-727FDA9DAE51
 install-name:    '/usr/lib/libUSBCfwflasher.dylib'
 exports:
   - targets:         [ arm64-macos, arm64e-macos ]

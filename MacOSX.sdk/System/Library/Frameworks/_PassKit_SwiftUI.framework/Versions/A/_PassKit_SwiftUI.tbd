@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BEEA23D4-8792-3671-8736-9CCAB6057894
+    value:           407911D7-2D7E-3521-B79D-2A1AEC11C283
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           90E63E08-4584-34CB-B89B-5FE34E62C6B3
+    value:           FC6B7E62-1B8E-3816-A3D8-C1E6620FEAC6
 install-name:    '/System/Library/Frameworks/_PassKit_SwiftUI.framework/Versions/A/_PassKit_SwiftUI'
 swift-abi-version: 7
 exports:

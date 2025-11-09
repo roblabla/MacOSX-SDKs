@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           135910D3-A5D1-3FBF-AB1D-26D25300BDDE
+    value:           94D8DE01-AA2E-3F00-B806-0F806BCE7A71
   - target:          x86_64-maccatalyst
-    value:           135910D3-A5D1-3FBF-AB1D-26D25300BDDE
+    value:           94D8DE01-AA2E-3F00-B806-0F806BCE7A71
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9EDDDBD6-CCB5-3E64-B1D6-F354EB0B9DB1
+    value:           F2FAA9E5-C09D-39D3-8A55-797A78F380AB
   - target:          arm64e-maccatalyst
-    value:           9EDDDBD6-CCB5-3E64-B1D6-F354EB0B9DB1
+    value:           F2FAA9E5-C09D-39D3-8A55-797A78F380AB
 install-name:    '/usr/lib/swift/libswiftos.dylib'
 current-version: 1034
 swift-abi-version: 7

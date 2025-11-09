@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F07A972E-E205-3354-B55C-EE07327F94E6
+    value:           7E6EDB39-09F9-391B-B508-A330F9C9E01D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F0E7171F-4BDA-3804-9F8F-E859B35C00A9
+    value:           8B1BCD81-FF16-3E43-A294-DEB0C657BE51
 install-name:    '/System/Library/PrivateFrameworks/WebBookmarks.framework/Versions/A/WebBookmarks'
-current-version: 614.2.9
+current-version: 614.3.7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _BookmarksBarSpecialID, _BookmarksFrequentlyVisitedSitesSpecialID, 
@@ -79,8 +79,9 @@ exports:
                        WebBookmarkSafariAutomationTabCollection, WebBookmarkSafariTechnologyPreviewTabCollection, 
                        WebBookmarkSecondaryCollection, WebBookmarkTabCollection, 
                        WebBookmarksSettingsGateway, WebBookmarksXPCConnection, WebBookmarksXPCListener ]
-    objc-ivars:      [ WBTab._added, WBTab._bookmark, WBTab._modified, WBTab._moved, 
-                       WBTab._tabGroup, WBTabGroup._bookmark, WBTabGroup._deletedTabs, 
+    objc-ivars:      [ WBTab._added, WBTab._bookmark, WBTab._local, WBTab._modified, 
+                       WBTab._moved, WBTab._privateBrowsing, WBTab._shared, WBTab._tabGroupUUID, 
+                       WBTabGroup._bookmark, WBTabGroup._cachedImmutableTabs, WBTabGroup._deletedTabs, 
                        WBTabGroup._displayTitleProvider, WBTabGroup._kind, WBTabGroup._lastSelectedTabUUID, 
-                       WBTabGroup._overflowRemoteTabs, WBTabGroup._tabs ]
+                       WBTabGroup._overflowRemoteTabs, WBTabGroup._tabs, WBTabGroup._tabsByUUID ]
 ...

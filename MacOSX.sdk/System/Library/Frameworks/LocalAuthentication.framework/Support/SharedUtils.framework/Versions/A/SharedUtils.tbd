@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           945DD3F9-40F6-31D1-B966-B9C12CEEE7B0
+    value:           FD0142CD-8A9C-31D1-8F39-CA94C30E2E0A
   - target:          x86_64-maccatalyst
-    value:           945DD3F9-40F6-31D1-B966-B9C12CEEE7B0
+    value:           FD0142CD-8A9C-31D1-8F39-CA94C30E2E0A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8F635B85-243E-3999-9B46-E4F9444A4F26
+    value:           1C712F17-50DA-3731-8AB0-E86CE9C3C9B9
   - target:          arm64e-maccatalyst
-    value:           8F635B85-243E-3999-9B46-E4F9444A4F26
+    value:           1C712F17-50DA-3731-8AB0-E86CE9C3C9B9
 install-name:    '/System/Library/Frameworks/LocalAuthentication.framework/Support/SharedUtils.framework/Versions/A/SharedUtils'
-current-version: 1131.40.25
+current-version: 1131.60.22
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -53,8 +53,8 @@ exports:
                        _GetSerializedVerifyAclConstraintSize, _GetSerializedVerifyPolicySize, 
                        _LAAssertionsProxyFactory, _LAErrorDomain, _LAErrorSubcodeKey, 
                        _LALogCategoryForOptions, _LALogCategoryForPolicy, _LALogForCategory, 
-                       _LALogForPolicy, _LALogSetProcessCategory, _LASerialScheduler, 
-                       _LAStorageErrorDomain, _LibCall_ACMContexAddCredentialWithScope, 
+                       _LALogForPolicy, _LALogSetProcessCategory, _LALogTypeForInternalError, 
+                       _LASerialScheduler, _LAStorageErrorDomain, _LibCall_ACMContexAddCredentialWithScope, 
                        _LibCall_ACMContexRemoveCredentialsByTypeAndScope, _LibCall_ACMContextCreate, 
                        _LibCall_ACMContextCreateWithExternalForm, _LibCall_ACMContextCredentialGetProperty, 
                        _LibCall_ACMContextDelete, _LibCall_ACMContextGetData, _LibCall_ACMContextGetInfo, 

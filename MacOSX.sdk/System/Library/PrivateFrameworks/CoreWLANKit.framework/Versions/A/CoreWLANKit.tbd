@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A20CE405-711F-33AB-ACEB-6C42352CD00F
+    value:           608EF007-D6CE-3BF5-8FD3-810F7A03004C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3D6E5E41-B20B-3C69-AFE3-303806273211
+    value:           65DCAE5A-CE8C-34AD-83FF-326F62EDD6A7
 install-name:    '/System/Library/PrivateFrameworks/CoreWLANKit.framework/Versions/A/CoreWLANKit'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -107,9 +107,9 @@ exports:
                        CWErrorDialog._scanResult, CWErrorDialog._title, CWHostAPDialog_SL._authorization, 
                        CWHostAPDialog_SL._caps, CWHostAPDialog_SL._showingManual, 
                        CWHostAPDialog_SL._showingOpen, CWHostAPDialog_SL._showingPassword, 
-                       CWHostAPDialog_SL.cachedPassword_, CWHostAPDialog_SL.cancelButton, 
-                       CWHostAPDialog_SL.channelSelectorPopupButton, CWHostAPDialog_SL.channelSelectorView, 
-                       CWHostAPDialog_SL.delegate_, CWHostAPDialog_SL.gridView, CWHostAPDialog_SL.helpButton, 
+                       CWHostAPDialog_SL.cancelButton, CWHostAPDialog_SL.channelSelectorPopupButton, 
+                       CWHostAPDialog_SL.channelSelectorView, CWHostAPDialog_SL.delegate_, 
+                       CWHostAPDialog_SL.gridView, CWHostAPDialog_SL.helpButton, 
                        CWHostAPDialog_SL.imageView, CWHostAPDialog_SL.interface_, 
                        CWHostAPDialog_SL.networkNameField, CWHostAPDialog_SL.networkNameView, 
                        CWHostAPDialog_SL.okButton, CWHostAPDialog_SL.okButtonBottomConstrain, 

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           947FDEF4-3909-31AA-84C7-75707A5DD467
+    value:           992D421D-6AC2-3DCC-942E-C8CFF30CC2E9
   - target:          x86_64-maccatalyst
-    value:           947FDEF4-3909-31AA-84C7-75707A5DD467
+    value:           992D421D-6AC2-3DCC-942E-C8CFF30CC2E9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4341D470-B21E-3617-BEE4-DA718CCB5626
+    value:           FD49BD98-6F78-3D81-8A7D-AF6C66480A3C
   - target:          arm64e-maccatalyst
-    value:           4341D470-B21E-3617-BEE4-DA718CCB5626
+    value:           FD49BD98-6F78-3D81-8A7D-AF6C66480A3C
 install-name:    '/System/Library/PrivateFrameworks/HumanUnderstandingFoundation.framework/Versions/A/HumanUnderstandingFoundation'
-current-version: 28.6
+current-version: 28.13
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

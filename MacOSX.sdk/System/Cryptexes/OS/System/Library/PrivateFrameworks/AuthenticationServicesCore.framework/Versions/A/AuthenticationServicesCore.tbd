@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           29E0AD8B-354E-3F96-8724-6A1F3AA70F11
+    value:           25F3CB4E-6421-37AF-A3DA-B35E5CB7E4C1
   - target:          x86_64-maccatalyst
-    value:           29E0AD8B-354E-3F96-8724-6A1F3AA70F11
+    value:           25F3CB4E-6421-37AF-A3DA-B35E5CB7E4C1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F1217D5A-F5A7-3669-8048-97924ECBE107
+    value:           F475ABA3-425C-392E-86C2-956EB61F3FEE
   - target:          arm64e-maccatalyst
-    value:           F1217D5A-F5A7-3669-8048-97924ECBE107
+    value:           F475ABA3-425C-392E-86C2-956EB61F3FEE
 install-name:    '/System/Library/PrivateFrameworks/AuthenticationServicesCore.framework/Versions/A/AuthenticationServicesCore'
-current-version: 614.2.9
+current-version: 614.3.7
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D29DC28A-2174-36E4-B2F9-796442B6CFE3
+    value:           C92CE82C-D779-3468-83CC-2C40C7082B8C
   - target:          x86_64-maccatalyst
-    value:           D29DC28A-2174-36E4-B2F9-796442B6CFE3
+    value:           C92CE82C-D779-3468-83CC-2C40C7082B8C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EE058205-BFF1-3D1C-A8CA-128567A5C9DF
+    value:           D5A8FF40-F488-3E32-BD2E-37B488B878F1
   - target:          arm64e-maccatalyst
-    value:           EE058205-BFF1-3D1C-A8CA-128567A5C9DF
+    value:           D5A8FF40-F488-3E32-BD2E-37B488B878F1
 install-name:    '/System/Library/PrivateFrameworks/SafariCore.framework/Versions/A/SafariCore'
-current-version: 614.2.9
+current-version: 614.3.7
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -122,9 +122,9 @@ exports:
                        _WBSStringFromCloudBookmarksErrorCode, _WBSStringFromCloudBookmarksSyncResult, 
                        _WBSStringFromCloudTabsErrorCode, _WBSSuppressCloudKitBookmarkMigrationForCyclerTestPreferenceKey, 
                        _WBSTabGroupUUIDForCurrentFocusModeKey, _WBSTeamIdentifierFromAuditToken, 
-                       _WBSUnlocalizedStringFromPasswordBreachCheckResult, __WBSLocalizedString, 
-                       __WBSLocalizedStringWithCurrentUserLocale, __WBSRunOnceImpl, 
-                       __ZN12SafariShared25SuddenTerminationDisabler23enableSuddenTerminationEv, 
+                       _WBSTimeUntilNextWeeklyAnalyticsReportForKey, _WBSUnlocalizedStringFromPasswordBreachCheckResult, 
+                       __WBSLocalizedString, __WBSLocalizedStringWithCurrentUserLocale, 
+                       __WBSRunOnceImpl, __ZN12SafariShared25SuddenTerminationDisabler23enableSuddenTerminationEv, 
                        __ZN12SafariShared25SuddenTerminationDisabler24disableSuddenTerminationEv, 
                        __ZN12SafariShared25SuddenTerminationDisablerC1EP8NSString, 
                        __ZN12SafariShared25SuddenTerminationDisablerC2EP8NSString, 

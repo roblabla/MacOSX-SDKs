@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DED90056-1EA9-39E8-A3F7-5742B0DD75E7
+    value:           D94728F3-714E-33E8-94CB-32C963EBDF4F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5D7E446C-F6E2-3F25-A36C-10A142BCF883
+    value:           7A581FBE-877D-38C2-86BC-33E153488DD3
 install-name:    '/System/Library/PrivateFrameworks/OnBoardingKit.framework/Versions/A/OnBoardingKit'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -51,10 +51,10 @@ exports:
     objc-classes:    [ OBAnalyticsManager, OBAnimationController, OBAnimationState, 
                        OBAnimationView, OBBundle, OBBundleManager, OBCapabilities, 
                        OBFlow, OBPrivacyBundleProvider, OBPrivacyCombinedController, 
-                       OBPrivacyCombinedController_macOS, OBPrivacyFlow, OBPrivacyLinkController, 
-                       OBPrivacyLinkController_macOS, OBPrivacyPresenter, OBPrivacySplashController, 
-                       OBSplashBullet, OBSplashContent, OBTemplateContainerViewController, 
-                       OBTemplatePartBulletExpandableListItem, OBTemplatePartBulletList, 
-                       OBTemplatePartBulletListItem, OBTemplatePartDisclosingListView, 
+                       OBPrivacyCombinedController_macOS, OBPrivacyFlow, OBPrivacyFlowGroup, 
+                       OBPrivacyLinkController, OBPrivacyLinkController_macOS, OBPrivacyPresenter, 
+                       OBPrivacySplashController, OBSplashBullet, OBSplashContent, 
+                       OBTemplateContainerViewController, OBTemplatePartBulletExpandableListItem, 
+                       OBTemplatePartBulletList, OBTemplatePartBulletListItem, OBTemplatePartDisclosingListView, 
                        OBTemplatePartLinkButton, OBTemplateUIUtilities, OBTemplateView ]
 ...

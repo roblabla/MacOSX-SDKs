@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           AB72B31C-320D-353C-B333-94C6D58F2CF4
+    value:           20F6EECE-94BA-3826-A1D4-72E763655634
   - target:          x86_64-maccatalyst
-    value:           AB72B31C-320D-353C-B333-94C6D58F2CF4
+    value:           20F6EECE-94BA-3826-A1D4-72E763655634
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B14D8DDC-73CD-3502-A12C-4D68CF6723B1
+    value:           E47FF3E9-DEF3-3203-966F-55912334E031
   - target:          arm64e-maccatalyst
-    value:           B14D8DDC-73CD-3502-A12C-4D68CF6723B1
+    value:           E47FF3E9-DEF3-3203-966F-55912334E031
 install-name:    '/System/Library/PrivateFrameworks/MetadataUtilities.framework/Versions/A/MetadataUtilities'
-current-version: 2230.2
+current-version: 2230.7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -116,9 +116,10 @@ exports:
                        _icu_search_context_create_raw, _icu_search_context_create_with_wildcard_limit, 
                        _icu_search_context_dump, _icu_search_context_fuzzy_match_state, 
                        _icu_search_context_get_pattern, _icu_search_context_is_fuzzy, 
-                       _icu_search_context_item_get_info, _icu_search_context_item_get_item_count, 
-                       _icu_search_match, _icu_term_key_starts, _icu_word_matcher_count, 
-                       _icu_word_matcher_create, _icu_word_matcher_matches, _icu_word_matcher_matches_string, 
+                       _icu_search_context_is_prefix, _icu_search_context_item_get_info, 
+                       _icu_search_context_item_get_item_count, _icu_search_match, 
+                       _icu_term_key_starts, _icu_word_matcher_count, _icu_word_matcher_create, 
+                       _icu_word_matcher_matches, _icu_word_matcher_matches_string, 
                        _resolve_transcriptions_for_locale, _strFromUTF32, _strFromUTF8, 
                        _strToUTF8 ]
     objc-classes:    [ MDPathFilter, MDPathFilterGenerator, _MDMutablePlistBytes, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EC398BC9-74A0-36C8-AB5C-5F869D42D128
+    value:           B25A6969-E026-3DA2-A41B-8232D1FE39CC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           52935CA5-8F81-3E60-B643-876E2430EC4F
+    value:           294EFA4D-6186-36FB-A44C-AB1646C9611E
 install-name:    '/System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/Frameworks/AccessibilityFoundation.framework/Versions/A/AccessibilityFoundation'
 current-version: 2
 compatibility-version: 0
@@ -31,7 +31,7 @@ exports:
                        _AXFElementBusyChangedNotification, _AXFElementTransportKey, 
                        _AXFFeatureIsVoiceOverBooksExperienceV2Enabled, _AXFFilter, 
                        _AXFFlatMap, _AXFFocusedUIElementChangedNotification, _AXFFocusedWindowChangedNotification, 
-                       _AXFGZIPData, _AXFGeometryAngleFromXAxisToSegmentConnectingPoints, 
+                       _AXFFormattedString, _AXFGZIPData, _AXFGeometryAngleFromXAxisToSegmentConnectingPoints, 
                        _AXFGeometryCenterOfRect, _AXFGeometryCentroidOfPoints, _AXFGeometryClosestRectToPointInRects, 
                        _AXFGeometryClosestRectToRectInRects, _AXFGeometryDenormalizePointRelativeToRect, 
                        _AXFGeometryDistanceBetweenPoints, _AXFGeometryDistanceBetweenRectAndPoint, 

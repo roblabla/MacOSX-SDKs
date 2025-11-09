@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           99AF3F70-9F79-31DA-A8B9-59073E75DC72
+    value:           8134EF4F-175F-35A9-A65B-2AE517779744
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D96D283A-CF41-38ED-9D20-887D34167384
+    value:           EF160A67-66D8-38A7-9258-E1EE3F749CAC
 install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/A/Libraries/libComposeFilters.dylib'
 current-version: 0
 exports:

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0FCFF5BC-C102-3F93-B510-1A197945485E
+    value:           D4F26CC7-A96C-3A83-AD08-B3EC9A62DDA8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7DF68BB6-26DF-3707-9C61-9898E5062A30
+    value:           69FD5FCF-2A34-3CAE-BCC5-70C616236698
 install-name:    '/usr/lib/libXARSigner.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

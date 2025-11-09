@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0FA96DA6-CE13-3723-8C8A-ED84B01A7178
+    value:           511613D3-B292-341B-9C1E-275C1F744A5D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EB6D8AFC-B053-39AE-99C5-CC1B029E3D87
+    value:           2D3A0644-1C5E-3F92-BF55-C08C61A56115
 install-name:    '/usr/lib/usd/libImath.dylib'
-current-version: 20.1.3
+current-version: 20.102.2
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos ]

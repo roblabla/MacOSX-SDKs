@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           355DD7C6-9217-32F2-89DE-BAD147FFB623
+    value:           0DD8FD8D-9A38-322F-B083-5C50CF552BF3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           82D710B0-6855-3DC5-8C70-75E50655D6C7
+    value:           33D30053-342A-3ABF-8791-16F7966E35BC
 install-name:    '/System/Library/PrivateFrameworks/SiriPlaybackControlSupport.framework/Versions/A/SiriPlaybackControlSupport'
 swift-abi-version: 7
 allowable-clients:

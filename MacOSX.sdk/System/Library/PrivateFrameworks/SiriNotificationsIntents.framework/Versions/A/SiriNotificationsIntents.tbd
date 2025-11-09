@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B8C12629-3AAC-3880-9D3A-F4B3ACB74D2C
+    value:           958263A1-389E-3DC3-A05C-1FB5CBE27C45
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FFD2E9AC-3A6B-3AB0-8777-48F896848FF3
+    value:           6000793F-7702-32EC-939A-16125B819DF2
 install-name:    '/System/Library/PrivateFrameworks/SiriNotificationsIntents.framework/Versions/A/SiriNotificationsIntents'
 swift-abi-version: 7
 exports:
@@ -47,6 +47,9 @@ exports:
                        '_$s24SiriNotificationsIntents12RNPromptFlowCfD', '_$s24SiriNotificationsIntents12RNPromptFlowCfd', 
                        '_$s24SiriNotificationsIntents13SharedObjectsVMa', '_$s24SiriNotificationsIntents13SharedObjectsVMn', 
                        '_$s24SiriNotificationsIntents13SharedObjectsVN', '_$s24SiriNotificationsIntents14ANFollowupFlowC0a3KitE00E0AAMc', 
+                       '_$s24SiriNotificationsIntents14ANFollowupFlowC12featureFlagsAcA0b7FeatureG0C_tcfC', 
+                       '_$s24SiriNotificationsIntents14ANFollowupFlowC12featureFlagsAcA0b7FeatureG0C_tcfCTq', 
+                       '_$s24SiriNotificationsIntents14ANFollowupFlowC12featureFlagsAcA0b7FeatureG0C_tcfc', 
                        '_$s24SiriNotificationsIntents14ANFollowupFlowC2on5inputSb0a3KitE05InputV_tF', 
                        '_$s24SiriNotificationsIntents14ANFollowupFlowC2on5inputSb0a3KitE05InputV_tFTq', 
                        '_$s24SiriNotificationsIntents14ANFollowupFlowC5input33_52267F0459B75EC1BF1E5A091D3CC8C7LL0a3KitE05InputVSgvpfi', 
@@ -58,11 +61,10 @@ exports:
                        '_$s24SiriNotificationsIntents14ANFollowupFlowC9exitValueAA0D17RequestedBehaviorOvg', 
                        '_$s24SiriNotificationsIntents14ANFollowupFlowC9exitValueAA0D17RequestedBehaviorOvgTq', 
                        '_$s24SiriNotificationsIntents14ANFollowupFlowC9exitValueAA0D17RequestedBehaviorOvpMV', 
-                       '_$s24SiriNotificationsIntents14ANFollowupFlowCACycfC', '_$s24SiriNotificationsIntents14ANFollowupFlowCACycfCTq', 
-                       '_$s24SiriNotificationsIntents14ANFollowupFlowCACycfc', '_$s24SiriNotificationsIntents14ANFollowupFlowCMa', 
-                       '_$s24SiriNotificationsIntents14ANFollowupFlowCMm', '_$s24SiriNotificationsIntents14ANFollowupFlowCMn', 
-                       '_$s24SiriNotificationsIntents14ANFollowupFlowCN', '_$s24SiriNotificationsIntents14ANFollowupFlowCfD', 
-                       '_$s24SiriNotificationsIntents14ANFollowupFlowCfd', '_$s24SiriNotificationsIntents14ANStateManagerC18extendedBurstIndex33_A12D203EDB475A2E9C6F775E000EDBC9LLSivpfi', 
+                       '_$s24SiriNotificationsIntents14ANFollowupFlowCMa', '_$s24SiriNotificationsIntents14ANFollowupFlowCMm', 
+                       '_$s24SiriNotificationsIntents14ANFollowupFlowCMn', '_$s24SiriNotificationsIntents14ANFollowupFlowCN', 
+                       '_$s24SiriNotificationsIntents14ANFollowupFlowCfD', '_$s24SiriNotificationsIntents14ANFollowupFlowCfd', 
+                       '_$s24SiriNotificationsIntents14ANStateManagerC18extendedBurstIndex33_A12D203EDB475A2E9C6F775E000EDBC9LLSivpfi', 
                        '_$s24SiriNotificationsIntents14ANStateManagerCMa', '_$s24SiriNotificationsIntents14ANStateManagerCMm', 
                        '_$s24SiriNotificationsIntents14ANStateManagerCMn', '_$s24SiriNotificationsIntents14ANStateManagerCN', 
                        '_$s24SiriNotificationsIntents14ANStateManagerCfD', '_$s24SiriNotificationsIntents14ANStateManagerCfd', 

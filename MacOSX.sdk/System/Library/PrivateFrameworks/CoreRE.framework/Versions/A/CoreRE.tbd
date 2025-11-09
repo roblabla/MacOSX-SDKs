@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CD042DB4-FF4E-37A1-9952-7077BDED0B0E
+    value:           0FD51C02-02B6-3574-9D8E-0B69033FE8B9
   - target:          x86_64-maccatalyst
-    value:           CD042DB4-FF4E-37A1-9952-7077BDED0B0E
+    value:           0FD51C02-02B6-3574-9D8E-0B69033FE8B9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           29767F5C-AB69-3C4C-8ABC-231E09D0B2AE
+    value:           FBA4EC9B-ADFD-30FE-B402-4786FE7ED18A
   - target:          arm64e-maccatalyst
-    value:           29767F5C-AB69-3C4C-8ABC-231E09D0B2AE
+    value:           FBA4EC9B-ADFD-30FE-B402-4786FE7ED18A
 install-name:    '/System/Library/PrivateFrameworks/CoreRE.framework/Versions/A/CoreRE'
 current-version: 225.123
 exports:

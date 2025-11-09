@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CE40D0B6-12D4-32CB-A540-15C56EB79CCA
+    value:           A44F287E-2D9A-320D-AABA-32DBB08C5E80
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           50BFE7F4-1FBC-3918-945B-F976403B7CE7
+    value:           61E033C0-0DBC-3FD0-885B-A54B5EB6A8AD
 install-name:    '/usr/lib/swift/libswiftPhotosUI.dylib'
-current-version: 511.0.170
+current-version: 520.0.240
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -92,7 +92,6 @@ exports:
                        '_$s8PhotosUI21PHPickerConfigurationV6filterAA0C6FilterVSgvs', 
                        '_$s8PhotosUI21PHPickerConfigurationV9SelectionO2eeoiySbAE_AEtFZ', 
                        '_$s8PhotosUI21PHPickerConfigurationV9SelectionO4hash4intoys6HasherVz_tF', 
-                       '_$s8PhotosUI21PHPickerConfigurationV9SelectionO6peopleyA2EmFWC', 
                        '_$s8PhotosUI21PHPickerConfigurationV9SelectionO7defaultyA2EmFWC', 
                        '_$s8PhotosUI21PHPickerConfigurationV9SelectionO7orderedyA2EmFWC', 
                        '_$s8PhotosUI21PHPickerConfigurationV9SelectionO9hashValueSivg', 

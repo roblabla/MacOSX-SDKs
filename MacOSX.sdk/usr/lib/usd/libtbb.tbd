@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3B33E909-3DBE-38B5-B1D7-25900F3BDF1A
+    value:           A09357C2-7750-3A37-BCC1-13ACCA0F3232
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CD922C37-CFDE-394D-9B3B-7A53B09E32A1
+    value:           86B552E0-BC82-3072-BEAA-974C33D355A7
 install-name:    '/usr/lib/usd/libtbb.dylib'
-current-version: 20.1.3
+current-version: 20.102.2
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos ]

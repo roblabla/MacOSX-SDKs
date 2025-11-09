@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           F24350D6-EAFA-39B0-A439-C78E21E4B3ED
+    value:           8D192756-A0D7-3F7B-AB31-1D306D5C2FB1
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           D20ABF87-ABE2-3DC0-92D7-D41EF9F83911
+    value:           B84F7CE3-2898-373E-B341-62CB2D96BD68
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_AppIntents_UIKit.framework/Versions/A/_AppIntents_UIKit'
-current-version: 130.5
+current-version: 130.100.5
 compatibility-version: 0
 swift-abi-version: 7
 exports:

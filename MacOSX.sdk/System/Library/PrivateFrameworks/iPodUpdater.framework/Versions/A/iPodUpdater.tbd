@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           43340BE8-A88F-33BD-99F7-A6FFECDF2E0B
+    value:           B53B54EC-D1A9-34F2-B444-492C5B70A5F4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           91CB2BC0-237A-30DB-AADF-2431B438F900
+    value:           BC8690BC-2A3E-3872-8445-7595DF146EC1
 install-name:    '/System/Library/PrivateFrameworks/iPodUpdater.framework/Versions/A/iPodUpdater'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

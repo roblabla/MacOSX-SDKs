@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           660F8B73-0CFE-3009-BEE9-1C3F05EC2C48
+    value:           3AC50347-428A-31F1-8D89-C66B616197F8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1248DBA0-B3F2-3639-B3AC-B18EC01AD299
+    value:           D135126F-FF6E-386B-9D15-47B2CD9FC3C2
 install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/31001/Libraries/libLLVM.dylib'
-current-version: 31001.255.6
+current-version: 31001.255.2
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _BlockExtractorEraseFuncs, _EnableHotColdSplit, _FSEC, _ForceSummaryEdgesCold, 
@@ -4394,7 +4394,8 @@ exports:
                        __ZN4llvm3AGX14CompileRequestC2ERNS_6ModuleENS0_14CodeGenOptionsENSt3__112basic_stringIcNS5_11char_traitsIcEENS5_9allocatorIcEEEEiPNS0_18TelemetryCollectorE, 
                        __ZN4llvm3AGX14CompileRequestD1Ev, __ZN4llvm3AGX14CompileRequestD2Ev, 
                        __ZN4llvm3AGX14CompileRequestaSEOS1_, __ZN4llvm3AGX14TargetResolver13getTargetInfoERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
-                       __ZN4llvm3AGX14TargetResolver13getTargetListEv, __ZN4llvm3AGX15AGXAssemblePlan22initializeAsmInjectionERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
+                       __ZN4llvm3AGX14TargetResolver13getTargetListEv, __ZN4llvm3AGX14TargetResolver14supportsTargetERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
+                       __ZN4llvm3AGX15AGXAssemblePlan22initializeAsmInjectionERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
                        __ZN4llvm3AGX15AGXAssemblePlan7executeERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEERNS_11raw_ostreamE, 
                        __ZN4llvm3AGX15AGXAssemblePlan7executeERNS0_14CompileRequestERNS0_12CompileReplyE, 
                        __ZN4llvm3AGX15AGXAssemblePlanC1EOS1_, __ZN4llvm3AGX15AGXAssemblePlanC1ERNS_13TargetMachineERNS0_17DiagnosticManagerE, 
@@ -7507,6 +7508,7 @@ exports:
                        __ZNK4llvm6object17ImportedSymbolRefeqERKS1_, __ZNK4llvm6object18GenericBinaryError3logERNS_11raw_ostreamE, 
                        __ZNK4llvm6object18MetalLibObjectFile10symbol_endEv, __ZNK4llvm6object18MetalLibObjectFile11getFeaturesEv, 
                        __ZNK4llvm6object18MetalLibObjectFile11reflectionsEv, __ZNK4llvm6object18MetalLibObjectFile11section_endEv, 
+                       __ZNK4llvm6object18MetalLibObjectFile12hashOfModuleENSt3__111__wrap_iterIPKNS2_10unique_ptrINS_8metallib14MetalLibModuleENS2_14default_deleteIS6_EEEEEE, 
                        __ZNK4llvm6object18MetalLibObjectFile12isSectionBSSENS0_11DataRefImplE, 
                        __ZNK4llvm6object18MetalLibObjectFile12symbol_beginEv, __ZNK4llvm6object18MetalLibObjectFile13getArchTripleEv, 
                        __ZNK4llvm6object18MetalLibObjectFile13getSymbolHashENS0_11DataRefImplE, 

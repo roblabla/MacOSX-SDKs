@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6367AF0C-DE7E-3036-B273-E7A66B88F353
+    value:           FE0B302D-B15D-3DD2-B1EC-6D3B085D2377
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A806DC70-E6ED-3338-B745-061276F733C0
+    value:           EBE675F8-60EF-369C-AC66-BEFBEB6EDA4F
 install-name:    '/System/Library/PrivateFrameworks/RemotePairingDevice.framework/Versions/A/RemotePairingDevice'
 current-version: 58.2
 swift-abi-version: 7

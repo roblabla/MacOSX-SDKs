@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           34B4AF57-497C-3582-B812-A460A570888F
+    value:           AF021580-BCD8-3DF9-9444-B385DAD9C524
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           44B30475-96BD-3B71-86C6-B67A3F352864
+    value:           E3103D9A-387F-3B3B-8E58-6E5A6E08E5E4
 install-name:    '/System/iOSSupport/System/Library/Frameworks/GameKit.framework/Versions/A/GameKit'
-current-version: 816.1.16
+current-version: 816.2.21
 reexported-libraries:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/Frameworks/ModelIO.framework/Versions/A/ModelIO', 
@@ -28,17 +28,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9AFF785C-168F-35B6-B8A8-16CF74A0DEE1
+    value:           8F71F945-D6AA-3EA3-8045-EE3DE08E20F3
   - target:          x86_64-maccatalyst
-    value:           9AFF785C-168F-35B6-B8A8-16CF74A0DEE1
+    value:           8F71F945-D6AA-3EA3-8045-EE3DE08E20F3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F8B18431-DE3A-33AA-B17D-8D4A4A52373F
+    value:           C7BFF0D4-1A93-35FF-A3E5-580A61D9BDD1
   - target:          arm64e-maccatalyst
-    value:           F8B18431-DE3A-33AA-B17D-8D4A4A52373F
+    value:           C7BFF0D4-1A93-35FF-A3E5-580A61D9BDD1
 install-name:    '/System/Library/PrivateFrameworks/GameCenterFoundation.framework/Versions/A/GameCenterFoundation'
 swift-abi-version: 7
 exports:
@@ -51,9 +51,17 @@ exports:
                        _GKAccountHasPrivacySettingsKey, _GKAccountIsDefaultNicknameKey, 
                        _GKAccountNameKey, _GKAccountPrivacyNoticeVersionKey, _GKAccountPropertyContactsLastUpdated, 
                        _GKAccountsDaemonIdentifier, _GKAchievementsThrottleThreshold, 
-                       _GKActiveLogBits, _GKAddFriendFromFriendList, _GKAddFriendFromLeaderboard, 
-                       _GKAddFriendFromSettings, _GKAliasKey, _GKAnonymousGuestPlayerIDSeparator, 
-                       _GKAnonymousPlayerID, _GKAppDataKey, _GKAppLaunchTime, _GKAppStoreArcadeOfferIdentifier, 
+                       _GKActiveLogBits, _GKActivityFeedMarkdownURLFormulationPathComponentAchievement, 
+                       _GKActivityFeedMarkdownURLFormulationPathComponentDashboard, 
+                       _GKActivityFeedMarkdownURLFormulationPathComponentGame, _GKActivityFeedMarkdownURLFormulationPathComponentLeaderboard, 
+                       _GKActivityFeedMarkdownURLFormulationPathComponentPlayer, 
+                       _GKActivityFeedMarkdownURLFormulationQueryActivityId, _GKActivityFeedMarkdownURLFormulationQueryActivityType, 
+                       _GKActivityFeedMarkdownURLFormulationQueryAdamId, _GKActivityFeedMarkdownURLFormulationQueryBundleId, 
+                       _GKActivityFeedMarkdownURLFormulationQueryIds, _GKActivityFeedMarkdownURLFormulationQueryName, 
+                       _GKActivityFeedMarkdownURLFormulationQueryPlayerId, _GKActivityFeedMarkdownURLFormulationQueryWidgetFamily, 
+                       _GKAddFriendFromFriendList, _GKAddFriendFromLeaderboard, _GKAddFriendFromSettings, 
+                       _GKAliasKey, _GKAnonymousGuestPlayerIDSeparator, _GKAnonymousPlayerID, 
+                       _GKAppDataKey, _GKAppLaunchTime, _GKAppStoreArcadeOfferIdentifier, 
                        _GKAppStoreBinaryIdentifier, _GKAppStoreGameUISample, _GKAppStoreIdentifier, 
                        _GKAppStoreKitIdentifier, _GKAppStoreProductPageExtensionIdentifier, 
                        _GKAppStoreSuscribePageExtensionIdentifier, _GKAppStoreWidgetIdentifier, 
@@ -72,6 +80,7 @@ exports:
                        _GKBagKeyGetFindFriendsMetadata, _GKBagKeyGetFriendIDs, _GKBagKeyGetGamesPlayed, 
                        _GKBagKeyGetLeaderboard, _GKBagKeyGetPerGameFriendPlayerIDs, 
                        _GKBagKeyGetPerGameSettings, _GKBagKeySetPerGameSettings, 
+                       _GKBagKeyWidgetDrawerActivityLivePreview, _GKBagKeyWidgetDrawerActivityTTL, 
                        _GKBlacklistedContactIdKey, _GKBlacklistedGroupIdKey, _GKBundleIDKey, 
                        _GKBundleShortVersionKey, _GKBundleVersionKey, _GKCDXKey, 
                        _GKCacheInvialidationKey, _GKCacheInvialidationStoreBagKey, 
@@ -167,9 +176,9 @@ exports:
                        _GKGetSystemLocalizedStringFromTableInBundle, _GKGlobalFriendListAccessAllowed, 
                        _GKGlobalFriendListAccessDenied, _GKGlobalFriendListAccessKey, 
                        _GKGlobalFriendListAccessUndetermined, _GKGroupActivityData, 
-                       _GKGroupActivityPlayerToInviteNotification, _GKHTTPShouldUsePipelining, 
-                       _GKHideFriendRecommendationSendContactsButtonKey, _GKICETimeoutKey, 
-                       _GKIDSLookupPushResponsePlayerID, _GKIDSLookupPushSenderCloudID, 
+                       _GKGroupActivityEligibilityChanges, _GKGroupActivityPlayerToInviteNotification, 
+                       _GKHTTPShouldUsePipelining, _GKHideFriendRecommendationSendContactsButtonKey, 
+                       _GKICETimeoutKey, _GKIDSLookupPushResponsePlayerID, _GKIDSLookupPushSenderCloudID, 
                        _GKIForgotURLKey, _GKIMDPersistenceIdentifier, _GKImageCachePathForSubdirectoryAndFilename, 
                        _GKImageCachePathForURL, _GKImageCacheRoot, _GKImageURLKeyForSize, 
                        _GKImageURLKeyForSizeAndScale, _GKImportFriendsKey, _GKInfoPlistKeyFriendsAPIUsageDescription, 
@@ -197,27 +206,29 @@ exports:
                        _GKLaunchApplicationWithIdentifier, _GKLaunchApplicationWithIdentifierAndURL, 
                        _GKLeaderboardTimeScopeKey, _GKLoggerFor, _GKLoginAppInit, 
                        _GKLoginSignIn, _GKLoginSignOut, _GKLookupKeyProfileGameCenterLink, 
-                       _GKMacOSPreferencesExtensionIdentifier, _GKMatchClientDataKey, 
-                       _GKMatchPushTokenKey, _GKMatchmakerExtensionIdentifier, _GKMatchmakerMatchRID, 
-                       _GKMatchmakerProtocolName, _GKMaxGameStateSizeTurnBased, _GKMaxPlayersHosted, 
-                       _GKMaxPlayersP2P, _GKMaxPlayersTurnBased, _GKMaxRecentPlayersCount, 
-                       _GKMaxRecentPlayersTime, _GKMessageInviteInitiate, _GKMessageInviteProcessingTime, 
-                       _GKMessagesIndentifier, _GKMetricsEventAdamID, _GKMetricsEventAnalyticsClientID, 
-                       _GKMetricsEventApp, _GKMetricsEventAppVersion, _GKMetricsEventBaseVersion, 
-                       _GKMetricsEventCanaryIdentifier, _GKMetricsEventCategory, 
-                       _GKMetricsEventClick, _GKMetricsEventClientBuildType, _GKMetricsEventClientEventId, 
-                       _GKMetricsEventConnection, _GKMetricsEventDSID, _GKMetricsEventDialog, 
-                       _GKMetricsEventEnter, _GKMetricsEventExit, _GKMetricsEventHardwareFamily, 
-                       _GKMetricsEventHardwareModel, _GKMetricsEventImpressions, 
-                       _GKMetricsEventIsSignedIn, _GKMetricsEventOS, _GKMetricsEventOsBuildNumber, 
-                       _GKMetricsEventOsVersion, _GKMetricsEventPage, _GKMetricsEventPageContext, 
-                       _GKMetricsEventPageDetails, _GKMetricsEventPageId, _GKMetricsEventPageType, 
-                       _GKMetricsEventPlayerId, _GKMetricsEventRefApp, _GKMetricsEventResourceRevNum, 
-                       _GKMetricsEventSchemaVersion, _GKMetricsEventSchemaVersionNumber, 
-                       _GKMetricsEventSearch, _GKMetricsEventStoreFrontHeader, _GKMetricsEventTime, 
-                       _GKMetricsEventTimezoneOffset, _GKMetricsEventType, _GKMetricsEventVersion, 
-                       _GKMetricsEventXpPostFrequency, _GKMetricsEventXpSendMethod, 
-                       _GKMetricsThrottlePercent, _GKMobileAddressBookIdentifier, 
+                       _GKMacOSPreferencesExtensionIdentifier, _GKMarkdownURLFormulationPathComponentASCLaunchTrampoline, 
+                       _GKMarkdownURLFormulationQueryLocalizedName, _GKMarkdownURLFormulationQueryTopic, 
+                       _GKMarkdownURLFormulationQueryWidgetId, _GKMarkdownURLFormulationQueryWidgetSize, 
+                       _GKMatchClientDataKey, _GKMatchPushTokenKey, _GKMatchmakerExtensionIdentifier, 
+                       _GKMatchmakerMatchRID, _GKMatchmakerProtocolName, _GKMaxGameStateSizeTurnBased, 
+                       _GKMaxPlayersHosted, _GKMaxPlayersP2P, _GKMaxPlayersTurnBased, 
+                       _GKMaxRecentPlayersCount, _GKMaxRecentPlayersTime, _GKMessageInviteInitiate, 
+                       _GKMessageInviteProcessingTime, _GKMessagesIndentifier, _GKMetricsEventAdamID, 
+                       _GKMetricsEventAnalyticsClientID, _GKMetricsEventApp, _GKMetricsEventAppVersion, 
+                       _GKMetricsEventBaseVersion, _GKMetricsEventCanaryIdentifier, 
+                       _GKMetricsEventCategory, _GKMetricsEventClick, _GKMetricsEventClientBuildType, 
+                       _GKMetricsEventClientEventId, _GKMetricsEventConnection, _GKMetricsEventDSID, 
+                       _GKMetricsEventDialog, _GKMetricsEventEnter, _GKMetricsEventExit, 
+                       _GKMetricsEventHardwareFamily, _GKMetricsEventHardwareModel, 
+                       _GKMetricsEventImpressions, _GKMetricsEventIsSignedIn, _GKMetricsEventOS, 
+                       _GKMetricsEventOsBuildNumber, _GKMetricsEventOsVersion, _GKMetricsEventPage, 
+                       _GKMetricsEventPageContext, _GKMetricsEventPageDetails, _GKMetricsEventPageId, 
+                       _GKMetricsEventPageType, _GKMetricsEventPlayerId, _GKMetricsEventRefApp, 
+                       _GKMetricsEventResourceRevNum, _GKMetricsEventSchemaVersion, 
+                       _GKMetricsEventSchemaVersionNumber, _GKMetricsEventSearch, 
+                       _GKMetricsEventStoreFrontHeader, _GKMetricsEventTime, _GKMetricsEventTimezoneOffset, 
+                       _GKMetricsEventType, _GKMetricsEventVersion, _GKMetricsEventXpPostFrequency, 
+                       _GKMetricsEventXpSendMethod, _GKMetricsThrottlePercent, _GKMobileAddressBookIdentifier, 
                        _GKMobilePhoneIdentifier, _GKMobileSMSIdentifier, _GKMultiplayerAllowedTypeReceivedNotification, 
                        _GKMultiplayerCancelTimeDelayInSeconds, _GKMultiplayerContext, 
                        _GKMultiplayerFriendSelectionImpression, _GKMultiplayerLobbyImpression, 
@@ -266,9 +277,13 @@ exports:
                        _GKRTPushBasedMatchTotal, _GKRealtimeMatchFromAPI, _GKRealtimeMatchFromGameCenterUI, 
                        _GKRealtimeMatchPersistenceTime, _GKReceiverTappedViewPlayerProfileButton, 
                        _GKRefreshDataTypeAsString, _GKRefreshSeedKey, _GKRejectFriendRequestIDs, 
-                       _GKRelayNotification, _GKRemoteAlertDeeplinkActionIdentifierKey, 
+                       _GKRelayNotification, _GKRemoteAlertDeeplinkAchievementsIdsKey, 
+                       _GKRemoteAlertDeeplinkActionAchievementsValue, _GKRemoteAlertDeeplinkActionActivityIdValue, 
+                       _GKRemoteAlertDeeplinkActionActivityTypeKey, _GKRemoteAlertDeeplinkActionIdentifierKey, 
                        _GKRemoteAlertDeeplinkActionKey, _GKRemoteAlertDeeplinkActionLeaderboardValue, 
-                       _GKRemoteAlertDeeplinkActionPlayerProfileValue, _GKRemoteAlertDeeplinkGameBundleIdentifierKey, 
+                       _GKRemoteAlertDeeplinkActionNameKey, _GKRemoteAlertDeeplinkActionPlayerProfileValue, 
+                       _GKRemoteAlertDeeplinkActionWidgetFamilyKey, _GKRemoteAlertDeeplinkActionWidgetIdKey, 
+                       _GKRemoteAlertDeeplinkGameAdamIdKey, _GKRemoteAlertDeeplinkGameBundleIdentifierKey, 
                        _GKRemoteAlertDeeplinkPlayerIdentifierKey, _GKRemoteAlertUserInfoBypassPreAuthenticationKey, 
                        _GKRemoteAlertUserInfoDeeplinkKey, _GKRemoteAlertUserInfoHostPIDKey, 
                        _GKRemoteAlertUserInfoSerializedGameKey, _GKRemoteUIAuthorizeAccountURLKey, 
@@ -427,10 +442,10 @@ exports:
                        GKClientInterface, GKCloudPlayer, GKCompatibilityEntryInternal, 
                        GKConcernInternal, GKContactRelationshipResult, GKCustomTournamentRequest, 
                        GKCustomTournamentRequestInternal, GKDaemonInterface, GKDaemonProxy, 
-                       GKDevice, GKDigestVerification, GKDispatchGroup, GKEventEmitter, 
-                       GKFamiliarPlayerInternal, GKFriendCodeDetailInternal, GKFriendPlayerInternal, 
-                       GKFriendRecommendationInternal, GKFriendRequestInternal, GKFriendRequestURLModel, 
-                       GKFriendServiceInterface, GKFriendServicePrivateInterface, 
+                       GKDevice, GKDigestVerification, GKDispatchGroup, GKEntitledContextProvider, 
+                       GKEventEmitter, GKFamiliarPlayerInternal, GKFriendCodeDetailInternal, 
+                       GKFriendPlayerInternal, GKFriendRecommendationInternal, GKFriendRequestInternal, 
+                       GKFriendRequestURLModel, GKFriendServiceInterface, GKFriendServicePrivateInterface, 
                        GKGame, GKGameDescriptor, GKGameHighlightInternal, GKGameInternal, 
                        GKGameMatch, GKGameRecommendationInternal, GKGameRecord, GKGameRecordInternal, 
                        GKGameServiceInterface, GKGameServicePrivateInterface, GKGameSession, 
@@ -457,10 +472,10 @@ exports:
                        GKPlayerEmailInternal, GKPlayerInternal, GKPreferences, GKProfileServiceInterface, 
                        GKProfileServicePrivateInterface, GKReachability, GKRecentMatchInternal, 
                        GKRecoveryAttempter, GKRecurrenceRule, GKReporter, GKRoute, 
-                       GKSavedGame, GKScore, GKScoreChallenge, GKScoreChallengeInternal, 
-                       GKScoreInternal, GKServiceInterface, GKServiceProxy, GKSession, 
-                       GKSpecialPlayerInternal, GKStoreItemInternal, GKThreadsafeCache, 
-                       GKThreadsafeDictionary, GKTournament, GKTournamentDefinition, 
+                       GKSavedGame, GKScopedIdManager, GKScore, GKScoreChallenge, 
+                       GKScoreChallengeInternal, GKScoreInternal, GKServiceInterface, 
+                       GKServiceProxy, GKSession, GKSpecialPlayerInternal, GKStoreItemInternal, 
+                       GKThreadsafeCache, GKThreadsafeDictionary, GKTournament, GKTournamentDefinition, 
                        GKTournamentDefinitionInternal, GKTournamentInternal, GKTournamentParticipant, 
                        GKTournamentParticipantHistoricalData, GKTournamentParticipantHistoricalDataInternal, 
                        GKTournamentParticipantInternal, GKTournamentParticipantRequest, 
@@ -492,28 +507,51 @@ exports:
                        GKReachability.localWiFiRef, GKReachability.reachabilityRef, 
                        GKRecoveryAttempter._attemptRecovery ]
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s20GameCenterFoundation22GKGroupActivityManagerC011activateForA04gameySo6GKGameC_tFTj', 
-                       '_$s20GameCenterFoundation22GKGroupActivityManagerC011activateForA04gameySo6GKGameC_tFTq', 
-                       '_$s20GameCenterFoundation22GKGroupActivityManagerC05startA0yyFTj', 
+    symbols:         [ '_$s20GameCenterFoundation22GKGroupActivityManagerC05startA0yyFTj', 
                        '_$s20GameCenterFoundation22GKGroupActivityManagerC05startA0yyFTq', 
                        '_$s20GameCenterFoundation22GKGroupActivityManagerC06sharedF0ACvgZ', 
-                       '_$s20GameCenterFoundation22GKGroupActivityManagerC11receiveData4data10fromPlayery0C00H0V_SStF', 
+                       '_$s20GameCenterFoundation22GKGroupActivityManagerC16playerDisconnect0G0ySo8GKPlayerC_tFTj', 
+                       '_$s20GameCenterFoundation22GKGroupActivityManagerC16playerDisconnect0G0ySo8GKPlayerC_tFTq', 
                        '_$s20GameCenterFoundation22GKGroupActivityManagerC23startLookingForSessionsyyFTj', 
                        '_$s20GameCenterFoundation22GKGroupActivityManagerC23startLookingForSessionsyyFTq', 
-                       '_$s20GameCenterFoundation22GKGroupActivityManagerC3endyyFTj', 
-                       '_$s20GameCenterFoundation22GKGroupActivityManagerC3endyyFTq', 
-                       '_$s20GameCenterFoundation22GKGroupActivityManagerC5leaveyyFTj', 
-                       '_$s20GameCenterFoundation22GKGroupActivityManagerC5leaveyyFTq', 
-                       '_$s20GameCenterFoundation22GKGroupActivityManagerC5resetyyFTj', 
-                       '_$s20GameCenterFoundation22GKGroupActivityManagerC5resetyyFTq', 
-                       '_$s20GameCenterFoundation22GKGroupActivityManagerC6update5matchySo7GKMatchCSg_tFTj', 
-                       '_$s20GameCenterFoundation22GKGroupActivityManagerC6update5matchySo7GKMatchCSg_tFTq', 
-                       '_$s20GameCenterFoundation22GKGroupActivityManagerC8sendData4data9toPlayersy0C00H0V_SaySo8GKPlayerCGtF', 
+                       '_$s20GameCenterFoundation22GKGroupActivityManagerC25isEligibleForGroupSessionSbyFTj', 
+                       '_$s20GameCenterFoundation22GKGroupActivityManagerC25isEligibleForGroupSessionSbyFTq', 
+                       '_$s20GameCenterFoundation22GKGroupActivityManagerC3endyyYaFTj', 
+                       '_$s20GameCenterFoundation22GKGroupActivityManagerC3endyyYaFTjTu', 
+                       '_$s20GameCenterFoundation22GKGroupActivityManagerC3endyyYaFTq', 
+                       '_$s20GameCenterFoundation22GKGroupActivityManagerC4send4data9toPlayers4modey0C04DataV_SaySo8GKPlayerCGSo011GKMatchSendL4ModeVtYaKF', 
+                       '_$s20GameCenterFoundation22GKGroupActivityManagerC4send4data9toPlayers4modey0C04DataV_SaySo8GKPlayerCGSo011GKMatchSendL4ModeVtYaKFTu', 
+                       '_$s20GameCenterFoundation22GKGroupActivityManagerC5leaveyyYaFTj', 
+                       '_$s20GameCenterFoundation22GKGroupActivityManagerC5leaveyyYaFTjTu', 
+                       '_$s20GameCenterFoundation22GKGroupActivityManagerC5leaveyyYaFTq', 
+                       '_$s20GameCenterFoundation22GKGroupActivityManagerC5resetyyYaFTj', 
+                       '_$s20GameCenterFoundation22GKGroupActivityManagerC5resetyyYaFTjTu', 
+                       '_$s20GameCenterFoundation22GKGroupActivityManagerC5resetyyYaFTq', 
+                       '_$s20GameCenterFoundation22GKGroupActivityManagerC6update5matchySo7GKMatchCSg_tYaFTj', 
+                       '_$s20GameCenterFoundation22GKGroupActivityManagerC6update5matchySo7GKMatchCSg_tYaFTjTu', 
+                       '_$s20GameCenterFoundation22GKGroupActivityManagerC6update5matchySo7GKMatchCSg_tYaFTq', 
+                       '_$s20GameCenterFoundation22GKGroupActivityManagerC8activate4gameySo6GKGameC_tYaKFTj', 
+                       '_$s20GameCenterFoundation22GKGroupActivityManagerC8activate4gameySo6GKGameC_tYaKFTjTu', 
+                       '_$s20GameCenterFoundation22GKGroupActivityManagerC8activate4gameySo6GKGameC_tYaKFTq', 
                        '_$s20GameCenterFoundation22GKGroupActivityManagerCACycfC', 
                        '_$s20GameCenterFoundation22GKGroupActivityManagerCACycfc', 
                        '_$s20GameCenterFoundation22GKGroupActivityManagerCMa', '_$s20GameCenterFoundation22GKGroupActivityManagerCMn', 
                        '_$s20GameCenterFoundation22GKGroupActivityManagerCMo', '_$s20GameCenterFoundation22GKGroupActivityManagerCMu', 
                        '_$s20GameCenterFoundation22GKGroupActivityManagerCN', '_$s20GameCenterFoundation22GKGroupActivityManagerCfD', 
+                       '_$s20GameCenterFoundation23EntitledContextProviderC02isD20ToUseGroupActivitiesSbyFZ', 
+                       '_$s20GameCenterFoundation23EntitledContextProviderCACycfC', 
+                       '_$s20GameCenterFoundation23EntitledContextProviderCACycfc', 
+                       '_$s20GameCenterFoundation23EntitledContextProviderCMa', '_$s20GameCenterFoundation23EntitledContextProviderCMn', 
+                       '_$s20GameCenterFoundation23EntitledContextProviderCMo', '_$s20GameCenterFoundation23EntitledContextProviderCN', 
+                       '_$s20GameCenterFoundation23EntitledContextProviderCfD', '_$s20GameCenterFoundation33GKMatchBackgroundAssertionManagerC10invalidateyyF', 
+                       '_$s20GameCenterFoundation33GKMatchBackgroundAssertionManagerC23assertionWillInvalidateyySo12RBSAssertionCF', 
+                       '_$s20GameCenterFoundation33GKMatchBackgroundAssertionManagerC6sharedACvgZ', 
+                       '_$s20GameCenterFoundation33GKMatchBackgroundAssertionManagerC7acquireyyF', 
+                       '_$s20GameCenterFoundation33GKMatchBackgroundAssertionManagerCMa', 
+                       '_$s20GameCenterFoundation33GKMatchBackgroundAssertionManagerCMn', 
+                       '_$s20GameCenterFoundation33GKMatchBackgroundAssertionManagerCMo', 
+                       '_$s20GameCenterFoundation33GKMatchBackgroundAssertionManagerCN', 
+                       '_$s20GameCenterFoundation33GKMatchBackgroundAssertionManagerCfD', 
                        '_$s20GameCenterFoundation34GKGroupActivityDeclineToJoinReasonO8rawValueACSgSi_tcfC', 
                        '_$s20GameCenterFoundation34GKGroupActivityDeclineToJoinReasonO8rawValueSivg', 
                        '_$s20GameCenterFoundation34GKGroupActivityDeclineToJoinReasonO8rawValueSivpMV', 
@@ -532,9 +570,9 @@ exports:
                        '_$s20GameCenterFoundation5GKLogV4httpyySS_S2SSitFZ', '_$s20GameCenterFoundation5GKLogV4infoyySS_S2SSitFZ', 
                        '_$s20GameCenterFoundation5GKLogV4perfyySS_S2SSitFZ', '_$s20GameCenterFoundation5GKLogV5cacheyySS_S2SSitFZ', 
                        '_$s20GameCenterFoundation5GKLogV5debugyySS_S2SSitFZ', '_$s20GameCenterFoundation5GKLogV5erroryySS_S2SSitFZ', 
-                       '_$s20GameCenterFoundation5GKLogV5matchyySS_S2SSitFZ', '_$s20GameCenterFoundation5GKLogV5traceyySS_S2SSitFZ', 
-                       '_$s20GameCenterFoundation5GKLogV6daemonyySS_S2SSitFZ', '_$s20GameCenterFoundation5GKLogV7generalyySS_S2SSitFZ', 
-                       '_$s20GameCenterFoundation5GKLogV8contactsyySS_S2SSitFZ', 
+                       '_$s20GameCenterFoundation5GKLogV5matchyySS_So13os_log_type_taS2SSitFZ', 
+                       '_$s20GameCenterFoundation5GKLogV5traceyySS_S2SSitFZ', '_$s20GameCenterFoundation5GKLogV6daemonyySS_S2SSitFZ', 
+                       '_$s20GameCenterFoundation5GKLogV7generalyySS_S2SSitFZ', '_$s20GameCenterFoundation5GKLogV8contactsyySS_S2SSitFZ', 
                        '_$s20GameCenterFoundation5GKLogV8dispatchyySS_S2SSitFZ', 
                        '_$s20GameCenterFoundation5GKLogV9backtrace5frame____ySi_S3SSitFZ', 
                        '_$s20GameCenterFoundation5GKLogV9developeryySS_S2SSitFZ', 
@@ -543,26 +581,28 @@ exports:
                        '_$s20GameCenterFoundation5GKLogVN', _GKURLComponentAcceptFriendRequest, 
                        _GKURLComponentChangePassword, _GKURLComponentCreateAccount, 
                        _GKURLComponentEditAccount, _GKURLComponentSignIn, _GKURLComponentVerifyAccount, 
-                       '_OBJC_CLASS_$__TtC20GameCenterFoundation22GKGroupActivityManager', 
-                       '_OBJC_METACLASS_$__TtC20GameCenterFoundation22GKGroupActivityManager' ]
-    objc-classes:    [ _TtC20GameCenterFoundation22GKGroupActivityManager ]
+                       '_OBJC_CLASS_$_GKEntitledContextProvider', '_OBJC_CLASS_$__TtC20GameCenterFoundation22GKGroupActivityManager', 
+                       '_OBJC_CLASS_$__TtC20GameCenterFoundation33GKMatchBackgroundAssertionManager', 
+                       '_OBJC_METACLASS_$_GKEntitledContextProvider', '_OBJC_METACLASS_$__TtC20GameCenterFoundation22GKGroupActivityManager', 
+                       '_OBJC_METACLASS_$__TtC20GameCenterFoundation33GKMatchBackgroundAssertionManager' ]
+    objc-classes:    [ _TtC20GameCenterFoundation22GKGroupActivityManager, _TtC20GameCenterFoundation33GKMatchBackgroundAssertionManager ]
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D5326B5A-9283-3576-B360-1C6746E25D39
+    value:           B597EE86-3318-3CDD-B5CA-A0E4CF7F6349
   - target:          x86_64-maccatalyst
-    value:           D5326B5A-9283-3576-B360-1C6746E25D39
+    value:           B597EE86-3318-3CDD-B5CA-A0E4CF7F6349
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           091C8D41-D57A-355C-94D1-BAF9552BFA72
+    value:           ED1EC807-AD0A-33F3-A149-9D7ACB646F36
   - target:          arm64e-maccatalyst
-    value:           091C8D41-D57A-355C-94D1-BAF9552BFA72
+    value:           ED1EC807-AD0A-33F3-A149-9D7ACB646F36
 install-name:    '/System/Library/PrivateFrameworks/GameCenterUICore.framework/Versions/A/GameCenterUICore'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -581,7 +621,8 @@ exports:
                        GKLocalPlayerAuthenticator, GKMacGameIconBrush, GKMultiCircleImageBrush, 
                        GKNetworkImageSource, GKRemoteViewControllerProxy, GKScreenConfigurationController, 
                        GKServerWebViewJSRoot, GKTextStyle, GKTextStyleFocus, GKTextStylePad, 
-                       GKTextStylePhone, GKThemeBrush, GKThreadsafeImageCache, GKUITheme ]
+                       GKTextStylePhone, GKThemeBrush, GKThreadsafeImageCache, GKUITheme, 
+                       GKWelcomeBannerVisibility ]
     objc-ivars:      [ GKLocalPlayerAuthenticator._alertMessage, GKLocalPlayerAuthenticator._alertTitle, 
                        GKLocalPlayerAuthenticator._authenticated, GKLocalPlayerAuthenticator._authenticating, 
                        GKLocalPlayerAuthenticator._forceAuthentication, GKLocalPlayerAuthenticator._inputLocalPlayer, 
@@ -614,11 +655,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           5DFED076-4594-3384-AEBF-D4A0445A2B79
+    value:           93AE48AE-9AEE-31EA-A06A-6F110EE324AF
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           5C772DDF-D0B2-3048-930C-DD9AA32E17A8
+    value:           0E703BB8-45DA-3418-A6D9-D0B140F6C0E6
 install-name:    '/System/iOSSupport/System/Library/PrivateFrameworks/GameCenterUI.framework/Versions/A/GameCenterUI'
 swift-abi-version: 7
 exports:
@@ -631,7 +672,10 @@ exports:
                        '_$s12GameCenterUI12CheckboxViewV05SwiftC00E0AAMc', '_$s12GameCenterUI12CheckboxViewV4bodyQrvg', 
                        '_$s12GameCenterUI12CheckboxViewV4bodyQrvpMV', '_$s12GameCenterUI12CheckboxViewV4bodyQrvpQOMQ', 
                        '_$s12GameCenterUI12CheckboxViewVMa', '_$s12GameCenterUI12CheckboxViewVMn', 
-                       '_$s12GameCenterUI12CheckboxViewVN', '_$s12GameCenterUI13KeyPathToggleV4bodyQrvg', 
+                       '_$s12GameCenterUI12CheckboxViewVN', '_$s12GameCenterUI13ImageProviderO02uiD0yACSo7UIImageCcACmFWC', 
+                       '_$s12GameCenterUI13ImageProviderO11urlTemplateyACSScACmFWC', 
+                       '_$s12GameCenterUI13ImageProviderOMa', '_$s12GameCenterUI13ImageProviderOMn', 
+                       '_$s12GameCenterUI13ImageProviderON', '_$s12GameCenterUI13KeyPathToggleV4bodyQrvg', 
                        '_$s12GameCenterUI13KeyPathToggleV4bodyQrvpMV', '_$s12GameCenterUI13KeyPathToggleV4bodyQrvpQOMQ', 
                        '_$s12GameCenterUI13KeyPathToggleVMa', '_$s12GameCenterUI13KeyPathToggleVMn', 
                        '_$s12GameCenterUI13KeyPathToggleVyxG05SwiftC04ViewAAMc', 
@@ -642,6 +686,7 @@ exports:
                        '_$s12GameCenterUI14GKFeatureFlagsO18PlayerActivityFeedyA2CmFWC', 
                        '_$s12GameCenterUI14GKFeatureFlagsO19ContactsIntegrationyA2CmFWC', 
                        '_$s12GameCenterUI14GKFeatureFlagsO20PlayerActivityWidgetyA2CmFWC', 
+                       '_$s12GameCenterUI14GKFeatureFlagsO20SharePlayIntegrationyA2CmFWC', 
                        '_$s12GameCenterUI14GKFeatureFlagsO20SimplifiedOnboardingyA2CmFWC', 
                        '_$s12GameCenterUI14GKFeatureFlagsO22DashboardIpadSplitViewyA2CmFWC', 
                        '_$s12GameCenterUI14GKFeatureFlagsO23PlayerActivityDashboardyA2CmFWC', 
@@ -729,15 +774,7 @@ exports:
                        '_$s12GameCenterUI30GKHostAppMetricsFieldsProviderV9JetEngine0fgH0AAMc', 
                        '_$s12GameCenterUI30GKHostAppMetricsFieldsProviderVACycfC', 
                        '_$s12GameCenterUI30GKHostAppMetricsFieldsProviderVMa', '_$s12GameCenterUI30GKHostAppMetricsFieldsProviderVMn', 
-                       '_$s12GameCenterUI30GKHostAppMetricsFieldsProviderVN', '_$s12GameCenterUI31ArcadeStateMetricsFieldProviderV03addF6Fields4into5usingy9JetEngine0fJ7Builder_pz_AG0fJ7ContextVtKF', 
-                       '_$s12GameCenterUI31ArcadeStateMetricsFieldProviderV8category9JetEngine0f6FieldsH8CategoryOvg', 
-                       '_$s12GameCenterUI31ArcadeStateMetricsFieldProviderV8category9JetEngine0f6FieldsH8CategoryOvpMV', 
-                       '_$s12GameCenterUI31ArcadeStateMetricsFieldProviderV9JetEngine0f6FieldsH0AAMc', 
-                       '_$s12GameCenterUI31ArcadeStateMetricsFieldProviderV9fieldNameSSvgZ', 
-                       '_$s12GameCenterUI31ArcadeStateMetricsFieldProviderVMa', '_$s12GameCenterUI31ArcadeStateMetricsFieldProviderVMn', 
-                       '_$s12GameCenterUI31ArcadeStateMetricsFieldProviderVN', '_$s12GameCenterUI9GKMetricsC17recordCustomClick11isHighlight8targetID6fields7contextySb_SSSDyS2SG9JetEngine20MetricsFieldsContextVtFTj', 
-                       '_$s12GameCenterUI9GKMetricsC17recordCustomClick11isHighlight8targetID6fields7contextySb_SSSDyS2SG9JetEngine20MetricsFieldsContextVtFTq', 
-                       '_$s12GameCenterUI9GKMetricsC19recordCustomMetrics4data7contexty9JetEngine0G4DataV_AG0G13FieldsContextVtFTj', 
+                       '_$s12GameCenterUI30GKHostAppMetricsFieldsProviderVN', '_$s12GameCenterUI9GKMetricsC19recordCustomMetrics4data7contexty9JetEngine0G4DataV_AG0G13FieldsContextVtFTj', 
                        '_$s12GameCenterUI9GKMetricsC19recordCustomMetrics4data7contexty9JetEngine0G4DataV_AG0G13FieldsContextVtFTq', 
                        '_$s12GameCenterUI9GKMetricsC19recordCustomMetrics6fieldsySDyS2SG_tFTj', 
                        '_$s12GameCenterUI9GKMetricsC19recordCustomMetrics6fieldsySDyS2SG_tFTq', 
@@ -853,6 +890,7 @@ exports:
                        '_$sSo21GKAchievementInternalC12GameCenterUI15LoadsHighlightsACWP', 
                        '_$sSo21GKAchievementInternalC12GameCenterUIE14loadHighlights7handleryySayAC9HighlightVGc_tFZ', 
                        '_$sSo21GKAchievementInternalC12GameCenterUIE20highlightPlaceholderAC9HighlightVvgZ', 
+                       '_$sSo26GKMatchmakerViewControllerC12GameCenterUIE015registerSharingC12ItemProvider04itemJ0So06UIViewC0CSo06NSItemJ0C_tF', 
                        '_$sSo6GKGameC12GameCenterUI15LoadsHighlightsACMc', '_$sSo6GKGameC12GameCenterUI15LoadsHighlightsACWP', 
                        '_$sSo6GKGameC12GameCenterUIE14loadHighlights7handleryySayAC9HighlightVGc_tFZ', 
                        '_$sSo6GKGameC12GameCenterUIE20highlightPlaceholderAC9HighlightVvgZ', 
@@ -860,29 +898,32 @@ exports:
                        _GKDashboardExtensionBundleIdentifier, _GKExtensionBundleIdentifierKey, 
                        _GKExtensionErrorDomain, _GKExtensionItemAuthenticateModeKey, 
                        _GKExtensionItemChallengeInternalKey, _GKExtensionItemCurrentGameKey, 
-                       _GKExtensionItemDashboardAchievementID, _GKExtensionItemDashboardGameBundleID, 
-                       _GKExtensionItemDashboardIsArcadeGame, _GKExtensionItemDashboardLaunchedFromAccessPoint, 
-                       _GKExtensionItemDashboardLeaderboardID, _GKExtensionItemDashboardLeaderboardInternal, 
-                       _GKExtensionItemDashboardPlayerID, _GKExtensionItemDashboardPlayerScope, 
-                       _GKExtensionItemDashboardShowPlayForChallenge, _GKExtensionItemDashboardTimeScope, 
-                       _GKExtensionItemDashboardViewState, _GKExtensionItemForcePickerKey, 
+                       _GKExtensionItemDashboardAchievementID, _GKExtensionItemDashboardActivityID, 
+                       _GKExtensionItemDashboardGameBundleID, _GKExtensionItemDashboardIsArcadeGame, 
+                       _GKExtensionItemDashboardLaunchedFromAccessPoint, _GKExtensionItemDashboardLeaderboardID, 
+                       _GKExtensionItemDashboardLeaderboardInternal, _GKExtensionItemDashboardLeaderboardTitle, 
+                       _GKExtensionItemDashboardPlayerAlias, _GKExtensionItemDashboardPlayerID, 
+                       _GKExtensionItemDashboardPlayerScope, _GKExtensionItemDashboardShowPlayForChallenge, 
+                       _GKExtensionItemDashboardTimeScope, _GKExtensionItemDashboardViewState, 
+                       _GKExtensionItemEntitledToGroupActivities, _GKExtensionItemForcePickerKey, 
                        _GKExtensionItemHostPIDKey, _GKExtensionItemHostUserInterfaceIdiomKey, 
                        _GKExtensionItemLocalPlayerKey, _GKExtensionItemLocalizationsKey, 
                        _GKExtensionItemMatchesAcceptedInviteInternal, _GKExtensionItemMatchesFastStartEnabled, 
-                       _GKExtensionItemMatchesHosted, _GKExtensionItemMatchesMatchRequestInternal, 
-                       _GKExtensionItemMatchesMatchmakingMode, _GKExtensionItemMatchesShowExistingMatches, 
-                       _GKExtensionItemMatchesShowPlayForMatch, _GKExtensionItemMatchesShowQuitForMatch, 
-                       _GKExtensionItemMessageKey, _GKExtensionItemPlayerInternalsKey, 
-                       _GKExtensionItemRTLKey, _GKExtensionItemStatusBarHeightKey, 
-                       _GKExtensionMessageChallengeMessage, _GKExtensionMessageCommandKey, 
-                       _GKExtensionMessageDashboardAssetNames, _GKExtensionMessageLeaderboardNames, 
-                       _GKExtensionMessageLeaderboardSetNames, _GKExtensionMessageParamKey, 
-                       _GKExtensionMessagePlayerID, _GKExtensionMessagePlayerInternal, 
-                       _GKExtensionVisualEffectGroupName, _GKGameCenterExtensionPointName, 
-                       _GKLoadStateContentLoaded, _GKLoadStateError, _GKLoadStateInitial, 
-                       _GKLoadStateLoadingContent, _GKLoadStateNoContent, _GKLoadStateRefreshingContent, 
-                       _GKMatchmakerExtensionBundleIdentifier, _GKServiceInterfaceController, 
-                       _GKTournamentExtensionBundleIdentifier, _GKTurnBasedMatchmakerExtensionBundleIdentifier ]
+                       _GKExtensionItemMatchesGroupSessionEligible, _GKExtensionItemMatchesHosted, 
+                       _GKExtensionItemMatchesMatchRequestInternal, _GKExtensionItemMatchesMatchmakingMode, 
+                       _GKExtensionItemMatchesShowExistingMatches, _GKExtensionItemMatchesShowPlayForMatch, 
+                       _GKExtensionItemMatchesShowQuitForMatch, _GKExtensionItemMessageKey, 
+                       _GKExtensionItemPlayerInternalsKey, _GKExtensionItemRTLKey, 
+                       _GKExtensionItemStatusBarHeightKey, _GKExtensionMessageChallengeMessage, 
+                       _GKExtensionMessageCommandKey, _GKExtensionMessageDashboardAssetNames, 
+                       _GKExtensionMessageLeaderboardNames, _GKExtensionMessageLeaderboardSetNames, 
+                       _GKExtensionMessageParamKey, _GKExtensionMessagePlayerID, 
+                       _GKExtensionMessagePlayerInternal, _GKExtensionVisualEffectGroupName, 
+                       _GKGameCenterExtensionPointName, _GKLoadStateContentLoaded, 
+                       _GKLoadStateError, _GKLoadStateInitial, _GKLoadStateLoadingContent, 
+                       _GKLoadStateNoContent, _GKLoadStateRefreshingContent, _GKMatchmakerExtensionBundleIdentifier, 
+                       _GKServiceInterfaceController, _GKTournamentExtensionBundleIdentifier, 
+                       _GKTurnBasedMatchmakerExtensionBundleIdentifier ]
     objc-classes:    [ GKAccessPoint, GKAchievementViewController, GKAcquireFocusWorkaroundView, 
                        GKAvatarContainerView, GKButton, GKButtonStyle, GKConstraintUpdateController, 
                        GKContiguousContainerView, GKDashboardFocusContainerView, 

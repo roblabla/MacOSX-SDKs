@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E336C9DC-BDD3-32A1-BD60-48BDC37E5BBF
+    value:           09721BB7-27D8-3928-B6B8-B79F8DB56BAC
   - target:          x86_64-maccatalyst
-    value:           E336C9DC-BDD3-32A1-BD60-48BDC37E5BBF
+    value:           09721BB7-27D8-3928-B6B8-B79F8DB56BAC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           19C23E49-A7FD-39B6-8201-587A760A2A3F
+    value:           8083E559-D130-3A1D-8F76-DC5D7BC6D039
   - target:          arm64e-maccatalyst
-    value:           19C23E49-A7FD-39B6-8201-587A760A2A3F
+    value:           8083E559-D130-3A1D-8F76-DC5D7BC6D039
 install-name:    '/System/Library/Frameworks/TabularData.framework/Versions/A/TabularData'
 swift-abi-version: 7
 exports:

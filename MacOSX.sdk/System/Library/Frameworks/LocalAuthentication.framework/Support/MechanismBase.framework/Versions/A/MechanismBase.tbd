@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0851C6D8-5AD6-318E-A6DD-08D52AA76457
+    value:           CBBEF197-7098-365B-AE70-B01E24648899
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ED7B164C-4829-3BC6-8BBB-D45F55E8F963
+    value:           9598CE49-9928-3CC6-A00D-E3425D9B22F7
 install-name:    '/System/Library/Frameworks/LocalAuthentication.framework/Support/MechanismBase.framework/Versions/A/MechanismBase'
-current-version: 1131.40.25
+current-version: 1131.60.22
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _kRemoteUIManagerDefaultActivateTimeout, _kRemoteUIManagerDefaultDeactivateTimeout ]

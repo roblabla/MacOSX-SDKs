@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F688C19F-2BD2-32DA-81CD-48327557E0EE
+    value:           565047B1-7AD9-3DD8-8264-0AF4E7026F73
   - target:          x86_64-maccatalyst
-    value:           F688C19F-2BD2-32DA-81CD-48327557E0EE
+    value:           565047B1-7AD9-3DD8-8264-0AF4E7026F73
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           232F7FB2-6083-3245-ACC0-22541ED90B58
+    value:           46F89198-0983-390B-BB61-3F7B25388B22
   - target:          arm64e-maccatalyst
-    value:           232F7FB2-6083-3245-ACC0-22541ED90B58
+    value:           46F89198-0983-390B-BB61-3F7B25388B22
 install-name:    '/System/Library/Frameworks/ManagedSettings.framework/Versions/A/ManagedSettings'
 current-version: 66
 swift-abi-version: 7

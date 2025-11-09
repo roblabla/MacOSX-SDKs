@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           956E6F04-7E2A-34E9-8A17-D55C67E7CCB3
+    value:           0948481C-00C9-3716-9EF7-D1402EAC4664
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1EFE7C9A-9FFC-3EB7-808D-B8A84EC2CE99
+    value:           AC42965F-371B-39A6-9FB0-D2899E6A5600
 install-name:    '/System/Library/PrivateFrameworks/SiriTranslationIntents.framework/Versions/A/SiriTranslationIntents'
 swift-abi-version: 7
 exports:
@@ -19,6 +19,7 @@ exports:
                        '_$s22SiriTranslationIntents0B10ResultItemC10definitionSSSgvpMV', 
                        '_$s22SiriTranslationIntents0B10ResultItemC10identifier7display17pronunciationHintACSSSg_SSAGtcfC', 
                        '_$s22SiriTranslationIntents0B10ResultItemC10identifier7display17pronunciationHintACSSSg_SSAGtcfc', 
+                       '_$s22SiriTranslationIntents0B10ResultItemC12romanizationSSSgvpMV', 
                        '_$s22SiriTranslationIntents0B10ResultItemC14translatedTextSSSgvpMV', 
                        '_$s22SiriTranslationIntents0B10ResultItemC20supportsSecureCodingSbvgZ', 
                        '_$s22SiriTranslationIntents0B10ResultItemC24translatedSantitizedTextSSSgvpMV', 

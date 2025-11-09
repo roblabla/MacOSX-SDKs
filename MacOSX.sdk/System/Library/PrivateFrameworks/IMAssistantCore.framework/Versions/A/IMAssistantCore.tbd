@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           10B8DBFD-4679-35A6-A858-E59363757DE2
+    value:           64B44FFB-6B2E-3FCB-8A68-F9FD7180CD5B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8915CF5E-A98A-30FE-9623-F70983404F03
+    value:           4314BD70-65C0-3073-A981-97FEA3E11A3E
 install-name:    '/System/Library/PrivateFrameworks/IMAssistantCore.framework/Versions/A/IMAssistantCore'
 current-version: 800
 exports:

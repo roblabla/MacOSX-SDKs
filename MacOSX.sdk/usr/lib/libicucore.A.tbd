@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0B50D0B9-44E0-3734-AF8B-2C53E9B9CE0D
+    value:           F72E9E63-A1DB-33B0-9474-7FA3BAC3325A
   - target:          x86_64-maccatalyst
-    value:           0B50D0B9-44E0-3734-AF8B-2C53E9B9CE0D
+    value:           F72E9E63-A1DB-33B0-9474-7FA3BAC3325A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B5B53999-6C33-3283-950D-5FF6DCCF83D2
+    value:           9E538435-AE89-35E1-84F3-1164B3C94E1E
   - target:          arm64e-maccatalyst
-    value:           B5B53999-6C33-3283-950D-5FF6DCCF83D2
+    value:           9E538435-AE89-35E1-84F3-1164B3C94E1E
 install-name:    '/usr/lib/libicucore.A.dylib'
 current-version: 70.1
 exports:

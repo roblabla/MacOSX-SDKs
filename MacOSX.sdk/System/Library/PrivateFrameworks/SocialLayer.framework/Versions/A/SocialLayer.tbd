@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0E4C6134-F616-394F-B8D4-97E6BF2CF79B
+    value:           B134F9DB-B781-3190-9F78-BFCB714BE195
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8DD14E84-00EE-3C67-8E7C-E78C5CE1AE7A
+    value:           0746189E-0011-3180-AAB0-C458B5CF3766
 install-name:    '/System/Library/PrivateFrameworks/SocialLayer.framework/Versions/A/SocialLayer'
 swift-abi-version: 7
 exports:
@@ -318,8 +318,8 @@ exports:
                        _SLDCUINamedImageDeviceClass, _SLDClientGlobalWorkloop, _SLDConnectionHasLegacyHighlightsEntitlement, 
                        _SLDConnectionHasPublicEntitlement, _SLDConnectionIsEntitled, 
                        _SLDConnectionIsEntitledForAccessibility, _SLDConnectionIsEntitledForCollaborationHandshake, 
-                       _SLDContactMonogramAttributedString, _SLDCreateColorNamed, 
-                       _SLDCreateGroupPhotoImageWithData, _SLDCreateGroupPhotoImageWithGroupID, 
+                       _SLDConnectionIsEntitledForShareableContent, _SLDContactMonogramAttributedString, 
+                       _SLDCreateColorNamed, _SLDCreateGroupPhotoImageWithData, _SLDCreateGroupPhotoImageWithGroupID, 
                        _SLDCreateImageNamed, _SLDCreateRasterizedSystemVectorGlyph, 
                        _SLDCreateRasterizedSystemVectorGlyphWithSlotStyle, _SLDCreateRasterizedVectorGlyph, 
                        _SLDGetHyphenationPosition, _SLDGlobalWorkloop, _SLDRenderContactMonogramInContextAtRect, 
@@ -366,6 +366,6 @@ exports:
                        SLHighlightDisambiguationPillMetrics, SLHighlightPillMetrics, 
                        SLHighlightsCache, SLInteractionHandler, SLKeyQueryController, 
                        SLPerson, SLPersonIdentityGenerator, SLRBSAssertion, SLRemoteTaskManager, 
-                       SLSWActionDispatcher, SLShareableContentMetadata, SLSyndicationController, 
-                       SocialLayerDaemon ]
+                       SLSWActionDispatcher, SLShareableContentActionHandler, SLShareableContentMetadata, 
+                       SLSyndicationController, SocialLayerDaemon ]
 ...

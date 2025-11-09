@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C6F0219D-9B13-3C5E-985D-EB2ADE15A85E
+    value:           BD301F5E-ED1B-3D0C-9E19-F7FF0F022D2D
   - target:          x86_64-maccatalyst
-    value:           C6F0219D-9B13-3C5E-985D-EB2ADE15A85E
+    value:           BD301F5E-ED1B-3D0C-9E19-F7FF0F022D2D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A8110477-6F13-3E1E-BD07-55669DCC2608
+    value:           8AF0F262-F312-342D-8BE6-4D2A37596B8B
   - target:          arm64e-maccatalyst
-    value:           A8110477-6F13-3E1E-BD07-55669DCC2608
+    value:           8AF0F262-F312-342D-8BE6-4D2A37596B8B
 install-name:    '/System/Library/Frameworks/CoreMotion.framework/Versions/A/CoreMotion'
-current-version: 2780.0.16
+current-version: 2780.0.27
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTINSt3__110__function6__baseIFvvEEE, __ZTINSt3__117bad_function_callE, 
@@ -40,7 +40,7 @@ exports:
                        _CLMotionSyncStoreLastUpdate, _CLPassKitNotifyPayment, _CLPingDaemon, 
                        _CLSetClientTransientAuthorizationInfo, _CLSetLocationDefault, 
                        _CLSetMapMatchingRouteHint, _CLSetRouteHintsForMapMatching, 
-                       _CLShouldDisplayEEDUI, _CLShouldDisplayStatusBarIconChangedNotification, 
+                       _CLSetTrackRunHint, _CLShouldDisplayEEDUI, _CLShouldDisplayStatusBarIconChangedNotification, 
                        _CLStartStopAdvertisingBeacon, _CLTechStatusChangedNotification, 
                        _CLWeatherNotifyForecast, _CMAbsoluteAltitudeKey, _CMActivityData, 
                        _CMAnomalyDetectorEnabled, _CMAnomalyDetectorEvent, _CMAnomalyEventType, 
@@ -150,11 +150,12 @@ exports:
                        __ZN16CLMotionActivity13isTypeRunningENS_4TypeE, __ZN16CLMotionActivity13isTypeWalkingENS_4TypeE, 
                        __ZN16CLMotionActivity14isTypeCoolDownENS_4TypeE, __ZN16CLMotionActivity14isTypeSwimmingENS_4TypeE, 
                        __ZN16CLMotionActivity15isTypeInVehicleENS_4TypeE, __ZN16CLMotionActivity16isTypeEllipticalENS_4TypeE, 
-                       __ZN16CLMotionActivity16isTypePedestrianENS_4TypeE, __ZN16CLMotionActivity17isTypeScubaDivingENS_4TypeE, 
-                       __ZN16CLMotionActivity18isTypeCoreTrainingENS_4TypeE, __ZN16CLMotionActivity19activityTypeToIndexENS_4TypeE, 
-                       __ZN16CLMotionActivity19indexToActivityTypeEi, __ZN16CLMotionActivity19isTypeStairClimbingENS_4TypeE, 
-                       __ZN16CLMotionActivity20activityTypeToStringENS_4TypeE, __ZN16CLMotionActivity20isTypeIndoorActivityENS_4TypeE, 
-                       __ZN16CLMotionActivity20isTypeWheelchairPushENS_4TypeE, __ZN16CLMotionActivity22isTypeIndoorPedestrianENS_4TypeE, 
+                       __ZN16CLMotionActivity16isTypeKickboxingENS_4TypeE, __ZN16CLMotionActivity16isTypePedestrianENS_4TypeE, 
+                       __ZN16CLMotionActivity17isTypeScubaDivingENS_4TypeE, __ZN16CLMotionActivity18isTypeCoreTrainingENS_4TypeE, 
+                       __ZN16CLMotionActivity19activityTypeToIndexENS_4TypeE, __ZN16CLMotionActivity19indexToActivityTypeEi, 
+                       __ZN16CLMotionActivity19isTypeStairClimbingENS_4TypeE, __ZN16CLMotionActivity20activityTypeToStringENS_4TypeE, 
+                       __ZN16CLMotionActivity20isTypeIndoorActivityENS_4TypeE, __ZN16CLMotionActivity20isTypeWheelchairPushENS_4TypeE, 
+                       __ZN16CLMotionActivity22isTypeIndoorPedestrianENS_4TypeE, 
                        __ZN16CLMotionActivity23isTypeOutdoorWheelchairENS_4TypeE, 
                        __ZN16CLMotionActivity23isTypePushingWheelchairENS_4TypeE, 
                        __ZN16CLMotionActivity23isTypeStationaryCyclingENS_4TypeE, 
@@ -171,34 +172,42 @@ exports:
                        __ZNK16CLMotionActivity9isDrivingEv, __ZNK16CLMotionActivity9isMountedEv, 
                        __ZNK16CLMotionActivity9isRunningEv, __ZNK16CLMotionActivity9isWalkingEv, 
                        _kCLCommonLocationAlwaysAndWhenInUseUsageDescriptionKey, _kCLCommonLocationAlwaysUsageDescriptionKey, 
+                       _kCLCommonLocationAuthorizationPurposeDescriptionDictionaryKey, 
                        _kCLCommonLocationDefaultAccuracyReducedKey, _kCLCommonLocationInterestZonesKey, 
                        _kCLCommonLocationTemporaryUsageDescriptionDictionaryKey, 
                        _kCLCommonLocationUsageDescriptionKey, _kCLCommonLocationWhenInUseUsageDescriptionKey, 
                        _kCLCommonLocationWildernessSafetyUsageDescriptionDictionaryKey, 
                        _kCLCommonNSWidgetWantsLocationKey, _kCLCommonWKRunsIndependentlyOfCompanionAppKey, 
-                       _kCLCommonWKWatchOnlyKey, _kCMHeadphoneMotionManagerEventTypeConnect, 
-                       _kCMHeadphoneMotionManagerEventTypeDisconnect, _kCMHeadphoneMotionManagerEventTypeKey, 
-                       _kCMMediaSessionAlwaysOnAnchor, _kCMMediaSessionClientMode, 
-                       _kCMMediaSessionOpportunisticAnchor, _kCMMediaSessionPredictionIntervalMicroseconds, 
-                       _kCMMotionContextSessionLogMSL, _kCMMotionContextSessionMSLFilePath, 
-                       _kCMMotionContextSessionMSLFilePrefix, _kCMMotionContextSessionUseMLModel, 
-                       _kCMSwimSWOLFInvalid, _kCMVehicleConnectedNotification, _kCMVehicleDisconnectedNotification, 
+                       _kCLCommonWKWatchOnlyKey, _kCMCameraWorkoutSessionLogAccel, 
+                       _kCMCameraWorkoutSessionLogAirPodsDM, _kCMCameraWorkoutSessionLogDM, 
+                       _kCMCameraWorkoutSessionLogGyro, _kCMCameraWorkoutSessionLoggingEnabled, 
+                       _kCMCameraWorkoutSessionMSLPath, _kCMCameraWorkoutSessionMSLPrefix, 
+                       _kCMHeadphoneMotionManagerEventTypeConnect, _kCMHeadphoneMotionManagerEventTypeDisconnect, 
+                       _kCMHeadphoneMotionManagerEventTypeKey, _kCMMediaSessionAlwaysOnAnchor, 
+                       _kCMMediaSessionClientMode, _kCMMediaSessionOpportunisticAnchor, 
+                       _kCMMediaSessionPredictionIntervalMicroseconds, _kCMMotionContextSessionLogMSL, 
+                       _kCMMotionContextSessionMSLFilePath, _kCMMotionContextSessionMSLFilePrefix, 
+                       _kCMMotionContextSessionUseMLModel, _kCMSwimSWOLFInvalid, 
+                       _kCMVehicleConnectedNotification, _kCMVehicleDisconnectedNotification, 
                        _kCMVehicleExitNotification, _kCMVehicularStateChangedNotification, 
                        _kCMVehicularStateChangedToVehicularNotification, _kStrideCalibrationDataBinsKey_Deprecated ]
     objc-classes:    [ CLDeviceMotionProperties, CLSensorRecorderRecordSensorTypeFor, 
                        CLSensorRecorderSensorAvailable, CLSensorRecorderSensorDataRequestById, 
                        CLSensorRecorderSensorMeta, CLSensorRecorderSensorMetaRequestByDateRange, 
                        CLSensorRecorderSensorMetaRequestById, CLSensorRecorderSensorSampleRate, 
-                       CLSensorRecorderWriteSensorDataToFileForDateRange, CMAbsoluteAltitudeData, 
-                       CMAccelerometerData, CMAccelerometerDataArray, CMActivity, 
-                       CMActivityAlarm, CMActivityEventData, CMActivityManager, CMAltimeter, 
-                       CMAltitudeData, CMAmbientPressureData, CMAmbientPressureDataArray, 
+                       CLSensorRecorderWriteSensorDataToFileForDateRange, CM2DSkeletonTransform, 
+                       CM3DLiftedSkeletonTransform, CM3DRetargetedSkeletonTransform, 
+                       CMAbsoluteAltitudeData, CMAccelerometerData, CMAccelerometerDataArray, 
+                       CMActivity, CMActivityAlarm, CMActivityEventData, CMActivityManager, 
+                       CMAltimeter, CMAltitudeData, CMAmbientPressureData, CMAmbientPressureDataArray, 
                        CMAnomalyEvent, CMAttitude, CMAudioAccessoryManager, CMCalorieData, 
-                       CMCalorieUserInfo, CMCalorieUtils, CMCatherineData, CMCatherineFeeder, 
-                       CMContextConfigurationManager, CMDeviceMotion, CMDeviceMotionLite, 
-                       CMDeviceOrientation, CMDistributedSensingManager, CMDistributedSensingManagerInternal, 
-                       CMDyskineticSymptomResult, CMElevation, CMElevationData, CMExerciseMinute, 
-                       CMExerciseMinuteData, CMFall, CMFallDetectionClient, CMFallDetectionEvent, 
+                       CMCalorieUserInfo, CMCalorieUtils, CMCameraBodyMetrics, CMCameraFitnessMachineSample, 
+                       CMCameraWorkoutEvent, CMCameraWorkoutSession, CMCatherineData, 
+                       CMCatherineFeeder, CMContextConfigurationManager, CMDeviceMotion, 
+                       CMDeviceMotionLite, CMDeviceOrientation, CMDistributedSensingManager, 
+                       CMDistributedSensingManagerInternal, CMDyskineticSymptomResult, 
+                       CMElevation, CMElevationData, CMExerciseMinute, CMExerciseMinuteData, 
+                       CMFacePose, CMFall, CMFallDetectionClient, CMFallDetectionEvent, 
                        CMFallDetectionManager, CMFallDetectionManagerInternal, CMFallDetectionServer, 
                        CMFitnessJuniorGoals, CMFitnessMachine, CMFitnessMachineData, 
                        CMFitnessMachineWorkout, CMFitnessPlusWorkout, CMFitnessShared, 
@@ -215,8 +224,8 @@ exports:
                        CMRecordedGyroData, CMRecordedPressureData, CMRecordedRotationRateData, 
                        CMRotationRateData, CMRunningMetricsManager, CMSWOLFSummary, 
                        CMSedentaryTimer, CMSedentaryTimerData, CMSensorDataList, 
-                       CMSensorRecorder, CMSignificantElevationSample, CMSkiData, 
-                       CMSkiTracker, CMSleepData, CMSleepTracker, CMStepCounter, 
+                       CMSensorRecorder, CMSignificantElevationSample, CMSkeletonCollection, 
+                       CMSkiData, CMSkiTracker, CMSleepData, CMSleepTracker, CMStepCounter, 
                        CMStrideCalibrationData, CMStrideCalibrationEntry, CMStrideCalibrationEntryArray, 
                        CMStrideCalibrationEntryInternal, CMStrideCalibrationHistory, 
                        CMSuppressionEvent, CMSuppressionManager, CMSwimData, CMSwimTracker, 

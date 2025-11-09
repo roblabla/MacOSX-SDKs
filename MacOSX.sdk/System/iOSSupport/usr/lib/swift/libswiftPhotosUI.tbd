@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           631A8851-FC73-35D7-BB96-6470026C1D70
+    value:           DA6C7CFE-75A7-3FE2-BC86-AC32448B5776
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           2E6B5A62-C724-32A9-99EB-BAE6A56912DD
+    value:           ADC381FA-8C24-3EF6-BC0E-4A8E7DDB1882
 install-name:    '/System/iOSSupport/usr/lib/swift/libswiftPhotosUI.dylib'
-current-version: 511.0.170
+current-version: 520.0.240
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -92,7 +92,6 @@ exports:
                        '_$s8PhotosUI21PHPickerConfigurationV6filterAA0C6FilterVSgvs', 
                        '_$s8PhotosUI21PHPickerConfigurationV9SelectionO2eeoiySbAE_AEtFZ', 
                        '_$s8PhotosUI21PHPickerConfigurationV9SelectionO4hash4intoys6HasherVz_tF', 
-                       '_$s8PhotosUI21PHPickerConfigurationV9SelectionO6peopleyA2EmFWC', 
                        '_$s8PhotosUI21PHPickerConfigurationV9SelectionO7defaultyA2EmFWC', 
                        '_$s8PhotosUI21PHPickerConfigurationV9SelectionO7orderedyA2EmFWC', 
                        '_$s8PhotosUI21PHPickerConfigurationV9SelectionO9hashValueSivg', 

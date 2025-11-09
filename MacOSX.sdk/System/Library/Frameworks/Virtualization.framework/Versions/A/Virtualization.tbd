@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           153E71D9-689F-3567-8CBC-2A72DC1EF973
+    value:           ECA043BC-E8B4-3188-832D-AC3A17AC3726
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3EC2A477-C3EC-3496-8861-706B1781521C
+    value:           757F57EA-D97A-3F37-87B6-3FCE0220B67A
 install-name:    '/System/Library/Frameworks/Virtualization.framework/Versions/A/Virtualization'
-current-version: 104.7
+current-version: 104.7.1
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ __VZVirtualMachineGuestTypeMacOS ]

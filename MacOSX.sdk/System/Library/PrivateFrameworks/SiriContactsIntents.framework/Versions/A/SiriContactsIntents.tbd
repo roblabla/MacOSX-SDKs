@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2DB8EA77-4054-310A-8635-75117BFA71D9
+    value:           B1B0B9E6-2D4A-32AF-89A4-D6AC50C2FDF9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E9AC9FEB-645F-3748-9FB5-144ABC95950E
+    value:           A332F17F-8A5D-3A68-9794-C1F929DE5444
 install-name:    '/System/Library/PrivateFrameworks/SiriContactsIntents.framework/Versions/A/SiriContactsIntents'
 swift-abi-version: 7
 allowable-clients:
@@ -19,6 +19,7 @@ exports:
                        '_$s11SiriKitFlow11DisplayHintV0A15ContactsIntentsE11descriptionSSvpMV', 
                        '_$s11SiriKitFlow11DisplayHintVs23CustomStringConvertible0A15ContactsIntentsMc', 
                        '_$s11SiriKitFlow5ParseO16DirectInvocationV0A15ContactsIntentsE02toaB6IntentAF0ab7ContactJ0_pSgyF', 
+                       '_$s11SiriKitFlow5ParseO16DirectInvocationV0A15ContactsIntentsE17getSelectionIndexSiyKF', 
                        '_$s13SiriInference15ContactResolverC0A15ContactsIntents0cD8ProtocolADMc', 
                        '_$s13SiriInference15ContactResolverC0A15ContactsIntents0cD8ProtocolADWP', 
                        '_$s13SiriInference7ContactV0A15ContactsIntentsE17formattedFullNameSSvg', 

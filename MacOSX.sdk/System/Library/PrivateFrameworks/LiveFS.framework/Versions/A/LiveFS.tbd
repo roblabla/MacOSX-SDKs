@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           31FA12CE-8EDD-3397-B302-46982B010AF8
+    value:           E54F9C25-C998-38A6-8FB7-558775337E70
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B111D6ED-5943-3769-A15C-67413D18AF1F
+    value:           794016E7-4821-3C82-A91D-CDA3AF5744D5
 install-name:    '/System/Library/PrivateFrameworks/LiveFS.framework/Versions/A/LiveFS'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

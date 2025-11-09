@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3C39F5C8-A47D-328C-9E73-AFC41EEBCDAB
+    value:           8D7C4BB9-7C92-387E-8632-4632B2B0A9EA
   - target:          x86_64-maccatalyst
-    value:           3C39F5C8-A47D-328C-9E73-AFC41EEBCDAB
+    value:           8D7C4BB9-7C92-387E-8632-4632B2B0A9EA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F1DA9635-E0CE-323D-B663-75B8E38339A3
+    value:           F920411D-AD30-3DA0-B32F-76F1D6C760C2
   - target:          arm64e-maccatalyst
-    value:           F1DA9635-E0CE-323D-B663-75B8E38339A3
+    value:           F920411D-AD30-3DA0-B32F-76F1D6C760C2
 install-name:    '/System/Library/PrivateFrameworks/CryptoKitCBridging.framework/Versions/A/CryptoKitCBridging'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

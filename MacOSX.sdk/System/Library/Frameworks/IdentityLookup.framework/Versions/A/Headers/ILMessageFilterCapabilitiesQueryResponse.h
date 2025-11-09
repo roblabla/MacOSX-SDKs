@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// A response to an ILMessageFilterCapabilitiesQueryRequest.
-IL_EXTERN API_AVAILABLE(ios(16.0), macCatalyst(18.0)) API_UNAVAILABLE( tvos) API_UNAVAILABLE(macos, watchos)
+IL_EXTERN API_AVAILABLE(ios(16.0), macCatalyst(16.0)) API_UNAVAILABLE( tvos) API_UNAVAILABLE(macos, watchos)
 @interface ILMessageFilterCapabilitiesQueryResponse : NSObject <NSSecureCoding>
 
 /// Array of type ILMessageFilterSubAction under Transactional

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           658C5387-536D-3D8B-9CD9-28E421597EA4
+    value:           AED3E5C1-64C1-3C7B-86BD-2522447831B1
   - target:          x86_64-maccatalyst
-    value:           658C5387-536D-3D8B-9CD9-28E421597EA4
+    value:           AED3E5C1-64C1-3C7B-86BD-2522447831B1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0E28B8FC-7123-3D86-AB4D-56EC7644209F
+    value:           FC2961B6-B0CC-32BB-9CD1-4FAF7654EB43
   - target:          arm64e-maccatalyst
-    value:           0E28B8FC-7123-3D86-AB4D-56EC7644209F
+    value:           FC2961B6-B0CC-32BB-9CD1-4FAF7654EB43
 install-name:    '/usr/lib/libBasebandCapabilities.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

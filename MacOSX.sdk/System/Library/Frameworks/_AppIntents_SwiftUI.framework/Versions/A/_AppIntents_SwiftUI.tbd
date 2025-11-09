@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           98F8DC2A-50E6-344A-BAD9-1F8F3C248B4A
+    value:           375380E5-9D85-36CB-B27A-BC5ADB01D62D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           61733078-AEB5-36D7-837A-191A51B3AE8D
+    value:           D30F4F98-D93F-37F3-9608-5943B1081F78
 install-name:    '/System/Library/Frameworks/_AppIntents_SwiftUI.framework/Versions/A/_AppIntents_SwiftUI'
-current-version: 130.5
+current-version: 130.100.5
 compatibility-version: 0
 swift-abi-version: 7
 exports:

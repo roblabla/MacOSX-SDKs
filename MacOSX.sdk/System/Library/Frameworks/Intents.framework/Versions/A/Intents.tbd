@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C88CEE9D-1A56-3DCD-94FC-08A47B27242B
+    value:           0C21862D-DC9B-3E58-8991-D3976467E8CA
   - target:          x86_64-maccatalyst
-    value:           C88CEE9D-1A56-3DCD-94FC-08A47B27242B
+    value:           0C21862D-DC9B-3E58-8991-D3976467E8CA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           42202DBF-8AF8-3726-AA28-A956858B4A17
+    value:           8ECE9CEC-FEBD-3B66-A044-895B05E6A242
   - target:          arm64e-maccatalyst
-    value:           42202DBF-8AF8-3726-AA28-A956858B4A17
+    value:           8ECE9CEC-FEBD-3B66-A044-895B05E6A242
 install-name:    '/System/Library/Frameworks/Intents.framework/Versions/A/Intents'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -49,8 +49,8 @@ exports:
                        _INAnnouncementSoundTypeGetBackingType, _INAnnouncementSoundTypeGetFacadeType, 
                        _INAnnouncementSoundTypeGetLocalizedName, _INAnnouncementSoundTypeGetName, 
                        _INAnnouncementSoundTypeHasBackingType, _INAnnouncementSoundTypeWithString, 
-                       _INAnswerCallIntentResponseCodeGetName, _INAppCanDonateIntent, 
-                       _INAppHasExtensionForIntent, _INAppIntentVocabularyInBundleProxy, 
+                       _INAnswerCallIntentIdentifier, _INAnswerCallIntentResponseCodeGetName, 
+                       _INAppCanDonateIntent, _INAppHasExtensionForIntent, _INAppIntentVocabularyInBundleProxy, 
                        _INAppProxyForAppOrContainedPluginWithBundleIdentifier, _INAppResolverLogInitIfNeeded, 
                        _INAppResolverOptionsIncludeUserActivityTypesKey, _INAppResolverOptionsSkipSupportedIntentsCheckKey, 
                        _INAppendToNoteIntentResponseCodeGetName, _INAudioCallTTYTypeGetBackingType, 
@@ -273,8 +273,9 @@ exports:
                        _INGetFileInformationIntentIdentifier, _INGetFileInformationIntentResponseCodeGetName, 
                        _INGetReservationDetailsIntentResponseCodeGetName, _INGetRideStatusIntentIdentifier, 
                        _INGetRideStatusIntentResponseCodeGetName, _INGetSettingIntentResponseCodeGetName, 
-                       _INGetVisualCodeIntentResponseCodeGetName, _INHangUpCallIntentResponseCodeGetName, 
-                       _INHelperServiceName, _INHelperServingXPCInterface, _INHomeAttributeLimitGetBackingType, 
+                       _INGetVisualCodeIntentResponseCodeGetName, _INHangUpCallIntentIdentifier, 
+                       _INHangUpCallIntentResponseCodeGetName, _INHelperServiceName, 
+                       _INHelperServingXPCInterface, _INHomeAttributeLimitGetBackingType, 
                        _INHomeAttributeLimitGetFacadeType, _INHomeAttributeLimitGetLocalizedName, 
                        _INHomeAttributeLimitGetName, _INHomeAttributeLimitHasBackingType, 
                        _INHomeAttributeLimitWithString, _INHomeAttributeTypeGetBackingType, 

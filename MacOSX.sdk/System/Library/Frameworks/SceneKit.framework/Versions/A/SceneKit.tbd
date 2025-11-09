@@ -3,23 +3,23 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F063CCA6-689C-379B-8810-30983C303D21
+    value:           E7D116F9-CA93-3CC4-9082-D45B7D9A0642
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CAF78FB2-4A0A-37BE-9909-C5255C9AC81F
+    value:           6E58FB68-0E50-3AE1-B060-C70FA1973D13
 install-name:    '/System/Library/Frameworks/SceneKit.framework/Versions/A/SceneKit'
-current-version: 581.100
+current-version: 581.203
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _C3DGetFileDecryptionCallbacks, _C3DIOCreateCStringFromCFString, 
                        _C3DIOCreateOptionsForRealtimeViewer, _C3DImageGetAttribute, 
                        _C3DImageGetURL, _C3DImageSetAttribute, _C3DSetFileDecryptionCallbacks, 
                        _SCNAnimationCommitOnCompletion, _SCNBindingValueTransformerKey, 
-                       _SCNCaptureDeviceOutputConsumerOptionContainsAlpha, _SCNCompositorRendererLayoutKey, 
-                       _SCNConsistencyElementIDErrorKey, _SCNConsistencyElementTypeErrorKey, 
-                       _SCNConsistencyLineNumberErrorKey, _SCNDataProviderAnimationTime, 
-                       _SCNDataProviderCAWaitTime, _SCNDataProviderCPUIdleTime, _SCNDataProviderClientUpdateTime, 
+                       _SCNCaptureDeviceOutputConsumerOptionContainsAlpha, _SCNConsistencyElementIDErrorKey, 
+                       _SCNConsistencyElementTypeErrorKey, _SCNConsistencyLineNumberErrorKey, 
+                       _SCNDataProviderAnimationTime, _SCNDataProviderCAWaitTime, 
+                       _SCNDataProviderCPUIdleTime, _SCNDataProviderClientUpdateTime, 
                        _SCNDataProviderConstraintsTime, _SCNDataProviderFPS, _SCNDataProviderFrameTime, 
                        _SCNDataProviderGPUDeviceUtil, _SCNDataProviderGPURendererUtil, 
                        _SCNDataProviderGPUTilerUtil, _SCNDataProviderParticleTime, 
@@ -140,15 +140,15 @@ exports:
                        SCNAssetCatalog, SCNAudioPlayer, SCNAudioSource, SCNAuthoringEnvironment, 
                        SCNAuthoringEnvironment2, SCNAvoidOccluderConstraint, SCNBillboardConstraint, 
                        SCNBox, SCNCamera, SCNCameraControlEventHandler, SCNCameraController, 
-                       SCNCameraNavigationController, SCNCapsule, SCNCompositorRenderer, 
-                       SCNCone, SCNConstantScaleConstraint, SCNConstraint, SCNCylinder, 
-                       SCNDistanceConstraint, SCNEffect, SCNEventHandler, SCNExportOperation, 
-                       SCNFloor, SCNGeometry, SCNGeometryDeformer, SCNGeometryElement, 
-                       SCNGeometrySource, SCNGeometryTessellator, SCNHitTestResult, 
-                       SCNIKConstraint, SCNImageSource, SCNKeyedArchiver, SCNKeyedUnarchiver, 
-                       SCNLayer, SCNLevelOfDetail, SCNLight, SCNLookAtConstraint, 
-                       SCNManipulableItem, SCNManipulator, SCNMaterial, SCNMaterialProperty, 
-                       SCNMetalLayer, SCNMorpher, SCNNode, SCNNodeReference, SCNOffscreenRenderer, 
+                       SCNCameraNavigationController, SCNCapsule, SCNCone, SCNConstantScaleConstraint, 
+                       SCNConstraint, SCNCylinder, SCNDistanceConstraint, SCNEffect, 
+                       SCNEventHandler, SCNExportOperation, SCNFloor, SCNGeometry, 
+                       SCNGeometryDeformer, SCNGeometryElement, SCNGeometrySource, 
+                       SCNGeometryTessellator, SCNHitTestResult, SCNIKConstraint, 
+                       SCNImageSource, SCNKeyedArchiver, SCNKeyedUnarchiver, SCNLayer, 
+                       SCNLevelOfDetail, SCNLight, SCNLookAtConstraint, SCNManipulableItem, 
+                       SCNManipulator, SCNMaterial, SCNMaterialProperty, SCNMetalLayer, 
+                       SCNMorpher, SCNNode, SCNNodeReference, SCNOffscreenRenderer, 
                        SCNParticlePropertyController, SCNParticleSystem, SCNPass, 
                        SCNPassContext, SCNPhysicsBallSocketJoint, SCNPhysicsBehavior, 
                        SCNPhysicsBody, SCNPhysicsCharacter, SCNPhysicsConeTwistJoint, 

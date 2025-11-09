@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A78CAB84-75B7-3A61-A895-6A5F20F22C0C
+    value:           6A82E9DA-F646-38D6-8D73-5A69327B5BFE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CF7CB87B-B325-38F5-848C-1050F9333C5F
+    value:           1556FC1E-6F1A-321B-891D-A440DB635255
 install-name:    '/System/Library/PrivateFrameworks/AudioServerDriver.framework/Versions/A/AudioServerDriver'
 exports:
   - targets:         [ x86_64-macos ]

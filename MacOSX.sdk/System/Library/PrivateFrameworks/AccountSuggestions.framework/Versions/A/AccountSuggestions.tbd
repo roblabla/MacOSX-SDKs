@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3876EAB8-C996-3A96-ABFE-B86136F815BB
+    value:           98C53462-85E7-37EA-9825-DD6655EF79DF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           159721D3-D5B5-3148-9C27-08B67601F0FC
+    value:           5FBF4979-2D43-3B71-AC61-758DFE5F7C34
 install-name:    '/System/Library/PrivateFrameworks/AccountSuggestions.framework/Versions/A/AccountSuggestions'
 swift-abi-version: 7
 exports:

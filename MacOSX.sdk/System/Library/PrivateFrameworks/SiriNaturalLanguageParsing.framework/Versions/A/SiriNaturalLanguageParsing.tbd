@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B6233382-C609-3DB2-A72F-08ED7F99EBAE
+    value:           97BC693E-E41C-3931-AA07-F388CD59093D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8928A000-22E3-383D-97BF-F4AB8312B0F6
+    value:           4F4B87A6-BD38-38FC-82CF-CE958317BA9C
 install-name:    '/System/Library/PrivateFrameworks/SiriNaturalLanguageParsing.framework/Versions/A/SiriNaturalLanguageParsing'
 exports:
   - targets:         [ x86_64-macos ]

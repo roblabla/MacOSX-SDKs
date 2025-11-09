@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B528049B-0467-3F4B-814B-BDF8120B7CCB
+    value:           722E2602-DFAB-31F6-95EB-24396F177603
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           255104D8-EDCA-3391-911C-FA92C72F750D
+    value:           E0A82A2E-B435-3669-B679-EAB6944FB1F5
 install-name:    '/System/Library/PrivateFrameworks/MachineSettings.framework/Versions/A/MachineSettings'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

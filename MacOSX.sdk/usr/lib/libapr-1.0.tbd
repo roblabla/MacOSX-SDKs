@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CAA39D01-AFF2-3FAA-A71E-56A041024693
+    value:           E8B2F6A6-B1BA-3D78-A0A5-C292FDFDA94A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0449F7C7-2973-37BF-93B7-A94F2137B38E
+    value:           DB5562E9-346E-316F-B98B-40CD6B867AB1
 install-name:    '/usr/lib/libapr-1.0.dylib'
 current-version: 5.8
 compatibility-version: 5

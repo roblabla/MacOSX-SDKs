@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           11162731-6F93-3CCB-BA80-016E6D84A0D1
+    value:           266984C5-FBDF-38C5-912E-5B68FA48364F
   - target:          x86_64-maccatalyst
-    value:           11162731-6F93-3CCB-BA80-016E6D84A0D1
+    value:           266984C5-FBDF-38C5-912E-5B68FA48364F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FD51CF11-75A7-37AF-9689-BAEF6E13DD75
+    value:           ECA8B6B7-3794-3AF1-8FBB-C30185556BE7
   - target:          arm64e-maccatalyst
-    value:           FD51CF11-75A7-37AF-9689-BAEF6E13DD75
+    value:           ECA8B6B7-3794-3AF1-8FBB-C30185556BE7
 install-name:    '/System/Library/PrivateFrameworks/CoreLocationProtobuf.framework/Versions/A/CoreLocationProtobuf'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -113,6 +113,8 @@ exports:
                        CLPCalibratedPressureCollectionRequest._devicePressureUncPa, 
                        CLPCalibratedPressureCollectionRequest._has, CLPCalibratedPressureCollectionRequest._horizontalUncM, 
                        CLPCalibratedPressureCollectionRequest._latitudeDeg, CLPCalibratedPressureCollectionRequest._longitudeDeg, 
+                       CLPCalibratedPressureCollectionRequest._quantizedDistChangeSinceLastCalibrationM, 
+                       CLPCalibratedPressureCollectionRequest._quantizedTimeChangeSinceLastCalibrationS, 
                        CLPCalibratedPressureCollectionRequest._referenceAltM, CLPCalibratedPressureCollectionRequest._referenceAltUncM, 
                        CLPCalibratedPressureCollectionRequest._reliability, CLPCalibratedPressureCollectionRequest._speedMps, 
                        CLPCalibratedPressureCollectionRequest._speedUncMps, CLPCalibratedPressureCollectionRequest._timeSinceLastSignificantLocationVisitExitS, 

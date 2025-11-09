@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6FE50A24-F476-3033-9EE8-F23F5CD09BE8
+    value:           5849CAF7-C1A5-3D67-A598-33A780178F69
   - target:          x86_64-maccatalyst
-    value:           6FE50A24-F476-3033-9EE8-F23F5CD09BE8
+    value:           5849CAF7-C1A5-3D67-A598-33A780178F69
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           31A4C803-8DD4-3A60-95E7-16067A92EA27
+    value:           D39B5CE6-16E2-3258-B470-D96D690F752D
   - target:          arm64e-maccatalyst
-    value:           31A4C803-8DD4-3A60-95E7-16067A92EA27
+    value:           D39B5CE6-16E2-3258-B470-D96D690F752D
 install-name:    '/System/Library/Frameworks/MediaToolbox.framework/Versions/A/MediaToolbox'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -1661,8 +1661,9 @@ exports:
                        _kFigAudioRenderPipelineSweepFilterConfigurationKey_MinimumCutOffFrequency, 
                        _kFigBufferedAirPlayAudioRenderPipelineProperty_DecodingRate, 
                        _kFigBufferedAirPlayAudioRenderPipelineProperty_GoActive, 
-                       _kFigBufferedAirPlayOutputAudioMode_Default, _kFigBufferedAirPlayOutputAudioMode_MoviePlayback, 
-                       _kFigBufferedAirPlayOutputAudioMode_SpokenAudio, _kFigBufferedAirPlayOutputNotificationKey_BufferingPriority, 
+                       _kFigBufferedAirPlayAudioRenderPipelineProperty_Started, _kFigBufferedAirPlayOutputAudioMode_Default, 
+                       _kFigBufferedAirPlayOutputAudioMode_MoviePlayback, _kFigBufferedAirPlayOutputAudioMode_SpokenAudio, 
+                       _kFigBufferedAirPlayOutputNotificationKey_BufferingPriority, 
                        _kFigBufferedAirPlayOutputNotificationKey_ConnectedRenderPipelineHash, 
                        _kFigBufferedAirPlayOutputNotificationParameter_OutputPresentationTimestamp, 
                        _kFigBufferedAirPlayOutputNotification_ActiveConfigurationDidBecomeInvalid, 
@@ -1814,7 +1815,6 @@ exports:
                        _kFigClosedCaptionRenderPipelineProperty_ClosedCaptionType, 
                        _kFigClosedCaptionRenderPipelineProperty_TextHighlightArray, 
                        _kFigContentKeyBossCreationOption_ClientAuditToken, _kFigContentKeyBossProperty_CanRetryRequests, 
-                       _kFigContentKeyBossProperty_ShouldTryCustomURLLoaderWhenClientManagedKeyBossExists, 
                        _kFigContentKeyBossProperty_SupportsReencryption, _kFigCoreAnimationRendererOption_DestinationColorAttachments, 
                        _kFigCoreAnimationRendererProperty_PerformanceDictionary, 
                        _kFigCoreAnimationRendererProperty_ThrottleForBackground, 
@@ -2100,7 +2100,8 @@ exports:
                        _kFigImageQueueProperty_CAImageQueueAlwaysSync, _kFigImageQueueProperty_CAImageQueueCaptionsMayAppearHint, 
                        _kFigImageQueueProperty_CachedTimeRange, _kFigImageQueueProperty_CachedVideoFrames, 
                        _kFigImageQueueProperty_CurrentFrameRate, _kFigImageQueueProperty_DisableColorMatching, 
-                       _kFigImageQueueProperty_DisplaySize, _kFigImageQueueProperty_DurationAllowedForCachedVideoFrames, 
+                       _kFigImageQueueProperty_DisplaySize, _kFigImageQueueProperty_Duration, 
+                       _kFigImageQueueProperty_DurationAllowedForCachedVideoFrames, 
                        _kFigImageQueueProperty_EnableImageQueueTiming, _kFigImageQueueProperty_EnablePSEMitigation, 
                        _kFigImageQueueProperty_EnqueueResetsSystemSleepTimer, _kFigImageQueueProperty_FirstImageEnqueued, 
                        _kFigImageQueueProperty_ForScrubbingOnly, _kFigImageQueueProperty_GPURegistryID, 
@@ -2756,21 +2757,21 @@ exports:
                        _kFigPlayerNotification_SubtitleChanged, _kFigPlayerNotification_SynchronousFrameEnqueued, 
                        _kFigPlayerNotification_TimedMetadata, _kFigPlayerNotification_UserFullMuteDidChange, 
                        _kFigPlayerNotification_UserMutedDidChange, _kFigPlayerNotification_UserVolumeDidChange, 
-                       _kFigPlayerNotification_VolumeDidChange, _kFigPlayerOptionKey_LoggingIdentifier, 
-                       _kFigPlayerOptionKey_PreserveSessionSampleRate, _kFigPlayerOptionKey_PrimaryAirPlayIDForInterstitial, 
-                       _kFigPlayerOptionKey_ShouldWaitForVideoTarget, _kFigPlayerParameter_AudioVolume, 
-                       _kFigPlayerParameter_CoordinatedPlaybackOriginator, _kFigPlayerParameter_CurrentConflictMuted, 
-                       _kFigPlayerParameter_CurrentDisplayingClosedCaptions, _kFigPlayerParameter_CurrentExternalProtectionStatus, 
-                       _kFigPlayerParameter_CurrentIsAirPlayVideoActive, _kFigPlayerParameter_CurrentIsNeroPlaybackActive, 
-                       _kFigPlayerParameter_CurrentMuted, _kFigPlayerParameter_CurrentPlaybackState, 
-                       _kFigPlayerParameter_CurrentRate, _kFigPlayerParameter_ErrorCode, 
-                       _kFigPlayerParameter_InterruptionStatus, _kFigPlayerParameter_InterruptorName, 
-                       _kFigPlayerParameter_MXSessionID, _kFigPlayerParameter_NewItem, 
-                       _kFigPlayerParameter_OverlappedPlaybackID, _kFigPlayerParameter_PauseAffectsCoordinatedPlayback, 
-                       _kFigPlayerParameter_PiPIsPossibleDidChange_PiPPossible, _kFigPlayerParameter_PlayImmediately, 
-                       _kFigPlayerParameter_PrerollID, _kFigPlayerParameter_RateChangeIdentifier, 
-                       _kFigPlayerParameter_ReasonForCurrentItemDidChange, _kFigPlayerParameter_ReasonForRateChange, 
-                       _kFigPlayerParameter_TimeReachedDuringOverlappedPlayback, 
+                       _kFigPlayerNotification_VolumeDidChange, _kFigPlayerOptionKey_InterstitialPrimaryPlayerName, 
+                       _kFigPlayerOptionKey_LoggingIdentifier, _kFigPlayerOptionKey_PlayerName, 
+                       _kFigPlayerOptionKey_PreserveSessionSampleRate, _kFigPlayerOptionKey_ShouldWaitForVideoTarget, 
+                       _kFigPlayerParameter_AudioVolume, _kFigPlayerParameter_CoordinatedPlaybackOriginator, 
+                       _kFigPlayerParameter_CurrentConflictMuted, _kFigPlayerParameter_CurrentDisplayingClosedCaptions, 
+                       _kFigPlayerParameter_CurrentExternalProtectionStatus, _kFigPlayerParameter_CurrentIsAirPlayVideoActive, 
+                       _kFigPlayerParameter_CurrentIsNeroPlaybackActive, _kFigPlayerParameter_CurrentMuted, 
+                       _kFigPlayerParameter_CurrentPlaybackState, _kFigPlayerParameter_CurrentRate, 
+                       _kFigPlayerParameter_ErrorCode, _kFigPlayerParameter_InterruptionStatus, 
+                       _kFigPlayerParameter_InterruptorName, _kFigPlayerParameter_MXSessionID, 
+                       _kFigPlayerParameter_NewItem, _kFigPlayerParameter_OverlappedPlaybackID, 
+                       _kFigPlayerParameter_PauseAffectsCoordinatedPlayback, _kFigPlayerParameter_PiPIsPossibleDidChange_PiPPossible, 
+                       _kFigPlayerParameter_PlayImmediately, _kFigPlayerParameter_PrerollID, 
+                       _kFigPlayerParameter_RateChangeIdentifier, _kFigPlayerParameter_ReasonForCurrentItemDidChange, 
+                       _kFigPlayerParameter_ReasonForRateChange, _kFigPlayerParameter_TimeReachedDuringOverlappedPlayback, 
                        _kFigPlayerPreWiringPixelBufferOptions_Size, _kFigPlayerPropertySendToNeroKey_NeroTransport, 
                        _kFigPlayerPropertySendToNeroKey_Visuals, _kFigPlayerProperty_AURemoteIOToken, 
                        _kFigPlayerProperty_ActionAtEnd, _kFigPlayerProperty_ActivationContext, 
@@ -2809,10 +2810,9 @@ exports:
                        _kFigPlayerProperty_ExpectedAssetTypeHint, _kFigPlayerProperty_ExternalPlaybackCapabilities, 
                        _kFigPlayerProperty_ExternalProtectionStatus, _kFigPlayerProperty_GatherPerformanceHistoryArray, 
                        _kFigPlayerProperty_ImageQueueSlotTransitionFinished, _kFigPlayerProperty_InterruptionHandlingFadeOutDuration, 
-                       _kFigPlayerProperty_InterstitialPrimaryAirPlayID, _kFigPlayerProperty_IsAirPlayVideoActive, 
-                       _kFigPlayerProperty_IsLongFormAudio, _kFigPlayerProperty_IsNeroPlaybackActive, 
-                       _kFigPlayerProperty_IsValid, _kFigPlayerProperty_LastSentSubtitleSample, 
-                       _kFigPlayerProperty_LegibleFallbackMediaSelectionCriteria, 
+                       _kFigPlayerProperty_IsAirPlayVideoActive, _kFigPlayerProperty_IsLongFormAudio, 
+                       _kFigPlayerProperty_IsNeroPlaybackActive, _kFigPlayerProperty_IsValid, 
+                       _kFigPlayerProperty_LastSentSubtitleSample, _kFigPlayerProperty_LegibleFallbackMediaSelectionCriteria, 
                        _kFigPlayerProperty_LimitsBandwidthForCellularAccess, _kFigPlayerProperty_MXSessionID, 
                        _kFigPlayerProperty_MasterClock, _kFigPlayerProperty_MaxRateForAudioPlayback, 
                        _kFigPlayerProperty_MaximumTrailingBufferDuration, _kFigPlayerProperty_MediaSelectionCriteria, 
@@ -2825,11 +2825,12 @@ exports:
                        _kFigPlayerProperty_PerformanceDictionary, _kFigPlayerProperty_PerformanceHistoryArray, 
                        _kFigPlayerProperty_PiPIsPossible, _kFigPlayerProperty_PickerContextUUID, 
                        _kFigPlayerProperty_PlaybackCoordinator, _kFigPlayerProperty_PlaybackState, 
-                       _kFigPlayerProperty_PlayerRole, _kFigPlayerProperty_PostChapterHREFChanges, 
-                       _kFigPlayerProperty_PostChapterImageChanges, _kFigPlayerProperty_PostChapterNameChanges, 
-                       _kFigPlayerProperty_PostClosedCaptionCommands, _kFigPlayerProperty_PreferredLanguageList, 
-                       _kFigPlayerProperty_PreferredMaximumBufferDuration, _kFigPlayerProperty_PreferredVideoDecoderGPURegistryID, 
-                       _kFigPlayerProperty_PrepareItemOnDispatchQueue, _kFigPlayerProperty_PreventAutomaticBackgroundingDuringVideoPlayback, 
+                       _kFigPlayerProperty_PlayerName, _kFigPlayerProperty_PlayerRole, 
+                       _kFigPlayerProperty_PostChapterHREFChanges, _kFigPlayerProperty_PostChapterImageChanges, 
+                       _kFigPlayerProperty_PostChapterNameChanges, _kFigPlayerProperty_PostClosedCaptionCommands, 
+                       _kFigPlayerProperty_PreferredLanguageList, _kFigPlayerProperty_PreferredMaximumBufferDuration, 
+                       _kFigPlayerProperty_PreferredVideoDecoderGPURegistryID, _kFigPlayerProperty_PrepareItemOnDispatchQueue, 
+                       _kFigPlayerProperty_PreventAutomaticBackgroundingDuringVideoPlayback, 
                        _kFigPlayerProperty_PreventDisplaySleepDuringVideoPlayback, 
                        _kFigPlayerProperty_PrimaryVideoOutputSize, _kFigPlayerProperty_PrivateRouteAvailable, 
                        _kFigPlayerProperty_ProhibitAMR, _kFigPlayerProperty_ReleaseResourcesWhenPaused, 

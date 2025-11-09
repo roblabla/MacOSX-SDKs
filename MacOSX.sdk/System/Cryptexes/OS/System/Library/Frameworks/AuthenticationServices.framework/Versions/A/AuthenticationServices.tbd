@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E01D3693-6FFE-3F09-9F60-B825368E8BDD
+    value:           104C8615-9F2E-3C03-A9A6-CA90CF14058A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           334A008A-ED69-38B2-BBAF-6DB42D9080E9
+    value:           F151CD0D-53EC-3780-97AC-6167A68A067C
 install-name:    '/System/Library/Frameworks/AuthenticationServices.framework/Versions/A/AuthenticationServices'
-current-version: 614.2.9
+current-version: 614.3.7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports, 

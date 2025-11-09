@@ -16,13 +16,13 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NSString *BCParameterName _NS_TYPED_EXTENSIBLE_ENUM NS_SWIFT_NAME(BCChatAction.Parameter);
 
 /** Intent is used to help the support agent or business system identify the product, service, account, or other context when the customer tapped the button to send the message. */
-extern BCParameterName const BCParameterNameIntent API_AVAILABLE(macos(10.13.4), ios(11.3));
+extern BCParameterName const BCParameterNameIntent API_DEPRECATED("", macos(10.13.4, 13.0), ios(11.3, 16.1));
 /** Group is used to help the business or customer service platform route the message to the appropriate support agent group. */
-extern BCParameterName const BCParameterNameGroup API_AVAILABLE(macos(10.13.4), ios(11.3));
+extern BCParameterName const BCParameterNameGroup API_DEPRECATED("", macos(10.13.4, 13.0), ios(11.3, 16.1));
 /** Body is used to help the customer by providing a pre-configured contextual message that the customer can tap to send to smooth the transition into Business Chat. */
-extern BCParameterName const BCParameterNameBody API_AVAILABLE(macos(10.13.4), ios(11.3));
+extern BCParameterName const BCParameterNameBody API_DEPRECATED("", macos(10.13.4, 13.0), ios(11.3, 16.1));
 
-API_AVAILABLE(macos(10.13.4), ios(11.3))
+API_DEPRECATED("", macos(10.13.4, 13.0), ios(11.3, 16.1))
 @interface BCChatAction : NSObject
 
 /**
@@ -32,7 +32,7 @@ API_AVAILABLE(macos(10.13.4), ios(11.3))
  @param intentParameters Parameters to be sent with the initial message.
  */
 + (void)openTranscript:(NSString *)businessIdentifier
-      intentParameters:(NSDictionary<BCParameterName, NSString *> *)intentParameters NS_SWIFT_NAME(openTranscript(businessIdentifier:intentParameters:))API_AVAILABLE(macos(10.13.4), ios(11.3));
+      intentParameters:(NSDictionary<BCParameterName, NSString *> *)intentParameters NS_SWIFT_NAME(openTranscript(businessIdentifier:intentParameters:)) API_DEPRECATED("", macos(10.13.4, 13.0), ios(11.3, 16.1));
 
 @end
 

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3C94C713-7F30-382A-B1F7-8FA46A5117A2
+    value:           D518535F-C613-3910-83B7-6333B516F2B0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           22C95ECD-C3EF-3D0F-AE8A-4D091B7888C8
+    value:           927D6BEE-D10B-394B-9073-063DD2E8141C
 install-name:    '/System/Library/PrivateFrameworks/DFRFoundation.framework/Versions/A/DFRFoundation'
-current-version: 282
+current-version: 282.1
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DFRAccessibilityRemoteUIElementsChangedNotification, _DFRControlStripPlayPauseButtonIdentifier, 

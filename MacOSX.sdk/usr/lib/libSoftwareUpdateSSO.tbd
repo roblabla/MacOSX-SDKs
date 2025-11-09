@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9E5115C0-F84E-3BB0-8253-4E6F88E74D9A
+    value:           AA4CE6F9-9841-3F25-8AD2-3904A694913A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DC115CEB-138B-3E6E-99B9-B101CE40F20D
+    value:           5B66E397-AB57-3ED1-A424-72CE5AE9A9DE
 install-name:    '/usr/lib/libSoftwareUpdateSSO.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

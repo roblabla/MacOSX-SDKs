@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5A7B3EAC-D8F6-321D-A792-01C06149C0B1
+    value:           DCF563B6-A827-36E5-85FD-36E0F5783317
   - target:          x86_64-maccatalyst
-    value:           5A7B3EAC-D8F6-321D-A792-01C06149C0B1
+    value:           DCF563B6-A827-36E5-85FD-36E0F5783317
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3E2A93A4-AE2D-3BA0-8A98-426D2BB31969
+    value:           2A61AB2A-BD4B-3E12-9124-FAB70060C90A
   - target:          arm64e-maccatalyst
-    value:           3E2A93A4-AE2D-3BA0-8A98-426D2BB31969
+    value:           2A61AB2A-BD4B-3E12-9124-FAB70060C90A
 install-name:    '/usr/lib/swift/libswiftAccelerate.dylib'
 current-version: 41
 swift-abi-version: 7

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C1A4F712-6E7D-34CB-A2DC-9F9C5DC286BD
+    value:           F347C6DD-EEA8-39D5-BAD6-87C286C319C5
   - target:          x86_64-maccatalyst
-    value:           C1A4F712-6E7D-34CB-A2DC-9F9C5DC286BD
+    value:           F347C6DD-EEA8-39D5-BAD6-87C286C319C5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2668134C-1B45-3258-ACD1-D3DB81090277
+    value:           D4F11A21-D04F-35D4-AEF8-EA7E084D12F1
   - target:          arm64e-maccatalyst
-    value:           2668134C-1B45-3258-ACD1-D3DB81090277
+    value:           D4F11A21-D04F-35D4-AEF8-EA7E084D12F1
 install-name:    '/usr/lib/libxar.1.dylib'
 current-version: 1.3
 exports:

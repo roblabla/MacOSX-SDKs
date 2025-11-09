@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E629BA6A-5435-302F-ABFF-97DCA3FFF8A2
+    value:           985A05C1-7EFE-30EA-A63B-F28C88111B6A
   - target:          x86_64-maccatalyst
-    value:           E629BA6A-5435-302F-ABFF-97DCA3FFF8A2
+    value:           985A05C1-7EFE-30EA-A63B-F28C88111B6A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8B277312-8B4D-3640-B824-1074D18EC297
+    value:           0AF0B5EC-40F0-305A-8A99-5EC07E56E689
   - target:          arm64e-maccatalyst
-    value:           8B277312-8B4D-3640-B824-1074D18EC297
+    value:           0AF0B5EC-40F0-305A-8A99-5EC07E56E689
 install-name:    '/System/Library/PrivateFrameworks/OSASubmissionClient.framework/Versions/A/OSASubmissionClient'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

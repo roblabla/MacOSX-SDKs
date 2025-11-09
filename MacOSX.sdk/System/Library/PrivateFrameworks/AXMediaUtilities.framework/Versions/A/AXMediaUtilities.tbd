@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           45A2C1A2-3021-3E1B-B967-593524D1C13A
+    value:           14CBCEA6-EE6D-31EB-89BA-6E6C72134FD9
   - target:          x86_64-maccatalyst
-    value:           45A2C1A2-3021-3E1B-B967-593524D1C13A
+    value:           14CBCEA6-EE6D-31EB-89BA-6E6C72134FD9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           031699BF-43FF-372F-90BA-607CA33BD9F9
+    value:           0012AFDA-870C-3062-9E0E-2175D092F201
   - target:          arm64e-maccatalyst
-    value:           031699BF-43FF-372F-90BA-607CA33BD9F9
+    value:           0012AFDA-870C-3062-9E0E-2175D092F201
 install-name:    '/System/Library/PrivateFrameworks/AXMediaUtilities.framework/Versions/A/AXMediaUtilities'
 swift-abi-version: 7
 exports:

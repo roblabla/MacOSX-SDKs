@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           415422C4-AEC1-3F1C-B8E6-D4A9BC4F14B6
+    value:           5CEF883F-C3E4-30ED-AD8D-85F7D5F50E7F
   - target:          x86_64-maccatalyst
-    value:           415422C4-AEC1-3F1C-B8E6-D4A9BC4F14B6
+    value:           5CEF883F-C3E4-30ED-AD8D-85F7D5F50E7F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           07E4EC73-B97B-341F-9C51-61CD16E8192A
+    value:           3B40C37F-0760-33FE-B41F-3F3FA8986D66
   - target:          arm64e-maccatalyst
-    value:           07E4EC73-B97B-341F-9C51-61CD16E8192A
+    value:           3B40C37F-0760-33FE-B41F-3F3FA8986D66
 install-name:    '/System/Library/PrivateFrameworks/MobileKeyBag.framework/Versions/A/MobileKeyBag'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

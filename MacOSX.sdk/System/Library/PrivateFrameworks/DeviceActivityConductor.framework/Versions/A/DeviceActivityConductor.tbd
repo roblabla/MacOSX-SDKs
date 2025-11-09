@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B9F415DD-3B25-378B-BA9A-AD7512184598
+    value:           2E4DA592-903E-3AD6-A4C8-26689C05C4B9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4DA4A131-8014-380D-BA35-783DFB90B96F
+    value:           C0275BA0-DB9E-33FD-A7A4-66A98F5BD96A
 install-name:    '/System/Library/PrivateFrameworks/DeviceActivityConductor.framework/Versions/A/DeviceActivityConductor'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

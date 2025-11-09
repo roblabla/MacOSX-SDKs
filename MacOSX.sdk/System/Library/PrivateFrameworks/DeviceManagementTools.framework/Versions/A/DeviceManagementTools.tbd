@@ -3,22 +3,24 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C1C2E18C-646E-384A-81F4-11837D401E95
+    value:           12A13B66-214F-3915-82DA-D32C37C75221
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           09895230-0A16-3A36-85C4-A8D0EB429FC8
+    value:           7C95596D-3C1C-3B77-815E-57D1D487325D
 install-name:    '/System/Library/PrivateFrameworks/DeviceManagementTools.framework/Versions/A/DeviceManagementTools'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _BooleanValueForObject, _DMTBundle, _DMTDescriptionKeyFormattedString, 
-                       _DMTDetailTextAddingDeviceBodyFor, _DMTDetailTextFailureEnrollmentFor, 
-                       _DMTDetailTextSuccessfulEnrollmentFor, _DMTEnrollmentTimeoutErrorForNetworkConfiguration, 
-                       _DMTErrorDomain, _DMTErrorWithCodeAndUserInfo, _DMTFormattedEnrollmentOrganizationNameFrom, 
+    symbols:         [ _BooleanValueForObject, _DMTBundle, _DMTCompletionButtonTitleForDeviceClass, 
+                       _DMTDescriptionKeyFormattedString, _DMTDetailTextAddingDeviceBodyFor, 
+                       _DMTDetailTextFailureEnrollmentFor, _DMTDetailTextSuccessfulEnrollmentFor, 
+                       _DMTEnrollmentTimeoutErrorForNetworkConfiguration, _DMTErrorDomain, 
+                       _DMTErrorWithCodeAndUserInfo, _DMTFormattedEnrollmentOrganizationNameFrom, 
                        _DMTLocalizedOrganizationMarketingNameForOrganizationType, 
-                       _DMTTitleTextAddingDeviceFor, _DMTTitleTextFailureEnrollmentFor, 
-                       _DMTValidateProfileArray, _DMTValidateProfileBoolean, _DMTValidateProfileData, 
-                       _DMTValidateProfileDate, _DMTValidateProfileDictionary, _DMTValidateProfileNumber, 
+                       _DMTSuccessfulEnrollmentTitleTextForDeviceClass, _DMTTitleTextAddingDeviceFor, 
+                       _DMTTitleTextFailureEnrollmentFor, _DMTValidateProfileArray, 
+                       _DMTValidateProfileBoolean, _DMTValidateProfileData, _DMTValidateProfileDate, 
+                       _DMTValidateProfileDictionary, _DMTValidateProfileNumber, 
                        _DMTValidateProfileString, _DMTisDarkBuddy, _DMTisWAPI, _DeviceManagementToolsVersionNumber, 
                        _DeviceManagementToolsVersionString, _ExtractSignedData, _kDMTWaitForKVOChangeOperationExpectedValueKey, 
                        _kDMTWaitForKVOChangeOperationUnexpectedValueKey, _kPayloadCertificateUUIDKey, 

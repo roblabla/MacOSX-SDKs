@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A70D03F2-39C5-33E3-B4B2-C36A6F62D045
+    value:           0CF59FC5-BC9B-3E50-88C4-45FBC2EBF1C5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B3A9ABBF-DBCB-3433-86A6-C5E2D16BE2E9
+    value:           5B80E06C-F781-3951-A662-7EAFEDBDDB72
 install-name:    '/System/Library/PrivateFrameworks/_JetEngine_SwiftUI.framework/Versions/A/_JetEngine_SwiftUI'
 swift-abi-version: 7
 exports:

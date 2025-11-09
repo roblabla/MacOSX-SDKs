@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           83981BB0-A2CA-3379-8B37-FB0A9C031D11
+    value:           5CA20E75-F49F-3B96-B516-1FF5FB29B2D3
   - target:          x86_64-maccatalyst
-    value:           83981BB0-A2CA-3379-8B37-FB0A9C031D11
+    value:           5CA20E75-F49F-3B96-B516-1FF5FB29B2D3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C36AEA1D-EA05-3EEF-B8FD-4FC77AFB7F28
+    value:           ECF5D9A2-B2EE-3ABD-81F2-C52BAD340CA4
   - target:          arm64e-maccatalyst
-    value:           C36AEA1D-EA05-3EEF-B8FD-4FC77AFB7F28
+    value:           ECF5D9A2-B2EE-3ABD-81F2-C52BAD340CA4
 install-name:    '/System/Library/PrivateFrameworks/BackgroundTaskManagement.framework/Versions/A/BackgroundTaskManagement'
 current-version: 104
 exports:

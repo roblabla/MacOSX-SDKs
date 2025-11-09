@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FB8A8249-ACED-3B0B-9250-CBB050738A37
+    value:           7B458FD9-FF65-3465-ACB9-A0198AD395E1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2DFBD61A-D34C-329B-B83B-8E9191DA9AB5
+    value:           6B59A277-32A0-3D70-BA75-B71F5F21A9FB
 install-name:    '/System/Library/PrivateFrameworks/UVCFrameProcessor.framework/Versions/A/UVCFrameProcessor'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

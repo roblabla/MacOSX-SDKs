@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E03A0E6A-6F28-3223-AB36-063AAE6D00AA
+    value:           8A93D695-17D3-3804-A36A-633C94CB9189
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C10BD66F-4569-3B23-9A84-07D18FB4F6EE
+    value:           13DDF154-64A1-30ED-AB2C-47B7301F7AB9
 install-name:    '/System/Library/PrivateFrameworks/SiriKitFlow.framework/Versions/A/SiriKitFlow'
 swift-abi-version: 7
 reexported-libraries:
@@ -4692,9 +4692,20 @@ exports:
                        '_$s11SiriKitFlow14ActionGroupingPAAE10transitionAA0D15GroupTransitionOSgvg', 
                        '_$s11SiriKitFlow14ActionGroupingPAAE10transitionAA0D15GroupTransitionOSgvpMV', 
                        '_$s11SiriKitFlow14ActionGroupingPs28CustomDebugStringConvertibleTb', 
-                       '_$s11SiriKitFlow14ActionGroupingTL', '_$s11SiriKitFlow14CommandFailureC11descriptionSSvgTj', 
-                       '_$s11SiriKitFlow14CommandFailureC11descriptionSSvgTq', '_$s11SiriKitFlow14CommandFailureC11descriptionSSvpMV', 
+                       '_$s11SiriKitFlow14ActionGroupingTL', '_$s11SiriKitFlow14CommandFailureC10Foundation14LocalizedErrorAAMc', 
+                       '_$s11SiriKitFlow14CommandFailureC11descriptionSSvgTj', '_$s11SiriKitFlow14CommandFailureC11descriptionSSvgTq', 
+                       '_$s11SiriKitFlow14CommandFailureC11descriptionSSvpMV', '_$s11SiriKitFlow14CommandFailureC11errorDomainSSSgvg', 
+                       '_$s11SiriKitFlow14CommandFailureC11errorDomainSSSgvpMV', 
+                       '_$s11SiriKitFlow14CommandFailureC15underlyingErrors0G0_pSgvg', 
+                       '_$s11SiriKitFlow14CommandFailureC15underlyingErrors0G0_pSgvpMV', 
+                       '_$s11SiriKitFlow14CommandFailureC16errorDescriptionSSSgvgTj', 
+                       '_$s11SiriKitFlow14CommandFailureC16errorDescriptionSSSgvgTq', 
+                       '_$s11SiriKitFlow14CommandFailureC16errorDescriptionSSSgvpMV', 
                        '_$s11SiriKitFlow14CommandFailureC6reasonSSSgvg', '_$s11SiriKitFlow14CommandFailureC6reasonSSSgvpMV', 
+                       '_$s11SiriKitFlow14CommandFailureC9errorCode6reason0F6Domain15underlyingErrorACSi_SSSgAHs0K0_pSgtcfC', 
+                       '_$s11SiriKitFlow14CommandFailureC9errorCode6reason0F6Domain15underlyingErrorACSi_SSSgAHs0K0_pSgtcfCTj', 
+                       '_$s11SiriKitFlow14CommandFailureC9errorCode6reason0F6Domain15underlyingErrorACSi_SSSgAHs0K0_pSgtcfCTq', 
+                       '_$s11SiriKitFlow14CommandFailureC9errorCode6reason0F6Domain15underlyingErrorACSi_SSSgAHs0K0_pSgtcfc', 
                        '_$s11SiriKitFlow14CommandFailureC9errorCode6reasonACSi_SSSgtcfC', 
                        '_$s11SiriKitFlow14CommandFailureC9errorCode6reasonACSi_SSSgtcfCTj', 
                        '_$s11SiriKitFlow14CommandFailureC9errorCode6reasonACSi_SSSgtcfCTq', 
@@ -8199,11 +8210,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9D90A9DD-D965-318B-9882-4F3EB534E61A
+    value:           BAD93C99-2E37-35FA-A45B-60508AF52C24
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DC26AD26-4B98-3509-8935-03EA8C087E09
+    value:           BEEBE542-83C9-33C7-806F-45449775F962
 install-name:    '/System/Library/PrivateFrameworks/SiriFlowEnvironment.framework/Versions/A/SiriFlowEnvironment'
 swift-abi-version: 7
 exports:
@@ -8697,11 +8708,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           321FA245-7B92-341A-90C3-5588622609F3
+    value:           C48DD482-BFB8-3B59-ADB8-F59CFB26186D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6D906876-39B8-32F5-9C87-854B3DF90993
+    value:           7F98DDAA-5BD2-3D62-BAA7-9C1155BA5D79
 install-name:    '/System/Library/PrivateFrameworks/SiriUtilities.framework/Versions/A/SiriUtilities'
 swift-abi-version: 7
 exports:

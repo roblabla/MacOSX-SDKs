@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7C4C0846-ACA3-3437-9D44-347D3AF410AF
+    value:           76D2DA1D-027B-3764-B7D1-CE9B98838678
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A5E6A8CC-8449-3235-B728-E32ECE0362B4
+    value:           82865393-F901-3539-B6A1-70BC960C624C
 install-name:    '/System/Library/PrivateFrameworks/MessageUIMacHelper.framework/Versions/A/MessageUIMacHelper'
-current-version: 3731.200.110
+current-version: 3731.255.101
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CanSendMail, _CreateMailComposeViewControllerHelper, _CreateMessageComposeViewControllerHelper, 

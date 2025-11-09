@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EE34AFD9-F65C-3B25-8771-D51767A5C0EA
+    value:           442EE1A9-C187-306E-9DE7-B6A95A4B13D2
   - target:          x86_64-maccatalyst
-    value:           EE34AFD9-F65C-3B25-8771-D51767A5C0EA
+    value:           442EE1A9-C187-306E-9DE7-B6A95A4B13D2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8ADCB8A8-DCFE-347B-BFF2-387210DBB8C3
+    value:           1E0BB14E-E404-33A6-BE23-0CD58C80FA3C
   - target:          arm64e-maccatalyst
-    value:           8ADCB8A8-DCFE-347B-BFF2-387210DBB8C3
+    value:           1E0BB14E-E404-33A6-BE23-0CD58C80FA3C
 install-name:    '/System/Library/PrivateFrameworks/CloudSharing.framework/Versions/A/CloudSharing'
-current-version: 57.0.1
+current-version: 57.1.2
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

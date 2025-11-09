@@ -66,5 +66,6 @@ API_DEPRECATED("PKVehicleConnectionSession has been deprecated. Please migrate a
 NS_ASSUME_NONNULL_END
 
 #else
+#import <TargetConditionals.h>
 #import <PassKitCore/PKVehicleConnectionSession.h>
 #endif

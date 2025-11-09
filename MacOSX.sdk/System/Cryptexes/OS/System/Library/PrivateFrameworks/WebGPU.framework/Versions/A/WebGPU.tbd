@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A66420F0-42AB-3D44-8065-0455555DC99F
+    value:           17982770-5396-39C2-ACEA-F0A168407F1C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E1B0B196-F2AA-3E08-89DA-F8537A01DC6D
+    value:           40946F7C-6BF2-3DAB-9FDC-C1011E363058
 install-name:    '/System/Library/PrivateFrameworks/WebGPU.framework/Versions/A/WebGPU'
-current-version: 614.2.9
+current-version: 614.3.7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _wgpuAdapterEnumerateFeatures, _wgpuAdapterGetLimits, _wgpuAdapterGetProperties, 

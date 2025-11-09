@@ -1,3 +1,4 @@
+#if !__has_include(<PassKitUI/PKAddPaymentPassViewController.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKAddPaymentPassViewController.h
 //  PassKit
@@ -57,4 +58,11 @@ API_AVAILABLE(ios(9.0))
 NS_ASSUME_NONNULL_END
 
 #endif // TARGET_OS_IPHONE
+#endif
+
+#else
+#if !TARGET_OS_OSX 
+#import <TargetConditionals.h>
+#import <PassKitUI/PKAddPaymentPassViewController.h>
+#endif
 #endif

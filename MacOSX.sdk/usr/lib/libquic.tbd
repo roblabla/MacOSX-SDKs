@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           88165BF3-11D8-3414-9CCA-E3B8777ABF82
+    value:           C4935914-C744-3F62-8819-7F20EFCE8F4A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5DBF5ABA-79AB-398B-AE48-6E380CEFE459
+    value:           83F35A62-7F8D-3C72-8D7D-4BDD7A7451D6
 install-name:    '/usr/lib/libquic.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

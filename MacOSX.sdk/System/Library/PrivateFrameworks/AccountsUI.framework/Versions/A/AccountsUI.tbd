@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           094DF0C5-EC53-3168-B4E9-716B1BCF64EF
+    value:           B0355A82-369B-336A-AE7D-05C3F6AB1224
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2B49521E-BF2D-3FB7-BAC3-45801AE488F9
+    value:           71EE3B52-8BCE-3291-A278-6579034F7064
 install-name:    '/System/Library/PrivateFrameworks/AccountsUI.framework/Versions/A/AccountsUI'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

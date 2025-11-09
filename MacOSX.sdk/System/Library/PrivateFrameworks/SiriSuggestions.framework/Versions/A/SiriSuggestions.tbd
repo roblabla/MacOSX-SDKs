@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C13CFBE8-4642-3403-978D-C57267A5D68B
+    value:           063E738E-C0AC-384C-AEA6-B2D604A20C49
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0029FA02-1B68-3BF8-8EB4-64F4EF381DDA
+    value:           EDF96C22-9871-3543-8880-FDF9DD6C2923
 install-name:    '/System/Library/PrivateFrameworks/SiriSuggestions.framework/Versions/A/SiriSuggestions'
 swift-abi-version: 7
 exports:

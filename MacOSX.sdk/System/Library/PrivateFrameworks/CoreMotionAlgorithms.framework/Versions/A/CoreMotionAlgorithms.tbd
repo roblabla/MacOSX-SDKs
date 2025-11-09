@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           48681DE8-4F9B-3B48-81B8-265D4057EF5B
+    value:           13F4CC9E-85C3-3995-B32F-6B19034CB0C3
   - target:          x86_64-maccatalyst
-    value:           48681DE8-4F9B-3B48-81B8-265D4057EF5B
+    value:           13F4CC9E-85C3-3995-B32F-6B19034CB0C3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FF5D711D-1BDD-3A6D-AF02-9372DAF69402
+    value:           663B6797-1808-325F-844F-55C8FC66142F
   - target:          arm64e-maccatalyst
-    value:           FF5D711D-1BDD-3A6D-AF02-9372DAF69402
+    value:           663B6797-1808-325F-844F-55C8FC66142F
 install-name:    '/System/Library/PrivateFrameworks/CoreMotionAlgorithms.framework/Versions/A/CoreMotionAlgorithms'
-current-version: 2780.0.16
+current-version: 2780.0.27
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3738E201-CB2D-38A0-901F-2071554451FE
+    value:           E62AF8FB-47D0-324D-8397-945A1C158478
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E1E57049-7D47-3CE0-B906-B687FB3EB64A
+    value:           07250873-272E-32FF-9793-0A67524F5B4C
 install-name:    '/System/Library/PrivateFrameworks/Hydra.framework/Versions/C/Hydra'
 current-version: 0
 compatibility-version: 0

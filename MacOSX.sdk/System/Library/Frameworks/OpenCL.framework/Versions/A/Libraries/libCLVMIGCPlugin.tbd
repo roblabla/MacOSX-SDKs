@@ -3,8 +3,8 @@ tbd-version:     4
 targets:         [ x86_64-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           576E35FC-6734-3F4B-B55F-2888BDF68022
-install-name:    '/AppleInternal/Library/BuildRoots/738177ec-44a7-11ed-9420-7ef33c48bc85/Library/Caches/com.apple.xbs/Sources/GPUDriversIntel/Common/lib/CLPlugin/igc/libCLVMIGCPlugin.dylib'
+    value:           6EFA72EE-1E87-34FB-9691-58CD81F7EDA9
+install-name:    '/AppleInternal/Library/BuildRoots/43362d89-619c-11ed-a949-7ef33c48bc85/Library/Caches/com.apple.xbs/Sources/GPUDriversIntel/Common/lib/CLPlugin/igc/libCLVMIGCPlugin.dylib'
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ _cvmsPluginElementBuild, _cvmsPluginServiceInitialize, _cvmsPluginServiceTerminate ]

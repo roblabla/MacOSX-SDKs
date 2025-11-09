@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1704111C-74D4-3095-99EB-6DFF42D6F33C
+    value:           18C36171-7FB8-3E63-A522-E4A31B71508D
   - target:          x86_64-maccatalyst
-    value:           1704111C-74D4-3095-99EB-6DFF42D6F33C
+    value:           18C36171-7FB8-3E63-A522-E4A31B71508D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           59C0FF90-AB67-32E8-B5F5-92B7B524C6E9
+    value:           5209ED4A-0ED6-3587-8BB9-ECC801BEFFF5
   - target:          arm64e-maccatalyst
-    value:           59C0FF90-AB67-32E8-B5F5-92B7B524C6E9
+    value:           5209ED4A-0ED6-3587-8BB9-ECC801BEFFF5
 install-name:    '/System/Library/PrivateFrameworks/InternationalSupport.framework/Versions/A/InternationalSupport'
 current-version: 74
 exports:

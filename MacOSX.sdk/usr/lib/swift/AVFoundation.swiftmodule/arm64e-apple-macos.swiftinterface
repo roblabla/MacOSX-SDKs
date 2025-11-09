@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target arm64e-apple-macos13.0 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAVFoundation -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name AVFoundation
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 2135.13.1
+// swift-module-flags: -target arm64e-apple-macos13.1 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAVFoundation -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name AVFoundation
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 2140.6.2
 @_exported import AVFoundation
 import CoreGraphics
 import CoreMedia

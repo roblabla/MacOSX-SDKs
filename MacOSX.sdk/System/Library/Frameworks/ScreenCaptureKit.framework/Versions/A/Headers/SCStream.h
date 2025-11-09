@@ -235,6 +235,12 @@ extern SCStreamFrameInfo const SCStreamFrameInfoContentRect API_AVAILABLE(macos(
  */
 extern SCStreamFrameInfo const SCStreamFrameInfoDirtyRects API_AVAILABLE(macos(12.3));
 
+/*!
+ @key SCStreamFrameInfoScreenRect
+ @abstract The key for the CFDictionary attached to the CMSampleBuffer for the onscreen location of the captured content
+ */
+extern SCStreamFrameInfo const SCStreamFrameInfoScreenRect API_AVAILABLE(macos(13.1));
+
 @protocol SCStreamOutput;
 API_AVAILABLE(macos(12.3))
 @interface SCStream : NSObject

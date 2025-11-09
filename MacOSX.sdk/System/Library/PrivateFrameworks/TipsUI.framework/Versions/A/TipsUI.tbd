@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           427E4AF8-2E6D-3BFD-9A3F-5A8023FE27B3
+    value:           1B630237-DE4A-3E7D-90EC-FC73236B74E7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0AC3AA70-1D4B-3954-A092-7A4F055582C4
+    value:           AECE1FA4-F802-3575-9E72-267235FD7A90
 install-name:    '/System/Library/PrivateFrameworks/TipsUI.framework/Versions/A/TipsUI'
-current-version: 660.8
+current-version: 663
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -186,8 +186,8 @@ exports:
                        '_$s6TipsUI0A15AnalyticsHelperC18currentWindowFrameSo6CGRectVSgvpMV', 
                        '_$s6TipsUI0A15AnalyticsHelperC18currentWindowFrameSo6CGRectVSgvsTj', 
                        '_$s6TipsUI0A15AnalyticsHelperC18currentWindowFrameSo6CGRectVSgvsTq', 
-                       '_$s6TipsUI0A15AnalyticsHelperC20logAnimationFinished18replayButtonTappedySb_tFTj', 
-                       '_$s6TipsUI0A15AnalyticsHelperC20logAnimationFinished18replayButtonTappedySb_tFTq', 
+                       '_$s6TipsUI0A15AnalyticsHelperC20logAnimationFinished18replayButtonTapped09animationG0ySb_SbtFTj', 
+                       '_$s6TipsUI0A15AnalyticsHelperC20logAnimationFinished18replayButtonTapped09animationG0ySb_SbtFTq', 
                        '_$s6TipsUI0A15AnalyticsHelperC20setCurrentCollectionyySo13TPSCollectionCSgFTj', 
                        '_$s6TipsUI0A15AnalyticsHelperC20setCurrentCollectionyySo13TPSCollectionCSgFTq', 
                        '_$s6TipsUI0A15AnalyticsHelperC21logReplayButtonTappedyyFTj', 
@@ -277,9 +277,15 @@ exports:
                        '_$s6TipsUI12TipViewModelC20assetFileInfoManagerSo08TPSAssetghI0CSgvgTq', 
                        '_$s6TipsUI12TipViewModelC20assetFileInfoManagerSo08TPSAssetghI0CSgvpMV', 
                        '_$s6TipsUI12TipViewModelC20collectionIdentifierSSvgTj', '_$s6TipsUI12TipViewModelC20collectionIdentifierSSvgTq', 
-                       '_$s6TipsUI12TipViewModelC20collectionIdentifierSSvpMV', '_$s6TipsUI12TipViewModelC2idSSvgTj', 
-                       '_$s6TipsUI12TipViewModelC2idSSvgTq', '_$s6TipsUI12TipViewModelC2idSSvpMV', 
-                       '_$s6TipsUI12TipViewModelC33constellationContentLinkActivated3urly10Foundation3URLV_tF', 
+                       '_$s6TipsUI12TipViewModelC20collectionIdentifierSSvpMV', '_$s6TipsUI12TipViewModelC26shouldLogAnimationFinishedSbvMTj', 
+                       '_$s6TipsUI12TipViewModelC26shouldLogAnimationFinishedSbvMTq', 
+                       '_$s6TipsUI12TipViewModelC26shouldLogAnimationFinishedSbvgTj', 
+                       '_$s6TipsUI12TipViewModelC26shouldLogAnimationFinishedSbvgTq', 
+                       '_$s6TipsUI12TipViewModelC26shouldLogAnimationFinishedSbvpMV', 
+                       '_$s6TipsUI12TipViewModelC26shouldLogAnimationFinishedSbvsTj', 
+                       '_$s6TipsUI12TipViewModelC26shouldLogAnimationFinishedSbvsTq', 
+                       '_$s6TipsUI12TipViewModelC2idSSvgTj', '_$s6TipsUI12TipViewModelC2idSSvgTq', 
+                       '_$s6TipsUI12TipViewModelC2idSSvpMV', '_$s6TipsUI12TipViewModelC33constellationContentLinkActivated3urly10Foundation3URLV_tF', 
                        '_$s6TipsUI12TipViewModelC43constellationContentPersonalizedStringForIDySSSgSiF', 
                        '_$s6TipsUI12TipViewModelC5titleSSvgTj', '_$s6TipsUI12TipViewModelC5titleSSvgTq', 
                        '_$s6TipsUI12TipViewModelC5titleSSvpMV', '_$s6TipsUI12TipViewModelC7Combine16ObservableObjectAAMc', 
@@ -412,24 +418,24 @@ exports:
                        '_$s6TipsUI22DocumentAssetViewModelC10$isPlaying7Combine9PublishedV9PublisherVySb_GvsTq', 
                        '_$s6TipsUI22DocumentAssetViewModelC10resetVideoyyFTj', '_$s6TipsUI22DocumentAssetViewModelC10resetVideoyyFTq', 
                        '_$s6TipsUI22DocumentAssetViewModelC11replayVideoyyFTj', '_$s6TipsUI22DocumentAssetViewModelC11replayVideoyyFTq', 
+                       '_$s6TipsUI22DocumentAssetViewModelC13isVideoLoadedSbvMTj', 
+                       '_$s6TipsUI22DocumentAssetViewModelC13isVideoLoadedSbvMTq', 
+                       '_$s6TipsUI22DocumentAssetViewModelC13isVideoLoadedSbvgTj', 
+                       '_$s6TipsUI22DocumentAssetViewModelC13isVideoLoadedSbvgTq', 
+                       '_$s6TipsUI22DocumentAssetViewModelC13isVideoLoadedSbvpMV', 
+                       '_$s6TipsUI22DocumentAssetViewModelC13isVideoLoadedSbvsTj', 
+                       '_$s6TipsUI22DocumentAssetViewModelC13isVideoLoadedSbvsTq', 
+                       '_$s6TipsUI22DocumentAssetViewModelC14$isVideoLoaded7Combine9PublishedV9PublisherVySb_GvMTj', 
+                       '_$s6TipsUI22DocumentAssetViewModelC14$isVideoLoaded7Combine9PublishedV9PublisherVySb_GvMTq', 
+                       '_$s6TipsUI22DocumentAssetViewModelC14$isVideoLoaded7Combine9PublishedV9PublisherVySb_GvgTj', 
+                       '_$s6TipsUI22DocumentAssetViewModelC14$isVideoLoaded7Combine9PublishedV9PublisherVySb_GvgTq', 
+                       '_$s6TipsUI22DocumentAssetViewModelC14$isVideoLoaded7Combine9PublishedV9PublisherVySb_GvpMV', 
+                       '_$s6TipsUI22DocumentAssetViewModelC14$isVideoLoaded7Combine9PublishedV9PublisherVySb_GvsTj', 
+                       '_$s6TipsUI22DocumentAssetViewModelC14$isVideoLoaded7Combine9PublishedV9PublisherVySb_GvsTq', 
                        '_$s6TipsUI22DocumentAssetViewModelC19pauseVideoIfPlayingyyFTj', 
                        '_$s6TipsUI22DocumentAssetViewModelC19pauseVideoIfPlayingyyFTq', 
-                       '_$s6TipsUI22DocumentAssetViewModelC19replayButtonVisibleSbvMTj', 
-                       '_$s6TipsUI22DocumentAssetViewModelC19replayButtonVisibleSbvMTq', 
-                       '_$s6TipsUI22DocumentAssetViewModelC19replayButtonVisibleSbvgTj', 
-                       '_$s6TipsUI22DocumentAssetViewModelC19replayButtonVisibleSbvgTq', 
-                       '_$s6TipsUI22DocumentAssetViewModelC19replayButtonVisibleSbvpMV', 
-                       '_$s6TipsUI22DocumentAssetViewModelC19replayButtonVisibleSbvsTj', 
-                       '_$s6TipsUI22DocumentAssetViewModelC19replayButtonVisibleSbvsTq', 
                        '_$s6TipsUI22DocumentAssetViewModelC19resumeVideoIfPausedSbyFTj', 
                        '_$s6TipsUI22DocumentAssetViewModelC19resumeVideoIfPausedSbyFTq', 
-                       '_$s6TipsUI22DocumentAssetViewModelC20$replayButtonVisible7Combine9PublishedV9PublisherVySb_GvMTj', 
-                       '_$s6TipsUI22DocumentAssetViewModelC20$replayButtonVisible7Combine9PublishedV9PublisherVySb_GvMTq', 
-                       '_$s6TipsUI22DocumentAssetViewModelC20$replayButtonVisible7Combine9PublishedV9PublisherVySb_GvgTj', 
-                       '_$s6TipsUI22DocumentAssetViewModelC20$replayButtonVisible7Combine9PublishedV9PublisherVySb_GvgTq', 
-                       '_$s6TipsUI22DocumentAssetViewModelC20$replayButtonVisible7Combine9PublishedV9PublisherVySb_GvpMV', 
-                       '_$s6TipsUI22DocumentAssetViewModelC20$replayButtonVisible7Combine9PublishedV9PublisherVySb_GvsTj', 
-                       '_$s6TipsUI22DocumentAssetViewModelC20$replayButtonVisible7Combine9PublishedV9PublisherVySb_GvsTq', 
                        '_$s6TipsUI22DocumentAssetViewModelC20assetFileInfoManagerSo08TPSAssethiJ0CSgvgTj', 
                        '_$s6TipsUI22DocumentAssetViewModelC20assetFileInfoManagerSo08TPSAssethiJ0CSgvgTq', 
                        '_$s6TipsUI22DocumentAssetViewModelC20assetFileInfoManagerSo08TPSAssethiJ0CSgvpMV', 
@@ -504,7 +510,8 @@ exports:
                        '_$sSo7NSImageC6TipsUIE13withTintColor_13renderingModeABSo7NSColorC_AC014UIKitRenderingH0OtF', 
                        '_$sSo7NSImageC6TipsUIE13withTintColoryABSo7NSColorCF', '_$sSo7NSImageC6TipsUIE15systemImageNameABSgSS_tcfC', 
                        '_$sSo7NSImageC6TipsUIE21tipsAppHomeScreenIconABSgyFZ', '_$sSo7NSImageC6TipsUIE25imageWithSymbolAttributes_9textStyleABSgSDySSypG_So010NSFontTextI0atFZ', 
-                       _TipsUIVersionNumber, _TipsUIVersionString ]
+                       '_$sSo7NSImageC6TipsUIE7resized2toABSgSo6CGSizeV_tF', _TipsUIVersionNumber, 
+                       _TipsUIVersionString ]
     objc-classes:    [ TPSImageAssetController, TPSTipsAssetPrefetchingManager, _TtC6TipsUI10PlayerView, 
                        _TtC6TipsUI16TipsContentModel ]
 ...

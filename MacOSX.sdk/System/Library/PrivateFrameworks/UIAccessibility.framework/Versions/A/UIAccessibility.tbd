@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4A73A979-DEFF-3CE8-8D7A-9D126927AC24
+    value:           6C21FDD0-E986-3B8C-9535-186ACBF730DA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           81573EC9-70AD-3EA8-80FB-D6855B3BB574
+    value:           620CB9F4-94F8-3C37-BCA8-551FCAA4BBF3
 install-name:    '/System/Library/PrivateFrameworks/UIAccessibility.framework/Versions/A/UIAccessibility'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

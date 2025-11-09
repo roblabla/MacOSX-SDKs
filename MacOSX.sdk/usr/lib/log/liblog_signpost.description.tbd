@@ -3,9 +3,9 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9945BA88-F238-328F-B933-30DDA9E54BF0
+    value:           578387BC-346A-34F6-B58A-755A28D09D93
   - target:          arm64e-macos
-    value:           3ADB8359-A550-3907-BD75-109D6C738E43
+    value:           F1979889-AA42-366A-B224-18284274D99E
 install-name:    '/usr/lib/log/liblog_signpost.description.dylib'
-current-version: 90
+current-version: 91
 ...

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           055A2A8F-CC2D-315C-9F15-C0261D438413
+    value:           F5F0D2C7-DF43-30E6-BD78-C2856E9E4932
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           750EB4CC-BE90-34C1-8D72-7E4C2017629B
+    value:           C15EDA93-FC3D-3867-9F1C-D6A93371AF6A
 install-name:    '/System/Library/PrivateFrameworks/IASUtilities.framework/Versions/A/IASUtilities'
 current-version: 119
 reexported-libraries:
@@ -60,11 +60,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C36C8A5D-63AA-3573-A42F-78B27846D818
+    value:           E9764191-2BA6-3680-8F7C-E48F2E28D290
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4D48FE70-9CF5-34A2-9A6E-CCF9A5FB04D3
+    value:           45F402F2-E6D6-3661-B7FB-239D5D465B38
 install-name:    '/System/Library/PrivateFrameworks/IASUtilitiesCore.framework/Versions/A/IASUtilitiesCore'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

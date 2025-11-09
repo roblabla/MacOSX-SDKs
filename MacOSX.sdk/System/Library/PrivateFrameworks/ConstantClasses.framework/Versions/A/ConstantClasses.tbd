@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BF860233-5164-3BD3-87D8-04DD324BB1D0
+    value:           B8DF4BC0-CF43-3411-88F9-1E068D44529C
   - target:          x86_64-maccatalyst
-    value:           BF860233-5164-3BD3-87D8-04DD324BB1D0
+    value:           B8DF4BC0-CF43-3411-88F9-1E068D44529C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7592EBFF-5925-3182-9CC5-A4C1842D0A3A
+    value:           95F32353-ED2C-3643-BDD5-ACF7A711AE23
   - target:          arm64e-maccatalyst
-    value:           7592EBFF-5925-3182-9CC5-A4C1842D0A3A
+    value:           95F32353-ED2C-3643-BDD5-ACF7A711AE23
 install-name:    '/System/Library/PrivateFrameworks/ConstantClasses.framework/Versions/A/ConstantClasses'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

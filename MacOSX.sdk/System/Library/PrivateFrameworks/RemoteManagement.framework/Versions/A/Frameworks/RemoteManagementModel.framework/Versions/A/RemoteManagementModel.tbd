@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E1D78FB9-396E-3EE7-84E5-C01C92E86832
+    value:           A5D275B0-BC40-3E5D-933D-2690EC4EA22A
   - target:          x86_64-maccatalyst
-    value:           E1D78FB9-396E-3EE7-84E5-C01C92E86832
+    value:           A5D275B0-BC40-3E5D-933D-2690EC4EA22A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           23F95599-BD22-3538-A6F4-1CD93818A536
+    value:           6B0B85D6-4B22-3882-B08E-B12986CBCD19
   - target:          arm64e-maccatalyst
-    value:           23F95599-BD22-3538-A6F4-1CD93818A536
+    value:           6B0B85D6-4B22-3882-B08E-B12986CBCD19
 install-name:    '/System/Library/PrivateFrameworks/RemoteManagement.framework/Versions/A/Frameworks/RemoteManagementModel.framework/Versions/A/RemoteManagementModel'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

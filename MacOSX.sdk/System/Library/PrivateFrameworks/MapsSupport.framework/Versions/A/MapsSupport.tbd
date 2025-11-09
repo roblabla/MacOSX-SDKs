@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D692A137-A222-366A-A7A3-F37FF28BE31B
+    value:           F86A42DC-F09D-36CD-9E2A-4669E686DEE7
   - target:          x86_64-maccatalyst
-    value:           D692A137-A222-366A-A7A3-F37FF28BE31B
+    value:           F86A42DC-F09D-36CD-9E2A-4669E686DEE7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F135BD17-4246-3550-B762-AFA91F432E1A
+    value:           9A06AC6C-035B-3DBA-BC99-007469E83B0E
   - target:          arm64e-maccatalyst
-    value:           F135BD17-4246-3550-B762-AFA91F432E1A
+    value:           9A06AC6C-035B-3DBA-BC99-007469E83B0E
 install-name:    '/System/Library/PrivateFrameworks/MapsSupport.framework/Versions/A/MapsSupport'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

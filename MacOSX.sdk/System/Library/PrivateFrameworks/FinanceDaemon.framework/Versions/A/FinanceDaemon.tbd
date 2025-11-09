@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           02E8FF2A-6E61-360A-945F-08C170B059FA
+    value:           FBC970E1-C2BA-3D05-96A6-0C2858747FA5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1053B031-7B47-3CD1-9B40-A2C5DB9E126B
+    value:           C5EAA78F-243D-338F-B542-0D873CAA3DAD
 install-name:    '/System/Library/PrivateFrameworks/FinanceDaemon.framework/Versions/A/FinanceDaemon'
 swift-abi-version: 7
 exports:

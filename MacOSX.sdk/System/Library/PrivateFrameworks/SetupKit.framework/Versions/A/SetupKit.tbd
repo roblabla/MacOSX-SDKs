@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E9F09BB1-FFF6-32C5-887E-E4DD720C83A4
+    value:           C30D738F-0772-3B16-8AF3-016D6C9B8DEE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           94F21008-DFC8-39FC-8613-F80F870529E4
+    value:           6D154574-51FA-3E32-8C8B-87284DF3FFE3
 install-name:    '/System/Library/PrivateFrameworks/SetupKit.framework/Versions/A/SetupKit'
 current-version: 0
 compatibility-version: 0

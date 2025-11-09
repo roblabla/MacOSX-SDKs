@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           981DC657-6F92-38F9-8B60-CDF11141F630
+    value:           3DB907AB-570A-383F-BF18-84F1D06FE75A
   - target:          x86_64-maccatalyst
-    value:           981DC657-6F92-38F9-8B60-CDF11141F630
+    value:           3DB907AB-570A-383F-BF18-84F1D06FE75A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           33AC5BE2-4330-3D2B-941A-280FB8DBDE9D
+    value:           65D0E26E-A3CB-374C-BCB2-F9FE82DA481B
   - target:          arm64e-maccatalyst
-    value:           33AC5BE2-4330-3D2B-941A-280FB8DBDE9D
+    value:           65D0E26E-A3CB-374C-BCB2-F9FE82DA481B
 install-name:    '/System/Library/Frameworks/SensorKit.framework/Versions/A/SensorKit'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -123,6 +123,7 @@ exports:
                        SRError, SRFetchRequest, SRFetchResult, SRKeyboardMetrics, 
                        SRKeyboardProbabilityMetric, SRMessagesUsageReport, SRNotificationUsage, 
                        SRPhoneUsageReport, SRSensorDescription, SRSensorPruner, SRSensorReader, 
-                       SRSensorWriter, SRTextInputSession, SRVisit, SRWebUsage, SRWristDetection, 
-                       _SRDeviceUsageActivityLevel, _SRDeviceUsageMotionActivity ]
+                       SRSensorWriter, SRSupplementalCategory, SRTextInputSession, 
+                       SRVisit, SRWebUsage, SRWristDetection, _SRDeviceUsageActivityLevel, 
+                       _SRDeviceUsageMotionActivity ]
 ...

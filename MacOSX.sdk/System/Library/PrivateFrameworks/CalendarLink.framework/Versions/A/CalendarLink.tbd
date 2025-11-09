@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BA1E5D3D-BDBE-3BFF-BA6E-946F73D4E426
+    value:           B078685A-6270-355A-B743-F9B0915519FC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D19D0B82-864F-366A-A26A-7E42A8D26196
+    value:           7476DCF7-9955-395A-B1F1-E8A2D9DD60C0
 install-name:    '/System/Library/PrivateFrameworks/CalendarLink.framework/Versions/A/CalendarLink'
 current-version: 0
 compatibility-version: 0

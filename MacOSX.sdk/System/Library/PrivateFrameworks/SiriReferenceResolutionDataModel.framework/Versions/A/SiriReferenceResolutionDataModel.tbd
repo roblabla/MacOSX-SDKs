@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           312C59F9-35C7-36BF-B228-D8C9619CCC86
+    value:           2BA9C5BF-D5DB-3A6B-B26F-60B44B07BBE8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           83E88583-F392-368F-A390-F7A89B0C6A20
+    value:           84968BAC-98C3-3389-95AD-4D76924A8102
 install-name:    '/System/Library/PrivateFrameworks/SiriReferenceResolutionDataModel.framework/Versions/A/SiriReferenceResolutionDataModel'
 swift-abi-version: 7
 exports:

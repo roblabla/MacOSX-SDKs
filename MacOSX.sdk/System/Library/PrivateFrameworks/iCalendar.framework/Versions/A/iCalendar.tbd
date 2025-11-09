@@ -4,37 +4,37 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           630271F7-D44E-37A4-9A96-5CB4CFCD7CB6
+    value:           07F66053-0BAB-310F-B408-A9B18CD0056E
   - target:          x86_64-maccatalyst
-    value:           630271F7-D44E-37A4-9A96-5CB4CFCD7CB6
+    value:           07F66053-0BAB-310F-B408-A9B18CD0056E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FC4742CB-CA23-3A14-B5D2-86C1DCA1E967
+    value:           8475D10A-E652-38BD-83D1-832566020006
   - target:          arm64e-maccatalyst
-    value:           FC4742CB-CA23-3A14-B5D2-86C1DCA1E967
+    value:           8475D10A-E652-38BD-83D1-832566020006
 install-name:    '/System/Library/PrivateFrameworks/iCalendar.framework/Versions/A/iCalendar'
-current-version: 1136
+current-version: 1136.3.1
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _ICSAppendEmoji, _ICSDecodeBase64, _ICSEncodeBase64, _ICSRedactBytes, 
-                       _ICSRedactString, _ICSRedactionSetTestModeEnabled, _ICSTravelAdvisoryBehavior_Automatic, 
-                       _ICSTravelAdvisoryBehavior_Disabled, _ICSTravelAdvisoryBehavior_Enabled, 
-                       _ICSiCalendarErrorDomain, _VCSByteBufferAppendByte, _VCSByteBufferAppendCString, 
-                       _VCSByteBufferData, _VCSByteBufferWithCapacity, _VCSLogHandle, 
-                       __pictureForByte, _iCalendarAppendStringToStringWithOptions, 
-                       _iCalendarRepresentationForCALDay, _kCALSTR_XAPPLE_inviter_name_param, 
-                       _kCALSTR_XAPPLE_self_invited_param, _kCALSTR_XAPPLE_telephone_param, 
-                       _kICSSTR_XAPPLE_acknowledged_param, _kICSSTR_XAPPLE_activity_prop, 
-                       _kICSSTR_XAPPLE_app_link_data_prop, _kICSSTR_XAPPLE_auto_refresh_prop, 
-                       _kICSSTR_XAPPLE_autoarchived_param, _kICSSTR_XAPPLE_bookmark, 
-                       _kICSSTR_XAPPLE_calendar_color_prop, _kICSSTR_XAPPLE_contact_identifiers, 
-                       _kICSSTR_XAPPLE_default_alarm, _kICSSTR_XAPPLE_dontschedule_prop, 
-                       _kICSSTR_XAPPLE_dropbox_prop, _kICSSTR_XAPPLE_end_location, 
-                       _kICSSTR_XAPPLE_etag, _kICSSTR_XAPPLE_ews_attachmentid_param, 
+    symbols:         [ _ICSAppendEmoji, _ICSDecodeBase64, _ICSDefaultPRODID, _ICSEncodeBase64, 
+                       _ICSRedactBytes, _ICSRedactString, _ICSRedactionSetTestModeEnabled, 
+                       _ICSTravelAdvisoryBehavior_Automatic, _ICSTravelAdvisoryBehavior_Disabled, 
+                       _ICSTravelAdvisoryBehavior_Enabled, _ICSiCalendarErrorDomain, 
+                       _VCSByteBufferAppendByte, _VCSByteBufferAppendCString, _VCSByteBufferData, 
+                       _VCSByteBufferWithCapacity, _VCSLogHandle, __pictureForByte, 
+                       _iCalendarAppendStringToStringWithOptions, _iCalendarRepresentationForCALDay, 
+                       _kCALSTR_XAPPLE_inviter_name_param, _kCALSTR_XAPPLE_self_invited_param, 
+                       _kCALSTR_XAPPLE_telephone_param, _kICSSTR_XAPPLE_acknowledged_param, 
+                       _kICSSTR_XAPPLE_activity_prop, _kICSSTR_XAPPLE_app_link_data_prop, 
+                       _kICSSTR_XAPPLE_auto_refresh_prop, _kICSSTR_XAPPLE_autoarchived_param, 
+                       _kICSSTR_XAPPLE_bookmark, _kICSSTR_XAPPLE_calendar_color_prop, 
+                       _kICSSTR_XAPPLE_contact_identifiers, _kICSSTR_XAPPLE_default_alarm, 
+                       _kICSSTR_XAPPLE_dontschedule_prop, _kICSSTR_XAPPLE_dropbox_prop, 
+                       _kICSSTR_XAPPLE_end_location, _kICSSTR_XAPPLE_etag, _kICSSTR_XAPPLE_ews_attachmentid_param, 
                        _kICSSTR_XAPPLE_ews_busystatus_prop, _kICSSTR_XAPPLE_ews_changekey_prop, 
                        _kICSSTR_XAPPLE_ews_itemid_prop, _kICSSTR_XAPPLE_ews_needsserverconfirmation_prop, 
                        _kICSSTR_XAPPLE_ews_permission_prop, _kICSSTR_XAPPLE_filename_param, 

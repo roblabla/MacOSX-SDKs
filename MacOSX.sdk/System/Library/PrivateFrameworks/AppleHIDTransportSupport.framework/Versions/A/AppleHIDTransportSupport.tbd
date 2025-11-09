@@ -5,7 +5,7 @@ uuids:
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F1002E95-CC56-377B-B6C1-FD9E3E7216A9
+    value:           72514EA9-682C-3D28-A712-01FAE7A5D3F5
 install-name:    '/System/Library/PrivateFrameworks/AppleHIDTransportSupport.framework/Versions/A/AppleHIDTransportSupport'
 current-version: 6400.40
 exports:

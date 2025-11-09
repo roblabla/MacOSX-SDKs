@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4FC3C66A-ABFA-35B9-AE43-9444A0B0DACE
+    value:           4D0A813F-8897-315C-9FDF-FEC04067B178
   - target:          x86_64-maccatalyst
-    value:           4FC3C66A-ABFA-35B9-AE43-9444A0B0DACE
+    value:           4D0A813F-8897-315C-9FDF-FEC04067B178
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3DAFB6C4-414B-3ED9-B5A8-01FDD8FA2550
+    value:           3EBA051A-9801-3519-8ECD-B6459C155874
   - target:          arm64e-maccatalyst
-    value:           3DAFB6C4-414B-3ED9-B5A8-01FDD8FA2550
+    value:           3EBA051A-9801-3519-8ECD-B6459C155874
 install-name:    '/usr/lib/swift/libswiftMetal.dylib'
-current-version: 306.2.4
+current-version: 306.3.4
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

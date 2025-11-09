@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CAA84EFE-F9C5-3208-BE16-4496CB1DC994
+    value:           01D46C5F-D97D-33B8-8A66-6BC71EF1E62E
   - target:          x86_64-maccatalyst
-    value:           CAA84EFE-F9C5-3208-BE16-4496CB1DC994
+    value:           01D46C5F-D97D-33B8-8A66-6BC71EF1E62E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E717A5EC-837D-3A3E-8298-D37D1C627DF5
+    value:           4D3FC211-5ED5-3C1F-945F-37BD35B45B3B
   - target:          arm64e-maccatalyst
-    value:           E717A5EC-837D-3A3E-8298-D37D1C627DF5
+    value:           4D3FC211-5ED5-3C1F-945F-37BD35B45B3B
 install-name:    '/usr/lib/swift/libswiftNetwork.dylib'
-current-version: 3013.41.2
+current-version: 3013.60.42
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

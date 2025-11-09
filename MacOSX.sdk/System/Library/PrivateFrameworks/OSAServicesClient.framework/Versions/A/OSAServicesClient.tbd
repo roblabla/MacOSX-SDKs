@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           199F029D-739B-3D6D-9689-1B7AB3E1571C
+    value:           89847992-E310-3D4D-869D-C273ABBE21B4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D9AF90E1-E662-316C-B825-4B564F66AD3C
+    value:           2A46A493-45F9-3D03-94DC-2403B0815D29
 install-name:    '/System/Library/PrivateFrameworks/OSAServicesClient.framework/Versions/A/OSAServicesClient'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

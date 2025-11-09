@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F063067C-1920-349E-B2EB-69871B6249AC
+    value:           0A419A39-54A7-3C30-9F5A-23AF2B7AB7F0
   - target:          x86_64-maccatalyst
-    value:           F063067C-1920-349E-B2EB-69871B6249AC
+    value:           0A419A39-54A7-3C30-9F5A-23AF2B7AB7F0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2FF701DD-CFF2-36F7-80B6-2902A1D4A8CE
+    value:           0C96FE9D-BABC-3BE3-895F-8D8514CF7225
   - target:          arm64e-maccatalyst
-    value:           2FF701DD-CFF2-36F7-80B6-2902A1D4A8CE
+    value:           0C96FE9D-BABC-3BE3-895F-8D8514CF7225
 install-name:    '/usr/lib/swift/libswiftCallKit.dylib'
 current-version: 4
 swift-abi-version: 7

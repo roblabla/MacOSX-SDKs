@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3DA210B9-05B9-3130-848A-08A5FA97596C
+    value:           FFE09A08-05C5-3A06-A366-C9ACBE4622C2
   - target:          x86_64-maccatalyst
-    value:           3DA210B9-05B9-3130-848A-08A5FA97596C
+    value:           FFE09A08-05C5-3A06-A366-C9ACBE4622C2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           200F0D06-A06E-359F-92D8-A8655327F140
+    value:           A962AEB7-4313-3E94-9017-E273B6D973C3
   - target:          arm64e-maccatalyst
-    value:           200F0D06-A06E-359F-92D8-A8655327F140
+    value:           A962AEB7-4313-3E94-9017-E273B6D973C3
 install-name:    '/System/Library/PrivateFrameworks/LinkManifestTools.framework/Versions/A/LinkManifestTools'
 current-version: 0
 compatibility-version: 0

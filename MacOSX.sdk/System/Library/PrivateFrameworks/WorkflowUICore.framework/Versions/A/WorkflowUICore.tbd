@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           35E7C71D-3F05-3D06-AAD3-676F432A312D
+    value:           0227E68E-004A-316A-80C7-A3290ADBAF80
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C9EF0849-68CF-3147-A55B-7BE2D4D901A5
+    value:           4CA468C9-074A-3A7D-BCAE-C349A44DBE55
 install-name:    '/System/Library/PrivateFrameworks/WorkflowUICore.framework/Versions/A/WorkflowUICore'
 swift-abi-version: 7
 allowable-clients:
@@ -81,9 +81,15 @@ exports:
                        '_$s14WorkflowUICore11ShareButtonV4bodyQrvg', '_$s14WorkflowUICore11ShareButtonV4bodyQrvpMV', 
                        '_$s14WorkflowUICore11ShareButtonV4bodyQrvpQOMQ', '_$s14WorkflowUICore11ShareButtonV7SwiftUI4ViewAAMc', 
                        '_$s14WorkflowUICore11ShareButtonVMa', '_$s14WorkflowUICore11ShareButtonVMn', 
-                       '_$s14WorkflowUICore11ShareButtonVN', '_$s14WorkflowUICore12VariableViewV4bodyQrvg', 
-                       '_$s14WorkflowUICore12VariableViewV4bodyQrvpMV', '_$s14WorkflowUICore12VariableViewV4bodyQrvpQOMQ', 
-                       '_$s14WorkflowUICore12VariableViewV7SwiftUI0D0AAMc', '_$s14WorkflowUICore12VariableViewV8variable6height12controlStateACSo10WFVariableC_12CoreGraphics7CGFloatVSo0i7ControlH0VtcfC', 
+                       '_$s14WorkflowUICore11ShareButtonVN', '_$s14WorkflowUICore12LoadingStateO5erroryACyxGs5Error_pcAEmlFWC', 
+                       '_$s14WorkflowUICore12LoadingStateO6loadedyACyxGxcAEmlFWC', 
+                       '_$s14WorkflowUICore12LoadingStateO7contentxSgvg', '_$s14WorkflowUICore12LoadingStateO7contentxSgvpMV', 
+                       '_$s14WorkflowUICore12LoadingStateO7loadingyACyxGAEmlFWC', 
+                       '_$s14WorkflowUICore12LoadingStateO8unloadedyACyxGAEmlFWC', 
+                       '_$s14WorkflowUICore12LoadingStateOMa', '_$s14WorkflowUICore12LoadingStateOMn', 
+                       '_$s14WorkflowUICore12VariableViewV4bodyQrvg', '_$s14WorkflowUICore12VariableViewV4bodyQrvpMV', 
+                       '_$s14WorkflowUICore12VariableViewV4bodyQrvpQOMQ', '_$s14WorkflowUICore12VariableViewV7SwiftUI0D0AAMc', 
+                       '_$s14WorkflowUICore12VariableViewV8variable6height12controlStateACSo10WFVariableC_12CoreGraphics7CGFloatVSo0i7ControlH0VtcfC', 
                        '_$s14WorkflowUICore12VariableViewVMa', '_$s14WorkflowUICore12VariableViewVMn', 
                        '_$s14WorkflowUICore12VariableViewVN', '_$s14WorkflowUICore13DebugMenuViewV4bodyQrvg', 
                        '_$s14WorkflowUICore13DebugMenuViewV4bodyQrvpMV', '_$s14WorkflowUICore13DebugMenuViewV4bodyQrvpQOMQ', 
@@ -342,6 +348,8 @@ exports:
                        '_$s14WorkflowUICore17OrderedDictionaryV11orderedKeysSayxGvg', 
                        '_$s14WorkflowUICore17OrderedDictionaryV11orderedKeysSayxGvpMV', 
                        '_$s14WorkflowUICore17OrderedDictionaryV11removeValue6forKeyq_Sgx_tF', 
+                       '_$s14WorkflowUICore17OrderedDictionaryV13orderedValuesSayq_Gvg', 
+                       '_$s14WorkflowUICore17OrderedDictionaryV13orderedValuesSayq_GvpMV', 
                        '_$s14WorkflowUICore17OrderedDictionaryV17dictionaryLiteralACyxq_Gx_q_td_tcfC', 
                        '_$s14WorkflowUICore17OrderedDictionaryV4dictSDyxq_Gvg', '_$s14WorkflowUICore17OrderedDictionaryV4dictSDyxq_GvpMV', 
                        '_$s14WorkflowUICore17OrderedDictionaryV6valuesSayq_Gvg', 

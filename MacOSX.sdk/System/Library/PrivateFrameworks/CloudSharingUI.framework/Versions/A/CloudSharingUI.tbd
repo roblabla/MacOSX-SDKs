@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3A23F7EE-26D9-303A-8ACE-50BD7C52A697
+    value:           B88F23E0-648F-3E9F-83F8-2E3C55CAD05F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7AAF9B1B-4FF3-37A0-A587-F08937BCFD27
+    value:           AC9ABE11-AD91-32A9-B115-9B811DBB16E5
 install-name:    '/System/Library/PrivateFrameworks/CloudSharingUI.framework/Versions/A/CloudSharingUI'
-current-version: 57.0.1
+current-version: 57.1.2
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

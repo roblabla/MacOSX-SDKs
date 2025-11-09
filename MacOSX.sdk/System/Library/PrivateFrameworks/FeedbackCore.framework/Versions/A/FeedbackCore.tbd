@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           687C1694-42A5-3399-9BA5-1BD7058D555A
+    value:           6BC81CDA-9812-3D8E-ADED-FEEC34C67534
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DBA7A13E-69CE-3F08-9B1A-82B3A57D80C1
+    value:           0BA0B260-C189-3312-94CD-1ED3420853AF
 install-name:    '/System/Library/PrivateFrameworks/FeedbackCore.framework/Versions/A/FeedbackCore'
 swift-abi-version: 7
 exports:
@@ -217,6 +217,7 @@ exports:
                        '_$sSo18FBKAppListResolverC12FeedbackCoreE12displayValue09forChoiceG0S2S_tFZ', 
                        '_$sSo18FBKAppListResolverC12FeedbackCoreE15prefetchChoicesyyF', 
                        '_$sSo18FBKAppListResolverC12FeedbackCoreE7choicesSaySo17FBKQuestionChoiceCGyF', 
+                       '_$sSo18FBKSharedConstantsC12FeedbackCoreE11environment10withStringSo14FBKEnvironmentVSgSSSg_tFZ', 
                        '_$sSo18NSNotificationNamea12FeedbackCoreE23needsUpdateNotificationABvgZ', 
                        '_$sSo19FBKMatcherPredicateC12FeedbackCoreE10hashingKeySSvg', 
                        '_$sSo19FBKMatcherPredicateC12FeedbackCoreE10hashingKeySSvpMV', 

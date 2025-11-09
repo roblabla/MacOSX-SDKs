@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           376A6CE3-E54E-32A6-A831-411CC4AF29C9
+    value:           FC84113F-676F-3E68-B87F-3D3CB977B633
   - target:          x86_64-maccatalyst
-    value:           376A6CE3-E54E-32A6-A831-411CC4AF29C9
+    value:           FC84113F-676F-3E68-B87F-3D3CB977B633
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E086121E-9D64-35E4-BCCF-AB287D7B93EE
+    value:           8856F541-459E-37D4-95EB-9AD5329D674F
   - target:          arm64e-maccatalyst
-    value:           E086121E-9D64-35E4-BCCF-AB287D7B93EE
+    value:           8856F541-459E-37D4-95EB-9AD5329D674F
 install-name:    '/System/Library/Frameworks/BackgroundTasks.framework/Versions/A/BackgroundTasks'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

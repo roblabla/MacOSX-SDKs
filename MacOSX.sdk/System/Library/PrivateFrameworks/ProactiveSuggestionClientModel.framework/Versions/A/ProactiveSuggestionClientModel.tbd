@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           672E182F-5E0A-3E21-AADE-1507A42ED627
+    value:           0C4C026D-046A-3CEB-A19D-302DEBD3C56E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E8324BB9-2C2C-3A72-BEBA-64F4620F4897
+    value:           239C0B49-8FA2-320F-8117-8573957A60DA
 install-name:    '/System/Library/PrivateFrameworks/ProactiveSuggestionClientModel.framework/Versions/A/ProactiveSuggestionClientModel'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

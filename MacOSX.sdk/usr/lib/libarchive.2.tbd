@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2D757797-22F2-3B6D-B0D5-298C812051CA
+    value:           4A5CFA24-90B3-3FB7-A2ED-443E4A2ABE6D
   - target:          x86_64-maccatalyst
-    value:           2D757797-22F2-3B6D-B0D5-298C812051CA
+    value:           4A5CFA24-90B3-3FB7-A2ED-443E4A2ABE6D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           357E08D7-516C-3AAD-86FE-3FBE6EBE901D
+    value:           8ACDB379-1B66-3785-B018-1F35DE85F090
   - target:          arm64e-maccatalyst
-    value:           357E08D7-516C-3AAD-86FE-3FBE6EBE901D
+    value:           8ACDB379-1B66-3785-B018-1F35DE85F090
 install-name:    '/usr/lib/libarchive.2.dylib'
 current-version: 9.2
 compatibility-version: 9

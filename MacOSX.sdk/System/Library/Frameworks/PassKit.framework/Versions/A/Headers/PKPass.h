@@ -63,5 +63,6 @@ NS_ASSUME_NONNULL_END
 #endif // __PKPASS_H
 
 #else
+#import <TargetConditionals.h>
 #import <PassKitCore/PKPass.h>
 #endif

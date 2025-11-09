@@ -3,8 +3,8 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8A5C7E30-C03E-385D-A0F6-B84301C492B1
+    value:           67EAB53F-8701-3FE9-8C3F-771239AA9EB8
   - target:          arm64e-macos
-    value:           0D7A5F34-7386-3B5C-9493-E775E1DDCBC4
+    value:           5B6B46D6-CCDF-3F92-9B9F-36AED020F8CF
 install-name:    '/System/Library/Frameworks/PushToTalk.framework/Versions/A/PushToTalk'
 ...

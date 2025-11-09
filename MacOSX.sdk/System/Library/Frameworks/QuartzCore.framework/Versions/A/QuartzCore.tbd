@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           10A00482-D136-3E49-BBD5-E9691CC8F82D
+    value:           48568A3F-3F78-33D9-93C9-2B1C0B2DB06F
   - target:          x86_64-maccatalyst
-    value:           10A00482-D136-3E49-BBD5-E9691CC8F82D
+    value:           48568A3F-3F78-33D9-93C9-2B1C0B2DB06F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6EAE8B05-2AF0-3057-91FC-CF2D9C74DD40
+    value:           8285B99F-B994-388E-8694-2F144A075DA3
   - target:          arm64e-maccatalyst
-    value:           6EAE8B05-2AF0-3057-91FC-CF2D9C74DD40
+    value:           8285B99F-B994-388E-8694-2F144A075DA3
 install-name:    '/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore'
 current-version: 1.11
 compatibility-version: 1.2
@@ -161,8 +161,7 @@ exports:
                        _CAEncodeBackingStores, _CAEncodeIOSurfacesAsCGImages, _CAEncodeLayerTree, 
                        _CAEncodeLayerTreeToFile, _CAEncodeLayerTreeToFileWithInfo, 
                        _CAEncodeLayerTreeWithInfo, _CAFenceBatchWaitLockAcquire, 
-                       _CAFenceBatchWaitLockRelease, _CAFenceCreateSetCallbackBlock, 
-                       _CAFrameRateRangeDefault, _CAFrameRateRangeDefaultDoNotUse, 
+                       _CAFenceBatchWaitLockRelease, _CAFrameRateRangeDefault, _CAFrameRateRangeDefaultDoNotUse, 
                        _CAFrameRateRangeIsEqualToRange, _CAFrameRateRangeMake, _CAFramingSlotCreate, 
                        _CAFramingSlotGetData, _CAFramingSlotGetImage, _CAFramingSlotGetTypeID, 
                        _CAGetCurrentImageBytes, _CAGetDebugFlags, _CAGetDebugMessage, 
@@ -560,14 +559,14 @@ exports:
                        _kCASnapshotModeIncludeContextList, _kCASnapshotModeLayer, 
                        _kCASnapshotModeStopAfterContextList, _kCASnapshotModeStopBeforeSlot, 
                        _kCASnapshotOriginX, _kCASnapshotOriginY, _kCASnapshotReuseBackdropContents, 
-                       _kCASnapshotSizeHeight, _kCASnapshotSizeWidth, _kCASnapshotTimeOffset, 
-                       _kCASnapshotTrackBackdropReuseFailures, _kCASnapshotTransform, 
-                       _kCASubtypeAngle, _kCASubtypeBool, _kCASubtypeColorMatrix, 
-                       _kCASubtypeCornerRadii, _kCASubtypeDistance, _kCASubtypeEnum, 
-                       _kCASubtypeFloat, _kCASubtypeInt, _kCASubtypePercentage, _kCASubtypePoint, 
-                       _kCASubtypePoint3D, _kCASubtypeRect, _kCASubtypeSize, _kCASubtypeTime, 
-                       _kCASubtypeTimeInterval, _kCASubtypeTransform, _kCATiledLayerDisableFade, 
-                       _kCATiledLayerOnlyIfNull, _kCATiledLayerRemoveImmediately, 
+                       _kCASnapshotSelfGenerated, _kCASnapshotSizeHeight, _kCASnapshotSizeWidth, 
+                       _kCASnapshotTimeOffset, _kCASnapshotTrackBackdropReuseFailures, 
+                       _kCASnapshotTransform, _kCASubtypeAngle, _kCASubtypeBool, 
+                       _kCASubtypeColorMatrix, _kCASubtypeCornerRadii, _kCASubtypeDistance, 
+                       _kCASubtypeEnum, _kCASubtypeFloat, _kCASubtypeInt, _kCASubtypePercentage, 
+                       _kCASubtypePoint, _kCASubtypePoint3D, _kCASubtypeRect, _kCASubtypeSize, 
+                       _kCASubtypeTime, _kCASubtypeTimeInterval, _kCASubtypeTransform, 
+                       _kCATiledLayerDisableFade, _kCATiledLayerOnlyIfNull, _kCATiledLayerRemoveImmediately, 
                        _kCATiledLayerUncollectable, _kCATransactionAnimatesFromModelValues, 
                        _kCATransactionAnimationDelegate, _kCATransactionAnimationDuration, 
                        _kCATransactionAnimationTimingFunction, _kCATransactionCommitTime, 

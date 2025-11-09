@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4AC8BFA1-153F-3C2D-8F98-6831B7C643F8
+    value:           69F8EA39-C0FF-3452-A0F5-0033C362A859
   - target:          x86_64-maccatalyst
-    value:           4AC8BFA1-153F-3C2D-8F98-6831B7C643F8
+    value:           69F8EA39-C0FF-3452-A0F5-0033C362A859
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1AFF9909-E8A3-32D2-9B31-1A894680F867
+    value:           FFE191B7-9340-302E-B8CD-3673EE4F6399
   - target:          arm64e-maccatalyst
-    value:           1AFF9909-E8A3-32D2-9B31-1A894680F867
+    value:           FFE191B7-9340-302E-B8CD-3673EE4F6399
 install-name:    '/System/Library/Frameworks/Metal.framework/Versions/A/Metal'
-current-version: 306.2.4
+current-version: 306.3.4
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

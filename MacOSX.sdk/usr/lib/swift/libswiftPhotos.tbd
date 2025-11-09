@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           463886AD-067E-3772-9A44-959FF4DA436F
+    value:           B9C5DF96-74AD-39E4-A342-75CFDA4DEF9F
   - target:          x86_64-maccatalyst
-    value:           463886AD-067E-3772-9A44-959FF4DA436F
+    value:           B9C5DF96-74AD-39E4-A342-75CFDA4DEF9F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           49787073-406A-30EB-92D4-6858E7387988
+    value:           491B289B-B896-3721-9336-4027BB82A5DA
   - target:          arm64e-maccatalyst
-    value:           49787073-406A-30EB-92D4-6858E7387988
+    value:           491B289B-B896-3721-9336-4027BB82A5DA
 install-name:    '/usr/lib/swift/libswiftPhotos.dylib'
-current-version: 511.0.170
+current-version: 520.0.240
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

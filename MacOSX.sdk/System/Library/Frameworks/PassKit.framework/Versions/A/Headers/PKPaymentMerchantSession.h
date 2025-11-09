@@ -24,5 +24,6 @@ NS_ASSUME_NONNULL_END
 #endif // __PKPAYMENTMERCHANTSESSION_H__
 
 #else
+#import <TargetConditionals.h>
 #import <PassKitCore/PKPaymentMerchantSession.h>
 #endif

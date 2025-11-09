@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E8EE5FB0-D618-379D-B260-ACCBFCD811D7
+    value:           2F3B5AC4-6082-3D32-B570-D168FD8A0DE4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           043CA220-83A8-3B5D-A6BA-746622DD4E40
+    value:           72A3E103-4FFC-3A3D-A205-56E839355DD8
 install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/31001/Libraries/libllvm-lmdb.dylib'
 current-version: 0
 compatibility-version: 0

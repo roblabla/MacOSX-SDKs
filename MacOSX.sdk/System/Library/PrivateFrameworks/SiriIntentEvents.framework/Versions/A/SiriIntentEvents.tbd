@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DAD2515D-EF23-33C0-9F39-1DFB6D498C52
+    value:           EEED3635-20CE-379C-B5A8-635820C24D87
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           53CFD856-E8E7-345C-9BA2-C416CF55D2A6
+    value:           8EAB3194-D904-3962-9C9D-347825DCBB4F
 install-name:    '/System/Library/PrivateFrameworks/SiriIntentEvents.framework/Versions/A/SiriIntentEvents'
 current-version: 0
 compatibility-version: 0
@@ -66,6 +66,10 @@ exports:
                        '_$s16SiriIntentEvents08CoreDuetB15EventStoreErrorON', '_$s16SiriIntentEvents08CoreDuetB15EventStoreErrorOSHAAMc', 
                        '_$s16SiriIntentEvents08CoreDuetB15EventStoreErrorOSQAAMc', 
                        '_$s16SiriIntentEvents08CoreDuetB15EventStoreErrorOs0H0AAMc', 
+                       '_$s16SiriIntentEvents0B10EventStoreV04findC08intentId9eventType9startDate03endL05limitSayAA0bD0CGSSSg_AA0bdJ0OSg10Foundation0L0VSgATSiSgtF', 
+                       '_$s16SiriIntentEvents0B10EventStoreV3log5eventyAA0bD0C_tF', 
+                       '_$s16SiriIntentEvents0B10EventStoreVACycfC', '_$s16SiriIntentEvents0B10EventStoreVMa', 
+                       '_$s16SiriIntentEvents0B10EventStoreVMn', '_$s16SiriIntentEvents0B10EventStoreVN', 
                        '_$s16SiriIntentEvents0B10ResultTypeO015completedWithinA0yA2CmFWC', 
                        '_$s16SiriIntentEvents0B10ResultTypeO19autoPunchedOutToAppyA2CmFWC', 
                        '_$s16SiriIntentEvents0B10ResultTypeO19userPunchedOutToAppyA2CmFWC', 
@@ -174,6 +178,10 @@ exports:
                        '_$s16SiriIntentEvents0B5StartC4fromACs7Decoder_p_tKcfc', 
                        '_$s16SiriIntentEvents0B5StartC6encode2toys7Encoder_p_tKFTj', 
                        '_$s16SiriIntentEvents0B5StartC6encode2toys7Encoder_p_tKFTq', 
+                       '_$s16SiriIntentEvents0B5StartC6intent9timestampACSo8INIntentC_10Foundation4DateVtKcfC', 
+                       '_$s16SiriIntentEvents0B5StartC6intent9timestampACSo8INIntentC_10Foundation4DateVtKcfCTj', 
+                       '_$s16SiriIntentEvents0B5StartC6intent9timestampACSo8INIntentC_10Foundation4DateVtKcfCTq', 
+                       '_$s16SiriIntentEvents0B5StartC6intent9timestampACSo8INIntentC_10Foundation4DateVtKcfc', 
                        '_$s16SiriIntentEvents0B5StartC9timestamp10Foundation4DateVvg', 
                        '_$s16SiriIntentEvents0B5StartC9timestamp10Foundation4DateVvpMV', 
                        '_$s16SiriIntentEvents0B5StartCMa', '_$s16SiriIntentEvents0B5StartCMm', 

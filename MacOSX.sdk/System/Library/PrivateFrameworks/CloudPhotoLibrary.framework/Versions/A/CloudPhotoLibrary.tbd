@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A6F57D41-B2B0-38B2-B437-AFF191D1CAD2
+    value:           6F3E888F-5F00-3E53-86B6-136E6BB4536F
   - target:          x86_64-maccatalyst
-    value:           A6F57D41-B2B0-38B2-B437-AFF191D1CAD2
+    value:           6F3E888F-5F00-3E53-86B6-136E6BB4536F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2CA81713-DFB5-3AB4-BBD8-BA8BCE78E272
+    value:           C4E906B4-7A18-30FA-9193-E712278F3737
   - target:          arm64e-maccatalyst
-    value:           2CA81713-DFB5-3AB4-BBD8-BA8BCE78E272
+    value:           C4E906B4-7A18-30FA-9193-E712278F3737
 install-name:    '/System/Library/PrivateFrameworks/CloudPhotoLibrary.framework/Versions/A/CloudPhotoLibrary'
-current-version: 511.0.170
+current-version: 520.0.240
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -107,42 +107,45 @@ exports:
                        CPLEnginePendingRecordChecks, CPLEnginePushRepository, CPLEngineQuarantinedRecords, 
                        CPLEngineRemappedRecords, CPLEngineResourceDownloadQueue, 
                        CPLEngineResourceDownloadTask, CPLEngineResourceStorage, CPLEngineResourceUploadTask, 
-                       CPLEngineScheduler, CPLEngineSchedulerBlocker, CPLEngineScope, 
-                       CPLEngineScopeCleanupTasks, CPLEngineScopeFlagsUpdate, CPLEngineScopeStorage, 
-                       CPLEngineScopedTask, CPLEngineStatusCenter, CPLEngineStorage, 
-                       CPLEngineStore, CPLEngineStoreTransaction, CPLEngineSyncManager, 
-                       CPLEngineSyncTask, CPLEngineSystemMonitor, CPLEngineTransientRepository, 
-                       CPLEngineTransientRepositoryBatchStorage, CPLEngineTransport, 
-                       CPLEngineWriteTransactionBlocker, CPLErrors, CPLExpungeableResourceState, 
-                       CPLExtractedBatch, CPLFaceAnalysis, CPLFaceAnalysisReference, 
-                       CPLFaceCropChange, CPLFaceInstance, CPLFeature, CPLFeatureVersionHistory, 
-                       CPLFeedbackMessage, CPLFileStorageItem, CPLFileWatcher, CPLForceSyncTask, 
-                       CPLIgnoredRecord, CPLInMemoryResourceDownloadTask, CPLInfoFeedbackMessage, 
-                       CPLInvalidBatchStorage, CPLItemChange, CPLLibraryInfo, CPLLibraryManager, 
-                       CPLLibraryScopeChange, CPLLibraryShareScopeChange, CPLLibraryState, 
-                       CPLMapEnumerator, CPLMasterChange, CPLMemoryAsset, CPLMemoryAssetFlag, 
-                       CPLMemoryAssetList, CPLMemoryChange, CPLMingleChangesScopeTask, 
-                       CPLMingleChangesTask, CPLMingleUtility, CPLMomentShare, CPLMomentShareFeature, 
-                       CPLMomentShareParticipant, CPLMomentSharePreviewData, CPLMomentShareScopeChange, 
-                       CPLNetworkIndicator, CPLNetworkState, CPLNetworkWatcher, CPLNewAlbumExtractionStep, 
+                       CPLEngineRevertRecords, CPLEngineScheduler, CPLEngineSchedulerBlocker, 
+                       CPLEngineScope, CPLEngineScopeCleanupTasks, CPLEngineScopeFlagsUpdate, 
+                       CPLEngineScopeStorage, CPLEngineScopedTask, CPLEngineStatusCenter, 
+                       CPLEngineStorage, CPLEngineStore, CPLEngineStoreTransaction, 
+                       CPLEngineSyncManager, CPLEngineSyncTask, CPLEngineSystemMonitor, 
+                       CPLEngineTransientRepository, CPLEngineTransientRepositoryBatchStorage, 
+                       CPLEngineTransport, CPLEngineWriteTransactionBlocker, CPLErrors, 
+                       CPLExpungeableResourceState, CPLExtractedBatch, CPLFaceAnalysis, 
+                       CPLFaceAnalysisReference, CPLFaceCropChange, CPLFaceInstance, 
+                       CPLFeature, CPLFeatureVersionHistory, CPLFeedbackMessage, 
+                       CPLFileStorageItem, CPLFileWatcher, CPLForceSyncTask, CPLIgnoredRecord, 
+                       CPLInMemoryResourceDownloadTask, CPLInfoFeedbackMessage, CPLInvalidBatchStorage, 
+                       CPLItemChange, CPLLibraryInfo, CPLLibraryManager, CPLLibraryScopeChange, 
+                       CPLLibraryShareScopeChange, CPLLibraryState, CPLMapEnumerator, 
+                       CPLMasterChange, CPLMemoryAsset, CPLMemoryAssetFlag, CPLMemoryAssetList, 
+                       CPLMemoryChange, CPLMingleChangesScopeTask, CPLMingleChangesTask, 
+                       CPLMingleUtility, CPLMomentShare, CPLMomentShareFeature, CPLMomentShareParticipant, 
+                       CPLMomentSharePreviewData, CPLMomentShareScopeChange, CPLNetworkIndicator, 
+                       CPLNetworkState, CPLNetworkWatcher, CPLNewAlbumExtractionStep, 
                        CPLNewAssetExtractionStep, CPLPersonChange, CPLPersonReference, 
                        CPLPlaceAnnotation, CPLPlaceholderRecord, CPLPlatform, CPLPlatformObject, 
-                       CPLPowerAssertion, CPLProcessStagedScopesScopeTask, CPLProcessStagedScopesTask, 
+                       CPLPowerAssertion, CPLPreventAssetTrashAndDeleteGatekeeper, 
+                       CPLProcessStagedScopesScopeTask, CPLProcessStagedScopesTask, 
                        CPLProxyForceSyncTask, CPLProxyLibraryManager, CPLProxyPullSession, 
                        CPLProxyPushSession, CPLProxyResourceTransferTask, CPLProxySession, 
                        CPLPullChangeSession, CPLPullFromTransportScopeTask, CPLPullFromTransportTask, 
-                       CPLPullScopesTask, CPLPullSessionScopesAcknowledgement, CPLPullSessionUpdate, 
-                       CPLPushChangeSession, CPLPushChangeTasks, CPLPushRepositoryStorage, 
-                       CPLPushSessionTracker, CPLPushSessionUpdate, CPLPushToTransportScopeTask, 
-                       CPLPushToTransportSyncStep, CPLPushToTransportTask, CPLQuarantineFeedbackMessage, 
-                       CPLRampingRequest, CPLRampingRequestResource, CPLRampingResponse, 
-                       CPLRampingResponseResource, CPLRecordChange, CPLRecordChangeDiffTracker, 
-                       CPLRecordPushContext, CPLRecordStatus, CPLRecordStorageView, 
-                       CPLRecordTarget, CPLRecordTargetMapping, CPLRecordView, CPLRejectedRecords, 
-                       CPLResetReason, CPLResetTracker, CPLReshareScopeTask, CPLReshareTask, 
-                       CPLResource, CPLResourceIdentity, CPLResourceIdentityImplementation, 
-                       CPLResourceTransferTask, CPLResourceTransferTaskOptions, CPLResourceTypeSet, 
-                       CPLScopeChange, CPLScopeFilter, CPLScopeStatusCounts, CPLScopeUpdateScopeTask, 
+                       CPLPullScopesTask, CPLPullSessionRevertRecords, CPLPullSessionScopesAcknowledgement, 
+                       CPLPullSessionUpdate, CPLPushChangeSession, CPLPushChangeTasks, 
+                       CPLPushPullGatekeeper, CPLPushRepositoryStorage, CPLPushSessionTracker, 
+                       CPLPushSessionUpdate, CPLPushToTransportScopeTask, CPLPushToTransportSyncStep, 
+                       CPLPushToTransportTask, CPLQuarantineFeedbackMessage, CPLRampingRequest, 
+                       CPLRampingRequestResource, CPLRampingResponse, CPLRampingResponseResource, 
+                       CPLRecordChange, CPLRecordChangeDiffTracker, CPLRecordPushContext, 
+                       CPLRecordStatus, CPLRecordStorageView, CPLRecordTarget, CPLRecordTargetMapping, 
+                       CPLRecordView, CPLRejectedRecords, CPLResetReason, CPLResetTracker, 
+                       CPLReshareScopeTask, CPLReshareTask, CPLResource, CPLResourceIdentity, 
+                       CPLResourceIdentityImplementation, CPLResourceTransferTask, 
+                       CPLResourceTransferTaskOptions, CPLResourceTypeSet, CPLScopeChange, 
+                       CPLScopeFilter, CPLScopeStatusCounts, CPLScopeUpdateScopeTask, 
                        CPLScopeUpdateTask, CPLScopedIdentifier, CPLSerializedFeedbackMessage, 
                        CPLServerFeedbackKeyAndValue, CPLServerFeedbackMessage, CPLServerFeedbackRequest, 
                        CPLServerFeedbackResponse, CPLSettingFeedbackMessage, CPLShare, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1AD167D9-FE75-3B83-9FB8-D06134B45633
+    value:           1FB64E67-4604-38A3-8909-FAAE1BC6568B
   - target:          x86_64-maccatalyst
-    value:           1AD167D9-FE75-3B83-9FB8-D06134B45633
+    value:           1FB64E67-4604-38A3-8909-FAAE1BC6568B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8E76A225-2BD9-34A5-8E60-34014E8782C9
+    value:           8FA7188D-7A52-3EA7-9A56-6CE1E0DCFAA6
   - target:          arm64e-maccatalyst
-    value:           8E76A225-2BD9-34A5-8E60-34014E8782C9
+    value:           8FA7188D-7A52-3EA7-9A56-6CE1E0DCFAA6
 install-name:    '/System/Library/Frameworks/CoreHaptics.framework/Versions/A/CoreHaptics'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

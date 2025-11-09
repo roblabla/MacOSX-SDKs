@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           03C0F5AF-2AA3-3113-85BE-4D414C4653D7
+    value:           E84FA0AE-4A40-3879-A6AE-86112DEAEC72
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           59814F78-C580-30A9-A7C2-3C29588739DC
+    value:           705EA83F-B398-3E0B-A19E-6D51025CEAE1
 install-name:    '/System/Library/PrivateFrameworks/IMDPersistence.framework/Versions/A/IMDPersistence'
 current-version: 800
 swift-abi-version: 7
@@ -114,7 +114,8 @@ exports:
                        _IMDChatRecordLastMessageTimeStampOnLoad, _IMDChatRecordPurgeAttachments, 
                        _IMDChatRecordRemoveHandle, _IMDChatRecordRemoveMessage, _IMDChatRecordRepairDuplicateChats, 
                        _IMDChatRecordSetIsArchived, _IMDChatRecordSetIsBlackholed, 
-                       _IMDChatRecordSetIsFiltered, _IMDChatRemapChatsWithLastAddressedSIMIDToNewLastAddressedIDs, 
+                       _IMDChatRecordSetIsFiltered, _IMDChatRecordSetIsRecovered, 
+                       _IMDChatRemapChatsWithLastAddressedSIMIDToNewLastAddressedIDs, 
                        _IMDChatRemapMessagesWithErrorCodeToErrorCode, _IMDChatRowIDsMostRecentByLastMessageWithLimit, 
                        _IMDCleanseBrowserSnapshots, _IMDCleanseOrphanedAttachments, 
                        _IMDCleanseOrphanedStickerAttachments, _IMDConfirmIndexesCreatedAsExpected, 
@@ -280,12 +281,12 @@ exports:
                        _IMDMigrateTo16000, _IMDMigrateTo16001, _IMDMigrateTo16002, 
                        _IMDMigrateTo16003, _IMDMigrateTo16004, _IMDMigrateTo16005, 
                        _IMDMigrateTo16006, _IMDMigrateTo16007, _IMDMigrateTo16008, 
-                       _IMDMigrateTo8200, _IMDMigrateTo9002, _IMDNotificationsApplicationDomain, 
-                       _IMDNotificationsHideKnown, _IMDNotificationsHidePromotions, 
-                       _IMDNotificationsHideTransactions, _IMDNotificationsHideUnknown, 
-                       _IMDNotificationsPostFirstUnlockMessage, _IMDNotificationsPostNotificationsWithContext, 
-                       _IMDNotificationsPostUrgentNotificationsForMessages, _IMDNotificationsRetractNotificationsForReadMessages, 
-                       _IMDNotificationsRetractNotificationsFromFirstUnlockWithContext, 
+                       _IMDMigrateTo16100, _IMDMigrateTo16101, _IMDMigrateTo8200, 
+                       _IMDMigrateTo9002, _IMDNotificationsApplicationDomain, _IMDNotificationsHideKnown, 
+                       _IMDNotificationsHidePromotions, _IMDNotificationsHideTransactions, 
+                       _IMDNotificationsHideUnknown, _IMDNotificationsPostFirstUnlockMessage, 
+                       _IMDNotificationsPostNotificationsWithContext, _IMDNotificationsPostUrgentNotificationsForMessages, 
+                       _IMDNotificationsRetractNotificationsForReadMessages, _IMDNotificationsRetractNotificationsFromFirstUnlockWithContext, 
                        _IMDNotificationsUpdatePostedNotificationsForMessages, _IMDPersistenceCheckDatabaseThread, 
                        _IMDPersistencePerformBlock, _IMDPersistencePerformBlockAfterDelay, 
                        _IMDPersistenceProtectionMerge_DeleteUnprotectedDatabase, 
@@ -364,8 +365,9 @@ exports:
                        __IMDCoreSpotlightCNContactForAddress, __IMDCoreSpotlightCNContactForAddressWithAdditionalPropertyKeys, 
                        __IMDCoreSpotlightCNContactForHandle, __IMDCoreSpotlightChatUIDForChatDictionary, 
                        __IMDCoreSpotlightFullNameForContact, __IMDCoreSpotlightHandleID, 
-                       __IMDCoreSpotlightMessageMentionsMe, __IMDCoreSpotlightNewINInteractionForIncomingMessage, 
-                       __IMDCoreSpotlightNewINPersonFromHandleAndContact, __IMDCoreSpotlightNewINPersonHandleFromIMHandleValueAndContact, 
+                       __IMDCoreSpotlightIsKnownContact, __IMDCoreSpotlightMessageMentionsMe, 
+                       __IMDCoreSpotlightNewINInteractionForIncomingMessage, __IMDCoreSpotlightNewINPersonFromHandleAndContact, 
+                       __IMDCoreSpotlightNewINPersonHandleFromIMHandleValueAndContact, 
                        __IMDCoreSpotlightNicknameForAddress, __IMDCoreSpotlightPerson, 
                        __IMDCoreSpotlightServiceIsLegacy, __IMDCoreSpotlightSuggestedNameForAddress, 
                        __IMDCoreSpotlightTokensForMeIncludingCallerID, __IMDCoreSpotlightTokensMentionedInMessage, 
@@ -464,11 +466,13 @@ exports:
                        ___XPCServerIMDChatRecordPurgeAttachments_IPCAction, ___XPCServerIMDChatRecordRemoveHandle_IPCAction, 
                        ___XPCServerIMDChatRecordRepairDuplicateChats_IPCAction, ___XPCServerIMDChatRecordSetIsArchived_IPCAction, 
                        ___XPCServerIMDChatRecordSetIsBlackholed_IPCAction, ___XPCServerIMDChatRecordSetIsFiltered_IPCAction, 
-                       ___XPCServerIMDChatRecordSplitDatabaseByDays_IPCAction, ___XPCServerIMDChatRecordSplitDatabaseByRecentCount_IPCAction, 
+                       ___XPCServerIMDChatRecordSetIsRecovered_IPCAction, ___XPCServerIMDChatRecordSplitDatabaseByDays_IPCAction, 
+                       ___XPCServerIMDChatRecordSplitDatabaseByRecentCount_IPCAction, 
                        ___XPCServerIMDChatRemapChatsWithLastAddressedSIMIDToNewLastAddressedIDs_IPCAction, 
                        ___XPCServerIMDChatRemapMessagesWithErrorCodeToErrorCode_IPCAction, 
                        ___XPCServerIMDCoreSpotlightAddChatGUID_IPCAction, ___XPCServerIMDCoreSpotlightAddMessageGUID_IPCAction, 
-                       ___XPCServerIMDCoreSpotlightAddMessageGUIDs_IPCAction, ___XPCServerIMDCoreSpotlightIndexNextMessageBatchIfNeeded_IPCAction, 
+                       ___XPCServerIMDCoreSpotlightAddMessageGUIDs_IPCAction, ___XPCServerIMDCoreSpotlightDeleteChatGUID_IPCAction, 
+                       ___XPCServerIMDCoreSpotlightIndexNextMessageBatchIfNeeded_IPCAction, 
                        ___XPCServerIMDCoreSpotlightMarkAttachment_IPCAction, ___XPCServerIMDCoreSpotlightReindexMessagesWithCollaborationMetadata_IPCAction, 
                        ___XPCServerIMDCoreSpotlightReindexMessages_IPCAction, ___XPCServerIMDCoreSpotlightSetNeedsMessageReindex_IPCAction, 
                        ___XPCServerIMDDatabaseClean_IPCAction, ___XPCServerIMDDowngradeDatabase_IPCAction, 
@@ -616,10 +620,12 @@ exports:
                        ___syncXPCIMDChatRecordDeleteEmptyChats_IPCAction, ___syncXPCIMDChatRecordDisassociateMessageWithGUIDFromChatWithGUIDIfNeeded_IPCAction, 
                        ___syncXPCIMDChatRecordPurgeAttachments_IPCAction, ___syncXPCIMDChatRecordRemoveHandle_IPCAction, 
                        ___syncXPCIMDChatRecordSetIsArchived_IPCAction, ___syncXPCIMDChatRecordSetIsBlackholed_IPCAction, 
-                       ___syncXPCIMDChatRecordSetIsFiltered_IPCAction, ___syncXPCIMDChatRemapChatsWithLastAddressedSIMIDToNewLastAddressedIDs_IPCAction, 
+                       ___syncXPCIMDChatRecordSetIsFiltered_IPCAction, ___syncXPCIMDChatRecordSetIsRecovered_IPCAction, 
+                       ___syncXPCIMDChatRemapChatsWithLastAddressedSIMIDToNewLastAddressedIDs_IPCAction, 
                        ___syncXPCIMDChatRemapMessagesWithErrorCodeToErrorCode_IPCAction, 
                        ___syncXPCIMDCoreSpotlightAddChatGUID_IPCAction, ___syncXPCIMDCoreSpotlightAddMessageGUID_IPCAction, 
-                       ___syncXPCIMDCoreSpotlightAddMessageGUIDs_IPCAction, ___syncXPCIMDCoreSpotlightIndexNextMessageBatchIfNeeded_IPCAction, 
+                       ___syncXPCIMDCoreSpotlightAddMessageGUIDs_IPCAction, ___syncXPCIMDCoreSpotlightDeleteChatGUID_IPCAction, 
+                       ___syncXPCIMDCoreSpotlightIndexNextMessageBatchIfNeeded_IPCAction, 
                        ___syncXPCIMDCoreSpotlightMarkAttachment_IPCAction, ___syncXPCIMDCoreSpotlightReindexMessagesWithCollaborationMetadata_IPCAction, 
                        ___syncXPCIMDCoreSpotlightReindexMessages_IPCAction, ___syncXPCIMDCoreSpotlightSetNeedsMessageReindex_IPCAction, 
                        ___syncXPCIMDDatabaseClean_IPCAction, ___syncXPCIMDHandleRecordBulkUpdate_IPCAction, 

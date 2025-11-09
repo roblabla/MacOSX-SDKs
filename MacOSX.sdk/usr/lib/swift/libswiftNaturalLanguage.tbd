@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9A3F6B9B-F269-3760-AB8B-B92E9CD7E092
+    value:           05B69631-1531-3B12-8F89-1B238143394E
   - target:          x86_64-maccatalyst
-    value:           9A3F6B9B-F269-3760-AB8B-B92E9CD7E092
+    value:           05B69631-1531-3B12-8F89-1B238143394E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           287953CC-696A-3EFE-9EBE-7C435A26E0D6
+    value:           BE2B6E31-38B0-3EE7-830F-18AC0A5C3B1C
   - target:          arm64e-maccatalyst
-    value:           287953CC-696A-3EFE-9EBE-7C435A26E0D6
+    value:           BE2B6E31-38B0-3EE7-830F-18AC0A5C3B1C
 install-name:    '/usr/lib/swift/libswiftNaturalLanguage.dylib'
 current-version: 3
 swift-abi-version: 7

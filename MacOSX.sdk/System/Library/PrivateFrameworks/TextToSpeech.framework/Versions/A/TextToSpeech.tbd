@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           703AD8DC-9B76-3369-9429-B5A2D943533F
+    value:           943F9B8C-2526-3F6B-AA13-E4F02EBA90DD
   - target:          x86_64-maccatalyst
-    value:           703AD8DC-9B76-3369-9429-B5A2D943533F
+    value:           943F9B8C-2526-3F6B-AA13-E4F02EBA90DD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EFD45C28-35AD-32BD-A229-DB7496726854
+    value:           05FF120A-5E28-358F-A0A7-B67ED86F0927
   - target:          arm64e-maccatalyst
-    value:           EFD45C28-35AD-32BD-A229-DB7496726854
+    value:           05FF120A-5E28-358F-A0A7-B67ED86F0927
 install-name:    '/System/Library/PrivateFrameworks/TextToSpeech.framework/Versions/A/TextToSpeech'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -45,10 +45,10 @@ exports:
                        _TTSCFDictionaryGetValueIfType, _TTSCFSetCreateMutableArray, 
                        _TTSCFSetSendDifferences, _TTSCFURLDeleteDirectoryContents, 
                        _TTSCachedBuildNumberKey, _TTSCachedIsMigrationCompleteKey, 
-                       _TTSCachedVoiceIdentifiersToMigrateKey, _TTSCopyContentsOfDirectoryAtURL, 
-                       _TTSCopyModificationDateForFileAtURL, _TTSCreateDataFromContentsOfURL, 
-                       _TTSCreateDecryptedDataFromEncryptedData, _TTSCreateDirectory, 
-                       _TTSCreateStringFromFileAtPath, _TTSCreateTemporaryDirectory, 
+                       _TTSCachedVoiceIdentifiersToMigrateKey, _TTSChoseong_JongseongToHangul, 
+                       _TTSCopyContentsOfDirectoryAtURL, _TTSCopyModificationDateForFileAtURL, 
+                       _TTSCreateDataFromContentsOfURL, _TTSCreateDecryptedDataFromEncryptedData, 
+                       _TTSCreateDirectory, _TTSCreateStringFromFileAtPath, _TTSCreateTemporaryDirectory, 
                        _TTSCreateURLAndDirectory, _TTSDeleteItemAtURL, _TTSDirectoryExistsAtURL, 
                        _TTSErrorCreate, _TTSFileExistsAtURL, _TTSFootprintCompactIdentifier, 
                        _TTSFootprintPremiumIdentifier, _TTSFootprintSuperCompactIdentifier, 
@@ -112,17 +112,17 @@ exports:
                        _kTTSMauiFrameworkPath, _kTTSMauiVocalizerResourcesDirectory, 
                        _kTTSMauiVoiceIdentifierPrefix, _kTTSMobileAssetPropertiesKey, 
                        _kTTSNeuralVoiceIdentifierPrefix, _kTTSOriginalAssetBrokerHeaderFileName, 
-                       _kTTSPreferencesSpokenLanguageChangedNotification, _kTTSResourceBuildKey, 
-                       _kTTSResourceFolderName, _kTTSResourceFootprintKey, _kTTSResourceGenderKey, 
-                       _kTTSResourceLanguagesKey, _kTTSResourceMemoryPeakKey, _kTTSResourceNameKey, 
-                       _kTTSResourceSubtypeKey, _kTTSResourceTypeKey, _kTTSResourceVoiceIdKey, 
-                       _kTTSSampleAssetsPath, _kTTSSiriVoiceIdentifierPrefix, _kTTSSiriVoiceLegacyIdentifierRegex, 
-                       _kTTSSpeechBundleLegacyIdentifierRegex, _kTTSSpeechTextClassAttribute, 
-                       _kTTSSpeechTextClassName, _kTTSSpeechTextClassTitle, _kTTSSpeechVoiceKey, 
-                       _kTTSSynthProviderCacheUpdatedNotification, _kTTSSynthesisProviderVoiceAttributeGroupName, 
-                       _kTTSSynthesisProviderVoiceIdentifierPrefix, _kTTSSynthesizerBundleIdentifierKey, 
-                       _kTTSSystemVoiceIdentifierPrefix, _kTTSValidLegacyIdentifiers, 
-                       _kTTSVocalizerLanguageKey, _kTTSVocalizerResourceAssetInstalledNotification, 
+                       _kTTSPreferenceByteLimit, _kTTSPreferencesSpokenLanguageChangedNotification, 
+                       _kTTSResourceBuildKey, _kTTSResourceFolderName, _kTTSResourceFootprintKey, 
+                       _kTTSResourceGenderKey, _kTTSResourceLanguagesKey, _kTTSResourceMemoryPeakKey, 
+                       _kTTSResourceNameKey, _kTTSResourceSubtypeKey, _kTTSResourceTypeKey, 
+                       _kTTSResourceVoiceIdKey, _kTTSSampleAssetsPath, _kTTSSiriVoiceIdentifierPrefix, 
+                       _kTTSSiriVoiceLegacyIdentifierRegex, _kTTSSpeechBundleLegacyIdentifierRegex, 
+                       _kTTSSpeechTextClassAttribute, _kTTSSpeechTextClassName, _kTTSSpeechTextClassTitle, 
+                       _kTTSSpeechVoiceKey, _kTTSSynthProviderCacheUpdatedNotification, 
+                       _kTTSSynthesisProviderVoiceAttributeGroupName, _kTTSSynthesisProviderVoiceIdentifierPrefix, 
+                       _kTTSSynthesizerBundleIdentifierKey, _kTTSSystemVoiceIdentifierPrefix, 
+                       _kTTSValidLegacyIdentifiers, _kTTSVocalizerLanguageKey, _kTTSVocalizerResourceAssetInstalledNotification, 
                        _kTTSVocalizerVoiceFormatKey, _kTTSVocalizerVoiceLegacyIdentifierRegex, 
                        _kTTSVocalizerVoiceNameKey, _kTTSVoiceAssetKey, _sseNotificationName, 
                        _ttsStartReplyBlockKey ]

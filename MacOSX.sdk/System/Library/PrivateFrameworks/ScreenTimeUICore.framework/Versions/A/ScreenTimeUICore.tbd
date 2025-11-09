@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1A402B6C-E674-3AF9-8735-A9A80374F6F9
+    value:           17437E1A-C71E-31F1-8C3D-6C22B870952C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C2F1AE57-B2B4-3641-B2CE-10EE8F4E491D
+    value:           F6D9BE3C-C8E5-3466-A7F1-91985B7A8D65
 install-name:    '/System/Library/PrivateFrameworks/ScreenTimeUICore.framework/Versions/A/ScreenTimeUICore'
-current-version: 502.1.8
+current-version: 502.2.3
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

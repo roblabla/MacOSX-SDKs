@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6568DBB6-E3BB-3E0F-AD3A-59AAEA126963
+    value:           F1ACFBCE-C121-34BE-B807-6CD4A5DBB273
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6A527D87-16B6-3FF4-9EB7-EED0F5AA80AB
+    value:           52076FEA-9BB4-36CB-A77B-C10A8120E571
 install-name:    '/System/Library/PrivateFrameworks/MusicUI.framework/Versions/A/MusicUI'
 swift-abi-version: 7
 exports:

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           565623A4-C436-3DAF-AB19-76B233F831F8
+    value:           2F294AE1-8056-3806-AFC4-F8CABDD239F8
   - target:          x86_64-maccatalyst
-    value:           565623A4-C436-3DAF-AB19-76B233F831F8
+    value:           2F294AE1-8056-3806-AFC4-F8CABDD239F8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           734445D0-1DFC-3500-9B2D-FE30ACFC21FD
+    value:           645F15E5-CA81-3F5B-81BE-B49380D5A3C2
   - target:          arm64e-maccatalyst
-    value:           734445D0-1DFC-3500-9B2D-FE30ACFC21FD
+    value:           645F15E5-CA81-3F5B-81BE-B49380D5A3C2
 install-name:    '/System/Library/Frameworks/ColorSync.framework/Versions/A/ColorSync'
 current-version: 4.13
 exports:

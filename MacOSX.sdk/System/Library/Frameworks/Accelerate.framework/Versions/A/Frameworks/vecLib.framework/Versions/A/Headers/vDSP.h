@@ -3,7 +3,7 @@
 
     Contains:   AltiVec DSP Interfaces
 
-    Version:    vecLib-818.40
+    Version:    vecLib-818.60
 
     Copyright:  Copyright (c) 2000-2022 by Apple Inc. All rights reserved.
 
@@ -239,7 +239,7 @@ extern "C" {
     vDSP_Version1 is a minor version number.
 */
 #define vDSP_Version0   818
-#define vDSP_Version1   40
+#define vDSP_Version1   60
 
 
 /*  Define types:

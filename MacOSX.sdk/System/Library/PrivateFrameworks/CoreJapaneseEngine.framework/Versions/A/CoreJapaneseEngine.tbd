@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F5ED954D-CD6F-3729-AB80-ABD93EF20B55
+    value:           ECFBBEDC-331E-3F33-A6B3-B116042AC57C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0C6430A4-29CB-3A27-98BF-D4DAA75BCEFD
+    value:           76571EF6-51F5-3F79-A77D-FD94C0F640BC
 install-name:    '/System/Library/PrivateFrameworks/CoreJapaneseEngine.framework/Versions/A/CoreJapaneseEngine'
 current-version: 262
 exports:

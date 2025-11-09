@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FFE8A447-1E33-3651-BC5A-AFABCCA94C69
+    value:           D12DBB80-FFC7-3D31-A442-104C1D03D1EB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           073C4270-50DB-301D-B179-7F2F514F4ADD
+    value:           13D9B1D4-597C-366A-9972-78324C7613CC
 install-name:    '/System/Library/PrivateFrameworks/TextInputTestingKit.framework/Versions/A/TextInputTestingKit'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -57,9 +57,10 @@ exports:
                        __TIEndMockingSingletons, __TIEndMockingTransientLexiconManager, 
                        __TIEndMockingUserDictionaryServer, __TIEndMockingUserModelDataStore, 
                        __TIGetMockLanguageLikelihoodModel, __TIGetMockingAggdReporterDistribution, 
-                       __TIGetMockingAggdReporterScalar, __TIGetMockingAnalyticsServiceAllEvents, 
-                       __TIGetMockingAnalyticsServiceCountEvent, __TIGetMockingAnalyticsServiceCountEventWithPredicate, 
-                       __TIGetMockingAnalyticsServiceEvents, __TIGetMockingAnalyticsServiceEventsForMultipleEventNames, 
+                       __TIGetMockingAggdReporterScalar, __TIGetMockingAnalyticsInputAnalyticsServiceEvents, 
+                       __TIGetMockingAnalyticsServiceAllEvents, __TIGetMockingAnalyticsServiceCountEvent, 
+                       __TIGetMockingAnalyticsServiceCountEventWithPredicate, __TIGetMockingAnalyticsServiceEvents, 
+                       __TIGetMockingAnalyticsServiceEventsForMultipleEventNames, 
                        __TIGetMockingAnalyticsServiceSumFloatField, __TIGetMockingAnalyticsServiceSumFloatFieldWithPredicate, 
                        __TIGetMockingAnalyticsServiceSumIntegerField, __TIGetMockingAnalyticsServiceSumIntegerFieldWithPredicate, 
                        __TIMockingAggdReporterClear, __TIMockingAggdReporterDictionary, 

@@ -40,5 +40,6 @@ NS_ASSUME_NONNULL_END
 #endif // __PKSECUREELEMENTPASS_H
 
 #else
+#import <TargetConditionals.h>
 #import <PassKitCore/PKSecureElementPass.h>
 #endif

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BC2DAFB9-806D-3B1B-A48B-BD46682BD9FA
+    value:           94ABE53B-D65B-3849-BBE4-26C09A0D4A2F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C80F7237-918E-307A-9923-7BF1DD57D6FD
+    value:           19D96884-E5CF-3BC9-9FEF-990EA5D43215
 install-name:    '/System/Library/PrivateFrameworks/ActionKit.framework/Versions/A/ActionKit'
 swift-abi-version: 7
 exports:
@@ -21,11 +21,8 @@ exports:
     symbols:         [ '_$s10Foundation11MeasurementV9ActionKitE5value4unitACyxGSgSdSg_xSgtcfC', 
                        '_$s9ActionKit018GetWeatherForecastA0C10identifier10definition20serializedParametersACSgSS_SDySo11WFActionKeyaypGSgSDySSSo20WFPropertyListObject_pGSgtcfC', 
                        '_$s9ActionKit018GetWeatherForecastA0C10identifier10definition20serializedParametersACSgSS_SDySo11WFActionKeyaypGSgSDySSSo20WFPropertyListObject_pGSgtcfc', 
-                       '_$s9ActionKit018GetWeatherForecastA0C20supportsSecureCodingSbvgZ', 
                        '_$s9ActionKit018GetWeatherForecastA0C3run9withInput8location0I15DisclosureLevelySo19WFContentCollectionC_So10CLLocationCSo012WFDisclosureK0VtYaKF', 
                        '_$s9ActionKit018GetWeatherForecastA0C3run9withInput8location0I15DisclosureLevelySo19WFContentCollectionC_So10CLLocationCSo012WFDisclosureK0VtYaKFTu', 
-                       '_$s9ActionKit018GetWeatherForecastA0C5coderACSgSo7NSCoderC_tcfC', 
-                       '_$s9ActionKit018GetWeatherForecastA0C5coderACSgSo7NSCoderC_tcfc', 
                        '_$s9ActionKit018GetWeatherForecastA0C8providerAA09WFWeatherE8Provider_pvM', 
                        '_$s9ActionKit018GetWeatherForecastA0C8providerAA09WFWeatherE8Provider_pvg', 
                        '_$s9ActionKit018GetWeatherForecastA0C8providerAA09WFWeatherE8Provider_pvpMV', 
@@ -36,11 +33,8 @@ exports:
                        '_$s9ActionKit018GetWeatherForecastA0CN', '_$s9ActionKit018GetWeatherForecastA0CfD', 
                        '_$s9ActionKit027GetCurrentWeatherConditionsA0C10identifier10definition20serializedParametersACSgSS_SDySo11WFActionKeyaypGSgSDySSSo20WFPropertyListObject_pGSgtcfC', 
                        '_$s9ActionKit027GetCurrentWeatherConditionsA0C10identifier10definition20serializedParametersACSgSS_SDySo11WFActionKeyaypGSgSDySSSo20WFPropertyListObject_pGSgtcfc', 
-                       '_$s9ActionKit027GetCurrentWeatherConditionsA0C20supportsSecureCodingSbvgZ', 
                        '_$s9ActionKit027GetCurrentWeatherConditionsA0C3run9withInput8location0J15DisclosureLevelySo19WFContentCollectionC_So10CLLocationCSo012WFDisclosureL0VtYaKF', 
                        '_$s9ActionKit027GetCurrentWeatherConditionsA0C3run9withInput8location0J15DisclosureLevelySo19WFContentCollectionC_So10CLLocationCSo012WFDisclosureL0VtYaKFTu', 
-                       '_$s9ActionKit027GetCurrentWeatherConditionsA0C5coderACSgSo7NSCoderC_tcfC', 
-                       '_$s9ActionKit027GetCurrentWeatherConditionsA0C5coderACSgSo7NSCoderC_tcfc', 
                        '_$s9ActionKit027GetCurrentWeatherConditionsA0C8providerAA09WFCurrentE8Provider_pvM', 
                        '_$s9ActionKit027GetCurrentWeatherConditionsA0C8providerAA09WFCurrentE8Provider_pvg', 
                        '_$s9ActionKit027GetCurrentWeatherConditionsA0C8providerAA09WFCurrentE8Provider_pvpMV', 
@@ -68,7 +62,6 @@ exports:
                        '_$s9ActionKit07WeatherA0C3run9withInput8location0G15DisclosureLevelySo19WFContentCollectionC_So10CLLocationCSo012WFDisclosureI0VtYaKF', 
                        '_$s9ActionKit07WeatherA0C3run9withInput8location0G15DisclosureLevelySo19WFContentCollectionC_So10CLLocationCSo012WFDisclosureI0VtYaKFTq', 
                        '_$s9ActionKit07WeatherA0C3run9withInput8location0G15DisclosureLevelySo19WFContentCollectionC_So10CLLocationCSo012WFDisclosureI0VtYaKFTu', 
-                       '_$s9ActionKit07WeatherA0C5coderACSgSo7NSCoderC_tcfC', '_$s9ActionKit07WeatherA0C5coderACSgSo7NSCoderC_tcfc', 
                        '_$s9ActionKit07WeatherA0CACycfC', '_$s9ActionKit07WeatherA0CACycfc', 
                        '_$s9ActionKit07WeatherA0CMa', '_$s9ActionKit07WeatherA0CMn', 
                        '_$s9ActionKit07WeatherA0CN', '_$s9ActionKit07WeatherA0CfD', 
@@ -1901,8 +1894,8 @@ exports:
                        WFPocketAccessResource, WFPocketAddAction, WFPocketGetAction, 
                        WFPodcastEpisodeContentItem, WFPodcastEpisodeObject, WFPodcastPickerParameter, 
                        WFPodcastShowObject, WFPodcastUtilities, WFPodcastsAccessResource, 
-                       WFPrintAction, WFQuickLookAction, WFQuitAppAction, WFRSSFeedAction, 
-                       WFRSSFeedExtractAction, WFRadiosPreferencesSettingsClient, 
+                       WFPosterContentItem, WFPrintAction, WFQuickLookAction, WFQuitAppAction, 
+                       WFRSSFeedAction, WFRSSFeedExtractAction, WFRadiosPreferencesSettingsClient, 
                        WFRandomNumberAction, WFRecordAudioAction, WFRecordingStatusManager, 
                        WFReminderAccessResource, WFRemoveCalendarItemsAction, WFRemovePhotoFromAlbumAction, 
                        WFRenameFileAction, WFReplaceTextAction, WFRequestPaymentAccessResource, 

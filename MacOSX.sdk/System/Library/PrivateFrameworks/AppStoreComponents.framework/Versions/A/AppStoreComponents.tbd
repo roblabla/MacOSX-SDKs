@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           01CAD994-B9DD-37FD-869B-7EB001FC557E
+    value:           1BCC80D2-6052-3462-825F-3A1A45AA7FFB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B89CC16E-E4B5-3EEC-9F1B-7F08E73BAC7A
+    value:           209E4CA3-007E-39AA-B244-99405F3AE821
 install-name:    '/System/Library/PrivateFrameworks/AppStoreComponents.framework/Versions/A/AppStoreComponents'
 swift-abi-version: 7
 exports:
@@ -21,6 +21,7 @@ exports:
                        '_$s18AppStoreComponents14ASCLayoutProxyC16offerEmptyLayout9imageView05titleJ008subtitleJ0ACSo6NSViewC_AISgAJtFZ', 
                        '_$s18AppStoreComponents14ASCLayoutProxyC16traitEnvironment4with5JetUI0i5TraitG0_pSo17JUTraitCollectionC_tFZ', 
                        '_$s18AppStoreComponents14ASCLayoutProxyC17tvTextPillOverlay14backgroundView04textK0ACSo6NSViewC_AHtFZ', 
+                       '_$s18AppStoreComponents14ASCLayoutProxyC21offerDisclosureLayout19disclosureIndicatorACSo6NSViewC_tFZ', 
                        '_$s18AppStoreComponents14ASCLayoutProxyC22offerIconLayoutForSize_9imageView05titleL008subtitleL019hasTrailingSubtitle14shouldTopAlign10topPaddingACSS_So6NSViewCALSgAMS2b12CoreGraphics7CGFloatVtFZ', 
                        '_$s18AppStoreComponents14ASCLayoutProxyC22offerTextLayoutForSize_19titleBackgroundView0kM008subtitleM019hasTrailingSubtitle14shouldTopAlign10topPadding0r6ExpandL0ACSS_So6NSViewCSo11NSTextFieldCAOSgS2b12CoreGraphics7CGFloatVSbtFZ', 
                        '_$s18AppStoreComponents14ASCLayoutProxyC23miniLockupEstimatedSize7fitting14compatibleWithSo6CGSizeVAH_So17JUTraitCollectionCtFZ', 
@@ -56,14 +57,14 @@ exports:
                        _ASCArtworkFormatLCR, _ASCArtworkFormatPNG, _ASCArtworkTemplateKeyCrop, 
                        _ASCArtworkTemplateKeyFormat, _ASCArtworkTemplateKeyHeight, 
                        _ASCArtworkTemplateKeyWidth, _ASCCollectionIDGamesForYou, 
-                       _ASCCollectionIDNewArcadeGames, _ASCLockupContextAdGridWithLandscapeScreenshots, 
-                       _ASCLockupContextAdGridWithPortraitScreenshots, _ASCLockupContextAdMaterialWithLandscapeScreenshots, 
-                       _ASCLockupContextAdMaterialWithPortraitScreenshots, _ASCLockupContextAdWithLandscapeScreenshot, 
-                       _ASCLockupContextAdWithLandscapeVideo, _ASCLockupContextAdWithPortraitScreenshots, 
-                       _ASCLockupContextAdWithPortraitVideo, _ASCLockupContextAdWithText, 
-                       _ASCLockupContextGameCenter, _ASCLockupContextGameCenterArcade, 
-                       _ASCLockupContextIsAdGridContext, _ASCLockupContextIsAdMaterialContext, 
-                       _ASCLockupContextIsAdMaterialWithLandscapeScreenshotsContext, 
+                       _ASCCollectionIDNewArcadeGames, _ASCCollectionIDSharePlay, 
+                       _ASCLockupContextAdGridWithLandscapeScreenshots, _ASCLockupContextAdGridWithPortraitScreenshots, 
+                       _ASCLockupContextAdMaterialWithLandscapeScreenshots, _ASCLockupContextAdMaterialWithPortraitScreenshots, 
+                       _ASCLockupContextAdWithLandscapeScreenshot, _ASCLockupContextAdWithLandscapeVideo, 
+                       _ASCLockupContextAdWithPortraitScreenshots, _ASCLockupContextAdWithPortraitVideo, 
+                       _ASCLockupContextAdWithText, _ASCLockupContextGameCenter, 
+                       _ASCLockupContextGameCenterArcade, _ASCLockupContextIsAdGridContext, 
+                       _ASCLockupContextIsAdMaterialContext, _ASCLockupContextIsAdMaterialWithLandscapeScreenshotsContext, 
                        _ASCLockupContextOfferOnly, _ASCLockupContextOverlay, _ASCLockupContextOverlayClip, 
                        _ASCLockupContextSafariExtension, _ASCLockupContextSingleSignOn, 
                        _ASCLockupContextStandard, _ASCLockupContextWatch, _ASCLockupKindApp, 
@@ -87,7 +88,7 @@ exports:
                        _ASCSignpostTagFromID, _ASCSignpostTagFromIDInProcess, _ASCSignpostTagMaxValue, 
                        _ASCSignpostTagNull, _ASCSignpostTagUnique, _AppStoreComponentsVersionNumber, 
                        _AppStoreComponentsVersionString, __ASCLockupKeyAdamID, __ASCLockupKeyIcon, 
-                       __ASCLockupKeySubtitle, __ASCLockupKeyTitle ]
+                       __ASCLockupKeyShortName, __ASCLockupKeySubtitle, __ASCLockupKeyTitle ]
     objc-classes:    [ ASCAdamID, ASCAppLaunchTrampoline, ASCAppLaunchTrampolineURL, 
                        ASCArtwork, ASCBlockDynamicColor, ASCCollectionRequest, ASCContentSkeleton, 
                        ASCLocalOffer, ASCLockup, ASCLockupProductDetails, ASCLockupProductDetailsPresentationContext, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6D1E1003-32DF-3C0E-A77D-711625796483
+    value:           14C24F78-7D19-35C1-A96B-D9554F05F075
   - target:          x86_64-maccatalyst
-    value:           6D1E1003-32DF-3C0E-A77D-711625796483
+    value:           14C24F78-7D19-35C1-A96B-D9554F05F075
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BE1F3AC2-D9BF-3ED3-9F2F-94A43F9482E5
+    value:           A50526F8-2ECB-361F-8FE0-D514FF5B0DE1
   - target:          arm64e-maccatalyst
-    value:           BE1F3AC2-D9BF-3ED3-9F2F-94A43F9482E5
+    value:           A50526F8-2ECB-361F-8FE0-D514FF5B0DE1
 install-name:    '/System/Library/PrivateFrameworks/AdPlatforms.framework/Versions/A/AdPlatforms'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

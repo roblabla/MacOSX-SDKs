@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0AE83A14-0DDF-3F5B-9116-A462A0F684B7
+    value:           4A372E58-F983-3002-A1B0-B7433AA358CD
   - target:          x86_64-maccatalyst
-    value:           0AE83A14-0DDF-3F5B-9116-A462A0F684B7
+    value:           4A372E58-F983-3002-A1B0-B7433AA358CD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FE20D916-734A-37BD-92E1-3C02A41F0860
+    value:           CDDA519A-7F57-3A7D-8D96-DF8222FE3EDA
   - target:          arm64e-maccatalyst
-    value:           FE20D916-734A-37BD-92E1-3C02A41F0860
+    value:           CDDA519A-7F57-3A7D-8D96-DF8222FE3EDA
 install-name:    '/System/Library/PrivateFrameworks/FMNetworking.framework/Versions/A/FMNetworking'
 swift-abi-version: 7
 allowable-clients:
@@ -491,6 +491,7 @@ exports:
                        '_$s12FMNetworking30FMNServerInteractionControllerC17FMNResponseFieldsV15responseHeadersSDyS2SGvpMV', 
                        '_$s12FMNetworking30FMNServerInteractionControllerC17FMNResponseFieldsV4data10Foundation4DataVvg', 
                        '_$s12FMNetworking30FMNServerInteractionControllerC17FMNResponseFieldsV4data10Foundation4DataVvpMV', 
+                       '_$s12FMNetworking30FMNServerInteractionControllerC17FMNResponseFieldsV4data10statusCode15responseHeaders8metadataAE10Foundation4DataV_SiSDyS2SGAC22InternalServerMetadataVSgtcfC', 
                        '_$s12FMNetworking30FMNServerInteractionControllerC17FMNResponseFieldsV8metadataAC22InternalServerMetadataVSgvM', 
                        '_$s12FMNetworking30FMNServerInteractionControllerC17FMNResponseFieldsV8metadataAC22InternalServerMetadataVSgvg', 
                        '_$s12FMNetworking30FMNServerInteractionControllerC17FMNResponseFieldsV8metadataAC22InternalServerMetadataVSgvpMV', 

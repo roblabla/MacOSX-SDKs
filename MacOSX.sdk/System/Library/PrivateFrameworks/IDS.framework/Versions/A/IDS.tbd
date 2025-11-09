@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0D70502F-78A7-3D65-A349-F914338C4E49
+    value:           6AFEE38B-2DED-3FEF-AD6E-2D71EE4DD287
   - target:          x86_64-maccatalyst
-    value:           0D70502F-78A7-3D65-A349-F914338C4E49
+    value:           6AFEE38B-2DED-3FEF-AD6E-2D71EE4DD287
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           324D45E0-E29C-33F4-9363-47C1C49A58B2
+    value:           2D63CBAE-6FE3-3E7F-AB5C-0EDE27260C03
   - target:          arm64e-maccatalyst
-    value:           324D45E0-E29C-33F4-9363-47C1C49A58B2
+    value:           2D63CBAE-6FE3-3E7F-AB5C-0EDE27260C03
 install-name:    '/System/Library/PrivateFrameworks/IDS.framework/Versions/A/IDS'
 current-version: 800
 reexported-libraries:
@@ -87,22 +87,22 @@ exports:
                        _IDSRefreshUserAccessTokensWithCompletionBlock, _IDSRegistrationControlDisableRegistrationType, 
                        _IDSRegistrationControlEnableRegistrationType, _IDSRegistrationControlGetStateForRegistrationType, 
                        _IDSRegistrationControlSyncGetStateForRegistrationType, _IDSRepairAccounts, 
-                       _IDSReportiMessageSpam, _IDSReportiMessageUnknownSender, _IDSReportiMessageUnknownSenderWithBlackholeStatus, 
-                       _IDSSecurityKeyRollingRegenerateRegisteredIdentity, _IDSSecurityKeyRollingRollKeys, 
-                       _IDSSendMessageOptionAccessTokenKey, _IDSSendMessageOptionActivityContinuationKey, 
-                       _IDSSendMessageOptionAllowCloudDeliveryKey, _IDSSendMessageOptionAlternateCallbackIdentifierKey, 
-                       _IDSSendMessageOptionAlwaysSkipSelfKey, _IDSSendMessageOptionBypassDuetKey, 
-                       _IDSSendMessageOptionCommandKey, _IDSSendMessageOptionCompressPayloadKey, 
-                       _IDSSendMessageOptionDataToEncryptKey, _IDSSendMessageOptionDeliveryMinimumTimeKey, 
-                       _IDSSendMessageOptionDeliveryStatusContextKey, _IDSSendMessageOptionDeliveryTimeKey, 
-                       _IDSSendMessageOptionDirectMessaging, _IDSSendMessageOptionDisableAliasValidationKey, 
-                       _IDSSendMessageOptionDropMessageIndicatorKey, _IDSSendMessageOptionDuetIdentifiersOverrideKey, 
-                       _IDSSendMessageOptionDuetKey, _IDSSendMessageOptionEncryptPayloadKey, 
-                       _IDSSendMessageOptionEnforceRemoteTimeoutsKey, _IDSSendMessageOptionExpectsPeerResponseKey, 
-                       _IDSSendMessageOptionFakeMessage, _IDSSendMessageOptionFireAndForgetKey, 
-                       _IDSSendMessageOptionForceEncryptionOffKey, _IDSSendMessageOptionForceLocalDeliveryKey, 
-                       _IDSSendMessageOptionFromIDKey, _IDSSendMessageOptionHomeKitMessageKey, 
-                       _IDSSendMessageOptionInterestingRegistrationPropertiesKey, 
+                       _IDSReportiMessageSpam, _IDSReportiMessageUnknownSender, _IDSReportiMessageUnknownSenderWithBlackholeAndJunkStatus, 
+                       _IDSReportiMessageUnknownSenderWithBlackholeStatus, _IDSSecurityKeyRollingRegenerateRegisteredIdentity, 
+                       _IDSSecurityKeyRollingRollKeys, _IDSSendMessageOptionAccessTokenKey, 
+                       _IDSSendMessageOptionActivityContinuationKey, _IDSSendMessageOptionAllowCloudDeliveryKey, 
+                       _IDSSendMessageOptionAlternateCallbackIdentifierKey, _IDSSendMessageOptionAlwaysSkipSelfKey, 
+                       _IDSSendMessageOptionBypassDuetKey, _IDSSendMessageOptionCommandKey, 
+                       _IDSSendMessageOptionCompressPayloadKey, _IDSSendMessageOptionDataToEncryptKey, 
+                       _IDSSendMessageOptionDeliveryMinimumTimeKey, _IDSSendMessageOptionDeliveryStatusContextKey, 
+                       _IDSSendMessageOptionDeliveryTimeKey, _IDSSendMessageOptionDirectMessaging, 
+                       _IDSSendMessageOptionDisableAliasValidationKey, _IDSSendMessageOptionDropMessageIndicatorKey, 
+                       _IDSSendMessageOptionDuetIdentifiersOverrideKey, _IDSSendMessageOptionDuetKey, 
+                       _IDSSendMessageOptionEncryptPayloadKey, _IDSSendMessageOptionEnforceRemoteTimeoutsKey, 
+                       _IDSSendMessageOptionExpectsPeerResponseKey, _IDSSendMessageOptionFakeMessage, 
+                       _IDSSendMessageOptionFireAndForgetKey, _IDSSendMessageOptionForceEncryptionOffKey, 
+                       _IDSSendMessageOptionForceLocalDeliveryKey, _IDSSendMessageOptionFromIDKey, 
+                       _IDSSendMessageOptionHomeKitMessageKey, _IDSSendMessageOptionInterestingRegistrationPropertiesKey, 
                        _IDSSendMessageOptionLiveMessageDeliveryKey, _IDSSendMessageOptionLocalDeliveryKey, 
                        _IDSSendMessageOptionMapTileKey, _IDSSendMessageOptionMetricReportIdentifierKey, 
                        _IDSSendMessageOptionNSURLSessionKey, _IDSSendMessageOptionNonCloudWakingKey, 
@@ -159,15 +159,15 @@ exports:
                        IDSGroupSessionBroadcastParameter, IDSGroupSessionDataCryptor, 
                        IDSGroupSessionKeyValueDelivery, IDSGroupSessionUnicastConnector, 
                        IDSGroupSessionUnicastParameter, IDSIDQueryController, IDSInvitation, 
-                       IDSInvitationManager, IDSKeyTransparencyManager, IDSLocalPairingAddPairedDeviceInfo, 
-                       IDSLocalPairingIdentityDataErrorPair, IDSLocalPairingLocalDeviceRecord, 
-                       IDSLocalPairingPairedDeviceRecord, IDSLocalPairingRecord, 
-                       IDSLogging, IDSPairedDeviceManager, IDSPhoneCertificateVendor, 
-                       IDSPhoneSubscription, IDSPhoneSubscriptionSelector, IDSPhoneTemporaryAliasDescription, 
-                       IDSQuickRelayFixedTokenAllocator, IDSRealTimeEncryptionProxy, 
-                       IDSReceivedInvitation, IDSSentInvitation, IDSServerMessagingController, 
-                       IDSServerMessagingIncomingContext, IDSServerMessagingMessage, 
-                       IDSServerMessagingOptions, IDSServerMessagingOutgoingContext, 
+                       IDSInvitationManager, IDSKTVerificationInfoProvider, IDSKeyTransparencyManager, 
+                       IDSLocalPairingAddPairedDeviceInfo, IDSLocalPairingIdentityDataErrorPair, 
+                       IDSLocalPairingLocalDeviceRecord, IDSLocalPairingPairedDeviceRecord, 
+                       IDSLocalPairingRecord, IDSLogging, IDSPairedDeviceManager, 
+                       IDSPhoneCertificateVendor, IDSPhoneSubscription, IDSPhoneSubscriptionSelector, 
+                       IDSPhoneTemporaryAliasDescription, IDSQuickRelayFixedTokenAllocator, 
+                       IDSRealTimeEncryptionProxy, IDSReceivedInvitation, IDSSentInvitation, 
+                       IDSServerMessagingController, IDSServerMessagingIncomingContext, 
+                       IDSServerMessagingMessage, IDSServerMessagingOptions, IDSServerMessagingOutgoingContext, 
                        IDSService, IDSServiceAvailabilityController, IDSServicePseudonymChange, 
                        IDSSession, IDSSignInController, IDSSignInServiceUserInfo, 
                        IDSSignInServiceUserStatus, IDSTransactionLogDataMessage, 
@@ -214,17 +214,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C0079FF5-D48B-3F29-B79C-F7A270AA4C1C
+    value:           EAB6915A-FF8C-31C1-9F5C-7E34823EF3F4
   - target:          x86_64-maccatalyst
-    value:           C0079FF5-D48B-3F29-B79C-F7A270AA4C1C
+    value:           EAB6915A-FF8C-31C1-9F5C-7E34823EF3F4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           95BAAD93-C4FB-3EE3-9D07-4C94C8C2A4AF
+    value:           96C4F8EA-BB29-3EA8-994F-5DC263FB5D6A
   - target:          arm64e-maccatalyst
-    value:           95BAAD93-C4FB-3EE3-9D07-4C94C8C2A4AF
+    value:           96C4F8EA-BB29-3EA8-994F-5DC263FB5D6A
 install-name:    '/System/Library/PrivateFrameworks/IDSFoundation.framework/Versions/A/IDSFoundation'
 current-version: 800
 exports:
@@ -248,16 +248,17 @@ exports:
                        _GLUtilGetSharedSessionIDs, _GLUtilHasCandidatePairForSameSharedSession, 
                        _GLUtilHasDefaultInterface, _GLUtilHasDifferentSharedRelayCandidatePair, 
                        _GLUtilHasNonSharedRelayCandidatePair, _GLUtilHasRelayCandidatePairConnected, 
-                       _GLUtilHasV4Address, _GLUtilHasV4AddressForInterface, _GLUtilHasV6Address, 
-                       _GLUtilHasVPNInterfaceForSelectedAddress, _GLUtilHasValidBinaryDataAttr, 
-                       _GLUtilHasValidUInt16Attr, _GLUtilHasValidUInt32Attr, _GLUtilHasValidUUIDAttr, 
-                       _GLUtilIDSStunTransportToBearer, _GLUtilInterfaceTypeListToString, 
-                       _GLUtilLinkTypeListToString, _GLUtilLinkTypeMaskForCandidatePair, 
-                       _GLUtilLinkTypeMaskToString, _GLUtilNATCheckTimeout, _GLUtilNewQRLinkType, 
-                       _GLUtilPreferredInterfaceToString, _GLUtilRelayLinkHasReachedMaxRetryLimit, 
-                       _GLUtilReportAWDActiveLinkRTT, _GLUtilReportAWDClientTimerEvent, 
-                       _GLUtilReportAWDStunMessageEvent, _GLUtilReportAWDStunMessageEventWithType, 
-                       _GLUtilSelectInterface, _GLUtilSelectStunTransport, _GLUtilShouldSetRemoteInterfacePreference, 
+                       _GLUtilHasRelayCandidatePairSucceededOrConnected, _GLUtilHasV4Address, 
+                       _GLUtilHasV4AddressForInterface, _GLUtilHasV6Address, _GLUtilHasVPNInterfaceForSelectedAddress, 
+                       _GLUtilHasValidBinaryDataAttr, _GLUtilHasValidUInt16Attr, 
+                       _GLUtilHasValidUInt32Attr, _GLUtilHasValidUUIDAttr, _GLUtilIDSStunTransportToBearer, 
+                       _GLUtilInterfaceTypeListToString, _GLUtilLinkTypeListToString, 
+                       _GLUtilLinkTypeMaskForCandidatePair, _GLUtilLinkTypeMaskToString, 
+                       _GLUtilNATCheckTimeout, _GLUtilNewQRLinkType, _GLUtilPreferredInterfaceToString, 
+                       _GLUtilRelayLinkHasReachedMaxRetryLimit, _GLUtilReportAWDActiveLinkRTT, 
+                       _GLUtilReportAWDClientTimerEvent, _GLUtilReportAWDStunMessageEvent, 
+                       _GLUtilReportAWDStunMessageEventWithType, _GLUtilSelectInterface, 
+                       _GLUtilSelectStunTransport, _GLUtilShouldSetRemoteInterfacePreference, 
                        _GLUtilStunErrorToGlobalLinkError, _GLUtilStunTransportChar, 
                        _GLUtilUnderPerformanceTesting, _IDSACAccountGameCenterContactsAssociationID, 
                        _IDSACAccountGameCenterContactsLastUpdatedDate, _IDSACAccountGameCenterContactsSharingState, 
@@ -440,11 +441,11 @@ exports:
                        _IDSGlobalLinkOptionClientTypeKey, _IDSGlobalLinkOptionDisallowCellularKey, 
                        _IDSGlobalLinkOptionDisallowWiFiKey, _IDSGlobalLinkOptionEnableSKEKey, 
                        _IDSGlobalLinkOptionForceRelayKey, _IDSGlobalLinkOptionGenericDataKey, 
-                       _IDSGlobalLinkOptionInviteRecvTimeKey, _IDSGlobalLinkOptionInviteSentTimeKey, 
-                       _IDSGlobalLinkOptionIsLightweightParticipant, _IDSGlobalLinkOptionLinkIDKey, 
-                       _IDSGlobalLinkOptionMaterialsKey, _IDSGlobalLinkOptionMaterialsRequestKey, 
-                       _IDSGlobalLinkOptionMetricsCollectorKey, _IDSGlobalLinkOptionNewLinkOptionsKey, 
-                       _IDSGlobalLinkOptionParticipantUpdateBlockedParticipantIDsKey, 
+                       _IDSGlobalLinkOptionHasValidDataBlob, _IDSGlobalLinkOptionInviteRecvTimeKey, 
+                       _IDSGlobalLinkOptionInviteSentTimeKey, _IDSGlobalLinkOptionIsLightweightParticipant, 
+                       _IDSGlobalLinkOptionLinkIDKey, _IDSGlobalLinkOptionMaterialsKey, 
+                       _IDSGlobalLinkOptionMaterialsRequestKey, _IDSGlobalLinkOptionMetricsCollectorKey, 
+                       _IDSGlobalLinkOptionNewLinkOptionsKey, _IDSGlobalLinkOptionParticipantUpdateBlockedParticipantIDsKey, 
                        _IDSGlobalLinkOptionParticipantUpdateRequestCounterKey, _IDSGlobalLinkOptionParticipantUpdateRequestTypeKey, 
                        _IDSGlobalLinkOptionPluginNameKey, _IDSGlobalLinkOptionPluginOperationKey, 
                        _IDSGlobalLinkOptionPluginRawPublicKeyKey, _IDSGlobalLinkOptionPreferCellularForCallSetupKey, 
@@ -520,15 +521,16 @@ exports:
                        _IDSMessageContextEndpointStateKey, _IDSMessageContextEngramGroupIDKey, 
                        _IDSMessageContextExpectsPeerResponseKey, _IDSMessageContextFromIDKey, 
                        _IDSMessageContextFromServerStorageKey, _IDSMessageContextIncomingResponseIdentifierKey, 
-                       _IDSMessageContextIsDirectMessage, _IDSMessageContextLocalMessageStateKey, 
-                       _IDSMessageContextMessageHadEncryptedData, _IDSMessageContextOriginalCommandKey, 
-                       _IDSMessageContextOriginalDestinationDeviceKey, _IDSMessageContextOriginalGUIDKey, 
-                       _IDSMessageContextOriginalTimestampKey, _IDSMessageContextOutgoingResponseIdentifierKey, 
-                       _IDSMessageContextPriorityKey, _IDSMessageContextPublicIntentActionKey, 
-                       _IDSMessageContextSenderCorrelationIdentifierKey, _IDSMessageContextSequenceNumberKey, 
-                       _IDSMessageContextServerTimestampKey, _IDSMessageContextServiceIdentifierKey, 
-                       _IDSMessageContextStorageGuidKey, _IDSMessageContextTargettedPseudonymKey, 
-                       _IDSMessageContextToIDKey, _IDSMessageContextTotalBytes, _IDSMessageContextUsedEngramKey, 
+                       _IDSMessageContextIsDirectMessage, _IDSMessageContextIsFromTrustedSender, 
+                       _IDSMessageContextLocalMessageStateKey, _IDSMessageContextMessageHadEncryptedData, 
+                       _IDSMessageContextOriginalCommandKey, _IDSMessageContextOriginalDestinationDeviceKey, 
+                       _IDSMessageContextOriginalGUIDKey, _IDSMessageContextOriginalTimestampKey, 
+                       _IDSMessageContextOutgoingResponseIdentifierKey, _IDSMessageContextPriorityKey, 
+                       _IDSMessageContextPublicIntentActionKey, _IDSMessageContextSenderCorrelationIdentifierKey, 
+                       _IDSMessageContextSequenceNumberKey, _IDSMessageContextServerTimestampKey, 
+                       _IDSMessageContextServiceIdentifierKey, _IDSMessageContextStorageGuidKey, 
+                       _IDSMessageContextTargettedPseudonymKey, _IDSMessageContextToIDKey, 
+                       _IDSMessageContextTotalBytes, _IDSMessageContextUsedEngramKey, 
                        _IDSMessageContextWPConnectionErrorCodeKey, _IDSMessageContextWPConnectionErrorDomainKey, 
                        _IDSMessageContextWPConnectionErrorUserInfoKey, _IDSMessageContextWantsAppAckKey, 
                        _IDSMessageContextWantsManualAckKey, _IDSMessageResourceTransferDataKey, 
@@ -640,11 +642,12 @@ exports:
                        _IDSRegistrationPropertySupportsMapsRoutingPathLeg, _IDSRegistrationPropertySupportsMapsWaypointRouteSharing, 
                        _IDSRegistrationPropertySupportsMediaV2, _IDSRegistrationPropertySupportsMirage, 
                        _IDSRegistrationPropertySupportsModernGFT, _IDSRegistrationPropertySupportsOriginalTimestampOrderingV1, 
-                       _IDSRegistrationPropertySupportsPeopleRequestMessages, _IDSRegistrationPropertySupportsPhotosExtensionV1, 
-                       _IDSRegistrationPropertySupportsPhotosExtensionV2, _IDSRegistrationPropertySupportsProtobufPayloadDataV2, 
-                       _IDSRegistrationPropertySupportsRetractAndEditMessages, _IDSRegistrationPropertySupportsScreenTimeErrors, 
-                       _IDSRegistrationPropertySupportsScreenTimeV2, _IDSRegistrationPropertySupportsSecureLocationsV1, 
-                       _IDSRegistrationPropertySupportsSelfOneToOneInvites, _IDSRegistrationPropertySupportsSharedExperiencePresence, 
+                       _IDSRegistrationPropertySupportsPeopleRequestMessages, _IDSRegistrationPropertySupportsPeopleRequestMessagesV2, 
+                       _IDSRegistrationPropertySupportsPhotosExtensionV1, _IDSRegistrationPropertySupportsPhotosExtensionV2, 
+                       _IDSRegistrationPropertySupportsProtobufPayloadDataV2, _IDSRegistrationPropertySupportsRetractAndEditMessages, 
+                       _IDSRegistrationPropertySupportsScreenTimeErrors, _IDSRegistrationPropertySupportsScreenTimeV2, 
+                       _IDSRegistrationPropertySupportsSecureLocationsV1, _IDSRegistrationPropertySupportsSelfOneToOneInvites, 
+                       _IDSRegistrationPropertySupportsSharedExperiencePresence, 
                        _IDSRegistrationPropertySupportsStickersV1, _IDSRegistrationPropertySupportsSyndicationActionsV1, 
                        _IDSRegistrationPropertySupportsUWB, _IDSRegistrationPropertySupportsUpdateAttachmentsV1, 
                        _IDSRegistrationServiceTypeCalling, _IDSRegistrationServiceTypeCloudMessaging, 
@@ -776,7 +779,7 @@ exports:
                        _IDSTransportThreadRemoveSocketWithPriority, _IDSTransportThreadResumeSocket, 
                        _IDSTransportThreadResumeSocketWithPriority, _IDSTransportThreadSuspendSocket, 
                        _IDSTransportThreadSuspendSocketWithPriority, _IDSTransportZoneKey, 
-                       _IDSUTunControlChannelRemoteDeviceEncryptionInfoMyIdentityKey, 
+                       _IDSTrustedSenderKey, _IDSUTunControlChannelRemoteDeviceEncryptionInfoMyIdentityKey, 
                        _IDSUTunControlChannelRemoteDeviceEncryptionInfoMyURIKey, 
                        _IDSUTunControlChannelRemoteDeviceEncryptionInfoRemoteTokenURIKey, 
                        _IDSUTunControlChannelRemoteDeviceEncryptionInfoServiceKey, 
@@ -1051,13 +1054,13 @@ exports:
                        IDSGroupEncryptionKeyMaterial, IDSGroupSessionActiveParticipant, 
                        IDSGroupSessionConnectionParameters, IDSGroupSessionParticipantUpdate, 
                        IDSHandle, IDSIDInfoOptions, IDSIDInfoResult, IDSIDKTData, 
-                       IDSInterfaceAddress, IDSKTVerificationResult, IDSKeyTransparencyTrustedDeviceEnrollmentMetric, 
-                       IDSKeyTransparencyTrustedDeviceVerificationMetric, IDSLegacyDeviceMessageProtectionCypher, 
-                       IDSLocalDeliveryMessageDeliveredMetric, IDSLocalDeliveryMessageReceivedMetric, 
-                       IDSLocalDeliveryMessageSentMetric, IDSLocalDeliverySocketClosedMetric, 
-                       IDSLocalDeliverySocketOpenedMetric, IDSLocalMessageDeliveryConnectionResetMetric, 
-                       IDSLocalMessageDeliveryServiceNotCompatibleMetric, IDSLocalMessageRTTMetric, 
-                       IDSLocalMessageSentMetric, IDSLocalMessageTimedOutMetric, 
+                       IDSInterfaceAddress, IDSKTOptInResult, IDSKTVerificationResult, 
+                       IDSKeyTransparencyTrustedDeviceEnrollmentMetric, IDSKeyTransparencyTrustedDeviceVerificationMetric, 
+                       IDSLegacyDeviceMessageProtectionCypher, IDSLocalDeliveryMessageDeliveredMetric, 
+                       IDSLocalDeliveryMessageReceivedMetric, IDSLocalDeliveryMessageSentMetric, 
+                       IDSLocalDeliverySocketClosedMetric, IDSLocalDeliverySocketOpenedMetric, 
+                       IDSLocalMessageDeliveryConnectionResetMetric, IDSLocalMessageDeliveryServiceNotCompatibleMetric, 
+                       IDSLocalMessageRTTMetric, IDSLocalMessageSentMetric, IDSLocalMessageTimedOutMetric, 
                        IDSLogFormatter, IDSMMCSAccessRequestMessage, IDSMMCSDownloadAuth, 
                        IDSMPConversationGroup, IDSMPConversationGroupSponsorPair, 
                        IDSMPConversationKey, IDSMPDecryptionResult, IDSMPFullAccountIdentity, 
@@ -1149,11 +1152,12 @@ exports:
                        IDSStunCandidatePair, IDSStunConnectionDataController, IDSStunMessage, 
                        IDSStunRelayInterfaceInfoController, IDSSysdiagnoseLogCollector, 
                        IDSTCPLink, IDSTapToRadar, IDSTapToRadarContext, IDSTapToRadarRequest, 
-                       IDSTransactionQueue, IDSTransportScoreCard, IDSUDPLink, IDSURI, 
-                       IDSWRMLinkRecommendationMetric, IDSWiFiSetupAttemptMetric, 
-                       IDSWiProxConnectionFailedMetric, IDSWiProxConnectionSuccessMetric, 
-                       IDSWiProxDidConnectToPeerMetric, IDSWiProxDidDisconnectFromPeerMetric, 
-                       IDSWiProxDidSendDataMetric, NWLinkConnection, PDSRegistrationAbandonedMetric ]
+                       IDSToolKTSelfVerificationHealableErrors, IDSTransactionQueue, 
+                       IDSTransportScoreCard, IDSUDPLink, IDSURI, IDSWRMLinkRecommendationMetric, 
+                       IDSWiFiSetupAttemptMetric, IDSWiProxConnectionFailedMetric, 
+                       IDSWiProxConnectionSuccessMetric, IDSWiProxDidConnectToPeerMetric, 
+                       IDSWiProxDidDisconnectFromPeerMetric, IDSWiProxDidSendDataMetric, 
+                       NWLinkConnection, PDSRegistrationAbandonedMetric ]
     objc-ivars:      [ IDSAWDLogging._AWDServerConnection, IDSAWDLogging._queue, 
                        IDSCellularLinkMonitor._cellularDataInterfaceName, IDSCellularLinkMonitor._cellularLinkDelegates, 
                        IDSCellularLinkMonitor._cellularMTU, IDSCellularLinkMonitor._dataIndicator, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1D14EB7A-F1B2-3185-B064-F879F4FFC780
+    value:           346976D7-0E65-3DDF-8BED-F18BDE296B2E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DC39CB3F-7375-34FD-A97A-17E89F62EE47
+    value:           C89D8E67-909A-3F9E-AEB8-CF023CD849CD
 install-name:    '/System/Library/PrivateFrameworks/SecureTransactionService.framework/Versions/A/SecureTransactionService'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

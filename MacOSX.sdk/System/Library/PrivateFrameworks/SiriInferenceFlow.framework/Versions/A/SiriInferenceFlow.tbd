@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B9093691-600E-3B46-B6C4-A3DAEF97D850
+    value:           0C6C2086-DBDC-344E-8D34-2E121DE25476
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F17EA50F-D98B-38D7-A020-3082C29B64C3
+    value:           B896B40C-783C-3E8A-A33B-61C2CF2E253E
 install-name:    '/System/Library/PrivateFrameworks/SiriInferenceFlow.framework/Versions/A/SiriInferenceFlow'
 swift-abi-version: 7
 exports:
@@ -87,6 +87,8 @@ exports:
                        '_$s17SiriInferenceFlow24EntityResolutionStrategyP25extractConfirmationStatus4fromSb0A8Ontology8NLIntentV_tFTq', 
                        '_$s17SiriInferenceFlow24EntityResolutionStrategyTL', '_$s17SiriInferenceFlow26ContactResolutionPatternIDO022detailedDisambiguationD5NamesyA2CmFWC', 
                        '_$s17SiriInferenceFlow26ContactResolutionPatternIDO05yesNoD4NameyA2CmFWC', 
+                       '_$s17SiriInferenceFlow26ContactResolutionPatternIDO22requiresAuthenticationSbvg', 
+                       '_$s17SiriInferenceFlow26ContactResolutionPatternIDO22requiresAuthenticationSbvpMV', 
                        '_$s17SiriInferenceFlow26ContactResolutionPatternIDO28openEndedClarificationTargetyA2CmFWC', 
                        '_$s17SiriInferenceFlow26ContactResolutionPatternIDO28yesNoSingleAlternativeHandleyA2CmFWC', 
                        '_$s17SiriInferenceFlow26ContactResolutionPatternIDO31simpleDisambiguationMixedLabelsyA2CmFWC', 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B1E868BB-6E65-3C7B-84C4-86319ACF1447
+    value:           EEF7A0BD-D34B-3217-8CAA-019829860F7A
   - target:          x86_64-maccatalyst
-    value:           B1E868BB-6E65-3C7B-84C4-86319ACF1447
+    value:           EEF7A0BD-D34B-3217-8CAA-019829860F7A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F7380C98-E853-319F-8BBC-A47E478324C3
+    value:           691B3524-B09A-3327-A2B1-C6B986DA5CF3
   - target:          arm64e-maccatalyst
-    value:           F7380C98-E853-319F-8BBC-A47E478324C3
+    value:           691B3524-B09A-3327-A2B1-C6B986DA5CF3
 install-name:    '/System/Library/PrivateFrameworks/ProactiveSupport.framework/Versions/A/ProactiveSupport'
 current-version: 365.3
 swift-abi-version: 7

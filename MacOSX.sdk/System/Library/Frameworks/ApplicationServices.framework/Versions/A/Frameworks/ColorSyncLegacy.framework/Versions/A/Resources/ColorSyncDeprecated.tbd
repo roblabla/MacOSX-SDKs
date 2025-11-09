@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           89B63F2F-1AEA-301C-8923-87E75FE03A77
+    value:           413B1325-36E2-3ACC-9134-F0BDA3E3B806
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           50A4E8E5-F2CC-3A62-B561-6042B1597F0D
+    value:           BF7966FC-5ABC-3162-99AB-B0A5673FE35D
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ColorSyncLegacy.framework/Versions/A/Resources/ColorSyncDeprecated.dylib'
 current-version: 4.6
 exports:

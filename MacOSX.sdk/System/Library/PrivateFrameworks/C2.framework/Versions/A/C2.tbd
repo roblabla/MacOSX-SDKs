@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           AEC66F9D-AA35-3D72-B85B-CDEA442BAA2E
+    value:           F96BD5D0-CE0C-31E9-BCF3-9912655BDF6E
   - target:          x86_64-maccatalyst
-    value:           AEC66F9D-AA35-3D72-B85B-CDEA442BAA2E
+    value:           F96BD5D0-CE0C-31E9-BCF3-9912655BDF6E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E11058A4-CCF2-3D43-ABFF-4B3A8E3A4512
+    value:           221217C2-3DA2-3E6A-89E8-EE8164D454CE
   - target:          arm64e-maccatalyst
-    value:           E11058A4-CCF2-3D43-ABFF-4B3A8E3A4512
+    value:           221217C2-3DA2-3E6A-89E8-EE8164D454CE
 install-name:    '/System/Library/PrivateFrameworks/C2.framework/Versions/A/C2'
 current-version: 2000.129.2
 swift-abi-version: 7

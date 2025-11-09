@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           50F71B72-6D88-3493-934C-89BE013E379D
+    value:           E02E52D7-31F3-3F7C-884F-56E778F87278
   - target:          x86_64-maccatalyst
-    value:           50F71B72-6D88-3493-934C-89BE013E379D
+    value:           E02E52D7-31F3-3F7C-884F-56E778F87278
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           35FD9536-3BB2-3CCB-BFD8-1E23B9E72CE4
+    value:           B2193611-3268-3AA0-907D-E864E6D7E0B2
   - target:          arm64e-maccatalyst
-    value:           35FD9536-3BB2-3CCB-BFD8-1E23B9E72CE4
+    value:           B2193611-3268-3AA0-907D-E864E6D7E0B2
 install-name:    '/System/Library/PrivateFrameworks/CalendarDatabase.framework/Versions/A/CalendarDatabase'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -567,10 +567,10 @@ exports:
                        _CalEventIsInvite, _CalEventIsOnCalendarThatAllowsScheduling, 
                        _CalEventIsOrganizedExternally, _CalEventIsProposed, _CalEventIsRecurring, 
                        _CalEventIsSignificantlyDetached, _CalEventNeedsResponse, 
-                       _CalEventNotifyInvitationIfNeeded, _CalEventOccurrenceCacheCleanOrphans, 
-                       _CalEventOccurrenceCacheCopyAllDaysAndOccurrenceCounts, _CalEventOccurrenceCacheCopyBoundsForTimeZone, 
-                       _CalEventOccurrenceCacheCopyEventOccurrencesAfterDate, _CalEventOccurrenceCacheCopyEventOccurrencesInDateRange, 
-                       _CalEventOccurrenceCacheCopyEventOccurrencesInDateRangeWithLimit, 
+                       _CalEventNotifyInvitationIfNeeded, _CalEventNotifyInvitationIfNeededWithOptions, 
+                       _CalEventOccurrenceCacheCleanOrphans, _CalEventOccurrenceCacheCopyAllDaysAndOccurrenceCounts, 
+                       _CalEventOccurrenceCacheCopyBoundsForTimeZone, _CalEventOccurrenceCacheCopyEventOccurrencesAfterDate, 
+                       _CalEventOccurrenceCacheCopyEventOccurrencesInDateRange, _CalEventOccurrenceCacheCopyEventOccurrencesInDateRangeWithLimit, 
                        _CalEventOccurrenceCacheCopyEventOccurrencesWithIDsAfterDate, 
                        _CalEventOccurrenceCacheCopyOccurrencesOnDay, _CalEventOccurrenceCacheCopyTimeZone, 
                        _CalEventOccurrenceCacheDoEventsHaveOccurrencesAfterDate, 

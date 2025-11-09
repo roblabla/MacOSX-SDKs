@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           599F0817-1A44-3A2B-89B2-74112AE0444C
+    value:           40FD4719-A683-3DF0-97C8-BDC6B1ABB723
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E0A00FEE-CFD6-3462-AA92-403D758FD9B5
+    value:           6C9DCAAD-C5E8-36FF-AC9E-A64F02A983CE
 install-name:    '/System/Library/PrivateFrameworks/AirPlaySupport.framework/Versions/A/AirPlaySupport'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -145,7 +145,7 @@ exports:
                        _APSIsFBOPropertyEqual, _APSIsFBOPropertyNonNull, _APSIsLinkLocalInterface, 
                        _APSIsMemberOfHTGroup, _APSIsMemberOfPersistentGroup, _APSIsPermanentSpeakerGroupingEnabled, 
                        _APSIsPersistentGroupSDBCapable, _APSIsProximityReceiverEnabled, 
-                       _APSIsProximitySenderEnabled, _APSIssueReporterProtocolGetProtocolID, 
+                       _APSIsProximitySenderEnabled, _APSIsSuntoryEnabled, _APSIssueReporterProtocolGetProtocolID, 
                        _APSKeyHolderGetCMBaseObject, _APSKeyHolderGetClassID, _APSKeyHolderGetTypeID, 
                        _APSLatencyOffsetStepperCreate, _APSLatencyOffsetStepperGetOffsetSamples, 
                        _APSLatencyOffsetStepperGetTypeID, _APSLatencyOffsetStepperSetTargetLatencyOffset, 

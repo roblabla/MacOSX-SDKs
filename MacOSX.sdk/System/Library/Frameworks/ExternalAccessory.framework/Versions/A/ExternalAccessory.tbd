@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0A3E053B-535C-3F7E-9024-26A4972201DF
+    value:           215F86B4-8985-3ABC-861B-90B3C98F028C
   - target:          x86_64-maccatalyst
-    value:           0A3E053B-535C-3F7E-9024-26A4972201DF
+    value:           215F86B4-8985-3ABC-861B-90B3C98F028C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6431E6B1-CC4D-3073-8D0A-8D7E598131B1
+    value:           E0C3E75C-86F6-3FC5-B160-779056C79E55
   - target:          arm64e-maccatalyst
-    value:           6431E6B1-CC4D-3073-8D0A-8D7E598131B1
+    value:           E0C3E75C-86F6-3FC5-B160-779056C79E55
 install-name:    '/System/Library/Frameworks/ExternalAccessory.framework/ExternalAccessory'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

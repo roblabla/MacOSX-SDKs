@@ -13,7 +13,7 @@
 #elif defined(__has_extension) /* defined(ATS_BUILDING_ATS) */
 # if __has_extension(attribute_deprecated_with_message)
 #  include <Availability.h>
-#  if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_VERSION_13_0 && !defined(ATS_BUILDING_ATS) && !defined(CARBON)
+#  if (!defined(MAC_OS_X_VERSION_MIN_REQUIRED) || !defined(MAC_OS_VERSION_13_0) || MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_VERSION_13_0) && !defined(ATS_BUILDING_ATS) && !defined(CARBON)
 #   define ATS_UNAVAILABLE UNAVAILABLE_ATTRIBUTE
 #  else
 #   define ATS_UNAVAILABLE API_DEPRECATED("ATS is no longer supported", macos(10.0,10.8))
@@ -26,7 +26,7 @@
 #if defined(ATS_BUILDING_ATS) || defined(CARBON)
 # define ATS_LEGACY_API 1
 #else
-#if TARGET_OS_MAC && MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_VERSION_13_0
+#if TARGET_OS_MAC && (!defined(MAC_OS_X_VERSION_MIN_REQUIRED) || !defined(MAC_OS_VERSION_13_0) || MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_VERSION_13_0)
 # define ATS_LEGACY_API 0
 #else
 # define ATS_LEGACY_API 1

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           B6DD4CDB-C0A1-3940-AEFF-DFEFBD0CCCFD
+    value:           5C3DDDCE-77D7-369A-BD02-F758D68C5DBC
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           F2436966-9A37-328A-9B04-4338971D1C67
+    value:           322FC1EE-A45D-3998-A0E5-1AEDE40B0AE0
 install-name:    '/System/iOSSupport/System/Library/Frameworks/ClockKit.framework/Versions/A/ClockKit'
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]

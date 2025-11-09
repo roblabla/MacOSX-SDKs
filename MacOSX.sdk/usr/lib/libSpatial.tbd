@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           12633C4B-32DD-3DF4-99F9-382BCA923A4E
+    value:           DA7C771C-24B9-3DE9-9B56-AFEC28292B4D
   - target:          x86_64-maccatalyst
-    value:           12633C4B-32DD-3DF4-99F9-382BCA923A4E
+    value:           DA7C771C-24B9-3DE9-9B56-AFEC28292B4D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           231E3C9F-964C-30FE-B5B9-E37BF84A3EB1
+    value:           E24C8526-2FF1-305F-8D9C-5716E4E674DD
   - target:          arm64e-maccatalyst
-    value:           231E3C9F-964C-30FE-B5B9-E37BF84A3EB1
+    value:           E24C8526-2FF1-305F-8D9C-5716E4E674DD
 install-name:    '/usr/lib/libSpatial.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5B65FBF3-C405-3AB8-B664-AFBF6A2B1C51
+    value:           2F4FE978-85CE-3B31-9C7E-55F307586AD7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3F92179A-25D6-3C68-B71F-D19682596532
+    value:           71F2A970-4F1A-3F1E-BCC5-C084A9CD2527
 install-name:    '/System/Library/Frameworks/GameController.framework/Versions/A/GameController'
-current-version: 10.2.9
+current-version: 10.3.5
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

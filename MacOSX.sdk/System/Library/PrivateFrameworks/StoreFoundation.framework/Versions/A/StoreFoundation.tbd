@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6B7CD9F9-70FC-37E3-A1AA-E8957769AB5C
+    value:           396580E5-2868-3EB8-AC73-06E41EB99D42
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6729B3D1-63D5-3D86-BE01-C38BD455A326
+    value:           90826DDB-3C82-389F-9991-7E37C21E3988
 install-name:    '/System/Library/PrivateFrameworks/StoreFoundation.framework/Versions/A/StoreFoundation'
 current-version: 379
 exports:
@@ -103,11 +103,12 @@ exports:
                        _kDefaultsFirstCheckinDateKey, _kDefaultsGeniusUpdateDateKey, 
                        _kDefaultsGeniusUsageKey, _kDefaultsHidePreReleaseOSUpdatesKey, 
                        _kDefaultsHideStatusTextKey, _kDefaultsIgnoreCertValidationKey, 
-                       _kDefaultsIgnorePreflightKey, _kDefaultsInAppReviewEnabledKey, 
-                       _kDefaultsInAppReviewIgnoreSigningKey, _kDefaultsInMemoryDecryption, 
-                       _kDefaultsInstallAfterLogoutKey, _kDefaultsKnownAccountsKey, 
-                       _kDefaultsLastAutoUpdateInvocationKey, _kDefaultsLastDebugGoToURLKey, 
-                       _kDefaultsLastDoItLaterLogoutFailedKey, _kDefaultsLastUTDNotInstalledNotificationOSMajorVersionKey, 
+                       _kDefaultsIgnorePreflightKey, _kDefaultsInAppReviewAllowSandbox, 
+                       _kDefaultsInAppReviewEnabledKey, _kDefaultsInAppReviewIgnoreSigningKey, 
+                       _kDefaultsInMemoryDecryption, _kDefaultsInstallAfterLogoutKey, 
+                       _kDefaultsKnownAccountsKey, _kDefaultsLastAutoUpdateInvocationKey, 
+                       _kDefaultsLastDebugGoToURLKey, _kDefaultsLastDoItLaterLogoutFailedKey, 
+                       _kDefaultsLastUTDNotInstalledNotificationOSMajorVersionKey, 
                        _kDefaultsLastUpdateNotificationOSMajorVersionKey, _kDefaultsLaunchCountKey, 
                        _kDefaultsLockedFilePathsKey, _kDefaultsLogHTMLDataKey, _kDefaultsLogHTTPRequestHeadersKey, 
                        _kDefaultsLogHTTPResponseHeadersKey, _kDefaultsLogJavascriptKey, 

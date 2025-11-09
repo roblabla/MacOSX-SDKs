@@ -25,5 +25,6 @@ NS_ASSUME_NONNULL_END
 #endif // __PKDEFERREDPAYMENTSUMMARYITEM_H__
 
 #else
+#import <TargetConditionals.h>
 #import <PassKitCore/PKDeferredPaymentSummaryItem.h>
 #endif

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D8E67716-C3F7-34B4-A691-0C4714475AD3
+    value:           6DEFA0A3-8D9A-3E1C-94C7-DECC75B59D10
   - target:          x86_64-maccatalyst
-    value:           D8E67716-C3F7-34B4-A691-0C4714475AD3
+    value:           6DEFA0A3-8D9A-3E1C-94C7-DECC75B59D10
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           319A461C-03BF-3CDB-A165-903CF964572E
+    value:           4233F1AB-B2A6-3A16-B4DF-B2C55E47BFE3
   - target:          arm64e-maccatalyst
-    value:           319A461C-03BF-3CDB-A165-903CF964572E
+    value:           4233F1AB-B2A6-3A16-B4DF-B2C55E47BFE3
 install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSNDArray.framework/Versions/A/MPSNDArray'
-current-version: 126.0.22
+current-version: 126.1.1
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

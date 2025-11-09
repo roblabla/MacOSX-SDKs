@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           301583CD-DEE5-32AD-B503-3E12CB87E685
+    value:           1D71C74A-C10F-3046-9092-69AB39FD94F9
   - target:          x86_64-maccatalyst
-    value:           301583CD-DEE5-32AD-B503-3E12CB87E685
+    value:           1D71C74A-C10F-3046-9092-69AB39FD94F9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AACA912F-547B-3D15-98A0-231496B2622C
+    value:           454355CD-FC96-3433-A11B-C76F2C4AAD7D
   - target:          arm64e-maccatalyst
-    value:           AACA912F-547B-3D15-98A0-231496B2622C
+    value:           454355CD-FC96-3433-A11B-C76F2C4AAD7D
 install-name:    '/System/Library/Frameworks/CryptoTokenKit.framework/Versions/A/CryptoTokenKit'
-current-version: 602.40.5
+current-version: 602.60.5
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

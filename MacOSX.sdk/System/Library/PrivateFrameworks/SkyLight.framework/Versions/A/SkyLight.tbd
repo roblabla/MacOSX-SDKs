@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           89844C6A-7225-3B2C-97E7-904AAE33ADDA
+    value:           D7D965B3-C53A-3215-98A0-883823BE50B2
   - target:          x86_64-maccatalyst
-    value:           89844C6A-7225-3B2C-97E7-904AAE33ADDA
+    value:           D7D965B3-C53A-3215-98A0-883823BE50B2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           046C8659-33E9-39C1-90FF-4D9C6DA2B837
+    value:           C1288DC8-1EC1-31AA-915B-6DCD0F99B264
   - target:          arm64e-maccatalyst
-    value:           046C8659-33E9-39C1-90FF-4D9C6DA2B837
+    value:           C1288DC8-1EC1-31AA-915B-6DCD0F99B264
 install-name:    '/System/Library/PrivateFrameworks/SkyLight.framework/Versions/A/SkyLight'
 current-version: 600
 compatibility-version: 64
@@ -597,19 +597,19 @@ exports:
                        _SLSTransactionSetWindowDesiredFilteringLevel, _SLSTransactionSetWindowDragRegion, 
                        _SLSTransactionSetWindowEventShape, _SLSTransactionSetWindowGlobalClipShape, 
                        _SLSTransactionSetWindowHasKeyAppearance, _SLSTransactionSetWindowHasMainAppearance, 
-                       _SLSTransactionSetWindowLevel, _SLSTransactionSetWindowLockedBounds, 
-                       _SLSTransactionSetWindowLockedBoundsAtPlace, _SLSTransactionSetWindowMovementGroup, 
-                       _SLSTransactionSetWindowOpaqueShape, _SLSTransactionSetWindowOriginRelativeToWindow, 
-                       _SLSTransactionSetWindowOverlayContext, _SLSTransactionSetWindowPrefersCurrentSpace, 
-                       _SLSTransactionSetWindowProperty, _SLSTransactionSetWindowReleasesBackingOnOrderOut, 
-                       _SLSTransactionSetWindowResizeEventShape, _SLSTransactionSetWindowResolution, 
-                       _SLSTransactionSetWindowShadowProperties, _SLSTransactionSetWindowShape, 
-                       _SLSTransactionSetWindowShouldIgnoreHDR, _SLSTransactionSetWindowSpecialCommandRegion, 
-                       _SLSTransactionSetWindowSubLevel, _SLSTransactionSetWindowSystemAlpha, 
-                       _SLSTransactionSetWindowSystemLevel, _SLSTransactionSetWindowSystemShadowProperties, 
-                       _SLSTransactionSetWindowTags, _SLSTransactionSetWindowTransform, 
-                       _SLSTransactionSetWindowTransform3D, _SLSTransactionSetWindowWarp, 
-                       _SLSTransactionShowSpace, _SLSTransactionSpaceFinishedResizeForRect, 
+                       _SLSTransactionSetWindowIsActiveOffscreen, _SLSTransactionSetWindowLevel, 
+                       _SLSTransactionSetWindowLockedBounds, _SLSTransactionSetWindowLockedBoundsAtPlace, 
+                       _SLSTransactionSetWindowMovementGroup, _SLSTransactionSetWindowOpaqueShape, 
+                       _SLSTransactionSetWindowOriginRelativeToWindow, _SLSTransactionSetWindowOverlayContext, 
+                       _SLSTransactionSetWindowPrefersCurrentSpace, _SLSTransactionSetWindowProperty, 
+                       _SLSTransactionSetWindowReleasesBackingOnOrderOut, _SLSTransactionSetWindowResizeEventShape, 
+                       _SLSTransactionSetWindowResolution, _SLSTransactionSetWindowShadowProperties, 
+                       _SLSTransactionSetWindowShape, _SLSTransactionSetWindowShouldIgnoreHDR, 
+                       _SLSTransactionSetWindowSpecialCommandRegion, _SLSTransactionSetWindowSubLevel, 
+                       _SLSTransactionSetWindowSystemAlpha, _SLSTransactionSetWindowSystemLevel, 
+                       _SLSTransactionSetWindowSystemShadowProperties, _SLSTransactionSetWindowTags, 
+                       _SLSTransactionSetWindowTransform, _SLSTransactionSetWindowTransform3D, 
+                       _SLSTransactionSetWindowWarp, _SLSTransactionShowSpace, _SLSTransactionSpaceFinishedResizeForRect, 
                        _SLSTransactionSpaceRebuildMenuBar, _SLSTransactionSpaceTileMoveToSpaceAtIndex, 
                        _SLSTransactionSystemStatusBarRegisterReplicantWindow, _SLSTransactionSystemStatusBarRegisterSortedWindow, 
                        _SLSTransactionSystemStatusBarSetDropPriority, _SLSTransactionSystemStatusBarSetItemPrivacyIndicator, 
@@ -763,9 +763,9 @@ exports:
                        _kSLWindowInnerRimDensityInactive, _kSLWindowInnerRimRadius, 
                        _kSLWindowInnerRimRadiusActive, _kSLWindowInnerRimRadiusInactive, 
                        _kSLWindowInnerRimStyleWhite, _kSLWindowInnerRimStyleWhiteActive, 
-                       _kSLWindowInnerRimStyleWhiteInactive, _kSLWindowRimRadius, 
-                       _kSLWindowRimRadiusActive, _kSLWindowRimRadiusInactive, _kSLWindowRimStyleWhite, 
-                       _kSLWindowRimStyleWhiteActive, _kSLWindowRimStyleWhiteInactive, 
+                       _kSLWindowInnerRimStyleWhiteInactive, _kSLWindowIsActiveOffscreen, 
+                       _kSLWindowRimRadius, _kSLWindowRimRadiusActive, _kSLWindowRimRadiusInactive, 
+                       _kSLWindowRimStyleWhite, _kSLWindowRimStyleWhiteActive, _kSLWindowRimStyleWhiteInactive, 
                        _slglsAttachDrawable, _slglsAttachPBuffer, _slglsAttachState, 
                        _slglsCreateContext, _slglsCreatePBuffer, _slglsDestroyContext, 
                        _slglsDestroyPBuffer, _slglsDestroyRendererInfo, _slglsGetInteger, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           280EE3DA-78B1-35C1-9493-7179CDE67CAD
+    value:           F9AB6A80-FF3B-36F1-906E-C95916205FE9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           04B4B544-3671-35E1-9850-134BC2593486
+    value:           856FCE00-3DB0-3BAA-A505-19ACA22787EA
 install-name:    '/System/Library/PrivateFrameworks/AccessibilitySupport.framework/Versions/A/Frameworks/AccessibilityKit.framework/Versions/A/AccessibilityKit'
 current-version: 2
 compatibility-version: 0

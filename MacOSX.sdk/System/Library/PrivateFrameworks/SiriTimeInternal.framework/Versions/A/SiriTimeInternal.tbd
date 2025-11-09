@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8B5809D9-076D-383E-BC4A-2211DB86CD25
+    value:           B13B0FDA-7291-365E-8C81-0147E4563037
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1E828589-128F-3915-9DA1-FFB8CDCA1F54
+    value:           9BD50DFA-0013-3606-A097-509E52730154
 install-name:    '/System/Library/PrivateFrameworks/SiriTimeInternal.framework/Versions/A/SiriTimeInternal'
 swift-abi-version: 7
 exports:
@@ -113,6 +113,8 @@ exports:
                        '_$s16SiriTimeInternal0A16TimerManagerImplC011stopCurrentD4SyncSbyFTq', 
                        '_$s16SiriTimeInternal0A16TimerManagerImplC012pauseCurrentD06intent10completionySo07INPauseD6IntentC_ys6ResultOyytAA0D14OperationErrorOGctF', 
                        '_$s16SiriTimeInternal0A16TimerManagerImplC012pauseCurrentD06intent10completionySo07INPauseD6IntentC_ys6ResultOyytAA0D14OperationErrorOGctFTq', 
+                       '_$s16SiriTimeInternal0A16TimerManagerImplC012resetCurrentD06intent10completionySo07INResetD6IntentC_ys6ResultOySo7INTimerCAA0D14OperationErrorOGctF', 
+                       '_$s16SiriTimeInternal0A16TimerManagerImplC012resetCurrentD06intent10completionySo07INResetD6IntentC_ys6ResultOySo7INTimerCAA0D14OperationErrorOGctFTq', 
                        '_$s16SiriTimeInternal0A16TimerManagerImplC012startCurrentD06intent10completionySo08INCreateD6IntentC_ys6ResultOySo7INTimerCAA0D14OperationErrorOGctF', 
                        '_$s16SiriTimeInternal0A16TimerManagerImplC012startCurrentD06intent10completionySo08INCreateD6IntentC_ys6ResultOySo7INTimerCAA0D14OperationErrorOGctFTq', 
                        '_$s16SiriTimeInternal0A16TimerManagerImplC013resumeCurrentD06intent10completionySo08INResumeD6IntentC_ys6ResultOyytAA0D14OperationErrorOGctF', 
@@ -187,8 +189,33 @@ exports:
                        '_$s16SiriTimeInternal0aB11AppBundleIdOMa', '_$s16SiriTimeInternal0aB11AppBundleIdOMn', 
                        '_$s16SiriTimeInternal0aB11AppBundleIdON', '_$s16SiriTimeInternal0aB11AppBundleIdOSHAAMc', 
                        '_$s16SiriTimeInternal0aB11AppBundleIdOSQAAMc', '_$s16SiriTimeInternal0aB11AppBundleIdOSYAAMc', 
-                       '_$s16SiriTimeInternal0aB12FeatureFlagsMp', '_$s16SiriTimeInternal0aB12FeatureFlagsTL', 
-                       '_$s16SiriTimeInternal0aB16FeatureFlagsImplV07isAlarmA8XEnabledSbyF', 
+                       '_$s16SiriTimeInternal0aB11EventSenderO04sendD012activityType04taskH06reason9attribute11descriptiony0A7KitFlow08ActivityH0O_AC04TaskH0OAJ0aM16ReliabilityCodesOSgAC9AttributeOSgAC17ReasonDescriptionOSgtFZ', 
+                       '_$s16SiriTimeInternal0aB11EventSenderO17ReasonDescriptionO8rawValueAESgSS_tcfC', 
+                       '_$s16SiriTimeInternal0aB11EventSenderO17ReasonDescriptionO8rawValueSSvg', 
+                       '_$s16SiriTimeInternal0aB11EventSenderO17ReasonDescriptionO8rawValueSSvpMV', 
+                       '_$s16SiriTimeInternal0aB11EventSenderO17ReasonDescriptionOMa', 
+                       '_$s16SiriTimeInternal0aB11EventSenderO17ReasonDescriptionOMn', 
+                       '_$s16SiriTimeInternal0aB11EventSenderO17ReasonDescriptionON', 
+                       '_$s16SiriTimeInternal0aB11EventSenderO17ReasonDescriptionOSHAAMc', 
+                       '_$s16SiriTimeInternal0aB11EventSenderO17ReasonDescriptionOSQAAMc', 
+                       '_$s16SiriTimeInternal0aB11EventSenderO17ReasonDescriptionOSYAAMc', 
+                       '_$s16SiriTimeInternal0aB11EventSenderO8TaskTypeO8rawValueAESgSS_tcfC', 
+                       '_$s16SiriTimeInternal0aB11EventSenderO8TaskTypeO8rawValueSSvg', 
+                       '_$s16SiriTimeInternal0aB11EventSenderO8TaskTypeO8rawValueSSvpMV', 
+                       '_$s16SiriTimeInternal0aB11EventSenderO8TaskTypeOMa', '_$s16SiriTimeInternal0aB11EventSenderO8TaskTypeOMn', 
+                       '_$s16SiriTimeInternal0aB11EventSenderO8TaskTypeON', '_$s16SiriTimeInternal0aB11EventSenderO8TaskTypeOSHAAMc', 
+                       '_$s16SiriTimeInternal0aB11EventSenderO8TaskTypeOSQAAMc', 
+                       '_$s16SiriTimeInternal0aB11EventSenderO8TaskTypeOSYAAMc', 
+                       '_$s16SiriTimeInternal0aB11EventSenderO9AttributeO8rawValueAESgSS_tcfC', 
+                       '_$s16SiriTimeInternal0aB11EventSenderO9AttributeO8rawValueSSvg', 
+                       '_$s16SiriTimeInternal0aB11EventSenderO9AttributeO8rawValueSSvpMV', 
+                       '_$s16SiriTimeInternal0aB11EventSenderO9AttributeOMa', '_$s16SiriTimeInternal0aB11EventSenderO9AttributeOMn', 
+                       '_$s16SiriTimeInternal0aB11EventSenderO9AttributeON', '_$s16SiriTimeInternal0aB11EventSenderO9AttributeOSHAAMc', 
+                       '_$s16SiriTimeInternal0aB11EventSenderO9AttributeOSQAAMc', 
+                       '_$s16SiriTimeInternal0aB11EventSenderO9AttributeOSYAAMc', 
+                       '_$s16SiriTimeInternal0aB11EventSenderOMa', '_$s16SiriTimeInternal0aB11EventSenderOMn', 
+                       '_$s16SiriTimeInternal0aB11EventSenderON', '_$s16SiriTimeInternal0aB12FeatureFlagsMp', 
+                       '_$s16SiriTimeInternal0aB12FeatureFlagsTL', '_$s16SiriTimeInternal0aB16FeatureFlagsImplV07isAlarmA8XEnabledSbyF', 
                        '_$s16SiriTimeInternal0aB16FeatureFlagsImplV07isTimerA8XEnabledSbyF', 
                        '_$s16SiriTimeInternal0aB16FeatureFlagsImplV14isJindoEnabledSbyF', 
                        '_$s16SiriTimeInternal0aB16FeatureFlagsImplV21isCoordinationEnabledSbyF', 
@@ -455,6 +482,20 @@ exports:
                        '_$s16SiriTimeInternal19TimerOperationErrorOMa', '_$s16SiriTimeInternal19TimerOperationErrorOMn', 
                        '_$s16SiriTimeInternal19TimerOperationErrorON', '_$s16SiriTimeInternal19TimerOperationErrorOSHAAMc', 
                        '_$s16SiriTimeInternal19TimerOperationErrorOSQAAMc', '_$s16SiriTimeInternal19TimerOperationErrorOs0F0AAMc', 
+                       '_$s16SiriTimeInternal19TimerSessionManagerC07currentE3IDs33_C060E110E4AEA4D65CED9F889EA1154ALLShySSGvpfi', 
+                       '_$s16SiriTimeInternal19TimerSessionManagerC14stateAssertion33_C060E110E4AEA4D65CED9F889EA1154ALL7Combine14AnyCancellableCSgvpfi', 
+                       '_$s16SiriTimeInternal19TimerSessionManagerC15sessionIDStringSSSgyYaF', 
+                       '_$s16SiriTimeInternal19TimerSessionManagerC15sessionIDStringSSSgyYaFTq', 
+                       '_$s16SiriTimeInternal19TimerSessionManagerC15sessionIDStringSSSgyYaFTu', 
+                       '_$s16SiriTimeInternal19TimerSessionManagerC20deferredContinuation33_C060E110E4AEA4D65CED9F889EA1154ALLScCySSSgs5NeverOGSgvpfi', 
+                       '_$s16SiriTimeInternal19TimerSessionManagerC6sharedACvau', 
+                       '_$s16SiriTimeInternal19TimerSessionManagerC6sharedACvgZ', 
+                       '_$s16SiriTimeInternal19TimerSessionManagerC6sharedACvpZ', 
+                       '_$s16SiriTimeInternal19TimerSessionManagerC9assertion33_C060E110E4AEA4D65CED9F889EA1154ALL7Combine14AnyCancellableCSgvpfi', 
+                       '_$s16SiriTimeInternal19TimerSessionManagerC9workQueue33_C060E110E4AEA4D65CED9F889EA1154ALLSo17OS_dispatch_queueCvpfi', 
+                       '_$s16SiriTimeInternal19TimerSessionManagerCMa', '_$s16SiriTimeInternal19TimerSessionManagerCMm', 
+                       '_$s16SiriTimeInternal19TimerSessionManagerCMn', '_$s16SiriTimeInternal19TimerSessionManagerCN', 
+                       '_$s16SiriTimeInternal19TimerSessionManagerCfD', '_$s16SiriTimeInternal19TimerSessionManagerCfd', 
                        '_$s16SiriTimeInternal20SnoozeAlarmHalIntentC10identifier12backingStoreACSSSg_So9PBCodableCSgtcfC', 
                        '_$s16SiriTimeInternal20SnoozeAlarmHalIntentC10identifier12backingStoreACSSSg_So9PBCodableCSgtcfc', 
                        '_$s16SiriTimeInternal20SnoozeAlarmHalIntentC14remoteDeviceIdSSSgvpMV', 

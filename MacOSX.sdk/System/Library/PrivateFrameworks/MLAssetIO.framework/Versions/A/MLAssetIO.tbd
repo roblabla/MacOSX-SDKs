@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F1810AAF-CF6B-3BC6-9870-4D81827AEFBE
+    value:           3099AD31-057C-362F-B2FF-58874DE84F87
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CADEF3AB-9569-3A7B-B295-FE2437D1D19B
+    value:           8E98613A-BF4A-3200-AC8B-E0ACB96285ED
 install-name:    '/System/Library/PrivateFrameworks/MLAssetIO.framework/Versions/A/MLAssetIO'
-current-version: 1436.40.4
+current-version: 1436.60.2
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTIFN3MIL16ValidationResultERKNS_11IROperationEE, __ZTINSt3__110__function6__baseIFN3MIL16ValidationResultERKNS2_11IROperationEEEE, 

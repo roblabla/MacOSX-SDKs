@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           6594EAEE-3DD2-3229-A798-65EEB2784CDA
+    value:           ED6F7C6F-A09B-3D47-8AE1-10828DF9A687
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           3D8B2091-0A88-3756-A145-4064CCFAE7DC
+    value:           701AF7EB-3469-31E6-97F4-496CB72D0BE5
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_MusicKit_SwiftUI.framework/Versions/A/_MusicKit_SwiftUI'
 swift-abi-version: 7
 exports:

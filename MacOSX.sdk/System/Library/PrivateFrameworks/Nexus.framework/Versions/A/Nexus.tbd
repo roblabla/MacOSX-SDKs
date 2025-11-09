@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           44318657-B0F1-3F7D-971D-755D59D9D159
+    value:           C38CC5AF-9739-3CE7-8DB4-F1E1E71F5E6F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E8E834D5-F2F8-38DE-8FEC-7270ADFB5FE9
+    value:           2745287A-E9F9-3364-8DAA-2F2EC5F94C9F
 install-name:    '/System/Library/PrivateFrameworks/Nexus.framework/Versions/A/Nexus'
 current-version: 0
 compatibility-version: 0

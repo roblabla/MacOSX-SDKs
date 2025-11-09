@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           64DFA93E-9974-3D2A-B790-72AAECF3574C
+    value:           CD3348FF-C376-3F7A-8E4D-9BCC4E616CA7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           77CC54E4-D655-30C6-BA46-B29ADC03BFF6
+    value:           B7EDA375-C347-36A1-B7D9-88CE5E00F28D
 install-name:    '/System/Library/PrivateFrameworks/DeauthorizationKit.framework/Versions/A/DeauthorizationKit'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

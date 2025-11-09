@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3B9A9A7D-287C-3FC4-863C-F5E2A3714E1A
+    value:           6660AFFA-B4B2-3BF3-A610-86927DA04D54
   - target:          x86_64-maccatalyst
-    value:           3B9A9A7D-287C-3FC4-863C-F5E2A3714E1A
+    value:           6660AFFA-B4B2-3BF3-A610-86927DA04D54
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A96FFAB7-4CA0-3F23-8ED6-197A9AB5F26D
+    value:           EC5A3F11-1254-3CF0-B5DD-C0D371DEFF08
   - target:          arm64e-maccatalyst
-    value:           A96FFAB7-4CA0-3F23-8ED6-197A9AB5F26D
+    value:           EC5A3F11-1254-3CF0-B5DD-C0D371DEFF08
 install-name:    '/System/Library/PrivateFrameworks/AVConference.framework/Frameworks/SimpleKeyExchange.framework/Versions/A/SimpleKeyExchange'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

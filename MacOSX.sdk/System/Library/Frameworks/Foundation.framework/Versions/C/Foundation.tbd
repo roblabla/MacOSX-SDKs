@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           ECA88952-D3AF-357E-80D8-4D31B2DC0C26
+    value:           AB5F8DB8-B03B-33B6-98F7-FFAEC27A8EAB
   - target:          x86_64-maccatalyst
-    value:           ECA88952-D3AF-357E-80D8-4D31B2DC0C26
+    value:           AB5F8DB8-B03B-33B6-98F7-FFAEC27A8EAB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           52B2F83F-586D-32A2-8B66-CE651400AC8C
+    value:           F1F5F857-8C3C-36D5-BC27-7702D6795468
   - target:          arm64e-maccatalyst
-    value:           52B2F83F-586D-32A2-8B66-CE651400AC8C
+    value:           F1F5F857-8C3C-36D5-BC27-7702D6795468
 install-name:    '/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation'
-current-version: 1953.1
+current-version: 1953.255
 compatibility-version: 300
 swift-abi-version: 7
 reexported-libraries:

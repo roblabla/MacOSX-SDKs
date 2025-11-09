@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           26551314-A73F-3C2A-BC1A-6ED83F6C38AC
+    value:           4FF919CE-2EE5-3627-9DC6-66890C52C774
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D5931B1F-A9E9-3010-801E-3084AB1B0AE7
+    value:           D4FA0CAA-D924-3F12-BFEC-4C4CAEF86ECD
 install-name:    '/System/Library/Frameworks/ContactsUI.framework/Versions/A/ContactsUI'
-current-version: 2535
+current-version: 2538.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

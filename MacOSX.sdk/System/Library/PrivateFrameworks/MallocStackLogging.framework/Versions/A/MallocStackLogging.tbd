@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9CC01663-4F9C-3A81-8653-7EC58BDD18B6
+    value:           D6A048C0-70C2-3AEA-9062-EC35897E7B78
   - target:          x86_64-maccatalyst
-    value:           9CC01663-4F9C-3A81-8653-7EC58BDD18B6
+    value:           D6A048C0-70C2-3AEA-9062-EC35897E7B78
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C096CD3A-47F1-3427-AB9B-48D754B92EAA
+    value:           2ED355BB-9EFD-3986-ABB1-2758DB1F342B
   - target:          arm64e-maccatalyst
-    value:           C096CD3A-47F1-3427-AB9B-48D754B92EAA
+    value:           2ED355BB-9EFD-3986-ABB1-2758DB1F342B
 install-name:    '/System/Library/PrivateFrameworks/MallocStackLogging.framework/Versions/A/MallocStackLogging'
 current-version: 0
 exports:

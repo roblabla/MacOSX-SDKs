@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           94CE69D7-95D8-3289-AFB5-A817C7953627
+    value:           B2962290-E84C-3DC9-9664-1DDC553EAA71
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           333AE804-66D0-39CD-A257-2810A080AFA1
+    value:           FA2424FD-ADB7-3AFD-80A8-FE7DA2346F23
 install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/31001/Libraries/libGPUCompilerUtils.dylib'
-current-version: 31001.255.6
+current-version: 31001.255.2
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _MTLGPUCompilerHashComputePipelineScript, _MTLGPUCompilerHashFragmentPipelineScript, 

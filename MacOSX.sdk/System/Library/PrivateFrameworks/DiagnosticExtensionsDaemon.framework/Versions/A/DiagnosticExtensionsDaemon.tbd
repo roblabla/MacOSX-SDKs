@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A40C185A-C37B-37D9-87E4-27829EAF94DB
+    value:           081FE3AC-3751-3B5B-AF35-C745B24C4B95
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EFF8D337-033F-3668-BCB4-777E054FA786
+    value:           8B429D04-A2BC-380D-AF36-B887303185C0
 install-name:    '/System/Library/PrivateFrameworks/DiagnosticExtensionsDaemon.framework/Versions/A/DiagnosticExtensionsDaemon'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -44,8 +44,8 @@ exports:
                        _DEDEncryptorDefaultChannelValue, _DEDEncryptorDefaultPayloadTypeValue, 
                        _DEDEncryptorEnvironmentStagingKey, _DEDEncryptorHKCertValue, 
                        _DEDEncryptorHKStagingCertValue, _DEDEncryptorPayloadTypeKey, 
-                       _DEDEncryptorStudyIDKey, _DEDEncryptorUniqueIDKey, _DEDErrorDomain, 
-                       _DEDFBKFeedbackUploadsKey, _DEDFeedbackGroupContainerName, 
+                       _DEDEncryptorPublicKeyKey, _DEDEncryptorStudyIDKey, _DEDEncryptorUniqueIDKey, 
+                       _DEDErrorDomain, _DEDFBKFeedbackUploadsKey, _DEDFeedbackGroupContainerName, 
                        _DEDHealthWrapCertificateFromString, _DEDHealthWrapDERDataFromString, 
                        _DEDIDSCommandShouldUseFireAndForget, _DEDIDSConnectionLog, 
                        _DEDKeyAllowsCellularUpload, _DEDKeyCapabilities, _DEDKeyCloudKitContainer, 
@@ -74,20 +74,20 @@ exports:
                        DEDCloudKitAttachmentGroupModel, DEDCloudKitAttachmentGroupStatusModel, 
                        DEDCloudKitAttachmentModel, DEDCloudKitBaseModel, DEDCloudKitClient, 
                        DEDCloudKitExtensionsUtil, DEDCloudKitFinisher, DEDCollectionNotification, 
-                       DEDConfiguration, DEDConstants, DEDController, DEDDaemon, 
-                       DEDDataTask, DEDDeferredExtensionInfo, DEDDevice, DEDDiagnosticCollector, 
-                       DEDDirectoriesCleanup, DEDEncryptorFactory, DEDExtension, 
-                       DEDExtensionIdentifier, DEDExtensionIdentifierManager, DEDFBKFeedbackUpload, 
-                       DEDFeedbackAnalytics, DEDFollowUpNotifier, DEDHealthLogsEncryptor, 
-                       DEDHomeKitManager, DEDIDSConnection, DEDIDSInbound, DEDIDSOutbound, 
-                       DEDImageResourceManager, DEDLocalTransport, DEDManager, DEDNotifierConfiguration, 
-                       DEDPersistence, DEDRadarAttachment, DEDRadarFinisher, DEDRadarUploadItem, 
-                       DEDRapportManager, DEDRequestAdvertiser, DEDRequestRecord, 
-                       DEDSeedingClient, DEDSeedingFilerToken, DEDSeedingFinisher, 
-                       DEDSeedingUploadItem, DEDSharingConnection, DEDSharingInbound, 
-                       DEDSharingOutbound, DEDTestingFinisher, DEDUserNotificationNotifier, 
-                       DEDUtils, DEDXPCConnector, DEDXPCInbound, DEDXPCOutbound, 
-                       ResourceLoader ]
+                       DEDCompressionDebouncer, DEDConfiguration, DEDConstants, DEDController, 
+                       DEDDaemon, DEDDataTask, DEDDeferredExtensionInfo, DEDDevice, 
+                       DEDDiagnosticCollector, DEDDirectoriesCleanup, DEDEncryptorFactory, 
+                       DEDExtension, DEDExtensionIdentifier, DEDExtensionIdentifierManager, 
+                       DEDFBKFeedbackUpload, DEDFeedbackAnalytics, DEDFollowUpNotifier, 
+                       DEDHealthLogsEncryptor, DEDHomeKitManager, DEDIDSConnection, 
+                       DEDIDSInbound, DEDIDSOutbound, DEDImageResourceManager, DEDLocalTransport, 
+                       DEDManager, DEDNotifierConfiguration, DEDPersistence, DEDRadarAttachment, 
+                       DEDRadarFinisher, DEDRadarUploadItem, DEDRapportManager, DEDRequestAdvertiser, 
+                       DEDRequestRecord, DEDSeedingClient, DEDSeedingFilerToken, 
+                       DEDSeedingFinisher, DEDSeedingUploadItem, DEDSharingConnection, 
+                       DEDSharingInbound, DEDSharingOutbound, DEDTestingFinisher, 
+                       DEDUserNotificationNotifier, DEDUtils, DEDXPCConnector, DEDXPCInbound, 
+                       DEDXPCOutbound, ResourceLoader ]
     objc-ivars:      [ AWDDEDBugSessionCreated._has, AWDDEDBugSessionCreated._hostapp, 
                        AWDDEDBugSessionCreated._timestamp, AWDDEDBugSessionEnded._has, 
                        AWDDEDBugSessionEnded._sessionState, AWDDEDBugSessionEnded._timestamp, 

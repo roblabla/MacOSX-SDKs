@@ -36,5 +36,6 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos, macos)
 NS_ASSUME_NONNULL_END
 
 #else
+#import <TargetConditionals.h>
 #import <PassKitCore/PKIssuerProvisioningExtensionHandler.h>
 #endif

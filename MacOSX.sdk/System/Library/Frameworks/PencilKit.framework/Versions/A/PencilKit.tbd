@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           052EAD92-EC45-38C5-97AC-DE50BFB2FE80
+    value:           F19E7314-02D5-34EC-B4F6-E28062984BF1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2EFF1C1C-5887-3169-B13C-8F7D9C34F27E
+    value:           59B8113F-D8BC-3D04-BC48-F4ECAD97DEBD
 install-name:    '/System/Library/Frameworks/PencilKit.framework/Versions/A/PencilKit'
 swift-abi-version: 7
 exports:
@@ -462,14 +462,12 @@ exports:
                        '_$s9PencilKit12PKInkingToolV5width12CoreGraphics7CGFloatVvg', 
                        '_$s9PencilKit12PKInkingToolV5width12CoreGraphics7CGFloatVvpMV', 
                        '_$s9PencilKit12PKInkingToolV5width12CoreGraphics7CGFloatVvs', 
-                       '_$s9PencilKit12PKInkingToolV7InkTypeO11fountainpenyA2EmFWC', 
                        '_$s9PencilKit12PKInkingToolV7InkTypeO12defaultWidth12CoreGraphics7CGFloatVvg', 
                        '_$s9PencilKit12PKInkingToolV7InkTypeO12defaultWidth12CoreGraphics7CGFloatVvpMV', 
                        '_$s9PencilKit12PKInkingToolV7InkTypeO15validWidthRangeSNy12CoreGraphics7CGFloatVGvg', 
                        '_$s9PencilKit12PKInkingToolV7InkTypeO15validWidthRangeSNy12CoreGraphics7CGFloatVGvpMV', 
                        '_$s9PencilKit12PKInkingToolV7InkTypeO3penyA2EmFWC', '_$s9PencilKit12PKInkingToolV7InkTypeO6markeryA2EmFWC', 
-                       '_$s9PencilKit12PKInkingToolV7InkTypeO6pencilyA2EmFWC', '_$s9PencilKit12PKInkingToolV7InkTypeO8monolineyA2EmFWC', 
-                       '_$s9PencilKit12PKInkingToolV7InkTypeO8rawValueAESgSS_tcfC', 
+                       '_$s9PencilKit12PKInkingToolV7InkTypeO6pencilyA2EmFWC', '_$s9PencilKit12PKInkingToolV7InkTypeO8rawValueAESgSS_tcfC', 
                        '_$s9PencilKit12PKInkingToolV7InkTypeO8rawValueSSvg', '_$s9PencilKit12PKInkingToolV7InkTypeO8rawValueSSvpMV', 
                        '_$s9PencilKit12PKInkingToolV7InkTypeOMa', '_$s9PencilKit12PKInkingToolV7InkTypeOMn', 
                        '_$s9PencilKit12PKInkingToolV7InkTypeON', '_$s9PencilKit12PKInkingToolV7InkTypeOSHAAMc', 
@@ -670,7 +668,9 @@ exports:
                        '_$s9PencilKit7InkMaskV8movement12CoreGraphics7CGFloatVvs', 
                        '_$s9PencilKit7InkMaskVACycfC', '_$s9PencilKit7InkMaskVMa', 
                        '_$s9PencilKit7InkMaskVMn', '_$s9PencilKit7InkMaskVN', '_$s9PencilKit7InkMaskVSEAAMc', 
-                       '_$s9PencilKit7InkMaskVSeAAMc', '_$s9PencilKit8PKStrokeV12renderBoundsSo6CGRectVvg', 
+                       '_$s9PencilKit7InkMaskVSeAAMc', '_$s9PencilKit8PKStrokeV10randomSeeds6UInt32VvM', 
+                       '_$s9PencilKit8PKStrokeV10randomSeeds6UInt32Vvg', '_$s9PencilKit8PKStrokeV10randomSeeds6UInt32VvpMV', 
+                       '_$s9PencilKit8PKStrokeV10randomSeeds6UInt32Vvs', '_$s9PencilKit8PKStrokeV12renderBoundsSo6CGRectVvg', 
                        '_$s9PencilKit8PKStrokeV12renderBoundsSo6CGRectVvpMV', '_$s9PencilKit8PKStrokeV16maskedPathRangesSaySNy12CoreGraphics7CGFloatVGGvg', 
                        '_$s9PencilKit8PKStrokeV16maskedPathRangesSaySNy12CoreGraphics7CGFloatVGGvpMV', 
                        '_$s9PencilKit8PKStrokeV19_bridgeToObjectiveCSoABCyF', '_$s9PencilKit8PKStrokeV26_forceBridgeFromObjectiveC_6resultySoABC_ACSgztFZ', 

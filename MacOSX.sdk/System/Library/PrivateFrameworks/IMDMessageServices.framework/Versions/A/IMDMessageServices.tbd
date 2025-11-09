@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           97884D77-E9D8-37AE-8948-678876996DB3
+    value:           5E261D4D-83F8-3606-92F6-5C495B7D2756
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DD55F5DD-A5C5-3AAA-ACDB-C47DCD15C7C9
+    value:           48F453C8-C3F5-391C-9F32-D02CC966C313
 install-name:    '/System/Library/PrivateFrameworks/IMDMessageServices.framework/Versions/A/IMDMessageServices'
 current-version: 800
 exports:

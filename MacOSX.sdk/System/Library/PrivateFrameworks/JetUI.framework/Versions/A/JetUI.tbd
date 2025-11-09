@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C7529D50-A00C-3A6C-A186-6381726A7AE8
+    value:           9021D8B6-3A22-3A88-ABCC-225645B5164C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           151D6FCF-86F1-3666-AB1F-1AC286EFD9C3
+    value:           5FFCE6E6-370F-3E0A-8470-C9C218643584
 install-name:    '/System/Library/PrivateFrameworks/JetUI.framework/Versions/A/JetUI'
 swift-abi-version: 7
 exports:
@@ -857,7 +857,10 @@ exports:
                        '_$s5JetUI17FlowActionFactoryP06TargetD0AC_0A6Engine0cD5ModelTn', 
                        '_$s5JetUI17FlowActionFactoryP0A6Engine10InjectableTb', '_$s5JetUI17FlowActionFactoryP18makeViewController9toSatisfySo06NSViewH0C06TargetD0_11DestinationQZ_tFTj', 
                        '_$s5JetUI17FlowActionFactoryP18makeViewController9toSatisfySo06NSViewH0C06TargetD0_11DestinationQZ_tFTq', 
-                       '_$s5JetUI17FlowActionFactoryTL', '_$s5JetUI17NQMLConfigurationV13listItemStyleSo011NSParagraphF0CvM', 
+                       '_$s5JetUI17FlowActionFactoryTL', '_$s5JetUI17MetricsVisualizerO05setupc5EventD0yyFZ', 
+                       '_$s5JetUI17MetricsVisualizerO08teardownc5EventD0yyFZ', '_$s5JetUI17MetricsVisualizerOMa', 
+                       '_$s5JetUI17MetricsVisualizerOMn', '_$s5JetUI17MetricsVisualizerON', 
+                       '_$s5JetUI17NQMLConfigurationV13listItemStyleSo011NSParagraphF0CvM', 
                        '_$s5JetUI17NQMLConfigurationV13listItemStyleSo011NSParagraphF0Cvg', 
                        '_$s5JetUI17NQMLConfigurationV13listItemStyleSo011NSParagraphF0CvpMV', 
                        '_$s5JetUI17NQMLConfigurationV13listItemStyleSo011NSParagraphF0Cvs', 

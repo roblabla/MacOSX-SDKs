@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           665F6B74-4D1B-3053-BBC3-02631B9E2016
+    value:           C577AD07-5758-356D-88A5-337637EDBD86
   - target:          x86_64-maccatalyst
-    value:           665F6B74-4D1B-3053-BBC3-02631B9E2016
+    value:           C577AD07-5758-356D-88A5-337637EDBD86
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D439FA4A-4B37-359A-AC09-244E975111A9
+    value:           8232B250-39CA-3350-A1EB-01E8C928FD30
   - target:          arm64e-maccatalyst
-    value:           D439FA4A-4B37-359A-AC09-244E975111A9
+    value:           8232B250-39CA-3350-A1EB-01E8C928FD30
 install-name:    '/System/Library/PrivateFrameworks/PlugInKit.framework/Versions/A/PlugInKit'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

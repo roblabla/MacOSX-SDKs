@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           18C95BFF-E0E4-3C77-8DFB-A29791E5666E
+    value:           15CACBD8-5FB9-330E-BE11-69957FFEF862
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           399E7AC8-9E47-33B8-A5CC-C1EE59BE1B7F
+    value:           DCF0CBFF-3CBB-34C3-BF01-7AC4F35D2F03
 install-name:    '/System/Library/Frameworks/AudioToolbox.framework/libValidationCapsule.dylib'
 exports:
   - targets:         [ x86_64-macos ]

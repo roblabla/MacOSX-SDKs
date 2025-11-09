@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0C65C4F6-F8B5-378C-B9E9-9C7E3E8BDAEC
+    value:           B10BBDDF-7ACA-36BC-9028-580C133FB79E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           29F340E6-A225-3E26-A73B-D8C13B69474B
+    value:           F1923C69-D469-3260-B555-26E6B484A143
 install-name:    '/System/Library/PrivateFrameworks/AccessibilityAudit.framework/Versions/A/AccessibilityAudit'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8FA81D26-4718-3F72-BB2D-7D62C3527F0B
+    value:           6366A8A5-4145-35D0-AE2B-889A6820D318
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E193F257-16A0-38A6-B82D-EE4CCF99A84F
+    value:           62CA5063-1BEC-360E-8683-A4631243BA5C
 install-name:    '/usr/lib/libpmenergy.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

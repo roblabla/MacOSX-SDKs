@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6A0A6761-3117-3C4B-9BF0-C9C2F43F4468
+    value:           F105C2E2-0600-3DB4-8E1F-A16BA8EAD9EE
   - target:          x86_64-maccatalyst
-    value:           6A0A6761-3117-3C4B-9BF0-C9C2F43F4468
+    value:           F105C2E2-0600-3DB4-8E1F-A16BA8EAD9EE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           97D139E3-0586-379D-81D5-7ACCFE9B2926
+    value:           A0FB834E-3227-3C25-93A2-137377D48908
   - target:          arm64e-maccatalyst
-    value:           97D139E3-0586-379D-81D5-7ACCFE9B2926
+    value:           A0FB834E-3227-3C25-93A2-137377D48908
 install-name:    '/usr/lib/libcharset.1.dylib'
 current-version: 2
 compatibility-version: 2

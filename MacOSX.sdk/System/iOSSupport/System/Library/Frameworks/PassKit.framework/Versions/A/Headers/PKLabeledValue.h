@@ -23,5 +23,6 @@ API_AVAILABLE(ios(10.1))
 NS_ASSUME_NONNULL_END
 
 #else
+#import <TargetConditionals.h>
 #import <PassKitCore/PKLabeledValue.h>
 #endif

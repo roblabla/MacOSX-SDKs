@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B47BFE58-C7EE-3720-BFF1-5D56CDC77EBF
+    value:           C29B7C95-58B1-3C94-A38B-639B56630200
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4B3190FE-2762-3DBC-BE1A-EEEFB854028B
+    value:           B168D095-6040-344B-A5B2-D1E72D313B93
 install-name:    '/System/Library/PrivateFrameworks/SiriCalendarIntents.framework/Versions/A/SiriCalendarIntents'
 swift-abi-version: 7
 allowable-clients:

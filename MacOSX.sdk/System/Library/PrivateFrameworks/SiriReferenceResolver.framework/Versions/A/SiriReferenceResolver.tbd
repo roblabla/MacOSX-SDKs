@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6DF33591-448F-3247-B44C-72E6903C9ED7
+    value:           31F4B43E-A2DF-3069-8306-A7AFAB11404D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BA28D776-8451-3C87-8B65-02F3BC621050
+    value:           EC6BDC54-76E7-3CA5-A600-8F6936E14661
 install-name:    '/System/Library/PrivateFrameworks/SiriReferenceResolver.framework/Versions/A/SiriReferenceResolver'
 current-version: 0
 compatibility-version: 0

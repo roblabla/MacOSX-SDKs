@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           374A4A34-FD03-3A62-94A9-7503E94FB2CB
+    value:           10509BC8-8C69-3AC9-805B-28694BB57AC4
   - target:          x86_64-maccatalyst
-    value:           374A4A34-FD03-3A62-94A9-7503E94FB2CB
+    value:           10509BC8-8C69-3AC9-805B-28694BB57AC4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2DAA091B-AF95-397D-A660-9C17F882BFF3
+    value:           80368E25-D743-3940-B9BB-D12CC389B106
   - target:          arm64e-maccatalyst
-    value:           2DAA091B-AF95-397D-A660-9C17F882BFF3
+    value:           80368E25-D743-3940-B9BB-D12CC389B106
 install-name:    '/System/Library/PrivateFrameworks/AssetCacheServicesExtensions.framework/Versions/A/AssetCacheServicesExtensions'
 current-version: 126
 exports:

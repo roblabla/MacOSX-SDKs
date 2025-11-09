@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           01A4942E-C6CF-3BB9-A8CE-8DDD05455A10
+    value:           4B36E225-21FF-30D8-A1BA-7B1E9D25EEEE
   - target:          x86_64-maccatalyst
-    value:           01A4942E-C6CF-3BB9-A8CE-8DDD05455A10
+    value:           4B36E225-21FF-30D8-A1BA-7B1E9D25EEEE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6584F3C5-D05E-3BB1-9821-63EFD4E2D21A
+    value:           2F72D0B9-F0BD-38AD-AF6F-E3586708DBC5
   - target:          arm64e-maccatalyst
-    value:           6584F3C5-D05E-3BB1-9821-63EFD4E2D21A
+    value:           2F72D0B9-F0BD-38AD-AF6F-E3586708DBC5
 install-name:    '/System/Library/PrivateFrameworks/AppStoreDaemon.framework/Versions/A/AppStoreDaemon'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1CCF39AE-1799-327F-BFA5-5CBBC9511318
+    value:           E7F80C5C-E18C-3201-ACB6-9A4C46B6574B
   - target:          x86_64-maccatalyst
-    value:           1CCF39AE-1799-327F-BFA5-5CBBC9511318
+    value:           E7F80C5C-E18C-3201-ACB6-9A4C46B6574B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3C081A70-EBBF-3746-A83F-FC93891BAA71
+    value:           113A1DDB-1B61-3C33-9FD5-B39A2A29D779
   - target:          arm64e-maccatalyst
-    value:           3C081A70-EBBF-3746-A83F-FC93891BAA71
+    value:           113A1DDB-1B61-3C33-9FD5-B39A2A29D779
 install-name:    '/usr/lib/system/libsystem_configuration.dylib'
-current-version: 1241.40.2
+current-version: 1241.60.3
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

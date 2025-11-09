@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           002057D9-5FCE-3264-A0CA-7B8D0BABCE3A
+    value:           1B1EE181-BB5E-3B3B-BCC7-0D07791D8F75
   - target:          x86_64-maccatalyst
-    value:           002057D9-5FCE-3264-A0CA-7B8D0BABCE3A
+    value:           1B1EE181-BB5E-3B3B-BCC7-0D07791D8F75
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E6843BD8-12DB-36AE-91C4-B78481661E4E
+    value:           C56B6BD3-6031-31F5-ACFE-2F97E4C6EF56
   - target:          arm64e-maccatalyst
-    value:           E6843BD8-12DB-36AE-91C4-B78481661E4E
+    value:           C56B6BD3-6031-31F5-ACFE-2F97E4C6EF56
 install-name:    '/System/Library/PrivateFrameworks/AXRuntime.framework/Versions/A/AXRuntime'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -84,6 +84,7 @@ exports:
                        _AccessibilityDefs_server_routine, _MSHCreateMIGServerSource, 
                        _MSHCreateMachServerSource, _MSHGetMachPortFromSource, _MSHMIGSourceSetNoSendersCallback, 
                        _MSHMIGSourceSetSendOnceCallback, _SerializeCFType, _UIAccessibilityCustomRotorActionIdentifierToken, 
+                       _UIAccessibilityPosterBoardInlineWidgetPidKey, _UIAccessibilityPosterBoardInlineWidgetUUIDKey, 
                        _UIAccessibilityTableIndexToken, _UIAccessibilityTokenAccessibilityLanguage, 
                        _UIAccessibilityTokenAlternateInterpretation, _UIAccessibilityTokenAngularMeasurement, 
                        _UIAccessibilityTokenAnnounceEvenIfSystemSleeping, _UIAccessibilityTokenAnnouncementPriority, 
@@ -298,7 +299,8 @@ exports:
                        _kAXXCParameterizedAttributeConvertHostedViewPositionFromContext, 
                        _kAXXCParameterizedAttributeConvertPositionToContext, _kAXXCParameterizedAttributeFocusedOpaqueElement, 
                        _kAXXCParameterizedAttributeKeyboardKeyForString, _kAXXCParameterizedAttributeMoveFocusToNextOpaqueElement, 
-                       _kAXXCParameterizedAttributeOpaqueElementsParameterized, _kAXXCParameterizedAttributeUserTestingSnapshotParameterized, 
+                       _kAXXCParameterizedAttributeNextDockForDisplayID, _kAXXCParameterizedAttributeOpaqueElementsParameterized, 
+                       _kAXXCParameterizedAttributeUserTestingSnapshotParameterized, 
                        _sSystemWideAppServerPID, _sSystemWideServerPID ]
     objc-classes:    [ AXAttributedString, AXElement, AXElementAttributedString, 
                        AXElementFetcher, AXElementGroup, AXElementGroupPruner, AXElementGrouper, 

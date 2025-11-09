@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E96A587F-C2C6-3602-B040-848E5202F6D0
+    value:           08C1A911-66F7-3C6C-AAF1-CDAEE3C2946A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5A872032-8AB6-3749-9DCF-3A28BFEFF9EE
+    value:           EAB70C91-5FF9-38F2-8498-2E587BE5FE28
 install-name:    '/System/Library/PrivateFrameworks/Symptoms.framework/Frameworks/SymptomNetworkUsage.framework/Versions/A/SymptomNetworkUsage'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

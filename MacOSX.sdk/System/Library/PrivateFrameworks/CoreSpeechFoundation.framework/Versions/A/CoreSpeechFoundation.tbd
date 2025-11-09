@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           66AB373E-D234-3643-AEF7-8A4CB7F85A4C
+    value:           D5C81760-BA91-3022-A40A-43C500FA8C89
   - target:          x86_64-maccatalyst
-    value:           66AB373E-D234-3643-AEF7-8A4CB7F85A4C
+    value:           D5C81760-BA91-3022-A40A-43C500FA8C89
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A370C97E-81D8-37A3-BC47-7463D7C6AAC4
+    value:           25CB25BD-5C61-329C-8444-BC37BB189094
   - target:          arm64e-maccatalyst
-    value:           A370C97E-81D8-37A3-BC47-7463D7C6AAC4
+    value:           25CB25BD-5C61-329C-8444-BC37BB189094
 install-name:    '/System/Library/PrivateFrameworks/CoreSpeechFoundation.framework/Versions/A/CoreSpeechFoundation'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -93,7 +93,8 @@ exports:
                        _kCSPreferencesDomain, _kCSPreferencesJarvisTriggerModeDidChangeDarwinNotification, 
                        _kCSSystemDomain, _kCSZeroRunLengthMetricKey, _kCSZeroRunStartingSampleMetricKey, 
                        _kDecay, _kDecay1, _kMinDecibelsPower, _kMinLinearPower, _kPeakDecay, 
-                       _kPeakDecay1, _kPeakResetTime, _kSSRLoggingContextFramework ]
+                       _kPeakDecay1, _kPeakResetTime, _kSSRLoggingContextFramework, 
+                       _kVTTranscriberDefaultKeywordConfidence ]
     objc-classes:    [ CSADPPreventStandbyAssertion, CSAsset, CSAudioChunk, CSAudioChunkForTV, 
                        CSAudioCircularBuffer, CSAudioDecoder, CSAudioFileManager, 
                        CSAudioPlayingApp, CSAudioPlayingAppMonitor, CSAudioPowerMeter, 
@@ -105,11 +106,15 @@ exports:
                        CSFCircularEventsCacheBuffer, CSFLPCMTypeConverter, CSFPreferences, 
                        CSFRangeUtils, CSFTimeUtils, CSFVoiceTriggerEventInfoSelfLogger, 
                        CSFVoiceTriggerEventInfoSelfLoggerDarwin, CSFVoiceTriggerEventInfoSelfLoggerEmbedded, 
-                       CSMobileAssetVersions, CSOSTransaction, CSOSTransactionStat, 
-                       CSPlainAudioFileWriter, CSPolicy, CSPowerAssertionAccessory, 
-                       CSPowerLogger, CSRemoteAssetManager, CSReusableBufferBackingStore, 
-                       CSReusableBufferPool, CSReusableBufferPoolConfiguration, CSReusablePrivateMemoryBackingStore, 
-                       CSReusableSharedMemoryBackingStore, CSSelectiveChannelAudioFileWriter, 
+                       CSKeywordAnalyzerNDAPI, CSKeywordAnalyzerNDAPIResult, CSKeywordAnalyzerNDEAPI, 
+                       CSKeywordAnalyzerNDEAPIResult, CSKeywordAnalyzerQuasar, CSMobileAssetVersions, 
+                       CSNovDetector, CSNovDetectorResult, CSOSTransaction, CSOSTransactionStat, 
+                       CSPhraseDetector, CSPhraseDetectorInfo, CSPlainAudioFileWriter, 
+                       CSPolicy, CSPowerAssertionAccessory, CSPowerLogger, CSRemoteAssetManager, 
+                       CSReusableBufferBackingStore, CSReusableBufferPool, CSReusableBufferPoolConfiguration, 
+                       CSReusablePrivateMemoryBackingStore, CSReusableSharedMemoryBackingStore, 
+                       CSSelectiveChannelAudioFileWriter, CSSinglePhraseResult, CSSyncKeywordAnalyzerQuasar, 
+                       CSSyncKeywordAnalyzerQuasarResult, CSUncompressedAudioLogging, 
                        CSUtils, CSVTUITrainingSelfLogger, CSVoiceTriggerAirPodWearerDetectionConfig, 
                        CSVoiceTriggerFirstPassConfig, CSVoiceTriggerFirstPassConfigDecoder, 
                        CSVoiceTriggerPhraseConfig, CSVoiceTriggerPhraseConfigDecoder, 

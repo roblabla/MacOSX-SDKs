@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8F74BA8A-AC35-3F3B-BEC9-37EB752F22E9
+    value:           E38AE52E-3829-3490-92E7-F7C2410EE15D
   - target:          x86_64-maccatalyst
-    value:           8F74BA8A-AC35-3F3B-BEC9-37EB752F22E9
+    value:           E38AE52E-3829-3490-92E7-F7C2410EE15D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D5540781-E9B0-3E93-930D-FFE96468D726
+    value:           C9195EDA-EBDA-33B5-85B2-F109560A75C0
   - target:          arm64e-maccatalyst
-    value:           D5540781-E9B0-3E93-930D-FFE96468D726
+    value:           C9195EDA-EBDA-33B5-85B2-F109560A75C0
 install-name:    '/System/Library/Frameworks/PushKit.framework/Versions/A/PushKit'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

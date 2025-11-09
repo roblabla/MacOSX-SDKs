@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           805BEE1F-C356-3549-B3BD-F432A8879072
+    value:           24075ED8-64E9-358B-87F9-386991B00050
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9A990947-8BCE-32AC-8353-5AED48C61EF0
+    value:           165E8E14-B924-334D-B12E-40B9C9D0D10E
 install-name:    '/System/Library/PrivateFrameworks/CoreHAP.framework/Versions/A/CoreHAP'
-current-version: 931.2.3
+current-version: 946.3.9
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CBUUIDCharacteristicValidRange, _HAP2AccessoryServerDiscoveryBonjourDiscoveryInfoServiceDomainKey, 
@@ -149,7 +149,7 @@ exports:
                        _HAPDiagnosticsSnapshotTypeAsString, _HAPDispatchQueueName, 
                        _HAPErrorCodeFromHAPBLEStatusErrorCode, _HAPErrorDomain, _HAPFirmwareUpdateStateAsString, 
                        _HAPGetHAPMetadataVersion, _HAPGetPreferredAuthMethod, _HAPHTTPClientErrorDomain, 
-                       _HAPHTTPSerializationTypeDescription, _HAPIsInternalBuild, 
+                       _HAPHTTPSerializationTypeDescription, _HAPIsHH2Enabled, _HAPIsInternalBuild, 
                        _HAPLinkTypeDescription, _HAPMetadataFirmwareUpdateAutoApplyPolicyKey, 
                        _HAPMetadataFirmwareUpdatePoliciesKey, _HAPMetadataFirmwareUpdatePolicyAnyUserAtHomeKey, 
                        _HAPMetadataFirmwareUpdatePolicyCharacteristicValueSettlingTimeKey, 
@@ -390,17 +390,17 @@ exports:
                        HAPAccessoryReachabilityProfile, HAPAccessoryServer, HAPAccessoryServerBTLE, 
                        HAPAccessoryServerBrowser, HAPAccessoryServerBrowserBTLE, 
                        HAPAccessoryServerBrowserHAP2Adapter, HAPAccessoryServerBrowserIP, 
-                       HAPAccessoryServerBrowserWiProxBTLE, HAPAccessoryServerHAP2Adapter, 
-                       HAPAccessoryServerIP, HAPAccessoryWakeTuple, HAPAddRemovePairingOperation, 
-                       HAPArrayWrapper, HAPAudioCodecBitRateWrapper, HAPAudioCodecSampleRateWrapper, 
-                       HAPAudioCodecTypeWrapper, HAPAudioStreamCodecConfiguration, 
-                       HAPAudioStreamCodecParameters, HAPAuthSession, HAPBLEAccessoryCache, 
-                       HAPBLECharacteristicCache, HAPBLEPeripheral, HAPBLEPeripheralInfo, 
-                       HAPBLEServiceCache, HAPBTLECentralManager, HAPBTLECharacteristicSignature, 
-                       HAPBTLEControlOutputStream, HAPBTLEControlPacket, HAPBTLEReachabilityScanTuple, 
-                       HAPBTLERequest, HAPBTLEResponse, HAPBTLEServiceSignature, 
-                       HAPBTLETransactionIdentifier, HAPBTLETuple, HAPBridgedAccessory, 
-                       HAPCharacteristic, HAPCharacteristicConfigurationRequestTuple, 
+                       HAPAccessoryServerBrowserInvalidateServerOperation, HAPAccessoryServerBrowserWiProxBTLE, 
+                       HAPAccessoryServerHAP2Adapter, HAPAccessoryServerIP, HAPAccessoryWakeTuple, 
+                       HAPAddRemovePairingOperation, HAPArrayWrapper, HAPAudioCodecBitRateWrapper, 
+                       HAPAudioCodecSampleRateWrapper, HAPAudioCodecTypeWrapper, 
+                       HAPAudioStreamCodecConfiguration, HAPAudioStreamCodecParameters, 
+                       HAPAuthSession, HAPBLEAccessoryCache, HAPBLECharacteristicCache, 
+                       HAPBLEPeripheral, HAPBLEPeripheralInfo, HAPBLEServiceCache, 
+                       HAPBTLECentralManager, HAPBTLECharacteristicSignature, HAPBTLEControlOutputStream, 
+                       HAPBTLEControlPacket, HAPBTLEReachabilityScanTuple, HAPBTLERequest, 
+                       HAPBTLEResponse, HAPBTLEServiceSignature, HAPBTLETransactionIdentifier, 
+                       HAPBTLETuple, HAPBridgedAccessory, HAPCharacteristic, HAPCharacteristicConfigurationRequestTuple, 
                        HAPCharacteristicContextData, HAPCharacteristicEnableEventCompletionTuple, 
                        HAPCharacteristicEvent, HAPCharacteristicMetadata, HAPCharacteristicNotificationContext, 
                        HAPCharacteristicReadCompletionTuple, HAPCharacteristicResponseTuple, 

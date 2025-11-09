@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           409269BE-A454-3388-82F4-16D00BB01FC4
+    value:           C7016EA2-3072-39E1-B874-1B95238862A0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CED11B91-07B4-37D2-9A36-E57C676EB624
+    value:           F213785E-E2AA-3BD0-8058-256ECCD829A0
 install-name:    '/System/Library/PrivateFrameworks/CHIPPlugin.framework/Versions/A/CHIPPlugin'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -21,8 +21,8 @@ exports:
                        _kCHIPPluginRemoteMessageMaxIntervalKey, _kCHIPPluginRemoteMessageMinIntervalKey, 
                        _kCHIPPluginRemoteMessageParamsKey, _kCHIPPluginRemoteMessageResultsKey, 
                        _kCHIPPluginRemoteMessageTimedInvokeTimeoutKey, _kCHIPPluginRemoteMessageTimedWriteTimeoutKey, 
-                       _kTopologyDictKeyClusters, _kTopologyDictKeyHAPCategories, 
-                       _kTopologyDictKeyHAPDisabledCharacteristics, _kTopologyDictKeyHAPServiceTypes ]
+                       _kTopologyAccessoryServicesBaseInstanceID, _kTopologyFirmwareUpdateServiceBaseInstanceID, 
+                       _kTopologyInfoServiceBaseInstanceID ]
     objc-classes:    [ CHIPAccessoryServer, CHIPAccessoryServerBrowser, CHIPAccessoryServerBuilder, 
                        CHIPAccessoryServerFactory, CHIPPluginAccessoryReachabilityManager, 
                        CHIPPluginAccessorySetupPayload, CHIPPluginAttestationDataStore, 
@@ -34,7 +34,12 @@ exports:
                        CHIPPluginMutableVendorMetadataProduct, CHIPPluginMutableVendorMetadataVendor, 
                        CHIPPluginPairing, CHIPPluginProtocolMap, CHIPPluginProtocolOperation, 
                        CHIPPluginProtocolOperationManager, CHIPPluginResidentStateManager, 
-                       CHIPPluginStorage, CHIPPluginSystemCommissionerPairingManager, 
+                       CHIPPluginSoftwareUpdateProvider, CHIPPluginSoftwareUpdateProviderApplyUpdateRequestParams, 
+                       CHIPPluginSoftwareUpdateProviderApplyUpdateResponseParams, 
+                       CHIPPluginSoftwareUpdateProviderNotifyUpdateParams, CHIPPluginSoftwareUpdateProviderQueryImageRequestParams, 
+                       CHIPPluginSoftwareUpdateProviderQueryResponseParams, CHIPPluginStorage, 
+                       CHIPPluginSyncClusterColorControl, CHIPPluginSyncClusterThermostat, 
+                       CHIPPluginSyncClusterWindowCovering, CHIPPluginSystemCommissionerPairingManager, 
                        CHIPPluginThermostat, CHIPPluginUIDialogPresenter, CHIPPluginUtilities, 
                        CHIPPluginVendorMetadata, CHIPPluginVendorMetadataProduct, 
                        CHIPPluginVendorMetadataStore, CHIPPluginVendorMetadataVendor, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           168114B8-77D0-36AC-BCBE-D36C184A8759
+    value:           4550BE2C-AE09-3187-9BA5-A4785D2A2F6D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9A2A1435-0729-3B9A-86B9-6C94F56BD955
+    value:           A4661B20-4D43-37BF-A5E0-9347FFC4AC9F
 install-name:    '/usr/lib/libpmsample.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

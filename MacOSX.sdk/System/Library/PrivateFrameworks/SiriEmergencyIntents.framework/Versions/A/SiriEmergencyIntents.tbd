@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           67B4A278-2450-3C52-922E-4846DC31715E
+    value:           C85C1189-CB54-354E-8E58-6E437D9B869F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1616CC63-C418-3DFC-99F9-8FF93C5474DD
+    value:           A3C53570-1EA4-3E0B-813D-0A3BD1820E4F
 install-name:    '/System/Library/PrivateFrameworks/SiriEmergencyIntents.framework/Versions/A/SiriEmergencyIntents'
 swift-abi-version: 7
 exports:

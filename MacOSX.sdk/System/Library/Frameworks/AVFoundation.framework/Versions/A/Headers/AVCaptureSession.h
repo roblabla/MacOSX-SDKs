@@ -422,7 +422,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) AP
  @discussion
     This property can be used to determine whether multitaskingCameraAccessEnabled may be set to YES. When this property changes from YES to NO, multitaskingCameraAccessEnabled also reverts to NO.
  
-    This property returns true on iPads that support Stage Manager.
+    This property returns true on iPads that support Stage Manager with an extended display.
  
     This property is key-value observable.
  */

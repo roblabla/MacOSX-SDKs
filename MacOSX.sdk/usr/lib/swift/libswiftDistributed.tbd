@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D2F7B4B8-2728-3CBD-8131-CEC29D17853C
+    value:           D0E6F51E-789D-380F-B8B8-0F3876D58E83
   - target:          x86_64-maccatalyst
-    value:           D2F7B4B8-2728-3CBD-8131-CEC29D17853C
+    value:           D0E6F51E-789D-380F-B8B8-0F3876D58E83
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5B17B5FF-F18C-3799-8327-F07A31560149
+    value:           C32B650E-679B-3183-BA1B-6D2E454CEA1F
   - target:          arm64e-maccatalyst
-    value:           5B17B5FF-F18C-3799-8327-F07A31560149
+    value:           C32B650E-679B-3183-BA1B-6D2E454CEA1F
 install-name:    '/usr/lib/swift/libswiftDistributed.dylib'
 current-version: 0
 swift-abi-version: 7

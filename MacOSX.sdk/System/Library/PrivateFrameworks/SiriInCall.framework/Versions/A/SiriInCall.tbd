@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8F924D8C-8B2C-30A7-9076-3EA6F58B8BF5
+    value:           C2D510B9-CD4C-3C98-8799-0B8E150CFEF6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           99678C9C-A9A8-31CF-A7EB-F1756BDF6269
+    value:           5812971D-BB64-30D9-8B16-3297BA75B481
 install-name:    '/System/Library/PrivateFrameworks/SiriInCall.framework/Versions/A/SiriInCall'
 swift-abi-version: 7
 exports:

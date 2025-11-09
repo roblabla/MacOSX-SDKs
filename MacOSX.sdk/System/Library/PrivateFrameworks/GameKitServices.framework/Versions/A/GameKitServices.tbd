@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A01F7F54-4723-3400-A041-6E981EE63DCE
+    value:           C7AF4876-B663-3CC7-9DFC-B71326C92878
   - target:          x86_64-maccatalyst
-    value:           A01F7F54-4723-3400-A041-6E981EE63DCE
+    value:           C7AF4876-B663-3CC7-9DFC-B71326C92878
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FE9DD0FE-C4FE-3D8A-9E27-A3F3780BD243
+    value:           54D3673B-2ECB-3968-8A66-32DF44FF3DB6
   - target:          arm64e-maccatalyst
-    value:           FE9DD0FE-C4FE-3D8A-9E27-A3F3780BD243
+    value:           54D3673B-2ECB-3968-8A66-32DF44FF3DB6
 install-name:    '/System/Library/PrivateFrameworks/GameKitServices.framework/Versions/A/GameKitServices'
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -47,14 +47,14 @@ exports:
                        _GCKSessionSendTo, _GCKSessionSetDisconnectTimeout, _GCKSessionSetEventCallback, 
                        _GCKSessionSetHeartbeatDuration, _GCKSessionSetLocalName, 
                        _GCKSessionSetReportingAgent, _GCKSessionSetWifiEnabled, _GCKSessionStartEventCallbacks, 
-                       _GCKSessionUpdateRelay, _GCK_BWE_CalcRxEstimate, _GCK_BWE_CloseHandle, 
-                       _GCK_BWE_CreateHandle, _GCK_BWE_GetProbeSeqSize, _GCK_BWE_TrackLargeFrameState, 
-                       _GKDiscoveryBonjourGameKitServiceType, _GKDiscoveryBonjourLocalDomain, 
-                       _GKSNetworkStatisticsBytesReceived, _GKSNetworkStatisticsBytesSent, 
-                       _GKSNetworkStatisticsCurrentReceiveRate, _GKSNetworkStatisticsCurrentSendRate, 
-                       _GKSNetworkStatisticsEstimatedReceiveBandwidth, _GKSNetworkStatisticsEstimatedSendBandwidth, 
-                       _GKSNetworkStatisticsInterfaces, _GKSNetworkStatisticsLinks, 
-                       _GKSNetworkStatisticsRTT, _GKSNetworkStatisticsReceivePacketLossRate, 
+                       _GCKSessionUpdateRelay, _GCKSession_TrimLocalInterfaceList, 
+                       _GCK_BWE_CalcRxEstimate, _GCK_BWE_CloseHandle, _GCK_BWE_CreateHandle, 
+                       _GCK_BWE_GetProbeSeqSize, _GCK_BWE_TrackLargeFrameState, _GKDiscoveryBonjourGameKitServiceType, 
+                       _GKDiscoveryBonjourLocalDomain, _GKSNetworkStatisticsBytesReceived, 
+                       _GKSNetworkStatisticsBytesSent, _GKSNetworkStatisticsCurrentReceiveRate, 
+                       _GKSNetworkStatisticsCurrentSendRate, _GKSNetworkStatisticsEstimatedReceiveBandwidth, 
+                       _GKSNetworkStatisticsEstimatedSendBandwidth, _GKSNetworkStatisticsInterfaces, 
+                       _GKSNetworkStatisticsLinks, _GKSNetworkStatisticsRTT, _GKSNetworkStatisticsReceivePacketLossRate, 
                        _GKSNetworkStatisticsSendPacketLossRate, _GKSNetworkStatisticsUpTime, 
                        _GKSRelayInitiateInfo, _GKSRelayUpdateInfo, _GKSSessionTicketData, 
                        _GKSSessionTokenData, _GameKitServicesVersionNumber, _GameKitServicesVersionString, 
@@ -105,17 +105,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D6FC47CA-573F-3541-AE5C-38BB8913C9F6
+    value:           A4AF683D-077E-3FEA-BC0E-96AFD7AD7E12
   - target:          x86_64-maccatalyst
-    value:           D6FC47CA-573F-3541-AE5C-38BB8913C9F6
+    value:           A4AF683D-077E-3FEA-BC0E-96AFD7AD7E12
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B86A5E69-A4D0-3E3A-8675-5A4905B11484
+    value:           BEB771E8-8062-3AF8-806C-495FF90A7D2F
   - target:          arm64e-maccatalyst
-    value:           B86A5E69-A4D0-3E3A-8675-5A4905B11484
+    value:           BEB771E8-8062-3AF8-806C-495FF90A7D2F
 install-name:    '/System/Library/PrivateFrameworks/AVConference.framework/Frameworks/LegacyHandle.framework/Versions/A/LegacyHandle'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -128,17 +128,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           53AA1307-A41F-3020-A829-2D2D8A0123DD
+    value:           D661E4F0-E699-31B7-83B7-CF5F62FE61E1
   - target:          x86_64-maccatalyst
-    value:           53AA1307-A41F-3020-A829-2D2D8A0123DD
+    value:           D661E4F0-E699-31B7-83B7-CF5F62FE61E1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BE01DB14-944F-38A6-9F2F-CA3BD15C3928
+    value:           F0A7CAAF-9601-3279-969C-618BBC82FE42
   - target:          arm64e-maccatalyst
-    value:           BE01DB14-944F-38A6-9F2F-CA3BD15C3928
+    value:           F0A7CAAF-9601-3279-969C-618BBC82FE42
 install-name:    '/System/Library/PrivateFrameworks/AVConference.framework/Frameworks/snatmap.framework/Versions/A/snatmap'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -151,17 +151,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F60B5D06-46B4-3B27-B318-05936A2179E7
+    value:           C874ECBF-2A85-38EF-A1B3-798E366C57C0
   - target:          x86_64-maccatalyst
-    value:           F60B5D06-46B4-3B27-B318-05936A2179E7
+    value:           C874ECBF-2A85-38EF-A1B3-798E366C57C0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EEE27D0F-29E5-3FDB-A8BF-F33114846CCC
+    value:           1AE8435D-4ED9-37DB-97CF-F796D11EC917
   - target:          arm64e-maccatalyst
-    value:           EEE27D0F-29E5-3FDB-A8BF-F33114846CCC
+    value:           1AE8435D-4ED9-37DB-97CF-F796D11EC917
 install-name:    '/System/Library/PrivateFrameworks/AVConference.framework/Versions/A/AVConference'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]

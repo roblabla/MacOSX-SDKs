@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1342641F-A21A-3C27-AB16-D820AAAA2E8E
+    value:           94BE8815-C59E-3DAD-9732-162578835F9D
   - target:          x86_64-maccatalyst
-    value:           1342641F-A21A-3C27-AB16-D820AAAA2E8E
+    value:           94BE8815-C59E-3DAD-9732-162578835F9D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9C140DAF-2F5E-3540-88C3-E3BBF1A14CA0
+    value:           9E6AE5B4-2318-34DA-B18B-16A0C4FF939B
   - target:          arm64e-maccatalyst
-    value:           9C140DAF-2F5E-3540-88C3-E3BBF1A14CA0
+    value:           9E6AE5B4-2318-34DA-B18B-16A0C4FF939B
 install-name:    '/System/Library/PrivateFrameworks/ManagedSettingsObjC.framework/Versions/A/ManagedSettingsObjC'
 current-version: 66
 exports:

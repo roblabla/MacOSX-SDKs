@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           47B59788-9452-3B26-90E4-BF7D0ADF9DB1
+    value:           B5327042-6DE2-3EC8-87B6-9AE405A8D478
   - target:          x86_64-maccatalyst
-    value:           47B59788-9452-3B26-90E4-BF7D0ADF9DB1
+    value:           B5327042-6DE2-3EC8-87B6-9AE405A8D478
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C7D9763E-2460-3838-89AD-A59EE5468B02
+    value:           D02DC733-402B-3D7C-84EC-4A21B09782A9
   - target:          arm64e-maccatalyst
-    value:           C7D9763E-2460-3838-89AD-A59EE5468B02
+    value:           D02DC733-402B-3D7C-84EC-4A21B09782A9
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/LaunchServices'
 current-version: 1141.1
 parent-umbrella:
@@ -362,34 +362,34 @@ exports:
                        _kLSAllowedToLaunchInOtherSessionsEntitlement, _kLSAllowedToLaunchWithArgumentsEntitlement, 
                        _kLSAllowedToLaunchWithEnvironmentVariablesEntitlement, _kLSAllowedToLaunchWithKnownArgumentsEntitlement, 
                        _kLSAllowedToLaunchWithSTDIOEntitlement, _kLSAllowedToSetLauncherAuditTokenEntitlement, 
-                       _kLSAppleInternalLibraryBundleIdentifier, _kLSComputerRootCanonicalName, 
-                       _kLSCurrentDeviceModelCode, _kLSDefaultLocalizedValueKey, 
-                       _kLSItemContentType, _kLSItemDisplayKind, _kLSItemDisplayName, 
-                       _kLSItemExtension, _kLSItemExtensionIsHidden, _kLSItemFileCreator, 
-                       _kLSItemFileType, _kLSItemIsInvisible, _kLSItemQuarantineProperties, 
-                       _kLSItemRoleHandlerDisplayName, _kLSLocalLibraryBundleIdentifier, 
-                       _kLSMeetingRoomCanonicalName, _kLSNetworkLibraryBundleIdentifier, 
-                       _kLSNetworkRootCanonicalName, _kLSNotificationDatabaseSeedingComplete, 
-                       _kLSNotificationDatabaseSeedingStart, _kLSNotificationSystemConfigurationChange, 
-                       _kLSQuarantineAgentBundleIdentifierKey, _kLSQuarantineAgentNameKey, 
-                       _kLSQuarantineDataURLKey, _kLSQuarantineOriginURLKey, _kLSQuarantineTimeStampKey, 
-                       _kLSQuarantineTypeCalendarEventAttachment, _kLSQuarantineTypeEmailAttachment, 
-                       _kLSQuarantineTypeInstantMessageAttachment, _kLSQuarantineTypeKey, 
-                       _kLSQuarantineTypeOtherAttachment, _kLSQuarantineTypeOtherDownload, 
-                       _kLSQuarantineTypeWebDownload, _kLSRemoteDiscRootCanonicalName, 
-                       _kLSSystemLibraryBundleIdentifier, _kLSUserLibraryBundleIdentifier, 
-                       _kLSVersionNumberNull, _kUTExportedTypeDeclarationsKey, _kUTImportedTypeDeclarationsKey, 
-                       _kUTTagClassDeviceModelCode, _kUTTagClassFilenameExtension, 
-                       _kUTTagClassMIMEType, _kUTTagClassNSPboardType, _kUTTagClassOSType, 
-                       _kUTType3DContent, _kUTTypeAVIMovie, _kUTTypeAliasFile, _kUTTypeAliasRecord, 
-                       _kUTTypeAppCategory, _kUTTypeAppCategoryActionGames, _kUTTypeAppCategoryAdventureGames, 
-                       _kUTTypeAppCategoryArcadeGames, _kUTTypeAppCategoryBoardGames, 
-                       _kUTTypeAppCategoryBusiness, _kUTTypeAppCategoryCardGames, 
-                       _kUTTypeAppCategoryCasinoGames, _kUTTypeAppCategoryDeveloperTools, 
-                       _kUTTypeAppCategoryDiceGames, _kUTTypeAppCategoryEducation, 
-                       _kUTTypeAppCategoryEducationalGames, _kUTTypeAppCategoryEntertainment, 
-                       _kUTTypeAppCategoryFamilyGames, _kUTTypeAppCategoryFinance, 
-                       _kUTTypeAppCategoryGames, _kUTTypeAppCategoryGraphicsDesign, 
+                       _kLSAppleInternalLibraryBundleIdentifier, _kLSClientEntitledToAccessOtherSessions, 
+                       _kLSComputerRootCanonicalName, _kLSCurrentDeviceModelCode, 
+                       _kLSDefaultLocalizedValueKey, _kLSItemContentType, _kLSItemDisplayKind, 
+                       _kLSItemDisplayName, _kLSItemExtension, _kLSItemExtensionIsHidden, 
+                       _kLSItemFileCreator, _kLSItemFileType, _kLSItemIsInvisible, 
+                       _kLSItemQuarantineProperties, _kLSItemRoleHandlerDisplayName, 
+                       _kLSLocalLibraryBundleIdentifier, _kLSMeetingRoomCanonicalName, 
+                       _kLSNetworkLibraryBundleIdentifier, _kLSNetworkRootCanonicalName, 
+                       _kLSNotificationDatabaseSeedingComplete, _kLSNotificationDatabaseSeedingStart, 
+                       _kLSNotificationSystemConfigurationChange, _kLSQuarantineAgentBundleIdentifierKey, 
+                       _kLSQuarantineAgentNameKey, _kLSQuarantineDataURLKey, _kLSQuarantineOriginURLKey, 
+                       _kLSQuarantineTimeStampKey, _kLSQuarantineTypeCalendarEventAttachment, 
+                       _kLSQuarantineTypeEmailAttachment, _kLSQuarantineTypeInstantMessageAttachment, 
+                       _kLSQuarantineTypeKey, _kLSQuarantineTypeOtherAttachment, 
+                       _kLSQuarantineTypeOtherDownload, _kLSQuarantineTypeWebDownload, 
+                       _kLSRemoteDiscRootCanonicalName, _kLSSystemLibraryBundleIdentifier, 
+                       _kLSUserLibraryBundleIdentifier, _kLSVersionNumberNull, _kUTExportedTypeDeclarationsKey, 
+                       _kUTImportedTypeDeclarationsKey, _kUTTagClassDeviceModelCode, 
+                       _kUTTagClassFilenameExtension, _kUTTagClassMIMEType, _kUTTagClassNSPboardType, 
+                       _kUTTagClassOSType, _kUTType3DContent, _kUTTypeAVIMovie, _kUTTypeAliasFile, 
+                       _kUTTypeAliasRecord, _kUTTypeAppCategory, _kUTTypeAppCategoryActionGames, 
+                       _kUTTypeAppCategoryAdventureGames, _kUTTypeAppCategoryArcadeGames, 
+                       _kUTTypeAppCategoryBoardGames, _kUTTypeAppCategoryBusiness, 
+                       _kUTTypeAppCategoryCardGames, _kUTTypeAppCategoryCasinoGames, 
+                       _kUTTypeAppCategoryDeveloperTools, _kUTTypeAppCategoryDiceGames, 
+                       _kUTTypeAppCategoryEducation, _kUTTypeAppCategoryEducationalGames, 
+                       _kUTTypeAppCategoryEntertainment, _kUTTypeAppCategoryFamilyGames, 
+                       _kUTTypeAppCategoryFinance, _kUTTypeAppCategoryGames, _kUTTypeAppCategoryGraphicsDesign, 
                        _kUTTypeAppCategoryHealthcareFitness, _kUTTypeAppCategoryKidsGames, 
                        _kUTTypeAppCategoryLifestyle, _kUTTypeAppCategoryMedical, 
                        _kUTTypeAppCategoryMusic, _kUTTypeAppCategoryMusicGames, _kUTTypeAppCategoryNews, 

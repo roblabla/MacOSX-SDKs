@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           74FBB7B7-EC70-34C1-BCC7-615D3F400E95
+    value:           E69A27CC-155F-3539-8FC1-F5D2ADD4A051
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4648CE32-D57B-39E3-A541-CB75F040908D
+    value:           58C24760-D140-315E-994D-73D5EC30B2F8
 install-name:    '/System/Library/PrivateFrameworks/UARPUpdaterService.framework/Versions/A/UARPUpdaterService'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

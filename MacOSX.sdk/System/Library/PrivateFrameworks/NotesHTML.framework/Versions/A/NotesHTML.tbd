@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8E54C146-787B-34D2-A7B9-FA1D29F17A7D
+    value:           3E9AC345-89CA-3079-AA2D-65B210E0EB5D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           66C19593-E619-3EB6-B3F4-4359A92181F0
+    value:           9B0FC30E-DE2C-3228-A105-AF9B72CA0B01
 install-name:    '/System/Library/PrivateFrameworks/NotesHTML.framework/Versions/A/NotesHTML'
-current-version: 2163
+current-version: 2185
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ AvatarStack.2.preview-thunk, ICLinkPresentationPreviewGenerator, 

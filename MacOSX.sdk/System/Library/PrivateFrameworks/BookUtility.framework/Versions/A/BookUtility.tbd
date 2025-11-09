@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           95D0FEEB-DD42-3FB6-859C-30AFCF806954
+    value:           037626CA-0FEC-3A92-83A6-2893B0B7615B
   - target:          x86_64-maccatalyst
-    value:           95D0FEEB-DD42-3FB6-859C-30AFCF806954
+    value:           037626CA-0FEC-3A92-83A6-2893B0B7615B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E2B0B8B3-9867-3A8F-A681-445A7237EF49
+    value:           ABDF972C-6567-3165-9B35-B04CC3DCE68C
   - target:          arm64e-maccatalyst
-    value:           E2B0B8B3-9867-3A8F-A681-445A7237EF49
+    value:           ABDF972C-6567-3165-9B35-B04CC3DCE68C
 install-name:    '/System/Library/PrivateFrameworks/BookUtility.framework/Versions/A/BookUtility'
-current-version: 1801
+current-version: 1825
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -33,7 +33,8 @@ exports:
                        _BUHaltDebugger, _BUIsRunningTests, _BUIsStoreBookAssetID, 
                        _BULocalizedErrorAlertMessageKey, _BULocalizedErrorAlertTitleKey, 
                        _BUMix, _BUNetworkMonitorInterfaceDidChangeNotification, _BUObjectReferenceDescription, 
-                       _BUProtocolCast, _BURandom, _BURandomBetween, _BUReportAssertionFailureWithMessage, 
+                       _BUOnboardingAllBundleIDs, _BUOnboardingBooksBundleID, _BUProtocolCast, 
+                       _BURandom, _BURandomBetween, _BUReportAssertionFailureWithMessage, 
                        _BUReverseSquare, _BURound, _BUShouldStopInDebugger, _BUSineMap, 
                        _BUStaticCast, _BUStaticClassAndProtocolCast, _BUStaticProtocolCast, 
                        _BUStoreIdFromObject, _BUStoreIdStringFromObject, _BUZip64EndOfCentralDirectoryLocatorSignature, 

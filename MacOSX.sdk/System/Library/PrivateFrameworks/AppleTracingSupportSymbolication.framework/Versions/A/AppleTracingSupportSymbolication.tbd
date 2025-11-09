@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5AC4EE5A-1675-3A29-9D1E-F886BEE7E56D
+    value:           0F4E2F73-8E42-39BB-BC36-1FB0B691AA01
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           96047E43-CAFA-3F63-99F3-DD6E28E43D8B
+    value:           8E12AC9D-80FC-3F07-972D-CCCEDF77B100
 install-name:    '/System/Library/PrivateFrameworks/AppleTracingSupportSymbolication.framework/Versions/A/AppleTracingSupportSymbolication'
 current-version: 13
 exports:

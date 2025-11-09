@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           95A9D3BC-BD12-3A65-85F5-95340D95DB9E
+    value:           B82A782A-459A-3DB2-B4B8-2C2C45BF0D7A
   - target:          x86_64-maccatalyst
-    value:           95A9D3BC-BD12-3A65-85F5-95340D95DB9E
+    value:           B82A782A-459A-3DB2-B4B8-2C2C45BF0D7A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           08D7974E-B78A-3F6E-B1A6-040450BD9328
+    value:           154CEF70-9F15-3683-8BAF-FC142F494E1E
   - target:          arm64e-maccatalyst
-    value:           08D7974E-B78A-3F6E-B1A6-040450BD9328
+    value:           154CEF70-9F15-3683-8BAF-FC142F494E1E
 install-name:    '/System/Library/PrivateFrameworks/SuggestionsSpotlightMetrics.framework/Versions/A/SuggestionsSpotlightMetrics'
-current-version: 1193.8
+current-version: 1193.8.6
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           50CA8EDE-BF29-31D5-8D8D-2205FA6B3372
+    value:           6AD119B6-B1A7-3771-A3A9-F989C3ABA8A3
   - target:          x86_64-maccatalyst
-    value:           50CA8EDE-BF29-31D5-8D8D-2205FA6B3372
+    value:           6AD119B6-B1A7-3771-A3A9-F989C3ABA8A3
   - target:          arm64e-macos
-    value:           6E536C07-A732-39DE-A042-218620760A21
+    value:           FA77F4F6-BD6D-31C9-992A-253CFA32FDD4
   - target:          arm64e-maccatalyst
-    value:           6E536C07-A732-39DE-A042-218620760A21
+    value:           FA77F4F6-BD6D-31C9-992A-253CFA32FDD4
 install-name:    '/System/Library/PrivateFrameworks/VisionCore.framework/Versions/A/VisionCore'
 current-version: 0.0.1
 ...

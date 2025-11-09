@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           DD071331-6DDC-3BA5-9ACC-7713EC4BF089
+    value:           AADBBC4A-EABC-382B-8BC5-AD9B489A99A6
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           A78BFE6A-0C65-32FC-A2CE-2ECE1BA37D6F
+    value:           6E8A3806-963E-3C3A-8DD9-A8323598F98A
 install-name:    '/System/iOSSupport/System/Library/Frameworks/CoreNFC.framework/Versions/A/CoreNFC'
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]

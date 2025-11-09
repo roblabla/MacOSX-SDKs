@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           896BAC4A-0D10-38B2-AD7D-7DA7F3F034F2
+    value:           E915E830-F6D0-3DD7-9A00-631514BC583A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F1078124-9A19-3163-9ED5-3226D08642B7
+    value:           63075FF8-F70F-3515-8A55-AFE384372E35
 install-name:    '/System/Library/PrivateFrameworks/AOSUI.framework/Versions/A/AOSUI'
 current-version: 415
 exports:
@@ -60,8 +60,9 @@ exports:
                        __AOSUIReAuthResultAuthTypePassword, __AOSUIReAuthResultPasswordKey, 
                        __AOSUIReAuthResultSuccessKey, __AOSUIReAuthTitleKey, __AOSUISignpostCreate, 
                        __AOSUISignpostCreateNull, __AOSUISignpostGetNanoseconds, 
-                       __AOSUISignpostLogSystem, __IsJSValueAnArray, __NSDictionaryFromJSObject, 
-                       __boldAttributedString, __centeredParagraphStyle, __fmipStateChangeNotificationReceived, 
+                       __AOSUISignpostLogSystem, __AOSUIWalrusProfilePhotoDiameter, 
+                       __IsJSValueAnArray, __NSDictionaryFromJSObject, __boldAttributedString, 
+                       __centeredParagraphStyle, __fmipStateChangeNotificationReceived, 
                        __frameDelta, __privateEmailController, __smallAttributedString, 
                        __unknownErrorShowing, __warningIconString, __webView, _addressBookBundleIdentifier, 
                        _homeBundleIdentifier, _iCalBundleIdentifier, _iCloudDSEErrorDomain, 
@@ -149,16 +150,16 @@ exports:
                        _kAASaveOptionsTwoFactorLoginCookiesKey, _kAOSUIAppleDataRecovery, 
                        _kAOSUICategoryIDFreespace, _kAOSUIDialogImageCloud, _kAOSUIDialogImageCombinedDataclasses, 
                        _kAOSUIDialogImageDocuments, _kAOSUIFindMyBundleIdentifier, 
-                       _kAOSUIImageCloud, _kAOSUIImageiCloudBanner, _kAOSUIImageiCloudText, 
-                       _kAOSUIPrefPaneImageAccounts, _kAOSUIPrefPaneImageCalendars, 
+                       _kAOSUIFreeformBundleIdentifier, _kAOSUIImageCloud, _kAOSUIImageiCloudBanner, 
+                       _kAOSUIImageiCloudText, _kAOSUIPrefPaneImageAccounts, _kAOSUIPrefPaneImageCalendars, 
                        _kAOSUIPrefPaneImageContacts, _kAOSUIPrefPaneImageDocuments, 
                        _kAOSUIPrefPaneImageFMM, _kAOSUIPrefPaneImageHome, _kAOSUIPrefPaneImageMail, 
                        _kAOSUIPrefPaneImageMessages, _kAOSUIPrefPaneImageNews, _kAOSUIPrefPaneImageNotes, 
-                       _kAOSUIPrefPaneImagePhotos, _kAOSUIPrefPaneImagePrivateConnect, 
-                       _kAOSUIPrefPaneImagePrivateEmail, _kAOSUIPrefPaneImageReminders, 
-                       _kAOSUIPrefPaneImageSafari, _kAOSUIPrefPaneImageSiri, _kAOSUIPrefPaneImageStocks, 
-                       _kAOSUIPrefPaneImageWallet, _kAOSUIProfilePictureCropRect, 
-                       _kAOSUIProfileViewScene, _kAOSUISettingsBundleIdentifier, 
+                       _kAOSUIPrefPaneImagePhotos, _kAOSUIPrefPaneImagePlaceholderIcon, 
+                       _kAOSUIPrefPaneImagePrivateConnect, _kAOSUIPrefPaneImagePrivateEmail, 
+                       _kAOSUIPrefPaneImageReminders, _kAOSUIPrefPaneImageSafari, 
+                       _kAOSUIPrefPaneImageSiri, _kAOSUIPrefPaneImageStocks, _kAOSUIPrefPaneImageWallet, 
+                       _kAOSUIProfilePictureCropRect, _kAOSUIProfileViewScene, _kAOSUISettingsBundleIdentifier, 
                        _kAOSUISpyglassAppleID, _kAOSUISpyglassFamily, _kAPPLICATION_USER_AGENT, 
                        _kAccountAPNSPushTokenKey, _kAccountAltDSID, _kAccountAnisetteMID, 
                        _kAccountAnisetteOTP, _kAccountAppleIDKey, _kAccountAuthTokenKey, 
@@ -262,15 +263,16 @@ exports:
                        AOSUISignOutFlowControllerDelegate, AOSUISpyglassAccountChangeHelper, 
                        AOSUISpyglassAvatarProfileViewController, AOSUISpyglassBaseViewController, 
                        AOSUISpyglassPaneViewController, AOSUISpyglassPaneWebViewController, 
-                       AOSUITrustedContactInvitationHandler, AOSUInheritanceInvitationViewModel, 
-                       CastlePlugin, IACastleIconView, IACastleServiceRow, IACastleServiceRowLoader, 
-                       IACastleServicesView, IACastleServicesViewLoader, MMAOSKeychainWrapper, 
-                       MMAccountInterface, MMAccountMgr, MMAddressBookAdditions, 
-                       MMAlert, MMAppDisplayUtilities, MMAuthenticatingPasswordSheet, 
-                       MMBaseInterface, MMBookmarksService, MMCSCOptionsSetupViewController, 
-                       MMCSCPassPhraseRecoveryViewController, MMCSCPassPhraseSetupViewController, 
-                       MMCSCPinRecoveryViewController, MMCSCPinSetupViewController, 
-                       MMCSCRecoveryController, MMCSCSMSTargetRecoveryViewController, 
+                       AOSUITrustedContactInvitationHandler, AOSUIWalrusAccountContactsViewController, 
+                       AOSUIWalrusRecoveryContactRemovalActionHandler, AOSUIWalrusRecoveryKeyRemovalActionHandler, 
+                       AOSUInheritanceInvitationViewModel, CastlePlugin, IACastleIconView, 
+                       IACastleServiceRow, IACastleServiceRowLoader, IACastleServicesView, 
+                       IACastleServicesViewLoader, MMAOSKeychainWrapper, MMAccountInterface, 
+                       MMAccountMgr, MMAddressBookAdditions, MMAlert, MMAppDisplayUtilities, 
+                       MMAuthenticatingPasswordSheet, MMBaseInterface, MMBookmarksService, 
+                       MMCSCOptionsSetupViewController, MMCSCPassPhraseRecoveryViewController, 
+                       MMCSCPassPhraseSetupViewController, MMCSCPinRecoveryViewController, 
+                       MMCSCPinSetupViewController, MMCSCRecoveryController, MMCSCSMSTargetRecoveryViewController, 
                        MMCSCSMSTargetSetupViewController, MMCSCSetupController, MMCalendarsService, 
                        MMCloudAccountInterface, MMCommerceBagContract, MMContactsService, 
                        MMDateFormatter, MMDeviceInfo, MMDiskManagement, MMDynamicDialogController, 
@@ -298,12 +300,12 @@ exports:
                        iCloudAccountResponse, iCloudAccountSubscriptionFeaturesController, 
                        iCloudAccountsDetailsGeneral, iCloudAddFamilyInvitee, iCloudAddFamilyMember, 
                        iCloudFMIPAuthenticateRequest, iCloudFMIPAuthenticateResponse, 
-                       iCloudFollowUpActionHandler, iCloudFollowUpSuggestion, iCloudHandleFLUI, 
-                       iCloudHomeService, iCloudLinkButton, iCloudLocHelper, iCloudNameFormatter, 
-                       iCloudNewsService, iCloudPaymentVerificationController, iCloudPurchaseStorageController, 
-                       iCloudRequester, iCloudSettingsSyncService, iCloudSiriService, 
-                       iCloudStocksService, iCloudTouchBarController, iCloudUtilities, 
-                       iCloudWalletService ]
+                       iCloudFollowUpActionHandler, iCloudFollowUpSuggestion, iCloudFreeformService, 
+                       iCloudHandleFLUI, iCloudHomeService, iCloudLinkButton, iCloudLocHelper, 
+                       iCloudNameFormatter, iCloudNewsService, iCloudPaymentVerificationController, 
+                       iCloudPurchaseStorageController, iCloudRequester, iCloudSettingsSyncService, 
+                       iCloudSiriService, iCloudStocksService, iCloudTouchBarController, 
+                       iCloudUtilities, iCloudWalletService ]
     objc-ivars:      [ AOSUIAccountContactsTableRowLoader._contactRow, CastlePlugin._accountDetailsController, 
                        CastlePlugin._accountDetailsControllerNew, CastlePlugin._accountList, 
                        CastlePlugin._authenticationResults, CastlePlugin._mainWindow, 

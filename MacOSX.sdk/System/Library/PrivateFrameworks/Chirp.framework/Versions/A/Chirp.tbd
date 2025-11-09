@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3A0C5AB0-FBF4-33B6-9794-011DA8FC4E0F
+    value:           0B6A6A59-2542-392D-A728-2790772978F5
   - target:          x86_64-maccatalyst
-    value:           3A0C5AB0-FBF4-33B6-9794-011DA8FC4E0F
+    value:           0B6A6A59-2542-392D-A728-2790772978F5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B4779771-5FAE-3D89-850F-8E246C124909
+    value:           2C38FF62-4315-3A8C-A5CE-A6AD44A5771B
   - target:          arm64e-maccatalyst
-    value:           B4779771-5FAE-3D89-850F-8E246C124909
+    value:           2C38FF62-4315-3A8C-A5CE-A6AD44A5771B
 install-name:    '/System/Library/PrivateFrameworks/Chirp.framework/Versions/A/Chirp'
 swift-abi-version: 7
 exports:

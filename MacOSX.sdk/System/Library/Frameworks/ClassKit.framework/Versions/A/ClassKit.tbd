@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CCCB02A3-12AA-3663-B7E1-8C4956801C1D
+    value:           E1C77E97-DCA2-3597-8066-537CA3371956
   - target:          x86_64-maccatalyst
-    value:           CCCB02A3-12AA-3663-B7E1-8C4956801C1D
+    value:           E1C77E97-DCA2-3597-8066-537CA3371956
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           61837498-B3EB-314D-BDEF-96887F391235
+    value:           2670BE50-F927-3189-A592-C86C3D570280
   - target:          arm64e-maccatalyst
-    value:           61837498-B3EB-314D-BDEF-96887F391235
+    value:           2670BE50-F927-3189-A592-C86C3D570280
 install-name:    '/System/Library/Frameworks/ClassKit.framework/Versions/A/ClassKit'
-current-version: 148.1.9
+current-version: 148.2.6
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -59,10 +59,11 @@ exports:
                        _CLSExecutableLinkedOnOrAfter_iOS13_2, _CLSExecutableLinkedOnOrAfter_iOS13_2_macOS_10_15_1, 
                        _CLSExecutableLinkedOnOrAfter_iOS14_0, _CLSExecutableLinkedOnOrAfter_iOS14_0_macOS_10_16, 
                        _CLSExecutableLinkedOnOrAfter_iOS14_2, _CLSExecutableLinkedOnOrAfter_iOS14_2_macOS_10_16, 
-                       _CLSExecutableLinkedOnOrAfter_iOS15_1_macOS_12_0, _CLSExpectedPersonaKey, 
-                       _CLSExtensionPropertiesForConnection, _CLSExtensionPropertiesForCurrentTask, 
-                       _CLSFavoriteTypeFromString, _CLSHandoutAttachmentCompletionStatusFromString, 
-                       _CLSHandoutAttachmentTypeFromString, _CLSHandoutClasses, _CLSHandoutPublishingStateFromString, 
+                       _CLSExecutableLinkedOnOrAfter_iOS15_1_macOS_12_0, _CLSExecutableLinkedOnOrAfter_iOS16_2_macOS_13_1, 
+                       _CLSExpectedPersonaKey, _CLSExtensionPropertiesForConnection, 
+                       _CLSExtensionPropertiesForCurrentTask, _CLSFavoriteTypeFromString, 
+                       _CLSHandoutAttachmentCompletionStatusFromString, _CLSHandoutAttachmentTypeFromString, 
+                       _CLSHandoutClasses, _CLSHandoutPublishingStateFromString, 
                        _CLSHandoutStateFromString, _CLSHandoutSubstateFromString, 
                        _CLSInitLog, _CLSInitialServerSyncCompleteNotificationName, 
                        _CLSInitialSyncCompleteDarwinNotificationName, _CLSInitialiCloudDriveSyncCompleteNotificationName, 
@@ -162,9 +163,10 @@ exports:
                        CLSCollaborationStateChange, CLSCollection, CLSCollectionItem, 
                        CLSContext, CLSContextNavigationNode, CLSContextProviderExtensionContext, 
                        CLSContextProviderExtensionHostContext, CLSContextProviderService, 
-                       CLSContextProviderServiceFinder, CLSCurrentUser, CLSDataObserver, 
-                       CLSDataStore, CLSEndpointConnection, CLSEntitlements, CLSFavorite, 
-                       CLSGraph, CLSHandout, CLSHandoutAssignedItem, CLSHandoutAttachment, 
+                       CLSContextProviderServiceFinder, CLSCurrentUser, CLSDarwinNotification, 
+                       CLSDarwinNotificationCenter, CLSDataObserver, CLSDataStore, 
+                       CLSEndpointConnection, CLSEntitlements, CLSFavorite, CLSGraph, 
+                       CLSHandout, CLSHandoutAssignedItem, CLSHandoutAttachment, 
                        CLSHandoutEvent, CLSHandoutEventAttachmentDetail, CLSHandoutRecipient, 
                        CLSHandoutReportItem, CLSImageUtils, CLSInsightEvent, CLSLocation, 
                        CLSMultipleChoiceAnswerFormat, CLSMultipleChoiceAnswerItem, 

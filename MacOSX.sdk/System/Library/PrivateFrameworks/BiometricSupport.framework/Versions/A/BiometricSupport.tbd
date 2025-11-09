@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           81A5C0D9-0DEE-38A0-AD53-C6BD68632E1A
+    value:           51558D71-D2BD-3770-B402-D931E8100EE4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3DB78A4E-2781-3E34-BA97-A6481F90EA33
+    value:           90014306-3620-3B33-8EEC-F333A10CC90A
 install-name:    '/System/Library/PrivateFrameworks/BiometricSupport.framework/Versions/A/BiometricSupport'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -35,17 +35,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           66271361-E3D4-36BA-913A-2E42081307A9
+    value:           D5E2B820-8F0E-37AC-B089-E18AB642E8EC
   - target:          x86_64-maccatalyst
-    value:           66271361-E3D4-36BA-913A-2E42081307A9
+    value:           D5E2B820-8F0E-37AC-B089-E18AB642E8EC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           687EDC59-A435-3842-993E-0F5FB7E12954
+    value:           04CD560D-10FE-3B20-8843-0E6B4DE25DAA
   - target:          arm64e-maccatalyst
-    value:           687EDC59-A435-3842-993E-0F5FB7E12954
+    value:           04CD560D-10FE-3B20-8843-0E6B4DE25DAA
 install-name:    '/System/Library/PrivateFrameworks/BiometricKit.framework/Versions/A/BiometricKit'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

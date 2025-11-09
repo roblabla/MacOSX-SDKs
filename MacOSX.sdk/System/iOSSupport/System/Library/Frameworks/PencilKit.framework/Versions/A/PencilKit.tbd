@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           0A672F29-6F7D-3D7A-AA8D-DAF1CA76B98E
+    value:           437790CD-E082-321A-B1B5-EA5870341BB5
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           891FCE49-560E-335E-A813-2CF6221DC584
+    value:           5083A4CA-34B1-32A6-AB5C-61C52CBDD4F1
 install-name:    '/System/iOSSupport/System/Library/Frameworks/PencilKit.framework/Versions/A/PencilKit'
 swift-abi-version: 7
 exports:
@@ -484,14 +484,12 @@ exports:
                        '_$s9PencilKit12PKInkingToolV5width12CoreGraphics7CGFloatVvg', 
                        '_$s9PencilKit12PKInkingToolV5width12CoreGraphics7CGFloatVvpMV', 
                        '_$s9PencilKit12PKInkingToolV5width12CoreGraphics7CGFloatVvs', 
-                       '_$s9PencilKit12PKInkingToolV7InkTypeO11fountainpenyA2EmFWC', 
                        '_$s9PencilKit12PKInkingToolV7InkTypeO12defaultWidth12CoreGraphics7CGFloatVvg', 
                        '_$s9PencilKit12PKInkingToolV7InkTypeO12defaultWidth12CoreGraphics7CGFloatVvpMV', 
                        '_$s9PencilKit12PKInkingToolV7InkTypeO15validWidthRangeSNy12CoreGraphics7CGFloatVGvg', 
                        '_$s9PencilKit12PKInkingToolV7InkTypeO15validWidthRangeSNy12CoreGraphics7CGFloatVGvpMV', 
                        '_$s9PencilKit12PKInkingToolV7InkTypeO3penyA2EmFWC', '_$s9PencilKit12PKInkingToolV7InkTypeO6markeryA2EmFWC', 
-                       '_$s9PencilKit12PKInkingToolV7InkTypeO6pencilyA2EmFWC', '_$s9PencilKit12PKInkingToolV7InkTypeO8monolineyA2EmFWC', 
-                       '_$s9PencilKit12PKInkingToolV7InkTypeO8rawValueAESgSS_tcfC', 
+                       '_$s9PencilKit12PKInkingToolV7InkTypeO6pencilyA2EmFWC', '_$s9PencilKit12PKInkingToolV7InkTypeO8rawValueAESgSS_tcfC', 
                        '_$s9PencilKit12PKInkingToolV7InkTypeO8rawValueSSvg', '_$s9PencilKit12PKInkingToolV7InkTypeO8rawValueSSvpMV', 
                        '_$s9PencilKit12PKInkingToolV7InkTypeOMa', '_$s9PencilKit12PKInkingToolV7InkTypeOMn', 
                        '_$s9PencilKit12PKInkingToolV7InkTypeON', '_$s9PencilKit12PKInkingToolV7InkTypeOSHAAMc', 
@@ -692,7 +690,9 @@ exports:
                        '_$s9PencilKit7InkMaskV8movement12CoreGraphics7CGFloatVvs', 
                        '_$s9PencilKit7InkMaskVACycfC', '_$s9PencilKit7InkMaskVMa', 
                        '_$s9PencilKit7InkMaskVMn', '_$s9PencilKit7InkMaskVN', '_$s9PencilKit7InkMaskVSEAAMc', 
-                       '_$s9PencilKit7InkMaskVSeAAMc', '_$s9PencilKit8PKStrokeV12renderBoundsSo6CGRectVvg', 
+                       '_$s9PencilKit7InkMaskVSeAAMc', '_$s9PencilKit8PKStrokeV10randomSeeds6UInt32VvM', 
+                       '_$s9PencilKit8PKStrokeV10randomSeeds6UInt32Vvg', '_$s9PencilKit8PKStrokeV10randomSeeds6UInt32VvpMV', 
+                       '_$s9PencilKit8PKStrokeV10randomSeeds6UInt32Vvs', '_$s9PencilKit8PKStrokeV12renderBoundsSo6CGRectVvg', 
                        '_$s9PencilKit8PKStrokeV12renderBoundsSo6CGRectVvpMV', '_$s9PencilKit8PKStrokeV16maskedPathRangesSaySNy12CoreGraphics7CGFloatVGGvg', 
                        '_$s9PencilKit8PKStrokeV16maskedPathRangesSaySNy12CoreGraphics7CGFloatVGGvpMV', 
                        '_$s9PencilKit8PKStrokeV19_bridgeToObjectiveCSoABCyF', '_$s9PencilKit8PKStrokeV26_forceBridgeFromObjectiveC_6resultySoABC_ACSgztFZ', 
@@ -785,8 +785,9 @@ exports:
                        PKLegacyDrawingRegressionTester, PKLinedPaper, PKLinedPaperLayer, 
                        PKMentionParticipant, PKMetalUtility, PKMutableStroke, PKPaintAreaView, 
                        PKPaletteHostView, PKPaletteScaleFactorPolicy, PKPaletteView, 
-                       PKPaletteViewInteraction, PKPencilTextInputElement, PKPencilTextInputElementInteraction, 
-                       PKPencilTouchDetection, PKPencilTouchDetectionService, PKProgressAlertController, 
+                       PKPaletteViewController, PKPaletteViewInteraction, PKPencilTextInputElement, 
+                       PKPencilTextInputElementInteraction, PKPencilTouchDetection, 
+                       PKPencilTouchDetectionService, PKProgressAlertController, 
                        PKRecognitionDataCollectionViewController, PKReplicaManager, 
                        PKScribbleInteraction, PKSearchQueryItem, PKSelectionInteraction, 
                        PKShape, PKSpaceInsertionController, PKStroke, PKStrokeDelta, 

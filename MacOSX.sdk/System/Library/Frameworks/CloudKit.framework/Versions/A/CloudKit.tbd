@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F334D610-D195-3CD0-94BB-2AF68761F20E
+    value:           4D680882-ECCA-3C12-BDBA-494FDBB0C496
   - target:          x86_64-maccatalyst
-    value:           F334D610-D195-3CD0-94BB-2AF68761F20E
+    value:           4D680882-ECCA-3C12-BDBA-494FDBB0C496
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C4AFC70A-E6D6-3CE4-A992-F6AFDD906F33
+    value:           767A0E32-7151-3D3F-9682-D951E60651BB
   - target:          arm64e-maccatalyst
-    value:           C4AFC70A-E6D6-3CE4-A992-F6AFDD906F33
+    value:           767A0E32-7151-3D3F-9682-D951E60651BB
 install-name:    '/System/Library/Frameworks/CloudKit.framework/Versions/A/CloudKit'
-current-version: 2020.16
+current-version: 2030.20
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -1980,12 +1980,15 @@ exports:
                        _CKErrorUserInfoClasses, _CKEventMetricKeyMergeableAssetCount, 
                        _CKEventMetricKeyMergeableFetchedDeltaCount, _CKEventMetricKeyMergeableReplacedDeltaCount, 
                        _CKEventMetricKeyMergeableSavedDeltaCount, _CKEventMetricKeyMergeableSavedReplacementDeltaCount, 
-                       _CKEventMetricKeyMergeableValueCount, _CKExtendedMethodSignatureForProtocolSelector, 
-                       _CKExtensionErrorPayloadKey, _CKFetchAPSEnvironmentFromServerOrEntitlements, 
-                       _CKFreeformShareType, _CKGetCurrentActivities, _CKGetDarwinCacheDirRealPath, 
-                       _CKGetDarwinTempDirRealPath, _CKGetGenerationCounterForFd, 
-                       _CKGetGlobalQueue, _CKGetHomeDir, _CKGetHomeDirRealPath, _CKGetRealPath, 
-                       _CKHTTPHeaderRequestUUID, _CKHTTPHeaderRetryAfter, _CKHandleSignificantIssueBehavior, 
+                       _CKEventMetricKeyMergeableValueCount, _CKEventMetricKeyPerRecordKeysRolled, 
+                       _CKEventMetricKeyShareKeysRolled, _CKEventMetricKeyWalrusEnabled, 
+                       _CKEventMetricKeyZoneKeysRolled, _CKEventMetricKeyZoneishKeysRolled, 
+                       _CKExtendedMethodSignatureForProtocolSelector, _CKExtensionErrorPayloadKey, 
+                       _CKFetchAPSEnvironmentFromServerOrEntitlements, _CKFreeformShareType, 
+                       _CKGetCurrentActivities, _CKGetDarwinCacheDirRealPath, _CKGetDarwinTempDirRealPath, 
+                       _CKGetGenerationCounterForFd, _CKGetGlobalQueue, _CKGetHomeDir, 
+                       _CKGetHomeDirRealPath, _CKGetRealPath, _CKHTTPHeaderRequestUUID, 
+                       _CKHTTPHeaderRetryAfter, _CKHandleSignificantIssueBehavior, 
                        _CKHeaderForLibraryName, _CKHexCharFromBytes, _CKIdentityUpdateNotification, 
                        _CKIndexedArrayKey, _CKInternalErrorDomain, _CKInternalUnderlyingHTTPStatusKey, 
                        _CKIsDebuggerAttached, _CKIsIndexedArrayKey, _CKIsPCSError, 
@@ -2041,17 +2044,18 @@ exports:
                        _CKStringForQOS, _CKStringForTransferSize, _CKStringForXPCActivityState, 
                        _CKStringFromAccountChangeType, _CKStringFromAccountStatus, 
                        _CKStringFromApplicationPermissionStatus, _CKStringFromCKMMCSEncryptionSupport, 
-                       _CKStringFromCapabilities, _CKStringFromDeviceToDeviceEncryptionStatus, 
-                       _CKStringFromParticipantAcceptanceStatus, _CKStringFromParticipantInvitationTokenStatus, 
-                       _CKStringFromParticipantPermission, _CKStringFromParticipantRole, 
-                       _CKStringFromPartition, _CKStringFromServerEnvironment, _CKStringFromShareParticipantSelfRemovalBehavior, 
-                       _CKStringFromShareParticipantVisibility, _CKStringWithArray, 
-                       _CKStringWithBytes, _CKStringWithData, _CKStringWithDate, 
-                       _CKStringWithDictionary, _CKStringWithLimitedArray, _CKStringWithNibbles, 
-                       _CKStringWithObject, _CKStringWithSet, _CKStringsAreBothNilOrEqual, 
-                       _CKSyncEngineDefaultPriority, _CKSyncEngineRecordModificationTypeOpposite, 
-                       _CKTabIndentAtDepth, _CKTernaryFromBOOL, _CKTopLevelUnderlyingErrorCodes, 
-                       _CKTrap, _CKURLSlugsToBundleIDsMap, _CKUnderlyingFunctionErrorKey, 
+                       _CKStringFromCapabilities, _CKStringFromDeviceToDeviceDataPrivacyStatus, 
+                       _CKStringFromDeviceToDeviceEncryptionStatus, _CKStringFromParticipantAcceptanceStatus, 
+                       _CKStringFromParticipantInvitationTokenStatus, _CKStringFromParticipantPermission, 
+                       _CKStringFromParticipantRole, _CKStringFromPartition, _CKStringFromServerEnvironment, 
+                       _CKStringFromShareParticipantSelfRemovalBehavior, _CKStringFromShareParticipantVisibility, 
+                       _CKStringFromWalrusStatus, _CKStringWithArray, _CKStringWithBytes, 
+                       _CKStringWithData, _CKStringWithDate, _CKStringWithDictionary, 
+                       _CKStringWithLimitedArray, _CKStringWithNibbles, _CKStringWithObject, 
+                       _CKStringWithSet, _CKStringsAreBothNilOrEqual, _CKSyncEngineDefaultPriority, 
+                       _CKSyncEngineRecordModificationTypeOpposite, _CKTabIndentAtDepth, 
+                       _CKTernaryFromBOOL, _CKTopLevelUnderlyingErrorCodes, _CKTrap, 
+                       _CKURLSlugsToBundleIDsMap, _CKUnderlyingFunctionErrorKey, 
                        _CKUploadRequestManagerResponseActionErrorUserInfoKey, _CKUploadRequestManagerResponseActionRetryUserInfoKey, 
                        _CKUseSystemInstalledBinariesFuncForSwift, _CKValidSharingURLHostnames, 
                        _CKValidateIndexedArrayKeys, _CKValidateKeyName, _CKValidateRecordArrayValue, 
@@ -2080,7 +2084,8 @@ exports:
                        _kCKAllowAccessDuringBuddyEntitlementKey, _kCKAllowMasqueradingEntitlementKey, 
                        _kCKAllowOnDeviceAssetStreamingKey, _kCKAllowProtectionDataEntitlementKey, 
                        _kCKAllowSetEnvironmentEntitlementKey, _kCKAllowZoneProtectionDataEntitlementKey, 
-                       _kCKAnonymousAccountKey, _kCKAssetChunkLength, _kCKAssociatedApplicationIdentifierKey, 
+                       _kCKAlwaysAllowPublishAssetsKey, _kCKAnonymousAccountKey, 
+                       _kCKAssetChunkLength, _kCKAssociatedApplicationIdentifierKey, 
                        _kCKCDBShareResourceProvider, _kCKCarmelShareURLSlug, _kCKCarmelUnitTestContainerIdentifier, 
                        _kCKChainPrivateKeyFieldName, _kCKClientLogCollectionBotEmail, 
                        _kCKCloudDocsContainerIdentifier, _kCKCloudDocsShareURLSlug, 
@@ -2119,7 +2124,7 @@ exports:
                        _kCKSafariTabGroupsShareURLSlug, _kCKSafariTabGroupsUnitTestContainerIdentifier, 
                        _kCKSetupBaseURLString, _kCKShareDaemonPrefix, _kCKStatusReportNotificationKey, 
                        _kCKSupportServiceEntitlementKey, _kCKSystemMachServiceName, 
-                       _kCKTestClouddMachServiceName, _kCKUserManagerMachServiceName, 
+                       _kCKTestClouddMachServiceName, _kCKURLComponentsScheme, _kCKUserManagerMachServiceName, 
                        _kCKVettingURLSlug, _kCKWillReloadAccountNotificationKey, 
                        _kCKXPCConnectionInterrupted, _kCloudKitKillSwitch, _mmapFileAtPath, 
                        _mmapFileDescriptor, _overrideCKIsRunningInTestHost, _setCKIsRunningInLogger, 

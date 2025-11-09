@@ -3,20 +3,20 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0425E580-BDCD-32AD-A8B5-4F2148E7D529
+    value:           A6999100-6FDB-31E8-B4B9-2FE72AFD1171
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           62440F29-6D8A-3E47-B118-0EC44B5B9B98
+    value:           F2483E39-1693-301E-B442-E1A35459A318
 install-name:    '/System/Library/PrivateFrameworks/VideoSubscriberAccountUI.framework/Versions/A/VideoSubscriberAccountUI'
-current-version: 453.10.10
+current-version: 453.20.8
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _VSAppSettingsFacadeAppsDidChangeNotification, _VSWLKAppInstallationOperationNotificationUserInfoAppAdamIDKey, 
                        _VSWLKAppInstallationOperationNotificationUserInfoInstallProgressKey, 
                        _VSWLKAppInstallationOperationProgressDidChange, _kVSDeveloperTwoCharCode ]
-    objc-classes:    [ VSAMSStorefrontFetchAllOperation, VSAppDescription, VSAppSettingsFacade, 
-                       VSAppSettingsViewModel, VSFetchAllSupportedAppsOperation, 
+    objc-classes:    [ VSACAccount, VSAMSStorefrontFetchAllOperation, VSAppDescription, 
+                       VSAppSettingsFacade, VSAppSettingsViewModel, VSFetchAllSupportedAppsOperation, 
                        VSFontCenter, VSIdentityProviderFetchAllOperation, VSIdentityProviderFetchAppsOperation, 
                        VSIdentityProviderFetchOperation, VSIdentityProviderFilter, 
                        VSIdentityProviderRequest, VSIdentityProviderRequestManager, 

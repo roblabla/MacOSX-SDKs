@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E77FA5AE-2FE0-3A29-BAD1-75CDA84B0F94
+    value:           23773C7D-7BF3-3EC2-9685-CE246B6971C1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5E27BF29-A08B-388B-8CC8-A94918618A42
+    value:           F54F323C-04CE-3E21-A1EF-542EFDFACEE6
 install-name:    '/usr/lib/libNFC_Comet.dylib'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

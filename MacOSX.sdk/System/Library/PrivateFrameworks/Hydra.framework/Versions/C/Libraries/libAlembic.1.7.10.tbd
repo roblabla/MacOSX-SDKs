@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0EB1E60A-9739-363E-9446-C3CBAAC70B66
+    value:           142572DE-CFB7-336B-9B84-BF026470C41D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0246F233-E082-39FF-9D58-17528CDAA0C1
+    value:           DD93DF24-B4BF-393A-9490-BBE08C065AB7
 install-name:    '/System/Library/PrivateFrameworks/Hydra.framework/Versions/C/Libraries/libAlembic.1.7.10.dylib'
 current-version: 1.7.10
 compatibility-version: 1.7

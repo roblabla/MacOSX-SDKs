@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F1A48017-E9DB-3220-B28E-4BDB6399D9CF
+    value:           E5856EC8-D48F-3108-80C2-9DCEB8094347
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5E5C9775-7E67-3A5A-A6D8-FAE15396C98D
+    value:           8E5FD5A1-0BCA-38C1-9B6D-0C8CEC2AF6B8
 install-name:    '/System/Library/PrivateFrameworks/SiriSetup.framework/Versions/A/SiriSetup'
 swift-abi-version: 7
 exports:

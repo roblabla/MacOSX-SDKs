@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FDBB37FA-1B95-349D-9956-61CF1EC520A4
+    value:           E5B2ADBB-A350-3D1C-A8DD-13B05A02ECA6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           83315C05-231E-33CB-9317-7A5A2782519C
+    value:           0E0A8647-E77C-3DBA-84B3-FF40CBA80C85
 install-name:    '/System/Library/PrivateFrameworks/TemplateKit.framework/Versions/A/TemplateKit'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

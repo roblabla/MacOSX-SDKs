@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0E2F9DC9-0806-3712-B2B8-19E99AB26CFA
+    value:           E19CD995-DBCE-3226-B5A1-A7B33A2A6A0F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A100F8DD-740D-3CB8-9CB7-326CCD681DF6
+    value:           85C189A5-477D-3BC8-841C-6BDC4E819774
 install-name:    '/System/Library/PrivateFrameworks/PostSiriEngagement.framework/Versions/A/PostSiriEngagement'
 swift-abi-version: 7
 exports:
@@ -646,21 +646,20 @@ exports:
                        '_$s18PostSiriEngagement25AbstractActivityCollectorCMn', '_$s18PostSiriEngagement25AbstractActivityCollectorCMo', 
                        '_$s18PostSiriEngagement25AbstractActivityCollectorCMu', '_$s18PostSiriEngagement25AbstractActivityCollectorCN', 
                        '_$s18PostSiriEngagement25AbstractActivityCollectorCfD', '_$s18PostSiriEngagement25AbstractActivityCollectorCfd', 
-                       '_$s18PostSiriEngagement25ActivityMetadataConstantsV011kCFActivityE11INIntentKeySSvau', 
-                       '_$s18PostSiriEngagement25ActivityMetadataConstantsV011kCFActivityE11INIntentKeySSvgZ', 
-                       '_$s18PostSiriEngagement25ActivityMetadataConstantsV011kCFActivityE11INIntentKeySSvpZ', 
-                       '_$s18PostSiriEngagement25ActivityMetadataConstantsV011kCFActivityE19INIntentResponseKeySSvau', 
-                       '_$s18PostSiriEngagement25ActivityMetadataConstantsV011kCFActivityE19INIntentResponseKeySSvgZ', 
-                       '_$s18PostSiriEngagement25ActivityMetadataConstantsV011kCFActivityE19INIntentResponseKeySSvpZ', 
-                       '_$s18PostSiriEngagement25ActivityMetadataConstantsV011kCFActivityE20IntentSynapseTypeKeySSvau', 
-                       '_$s18PostSiriEngagement25ActivityMetadataConstantsV011kCFActivityE20IntentSynapseTypeKeySSvgZ', 
-                       '_$s18PostSiriEngagement25ActivityMetadataConstantsV011kCFActivityE20IntentSynapseTypeKeySSvpZ', 
-                       '_$s18PostSiriEngagement25ActivityMetadataConstantsV011kCFActivityE28IntentResponseSynapseTypeKeySSvau', 
-                       '_$s18PostSiriEngagement25ActivityMetadataConstantsV011kCFActivityE28IntentResponseSynapseTypeKeySSvgZ', 
-                       '_$s18PostSiriEngagement25ActivityMetadataConstantsV011kCFActivityE28IntentResponseSynapseTypeKeySSvpZ', 
-                       '_$s18PostSiriEngagement25ActivityMetadataConstantsVACycfC', 
-                       '_$s18PostSiriEngagement25ActivityMetadataConstantsVMa', '_$s18PostSiriEngagement25ActivityMetadataConstantsVMn', 
-                       '_$s18PostSiriEngagement25ActivityMetadataConstantsVN', '_$s18PostSiriEngagement25CalendarActivityCollectorC011kCFCalendareF10IdentifierSSvg', 
+                       '_$s18PostSiriEngagement25ActivityMetadataConstantsO011kCFActivityE11INIntentKeySSvau', 
+                       '_$s18PostSiriEngagement25ActivityMetadataConstantsO011kCFActivityE11INIntentKeySSvgZ', 
+                       '_$s18PostSiriEngagement25ActivityMetadataConstantsO011kCFActivityE11INIntentKeySSvpZ', 
+                       '_$s18PostSiriEngagement25ActivityMetadataConstantsO011kCFActivityE19INIntentResponseKeySSvau', 
+                       '_$s18PostSiriEngagement25ActivityMetadataConstantsO011kCFActivityE19INIntentResponseKeySSvgZ', 
+                       '_$s18PostSiriEngagement25ActivityMetadataConstantsO011kCFActivityE19INIntentResponseKeySSvpZ', 
+                       '_$s18PostSiriEngagement25ActivityMetadataConstantsO011kCFActivityE20IntentSynapseTypeKeySSvau', 
+                       '_$s18PostSiriEngagement25ActivityMetadataConstantsO011kCFActivityE20IntentSynapseTypeKeySSvgZ', 
+                       '_$s18PostSiriEngagement25ActivityMetadataConstantsO011kCFActivityE20IntentSynapseTypeKeySSvpZ', 
+                       '_$s18PostSiriEngagement25ActivityMetadataConstantsO011kCFActivityE28IntentResponseSynapseTypeKeySSvau', 
+                       '_$s18PostSiriEngagement25ActivityMetadataConstantsO011kCFActivityE28IntentResponseSynapseTypeKeySSvgZ', 
+                       '_$s18PostSiriEngagement25ActivityMetadataConstantsO011kCFActivityE28IntentResponseSynapseTypeKeySSvpZ', 
+                       '_$s18PostSiriEngagement25ActivityMetadataConstantsOMa', '_$s18PostSiriEngagement25ActivityMetadataConstantsOMn', 
+                       '_$s18PostSiriEngagement25ActivityMetadataConstantsON', '_$s18PostSiriEngagement25CalendarActivityCollectorC011kCFCalendareF10IdentifierSSvg', 
                        '_$s18PostSiriEngagement25CalendarActivityCollectorC011kCFCalendareF10IdentifierSSvpMV', 
                        '_$s18PostSiriEngagement25CalendarActivityCollectorC018calendarSignalFromE08activity18referenceUISessionSDySSypGSgSo16SAActivityObjectC_AJtFTj', 
                        '_$s18PostSiriEngagement25CalendarActivityCollectorC018calendarSignalFromE08activity18referenceUISessionSDySSypGSgSo16SAActivityObjectC_AJtFTq', 
@@ -874,6 +873,8 @@ exports:
                        '_$s18PostSiriEngagement5DeltaVN', '_$s18PostSiriEngagement5DeltaVSEAAMc', 
                        '_$s18PostSiriEngagement5UtilsC13deltaTBetween8activity17referenceActivityAA5DeltaVSo16SAActivityObjectC_AJtFZ', 
                        '_$s18PostSiriEngagement5UtilsC13deltaTBetween8activity17referenceActivityAA5DeltaVSo16SAActivityObjectC_AJtFZTq', 
+                       '_$s18PostSiriEngagement5UtilsC19deriveEngagmentType4from0b4TaskC005ProtoicG0OSS_tFZ', 
+                       '_$s18PostSiriEngagement5UtilsC19deriveEngagmentType4from0b4TaskC005ProtoicG0OSS_tFZTq', 
                        '_$s18PostSiriEngagement5UtilsC23formulateIntentTypeName06intentgH0S2S_tFZ', 
                        '_$s18PostSiriEngagement5UtilsC23formulateIntentTypeName06intentgH0S2S_tFZTq', 
                        '_$s18PostSiriEngagement5UtilsCACycfC', '_$s18PostSiriEngagement5UtilsCACycfCTq', 

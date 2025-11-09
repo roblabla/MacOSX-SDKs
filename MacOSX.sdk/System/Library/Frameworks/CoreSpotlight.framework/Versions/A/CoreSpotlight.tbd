@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CF1E0ED3-550A-30D6-97FF-834C35D297D9
+    value:           DB1194A8-34D9-347B-8127-7FE714553173
   - target:          x86_64-maccatalyst
-    value:           CF1E0ED3-550A-30D6-97FF-834C35D297D9
+    value:           DB1194A8-34D9-347B-8127-7FE714553173
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3F347BC1-D9E5-3630-8EEC-F764F7ADB2ED
+    value:           EF840981-EAD3-3F0A-ADC9-5EDE61701173
   - target:          arm64e-maccatalyst
-    value:           3F347BC1-D9E5-3630-8EEC-F764F7ADB2ED
+    value:           EF840981-EAD3-3F0A-ADC9-5EDE61701173
 install-name:    '/System/Library/Frameworks/CoreSpotlight.framework/Versions/A/CoreSpotlight'
 swift-abi-version: 7
 exports:
@@ -143,7 +143,7 @@ exports:
                        _MDItemIsGeneralMIDISequence, _MDItemIsLikelyJunk, _MDItemIsLocal, 
                        _MDItemIsPartiallyDownloaded, _MDItemIsPlaceholder, _MDItemIsProResVideo, 
                        _MDItemIsReaderView, _MDItemIsShared, _MDItemIsTrashed, _MDItemIsUploaded, 
-                       _MDItemIsUploading, _MDItemIsZombie, _MDItemKeySignature, 
+                       _MDItemIsUploading, _MDItemIsWebClip, _MDItemIsZombie, _MDItemKeySignature, 
                        _MDItemKeywords, _MDItemKind, _MDItemLPMediaPaths, _MDItemLabelID, 
                        _MDItemLabelIcon, _MDItemLabelKind, _MDItemLabelUUID, _MDItemLanguages, 
                        _MDItemLastEditorIdentifier, _MDItemLastEditorName, _MDItemLastMotionActivityState, 

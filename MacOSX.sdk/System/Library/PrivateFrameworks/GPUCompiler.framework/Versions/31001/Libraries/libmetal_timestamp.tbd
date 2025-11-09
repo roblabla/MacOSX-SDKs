@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           79EA3228-517D-366A-8D0E-73FF3707CD30
+    value:           5F055ADF-AC2E-34EE-98AC-84DFF45E9561
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D0869D14-DBE7-31A3-881D-6D88827B4CBB
+    value:           445636A1-F4B9-3AFF-8545-23B99DF6B278
 install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/31001/Libraries/libmetal_timestamp.dylib'
-current-version: 31001.255.6
+current-version: 31001.255.2
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _getMetalTimeStamp ]

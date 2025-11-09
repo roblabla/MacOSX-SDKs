@@ -3,17 +3,17 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4573BDD5-4817-3D26-B6A7-38AAE653FCBC
+    value:           632C478C-AAF6-3330-AA8E-0D0FCA4C6237
   - target:          x86_64-maccatalyst
-    value:           4573BDD5-4817-3D26-B6A7-38AAE653FCBC
+    value:           632C478C-AAF6-3330-AA8E-0D0FCA4C6237
   - target:          arm64-macos
-    value:           B695C46E-649C-3047-AF7D-ED475E37DE56
+    value:           F71DA09E-609F-3C9A-95BF-22B22CFAD5A5
   - target:          arm64-maccatalyst
-    value:           B695C46E-649C-3047-AF7D-ED475E37DE56
+    value:           F71DA09E-609F-3C9A-95BF-22B22CFAD5A5
   - target:          arm64e-macos
-    value:           B4352C72-0618-3135-B375-BFF70DB8C3F2
+    value:           471DA066-B65F-36B1-93B7-243C71F8838B
   - target:          arm64e-maccatalyst
-    value:           B4352C72-0618-3135-B375-BFF70DB8C3F2
+    value:           471DA066-B65F-36B1-93B7-243C71F8838B
 install-name:    '/usr/lib/system/libmacho.dylib'
 current-version: 1001.2
 parent-umbrella:

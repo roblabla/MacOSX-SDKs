@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C4D6D29E-61AB-3488-97BF-DCD5A1D92B86
+    value:           BF55CD90-469C-39F1-BD05-1D3E3DB73FFE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F691B640-C08C-37D1-B34E-7173D0F64276
+    value:           EA0BE399-33D6-3BED-8393-A1E40E1BC0F2
 install-name:    '/System/Library/PrivateFrameworks/NeutrinoKit.framework/Versions/A/NeutrinoKit'
-current-version: 511.0.170
+current-version: 520.0.240
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _NSStringFromCATransform3D, _NUBoundingRectForRotatedRect, 

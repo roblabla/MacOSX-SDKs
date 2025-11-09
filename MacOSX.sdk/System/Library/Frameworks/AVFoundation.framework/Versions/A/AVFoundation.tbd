@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           13386466-6E53-3FA3-B431-CF6C44D6EDA8
+    value:           59803F12-E14D-3BA6-862E-93066F9B08F3
   - target:          x86_64-maccatalyst
-    value:           13386466-6E53-3FA3-B431-CF6C44D6EDA8
+    value:           59803F12-E14D-3BA6-862E-93066F9B08F3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E70564DB-BA3D-3552-9F95-1108592A63AF
+    value:           0797D98A-3B4B-3474-9BE2-3D4746AFFC40
   - target:          arm64e-maccatalyst
-    value:           E70564DB-BA3D-3552-9F95-1108592A63AF
+    value:           0797D98A-3B4B-3474-9BE2-3D4746AFFC40
 install-name:    '/System/Library/Frameworks/AVFoundation.framework/Versions/A/AVFoundation'
 current-version: 2
 reexported-libraries:
@@ -33,17 +33,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2AA9F239-8002-34FC-AE29-DE8BF568AFCF
+    value:           E47E5209-3C28-3B31-B87E-B4323EFA6F19
   - target:          x86_64-maccatalyst
-    value:           2AA9F239-8002-34FC-AE29-DE8BF568AFCF
+    value:           E47E5209-3C28-3B31-B87E-B4323EFA6F19
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3F5512A4-C4DD-367C-A253-183621CB11E3
+    value:           CCCD4330-DEC6-3B0F-945D-74ECB265DEE5
   - target:          arm64e-maccatalyst
-    value:           3F5512A4-C4DD-367C-A253-183621CB11E3
+    value:           CCCD4330-DEC6-3B0F-945D-74ECB265DEE5
 install-name:    '/System/Library/PrivateFrameworks/AVFCapture.framework/Versions/A/AVFCapture'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -316,17 +316,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CCEA83EE-4D33-3497-A05F-CDF4F12E0BCD
+    value:           DD0FCBD9-7E36-362C-9CCF-CA9716F98530
   - target:          x86_64-maccatalyst
-    value:           CCEA83EE-4D33-3497-A05F-CDF4F12E0BCD
+    value:           DD0FCBD9-7E36-362C-9CCF-CA9716F98530
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           56B4E65C-C5BB-3A7A-A8FD-DAF4FBD519C4
+    value:           86C3D6D5-461E-33DE-9191-6C571EB3D57B
   - target:          arm64e-maccatalyst
-    value:           56B4E65C-C5BB-3A7A-A8FD-DAF4FBD519C4
+    value:           86C3D6D5-461E-33DE-9191-6C571EB3D57B
 install-name:    '/System/Library/PrivateFrameworks/AVFCore.framework/Versions/A/AVFCore'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

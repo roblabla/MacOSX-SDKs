@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0C98F0BD-FF68-316A-AD1B-37C8EE660845
+    value:           E4577563-128D-32B5-AA5E-D35A688249BF
   - target:          x86_64-maccatalyst
-    value:           0C98F0BD-FF68-316A-AD1B-37C8EE660845
+    value:           E4577563-128D-32B5-AA5E-D35A688249BF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ED786EE3-EBC5-30C4-817B-08D80016EA79
+    value:           9AEAF5A3-49FD-3DDF-B573-7988076F82A4
   - target:          arm64e-maccatalyst
-    value:           ED786EE3-EBC5-30C4-817B-08D80016EA79
+    value:           9AEAF5A3-49FD-3DDF-B573-7988076F82A4
 install-name:    '/System/Library/PrivateFrameworks/DiagnosticExtensions.framework/Versions/A/DiagnosticExtensions'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

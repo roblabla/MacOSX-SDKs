@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           421C68EB-392F-37EB-B919-42DAB75A2160
+    value:           A8120DDD-01A8-3842-8CD0-388A14B38062
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8D19BFA4-C966-304A-9A6F-AA66C9D316FA
+    value:           18F10319-28FF-38F6-9A27-4C02380F3F9D
 install-name:    '/System/Library/Frameworks/TWAIN.framework/Versions/A/TWAIN'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AE5B0D8D-D3DD-3E69-AA56-2FCC12930EFC
+    value:           F18938B2-FE56-3C5B-87F7-53171B995D39
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C7531A25-5F5D-3E35-BB2E-902080B6F7D9
+    value:           65C6EA19-07BC-3DF5-89E8-BFCF263E84B6
 install-name:    '/System/Library/PrivateFrameworks/DataDetectors.framework/Versions/A/DataDetectors'
-current-version: 441
+current-version: 441.1
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DDActionsManagerDidRunActionNotification, _DDActionsManagerWillRunActionNotification, 

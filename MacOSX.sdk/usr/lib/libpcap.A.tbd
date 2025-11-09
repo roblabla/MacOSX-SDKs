@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           14265FF8-C5E3-31BE-A6FD-BE15D9EAC95B
+    value:           7CE22E07-2EE8-396E-9496-2E53631D1EB3
   - target:          x86_64-maccatalyst
-    value:           14265FF8-C5E3-31BE-A6FD-BE15D9EAC95B
+    value:           7CE22E07-2EE8-396E-9496-2E53631D1EB3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B9434D82-D082-3C63-812E-67B2AEA08428
+    value:           CB4B666B-37FC-3E04-9138-5A6E7DB6D506
   - target:          arm64e-maccatalyst
-    value:           B9434D82-D082-3C63-812E-67B2AEA08428
+    value:           CB4B666B-37FC-3E04-9138-5A6E7DB6D506
 install-name:    '/usr/lib/libpcap.A.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

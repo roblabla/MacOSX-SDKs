@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BE3E0F69-A9DA-307F-9058-5C396BF94FF5
+    value:           A261BA2E-9A33-3D1B-B72D-7B3428082784
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           63534B1B-3F90-3B54-A6F4-75D8983082C8
+    value:           ECC9A235-BBDA-3815-A7F6-1B09E4398000
 install-name:    '/System/Library/PrivateFrameworks/AOSKit.framework/Versions/A/AOSKit'
 current-version: 282
 exports:

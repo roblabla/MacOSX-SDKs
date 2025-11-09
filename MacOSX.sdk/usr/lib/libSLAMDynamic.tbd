@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           426B35F6-BF18-3E0A-8C01-39A38F198A93
+    value:           80379A69-F661-3605-8ECF-36176C47365C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           518AC3A0-619E-39F2-9589-A551F59E7672
+    value:           795755D6-089E-3A03-BDAB-8B4C065B60E1
 install-name:    '/usr/lib/libSLAMDynamic.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

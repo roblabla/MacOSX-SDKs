@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4F7F6852-55E9-31FC-8853-01CC01AE1366
+    value:           AFBB3401-1525-3083-A354-5F338EFB9D40
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           62B980AC-CA9C-3DDB-A008-DC916BC1461F
+    value:           0995CB07-99FC-30E1-B128-E334FE6AB594
 install-name:    '/System/Library/PrivateFrameworks/WiFiPolicy.framework/Versions/A/WiFiPolicy'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -117,8 +117,9 @@ exports:
                        WiFiUsageLQMWindowAnalysisNetworkQuality, WiFiUsageLQMWindowAnalysisRoaming, 
                        WiFiUsageLinkSession, WiFiUsageMonitor, WiFiUsageNetworkDetails, 
                        WiFiUsageNetworkSession, WiFiUsageParsedBeacon, WiFiUsagePrivacyFilter, 
-                       WiFiUsageRangingRttSample, WiFiUsageRangingSession, WiFiUsageSession, 
-                       WiFiUsageSessionLQM, WiFiUsageSessionPingPongStats, WiFiUsageSoftApSession, 
-                       WiFiUsageUserSession, WiFiWalletPass, WiFiWalletSource ]
+                       WiFiUsageRangingRttSample, WiFiUsageRangingSession, WiFiUsageRealTimeCoexSession, 
+                       WiFiUsageSession, WiFiUsageSessionLQM, WiFiUsageSessionPingPongStats, 
+                       WiFiUsageSoftApSession, WiFiUsageUserSession, WiFiWalletPass, 
+                       WiFiWalletSource ]
     objc-ivars:      [ WFLoggerBase._ctxt, WFLoggerBase._dispatchQueue, WFLoggerBase._internalInstall ]
 ...

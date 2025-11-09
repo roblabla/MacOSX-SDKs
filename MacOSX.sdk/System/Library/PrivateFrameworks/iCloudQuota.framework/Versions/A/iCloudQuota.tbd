@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           06A777A8-02A4-379E-B6A8-F080BCFCAF88
+    value:           C9DAB594-0263-3A91-8D38-11B3E868B768
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D76F55CA-F274-398E-A0D7-CB7E0867A64F
+    value:           599609FD-18FB-3B4B-9396-11B24C677C1A
 install-name:    '/System/Library/PrivateFrameworks/iCloudQuota.framework/Versions/A/iCloudQuota'
 swift-abi-version: 7
 exports:
@@ -28,36 +28,40 @@ exports:
                        _ICQAccountQuotaUpdateOfferURLKey, _ICQActionParameterDynamicUIRouteKey, 
                        _ICQActionParameterOpenURLKey, _ICQActionParameterPurchaseAttributionKey, 
                        _ICQActionParameterServerLinkIdentifierKey, _ICQActionParameterURLKey, 
-                       _ICQActionParameterURLQueryParametersKey, _ICQCreateError, 
-                       _ICQCreateErrorWithMessage, _ICQCurrentDefaultOfferChangedNotification, 
+                       _ICQActionParameterURLQueryParametersKey, _ICQChangeStoragePlanPreferencesURL, 
+                       _ICQCreateError, _ICQCreateErrorWithMessage, _ICQCurrentDefaultOfferChangedNotification, 
                        _ICQCurrentOfferChangedNotification, _ICQCurrentPremiumOfferChangedNotification, 
                        _ICQDaemonBundleIdentifierKey, _ICQDaemonContextDictionaryKey, 
                        _ICQDomain, _ICQEngagementBundleIdKey, _ICQEngagementEventTypeKey, 
                        _ICQEngagementICQUIBundleId, _ICQEngagementNewAppleOneStoragePlanKey, 
-                       _ICQEngagementNewiCloudStoragePlanKey, _ICQErrorDomain, _ICQFetchOffersReasonAccountUpdate, 
-                       _ICQFetchOffersReasonCacheDelete, _ICQFetchOffersReasonDeviceNameChange, 
-                       _ICQFetchOffersReasonDevicePairing, _ICQFetchOffersReasonFallBelowLowDisk, 
-                       _ICQFetchOffersReasonFallBelowNearLowDisk, _ICQFetchOffersReasonFallBelowVeryLowDisk, 
-                       _ICQFetchOffersReasonHeartBeat, _ICQFetchOffersReasonICPLStateChanged, 
-                       _ICQFetchOffersReasonICQCTL, _ICQFetchOffersReasonLogin, _ICQFetchOffersReasonNewPushToken, 
+                       _ICQEngagementNewiCloudStoragePlanKey, _ICQErrorDomain, _ICQFamilySetupPreferencesURL, 
+                       _ICQFetchOffersReasonAccountUpdate, _ICQFetchOffersReasonCacheDelete, 
+                       _ICQFetchOffersReasonDeviceNameChange, _ICQFetchOffersReasonDevicePairing, 
+                       _ICQFetchOffersReasonFallBelowLowDisk, _ICQFetchOffersReasonFallBelowNearLowDisk, 
+                       _ICQFetchOffersReasonFallBelowVeryLowDisk, _ICQFetchOffersReasonHeartBeat, 
+                       _ICQFetchOffersReasonICPLStateChanged, _ICQFetchOffersReasonICQCTL, 
+                       _ICQFetchOffersReasonLogin, _ICQFetchOffersReasonNewPushToken, 
                        _ICQFetchOffersReasonOfferReset, _ICQFetchOffersReasonPhotosOptimizeStateChanged, 
                        _ICQFetchOffersReasonPushTeardown, _ICQFetchOffersReasonReboot, 
                        _ICQFetchOffersReasonRefreshOfferDetails, _ICQFetchOffersReasonRegistrationHeartbeat, 
                        _ICQFetchOffersReasonRiseAboveDesiredDisk, _ICQFetchOffersReasonRiseAboveLowDisk, 
                        _ICQFetchOffersReasonUnknown, _ICQFollowupNotifyingAppIdKey, 
                        _ICQLogDataTaskComplete, _ICQLogOfferDetailsForServerDictionary, 
+                       _ICQManageStoragePreferencesURL, _ICQManageStorageSystemSettingsURL, 
                        _ICQOpenURL, _ICQOpportunityBubbleDetailsActionsKey, _ICQOpportunityBubbleDetailsBtnActParamsKey, 
                        _ICQOpportunityBubbleDetailsBtnActionKey, _ICQOpportunityBubbleDetailsBtnDefaultKey, 
                        _ICQOpportunityBubbleDetailsBtnIdKey, _ICQOpportunityBubbleDetailsBtnTitleKey, 
                        _ICQOpportunityBubbleDetailsImageDetailsKey, _ICQOpportunityBubbleDetailsMessageKey, 
                        _ICQOpportunityBubbleDetailsTitleKey, _ICQOpportunityBubbleHomePlacement, 
                        _ICQOpportunityBubblePhotosPlacement, _ICQOpportunityBubbleServiceType, 
-                       _ICQPrivateNetworkJourneyIdentifier, _ICQQuotaDidChangeNotification, 
-                       _ICQRetryAfterDateKey, _ICQRetryAfterDelayKey, _ICQTipPointerConfigurationBottom, 
-                       _ICQTipPointerConfigurationBottomLeft, _ICQTipPointerConfigurationBottomRight, 
-                       _ICQTipPointerConfigurationNone, _ICQTipPointerConfigurationTop, 
-                       _ICQTipPointerConfigurationTopLeft, _ICQTipPointerConfigurationTopRight, 
-                       _ICQUpdateOfferKeyIsZeroAction, _ICQUsedDiskSpaceForVolume, 
+                       _ICQPrimaryPaymentPreferencesURL, _ICQPrivateNetworkJourneyIdentifier, 
+                       _ICQQuotaDidChangeNotification, _ICQRetryAfterDateKey, _ICQRetryAfterDelayKey, 
+                       _ICQRootPreferencesURL, _ICQStorageUpgradePreferencesURL, 
+                       _ICQTipPointerConfigurationBottom, _ICQTipPointerConfigurationBottomLeft, 
+                       _ICQTipPointerConfigurationBottomRight, _ICQTipPointerConfigurationNone, 
+                       _ICQTipPointerConfigurationTop, _ICQTipPointerConfigurationTopLeft, 
+                       _ICQTipPointerConfigurationTopRight, _ICQUpdateOfferKeyIsZeroAction, 
+                       _ICQUsedDiskSpaceForVolume, _ICQiCloudBackupPreferencesURL, 
                        __ICQAccountDataclassQuota, __ICQActionForServerActionString, 
                        __ICQActionForString, __ICQActionParametersForServerActionParameters, 
                        __ICQAlertSpecificationForServerDict, __ICQAppendServerMessageFormatAndLinks, 
@@ -88,12 +92,9 @@ exports:
                        __ICQStringFromDictionaryKey, __ICQUpgradeCompletePageIdentifier, 
                        __ICQUpgradeFailureNetworkPageIdentifier, __ICQUpgradeFailurePageIdentifier, 
                        __ICQUpgradeOfferPageIdentifier, __ICQUpgradeSuccessWiFiPageIdentifier, 
-                       _kChangeStoragePlanPreferencesURL, _kFamilySetupPreferencesURL, 
                        _kICQOpportunitySheetDefaultKey, _kICQOpportunitySheetMessageFormat, 
                        _kICQOpportunitySheetMessageKey, _kICQOpportunitySheetUnlimitedKey, 
-                       _kICQPrefEnableUnifiedMessagingKey, _kManageStoragePreferencesURL, 
-                       _kManageStorageSystemSettingsURL, _kPrimaryPaymentPreferencesURL, 
-                       _kRootPreferencesURL, _kStorageUpgradePreferencesURL, _kiCloudBackupPreferencesURL ]
+                       _kICQPrefEnableUnifiedMessagingKey ]
     objc-classes:    [ ICQAppCloudStorage, ICQAppCloudStorageCache, ICQAsyncValueLoader, 
                        ICQBackupDevice, ICQBackupDeviceGroup, ICQBackupInfo, ICQCloudStorageDataController, 
                        ICQCloudStorageSummary, ICQCloudStorageSummaryCache, ICQDaemonAlert, 

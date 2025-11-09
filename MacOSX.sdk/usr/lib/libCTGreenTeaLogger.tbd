@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C6F58010-681A-3294-8972-B54B134ED14F
+    value:           F6011F07-F625-3846-B0C5-0418E107E2CC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9D961069-CE2A-3EE0-96A3-9D196ED6741B
+    value:           B726DD8D-1728-3844-9039-7847F02D7307
 install-name:    '/usr/lib/libCTGreenTeaLogger.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

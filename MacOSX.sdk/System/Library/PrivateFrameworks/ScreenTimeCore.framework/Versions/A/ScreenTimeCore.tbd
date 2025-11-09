@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DD16DDE6-9205-39F8-ABC5-AED9FA74BF55
+    value:           CB5D4690-384D-3789-94FB-9AC97D79E8CB
   - target:          x86_64-maccatalyst
-    value:           DD16DDE6-9205-39F8-ABC5-AED9FA74BF55
+    value:           CB5D4690-384D-3789-94FB-9AC97D79E8CB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0FE2512D-9BDD-315F-BDB5-EF17535D85F5
+    value:           AB25D050-F32E-3FD1-BCFD-3AAEFF653DDF
   - target:          arm64e-maccatalyst
-    value:           0FE2512D-9BDD-315F-BDB5-EF17535D85F5
+    value:           AB25D050-F32E-3FD1-BCFD-3AAEFF653DDF
 install-name:    '/System/Library/PrivateFrameworks/ScreenTimeCore.framework/Versions/A/ScreenTimeCore'
-current-version: 502.1.8
+current-version: 502.2.3
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -91,7 +91,9 @@ exports:
                        _STUserNotificationAskToManageContactsResponseReceivedDontApprove, 
                        _STUserNotificationWeeklyReportCategoryIdentifier, _STUserNotificationWeeklyReportPrimaryActionIdentifier, 
                        _STXPCSafeErrorFromCoreDataError ]
-    objc-classes:    [ STAdminPersistenceController, STAppInfo, STAppInfoCache, STAppLimitWarningUserNotificationContext, 
+    objc-classes:    [ STAdminPersistenceController, STAgePresetsResetCoreAnalyticsEvent, 
+                       STAgePresetsSkippedCoreAnalyticsEvent, STAgePresetsViewedCoreAnalyticsEvent, 
+                       STAppInfo, STAppInfoCache, STAppLimitWarningUserNotificationContext, 
                        STAskClient, STAskForTimeApplicationResource, STAskForTimeApprovedResponseReceivedUserNotificationContext, 
                        STAskForTimeCategoryResource, STAskForTimeClient, STAskForTimeNotApprovedResponseReceivedUserNotificationContext, 
                        STAskForTimeRequest, STAskForTimeRequestReceivedUserNotificationContext, 
@@ -122,7 +124,9 @@ exports:
                        STLocalOrganization, STLocationSharingModificationClient, 
                        STLocations, STLog, STManagementState, STManagementStateObserver, 
                        STOpaquePasscode, STPINController, STPersistenceConfiguration, 
-                       STPersistenceController, STPresetsClient, STPresetsConfiguration, 
+                       STPersistenceController, STPresetsAgeSelectedCoreAnalyticsEvent, 
+                       STPresetsChooseAgeTappedCoreAnalyticsEvent, STPresetsClient, 
+                       STPresetsConfiguration, STPresetsEnableRestrictionsCoreAnalyticsEvent, 
                        STReconciler, STRestrictionsCoreAnalyticsEvent, STScreenTimeAgentPrivateConnection, 
                        STScreenTimeCoreBundle, STScreenTimeEnabledUserNotificationContext, 
                        STScreenTimeEnablementCoreAnalyticsEvent, STScreenTimeSettings, 
@@ -132,6 +136,7 @@ exports:
                        STUsageCountedItem, STUsageDetailItem, STUsageReporter, STUsageRequest, 
                        STUsageTimedItem, STUsageTrustIdentifier, STUserData, STUserDescription, 
                        STUserDeviceState, STUserID, STVersionVector, STViewAllActivityCoreAnalyticsEvent, 
-                       STWebUsageController, STWeeklyReportUserNotificationContext, 
-                       STXPCRemoteObjectProxy, STiCloudOrganization ]
+                       STWebContentFilterCoreAnalyticsEvent, STWebUsageController, 
+                       STWeeklyReportUserNotificationContext, STXPCRemoteObjectProxy, 
+                       STiCloudOrganization ]
 ...

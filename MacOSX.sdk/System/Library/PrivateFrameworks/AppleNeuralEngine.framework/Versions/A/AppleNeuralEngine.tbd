@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6F09890C-7558-3650-A2FC-01CC08A3670E
+    value:           8E681290-38AE-3D44-87DD-AC8E70144094
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A3ED13B7-41A2-31CF-B0E7-D6E9253B109A
+    value:           17ABDF53-9E7F-3681-9B1E-EB7619527D78
 install-name:    '/System/Library/PrivateFrameworks/AppleNeuralEngine.framework/Versions/A/AppleNeuralEngine'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

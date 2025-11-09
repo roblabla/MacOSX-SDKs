@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           293586E9-5802-3F3B-8527-50394C46826B
+    value:           2A931E0A-5F5A-35CC-982C-2A7D010E9C78
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D0544ADB-2510-36C8-BF7E-0E0D2C763F02
+    value:           B30A5A00-631E-36B5-A7C8-47D38F501569
 install-name:    '/System/Library/PrivateFrameworks/MobileObliteration.framework/Versions/A/MobileObliteration'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

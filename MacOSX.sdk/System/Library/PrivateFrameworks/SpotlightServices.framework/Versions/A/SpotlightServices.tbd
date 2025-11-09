@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5F7A458D-D7C5-3F34-A15D-076CD67756D0
+    value:           B8EA5ED9-B23F-3C98-BC2E-756DAD398AA4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C28D1F56-25C8-321E-8C7C-6EFD9C836B40
+    value:           EFFDD077-2334-33BD-A14F-9379A8905421
 install-name:    '/System/Library/PrivateFrameworks/SpotlightServices.framework/Versions/A/SpotlightServices'
-current-version: 2230.2
+current-version: 2230.7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _MDItemAppStoreHasMetadataPlist, _MDItemTextContentConfidenceHigh, 
@@ -177,7 +177,8 @@ exports:
                        _SSCompactRankingAttrsGetValue, _SSCompactRankingAttrsUpdateFloat, 
                        _SSCompactRankingAttrsUpdateInt128, _SSCompactRankingAttrsUpdateInt64Array, 
                        _SSCompactRankingAttrsUpdateInt64ArrayFromNSArray, _SSCompactRankingAttrsUpdateValue, 
-                       _SSContactsBundleIdentifier, _SSCreateAsTypedSuggestion, _SSDefaultQueryParseResultsForQueryString, 
+                       _SSContactsBundleIdentifier, _SSCoreSuggestionsBundleIdentifier, 
+                       _SSCreateAsTypedSuggestion, _SSDefaultQueryParseResultsForQueryString, 
                        _SSDefaultsGetState, _SSDefaultsSetBullseyeForTesting, _SSDemoteNonExactMatchBundle, 
                        _SSDisplayLateServerSuggestions, _SSDisplayNameAdditionsQuery, 
                        _SSDisplayNameFuzzyQuery, _SSDocumentsBundleIdentifier, _SSEnableLocalDetailText, 

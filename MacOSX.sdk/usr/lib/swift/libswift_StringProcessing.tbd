@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E19EB443-F0EC-3A7A-A852-37DC55A065DE
+    value:           43089DDC-0646-3C3A-AB3F-38CDE2313587
   - target:          x86_64-maccatalyst
-    value:           E19EB443-F0EC-3A7A-A852-37DC55A065DE
+    value:           43089DDC-0646-3C3A-AB3F-38CDE2313587
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           65A6E253-6FB1-330F-BBFC-C9572C216770
+    value:           6C664260-0245-31B8-9202-71D9D27A1F2C
   - target:          arm64e-maccatalyst
-    value:           65A6E253-6FB1-330F-BBFC-C9572C216770
+    value:           6C664260-0245-31B8-9202-71D9D27A1F2C
 install-name:    '/usr/lib/swift/libswift_StringProcessing.dylib'
 current-version: 0
 swift-abi-version: 7

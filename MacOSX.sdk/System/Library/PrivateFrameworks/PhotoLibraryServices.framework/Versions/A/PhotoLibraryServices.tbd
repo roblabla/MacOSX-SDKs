@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C447555E-87FC-3BBA-9397-8B9CF17C363A
+    value:           0BD782D8-3B0A-3D23-AB59-91DA455CB8BA
   - target:          x86_64-maccatalyst
-    value:           C447555E-87FC-3BBA-9397-8B9CF17C363A
+    value:           0BD782D8-3B0A-3D23-AB59-91DA455CB8BA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BA342FF6-4472-3C14-8C59-72740C300BC4
+    value:           EFD33EA0-5534-3E5C-AD31-F25C06236F7D
   - target:          arm64e-maccatalyst
-    value:           BA342FF6-4472-3C14-8C59-72740C300BC4
+    value:           EFD33EA0-5534-3E5C-AD31-F25C06236F7D
 install-name:    '/System/Library/PrivateFrameworks/PhotoLibraryServices.framework/Versions/A/PhotoLibraryServices'
-current-version: 511.0.170
+current-version: 520.0.240
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -128,15 +128,16 @@ exports:
                        _PLDefaultLocationValue, _PLDeferredLogInitializeServer, _PLDeferredLogRead, 
                        _PLDeferredLoggingInitializeClient, _PLDelayedSearchIndexUpdateInsertDetectedFaceKey, 
                        _PLDelayedSearchIndexUpdateInsertPersonKey, _PLDeleteGuestAssetsInLibraryWithManagedObjectContext, 
-                       _PLDeregisterBackgroundMigrationLibraryURL, _PLDescriptionForBackgroundJobServiceState, 
-                       _PLDescriptionForCriteriaXPCActivityPriority, _PLDescriptionForLocationOfInterestType, 
-                       _PLDescriptionForMemoryMood, _PLDescriptionForPhotosHighlightCategory, 
-                       _PLDescriptionForPhotosHighlightCurationType, _PLDescriptionForPhotosHighlightEnrichmentState, 
-                       _PLDescriptionForPhotosHighlightKind, _PLDescriptionForPhotosHighlightType, 
-                       _PLDescriptionForPhotosHighlightVisibilityState, _PLDescriptionForSharingComposition, 
-                       _PLDescriptionForUpdateProperties, _PLDetectionTraitTypeDescription, 
-                       _PLDetectionTypeDescription, _PLDeviceRestoreMigrationPostProcessingTokenBuild, 
-                       _PLDeviceRestoreMigrationPostProcessingTokenDate, _PLDeviceRestoreMigrationPostProcessingTokenInProgressCounter, 
+                       _PLDemoContentPhotoLibraryTemplatePath, _PLDeregisterBackgroundMigrationLibraryURL, 
+                       _PLDescriptionForBackgroundJobServiceState, _PLDescriptionForCriteriaXPCActivityPriority, 
+                       _PLDescriptionForLocationOfInterestType, _PLDescriptionForMemoryMood, 
+                       _PLDescriptionForPhotosHighlightCategory, _PLDescriptionForPhotosHighlightCurationType, 
+                       _PLDescriptionForPhotosHighlightEnrichmentState, _PLDescriptionForPhotosHighlightKind, 
+                       _PLDescriptionForPhotosHighlightType, _PLDescriptionForPhotosHighlightVisibilityState, 
+                       _PLDescriptionForSharingComposition, _PLDescriptionForUpdateProperties, 
+                       _PLDetectionTraitTypeDescription, _PLDetectionTypeDescription, 
+                       _PLDeviceRestoreMigrationPostProcessingTokenBuild, _PLDeviceRestoreMigrationPostProcessingTokenDate, 
+                       _PLDeviceRestoreMigrationPostProcessingTokenInProgressCounter, 
                        _PLDeviceRestoreMigrationPostProcessingTokenInProgressHistory, 
                        _PLDeviceRestoreMigrationPostProcessingTokenModelVersion, 
                        _PLDeviceRestoreMigrationPostProcessingTokenPID, _PLDeviceRestoreMigrationPostProcessingTokenProcess, 
@@ -151,14 +152,15 @@ exports:
                        _PLEnableJournalRebuild, _PLEnableJournals, _PLEnumerateAnalysisWorkerType, 
                        _PLExclusiveCategoriesIsSupersetOfSearchedCategories, _PLExifColorSpaceFromImageProperties, 
                        _PLExifPixelXDimensionFromImageProperties, _PLExifPixelYDimensionFromImageProperties, 
-                       _PLFaceCropStateDescription, _PLFaceCropTypeDescription, _PLFaceMetadataExtension, 
-                       _PLFaceRegionRequireFixup, _PLFaceTrainingTypeDescription, 
-                       _PLFavoriteScoreWeight, _PLFilePathCPLMasterThumb, _PLFilePathCPLMed, 
-                       _PLFilePathCPLOrig, _PLFilePathDCIMPath, _PLFilePathMasterThumb, 
-                       _PLFilePathPhotoDataPath, _PLFileTypeFromUTType, _PLFilesPlaceholderBundleID, 
-                       _PLFindPhoneInvitationFailureNotification, _PLFinderSyncSizeKey, 
-                       _PLFinishReportiCPLState, _PLFolderMetadataExtension, _PLForegroundMonitorPhotosBGNotification, 
-                       _PLForegroundMonitorPhotosFGNotification, _PLFrequentLocationMaximumCentroidDistanceToBeNearFrequentLocation, 
+                       _PLExtrinsicPhotosPathsOnThisDeviceForDemoBundle, _PLFaceCropStateDescription, 
+                       _PLFaceCropTypeDescription, _PLFaceMetadataExtension, _PLFaceRegionRequireFixup, 
+                       _PLFaceTrainingTypeDescription, _PLFavoriteScoreWeight, _PLFilePathCPLMasterThumb, 
+                       _PLFilePathCPLMed, _PLFilePathCPLOrig, _PLFilePathDCIMPath, 
+                       _PLFilePathMasterThumb, _PLFilePathPhotoDataPath, _PLFileProviderLocalStorageBundleID, 
+                       _PLFileTypeFromUTType, _PLFilesPlaceholderBundleID, _PLFindPhoneInvitationFailureNotification, 
+                       _PLFinderSyncSizeKey, _PLFinishReportiCPLState, _PLFolderMetadataExtension, 
+                       _PLForegroundMonitorPhotosBGNotification, _PLForegroundMonitorPhotosFGNotification, 
+                       _PLFrequentLocationMaximumCentroidDistanceToBeNearFrequentLocation, 
                        _PLFullMethodName, _PLGenericAlbumHashOfSingletonAlbumValues, 
                        _PLGenericChangeNotification, _PLGenericImageNameForExtension, 
                        _PLGetCPLDeviceLibraryConfiguration, _PLGetCoordinatesGeohash, 
@@ -258,10 +260,10 @@ exports:
                        _PLMetadataScoreWeight, _PLMethodNotImplentedException, _PLMigrationActionClassNameTokenSeparator, 
                        _PLMigrationActionUnknowClassName, _PLMigrationContextWellKnownPhotoLibraryIdentifier, 
                        _PLMigrationLibraryBundleKey, _PLMigrationPathManagerKey, 
-                       _PLMobileSlideshowBundleId, _PLModelMigrationActionRegistration_15000, 
-                       _PLModelMigrationActionRegistration_16000, _PLModelMigrationActionRegistration_Background, 
-                       _PLModelMigrationActionRegistration_Repairs, _PLModelMigrationActionRegistration_Staged, 
-                       _PLModelMigrationActionUtilityConvertObjectIDResumeMarkerString, 
+                       _PLMobileDocumentsFileProviderBundleID, _PLMobileSlideshowBundleId, 
+                       _PLModelMigrationActionRegistration_15000, _PLModelMigrationActionRegistration_16000, 
+                       _PLModelMigrationActionRegistration_Background, _PLModelMigrationActionRegistration_Repairs, 
+                       _PLModelMigrationActionRegistration_Staged, _PLModelMigrationActionUtilityConvertObjectIDResumeMarkerString, 
                        _PLModelMigrationActionUtilityIncrementalUpdateLog, _PLModelMigrationActionUtilityIncrementalUpdateSize, 
                        _PLModelMigrationStagedVersions, _PLModelMigrationSubclassesForClass, 
                        _PLModelVersionKey, _PLMomentAggregationScoreFromAggregationScoreType, 
@@ -1154,7 +1156,8 @@ exports:
                        PLModelMigrationAction_ResetSyndication, PLModelMigrationAction_ResetSyndicationAssetSyncToken, 
                        PLModelMigrationAction_ResetVideoDuplicateAssetFromDuplicateAlbums, 
                        PLModelMigrationAction_RevalidateFaceAreaPoints, PLModelMigrationAction_SetDefaultFaceAnalysisVersion, 
-                       PLModelMigrationAction_SetPrivacyStateOnSmartAlbums, PLModelMigrationAction_UpdateDuplicateAssetVisibilityStateMostRelevant, 
+                       PLModelMigrationAction_SetPrivacyStateOnSmartAlbums, PLModelMigrationAction_UnTrashSharedDuplicates, 
+                       PLModelMigrationAction_UpdateDuplicateAssetVisibilityStateMostRelevant, 
                        PLModelMigrationAction_WriteLibraryScopeIsActiveDefaults, 
                        PLModelMigrationAction_updateACVideos, PLModelMigrator, PLModelMigratorLog, 
                        PLModelMigratorRebuildProgressFraction, PLMoment, PLMomentCluster, 
@@ -1284,10 +1287,11 @@ exports:
                        PLAnalyticsLibraryCounters.camera, PLAnalyticsLibraryCounters.duplicateAssetCount, 
                        PLAnalyticsLibraryCounters.duplicateAssetGroupCount, PLAnalyticsLibraryCounters.duplicateSharedLibraryAssetCount, 
                        PLAnalyticsLibraryCounters.faceCount, PLAnalyticsLibraryCounters.favoriteCount, 
-                       PLAnalyticsLibraryCounters.gpsLocationCount, PLAnalyticsLibraryCounters.heifCount, 
-                       PLAnalyticsLibraryCounters.importedByAssetCount, PLAnalyticsLibraryCounters.isActive, 
-                       PLAnalyticsLibraryCounters.jpegCount, PLAnalyticsLibraryCounters.junkCount, 
-                       PLAnalyticsLibraryCounters.livePhotosCount, PLAnalyticsLibraryCounters.nonGuestSavedFromMessagesCount, 
+                       PLAnalyticsLibraryCounters.finderSyncedAssetCount, PLAnalyticsLibraryCounters.gpsLocationCount, 
+                       PLAnalyticsLibraryCounters.heifCount, PLAnalyticsLibraryCounters.importedByAssetCount, 
+                       PLAnalyticsLibraryCounters.isActive, PLAnalyticsLibraryCounters.jpegCount, 
+                       PLAnalyticsLibraryCounters.junkCount, PLAnalyticsLibraryCounters.livePhotosCount, 
+                       PLAnalyticsLibraryCounters.nonGuestSavedFromMessagesCount, 
                        PLAnalyticsLibraryCounters.originalOnTopAssetCount, PLAnalyticsLibraryCounters.otherImagesCount, 
                        PLAnalyticsLibraryCounters.otherMediaCount, PLAnalyticsLibraryCounters.personalLibraryAssetCount, 
                        PLAnalyticsLibraryCounters.photosCount, PLAnalyticsLibraryCounters.portraitCount, 

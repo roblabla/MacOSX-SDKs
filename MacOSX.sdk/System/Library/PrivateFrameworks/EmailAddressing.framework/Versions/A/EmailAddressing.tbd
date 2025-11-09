@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           AE309EE0-4FED-3448-B7F9-3CB8E1422627
+    value:           4B937750-09E3-3363-BF71-FECDC5BF05E8
   - target:          x86_64-maccatalyst
-    value:           AE309EE0-4FED-3448-B7F9-3CB8E1422627
+    value:           4B937750-09E3-3363-BF71-FECDC5BF05E8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AE81E8AD-7742-34F2-807D-D73E2EE41068
+    value:           BCC7B86B-176E-31CA-8B39-F705158F7122
   - target:          arm64e-maccatalyst
-    value:           AE81E8AD-7742-34F2-807D-D73E2EE41068
+    value:           BCC7B86B-176E-31CA-8B39-F705158F7122
 install-name:    '/System/Library/PrivateFrameworks/EmailAddressing.framework/Versions/A/EmailAddressing'
-current-version: 3731.200.110
+current-version: 3731.255.101
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

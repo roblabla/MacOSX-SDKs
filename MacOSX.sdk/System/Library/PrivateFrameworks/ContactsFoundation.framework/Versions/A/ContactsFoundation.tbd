@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A668A7F5-858C-3DB9-94CA-AE558182FAD4
+    value:           CEBAB80F-DBE6-3FE2-95E4-94F363444015
   - target:          x86_64-maccatalyst
-    value:           A668A7F5-858C-3DB9-94CA-AE558182FAD4
+    value:           CEBAB80F-DBE6-3FE2-95E4-94F363444015
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8E47C39D-4D68-3B77-9D20-806B91626A1F
+    value:           AEEEE3F6-FC6F-3161-A8ED-9D35A7406185
   - target:          arm64e-maccatalyst
-    value:           8E47C39D-4D68-3B77-9D20-806B91626A1F
+    value:           AEEEE3F6-FC6F-3161-A8ED-9D35A7406185
 install-name:    '/System/Library/PrivateFrameworks/ContactsFoundation.framework/Versions/A/ContactsFoundation'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

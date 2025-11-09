@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           97B7BC0C-3AAD-3835-AA0E-7A4CB2DF1320
+    value:           F1486603-C4E8-37A5-8D27-5D2D4053E0DC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4DB7867F-32EF-39B0-9ABB-10104183185B
+    value:           2BB4B725-1C39-32AD-BBF7-0BF8CCBC0B27
 install-name:    '/System/Library/PrivateFrameworks/CoreRealityIO.framework/Versions/A/CoreRealityIO'
 current-version: 76.4
 exports:

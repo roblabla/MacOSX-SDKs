@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A678A35B-A95C-352F-A2CD-E5472E3696AD
+    value:           33A8E823-2658-31EC-8C5C-23606F8557DB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7C56DE06-FE7B-3E86-954C-8E6844B1B3CD
+    value:           84A767F0-5D04-3CF8-A470-580E9D795B3B
 install-name:    '/usr/lib/libmdns.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

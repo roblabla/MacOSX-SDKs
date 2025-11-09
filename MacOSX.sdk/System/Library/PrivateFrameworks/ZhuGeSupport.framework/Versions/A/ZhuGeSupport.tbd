@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           75B4BF9A-0FB9-3B2D-B3C1-698653A1016C
+    value:           6DBDAB63-CAFF-39A5-9E18-49A555F85C94
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           23B70F96-236D-3361-8C3E-1BF47F6F4D05
+    value:           92BD414F-58BC-3353-8E38-3C833C5C4D26
 install-name:    '/System/Library/PrivateFrameworks/ZhuGeSupport.framework/Versions/A/ZhuGeSupport'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9B1A45F5-BC87-30FA-A6F9-DA153EF97669
+    value:           0C4849AA-C457-3F81-8068-D6413FFE54BD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BD727456-5568-3538-A5D2-CA0DCB990684
+    value:           D0803049-2A21-3C3F-A576-00EE94BD2E86
 install-name:    '/System/Library/Frameworks/GLUT.framework/Versions/A/GLUT'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           72A62A6C-8D0B-3520-B70C-78C41C9F10F1
+    value:           C6898F22-2F43-3CA3-828B-1125E9D078EB
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           D618FB13-B11E-3F9D-B4CF-30F69139FD13
+    value:           37622C52-1533-39F5-A0E7-0DC973EF573B
 install-name:    '/System/iOSSupport/System/Library/Frameworks/iAd.framework/Versions/A/iAd'
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]

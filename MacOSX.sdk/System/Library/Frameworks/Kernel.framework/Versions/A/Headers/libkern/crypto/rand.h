@@ -29,9 +29,31 @@
 #ifndef _RAND_H
 #define _RAND_H
 
-#include <sys/types.h>
+#include <libkern/crypto/crypto.h>
 
 __BEGIN_DECLS
+
+// A handle to a random generator suitable for use with
+// crypto_random_generate.
+typedef void *crypto_random_ctx_t;
+
+// The maximum size (in bytes) of a random generator.
+#define CRYPTO_RANDOM_MAX_CTX_SIZE ((size_t)256)
+
+typedef void (*crypto_random_generate_fn_t)(
+	crypto_random_ctx_t ctx,
+	void *random,
+	size_t random_size);
+
+typedef void (*crypto_random_uniform_fn_t)(
+	crypto_random_ctx_t ctx,
+	uint64_t bound,
+	uint64_t *random);
+
+typedef size_t (*crypto_random_kmem_ctx_size_fn_t)(void);
+
+typedef void (*crypto_random_kmem_init_fn_t)(
+	crypto_random_ctx_t ctx);
 
 
 int random_buf(void *buf, size_t buflen);

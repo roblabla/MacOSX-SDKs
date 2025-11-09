@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           608A8710-8CB2-3621-84B6-386D594C3437
+    value:           A6A95EAC-D12B-369D-9183-76857C300E00
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FC84AE68-9245-31FE-A4D3-EA482C41B6DA
+    value:           5BF92FC3-8B8E-3F77-B646-1AFF6BC33F34
 install-name:    '/System/Library/PrivateFrameworks/CoreRC.framework/Versions/A/CoreRC'
 current-version: 194
 exports:

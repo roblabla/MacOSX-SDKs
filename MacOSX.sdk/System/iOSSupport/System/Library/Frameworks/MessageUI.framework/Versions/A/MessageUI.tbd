@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           F0C3B019-12DA-396F-9EE4-44FF661B35C1
+    value:           C67BAF9B-D1F7-331C-A0FC-A0E2715F95AE
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           69CF9E2B-2F46-3C4C-AE06-FA5881EE935A
+    value:           3560D4BA-2B56-39F4-A793-E80FC0BFFFCC
 install-name:    '/System/iOSSupport/System/Library/Frameworks/MessageUI.framework/Versions/A/MessageUI'
-current-version: 3731.200.110
+current-version: 3731.255.101
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _MFAutomaticHorizontalDirectionalEdgeInsets, _MFAutomaticHorizontalEdgeInsets, 
@@ -79,10 +79,11 @@ exports:
                        _MFModernUIContentSizeAwareImageNameWithPrefix, _MFModernUIContentSizeCategoryOrdering, 
                        _MFPointRoundedToViewScale ]
     objc-classes:    [ MFAddressConcatenator, MFAlertOverlayController, MFAtomTextView, 
-                       MFAutocompleteResultsTableViewController, MFCalendarComposeRecipient, 
-                       MFComposeAttachmentInfo, MFComposeDisplayMetrics, MFComposeHeaderView, 
-                       MFComposeRecipient, MFComposeRecipientGroup, MFComposeRecipientOriginContext, 
-                       MFComposeRecipientTextView, MFComposeTextStyle, MFContactsSearchManager, 
+                       MFAttachmentMarkup, MFAutocompleteResultsTableViewController, 
+                       MFCalendarComposeRecipient, MFComposeAttachmentInfo, MFComposeDisplayMetrics, 
+                       MFComposeHeaderView, MFComposeRecipient, MFComposeRecipientGroup, 
+                       MFComposeRecipientOriginContext, MFComposeRecipientTextView, 
+                       MFComposeTextStyle, MFContactsManager, MFContactsSearchManager, 
                        MFDatePickerViewController, MFFontMetricCache, MFHeaderLabelView, 
                        MFMailComposeViewController, MFMailMenuCommand, MFMessageComposeViewController, 
                        MFModernAtomView, MFModernComposeRecipientAtom, MFRecentComposeRecipient, 

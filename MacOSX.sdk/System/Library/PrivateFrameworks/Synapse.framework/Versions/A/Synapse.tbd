@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           AE705982-33AA-39BB-97AB-E11BCE8D6093
+    value:           4C0EB30F-2C86-3241-A928-3B7568DCD8E7
   - target:          x86_64-maccatalyst
-    value:           AE705982-33AA-39BB-97AB-E11BCE8D6093
+    value:           4C0EB30F-2C86-3241-A928-3B7568DCD8E7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2FE5EEC8-DD06-32A6-8EDB-81361B21F5D2
+    value:           C7BC0F24-A077-3ADB-A777-E5B5521DC75B
   - target:          arm64e-maccatalyst
-    value:           2FE5EEC8-DD06-32A6-8EDB-81361B21F5D2
+    value:           C7BC0F24-A077-3ADB-A777-E5B5521DC75B
 install-name:    '/System/Library/PrivateFrameworks/Synapse.framework/Versions/A/Synapse'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

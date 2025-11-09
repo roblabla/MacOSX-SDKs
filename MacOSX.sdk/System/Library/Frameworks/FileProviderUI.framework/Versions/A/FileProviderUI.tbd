@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           33BD2927-92A6-36B4-8211-F315FE78261F
+    value:           BC169B28-946C-3EF8-9FFB-C09FE5527795
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F41278C8-5E4F-39C7-842E-80E9EA8D90CA
+    value:           9C0C264B-771A-3FE4-BF0A-F5D1E56C2355
 install-name:    '/System/Library/Frameworks/FileProviderUI.framework/Versions/A/FileProviderUI'
 current-version: 44
 exports:

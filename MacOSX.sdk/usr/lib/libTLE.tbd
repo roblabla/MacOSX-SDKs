@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5AC709A9-6959-32AF-AC8C-F7F31B2F0A5B
+    value:           4EC16B7E-9373-3FC2-AC59-160BFE0D027C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           107F28CC-7E3E-32A9-A3F3-4AEB97E53A81
+    value:           4805F20D-C165-3ACF-A80F-74EBAC60861B
 install-name:    '/usr/lib/libTLE.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

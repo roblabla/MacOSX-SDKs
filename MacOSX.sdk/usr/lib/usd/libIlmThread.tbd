@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E0474390-0F89-3F9E-9013-8ABEF88E73A3
+    value:           3BFC7576-FF45-37CD-B702-4AF318B0F32F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           20B8983F-5AF5-38DA-81BD-56D191C11FE0
+    value:           2D400CC2-7557-37B0-86AB-532DFBCBE8AF
 install-name:    '/usr/lib/usd/libIlmThread.dylib'
-current-version: 20.1.3
+current-version: 20.102.2
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos ]

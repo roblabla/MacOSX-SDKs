@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3D3A56D6-9F8E-3CC4-B7C6-6EFE24A8A34B
+    value:           85CA3F4C-3E9C-3474-8342-E963AF8A67E4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3BBC7814-562B-3437-9F9E-7CD70B857598
+    value:           80FF5CA9-3F17-309C-AA02-03D1A5C81258
 install-name:    '/System/Library/PrivateFrameworks/SiriRemembers.framework/Versions/A/SiriRemembers'
 current-version: 0
 compatibility-version: 0
@@ -164,6 +164,7 @@ exports:
                        '_$s13SiriRemembers16AppMatcherResultVMa', '_$s13SiriRemembers16AppMatcherResultVMn', 
                        '_$s13SiriRemembers16AppMatcherResultVN', '_$s13SiriRemembers16InteractionQueryV10fetchStats_7groupBySDySSAA07HistoryF0VGAA0C5StoreV_SayAA0d5GroupH3KeyOGtKF', 
                        '_$s13SiriRemembers16InteractionQueryV10fetchStatsyAA07HistoryF0VAA0C5StoreVKF', 
+                       '_$s13SiriRemembers16InteractionQueryV22fetchAllWithParametersySayAA0cgH0VGAA0C5StoreVKF', 
                        '_$s13SiriRemembers16InteractionQueryV25filterDirectDonationsOnlyACyF', 
                        '_$s13SiriRemembers16InteractionQueryV6filter011isDonatedByA0ACSb_tF', 
                        '_$s13SiriRemembers16InteractionQueryV6filter021includingEntitiesFromD0AcA06EntityD0V_tF', 
@@ -347,7 +348,20 @@ exports:
                        '_$s13SiriRemembers25InteractionHandlingStatusON', '_$s13SiriRemembers25InteractionHandlingStatusOSEAAMc', 
                        '_$s13SiriRemembers25InteractionHandlingStatusOSHAAMc', '_$s13SiriRemembers25InteractionHandlingStatusOSQAAMc', 
                        '_$s13SiriRemembers25InteractionHandlingStatusOSYAAMc', '_$s13SiriRemembers25InteractionHandlingStatusOSeAAMc', 
-                       '_$s13SiriRemembers26AggregatedBiomeEventSourceMp', '_$s13SiriRemembers26AggregatedBiomeEventSourceP21biomeStreamIdentifierSSvgTj', 
+                       '_$s13SiriRemembers25InteractionWithParametersV10parametersSDySSSayAA6EntityVGGvM', 
+                       '_$s13SiriRemembers25InteractionWithParametersV10parametersSDySSSayAA6EntityVGGvg', 
+                       '_$s13SiriRemembers25InteractionWithParametersV10parametersSDySSSayAA6EntityVGGvpMV', 
+                       '_$s13SiriRemembers25InteractionWithParametersV10parametersSDySSSayAA6EntityVGGvs', 
+                       '_$s13SiriRemembers25InteractionWithParametersV11interactionAA0C0VvM', 
+                       '_$s13SiriRemembers25InteractionWithParametersV11interactionAA0C0Vvg', 
+                       '_$s13SiriRemembers25InteractionWithParametersV11interactionAA0C0VvpMV', 
+                       '_$s13SiriRemembers25InteractionWithParametersV11interactionAA0C0Vvs', 
+                       '_$s13SiriRemembers25InteractionWithParametersV4fromACs7Decoder_p_tKcfC', 
+                       '_$s13SiriRemembers25InteractionWithParametersV6encode2toys7Encoder_p_tKF', 
+                       '_$s13SiriRemembers25InteractionWithParametersVMa', '_$s13SiriRemembers25InteractionWithParametersVMn', 
+                       '_$s13SiriRemembers25InteractionWithParametersVN', '_$s13SiriRemembers25InteractionWithParametersVSEAAMc', 
+                       '_$s13SiriRemembers25InteractionWithParametersVSeAAMc', '_$s13SiriRemembers26AggregatedBiomeEventSourceMp', 
+                       '_$s13SiriRemembers26AggregatedBiomeEventSourceP21biomeStreamIdentifierSSvgTj', 
                        '_$s13SiriRemembers26AggregatedBiomeEventSourceP21biomeStreamIdentifierSSvgTq', 
                        '_$s13SiriRemembers26AggregatedBiomeEventSourcePAA0ceF0Tb', 
                        '_$s13SiriRemembers26AggregatedBiomeEventSourceTL', '_$s13SiriRemembers6EntityV2eeoiySbAC_ACtFZ', 

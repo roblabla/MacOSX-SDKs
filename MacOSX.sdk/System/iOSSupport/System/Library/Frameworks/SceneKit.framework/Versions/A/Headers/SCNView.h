@@ -75,15 +75,15 @@ SCN_EXPORT
 /*! 
  @property allowsCameraControl
  @abstract A Boolean value that determines whether the user can manipulate the point of view used to render the scene. 
- @discussion  When set to YES, a defaultCameraController is created and the view will handle UI events to pilot it so the user can manipulate the current point of view with the mouse or the trackpad. The scene graph and existing cameras won't be modified by this action. The default value of this property is NO.
-     Note that the default event handling provided by the view may not suite your needs. You may want to implement you own evnet handler.
+ @discussion  When set to YES, a `defaultCameraController` is created and the view will handle UI events to pilot it so the user can manipulate the current point of view with the mouse or the trackpad. The scene graph and existing cameras won't be modified by this action. The default value of this property is NO.
+     Note that the default event handling provided by the view may not suit your needs. You may want to implement your own event handler.
      The built-in camera controller let you:
-       - pan with 1 finger to rotate the camera around the scene.
-       - pan with 2 fingers to translate the camera on its local X,Y plan.
-       - pan with 3 fingers vertically to move the the camera forward/backward.
-       - double tap to switch to the next camera in the scene.
-       - rotate with two fingers to roll the camera (rotation on the Z axis).
-       - pinch to zoom-in / zoom-out (change the fov of the camera).
+       - pan with 1 finger to rotate the camera around the scene
+       - pan with 2 fingers to translate the camera on its local X,Y plan
+       - pan with 3 fingers vertically to move the the camera forward/backward
+       - double tap to switch to the next camera in the scene
+       - rotate with two fingers to roll the camera (rotation around the Z axis)
+       - pinch to zoom-in / zoom-out (change the field of view of the camera)
  */
 @property(nonatomic) BOOL allowsCameraControl;
 

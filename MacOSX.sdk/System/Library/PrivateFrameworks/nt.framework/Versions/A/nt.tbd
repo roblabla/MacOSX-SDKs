@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DC30AF9D-91CD-320E-B165-C4649A08034E
+    value:           82271F51-D4A3-309B-8F59-10CD167630A5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4BE4AEF2-EC23-328C-B052-B67C7CA8C62D
+    value:           04B890D1-08DF-308B-B27F-40DD4ABB093B
 install-name:    '/System/Library/PrivateFrameworks/nt.framework/Versions/A/nt'
-current-version: 600
+current-version: 601
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DigestLogon, _NTLMLogon, _NetLogonChangeTrustPassword, _NetLogonProbe, 

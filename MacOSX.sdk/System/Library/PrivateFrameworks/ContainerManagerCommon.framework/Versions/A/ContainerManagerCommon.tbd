@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EA14C84D-23E0-33CD-ABD1-554849EB7531
+    value:           89EFDB32-9ED4-3411-8C56-03B2244179CC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D84BD7AE-7BED-3A21-9D97-FC8ED7852B53
+    value:           A64C7962-844C-3D3F-9063-95BADEDF39F5
 install-name:    '/System/Library/PrivateFrameworks/ContainerManagerCommon.framework/Versions/A/ContainerManagerCommon'
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

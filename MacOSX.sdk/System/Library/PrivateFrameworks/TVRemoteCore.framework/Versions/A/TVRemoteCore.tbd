@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FE628D6A-A001-3D26-89D5-5EC32803A090
+    value:           C2149622-E80D-3686-8DFD-5CAF324CA552
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7CB00A84-92B6-36A5-B099-FE7E6BD62BC6
+    value:           D0A0A23B-7B05-356A-860C-31F7B1D208E2
 install-name:    '/System/Library/PrivateFrameworks/TVRemoteCore.framework/Versions/A/TVRemoteCore'
-current-version: 252.10.14
+current-version: 252.20.5
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _NSStringFromRMSMessageType, _NSStringFromRMSResponseCode, 

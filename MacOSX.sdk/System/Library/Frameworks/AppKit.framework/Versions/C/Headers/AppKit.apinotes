@@ -8728,6 +8728,24 @@ Globals:
   SwiftName: macOS11_3
 - Name: NSAppKitVersionNumber11_4
   SwiftName: macOS11_4
+- Name: NSAppKitVersionNumber11_5
+  SwiftName: macOS11_5
+- Name: NSAppKitVersionNumber12_0
+  SwiftName: macOS12_0
+- Name: NSAppKitVersionNumber12_1
+  SwiftName: macOS12_1
+- Name: NSAppKitVersionNumber12_2
+  SwiftName: macOS12_2
+- Name: NSAppKitVersionNumber12_3
+  SwiftName: macOS12_3
+- Name: NSAppKitVersionNumber12_4
+  SwiftName: macOS12_4
+- Name: NSAppKitVersionNumber12_5
+  SwiftName: macOS12_5
+- Name: NSAppKitVersionNumber13_0
+  SwiftName: macOS13_0
+- Name: NSAppKitVersionNumber13_1
+  SwiftName: macOS13_1
 - Name: NSAppKitVersionNumberWithColumnResizingBrowser
   Availability: nonswift
 - Name: NSAppKitVersionNumberWithContinuousScrollingBrowser

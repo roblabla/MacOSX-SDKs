@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BC04CA29-0A19-3E23-9424-687D42F4328F
+    value:           2CCBEA5A-29DC-3EF3-8EBC-E190EA2CCA5C
   - target:          x86_64-maccatalyst
-    value:           BC04CA29-0A19-3E23-9424-687D42F4328F
+    value:           2CCBEA5A-29DC-3EF3-8EBC-E190EA2CCA5C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DABD0B2D-03F1-32D6-B67A-133F93396082
+    value:           FE0C0D3D-D6F5-3435-966B-99F285A57000
   - target:          arm64e-maccatalyst
-    value:           DABD0B2D-03F1-32D6-B67A-133F93396082
+    value:           FE0C0D3D-D6F5-3435-966B-99F285A57000
 install-name:    '/System/Library/PrivateFrameworks/SiriOntologyProtobuf.framework/Versions/A/SiriOntologyProtobuf'
 swift-abi-version: 7
 exports:

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6D7D76AF-6D27-3D0A-A23D-57B50EEF5B44
+    value:           73A172BF-546C-3FEA-A606-B6FA6CA7CE63
   - target:          x86_64-maccatalyst
-    value:           6D7D76AF-6D27-3D0A-A23D-57B50EEF5B44
+    value:           73A172BF-546C-3FEA-A606-B6FA6CA7CE63
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BD5439D0-54F6-3F63-BFCB-2E05EE272C2C
+    value:           29BAE00D-2C50-3DF4-B169-518E72393604
   - target:          arm64e-maccatalyst
-    value:           BD5439D0-54F6-3F63-BFCB-2E05EE272C2C
+    value:           29BAE00D-2C50-3DF4-B169-518E72393604
 install-name:    '/System/Library/PrivateFrameworks/MusicKitInternal.framework/Versions/A/MusicKitInternal'
 swift-abi-version: 7
 exports:
@@ -1027,6 +1027,7 @@ exports:
                        '_$s16MusicKitInternal0A5MovieV0aB026PropertyProviderBackedItemAAMc', 
                        '_$s16MusicKitInternal0A5MovieV0aB028CatalogFilterIdentifyingItemAAMc', 
                        '_$s16MusicKitInternal0A5MovieV0aB030CatalogSearchableTypeProvidingAAMc', 
+                       '_$s16MusicKitInternal0A5MovieV0aB031PlayabilityInformationProvidingAAMc', 
                        '_$s16MusicKitInternal0A5MovieV0aB034PropertyProviderBasedInitializableAAMc', 
                        '_$s16MusicKitInternal0A5MovieV0aB037LegacyModelExtendedLibraryRequestableAAMc', 
                        '_$s16MusicKitInternal0A5MovieV0aB037LegacyModelStorageDictionaryProvidingAAMc', 
@@ -2054,6 +2055,7 @@ exports:
                        '_$s16MusicKitInternal13UploadedAudioV0aB024CloudResourceConvertibleAAMc', 
                        '_$s16MusicKitInternal13UploadedAudioV0aB026PropertyProviderBackedItemAAMc', 
                        '_$s16MusicKitInternal13UploadedAudioV0aB028CatalogFilterIdentifyingItemAAMc', 
+                       '_$s16MusicKitInternal13UploadedAudioV0aB031PlayabilityInformationProvidingAAMc', 
                        '_$s16MusicKitInternal13UploadedAudioV0aB034PropertyProviderBasedInitializableAAMc', 
                        '_$s16MusicKitInternal13UploadedAudioV0aB037LegacyModelStorageDictionaryProvidingAAMc', 
                        '_$s16MusicKitInternal13UploadedAudioV0aB038UnderlyingLegacyModelObjectConvertibleAAMc', 
@@ -2157,6 +2159,7 @@ exports:
                        '_$s16MusicKitInternal13UploadedVideoV0aB026PropertyProviderBackedItemAAMc', 
                        '_$s16MusicKitInternal13UploadedVideoV0aB028CatalogFilterIdentifyingItemAAMc', 
                        '_$s16MusicKitInternal13UploadedVideoV0aB030CatalogSearchableTypeProvidingAAMc', 
+                       '_$s16MusicKitInternal13UploadedVideoV0aB031PlayabilityInformationProvidingAAMc', 
                        '_$s16MusicKitInternal13UploadedVideoV0aB034PropertyProviderBasedInitializableAAMc', 
                        '_$s16MusicKitInternal13UploadedVideoV0aB037LegacyModelStorageDictionaryProvidingAAMc', 
                        '_$s16MusicKitInternal13UploadedVideoV0aB038UnderlyingLegacyModelObjectConvertibleAAMc', 
@@ -3252,6 +3255,7 @@ exports:
                        '_$s16MusicKitInternal9TVEpisodeV0aB026PropertyProviderBackedItemAAMc', 
                        '_$s16MusicKitInternal9TVEpisodeV0aB028CatalogFilterIdentifyingItemAAMc', 
                        '_$s16MusicKitInternal9TVEpisodeV0aB030CatalogSearchableTypeProvidingAAMc', 
+                       '_$s16MusicKitInternal9TVEpisodeV0aB031PlayabilityInformationProvidingAAMc', 
                        '_$s16MusicKitInternal9TVEpisodeV0aB034PropertyProviderBasedInitializableAAMc', 
                        '_$s16MusicKitInternal9TVEpisodeV0aB037LegacyModelExtendedLibraryRequestableAAMc', 
                        '_$s16MusicKitInternal9TVEpisodeV0aB037LegacyModelStorageDictionaryProvidingAAMc', 

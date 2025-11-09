@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           542BC259-068D-31DE-A190-CF4973EBB274
+    value:           F86DE43B-D536-3AF5-B018-84070AAD9B4D
   - target:          x86_64-maccatalyst
-    value:           542BC259-068D-31DE-A190-CF4973EBB274
+    value:           F86DE43B-D536-3AF5-B018-84070AAD9B4D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           59B06709-94E2-35D9-BE5D-FAAAC0C30948
+    value:           17608FDB-A29C-3706-B858-00A11491D079
   - target:          arm64e-maccatalyst
-    value:           59B06709-94E2-35D9-BE5D-FAAAC0C30948
+    value:           17608FDB-A29C-3706-B858-00A11491D079
 install-name:    '/System/Library/PrivateFrameworks/SignpostSupport.framework/Versions/A/SignpostSupport'
-current-version: 90
+current-version: 91
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -58,20 +58,21 @@ exports:
                        SignpostFrameLifetimeInterval, SignpostHIDLatencyInterval, 
                        SignpostImageQueueSampleEvent, SignpostInterval, SignpostIntervalBuilder, 
                        SignpostMetrics, SignpostObject, SignpostRenderAccumulatedState, 
-                       SignpostRenderServerRenderInterval, SignpostStackFrame, SignpostStreamEvent, 
-                       SignpostSupportAnimationGraceTimeController, SignpostSupportCompositorInterval, 
-                       SignpostSupportExactProcessNameAllowlist, SignpostSupportExactProcessNameBlacklist, 
-                       SignpostSupportExactProcessNameBlocklist, SignpostSupportExactProcessNameFilter, 
-                       SignpostSupportExactProcessNameWhitelist, SignpostSupportLogMessage, 
-                       SignpostSupportMachTimeTranslationRange, SignpostSupportMachTimeTranslator, 
-                       SignpostSupportMessageArgument, SignpostSupportMetadataSegment, 
-                       SignpostSupportObject, SignpostSupportObjectExtractor, SignpostSupportObjectFilter, 
-                       SignpostSupportPIDAllowlist, SignpostSupportPIDBlacklist, 
-                       SignpostSupportPIDBlocklist, SignpostSupportPIDFilter, SignpostSupportPIDWhitelist, 
-                       SignpostSupportSerializabledObjectCollection, SignpostSupportSubsystemCategoryAllowlist, 
-                       SignpostSupportSubsystemCategoryBlacklist, SignpostSupportSubsystemCategoryBlocklist, 
-                       SignpostSupportSubsystemCategoryFilter, SignpostSupportSubsystemCategoryFilterEntry, 
-                       SignpostSupportSubsystemCategoryWhitelist, SignpostSupportUniquePIDAllowlist, 
-                       SignpostSupportUniquePIDBlacklist, SignpostSupportUniquePIDBlocklist, 
-                       SignpostSupportUniquePIDFilter, SignpostSupportUniquePIDWhitelist ]
+                       SignpostRenderServerRenderInterval, SignpostStackFrame, SignpostStatisticsAggregation, 
+                       SignpostStreamEvent, SignpostSupportAnimationGraceTimeController, 
+                       SignpostSupportCompositorInterval, SignpostSupportExactProcessNameAllowlist, 
+                       SignpostSupportExactProcessNameBlacklist, SignpostSupportExactProcessNameBlocklist, 
+                       SignpostSupportExactProcessNameFilter, SignpostSupportExactProcessNameWhitelist, 
+                       SignpostSupportLogMessage, SignpostSupportMachTimeTranslationRange, 
+                       SignpostSupportMachTimeTranslator, SignpostSupportMessageArgument, 
+                       SignpostSupportMetadataSegment, SignpostSupportObject, SignpostSupportObjectExtractor, 
+                       SignpostSupportObjectFilter, SignpostSupportPIDAllowlist, 
+                       SignpostSupportPIDBlacklist, SignpostSupportPIDBlocklist, 
+                       SignpostSupportPIDFilter, SignpostSupportPIDWhitelist, SignpostSupportSerializabledObjectCollection, 
+                       SignpostSupportSubsystemCategoryAllowlist, SignpostSupportSubsystemCategoryBlacklist, 
+                       SignpostSupportSubsystemCategoryBlocklist, SignpostSupportSubsystemCategoryFilter, 
+                       SignpostSupportSubsystemCategoryFilterEntry, SignpostSupportSubsystemCategoryWhitelist, 
+                       SignpostSupportUniquePIDAllowlist, SignpostSupportUniquePIDBlacklist, 
+                       SignpostSupportUniquePIDBlocklist, SignpostSupportUniquePIDFilter, 
+                       SignpostSupportUniquePIDWhitelist ]
 ...

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A8B1B7DE-80E6-3E90-B9A1-DC4FA012E271
+    value:           CE324A64-B313-35DA-A62C-563CAD683A97
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D8DF9D17-0C84-3AEA-BE3C-79D80C149B81
+    value:           24AB4657-798D-3C0E-B5D7-DAA6897EB5D0
 install-name:    '/System/Library/PrivateFrameworks/TVLibrary.framework/Versions/A/TVLibrary'
 current-version: 0
 compatibility-version: 0

@@ -209,6 +209,7 @@ typedef NS_ENUM(NSUInteger, MPSImageFeatureChannelFormat)
  *  @discussion A value to specify a type of data.
  *
  *  @constant   MPSDataTypeFloatBit         A common bit for all floating point data types.  Zero for integer types
+ *  @constant   MPSDataTypeComplexBit   A common bit for all complex point data types.  Zero for integer types
  *  @constant   MPSDataTypeNormalizedBit    If set, the value of the shall be interpreted as value / UNORM_TYPE_MAX
  *                                          Normalized values have range [0, 1.0] if unsigned and [-1,1] if signed.
  *                                          SNORM_TYPE_MIN is interpreted as SNORM_TYPE_MIN+1 per standard Metal rules.
@@ -222,6 +223,8 @@ typedef NS_ENUM(NSUInteger, MPSImageFeatureChannelFormat)
  *  @constant   MPSDataTypeUInt32       Unsigned 32-bit integer. Not normalized
  *  @constant   MPSDataTypeUnorm1       Unsigned 1-bit normalized value.
  *  @constant   MPSDataTypeUnorm8       Unsigned 8-bit normalized value.
+ *  @constant   MPSDataTypeComplexFloat32      Complex number composed of two 32-bit floating point numbers (single-precision).
+ *  @constant   MPSDataTypeComplexFloat16      Complex number composed of two 16-bit floating point numbers (half-precision).  (IEEE-754-2008 float16 exchange format)
  */
 #if defined(DOXYGEN)
     typedef enum MPSDataType
@@ -234,7 +237,11 @@ typedef NS_ENUM(NSUInteger, MPSImageFeatureChannelFormat)
     MPSDataTypeFloatBit MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0)) = 0x10000000,
     MPSDataTypeFloat32  MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0)) = MPSDataTypeFloatBit | 32,
     MPSDataTypeFloat16  MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0)) = MPSDataTypeFloatBit | 16,
-    
+
+    MPSDataTypeComplexBit MPS_ENUM_AVAILABLE_STARTING( macos(13.1), ios(16.2), macCatalyst(16.2), tvos(16.2)) = 0x01000000,
+    MPSDataTypeComplexFloat32  MPS_ENUM_AVAILABLE_STARTING( macos(13.1), ios(16.2), macCatalyst(16.2), tvos(13.1)) = MPSDataTypeFloatBit | MPSDataTypeComplexBit | 64,
+    MPSDataTypeComplexFloat16  MPS_ENUM_AVAILABLE_STARTING( macos(13.1), ios(16.2), macCatalyst(16.2), tvos(13.1)) = MPSDataTypeFloatBit | MPSDataTypeComplexBit | 32,
+
     // signed integers
     MPSDataTypeSignedBit MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0)) = 0x20000000,
     MPSDataTypeIntBit DEPRECATED_ATTRIBUTE = MPSDataTypeSignedBit,

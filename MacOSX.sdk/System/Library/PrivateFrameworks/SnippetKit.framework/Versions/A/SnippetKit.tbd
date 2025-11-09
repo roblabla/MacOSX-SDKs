@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B3FD6E8B-8076-3EE0-867A-4EED1BAD0A6D
+    value:           5A7F0A15-C623-3277-AA50-01AF9DA87701
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           32A999FD-A9B1-3A28-8BBE-B5D7756F0E22
+    value:           70D17F24-C7DC-3B61-BA36-41EB7BD7E085
 install-name:    '/System/Library/PrivateFrameworks/SnippetKit.framework/Versions/A/SnippetKit'
 swift-abi-version: 7
 exports:

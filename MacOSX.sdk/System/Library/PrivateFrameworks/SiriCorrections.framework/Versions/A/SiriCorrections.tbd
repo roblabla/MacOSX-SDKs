@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           78DC8120-C9B1-358F-904D-9D41A9E6270D
+    value:           A14B2E9F-89BA-348F-B230-77FD4713085E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E2560E03-8F33-3486-A0C1-662DA0D45B75
+    value:           162194D2-CA33-3E9E-B75A-D7AC32E8658C
 install-name:    '/System/Library/PrivateFrameworks/SiriCorrections.framework/Versions/A/SiriCorrections'
 swift-abi-version: 7
 exports:

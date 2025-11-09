@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CFA73B92-6ED8-3B70-90F2-80B2DFCFB92D
+    value:           16AA509A-61BA-32FE-9EE2-E7A583CE751C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EAA6AD14-7C5E-3F68-AA77-0ABE5B112745
+    value:           06A2476A-B4A7-3176-B059-6AE1A0433A01
 install-name:    '/usr/lib/log/liblog_odtypes.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

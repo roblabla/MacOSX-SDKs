@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CA0EC19C-2131-356E-B5DC-83432F2F97DA
+    value:           69853D90-FF61-3D0E-81D6-DE7F02F6A568
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           97E8EF0E-C099-30C2-8646-D532AF4B13E4
+    value:           E7A82EC6-7A14-35F8-A630-A79025E39A60
 install-name:    '/System/Library/PrivateFrameworks/Koa.framework/Versions/A/Koa'
 exports:
   - targets:         [ x86_64-macos ]
@@ -33,11 +33,11 @@ exports:
                        _KVLocaleTypeFromNSLocale, _KVLocaleTypeFromName, _KVLocaleTypeFromNumber, 
                        _KVLocaleTypeIsValid, _KVLocaleTypeName, _KVLocaleTypeToNSLocale, 
                        _KVLocaleTypeToNumber, _KVLocaleType_MAX, _KVOriginAppIdApplications, 
-                       _KVOriginAppIdContacts, _KVOriginAppIdHomeMemberInfo, _KVOriginAppIdMediaPlayer, 
-                       _KVOriginAppIdPodcasts, _KVSBLogContext, _KVScanHexString, 
-                       _KVSetAndReportError, _KVSetError, _KVSkitDirectoryURL, _KVUserDescription, 
-                       _KVUserIdHash, _KVUserIdHashFromDataDirectoryURL, _KVUserIdHashFromString, 
-                       _KVUserIdHashToString, __ZN10skitbridge10is_indexedEN3koa10vocabulary9FieldTypeE, 
+                       _KVOriginAppIdContacts, _KVOriginAppIdFitness, _KVOriginAppIdHomeMemberInfo, 
+                       _KVOriginAppIdMediaPlayer, _KVOriginAppIdPodcasts, _KVSBLogContext, 
+                       _KVScanHexString, _KVSetAndReportError, _KVSetError, _KVSkitDirectoryURL, 
+                       _KVUserDescription, _KVUserIdHash, _KVUserIdHashFromDataDirectoryURL, 
+                       _KVUserIdHashFromString, _KVUserIdHashToString, __ZN10skitbridge10is_indexedEN3koa10vocabulary9FieldTypeE, 
                        __ZN10skitbridge12cj_tokenizerEN4skit11TokenStreamE, __ZN10skitbridge14LogInitializer4initEv, 
                        __ZN10skitbridge14LogInitializerC1Ev, __ZN10skitbridge14LogInitializerC2Ev, 
                        __ZN10skitbridge14build_documentERN5apple4aiml12flatbuffers217FlatBufferBuilderEPKhmNSt3__117basic_string_viewIcNS7_11char_traitsIcEEEERKNS7_6vectorINS2_6OffsetIN3koa10vocabulary14TokenizedFieldEEENS7_9allocatorISH_EEEE, 
@@ -69,10 +69,10 @@ exports:
                        __ZN10skitbridge9TokenizerC1ERKNSt3__112basic_stringIDsNS1_11char_traitsIDsEENS1_9allocatorIDsEEEENS1_17basic_string_viewIcNS3_IcEEEEb, 
                        __ZN10skitbridge9TokenizerC2ERKNSt3__112basic_stringIDsNS1_11char_traitsIDsEENS1_9allocatorIDsEEEENS1_17basic_string_viewIcNS3_IcEEEEb, 
                        __ZNK10skitbridge8Analyzer11analyze_strERN4skit11TokenStreamENSt3__117basic_string_viewIDsNS4_11char_traitsIDsEEEE, 
-                       __ZNK10skitbridge8Analyzer13apply_filtersENSt3__111__wrap_iterIPN4skit5TokenEEENS2_IPKS4_EENS_11SearchGroupE, 
+                       __ZNK10skitbridge8Analyzer13apply_filtersENSt3__111__wrap_iterIPN4skit5TokenEEES6_NS_11SearchGroupE, 
                        __ZNK10skitbridge8Analyzer13apply_filtersERN4skit11TokenStreamENS_11SearchGroupEm, 
                        __ZNK10skitbridge8Analyzer20process_for_indexingEN4skit11TokenStreamE, 
-                       __ZNK10skitbridge8Analyzer21apply_transformationsERN4skit11TokenStreamEm, 
+                       __ZNK10skitbridge8Analyzer21apply_transformationsERN4skit11TokenStreamEbm, 
                        __ZNK10skitbridge8Analyzer24process_for_index_searchEN4skit11TokenStreamENS_11SearchGroupEPKNS1_14AliasSpanMatchES6_, 
                        __ZNK10skitbridge8Searcher11match_spansERKNS_5QueryE, __ZNK10skitbridge9Tokenizer15tokenize_str_tsERN4skit11TokenStreamENSt3__117basic_string_viewIDsNS4_11char_traitsIDsEEEE, 
                        __ZTIN10skitbridge8AnalyzerE, __ZTSN10skitbridge8AnalyzerE, 

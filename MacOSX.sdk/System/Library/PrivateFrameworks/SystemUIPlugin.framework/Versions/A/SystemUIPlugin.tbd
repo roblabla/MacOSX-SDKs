@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1E53527F-C9F5-34F1-8726-B216B5DF7A1C
+    value:           046B0A46-5901-3827-8900-AB648237E852
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           93E632E1-7C25-3846-95CA-E41D4CDB962B
+    value:           CBB646CF-2165-322E-B018-C317DF8D047E
 install-name:    '/System/Library/PrivateFrameworks/SystemUIPlugin.framework/Versions/A/SystemUIPlugin'
-current-version: 40
+current-version: 40.1
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     objc-classes:    [ NSMenuExtra, NSMenuExtraView ]

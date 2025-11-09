@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C1A238C3-8EB1-395D-9DB5-6913C82B6ED3
+    value:           C7A53FF7-E0AE-35E4-BF71-545C2B637A5C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D4997E6A-7B48-3C6B-A382-93F5A4DDE436
+    value:           592EE545-305E-358C-9C5C-8A1F265AA8AD
 install-name:    '/System/Library/PrivateFrameworks/MemoryDiagnostics.framework/Versions/A/MemoryDiagnostics'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

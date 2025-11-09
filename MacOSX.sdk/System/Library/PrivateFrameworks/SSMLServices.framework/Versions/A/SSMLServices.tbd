@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4EB71CCC-CEB0-3DAF-A5C1-575FF2486407
+    value:           A874DA72-C25E-390C-921D-59D6E01273FA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A8E3AD66-B8E4-3CF8-AF7D-6BAB6708E50E
+    value:           018329AC-F879-3742-A6AC-CD94082D05E0
 install-name:    '/System/Library/PrivateFrameworks/SSMLServices.framework/Versions/A/SSMLServices'
 swift-abi-version: 7
 exports:

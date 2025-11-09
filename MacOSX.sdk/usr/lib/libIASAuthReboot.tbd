@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C163BF5A-AC66-3201-B86F-12EB47C31039
+    value:           2C1252A6-C95C-3255-B7F3-339B24323FDA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C45E34CD-0C8A-3E5E-B34C-3AA4C02AC844
+    value:           E86E066C-4BD2-3452-872D-AC4B68D44118
 install-name:    '/usr/lib/libIASAuthReboot.dylib'
 current-version: 1000
 exports:

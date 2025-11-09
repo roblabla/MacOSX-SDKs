@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           AB67D3D1-1D8C-3DC1-A600-40E0AE54B523
+    value:           D6BD46A5-CF1B-39E1-AF10-A6AB4EFA955C
   - target:          x86_64-maccatalyst
-    value:           AB67D3D1-1D8C-3DC1-A600-40E0AE54B523
+    value:           D6BD46A5-CF1B-39E1-AF10-A6AB4EFA955C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CA95DF13-EDF1-3839-BDCB-20A206AABCF2
+    value:           E158B753-CD59-30EF-9FC7-342A4394650D
   - target:          arm64e-maccatalyst
-    value:           CA95DF13-EDF1-3839-BDCB-20A206AABCF2
+    value:           E158B753-CD59-30EF-9FC7-342A4394650D
 install-name:    '/System/Library/PrivateFrameworks/LiveExecutionResultsFoundation.framework/Versions/A/LiveExecutionResultsFoundation'
 swift-abi-version: 7
 exports:

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5E0A33E4-A95F-3E1E-8204-CE8C8237916C
+    value:           C9FD0DD4-E68D-35EE-BAB9-621080B2A8A6
   - target:          x86_64-maccatalyst
-    value:           5E0A33E4-A95F-3E1E-8204-CE8C8237916C
+    value:           C9FD0DD4-E68D-35EE-BAB9-621080B2A8A6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A23B5271-023F-3290-970F-EF0083000AE0
+    value:           17B4BC31-889D-3D55-BAAD-EA0EC4D7492A
   - target:          arm64e-maccatalyst
-    value:           A23B5271-023F-3290-970F-EF0083000AE0
+    value:           17B4BC31-889D-3D55-BAAD-EA0EC4D7492A
 install-name:    '/System/Library/PrivateFrameworks/AdCore.framework/Versions/A/AdCore'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -43,9 +43,10 @@ exports:
                        _ClientTypeToString, _GetKeychainPropertyListForKey, _NewsWidgetDefaultsBundleID, 
                        _PreferencesDefaultsBundleID, _PreferencesMacDefaultsBundleID, 
                        _RequestRetryDelay, _SetKeychainPropertyListForKey, _StringIsUUID, 
-                       _StringIsZeroUUID, _StringMatch, __ADLog, _dumpObject, _kBagPropertyJingleRequest_OptInBagKey, 
-                       _kBagPropertyJingleRequest_OptOutBagKey, _kBagPropertyJingleRequest_SegmentBagKey, 
-                       _releaseXPCTransaction, _takeXPCTransaction ]
+                       _StringIsZeroUUID, _StringMatch, __ADLog, _dumpObject, _kAPSystemInfoUnknown, 
+                       _kBagPropertyJingleRequest_OptInBagKey, _kBagPropertyJingleRequest_OptOutBagKey, 
+                       _kBagPropertyJingleRequest_SegmentBagKey, _releaseXPCTransaction, 
+                       _takeXPCTransaction ]
     objc-classes:    [ ADAnalyticsEvent, ADAttributionRequest, ADAttributionResponse, 
                        ADBackgroundTaskRequest, ADBackgroundTaskScheduler, ADCapData, 
                        ADClientSettingsRequest, ADClientSettingsResponse, ADConfiguration, 

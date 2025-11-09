@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9C86A2C7-881C-3A41-8C37-DF0CF1940946
+    value:           1FED3D48-AD38-38C6-B374-85A767EDB2D8
   - target:          x86_64-maccatalyst
-    value:           9C86A2C7-881C-3A41-8C37-DF0CF1940946
+    value:           1FED3D48-AD38-38C6-B374-85A767EDB2D8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           23C084C7-B578-33A1-97AF-2585E323B806
+    value:           571DE63C-8125-3E4F-B599-CC3D7B486FDB
   - target:          arm64e-maccatalyst
-    value:           23C084C7-B578-33A1-97AF-2585E323B806
+    value:           571DE63C-8125-3E4F-B599-CC3D7B486FDB
 install-name:    '/System/Library/Frameworks/CoreData.framework/Versions/A/CoreData'
-current-version: 1241
+current-version: 1244.6
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

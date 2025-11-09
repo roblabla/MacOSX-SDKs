@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           875FA538-5261-3A37-90F3-6CF2F27CEE32
+    value:           C42EFE16-13B3-3818-99AD-625B196574F5
   - target:          x86_64-maccatalyst
-    value:           875FA538-5261-3A37-90F3-6CF2F27CEE32
+    value:           C42EFE16-13B3-3818-99AD-625B196574F5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9A873527-2097-3397-AB1E-BD2121A70052
+    value:           5F78B20B-0EE9-3D46-81B7-69AA37504EFA
   - target:          arm64e-maccatalyst
-    value:           9A873527-2097-3397-AB1E-BD2121A70052
+    value:           5F78B20B-0EE9-3D46-81B7-69AA37504EFA
 install-name:    '/System/Library/PrivateFrameworks/SiriPrivateLearningLogging.framework/Versions/A/SiriPrivateLearningLogging'
 current-version: 0
 compatibility-version: 0

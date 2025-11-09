@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           A6B483F6-A770-3E44-8C15-1D0FE51E5EF2
+    value:           E9D34164-F4DD-35AA-8D20-19B34C7A5118
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           9919425F-664F-3B88-BE8D-A60B91A8828F
+    value:           C7293688-7588-3998-93D1-314D3D8795B7
 install-name:    '/System/iOSSupport/System/Library/Frameworks/UIKit.framework/Versions/A/UIKit'
-current-version: 6109.1.255
+current-version: 6209.1.255
 reexported-libraries:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     libraries:       [ '/System/iOSSupport/System/Library/PrivateFrameworks/DocumentManager.framework/Versions/A/DocumentManager', 
@@ -22,17 +22,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8E813D94-B09B-39D9-8736-90BEDAA160FE
+    value:           F0C56B35-F24B-310D-801A-D58BE1A34B10
   - target:          x86_64-maccatalyst
-    value:           8E813D94-B09B-39D9-8736-90BEDAA160FE
+    value:           F0C56B35-F24B-310D-801A-D58BE1A34B10
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C1B15449-BED9-3FC6-B07E-55FD41DB23B3
+    value:           C948B66D-DF09-3EBA-8F45-CEE8DD8098AB
   - target:          arm64e-maccatalyst
-    value:           C1B15449-BED9-3FC6-B07E-55FD41DB23B3
+    value:           C948B66D-DF09-3EBA-8F45-CEE8DD8098AB
 install-name:    '/System/Library/PrivateFrameworks/CollectionViewCore.framework/Versions/A/CollectionViewCore'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -52,19 +52,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9AAE8F4E-D8AA-3D1B-A67A-AB7C4F7639A9
+    value:           157284E2-7C0D-31CC-938C-DE5A9FA68516
   - target:          x86_64-maccatalyst
-    value:           9AAE8F4E-D8AA-3D1B-A67A-AB7C4F7639A9
+    value:           157284E2-7C0D-31CC-938C-DE5A9FA68516
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6B5DCD6A-9C35-30E4-8A02-6A73A39D985E
+    value:           77A93BFC-BF19-308D-AA8B-8FA41389A5FE
   - target:          arm64e-maccatalyst
-    value:           6B5DCD6A-9C35-30E4-8A02-6A73A39D985E
+    value:           77A93BFC-BF19-308D-AA8B-8FA41389A5FE
 install-name:    '/System/Library/PrivateFrameworks/UIFoundation.framework/Versions/A/UIFoundation'
-current-version: 855
+current-version: 856.3
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -434,13 +434,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           7848DC14-F41B-33DC-8F3A-5A4F07032287
+    value:           14C61495-4DCF-3B59-831B-F6FCB6A24BDD
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           359039CB-E63E-3A98-8F62-E7BFFF3E8D9E
+    value:           E4394E57-296E-3863-9966-11077F8EDE20
 install-name:    '/System/iOSSupport/System/Library/PrivateFrameworks/DocumentManager.framework/Versions/A/DocumentManager'
-current-version: 280.2.4
+current-version: 280.3.4
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _DOCAdaptSizeToRect, _DOCAlertItemIsNotReadable, _DOCAlertUserTheNetworkIsNotReachable, 
@@ -509,11 +509,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           B8ED5D71-378F-3BBA-AA15-7BD99663F74D
+    value:           1A6B470B-6CD9-39E1-B23C-2901E8855CE4
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           100EDF79-9C6D-3AAE-8A4C-A55F97ED5FF4
+    value:           E9C87FE3-B671-3BD9-8C06-7FA09B8A150A
 install-name:    '/System/iOSSupport/System/Library/PrivateFrameworks/PrintKitUI.framework/Versions/A/PrintKitUI'
 current-version: 15.1
 exports:
@@ -529,13 +529,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           9B5863A5-BB8F-3899-869A-646E0A0CACF8
+    value:           3170D842-F589-3B75-9DCE-0F0D36CDC8A5
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           9680517C-042B-3405-B064-E2DAFCA9D3F1
+    value:           F7D604D8-688F-3141-A2B1-A28C4BBE06A7
 install-name:    '/System/iOSSupport/System/Library/PrivateFrameworks/ShareSheet.framework/Versions/A/ShareSheet'
-current-version: 1847.1.2
+current-version: 1853
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _UIActivityTypeAddToReadingList, _UIActivityTypeAirDrop, _UIActivityTypeAssignToContact, 
@@ -570,13 +570,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           29D3237C-8F28-32E2-8744-CA8F65671AB8
+    value:           F666CB15-934F-38A7-BC12-3380A0A5CAD4
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           0E2D97B1-7A9E-3621-98CC-AEA5F96164EE
+    value:           840EE111-997A-39F3-BB14-D96D6C833B59
 install-name:    '/System/iOSSupport/System/Library/PrivateFrameworks/UIKitCore.framework/Versions/A/UIKitCore'
-current-version: 6109.1.255
+current-version: 6209.1.255
 reexported-libraries:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/CollectionViewCore.framework/Versions/A/CollectionViewCore', 
@@ -1542,9 +1542,16 @@ exports:
                        _UITextFieldDidEndEditingReasonKey, _UITextFieldTextDidBeginEditingNotification, 
                        _UITextFieldTextDidChangeNotification, _UITextFieldTextDidEndEditingNotification, 
                        _UITextGranularityFromNSTextSelectionGranularity, _UITextGranularityToNSTextSelectionGranularity, 
-                       _UITextInputContextIdentifierDataDidUpdateNotification, _UITextInputContextIdentifierPreferencesDomain, 
-                       _UITextInputContextIdentifierPreferencesDomainKey, _UITextInputContextIdentifierPreferencesIdentifierKey, 
-                       _UITextInputContextIdentifierPreferencesIdentifierSetTimeKey, 
+                       _UITextInputActionsAnalyticsEventFullName, _UITextInputActionsBundleIdKey, 
+                       _UITextInputActionsInputActionCountKey, _UITextInputActionsInputModeDelimiter, 
+                       _UITextInputActionsInsertedObjectsKey, _UITextInputActionsKeyboardLayoutKey, 
+                       _UITextInputActionsKeyboardTypeKey, _UITextInputActionsKeyboardVariantKey, 
+                       _UITextInputActionsLanguageKey, _UITextInputActionsObjectTypeKey, 
+                       _UITextInputActionsRegionKey, _UITextInputActionsRemovedObjectsKey, 
+                       _UITextInputActionsSessionIsModelessKey, _UITextInputActionsSourceKey, 
+                       _UITextInputActionsTypeKey, _UITextInputContextIdentifierDataDidUpdateNotification, 
+                       _UITextInputContextIdentifierPreferencesDomain, _UITextInputContextIdentifierPreferencesDomainKey, 
+                       _UITextInputContextIdentifierPreferencesIdentifierKey, _UITextInputContextIdentifierPreferencesIdentifierSetTimeKey, 
                        _UITextInputContextIdentifierPreferencesPrefix, _UITextInputContextIdentifierPreferencesSetTimeSuffix, 
                        _UITextInputCurrentInputModeDidChangeNotification, _UITextInputCurrentInputModeWillChangeNotification, 
                        _UITextInputCurrentKeyboardLayoutDidChangeNotification, _UITextInputNextToUseInputModeDidChangeKey, 
@@ -1807,16 +1814,16 @@ exports:
                        __UIImageGetCGImageRepresentation, __UIImageGetListIcon, __UIImageGetSearchGlass, 
                        __UIImageIdentityBundleIdentifier, __UIImageIdentityName, 
                        __UIImageIsFromMainBundle, __UIImageIsSystemSymbol, __UIImageIsUIKitImage, 
-                       __UIImageJPEGRepresentation, __UIImageName, __UIImageNamedColorStyleControlAccentColor, 
-                       __UIImageNamedColorStyleLabelColor, __UIImageNamedColorStyleQuaternaryLabelColor, 
-                       __UIImageNamedColorStyleSecondaryLabelColor, __UIImageNamedColorStyleSystemBlack, 
+                       __UIImageJPEGRepresentation, __UIImageName, __UIImageNamedColorStyleBlack, 
+                       __UIImageNamedColorStyleControlAccentColor, __UIImageNamedColorStyleLabelColor, 
+                       __UIImageNamedColorStyleQuaternaryLabelColor, __UIImageNamedColorStyleSecondaryLabelColor, 
                        __UIImageNamedColorStyleSystemBlue, __UIImageNamedColorStyleSystemBrown, 
                        __UIImageNamedColorStyleSystemGray, __UIImageNamedColorStyleSystemGreen, 
                        __UIImageNamedColorStyleSystemIndigo, __UIImageNamedColorStyleSystemOrange, 
                        __UIImageNamedColorStyleSystemPink, __UIImageNamedColorStyleSystemPurple, 
                        __UIImageNamedColorStyleSystemRed, __UIImageNamedColorStyleSystemTeal, 
-                       __UIImageNamedColorStyleSystemWhite, __UIImageNamedColorStyleSystemYellow, 
-                       __UIImageNamedColorStyleTertiaryLabelColor, __UIImageNamedColorStyleTintColor, 
+                       __UIImageNamedColorStyleSystemYellow, __UIImageNamedColorStyleTertiaryLabelColor, 
+                       __UIImageNamedColorStyleTintColor, __UIImageNamedColorStyleWhite, 
                        __UIImageOrientationForEXIFOrientation, __UIImagePickerController1XCroppedImage, 
                        __UIImagePickerControllerAllowAnySuperview, __UIImagePickerControllerAllowIris, 
                        __UIImagePickerControllerAllowMultipleSelection, __UIImagePickerControllerAllowStillDuringVideo, 
@@ -1890,9 +1897,8 @@ exports:
                        __UIMenuSystemShouldRevalidateNotification, __UIMinimumHeightForSizeClasses, 
                        __UIMinimumWidthForSizeClasses, __UIMotionEffectsEnabledDidChangeNotification, 
                        __UINSActivationStateForScene, __UINSAllConnectedAppLifecycleAffectingScenes, 
-                       __UINSAllConnectedScenesExcludingInternal, __UINSApplicationSceneTransitionContext, 
-                       __UINSAttemptDestructionOfScene, __UINSCreateUIWindowForHostingViewInScene, 
-                       __UINSDiscardPreviouslyPersistedScenesExcludingPersistentIdentifiers, 
+                       __UINSAllConnectedScenesExcludingInternal, __UINSAttemptDestructionOfScene, 
+                       __UINSCreateUIWindowForHostingViewInScene, __UINSDiscardPreviouslyPersistedScenesExcludingPersistentIdentifiers, 
                        __UINSEnsureApplicationInitializationContextIsLoaded, __UINSExistingWindowSceneWithPersistentIdentifier, 
                        __UINSExistingWindowSceneWithSceneIdentifier, __UINSFullScreenSceneSizeForUserInterfaceOrientation, 
                        __UINSItemProviderMetadataPreferredPresentationSizeKey, __UINSItemProviderMetadataPreferredPresentationStyleKey, 

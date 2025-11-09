@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           09900273-D075-3EA2-B417-F33173ADF347
+    value:           33FE85D6-B395-36F1-A20E-84CD679A2532
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B0FF448A-D6B7-352A-8C0D-B871CBDD0E52
+    value:           52D6FEC8-3482-3FF9-B7C7-EB40B2CDDC9A
 install-name:    '/usr/lib/libnwswifttls.dylib'
 swift-abi-version: 7
 exports:

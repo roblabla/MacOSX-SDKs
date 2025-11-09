@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           71DF3008-1930-30FC-AD99-F148E520B7EE
+    value:           798DA4F6-9A46-3192-B014-DC1B4B71554E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E45156C4-81A6-3761-B4BE-C7DF6BEE296C
+    value:           7C627524-FC71-3BF3-B085-3BEB91430DBA
 install-name:    '/System/Library/PrivateFrameworks/ASOctaneSupport.framework/Versions/A/ASOctaneSupport'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D4D991B6-5680-3A79-B1A4-A7BACE7ADD6A
+    value:           5D25646E-5340-3E9B-B396-0F11B9D60E00
   - target:          x86_64-maccatalyst
-    value:           D4D991B6-5680-3A79-B1A4-A7BACE7ADD6A
+    value:           5D25646E-5340-3E9B-B396-0F11B9D60E00
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0B90D65D-6A98-3AFE-8B75-E7BE6EAD00C6
+    value:           72BB63F2-21EB-3CB4-837D-0BC09186EE62
   - target:          arm64e-maccatalyst
-    value:           0B90D65D-6A98-3AFE-8B75-E7BE6EAD00C6
+    value:           72BB63F2-21EB-3CB4-837D-0BC09186EE62
 install-name:    '/System/Library/PrivateFrameworks/MobileTimer.framework/Versions/A/MobileTimer'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -51,27 +51,27 @@ exports:
                        _MTAlarmRepeatScheduleFromDay, _MTAlarmRepeatString, _MTAlarmScheduledFiredDateKey, 
                        _MTAlarmServerInterface, _MTAlarmServerLifecycleNotification, 
                        _MTAlarmServerReadyNotification, _MTAlarmSnoozeAction, _MTAlarmSnoozeableKey, 
-                       _MTAlarmStandardSort, _MTBedtimeAlarmCategory, _MTBedtimeAlarmNotificationPrefix, 
-                       _MTBedtimeDNDIdentifier, _MTClockBundleID, _MTCompareTimerTimes, 
-                       _MTCurrentDateProvider, _MTDNDAssertionServiceClientIdentifier, 
-                       _MTDateFormattingLocaleDidChangeNotification, _MTDeleteTimerIntentHandlerErrorDomain, 
-                       _MTDeviceHasBeenUnlockedForFirstTime, _MTDismissAlarmActionCountsAsWakeUp, 
-                       _MTDismissAlarmActionDescription, _MTDismissAlarmActionIsForBedtime, 
-                       _MTForceClock, _MTIdiomIpad, _MTIntegerIsPositive, _MTIntentsTimerForTimer, 
-                       _MTIntentsTimerStateForTimerState, _MTIntentsTimerTypeFromSiriContext, 
-                       _MTIsAlarmReconciliationAllowed, _MTIsHorseman, _MTLogForCategory, 
-                       _MTMobileTimerAlarmIntentErrorDomain, _MTMobileTimerEntitlement, 
-                       _MTNanoAlarmBundleID, _MTNanoTimerBundleID, _MTNanoTimerClassicBundleID, 
-                       _MTNewChildActivityForName, _MTNilify, _MTNullify, _MTPBAlarmAddReadFrom, 
-                       _MTPBAlarmDeleteReadFrom, _MTPBAlarmPropertiesReadFrom, _MTPBAlarmReadFrom, 
-                       _MTPBAlarmStateReadFrom, _MTPBAlarmUpdateReadFrom, _MTPBDismissActionReadFrom, 
-                       _MTPBSnoozeActionReadFrom, _MTPBSoundReadFrom, _MTPBSyncMessageReadFrom, 
-                       _MTRepeatDaysForAlarmRepeatSchedule, _MTShouldAllowToneStore, 
-                       _MTShouldHandleForBedtime, _MTShouldHideForSensitivity, _MTSiriIntentDonorProcessName, 
-                       _MTSnoozeAlarmActionDescription, _MTSnoozeAlarmCountdownCategory, 
-                       _MTSnoozeAlarmCountdownPrefix, _MTTimeIntervalIsPositive, 
-                       _MTTimerCategory, _MTTimerClientInterface, _MTTimerConflictsWithTimer, 
-                       _MTTimerDefaultDuration, _MTTimerDidFireNotificationName, 
+                       _MTAlarmStandardSort, _MTAlarmWidgetForwardRangeHours, _MTBedtimeAlarmCategory, 
+                       _MTBedtimeAlarmNotificationPrefix, _MTBedtimeDNDIdentifier, 
+                       _MTClockBundleID, _MTCompareTimerTimes, _MTCurrentDateProvider, 
+                       _MTDNDAssertionServiceClientIdentifier, _MTDateFormattingLocaleDidChangeNotification, 
+                       _MTDeleteTimerIntentHandlerErrorDomain, _MTDeviceHasBeenUnlockedForFirstTime, 
+                       _MTDismissAlarmActionCountsAsWakeUp, _MTDismissAlarmActionDescription, 
+                       _MTDismissAlarmActionIsForBedtime, _MTForceClock, _MTIdiomIpad, 
+                       _MTIntegerIsPositive, _MTIntentsTimerForTimer, _MTIntentsTimerStateForTimerState, 
+                       _MTIntentsTimerTypeFromSiriContext, _MTIsAlarmReconciliationAllowed, 
+                       _MTIsHorseman, _MTLogForCategory, _MTMobileTimerAlarmIntentErrorDomain, 
+                       _MTMobileTimerEntitlement, _MTNanoAlarmBundleID, _MTNanoTimerBundleID, 
+                       _MTNanoTimerClassicBundleID, _MTNewChildActivityForName, _MTNilify, 
+                       _MTNullify, _MTPBAlarmAddReadFrom, _MTPBAlarmDeleteReadFrom, 
+                       _MTPBAlarmPropertiesReadFrom, _MTPBAlarmReadFrom, _MTPBAlarmStateReadFrom, 
+                       _MTPBAlarmUpdateReadFrom, _MTPBDismissActionReadFrom, _MTPBSnoozeActionReadFrom, 
+                       _MTPBSoundReadFrom, _MTPBSyncMessageReadFrom, _MTRepeatDaysForAlarmRepeatSchedule, 
+                       _MTShouldAllowToneStore, _MTShouldHandleForBedtime, _MTShouldHideForSensitivity, 
+                       _MTSiriIntentDonorProcessName, _MTSnoozeAlarmActionDescription, 
+                       _MTSnoozeAlarmCountdownCategory, _MTSnoozeAlarmCountdownPrefix, 
+                       _MTTimeIntervalIsPositive, _MTTimerCategory, _MTTimerClientInterface, 
+                       _MTTimerConflictsWithTimer, _MTTimerDefaultDuration, _MTTimerDidFireNotificationName, 
                        _MTTimerDismissAction, _MTTimerDurationKey, _MTTimerIntentHandlerDurationMax, 
                        _MTTimerIntentHandlerErrorDomain, _MTTimerIntentResultsComparator, 
                        _MTTimerIntentSupportSiriContextTimerTypeKey, _MTTimerMachServiceName, 
@@ -93,14 +93,15 @@ exports:
                        _NSGregorianCalendarDayForMTDay, _ResetTimeFormatter, _WorldClockCityLanguageKey, 
                        _WorldClockCityPropertiesCount, _WorldClockCityPropertiesKey, 
                        _WorldClockCityTypeKey, _WorldClockMaximumCount, ___shouldLog, 
-                       ___unitTesting, _kMTAgentDiagnostics, _kMTAlarmActiveEncodingKey, 
-                       _kMTAlarmAllowsSnoozeEncodingKey, _kMTAlarmBedtimeDNDEncodingKey, 
-                       _kMTAlarmBedtimeDNDOptionsEncodingKey, _kMTAlarmBedtimeDismissedActionEncodingKey, 
-                       _kMTAlarmBedtimeDismissedDateEncodingKey, _kMTAlarmBedtimeFiredDateEncodingKey, 
-                       _kMTAlarmBedtimeHourEncodingKey, _kMTAlarmBedtimeLegacyEncodingKey, 
-                       _kMTAlarmBedtimeMinuteEncodingKey, _kMTAlarmBedtimeReminderEncodingKey, 
-                       _kMTAlarmBedtimeSnoozeFireDateEncodingKey, _kMTAlarmBypassReloadEncodingKey, 
-                       _kMTAlarmDataVersion, _kMTAlarmDataVersionEncodingKey, _kMTAlarmDismissedActionEncodingKey, 
+                       ___unitTesting, _kBypassWidgetReloadThreshold, _kMTAgentDiagnostics, 
+                       _kMTAlarmActiveEncodingKey, _kMTAlarmAllowsSnoozeEncodingKey, 
+                       _kMTAlarmBedtimeDNDEncodingKey, _kMTAlarmBedtimeDNDOptionsEncodingKey, 
+                       _kMTAlarmBedtimeDismissedActionEncodingKey, _kMTAlarmBedtimeDismissedDateEncodingKey, 
+                       _kMTAlarmBedtimeFiredDateEncodingKey, _kMTAlarmBedtimeHourEncodingKey, 
+                       _kMTAlarmBedtimeLegacyEncodingKey, _kMTAlarmBedtimeMinuteEncodingKey, 
+                       _kMTAlarmBedtimeReminderEncodingKey, _kMTAlarmBedtimeSnoozeFireDateEncodingKey, 
+                       _kMTAlarmBypassReloadDateEncodingKey, _kMTAlarmDataVersion, 
+                       _kMTAlarmDataVersionEncodingKey, _kMTAlarmDismissedActionEncodingKey, 
                        _kMTAlarmDismissedDateEncodingKey, _kMTAlarmEnabledEncodingKey, 
                        _kMTAlarmFiredDateEncodingKey, _kMTAlarmFiringEncodingKey, 
                        _kMTAlarmHourEncodingKey, _kMTAlarmIDEncodingKey, _kMTAlarmIsNewEncodingKey, 

@@ -4,23 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BCA7763F-086A-3837-B278-2F8046E4E885
+    value:           F3846A86-644B-3BCD-ACCE-FC7B751105C1
   - target:          x86_64-maccatalyst
-    value:           BCA7763F-086A-3837-B278-2F8046E4E885
+    value:           F3846A86-644B-3BCD-ACCE-FC7B751105C1
   - target:          x86_64h-macos
-    value:           DBC459F3-81BB-398A-8F74-3F7392392BB7
+    value:           BEB5FC0B-7196-3C1D-A59A-F62ADA98F592
   - target:          x86_64h-maccatalyst
-    value:           DBC459F3-81BB-398A-8F74-3F7392392BB7
+    value:           BEB5FC0B-7196-3C1D-A59A-F62ADA98F592
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F4FF83FC-E62C-30B4-B3A9-876C8A1FD595
+    value:           FD16D6D9-10C0-323B-B43B-9781C4A4D268
   - target:          arm64e-maccatalyst
-    value:           F4FF83FC-E62C-30B4-B3A9-876C8A1FD595
+    value:           FD16D6D9-10C0-323B-B43B-9781C4A4D268
 install-name:    '/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation'
-current-version: 1953.1
+current-version: 1953.255
 compatibility-version: 150
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
@@ -660,10 +660,11 @@ exports:
                        __CFLocaleCreateLikeCurrentWithBundleLocalizations, __CFLocaleCreateLocaleIdentiferByReplacingLanguageCodeAndScriptCode, 
                        __CFLocaleGetCalendarDirection, __CFLocaleGetNoteCount, __CFLocaleResetCurrent, 
                        __CFLocaleSetPreferredMeasurementSystem, __CFLocaleSetPreferredTemperatureUnit, 
-                       __CFLogvEx, __CFLogvEx2, __CFLogvEx3, __CFMZEnabled, __CFMachPortCreateWithPort2, 
-                       __CFMachPortInstallNotifyPort, __CFMainPThread, __CFMessagePortCreateLocalEx, 
-                       __CFNonObjCEqual, __CFNonObjCHash, __CFNonObjCRelease, __CFNonObjCRetain, 
-                       __CFNonObjCStringGetCStringPtr, __CFNotificationCenterInitializeDependentNotificationIfNecessary, 
+                       __CFLogvEx, __CFLogvEx2, __CFLogvEx3, __CFMZEnabled, __CFMachPortCreateReply, 
+                       __CFMachPortCreateWithPort2, __CFMachPortInstallNotifyPort, 
+                       __CFMainPThread, __CFMessagePortCreateLocalEx, __CFNonObjCEqual, 
+                       __CFNonObjCHash, __CFNonObjCRelease, __CFNonObjCRetain, __CFNonObjCStringGetCStringPtr, 
+                       __CFNotificationCenterInitializeDependentNotificationIfNecessary, 
                        __CFNotificationCenterRegisterDependentNotificationList, __CFNumberCreateWithBigNum, 
                        __CFNumberFormatterGetFormatter, __CFNumberGetType2, __CFOperatingSystemVersionGetCurrent, 
                        __CFOperatingSystemVersionIsAtLeastVersion, __CFPlatformExecutableLinkedOnOrAfter, 

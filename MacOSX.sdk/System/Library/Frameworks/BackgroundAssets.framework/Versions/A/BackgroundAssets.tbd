@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           074914D8-7617-370A-BEA8-8BD96E227CF4
+    value:           7863D9CB-C4A9-3357-9E4F-F36D67849345
   - target:          x86_64-maccatalyst
-    value:           074914D8-7617-370A-BEA8-8BD96E227CF4
+    value:           7863D9CB-C4A9-3357-9E4F-F36D67849345
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A7DC808E-8269-35C7-B668-666D9ECC7320
+    value:           067F83D9-1749-3E9A-8115-AB6052888842
   - target:          arm64e-maccatalyst
-    value:           A7DC808E-8269-35C7-B668-666D9ECC7320
+    value:           067F83D9-1749-3E9A-8115-AB6052888842
 install-name:    '/System/Library/Frameworks/BackgroundAssets.framework/Versions/A/BackgroundAssets'
 swift-abi-version: 7
 reexported-libraries:
@@ -40,7 +40,7 @@ exports:
                        _kBackgroundAssetsAppInfoDeliveredAppHasLaunched, _kBackgroundAssetsAppInfoInitialBackgroundCellularPolicy, 
                        _kBackgroundAssetsAppInfoLastApplicationLaunchTime, _kBackgroundAssetsAppInfoLastTimeCheckKey, 
                        _kBackgroundAssetsAppInfoManifestURL, _kBackgroundAssetsAppInfoPermittedForInitialBackgroundActivity, 
-                       _kBackgroundAssetsDeveloperTeamIdentifierEntitlement ]
+                       _kBackgroundAssetsAppInfoUserForceQuitApp, _kBackgroundAssetsDeveloperTeamIdentifierEntitlement ]
     objc-classes:    [ BAAgentSystemProxy, BAAppExtensionInfo, BAAppStoreClient, 
                        BAAppStoreGrantDescriptor, BACloudKitDownload, BADownload, 
                        BADownloadManager, BAURLDownload ]

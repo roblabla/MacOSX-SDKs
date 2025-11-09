@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0611F844-4C09-3470-A5A4-8522B65540D6
+    value:           A6CBDE8D-77C4-3F26-81C1-7B3E2CC3A2C6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           02A61C49-A21F-340E-9996-CCABC73472B9
+    value:           9949F480-E2E5-3960-BBFF-0F17C9F14EBF
 install-name:    '/System/Library/PrivateFrameworks/StorageKit.framework/Versions/A/StorageKit'
 current-version: 53
 exports:

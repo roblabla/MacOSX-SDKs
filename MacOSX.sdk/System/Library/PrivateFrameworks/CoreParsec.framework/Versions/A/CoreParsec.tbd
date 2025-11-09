@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B4087D76-EB2F-39A4-96F0-7E70CB7EF5AC
+    value:           AC9BCAF4-A9EA-36F3-ABEB-64F1EBE03502
   - target:          x86_64-maccatalyst
-    value:           B4087D76-EB2F-39A4-96F0-7E70CB7EF5AC
+    value:           AC9BCAF4-A9EA-36F3-ABEB-64F1EBE03502
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FF260797-CA88-3299-87B7-6804EA0D7B17
+    value:           CBD03669-79A5-3664-9397-26E91F5B0C74
   - target:          arm64e-maccatalyst
-    value:           FF260797-CA88-3299-87B7-6804EA0D7B17
+    value:           CBD03669-79A5-3664-9397-26E91F5B0C74
 install-name:    '/System/Library/PrivateFrameworks/CoreParsec.framework/Versions/A/CoreParsec'
 swift-abi-version: 7
 exports:
@@ -24,10 +24,10 @@ exports:
                        '_$s10CoreParsec10ClientNameC07extractcD13FromUserAgent_17allowAbbreviationSSSgAF_SbtFZ', 
                        '_$s10CoreParsec10ClientNameC0A11SuggestionsSSvgZ', '_$s10CoreParsec10ClientNameC0B4ToolSSvgZ', 
                        '_$s10CoreParsec10ClientNameC10DuetExpertSSvgZ', '_$s10CoreParsec10ClientNameC10PegasusKitSSvgZ', 
-                       '_$s10CoreParsec10ClientNameC11PhotoPickerSSvgZ', '_$s10CoreParsec10ClientNameC11sessionType3forAA07SessionF0OSSSg_tFZ', 
-                       '_$s10CoreParsec10ClientNameC14MediaAnalysisdSSvgZ', '_$s10CoreParsec10ClientNameC15FlightUtilitiesSSvgZ', 
-                       '_$s10CoreParsec10ClientNameC15MapsSuggestionsSSvgZ', '_$s10CoreParsec10ClientNameC16ReverseTemplatedSSvgZ', 
-                       '_$s10CoreParsec10ClientNameC18VisualIntelligenceSSvgZ', '_$s10CoreParsec10ClientNameC20NotificationsLoggingSSvgZ', 
+                       '_$s10CoreParsec10ClientNameC11PhotoPickerSSvgZ', '_$s10CoreParsec10ClientNameC14MediaAnalysisdSSvgZ', 
+                       '_$s10CoreParsec10ClientNameC15FlightUtilitiesSSvgZ', '_$s10CoreParsec10ClientNameC15MapsSuggestionsSSvgZ', 
+                       '_$s10CoreParsec10ClientNameC16ReverseTemplatedSSvgZ', '_$s10CoreParsec10ClientNameC18VisualIntelligenceSSvgZ', 
+                       '_$s10CoreParsec10ClientNameC20NotificationsLoggingSSvgZ', 
                        '_$s10CoreParsec10ClientNameC4MailSSvgZ', '_$s10CoreParsec10ClientNameC4NewsSSvgZ', 
                        '_$s10CoreParsec10ClientNameC4SiriSSvgZ', '_$s10CoreParsec10ClientNameC6LookupSSvgZ', 
                        '_$s10CoreParsec10ClientNameC6PhotosSSvgZ', '_$s10CoreParsec10ClientNameC6SafariSSvgZ', 
@@ -41,22 +41,6 @@ exports:
                        '_$s10CoreParsec10ClientTypeOMa', '_$s10CoreParsec10ClientTypeOMn', 
                        '_$s10CoreParsec10ClientTypeON', '_$s10CoreParsec10ClientTypeOSHAAMc', 
                        '_$s10CoreParsec10ClientTypeOSQAAMc', '_$s10CoreParsec10ClientTypeOSYAAMc', 
-                       '_$s10CoreParsec11SessionTypeO10duetexpertyA2CmFWC', '_$s10CoreParsec11SessionTypeO10parsectoolyA2CmFWC', 
-                       '_$s10CoreParsec11SessionTypeO11photopickeryA2CmFWC', '_$s10CoreParsec11SessionTypeO14mediaanalysisdyA2CmFWC', 
-                       '_$s10CoreParsec11SessionTypeO15flightutilitiesyA2CmFWC', 
-                       '_$s10CoreParsec11SessionTypeO15mapssuggestionsyA2CmFWC', 
-                       '_$s10CoreParsec11SessionTypeO16reversetemplatedyA2CmFWC', 
-                       '_$s10CoreParsec11SessionTypeO20notificationsloggingyA2CmFWC', 
-                       '_$s10CoreParsec11SessionTypeO4mailyA2CmFWC', '_$s10CoreParsec11SessionTypeO4newsyA2CmFWC', 
-                       '_$s10CoreParsec11SessionTypeO4siriyA2CmFWC', '_$s10CoreParsec11SessionTypeO6lookupyA2CmFWC', 
-                       '_$s10CoreParsec11SessionTypeO6photosyA2CmFWC', '_$s10CoreParsec11SessionTypeO6safariyA2CmFWC', 
-                       '_$s10CoreParsec11SessionTypeO7parsecdyA2CmFWC', '_$s10CoreParsec11SessionTypeO7unknownyA2CmFWC', 
-                       '_$s10CoreParsec11SessionTypeO8messagesyA2CmFWC', '_$s10CoreParsec11SessionTypeO8rawValueACSgSu_tcfC', 
-                       '_$s10CoreParsec11SessionTypeO8rawValueSuvg', '_$s10CoreParsec11SessionTypeO8rawValueSuvpMV', 
-                       '_$s10CoreParsec11SessionTypeO8trysteroyA2CmFWC', '_$s10CoreParsec11SessionTypeO9spotlightyA2CmFWC', 
-                       '_$s10CoreParsec11SessionTypeOMa', '_$s10CoreParsec11SessionTypeOMn', 
-                       '_$s10CoreParsec11SessionTypeON', '_$s10CoreParsec11SessionTypeOSHAAMc', 
-                       '_$s10CoreParsec11SessionTypeOSQAAMc', '_$s10CoreParsec11SessionTypeOSYAAMc', 
                        '_$s10CoreParsec13URLDataSourceMp', '_$s10CoreParsec13URLDataSourceP4data10forRequestAA0cD6OutputV10Foundation10URLRequestV_tYaKFTj', 
                        '_$s10CoreParsec13URLDataSourceP4data10forRequestAA0cD6OutputV10Foundation10URLRequestV_tYaKFTjTu', 
                        '_$s10CoreParsec13URLDataSourceP4data10forRequestAA0cD6OutputV10Foundation10URLRequestV_tYaKFTq', 
@@ -252,7 +236,7 @@ exports:
                        '_$sSo16PAREngagedResultC10CoreParsecE29maxEncodedNormalizedTopicSizeSivgZ', 
                        '_$sSo16PAREngagedResultC10CoreParsecE7encoded10Foundation4DataVyF', 
                        '_$sSo16PAREngagedResultC10CoreParsecE7encodedABSg10Foundation4DataV_tcfC', 
-                       '_$sSo16PAREngagedResultC10CoreParsecE_12searchString4typeABSS_SSSo12SFResultTypeVtcfC', 
+                       '_$sSo16PAREngagedResultC10CoreParsecE_12searchString4type16engagemementTimeABSS_SSSo12SFResultTypeV10Foundation4DateVtcfC', 
                        '_$sSo16PAREngagedResultC10CoreParsecEyABSgSo09SFEngagedB0_pcfC', 
                        _CoreParsecVersionNumber, _CoreParsecVersionString, _CoreParsec_notify_cancel, 
                        _CoreParsec_notify_register_dispatch, _PARNewsAppBundleIdentifier, 

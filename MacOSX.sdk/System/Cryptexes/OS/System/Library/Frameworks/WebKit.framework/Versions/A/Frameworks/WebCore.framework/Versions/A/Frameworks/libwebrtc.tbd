@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9AA85520-DE64-399C-A395-9FDBC8063DBA
+    value:           26EB397A-64E8-3B6B-A2CE-C6FC3A1A2F8C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AC0C6EDC-87C2-3A88-831A-229F34C72D09
+    value:           4F65EE63-D476-3CC9-8F58-691F8F6CBF26
 install-name:    '/System/Library/Frameworks/WebKit.framework/Versions/A/Frameworks/WebCore.framework/Versions/A/Frameworks/libwebrtc.dylib'
-current-version: 614.2.9
+current-version: 614.3.7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ConvertToI420, __ZN10vp9_parser15Vp9HeaderParser23ParseUncompressedHeaderEPKhm, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A86D49EE-2D2B-3C03-87BD-35A4F5E6CA03
+    value:           9F374997-12A1-36E1-B54A-9C840E3860EB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9193411F-1D89-3B6A-A31D-C940F7EFDEBC
+    value:           D449ADB6-C735-3FE6-AE2B-4F43CC670140
 install-name:    '/System/Library/PrivateFrameworks/JavaScriptOSA.framework/Versions/A/JavaScriptOSA'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

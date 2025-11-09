@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E4A1A60B-B64B-396B-8D3C-4AF06882C919
+    value:           55A91709-01CA-3931-A1CF-00F196649565
   - target:          x86_64-maccatalyst
-    value:           E4A1A60B-B64B-396B-8D3C-4AF06882C919
+    value:           55A91709-01CA-3931-A1CF-00F196649565
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           55A2E474-0D5C-3A4B-B29D-D7BB6E07EF56
+    value:           634990DB-4327-3AC1-998C-82F280E98619
   - target:          arm64e-maccatalyst
-    value:           55A2E474-0D5C-3A4B-B29D-D7BB6E07EF56
+    value:           634990DB-4327-3AC1-998C-82F280E98619
 install-name:    '/System/Library/Frameworks/MediaAccessibility.framework/Versions/A/MediaAccessibility'
 current-version: 62
 exports:

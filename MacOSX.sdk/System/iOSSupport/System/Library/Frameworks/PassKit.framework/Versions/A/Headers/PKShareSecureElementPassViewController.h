@@ -1,9 +1,13 @@
+#if !__has_include(<PassKitUI/PKShareSecureElementPassViewController.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKShareSecureElementPassViewController.h
 //  PassKit
 //
 //  Copyright © 2021 Apple, Inc. All rights reserved.
 //
+
+#ifndef __PKSHARESECUREELEMENTPASSVIEWCONTROLLER_H
+#define __PKSHARESECUREELEMENTPASSVIEWCONTROLLER_H
 
 #import <TargetConditionals.h>
 
@@ -67,3 +71,11 @@ API_AVAILABLE(ios(16.0))
 NS_ASSUME_NONNULL_END
 
 #endif // TARGET_OS_IOS
+#endif // __PKSHARESECUREELEMENTPASSVIEWCONTROLLER_H
+
+#else
+#if !TARGET_OS_OSX 
+#import <TargetConditionals.h>
+#import <PassKitUI/PKShareSecureElementPassViewController.h>
+#endif
+#endif

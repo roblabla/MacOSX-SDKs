@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4ED28FF4-71BA-3957-AC08-A59373729043
+    value:           C2BCB8CA-0D33-3AC7-A72F-1ADA13737AF2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F824D471-48D8-39FE-842F-2D3467515808
+    value:           58119E0E-4039-3BE5-BF80-9ADA3F2CFBDB
 install-name:    '/System/Library/PrivateFrameworks/ServerInformation.framework/Versions/A/ServerInformation'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

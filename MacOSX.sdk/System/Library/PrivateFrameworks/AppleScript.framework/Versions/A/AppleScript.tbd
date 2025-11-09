@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E68E7E5F-FB11-313F-AFA9-449ABD4B15B7
+    value:           A2871470-928D-3CBA-AB55-5D2F9E7A651D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           36F32796-7671-3244-A7F9-893419A2D1C6
+    value:           F54C31EF-6A78-3FFB-9AF0-763D59C5B6DF
 install-name:    '/System/Library/PrivateFrameworks/AppleScript.framework/Versions/A/AppleScript'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

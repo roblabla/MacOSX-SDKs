@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           7CEAD3FC-BCE4-31CC-8816-48CB5494FE94
+    value:           5CAEB19E-BB74-3879-879B-9A5451207320
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           6A402280-779C-3299-86EB-26C4BC69AA52
+    value:           C8172932-2AA7-3B67-8C6F-4B66A9B887E2
 install-name:    '/System/iOSSupport/System/Library/Frameworks/PhotosUI.framework/Versions/A/PhotosUI'
-current-version: 511.0.170
+current-version: 520.0.240
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _PHLimitedLibraryPickerClientApplicationIdentifier, _PHLimitedLibraryPickerCompletionBlock, 

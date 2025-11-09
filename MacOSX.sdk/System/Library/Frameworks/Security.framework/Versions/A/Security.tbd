@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           164B9AD0-FE12-398C-BAF8-A5EC0ABB1BE8
+    value:           340B176F-EFE0-392B-B775-4719B7DC19F6
   - target:          x86_64-maccatalyst
-    value:           164B9AD0-FE12-398C-BAF8-A5EC0ABB1BE8
+    value:           340B176F-EFE0-392B-B775-4719B7DC19F6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           45486038-0D43-37F7-A872-A47A9A1D349F
+    value:           D3DA1540-042C-3896-A838-6E6548C33E94
   - target:          arm64e-maccatalyst
-    value:           45486038-0D43-37F7-A872-A47A9A1D349F
+    value:           D3DA1540-042C-3896-A838-6E6548C33E94
 install-name:    '/System/Library/Frameworks/Security.framework/Versions/A/Security'
-current-version: 60420.40.34
+current-version: 60420.60.24
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -555,7 +555,7 @@ exports:
                        _SSLSetPeerDomainName, _SSLSetPeerID, _SSLSetProtocolVersionMax, 
                        _SSLSetProtocolVersionMin, _SSLSetRecordContext, _SSLSetSessionCacheTimeout, 
                        _SSLSetSessionConfig, _SSLSetSessionOption, _SSLSetSessionTicketsEnabled, 
-                       _SSLWrite, _SecACLCopyAuthorizations, _SecACLGetAuthorizations, 
+                       _SSLWrite, _SecABCTrigger, _SecACLCopyAuthorizations, _SecACLGetAuthorizations, 
                        _SecACLSetAuthorizations, _SecACLUpdateAuthorizations, _SecASN1PrintableString, 
                        _SecASN1UTF8String, _SecAbsoluteTimeFromDateContent, _SecAbsoluteTimeFromDateContentWithError, 
                        _SecAccessConstraintCreateBiometryAny, _SecAccessConstraintCreateBiometryCurrentSet, 
@@ -885,10 +885,11 @@ exports:
                        _SecPolicyCreateMobileStoreSigner, _SecPolicyCreateOCSPSigner, 
                        _SecPolicyCreateOSXProvisioningProfileSigning, _SecPolicyCreateOTATasking, 
                        _SecPolicyCreateOrderBundleSigner, _SecPolicyCreatePCSEscrowServiceIdKeySigning, 
-                       _SecPolicyCreatePCSEscrowServiceSigner, _SecPolicyCreatePassbookCardSigner, 
-                       _SecPolicyCreatePrivacyConfigurationProfileSigner, _SecPolicyCreateQAConfigurationProfileSigner, 
-                       _SecPolicyCreateQiSigning, _SecPolicyCreateRevocation, _SecPolicyCreateSMIME, 
-                       _SecPolicyCreateSSL, _SecPolicyCreateSSLWithATSPinning, _SecPolicyCreateSSLWithKeyUsage, 
+                       _SecPolicyCreatePCSEscrowServiceSigner, _SecPolicyCreatePPMAggregatorConfigSigning, 
+                       _SecPolicyCreatePassbookCardSigner, _SecPolicyCreatePrivacyConfigurationProfileSigner, 
+                       _SecPolicyCreateQAConfigurationProfileSigner, _SecPolicyCreateQiSigning, 
+                       _SecPolicyCreateRevocation, _SecPolicyCreateSMIME, _SecPolicyCreateSSL, 
+                       _SecPolicyCreateSSLWithATSPinning, _SecPolicyCreateSSLWithKeyUsage, 
                        _SecPolicyCreateTestApplePPQSigning, _SecPolicyCreateTestAppleSMPEncryption, 
                        _SecPolicyCreateTestMobileStoreSigner, _SecPolicyCreateURLBag, 
                        _SecPolicyCreateWithProperties, _SecPolicyCreateiAP, _SecPolicyCreateiAPSWAuth, 
@@ -1475,7 +1476,8 @@ exports:
                        _kSecPolicyAppleOTATasking, _kSecPolicyAppleOrderBundleSigner, 
                        _kSecPolicyApplePCSEscrowService, _kSecPolicyApplePCSEscrowServiceIdKeySigning, 
                        _kSecPolicyApplePKINITClient, _kSecPolicyApplePKINITServer, 
-                       _kSecPolicyApplePPQService, _kSecPolicyApplePPQSigning, _kSecPolicyApplePackageSigning, 
+                       _kSecPolicyApplePPMAggregatorConfigSigning, _kSecPolicyApplePPQService, 
+                       _kSecPolicyApplePPQSigning, _kSecPolicyApplePackageSigning, 
                        _kSecPolicyApplePassbookSigning, _kSecPolicyApplePayIssuerEncryption, 
                        _kSecPolicyApplePayModelSigning, _kSecPolicyApplePayQRCodeEncryption, 
                        _kSecPolicyApplePayQRCodeSigning, _kSecPolicyAppleProfileSigner, 
@@ -1713,8 +1715,8 @@ exports:
                        OTControlArguments, OTJoiningConfiguration, OTOperationConfiguration, 
                        SFAnalytics, SFAnalyticsActivityTracker, SFAnalyticsMultiSampler, 
                        SFAnalyticsSQLiteStore, SFAnalyticsSampler, SFSQLite, SOSAnalytics, 
-                       SOSCachedNotification, SecCoreAnalytics, SecEscrowRequest, 
-                       SecKeyProxy, SecXPCHelper, SecuritydXPCClient ]
+                       SOSCachedNotification, SecABC, SecCoreAnalytics, SecEscrowRequest, 
+                       SecKeyProxy, SecTapToRadar, SecXPCHelper, SecuritydXPCClient ]
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CMSDecoderSetSearchKeychain, _CMSEncode, _CMSEncoderSetEncapsulatedContentType, 
                        _ConvertArrayToKeyUsage, _GKBIS_DS_Store_Present, _GKBIS_Dot_underbar_Present, 

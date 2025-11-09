@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0304971E-BF52-37FA-81D0-290F934FB285
+    value:           42011870-216C-340A-8E47-C4780057CB7E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           48BEDD0B-E97C-3926-BEDE-A4D0D170B0E7
+    value:           19B01E1E-A611-30B1-B9A8-CC1339D30D2C
 install-name:    '/System/Library/PrivateFrameworks/SystemMigrationNetworking.framework/Versions/A/SystemMigrationNetworking'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

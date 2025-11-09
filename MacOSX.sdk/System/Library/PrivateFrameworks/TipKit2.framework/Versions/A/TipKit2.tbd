@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A98AD3A8-5AF0-3296-BDD9-18BA00E3E820
+    value:           BB56AD53-8CB0-33D7-8A08-FFF51CBFDA66
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E3EF0AD8-1F47-3169-8CC1-84E0F95BF08D
+    value:           6092C990-1003-3213-9861-1B756F7B8E58
 install-name:    '/System/Library/PrivateFrameworks/TipKit2.framework/Versions/A/TipKit2'
 current-version: 9999.99.99
 swift-abi-version: 7
@@ -140,6 +140,13 @@ exports:
                        '_$s7TipKit20A7PopoverC15popoverWillShowyy10Foundation12NotificationVFTj', 
                        '_$s7TipKit20A7PopoverC15popoverWillShowyy10Foundation12NotificationVFTq', 
                        '_$s7TipKit20A7PopoverC17closeButtonTappedyyFTj', '_$s7TipKit20A7PopoverC17closeButtonTappedyyFTq', 
+                       '_$s7TipKit20A7PopoverC20preferredContentSizeSo6CGSizeVvMTj', 
+                       '_$s7TipKit20A7PopoverC20preferredContentSizeSo6CGSizeVvMTq', 
+                       '_$s7TipKit20A7PopoverC20preferredContentSizeSo6CGSizeVvgTj', 
+                       '_$s7TipKit20A7PopoverC20preferredContentSizeSo6CGSizeVvgTq', 
+                       '_$s7TipKit20A7PopoverC20preferredContentSizeSo6CGSizeVvpMV', 
+                       '_$s7TipKit20A7PopoverC20preferredContentSizeSo6CGSizeVvsTj', 
+                       '_$s7TipKit20A7PopoverC20preferredContentSizeSo6CGSizeVvsTq', 
                        '_$s7TipKit20A7PopoverC3tip8delegateAC9TipsCore20A0C_So17NSPopoverDelegate_pSgtcfC', 
                        '_$s7TipKit20A7PopoverC3tip8delegateAC9TipsCore20A0C_So17NSPopoverDelegate_pSgtcfCTj', 
                        '_$s7TipKit20A7PopoverC3tip8delegateAC9TipsCore20A0C_So17NSPopoverDelegate_pSgtcfCTq', 
@@ -159,6 +166,9 @@ exports:
                        '_$s7TipKit20A9ViewModelC10edgeInsets7SwiftUI04EdgeF0VvpMV', 
                        '_$s7TipKit20A9ViewModelC10edgeInsets7SwiftUI04EdgeF0VvsTj', 
                        '_$s7TipKit20A9ViewModelC10edgeInsets7SwiftUI04EdgeF0VvsTq', 
+                       '_$s7TipKit20A9ViewModelC10idealWidth12CoreGraphics7CGFloatVSgvgTj', 
+                       '_$s7TipKit20A9ViewModelC10idealWidth12CoreGraphics7CGFloatVSgvgTq', 
+                       '_$s7TipKit20A9ViewModelC10idealWidth12CoreGraphics7CGFloatVSgvpMV', 
                        '_$s7TipKit20A9ViewModelC10titleColor7SwiftUI0F0VvMTj', '_$s7TipKit20A9ViewModelC10titleColor7SwiftUI0F0VvMTq', 
                        '_$s7TipKit20A9ViewModelC10titleColor7SwiftUI0F0VvgTj', '_$s7TipKit20A9ViewModelC10titleColor7SwiftUI0F0VvgTq', 
                        '_$s7TipKit20A9ViewModelC10titleColor7SwiftUI0F0VvpMV', '_$s7TipKit20A9ViewModelC10titleColor7SwiftUI0F0VvsTj', 
@@ -169,6 +179,9 @@ exports:
                        '_$s7TipKit20A9ViewModelC11$edgeInsets7Combine9PublishedV9PublisherVy7SwiftUI04EdgeF0V_GvpMV', 
                        '_$s7TipKit20A9ViewModelC11$edgeInsets7Combine9PublishedV9PublisherVy7SwiftUI04EdgeF0V_GvsTj', 
                        '_$s7TipKit20A9ViewModelC11$edgeInsets7Combine9PublishedV9PublisherVy7SwiftUI04EdgeF0V_GvsTq', 
+                       '_$s7TipKit20A9ViewModelC11idealHeight12CoreGraphics7CGFloatVSgvgTj', 
+                       '_$s7TipKit20A9ViewModelC11idealHeight12CoreGraphics7CGFloatVSgvgTq', 
+                       '_$s7TipKit20A9ViewModelC11idealHeight12CoreGraphics7CGFloatVSgvpMV', 
                        '_$s7TipKit20A9ViewModelC14assetTintColor7SwiftUI0G0VvMTj', 
                        '_$s7TipKit20A9ViewModelC14assetTintColor7SwiftUI0G0VvMTq', 
                        '_$s7TipKit20A9ViewModelC14assetTintColor7SwiftUI0G0VvgTj', 
@@ -210,7 +223,21 @@ exports:
                        '_$s7TipKit20A9ViewModelC17hideActionButtonsSbvMTj', '_$s7TipKit20A9ViewModelC17hideActionButtonsSbvMTq', 
                        '_$s7TipKit20A9ViewModelC17hideActionButtonsSbvgTj', '_$s7TipKit20A9ViewModelC17hideActionButtonsSbvgTq', 
                        '_$s7TipKit20A9ViewModelC17hideActionButtonsSbvpMV', '_$s7TipKit20A9ViewModelC17hideActionButtonsSbvsTj', 
-                       '_$s7TipKit20A9ViewModelC17hideActionButtonsSbvsTq', '_$s7TipKit20A9ViewModelC7Combine16ObservableObjectAAMc', 
+                       '_$s7TipKit20A9ViewModelC17hideActionButtonsSbvsTq', '_$s7TipKit20A9ViewModelC20preferredContentSizeSo6CGSizeVvMTj', 
+                       '_$s7TipKit20A9ViewModelC20preferredContentSizeSo6CGSizeVvMTq', 
+                       '_$s7TipKit20A9ViewModelC20preferredContentSizeSo6CGSizeVvgTj', 
+                       '_$s7TipKit20A9ViewModelC20preferredContentSizeSo6CGSizeVvgTq', 
+                       '_$s7TipKit20A9ViewModelC20preferredContentSizeSo6CGSizeVvpMV', 
+                       '_$s7TipKit20A9ViewModelC20preferredContentSizeSo6CGSizeVvsTj', 
+                       '_$s7TipKit20A9ViewModelC20preferredContentSizeSo6CGSizeVvsTq', 
+                       '_$s7TipKit20A9ViewModelC21$preferredContentSize7Combine9PublishedV9PublisherVySo6CGSizeV_GvMTj', 
+                       '_$s7TipKit20A9ViewModelC21$preferredContentSize7Combine9PublishedV9PublisherVySo6CGSizeV_GvMTq', 
+                       '_$s7TipKit20A9ViewModelC21$preferredContentSize7Combine9PublishedV9PublisherVySo6CGSizeV_GvgTj', 
+                       '_$s7TipKit20A9ViewModelC21$preferredContentSize7Combine9PublishedV9PublisherVySo6CGSizeV_GvgTq', 
+                       '_$s7TipKit20A9ViewModelC21$preferredContentSize7Combine9PublishedV9PublisherVySo6CGSizeV_GvpMV', 
+                       '_$s7TipKit20A9ViewModelC21$preferredContentSize7Combine9PublishedV9PublisherVySo6CGSizeV_GvsTj', 
+                       '_$s7TipKit20A9ViewModelC21$preferredContentSize7Combine9PublishedV9PublisherVySo6CGSizeV_GvsTq', 
+                       '_$s7TipKit20A9ViewModelC7Combine16ObservableObjectAAMc', 
                        '_$s7TipKit20A9ViewModelC9assetSizeSo6CGSizeVvMTj', '_$s7TipKit20A9ViewModelC9assetSizeSo6CGSizeVvMTq', 
                        '_$s7TipKit20A9ViewModelC9assetSizeSo6CGSizeVvgTj', '_$s7TipKit20A9ViewModelC9assetSizeSo6CGSizeVvgTq', 
                        '_$s7TipKit20A9ViewModelC9assetSizeSo6CGSizeVvpMV', '_$s7TipKit20A9ViewModelC9assetSizeSo6CGSizeVvsTj', 

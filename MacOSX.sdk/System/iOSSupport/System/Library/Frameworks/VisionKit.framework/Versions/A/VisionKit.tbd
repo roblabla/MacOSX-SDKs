@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           5F6B5489-63CA-3258-8BD5-766C97C3DA34
+    value:           35B14585-F323-3B8F-9843-79FCA313DEF5
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           6CF66556-1F31-3697-AA58-0560BDCEE7DA
+    value:           B4223B26-8AF3-3C33-B457-B232BE339BE7
 install-name:    '/System/iOSSupport/System/Library/Frameworks/VisionKit.framework/Versions/A/VisionKit'
 swift-abi-version: 7
 reexported-libraries:
@@ -421,13 +421,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           CDD55F9E-E669-3880-ABFA-F5ACB6D4BE55
+    value:           BD1B307F-B272-3A88-ABA7-F3B62D41DF08
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           84199FBC-A58E-3E9B-8E86-C9B96E4E419F
+    value:           044F927C-E8F5-3103-9D4E-ADBED6431CC1
 install-name:    '/System/iOSSupport/System/Library/PrivateFrameworks/DocumentCamera.framework/Versions/A/DocumentCamera'
-current-version: 110
+current-version: 115
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _DCDebugInterfaceEnabled, _DCScanWasDeletedNotification, _DCTransformFromImageOrientation, 

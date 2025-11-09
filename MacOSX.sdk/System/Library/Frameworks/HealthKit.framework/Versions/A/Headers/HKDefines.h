@@ -139,7 +139,7 @@ typedef NS_ENUM(NSInteger, HKBloodType) {
 typedef NS_ENUM(NSInteger, HKCategoryValueSleepAnalysis) {
     HKCategoryValueSleepAnalysisInBed = 0,
     HKCategoryValueSleepAnalysisAsleepUnspecified API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0)) = 1,
-    HKCategoryValueSleepAnalysisAsleep API_DEPRECATED_WITH_REPLACEMENT("HKCategoryValueSleepAnalysisAsleepUnspecified", ios(8.0, 16.0), watchos(2.0, 9.0)) = HKCategoryValueSleepAnalysisAsleepUnspecified,
+    HKCategoryValueSleepAnalysisAsleep API_DEPRECATED_WITH_REPLACEMENT("HKCategoryValueSleepAnalysisAsleepUnspecified", ios(8.0, 16.0), watchos(2.0, 9.0), macCatalyst(13.0, 16.0), macos(13.0, 13.0)) = HKCategoryValueSleepAnalysisAsleepUnspecified,
     HKCategoryValueSleepAnalysisAwake API_AVAILABLE(ios(10.0), watchos(3.0), macCatalyst(13.0), macos(13.0)) = 2,
     HKCategoryValueSleepAnalysisAsleepCore API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0)) = 3,
     HKCategoryValueSleepAnalysisAsleepDeep API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0)) = 4,

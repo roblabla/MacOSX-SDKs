@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           026B3811-4A07-3411-A677-75DC0B205562
+    value:           5F9C3073-F46C-38C9-8B45-AEF5338BD632
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           35FD8C11-044F-3226-B55C-33CA59C25354
+    value:           FB48528C-49D0-3B39-B16F-7FB2455E93C3
 install-name:    '/System/Library/PrivateFrameworks/ExchangeSyncExpress.framework/Versions/A/ExchangeSyncExpress'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

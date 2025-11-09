@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7B11574A-D4F3-3159-8B7E-F496188BF217
+    value:           091B1302-2FB4-3DF2-A5DF-7DFE352F36E0
   - target:          x86_64-maccatalyst
-    value:           7B11574A-D4F3-3159-8B7E-F496188BF217
+    value:           091B1302-2FB4-3DF2-A5DF-7DFE352F36E0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9C119A14-1AFC-3B0F-BEF3-ABFBD46D86D4
+    value:           5565A23D-E45F-3910-A325-81E29B3DC9BA
   - target:          arm64e-maccatalyst
-    value:           9C119A14-1AFC-3B0F-BEF3-ABFBD46D86D4
+    value:           5565A23D-E45F-3910-A325-81E29B3DC9BA
 install-name:    '/System/Library/PrivateFrameworks/AppSupport.framework/Versions/A/AppSupport'
 current-version: 29
 reexported-libraries:
@@ -256,9 +256,9 @@ exports:
     objc-classes:    [ ALCity, ALCityManager, ALSCGreenClient, CPAggregateDictionary, 
                        CPBitmapStore, CPDistributedMessagingAsyncOperation, CPDistributedMessagingCallout, 
                        CPDistributedMessagingCenter, CPDistributedMessagingDelayedReplyContext, 
-                       CPDistributedNotificationCenter, CPExclusiveLock, CPLRUDictionary, 
-                       CPLRUDictionaryNode, CPMemoryPool, CPMemoryPoolFile, CPNetworkObserver, 
-                       CPSearchMatcher, CapturedInvocationTrampoline, DelayedInvocationTrampoline, 
+                       CPDistributedNotificationCenter, CPLRUDictionary, CPLRUDictionaryNode, 
+                       CPMemoryPool, CPMemoryPoolFile, CPNetworkObserver, CPSearchMatcher, 
+                       CapturedInvocationTrampoline, DelayedInvocationTrampoline, 
                        InvocationTrampoline, OperationQueueInvocationTrampoline, 
                        PEPServiceConfiguration, RadiosPreferences, ThreadedInvocationTrampoline, 
                        _CPBundleIdentifierString, _CPInhibitorManager, _CPPowerAssertion, 
@@ -290,18 +290,17 @@ exports:
                        CPDistributedNotificationCenter._isServer, CPDistributedNotificationCenter._lock, 
                        CPDistributedNotificationCenter._queue, CPDistributedNotificationCenter._receiveNotificationSource, 
                        CPDistributedNotificationCenter._sendPorts, CPDistributedNotificationCenter._startCount, 
-                       CPExclusiveLock._fd, CPExclusiveLock._name, CPLRUDictionary._dictionary, 
-                       CPLRUDictionary._head, CPLRUDictionary._maxCount, CPLRUDictionary._tail, 
-                       CPLRUDictionaryNode._key, CPLRUDictionaryNode._object, CPLRUDictionaryNode.next, 
-                       CPLRUDictionaryNode.prev, CPMemoryPoolFile._deallocator, CPMemoryPoolFile._fd, 
-                       CPMemoryPoolFile._mutex, CPMemoryPoolFile._slotCount, CPMemoryPoolFile._slotLength, 
-                       CPMemoryPoolFile._slots, CPMemoryPoolFile._usedSlots, CPSearchMatcher._asciiComponents, 
-                       CPSearchMatcher._components, CPSearchMatcher._context, CPSearchMatcher._options, 
-                       CPSearchMatcher._wholeSearchStringData, CapturedInvocationTrampoline._outInvocation, 
-                       DelayedInvocationTrampoline._delay, InvocationTrampoline._target, 
-                       OperationQueueInvocationTrampoline._priority, OperationQueueInvocationTrampoline._queue, 
-                       PEPServiceConfiguration._cacheFilePath, PEPServiceConfiguration._cachedFileLastModifyDate, 
-                       PEPServiceConfiguration._shouldDownloadNetworkConfigFile, 
+                       CPLRUDictionary._dictionary, CPLRUDictionary._head, CPLRUDictionary._maxCount, 
+                       CPLRUDictionary._tail, CPLRUDictionaryNode._key, CPLRUDictionaryNode._object, 
+                       CPLRUDictionaryNode.next, CPLRUDictionaryNode.prev, CPMemoryPoolFile._deallocator, 
+                       CPMemoryPoolFile._fd, CPMemoryPoolFile._mutex, CPMemoryPoolFile._slotCount, 
+                       CPMemoryPoolFile._slotLength, CPMemoryPoolFile._slots, CPMemoryPoolFile._usedSlots, 
+                       CPSearchMatcher._asciiComponents, CPSearchMatcher._components, 
+                       CPSearchMatcher._context, CPSearchMatcher._options, CPSearchMatcher._wholeSearchStringData, 
+                       CapturedInvocationTrampoline._outInvocation, DelayedInvocationTrampoline._delay, 
+                       InvocationTrampoline._target, OperationQueueInvocationTrampoline._priority, 
+                       OperationQueueInvocationTrampoline._queue, PEPServiceConfiguration._cacheFilePath, 
+                       PEPServiceConfiguration._cachedFileLastModifyDate, PEPServiceConfiguration._shouldDownloadNetworkConfigFile, 
                        RadiosPreferences._applySkipCount, RadiosPreferences._cachedAirplaneMode, 
                        RadiosPreferences._delegate, RadiosPreferences._dispatchQueue, 
                        RadiosPreferences._isCachedAirplaneModeValid, RadiosPreferences._prefs, 
@@ -320,17 +319,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A363F319-4CDA-35D9-8420-378B9C51F220
+    value:           6FEB2056-BA12-30FE-AC14-D7A2B54EE08F
   - target:          x86_64-maccatalyst
-    value:           A363F319-4CDA-35D9-8420-378B9C51F220
+    value:           6FEB2056-BA12-30FE-AC14-D7A2B54EE08F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A267DDA9-D694-399E-A247-0DE7B4F4DDEC
+    value:           DA25C3B7-F906-3FAF-8C5A-ACED7F88B845
   - target:          arm64e-maccatalyst
-    value:           A267DDA9-D694-399E-A247-0DE7B4F4DDEC
+    value:           DA25C3B7-F906-3FAF-8C5A-ACED7F88B845
 install-name:    '/System/Library/PrivateFrameworks/CorePhoneNumbers.framework/Versions/A/CorePhoneNumbers'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -357,17 +356,19 @@ exports:
                        __PNCopyFormattedNumberForDigitsWithCountry, __PNCopyFormattedNumberForDigitsWithCountryByRemovingAtIndex, 
                        __PNCopyFormattedNumberSuggestionForDigitsWithCountry, __PNCopyFullyQualifiedNumberForCountry, 
                        __PNCopyFullyQualifiedNumberForCountryInternal, __PNCopyIndexStringsForAddressBookSearch, 
-                       __PNCopyInternationalCodeForCountry, __PNCopyInternationalPrefix, 
-                       __PNCopyLastFourDigitsOfLocalNumber, __PNCopyNationalDirectDialingPrefixForCountry, 
-                       __PNCopyNormalized, __PNCopyPrefixForCountry, __PNCopySampleNumberForCountry, 
+                       __PNCopyInternationalCodeForCountry, __PNCopyInternationalDirectDialingPrefixForCountry, 
+                       __PNCopyInternationalPrefix, __PNCopyLastFourDigitsOfLocalNumber, 
+                       __PNCopyNationalDirectDialingPrefixForCountry, __PNCopyNormalized, 
+                       __PNCopyPrefixForCountry, __PNCopySampleNumberForCountry, 
                        __PNCopyStrippedNumberWithoutPauses, __PNCreateLocalizedStringWithString, 
                        __PNCreateStringByAddingPauses, __PNCreateStringByStrippingFormattingAndNotVisiblyAllowable, 
                        __PNFindFormatRuleForDigitsWithCountry, __PNGetITUCountryCode, 
-                       __PNSetSampleNumberForCountry, _cpn_default_log, _decomposedPhoneNumbersEqual, 
-                       _kCFPhoneNumberBundleIdentifier, _kCFPhoneNumberBundleRulesetResourceName, 
-                       _kCFPhoneNumberBundleRulesetResourceType, _kCFPhoneNumberStringTransformNormalize, 
-                       _pn_uset_alphabetSetContains, _pn_uset_basicPresentationSetContains, 
-                       _pn_uset_expandedPresentationSetContains, _pn_uset_internationalPrefixSetContains, 
-                       _pn_uset_numeralSetContains, _pn_uset_pauseSetContains, _pn_uset_separatorSetContains, 
+                       __PNIsDomesticNumber, __PNSetSampleNumberForCountry, _cpn_default_log, 
+                       _decomposedPhoneNumbersEqual, _kCFPhoneNumberBundleIdentifier, 
+                       _kCFPhoneNumberBundleRulesetResourceName, _kCFPhoneNumberBundleRulesetResourceType, 
+                       _kCFPhoneNumberStringTransformNormalize, _pn_uset_alphabetSetContains, 
+                       _pn_uset_basicPresentationSetContains, _pn_uset_expandedPresentationSetContains, 
+                       _pn_uset_internationalPrefixSetContains, _pn_uset_numeralSetContains, 
+                       _pn_uset_pauseSetContains, _pn_uset_separatorSetContains, 
                        _pn_uset_verticalServiceSetContains ]
 ...

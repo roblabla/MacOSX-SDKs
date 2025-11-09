@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7F4C5D82-2181-3E82-8504-F0ECFE76F201
+    value:           525C64F7-95D7-3CDC-ADDF-6FDC2812FE37
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3EEEDEF1-9D7E-3571-A720-9FB51C37FBB4
+    value:           3CEFF9D9-1E14-3230-B722-713EC2D5FDFA
 install-name:    '/System/Library/PrivateFrameworks/Trial.framework/Versions/A/Trial'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -72,6 +72,7 @@ exports:
                        _kTRIEvaluationStatusEntitlement, _kTRITrialClientEntitlement ]
     objc-classes:    [ TRIAllocationStatus, TRIAllocationStatusCursor, TRIAllocationStatusDefaultProvider, 
                        TRIAllocationStatusProviderGuardedData, TRIAppContainer, TRIAssetIdFactorName, 
+                       TRIBMLTActiveEvaluationTuple, TRIBackgroundMLTaskIdentifiers, 
                        TRICKServerEnvironmentReader, TRICellularParameterGuardedData, 
                        TRICellularParameterManager, TRIClient, TRIClientFactorPackStreamingParser, 
                        TRIClientFactorPackStreamingWriter, TRIClientGuardedData, 

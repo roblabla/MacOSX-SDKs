@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B2C048AF-C974-32BC-B8B8-7313CF157574
+    value:           92DD7643-5520-34DA-B521-2AE7A5A4B2F8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DF955059-CC57-32E4-B5A1-ED082E35C173
+    value:           22680C5D-15A4-3CEF-9A9C-8FB2E6A3F7FA
 install-name:    '/System/Library/PrivateFrameworks/FinanceKitUI.framework/Versions/A/FinanceKitUI'
 swift-abi-version: 7
 exports:
@@ -18,8 +18,8 @@ exports:
                        '_$s10FinanceKit5OrderV11FulfillmentO0aB2UIE11statusColor3for05SwiftE00G0VAC_tF', 
                        '_$s10FinanceKit5OrderV11FulfillmentO13DisplayStatusO0aB2UIAC06PickupF0ORszrlE11statusColor05SwiftG00J0Vvg', 
                        '_$s10FinanceKit5OrderV11FulfillmentO13DisplayStatusO0aB2UIAC06PickupF0ORszrlE11statusColor05SwiftG00J0VvpMV', 
-                       '_$s10FinanceKit5OrderV11FulfillmentO13DisplayStatusO0aB2UIAC08ShippingF0ORszrlE11statusColor05SwiftG00J0Vvg', 
-                       '_$s10FinanceKit5OrderV11FulfillmentO13DisplayStatusO0aB2UIAC08ShippingF0ORszrlE11statusColor05SwiftG00J0VvpMV', 
+                       '_$s10FinanceKit5OrderV11FulfillmentO13DisplayStatusO0aB2UIAE08ShippingeF9TypeModelVRszrlE11statusColor05SwiftG00L0Vvg', 
+                       '_$s10FinanceKit5OrderV11FulfillmentO13DisplayStatusO0aB2UIAE08ShippingeF9TypeModelVRszrlE11statusColor05SwiftG00L0VvpMV', 
                        '_$s10FinanceKit5OrderV11FulfillmentO13DisplayStatusO0aB2UIs5NeverORszrlE11statusColor05SwiftG00J0Vvg', 
                        '_$s10FinanceKit5OrderV11FulfillmentO13DisplayStatusO0aB2UIs5NeverORszrlE11statusColor05SwiftG00J0VvpMV', 
                        '_$s10FinanceKit5OrderV16CoreTransferable0E00aB2UIMc', '_$s12FinanceKitUI10OrderImageV10imageNames22orderVersionIdentifier11contentMode8fallbackACyxGSaySSG_0aB00D0V0iJ0VAA0dE5ModelV07ContentL0OxyctcfC', 

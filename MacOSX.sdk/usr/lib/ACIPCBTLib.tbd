@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AB45C04C-0B47-3B82-8CAB-771262F00D53
+    value:           CDCD01FC-0D16-3249-831B-4F8016D5350B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9E4636DA-BE40-3DA4-AED0-906E9D2BAF6D
+    value:           BAF83B17-4F3A-3F1E-9547-B8A986DB7613
 install-name:    '/usr/lib/ACIPCBTLib.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

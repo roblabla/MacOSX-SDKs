@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9D8E89E1-6E31-3807-97C5-B0850F74C377
+    value:           D686E037-E6B2-35A0-AB42-0A187E2FA2CF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0239DF62-42F7-3980-A554-12EBA7B51615
+    value:           CC248340-4E22-30C3-BD76-EDD671F4B4C0
 install-name:    '/System/Library/PrivateFrameworks/FocusSettingsUI.framework/Versions/A/FocusSettingsUI'
 swift-abi-version: 7
 exports:

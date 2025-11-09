@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DCEB4313-6A89-3D4D-8469-137DB8F4074D
+    value:           624BB53F-241F-3702-9D44-E6296EE206ED
   - target:          x86_64-maccatalyst
-    value:           DCEB4313-6A89-3D4D-8469-137DB8F4074D
+    value:           624BB53F-241F-3702-9D44-E6296EE206ED
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2FDAEB38-29C5-3894-9B19-6F4C60AC9CE4
+    value:           0FA81FDA-2DA3-3325-B56A-3C11A9F63356
   - target:          arm64e-maccatalyst
-    value:           2FDAEB38-29C5-3894-9B19-6F4C60AC9CE4
+    value:           0FA81FDA-2DA3-3325-B56A-3C11A9F63356
 install-name:    '/System/Library/Frameworks/CryptoKit.framework/Versions/A/CryptoKit'
 swift-abi-version: 7
 exports:

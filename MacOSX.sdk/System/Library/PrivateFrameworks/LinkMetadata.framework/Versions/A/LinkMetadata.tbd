@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           761377F6-6F14-3C56-B549-25C5DD653A33
+    value:           4B12CCAF-30A0-34A2-BDFD-69D29FEC298E
   - target:          x86_64-maccatalyst
-    value:           761377F6-6F14-3C56-B549-25C5DD653A33
+    value:           4B12CCAF-30A0-34A2-BDFD-69D29FEC298E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           976440ED-0AE3-3A14-9B5D-6B7BEB53808F
+    value:           44D08DF4-98FA-3EF3-860D-C159AEEAB62F
   - target:          arm64e-maccatalyst
-    value:           976440ED-0AE3-3A14-9B5D-6B7BEB53808F
+    value:           44D08DF4-98FA-3EF3-860D-C159AEEAB62F
 install-name:    '/System/Library/PrivateFrameworks/LinkMetadata.framework/Versions/A/LinkMetadata'
-current-version: 130.5
+current-version: 130.100.5
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -87,7 +87,7 @@ exports:
                        _LNActionTypeSpecificMetadataKeyDefaultValue, _LNActionTypeSpecificMetadataKeyEntityMetadata, 
                        _LNActionTypeSpecificMetadataKeyEntityType, _LNAvailabilityAnnotationWildcardVersion, 
                        _LNBundleMetadataVersionAsString, _LNEntityIdentifierMaximumValueLength, 
-                       _LNIdentifierScopeAsString, _LNIntentsValueTypeIdentifierAsString, 
+                       _LNEnumIdentifierIsSystem, _LNIdentifierScopeAsString, _LNIntentsValueTypeIdentifierAsString, 
                        _LNLogCategoryExecution, _LNLogCategoryGeneral, _LNLogCategoryMetadata, 
                        _LNLogCategoryPolicy, _LNLogCategoryQuery, _LNLogCategorySandbox, 
                        _LNLogCategorySecurity, _LNLogCategoryView, _LNLogCategoryVocabulary, 

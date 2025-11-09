@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           40A11D7C-A89B-3AFF-BE39-019F7B8CBBF4
+    value:           C63B00EF-C555-3F87-90F5-C5130704BEBA
   - target:          x86_64-maccatalyst
-    value:           40A11D7C-A89B-3AFF-BE39-019F7B8CBBF4
+    value:           C63B00EF-C555-3F87-90F5-C5130704BEBA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0D8C31D5-7D97-321E-87D6-39620A06715C
+    value:           A5BCE73C-4572-37E2-AA20-ACD98D67698D
   - target:          arm64e-maccatalyst
-    value:           0D8C31D5-7D97-321E-87D6-39620A06715C
+    value:           A5BCE73C-4572-37E2-AA20-ACD98D67698D
 install-name:    '/usr/lib/libmis.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

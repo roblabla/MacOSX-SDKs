@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D7666812-4CF0-3326-B4E9-1CDE54BA14EE
+    value:           964F4CD5-F21C-3DC6-971C-C275306B8084
   - target:          x86_64-maccatalyst
-    value:           D7666812-4CF0-3326-B4E9-1CDE54BA14EE
+    value:           964F4CD5-F21C-3DC6-971C-C275306B8084
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6FAF2F8F-C423-3B62-99B1-27FA60B334E5
+    value:           28D756CD-8E8A-3AEC-9D39-FE31A06C0DEB
   - target:          arm64e-maccatalyst
-    value:           6FAF2F8F-C423-3B62-99B1-27FA60B334E5
+    value:           28D756CD-8E8A-3AEC-9D39-FE31A06C0DEB
 install-name:    '/System/Library/PrivateFrameworks/CryptoKitPrivate.framework/Versions/A/CryptoKitPrivate'
 swift-abi-version: 7
 exports:
@@ -221,12 +221,12 @@ exports:
                        '_$s16CryptoKitPrivate18AlishaSPAKE2ProverCMo', '_$s16CryptoKitPrivate18AlishaSPAKE2ProverCMu', 
                        '_$s16CryptoKitPrivate18AlishaSPAKE2ProverCN', '_$s16CryptoKitPrivate18AlishaSPAKE2ProverCfD', 
                        '_$s16CryptoKitPrivate18CKPIETFKeyBlindingC10secKeyFrom24compressedRepresentationSo03SecG3RefaSgSo6NSDataC_tFZ', 
-                       '_$s16CryptoKitPrivate18CKPIETFKeyBlindingC14blindPublicKey06publicH04withSo03SecH3RefaAH_AHtKFZ', 
-                       '_$s16CryptoKitPrivate18CKPIETFKeyBlindingC16unblindPublicKey_4withSo03SecH3RefaAG_AGtKFZ', 
+                       '_$s16CryptoKitPrivate18CKPIETFKeyBlindingC14blindPublicKey06publicH04with7contextSo03SecH3RefaAI_AISo6NSDataCtKFZ', 
+                       '_$s16CryptoKitPrivate18CKPIETFKeyBlindingC16unblindPublicKey_4with7contextSo03SecH3RefaAH_AHSo6NSDataCtKFZ', 
                        '_$s16CryptoKitPrivate18CKPIETFKeyBlindingC23privateScalarFromSecKeyy10Foundation4DataVSgSo0iJ3RefaFZ', 
                        '_$s16CryptoKitPrivate18CKPIETFKeyBlindingC28compressedRepresentationFrom6secKeySo6NSDataCSgSo03SecJ3Refa_tFZ', 
-                       '_$s16CryptoKitPrivate18CKPIETFKeyBlindingC7isValid9signature3for4withSb10Foundation4DataV_AJSo9SecKeyRefatFZ', 
-                       '_$s16CryptoKitPrivate18CKPIETFKeyBlindingC9blindSign_9blindedBy4withSo6NSDataC10Foundation4DataV_So9SecKeyRefaAMtKFZ', 
+                       '_$s16CryptoKitPrivate18CKPIETFKeyBlindingC7isValid9signature3for4with7contextSb10Foundation4DataV_AKSo9SecKeyRefaSo6NSDataCtFZ', 
+                       '_$s16CryptoKitPrivate18CKPIETFKeyBlindingC9blindSign_9blindedBy4with7contextSo6NSDataC10Foundation4DataV_So9SecKeyRefaAnItKFZ', 
                        '_$s16CryptoKitPrivate18CKPIETFKeyBlindingCACycfC', '_$s16CryptoKitPrivate18CKPIETFKeyBlindingCACycfc', 
                        '_$s16CryptoKitPrivate18CKPIETFKeyBlindingCMa', '_$s16CryptoKitPrivate18CKPIETFKeyBlindingCMn', 
                        '_$s16CryptoKitPrivate18CKPIETFKeyBlindingCMo', '_$s16CryptoKitPrivate18CKPIETFKeyBlindingCN', 

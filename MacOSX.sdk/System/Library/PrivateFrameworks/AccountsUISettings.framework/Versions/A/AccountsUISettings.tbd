@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D5BB69DA-3DF5-3B8F-9547-4ACE7C6F7F14
+    value:           FFC7648F-8449-3D20-8744-FEB477E0CD5A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CA677F50-5AB3-373D-A32C-4A4CF4FB7070
+    value:           DEDBA98F-40C4-397A-A019-726FEF95CF5C
 install-name:    '/System/Library/PrivateFrameworks/AccountsUISettings.framework/Versions/A/AccountsUISettings'
 swift-abi-version: 7
 exports:

@@ -39,5 +39,6 @@ typedef NS_ENUM(NSInteger, PKDisbursementRequestSchedule) {
 NS_ASSUME_NONNULL_END
 
 #else
+#import <TargetConditionals.h>
 #import <PassKitCore/PKDisbursementRequest.h>
 #endif

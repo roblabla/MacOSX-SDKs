@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2972D16B-EBAC-308A-9687-7615729AA1CA
+    value:           553644B3-E582-3DC1-9FF3-77192DF4BDB2
   - target:          x86_64-maccatalyst
-    value:           2972D16B-EBAC-308A-9687-7615729AA1CA
+    value:           553644B3-E582-3DC1-9FF3-77192DF4BDB2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           91B32546-DA3E-3BEA-B788-4A0520D018E2
+    value:           520EE409-0B30-30FC-8106-F35BC6F9C5C1
   - target:          arm64e-maccatalyst
-    value:           91B32546-DA3E-3BEA-B788-4A0520D018E2
+    value:           520EE409-0B30-30FC-8106-F35BC6F9C5C1
 install-name:    '/System/Library/PrivateFrameworks/CloudKitDistributedSync.framework/Versions/A/CloudKitDistributedSync'
-current-version: 2020.16
+current-version: 2030.20
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

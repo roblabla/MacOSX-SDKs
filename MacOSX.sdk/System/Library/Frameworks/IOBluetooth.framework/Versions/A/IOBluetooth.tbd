@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           23AA22B7-4C57-39EB-91C1-1B6C9002707A
+    value:           C0C0B536-D3B0-3139-AA3B-E44C5379A1D9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CC5A5C8E-2114-3EC4-BB62-86E47D586FC3
+    value:           37FFD0EF-18FD-39D5-BDCE-7C1392AA52D2
 install-name:    '/System/Library/Frameworks/IOBluetooth.framework/Versions/A/IOBluetooth'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

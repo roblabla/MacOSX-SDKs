@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B0972B6A-92BE-3058-B492-133167B02903
+    value:           D75692D3-65DE-3282-8898-099FDF5558A4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5FBED7D3-57A7-33E9-B62E-8900D88E74D0
+    value:           0573795D-E158-3B88-B9C1-FF845A03346B
 install-name:    '/System/Library/PrivateFrameworks/Settings.framework/Versions/A/Settings'
 current-version: 0
 compatibility-version: 0
@@ -171,11 +171,18 @@ exports:
                        '_$s8Settings0A7SubpaneC8selectedSbvMTj', '_$s8Settings0A7SubpaneC8selectedSbvMTq', 
                        '_$s8Settings0A7SubpaneC8selectedSbvgTj', '_$s8Settings0A7SubpaneC8selectedSbvgTq', 
                        '_$s8Settings0A7SubpaneC8selectedSbvpMV', '_$s8Settings0A7SubpaneC8selectedSbvsTj', 
-                       '_$s8Settings0A7SubpaneC8selectedSbvsTq', '_$s8Settings0A7SubpaneC9hashValueSivgTj', 
-                       '_$s8Settings0A7SubpaneC9hashValueSivgTq', '_$s8Settings0A7SubpaneC9hashValueSivpMV', 
-                       '_$s8Settings0A7SubpaneCMa', '_$s8Settings0A7SubpaneCMm', 
-                       '_$s8Settings0A7SubpaneCMn', '_$s8Settings0A7SubpaneCMo', 
-                       '_$s8Settings0A7SubpaneCMu', '_$s8Settings0A7SubpaneCN', '_$s8Settings0A7SubpaneCSHAAMc', 
+                       '_$s8Settings0A7SubpaneC8selectedSbvsTq', '_$s8Settings0A7SubpaneC9$disabled7Combine9PublishedV9PublisherVySb_GvMTj', 
+                       '_$s8Settings0A7SubpaneC9$disabled7Combine9PublishedV9PublisherVySb_GvMTq', 
+                       '_$s8Settings0A7SubpaneC9$disabled7Combine9PublishedV9PublisherVySb_GvgTj', 
+                       '_$s8Settings0A7SubpaneC9$disabled7Combine9PublishedV9PublisherVySb_GvgTq', 
+                       '_$s8Settings0A7SubpaneC9$disabled7Combine9PublishedV9PublisherVySb_GvpMV', 
+                       '_$s8Settings0A7SubpaneC9$disabled7Combine9PublishedV9PublisherVySb_GvsTj', 
+                       '_$s8Settings0A7SubpaneC9$disabled7Combine9PublishedV9PublisherVySb_GvsTq', 
+                       '_$s8Settings0A7SubpaneC9hashValueSivgTj', '_$s8Settings0A7SubpaneC9hashValueSivgTq', 
+                       '_$s8Settings0A7SubpaneC9hashValueSivpMV', '_$s8Settings0A7SubpaneCMa', 
+                       '_$s8Settings0A7SubpaneCMm', '_$s8Settings0A7SubpaneCMn', 
+                       '_$s8Settings0A7SubpaneCMo', '_$s8Settings0A7SubpaneCMu', 
+                       '_$s8Settings0A7SubpaneCN', '_$s8Settings0A7SubpaneCSHAAMc', 
                        '_$s8Settings0A7SubpaneCSQAAMc', '_$s8Settings0A7SubpaneC_12hostDelegate10isDisabledAcA0A9ExtensionC_AA0A19PrivateHostProtocol_pSgSbtcfC', 
                        '_$s8Settings0A7SubpaneC_12hostDelegate10isDisabledAcA0A9ExtensionC_AA0A19PrivateHostProtocol_pSgSbtcfCTj', 
                        '_$s8Settings0A7SubpaneC_12hostDelegate10isDisabledAcA0A9ExtensionC_AA0A19PrivateHostProtocol_pSgSbtcfCTq', 

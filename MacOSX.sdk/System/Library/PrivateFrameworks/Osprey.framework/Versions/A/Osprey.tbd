@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A5FCC84C-BD52-3589-849E-46ECC3D6FC01
+    value:           E52F352E-EA34-3A3A-BABC-68C7C7618CC2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E58C98E3-654C-3146-9CF6-F0D1C8CE6D53
+    value:           F6A0016A-FFCC-35C2-8FAE-37BEB33B8945
 install-name:    '/System/Library/PrivateFrameworks/Osprey.framework/Versions/A/Osprey'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

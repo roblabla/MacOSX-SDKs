@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0B265F07-1CEF-3C92-9FA6-54A32362942C
+    value:           63AA848A-2F51-3B15-9354-B422033687D7
   - target:          x86_64-maccatalyst
-    value:           0B265F07-1CEF-3C92-9FA6-54A32362942C
+    value:           63AA848A-2F51-3B15-9354-B422033687D7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           16789EF8-F306-3050-9137-7E72804EFC2B
+    value:           F84137F5-3B8E-3C83-8873-553333C2400D
   - target:          arm64e-maccatalyst
-    value:           16789EF8-F306-3050-9137-7E72804EFC2B
+    value:           F84137F5-3B8E-3C83-8873-553333C2400D
 install-name:    '/System/Library/Frameworks/AppIntents.framework/Versions/A/AppIntents'
-current-version: 130.5
+current-version: 130.100.5
 compatibility-version: 0
 swift-abi-version: 7
 exports:

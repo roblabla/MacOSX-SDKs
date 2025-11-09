@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           054CC612-EDF5-345A-A2BA-7C93F8A4833C
+    value:           BA8D5C28-78D5-3F36-870C-F983913AC277
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FCEE76C1-246D-38F9-88F8-1FA2CD34D7CE
+    value:           EC4A5F23-354C-35E3-A0C8-087787C2DE70
 install-name:    '/System/Library/PrivateFrameworks/SafariSharedUI.framework/Versions/A/SafariSharedUI'
-current-version: 614.2.9
+current-version: 614.3.7
 compatibility-version: 0
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -888,19 +888,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D29DC28A-2174-36E4-B2F9-796442B6CFE3
+    value:           C92CE82C-D779-3468-83CC-2C40C7082B8C
   - target:          x86_64-maccatalyst
-    value:           D29DC28A-2174-36E4-B2F9-796442B6CFE3
+    value:           C92CE82C-D779-3468-83CC-2C40C7082B8C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EE058205-BFF1-3D1C-A8CA-128567A5C9DF
+    value:           D5A8FF40-F488-3E32-BD2E-37B488B878F1
   - target:          arm64e-maccatalyst
-    value:           EE058205-BFF1-3D1C-A8CA-128567A5C9DF
+    value:           D5A8FF40-F488-3E32-BD2E-37B488B878F1
 install-name:    '/System/Library/PrivateFrameworks/SafariCore.framework/Versions/A/SafariCore'
-current-version: 614.2.9
+current-version: 614.3.7
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -1006,9 +1006,9 @@ exports:
                        _WBSStringFromCloudBookmarksErrorCode, _WBSStringFromCloudBookmarksSyncResult, 
                        _WBSStringFromCloudTabsErrorCode, _WBSSuppressCloudKitBookmarkMigrationForCyclerTestPreferenceKey, 
                        _WBSTabGroupUUIDForCurrentFocusModeKey, _WBSTeamIdentifierFromAuditToken, 
-                       _WBSUnlocalizedStringFromPasswordBreachCheckResult, __WBSLocalizedString, 
-                       __WBSLocalizedStringWithCurrentUserLocale, __WBSRunOnceImpl, 
-                       __ZN12SafariShared25SuddenTerminationDisabler23enableSuddenTerminationEv, 
+                       _WBSTimeUntilNextWeeklyAnalyticsReportForKey, _WBSUnlocalizedStringFromPasswordBreachCheckResult, 
+                       __WBSLocalizedString, __WBSLocalizedStringWithCurrentUserLocale, 
+                       __WBSRunOnceImpl, __ZN12SafariShared25SuddenTerminationDisabler23enableSuddenTerminationEv, 
                        __ZN12SafariShared25SuddenTerminationDisabler24disableSuddenTerminationEv, 
                        __ZN12SafariShared25SuddenTerminationDisablerC1EP8NSString, 
                        __ZN12SafariShared25SuddenTerminationDisablerC2EP8NSString, 
@@ -1189,13 +1189,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A2C41659-B229-32CF-B0BE-2D8308F9FFDF
+    value:           00F4AE36-0816-309C-B4BE-DCF05B55357F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D31E8877-3C95-3F82-8B35-CABE6D02F648
+    value:           FBA39F0A-FCC8-3472-BEFE-6ECE83F71C20
 install-name:    '/System/Library/PrivateFrameworks/SafariShared.framework/Versions/A/SafariShared'
-current-version: 614.2.9
+current-version: 614.3.7
 compatibility-version: 0
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -1411,8 +1411,8 @@ exports:
                        _WBSLastDigitsOfCreditCardNumber, _WBSLastKnownStartPageAppearancePreferenceKey, 
                        _WBSLastKnownStartPageBackgroundImageNameKey, _WBSLastTimeManageExtensionSheetWasViewedPreferenceKey, 
                        _WBSLastWeakPasswordReportTimePreferenceKey, _WBSLaunchAgentEnabledTopicsKey, 
-                       _WBSLaunchAgentIgnoredTopicsKey, _WBSLaunchAgentSyncServiceBundePathKey, 
-                       _WBSLegacyHideFrequentlyVisitedSitesDefaultsKey, _WBSLegacySafariSettingsStartPageBackgroundImageVisibilityKey, 
+                       _WBSLaunchAgentIgnoredTopicsKey, _WBSLegacyHideFrequentlyVisitedSitesDefaultsKey, 
+                       _WBSLegacySafariSettingsStartPageBackgroundImageVisibilityKey, 
                        _WBSLegacySafariSettingsStartPageCloudTabsVisibilityKey, _WBSLegacySafariSettingsStartPageFavoritesVisibilityKey, 
                        _WBSLegacySafariSettingsStartPageFrequentlyVisitedSitesVisibilityKey, 
                        _WBSLegacySafariSettingsStartPageHighlightsVisibilityKey, 

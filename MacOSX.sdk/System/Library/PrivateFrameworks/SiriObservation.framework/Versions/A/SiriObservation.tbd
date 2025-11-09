@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8073EB39-051D-375E-B7D9-85DAA4B4C738
+    value:           353226B3-88FF-3768-A661-BE23C08D7AAB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B2EE20FF-0B89-379C-8713-52CD284AD1AE
+    value:           EA1A5C01-3361-349C-BBBA-7A2CD0F2838A
 install-name:    '/System/Library/PrivateFrameworks/SiriObservation.framework/Versions/A/SiriObservation'
 current-version: 0
 compatibility-version: 0

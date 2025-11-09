@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           38420AF9-3681-35DB-8B6B-1F224778E96C
+    value:           9EC394F3-4951-3D4E-A58A-82CD06DB46DC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F2E98E26-1031-3DEC-A492-D382022E528B
+    value:           BE696DE9-BCE3-320B-B2F4-61E5AEA12557
 install-name:    '/System/Library/PrivateFrameworks/SiriSettingsIntents.framework/Versions/A/SiriSettingsIntents'
 swift-abi-version: 7
 allowable-clients:

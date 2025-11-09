@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A5B944BD-E7F2-3A7C-8459-AF9E60FC60E3
+    value:           1F57DE5C-FD24-3080-B4B2-69A671B441B8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E431C9E1-CCB5-3C75-B9C8-FD385C5D8138
+    value:           3FB6D7C1-5214-3BBA-AA0C-E4C9D76CBAB6
 install-name:    '/System/Library/Frameworks/Matter.framework/Versions/A/Matter'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -119,8 +119,8 @@ exports:
                        MTRContentLauncherClusterLaunchResponseParams, MTRContentLauncherClusterLaunchURLParams, 
                        MTRContentLauncherClusterParameter, MTRContentLauncherClusterStyleInformation, 
                        MTRControllerFactory, MTRControllerFactoryParams, MTRDescriptorClusterDeviceType, 
-                       MTRDevice, MTRDeviceAttestationDeviceInfo, MTRDeviceController, 
-                       MTRDeviceControllerStartupParams, MTRDiagnosticLogsClusterRetrieveLogsRequestParams, 
+                       MTRDescriptorClusterDeviceTypeStruct, MTRDevice, MTRDeviceAttestationDeviceInfo, 
+                       MTRDeviceController, MTRDeviceControllerStartupParams, MTRDiagnosticLogsClusterRetrieveLogsRequestParams, 
                        MTRDiagnosticLogsClusterRetrieveLogsResponseParams, MTRDoorLockClusterClearCredentialParams, 
                        MTRDoorLockClusterClearHolidayScheduleParams, MTRDoorLockClusterClearUserParams, 
                        MTRDoorLockClusterClearWeekDayScheduleParams, MTRDoorLockClusterClearYearDayScheduleParams, 

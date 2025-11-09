@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0BE82E9F-8CDF-340F-8DA9-48EC788DD9FE
+    value:           B712B0A1-3452-31E0-89F7-523D484F3B3C
   - target:          x86_64-maccatalyst
-    value:           0BE82E9F-8CDF-340F-8DA9-48EC788DD9FE
+    value:           B712B0A1-3452-31E0-89F7-523D484F3B3C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D1B8E58A-4B44-3DA1-8051-9EE44D69FF17
+    value:           77526EEA-0BBB-3070-ADA2-44DCA13AACCB
   - target:          arm64e-maccatalyst
-    value:           D1B8E58A-4B44-3DA1-8051-9EE44D69FF17
+    value:           77526EEA-0BBB-3070-ADA2-44DCA13AACCB
 install-name:    '/System/Library/PrivateFrameworks/vCard.framework/Versions/A/vCard'
-current-version: 3579
+current-version: 3581.1
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -135,13 +135,14 @@ exports:
                        CNVCardLine, CNVCardLine21SerializationStrategy, CNVCardLine30SerializationStrategy, 
                        CNVCardLineFactory, CNVCardLineGenerator, CNVCardLineSerializationStrategy, 
                        CNVCardLineSerializationStrategyImpl, CNVCardLiteralLine, 
-                       CNVCardMutableImage, CNVCardMutableNameComponents, CNVCardNameComponents, 
-                       CNVCardNameSerialization, CNVCardOptions, CNVCardPHOTOParser, 
-                       CNVCardParameter, CNVCardParameterDecoder, CNVCardParameterEncoder, 
-                       CNVCardParsedDictionaryResultBuilder, CNVCardParsedLine, CNVCardParsedParameter, 
-                       CNVCardParsedResultBuilderFactory, CNVCardParser, CNVCardParsingConcurrencyStrategy, 
-                       CNVCardPerson, CNVCardPhoneLineGenerator, CNVCardProdIdString, 
-                       CNVCardPropertyItem, CNVCardRangeFinder, CNVCardReading, CNVCardReadingOptions, 
+                       CNVCardLogging, CNVCardMutableImage, CNVCardMutableNameComponents, 
+                       CNVCardNameComponents, CNVCardNameSerialization, CNVCardOptions, 
+                       CNVCardPHOTOParser, CNVCardParameter, CNVCardParameterDecoder, 
+                       CNVCardParameterEncoder, CNVCardParsedDictionaryResultBuilder, 
+                       CNVCardParsedLine, CNVCardParsedParameter, CNVCardParsedResultBuilderFactory, 
+                       CNVCardParser, CNVCardParsingConcurrencyStrategy, CNVCardPerson, 
+                       CNVCardPhoneLineGenerator, CNVCardProdIdString, CNVCardPropertyItem, 
+                       CNVCardRangeFinder, CNVCardReading, CNVCardReadingOptions, 
                        CNVCardSelectorMap, CNVCardSerializationStorage, CNVCardSocialProfileLineGenerator, 
                        CNVCardStreetAddressLineGenerator, CNVCardStringStorage, CNVCardTesting, 
                        CNVCardURLParser, CNVCardUnknownPropertyDescription, CNVCardUserDefaults, 

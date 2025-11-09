@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           556B5E0A-23A8-3D78-8E8F-95FB24AB2E2C
+    value:           2A02011D-8454-352D-93F9-F90A8AA83BE4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           74971567-CF64-3D18-B6EE-9095D537DEB2
+    value:           7EF52566-3576-38A9-8E89-AB184EB608A3
 install-name:    '/System/Library/PrivateFrameworks/IOSurfaceAccelerator.framework/Versions/A/IOSurfaceAccelerator'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

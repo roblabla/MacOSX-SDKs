@@ -3,9 +3,9 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B1B6FAC3-74CF-309C-8168-5D91AE41BDDF
+    value:           40366C12-44E1-3CB9-AECD-F8BB463C334F
   - target:          arm64e-macos
-    value:           1F28E591-F1AA-37DD-B7C7-1D25C0AF19F4
+    value:           1EAB4D8B-111F-3641-85FE-08D23491C547
 install-name:    '/System/Library/Frameworks/_GroupActivities_AppKit.framework/Versions/A/_GroupActivities_AppKit'
 swift-abi-version: 7
 ...

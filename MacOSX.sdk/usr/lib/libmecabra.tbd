@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2C2576A3-4204-315F-A878-64262A8C4765
+    value:           04C8C965-8325-3BF9-AFCC-923830F45A68
   - target:          x86_64-maccatalyst
-    value:           2C2576A3-4204-315F-A878-64262A8C4765
+    value:           04C8C965-8325-3BF9-AFCC-923830F45A68
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E4AAB2ED-C66E-3565-8A1C-8B04E1A122F4
+    value:           38C7960E-62D3-3C4F-AC92-A255C1665ABE
   - target:          arm64e-maccatalyst
-    value:           E4AAB2ED-C66E-3565-8A1C-8B04E1A122F4
+    value:           38C7960E-62D3-3C4F-AC92-A255C1665ABE
 install-name:    '/usr/lib/libmecabra.dylib'
 current-version: 1019
 exports:

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0E69DE10-8633-31AE-9B94-CC5650921E3F
+    value:           09965D2A-E66A-316C-A8D4-9C961EB8103C
   - target:          x86_64-maccatalyst
-    value:           0E69DE10-8633-31AE-9B94-CC5650921E3F
+    value:           09965D2A-E66A-316C-A8D4-9C961EB8103C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D6247CDC-FC36-3D52-99DC-25CAD0D2C3CD
+    value:           434759C2-9906-38A8-B146-C0B45AC6F5C0
   - target:          arm64e-maccatalyst
-    value:           D6247CDC-FC36-3D52-99DC-25CAD0D2C3CD
+    value:           434759C2-9906-38A8-B146-C0B45AC6F5C0
 install-name:    '/System/Library/PrivateFrameworks/CMImaging.framework/Versions/A/CMImaging'
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -46,17 +46,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3F7A5F58-5279-31F1-8025-331CD2021915
+    value:           0532CDF8-BC38-355E-9C4A-D2562301DE04
   - target:          x86_64-maccatalyst
-    value:           3F7A5F58-5279-31F1-8025-331CD2021915
+    value:           0532CDF8-BC38-355E-9C4A-D2562301DE04
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0C4FE595-9D2E-37B4-B6A0-8D26266348BE
+    value:           2E08B8B7-8EC5-3EF1-9890-FAC1E083C823
   - target:          arm64e-maccatalyst
-    value:           0C4FE595-9D2E-37B4-B6A0-8D26266348BE
+    value:           2E08B8B7-8EC5-3EF1-9890-FAC1E083C823
 install-name:    '/System/Library/PrivateFrameworks/CMCaptureCore.framework/Versions/A/CMCaptureCore'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -276,6 +276,7 @@ exports:
                        _kFigCaptureSampleBufferAttachmentKey_VisionDataBuffer, _kFigCaptureSampleBufferAttachmentValue_MPFEncodingMode, 
                        _kFigCaptureSampleBufferAttachmentValue_MPFSampleBuffersArray, 
                        _kFigCaptureSampleBufferMetadata_AdditionalPreviewZoomToApply, 
+                       _kFigCaptureSampleBufferMetadata_AppliedZoomFactorWithoutFudge, 
                        _kFigCaptureSampleBufferMetadata_ExifOrientation, _kFigCaptureSampleBufferMetadata_ExposureDurationType, 
                        _kFigCaptureSampleBufferMetadata_ExposureMode, _kFigCaptureSampleBufferMetadata_FinalCropRect, 
                        _kFigCaptureSampleBufferMetadata_FinalCropRectFromSource, 

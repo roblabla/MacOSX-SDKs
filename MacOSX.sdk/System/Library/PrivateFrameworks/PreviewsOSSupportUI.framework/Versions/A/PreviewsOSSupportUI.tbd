@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A74A2338-7E20-31AE-88E6-708E9B60A7B5
+    value:           B327FD8C-0009-3D4F-A9CB-6B381036308E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           91CAAB4B-FE08-3BED-943F-755E49925D44
+    value:           2FECFF78-6F17-3853-8464-AFD6D29B00E0
 install-name:    '/System/Library/PrivateFrameworks/PreviewsOSSupportUI.framework/Versions/A/PreviewsOSSupportUI'
 current-version: 20.10.11
 swift-abi-version: 7

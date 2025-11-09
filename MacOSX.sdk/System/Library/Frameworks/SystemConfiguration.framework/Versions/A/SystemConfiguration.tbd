@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BD190925-12FB-3026-9901-9F17A981B0B7
+    value:           FE4039FB-D061-3EC4-B51F-FA4EFCC286D2
   - target:          x86_64-maccatalyst
-    value:           BD190925-12FB-3026-9901-9F17A981B0B7
+    value:           FE4039FB-D061-3EC4-B51F-FA4EFCC286D2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0B97A6BE-57F7-36FE-A8FA-895B0320E3A8
+    value:           00FCF1C5-4B39-33B1-AE36-2B5EAA186B6F
   - target:          arm64e-maccatalyst
-    value:           0B97A6BE-57F7-36FE-A8FA-895B0320E3A8
+    value:           00FCF1C5-4B39-33B1-AE36-2B5EAA186B6F
 install-name:    '/System/Library/Frameworks/SystemConfiguration.framework/Versions/A/SystemConfiguration'
-current-version: 1241.40.2
+current-version: 1241.60.3
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9053D30C-239D-30B4-B36D-4E3490F72FE4
+    value:           E9412018-811C-36B7-9F58-6471398EE465
   - target:          arm64-macos
-    value:           A7F13C10-9CEA-3A4E-86AB-F65E292E7804
+    value:           954CFCC0-97A8-329B-B5AA-FF9046F3E94F
   - target:          arm64e-macos
-    value:           824DFF0F-A337-32EB-B5DF-3FDD0BBFF9ED
+    value:           9F57BC0A-3F18-3F00-B772-40B6A8616E26
 install-name:    '/usr/lib/system/libcompiler_rt.dylib'
 current-version: 103.1
 parent-umbrella:

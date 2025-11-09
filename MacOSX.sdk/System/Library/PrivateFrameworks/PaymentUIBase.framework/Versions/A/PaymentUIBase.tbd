@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2BBA9303-0DB6-37DB-A165-C910EC65DA9F
+    value:           85A5EB67-01A0-322D-AF2A-4B7692C3F461
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B2E3C827-A7D6-3EC4-9BBE-4112856C531B
+    value:           99D47FF3-C132-32B7-B247-CA9935B1C019
 install-name:    '/System/Library/PrivateFrameworks/PaymentUIBase.framework/Versions/A/PaymentUIBase'
 swift-abi-version: 7
 exports:

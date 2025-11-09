@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           15E7C3B9-6817-3267-89D0-3DB26B442FE1
+    value:           BBCD86AF-2B39-3555-841C-9179EE93C5C0
   - target:          x86_64-maccatalyst
-    value:           15E7C3B9-6817-3267-89D0-3DB26B442FE1
+    value:           BBCD86AF-2B39-3555-841C-9179EE93C5C0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DEEFB6B4-5BD6-3B68-B2F5-0FF6B6E5F150
+    value:           3252F507-CE81-36F7-AEC9-9A6C8B7C7D7E
   - target:          arm64e-maccatalyst
-    value:           DEEFB6B4-5BD6-3B68-B2F5-0FF6B6E5F150
+    value:           3252F507-CE81-36F7-AEC9-9A6C8B7C7D7E
 install-name:    '/System/Library/PrivateFrameworks/ScreenTimeFoundation.framework/Versions/A/ScreenTimeFoundation'
-current-version: 502.1.8
+current-version: 502.2.3
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

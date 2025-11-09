@@ -4,34 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A4FE7531-9900-3D3E-BA02-2013010A0147
+    value:           851B7B12-8DE8-3A95-A3AE-F15CEB79B66A
   - target:          x86_64-maccatalyst
-    value:           A4FE7531-9900-3D3E-BA02-2013010A0147
+    value:           851B7B12-8DE8-3A95-A3AE-F15CEB79B66A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F018BC09-0849-3807-A435-417E05FB7825
+    value:           C9805386-561E-3752-8C6D-F4E6210A5FDB
   - target:          arm64e-maccatalyst
-    value:           F018BC09-0849-3807-A435-417E05FB7825
+    value:           C9805386-561E-3752-8C6D-F4E6210A5FDB
 install-name:    '/System/Library/PrivateFrameworks/ContentKit.framework/Versions/A/ContentKit'
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ '_$s10ContentKit10UnfairLockC04withD04bodyxxyKXE_tKlF', '_$s10ContentKit10UnfairLockC04withD04bodyxxyXE_tlF', 
-                       '_$s10ContentKit10UnfairLockC04withD04bodyyyyXE_tF', '_$s10ContentKit10UnfairLockC11assertOwneryyF', 
-                       '_$s10ContentKit10UnfairLockC14assertNotOwneryyF', '_$s10ContentKit10UnfairLockC4lockSpySo010os_unfair_E2_sVGvg', 
-                       '_$s10ContentKit10UnfairLockC4lockSpySo010os_unfair_E2_sVGvpMV', 
-                       '_$s10ContentKit10UnfairLockC7acquire7Combine11Cancellable_pyF', 
-                       '_$s10ContentKit10UnfairLockCACycfC', '_$s10ContentKit10UnfairLockCACycfCTj', 
-                       '_$s10ContentKit10UnfairLockCACycfCTq', '_$s10ContentKit10UnfairLockCACycfc', 
-                       '_$s10ContentKit10UnfairLockCMa', '_$s10ContentKit10UnfairLockCMm', 
-                       '_$s10ContentKit10UnfairLockCMn', '_$s10ContentKit10UnfairLockCMo', 
-                       '_$s10ContentKit10UnfairLockCMu', '_$s10ContentKit10UnfairLockCN', 
-                       '_$s10ContentKit10UnfairLockCfD', '_$s10ContentKit10UnfairLockCfd', 
-                       '_$s10ContentKit13WFLogSignpostV10signposter2os12OSSignposterVvg', 
+    symbols:         [ '_$s10ContentKit13WFLogSignpostV10signposter2os12OSSignposterVvg', 
                        '_$s10ContentKit13WFLogSignpostV10signposter2os12OSSignposterVvpMV', 
                        '_$s10ContentKit13WFLogSignpostV15enableTelemetrys12StaticStringVvgZ', 
                        '_$s10ContentKit13WFLogSignpostV3endyyF', '_$s10ContentKit13WFLogSignpostV4names12StaticStringVvg', 
@@ -136,9 +125,10 @@ exports:
                        _WFLogCategorySandbox, _WFLogCategorySecurity, _WFLogCategorySessionKit, 
                        _WFLogCategorySleep, _WFLogCategorySpotlightSync, _WFLogCategoryStateMachine, 
                        _WFLogCategoryTestHarness, _WFLogCategoryTips, _WFLogCategoryTriggerNotifications, 
-                       _WFLogCategoryTriggers, _WFLogCategoryWFContact, _WFLogCategoryWatchSync, 
-                       _WFLogCategoryWidget, _WFLogCategoryWorkflowExecution, _WFLogCategoryWorkflowMigration, 
-                       _WFLogCategoryXPCRunner, _WFLogSubsystem, _WFMakeContentAttributionSetForRemindersAccount, 
+                       _WFLogCategoryTriggers, _WFLogCategoryWFContact, _WFLogCategoryWalrus, 
+                       _WFLogCategoryWatchSync, _WFLogCategoryWidget, _WFLogCategoryWorkflowExecution, 
+                       _WFLogCategoryWorkflowMigration, _WFLogCategoryXPCRunner, 
+                       _WFLogSubsystem, _WFMakeContentAttributionSetForRemindersAccount, 
                        _WFMakeContentLocationForRemindersAccount, _WFMeasurementUnitTypeAcceleration, 
                        _WFMeasurementUnitTypeAngle, _WFMeasurementUnitTypeArea, _WFMeasurementUnitTypeConcentrationMass, 
                        _WFMeasurementUnitTypeDispersion, _WFMeasurementUnitTypeDuration, 
@@ -191,8 +181,8 @@ exports:
                        _getWFSessionKitLogObject, _getWFSleepLogObject, _getWFSpotlightSyncLogObject, 
                        _getWFStateMachineLogObject, _getWFTestHarnessLogObject, _getWFTipsLogObject, 
                        _getWFTriggerNotificationsLogObject, _getWFTriggersLogObject, 
-                       _getWFWFContactLogObject, _getWFWatchSyncLogObject, _getWFWidgetLogObject, 
-                       _getWFWorkflowExecutionLogObject, _getWFWorkflowMigrationLogObject, 
+                       _getWFWFContactLogObject, _getWFWalrusLogObject, _getWFWatchSyncLogObject, 
+                       _getWFWidgetLogObject, _getWFWorkflowExecutionLogObject, _getWFWorkflowMigrationLogObject, 
                        _getWFXPCRunnerLogObject ]
     objc-classes:    [ DCMapsLink, DCMutableMapsLink, WFAVAssetContentItem, WFAccountContentLocation, 
                        WFAlert, WFAlertButton, WFApp, WFAppContentLocation, WFAppLaunchRequest, 

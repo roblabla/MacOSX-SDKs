@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1252E062-1116-32CC-88B1-0A5B20E8C3AB
+    value:           E83E5F78-C1C4-3660-8AFF-C0652BBA5EA3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           222CBAF9-86BD-3254-8AE4-D9E11476A1F8
+    value:           C044C60A-996F-39B9-A5B8-5DA326FD2114
 install-name:    '/System/Library/PrivateFrameworks/AirPlaySender.framework/Versions/A/AirPlaySender'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -29,7 +29,8 @@ exports:
                        _APEndpointDescriptionAirPlayCreateWithTransportDevice, _APEndpointDescriptionCopyDebugString, 
                        _APEndpointDescriptionGetCMBaseObject, _APEndpointDescriptionGetClassID, 
                        _APEndpointDescriptionGetDeviceID, _APEndpointDescriptionGetTypeID, 
-                       _APEndpointDisplayDescriptionCopyProperty, _APEndpointDisplayDescriptionCreateDefaultWithEndpointFeatures, 
+                       _APEndpointDescriptionIsSourceVersionOlderThan, _APEndpointDisplayDescriptionCopyProperty, 
+                       _APEndpointDisplayDescriptionCreateDefaultWithEndpointFeatures, 
                        _APEndpointDisplayDescriptionCreateWithDisplayInfo, _APEndpointDisplayDescriptionGetTypeID, 
                        _APEndpointFigEndpointClusterTypeToAPSClusterType, _APEndpointGetAllAudioFeatures, 
                        _APEndpointGetEnabledFeatures, _APEndpointGetFeatureFromStreamType, 

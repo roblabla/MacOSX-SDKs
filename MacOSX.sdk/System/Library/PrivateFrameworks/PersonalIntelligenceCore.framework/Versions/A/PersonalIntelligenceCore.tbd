@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6A19F897-9AF3-36D4-A9FA-0A0C8B4ED274
+    value:           68A33EEC-6A24-3DDB-84EF-D12BD1C8B1FE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B7FB546C-F878-3788-9499-8106D47BA05A
+    value:           C6AB6FFA-375B-3367-9B0E-4A6FB0904BCE
 install-name:    '/System/Library/PrivateFrameworks/PersonalIntelligenceCore.framework/Versions/A/PersonalIntelligenceCore'
-current-version: 1193.8
+current-version: 1193.8.6
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

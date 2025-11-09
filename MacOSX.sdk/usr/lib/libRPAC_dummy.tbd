@@ -3,8 +3,8 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3D3EB6CF-C396-3B3E-9224-6202C9191B88
+    value:           C60F41E0-3346-39BA-B96C-B33A5B055B43
   - target:          arm64e-macos
-    value:           B86D3075-B7CA-3997-B57C-EE67BCE8FDB5
+    value:           D2DF70A3-E2AF-3508-8883-4FAFBF7D9B38
 install-name:    '/usr/lib/libRPAC_dummy.dylib'
 ...

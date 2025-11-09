@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           59D97C84-2839-3D93-A489-99466A9A7191
+    value:           B22C3252-8CC6-3E6B-8436-B40AEDB19C55
   - target:          x86_64-maccatalyst
-    value:           59D97C84-2839-3D93-A489-99466A9A7191
+    value:           B22C3252-8CC6-3E6B-8436-B40AEDB19C55
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9185E3E7-672B-3FBF-ACAA-AE814497178A
+    value:           0777EF4F-22D8-361F-97E0-D8286C32DD37
   - target:          arm64e-maccatalyst
-    value:           9185E3E7-672B-3FBF-ACAA-AE814497178A
+    value:           0777EF4F-22D8-361F-97E0-D8286C32DD37
 install-name:    '/System/Library/PrivateFrameworks/MapsSuggestions.framework/Versions/A/MapsSuggestions'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]

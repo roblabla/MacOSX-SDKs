@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D02BCB98-8CCD-3998-A7F7-86A3F9D6A3C6
+    value:           E7BE1743-4EBF-38EC-A91E-C7E37B3DBB67
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6CCD6B09-DFB4-3314-8AF6-6C31166DEBDD
+    value:           05E20BF0-F89E-3C2F-AD35-6C3B6694C46E
 install-name:    '/System/Library/PrivateFrameworks/WindowManager.framework/Versions/A/WindowManager'
-current-version: 61
+current-version: 61.9
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

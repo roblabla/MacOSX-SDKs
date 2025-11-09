@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           21AFD723-78B2-3A41-A515-38348BC242A2
+    value:           F6D0BD2C-8B67-3208-A607-2D395E65E3FC
   - target:          x86_64-maccatalyst
-    value:           21AFD723-78B2-3A41-A515-38348BC242A2
+    value:           F6D0BD2C-8B67-3208-A607-2D395E65E3FC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           78934DEC-1A2D-350F-AC66-274668BC5A6F
+    value:           ED0CAD82-1DCE-3CA0-BDF5-3E025422AC99
   - target:          arm64e-maccatalyst
-    value:           78934DEC-1A2D-350F-AC66-274668BC5A6F
+    value:           ED0CAD82-1DCE-3CA0-BDF5-3E025422AC99
 install-name:    '/System/Library/Frameworks/FileProvider.framework/Versions/A/FileProvider'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -156,17 +156,19 @@ exports:
                        _fpfs_finder_info_update_with_mask, _fpfs_fopendir, _fpfs_free_metadata_tag_data, 
                        _fpfs_free_tag_data, _fpfs_fremovexattr, _fpfs_fset_acl, _fpfs_fset_collaboration_identifier, 
                        _fpfs_fset_metadata, _fpfs_fset_syncroot, _fpfs_fsetxattr, 
-                       _fpfs_funload_file, _fpfs_funload_hierarchy, _fpfs_get_dataless_cmpfs_xattr_owner, 
-                       _fpfs_get_favorite_rank, _fpfs_get_finder_info, _fpfs_get_finder_info_buffer, 
-                       _fpfs_get_flock_type, _fpfs_get_is_ignore_root, _fpfs_get_is_pinned, 
-                       _fpfs_get_last_use_date, _fpfs_get_materialization_alignment, 
+                       _fpfs_fsgetpath, _fpfs_funload_file, _fpfs_funload_hierarchy, 
+                       _fpfs_get_dataless_cmpfs_xattr_owner, _fpfs_get_favorite_rank, 
+                       _fpfs_get_finder_info, _fpfs_get_finder_info_buffer, _fpfs_get_flock_type, 
+                       _fpfs_get_is_ignore_root, _fpfs_get_is_pinned, _fpfs_get_last_use_date, 
+                       _fpfs_get_long_parent, _fpfs_get_materialization_alignment, 
                        _fpfs_get_syncable_xattrs, _fpfs_get_tag_data, _fpfs_gethandle_at, 
                        _fpfs_icd_package_extension_list_contains, _fpfs_icd_package_extension_list_reload, 
                        _fpfs_is_busy_date, _fpfs_is_dataless_fault, _fpfs_is_dataless_fault_at, 
                        _fpfs_is_evictable, _fpfs_is_finder_alias_at, _fpfs_is_resurrected, 
                        _fpfs_is_type_purgeable, _fpfs_is_vfs_ignore_permissions_iopolicy_set, 
                        _fpfs_item_handle_gencmp, _fpfs_load_additional_attrs, _fpfs_make_fsevent, 
-                       _fpfs_materialize, _fpfs_materialize_at, _fpfs_open, _fpfs_openat, 
+                       _fpfs_materialize, _fpfs_materialize_at, _fpfs_open, _fpfs_open_longpath, 
+                       _fpfs_openat, _fpfs_openat_longparent, _fpfs_openat_longpath, 
                        _fpfs_openbyid, _fpfs_openbyid_ext, _fpfs_opendir, _fpfs_opendirat, 
                        _fpfs_operation_is_allowed, _fpfs_path_has_provider_domain_xattr, 
                        _fpfs_path_is_ignored, _fpfs_path_is_safe_save_temp_file, 
@@ -192,7 +194,8 @@ exports:
                        _fpfs_should_be_tracked_internal, _fpfs_supports_dir_eviction, 
                        _fpfs_supports_endpoint_security, _fpfs_supports_flock_timer_handler, 
                        _fpfs_supports_indexing_xpc_activity, _fpfs_supports_initial_sql_telemetry, 
-                       _fpfs_supports_materialization_helpers, _fpfs_supports_parent_mtime_iopolicy, 
+                       _fpfs_supports_long_paths, _fpfs_supports_materialization_helpers, 
+                       _fpfs_supports_nx_for_testing, _fpfs_supports_parent_mtime_iopolicy, 
                        _fpfs_supports_partial_materialization, _fpfs_supports_periodic_FPCK_run, 
                        _fpfs_supports_pkg_dataless_escape_prevention, _fpfs_supports_pkg_eviction, 
                        _fpfs_supports_sokoban, _fpfs_supports_targeted_purge, _fpfs_supports_vfs_ignore_permissions_iopolicy, 
@@ -208,11 +211,11 @@ exports:
                        _fpfs_user_package_extension_list_remove, _fpfs_with_parent_path, 
                        _fpfs_xattr_is_content_dependent, _fpfs_xattr_is_syncable, 
                        _kACLReadEntitlement, _kACLWriteEntitlement, _kAlternateContentsEntitlement, 
-                       _kCloudDocsAccountManagementEntitlement, _kDebugEntitlement, 
-                       _kEnumerateEntitlement, _kFPPath_Library_Slash_CloudStorage_Slash, 
-                       _kFetchURLEntitlement, _kFileProviderTestingModeEntitlement, 
-                       _kInPlaceCollaborationEntitlement, _kShareEntitlement, _kTestingHarnessEntitlement, 
-                       _kiWorkCollaborationMessagingEntitlement ]
+                       _kCiconiaEntitlement, _kCloudDocsAccountManagementEntitlement, 
+                       _kDebugEntitlement, _kEnumerateEntitlement, _kFPCKEntitlement, 
+                       _kFPPath_Library_Slash_CloudStorage_Slash, _kFetchURLEntitlement, 
+                       _kFileProviderTestingModeEntitlement, _kInPlaceCollaborationEntitlement, 
+                       _kShareEntitlement, _kTestingHarnessEntitlement, _kiWorkCollaborationMessagingEntitlement ]
     objc-classes:    [ FPAccessControlManager, FPActionLocatorAccessToken, FPActionOperation, 
                        FPActionOperationInfo, FPActionOperationLocator, FPAggregateProgress, 
                        FPAppLibraryCollection, FPAppLibraryCollectionDataSource, 

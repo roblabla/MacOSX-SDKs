@@ -62,6 +62,11 @@ API_AVAILABLE(macos(12.3))
  @abstract onScreen the bool property denoting of the SCWindow is on the screen
  */
 @property (readonly, getter=isOnScreen) BOOL onScreen;
+
+/*!
+ @abstract active the bool property denoting of the SCWindow is active. with Stage Manager, SCWindow can be offScreen and active
+ */
+@property (readonly, getter=isActive) BOOL active API_AVAILABLE(macos(13.1));
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 @end

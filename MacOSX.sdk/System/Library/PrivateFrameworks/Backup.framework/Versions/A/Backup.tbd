@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3AC19CA0-9995-3A76-A13C-2CC6378A1B6F
+    value:           826AAE6F-3206-3864-B83C-2E0A4FD42763
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FC9394BD-9FE1-321B-8CCA-20BA0C7D0D95
+    value:           D40A34A0-5558-3ED3-B6F1-84F03BEB8DDA
 install-name:    '/System/Library/PrivateFrameworks/Backup.framework/Versions/A/Backup'
-current-version: 1547.0.1
+current-version: 1547.1.2
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _BUAboutToDeleteSnapshots, _BUActivatedSnapshot, _BUChangeTimeMachineTarget, 

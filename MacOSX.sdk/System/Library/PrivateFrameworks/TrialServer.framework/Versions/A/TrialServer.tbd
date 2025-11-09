@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           09CAE1D3-193D-3DD0-9AF7-BF7C826CA05C
+    value:           2B58B67D-6F0C-38CD-8AD6-01018DED0400
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BD55D2D4-3084-3DF3-98EF-FC4F6882009D
+    value:           BAFB1164-4AE8-31BC-8FFA-8A1D52F42033
 install-name:    '/System/Library/PrivateFrameworks/TrialServer.framework/Versions/A/TrialServer'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -20,20 +20,20 @@ exports:
                        _TRILogCategory_Backtrace, _TRILogCategory_Daemon, _TRILogCategory_InternalTool, 
                        _TRILogCategory_Server, _TRILogCategory_XCTest, _TRILoggedNamespaceName, 
                        _TRIMetricName_AllowsCellularDownload, _TRIMetricName_BuddyDownloadLatency, 
-                       _TRIMetricName_BytesRead, _TRIMetricName_ClientTreatmentInfo, 
-                       _TRIMetricName_CloudkitError, _TRIMetricName_DirectoryTreeAssetDiffResult, 
-                       _TRIMetricName_DirectoryTreeAssetDiffSize, _TRIMetricName_DirectoryTreeDeltaError, 
-                       _TRIMetricName_FactorPackAssetsPurged, _TRIMetricName_FactorPackPromotion, 
-                       _TRIMetricName_FactorPackRejection, _TRIMetricName_ImmediateDownloadLatency, 
-                       _TRIMetricName_MobileAssetError, _TRIMetricName_MobileAssetErrorDescription, 
-                       _TRIMetricName_OnDemandFactorDownloadedByRequest, _TRIMetricName_OnDemandFactorDownloadedBySubscription, 
-                       _TRIMetricName_OnDemandFactorFailedToDownloadByRequest, _TRIMetricName_OnDemandFactorFailedToDownloadBySubscription, 
+                       _TRIMetricName_ClientTreatmentInfo, _TRIMetricName_CloudkitError, 
+                       _TRIMetricName_DirectoryTreeAssetDiffResult, _TRIMetricName_DirectoryTreeAssetDiffSize, 
+                       _TRIMetricName_DirectoryTreeDeltaError, _TRIMetricName_FactorPackAssetsPurged, 
+                       _TRIMetricName_FactorPackPromotion, _TRIMetricName_FactorPackRejection, 
+                       _TRIMetricName_ImmediateDownloadLatency, _TRIMetricName_MobileAssetError, 
+                       _TRIMetricName_MobileAssetErrorDescription, _TRIMetricName_OnDemandFactorDownloadedByRequest, 
+                       _TRIMetricName_OnDemandFactorDownloadedBySubscription, _TRIMetricName_OnDemandFactorFailedToDownloadByRequest, 
+                       _TRIMetricName_OnDemandFactorFailedToDownloadBySubscription, 
                        _TRIMetricName_OnDemandFactorSubscribed, _TRIMetricName_OnDemandRequestedFactorFailedToDownloadWithoutAssetFetch, 
                        _TRIMetricName_OnDemandSubscribedFactorFailedToDownloadWithoutAssetFetch, 
-                       _TRIMetricName_Retrycount, _TRIMetricName_RolloutsRead, _TRIMetricName_ServerError, 
-                       _TRIMetricName_TargetingError, _TRIMetricName_TotalPurgedAssetSize, 
-                       _TRIMetricName_TriggerEvent, _TRINamespaceFactorSubscriptionKey, 
-                       _TRIPersistentIsSiriEnabled, _TRIPersistentSiriLocale, _TRIRolloutTargetingPersistedTask_TriggerEvent_EnumDescriptor, 
+                       _TRIMetricName_Retrycount, _TRIMetricName_ServerError, _TRIMetricName_TargetingError, 
+                       _TRIMetricName_TotalPurgedAssetSize, _TRIMetricName_TriggerEvent, 
+                       _TRINamespaceFactorSubscriptionKey, _TRIPersistentIsSiriEnabled, 
+                       _TRIPersistentSiriLocale, _TRIRolloutTargetingPersistedTask_TriggerEvent_EnumDescriptor, 
                        _TRIRolloutTargetingPersistedTask_TriggerEvent_IsValidValue, 
                        _TRISystemCovariate_CarrierBundleId, _TRISystemCovariate_CarrierCountryCode, 
                        _TRISystemCovariate_DeviceLocale, _TRISystemCovariate_LanguageCode, 
@@ -91,8 +91,8 @@ exports:
                        TRIHotfixRolloutTargetingScheduler, TRIImmediateDownloadTelemetryGenerator, 
                        TRIInternalServiceRequestHandler, TRIInternalSystemServiceRequestHandler, 
                        TRIKVStore, TRILatencyMetricTelemetryValidator, TRILaunchDaemonActivityDescriptor, 
-                       TRILogTreatmentProvider, TRIMAAssetMetadata, TRIMAProvider, 
-                       TRIMAProvidingGuardedData, TRIMLRuntimeEvaluationHistoryDatabase, 
+                       TRILighthouseBitacoraHandler, TRILogTreatmentProvider, TRIMAAssetMetadata, 
+                       TRIMAProvider, TRIMAProvidingGuardedData, TRIMLRuntimeEvaluationHistoryDatabase, 
                        TRIMaintenancePersistedTask, TRIMaintenanceTask, TRIMaintenanceTaskGuardedData, 
                        TRIMakeDefaultPersistedTask, TRIMakeDefaultTask, TRIMemoryEfficientFileDigest, 
                        TRIMobileAssetUtil, TRINamespaceDatabase, TRINamespaceDescriptorProvider, 

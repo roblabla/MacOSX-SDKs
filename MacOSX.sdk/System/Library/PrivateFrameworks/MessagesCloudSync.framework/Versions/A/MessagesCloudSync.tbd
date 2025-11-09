@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           228FDA99-23B2-3BD4-B64B-DFD2B031837F
+    value:           E5E36F08-DEE3-3B63-97EB-F009D214DF96
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AAD99B7F-3232-3894-90AF-75FBF5F55446
+    value:           60D85273-2C34-3702-80B8-240D089AECE6
 install-name:    '/System/Library/PrivateFrameworks/MessagesCloudSync.framework/Versions/A/MessagesCloudSync'
 current-version: 800
 swift-abi-version: 7

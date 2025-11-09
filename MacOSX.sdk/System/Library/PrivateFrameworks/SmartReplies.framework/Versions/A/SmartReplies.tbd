@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5C248452-352B-3C56-98C8-5978137DB76F
+    value:           7C5BA69A-FE17-3A13-A5D6-BEB9A00B3959
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8C3095E8-AD5B-3457-84B1-DE2C1ECF5B66
+    value:           FD99C1EC-68F9-310E-A122-C77EC1D87BB2
 install-name:    '/System/Library/PrivateFrameworks/SmartReplies.framework/Versions/A/SmartReplies'
 swift-abi-version: 7
 exports:

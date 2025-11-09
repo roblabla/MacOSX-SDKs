@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BB2626BC-7015-3717-B23E-5DF59AB8F8A1
+    value:           1598B88C-6B40-36D6-A21C-5DD719EC4AF3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5FB8E7BF-6BEB-3418-AE84-B582AED6E795
+    value:           AF8BEBAC-EB00-3622-A387-F9398335FAB2
 install-name:    '/System/Library/PrivateFrameworks/NotesAnalytics.framework/Versions/A/NotesAnalytics'
-current-version: 2163
+current-version: 2185
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ICCoreAnalyticsNoteViewApproachIOSDeeplinkThumbnail, _ICCoreAnalyticsNoteViewApproachIOSSafariMenuAffordance, 
@@ -72,7 +72,9 @@ exports:
                        ICASDrawingTool, ICASEditorCallOutData, ICASEnabledFiltersArrayData, 
                        ICASEndCollaborationCollaboratorData, ICASEndDocScanPageData, 
                        ICASEndDrawingStrokeData, ICASEndMode, ICASEndState, ICASEndTableData, 
-                       ICASErrorStatus, ICASFilterCondition, ICASFolderContentData, 
+                       ICASErrorStatus, ICASFastSyncData, ICASFastSyncErrorData, 
+                       ICASFastSyncMessageData, ICASFastSyncParticipantData, ICASFastSyncSessionEndEvent, 
+                       ICASFastSyncSessionStartEvent, ICASFilterCondition, ICASFolderContentData, 
                        ICASFolderCreateEvent, ICASFolderCreationApproach, ICASFolderData, 
                        ICASFolderDeleteEvent, ICASFolderLabelType, ICASFolderListViewEvent, 
                        ICASFolderSnapshotData, ICASFolderSnapshotEvent, ICASFolderSnapshotItemData, 

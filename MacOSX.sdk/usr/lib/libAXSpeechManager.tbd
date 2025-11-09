@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           474ADB9D-48BA-3CF7-A349-26A19B846BDD
+    value:           6036C8A0-2397-3C66-8B93-65C8B5C489D0
   - target:          x86_64-maccatalyst
-    value:           474ADB9D-48BA-3CF7-A349-26A19B846BDD
+    value:           6036C8A0-2397-3C66-8B93-65C8B5C489D0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B4DA9FA7-AB89-3735-83E5-981546CDE53A
+    value:           34BF390F-6AA9-3A20-BF52-1A3BC8B1EBA5
   - target:          arm64e-maccatalyst
-    value:           B4DA9FA7-AB89-3735-83E5-981546CDE53A
+    value:           34BF390F-6AA9-3A20-BF52-1A3BC8B1EBA5
 install-name:    '/usr/lib/libAXSpeechManager.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

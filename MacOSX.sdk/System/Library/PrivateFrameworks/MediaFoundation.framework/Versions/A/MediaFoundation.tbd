@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1F95DA95-F564-357B-B942-FFF5353931BE
+    value:           1CA2BFE8-7C81-34E0-B2E0-59931494E93D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0429DEF7-FDEF-3008-9405-933B9A02120F
+    value:           DBDC68EF-1723-3842-BB4D-AE5114215B0E
 install-name:    '/System/Library/PrivateFrameworks/MediaFoundation.framework/Versions/A/MediaFoundation'
 current-version: 0
 compatibility-version: 0
@@ -280,8 +280,6 @@ exports:
                        '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC8delegateAA0cdE8Delegate_pSgvsTj', 
                        '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC8delegateAA0cdE8Delegate_pSgvsTq', 
                        '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC8playerID06engineH005queueE011assetLoader05errorE0016externalPlaybackE005leaseE08defaults0J0ACSS_SSAA16QueueControlling_pAA12AssetLoading_pAA05ErrorE0_pAA08ExternaloE0_pAA05LeaseS0_pAA0O8Defaults_pSo012OS_dispatch_J0CtcfC', 
-                       '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC8playerID06engineH005queueE011assetLoader05errorE0016externalPlaybackE005leaseE08defaults0J0ACSS_SSAA16QueueControlling_pAA12AssetLoading_pAA05ErrorE0_pAA08ExternaloE0_pAA05LeaseS0_pAA0O8Defaults_pSo012OS_dispatch_J0CtcfCTj', 
-                       '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC8playerID06engineH005queueE011assetLoader05errorE0016externalPlaybackE005leaseE08defaults0J0ACSS_SSAA16QueueControlling_pAA12AssetLoading_pAA05ErrorE0_pAA08ExternaloE0_pAA05LeaseS0_pAA0O8Defaults_pSo012OS_dispatch_J0CtcfCTq', 
                        '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC8playerID06engineH005queueE011assetLoader05errorE0016externalPlaybackE005leaseE08defaults0J0ACSS_SSAA16QueueControlling_pAA12AssetLoading_pAA05ErrorE0_pAA08ExternaloE0_pAA05LeaseS0_pAA0O8Defaults_pSo012OS_dispatch_J0Ctcfc', 
                        '_$s15MediaFoundation39MFPlaybackStackControllerImplementationC9nextItemsSayAA15QueuePlayerItem_pGvpMV', 
                        '_$s15MediaFoundation39MFPlaybackStackControllerImplementationCACycfC', 

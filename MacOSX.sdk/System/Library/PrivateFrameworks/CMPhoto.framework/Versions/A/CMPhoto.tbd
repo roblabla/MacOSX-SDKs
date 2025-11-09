@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EDDB23B1-7FF0-3A18-B387-A281D973BF95
+    value:           614C9ECA-0967-38E0-A9FA-DF4D3425AD10
   - target:          x86_64-maccatalyst
-    value:           EDDB23B1-7FF0-3A18-B387-A281D973BF95
+    value:           614C9ECA-0967-38E0-A9FA-DF4D3425AD10
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C5E8DDD5-A8FE-3501-A5B7-F03FC0876868
+    value:           A516E4E5-79C4-3D32-A6DC-E9C507A74788
   - target:          arm64e-maccatalyst
-    value:           C5E8DDD5-A8FE-3501-A5B7-F03FC0876868
+    value:           A516E4E5-79C4-3D32-A6DC-E9C507A74788
 install-name:    '/System/Library/PrivateFrameworks/CMPhoto.framework/Versions/A/CMPhoto'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -258,8 +258,8 @@ exports:
                        _kCMPhotoDNGOptionKey_RemoveWhiteBalance, _kCMPhotoDNGOptionKey_SourceCropRect, 
                        _kCMPhotoDNGOptionKey_Tiling, _kCMPhotoDNGOptionKey_UseAnalogBalance, 
                        _kCMPhotoDNGReaderOptionKey_IncludeLinearizationTable, _kCMPhotoDNGReaderOptionKey_MainBufferPixelFormat, 
-                       _kCMPhotoDNGReaderOptionKey_ThumbnailIndex, _kCMPhotoDNG_TargetDNGVersion, 
-                       _kCMPhotoDecompressionContainerDescription_AlphaPremultiplication, 
+                       _kCMPhotoDNGReaderOptionKey_ReportOnlyDNGMetadata, _kCMPhotoDNGReaderOptionKey_ThumbnailIndex, 
+                       _kCMPhotoDNG_TargetDNGVersion, _kCMPhotoDecompressionContainerDescription_AlphaPremultiplication, 
                        _kCMPhotoDecompressionContainerDescription_AudioTrackCount, 
                        _kCMPhotoDecompressionContainerDescription_AuxiliaryImages, 
                        _kCMPhotoDecompressionContainerDescription_AuxiliaryNativePixelFormat, 

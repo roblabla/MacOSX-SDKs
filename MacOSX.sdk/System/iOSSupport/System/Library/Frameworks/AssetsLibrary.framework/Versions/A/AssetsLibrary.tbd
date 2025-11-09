@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           54FE76F4-8063-3D6F-BC46-7B85A088DBB4
+    value:           A956E0EA-CDBB-39A4-8F2A-56C89165CDEC
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           74787B06-DA99-3AAB-BFC8-BFC13B88AD1D
+    value:           FB62EC9A-FA74-32EF-A373-EB68892105C5
 install-name:    '/System/iOSSupport/System/Library/Frameworks/AssetsLibrary.framework/Versions/A/AssetsLibrary'
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]

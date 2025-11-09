@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F27D523F-6B53-3534-A380-1EB9F2ABB24D
+    value:           9E8324C4-04A4-30D2-8810-7186CE42759C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2903A3C6-6B01-3854-920E-03B58E021179
+    value:           5B976FAF-F632-367E-8B4E-F77022EDA00F
 install-name:    '/System/Library/PrivateFrameworks/CalendarUI.framework/Versions/A/CalendarUI'
-current-version: 1138
+current-version: 1138.3.3
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CALGroupPboardType, _CALLocationPboardType, _CALPixelAlignedPoint, 
@@ -107,17 +107,17 @@ exports:
                        CalUIResizingTextField, CalUIRowView, CalUISuggestionsField, 
                        CalUISuggestionsFieldController, CalUISuggestionsTable, CalUISuggestionsWindow, 
                        CalUITextFieldCell, CalUITextFieldEditor, CalUITimeZoneCityPickerController, 
-                       CalUITimeZonePicker, CalUITouchBarUtilities, CalUIVibrantDividerRowView, 
-                       CalUIVibrantView, CalUIVoiceOverFriendlyMatrix, EKCalendarViewController, 
-                       EKEventViewController, EKEventViewControllerSettings, EKShareSheetReminderCalendarViewController, 
-                       EKShareSheetReminderNotesViewController, EKShareSheetReminderTitleViewController, 
-                       EKUIAbstractTimeZoneGadget, EKUIAcceptMaybeDeclineGadget, 
-                       EKUIAddIgnoreGadget, EKUIAlarmButton, EKUIAlarmCompositeGadget, 
-                       EKUIAlarmContainerView, EKUIAlarmGadget, EKUIAlarmSummaryGadget, 
-                       EKUIAllDayGadget, EKUIAttachmentCellView, EKUIAttachmentGadget, 
-                       EKUIAttachmentLinkCellView, EKUIAttachmentTableView, EKUIAttachmentTokenAttachmentCell, 
-                       EKUIAttachmentTokenAttachmentLinkCell, EKUIAttendeeCommentGadget, 
-                       EKUIAttendeeFreeBusyInfo, EKUIAttendeeTokenAttachmentCell, 
+                       CalUITimeZonePicker, CalUITouchBarUtilities, CalUIUtilities, 
+                       CalUIVibrantDividerRowView, CalUIVibrantView, CalUIVoiceOverFriendlyMatrix, 
+                       EKCalendarViewController, EKEventViewController, EKEventViewControllerSettings, 
+                       EKShareSheetReminderCalendarViewController, EKShareSheetReminderNotesViewController, 
+                       EKShareSheetReminderTitleViewController, EKUIAbstractTimeZoneGadget, 
+                       EKUIAcceptMaybeDeclineGadget, EKUIAddIgnoreGadget, EKUIAlarmButton, 
+                       EKUIAlarmCompositeGadget, EKUIAlarmContainerView, EKUIAlarmGadget, 
+                       EKUIAlarmSummaryGadget, EKUIAllDayGadget, EKUIAttachmentCellView, 
+                       EKUIAttachmentGadget, EKUIAttachmentLinkCellView, EKUIAttachmentTableView, 
+                       EKUIAttachmentTokenAttachmentCell, EKUIAttachmentTokenAttachmentLinkCell, 
+                       EKUIAttendeeCommentGadget, EKUIAttendeeFreeBusyInfo, EKUIAttendeeTokenAttachmentCell, 
                        EKUIAttendeesControlContainer, EKUIAttendeesGadget, EKUIAutocompleteView, 
                        EKUIAvailabilityGadget, EKUIButton, EKUICalendarGadget, EKUICalendarPopUpButton, 
                        EKUICalendarPopUpButtonCell, EKUICallButton, EKUIClickThoughTextField, 

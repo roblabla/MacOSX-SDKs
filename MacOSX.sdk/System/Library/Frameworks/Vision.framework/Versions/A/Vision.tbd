@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2A12FF59-7B89-3353-B2AC-610FA9D4DB74
+    value:           00DD699E-4F17-36DA-8EB2-EBB803F0A7EE
   - target:          x86_64-maccatalyst
-    value:           2A12FF59-7B89-3353-B2AC-610FA9D4DB74
+    value:           00DD699E-4F17-36DA-8EB2-EBB803F0A7EE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           72B367F0-0CB3-3D6B-89CE-1EAE8BABAD56
+    value:           557FC1D7-D40B-3429-9E19-99A5C361A798
   - target:          arm64e-maccatalyst
-    value:           72B367F0-0CB3-3D6B-89CE-1EAE8BABAD56
+    value:           557FC1D7-D40B-3429-9E19-99A5C361A798
 install-name:    '/System/Library/Frameworks/Vision.framework/Versions/A/Vision'
 current-version: 6.0.48
 exports:

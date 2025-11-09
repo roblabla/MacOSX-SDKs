@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2F960B87-2495-34A9-A5BD-736B696DBF1C
+    value:           84C76C52-585F-3102-8D33-77B8F237C0EA
   - target:          x86_64-maccatalyst
-    value:           2F960B87-2495-34A9-A5BD-736B696DBF1C
+    value:           84C76C52-585F-3102-8D33-77B8F237C0EA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D691558E-B6DC-3220-BD17-BB33E65C4793
+    value:           D2E29EF7-0D74-3789-A72A-4263A522E1C3
   - target:          arm64e-maccatalyst
-    value:           D691558E-B6DC-3220-BD17-BB33E65C4793
+    value:           D2E29EF7-0D74-3789-A72A-4263A522E1C3
 install-name:    '/usr/lib/libusrtcp.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

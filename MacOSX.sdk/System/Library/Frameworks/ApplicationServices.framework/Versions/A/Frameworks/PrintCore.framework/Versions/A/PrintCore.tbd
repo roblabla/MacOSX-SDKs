@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EF121ACE-4E8D-33C9-8ECF-96950F520E7A
+    value:           E95A1193-7879-3DFF-8CD5-FA05E09DCF55
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3BE81271-7AC7-35F0-875D-54FA321FB886
+    value:           457695DF-66A3-30D6-B3C9-7ED185B22EB8
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/PrintCore.framework/Versions/A/PrintCore'
-current-version: 566
+current-version: 567
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        ApplicationServices

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9199477A-0030-3D64-9DE1-3E7CDA5A57AA
+    value:           2C24B25F-F34B-31CE-A097-CAF469114ADC
   - target:          x86_64-maccatalyst
-    value:           9199477A-0030-3D64-9DE1-3E7CDA5A57AA
+    value:           2C24B25F-F34B-31CE-A097-CAF469114ADC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A62E76F3-3350-3128-BF68-749282191857
+    value:           96FA76F1-77CD-37DE-9F64-38C9B998CD50
   - target:          arm64e-maccatalyst
-    value:           A62E76F3-3350-3128-BF68-749282191857
+    value:           96FA76F1-77CD-37DE-9F64-38C9B998CD50
 install-name:    '/usr/lib/libipsec.A.dylib'
 current-version: 300
 exports:

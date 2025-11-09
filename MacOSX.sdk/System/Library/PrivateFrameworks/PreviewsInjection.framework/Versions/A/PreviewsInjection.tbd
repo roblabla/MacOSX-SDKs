@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1833D7CA-A30A-378B-9E21-C67D402A6591
+    value:           1C3ED280-4D77-33A7-B5F3-1F991194DD50
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1C77EFCA-231F-370E-83B5-BA6E1293871C
+    value:           035E177C-375A-3378-9FEF-271963B93321
 install-name:    '/System/Library/PrivateFrameworks/PreviewsInjection.framework/Versions/A/PreviewsInjection'
 current-version: 20.10.11
 swift-abi-version: 7

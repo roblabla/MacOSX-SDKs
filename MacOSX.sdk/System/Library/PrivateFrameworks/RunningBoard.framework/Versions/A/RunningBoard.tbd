@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D0E66CCD-ABB5-3D12-98E1-978791582473
+    value:           97490297-E5EB-3DA3-BE17-A3B1127EDA9E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9D230952-C46B-3BCB-84D2-D7E64037DC9A
+    value:           37CD05E7-09B0-31D4-B751-B59015D55521
 install-name:    '/System/Library/PrivateFrameworks/RunningBoard.framework/Versions/A/RunningBoard'
-current-version: 800.40.6
+current-version: 800.60.5
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _RBAttributePrimitiveEntitlement, _RBBackBoardClientEntitlement, 

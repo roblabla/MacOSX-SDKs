@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           50C188AC-696A-3754-B06C-A09F219B05DC
+    value:           A7999728-D984-36EE-A2EB-CC764F1BAE7C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           25A18E7E-60EC-3F1D-ADB8-298BC8AD740B
+    value:           3DD6749E-88C7-3A1B-8EA1-E5B66ECB8D1E
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Print.framework/Versions/A/Print'
 current-version: 272
 parent-umbrella:

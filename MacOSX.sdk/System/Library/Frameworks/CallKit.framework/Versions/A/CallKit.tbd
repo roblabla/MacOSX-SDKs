@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CF7C2594-3F36-3C6E-BEE1-5ECC8300EB5B
+    value:           BB0B8FF7-5DF1-393B-A559-E8822001601B
   - target:          x86_64-maccatalyst
-    value:           CF7C2594-3F36-3C6E-BEE1-5ECC8300EB5B
+    value:           BB0B8FF7-5DF1-393B-A559-E8822001601B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           50239E37-B4E9-3EC9-9936-B05F8F5E72EB
+    value:           4E011352-462A-33FC-B617-DD4C2D5FC254
   - target:          arm64e-maccatalyst
-    value:           50239E37-B4E9-3EC9-9936-B05F8F5E72EB
+    value:           4E011352-462A-33FC-B617-DD4C2D5FC254
 install-name:    '/System/Library/Frameworks/CallKit.framework/Versions/A/CallKit'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

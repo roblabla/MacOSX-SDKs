@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           065BA0D7-8B7C-3594-9D4B-D258C63E2535
+    value:           665C8279-43BB-3F17-A8ED-1E5F2497FB66
   - target:          x86_64-maccatalyst
-    value:           065BA0D7-8B7C-3594-9D4B-D258C63E2535
+    value:           665C8279-43BB-3F17-A8ED-1E5F2497FB66
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C3175179-5680-3FAD-AE03-59E675A1962A
+    value:           402A731B-9AE0-3D25-A8B9-BFCC87FF735C
   - target:          arm64e-maccatalyst
-    value:           C3175179-5680-3FAD-AE03-59E675A1962A
+    value:           402A731B-9AE0-3D25-A8B9-BFCC87FF735C
 install-name:    '/System/Library/Frameworks/AutomaticAssessmentConfiguration.framework/Versions/A/Frameworks/AACClient.framework/Versions/A/AACClient'
 current-version: 0
 compatibility-version: 0

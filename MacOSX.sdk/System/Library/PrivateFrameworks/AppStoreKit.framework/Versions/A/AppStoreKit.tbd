@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4093E98B-86EA-3ECE-8BCA-829D2C3908F1
+    value:           1B8A6C1C-82C0-3D1A-9876-5075595C1083
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B8A9FFB4-DD88-38D8-8271-3D5304F4CF7C
+    value:           0CA0720B-C974-3171-A49D-D7786FA8F3CA
 install-name:    '/System/Library/PrivateFrameworks/AppStoreKit.framework/Versions/A/AppStoreKit'
 swift-abi-version: 7
 allowable-clients:
@@ -747,6 +747,8 @@ exports:
                        '_$s11AppStoreKit7ArtworkC11URLTemplateVSQAAMc', '_$s11AppStoreKit7ArtworkC11URLTemplateVSYAAMc', 
                        '_$s11AppStoreKit7ArtworkC11bestVariant19prefersLayeredImageAC0F0VSb_tFTj', 
                        '_$s11AppStoreKit7ArtworkC11bestVariant19prefersLayeredImageAC0F0VSb_tFTq', 
+                       '_$s11AppStoreKit7ArtworkC11contentModeAC07ContentF0Ovg', 
+                       '_$s11AppStoreKit7ArtworkC11contentModeAC07ContentF0OvpMV', 
                        '_$s11AppStoreKit7ArtworkC11isLandscapeSbvgTj', '_$s11AppStoreKit7ArtworkC11isLandscapeSbvgTq', 
                        '_$s11AppStoreKit7ArtworkC11isLandscapeSbvpMV', '_$s11AppStoreKit7ArtworkC12isLocalImageSbvgTj', 
                        '_$s11AppStoreKit7ArtworkC12isLocalImageSbvgTq', '_$s11AppStoreKit7ArtworkC12isLocalImageSbvpMV', 
@@ -763,16 +765,21 @@ exports:
                        '_$s11AppStoreKit7ArtworkC15systemImageNameSSSgvpMV', '_$s11AppStoreKit7ArtworkC17impressionMetrics9JetEngine010ImpressionF0VSgvg', 
                        '_$s11AppStoreKit7ArtworkC17impressionMetrics9JetEngine010ImpressionF0VSgvpMV', 
                        '_$s11AppStoreKit7ArtworkC18shouldUseWideGamut3forSbAC7VariantV_tF', 
-                       '_$s11AppStoreKit7ArtworkC2eeoiySbAC_ACtFZ', '_$s11AppStoreKit7ArtworkC2id8template4size15backgroundColor5style4crop8variants17impressionMetricsACSSSg_AC11URLTemplateVSo6CGSizeVSo7NSColorCSgAC5StyleOAC4CropVSayAC7VariantVG9JetEngine010ImpressionN0VSgtcfC', 
-                       '_$s11AppStoreKit7ArtworkC2id8template4size15backgroundColor5style4crop8variants17impressionMetricsACSSSg_AC11URLTemplateVSo6CGSizeVSo7NSColorCSgAC5StyleOAC4CropVSayAC7VariantVG9JetEngine010ImpressionN0VSgtcfCTj', 
-                       '_$s11AppStoreKit7ArtworkC2id8template4size15backgroundColor5style4crop8variants17impressionMetricsACSSSg_AC11URLTemplateVSo6CGSizeVSo7NSColorCSgAC5StyleOAC4CropVSayAC7VariantVG9JetEngine010ImpressionN0VSgtcfCTq', 
-                       '_$s11AppStoreKit7ArtworkC2id8template4size15backgroundColor5style4crop8variants17impressionMetricsACSSSg_AC11URLTemplateVSo6CGSizeVSo7NSColorCSgAC5StyleOAC4CropVSayAC7VariantVG9JetEngine010ImpressionN0VSgtcfc', 
+                       '_$s11AppStoreKit7ArtworkC2eeoiySbAC_ACtFZ', '_$s11AppStoreKit7ArtworkC2id8template4size15backgroundColor5style4crop11contentMode8variants17impressionMetricsACSSSg_AC11URLTemplateVSo6CGSizeVSo7NSColorCSgAC5StyleOAC4CropVAC07ContentM0OSgSayAC7VariantVG9JetEngine010ImpressionP0VSgtcfC', 
+                       '_$s11AppStoreKit7ArtworkC2id8template4size15backgroundColor5style4crop11contentMode8variants17impressionMetricsACSSSg_AC11URLTemplateVSo6CGSizeVSo7NSColorCSgAC5StyleOAC4CropVAC07ContentM0OSgSayAC7VariantVG9JetEngine010ImpressionP0VSgtcfCTj', 
+                       '_$s11AppStoreKit7ArtworkC2id8template4size15backgroundColor5style4crop11contentMode8variants17impressionMetricsACSSSg_AC11URLTemplateVSo6CGSizeVSo7NSColorCSgAC5StyleOAC4CropVAC07ContentM0OSgSayAC7VariantVG9JetEngine010ImpressionP0VSgtcfCTq', 
+                       '_$s11AppStoreKit7ArtworkC2id8template4size15backgroundColor5style4crop11contentMode8variants17impressionMetricsACSSSg_AC11URLTemplateVSo6CGSizeVSo7NSColorCSgAC5StyleOAC4CropVAC07ContentM0OSgSayAC7VariantVG9JetEngine010ImpressionP0VSgtcfc', 
                        '_$s11AppStoreKit7ArtworkC2ids11AnyHashableVvg', '_$s11AppStoreKit7ArtworkC2ids11AnyHashableVvpMV', 
                        '_$s11AppStoreKit7ArtworkC4CropV012squareCenterE0AEvgZ', '_$s11AppStoreKit7ArtworkC4CropV10sourceSizeAEvgZ', 
                        '_$s11AppStoreKit7ArtworkC4CropV11boundingBoxAEvgZ', '_$s11AppStoreKit7ArtworkC4CropV17specificRectangleAEvgZ', 
                        '_$s11AppStoreKit7ArtworkC4CropV20condensedSearchStoryAEvgZ', 
                        '_$s11AppStoreKit7ArtworkC4CropV20preferredContentModeAC0gH0Ovg', 
                        '_$s11AppStoreKit7ArtworkC4CropV20preferredContentModeAC0gH0OvpMV', 
+                       '_$s11AppStoreKit7ArtworkC4CropV25searchLandingCategoryPillAEvgZ', 
+                       '_$s11AppStoreKit7ArtworkC4CropV25searchLandingCategoryTileAEvgZ', 
+                       '_$s11AppStoreKit7ArtworkC4CropV27searchLandingCategoryCircleAEvgZ', 
+                       '_$s11AppStoreKit7ArtworkC4CropV28searchLandingCategoryPillRTLAEvgZ', 
+                       '_$s11AppStoreKit7ArtworkC4CropV28searchLandingCategoryTileRTLAEvgZ', 
                        '_$s11AppStoreKit7ArtworkC4CropV2ekAEvgZ', '_$s11AppStoreKit7ArtworkC4CropV2elAEvgZ', 
                        '_$s11AppStoreKit7ArtworkC4CropV2emAEvgZ', '_$s11AppStoreKit7ArtworkC4CropV2enAEvgZ', 
                        '_$s11AppStoreKit7ArtworkC4CropV2epAEvgZ', '_$s11AppStoreKit7ArtworkC4CropV2faAEvgZ', 

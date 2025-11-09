@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E2D3C4E1-D706-3D49-B00A-26448BE99831
+    value:           57F20439-E27C-3D5D-A766-882CC01D8525
   - target:          x86_64-maccatalyst
-    value:           E2D3C4E1-D706-3D49-B00A-26448BE99831
+    value:           57F20439-E27C-3D5D-A766-882CC01D8525
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0DF43620-ACB3-3F41-B2E0-F938CFCE3C93
+    value:           35553500-37D6-34B6-95E5-58D30C436E77
   - target:          arm64e-maccatalyst
-    value:           0DF43620-ACB3-3F41-B2E0-F938CFCE3C93
+    value:           35553500-37D6-34B6-95E5-58D30C436E77
 install-name:    '/System/Library/PrivateFrameworks/AttributeGraph.framework/Versions/A/AttributeGraph'
 swift-abi-version: 7
 exports:

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           91C61272-3AD2-3E81-A7DC-40B5C81B8655
+    value:           26D415DF-01EB-3AC1-9A39-C681062DC5CC
   - target:          x86_64-maccatalyst
-    value:           91C61272-3AD2-3E81-A7DC-40B5C81B8655
+    value:           26D415DF-01EB-3AC1-9A39-C681062DC5CC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           286DC6E8-0D47-346D-B3FB-3A3D8EB90241
+    value:           CE802714-E693-368D-A76E-91053C0B0DA8
   - target:          arm64e-maccatalyst
-    value:           286DC6E8-0D47-346D-B3FB-3A3D8EB90241
+    value:           CE802714-E693-368D-A76E-91053C0B0DA8
 install-name:    '/System/Library/PrivateFrameworks/SpotlightIndex.framework/Versions/A/SpotlightIndex'
-current-version: 2230.2
+current-version: 2230.7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -92,9 +92,9 @@ exports:
                        __SIGetFileOptions, __SIGetIndexCount, __SIGetLastUsedDate, 
                        __SIGetMissingParentOID, __SIGetRecoverTimeStamp, __SIIssueBadIndex, 
                        __SIIssueCacheCleanup, __SIIssueDefrag, __SIIssueFlush, __SIIssueFullMerge, 
-                       __SIIssueFullMergeWithGroup, __SIIssueMerge, __SIIssueRecovery, 
-                       __SIIssueSchedulerDump, __SIIssueSizeRepair, __SIIssueSplit, 
-                       __SIIssueVerify, __SIMinimizeDiskSpace, __SIOpenIndexFilesForMerge, 
+                       __SIIssueFullMergeWithGroup, __SIIssueLiveQueryDump, __SIIssueMerge, 
+                       __SIIssueRecovery, __SIIssueSchedulerDump, __SIIssueSizeRepair, 
+                       __SIIssueSplit, __SIIssueVerify, __SIMinimizeDiskSpace, __SIOpenIndexFilesForMerge, 
                        __SIPreHeatPermissions, __SIProtectionClass, __SIQuerySetTMNameSpaces, 
                        __SIReverseStoreIterate, __SIScanQueuesDrained, __SIScheduleBackgroundOperation, 
                        __SIScheduleDiskOperation, __SIScheduleOperation, __SISchedulerCopyDump, 

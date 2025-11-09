@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           67C665D1-B9E6-3354-8848-29B010F4E96D
+    value:           594025EF-8BB4-3918-BFE0-19C96B597B3C
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           A9587F15-659F-31FF-91D3-05B7DB93F36B
+    value:           7290F044-7716-34B5-A992-D329406E20B4
 install-name:    '/System/iOSSupport/usr/lib/swift/libswiftMediaPlayer.dylib'
-current-version: 4019.130.110
+current-version: 4022.255.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]

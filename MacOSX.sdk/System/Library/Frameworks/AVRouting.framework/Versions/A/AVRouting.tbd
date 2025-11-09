@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           97FE621A-AF3B-3769-B39F-0841BF79FBC8
+    value:           E6E22BC6-7318-3047-B093-108752AF4D4B
   - target:          x86_64-maccatalyst
-    value:           97FE621A-AF3B-3769-B39F-0841BF79FBC8
+    value:           E6E22BC6-7318-3047-B093-108752AF4D4B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0CEF8E65-6889-3CA1-B5F3-36B89858CDDE
+    value:           85FBF5BD-ED18-3A88-9828-8A7C263FDD7C
   - target:          arm64e-maccatalyst
-    value:           0CEF8E65-6889-3CA1-B5F3-36B89858CDDE
+    value:           85FBF5BD-ED18-3A88-9828-8A7C263FDD7C
 install-name:    '/System/Library/Frameworks/AVRouting.framework/Versions/A/AVRouting'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

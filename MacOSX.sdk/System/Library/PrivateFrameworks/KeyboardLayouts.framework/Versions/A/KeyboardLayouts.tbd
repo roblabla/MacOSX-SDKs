@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           24527DBF-2144-3857-9503-F49F808D5CFA
+    value:           CB5BE3A0-F593-3BAC-B4B5-C75AE4F011F3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           389D95BD-5BD8-3E94-AB5A-F79D5C53518F
+    value:           7DB9F4B5-2478-37EB-AC30-CDED5B8CE4CF
 install-name:    '/System/Library/PrivateFrameworks/KeyboardLayouts.framework/Versions/A/KeyboardLayouts'
 current-version: 226
 exports:

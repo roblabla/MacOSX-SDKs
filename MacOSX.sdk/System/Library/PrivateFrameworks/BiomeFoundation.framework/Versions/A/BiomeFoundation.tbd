@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           94CB9455-C71C-3943-A37E-5AE9CDD73EEA
+    value:           8DF6C9AC-9B92-3FA2-AF8A-79BD18E024DA
   - target:          x86_64-maccatalyst
-    value:           94CB9455-C71C-3943-A37E-5AE9CDD73EEA
+    value:           8DF6C9AC-9B92-3FA2-AF8A-79BD18E024DA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D1EED8AA-A5A5-3C38-9E49-337EAAFC71AF
+    value:           CF0330CD-7574-377A-BB1C-31BCF1612E7E
   - target:          arm64e-maccatalyst
-    value:           D1EED8AA-A5A5-3C38-9E49-337EAAFC71AF
+    value:           CF0330CD-7574-377A-BB1C-31BCF1612E7E
 install-name:    '/System/Library/PrivateFrameworks/BiomeFoundation.framework/Versions/A/BiomeFoundation'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

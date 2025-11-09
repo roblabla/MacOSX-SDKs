@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FF770252-A8E2-3343-AB24-8B3D593DB259
+    value:           1723E371-C296-3DB1-B231-8A33CA923588
   - target:          x86_64-maccatalyst
-    value:           FF770252-A8E2-3343-AB24-8B3D593DB259
+    value:           1723E371-C296-3DB1-B231-8A33CA923588
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1B1DAAD6-8652-3E6C-913F-1C46726D86D8
+    value:           EA39F453-E3B6-30A4-B5FA-8A8BA4325467
   - target:          arm64e-maccatalyst
-    value:           1B1DAAD6-8652-3E6C-913F-1C46726D86D8
+    value:           EA39F453-E3B6-30A4-B5FA-8A8BA4325467
 install-name:    '/System/Library/PrivateFrameworks/ScreenReaderCore.framework/Versions/A/ScreenReaderCore'
 current-version: 390
 exports:
@@ -130,21 +130,20 @@ exports:
                        _kSCRCUserDefaultsCacheAudiographDisplayTemporary, _kSCRCUserDefaultsCacheAudiographIsDisplayingTemporary, 
                        _kSCRCUserDefaultsCacheElementDictionaryTemporary, _kSCRCUserDefaultsCachePortablePreferencesDictionary, 
                        _kSCRCUserDefaultsCacheScreenCurtainState, _kSCRCUserDefaultsCategoryContent_CategoryIsEnabled, 
-                       _kSCRCUserDefaultsCategoryContent_IntonationAsPercent, _kSCRCUserDefaultsCategoryContent_PitchAsPercent, 
-                       _kSCRCUserDefaultsCategoryContent_RateAsPercent, _kSCRCUserDefaultsCategoryContent_SupportTemporarySpeechParameterChange, 
+                       _kSCRCUserDefaultsCategoryContent_PitchAsPercent, _kSCRCUserDefaultsCategoryContent_RateAsPercent, 
+                       _kSCRCUserDefaultsCategoryContent_SupportTemporarySpeechParameterChange, 
                        _kSCRCUserDefaultsCategoryContent_VoiceIdentifier, _kSCRCUserDefaultsCategoryContent_VoiceUseCustomizedVoiceSettings, 
                        _kSCRCUserDefaultsCategoryContent_VolumeAsPercent, _kSCRCUserDefaultsCategoryElementType_CategoryIsEnabled, 
-                       _kSCRCUserDefaultsCategoryElementType_IntonationAsPercent, 
                        _kSCRCUserDefaultsCategoryElementType_PitchAsPercent, _kSCRCUserDefaultsCategoryElementType_RateAsPercent, 
                        _kSCRCUserDefaultsCategoryElementType_SupportTemporarySpeechParameterChange, 
                        _kSCRCUserDefaultsCategoryElementType_VoiceIdentifier, _kSCRCUserDefaultsCategoryElementType_VoiceUseCustomizedVoiceSettings, 
                        _kSCRCUserDefaultsCategoryElementType_VolumeAsPercent, _kSCRCUserDefaultsCategoryGuide_CategoryIsEnabled, 
-                       _kSCRCUserDefaultsCategoryGuide_IntonationAsPercent, _kSCRCUserDefaultsCategoryGuide_PitchAsPercent, 
-                       _kSCRCUserDefaultsCategoryGuide_RateAsPercent, _kSCRCUserDefaultsCategoryGuide_SupportTemporarySpeechParameterChange, 
+                       _kSCRCUserDefaultsCategoryGuide_PitchAsPercent, _kSCRCUserDefaultsCategoryGuide_RateAsPercent, 
+                       _kSCRCUserDefaultsCategoryGuide_SupportTemporarySpeechParameterChange, 
                        _kSCRCUserDefaultsCategoryGuide_VoiceIdentifier, _kSCRCUserDefaultsCategoryGuide_VoiceUseCustomizedVoiceSettings, 
                        _kSCRCUserDefaultsCategoryGuide_VolumeAsPercent, _kSCRCUserDefaultsCategoryStatus_CategoryIsEnabled, 
-                       _kSCRCUserDefaultsCategoryStatus_IntonationAsPercent, _kSCRCUserDefaultsCategoryStatus_PitchAsPercent, 
-                       _kSCRCUserDefaultsCategoryStatus_RateAsPercent, _kSCRCUserDefaultsCategoryStatus_SupportTemporarySpeechParameterChange, 
+                       _kSCRCUserDefaultsCategoryStatus_PitchAsPercent, _kSCRCUserDefaultsCategoryStatus_RateAsPercent, 
+                       _kSCRCUserDefaultsCategoryStatus_SupportTemporarySpeechParameterChange, 
                        _kSCRCUserDefaultsCategoryStatus_VoiceIdentifier, _kSCRCUserDefaultsCategoryStatus_VoiceUseCustomizedVoiceSettings, 
                        _kSCRCUserDefaultsCategoryStatus_VolumeAsPercent, _kSCRCUserDefaultsCategorySystemWide_AudioOutputSelectorDeviceID, 
                        _kSCRCUserDefaultsCategorySystemWide_AudioOutputSelectorDeviceName, 
@@ -153,7 +152,6 @@ exports:
                        _kSCRCUserDefaultsCategorySystemWide_CategoryIsEnabled, _kSCRCUserDefaultsCategorySystemWide_DeleteCharacterMode, 
                        _kSCRCUserDefaultsCategorySystemWide_DisableSound, _kSCRCUserDefaultsCategorySystemWide_DisableSpeech, 
                        _kSCRCUserDefaultsCategorySystemWide_IndentationLevel, _kSCRCUserDefaultsCategorySystemWide_IndentationWidth, 
-                       _kSCRCUserDefaultsCategorySystemWide_IntonationAsPercent, 
                        _kSCRCUserDefaultsCategorySystemWide_LinkAttributeDescriptionLevel, 
                        _kSCRCUserDefaultsCategorySystemWide_MisspelledWordsDescriptionLevel, 
                        _kSCRCUserDefaultsCategorySystemWide_NumberMode, _kSCRCUserDefaultsCategorySystemWide_PitchAsPercent, 
@@ -173,15 +171,13 @@ exports:
                        _kSCRCUserDefaultsCategorySystemWide_VoiceUpperCasePitchRelativeChange, 
                        _kSCRCUserDefaultsCategorySystemWide_VoiceUseCustomizedVoiceSettings, 
                        _kSCRCUserDefaultsCategorySystemWide_VolumeAsPercent, _kSCRCUserDefaultsCategoryTextAttributes_CategoryIsEnabled, 
-                       _kSCRCUserDefaultsCategoryTextAttributes_IntonationAsPercent, 
                        _kSCRCUserDefaultsCategoryTextAttributes_PitchAsPercent, _kSCRCUserDefaultsCategoryTextAttributes_RateAsPercent, 
                        _kSCRCUserDefaultsCategoryTextAttributes_SupportTemporarySpeechParameterChange, 
                        _kSCRCUserDefaultsCategoryTextAttributes_VoiceIdentifier, 
                        _kSCRCUserDefaultsCategoryTextAttributes_VoiceUseCustomizedVoiceSettings, 
                        _kSCRCUserDefaultsCategoryTextAttributes_VolumeAsPercent, 
-                       _kSCRCUserDefaultsCategoryTitle_CategoryIsEnabled, _kSCRCUserDefaultsCategoryTitle_IntonationAsPercent, 
-                       _kSCRCUserDefaultsCategoryTitle_PitchAsPercent, _kSCRCUserDefaultsCategoryTitle_RateAsPercent, 
-                       _kSCRCUserDefaultsCategoryTitle_SupportTemporarySpeechParameterChange, 
+                       _kSCRCUserDefaultsCategoryTitle_CategoryIsEnabled, _kSCRCUserDefaultsCategoryTitle_PitchAsPercent, 
+                       _kSCRCUserDefaultsCategoryTitle_RateAsPercent, _kSCRCUserDefaultsCategoryTitle_SupportTemporarySpeechParameterChange, 
                        _kSCRCUserDefaultsCategoryTitle_VoiceIdentifier, _kSCRCUserDefaultsCategoryTitle_VoiceUseCustomizedVoiceSettings, 
                        _kSCRCUserDefaultsCategoryTitle_VolumeAsPercent, _kSCRCUserDefaultsContextualHelpDelayInSeconds, 
                        _kSCRCUserDefaultsCurrentProfile, _kSCRCUserDefaultsCurrentlySelectedSpeechAttributeType, 

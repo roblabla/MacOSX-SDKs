@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           9F7562FE-2D05-32DE-87B6-CC18A7B8043A
+    value:           7E2449E7-251C-3117-9F3B-73A135290C48
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           A63E0CAA-278D-3836-A869-5847147A89AA
+    value:           9DC9E2A1-9BDD-3D38-B9B9-0E51A8C769E3
 install-name:    '/System/iOSSupport/System/Library/Frameworks/ReplayKit.framework/Versions/A/ReplayKit'
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]

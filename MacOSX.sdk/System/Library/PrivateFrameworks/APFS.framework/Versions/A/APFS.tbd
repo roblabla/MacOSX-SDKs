@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5AC0FB8D-3AD7-32B6-80EB-3FF1B0479C51
+    value:           02C4F32C-E506-3A03-9EEE-B06CADCB6A9B
   - target:          x86_64-maccatalyst
-    value:           5AC0FB8D-3AD7-32B6-80EB-3FF1B0479C51
+    value:           02C4F32C-E506-3A03-9EEE-B06CADCB6A9B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5FE85853-74CD-3572-9450-AD1A25E4F53E
+    value:           562C8A2A-00EF-330C-84F8-A9D27EC6AF16
   - target:          arm64e-maccatalyst
-    value:           5FE85853-74CD-3572-9450-AD1A25E4F53E
+    value:           562C8A2A-00EF-330C-84F8-A9D27EC6AF16
 install-name:    '/System/Library/PrivateFrameworks/APFS.framework/Versions/A/APFS'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

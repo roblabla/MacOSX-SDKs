@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           938107F4-E608-3748-A86D-41765EE4C8B3
+    value:           2613A75E-BC10-329A-B513-BD4CE69BB3A8
   - target:          x86_64-maccatalyst
-    value:           938107F4-E608-3748-A86D-41765EE4C8B3
+    value:           2613A75E-BC10-329A-B513-BD4CE69BB3A8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           67E8B285-F6FA-32E4-A90B-82269A392BA7
+    value:           197DF625-FFDD-3BAB-A904-6B155221516A
   - target:          arm64e-maccatalyst
-    value:           67E8B285-F6FA-32E4-A90B-82269A392BA7
+    value:           197DF625-FFDD-3BAB-A904-6B155221516A
 install-name:    '/System/Library/Frameworks/EventKit.framework/Versions/A/EventKit'
-current-version: 1833
+current-version: 1833.3.2
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

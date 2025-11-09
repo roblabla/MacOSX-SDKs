@@ -3,34 +3,34 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           30D11B5E-343C-39B7-AFDB-4D4F7045DFBA
+    value:           CE38E71B-6084-3AD9-AEC5-4679DF65E229
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           03AB23F8-A558-3912-8FEC-49D805912038
+    value:           13CB5B1F-A8CE-3C70-B9A6-9DAB378CFDA8
 install-name:    '/System/Library/PrivateFrameworks/CloudDocsDaemon.framework/Versions/A/CloudDocsDaemon'
-current-version: 1177.40.40
+current-version: 1177.60.73
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AppTelemetryCiconiaBouncesInvestigationReadFrom, _AppTelemetryCiconiaInvestigationReadFrom, 
-                       _AppTelemetryInvestigationReadFrom, _AppTelemetryQBSInvestigationReadFrom, 
-                       _AppTelemetryQBSPerformanceReadFrom, _AppTelemetryTelemetryMessageReadFrom, 
-                       _AppTelemetryTimeSeriesEventReadFrom, _BRCCopyQuarantineInfo, 
-                       _BRCCoreAnalyticsReporterDSIDKey, _BRCCoreAnalyticsReporterErrorCountKey, 
-                       _BRCCoreAnalyticsReporterErrorMessageKey, _BRCCoreAnalyticsReporterErrorNameKey, 
-                       _BRCCoreAnalyticsReporterFolderSharingEnabledKey, _BRCCoreAnalyticsReporterLastErrorTimestampKey, 
-                       _BRCCoreAnalyticsReporterPCSStateKey, _BRCCoreAnalyticsReporterRampNumberKey, 
-                       _BRCCoreAnalyticsReporterSyncTypeKey, _BRCCoreAnalyticsReporterTotalItemsCountKey, 
-                       _BRCCoreAnalyticsReporterZoneErrorCountKey, _BRCCoreAnalyticsReporterZoneTypeKey, 
-                       _BRCDeleteAPFSSnapshot, _BRCExecutableNameForProcessIdentifier, 
-                       _BRCExtensionErrorPayloadReadFrom, _BRCFSSchedulerBaseDidUpdateHasWorkNotification, 
-                       _BRCFSWithPermissionsUpgrade, _BRCFSWithPermissionsUpgradeStripping, 
-                       _BRCGenerateAPFSSnapshot, _BRCGenerationCountFromData, _BRCGetOrAllocateDocID, 
-                       _BRCHasAPFSSnapshot, _BRCItemFieldsPrettyPrint, _BRCItemIDDocuments, 
-                       _BRCItemIDZoneRoot, _BRCMountAPFSSnapshot, _BRCOpenAt, _BRCOpenByID, 
-                       _BRCPrettyPrintBitmapWithContext, _BRCPrettyPrintEnumWithContext, 
-                       _BRCRecursiveRemove, _BRCRecursivelyChangeOwnerAndGroupToMobile, 
+                       _AppTelemetryFPFSMigrationInvestigationReadFrom, _AppTelemetryInvestigationReadFrom, 
+                       _AppTelemetryQBSInvestigationReadFrom, _AppTelemetryQBSPerformanceReadFrom, 
+                       _AppTelemetryTelemetryMessageReadFrom, _AppTelemetryTimeSeriesEventReadFrom, 
+                       _BRCCopyQuarantineInfo, _BRCCoreAnalyticsReporterDSIDKey, 
+                       _BRCCoreAnalyticsReporterErrorCountKey, _BRCCoreAnalyticsReporterErrorMessageKey, 
+                       _BRCCoreAnalyticsReporterErrorNameKey, _BRCCoreAnalyticsReporterFolderSharingEnabledKey, 
+                       _BRCCoreAnalyticsReporterLastErrorTimestampKey, _BRCCoreAnalyticsReporterPCSStateKey, 
+                       _BRCCoreAnalyticsReporterRampNumberKey, _BRCCoreAnalyticsReporterSyncTypeKey, 
+                       _BRCCoreAnalyticsReporterTotalItemsCountKey, _BRCCoreAnalyticsReporterZoneErrorCountKey, 
+                       _BRCCoreAnalyticsReporterZoneTypeKey, _BRCDeleteAPFSSnapshot, 
+                       _BRCExecutableNameForProcessIdentifier, _BRCExtensionErrorPayloadReadFrom, 
+                       _BRCFSSchedulerBaseDidUpdateHasWorkNotification, _BRCFSWithPermissionsUpgrade, 
+                       _BRCFSWithPermissionsUpgradeStripping, _BRCGenerateAPFSSnapshot, 
+                       _BRCGenerationCountFromData, _BRCGetOrAllocateDocID, _BRCHasAPFSSnapshot, 
+                       _BRCItemFieldsPrettyPrint, _BRCItemIDDocuments, _BRCItemIDZoneRoot, 
+                       _BRCMountAPFSSnapshot, _BRCOpenAt, _BRCOpenByID, _BRCPrettyPrintBitmapWithContext, 
+                       _BRCPrettyPrintEnumWithContext, _BRCRecursiveRemove, _BRCRecursivelyChangeOwnerAndGroupToMobile, 
                        _BRCRegisterAndSendNewContainerReset, _BRCServerZoneStatePrettyPrintWithContext, 
                        _BRCSetupVNodeRapidAging, _BRCSharingNoOverrideString, _BRCSizeInfoCompletedUnitCountKey, 
                        _BRCSizeInfoTotalUnitCountKey, _BRCSyncContextDidBecomeBackground, 
@@ -70,7 +70,8 @@ exports:
                        _kBRRecordKeyXattr, _kBRRecordTypeContent, _kBRRecordTypeSideCar, 
                        _kBRRecordTypeStructure, _prettyprintFSEventFlags, _sync_state_pretty_entries ]
     objc-classes:    [ AppTelemetryCiconiaBouncesInvestigation, AppTelemetryCiconiaInvestigation, 
-                       AppTelemetryInvestigation, AppTelemetryQBSInvestigation, AppTelemetryQBSPerformance, 
+                       AppTelemetryFPFSMigrationInvestigation, AppTelemetryInvestigation, 
+                       AppTelemetryQBSInvestigation, AppTelemetryQBSPerformance, 
                        AppTelemetryTelemetryMessage, AppTelemetryTimeSeriesEvent, 
                        BRCAccountHandler, BRCAccountSession, BRCAccountWaitOperation, 
                        BRCAccountsManager, BRCAggregateOperation, BRCAnalyticsReporter, 
@@ -146,7 +147,7 @@ exports:
                        AppTelemetryCiconiaInvestigation._experimentId, AppTelemetryCiconiaInvestigation._has, 
                        AppTelemetryCiconiaInvestigation._ignoredContentProtectedItems, 
                        AppTelemetryCiconiaInvestigation._importTime, AppTelemetryCiconiaInvestigation._isAccountDataSeparated, 
-                       AppTelemetryCiconiaInvestigation._itemsChangedDuringCloning, 
+                       AppTelemetryCiconiaInvestigation._isDesktopEnabled, AppTelemetryCiconiaInvestigation._itemsChangedDuringCloning, 
                        AppTelemetryCiconiaInvestigation._itemsNotFoundInDB, AppTelemetryCiconiaInvestigation._itemsNotMigratedCount, 
                        AppTelemetryCiconiaInvestigation._manuallyTriggeredMigration, 
                        AppTelemetryCiconiaInvestigation._materialisedOnCDItemsCount, 
@@ -157,10 +158,20 @@ exports:
                        AppTelemetryCiconiaInvestigation._rampId, AppTelemetryCiconiaInvestigation._totalItemCount, 
                        AppTelemetryCiconiaInvestigation._treatmentId, AppTelemetryCiconiaInvestigation._typesOfMigratedItemsMask, 
                        AppTelemetryCiconiaInvestigation._typesOfNonMigratedItemsMask, 
-                       AppTelemetryCiconiaInvestigation._unexpectedCreations, AppTelemetryInvestigation._bouncesInvestigation, 
-                       AppTelemetryInvestigation._ciconiaInvestigation, AppTelemetryInvestigation._errorCode, 
-                       AppTelemetryInvestigation._errorDescription, AppTelemetryInvestigation._errorDomain, 
-                       AppTelemetryInvestigation._eventGroupUUID, AppTelemetryInvestigation._has, 
+                       AppTelemetryCiconiaInvestigation._unexpectedCreations, AppTelemetryFPFSMigrationInvestigation._accountQuotaUsage, 
+                       AppTelemetryFPFSMigrationInvestigation._bouncedItemsCount, 
+                       AppTelemetryFPFSMigrationInvestigation._bouncedItemsMatrix, 
+                       AppTelemetryFPFSMigrationInvestigation._experimentId, AppTelemetryFPFSMigrationInvestigation._has, 
+                       AppTelemetryFPFSMigrationInvestigation._importTime, AppTelemetryFPFSMigrationInvestigation._isAccountDataSeparated, 
+                       AppTelemetryFPFSMigrationInvestigation._isSuccessful, AppTelemetryFPFSMigrationInvestigation._itemsNotFoundInDB, 
+                       AppTelemetryFPFSMigrationInvestigation._itemsNotMigratedCount, 
+                       AppTelemetryFPFSMigrationInvestigation._rampId, AppTelemetryFPFSMigrationInvestigation._totalItemCount, 
+                       AppTelemetryFPFSMigrationInvestigation._treatmentId, AppTelemetryFPFSMigrationInvestigation._typesOfMigratedItemsMask, 
+                       AppTelemetryFPFSMigrationInvestigation._typesOfNonMigratedItemsMask, 
+                       AppTelemetryInvestigation._bouncesInvestigation, AppTelemetryInvestigation._ciconiaInvestigation, 
+                       AppTelemetryInvestigation._errorCode, AppTelemetryInvestigation._errorDescription, 
+                       AppTelemetryInvestigation._errorDomain, AppTelemetryInvestigation._eventGroupUUID, 
+                       AppTelemetryInvestigation._fpfsMigrationInvestigation, AppTelemetryInvestigation._has, 
                        AppTelemetryInvestigation._hasForegroundClients, AppTelemetryInvestigation._isPCSChained, 
                        AppTelemetryInvestigation._itemID, AppTelemetryInvestigation._lastStep, 
                        AppTelemetryInvestigation._nonDiscretionary, AppTelemetryInvestigation._operationType, 

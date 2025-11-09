@@ -30,5 +30,6 @@ NS_ASSUME_NONNULL_END
 #endif
 
 #else
+#import <TargetConditionals.h>
 #import <PassKitCore/PKDateComponentsRange.h>
 #endif

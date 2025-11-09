@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0A9C45A9-3052-3CF5-A5F7-965715F3C892
+    value:           4ECCB41A-A2E1-36D4-BB73-D9F8F04B5A7A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6CC2EDC6-3A72-3896-8CB0-6811E2351BA4
+    value:           2F23C11E-3AFA-3D5E-B351-F537440392B8
 install-name:    '/System/Library/PrivateFrameworks/TranslationUI.framework/Versions/A/TranslationUI'
-current-version: 216.4
+current-version: 216.8
 compatibility-version: 0
 swift-abi-version: 7
 exports:

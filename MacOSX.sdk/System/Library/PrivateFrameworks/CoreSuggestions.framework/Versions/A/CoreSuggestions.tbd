@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DC78D3E7-30FA-31D4-8D3F-4DD92F9C5A4D
+    value:           9DBD26EF-7952-3EDC-9F01-7F6F7F601358
   - target:          x86_64-maccatalyst
-    value:           DC78D3E7-30FA-31D4-8D3F-4DD92F9C5A4D
+    value:           9DBD26EF-7952-3EDC-9F01-7F6F7F601358
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CE60F669-ADE1-3DD8-9325-7D9E7B93ABF6
+    value:           C95CA6CA-A88A-3E91-819F-DB383EB45754
   - target:          arm64e-maccatalyst
-    value:           CE60F669-ADE1-3DD8-9325-7D9E7B93ABF6
+    value:           C95CA6CA-A88A-3E91-819F-DB383EB45754
 install-name:    '/System/Library/PrivateFrameworks/CoreSuggestions.framework/Versions/A/CoreSuggestions'
-current-version: 1193.8
+current-version: 1193.8.6
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -229,9 +229,9 @@ exports:
                        SGReminder, SGReminderMetadata, SGRemoteObjectProxy, SGSimpleNamedEmailAddress, 
                        SGSimpleTimeRange, SGSocialProfile, SGSuggestedActionMetrics, 
                        SGSuggestedEventLaunchInfo, SGSuggestions, SGSuggestionsICSMetrics, 
-                       SGSuggestionsService, SGTimeZone, SGTimeZoneDetector, SGURL, 
-                       SGXPCResponse, SGXPCResponse1, SGXPCResponse2, SGXPCResponse3, 
-                       _SGNSStringEncodingEnumerator ]
+                       SGSuggestionsService, SGSuggestionsWorkGroupManager, SGSuggestionsWorkGroupManagerGuardedData, 
+                       SGTimeZone, SGTimeZoneDetector, SGURL, SGXPCResponse, SGXPCResponse1, 
+                       SGXPCResponse2, SGXPCResponse3, _SGNSStringEncodingEnumerator ]
     objc-ivars:      [ SGDetailCacheSnapshot._emailCache, SGDetailCacheSnapshot._maybeFormat, 
                        SGDetailCacheSnapshot._phoneCache, SGEntityTagLabelOptions.indexed, 
                        SGEntityTagLabelOptions.stored, SGEntityTagLabelOptions.tracked, 
@@ -297,5 +297,6 @@ exports:
                        SGOrigin._shouldShowOperatingSystemVersion, SGOrigin._sourceKey, 
                        SGOrigin._title, SGOrigin._to, SGOrigin._toPeople, SGOrigin._type, 
                        SGPersistentSaltProviderGuardedData._salt, SGPreferenceManager._suggestionsDefaults, 
-                       SGSuggestionsService._daemonConnectionFuture ]
+                       SGSuggestionsService._daemonConnectionFuture, SGSuggestionsWorkGroupManagerGuardedData._groupLookup, 
+                       SGSuggestionsWorkGroupManagerGuardedData._uniqueIds ]
 ...

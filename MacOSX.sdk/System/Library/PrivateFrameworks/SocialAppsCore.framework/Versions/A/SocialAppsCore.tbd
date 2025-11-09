@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8D684621-7DA8-3D20-908B-41B6CB8F852E
+    value:           D54DD381-B6A9-3C2E-B8B8-2C9AF25EF57D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7737A4EA-49D3-38BD-B328-D58C3613998E
+    value:           74F05895-85E6-3DD5-8CD6-E2B8A2A0B6C6
 install-name:    '/System/Library/PrivateFrameworks/SocialAppsCore.framework/Versions/A/SocialAppsCore'
 current-version: 5500
 reexported-libraries:
@@ -60,11 +60,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8A1FD89E-342C-33E8-9CDB-C005CAD1A12A
+    value:           98221A9A-7F28-30A5-B005-01938727F7AA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           71C6191E-CCC8-344E-A9FA-DC03FC857CBB
+    value:           20FA1F52-1EFA-34BA-A698-C00A21E24B05
 install-name:    '/System/Library/PrivateFrameworks/IMCore.framework/Versions/A/IMCore'
 current-version: 800
 swift-abi-version: 7
@@ -255,22 +255,24 @@ exports:
                        _IMHandleStatusChangedNotification, _IMHandlesForABPersonChangedNotification, 
                        _IMHashOfHashesForStringArray, _IMIDStatusControllerUpdatedNotification, 
                        _IMIDStringKey, _IMIndexesFromOrderedCollectionDifference, 
-                       _IMInlineReplyChatItemsDidChangeNotification, _IMItemCompareSortIDs, 
-                       _IMJabberListPrefKey, _IMJabberServiceName, _IMManagedPreferencesChangedNotification, 
-                       _IMManagedUserSetupSkipKey, _IMMeChangedNotification, _IMMeNowPlayingInfoChangedNotification, 
+                       _IMInlineReplyChatItemsDidChangeNotification, _IMIsOscarEnabled, 
+                       _IMItemCompareSortIDs, _IMJabberListPrefKey, _IMJabberServiceName, 
+                       _IMManagedPreferencesChangedNotification, _IMManagedUserSetupSkipKey, 
+                       _IMMeChangedNotification, _IMMeNowPlayingInfoChangedNotification, 
                        _IMMePictureChangedNotification, _IMMeStatusChangedNotification, 
                        _IMMessageCompare, _IMMessageErrorDomain, _IMMessageExpireStatusTypeExpiringDuration, 
                        _IMNicknameControllerDidLoadNotification, _IMNicknameDidChangeNotification, 
-                       _IMNicknameOnboardingDidFinishNotification, _IMOneTimeCodeDisplayKey, 
-                       _IMOneTimeCodeDomainKey, _IMOneTimeCodeGuidKey, _IMOneTimeCodeHandleKey, 
-                       _IMOneTimeCodeKey, _IMOneTimeCodeMachineReadableCodeKey, _IMOneTimeCodeTimeStampKey, 
-                       _IMOperationalAccountForService, _IMPayloadDidLoadContent, 
-                       _IMPayloadNeedsResizing, _IMPeopleAddedNotification, _IMPeopleChangedNotification, 
-                       _IMPeopleChangedUserInfoKey, _IMPeopleRemovedNotification, 
-                       _IMPersonAllowedCapabilitiesKey, _IMPersonKey, _IMPersonNicknameKey, 
-                       _IMPersonProfileKey, _IMPersonStatusComparator, _IMPersonStatusFromFZPersonStatus, 
-                       _IMPersonStatusIsOnline, _IMPersonStatusReverseComparator, 
-                       _IMPersonalNicknameDidChangeNotification, _IMPinnedConversationsControllerPinningUpdateReasonContextMenu, 
+                       _IMNicknameOnboardingDidFinishNotification, _IMOffsetSerializedDDScannerResult, 
+                       _IMOneTimeCodeDisplayKey, _IMOneTimeCodeDomainKey, _IMOneTimeCodeGuidKey, 
+                       _IMOneTimeCodeHandleKey, _IMOneTimeCodeKey, _IMOneTimeCodeMachineReadableCodeKey, 
+                       _IMOneTimeCodeTimeStampKey, _IMOperationalAccountForService, 
+                       _IMPayloadDidLoadContent, _IMPayloadNeedsResizing, _IMPeopleAddedNotification, 
+                       _IMPeopleChangedNotification, _IMPeopleChangedUserInfoKey, 
+                       _IMPeopleRemovedNotification, _IMPersonAllowedCapabilitiesKey, 
+                       _IMPersonKey, _IMPersonNicknameKey, _IMPersonProfileKey, _IMPersonStatusComparator, 
+                       _IMPersonStatusFromFZPersonStatus, _IMPersonStatusIsOnline, 
+                       _IMPersonStatusReverseComparator, _IMPersonalNicknameDidChangeNotification, 
+                       _IMPinnedConversationsControllerPinningUpdateReasonContextMenu, 
                        _IMPinnedConversationsControllerPinningUpdateReasonConversationDelete, 
                        _IMPinnedConversationsControllerPinningUpdateReasonDragAndDrop, 
                        _IMPinnedConversationsControllerPinningUpdateReasonFetchFromLocalStore, 
@@ -285,12 +287,12 @@ exports:
                        _IMPreferredAccountForService, _IMPreferredAccountForServiceChangedNotification, 
                        _IMPreferredSendingAccountForAddressWithFallbackService, _IMPreferredSendingAccountForAddressesWantsGroupWithFallbackService, 
                        _IMPreferredSendingAccountForAddressesWithFallbackService, 
-                       _IMRegisterForPreferredAccountChangeNotifications, _IMRunAllCloudKitEventNotificationManagerTests, 
-                       _IMSPICalculateSendingServiceByDestinationsAndChatGUID, _IMSPIGetAllChatsContainingParticipantWithHandle, 
-                       _IMSPIGetAttachmentPathsForTransferGUIDs, _IMSPIGetAttachmentPathsForTransferGUIDsWithQOS, 
-                       _IMSPIGetContactsByChatGUID, _IMSPIGetDisplayNameAndParticipantsForChatWithGUID, 
-                       _IMSPIGetGroupPhotosForChatsWithGroupIDs, _IMSPIGetMostRecentContacts, 
-                       _IMSPIGetMostRecentIMEventForContactHandlesAndLocalLabelIDs, 
+                       _IMRegisterForPreferredAccountChangeNotifications, _IMResetJunkiMessageFilteringState, 
+                       _IMRunAllCloudKitEventNotificationManagerTests, _IMSPICalculateSendingServiceByDestinationsAndChatGUID, 
+                       _IMSPIGetAllChatsContainingParticipantWithHandle, _IMSPIGetAttachmentPathsForTransferGUIDs, 
+                       _IMSPIGetAttachmentPathsForTransferGUIDsWithQOS, _IMSPIGetContactsByChatGUID, 
+                       _IMSPIGetDisplayNameAndParticipantsForChatWithGUID, _IMSPIGetGroupPhotosForChatsWithGroupIDs, 
+                       _IMSPIGetMostRecentContacts, _IMSPIGetMostRecentIMEventForContactHandlesAndLocalLabelIDs, 
                        _IMSPIGetMostRecentIMEventForContactHandlesAndLocalPhoneHandles, 
                        _IMSPIHasActiveAliasForSendingOnService, _IMSPILastAddressedHandleForChatWithGUID, 
                        _IMSPILastFailedMessageDate, _IMSPILastFailedMessageDateChangedNotification, 
@@ -407,17 +409,17 @@ exports:
                        IMFileTransferCenter, IMGroupActionChatItem, IMGroupTitleChangeChatItem, 
                        IMHandle, IMHandleAvailabilityManager, IMHandleRegistrar, 
                        IMIDStatusController, IMInlineReplyChatItemRules, IMInlineReplyController, 
-                       IMItemChatContext, IMItemsController, IMLoadMoreChatItem, 
-                       IMLoadMoreRecentChatItem, IMLocatingChatItem, IMLocationManager, 
-                       IMLocationManagerUtils, IMLocationShareActionChatItem, IMLocationShareOfferChatItem, 
-                       IMLocationUpdateSentChatItem, IMMe, IMMessage, IMMessageAcknowledgmentChatItem, 
-                       IMMessageActionChatItem, IMMessageAttributionChatItem, IMMessageChatItem, 
-                       IMMessageEditChatItem, IMMessageEffectControlChatItem, IMMessagePartChatItem, 
-                       IMMessagePartHighlightChatItem, IMMessageReplyCountChatItem, 
+                       IMItemChatContext, IMItemsController, IMJunkRecoveryTranscriptChatItem, 
+                       IMLoadMoreChatItem, IMLoadMoreRecentChatItem, IMLocatingChatItem, 
+                       IMLocationManager, IMLocationManagerUtils, IMLocationShareActionChatItem, 
+                       IMLocationShareOfferChatItem, IMLocationUpdateSentChatItem, 
+                       IMMe, IMMessage, IMMessageAcknowledgmentChatItem, IMMessageActionChatItem, 
+                       IMMessageAttributionChatItem, IMMessageChatItem, IMMessageEffectControlChatItem, 
+                       IMMessagePartChatItem, IMMessagePartHighlightChatItem, IMMessageReplyCountChatItem, 
                        IMMessageRetractionChatItem, IMMessageStatusChatItem, IMMultiplexedDaemonConnection, 
                        IMMutableChatContext, IMNicknameController, IMNotifyAnywayChatItem, 
-                       IMNumberChangedChatItem, IMOneTimeCodeAccelerator, IMOrderingMetricCollector, 
-                       IMOrderingTools, IMOrganicAttachmentMessagePartChatItem, IMParentalControls, 
+                       IMNumberChangedChatItem, IMOneTimeCodeAccelerator, IMOrderingTools, 
+                       IMOrganicAttachmentMessagePartChatItem, IMParentalControls, 
                        IMParticipantChangeChatItem, IMParticipantSubscriptionSwitchChatItem, 
                        IMPendingMomentShareMessagePartChatItem, IMPeople, IMPeopleCollection, 
                        IMPhotoLibraryPersistenceManager, IMPinnedConversationsController, 
@@ -447,17 +449,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CB06F68E-1C97-3CFB-82F4-0E257660F1DC
+    value:           762BD66B-FE82-3817-B089-1BAC313FB57A
   - target:          x86_64-maccatalyst
-    value:           CB06F68E-1C97-3CFB-82F4-0E257660F1DC
+    value:           762BD66B-FE82-3817-B089-1BAC313FB57A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           62D110D3-85F1-3055-8ACB-235249CCCE5D
+    value:           9E04A700-2039-3E7A-87C0-6E8774DE5652
   - target:          arm64e-maccatalyst
-    value:           62D110D3-85F1-3055-8ACB-235249CCCE5D
+    value:           9E04A700-2039-3E7A-87C0-6E8774DE5652
 install-name:    '/System/Library/PrivateFrameworks/IMFoundation.framework/Versions/A/IMFoundation'
 current-version: 800
 exports:

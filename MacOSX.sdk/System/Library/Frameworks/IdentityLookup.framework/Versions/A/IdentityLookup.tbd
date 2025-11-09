@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           27100993-4F08-36C9-99D9-58B400525566
+    value:           E75946F4-3E6F-3DF8-949F-E1E72839BDA1
   - target:          x86_64-maccatalyst
-    value:           27100993-4F08-36C9-99D9-58B400525566
+    value:           E75946F4-3E6F-3DF8-949F-E1E72839BDA1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0C29073D-B743-3BCA-8182-29B99DB49552
+    value:           B291A87B-B27E-3866-9E9B-31D19DA2B1A1
   - target:          arm64e-maccatalyst
-    value:           0C29073D-B743-3BCA-8182-29B99DB49552
+    value:           B291A87B-B27E-3866-9E9B-31D19DA2B1A1
 install-name:    '/System/Library/Frameworks/IdentityLookup.framework/Versions/A/IdentityLookup'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

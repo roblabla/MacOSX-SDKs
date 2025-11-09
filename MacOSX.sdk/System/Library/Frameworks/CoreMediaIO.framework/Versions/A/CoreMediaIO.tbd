@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9DD967C4-2797-35C4-AE08-C547CDBF30A0
+    value:           927CE8FC-5905-3FC6-BC80-9D3EE2DE448F
   - target:          x86_64-maccatalyst
-    value:           9DD967C4-2797-35C4-AE08-C547CDBF30A0
+    value:           927CE8FC-5905-3FC6-BC80-9D3EE2DE448F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E01DDB19-9943-373D-9DA3-3DEDA788D505
+    value:           FC89D439-D723-3A8C-A222-F64AC354DF8D
   - target:          arm64e-maccatalyst
-    value:           E01DDB19-9943-373D-9DA3-3DEDA788D505
+    value:           FC89D439-D723-3A8C-A222-F64AC354DF8D
 install-name:    '/System/Library/Frameworks/CoreMediaIO.framework/Versions/A/CoreMediaIO'
 current-version: 0
 compatibility-version: 0
@@ -40,14 +40,14 @@ exports:
                        _CMIOExtensionPropertyIs4CCProperty, _CMIOExtensionPropertyIs4CCSelectorControlProperty, 
                        _CMIOExtensionPropertyProviderManufacturer, _CMIOExtensionPropertyProviderName, 
                        _CMIOExtensionPropertyStreamActiveFormatIndex, _CMIOExtensionPropertyStreamAsyncStillCaptureConfigurations, 
-                       _CMIOExtensionPropertyStreamAsyncStillCaptureEnabled, _CMIOExtensionPropertyStreamCinematicFramingActive, 
-                       _CMIOExtensionPropertyStreamFaceDetectionEnabled, _CMIOExtensionPropertyStreamFlashSupported, 
-                       _CMIOExtensionPropertyStreamFrameDuration, _CMIOExtensionPropertyStreamHumanBodyDetectionEnabled, 
-                       _CMIOExtensionPropertyStreamInputBufferQueueSize, _CMIOExtensionPropertyStreamMaxFrameDuration, 
-                       _CMIOExtensionPropertyStreamOverheadCameraMode, _CMIOExtensionPropertyStreamPerFrameExifDataEnabled, 
-                       _CMIOExtensionPropertyStreamPortraitEffectActive, _CMIOExtensionPropertyStreamPortraitEffectEnabled, 
-                       _CMIOExtensionPropertyStreamSinkBufferQueueSize, _CMIOExtensionPropertyStreamSinkBufferUnderrunCount, 
-                       _CMIOExtensionPropertyStreamSinkBuffersRequiredForStartup, 
+                       _CMIOExtensionPropertyStreamAsyncStillCaptureEnabled, _CMIOExtensionPropertyStreamCenterStageRectOfInterest, 
+                       _CMIOExtensionPropertyStreamCinematicFramingActive, _CMIOExtensionPropertyStreamFaceDetectionEnabled, 
+                       _CMIOExtensionPropertyStreamFlashSupported, _CMIOExtensionPropertyStreamFrameDuration, 
+                       _CMIOExtensionPropertyStreamHumanBodyDetectionEnabled, _CMIOExtensionPropertyStreamInputBufferQueueSize, 
+                       _CMIOExtensionPropertyStreamMaxFrameDuration, _CMIOExtensionPropertyStreamOverheadCameraMode, 
+                       _CMIOExtensionPropertyStreamPerFrameExifDataEnabled, _CMIOExtensionPropertyStreamPortraitEffectActive, 
+                       _CMIOExtensionPropertyStreamPortraitEffectEnabled, _CMIOExtensionPropertyStreamSinkBufferQueueSize, 
+                       _CMIOExtensionPropertyStreamSinkBufferUnderrunCount, _CMIOExtensionPropertyStreamSinkBuffersRequiredForStartup, 
                        _CMIOExtensionPropertyStreamSinkEndOfData, _CMIOExtensionPropertyStreamStudioLightingActive, 
                        _CMIOExtensionPropertyStreamStudioLightingEnabled, _CMIOExtensionPropertyStreamZoom, 
                        _CMIOExtensionPropertyStreamZoomUsingRamp, _CMIOFileWritingControlTokenAllVolumesAreOutOfDiskSpace, 

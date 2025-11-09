@@ -3,19 +3,33 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C05B87D8-BD03-3CE2-9BE9-0E38156C7A3F
+    value:           9FD83368-5918-3FD5-9776-16366CF062D6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7BDFC23B-084F-325B-A6DD-233F85BD2476
+    value:           1EE2B3E0-FDC6-3AE8-9AB2-2604B10A9CA1
 install-name:    '/System/Library/PrivateFrameworks/PhotoAnalysis.framework/Versions/A/PhotoAnalysis'
-current-version: 511.0.170
+current-version: 520.0.240
+swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ photoanalysisd ]
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _CPAnalyticsUserAgeRange18_25, _CPAnalyticsUserAgeRange26_35, 
+    symbols:         [ '_$s13PhotoAnalysis14BiomeUtilitiesC05pruneC10EventsWith5uuidsySo12NSMutableSetC_tFZ', 
+                       '_$s13PhotoAnalysis14BiomeUtilitiesC9readUUIDs16progressReporterSo12NSMutableSetCSo010MAProgressH0C_tKFZ', 
+                       '_$s13PhotoAnalysis14BiomeUtilitiesCACycfC', '_$s13PhotoAnalysis14BiomeUtilitiesCACycfc', 
+                       '_$s13PhotoAnalysis14BiomeUtilitiesCMa', '_$s13PhotoAnalysis14BiomeUtilitiesCMn', 
+                       '_$s13PhotoAnalysis14BiomeUtilitiesCN', '_$s13PhotoAnalysis14BiomeUtilitiesCfD', 
+                       '_$s13PhotoAnalysis22UserAnalyticsUtilitiesC06updatecD6Stream20withProgressReporterySo010MAProgressJ0C_tKF', 
+                       '_$s13PhotoAnalysis22UserAnalyticsUtilitiesC06updatecD6Stream20withProgressReporterySo010MAProgressJ0C_tKFTq', 
+                       '_$s13PhotoAnalysis22UserAnalyticsUtilitiesC12photoLibraryACSo07PHPhotoG0C_tcfC', 
+                       '_$s13PhotoAnalysis22UserAnalyticsUtilitiesC12photoLibraryACSo07PHPhotoG0C_tcfCTq', 
+                       '_$s13PhotoAnalysis22UserAnalyticsUtilitiesC12photoLibraryACSo07PHPhotoG0C_tcfc', 
+                       '_$s13PhotoAnalysis22UserAnalyticsUtilitiesCACycfC', '_$s13PhotoAnalysis22UserAnalyticsUtilitiesCACycfc', 
+                       '_$s13PhotoAnalysis22UserAnalyticsUtilitiesCMa', '_$s13PhotoAnalysis22UserAnalyticsUtilitiesCMn', 
+                       '_$s13PhotoAnalysis22UserAnalyticsUtilitiesCN', '_$s13PhotoAnalysis22UserAnalyticsUtilitiesCfD', 
+                       _CPAnalyticsUserAgeRange18_25, _CPAnalyticsUserAgeRange26_35, 
                        _CPAnalyticsUserAgeRange36_45, _CPAnalyticsUserAgeRange46_55, 
                        _CPAnalyticsUserAgeRange56_65, _CPAnalyticsUserAgeRangeOver65, 
                        _CPAnalyticsUserAgeRangeUnder18, _CPAnalyticsUserAgeRangeUnknown, 
@@ -208,7 +222,7 @@ exports:
                        _negativeDatasetKey, _photoAnalysisLastEvaluationDate, _positiveDatasetKey, 
                        _setLibraryScopedMusicWorkerPreferencesValue ]
     objc-classes:    [ PHAActivityGovernor, PHAActivityLog, PHAAnalysisWorkerJob, 
-                       PHAAssetRevGeocodeEnrichmentTask, PHACachingCPAnalyticsPropertiesTask, 
+                       PHAAssetRevGeocodeEnrichmentTask, PHABiomeUtilities, PHACachingCPAnalyticsPropertiesTask, 
                        PHACameraSmartSharingTask, PHAContactClassificationTask, PHACoreDuetDatasetSample, 
                        PHACoreDuetDatasetStorage, PHACurareShadowEvaluationDataset, 
                        PHACurareShadowEvaluationEvaluationResult, PHACurareShadowEvaluationEvaluator, 
@@ -246,14 +260,14 @@ exports:
                        PHAStorytellingClientRequestUtils, PHAStorytellingOnDemandTaskHandler, 
                        PHAStorytellingWorker, PHASuggestionController, PHASuggestionGenerationTask, 
                        PHASyndicationTask, PHATaskConverter, PHATaskHealthRecorder, 
-                       PHATaskWorkerJob, PHAUserBehaviorEnrichmentTask, PHAUserFeedbackUpdater, 
-                       PHAWallpaperShuffleDescriptorGenerator, PHAWallpaperSuggestionAnalyticsSender, 
-                       PHAWallpaperSuggestionGenerationNightlyTask, PHAWallpaperSuggestionGenerationWeeklyTask, 
-                       PHAWallpaperSuggestionRefreshSession, PHAWallpaperSuggestionUpgradeSession, 
-                       PHAWorker, PHAWorkerHealthMonitor, PHAWorkerHealthScoreEntry, 
-                       PHAWorkerJob, PHAWorkerWarmer, PVExportHelper, PVLibraryGraph, 
-                       PVLibraryGraphEdge, PVLibraryGraphNode, PVLibraryGraphSpecification, 
-                       _PHAWallpaperSuggestionCount ]
+                       PHATaskWorkerJob, PHAUserAnalyticsBiomeTask, PHAUserAnalyticsUtilities, 
+                       PHAUserBehaviorEnrichmentTask, PHAUserFeedbackUpdater, PHAWallpaperShuffleDescriptorGenerator, 
+                       PHAWallpaperSuggestionAnalyticsSender, PHAWallpaperSuggestionGenerationNightlyTask, 
+                       PHAWallpaperSuggestionGenerationWeeklyTask, PHAWallpaperSuggestionRefreshSession, 
+                       PHAWallpaperSuggestionUpgradeSession, PHAWorker, PHAWorkerHealthMonitor, 
+                       PHAWorkerHealthScoreEntry, PHAWorkerJob, PHAWorkerWarmer, 
+                       PVExportHelper, PVLibraryGraph, PVLibraryGraphEdge, PVLibraryGraphNode, 
+                       PVLibraryGraphSpecification, _PHAWallpaperSuggestionCount ]
     objc-ivars:      [ PHAMediaAnalysisdTurboJob._complete, PHAMediaAnalysisdTurboJob._library, 
                        PHAMediaAnalysisdTurboJob._lock, PHAMediaAnalysisdTurboJob._requestId ]
 ...

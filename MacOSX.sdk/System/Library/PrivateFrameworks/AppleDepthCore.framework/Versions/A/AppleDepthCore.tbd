@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B7B2037A-1F0B-3FBF-8DC7-962851FF246D
+    value:           13C40E6A-456D-3B33-9AA4-0D9B4962E305
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A13AD1A2-75EB-368A-8854-231BE4084737
+    value:           9DE075B9-19A1-3FCD-9DC2-0EEFDAA42F3F
 install-name:    '/System/Library/PrivateFrameworks/AppleDepthCore.framework/Versions/A/AppleDepthCore'
 current-version: 0
 compatibility-version: 0

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8D4398C8-A302-3FA9-9983-3D208A4E92AE
+    value:           CDB164F0-AA04-38D2-99C4-5E100FEC4482
   - target:          x86_64-maccatalyst
-    value:           8D4398C8-A302-3FA9-9983-3D208A4E92AE
+    value:           CDB164F0-AA04-38D2-99C4-5E100FEC4482
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C43389C0-259A-318B-A1E3-6078DBC02AB7
+    value:           5FB7575E-60F1-33D8-A012-BFAF6F322814
   - target:          arm64e-maccatalyst
-    value:           C43389C0-259A-318B-A1E3-6078DBC02AB7
+    value:           5FB7575E-60F1-33D8-A012-BFAF6F322814
 install-name:    '/System/Library/PrivateFrameworks/PreviewsMessaging.framework/Versions/A/PreviewsMessaging'
 current-version: 20.10.11
 swift-abi-version: 7

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           874DA2F8-59E2-3681-B0DA-D82859A05A7A
+    value:           0B48EE4D-81BE-3DEF-8C1C-15A65F31DCC5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9247E9BE-8E57-3E8A-A892-3A8E0E542994
+    value:           7D517F0F-EBAD-3757-8360-50A6E7456E0F
 install-name:    '/System/Library/PrivateFrameworks/Shortcut.framework/Versions/A/Shortcut'
 current-version: 119
 exports:

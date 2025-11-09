@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           58475DD8-E454-386F-8734-5A69143B3560
+    value:           8275D5A2-DB57-3D6B-B24F-1DB373442E4D
   - target:          x86_64-maccatalyst
-    value:           58475DD8-E454-386F-8734-5A69143B3560
+    value:           8275D5A2-DB57-3D6B-B24F-1DB373442E4D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9CB3697B-A6C1-3176-9582-555492147F62
+    value:           648CC74A-A121-3781-BDD7-14701F0D9220
   - target:          arm64e-maccatalyst
-    value:           9CB3697B-A6C1-3176-9582-555492147F62
+    value:           648CC74A-A121-3781-BDD7-14701F0D9220
 install-name:    '/System/Library/PrivateFrameworks/TeaSettings.framework/Versions/A/TeaSettings'
-current-version: 701
+current-version: 715
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -24,7 +24,7 @@ allowable-clients:
     clients:         [ ArticleNotificationExtension, ArticleNotificationServiceExtension, 
                        Feldspar, Feldspar Tests, Kinsale, KinsaleAnalytics, KinsaleUI, 
                        MarketingNotificationExtension, NVCDemo, NanoNewsWidgetExtension, 
-                       News, NewsAds, NewsAdsTests, NewsAnalytics, NewsAnalyticsTests, 
+                       NanoWeather, News, NewsAds, NewsAdsTests, NewsAnalytics, NewsAnalyticsTests, 
                        NewsAnalyticsUpload, NewsArticleQuickLook, NewsArticleViewer, 
                        NewsArticles, NewsArticlesTests, NewsDES, NewsDESTests, NewsDiagnosticExtension, 
                        NewsEngagement, NewsEngagementCollector, NewsEngagementTests, 
@@ -216,7 +216,7 @@ exports:
                        '_$s11TeaSettings16SettingCellStyleO06ButtonE0OSQAAMc', '_$s11TeaSettings16SettingCellStyleO15secureTextFieldyACSS_SayAA0C6ActionCGySSctcACmFWC', 
                        '_$s11TeaSettings16SettingCellStyleO22buttonWithConfirmationyA2C06ButtonE0O_S3SSayAA0C6ActionCGyyctcACmFWC', 
                        '_$s11TeaSettings16SettingCellStyleO4pageyACSayAA5GroupVG_tcACmFWC', 
-                       '_$s11TeaSettings16SettingCellStyleO6buttonyA2C06ButtonE0O_SayAA0C6ActionCGSbyyctcACmFWC', 
+                       '_$s11TeaSettings16SettingCellStyleO6buttonyA2C06ButtonE0O_SayAA0C6ActionCGyyctcACmFWC', 
                        '_$s11TeaSettings16SettingCellStyleO6slideryACSf_AA4ItemC16RangeControlTypeO9PrecisionOySf__GS2fSayAA0C6ActionCGySfctcACmFWC', 
                        '_$s11TeaSettings16SettingCellStyleO6switchyACSb_SayAA0C6ActionCGAA14ChangeBehaviorOSbctcACmFWC', 
                        '_$s11TeaSettings16SettingCellStyleO6toggleyACSayAA0C6ActionCG_SbycySbctcACmFWC', 

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EEB6D976-588B-3DB8-B282-22E83D7452CB
+    value:           FECCCE8B-7886-3A95-983E-BB6BF416D9B7
   - target:          x86_64-maccatalyst
-    value:           EEB6D976-588B-3DB8-B282-22E83D7452CB
+    value:           FECCCE8B-7886-3A95-983E-BB6BF416D9B7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3AECB52E-A0D4-32B4-97EA-0397F1929254
+    value:           B1C78A21-A950-32C3-B52C-CC5DA9DCE4E8
   - target:          arm64e-maccatalyst
-    value:           3AECB52E-A0D4-32B4-97EA-0397F1929254
+    value:           B1C78A21-A950-32C3-B52C-CC5DA9DCE4E8
 install-name:    '/System/Library/PrivateFrameworks/GameControllerSettings.framework/Versions/A/GameControllerSettings'
-current-version: 10.2.9
+current-version: 10.3.5
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

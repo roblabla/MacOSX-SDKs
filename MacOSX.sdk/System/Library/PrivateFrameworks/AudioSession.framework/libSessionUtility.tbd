@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5C7189B2-749B-3956-AFF4-EE4035838DBA
+    value:           FBEAD755-0020-39E6-9C85-F8DDF5E96D50
   - target:          x86_64-maccatalyst
-    value:           5C7189B2-749B-3956-AFF4-EE4035838DBA
+    value:           FBEAD755-0020-39E6-9C85-F8DDF5E96D50
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           26498C78-CA03-309A-911B-B771DDF09014
+    value:           CDEF974D-0EC9-31A5-9B7E-BAD6AE1574D2
   - target:          arm64e-maccatalyst
-    value:           26498C78-CA03-309A-911B-B771DDF09014
+    value:           CDEF974D-0EC9-31A5-9B7E-BAD6AE1574D2
 install-name:    '/System/Library/PrivateFrameworks/AudioSession.framework/libSessionUtility.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]

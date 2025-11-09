@@ -196,5 +196,6 @@ NS_ASSUME_NONNULL_END
 #endif // __PKPAYMENTREQUEST_H__
 
 #else
+#import <TargetConditionals.h>
 #import <PassKitCore/PKPaymentRequest.h>
 #endif

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FB49817D-3578-3AA6-AFD0-C71D5044336C
+    value:           1BCBBB0D-5F03-33B9-93EA-0A0189FE9FD6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           07FF7270-D9D6-3631-A2F1-77E99B7E66EF
+    value:           624A500C-1125-3B7A-9D13-CD1760451D61
 install-name:    '/System/Library/PrivateFrameworks/PackageKit.framework/Versions/A/PackageKit'
 current-version: 434
 exports:

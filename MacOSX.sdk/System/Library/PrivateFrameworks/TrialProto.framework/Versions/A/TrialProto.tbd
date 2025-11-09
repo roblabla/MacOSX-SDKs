@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C81628C1-7DF2-30DE-B79D-187D987096A4
+    value:           24786298-44ED-3981-9AD5-0AB703C31EE5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D38D7FE0-A2B9-3F46-8FC2-21CDDF4292AC
+    value:           DB1DACC0-F9A4-369C-AEE7-87C6A4361450
 install-name:    '/System/Library/PrivateFrameworks/TrialProto.framework/Versions/A/TrialProto'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -125,23 +125,23 @@ exports:
                        _TRITrialSystemTelemetryReadFrom, _TRIUIAssignment_ClearBucketingOneOfCase, 
                        _TRIUnit_Device, _TRIUnit_Session, _TRIUnit_Unknown, _TRIUnit_User, 
                        _TRIUserDimensionReadFrom, _TrialProtoVersionNumber, _TrialProtoVersionString ]
-    objc-classes:    [ TRIAsset, TRIAssignment, TRIClientExperiment, TRIClientFactorPack, 
-                       TRIClientRollout, TRIClientSelectedNamespace, TRIClientTreatment, 
-                       TRICloudKitSupport, TRICoreMLAssignmentLanguage, TRICoreMlassignmentRoot, 
-                       TRIDenormalizedEvent, TRIDeploymentRule, TRIExperimentRollbackPushNotification, 
-                       TRIFactor, TRIFactorLevel, TRIFactorLevels, TRIFactors, TRIFile, 
-                       TRILevel, TRILogContext, TRILogEvent, TRILogNamespace, TRILogTime, 
-                       TRILogTreatment, TRIMLRuntimeDimensions, TRIMLRuntimeEvaluation, 
-                       TRIMLRuntimeSchedulingPolicy, TRIMetric, TRIMobileAssetReference, 
-                       TRINSExpressionAssignmentLanguage, TRINamespace, TRINamespaces, 
-                       TRINotificationProcessingPolicy, TRIPBAny, TRIPBAnyRoot, TRIPBApi, 
-                       TRIPBApiRoot, TRIPBAutocreatedArray, TRIPBAutocreatedDictionary, 
-                       TRIPBBoolArray, TRIPBBoolBoolDictionary, TRIPBBoolDoubleDictionary, 
-                       TRIPBBoolEnumDictionary, TRIPBBoolFloatDictionary, TRIPBBoolInt32Dictionary, 
-                       TRIPBBoolInt64Dictionary, TRIPBBoolObjectDictionary, TRIPBBoolUInt32Dictionary, 
-                       TRIPBBoolUInt64Dictionary, TRIPBBoolValue, TRIPBBytesValue, 
-                       TRIPBCodedInputStream, TRIPBCodedOutputStream, TRIPBDescriptor, 
-                       TRIPBDescriptorProto, TRIPBDescriptorProto_ExtensionRange, 
+    objc-classes:    [ TRIAsset, TRIAssignment, TRIClientBackgroundMLTask, TRIClientExperiment, 
+                       TRIClientFactorPack, TRIClientRollout, TRIClientSelectedNamespace, 
+                       TRIClientTreatment, TRICloudKitSupport, TRICoreMLAssignmentLanguage, 
+                       TRICoreMlassignmentRoot, TRIDenormalizedEvent, TRIDeploymentRule, 
+                       TRIExperimentRollbackPushNotification, TRIFactor, TRIFactorLevel, 
+                       TRIFactorLevels, TRIFactors, TRIFile, TRILevel, TRILogContext, 
+                       TRILogEvent, TRILogNamespace, TRILogTime, TRILogTreatment, 
+                       TRIMLRuntimeDimensions, TRIMLRuntimeEvaluation, TRIMLRuntimeSchedulingPolicy, 
+                       TRIMetric, TRIMobileAssetReference, TRINSExpressionAssignmentLanguage, 
+                       TRINamespace, TRINamespaces, TRINotificationProcessingPolicy, 
+                       TRIPBAny, TRIPBAnyRoot, TRIPBApi, TRIPBApiRoot, TRIPBAutocreatedArray, 
+                       TRIPBAutocreatedDictionary, TRIPBBoolArray, TRIPBBoolBoolDictionary, 
+                       TRIPBBoolDoubleDictionary, TRIPBBoolEnumDictionary, TRIPBBoolFloatDictionary, 
+                       TRIPBBoolInt32Dictionary, TRIPBBoolInt64Dictionary, TRIPBBoolObjectDictionary, 
+                       TRIPBBoolUInt32Dictionary, TRIPBBoolUInt64Dictionary, TRIPBBoolValue, 
+                       TRIPBBytesValue, TRIPBCodedInputStream, TRIPBCodedOutputStream, 
+                       TRIPBDescriptor, TRIPBDescriptorProto, TRIPBDescriptorProto_ExtensionRange, 
                        TRIPBDescriptorProto_ReservedRange, TRIPBDescriptorRoot, TRIPBDoubleArray, 
                        TRIPBDoubleValue, TRIPBDuration, TRIPBDurationRoot, TRIPBEmpty, 
                        TRIPBEmptyRoot, TRIPBEnum, TRIPBEnumArray, TRIPBEnumDescriptor, 
@@ -189,9 +189,10 @@ exports:
                        TRITrialDownloadStatusFields, TRITrialExperimentFields, TRITrialFactorFields, 
                        TRITrialMobileAssetOriginFields, TRITrialOnDemandFactorFields, 
                        TRITrialRolloutFields, TRITrialSystemTelemetry, TRITriassignmentRoot, 
-                       TRITriclientExperimentRoot, TRITriclientRolloutRoot, TRITricloudKitSupportRoot, 
-                       TRITrideploymentEnvironmentRoot, TRITrifactorRoot, TRITrifactorTypesRoot, 
-                       TRITrinamespaceRoot, TRITriprojectIdRoot, TRITriprovisionalFactorPackMetadataRoot, 
+                       TRITriclientBackgroundMltaskRoot, TRITriclientExperimentRoot, 
+                       TRITriclientRolloutRoot, TRITricloudKitSupportRoot, TRITrideploymentEnvironmentRoot, 
+                       TRITrifactorRoot, TRITrifactorTypesRoot, TRITrinamespaceRoot, 
+                       TRITriprojectIdRoot, TRITriprovisionalFactorPackMetadataRoot, 
                        TRITripushNotificationRoot, TRITrishadowEvaluationRoot, TRIUIAssignment, 
                        TRIUIAssignmentLanguage, TRIUIAssignment_ExplicitBuckets, 
                        TRIUiassignmentRoot, TRIUserDimension ]

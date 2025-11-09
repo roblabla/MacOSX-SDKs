@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6C9733EF-0656-3934-B3E2-1D8CA00539C4
+    value:           0322A6AB-C364-375B-8D4A-094C145B0AAE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B5F1A83A-9511-3518-B779-4FA1AC562FA4
+    value:           00C36679-A4A0-3AB8-BD1A-5D65CCFBB0C8
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/SpeechSynthesis.framework/Versions/A/SpeechSynthesis'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -202,7 +202,7 @@ exports:
                        _kSpeechVoiceGroupCustomCompact, _kSpeechVoiceGroupDefault, 
                        _kSpeechVoiceRelativeDesirability, _kVoiceConstantRateOnly, 
                        _kVoiceShowInFullListOnly, _midiToHertz, _sCachedTimeAnnouncementsDictionary, 
-                       _voiceSortFn ]
+                       _stateNames, _voiceSortFn ]
     objc-classes:    [ BFConversionUtils, BFIsoProsodicTextSpeechElement, BFPauseSpeechElement, 
                        BFPlaintalkParser, BFProsodicState, BFRegexCache, BFSkipSpeechElement, 
                        BFSpeechChannel, BFSpeechElement, BFSyncSpeechElement, BabelFish, 

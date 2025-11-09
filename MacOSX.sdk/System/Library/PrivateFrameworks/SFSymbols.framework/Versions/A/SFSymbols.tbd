@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A25B2BE3-2DD1-3C7C-A6EB-A8C97E10B01D
+    value:           6B1A6858-E34A-3B59-9B63-1DEE54D35C0B
   - target:          x86_64-maccatalyst
-    value:           A25B2BE3-2DD1-3C7C-A6EB-A8C97E10B01D
+    value:           6B1A6858-E34A-3B59-9B63-1DEE54D35C0B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4B9AB0A1-7DF0-3408-AEEB-8547ADC23EEA
+    value:           05ADBA38-226D-3B78-AA81-D71FC7B99486
   - target:          arm64e-maccatalyst
-    value:           4B9AB0A1-7DF0-3408-AEEB-8547ADC23EEA
+    value:           05ADBA38-226D-3B78-AA81-D71FC7B99486
 install-name:    '/System/Library/PrivateFrameworks/SFSymbols.framework/Versions/A/SFSymbols'
-current-version: 98
+current-version: 99.2
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

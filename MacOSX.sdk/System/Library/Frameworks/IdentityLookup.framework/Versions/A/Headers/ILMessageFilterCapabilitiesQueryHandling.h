@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
  Subclasses of ILMessageFilterExtension which support querying must conform to this protocol.
  */
 
-IL_EXTERN API_AVAILABLE(ios(16.0), macCatalyst(18.0)) API_UNAVAILABLE( tvos) API_UNAVAILABLE(macos, watchos)
+IL_EXTERN API_AVAILABLE(ios(16.0), macCatalyst(16.0)) API_UNAVAILABLE( tvos) API_UNAVAILABLE(macos, watchos)
 @protocol ILMessageFilterCapabilitiesQueryHandling <NSObject>
 
 /**

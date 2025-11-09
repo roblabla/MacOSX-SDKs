@@ -118,10 +118,10 @@ typedef NS_ENUM(NSInteger, UINSToolbarItemPresentationSize) {
 /* The numbered variations, systemGray2 through systemGray6, are grays which increasingly
  * trend away from systemGray and in the direction of systemBackgroundColor.
  *
- * In UIUserInterfaceStyleLight: systemGray1 is slightly lighter than systemGray.
- *                               systemGray2 is lighter than that, and so on.
- * In UIUserInterfaceStyleDark:  systemGray1 is slightly darker than systemGray.
- *                               systemGray2 is darker than that, and so on.
+ * In UIUserInterfaceStyleLight: systemGray2 is slightly lighter than systemGray.
+ *                               systemGray3 is lighter than that, and so on.
+ * In UIUserInterfaceStyleDark:  systemGray2 is slightly darker than systemGray.
+ *                               systemGray3 is darker than that, and so on.
  */
 @property (class, nonatomic, readonly) UIColor *systemGray2Color        API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos);
 @property (class, nonatomic, readonly) UIColor *systemGray3Color        API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos);

@@ -21,6 +21,12 @@ INTENTS_EXTERN NSString *const INSearchCallHistoryIntentIdentifier API_AVAILABLE
 // Identifier for INStartCallIntent class.
 INTENTS_EXTERN NSString *const INStartCallIntentIdentifier API_AVAILABLE(ios(13.0), watchos(6.0)) API_UNAVAILABLE(macos, tvos);
 
+// Identifier for INAnswerCallIntent class.
+INTENTS_EXTERN NSString *const INAnswerCallIntentIdentifier API_AVAILABLE(ios(16.2), macos(13.1), watchos(9.2), tvos(16.2));
+
+// Identifier for INHangUpCallIntent class.
+INTENTS_EXTERN NSString *const INHangUpCallIntentIdentifier API_AVAILABLE(ios(16.2), macos(13.1), watchos(9.2), tvos(16.2));
+
 // Identifier for INSetAudioSourceInCarIntent class.
 INTENTS_EXTERN NSString *const INSetAudioSourceInCarIntentIdentifier API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(macos, watchos, tvos);
 

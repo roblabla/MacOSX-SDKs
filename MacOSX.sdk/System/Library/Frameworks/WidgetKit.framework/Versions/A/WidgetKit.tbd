@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A6075E25-1023-3FEF-9CA2-6BFCFC1B0B1B
+    value:           08393E20-4198-3D67-93D4-8D9D40ADB832
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           05AC36B1-35B6-32F6-ACEA-76872F2F708D
+    value:           BCFF8B43-91F0-301B-AD70-04E1A419F609
 install-name:    '/System/Library/Frameworks/WidgetKit.framework/Versions/A/WidgetKit'
-current-version: 281.24
+current-version: 281.49
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -43,6 +43,10 @@ exports:
                        '_$s7SwiftUI17EnvironmentValuesV9WidgetKitE18_widgetRenderStyleAD0ehI0Vvg', 
                        '_$s7SwiftUI17EnvironmentValuesV9WidgetKitE18_widgetRenderStyleAD0ehI0VvpMV', 
                        '_$s7SwiftUI17EnvironmentValuesV9WidgetKitE18_widgetRenderStyleAD0ehI0Vvs', 
+                       '_$s7SwiftUI17EnvironmentValuesV9WidgetKitE19widgetReferenceDate10Foundation0I0VSgvM', 
+                       '_$s7SwiftUI17EnvironmentValuesV9WidgetKitE19widgetReferenceDate10Foundation0I0VSgvg', 
+                       '_$s7SwiftUI17EnvironmentValuesV9WidgetKitE19widgetReferenceDate10Foundation0I0VSgvpMV', 
+                       '_$s7SwiftUI17EnvironmentValuesV9WidgetKitE19widgetReferenceDate10Foundation0I0VSgvs', 
                        '_$s7SwiftUI17EnvironmentValuesV9WidgetKitE19widgetRenderingModeAD0ehI0VvM', 
                        '_$s7SwiftUI17EnvironmentValuesV9WidgetKitE19widgetRenderingModeAD0ehI0Vvg', 
                        '_$s7SwiftUI17EnvironmentValuesV9WidgetKitE19widgetRenderingModeAD0ehI0VvpMV', 
@@ -300,7 +304,6 @@ exports:
                        '_$s9WidgetKit0A13RenderingModeV0D0OMn', '_$s9WidgetKit0A13RenderingModeV0D0ON', 
                        '_$s9WidgetKit0A13RenderingModeV0D0OSHAAMc', '_$s9WidgetKit0A13RenderingModeV0D0OSQAAMc', 
                        '_$s9WidgetKit0A13RenderingModeV11descriptionSSvg', '_$s9WidgetKit0A13RenderingModeV11descriptionSSvpMV', 
-                       '_$s9WidgetKit0A13RenderingModeV11filterStyleACSgSo013CHSTintFilterF0V_tcfC', 
                        '_$s9WidgetKit0A13RenderingModeV2eeoiySbAC_ACtFZ', '_$s9WidgetKit0A13RenderingModeV4modeAC0D0OvM', 
                        '_$s9WidgetKit0A13RenderingModeV4modeAC0D0Ovg', '_$s9WidgetKit0A13RenderingModeV4modeAC0D0OvpMV', 
                        '_$s9WidgetKit0A13RenderingModeV4modeAC0D0Ovs', '_$s9WidgetKit0A13RenderingModeV7vibrantACvgZ', 
@@ -588,6 +591,8 @@ exports:
                        '_$s9WidgetKit10ViewStatesMp', '_$s9WidgetKit10ViewStatesP11updateState2at4hostySi_7SwiftUI09_ArchivedC4HostCy7ContentQzqd__GtKAG01_kcL8DelegateRd__lFTj', 
                        '_$s9WidgetKit10ViewStatesP11updateState2at4hostySi_7SwiftUI09_ArchivedC4HostCy7ContentQzqd__GtKAG01_kcL8DelegateRd__lFTq', 
                        '_$s9WidgetKit10ViewStatesP12makeMetadata0F0QzyKFTj', '_$s9WidgetKit10ViewStatesP12makeMetadata0F0QzyKFTq', 
+                       '_$s9WidgetKit10ViewStatesP13filteredImageySo10CGImageRefaAFKFTj', 
+                       '_$s9WidgetKit10ViewStatesP13filteredImageySo10CGImageRefaAFKFTq', 
                        '_$s9WidgetKit10ViewStatesP5countSivgTj', '_$s9WidgetKit10ViewStatesP5countSivgTq', 
                        '_$s9WidgetKit10ViewStatesP7ContentAC_7SwiftUI0C0Tn', '_$s9WidgetKit10ViewStatesP8MetadataAC_SETn', 
                        '_$s9WidgetKit10ViewStatesP8MetadataAC_SeTn', '_$s9WidgetKit10ViewStatesTL', 
@@ -619,9 +624,11 @@ exports:
                        '_$s9WidgetKit13SystemVersionV5AzulEACvsZ', '_$s9WidgetKit13SystemVersionV6SydneyACvMZ', 
                        '_$s9WidgetKit13SystemVersionV6SydneyACvgZ', '_$s9WidgetKit13SystemVersionV6SydneyACvsZ', 
                        '_$s9WidgetKit13SystemVersionV6encode2toys7Encoder_p_tKF', 
-                       '_$s9WidgetKit13SystemVersionVMa', '_$s9WidgetKit13SystemVersionVMn', 
-                       '_$s9WidgetKit13SystemVersionVN', '_$s9WidgetKit13SystemVersionVSEAAMc', 
-                       '_$s9WidgetKit13SystemVersionVSeAAMc', '_$s9WidgetKit13SystemVersionVs23CustomStringConvertibleAAMc', 
+                       '_$s9WidgetKit13SystemVersionV7SydneyCACvMZ', '_$s9WidgetKit13SystemVersionV7SydneyCACvgZ', 
+                       '_$s9WidgetKit13SystemVersionV7SydneyCACvsZ', '_$s9WidgetKit13SystemVersionVMa', 
+                       '_$s9WidgetKit13SystemVersionVMn', '_$s9WidgetKit13SystemVersionVN', 
+                       '_$s9WidgetKit13SystemVersionVSEAAMc', '_$s9WidgetKit13SystemVersionVSeAAMc', 
+                       '_$s9WidgetKit13SystemVersionVs23CustomStringConvertibleAAMc', 
                        '_$s9WidgetKit13TimelineEntryMp', '_$s9WidgetKit13TimelineEntryP4date10Foundation4DateVvgTj', 
                        '_$s9WidgetKit13TimelineEntryP4date10Foundation4DateVvgTq', 
                        '_$s9WidgetKit13TimelineEntryP9relevanceAA0cD9RelevanceVSgvgTj', 
@@ -691,9 +698,6 @@ exports:
                        '_$s9WidgetKit18PlaceholderRequestCMo', '_$s9WidgetKit18PlaceholderRequestCMu', 
                        '_$s9WidgetKit18PlaceholderRequestCN', '_$s9WidgetKit18PlaceholderRequestCSEAAMc', 
                        '_$s9WidgetKit18PlaceholderRequestCSeAAMc', '_$s9WidgetKit18PlaceholderRequestCfD', 
-                       '_$s9WidgetKit18ViewStatesArchiverV13archiveToData10Foundation0H0VyKF', 
-                       '_$s9WidgetKit18ViewStatesArchiverV7archive2toySo12NSFileHandleC_tKF', 
-                       '_$s9WidgetKit18ViewStatesArchiverVMa', '_$s9WidgetKit18ViewStatesArchiverVMn', 
                        '_$s9WidgetKit19DataProtectionLevelO04fileD4TypeSo06NSFiledG0avg', 
                        '_$s9WidgetKit19DataProtectionLevelO04fileD4TypeSo06NSFiledG0avpMV', 
                        '_$s9WidgetKit19DataProtectionLevelO11descriptionSSvg', '_$s9WidgetKit19DataProtectionLevelO11descriptionSSvpMV', 

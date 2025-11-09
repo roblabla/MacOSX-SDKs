@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           33963BD8-B43E-3EB4-AD96-439065B74288
+    value:           B7E9AB57-6221-3299-B2B7-4BA1F1B8824B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           476CD381-F8B6-3723-932F-74300F89E121
+    value:           4367388D-B814-3A5E-9E3E-667A53B68F6E
 install-name:    '/usr/lib/libcryptex.dylib'
-current-version: 206.40.13
+current-version: 206.60.6
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ __cryptex_copy_list, __cryptex_create, __cryptex_identity_equal, 

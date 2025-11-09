@@ -3,17 +3,17 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           BB58BA4F-74B7-3AC9-9DC5-261C81BAE2D3
+    value:           52E60434-ECF0-3C16-95DF-1A25053426BB
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           524DC838-BCBA-3A95-AACD-DF35CB1C63E3
+    value:           23877E68-AD33-3520-A6C5-77AC22C0F297
 install-name:    '/System/Library/PrivateFrameworks/MaterialKit.framework/Versions/A/MaterialKit'
 allowable-clients:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     clients:         [ AXHearingSupport, AppPredictionUIWidget, AssistantUI, AudioUIPlugin, 
                        BannerKit, BannerKitTest, BatteryCenterUI, BatteryCenterUITest, 
-                       BatteryWidget, CarPlay, ChargingViewService, ChronoUIServices, 
+                       BatteryWidget, CarPlay, ChargingViewService, ChronoKit, ChronoUIServices, 
                        ClockAngel, ContinuousExposeModule, ControlCenterUI, ControlCenterUIKit, 
                        CoverSheet, DashBoard, FocusUI, HomeUI, LoginUI, MaterialKitTester, 
                        MaterialKitTests, MediaControls, MediaRemoteUI, MobileSafari, 

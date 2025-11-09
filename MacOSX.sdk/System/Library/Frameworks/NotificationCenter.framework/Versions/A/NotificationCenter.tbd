@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           307E156C-72EE-356B-8C33-1D40E057E597
+    value:           68FB852A-3922-3C4F-A7E6-C57E0AD719FB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CC11F88D-C18B-36E8-8627-C1B7E00A565C
+    value:           020A1FC3-7BDC-3966-9FB3-D7FA1B49C16B
 install-name:    '/System/Library/Frameworks/NotificationCenter.framework/Versions/A/NotificationCenter'
-current-version: 1235
+current-version: 1235.1
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _NCMaterialComputedStyle, _NCMaterialControlColor, _NCMaterialGetCustomAppearance, 

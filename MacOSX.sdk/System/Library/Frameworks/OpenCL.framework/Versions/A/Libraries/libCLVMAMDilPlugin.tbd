@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64h-macos ]
 uuids:
   - target:          x86_64h-macos
-    value:           10682050-A200-3F90-9AA2-819C319B1D3C
+    value:           E589FEDF-B56D-3CD1-BBBA-76076D20CFFB
 install-name:    '/System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/libCLVMAMDilPlugin.dylib'
 exports:
   - targets:         [ x86_64h-macos ]

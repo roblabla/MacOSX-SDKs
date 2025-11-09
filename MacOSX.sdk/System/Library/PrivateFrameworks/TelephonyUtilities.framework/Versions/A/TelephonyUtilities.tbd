@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E593C8BB-A263-325B-881B-63923FDDD111
+    value:           65ED5D14-BB30-3D88-917D-C6192C0B0154
   - target:          x86_64-maccatalyst
-    value:           E593C8BB-A263-325B-881B-63923FDDD111
+    value:           65ED5D14-BB30-3D88-917D-C6192C0B0154
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           45E7A93D-263C-32F8-9BBF-28F47A95FDAA
+    value:           49619680-3009-3F72-A8E2-73A7250A1094
   - target:          arm64e-maccatalyst
-    value:           45E7A93D-263C-32F8-9BBF-28F47A95FDAA
+    value:           49619680-3009-3F72-A8E2-73A7250A1094
 install-name:    '/System/Library/PrivateFrameworks/TelephonyUtilities.framework/Versions/A/TelephonyUtilities'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -125,19 +125,19 @@ exports:
                        _TUCollaborationDictionaryIdentifierTypeKey, _TUCollaborationDictionaryURLKey, 
                        _TUConduitLog, _TUConnectionTimeoutForCallService, _TUConversationActivityContextIdentifierCollaboration, 
                        _TUConversationActivityContextIdentifierGeneric, _TUConversationActivityContextIdentifierListenTogether, 
-                       _TUConversationActivityContextIdentifierScreenSharing, _TUConversationActivityContextIdentifierWatchTogether, 
-                       _TUConversationActivityContextIdentifierWorkoutTogether, _TUConversationLinkQueryKeyLinkName, 
-                       _TUConversationLinkQueryKeyNickname, _TUConversationLinkQueryKeyPseudonym, 
-                       _TUConversationLinkQueryKeyPublicKey, _TUConversationLinkQueryKeyVersion, 
-                       _TUConversationManagerMessagesErrorDomain, _TUConversationProviderIdentifierKey, 
-                       _TUConvertDestinationIDToLatinNumbers, _TUCopyIDSCanonicalAddressForDestinationID, 
-                       _TUCopyIDSCanonicalAddressForHandle, _TUCopyIDSFromIDForHandle, 
-                       _TUCountryCodeForIncomingCall, _TUCurrentProcessHasEntitlement, 
-                       _TUDefaultLog, _TUDestinationIDsAreEqual, _TUDeviceHasHomeButton, 
-                       _TUDialAssistDomain, _TUDialAssistEnabledOverride, _TUDialAssistUserSettingChanged, 
-                       _TUDialAssistedDialRequest, _TUDialRequestOriginatingUIStringContactCard, 
-                       _TUDialRequestOriginatingUIStringDialer, _TUDialRequestOriginatingUIStringECG, 
-                       _TUDialRequestOriginatingUIStringEmergencyDialerLockscreen, 
+                       _TUConversationActivityContextIdentifierPlayTogether, _TUConversationActivityContextIdentifierScreenSharing, 
+                       _TUConversationActivityContextIdentifierWatchTogether, _TUConversationActivityContextIdentifierWorkoutTogether, 
+                       _TUConversationLinkQueryKeyLinkName, _TUConversationLinkQueryKeyNickname, 
+                       _TUConversationLinkQueryKeyPseudonym, _TUConversationLinkQueryKeyPublicKey, 
+                       _TUConversationLinkQueryKeyVersion, _TUConversationManagerMessagesErrorDomain, 
+                       _TUConversationProviderIdentifierKey, _TUConvertDestinationIDToLatinNumbers, 
+                       _TUCopyIDSCanonicalAddressForDestinationID, _TUCopyIDSCanonicalAddressForHandle, 
+                       _TUCopyIDSFromIDForHandle, _TUCountryCodeForIncomingCall, 
+                       _TUCurrentProcessHasEntitlement, _TUDefaultLog, _TUDestinationIDsAreEqual, 
+                       _TUDeviceHasHomeButton, _TUDialAssistDomain, _TUDialAssistEnabledOverride, 
+                       _TUDialAssistUserSettingChanged, _TUDialAssistedDialRequest, 
+                       _TUDialRequestOriginatingUIStringContactCard, _TUDialRequestOriginatingUIStringDialer, 
+                       _TUDialRequestOriginatingUIStringECG, _TUDialRequestOriginatingUIStringEmergencyDialerLockscreen, 
                        _TUDialRequestOriginatingUIStringFaceTimeCreateCall, _TUDialRequestOriginatingUIStringFaceTimeLink, 
                        _TUDialRequestOriginatingUIStringFaceTimeRecents, _TUDialRequestOriginatingUIStringFallDetection, 
                        _TUDialRequestOriginatingUIStringGFTNotification, _TUDialRequestOriginatingUIStringMessagesAvatarBar, 
@@ -173,8 +173,8 @@ exports:
                        _TUIncomingInvitationTimeout, _TUIsBareMakoAccount, _TUIsCallHandoffActivityType, 
                        _TUIsEmergencyNumber, _TUIsEmergencyNumberOrIsWhiteListed, 
                        _TUIsIDSAvailableForFaceTime, _TUIsMMIOrUSSDNumber, _TUIsMirageAvailable, 
-                       _TUKickMemberTimeout, _TUMakeNeighborhoodConduitError, _TUMapItemForDestinationID, 
-                       _TUMapItemForPhoneNumberRef, _TUMapItemForPhoneNumberRefSync, 
+                       _TUKickMemberTimeout, _TULockdownModeEnabled, _TUMakeNeighborhoodConduitError, 
+                       _TUMapItemForDestinationID, _TUMapItemForPhoneNumberRef, _TUMapItemForPhoneNumberRefSync, 
                        _TUMetadataCacheDidFinishUpdatingNotification, _TUMinimumSupportedSharePlayProtocolVersion, 
                        _TUMobilePhoneDomain, _TUMobilePhoneLogDialAssistKey, _TUMultiwayMaxConcurrentStreams, 
                        _TUNeighborhoodActivityConduitErrorDomain, _TUNetworkCountryCode, 

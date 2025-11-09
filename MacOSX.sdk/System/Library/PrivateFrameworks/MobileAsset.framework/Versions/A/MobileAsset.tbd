@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E7DC06E8-E24F-38E8-8D4B-FF086D8D89A0
+    value:           E2E60F0F-A1E0-3FDF-B208-842700AE87BC
   - target:          x86_64-maccatalyst
-    value:           E7DC06E8-E24F-38E8-8D4B-FF086D8D89A0
+    value:           E2E60F0F-A1E0-3FDF-B208-842700AE87BC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DDFEB006-A1C6-3693-B727-157E49816DE0
+    value:           7AB9909F-F96F-32EC-8D59-94EDDFCCBB28
   - target:          arm64e-maccatalyst
-    value:           DDFEB006-A1C6-3693-B727-157E49816DE0
+    value:           7AB9909F-F96F-32EC-8D59-94EDDFCCBB28
 install-name:    '/System/Library/PrivateFrameworks/MobileAsset.framework/Versions/A/MobileAsset'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

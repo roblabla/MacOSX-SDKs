@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           856A6F6A-6FCF-3601-B9E2-65332A2AE686
+    value:           5A817545-318B-312D-A5A8-AC34A5A66B5D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F809BA43-043E-31CF-9D40-EB3F5B659447
+    value:           7A58CFB3-22C8-3993-AE42-E65E950565A4
 install-name:    '/System/Library/PrivateFrameworks/SpeechObjects.framework/Versions/A/SpeechObjects'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

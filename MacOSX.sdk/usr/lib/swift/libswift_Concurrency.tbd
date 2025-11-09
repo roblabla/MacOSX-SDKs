@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           58BF569D-444C-3531-8198-9F0AA93CD25B
+    value:           B99D7780-85D2-364B-89D1-9ECAE1F0E620
   - target:          x86_64-maccatalyst
-    value:           58BF569D-444C-3531-8198-9F0AA93CD25B
+    value:           B99D7780-85D2-364B-89D1-9ECAE1F0E620
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D636D7E9-D51C-3C8D-A4D7-B82BF75EDC7A
+    value:           3CC87F02-D5C8-33CA-A96E-22E8F00D4214
   - target:          arm64e-maccatalyst
-    value:           D636D7E9-D51C-3C8D-A4D7-B82BF75EDC7A
+    value:           3CC87F02-D5C8-33CA-A96E-22E8F00D4214
 install-name:    '/usr/lib/swift/libswift_Concurrency.dylib'
 current-version: 5.7.1
 swift-abi-version: 7

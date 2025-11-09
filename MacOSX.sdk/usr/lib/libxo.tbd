@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C2B35420-B053-34D7-A434-4EDC81567611
+    value:           C971AC03-C78B-3D01-B5A5-5D925821CAAD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           25E5C417-2241-3121-AEEE-F4701F0ABCCD
+    value:           F284981D-421C-38C0-864A-CB0ECB2D5A29
 install-name:    '/usr/lib/libxo.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

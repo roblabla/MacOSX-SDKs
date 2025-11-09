@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EFEDC5F7-35E8-3BC9-8842-CA6C58841BDF
+    value:           DF6D4B30-3E85-3E1F-B53F-1FECFE08F8BE
   - target:          x86_64-maccatalyst
-    value:           EFEDC5F7-35E8-3BC9-8842-CA6C58841BDF
+    value:           DF6D4B30-3E85-3E1F-B53F-1FECFE08F8BE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EAEBBEBD-C505-30A8-AA50-94A7365AD3CC
+    value:           5A2C5E38-56D9-3F0D-B865-E4A984F82D8C
   - target:          arm64e-maccatalyst
-    value:           EAEBBEBD-C505-30A8-AA50-94A7365AD3CC
+    value:           5A2C5E38-56D9-3F0D-B865-E4A984F82D8C
 install-name:    '/System/Library/PrivateFrameworks/TeaFoundation.framework/Versions/A/TeaFoundation'
-current-version: 701
+current-version: 715
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -24,7 +24,7 @@ allowable-clients:
     clients:         [ ArticleNotificationExtension, ArticleNotificationServiceExtension, 
                        Feldspar, Feldspar Tests, Kinsale, KinsaleAnalytics, KinsaleUI, 
                        MarketingNotificationExtension, NVCDemo, NanoNewsWidgetExtension, 
-                       News, NewsAds, NewsAdsTests, NewsAnalytics, NewsAnalyticsTests, 
+                       NanoWeather, News, NewsAds, NewsAdsTests, NewsAnalytics, NewsAnalyticsTests, 
                        NewsAnalyticsUpload, NewsArticleQuickLook, NewsArticleViewer, 
                        NewsArticles, NewsArticlesTests, NewsDES, NewsDESTests, NewsDiagnosticExtension, 
                        NewsEngagement, NewsEngagementCollector, NewsEngagementTests, 
@@ -897,7 +897,16 @@ exports:
                        '_$s13TeaFoundation16NetworkOperationCACyxGycfC', '_$s13TeaFoundation16NetworkOperationCACyxGycfc', 
                        '_$s13TeaFoundation16NetworkOperationCMa', '_$s13TeaFoundation16NetworkOperationCMn', 
                        '_$s13TeaFoundation16NetworkOperationCMo', '_$s13TeaFoundation16NetworkOperationCMu', 
-                       '_$s13TeaFoundation16NetworkOperationCfD', '_$s13TeaFoundation16ReferenceDecoderC20decodeWithReferences_4from4poolxxm_0B04DataVAA0C12DecodingPoolCtKSeRzlFTj', 
+                       '_$s13TeaFoundation16NetworkOperationCfD', '_$s13TeaFoundation16PromiseDebouncerC6cancelyyF', 
+                       '_$s13TeaFoundation16PromiseDebouncerC8debounceyAA0C0CyxGAGycF', 
+                       '_$s13TeaFoundation16PromiseDebouncerC8interval5queueACyxGSd_So012OS_dispatch_F0CtcfC', 
+                       '_$s13TeaFoundation16PromiseDebouncerC8interval5queueACyxGSd_So012OS_dispatch_F0CtcfCTj', 
+                       '_$s13TeaFoundation16PromiseDebouncerC8interval5queueACyxGSd_So012OS_dispatch_F0CtcfCTq', 
+                       '_$s13TeaFoundation16PromiseDebouncerC8interval5queueACyxGSd_So012OS_dispatch_F0Ctcfc', 
+                       '_$s13TeaFoundation16PromiseDebouncerCMa', '_$s13TeaFoundation16PromiseDebouncerCMn', 
+                       '_$s13TeaFoundation16PromiseDebouncerCMo', '_$s13TeaFoundation16PromiseDebouncerCMu', 
+                       '_$s13TeaFoundation16PromiseDebouncerCfD', '_$s13TeaFoundation16PromiseDebouncerCfd', 
+                       '_$s13TeaFoundation16ReferenceDecoderC20decodeWithReferences_4from4poolxxm_0B04DataVAA0C12DecodingPoolCtKSeRzlFTj', 
                        '_$s13TeaFoundation16ReferenceDecoderC20decodeWithReferences_4from4poolxxm_0B04DataVAA0C12DecodingPoolCtKSeRzlFTq', 
                        '_$s13TeaFoundation16ReferenceDecoderCACycfC', '_$s13TeaFoundation16ReferenceDecoderCACycfc', 
                        '_$s13TeaFoundation16ReferenceDecoderCMa', '_$s13TeaFoundation16ReferenceDecoderCMm', 
@@ -1221,6 +1230,22 @@ exports:
                        '_$s13TeaFoundation18ObservablePropertyCMa', '_$s13TeaFoundation18ObservablePropertyCMn', 
                        '_$s13TeaFoundation18ObservablePropertyCMo', '_$s13TeaFoundation18ObservablePropertyCMu', 
                        '_$s13TeaFoundation18ObservablePropertyCfD', '_$s13TeaFoundation18ObservablePropertyCfd', 
+                       '_$s13TeaFoundation18ObservableResolverC07bridgedD0So10TFResolver_pvg', 
+                       '_$s13TeaFoundation18ObservableResolverC07bridgedD0So10TFResolver_pvpMV', 
+                       '_$s13TeaFoundation18ObservableResolverC7Combine0C6ObjectAAMc', 
+                       '_$s13TeaFoundation18ObservableResolverC7resolve_4name4withxSgxm_SSSgyAA11ContextType_pctlF', 
+                       '_$s13TeaFoundation18ObservableResolverC7resolve_4namexSgxm_SSSgtlF', 
+                       '_$s13TeaFoundation18ObservableResolverC7resolve_4withxSgxm_yAA11ContextType_pctlF', 
+                       '_$s13TeaFoundation18ObservableResolverC7resolveyxSgxmlF', 
+                       '_$s13TeaFoundation18ObservableResolverCAA0D4TypeAAMc', '_$s13TeaFoundation18ObservableResolverCAA0D4TypeAAWP', 
+                       '_$s13TeaFoundation18ObservableResolverCMa', '_$s13TeaFoundation18ObservableResolverCMm', 
+                       '_$s13TeaFoundation18ObservableResolverCMn', '_$s13TeaFoundation18ObservableResolverCMo', 
+                       '_$s13TeaFoundation18ObservableResolverCMu', '_$s13TeaFoundation18ObservableResolverCN', 
+                       '_$s13TeaFoundation18ObservableResolverCfD', '_$s13TeaFoundation18ObservableResolverCfd', 
+                       '_$s13TeaFoundation18ObservableResolverCyAcA0D4Type_pcfC', 
+                       '_$s13TeaFoundation18ObservableResolverCyAcA0D4Type_pcfCTj', 
+                       '_$s13TeaFoundation18ObservableResolverCyAcA0D4Type_pcfCTq', 
+                       '_$s13TeaFoundation18ObservableResolverCyAcA0D4Type_pcfc', 
                        '_$s13TeaFoundation18ScenePhaseObserverMp', '_$s13TeaFoundation18ScenePhaseObserverP05sceneD7Changed3old3newyAA0cD0O_AHtFTj', 
                        '_$s13TeaFoundation18ScenePhaseObserverP05sceneD7Changed3old3newyAA0cD0O_AHtFTq', 
                        '_$s13TeaFoundation18ScenePhaseObserverTL', '_$s13TeaFoundation18StartupTaskManagerC02onC03run2in6duringyAA0cD4Type_pyc_AA0cD5GroupVAA0cD14ExecutionPhaseOtF', 
@@ -1834,11 +1859,12 @@ exports:
                        '_$s13TeaFoundation4JSONOSQAAMc', '_$s13TeaFoundation4JSONOSeAAMc', 
                        '_$s13TeaFoundation4JSONOs23CustomStringConvertibleAAMc', 
                        '_$s13TeaFoundation4LazyC11loadedValuexSgvgTj', '_$s13TeaFoundation4LazyC11loadedValuexSgvgTq', 
-                       '_$s13TeaFoundation4LazyC11loadedValuexSgvpMV', '_$s13TeaFoundation4LazyC4loadyyyxcFTj', 
-                       '_$s13TeaFoundation4LazyC4loadyyyxcFTq', '_$s13TeaFoundation4LazyC5valuexvgTj', 
-                       '_$s13TeaFoundation4LazyC5valuexvgTq', '_$s13TeaFoundation4LazyC5valuexvpMV', 
-                       '_$s13TeaFoundation4LazyC6onLoadyACyxGyxcFTj', '_$s13TeaFoundation4LazyC6onLoadyACyxGyxcFTq', 
-                       '_$s13TeaFoundation4LazyC7options9loadBlockACyxGAA0C7OptionsV_xyctcfC', 
+                       '_$s13TeaFoundation4LazyC11loadedValuexSgvpMV', '_$s13TeaFoundation4LazyC22updateValueIfNotLoadedyACyxGxycFTj', 
+                       '_$s13TeaFoundation4LazyC22updateValueIfNotLoadedyACyxGxycFTq', 
+                       '_$s13TeaFoundation4LazyC4loadyyyxcFTj', '_$s13TeaFoundation4LazyC4loadyyyxcFTq', 
+                       '_$s13TeaFoundation4LazyC5valuexvgTj', '_$s13TeaFoundation4LazyC5valuexvgTq', 
+                       '_$s13TeaFoundation4LazyC5valuexvpMV', '_$s13TeaFoundation4LazyC6onLoadyACyxGyxcFTj', 
+                       '_$s13TeaFoundation4LazyC6onLoadyACyxGyxcFTq', '_$s13TeaFoundation4LazyC7options9loadBlockACyxGAA0C7OptionsV_xyctcfC', 
                        '_$s13TeaFoundation4LazyC7options9loadBlockACyxGAA0C7OptionsV_xyctcfCTj', 
                        '_$s13TeaFoundation4LazyC7options9loadBlockACyxGAA0C7OptionsV_xyctcfCTq', 
                        '_$s13TeaFoundation4LazyC7options9loadBlockACyxGAA0C7OptionsV_xyctcfc', 
@@ -1970,10 +1996,11 @@ exports:
                        '_$s13TeaFoundation7PromiseC13waitUnwrapped3for18ignoreInitialValue10satisfyingACyqd__GAA18ObservablePropertyCyqd__SgG_S2bqd__cSgtlFZ', 
                        '_$s13TeaFoundation7PromiseC13waitUnwrapped3for18ignoreInitialValue10satisfyingACyqd__Gs7KeyPathCyxAA18ObservablePropertyCyqd__SgGG_S2bqd__cSgtlF', 
                        '_$s13TeaFoundation7PromiseC20dictionaryOfPromises4keysSDyqd_0_ACyqd_1_SgGGqd___tSDyqd_0_qd_1_GRszSTRd__SHRd_0_7ElementQyd__Rsd_0_r1_lF', 
+                       '_$s13TeaFoundation7PromiseC22asOptionalWithRecoveryACyxSgGyF', 
                        '_$s13TeaFoundation7PromiseC2asyACyqd__Gqd__mlF', '_$s13TeaFoundation7PromiseC3all2on_ACySayxGGSo17OS_dispatch_queueC_qd__tSlRd__ACyxG7ElementRtd__lFZ', 
                        '_$s13TeaFoundation7PromiseC3allyACySayxGGACyxGd_tFZ', '_$s13TeaFoundation7PromiseC4raceyACyxGAEd_tFZ', 
                        '_$s13TeaFoundation7PromiseC4raceyACyxGqd__SlRd__AE7ElementRtd__lFZ', 
-                       '_$s13TeaFoundation7PromiseC4then2on7closureACyqd__GSo17OS_dispatch_queueC_AGxKctlFTj', 
+                       '_$s13TeaFoundation7PromiseC4taskACyxGxyYaYbKc_tcfC', '_$s13TeaFoundation7PromiseC4then2on7closureACyqd__GSo17OS_dispatch_queueC_AGxKctlFTj', 
                        '_$s13TeaFoundation7PromiseC4then2on7closureACyqd__GSo17OS_dispatch_queueC_AGxKctlFTq', 
                        '_$s13TeaFoundation7PromiseC4then2on7closureACyqd__GSo17OS_dispatch_queueC_qd__xKctlFTj', 
                        '_$s13TeaFoundation7PromiseC4then2on7closureACyqd__GSo17OS_dispatch_queueC_qd__xKctlFTq', 

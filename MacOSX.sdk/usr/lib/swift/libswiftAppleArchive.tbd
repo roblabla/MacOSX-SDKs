@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           559F8B76-D2E7-3297-B95B-266D6164EE46
+    value:           311C969E-C770-32F1-B78D-2B6DF2FFDF3E
   - target:          x86_64-maccatalyst
-    value:           559F8B76-D2E7-3297-B95B-266D6164EE46
+    value:           311C969E-C770-32F1-B78D-2B6DF2FFDF3E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5B3F2B6D-F8DF-3135-A656-5ED1CDE41EAD
+    value:           9576E793-FF3E-3B5B-9A78-61D34D36C2A6
   - target:          arm64e-maccatalyst
-    value:           5B3F2B6D-F8DF-3135-A656-5ED1CDE41EAD
+    value:           9576E793-FF3E-3B5B-9A78-61D34D36C2A6
 install-name:    '/usr/lib/swift/libswiftAppleArchive.dylib'
-current-version: 364.40.1
+current-version: 364.60.3
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

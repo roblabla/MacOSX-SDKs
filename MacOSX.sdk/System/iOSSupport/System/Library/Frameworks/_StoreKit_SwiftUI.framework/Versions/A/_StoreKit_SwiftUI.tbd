@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           AA157F4D-6D54-34DC-A6F4-5E184B12D93D
+    value:           30E79E6B-6704-34C7-8A6B-EB8F81C16394
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           B93A401C-10DD-3AAE-ABEB-3270E9C5FD1A
+    value:           4A15C435-CF87-3251-BBD7-A2D829EC0A7F
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_StoreKit_SwiftUI.framework/Versions/A/_StoreKit_SwiftUI'
 swift-abi-version: 7
 exports:

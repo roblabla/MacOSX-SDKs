@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FABA5173-C346-3170-97B1-1C3E03F5ED33
+    value:           8C7D86BC-9702-3144-BB6E-C75E19F654DC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7F09A766-9009-399E-A08E-C47AC06828FA
+    value:           2CFE8411-6A23-3283-9B73-59AE6874140B
 install-name:    '/System/Library/PrivateFrameworks/WildDevices.framework/Versions/A/WildDevices'
 current-version: 1.1
 exports:

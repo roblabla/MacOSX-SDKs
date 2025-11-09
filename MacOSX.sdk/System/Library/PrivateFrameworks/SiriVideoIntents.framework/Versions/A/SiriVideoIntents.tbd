@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           79F8E1DE-6E18-3CAF-8812-17123BADBACD
+    value:           41A3BD27-581B-3DE7-8B22-6E70AB942B17
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7F046E44-2DC2-3132-9E94-0960AF2B180E
+    value:           E7E13A7A-7E57-37DD-B02D-F1FC98DB9F30
 install-name:    '/System/Library/PrivateFrameworks/SiriVideoIntents.framework/Versions/A/SiriVideoIntents'
 swift-abi-version: 7
 allowable-clients:
@@ -836,6 +836,16 @@ exports:
                        '_$s27SiriVirtualDeviceResolution0C4UnitC0A12VideoIntentsE11descriptionSSvg', 
                        '_$s27SiriVirtualDeviceResolution9ProximityO0A12VideoIntentsE1loiySbAC_ACtFZ', 
                        '_$s27SiriVirtualDeviceResolution9ProximityOSL0A12VideoIntentsMc', 
+                       '_$sSo19SKIDirectInvocationC16SiriVideoIntentsE0D0O10newPayload8userDataSo0abG0CSDys11AnyHashableVypGSg_tF', 
+                       '_$sSo19SKIDirectInvocationC16SiriVideoIntentsE0D0O8allCasesSayAEGvgZ', 
+                       '_$sSo19SKIDirectInvocationC16SiriVideoIntentsE0D0O8rawValueAESgSS_tcfC', 
+                       '_$sSo19SKIDirectInvocationC16SiriVideoIntentsE0D0O8rawValueSSvg', 
+                       '_$sSo19SKIDirectInvocationC16SiriVideoIntentsE0D0O8rawValueSSvpMV', 
+                       '_$sSo19SKIDirectInvocationC16SiriVideoIntentsE0D0OMa', '_$sSo19SKIDirectInvocationC16SiriVideoIntentsE0D0OMn', 
+                       '_$sSo19SKIDirectInvocationC16SiriVideoIntentsE0D0ON', '_$sSo19SKIDirectInvocationC16SiriVideoIntentsE0D0OSHACMc', 
+                       '_$sSo19SKIDirectInvocationC16SiriVideoIntentsE0D0OSQACMc', 
+                       '_$sSo19SKIDirectInvocationC16SiriVideoIntentsE0D0OSYACMc', 
+                       '_$sSo19SKIDirectInvocationC16SiriVideoIntentsE0D0Os12CaseIterableACMc', 
                        _SiriVideoIntentsVersionNumber, _SiriVideoIntentsVersionString ]
     objc-classes:    [ AddToWatchListContentResolutionResult, AddToWatchListIntent, 
                        AddToWatchListIntentResponse, ArchiveExtractor, Content, ContentImage, 

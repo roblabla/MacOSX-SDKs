@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3A120601-C9EB-3800-BD9D-A02C03664076
+    value:           91654D28-1975-375B-9EF4-D0A24E53AA5D
   - target:          x86_64-maccatalyst
-    value:           3A120601-C9EB-3800-BD9D-A02C03664076
+    value:           91654D28-1975-375B-9EF4-D0A24E53AA5D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D7D40475-D5D1-3EE0-BF84-CA4BF13F6800
+    value:           1A8D1053-9B3D-3DC8-9FBA-ECB90DF67FB8
   - target:          arm64e-maccatalyst
-    value:           D7D40475-D5D1-3EE0-BF84-CA4BF13F6800
+    value:           1A8D1053-9B3D-3DC8-9FBA-ECB90DF67FB8
 install-name:    '/System/Library/PrivateFrameworks/HearingUtilities.framework/Versions/A/HearingUtilities'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           801FC50C-05A8-3F76-83F8-A2069FFD8E34
+    value:           D0C91232-2B60-3FDB-83BA-25789857E2C7
   - target:          x86_64-maccatalyst
-    value:           801FC50C-05A8-3F76-83F8-A2069FFD8E34
+    value:           D0C91232-2B60-3FDB-83BA-25789857E2C7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5A516E58-435D-340B-8E10-75C24D1E82B8
+    value:           35B31759-030A-3A7C-B0A3-AAF44772B235
   - target:          arm64e-maccatalyst
-    value:           5A516E58-435D-340B-8E10-75C24D1E82B8
+    value:           35B31759-030A-3A7C-B0A3-AAF44772B235
 install-name:    '/System/Library/PrivateFrameworks/VoiceShortcutClient.framework/Versions/A/VoiceShortcutClient'
 swift-abi-version: 7
 exports:
@@ -36,10 +36,13 @@ exports:
                        '_$s19VoiceShortcutClient11XPCEndpointV2eeoiySbAC_ACtFZ', 
                        '_$s19VoiceShortcutClient11XPCEndpointV4fromACs7Decoder_p_tKcfC', 
                        '_$s19VoiceShortcutClient11XPCEndpointV6encode2toys7Encoder_p_tKF', 
+                       '_$s19VoiceShortcutClient11XPCEndpointV8endpointSo13OS_xpc_object_pvg', 
+                       '_$s19VoiceShortcutClient11XPCEndpointV8endpointSo13OS_xpc_object_pvpMV', 
                        '_$s19VoiceShortcutClient11XPCEndpointVMa', '_$s19VoiceShortcutClient11XPCEndpointVMn', 
                        '_$s19VoiceShortcutClient11XPCEndpointVN', '_$s19VoiceShortcutClient11XPCEndpointVSEAAMc', 
                        '_$s19VoiceShortcutClient11XPCEndpointVSQAAMc', '_$s19VoiceShortcutClient11XPCEndpointVSeAAMc', 
                        '_$s19VoiceShortcutClient11XPCEndpointVs23CustomStringConvertibleAAMc', 
+                       '_$s19VoiceShortcutClient11XPCEndpointVyACSo13OS_xpc_object_pcfC', 
                        '_$s19VoiceShortcutClient11XPCListenerC10invalidateyyFTj', 
                        '_$s19VoiceShortcutClient11XPCListenerC10invalidateyyFTq', 
                        '_$s19VoiceShortcutClient11XPCListenerC11descriptionSSvg', 
@@ -257,8 +260,7 @@ exports:
                        '_$s19VoiceShortcutClient37XPCDistributedNotificationEventStreamVN', 
                        '_$s19VoiceShortcutClient8XPCEventMp', '_$s19VoiceShortcutClient8XPCEventPSeTb', 
                        '_$s19VoiceShortcutClient8XPCEventTL', '_$s5Event19VoiceShortcutClient14XPCEventStreamPTl', 
-                       '_$s5Reply19VoiceShortcutClient014XPCMessageWithA0PTl', '_$sScT19VoiceShortcutClientE10completionyyYaKF', 
-                       '_$sScT19VoiceShortcutClientE10completionyyYaKFTu', _CGFloatCeilWithScale, 
+                       '_$s5Reply19VoiceShortcutClient014XPCMessageWithA0PTl', _CGFloatCeilWithScale, 
                        _CGFloatFloorWithScale, _CGFloatRoundWithScale, _INAppDescriptorAppIntentIdentifierKey, 
                        _INAppDescriptorAppNameKey, _INAppDescriptorBundleIdentifierKey, 
                        _INAppDescriptorExtensionBundleIdentifierKey, _INAppDescriptorIntentClassNameKey, 
@@ -313,7 +315,7 @@ exports:
                        _WFDescribeWorkflowOutputBehavior, _WFDeviceCapabilityCellularData, 
                        _WFDeviceCapabilityForceTouch, _WFDeviceCapabilityHapticFeedback, 
                        _WFDeviceCapabilityHomeButton, _WFDeviceCapabilityPersonalHotspot, 
-                       _WFDeviceCapabilityScarlett, _WFDeviceCapabilityVibration, 
+                       _WFDeviceCapabilityPosters, _WFDeviceCapabilityScarlett, _WFDeviceCapabilityVibration, 
                        _WFDeviceCapabilityWAPI, _WFDialogNotificationCategoryIdentifier, 
                        _WFDialogNotificationConfirmationCategoryIdentifier, _WFEncodableError, 
                        _WFExportAsFilesActionIdentifier, _WFFastPathContextualActionsForSurface, 
@@ -454,17 +456,25 @@ exports:
                        WFServicesWorkflow, WFServicesWorkflowRunRequest, WFShareSheetWorkflow, 
                        WFShojiSystemActionsRunnerClient, WFShowAlertDialogRequest, 
                        WFShowSecureConfirmationDialogRequest, WFSingleConnectionXPCListener, 
-                       WFSiriExecutionMetrics, WFSiriUIPresenter, WFSiriWorkflowRunRequest, 
-                       WFSiriWorkflowRunnerClient, WFSleepWorkflowRunnerClient, WFSmartPromptButton, 
-                       WFSmartPromptButtonResolutionResult, WFSmartPromptIntent, 
-                       WFSmartPromptIntentResponse, WFSpotlightResultWorkflowRunnerClient, 
+                       WFSiriActionRequest, WFSiriActionResponse, WFSiriDialogRequest, 
+                       WFSiriDialogResponse, WFSiriExecutionMetrics, WFSiriInteractionResponse, 
+                       WFSiriKitIntentRequest, WFSiriKitIntentResponse, WFSiriLinkRequest, 
+                       WFSiriLinkResponse, WFSiriOpenAppRequest, WFSiriOpenAppResponse, 
+                       WFSiriOpenInteractionRequest, WFSiriOpenURLRequest, WFSiriOpenURLResponse, 
+                       WFSiriPunchOutRequest, WFSiriPunchOutResponse, WFSiriSpeakTextRequest, 
+                       WFSiriSpeakTextResponse, WFSiriUIPresenter, WFSiriUIPresenterLocalConnection, 
+                       WFSiriUIPresenterXPCConnection, WFSiriUserActivityRequest, 
+                       WFSiriUserActivityResponse, WFSiriWorkflowRunRequest, WFSiriWorkflowRunnerClient, 
+                       WFSiriWorkflowRunnerClientOptions, WFSleepWorkflowRunnerClient, 
+                       WFSmartPromptButton, WFSmartPromptButtonResolutionResult, 
+                       WFSmartPromptIntent, WFSmartPromptIntentResponse, WFSpotlightResultWorkflowRunnerClient, 
                        WFSpringBoardWebClipMetadata, WFSpringBoardWorkflowRunnerClient, 
                        WFStingWorkflow, WFStingWorkflowRunnerClient, WFSuggestionsWorkflowRunnerClient, 
                        WFSymbolIcon, WFSystemContextualAction, WFSystemSurfaceWorkflowStatusRegistry, 
                        WFTTSPause, WFTTSSpokenVariant, WFTTSString, WFTakeScreenshotContextualAction, 
                        WFTextFieldConfiguration, WFToggleAlarmContextualAction, WFToggleFocusModeContextualAction, 
                        WFToggleFocusModeContextualActionFocusMode, WFToggleSettingContextualAction, 
-                       WFType, WFVoiceShortcutCache, WFWidgetWorkflowRunnerClient, 
+                       WFType, WFVoiceShortcutCache, WFWallpaperConfiguration, WFWidgetWorkflowRunnerClient, 
                        WFWorkflowCollection, WFWorkflowContextualActionOutputRunResult, 
                        WFWorkflowDataRunDescriptor, WFWorkflowDatabaseRunDescriptor, 
                        WFWorkflowDescriptor, WFWorkflowGlyphIcon, WFWorkflowIcon, 

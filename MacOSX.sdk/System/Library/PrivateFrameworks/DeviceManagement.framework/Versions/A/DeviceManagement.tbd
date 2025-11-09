@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           118AA36B-F7A9-32DF-AF48-926CDA352A15
+    value:           A1259699-1650-3ED9-80CF-D063C41F9DB7
   - target:          x86_64-maccatalyst
-    value:           118AA36B-F7A9-32DF-AF48-926CDA352A15
+    value:           A1259699-1650-3ED9-80CF-D063C41F9DB7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           75F44CFE-0E87-3E04-BF4D-F555C13A23A6
+    value:           C75B639F-4512-3EF9-9668-552E67407EDC
   - target:          arm64e-maccatalyst
-    value:           75F44CFE-0E87-3E04-BF4D-F555C13A23A6
+    value:           C75B639F-4512-3EF9-9668-552E67407EDC
 install-name:    '/System/Library/PrivateFrameworks/DeviceManagement.framework/Versions/A/DeviceManagement'
-current-version: 124
+current-version: 132
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -223,17 +223,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           40EB0766-9FDA-3007-83B0-9432CE3F1B36
+    value:           7D62AADD-E03B-32D2-AEA4-7C43C84E5A5D
   - target:          x86_64-maccatalyst
-    value:           40EB0766-9FDA-3007-83B0-9432CE3F1B36
+    value:           7D62AADD-E03B-32D2-AEA4-7C43C84E5A5D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AB179020-6450-3406-993F-74B150ED559F
+    value:           08984EFD-C7F3-376C-A521-2309811DB8C0
   - target:          arm64e-maccatalyst
-    value:           AB179020-6450-3406-993F-74B150ED559F
+    value:           08984EFD-C7F3-376C-A521-2309811DB8C0
 install-name:    '/System/Library/PrivateFrameworks/Catalyst.framework/Versions/A/Catalyst'
 current-version: 9.1
 exports:

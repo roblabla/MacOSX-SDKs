@@ -119,7 +119,7 @@ typedef struct nicproxy_rr_info_s {
 #define NIC_PROXY_FLAGS_WOMP        (1 << 6);
 
 typedef struct nicproxy_info_s {
-    uint32_t len;                   // The whole structure length including the variable-size buf
+    uint32_t len;                   // The whole structure length including the variable-size buf, rounded up to the uint32_t.
     ether_addr_t mac_addr;
     uint8_t flags;
     uint8_t reserved;

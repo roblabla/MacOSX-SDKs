@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F941FAAC-04B6-3E96-BBF4-6A99380C39AA
+    value:           506C45B2-BDCE-3894-A618-8D788067BD30
   - target:          x86_64-maccatalyst
-    value:           F941FAAC-04B6-3E96-BBF4-6A99380C39AA
+    value:           506C45B2-BDCE-3894-A618-8D788067BD30
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CABE04D6-BC25-3182-9C0C-82CB1E4F09DF
+    value:           BCC9CE4B-7BCC-3688-8253-2BB471434ABB
   - target:          arm64e-maccatalyst
-    value:           CABE04D6-BC25-3182-9C0C-82CB1E4F09DF
+    value:           BCC9CE4B-7BCC-3688-8253-2BB471434ABB
 install-name:    '/System/Library/PrivateFrameworks/HomeMessagingUtils.framework/Versions/A/HomeMessagingUtils'
 swift-abi-version: 7
 exports:

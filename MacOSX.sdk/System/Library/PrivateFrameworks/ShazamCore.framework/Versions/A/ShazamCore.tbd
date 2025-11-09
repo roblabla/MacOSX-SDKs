@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D8BDEF6B-608B-3800-B489-7EA2462E539D
+    value:           EF213B95-66EF-3B0C-9238-38309B58B048
   - target:          x86_64-maccatalyst
-    value:           D8BDEF6B-608B-3800-B489-7EA2462E539D
+    value:           EF213B95-66EF-3B0C-9238-38309B58B048
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F18B287E-1C5C-353A-B0C8-F2571502214F
+    value:           53616FA2-173B-38D9-8B98-07D95AFDB547
   - target:          arm64e-maccatalyst
-    value:           F18B287E-1C5C-353A-B0C8-F2571502214F
+    value:           53616FA2-173B-38D9-8B98-07D95AFDB547
 install-name:    '/System/Library/PrivateFrameworks/ShazamCore.framework/Versions/A/ShazamCore'
-current-version: 195.4
+current-version: 195.10
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -38,6 +38,6 @@ exports:
     objc-classes:    [ SHAnalytics, SHBagContract, SHCampaignTokens, SHCompression, 
                        SHCoreError, SHDefaultConfigurationValues, SHEndpoints, SHEntitlements, 
                        SHFeatureFlags, SHHost, SHJSONLFileReader, SHJSONLFileWriter, 
-                       SHLocalization, SHRemoteConfiguration, SHService, SHStorefront, 
-                       SHTokenizedURL ]
+                       SHLocalization, SHMusicSubscriptionStatus, SHRemoteConfiguration, 
+                       SHService, SHStorefront, SHTokenizedURL ]
 ...

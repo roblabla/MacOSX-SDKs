@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           27569F1C-7504-3C38-AC02-E36D32DC79E7
+    value:           730455A3-26A6-32E7-AEC2-3CD633E01324
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9142CA80-3A04-31F5-8E4B-8FBA25CED073
+    value:           42D5D378-1843-3143-8D70-CBDD49CDA6D5
 install-name:    '/System/Library/PrivateFrameworks/SiriNotebook.framework/Versions/A/SiriNotebook'
 swift-abi-version: 7
 exports:

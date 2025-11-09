@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FC23D572-BAD9-3E1E-9FE2-1D4524C6D5E4
+    value:           77B9565C-1765-318F-88FF-95556D01BB3E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FF32FA60-C748-3EB0-99D0-E36128AADAD4
+    value:           A34D90A0-C787-31D9-BF42-D5D14EA0FB0E
 install-name:    '/System/Library/PrivateFrameworks/TipKit.framework/Versions/A/TipKit'
-current-version: 660.8
+current-version: 663
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

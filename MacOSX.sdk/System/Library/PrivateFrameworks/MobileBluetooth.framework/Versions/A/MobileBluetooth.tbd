@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FFAC9FBF-C99E-3E5D-A702-0CAD51CDDA73
+    value:           8BB997AB-B25C-3886-9A46-C52DC534F1E8
   - target:          x86_64-maccatalyst
-    value:           FFAC9FBF-C99E-3E5D-A702-0CAD51CDDA73
+    value:           8BB997AB-B25C-3886-9A46-C52DC534F1E8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C03E76A5-5E42-376B-A004-EF973769F805
+    value:           0BD3A49B-2AB0-31B0-A1F8-99482444553F
   - target:          arm64e-maccatalyst
-    value:           C03E76A5-5E42-376B-A004-EF973769F805
+    value:           0BD3A49B-2AB0-31B0-A1F8-99482444553F
 install-name:    '/System/Library/PrivateFrameworks/MobileBluetooth.framework/Versions/A/MobileBluetooth'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

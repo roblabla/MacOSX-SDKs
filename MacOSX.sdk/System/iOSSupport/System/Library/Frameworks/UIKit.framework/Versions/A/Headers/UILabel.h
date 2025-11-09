@@ -60,7 +60,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 // Specifies the line break strategies that may be used for laying out the text in this label.
 // If this property is not set, the default value is NSLineBreakStrategyStandard.
 // If the label contains an attributed text with paragraph style(s) that specify a set of line break strategies, the set of strategies in the paragraph style(s) will be used instead of the set of strategies defined by this property.
-@property(nonatomic) NSLineBreakStrategy lineBreakStrategy;
+@property(nonatomic) NSLineBreakStrategy lineBreakStrategy API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0));
 
 // override points. can adjust rect before calling super.
 // label has default content mode of UIViewContentModeRedraw

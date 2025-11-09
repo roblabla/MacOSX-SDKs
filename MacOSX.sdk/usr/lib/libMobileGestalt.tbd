@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9E8DFD52-63C1-3A16-A1EE-C49B3B124CB3
+    value:           20D09D19-5C6D-38BC-A637-9D93D026694F
   - target:          x86_64-maccatalyst
-    value:           9E8DFD52-63C1-3A16-A1EE-C49B3B124CB3
+    value:           20D09D19-5C6D-38BC-A637-9D93D026694F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           761AC827-5999-35AE-9C7B-F2ABFD0065E6
+    value:           F66FD175-C74F-3599-A14A-3773A4A102B8
   - target:          arm64e-maccatalyst
-    value:           761AC827-5999-35AE-9C7B-F2ABFD0065E6
+    value:           F66FD175-C74F-3599-A14A-3773A4A102B8
 install-name:    '/usr/lib/libMobileGestalt.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -402,12 +402,12 @@ exports:
                        _MobileGestalt_get_watchSupportsListeningOnGesture, _MobileGestalt_get_watchSupportsMusicStreaming, 
                        _MobileGestalt_get_watchSupportsSiriCommute, _MobileGestalt_get_wifiCallingCapability, 
                        _MobileGestalt_get_wifiCallingSecondaryDeviceCapability, _MobileGestalt_get_wifiCapability, 
-                       _MobileGestalt_get_wirelessChargingCapability, _MobileGestalt_get_youtubeCapability, 
-                       _MobileGestalt_get_youtubePluginCapability, __MGCacheCopyValueForKey, 
-                       __MGCacheValid, __MGClearInProcessCache, __MGCopyDeviceDescription, 
-                       __MGCopyIteratedDeviceDescription, __MGGetFastPathLog, __MGIterateDevices, 
-                       __MGLog, __MGPrintIteratedDeviceDescription, __MGRebuildCache, 
-                       __MGRebuildCache4PurpleRestore, __MGServerCopyAnswerWithError, 
+                       _MobileGestalt_get_wirelessChargingCapability, _MobileGestalt_get_workoutUltraMode, 
+                       _MobileGestalt_get_youtubeCapability, _MobileGestalt_get_youtubePluginCapability, 
+                       __MGCacheCopyValueForKey, __MGCacheValid, __MGClearInProcessCache, 
+                       __MGCopyDeviceDescription, __MGCopyIteratedDeviceDescription, 
+                       __MGGetFastPathLog, __MGIterateDevices, __MGLog, __MGPrintIteratedDeviceDescription, 
+                       __MGRebuildCache, __MGRebuildCache4PurpleRestore, __MGServerCopyAnswerWithError, 
                        __MGServerQuestionIsPlatform, __MGSetServer, __MGWaitForDevices, 
                        __MGWriteCache, __MGWriteCacheOnHelper, __MGWriteRebuildCacheSentinel, 
                        _is_restore_os, _kMGQDiskUsageAmountDataAvailable, _kMGQDiskUsageAmountDataReserved, 

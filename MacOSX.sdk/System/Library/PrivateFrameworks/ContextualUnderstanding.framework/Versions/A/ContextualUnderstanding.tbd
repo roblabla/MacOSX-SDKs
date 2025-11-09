@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B4EDC152-A8DA-3386-ADA4-E70B107B0A70
+    value:           3E376299-355F-34D8-9704-411F00784DBB
   - target:          x86_64-maccatalyst
-    value:           B4EDC152-A8DA-3386-ADA4-E70B107B0A70
+    value:           3E376299-355F-34D8-9704-411F00784DBB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DCFEF9A2-1414-358E-8FBA-B064D9810EF6
+    value:           25E02008-470B-33D4-9E3B-153BB9A7357C
   - target:          arm64e-maccatalyst
-    value:           DCFEF9A2-1414-358E-8FBA-B064D9810EF6
+    value:           25E02008-470B-33D4-9E3B-153BB9A7357C
 install-name:    '/System/Library/PrivateFrameworks/ContextualUnderstanding.framework/Versions/A/ContextualUnderstanding'
-current-version: 28.6
+current-version: 28.13
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

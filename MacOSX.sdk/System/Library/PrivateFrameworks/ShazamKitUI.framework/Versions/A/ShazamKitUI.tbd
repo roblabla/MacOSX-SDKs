@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           290F2A69-2C28-3FC0-A4C2-BCCB173A23E5
+    value:           1A61BF6D-59CF-3956-8AE3-973E1594CC64
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           14395EF3-CCB0-3D9C-A7E0-6AFEB71DCC1C
+    value:           5E4E9778-D9D6-3B68-A29F-6A84162224EE
 install-name:    '/System/Library/PrivateFrameworks/ShazamKitUI.framework/Versions/A/ShazamKitUI'
 swift-abi-version: 7
 exports:

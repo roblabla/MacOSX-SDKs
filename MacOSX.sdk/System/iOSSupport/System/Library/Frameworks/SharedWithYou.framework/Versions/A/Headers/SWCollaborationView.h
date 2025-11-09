@@ -57,6 +57,7 @@ API_AVAILABLE(ios(16.0))
 @property (nonatomic, copy) NSString *headerSubtitle;
 #if TARGET_OS_OSX
 @property (nonatomic, strong) NSImage *headerImage;
+@property (readonly) NSMenuItem *menuFormRepresentation API_AVAILABLE(macos(13.1));
 #else
 @property (nonatomic, strong) UIImage *headerImage;
 #endif

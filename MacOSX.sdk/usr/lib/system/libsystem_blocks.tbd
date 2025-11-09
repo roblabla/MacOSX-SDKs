@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8AE2D1DF-B8E1-3564-810B-65C611BA237B
+    value:           942C1938-B1BC-3B74-912C-D7E7E2B6DC72
   - target:          x86_64-maccatalyst
-    value:           8AE2D1DF-B8E1-3564-810B-65C611BA237B
+    value:           942C1938-B1BC-3B74-912C-D7E7E2B6DC72
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2E8EE0E2-160C-3418-AFC4-3FD86B4E7A6E
+    value:           B126606C-8D07-3F9D-AD5E-9864CF11D901
   - target:          arm64e-maccatalyst
-    value:           2E8EE0E2-160C-3418-AFC4-3FD86B4E7A6E
+    value:           B126606C-8D07-3F9D-AD5E-9864CF11D901
 install-name:    '/usr/lib/system/libsystem_blocks.dylib'
 current-version: 84
 parent-umbrella:

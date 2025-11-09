@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8675478D-16CF-3096-9BF7-6125BA9F8239
+    value:           201C7F76-3968-3FC7-B187-146E6789DBEA
   - target:          x86_64-maccatalyst
-    value:           8675478D-16CF-3096-9BF7-6125BA9F8239
+    value:           201C7F76-3968-3FC7-B187-146E6789DBEA
   - target:          arm64-macos
-    value:           C4EF404E-8134-3D62-99F1-7F475077F511
+    value:           2F91346C-F0DC-3945-9865-C87270C3441C
   - target:          arm64-maccatalyst
-    value:           C4EF404E-8134-3D62-99F1-7F475077F511
+    value:           2F91346C-F0DC-3945-9865-C87270C3441C
   - target:          arm64e-macos
-    value:           BB0949D3-A76E-3D9F-B3B8-9737D96B3076
+    value:           97F0FAEC-7E07-31BC-BF15-2AD69936F5E0
   - target:          arm64e-maccatalyst
-    value:           BB0949D3-A76E-3D9F-B3B8-9737D96B3076
+    value:           97F0FAEC-7E07-31BC-BF15-2AD69936F5E0
 install-name:    '/usr/lib/libParallelCompression.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

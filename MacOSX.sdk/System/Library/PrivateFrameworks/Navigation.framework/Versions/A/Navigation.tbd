@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C5DBF2C1-E718-3DA7-B78D-81026FAC57D9
+    value:           9A5CF249-E59F-37C7-B5D9-7773F222A9D9
   - target:          x86_64-maccatalyst
-    value:           C5DBF2C1-E718-3DA7-B78D-81026FAC57D9
+    value:           9A5CF249-E59F-37C7-B5D9-7773F222A9D9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BD767EE5-A655-3C0B-8808-DB2BF3FA562F
+    value:           3310C206-1852-33F7-A232-C289A734D845
   - target:          arm64e-maccatalyst
-    value:           BD767EE5-A655-3C0B-8808-DB2BF3FA562F
+    value:           3310C206-1852-33F7-A232-C289A734D845
 install-name:    '/System/Library/PrivateFrameworks/Navigation.framework/Versions/A/Navigation'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -28,19 +28,19 @@ exports:
                        _MNGetMNDirectionsRequestLog, _MNGetMNLocationProviderLog, 
                        _MNGetMNLocationTrackerLog, _MNGetMNNavigationDetailsLog, 
                        _MNGetMNNavigationSessionLog, _MNGetMNNavigationStateManagerLog, 
-                       _MNGetMNRouteAttributesLog, _MNGetMNRouteStorageLog, _MNGetMNStringExtrasLog, 
-                       _MNGetMNTimeAndDistanceUpdaterLog, _MNGetMNTunnelProjectorLog, 
-                       _MNGetMNVirtualGarageManagerLog, _MNGetMNXPCTransactionManagerLog, 
-                       _MNGetProcessHandlingLog, _MNGetPuckTrackingLog, _MNGetRouteWithID, 
-                       _MNHeadphonesAreInUse, _MNInstructionsCalculateDistanceUnits, 
-                       _MNInstructionsCalculateScaledDistanceUnits, _MNInstructionsDistanceTypeConvertToMeters, 
-                       _MNInstructionsInitOptionsWithDefault, _MNInstructionsLocalizedImperialUnits, 
-                       _MNInstructionsLocalizedMetricUnits, _MNInstructionsShortPromptTypeForManeuver, 
-                       _MNJSONForBool, _MNJSONForCoordinate, _MNJSONForDate, _MNJSONForError, 
-                       _MNJSONForLatLng, _MNJSONForLocation, _MNJSONForMapRegion, 
-                       _MNJSONForObject, _MNJSONForRoute, _MNJSONForRoutes, _MNJSONForWaypoint, 
-                       _MNJSONForWaypointAndTransportType, _MNJSONStringForObject, 
-                       _MNLPRRuleMatcherErrorDomain, _MNLocaleDidChangeNotification, 
+                       _MNGetMNRouteAttributesLog, _MNGetMNRouteStorageLog, _MNGetMNServerSessionStateInfoLog, 
+                       _MNGetMNStringExtrasLog, _MNGetMNTimeAndDistanceUpdaterLog, 
+                       _MNGetMNTunnelProjectorLog, _MNGetMNVirtualGarageManagerLog, 
+                       _MNGetMNXPCTransactionManagerLog, _MNGetProcessHandlingLog, 
+                       _MNGetPuckTrackingLog, _MNGetRouteWithID, _MNHeadphonesAreInUse, 
+                       _MNInstructionsCalculateDistanceUnits, _MNInstructionsCalculateScaledDistanceUnits, 
+                       _MNInstructionsDistanceTypeConvertToMeters, _MNInstructionsInitOptionsWithDefault, 
+                       _MNInstructionsLocalizedImperialUnits, _MNInstructionsLocalizedMetricUnits, 
+                       _MNInstructionsShortPromptTypeForManeuver, _MNJSONForBool, 
+                       _MNJSONForCoordinate, _MNJSONForDate, _MNJSONForError, _MNJSONForLatLng, 
+                       _MNJSONForLocation, _MNJSONForMapRegion, _MNJSONForObject, 
+                       _MNJSONForRoute, _MNJSONForRoutes, _MNJSONForWaypoint, _MNJSONForWaypointAndTransportType, 
+                       _MNJSONStringForObject, _MNLPRRuleMatcherErrorDomain, _MNLocaleDidChangeNotification, 
                        _MNLogFacilityAssert, _MNLogFacilityCoreLocationRouteHints, 
                        _MNLogFacilityDirectionsRequest, _MNLogFacilityDodgeball, 
                        _MNLogFacilityETAUpdateRequest, _MNLogFacilityEVChargingStateMonitor, 
@@ -63,11 +63,11 @@ exports:
                        _MNTraceNavigationEventTypeAsString, _MNTransportTypeSupportsTurnByTurn, 
                        _NavdNotificationManagerClassString, _NavigationConfig_ARGuidanceArrivalLabelMinimumStepIndex, 
                        _NavigationConfig_ARGuidanceHeadingDeltaTurn, _NavigationConfig_ARGuidanceInitialGuidanceDistanceThreshold, 
-                       _NavigationConfig_ARGuidanceNextManeuverDistanceOffset, _NavigationConfig_ApproachingWaypointThreshold, 
-                       _NavigationConfig_AutomaticallyEndOnArrival, _NavigationConfig_AutomaticallyEndOnVehicleDisconnectAfterArrival, 
-                       _NavigationConfig_DebugNavigationIncludeRealtimeUpdates, _NavigationConfig_DoomDirectionsRequestPriority, 
-                       _NavigationConfig_ETAResponseFailureAlert, _NavigationConfig_ETAResponseFakeTrafficIncidentAlert, 
-                       _NavigationConfig_ETAResponseFakeTrafficIncidentSimulateVotingButtons, 
+                       _NavigationConfig_ARGuidanceNextManeuverDistanceOffset, _NavigationConfig_AutomaticallyEndOnArrival, 
+                       _NavigationConfig_AutomaticallyEndOnVehicleDisconnectAfterArrival, 
+                       _NavigationConfig_DebugNavigationIncludeRealtimeUpdates, _NavigationConfig_DistanceThresholdToMonitorWaypoint, 
+                       _NavigationConfig_DoomDirectionsRequestPriority, _NavigationConfig_ETAResponseFailureAlert, 
+                       _NavigationConfig_ETAResponseFakeTrafficIncidentAlert, _NavigationConfig_ETAResponseFakeTrafficIncidentSimulateVotingButtons, 
                        _NavigationConfig_ETAResponseFakeTrafficIncidentVotingButtonDisplay, 
                        _NavigationConfig_ETAUpdateInterval, _NavigationConfig_EVChargingMonitorMaximumTime, 
                        _NavigationConfig_EVChargingMonitorMinimumTime, _NavigationConfig_EVChargingMonitorSpeedThreshold, 
@@ -86,6 +86,7 @@ exports:
                        _NavigationConfig_MPRDepartureDistanceFromWaypointPoints, 
                        _NavigationConfig_MPRDepartureDistanceToCenter, _NavigationConfig_MPRDepartureNumLocationsForArrivalRegion, 
                        _NavigationConfig_MPRDepartureTimeAtWaypoint, _NavigationConfig_MPRDepartureTimeoutMinutes, 
+                       _NavigationConfig_MPRWaypointArrivalApproachingThreshold, 
                        _NavigationConfig_MapLocalizeLabels, _NavigationConfig_MinLocationAccuracyForPreArrivalReroute, 
                        _NavigationConfig_MinimumDistanceBetweenReroutes, _NavigationConfig_MinimumTimeBetweenReroutes, 
                        _NavigationConfig_NavDoomCacheCurrentTripTag, _NavigationConfig_NavdDisconnectRetryCount, 
@@ -108,6 +109,8 @@ exports:
                        _NavigationConfig_TracePlaybackShouldLoadReroutesFromTrace, 
                        _NavigationConfig_TracePlaybackShouldLoadWaypointReroutesFromTrace, 
                        _NavigationConfig_TracePlaybackShouldSendAnalytics, _NavigationConfig_TracePlaybackShouldUpdateRouteWhenJumping, 
+                       _NavigationConfig_TracePlayback_NavigationUpdates_ChangeRoute, 
+                       _NavigationConfig_TracePlayback_NavigationUpdates_DepartWaypoint, 
                        _NavigationConfig_TraceRecordingCopyToCrashReporter, _NavigationConfig_TraceRecordingCreateSymbolicLinkToLatestTrace, 
                        _NavigationConfig_TraceRecordingEnabled, _NavigationConfig_TraceRecordingRoutePreviewGuidanceEnabled, 
                        _NavigationConfig_TrafficIncidentAlertDisplayDurationSeconds, 

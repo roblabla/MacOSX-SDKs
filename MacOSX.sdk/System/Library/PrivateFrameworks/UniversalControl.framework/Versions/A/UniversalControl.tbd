@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B30F5680-BDCA-37B5-AC0E-4B9A0E2C6E2A
+    value:           F839BBA9-750B-3701-BAD9-4C9FF04A9DBE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5D625A06-3D19-3754-BB8A-E78F946C0F19
+    value:           66689CFC-6E6F-31B1-AAE7-A2E0BB287AC7
 install-name:    '/System/Library/PrivateFrameworks/UniversalControl.framework/Versions/A/UniversalControl'
-current-version: 123
+current-version: 124.3
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

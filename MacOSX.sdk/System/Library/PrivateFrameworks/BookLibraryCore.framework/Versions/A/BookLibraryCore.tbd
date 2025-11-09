@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0C561439-6D66-31EA-8F98-932D4DDDB0FB
+    value:           3A451A41-6B35-3B76-B0C7-24E3DAEB0C55
   - target:          x86_64-maccatalyst
-    value:           0C561439-6D66-31EA-8F98-932D4DDDB0FB
+    value:           3A451A41-6B35-3B76-B0C7-24E3DAEB0C55
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A2BFBD4E-21E5-3BF3-B13A-B938400778F9
+    value:           D677795D-DC5B-3CBB-94F3-64496001B454
   - target:          arm64e-maccatalyst
-    value:           A2BFBD4E-21E5-3BF3-B13A-B938400778F9
+    value:           D677795D-DC5B-3CBB-94F3-64496001B454
 install-name:    '/System/Library/PrivateFrameworks/BookLibraryCore.framework/Versions/A/BookLibraryCore'
-current-version: 1801
+current-version: 1825
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

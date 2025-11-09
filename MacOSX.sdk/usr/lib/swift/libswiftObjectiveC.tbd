@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B44016A1-A526-3B7C-82C7-3027B83FC378
+    value:           4F26DCFD-558F-3F4F-B8BA-A96B504261AD
   - target:          x86_64-maccatalyst
-    value:           B44016A1-A526-3B7C-82C7-3027B83FC378
+    value:           4F26DCFD-558F-3F4F-B8BA-A96B504261AD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E2F827BC-E61D-3732-92C7-D12D89457CC7
+    value:           2C23A57A-C0A6-3F2A-A43D-22B0944B9ABB
   - target:          arm64e-maccatalyst
-    value:           E2F827BC-E61D-3732-92C7-D12D89457CC7
+    value:           2C23A57A-C0A6-3F2A-A43D-22B0944B9ABB
 install-name:    '/usr/lib/swift/libswiftObjectiveC.dylib'
 current-version: 6
 swift-abi-version: 7

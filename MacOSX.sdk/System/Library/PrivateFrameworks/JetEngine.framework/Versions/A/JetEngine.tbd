@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DFC15BF5-8D1D-3196-B3D1-DD1C87EE5E4A
+    value:           F7B7517E-0FDA-32FD-BD28-6B3D77249FE9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F7A2CFDC-A365-3437-9B14-A00BE076F63F
+    value:           B293AA35-71E9-39FF-B668-C0BC621BA321
 install-name:    '/System/Library/PrivateFrameworks/JetEngine.framework/Versions/A/JetEngine'
 swift-abi-version: 7
 exports:
@@ -1190,7 +1190,9 @@ exports:
                        '_$s9JetEngine14MapStateCenterCfD', '_$s9JetEngine14MapStateCenterCfd', 
                        '_$s9JetEngine14MapStateCenterCyxGAA0dE0AAMc', '_$s9JetEngine14MergeableModelMp', 
                        '_$s9JetEngine14MergeableModelP11mergingWithyxxKFTj', '_$s9JetEngine14MergeableModelP11mergingWithyxxKFTq', 
-                       '_$s9JetEngine14MergeableModelTL', '_$s9JetEngine14OpaqueMetatypeV11descriptionSSvg', 
+                       '_$s9JetEngine14MergeableModelTL', '_$s9JetEngine14MetricsEmitterO11eventStreamScSyAA0cD5EventVGvgZ', 
+                       '_$s9JetEngine14MetricsEmitterOMa', '_$s9JetEngine14MetricsEmitterOMn', 
+                       '_$s9JetEngine14MetricsEmitterON', '_$s9JetEngine14OpaqueMetatypeV11descriptionSSvg', 
                        '_$s9JetEngine14OpaqueMetatypeV11descriptionSSvpMV', '_$s9JetEngine14OpaqueMetatypeV2eeoiySbAC_ACtFZ', 
                        '_$s9JetEngine14OpaqueMetatypeV2ofACx_tcAA4LensRzlufC', '_$s9JetEngine14OpaqueMetatypeV2ofACyp_tcfC', 
                        '_$s9JetEngine14OpaqueMetatypeV4hash4intoys6HasherVz_tF', 
@@ -2120,7 +2122,12 @@ exports:
                        '_$s9JetEngine19MappedPreferenceKeyP6encodeyyp5ValueQzFTj', 
                        '_$s9JetEngine19MappedPreferenceKeyP6encodeyyp5ValueQzFTq', 
                        '_$s9JetEngine19MappedPreferenceKeyPAA03AnydE0Tb', '_$s9JetEngine19MappedPreferenceKeyTL', 
-                       '_$s9JetEngine19PreferenceNamespaceV03jetB0ACvgZ', '_$s9JetEngine19PreferenceNamespaceV10componentsACSaySSG_tcfC', 
+                       '_$s9JetEngine19MetricsEmitterEventV5colorSo10CGColorRefavg', 
+                       '_$s9JetEngine19MetricsEmitterEventV5colorSo10CGColorRefavpMV', 
+                       '_$s9JetEngine19MetricsEmitterEventV9fieldNameSSvg', '_$s9JetEngine19MetricsEmitterEventV9fieldNameSSvpMV', 
+                       '_$s9JetEngine19MetricsEmitterEventVMa', '_$s9JetEngine19MetricsEmitterEventVMn', 
+                       '_$s9JetEngine19MetricsEmitterEventVN', '_$s9JetEngine19PreferenceNamespaceV03jetB0ACvgZ', 
+                       '_$s9JetEngine19PreferenceNamespaceV10componentsACSaySSG_tcfC', 
                        '_$s9JetEngine19PreferenceNamespaceV11descriptionSSvg', '_$s9JetEngine19PreferenceNamespaceV11descriptionSSvpMV', 
                        '_$s9JetEngine19PreferenceNamespaceV2eeoiySbAC_ACtFZ', '_$s9JetEngine19PreferenceNamespaceV9appendingyA2CF', 
                        '_$s9JetEngine19PreferenceNamespaceV9appendingyACSSF', '_$s9JetEngine19PreferenceNamespaceV9appendingyACSiF', 
@@ -3184,6 +3191,8 @@ exports:
                        '_$s9JetEngine33ConditionallyExpressibleByJSValuePyxSo0F0CKcfCTj', 
                        '_$s9JetEngine33ConditionallyExpressibleByJSValuePyxSo0F0CKcfCTq', 
                        '_$s9JetEngine33ConditionallyExpressibleByJSValueTL', '_$s9JetEngine34AMSMetricsIdentifierFieldsProviderV010addMetricsE04into5usingyAA0hE7Builder_pz_AA0hE7ContextVtKF', 
+                       '_$s9JetEngine34AMSMetricsIdentifierFieldsProviderV07accountF07process3bag13shouldMigrate13eventRecorderAcA07AccountF0_p_So14AMSProcessInfoCAA3BagVSbAA012MetricsEventM0_pSgtcfC', 
+                       '_$s9JetEngine34AMSMetricsIdentifierFieldsProviderV07accountF07process3bag13shouldMigrate13resetInterval13eventRecorder4keysAcA07AccountF0_p_So14AMSProcessInfoCAA3BagVSgSbSdAA012MetricsEventO0_pSgSaySo0cD3KeyCGtcfC', 
                        '_$s9JetEngine34AMSMetricsIdentifierFieldsProviderV07accountF07process3bag13shouldMigrate13resetInterval4keysAcA07AccountF0_p_So14AMSProcessInfoCAA3BagVSgSbSdSaySo0cD3KeyCGtcfC', 
                        '_$s9JetEngine34AMSMetricsIdentifierFieldsProviderV07accountF07process3bag13shouldMigrateAcA07AccountF0_p_So14AMSProcessInfoCAA3BagVSbtcfC', 
                        '_$s9JetEngine34AMSMetricsIdentifierFieldsProviderV11metricsKeysSaySo0cD3KeyCGvgZ', 

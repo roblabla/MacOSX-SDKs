@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B8826E31-15E7-3D70-9C5F-00FE23A2CCE7
+    value:           B28B86CF-B277-3599-B86E-62588D0AC40B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           550EAA03-0BA4-382A-912C-73200FE47B08
+    value:           7993BAC7-ACDE-38FF-856E-C76C1E45E77E
 install-name:    '/System/Library/PrivateFrameworks/AudioResourceArbitration.framework/Versions/A/AudioResourceArbitration'
 exports:
   - targets:         [ x86_64-macos ]

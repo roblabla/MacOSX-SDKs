@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C31AB291-1EF9-3874-85A2-13A638E2D759
+    value:           91AE8945-E360-3AA6-AFF7-9ECD0D240EF3
   - target:          x86_64-maccatalyst
-    value:           C31AB291-1EF9-3874-85A2-13A638E2D759
+    value:           91AE8945-E360-3AA6-AFF7-9ECD0D240EF3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7D54479C-3C20-3CF5-BF43-F4C6614255F1
+    value:           C8E9A755-FD27-3F49-A96B-94F7C5004CE7
   - target:          arm64e-maccatalyst
-    value:           7D54479C-3C20-3CF5-BF43-F4C6614255F1
+    value:           C8E9A755-FD27-3F49-A96B-94F7C5004CE7
 install-name:    '/System/Library/PrivateFrameworks/TeaDB.framework/Versions/A/TeaDB'
-current-version: 701
+current-version: 715
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -24,7 +24,7 @@ allowable-clients:
     clients:         [ ArticleNotificationExtension, ArticleNotificationServiceExtension, 
                        Feldspar, Feldspar Tests, Kinsale, KinsaleAnalytics, KinsaleUI, 
                        MarketingNotificationExtension, NVCDemo, NanoNewsWidgetExtension, 
-                       News, NewsAds, NewsAdsTests, NewsAnalytics, NewsAnalyticsTests, 
+                       NanoWeather, News, NewsAds, NewsAdsTests, NewsAnalytics, NewsAnalyticsTests, 
                        NewsAnalyticsUpload, NewsArticleQuickLook, NewsArticleViewer, 
                        NewsArticles, NewsArticlesTests, NewsDES, NewsDESTests, NewsDiagnosticExtension, 
                        NewsEngagement, NewsEngagementCollector, NewsEngagementTests, 

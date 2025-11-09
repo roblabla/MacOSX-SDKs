@@ -38,5 +38,6 @@ API_AVAILABLE(macos(10.12), ios(9.0), watchos(3.0))
 #endif
 
 #else
+#import <TargetConditionals.h>
 #import <PassKitCore/PKContact.h>
 #endif

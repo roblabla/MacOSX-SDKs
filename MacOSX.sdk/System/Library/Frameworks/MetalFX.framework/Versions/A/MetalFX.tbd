@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           28256D6A-F96A-3C7F-869F-2E78BC27834C
+    value:           E89BB43E-E25F-3589-8C62-CF42CCA47D0D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C281E1AF-06ED-39AD-A509-841065E3C8CA
+    value:           62122170-6548-34D8-895F-86EAB4DFB830
 install-name:    '/System/Library/Frameworks/MetalFX.framework/Versions/A/MetalFX'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

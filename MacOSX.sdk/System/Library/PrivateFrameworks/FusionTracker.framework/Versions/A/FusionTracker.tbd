@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           02627076-935C-348C-B29E-4E2D79A8BCA7
+    value:           63CD0933-B936-300C-884E-3B9FC7A891B2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DAEFCA56-12EC-38B8-88EA-5D38ED1FBD2A
+    value:           3831F7B8-9986-3FAA-967F-9A89EC39C4F1
 install-name:    '/System/Library/PrivateFrameworks/FusionTracker.framework/Versions/A/FusionTracker'
 exports:
   - targets:         [ x86_64-macos ]

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           107C42F6-FEE6-361B-B510-7E956A539F87
+    value:           9F4A190D-8B3C-3328-B584-AB86A33FD09D
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           7F68C353-62C5-3B0B-8D46-65E0B2C487FC
+    value:           5071F944-D17C-3070-B950-E343140B72EE
 install-name:    '/System/iOSSupport/System/Library/Frameworks/MapKit.framework/Versions/A/MapKit'
 current-version: 14
 exports:
@@ -237,11 +237,11 @@ exports:
                        MKDirectionsRequest, MKDirectionsResponse, MKDistanceFormatter, 
                        MKETAProvider, MKETAResponse, MKExploreGuidesReusableView, 
                        MKExploreGuidesView, MKFirstPartyRatingFormatter, MKFirstPartyRatingStringBuilder, 
-                       MKFontManager, MKGeoJSONDecoder, MKGeoJSONFeature, MKGeodesicPolyline, 
-                       MKGradientPolylineRenderer, MKGroupedPlacesSnapshotter, MKHapticEngine, 
-                       MKHybridMapConfiguration, MKIconManager, MKIconStyle, MKImageryMapConfiguration, 
-                       MKIncidentsViewController, MKInfoCardThemeManager, MKJunction, 
-                       MKLayoutCardViewController, MKLocalPointsOfInterestRequest, 
+                       MKFitnessRAPReport, MKFontManager, MKGeoJSONDecoder, MKGeoJSONFeature, 
+                       MKGeodesicPolyline, MKGradientPolylineRenderer, MKGroupedPlacesSnapshotter, 
+                       MKHapticEngine, MKHybridMapConfiguration, MKIconManager, MKIconStyle, 
+                       MKImageryMapConfiguration, MKIncidentsViewController, MKInfoCardThemeManager, 
+                       MKJunction, MKLayoutCardViewController, MKLocalPointsOfInterestRequest, 
                        MKLocalSearch, MKLocalSearchCompleter, MKLocalSearchCompletion, 
                        MKLocalSearchKeypressMetrics, MKLocalSearchRequest, MKLocalSearchResponse, 
                        MKLocalSearchSection, MKLocationManager, MKLookAroundBumpFlash, 
@@ -259,9 +259,9 @@ exports:
                        MKMultiPartLabel, MKMultiPoint, MKMultiPolygon, MKMultiPolygonRenderer, 
                        MKMultiPolyline, MKMultiPolylineRenderer, MKOverlayPathRenderer, 
                        MKOverlayPathView, MKOverlayRenderer, MKOverlayView, MKPOIEnrichmentAvailibility, 
-                       MKPinAnnotationView, MKPitchControl, MKPlaceActionItemAppearanceProvider, 
-                       MKPlaceActionItemCustomAppearanceProvider, MKPlaceActionManager, 
-                       MKPlaceAttributionCell, MKPlaceAttributionViewController, 
+                       MKPinAnnotationView, MKPitchControl, MKPlaceActionEnvironment, 
+                       MKPlaceActionItemAppearanceProvider, MKPlaceActionItemCustomAppearanceProvider, 
+                       MKPlaceActionManager, MKPlaceAttributionCell, MKPlaceAttributionViewController, 
                        MKPlaceBatchController, MKPlaceBatchableCompactCollection, 
                        MKPlaceCardActionItem, MKPlaceCardHeaderViewController, MKPlaceCardMenuBuildingOptions, 
                        MKPlaceCollectionCell, MKPlaceCollectionImageProvider, MKPlaceCollectionMapItem, 

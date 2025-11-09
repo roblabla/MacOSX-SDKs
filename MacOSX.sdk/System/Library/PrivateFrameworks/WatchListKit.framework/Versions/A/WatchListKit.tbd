@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           197CC3D6-480B-3CDC-93E7-384D67041099
+    value:           A6CDEBD0-897D-32B6-9FC8-341EDE09E230
   - target:          x86_64-maccatalyst
-    value:           197CC3D6-480B-3CDC-93E7-384D67041099
+    value:           A6CDEBD0-897D-32B6-9FC8-341EDE09E230
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B00FB450-1E0F-3307-83E3-6D16455A6675
+    value:           6F005721-2772-3382-8680-A4579D24E865
   - target:          arm64e-maccatalyst
-    value:           B00FB450-1E0F-3307-83E3-6D16455A6675
+    value:           6F005721-2772-3382-8680-A4579D24E865
 install-name:    '/System/Library/PrivateFrameworks/WatchListKit.framework/Versions/A/WatchListKit'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -73,17 +73,18 @@ exports:
                        _WLKNotificationsKeyCategory, _WLKNotificationsKeyExpirationDate, 
                        _WLKNotificationsKeyFooter, _WLKNotificationsKeyIdentifier, 
                        _WLKNotificationsKeyInterruptionLevel, _WLKNotificationsKeyIsSession, 
-                       _WLKNotificationsKeyMetrics, _WLKNotificationsKeySound, _WLKNotificationsKeySource, 
-                       _WLKNotificationsKeyThreadID, _WLKNotificationsKeyTimeout, 
-                       _WLKNotificationsKeyTitle, _WLKNotificationsKeyType, _WLKNotificationsKeyUserInfo, 
-                       _WLKNotificationsOnActionKeyReason, _WLKNotificationsOnActionKeyReasonActivation, 
-                       _WLKNotificationsOnActionKeyReasonDeclinedByUser, _WLKNotificationsOnActionKeyReasonDisabled, 
-                       _WLKNotificationsOnActionKeyReasonDismissed, _WLKNotificationsOnActionKeyReasonFailedToPresent, 
-                       _WLKNotificationsOnActionKeyReasonInterrupted, _WLKNotificationsOnActionKeyReasonSession, 
-                       _WLKNotificationsOnActionKeyReasonSystemEvent, _WLKNotificationsOnActionKeyReasonTimedOut, 
-                       _WLKNotificationsSoundDefaultValue, _WLKNotificationsSoundSilent, 
-                       _WLKNotificationsUserDefaultsKeyBadgeIdentifiers, _WLKNotificationsUserDefaultsKeyBadgingSystemMigrated, 
-                       _WLKOfferManagerErrorDomain, _WLKOfferManagerKeyBadgeId, _WLKPlayablePunchoutUrlKeyOpen, 
+                       _WLKNotificationsKeyMetrics, _WLKNotificationsKeyNotificationSubType, 
+                       _WLKNotificationsKeySound, _WLKNotificationsKeySource, _WLKNotificationsKeyThreadID, 
+                       _WLKNotificationsKeyTimeout, _WLKNotificationsKeyTitle, _WLKNotificationsKeyType, 
+                       _WLKNotificationsKeyUserInfo, _WLKNotificationsOnActionKeyReason, 
+                       _WLKNotificationsOnActionKeyReasonActivation, _WLKNotificationsOnActionKeyReasonDeclinedByUser, 
+                       _WLKNotificationsOnActionKeyReasonDisabled, _WLKNotificationsOnActionKeyReasonDismissed, 
+                       _WLKNotificationsOnActionKeyReasonFailedToPresent, _WLKNotificationsOnActionKeyReasonInterrupted, 
+                       _WLKNotificationsOnActionKeyReasonSession, _WLKNotificationsOnActionKeyReasonSystemEvent, 
+                       _WLKNotificationsOnActionKeyReasonTimedOut, _WLKNotificationsSoundDefaultValue, 
+                       _WLKNotificationsSoundSilent, _WLKNotificationsUserDefaultsKeyBadgeIdentifiers, 
+                       _WLKNotificationsUserDefaultsKeyBadgingSystemMigrated, _WLKOfferManagerErrorDomain, 
+                       _WLKOfferManagerKeyBadgeId, _WLKPlayablePunchoutUrlKeyOpen, 
                        _WLKPlayablePunchoutUrlKeyPlay, _WLKPlaybackTrackingLogObject, 
                        _WLKPlistClasses, _WLKPrewarmSubscriptionDataDidComplete, 
                        _WLKPrewarmSubscriptionDataNotificationErrorKey, _WLKProtocolVersion, 
@@ -142,12 +143,12 @@ exports:
                        __DeltaKeyWidgetImages, __PrewarmSemaphoreTimeout, __SanitizedAMSError, 
                        __TemporalTolerance, __WLKAppLibraryDidChangeNotification, 
                        __WLKChannelUtilitesDataShouldRefreshInternal, __WLKOfferPeriodKeyDuration, 
-                       __WLKOfferPeriodKeyType, __WLKSmootEntitlementKey, __WLKSportsFavoriteCacheSyncNotification, 
-                       __WLKSportsFavoriteCacheSyncingAvailableOverrideKey, __WLKSportsFavoriteCacheSyncingEnabledKey, 
-                       __WLKSportsFavoriteCacheSyncingEnabledLastModifiedKey, __WLKSportsFavoriteCacheSyncingEnabledOverrideKey, 
-                       __WLKSportsFavoriteOptInStatusChangedNotification, __WLKSportsFavoritesCacheKey, 
-                       __WLKSubscriptionStoreSubscriptionDataDidChangeInternal, __WLKSupportsTVInfoPlistKey, 
-                       __WLKSystemSubscriptionPID, __WLKUserEnvironmentPlatform, 
+                       __WLKOfferPeriodKeyType, __WLKSmootEntitlementKey, __WLKSportsFavoriteCacheLastModifiedKey, 
+                       __WLKSportsFavoriteCacheSyncNotification, __WLKSportsFavoriteCacheSyncingAvailableOverrideKey, 
+                       __WLKSportsFavoriteCacheSyncingEnabledKey, __WLKSportsFavoriteCacheSyncingEnabledLastModifiedKey, 
+                       __WLKSportsFavoriteCacheSyncingEnabledOverrideKey, __WLKSportsFavoriteOptInStatusChangedNotification, 
+                       __WLKSportsFavoritesCacheKey, __WLKSubscriptionStoreSubscriptionDataDidChangeInternal, 
+                       __WLKSupportsTVInfoPlistKey, __WLKSystemSubscriptionPID, __WLKUserEnvironmentPlatform, 
                        __WLKUserEnvironmentPlatformMac, __WLKUserEnvironmentPlatformPad, 
                        __WLKUserEnvironmentPlatformPhone, __WLKUserEnvironmentPlatformTV, 
                        __WLKUserEnvironmentPlatformWatch, ___WLKLocationManagerLocationDidChangeNotification, 

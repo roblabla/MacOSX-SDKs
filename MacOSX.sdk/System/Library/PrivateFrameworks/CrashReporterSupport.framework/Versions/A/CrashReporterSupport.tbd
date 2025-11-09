@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3C13F736-6485-36B3-A478-64D9888B7AF4
+    value:           72B1CE5D-CB14-3610-8657-62DBCFB7EB75
   - target:          x86_64-maccatalyst
-    value:           3C13F736-6485-36B3-A478-64D9888B7AF4
+    value:           72B1CE5D-CB14-3610-8657-62DBCFB7EB75
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           635C8001-3B28-3B80-A7EF-39CDBCF23567
+    value:           B06099E8-94C1-3002-9562-944E16676004
   - target:          arm64e-maccatalyst
-    value:           635C8001-3B28-3B80-A7EF-39CDBCF23567
+    value:           B06099E8-94C1-3002-9562-944E16676004
 install-name:    '/System/Library/PrivateFrameworks/CrashReporterSupport.framework/Versions/A/CrashReporterSupport'
-current-version: 15107
+current-version: 15108
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -130,26 +130,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0C442442-98AA-3983-8271-91DE84E7A453
+    value:           1DD6BA55-2ED0-3ECC-AEA0-0D7E69C14C73
   - target:          x86_64-maccatalyst
-    value:           0C442442-98AA-3983-8271-91DE84E7A453
+    value:           1DD6BA55-2ED0-3ECC-AEA0-0D7E69C14C73
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C9F34B18-461F-3825-9DF8-3A44783958EC
+    value:           F405E553-C2B7-3FB7-B0A4-34082A690CD9
   - target:          arm64e-maccatalyst
-    value:           C9F34B18-461F-3825-9DF8-3A44783958EC
+    value:           F405E553-C2B7-3FB7-B0A4-34082A690CD9
 install-name:    '/System/Library/PrivateFrameworks/OSAnalytics.framework/Versions/A/OSAnalytics'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _OSADateFormat, _OSAIsDebugEnabledForRSD, _OSAIsRSDDevice, 
-                       _OSAIsRSDDisplay, _OSAIsRSDHost, _OSANSDateFormat, _OSARTCIsProcessOfInterest, 
-                       _OSASafeCreateDirectory, _OSASafeMoveItemAtURL, _OSASafeOpen, 
-                       _OSASafeOpenReadOnly, _OSASafeOpenWriteOnly, _OSASafeRemoveFileAtURL, 
-                       _OSASandboxConsumeExtension, _OSASandboxExtensionForUserSubmissionDirectory, 
+    symbols:         [ _OSACPUTypeToString, _OSADateFormat, _OSAIsDebugEnabledForRSD, 
+                       _OSAIsRSDDevice, _OSAIsRSDDisplay, _OSAIsRSDHost, _OSANSDateFormat, 
+                       _OSARTCIsProcessOfInterest, _OSASafeCreateDirectory, _OSASafeMoveItemAtURL, 
+                       _OSASafeOpen, _OSASafeOpenReadOnly, _OSASafeOpenWriteOnly, 
+                       _OSASafeRemoveFileAtURL, _OSASandboxConsumeExtension, _OSASandboxExtensionForUserSubmissionDirectory, 
                        _OSASanitizeOptionHomeDirectory, _OSASanitizeOptionKeepFilename, 
                        _OSASanitizeOptionMountedVolume, _OSASanitizeOptionNetworkVolume, 
                        _OSASanitizePath, _OSASetOwnership, _OSAStateMonitorEventCALogWritten, 

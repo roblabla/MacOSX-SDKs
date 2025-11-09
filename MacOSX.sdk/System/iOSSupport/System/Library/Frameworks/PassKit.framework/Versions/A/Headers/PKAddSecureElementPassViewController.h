@@ -1,3 +1,4 @@
+#if !__has_include(<PassKitUI/PKAddSecureElementPassViewController.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKAddSecureElementPassViewController.h
 //  PassKit
@@ -46,3 +47,10 @@ API_AVAILABLE(ios(13.4))
 NS_ASSUME_NONNULL_END
 
 #endif // TARGET_OS_IOS
+
+#else
+#if !TARGET_OS_OSX 
+#import <TargetConditionals.h>
+#import <PassKitUI/PKAddSecureElementPassViewController.h>
+#endif
+#endif

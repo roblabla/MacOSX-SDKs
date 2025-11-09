@@ -455,7 +455,7 @@ enum {
 enum {
   minCountry                    = verUS,
   maxCountry                    = verIrelandEnglish
-};
+} API_DEPRECATED( "Deprecated", macos(10.0,13.0));
 
 enum {
                                         /* Calendar Codes */
@@ -827,20 +827,20 @@ enum {
   crash                         = 5     /* TokenResults */
 } API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
-typedef SInt8                           TokenResults;
-typedef char                            CharByteTable[256];
+typedef SInt8                           TokenResults API_DEPRECATED( "Deprecated", macos(10.0,13.0));
+typedef char                            CharByteTable[256] API_DEPRECATED( "Deprecated", macos(10.0,13.0));;
 /* "TokenType" was renamed to "ScriptTokenType" because of a name collisions*/
-typedef short                           ScriptTokenType;
-typedef ScriptTokenType                 DelimType[2];
-typedef ScriptTokenType                 CommentType[4];
+typedef short                           ScriptTokenType API_DEPRECATED( "Deprecated", macos(10.0,13.0));;
+typedef ScriptTokenType                 DelimType[2] API_DEPRECATED( "Deprecated", macos(10.0,13.0));;
+typedef ScriptTokenType                 CommentType[4] API_DEPRECATED( "Deprecated", macos(10.0,13.0));;
 struct TokenRec {
   ScriptTokenType     theToken;
   Ptr                 position;               /*pointer into original source*/
   long                length;                 /*length of text in original source*/
   StringPtr           stringPosition;         /*Pascal/C string copy of identifier*/
-};
-typedef struct TokenRec                 TokenRec;
-typedef TokenRec *                      TokenRecPtr;
+} API_DEPRECATED( "Deprecated", macos(10.0,13.0));
+typedef struct TokenRec                 TokenRec API_DEPRECATED( "Deprecated", macos(10.0,13.0));
+typedef TokenRec *                      TokenRecPtr API_DEPRECATED( "Deprecated", macos(10.0,13.0));
 struct TokenBlock {
   Ptr                 source;                 /*pointer to stream of characters*/
   long                sourceLength;           /*length of source stream*/
@@ -862,9 +862,9 @@ struct TokenBlock {
   ScriptTokenType     decimalCode;
   Handle              itlResource;            /*handle to itl4 resource of current script*/
   long                reserved[8];            /*must be zero!*/
-};
-typedef struct TokenBlock               TokenBlock;
-typedef TokenBlock *                    TokenBlockPtr;
+} API_DEPRECATED( "Deprecated", macos(10.0,13.0));
+typedef struct TokenBlock               TokenBlock API_DEPRECATED( "Deprecated", macos(10.0,13.0));
+typedef TokenBlock *                    TokenBlockPtr API_DEPRECATED( "Deprecated", macos(10.0,13.0));
 
 /* Result values from GetScriptManagerVariable and SetScriptManagerVariable calls. */
 enum {
@@ -982,7 +982,7 @@ enum {
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern long 
-GetScriptManagerVariable(short selector)                      __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+GetScriptManagerVariable(short selector) API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 
 /*
@@ -1006,7 +1006,7 @@ GetScriptManagerVariable(short selector)                      __OSX_AVAILABLE_BU
 extern OSErr 
 SetScriptManagerVariable(
   short   selector,
-  long    param)                                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+						 long    param) API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 
 #if !__LP64__
@@ -1162,8 +1162,8 @@ enum {
  */
 extern long 
 GetScriptVariable(
-  short   script,
-  short   selector)                                           __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+				  short   script,
+				  short   selector ) API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 
 #endif  /* !__LP64__ */
@@ -1194,9 +1194,9 @@ GetScriptVariable(
  */
 extern OSErr 
 SetScriptVariable(
-  short   script,
-  short   selector,
-  long    param)                                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+				  short   script,
+				  short   selector,
+				  long    param) API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 
 #endif  /* !__LP64__ */
@@ -1234,7 +1234,7 @@ SetScriptVariable(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-GetSysDirection(void)                                         __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
+GetSysDirection(void) API_DEPRECATED( "Deprecated", macos(10.0,10.4));
 
 
 /*
@@ -1252,7 +1252,7 @@ GetSysDirection(void)                                         __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-SetSysDirection(short value)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
+SetSysDirection(short value) API_DEPRECATED( "Deprecated", macos(10.0,10.4));
 
 
 /*
@@ -1277,7 +1277,7 @@ SetSysDirection(short value)                                  __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-FontScript(void)                                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
+FontScript(void) API_DEPRECATED( "Deprecated", macos(10.0,10.4));
 
 
 /*
@@ -1302,7 +1302,7 @@ FontScript(void)                                              __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-IntlScript(void)                                              __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
+IntlScript(void) API_DEPRECATED( "Deprecated", macos(10.0,10.4));
 
 
 /*
@@ -1326,7 +1326,7 @@ IntlScript(void)                                              __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern short 
-FontToScript(short fontNumber)                                __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
+FontToScript(short fontNumber) API_DEPRECATED( "Deprecated", macos(10.0,10.4));
 
 
 /*
@@ -1348,9 +1348,9 @@ FontToScript(short fontNumber)                                __OSX_AVAILABLE_BU
  */
 extern short 
 CharacterByteType(
-  Ptr          textBuf,
-  short        textOffset,
-  ScriptCode   script)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
+				  Ptr          textBuf,
+				  short        textOffset,
+				  ScriptCode   script) API_DEPRECATED( "Deprecated", macos(10.0,10.4));
 
 
 /*
@@ -1372,9 +1372,9 @@ CharacterByteType(
  */
 extern short 
 CharacterType(
-  Ptr          textBuf,
-  short        textOffset,
-  ScriptCode   script)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
+			  Ptr          textBuf,
+			  short        textOffset,
+			  ScriptCode   script) API_DEPRECATED( "Deprecated", macos(10.0,10.4));
 
 
 /*
@@ -1394,11 +1394,11 @@ CharacterType(
  */
 extern OSErr 
 TransliterateText(
-  Handle       srcHandle,
-  Handle       dstHandle,
-  short        target,
-  long         srcMask,
-  ScriptCode   script)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
+				  Handle       srcHandle,
+				  Handle       dstHandle,
+				  short        target,
+				  long         srcMask,
+				  ScriptCode   script) API_DEPRECATED( "Deprecated", macos(10.0,10.4));
 
 
 /*
@@ -1420,9 +1420,8 @@ TransliterateText(
  */
 extern Boolean 
 FillParseTable(
-  CharByteTable   table,
-  ScriptCode      script)                                     __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
-
+			   CharByteTable   table,
+			   ScriptCode      script) API_DEPRECATED( "Deprecated", macos(10.0,10.4));
 
 /*
  *  GetIntlResource()   *** DEPRECATED ***
@@ -1462,7 +1461,7 @@ FillParseTable(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern Handle 
-GetIntlResource(short theID)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_5, __IPHONE_NA, __IPHONE_NA);
+GetIntlResource(short theID) API_DEPRECATED( "Deprecated", macos(10.0,10.5));
 
 
 /*
@@ -1480,7 +1479,7 @@ GetIntlResource(short theID)                                  __OSX_AVAILABLE_BU
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern void 
-ClearIntlResourceCache(void)                                  __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
+ClearIntlResourceCache(void) API_DEPRECATED( "Deprecated", macos(10.0,10.4));
 
 
 /*
@@ -1499,105 +1498,14 @@ ClearIntlResourceCache(void)                                  __OSX_AVAILABLE_BU
  */
 extern void 
 GetIntlResourceTable(
-  ScriptCode   script,
-  short        tableCode,
-  Handle *     itlHandle,
-  long *       offset,
-  long *       length)                                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
+					 ScriptCode   script,
+					 short        tableCode,
+					 Handle *     itlHandle,
+					 long *       offset,
+					 long *       length) API_DEPRECATED( "Deprecated", macos(10.0,10.4));
 
 
 #endif  /* !__LP64__ */
-
-/*
- *  GetScriptUtilityAddress()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  SetScriptUtilityAddress()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  GetScriptQDPatchAddress()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  SetScriptQDPatchAddress()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  SetIntlResource()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  CharByte()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  CharType()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  Transliterate()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
-/*
- *  ParseTable()
- *  
- *  Availability:
- *    Mac OS X:         not available
- *    CarbonLib:        not available
- *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
- */
-
-
 
 #if !__LP64__
 /*
@@ -1615,8 +1523,7 @@ GetIntlResourceTable(
  *    Non-Carbon CFM:   in InterfaceLib 7.1 and later
  */
 extern TokenResults 
-IntlTokenize(TokenBlockPtr tokenParam)                        __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_0, __MAC_10_4, __IPHONE_NA, __IPHONE_NA);
-
+IntlTokenize(TokenBlockPtr tokenParam) API_DEPRECATED( "Deprecated", macos(10.0,10.4));
 
 #endif  /* !__LP64__ */
 

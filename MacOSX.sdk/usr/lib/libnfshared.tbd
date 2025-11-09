@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7486DF1D-1F04-3B35-AEA2-9E7E153E7382
+    value:           411C0FC0-EB5D-3442-B27C-C8497EF2CE02
   - target:          x86_64-maccatalyst
-    value:           7486DF1D-1F04-3B35-AEA2-9E7E153E7382
+    value:           411C0FC0-EB5D-3442-B27C-C8497EF2CE02
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           09EB2CCF-9CB4-39FD-92E9-406C1D820F6F
+    value:           CD362E50-3116-3364-B548-622390F970C1
   - target:          arm64e-maccatalyst
-    value:           09EB2CCF-9CB4-39FD-92E9-406C1D820F6F
+    value:           CD362E50-3116-3364-B548-622390F970C1
 install-name:    '/usr/lib/libnfshared.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -29,20 +29,21 @@ exports:
                        _NFDataScannerRetain, _NFGetOrCreateRootQueue, _NFGetProductType, 
                        _NFGetRootQueue, _NFGetThreadPriority, _NFIsChinaSku, _NFIsGreenTea, 
                        _NFIsInternalBuild, _NFIsProductType, _NFIsRestoreOS, _NFIsSimulator, 
-                       _NFIsUIBuild, _NFLogGetLogger, _NFLogSetLogger, _NFProductGetName, 
-                       _NFProductHasB0LPKey, _NFProductHasNFCRadio, _NFProductHasThermistor, 
-                       _NFProductIsASMac, _NFProductIsBridge, _NFProductIsDevBoard, 
-                       _NFProductIsMac, _NFProductIsPad, _NFProductIsPhone, _NFProductIsWatch, 
-                       _NFProductSupportsAC, _NFProductSupportsNFCReader, _NFReaderPurposeStringKey, 
-                       _NFSetThreadPriority, _NFSharedDumpTransport, _NFSharedLogGetLogger, 
-                       _NFSharedLogTransport, _NFSharedMiddlewareSignpostLog, _NFSharedSignpostLog, 
-                       _NFSimulateCrash, _NFThermalMonitorProvidedBySMC, _NF_isFeatureSupported, 
-                       _TLVCreateWithData, _TLVCreateWithDataMixed, _TLVCreateWithFirstChild, 
-                       _TLVCreateWithValue, _TLVRelease, _TLVRetain, _postAWDDynamicRFChangedEvent, 
-                       _postAWDHardwareExceptionEvent, _postAWDLPCDStatistic, _postAWDMainSERemovedEvent, 
-                       _postAWDMiddlewareExceptionEvent, _postAnalyticsHardwareExceptionEvent, 
-                       _postAnalyticsMainSERemovedEvent, _postAnalyticsMiddlewareExceptionEvent, 
-                       _postCADynamicRFChangedEvent, _resetAWDLoadStackExceptionCount ]
+                       _NFIsUIBuild, _NFLogGetLogger, _NFLogSetLogger, _NFPlatformShouldLimitAccessoryReaderTime, 
+                       _NFProductGetName, _NFProductHasB0LPKey, _NFProductHasNFCRadio, 
+                       _NFProductHasThermistor, _NFProductIsASMac, _NFProductIsBridge, 
+                       _NFProductIsDevBoard, _NFProductIsMac, _NFProductIsPad, _NFProductIsPhone, 
+                       _NFProductIsWatch, _NFProductSupportsAC, _NFProductSupportsNFCReader, 
+                       _NFReaderPurposeStringKey, _NFSetThreadPriority, _NFSharedDumpTransport, 
+                       _NFSharedLogGetLogger, _NFSharedLogTransport, _NFSharedMiddlewareSignpostLog, 
+                       _NFSharedSignpostLog, _NFSimulateCrash, _NFThermalMonitorProvidedBySMC, 
+                       _NF_isFeatureSupported, _TLVCreateWithData, _TLVCreateWithDataMixed, 
+                       _TLVCreateWithFirstChild, _TLVCreateWithValue, _TLVRelease, 
+                       _TLVRetain, _postAWDDynamicRFChangedEvent, _postAWDHardwareExceptionEvent, 
+                       _postAWDLPCDStatistic, _postAWDMainSERemovedEvent, _postAWDMiddlewareExceptionEvent, 
+                       _postAnalyticsHardwareExceptionEvent, _postAnalyticsMainSERemovedEvent, 
+                       _postAnalyticsMiddlewareExceptionEvent, _postCADynamicRFChangedEvent, 
+                       _resetAWDLoadStackExceptionCount ]
     objc-classes:    [ ChipAuthenticationInfo, NFAWDAPNReceived, NFAWDActivityTimeout, 
                        NFAWDCRSActivationTimerExpired, NFAWDCRSAuthException, NFAWDCRSAuthInit, 
                        NFAWDCRSAuthInitException, NFAWDCRSAuthorize, NFAWDCRSAuthorizeECommerce, 

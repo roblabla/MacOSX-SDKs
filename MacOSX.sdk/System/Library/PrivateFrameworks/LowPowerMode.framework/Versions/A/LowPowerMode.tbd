@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           28707A8D-6A45-3565-81CF-2DFA62903323
+    value:           B8961BC3-B567-35F1-A34B-2BE7F34854F2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B9A77A15-5EC9-3882-BB3C-B49D8CD26727
+    value:           A62F02F1-3112-3936-BC12-6326800A6FDF
 install-name:    '/System/Library/PrivateFrameworks/LowPowerMode.framework/Versions/A/LowPowerMode'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

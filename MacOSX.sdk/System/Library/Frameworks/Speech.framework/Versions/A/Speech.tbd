@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           950D1238-6A4D-3D52-898D-42923320D00D
+    value:           242DBFBD-C927-3BA7-81B4-867E93E9F672
   - target:          x86_64-maccatalyst
-    value:           950D1238-6A4D-3D52-898D-42923320D00D
+    value:           242DBFBD-C927-3BA7-81B4-867E93E9F672
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F847FD56-1E81-31F2-A2E0-7ABE5265E909
+    value:           5BF63130-FC2B-356D-AC80-510169E548C7
   - target:          arm64e-maccatalyst
-    value:           F847FD56-1E81-31F2-A2E0-7ABE5265E909
+    value:           5BF63130-FC2B-356D-AC80-510169E548C7
 install-name:    '/System/Library/Frameworks/Speech.framework/Versions/A/Speech'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6D5B5A80-9C69-36E7-B5A7-2587299AD498
+    value:           36A159C9-13BF-3C64-A559-891008001B06
   - target:          x86_64-maccatalyst
-    value:           6D5B5A80-9C69-36E7-B5A7-2587299AD498
+    value:           36A159C9-13BF-3C64-A559-891008001B06
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0D46C99A-45FB-3932-80FC-5B072B30D43C
+    value:           D9FD60D4-D23C-3589-822D-B317F45372C8
   - target:          arm64e-maccatalyst
-    value:           0D46C99A-45FB-3932-80FC-5B072B30D43C
+    value:           D9FD60D4-D23C-3589-822D-B317F45372C8
 install-name:    '/System/Library/PrivateFrameworks/IOGPU.framework/Versions/A/IOGPU'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

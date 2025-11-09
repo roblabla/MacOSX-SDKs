@@ -3,9 +3,9 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DB03ACB5-023C-3620-B9E0-9A2B457908EA
+    value:           E01E3E27-06D8-3766-A385-E575937FA7A9
   - target:          arm64e-macos
-    value:           A0BDEE21-B4AC-3AD5-A6FD-BEF085F6DD6B
+    value:           7D23DA89-BA1D-360A-A61C-EAA0A1D5A9F6
 install-name:    '/usr/lib/log/liblog_signpost.telemetry.dylib'
-current-version: 90
+current-version: 91
 ...

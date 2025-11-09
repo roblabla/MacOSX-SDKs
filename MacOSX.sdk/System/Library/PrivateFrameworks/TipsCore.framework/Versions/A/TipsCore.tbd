@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2C9A111F-CA59-385A-9FEF-4078A2D0729F
+    value:           D0A6D7AF-0C23-3200-8066-EFB3BDDB39E4
   - target:          x86_64-maccatalyst
-    value:           2C9A111F-CA59-385A-9FEF-4078A2D0729F
+    value:           D0A6D7AF-0C23-3200-8066-EFB3BDDB39E4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5758248E-C457-3787-BA72-2A1518518DFD
+    value:           59003EF5-4A3B-35DB-B996-C3C09BF5AF71
   - target:          arm64e-maccatalyst
-    value:           5758248E-C457-3787-BA72-2A1518518DFD
+    value:           59003EF5-4A3B-35DB-B996-C3C09BF5AF71
 install-name:    '/System/Library/PrivateFrameworks/TipsCore.framework/Versions/A/TipsCore'
-current-version: 660.8
+current-version: 663
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -398,6 +398,6 @@ exports:
                        TPSURLActionComponents, TPSURLSessionACAuthContext, TPSURLSessionACAuthHandler, 
                        TPSURLSessionHandler, TPSURLSessionItem, TPSURLSessionManager, 
                        TPSURLSessionTask, TPSUserGuide, TPSUserTypeChecker, TPSViewSourceProxy, 
-                       TPSWidgetAssetFetchOperation, TPSWidgetContent, TPSWidgetController, 
-                       _TPSEligibleTip, _TPSXPCConnection, _TPSXPCExportedObjectProxy ]
+                       TPSWidgetContent, TPSWidgetController, _TPSEligibleTip, _TPSXPCConnection, 
+                       _TPSXPCExportedObjectProxy ]
 ...

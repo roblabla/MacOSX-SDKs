@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8EB7C65F-FAF2-3EB3-A443-4BE254E9E6F1
+    value:           0434C295-E6C6-397C-9475-6690A613EEA8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BC4AE488-D0E8-36FD-B8EB-A08D23A8F744
+    value:           2BF8467B-A44E-3653-B9F6-CA62BD4AEA34
 install-name:    '/System/Library/PrivateFrameworks/DiagnosticRequestService.framework/Versions/A/DiagnosticRequestService'
 current-version: 4
 swift-abi-version: 7
@@ -386,7 +386,9 @@ exports:
                        _kDRSDMHangTracerFirstPartyMicroHangIssueCategory, _kDRSDMHangTracerFirstPartyNormalHangIssueCategory, 
                        _kDRSDMHangTracerTeamID, _kDRSDMHangTracerThirdPartyLongHangIssueCategory, 
                        _kDRSDMHangTracerThirdPartyNormalHangIssueCategory, _kDRSDMHysteresisKey, 
-                       _kDRSDMIssueCategoryDictKey, _kDRSDMMemoryToolsMemgraphDmonThresholdCategory, 
+                       _kDRSDMIssueCategoryDictKey, _kDRSDMMailConversationViewIssueCategory, 
+                       _kDRSDMMailMessageListIssueCategory, _kDRSDMMailMiscResponsivenessIssueCategory, 
+                       _kDRSDMMailTeamID, _kDRSDMMemoryToolsMemgraphDmonThresholdCategory, 
                        _kDRSDMMemoryToolsMemgraphOverTimeCategory, _kDRSDMMemoryToolsTeamID, 
                        _kDRSDMNandAutoGBBSweepIssueCategory, _kDRSDMNandGBBTeamID, 
                        _kDRSDMNandTeamID, _kDRSDMNoCap, _kDRSDMNoHysteresis, _kDRSDMPPSArchiveIssueCategory, 

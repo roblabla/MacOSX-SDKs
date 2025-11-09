@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           E4F3E502-BFED-3E1F-9BB6-9CF05E6973EE
+    value:           E257397C-BDE6-3ED9-9193-A1532154D505
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           D156150F-314D-3BB6-B30B-352915E8905C
+    value:           AE88E493-12A8-3E7B-A76D-0A891E301EA2
 install-name:    '/System/iOSSupport/System/Library/Frameworks/FamilyControls.framework/Versions/A/FamilyControls'
 current-version: 1045
 swift-abi-version: 7

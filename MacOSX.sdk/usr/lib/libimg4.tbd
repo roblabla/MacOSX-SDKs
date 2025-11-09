@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           122D7459-AABA-3023-AA6C-68684104C7BD
+    value:           C3CDC1CF-37C3-3391-B0DE-80989843C8AC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F7AC65C4-217A-3251-B01C-15B3F97601CB
+    value:           EF5BD92E-95D4-3EB7-A4F2-8A7ADDBA8F1C
 install-name:    '/usr/lib/libimg4.dylib'
-current-version: 201.40.10
+current-version: 201.60.2
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ __img4_chip_ap_category_ff02, __img4_chip_ap_category_ff03, 

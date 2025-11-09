@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CDCD873B-B989-31F8-9697-36EE23C261A1
+    value:           D52AF785-69AE-3551-AB83-6DA3C295E36D
   - target:          x86_64-maccatalyst
-    value:           CDCD873B-B989-31F8-9697-36EE23C261A1
+    value:           D52AF785-69AE-3551-AB83-6DA3C295E36D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AFAE9A93-F77C-337B-8D73-1A3F1F4A1FBD
+    value:           94C0361F-7F14-3F76-B533-6645D025E23D
   - target:          arm64e-maccatalyst
-    value:           AFAE9A93-F77C-337B-8D73-1A3F1F4A1FBD
+    value:           94C0361F-7F14-3F76-B533-6645D025E23D
 install-name:    '/System/Library/PrivateFrameworks/APFoundation.framework/Versions/A/APFoundation'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

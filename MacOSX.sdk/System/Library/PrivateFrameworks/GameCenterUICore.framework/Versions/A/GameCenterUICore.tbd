@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D5326B5A-9283-3576-B360-1C6746E25D39
+    value:           B597EE86-3318-3CDD-B5CA-A0E4CF7F6349
   - target:          x86_64-maccatalyst
-    value:           D5326B5A-9283-3576-B360-1C6746E25D39
+    value:           B597EE86-3318-3CDD-B5CA-A0E4CF7F6349
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           091C8D41-D57A-355C-94D1-BAF9552BFA72
+    value:           ED1EC807-AD0A-33F3-A149-9D7ACB646F36
   - target:          arm64e-maccatalyst
-    value:           091C8D41-D57A-355C-94D1-BAF9552BFA72
+    value:           ED1EC807-AD0A-33F3-A149-9D7ACB646F36
 install-name:    '/System/Library/PrivateFrameworks/GameCenterUICore.framework/Versions/A/GameCenterUICore'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -47,10 +47,10 @@ exports:
                        GKServerWebViewJSExternalAccounts, GKServerWebViewJSGame, 
                        GKServerWebViewJSRoot, GKTextStyle, GKTextStyleFocus, GKTextStyleMac, 
                        GKTextStylePad, GKTextStylePhone, GKThemeBrush, GKThreadsafeImageCache, 
-                       GKUIActivityIndicatorView, GKUITheme, SortHueEntry, UXAlertAction, 
-                       UXAlertController, UXNavigationBar, UXNavigationController, 
-                       UXNavigationItem, UXResizableImage, UXResizableImageView, 
-                       UXViewController, _GKAlert ]
+                       GKUIActivityIndicatorView, GKUITheme, GKWelcomeBannerVisibility, 
+                       SortHueEntry, UXAlertAction, UXAlertController, UXNavigationBar, 
+                       UXNavigationController, UXNavigationItem, UXResizableImage, 
+                       UXResizableImageView, UXViewController, _GKAlert ]
     objc-ivars:      [ GKAccountViewController._accountName, GKAccountViewController._alias, 
                        GKAccountViewController._firstName, GKAccountViewController._lastName, 
                        GKAccountViewController._mode, GKAccountViewController._shouldUploadContacts, 

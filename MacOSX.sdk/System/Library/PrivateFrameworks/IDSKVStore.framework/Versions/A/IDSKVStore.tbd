@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FA07911E-A1AD-31ED-BC9E-8C81C1BECB6A
+    value:           9A5A0238-99D5-30FE-8799-AE89F4816259
   - target:          x86_64-maccatalyst
-    value:           FA07911E-A1AD-31ED-BC9E-8C81C1BECB6A
+    value:           9A5A0238-99D5-30FE-8799-AE89F4816259
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F5679C7A-0E70-3B3B-B511-ED7DA6F8B3DE
+    value:           4AAB8787-CFCE-3F8E-A79E-C62B2D91A8BA
   - target:          arm64e-maccatalyst
-    value:           F5679C7A-0E70-3B3B-B511-ED7DA6F8B3DE
+    value:           4AAB8787-CFCE-3F8E-A79E-C62B2D91A8BA
 install-name:    '/System/Library/PrivateFrameworks/IDSKVStore.framework/Versions/A/IDSKVStore'
 current-version: 800
 exports:

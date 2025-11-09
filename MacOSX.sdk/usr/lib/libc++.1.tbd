@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           06015868-B157-3745-889B-69E23C5034FD
+    value:           5C425EA0-066D-38B9-9DB4-8D3885D78B6B
   - target:          x86_64-maccatalyst
-    value:           06015868-B157-3745-889B-69E23C5034FD
+    value:           5C425EA0-066D-38B9-9DB4-8D3885D78B6B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AE8EA4B2-B8FD-33E3-A0AF-0B7485AB97C0
+    value:           A4BED887-64CE-3F2E-80DF-87D583B262D9
   - target:          arm64e-maccatalyst
-    value:           AE8EA4B2-B8FD-33E3-A0AF-0B7485AB97C0
+    value:           A4BED887-64CE-3F2E-80DF-87D583B262D9
 install-name:    '/usr/lib/libc++.1.dylib'
-current-version: 1300.32
+current-version: 1300.36
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     symbols:         [ __ZTINSt3__110__time_getE, __ZTINSt3__110__time_putE, __ZTINSt3__110ctype_baseE, 

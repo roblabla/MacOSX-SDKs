@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6BA81CD2-5019-30BC-A3E0-6D33B3BF83A7
+    value:           97B150F7-9A32-379F-BF63-F7CE0261C97C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0AC90CF2-507B-36E6-A15B-CF7F52E60674
+    value:           E77FBA8D-21CA-3485-917A-B86413B31C95
 install-name:    '/System/Library/PrivateFrameworks/SiriMemoryClient.framework/Versions/A/SiriMemoryClient'
 swift-abi-version: 7
 exports:

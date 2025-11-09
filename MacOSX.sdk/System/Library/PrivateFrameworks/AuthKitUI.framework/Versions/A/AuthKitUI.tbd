@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D8A42D97-8045-31BF-9BB9-AD59CEEC6FDF
+    value:           17A5821E-348B-31FB-90D1-FFF837E04A3C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B9656EAF-8D09-3D0E-A879-808D4FA6ED98
+    value:           7A149B64-BFB8-3711-809A-3A0BFE329F4C
 install-name:    '/System/Library/PrivateFrameworks/AuthKitUI.framework/Versions/A/AuthKitUI'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -91,6 +91,7 @@ exports:
                        _webViewSetupFamilyUI, _webViewTransferRequestsUI ]
     objc-classes:    [ AKASAuthorizationProvider, AKAccessibleContainerView, AKAppleIDAuthenticationInAppContext, 
                        AKAppleIDAuthenticationInAssistantContext, AKAppleIDAuthenticationMacOSExtenstionContext, 
+                       AKAppleIDAuthenticationPrefPaneLogoContainerViewController, 
                        AKAppleIDAuthenticationUISurrogateContext, AKAppleIDAuthenticationiCloudPrefPaneContext, 
                        AKAppleIDAuthenticationiCloudPrefPaneSecondFactorViewController, 
                        AKAppleIDAuthenticationiCloudPrefPaneViewController, AKAppleIDFollowUpServerUIPresenter, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5165319F-BF72-3DC6-9CDC-E1CCA552216F
+    value:           2D9C1E5A-762F-348E-879E-7C4D23665AB9
   - target:          x86_64-maccatalyst
-    value:           5165319F-BF72-3DC6-9CDC-E1CCA552216F
+    value:           2D9C1E5A-762F-348E-879E-7C4D23665AB9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           48687561-E1A4-317E-BFD6-D6E78194E354
+    value:           3F50FD89-9E53-325A-86D6-1A83997BE2FD
   - target:          arm64e-maccatalyst
-    value:           48687561-E1A4-317E-BFD6-D6E78194E354
+    value:           3F50FD89-9E53-325A-86D6-1A83997BE2FD
 install-name:    '/System/Library/Frameworks/MLCompute.framework/Versions/A/MLCompute'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

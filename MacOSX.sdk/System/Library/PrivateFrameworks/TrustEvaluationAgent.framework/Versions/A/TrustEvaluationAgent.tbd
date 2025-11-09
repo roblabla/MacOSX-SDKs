@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           07B3EE70-0D59-3388-9ECD-0B1FBC05A4B9
+    value:           EBA27420-28EB-3ED3-9163-090BC346955D
   - target:          x86_64-maccatalyst
-    value:           07B3EE70-0D59-3388-9ECD-0B1FBC05A4B9
+    value:           EBA27420-28EB-3ED3-9163-090BC346955D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B4552493-0077-3DD1-8022-4FF93F98379B
+    value:           779868C0-6BE5-3F27-98C8-481850359921
   - target:          arm64e-maccatalyst
-    value:           B4552493-0077-3DD1-8022-4FF93F98379B
+    value:           779868C0-6BE5-3F27-98C8-481850359921
 install-name:    '/System/Library/PrivateFrameworks/TrustEvaluationAgent.framework/Versions/A/TrustEvaluationAgent'
 current-version: 38
 exports:

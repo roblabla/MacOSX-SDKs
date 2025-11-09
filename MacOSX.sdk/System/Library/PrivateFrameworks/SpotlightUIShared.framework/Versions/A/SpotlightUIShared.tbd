@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           68B7F32F-37C5-3B8B-81B1-609948FDE793
+    value:           F0304335-2663-3F72-87A3-706D54BEA6FD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6C5EDA8E-FCC8-3078-9BA6-B78C27FED040
+    value:           FA9E2143-394E-304A-9D93-0009C8AB0C10
 install-name:    '/System/Library/PrivateFrameworks/SpotlightUIShared.framework/Versions/A/SpotlightUIShared'
-current-version: 41.1.1
+current-version: 42.2.1
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _SpotlightUISharedVersionNumber, _SpotlightUISharedVersionString ]

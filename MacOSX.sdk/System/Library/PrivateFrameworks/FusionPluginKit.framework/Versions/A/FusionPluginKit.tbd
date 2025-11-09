@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3C13DDE8-3F2F-3D29-8F71-B31DC493457B
+    value:           A0479554-8E13-3A37-BAC5-BFD6DDB887A1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           27B69DAF-5E80-306F-9CEE-BDECDBD033C6
+    value:           42DDCDC4-EF2F-3C26-893E-08C11D98703D
 install-name:    '/System/Library/PrivateFrameworks/FusionPluginKit.framework/Versions/A/FusionPluginKit'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

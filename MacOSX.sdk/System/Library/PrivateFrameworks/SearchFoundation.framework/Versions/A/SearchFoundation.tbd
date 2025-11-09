@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           16891A38-A72E-3408-ACCD-D738767AD9C9
+    value:           ADB4758E-9F88-3D4E-A465-78B6BEA52298
   - target:          x86_64-maccatalyst
-    value:           16891A38-A72E-3408-ACCD-D738767AD9C9
+    value:           ADB4758E-9F88-3D4E-A465-78B6BEA52298
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9C5686FF-D529-3B17-A7DC-0CE526900175
+    value:           3C811B13-8766-3426-85D0-FA16DAF9A147
   - target:          arm64e-maccatalyst
-    value:           9C5686FF-D529-3B17-A7DC-0CE526900175
+    value:           3C811B13-8766-3426-85D0-FA16DAF9A147
 install-name:    '/System/Library/PrivateFrameworks/SearchFoundation.framework/Versions/A/SearchFoundation'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -120,7 +120,7 @@ exports:
                        __SFPBWatchListButtonItemReadFrom, __SFPBWatchListCardSectionReadFrom, 
                        __SFPBWatchListItemReadFrom, __SFPBWatchNowCardSectionReadFrom, 
                        __SFPBWebCardSectionReadFrom, __SFPBWorldMapCardSectionReadFrom, 
-                       __internalDetailedRowCardSection, _kURLPropertyKeyRegexPattern ]
+                       _kURLPropertyKeyRegexPattern ]
     objc-classes:    [ SFAbstractCommand, SFActionItem, SFActivityIndicatorCardSection, 
                        SFAddToPhotosLibraryCommand, SFAirport, SFApiResults, SFAppAutoShortcutsButtonItem, 
                        SFAppAutoShortcutsItem, SFAppIconImage, SFAppLink, SFAppLinkCardSection, 

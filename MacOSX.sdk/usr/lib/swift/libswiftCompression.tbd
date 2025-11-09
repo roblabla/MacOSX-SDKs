@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7DCDA4D1-84E9-3C59-904D-B09D1728D42B
+    value:           B316D665-EB98-3F6B-BC17-86CE70838F46
   - target:          x86_64-maccatalyst
-    value:           7DCDA4D1-84E9-3C59-904D-B09D1728D42B
+    value:           B316D665-EB98-3F6B-BC17-86CE70838F46
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           06FAED16-55ED-3BB4-8598-F0BF1E016576
+    value:           7E7EB398-E959-399D-8887-157910E05723
   - target:          arm64e-maccatalyst
-    value:           06FAED16-55ED-3BB4-8598-F0BF1E016576
+    value:           7E7EB398-E959-399D-8887-157910E05723
 install-name:    '/usr/lib/swift/libswiftCompression.dylib'
 current-version: 6
 swift-abi-version: 7

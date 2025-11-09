@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C0960797-F2ED-3292-8528-33E0BBD12B7B
+    value:           55910B78-1718-30DE-BA7A-5FCEFC458B6F
   - target:          x86_64-maccatalyst
-    value:           C0960797-F2ED-3292-8528-33E0BBD12B7B
+    value:           55910B78-1718-30DE-BA7A-5FCEFC458B6F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F9A98425-83C4-3E6A-9C2E-3153BA4A9140
+    value:           A6D49D05-E7A7-3176-911A-1A7629D5DECE
   - target:          arm64e-maccatalyst
-    value:           F9A98425-83C4-3E6A-9C2E-3153BA4A9140
+    value:           A6D49D05-E7A7-3176-911A-1A7629D5DECE
 install-name:    '/System/Library/Frameworks/MailKit.framework/Versions/A/MailKit'
-current-version: 3731.200.110
+current-version: 3731.255.101
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

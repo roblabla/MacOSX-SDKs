@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           14C1BBB3-0BE2-3164-BD5B-59D76F4F96D9
+    value:           DD965108-D382-3283-BAD7-9FAB6261472D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DC2AE05B-6BBF-31F2-BD17-72BC360EF4E2
+    value:           C3345E5B-58C7-36C5-8597-3F0092F52BB1
 install-name:    '/System/Library/PrivateFrameworks/SnippetUI.framework/Versions/A/SnippetUI'
 swift-abi-version: 7
 exports:
@@ -531,7 +531,8 @@ exports:
                        '_$s9SnippetUI22VisualResponseProviderC14viewController3for4modeSo09VRXVisualD0_So06NSViewG0CXcSg10Foundation4DataV_So7VRXModeVtF', 
                        '_$s9SnippetUI22VisualResponseProviderC4view3for4mode8overloadSo09VRXVisualD0_So6NSViewCXcSg10Foundation4DataV_So7VRXModeVSitF', 
                        '_$s9SnippetUI22VisualResponseProviderC4view3for4modeAA0D4ViewVAD_AA7ContextC7contextt10Foundation4DataV_So7VRXModeVtKF', 
-                       '_$s9SnippetUI22VisualResponseProviderC5resetyyF', '_$s9SnippetUI22VisualResponseProviderC9transform5model4mode12currentIdiomSaySo11VRXResponseCG10Foundation4DataV_So7VRXModeVSo8VRXIdiomVtKFZ', 
+                       '_$s9SnippetUI22VisualResponseProviderC5resetyyF', '_$s9SnippetUI22VisualResponseProviderC7preWarm5usingySo6NSViewC_tFZ', 
+                       '_$s9SnippetUI22VisualResponseProviderC9transform5model4mode12currentIdiomSaySo11VRXResponseCG10Foundation4DataV_So7VRXModeVSo8VRXIdiomVtKFZ', 
                        '_$s9SnippetUI22VisualResponseProviderCACycfC', '_$s9SnippetUI22VisualResponseProviderCACycfc', 
                        '_$s9SnippetUI22VisualResponseProviderCMa', '_$s9SnippetUI22VisualResponseProviderCMn', 
                        '_$s9SnippetUI22VisualResponseProviderCMo', '_$s9SnippetUI22VisualResponseProviderCN', 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0EFBE8AC-91BE-3838-A20A-60B2EF348AB6
+    value:           DB6929BF-7CE6-3589-9E48-05E30939A78B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E7561F63-7AA5-388C-A42C-157D608F9D4C
+    value:           12256722-0C4B-34AC-8251-F257AB472505
 install-name:    '/System/Library/PrivateFrameworks/AppleMediaServicesUI.framework/Versions/A/AppleMediaServicesUI'
 swift-abi-version: 7
 exports:
@@ -1041,25 +1041,27 @@ exports:
                        '_$s20AppleMediaServicesUI9ToastViewVN', _AMSStringFromSize, 
                        _AMSUIDynamicClientOptionsKeyMarketingItemQueryParams, _AMSUIEngagementTaskErrorDomain, 
                        _AMSUIWebPluginPurchaseContentTypeApp ]
-    objc-classes:    [ AMSPaymentVerificationTokenResult, AMSUIAddFundsViewController, 
+    objc-classes:    [ AMSPaymentVerificationTokenResult, AMSUIAccountMessageAppearance, 
+                       AMSUIAccountMessageViewController, AMSUIAddFundsViewController, 
                        AMSUIAgeVerificationTask, AMSUIAlertDialogTask, AMSUIAppearance, 
                        AMSUIAuthKitUpdateTask, AMSUIAuthenticateTask, AMSUIAutomaticDownloadKindsSetTask, 
-                       AMSUIBannerAppearance, AMSUIBannerMessageViewController, AMSUIBubbleTipAppearance, 
-                       AMSUIBubbleTipInlineAnchorInfo, AMSUIBubbleTipViewController, 
-                       AMSUIBundleViewController, AMSUICGRectHelper, AMSUICodeRedeemerViewController, 
-                       AMSUICommonBarButtonItem, AMSUICommonButton, AMSUICommonCollectionView, 
-                       AMSUICommonCollectionViewCell, AMSUICommonControl, AMSUICommonDynamicColor, 
-                       AMSUICommonImageView, AMSUICommonLabel, AMSUICommonNavigationBar, 
-                       AMSUICommonNavigationController, AMSUICommonNavigationItem, 
-                       AMSUICommonScreen, AMSUICommonStackView, AMSUICommonTextView, 
-                       AMSUICommonView, AMSUICommonViewController, AMSUICommonVisualEffectView, 
-                       AMSUIDashboardMessageAppearance, AMSUIDashboardMessageViewController, 
-                       AMSUIDynamicImpressionItem, AMSUIDynamicImpressionMetrics, 
-                       AMSUIDynamicImpressionMetricsIdentifier, AMSUIDynamicViewController, 
-                       AMSUIEngagementTask, AMSUIEngagementTaskViewController, AMSUIImageLoader, 
-                       AMSUIInlineDialogViewController, AMSUIMarketingItemViewController, 
-                       AMSUIMessageGroup, AMSUIMessageRequest, AMSUIPaymentVerificationTokenFetchTask, 
-                       AMSUIPurchaseTask, AMSUISceneIdentifierRequest, AMSUISpyglassViewController, 
+                       AMSUIBannerAppearance, AMSUIBannerMessageViewController, AMSUIBaseMessageViewController, 
+                       AMSUIBubbleTipAppearance, AMSUIBubbleTipInlineAnchorInfo, 
+                       AMSUIBubbleTipViewController, AMSUIBundleViewController, AMSUICGRectHelper, 
+                       AMSUICodeRedeemerViewController, AMSUICommonBarButtonItem, 
+                       AMSUICommonButton, AMSUICommonCollectionView, AMSUICommonCollectionViewCell, 
+                       AMSUICommonControl, AMSUICommonDynamicColor, AMSUICommonImageView, 
+                       AMSUICommonLabel, AMSUICommonNavigationBar, AMSUICommonNavigationController, 
+                       AMSUICommonNavigationItem, AMSUICommonScreen, AMSUICommonStackView, 
+                       AMSUICommonTextView, AMSUICommonView, AMSUICommonViewController, 
+                       AMSUICommonVisualEffectView, AMSUIDashboardMessageAppearance, 
+                       AMSUIDashboardMessageViewController, AMSUIDynamicImpressionItem, 
+                       AMSUIDynamicImpressionMetrics, AMSUIDynamicImpressionMetricsIdentifier, 
+                       AMSUIDynamicViewController, AMSUIEngagementTask, AMSUIEngagementTaskViewController, 
+                       AMSUIEngagementViewController, AMSUIImageLoader, AMSUIInlineDialogViewController, 
+                       AMSUIMarketingItemViewController, AMSUIMessageGroup, AMSUIMessageRequest, 
+                       AMSUIPaymentVerificationTokenFetchTask, AMSUIPurchaseTask, 
+                       AMSUISceneIdentifierRequest, AMSUISpyglassViewController, 
                        AMSUISpyglassWrapperViewController, AMSUISubscriptionsViewController, 
                        AMSUIToastAppearance, AMSUIToastViewController, AMSUIWebAppearance, 
                        AMSUIWebViewController, AMSUIWindowRequest, _TtCV20AppleMediaServicesUI16CodeRedeemerView11Coordinator, 

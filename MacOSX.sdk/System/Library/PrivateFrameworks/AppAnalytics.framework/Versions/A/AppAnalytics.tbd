@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           343DCDF0-7473-3865-A0BF-7312FEB0E4C5
+    value:           F3DCA8F8-26CB-3C08-858A-5F599C7F6041
   - target:          x86_64-maccatalyst
-    value:           343DCDF0-7473-3865-A0BF-7312FEB0E4C5
+    value:           F3DCA8F8-26CB-3C08-858A-5F599C7F6041
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           130EF16E-87BA-3C6E-9EB2-FE0B9A47317B
+    value:           6E39C8F3-57FD-3661-A681-81021512696E
   - target:          arm64e-maccatalyst
-    value:           130EF16E-87BA-3C6E-9EB2-FE0B9A47317B
+    value:           6E39C8F3-57FD-3661-A681-81021512696E
 install-name:    '/System/Library/PrivateFrameworks/AppAnalytics.framework/Versions/A/AppAnalytics'
-current-version: 211
+current-version: 218
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -24,12 +24,12 @@ allowable-clients:
     clients:         [ AppAnalyticsTests, ArticleNotificationExtension, ArticleNotificationServiceExtension, 
                        BookAnalytics, BookCore, BookStoreUI, Books, BooksNotificationContentExtension, 
                        BooksUI, Feldspar Tests, Kinsale, KinsaleAnalytics, KinsaleUI, 
-                       MarketingNotificationExtension, NVCDemo, NanoBooks, News, 
-                       NewsAds, NewsAdsTests, NewsAnalytics, NewsAnalyticsTests, 
-                       NewsAnalyticsUpload, NewsArticles, NewsArticlesTests, NewsDES, 
-                       NewsDESTests, NewsDiagnosticExtension, NewsFeed, NewsFeedTests, 
-                       NewsFormat, NewsFormatTests, NewsInternalSettings, NewsKit, 
-                       NewsKitDemo, NewsKitTests, NewsPersonalization, NewsPersonalizationTests, 
+                       MarketingNotificationExtension, MomentsTesting, MomentsTestingAnalytics, 
+                       MomentsTestingTests, NVCDemo, NanoBooks, News, NewsAds, NewsAdsTests, 
+                       NewsAnalytics, NewsAnalyticsTests, NewsAnalyticsUpload, NewsArticles, 
+                       NewsArticlesTests, NewsDES, NewsDESTests, NewsDiagnosticExtension, 
+                       NewsFeed, NewsFeedTests, NewsFormat, NewsFormatTests, NewsInternalSettings, 
+                       NewsKit, NewsKitDemo, NewsKitTests, NewsPersonalization, NewsPersonalizationTests, 
                        NewsServices, NewsServicesInternal, NewsSettings, NewsSubscription, 
                        NewsSubscriptionTests, NewsToday, NewsUI, NewsUI2, NewsUI2Tests, 
                        NotesAnalytics, OpenInNews, Stocks, StocksAnalytics, StocksAnalyticsTests, 
@@ -215,6 +215,7 @@ exports:
                        '_$s12AppAnalytics13AccessTrackerC10leaveGroup9groupNameySSSg_tF', 
                        '_$s12AppAnalytics13AccessTrackerC10leaveGroupyyF', '_$s12AppAnalytics13AccessTrackerC12explicitTime_05startF0yxm_10Foundation4DateVtAA9EventTypeRzlF', 
                        '_$s12AppAnalytics13AccessTrackerC14explicitSubmit_10submitTime10completionyxm_10Foundation4DateVyAA05EventF6ResultOyxGcSgtAA0L4TypeRzlF', 
+                       '_$s12AppAnalytics13AccessTrackerC14explicitSubmit_10submitTime8userInfo10completionyxm_10Foundation4DateVypSgyAA05EventF6ResultOyxGcSgtAA0N4TypeRzlF', 
                        '_$s12AppAnalytics13AccessTrackerC3pop4typeyxm_tAA13DataEventTypeRzlF', 
                        '_$s12AppAnalytics13AccessTrackerC4peekyxSgxmAA13DataEventTypeRzlF', 
                        '_$s12AppAnalytics13AccessTrackerC4push4data6traits4file4lineyx_SayAA14DataEventTraitOGSSSitAA0jK4TypeRzlF', 
@@ -821,11 +822,14 @@ exports:
                        '_$s12AppAnalytics22UploadBatchEventConfigC4with021maxByteSizePerSessionD0ACSi_tF', 
                        '_$s12AppAnalytics22UploadBatchEventConfigC4with03maxC5TriesACSi_tF', 
                        '_$s12AppAnalytics22UploadBatchEventConfigC4with16debuggingEnabledACSb_tF', 
+                       '_$s12AppAnalytics22UploadBatchEventConfigC4with9directoryAC10Foundation3URLV_tF', 
                        '_$s12AppAnalytics22UploadBatchEventConfigC7defaultACvgZ', 
                        '_$s12AppAnalytics22UploadBatchEventConfigC9batchSize0G9DebuggingACSi_SbtcfC', 
                        '_$s12AppAnalytics22UploadBatchEventConfigC9batchSize0G9DebuggingACSi_SbtcfCTj', 
                        '_$s12AppAnalytics22UploadBatchEventConfigC9batchSize0G9DebuggingACSi_SbtcfCTq', 
                        '_$s12AppAnalytics22UploadBatchEventConfigC9batchSize0G9DebuggingACSi_Sbtcfc', 
+                       '_$s12AppAnalytics22UploadBatchEventConfigC9directory10Foundation3URLVvg', 
+                       '_$s12AppAnalytics22UploadBatchEventConfigC9directory10Foundation3URLVvpMV', 
                        '_$s12AppAnalytics22UploadBatchEventConfigCACycfC', '_$s12AppAnalytics22UploadBatchEventConfigCACycfc', 
                        '_$s12AppAnalytics22UploadBatchEventConfigCMa', '_$s12AppAnalytics22UploadBatchEventConfigCMn', 
                        '_$s12AppAnalytics22UploadBatchEventConfigCMo', '_$s12AppAnalytics22UploadBatchEventConfigCMu', 

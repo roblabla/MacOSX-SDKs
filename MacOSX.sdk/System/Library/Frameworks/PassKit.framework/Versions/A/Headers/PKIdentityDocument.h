@@ -30,5 +30,6 @@ NS_ASSUME_NONNULL_END
 
 
 #else
+#import <TargetConditionals.h>
 #import <PassKitCore/PKIdentityDocument.h>
 #endif

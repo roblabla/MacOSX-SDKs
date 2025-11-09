@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D95D8C17-9F95-3076-A449-FBC4D1E9AD57
+    value:           F609F029-BCD0-3A54-B48A-99B3CE8378CE
   - target:          x86_64-maccatalyst
-    value:           D95D8C17-9F95-3076-A449-FBC4D1E9AD57
+    value:           F609F029-BCD0-3A54-B48A-99B3CE8378CE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           030A8CB7-CD53-32E1-A0CC-6AC7D7DE93F1
+    value:           04185997-16D2-30DA-8691-7C82612635A3
   - target:          arm64e-maccatalyst
-    value:           030A8CB7-CD53-32E1-A0CC-6AC7D7DE93F1
+    value:           04185997-16D2-30DA-8691-7C82612635A3
 install-name:    '/usr/lib/system/libsystem_malloc.dylib'
-current-version: 409.40.6
+current-version: 409.60.6
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

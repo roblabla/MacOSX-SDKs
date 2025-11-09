@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           42113D33-461B-3E28-8803-BFAD160D7ECE
+    value:           D4D5E542-188C-39ED-B8AA-AB33A5F79590
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8BC4C0BD-676B-3B6D-BC7C-D60EB51EAC5C
+    value:           211614B1-4057-3959-8FAF-4ED43AF906C0
 install-name:    '/System/Library/PrivateFrameworks/LiftUI.framework/Versions/A/LiftUI'
 swift-abi-version: 7
 exports:

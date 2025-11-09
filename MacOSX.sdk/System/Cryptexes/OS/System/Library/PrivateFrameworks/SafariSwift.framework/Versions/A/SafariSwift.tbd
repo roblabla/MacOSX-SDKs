@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B3D5E932-E7BB-3FC8-B003-EF571B32C3A6
+    value:           A3B56BCB-657F-340D-B6F8-D8E271997708
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DBC08502-C3F1-3DB3-9640-AAB958C72953
+    value:           2F29169A-F6DA-39FB-AB90-338313028BE6
 install-name:    '/System/Library/PrivateFrameworks/SafariSwift.framework/Versions/A/SafariSwift'
 swift-abi-version: 7
 exports:

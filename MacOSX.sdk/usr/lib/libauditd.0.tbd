@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A67B0A81-7681-3F80-A671-F10B58FA91A0
+    value:           ABA6C3B6-7535-3D05-BDB7-71300230EF5B
   - target:          x86_64-maccatalyst
-    value:           A67B0A81-7681-3F80-A671-F10B58FA91A0
+    value:           ABA6C3B6-7535-3D05-BDB7-71300230EF5B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           19B1742F-240E-360A-AF0D-EB4A9B14E048
+    value:           5C79A7AC-D38B-3294-825B-88033CFB4C9D
   - target:          arm64e-maccatalyst
-    value:           19B1742F-240E-360A-AF0D-EB4A9B14E048
+    value:           5C79A7AC-D38B-3294-825B-88033CFB4C9D
 install-name:    '/usr/lib/libauditd.0.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

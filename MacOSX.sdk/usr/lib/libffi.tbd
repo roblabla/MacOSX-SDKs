@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FCF97EF0-DBAF-333C-B3DE-663C59F2D727
+    value:           ED442788-783E-39D6-B7C5-B385191E8366
   - target:          x86_64-maccatalyst
-    value:           FCF97EF0-DBAF-333C-B3DE-663C59F2D727
+    value:           ED442788-783E-39D6-B7C5-B385191E8366
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           25FB5B48-55A2-3277-88B4-A69E26B4A0DE
+    value:           5E3BF348-76B1-34E6-B546-B41B056BC92D
   - target:          arm64e-maccatalyst
-    value:           25FB5B48-55A2-3277-88B4-A69E26B4A0DE
+    value:           5E3BF348-76B1-34E6-B546-B41B056BC92D
 install-name:    '/usr/lib/libffi.dylib'
 current-version: 30
 exports:

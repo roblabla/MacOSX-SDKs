@@ -3,17 +3,18 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A4FC95BB-61A1-3B64-A9FE-C9586BA6FC07
+    value:           65276FD2-90C8-3FE6-B40D-4B3B2AC7E450
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           922AC462-25E6-3FAE-BAE4-CBD957EC5EF9
+    value:           E0146755-5982-3CC8-BFD4-DFB781A348DA
 install-name:    '/System/Library/PrivateFrameworks/CMContinuityCaptureCore.framework/Versions/A/CMContinuityCaptureCore'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CMContinityCaptureDebugLogEnabled, _CMContinuityCapture4CCIDFromControlName, 
                        _CMContinuityCaptureClamshellIsClosed, _CMContinuityCaptureClientActiveKVOKey, 
                        _CMContinuityCaptureControlNameAsyncStillCaptureConfigs, _CMContinuityCaptureControlNameAsyncStillCaptureEnabled, 
+                       _CMContinuityCaptureControlNameCenterStageRectOfInterest, 
                        _CMContinuityCaptureControlNameCinematicFramingActive, _CMContinuityCaptureControlNameCinematicFramingEnabled, 
                        _CMContinuityCaptureControlNameDeskViewCameraMode, _CMContinuityCaptureControlNameFaceDetectionEnabled, 
                        _CMContinuityCaptureControlNameFlashSupported, _CMContinuityCaptureControlNameHumanBodyDetectionEnabled, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E6DDF714-D8A2-3BAF-92BE-0DDCB98D27DA
+    value:           1F08D1A4-5475-38C1-AE13-3A642E859F5A
   - target:          x86_64-maccatalyst
-    value:           E6DDF714-D8A2-3BAF-92BE-0DDCB98D27DA
+    value:           1F08D1A4-5475-38C1-AE13-3A642E859F5A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           48955017-2C8F-3785-AEB3-8DB90A7810DD
+    value:           E8DACE29-B28A-31FF-8FD7-92DD8FAFF5A4
   - target:          arm64e-maccatalyst
-    value:           48955017-2C8F-3785-AEB3-8DB90A7810DD
+    value:           E8DACE29-B28A-31FF-8FD7-92DD8FAFF5A4
 install-name:    '/usr/lib/libexpat.1.dylib'
 current-version: 8
 compatibility-version: 7

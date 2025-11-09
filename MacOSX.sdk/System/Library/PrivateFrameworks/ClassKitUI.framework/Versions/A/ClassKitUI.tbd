@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DE18B2EB-056B-3214-8209-265E9E9B787B
+    value:           BC3E2007-2ABC-329F-9326-11211E10F322
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           92F98738-B86B-3815-B99F-870D159C81B7
+    value:           6A8DCA8F-EF14-3C76-8647-DE28885149F9
 install-name:    '/System/Library/PrivateFrameworks/ClassKitUI.framework/Versions/A/ClassKitUI'
-current-version: 148.1.9
+current-version: 148.2.6
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     objc-classes:    [ CLSNotificationBanner, CLSNotificationBannerDisplayManager ]

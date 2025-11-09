@@ -5,7 +5,7 @@ uuids:
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AA95D819-55D1-3529-B62E-314C9CA36210
+    value:           7520F36E-6E65-39FF-AB1E-EA1FBF317367
 install-name:    '/System/Library/PrivateFrameworks/FRC.framework/Versions/A/FRC'
 current-version: 146.1
 exports:

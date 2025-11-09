@@ -1,3 +1,4 @@
+#if !__has_include(<PassKitUI/PKPaymentAuthorizationViewController.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKPaymentAuthorizationViewController.h
 //  PassKit
@@ -82,5 +83,12 @@ NS_CLASS_AVAILABLE_MAC(11_0)
 
 NS_ASSUME_NONNULL_END
 
+#endif
+#endif
+
+#else
+#if !TARGET_OS_OSX 
+#import <TargetConditionals.h>
+#import <PassKitUI/PKPaymentAuthorizationViewController.h>
 #endif
 #endif

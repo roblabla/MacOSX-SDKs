@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           ACE116BA-5F70-3DCD-8EB8-1BFD8C90F60F
+    value:           60B65134-5331-3120-AED9-753B70F59AB6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           66609B03-4D52-3D0B-96DD-CD996CC1CE38
+    value:           EDB556F4-8917-3538-9B87-22FB5A8CC2D1
 install-name:    '/System/Library/PrivateFrameworks/WirelessCoexManager.framework/Versions/A/WirelessCoexManager'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

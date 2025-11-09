@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           757C74CB-C677-3600-96FC-DCC7B3F3D09F
+    value:           0736D086-092D-3B24-9FB7-E95E44734272
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C3166E4D-BD7B-3558-80BE-AAB517A5A111
+    value:           09779CA8-8A0D-3A59-9848-F94780B40A02
 install-name:    '/System/Library/PrivateFrameworks/AutoBugCaptureCore.framework/Versions/A/AutoBugCaptureCore'
 current-version: 0
 exports:

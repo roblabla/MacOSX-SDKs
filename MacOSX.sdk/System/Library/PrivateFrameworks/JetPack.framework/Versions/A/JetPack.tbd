@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9705A928-C71D-37EE-9DD4-A5283FA092EB
+    value:           BF09A7C2-D389-32AD-8020-18E9FB6162EC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1083A3B7-1601-3446-9ABB-6832309EAA9D
+    value:           F139C9C2-988A-3CC0-8D96-47F903A78628
 install-name:    '/System/Library/PrivateFrameworks/JetPack.framework/Versions/A/JetPack'
 exports:
   - targets:         [ x86_64-macos ]

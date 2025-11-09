@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6118A340-F865-3606-B779-D1CB7104C86E
+    value:           90997882-B240-3812-A92B-A590F3993A73
   - target:          x86_64-maccatalyst
-    value:           6118A340-F865-3606-B779-D1CB7104C86E
+    value:           90997882-B240-3812-A92B-A590F3993A73
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           50541CF7-DC85-3E93-8FCB-841494F45275
+    value:           E58A13AD-1F94-31B4-8C72-1F90EA83D7DE
   - target:          arm64e-maccatalyst
-    value:           50541CF7-DC85-3E93-8FCB-841494F45275
+    value:           E58A13AD-1F94-31B4-8C72-1F90EA83D7DE
 install-name:    '/usr/lib/libTelephonyIOKitDynamic.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

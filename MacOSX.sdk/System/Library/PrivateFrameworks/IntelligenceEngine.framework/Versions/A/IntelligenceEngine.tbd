@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F0D66AFE-0CFC-3F3F-BD5E-7AF00A4C7D0D
+    value:           DFD53383-68AD-3E4D-8C35-3AF28EE663E8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FDCCA78D-4B13-3FCD-AD5E-D3C54EEB8378
+    value:           859BFA59-9A7A-33B4-89DE-A1FE5AF56F53
 install-name:    '/System/Library/PrivateFrameworks/IntelligenceEngine.framework/Versions/A/IntelligenceEngine'
 current-version: 3200.51.1
 exports:

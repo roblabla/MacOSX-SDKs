@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           086EB36C-98AB-33A8-9CAE-05404440122E
+    value:           DA8FEB92-7B7F-3F8A-959F-53235AF70536
   - target:          x86_64-maccatalyst
-    value:           086EB36C-98AB-33A8-9CAE-05404440122E
+    value:           DA8FEB92-7B7F-3F8A-959F-53235AF70536
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F3B81AA7-B6F6-33FF-AA5D-0C52A8ED8715
+    value:           B6175D33-BD52-36C9-9A45-A260F6307458
   - target:          arm64e-maccatalyst
-    value:           F3B81AA7-B6F6-33FF-AA5D-0C52A8ED8715
+    value:           B6175D33-BD52-36C9-9A45-A260F6307458
 install-name:    '/System/Library/Frameworks/Contacts.framework/Versions/A/Contacts'
-current-version: 3579
+current-version: 3581.1
 compatibility-version: 0
 swift-abi-version: 7
 exports:

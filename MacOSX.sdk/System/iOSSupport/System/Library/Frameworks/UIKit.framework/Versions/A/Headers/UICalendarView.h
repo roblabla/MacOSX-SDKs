@@ -73,6 +73,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI
 API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos)
 @protocol UICalendarViewDelegate<NSObject>
 
+@optional
+
 /**
  *  @abstract Called when the calendar view is preparing decorations.
  *
@@ -82,6 +84,15 @@ API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos)
  *  @return A @c UICalendarViewDecoration to annotate the specific date. Return @c nil for no decoration.
  */
 - (nullable UICalendarViewDecoration *)calendarView:(UICalendarView *)calendarView decorationForDateComponents:(NSDateComponents *)dateComponents;
+
+/**
+ *  @abstract Called when the visible date has changed from @c previousDateComponents from user interaction.
+ *
+ *  @param calendarView The @c UICalendarView
+ *  @param previousDateComponents The previous date components before the visible date components changed.
+ */
+- (void)calendarView:(UICalendarView *)calendarView didChangeVisibleDateComponentsFrom:(NSDateComponents *)previousDateComponents API_AVAILABLE(ios(16.2));
+
 
 @end
 

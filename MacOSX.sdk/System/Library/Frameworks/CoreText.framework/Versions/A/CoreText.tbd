@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D2FE6B3D-8F39-3DA9-B5E2-55975B460A62
+    value:           6839C134-1C19-3A1B-9AB8-E9474089ACB8
   - target:          x86_64-maccatalyst
-    value:           D2FE6B3D-8F39-3DA9-B5E2-55975B460A62
+    value:           6839C134-1C19-3A1B-9AB8-E9474089ACB8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E1E0AAD7-E707-3E0D-8256-5D00F23BF3D0
+    value:           55B6D0F8-497E-3D26-A876-7DA3B80C4C7D
   - target:          arm64e-maccatalyst
-    value:           E1E0AAD7-E707-3E0D-8256-5D00F23BF3D0
+    value:           55B6D0F8-497E-3D26-A876-7DA3B80C4C7D
 install-name:    '/System/Library/Frameworks/CoreText.framework/Versions/A/CoreText'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

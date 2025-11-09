@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8B1A198E-D459-3178-BC27-4D782D0BB6BD
+    value:           C627E6CD-7AA1-37DD-A0A9-61AA11287E56
   - target:          x86_64-maccatalyst
-    value:           8B1A198E-D459-3178-BC27-4D782D0BB6BD
+    value:           C627E6CD-7AA1-37DD-A0A9-61AA11287E56
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AF4BA99F-90DC-3682-B2BB-C8DB8A775DB0
+    value:           57143558-DB58-31B0-899F-17BF9FBF230F
   - target:          arm64e-maccatalyst
-    value:           AF4BA99F-90DC-3682-B2BB-C8DB8A775DB0
+    value:           57143558-DB58-31B0-899F-17BF9FBF230F
 install-name:    '/System/Library/PrivateFrameworks/ApplePushService.framework/Versions/A/ApplePushService'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -48,9 +48,9 @@ exports:
                        _APSPersistentTopicsKey, _APSPowerLog, _APSPrettyPrintCollection, 
                        _APSPropertyListFromNSData, _APSPubSubError, _APSPubSubErrorDomain, 
                        _APSPushWakeEntitlement, _APSSafeArrayOfStrings, _APSSetXPCConnectionContext, 
-                       _APSSystemUsersKey, _APSTokenInfosKey, _APSURLTokenError, 
-                       _APSURLTokenErrorDomain, _APSUnderlyingError, _APSUsesAppLaunchStatsKey, 
-                       _APSXPCConfigureConnection, _APSXPCConnectionSetEventHandlers, 
+                       _APSSystemUsersKey, _APSTokenInfosKey, _APSTrustAllHosts, 
+                       _APSURLTokenError, _APSURLTokenErrorDomain, _APSUnderlyingError, 
+                       _APSUsesAppLaunchStatsKey, _APSXPCConfigureConnection, _APSXPCConnectionSetEventHandlers, 
                        _APSXPCCreateConnectionForService, _APSXPCCreateConnectionForServiceWithQueue, 
                        _APSXPCCreateServerConnection, _APSXPCMessageTypeKey, _kAPSTaskClientServiceName ]
     objc-classes:    [ APSAccessCheck, APSAppTokenInfo, APSChannelSubscriptionFailure, 

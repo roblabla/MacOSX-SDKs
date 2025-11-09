@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5453D9ED-F1E7-35CA-BB1A-F50FAC5AAB31
+    value:           A57F54F0-6984-39A0-AF92-2EDC099269DB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1F183924-52F5-3602-B0AD-EC84A9C3A163
+    value:           E45E6A54-9BE9-358B-88F0-47B494CCB095
 install-name:    '/System/Library/PrivateFrameworks/ShareKit.framework/Versions/A/ShareKit'
-current-version: 841.3
+current-version: 845
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _NSSharingPlugInServiceOptionAppIDKey, _NSSharingPlugInServiceOptionAppIsBackgroundOnlyKey, 

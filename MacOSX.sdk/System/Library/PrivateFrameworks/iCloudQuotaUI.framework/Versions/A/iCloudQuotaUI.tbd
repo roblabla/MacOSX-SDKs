@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4DE096F4-14D4-35F2-B7CC-223F46AA4381
+    value:           95841A74-AF65-3B8C-8A2B-9512D28A0766
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8220A458-2208-3850-8860-21BFEA34C6A9
+    value:           161F2E5E-C7D7-3144-9FBF-D6B17B7F1B32
 install-name:    '/System/Library/PrivateFrameworks/iCloudQuotaUI.framework/Versions/A/iCloudQuotaUI'
 swift-abi-version: 7
 exports:

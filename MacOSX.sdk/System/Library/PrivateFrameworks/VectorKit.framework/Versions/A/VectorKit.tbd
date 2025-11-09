@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3144E7BA-5E9C-3E88-B23C-A88BF281B13A
+    value:           8715BCE6-B271-3E88-A26D-1E8193ED9BA7
   - target:          x86_64-maccatalyst
-    value:           3144E7BA-5E9C-3E88-B23C-A88BF281B13A
+    value:           8715BCE6-B271-3E88-A26D-1E8193ED9BA7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4316A7EE-1A35-3650-8F87-4B75387026E1
+    value:           462786FD-A303-36EC-85BF-C33FB8D5FAF4
   - target:          arm64e-maccatalyst
-    value:           4316A7EE-1A35-3650-8F87-4B75387026E1
+    value:           462786FD-A303-36EC-85BF-C33FB8D5FAF4
 install-name:    '/System/Library/PrivateFrameworks/VectorKit.framework/Versions/A/VectorKit'
-current-version: 1845.20.7
+current-version: 1845.22.9
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTINSt3__110__function6__baseIFvimEEE, __ZTINSt3__117bad_function_callE, 
@@ -58,24 +58,25 @@ exports:
                        _VectorKitConfig_AllowPedestrianMnMetadata, _VectorKitConfig_BaseSSLPMEnabled, 
                        _VectorKitConfig_CleanupDestroysAllocators, _VectorKitConfig_CommandQueueResetMaxAttempts, 
                        _VectorKitConfig_DistanceToCurrentManeuverSimilarityThresholdInMeters, 
-                       _VectorKitConfig_EnableCommandQueueResetOnErrors, _VectorKitConfig_EnableServerDrapedElevatedPolygons, 
-                       _VectorKitConfig_MRLMaxEntityUpdatesPerFrame, _VectorKitConfig_ManeuverComplexityJunctionCountMin, 
-                       _VectorKitConfig_MaxEntitiesToFlexPerFrame, _VectorKitConfig_MaxNavCameraHeight, 
-                       _VectorKitConfig_MaxZoomScaleDefault, _VectorKitConfig_MetalBufferPruneThreshold, 
-                       _VectorKitConfig_MnAnimationAcceleration, _VectorKitConfig_MnBumpBackwardDuration, 
-                       _VectorKitConfig_MnBumpBackwardFriction, _VectorKitConfig_MnBumpForwardDuration, 
-                       _VectorKitConfig_MnBumpForwardFriction, _VectorKitConfig_MnIntermediateLod, 
-                       _VectorKitConfig_MnMaxSnapshotMetadataTileSearchRadius, _VectorKitConfig_MnMaxTargetPointDistance, 
-                       _VectorKitConfig_MnNearbyLodOffset, _VectorKitConfig_MnNearbyLodOffsetCount, 
-                       _VectorKitConfig_MnResourceAgePenalty, _VectorKitConfig_MnResourcePenalty, 
-                       _VectorKitConfig_MnStepSizeMaxDistance, _VectorKitConfig_MnStepSizeMaxValue, 
-                       _VectorKitConfig_MnStepSizeMinDistance, _VectorKitConfig_MnStepSizeMinValue, 
-                       _VectorKitConfig_MnStepSizePenalty, _VectorKitConfig_MnStepSizePenaltyDeadZone, 
-                       _VectorKitConfig_MnTargetLodMaxSizes, _VectorKitConfig_MnTargetPointHiddenLod, 
-                       _VectorKitConfig_MnTargetPointOmniLod, _VectorKitConfig_NavCameraBaseDisplayRate, 
-                       _VectorKitConfig_NavCameraDefaultFarClipPlaneFactor, _VectorKitConfig_NavCameraDefaultMaxDisplayRate, 
-                       _VectorKitConfig_NavCameraDynamicFramerateThresholds, _VectorKitConfig_NavCameraEnableDynamicFramerate, 
-                       _VectorKitConfig_NavCameraMaxFarClipPlaneFactor, _VectorKitConfig_NavCameraShouldUseStartLocationForPounce, 
+                       _VectorKitConfig_EnableClientDrapedVectorPolygons, _VectorKitConfig_EnableCommandQueueResetOnErrors, 
+                       _VectorKitConfig_EnableServerDrapedElevatedPolygons, _VectorKitConfig_MRLMaxEntityUpdatesPerFrame, 
+                       _VectorKitConfig_ManeuverComplexityJunctionCountMin, _VectorKitConfig_MaxEntitiesToFlexPerFrame, 
+                       _VectorKitConfig_MaxNavCameraHeight, _VectorKitConfig_MaxZoomScaleDefault, 
+                       _VectorKitConfig_MetalBufferPruneThreshold, _VectorKitConfig_MnAnimationAcceleration, 
+                       _VectorKitConfig_MnBumpBackwardDuration, _VectorKitConfig_MnBumpBackwardFriction, 
+                       _VectorKitConfig_MnBumpForwardDuration, _VectorKitConfig_MnBumpForwardFriction, 
+                       _VectorKitConfig_MnIntermediateLod, _VectorKitConfig_MnMaxSnapshotMetadataTileSearchRadius, 
+                       _VectorKitConfig_MnMaxTargetPointDistance, _VectorKitConfig_MnNearbyLodOffset, 
+                       _VectorKitConfig_MnNearbyLodOffsetCount, _VectorKitConfig_MnResourceAgePenalty, 
+                       _VectorKitConfig_MnResourcePenalty, _VectorKitConfig_MnStepSizeMaxDistance, 
+                       _VectorKitConfig_MnStepSizeMaxValue, _VectorKitConfig_MnStepSizeMinDistance, 
+                       _VectorKitConfig_MnStepSizeMinValue, _VectorKitConfig_MnStepSizePenalty, 
+                       _VectorKitConfig_MnStepSizePenaltyDeadZone, _VectorKitConfig_MnTargetLodMaxSizes, 
+                       _VectorKitConfig_MnTargetPointHiddenLod, _VectorKitConfig_MnTargetPointOmniLod, 
+                       _VectorKitConfig_NavCameraBaseDisplayRate, _VectorKitConfig_NavCameraDefaultFarClipPlaneFactor, 
+                       _VectorKitConfig_NavCameraDefaultMaxDisplayRate, _VectorKitConfig_NavCameraDynamicFramerateThresholds, 
+                       _VectorKitConfig_NavCameraEnableDynamicFramerate, _VectorKitConfig_NavCameraMaxFarClipPlaneFactor, 
+                       _VectorKitConfig_NavCameraShouldUseStartLocationForPounce, 
                        _VectorKitConfig_NavigationOffRouteTrafficDisplayEnabled, 
                        _VectorKitConfig_PuckUpdateDistanceDeltaThreshold, _VectorKitConfig_PuckUpdatePointDeltaForAnimation, 
                        _VectorKitConfig_RouteLineMaskingAllowed, _VectorKitConfig_SmallCacheSizeFactor, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           95D1DCC2-FB75-3373-971E-3116074D5943
+    value:           179852A3-0DCC-357C-879C-DF2BA96C42B4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2625FE1C-E26F-3826-99FE-2CDC479B183B
+    value:           CD14221E-7F96-3338-8CFE-27BAD3D222C9
 install-name:    '/System/Library/PrivateFrameworks/DFRDisplay.framework/Versions/A/DFRDisplay'
 current-version: 183
 compatibility-version: 0

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           00AF11BD-7B03-339D-A142-7F575A043CE6
+    value:           A5EFC49A-5E1C-3C87-9DE7-D3C883D999CC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2E2DB5A5-FAAF-3A4C-B339-DA91C564E3AF
+    value:           C0EB8804-5602-3A38-97C5-93088E0F9D27
 install-name:    '/System/Library/PrivateFrameworks/AccessibilityPlatformTranslation.framework/Versions/A/AccessibilityPlatformTranslation'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

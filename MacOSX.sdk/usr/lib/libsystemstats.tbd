@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B8BCD3C5-7783-3A97-81BF-D7A9E61E7DE0
+    value:           971A0C32-A671-396C-B3EE-95011886935D
   - target:          x86_64-maccatalyst
-    value:           B8BCD3C5-7783-3A97-81BF-D7A9E61E7DE0
+    value:           971A0C32-A671-396C-B3EE-95011886935D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D9CC1FEC-E78D-3F13-910C-BA000BB9A6C0
+    value:           EB1A2EF4-D506-341F-854E-C108E1CF4E78
   - target:          arm64e-maccatalyst
-    value:           D9CC1FEC-E78D-3F13-910C-BA000BB9A6C0
+    value:           EB1A2EF4-D506-341F-854E-C108E1CF4E78
 install-name:    '/usr/lib/libsystemstats.dylib'
 current-version: 488
 exports:

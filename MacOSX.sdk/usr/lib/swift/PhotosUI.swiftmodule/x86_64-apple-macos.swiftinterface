@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target x86_64-apple-macos13.0 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftPhotosUI -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name PhotosUI
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 511.0.170
+// swift-module-flags: -target x86_64-apple-macos13.1 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftPhotosUI -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name PhotosUI
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 520.0.240
 import Photos
 @_exported import PhotosUI
 import Swift
@@ -74,8 +74,6 @@ public struct PHPickerConfiguration : Swift.Equatable, Swift.Hashable {
   public enum Selection {
     case `default`
     case ordered
-    @available(iOS 16.0, *)
-    case people
     public static func == (a: PhotosUI.PHPickerConfiguration.Selection, b: PhotosUI.PHPickerConfiguration.Selection) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {

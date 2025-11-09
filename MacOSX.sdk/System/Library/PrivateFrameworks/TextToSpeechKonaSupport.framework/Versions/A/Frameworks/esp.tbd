@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D1AC2631-1764-3D47-B243-02DA15B97416
+    value:           0B3A5784-93A7-343D-886A-B9FB7C0DDAB8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F6D1F01C-9AF4-37D3-AE7C-4141BDCC2EC9
+    value:           FD1CD52D-C15D-3E82-8F4B-397FC9597AB4
 install-name:    '/System/Library/PrivateFrameworks/TextToSpeechKonaSupport.framework/Versions/Current/Frameworks/esp.dylib'
 current-version: 0
 compatibility-version: 0

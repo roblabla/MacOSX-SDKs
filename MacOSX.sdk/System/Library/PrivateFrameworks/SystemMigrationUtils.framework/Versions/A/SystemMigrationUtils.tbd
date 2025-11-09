@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           815209DA-BB52-3AC3-9D93-DBE25F2A44B2
+    value:           B2C663B1-6AC5-3D6B-AA07-F9CFC983C014
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           954EEB33-AED6-39CC-9DC6-1EF53C7C7CC4
+    value:           36B9FEEF-2FF6-3D87-BB00-7FDF4265FA86
 install-name:    '/System/Library/PrivateFrameworks/SystemMigrationUtils.framework/Versions/A/SystemMigrationUtils'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

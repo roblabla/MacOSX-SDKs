@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           08F2CEC3-71A0-3D24-B3AB-589FEC341EE8
+    value:           DBBE8948-102B-30E7-9022-8B79B103C5B5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           14F74261-8543-3B6D-B3BF-B11239059365
+    value:           74104F6E-422E-38A6-ABF6-612018BC0A28
 install-name:    '/System/Library/PrivateFrameworks/BiometricKitUI.framework/Versions/A/BiometricKitUI'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

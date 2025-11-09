@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1F418CCA-74AB-39E3-8130-05508399C172
+    value:           65E3FAC4-C563-3EB7-8064-46C06102C448
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2B808B6D-C3FF-35DD-B45A-8AB8C31BD86E
+    value:           A276D6C8-8FB0-35FD-9581-389C70156B96
 install-name:    '/System/Library/PrivateFrameworks/SiriInference.framework/Versions/A/SiriInference'
 current-version: 0
 compatibility-version: 0
@@ -26,6 +26,7 @@ exports:
                        '_$s12SiriOntology15TerminalElementV8IntervalV0A9InferenceE02toE0AF8DateTimeCADCyF', 
                        '_$s12SiriOntology15TerminalElementV9QualifierO0A9InferenceE02toE0AF8DateTimeCADOSgyF', 
                        '_$s12SiriOntology17AddressIntentNodeV0A9InferenceE10toLocationAD0H0VSgyF', 
+                       '_$s12SiriOntology21UsoEntity_common_DateC0A9InferenceE02toF0AD0F4TimeC0F0CSgyF', 
                        '_$s12SiriOntology22UsoEntity_common_AgentC0A9Inference14ToContactQueryADMc', 
                        '_$s12SiriOntology22UsoEntity_common_AgentC0A9Inference14ToContactQueryADWP', 
                        '_$s12SiriOntology22UsoEntity_common_AgentC0A9InferenceE14toContactQueryAD0iJ0VyF', 
@@ -3090,6 +3091,9 @@ exports:
                        '_$s13SiriInference8DateTimeC14TemporalIntentON', '_$s13SiriInference8DateTimeC14TemporalIntentOSEAAMc', 
                        '_$s13SiriInference8DateTimeC14TemporalIntentOSHAAMc', '_$s13SiriInference8DateTimeC14TemporalIntentOSQAAMc', 
                        '_$s13SiriInference8DateTimeC14TemporalIntentOSYAAMc', '_$s13SiriInference8DateTimeC14TemporalIntentOSeAAMc', 
+                       '_$s13SiriInference8DateTimeC14dateComponents10Foundation0cF0VvgTj', 
+                       '_$s13SiriInference8DateTimeC14dateComponents10Foundation0cF0VvgTq', 
+                       '_$s13SiriInference8DateTimeC14dateComponents10Foundation0cF0VvpMV', 
                        '_$s13SiriInference8DateTimeC14temporalIntentAC08TemporalF0OSgvg', 
                        '_$s13SiriInference8DateTimeC14temporalIntentAC08TemporalF0OSgvpMV', 
                        '_$s13SiriInference8DateTimeC16withDefinedValueA2C0fcD0O_tcfC', 

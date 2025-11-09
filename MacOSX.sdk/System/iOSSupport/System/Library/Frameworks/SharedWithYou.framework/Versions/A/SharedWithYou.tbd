@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           DCC9E04C-3992-3DEA-9B69-E141A4FB8DB5
+    value:           6BDAB858-4750-3385-A0C7-43DAD7812758
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           40C0E95D-C79F-3488-804F-068C5EBB6CD8
+    value:           9C7AE680-9DF5-3F83-B420-CF0FD0920A64
 install-name:    '/System/iOSSupport/System/Library/Frameworks/SharedWithYou.framework/Versions/A/SharedWithYou'
 swift-abi-version: 7
 reexported-libraries:

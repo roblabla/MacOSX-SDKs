@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AD76E374-AED4-33CE-910B-251BBF835DF4
+    value:           B77B5D41-C17D-3768-B2EA-1F59FFD5CEA7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0226A8A1-14B5-3C91-9C1A-2A36A3E10C9A
+    value:           38DF7B91-C500-3E5C-88B0-589D7CE68B90
 install-name:    '/System/Library/PrivateFrameworks/HomeKitMetrics.framework/Versions/A/HomeKitMetrics'
-current-version: 931.2.3
+current-version: 946.3.9
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _HMMSafeHomeUUIDFromLogEvent ]

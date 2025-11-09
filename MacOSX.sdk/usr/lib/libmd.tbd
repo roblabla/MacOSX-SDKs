@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           60B577C7-C755-377B-9564-8566E71499A0
+    value:           AA230746-02E1-332C-AC04-7D97C3965D58
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7C0CD775-F3C8-39BC-8E9B-4EB8D61CE755
+    value:           6D78CA2E-4C35-35B1-9DBD-149E050E9097
 install-name:    '/usr/lib/libmd.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

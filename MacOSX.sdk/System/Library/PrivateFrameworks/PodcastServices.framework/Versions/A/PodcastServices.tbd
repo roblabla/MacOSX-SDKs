@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E25B36FF-3802-30D0-B4E2-F6D526666C71
+    value:           354AA3E6-D6DD-3899-A9BC-C820B120C650
   - target:          x86_64-maccatalyst
-    value:           E25B36FF-3802-30D0-B4E2-F6D526666C71
+    value:           354AA3E6-D6DD-3899-A9BC-C820B120C650
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           58A50CC3-764D-3B56-A853-9AAAFE2898B6
+    value:           BCF7EA53-A432-3C10-9ED3-970DB4692A04
   - target:          arm64e-maccatalyst
-    value:           58A50CC3-764D-3B56-A853-9AAAFE2898B6
+    value:           BCF7EA53-A432-3C10-9ED3-970DB4692A04
 install-name:    '/System/Library/PrivateFrameworks/PodcastServices.framework/Versions/A/PodcastServices'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

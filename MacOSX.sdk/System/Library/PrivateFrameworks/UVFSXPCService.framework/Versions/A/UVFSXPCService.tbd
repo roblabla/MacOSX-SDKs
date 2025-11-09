@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7A3C05FF-F7A3-3821-9193-CF20C2DF2312
+    value:           1774F002-EFEA-30C4-B94C-50076CE342DC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CE65980C-039E-35E5-B627-64651C8EA9EA
+    value:           039C3434-C2C4-33B1-9200-5FE52E6FB2D3
 install-name:    '/System/Library/PrivateFrameworks/UVFSXPCService.framework/Versions/A/UVFSXPCService'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

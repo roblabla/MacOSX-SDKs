@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A164178C-EF33-344B-B9AE-23EC17F255D3
+    value:           63D04414-7D7B-351D-89F0-3156D36C4F18
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           52D1C408-36F8-3C69-8B24-EE61DB45A817
+    value:           194DF137-00CC-3C53-9C19-A0839015DC07
 install-name:    '/System/Library/PrivateFrameworks/SiriRequestDispatcher.framework/Versions/A/SiriRequestDispatcher'
 swift-abi-version: 7
 exports:
@@ -168,7 +168,57 @@ exports:
                        '_$s21SiriRequestDispatcher06CancelB7MessageC4fromACs7Decoder_p_tKcfc', 
                        '_$s21SiriRequestDispatcher06CancelB7MessageCMa', '_$s21SiriRequestDispatcher06CancelB7MessageCMn', 
                        '_$s21SiriRequestDispatcher06CancelB7MessageCMo', '_$s21SiriRequestDispatcher06CancelB7MessageCN', 
-                       '_$s21SiriRequestDispatcher06CancelB7MessageCfD', '_$s21SiriRequestDispatcher09StartTextB7MessageC10withSource11assistantId07sessionJ007requestJ011inputOriginACSgAA0fH0O_SS10Foundation4UUIDVSSAA05InputN0OtcfC', 
+                       '_$s21SiriRequestDispatcher06CancelB7MessageCfD', '_$s21SiriRequestDispatcher07InsightB10SummaryKeyV03nluB2IdACvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB10SummaryKeyV10bridgeNameACvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB10SummaryKeyV10returnCodeACvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB10SummaryKeyV11assistantIdACvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB10SummaryKeyV11commandNameACvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB10SummaryKeyV11isMitigatedACvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB10SummaryKeyV12endpointModeACvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB10SummaryKeyV13failureReasonACvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB10SummaryKeyV13postSucceededACvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB10SummaryKeyV14cdmSetupStatusACvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB10SummaryKeyV14mitigatedByURSACvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB10SummaryKeyV17resultCandidateIdACvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB10SummaryKeyV18messageDescriptionACvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB10SummaryKeyV20preExecutionDecisionACvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB10SummaryKeyV20serverFallbackReasonACvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB10SummaryKeyV22dismissUIForMitigationACvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB10SummaryKeyV23serverFallbackContextIdACvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB10SummaryKeyV9errorCodeACvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB10SummaryKeyV9requestIdACvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB10SummaryKeyV9sessionIdACvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB10SummaryKeyVMa', '_$s21SiriRequestDispatcher07InsightB10SummaryKeyVMn', 
+                       '_$s21SiriRequestDispatcher07InsightB10SummaryKeyVN', '_$s21SiriRequestDispatcher07InsightB13SummaryLoggerV9emitDebugyys13KeyValuePairsVyAA0dbeI0VSSGyXAF', 
+                       '_$s21SiriRequestDispatcher07InsightB13SummaryLoggerV9emitErroryys13KeyValuePairsVyAA0dbeI0VSSGyXAF', 
+                       '_$s21SiriRequestDispatcher07InsightB13SummaryLoggerVACycfC', 
+                       '_$s21SiriRequestDispatcher07InsightB13SummaryLoggerVMa', 
+                       '_$s21SiriRequestDispatcher07InsightB13SummaryLoggerVMn', 
+                       '_$s21SiriRequestDispatcher07InsightB13SummaryLoggerVN', '_$s21SiriRequestDispatcher07InsightB25SummaryMessageDescriptionO017executionMitigateB0SSvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB25SummaryMessageDescriptionO026asrResultCandidateAcceptedF14PostingFailureSSvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB25SummaryMessageDescriptionO026asrResultCandidateAcceptedF7PostingSSvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB25SummaryMessageDescriptionO03nluB18ReceivedInCdmProxySSvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB25SummaryMessageDescriptionO03nluB4SentSSvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB25SummaryMessageDescriptionO15nlCdmSetupEndedSSvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB25SummaryMessageDescriptionO17nlCdmSetupStartedSSvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB25SummaryMessageDescriptionO17nlCdmSetupSuccessSSvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB25SummaryMessageDescriptionO19nluResponseReceivedSSvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB25SummaryMessageDescriptionO26asrResultCandidateAcceptedSSvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB25SummaryMessageDescriptionO26asrResultCandidateReceivedSSvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB25SummaryMessageDescriptionO26nluResponseExecuteOnServerSSvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB25SummaryMessageDescriptionO26nluResponseReceivedFailureSSvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB25SummaryMessageDescriptionO29asrResultCandidateAcceptedMUXSSvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB25SummaryMessageDescriptionO29executionPreExecutionDecisionSSvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB25SummaryMessageDescriptionO30asrResultCandidateWithEndpointSSvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB25SummaryMessageDescriptionO32executionServerFallbackInitiatedSSvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB25SummaryMessageDescriptionO33asrResultCandidateAcceptedFailureSSvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB25SummaryMessageDescriptionO33asrResultCandidateReceivedFailureSSvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB25SummaryMessageDescriptionO36asrResultCandidateAcceptedMUXFailureSSvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB25SummaryMessageDescriptionO37asrResultCandidateWithEndpointFailureSSvgZ', 
+                       '_$s21SiriRequestDispatcher07InsightB25SummaryMessageDescriptionOMa', 
+                       '_$s21SiriRequestDispatcher07InsightB25SummaryMessageDescriptionOMn', 
+                       '_$s21SiriRequestDispatcher07InsightB25SummaryMessageDescriptionON', 
+                       '_$s21SiriRequestDispatcher09StartTextB7MessageC10withSource11assistantId07sessionJ007requestJ011inputOriginACSgAA0fH0O_SS10Foundation4UUIDVSSAA05InputN0OtcfC', 
                        '_$s21SiriRequestDispatcher09StartTextB7MessageC10withSource11assistantId07sessionJ007requestJ011inputOriginACSgAA0fH0O_SS10Foundation4UUIDVSSAA05InputN0Otcfc', 
                        '_$s21SiriRequestDispatcher09StartTextB7MessageC4fromACs7Decoder_p_tKcfC', 
                        '_$s21SiriRequestDispatcher09StartTextB7MessageC4fromACs7Decoder_p_tKcfc', 

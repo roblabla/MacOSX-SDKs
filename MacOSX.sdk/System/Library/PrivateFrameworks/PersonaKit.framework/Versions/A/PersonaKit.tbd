@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           815FB188-BCF0-328A-9773-3F65F165BD24
+    value:           C8AC9B81-7023-34B4-AB85-DFFD4D8BD17B
   - target:          x86_64-maccatalyst
-    value:           815FB188-BCF0-328A-9773-3F65F165BD24
+    value:           C8AC9B81-7023-34B4-AB85-DFFD4D8BD17B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           58358772-6D14-38D0-9B01-9FECAAFCF336
+    value:           2B8F4806-9FE0-3D88-8B6F-52CFD07B8F30
   - target:          arm64e-maccatalyst
-    value:           58358772-6D14-38D0-9B01-9FECAAFCF336
+    value:           2B8F4806-9FE0-3D88-8B6F-52CFD07B8F30
 install-name:    '/System/Library/PrivateFrameworks/PersonaKit.framework/Versions/A/PersonaKit'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

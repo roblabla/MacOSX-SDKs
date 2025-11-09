@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           272E134A-310F-3A48-87DD-60AE55292A9A
+    value:           9D38A089-1F21-3AFB-945B-E15954223D69
   - target:          x86_64-maccatalyst
-    value:           272E134A-310F-3A48-87DD-60AE55292A9A
+    value:           9D38A089-1F21-3AFB-945B-E15954223D69
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DA8E65CE-540A-3B50-8C41-71E15FCF0B2F
+    value:           DC6E5D2B-42F1-3BA9-9AAB-0459464542A7
   - target:          arm64e-maccatalyst
-    value:           DA8E65CE-540A-3B50-8C41-71E15FCF0B2F
+    value:           DC6E5D2B-42F1-3BA9-9AAB-0459464542A7
 install-name:    '/System/Library/Frameworks/VideoSubscriberAccount.framework/Versions/A/VideoSubscriberAccount'
-current-version: 453.10.10
+current-version: 453.20.8
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

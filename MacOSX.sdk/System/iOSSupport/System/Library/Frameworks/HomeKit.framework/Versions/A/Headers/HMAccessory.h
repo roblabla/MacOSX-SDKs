@@ -136,6 +136,11 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
 @property (readonly) BOOL supportsIdentify API_AVAILABLE(ios(11.3), watchos(4.3), tvos(11.3));
 
 /*!
+ *  @abstract   The node identifier used to identify the device on Apple’s Matter fabric.
+ */
+@property (nullable, readonly, copy, nonatomic) NSNumber *matterNodeID NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(16.1), watchos(9.1), tvos(16.1), macCatalyst(16.1), macos(13.0));
+
+/*!
  * @brief This method is used to change the name of the accessory.
  *
  * @param name New name for the accessory.

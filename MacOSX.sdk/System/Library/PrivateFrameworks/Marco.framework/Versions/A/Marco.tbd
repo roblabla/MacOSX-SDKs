@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           083D8C8A-C99B-3810-A771-B61D4660CBA5
+    value:           57B00A9A-D553-3B61-A4AC-4622B3DB701A
   - target:          x86_64-maccatalyst
-    value:           083D8C8A-C99B-3810-A771-B61D4660CBA5
+    value:           57B00A9A-D553-3B61-A4AC-4622B3DB701A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           864E0379-3DCB-3FA7-90C5-7648CC0B09A5
+    value:           EC1F1B69-E772-3109-BEAB-EED66D66D33A
   - target:          arm64e-maccatalyst
-    value:           864E0379-3DCB-3FA7-90C5-7648CC0B09A5
+    value:           EC1F1B69-E772-3109-BEAB-EED66D66D33A
 install-name:    '/System/Library/PrivateFrameworks/Marco.framework/Versions/A/Marco'
 current-version: 800
 exports:

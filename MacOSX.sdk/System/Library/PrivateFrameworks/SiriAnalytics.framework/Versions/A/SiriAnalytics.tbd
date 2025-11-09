@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7EDE6E40-E687-3692-8EC2-7CC00B82B301
+    value:           B8408519-448F-3DFC-B807-5CC36111554B
   - target:          x86_64-maccatalyst
-    value:           7EDE6E40-E687-3692-8EC2-7CC00B82B301
+    value:           B8408519-448F-3DFC-B807-5CC36111554B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           207492D4-F5E5-362B-90AF-2AA568CEC363
+    value:           BF173BDA-1F6D-3B41-A933-DB3B6497F7A8
   - target:          arm64e-maccatalyst
-    value:           207492D4-F5E5-362B-90AF-2AA568CEC363
+    value:           BF173BDA-1F6D-3B41-A933-DB3B6497F7A8
 install-name:    '/System/Library/PrivateFrameworks/SiriAnalytics.framework/Versions/A/SiriAnalytics'
 swift-abi-version: 7
 exports:

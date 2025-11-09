@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0279406F-2D05-332E-A8A1-A05CEC848A49
+    value:           EF3BE7D0-33DF-3D69-9BB6-03803DB5678F
   - target:          x86_64-maccatalyst
-    value:           0279406F-2D05-332E-A8A1-A05CEC848A49
+    value:           EF3BE7D0-33DF-3D69-9BB6-03803DB5678F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           148CAF24-11B6-3DD7-A60B-1B1D8EE84AD8
+    value:           96821FA7-A7F5-359F-9B7D-6E4E7390E0D0
   - target:          arm64e-maccatalyst
-    value:           148CAF24-11B6-3DD7-A60B-1B1D8EE84AD8
+    value:           96821FA7-A7F5-359F-9B7D-6E4E7390E0D0
 install-name:    '/System/Library/Frameworks/Kerberos.framework/Versions/A/Kerberos'
 current-version: 6
 compatibility-version: 5

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6CCAFA35-12AA-3151-A724-9DD14A748CF3
+    value:           82963280-A3E5-3D84-AF15-4E1850AA8AF6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5229B3A5-BAF6-304B-ABA5-E7AC92207B64
+    value:           329A0C97-2AA8-3A4E-B6BA-6E3B5A5C9372
 install-name:    '/System/Library/PrivateFrameworks/RemoteServiceDiscovery.framework/Versions/A/RemoteServiceDiscovery'
-current-version: 95.41.3
+current-version: 95.60.4
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _bridge_version_compare, _bridge_version_copy_current_string, 

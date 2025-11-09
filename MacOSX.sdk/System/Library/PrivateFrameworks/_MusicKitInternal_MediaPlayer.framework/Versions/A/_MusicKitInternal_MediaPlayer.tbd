@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D216470F-D032-3975-B67E-786CD3A283F8
+    value:           FFDC6FFC-2EAD-3F0F-8D43-44C63F2ABE0C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D2C67445-1339-351C-834B-BAFFFA826E8D
+    value:           73F9FF4A-72CC-3CAA-8E4D-77670ACA7E8A
 install-name:    '/System/Library/PrivateFrameworks/_MusicKitInternal_MediaPlayer.framework/Versions/A/_MusicKitInternal_MediaPlayer'
 swift-abi-version: 7
 exports:

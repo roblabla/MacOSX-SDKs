@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6384FB27-3D1B-3E2D-8F98-88FEA78FCF22
+    value:           2DBB98DF-EF24-329A-84DF-E45AE45542DF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AB3CE21E-3FE8-39A8-8114-7F4707A26EEF
+    value:           B45B6E6D-0CB9-3397-AC5C-052D139E99DD
 install-name:    '/System/Library/PrivateFrameworks/DMCEnrollmentLibrary.framework/Versions/A/DMCEnrollmentLibrary'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

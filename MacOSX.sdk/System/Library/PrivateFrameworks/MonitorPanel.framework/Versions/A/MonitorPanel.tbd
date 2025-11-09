@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3B098F2D-8728-3360-9512-59BE50D45989
+    value:           3154D11C-90CF-3828-8A9B-FDE5DEFAC9AC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E3F77A9F-B3E1-306A-BF58-4FFCCF940444
+    value:           594348AE-2CF6-3BCD-9BC8-4C56981B077C
 install-name:    '/System/Library/PrivateFrameworks/MonitorPanel.framework/Versions/A/MonitorPanel'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           96CAD333-8633-3FFA-A9B2-064255F47652
+    value:           0B29DD5C-54A8-39FF-936D-95AF6743A1B7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1774CE45-AB41-39A7-B24D-D0B99FE32893
+    value:           5F7625CB-1480-314F-B5AA-B640BF958218
 install-name:    '/usr/lib/libcmark-gfm.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

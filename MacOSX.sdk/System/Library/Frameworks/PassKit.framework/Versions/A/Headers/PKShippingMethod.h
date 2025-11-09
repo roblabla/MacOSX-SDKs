@@ -37,5 +37,6 @@ NS_ASSUME_NONNULL_END
 #endif // __PKSHIPPINGMETHOD_H__
 
 #else
+#import <TargetConditionals.h>
 #import <PassKitCore/PKShippingMethod.h>
 #endif

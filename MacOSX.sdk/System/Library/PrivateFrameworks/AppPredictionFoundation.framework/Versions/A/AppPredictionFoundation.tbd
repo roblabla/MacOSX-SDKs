@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C6D8FD18-2B41-36A4-AD6B-2AF470D72006
+    value:           422B210D-70B6-35A3-BD68-898491A991D6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7C875B82-F9E0-3587-94BF-BDC61150C438
+    value:           10A64FA6-1A3A-3769-A3EA-4CEA365A5A57
 install-name:    '/System/Library/PrivateFrameworks/AppPredictionFoundation.framework/Versions/A/AppPredictionFoundation'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -36,7 +36,8 @@ exports:
                        __kATXWidgetOnboardingRemovedDateDefaultsKey, __kATXWidgetOnboardingResultDefaultsKey, 
                        __kATXWidgetOnboardingSuggestionsWerePersonalizedDefaultsKey, 
                        _kATXColoringBookWasSeenForModeIdentifiersKey, _kATXFaceGallerySeenKey, 
-                       _kATXFaceGallerySourceOverrideKey, _kATXMockDescriptorScoresKey ]
+                       _kATXFaceGallerySourceOverrideKey, _kATXMockDescriptorScoresKey, 
+                       _kATXPosterConfigurationsLastActiveDatesInPastWeekKey ]
     objc-classes:    [ ATXBMBookmark, ATXBMStoreEvent, ATXGenericFileBasedCache, 
                        ATXMemoryPressureMonitor, ATXPETEventTracker2Logger, ATXPaths, 
                        ATXReservoirSampler, ATXRingBuffer, ATXSecureCodedTuple, ATXSigtermListener, 

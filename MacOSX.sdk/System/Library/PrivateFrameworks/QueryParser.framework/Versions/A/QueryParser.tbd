@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DE5748E5-4B7A-3B63-8EA4-337144C4C82D
+    value:           AE740897-7DDC-344B-9398-467206653023
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FDCC6BF5-1835-3F70-B0F1-F300346E6538
+    value:           A5C58B03-9033-34BE-8B90-4523FE6A97AE
 install-name:    '/System/Library/PrivateFrameworks/QueryParser.framework/Versions/A/QueryParser'
-current-version: 43.4
+current-version: 43.5
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _QPParseAttributeDateKey, _QPParseAttributeRecipientKey, _QPParseAttributeSenderKey, 

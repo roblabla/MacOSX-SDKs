@@ -55,5 +55,6 @@ NS_ASSUME_NONNULL_END
 
 
 #else
+#import <TargetConditionals.h>
 #import <PassKitCore/PKRecurringPaymentRequest.h>
 #endif

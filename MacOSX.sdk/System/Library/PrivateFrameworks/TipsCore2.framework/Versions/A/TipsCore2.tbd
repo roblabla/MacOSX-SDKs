@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B2DD818B-5824-35AD-9569-BDF677E79624
+    value:           00822E1D-658E-32EB-83BB-B1BD7B8D881A
   - target:          x86_64-maccatalyst
-    value:           B2DD818B-5824-35AD-9569-BDF677E79624
+    value:           00822E1D-658E-32EB-83BB-B1BD7B8D881A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3D7AE0C8-2AC4-38B4-98CB-3D6D6D1685D8
+    value:           7E7A9709-82F8-30E3-A7A0-E0636E523FD5
   - target:          arm64e-maccatalyst
-    value:           3D7AE0C8-2AC4-38B4-98CB-3D6D6D1685D8
+    value:           7E7A9709-82F8-30E3-A7A0-E0636E523FD5
 install-name:    '/System/Library/PrivateFrameworks/TipsCore2.framework/Versions/A/TipsCore2'
-current-version: 26
+current-version: 28
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -284,8 +284,7 @@ exports:
                        '_$s9TipsCore214ColorReferenceVMa', '_$s9TipsCore214ColorReferenceVMn', 
                        '_$s9TipsCore214ColorReferenceVN', '_$s9TipsCore214ColorReferenceVSEAAMc', 
                        '_$s9TipsCore214ColorReferenceVSQAAMc', '_$s9TipsCore214ColorReferenceVSeAAMc', 
-                       '_$s9TipsCore214DatastoreProxyMp', '_$s9TipsCore214DatastoreProxyP11clearRecordyyFTj', 
-                       '_$s9TipsCore214DatastoreProxyP11clearRecordyyFTq', '_$s9TipsCore214DatastoreProxyP11recordValueyqd__Sgs7KeyPathCy10RecordTypeQzqd__GlFTj', 
+                       '_$s9TipsCore214DatastoreProxyMp', '_$s9TipsCore214DatastoreProxyP11recordValueyqd__Sgs7KeyPathCy10RecordTypeQzqd__GlFTj', 
                        '_$s9TipsCore214DatastoreProxyP11recordValueyqd__Sgs7KeyPathCy10RecordTypeQzqd__GlFTq', 
                        '_$s9TipsCore214DatastoreProxyP15transientValuesSDys14PartialKeyPathCy10RecordTypeQzGypGSgvMTj', 
                        '_$s9TipsCore214DatastoreProxyP15transientValuesSDys14PartialKeyPathCy10RecordTypeQzGypGSgvMTq', 
@@ -705,8 +704,8 @@ exports:
                        '_$s9TipsCore29TipRecordC7messageAA7MessageCvpMV', '_$s9TipsCore29TipRecordC7tipInfoSDySSs11AnyHashableVGvpMV', 
                        '_$s9TipsCore29TipRecordCMa', '_$s9TipsCore29TipRecordCMn', 
                        '_$s9TipsCore29TipRecordCMo', '_$s9TipsCore29TipRecordCN', 
-                       '_$s9TipsCore29TipRecordCfD', '_$s9TipsCore29TipStatusO11isEligibileSbvg', 
-                       '_$s9TipsCore29TipStatusO11isEligibileSbvpMV', '_$s9TipsCore29TipStatusO12defaultValueACvgZ', 
+                       '_$s9TipsCore29TipRecordCfD', '_$s9TipsCore29TipStatusO10isEligibleSbvg', 
+                       '_$s9TipsCore29TipStatusO10isEligibleSbvpMV', '_$s9TipsCore29TipStatusO12defaultValueACvgZ', 
                        '_$s9TipsCore29TipStatusO7pendingyA2CmFWC', '_$s9TipsCore29TipStatusO8rawValueACSgSi_tcfC', 
                        '_$s9TipsCore29TipStatusO8rawValueSivg', '_$s9TipsCore29TipStatusO8rawValueSivpMV', 
                        '_$s9TipsCore29TipStatusO9availableyA2CmFWC', '_$s9TipsCore29TipStatusO9dismissedyA2CmFWC', 

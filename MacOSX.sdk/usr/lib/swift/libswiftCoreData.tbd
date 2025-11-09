@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           89CA5D85-F083-3CF2-8FAF-89EBAD68E9C0
+    value:           3F3B71D8-0B51-378B-BDE5-9BF9CF3A0588
   - target:          x86_64-maccatalyst
-    value:           89CA5D85-F083-3CF2-8FAF-89EBAD68E9C0
+    value:           3F3B71D8-0B51-378B-BDE5-9BF9CF3A0588
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           80CC63F4-1383-3555-871D-E0A150909E05
+    value:           2E1D4717-BFFC-33ED-BD69-65B0BCCC8EBC
   - target:          arm64e-maccatalyst
-    value:           80CC63F4-1383-3555-871D-E0A150909E05
+    value:           2E1D4717-BFFC-33ED-BD69-65B0BCCC8EBC
 install-name:    '/usr/lib/swift/libswiftCoreData.dylib'
 current-version: 25
 reexported-libraries:

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           A22CF9D3-FF72-39FF-ABF9-E3176C46340E
+    value:           CB0A2487-E3B0-3D71-A907-CF0FE2C6639B
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           F9546AC7-7E7A-3C83-B917-FBEED38A386B
+    value:           2E334D65-D906-3781-B8C0-703C7A806EC3
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_GroupActivities_UIKit.framework/Versions/A/_GroupActivities_UIKit'
 swift-abi-version: 7
 exports:
@@ -25,6 +25,13 @@ exports:
                        '_$s22_GroupActivities_UIKit0A21ActivitySharingResultOSQAAMc', 
                        '_$s22_GroupActivities_UIKit0A25ActivitySharingControllerC011dismissViewF06resultyAA0adE6ResultO_tF', 
                        '_$s22_GroupActivities_UIKit0A25ActivitySharingControllerC011dismissViewF06resultyAA0adE6ResultO_tFfA_', 
+                       '_$s22_GroupActivities_UIKit0A25ActivitySharingControllerC011startStagedD0SbvMTj', 
+                       '_$s22_GroupActivities_UIKit0A25ActivitySharingControllerC011startStagedD0SbvMTq', 
+                       '_$s22_GroupActivities_UIKit0A25ActivitySharingControllerC011startStagedD0SbvgTj', 
+                       '_$s22_GroupActivities_UIKit0A25ActivitySharingControllerC011startStagedD0SbvgTq', 
+                       '_$s22_GroupActivities_UIKit0A25ActivitySharingControllerC011startStagedD0SbvpMV', 
+                       '_$s22_GroupActivities_UIKit0A25ActivitySharingControllerC011startStagedD0SbvsTj', 
+                       '_$s22_GroupActivities_UIKit0A25ActivitySharingControllerC011startStagedD0SbvsTq', 
                        '_$s22_GroupActivities_UIKit0A25ActivitySharingControllerC10controllerAA012PeoplePickerF0Cvg', 
                        '_$s22_GroupActivities_UIKit0A25ActivitySharingControllerC10controllerAA012PeoplePickerF0CvpMV', 
                        '_$s22_GroupActivities_UIKit0A25ActivitySharingControllerC11resultValueAA0adE6ResultOSgvMTj', 
@@ -168,6 +175,14 @@ exports:
                        '_$s22_GroupActivities_UIKit22PeoplePickerControllerC19shareSheetSessionIDSSSgvpWvd', 
                        '_$s22_GroupActivities_UIKit22PeoplePickerControllerC19shareSheetSessionIDSSSgvs', 
                        '_$s22_GroupActivities_UIKit22PeoplePickerControllerC19shareSheetSessionIDSSSgvsTq', 
+                       '_$s22_GroupActivities_UIKit22PeoplePickerControllerC19startStagedActivitySbvM', 
+                       '_$s22_GroupActivities_UIKit22PeoplePickerControllerC19startStagedActivitySbvMTq', 
+                       '_$s22_GroupActivities_UIKit22PeoplePickerControllerC19startStagedActivitySbvg', 
+                       '_$s22_GroupActivities_UIKit22PeoplePickerControllerC19startStagedActivitySbvgTq', 
+                       '_$s22_GroupActivities_UIKit22PeoplePickerControllerC19startStagedActivitySbvpMV', 
+                       '_$s22_GroupActivities_UIKit22PeoplePickerControllerC19startStagedActivitySbvpWvd', 
+                       '_$s22_GroupActivities_UIKit22PeoplePickerControllerC19startStagedActivitySbvs', 
+                       '_$s22_GroupActivities_UIKit22PeoplePickerControllerC19startStagedActivitySbvsTq', 
                        '_$s22_GroupActivities_UIKit22PeoplePickerControllerC22handleServerDisconnectyyF', 
                        '_$s22_GroupActivities_UIKit22PeoplePickerControllerC24createActivityIfPossible10completionSbySbc_tF', 
                        '_$s22_GroupActivities_UIKit22PeoplePickerControllerC24createActivityIfPossible10completionSbySbc_tFTq', 

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B97B72F2-FB58-35C9-AB2F-8D9D979430ED
+    value:           A8B8BD1D-7D57-3E25-9C3B-6B2DA6604513
   - target:          x86_64-maccatalyst
-    value:           B97B72F2-FB58-35C9-AB2F-8D9D979430ED
+    value:           A8B8BD1D-7D57-3E25-9C3B-6B2DA6604513
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B498F66D-83CD-3A2E-BAAD-EA34211DDEC0
+    value:           14CADF19-6E2C-3E22-97A3-600026F83A4C
   - target:          arm64e-maccatalyst
-    value:           B498F66D-83CD-3A2E-BAAD-EA34211DDEC0
+    value:           14CADF19-6E2C-3E22-97A3-600026F83A4C
 install-name:    '/System/Library/PrivateFrameworks/MIL.framework/Versions/A/MIL'
-current-version: 4.28.3
+current-version: 4.28.4
 compatibility-version: 4.28
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DDA7D38F-34F8-3856-A1DC-F160E505EF7E
+    value:           160A7258-346E-30B6-9CED-EF3AC7D379E0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0671CD0E-C9A1-3962-9AC1-A4D1AC795501
+    value:           C0AA3B10-CFA3-327A-A1D8-658E979D6D80
 install-name:    '/System/Library/PrivateFrameworks/PerformanceTrace.framework/Versions/A/PerformanceTrace'
 current-version: 139.3
 exports:

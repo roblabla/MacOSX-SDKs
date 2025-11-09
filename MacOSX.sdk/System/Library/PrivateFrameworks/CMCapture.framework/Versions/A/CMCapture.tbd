@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           31D6E91B-2012-3B53-84F9-4008A287FC6A
+    value:           4419D103-C0FC-3899-92CC-68F9C5E1F2B7
   - target:          x86_64-maccatalyst
-    value:           31D6E91B-2012-3B53-84F9-4008A287FC6A
+    value:           4419D103-C0FC-3899-92CC-68F9C5E1F2B7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FD4F2AEE-FCA2-3B6D-A5E9-A30E4F2744A2
+    value:           A5575412-7B88-37A5-96CE-EC9B3CE40E58
   - target:          arm64e-maccatalyst
-    value:           FD4F2AEE-FCA2-3B6D-A5E9-A30E4F2744A2
+    value:           A5575412-7B88-37A5-96CE-EC9B3CE40E58
 install-name:    '/System/Library/PrivateFrameworks/CMCapture.framework/Versions/A/CMCapture'
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -710,11 +710,12 @@ exports:
                        _kFigCaptureSourceProperty_AutoTorchEnabled, _kFigCaptureSourceProperty_AvailableMetadataKeyGroups, 
                        _kFigCaptureSourceProperty_BatteryPackAccessoryConnected, 
                        _kFigCaptureSourceProperty_BravoCameraSelectionConfiguration, 
-                       _kFigCaptureSourceProperty_CameraPoseMatrix, _kFigCaptureSourceProperty_CinematicVideoFocusOperation, 
-                       _kFigCaptureSourceProperty_Clock, _kFigCaptureSourceProperty_ClockType, 
-                       _kFigCaptureSourceProperty_Connected, _kFigCaptureSourceProperty_DeviceWhiteBalanceGains, 
-                       _kFigCaptureSourceProperty_DigitalFlashExposureTimes, _kFigCaptureSourceProperty_DigitalFlashMode, 
-                       _kFigCaptureSourceProperty_DigitalFlashStatus, _kFigCaptureSourceProperty_DisplayPipeRequiresPacked10BitPixelFormatForP3Input, 
+                       _kFigCaptureSourceProperty_CameraPoseMatrix, _kFigCaptureSourceProperty_CenterStageRectOfInterest, 
+                       _kFigCaptureSourceProperty_CinematicVideoFocusOperation, _kFigCaptureSourceProperty_Clock, 
+                       _kFigCaptureSourceProperty_ClockType, _kFigCaptureSourceProperty_Connected, 
+                       _kFigCaptureSourceProperty_DeviceWhiteBalanceGains, _kFigCaptureSourceProperty_DigitalFlashExposureTimes, 
+                       _kFigCaptureSourceProperty_DigitalFlashMode, _kFigCaptureSourceProperty_DigitalFlashStatus, 
+                       _kFigCaptureSourceProperty_DisplayPipeRequiresPacked10BitPixelFormatForP3Input, 
                        _kFigCaptureSourceProperty_EligibleFallbackCaptureSources, 
                        _kFigCaptureSourceProperty_ExposureDuration, _kFigCaptureSourceProperty_ExposureOperation, 
                        _kFigCaptureSourceProperty_ExposureTargetBias, _kFigCaptureSourceProperty_ExposureTargetBiasOperation, 
@@ -783,8 +784,8 @@ exports:
                        _kFigCaptureStreamNotification_StreamStarted, _kFigCaptureStreamNotification_StreamStopped, 
                        _kFigCaptureStreamNotification_SuspendedByUser, _kFigCaptureStreamProperty_AutoAENow, 
                        _kFigCaptureStreamProperty_AutoFocusNow, _kFigCaptureStreamProperty_BufferQueue, 
-                       _kFigCaptureStreamProperty_CMIOBackgroundBlurEnabled, _kFigCaptureStreamProperty_CMIOCinematicFramingEnabled, 
-                       _kFigCaptureStreamProperty_CMIOCompanionDeskViewDeviceUUID, 
+                       _kFigCaptureStreamProperty_CMIOBackgroundBlurEnabled, _kFigCaptureStreamProperty_CMIOCenterStageRectOfInterest, 
+                       _kFigCaptureStreamProperty_CMIOCinematicFramingEnabled, _kFigCaptureStreamProperty_CMIOCompanionDeskViewDeviceUUID, 
                        _kFigCaptureStreamProperty_CMIOCreatorID, _kFigCaptureStreamProperty_CMIODeviceID, 
                        _kFigCaptureStreamProperty_CMIOFlashSupported, _kFigCaptureStreamProperty_CMIOLocation, 
                        _kFigCaptureStreamProperty_CMIOSpecialDeviceType, _kFigCaptureStreamProperty_CMIOStreamID, 
@@ -988,17 +989,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3F7A5F58-5279-31F1-8025-331CD2021915
+    value:           0532CDF8-BC38-355E-9C4A-D2562301DE04
   - target:          x86_64-maccatalyst
-    value:           3F7A5F58-5279-31F1-8025-331CD2021915
+    value:           0532CDF8-BC38-355E-9C4A-D2562301DE04
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0C4FE595-9D2E-37B4-B6A0-8D26266348BE
+    value:           2E08B8B7-8EC5-3EF1-9890-FAC1E083C823
   - target:          arm64e-maccatalyst
-    value:           0C4FE595-9D2E-37B4-B6A0-8D26266348BE
+    value:           2E08B8B7-8EC5-3EF1-9890-FAC1E083C823
 install-name:    '/System/Library/PrivateFrameworks/CMCaptureCore.framework/Versions/A/CMCaptureCore'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -1218,6 +1219,7 @@ exports:
                        _kFigCaptureSampleBufferAttachmentKey_VisionDataBuffer, _kFigCaptureSampleBufferAttachmentValue_MPFEncodingMode, 
                        _kFigCaptureSampleBufferAttachmentValue_MPFSampleBuffersArray, 
                        _kFigCaptureSampleBufferMetadata_AdditionalPreviewZoomToApply, 
+                       _kFigCaptureSampleBufferMetadata_AppliedZoomFactorWithoutFudge, 
                        _kFigCaptureSampleBufferMetadata_ExifOrientation, _kFigCaptureSampleBufferMetadata_ExposureDurationType, 
                        _kFigCaptureSampleBufferMetadata_ExposureMode, _kFigCaptureSampleBufferMetadata_FinalCropRect, 
                        _kFigCaptureSampleBufferMetadata_FinalCropRectFromSource, 

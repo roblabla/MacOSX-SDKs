@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D37EB93A-3154-36B0-BA75-342DED04D573
+    value:           12691B5C-B1CE-349F-9ADD-E315C5FDA324
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           78912BCB-8529-37A9-825D-AC620B699A0D
+    value:           8168BDFD-1622-3473-865A-298F385345A5
 install-name:    '/System/Library/PrivateFrameworks/MDMClientLibrary.framework/Versions/A/MDMClientLibrary'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -126,11 +126,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           97B973E9-E618-3994-B5D2-F78390C525DC
+    value:           9EB3E6F9-C56A-3A49-895D-EA63C9537AC8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           35CE45BE-5973-3545-8A03-A37537F2C81B
+    value:           D8895D46-775B-323D-8C95-BE1995719C6B
 install-name:    '/System/Library/PrivateFrameworks/DEPClientLibrary.framework/Versions/A/DEPClientLibrary'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

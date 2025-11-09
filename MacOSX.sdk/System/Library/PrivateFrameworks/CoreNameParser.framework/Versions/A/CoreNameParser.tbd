@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6EC31464-5F2A-335C-BAD3-86341A5AC6DE
+    value:           2E11B6A7-0F24-3DBE-B0AF-695969CD0C43
   - target:          x86_64-maccatalyst
-    value:           6EC31464-5F2A-335C-BAD3-86341A5AC6DE
+    value:           2E11B6A7-0F24-3DBE-B0AF-695969CD0C43
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1705DA38-1927-3493-A66B-638E99FD3A9E
+    value:           E89A2158-C459-34EB-B38B-A738B9FCEE55
   - target:          arm64e-maccatalyst
-    value:           1705DA38-1927-3493-A66B-638E99FD3A9E
+    value:           E89A2158-C459-34EB-B38B-A738B9FCEE55
 install-name:    '/System/Library/PrivateFrameworks/CoreNameParser.framework/Versions/A/CoreNameParser'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

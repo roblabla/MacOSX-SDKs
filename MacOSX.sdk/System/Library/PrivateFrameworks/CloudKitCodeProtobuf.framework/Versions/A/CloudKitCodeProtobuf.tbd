@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C1CC0D45-5563-3D58-AFEE-370C2F5389C8
+    value:           782E595B-D97E-382C-B0AA-4317547A79AE
   - target:          x86_64-maccatalyst
-    value:           C1CC0D45-5563-3D58-AFEE-370C2F5389C8
+    value:           782E595B-D97E-382C-B0AA-4317547A79AE
   - target:          arm64e-macos
-    value:           6F48AF57-46DD-333B-933A-9EEE4A85B187
+    value:           668B68DA-F3FD-33A3-ADF4-56F8378EA0D2
   - target:          arm64e-maccatalyst
-    value:           6F48AF57-46DD-333B-933A-9EEE4A85B187
+    value:           668B68DA-F3FD-33A3-ADF4-56F8378EA0D2
 install-name:    '/System/Library/PrivateFrameworks/CloudKitCodeProtobuf.framework/Versions/A/CloudKitCodeProtobuf'
-current-version: 2020.16
+current-version: 2030.20
 swift-abi-version: 7
 ...

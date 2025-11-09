@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           76672C78-E9D6-3404-A899-AD2CB01688C3
+    value:           7F9C341F-EFC1-3C3E-A257-B8425E92AE81
   - target:          x86_64-maccatalyst
-    value:           76672C78-E9D6-3404-A899-AD2CB01688C3
+    value:           7F9C341F-EFC1-3C3E-A257-B8425E92AE81
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8BCB7BA4-FC0F-353F-AD9A-DBB595FA42FC
+    value:           0A098825-F38B-344D-8D19-19E7158DDEDB
   - target:          arm64e-maccatalyst
-    value:           8BCB7BA4-FC0F-353F-AD9A-DBB595FA42FC
+    value:           0A098825-F38B-344D-8D19-19E7158DDEDB
 install-name:    '/System/Library/PrivateFrameworks/BookFoundation.framework/Versions/A/BookFoundation'
 swift-abi-version: 7
 exports:

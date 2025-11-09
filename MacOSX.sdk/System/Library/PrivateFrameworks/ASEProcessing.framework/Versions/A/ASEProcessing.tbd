@@ -5,7 +5,7 @@ uuids:
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D5891BCA-348B-3160-A012-6A48F9397EE7
+    value:           44ED23AD-E4E2-3B10-B123-BE215315009E
 install-name:    '/System/Library/PrivateFrameworks/ASEProcessing.framework/Versions/A/ASEProcessing'
 exports:
   - targets:         [ arm64-macos, arm64e-macos ]

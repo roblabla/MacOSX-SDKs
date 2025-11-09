@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EC77378F-BE7B-31D0-B6B0-ED4098DDCBE8
+    value:           8A22C5C6-618D-3725-9BA7-7E41E2FFFD79
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           02A0B134-8D3B-3861-A06B-59E2D31D4D73
+    value:           C4364FA4-C9AE-3CCD-8689-42E9C52170A7
 install-name:    '/System/Library/PrivateFrameworks/ProductKit.framework/Versions/A/ProductKit'
 swift-abi-version: 7
 exports:

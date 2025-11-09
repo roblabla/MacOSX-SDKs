@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7A8ECB04-D500-30EB-96BE-ABC7EE13AB4D
+    value:           11919D75-4063-310C-B100-838F6852FE33
   - target:          x86_64-maccatalyst
-    value:           7A8ECB04-D500-30EB-96BE-ABC7EE13AB4D
+    value:           11919D75-4063-310C-B100-838F6852FE33
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4367A9AA-7B6A-3BFF-8546-1C3127B471BA
+    value:           37BFFA41-77C9-3DFE-9702-F1F03AC5E3F3
   - target:          arm64e-maccatalyst
-    value:           4367A9AA-7B6A-3BFF-8546-1C3127B471BA
+    value:           37BFFA41-77C9-3DFE-9702-F1F03AC5E3F3
 install-name:    '/usr/lib/libdns_services.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -26,13 +26,14 @@ exports:
                        _advertising_proxy_flush_entries, _advertising_proxy_get_service_list, 
                        _advertising_proxy_get_ula, _advertising_proxy_ref_dealloc, 
                        _advertising_proxy_regenerate_ula, _advertising_proxy_remove_prefix, 
-                       _advertising_proxy_start_dropping_push_connections, _advertising_proxy_stop, 
-                       _advertising_proxy_unblock_service, _advertising_proxy_undrop_srpl_advertisement, 
-                       _advertising_proxy_undrop_srpl_connection, _dnssd_cname_array_get_cname, 
-                       _dnssd_cname_array_get_count, _dnssd_copy_description, _dnssd_getaddrinfo_activate, 
-                       _dnssd_getaddrinfo_add_resolver_uuid, _dnssd_getaddrinfo_create, 
-                       _dnssd_getaddrinfo_invalidate, _dnssd_getaddrinfo_prohibit_encrypted_dns, 
-                       _dnssd_getaddrinfo_result_enumerate_alpn_values, _dnssd_getaddrinfo_result_enumerate_service_address_hints, 
+                       _advertising_proxy_start_breaking_time_validation, _advertising_proxy_start_dropping_push_connections, 
+                       _advertising_proxy_stop, _advertising_proxy_unblock_service, 
+                       _advertising_proxy_undrop_srpl_advertisement, _advertising_proxy_undrop_srpl_connection, 
+                       _dnssd_cname_array_get_cname, _dnssd_cname_array_get_count, 
+                       _dnssd_copy_description, _dnssd_getaddrinfo_activate, _dnssd_getaddrinfo_add_resolver_uuid, 
+                       _dnssd_getaddrinfo_create, _dnssd_getaddrinfo_invalidate, 
+                       _dnssd_getaddrinfo_prohibit_encrypted_dns, _dnssd_getaddrinfo_result_enumerate_alpn_values, 
+                       _dnssd_getaddrinfo_result_enumerate_service_address_hints, 
                        _dnssd_getaddrinfo_result_get_actual_hostname, _dnssd_getaddrinfo_result_get_address, 
                        _dnssd_getaddrinfo_result_get_authentication_tag, _dnssd_getaddrinfo_result_get_cnames, 
                        _dnssd_getaddrinfo_result_get_doh_path, _dnssd_getaddrinfo_result_get_doh_uri, 

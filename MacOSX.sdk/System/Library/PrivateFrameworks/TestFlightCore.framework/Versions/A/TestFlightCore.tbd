@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1E75687D-5EC4-3C52-8B0E-C4260EC50F42
+    value:           C0A79995-3A8F-399E-999C-38975C5F3B6F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           51F02CE0-FAB0-3F40-AB15-2AA38C950007
+    value:           8CAF6C7D-404B-341C-AC7B-2D89A7593E8C
 install-name:    '/System/Library/PrivateFrameworks/TestFlightCore.framework/Versions/A/TestFlightCore'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

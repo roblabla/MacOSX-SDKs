@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           719248CA-D5FE-32A5-A22B-2F8D07EEE85A
+    value:           FFB49AB5-BF1A-3979-93AE-FF649E3F7A56
   - target:          x86_64-maccatalyst
-    value:           719248CA-D5FE-32A5-A22B-2F8D07EEE85A
+    value:           FFB49AB5-BF1A-3979-93AE-FF649E3F7A56
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D97AD2FE-38AE-3039-9EB6-5F0F2BEA440F
+    value:           9D656F07-730D-353E-80F8-1D935C60DBE5
   - target:          arm64e-maccatalyst
-    value:           D97AD2FE-38AE-3039-9EB6-5F0F2BEA440F
+    value:           9D656F07-730D-353E-80F8-1D935C60DBE5
 install-name:    '/System/Library/PrivateFrameworks/SidecarCore.framework/Versions/A/SidecarCore'
-current-version: 279
+current-version: 280.3
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

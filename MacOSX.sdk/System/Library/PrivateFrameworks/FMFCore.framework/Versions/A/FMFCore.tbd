@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           178A5C04-DEDF-3634-8954-B968B4ACABAB
+    value:           35DC2730-3715-3F42-B7F2-2484F6797209
   - target:          x86_64-maccatalyst
-    value:           178A5C04-DEDF-3634-8954-B968B4ACABAB
+    value:           35DC2730-3715-3F42-B7F2-2484F6797209
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           14EE1E43-2EFF-3133-8E41-90D7905BC2A4
+    value:           156DA381-C136-3A31-B32A-7B227AF5E14F
   - target:          arm64e-maccatalyst
-    value:           14EE1E43-2EFF-3133-8E41-90D7905BC2A4
+    value:           156DA381-C136-3A31-B32A-7B227AF5E14F
 install-name:    '/System/Library/PrivateFrameworks/FMFCore.framework/Versions/A/FMFCore'
 swift-abi-version: 7
 allowable-clients:
@@ -126,7 +126,7 @@ exports:
                        '_$s7FMFCore10FMFManagerC19myUnshiftedLocationAA11FMFLocationVSgvgTj', 
                        '_$s7FMFCore10FMFManagerC19myUnshiftedLocationAA11FMFLocationVSgvgTq', 
                        '_$s7FMFCore10FMFManagerC19myUnshiftedLocationAA11FMFLocationVSgvpMV', 
-                       '_$s7FMFCore10FMFManagerC20pendingDeleteFriendsSayAA9FMFFriendVGvgTj', 
+                       '_$s7FMFCore10FMFManagerC19willSaveCacheToDiskyyF', '_$s7FMFCore10FMFManagerC20pendingDeleteFriendsSayAA9FMFFriendVGvgTj', 
                        '_$s7FMFCore10FMFManagerC20pendingDeleteFriendsSayAA9FMFFriendVGvgTq', 
                        '_$s7FMFCore10FMFManagerC20pendingDeleteFriendsSayAA9FMFFriendVGvpMV', 
                        '_$s7FMFCore10FMFManagerC20pendingUpdateFriendsSayAA9FMFFriendVGvgTj', 
@@ -492,12 +492,13 @@ exports:
                        '_$s7FMFCore17FMFFavoriteFriendVSQAAMc', '_$s7FMFCore17FMFFavoriteFriendVSeAAMc', 
                        '_$s7FMFCore17FMFFavoriteFriendVs28CustomDebugStringConvertibleAAMc', 
                        '_$s7FMFCore17FMFLocationSourceO10secureLiveyA2CmFWC', '_$s7FMFCore17FMFLocationSourceO22secureProactiveShallowyA2CmFWC', 
-                       '_$s7FMFCore17FMFLocationSourceO6legacyyA2CmFWC', '_$s7FMFCore17FMFLocationSourceO8rawValueACSgSi_tcfC', 
-                       '_$s7FMFCore17FMFLocationSourceO8rawValueSivg', '_$s7FMFCore17FMFLocationSourceO8rawValueSivpMV', 
-                       '_$s7FMFCore17FMFLocationSourceOMa', '_$s7FMFCore17FMFLocationSourceOMn', 
-                       '_$s7FMFCore17FMFLocationSourceON', '_$s7FMFCore17FMFLocationSourceOSHAAMc', 
-                       '_$s7FMFCore17FMFLocationSourceOSQAAMc', '_$s7FMFCore17FMFLocationSourceOSYAAMc', 
-                       '_$s7FMFCore17FMImageCacheErrorO07unknownD0yA2CmFWC', '_$s7FMFCore17FMImageCacheErrorO19unableToConvertDatayA2CmFWC', 
+                       '_$s7FMFCore17FMFLocationSourceO6legacyyA2CmFWC', '_$s7FMFCore17FMFLocationSourceO6stewieyA2CmFWC', 
+                       '_$s7FMFCore17FMFLocationSourceO8rawValueACSgSi_tcfC', '_$s7FMFCore17FMFLocationSourceO8rawValueSivg', 
+                       '_$s7FMFCore17FMFLocationSourceO8rawValueSivpMV', '_$s7FMFCore17FMFLocationSourceOMa', 
+                       '_$s7FMFCore17FMFLocationSourceOMn', '_$s7FMFCore17FMFLocationSourceON', 
+                       '_$s7FMFCore17FMFLocationSourceOSHAAMc', '_$s7FMFCore17FMFLocationSourceOSQAAMc', 
+                       '_$s7FMFCore17FMFLocationSourceOSYAAMc', '_$s7FMFCore17FMImageCacheErrorO07unknownD0yA2CmFWC', 
+                       '_$s7FMFCore17FMImageCacheErrorO19unableToConvertDatayA2CmFWC', 
                        '_$s7FMFCore17FMImageCacheErrorO2eeoiySbAC_ACtFZ', '_$s7FMFCore17FMImageCacheErrorO4hash4intoys6HasherVz_tF', 
                        '_$s7FMFCore17FMImageCacheErrorO9hashValueSivg', '_$s7FMFCore17FMImageCacheErrorO9hashValueSivpMV', 
                        '_$s7FMFCore17FMImageCacheErrorOMa', '_$s7FMFCore17FMImageCacheErrorOMn', 
@@ -714,6 +715,8 @@ exports:
                        '_$s7FMFCore21FMFDataUpdateDelegateP10didReceive8featuresyAA11FMFFeaturesVSg_tFTq', 
                        '_$s7FMFCore21FMFDataUpdateDelegateP10didReceive9locationsySayAA11FMFLocationVG_tFTj', 
                        '_$s7FMFCore21FMFDataUpdateDelegateP10didReceive9locationsySayAA11FMFLocationVG_tFTq', 
+                       '_$s7FMFCore21FMFDataUpdateDelegateP19willSaveCacheToDiskyyFTj', 
+                       '_$s7FMFCore21FMFDataUpdateDelegateP19willSaveCacheToDiskyyFTq', 
                        '_$s7FMFCore21FMFDataUpdateDelegatePAAE10didReceive14locationAlertsySayAA16FMFLocationAlertVG_tF', 
                        '_$s7FMFCore21FMFDataUpdateDelegatePAAE10didReceive17labelledLocationsySayAA19FMFLabelledLocationVGSg_tF', 
                        '_$s7FMFCore21FMFDataUpdateDelegatePAAE10didReceive6configyAA9FMFConfigVSg_tF', 
@@ -723,6 +726,7 @@ exports:
                        '_$s7FMFCore21FMFDataUpdateDelegatePAAE10didReceive7friends10fromServerySayAA9FMFFriendVG_SbtF', 
                        '_$s7FMFCore21FMFDataUpdateDelegatePAAE10didReceive8featuresyAA11FMFFeaturesVSg_tF', 
                        '_$s7FMFCore21FMFDataUpdateDelegatePAAE10didReceive9locationsySayAA11FMFLocationVG_tF', 
+                       '_$s7FMFCore21FMFDataUpdateDelegatePAAE19willSaveCacheToDiskyyF', 
                        '_$s7FMFCore21FMFDataUpdateDelegateTL', '_$s7FMFCore21FMFGeofenceAlertsFromO7friendsyA2CmFWC', 
                        '_$s7FMFCore21FMFGeofenceAlertsFromO8everyoneyA2CmFWC', '_$s7FMFCore21FMFGeofenceAlertsFromO8rawValueACSgSS_tcfC', 
                        '_$s7FMFCore21FMFGeofenceAlertsFromO8rawValueSSvg', '_$s7FMFCore21FMFGeofenceAlertsFromO8rawValueSSvpMV', 
@@ -830,6 +834,9 @@ exports:
                        '_$s7FMFCore23FMFManagerConfigurationC17enabledSubsystemsAA0B9SubsystemVvpMV', 
                        '_$s7FMFCore23FMFManagerConfigurationC17useOptimizedFetchSbvg', 
                        '_$s7FMFCore23FMFManagerConfigurationC17useOptimizedFetchSbvpMV', 
+                       '_$s7FMFCore23FMFManagerConfigurationC18shouldUseFileCacheSbvgTj', 
+                       '_$s7FMFCore23FMFManagerConfigurationC18shouldUseFileCacheSbvgTq', 
+                       '_$s7FMFCore23FMFManagerConfigurationC18shouldUseFileCacheSbvpMV', 
                        '_$s7FMFCore23FMFManagerConfigurationC22disableContactMatchingSbvg', 
                        '_$s7FMFCore23FMFManagerConfigurationC22disableContactMatchingSbvpMV', 
                        '_$s7FMFCore23FMFManagerConfigurationC7defaultACvgZ', '_$s7FMFCore23FMFManagerConfigurationC8useCacheSbvg', 
@@ -1175,7 +1182,8 @@ exports:
                        '_$s7FMFCore9FMFMyInfoVSQAAMc', '_$s7FMFCore9FMFMyInfoVSeAAMc', 
                        '_$s7FMFCore9FMFMyInfoVs28CustomDebugStringConvertibleAAMc', 
                        '_$s7Request7FMFCore21FMImageCacheOperationPTl', '_$sSo10CLLocationC7FMFCoreE12fmifIsNearBy_25inBTRangeDistanceInMetersSbAB_SdtF', 
-                       '_$sSo12FMSystemInfoC7FMFCoreE10isKoreaSKUSbyFZ', '_$sSo29SPSecureLocationPublishReasonV7FMFCoreE11descriptionSSvg', 
+                       '_$sSo12FMSystemInfoC7FMFCoreE10isChinaSKUSbyFZ', '_$sSo12FMSystemInfoC7FMFCoreE10isKoreaSKUSbyFZ', 
+                       '_$sSo29SPSecureLocationPublishReasonV7FMFCoreE11descriptionSSvg', 
                        '_$sSo29SPSecureLocationPublishReasonV7FMFCoreE11descriptionSSvpMV', 
                        '_$sSo29SPSecureLocationPublishReasonVs23CustomStringConvertible7FMFCoreMc', 
                        '_$sSo30CLClientLocationReferenceFrameaSH7FMFCoreMc', '_$sSo30CLClientLocationReferenceFrameaSQ7FMFCoreMc' ]

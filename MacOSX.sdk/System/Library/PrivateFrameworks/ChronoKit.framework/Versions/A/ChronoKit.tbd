@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E2161C29-4D98-34D4-ACD5-52315F5ED60B
+    value:           44CA420F-0E83-36E9-98B5-DF517C5524D9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1B355536-E763-3BC4-A21C-BFCA5A530427
+    value:           750BD2E7-DE11-3222-BCB0-21C73892EAC0
 install-name:    '/System/Library/PrivateFrameworks/ChronoKit.framework/Versions/A/ChronoKit'
-current-version: 281.24
+current-version: 281.49
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -35,7 +35,12 @@ exports:
                        '_$s11StoredEntry9ChronoKit32StatefulStoreReloadFailurePolicyPTl', 
                        '_$s14VariantContext9ChronoKit17ReloadingStrategyPTl', '_$s7Content9ChronoKit0A5EntryPTl', 
                        '_$s7Content9ChronoKit17ReloadingStrategyPTl', '_$s7Content9ChronoKit32WidgetViewEntrySecurityProvidingPTl', 
-                       '_$s7Context9ChronoKit17ReloadingStrategyPTl', '_$s7SwiftUI4ViewP9ChronoKitE14onWidgetLaunch10currentURL7performQrAA7BindingVy10Foundation0J0VSgG_yAD0G9URLSourceO_AMtcSgtF', 
+                       '_$s7Context9ChronoKit17ReloadingStrategyPTl', '_$s7SwiftUI19NSHostingControllerC9ChronoKitE18configureRenderBox5async8isOpaque20minAnimationIntervalySb_SbSdtF', 
+                       '_$s7SwiftUI19NSHostingControllerC9ChronoKitE23consumeRenderStatisticsAD013WidgetContenthI0VSgyF', 
+                       '_$s7SwiftUI19NSHostingControllerC9ChronoKitE25setNeedsSynchronousUpdateyyF', 
+                       '_$s7SwiftUI19NSHostingControllerC9ChronoKitE7rbLayerSo7RBLayerCSgvg', 
+                       '_$s7SwiftUI19NSHostingControllerC9ChronoKitE7rbLayerSo7RBLayerCSgvpMV', 
+                       '_$s7SwiftUI4ViewP9ChronoKitE14onWidgetLaunch10currentURL7performQrAA7BindingVy10Foundation0J0VSgG_yAD0G9URLSourceO_AMtcSgtF', 
                        '_$s7SwiftUI4ViewP9ChronoKitE14onWidgetLaunch10currentURL7performQrAA7BindingVy10Foundation0J0VSgG_yAD0G9URLSourceO_AMtcSgtFQOMQ', 
                        '_$s9ChronoKit0A13MetadataStoreC016ConfiguredWidgetD0C013startDatesForF3IDsSDySS10Foundation4DateVGyKFTj', 
                        '_$s9ChronoKit0A13MetadataStoreC016ConfiguredWidgetD0C013startDatesForF3IDsSDySS10Foundation4DateVGyKFTq', 
@@ -1344,6 +1349,7 @@ exports:
                        '_$s9ChronoKit21WidgetDescriptorCacheC12backingStoreAcA0a8MetadataG0CSg_tcfCTj', 
                        '_$s9ChronoKit21WidgetDescriptorCacheC12backingStoreAcA0a8MetadataG0CSg_tcfCTq', 
                        '_$s9ChronoKit21WidgetDescriptorCacheC12backingStoreAcA0a8MetadataG0CSg_tcfc', 
+                       '_$s9ChronoKit21WidgetDescriptorCacheC19hasAnyVersionCached9extensionSbAA9Extension_p_tF', 
                        '_$s9ChronoKit21WidgetDescriptorCacheC25descriptorUpdatePublisher7Combine03AnyH0Vyyts5NeverOGvg', 
                        '_$s9ChronoKit21WidgetDescriptorCacheC25descriptorUpdatePublisher7Combine03AnyH0Vyyts5NeverOGvpMV', 
                        '_$s9ChronoKit21WidgetDescriptorCacheC32descriptorsByExtensionIdentifierSDySSSaySo09CHSWidgetD0CGGvg', 
@@ -1487,6 +1493,8 @@ exports:
                        '_$s9ChronoKit23PowerlogUpdateServicingTL', '_$s9ChronoKit23WidgetDescriptorCachingMp', 
                        '_$s9ChronoKit23WidgetDescriptorCachingP10initialize4withyAA0cD8Provider_p_tFTj', 
                        '_$s9ChronoKit23WidgetDescriptorCachingP10initialize4withyAA0cD8Provider_p_tFTq', 
+                       '_$s9ChronoKit23WidgetDescriptorCachingP19hasAnyVersionCached9extensionSbAA9Extension_p_tFTj', 
+                       '_$s9ChronoKit23WidgetDescriptorCachingP19hasAnyVersionCached9extensionSbAA9Extension_p_tFTq', 
                        '_$s9ChronoKit23WidgetDescriptorCachingP25descriptorUpdatePublisher7Combine03AnyH0Vyyts5NeverOGvgTj', 
                        '_$s9ChronoKit23WidgetDescriptorCachingP25descriptorUpdatePublisher7Combine03AnyH0Vyyts5NeverOGvgTq', 
                        '_$s9ChronoKit23WidgetDescriptorCachingP32descriptorsByExtensionIdentifierSDySSSaySo09CHSWidgetD0CGGvgTj', 
@@ -1672,7 +1680,10 @@ exports:
                        '_$s9ChronoKit24PlaceholderStatefulStoreCMa', '_$s9ChronoKit24PlaceholderStatefulStoreCMm', 
                        '_$s9ChronoKit24PlaceholderStatefulStoreCMn', '_$s9ChronoKit24PlaceholderStatefulStoreCMo', 
                        '_$s9ChronoKit24PlaceholderStatefulStoreCN', '_$s9ChronoKit24PlaceholderStatefulStoreCfD', 
-                       '_$s9ChronoKit24PlaceholderStatefulStoreCfd', '_$s9ChronoKit24WidgetAssertionProvidingMp', 
+                       '_$s9ChronoKit24PlaceholderStatefulStoreCfd', '_$s9ChronoKit24RenderStatisticsProviderMp', 
+                       '_$s9ChronoKit24RenderStatisticsProviderP07consumecD0AA013WidgetContentcD0VSgyFTj', 
+                       '_$s9ChronoKit24RenderStatisticsProviderP07consumecD0AA013WidgetContentcD0VSgyFTq', 
+                       '_$s9ChronoKit24RenderStatisticsProviderTL', '_$s9ChronoKit24WidgetAssertionProvidingMp', 
                        '_$s9ChronoKit24WidgetAssertionProvidingP07acquirec8LifetimeD03for4withAA0D0_pSo9CHSWidgetC_So0J7MetricsCtFTj', 
                        '_$s9ChronoKit24WidgetAssertionProvidingP07acquirec8LifetimeD03for4withAA0D0_pSo9CHSWidgetC_So0J7MetricsCtFTq', 
                        '_$s9ChronoKit24WidgetAssertionProvidingTL', '_$s9ChronoKit24WidgetConfigurationCacheC12backingStoreAcA0a8MetadataG0CSg_tcfC', 
@@ -1993,6 +2004,8 @@ exports:
                        '_$s9ChronoKit31BaseWidgetContentViewControllerC20isUsingCoreAnimationSbvpMV', 
                        '_$s9ChronoKit31BaseWidgetContentViewControllerC23consumeRenderStatisticsAA0deiJ0VSgyFTj', 
                        '_$s9ChronoKit31BaseWidgetContentViewControllerC23consumeRenderStatisticsAA0deiJ0VSgyFTq', 
+                       '_$s9ChronoKit31BaseWidgetContentViewControllerC25setNeedsSynchronousUpdateyyFTj', 
+                       '_$s9ChronoKit31BaseWidgetContentViewControllerC25setNeedsSynchronousUpdateyyFTq', 
                        '_$s9ChronoKit31BaseWidgetContentViewControllerC5coderACSgSo7NSCoderC_tcfC', 
                        '_$s9ChronoKit31BaseWidgetContentViewControllerC5coderACSgSo7NSCoderC_tcfc', 
                        '_$s9ChronoKit31BaseWidgetContentViewControllerC7content7SwiftUI03AnyF0VvMTj', 
@@ -2007,6 +2020,8 @@ exports:
                        '_$s9ChronoKit31BaseWidgetContentViewControllerC7rbLayerSo7RBLayerCSgvgTj', 
                        '_$s9ChronoKit31BaseWidgetContentViewControllerC7rbLayerSo7RBLayerCSgvgTq', 
                        '_$s9ChronoKit31BaseWidgetContentViewControllerC7rbLayerSo7RBLayerCSgvpMV', 
+                       '_$s9ChronoKit31BaseWidgetContentViewControllerCAA24RenderStatisticsProviderAAMc', 
+                       '_$s9ChronoKit31BaseWidgetContentViewControllerCAA24RenderStatisticsProviderAAWP', 
                        '_$s9ChronoKit31BaseWidgetContentViewControllerCMa', '_$s9ChronoKit31BaseWidgetContentViewControllerCMn', 
                        '_$s9ChronoKit31BaseWidgetContentViewControllerCMo', '_$s9ChronoKit31BaseWidgetContentViewControllerCMu', 
                        '_$s9ChronoKit31BaseWidgetContentViewControllerCN', '_$s9ChronoKit31BaseWidgetContentViewControllerCfD', 
@@ -2271,6 +2286,10 @@ exports:
                        '_$sSo15NSXPCConnectionC9ChronoKitE30isFromContainingAppOrExtension4withSbSS_tF', 
                        '_$sSo17CHSBaseDescriptorC9ChronoKitE7matches10localeDataSb10Foundation0G0VSg_tF', 
                        '_$sSo17CHSBaseDescriptorC9ChronoKitE7matches6localeSb10Foundation4DataVSg_tF', 
+                       '_$sSo23CHSWidgetTintParametersC9ChronoKitE19widgetRenderingMode06WidgetE00igH0Vvg', 
+                       '_$sSo23CHSWidgetTintParametersC9ChronoKitE19widgetRenderingMode06WidgetE00igH0VvpMV', 
+                       '_$sSo23CHSWidgetTintParametersC9ChronoKitE23chsWidgetRenderingModesSo0ahI0Vvg', 
+                       '_$sSo23CHSWidgetTintParametersC9ChronoKitE23chsWidgetRenderingModesSo0ahI0VvpMV', 
                        '_$sSo7CALayerC9ChronoKitE14SnapshotFormatO4caaryA2EmFWC', 
                        '_$sSo7CALayerC9ChronoKitE14SnapshotFormatO4camlyAeC15CAMLSnapshotterV11CAMLOptionsVcAEmFWC', 
                        '_$sSo7CALayerC9ChronoKitE14SnapshotFormatO7defaultAEvgZ', 

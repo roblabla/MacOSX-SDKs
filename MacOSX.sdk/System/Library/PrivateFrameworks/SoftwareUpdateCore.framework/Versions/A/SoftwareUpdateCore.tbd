@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           14C1B396-2796-34EF-8624-57EA9E3AE498
+    value:           60EE280C-4350-3A8F-81A9-418E945D8FE1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6B4FAAAF-5B5F-3FCF-901B-EBC47D70E40F
+    value:           BE0937D3-C639-3AED-B662-BCAE9A301DC5
 install-name:    '/System/Library/PrivateFrameworks/SoftwareUpdateCore.framework/Versions/A/SoftwareUpdateCore'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

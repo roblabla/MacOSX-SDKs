@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D198406D-6F0D-3857-9CB3-9BA231DFEE00
+    value:           1A8A8D34-268F-3D42-936A-8A0029817E22
   - target:          x86_64-maccatalyst
-    value:           D198406D-6F0D-3857-9CB3-9BA231DFEE00
+    value:           1A8A8D34-268F-3D42-936A-8A0029817E22
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6A5FFEB0-E606-324E-B687-DA95C362CE05
+    value:           E32C0A9B-EDD0-376D-A504-A06C215E89FE
   - target:          arm64e-maccatalyst
-    value:           6A5FFEB0-E606-324E-B687-DA95C362CE05
+    value:           E32C0A9B-EDD0-376D-A504-A06C215E89FE
 install-name:    '/usr/lib/system/libcorecrypto.dylib'
-current-version: 1386.40.5
+current-version: 1386.60.8
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -115,8 +115,9 @@ exports:
                        _ccder_encode_tag, _ccder_encode_tl, _ccder_encode_uint64, 
                        _ccder_sizeof, _ccder_sizeof_eckey, _ccder_sizeof_implicit_integer, 
                        _ccder_sizeof_implicit_octet_string, _ccder_sizeof_implicit_raw_octet_string, 
-                       _ccder_sizeof_implicit_uint64, _ccder_sizeof_integer, _ccder_sizeof_len, 
-                       _ccder_sizeof_octet_string, _ccder_sizeof_oid, _ccder_sizeof_raw_octet_string, 
+                       _ccder_sizeof_implicit_raw_octet_string_overflow, _ccder_sizeof_implicit_uint64, 
+                       _ccder_sizeof_integer, _ccder_sizeof_len, _ccder_sizeof_octet_string, 
+                       _ccder_sizeof_oid, _ccder_sizeof_overflow, _ccder_sizeof_raw_octet_string, 
                        _ccder_sizeof_tag, _ccder_sizeof_uint64, _ccdes3_cbc_decrypt_mode, 
                        _ccdes3_cbc_encrypt_mode, _ccdes3_cfb8_decrypt_mode, _ccdes3_cfb8_encrypt_mode, 
                        _ccdes3_cfb_decrypt_mode, _ccdes3_cfb_encrypt_mode, _ccdes3_ctr_crypt_mode, 

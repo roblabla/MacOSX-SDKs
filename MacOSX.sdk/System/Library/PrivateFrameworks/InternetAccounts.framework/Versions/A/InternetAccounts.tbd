@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B9A46BE0-657E-3F10-8D69-F2245C9A2812
+    value:           94B57198-A201-373C-AB9A-ABF05B7C4AC2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           88FB7B6D-B03C-3B5C-B6DD-C76485FF3656
+    value:           EE470226-DD06-347B-9784-E399C4C6796A
 install-name:    '/System/Library/PrivateFrameworks/InternetAccounts.framework/Versions/A/InternetAccounts'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

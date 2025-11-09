@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           43AE1FBB-5452-3BC0-9E19-239014F53F83
+    value:           A566E306-A99B-3BEF-B70F-4D93DFB0C1E1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6FA7576E-ED8E-33C5-AF7E-37F231B9084C
+    value:           7FE65EB3-E599-30DA-865C-00BEE4A40719
 install-name:    '/System/Library/PrivateFrameworks/AOSUILite.framework/Versions/A/AOSUILite'
 current-version: 415
 exports:
@@ -40,18 +40,19 @@ exports:
                        _iCalBundleIdentifier, _iphotoBundleIdentifier, _kAOSUIAppleDataRecovery, 
                        _kAOSUIDialogImageCloud, _kAOSUIDialogImageCombinedDataclasses, 
                        _kAOSUIDialogImageDocuments, _kAOSUIFindMyBundleIdentifier, 
-                       _kAOSUIImageCloud, _kAOSUIImageiCloudBanner, _kAOSUIImageiCloudText, 
-                       _kAOSUIPrefPaneImageAccounts, _kAOSUIPrefPaneImageCalendars, 
+                       _kAOSUIFreeformBundleIdentifier, _kAOSUIImageCloud, _kAOSUIImageiCloudBanner, 
+                       _kAOSUIImageiCloudText, _kAOSUIPrefPaneImageAccounts, _kAOSUIPrefPaneImageCalendars, 
                        _kAOSUIPrefPaneImageContacts, _kAOSUIPrefPaneImageDocuments, 
                        _kAOSUIPrefPaneImageFMM, _kAOSUIPrefPaneImageHome, _kAOSUIPrefPaneImageMail, 
                        _kAOSUIPrefPaneImageMessages, _kAOSUIPrefPaneImageNews, _kAOSUIPrefPaneImageNotes, 
-                       _kAOSUIPrefPaneImagePhotos, _kAOSUIPrefPaneImagePrivateConnect, 
-                       _kAOSUIPrefPaneImagePrivateEmail, _kAOSUIPrefPaneImageReminders, 
-                       _kAOSUIPrefPaneImageSafari, _kAOSUIPrefPaneImageSiri, _kAOSUIPrefPaneImageStocks, 
-                       _kAOSUIPrefPaneImageWallet, _kAOSUISettingsBundleIdentifier, 
-                       _kAOSUISpyglassAppleID, _kAOSUISpyglassFamily, _kMMCDigitField, 
-                       _kMMCDigitFieldFocus, _kMMCurrentApplicationHeaderKey, _kMMCurrentApplicationVersionHeaderKey, 
-                       _kMMDataclassQuota, _kMMModialDialogEscapeKey, _kMMPremiumFeatureDetailsURLKey, 
+                       _kAOSUIPrefPaneImagePhotos, _kAOSUIPrefPaneImagePlaceholderIcon, 
+                       _kAOSUIPrefPaneImagePrivateConnect, _kAOSUIPrefPaneImagePrivateEmail, 
+                       _kAOSUIPrefPaneImageReminders, _kAOSUIPrefPaneImageSafari, 
+                       _kAOSUIPrefPaneImageSiri, _kAOSUIPrefPaneImageStocks, _kAOSUIPrefPaneImageWallet, 
+                       _kAOSUISettingsBundleIdentifier, _kAOSUISpyglassAppleID, _kAOSUISpyglassFamily, 
+                       _kMMCDigitField, _kMMCDigitFieldFocus, _kMMCurrentApplicationHeaderKey, 
+                       _kMMCurrentApplicationVersionHeaderKey, _kMMDataclassQuota, 
+                       _kMMModialDialogEscapeKey, _kMMPremiumFeatureDetailsURLKey, 
                        _kMMQuotaURLKey, _kMMStorageURLKey, _kNetworkReachabilityNode, 
                        _keychainaccessBundleIdentifier, _mailBundleIdentifier, _messagesBundleIdentifier, 
                        _newsBundleIdentifier, _notesBundleIdentifier, _remindersBundleIdentifier, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           49E50981-D01E-3550-BA3F-575685567DC8
+    value:           C5527E6D-F7E1-3659-AFD3-ECD20D92865A
   - target:          x86_64-maccatalyst
-    value:           49E50981-D01E-3550-BA3F-575685567DC8
+    value:           C5527E6D-F7E1-3659-AFD3-ECD20D92865A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EDB86433-1EBA-338A-B447-164C2DC4054C
+    value:           58AAACF6-410C-38DA-8318-840214BCCAD4
   - target:          arm64e-maccatalyst
-    value:           EDB86433-1EBA-338A-B447-164C2DC4054C
+    value:           58AAACF6-410C-38DA-8318-840214BCCAD4
 install-name:    '/System/Library/Frameworks/DataDetection.framework/Versions/A/DataDetection'
 current-version: 727
 exports:

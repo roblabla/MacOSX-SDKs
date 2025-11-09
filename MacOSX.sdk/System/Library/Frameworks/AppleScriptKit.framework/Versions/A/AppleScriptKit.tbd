@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           76372FE0-8F23-3C43-98B0-583A171DAE8E
+    value:           E742E9D2-859B-31E2-AEFD-9B55F238D864
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AB5120DD-6BEA-341F-B015-64E02BEE2915
+    value:           E616A6F9-8F32-331C-893E-B921423663A4
 install-name:    '/System/Library/Frameworks/AppleScriptKit.framework/Versions/A/AppleScriptKit'
 current-version: 88
 exports:

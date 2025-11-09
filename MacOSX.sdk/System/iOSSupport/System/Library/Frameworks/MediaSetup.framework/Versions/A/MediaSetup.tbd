@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           DE4FE321-E9E2-3EE5-97E9-87B1D389B4FA
+    value:           D4BBC768-C461-3E71-818F-91DE7AD87CB9
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           BA435A55-47B4-3B45-9F73-D6B4814849DD
+    value:           4D65EF5B-3A5D-3223-8E61-938234C68BF4
 install-name:    '/System/iOSSupport/System/Library/Frameworks/MediaSetup.framework/Versions/A/MediaSetup'
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]

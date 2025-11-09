@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BA1F3EFB-7A2F-39BD-87C7-6AC8CB751D4E
+    value:           C1EFD621-0909-3834-81CA-44E06B2A89BE
   - target:          x86_64-maccatalyst
-    value:           BA1F3EFB-7A2F-39BD-87C7-6AC8CB751D4E
+    value:           C1EFD621-0909-3834-81CA-44E06B2A89BE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           72F4B020-18A6-3AC5-8BD7-AEA1B91D3E12
+    value:           499F60BD-6F2A-374F-BAC3-0B59BFAC119F
   - target:          arm64e-maccatalyst
-    value:           72F4B020-18A6-3AC5-8BD7-AEA1B91D3E12
+    value:           499F60BD-6F2A-374F-BAC3-0B59BFAC119F
 install-name:    '/usr/lib/libamsupport.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

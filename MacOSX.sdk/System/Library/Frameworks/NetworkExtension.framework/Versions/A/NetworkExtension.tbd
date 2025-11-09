@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           82823575-E668-3038-AEF5-E2C41E35F1EC
+    value:           3E63D67D-E6FA-3756-A3CB-B76D7CD17757
   - target:          x86_64-maccatalyst
-    value:           82823575-E668-3038-AEF5-E2C41E35F1EC
+    value:           3E63D67D-E6FA-3756-A3CB-B76D7CD17757
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D15F0018-584F-3589-B17E-3F87D4813A7E
+    value:           1688602F-3C5F-3ED8-9AC9-8449B41F1E75
   - target:          arm64e-maccatalyst
-    value:           D15F0018-584F-3589-B17E-3F87D4813A7E
+    value:           1688602F-3C5F-3ED8-9AC9-8449B41F1E75
 install-name:    '/System/Library/Frameworks/NetworkExtension.framework/Versions/A/NetworkExtension'
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

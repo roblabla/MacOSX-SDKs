@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DFE1EA6B-9F1F-34E7-89F8-A583FBFE1B85
+    value:           55C004D4-9470-313D-8311-E18FA941E294
   - target:          x86_64-maccatalyst
-    value:           DFE1EA6B-9F1F-34E7-89F8-A583FBFE1B85
+    value:           55C004D4-9470-313D-8311-E18FA941E294
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B3B912E3-363B-344C-AF58-992BB7D6BBF5
+    value:           CC4CDDE2-B3A7-3CB6-B947-31233CDB479F
   - target:          arm64e-maccatalyst
-    value:           B3B912E3-363B-344C-AF58-992BB7D6BBF5
+    value:           CC4CDDE2-B3A7-3CB6-B947-31233CDB479F
 install-name:    '/usr/lib/libCRFSuite.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

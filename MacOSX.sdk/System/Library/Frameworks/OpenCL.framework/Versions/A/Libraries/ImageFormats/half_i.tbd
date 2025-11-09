@@ -3,9 +3,9 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B7C3D845-E816-33F8-B0E5-BBAC8CB6933F
+    value:           A480DB63-C119-370C-9888-084F7A979A2A
   - target:          x86_64-maccatalyst
-    value:           B7C3D845-E816-33F8-B0E5-BBAC8CB6933F
+    value:           A480DB63-C119-370C-9888-084F7A979A2A
 install-name:    '/System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/ImageFormats/half_i.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]

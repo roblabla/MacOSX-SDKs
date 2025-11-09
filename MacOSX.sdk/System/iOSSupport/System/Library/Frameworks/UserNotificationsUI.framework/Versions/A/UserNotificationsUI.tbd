@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           4BF9162F-EC6E-3D8A-93B0-CAA975383296
+    value:           0DC3BDA3-F0C9-3D14-BBBC-E93803A3E7C6
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           FEC6349C-29FD-318D-8148-3EB975044EB4
+    value:           53EDC20C-272B-32E4-A2DE-AFC8DA5EA057
 install-name:    '/System/iOSSupport/System/Library/Frameworks/UserNotificationsUI.framework/Versions/A/UserNotificationsUI'
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]

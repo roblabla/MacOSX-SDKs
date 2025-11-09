@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0C8E525C-CFF9-35D3-ABEC-3AEFB2F7A8AC
+    value:           9207251C-F34F-36BD-A95B-2057748C20E5
   - target:          x86_64-maccatalyst
-    value:           0C8E525C-CFF9-35D3-ABEC-3AEFB2F7A8AC
+    value:           9207251C-F34F-36BD-A95B-2057748C20E5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C07858FA-1822-3FB2-96D3-6438BFC19297
+    value:           38EF38AE-34F0-3E57-92FD-8E416B25F299
   - target:          arm64e-maccatalyst
-    value:           C07858FA-1822-3FB2-96D3-6438BFC19297
+    value:           38EF38AE-34F0-3E57-92FD-8E416B25F299
 install-name:    '/System/Library/PrivateFrameworks/AppContainer.framework/Versions/A/AppContainer'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

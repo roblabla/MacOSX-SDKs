@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           45290B9C-9DEB-3F4E-BE30-BFACC97CF403
+    value:           2C73C62D-D12E-355D-A489-C66C4F9F8E44
   - target:          x86_64-maccatalyst
-    value:           45290B9C-9DEB-3F4E-BE30-BFACC97CF403
+    value:           2C73C62D-D12E-355D-A489-C66C4F9F8E44
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           77609E13-D27E-353E-94D9-B544CC76278A
+    value:           CA02452C-0887-3D1D-9AD6-50BDCE990AC8
   - target:          arm64e-maccatalyst
-    value:           77609E13-D27E-353E-94D9-B544CC76278A
+    value:           CA02452C-0887-3D1D-9AD6-50BDCE990AC8
 install-name:    '/System/Library/PrivateFrameworks/AppleIDAuthSupport.framework/Versions/A/AppleIDAuthSupport'
 current-version: 103
 exports:

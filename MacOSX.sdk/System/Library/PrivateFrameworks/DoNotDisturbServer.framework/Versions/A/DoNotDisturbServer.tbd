@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           26C5421B-71E0-3EF4-92C3-B0BA2D630B3F
+    value:           2174376B-F4C5-34C5-B697-791270534F0B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           86391C50-A362-309E-BC19-41101BB70D3B
+    value:           38B1EEB9-A60B-353C-9C80-1D37E43884DE
 install-name:    '/System/Library/PrivateFrameworks/DoNotDisturbServer.framework/Versions/A/DoNotDisturbServer'
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

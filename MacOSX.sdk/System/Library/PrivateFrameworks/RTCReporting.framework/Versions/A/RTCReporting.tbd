@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FB4BBAC4-16FD-3801-896D-12B501743F96
+    value:           9E58A810-3E62-3DA4-964D-7D413AD7B345
   - target:          x86_64-maccatalyst
-    value:           FB4BBAC4-16FD-3801-896D-12B501743F96
+    value:           9E58A810-3E62-3DA4-964D-7D413AD7B345
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           251AB5BD-1335-3AC2-83CE-223C0408B3EF
+    value:           5A452D6B-0CAF-3727-9A38-27422A61FB5B
   - target:          arm64e-maccatalyst
-    value:           251AB5BD-1335-3AC2-83CE-223C0408B3EF
+    value:           5A452D6B-0CAF-3727-9A38-27422A61FB5B
 install-name:    '/System/Library/PrivateFrameworks/RTCReporting.framework/Versions/A/RTCReporting'
 swift-abi-version: 7
 exports:

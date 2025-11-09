@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           44597195-DAE9-331B-937D-92A2B5B5D4E2
+    value:           D4F52977-EDBC-32FF-8036-484FB4C4D79D
   - target:          x86_64-maccatalyst
-    value:           44597195-DAE9-331B-937D-92A2B5B5D4E2
+    value:           D4F52977-EDBC-32FF-8036-484FB4C4D79D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A2581A50-8398-313A-A9D3-474A1ABAF019
+    value:           8D5E46C9-D01D-372D-B2B1-68C94C4D78A2
   - target:          arm64e-maccatalyst
-    value:           A2581A50-8398-313A-A9D3-474A1ABAF019
+    value:           8D5E46C9-D01D-372D-B2B1-68C94C4D78A2
 install-name:    '/usr/lib/swift/libswiftSoundAnalysis.dylib'
-current-version: 144.2.102
+current-version: 144.2.104
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

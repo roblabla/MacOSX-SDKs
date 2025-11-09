@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A3F5EE69-0568-3379-9A33-3AF4993EEA25
+    value:           94291679-3C80-3CFD-8798-F8EB4AE25496
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           75A6E2B7-9EBD-3E64-A6B8-C5A81ABC6CA3
+    value:           5224D687-386A-3C46-8ECE-479F1FDD8BEC
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/QuartzComposer.framework/Versions/A/QuartzComposer'
 current-version: 168
 exports:

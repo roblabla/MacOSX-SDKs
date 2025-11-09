@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           590FBD80-04A9-3438-B32A-C445B487F2B2
+    value:           D5254D51-CC65-37BA-86C7-FBC5F2BFE7BC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EB1DD97F-8D58-3474-B001-4D383F49E528
+    value:           0CA483C7-ABD5-335F-BAB6-87F04087616A
 install-name:    '/System/Library/PrivateFrameworks/AIMLInstrumentationStreams.framework/Versions/A/AIMLInstrumentationStreams'
 swift-abi-version: 7
 exports:

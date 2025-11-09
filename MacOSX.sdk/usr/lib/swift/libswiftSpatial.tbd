@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           19455749-B92A-3F1D-9632-A3D90D1773D6
+    value:           3E4F1802-1E9E-3845-BC83-F72F3E27A387
   - target:          x86_64-maccatalyst
-    value:           19455749-B92A-3F1D-9632-A3D90D1773D6
+    value:           3E4F1802-1E9E-3845-BC83-F72F3E27A387
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           85D94C22-126F-3058-A0D5-1AFDAF07443E
+    value:           D909F7FE-D616-3884-93CA-AAC46983C111
   - target:          arm64e-maccatalyst
-    value:           85D94C22-126F-3058-A0D5-1AFDAF07443E
+    value:           D909F7FE-D616-3884-93CA-AAC46983C111
 install-name:    '/usr/lib/swift/libswiftSpatial.dylib'
 swift-abi-version: 7
 exports:

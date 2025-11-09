@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4E7C6FEF-CEBF-3F52-AB54-3FF52FD86EC3
+    value:           21A3C8AC-6B0B-3646-B91B-4ACBE4A3442C
   - target:          x86_64-maccatalyst
-    value:           4E7C6FEF-CEBF-3F52-AB54-3FF52FD86EC3
+    value:           21A3C8AC-6B0B-3646-B91B-4ACBE4A3442C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3B933F50-AA74-3147-A721-51B9A951F3BB
+    value:           48390F6B-D40A-37F0-8D4F-59845531218E
   - target:          arm64e-maccatalyst
-    value:           3B933F50-AA74-3147-A721-51B9A951F3BB
+    value:           48390F6B-D40A-37F0-8D4F-59845531218E
 install-name:    '/System/Library/Frameworks/_LocalAuthentication_SwiftUI.framework/Versions/A/_LocalAuthentication_SwiftUI'
-current-version: 1131.40.25
+current-version: 1131.60.22
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

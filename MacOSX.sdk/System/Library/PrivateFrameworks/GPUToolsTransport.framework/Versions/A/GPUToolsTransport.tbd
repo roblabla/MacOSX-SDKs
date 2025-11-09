@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4980B7EB-0DF1-3454-9F7F-31B85625A0B2
+    value:           C50A6FB6-4860-3403-AA51-55F27F2816EA
   - target:          arm64-macos
-    value:           D83B6CAD-7863-3114-8665-82CF1C07B72C
+    value:           51465176-A58A-31BF-9A98-E80830BE2522
   - target:          arm64e-macos
-    value:           0F2622FB-EF53-397C-8BB0-E339CFE11DA2
+    value:           A8688704-621A-3925-BFEA-403E76442E37
 install-name:    '/System/Library/PrivateFrameworks/GPUToolsTransport.framework/Versions/A/GPUToolsTransport'
 current-version: 0
 compatibility-version: 0

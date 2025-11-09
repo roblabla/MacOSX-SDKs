@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           22E8741E-7EB0-3825-BB8C-DA545CA68E58
+    value:           8A1C0167-71C4-3D26-AA94-79ACE6728EF5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F27C3BB6-AF80-3714-BA6D-ED11CCE826DB
+    value:           F7EB422C-021D-3ACA-AFAE-EE5D927F895B
 install-name:    '/System/Library/Frameworks/OSAKit.framework/Versions/A/OSAKit'
 current-version: 113
 exports:

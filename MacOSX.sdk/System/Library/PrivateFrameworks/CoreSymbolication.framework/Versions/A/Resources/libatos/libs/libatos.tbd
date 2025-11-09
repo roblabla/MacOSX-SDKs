@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FEA1E8F7-270E-35F7-96F6-C4A9C50B0AB3
+    value:           2B3126E0-9548-3610-8AC7-520F0AD07977
   - target:          x86_64-maccatalyst
-    value:           FEA1E8F7-270E-35F7-96F6-C4A9C50B0AB3
+    value:           2B3126E0-9548-3610-8AC7-520F0AD07977
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1DAD279A-817E-3904-9BA4-AFE9BA8B3056
+    value:           CCA3B489-1298-3739-B547-38DFEE5FA508
   - target:          arm64e-maccatalyst
-    value:           1DAD279A-817E-3904-9BA4-AFE9BA8B3056
+    value:           CCA3B489-1298-3739-B547-38DFEE5FA508
 install-name:    '/libatos.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

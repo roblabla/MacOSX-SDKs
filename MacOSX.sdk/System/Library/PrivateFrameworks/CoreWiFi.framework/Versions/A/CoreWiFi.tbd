@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2B542768-78EC-3508-8356-47DF855747C1
+    value:           97725B02-B677-34A9-B9C2-7FB4E50E99EF
   - target:          x86_64-maccatalyst
-    value:           2B542768-78EC-3508-8356-47DF855747C1
+    value:           97725B02-B677-34A9-B9C2-7FB4E50E99EF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1FB38FE2-4197-3004-B828-C8A1E172294B
+    value:           29F3350F-F100-3334-ADEA-D8FE9FD8B611
   - target:          arm64e-maccatalyst
-    value:           1FB38FE2-4197-3004-B828-C8A1E172294B
+    value:           29F3350F-F100-3334-ADEA-D8FE9FD8B611
 install-name:    '/System/Library/PrivateFrameworks/CoreWiFi.framework/Versions/A/CoreWiFi'
 current-version: 0
 compatibility-version: 0
@@ -40,8 +40,10 @@ exports:
                        _CWFInternalEventIsAutoJoinKey, _CWFInternalEventKnownNetworkEventTypeKey, 
                        _CWFInternalEventKnownNetworkProfileKey, _CWFInternalEventScanResultKey, 
                        _CWFIsAutoJoinRetryTrigger, _CWFKnownNetworkAssociatedDuringAWDLRealTimeMode, 
-                       _CWFKnownNetworksStoreIdentifier, _CWFLog, _CWFMachineSerialNumber, 
-                       _CWFManagerErrorDomain, _CWFNetworkConfigurationTimeout, _CWFNetworkProfilePropertyAddReasonKey, 
+                       _CWFKnownNetworkSupportsSeamlessSSIDTransition, _CWFKnownNetworksStoreIdentifier, 
+                       _CWFKnownNetworksSupportingSeamlessSSIDTransitionForScanResult, 
+                       _CWFLog, _CWFMachineSerialNumber, _CWFManagerErrorDomain, 
+                       _CWFNetworkConfigurationTimeout, _CWFNetworkProfilePropertyAddReasonKey, 
                        _CWFNetworkProfilePropertyAddedAtKey, _CWFNetworkProfilePropertyAutoJoinDisabledKey, 
                        _CWFNetworkProfilePropertyBSSListKey, _CWFNetworkProfilePropertyBundleIDKey, 
                        _CWFNetworkProfilePropertyCaptiveProfileKey, _CWFNetworkProfilePropertyCarPlayNetworkKey, 
@@ -64,11 +66,12 @@ exports:
                        _CWFNetworkProfilePropertyUpdatedAtKey, _CWFNetworkProfilePropertyUserPreferredNetworkNamesKey, 
                        _CWFNetworkProfilePropertyUserPreferredPasspointDomainsKey, 
                        _CWFNetworkProfilePropertyWAPISubtypeKey, _CWFNetworkProfilePropertyWEPSubtypeKey, 
-                       _CWFScanResultPropertyOSSpecificAttributesKey, _CWFSecItemQueryPassword, 
-                       _CWFSecItemSetPassword, _CWFSlowestPHYMode, _CWFStrongestSecurityType, 
-                       _CWFUserSettingsStoreAskToJoinModeKey, _CWFUserSettingsStoreAutoHotspotModeKey, 
-                       _CWFUserSettingsStoreIdentifier, _CWFUserSettingsStoreSyncModeKey, 
-                       _CWFWeakestSecurityType, _CWFXPCANQPParamsKey, _CWFXPCAWDLPeerAssistedDiscoveryParamsKey, 
+                       _CWFScanResultPropertyOSSpecificAttributesKey, _CWFScanResultSupportsSeamlessSSIDTransition, 
+                       _CWFSecItemQueryPassword, _CWFSecItemSetPassword, _CWFSlowestPHYMode, 
+                       _CWFStrongestSecurityType, _CWFUserSettingsStoreAskToJoinModeKey, 
+                       _CWFUserSettingsStoreAutoHotspotModeKey, _CWFUserSettingsStoreIdentifier, 
+                       _CWFUserSettingsStoreSyncModeKey, _CWFWeakestSecurityType, 
+                       _CWFXPCANQPParamsKey, _CWFXPCAWDLPeerAssistedDiscoveryParamsKey, 
                        _CWFXPCAWDLPeerTrafficRegistrationKey, _CWFXPCActivityKey, 
                        _CWFXPCAssocParamsKey, _CWFXPCAutoHotspotModeKey, _CWFXPCAutoJoinParamsKey, 
                        _CWFXPCChannelKey, _CWFXPCCountryCodeKey, _CWFXPCDisassocReasonKey, 

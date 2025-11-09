@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0C6FCC59-0A40-38B2-BDC1-E4DFDB2585D1
+    value:           DEE7D957-6746-3C72-8030-DAACC125DE13
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C92A3A37-9A37-309D-8839-D2F8CDCEF5E0
+    value:           23A2264D-F69A-3593-B890-644529282317
 install-name:    '/System/Library/PrivateFrameworks/STSXPCHelperClient.framework/Versions/A/STSXPCHelperClient'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

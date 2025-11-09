@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5884FE5B-DE1E-3077-A0C0-984C7D258840
+    value:           7632289D-BBA4-356C-AD4A-BEC13DA6D87A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           632E54E5-755F-34E4-B0A1-8AC1C7D25C50
+    value:           8CF9D01B-B5FC-3ACE-8716-E800DDF6CCEC
 install-name:    '/System/Library/Frameworks/FamilyControls.framework/Versions/A/FamilyControls'
 current-version: 1045
 swift-abi-version: 7

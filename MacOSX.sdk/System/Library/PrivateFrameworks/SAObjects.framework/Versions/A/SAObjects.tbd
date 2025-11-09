@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D56AAEFF-1263-344D-9E56-6B5484E4421F
+    value:           ED04F5B0-49B8-32FC-A90A-ECFA6647839E
   - target:          x86_64-maccatalyst
-    value:           D56AAEFF-1263-344D-9E56-6B5484E4421F
+    value:           ED04F5B0-49B8-32FC-A90A-ECFA6647839E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3808D2FF-9AAF-36CF-B7AD-7BDAAC50B83D
+    value:           19C21089-4828-39FD-A861-E60EFFD7F885
   - target:          arm64e-maccatalyst
-    value:           3808D2FF-9AAF-36CF-B7AD-7BDAAC50B83D
+    value:           19C21089-4828-39FD-A861-E60EFFD7F885
 install-name:    '/System/Library/PrivateFrameworks/SAObjects.framework/Versions/A/SAObjects'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -149,42 +149,43 @@ exports:
                        _SAAceTemperatureUnitRankineValue, _SAAceVersionCurrent, _SAAceViewCanBeRefreshedPListKey, 
                        _SAAceViewCanUseServerTTSPListKey, _SAAceViewClassIdentifier, 
                        _SAAceViewContextPListKey, _SAAceViewCorrespondingSessionIDPListKey, 
-                       _SAAceViewDeferredRenderingPListKey, _SAAceViewDialogPListKey, 
-                       _SAAceViewDisableDeviceRacingPListKey, _SAAceViewIsTransientPListKey, 
-                       _SAAceViewItemTypePListKey, _SAAceViewListenAfterSpeakingBehaviorPListKey, 
-                       _SAAceViewListenAfterSpeakingPListKey, _SAAceViewSpeakableContextInfoPListKey, 
-                       _SAAceViewSpeakableTextPListKey, _SAAceViewUIItemTypeItemTypeConversationValue, 
-                       _SAAceViewUIItemTypeItemTypeResultValue, _SAAceViewUIItemTypeItemTypeUnspecifiedValue, 
-                       _SAAceViewViewIdPListKey, _SAAceWatchFaceClassIdentifier, 
-                       _SAAcknowledgeAlertClassIdentifier, _SAAcknowledgeAlertObjectPListKey, 
-                       _SAActivityObjectClassIdentifier, _SAActivityObjectEndDatePListKey, 
-                       _SAActivityObjectMetadataPListKey, _SAActivityObjectStartDatePListKey, 
-                       _SAActivityObjectStreamTypePListKey, _SAActivityObjectTypePListKey, 
-                       _SAActivityObjectUserActivityPListKey, _SAActivityObjectVisibilityPListKey, 
-                       _SAActivityStreamActivitiesPListKey, _SAActivityStreamClassIdentifier, 
-                       _SAActivityStreamSortDescriptorEndDateValue, _SAActivityStreamSortDescriptorStartDateValue, 
-                       _SAActivityStreamTaskTypePListKey, _SAAddResultObjectsClassIdentifier, 
-                       _SAAddResultObjectsObjectsPListKey, _SAAddResultObjectsResultObjectsPListKey, 
-                       _SAAlarmAceAlarmWrapClassIdentifier, _SAAlarmAceAlarmWrapGenerationPListKey, 
-                       _SAAlarmAlarmModificationAddedFrequencyPListKey, _SAAlarmAlarmModificationAlarmIdPListKey, 
-                       _SAAlarmAlarmModificationClassIdentifier, _SAAlarmAlarmModificationEnabledPListKey, 
-                       _SAAlarmAlarmModificationHourPListKey, _SAAlarmAlarmModificationLabelPListKey, 
-                       _SAAlarmAlarmModificationMinutePListKey, _SAAlarmAlarmModificationRemovedFrequencyPListKey, 
-                       _SAAlarmAlarmShowAlarmIdsPListKey, _SAAlarmAlarmShowClassIdentifier, 
-                       _SAAlarmCreateAlarmToCreatePListKey, _SAAlarmCreateClassIdentifier, 
-                       _SAAlarmCreateCompletedAlarmIdPListKey, _SAAlarmCreateCompletedClassIdentifier, 
-                       _SAAlarmCreatingAlarmErrorCode, _SAAlarmDayOfWeekForString, 
-                       _SAAlarmDayOfWeekFridayValue, _SAAlarmDayOfWeekMondayValue, 
-                       _SAAlarmDayOfWeekNeverValue, _SAAlarmDayOfWeekSaturdayValue, 
-                       _SAAlarmDayOfWeekSundayValue, _SAAlarmDayOfWeekThursdayValue, 
-                       _SAAlarmDayOfWeekTuesdayValue, _SAAlarmDayOfWeekWednesdayValue, 
-                       _SAAlarmDeleteAlarmIdsPListKey, _SAAlarmDeleteClassIdentifier, 
-                       _SAAlarmDeleteCompletedClassIdentifier, _SAAlarmDismissAlarmIdsPListKey, 
-                       _SAAlarmDismissClassIdentifier, _SAAlarmEnablingAlarmErrorCode, 
-                       _SAAlarmGroupAcronym, _SAAlarmGroupIdentifier, _SAAlarmObjectClassIdentifier, 
-                       _SAAlarmObjectDataSourceInfoPListKey, _SAAlarmObjectEnabledPListKey, 
-                       _SAAlarmObjectFiringPListKey, _SAAlarmObjectFrequencyPListKey, 
-                       _SAAlarmObjectHourPListKey, _SAAlarmObjectLabelPListKey, _SAAlarmObjectMinutePListKey, 
+                       _SAAceViewDeferredRenderingPListKey, _SAAceViewDelayDismissalMsPListKey, 
+                       _SAAceViewDialogPListKey, _SAAceViewDisableDeviceRacingPListKey, 
+                       _SAAceViewIsTransientPListKey, _SAAceViewItemTypePListKey, 
+                       _SAAceViewListenAfterSpeakingBehaviorPListKey, _SAAceViewListenAfterSpeakingPListKey, 
+                       _SAAceViewSpeakableContextInfoPListKey, _SAAceViewSpeakableTextPListKey, 
+                       _SAAceViewUIItemTypeItemTypeConversationValue, _SAAceViewUIItemTypeItemTypeResultValue, 
+                       _SAAceViewUIItemTypeItemTypeUnspecifiedValue, _SAAceViewViewIdPListKey, 
+                       _SAAceWatchFaceClassIdentifier, _SAAcknowledgeAlertClassIdentifier, 
+                       _SAAcknowledgeAlertObjectPListKey, _SAActivityObjectClassIdentifier, 
+                       _SAActivityObjectEndDatePListKey, _SAActivityObjectMetadataPListKey, 
+                       _SAActivityObjectStartDatePListKey, _SAActivityObjectStreamTypePListKey, 
+                       _SAActivityObjectTypePListKey, _SAActivityObjectUserActivityPListKey, 
+                       _SAActivityObjectVisibilityPListKey, _SAActivityStreamActivitiesPListKey, 
+                       _SAActivityStreamClassIdentifier, _SAActivityStreamSortDescriptorEndDateValue, 
+                       _SAActivityStreamSortDescriptorStartDateValue, _SAActivityStreamTaskTypePListKey, 
+                       _SAAddResultObjectsClassIdentifier, _SAAddResultObjectsObjectsPListKey, 
+                       _SAAddResultObjectsResultObjectsPListKey, _SAAlarmAceAlarmWrapClassIdentifier, 
+                       _SAAlarmAceAlarmWrapGenerationPListKey, _SAAlarmAlarmModificationAddedFrequencyPListKey, 
+                       _SAAlarmAlarmModificationAlarmIdPListKey, _SAAlarmAlarmModificationClassIdentifier, 
+                       _SAAlarmAlarmModificationEnabledPListKey, _SAAlarmAlarmModificationHourPListKey, 
+                       _SAAlarmAlarmModificationLabelPListKey, _SAAlarmAlarmModificationMinutePListKey, 
+                       _SAAlarmAlarmModificationRemovedFrequencyPListKey, _SAAlarmAlarmShowAlarmIdsPListKey, 
+                       _SAAlarmAlarmShowClassIdentifier, _SAAlarmCreateAlarmToCreatePListKey, 
+                       _SAAlarmCreateClassIdentifier, _SAAlarmCreateCompletedAlarmIdPListKey, 
+                       _SAAlarmCreateCompletedClassIdentifier, _SAAlarmCreatingAlarmErrorCode, 
+                       _SAAlarmDayOfWeekForString, _SAAlarmDayOfWeekFridayValue, 
+                       _SAAlarmDayOfWeekMondayValue, _SAAlarmDayOfWeekNeverValue, 
+                       _SAAlarmDayOfWeekSaturdayValue, _SAAlarmDayOfWeekSundayValue, 
+                       _SAAlarmDayOfWeekThursdayValue, _SAAlarmDayOfWeekTuesdayValue, 
+                       _SAAlarmDayOfWeekWednesdayValue, _SAAlarmDeleteAlarmIdsPListKey, 
+                       _SAAlarmDeleteClassIdentifier, _SAAlarmDeleteCompletedClassIdentifier, 
+                       _SAAlarmDismissAlarmIdsPListKey, _SAAlarmDismissClassIdentifier, 
+                       _SAAlarmEnablingAlarmErrorCode, _SAAlarmGroupAcronym, _SAAlarmGroupIdentifier, 
+                       _SAAlarmObjectClassIdentifier, _SAAlarmObjectDataSourceInfoPListKey, 
+                       _SAAlarmObjectEnabledPListKey, _SAAlarmObjectFiringPListKey, 
+                       _SAAlarmObjectFrequencyPListKey, _SAAlarmObjectHourPListKey, 
+                       _SAAlarmObjectLabelPListKey, _SAAlarmObjectMinutePListKey, 
                        _SAAlarmObjectRelativeOffsetMinutesPListKey, _SAAlarmSearchClassIdentifier, 
                        _SAAlarmSearchCompletedClassIdentifier, _SAAlarmSearchCompletedResultsPListKey, 
                        _SAAlarmSearchEnabledPListKey, _SAAlarmSearchFrequencyPListKey, 
@@ -2091,7 +2092,8 @@ exports:
                        _SANotificationPriorityHIGHValue, _SANotificationPriorityNONEValue, 
                        _SANotificationSourceBANNERValue, _SANotificationSourceLOCK_SCREENValue, 
                        _SANotificationSourceNOTIFICATION_CENTERValue, _SANotificationTypeConnectedCallValue, 
-                       _SANotificationTypeIncomingGenericNotificationValue, _SANotificationTypeIncomingGroupFaceTimeInviteNotificationValue, 
+                       _SANotificationTypeIncomingCallNotificationValue, _SANotificationTypeIncomingGenericNotificationValue, 
+                       _SANotificationTypeIncomingGroupFaceTimeInviteNotificationValue, 
                        _SANotificationTypeIncomingHomeCommunicationValue, _SANotificationTypeIncomingMessageValue, 
                        _SANotificationTypeIncomingReminderNotificationValue, _SANotificationTypeIncomingVoiceMailNotificationValue, 
                        _SANotificationTypePredictedWorkoutNotificationValue, _SANotificationsSearchAfterNotificationIdPListKey, 

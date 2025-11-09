@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EA15417E-2FB9-3F9C-B5B4-B57516FB38E0
+    value:           DBDA7F71-E59C-37C0-B550-B2C7C3D9142A
   - target:          x86_64-maccatalyst
-    value:           EA15417E-2FB9-3F9C-B5B4-B57516FB38E0
+    value:           DBDA7F71-E59C-37C0-B550-B2C7C3D9142A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A71B6302-FF3B-3370-996C-36855DBD7441
+    value:           45EED692-0259-3875-A6C9-A651447FEA3B
   - target:          arm64e-maccatalyst
-    value:           A71B6302-FF3B-3370-996C-36855DBD7441
+    value:           45EED692-0259-3875-A6C9-A651447FEA3B
 install-name:    '/System/Library/PrivateFrameworks/CommonAuth.framework/Versions/A/CommonAuth'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

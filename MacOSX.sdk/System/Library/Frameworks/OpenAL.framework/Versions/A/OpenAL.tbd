@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C78DFFE8-417D-3E70-B5CF-67A6C971744E
+    value:           D2642499-2D32-3DB3-AD4E-F9568893E031
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2DC78F13-412D-3F9F-ABCD-B6E8EA3E36CB
+    value:           D7335F0A-CE6B-3F89-8E4B-DCAD35D4779E
 install-name:    '/System/Library/Frameworks/OpenAL.framework/Versions/A/OpenAL'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

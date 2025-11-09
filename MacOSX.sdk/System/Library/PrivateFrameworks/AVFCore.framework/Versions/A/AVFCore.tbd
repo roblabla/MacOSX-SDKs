@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CCEA83EE-4D33-3497-A05F-CDF4F12E0BCD
+    value:           DD0FCBD9-7E36-362C-9CCF-CA9716F98530
   - target:          x86_64-maccatalyst
-    value:           CCEA83EE-4D33-3497-A05F-CDF4F12E0BCD
+    value:           DD0FCBD9-7E36-362C-9CCF-CA9716F98530
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           56B4E65C-C5BB-3A7A-A8FD-DAF4FBD519C4
+    value:           86C3D6D5-461E-33DE-9191-6C571EB3D57B
   - target:          arm64e-maccatalyst
-    value:           56B4E65C-C5BB-3A7A-A8FD-DAF4FBD519C4
+    value:           86C3D6D5-461E-33DE-9191-6C571EB3D57B
 install-name:    '/System/Library/PrivateFrameworks/AVFCore.framework/Versions/A/AVFCore'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           652C2FFD-9E28-3E7C-951B-4869441339F5
+    value:           DADAFF66-F21B-35EA-BCFA-A2B3B76C2AF0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C74803C7-232A-3A45-8737-8B8DF468C511
+    value:           E3A92B0A-3306-3939-8988-C0ABBAF13680
 install-name:    '/System/Library/PrivateFrameworks/MilAneflow.framework/Versions/A/MilAneflow'
 exports:
   - targets:         [ x86_64-macos ]

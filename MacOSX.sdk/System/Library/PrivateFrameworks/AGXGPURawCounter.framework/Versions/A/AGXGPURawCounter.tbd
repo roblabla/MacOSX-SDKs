@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3DF46765-99DF-3ED6-A060-B2F5D596CB53
+    value:           D007A8AE-C2B5-366F-8621-DE908295A9E4
   - target:          x86_64-maccatalyst
-    value:           3DF46765-99DF-3ED6-A060-B2F5D596CB53
+    value:           D007A8AE-C2B5-366F-8621-DE908295A9E4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           313F6265-9C81-3BDA-989B-F093CB97885C
+    value:           6421952D-58B4-3D2C-9CD0-253E9BBD2B00
   - target:          arm64e-maccatalyst
-    value:           313F6265-9C81-3BDA-989B-F093CB97885C
+    value:           6421952D-58B4-3D2C-9CD0-253E9BBD2B00
 install-name:    '/System/Library/PrivateFrameworks/AGXGPURawCounter.framework/Versions/A/AGXGPURawCounter'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

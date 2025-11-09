@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           71A32A3E-FF86-3BF2-A0B2-E7238515F7F9
+    value:           DD80CDD8-BF93-31B4-9BDF-43E2BD205E96
   - target:          x86_64-maccatalyst
-    value:           71A32A3E-FF86-3BF2-A0B2-E7238515F7F9
+    value:           DD80CDD8-BF93-31B4-9BDF-43E2BD205E96
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5C54002C-43FA-3182-AA93-E737059B6C62
+    value:           8C0DE742-F68E-3ABE-BC27-46902BAC5BC6
   - target:          arm64e-maccatalyst
-    value:           5C54002C-43FA-3182-AA93-E737059B6C62
+    value:           8C0DE742-F68E-3ABE-BC27-46902BAC5BC6
 install-name:    '/System/Library/PrivateFrameworks/Coherence.framework/Versions/A/Coherence'
 swift-abi-version: 7
 allowable-clients:
@@ -2321,17 +2321,12 @@ exports:
                        '_$s9Coherence17CRDataStoreBundleC5write_5model3url16allowedEncodings0H10AppFormatsyAA9CRContextC_AA7CapsuleVyxG10Foundation3URLVSayAA16CRCodableVersionOGSays5Int16VGtKFZ', 
                        '_$s9Coherence17CRDataStoreBundleC5write_5model3url17fileFormatVersionyAA9CRContextC_AA7CapsuleVyxG10Foundation3URLVs5Int16VSgtKFZ', 
                        '_$s9Coherence17CRDataStoreBundleC5write_5model3url7version17fileFormatVersionyAA9CRContextC_AA7CapsuleVyxG10Foundation3URLVAA09CRCodableK0Os5Int16VSgtKFZ', 
-                       '_$s9Coherence17CRDataStoreBundleC7UpdatesV17makeAsyncIteratorAEyx_GyF', 
-                       '_$s9Coherence17CRDataStoreBundleC7UpdatesV4nextAA7CapsuleVyxGSgyYaKF', 
-                       '_$s9Coherence17CRDataStoreBundleC7UpdatesV4nextAA7CapsuleVyxGSgyYaKFTu', 
-                       '_$s9Coherence17CRDataStoreBundleC7UpdatesVMa', '_$s9Coherence17CRDataStoreBundleC7UpdatesVMn', 
-                       '_$s9Coherence17CRDataStoreBundleC7UpdatesVyx_GScIAAMc', '_$s9Coherence17CRDataStoreBundleC7UpdatesVyx_GSciAAMc', 
                        '_$s9Coherence17CRDataStoreBundleC7canRead3url16allowedEncodings0H10AppFormatsSb10Foundation3URLV_SayAA16CRCodableVersionOGSays5Int16VGtFZ', 
                        '_$s9Coherence17CRDataStoreBundleC7receive10completiony7Combine11SubscribersO10CompletionOy_s5NeverOG_tF', 
                        '_$s9Coherence17CRDataStoreBundleC7receive12subscriptiony7Combine12Subscription_p_tF', 
                        '_$s9Coherence17CRDataStoreBundleC7receivey7Combine11SubscribersO6DemandVAA7CapsuleVyxGF', 
-                       '_$s9Coherence17CRDataStoreBundleC7updatesAC7UpdatesVyx_Gvg', 
-                       '_$s9Coherence17CRDataStoreBundleC7updatesAC7UpdatesVyx_GvpMV', 
+                       '_$s9Coherence17CRDataStoreBundleC7updatesScSyAA7CapsuleVyxGGvg', 
+                       '_$s9Coherence17CRDataStoreBundleC7updatesScSyAA7CapsuleVyxGGvpMV', 
                        '_$s9Coherence17CRDataStoreBundleC8getModel6readeryyAA7CapsuleVyxGSgc_tF', 
                        '_$s9Coherence17CRDataStoreBundleC9publisher7Combine12AnyPublisherVyAA7CapsuleVyxGs5Error_pGvg', 
                        '_$s9Coherence17CRDataStoreBundleC9publisher7Combine12AnyPublisherVyAA7CapsuleVyxGs5Error_pGvpMV', 
@@ -2635,20 +2630,17 @@ exports:
                        '_$s9Coherence21CapsuleMergeableDeltaV25needsToFinalizeTimestampsSbyF', 
                        '_$s9Coherence21CapsuleMergeableDeltaVMa', '_$s9Coherence21CapsuleMergeableDeltaVMn', 
                        '_$s9Coherence21CapsuleMergeableDeltaVN', '_$s9Coherence21CapsuleMergeableDeltaV_14serializedData2inAcA9CRContextC_10Foundation0F0VAA0B0VyxGtKcAA6CRTypeRzlufC', 
+                       '_$s9Coherence22CRMulticastSyncManagerC14isValidMessageySb10Foundation4DataVF', 
+                       '_$s9Coherence22CRMulticastSyncManagerC4sync_9sendDeltayAA7CapsuleVyxG_SbtF', 
                        '_$s9Coherence22CRMulticastSyncManagerC4syncyyAA7CapsuleVyxGF', 
-                       '_$s9Coherence22CRMulticastSyncManagerC7UpdatesV17makeAsyncIteratorAEyx_GyF', 
-                       '_$s9Coherence22CRMulticastSyncManagerC7UpdatesV4nextAA7CapsuleVyxGSgyYaKF', 
-                       '_$s9Coherence22CRMulticastSyncManagerC7UpdatesV4nextAA7CapsuleVyxGSgyYaKFTu', 
-                       '_$s9Coherence22CRMulticastSyncManagerC7UpdatesVMa', '_$s9Coherence22CRMulticastSyncManagerC7UpdatesVMn', 
-                       '_$s9Coherence22CRMulticastSyncManagerC7UpdatesVyx_GScIAAMc', 
-                       '_$s9Coherence22CRMulticastSyncManagerC7UpdatesVyx_GSciAAMc', 
                        '_$s9Coherence22CRMulticastSyncManagerC7receive10completiony7Combine11SubscribersO10CompletionOy_s5NeverOG_tF', 
                        '_$s9Coherence22CRMulticastSyncManagerC7receive12subscriptiony7Combine12Subscription_p_tF', 
                        '_$s9Coherence22CRMulticastSyncManagerC7receivey7Combine11SubscribersO6DemandVAA7CapsuleVyxGF', 
                        '_$s9Coherence22CRMulticastSyncManagerC7receiveyy10Foundation4DataVF', 
                        '_$s9Coherence22CRMulticastSyncManagerC7setLinkyyAA0bF0_pF', 
-                       '_$s9Coherence22CRMulticastSyncManagerC7updatesAC7UpdatesVyx_Gvg', 
-                       '_$s9Coherence22CRMulticastSyncManagerC7updatesAC7UpdatesVyx_GvpMV', 
+                       '_$s9Coherence22CRMulticastSyncManagerC7updatesScSyAA7CapsuleVyxGGvg', 
+                       '_$s9Coherence22CRMulticastSyncManagerC7updatesScSyAA7CapsuleVyxGGvpMV', 
+                       '_$s9Coherence22CRMulticastSyncManagerC8getModelAA7CapsuleVyxGSgyF', 
                        '_$s9Coherence22CRMulticastSyncManagerC9publisher7Combine12AnyPublisherVyAA7CapsuleVyxGs5Error_pGvg', 
                        '_$s9Coherence22CRMulticastSyncManagerC9publisher7Combine12AnyPublisherVyAA7CapsuleVyxGs5Error_pGvpMV', 
                        '_$s9Coherence22CRMulticastSyncManagerCMa', '_$s9Coherence22CRMulticastSyncManagerCMn', 
@@ -2656,6 +2648,8 @@ exports:
                        '_$s9Coherence22CRMulticastSyncManagerC_14sendHeartbeatsACyxGAA7CapsuleVyxG_SbtcfC', 
                        '_$s9Coherence22CRMulticastSyncManagerC_5model14sendHeartbeatsACyxGAA9CRContextC_AA7CapsuleVyxGSbtcfC', 
                        '_$s9Coherence22CRMulticastSyncManagerC_5model14sendHeartbeatsACyxGAA9CRContextC_AA7CapsuleVyxGSgSbtcfC', 
+                       '_$s9Coherence22CRMulticastSyncManagerC_5model9appFormat10identifier14sendHeartbeatsACyxGAA9CRContextC_AA7CapsuleVyxGSgs5UInt8VSg10Foundation4DataVSgSbtcfC', 
+                       '_$s9Coherence22CRMulticastSyncManagerC_5model9appFormat10identifier7catchupACyxGAA9CRContextC_AA7CapsuleVyxGSgs5UInt8VSg10Foundation4DataVSgAA0bcD15CatchupBehaviorOtcfC', 
                        '_$s9Coherence22CRMulticastSyncManagerCfD', '_$s9Coherence22CRMulticastSyncManagerCfd', 
                        '_$s9Coherence22CRMulticastSyncManagerCyxG7Combine06CustomE21IdentifierConvertibleAAMc', 
                        '_$s9Coherence22CRMulticastSyncManagerCyxG7Combine10SubscriberAAMc', 
@@ -2665,14 +2659,8 @@ exports:
                        '_$s9Coherence23CRCustomFileSyncManagerC26disableReadingInBackgroundSbvs', 
                        '_$s9Coherence23CRCustomFileSyncManagerC4sync_8finishedyAA7CapsuleVy5ModelQzG_yyctF', 
                        '_$s9Coherence23CRCustomFileSyncManagerC4syncyyAA7CapsuleVy5ModelQzGF', 
-                       '_$s9Coherence23CRCustomFileSyncManagerC7UpdatesV17makeAsyncIteratorAEyx_GyF', 
-                       '_$s9Coherence23CRCustomFileSyncManagerC7UpdatesV4nextAA7CapsuleVy5ModelQzGSgyYaKF', 
-                       '_$s9Coherence23CRCustomFileSyncManagerC7UpdatesV4nextAA7CapsuleVy5ModelQzGSgyYaKFTu', 
-                       '_$s9Coherence23CRCustomFileSyncManagerC7UpdatesVMa', '_$s9Coherence23CRCustomFileSyncManagerC7UpdatesVMn', 
-                       '_$s9Coherence23CRCustomFileSyncManagerC7UpdatesVyx_GScIAAMc', 
-                       '_$s9Coherence23CRCustomFileSyncManagerC7UpdatesVyx_GSciAAMc', 
-                       '_$s9Coherence23CRCustomFileSyncManagerC7updatesAC7UpdatesVyx_Gvg', 
-                       '_$s9Coherence23CRCustomFileSyncManagerC7updatesAC7UpdatesVyx_GvpMV', 
+                       '_$s9Coherence23CRCustomFileSyncManagerC7updatesScSyAA7CapsuleVy5ModelQzGGvg', 
+                       '_$s9Coherence23CRCustomFileSyncManagerC7updatesScSyAA7CapsuleVy5ModelQzGGvpMV', 
                        '_$s9Coherence23CRCustomFileSyncManagerC9publisher7Combine12AnyPublisherVyAA7CapsuleVy5ModelQzGs5Error_pGvg', 
                        '_$s9Coherence23CRCustomFileSyncManagerC9publisher7Combine12AnyPublisherVyAA7CapsuleVy5ModelQzGs5Error_pGvpMV', 
                        '_$s9Coherence23CRCustomFileSyncManagerCMa', '_$s9Coherence23CRCustomFileSyncManagerCMn', 
@@ -2826,7 +2814,15 @@ exports:
                        '_$s9Coherence28ObservableDifferenceIdentityTL', '_$s9Coherence31CRAttributeStringAttributeScopeMp', 
                        '_$s9Coherence31CRAttributeStringAttributeScopeP14attributeTypesSDySSAA0bC11DecodingKey_pXpGvgZTj', 
                        '_$s9Coherence31CRAttributeStringAttributeScopeP14attributeTypesSDySSAA0bC11DecodingKey_pXpGvgZTq', 
-                       '_$s9Coherence31CRAttributeStringAttributeScopeTL', '_$s9Coherence38CRDataStoreBundleReadFileVersionPolicyO012allMergingToF0yA2CmFWC', 
+                       '_$s9Coherence31CRAttributeStringAttributeScopeTL', '_$s9Coherence37CRMulticastSyncManagerCatchupBehaviorO15onConnectOrFailyA2CmFWC', 
+                       '_$s9Coherence37CRMulticastSyncManagerCatchupBehaviorO28onConnectOrFailWithHeartbeatyACSd_tcACmFWC', 
+                       '_$s9Coherence37CRMulticastSyncManagerCatchupBehaviorO2eeoiySbAC_ACtFZ', 
+                       '_$s9Coherence37CRMulticastSyncManagerCatchupBehaviorO5neveryA2CmFWC', 
+                       '_$s9Coherence37CRMulticastSyncManagerCatchupBehaviorOMa', 
+                       '_$s9Coherence37CRMulticastSyncManagerCatchupBehaviorOMn', 
+                       '_$s9Coherence37CRMulticastSyncManagerCatchupBehaviorON', 
+                       '_$s9Coherence37CRMulticastSyncManagerCatchupBehaviorOSQAAMc', 
+                       '_$s9Coherence38CRDataStoreBundleReadFileVersionPolicyO012allMergingToF0yA2CmFWC', 
                        '_$s9Coherence38CRDataStoreBundleReadFileVersionPolicyO2eeoiySbAC_ACtFZ', 
                        '_$s9Coherence38CRDataStoreBundleReadFileVersionPolicyO3allyA2CmFWC', 
                        '_$s9Coherence38CRDataStoreBundleReadFileVersionPolicyO4hash4intoys6HasherVz_tF', 
@@ -3414,6 +3410,7 @@ exports:
                        '_$s9Coherence9CRContextC18encryptionDelegateAA010EncryptionD0_pSgvpMV', 
                        '_$s9Coherence9CRContextC19newTransientContext18uniqueAssetManager18encryptionDelegateACSb_AA010EncryptionJ0_pSgtFZ', 
                        '_$s9Coherence9CRContextC22uniqueContextUnchecked3for18encryptionDelegateAC10Foundation3URLV_AA010EncryptionH0_pSgtKFZ', 
+                       '_$s9Coherence9CRContextC29currentUniqueContextUnchecked3forACSg10Foundation3URLV_tFZ', 
                        '_$s9Coherence9CRContextC3for18encryptionDelegateAC10Foundation3URLV_AA010EncryptionE0_pSgtKcfC', 
                        '_$s9Coherence9CRContextC5closeyyF', '_$s9Coherence9CRContextCACycfC', 
                        '_$s9Coherence9CRContextCACycfc', '_$s9Coherence9CRContextCMa', 

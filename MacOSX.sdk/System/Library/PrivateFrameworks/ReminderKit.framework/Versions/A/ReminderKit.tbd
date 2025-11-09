@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9EC1EF3C-AF5C-3FC7-96B4-F5CAABA33043
+    value:           D33D345D-4080-33F9-B662-CD59411BE800
   - target:          x86_64-maccatalyst
-    value:           9EC1EF3C-AF5C-3FC7-96B4-F5CAABA33043
+    value:           D33D345D-4080-33F9-B662-CD59411BE800
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           69DD1904-B7BF-3691-BD26-66CA2F2F6246
+    value:           E2889019-E66D-3670-851A-D22FB2A68928
   - target:          arm64e-maccatalyst
-    value:           69DD1904-B7BF-3691-BD26-66CA2F2F6246
+    value:           E2889019-E66D-3670-851A-D22FB2A68928
 install-name:    '/System/Library/PrivateFrameworks/ReminderKit.framework/Versions/A/ReminderKit'
-current-version: 815
+current-version: 845
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -28,15 +28,16 @@ exports:
                        _NewBase64Decode, _NewBase64Encode, _PropertyNameFromREMReminderChangeTrackingProperty, 
                        _RDHashtagLabelUpdaterAuthor, _RDNotificationConsumerLastBannerPresentationDateAuthor, 
                        _RDSharedInlineTagAutoConvertAuthor, _RDStagedLightweightMigrationAuthor, 
-                       _RDStalePinnedListsEventHandlerAuthor, _RDStoreControllerAccountIdentifierHashtagLabelsMigrationAuthor, 
+                       _RDStalePinnedListsEventHandlerAuthor, _RDStaleSharedToMeListMostRecentTargetTemplateIdentifierByCurrentUserEventHandlerAuthor, 
+                       _RDStoreControllerAccountIdentifierHashtagLabelsMigrationAuthor, 
                        _RDStoreControllerAutoConvertSharedInlineTagsMigrationAuthor, 
                        _RDStoreControllerCKParentReminderIdentifierMigrationAuthor, 
                        _RDStoreControllerCreateAccountStoreAuthor, _RDStoreControllerDefaultValuesMigrationAuthor, 
                        _RDStoreControllerDeleteAccountStoreAuthor, _RDStoreControllerDiacriticsInsensitiveHashtagLabelsMigrationAuthor, 
                        _RDStoreControllerDisplayDateUpdaterAuthor, _RDStoreControllerICCloudContextAuthor, 
                        _RDStoreControllerICCloudContextInternalAuthor, _RDStoreControllerICCloudContextServerChangeTokenAuthor, 
-                       _RDStoreControllerIsPinnedByCurrentUserMigrationAuthor, _RDStoreControllerJSONPropertiesMigrationAuthor, 
-                       _RDStoreControllerMostRecentTargetTemplateIdentifierByCurrentUserMigrationAuthor, 
+                       _RDStoreControllerImageDeduplicationActivityAuthor, _RDStoreControllerIsPinnedByCurrentUserMigrationAuthor, 
+                       _RDStoreControllerJSONPropertiesMigrationAuthor, _RDStoreControllerMostRecentTargetTemplateIdentifierByCurrentUserMigrationAuthor, 
                        _RDStoreControllerOrphanedListMigrationAuthor, _RDStoreControllerUnsetCKDirtyFlagsInNonCKAccountsMigrationAuthor, 
                        _RDSyncActivityNotificationEngineAuthor, _RDTemplateOperationAuthor, 
                        _RDTodayNotificationLastBannerPresentationDateAuthor, _REMACAccountPropertyDidChooseToMigrate, 
@@ -120,13 +121,14 @@ exports:
                        __REMStoreDidCompleteInitializeAllAccounts, __REMStoreMustRefreshNotificationName, 
                        __REMStoreShouldNotifyOfInteractionWithPeopleNotificationName, 
                        __auto_REMAccountTypeForPrimaryCloudKit, _cloudBasedAccountTypes, 
-                       _cloudKitAccountTypes, _kREMCurrentRuntimeVersion, _kREMObjectIDURLScheme, 
-                       _kREMSupportedVersionForSydneyRomeKincaid, _kREMSupportedVersionUnset, 
-                       _kStructuredLocationABIDKey, _kStructuredLocationABIDKey_oldAndBusted, 
+                       _cloudKitAccountTypes, _kREMCurrentRuntimeVersion, _kREMNonceUnset, 
+                       _kREMObjectIDURLScheme, _kREMSupportedVersionForSydneyRomeKincaid, 
+                       _kREMSupportedVersionUnset, _kStructuredLocationABIDKey, _kStructuredLocationABIDKey_oldAndBusted, 
                        _kStructuredLocationRadiusKey, _kStructuredLocationRadiusKey_oldAndBusted, 
                        _kStructuredLocationReferenceFrameKey, _k_REM_ImportOptionConsiderDTENDForDueDate, 
-                       _rem_currentRuntimeVersion, _rem_feature_enabled, _rem_isUnsupportedVersionByRuntime, 
-                       _rem_logObject, _rem_loggableSupportedVersionFrom ]
+                       _rem_currentRuntimeVersion, _rem_feature_enabled, _rem_isEqualNonces, 
+                       _rem_isNonceUnset, _rem_isUnsupportedVersionByRuntime, _rem_logObject, 
+                       _rem_loggableSupportedVersionFrom ]
     objc-classes:    [ CRArray, CRCoder, CRCoderArchiver, CRCoderUnarchiver, CRConstant, 
                        CRDocument, CRObject, CRRegisterLatest, CRRegisterMultiValue, 
                        CRRegisterMultiValueLeast, CRSet, CRTTCompatibleDocument, 

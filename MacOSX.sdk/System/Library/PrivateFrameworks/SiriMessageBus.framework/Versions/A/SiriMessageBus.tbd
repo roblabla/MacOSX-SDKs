@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0C0B870D-5E6A-36DB-9A79-39DA886826F9
+    value:           1773F126-3F33-3A64-BFD8-24BF058CEE7F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           17131270-BA17-358E-88A6-64631B22321F
+    value:           F7B30EF8-23BD-30EC-B12C-771A7CDACFBA
 install-name:    '/System/Library/PrivateFrameworks/SiriMessageBus.framework/Versions/A/SiriMessageBus'
 swift-abi-version: 7
 exports:

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           98EB8A94-F258-30F0-B5FB-A8DB0D96D1F8
+    value:           B4FE0770-457C-3535-BA89-FA4DD30C97D0
   - target:          x86_64-maccatalyst
-    value:           98EB8A94-F258-30F0-B5FB-A8DB0D96D1F8
+    value:           B4FE0770-457C-3535-BA89-FA4DD30C97D0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           34580E17-9269-3B6D-BEF5-2F3F4223C292
+    value:           98DCE887-8BEE-35FF-9C38-A12674B9D341
   - target:          arm64e-maccatalyst
-    value:           34580E17-9269-3B6D-BEF5-2F3F4223C292
+    value:           98DCE887-8BEE-35FF-9C38-A12674B9D341
 install-name:    '/usr/lib/swift/libswiftOpenCL.dylib'
 current-version: 2
 swift-abi-version: 7

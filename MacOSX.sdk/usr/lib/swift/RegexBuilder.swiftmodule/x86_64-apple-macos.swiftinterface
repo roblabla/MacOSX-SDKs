@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.134.4 clang-1400.0.29.51)
-// swift-module-flags: -target x86_64-apple-macosx13.0 -enable-objc-interop -enable-library-evolution -module-link-name swiftRegexBuilder -swift-version 5 -O -enforce-exclusivity=unchecked -module-name RegexBuilder
+// swift-module-flags: -target x86_64-apple-macosx13.1 -enable-objc-interop -enable-library-evolution -module-link-name swiftRegexBuilder -swift-version 5 -O -enforce-exclusivity=unchecked -module-name RegexBuilder
 // swift-module-flags-ignorable: -enable-lexical-lifetimes=false -target-min-inlining-version min -user-module-version 5.7.1.134.4
 import Swift
 import _StringProcessing

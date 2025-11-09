@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E685D43D-4F55-36F0-825D-28FFEC8A6753
+    value:           36CC6D67-015D-3628-90C3-1C3FEB5D7C50
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           66C6FFAD-4FA8-35D1-932B-2F9EFFBF33FB
+    value:           5EF11172-E432-3ABB-A367-065946703844
 install-name:    '/System/Library/PrivateFrameworks/PowerlogHelperdOperators.framework/Versions/A/PowerlogHelperdOperators'
 exports:
   - targets:         [ x86_64-macos ]

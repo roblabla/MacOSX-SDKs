@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DD282E29-2A96-3120-936D-1ABDE6568C43
+    value:           E243DFCA-FC8A-3998-838B-84BC23CE10CE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EB97CC34-CC88-3714-A919-DEC3E5CB0757
+    value:           589F6F3C-417C-3058-9329-B8D18A32664F
 install-name:    '/System/Library/Frameworks/IntentsUI.framework/Versions/A/IntentsUI'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

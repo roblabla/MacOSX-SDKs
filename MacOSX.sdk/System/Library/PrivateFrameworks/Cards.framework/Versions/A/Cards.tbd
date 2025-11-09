@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CBD5002F-11DB-39AE-8F23-A591B7817E49
+    value:           8ED0875C-5941-3245-B854-A59B047FF4AA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           90CFCDF8-B7B5-3DA0-B8BE-3E175E8FD85D
+    value:           DBF1B418-D0E4-3BBF-AC8F-AD3B6BE5C05F
 install-name:    '/System/Library/PrivateFrameworks/Cards.framework/Versions/A/Cards'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

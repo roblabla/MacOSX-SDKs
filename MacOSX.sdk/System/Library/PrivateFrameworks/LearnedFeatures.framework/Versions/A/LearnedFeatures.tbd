@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1325A2FD-40F2-38EC-B02C-707A92949DAF
+    value:           8DC1D947-1769-3987-8C68-FA4EDC845BF9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           204DC602-A12A-313F-97B3-348A704762F0
+    value:           D898201D-19F1-304A-90B6-553A7A3D73B9
 install-name:    '/System/Library/PrivateFrameworks/LearnedFeatures.framework/Versions/A/LearnedFeatures'
 current-version: 5.54.8
 compatibility-version: 5.54.8

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FCB3E4FD-FD13-38D8-B96A-B603357F5F03
+    value:           299A6CA1-52A1-3284-9A0F-222889283E32
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           58A2AC43-16AA-380D-A3E5-41C88736F9C1
+    value:           DE3F5BD8-7712-3625-8A3D-1FB5DF885AE7
 install-name:    '/usr/lib/libskit.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
