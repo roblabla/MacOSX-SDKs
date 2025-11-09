@@ -4,16 +4,16 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           416B20FE-9E3F-332C-BE38-53E7317ED64B
+    value:           A363158E-3E35-3259-BA3B-3DCC950AEE58
   - target:          x86_64-maccatalyst
-    value:           416B20FE-9E3F-332C-BE38-53E7317ED64B
+    value:           A363158E-3E35-3259-BA3B-3DCC950AEE58
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0590D265-76B7-3D97-B43F-B1C8755A2E81
+    value:           84C1AC15-DF41-3B79-AE2C-B4041B43AFE1
   - target:          arm64e-maccatalyst
-    value:           0590D265-76B7-3D97-B43F-B1C8755A2E81
+    value:           84C1AC15-DF41-3B79-AE2C-B4041B43AFE1
 install-name:    '/usr/lib/libFaultOrdering.dylib'
 ...

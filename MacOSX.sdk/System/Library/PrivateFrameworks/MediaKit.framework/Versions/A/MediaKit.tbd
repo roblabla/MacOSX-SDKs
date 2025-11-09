@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E0188048-8E92-35D1-8C93-953E48E0ABAC
+    value:           C7FB3929-E0E1-3A6C-B138-EE504CCE9EF0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F8F359A2-6E19-3254-A4F7-A50CC991C522
+    value:           AFF2AF6E-FACA-34D1-BA21-F01E445DB697
 install-name:    '/System/Library/PrivateFrameworks/MediaKit.framework/Versions/A/MediaKit'
 current-version: 927.40.2
 compatibility-version: 302

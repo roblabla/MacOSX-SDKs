@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B71CBE24-C78C-34BD-BB85-CDB506F5F407
+    value:           8EE538E7-2BB1-3E29-8FC3-938335998B22
   - target:          x86_64-maccatalyst
-    value:           B71CBE24-C78C-34BD-BB85-CDB506F5F407
+    value:           8EE538E7-2BB1-3E29-8FC3-938335998B22
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A3DA8B3E-2857-3E3B-9661-618C4A116BD6
+    value:           A2A5B698-8017-3DCE-BD07-C9CC7A807B95
   - target:          arm64e-maccatalyst
-    value:           A3DA8B3E-2857-3E3B-9661-618C4A116BD6
+    value:           A2A5B698-8017-3DCE-BD07-C9CC7A807B95
 install-name:    '/System/Library/PrivateFrameworks/ProtocolBuffer.framework/Versions/A/ProtocolBuffer'
 current-version: 285.20.8
 exports:

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0D6E59BC-A818-30E3-ABA9-ED8C61197F04
+    value:           106D5341-00A4-30ED-9F14-7429699307B1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BCB12437-13DA-37D1-8B57-B169AC81EC1F
+    value:           A9632E64-D22D-36FC-B964-FE1BCE16A687
 install-name:    '/System/Library/PrivateFrameworks/DiskManagement.framework/Versions/A/DiskManagement'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

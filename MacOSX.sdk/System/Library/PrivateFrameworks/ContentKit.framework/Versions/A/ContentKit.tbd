@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8E4FC56B-71FF-36DC-A089-F39CCC3258A5
+    value:           1AE8ADA1-0D72-371C-9180-1A37AF74ADF0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FEC2DFCD-896A-3795-B643-D3105D7A369E
+    value:           6F8AAF20-D064-3190-985E-55247064DF08
 install-name:    '/System/Library/PrivateFrameworks/ContentKit.framework/Versions/A/ContentKit'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -45,7 +45,9 @@ exports:
                        _WFCoercionOptionIgnoreDefaultDisallowedCoercionPaths, _WFCoercionOptionItemClassPrioritizationType, 
                        _WFCoercionOptionPreferredTypes, _WFCoercionPathContainsPath, 
                        _WFContactAccessResourceAvailabilityCoercionOptionName, _WFContactFromCNContactProperty, 
-                       _WFContentAttributionSetApplicationKey, _WFContentItemErrorDomain, 
+                       _WFContentAttributionSetApplicationKey, _WFContentItemChangeTransactionModeAppend, 
+                       _WFContentItemChangeTransactionModeRemove, _WFContentItemChangeTransactionModeRemoveAll, 
+                       _WFContentItemChangeTransactionModeSet, _WFContentItemErrorDomain, 
                        _WFContentItemListThumbnailCornerRadiusForRoundingStyle, _WFContentItemListThumbnailOptionRoundingStyle, 
                        _WFContentItemTypeName, _WFContentKitLocalizedContentPropertyName, 
                        _WFContentKitLocalizedContentPropertyNameMarker, _WFContentKitLocalizedContentPropertyPossibleValue, 
@@ -100,7 +102,7 @@ exports:
                        _WFLogCategoryContentGraph, _WFLogCategoryContentItem, _WFLogCategoryDatabase, 
                        _WFLogCategoryDialog, _WFLogCategoryEventTracker, _WFLogCategoryFolders, 
                        _WFLogCategoryGallery, _WFLogCategoryGeneral, _WFLogCategoryHome, 
-                       _WFLogCategoryIntentExecution, _WFLogCategoryInterchange, 
+                       _WFLogCategoryHomescreen, _WFLogCategoryIntentExecution, _WFLogCategoryInterchange, 
                        _WFLogCategoryPeaceMigration, _WFLogCategoryRemoteExecution, 
                        _WFLogCategorySleep, _WFLogCategorySpotlightSync, _WFLogCategoryTriggers, 
                        _WFLogCategoryWFContact, _WFLogCategoryWatchSync, _WFLogCategoryWidget, 
@@ -188,16 +190,16 @@ exports:
                        WFContentAlertButton, WFContentAppAttribution, WFContentAttribution, 
                        WFContentAttributionSet, WFContentCoercionNode, WFContentCoercionSearch, 
                        WFContentCollection, WFContentComparisonPredicate, WFContentCompoundPredicate, 
-                       WFContentFalsePredicate, WFContentItem, WFContentItemRegistry, 
-                       WFContentLibraryANDFiltering, WFContentLibraryFiltering, WFContentPredicate, 
-                       WFContentProperty, WFContentPropertyBuilder, WFContentQuery, 
-                       WFContentSortDescriptor, WFContentTruePredicate, WFCreateFolderEvent, 
-                       WFCurrencyAmountContentItem, WFDCMapsLinkContentItem, WFDaemonApplicationContextProvider, 
-                       WFDataDetector, WFDataDetectorResults, WFDateContentItem, 
-                       WFDateDetector, WFDatePickerConfiguration, WFDeferredLocalizedString, 
-                       WFDeleteShortcutEvent, WFDevice, WFDictionaryContentItem, 
-                       WFEKParticipantContentItem, WFEditShortcutEvent, WFEmail, 
-                       WFEmailAddress, WFEmailAddressContentItem, WFEmailContentItem, 
+                       WFContentFalsePredicate, WFContentItem, WFContentItemChangeTransaction, 
+                       WFContentItemRegistry, WFContentLibraryANDFiltering, WFContentLibraryFiltering, 
+                       WFContentPredicate, WFContentProperty, WFContentPropertyBuilder, 
+                       WFContentQuery, WFContentSortDescriptor, WFContentTruePredicate, 
+                       WFCreateFolderEvent, WFCurrencyAmountContentItem, WFDCMapsLinkContentItem, 
+                       WFDaemonApplicationContextProvider, WFDataDetector, WFDataDetectorResults, 
+                       WFDateContentItem, WFDateDetector, WFDatePickerConfiguration, 
+                       WFDeferredLocalizedString, WFDeleteShortcutEvent, WFDevice, 
+                       WFDictionaryContentItem, WFEKParticipantContentItem, WFEditShortcutEvent, 
+                       WFEmail, WFEmailAddress, WFEmailAddressContentItem, WFEmailContentItem, 
                        WFEvent, WFEventLogarithmicBinningValueTransformer, WFEventSignificantFigureValueTransformer, 
                        WFEventTracker, WFFTPDirectoryListingContentItem, WFFileCoder, 
                        WFFileRepresentation, WFFileSize, WFFileSizeContentItem, WFFileType, 

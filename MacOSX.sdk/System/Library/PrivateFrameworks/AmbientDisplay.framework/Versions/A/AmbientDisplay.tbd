@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DE793297-1F31-31DD-8881-AC9A3626B39B
+    value:           348E4DC6-24EE-309E-ACA0-B2E79896D793
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C7E4A4E1-8344-3BE0-AF7C-5E7EEB6AE6CC
+    value:           C9E4D48A-2DEE-35A1-A9F4-A2E9FC06AC8A
 install-name:    '/System/Library/PrivateFrameworks/AmbientDisplay.framework/Versions/A/AmbientDisplay'
 current-version: 110
 exports:

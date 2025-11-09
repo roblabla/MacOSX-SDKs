@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2E994C7F-3F03-3A07-879C-55690D22BEDA
+    value:           D59138DC-10CD-3DF8-9F04-CCDB6102C370
   - target:          x86_64-maccatalyst
-    value:           2E994C7F-3F03-3A07-879C-55690D22BEDA
+    value:           D59138DC-10CD-3DF8-9F04-CCDB6102C370
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B4817FA2-1D03-3DC6-AF3F-980A5F59111C
+    value:           0FB3C46F-6DDF-3FDD-BF81-BF62A7553659
   - target:          arm64e-maccatalyst
-    value:           B4817FA2-1D03-3DC6-AF3F-980A5F59111C
+    value:           0FB3C46F-6DDF-3FDD-BF81-BF62A7553659
 install-name:    '/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore'
 current-version: 1.11
 compatibility-version: 1.2
@@ -25,7 +25,7 @@ reexported-libraries:
                        '/System/Library/Frameworks/CoreVideo.framework/Versions/A/CoreVideo', 
                        '/usr/lib/libobjc.A.dylib' ]
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CAAtomGetString, _CABackingStoreBeginUpdate, _CABackingStoreCollect, 
                        _CABackingStoreCollectBlocking, _CABackingStoreCopyCGImage, 
@@ -490,8 +490,8 @@ exports:
                        _kCASnapshotDestination, _kCASnapshotDisplayName, _kCASnapshotEnforceSecureMode, 
                        _kCASnapshotFormatOpaque, _kCASnapshotFormatWideGamut, _kCASnapshotIgnoreDisableUpdateMasks, 
                        _kCASnapshotIgnoreLayerFixup, _kCASnapshotIgnoreRootAccessibilityFilters, 
-                       _kCASnapshotIgnoreSublayers, _kCASnapshotLayerId, _kCASnapshotMode, 
-                       _kCASnapshotModeDisplay, _kCASnapshotModeExcludeContextList, 
+                       _kCASnapshotIgnoreSublayers, _kCASnapshotLayerId, _kCASnapshotMapCacheAttribute, 
+                       _kCASnapshotMode, _kCASnapshotModeDisplay, _kCASnapshotModeExcludeContextList, 
                        _kCASnapshotModeIncludeContextList, _kCASnapshotModeLayer, 
                        _kCASnapshotModeStopAfterContextList, _kCASnapshotOriginX, 
                        _kCASnapshotOriginY, _kCASnapshotReuseBackdropContents, _kCASnapshotSizeHeight, 
@@ -561,6 +561,6 @@ exports:
                        CAStateAddElement._keyPath, CAStateAddElement._object, CAStateElement._source, 
                        CAStateElement._target, CAStateRemoveElement._keyPath, CAStateRemoveElement._object, 
                        CAValueFunction._impl, CAValueFunction._string ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CARenderContextGetRemoteInputMachTime ]
 ...

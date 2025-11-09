@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B8F02DB3-2C04-3B50-BD1A-29AB29BFF6EF
+    value:           9C14FA0A-D905-375B-8C32-E311ED59B6AD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           81661BC1-EA52-313F-8EFB-FBE195CE9F82
+    value:           9DC7A28A-4E40-35EE-83DC-FCE5261B3630
 install-name:    '/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/SpeechRecognition.framework/Versions/A/SpeechRecognition'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

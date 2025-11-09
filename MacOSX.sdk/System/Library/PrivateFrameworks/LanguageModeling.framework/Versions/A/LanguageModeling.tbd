@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9558DF3C-AD78-3C91-9B80-572ACED34F5C
+    value:           BCB1F8A7-54B9-36D1-B742-70DF7657BF0B
   - target:          x86_64-maccatalyst
-    value:           9558DF3C-AD78-3C91-9B80-572ACED34F5C
+    value:           BCB1F8A7-54B9-36D1-B742-70DF7657BF0B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D65F2A08-4AEE-36B9-B565-FB3A3A260C15
+    value:           4D0D7198-4EB8-3D57-93E7-6F1F7EF4437C
   - target:          arm64e-maccatalyst
-    value:           D65F2A08-4AEE-36B9-B565-FB3A3A260C15
+    value:           4D0D7198-4EB8-3D57-93E7-6F1F7EF4437C
 install-name:    '/System/Library/PrivateFrameworks/LanguageModeling.framework/Versions/A/LanguageModeling'
-current-version: 247
+current-version: 247.1
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     weak-symbols:    [ __ZTINSt3__113basic_filebufIcNS_11char_traitsIcEEEE, __ZTINSt3__114basic_ifstreamIcNS_11char_traitsIcEEEE, 

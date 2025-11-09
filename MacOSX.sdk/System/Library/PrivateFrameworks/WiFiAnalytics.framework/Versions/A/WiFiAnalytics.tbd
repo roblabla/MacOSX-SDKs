@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2C54B90A-A8B3-3D18-8E34-C73789287477
+    value:           8C0F558F-8F16-3302-89F4-6068664E2C5B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2929F594-59C9-3427-9D56-7A2C9F741842
+    value:           9695EEFF-4B5E-3943-B2A7-1CF26395F11F
 install-name:    '/System/Library/PrivateFrameworks/WiFiAnalytics.framework/Versions/A/WiFiAnalytics'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

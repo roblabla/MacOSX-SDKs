@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FA0E28AF-10C4-349A-A579-02C08D06D198
+    value:           027F4A28-FD71-31DD-963B-396AD41B327A
   - target:          x86_64-maccatalyst
-    value:           FA0E28AF-10C4-349A-A579-02C08D06D198
+    value:           027F4A28-FD71-31DD-963B-396AD41B327A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E6C0CAAF-D9CC-311E-81E3-D67D22C547A2
+    value:           B2FD1798-C68D-3735-B400-04057F97A605
   - target:          arm64e-maccatalyst
-    value:           E6C0CAAF-D9CC-311E-81E3-D67D22C547A2
+    value:           B2FD1798-C68D-3735-B400-04057F97A605
 install-name:    '/System/Library/Frameworks/ModelIO.framework/Versions/A/ModelIO'
-current-version: 238
+current-version: 239.1
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _MDLAssetLoadingOptionAssetAtTime, _MDLAssetLoadingOptionBufferAllocator, 
                        _MDLAssetLoadingOptionComputeBitangents, _MDLAssetLoadingOptionComputeExtents, 

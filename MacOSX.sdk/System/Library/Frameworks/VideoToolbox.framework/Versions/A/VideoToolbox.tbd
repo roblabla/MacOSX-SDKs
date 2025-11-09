@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           862F2D78-84B6-3129-836C-693A0FCE9448
+    value:           53FF51DF-E1B6-3320-9290-E54DD1B3ACB7
   - target:          x86_64-maccatalyst
-    value:           862F2D78-84B6-3129-836C-693A0FCE9448
+    value:           53FF51DF-E1B6-3320-9290-E54DD1B3ACB7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B55A2933-8C41-3C07-AD48-D1D09B11DB99
+    value:           7FFA8E1F-9457-32C3-8DDB-8BEA613F4D81
   - target:          arm64e-maccatalyst
-    value:           B55A2933-8C41-3C07-AD48-D1D09B11DB99
+    value:           7FFA8E1F-9457-32C3-8DDB-8BEA613F4D81
 install-name:    '/System/Library/Frameworks/VideoToolbox.framework/Versions/A/VideoToolbox'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _VTBeginUpdatingIncrementalCodeCoverageData, _VTBuildPixelBufferPools, 
                        _VTBuildPixelBufferPools2, _VTCompressionSessionBeginPass, 
@@ -315,6 +315,7 @@ exports:
                        _kVTPixelTransferMostRecentConversionValue_HardwareAndSoftware, 
                        _kVTPixelTransferMostRecentConversionValue_Metal, _kVTPixelTransferMostRecentConversionValue_Software, 
                        _kVTPixelTransferPropertyKey_AllowLowQualityScaling, _kVTPixelTransferPropertyKey_ClientPID, 
+                       _kVTPixelTransferPropertyKey_Convert10BitHDRToSDRFor8BitDestinationWithUnspecifiedColorProperties, 
                        _kVTPixelTransferPropertyKey_DestinationCleanAperture, _kVTPixelTransferPropertyKey_DestinationColorPrimaries, 
                        _kVTPixelTransferPropertyKey_DestinationCropRectangle, _kVTPixelTransferPropertyKey_DestinationICCProfile, 
                        _kVTPixelTransferPropertyKey_DestinationPixelAspectRatio, 
@@ -436,7 +437,7 @@ exports:
                        _kVTVideoEncoder_IsHardwareAccelerated, _kVTVideoEncoder_IsWrapperEncoder, 
                        _kVTVideoEncoder_QualityRating, _kVTVideoEncoder_Rating, _kVTVideoEncoder_SupportsTiledCompression, 
                        _kVTVideoEncoder_WrappedInstanceCount, _kVTVideoEncoder_WrapsCodecType ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _VTRegisterVideoDecoderBundleDirectory, _VTRegisterVideoEncoderBundleDirectory, 
                        _kVTCompressionPropertyKey_ExpectedInputBufferDimensions ]
   - targets:         [ arm64e-macos, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]

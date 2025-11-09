@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           E5CD5431-1F55-3674-B41E-137DFAC46FC6
+    value:           3D9B51D8-AF02-3B23-8BF5-66ABF730B4DF
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           95B074C3-7C16-3768-B0DE-B8F0FB88B212
+    value:           3F3B29E8-B2DB-3311-9B69-EFB182BD7019
 install-name:    '/System/iOSSupport/System/Library/Frameworks/MapKit.framework/Versions/A/MapKit'
 current-version: 14
 exports:
-  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _CLLocationCoordinatesFromNSData, _DidDisplayBrowseCategories, 
                        _DidFailDisplayBrowseCategories, _ImageForShieldDataSourceTypeShouldBeFlipped, 
                        _MKAddressDictionaryFromCLPlacemark, _MKAddressDictionaryFromContactsDictionary, 

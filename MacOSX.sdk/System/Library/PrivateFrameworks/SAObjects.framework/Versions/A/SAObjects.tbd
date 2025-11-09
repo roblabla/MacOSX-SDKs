@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           586095D4-4B96-37E0-8689-18256FCF4699
+    value:           0E2EBC8E-217F-3BDF-A5BA-24C8AB09002B
   - target:          x86_64-maccatalyst
-    value:           586095D4-4B96-37E0-8689-18256FCF4699
+    value:           0E2EBC8E-217F-3BDF-A5BA-24C8AB09002B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EABF40A7-CEEB-3814-9F02-D9B56178F1A9
+    value:           864D5CDB-44A7-36F6-BDD3-A7FAF8E73CEC
   - target:          arm64e-maccatalyst
-    value:           EABF40A7-CEEB-3814-9F02-D9B56178F1A9
+    value:           864D5CDB-44A7-36F6-BDD3-A7FAF8E73CEC
 install-name:    '/System/Library/PrivateFrameworks/SAObjects.framework/Versions/A/SAObjects'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

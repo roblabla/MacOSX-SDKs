@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DA812F0F-31DA-3A10-BE83-190AE6189A58
+    value:           24FCD568-7079-383F-925E-2145F1584C8A
   - target:          x86_64-maccatalyst
-    value:           DA812F0F-31DA-3A10-BE83-190AE6189A58
+    value:           24FCD568-7079-383F-925E-2145F1584C8A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           33922935-726A-3BC6-94BE-C541571CC1E4
+    value:           1097149C-B0EB-344D-89F1-E854FB302688
   - target:          arm64e-maccatalyst
-    value:           33922935-726A-3BC6-94BE-C541571CC1E4
+    value:           1097149C-B0EB-344D-89F1-E854FB302688
 install-name:    '/usr/lib/swift/libswiftCryptoTokenKit.dylib'
-current-version: 487.40.10
+current-version: 487.60.2
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftCryptoTokenKit.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftCryptoTokenKit.dylib', 

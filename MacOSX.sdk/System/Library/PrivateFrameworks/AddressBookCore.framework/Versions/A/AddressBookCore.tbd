@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D84B1F64-8429-3034-8D51-50CA1CF3A228
+    value:           C44366A9-14CF-3CE3-954B-1019119EEF04
   - target:          x86_64-maccatalyst
-    value:           D84B1F64-8429-3034-8D51-50CA1CF3A228
+    value:           C44366A9-14CF-3CE3-954B-1019119EEF04
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ED04B608-4713-33B5-AE4E-BE031C573EA1
+    value:           238D3D7E-0C1B-3DDF-8FD5-CDE992B05622
   - target:          arm64e-maccatalyst
-    value:           ED04B608-4713-33B5-AE4E-BE031C573EA1
+    value:           238D3D7E-0C1B-3DDF-8FD5-CDE992B05622
 install-name:    '/System/Library/PrivateFrameworks/AddressBookCore.framework/Versions/A/AddressBookCore'
-current-version: 2452
+current-version: 2452.2
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -362,21 +362,22 @@ exports:
                        _kABOrganizationPhoneticProperty, _kABOrganizationProperty, 
                        _kABOtherDateComponentsProperty, _kABOtherDatesProperty, _kABOtherLabel, 
                        _kABParentGroupsProperty, _kABParentLabel, _kABPartnerLabel, 
-                       _kABPersonFlags, _kABPersonUIDProperty, _kABPhoneAssistantLabel, 
-                       _kABPhoneCallbackLabel, _kABPhoneCarLabel, _kABPhoneCompanyMainLabel, 
-                       _kABPhoneDistributionListDictionaryKey, _kABPhoneHomeFAXLabel, 
-                       _kABPhoneHomeLabel, _kABPhoneISDNLabel, _kABPhoneMainLabel, 
-                       _kABPhoneMobileLabel, _kABPhoneOtherFAXLabel, _kABPhoneOtherLabel, 
-                       _kABPhonePagerLabel, _kABPhoneProperty, _kABPhoneRadioLabel, 
-                       _kABPhoneTTYLabel, _kABPhoneTelexLabel, _kABPhoneWorkFAXLabel, 
-                       _kABPhoneWorkLabel, _kABPhoneiPhoneLabel, _kABPhonemeDataProperty, 
-                       _kABPointOfInterestSourceClassName, _kABPreferredApplePersonaIdentifierProperty, 
-                       _kABPreferredLikenessSourceProperty, _kABPreserveModificationDate, 
-                       _kABPublishLabel, _kABReadSharingACLProperty, _kABReadWriteSharingACLProperty, 
-                       _kABRelatedNamesProperty, _kABRemoteLocationProperty, _kABRestoreFromBackup, 
-                       _kABRestoreFromMetadata, _kABRingtoneLabel, _kABSearchElementProperty, 
-                       _kABSearchFieldRecents, _kABSearchThreshold, _kABSenderProcessID, 
-                       _kABSenderProcessName, _kABSeparateWindowIdentifier, _kABSeparateWindowRestorationError, 
+                       _kABPersonFlags, _kABPersonUIDProperty, _kABPhoneAppleWatchLabel, 
+                       _kABPhoneAssistantLabel, _kABPhoneCallbackLabel, _kABPhoneCarLabel, 
+                       _kABPhoneCompanyMainLabel, _kABPhoneDistributionListDictionaryKey, 
+                       _kABPhoneHomeFAXLabel, _kABPhoneHomeLabel, _kABPhoneISDNLabel, 
+                       _kABPhoneMainLabel, _kABPhoneMobileLabel, _kABPhoneOtherFAXLabel, 
+                       _kABPhoneOtherLabel, _kABPhonePagerLabel, _kABPhoneProperty, 
+                       _kABPhoneRadioLabel, _kABPhoneTTYLabel, _kABPhoneTelexLabel, 
+                       _kABPhoneWorkFAXLabel, _kABPhoneWorkLabel, _kABPhoneiPhoneLabel, 
+                       _kABPhonemeDataProperty, _kABPointOfInterestSourceClassName, 
+                       _kABPreferredApplePersonaIdentifierProperty, _kABPreferredLikenessSourceProperty, 
+                       _kABPreserveModificationDate, _kABPublishLabel, _kABReadSharingACLProperty, 
+                       _kABReadWriteSharingACLProperty, _kABRelatedNamesProperty, 
+                       _kABRemoteLocationProperty, _kABRestoreFromBackup, _kABRestoreFromMetadata, 
+                       _kABRingtoneLabel, _kABSearchElementProperty, _kABSearchFieldRecents, 
+                       _kABSearchThreshold, _kABSenderProcessID, _kABSenderProcessName, 
+                       _kABSeparateWindowIdentifier, _kABSeparateWindowRestorationError, 
                        _kABSeparateWindowUID, _kABSeparateWindowsFrames, _kABSeparateWindowsHiddenUIDs, 
                        _kABSeparateWindowsUIDs, _kABShowPointOfInterestSearch, _kABSisterLabel, 
                        _kABSmartGroupAnyGroupMembershipProperty, _kABSmartGroupFlagsProperty, 
@@ -747,17 +748,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F10AE47E-3D7A-377B-B521-0FB665F8D399
+    value:           F9AB732A-0F66-3260-AF85-572979E478EF
   - target:          x86_64-maccatalyst
-    value:           F10AE47E-3D7A-377B-B521-0FB665F8D399
+    value:           F9AB732A-0F66-3260-AF85-572979E478EF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1B16B9AC-5805-3C64-8D5C-92E1B73D8A47
+    value:           2DC7B8D8-2FDD-36B0-ADEB-B7CB48657956
   - target:          arm64e-maccatalyst
-    value:           1B16B9AC-5805-3C64-8D5C-92E1B73D8A47
+    value:           2DC7B8D8-2FDD-36B0-ADEB-B7CB48657956
 install-name:    '/System/Library/PrivateFrameworks/ContactsPersistence.framework/Versions/A/ContactsPersistence'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

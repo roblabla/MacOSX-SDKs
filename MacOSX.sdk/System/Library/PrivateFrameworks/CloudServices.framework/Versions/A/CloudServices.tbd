@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DD995E25-DC62-30A4-8FF9-C2448E4C7453
+    value:           15DA4332-C612-3D01-B8B8-EE1BEAA1CD38
   - target:          x86_64-maccatalyst
-    value:           DD995E25-DC62-30A4-8FF9-C2448E4C7453
+    value:           15DA4332-C612-3D01-B8B8-EE1BEAA1CD38
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E77640AB-829F-333B-A063-8FB73F4301B3
+    value:           C4086160-F856-3DFB-A6E0-BCFD9CF7A014
   - target:          arm64e-maccatalyst
-    value:           E77640AB-829F-333B-A063-8FB73F4301B3
+    value:           C4086160-F856-3DFB-A6E0-BCFD9CF7A014
 install-name:    '/System/Library/PrivateFrameworks/CloudServices.framework/Versions/A/CloudServices'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -63,17 +63,17 @@ exports:
                        _kSecureBackupEMCSOldManagedCredentialKey, _kSecureBackupErrorDomain, 
                        _kSecureBackupEscrowDateKey, _kSecureBackupEscrowDigestKey, 
                        _kSecureBackupEscrowTimestampKey, _kSecureBackupEscrowTrustStatusKey, 
-                       _kSecureBackupEscrowedSPKIKey, _kSecureBackupFMiPDataKey, 
-                       _kSecureBackupFMiPRecoveryKey, _kSecureBackupFMiPUUIDKey, 
-                       _kSecureBackupHSA2CachedPrerecordUUID, _kSecureBackupIDMSDataKey, 
-                       _kSecureBackupIDMSRecoveryKey, _kSecureBackupIsEnabledKey, 
-                       _kSecureBackupKeybagDigestKey, _kSecureBackupLastBackupDateKey, 
-                       _kSecureBackupLastBackupTimestampKey, _kSecureBackupMetadataKey, 
-                       _kSecureBackupNewPassphraseKey, _kSecureBackupNotificationKey, 
-                       _kSecureBackupNumericPassphraseLengthKey, _kSecureBackupPassphraseKey, 
-                       _kSecureBackupPeerInfoDataKey, _kSecureBackupPeerInfoOSVersionKey, 
-                       _kSecureBackupPeerInfoSerialNumberKey, _kSecureBackupRecordIDKey, 
-                       _kSecureBackupRecordLabelKey, _kSecureBackupRecordStatusInvalid, 
+                       _kSecureBackupEscrowedSPKIKey, _kSecureBackupExcludeiCDPRecords, 
+                       _kSecureBackupFMiPDataKey, _kSecureBackupFMiPRecoveryKey, 
+                       _kSecureBackupFMiPUUIDKey, _kSecureBackupHSA2CachedPrerecordUUID, 
+                       _kSecureBackupIDMSDataKey, _kSecureBackupIDMSRecoveryKey, 
+                       _kSecureBackupIsEnabledKey, _kSecureBackupKeybagDigestKey, 
+                       _kSecureBackupLastBackupDateKey, _kSecureBackupLastBackupTimestampKey, 
+                       _kSecureBackupMetadataKey, _kSecureBackupNewPassphraseKey, 
+                       _kSecureBackupNotificationKey, _kSecureBackupNumericPassphraseLengthKey, 
+                       _kSecureBackupPassphraseKey, _kSecureBackupPeerInfoDataKey, 
+                       _kSecureBackupPeerInfoOSVersionKey, _kSecureBackupPeerInfoSerialNumberKey, 
+                       _kSecureBackupRecordIDKey, _kSecureBackupRecordLabelKey, _kSecureBackupRecordStatusInvalid, 
                        _kSecureBackupRecordStatusKey, _kSecureBackupRecordStatusValid, 
                        _kSecureBackupRecoveryKeyKey, _kSecureBackupRecoveryRequiresVerificationTokenKey, 
                        _kSecureBackupRecoveryStatusKey, _kSecureBackupRecoveryVerificationTokenLengthKey, 

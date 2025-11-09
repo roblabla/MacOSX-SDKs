@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           156AB3B4-01C1-3893-9254-B58895BF0EBD
+    value:           A6166CAA-A344-3443-B0F0-6D271EB02F96
   - target:          x86_64-maccatalyst
-    value:           156AB3B4-01C1-3893-9254-B58895BF0EBD
+    value:           A6166CAA-A344-3443-B0F0-6D271EB02F96
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           497571A0-624E-3271-B347-18B7F9DAA001
+    value:           041D3F75-FB18-3D1C-A924-7FEB7987DF1B
   - target:          arm64e-maccatalyst
-    value:           497571A0-624E-3271-B347-18B7F9DAA001
+    value:           041D3F75-FB18-3D1C-A924-7FEB7987DF1B
 install-name:    '/System/Library/PrivateFrameworks/AACCore.framework/Versions/A/AACCore'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

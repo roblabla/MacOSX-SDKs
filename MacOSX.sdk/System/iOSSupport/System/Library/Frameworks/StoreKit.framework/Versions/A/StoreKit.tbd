@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           063D93AA-23FC-3D5C-A17D-D64ED90B0A75
+    value:           0D4EEDC2-B0C2-3507-9871-5B22F0DFE409
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           D9761E35-0715-3D74-BB8B-3FE18422FD88
+    value:           3135852D-CB55-3F1F-9503-989C73DCDB8B
 install-name:    '/System/iOSSupport/System/Library/Frameworks/StoreKit.framework/Versions/A/StoreKit'
 exports:
-  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _SKCloudServiceCapabilitiesDidChangeNotification, _SKCloudServiceSetupActionSubscribe, 
                        _SKCloudServiceSetupMessageIdentifierAddMusic, _SKCloudServiceSetupMessageIdentifierConnect, 
                        _SKCloudServiceSetupMessageIdentifierJoin, _SKCloudServiceSetupMessageIdentifierPlayMusic, 

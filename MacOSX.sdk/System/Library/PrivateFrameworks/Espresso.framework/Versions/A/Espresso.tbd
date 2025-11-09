@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0744EA81-9EB4-3DA5-AD8A-4571712AA2AD
+    value:           C2903F04-5EE0-3FCA-A7D8-6ABFDD38A27B
   - target:          x86_64-maccatalyst
-    value:           0744EA81-9EB4-3DA5-AD8A-4571712AA2AD
+    value:           C2903F04-5EE0-3FCA-A7D8-6ABFDD38A27B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           51B01472-53E4-31CF-B207-627C68FF5EE8
+    value:           576FEF2E-F3EE-3A32-AF78-D6AF11DDDD9E
   - target:          arm64e-maccatalyst
-    value:           51B01472-53E4-31CF-B207-627C68FF5EE8
+    value:           576FEF2E-F3EE-3A32-AF78-D6AF11DDDD9E
 install-name:    '/System/Library/PrivateFrameworks/Espresso.framework/Versions/A/Espresso'
 current-version: 0
 exports:

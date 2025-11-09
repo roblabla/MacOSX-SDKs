@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BB11E115-0E24-3428-B75E-40FC52C0A4B0
+    value:           BC857A0D-9AD8-3767-B4D0-C6BCFA1A91CC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5C417104-E4CE-366D-9BDB-A60ADFCBA367
+    value:           128D4C65-E07B-37AE-B39D-314380124C5C
 install-name:    '/usr/lib/libktrace.dylib'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -18,19 +18,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B1FA5260-096C-3EDE-B8DC-DC5889168A0F
+    value:           D7349C38-89B7-340A-AD85-087906DB7944
   - target:          x86_64-maccatalyst
-    value:           B1FA5260-096C-3EDE-B8DC-DC5889168A0F
+    value:           D7349C38-89B7-340A-AD85-087906DB7944
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3C44D37A-EDD7-357B-BC4F-5EEC07F91226
+    value:           AD5486FF-CD3E-3B61-BFBF-C3BE1DECBEFA
   - target:          arm64e-maccatalyst
-    value:           3C44D37A-EDD7-357B-BC4F-5EEC07F91226
+    value:           AD5486FF-CD3E-3B61-BFBF-C3BE1DECBEFA
 install-name:    '/System/Library/PrivateFrameworks/ktrace.framework/Versions/A/ktrace'
-current-version: 406.40.10
+current-version: 406.60.1
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     weak-symbols:    [ __ZTIN11flatbuffers15ToStringVisitorE, __ZTIN11flatbuffers16DefaultAllocatorE, 

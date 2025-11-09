@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5DF9184F-4D08-3DA2-86BE-8DBBE8FC72BA
+    value:           662298A0-D7DD-3C50-8C60-72E61DB7C47D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8401ACD8-FAB9-3AFE-A5A4-CA5345478A4D
+    value:           2AF2E3FA-6685-36BA-ACC3-2CE674419861
 install-name:    '/usr/lib/libcryptex.dylib'
 current-version: 84.40.6
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ __cryptex_copy_list, __cryptex_install_core, __cryptex_set_actor, 
                        __cryptex_uninstall_by_name, __cryptex_version, _cryptex_attr_create, 
                        _cryptex_attr_set_authentication, _cryptex_attr_set_persistence, 

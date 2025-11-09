@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0244830F-9BA4-3B97-937E-E816187619E2
+    value:           B439FD8C-9A84-3C55-9E82-08069D40964B
   - target:          x86_64-maccatalyst
-    value:           0244830F-9BA4-3B97-937E-E816187619E2
+    value:           B439FD8C-9A84-3C55-9E82-08069D40964B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D1C42C60-71E4-3C37-88C4-4C42D30BDB12
+    value:           FC3AA9BD-86F2-301A-9DD0-FC0A1FCBD8B3
   - target:          arm64e-maccatalyst
-    value:           D1C42C60-71E4-3C37-88C4-4C42D30BDB12
+    value:           FC3AA9BD-86F2-301A-9DD0-FC0A1FCBD8B3
 install-name:    '/System/Library/PrivateFrameworks/KeyboardServices.framework/KeyboardServices'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

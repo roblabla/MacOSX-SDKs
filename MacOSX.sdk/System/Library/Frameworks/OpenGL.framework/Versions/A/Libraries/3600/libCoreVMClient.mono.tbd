@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           56B3834D-4204-30C4-A09D-BD15162D48E1
+    value:           7E361655-73F9-307A-BDE4-A8DF782DEC8C
   - target:          x86_64-maccatalyst
-    value:           56B3834D-4204-30C4-A09D-BD15162D48E1
+    value:           7E361655-73F9-307A-BDE4-A8DF782DEC8C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DFEF2A45-A0DA-33CB-90C3-C395BA33A5C1
+    value:           E584CB35-5F30-32B2-BC6F-0D5E7CF0398D
   - target:          arm64e-maccatalyst
-    value:           DFEF2A45-A0DA-33CB-90C3-C395BA33A5C1
+    value:           E584CB35-5F30-32B2-BC6F-0D5E7CF0398D
 install-name:    '/Library/Caches/com.apple.xbs/Binaries/CVMS/install/Symbols/Release/libCoreVMClient.mono600.dylib'
 current-version: 0
 compatibility-version: 0

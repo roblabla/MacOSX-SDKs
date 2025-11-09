@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           063249B8-7327-36D9-AB9D-D004DE69E7A1
+    value:           8D36AF84-5050-351D-A073-0CCE9DA84DA9
   - target:          x86_64-maccatalyst
-    value:           063249B8-7327-36D9-AB9D-D004DE69E7A1
+    value:           8D36AF84-5050-351D-A073-0CCE9DA84DA9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E0FEA64D-C9AF-340B-B0FB-F17AD3D199DD
+    value:           1D95FD62-65A4-3733-A925-325BDAFF79F0
   - target:          arm64e-maccatalyst
-    value:           E0FEA64D-C9AF-340B-B0FB-F17AD3D199DD
+    value:           1D95FD62-65A4-3733-A925-325BDAFF79F0
 install-name:    '/System/Library/PrivateFrameworks/BiometricKit.framework/Versions/A/BiometricKit'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

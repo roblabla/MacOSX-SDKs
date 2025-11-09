@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           45374BB5-FE40-3ED5-A0D8-6A4ECCB5867D
+    value:           066EC2A1-1B98-3CCC-8215-D17BD97945DF
   - target:          x86_64-maccatalyst
-    value:           45374BB5-FE40-3ED5-A0D8-6A4ECCB5867D
+    value:           066EC2A1-1B98-3CCC-8215-D17BD97945DF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D5CC91A3-A2DE-36EF-8F66-43C9FC7812F4
+    value:           088C7A22-7733-396A-A0C6-E5DED6630287
   - target:          arm64e-maccatalyst
-    value:           D5CC91A3-A2DE-36EF-8F66-43C9FC7812F4
+    value:           088C7A22-7733-396A-A0C6-E5DED6630287
 install-name:    '/System/Library/PrivateFrameworks/ChronoServices.framework/Versions/A/ChronoServices'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           43AAC9A4-DC28-30A2-8876-6FE4F6777AA3
+    value:           13BE9A0B-F8C5-3C02-B5BC-ABDDDC4A8932
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           77F420FB-F4D2-3D4D-9893-BF70429122F6
+    value:           1B330A17-D3ED-3634-BB65-9E47791602C6
 install-name:    '/System/Library/Frameworks/PDFKit.framework/Versions/A/PDFKit'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ '$ld$install_name$os10.10$/System/Library/Frameworks/Quartz.framework/Versions/A/Quartz', 
                        '$ld$install_name$os10.11$/System/Library/Frameworks/Quartz.framework/Versions/A/Quartz', 
                        '$ld$install_name$os10.12$/System/Library/Frameworks/Quartz.framework/Versions/A/Quartz', 

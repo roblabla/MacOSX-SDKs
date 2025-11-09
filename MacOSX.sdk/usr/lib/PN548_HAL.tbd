@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           936C9BC1-3B94-3C42-96B0-2B96872A95A9
+    value:           0D454358-D856-3E82-8A8B-4EDE4C16C4E7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A4005846-72EF-3EF6-838B-9D7FBC8FA5E7
+    value:           440507AF-E185-3B47-826F-A6D52FCDF09B
 install-name:    '/usr/lib/PN548_HAL.dylib'
 exports:
   - targets:         [ x86_64-macos ]

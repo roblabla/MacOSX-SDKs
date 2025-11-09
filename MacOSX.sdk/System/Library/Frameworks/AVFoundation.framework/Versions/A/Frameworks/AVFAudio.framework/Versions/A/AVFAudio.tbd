@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E3E05714-1CD4-3945-AA79-708A63E38688
+    value:           4F121DC8-938F-3E2E-ABCF-49CD95F5FD5C
   - target:          x86_64-maccatalyst
-    value:           E3E05714-1CD4-3945-AA79-708A63E38688
+    value:           4F121DC8-938F-3E2E-ABCF-49CD95F5FD5C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6A0201A3-19BE-38B7-9DE9-939B435BC7D3
+    value:           B2C16204-D89D-3CE4-8C5C-CD09BA02FD00
   - target:          arm64e-maccatalyst
-    value:           6A0201A3-19BE-38B7-9DE9-939B435BC7D3
+    value:           B2C16204-D89D-3CE4-8C5C-CD09BA02FD00
 install-name:    '/System/Library/Frameworks/AVFoundation.framework/Versions/A/Frameworks/AVFAudio.framework/Versions/A/AVFAudio'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _AVAudioBitRateStrategy_Constant, _AVAudioBitRateStrategy_LongTermAverage, 
                        _AVAudioBitRateStrategy_Variable, _AVAudioBitRateStrategy_VariableConstrained, 

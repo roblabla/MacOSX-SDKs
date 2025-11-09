@@ -135,6 +135,8 @@ CORE_IMAGE_EXPORT CIRAWFilterOption const kCIInputNoiseReductionDetailAmountKey 
 CORE_IMAGE_EXPORT NSString *const kCIInputEnableEDRModeKey NS_AVAILABLE(10_14, 12_0);
 
 
+/** NSNumber (double): The amount of the local tone map. Range is 0 to 1. Default is 1  */
+CORE_IMAGE_EXPORT CIRAWFilterOption const kCIInputLocalToneMapAmountKey NS_AVAILABLE(11_1, 14_3);
 
 
 /** CIFilter (id) : CIFilter to be applied to the RAW image while it is in linear space. */

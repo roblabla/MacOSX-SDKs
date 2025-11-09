@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           44FC7476-22EB-3FC6-81A5-F7AE58223586
+    value:           CEF1460B-1362-381A-AE69-6BCE2D8C215B
   - target:          x86_64-maccatalyst
-    value:           44FC7476-22EB-3FC6-81A5-F7AE58223586
+    value:           CEF1460B-1362-381A-AE69-6BCE2D8C215B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2C3ACB3B-9434-366C-AF72-DFC582741F7F
+    value:           68CAA910-6621-32A1-95AE-40594BA75013
   - target:          arm64e-maccatalyst
-    value:           2C3ACB3B-9434-366C-AF72-DFC582741F7F
+    value:           68CAA910-6621-32A1-95AE-40594BA75013
 install-name:    '/usr/lib/system/libdispatch.dylib'
 current-version: 1271.40.12
 parent-umbrella:

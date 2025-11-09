@@ -4,24 +4,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           22935DA2-BA78-3D21-AD91-D165963F1EB0
+    value:           E21EC9A3-3DD7-380A-A10D-42B78A16B20A
   - target:          x86_64-maccatalyst
-    value:           22935DA2-BA78-3D21-AD91-D165963F1EB0
+    value:           E21EC9A3-3DD7-380A-A10D-42B78A16B20A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F62938B1-117E-38D8-BA0E-F260AF386094
+    value:           D833AFB2-87D9-3ABD-B040-059AFAF9A84B
   - target:          arm64e-maccatalyst
-    value:           F62938B1-117E-38D8-BA0E-F260AF386094
+    value:           D833AFB2-87D9-3ABD-B040-059AFAF9A84B
 install-name:    '/System/Library/PrivateFrameworks/NewsDaemon.framework/Versions/A/NewsDaemon'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _NDAnalyticsMachServiceName, _NDFeedMachServiceName, _NDNewsdDataContainerClass, 
-                       _NDNewsdDataContainerIdentifier, _NDNewsdProcessName, _NDSharedClientLog, 
-                       _NDSharedServiceLog, _NDTodayMachServiceName, _NewsDaemonVersionNumber, 
-                       _NewsDaemonVersionString ]
-    objc-classes:    [ NDNewsDaemonContext, NDNewsServiceConnection, NDNewsServiceConnectionClientProxy ]
+    symbols:         [ _NDAnalyticsMachServiceName, _NDDownloadMachServiceName, _NDDownloadServiceHasUnfinishedWorkKey, 
+                       _NDDownloadServiceXPCConnection, _NDDownloadServiceXPCInterface, 
+                       _NDFeedMachServiceName, _NDNewsdDataContainerClass, _NDNewsdDataContainerIdentifier, 
+                       _NDNewsdProcessName, _NDSharedClientLog, _NDSharedServiceLog, 
+                       _NDTodayMachServiceName, _NewsDaemonVersionNumber, _NewsDaemonVersionString ]
+    objc-classes:    [ NDANFImageResource, NDANFParsingService, NDANFResource, NDDownloadRequest, 
+                       NDNewsDaemonContext, NDNewsServiceConnection, NDNewsServiceConnectionClientProxy ]
 ...

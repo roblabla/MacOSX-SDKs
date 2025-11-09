@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1B7CA0D5-D0AC-3F4C-9930-EE29A8ACDE5C
+    value:           1354A97A-E9DA-3C33-A639-0574E822067F
   - target:          x86_64-maccatalyst
-    value:           1B7CA0D5-D0AC-3F4C-9930-EE29A8ACDE5C
+    value:           1354A97A-E9DA-3C33-A639-0574E822067F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2D1058AE-CB01-3DB2-9300-5256404F59D5
+    value:           345AF9DC-44A9-3949-9D53-B5D7A7D86482
   - target:          arm64e-maccatalyst
-    value:           2D1058AE-CB01-3DB2-9300-5256404F59D5
+    value:           345AF9DC-44A9-3949-9D53-B5D7A7D86482
 install-name:    '/System/Library/PrivateFrameworks/HomeAI.framework/Versions/A/HomeAI'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]

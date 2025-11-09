@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7B998158-6929-3D39-A787-334F00A93E54
+    value:           5297973C-1CDA-3BE1-B9B0-6F9B69A66470
   - target:          x86_64-maccatalyst
-    value:           7B998158-6929-3D39-A787-334F00A93E54
+    value:           5297973C-1CDA-3BE1-B9B0-6F9B69A66470
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           41D8E21B-C7A6-3AB7-9646-2E6C5FD0E7C1
+    value:           33861C23-6976-38B1-A67A-9261CB5B9348
   - target:          arm64e-maccatalyst
-    value:           41D8E21B-C7A6-3AB7-9646-2E6C5FD0E7C1
+    value:           33861C23-6976-38B1-A67A-9261CB5B9348
 install-name:    '/System/Library/PrivateFrameworks/CoreParsec.framework/Versions/A/CoreParsec'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -66,8 +66,7 @@ exports:
                        _kPARSpotlightModelResourcesExperimental, _kPARSpotlightModels, 
                        _kPARSpotlightResultFeaturesDir, _kPARSpotlightShadowResources, 
                        _kPARTrysteroClient, _kPARTrysteroDir, _kPARUserReportDir, 
-                       _kPARWebsiteCategoryLabels, _kSilhouetteConfig, _kSilhouetteTopicMapping, 
-                       _kSilhouetteWhitelistedTopics ]
+                       _kPARWebsiteCategoryLabels ]
     objc-classes:    [ PARAsyncCard, PARAsyncMoreResults, PARBag, PARCardRequest, 
                        PARDefaultFactory, PAREngagedCompletionCache, PARFlightResponse, 
                        PARFlightSearchRequest, PARFuture, PARHashtagImagesVisibility, 

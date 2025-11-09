@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           669A0E04-AB20-31F1-A9C6-E82C348C7AEF
+    value:           88A6BC90-2B36-36ED-92B0-C2E430F10DC5
   - target:          x86_64-maccatalyst
-    value:           669A0E04-AB20-31F1-A9C6-E82C348C7AEF
+    value:           88A6BC90-2B36-36ED-92B0-C2E430F10DC5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F0098A91-9BC7-3E6B-9D6C-E85E665030D5
+    value:           B7A1207E-C10A-324D-87C8-8C6D16D68AF5
   - target:          arm64e-maccatalyst
-    value:           F0098A91-9BC7-3E6B-9D6C-E85E665030D5
+    value:           B7A1207E-C10A-324D-87C8-8C6D16D68AF5
 install-name:    '/System/Library/PrivateFrameworks/VoiceTrigger.framework/Versions/A/VoiceTrigger'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]

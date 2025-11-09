@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4A399CF7-0518-374F-B77B-755BA20B640B
+    value:           AC2752B1-F2AB-375F-89CD-1A667587D9A3
   - target:          x86_64-maccatalyst
-    value:           4A399CF7-0518-374F-B77B-755BA20B640B
+    value:           AC2752B1-F2AB-375F-89CD-1A667587D9A3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D559624A-96BF-3F09-8FBE-C0CDCAF126A6
+    value:           7A485945-1156-3AB5-A0A6-72B582BDD97F
   - target:          arm64e-maccatalyst
-    value:           D559624A-96BF-3F09-8FBE-C0CDCAF126A6
+    value:           7A485945-1156-3AB5-A0A6-72B582BDD97F
 install-name:    '/usr/lib/swift/libswiftObjectiveC.dylib'
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftObjectiveC.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftObjectiveC.dylib', 

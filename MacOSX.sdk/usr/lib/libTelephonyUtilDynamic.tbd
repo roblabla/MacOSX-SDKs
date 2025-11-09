@@ -4,24 +4,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D621CAC7-7759-304E-B09E-1B9D4CDF3072
+    value:           FD27BE40-17A0-3561-90E3-FFB96048C2AD
   - target:          x86_64-maccatalyst
-    value:           D621CAC7-7759-304E-B09E-1B9D4CDF3072
+    value:           FD27BE40-17A0-3561-90E3-FFB96048C2AD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6F602858-AE3D-393D-B28D-6EC16F9831D8
+    value:           81F0EDAE-8D4D-3AE1-9A05-0A51ED59E00E
   - target:          arm64e-maccatalyst
-    value:           6F602858-AE3D-393D-B28D-6EC16F9831D8
+    value:           81F0EDAE-8D4D-3AE1-9A05-0A51ED59E00E
 install-name:    '/usr/lib/libTelephonyUtilDynamic.dylib'
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     symbols:         [ __ZN3ctu16LogMessageBuffer17vCreateWithFormatEPKcP13__va_list_tag, 
                        __ZN3ctu16LogMessageBuffer19vCreateWithNSFormatEP8NSStringP13__va_list_tag, 
                        __ZN3ctu16LogMessageBuffer7vprintfEPKcP13__va_list_tag ]
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _TelephonyCapabilitiesAccessoryDetectionForSupported, _TelephonyCapabilitiesAccessoryDetectionSupported, 
                        _TelephonyCapabilitiesAccessoryTypeDetectionForASupported, 
@@ -37,7 +37,8 @@ exports:
                        _TelephonyCapabilitiesGetStartupMode, _TelephonyCapabilitiesGetWakeReasonV2Supported, 
                        _TelephonyCapabilitiesLCounterIndicationSupported, _TelephonyCapabilitiesLTechupported, 
                        _TelephonyCapabilitiesMSupported, _TelephonyCapabilitiesRadioDMSupported, 
-                       _TelephonyCapabilitiesRadioSupportsMultiClientAWD, _TelephonyCapabilitiesSDIResetSupported, 
+                       _TelephonyCapabilitiesRadioGetQMuxPendingRequestsLimit, _TelephonyCapabilitiesRadioSupportsMultiClientAWD, 
+                       _TelephonyCapabilitiesRadioSupportsQMuxSendWindow, _TelephonyCapabilitiesSDIResetSupported, 
                        _TelephonyCapabilitiesSetHardwareModel, _TelephonyCapabilitiesSetHardwareModelFromString, 
                        _TelephonyCapabilitiesSetHardwareModelFromTelephonyProduct, 
                        _TelephonyCapabilitiesSupportsFL, _TelephonyCapabilitiesUTechSupported, 

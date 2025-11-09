@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BA329C8D-D723-3B53-8602-11A886DC7ED2
+    value:           0170460F-2CC7-3E83-A531-C71C03F43A2F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1CC9A0B7-407F-3206-9A37-4D8D09976ED1
+    value:           E48FD57A-439C-37F5-A724-DED54EDA140A
 install-name:    '/System/Library/PrivateFrameworks/ByteRangeLocking.framework/Versions/A/ByteRangeLocking'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

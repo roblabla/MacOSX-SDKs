@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8208E50C-8C85-3E00-B19D-9E85008AB78F
+    value:           AFD5CE9C-C147-3306-8DE0-26CA38FB3BC1
   - target:          x86_64-maccatalyst
-    value:           8208E50C-8C85-3E00-B19D-9E85008AB78F
+    value:           AFD5CE9C-C147-3306-8DE0-26CA38FB3BC1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1C411C3A-A1BA-38C6-9F0F-3169CF5B89E7
+    value:           31286816-5924-372E-B4A3-B54B4338F37B
   - target:          arm64e-maccatalyst
-    value:           1C411C3A-A1BA-38C6-9F0F-3169CF5B89E7
+    value:           31286816-5924-372E-B4A3-B54B4338F37B
 install-name:    '/System/Library/PrivateFrameworks/SafariSafeBrowsing.framework/Versions/A/SafariSafeBrowsing'
 current-version: 0
 compatibility-version: 0

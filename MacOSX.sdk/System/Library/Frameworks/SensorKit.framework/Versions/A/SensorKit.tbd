@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           65B87B49-40FA-3695-B22F-FDDF8970BC1C
+    value:           B2C3D6C4-D0E6-3277-93C8-00A4466FCC70
   - target:          x86_64-maccatalyst
-    value:           65B87B49-40FA-3695-B22F-FDDF8970BC1C
+    value:           B2C3D6C4-D0E6-3277-93C8-00A4466FCC70
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           65BF8CDC-082E-3B1A-BCBD-C7BCC56B1D12
+    value:           3E863909-6C2E-3087-AECA-331B21FB5EB9
   - target:          arm64e-maccatalyst
-    value:           65BF8CDC-082E-3B1A-BCBD-C7BCC56B1D12
+    value:           3E863909-6C2E-3087-AECA-331B21FB5EB9
 install-name:    '/System/Library/Frameworks/SensorKit.framework/Versions/A/SensorKit'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _SRAbsoluteTimeFromCFAbsoluteTime, _SRAbsoluteTimeFromContinuousTime, 
                        _SRAbsoluteTimeGetCurrent, _SRAbsoluteTimeGetOffsets, _SRAbsoluteTimeInitWithRemoteRTCOffset, 

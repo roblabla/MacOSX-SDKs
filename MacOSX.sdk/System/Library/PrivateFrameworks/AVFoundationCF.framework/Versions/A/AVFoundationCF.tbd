@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           70124874-101F-3F1A-8558-030A1BA0CD78
+    value:           2ECD5FD4-68B9-304B-9EC0-31F631EAE41B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           39914930-8492-3F9F-A82F-EAC12B48F11E
+    value:           0EF78E26-EE4E-30D5-8DCD-E74C3D9B32C6
 install-name:    '/System/Library/PrivateFrameworks/AVFoundationCF.framework/Versions/A/AVFoundationCF'
 current-version: 2
 exports:

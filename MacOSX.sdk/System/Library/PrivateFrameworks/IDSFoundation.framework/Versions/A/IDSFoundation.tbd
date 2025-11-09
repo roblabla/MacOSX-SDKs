@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D53A9DDD-7F89-3F60-9625-211440D6B255
+    value:           F56B5595-6180-36E9-9738-0D2FD178690E
   - target:          x86_64-maccatalyst
-    value:           D53A9DDD-7F89-3F60-9625-211440D6B255
+    value:           F56B5595-6180-36E9-9738-0D2FD178690E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           48C16C5B-B4E5-3356-A17B-A1ADE9FE3F8D
+    value:           C0BDC609-DF99-3573-8A6C-7E4C430E9B7C
   - target:          arm64e-maccatalyst
-    value:           48C16C5B-B4E5-3356-A17B-A1ADE9FE3F8D
+    value:           C0BDC609-DF99-3573-8A6C-7E4C430E9B7C
 install-name:    '/System/Library/PrivateFrameworks/IDSFoundation.framework/Versions/A/IDSFoundation'
 current-version: 800
 exports:

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D313CC4E-D735-3B66-A1C0-4E83298A0BE6
+    value:           B85C7281-9F31-3317-803B-BE76E265CDA9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9231A34D-9349-3BC1-A0FB-7D2668DB7BD0
+    value:           4F447FE8-B9A7-3DEA-A0CD-7EF34C2E28AD
 install-name:    '/System/Library/PrivateFrameworks/WiFiPeerToPeer.framework/Versions/A/WiFiPeerToPeer'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

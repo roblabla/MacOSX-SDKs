@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           44ADABC5-2A22-33F4-A567-5A7FF17E4E27
+    value:           E973C27B-18D1-3814-9442-A7B18EB7D78C
   - target:          x86_64-maccatalyst
-    value:           44ADABC5-2A22-33F4-A567-5A7FF17E4E27
+    value:           E973C27B-18D1-3814-9442-A7B18EB7D78C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           00D78A12-88C2-36EB-A83F-66260BE4D1FA
+    value:           D6C928E7-7305-3FC7-A5FE-DE69821ACBA8
   - target:          arm64e-maccatalyst
-    value:           00D78A12-88C2-36EB-A83F-66260BE4D1FA
+    value:           D6C928E7-7305-3FC7-A5FE-DE69821ACBA8
 install-name:    '/usr/lib/swift/libswiftOSLog.dylib'
 swift-abi-version: 7
 exports:

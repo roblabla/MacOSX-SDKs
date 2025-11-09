@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B520A5AB-1ED2-388B-93E5-D2140353063A
+    value:           62EB906D-E46A-3E21-9339-6D3458B0C2D1
   - target:          x86_64-maccatalyst
-    value:           B520A5AB-1ED2-388B-93E5-D2140353063A
+    value:           62EB906D-E46A-3E21-9339-6D3458B0C2D1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E7F4DEF7-6D07-3345-9658-16349F7C61EC
+    value:           31F8D7DE-35BD-3894-8075-F97E2F3FDFAC
   - target:          arm64e-maccatalyst
-    value:           E7F4DEF7-6D07-3345-9658-16349F7C61EC
+    value:           31F8D7DE-35BD-3894-8075-F97E2F3FDFAC
 install-name:    '/System/Library/PrivateFrameworks/ContactsAutocomplete.framework/Versions/A/ContactsAutocomplete'
-current-version: 1152
+current-version: 1152.2
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

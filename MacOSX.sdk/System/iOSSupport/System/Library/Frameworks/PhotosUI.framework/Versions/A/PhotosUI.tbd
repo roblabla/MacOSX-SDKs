@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           D59C9A2C-E741-3CB5-BA7E-7497B7C2D80A
+    value:           7B5344F0-6EC7-36AF-9DD5-6D8B5F4CC547
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           9B65AE29-B51B-3090-BFC8-5DA7C20DA122
+    value:           7E335297-412B-3F8E-8B54-C24A654E3C3D
 install-name:    '/System/iOSSupport/System/Library/Frameworks/PhotosUI.framework/Versions/A/PhotosUI'
-current-version: 311.0.120
+current-version: 321.0.102
 exports:
-  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _PHDisplayVelocityZero, _PUAdjustPointsToBeWithinRect, _PUAffineTransformIsApproximatelyEqualToTransform, 
                        _PUAffineTransformToMatchRect, _PUAffineTransformWithAnchorPointTranslationRotationScale, 
                        _PUAlbumListViewControllerAlbumCellIdentifier, _PUAlbumListViewControllerPlaceholderCellIdentifier, 

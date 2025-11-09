@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           283E1889-3668-3E4C-83D9-36FF3DACEC3E
+    value:           CF4E97B8-C458-368F-AC54-75DAFB551E4B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           636BE4FB-B0FE-3C12-AA0B-140D2C22F2A2
+    value:           A92B3F93-5F47-304D-9C69-687F0145918F
 install-name:    '/System/Library/Frameworks/AuthenticationServices.framework/Versions/A/AuthenticationServices'
-current-version: 610.2.11
+current-version: 610.3.7
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _ASAuthorizationAppleIDProviderCredentialRevokedNotification, 

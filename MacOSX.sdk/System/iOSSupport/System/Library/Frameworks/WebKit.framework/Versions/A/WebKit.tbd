@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           3B7BC9A7-9C23-38D3-BB4A-054C71E59DE7
+    value:           3B7EB976-3772-3BED-806C-C3234C5E8DD9
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           68730577-6714-3B1A-80FC-BF4D30CA01CE
+    value:           4499D027-9FBF-3609-B088-9BD84D779525
 install-name:    '/System/iOSSupport/System/Library/Frameworks/WebKit.framework/Versions/A/WebKit'
-current-version: 610.2.11
+current-version: 610.3.7
 reexported-libraries:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     libraries:       [ '/System/iOSSupport/System/Library/PrivateFrameworks/WebCore.framework/Versions/A/WebCore', 
@@ -437,8 +437,9 @@ exports:
                        _WKPageSetEnableVerticalRubberBanding, _WKPageSetFixedLayoutSize, 
                        _WKPageSetFullscreenDelegate, _WKPageSetGapBetweenPages, _WKPageSetIgnoresViewportScaleLimits, 
                        _WKPageSetMaintainsInactiveSelection, _WKPageSetMayStartMediaWhenInWindow, 
-                       _WKPageSetMediaCaptureEnabled, _WKPageSetMediaVolume, _WKPageSetMockCameraOrientation, 
-                       _WKPageSetMuted, _WKPageSetPageAndTextZoomFactors, _WKPageSetPageContextMenuClient, 
+                       _WKPageSetMediaCaptureEnabled, _WKPageSetMediaCaptureReportingDelayForTesting, 
+                       _WKPageSetMediaVolume, _WKPageSetMockCameraOrientation, _WKPageSetMuted, 
+                       _WKPageSetPageAndTextZoomFactors, _WKPageSetPageContextMenuClient, 
                        _WKPageSetPageDiagnosticLoggingClient, _WKPageSetPageFindClient, 
                        _WKPageSetPageFindMatchesClient, _WKPageSetPageFormClient, 
                        _WKPageSetPageInjectedBundleClient, _WKPageSetPageLength, 
@@ -923,13 +924,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           749CBCA7-030D-34A9-9AB8-A088DB725D10
+    value:           B795B3E6-9743-3F5A-B959-EF9D71B2090A
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           60CE38B1-4F77-3377-BFD0-E3FDE847E8BA
+    value:           27AE0841-2981-36EC-86FD-B94F48D3112B
 install-name:    '/System/iOSSupport/System/Library/PrivateFrameworks/WebCore.framework/Versions/A/WebCore'
-current-version: 610.2.11
+current-version: 610.3.7
 allowable-clients:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     clients:         [ Casablanca, DumpRenderTree, Remote, TVBooks, TestWebKitAPI, 
@@ -2551,12 +2552,12 @@ exports:
                        __ZN7WebCore11MediaPlayer19audioSourceProviderEv, __ZN7WebCore11MediaPlayer19networkStateChangedEv, 
                        __ZN7WebCore11MediaPlayer19nextBestMediaEngineEPKNS_18MediaPlayerFactoryE, 
                        __ZN7WebCore11MediaPlayer19originsInMediaCacheERKN3WTF6StringE, 
-                       __ZN7WebCore11MediaPlayer19prepareForRenderingEv, __ZN7WebCore11MediaPlayer19syncTextTrackBoundsEv, 
-                       __ZN7WebCore11MediaPlayer20cachedResourceLoaderEv, __ZN7WebCore11MediaPlayer20createResourceLoaderEv, 
-                       __ZN7WebCore11MediaPlayer20playbackStateChangedEv, __ZN7WebCore11MediaPlayer21characteristicChangedEv, 
-                       __ZN7WebCore11MediaPlayer21endSimulatedHDCPErrorEv, __ZN7WebCore11MediaPlayer21outOfBandTrackSourcesEv, 
-                       __ZN7WebCore11MediaPlayer21setShouldDisableSleepEb, __ZN7WebCore11MediaPlayer22notifyTrackModeChangedEv, 
-                       __ZN7WebCore11MediaPlayer22performTaskAtMediaTimeEON3WTF8FunctionIFvvEEERKNS1_9MediaTimeE, 
+                       __ZN7WebCore11MediaPlayer19prepareForRenderingEv, __ZN7WebCore11MediaPlayer19setVisibleForCanvasEb, 
+                       __ZN7WebCore11MediaPlayer19syncTextTrackBoundsEv, __ZN7WebCore11MediaPlayer20cachedResourceLoaderEv, 
+                       __ZN7WebCore11MediaPlayer20createResourceLoaderEv, __ZN7WebCore11MediaPlayer20playbackStateChangedEv, 
+                       __ZN7WebCore11MediaPlayer21characteristicChangedEv, __ZN7WebCore11MediaPlayer21endSimulatedHDCPErrorEv, 
+                       __ZN7WebCore11MediaPlayer21outOfBandTrackSourcesEv, __ZN7WebCore11MediaPlayer21setShouldDisableSleepEb, 
+                       __ZN7WebCore11MediaPlayer22notifyTrackModeChangedEv, __ZN7WebCore11MediaPlayer22performTaskAtMediaTimeEON3WTF8FunctionIFvvEEERKNS1_9MediaTimeE, 
                        __ZN7WebCore11MediaPlayer22setPrivateBrowsingModeEb, __ZN7WebCore11MediaPlayer22setVideoFullscreenModeEj, 
                        __ZN7WebCore11MediaPlayer23beginSimulatedHDCPErrorEv, __ZN7WebCore11MediaPlayer23loadWithNextMediaEngineEPKNS_18MediaPlayerFactoryE, 
                        __ZN7WebCore11MediaPlayer23setVideoFullscreenFrameENS_9FloatRectE, 
@@ -7719,13 +7720,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           E872357B-BB63-37BA-AB1E-893B186A16FC
+    value:           335A6AFD-FBB1-3329-902F-F19F90257765
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           06EB8AAB-7281-302C-9B39-A34320150BED
+    value:           5A5FCD2B-2DBE-3588-8EF7-DBB73763DFCB
 install-name:    '/System/iOSSupport/System/Library/PrivateFrameworks/WebKitLegacy.framework/Versions/A/WebKitLegacy'
-current-version: 610.2.11
+current-version: 610.3.7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _DOMEventException, _DOMException, _DOMRangeException, _DOMXPathException, 

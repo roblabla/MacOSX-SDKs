@@ -74,12 +74,21 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  
     This method validates your settings and enforces the following rules in order to ensure deterministic behavior. If any of these rules are violated, a NSInvalidArgumentException is thrown.
     RAW rules:
+        See +isBayerRAWPixelFormat: and +isAppleProRAWPixelFormat: on the difference between Bayer RAW and Apple ProRAW pixel formats.
+        Common RAW rules:
         - If rawPhotoPixelFormatType is non-zero, it must be present in the receiver's -availableRawPhotoPixelFormatTypes array.
-        - If rawPhotoPixelFormatType is non-zero, photoQualityPrioritization must be set to AVCapturePhotoQualityPrioritizationSpeed (deprecated autoStillImageStabilizationEnabled must be set to NO).
         - If rawPhotoPixelFormatType is non-zero, your delegate must respond to -captureOutput:didFinishProcessingRawPhotoSampleBuffer:previewPhotoSampleBuffer:resolvedSettings:bracketSettings:error:.
         - If rawPhotoPixelFormatType is non-zero, highResolutionPhotoEnabled may be YES or NO, but the setting only applies to the processed image, if you've specified one.
-        - If rawPhotoPixelFormatType is non-zero, the videoZoomFactor of the source device and the videoScaleAndCropFactor of the photo output's video connection must both be 1.0. Ensure no zoom is applied before requesting a RAW capture, and don't change the zoom during RAW capture.
         - If rawFileType is specified, it must be present in -availableRawPhotoFileTypes and must support the rawPhotoPixelFormatType specified using -supportedRawPhotoPixelFormatTypesForFileType:.
+        Bayer RAW rules (isBayerRAWPixelFormat: returns yes for rawPhotoPixelFormatType):
+        - photoQualityPrioritization must be set to AVCapturePhotoQualityPrioritizationSpeed (deprecated autoStillImageStabilizationEnabled must be set to NO).
+        - the videoZoomFactor of the source device and the videoScaleAndCropFactor of the photo output's video connection must both be 1.0. Ensure no zoom is applied before requesting a RAW capture, and don't change the zoom during RAW capture.
+        Apple ProRAW rules (isAppleProRAWPixelFormat: returns yes for rawPhotoPixelFormatType):
+        - livePhotoMovieFileURL must be nil in AVCapturePhotoSettings settings
+        - autoContentAwareDistortionCorrectionEnabled will automatically be disabled in AVCapturePhotoSettings
+        - autoRedEyeReductionEnabled will automatically be disabled in AVCapturePhotoSettings
+        - portraitEffectsMatteDeliveryEnabled will automatically be disabled in AVCapturePhotoSettings
+        - enabledSemanticSegmentationMatteTypes will automatically be cleared in AVCapturePhotoSettings
     Processed Format rules:
         - If format is non-nil, a kCVPixelBufferPixelFormatTypeKey or AVVideoCodecKey must be present, and both may not be present.
         - If format has a kCVPixelBufferPixelFormatTypeKey, its value must be present in the receiver's -availablePhotoPixelFormatTypes array.
@@ -154,14 +163,57 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
  */
 @property(nonatomic, readonly) NSArray<AVVideoCodecType> *availablePhotoCodecTypes;
 
+/*!
+ @property appleProRAWSupported
+ @abstract
+    Indicates whether the current configuration supports Apple ProRAW pixel formats.
+ 
+ @discussion
+	The AVCapturePhotoSettings appleProRAWEnabled property may only be set to YES if this property returns YES. This property is key-value observable.
+ */
+@property(nonatomic, readonly, getter=isAppleProRAWSupported) BOOL appleProRAWSupported API_AVAILABLE(ios(14.3)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
 
-/*
+/*!
+ @property appleProRAWEnabled
+ @abstract
+    Indicates whether the photo output is configured for delivery of Apple ProRAW pixel formats as well as Bayer RAW formats.
+ 
+ @discussion
+    Setting this property to YES will enable support for taking photos in Apple ProRAW pixel formats. These formats will be added to -availableRawPhotoPixelFormatTypes after any existing Bayer RAW formats. Compared to photos taken with a Bayer RAW format, these photos will be demosaiced and partially processed. They are still scene-referred, and allow capturing RAW photos in modes where there is no traditional sensor/Bayer RAW available. Examples are any modes that rely on fusion of multiple captures. Use +isBayerRAWPixelFormat: to determine if a pixel format in -availableRawPhotoPixelFormatTypes is a Bayer RAW format, and +isAppleProRAWPixelFormat: to determine if it is an Apple ProRAW format. When writing an Apple ProRAW buffer to a DNG file, the resulting file is known as "Linear DNG". Apple ProRAW formats are not supported on all platforms and devices. This property may only be set to YES if appleProRAWSupported returns YES. This property is key-value observable.
+ 
+    Enabling this property requires a lengthy reconfiguration of the capture render pipeline, so you should set this property to YES before calling -[AVCaptureSession startRunning].
+ */
+@property(nonatomic, getter=isAppleProRAWEnabled) BOOL appleProRAWEnabled API_AVAILABLE(ios(14.3)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+
+/*!
+ @method isBayerRAWPixelFormat:
+ @abstract
+    Returns YES if the given pixel format is a Bayer RAW format.
+ 
+ @discussion
+    May be used to distinguish Bayer RAW from Apple ProRAW pixel formats in -availableRawPhotoPixelFormatTypes once appleProRAWEnabled has been set to YES.
+ */
++ (BOOL)isBayerRAWPixelFormat:(OSType)pixelFormat API_AVAILABLE(ios(14.3)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+
+/*!
+ @method isAppleProRAWPixelFormat:
+ @abstract
+    Returns YES if the given pixel format is an Apple ProRAW format.
+ 
+ @discussion
+    May be used to distinguish Bayer RAW from Apple ProRAW pixel formats in -availableRawPhotoPixelFormatTypes once appleProRAWEnabled has been set to YES.
+ 
+    See appleProRAWEnabled for more information on Apple ProRAW.
+ */
++ (BOOL)isAppleProRAWPixelFormat:(OSType)pixelFormat API_AVAILABLE(ios(14.3)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
+
+/*!
  @property availableRawPhotoPixelFormatTypes
  @abstract
-    An array of Bayer RAW CVPixelBufferPixelFormatTypeKey values that are currently supported by the receiver.
+    An array of RAW CVPixelBufferPixelFormatTypeKey values that are currently supported by the receiver.
 
  @discussion
-    If you wish to capture a RAW photo, you must ensure that the Bayer RAW format you want is present in the receiver's availableRawPhotoPixelFormatTypes array. If you've not yet added your receiver to an AVCaptureSession with a video source, no RAW formats are available. This property is key-value observable. RAW capture is not supported on all platforms.
+    If you wish to capture a RAW photo, you must ensure that the RAW format you want is present in the receiver's availableRawPhotoPixelFormatTypes array. If you've not yet added your receiver to an AVCaptureSession with a video source, no RAW formats are available. See AVCapturePhotoOutput.appleProRAWEnabled on how to enable support for partially processed RAW formats. This property is key-value observable. RAW capture is not supported on all platforms.
  */
 @property(nonatomic, readonly) NSArray<NSNumber *> *availableRawPhotoPixelFormatTypes API_UNAVAILABLE(macos);
 
@@ -836,7 +888,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
     Creates an instance of AVCapturePhotoSettings specifying RAW only output.
  
  @param rawPixelFormatType
-    A Bayer RAW pixel format OSType (defined in CVPixelBuffer.h).
+    A Bayer RAW or Apple ProRAW pixel format OSType (defined in CVPixelBuffer.h).
  @result
     An instance of AVCapturePhotoSettings.
 
@@ -851,7 +903,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
     Creates an instance of AVCapturePhotoSettings specifying RAW + a processed format (such as JPEG).
  
  @param rawPixelFormatType
-    A Bayer RAW pixel format OSType (defined in CVPixelBuffer.h).
+    A Bayer RAW or Apple ProRAW pixel format OSType (defined in CVPixelBuffer.h).
  @param processedFormat
     A dictionary of Core Video pixel buffer attributes or AVVideoSettings, analogous to AVCaptureStillImageOutput's outputSettings property.
  @result
@@ -868,7 +920,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
     Creates an instance of AVCapturePhotoSettings specifying RAW + a processed format (such as JPEG) and a file container to which it will be written.
  
  @param rawPixelFormatType
-    A Bayer RAW pixel format OSType (defined in CVPixelBuffer.h). Pass 0 if you do not desire a RAW photo callback.
+    A Bayer RAW or Apple ProRAW pixel format OSType (defined in CVPixelBuffer.h). Pass 0 if you do not desire a RAW photo callback.
  @param rawFileType
     The file container for which the RAW image should be formatted to be written. Pass nil if you have no preferred file container. A default container will be chosen for you.
  @param processedFormat
@@ -931,7 +983,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 /*!
  @property rawPhotoPixelFormatType
  @abstract
-    A Bayer RAW pixel format OSType (defined in CVPixelBuffer.h).
+    A Bayer RAW or Apple ProRAW pixel format OSType (defined in CVPixelBuffer.h).
 
  @discussion
     The rawPixelFormatType you specified in one of the creation methods. Returns 0 if you did not specify RAW capture. See AVCapturePhotoOutput's -capturePhotoWithSettings:delegate: inline documentation for a discussion of restrictions on AVCapturePhotoSettings when requesting RAW capture.
@@ -984,7 +1036,7 @@ API_AVAILABLE(macos(10.15), ios(10.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
     Specifies whether still image stabilization should be used automatically.
 
  @discussion
-    Default is YES unless you are capturing a RAW photo (RAW photos may not be processed by definition) or a bracket using AVCapturePhotoBracketSettings. When set to YES, still image stabilization is applied automatically in low light to counteract hand shake. If the device has optical image stabilization, autoStillImageStabilizationEnabled makes use of lens stabilization as well.
+    Default is YES unless you are capturing a Bayer RAW photo (Bayer RAW photos may not be processed by definition) or a bracket using AVCapturePhotoBracketSettings. When set to YES, still image stabilization is applied automatically in low light to counteract hand shake. If the device has optical image stabilization, autoStillImageStabilizationEnabled makes use of lens stabilization as well.
  
     As of iOS 13 hardware, the AVCapturePhotoOutput is capable of applying a variety of multi-image fusion techniques to improve photo quality (reduce noise, preserve detail in low light, freeze motion, etc), all of which have been previously lumped under the stillImageStabilization moniker. This property should no longer be used as it no longer provides meaningful information about the techniques used to improve quality in a photo capture. Instead, you should use -photoQualityPrioritization to indicate your preferred quality vs speed.
  */
@@ -1546,7 +1598,7 @@ AV_INIT_UNAVAILABLE
     For uncompressed or RAW captures, this property offers access to the pixel data.
 
  @discussion
-    Uncompressed captures, such as '420f' or 'BGRA', or RAW captures, such as 'bgg4', present pixel data as a CVPixelBuffer. This property is analogous to CMSampleBufferGetImageBuffer(). The pixel buffer contains only the minimal attachments required for correct display. Compressed captures, such as 'jpeg', return nil.
+    Uncompressed captures, such as '420f' or 'BGRA', Bayer RAW captures, such as 'bgg4', or Apple ProRAW captures, such as 'l64r', present pixel data as a CVPixelBuffer. See AVCapturePhotoOutput's -appleProRAWEnabled for a discussion on the differences between Bayer RAW and Apple ProRAW. This property is analogous to CMSampleBufferGetImageBuffer(). The pixel buffer contains only the minimal attachments required for correct display. Compressed captures, such as 'jpeg', return nil.
  */
 @property(nullable, readonly) CVPixelBufferRef pixelBuffer NS_RETURNS_INNER_POINTER;
 
@@ -1880,6 +1932,29 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos)
  */
 - (nullable AVSemanticSegmentationMatte *)replacementSemanticSegmentationMatteOfType:(AVSemanticSegmentationMatteType)semanticSegmentationMatteType forPhoto:(AVCapturePhoto *)photo API_AVAILABLE(ios(13.0));
 
+/*!
+ @method replacementAppleProRAWCompressionSettingsForPhoto:defaultSettings:maximumBitDepth:
+ @abstract
+	A callback in which you may provide replacement compression settings for the DNG flattened file data representation of Apple ProRAW. This callback will only be invoked for Apple ProRAW captures written to DNG.
+ 
+ @param photo
+	The calling instance of AVCapturePhoto.
+ @param defaultSettings
+	The default settings that will be used if not overridden.
+ @param maximumBitDepth
+	The maximum bit depth that can be specified with AVVideoAppleProRAWBitDepthKey in the returned settings dictionary.
+ @return
+	An NSDictionary containing compression settings to be used when writing the DNG file representation. Currently accepted keys are:
+		AVVideoQualityKey (NSNumber in range 0 to 1.0, inclusive)
+		AVVideoAppleProRAWBitDepthKey (NSNumber in range 8 to maximumBitDepth, inclusive)
+	Setting AVVideoQualityKey to 1.0 will use lossless compression. Any value between 0 and 1.0 will use lossy compression with that quality.
+	Setting AVVideoAppleProRAWBitDepthKey to a value less than what is given in defaultSettings may result in quantization losses.
+	Any keys not specified in the returned dictionary will use the values from defaultSettings. Return defaultSettings if no changes to the compression settings are desired.
+
+ @discussion
+	This callback is optional. If your delegate does not implement this callback, the default compression settings for the file type will be used.
+ */
+- (NSDictionary<NSString *, id> *)replacementAppleProRAWCompressionSettingsForPhoto:(AVCapturePhoto *)photo defaultSettings:(NSDictionary<NSString *, id> *)defaultSettings maximumBitDepth:(NSInteger)maximumBitDepth API_AVAILABLE(ios(14.3)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos, tvos);
 
 @end
 

@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           03A38609-C363-39E0-A3C0-84902C589898
+    value:           A638286E-538B-3710-AAE1-D2A7D444E9CE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EE5B157B-10CB-35C4-9C33-E730D73683DE
+    value:           6AEE152C-8D1C-3E61-8D63-FC6ABC5E1841
 install-name:    '/System/Library/Frameworks/NetFS.framework/Versions/A/NetFS'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _GetCompleteMountURL, _GetURLFromURLRemountInfo, _GetURLRemountInfo, 
                        _GetURLRemountInfoSize, _MountCompleteURL, _MountServerURL, 
                        _MountURLWithAuthentication, _NetFSCFStringtoCString, _NetFSClearAllURLApprovals, 

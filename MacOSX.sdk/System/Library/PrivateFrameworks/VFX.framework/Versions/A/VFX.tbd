@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2E1742F1-1B47-3CBF-8647-693F947060C6
+    value:           390C26F8-B093-3F21-8D55-30253692EA96
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E4699E7B-3157-3826-BB9B-C973E73C91CD
+    value:           ADEBBE4A-E37F-3116-83F6-F58329B11512
 install-name:    '/System/Library/PrivateFrameworks/VFX.framework/Versions/A/VFX'
 swift-abi-version: 7
 exports:

@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4AA920C2-3F61-3555-A957-83AB8FF03AC4
+    value:           7368E757-19E7-31EB-9F01-AD5D681F02A1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           43048411-B678-392A-9A72-BC4837E08161
+    value:           9A64300D-D713-38B3-830A-1EC2C99A6984
 install-name:    '/usr/lib/libcryptex_core.dylib'
 current-version: 84.40.6
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ __cryptex_asset_type_c411, __cryptex_asset_type_cpxd, __cryptex_asset_type_im4m, 
                        __cryptex_asset_type_ltrs, __cryptex_asset_type_root, __cryptex_base_alloc, 
                        __cryptex_base_dealloc, _cryptex_activate, _cryptex_asset_array_destroy, 

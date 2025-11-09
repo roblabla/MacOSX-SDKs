@@ -4,29 +4,29 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B00D3061-1558-35EE-A20B-9D8AFEE10DB1
+    value:           8DD3A0BC-2C92-31E3-BBAB-CE923A4342E4
   - target:          x86_64-maccatalyst
-    value:           B00D3061-1558-35EE-A20B-9D8AFEE10DB1
+    value:           8DD3A0BC-2C92-31E3-BBAB-CE923A4342E4
   - target:          arm64-macos
-    value:           FD7D4A1B-772F-3E4B-AA71-3D5E959DA868
+    value:           7EDAEC3F-03BB-3E2D-8DBD-6F86979C566F
   - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
+    value:           7EDAEC3F-03BB-3E2D-8DBD-6F86979C566F
   - target:          arm64e-macos
-    value:           5B53BD62-67C9-342D-8B39-2E2320708B84
+    value:           EDB716F3-BF94-3941-B7DA-D6C91094C645
   - target:          arm64e-maccatalyst
-    value:           5B53BD62-67C9-342D-8B39-2E2320708B84
+    value:           EDB716F3-BF94-3941-B7DA-D6C91094C645
 install-name:    '/usr/lib/system/libsystem_pthread.dylib'
-current-version: 454.40.3
+current-version: 454.60.1
 parent-umbrella:
   - targets:         [ i386-macos, x86_64-macos, x86_64-maccatalyst, arm64-macos, 
                        arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos, 
-                       arm64e-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __pthread_is_threaded, _cthread_yield ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos, x86_64-maccatalyst, 
-                       arm64e-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ arm64-macos, x86_64-macos, arm64e-macos, x86_64-maccatalyst, 
+                       arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ ____chkstk_darwin, ___is_threaded, ___pthread_init, ___pthread_workqueue_setkill, 
                        ___unix_conforming, __pthread_atfork_child, __pthread_atfork_child_handlers, 
                        __pthread_atfork_parent, __pthread_atfork_parent_handlers, 

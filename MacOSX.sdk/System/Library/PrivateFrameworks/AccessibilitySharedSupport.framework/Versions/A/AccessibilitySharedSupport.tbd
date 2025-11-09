@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A0421C4F-E0A2-3472-8A46-83A2AD6D3D6B
+    value:           0C02B8FF-F0D1-33A7-95D0-36A259152E6D
   - target:          x86_64-maccatalyst
-    value:           A0421C4F-E0A2-3472-8A46-83A2AD6D3D6B
+    value:           0C02B8FF-F0D1-33A7-95D0-36A259152E6D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1A13FC95-7925-3B9D-835E-37054FD90CB8
+    value:           446D084B-EDA1-3350-88A7-ED8DD8FC5C21
   - target:          arm64e-maccatalyst
-    value:           1A13FC95-7925-3B9D-835E-37054FD90CB8
+    value:           446D084B-EDA1-3350-88A7-ED8DD8FC5C21
 install-name:    '/System/Library/PrivateFrameworks/AccessibilitySharedSupport.framework/Versions/A/AccessibilitySharedSupport'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -63,9 +63,8 @@ exports:
                        _AXSSLogForCategory, _AXSSMotionTrackingDaemonIdentifier, 
                        _AXSSMotionTrackingDefaultJoystickModeMovementThreshold, _AXSSMotionTrackingDefaultMode, 
                        _AXSSMotionTrackingDefaultSensitivity, _AXSSMotionTrackingErrorDomain, 
-                       _AXSSMotionTrackingHIDUsagePage, _AXSSMotionTrackingHIDXPositionUsage, 
-                       _AXSSMotionTrackingHIDYPositionUsage, _AXSSMotionTrackingInvalidPoint, 
-                       _AXSSMotionTrackingPreferenceDomain, _AXSSMotionTrackingVideoFileInputDistributedNotificationName, 
+                       _AXSSMotionTrackingInvalidPoint, _AXSSMotionTrackingPreferenceDomain, 
+                       _AXSSMotionTrackingVideoFileInputDistributedNotificationName, 
                        _AXSSMotionTrackingVideoFileInputPreferenceKey, _AXSSPunctuationCloudKitContainer, 
                        _AXSSPunctuationCloudKitTopic, _AXSSPunctuationCloudKitZone, 
                        _AXSSPunctutionGroupFileExtension, _AXSSSpeechLanguageCanonicalFormToGeneralLanguage, 

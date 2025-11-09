@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5F951703-7E30-366A-9DEB-63BE353A8AAB
+    value:           328FF813-C496-3089-B63D-534571F99EC1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E695C3D5-86F8-355D-AE6D-08FF9706C178
+    value:           386F86C8-D672-336A-BF17-C96B63ECCD9D
 install-name:    '/System/Library/PrivateFrameworks/OnBoardingKit.framework/Versions/A/OnBoardingKit'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -24,8 +24,9 @@ exports:
                        _OBPrivacyCloudCallingIdentifier, _OBPrivacyContactTracingIdentifier, 
                        _OBPrivacyDictationIdentifier, _OBPrivacyEmergencySOSIdentifier, 
                        _OBPrivacyFaceIDIdentifier, _OBPrivacyFamilySetupIdentifier, 
-                       _OBPrivacyFindMyIdentifier, _OBPrivacyGameCenterIdentifier, 
-                       _OBPrivacyGymKitIdentifier, _OBPrivacyHealthRecordsIdentifier, 
+                       _OBPrivacyFindMyIdentifier, _OBPrivacyFitnessPlusIdentifier, 
+                       _OBPrivacyGameCenterIdentifier, _OBPrivacyGymKitIdentifier, 
+                       _OBPrivacyHealthRecordsIdentifier, _OBPrivacyImproveFitnessPlusIdentifier, 
                        _OBPrivacyImproveHandwashingIdentifier, _OBPrivacyImproveHealthIdentifier, 
                        _OBPrivacyImproveHealthRecordsIdentifier, _OBPrivacyImproveMapsIdentifier, 
                        _OBPrivacyImproveSiriIdentifier, _OBPrivacyLIDARCameraIdentifier, 

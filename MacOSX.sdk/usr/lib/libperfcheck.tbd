@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           11603DE5-FD4B-3BF0-962A-63052E11B75F
+    value:           67113817-A463-360A-B321-9286DC50FEDA
   - target:          x86_64-maccatalyst
-    value:           11603DE5-FD4B-3BF0-962A-63052E11B75F
+    value:           67113817-A463-360A-B321-9286DC50FEDA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FD5228D9-1BD9-305A-A094-E4A2346C9D20
+    value:           FFAF5096-29A0-32D7-9503-330BE86BA903
   - target:          arm64e-maccatalyst
-    value:           FD5228D9-1BD9-305A-A094-E4A2346C9D20
+    value:           FFAF5096-29A0-32D7-9503-330BE86BA903
 install-name:    '/usr/lib/libperfcheck.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _ep_session_begin, _ep_session_config_with_argstr, _ep_session_create, 
                        _ep_session_destroy, _ep_session_end, _ep_session_process, 

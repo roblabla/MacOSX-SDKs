@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FD533791-8330-3F8C-A492-724F2BF1BBE1
+    value:           D3DA3A28-D8D1-31DE-98E8-93EAA0BF40CA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F9207E75-AFF8-3EAA-998A-AC91398960F8
+    value:           1F063D60-3BC0-3F6E-A75D-AE297628446A
 install-name:    '/System/Library/PrivateFrameworks/CalendarUIKit.framework/Versions/A/CalendarUIKit'
 current-version: 0
 exports:

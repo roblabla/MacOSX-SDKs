@@ -3,20 +3,21 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F7A8EB95-3593-3599-AE1B-AF12312F390C
+    value:           47A6C89A-71D3-3DF8-B78A-686A5790985F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           33CC462B-1FE9-3CC5-94F8-1E4C0FFB5674
+    value:           DF3423CE-F4C7-39EC-B2EA-C7BF3F2C06D2
 install-name:    '/usr/lib/swift/libswiftGLKit.dylib'
 current-version: 1.1
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftGLKit.dylib', '$ld$install_name$os10.11$@rpath/libswiftGLKit.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftGLKit.dylib', '$ld$install_name$os10.13$@rpath/libswiftGLKit.dylib', 
-                       '$ld$install_name$os10.14$@rpath/libswiftGLKit.dylib', '$ld$install_name$os10.9$@rpath/libswiftGLKit.dylib', 
-                       '_$s5GLKit22_indexHomogeneousValueyq_SPyxG_Sitr0_lF', '_$sSo11_GLKMatrix2V5GLKitEySfSicig', 
+                       '$ld$install_name$os10.14$@rpath/libswiftGLKit.dylib', '$ld$install_name$os10.9$@rpath/libswiftGLKit.dylib' ]
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+    symbols:         [ '_$s5GLKit22_indexHomogeneousValueyq_SPyxG_Sitr0_lF', '_$sSo11_GLKMatrix2V5GLKitEySfSicig', 
                        '_$sSo11_GLKMatrix2V5GLKitEySfSicipMV', '_$sSo11_GLKMatrix3V5GLKitEySfSicig', 
                        '_$sSo11_GLKMatrix3V5GLKitEySfSicipMV', '_$sSo11_GLKMatrix4V5GLKitEySfSicig', 
                        '_$sSo11_GLKMatrix4V5GLKitEySfSicipMV', '_$sSo11_GLKVector2V5GLKitEySfSicig', 

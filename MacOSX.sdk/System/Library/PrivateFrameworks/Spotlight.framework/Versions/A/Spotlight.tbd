@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D0F5E63B-4FB8-3DA3-B68E-C42BEF898D55
+    value:           536A1B1C-C370-3DB4-88ED-C8A52D9F6C78
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           187F0572-0661-3FF9-BB1E-B0A52B3E7D80
+    value:           0BAE1FDB-FA07-38A9-9549-F98CC5CDA6A6
 install-name:    '/System/Library/PrivateFrameworks/Spotlight.framework/Versions/A/Spotlight'
-current-version: 2149.5
+current-version: 2150.6
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _SPAppDelegatePreferencesChanged, _SPBodyColor, _SPBodyFont, 
@@ -43,5 +43,6 @@ exports:
                        SPShortcuts, SPSuggestionCardSection, SPTTRResult, SPTTRSupport, 
                        SPUISearchModel, SPUISearchModelGeneral, SPURLQuery, SPURLResult, 
                        _SPResultsArrays ]
-    objc-ivars:      [ SPQueryTask._queryStartTime, SPQueryTask._topHitSection ]
+    objc-ivars:      [ SPQueryTask._queryStartTime, SPQueryTask._shortcutResultChecked, 
+                       SPQueryTask._topHitSection ]
 ...

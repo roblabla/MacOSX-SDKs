@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F10BC327-5B0B-3F54-BA5B-463284C1A752
+    value:           CBA6F342-2755-3244-8BDC-F4F30FFC8418
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0912D4B0-A28E-3C5B-B6D7-4362D8DE0EE3
+    value:           BB049899-CBB4-3054-AE0F-37EA827A9CB7
 install-name:    '/System/Library/PrivateFrameworks/DiagnosticRequestService.framework/Versions/A/DiagnosticRequestService'
 current-version: 4
 exports:

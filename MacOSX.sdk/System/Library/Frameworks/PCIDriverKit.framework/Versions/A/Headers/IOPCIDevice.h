@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.40.8) generated from IOPCIDevice.iig */
+/* iig(DriverKit-107.60.3) generated from IOPCIDevice.iig */
 
 /* IOPCIDevice.iig:1-35 */
 /*

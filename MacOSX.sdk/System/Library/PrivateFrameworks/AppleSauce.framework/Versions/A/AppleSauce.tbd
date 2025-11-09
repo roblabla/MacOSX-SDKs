@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3FC38E79-52B3-342C-BDE8-D57B27777CAB
+    value:           AE525243-2CE7-373E-994E-C2457611EB3C
   - target:          x86_64-maccatalyst
-    value:           3FC38E79-52B3-342C-BDE8-D57B27777CAB
+    value:           AE525243-2CE7-373E-994E-C2457611EB3C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E2FE1EB8-F8E7-3295-8366-3F93BF9C3A2E
+    value:           F38BC353-F9A4-3762-AEF4-DA4692FE80B6
   - target:          arm64e-maccatalyst
-    value:           E2FE1EB8-F8E7-3295-8366-3F93BF9C3A2E
+    value:           F38BC353-F9A4-3762-AEF4-DA4692FE80B6
 install-name:    '/System/Library/PrivateFrameworks/AppleSauce.framework/Versions/A/AppleSauce'
 current-version: 0
 compatibility-version: 0

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0AA47FDB-EC4F-374D-923C-8AE71DF3C576
+    value:           C21CA883-5AFC-3FEC-8B9E-288077A03BEB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C7C26BE2-9955-3CCC-9778-616593717147
+    value:           CD008432-8AE8-39D1-BCC4-78AB1030E33E
 install-name:    '/System/Library/Frameworks/CoreTelephony.framework/Support/libCommCenterAWDMetrics.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -2829,6 +2829,7 @@ exports:
                        __ZN3awd7metrics28CommCenterSaveDataModeSwitch18kSubsIdFieldNumberE, 
                        __ZN3awd7metrics28CommCenterSaveDataModeSwitch21CheckTypeAndMergeFromERKN20wireless_diagnostics6google8protobuf11MessageLiteE, 
                        __ZN3awd7metrics28CommCenterSaveDataModeSwitch21InitAsDefaultInstanceEv, 
+                       __ZN3awd7metrics28CommCenterSaveDataModeSwitch23kIsExpensiveFieldNumberE, 
                        __ZN3awd7metrics28CommCenterSaveDataModeSwitch23kSwitchStateFieldNumberE, 
                        __ZN3awd7metrics28CommCenterSaveDataModeSwitch27MergePartialFromCodedStreamEPN20wireless_diagnostics6google8protobuf2io16CodedInputStreamE, 
                        __ZN3awd7metrics28CommCenterSaveDataModeSwitch4SwapEPS1_, 

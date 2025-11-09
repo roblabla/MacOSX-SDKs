@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E35EA0C3-E03B-3350-B261-40BE0392D12A
+    value:           2C881E82-6E2C-3E92-8DC5-3C2D05FE7C95
   - target:          x86_64-maccatalyst
-    value:           E35EA0C3-E03B-3350-B261-40BE0392D12A
+    value:           2C881E82-6E2C-3E92-8DC5-3C2D05FE7C95
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           14B0EA75-EB11-3F97-81C9-E875CEAE2FF7
+    value:           AAC88056-759F-32E3-8388-D9FF2EB55B61
   - target:          arm64e-maccatalyst
-    value:           14B0EA75-EB11-3F97-81C9-E875CEAE2FF7
+    value:           AAC88056-759F-32E3-8388-D9FF2EB55B61
 install-name:    '/usr/lib/libxslt.1.dylib'
 current-version: 3.26
 compatibility-version: 3
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _xslAddCall, _xslDebugStatus, _xslDropCall, _xslHandleDebugger, 
                        _xsltAddKey, _xsltAddStackElemList, _xsltAddTemplate, _xsltAllocateExtra, 

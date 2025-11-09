@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8CE8DF51-72D5-392C-8D7B-77EE13C83C67
+    value:           CC4A2EED-7DAE-3B81-A69B-C3F9544E0A38
   - target:          x86_64-maccatalyst
-    value:           8CE8DF51-72D5-392C-8D7B-77EE13C83C67
+    value:           CC4A2EED-7DAE-3B81-A69B-C3F9544E0A38
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A47F5D9B-55F5-3204-9A28-2E1D0A84AF4D
+    value:           1502D2A0-248E-3B40-8E13-741584956FD8
   - target:          arm64e-maccatalyst
-    value:           A47F5D9B-55F5-3204-9A28-2E1D0A84AF4D
+    value:           1502D2A0-248E-3B40-8E13-741584956FD8
 install-name:    '/System/Library/PrivateFrameworks/RemoteTextInput.framework/Versions/A/RemoteTextInput'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           975171CD-3660-32A1-A446-540A876AC2D0
+    value:           3C43C793-5F60-3571-BC21-79480596D272
   - target:          x86_64-maccatalyst
-    value:           975171CD-3660-32A1-A446-540A876AC2D0
+    value:           3C43C793-5F60-3571-BC21-79480596D272
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           147C5A7D-DB5B-3D3B-81DE-99C0AE6E5E9C
+    value:           A853E44B-F8DA-3CB8-B5AD-79C48211EB28
   - target:          arm64e-maccatalyst
-    value:           147C5A7D-DB5B-3D3B-81DE-99C0AE6E5E9C
+    value:           A853E44B-F8DA-3CB8-B5AD-79C48211EB28
 install-name:    '/System/Library/Frameworks/Photos.framework/Versions/A/Photos'
-current-version: 311.0.120
+current-version: 321.0.102
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _NSStringFromPHErrorCode, _PHAccessLevelFromPLPhotosAccessScopeOptions, 
                        _PHAdjustmentBaseVersionDescription, _PHAdjustmentDataKey, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A78025D4-251D-3BCE-BBDA-A5C9334C9AA6
+    value:           DCB9F7C3-32DC-39B8-BFAB-03AF2E6480C5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C18ECCE9-055B-3C42-8767-2D2C377902A9
+    value:           9EB34D4C-2370-35DC-9D72-6ECD6228E5A2
 install-name:    '/System/Library/PrivateFrameworks/ConversationKit.framework/Versions/A/ConversationKit'
 swift-abi-version: 7
 exports:
@@ -141,6 +141,7 @@ exports:
                        '_$s15ConversationKit0A10ControllerC25didUpdateLocalParticipantyAA0G0V_AA17BroadcastingStateOtcSgvpMV', 
                        '_$s15ConversationKit0A10ControllerC25didUpdateLocalParticipantyAA0G0V_AA17BroadcastingStateOtcSgvpWvd', 
                        '_$s15ConversationKit0A10ControllerC25didUpdateLocalParticipantyAA0G0V_AA17BroadcastingStateOtcSgvs', 
+                       '_$s15ConversationKit0A10ControllerC25handleLocalPreviewChangedyy10Foundation12NotificationVF', 
                        '_$s15ConversationKit0A10ControllerC25handleSendingVideoChangedyy10Foundation12NotificationVF', 
                        '_$s15ConversationKit0A10ControllerC26conversationStateDidChangeySo014TUConversationE0VcSgvM', 
                        '_$s15ConversationKit0A10ControllerC26conversationStateDidChangeySo014TUConversationE0VcSgvg', 
@@ -3075,15 +3076,18 @@ exports:
                        '_$s15ConversationKit6LayoutV14InCallControlsV34participantListSubtitleIconSpacing12CoreGraphics7CGFloatVvau', 
                        '_$s15ConversationKit6LayoutV14InCallControlsV34participantListSubtitleIconSpacing12CoreGraphics7CGFloatVvgZ', 
                        '_$s15ConversationKit6LayoutV14InCallControlsV34participantListSubtitleIconSpacing12CoreGraphics7CGFloatVvpZ', 
+                       '_$s15ConversationKit6LayoutV14InCallControlsV35addParticipantNameLabelLeadingInset12CoreGraphics7CGFloatVvau', 
+                       '_$s15ConversationKit6LayoutV14InCallControlsV35addParticipantNameLabelLeadingInset12CoreGraphics7CGFloatVvgZ', 
+                       '_$s15ConversationKit6LayoutV14InCallControlsV35addParticipantNameLabelLeadingInset12CoreGraphics7CGFloatVvpZ', 
                        '_$s15ConversationKit6LayoutV14InCallControlsV35participantListContentVerticalInset12CoreGraphics7CGFloatVvau', 
                        '_$s15ConversationKit6LayoutV14InCallControlsV35participantListContentVerticalInset12CoreGraphics7CGFloatVvgZ', 
                        '_$s15ConversationKit6LayoutV14InCallControlsV35participantListContentVerticalInset12CoreGraphics7CGFloatVvpZ', 
+                       '_$s15ConversationKit6LayoutV14InCallControlsV36addParticipantNameLabelTrailingInset12CoreGraphics7CGFloatVvau', 
+                       '_$s15ConversationKit6LayoutV14InCallControlsV36addParticipantNameLabelTrailingInset12CoreGraphics7CGFloatVvgZ', 
+                       '_$s15ConversationKit6LayoutV14InCallControlsV36addParticipantNameLabelTrailingInset12CoreGraphics7CGFloatVvpZ', 
                        '_$s15ConversationKit6LayoutV14InCallControlsV37participantListContentHorizontalInset12CoreGraphics7CGFloatVvau', 
                        '_$s15ConversationKit6LayoutV14InCallControlsV37participantListContentHorizontalInset12CoreGraphics7CGFloatVvgZ', 
                        '_$s15ConversationKit6LayoutV14InCallControlsV37participantListContentHorizontalInset12CoreGraphics7CGFloatVvpZ', 
-                       '_$s15ConversationKit6LayoutV14InCallControlsV38addParticipantNameLabelHorizontalInset12CoreGraphics7CGFloatVvau', 
-                       '_$s15ConversationKit6LayoutV14InCallControlsV38addParticipantNameLabelHorizontalInset12CoreGraphics7CGFloatVvgZ', 
-                       '_$s15ConversationKit6LayoutV14InCallControlsV38addParticipantNameLabelHorizontalInset12CoreGraphics7CGFloatVvpZ', 
                        '_$s15ConversationKit6LayoutV14InCallControlsV40participantListRingButtonHorizontalInset12CoreGraphics7CGFloatVvau', 
                        '_$s15ConversationKit6LayoutV14InCallControlsV40participantListRingButtonHorizontalInset12CoreGraphics7CGFloatVvgZ', 
                        '_$s15ConversationKit6LayoutV14InCallControlsV40participantListRingButtonHorizontalInset12CoreGraphics7CGFloatVvpZ', 

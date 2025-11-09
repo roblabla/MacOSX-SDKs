@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F6DB3130-83A3-3A88-A2AF-A45625E4011E
+    value:           4C483448-0DFB-3640-B53A-5BF1DF4B6D93
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E3B024CD-7482-31D4-BACF-CC340CC44073
+    value:           06D79FC2-0D99-33F9-9293-311B32E570DC
 install-name:    '/System/Library/PrivateFrameworks/VCXMPP.framework/Versions/A/Frameworks/Pear.framework/Versions/A/Pear'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

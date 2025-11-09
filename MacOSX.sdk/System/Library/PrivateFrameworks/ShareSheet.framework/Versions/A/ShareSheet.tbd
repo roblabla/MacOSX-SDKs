@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           2C75A46E-33D5-32F0-B742-BB0D03F7BB57
+    value:           26CB6C7B-D014-3B85-9982-BD1DD0CEE744
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           821A38A1-78D1-3FA7-AF42-2B1C7E16BC38
+    value:           810E2DAE-6D7F-3904-BF37-6E8147419335
 install-name:    '/System/Library/PrivateFrameworks/ShareSheet.framework/Versions/A/ShareSheet'
-current-version: 1570.6
+current-version: 1575
 exports:
   - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _ShareSheetVersionNumber, _ShareSheetVersionString, _UIActivityTypeAddToReadingList, 

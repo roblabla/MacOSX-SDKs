@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.40.8) generated from IOUserNetworkPacketBufferPool.iig */
+/* iig(DriverKit-107.60.3) generated from IOUserNetworkPacketBufferPool.iig */
 
 /* IOUserNetworkPacketBufferPool.iig:1-59 */
 /*
@@ -77,7 +77,7 @@ public:
     virtual void
     free() override;
 
-    /** @deprectated, use CreateWithOptions instead */
+    /** @deprecated, use CreateWithOptions instead */
     static kern_return_t
     Create(
         OSObject * poolOwner,

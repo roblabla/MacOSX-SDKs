@@ -3,17 +3,17 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4BC7031E-445A-30C5-A2F1-96456569666A
+    value:           B82D099B-4F53-3B60-8BAA-975C41EFD356
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6E449740-895D-381B-A822-C9E43B2BBE2C
+    value:           9E776419-229D-30CC-AD40-193F29B2C670
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATSUI.framework/Versions/A/ATSUI'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        ApplicationServices
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _ATSApplyMorph, _ATSClearGlyphVector, _ATSGrowGlyphVector, 
                        _ATSInitializeGlyphVector, _ATSUBatchBreakLines, _ATSUBreakLine, 
                        _ATSUClearAttributes, _ATSUClearFontFeatures, _ATSUClearFontVariations, 

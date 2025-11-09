@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3DF8DA45-FCBB-3C30-80B4-0515A5B43CC9
+    value:           0DBA59AE-FD6A-3945-84A3-CF280DEA9660
   - target:          x86_64-maccatalyst
-    value:           3DF8DA45-FCBB-3C30-80B4-0515A5B43CC9
+    value:           0DBA59AE-FD6A-3945-84A3-CF280DEA9660
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           32F7C207-6A8B-3D52-BD7B-C84D30DBFCB0
+    value:           62C24C00-C683-3665-B2E8-03A9AC38C074
   - target:          arm64e-maccatalyst
-    value:           32F7C207-6A8B-3D52-BD7B-C84D30DBFCB0
+    value:           62C24C00-C683-3665-B2E8-03A9AC38C074
 install-name:    '/System/Library/PrivateFrameworks/Navigation.framework/Versions/A/Navigation'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -23,10 +23,10 @@ exports:
                        _MNClearStoredRoutesUsedBefore, _MNCommuteETAUpdateInterval, 
                        _MNCurrentNavigationStateAllowsDoom, _MNDeviceSpeakerIsInUse, 
                        _MNDirectionsRequestDetailsReadFrom, _MNDisplayETAAndRemainingMinutes, 
-                       _MNErrorDomain, _MNErrorInternalDescriptionKey, _MNFormattedStringOptionsHash, 
-                       _MNFormattedStringOptionsIsEqual, _MNGetHoursAndMinutesForTimeInterval, 
-                       _MNGetMNAudioLog, _MNGetMNDirectionsRequestLog, _MNGetMNLocationProviderLog, 
-                       _MNGetMNLocationTrackerLog, _MNGetMNNavigationDetailsLog, 
+                       _MNErrorDomain, _MNErrorInternalDescriptionKey, _MNErrorInterruptionDatesKey, 
+                       _MNFormattedStringOptionsHash, _MNFormattedStringOptionsIsEqual, 
+                       _MNGetHoursAndMinutesForTimeInterval, _MNGetMNAudioLog, _MNGetMNDirectionsRequestLog, 
+                       _MNGetMNLocationProviderLog, _MNGetMNLocationTrackerLog, _MNGetMNNavigationDetailsLog, 
                        _MNGetMNNavigationStateManagerLog, _MNGetMNRouteAttributesLog, 
                        _MNGetMNRouteStorageLog, _MNGetMNXPCTransactionManagerLog, 
                        _MNGetProcessHandlingLog, _MNGetRouteWithID, _MNGuidanceEventFeedbackReadFrom, 
@@ -154,11 +154,11 @@ exports:
                        MNTraceCommuteDirectionsRequestRow, MNTraceDirectionsRow, 
                        MNTraceETAUpdateRow, MNTraceEvent, MNTraceHeadingDataRow, 
                        MNTraceLoader, MNTraceLocationRow, MNTraceMiscInfo, MNTraceMotionDataRow, 
-                       MNTracePlaybackDetails, MNTracePlayer, MNTracePlayerScheduler, 
-                       MNTracePlayerTimelineStream, MNTraceRecorder, MNTraceRecordingData, 
-                       MNTraceRouteSelectionsRow, MNTraceRouteSimulator, MNTraceVehicleHeadingRow, 
-                       MNTraceVehicleSpeedRow, MNTrafficIncidentAlert, MNTransitInstruction, 
-                       MNTransitStepInstruction, MNTransitWalkingSegmentInstruction, 
+                       MNTraceNavigationEventRow, MNTracePlaybackDetails, MNTracePlayer, 
+                       MNTracePlayerScheduler, MNTracePlayerTimelineStream, MNTraceRecorder, 
+                       MNTraceRecordingData, MNTraceRouteSelectionsRow, MNTraceRouteSimulator, 
+                       MNTraceVehicleHeadingRow, MNTraceVehicleSpeedRow, MNTrafficIncidentAlert, 
+                       MNTransitInstruction, MNTransitStepInstruction, MNTransitWalkingSegmentInstruction, 
                        MNTunnelLocationProjector, MNTurnByTurnLocationTracker, MNVehicleMonitor, 
                        MNVoiceController, MNVoiceLanguageUtil, MNWalkingTurnByTurnLocationTracker, 
                        MNXPCActivity, MNXPCTransactionCounter, _MNTimepointAndTransportType ]

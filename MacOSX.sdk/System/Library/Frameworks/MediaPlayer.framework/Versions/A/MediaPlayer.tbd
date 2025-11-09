@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           30771BBE-0008-31E0-BDB2-3BB1E35C173D
+    value:           98F74E6D-4344-3FC0-9148-00E29BBDB37D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E8418829-14D9-3D7C-973D-FA7D7D989503
+    value:           9766D6E1-D247-3486-8696-64DDA33F9F83
 install-name:    '/System/Library/Frameworks/MediaPlayer.framework/Versions/A/MediaPlayer'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CGRectNormalizedRectFromSubRect, _CGRectSubRectWithNormalizedRect, 
                        _MPAVMRRouteDiscoveryModeFromDiscoveryMode, _MPAVRouteConnectionCorrelationIDUserInfoKey, 
                        _MPAVRouteConnectionEndpointIdentifierUserInfoKey, _MPAVRouteConnectionErrorDomain, 
@@ -604,7 +604,8 @@ exports:
                        MPPMediaQuery, MPPPersistentIDsPredicate, MPPPropertyPredicate, 
                        MPPSearchStringPredicate, MPPlaybackArchive, MPPlaybackArchiveConfiguration, 
                        MPPlaybackArchiveDisplayProperties, MPPlaybackSessionCommandEvent, 
-                       MPPreloadPlaybackSessionCommand, MPPropertySet, MPProtocolProxy, 
+                       MPPlaybackSessionCommandInfo, MPPreloadPlaybackSessionCommand, 
+                       MPPreloadPlaybackSessionCommandEvent, MPPropertySet, MPProtocolProxy, 
                        MPRadioStationEvent, MPRadioStationRemotePlaybackQueue, MPRandomDistribution, 
                        MPRatingCommand, MPRatingCommandEvent, MPRemoteCommand, MPRemoteCommandCenter, 
                        MPRemoteCommandEvent, MPRemotePlaybackQueue, MPReorderQueueCommand, 

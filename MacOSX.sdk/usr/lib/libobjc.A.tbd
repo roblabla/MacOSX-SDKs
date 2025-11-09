@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A07B8D14-358C-3CBB-B102-C85B49EC8DE2
+    value:           339EDCD0-5ABF-362A-B9E5-8B9236C8D36B
   - target:          x86_64-maccatalyst
-    value:           A07B8D14-358C-3CBB-B102-C85B49EC8DE2
+    value:           339EDCD0-5ABF-362A-B9E5-8B9236C8D36B
   - target:          x86_64h-macos
-    value:           DA578859-4D2C-33A0-AF74-4E3DA9F56E50
+    value:           45EA2DE2-B612-3486-B156-2359CE279159
   - target:          x86_64h-maccatalyst
-    value:           DA578859-4D2C-33A0-AF74-4E3DA9F56E50
+    value:           45EA2DE2-B612-3486-B156-2359CE279159
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2F1DE55F-5BE4-377A-8A57-411628130346
+    value:           A4BC7D83-2CA5-32B1-B1CA-1D1431C04916
   - target:          arm64e-maccatalyst
-    value:           2F1DE55F-5BE4-377A-8A57-411628130346
+    value:           A4BC7D83-2CA5-32B1-B1CA-1D1431C04916
 install-name:    '/usr/lib/libobjc.A.dylib'
 current-version: 228
 exports:
@@ -33,7 +33,7 @@ exports:
   - targets:         [ x86_64-macos, x86_64h-macos, x86_64-maccatalyst, x86_64h-maccatalyst ]
     symbols:         [ _objc_msgLookup_fp2ret, _objc_msgLookup_fpret, _objc_msgSend_fp2ret, 
                        _objc_msgSend_fp2ret_debug, _objc_msgSend_fpret, _objc_msgSend_fpret_debug ]
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, x86_64-maccatalyst, 
                        x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
     symbols:         [ _NXCompareHashTables, _NXCompareMapTables, _NXCopyHashTable, 
                        _NXCountHashTable, _NXCountMapTable, _NXCreateHashTable, _NXCreateHashTableFromZone, 
@@ -153,7 +153,7 @@ exports:
                        _sel_isMapped, _sel_registerName ]
     objc-classes:    [ NSObject, Object, Protocol ]
     objc-ivars:      [ NSObject.isa, Object.isa ]
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, arm64-macos ]
     symbols:         [ _objc_allocate_object, _objc_assertRegisteredThreadWithCollector, 
                        _objc_assign_global, _objc_assign_ivar, _objc_assign_strongCast, 
                        _objc_assign_threadlocal, _objc_assign_weak, _objc_atomicCompareAndSwapGlobal, 

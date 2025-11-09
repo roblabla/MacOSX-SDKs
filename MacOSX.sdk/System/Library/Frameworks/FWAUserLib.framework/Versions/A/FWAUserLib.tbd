@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EB7ED485-16FD-3C26-8D8B-962FC3194DC8
+    value:           D7350C3B-35AD-381D-9529-D7EDB4943D89
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           734566F9-BE7B-396C-8197-80309B08C801
+    value:           F795D7C6-31FA-37FB-809F-AA26945D4E33
 install-name:    '/System/Library/Frameworks/FWAUserLib.framework/Versions/A/FWAUserLib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CreateAsyncWakePort, _FWAAttachFWAudioMIDIStream, _FWAAttachFWAudioStream, 
                        _FWAClose, _FWACountDevices, _FWACreateAudioStream, _FWACreateFWAudioDevice, 
                        _FWACreateFWAudioEngine, _FWACreateFWAudioMIDIDeviceNub, _FWACreateFWAudioMIDIPlug, 

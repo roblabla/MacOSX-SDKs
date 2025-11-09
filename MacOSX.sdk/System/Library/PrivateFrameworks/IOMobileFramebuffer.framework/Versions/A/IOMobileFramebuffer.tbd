@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           83F2AA55-649B-386C-B4C5-615C00F9F408
+    value:           7665CECB-5FAF-3935-BE74-6356E18DDF0F
   - target:          x86_64-maccatalyst
-    value:           83F2AA55-649B-386C-B4C5-615C00F9F408
+    value:           7665CECB-5FAF-3935-BE74-6356E18DDF0F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EAEDCA3F-E952-39BF-8C1D-342377F1310D
+    value:           7F6BECC6-FBA0-3912-B1B3-2AF537F192D4
   - target:          arm64e-maccatalyst
-    value:           EAEDCA3F-E952-39BF-8C1D-342377F1310D
+    value:           7F6BECC6-FBA0-3912-B1B3-2AF537F192D4
 install-name:    '/System/Library/PrivateFrameworks/IOMobileFramebuffer.framework/Versions/A/IOMobileFramebuffer'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

@@ -4,24 +4,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           04780659-F0B9-3F09-A6EB-60BD7DA52026
+    value:           4958FE0E-ABB6-379B-9B0A-FE170AE0A87E
   - target:          x86_64-maccatalyst
-    value:           04780659-F0B9-3F09-A6EB-60BD7DA52026
+    value:           4958FE0E-ABB6-379B-9B0A-FE170AE0A87E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B3984955-EFAC-3D02-B7E0-BFD3A84644CB
+    value:           4A826979-5E60-3DA5-BCE5-A81CE8269158
   - target:          arm64e-maccatalyst
-    value:           B3984955-EFAC-3D02-B7E0-BFD3A84644CB
+    value:           4A826979-5E60-3DA5-BCE5-A81CE8269158
 install-name:    '/usr/lib/swift/libswiftCoreGraphics.dylib'
 current-version: 2
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ '_$s12CoreGraphics7CGFloatVyACs7Float80VcfC' ]
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftCoreGraphics.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftCoreGraphics.dylib', 

@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           760C7B5A-643B-37C7-98E8-1B68F7F27BAB
+    value:           DC652D50-FA69-3801-9361-004D4D6832D0
   - target:          x86_64-maccatalyst
-    value:           760C7B5A-643B-37C7-98E8-1B68F7F27BAB
+    value:           DC652D50-FA69-3801-9361-004D4D6832D0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CAFC4086-078F-3519-A699-862A7A858661
+    value:           A42FE2FA-6D61-3A6B-BC18-D81CF9EEC26E
   - target:          arm64e-maccatalyst
-    value:           CAFC4086-078F-3519-A699-862A7A858661
+    value:           A42FE2FA-6D61-3A6B-BC18-D81CF9EEC26E
 install-name:    '/usr/lib/libbsm.0.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _au_bsm_to_domain, _au_bsm_to_errno, _au_bsm_to_fcntl_cmd, 
                        _au_bsm_to_socket_type, _au_close, _au_close_buffer, _au_close_token, 

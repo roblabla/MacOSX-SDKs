@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EC5DADA8-608A-3D72-8F29-F77159B7E1EB
+    value:           E2C377F2-B0F0-3240-A5CE-498EDF018A44
   - target:          x86_64-maccatalyst
-    value:           EC5DADA8-608A-3D72-8F29-F77159B7E1EB
+    value:           E2C377F2-B0F0-3240-A5CE-498EDF018A44
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1DB9202C-F6A4-3D32-8B39-2FEF1527B753
+    value:           893A329B-A63F-3E71-B835-3BB6757A6C07
   - target:          arm64e-maccatalyst
-    value:           1DB9202C-F6A4-3D32-8B39-2FEF1527B753
+    value:           893A329B-A63F-3E71-B835-3BB6757A6C07
 install-name:    '/System/Library/PrivateFrameworks/CryptoKitPrivate.framework/Versions/A/CryptoKitPrivate'
 swift-abi-version: 7
 exports:
@@ -158,6 +158,23 @@ exports:
                        '_$s16CryptoKitPrivate27AlishaSPAKE2ProverConfirmedCMa', '_$s16CryptoKitPrivate27AlishaSPAKE2ProverConfirmedCMn', 
                        '_$s16CryptoKitPrivate27AlishaSPAKE2ProverConfirmedCMo', '_$s16CryptoKitPrivate27AlishaSPAKE2ProverConfirmedCMu', 
                        '_$s16CryptoKitPrivate27AlishaSPAKE2ProverConfirmedCN', '_$s16CryptoKitPrivate27AlishaSPAKE2ProverConfirmedCfD', 
+                       '_$s16CryptoKitPrivate5APSICO15SupportedCurvesO2eeoiySbAE_AEtFZ', 
+                       '_$s16CryptoKitPrivate5APSICO15SupportedCurvesO4hash4intoys6HasherVz_tF', 
+                       '_$s16CryptoKitPrivate5APSICO15SupportedCurvesO4p256yA2EmFWC', 
+                       '_$s16CryptoKitPrivate5APSICO15SupportedCurvesO4p384yA2EmFWC', 
+                       '_$s16CryptoKitPrivate5APSICO15SupportedCurvesO4p521yA2EmFWC', 
+                       '_$s16CryptoKitPrivate5APSICO15SupportedCurvesO8allCasesSayAEGvgZ', 
+                       '_$s16CryptoKitPrivate5APSICO15SupportedCurvesO9hashValueSivg', 
+                       '_$s16CryptoKitPrivate5APSICO15SupportedCurvesO9hashValueSivpMV', 
+                       '_$s16CryptoKitPrivate5APSICO15SupportedCurvesOMa', '_$s16CryptoKitPrivate5APSICO15SupportedCurvesOMn', 
+                       '_$s16CryptoKitPrivate5APSICO15SupportedCurvesON', '_$s16CryptoKitPrivate5APSICO15SupportedCurvesOSHAAMc', 
+                       '_$s16CryptoKitPrivate5APSICO15SupportedCurvesOSQAAMc', '_$s16CryptoKitPrivate5APSICO15SupportedCurvesOs12CaseIterableAAMc', 
+                       '_$s16CryptoKitPrivate5APSICO6ClientV24computeIntersectResponse7element10matchPoint10Foundation4DataV1q_AK1stAK_AKtKF', 
+                       '_$s16CryptoKitPrivate5APSICO6ClientV30computeGuaranteedMatchResponse10Foundation4DataV1q_AI1styKF', 
+                       '_$s16CryptoKitPrivate5APSICO6ClientV9publicKey19domainSeparationTag9curveTypeAE10Foundation4DataV_AkC15SupportedCurvesOtKcfC', 
+                       '_$s16CryptoKitPrivate5APSICO6ClientVMa', '_$s16CryptoKitPrivate5APSICO6ClientVMn', 
+                       '_$s16CryptoKitPrivate5APSICO6ClientVN', '_$s16CryptoKitPrivate5APSICOMa', 
+                       '_$s16CryptoKitPrivate5APSICOMn', '_$s16CryptoKitPrivate5APSICON', 
                        '_$s16CryptoKitPrivate6ScryptC9deriveKey8password4salt10outputSize4cost05blockJ015parallelizationSo6NSDataCSgAL_AMSis6UInt64Vs6UInt32VAQtFZ', 
                        '_$s16CryptoKitPrivate6ScryptCACycfC', '_$s16CryptoKitPrivate6ScryptCACycfc', 
                        '_$s16CryptoKitPrivate6ScryptCMa', '_$s16CryptoKitPrivate6ScryptCMn', 

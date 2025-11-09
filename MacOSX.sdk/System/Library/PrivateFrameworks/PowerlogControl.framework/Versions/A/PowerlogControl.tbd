@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B9A164BD-7157-301B-8CE0-46F838867F9F
+    value:           1DCB4715-FCB4-392E-8326-7C4344C2536A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C6001CE8-FCC6-3D1C-8BCB-366D94AF97B4
+    value:           8432CD80-C940-37E0-AAC2-32C0D4CEC7AF
 install-name:    '/System/Library/PrivateFrameworks/PowerlogControl.framework/Versions/A/PowerlogControl'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

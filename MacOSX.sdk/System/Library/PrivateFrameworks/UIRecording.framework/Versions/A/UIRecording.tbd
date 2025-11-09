@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3B577F88-5125-3E35-9DAB-7DE2F50B55F8
+    value:           5EEDA312-977D-39A9-B16A-9EC554D982DC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           72E3C586-DDD9-31DF-85C5-17D678A44F59
+    value:           FD846602-81DB-3EE7-9668-293B83260568
 install-name:    '/System/Library/PrivateFrameworks/UIRecording.framework/Versions/A/UIRecording'
 current-version: 28
 exports:

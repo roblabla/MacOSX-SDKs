@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BADF9649-6E9E-3326-80BA-676BE83FB161
+    value:           D0F9F628-F241-3FA2-A785-7B9DCBB2FEC4
   - target:          x86_64-maccatalyst
-    value:           BADF9649-6E9E-3326-80BA-676BE83FB161
+    value:           D0F9F628-F241-3FA2-A785-7B9DCBB2FEC4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CD84F9AA-B7E3-3C11-A299-7AFC28831AD7
+    value:           2A0EA878-17A0-3D13-9FE0-D3AB09DD5187
   - target:          arm64e-maccatalyst
-    value:           CD84F9AA-B7E3-3C11-A299-7AFC28831AD7
+    value:           2A0EA878-17A0-3D13-9FE0-D3AB09DD5187
 install-name:    '/System/Library/Frameworks/AudioToolbox.framework/Versions/A/AudioToolbox'
 current-version: 1000
 reexported-libraries:
@@ -22,7 +22,7 @@ reexported-libraries:
                        arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/AudioToolboxCore.framework/Versions/A/AudioToolboxCore' ]
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$hide$os10.10$_AudioCodecAppendInputBufferList', '$ld$hide$os10.10$_AudioCodecAppendInputData', 
                        '$ld$hide$os10.10$_AudioCodecGetProperty', '$ld$hide$os10.10$_AudioCodecGetPropertyInfo', 
@@ -292,7 +292,7 @@ exports:
     objc-classes:    [ AVHapticEvent, AVHapticParameterCurveValue, AVHapticPlayer, 
                        AVHapticPlayerChannel, AVHapticPlayerParameterCurve, AVHapticPlayerParameterCurveControlPoint, 
                        AVHapticSequence ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _ATGetDefaultDeviceAggregateID, _ATGetDefaultDeviceAggregateUID, 
                        _AUGraphCountNodeConnections, _AUGraphGetConnectionInfo, _AUGraphGetNodeConnections, 
                        _AUGraphGetNodeInfo, _AUGraphGetNodeInfoSubGraph, _AUGraphGetNumberOfConnections, 
@@ -317,17 +317,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FD5FC46B-11F6-3DA9-B2C8-AF682C946CB9
+    value:           56821802-07B9-3FA9-AF73-D943BAE0DE57
   - target:          x86_64-maccatalyst
-    value:           FD5FC46B-11F6-3DA9-B2C8-AF682C946CB9
+    value:           56821802-07B9-3FA9-AF73-D943BAE0DE57
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F2F15D57-21BE-37C1-8BEE-F102BEF5CB06
+    value:           70295FDE-F110-3D9F-B696-D8E4995D2FE4
   - target:          arm64e-maccatalyst
-    value:           F2F15D57-21BE-37C1-8BEE-F102BEF5CB06
+    value:           70295FDE-F110-3D9F-B696-D8E4995D2FE4
 install-name:    '/System/Library/PrivateFrameworks/AudioToolboxCore.framework/Versions/A/AudioToolboxCore'
 exports:
   - targets:         [ x86_64-macos ]
@@ -343,9 +343,7 @@ exports:
                        _SwapInt16ToFloat32_X86, _SwapInt24ToFloat32_X86, _SwapInt32ToFloat32_X86, 
                        _SwapPCM16_X86, _SwapPCM32_X86, _UpmixMonoToStereoInterleaved16_X86, 
                        _UpmixMonoToStereoInterleaved32_X86 ]
-  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
-    symbols:         [ _AudioOutputUnitGetHostIcon ]
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _AUEventListenerAddEventType, _AUEventListenerCreate, _AUEventListenerCreateWithDispatchQueue, 
                        _AUEventListenerNotify, _AUEventListenerRemoveEventType, _AUListenerAddParameter, 
@@ -950,12 +948,14 @@ exports:
                        AUAudioUnitV2Bridge, AUHostExtensionContext, AUParameter, 
                        AUParameterGroup, AUParameterNode, AUParameterTree, AURemoteExtensionContext, 
                        AURemoteHost, AudioComponentRegistrar ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _AudioComponentGetIcon, _AudioConverterFillBuffer, _AudioFileCreate, 
                        _AudioFileInitialize, _AudioFileOpen, _ExtAudioFileCreateNew, 
                        _ExtAudioFileOpen ]
     objc-classes:    [ AUHostingServiceDelegate, AUHostingServiceInstanceMap, _AUAudioUnitV3ViewFactory, 
                        _RemoteAUv2ViewFactory ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
+    symbols:         [ _AudioOutputUnitGetHostIcon ]
   - targets:         [ arm64e-macos, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
     symbols:         [ _DownmixStereoInterleavedInt16ToMono_ARM, _Float32ToNativeInt16Scaled_ARM, 
                        _Float32ToNativeInt32Scaled_ARM, _Float32ToNativeLowAlignedInt32_ARM, 

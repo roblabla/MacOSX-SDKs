@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F0356B70-5F96-3E23-814A-CC3D14F2F4A1
+    value:           83CA0F5C-2818-38AE-B898-4E2E2E7A13B5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EC93E086-58A9-3856-9ACB-1BB1247D3F07
+    value:           43B9DD20-5A7D-38C9-BE82-110B0B0690A4
 install-name:    '/System/Library/PrivateFrameworks/AOSUILite.framework/Versions/A/AOSUILite'
 current-version: 415
 exports:

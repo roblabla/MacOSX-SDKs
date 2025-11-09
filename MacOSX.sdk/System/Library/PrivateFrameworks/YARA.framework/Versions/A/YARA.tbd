@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E6E754EE-C1CF-3123-B5AE-AA92939535EF
+    value:           E247D107-CC0E-3024-B939-84A82AE51EEB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E048A8AC-D5B5-3528-8147-E48AD85B40EF
+    value:           A9B6DD40-00A0-3117-B355-DB47C57ADAFC
 install-name:    '/System/Library/PrivateFrameworks/yara.framework/Versions/A/yara'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

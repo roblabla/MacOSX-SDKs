@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D48DE4A1-4F43-3524-BB8E-0292ECA44B8C
+    value:           AFFA9D76-20C5-3842-9FD5-C110E5CC7562
   - target:          x86_64-maccatalyst
-    value:           D48DE4A1-4F43-3524-BB8E-0292ECA44B8C
+    value:           AFFA9D76-20C5-3842-9FD5-C110E5CC7562
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6AA279E0-E0BC-3B3C-9C69-82935FFB85E3
+    value:           48E00609-58CC-3485-AD70-47E775316F15
   - target:          arm64e-maccatalyst
-    value:           6AA279E0-E0BC-3B3C-9C69-82935FFB85E3
+    value:           48E00609-58CC-3485-AD70-47E775316F15
 install-name:    '/System/Library/CoreServices/Encodings/libHebrewConverter.dylib'
 current-version: 90
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ ___CFStringEncodingGetHebrewConverterDefinition ]
 ...

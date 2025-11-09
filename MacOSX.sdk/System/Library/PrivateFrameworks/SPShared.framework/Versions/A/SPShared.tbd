@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           18655DCC-F037-358B-916D-B645BE257FCC
+    value:           B6ECD3BD-E0CD-3F33-8741-CDBE0CD778DA
   - target:          x86_64-maccatalyst
-    value:           18655DCC-F037-358B-916D-B645BE257FCC
+    value:           B6ECD3BD-E0CD-3F33-8741-CDBE0CD778DA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9FDDD399-1E17-39E4-AC9C-283B4D9294FF
+    value:           B80B8F90-FAF7-396F-A319-F518CB5B3D12
   - target:          arm64e-maccatalyst
-    value:           9FDDD399-1E17-39E4-AC9C-283B4D9294FF
+    value:           B80B8F90-FAF7-396F-A319-F518CB5B3D12
 install-name:    '/System/Library/PrivateFrameworks/SPShared.framework/Versions/A/SPShared'
 swift-abi-version: 7
 allowable-clients:
@@ -33,6 +33,7 @@ exports:
                        '_$s10Foundation3URLV8SPSharedE22ExtendedAttributeErrorOMn', 
                        '_$s10Foundation3URLV8SPSharedE22ExtendedAttributeErrorON', 
                        '_$s10Foundation3URLV8SPSharedE22ExtendedAttributeErrorOs0F0ADMc', 
+                       '_$s10Foundation4DataV8SPSharedE0B5ErrorO019invalidRangeOutsideB8BoundaryyA2FmFWC', 
                        '_$s10Foundation4DataV8SPSharedE0B5ErrorO19invalidRangeForTypeyA2FmFWC', 
                        '_$s10Foundation4DataV8SPSharedE0B5ErrorO2eeoiySbAF_AFtFZ', 
                        '_$s10Foundation4DataV8SPSharedE0B5ErrorO4hash4intoys6HasherVz_tF', 
@@ -44,7 +45,9 @@ exports:
                        '_$s10Foundation4DataV8SPSharedE10stableUUIDAA0E0Vvg', '_$s10Foundation4DataV8SPSharedE10stableUUIDAA0E0VvpMV', 
                        '_$s10Foundation4DataV8SPSharedE11randomBytes5countACSi_tKFZ', 
                        '_$s10Foundation4DataV8SPSharedE13stringLiteralACSS_tcfC', 
-                       '_$s10Foundation4DataV8SPSharedE1loiySbAC_ACtFZ', '_$s10Foundation4DataV8SPSharedE4hash9algorithmAcD13HashAlgorithmO_tF', 
+                       '_$s10Foundation4DataV8SPSharedE1loiySbAC_ACtFZ', '_$s10Foundation4DataV8SPSharedE24nullTerminatedUTF8StringSSSgvg', 
+                       '_$s10Foundation4DataV8SPSharedE24nullTerminatedUTF8StringSSSgvpMV', 
+                       '_$s10Foundation4DataV8SPSharedE4hash9algorithmAcD13HashAlgorithmO_tF', 
                        '_$s10Foundation4DataV8SPSharedE4hmac3key9algorithmA2C_AD13HmacAlgorithmOtF', 
                        '_$s10Foundation4DataV8SPSharedE5write2to17excludeFromBackup7optionsyAA3URLV_SbSo20NSDataWritingOptionsVSgtKF', 
                        '_$s10Foundation4DataV8SPSharedE6isNullSbvg', '_$s10Foundation4DataV8SPSharedE6isNullSbvpMV', 
@@ -59,7 +62,25 @@ exports:
                        '_$s10Foundation4DataVs43ExpressibleByExtendedGraphemeClusterLiteral8SPSharedMc', 
                        '_$s10Foundation4DateV8SPSharedE5epochs5Int64Vvg', '_$s10Foundation4DateV8SPSharedE5epochs5Int64VvpMV', 
                        '_$s10Foundation4UUIDV8SPSharedE4dataAA4DataVvg', '_$s10Foundation4UUIDV8SPSharedE4dataAA4DataVvpMV', 
-                       '_$s10Subscriber8SPShared12SubscribablePTl', '_$s8SPShared10XPCSessionC10connectionACyxGSgSo15NSXPCConnectionC_tcfC', 
+                       '_$s10Foundation4UUIDV8SPSharedE5bytesACSgSays5UInt8VG_tcfC', 
+                       '_$s10Foundation4UUIDV8SPSharedE5bytesSays5UInt8VGvg', '_$s10Foundation4UUIDV8SPSharedE5bytesSays5UInt8VGvpMV', 
+                       '_$s10Foundation6LocaleV8SPSharedE18acceptLanguageCodeSSvg', 
+                       '_$s10Foundation6LocaleV8SPSharedE18acceptLanguageCodeSSvpMV', 
+                       '_$s10Foundation8TimeZoneV8SPSharedE3gmtACvgZ', '_$s10Subscriber8SPShared12SubscribablePTl', 
+                       '_$s8SPShared10MACAddressV11descriptionSSvg', '_$s8SPShared10MACAddressV11descriptionSSvpMV', 
+                       '_$s8SPShared10MACAddressV13stringLiteralACSS_tcfC', '_$s8SPShared10MACAddressV2eeoiySbAC_ACtFZ', 
+                       '_$s8SPShared10MACAddressV4data10Foundation4DataVvg', '_$s8SPShared10MACAddressV4data10Foundation4DataVvpMV', 
+                       '_$s8SPShared10MACAddressV4dataACSg10Foundation4DataV_tcfC', 
+                       '_$s8SPShared10MACAddressV4hash4intoys6HasherVz_tF', '_$s8SPShared10MACAddressV6stringACSgSS_tcfC', 
+                       '_$s8SPShared10MACAddressV9hashValueSivg', '_$s8SPShared10MACAddressV9hashValueSivpMV', 
+                       '_$s8SPShared10MACAddressV9hexStringSSvg', '_$s8SPShared10MACAddressV9hexStringSSvpMV', 
+                       '_$s8SPShared10MACAddressVMa', '_$s8SPShared10MACAddressVMn', 
+                       '_$s8SPShared10MACAddressVN', '_$s8SPShared10MACAddressVSHAAMc', 
+                       '_$s8SPShared10MACAddressVSQAAMc', '_$s8SPShared10MACAddressVs23CustomStringConvertibleAAMc', 
+                       '_$s8SPShared10MACAddressVs26ExpressibleByStringLiteralAAMc', 
+                       '_$s8SPShared10MACAddressVs33ExpressibleByUnicodeScalarLiteralAAMc', 
+                       '_$s8SPShared10MACAddressVs43ExpressibleByExtendedGraphemeClusterLiteralAAMc', 
+                       '_$s8SPShared10XPCSessionC10connectionACyxGSgSo15NSXPCConnectionC_tcfC', 
                        '_$s8SPShared10XPCSessionC10connectionACyxGSgSo15NSXPCConnectionC_tcfCTj', 
                        '_$s8SPShared10XPCSessionC10connectionACyxGSgSo15NSXPCConnectionC_tcfCTq', 
                        '_$s8SPShared10XPCSessionC10connectionACyxGSgSo15NSXPCConnectionC_tcfc', 
@@ -205,8 +226,38 @@ exports:
                        '_$s8SPShared14BinaryDecodingTL', '_$s8SPShared14BinaryEncodingMp', 
                        '_$s8SPShared14BinaryEncodingP9containerAA0bC10Containing_pyFTj', 
                        '_$s8SPShared14BinaryEncodingP9containerAA0bC10Containing_pyFTq', 
-                       '_$s8SPShared14BinaryEncodingTL', '_$s8SPShared15BinaryDecodableMp', 
-                       '_$s8SPShared15BinaryDecodableP4fromxAA0B8Decoding_p_tKcfCTj', 
+                       '_$s8SPShared14BinaryEncodingTL', '_$s8SPShared14UTAlertCommandO10commandFor3urlAC0D0_10Foundation4UUIDV4uuidtSgAG3URLV_tFZ', 
+                       '_$s8SPShared14UTAlertCommandO18followingLearnMoreyA2CmFWC', 
+                       '_$s8SPShared14UTAlertCommandO18followingPlaySoundyA2CmFWC', 
+                       '_$s8SPShared14UTAlertCommandO19followingAllowTodayyA2CmFWC', 
+                       '_$s8SPShared14UTAlertCommandO21lostDetectedLearnMoreyA2CmFWC', 
+                       '_$s8SPShared14UTAlertCommandO26followingAllowIndefinitelyyA2CmFWC', 
+                       '_$s8SPShared14UTAlertCommandO27lostDetectedSeeOwnerMessageyA2CmFWC', 
+                       '_$s8SPShared14UTAlertCommandO6urlFor7command4uuid10Foundation3URLVSgAC_AG4UUIDVtFZ', 
+                       '_$s8SPShared14UTAlertCommandO8rawValueACSgSS_tcfC', '_$s8SPShared14UTAlertCommandO8rawValueSSvg', 
+                       '_$s8SPShared14UTAlertCommandO8rawValueSSvpMV', '_$s8SPShared14UTAlertCommandO9playSoundyA2CmFWC', 
+                       '_$s8SPShared14UTAlertCommandOMa', '_$s8SPShared14UTAlertCommandOMn', 
+                       '_$s8SPShared14UTAlertCommandON', '_$s8SPShared14UTAlertCommandOSEAAMc', 
+                       '_$s8SPShared14UTAlertCommandOSHAAMc', '_$s8SPShared14UTAlertCommandOSQAAMc', 
+                       '_$s8SPShared14UTAlertCommandOSYAAMc', '_$s8SPShared14UTAlertCommandOSeAAMc', 
+                       '_$s8SPShared14UTAlertContextV16debugDescriptionSSvg', '_$s8SPShared14UTAlertContextV16debugDescriptionSSvpMV', 
+                       '_$s8SPShared14UTAlertContextV2eeoiySbAC_ACtFZ', '_$s8SPShared14UTAlertContextV4fromACs7Decoder_p_tKcfC', 
+                       '_$s8SPShared14UTAlertContextV4modeAA0bC4ModeOSgvg', '_$s8SPShared14UTAlertContextV4modeAA0bC4ModeOSgvpMV', 
+                       '_$s8SPShared14UTAlertContextV4uuid10Foundation4UUIDVSgvg', 
+                       '_$s8SPShared14UTAlertContextV4uuid10Foundation4UUIDVSgvpMV', 
+                       '_$s8SPShared14UTAlertContextV4uuid4mode6roleId0F5Emoji5title8subtitle8latitude9longitudeAC10Foundation4UUIDVSg_AA0bC4ModeOSgSiSgSSSgA2TSdSgAUtcfC', 
+                       '_$s8SPShared14UTAlertContextV5titleSSSgvg', '_$s8SPShared14UTAlertContextV5titleSSSgvpMV', 
+                       '_$s8SPShared14UTAlertContextV6encode2toys7Encoder_p_tKF', 
+                       '_$s8SPShared14UTAlertContextV6roleIdSiSgvg', '_$s8SPShared14UTAlertContextV6roleIdSiSgvpMV', 
+                       '_$s8SPShared14UTAlertContextV8latitudeSdSgvg', '_$s8SPShared14UTAlertContextV8latitudeSdSgvpMV', 
+                       '_$s8SPShared14UTAlertContextV8subtitleSSSgvg', '_$s8SPShared14UTAlertContextV8subtitleSSSgvpMV', 
+                       '_$s8SPShared14UTAlertContextV9longitudeSdSgvg', '_$s8SPShared14UTAlertContextV9longitudeSdSgvpMV', 
+                       '_$s8SPShared14UTAlertContextV9roleEmojiSSSgvg', '_$s8SPShared14UTAlertContextV9roleEmojiSSSgvpMV', 
+                       '_$s8SPShared14UTAlertContextVMa', '_$s8SPShared14UTAlertContextVMn', 
+                       '_$s8SPShared14UTAlertContextVN', '_$s8SPShared14UTAlertContextVSEAAMc', 
+                       '_$s8SPShared14UTAlertContextVSQAAMc', '_$s8SPShared14UTAlertContextVSeAAMc', 
+                       '_$s8SPShared14UTAlertContextVs28CustomDebugStringConvertibleAAMc', 
+                       '_$s8SPShared15BinaryDecodableMp', '_$s8SPShared15BinaryDecodableP4fromxAA0B8Decoding_p_tKcfCTj', 
                        '_$s8SPShared15BinaryDecodableP4fromxAA0B8Decoding_p_tKcfCTq', 
                        '_$s8SPShared15BinaryDecodablePAAE4datax10Foundation4DataV_tKcfC', 
                        '_$s8SPShared15BinaryDecodableTL', '_$s8SPShared15BinaryEncodableMp', 
@@ -262,7 +313,14 @@ exports:
                        '_$s8SPShared18PerformanceCaptureCMm', '_$s8SPShared18PerformanceCaptureCMn', 
                        '_$s8SPShared18PerformanceCaptureCMo', '_$s8SPShared18PerformanceCaptureCMu', 
                        '_$s8SPShared18PerformanceCaptureCN', '_$s8SPShared18PerformanceCaptureCfD', 
-                       '_$s8SPShared18PerformanceCaptureCfd', '_$s8SPShared19BinaryDecodingErrorO08decodingD0yA2CmFWC', 
+                       '_$s8SPShared18PerformanceCaptureCfd', '_$s8SPShared18UTAlertContextModeO16itemFollowingYouyA2CmFWC', 
+                       '_$s8SPShared18UTAlertContextModeO19itemDetectedWithYouyA2CmFWC', 
+                       '_$s8SPShared18UTAlertContextModeO8rawValueACSgSS_tcfC', '_$s8SPShared18UTAlertContextModeO8rawValueSSvg', 
+                       '_$s8SPShared18UTAlertContextModeO8rawValueSSvpMV', '_$s8SPShared18UTAlertContextModeOMa', 
+                       '_$s8SPShared18UTAlertContextModeOMn', '_$s8SPShared18UTAlertContextModeON', 
+                       '_$s8SPShared18UTAlertContextModeOSEAAMc', '_$s8SPShared18UTAlertContextModeOSHAAMc', 
+                       '_$s8SPShared18UTAlertContextModeOSQAAMc', '_$s8SPShared18UTAlertContextModeOSYAAMc', 
+                       '_$s8SPShared18UTAlertContextModeOSeAAMc', '_$s8SPShared19BinaryDecodingErrorO08decodingD0yA2CmFWC', 
                        '_$s8SPShared19BinaryDecodingErrorO16insufficientDatayA2CmFWC', 
                        '_$s8SPShared19BinaryDecodingErrorO2eeoiySbAC_ACtFZ', '_$s8SPShared19BinaryDecodingErrorO4hash4intoys6HasherVz_tF', 
                        '_$s8SPShared19BinaryDecodingErrorO9hashValueSivg', '_$s8SPShared19BinaryDecodingErrorO9hashValueSivpMV', 
@@ -275,6 +333,11 @@ exports:
                        '_$s8SPShared19BinaryEncodingErrorOMa', '_$s8SPShared19BinaryEncodingErrorOMn', 
                        '_$s8SPShared19BinaryEncodingErrorON', '_$s8SPShared19BinaryEncodingErrorOSHAAMc', 
                        '_$s8SPShared19BinaryEncodingErrorOSQAAMc', '_$s8SPShared19BinaryEncodingErrorOs0D0AAMc', 
+                       '_$s8SPShared19LocalizationUtilityC22localizedHawkeyeString3keyS2S_tFZ', 
+                       '_$s8SPShared19LocalizationUtilityCMa', '_$s8SPShared19LocalizationUtilityCMm', 
+                       '_$s8SPShared19LocalizationUtilityCMn', '_$s8SPShared19LocalizationUtilityCMo', 
+                       '_$s8SPShared19LocalizationUtilityCMu', '_$s8SPShared19LocalizationUtilityCN', 
+                       '_$s8SPShared19LocalizationUtilityCfD', '_$s8SPShared19LocalizationUtilityCfd', 
                        '_$s8SPShared19NetworkReachabilityC6statusAA0bC6StatusOvgTj', 
                        '_$s8SPShared19NetworkReachabilityC6statusAA0bC6StatusOvgTq', 
                        '_$s8SPShared19NetworkReachabilityC6statusAA0bC6StatusOvpMV', 
@@ -356,6 +419,8 @@ exports:
                        '_$s8SPShared25NetworkReachabilityStatusOMa', '_$s8SPShared25NetworkReachabilityStatusOMn', 
                        '_$s8SPShared25NetworkReachabilityStatusON', '_$s8SPShared25NetworkReachabilityStatusOSHAAMc', 
                        '_$s8SPShared25NetworkReachabilityStatusOSQAAMc', '_$s8SPShared25NetworkReachabilityStatusOSYAAMc', 
+                       '_$s8SPShared25UTAlertCommandOpenURLPathSSvg', '_$s8SPShared27UTAlertCommandOpenURLSchemeSSvg', 
+                       '_$s8SPShared29UTAlertExtensionIdentifierKeySSvg', '_$s8SPShared34UTAlertExtensionUserInfoContextKeySSvg', 
                        '_$s8SPShared3BitO11descriptionSSvg', '_$s8SPShared3BitO11descriptionSSvpMV', 
                        '_$s8SPShared3BitO3oneyA2CmFWC', '_$s8SPShared3BitO4zeroyA2CmFWC', 
                        '_$s8SPShared3BitO8rawValueACSgs5UInt8V_tcfC', '_$s8SPShared3BitO8rawValues5UInt8Vvg', 

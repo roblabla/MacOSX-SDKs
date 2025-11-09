@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CFD982D7-DED6-31F1-B9AE-6598646E6592
+    value:           20ABD355-9DF9-3EE9-96AB-4FA387E41CBD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           50A9EAAF-C634-3DAC-B5FB-193A4673247F
+    value:           1D5DE1E6-77A2-3B2B-B997-5A94192A156E
 install-name:    '/System/Library/PrivateFrameworks/FilesActionsUI.framework/Versions/A/FilesActionsUI'
 current-version: 35
 exports:

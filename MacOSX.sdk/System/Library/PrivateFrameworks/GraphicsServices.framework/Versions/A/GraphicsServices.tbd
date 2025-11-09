@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5F226A72-CAE2-3C6C-9756-7F06F012BA30
+    value:           F2316D2C-D872-329E-AE15-CBE6D3285EE1
   - target:          x86_64-maccatalyst
-    value:           5F226A72-CAE2-3C6C-9756-7F06F012BA30
+    value:           F2316D2C-D872-329E-AE15-CBE6D3285EE1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6BA535AA-34D8-3FF6-9FD4-4ECA9615D78E
+    value:           15ACB62A-0325-3C9F-B241-66430354CFC4
   - target:          arm64e-maccatalyst
-    value:           6BA535AA-34D8-3FF6-9FD4-4ECA9615D78E
+    value:           15ACB62A-0325-3C9F-B241-66430354CFC4
 install-name:    '/System/Library/PrivateFrameworks/GraphicsServices.framework/Versions/A/GraphicsServices'
 current-version: 14
 exports:

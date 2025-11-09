@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           05F94C75-A941-3C3E-BD71-19BE579A4828
+    value:           F4CFA04E-7991-3972-A15E-4790A9724586
   - target:          x86_64-maccatalyst
-    value:           05F94C75-A941-3C3E-BD71-19BE579A4828
+    value:           F4CFA04E-7991-3972-A15E-4790A9724586
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EA64CC21-A0C5-38C3-85FA-46D26C500113
+    value:           C7CCD01A-673D-34B5-8054-FBB74B079FB0
   - target:          arm64e-maccatalyst
-    value:           EA64CC21-A0C5-38C3-85FA-46D26C500113
+    value:           C7CCD01A-673D-34B5-8054-FBB74B079FB0
 install-name:    '/System/Library/PrivateFrameworks/DeviceCheckInternal.framework/Versions/A/DeviceCheckInternal'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0D992A18-EE7C-31B7-8276-59B6E64EE9FB
+    value:           7C13C66E-7748-3D63-87F3-B4F24530E2B8
   - target:          x86_64-maccatalyst
-    value:           0D992A18-EE7C-31B7-8276-59B6E64EE9FB
+    value:           7C13C66E-7748-3D63-87F3-B4F24530E2B8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           94EF3AB6-F03F-3E5E-B7B8-CA95662DF891
+    value:           914A3C8C-7B86-353B-9B97-8F9EB49865AD
   - target:          arm64e-maccatalyst
-    value:           94EF3AB6-F03F-3E5E-B7B8-CA95662DF891
+    value:           914A3C8C-7B86-353B-9B97-8F9EB49865AD
 install-name:    '/System/Library/PrivateFrameworks/Quagga.framework/Versions/A/Quagga'
 current-version: 47
 exports:

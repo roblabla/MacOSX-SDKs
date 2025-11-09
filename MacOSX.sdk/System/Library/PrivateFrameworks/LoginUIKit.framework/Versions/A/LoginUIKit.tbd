@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0A459D6E-A946-3D52-8D3D-4EF5236B1F9F
+    value:           CD7FC25C-0775-390E-9757-4466C528769B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           25071B74-A3FD-312F-AB45-B856C87DA31C
+    value:           13AF8485-F28B-3622-B40F-A13BD26CC72B
 install-name:    '/System/Library/PrivateFrameworks/LoginUIKit.framework/Versions/A/LoginUIKit'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -140,11 +140,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           77AA1D55-F61F-350E-A87B-E504BF2A885D
+    value:           8AE86484-F756-3BDE-973A-A70C0345697B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A695B6A8-6B5F-3BD1-83B0-24C7F7BE67CD
+    value:           3AE223DC-ACE7-3E72-8865-A4107EAAF0BA
 install-name:    '/System/Library/PrivateFrameworks/LoginUIKit.framework/Versions/A/Frameworks/LoginUICore.framework/Versions/A/LoginUICore'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

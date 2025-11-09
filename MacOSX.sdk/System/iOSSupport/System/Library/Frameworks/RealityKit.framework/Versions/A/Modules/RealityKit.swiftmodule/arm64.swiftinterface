@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.1 (swiftlang-1200.2.40 clang-1200.0.32.7)
-// swift-module-flags: -target arm64e-apple-ios14.2-macabi -enable-objc-interop -swift-version 5 -enforce-exclusivity=checked -O -enable-library-evolution -module-name RealityKit
+// swift-compiler-version: Apple Swift version 5.3.1 (swiftlang-1200.2.41 clang-1200.0.32.8)
+// swift-module-flags: -target arm64e-apple-ios14.3-macabi -enable-objc-interop -swift-version 5 -enforce-exclusivity=checked -O -enable-library-evolution -module-name RealityKit
 import ARKit
 import AVFoundation
 import AudioToolbox
@@ -3494,7 +3494,6 @@ extension __RKEntityActionSpecification : RealityKit.__USDEncodablePublic {
   @available(*, deprecated)
   public func encode(to encoder: RealityKit.__USDEncoder, at pathName: RealityKit.__USKObjectPathWrapper, sceneSpecifier: RealityKit.__USKNodeSpecifierTypeWrapper) throws -> RealityKit.__USKNodeWrapper
 }
-@available(macCatalyst 14.0, *)
 extension ARView {
   @objc override dynamic open func didMoveToWindow()
 }

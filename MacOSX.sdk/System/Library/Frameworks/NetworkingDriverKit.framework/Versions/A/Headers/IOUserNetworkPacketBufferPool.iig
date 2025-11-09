@@ -77,7 +77,7 @@ public:
     virtual void
     free() override;
 
-    /** @deprectated, use CreateWithOptions instead */
+    /** @deprecated, use CreateWithOptions instead */
     static kern_return_t
     Create(
         OSObject * poolOwner,

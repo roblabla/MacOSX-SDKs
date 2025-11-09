@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           10EAA4D3-C86F-372D-9B3C-C9E15838D6F5
+    value:           6FD6D7E3-1541-35B1-8A25-4F05E3A1358C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AFC6D9E1-767C-339E-8F6C-870CA232DC45
+    value:           98513AA6-B692-3DAC-97BD-0B3094BE395C
 install-name:    '/System/Library/PrivateFrameworks/OctagonTrust.framework/Versions/A/OctagonTrust'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

@@ -5,7 +5,7 @@ uuids:
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           069A4500-761E-3A03-BD57-237E72FFBD87
+    value:           F4706D27-018A-321A-B529-B8759CAB0ADC
 install-name:    '/System/Library/PrivateFrameworks/CoreRC.framework/Versions/A/CoreRC'
 current-version: 163
 exports:

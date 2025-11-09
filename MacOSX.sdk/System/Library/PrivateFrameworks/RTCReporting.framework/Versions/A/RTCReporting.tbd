@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1223ECF8-C169-336F-947D-030555F90290
+    value:           BFCE3680-2A03-3FC2-8959-091188900EF0
   - target:          x86_64-maccatalyst
-    value:           1223ECF8-C169-336F-947D-030555F90290
+    value:           BFCE3680-2A03-3FC2-8959-091188900EF0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1AA1E053-D626-342C-A4D8-A10118A86A2D
+    value:           894F89BE-7D02-33B5-8568-6A737ED16946
   - target:          arm64e-maccatalyst
-    value:           1AA1E053-D626-342C-A4D8-A10118A86A2D
+    value:           894F89BE-7D02-33B5-8568-6A737ED16946
 install-name:    '/System/Library/PrivateFrameworks/RTCReporting.framework/Versions/A/RTCReporting'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

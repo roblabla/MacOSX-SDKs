@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           29FC71A5-CD66-320E-ABA9-89D6DA0A15EA
+    value:           67618CB6-2DD4-3A2A-940A-CB9EE3B5E936
   - target:          x86_64-maccatalyst
-    value:           29FC71A5-CD66-320E-ABA9-89D6DA0A15EA
+    value:           67618CB6-2DD4-3A2A-940A-CB9EE3B5E936
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7BD13CC6-D0D8-3E1B-8405-3E95A3175C27
+    value:           7809A41E-240F-368F-9462-AC027B16C042
   - target:          arm64e-maccatalyst
-    value:           7BD13CC6-D0D8-3E1B-8405-3E95A3175C27
+    value:           7809A41E-240F-368F-9462-AC027B16C042
 install-name:    '/System/Library/PrivateFrameworks/TextToSpeech.framework/Versions/A/TextToSpeech'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -66,7 +66,8 @@ exports:
                        _TTSVocalizerCopyPathForResources, _TTSVocalizerCopyPathForTones, 
                        _TTSVocalizerCopyURLForFallbackResource, _TTSVocalizerCopyVoiceEngineFormatVersionForLanguage, 
                        _TTSVoiceIsGryphonAssetType, _TTSWatchSupportsSiriSpeaks, 
-                       __GetScheduledPriority, __TTSBundleCopyResourceURL, __TTSCopyAvailableLanguageIdentifiers, 
+                       __GetScheduledPriority, __SpeechGenderForVocalizerGender, 
+                       __TTSBundleCopyResourceURL, __TTSCopyAvailableLanguageIdentifiers, 
                        __TTSCopyAvailableOutputLanguageIdentifiers, __TTSCopyFallbackLanguageIdentifierExplicitForCurrentLocale, 
                        __TTSCopyFallbackLanguageIdentifierExplicitForLocale, __TTSCopyFallbackLanguageIdentifierForCurrentLocale, 
                        __TTSCopyFallbackLanguageIdentifierForLanguageIdentifier, 

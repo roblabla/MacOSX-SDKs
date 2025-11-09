@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BF58CEFA-3CB8-39E6-B64C-08AF858E9963
+    value:           0B778B2E-497D-33B4-806C-6DB26AA9061A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2EF5DF84-84C5-3F52-A1DE-6725013E608C
+    value:           CA7CF36C-3F13-37F3-B264-1B5A31103890
 install-name:    '/System/Library/PrivateFrameworks/ServerCompatibility.framework/Versions/A/ServerCompatibility'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

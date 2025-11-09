@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.40.8) generated from IOUserUSBHostHIDDevice.iig */
+/* iig(DriverKit-107.60.3) generated from IOUserUSBHostHIDDevice.iig */
 
 /* IOUserUSBHostHIDDevice.iig:1-41 */
 /*
@@ -685,7 +685,7 @@ public:
 struct OSAction_IOUserUSBHostHIDDevice_CompleteInputReport_IVars;
 struct OSAction_IOUserUSBHostHIDDevice_CompleteInputReport_LocalIVars;
 
-class OSAction_IOUserUSBHostHIDDevice_CompleteInputReport : public OSAction, public OSAction_IOUserUSBHostHIDDevice_CompleteInputReportInterface
+class __attribute__((availability(driverkit,introduced=20,message="Type-safe OSAction factory methods are available in DriverKit 20 and newer"))) OSAction_IOUserUSBHostHIDDevice_CompleteInputReport : public OSAction, public OSAction_IOUserUSBHostHIDDevice_CompleteInputReportInterface
 {
 #if KERNEL
     OSDeclareDefaultStructorsWithDispatch(OSAction_IOUserUSBHostHIDDevice_CompleteInputReport);
@@ -772,7 +772,7 @@ public:
 struct OSAction_IOUserUSBHostHIDDevice_CompleteOutputReport_IVars;
 struct OSAction_IOUserUSBHostHIDDevice_CompleteOutputReport_LocalIVars;
 
-class OSAction_IOUserUSBHostHIDDevice_CompleteOutputReport : public OSAction, public OSAction_IOUserUSBHostHIDDevice_CompleteOutputReportInterface
+class __attribute__((availability(driverkit,introduced=20,message="Type-safe OSAction factory methods are available in DriverKit 20 and newer"))) OSAction_IOUserUSBHostHIDDevice_CompleteOutputReport : public OSAction, public OSAction_IOUserUSBHostHIDDevice_CompleteOutputReportInterface
 {
 #if KERNEL
     OSDeclareDefaultStructorsWithDispatch(OSAction_IOUserUSBHostHIDDevice_CompleteOutputReport);
@@ -859,7 +859,7 @@ public:
 struct OSAction_IOUserUSBHostHIDDevice_CompleteOutputRequest_IVars;
 struct OSAction_IOUserUSBHostHIDDevice_CompleteOutputRequest_LocalIVars;
 
-class OSAction_IOUserUSBHostHIDDevice_CompleteOutputRequest : public OSAction, public OSAction_IOUserUSBHostHIDDevice_CompleteOutputRequestInterface
+class __attribute__((availability(driverkit,introduced=20,message="Type-safe OSAction factory methods are available in DriverKit 20 and newer"))) OSAction_IOUserUSBHostHIDDevice_CompleteOutputRequest : public OSAction, public OSAction_IOUserUSBHostHIDDevice_CompleteOutputRequestInterface
 {
 #if KERNEL
     OSDeclareDefaultStructorsWithDispatch(OSAction_IOUserUSBHostHIDDevice_CompleteOutputRequest);
@@ -946,7 +946,7 @@ public:
 struct OSAction_IOUserUSBHostHIDDevice_TimerOccurred_IVars;
 struct OSAction_IOUserUSBHostHIDDevice_TimerOccurred_LocalIVars;
 
-class OSAction_IOUserUSBHostHIDDevice_TimerOccurred : public OSAction, public OSAction_IOUserUSBHostHIDDevice_TimerOccurredInterface
+class __attribute__((availability(driverkit,introduced=20,message="Type-safe OSAction factory methods are available in DriverKit 20 and newer"))) OSAction_IOUserUSBHostHIDDevice_TimerOccurred : public OSAction, public OSAction_IOUserUSBHostHIDDevice_TimerOccurredInterface
 {
 #if KERNEL
     OSDeclareDefaultStructorsWithDispatch(OSAction_IOUserUSBHostHIDDevice_TimerOccurred);
@@ -1033,7 +1033,7 @@ public:
 struct OSAction_IOUserUSBHostHIDDevice_CompleteZLP_IVars;
 struct OSAction_IOUserUSBHostHIDDevice_CompleteZLP_LocalIVars;
 
-class OSAction_IOUserUSBHostHIDDevice_CompleteZLP : public OSAction, public OSAction_IOUserUSBHostHIDDevice_CompleteZLPInterface
+class __attribute__((availability(driverkit,introduced=20,message="Type-safe OSAction factory methods are available in DriverKit 20 and newer"))) OSAction_IOUserUSBHostHIDDevice_CompleteZLP : public OSAction, public OSAction_IOUserUSBHostHIDDevice_CompleteZLPInterface
 {
 #if KERNEL
     OSDeclareDefaultStructorsWithDispatch(OSAction_IOUserUSBHostHIDDevice_CompleteZLP);

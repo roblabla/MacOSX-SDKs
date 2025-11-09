@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           EC6536F9-1A58-3819-9F14-7F061766A937
+    value:           242EFD18-0B4F-372A-8B47-414823DD66C8
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           F835C15B-60AC-3B91-BEEE-9BB7B41034E7
+    value:           95CF7D3A-1B0E-34D9-A028-E2743EDBF1A0
 install-name:    '/System/iOSSupport/System/Library/Frameworks/PencilKit.framework/Versions/A/PencilKit'
 exports:
-  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _PKAppleDrawingTypeIdentifier, _PKAppleStrokeSelectionTypeIdentifier, 
                        _PKAttachmentViewDefaultDrawingWidth, _PKClipperScaling, _PKHandwritingFeedbackActivityType, 
                        _PKHasScribbleInteractionInView, _PKInkBlueComponentProperty, 

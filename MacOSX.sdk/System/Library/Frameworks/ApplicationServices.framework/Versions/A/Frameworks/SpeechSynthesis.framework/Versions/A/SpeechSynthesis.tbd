@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9B86F33B-E5EE-3985-B6F1-0F14DDF8A206
+    value:           B86A2136-8DD7-395D-BB9F-9416C56DD2D6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A827EB20-EB83-3804-A50F-4C7A13B08314
+    value:           2205CF41-DFC6-325B-B2A7-EBB0DD2F73BE
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/SpeechSynthesis.framework/Versions/A/SpeechSynthesis'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

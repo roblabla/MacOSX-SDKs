@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2F83254E-AF27-3725-AFA9-752DC62E66E7
+    value:           7F48586A-106A-3B83-95AD-11C3014DEA26
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           145F3692-37CE-3F7D-8C17-E8DD5BDE2B69
+    value:           B8CE1AEA-8EAD-3273-8DF4-C4B16005E345
 install-name:    '/System/Library/PrivateFrameworks/Helium.framework/Versions/A/Helium'
 current-version: 0
 compatibility-version: 0

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EA26EEEE-789C-3A3D-9C3B-D7EBAECC10C9
+    value:           18D872B3-4EB8-315E-9FB1-7D87C619A239
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           125FF855-15F4-3977-9BB5-A76EE7B30CC8
+    value:           E879D7F8-FE64-3CEF-989B-0715280CE4CC
 install-name:    '/System/Library/PrivateFrameworks/PrintingPrivate.framework/Versions/A/PrintingPrivate'
 current-version: 203
 exports:

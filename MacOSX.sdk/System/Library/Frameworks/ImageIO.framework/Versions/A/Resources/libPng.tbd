@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E72896CA-4B1C-3508-B0A2-1F9F4D273F4C
+    value:           38709DA7-6FB8-366E-ACAC-23A038749899
   - target:          x86_64-maccatalyst
-    value:           E72896CA-4B1C-3508-B0A2-1F9F4D273F4C
+    value:           38709DA7-6FB8-366E-ACAC-23A038749899
   - target:          x86_64h-macos
-    value:           6B36EA40-157E-34B2-A283-DAF4BCB6A0D2
+    value:           035BA9E2-AE02-3876-9995-2F2505C732CF
   - target:          x86_64h-maccatalyst
-    value:           6B36EA40-157E-34B2-A283-DAF4BCB6A0D2
+    value:           035BA9E2-AE02-3876-9995-2F2505C732CF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           06C33348-BBB5-37D1-A7CA-A49876C0CBA2
+    value:           968D8AAA-0C50-3395-91A4-044D254F4F01
   - target:          arm64e-maccatalyst
-    value:           06C33348-BBB5-37D1-A7CA-A49876C0CBA2
+    value:           968D8AAA-0C50-3395-91A4-044D254F4F01
 install-name:    '/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libPng.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, x86_64h-maccatalyst, x86_64h-macos, 

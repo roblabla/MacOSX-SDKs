@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1C4F5948-1654-381C-91FD-890AF7036852
+    value:           D1E7DC71-1929-30A8-B73E-268387110608
   - target:          x86_64-maccatalyst
-    value:           1C4F5948-1654-381C-91FD-890AF7036852
+    value:           D1E7DC71-1929-30A8-B73E-268387110608
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           16389D48-A48E-348D-87A3-494990229B3A
+    value:           D5F93E39-B11F-3862-93CD-BB162E078EB9
   - target:          arm64e-maccatalyst
-    value:           16389D48-A48E-348D-87A3-494990229B3A
+    value:           D5F93E39-B11F-3862-93CD-BB162E078EB9
 install-name:    '/System/Library/PrivateFrameworks/AppleFSCompression.framework/Versions/A/AppleFSCompression'
 current-version: 125
 exports:

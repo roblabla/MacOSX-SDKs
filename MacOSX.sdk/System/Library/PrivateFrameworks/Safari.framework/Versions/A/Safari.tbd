@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DD436086-B5B7-35D7-960F-2700B9D5631E
+    value:           53FB2C80-7CF2-3AFE-A74D-997CAF6B65BE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           20A9EF70-E43B-3C41-B120-0AB04ECDF53D
+    value:           F45C64A5-B04A-32D2-9BD8-465557968B93
 install-name:    '/System/Library/PrivateFrameworks/Safari.framework/Versions/A/Safari'
-current-version: 610.2.11
+current-version: 610.3.7
 compatibility-version: 528
 exports:
   - targets:         [ x86_64-macos ]

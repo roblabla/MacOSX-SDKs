@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CD069BE5-D73E-36B7-A0B6-E6ED33AA9DB2
+    value:           58B61B94-9808-398C-8B8F-20E55018FBE3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4EE13C3A-5E09-3A21-AC90-791A90A5361B
+    value:           11662D5C-CC73-3BE9-A7C7-9DEA51CFA6C8
 install-name:    '/System/Library/PrivateFrameworks/CoreChineseEngine.framework/Versions/A/CoreChineseEngine'
 current-version: 479
 exports:

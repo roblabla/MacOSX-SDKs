@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F6AF6119-4314-3EFA-992C-9098CFD826A0
+    value:           ABD8B5E3-80AC-3771-80A2-7F7BF3745633
   - target:          x86_64-maccatalyst
-    value:           F6AF6119-4314-3EFA-992C-9098CFD826A0
+    value:           ABD8B5E3-80AC-3771-80A2-7F7BF3745633
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           286710F7-40CD-3C3A-9E72-87171AC55CEA
+    value:           BF59C191-B66B-3C2C-8AFA-3E95DB7F6E9B
   - target:          arm64e-maccatalyst
-    value:           286710F7-40CD-3C3A-9E72-87171AC55CEA
+    value:           BF59C191-B66B-3C2C-8AFA-3E95DB7F6E9B
 install-name:    '/System/Library/PrivateFrameworks/StoreServices.framework/Versions/A/StoreServices'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

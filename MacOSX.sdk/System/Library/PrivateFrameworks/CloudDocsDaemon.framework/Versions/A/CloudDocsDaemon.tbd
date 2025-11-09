@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           23D5AD4A-AB36-3B51-8B7D-E87A3B115A19
+    value:           D8F64C55-D39C-3805-9E3F-D42D53D3B348
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           56555CD2-DD76-3A59-BBEE-22B73F015D35
+    value:           0D047C4E-9028-3D7C-A3E6-8EA4C437C37E
 install-name:    '/System/Library/PrivateFrameworks/CloudDocsDaemon.framework/Versions/A/CloudDocsDaemon'
 current-version: 726
 compatibility-version: 0

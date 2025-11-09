@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E9E9E19B-A7D1-3EBB-9885-EE3B43A7E9D8
+    value:           716EE91C-40F6-36EE-B7ED-08AF9F1DD91A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           99CB255B-64B3-330B-9A44-61207030370C
+    value:           AC404C8F-C32B-34CB-955B-F0FCDB120527
 install-name:    '/System/Library/PrivateFrameworks/SafariSharedUI.framework/Versions/A/SafariSharedUI'
-current-version: 610.2.11
+current-version: 610.3.7
 compatibility-version: 0
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -70,6 +70,7 @@ exports:
                        _WBSTranslationDetailStringForType, _WBSTranslationDetectionDidChangeNotificationName, 
                        _WBSTranslationDetectionDidChangeNotificationNotificationLevelUserInfoKey, 
                        _WBSTranslationDetectionDidChangeNotificationWebpageLanguageUserInfoKey, 
+                       _WBSTranslationDiagnosticDictionaryErrorKey, _WBSTranslationDiagnosticDictionaryParagraphIdentifierKey, 
                        _WBSTranslationDiagnosticDictionaryParagraphsKey, _WBSTranslationDiagnosticDictionaryURLKey, 
                        _WBSTranslationEnableContinuedTranslationSettingsKey, _WBSTranslationEnabledSettingsKey, 
                        _WBSTranslationForceOnlineTranslationSettingsKey, _WBSTranslationHideInternalTapToRadarActionSettingsKey, 
@@ -105,9 +106,9 @@ exports:
                        _allocVNImageRequestHandlerInstance, _alloc_LTAlignmentInstance, 
                        _alloc_LTLanguageDetectionResultInstance, _alloc_LTLocalePairInstance, 
                        _alloc_LTParagraphTranslationRequestInstance, _alloc_LTTextLanguageDetectionResultInstance, 
-                       _alloc_LTTranslationRangeInstance, _alloc_LTTranslationRequestInstance, 
-                       _alloc_LTTranslationSessionInstance, _alloc_LTTranslatorInstance, 
-                       _availablePreferredTargetLocalesFilteredBySupportedLocales, 
+                       _alloc_LTTranslationFeedbackInstance, _alloc_LTTranslationRangeInstance, 
+                       _alloc_LTTranslationRequestInstance, _alloc_LTTranslationSessionInstance, 
+                       _alloc_LTTranslatorInstance, _availablePreferredTargetLocalesFilteredBySupportedLocales, 
                        _canLoadCoreML, _canLoadMobileAsset, _canLoadPassKitUIFoundation, 
                        _canLoadTranslation, _canLoadVision, _clipboardWritePermissionKey, 
                        _commandNameKey, _commandShortcutKey, _contextMenusPermissionKey, 
@@ -122,11 +123,11 @@ exports:
                        _getVNCoreMLRequestClass, _getVNImageRequestHandlerClass, 
                        _get_LTAlignmentClass, _get_LTLanguageDetectionResultClass, 
                        _get_LTLocalePairClass, _get_LTParagraphTranslationRequestClass, 
-                       _get_LTTextLanguageDetectionResultClass, _get_LTTranslationRangeClass, 
-                       _get_LTTranslationRequestClass, _get_LTTranslationSessionClass, 
-                       _get_LTTranslationTaskHint, _get_LTTranslationTaskHintWeb, 
-                       _get_LTTranslatorClass, _manifestVersionManifestKey, _menusPermissionKey, 
-                       _nativeMessagingPermissionKey, _preferredTargetLocalesFromSettings, 
+                       _get_LTTextLanguageDetectionResultClass, _get_LTTranslationFeedbackClass, 
+                       _get_LTTranslationRangeClass, _get_LTTranslationRequestClass, 
+                       _get_LTTranslationSessionClass, _get_LTTranslationTaskHint, 
+                       _get_LTTranslationTaskHintWeb, _get_LTTranslatorClass, _manifestVersionManifestKey, 
+                       _menusPermissionKey, _nativeMessagingPermissionKey, _preferredTargetLocalesFromSettings, 
                        _safari14VersionString, _showInternalTranslationActions, _storagePermissionKey, 
                        _tabsPermissionKey, _unlimitedStoragePermissionKey, _webExtensionErrorOccurredNotification, 
                        _webExtensionGrantedPermissionsWereRemovedNotification, _webExtensionLargeIconIdealPointSize, 
@@ -190,7 +191,8 @@ exports:
                        WBSTranslationConsentAlertLearnMoreWindowControllerMac, WBSTranslationContext, 
                        WBSTranslationContextSnapshot, WBSTranslationDataCollectionManager, 
                        WBSTranslationDiagnosticData, WBSTranslationErrorController, 
-                       WBSTranslationInformation, WBSTranslationURLParser, WBSTranslationWebpageContentExtractor, 
+                       WBSTranslationInformation, WBSTranslationScrollInteractionAnalyticsHelper, 
+                       WBSTranslationURLParser, WBSTranslationWebpageContentExtractor, 
                        WBSUISafariSandboxBroker, WBSUISafariSandboxBrokerConnection, 
                        WBSURLSpoofingMitigator, WBSWebExtensionContextMenuContext, 
                        WBSWebExtensionContextMenuItem, WBSWebExtensionContextMenuItemInfo, 
@@ -208,19 +210,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B200131E-C1AB-345B-8FE0-DC9EE2B7EE5E
+    value:           9E1CC71D-842C-3DF3-B5D5-FE1EFC273C4D
   - target:          x86_64-maccatalyst
-    value:           B200131E-C1AB-345B-8FE0-DC9EE2B7EE5E
+    value:           9E1CC71D-842C-3DF3-B5D5-FE1EFC273C4D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4C9E04B0-202F-3491-843C-317D9BD9795F
+    value:           491DC8F8-1842-3437-A12F-8B7973814EA3
   - target:          arm64e-maccatalyst
-    value:           4C9E04B0-202F-3491-843C-317D9BD9795F
+    value:           491DC8F8-1842-3437-A12F-8B7973814EA3
 install-name:    '/System/Library/PrivateFrameworks/SafariCore.framework/Versions/A/SafariCore'
-current-version: 610.2.11
+current-version: 610.3.7
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -278,8 +280,9 @@ exports:
                        _WBSPasswordManagerURLSenderSiri, _WBSPasswordManagerURLShowChangePasswordController, 
                        _WBSPasswordManagerURLTrue, _WBSPasswordRuleParserErrorCodeNoError, 
                        _WBSPasswordRuleParserErrorDomain, _WBSPrivacyPreservingDescription, 
-                       _WBSRemoteAutoFillQuirksLastUpdateTimePreferenceKey, _WBSSQLiteErrorDomain, 
-                       _WBSSafariBookmarksSyncAgentBugIDsKey, _WBSSafariBookmarksSyncAgentCloudTabsWereUpdatedOnServerNotificationName, 
+                       _WBSReleaseOnMainQueueImpl, _WBSRemoteAutoFillQuirksLastUpdateTimePreferenceKey, 
+                       _WBSSQLiteErrorDomain, _WBSSafariBookmarksSyncAgentBugIDsKey, 
+                       _WBSSafariBookmarksSyncAgentCloudTabsWereUpdatedOnServerNotificationName, 
                        _WBSSafariBookmarksSyncAgentDidDetectBugNotificationName, 
                        _WBSSafariBookmarksSyncAgentDidDetectHierarchyIssueNotificationName, 
                        _WBSSafariBookmarksSyncAgentDidUpdateBookmarksNotificationName, 
@@ -437,13 +440,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           048AE572-AF3E-35A1-88E1-7F1641336D28
+    value:           1023011E-8721-3FC8-B014-0DAD7E65E2E4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AC97627B-4CA3-3F6D-A7DF-40593482B82B
+    value:           8AE5A228-2200-3DFB-9A13-D8B60A806A75
 install-name:    '/System/Library/PrivateFrameworks/SafariShared.framework/Versions/A/SafariShared'
-current-version: 610.2.11
+current-version: 610.3.7
 compatibility-version: 0
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -633,6 +636,7 @@ exports:
                        _WBSParsecDomainSafariBaiduSearch, _WBSParsecDomainSafariBingCompletion, 
                        _WBSParsecDomainSafariBingSearch, _WBSParsecDomainSafariBookmark, 
                        _WBSParsecDomainSafariDuckDuckGoCompletion, _WBSParsecDomainSafariDuckDuckGoSearch, 
+                       _WBSParsecDomainSafariEcosiaCompletion, _WBSParsecDomainSafariEcosiaSearch, 
                        _WBSParsecDomainSafariFindOnPage, _WBSParsecDomainSafariGoToSite, 
                        _WBSParsecDomainSafariGoogleCompletion, _WBSParsecDomainSafariGoogleSearch, 
                        _WBSParsecDomainSafariHistory, _WBSParsecDomainSafariHistorySearch, 
@@ -786,6 +790,7 @@ exports:
                        __ZN12SafariShared25ArticleFinderJSController15staticFunctionsERN3WTF6VectorI16JSStaticFunctionLm0ENS1_15CrashOnOverflowELm16ENS1_10FastMallocEEE, 
                        __ZN12SafariShared25ArticleFinderJSController16scriptObjectNameEv, 
                        __ZN12SafariShared25ArticleFinderJSController17readerIsAvailableEv, 
+                       __ZN12SafariShared25ArticleFinderJSController19getScrollPercentageEv, 
                        __ZN12SafariShared25ArticleFinderJSController20reloadArticleContentEv, 
                        __ZN12SafariShared25ArticleFinderJSController27prepareToTransitionToReaderEv, 
                        __ZN12SafariShared25ArticleFinderJSController33collectReadingListItemInformationEv, 
@@ -814,6 +819,7 @@ exports:
                        __ZN12SafariShared28ReadStreamedDomainExpansionsEiU13block_pointerFvPNS_31_HistoryStreamedDomainExpansionEE, 
                        __ZN12SafariShared28ReaderAvailabilityController13didFinishLoadEv, 
                        __ZN12SafariShared28ReaderAvailabilityController17clearAvailabilityEv, 
+                       __ZN12SafariShared28ReaderAvailabilityController19getScrollPercentageEv, 
                        __ZN12SafariShared28ReaderAvailabilityController20prepareArticleFinderEv, 
                        __ZN12SafariShared28ReaderAvailabilityController21determineAvailabilityEv, 
                        __ZN12SafariShared28ReaderAvailabilityController21didFinishDocumentLoadEv, 

@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           223C4C8C-5324-3452-9A92-BD54004A8F72
+    value:           68951244-CF62-3D3C-BC55-583A3B6A35A2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DB694796-46EB-3122-A14E-5B5473E94F5D
+    value:           E188A3CB-0C13-3C34-AFF1-9006790328C6
 install-name:    '/System/Library/Frameworks/OSAKit.framework/Versions/A/OSAKit'
 current-version: 112
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _OSAScriptErrorAppAddressKey, _OSAScriptErrorAppName, _OSAScriptErrorAppNameKey, 
                        _OSAScriptErrorBriefMessage, _OSAScriptErrorBriefMessageKey, 
                        _OSAScriptErrorExpectedTypeKey, _OSAScriptErrorMessage, _OSAScriptErrorMessageKey, 

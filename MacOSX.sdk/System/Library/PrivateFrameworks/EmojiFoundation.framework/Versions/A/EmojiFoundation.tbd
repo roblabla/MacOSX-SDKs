@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F9798C7B-656D-3DF3-BCA9-14876D5A9BD8
+    value:           5AFD42F0-D066-3A87-8B2F-CB864275BDEB
   - target:          x86_64-maccatalyst
-    value:           F9798C7B-656D-3DF3-BCA9-14876D5A9BD8
+    value:           5AFD42F0-D066-3A87-8B2F-CB864275BDEB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3D50F613-68C3-3BA2-BCE4-D5D57EA58C27
+    value:           646917CE-960A-3711-A670-BC5491ED440F
   - target:          arm64e-maccatalyst
-    value:           3D50F613-68C3-3BA2-BCE4-D5D57EA58C27
+    value:           646917CE-960A-3711-A670-BC5491ED440F
 install-name:    '/System/Library/PrivateFrameworks/EmojiFoundation.framework/Versions/A/EmojiFoundation'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

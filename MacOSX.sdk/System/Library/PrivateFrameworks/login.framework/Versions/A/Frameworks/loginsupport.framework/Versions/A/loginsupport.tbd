@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           AA42AB32-B6FD-3C43-B5EF-60147459AF81
+    value:           4F860927-F6F5-3A99-A103-744CF365634F
   - target:          x86_64-maccatalyst
-    value:           AA42AB32-B6FD-3C43-B5EF-60147459AF81
+    value:           4F860927-F6F5-3A99-A103-744CF365634F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           27902A6C-E1CD-3D84-AC51-EA1A16C597FC
+    value:           08ABC43D-FFEE-3F47-804A-D2510D814E42
   - target:          arm64e-maccatalyst
-    value:           27902A6C-E1CD-3D84-AC51-EA1A16C597FC
+    value:           08ABC43D-FFEE-3F47-804A-D2510D814E42
 install-name:    '/System/Library/PrivateFrameworks/login.framework/Versions/A/Frameworks/loginsupport.framework/Versions/A/loginsupport'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

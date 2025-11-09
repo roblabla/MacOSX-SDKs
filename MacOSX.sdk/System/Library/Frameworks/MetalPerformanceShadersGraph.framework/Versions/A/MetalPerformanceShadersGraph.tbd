@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EBBE3366-0306-362A-ABB2-E36F30CD38D4
+    value:           367C1DCD-0694-3AFB-80AA-EEC2F6F0F8DE
   - target:          x86_64-maccatalyst
-    value:           EBBE3366-0306-362A-ABB2-E36F30CD38D4
+    value:           367C1DCD-0694-3AFB-80AA-EEC2F6F0F8DE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6C62ADA1-7DB9-34FE-8C1A-0011FB516BCB
+    value:           1B9095D9-ACA9-3C5B-86BD-5AA6FDAF399E
   - target:          arm64e-maccatalyst
-    value:           6C62ADA1-7DB9-34FE-8C1A-0011FB516BCB
+    value:           1B9095D9-ACA9-3C5B-86BD-5AA6FDAF399E
 install-name:    '/System/Library/Frameworks/MetalPerformanceShadersGraph.framework/Versions/A/MetalPerformanceShadersGraph'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     objc-classes:    [ MPSGraph, MPSGraphAdamOptimizer, MPSGraphConvolution2DOpDescriptor, 
                        MPSGraphDepthwiseConvolution2DOpDescriptor, MPSGraphDevice, 

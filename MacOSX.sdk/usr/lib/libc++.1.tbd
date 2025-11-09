@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E75C3FA9-8383-320D-8BF4-E0FFDD17E92A
+    value:           AE3A940A-7A9C-3F99-B175-3511528D8DFE
   - target:          x86_64-maccatalyst
-    value:           E75C3FA9-8383-320D-8BF4-E0FFDD17E92A
+    value:           AE3A940A-7A9C-3F99-B175-3511528D8DFE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           847513DE-3DB5-3757-8338-471AC3CD00A7
+    value:           28BA0783-4F54-33EB-8DC0-DC23CD3BC576
 install-name:    '/usr/lib/libc++.1.dylib'
 current-version: 904.4
 exports:

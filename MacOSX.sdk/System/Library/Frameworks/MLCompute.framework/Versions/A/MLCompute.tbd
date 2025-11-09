@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           91E32EED-8085-3889-A22E-68FF4B6090BC
+    value:           BCEA1149-197E-398F-9424-E29B0AD0829F
   - target:          x86_64-maccatalyst
-    value:           91E32EED-8085-3889-A22E-68FF4B6090BC
+    value:           BCEA1149-197E-398F-9424-E29B0AD0829F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F5B4E1CB-0E0E-33E3-B6FC-299E8EA6F1ED
+    value:           CD745414-6E80-3BCD-9EFE-CE192AC0AEB4
   - target:          arm64e-maccatalyst
-    value:           F5B4E1CB-0E0E-33E3-B6FC-299E8EA6F1ED
+    value:           CD745414-6E80-3BCD-9EFE-CE192AC0AEB4
 install-name:    '/System/Library/Frameworks/MLCompute.framework/Versions/A/MLCompute'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _ANE_BuildArithmeticUnit, _ANE_BuildNeuronParams, _ANE_BuildNeuronUnit, 
                        _ANE_CompileArithmeticLayer, _ANE_CompileConcatLayer, _ANE_CompileConvolutionLayer, 

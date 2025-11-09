@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           10292AF2-0576-3BA2-AA86-A41CDF5F33AF
+    value:           6B3E8FA3-1C52-3187-920A-146C6E108054
   - target:          x86_64-maccatalyst
-    value:           10292AF2-0576-3BA2-AA86-A41CDF5F33AF
+    value:           6B3E8FA3-1C52-3187-920A-146C6E108054
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           171AD6EE-760F-3F83-B71E-901EE1CAE56C
+    value:           56532E5E-750B-3FBD-B436-BE0C838698A6
   - target:          arm64e-maccatalyst
-    value:           171AD6EE-760F-3F83-B71E-901EE1CAE56C
+    value:           56532E5E-750B-3FBD-B436-BE0C838698A6
 install-name:    '/System/Library/PrivateFrameworks/AXRuntime.framework/Versions/A/AXRuntime'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -52,9 +52,10 @@ exports:
                        _AXSerializeWrapper, _AXSetCurrentSerializationStyle, _AXSetPipPid, 
                        _AXStringFromAXAttributedString, _AXTentativePidSuspend, _AXUIAccessibilityAssistiveTechnologyKey, 
                        _AXUIAccessibilityCustomRotorVisibleInTouchRotorKey, _AXUIAccessibilityHonorsGroupsKey, 
-                       _AXUIAccessibilityShouldAlwaysScrollKey, _AXUIAccessibilitySortKey, 
-                       _AXUIAccessibilitySpeechAttributeLanguage, _AXUIAccessibilitySpeechAttributePhonemeSubstitution, 
-                       _AXUIAccessibilitySpeechAttributePitch, _AXUIAccessibilitySpeechAttributePoorMansPronunciationHelp, 
+                       _AXUIAccessibilityIncludeRemoteElements, _AXUIAccessibilityShouldAlwaysScrollKey, 
+                       _AXUIAccessibilitySortKey, _AXUIAccessibilitySpeechAttributeLanguage, 
+                       _AXUIAccessibilitySpeechAttributePhonemeSubstitution, _AXUIAccessibilitySpeechAttributePitch, 
+                       _AXUIAccessibilitySpeechAttributePoorMansPronunciationHelp, 
                        _AXUIAccessibilitySpeechAttributePoorMansPronunciationHelpForMacintalk, 
                        _AXUIAccessibilitySpeechAttributePoorMansPronunciationHelpForNashville, 
                        _AXUIAccessibilitySpeechAttributePunctuation, _AXUIAccessibilitySpeechAttributeQueueAnnouncement, 

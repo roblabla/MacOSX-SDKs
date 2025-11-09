@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           514F2078-E7AA-3816-ACF6-603A04FF4820
+    value:           8CF29FAE-D1F5-37FA-B529-D999AFE990FD
   - target:          x86_64-maccatalyst
-    value:           514F2078-E7AA-3816-ACF6-603A04FF4820
+    value:           8CF29FAE-D1F5-37FA-B529-D999AFE990FD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           28E03DBD-717F-38EE-87ED-1E674ECB1A2F
+    value:           1C11FE31-9F7F-3C6B-B1D6-4DA3FF5E10D0
   - target:          arm64e-maccatalyst
-    value:           28E03DBD-717F-38EE-87ED-1E674ECB1A2F
+    value:           1C11FE31-9F7F-3C6B-B1D6-4DA3FF5E10D0
 install-name:    '/System/Library/Frameworks/OpenAL.framework/Versions/A/OpenAL'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _alBuffer3f, _alBuffer3i, _alBufferData, _alBufferf, _alBufferfv, 
                        _alBufferi, _alBufferiv, _alDeleteBuffers, _alDeleteSources, 

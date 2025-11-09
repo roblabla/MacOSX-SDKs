@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CCC3CC1C-1E42-3B12-8863-F0CF41745E94
+    value:           3CE70BB0-442D-3647-81A2-3EE9F02BB3C5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EF5C66A5-C4CC-3B29-87A4-F74AC5C8E370
+    value:           9EEFA371-CBA3-32ED-A86B-CC4488CBDD9C
 install-name:    '/System/Library/PrivateFrameworks/Bootability.framework/Versions/A/Bootability'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

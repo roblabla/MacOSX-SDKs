@@ -252,6 +252,19 @@ typedef NS_ENUM(NSInteger, HKCategoryValueEnvironmentalAudioExposureEvent) {
     HKCategoryValueEnvironmentalAudioExposureEventMomentaryLimit = 1,
 } API_AVAILABLE(ios(14.0), watchos(7.0));
 
+/*!
+ @enum          HKCategoryValueContraceptive
+ @abstract      Set of values to indicate the type of contraceptive.
+ */
+typedef NS_ENUM(NSInteger, HKCategoryValueContraceptive) {
+    HKCategoryValueContraceptiveUnspecified = 1,
+    HKCategoryValueContraceptiveImplant,
+    HKCategoryValueContraceptiveInjection,
+    HKCategoryValueContraceptiveIntrauterineDevice,
+    HKCategoryValueContraceptiveIntravaginalRing,
+    HKCategoryValueContraceptiveOral,
+    HKCategoryValueContraceptivePatch,
+} API_AVAILABLE(ios(14.3), watchos(7.2));
 
 /*!
  @enum          HKCategoryValueSeverity
@@ -293,6 +306,16 @@ typedef NS_ENUM(NSInteger, HKCategoryValuePresence) {
 typedef NS_ENUM(NSInteger, HKCategoryValueHeadphoneAudioExposureEvent) {
     HKCategoryValueHeadphoneAudioExposureEventSevenDayLimit = 1
 } API_AVAILABLE(ios(14.2), watchos(7.1));
+
+/*!
+ @enum          HKCategoryValueLowCardioFitnessEvent
+ @abstract      Specifies the type of cardio fitness event.
+
+ @constant      HKCategoryValueLowCardioFitnessEventLowFitness       This constant defines an event where a VO2Max measurement was recorded that falls into the "Low" fitness classification
+  */
+typedef NS_ENUM(NSInteger, HKCategoryValueLowCardioFitnessEvent) {
+    HKCategoryValueLowCardioFitnessEventLowFitness = 1,
+} API_AVAILABLE(ios(14.3), watchos(7.2));
 
 /*!
  @enum          HKActivityMoveMode

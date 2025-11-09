@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           290770EE-7DEC-37C0-BB29-EAAC3E2F46DC
+    value:           66B5A0A6-2DBF-36AC-ADA9-12071CA02E4A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4F71E67D-71CE-339F-89D3-1E2B93278E74
+    value:           1494F7CD-5B23-3A79-BECE-6D9AF8706C36
 install-name:    '/System/Library/PrivateFrameworks/SiriAudioInternal.framework/Versions/A/SiriAudioInternal'
 swift-abi-version: 7
 allowable-clients:

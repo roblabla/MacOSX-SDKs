@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FA340E99-C227-32F4-9806-BA936A9EB522
+    value:           00F7A635-5857-3DD2-8D0B-A4DCD51B05EC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6C447946-E9D4-3C58-8504-F23012077F7A
+    value:           54BC582E-B75D-3E42-8816-EEAF96417E3F
 install-name:    '/usr/lib/libFDR.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

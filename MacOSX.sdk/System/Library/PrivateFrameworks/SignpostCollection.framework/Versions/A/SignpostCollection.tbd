@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9BDD51CC-6136-38A7-B0E7-FCA7E5932AD5
+    value:           23F3A5CA-90B0-38A0-A9B3-B7BEFEE3EFC9
   - target:          x86_64-maccatalyst
-    value:           9BDD51CC-6136-38A7-B0E7-FCA7E5932AD5
+    value:           23F3A5CA-90B0-38A0-A9B3-B7BEFEE3EFC9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8A57A5DF-3F15-3295-BF0D-B841EA808F76
+    value:           0114C1F6-BAEC-3A1A-896A-EB258D9CD345
   - target:          arm64e-maccatalyst
-    value:           8A57A5DF-3F15-3295-BF0D-B841EA808F76
+    value:           0114C1F6-BAEC-3A1A-896A-EB258D9CD345
 install-name:    '/System/Library/PrivateFrameworks/SignpostCollection.framework/Versions/A/SignpostCollection'
 current-version: 53
 exports:

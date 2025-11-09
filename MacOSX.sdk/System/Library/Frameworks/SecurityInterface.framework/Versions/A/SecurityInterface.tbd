@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           630AEDFB-3B06-399C-88C7-40B96F0F5693
+    value:           D57E0D98-ABB7-3D4E-999C-1F1538CD1881
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F652EA3F-BC2A-3410-B804-029369C7D11D
+    value:           CD79E713-E63B-3F67-8822-490225670C7B
 install-name:    '/System/Library/Frameworks/SecurityInterface.framework/Versions/A/SecurityInterface'
 current-version: 55149.40.3
 reexported-libraries:

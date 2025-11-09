@@ -32,6 +32,9 @@ API_AVAILABLE(ios(9.0)) typedef NS_ENUM(NSInteger, UIPressType) {
     UIPressTypeSelect,
     UIPressTypeMenu,
     UIPressTypePlayPause,
+
+    UIPressTypePageUp API_AVAILABLE(tvos(14.3)) API_UNAVAILABLE(ios, watchos) = 30,
+    UIPressTypePageDown API_AVAILABLE(tvos(14.3)) API_UNAVAILABLE(ios, watchos) = 31,
 };
 
 UIKIT_EXTERN API_AVAILABLE(ios(9.0)) @interface UIPress : NSObject

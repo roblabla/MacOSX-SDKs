@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           98711668-9BD4-32DA-97FF-1428766C4342
+    value:           DCE98762-F313-35E4-A9D2-65D335DFA0DA
   - target:          x86_64-maccatalyst
-    value:           98711668-9BD4-32DA-97FF-1428766C4342
+    value:           DCE98762-F313-35E4-A9D2-65D335DFA0DA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           08D74B96-C969-3B38-9A0E-82B5E01D6639
+    value:           11313804-D774-3A95-851E-EE84B6B2EA64
   - target:          arm64e-maccatalyst
-    value:           08D74B96-C969-3B38-9A0E-82B5E01D6639
+    value:           11313804-D774-3A95-851E-EE84B6B2EA64
 install-name:    '/System/Library/PrivateFrameworks/AXCoreUtilities.framework/Versions/A/AXCoreUtilities'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

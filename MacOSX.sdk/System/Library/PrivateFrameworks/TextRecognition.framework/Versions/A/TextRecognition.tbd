@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8BD6D4E2-0EDB-36ED-9D82-CE67186C669E
+    value:           C66ECD76-87A1-3D63-A1F3-30154B7F853C
   - target:          x86_64-maccatalyst
-    value:           8BD6D4E2-0EDB-36ED-9D82-CE67186C669E
+    value:           C66ECD76-87A1-3D63-A1F3-30154B7F853C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F8B4CFFF-28D6-3724-82B4-A4FC179F0F4A
+    value:           3FB7DD61-67BF-3573-9CEF-8B534F7F0F98
   - target:          arm64e-maccatalyst
-    value:           F8B4CFFF-28D6-3724-82B4-A4FC179F0F4A
+    value:           3FB7DD61-67BF-3573-9CEF-8B534F7F0F98
 install-name:    '/System/Library/PrivateFrameworks/TextRecognition.framework/Versions/A/TextRecognition'
 current-version: 157
 exports:

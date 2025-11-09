@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1298C60C-515D-3E98-86D0-89C565FF4CC9
+    value:           F8E4656A-6FC4-36BD-8711-8100760CDB8C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F6E355C9-3CD3-3E7A-B00C-F9FC5E464380
+    value:           1D03B0FF-067B-3B76-A42F-CBA9751460D4
 install-name:    '/System/Library/PrivateFrameworks/SpotlightServices.framework/Versions/A/SpotlightServices'
-current-version: 2149.5
+current-version: 2150.6
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _MDItemAppStoreHasMetadataPlist, _PRSDirectivesManagerDescriptorsForModelInputScore, 
@@ -214,7 +214,7 @@ exports:
                        _shouldUpdateCrossAttributeFeature, _shouldUpdateFuncForSnippetFeature, 
                        _startsWithDoubleQuote, _strippedURL, _suffixTrimSetForMathQueries, 
                        _updateMeEmailAddresses, _updatePhoneFavoritesQuery, _updateVIPList, 
-                       _updateVIPRankingQuery, _updatedCrossAttributeFeature, _userQueryHasOnlySingleCharacterTerms ]
+                       _updateVIPRankingQuery, _updatedCrossAttributeFeature ]
     objc-classes:    [ PRSAnonymousPipelineManager, PRSAnonymousPipelineManagerSession, 
                        PRSBagHandler, PRSCoreDuet, PRSCoreParsecQueryTask, PRSDirectivesManager, 
                        PRSFTETask, PRSFeedbackProxy, PRSL2FeatureVector, PRSL2FeatureVectorProcessingContext, 

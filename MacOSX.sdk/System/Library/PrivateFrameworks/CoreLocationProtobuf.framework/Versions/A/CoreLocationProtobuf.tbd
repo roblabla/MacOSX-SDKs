@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F29265EA-ED2B-3D53-A524-A71EE46733BA
+    value:           1ED8D2D6-2CAD-3C7B-868C-CE0D1A8A88B0
   - target:          x86_64-maccatalyst
-    value:           F29265EA-ED2B-3D53-A524-A71EE46733BA
+    value:           1ED8D2D6-2CAD-3C7B-868C-CE0D1A8A88B0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E5F4BC5C-68C8-36CE-86A1-7C21797DDF6C
+    value:           5ED06B40-3152-39DB-953B-1ED9DBD2FDF2
   - target:          arm64e-maccatalyst
-    value:           E5F4BC5C-68C8-36CE-86A1-7C21797DDF6C
+    value:           5ED06B40-3152-39DB-953B-1ED9DBD2FDF2
 install-name:    '/System/Library/PrivateFrameworks/CoreLocationProtobuf.framework/Versions/A/CoreLocationProtobuf'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

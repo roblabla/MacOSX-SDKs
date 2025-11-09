@@ -3,18 +3,18 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           5E2826C3-5868-3CA6-AF3F-2EDB9C79EB5C
+    value:           1D11A163-8022-38A0-83A5-0F7D9767F785
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           F7E493DD-3140-3A8E-93D9-64051EFD0D98
+    value:           A6F0A2C9-443B-3686-A3B0-D2F365800471
 install-name:    '/System/iOSSupport/System/Library/Frameworks/LinkPresentation.framework/Versions/A/LinkPresentation'
-current-version: 146.5
+current-version: 146.8
 reexported-libraries:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/URLFormatting.framework/Versions/A/URLFormatting' ]
 exports:
-  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _LPErrorDomain, _LPLogChannelFetching, _LPLogChannelPlugin, 
                        _LPLogChannelSerialization, _LPLogChannelTranscoding, _LPLogChannelUI, 
                        _LPLogChannelVideo, _LPYouTubePlayerErrorDomain ]
@@ -51,21 +51,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5A325912-5CEB-3DA1-ACB7-1CF1F3F0CCDB
+    value:           B77A6E0A-66AD-3044-AB17-10ECA706A151
   - target:          x86_64-maccatalyst
-    value:           5A325912-5CEB-3DA1-ACB7-1CF1F3F0CCDB
+    value:           B77A6E0A-66AD-3044-AB17-10ECA706A151
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           88FC8DB3-D645-37D7-A8AE-0CEB6FF79396
+    value:           28505AFE-050F-3BA5-B27A-95939234C9D3
   - target:          arm64e-maccatalyst
-    value:           88FC8DB3-D645-37D7-A8AE-0CEB6FF79396
+    value:           28505AFE-050F-3BA5-B27A-95939234C9D3
 install-name:    '/System/Library/PrivateFrameworks/URLFormatting.framework/Versions/A/URLFormatting'
-current-version: 146.5
+current-version: 146.8
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     objc-classes:    [ URLFormattingTestingOverrides ]
 ...

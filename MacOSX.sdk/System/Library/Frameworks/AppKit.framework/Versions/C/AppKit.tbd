@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2818F4AA-1033-32D5-9FD2-DD1D9E06318D
+    value:           FDD49C47-209F-3135-B663-D6A36FF49B80
   - target:          x86_64-maccatalyst
-    value:           2818F4AA-1033-32D5-9FD2-DD1D9E06318D
+    value:           FDD49C47-209F-3135-B663-D6A36FF49B80
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           26371BC6-956E-32AE-88A5-9A32E9A54BCA
+    value:           9D1F3C60-1EE4-3EC8-A980-CD549E4C3925
   - target:          arm64e-maccatalyst
-    value:           26371BC6-956E-32AE-88A5-9A32E9A54BCA
+    value:           9D1F3C60-1EE4-3EC8-A980-CD549E4C3925
 install-name:    '/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit'
-current-version: 2022
+current-version: 2022.20.117
 compatibility-version: 45
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -33,7 +33,7 @@ exports:
                        '$ld$add$os10.6$_OBJC_METACLASS_$_NSLayoutConstraint', '$ld$add$os10.6$__NSDictionaryOfVariableBindings', 
                        '$ld$add$os10.7$_OBJC_CLASS_$_NSLayoutConstraint', '$ld$add$os10.7$_OBJC_METACLASS_$_NSLayoutConstraint', 
                        '$ld$add$os10.7$__NSDictionaryOfVariableBindings' ]
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _GDBDumpCursorStack, _IBAppleScriptFramework, _IBCarbonFramework, 
                        _IBCocoaFramework, _IBSwingFramework, _NSAbortModalException, 
@@ -1257,7 +1257,7 @@ exports:
                        _NSServiceFilter.entry, _NSServiceFilter.flags, _NSServiceFilter.linkSchemes, 
                        _NSServiceFilter.textScript, _NSServiceFilter.wordLimit, _NSToolbarItemViewerLabelCellPopUpCell._realTitle, 
                        _NSToolbarSeparator._inPalette ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _NSAttributedStringFromMacSimpleTextData, _NSSourceTextScalingDocumentOption, 
                        _NSTargetTextScalingDocumentOption, _NSTextDidBeginEditingNotification, 
                        _NSTextDidChangeNotification, _NSTextDidEndEditingNotification, 
@@ -1277,19 +1277,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           11B04EA0-28EB-39EB-BC7E-128AB04278B1
+    value:           71C63CE5-094D-34AF-B538-8DCAB3B66DE9
   - target:          x86_64-maccatalyst
-    value:           11B04EA0-28EB-39EB-BC7E-128AB04278B1
+    value:           71C63CE5-094D-34AF-B538-8DCAB3B66DE9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C38556BD-B430-3234-AE2B-F07AD3420406
+    value:           085965EE-A855-340D-8022-805BB9F45A87
   - target:          arm64e-maccatalyst
-    value:           C38556BD-B430-3234-AE2B-F07AD3420406
+    value:           085965EE-A855-340D-8022-805BB9F45A87
 install-name:    '/System/Library/PrivateFrameworks/UIFoundation.framework/Versions/A/UIFoundation'
-current-version: 725
+current-version: 726.11
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -1456,8 +1456,8 @@ exports:
                        __UISetPointValueForAxis, __UISetSizeValueForAxis, __UISizeAdd, 
                        __UISizeEqualToSizeWithPrecision, __UISizeValueForAxis, __UISystemFontName, 
                        __UITotalEdgeDimensionsForLayoutAxis, __UITrailingOffsetForInsetsAlongAxis, 
-                       __UIUnitAnchorPointForEdges, ___CTFontGetExtraData, ___NSTokenizerLanguageSet, 
-                       ___objectEqual ]
+                       __UIUnitAnchorPointForEdges, ___CTFontGetExtraData, ___NSTextLayoutManagerLinearLayoutFragmentsDump, 
+                       ___NSTokenizerLanguageSet, ___objectEqual ]
     objc-classes:    [ NSATSGlyphStorage, NSATSLineFragment, NSATSTypesetter, NSAttributeDictionary, 
                        NSAttributeDictionaryEnumerator, NSCIDGlyphInfo, NSCTFont, 
                        NSCTFontDescriptor, NSCTGlyphInfo, NSCollectionLayoutAnchor, 

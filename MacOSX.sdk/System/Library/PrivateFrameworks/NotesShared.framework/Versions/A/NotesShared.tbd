@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           79B14DCD-A0CD-30BA-A533-B546293BE3F8
+    value:           9D7E1A61-F879-30B7-A30F-BC1D91F5F413
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           13E27C14-B348-3EB0-83CB-4104A7D047FC
+    value:           851C4322-F3CA-366E-A385-C57B59EB79C4
 install-name:    '/System/Library/PrivateFrameworks/NotesShared.framework/Versions/A/NotesShared'
-current-version: 1778
+current-version: 1800
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ AvatarStack.2.preview-thunk, MacNotesTestHost, MacUIFrameworkTests, 

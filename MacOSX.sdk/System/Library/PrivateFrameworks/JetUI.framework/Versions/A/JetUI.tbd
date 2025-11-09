@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FEC6A4ED-FD1B-366E-A5EA-E7F7A58D47C7
+    value:           EFE87A90-D2F5-3103-ACAC-147564B6EB8C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C16EC98B-FF58-3BC0-BBB2-3C775BA44555
+    value:           44FBB706-FD3E-3F1B-A542-69123F233480
 install-name:    '/System/Library/PrivateFrameworks/JetUI.framework/Versions/A/JetUI'
 swift-abi-version: 7
 allowable-clients:
@@ -29,6 +29,7 @@ exports:
                        '_$s10Foundation6LocaleV5JetUIE10storefrontACvgZ', '_$s10Foundation6LocaleV5JetUIE25hasExtraTallWritingSystemSbvg', 
                        '_$s10Foundation6LocaleV5JetUIE25hasExtraTallWritingSystemSbvpMV', 
                        '_$s12CoreGraphics7CGFloatV5JetUI12AnyDimensionADMc', '_$s12CoreGraphics7CGFloatV5JetUI12AnyDimensionADWP', 
+                       '_$s12CoreGraphics7CGFloatV5JetUIE11scalingLike_4withAcD15CustomTextStyle_p_AD0D15TraitCollectionCtF', 
                        '_$s12CoreGraphics7CGFloatV5JetUIE20languageAwareOutsets14compatibleWithSo12NSEdgeInsetsVAD0D15TraitCollectionC_tF', 
                        '_$s12CoreGraphics7CGFloatV5JetUIE6scaled2by14compatibleWithAcD10FontSourceO_AD0D15TraitCollectionCtF', 
                        '_$s12CoreGraphics7CGFloatV5JetUIE8rawValue2inAcD0D16TraitEnvironment_p_tF', 
@@ -184,6 +185,7 @@ exports:
                        '_$s5JetUI10DimensionsVMa', '_$s5JetUI10DimensionsVMn', '_$s5JetUI10DimensionsVN', 
                        '_$s5JetUI10FontSourceO2eeoiySbAC_ACtFZ', '_$s5JetUI10FontSourceO4font14compatibleWithSo6NSFontCAA0A15TraitCollectionC_tF', 
                        '_$s5JetUI10FontSourceO7useCaseyAcA0c3UseF0OcACmFWC', '_$s5JetUI10FontSourceO9textStyleyAcA0ac4TextF0VcACmFWC', 
+                       '_$s5JetUI10FontSourceOAA15CustomTextStyleAAMc', '_$s5JetUI10FontSourceOAA15CustomTextStyleAAWP', 
                        '_$s5JetUI10FontSourceOMa', '_$s5JetUI10FontSourceOMn', '_$s5JetUI10FontSourceON', 
                        '_$s5JetUI10FontSourceOSQAAMc', '_$s5JetUI10LayoutRectV02cgD0So6CGRectVvg', 
                        '_$s5JetUI10LayoutRectV02cgD0So6CGRectVvpMV', '_$s5JetUI10LayoutRectV12lastBaseline12CoreGraphics7CGFloatVvg', 
@@ -349,7 +351,11 @@ exports:
                        '_$s5JetUI15AspectFitLayoutVAA0E0AAMc', '_$s5JetUI15AspectFitLayoutVAA0E0AAWP', 
                        '_$s5JetUI15AspectFitLayoutVAA10MeasurableAAMc', '_$s5JetUI15AspectFitLayoutVAA10MeasurableAAWP', 
                        '_$s5JetUI15AspectFitLayoutVMa', '_$s5JetUI15AspectFitLayoutVMn', 
-                       '_$s5JetUI15AspectFitLayoutVN', '_$s5JetUI15StackMeasurableV11insertChild_2atyAA0D0_p_SitF', 
+                       '_$s5JetUI15AspectFitLayoutVN', '_$s5JetUI15CustomTextStyleMp', 
+                       '_$s5JetUI15CustomTextStyleP4font14compatibleWithSo6NSFontCAA0A15TraitCollectionC_tFTj', 
+                       '_$s5JetUI15CustomTextStyleP4font14compatibleWithSo6NSFontCAA0A15TraitCollectionC_tFTq', 
+                       '_$s5JetUI15CustomTextStylePAAE13scalingValues14compatibleWith12CoreGraphics7CGFloatV7divisor_AH5scaletAA0A15TraitCollectionC_tF', 
+                       '_$s5JetUI15CustomTextStyleTL', '_$s5JetUI15StackMeasurableV11insertChild_2atyAA0D0_p_SitF', 
                        '_$s5JetUI15StackMeasurableV11removeChild2atySi_tF', '_$s5JetUI15StackMeasurableV12measurements7fitting2inSo14JUMeasurementsVSo6CGSizeV_AA0A16TraitEnvironment_ptF', 
                        '_$s5JetUI15StackMeasurableV17removeAllChildrenyyF', '_$s5JetUI15StackMeasurableV17skipEmptyChildrenSbvM', 
                        '_$s5JetUI15StackMeasurableV17skipEmptyChildrenSbvg', '_$s5JetUI15StackMeasurableV17skipEmptyChildrenSbvpMV', 
@@ -378,6 +384,7 @@ exports:
                        '_$s5JetUI15StaticDimensionVAA03AnyD0AAMc', '_$s5JetUI15StaticDimensionVAA03AnyD0AAWP', 
                        '_$s5JetUI15StaticDimensionVMa', '_$s5JetUI15StaticDimensionVMn', 
                        '_$s5JetUI15StaticDimensionVN', '_$s5JetUI15StaticDimensionVSQAAMc', 
+                       '_$s5JetUI15StaticDimensionV_10scaledLikeAC12CoreGraphics7CGFloatV_AA15CustomTextStyle_ptcfC', 
                        '_$s5JetUI15StaticDimensionVs23CustomStringConvertibleAAMc', 
                        '_$s5JetUI16ShelvesPresenterC11reloadItemsyyqd__SlRd__s11AnyHashableV7ElementRtd__lF', 
                        '_$s5JetUI16ShelvesPresenterC11setContentsyyqd__7ElementQyd__RszSlRd__lF', 
@@ -526,7 +533,8 @@ exports:
                        '_$s5JetUI19LineHeightDimensionV10multiplier6sourceAC12CoreGraphics7CGFloatV_AA10FontSourceOtcfC', 
                        '_$s5JetUI19LineHeightDimensionV11descriptionSSvg', '_$s5JetUI19LineHeightDimensionV11descriptionSSvpMV', 
                        '_$s5JetUI19LineHeightDimensionV20languageAwareOutsets14compatibleWithSo12NSEdgeInsetsVAA0A15TraitCollectionC_tF', 
-                       '_$s5JetUI19LineHeightDimensionV2eeoiySbAC_ACtFZ', '_$s5JetUI19LineHeightDimensionV6sourceAA10FontSourceOvg', 
+                       '_$s5JetUI19LineHeightDimensionV2eeoiySbAC_ACtFZ', '_$s5JetUI19LineHeightDimensionV4with12multipliedByAcA15CustomTextStyle_p_12CoreGraphics7CGFloatVtcfC', 
+                       '_$s5JetUI19LineHeightDimensionV6sourceAA10FontSourceOvg', 
                        '_$s5JetUI19LineHeightDimensionV6sourceAA10FontSourceOvpMV', 
                        '_$s5JetUI19LineHeightDimensionV8rawValue2in12CoreGraphics7CGFloatVAA0A16TraitEnvironment_p_tF', 
                        '_$s5JetUI19LineHeightDimensionVAA03AnyE0AAMc', '_$s5JetUI19LineHeightDimensionVAA03AnyE0AAWP', 
@@ -1129,6 +1137,7 @@ exports:
                        '_$s7Element5JetUI8RecyclerPTl', '_$s7Metrics5JetUI0A12ConfigurablePTl', 
                        '_$s7Section5JetUI21DiffableDataPresenterPTl', '_$s9JetEngine23ViewWillDisappearReasonV0A2UIE8inferred3forACSo16NSViewControllerC_tFZ', 
                        '_$sSS5JetUIE20languageAwareOutsets12whenUsedWithSo12NSEdgeInsetsVSo6NSFontC_tF', 
+                       '_$sSa5JetUI12CoreGraphics7CGFloatVRszlE11scalingLike_4withSayADGAA15CustomTextStyle_p_AA0A15TraitCollectionCtF', 
                        '_$sSa5JetUI12CoreGraphics7CGFloatVRszlE6scaled2by14compatibleWithSayADGAA10FontSourceO_AA0A15TraitCollectionCtF', 
                        '_$sSd5JetUI12AnyDimensionAAMc', '_$sSd5JetUI12AnyDimensionAAWP', 
                        '_$sSd5JetUIE20languageAwareOutsets14compatibleWithSo12NSEdgeInsetsVAA0A15TraitCollectionC_tF', 

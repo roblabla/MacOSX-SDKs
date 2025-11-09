@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FC163BFE-89A0-3241-A72F-E381CE4C4355
+    value:           DC1E67E0-2690-3EE0-840D-461DA2980D9D
   - target:          x86_64-maccatalyst
-    value:           FC163BFE-89A0-3241-A72F-E381CE4C4355
+    value:           DC1E67E0-2690-3EE0-840D-461DA2980D9D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2BAAD557-43EB-3176-B889-B3995091AE40
+    value:           373E5F26-615E-356B-AC28-70EA9204AF22
   - target:          arm64e-maccatalyst
-    value:           2BAAD557-43EB-3176-B889-B3995091AE40
+    value:           373E5F26-615E-356B-AC28-70EA9204AF22
 install-name:    '/usr/lib/libMatch.1.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _matchCombine, _matchCompile, _matchDiagram, _matchDup, _matchExec, 
                        _matchFree, _matchInit, _matchOptimize, _matchPack, _matchPrintNodes, 

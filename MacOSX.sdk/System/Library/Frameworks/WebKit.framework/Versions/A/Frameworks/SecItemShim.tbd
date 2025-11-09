@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AD9CE7D7-9404-3F7D-9845-64A25A0F8952
+    value:           CAE3ED45-ED51-3D9B-9674-8B8BD75D8127
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ADD6BE12-2827-3C57-BD0F-6F8056C39823
+    value:           DD446851-0AB5-3221-9862-E4A7F3D5A94D
 install-name:    '/System/Library/Frameworks/WebKit.framework/Versions/A/Frameworks/SecItemShim.dylib'
-current-version: 610.2.11
+current-version: 610.3.7
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _WebKitSecItemShimInitialize ]

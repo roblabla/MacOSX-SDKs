@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           847EEA06-5BD5-35BD-A6CA-A961991841DB
+    value:           3CDB2034-B466-3652-B2DC-AC1E0E663E8F
   - target:          x86_64-maccatalyst
-    value:           847EEA06-5BD5-35BD-A6CA-A961991841DB
+    value:           3CDB2034-B466-3652-B2DC-AC1E0E663E8F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           70497015-CD08-3541-AD3B-4D38EFDB70D6
+    value:           EA46441A-9280-3524-909B-F905FF01A7F7
   - target:          arm64e-maccatalyst
-    value:           70497015-CD08-3541-AD3B-4D38EFDB70D6
+    value:           EA46441A-9280-3524-909B-F905FF01A7F7
 install-name:    '/System/Library/PrivateFrameworks/MusicLibrary.framework/Versions/A/MusicLibrary'
 current-version: 18
 exports:

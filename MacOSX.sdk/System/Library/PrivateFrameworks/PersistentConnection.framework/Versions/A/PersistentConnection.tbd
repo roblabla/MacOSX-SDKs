@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           05626933-8FBB-3241-BD87-A820FE527365
+    value:           C3F975D3-A87C-353C-BA1F-072825E60E8C
   - target:          x86_64-maccatalyst
-    value:           05626933-8FBB-3241-BD87-A820FE527365
+    value:           C3F975D3-A87C-353C-BA1F-072825E60E8C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DE93126C-4CBB-3B8C-96FE-F251272711E3
+    value:           D423D474-AB61-3F4E-9508-ED25B9E12012
   - target:          arm64e-maccatalyst
-    value:           DE93126C-4CBB-3B8C-96FE-F251272711E3
+    value:           D423D474-AB61-3F4E-9508-ED25B9E12012
 install-name:    '/System/Library/PrivateFrameworks/PersistentConnection.framework/Versions/A/PersistentConnection'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

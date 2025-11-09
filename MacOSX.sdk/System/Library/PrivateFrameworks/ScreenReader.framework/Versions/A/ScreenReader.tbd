@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E443E44D-4B10-35FE-AC32-DA873D102833
+    value:           7168307E-4655-37CA-A048-72782226E141
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FD881BA3-87F9-341D-B6E9-1AC8894252F8
+    value:           E4909415-BF05-3F26-84B7-6C3DF7041746
 install-name:    '/System/Library/PrivateFrameworks/ScreenReader.framework/Versions/A/ScreenReader'
 current-version: 390
 exports:

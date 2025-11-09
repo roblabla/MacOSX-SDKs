@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           91EFBEC8-F598-3100-9BAA-AE47F516B954
+    value:           DB38FEFE-CD3B-317A-9204-262881655973
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           8BC56919-0F81-331B-9311-801F25E42C23
+    value:           52929455-FBF6-348F-9885-452FEC56C334
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_SpriteKit_SwiftUI.framework/Versions/A/_SpriteKit_SwiftUI'
 swift-abi-version: 7
 exports:

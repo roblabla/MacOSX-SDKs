@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F9A4703A-9522-3489-8C48-FA03BC9084EC
+    value:           F4B3905F-C024-33C1-82C8-F1744AF8516E
   - target:          x86_64-maccatalyst
-    value:           F9A4703A-9522-3489-8C48-FA03BC9084EC
+    value:           F4B3905F-C024-33C1-82C8-F1744AF8516E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3861F20A-2A35-303B-889A-D24D426E404D
+    value:           FD5B24DE-DFDE-3FCE-AED6-6C49C0FD12A9
   - target:          arm64e-maccatalyst
-    value:           3861F20A-2A35-303B-889A-D24D426E404D
+    value:           FD5B24DE-DFDE-3FCE-AED6-6C49C0FD12A9
 install-name:    '/System/Library/PrivateFrameworks/GPUWrangler.framework/Versions/A/GPUWrangler'
 current-version: 0
 exports:

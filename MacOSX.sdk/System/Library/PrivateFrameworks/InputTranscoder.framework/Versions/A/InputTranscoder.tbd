@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FBABC727-DCF6-3372-8772-86C8558C9155
+    value:           65B5B950-8317-3200-B48F-682A6BA084D0
   - target:          x86_64-maccatalyst
-    value:           FBABC727-DCF6-3372-8772-86C8558C9155
+    value:           65B5B950-8317-3200-B48F-682A6BA084D0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           31230A90-CBAB-3CB1-8EE3-9AF48CBDC981
+    value:           B85755FF-3B47-346E-97C1-974AE14228D9
   - target:          arm64e-maccatalyst
-    value:           31230A90-CBAB-3CB1-8EE3-9AF48CBDC981
+    value:           B85755FF-3B47-346E-97C1-974AE14228D9
 install-name:    '/System/Library/PrivateFrameworks/InputTranscoder.framework/Versions/A/InputTranscoder'
 current-version: 55
 exports:

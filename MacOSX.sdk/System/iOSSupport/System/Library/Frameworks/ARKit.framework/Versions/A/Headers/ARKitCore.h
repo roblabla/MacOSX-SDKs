@@ -36,6 +36,7 @@
 #import <ARKit/ARPlaneGeometry.h>
 #import <ARKit/ARGeoAnchor.h>
 #import <ARKit/ARGeoTrackingTypes.h>
+#import <ARKit/ARAppClipCodeAnchor.h>
 
 
 

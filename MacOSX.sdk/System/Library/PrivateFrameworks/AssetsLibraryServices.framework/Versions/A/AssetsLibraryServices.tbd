@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9BB0E603-FC9E-361E-AF1A-95B0F1EB673B
+    value:           5B2B8B91-8AC5-3921-B05F-410817CF3AC5
   - target:          x86_64-maccatalyst
-    value:           9BB0E603-FC9E-361E-AF1A-95B0F1EB673B
+    value:           5B2B8B91-8AC5-3921-B05F-410817CF3AC5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5F702883-77B1-3526-89F4-02F44D5FB609
+    value:           63A92095-A056-34D7-B3F0-73BD37EAFE74
   - target:          arm64e-maccatalyst
-    value:           5F702883-77B1-3526-89F4-02F44D5FB609
+    value:           63A92095-A056-34D7-B3F0-73BD37EAFE74
 install-name:    '/System/Library/PrivateFrameworks/AssetsLibraryServices.framework/Versions/A/AssetsLibraryServices'
-current-version: 311.0.120
+current-version: 321.0.102
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -308,13 +308,13 @@ exports:
                        _PLScaleDimensionsForThumbnailCore, _PLScaleDimensionsToShortSide, 
                        _PLScaledSizeWithinSizeCore, _PLSearchDatabaseDirectoryName, 
                        _PLSemanticDevelopmentProxyFileSuffix, _PLSendCoreAnalyticEvent, 
-                       _PLServicesLocalizedFrameworkString, _PLServicesLocalizedFrameworkStringForAssetsd, 
-                       _PLSetIsAssetsdProxyService, _PLSetIsSuppressingLogsForUnitTesting, 
-                       _PLSetSystemLibraryAccessProhibited, _PLSharedCountFormatter, 
-                       _PLShouldPreventAutomaticLimitedAccessAlert, _PLSimulateCrash, 
-                       _PLSingleQueryReadFrom, _PLSizeFromCGSize, _PLSizeMake, _PLSleepUntilNotification, 
-                       _PLSpatialOverCaptureFileSuffix, _PLSplitToCGRectFromInt64, 
-                       _PLSplitToDoubleFromInt64, _PLStringFromDesignatedRequirementData, 
+                       _PLServicesLinearDNGLocalizedFrameworkString, _PLServicesLocalizedFrameworkString, 
+                       _PLServicesLocalizedFrameworkStringForAssetsd, _PLSetIsAssetsdProxyService, 
+                       _PLSetIsSuppressingLogsForUnitTesting, _PLSetSystemLibraryAccessProhibited, 
+                       _PLSharedCountFormatter, _PLShouldPreventAutomaticLimitedAccessAlert, 
+                       _PLSimulateCrash, _PLSingleQueryReadFrom, _PLSizeFromCGSize, 
+                       _PLSizeMake, _PLSleepUntilNotification, _PLSpatialOverCaptureFileSuffix, 
+                       _PLSplitToCGRectFromInt64, _PLSplitToDoubleFromInt64, _PLStringFromDesignatedRequirementData, 
                        _PLStringFromLibraryServicesState, _PLStringFromPLPhotoLibraryCacheSubPathType, 
                        _PLStringFromPLPhotoLibraryExternalPathType, _PLStringFromPLPhotoLibrarySubPathLeafType, 
                        _PLStringFromPLPhotoLibrarySubPathType, _PLStringFromPLQueryComparatorType, 

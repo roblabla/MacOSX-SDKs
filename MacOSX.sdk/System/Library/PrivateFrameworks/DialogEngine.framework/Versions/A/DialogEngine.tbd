@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E0E60123-9BC2-3A67-80E4-D6AEA871C134
+    value:           22DD132A-557C-3C99-992C-E9E108AF3F62
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D5149C61-619A-338F-A861-9EAE1774DDC4
+    value:           0577296E-A618-3135-A8AC-DB1B05571BFA
 install-name:    '/System/Library/PrivateFrameworks/DialogEngine.framework/Versions/A/DialogEngine'
-current-version: 20109
+current-version: 20202
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTIN4siri12dialogengine10ArrayValueE, __ZTIN4siri12dialogengine11DoubleValueE, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E9EE31A4-0ED0-300F-A3FA-40094947968A
+    value:           9EAEF19A-4167-3914-A9A8-25C36E586550
   - target:          x86_64-maccatalyst
-    value:           E9EE31A4-0ED0-300F-A3FA-40094947968A
+    value:           9EAEF19A-4167-3914-A9A8-25C36E586550
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4A59D7A5-1418-30EE-ABAA-AD9F43A68B2D
+    value:           6278D5AA-C6CD-3261-A394-F299CB82588B
   - target:          arm64e-maccatalyst
-    value:           4A59D7A5-1418-30EE-ABAA-AD9F43A68B2D
+    value:           6278D5AA-C6CD-3261-A394-F299CB82588B
 install-name:    '/System/Library/PrivateFrameworks/FrontBoardServices.framework/Versions/A/FrontBoardServices'
 current-version: 0
 reexported-libraries:
@@ -185,21 +185,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           81B1F2D5-2E8F-3D20-8260-F535B41C3397
+    value:           38C24B3A-8226-3FD5-8C28-B11D02747B56
   - target:          x86_64-maccatalyst
-    value:           81B1F2D5-2E8F-3D20-8260-F535B41C3397
+    value:           38C24B3A-8226-3FD5-8C28-B11D02747B56
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C67D0985-8407-345F-9BE4-F8FE28CF811D
+    value:           7A3F1C5D-442D-35AB-8B63-D13EC7638F1A
   - target:          arm64e-maccatalyst
-    value:           C67D0985-8407-345F-9BE4-F8FE28CF811D
+    value:           7A3F1C5D-442D-35AB-8B63-D13EC7638F1A
 install-name:    '/System/Library/PrivateFrameworks/BaseBoard.framework/Versions/A/BaseBoard'
 current-version: 0
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _BSAbsoluteTimeFromMachTime, _BSActionClearResponseListenerWithToken, 
                        _BSActionCreateResponseListenerWithHandler, _BSActionErrorDomain, 
@@ -356,21 +356,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A9AFA1BC-0CAF-3BE4-9EF5-6F4E75915BE4
+    value:           87D88A0A-A43D-301B-9393-D06E971BAEDF
   - target:          x86_64-maccatalyst
-    value:           A9AFA1BC-0CAF-3BE4-9EF5-6F4E75915BE4
+    value:           87D88A0A-A43D-301B-9393-D06E971BAEDF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           77935D21-1DD3-3B90-A2CB-C94B4F6F94E4
+    value:           7C4352EB-FF9D-3E3D-BC0F-EC1A4C7FEDB6
   - target:          arm64e-maccatalyst
-    value:           77935D21-1DD3-3B90-A2CB-C94B4F6F94E4
+    value:           7C4352EB-FF9D-3E3D-BC0F-EC1A4C7FEDB6
 install-name:    '/System/Library/PrivateFrameworks/BoardServices.framework/Versions/A/BoardServices'
 current-version: 0
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     objc-classes:    [ BSMutableServiceInterface, BSServiceConnection, BSServiceConnectionEndpoint, 
                        BSServiceConnectionEndpointInjector, BSServiceConnectionEndpointMonitor, 

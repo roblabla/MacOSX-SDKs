@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           779D9628-C2F9-3175-838B-EE3916894BEC
+    value:           8302F4DE-34E0-3FD4-93F2-2FF22A937F39
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3B6548EC-4CD9-30B0-9A2F-EE0CB52B9A65
+    value:           74A714E4-0D6E-3EEF-82C1-18F769C62452
 install-name:    '/System/Library/PrivateFrameworks/SiriDialogEngine.framework/Versions/A/SiriDialogEngine'
 swift-abi-version: 7
 exports:

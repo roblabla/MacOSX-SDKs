@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           532E82DA-547C-3A0A-AB4B-B2F60E473CF2
+    value:           35AD02CD-7223-3923-BC84-2F894DBBDE97
   - target:          x86_64-maccatalyst
-    value:           532E82DA-547C-3A0A-AB4B-B2F60E473CF2
+    value:           35AD02CD-7223-3923-BC84-2F894DBBDE97
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           07C90FDE-F226-3143-8678-A64F455296C3
+    value:           04DEDA34-4D29-3133-91D4-7DB7332068CE
   - target:          arm64e-maccatalyst
-    value:           07C90FDE-F226-3143-8678-A64F455296C3
+    value:           04DEDA34-4D29-3133-91D4-7DB7332068CE
 install-name:    '/usr/lib/swift/libswiftos.dylib'
 current-version: 1000.40.3
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftos.dylib', '$ld$install_name$os10.11$@rpath/libswiftos.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftos.dylib', '$ld$install_name$os10.13$@rpath/libswiftos.dylib', 

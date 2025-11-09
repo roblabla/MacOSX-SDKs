@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BE837402-867F-3BAE-BFF2-38A89EEF3058
+    value:           2D82071D-495C-3E80-BF3C-CB181FECB500
   - target:          x86_64-maccatalyst
-    value:           BE837402-867F-3BAE-BFF2-38A89EEF3058
+    value:           2D82071D-495C-3E80-BF3C-CB181FECB500
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           28A93BBC-7F2C-323D-9418-326581DF3DC6
+    value:           485D0132-ADEA-32D6-9338-7135287DA552
   - target:          arm64e-maccatalyst
-    value:           28A93BBC-7F2C-323D-9418-326581DF3DC6
+    value:           485D0132-ADEA-32D6-9338-7135287DA552
 install-name:    '/System/Library/Frameworks/CloudKit.framework/Versions/A/CloudKit'
 current-version: 962
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CKAPSMachServiceConnectionDidChangeConnectedStatusNotification, 
                        _CKAPSMachServiceConnectionDidChangeConnectedStatusNotificationConnectedUserInfoKey, 

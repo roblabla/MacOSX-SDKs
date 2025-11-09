@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           50655A34-39E1-3DA6-A2E9-2261689207DC
+    value:           C2D99AC0-284E-3E1D-B540-6837CD23E21B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           506382E5-5A22-3275-9A8F-EE102B03EFFD
+    value:           DAC1B713-E9AB-350C-B47E-2FD554116437
 install-name:    '/System/Library/PrivateFrameworks/CloudFamilyRestrictions.framework/Versions/A/CloudFamilyRestrictions'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

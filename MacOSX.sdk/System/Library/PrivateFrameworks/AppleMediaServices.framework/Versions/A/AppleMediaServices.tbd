@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D9753EB7-649B-3C61-8EF6-80F2AA3C7BC7
+    value:           40D647FE-1D02-3F94-B49C-F5BBA2E87D35
   - target:          x86_64-maccatalyst
-    value:           D9753EB7-649B-3C61-8EF6-80F2AA3C7BC7
+    value:           40D647FE-1D02-3F94-B49C-F5BBA2E87D35
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7199CA21-E8BF-3A18-8F52-8A9DAD505E95
+    value:           F764C13D-F085-3DE2-B73E-DB139C7A93FC
   - target:          arm64e-maccatalyst
-    value:           7199CA21-E8BF-3A18-8F52-8A9DAD505E95
+    value:           F764C13D-F085-3DE2-B73E-DB139C7A93FC
 install-name:    '/System/Library/PrivateFrameworks/AppleMediaServices.framework/Versions/A/AppleMediaServices'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -168,9 +168,10 @@ exports:
                        AMSAuthenticateResult, AMSAuthenticateTask, AMSAutomaticDownloadKindsFetchTask, 
                        AMSAutomaticDownloadKindsResult, AMSAutomaticDownloadKindsSetTask, 
                        AMSBag, AMSBagKeySet, AMSBagValue, AMSBinaryPromise, AMSBiometrics, 
-                       AMSBiometricsDisableTask, AMSBiometricsSecurityService, AMSBiometricsTokenUpdateTask, 
-                       AMSBuyParams, AMSCardAuthorizationTask, AMSCardEnrollment, 
-                       AMSCardEnrollmentEligibilityTask, AMSCardEnrollmentPaymentSessionTask, 
+                       AMSBiometricsDisableTask, AMSBiometricsSecurityService, AMSBiometricsSignatureRequest, 
+                       AMSBiometricsSignatureResult, AMSBiometricsSignatureTask, 
+                       AMSBiometricsTokenUpdateTask, AMSBuyParams, AMSCardAuthorizationTask, 
+                       AMSCardEnrollment, AMSCardEnrollmentEligibilityTask, AMSCardEnrollmentPaymentSessionTask, 
                        AMSCardEnrollmentVerificationTask, AMSCardMetadataRegistrationResult, 
                        AMSCardRegistrationResult, AMSCardRegistrationTask, AMSCommandLineDialogTask, 
                        AMSContentRating, AMSDaemonConnectionInterface, AMSData, AMSDataMigrator, 
@@ -205,9 +206,10 @@ exports:
                        AMSPurchaseResult, AMSPurchaseTask, AMSPushConfiguration, 
                        AMSPushHandler, AMSPushNotificationService, AMSPushPayload, 
                        AMSRatingSystem, AMSRatingsProviderResult, AMSRatingsProviderTask, 
-                       AMSRatingsStoreFront, AMSRemoteNotification, AMSRestrictions, 
-                       AMSSetDemoAccountTask, AMSSignInContext, AMSSignOutTask, AMSSnapshotBag, 
-                       AMSSnapshotBagBuilder, AMSSubscriptionEntitlement, AMSSubscriptionEntitlementsResult, 
+                       AMSRatingsStoreFront, AMSRatingsStorefrontResult, AMSRatingsStorefrontTask, 
+                       AMSRemoteNotification, AMSRestrictions, AMSSetDemoAccountTask, 
+                       AMSSignInContext, AMSSignOutTask, AMSSnapshotBag, AMSSnapshotBagBuilder, 
+                       AMSSubscriptionEntitlement, AMSSubscriptionEntitlementsResult, 
                        AMSSubscriptionEntitlementsTask, AMSSyncPasswordSettingsResult, 
                        AMSSyncPasswordSettingsTask, AMSSystemAlertDialogTask, AMSTask, 
                        AMSThreadSafeObject, AMSURLAction, AMSURLParser, AMSURLProtocolHandler, 

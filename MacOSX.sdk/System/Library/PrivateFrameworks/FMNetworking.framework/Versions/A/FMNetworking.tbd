@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           12698BED-4B30-3559-A343-8630035D9EAB
+    value:           4BC8A306-5FA3-3C75-90C4-A07225ABB591
   - target:          x86_64-maccatalyst
-    value:           12698BED-4B30-3559-A343-8630035D9EAB
+    value:           4BC8A306-5FA3-3C75-90C4-A07225ABB591
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3D66D793-64D0-31D8-B7B5-B349CC37D09F
+    value:           68997B30-92D1-3EA0-A589-621AA74CA46B
   - target:          arm64e-maccatalyst
-    value:           3D66D793-64D0-31D8-B7B5-B349CC37D09F
+    value:           68997B30-92D1-3EA0-A589-621AA74CA46B
 install-name:    '/System/Library/PrivateFrameworks/FMNetworking.framework/Versions/A/FMNetworking'
 swift-abi-version: 7
 allowable-clients:
@@ -66,7 +66,9 @@ exports:
                        '_$s12FMNetworking13FMNHttpClientCACycfc', '_$s12FMNetworking13FMNHttpClientCMa', 
                        '_$s12FMNetworking13FMNHttpClientCMn', '_$s12FMNetworking13FMNHttpClientCMo', 
                        '_$s12FMNetworking13FMNHttpClientCMu', '_$s12FMNetworking13FMNHttpClientCN', 
-                       '_$s12FMNetworking13FMNHttpClientCfD', '_$s12FMNetworking14FMNAccountTypeO11pairingLockyA2CmFWC', 
+                       '_$s12FMNetworking13FMNHttpClientCfD', '_$s12FMNetworking13HeaderKeyNameO13authorizationSSvgZ', 
+                       '_$s12FMNetworking13HeaderKeyNameOMa', '_$s12FMNetworking13HeaderKeyNameOMn', 
+                       '_$s12FMNetworking13HeaderKeyNameON', '_$s12FMNetworking14FMNAccountTypeO11pairingLockyA2CmFWC', 
                        '_$s12FMNetworking14FMNAccountTypeO11searchPartyyA2CmFWC', 
                        '_$s12FMNetworking14FMNAccountTypeO20fmipPlaceholderForSPyA2CmFWC', 
                        '_$s12FMNetworking14FMNAccountTypeO3fmfyA2CmFWC', '_$s12FMNetworking14FMNAccountTypeO4fmipyA2CmFWC', 
@@ -443,10 +445,10 @@ exports:
                        '_$s12FMNetworking30FMNServerInteractionControllerC0bC5ErrorOs0E0AAMc', 
                        '_$s12FMNetworking30FMNServerInteractionControllerC11retryUpload19consolidatedContent19redirectedHostStore15responseHandler0E5CountyAA23FMNRequestConfigurating_p_AA07FMNFileF13Representable_pt_AA011FMNRedirectjK0VSgy8SPShared12LegacyResultOy10Foundation4DataV4data_Si10statusCodeSDyS2SG0L7HeaderstGcSitFTj', 
                        '_$s12FMNetworking30FMNServerInteractionControllerC11retryUpload19consolidatedContent19redirectedHostStore15responseHandler0E5CountyAA23FMNRequestConfigurating_p_AA07FMNFileF13Representable_pt_AA011FMNRedirectjK0VSgy8SPShared12LegacyResultOy10Foundation4DataV4data_Si10statusCodeSDyS2SG0L7HeaderstGcSitFTq', 
+                       '_$s12FMNetworking30FMNServerInteractionControllerC11sendRequest8endpoint7content6source10credential15responseHandleryAA23FMNRequestConfigurating_p_AA0M20ContentRepresentable_pSSAA27FMNAuthenticationCredentialCSgy8SPShared12LegacyResultOy10Foundation4DataV4data_Si10statusCodeSDyS2SG0K7HeaderstGctFTj', 
+                       '_$s12FMNetworking30FMNServerInteractionControllerC11sendRequest8endpoint7content6source10credential15responseHandleryAA23FMNRequestConfigurating_p_AA0M20ContentRepresentable_pSSAA27FMNAuthenticationCredentialCSgy8SPShared12LegacyResultOy10Foundation4DataV4data_Si10statusCodeSDyS2SG0K7HeaderstGctFTq', 
                        '_$s12FMNetworking30FMNServerInteractionControllerC11sendRequest8endpoint7content6source15responseHandleryAA23FMNRequestConfigurating_p_AA0L20ContentRepresentable_pSSy10Foundation4DataVSg_s5Error_pSgtctFTj', 
                        '_$s12FMNetworking30FMNServerInteractionControllerC11sendRequest8endpoint7content6source15responseHandleryAA23FMNRequestConfigurating_p_AA0L20ContentRepresentable_pSSy10Foundation4DataVSg_s5Error_pSgtctFTq', 
-                       '_$s12FMNetworking30FMNServerInteractionControllerC11sendRequest8endpoint7content6source15responseHandleryAA23FMNRequestConfigurating_p_AA0L20ContentRepresentable_pSSy8SPShared12LegacyResultOy10Foundation4DataV4data_Si10statusCodeSDyS2SG0J7HeaderstGctFTj', 
-                       '_$s12FMNetworking30FMNServerInteractionControllerC11sendRequest8endpoint7content6source15responseHandleryAA23FMNRequestConfigurating_p_AA0L20ContentRepresentable_pSSy8SPShared12LegacyResultOy10Foundation4DataV4data_Si10statusCodeSDyS2SG0J7HeaderstGctFTq', 
                        '_$s12FMNetworking30FMNServerInteractionControllerC12retryRequest19consolidatedContent19redirectedHostStore15responseHandler0E5CountyAA23FMNRequestConfigurating_p_AA0oH13Representable_pt_AA011FMNRedirectjK0VSgy10Foundation4DataVSg_s5Error_pSgtcSitFTj', 
                        '_$s12FMNetworking30FMNServerInteractionControllerC12retryRequest19consolidatedContent19redirectedHostStore15responseHandler0E5CountyAA23FMNRequestConfigurating_p_AA0oH13Representable_pt_AA011FMNRedirectjK0VSgy10Foundation4DataVSg_s5Error_pSgtcSitFTq', 
                        '_$s12FMNetworking30FMNServerInteractionControllerC12retryRequest19consolidatedContent19redirectedHostStore15responseHandler0E5CountyAA23FMNRequestConfigurating_p_AA0oH13Representable_pt_AA011FMNRedirectjK0VSgy8SPShared12LegacyResultOy10Foundation4DataV4data_Si10statusCodeSDyS2SG0L7HeaderstGcSitFTj', 

@@ -141,9 +141,13 @@ HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierIrregularHeartR
 HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierAudioExposureEvent                                                         // HKCategoryValueAudioExposureEvent
     API_DEPRECATED_WITH_REPLACEMENT("HKCategoryTypeIdentifierEnvironmentalAudioExposureEvent", ios(13.0, 14.0), watchos(6.0, 7.0));
 HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierToothbrushingEvent API_AVAILABLE(ios(13.0), watchos(6.0));                 // HKCategoryValue
+HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierPregnancy API_AVAILABLE(ios(14.3), watchos(7.2));                          // HKCategoryValue
+HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierLactation API_AVAILABLE(ios(14.3), watchos(7.2));                          // HKCategoryValue
+HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierContraceptive API_AVAILABLE(ios(14.3), watchos(7.2));                      // HKCategoryValueContraceptive
 HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierEnvironmentalAudioExposureEvent API_AVAILABLE(ios(14.0), watchos(7.0));    // HKCategoryValueEnvironmentalAudioExposureEvent
 HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierHeadphoneAudioExposureEvent API_AVAILABLE(ios(14.2), watchos(7.1));        // HKCategoryValueHeadphoneAudioExposureEvent
 HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierHandwashingEvent API_AVAILABLE(ios(14.0), watchos(7.0));                   // HKCategoryValue
+HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierLowCardioFitnessEvent API_AVAILABLE(ios(14.3), watchos(7.2));
 
 // Symptoms
 HK_EXTERN HKCategoryTypeIdentifier const HKCategoryTypeIdentifierAbdominalCramps API_AVAILABLE(ios(13.6), watchos(7.0));                    // HKCategoryValueSeverity

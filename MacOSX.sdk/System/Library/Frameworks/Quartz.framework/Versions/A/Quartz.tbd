@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1C1AF8C9-8246-3FEA-BE84-F865FE464DF7
+    value:           F7A81E93-FDF9-3DAC-80F9-AF4D5887B2E0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8D001121-2EEA-3936-BA6A-97A2ADEF61EB
+    value:           D318790D-2F44-322B-854D-7498C548C10B
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Quartz'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -22,14 +22,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A0D7956B-92C0-3263-A3E6-7D0A5D96501B
+    value:           0FB1CD82-6DCD-333B-831E-9E81A4A14C7B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6664204F-BF89-3A39-ABCA-24E6282A523A
+    value:           011E9F55-7937-302D-85C3-C9A71220AE22
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/ImageKit.framework/Versions/A/ImageKit'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _IKAnimationDelayKey, _IKAnimationDurationKey, _IKAnimationFrameRateKey, 
                        _IKAnimationVelocityCurveKey, _IKBestRepresentationFromNSImageForPhysicalSize, 
                        _IKCGBitmapContextRefFromCGImageRef, _IKCGBitmapContextRefFromData, 
@@ -241,11 +241,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5FB74BE8-13D8-3BD6-81AA-40BFF638B6C8
+    value:           CECFD875-ECE5-35A1-B97A-C493F183639C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5A54900E-2FDE-35A2-A744-6138AB596EDC
+    value:           0D79A00C-8828-3FC7-ADA6-F20E8936634A
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/QuartzComposer.framework/Versions/A/QuartzComposer'
 current-version: 168
 exports:
@@ -3146,14 +3146,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8B41FDB9-2947-3413-80AA-515E33B5A27B
+    value:           9C2F0204-D844-3C03-AEE2-1EC2DA58ACFD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2112F274-A7E8-3875-B2E5-71F90A3423AE
+    value:           06D7A5DE-B270-3C7D-BA51-4A8D1A3B19BA
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/QuartzFilters.framework/Versions/A/QuartzFilters'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _QuartzFilterApplyToContext, _QuartzFilterCopyContextDict, 
                        _QuartzFilterCreateHostMatchingFilter, _QuartzFilterCreateImageCoverter, 
                        _QuartzFilterCreateWithOutputIntents, _QuartzFilterCreateWithURL, 
@@ -3233,11 +3233,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4C24C48E-1111-3B8B-856F-E45F652B9E95
+    value:           559B0828-7637-319F-9856-3F336376FAA0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           56A4871C-85B8-33CB-9076-B4A6FDFC481B
+    value:           38EC94FC-33E1-3E06-A61E-B49E5349247F
 install-name:    '/System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/QuickLookUI.framework/Versions/A/QuickLookUI'
 current-version: 0
 reexported-libraries:

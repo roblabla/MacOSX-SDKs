@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           07026D81-9764-312B-AF21-7FB4DA1FB7B1
+    value:           3B95F319-D627-3A9B-BD31-2067B57CC40A
   - target:          x86_64-maccatalyst
-    value:           07026D81-9764-312B-AF21-7FB4DA1FB7B1
+    value:           3B95F319-D627-3A9B-BD31-2067B57CC40A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8717C625-FC4D-3DAC-9EDC-A198C5FAF666
+    value:           1D83B723-DFE4-3A46-B37B-46AAC504F7D0
   - target:          arm64e-maccatalyst
-    value:           8717C625-FC4D-3DAC-9EDC-A198C5FAF666
+    value:           1D83B723-DFE4-3A46-B37B-46AAC504F7D0
 install-name:    '/System/Library/Frameworks/CoreSpotlight.framework/Versions/A/CoreSpotlight'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CSAccountTypeExchangeActiveSync, _CSAccountTypeExchangeWebServices, 
                        _CSAccountTypeIMAP, _CSAccountTypeLocal, _CSAccountTypePOP, 
@@ -216,6 +216,6 @@ exports:
                        _MDImportExtensionManager, _MDIndexExtension, _MDIndexExtensionLoader, 
                        _MDIndexExtensionManager, _MDSearchableIndex, _MDSearchableItem, 
                        _MDUserAction ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _identifierToTagAndOid ]
 ...

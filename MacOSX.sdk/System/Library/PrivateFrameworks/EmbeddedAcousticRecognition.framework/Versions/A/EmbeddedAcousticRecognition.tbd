@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           19F4B384-47F4-3A4E-A45E-26858B9F5112
+    value:           4B3B8AE6-825D-3112-A6E1-4F9A961488EB
   - target:          x86_64-maccatalyst
-    value:           19F4B384-47F4-3A4E-A45E-26858B9F5112
+    value:           4B3B8AE6-825D-3112-A6E1-4F9A961488EB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A08A8CDE-668F-3708-8D58-EEF6E2CE9403
+    value:           D9DD8B0E-9C98-3B97-BB4E-B6B6F291A371
   - target:          arm64e-maccatalyst
-    value:           A08A8CDE-668F-3708-8D58-EEF6E2CE9403
+    value:           D9DD8B0E-9C98-3B97-BB4E-B6B6F291A371
 install-name:    '/System/Library/PrivateFrameworks/EmbeddedAcousticRecognition.framework/Versions/A/EmbeddedAcousticRecognition'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -65,6 +65,7 @@ exports:
                        _EARLanguageDetectorResult, _EARLanguageModel, _EARLatticeMitigatorResult, 
                        _EARLmData, _EARLmEvaluator, _EARLmHandle, _EARLmLoader, _EARLmModel, 
                        _EARNnetUtil, _EAROovToken, _EARPlsParser, _EARResultCombiner, 
+                       _EARSpeakerCodeInfo, _EARSpeakerCodeReader, _EARSpeakerCodeWriter, 
                        _EARSpeechModelInfo, _EARSpeechRecognition, _EARSpeechRecognitionAudioBuffer, 
                        _EARSpeechRecognitionResult, _EARSpeechRecognitionResultPackage, 
                        _EARSpeechRecognitionToken, _EARSpeechRecognizer, _EARSyncResultStreamHelper, 

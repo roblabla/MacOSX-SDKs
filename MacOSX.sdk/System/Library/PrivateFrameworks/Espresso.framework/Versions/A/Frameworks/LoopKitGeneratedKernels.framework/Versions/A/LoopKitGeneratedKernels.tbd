@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1818724A-AEE8-355D-BBCC-3E542D61544A
+    value:           E3B3D3EE-BB8D-30A4-B026-CEC7DE4EC83E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           13148113-4BE5-3BE1-94C8-23EC46FB1C09
+    value:           56FB9D31-3B19-3DA5-B532-2127C866964E
 install-name:    '@rpath/LoopKitGeneratedKernels.framework/Versions/A/LoopKitGeneratedKernels'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

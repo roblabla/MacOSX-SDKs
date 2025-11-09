@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C2A7C5BC-A29F-3EA5-81B2-DC4E93D2A556
+    value:           66626D97-2E9F-3C38-9628-623B3609B303
   - target:          x86_64-maccatalyst
-    value:           C2A7C5BC-A29F-3EA5-81B2-DC4E93D2A556
+    value:           66626D97-2E9F-3C38-9628-623B3609B303
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2AAA78D6-B730-3097-8AFC-76865DA5A20E
+    value:           881D6D19-67F7-3E5F-AD45-0FEEA21EB7B7
   - target:          arm64e-maccatalyst
-    value:           2AAA78D6-B730-3097-8AFC-76865DA5A20E
+    value:           881D6D19-67F7-3E5F-AD45-0FEEA21EB7B7
 install-name:    '/System/Library/PrivateFrameworks/CorePrediction.framework/Versions/A/CorePrediction'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BD281DE6-7725-38AF-9F24-8526C6A38954
+    value:           289626CC-15CD-356C-9E5E-BD5A8F992962
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2F66C049-971D-3A91-86BC-2E952122BCF2
+    value:           273F9370-0579-3345-BA8B-4D3D78707E82
 install-name:    '/System/Library/PrivateFrameworks/CalendarNotification.framework/Versions/A/CalendarNotification'
 current-version: 0
 exports:

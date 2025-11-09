@@ -5,7 +5,7 @@ uuids:
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           899D0EB3-4A01-33E6-A631-E605459C1CB7
+    value:           07C48BF4-52DD-3785-B7AE-24F6E11EBAE7
 install-name:    '/System/Library/PrivateFrameworks/CPMS.framework/Versions/A/CPMS'
 exports:
   - targets:         [ arm64e-macos, arm64-macos ]

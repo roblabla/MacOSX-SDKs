@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CD4D7B64-E8DC-3B32-954C-24EFC3397556
+    value:           9E4E89CD-AFD8-373E-AF85-5D8E22F4EA6F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           58070E73-A0F3-3454-A93D-A362C9EB9C2E
+    value:           B9C734A8-394F-33A8-91C5-932203FA98E7
 install-name:    '/System/Library/Frameworks/NetworkingDriverKit.framework/Versions/A/NetworkingDriverKit'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _IOUserNetworkEthernet_Class, _IOUserNetworkPacketBufferPool_Class, 
                        _IOUserNetworkPacketQueue_Class, _IOUserNetworkPacket_Class, 
                        _IOUserNetworkRxCompletionQueue_Class, _IOUserNetworkRxSubmissionQueue_Class, 
@@ -38,6 +38,7 @@ exports:
                        __ZN21IOUserNetworkEthernet20ReportNicProxyLimitsE22nicproxy_limits_info_sPFiP15OSMetaClassBase5IORPCE, 
                        __ZN21IOUserNetworkEthernet20hwConfigNicProxyDataEP14offload_info_s, 
                        __ZN21IOUserNetworkEthernet21SetMulticastAddressesEPK23IOUserNetworkMACAddressjPFiP15OSMetaClassBase5IORPCE, 
+                       __ZN21IOUserNetworkEthernet21setMulticastAddressesEPK10ether_addrj, 
                        __ZN21IOUserNetworkEthernet22SelectMediaType_InvokeE5IORPCP15OSMetaClassBasePFiS2_jE, 
                        __ZN21IOUserNetworkEthernet22SetSoftwareVlanSupportEb, __ZN21IOUserNetworkEthernet22_SetMulticastAddressesEP18IOMemoryDescriptorPFiP15OSMetaClassBase5IORPCE, 
                        __ZN21IOUserNetworkEthernet23ReportLinkStatus_InvokeE5IORPCP15OSMetaClassBasePFiS2_jjE, 
@@ -192,9 +193,10 @@ exports:
                        __ZThn40_NK19IOUserNetworkPacket22getMemorySegmentOffsetEv, 
                        __ZThn40_NK19IOUserNetworkPacket23getDataIOVirtualAddressEv, 
                        __ZThn40_NK19IOUserNetworkPacket6_PrintEy, __ZThn48_N21IOUserNetworkEthernet20hwConfigNicProxyDataEP14offload_info_s, 
+                       __ZThn48_N21IOUserNetworkEthernet21setMulticastAddressesEPK10ether_addrj, 
                        __ZThn48_N21IOUserNetworkEthernet25RegisterEthernetInterfaceE23IOUserNetworkMACAddressP29IOUserNetworkPacketBufferPoolPP24IOUserNetworkPacketQueuej, 
                        __ZThn48_N21IOUserNetworkEthernet25ReportAvailableMediaTypesEPKjj, 
-                       _gIOUserNetworkEthernetMetaClass, _gIOUserNetworkPacketBufferPoolMetaClass, 
+                       _gIOSkywalkDebugFlags, _gIOUserNetworkEthernetMetaClass, _gIOUserNetworkPacketBufferPoolMetaClass, 
                        _gIOUserNetworkPacketMetaClass, _gIOUserNetworkPacketQueueMetaClass, 
                        _gIOUserNetworkRxCompletionQueueMetaClass, _gIOUserNetworkRxSubmissionQueueMetaClass, 
                        _gIOUserNetworkTxCompletionQueueMetaClass, _gIOUserNetworkTxSubmissionQueueMetaClass, 

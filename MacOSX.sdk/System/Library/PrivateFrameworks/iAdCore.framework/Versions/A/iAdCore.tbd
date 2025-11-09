@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5C773E84-BF4C-3233-B30F-623427D2B69D
+    value:           91AB8A68-231E-3C83-9AB7-C48867DE736D
   - target:          x86_64-maccatalyst
-    value:           5C773E84-BF4C-3233-B30F-623427D2B69D
+    value:           91AB8A68-231E-3C83-9AB7-C48867DE736D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           44766A79-F33D-3BD6-834C-F7E366C25CD5
+    value:           55C91E47-E217-33ED-BA9E-0952FD2A1839
   - target:          arm64e-maccatalyst
-    value:           44766A79-F33D-3BD6-834C-F7E366C25CD5
+    value:           55C91E47-E217-33ED-BA9E-0952FD2A1839
 install-name:    '/System/Library/PrivateFrameworks/iAdCore.framework/Versions/A/iAdCore'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]

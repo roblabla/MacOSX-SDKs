@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4C7A6536-0D71-3344-8D94-A30E42898A1F
+    value:           54E366D5-42CF-348F-B368-629D216084DE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           31BD8EE8-5F69-3EDB-A4FD-6AB65EDECE76
+    value:           74B4AB42-BF99-3932-84C8-EE9BA5B39A66
 install-name:    '/System/Library/PrivateFrameworks/InstallCoordination.framework/Versions/A/InstallCoordination'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

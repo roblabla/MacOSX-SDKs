@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5B717D16-CAB6-3850-8804-2E5058CFCB14
+    value:           24F59C67-05E5-3DB5-9A14-77701F4375C4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           348E8A17-FF9A-31B0-A593-F39149E26BF1
+    value:           4DADA092-84AC-36A9-99CE-361E1311AB32
 install-name:    '/System/Library/Frameworks/Hypervisor.framework/Versions/A/Hypervisor'
 exports:
   - targets:         [ x86_64-macos ]
@@ -22,7 +22,7 @@ exports:
                        _hv_vmx_vcpu_read_shadow_vmcs, _hv_vmx_vcpu_read_vmcs, _hv_vmx_vcpu_set_apic_address, 
                        _hv_vmx_vcpu_set_shadow_access, _hv_vmx_vcpu_write_shadow_vmcs, 
                        _hv_vmx_vcpu_write_vmcs ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _hv_vcpu_create, _hv_vcpu_destroy, _hv_vcpu_get_exec_time, 
                        _hv_vcpu_run, _hv_vm_create, _hv_vm_destroy, _hv_vm_map, _hv_vm_protect, 
                        _hv_vm_unmap ]

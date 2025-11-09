@@ -4,23 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0A7130E7-2064-334B-BFDD-08FC3809B1F6
+    value:           53B9ED96-D941-3172-8D14-2E2CD0D721C4
   - target:          x86_64-maccatalyst
-    value:           0A7130E7-2064-334B-BFDD-08FC3809B1F6
+    value:           53B9ED96-D941-3172-8D14-2E2CD0D721C4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FD7FC494-F126-3BCF-9225-1A9FA7AFDA4E
+    value:           EDAE8E78-86D9-329F-8A90-445FB49A1C7C
   - target:          arm64e-maccatalyst
-    value:           FD7FC494-F126-3BCF-9225-1A9FA7AFDA4E
+    value:           EDAE8E78-86D9-329F-8A90-445FB49A1C7C
 install-name:    '/System/Library/Frameworks/Security.framework/Versions/A/Security'
-current-version: 59754.41.1
+current-version: 59754.60.13
 exports:
-  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
-    symbols:         [ _SecKeyRawSign, _SecKeyRawVerify ]
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _ApplyScopeDictionaryForID, _ApplyScopeListForID, _AuthorizationCopyInfo, 
                        _AuthorizationCopyPreloginUserDatabase, _AuthorizationCopyPrivilegedReference, 
@@ -685,20 +683,21 @@ exports:
                        _SecCodeSignerAddSignature, _SecCodeSignerAddSignatureWithErrors, 
                        _SecCodeSignerCreate, _SecCodeSignerGetTypeID, _SecCodeValidateFileResource, 
                        _SecCopyDecryptedForServer, _SecCopyEncryptedToServer, _SecCopyEncryptedToServerKey, 
-                       _SecCopyErrorMessageString, _SecCopyLastError, _SecCoreAnalyticsSendValue, 
-                       _SecCoreAnalyticsValue, _SecCreateCFErrorWithXPCObject, _SecCreateCollectTransform, 
-                       _SecCreateMaskGenerationFunctionTransform, _SecCreateRecoveryPassword, 
-                       _SecCreateSharedWebCredentialPassword, _SecCreateXPCObjectWithCFError, 
-                       _SecDERItemCopyOIDDecimalRepresentation, _SecDHComputeKey, 
-                       _SecDHCreate, _SecDHCreateFromAlgorithmId, _SecDHCreateFromParameters, 
-                       _SecDHDecodeParams, _SecDHDestroy, _SecDHEncodeParams, _SecDHGenerateKeypair, 
-                       _SecDHGetMaxKeyLength, _SecDNSIsTLD, _SecDecodeTransformCreate, 
-                       _SecDecryptTransformCreate, _SecDecryptTransformGetTypeID, 
-                       _SecDigestCreate, _SecDigestTransformCreate, _SecDigestTransformGetTypeID, 
-                       _SecDistinguishedNameCopyNormalizedContent, _SecDistinguishedNameCopyNormalizedSequence, 
-                       _SecECDoWithFullKey, _SecECDoWithPubKey, _SecECKeyCopyPublicBits, 
-                       _SecECKeyGetNamedCurve, _SecEncodeTransformCreate, _SecEncryptTransformCreate, 
-                       _SecEncryptTransformGetTypeID, _SecErrorGetOSStatus, _SecErrorIsNestedErrorCappingEnabled, 
+                       _SecCopyErrorMessageString, _SecCopyLastError, _SecCoreAnalyticsSendKernEntropyHealth, 
+                       _SecCoreAnalyticsSendValue, _SecCoreAnalyticsValue, _SecCreateCFErrorWithXPCObject, 
+                       _SecCreateCollectTransform, _SecCreateMaskGenerationFunctionTransform, 
+                       _SecCreateRecoveryPassword, _SecCreateSharedWebCredentialPassword, 
+                       _SecCreateXPCObjectWithCFError, _SecDERItemCopyOIDDecimalRepresentation, 
+                       _SecDHComputeKey, _SecDHCreate, _SecDHCreateFromAlgorithmId, 
+                       _SecDHCreateFromParameters, _SecDHDecodeParams, _SecDHDestroy, 
+                       _SecDHEncodeParams, _SecDHGenerateKeypair, _SecDHGetMaxKeyLength, 
+                       _SecDNSIsTLD, _SecDecodeTransformCreate, _SecDecryptTransformCreate, 
+                       _SecDecryptTransformGetTypeID, _SecDigestCreate, _SecDigestTransformCreate, 
+                       _SecDigestTransformGetTypeID, _SecDistinguishedNameCopyNormalizedContent, 
+                       _SecDistinguishedNameCopyNormalizedSequence, _SecECDoWithFullKey, 
+                       _SecECDoWithPubKey, _SecECKeyCopyPublicBits, _SecECKeyGetNamedCurve, 
+                       _SecEncodeTransformCreate, _SecEncryptTransformCreate, _SecEncryptTransformGetTypeID, 
+                       _SecErrorGetOSStatus, _SecErrorIsNestedErrorCappingEnabled, 
                        _SecErrorSetOverrideNestedErrorCappingIsEnabled, _SecEscrowRequestHavePrecord, 
                        _SecEscrowRequestPendingCertificate, _SecEscrowRequestPendingPasscode, 
                        _SecEscrowRequestSetupControlProtocol, _SecExternalSourceSetValue, 
@@ -1634,7 +1633,7 @@ exports:
                        SFAnalyticsMultiSampler, SFAnalyticsSQLiteStore, SFAnalyticsSampler, 
                        SFSQLite, SOSAnalytics, SOSCachedNotification, SecCoreAnalytics, 
                        SecEscrowRequest, SecKeyProxy, SecXPCHelper, SecuritydXPCClient ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CMSDecoderSetSearchKeychain, _CMSEncode, _CMSEncoderSetEncapsulatedContentType, 
                        _ConvertArrayToKeyUsage, _GKBIS_DS_Store_Present, _GKBIS_Dot_underbar_Present, 
                        _GKBIS_Num_dirs, _GKBIS_Num_files, _GKBIS_Num_localizations, 
@@ -1723,6 +1722,8 @@ exports:
                        _kSecPolicyKU_DigitalSignature, _kSecPolicyKU_EncipherOnly, 
                        _kSecPolicyKU_KeyAgreement, _kSecPolicyKU_KeyCertSign, _kSecPolicyKU_KeyEncipherment, 
                        _kSecPolicyKU_NonRepudiation, _secdebug_internal, _secdebugfunc_internal ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
+    symbols:         [ _SecKeyRawSign, _SecKeyRawVerify ]
   - targets:         [ arm64e-macos, arm64-macos ]
     symbols:         [ '_SecCertificateCopyPublicKey$LEGACYMAC', '_SecCertificateCopySerialNumber$LEGACYMAC' ]
 ...

@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A81BC3E6-B261-3FB9-8B36-AF069E82DBAC
+    value:           F4C3D15D-BEFE-37A9-A55F-2BFB16842FBE
   - target:          x86_64-maccatalyst
-    value:           A81BC3E6-B261-3FB9-8B36-AF069E82DBAC
+    value:           F4C3D15D-BEFE-37A9-A55F-2BFB16842FBE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C175581B-01CD-3F5E-B114-DD3C007008D4
+    value:           FD2E32BC-9EAA-302C-8E63-5B5E6921D4F5
   - target:          arm64e-maccatalyst
-    value:           C175581B-01CD-3F5E-B114-DD3C007008D4
+    value:           FD2E32BC-9EAA-302C-8E63-5B5E6921D4F5
 install-name:    '/System/Library/Frameworks/CoreLocation.framework/Versions/A/CoreLocation'
-current-version: 2420.8.10
+current-version: 2420.12.12
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CLAppResetChangedNotification, _CLAppStatusChangedNotification, 
                        _CLApplyArchivedAuthorizationDecisions, _CLAuthorizationStatusChangedNotification, 
@@ -76,15 +76,15 @@ exports:
                        _kCLPolygonalRegionMaxVertices, _kCLPolygonalRegionMinVertices, 
                        _kInvalidMacAddress ]
     objc-classes:    [ CLAssertion, CLBeacon, CLBeaconIdentityConstraint, CLBeaconRegion, 
-                       CLCircularRegion, CLEmergencyEnablementAssertion, CLFloor, 
-                       CLGeocoder, CLHeading, CLLocation, CLLocationManager, CLLocationManagerRoutine, 
-                       CLLocationMatchInfo, CLPlacemark, CLReductiveFilterOptions, 
-                       CLRegion, CLSimulationManager, CLStateTracker, CLVisit, _CLLSLHeading, 
-                       _CLLSLHeadingEstimation, _CLLSLHeadingSupplInfo, _CLLSLLocation, 
-                       _CLLSLLocationCoordinate, _CLLSLMapRoadSegment, _CLLocationFusionInfo, 
-                       _CLLocationGroundAltitude, _CLPlaceInference, _CLPolygonalRegion, 
-                       _CLRangingPeer, _CLRangingPeerDistance, _CLVIOEstimation, 
-                       _CLVLLocalizationResult, _CLVertex ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+                       CLCircularRegion, CLEmergencyEnablementAssertion, CLFindMyAccessoryFirmwareVersion, 
+                       CLFloor, CLGeocoder, CLHeading, CLLocation, CLLocationManager, 
+                       CLLocationManagerRoutine, CLLocationMatchInfo, CLPlacemark, 
+                       CLReductiveFilterOptions, CLRegion, CLSimulationManager, CLStateTracker, 
+                       CLVisit, _CLLSLHeading, _CLLSLHeadingEstimation, _CLLSLHeadingSupplInfo, 
+                       _CLLSLLocation, _CLLSLLocationCoordinate, _CLLSLMapRoadSegment, 
+                       _CLLocationFusionInfo, _CLLocationGroundAltitude, _CLPlaceInference, 
+                       _CLPolygonalRegion, _CLRangingPeer, _CLRangingPeerDistance, 
+                       _CLVIOEstimation, _CLVLLocalizationResult, _CLVertex ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CLAuthStatusChangedNotification, _CLDaemonShutdownNotification ]
 ...

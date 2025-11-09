@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9EAE8862-F715-3957-8D2D-DEF7B7502E8F
+    value:           204C3909-CEF3-37E2-BC2B-2E10A1DCEA12
   - target:          x86_64-maccatalyst
-    value:           9EAE8862-F715-3957-8D2D-DEF7B7502E8F
+    value:           204C3909-CEF3-37E2-BC2B-2E10A1DCEA12
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C2331CE5-D956-3201-A1DA-8EC680BD97E7
+    value:           CE177188-9719-3FAB-BDE2-0AAEA2BBB546
   - target:          arm64e-maccatalyst
-    value:           C2331CE5-D956-3201-A1DA-8EC680BD97E7
+    value:           CE177188-9719-3FAB-BDE2-0AAEA2BBB546
 install-name:    '/System/Library/PrivateFrameworks/PhysicsKit.framework/Versions/A/PhysicsKit'
 current-version: 32
 exports:

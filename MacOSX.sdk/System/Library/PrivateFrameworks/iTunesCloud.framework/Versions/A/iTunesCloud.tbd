@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           55764CD8-5A2C-39A4-906C-F26C721BDAE9
+    value:           54CF5A4F-1082-3467-A168-056431965402
   - target:          x86_64-maccatalyst
-    value:           55764CD8-5A2C-39A4-906C-F26C721BDAE9
+    value:           54CF5A4F-1082-3467-A168-056431965402
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3E51F683-0F7F-395C-B954-30E30DD70CC1
+    value:           C0BE4C69-34AD-3C32-8277-D3A4DEF26582
   - target:          arm64e-maccatalyst
-    value:           3E51F683-0F7F-395C-B954-30E30DD70CC1
+    value:           C0BE4C69-34AD-3C32-8277-D3A4DEF26582
 install-name:    '/System/Library/PrivateFrameworks/iTunesCloud.framework/Versions/A/iTunesCloud'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -84,7 +84,8 @@ exports:
                        _ICDeviceSystemReleaseTypeRestore, _ICDeviceSystemReleaseTypeVendor, 
                        _ICEnvironmentNetworkTypeIsBluetooth, _ICEnvironmentNetworkTypeIsCellular, 
                        _ICEnvironmentNetworkTypeIsWiFi, _ICEnvironmentNetworkTypeIsWifi, 
-                       _ICEnvironmentNetworkTypeIsWired, _ICErrorDomain, _ICFPStreamContextVersionWHA, 
+                       _ICEnvironmentNetworkTypeIsWired, _ICEnvironmentSignalStrengthBarsKey, 
+                       _ICEnvironmentSignalStrengthMaxBarsKey, _ICErrorDomain, _ICFPStreamContextVersionWHA, 
                        _ICFairPlayCopyKeyBagSyncData, _ICFairPlayCopyKeyBagSyncDataWithContextID, 
                        _ICFairPlayErrorDomain, _ICFairPlayGetContextIdentifier, _ICFairPlayGetContextIdentifierForFolderPath, 
                        _ICFairPlayGetHardwareInfo, _ICFairPlayGetHardwareInfoFromDeviceUDID, 
@@ -142,7 +143,8 @@ exports:
                        _ICPlayActivityControllerUserInfoKeyEndRevision, _ICPlayActivityControllerUserInfoKeyEndpointIdentifier, 
                        _ICPlayActivityControllerUserInfoKeyStartRevision, _ICPlayActivityFeedSerializationPlayEventsDictionaryKeyEvents, 
                        _ICPlayActivityFeedSerializationPlayEventsDictionaryKeyOverrideHeaders, 
-                       _ICPrivacyIdentifierAppStore, _ICPrivacyIdentifierBooks, _ICPrivacyIdentifierMusic, 
+                       _ICPrivacyIdentifierAppStore, _ICPrivacyIdentifierBooks, _ICPrivacyIdentifierFitnessPlus, 
+                       _ICPrivacyIdentifierImproveFitnessPlus, _ICPrivacyIdentifierMusic, 
                        _ICPrivacyIdentifierPodcasts, _ICPrivacyIdentifierTV, _ICPushNotificationMessageKeyAPSPayload, 
                        _ICPushNotificationMessageKeyAPSPayloadFormat, _ICPushNotificationMessageKeyAccountDSID, 
                        _ICPushNotificationMessageKeyActionType, _ICPushNotificationTypeBookkeeper, 

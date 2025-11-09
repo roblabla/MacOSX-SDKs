@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A4677277-414B-32D5-94AF-022249DA23E7
+    value:           2271532D-E2B3-3D4D-ADF0-0935F8DCE89B
   - target:          x86_64-maccatalyst
-    value:           A4677277-414B-32D5-94AF-022249DA23E7
+    value:           2271532D-E2B3-3D4D-ADF0-0935F8DCE89B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F78F5800-D0A5-3502-B762-F46B53935807
+    value:           87B86869-7D32-3408-B85C-5D3EE7572552
   - target:          arm64e-maccatalyst
-    value:           F78F5800-D0A5-3502-B762-F46B53935807
+    value:           87B86869-7D32-3408-B85C-5D3EE7572552
 install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGFXShared.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

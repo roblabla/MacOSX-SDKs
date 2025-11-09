@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1B752707-5861-3FBD-92CD-011534A353AD
+    value:           BFF4ECF8-691F-3B00-8EA2-D3DA1F63C0C7
   - target:          x86_64-maccatalyst
-    value:           1B752707-5861-3FBD-92CD-011534A353AD
+    value:           BFF4ECF8-691F-3B00-8EA2-D3DA1F63C0C7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           012ACA6F-BF37-367E-A9E9-E2A28684709F
+    value:           868CA13D-47A2-3FF2-9FA0-ECCBD7B387B8
   - target:          arm64e-maccatalyst
-    value:           012ACA6F-BF37-367E-A9E9-E2A28684709F
+    value:           868CA13D-47A2-3FF2-9FA0-ECCBD7B387B8
 install-name:    '/usr/lib/libexslt.0.dylib'
 current-version: 9.15
 compatibility-version: 9
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _exsltCommonRegister, _exsltDateRegister, _exsltDateXpathCtxtRegister, 
                        _exsltDynRegister, _exsltFuncRegister, _exsltLibexsltVersion, 

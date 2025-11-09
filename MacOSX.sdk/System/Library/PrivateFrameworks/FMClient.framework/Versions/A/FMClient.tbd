@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A3B8DE52-ED85-3920-AB8C-6ADDF6EDEF05
+    value:           BDFA5B02-190A-39A4-A7CC-EEEECE95C95D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3839BF93-279F-3536-A7C6-AFA7619A5DD2
+    value:           D99A84E4-92F6-31F5-948C-F5FB0C2076AE
 install-name:    '/System/Library/PrivateFrameworks/FMClient.framework/Versions/A/FMClient'
 swift-abi-version: 7
 allowable-clients:

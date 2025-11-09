@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0B36D44A-F21A-3345-906B-DCDF5BE991D3
+    value:           1A59EB54-D90E-3314-B7CB-E28AB6EB2E06
   - target:          x86_64-maccatalyst
-    value:           0B36D44A-F21A-3345-906B-DCDF5BE991D3
+    value:           1A59EB54-D90E-3314-B7CB-E28AB6EB2E06
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           36E039EA-238C-3252-82A5-81566A4E94BF
+    value:           54454C94-88DC-32B6-8868-5D3AAB7DF660
   - target:          arm64e-maccatalyst
-    value:           36E039EA-238C-3252-82A5-81566A4E94BF
+    value:           54454C94-88DC-32B6-8868-5D3AAB7DF660
 install-name:    '/System/Library/PrivateFrameworks/PhotosImagingFoundation.framework/Versions/A/PhotosImagingFoundation'
-current-version: 311.0.120
+current-version: 321.0.102
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -169,7 +169,8 @@ exports:
                        IPAGeometryOperatorSequence, IPAIdentityOperator, IPAImageGeometry, 
                        IPAImageIdentityTransform, IPAImageSizePolicy, IPAImageTransform, 
                        IPAImageTransformSequence, IPALocalPreviewSizeRegistry, IPAManualAutoSettings, 
-                       IPAMetadata, IPAMutableRectArray, IPAMutableRegion, IPAOrientationOperator, 
+                       IPAMetadata, IPAMetadataStateBreadcrumb, IPAMetadataStateHandler, 
+                       IPAMutableRectArray, IPAMutableRegion, IPAOrientationOperator, 
                        IPAOriginalSizePolicy, IPAPendingAutoSettings, IPAPerspectiveOperator, 
                        IPAPhotoAdjustment, IPAPhotoAdjustmentPipeline, IPAPhotoAdjustmentStack, 
                        IPAPhotoAdjustmentStackSerializer, IPAPhotoAdjustmentStackSerializer_SLM_v11, 

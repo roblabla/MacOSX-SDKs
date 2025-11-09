@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A4158738-16CC-3F4C-998F-96B672E38D4B
+    value:           0FF4CFB1-B8DD-31C3-A000-5016CFE45EB9
   - target:          x86_64-maccatalyst
-    value:           A4158738-16CC-3F4C-998F-96B672E38D4B
+    value:           0FF4CFB1-B8DD-31C3-A000-5016CFE45EB9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           12D715BB-2E6C-35BA-B0EF-CCCB93515894
+    value:           11FE4920-7267-36EB-8B17-151B8F41D654
   - target:          arm64e-maccatalyst
-    value:           12D715BB-2E6C-35BA-B0EF-CCCB93515894
+    value:           11FE4920-7267-36EB-8B17-151B8F41D654
 install-name:    '/System/Library/Frameworks/CoreBluetooth.framework/Versions/A/CoreBluetooth'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CBATTErrorDomain, _CBAdvOptionInstanceAddress, _CBAdvOptionInstanceRandomAddressBytes, 
                        _CBAdvOptionObjectLocatorOnThisInstance, _CBAdvOptionStopOnAdvertisingAddressChange, 
@@ -146,10 +146,11 @@ exports:
                        _CBXPCGetNextClientID, _gCBDaemonServer ]
     objc-classes:    [ BTDevicePicker, CBATTRequest, CBAttribute, CBCentral, CBCentralManager, 
                        CBCharacteristic, CBClassicManager, CBClassicPeer, CBConnection, 
-                       CBController, CBDescriptor, CBDevice, CBDiscovery, CBIdentity, 
-                       CBL2CAPChannel, CBManager, CBMutableCharacteristic, CBMutableDescriptor, 
-                       CBMutableService, CBPairingAgent, CBPeer, CBPeripheral, CBPeripheralManager, 
-                       CBRFCOMMChannel, CBReadRequest, CBScalablePipe, CBScalablePipeManager, 
-                       CBServer, CBService, CBSpatialInteractionSession, CBSpatialMeasurement, 
-                       CBUUID, CBWriteRequest ]
+                       CBController, CBControllerInfo, CBDescriptor, CBDevice, CBDiscovery, 
+                       CBIdentity, CBL2CAPChannel, CBManager, CBMutableCharacteristic, 
+                       CBMutableDescriptor, CBMutableService, CBPairingAgent, CBPeer, 
+                       CBPeripheral, CBPeripheralManager, CBRFCOMMChannel, CBReadRequest, 
+                       CBScalablePipe, CBScalablePipeManager, CBServer, CBService, 
+                       CBSpatialInteractionSession, CBSpatialMeasurement, CBUUID, 
+                       CBWriteRequest ]
 ...

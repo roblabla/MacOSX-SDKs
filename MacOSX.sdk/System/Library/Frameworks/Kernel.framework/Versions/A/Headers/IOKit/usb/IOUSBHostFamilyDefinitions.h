@@ -285,6 +285,7 @@ enum tIOUSBHostPortStatus
 #define kUSBHostControllerPropertyPersistFullSpeedIsochronous   "UsbHostControllerPersistFullSpeedIsochronous"  // OSBoolean true to reduce commands related to full-speed isochronous endpoints
 #define kUSBHostControllerPropertyDeferRegisterService          "UsbHostControllerDeferRegisterService" // OSBoolean true to defer registerService call by base class during start
 #define kUSBHostControllerPropertyStreamPolicy                  "UsbHostControllerStreamPolicy"         // OSNumber containing AppleUSBHostController::tStreamPolicy
+#define kUSBHostControllerPropertyTierLimit                     "UsbHostControllerTierLimit"            // OSNumber containing the number of tiers supported by this controller (See USB 2.0 § 4.1.1)
 
 #define kIOUSBHostDeviceClassName                               "IOUSBHostDevice"
 #define kIOUSBHostInterfaceClassName                            "IOUSBHostInterface"

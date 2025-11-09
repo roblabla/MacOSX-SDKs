@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           CB8C9ACA-1CE7-3CCE-B0ED-328E3E9F1187
+    value:           06A268DC-BB9A-3B8B-8515-D2ED48B64CD8
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           0C4F3EA0-3D2B-3697-9E68-63D8F549A836
+    value:           A8886EB6-BCC8-3104-8B75-09886A3F0BF5
 install-name:    '/System/Library/PrivateFrameworks/FMFCore.framework/Versions/A/FMFCore'
 swift-abi-version: 7
 allowable-clients:

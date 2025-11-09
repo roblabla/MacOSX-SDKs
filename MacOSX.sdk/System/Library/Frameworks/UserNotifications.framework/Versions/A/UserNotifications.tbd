@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           77FB8BAF-6843-3F8D-83FA-AA9414026E4A
+    value:           F477A274-DB34-38C2-A49D-F832C67A92AB
   - target:          x86_64-maccatalyst
-    value:           77FB8BAF-6843-3F8D-83FA-AA9414026E4A
+    value:           F477A274-DB34-38C2-A49D-F832C67A92AB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DE5F2636-5B91-38C0-8CEB-4E1266C67072
+    value:           30999A32-DF4E-3018-8AEE-03742BE88810
   - target:          arm64e-maccatalyst
-    value:           DE5F2636-5B91-38C0-8CEB-4E1266C67072
+    value:           30999A32-DF4E-3018-8AEE-03742BE88810
 install-name:    '/System/Library/Frameworks/UserNotifications.framework/Versions/A/UserNotifications'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _UNAuthorizationStatusString, _UNDoubleIsZero, _UNEqualBools, 
                        _UNEqualDoubles, _UNEqualFloats, _UNEqualIntegers, _UNEqualObjects, 

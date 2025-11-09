@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9D5C6B2A-9232-33C9-B71A-187F5F25169C
+    value:           72174A05-C9DD-3E28-BD1E-AB2B62A272A7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D8E75CD8-351F-30DE-99D0-44661E6EEFBD
+    value:           AF9AD9E0-793C-3DFA-BD0A-DBBFB6DB5E76
 install-name:    '/System/Library/PrivateFrameworks/VCXMPP.framework/Versions/A/VCXMPP'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -24,11 +24,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0ED664CF-FED6-3CA4-89AF-E3070D092F12
+    value:           6620A1FE-9225-3109-B8AC-3E76CBF0AD87
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B3817DE3-0F76-3EDE-A3E9-64F29A869179
+    value:           1B247C1A-48AA-34E4-9C89-B2A3FA4AB3BF
 install-name:    '/System/Library/PrivateFrameworks/VCXMPP.framework/Versions/A/Frameworks/Apollo.framework/Versions/A/Apollo'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -122,11 +122,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F6DB3130-83A3-3A88-A2AF-A45625E4011E
+    value:           4C483448-0DFB-3640-B53A-5BF1DF4B6D93
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E3B024CD-7482-31D4-BACF-CC340CC44073
+    value:           06D79FC2-0D99-33F9-9293-311B32E570DC
 install-name:    '/System/Library/PrivateFrameworks/VCXMPP.framework/Versions/A/Frameworks/Pear.framework/Versions/A/Pear'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -229,11 +229,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F599ECC2-0CED-3AED-90D6-B6461C71DE2A
+    value:           1BDEDDC5-A14E-3D63-A113-CBA8D10A0CA0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           13E7B5D7-229E-3A16-97CA-9EBEC4A28780
+    value:           A0ADBAF1-4E52-3BF6-810E-265D406F5FC7
 install-name:    '/System/Library/PrivateFrameworks/VCXMPP.framework/Versions/A/Frameworks/XMPPToolkit.framework/Versions/A/XMPPToolkit'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -373,11 +373,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AA08B58D-BA79-3222-A412-0DD575BC8F37
+    value:           2C1A7948-71DD-3329-A7E0-B0ED04E56964
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           24668312-A99C-3082-A2D0-24FE6C7EF83E
+    value:           29BE136D-237B-388C-9101-68B030322AB8
 install-name:    '/System/Library/PrivateFrameworks/VCXMPP.framework/Versions/A/Frameworks/uxmi.framework/Versions/0.1/uxmi'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           43FB5619-A08E-310C-9D83-53AAEA291905
+    value:           22D8A9FA-842F-3CAD-9CC3-CC52650CA283
   - target:          x86_64-maccatalyst
-    value:           43FB5619-A08E-310C-9D83-53AAEA291905
+    value:           22D8A9FA-842F-3CAD-9CC3-CC52650CA283
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           02D6A645-4C38-346B-8A9B-1E6DE48EBDA4
+    value:           B884B9C1-9518-3F19-B5EB-C163975C49CB
   - target:          arm64e-maccatalyst
-    value:           02D6A645-4C38-346B-8A9B-1E6DE48EBDA4
+    value:           B884B9C1-9518-3F19-B5EB-C163975C49CB
 install-name:    '/System/Library/PrivateFrameworks/PhotoLibraryServices.framework/Versions/A/PhotoLibraryServices'
-current-version: 311.0.120
+current-version: 321.0.102
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -151,14 +151,15 @@ exports:
                        _PLITunesSyncedContentInfoVideoCountKey, _PLImageRecipeIDIsCPLImageDerivative, 
                        _PLImageSizeFromImageData, _PLImageSizeFromImageProperties, 
                        _PLImageSourceCopyPropertiesAtIndexDecodingRawIfNecessary, 
-                       _PLImportedFileSystemAssetsDateKey, _PLImportedFileSystemAssetsKey, 
-                       _PLIndent, _PLIndentToString, _PLInternalSizeDerivativeKey, 
-                       _PLInternalSizeFileBackedThumbnailKey, _PLInternalSizeOriginalsKey, 
-                       _PLInternalSizeTableThumbnailKey, _PLInvitationRecordsDidChangeNotification, 
-                       _PLIsCPLDataclassEnabled, _PLIsCloudPhotoLibraryEnabledForCurrentUser, 
-                       _PLIsCloudPhotoLibraryEnabledForPhotoLibraryURL, _PLIsQueueBasedContextConcurrencyType, 
-                       _PLIsResourceMarkedFullSizeFromRecipeID, _PLIssueSandboxExtensionsForJobDictionary, 
-                       _PLJPEGDataFromImage, _PLJournalCoalesceDateKey, _PLJournalCoalescePayloadVersionKey, 
+                       _PLImageWriterRemovePrivateKeysFromJobDictionary, _PLImportedFileSystemAssetsDateKey, 
+                       _PLImportedFileSystemAssetsKey, _PLIndent, _PLIndentToString, 
+                       _PLInternalSizeDerivativeKey, _PLInternalSizeFileBackedThumbnailKey, 
+                       _PLInternalSizeOriginalsKey, _PLInternalSizeTableThumbnailKey, 
+                       _PLInvitationRecordsDidChangeNotification, _PLIsCPLDataclassEnabled, 
+                       _PLIsCloudPhotoLibraryEnabledForCurrentUser, _PLIsCloudPhotoLibraryEnabledForPhotoLibraryURL, 
+                       _PLIsQueueBasedContextConcurrencyType, _PLIsResourceMarkedFullSizeFromRecipeID, 
+                       _PLIssueSandboxExtensionsForJobDictionary, _PLJPEGDataFromImage, 
+                       _PLJournalCoalesceDateKey, _PLJournalCoalescePayloadVersionKey, 
                        _PLJournalCurrentPayloadVersionKey, _PLJournalEntryHeaderReadFrom, 
                        _PLJournalManagerCurrentHistoryTokenKey, _PLJournalRebuildRequiredKey, 
                        _PLJournalSnapshotDateKey, _PLJournalSnapshotPayloadVersionKey, 
@@ -645,7 +646,8 @@ exports:
                        _PLSAggregateDictionaryPhotosOneUpViewedSlomoVideoKey, _PLSAggregateDictionaryPhotosOneUpViewedTimelapseVideoKey, 
                        _PLSAggregateDictionaryPhotosSmartAlbumAllHidden, _PLSAggregateDictionaryPhotosSmartAlbumBursts, 
                        _PLSAggregateDictionaryPhotosSmartAlbumFavorites, _PLSAggregateDictionaryPhotosSmartAlbumMyPhotoStream, 
-                       _PLSAggregateDictionaryPhotosSmartAlbumPanoramas, _PLSAggregateDictionaryPhotosSmartAlbumRecentlyDeletedKey, 
+                       _PLSAggregateDictionaryPhotosSmartAlbumPanoramas, _PLSAggregateDictionaryPhotosSmartAlbumRAW, 
+                       _PLSAggregateDictionaryPhotosSmartAlbumRecentlyDeletedKey, 
                        _PLSAggregateDictionaryPhotosSmartAlbumRecentlyEdited, _PLSAggregateDictionaryPhotosSmartAlbumScreenRecordings, 
                        _PLSAggregateDictionaryPhotosSmartAlbumScreenShots, _PLSAggregateDictionaryPhotosSmartAlbumSelfPortraits, 
                        _PLSAggregateDictionaryPhotosSmartAlbumSlomoVideos, _PLSAggregateDictionaryPhotosSmartAlbumTimelapses, 

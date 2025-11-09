@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2138C4D4-4660-3344-BC30-AE3A5F8054FB
+    value:           AB2C9575-2D03-3EC1-8B94-3A579AD5274E
   - target:          x86_64-maccatalyst
-    value:           2138C4D4-4660-3344-BC30-AE3A5F8054FB
+    value:           AB2C9575-2D03-3EC1-8B94-3A579AD5274E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           045DD1A7-1EE8-3EFF-8CB4-EF7FF03B30B0
+    value:           D276DA49-8035-3A10-BF0A-383A55B755B6
   - target:          arm64e-maccatalyst
-    value:           045DD1A7-1EE8-3EFF-8CB4-EF7FF03B30B0
+    value:           D276DA49-8035-3A10-BF0A-383A55B755B6
 install-name:    '/System/Library/PrivateFrameworks/Coherence.framework/Versions/A/Coherence'
 swift-abi-version: 7
 allowable-clients:

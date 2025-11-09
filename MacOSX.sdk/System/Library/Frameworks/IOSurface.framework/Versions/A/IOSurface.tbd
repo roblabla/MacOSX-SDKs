@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D1066EB5-D14B-3A75-A217-C7BA1EEEB198
+    value:           A3B10665-5909-30EE-BE34-F3284D6D5975
   - target:          x86_64-maccatalyst
-    value:           D1066EB5-D14B-3A75-A217-C7BA1EEEB198
+    value:           A3B10665-5909-30EE-BE34-F3284D6D5975
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6C7EA086-133A-3DD4-9D48-59F7BFEC740A
+    value:           9FF9A9E1-CEE6-3B60-B906-9F841A8C458F
   - target:          arm64e-maccatalyst
-    value:           6C7EA086-133A-3DD4-9D48-59F7BFEC740A
+    value:           9FF9A9E1-CEE6-3B60-B906-9F841A8C458F
 install-name:    '/System/Library/Frameworks/IOSurface.framework/Versions/A/IOSurface'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _IOSurfaceAlignProperty, _IOSurfaceAllowsPixelSizeCasting, 
                        _IOSurfaceBindAccel, _IOSurfaceBindAccelOnPlane, _IOSurfaceCopyAllValues, 
@@ -152,6 +152,6 @@ exports:
                        IOSurfaceSharedEvent, IOSurfaceSharedEventListener ]
     objc-ivars:      [ IOSurfaceSharedEvent._eventPort, IOSurfaceSharedEvent._globalTraceObjectID, 
                        IOSurfaceSharedEventListener._dispatchQueue, IOSurfaceSharedEventListener._notificationPort ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _IOSurfaceCopyGPUPolicies ]
 ...

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           241BA3B9-260D-332E-863B-05A34F5C7471
+    value:           8D263740-DEC9-3B5C-8390-46A3040E2AE6
   - target:          x86_64-maccatalyst
-    value:           241BA3B9-260D-332E-863B-05A34F5C7471
+    value:           8D263740-DEC9-3B5C-8390-46A3040E2AE6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B7886BB1-67F8-3D9C-99E9-0E2E96B2C3D7
+    value:           35967D33-2CD4-3BEE-B479-23D7B6A2A142
   - target:          arm64e-maccatalyst
-    value:           B7886BB1-67F8-3D9C-99E9-0E2E96B2C3D7
+    value:           35967D33-2CD4-3BEE-B479-23D7B6A2A142
 install-name:    '/System/Library/PrivateFrameworks/NetAppsUtilities.framework/Versions/A/NetAppsUtilities'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

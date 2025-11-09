@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           82C11138-61B5-3CFA-861F-8A883B929D21
+    value:           88BA8D8C-84E5-37F5-B754-ECFA44F43CFF
 install-name:    '/AppleInternal/BuildRoot/Library/Caches/com.apple.xbs/Binaries/GPUDriversNvidia/install/TempContent/Root/System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/NVPTX.dylib'
 exports:
   - targets:         [ x86_64-macos ]

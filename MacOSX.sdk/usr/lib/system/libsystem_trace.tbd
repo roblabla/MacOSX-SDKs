@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7E1FAE3C-3C13-3F8A-8E79-D310F8931FDE
+    value:           48C14376-626E-3C81-B0F5-7416E64580C7
   - target:          x86_64-maccatalyst
-    value:           7E1FAE3C-3C13-3F8A-8E79-D310F8931FDE
+    value:           48C14376-626E-3C81-B0F5-7416E64580C7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9EE99324-72EA-398A-A10C-BDC1D3E2F408
+    value:           D67123A1-A8BC-329C-BC76-830E95EBA1B3
   - target:          arm64e-maccatalyst
-    value:           9EE99324-72EA-398A-A10C-BDC1D3E2F408
+    value:           D67123A1-A8BC-329C-BC76-830E95EBA1B3
 install-name:    '/usr/lib/system/libsystem_trace.dylib'
-current-version: 1277.40.18
+current-version: 1277.50.1
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

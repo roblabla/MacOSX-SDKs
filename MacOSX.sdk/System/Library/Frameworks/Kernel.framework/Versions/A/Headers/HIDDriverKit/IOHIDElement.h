@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.40.8) generated from IOHIDElement.iig */
+/* iig(DriverKit-107.60.3) generated from IOHIDElement.iig */
 
 /* IOHIDElement.iig:1-39 */
 /*

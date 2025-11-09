@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4FA60DA7-0D54-3CCC-8EB1-D81697E4B5C3
+    value:           C703A1AF-8D15-34FC-AEB1-FB1A9B5329DF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2216AB4F-71D1-3B39-815C-23943050CC80
+    value:           FAB09355-2FF5-37E1-85E2-FC9D738ADF54
 install-name:    '/System/Library/PrivateFrameworks/CoreNavigation.framework/Versions/A/CoreNavigation'
 current-version: 0
 compatibility-version: 0

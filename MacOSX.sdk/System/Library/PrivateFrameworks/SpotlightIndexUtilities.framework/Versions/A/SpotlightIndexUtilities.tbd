@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2CF064F3-274B-3459-92D2-D71142138903
+    value:           F57C6925-0E72-3DB3-B6AE-AEA1B4633EB0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           56C52274-2F51-30F3-B00C-8D89EF052738
+    value:           021A7732-C643-3F6C-BA78-27963AC8E72F
 install-name:    '/System/Library/PrivateFrameworks/SpotlightIndexUtilities.framework/Versions/A/SpotlightIndexUtilities'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

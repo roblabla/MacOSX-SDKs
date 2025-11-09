@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           462B7259-7389-3AD5-A6E6-20A5E8D57358
+    value:           9205B94A-6807-3D31-8AE3-5B1BF11D461B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           79CE6B5E-F77E-371F-A35E-C0F9691E9893
+    value:           AFA0DA8A-F8CA-3977-9AA3-857B87E63D00
 install-name:    '/System/Library/PrivateFrameworks/SiriPlaybackControlSupport.framework/Versions/A/SiriPlaybackControlSupport'
 swift-abi-version: 7
 allowable-clients:
@@ -22,10 +22,14 @@ exports:
                        '_$s26SiriPlaybackControlSupport0B10ControllerC11localDeviceSSvgZ', 
                        '_$s26SiriPlaybackControlSupport0B10ControllerC13setRepeatMode2to2on011shouldStartB12AfterCommand4withyAA0gH0O_SaySSGSbys6ResultOyytAA0B16ControllingErrorOGctFTj', 
                        '_$s26SiriPlaybackControlSupport0B10ControllerC13setRepeatMode2to2on011shouldStartB12AfterCommand4withyAA0gH0O_SaySSGSbys6ResultOyytAA0B16ControllingErrorOGctFTq', 
+                       '_$s26SiriPlaybackControlSupport0B10ControllerC14getVolumeLevel6device10completionySS_ys6ResultOySfAA0B16ControllingErrorOGctFTj', 
+                       '_$s26SiriPlaybackControlSupport0B10ControllerC14getVolumeLevel6device10completionySS_ys6ResultOySfAA0B16ControllingErrorOGctFTq', 
                        '_$s26SiriPlaybackControlSupport0B10ControllerC14resumeLocalApp11appBundleId4withySS_ys6ResultOyytAA0B16ControllingErrorOGctFTj', 
                        '_$s26SiriPlaybackControlSupport0B10ControllerC14resumeLocalApp11appBundleId4withySS_ys6ResultOyytAA0B16ControllingErrorOGctFTq', 
                        '_$s26SiriPlaybackControlSupport0B10ControllerC14setShuffleMode2to2on4withyAA0gH0O_SaySSGys6ResultOyytAA0B16ControllingErrorOGctFTj', 
                        '_$s26SiriPlaybackControlSupport0B10ControllerC14setShuffleMode2to2on4withyAA0gH0O_SaySSGys6ResultOyytAA0B16ControllingErrorOGctFTq', 
+                       '_$s26SiriPlaybackControlSupport0B10ControllerC14setVolumeLevel6device06volumeH010completionySS_Sfys6ResultOyytAA0B16ControllingErrorOGctFTj', 
+                       '_$s26SiriPlaybackControlSupport0B10ControllerC14setVolumeLevel6device06volumeH010completionySS_Sfys6ResultOyytAA0B16ControllingErrorOGctFTq', 
                        '_$s26SiriPlaybackControlSupport0B10ControllerC15getDurationInfo6device4withySS_yAA0gH0VSgctFTj', 
                        '_$s26SiriPlaybackControlSupport0B10ControllerC15getDurationInfo6device4withySS_yAA0gH0VSgctFTq', 
                        '_$s26SiriPlaybackControlSupport0B10ControllerC16disableSubtitles6device4withySS_ys6ResultOyytAA0B16ControllingErrorOGctFTj', 
@@ -66,10 +70,14 @@ exports:
                        '_$s26SiriPlaybackControlSupport0B11ControllingP11fastForward7devices2by4withySaySSG_Sdys6ResultOyytAA0bE5ErrorOGctFTq', 
                        '_$s26SiriPlaybackControlSupport0B11ControllingP13setRepeatMode2to2on011shouldStartB12AfterCommand4withyAA0gH0O_SaySSGSbys6ResultOyytAA0bE5ErrorOGctFTj', 
                        '_$s26SiriPlaybackControlSupport0B11ControllingP13setRepeatMode2to2on011shouldStartB12AfterCommand4withyAA0gH0O_SaySSGSbys6ResultOyytAA0bE5ErrorOGctFTq', 
+                       '_$s26SiriPlaybackControlSupport0B11ControllingP14getVolumeLevel6device10completionySS_ys6ResultOySfAA0bE5ErrorOGctFTj', 
+                       '_$s26SiriPlaybackControlSupport0B11ControllingP14getVolumeLevel6device10completionySS_ys6ResultOySfAA0bE5ErrorOGctFTq', 
                        '_$s26SiriPlaybackControlSupport0B11ControllingP14resumeLocalApp11appBundleId4withySS_ys6ResultOyytAA0bE5ErrorOGctFTj', 
                        '_$s26SiriPlaybackControlSupport0B11ControllingP14resumeLocalApp11appBundleId4withySS_ys6ResultOyytAA0bE5ErrorOGctFTq', 
                        '_$s26SiriPlaybackControlSupport0B11ControllingP14setShuffleMode2to2on4withyAA0gH0O_SaySSGys6ResultOyytAA0bE5ErrorOGctFTj', 
                        '_$s26SiriPlaybackControlSupport0B11ControllingP14setShuffleMode2to2on4withyAA0gH0O_SaySSGys6ResultOyytAA0bE5ErrorOGctFTq', 
+                       '_$s26SiriPlaybackControlSupport0B11ControllingP14setVolumeLevel6device06volumeH010completionySS_Sfys6ResultOyytAA0bE5ErrorOGctFTj', 
+                       '_$s26SiriPlaybackControlSupport0B11ControllingP14setVolumeLevel6device06volumeH010completionySS_Sfys6ResultOyytAA0bE5ErrorOGctFTq', 
                        '_$s26SiriPlaybackControlSupport0B11ControllingP15getDurationInfo6device4withySS_yAA0gH0VSgctFTj', 
                        '_$s26SiriPlaybackControlSupport0B11ControllingP15getDurationInfo6device4withySS_yAA0gH0VSgctFTq', 
                        '_$s26SiriPlaybackControlSupport0B11ControllingP16disableSubtitles6device4withySS_ys6ResultOyytAA0bE5ErrorOGctFTj', 
@@ -270,6 +278,19 @@ exports:
                        '_$s26SiriPlaybackControlSupport22LanguageCharacteristicOSHAAMc', 
                        '_$s26SiriPlaybackControlSupport22LanguageCharacteristicOSQAAMc', 
                        '_$s26SiriPlaybackControlSupport22LanguageCharacteristicOSYAAMc', 
+                       '_$s26SiriPlaybackControlSupport22VolumeControllingErrorO12alreadyMutedyA2CmFWC', 
+                       '_$s26SiriPlaybackControlSupport22VolumeControllingErrorO14alreadyUnmutedyA2CmFWC', 
+                       '_$s26SiriPlaybackControlSupport22VolumeControllingErrorO2eeoiySbAC_ACtFZ', 
+                       '_$s26SiriPlaybackControlSupport22VolumeControllingErrorO4hash4intoys6HasherVz_tF', 
+                       '_$s26SiriPlaybackControlSupport22VolumeControllingErrorO7unknownyA2CmFWC', 
+                       '_$s26SiriPlaybackControlSupport22VolumeControllingErrorO9hashValueSivg', 
+                       '_$s26SiriPlaybackControlSupport22VolumeControllingErrorO9hashValueSivpMV', 
+                       '_$s26SiriPlaybackControlSupport22VolumeControllingErrorOMa', 
+                       '_$s26SiriPlaybackControlSupport22VolumeControllingErrorOMn', 
+                       '_$s26SiriPlaybackControlSupport22VolumeControllingErrorON', 
+                       '_$s26SiriPlaybackControlSupport22VolumeControllingErrorOSHAAMc', 
+                       '_$s26SiriPlaybackControlSupport22VolumeControllingErrorOSQAAMc', 
+                       '_$s26SiriPlaybackControlSupport22VolumeControllingErrorOs0G0AAMc', 
                        '_$s26SiriPlaybackControlSupport6DeviceV10identifierSSSgvM', 
                        '_$s26SiriPlaybackControlSupport6DeviceV10identifierSSSgvg', 
                        '_$s26SiriPlaybackControlSupport6DeviceV10identifierSSSgvpMV', 

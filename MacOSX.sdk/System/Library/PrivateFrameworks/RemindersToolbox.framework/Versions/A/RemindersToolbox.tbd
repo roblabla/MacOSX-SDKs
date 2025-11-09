@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5460DFE9-CF49-3AFB-ABED-4871B05B1BF6
+    value:           1330304A-80A0-311B-8A9A-67CAC6601AA9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8172D5B1-E89B-3800-888C-7389E130820C
+    value:           8C679241-2CF6-339A-96D1-7232E7944A86
 install-name:    '/System/Library/PrivateFrameworks/RemindersToolbox.framework/Versions/A/RemindersToolbox'
 swift-abi-version: 7
 exports:

@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4EA4C853-66DE-32CE-8D15-660B6459F6C1
+    value:           E921638F-E94D-3171-9A4B-C7B5047AA746
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B6B080B4-9F24-3EE7-86A2-8BF99F1836DF
+    value:           020C147C-1621-3D96-AE26-F05FE429E381
 install-name:    '/usr/lib/libThreadExternalCommissioner.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _kBorderAgentNotificationExistingCommissioner ]
     objc-classes:    [ BorderAgentConnector, BorderAgentFinder ]
 ...

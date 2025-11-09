@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5CF272D5-B9A2-3471-B9C7-1661A877D0EC
+    value:           D9442D06-5C2B-36C1-9BF5-BD1993E5EDBD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B49C7487-3E62-32FE-91EF-289C69315C41
+    value:           9720C794-AFA4-3040-A9FC-E437B969459D
 install-name:    '/usr/lib/ACIPCBTLib.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ __ZN12ACIPCBTClass10writeAsyncEPKvjPFvPviS2_ES2_, __ZN12ACIPCBTClass12readRegisterEjPvPj, 
                        __ZN12ACIPCBTClass14clearIteratorsEv, __ZN12ACIPCBTClass14sendImageAsyncEPKvjPFvPviS2_S2_ES2_, 
                        __ZN12ACIPCBTClass16interfaceMatchedEPvj, __ZN12ACIPCBTClass17abortChannelAsyncE14acipcDirectionPFvPviES1_, 

@@ -3,15 +3,17 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           607AC920-92A7-3656-A7BC-FB7E56AC0895
+    value:           6527B405-8E33-33C8-9EB4-F0D8A0D53D4E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           21711C70-052A-3BDB-8BBD-77E393154538
+    value:           2C6588BB-04E3-3CCA-BC57-728EDE9353A4
 install-name:    '/System/Library/PrivateFrameworks/SearchAds.framework/Versions/A/SearchAds'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _SearchAdsVersionNumber, _SearchAdsVersionString ]
-    objc-classes:    [ ADDataObject, ADInstallAttributionData, ADLocationManager, 
-                       ADResponseData, ADSearchAdsSettings, ADSearchObject, ADSearchSession ]
+    objc-classes:    [ ADAppAdvertisement, ADAppRepresentation, ADCapService, ADDaemonMetricsHelper, 
+                       ADDataObject, ADInstallAttributionData, ADLocationManager, 
+                       ADMetricManager, ADParameterFactory, ADResponseData, ADSearchAdsSettings, 
+                       ADSearchCriteria, ADSearchObject, ADSearchSession, ADUnfairLock ]
 ...

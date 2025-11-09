@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4965BE01-8AC8-3D33-A2AF-5E6F9C68D790
+    value:           05A7EFDD-4111-3E4D-B668-239B69DE3D0F
   - target:          x86_64-maccatalyst
-    value:           4965BE01-8AC8-3D33-A2AF-5E6F9C68D790
+    value:           05A7EFDD-4111-3E4D-B668-239B69DE3D0F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           65DF7A35-C2D6-3F0B-9EAF-AC95E327BDDB
+    value:           A42FB952-AEBC-335F-8336-751E963F09F4
   - target:          arm64e-maccatalyst
-    value:           65DF7A35-C2D6-3F0B-9EAF-AC95E327BDDB
+    value:           A42FB952-AEBC-335F-8336-751E963F09F4
 install-name:    '/usr/lib/system/liblaunch.dylib'
 current-version: 2038.40.38
 parent-umbrella:

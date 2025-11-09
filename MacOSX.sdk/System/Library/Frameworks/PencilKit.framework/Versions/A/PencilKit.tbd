@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D55E62AF-B4DA-3510-8A73-DFC39DF04114
+    value:           61DD7515-94AF-35A6-92AF-B1473BC8E8BF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CE57E9A3-E879-3550-B13F-4ECE7A5B2466
+    value:           7CC5B79A-1F1C-3F5C-BAA9-DF7ACF630FFB
 install-name:    '/System/Library/Frameworks/PencilKit.framework/Versions/A/PencilKit'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _PKAppleDrawingTypeIdentifier, _PKAppleStrokeSelectionTypeIdentifier, 
                        _PKAttachmentViewDefaultDrawingWidth, _PKClipperScaling, _PKInkBlueComponentProperty, 
                        _PKInkColorProperty, _PKInkGreenComponentProperty, _PKInkIdentifierCharcoal, 

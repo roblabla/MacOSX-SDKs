@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           568A3E9D-388A-3D16-8571-30B445E76BBC
+    value:           C84C9C98-5382-3E27-8275-AC9816AA28E8
   - target:          x86_64-maccatalyst
-    value:           568A3E9D-388A-3D16-8571-30B445E76BBC
+    value:           C84C9C98-5382-3E27-8275-AC9816AA28E8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B5F352FB-72BD-308D-9F38-2FB6A87B4A45
+    value:           C2875C59-B7D4-360A-A2AF-4CE27686AE90
   - target:          arm64e-maccatalyst
-    value:           B5F352FB-72BD-308D-9F38-2FB6A87B4A45
+    value:           C2875C59-B7D4-360A-A2AF-4CE27686AE90
 install-name:    '/System/Library/PrivateFrameworks/ProtectedCloudStorage.framework/Versions/A/ProtectedCloudStorage'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

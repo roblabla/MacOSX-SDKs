@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EDE24366-F4B8-31BF-847B-B65042079DCE
+    value:           F2740CA7-334B-3F24-AFE8-2451D1A041C2
   - target:          x86_64-maccatalyst
-    value:           EDE24366-F4B8-31BF-847B-B65042079DCE
+    value:           F2740CA7-334B-3F24-AFE8-2451D1A041C2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           088CE78F-1CCB-303D-B44A-A12923B278B7
+    value:           7C39E85F-C302-380F-9E7D-EFF873607707
   - target:          arm64e-maccatalyst
-    value:           088CE78F-1CCB-303D-B44A-A12923B278B7
+    value:           7C39E85F-C302-380F-9E7D-EFF873607707
 install-name:    '/System/Library/PrivateFrameworks/GenerationalStorage.framework/Versions/A/GenerationalStorage'
 current-version: 322
 exports:

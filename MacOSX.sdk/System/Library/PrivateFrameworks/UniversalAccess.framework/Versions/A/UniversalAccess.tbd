@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4BDAFA84-F144-3023-9541-6DD9876B2A4D
+    value:           70A01C0A-F4EB-39D5-9D59-F79390B9D634
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9D2E4D83-E1D4-3443-8A66-D765B8BE8643
+    value:           F66C4CDB-814E-3E77-BC8C-FF33F4BB13BD
 install-name:    '/System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/UniversalAccess'
 current-version: 236
 reexported-libraries:
@@ -52,11 +52,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           830C9CFC-C624-3095-9591-976CC489A03B
+    value:           0F2C22FF-2244-3131-8779-CE9C2052CA2E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D0E7109A-3C68-3DBF-9976-C8584A3460AA
+    value:           8896B39C-89FF-36B2-92CA-7F61801C036D
 install-name:    '/System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/Frameworks/UniversalAccessCore.framework/Versions/A/UniversalAccessCore'
 current-version: 236
 reexported-libraries:
@@ -229,11 +229,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           ACC11A16-FF3D-39E7-80E1-EA28F74F2F3F
+    value:           577C5E83-DEC7-32B1-8C46-D0AA8DCE06A3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F9FB1A28-5F80-3ED1-BCBA-37849423EC2D
+    value:           D88E3952-57AD-32A5-A2DB-66BCAC305BDF
 install-name:    '/System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/Libraries/libUAPreferences.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

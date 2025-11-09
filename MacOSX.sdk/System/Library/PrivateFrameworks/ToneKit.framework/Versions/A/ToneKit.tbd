@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1ABA3DCE-2D28-3618-AE36-559DF9282008
+    value:           5EB360C6-C2B7-3B22-8CC5-001E5B2CD260
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           28E64930-9E52-3FBA-93F6-401AA830CD31
+    value:           150642FC-E2A3-3F9C-AE35-14918515C503
 install-name:    '/System/Library/PrivateFrameworks/ToneKit.framework/Versions/A/ToneKit'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

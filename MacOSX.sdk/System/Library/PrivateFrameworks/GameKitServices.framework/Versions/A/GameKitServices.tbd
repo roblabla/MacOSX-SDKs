@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E4E52C93-252D-3A90-A62A-4CA547A2760C
+    value:           E2B689A3-15AC-3B8C-A7D2-150AED8E4091
   - target:          x86_64-maccatalyst
-    value:           E4E52C93-252D-3A90-A62A-4CA547A2760C
+    value:           E2B689A3-15AC-3B8C-A7D2-150AED8E4091
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2323B9DB-6059-306B-AA0C-CDEF2CD70AF6
+    value:           C77F872D-FCF9-3222-A6AA-2EA466847B06
   - target:          arm64e-maccatalyst
-    value:           2323B9DB-6059-306B-AA0C-CDEF2CD70AF6
+    value:           C77F872D-FCF9-3222-A6AA-2EA466847B06
 install-name:    '/System/Library/PrivateFrameworks/GameKitServices.framework/Versions/A/GameKitServices'
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -105,17 +105,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           080DA397-273D-30A8-BF4B-E2B76E41D27C
+    value:           D4AAB3EA-8CAB-343C-B66D-35AFD3340B78
   - target:          x86_64-maccatalyst
-    value:           080DA397-273D-30A8-BF4B-E2B76E41D27C
+    value:           D4AAB3EA-8CAB-343C-B66D-35AFD3340B78
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5AE3EA80-A498-3182-AA1C-3528AB90817B
+    value:           D19BA2B0-E00B-3EF2-90B9-71E0794DAD9E
   - target:          arm64e-maccatalyst
-    value:           5AE3EA80-A498-3182-AA1C-3528AB90817B
+    value:           D19BA2B0-E00B-3EF2-90B9-71E0794DAD9E
 install-name:    '/System/Library/PrivateFrameworks/AVConference.framework/Frameworks/LegacyHandle.framework/Versions/A/LegacyHandle'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -128,17 +128,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E92A0FD4-8963-3AAA-AAE3-C4B9D69C6FA0
+    value:           E76DDBEA-47DC-3CCE-907A-3E04C8FF1772
   - target:          x86_64-maccatalyst
-    value:           E92A0FD4-8963-3AAA-AAE3-C4B9D69C6FA0
+    value:           E76DDBEA-47DC-3CCE-907A-3E04C8FF1772
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2F082276-3B8A-3BA6-8597-747EBE293919
+    value:           F7E86C3B-F460-3E33-970A-25EE2C3F07E6
   - target:          arm64e-maccatalyst
-    value:           2F082276-3B8A-3BA6-8597-747EBE293919
+    value:           F7E86C3B-F460-3E33-970A-25EE2C3F07E6
 install-name:    '/System/Library/PrivateFrameworks/AVConference.framework/Frameworks/snatmap.framework/Versions/A/snatmap'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -151,17 +151,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E4A2B42B-3882-302A-A473-2B94B8CBD8F1
+    value:           9038B76F-84D4-3E13-A735-B831585A02CD
   - target:          x86_64-maccatalyst
-    value:           E4A2B42B-3882-302A-A473-2B94B8CBD8F1
+    value:           9038B76F-84D4-3E13-A735-B831585A02CD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7F82E996-C307-304E-8CEC-6E91479EFBD6
+    value:           DA83F64F-36B8-3526-B27C-1CC36CAD113D
   - target:          arm64e-maccatalyst
-    value:           7F82E996-C307-304E-8CEC-6E91479EFBD6
+    value:           DA83F64F-36B8-3526-B27C-1CC36CAD113D
 install-name:    '/System/Library/PrivateFrameworks/AVConference.framework/Versions/A/AVConference'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
@@ -218,40 +218,41 @@ exports:
                        _GKSConnectionBlobMaxBytes, _GKSConnectivitySettingsUpdateName, 
                        _GKSConnectivitySettings_GetICETimeout, _GKSConnectivitySettings_GetMinQueueSizeOverride5G, 
                        _GKSConnectivitySettings_GetNetworkConditionsTimeout, _GKSConnectivitySettings_GetNoRemotePacketsTimeout, 
-                       _GKSDecryptionTimeoutInterval, _GKSDidStartParameter_CallID, 
-                       _GKSDidStartParameter_ConnType, _GKSDidStartParameter_DidStart, 
-                       _GKSDidStartParameter_Error, _GKSDidStartParameter_Event, 
-                       _GKSDidStartParameter_localUseCell, _GKSDidStartParameter_remoteUseCell, 
-                       _GKSErrorDetailedError, _GKSErrorReturnCode, _GKSICETimeout, 
-                       _GKSKeepAliveTimeoutCarrierSpecific, _GKSLocalGamingDiscoveryHeartbeat, 
-                       _GKSLocalGamingDiscoveryTimeout, _GKSMaxBitrate2G, _GKSMaxBitrate3G, 
-                       _GKSMaxBitrate5G, _GKSMaxBitrateLTE, _GKSMaxBitrateLTEv2, 
-                       _GKSMaxBitrateWiFi, _GKSMaxRelayBitrate, _GKSMaxTCPRelayBitrate, 
-                       _GKSMinJBQueueSize5G, _GKSNATCheckTimeout, _GKSNATObserver_AddCarrierFlag, 
-                       _GKSNATObserver_AddInRangeFlag, _GKSNATObserver_CheckTCPAndSSL, 
-                       _GKSNATObserver_FavorNonCarrier, _GKSNATObserver_IgnoreCache, 
-                       _GKSNATObserver_NewCarrierType, _GKSNATObserver_NonCarrierOnly, 
-                       _GKSNetworkConditionsTimeout, _GKSNewSessionJoiningInterval, 
-                       _GKSNoRemotePacketsTimeout, _GKSPreEmptiveRelayTimeout, _GKSRateControllerType, 
-                       _GKSRelayParameter_ClientData, _GKSRelayParameter_ConnectionID, 
-                       _GKSRelayParameter_PeerAddrPointer, _GKSRelayParameter_PeerBlob, 
-                       _GKSRelayParameter_PeerExternalAddr, _GKSRelayParameter_PeerID, 
-                       _GKSRelayParameter_PeerNatType, _GKSRelayParameter_PeerRelayIP, 
-                       _GKSRelayParameter_PeerRelayNatIP, _GKSRelayParameter_PeerRelayNatPort, 
-                       _GKSRelayParameter_PeerRelayPort, _GKSRelayParameter_RemotePrimaryId, 
-                       _GKSRelayParameter_SelfAddrPointer, _GKSRelayParameter_SelfBlob, 
-                       _GKSRelayParameter_SelfExternalAddr, _GKSRelayParameter_SelfNatType, 
-                       _GKSRelayParameter_SelfRelayIP, _GKSRelayParameter_SelfRelayNatIP, 
-                       _GKSRelayParameter_SelfRelayNatPort, _GKSRelayParameter_SelfRelayPort, 
-                       _GKSRelayParameter_Token, _GKSRelayParameter_TransactionID, 
-                       _GKSRelayType, _GKSSSLCheckServerName, _GKSStartupTimeout, 
-                       _GKSStaticNATTypeCarrierSpecific, _GKSSupportsEVSCodec, _GKSSupportsHEVCEncoding, 
-                       _GKSSupportsRedAudio, _GKSTCPCheckServerName, _GKSVideoDegradedThreshold, 
-                       _GKSVideoNearDegradedThreshold, _GKSVideoThrottlingTimeout, 
-                       _GKSiRATRecommendationSupport, _GKVoiceChatServiceErrorDomain, 
-                       _LogFilenameOnly, _MultiRadixFFT_CplxInPlaceTransform, _MultiRadixFFT_CplxOutOfPlaceTransform, 
-                       _MultiRadixFFT_Create, _MultiRadixFFT_Dispose, _MultiRadixFFT_Size, 
-                       _MultiRadixRealFFT_Create, _MultiRadixRealFFT_Dispose, _MultiRadixRealFFT_RealInPlaceTransform, 
+                       _GKSDecryptionMKMRecoveryInterval, _GKSDecryptionTimeoutInterval, 
+                       _GKSDidStartParameter_CallID, _GKSDidStartParameter_ConnType, 
+                       _GKSDidStartParameter_DidStart, _GKSDidStartParameter_Error, 
+                       _GKSDidStartParameter_Event, _GKSDidStartParameter_localUseCell, 
+                       _GKSDidStartParameter_remoteUseCell, _GKSErrorDetailedError, 
+                       _GKSErrorReturnCode, _GKSICETimeout, _GKSKeepAliveTimeoutCarrierSpecific, 
+                       _GKSLocalGamingDiscoveryHeartbeat, _GKSLocalGamingDiscoveryTimeout, 
+                       _GKSMaxBitrate2G, _GKSMaxBitrate3G, _GKSMaxBitrate5G, _GKSMaxBitrateLTE, 
+                       _GKSMaxBitrateLTEv2, _GKSMaxBitrateWiFi, _GKSMaxRelayBitrate, 
+                       _GKSMaxTCPRelayBitrate, _GKSMinJBQueueSize5G, _GKSNATCheckTimeout, 
+                       _GKSNATObserver_AddCarrierFlag, _GKSNATObserver_AddInRangeFlag, 
+                       _GKSNATObserver_CheckTCPAndSSL, _GKSNATObserver_FavorNonCarrier, 
+                       _GKSNATObserver_IgnoreCache, _GKSNATObserver_NewCarrierType, 
+                       _GKSNATObserver_NonCarrierOnly, _GKSNetworkConditionsTimeout, 
+                       _GKSNewSessionJoiningInterval, _GKSNoRemotePacketsTimeout, 
+                       _GKSPreEmptiveRelayTimeout, _GKSRateControllerType, _GKSRelayParameter_ClientData, 
+                       _GKSRelayParameter_ConnectionID, _GKSRelayParameter_PeerAddrPointer, 
+                       _GKSRelayParameter_PeerBlob, _GKSRelayParameter_PeerExternalAddr, 
+                       _GKSRelayParameter_PeerID, _GKSRelayParameter_PeerNatType, 
+                       _GKSRelayParameter_PeerRelayIP, _GKSRelayParameter_PeerRelayNatIP, 
+                       _GKSRelayParameter_PeerRelayNatPort, _GKSRelayParameter_PeerRelayPort, 
+                       _GKSRelayParameter_RemotePrimaryId, _GKSRelayParameter_SelfAddrPointer, 
+                       _GKSRelayParameter_SelfBlob, _GKSRelayParameter_SelfExternalAddr, 
+                       _GKSRelayParameter_SelfNatType, _GKSRelayParameter_SelfRelayIP, 
+                       _GKSRelayParameter_SelfRelayNatIP, _GKSRelayParameter_SelfRelayNatPort, 
+                       _GKSRelayParameter_SelfRelayPort, _GKSRelayParameter_Token, 
+                       _GKSRelayParameter_TransactionID, _GKSRelayType, _GKSSSLCheckServerName, 
+                       _GKSStartupTimeout, _GKSStaticNATTypeCarrierSpecific, _GKSSupportsEVSCodec, 
+                       _GKSSupportsHEVCEncoding, _GKSSupportsRedAudio, _GKSTCPCheckServerName, 
+                       _GKSVideoDegradedThreshold, _GKSVideoNearDegradedThreshold, 
+                       _GKSVideoThrottlingTimeout, _GKSiRATRecommendationSupport, 
+                       _GKVoiceChatServiceErrorDomain, _LogFilenameOnly, _MultiRadixFFT_CplxInPlaceTransform, 
+                       _MultiRadixFFT_CplxOutOfPlaceTransform, _MultiRadixFFT_Create, 
+                       _MultiRadixFFT_Dispose, _MultiRadixFFT_Size, _MultiRadixRealFFT_Create, 
+                       _MultiRadixRealFFT_Dispose, _MultiRadixRealFFT_RealInPlaceTransform, 
                        _MultiRadixRealFFT_RealOutOfPlaceForwardTransform, _MultiRadixRealFFT_RealOutOfPlaceInverseTransform, 
                        _MultiRadixRealFFT_Size, _RTCACMaxBitrate2G, _RTCACMaxBitrate3G, 
                        _RTCACMaxBitrateLTE, _RTCACMaxRelayBitrate, _RTCACMaxTCPRelayBitrate, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C41D6858-85EC-3D72-A3AB-BD01BC4B4C6A
+    value:           AB7E6A20-65EF-3A68-B420-17746340D383
   - target:          x86_64-maccatalyst
-    value:           C41D6858-85EC-3D72-A3AB-BD01BC4B4C6A
+    value:           AB7E6A20-65EF-3A68-B420-17746340D383
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           63CE3947-DDD3-3946-9E32-B412C3F4B5D2
+    value:           57219498-36D9-3CF2-8270-09C5F9FF3A9D
   - target:          arm64e-maccatalyst
-    value:           63CE3947-DDD3-3946-9E32-B412C3F4B5D2
+    value:           57219498-36D9-3CF2-8270-09C5F9FF3A9D
 install-name:    '/System/Library/PrivateFrameworks/RemoteConfiguration.framework/Versions/A/RemoteConfiguration'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -66,7 +66,8 @@ exports:
                        _RCNextHighestRelativePriority, _RCPerformBlockOnMainThread, 
                        _RCPerformIfNonNil, _RCProtocolCast, _RCQoSClassFromQoS, _RCQoSFromQoSClass, 
                        _RCQueuePriorityFromRelativePriority, _RCRandom, _RCRandomBetween, 
-                       _RCRepeat, _RCRequestAppConfigurationKey, _RCRequestStocksConfigurationKey, 
+                       _RCRepeat, _RCRequesBooksConfigurationKey, _RCRequestAppConfigurationKey, 
+                       _RCRequestStocksConfigurationKey, _RCRequestWeatherConfigurationKey, 
                        _RCRequestWidgetConfigurationKey, _RCResponseAppConfigurationWrapperKey, 
                        _RCResponseErrorWrapperKey, _RCResponseStocksConfigurationWrapperKey, 
                        _RCResponseUserInfoKey, _RCResponseWidgetConfigurationWrapperKey, 

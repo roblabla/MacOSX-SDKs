@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           01700550-21F5-3722-9168-A0ABC28A82C0
+    value:           5F5B43A9-B9D5-3A9F-A083-F2BDDE60145A
   - target:          x86_64-maccatalyst
-    value:           01700550-21F5-3722-9168-A0ABC28A82C0
+    value:           5F5B43A9-B9D5-3A9F-A083-F2BDDE60145A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A4AD8711-03AB-3D4D-8032-79227EB9E8A0
+    value:           E7535D14-6A51-3A04-ADD1-D4831E720401
   - target:          arm64e-maccatalyst
-    value:           A4AD8711-03AB-3D4D-8032-79227EB9E8A0
+    value:           E7535D14-6A51-3A04-ADD1-D4831E720401
 install-name:    '/usr/lib/libmarisa.dylib'
 current-version: 19
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ __ZN6marisa4Trie3mapEPKvm, __ZN6marisa4Trie4loadEPKc, __ZN6marisa4Trie4mmapEPKc, 
                        __ZN6marisa4Trie4readEi, __ZN6marisa4Trie4swapERS0_, __ZN6marisa4Trie5buildERNS_6KeysetEi, 

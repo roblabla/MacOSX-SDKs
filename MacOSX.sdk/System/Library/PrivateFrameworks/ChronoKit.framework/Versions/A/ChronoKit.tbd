@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           21D0FC12-56AE-34BB-91CB-03F66DE358D7
+    value:           5984BE88-CA97-33A9-BD32-FCDCC5D447AD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8C69BABC-B6E5-371D-AB31-933630BD7FB7
+    value:           80240296-93CB-384D-BCDF-88BB8A1D4F60
 install-name:    '/System/Library/PrivateFrameworks/ChronoKit.framework/Versions/A/ChronoKit'
-current-version: 104.4.3
+current-version: 104.9.5
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -939,6 +939,12 @@ exports:
                        '_$s9ChronoKit22WidgetCacheURLProviderCMn', '_$s9ChronoKit22WidgetCacheURLProviderCMo', 
                        '_$s9ChronoKit22WidgetCacheURLProviderCMu', '_$s9ChronoKit22WidgetCacheURLProviderCN', 
                        '_$s9ChronoKit22WidgetCacheURLProviderCfD', '_$s9ChronoKit22WidgetCacheURLProviderCfd', 
+                       '_$s9ChronoKit23LocaleChangeCoordinatorC09localeDidD9Publisher7Combine03AnyH0Vyyts5NeverOGvgZ', 
+                       '_$s9ChronoKit23LocaleChangeCoordinatorC10initialize4withyAA17ExtensionManaging_p_tFZ', 
+                       '_$s9ChronoKit23LocaleChangeCoordinatorCMa', '_$s9ChronoKit23LocaleChangeCoordinatorCMm', 
+                       '_$s9ChronoKit23LocaleChangeCoordinatorCMn', '_$s9ChronoKit23LocaleChangeCoordinatorCMo', 
+                       '_$s9ChronoKit23LocaleChangeCoordinatorCMu', '_$s9ChronoKit23LocaleChangeCoordinatorCN', 
+                       '_$s9ChronoKit23LocaleChangeCoordinatorCfD', '_$s9ChronoKit23LocaleChangeCoordinatorCfd', 
                        '_$s9ChronoKit23PowerlogUpdateServicingMp', '_$s9ChronoKit23PowerlogUpdateServicingP15timelineUpdated3for4cost6reason15remainingBudgetySayAA0cD8IdentityVG_AA0cD4CostOAA0C10WakeReasonOSitFTj', 
                        '_$s9ChronoKit23PowerlogUpdateServicingP15timelineUpdated3for4cost6reason15remainingBudgetySayAA0cD8IdentityVG_AA0cD4CostOAA0C10WakeReasonOSitFTq', 
                        '_$s9ChronoKit23PowerlogUpdateServicingP5flushyyFTj', '_$s9ChronoKit23PowerlogUpdateServicingP5flushyyFTq', 
@@ -1307,6 +1313,9 @@ exports:
                        '_$sSo15NSXPCConnectionC9ChronoKitE16bundleIdentifierSSSgvg', 
                        '_$sSo15NSXPCConnectionC9ChronoKitE16bundleIdentifierSSSgvpMV', 
                        '_$sSo15NSXPCConnectionC9ChronoKitE30isFromContainingAppOrExtension4withSbSS_tF', 
+                       '_$sSo20CHSAvocadoDescriptorC9ChronoKitE7matches10localeDataSbSo6NSDataCSg_tF', 
+                       '_$sSo20CHSAvocadoDescriptorC9ChronoKitE7matches6localeSb10Foundation4DataVSg_tF', 
+                       '_$sSo8NSLocaleC9ChronoKitE18currentLocaleTokenSo6NSDataC_So12NSDictionaryCtyFZ', 
                        _ChronoKitVersionNumber, _ChronoKitVersionString ]
     objc-classes:    [ CHSWidgetPreviewInfo, _TtC9ChronoKit12WidgetReaper, _TtC9ChronoKit16ExtensionManager, 
                        _TtC9ChronoKit23WidgetHostingController, _TtC9ChronoKit26WidgetPreviewTimelineEntry, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A56D2AF0-5C7B-3473-9FF8-F86A51788FF4
+    value:           A63CC12F-8051-3196-9508-0C1D6F97C9B5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B7B37D63-F3B4-3595-8744-01AD93A7817D
+    value:           A4952464-B7EF-3C4B-A8A3-CA520C79FC0D
 install-name:    '/System/Library/PrivateFrameworks/MobileSoftwareUpdate.framework/Versions/A/MobileSoftwareUpdate'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

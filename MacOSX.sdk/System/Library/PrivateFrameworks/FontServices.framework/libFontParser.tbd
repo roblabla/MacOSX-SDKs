@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           790908AD-0BB4-380A-9F0F-A61292172ED0
+    value:           76C6C92A-1B16-3FB7-9EA2-7227D379C20F
   - target:          x86_64-maccatalyst
-    value:           790908AD-0BB4-380A-9F0F-A61292172ED0
+    value:           76C6C92A-1B16-3FB7-9EA2-7227D379C20F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B6E26F09-EFF6-3001-BD91-54E99BED7E70
+    value:           C3FF494B-E873-3E1C-9481-60A5D00A12E3
   - target:          arm64e-maccatalyst
-    value:           B6E26F09-EFF6-3001-BD91-54E99BED7E70
+    value:           C3FF494B-E873-3E1C-9481-60A5D00A12E3
 install-name:    '/System/Library/PrivateFrameworks/FontServices.framework/libFontParser.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]

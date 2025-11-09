@@ -29,6 +29,8 @@
 #ifndef _IOUSERNETWORKETHERNET_IIG
 #define _IOUSERNETWORKETHERNET_IIG
 
+#include <net/ethernet.h>
+
 #include <DriverKit/IOService.iig>
 #include <DriverKit/OSAction.iig>
 #include <DriverKit/IODispatchQueue.iig>
@@ -101,10 +103,16 @@ public:
     virtual kern_return_t
     SetPromiscuousModeEnable(bool enable) = 0;
 
+    /** @deprecated, use  setMulticastAddresses instead */
     virtual kern_return_t
     SetMulticastAddresses(
         const IOUserNetworkMACAddress * addresses,
-        uint32_t count) = 0;
+        uint32_t count);
+
+    virtual kern_return_t
+    setMulticastAddresses(
+        const ether_addr_t * addresses,
+        uint32_t count) LOCALONLY;
 
     virtual kern_return_t
     SetAllMulticastModeEnable(bool enable) = 0;
@@ -170,7 +178,7 @@ class EXTENDS (IOUserNetworkEthernet) IOUserNetworkEthernetPrivate
 };
 
 struct _IOUserNetworkEthernetInterfaceDescriptor {
-    IOUserNetworkMACAddress     macAddress;
+    ether_addr_t macAddress;
     uint32_t                featureFlags;
     uint32_t                 _reserved;
     uint16_t                txPacketHeadroomBytes;

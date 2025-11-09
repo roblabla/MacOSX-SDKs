@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AA78096C-C6CF-3158-A51D-00F60CA0D893
+    value:           2A2FF9B2-E7A0-33E5-8184-CBF38A29CDC7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AC3BA9A6-DD92-3544-94D8-5462B2D16539
+    value:           3A893075-5E02-3338-965C-280EA20068AF
 install-name:    '/System/Library/PrivateFrameworks/SystemUIPlugin.framework/Versions/A/SystemUIPlugin'
 current-version: 39
 exports:

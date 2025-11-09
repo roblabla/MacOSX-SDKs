@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6D485E6F-E1F3-3700-AA24-5BE3841C0F9A
+    value:           30FAEDA9-37A2-3778-A736-4B3DE1228632
   - target:          x86_64-maccatalyst
-    value:           6D485E6F-E1F3-3700-AA24-5BE3841C0F9A
+    value:           30FAEDA9-37A2-3778-A736-4B3DE1228632
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           84D9EAC2-6F77-3E33-90EB-4B8EBF36FDF3
+    value:           5FA0A986-26D2-3D41-92B0-2E7D982B9FB7
   - target:          arm64e-maccatalyst
-    value:           84D9EAC2-6F77-3E33-90EB-4B8EBF36FDF3
+    value:           5FA0A986-26D2-3D41-92B0-2E7D982B9FB7
 install-name:    '/System/Library/PrivateFrameworks/SpeakerRecognition.framework/Versions/A/SpeakerRecognition'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

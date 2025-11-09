@@ -2,8 +2,8 @@
 /* edit configure.ac to change version number */
 #define PHP_MAJOR_VERSION 7
 #define PHP_MINOR_VERSION 3
-#define PHP_RELEASE_VERSION 22
+#define PHP_RELEASE_VERSION 24
 #define PHP_EXTRA_VERSION "-(to be removed in future macOS)"
-#define PHP_VERSION "7.3.22-(to be removed in future macOS)"
-#define PHP_VERSION_ID 70322
-#define PHP_DEPRECATION_NOTICE "WARNING: PHP is not recommended\\nPHP is included in macOS for compatibility with legacy software.\\nFuture versions of macOS will not include PHP."
+#define PHP_VERSION "7.3.24-(to be removed in future macOS)"
+#define PHP_VERSION_ID 70324
+#define PHP_DEPRECATION_NOTICE "WARNING: PHP is not recommended\nPHP is included in macOS for compatibility with legacy software.\nFuture versions of macOS will not include PHP."

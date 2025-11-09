@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C5DFDB18-1F54-36FE-BEEF-BDE1A74FD3ED
+    value:           B0562890-9D34-3651-922D-9123118D6653
   - target:          x86_64-maccatalyst
-    value:           C5DFDB18-1F54-36FE-BEEF-BDE1A74FD3ED
+    value:           B0562890-9D34-3651-922D-9123118D6653
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7B9B5D50-83C9-3666-AD47-84E98EAE7E26
+    value:           8E72C575-C2F2-3BB5-B2E8-E5D027DB899A
   - target:          arm64e-maccatalyst
-    value:           7B9B5D50-83C9-3666-AD47-84E98EAE7E26
+    value:           8E72C575-C2F2-3BB5-B2E8-E5D027DB899A
 install-name:    '/System/Library/PrivateFrameworks/PrototypeTools.framework/Versions/A/PrototypeTools'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

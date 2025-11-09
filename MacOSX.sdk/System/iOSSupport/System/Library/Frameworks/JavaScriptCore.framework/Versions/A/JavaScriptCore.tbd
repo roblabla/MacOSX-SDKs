@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           54198FC6-8AB7-3606-A45D-B880911C8447
+    value:           A5EB1052-B1FF-3169-995B-B1FD7A19A27F
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           B559F918-D60D-310F-BC99-314D8301BB9D
+    value:           2FCC3A82-E7AA-3147-A534-4F9888990059
 install-name:    '/System/iOSSupport/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/JavaScriptCore'
-current-version: 610.2.11
+current-version: 610.3.7
 exports:
   - targets:         [ x86_64-maccatalyst ]
     symbols:         [ __ZN3JSC19WebAssemblyFunction6createERNS_2VMEPNS_14JSGlobalObjectEPNS_9StructureEjRKN3WTF6StringEPNS_21JSWebAssemblyInstanceERNS_4Wasm6CalleeEPNS_21MacroAssemblerCodePtrILNS7_6PtrTagE64376EEEy, 

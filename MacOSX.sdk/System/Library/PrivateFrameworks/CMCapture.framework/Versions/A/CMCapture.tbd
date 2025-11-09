@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           80EF2A67-C15A-330B-B631-23930F621CF1
+    value:           21771336-D58A-3F59-A4BE-679B1308A4B0
   - target:          x86_64-maccatalyst
-    value:           80EF2A67-C15A-330B-B631-23930F621CF1
+    value:           21771336-D58A-3F59-A4BE-679B1308A4B0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F6D4E4B7-7CE4-3BBF-8D73-A1ACE3DC97A8
+    value:           62A58D75-5D84-3706-81E2-B44E066C8B4B
   - target:          arm64e-maccatalyst
-    value:           F6D4E4B7-7CE4-3BBF-8D73-A1ACE3DC97A8
+    value:           62A58D75-5D84-3706-81E2-B44E066C8B4B
 install-name:    '/System/Library/PrivateFrameworks/CMCapture.framework/Versions/A/CMCapture'
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -30,8 +30,8 @@ exports:
                        _BWCMSampleBufferCreateCopyWithNewTimingIncludingMetadata, 
                        _BWCMSampleBufferCreateDeepCopyWithNewPixelBuffer, _BWCompressedPixelFormatForPixelFormat, 
                        _BWFigVideoCaptureDeviceShallowDepthOfFieldStatusChangedNotificationPayloadKeyPreviewRenderingStatus, 
-                       _BWFullRangePixelFormatForPixelFormat, _BWInferenceAttachmentKey_VisionAestheticsObservation, 
-                       _BWInferenceAttachmentKey_VisionExtendedFaceObservations, 
+                       _BWFullRangePixelFormatForPixelFormat, _BWInferenceAttachmentKey_MattedMasksContainValidContent, 
+                       _BWInferenceAttachmentKey_VisionAestheticsObservation, _BWInferenceAttachmentKey_VisionExtendedFaceObservations, 
                        _BWInferenceAttachmentKey_VisionFaceDetectionObservations, 
                        _BWInferenceAttachmentKey_VisionFoodAndDrinkObservations, 
                        _BWInferenceAttachmentKey_VisionImageSaliencyObservation, 
@@ -209,6 +209,10 @@ exports:
                        _kFigCameraCalibrationDataMetadataAttachmentKey_LensDistortionCoefficients, 
                        _kFigCameraCalibrationDataMetadataAttachmentKey_PixelSize, 
                        _kFigCameraCharacterization_MicronsPerPixel, _kFigCaptureAddAttachmentsOptionsKey_SelectedAttachmentKeys, 
+                       _kFigCaptureAppClipCodeAttachmentKey_AppClipCodes, _kFigCaptureAppClipCodeAttachmentKey_AppClipCodesCount, 
+                       _kFigCaptureAppClipCodeAttachmentKey_BoundingRect, _kFigCaptureAppClipCodeAttachmentKey_Corners, 
+                       _kFigCaptureAppClipCodeAttachmentKey_Metadata, _kFigCaptureAppClipCodeAttachmentKey_RawData, 
+                       _kFigCaptureAppClipCodeAttachmentKey_TimeStamp, _kFigCaptureAppClipCodeAttachmentKey_Version, 
                        _kFigCaptureDeferredContainerManagerNotification_ServerConnectionDied, 
                        _kFigCaptureDeferredPhotoProcessorNotificationPayloadKey_CaptureRequestIdentifier, 
                        _kFigCaptureDeferredPhotoProcessorNotificationPayloadKey_ErrorReason, 
@@ -752,9 +756,9 @@ exports:
                        _portIndexFromPortType, _reasonableSimulationFramerate, _sFigCaptureSessionCameraAppStartupTelemetry, 
                        _sFigCaptureSessionPrewarming, _sLockScreenCameraLaunchTelemetry, 
                        _videoStabilizationUsesOpenGLES3 ]
-    objc-classes:    [ BWAdaptiveBracketingFrameParameters, BWAggdDataReporter, BWAttachedMediaSplitNode, 
-                       BWAttachedMediaSwapNode, BWAudioConverterNode, BWAudioFileSinkNode, 
-                       BWAudioFormat, BWAudioSourceNode, BWAutoFocusDriverShortStatisticsAnalyticsPayload, 
+    objc-classes:    [ BWAdaptiveBracketingFrameParameters, BWAggdDataReporter, BWAppClipCodeNode, 
+                       BWAttachedMediaSplitNode, BWAttachedMediaSwapNode, BWAudioConverterNode, 
+                       BWAudioFileSinkNode, BWAudioFormat, BWAudioSourceNode, BWAutoFocusDriverShortStatisticsAnalyticsPayload, 
                        BWAutoFocusPositionSensorMonitor, BWBackPressureNode, BWBoxedOutputDetectionTimingInfo, 
                        BWBracketSettings, BWBravoPortraitSceneMonitor, BWBravoPortraitSceneMonitorV2, 
                        BWBravoStreamSelector, BWBreadthFirstEnumerator, BWCameraCalibrationDataFormat, 
@@ -784,9 +788,9 @@ exports:
                        BWIntermediateJPEGCompressor, BWIrisDiscontinuity, BWIrisMovieGenerator, 
                        BWIrisMovieInfo, BWIrisMovieInfoAndCallback, BWIrisSequenceAdjuster, 
                        BWIrisStagingNode, BWIrisStillImageMovieMetadataCache, BWLimitedGMErrorLogger, 
-                       BWLivePhotoMovieAnalyticsPayload, BWMRCNode, BWMemoryPool, 
-                       BWMetadataFormat, BWMetadataObjectFormat, BWMetadataSourceNode, 
-                       BWMetadataTimeMachine, BWMetadataTimeMachineMetadataRequest, 
+                       BWLivePhotoMovieAnalyticsPayload, BWMRCGatingNode, BWMRCGatingOutputController, 
+                       BWMRCNode, BWMemoryPool, BWMetadataFormat, BWMetadataObjectFormat, 
+                       BWMetadataSourceNode, BWMetadataTimeMachine, BWMetadataTimeMachineMetadataRequest, 
                        BWMetadataTimeMachineRequest, BWMetadataTimeMachineWaitRequest, 
                        BWMetalColorCubeRenderer, BWMetalColorCubeRendererParameters, 
                        BWMotionAttachmentsNode, BWMotionDataPreserver, BWMotionDataTimeMachine, 
@@ -807,9 +811,9 @@ exports:
                        BWPreviewStitcherNode, BWPreviewTimeMachineSinkNode, BWQuickTimeMovieFileSinkNode, 
                        BWRamp, BWRemoteQueueSinkNode, BWRenderList, BWRenderListAnimator, 
                        BWRenderListParameters, BWRenderListProcessor, BWReverseBreadthFirstEnumerator, 
-                       BWReverseDepthFirstEnumerator, BWRingBuffer, BWSensorConfiguration, 
-                       BWSimpleCache, BWSingleCameraPortraitSceneMonitor, BWSinkNode, 
-                       BWSlaveFrameSynchronizerNode, BWSourceNode, BWSphereModeSelector, 
+                       BWReverseDepthFirstEnumerator, BWRingBuffer, BWSceneStabilityMonitor, 
+                       BWSensorConfiguration, BWSimpleCache, BWSingleCameraPortraitSceneMonitor, 
+                       BWSinkNode, BWSlaveFrameSynchronizerNode, BWSourceNode, BWSphereModeSelector, 
                        BWSpringSimulation, BWStartupCalibrationAnalyticsPayload, 
                        BWStats, BWStillImageBufferRouterNode, BWStillImageCaptureAnalyticsPayload, 
                        BWStillImageCaptureDelegateCallbackInfo, BWStillImageCaptureMetadata, 
@@ -970,24 +974,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           804318C1-3422-33C8-B336-D861794701DE
+    value:           A0D43E58-B960-3A80-8807-4115F0E1EF74
   - target:          x86_64-maccatalyst
-    value:           804318C1-3422-33C8-B336-D861794701DE
+    value:           A0D43E58-B960-3A80-8807-4115F0E1EF74
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C7CFCE91-98A7-3C63-A0E5-B85CA81E62FB
+    value:           A89879A4-F679-3168-A50A-8F83FBE3184C
   - target:          arm64e-maccatalyst
-    value:           C7CFCE91-98A7-3C63-A0E5-B85CA81E62FB
+    value:           A89879A4-F679-3168-A50A-8F83FBE3184C
 install-name:    '/System/Library/PrivateFrameworks/CMCaptureCore.framework/Versions/A/CMCaptureCore'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ CMCapture, CMCaptureCoreTests, CoreMedia, MediaToolbox ]
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _FigCaptureComputeImageGainFromMetadata, _FigCaptureCopySerializableKeys, 
                        _FigStartCaptureServers, _kCMCaptureCoreSCMVersion, _kFigAppleMakerNote_AEAverage, 
@@ -1176,8 +1180,12 @@ exports:
                        _kFigCaptureSampleBufferAttachmentKey_OriginalPresentationTimeStamp, 
                        _kFigCaptureSampleBufferAttachmentKey_PrimaryCaptureRect, 
                        _kFigCaptureSampleBufferAttachmentKey_PrimaryCaptureRectBeforeCropping, 
-                       _kFigCaptureSampleBufferAttachmentKey_RawImage, _kFigCaptureSampleBufferAttachmentKey_SashimiRaw, 
-                       _kFigCaptureSampleBufferAttachmentKey_SparePixelBuffer, _kFigCaptureSampleBufferAttachmentKey_StreamingForegroundSegmentationBuffer, 
+                       _kFigCaptureSampleBufferAttachmentKey_RawImage, _kFigCaptureSampleBufferAttachmentKey_RunMRCDetection, 
+                       _kFigCaptureSampleBufferAttachmentKey_SashimiRaw, _kFigCaptureSampleBufferAttachmentKey_SceneLikelyToHaveCodes, 
+                       _kFigCaptureSampleBufferAttachmentKey_SceneMotionOffsetX, 
+                       _kFigCaptureSampleBufferAttachmentKey_SceneMotionOffsetY, 
+                       _kFigCaptureSampleBufferAttachmentKey_SceneStable, _kFigCaptureSampleBufferAttachmentKey_SparePixelBuffer, 
+                       _kFigCaptureSampleBufferAttachmentKey_StreamingForegroundSegmentationBuffer, 
                        _kFigCaptureSampleBufferAttachmentKey_SushiRaw, _kFigCaptureSampleBufferAttachmentKey_TrackedFaces, 
                        _kFigCaptureSampleBufferAttachmentKey_VideoPreviewHistogramData, 
                        _kFigCaptureSampleBufferAttachmentKey_VideoPreviewLumaHistogramData, 
@@ -1189,8 +1197,9 @@ exports:
                        _kFigCaptureSampleBufferMetadata_FinalCropRectHasBeenAppliedByBlackeningBorders, 
                        _kFigCaptureSampleBufferMetadata_FocalLenIn35mmFilmFromSource, 
                        _kFigCaptureSampleBufferMetadata_FocusAccelerometerVector, 
-                       _kFigCaptureSampleBufferMetadata_GainMapHeadroom, _kFigCaptureSampleBufferMetadata_NRFInputBracketCount, 
-                       _kFigCaptureSampleBufferMetadata_NRFRegisteredBracketCount, 
+                       _kFigCaptureSampleBufferMetadata_GainMapHeadroom, _kFigCaptureSampleBufferMetadata_LTMDigitalGain, 
+                       _kFigCaptureSampleBufferMetadata_LTMRelativeBrightness, _kFigCaptureSampleBufferMetadata_LTMSoftGain, 
+                       _kFigCaptureSampleBufferMetadata_NRFInputBracketCount, _kFigCaptureSampleBufferMetadata_NRFRegisteredBracketCount, 
                        _kFigCaptureSampleBufferMetadata_NRFSRLStatus, _kFigCaptureSampleBufferMetadata_NRFStatus, 
                        _kFigCaptureSampleBufferMetadata_RequestedExposureBias, _kFigCaptureSampleBufferMetadata_SISMethod, 
                        _kFigCaptureSampleBufferMetadata_Stationary, _kFigCaptureSampleBufferMetadata_StillImageScaleFactorHasBeenApplied, 
@@ -1731,16 +1740,18 @@ exports:
                        _kFigCaptureStreamRegionStrictness_Strict, _kFigCaptureStreamSaliencyHeatMapKey_BytesPerRow, 
                        _kFigCaptureStreamSaliencyHeatMapKey_Height, _kFigCaptureStreamSaliencyHeatMapKey_Map, 
                        _kFigCaptureStreamSaliencyHeatMapKey_Width, _kFigCaptureStreamSalientObjectsKey_HeatMap, 
-                       _kFigCaptureStreamSceneType_Baby, _kFigCaptureStreamSceneType_Beach, 
-                       _kFigCaptureStreamSceneType_BrightStage, _kFigCaptureStreamSceneType_Concert, 
-                       _kFigCaptureStreamSceneType_Document, _kFigCaptureStreamSceneType_Documents, 
-                       _kFigCaptureStreamSceneType_Fireworks, _kFigCaptureStreamSceneType_Foliage, 
-                       _kFigCaptureStreamSceneType_Forest, _kFigCaptureStreamSceneType_Mountains, 
-                       _kFigCaptureStreamSceneType_Ocean, _kFigCaptureStreamSceneType_Others, 
-                       _kFigCaptureStreamSceneType_Pet, _kFigCaptureStreamSceneType_PointLightSources, 
-                       _kFigCaptureStreamSceneType_PointLights, _kFigCaptureStreamSceneType_QR, 
-                       _kFigCaptureStreamSceneType_Sky, _kFigCaptureStreamSceneType_Snow, 
-                       _kFigCaptureStreamSceneType_Sport, _kFigCaptureStreamSceneType_Starry, 
+                       _kFigCaptureStreamSceneType_AppCode, _kFigCaptureStreamSceneType_Baby, 
+                       _kFigCaptureStreamSceneType_Beach, _kFigCaptureStreamSceneType_BrightStage, 
+                       _kFigCaptureStreamSceneType_Concert, _kFigCaptureStreamSceneType_Document, 
+                       _kFigCaptureStreamSceneType_Documents, _kFigCaptureStreamSceneType_Fireworks, 
+                       _kFigCaptureStreamSceneType_Foliage, _kFigCaptureStreamSceneType_Forest, 
+                       _kFigCaptureStreamSceneType_LynxGiftCard, _kFigCaptureStreamSceneType_Mountains, 
+                       _kFigCaptureStreamSceneType_Ocean, _kFigCaptureStreamSceneType_OtherCode, 
+                       _kFigCaptureStreamSceneType_Others, _kFigCaptureStreamSceneType_Pet, 
+                       _kFigCaptureStreamSceneType_PointLightSources, _kFigCaptureStreamSceneType_PointLights, 
+                       _kFigCaptureStreamSceneType_QR, _kFigCaptureStreamSceneType_Sky, 
+                       _kFigCaptureStreamSceneType_Snow, _kFigCaptureStreamSceneType_Sport, 
+                       _kFigCaptureStreamSceneType_StandardGiftCard, _kFigCaptureStreamSceneType_Starry, 
                        _kFigCaptureStreamSceneType_SunsetSunrise, _kFigCaptureStreamSphereControllerHealthKey_AverageCurrentConsumption, 
                        _kFigCaptureStreamSphereControllerHealthKey_ExternalForceOffsetX, 
                        _kFigCaptureStreamSphereControllerHealthKey_ExternalForceOffsetY, 
@@ -2010,6 +2021,7 @@ exports:
                        _kFigHardwareTemporalNoiseReductionSampleBufferProcessorPropertyValue_Params_MotionTable, 
                        _kFigHardwareTemporalNoiseReductionSampleBufferProcessorPropertyValue_Params_SelectK, 
                        _kFigHardwareTemporalNoiseReductionSampleBufferProcessorProperty_Params, 
+                       _kFigMetadataIdentifier_QuickTimeMetadataDetectedMachineReadableCodeAppClipCode, 
                        _kFigMetadataIdentifier_QuickTimeMetadataVideoPreviewHistogram, 
                        _kFigMotionAttachmentsSampleBufferProcessorMetadata_Acceleration, 
                        _kFigMotionAttachmentsSampleBufferProcessorMetadata_Attitude, 

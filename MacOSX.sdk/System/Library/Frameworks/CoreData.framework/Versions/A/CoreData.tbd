@@ -4,25 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6C0B0BAF-15CB-30CB-91AC-2F883DA35343
+    value:           FD6AB5DD-38B1-366F-ADE1-F2EA94CDAA20
   - target:          x86_64-maccatalyst
-    value:           6C0B0BAF-15CB-30CB-91AC-2F883DA35343
+    value:           FD6AB5DD-38B1-366F-ADE1-F2EA94CDAA20
   - target:          x86_64h-macos
-    value:           FB4EDDF9-84E3-3E46-8E1E-5E3A03CA5C2E
+    value:           76179A55-CA89-3967-A0A7-C419DB735983
   - target:          x86_64h-maccatalyst
-    value:           FB4EDDF9-84E3-3E46-8E1E-5E3A03CA5C2E
+    value:           76179A55-CA89-3967-A0A7-C419DB735983
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1429F4B6-24E1-3FA3-9CDD-C8BA0AF34088
+    value:           0DFDE2DB-2C07-3DBE-872E-CFD24D675C43
   - target:          arm64e-maccatalyst
-    value:           1429F4B6-24E1-3FA3-9CDD-C8BA0AF34088
+    value:           0DFDE2DB-2C07-3DBE-872E-CFD24D675C43
 install-name:    '/System/Library/Frameworks/CoreData.framework/Versions/A/CoreData'
-current-version: 1044
+current-version: 1044.3
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, x86_64-maccatalyst, 
                        x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
     symbols:         [ _NSAddedPersistentStoresKey, _NSAffectedObjectsErrorKey, _NSAffectedStoresErrorKey, 
                        _NSAutomaticMigrationUseDocumentDestinationOption, _NSBinaryExternalRecordType, 

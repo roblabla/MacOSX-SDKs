@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           13260443-85E0-331E-9848-913638470C31
+    value:           112C7165-8F3C-3953-801E-9EA31F562B8A
   - target:          x86_64-maccatalyst
-    value:           13260443-85E0-331E-9848-913638470C31
+    value:           112C7165-8F3C-3953-801E-9EA31F562B8A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E021642C-ABFC-35D2-B6C9-0FCE79F1363C
+    value:           AC9A8520-22EE-3A17-8558-BDFDB8F66D53
   - target:          arm64e-maccatalyst
-    value:           E021642C-ABFC-35D2-B6C9-0FCE79F1363C
+    value:           AC9A8520-22EE-3A17-8558-BDFDB8F66D53
 install-name:    '/System/Library/PrivateFrameworks/NewsFoundation.framework/Versions/A/NewsFoundation'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

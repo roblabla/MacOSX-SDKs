@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1AD3BDA3-9EC0-329F-BA07-740580694F9F
+    value:           B0B2A8DD-A6F1-3EF7-9351-1BA604353A11
   - target:          x86_64-maccatalyst
-    value:           1AD3BDA3-9EC0-329F-BA07-740580694F9F
+    value:           B0B2A8DD-A6F1-3EF7-9351-1BA604353A11
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9DE6FF1A-41A5-35F3-9E5A-943A30C798CD
+    value:           AE3C151D-2022-3A70-9DE4-FA773BF55FDB
   - target:          arm64e-maccatalyst
-    value:           9DE6FF1A-41A5-35F3-9E5A-943A30C798CD
+    value:           AE3C151D-2022-3A70-9DE4-FA773BF55FDB
 install-name:    '/System/Library/Frameworks/CoreText.framework/Versions/A/CoreText'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CTCopyDescriptionDictionary, _CTFontCollectionCopyAttributes, 
                        _CTFontCollectionCopyExclusionDescriptors, _CTFontCollectionCopyFontAttribute, 
@@ -363,7 +363,7 @@ exports:
                        CTGlyphStorageInterface._glyphCount, CTGlyphStorageInterface._glyphs, 
                        CTGlyphStorageInterface._origins, CTGlyphStorageInterface._props, 
                        CTGlyphStorageInterface._stringIndexes ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ '$ld$install_name$os10.5$/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 
                        '$ld$install_name$os10.6$/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 
                        '$ld$install_name$os10.7$/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 

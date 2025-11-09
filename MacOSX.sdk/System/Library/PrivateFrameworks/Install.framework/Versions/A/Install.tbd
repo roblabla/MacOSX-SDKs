@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1C061634-7559-3D10-B549-0DB858B0EFBB
+    value:           B0CDF2F2-1FED-3598-88E8-02E5B125616C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B768C9E2-1AFE-3D4B-97EE-BB548E282DAE
+    value:           7BD8C694-4AB5-3EB0-93FA-CE82BC2B4917
 install-name:    '/System/Library/PrivateFrameworks/Install.framework/Versions/A/Install'
 current-version: 1000
 exports:

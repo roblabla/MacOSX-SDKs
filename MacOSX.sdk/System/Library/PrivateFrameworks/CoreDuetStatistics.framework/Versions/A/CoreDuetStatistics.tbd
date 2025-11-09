@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BC9557F3-F87E-3FC3-A22A-955357B5C18F
+    value:           DA9A23BA-362E-3158-9665-09C5F97D2F09
   - target:          x86_64-maccatalyst
-    value:           BC9557F3-F87E-3FC3-A22A-955357B5C18F
+    value:           DA9A23BA-362E-3158-9665-09C5F97D2F09
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F96D574D-1004-3EAC-82A1-492673B45F1B
+    value:           9204758C-1628-386D-80EB-B5BAD1DF7544
   - target:          arm64e-maccatalyst
-    value:           F96D574D-1004-3EAC-82A1-492673B45F1B
+    value:           9204758C-1628-386D-80EB-B5BAD1DF7544
 install-name:    '/System/Library/PrivateFrameworks/CoreDuetStatistics.framework/Versions/A/CoreDuetStatistics'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

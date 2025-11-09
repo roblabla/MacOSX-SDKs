@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CAEE2317-F3BD-33C6-91D6-2F938B955AB8
+    value:           6581AC5D-5487-3A9C-9436-6A9B7FAF78BF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A6F5DEC7-F979-3A2D-9AA2-5AE0ED035F69
+    value:           B2A5D007-20B2-3DD5-A733-6DEC8AA84CF0
 install-name:    '/System/Library/PrivateFrameworks/CoreCDPInternal.framework/Versions/A/CoreCDPInternal'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           88BCCFE7-BCB6-3F4E-8F30-9E07D504CB92
+    value:           14DFF088-853F-30F6-A60C-5884310238F4
   - target:          x86_64-maccatalyst
-    value:           88BCCFE7-BCB6-3F4E-8F30-9E07D504CB92
+    value:           14DFF088-853F-30F6-A60C-5884310238F4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           564F135D-814B-35A4-9A2A-A49DD9E72C5A
+    value:           8D477CFC-1D18-3E26-AF5E-03ED4F49D9CA
   - target:          arm64e-maccatalyst
-    value:           564F135D-814B-35A4-9A2A-A49DD9E72C5A
+    value:           8D477CFC-1D18-3E26-AF5E-03ED4F49D9CA
 install-name:    '/System/Library/PrivateFrameworks/CaptiveNetwork.framework/Versions/A/CaptiveNetwork'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

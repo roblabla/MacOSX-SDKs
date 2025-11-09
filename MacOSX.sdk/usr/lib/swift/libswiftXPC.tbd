@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6D429554-F7A6-3EA0-A6CF-A9D6BA1441FF
+    value:           AE90953B-1D6B-3716-81D2-65B76B5AF528
   - target:          x86_64-maccatalyst
-    value:           6D429554-F7A6-3EA0-A6CF-A9D6BA1441FF
+    value:           AE90953B-1D6B-3716-81D2-65B76B5AF528
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4DEBEC88-35C5-3272-8958-C1EDBD65AE00
+    value:           89D4396C-A5B0-311C-8C51-F826AB356841
   - target:          arm64e-maccatalyst
-    value:           4DEBEC88-35C5-3272-8958-C1EDBD65AE00
+    value:           89D4396C-A5B0-311C-8C51-F826AB356841
 install-name:    '/usr/lib/swift/libswiftXPC.dylib'
 current-version: 1.1
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftXPC.dylib', '$ld$install_name$os10.11$@rpath/libswiftXPC.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftXPC.dylib', '$ld$install_name$os10.13$@rpath/libswiftXPC.dylib', 

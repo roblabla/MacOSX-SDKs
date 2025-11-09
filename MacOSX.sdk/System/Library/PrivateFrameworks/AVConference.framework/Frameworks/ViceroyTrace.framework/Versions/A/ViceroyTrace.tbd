@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           77167579-9FBB-3D39-941F-E5CF934E59D0
+    value:           D8A99957-0ACA-3DCE-A1B5-5A81E4A1F365
   - target:          x86_64-maccatalyst
-    value:           77167579-9FBB-3D39-941F-E5CF934E59D0
+    value:           D8A99957-0ACA-3DCE-A1B5-5A81E4A1F365
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C1922783-59CC-3CC2-A9A7-83BA7402EA42
+    value:           3FA575AC-2DB2-313C-ABC0-FC1D063336D6
   - target:          arm64e-maccatalyst
-    value:           C1922783-59CC-3CC2-A9A7-83BA7402EA42
+    value:           3FA575AC-2DB2-313C-ABC0-FC1D063336D6
 install-name:    '/System/Library/PrivateFrameworks/AVConference.framework/Frameworks/ViceroyTrace.framework/Versions/A/ViceroyTrace'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

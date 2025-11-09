@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           62C51CCB-B5BC-3E48-935E-77B2968343BF
+    value:           9C615967-6D8E-307F-B028-6278A4FA7C8C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6D2990B5-62AC-36CF-8F2C-AFC7AFB75BBA
+    value:           4A7CBA4E-46D7-3C12-9E87-20C15E4FACE6
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Versions/A/CarbonCore'
 current-version: 1307
 parent-umbrella:

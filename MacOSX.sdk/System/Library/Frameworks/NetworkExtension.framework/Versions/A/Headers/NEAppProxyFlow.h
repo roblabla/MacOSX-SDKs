@@ -122,6 +122,12 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  */
 @property (readonly, nullable) NSString *remoteHostname API_AVAILABLE(macos(11.0), ios(14.2)) API_UNAVAILABLE(tvos, watchos) __WATCHOS_PROHIBITED;
 
+/*!
+ * @property isBound
+ * @discussion YES if the flow was bound by the application to a specific interface (contained in the networkInterface property), NO otherwise.
+ */
+@property (readonly) BOOL isBound API_AVAILABLE(macos(11.1), ios(14.3)) API_UNAVAILABLE(tvos, watchos) __WATCHOS_PROHIBITED;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DC00A3D7-D164-3256-9682-92C8D7DD96C5
+    value:           EEDE4AFB-E921-3B6E-BEF9-85E94B86F472
   - target:          x86_64-maccatalyst
-    value:           DC00A3D7-D164-3256-9682-92C8D7DD96C5
+    value:           EEDE4AFB-E921-3B6E-BEF9-85E94B86F472
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A79988B2-D77C-3801-AF3B-E2B2A7F789BF
+    value:           DD53D060-E123-3942-8EA4-7EB650D58AF3
   - target:          arm64e-maccatalyst
-    value:           A79988B2-D77C-3801-AF3B-E2B2A7F789BF
+    value:           DD53D060-E123-3942-8EA4-7EB650D58AF3
 install-name:    '/usr/lib/swift/libswiftCoreFoundation.dylib'
 current-version: 1.6
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftCoreFoundation.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftCoreFoundation.dylib', 

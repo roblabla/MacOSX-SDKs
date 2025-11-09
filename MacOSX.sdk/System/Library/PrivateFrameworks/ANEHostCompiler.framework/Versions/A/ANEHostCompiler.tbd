@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           835B7028-548A-36E3-B906-19FE2F122E9D
+    value:           C07B724A-FFB4-339F-ABFB-1CD066CF3774
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C29D85F9-2AF2-365F-AB94-47986C5BDAD5
+    value:           9EE30338-2412-363C-87C8-20D379D4AD9C
 install-name:    '@rpath/ANEHostCompiler.framework/Versions/A/ANEHostCompiler'
 exports:
   - targets:         [ x86_64-macos ]

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           52B52CD8-3241-3C53-A39D-DB475046F910
+    value:           1EA4C0F0-6039-3215-84FB-0AAEB3F98E3D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9757C689-CAF8-35EC-BD4F-1E6D7F525BE2
+    value:           ACFC07D9-6EA4-3541-9748-6F01DB0ABEA2
 install-name:    '/System/Library/PrivateFrameworks/ConfigurationProfiles.framework/Versions/A/ConfigurationProfiles'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C2431215-6B03-3435-BD27-6E634408D600
+    value:           E1062C6A-0834-311D-BA1A-CE43CC7CBC20
   - target:          x86_64-maccatalyst
-    value:           C2431215-6B03-3435-BD27-6E634408D600
+    value:           E1062C6A-0834-311D-BA1A-CE43CC7CBC20
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           14E36D79-3D02-349C-89B1-78811A087697
+    value:           8A78AC80-9F84-353E-824C-46A1F59339F8
   - target:          arm64e-maccatalyst
-    value:           14E36D79-3D02-349C-89B1-78811A087697
+    value:           8A78AC80-9F84-353E-824C-46A1F59339F8
 install-name:    '/System/Library/PrivateFrameworks/SiriTTS.framework/Versions/A/SiriTTS'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -36,7 +36,7 @@ exports:
                        __ZN14TTSSynthesizer18set_global_whisperEb, __ZN14TTSSynthesizer19load_voice_resourceEPKvRKmRKNSt3__112basic_stringIcNS4_11char_traitsIcEENS4_9allocatorIcEEEE, 
                        __ZN14TTSSynthesizer19load_voice_resourceERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEES8_, 
                        __ZN14TTSSynthesizer19ready_for_synthesisEv, __ZN14TTSSynthesizer19set_global_propertyENS_14GlobalPropertyEf, 
-                       __ZN14TTSSynthesizer20has_phatic_responsesERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE, 
+                       __ZN14TTSSynthesizer19set_prohibit_neuralEb, __ZN14TTSSynthesizer20has_phatic_responsesERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE, 
                        __ZN14TTSSynthesizer20set_analysis_enabledEb, __ZN14TTSSynthesizer20set_censor_plaintextEb, 
                        __ZN14TTSSynthesizer20set_prompts_disabledEb, __ZN14TTSSynthesizer20synthesize_text_syncERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEERNS0_6vectorIhNS4_IhEEEE, 
                        __ZN14TTSSynthesizer21get_voice_descriptionEv, __ZN14TTSSynthesizer21synthesize_text_asyncERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEERNS0_6vectorIhNS4_IhEEEENS0_8functionIFiNS_15CallbackMessageEEEE, 

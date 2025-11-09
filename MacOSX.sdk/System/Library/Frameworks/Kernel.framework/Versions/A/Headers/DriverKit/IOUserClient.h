@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.40.8) generated from IOUserClient.iig */
+/* iig(DriverKit-107.60.3) generated from IOUserClient.iig */
 
 /* IOUserClient.iig:1-153 */
 /*
@@ -510,7 +510,7 @@ public:
 struct OSAction_IOUserClient_KernelCompletion_IVars;
 struct OSAction_IOUserClient_KernelCompletion_LocalIVars;
 
-class OSAction_IOUserClient_KernelCompletion : public OSAction, public OSAction_IOUserClient_KernelCompletionInterface
+class __attribute__((availability(driverkit,introduced=20,message="Type-safe OSAction factory methods are available in DriverKit 20 and newer"))) OSAction_IOUserClient_KernelCompletion : public OSAction, public OSAction_IOUserClient_KernelCompletionInterface
 {
     OSDeclareDefaultStructorsWithDispatch(OSAction_IOUserClient_KernelCompletion);
 

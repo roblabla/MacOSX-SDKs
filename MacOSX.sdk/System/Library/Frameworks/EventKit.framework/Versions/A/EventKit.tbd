@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EA502517-D07F-3D41-A453-AAA8BDADC7A1
+    value:           0C1461AA-4F63-3473-86B7-8C7C0A290B8C
   - target:          x86_64-maccatalyst
-    value:           EA502517-D07F-3D41-A453-AAA8BDADC7A1
+    value:           0C1461AA-4F63-3473-86B7-8C7C0A290B8C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           20E66195-BC13-31DB-A0A7-5CBFEE143B03
+    value:           C965076F-039A-315D-AE74-592D4F7EC411
   - target:          arm64e-maccatalyst
-    value:           20E66195-BC13-31DB-A0A7-5CBFEE143B03
+    value:           C965076F-039A-315D-AE74-592D4F7EC411
 install-name:    '/System/Library/Frameworks/EventKit.framework/Versions/A/EventKit'
-current-version: 1414
+current-version: 1414.3.1
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _EKActionConfirmSuggestedEvent, _EKActionRejectSuggestedEvent, 
                        _EKAutoCommentPrefix, _EKAvailabilityCacheErrorDomain, _EKAvailabilitySpanTypeAsString, 
@@ -113,19 +113,19 @@ exports:
                        EKCalendarSharedCalendarNotification, EKCalendarStoreBackingStore, 
                        EKCalendarSuggestionNotification, EKCalendarVisibilityManager, 
                        EKChangeListener, EKChangeSet, EKChangeTrackingClientId, EKCompatibility, 
-                       EKConferenceURLDetector, EKConflictDetails, EKConflictScanJob, 
-                       EKConflictScanner, EKCoreDataFaultDelegate, EKCreateEventIntent, 
-                       EKCreateEventIntentResponse, EKCredentials, EKDataProtectionObserver, 
-                       EKDebugPreferences, EKDiff, EKDirectoryLocation, EKDirectoryPerson, 
-                       EKDirectoryRecord, EKDirectorySearchOperation, EKDirectorySearchQuery, 
-                       EKDirectorySearchResultSet, EKDuetSignalEventSerializer, EKEphemeralCacheEventStoreProvider, 
-                       EKEvent, EKEventActionHandler, EKEventOccurrenceCache, EKEventRangePredicate, 
-                       EKEventSliceInfo, EKEventStore, EKFeatureSet, EKFrozenAlarm, 
-                       EKFrozenCalendar, EKFrozenCalendarItem, EKFrozenCalendarSource, 
-                       EKFrozenEvent, EKFrozenObject, EKFrozenReminder, EKICSImporter, 
-                       EKInviteeAlternativeTime, EKInviteeAlternativeTimeSearcher, 
-                       EKJunkInvitationProtocol_Shared, EKManagedObjectContext, EKMutableTravelEngineHypothesis, 
-                       EKObject, EKObjectChangeSummarizer, EKObjectPersistentChangesModel, 
+                       EKConflictDetails, EKConflictScanJob, EKConflictScanner, EKCoreDataFaultDelegate, 
+                       EKCreateEventIntent, EKCreateEventIntentResponse, EKCredentials, 
+                       EKDataProtectionObserver, EKDebugPreferences, EKDiff, EKDirectoryLocation, 
+                       EKDirectoryPerson, EKDirectoryRecord, EKDirectorySearchOperation, 
+                       EKDirectorySearchQuery, EKDirectorySearchResultSet, EKDuetSignalEventSerializer, 
+                       EKEphemeralCacheEventStoreProvider, EKEvent, EKEventActionHandler, 
+                       EKEventOccurrenceCache, EKEventRangePredicate, EKEventSliceInfo, 
+                       EKEventStore, EKFeatureSet, EKFrozenAlarm, EKFrozenCalendar, 
+                       EKFrozenCalendarItem, EKFrozenCalendarSource, EKFrozenEvent, 
+                       EKFrozenObject, EKFrozenReminder, EKICSImporter, EKInviteeAlternativeTime, 
+                       EKInviteeAlternativeTimeSearcher, EKJunkInvitationProtocol_Shared, 
+                       EKManagedObjectContext, EKMutableTravelEngineHypothesis, EKObject, 
+                       EKObjectChangeSummarizer, EKObjectPersistentChangesModel, 
                        EKOccurrenceCacheLocationSearch, EKOfficeHour, EKOrganizer, 
                        EKParticipant, EKParticipantForSorting, EKPersistentHistoryTransactionChangeSummary, 
                        EKPersistentHistoryTransactionChangeSummaryModel, EKPredicate, 

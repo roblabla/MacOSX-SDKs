@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D413833A-9D55-3ECD-9DD4-D07BB62BAE24
+    value:           32C4334F-EF26-3E17-B7BC-F7C5B28A0BF2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EB17EE01-2FAB-3579-A2DE-CFB65F6BFE92
+    value:           938251C5-0385-3A6A-B463-295FB36B3784
 install-name:    '/System/Library/PrivateFrameworks/SiriKitRuntime.framework/Versions/A/SiriKitRuntime'
 swift-abi-version: 7
 allowable-clients:
@@ -16,7 +16,11 @@ allowable-clients:
                        SiriKitRuntimeTests, SiriRequestDispatcher, SiriRequestDispatcherTests ]
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ '_$s11SiriKitFlow11InputOriginO0aB7RuntimeE4from03acedE0ACSgSS_tFZ', 
+    symbols:         [ '_$s11SiriKitFlow11BargeInModeV0aB7RuntimeE4from8aceModesACSaySSG_tFZ', 
+                       '_$s11SiriKitFlow11InputOriginO0aB7RuntimeE4from03acedE0ACSgSS_tFZ', 
+                       '_$s11SiriKitFlow14BargeInContextV0aB7RuntimeE16debugDescriptionSSvg', 
+                       '_$s11SiriKitFlow14BargeInContextV0aB7RuntimeE16debugDescriptionSSvpMV', 
+                       '_$s11SiriKitFlow14BargeInContextVs28CustomDebugStringConvertible0aB7RuntimeMc', 
                        '_$s11SiriKitFlow15InteractionTypeO0aB7RuntimeE4from03acedE0ACSgSS_tFZ', 
                        '_$s11SiriKitFlow33PersonalDomainsAuthenticationModeO0aB7RuntimeE12fromAceValueyACSgSSSgFZ', 
                        '_$s14SiriKitRuntime03AnyaB12FrameFactoryC14wrappedPrepareyycvg', 
@@ -211,6 +215,7 @@ exports:
                        '_$s14SiriKitRuntime0aB16ExecutorRunUtilsO15inputOriginFrom7command0aB4Flow05InputH0OSo013SAIntentGroupeabD0C_tFZ', 
                        '_$s14SiriKitRuntime0aB16ExecutorRunUtilsO15siriVoiceGender0aB4Flow0ahI0OvgZ', 
                        '_$s14SiriKitRuntime0aB16ExecutorRunUtilsO17addIntentMetadata6intent8peerInfoySo8INIntentC_0aB4Flow04PeerL9Providing_ptFZ', 
+                       '_$s14SiriKitRuntime0aB16ExecutorRunUtilsO18bargeInContextFrom7command0aB4Flow05BargehI0VSgSo013SAIntentGroupeabD0C_tFZ', 
                        '_$s14SiriKitRuntime0aB16ExecutorRunUtilsO18multiUserStateFrom7command0aB4Flow05MultihI0OSo013SAIntentGroupeabD0C_tFZ', 
                        '_$s14SiriKitRuntime0aB16ExecutorRunUtilsO19executionCompletion14intentTypeName11runCmdAceId08signpostO007commandH0ys6ResultOyyt0aB4Flow14CommandFailureCGcSS_SS2os12OSSignpostIDVySDys11AnyHashableVypGSgctFZ', 
                        '_$s14SiriKitRuntime0aB16ExecutorRunUtilsO19interactionTypeFrom7command0aB4Flow011InteractionH0OSo013SAIntentGroupeabD0C_tFZ', 
@@ -556,6 +561,8 @@ exports:
                        '_$s14SiriKitRuntime15InvocationStateP11inputOrigin0aB4Flow05InputG0OvgTq', 
                        '_$s14SiriKitRuntime15InvocationStateP13remoteContextSo013SAIntentGroupaB15RemoteExecutionCSgvgTj', 
                        '_$s14SiriKitRuntime15InvocationStateP13remoteContextSo013SAIntentGroupaB15RemoteExecutionCSgvgTq', 
+                       '_$s14SiriKitRuntime15InvocationStateP14bargeInContext0aB4Flow05BargegH0VSgvgTj', 
+                       '_$s14SiriKitRuntime15InvocationStateP14bargeInContext0aB4Flow05BargegH0VSgvgTq', 
                        '_$s14SiriKitRuntime15InvocationStateP14isDirectActionSbvgTj', 
                        '_$s14SiriKitRuntime15InvocationStateP14isDirectActionSbvgTq', 
                        '_$s14SiriKitRuntime15InvocationStateP14metricsContextSo013SAIntentGroupaB7MetricsCvgTj', 
@@ -687,12 +694,15 @@ exports:
                        '_$s14SiriKitRuntime18DefaultDeviceStateC11inputOrigin0aB4Flow05InputH0Ovg', 
                        '_$s14SiriKitRuntime18DefaultDeviceStateC11inputOrigin0aB4Flow05InputH0OvpMV', 
                        '_$s14SiriKitRuntime18DefaultDeviceStateC11inputOrigin0aB4Flow05InputH0OvpWvd', 
-                       '_$s14SiriKitRuntime18DefaultDeviceStateC11inputOrigin15interactionType06renderE5Idiom09multiUserF010siriLocale0O11VoiceGender10isEyesFree0sQ14TriggerEnabled0s12TextToSpeechW00S7CarPlay0S6CarDND0S12DirectAction0S25LockedWithPasscodeClosure26sessionHandOffContinuityID23preferencesLanguageCode33personalDomainsAuthenticationModeAC0aB4Flow05InputH0O_AT011InteractionJ0OAT0eL0OAT05MultinF0O10Foundation0P0VAT0aqR0OS7bycSSSgA6_AT33PersonalDomainsAuthenticationModeOSgtcfC', 
-                       '_$s14SiriKitRuntime18DefaultDeviceStateC11inputOrigin15interactionType06renderE5Idiom09multiUserF010siriLocale0O11VoiceGender10isEyesFree0sQ14TriggerEnabled0s12TextToSpeechW00S7CarPlay0S6CarDND0S12DirectAction0S25LockedWithPasscodeClosure26sessionHandOffContinuityID23preferencesLanguageCode33personalDomainsAuthenticationModeAC0aB4Flow05InputH0O_AT011InteractionJ0OAT0eL0OAT05MultinF0O10Foundation0P0VAT0aqR0OS7bycSSSgA6_AT33PersonalDomainsAuthenticationModeOSgtcfCTq', 
-                       '_$s14SiriKitRuntime18DefaultDeviceStateC11inputOrigin15interactionType06renderE5Idiom09multiUserF010siriLocale0O11VoiceGender10isEyesFree0sQ14TriggerEnabled0s12TextToSpeechW00S7CarPlay0S6CarDND0S12DirectAction0S25LockedWithPasscodeClosure26sessionHandOffContinuityID23preferencesLanguageCode33personalDomainsAuthenticationModeAC0aB4Flow05InputH0O_AT011InteractionJ0OAT0eL0OAT05MultinF0O10Foundation0P0VAT0aqR0OS7bycSSSgA6_AT33PersonalDomainsAuthenticationModeOSgtcfc', 
+                       '_$s14SiriKitRuntime18DefaultDeviceStateC11inputOrigin15interactionType06renderE5Idiom09multiUserF010siriLocale0O11VoiceGender10isEyesFree0sQ14TriggerEnabled0s12TextToSpeechW00S7CarPlay0S6CarDND0S12DirectAction0S25LockedWithPasscodeClosure26sessionHandOffContinuityID23preferencesLanguageCode33personalDomainsAuthenticationMode14bargeInContextAC0aB4Flow05InputH0O_AU011InteractionJ0OAU0eL0OAU05MultinF0O10Foundation0P0VAU0aqR0OS7bycSSSgA7_AU33PersonalDomainsAuthenticationModeOSgAU14BargeInContextVSgtcfC', 
+                       '_$s14SiriKitRuntime18DefaultDeviceStateC11inputOrigin15interactionType06renderE5Idiom09multiUserF010siriLocale0O11VoiceGender10isEyesFree0sQ14TriggerEnabled0s12TextToSpeechW00S7CarPlay0S6CarDND0S12DirectAction0S25LockedWithPasscodeClosure26sessionHandOffContinuityID23preferencesLanguageCode33personalDomainsAuthenticationMode14bargeInContextAC0aB4Flow05InputH0O_AU011InteractionJ0OAU0eL0OAU05MultinF0O10Foundation0P0VAU0aqR0OS7bycSSSgA7_AU33PersonalDomainsAuthenticationModeOSgAU14BargeInContextVSgtcfCTq', 
+                       '_$s14SiriKitRuntime18DefaultDeviceStateC11inputOrigin15interactionType06renderE5Idiom09multiUserF010siriLocale0O11VoiceGender10isEyesFree0sQ14TriggerEnabled0s12TextToSpeechW00S7CarPlay0S6CarDND0S12DirectAction0S25LockedWithPasscodeClosure26sessionHandOffContinuityID23preferencesLanguageCode33personalDomainsAuthenticationMode14bargeInContextAC0aB4Flow05InputH0O_AU011InteractionJ0OAU0eL0OAU05MultinF0O10Foundation0P0VAU0aqR0OS7bycSSSgA7_AU33PersonalDomainsAuthenticationModeOSgAU14BargeInContextVSgtcfc', 
                        '_$s14SiriKitRuntime18DefaultDeviceStateC12isCarDNDModeSbvg', 
                        '_$s14SiriKitRuntime18DefaultDeviceStateC12isCarDNDModeSbvpMV', 
                        '_$s14SiriKitRuntime18DefaultDeviceStateC12isCarDNDModeSbvpWvd', 
+                       '_$s14SiriKitRuntime18DefaultDeviceStateC14bargeInContext0aB4Flow05BargehI0VSgvg', 
+                       '_$s14SiriKitRuntime18DefaultDeviceStateC14bargeInContext0aB4Flow05BargehI0VSgvpMV', 
+                       '_$s14SiriKitRuntime18DefaultDeviceStateC14bargeInContext0aB4Flow05BargehI0VSgvpWvd', 
                        '_$s14SiriKitRuntime18DefaultDeviceStateC14isDirectActionSbvg', 
                        '_$s14SiriKitRuntime18DefaultDeviceStateC14isDirectActionSbvpMV', 
                        '_$s14SiriKitRuntime18DefaultDeviceStateC14isDirectActionSbvpWvd', 
@@ -841,6 +851,10 @@ exports:
                        '_$s14SiriKitRuntime19InvocationStateImplV13remoteContextSo013SAIntentGroupaB15RemoteExecutionCSgvg', 
                        '_$s14SiriKitRuntime19InvocationStateImplV13remoteContextSo013SAIntentGroupaB15RemoteExecutionCSgvpMV', 
                        '_$s14SiriKitRuntime19InvocationStateImplV13remoteContextSo013SAIntentGroupaB15RemoteExecutionCSgvs', 
+                       '_$s14SiriKitRuntime19InvocationStateImplV14bargeInContext0aB4Flow05BargehI0VSgvM', 
+                       '_$s14SiriKitRuntime19InvocationStateImplV14bargeInContext0aB4Flow05BargehI0VSgvg', 
+                       '_$s14SiriKitRuntime19InvocationStateImplV14bargeInContext0aB4Flow05BargehI0VSgvpMV', 
+                       '_$s14SiriKitRuntime19InvocationStateImplV14bargeInContext0aB4Flow05BargehI0VSgvs', 
                        '_$s14SiriKitRuntime19InvocationStateImplV14isDirectActionSbvM', 
                        '_$s14SiriKitRuntime19InvocationStateImplV14isDirectActionSbvg', 
                        '_$s14SiriKitRuntime19InvocationStateImplV14isDirectActionSbvpMV', 

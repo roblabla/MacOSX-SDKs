@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           446FD320-829F-3B6F-AEF8-908F4305E6B4
+    value:           229BF97A-1D56-3CB4-8338-E0D464F73A33
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3DA3E3CC-D386-360B-8B99-012A19C4EAA3
+    value:           C5041E8F-8A23-3EF8-8F45-E9A80452B397
 install-name:    '/System/Library/Frameworks/CoreDisplay.framework/Versions/A/CoreDisplay'
-current-version: 229
+current-version: 231.3
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CDGetDisplayMapSeed, _CDNotificationRegisterCallbackBlock, 
                        _CDNotificationRegisterCallbackBlockOnQueue, _CDNotificationRegisterCallbackFunction, 
                        _CDNotificationRegisterCallbackFunctionOnQueue, _CDNotificationRegisterLocalCallbackBlock, 
@@ -196,8 +196,9 @@ exports:
                        _CursorBitmapGetBytesPerRow, _CursorBitmapGetData, _CursorBitmapGetFrameCount, 
                        _CursorBitmapGetFrameData, _CursorBitmapGetFrameHeight, _CursorBitmapGetFrameWidth, 
                        _CursorBitmapGetHeight, _CursorBitmapGetHotSpot, _CursorBitmapGetWidth, 
-                       _CursorBitmapRelease, _InitializeCoreDisplay, _WSAGDCSetDebugOptions, 
-                       _WSCanonicalMirrorMasterForDisplayDevice, _WSDisplayAddActiveDisplaysToExternalDebuggingDictionary, 
+                       _CursorBitmapRelease, _InitializeCoreDisplay, _ReportsSLXServerGPUAddedRemovedNotifications, 
+                       _WSAGDCSetDebugOptions, _WSCanonicalMirrorMasterForDisplayDevice, 
+                       _WSDisplayAddActiveDisplaysToExternalDebuggingDictionary, 
                        _WSDisplayGetAcceleratorForcingSWCursor, _WSDisplayIsAirPlayDevice, 
                        _WSDisplayIsCanonicalMirrorMaster, _WSDisplayReconfigureTime, 
                        _WSDisplayUpdatesAreDisabled, _WSGetDesktopColor, _WSGetGeometrySeed, 

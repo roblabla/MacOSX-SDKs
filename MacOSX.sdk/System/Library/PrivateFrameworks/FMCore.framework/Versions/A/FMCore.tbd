@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           76B18C03-B184-31AF-A15F-97B5461A5267
+    value:           39D018B6-5A62-34A8-A3E7-DC3261A5F5FE
   - target:          x86_64-maccatalyst
-    value:           76B18C03-B184-31AF-A15F-97B5461A5267
+    value:           39D018B6-5A62-34A8-A3E7-DC3261A5F5FE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           79490810-4103-3F74-9593-A709995027C6
+    value:           2C65B774-7BBA-3007-9509-FE1A1F43A378
   - target:          arm64e-maccatalyst
-    value:           79490810-4103-3F74-9593-A709995027C6
+    value:           2C65B774-7BBA-3007-9509-FE1A1F43A378
 install-name:    '/System/Library/PrivateFrameworks/FMCore.framework/Versions/A/FMCore'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

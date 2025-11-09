@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           49BC70CB-46AC-3871-9CAD-857B98671A87
+    value:           41637380-6292-31BD-84BD-47CF08DABBE1
   - target:          x86_64-maccatalyst
-    value:           49BC70CB-46AC-3871-9CAD-857B98671A87
+    value:           41637380-6292-31BD-84BD-47CF08DABBE1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0CAED8D8-6EAD-3429-859B-1E78BBF1F44E
+    value:           23E89C85-E4F5-309F-8B3E-9694F4B33C2D
   - target:          arm64e-maccatalyst
-    value:           0CAED8D8-6EAD-3429-859B-1E78BBF1F44E
+    value:           23E89C85-E4F5-309F-8B3E-9694F4B33C2D
 install-name:    '/System/Library/PrivateFrameworks/MetalSerializer.framework/Versions/A/MetalSerializer'
 current-version: 0
 compatibility-version: 0

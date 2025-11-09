@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C1E9C173-19E5-3251-AB51-C0A69925F103
+    value:           D54364A6-1C4C-33D7-8B24-C753777B3654
   - target:          x86_64-maccatalyst
-    value:           C1E9C173-19E5-3251-AB51-C0A69925F103
+    value:           D54364A6-1C4C-33D7-8B24-C753777B3654
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DA4C0E92-4F09-3FFA-A2AF-88EBF4967476
+    value:           38A45B37-F56D-3077-AE41-202435470BD0
   - target:          arm64e-maccatalyst
-    value:           DA4C0E92-4F09-3FFA-A2AF-88EBF4967476
+    value:           38A45B37-F56D-3077-AE41-202435470BD0
 install-name:    '/System/Library/PrivateFrameworks/Lexicon.framework/Versions/A/Lexicon'
 current-version: 86.1
 exports:

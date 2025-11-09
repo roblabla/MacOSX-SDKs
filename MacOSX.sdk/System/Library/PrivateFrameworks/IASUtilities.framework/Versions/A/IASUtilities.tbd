@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6AD1E54D-72FD-34B6-B717-F77640D6A9F6
+    value:           141DA23C-3FC0-3DAC-8C49-0703A52188BF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           15966619-AEB9-3804-80E6-F63A35BA9496
+    value:           47ACECAF-0DD4-3FA6-BCCD-2D71164C91CA
 install-name:    '/System/Library/PrivateFrameworks/IASUtilities.framework/Versions/A/IASUtilities'
 current-version: 119
 exports:

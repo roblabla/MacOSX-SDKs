@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2019 Apple Inc. All rights reserved.
+	Copyright 2010-2020 Apple Inc. All rights reserved.
 
 */
 
@@ -180,9 +180,10 @@ AVF_EXPORT NSString *const AVVideoAllowWideColorKey /* NSNumber(BOOL)	*/					API
  */
 AVF_EXPORT NSString *const AVVideoCompressionPropertiesKey /* NSDictionary */                                API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 	AVF_EXPORT NSString *const AVVideoAverageBitRateKey /* NSNumber (bits per second, H.264 only) */         API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
-	AVF_EXPORT NSString *const AVVideoQualityKey /* NSNumber (0.0-1.0, JPEG and HEIC only. With HEIC, 1.0 indicates lossless compression) */ API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+	AVF_EXPORT NSString *const AVVideoQualityKey /* NSNumber (0.0-1.0, JPEG, HEIC and Apple ProRAW only. With HEIC and Apple ProRAW, 1.0 indicates lossless compression) */ API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 	AVF_EXPORT NSString *const AVVideoMaxKeyFrameIntervalKey /* NSNumber (frames, 1 means key frames only, H.264 only) */ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 	AVF_EXPORT NSString *const AVVideoMaxKeyFrameIntervalDurationKey /* NSNumber (seconds, 0.0 means no limit, H.264 only) */ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+	AVF_EXPORT NSString *const AVVideoAppleProRAWBitDepthKey /* NSNumber (8-16) */ API_AVAILABLE(macos(11.1), ios(14.3), tvos(14.3), watchos(7.2));
 
 	/*!
 	 @constant	AVVideoAllowFrameReorderingKey

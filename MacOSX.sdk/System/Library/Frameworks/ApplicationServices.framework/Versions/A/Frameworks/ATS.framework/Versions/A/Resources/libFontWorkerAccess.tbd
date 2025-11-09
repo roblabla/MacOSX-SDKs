@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B8B9043A-4985-382F-A0B8-30E5DA9A5C1F
+    value:           3BC9C020-7F2A-3EFD-855F-D17C7D1D5457
   - target:          x86_64-maccatalyst
-    value:           B8B9043A-4985-382F-A0B8-30E5DA9A5C1F
+    value:           3BC9C020-7F2A-3EFD-855F-D17C7D1D5457
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           005F0E18-B104-313E-8EC4-57F88E09940A
+    value:           507B4FF0-6B97-324B-8ABD-1B06D51EC085
   - target:          arm64e-maccatalyst
-    value:           005F0E18-B104-313E-8EC4-57F88E09940A
+    value:           507B4FF0-6B97-324B-8ABD-1B06D51EC085
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Resources/libFontWorkerAccess.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           87C4BED0-162A-36D3-A139-7202BC7EA917
+    value:           6D28724B-A00E-3F00-BBFD-DD4085FDAC14
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           35C97220-699F-3C6E-9785-C6E944FB9A3B
+    value:           BB799522-CD06-3EFE-ABDB-FF488F8FCB53
 install-name:    '/System/Library/PrivateFrameworks/IntlPreferences.framework/Versions/A/IntlPreferences'
 current-version: 330
 exports:

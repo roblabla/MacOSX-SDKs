@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           195DF633-7E24-349E-B0E8-2C4CE40D44C3
+    value:           6EEB2F40-3F5A-374B-BAD4-8CB416769B13
   - target:          x86_64-maccatalyst
-    value:           195DF633-7E24-349E-B0E8-2C4CE40D44C3
+    value:           6EEB2F40-3F5A-374B-BAD4-8CB416769B13
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5319E9F3-28D5-30F8-8ABF-F39D72447276
+    value:           C953BC70-A976-38BA-96BC-E4F6E2D9B4E7
   - target:          arm64e-maccatalyst
-    value:           5319E9F3-28D5-30F8-8ABF-F39D72447276
+    value:           C953BC70-A976-38BA-96BC-E4F6E2D9B4E7
 install-name:    '/System/Library/PrivateFrameworks/PodcastsFoundation.framework/Versions/A/PodcastsFoundation'
 swift-abi-version: 7
 allowable-clients:
@@ -379,7 +379,7 @@ exports:
                        '_$s18PodcastsFoundation22MediaRequestControllerC0D6ParamsV11identifiersSaySSGvg', 
                        '_$s18PodcastsFoundation22MediaRequestControllerC0D6ParamsV11identifiersSaySSGvpMV', 
                        '_$s18PodcastsFoundation22MediaRequestControllerC0D6ParamsV11identifiersSaySSGvs', 
-                       '_$s18PodcastsFoundation22MediaRequestControllerC0D6ParamsV11requestType0g7ContentH004viewH011identifiers5limitAeC0dH0O_AC0diH0OAC04ViewH0OSgSaySSGSiSgtcfC', 
+                       '_$s18PodcastsFoundation22MediaRequestControllerC0D6ParamsV11requestType0g7ContentH004viewH011identifiers5limit7includeAeC0dH0O_AC0diH0OAC04ViewH0OSgSaySSGSiSgSayAC12IncludeTypesOGtcfC', 
                        '_$s18PodcastsFoundation22MediaRequestControllerC0D6ParamsV11requestTypeAC0dH0OvM', 
                        '_$s18PodcastsFoundation22MediaRequestControllerC0D6ParamsV11requestTypeAC0dH0Ovg', 
                        '_$s18PodcastsFoundation22MediaRequestControllerC0D6ParamsV11requestTypeAC0dH0OvpMV', 
@@ -392,6 +392,10 @@ exports:
                        '_$s18PodcastsFoundation22MediaRequestControllerC0D6ParamsV5limitSiSgvg', 
                        '_$s18PodcastsFoundation22MediaRequestControllerC0D6ParamsV5limitSiSgvpMV', 
                        '_$s18PodcastsFoundation22MediaRequestControllerC0D6ParamsV5limitSiSgvs', 
+                       '_$s18PodcastsFoundation22MediaRequestControllerC0D6ParamsV7includeSayAC12IncludeTypesOGvM', 
+                       '_$s18PodcastsFoundation22MediaRequestControllerC0D6ParamsV7includeSayAC12IncludeTypesOGvg', 
+                       '_$s18PodcastsFoundation22MediaRequestControllerC0D6ParamsV7includeSayAC12IncludeTypesOGvpMV', 
+                       '_$s18PodcastsFoundation22MediaRequestControllerC0D6ParamsV7includeSayAC12IncludeTypesOGvs', 
                        '_$s18PodcastsFoundation22MediaRequestControllerC0D6ParamsV8viewTypeAC04ViewH0OSgvM', 
                        '_$s18PodcastsFoundation22MediaRequestControllerC0D6ParamsV8viewTypeAC04ViewH0OSgvg', 
                        '_$s18PodcastsFoundation22MediaRequestControllerC0D6ParamsV8viewTypeAC04ViewH0OSgvpMV', 
@@ -399,6 +403,16 @@ exports:
                        '_$s18PodcastsFoundation22MediaRequestControllerC0D6ParamsVMa', 
                        '_$s18PodcastsFoundation22MediaRequestControllerC0D6ParamsVMn', 
                        '_$s18PodcastsFoundation22MediaRequestControllerC0D6ParamsVN', 
+                       '_$s18PodcastsFoundation22MediaRequestControllerC12IncludeTypesO16playbackPositionyA2EmFWC', 
+                       '_$s18PodcastsFoundation22MediaRequestControllerC12IncludeTypesO8rawValueAESgSS_tcfC', 
+                       '_$s18PodcastsFoundation22MediaRequestControllerC12IncludeTypesO8rawValueSSvg', 
+                       '_$s18PodcastsFoundation22MediaRequestControllerC12IncludeTypesO8rawValueSSvpMV', 
+                       '_$s18PodcastsFoundation22MediaRequestControllerC12IncludeTypesOMa', 
+                       '_$s18PodcastsFoundation22MediaRequestControllerC12IncludeTypesOMn', 
+                       '_$s18PodcastsFoundation22MediaRequestControllerC12IncludeTypesON', 
+                       '_$s18PodcastsFoundation22MediaRequestControllerC12IncludeTypesOSHAAMc', 
+                       '_$s18PodcastsFoundation22MediaRequestControllerC12IncludeTypesOSQAAMc', 
+                       '_$s18PodcastsFoundation22MediaRequestControllerC12IncludeTypesOSYAAMc', 
                        '_$s18PodcastsFoundation22MediaRequestControllerC13responseQueueSo17OS_dispatch_queueCSgvMTj', 
                        '_$s18PodcastsFoundation22MediaRequestControllerC13responseQueueSo17OS_dispatch_queueCSgvMTq', 
                        '_$s18PodcastsFoundation22MediaRequestControllerC13responseQueueSo17OS_dispatch_queueCSgvgTj', 

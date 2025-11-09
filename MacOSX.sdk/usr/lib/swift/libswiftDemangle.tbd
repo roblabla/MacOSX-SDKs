@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A46C6EB6-D9AB-3A12-AB93-4B271BF87460
+    value:           56CFE248-4E62-3D1C-BA85-6EE8573FAF60
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D1BA0037-9E08-338F-8C1C-55AF0F4EAD8D
+    value:           0C217509-78A2-3767-B53C-E9715B92683F
 install-name:    '/usr/lib/swift/libswiftDemangle.dylib'
 current-version: 0
 exports:

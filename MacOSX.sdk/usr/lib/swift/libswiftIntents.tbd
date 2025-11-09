@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           262F7EEE-958E-35E6-845D-62F4653A634D
+    value:           0A79595A-95CD-3264-92C0-BDA18DC5F28B
   - target:          x86_64-maccatalyst
-    value:           262F7EEE-958E-35E6-845D-62F4653A634D
+    value:           0A79595A-95CD-3264-92C0-BDA18DC5F28B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AB5C87FA-0421-3E89-95C0-6D4C05F21B27
+    value:           C170A0B9-E590-3115-BEC3-AA2FBC85B89D
   - target:          arm64e-maccatalyst
-    value:           AB5C87FA-0421-3E89-95C0-6D4C05F21B27
+    value:           C170A0B9-E590-3115-BEC3-AA2FBC85B89D
 install-name:    '/usr/lib/swift/libswiftIntents.dylib'
-current-version: 7
+current-version: 8
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftIntents.dylib', '$ld$install_name$os10.11$@rpath/libswiftIntents.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftIntents.dylib', '$ld$install_name$os10.13$@rpath/libswiftIntents.dylib', 
@@ -60,7 +60,9 @@ exports:
                        '_$s7Intents18INMediaDestinationOSQAAMc', '_$s7Intents18INMediaDestinationOs21_ObjectiveCBridgeableAAMc', 
                        '_$s7Intents18INMediaDestinationOs23CustomStringConvertibleAAMc', 
                        '_$s7Intents18INMediaDestinationOs28CustomDebugStringConvertibleAAMc', 
-                       '_$s7Intents24_INIntentSetImageKeyPathMp', '_$s7Intents24_INIntentSetImageKeyPathPAAE03setD0_17forParameterNamedySo7INImageCSg_s0eF0Cyxqd__GtlF', 
+                       '_$s7Intents23INIntentSetImageKeyPathMp', '_$s7Intents23INIntentSetImageKeyPathPAA01_bcdeF0Tb', 
+                       '_$s7Intents23INIntentSetImageKeyPathTL', '_$s7Intents24_INIntentSetImageKeyPathMp', 
+                       '_$s7Intents24_INIntentSetImageKeyPathPAAE03setD0_17forParameterNamedySo7INImageCSg_s0eF0Cyxqd__GtlF', 
                        '_$s7Intents24_INIntentSetImageKeyPathPAAE5image17forParameterNamedSo7INImageCSgs0eF0Cyxqd__G_tlF', 
                        '_$s7Intents24_INIntentSetImageKeyPathTL', '_$sSo11INParameterC7IntentsE7keyPathABSgs03KeyD0Cyxq_G_tcr0_lufC', 
                        '_$sSo11INParameterC7IntentsE7keyPathABSgs03KeyD0Cyxq_G_tcr0_lufc', 
@@ -236,6 +238,7 @@ exports:
                        '_$sSo38INGetCarPowerLevelStatusIntentResponseC7IntentsE8chargingSbSgvpMV', 
                        '_$sSo38INGetCarPowerLevelStatusIntentResponseC7IntentsE8chargingSbSgvs', 
                        '_$sSo8INIntentC7Intents01_A15SetImageKeyPathACMc', '_$sSo8INIntentC7Intents01_A15SetImageKeyPathACWP', 
+                       '_$sSo8INIntentC7Intents0A15SetImageKeyPathACMc', '_$sSo8INIntentC7Intents0A15SetImageKeyPathACWP', 
                        '_$sSo8NSStringC7IntentsE017deferredLocalizedB6String4with5table9argumentsABSS_SSs14CVaListPointerVtFZ', 
                        '_$sSo8NSStringC7IntentsE017deferredLocalizedB6String4with5table_ABSS_SSs7CVarArg_pdtFZ', 
                        '_$sSo8NSStringC7IntentsE017deferredLocalizedB6String4with_ABSS_s7CVarArg_pdtFZ', 

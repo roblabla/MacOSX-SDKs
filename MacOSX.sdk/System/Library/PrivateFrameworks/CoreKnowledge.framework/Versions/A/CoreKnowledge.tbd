@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           181BC8BD-79CE-3F80-84BB-F71E558A1FC6
+    value:           7CEA5357-F3A4-359A-8A86-CBF42FD7982D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3E6C6989-64A5-3813-B12F-474A3FEEBCBB
+    value:           2EE6A7C6-BD58-3607-88D9-107453A20079
 install-name:    '/System/Library/PrivateFrameworks/CoreKnowledge.framework/Versions/A/CoreKnowledge'
 swift-abi-version: 7
 exports:

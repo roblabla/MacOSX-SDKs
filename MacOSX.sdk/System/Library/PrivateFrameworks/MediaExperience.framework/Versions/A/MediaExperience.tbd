@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DEB804A8-0DC3-3E1D-8501-A6CB60457835
+    value:           73267208-FF25-3F62-A78E-E1016AA2C81E
   - target:          x86_64-maccatalyst
-    value:           DEB804A8-0DC3-3E1D-8501-A6CB60457835
+    value:           73267208-FF25-3F62-A78E-E1016AA2C81E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           16ECAE52-2F90-399A-A79F-54097037573F
+    value:           7406B367-3797-3DEA-BC52-FE31A2275EA0
   - target:          arm64e-maccatalyst
-    value:           16ECAE52-2F90-399A-A79F-54097037573F
+    value:           7406B367-3797-3DEA-BC52-FE31A2275EA0
 install-name:    '/System/Library/PrivateFrameworks/MediaExperience.framework/Versions/A/MediaExperience'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
@@ -248,7 +248,8 @@ exports:
                        _kFigRoutingContextNotification_AssociatedAudioDeviceChanged, 
                        _kFigRoutingContextNotification_CommChannelDidClose, _kFigRoutingContextNotification_CurrentGroupConfigurationChanged, 
                        _kFigRoutingContextNotification_CurrentRouteChanged, _kFigRoutingContextNotification_DefaultGroupIDChanged, 
-                       _kFigRoutingContextNotification_DidReceiveData, _kFigRoutingContextNotification_RemoteControlChannelAvailabilityChanged, 
+                       _kFigRoutingContextNotification_DidReceiveData, _kFigRoutingContextNotification_PredictedSelectedRouteDescriptorChanged, 
+                       _kFigRoutingContextNotification_RemoteControlChannelAvailabilityChanged, 
                        _kFigRoutingContextNotification_RemoteControlSessionAvailable, 
                        _kFigRoutingContextNotification_RouteChangeEnded, _kFigRoutingContextNotification_RouteChangeStarted, 
                        _kFigRoutingContextNotification_RouteConfigUpdated, _kFigRoutingContextNotification_ServerConnectionDied, 
@@ -263,6 +264,7 @@ exports:
                        _kFigRoutingContextSelectRouteOptionKey_AuthInfo, _kFigRoutingContextSelectRouteOptionKey_AvoidAuthPrompt, 
                        _kFigRoutingContextSelectRouteOptionKey_ClientCorrelationID, 
                        _kFigRoutingContextSelectRouteOptionKey_ClientPID, _kFigRoutingContextSelectRouteOptionKey_ClientRouteRequestID, 
+                       _kFigRoutingContextSelectRouteOptionKey_CrossfadePlayback, 
                        _kFigRoutingContextSelectRouteOptionKey_Initiator, _kFigRoutingContextSelectRouteOptionKey_RemoteScreenSender, 
                        _kFigRoutingContextSelectRouteOptionKey_SilentSender, _kFigRoutingManagerNotificationKey_RoutingContextUUID, 
                        _kFigRoutingManagerNotification_RoutingContextAdded, _kFigRoutingManagerNotification_RoutingContextRemoved, 
@@ -365,7 +367,8 @@ exports:
                        _kMXSystemControllerNotification_VoicePromptStyleDidChange, 
                        _kMXSystemControllerProperty_ActiveAudioRoute, _kMXSystemControllerProperty_ActiveClientPIDsThatHideTheSpeechDetectionDevice, 
                        _kMXSystemControllerProperty_ActiveInputRouteForPlayAndRecordNoBluetooth, 
-                       _kMXSystemControllerProperty_AirPlayScreenSuspended, _kMXSystemControllerProperty_AllowAppToInitiatePlaybackTemporarily, 
+                       _kMXSystemControllerProperty_AirPlayScreenSuspended, _kMXSystemControllerProperty_AllowAppToFadeInTemporarily, 
+                       _kMXSystemControllerProperty_AllowAppToInitiatePlaybackTemporarily, 
                        _kMXSystemControllerProperty_AppToInterruptCurrentNowPlayingSession, 
                        _kMXSystemControllerProperty_AppWantsVolumeChanges, _kMXSystemControllerProperty_AvailableForVoicePrompts, 
                        _kMXSystemControllerProperty_CanBeNowPlayingApp, _kMXSystemControllerProperty_CarPlayAuxStreamSupport, 

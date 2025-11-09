@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4C8DD60C-44D6-3237-B0A2-AA9AB35FC829
+    value:           198A4273-5B92-3A05-A99D-7FD4914A959A
   - target:          x86_64-maccatalyst
-    value:           4C8DD60C-44D6-3237-B0A2-AA9AB35FC829
+    value:           198A4273-5B92-3A05-A99D-7FD4914A959A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F32D0234-596F-3183-85A4-8C6A58007884
+    value:           6A28B5ED-404A-3179-8B43-D1210BDEB176
   - target:          arm64e-maccatalyst
-    value:           F32D0234-596F-3183-85A4-8C6A58007884
+    value:           6A28B5ED-404A-3179-8B43-D1210BDEB176
 install-name:    '/System/Library/PrivateFrameworks/CoreUtils.framework/Versions/A/CoreUtils'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -142,9 +142,12 @@ exports:
                        _CUXPCDecodeBool, _CUXPCDecodeDouble, _CUXPCDecodeNSArrayOfInteger, 
                        _CUXPCDecodeNSArrayOfNSData, _CUXPCDecodeNSData, _CUXPCDecodeNSDataOfLength, 
                        _CUXPCDecodeNSError, _CUXPCDecodeNSErrorIfNeeded, _CUXPCDecodeNSString, 
-                       _CUXPCDecodeNSUUID, _CUXPCDecodeSInt64Ranged, _CUXPCDecodeSInt64RangedEx, 
-                       _CUXPCDecodeUInt64Ranged, _CUXPCDecodeUInt64RangedEx, _CUXPCEncodeNSArrayOfNSData, 
-                       _CUXPCEncodeNSArrayOfNSNumber, _CUXPCEncodeNSError, _CUXPCGetNextClientID, 
+                       _CUXPCDecodeNSUUID, _CUXPCDecodeObject, _CUXPCDecodeSInt64Ranged, 
+                       _CUXPCDecodeSInt64RangedEx, _CUXPCDecodeUInt64Ranged, _CUXPCDecodeUInt64RangedEx, 
+                       _CUXPCDictionaryCreateReply, _CUXPCDictionaryExpectsReply, 
+                       _CUXPCEncodeNSArrayOfNSData, _CUXPCEncodeNSArrayOfNSNumber, 
+                       _CUXPCEncodeNSError, _CUXPCEncodeObject, _CUXPCGetNextClientID, 
+                       _CUXPCObjectGetResponseHandler, _CUXPCObjectSetResponseHandler, 
                        _CocoaTextViewAppendUTF8String, _CopyEDIDbyUUID, _CopyFileDataByFile, 
                        _CopyFileDataByPath, _CoreAudioCopyDataSourceName, _CoreAudioCopyPropertyData, 
                        _CoreAudioFindDeviceByUID, _CoreAudioGetDefaultAudioDevice, 

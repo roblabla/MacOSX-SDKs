@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E57E2C49-719D-3AA7-89F0-D87E25D12356
+    value:           B30AF83E-DB1A-3CD2-B351-2871E98B8CC4
   - target:          x86_64-maccatalyst
-    value:           E57E2C49-719D-3AA7-89F0-D87E25D12356
+    value:           B30AF83E-DB1A-3CD2-B351-2871E98B8CC4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2595F49A-8BEF-331A-AE7D-D61982919116
+    value:           669AA751-A9A6-30AE-B6B8-10C2CF080E3F
   - target:          arm64e-maccatalyst
-    value:           2595F49A-8BEF-331A-AE7D-D61982919116
+    value:           669AA751-A9A6-30AE-B6B8-10C2CF080E3F
 install-name:    '/System/Library/PrivateFrameworks/ContactsUIMacHelper.framework/Versions/A/ContactsUIMacHelper'
-current-version: 2452
+current-version: 2452.2
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5863BFBA-E48A-3158-84A8-F8C725D92592
+    value:           301C43FA-219C-344A-89D4-0FB7398B06E6
   - target:          x86_64-maccatalyst
-    value:           5863BFBA-E48A-3158-84A8-F8C725D92592
+    value:           301C43FA-219C-344A-89D4-0FB7398B06E6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           84B1F872-F340-3AE4-8C8F-AFEA11ED5525
+    value:           CE76D344-4726-35D3-A59A-B160A7947273
   - target:          arm64e-maccatalyst
-    value:           84B1F872-F340-3AE4-8C8F-AFEA11ED5525
+    value:           CE76D344-4726-35D3-A59A-B160A7947273
 install-name:    '/System/Library/PrivateFrameworks/ShazamKit.framework/Versions/A/ShazamKit'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]

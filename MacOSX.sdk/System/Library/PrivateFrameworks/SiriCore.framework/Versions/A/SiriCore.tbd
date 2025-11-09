@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           057F05DF-172F-3332-847B-106A33C78308
+    value:           1CDB5009-58EC-3463-8567-83B9213A10EA
   - target:          x86_64-maccatalyst
-    value:           057F05DF-172F-3332-847B-106A33C78308
+    value:           1CDB5009-58EC-3463-8567-83B9213A10EA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BF39B940-B304-34E8-8118-B08AF2DDE876
+    value:           162C648B-BCE1-3244-B2E3-70F5A3DDC709
   - target:          arm64e-maccatalyst
-    value:           BF39B940-B304-34E8-8118-B08AF2DDE876
+    value:           162C648B-BCE1-3244-B2E3-70F5A3DDC709
 install-name:    '/System/Library/PrivateFrameworks/SiriCore.framework/Versions/A/SiriCore'
 current-version: 0
 compatibility-version: 0
@@ -38,12 +38,12 @@ exports:
                        _SiriCoreSQLiteQueryCreateRangeExpression, _SiriCoreSiriConnectionErrorDomain, 
                        _SiriCoreSiriConnectionHTTPErrorStatusCodeKey, _SiriCoreSiriConnectionHTTPRedirectValueKey, 
                        _SiriCoreSiriConnectionShouldSkipIDSOnNextAttemptKey, _SiriCoreSiriConnectionShouldSkipTuscanyOnNextAttemptKey, 
-                       _SiriCoreUUIDStringCreate, _SiriCoreUserAgentStringCreate, 
-                       _SiriCoreUserCorrectionsProfileEntryReadFrom, __COUNT_QUERY, 
-                       __DB_SCHEMA0, __DB_SCHEMA1, __DB_SCHEMA2, __DB_SCHEMA3, __DB_SCHEMA4, 
-                       __DB_SCHEMA5, __DB_SCHEMA6, __DB_SCHEMA7, __DB_VERS, __DELETE_OF_RECORD, 
-                       __DELETE_OF_TYPE, __ENUM_QUERY, __REMOVE_OF_TYPE, __SYNC_DB_DOMAIN, 
-                       __SiriCoreSharedResourcesDirectory ]
+                       _SiriCoreTrialAllocationsStringCreate, _SiriCoreUUIDStringCreate, 
+                       _SiriCoreUserAgentStringCreate, _SiriCoreUserCorrectionsProfileEntryReadFrom, 
+                       __COUNT_QUERY, __DB_SCHEMA0, __DB_SCHEMA1, __DB_SCHEMA2, __DB_SCHEMA3, 
+                       __DB_SCHEMA4, __DB_SCHEMA5, __DB_SCHEMA6, __DB_SCHEMA7, __DB_VERS, 
+                       __DELETE_OF_RECORD, __DELETE_OF_TYPE, __ENUM_QUERY, __REMOVE_OF_TYPE, 
+                       __SYNC_DB_DOMAIN, __SiriCoreSharedResourcesDirectory ]
     objc-classes:    [ SASetRestrictionsThunk, SiriCoreAceConnectionAnalysisInfo, 
                        SiriCoreAceSerialization, SiriCoreConnectionMetrics, SiriCoreConnectionQueueMonitor, 
                        SiriCoreConnectionTCPInfoMetrics, SiriCoreConnectionType, 

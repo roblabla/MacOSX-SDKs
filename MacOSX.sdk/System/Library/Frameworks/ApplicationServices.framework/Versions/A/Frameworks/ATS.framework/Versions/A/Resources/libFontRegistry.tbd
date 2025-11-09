@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2CB68805-FF82-34DE-AE9C-0E9C187E928F
+    value:           790676A3-2B74-3239-A60D-429069933542
   - target:          x86_64-maccatalyst
-    value:           2CB68805-FF82-34DE-AE9C-0E9C187E928F
+    value:           790676A3-2B74-3239-A60D-429069933542
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D5D24ED9-B5D0-3EC9-95F4-3BA80C3D176F
+    value:           6901EFA1-C468-3C81-96A6-8B173C0E9B2B
   - target:          arm64e-maccatalyst
-    value:           D5D24ED9-B5D0-3EC9-95F4-3BA80C3D176F
+    value:           6901EFA1-C468-3C81-96A6-8B173C0E9B2B
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Resources/libFontRegistry.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _XTCopyAutoActivatedFontURLs, _XTCopyAutoActivationSearchDirectories, 
                        _XTCopyAvailableFamilyNames, _XTCopyAvailableFamilyNames2, 
@@ -78,6 +78,6 @@ exports:
                        _kXTReportKeyStandardFontsNotRestored, _kXTVariationAxisDefaultValue, 
                        _kXTVariationAxisFlagsKey, _kXTVariationAxisHiddenKey, _kXTVariationAxisIdentifier, 
                        _kXTVariationAxisMaxValue, _kXTVariationAxisMinValue, _kXTVariationAxisName ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _XTAuthenticateAsAdminFromExternalAuthorization, _XTMoveFontFilesToDisabledFolder ]
 ...

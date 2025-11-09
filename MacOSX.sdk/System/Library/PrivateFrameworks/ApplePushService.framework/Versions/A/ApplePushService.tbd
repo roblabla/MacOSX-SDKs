@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6A14C795-9FB5-3363-8CD0-9740EE7E6972
+    value:           F8FAEB30-AFCF-36A1-9E72-25681E6C5BF7
   - target:          x86_64-maccatalyst
-    value:           6A14C795-9FB5-3363-8CD0-9740EE7E6972
+    value:           F8FAEB30-AFCF-36A1-9E72-25681E6C5BF7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3C6D512E-3799-33FC-AFBC-25A0CB5CAFEC
+    value:           7030C305-D773-3E71-BA7E-4EFD3D7FED0D
   - target:          arm64e-maccatalyst
-    value:           3C6D512E-3799-33FC-AFBC-25A0CB5CAFEC
+    value:           7030C305-D773-3E71-BA7E-4EFD3D7FED0D
 install-name:    '/System/Library/PrivateFrameworks/ApplePushService.framework/Versions/A/ApplePushService'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

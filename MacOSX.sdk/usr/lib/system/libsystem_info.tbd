@@ -4,24 +4,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           43E12DA6-AFDF-30F4-B1E0-ECB36FD77AF9
+    value:           0979757C-5F0D-3F5A-9E0E-EBF234B310AF
   - target:          x86_64-maccatalyst
-    value:           43E12DA6-AFDF-30F4-B1E0-ECB36FD77AF9
+    value:           0979757C-5F0D-3F5A-9E0E-EBF234B310AF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           711172AD-E170-3AAD-BAF6-F22EAD81EBAE
+    value:           CFE4640F-4E04-3DC5-80F6-79E0BF7F4FAF
   - target:          arm64e-maccatalyst
-    value:           711172AD-E170-3AAD-BAF6-F22EAD81EBAE
+    value:           CFE4640F-4E04-3DC5-80F6-79E0BF7F4FAF
 install-name:    '/usr/lib/system/libsystem_info.dylib'
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _LI_get_thread_item, _LI_get_thread_list, _LI_ils_create, 
                        _LI_set_thread_item, _LI_set_thread_list, ___dn_skipname, 

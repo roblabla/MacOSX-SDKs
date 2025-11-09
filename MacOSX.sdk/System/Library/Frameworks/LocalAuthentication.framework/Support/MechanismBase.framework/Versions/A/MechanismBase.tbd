@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           31C3473B-4992-3E7C-8362-84A2131C815E
+    value:           8E00DA4E-7C63-340B-BB9D-06F5F2D9B298
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           637D558E-89E5-317C-8414-87BC4091E8AB
+    value:           E52F04C9-ABCF-387A-BCB5-147BEEF757E6
 install-name:    '/System/Library/Frameworks/LocalAuthentication.framework/Support/MechanismBase.framework/Versions/A/MechanismBase'
-current-version: 827.40.37
+current-version: 827.60.15
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     objc-classes:    [ ACMContextRecord, MechanismACM, MechanismBase, MechanismContext, 

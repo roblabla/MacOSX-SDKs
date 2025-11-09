@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A8145B79-127B-34FF-BBC4-DB1741BDA4F8
+    value:           139BEEF2-5BB5-3675-838A-9009DAE3AB82
   - target:          x86_64-maccatalyst
-    value:           A8145B79-127B-34FF-BBC4-DB1741BDA4F8
+    value:           139BEEF2-5BB5-3675-838A-9009DAE3AB82
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0C9126F7-2363-375A-B645-4C6F076ECE0B
+    value:           329FE131-BA9C-372B-9847-0E73C457E5AC
   - target:          arm64e-maccatalyst
-    value:           0C9126F7-2363-375A-B645-4C6F076ECE0B
+    value:           329FE131-BA9C-372B-9847-0E73C457E5AC
 install-name:    '/System/Library/PrivateFrameworks/VectorKit.framework/Versions/A/VectorKit'
-current-version: 1721.20.8
+current-version: 1721.22.10
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     weak-symbols:    [ __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           45366D50-74C7-3650-ACEE-A52239E84A47
+    value:           2F1F491A-691F-37E0-A2DE-19880E85DAFD
   - target:          x86_64-maccatalyst
-    value:           45366D50-74C7-3650-ACEE-A52239E84A47
+    value:           2F1F491A-691F-37E0-A2DE-19880E85DAFD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E42FEF6E-EBF5-32C8-8848-1671D1ED7F52
+    value:           CD4D2FBF-6786-30E2-BC55-09FEED2392DA
   - target:          arm64e-maccatalyst
-    value:           E42FEF6E-EBF5-32C8-8848-1671D1ED7F52
+    value:           CD4D2FBF-6786-30E2-BC55-09FEED2392DA
 install-name:    '/System/Library/PrivateFrameworks/MapsSync.framework/Versions/A/MapsSync'
 swift-abi-version: 7
 exports:
@@ -526,7 +526,22 @@ exports:
                        '_$s8MapsSync0aB18MutableHistoryItemC8positionSdvsTq', '_$s8MapsSync0aB18MutableHistoryItemCMa', 
                        '_$s8MapsSync0aB18MutableHistoryItemCMn', '_$s8MapsSync0aB18MutableHistoryItemCMo', 
                        '_$s8MapsSync0aB18MutableHistoryItemCMu', '_$s8MapsSync0aB18MutableHistoryItemCN', 
-                       '_$s8MapsSync0aB18MutableHistoryItemCfD', '_$s8MapsSync0aB19AnonymousCredentialC011fetchLatestcD0ACSgvgZ', 
+                       '_$s8MapsSync0aB18MutableHistoryItemCfD', '_$s8MapsSync0aB18ReviewedPlaceQueryC05fetchE8Contents13callbackQueue10completionySo17OS_dispatch_queueCSg_ySayAA0abcD0CG_s5Error_pSgtctFTj', 
+                       '_$s8MapsSync0aB18ReviewedPlaceQueryC05fetchE8Contents13callbackQueue10completionySo17OS_dispatch_queueCSg_ySayAA0abcD0CG_s5Error_pSgtctFTq', 
+                       '_$s8MapsSync0aB18ReviewedPlaceQueryC05fetchE8ContentsyyySayAA0abcD0CG_s5Error_pSgtcFTj', 
+                       '_$s8MapsSync0aB18ReviewedPlaceQueryC05fetchE8ContentsyyySayAA0abcD0CG_s5Error_pSgtcFTq', 
+                       '_$s8MapsSync0aB18ReviewedPlaceQueryC13fetchContents13callbackQueue10completionySo17OS_dispatch_queueCSg_ySayAA0abcD0CGctFTj', 
+                       '_$s8MapsSync0aB18ReviewedPlaceQueryC13fetchContents13callbackQueue10completionySo17OS_dispatch_queueCSg_ySayAA0abcD0CGctFTq', 
+                       '_$s8MapsSync0aB18ReviewedPlaceQueryC13fetchContentsyyySayAA0abcD0CGcFTj', 
+                       '_$s8MapsSync0aB18ReviewedPlaceQueryC13fetchContentsyyySayAA0abcD0CGcFTq', 
+                       '_$s8MapsSync0aB18ReviewedPlaceQueryC8delegateAcA0ab4DataE8Delegate_pSg_tcfC', 
+                       '_$s8MapsSync0aB18ReviewedPlaceQueryC8delegateAcA0ab4DataE8Delegate_pSg_tcfCTj', 
+                       '_$s8MapsSync0aB18ReviewedPlaceQueryC8delegateAcA0ab4DataE8Delegate_pSg_tcfCTq', 
+                       '_$s8MapsSync0aB18ReviewedPlaceQueryC8delegateAcA0ab4DataE8Delegate_pSg_tcfc', 
+                       '_$s8MapsSync0aB18ReviewedPlaceQueryCMa', '_$s8MapsSync0aB18ReviewedPlaceQueryCMn', 
+                       '_$s8MapsSync0aB18ReviewedPlaceQueryCMo', '_$s8MapsSync0aB18ReviewedPlaceQueryCMu', 
+                       '_$s8MapsSync0aB18ReviewedPlaceQueryCN', '_$s8MapsSync0aB18ReviewedPlaceQueryCfD', 
+                       '_$s8MapsSync0aB19AnonymousCredentialC011fetchLatestcD0ACSgvgZ', 
                        '_$s8MapsSync0aB19AnonymousCredentialC09fetchWithC2IdyACSgSo6NSDataCFZ', 
                        '_$s8MapsSync0aB19AnonymousCredentialC11anonymousId10Foundation4DataVSgvgTj', 
                        '_$s8MapsSync0aB19AnonymousCredentialC11anonymousId10Foundation4DataVSgvgTq', 
@@ -1331,9 +1346,10 @@ exports:
                        '_$s8MapsSync0aB9DataQueryCMa', '_$s8MapsSync0aB9DataQueryCMn', 
                        '_$s8MapsSync0aB9DataQueryCMo', '_$s8MapsSync0aB9DataQueryCMu', 
                        '_$s8MapsSync0aB9DataQueryCN', '_$s8MapsSync0aB9DataQueryCfD', 
-                       '_$s8MapsSync0aB9ErrorCodeO08CoreDataC0yA2CmFWC', '_$s8MapsSync0aB9ErrorCodeO14ObjectNotFoundyA2CmFWC', 
-                       '_$s8MapsSync0aB9ErrorCodeO14ObjectNotSavedyA2CmFWC', '_$s8MapsSync0aB9ErrorCodeO14StoreNotLoadedyA2CmFWC', 
-                       '_$s8MapsSync0aB9ErrorCodeO17ObjectIsDuplicateyA2CmFWC', '_$s8MapsSync0aB9ErrorCodeO19ObjectAlreadyExistsyA2CmFWC', 
+                       '_$s8MapsSync0aB9ErrorCodeO08CoreDataC0yA2CmFWC', '_$s8MapsSync0aB9ErrorCodeO13ObjCExceptionyA2CmFWC', 
+                       '_$s8MapsSync0aB9ErrorCodeO14ObjectNotFoundyA2CmFWC', '_$s8MapsSync0aB9ErrorCodeO14ObjectNotSavedyA2CmFWC', 
+                       '_$s8MapsSync0aB9ErrorCodeO14StoreNotLoadedyA2CmFWC', '_$s8MapsSync0aB9ErrorCodeO17ObjectIsDuplicateyA2CmFWC', 
+                       '_$s8MapsSync0aB9ErrorCodeO19ObjectAlreadyExistsyA2CmFWC', 
                        '_$s8MapsSync0aB9ErrorCodeO20ObjectAlreadyDeletedyA2CmFWC', 
                        '_$s8MapsSync0aB9ErrorCodeO33FetchInvalidValueTypeForAttributeyA2CmFWC', 
                        '_$s8MapsSync0aB9ErrorCodeO7UnknownyA2CmFWC', '_$s8MapsSync0aB9ErrorCodeO8XPCErroryA2CmFWC', 
@@ -1350,7 +1366,7 @@ exports:
                        '_$sSo9OS_os_logC8MapsSyncE5erroryySSFZ', '_$sSo9OS_os_logC8MapsSyncEAcBvgZ', 
                        _MapsSyncGeoMapItemStorageDescription, _MapsSyncGetExceptionRaisedInBlock, 
                        _MapsSyncListenForNotification, _MapsSyncPostNotification, 
-                       _MapsSyncVersionNumber, _MapsSyncVersionString ]
+                       _MapsSyncVersionNumber, _MapsSyncVersionString, _throwObjCException ]
     objc-classes:    [ _TtC8MapsSync13MapsSyncBatch, _TtC8MapsSync13MapsSyncError, 
                        _TtC8MapsSync15MapsSyncVehicle, _TtC8MapsSync16MapsSyncBaseItem, 
                        _TtC8MapsSync17MapsSyncBaseQuery, _TtC8MapsSync17MapsSyncDataQuery, 
@@ -1364,18 +1380,18 @@ exports:
                        _TtC8MapsSync24MapsSyncHistoryPlaceItem, _TtC8MapsSync25MapsSyncCuratedCollection, 
                        _TtC8MapsSync25MapsSyncFavoriteItemQuery, _TtC8MapsSync25MapsSyncHistorySearchItem, 
                        _TtC8MapsSync25MapsSyncMutableCollection, _TtC8MapsSync26MapsSyncHistoryTransitItem, 
-                       _TtC8MapsSync26MapsSyncMutableHistoryItem, _TtC8MapsSync27MapsSyncAnonymousCredential, 
-                       _TtC8MapsSync27MapsSyncCollectionItemQuery, _TtC8MapsSync27MapsSyncCollectionPlaceItem, 
-                       _TtC8MapsSync27MapsSyncMutableFavoriteItem, _TtC8MapsSync28MapsSyncHistoryRideShareItem, 
-                       _TtC8MapsSync28MapsSyncMutableReviewedPlace, _TtC8MapsSync29MapsSyncCollectionTransitItem, 
-                       _TtC8MapsSync29MapsSyncHistoryDirectionsItem, _TtC8MapsSync29MapsSyncMutableCollectionItem, 
-                       _TtC8MapsSync30MapsSyncCuratedCollectionQuery, _TtC8MapsSync31MapsSyncCachedCuratedCollection, 
-                       _TtC8MapsSync31MapsSyncHistoryEvDirectionsItem, _TtC8MapsSync31MapsSyncMutableCachedUserReview, 
-                       _TtC8MapsSync31MapsSyncMutableHistoryPlaceItem, _TtC8MapsSync32MapsSyncCollectionPlaceItemQuery, 
-                       _TtC8MapsSync32MapsSyncMutableCuratedCollection, _TtC8MapsSync32MapsSyncMutableHistorySearchItem, 
-                       _TtC8MapsSync33MapsSyncMutableHistoryTransitItem, _TtC8MapsSync34MapsSyncCollectionTransitItemQuery, 
-                       _TtC8MapsSync34MapsSyncMutableAnonymousCredential, _TtC8MapsSync34MapsSyncMutableCollectionPlaceItem, 
-                       _TtC8MapsSync35MapsSyncMutableHistoryRideShareItem, _TtC8MapsSync36MapsSyncMutableCollectionTransitItem, 
-                       _TtC8MapsSync36MapsSyncMutableHistoryDirectionsItem, _TtC8MapsSync38MapsSyncMutableCachedCuratedCollection, 
-                       _TtC8MapsSync38MapsSyncMutableHistoryEvDirectionsItem ]
+                       _TtC8MapsSync26MapsSyncMutableHistoryItem, _TtC8MapsSync26MapsSyncReviewedPlaceQuery, 
+                       _TtC8MapsSync27MapsSyncAnonymousCredential, _TtC8MapsSync27MapsSyncCollectionItemQuery, 
+                       _TtC8MapsSync27MapsSyncCollectionPlaceItem, _TtC8MapsSync27MapsSyncMutableFavoriteItem, 
+                       _TtC8MapsSync28MapsSyncHistoryRideShareItem, _TtC8MapsSync28MapsSyncMutableReviewedPlace, 
+                       _TtC8MapsSync29MapsSyncCollectionTransitItem, _TtC8MapsSync29MapsSyncHistoryDirectionsItem, 
+                       _TtC8MapsSync29MapsSyncMutableCollectionItem, _TtC8MapsSync30MapsSyncCuratedCollectionQuery, 
+                       _TtC8MapsSync31MapsSyncCachedCuratedCollection, _TtC8MapsSync31MapsSyncHistoryEvDirectionsItem, 
+                       _TtC8MapsSync31MapsSyncMutableCachedUserReview, _TtC8MapsSync31MapsSyncMutableHistoryPlaceItem, 
+                       _TtC8MapsSync32MapsSyncCollectionPlaceItemQuery, _TtC8MapsSync32MapsSyncMutableCuratedCollection, 
+                       _TtC8MapsSync32MapsSyncMutableHistorySearchItem, _TtC8MapsSync33MapsSyncMutableHistoryTransitItem, 
+                       _TtC8MapsSync34MapsSyncCollectionTransitItemQuery, _TtC8MapsSync34MapsSyncMutableAnonymousCredential, 
+                       _TtC8MapsSync34MapsSyncMutableCollectionPlaceItem, _TtC8MapsSync35MapsSyncMutableHistoryRideShareItem, 
+                       _TtC8MapsSync36MapsSyncMutableCollectionTransitItem, _TtC8MapsSync36MapsSyncMutableHistoryDirectionsItem, 
+                       _TtC8MapsSync38MapsSyncMutableCachedCuratedCollection, _TtC8MapsSync38MapsSyncMutableHistoryEvDirectionsItem ]
 ...

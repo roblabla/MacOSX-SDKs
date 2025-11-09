@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A92E0930-EE3C-383C-974B-06696CC91D53
+    value:           9A30E4F6-69EF-318F-9268-763F2472F8CB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           22E58FCF-5D0C-3671-89A4-80EC4231A8B0
+    value:           DAFF53E1-EA0A-331D-9FE7-2B9AFE1C20AE
 install-name:    '/System/Library/PrivateFrameworks/AssistiveControlSupport.framework/Versions/A/AssistiveControlSupport'
 current-version: 87
 exports:
@@ -77,6 +77,7 @@ exports:
                        _ACSHThemeAttributeFromString, _ACSHThemeAttributeToString, 
                        _ACSHThemeInfo, _ACSHThemeInfoLocalizedNameKey, _ACSHThemeInfoNumericValueKey, 
                        _ACSHThemeInfoStringValueKey, _ACSHTitlebarIconsThemeForDisplayTheme, 
+                       _ACSHToolbarControllerConfigurationHasNonInputActionsKey, 
                        _ACSHToolbarControllerConfigurationIdentifierKey, _ACSHToolbarControllerConfigurationIsDynamic, 
                        _ACSHToolbarControllerConfigurationIsDynamicallyHidden, _ACSHToolbarControllerConfigurationIsUserToolbarKey, 
                        _ACSHToolbarControllerConfigurationUserVisibleNameKey, _ACSHToolbarControllerConfigurationVisibilityKey, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           918C2E2B-A567-3371-968F-59553D15AA94
+    value:           8C99A848-FCD4-3746-ABCB-EDDB25857F7B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FA08EBE5-BB83-300B-A20F-2B32A579951F
+    value:           DAF2CCCE-329D-314F-A642-CE7FF2171746
 install-name:    '/System/Library/PrivateFrameworks/AirPlaySender.framework/Versions/A/AirPlaySender'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -341,13 +341,15 @@ exports:
                        _kAPEndpointStreamCreationOptionKey_IsPerAppDisplay, _kAPEndpointStreamCreationOptionKey_ScreenProcessor, 
                        _kAPEndpointStreamCreationOptionKey_ScreenSource, _kAPEndpointStreamCreationOptionKey_ScreenUsageMode, 
                        _kAPEndpointStreamLocalStreamID, _kAPEndpointStreamMode, _kAPEndpointStreamNotificationPayloadKey_DynamicLatencyOffsetMs, 
-                       _kAPEndpointStreamNotificationPayloadKey_IsPlaying, _kAPEndpointStreamNotificationPayloadKey_IsStartupFailure, 
+                       _kAPEndpointStreamNotificationPayloadKey_IsInUse, _kAPEndpointStreamNotificationPayloadKey_IsPlaying, 
+                       _kAPEndpointStreamNotificationPayloadKey_IsStartupFailure, 
                        _kAPEndpointStreamNotification_DynamicLatencyOffsetDidChange, 
-                       _kAPEndpointStreamNotification_IsPlayingDidChange, _kAPEndpointStreamNotification_TimelineEstablished, 
-                       _kAPEndpointStreamOptions_AudioEngine, _kAPEndpointStreamOptions_AudioEngineVendor, 
-                       _kAPEndpointStreamOptions_AudioFormat, _kAPEndpointStreamProperty_AudioType, 
-                       _kAPEndpointStreamProperty_Cryptor, _kAPEndpointStreamProperty_DynamicLatencyOffsetMs, 
-                       _kAPEndpointStreamProperty_HoseRegistrar, _kAPEndpointStreamProperty_IsLocalStream, 
+                       _kAPEndpointStreamNotification_IsInUseDidChange, _kAPEndpointStreamNotification_IsPlayingDidChange, 
+                       _kAPEndpointStreamNotification_TimelineEstablished, _kAPEndpointStreamOptions_AudioEngine, 
+                       _kAPEndpointStreamOptions_AudioEngineVendor, _kAPEndpointStreamOptions_AudioFormat, 
+                       _kAPEndpointStreamProperty_AudioType, _kAPEndpointStreamProperty_Cryptor, 
+                       _kAPEndpointStreamProperty_DynamicLatencyOffsetMs, _kAPEndpointStreamProperty_HoseRegistrar, 
+                       _kAPEndpointStreamProperty_IsInUse, _kAPEndpointStreamProperty_IsLocalStream, 
                        _kAPEndpointStreamProperty_IsPlaying, _kAPEndpointStreamProperty_IsTimelineEstablished, 
                        _kAPEndpointStreamProperty_Manufacturer, _kAPEndpointStreamProperty_Model, 
                        _kAPEndpointStreamProperty_OSVersion, _kAPEndpointStreamProperty_RTCStats, 

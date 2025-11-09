@@ -506,7 +506,7 @@ HK_EXTERN NSString * const HKMetadataKeyAverageMETs API_AVAILABLE(ios(13.0), wat
  @constant      HKMetadataKeyAudioExposureLevel
  @abstract      Represents the audio level associated with an audio event.
  @discussion    The expected value is an HKQuantity whose value is the audio level
-                associated with the event measured in dbASPL units.
+                associated with the event measured in dBASPL units.
  */
 HK_EXTERN NSString * const HKMetadataKeyAudioExposureLevel API_AVAILABLE(ios(13.0), watchos(6.0));
 
@@ -527,6 +527,7 @@ HK_EXTERN NSString * const HKMetadataKeyAudioExposureDuration API_AVAILABLE(ios(
  */
 typedef NS_ENUM(NSInteger, HKAppleECGAlgorithmVersion) {
     HKAppleECGAlgorithmVersion1 = 1,
+    HKAppleECGAlgorithmVersion2 API_AVAILABLE(ios(14.3), watchos(7.2)) = 2,
 } API_AVAILABLE(ios(14.0), watchos(7.0));
 
 /*!
@@ -572,5 +573,19 @@ HK_EXTERN NSString * const HKMetadataKeyBarometricPressure API_AVAILABLE(ios(14.
  @discussion    The expected value is a boolean NSNumber indicating whether the sample value was estimated using a sufficient set of device calibration data. The calibration status of a device may vary per data type. This key is read-only.
  */
 HK_EXTERN NSString * const HKMetadataKeyAppleDeviceCalibrated API_AVAILABLE(ios(14.0), watchos(7.0));
+
+/*!
+@constant      HKMetadataKeyVO2MaxValue
+@abstract      Represents a VO2Max value that can be associated with, for example, Cardio Fitness Events
+@discussion    This key should be used to store an HKQuantity with a unit of `ml/kg·min`
+*/
+HK_EXTERN NSString * const HKMetadataKeyVO2MaxValue API_AVAILABLE(ios(14.3), watchos(7.2));
+
+/*!
+@constant      HKMetadataKeyLowCardioFitnessEventThreshold
+@abstract      Can be used to store a snapshot of the threshold used to classify VO2Max values as "low"
+@discussion    This key should be used to store an HKQuantity, with a unit of `ml/kg·min`, representing the low fitness threshold.
+*/
+HK_EXTERN NSString * const HKMetadataKeyLowCardioFitnessEventThreshold API_AVAILABLE(ios(14.3), watchos(7.2));
 
 NS_ASSUME_NONNULL_END

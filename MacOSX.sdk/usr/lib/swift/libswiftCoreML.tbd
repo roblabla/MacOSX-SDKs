@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           43ED9203-7F9A-3838-A4A4-AC1C2F4DFF6E
+    value:           CA756D08-3395-30F3-A659-10AD10BE9AB5
   - target:          x86_64-maccatalyst
-    value:           43ED9203-7F9A-3838-A4A4-AC1C2F4DFF6E
+    value:           CA756D08-3395-30F3-A659-10AD10BE9AB5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2C14B858-DE5D-383D-B98B-766F8602B98B
+    value:           1A785B77-298F-3991-8922-9281CCF2BEC4
   - target:          arm64e-maccatalyst
-    value:           2C14B858-DE5D-383D-B98B-766F8602B98B
+    value:           1A785B77-298F-3991-8922-9281CCF2BEC4
 install-name:    '/usr/lib/swift/libswiftCoreML.dylib'
 current-version: 1006.40.39
 swift-abi-version: 7

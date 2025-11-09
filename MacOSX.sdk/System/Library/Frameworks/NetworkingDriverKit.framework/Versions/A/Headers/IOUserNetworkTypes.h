@@ -31,7 +31,8 @@
 
 #include <stdint.h>
 
-struct IOUserNetworkMACAddress {
+/** @deprecated use ether_addr_t instead */
+struct __deprecated IOUserNetworkMACAddress {
     uint8_t octet[6];
 };
 

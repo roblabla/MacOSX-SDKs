@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B7049882-6AD8-3DBA-A368-BC825AA4C288
+    value:           22F10D9C-4C88-30B2-9D97-333A69F790F5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3962E41E-394C-39D1-9845-400186442EA2
+    value:           8555308A-9347-3D16-BFC9-1FBFDE096CE3
 install-name:    '/System/Library/PrivateFrameworks/Cards.framework/Versions/A/Cards'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -19,8 +19,9 @@ exports:
                        CRBasicCard, CRBasicCardSection, CRBasicCardSectionViewAppearanceFeedback, 
                        CRBasicCardSectionViewDisappearanceFeedback, CRBasicPayloadCommand, 
                        CRBeganEditingCommand, CRBundleManager, CRCardMocks, CRError, 
-                       CRHandleIntentCommand, CRInvocationChain, CRJSContext, CRJSObject, 
-                       CRMockAsyncCard, CRNextCardCommand, CRPBSerialization, CRProtocolRestrictedInvocationChain, 
+                       CRFinishedEditingCommand, CRHandleIntentCommand, CRInvocationChain, 
+                       CRInvocationPayloadCommand, CRJSContext, CRJSObject, CRMockAsyncCard, 
+                       CRNextCardCommand, CRPBSerialization, CRProtocolRestrictedInvocationChain, 
                        CRPunchoutCommand, CRRequestUserConfirmationCommand, CRSFCardLoader, 
                        CRSFCardSectionUtilities, CRUpdateProgressCommand ]
 ...

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7C5C139B-DCF7-3C4A-95FD-6439178F8529
+    value:           CBD21AFE-44A3-3C25-9585-CCC65E1365DB
   - target:          x86_64-maccatalyst
-    value:           7C5C139B-DCF7-3C4A-95FD-6439178F8529
+    value:           CBD21AFE-44A3-3C25-9585-CCC65E1365DB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C6DEA421-65D2-3A77-AEBE-8066956FCB2E
+    value:           8ECFF1E0-A39B-3823-99D8-D6B83D396668
   - target:          arm64e-maccatalyst
-    value:           C6DEA421-65D2-3A77-AEBE-8066956FCB2E
+    value:           8ECFF1E0-A39B-3823-99D8-D6B83D396668
 install-name:    '/System/Library/PrivateFrameworks/HelloWorldMacHelper.framework/Versions/A/HelloWorldMacHelper'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           DB7928C8-4F44-34C2-80BD-96DA13E31BC4
+    value:           C8483C26-637B-36EF-8BE7-C529535E406B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           52963AD4-DD8C-3D58-B552-F0048A60B93E
+    value:           B0D16212-B240-366E-BBA4-87486A4965C0
 install-name:    '/System/Library/PrivateFrameworks/MediaControlSender.framework/Versions/A/MediaControlSender'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

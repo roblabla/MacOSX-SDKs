@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           8EAF7300-2AFF-3752-A7C0-D36189605F7F
+    value:           86F530EC-DBE8-3B12-B29F-790A1131D746
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           E59460D2-126C-39C8-83FF-36209FC8594C
+    value:           F1846020-6EB6-3E0F-9D0C-3EA314783FA9
 install-name:    '/System/iOSSupport/usr/lib/swift/libswiftPencilKit.dylib'
 current-version: 5
 swift-abi-version: 7

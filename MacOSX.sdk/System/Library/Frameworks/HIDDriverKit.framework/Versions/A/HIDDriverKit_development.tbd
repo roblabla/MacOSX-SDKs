@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           80083F8A-5012-39FD-9232-0E8636DE35FB
+    value:           ED2B379F-111B-32A8-B67C-ECCCBDCD62DD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1D8A7B5C-744C-3542-BA4C-BDDCBB37467B
+    value:           2AA65EF9-43FC-36BD-8636-E889E1F93182
 install-name:    '/System/Library/Frameworks/HIDDriverKit.framework/Versions/A/HIDDriverKit_development'
 exports:
   - targets:         [ x86_64-macos ]
@@ -15,7 +15,7 @@ exports:
                        __ZN30IOHIDInterfaceElementContainer14withDescriptorEPvjP14IOHIDInterface, 
                        __ZN30IOHIDInterfaceElementContainer4initEPvjP14IOHIDInterface, 
                        __ZThn48_N21IOHIDElementContainer4initEPvj, __ZThn64_N30IOHIDInterfaceElementContainer4initEPvjP14IOHIDInterface ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _HIDDriverKitVersionNumber, _HIDDriverKitVersionString, _IOHIDDevice_Class, 
                        _IOHIDDigitizerCollection_Class, _IOHIDElementContainer_Class, 
                        _IOHIDElementPrivate_Class, _IOHIDElement_Class, _IOHIDEventService_Class, 
@@ -142,7 +142,8 @@ exports:
                        __ZN20IOUserHIDEventDriver19parsePointerElementEP12IOHIDElement, 
                        __ZN20IOUserHIDEventDriver20handleKeyboardReportEyj, __ZN20IOUserHIDEventDriver20parseKeyboardElementEP12IOHIDElement, 
                        __ZN20IOUserHIDEventDriver20setSurfaceDimensionsEv, __ZN20IOUserHIDEventDriver21handleDigitizerReportEyj, 
-                       __ZN20IOUserHIDEventDriver21parseDigitizerElementEP12IOHIDElement, 
+                       __ZN20IOUserHIDEventDriver21handleProximityReportEyj, __ZN20IOUserHIDEventDriver21parseDigitizerElementEP12IOHIDElement, 
+                       __ZN20IOUserHIDEventDriver21parseProximityElementEP12IOHIDElement, 
                        __ZN20IOUserHIDEventDriver25setAccelerationPropertiesEv, __ZN20IOUserHIDEventDriver27handleAbsolutePointerReportEyj, 
                        __ZN20IOUserHIDEventDriver27handleRelativePointerReportEyj, 
                        __ZN20IOUserHIDEventDriver33createEventForDigitizerCollectionEP24IOHIDDigitizerCollectionyj, 
@@ -390,7 +391,9 @@ exports:
                        __ZThn80_N20IOUserHIDEventDriver20handleKeyboardReportEyj, 
                        __ZThn80_N20IOUserHIDEventDriver20parseKeyboardElementEP12IOHIDElement, 
                        __ZThn80_N20IOUserHIDEventDriver21handleDigitizerReportEyj, 
+                       __ZThn80_N20IOUserHIDEventDriver21handleProximityReportEyj, 
                        __ZThn80_N20IOUserHIDEventDriver21parseDigitizerElementEP12IOHIDElement, 
+                       __ZThn80_N20IOUserHIDEventDriver21parseProximityElementEP12IOHIDElement, 
                        __ZThn80_N20IOUserHIDEventDriver27handleAbsolutePointerReportEyj, 
                        __ZThn80_N20IOUserHIDEventDriver27handleRelativePointerReportEyj, 
                        __ZThn80_N22IOUserUSBHostHIDDevice11setProtocolEt, __ZThn80_N22IOUserUSBHostHIDDevice13setIdlePolicyE17USBIdlePolicyTypet, 

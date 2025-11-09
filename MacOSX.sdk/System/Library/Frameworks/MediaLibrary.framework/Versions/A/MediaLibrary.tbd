@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EADD812F-0625-3083-91A4-7F93A5EFA153
+    value:           4A367509-D40C-3D66-9618-5E1FA4D44D7C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           924A8AEC-98F4-310F-8BF6-F8A501BCDC9B
+    value:           3742480E-4C1B-3CF6-BF72-1AAA4BFAE184
 install-name:    '/System/Library/Frameworks/MediaLibrary.framework/Versions/A/MediaLibrary'
 current-version: 796
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _MLApertureAllPhotosTypeIdentifier, _MLApertureAllProjectsTypeIdentifier, 
                        _MLApertureFacebookAlbumTypeIdentifier, _MLApertureFacebookGroupTypeIdentifier, 
                        _MLApertureFacesAlbumTypeIdentifier, _MLApertureFlaggedTypeIdentifier, 

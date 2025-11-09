@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0FDED824-715F-3A8C-9ED7-BEDC14EEE31D
+    value:           75908B3C-77E7-39DD-895D-39C86FF52AD7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C82AB688-66F8-3E83-B06B-849A720791E7
+    value:           24AD540A-5E28-392B-AE5A-1F8669493EA8
 install-name:    '/usr/lib/libKernelCollectionBuilder.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _addCollectionFile, _addInterfaceFile, _addKernelFile, _addKextDataFile, 
                        _addPrelinkInfo, _addSegmentData, _createKernelCollectionBuilder, 
                        _destroyKernelCollectionBuilder, _getCollectionFileResults, 

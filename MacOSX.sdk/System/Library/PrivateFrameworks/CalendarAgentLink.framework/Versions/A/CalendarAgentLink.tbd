@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           90EFC66D-92DB-3544-A2FB-EED416E53BC2
+    value:           C5CF731A-49DA-39B2-A070-84040A82FEC2
   - target:          x86_64-maccatalyst
-    value:           90EFC66D-92DB-3544-A2FB-EED416E53BC2
+    value:           C5CF731A-49DA-39B2-A070-84040A82FEC2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           51AEBE22-E76B-3E41-A78F-835B21884C5C
+    value:           721C5077-66FE-36F3-A0AF-2CC2F17A98F0
   - target:          arm64e-maccatalyst
-    value:           51AEBE22-E76B-3E41-A78F-835B21884C5C
+    value:           721C5077-66FE-36F3-A0AF-2CC2F17A98F0
 install-name:    '/System/Library/PrivateFrameworks/CalendarAgentLink.framework/Versions/A/CalendarAgentLink'
 current-version: 845
 exports:

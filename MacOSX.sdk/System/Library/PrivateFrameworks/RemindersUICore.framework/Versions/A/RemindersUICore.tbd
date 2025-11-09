@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           59ED7360-29E4-30A7-B846-B32629CFE0FF
+    value:           32D72951-FA65-3BDE-AC6D-3B6B698086E8
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EC98D34F-E362-32FC-9DD2-28FE5FD91DC8
+    value:           B399BDDB-2E76-34BB-A8D3-DDA69C30BEFD
 install-name:    '/System/Library/PrivateFrameworks/RemindersUICore.framework/Versions/A/RemindersUICore'
 current-version: 2185
 swift-abi-version: 7

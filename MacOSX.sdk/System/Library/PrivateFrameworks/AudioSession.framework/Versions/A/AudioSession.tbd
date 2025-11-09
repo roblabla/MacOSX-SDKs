@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D2461A3F-E7F4-3CAE-9A63-B042007BF46F
+    value:           C0B1C9EB-A594-31E3-ADDF-118583840E6F
   - target:          x86_64-maccatalyst
-    value:           D2461A3F-E7F4-3CAE-9A63-B042007BF46F
+    value:           C0B1C9EB-A594-31E3-ADDF-118583840E6F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C32DE811-77D5-36A0-847E-468B7D025EED
+    value:           BDC23BAB-CFE3-32DB-B8AF-C240056C6DF3
   - target:          arm64e-maccatalyst
-    value:           C32DE811-77D5-36A0-847E-468B7D025EED
+    value:           BDC23BAB-CFE3-32DB-B8AF-C240056C6DF3
 install-name:    '/System/Library/PrivateFrameworks/AudioSession.framework/Versions/A/AudioSession'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

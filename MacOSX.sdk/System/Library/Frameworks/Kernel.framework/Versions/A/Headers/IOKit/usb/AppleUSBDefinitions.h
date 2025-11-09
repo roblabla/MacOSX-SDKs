@@ -1114,6 +1114,13 @@ enum tIOUSB30BusCurrent
     kIOUSB30BusCurrentMaxPowerUnits = 8
 };
 
+#pragma mark USB 2.0 constants
+// USB 2.0 4.1.1
+enum
+{
+    kIOUSBTopologyTierLimit = 7
+};
+
 #pragma mark USB 3.0 constants
 // USB 3.0 Table 6-21
 enum tIOUSB30ResetTimeout

@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.40.8) generated from IOUserHIDEventService.iig */
+/* iig(DriverKit-107.60.3) generated from IOUserHIDEventService.iig */
 
 /* IOUserHIDEventService.iig:1-38 */
 /*
@@ -492,7 +492,7 @@ public:
 struct OSAction_IOUserHIDEventService_ReportAvailable_IVars;
 struct OSAction_IOUserHIDEventService_ReportAvailable_LocalIVars;
 
-class OSAction_IOUserHIDEventService_ReportAvailable : public OSAction, public OSAction_IOUserHIDEventService_ReportAvailableInterface
+class __attribute__((availability(driverkit,introduced=20,message="Type-safe OSAction factory methods are available in DriverKit 20 and newer"))) OSAction_IOUserHIDEventService_ReportAvailable : public OSAction, public OSAction_IOUserHIDEventService_ReportAvailableInterface
 {
 #if KERNEL
     OSDeclareDefaultStructorsWithDispatch(OSAction_IOUserHIDEventService_ReportAvailable);

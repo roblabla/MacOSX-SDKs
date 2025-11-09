@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           712A36B9-6D0C-39C7-834D-927287D3F120
+    value:           F6FD145C-A852-3965-B3AC-7F90DCD16D10
   - target:          x86_64-maccatalyst
-    value:           712A36B9-6D0C-39C7-834D-927287D3F120
+    value:           F6FD145C-A852-3965-B3AC-7F90DCD16D10
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A6463532-80C0-30CD-8042-236C62D8EA17
+    value:           016F6873-9436-39CC-AE88-0F32CB050E3D
   - target:          arm64e-maccatalyst
-    value:           A6463532-80C0-30CD-8042-236C62D8EA17
+    value:           016F6873-9436-39CC-AE88-0F32CB050E3D
 install-name:    '/System/Library/PrivateFrameworks/UIKitServices.framework/Versions/A/UIKitServices'
-current-version: 3999.1.255
+current-version: 4003.1.255
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

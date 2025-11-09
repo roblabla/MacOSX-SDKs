@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2FE79715-67D3-34A2-8578-223D33E4AC69
+    value:           1ED5A4BF-8876-3AEB-AB33-C01241E5DF8A
   - target:          x86_64-maccatalyst
-    value:           2FE79715-67D3-34A2-8578-223D33E4AC69
+    value:           1ED5A4BF-8876-3AEB-AB33-C01241E5DF8A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2AA16355-292A-3A88-8BAA-C4330B53A5A2
+    value:           148FEEB7-0D22-35D9-BCAA-14EE81A7446C
   - target:          arm64e-maccatalyst
-    value:           2AA16355-292A-3A88-8BAA-C4330B53A5A2
+    value:           148FEEB7-0D22-35D9-BCAA-14EE81A7446C
 install-name:    '/System/Library/PrivateFrameworks/EmailCore.framework/Versions/A/EmailCore'
-current-version: 3654.0.3
+current-version: 3654.40
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

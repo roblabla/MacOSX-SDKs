@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9E4AAEC0-68E7-3DE8-B8F8-A7084CBE5845
+    value:           7B952EB9-D388-3D85-80A7-464580692C80
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0030DD88-EBD4-3AD9-B57C-0C295DE955D0
+    value:           E5D1F5E2-92D2-3A8A-AD3C-1D443450212F
 install-name:    '/System/Library/PrivateFrameworks/Mail.framework/Versions/A/Mail'
-current-version: 3654.0.3
+current-version: 3654.40
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ CoreSuggestionsTests, DebugBundle, EmailAuthenticationPlugin, 

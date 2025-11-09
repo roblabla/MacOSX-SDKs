@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           41F09AC9-C10F-3DAD-8295-20CC4974891A
+    value:           5FFCA34B-7B35-3783-983E-EF263352034C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5AFCDD3A-39AD-374E-9BB2-5C0EF6A52AE2
+    value:           EF32E47A-A211-3DCC-AE63-0E43717E367D
 install-name:    '/usr/lib/AppleConvergedTransport.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _AppleConvergedTransportCreate, _AppleConvergedTransportFree, 
                        _AppleConvergedTransportInitParameters, _AppleConvergedTransportIsValid, 
                        _AppleConvergedTransportRead, _AppleConvergedTransportReadRegister, 

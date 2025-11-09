@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6B616943-CC0C-3992-8829-1A79A95B734B
+    value:           6CAA6640-AE64-3A95-A1E2-F3490314802B
   - target:          x86_64-maccatalyst
-    value:           6B616943-CC0C-3992-8829-1A79A95B734B
+    value:           6CAA6640-AE64-3A95-A1E2-F3490314802B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           795B39E4-E827-39B3-B120-D7067BF2AD95
+    value:           8280211B-3936-3624-8485-F88039639E5D
   - target:          arm64e-maccatalyst
-    value:           795B39E4-E827-39B3-B120-D7067BF2AD95
+    value:           8280211B-3936-3624-8485-F88039639E5D
 install-name:    '/System/Library/PrivateFrameworks/ProofReader.framework/Versions/A/ProofReader'
-current-version: 526
+current-version: 526.1
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

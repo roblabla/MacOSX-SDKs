@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3FF707D6-5481-35E7-813D-3198C551801C
+    value:           84667072-0669-3BF9-BFB6-C87A982A28C0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3C1DBF19-5A2D-3D95-B46A-99C94A1F12BC
+    value:           FE276C5E-BEF8-3D41-A491-11ACAC88FA45
 install-name:    '/System/Library/PrivateFrameworks/JetEngine.framework/Versions/A/JetEngine'
 swift-abi-version: 7
 allowable-clients:

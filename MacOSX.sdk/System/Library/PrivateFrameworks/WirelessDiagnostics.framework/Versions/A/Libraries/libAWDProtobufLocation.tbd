@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A1473AD1-D358-3424-B80D-5F82991AC979
+    value:           79D6EAE9-4957-3059-B6F0-C1429944D523
   - target:          x86_64-maccatalyst
-    value:           A1473AD1-D358-3424-B80D-5F82991AC979
+    value:           79D6EAE9-4957-3059-B6F0-C1429944D523
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B43579FF-017E-3E9B-A067-CB250AA73F12
+    value:           9F65F0B4-B134-3AC4-A42D-E7EDFD2FFC33
   - target:          arm64e-maccatalyst
-    value:           B43579FF-017E-3E9B-A067-CB250AA73F12
+    value:           9F65F0B4-B134-3AC4-A42D-E7EDFD2FFC33
 install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libAWDProtobufLocation.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -432,6 +432,7 @@ exports:
                        __ZN3awd7metrics19MotionFitnessAllDay22kPctEMBurstFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay22kUserAgeBinFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay23kUserMaxMetsFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay23kWorkoutTypeFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay25kEventDurationFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay25kNumFallAlertsFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay25kPctEMCoverageFieldNumberE, 
@@ -442,6 +443,7 @@ exports:
                        __ZN3awd7metrics19MotionFitnessAllDay27kNumPushFailuresFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay27kPctCaloriesPushFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay27kUserStartedTypeFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay27kWorkoutDurationFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay29kNumRecoveryEventsFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay29kNumSOSCallsPlacedFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay29kPctCaloriesFrozenFieldNumberE, 
@@ -449,10 +451,12 @@ exports:
                        __ZN3awd7metrics19MotionFitnessAllDay30kPctAllDayEMOnGradeFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay30kTimeSinceLastAlertFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay31kBelongsToOlderGroupFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay31kNumHikingFallAlertsFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay32kPctCaloriesSSPostureFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay33kMaxAccelNormThresholdFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay34kMaxAbsXYZForAllImpactsFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay34kPctCaloriesSSIntensityFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay35kNumHikingRecoveryEventsFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay35kNumSOSCanceledAggregateFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay35kNumUserResponseRejectedFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay35kRunCalibrationAvailableFieldNumberE, 
@@ -468,15 +472,24 @@ exports:
                        __ZN3awd7metrics19MotionFitnessAllDay38kPctAllDayCaloriesFromGradeFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay39kMaxAccelNormForOtherImpactsFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay39kNumGatedFallAlertsOnChargerFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay39kNumOutdoorCyclingFallAlertsFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay39kNumOutdoorRunningFallAlertsFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay39kNumOutdoorWalkingFallAlertsFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay39kNumSOSCanceledBecauseActiveFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay40kNumAlertCanceledBecauseOfFFTFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay41kAlgorithmEffectivenessBitmaskFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay41kNumHikingUserResponseRejectedFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay41kNumSOSCanceledBecauseOffWristFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay41kPctCaloriesSessionPedWorkoutsFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay42kNumAlertCanceledOtherAggregateFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay42kNumHikingUserResponseDismissedFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay42kPctCaloriesSessionSwimWorkoutsFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay43kNumOutdoorCyclingRecoveryEventsFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay43kNumOutdoorRunningRecoveryEventsFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay43kNumOutdoorWalkingRecoveryEventsFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay43kPctCaloriesSessionOtherWorkoutsFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay43kPctCaloriesSessionWheelchairRunFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay44kDidEnableWorkoutAnomalyDetectionFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay44kNumAlertCanceledBecauseOfOffBodyFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay44kPctCaloriesSessionWheelchairWalkFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay45kJerkVectorMagnitudeForFallImpactsFieldNumberE, 
@@ -490,20 +503,44 @@ exports:
                        __ZN3awd7metrics19MotionFitnessAllDay48kNumImpactCanceledBecauseOfMultiPeaksFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay48kNumImpactCanceledBecauseOfNaiveBayesFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay49kNumAlertCanceledBecauseOfOffWristPostFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay49kNumOutdoorCyclingUserResponseRejectedFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay49kNumOutdoorRunningUserResponseRejectedFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay49kNumOutdoorWalkingUserResponseRejectedFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay49kNumSOSCanceledBecauseAbsenceOfLongLieFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay4SwapEPS1_, __ZN3awd7metrics19MotionFitnessAllDay50kIsImproveHealthAndActivityOptInEnabledFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay50kNumImpactCanceledBecauseOfMaxAccelNormFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay50kNumOutdoorCyclingUserResponseDismissedFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay50kNumOutdoorRunningUserResponseDismissedFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay50kNumOutdoorWalkingUserResponseDismissedFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay51kNumUserResponseAutomaticActionRequestedFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay51kNumUserResponseConfirmedActionRequestedFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay52kNumAlertCanceledBecauseOfFeatureDisabledFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay52kNumAlertCanceledBecauseOfLowFrequencyFFTFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay53kDidEnableBackgroundAllDayAnomalyDetectionFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay53kNumAlertCanceledBecauseOfHighFrequencyFFTFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay53kNumAlertCanceledBecauseOfRepetitiveMotionFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay53kNumUserResponseConfirmedNoActionRequestedFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay54kDidEnableBackgroundWorkoutAnomalyDetectionFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay54kHikingWorkoutAlgorithmEffectivenessBitmaskFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay55kNumAlertCanceledBecauseOfAlreadyGatedBeforeFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay56kNumAlertCanceledBecauseOfAbsenceOfQuiessenceFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay57kNumHikingUserResponseAutomaticActionRequestedFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay57kNumHikingUserResponseConfirmedActionRequestedFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay57kNumImpactCanceledBecauseOfOtherHardThresholdsFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay59kNumHikingUserResponseConfirmedNoActionRequestedFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay5ClearEv, __ZN3awd7metrics19MotionFitnessAllDay61kNumAlertCanceledBecauseOfDecimatedLowFrequencyFFTFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay62kOutdoorCyclingWorkoutAlgorithmEffectivenessBitmaskFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay62kOutdoorRunningWorkoutAlgorithmEffectivenessBitmaskFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay62kOutdoorWalkingWorkoutAlgorithmEffectivenessBitmaskFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay65kNumOutdoorCyclingUserResponseAutomaticActionRequestedFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay65kNumOutdoorCyclingUserResponseConfirmedActionRequestedFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay65kNumOutdoorRunningUserResponseAutomaticActionRequestedFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay65kNumOutdoorRunningUserResponseConfirmedActionRequestedFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay65kNumOutdoorWalkingUserResponseAutomaticActionRequestedFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay65kNumOutdoorWalkingUserResponseConfirmedActionRequestedFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay67kNumOutdoorCyclingUserResponseConfirmedNoActionRequestedFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay67kNumOutdoorRunningUserResponseConfirmedNoActionRequestedFieldNumberE, 
+                       __ZN3awd7metrics19MotionFitnessAllDay67kNumOutdoorWalkingUserResponseConfirmedNoActionRequestedFieldNumberE, 
                        __ZN3awd7metrics19MotionFitnessAllDay8CopyFromERKS1_, __ZN3awd7metrics19MotionFitnessAllDay9MergeFromERKS1_, 
                        __ZN3awd7metrics19MotionFitnessAllDayC1ERKS1_, __ZN3awd7metrics19MotionFitnessAllDayC1Ev, 
                        __ZN3awd7metrics19MotionFitnessAllDayC2ERKS1_, __ZN3awd7metrics19MotionFitnessAllDayC2Ev, 

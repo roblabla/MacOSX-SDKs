@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           549522F9-5489-3F94-B382-519A5751514D
+    value:           6A1EBFAB-5B9B-3BE2-94AB-70D6C69D16D2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E88D634A-5BDA-38B2-8AA8-B10A99626CE0
+    value:           8395478C-1A58-3BD8-87D9-FF56EA6DAF6A
 install-name:    '/usr/lib/libiodbcinst.2.dylib'
 current-version: 4.18
 compatibility-version: 4

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           78E3E2AC-326A-3247-A0A1-91D6C1AF0A1C
+    value:           1E5E4875-8698-3CFE-A9A1-50669BC6A44D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AF42425F-7266-3600-A61E-6A11E31ACE28
+    value:           BFF45202-5176-342E-B137-5AFD04403000
 install-name:    '/System/Library/Frameworks/ScreenSaver.framework/Versions/A/ScreenSaver'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -52,15 +52,5 @@ exports:
                        ScreenSaverModule._enabled, ScreenSaverModule._hasConfigureSheet, 
                        ScreenSaverModule._moduleName, ScreenSaverModule._path, ScreenSaverModule._representedObject, 
                        ScreenSaverModule._requiresGraphicsAcceleration, ScreenSaverModule._type, 
-                       ScreenSaverModules._modules, ScreenSaverModules._times, ScreenSaverPhotoChooser._blocksToCallOnceFinishedLoading, 
-                       ScreenSaverPhotoChooser._currentPhotoChooserSource, ScreenSaverPhotoChooser._customControlsView, 
-                       ScreenSaverPhotoChooser._customControlsViewTLOArray, ScreenSaverPhotoChooser._defaultCollections, 
-                       ScreenSaverPhotoChooser._defaults, ScreenSaverPhotoChooser._folderMediaManager, 
-                       ScreenSaverPhotoChooser._iLifeLockedAndLoaded, ScreenSaverPhotoChooser._latestPhotosEvents, 
-                       ScreenSaverPhotoChooser._latestPhotosProjects, ScreenSaverPhotoChooser._mediaBrowserView, 
-                       ScreenSaverPhotoChooser._mediaBrowserViewTLOArray, ScreenSaverPhotoChooser._mediaChooserWindow, 
-                       ScreenSaverPhotoChooser._photoStreamDetected, ScreenSaverPhotoChooser._photosMediaManager, 
-                       ScreenSaverPhotoChooser._selectedMediaGroupID, ScreenSaverPhotoChooser._sourceLabelField, 
-                       ScreenSaverPhotoChooser._sourceMenuLoadedBlock, ScreenSaverPhotoChooser._sourcePopUpButton, 
-                       ScreenSaverPhotoChooser._sourceShuffleButton ]
+                       ScreenSaverModules._modules, ScreenSaverModules._times ]
 ...

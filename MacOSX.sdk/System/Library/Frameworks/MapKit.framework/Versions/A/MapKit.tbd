@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           CB80D920-5C01-3720-A1A9-E778B2B0EF70
+    value:           CD1E2AD2-D6E2-33C4-B0C8-0EEB92947506
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0FF01C12-6FD4-3113-93FA-697E958427B6
+    value:           D3BB3C25-9F5C-3EB6-981D-B243DCF06FA5
 install-name:    '/System/Library/Frameworks/MapKit.framework/Versions/A/MapKit'
 current-version: 0
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _ImageForShieldDataSourceTypeShouldBeFlipped, _MKAddressDictionaryFromCLPlacemark, 
                        _MKAddressDictionaryFromContactsDictionary, _MKAddressDictionaryFromPostalAddress, 
                        _MKAddressStringForAddressDictionary, _MKAnnotationCalloutInfoDidChangeNotification, 

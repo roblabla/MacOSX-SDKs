@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B0C47022-949F-36B1-9104-2FEED8868AAD
+    value:           B0BF7749-9F7B-3CD4-8795-E3AAE998D6D5
   - target:          x86_64-maccatalyst
-    value:           B0C47022-949F-36B1-9104-2FEED8868AAD
+    value:           B0BF7749-9F7B-3CD4-8795-E3AAE998D6D5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8D350700-160A-35A6-A026-342E69905C9D
+    value:           B711071C-7F3D-305B-9A90-210D5B9FF4A3
   - target:          arm64e-maccatalyst
-    value:           8D350700-160A-35A6-A026-342E69905C9D
+    value:           B711071C-7F3D-305B-9A90-210D5B9FF4A3
 install-name:    '/System/Library/PrivateFrameworks/SPFinder.framework/Versions/A/SPFinder'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

@@ -5,7 +5,7 @@ uuids:
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1D3F6258-367E-3D95-96AE-8BF378F16C0B
+    value:           49468A2D-EDEF-3F69-A9F7-1517CCA21259
 install-name:    '/usr/lib/libAHTRestore.dylib'
 current-version: 4400.35
 exports:

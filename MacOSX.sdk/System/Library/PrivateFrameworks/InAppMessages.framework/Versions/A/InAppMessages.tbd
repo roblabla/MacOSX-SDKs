@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           45BBB9E5-7EA7-36D8-AC70-557A2350B980
+    value:           18061D07-38EF-31B4-97B3-E1DDC6DCF46B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ED9F913D-043C-3538-8EE2-82A8D9ED26E4
+    value:           8FA35CB1-C343-37EA-B83C-54E5B8E8C0AB
 install-name:    '/System/Library/PrivateFrameworks/InAppMessages.framework/Versions/A/InAppMessages'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -28,20 +28,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6A22E78C-919C-3A3C-A949-D64ABD75A18A
+    value:           34CB0DD1-8089-3BDE-9756-1C26A26BB317
   - target:          x86_64-maccatalyst
-    value:           6A22E78C-919C-3A3C-A949-D64ABD75A18A
+    value:           34CB0DD1-8089-3BDE-9756-1C26A26BB317
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A7454F55-5D98-3ECA-91BD-14CC686CA952
+    value:           586DB329-278E-349F-B2CA-F4AF6EEBB522
   - target:          arm64e-maccatalyst
-    value:           A7454F55-5D98-3ECA-91BD-14CC686CA952
+    value:           586DB329-278E-349F-B2CA-F4AF6EEBB522
 install-name:    '/System/Library/PrivateFrameworks/InAppMessagesCore.framework/Versions/A/InAppMessagesCore'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _IAMApplicationDidBecomeActiveEventName, _IAMLogCategoryDefault, 
                        _IAMLogCategoryDefault_Oversize, _IAMWebProcessShouldDismissPresentationBeforeOpen, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           95BF3C58-844F-3A64-8305-D0BAD8A8D516
+    value:           DF0AD868-F348-3C90-86FA-D037A6F88339
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           31285290-BA79-3165-97E2-5A4458751B52
+    value:           1A61F578-FBFA-3FAA-9036-6FD4AEA68274
 install-name:    '/System/Library/PrivateFrameworks/CoreUtilsSwift.framework/Versions/A/CoreUtilsSwift'
 current-version: 0
 compatibility-version: 0

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B72A4AE7-379A-3449-92E6-4BF0B479ECDB
+    value:           999F3769-6DD0-350B-B25D-87697F914404
   - target:          x86_64-maccatalyst
-    value:           B72A4AE7-379A-3449-92E6-4BF0B479ECDB
+    value:           999F3769-6DD0-350B-B25D-87697F914404
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7449A2EE-BB2E-356F-B541-3425FC204AB3
+    value:           4C3D6177-55A7-3A4D-B60A-427F7DBED664
   - target:          arm64e-maccatalyst
-    value:           7449A2EE-BB2E-356F-B541-3425FC204AB3
+    value:           4C3D6177-55A7-3A4D-B60A-427F7DBED664
 install-name:    '/System/Library/PrivateFrameworks/AdPlatformsCommon.framework/Versions/A/AdPlatformsCommon'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -26,6 +26,7 @@ exports:
                        _kAPMetricClientIdentifierKey, _kAPMetricClientInfoKey, _kAPMetricContentIdentifierKey, 
                        _kAPMetricContextIdentifierKey, _kAPMetricDeviceIdentifierKey, 
                        _kAPMetricDeviceModel, _kAPMetricIdentifierKey, _kAPMetricInternalMessageBetweenArticleRateKey, 
+                       _kAPMetricInternalMessageClientHandlesVisibilityTrackingKey, 
                        _kAPMetricInternalMessageInArticleRateKey, _kAPMetricInternalMessageInFeedRateKey, 
                        _kAPMetricInternalMessageNativeInArticleRateKey, _kAPMetricInternalMessageNativeInFeedRateKey, 
                        _kAPMetricInternalMessageVideoInArticleRateKey, _kAPMetricInternalPropertiesKey, 

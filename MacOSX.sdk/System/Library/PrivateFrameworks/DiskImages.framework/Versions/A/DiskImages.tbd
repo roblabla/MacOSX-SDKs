@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           28EEBA6F-DF31-3B45-B63B-91A5EEDA628D
+    value:           B0A2C1DD-79A0-3C26-A1A8-22F1989E5415
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CA51A53B-FAE0-3AA3-86F5-2AC2B5DF13D8
+    value:           521C9845-BBDC-3B3B-9A2E-C2D13B7F41E6
 install-name:    '/System/Library/PrivateFrameworks/DiskImages.framework/Versions/A/DiskImages'
 current-version: 595.40.1
 compatibility-version: 1.0.8

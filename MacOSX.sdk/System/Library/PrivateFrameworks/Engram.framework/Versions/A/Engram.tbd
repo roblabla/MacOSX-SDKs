@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           534705F7-165A-37E4-AC3C-68EBCD911C99
+    value:           F7F6B85F-6B03-3BD2-BC02-DA5DBBB60014
   - target:          x86_64-maccatalyst
-    value:           534705F7-165A-37E4-AC3C-68EBCD911C99
+    value:           F7F6B85F-6B03-3BD2-BC02-DA5DBBB60014
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           91F091CF-BD03-3B2C-B375-ED735D34A2CF
+    value:           9D1BB02E-C2E4-3971-B8D5-82BF297C4F34
   - target:          arm64e-maccatalyst
-    value:           91F091CF-BD03-3B2C-B375-ED735D34A2CF
+    value:           9D1BB02E-C2E4-3971-B8D5-82BF297C4F34
 install-name:    '/System/Library/PrivateFrameworks/Engram.framework/Versions/A/Engram'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

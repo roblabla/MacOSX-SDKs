@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4D568BB3-F2BA-3F7C-82C7-C493EBAA3F4C
+    value:           088D0108-AA14-3610-86A0-89D0C605384F
   - target:          x86_64-maccatalyst
-    value:           4D568BB3-F2BA-3F7C-82C7-C493EBAA3F4C
+    value:           088D0108-AA14-3610-86A0-89D0C605384F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7EE96A32-9D61-32BF-A993-86593FB5E990
+    value:           1B34F90E-E298-3EF6-904F-6903CDEF72EF
   - target:          arm64e-maccatalyst
-    value:           7EE96A32-9D61-32BF-A993-86593FB5E990
+    value:           1B34F90E-E298-3EF6-904F-6903CDEF72EF
 install-name:    '/System/Library/PrivateFrameworks/CoreServicesStore.framework/Versions/A/CoreServicesStore'
-current-version: 1122.4
+current-version: 1122.11
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     symbols:         [ __ZN8CSStore222AttributedStringWriter19formatWithArgumentsEP8NSStringP13__va_list_tag, 

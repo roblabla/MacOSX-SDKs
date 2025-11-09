@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4C25F1AE-CAB2-30D8-B5E2-FBA8A5FEB9EA
+    value:           75587D48-737D-3437-8CA4-4ACFB6AF33EA
   - target:          x86_64-maccatalyst
-    value:           4C25F1AE-CAB2-30D8-B5E2-FBA8A5FEB9EA
+    value:           75587D48-737D-3437-8CA4-4ACFB6AF33EA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           02B9EED2-5268-32AC-B64C-4D2C376E3A78
+    value:           7ACCFAF1-9FB9-321D-9D55-31DA359D35E5
   - target:          arm64e-maccatalyst
-    value:           02B9EED2-5268-32AC-B64C-4D2C376E3A78
+    value:           7ACCFAF1-9FB9-321D-9D55-31DA359D35E5
 install-name:    '/System/Library/PrivateFrameworks/ReminderKit.framework/Versions/A/ReminderKit'
 current-version: 305
 exports:

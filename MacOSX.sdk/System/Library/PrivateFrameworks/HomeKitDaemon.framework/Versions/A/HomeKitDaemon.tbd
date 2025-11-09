@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           89537B1D-9F9C-313A-95A0-95523F7FB030
+    value:           7980B846-F478-3659-B69A-F132E74DCC79
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F879A1AC-2F42-3556-B200-24DAAD21BEFA
+    value:           76C5BA1F-53ED-3351-B96F-4ACBAFA204D3
 install-name:    '/System/Library/PrivateFrameworks/HomeKitDaemon.framework/Versions/A/HomeKitDaemon'
-current-version: 714.2.17
+current-version: 714.3.25
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _AVCAudioCodecTypeAsString, _AVCCipherSuiteAsString, _AVCVideoCodecTypeAsString, 
@@ -374,11 +374,20 @@ exports:
                        _HMDLogEventCloudSyncEventsAnalyzerUploadMaximumDelayReachedKey, 
                        _HMDLogEventCloudSyncEventsHomeDataBytesFetchedKey, _HMDLogEventCloudSyncEventsHomeDataBytesPushedKey, 
                        _HMDLogEventCloudSyncEventsLegacyHomeDataBytesFetchedKey, 
-                       _HMDLogEventCloudSyncEventsLegacyHomeDataBytesPushedKey, _HMDLogEventMessageRxIDSMessagesCountDailyRequestGroup, 
-                       _HMDLogEventMessageRxIDSProxyMessagesCountDailyRequestGroup, 
-                       _HMDLogEventMessageRxLoxyMessagesCountDailyRequestGroup, _HMDLogEventMessageRxSecureMessagesCountDailyRequestGroup, 
-                       _HMDLogEventMessageTxIDSMessagesCountDailyRequestGroup, _HMDLogEventMessageTxIDSProxyMessagesCountDailyRequestGroup, 
-                       _HMDLogEventMessageTxLoxyMessagesCountDailyRequestGroup, _HMDLogEventMessageTxSecureMessagesCountDailyRequestGroup, 
+                       _HMDLogEventCloudSyncEventsLegacyHomeDataBytesPushedKey, _HMDLogEventMessageAnalyzerRemoteMessageReceivedDailyRequestGroup, 
+                       _HMDLogEventMessageAnalyzerRemoteMessageSentDailyRequestGroup, 
+                       _HMDLogEventMessageAnalyzerRemoteMessageTransportTypeIDSEventCounter, 
+                       _HMDLogEventMessageAnalyzerRemoteMessageTransportTypeIDSProxyEventCounter, 
+                       _HMDLogEventMessageAnalyzerRemoteMessageTransportTypeLoxyEventCounter, 
+                       _HMDLogEventMessageAnalyzerRemoteMessageTransportTypeSecureEventCounter, 
+                       _HMDLogEventMessageAnalyzerRxIDSMessagesCountPeriodicRequestGroup, 
+                       _HMDLogEventMessageAnalyzerRxIDSProxyMessagesCountPeriodicRequestGroup, 
+                       _HMDLogEventMessageAnalyzerRxLoxyMessagesCountPeriodicRequestGroup, 
+                       _HMDLogEventMessageAnalyzerRxSecureMessagesCountPeriodicRequestGroup, 
+                       _HMDLogEventMessageAnalyzerTxIDSMessagesCountPeriodicRequestGroup, 
+                       _HMDLogEventMessageAnalyzerTxIDSProxyMessagesCountPeriodicRequestGroup, 
+                       _HMDLogEventMessageAnalyzerTxLoxyMessagesCountPeriodicRequestGroup, 
+                       _HMDLogEventMessageAnalyzerTxSecureMessagesCountPeriodicRequestGroup, 
                        _HMDLogEventReachabilityEventsAnalyzerCameraRecordingOfflineDurationCounter, 
                        _HMDLogEventReachabilityEventsAnalyzerCameraRecordingReachabilityChangedCounter, 
                        _HMDLogEventReachabilityEventsAnalyzerHomeHubReachabilityChangedCounter, 
@@ -1294,9 +1303,9 @@ exports:
                        HMDWatchConnectivityLogEvent, HMDWatchConnectivityLogEventManager, 
                        HMDWatchManager, HMDWatchSync, HMDWatchSyncState, HMDWatchSystemState, 
                        HMDWiFiManagementController, HMDWiFiReconfigurationLogEvent, 
-                       HMDXPCAccessMessageFilter, HMDXPCActivityInterface, HMDXPCBackgroundMessageFilter, 
-                       HMDXPCBackgroundMessagePolicy, HMDXPCClientConnection, HMDXPCEntitlementMessageFilter, 
-                       HMDXPCKeyedArchiver, HMDXPCMessageCountTracker, HMDXPCMessageCountersLogEvent, 
+                       HMDXPCActivityInterface, HMDXPCBackgroundMessageFilter, HMDXPCBackgroundMessagePolicy, 
+                       HMDXPCClientConnection, HMDXPCEntitlementMessageFilter, HMDXPCKeyedArchiver, 
+                       HMDXPCMessageCountTracker, HMDXPCMessageCountersLogEvent, 
                        HMDXPCMessageFilter, HMDXPCMessagePolicy, HMDXPCMessageSendPolicy, 
                        HMDXPCMessageSendPolicyParameters, HMDXPCMessageTransport, 
                        HMDXPCRequest, HMDXPCRequestTracker, HMDZone, HMDZoneModel, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8D5AD027-2B11-374D-9B07-2F85E55F31D1
+    value:           9BB5A119-47C2-3F06-A036-2C3E011AD689
   - target:          x86_64-maccatalyst
-    value:           8D5AD027-2B11-374D-9B07-2F85E55F31D1
+    value:           9BB5A119-47C2-3F06-A036-2C3E011AD689
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E341ED99-8F0D-3D36-8C6B-A778935E673D
+    value:           3AE28974-CA8D-384A-897F-D35939ADB357
   - target:          arm64e-maccatalyst
-    value:           E341ED99-8F0D-3D36-8C6B-A778935E673D
+    value:           3AE28974-CA8D-384A-897F-D35939ADB357
 install-name:    '/System/Library/PrivateFrameworks/Categories.framework/Versions/A/Categories'
 current-version: 5.26
 exports:

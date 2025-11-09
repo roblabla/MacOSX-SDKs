@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D278A0CA-43DF-3DB7-A907-EEBFEF6FFB9A
+    value:           E705348A-AC15-3CAE-870F-73A4F3555E21
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0A546358-8405-3FEB-B966-5F69F0A6497D
+    value:           320708D5-3D9F-38B6-A743-E97683F2A5E7
 install-name:    '/System/Library/PrivateFrameworks/ContactsAgent.framework/Versions/A/ContactsAgent'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

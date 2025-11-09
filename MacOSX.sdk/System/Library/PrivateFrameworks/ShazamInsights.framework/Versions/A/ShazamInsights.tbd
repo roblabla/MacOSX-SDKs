@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           42826053-2D7E-3EF1-8E3A-3121F07495CD
+    value:           5373BB08-B5EC-358B-9D3A-1940B258FF2F
   - target:          x86_64-maccatalyst
-    value:           42826053-2D7E-3EF1-8E3A-3121F07495CD
+    value:           5373BB08-B5EC-358B-9D3A-1940B258FF2F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F8899F69-FD52-3FD2-8B28-EFCBCFC52634
+    value:           8AD5CC0F-6727-3BEC-98B1-EB3A5D0422A8
   - target:          arm64e-maccatalyst
-    value:           F8899F69-FD52-3FD2-8B28-EFCBCFC52634
+    value:           8AD5CC0F-6727-3BEC-98B1-EB3A5D0422A8
 install-name:    '/System/Library/PrivateFrameworks/ShazamInsights.framework/Versions/A/ShazamInsights'
 current-version: 78
 compatibility-version: 0

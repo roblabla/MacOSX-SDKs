@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4CD489A9-8FD7-3C4D-B6B8-3837EB59DCEE
+    value:           EC68F115-A762-3834-8315-2E3236C533F4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8B3FECE0-0820-3AC3-B734-8A4D133012E2
+    value:           C2AEC4D3-DBE0-3691-834F-FB279026B659
 install-name:    '/System/Library/PrivateFrameworks/AudioHistory.framework/Versions/A/AudioHistory'
 exports:
   - targets:         [ x86_64-macos ]

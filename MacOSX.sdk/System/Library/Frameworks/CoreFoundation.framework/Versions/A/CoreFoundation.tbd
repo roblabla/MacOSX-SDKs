@@ -4,23 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           62CC0D5C-3FEB-353D-A232-4E050E773913
+    value:           7AADB19E-8EA2-3C9B-8699-F206DB47C6BE
   - target:          x86_64-maccatalyst
-    value:           62CC0D5C-3FEB-353D-A232-4E050E773913
+    value:           7AADB19E-8EA2-3C9B-8699-F206DB47C6BE
   - target:          x86_64h-macos
-    value:           251E85A0-E1EA-3183-B99C-A491F9A8A296
+    value:           EAC298C4-CE3E-3551-A832-42ED9A13EF74
   - target:          x86_64h-maccatalyst
-    value:           251E85A0-E1EA-3183-B99C-A491F9A8A296
+    value:           EAC298C4-CE3E-3551-A832-42ED9A13EF74
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           866351AC-B3D5-3BB9-93D4-EFEAA73BBFAC
+    value:           396F9604-7574-3C1B-ACA7-C7EB24FE3544
   - target:          arm64e-maccatalyst
-    value:           866351AC-B3D5-3BB9-93D4-EFEAA73BBFAC
+    value:           396F9604-7574-3C1B-ACA7-C7EB24FE3544
 install-name:    '/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation'
-current-version: 1770.106
+current-version: 1770.255
 compatibility-version: 150
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
@@ -33,7 +33,7 @@ exports:
                        '$ld$add$os10.6$_OBJC_IVAR_$_NSObject.isa', '$ld$add$os10.6$_OBJC_METACLASS_$_NSObject', 
                        '$ld$add$os10.7$_OBJC_CLASS_$_NSObject', '$ld$add$os10.7$_OBJC_IVAR_$_NSObject.isa', 
                        '$ld$add$os10.7$_OBJC_METACLASS_$_NSObject' ]
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, x86_64-maccatalyst, 
                        x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CFAbsoluteTimeAddGregorianUnits, _CFAbsoluteTimeGetCurrent, 
                        _CFAbsoluteTimeGetDayOfWeek, _CFAbsoluteTimeGetDayOfYear, 
@@ -1220,7 +1220,7 @@ exports:
                        _NSAutoCalendar.changedFirstWeekday, _NSAutoCalendar.changedGregorianStartDate, 
                        _NSAutoCalendar.changedLocale, _NSAutoCalendar.changedMinimumDaysinFirstWeek, 
                        _NSAutoCalendar.changedTimeZone, _NSAutoCalendar.combinedNoteCount ]
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, arm64-macos ]
     symbols:         [ _CFMachPortBoostGetTypeID, _CFXMLCreateStringByEscapingEntities, 
                        _CFXMLCreateStringByUnescapingEntities, _CFXMLNodeCreate, 
                        _CFXMLNodeCreateCopy, _CFXMLNodeGetInfoPtr, _CFXMLNodeGetString, 
@@ -1254,6 +1254,6 @@ exports:
                        _kCFServiceControllerUserDataKey, _kCFXMLTreeErrorDescription, 
                        _kCFXMLTreeErrorLineNumber, _kCFXMLTreeErrorLocation, _kCFXMLTreeErrorStatusCode ]
     objc-ivars:      [ NSMessageBuilder._addr, NSMessageBuilder._target ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ ___CFObjCIsCollectable ]
 ...

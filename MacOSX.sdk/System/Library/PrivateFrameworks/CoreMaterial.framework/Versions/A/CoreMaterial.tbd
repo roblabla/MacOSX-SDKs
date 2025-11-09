@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F190525C-4184-3501-BC2D-076223561434
+    value:           BF6D5746-BB4F-3AEB-B243-CC0404D328AC
   - target:          x86_64-maccatalyst
-    value:           F190525C-4184-3501-BC2D-076223561434
+    value:           BF6D5746-BB4F-3AEB-B243-CC0404D328AC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3DF4EFA2-7ACC-3C74-8C99-E19F0F210625
+    value:           C050EFD0-33DB-3F7B-99BB-A1A922A9167A
   - target:          arm64e-maccatalyst
-    value:           3DF4EFA2-7ACC-3C74-8C99-E19F0F210625
+    value:           C050EFD0-33DB-3F7B-99BB-A1A922A9167A
 install-name:    '/System/Library/PrivateFrameworks/CoreMaterial.framework/Versions/A/CoreMaterial'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

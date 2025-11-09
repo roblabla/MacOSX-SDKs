@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           39CB76C1-E661-3CDA-A81E-C73449B98278
+    value:           6BA0C056-2304-38AA-9FE9-2496C8AD298F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F64178BD-E6BE-3DEF-8DD8-69A525B90FDF
+    value:           C9209346-0BC5-34FD-A4C4-CA9885F208E3
 install-name:    '/System/Library/PrivateFrameworks/Uninstall.framework/Versions/A/Uninstall'
 current-version: 211
 exports:

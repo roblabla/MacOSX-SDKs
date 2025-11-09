@@ -804,6 +804,7 @@ IMAGEIO_EXTERN const CFStringRef kCGImageAuxiliaryDataTypeSemanticSegmentationSk
 IMAGEIO_EXTERN const CFStringRef kCGImageAuxiliaryDataTypeSemanticSegmentationHairMatte IMAGEIO_AVAILABLE_STARTING(10.15, 13.0);
 IMAGEIO_EXTERN const CFStringRef kCGImageAuxiliaryDataTypeSemanticSegmentationTeethMatte IMAGEIO_AVAILABLE_STARTING(10.15, 13.0);
 IMAGEIO_EXTERN const CFStringRef kCGImageAuxiliaryDataTypeSemanticSegmentationGlassesMatte IMAGEIO_AVAILABLE_STARTING(11.0, 14.1);
+IMAGEIO_EXTERN const CFStringRef kCGImageAuxiliaryDataTypeSemanticSegmentationSkyMatte IMAGEIO_AVAILABLE_STARTING(11.0, 14.1);
 IMAGEIO_EXTERN const CFStringRef kCGImageAuxiliaryDataTypeHDRGainMap   IMAGEIO_AVAILABLE_STARTING(11.0, 14.1);
 
 

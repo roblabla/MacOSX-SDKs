@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           71FBDF50-13FE-3E93-A8A1-5F3B166B1E47
+    value:           D31BD4A9-2E13-31A3-81FD-7E159A7DE99A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D4578D46-F68F-34C8-B518-9BC852D71B88
+    value:           F13A1B1E-4EB5-35AD-82D4-9C18638DB5F8
 install-name:    '/System/Library/PrivateFrameworks/NetworkMenusCommon.framework/NetworkMenusCommon'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

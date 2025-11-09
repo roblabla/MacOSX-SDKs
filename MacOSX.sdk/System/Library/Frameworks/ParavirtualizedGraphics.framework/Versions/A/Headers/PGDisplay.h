@@ -61,6 +61,12 @@ typedef void (^PGDisplayCursorGlyphHandler)(NSBitmapImageRep * _Nonnull glyph, P
 typedef void (^PGDisplayCursorShowHandler)(BOOL show) API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios);
 
 /*!
+ @typedef PGDisplayCursorMoveHandler_t
+ @abstract A block that will be invoked to handle cursor movement.
+ */
+typedef void (^PGDisplayCursorMoveHandler)(void) API_AVAILABLE(macos(11.1)) API_UNAVAILABLE(ios);
+
+/*!
  @interface PGDisplayDescriptor:
  @abstract Descriptor to facilitate creation of PGDisplay.
  @discussion See [PGDevice newDisplayWithDescriptor:port:serialNum]
@@ -116,6 +122,13 @@ API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
  @discussion Handler invocation indicative of hide/show of cursor glyph.  If this block is not set, cursor will be precomposited in presented image.
  */
 @property(readwrite, nonatomic, nullable, copy) PGDisplayCursorShowHandler cursorShowHandler API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios);
+
+/*!
+ @property cursorMoveHandler
+ @abstract The block to invoke to handle cursor movement.
+ @discussion Handler invocation indicative of movement.  Handler should resampling via PGDisplay::cursorPosition.
+ */
+@property(readwrite, nonatomic, nullable, copy) PGDisplayCursorMoveHandler cursorMoveHandler API_AVAILABLE(macos(11.1)) API_UNAVAILABLE(ios);
 
 @end
 
@@ -200,6 +213,12 @@ API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios)
  @abstract The block to invoke to handle cursor show/hide updates.
  */
 @property(readonly, nonatomic, nullable) PGDisplayCursorShowHandler cursorShowHandler API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios);
+
+/*!
+ @property cursorMoveHandler
+ @abstract The block to invoke to handle cursor movement.
+ */
+@property(readonly, nonatomic, nullable) PGDisplayCursorMoveHandler cursorMoveHandler API_AVAILABLE(macos(11.1)) API_UNAVAILABLE(ios);
 
 /*!
  @property cursorPosition

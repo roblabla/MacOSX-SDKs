@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E0C47A1F-695C-364D-9B74-2450499D15C3
+    value:           12890AA5-14D5-3DEA-9FBB-FBB7E3F34BDF
   - target:          x86_64-maccatalyst
-    value:           E0C47A1F-695C-364D-9B74-2450499D15C3
+    value:           12890AA5-14D5-3DEA-9FBB-FBB7E3F34BDF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           57C92B0A-8387-3404-B810-ACB9DA649069
+    value:           546A45E4-BC3D-30E7-8544-5829FD8CD1DA
   - target:          arm64e-maccatalyst
-    value:           57C92B0A-8387-3404-B810-ACB9DA649069
+    value:           546A45E4-BC3D-30E7-8544-5829FD8CD1DA
 install-name:    '/System/Library/Frameworks/AVFoundation.framework/Versions/A/AVFoundation'
 current-version: 2
 reexported-libraries:
@@ -24,7 +24,7 @@ reexported-libraries:
                        '/System/Library/PrivateFrameworks/AVFCapture.framework/Versions/A/AVFCapture', 
                        '/System/Library/PrivateFrameworks/AVFCore.framework/Versions/A/AVFCore' ]
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _kAVFoundationSCMVersion ]
 --- !tapi-tbd
@@ -33,20 +33,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E3E05714-1CD4-3945-AA79-708A63E38688
+    value:           4F121DC8-938F-3E2E-ABCF-49CD95F5FD5C
   - target:          x86_64-maccatalyst
-    value:           E3E05714-1CD4-3945-AA79-708A63E38688
+    value:           4F121DC8-938F-3E2E-ABCF-49CD95F5FD5C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6A0201A3-19BE-38B7-9DE9-939B435BC7D3
+    value:           B2C16204-D89D-3CE4-8C5C-CD09BA02FD00
   - target:          arm64e-maccatalyst
-    value:           6A0201A3-19BE-38B7-9DE9-939B435BC7D3
+    value:           B2C16204-D89D-3CE4-8C5C-CD09BA02FD00
 install-name:    '/System/Library/Frameworks/AVFoundation.framework/Versions/A/Frameworks/AVFAudio.framework/Versions/A/AVFAudio'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _AVAudioBitRateStrategy_Constant, _AVAudioBitRateStrategy_LongTermAverage, 
                        _AVAudioBitRateStrategy_Variable, _AVAudioBitRateStrategy_VariableConstrained, 
@@ -151,24 +151,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6396C3CE-4F6A-35D1-94FC-28EA7F8499F0
+    value:           FEA644F1-6D58-3E38-9057-33DBCC85D91A
   - target:          x86_64-maccatalyst
-    value:           6396C3CE-4F6A-35D1-94FC-28EA7F8499F0
+    value:           FEA644F1-6D58-3E38-9057-33DBCC85D91A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8CA96782-C573-3807-BAF8-277C3B83F8FC
+    value:           D1135845-7708-362D-8CB1-F4CD5A5EA0A6
   - target:          arm64e-maccatalyst
-    value:           8CA96782-C573-3807-BAF8-277C3B83F8FC
+    value:           D1135845-7708-362D-8CB1-F4CD5A5EA0A6
 install-name:    '/System/Library/PrivateFrameworks/AVFCapture.framework/Versions/A/AVFCapture'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ AVFoundation ]
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _AVAppleMakerNote_ARKitPhoto, _AVAppleMakerNote_AssetIdentifier, 
                        _AVAppleMakerNote_BurstUUID, _AVAppleMakerNote_ImageCaptureRequestIdentifier, 
@@ -250,20 +250,20 @@ exports:
                        _AVCaptureWhiteBalanceGainsCurrent, _AVMediaTypeCameraCalibrationData, 
                        _AVMediaTypePointCloudData, _AVMediaTypeVisionData, _AVMetadataMakeDependentSpecificationsForValue, 
                        _AVMetadataMakeMetadataObjectFromBoxedMetadata, _AVMetadataObjectCreateBoxedMetadataFromObjectAndFormatDescription, 
-                       _AVMetadataObjectTypeAztecCode, _AVMetadataObjectTypeCatBody, 
-                       _AVMetadataObjectTypeCode128Code, _AVMetadataObjectTypeCode39Code, 
-                       _AVMetadataObjectTypeCode39Mod43Code, _AVMetadataObjectTypeCode93Code, 
-                       _AVMetadataObjectTypeDataMatrixCode, _AVMetadataObjectTypeDogBody, 
-                       _AVMetadataObjectTypeEAN13Code, _AVMetadataObjectTypeEAN8Code, 
-                       _AVMetadataObjectTypeFace, _AVMetadataObjectTypeHumanBody, 
-                       _AVMetadataObjectTypeITF14Code, _AVMetadataObjectTypeInterleaved2of5Code, 
-                       _AVMetadataObjectTypeOfflineVideoStabilizationMotion, _AVMetadataObjectTypePDF417Code, 
-                       _AVMetadataObjectTypeQRCode, _AVMetadataObjectTypeSaliencyHeatMap, 
-                       _AVMetadataObjectTypeSalientObject, _AVMetadataObjectTypeTrackedFaces, 
-                       _AVMetadataObjectTypeUPCECode, _AVMetadataObjectTypeVideoPreviewHistogram, 
-                       _AVSemanticSegmentationMatteTypeGlasses, _AVSemanticSegmentationMatteTypeHair, 
-                       _AVSemanticSegmentationMatteTypeSkin, _AVSemanticSegmentationMatteTypeTeeth, 
-                       _kAVFCaptureSCMVersion ]
+                       _AVMetadataObjectTypeAppClipCode, _AVMetadataObjectTypeAztecCode, 
+                       _AVMetadataObjectTypeCatBody, _AVMetadataObjectTypeCode128Code, 
+                       _AVMetadataObjectTypeCode39Code, _AVMetadataObjectTypeCode39Mod43Code, 
+                       _AVMetadataObjectTypeCode93Code, _AVMetadataObjectTypeDataMatrixCode, 
+                       _AVMetadataObjectTypeDogBody, _AVMetadataObjectTypeEAN13Code, 
+                       _AVMetadataObjectTypeEAN8Code, _AVMetadataObjectTypeFace, 
+                       _AVMetadataObjectTypeHumanBody, _AVMetadataObjectTypeITF14Code, 
+                       _AVMetadataObjectTypeInterleaved2of5Code, _AVMetadataObjectTypeOfflineVideoStabilizationMotion, 
+                       _AVMetadataObjectTypePDF417Code, _AVMetadataObjectTypeQRCode, 
+                       _AVMetadataObjectTypeSaliencyHeatMap, _AVMetadataObjectTypeSalientObject, 
+                       _AVMetadataObjectTypeTrackedFaces, _AVMetadataObjectTypeUPCECode, 
+                       _AVMetadataObjectTypeVideoPreviewHistogram, _AVSemanticSegmentationMatteTypeGlasses, 
+                       _AVSemanticSegmentationMatteTypeHair, _AVSemanticSegmentationMatteTypeSkin, 
+                       _AVSemanticSegmentationMatteTypeTeeth, _kAVFCaptureSCMVersion ]
     objc-classes:    [ AVApplePortraitMetadata, AVCameraCalibrationData, AVCaptureAudioChannel, 
                        AVCaptureAudioDataOutput, AVCaptureAudioFileOutput, AVCaptureAudioPreviewOutput, 
                        AVCaptureAutoExposureBracketedStillImageSettings, AVCaptureBracketedStillImageSettings, 
@@ -299,24 +299,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2CE620B3-BF81-3464-942D-9AF03C250BD5
+    value:           533A5655-2ABC-3B8E-8D0D-C96C9E91C82D
   - target:          x86_64-maccatalyst
-    value:           2CE620B3-BF81-3464-942D-9AF03C250BD5
+    value:           533A5655-2ABC-3B8E-8D0D-C96C9E91C82D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D6096E9E-0CF5-309E-89AB-7407C7D299BF
+    value:           5B59692C-C325-39CD-8E78-14820DC7C37A
   - target:          arm64e-maccatalyst
-    value:           D6096E9E-0CF5-309E-89AB-7407C7D299BF
+    value:           5B59692C-C325-39CD-8E78-14820DC7C37A
 install-name:    '/System/Library/PrivateFrameworks/AVFCore.framework/Versions/A/AVFCore'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ AVFCapture, AVFoundation ]
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _AVAllAvailableNSBundleCompatibleLanguageTagsForObjects, _AVAssetAnalysisMovieParsingMessageTypeInvalidAtomStructure, 
                        _AVAssetAnalysisMovieParsingMessageTypeInvalidMovieAtom, _AVAssetAnalysisMovieParsingMessageTypeInvalidTopLevelAtom, 
@@ -354,8 +354,8 @@ exports:
                        _AVAssetDownloadSessioniTunesStoreContentPurchasedMediaKindKey, 
                        _AVAssetDownloadSessioniTunesStoreContentTypeKey, _AVAssetDownloadSessioniTunesStoreContentUserAgentKey, 
                        _AVAssetDownloadTaskAllowHighDynamicRangeKey, _AVAssetDownloadTaskClientIsCatalyst, 
-                       _AVAssetDownloadTaskDestinationURLKey, _AVAssetDownloadTaskMediaSelectionKey, 
-                       _AVAssetDownloadTaskMediaSelectionPrefersMultichannelForMostPreferredLanguageOnlyKey, 
+                       _AVAssetDownloadTaskClientIsIOSAppOnMac, _AVAssetDownloadTaskDestinationURLKey, 
+                       _AVAssetDownloadTaskMediaSelectionKey, _AVAssetDownloadTaskMediaSelectionPrefersMultichannelForMostPreferredLanguageOnlyKey, 
                        _AVAssetDownloadTaskMediaSelectionPrefersMultichannelKey, 
                        _AVAssetDownloadTaskMediaSelectionsForMultichannelKey, _AVAssetDownloadTaskMinimumRequiredMediaBitrateForHEVCKey, 
                        _AVAssetDownloadTaskMinimumRequiredMediaBitrateKey, _AVAssetDownloadTaskMinimumRequiredPresentationSizeKey, 
@@ -432,10 +432,11 @@ exports:
                        _AVFragmentedMovieWasDefragmentedNotification, _AVFullMethodName, 
                        _AVFullMethodNameFromClass, _AVInitializeProtectedContentPlaybackSupportExternalProtectionKey, 
                        _AVInitializeProtectedContentPlaybackSupportStorageURLKey, 
-                       _AVInitializeProtectedContentPlaybackSupportVideoKey, _AVIsSpecialSpokenExtendedLanguageTag, 
-                       _AVLanguageCodeFromExtendedLanguageTag, _AVLanguageCodeFromPackedLanguageCode, 
-                       _AVLayerVideoGravityResize, _AVLayerVideoGravityResizeAspect, 
-                       _AVLayerVideoGravityResizeAspectFill, _AVLocalizedError, _AVLocalizedErrorWithUnderlyingOSStatus, 
+                       _AVInitializeProtectedContentPlaybackSupportVideoKey, _AVIsKnownExtendedLanguageTagMissingLocaleDisplayName, 
+                       _AVIsSpecialSpokenExtendedLanguageTag, _AVLanguageCodeFromExtendedLanguageTag, 
+                       _AVLanguageCodeFromPackedLanguageCode, _AVLayerVideoGravityResize, 
+                       _AVLayerVideoGravityResizeAspect, _AVLayerVideoGravityResizeAspectFill, 
+                       _AVLocalizedError, _AVLocalizedErrorWithUnderlyingOSStatus, 
                        _AVLocalizedStringFromTable, _AVLocalizedStringFromTableWithBundleIdentifier, 
                        _AVLocalizedStringFromTableWithLocale, _AVMakeBlockSchedulerThatExecutesBlocksSynchronously, 
                        _AVMakeBlockSchedulerThatSerializesBlocksPrefersSynchronousExecutionAndAllowsReentrantExecution, 
@@ -814,9 +815,10 @@ exports:
                        _AVOutOfBandAlternateTrackIdentifierKey, _AVOutOfBandAlternateTrackIsDefaultKey, 
                        _AVOutOfBandAlternateTrackMediaCharactersticsKey, _AVOutOfBandAlternateTrackSourceKey, 
                        _AVOutputContextAddOutputDeviceOptionAuthorizationToken, _AVOutputContextAddOutputDeviceOptionCancelIfAuthRequired, 
-                       _AVOutputContextAddOutputDeviceOptionInitiator, _AVOutputContextCanSetVolumeDidChangeNotification, 
-                       _AVOutputContextCommunicationChannelControlTypeDirect, _AVOutputContextCommunicationChannelControlTypeRelayed, 
-                       _AVOutputContextCommunicationChannelOptionControlType, _AVOutputContextDestinationChangeCancellationReasonAuthorizationSkipped, 
+                       _AVOutputContextAddOutputDeviceOptionFadePlayback, _AVOutputContextAddOutputDeviceOptionInitiator, 
+                       _AVOutputContextCanSetVolumeDidChangeNotification, _AVOutputContextCommunicationChannelControlTypeDirect, 
+                       _AVOutputContextCommunicationChannelControlTypeRelayed, _AVOutputContextCommunicationChannelOptionControlType, 
+                       _AVOutputContextDestinationChangeCancellationReasonAuthorizationSkipped, 
                        _AVOutputContextDestinationChangeDeviceIDKey, _AVOutputContextDestinationChangeInitiatedNotification, 
                        _AVOutputContextDestinationChangeInitiatorKey, _AVOutputContextDestinationChangeKey, 
                        _AVOutputContextDestinationChangePreviousDeviceIDsKey, _AVOutputContextDestinationChangeReasonIdleDisconnect, 
@@ -831,14 +833,16 @@ exports:
                        _AVOutputContextManagerOutputDeviceKey, _AVOutputContextOutputDeviceDidChangeNotification, 
                        _AVOutputContextOutputDevicesDidChangeNotification, _AVOutputContextProvidesControlForAllVolumeFeaturesDidChangeNotification, 
                        _AVOutputContextRemoveOutputDeviceOptionContinuePlayingAfterLastDeviceRemoved, 
-                       _AVOutputContextRemoveOutputDeviceOptionInitiator, _AVOutputContextSetOutputDeviceCancelIfAuthRequiredKey, 
+                       _AVOutputContextRemoveOutputDeviceOptionFadePlayback, _AVOutputContextRemoveOutputDeviceOptionInitiator, 
+                       _AVOutputContextSetOutputDeviceCancelIfAuthRequiredKey, _AVOutputContextSetOutputDeviceFadePlaybackKey, 
                        _AVOutputContextSetOutputDeviceInitiatorKey, _AVOutputContextSetOutputDevicePasswordKey, 
                        _AVOutputContextSetOutputDeviceSuppressUserInteractionOnSenderOnlyKey, 
-                       _AVOutputContextSetOutputDevicesOptionInitiator, _AVOutputContextTypeAudio, 
-                       _AVOutputContextTypeGroupControl, _AVOutputContextTypeScreen, 
-                       _AVOutputContextTypeSharedAudioPresentation, _AVOutputContextTypeSharedSystemAudio, 
-                       _AVOutputContextTypeSharedSystemScreen, _AVOutputContextTypeVideo, 
-                       _AVOutputContextVolumeDidChangeNotification, _AVOutputDeviceAuthorizationRequestRetryReasonIncorrectAuthorizationToken, 
+                       _AVOutputContextSetOutputDevicesOptionFadePlayback, _AVOutputContextSetOutputDevicesOptionInitiator, 
+                       _AVOutputContextTypeAudio, _AVOutputContextTypeGroupControl, 
+                       _AVOutputContextTypeScreen, _AVOutputContextTypeSharedAudioPresentation, 
+                       _AVOutputContextTypeSharedSystemAudio, _AVOutputContextTypeSharedSystemScreen, 
+                       _AVOutputContextTypeVideo, _AVOutputContextVolumeDidChangeNotification, 
+                       _AVOutputDeviceAuthorizationRequestRetryReasonIncorrectAuthorizationToken, 
                        _AVOutputDeviceAuthorizationTokenTypePIN, _AVOutputDeviceAuthorizationTokenTypePassword, 
                        _AVOutputDeviceBatteryLevelCaseKey, _AVOutputDeviceBatteryLevelLeftKey, 
                        _AVOutputDeviceBatteryLevelRightKey, _AVOutputDeviceBluetoothListeningModeActiveNoiseCancellation, 
@@ -961,17 +965,18 @@ exports:
                        _AVURLAssetWhitelistQUICKey, _AVUnsupportedOutputURLPathExtensions, 
                        _AVVideoAllowFrameReorderingKey, _AVVideoAllowWideColorKey, 
                        _AVVideoApertureModeCleanAperture, _AVVideoApertureModeEncodedPixels, 
-                       _AVVideoApertureModeProductionAperture, _AVVideoAverageBitRateKey, 
-                       _AVVideoAverageNonDroppableFrameRateKey, _AVVideoCleanApertureHeightKey, 
-                       _AVVideoCleanApertureHorizontalOffsetKey, _AVVideoCleanApertureKey, 
-                       _AVVideoCleanApertureVerticalOffsetKey, _AVVideoCleanApertureWidthKey, 
-                       _AVVideoCodecAppleProRes422, _AVVideoCodecAppleProRes4444, 
-                       _AVVideoCodecH264, _AVVideoCodecHEVC, _AVVideoCodecJPEG, _AVVideoCodecKey, 
-                       _AVVideoCodecTypeAppleProRes422, _AVVideoCodecTypeAppleProRes422HQ, 
-                       _AVVideoCodecTypeAppleProRes422LT, _AVVideoCodecTypeAppleProRes422Proxy, 
-                       _AVVideoCodecTypeAppleProRes4444, _AVVideoCodecTypeFromCMVideoCodecType, 
-                       _AVVideoCodecTypeH264, _AVVideoCodecTypeHEVC, _AVVideoCodecTypeHEVCWithAlpha, 
-                       _AVVideoCodecTypeJPEG, _AVVideoColorPrimariesKey, _AVVideoColorPrimaries_DCI_P3, 
+                       _AVVideoApertureModeProductionAperture, _AVVideoAppleProRAWBitDepthKey, 
+                       _AVVideoAverageBitRateKey, _AVVideoAverageNonDroppableFrameRateKey, 
+                       _AVVideoCleanApertureHeightKey, _AVVideoCleanApertureHorizontalOffsetKey, 
+                       _AVVideoCleanApertureKey, _AVVideoCleanApertureVerticalOffsetKey, 
+                       _AVVideoCleanApertureWidthKey, _AVVideoCodecAppleProRes422, 
+                       _AVVideoCodecAppleProRes4444, _AVVideoCodecH264, _AVVideoCodecHEVC, 
+                       _AVVideoCodecJPEG, _AVVideoCodecKey, _AVVideoCodecTypeAppleProRes422, 
+                       _AVVideoCodecTypeAppleProRes422HQ, _AVVideoCodecTypeAppleProRes422LT, 
+                       _AVVideoCodecTypeAppleProRes422Proxy, _AVVideoCodecTypeAppleProRes4444, 
+                       _AVVideoCodecTypeFromCMVideoCodecType, _AVVideoCodecTypeH264, 
+                       _AVVideoCodecTypeHEVC, _AVVideoCodecTypeHEVCWithAlpha, _AVVideoCodecTypeJPEG, 
+                       _AVVideoColorPrimariesKey, _AVVideoColorPrimaries_DCI_P3, 
                        _AVVideoColorPrimaries_EBU_3213, _AVVideoColorPrimaries_ITU_R_2020, 
                        _AVVideoColorPrimaries_ITU_R_709_2, _AVVideoColorPrimaries_P22, 
                        _AVVideoColorPrimaries_P3_D65, _AVVideoColorPrimaries_SMPTE_C, 
@@ -1091,7 +1096,7 @@ exports:
                        AVWeakObservationBlockFactory, AVWeakReference, AVWeakReferencingDelegateStorage ]
     objc-ivars:      [ AVAssetWriterInputMetadataAdaptor._internal, AVChapterMetadataItem._privChapter, 
                        AVMetadataItem._priv, AVMutableCaption._mutableInternal, AVMutableMetadataItem._mutablePriv ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _AVApplicationAuthorizationChallengeProviderFairPlay, _AVApplicationAuthorizationChallengeProviderNone, 
                        _AVAssetExportPresetAVCHD, _AVAssetExportPresetAppleM4V1080pHD, 
                        _AVAssetExportPresetAppleM4V480pSD, _AVAssetExportPresetAppleM4V720pHD, 

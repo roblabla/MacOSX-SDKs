@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F12EF342-291A-3A36-9988-4E9D37E0F430
+    value:           8BB18335-5DD3-3154-85C8-0145C64556A2
   - target:          x86_64-maccatalyst
-    value:           F12EF342-291A-3A36-9988-4E9D37E0F430
+    value:           8BB18335-5DD3-3154-85C8-0145C64556A2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C9AEA5B6-ECB9-3732-A73E-0A7BE2D95F12
+    value:           8B0D70D0-3C4C-3A1E-B55C-C2F2AF0C5F32
   - target:          arm64e-maccatalyst
-    value:           C9AEA5B6-ECB9-3732-A73E-0A7BE2D95F12
+    value:           8B0D70D0-3C4C-3A1E-B55C-C2F2AF0C5F32
 install-name:    '/System/Library/PrivateFrameworks/Heimdal.framework/Versions/A/Heimdal'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

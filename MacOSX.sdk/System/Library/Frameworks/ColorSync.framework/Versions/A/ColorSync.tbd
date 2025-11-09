@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           438A19B2-04A6-31E0-A0C8-8863396CA6EA
+    value:           7387EBC7-CBD9-34FE-B4A3-345E4750FD81
   - target:          x86_64-maccatalyst
-    value:           438A19B2-04A6-31E0-A0C8-8863396CA6EA
+    value:           7387EBC7-CBD9-34FE-B4A3-345E4750FD81
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F6AF9218-B891-36AE-8410-AB5BC01085A0
+    value:           DFF79761-3AF6-33F4-BAD2-8A276AECE01D
   - target:          arm64e-maccatalyst
-    value:           F6AF9218-B891-36AE-8410-AB5BC01085A0
+    value:           DFF79761-3AF6-33F4-BAD2-8A276AECE01D
 install-name:    '/System/Library/Frameworks/ColorSync.framework/Versions/A/ColorSync'
 current-version: 4.7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 
                        '$ld$install_name$os10.11$/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 
@@ -155,7 +155,7 @@ exports:
                        _kColorSyncTransformSceneLinearToPCS, _kColorSyncTransformSimplifiedConversionData, 
                        _kColorSyncTransformSrcSpace, _kColorSyncTransformTRCSize, 
                        _kColorSyncTransformTag, _kColorSyncWaitForCacheReply ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _ColorSyncCMMCopyCMMIdentifier, _ColorSyncCMMCopyLocalizedName, 
                        _ColorSyncCMMCreate, _ColorSyncCMMGetBundle, _ColorSyncCMMGetTypeID, 
                        _ColorSyncIterateInstalledCMMs, _kCMMApplyTransformProcName, 

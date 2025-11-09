@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F5C6BF86-2211-345A-BFBA-99F0E8E2CE25
+    value:           8F933496-4A55-33F6-ACF7-B2A06FB73E2A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           002F5300-913B-37C4-A399-38383D169E6B
+    value:           AE134168-F6AB-343B-9E8C-967A9F285083
 install-name:    '/System/Library/PrivateFrameworks/NotesUI.framework/Versions/A/NotesUI'
-current-version: 1778
+current-version: 1800
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ MacUIFrameworkTests, Notes, NotesAccountNotificationPlugin, 

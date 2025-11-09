@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EF17F6E2-791F-3904-8CF5-877900E22C51
+    value:           DAF31119-B753-38AF-94AA-033658E78F77
   - target:          x86_64-maccatalyst
-    value:           EF17F6E2-791F-3904-8CF5-877900E22C51
+    value:           DAF31119-B753-38AF-94AA-033658E78F77
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AC3759F3-911E-32EC-8FC7-5192457175A4
+    value:           BC8948A9-DF95-334E-AB45-FF67CE19BF24
   - target:          arm64e-maccatalyst
-    value:           AC3759F3-911E-32EC-8FC7-5192457175A4
+    value:           BC8948A9-DF95-334E-AB45-FF67CE19BF24
 install-name:    '/usr/lib/swift/libswiftSpeech.dylib'
 swift-abi-version: 7
 exports:

@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.40.8) generated from IOHIDDevice.iig */
+/* iig(DriverKit-107.60.3) generated from IOHIDDevice.iig */
 
 /* IOHIDDevice.iig:1-44 */
 /*
@@ -470,7 +470,7 @@ public:
 struct OSAction_IOHIDDevice__CompleteReport_IVars;
 struct OSAction_IOHIDDevice__CompleteReport_LocalIVars;
 
-class OSAction_IOHIDDevice__CompleteReport : public OSAction, public OSAction_IOHIDDevice__CompleteReportInterface
+class __attribute__((availability(driverkit,introduced=20,message="Type-safe OSAction factory methods are available in DriverKit 20 and newer"))) OSAction_IOHIDDevice__CompleteReport : public OSAction, public OSAction_IOHIDDevice__CompleteReportInterface
 {
 #if KERNEL
     OSDeclareDefaultStructorsWithDispatch(OSAction_IOHIDDevice__CompleteReport);

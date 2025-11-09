@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6396C3CE-4F6A-35D1-94FC-28EA7F8499F0
+    value:           FEA644F1-6D58-3E38-9057-33DBCC85D91A
   - target:          x86_64-maccatalyst
-    value:           6396C3CE-4F6A-35D1-94FC-28EA7F8499F0
+    value:           FEA644F1-6D58-3E38-9057-33DBCC85D91A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8CA96782-C573-3807-BAF8-277C3B83F8FC
+    value:           D1135845-7708-362D-8CB1-F4CD5A5EA0A6
   - target:          arm64e-maccatalyst
-    value:           8CA96782-C573-3807-BAF8-277C3B83F8FC
+    value:           D1135845-7708-362D-8CB1-F4CD5A5EA0A6
 install-name:    '/System/Library/PrivateFrameworks/AVFCapture.framework/Versions/A/AVFCapture'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -103,20 +103,20 @@ exports:
                        _AVCaptureWhiteBalanceGainsCurrent, _AVMediaTypeCameraCalibrationData, 
                        _AVMediaTypePointCloudData, _AVMediaTypeVisionData, _AVMetadataMakeDependentSpecificationsForValue, 
                        _AVMetadataMakeMetadataObjectFromBoxedMetadata, _AVMetadataObjectCreateBoxedMetadataFromObjectAndFormatDescription, 
-                       _AVMetadataObjectTypeAztecCode, _AVMetadataObjectTypeCatBody, 
-                       _AVMetadataObjectTypeCode128Code, _AVMetadataObjectTypeCode39Code, 
-                       _AVMetadataObjectTypeCode39Mod43Code, _AVMetadataObjectTypeCode93Code, 
-                       _AVMetadataObjectTypeDataMatrixCode, _AVMetadataObjectTypeDogBody, 
-                       _AVMetadataObjectTypeEAN13Code, _AVMetadataObjectTypeEAN8Code, 
-                       _AVMetadataObjectTypeFace, _AVMetadataObjectTypeHumanBody, 
-                       _AVMetadataObjectTypeITF14Code, _AVMetadataObjectTypeInterleaved2of5Code, 
-                       _AVMetadataObjectTypeOfflineVideoStabilizationMotion, _AVMetadataObjectTypePDF417Code, 
-                       _AVMetadataObjectTypeQRCode, _AVMetadataObjectTypeSaliencyHeatMap, 
-                       _AVMetadataObjectTypeSalientObject, _AVMetadataObjectTypeTrackedFaces, 
-                       _AVMetadataObjectTypeUPCECode, _AVMetadataObjectTypeVideoPreviewHistogram, 
-                       _AVSemanticSegmentationMatteTypeGlasses, _AVSemanticSegmentationMatteTypeHair, 
-                       _AVSemanticSegmentationMatteTypeSkin, _AVSemanticSegmentationMatteTypeTeeth, 
-                       _kAVFCaptureSCMVersion ]
+                       _AVMetadataObjectTypeAppClipCode, _AVMetadataObjectTypeAztecCode, 
+                       _AVMetadataObjectTypeCatBody, _AVMetadataObjectTypeCode128Code, 
+                       _AVMetadataObjectTypeCode39Code, _AVMetadataObjectTypeCode39Mod43Code, 
+                       _AVMetadataObjectTypeCode93Code, _AVMetadataObjectTypeDataMatrixCode, 
+                       _AVMetadataObjectTypeDogBody, _AVMetadataObjectTypeEAN13Code, 
+                       _AVMetadataObjectTypeEAN8Code, _AVMetadataObjectTypeFace, 
+                       _AVMetadataObjectTypeHumanBody, _AVMetadataObjectTypeITF14Code, 
+                       _AVMetadataObjectTypeInterleaved2of5Code, _AVMetadataObjectTypeOfflineVideoStabilizationMotion, 
+                       _AVMetadataObjectTypePDF417Code, _AVMetadataObjectTypeQRCode, 
+                       _AVMetadataObjectTypeSaliencyHeatMap, _AVMetadataObjectTypeSalientObject, 
+                       _AVMetadataObjectTypeTrackedFaces, _AVMetadataObjectTypeUPCECode, 
+                       _AVMetadataObjectTypeVideoPreviewHistogram, _AVSemanticSegmentationMatteTypeGlasses, 
+                       _AVSemanticSegmentationMatteTypeHair, _AVSemanticSegmentationMatteTypeSkin, 
+                       _AVSemanticSegmentationMatteTypeTeeth, _kAVFCaptureSCMVersion ]
     objc-classes:    [ AVApplePortraitMetadata, AVCameraCalibrationData, AVCaptureAudioChannel, 
                        AVCaptureAudioDataOutput, AVCaptureAudioFileOutput, AVCaptureAudioPreviewOutput, 
                        AVCaptureAutoExposureBracketedStillImageSettings, AVCaptureBracketedStillImageSettings, 

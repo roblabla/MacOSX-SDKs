@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2B91DDA0-4EFB-3659-B3E7-27017BAE4C6A
+    value:           EB7D82A2-F4C4-3541-A644-8037435039F9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           730EE651-B2C9-303E-9CAE-41E8BECA683C
+    value:           CD29EFA7-8895-32AB-A3B2-F2A9DA20429D
 install-name:    '/System/Library/PrivateFrameworks/AirPlayReceiver.framework/Versions/A/AirPlayReceiver'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

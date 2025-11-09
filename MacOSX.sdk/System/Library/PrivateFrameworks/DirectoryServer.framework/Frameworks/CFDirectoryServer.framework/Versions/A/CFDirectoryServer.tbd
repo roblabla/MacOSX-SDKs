@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5AE68659-F6A0-3E49-BA69-5D6D63725D42
+    value:           82D3A7BC-E695-3195-B513-6C1702256831
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6ADA7889-4006-3FE7-903E-4FCE09D00373
+    value:           496D318E-1F5E-36BE-97F6-42B6FFE0ED3A
 install-name:    '/System/Library/PrivateFrameworks/DirectoryServer.framework/Frameworks/CFDirectoryServer.framework/Versions/A/CFDirectoryServer'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           3ABCE7D1-A377-3B83-9F49-AC73480F29EE
+    value:           1A5A86D1-735A-3041-A4C3-E0754986F836
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           F8A6DE0A-496C-3084-9C95-63A5C3439A00
+    value:           86D9A684-83FE-34A3-B7AF-B380DB6933FF
 install-name:    '/System/iOSSupport/System/Library/Frameworks/MetalKit.framework/Versions/A/MetalKit'
 current-version: 147.1
 exports:
-  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _MTKMetalVertexDescriptorFromModelIO, _MTKMetalVertexDescriptorFromModelIOWithError, 
                        _MTKMetalVertexFormatFromModelIO, _MTKModelErrorDomain, _MTKModelErrorKey, 
                        _MTKModelIOVertexDescriptorFromMetal, _MTKModelIOVertexDescriptorFromMetalWithError, 

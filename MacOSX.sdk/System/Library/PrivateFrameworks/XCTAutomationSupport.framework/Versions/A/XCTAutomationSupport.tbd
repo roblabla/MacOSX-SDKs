@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B98CBB89-C575-3D45-B248-310F813322CA
+    value:           8474C3A6-E48E-3509-A8AF-94E8F8AD7F72
   - target:          x86_64-maccatalyst
-    value:           B98CBB89-C575-3D45-B248-310F813322CA
+    value:           8474C3A6-E48E-3509-A8AF-94E8F8AD7F72
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           812616A4-38D7-3456-805A-762BA8DA0092
+    value:           0F1D69E6-B954-3920-9246-8EC0B7E50D5C
   - target:          arm64e-maccatalyst
-    value:           812616A4-38D7-3456-805A-762BA8DA0092
+    value:           0F1D69E6-B954-3920-9246-8EC0B7E50D5C
 install-name:    '/System/Library/PrivateFrameworks/XCTAutomationSupport.framework/Versions/A/XCTAutomationSupport'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

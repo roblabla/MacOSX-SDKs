@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           D13CCE90-0262-3957-9254-AE556707A39E
+    value:           66D160C6-6C8E-32D6-9061-FB345211412C
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           69B44E6B-5D99-3BFC-92D7-38EC15D583B7
+    value:           10D9C44A-CF18-3D29-BBEE-8D779BA000CB
 install-name:    '/System/iOSSupport/System/Library/Frameworks/RealityKit.framework/Versions/A/RealityKit'
-current-version: 60.45.3
+current-version: 60.45.4
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]

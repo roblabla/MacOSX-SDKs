@@ -3,17 +3,18 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D1A04379-2A8D-3311-B7EA-F7F4A71EEA0B
+    value:           F3FBB214-A5E7-3100-823A-D85915175D5C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           75989BA8-8B37-32E1-AC33-F3A1925E5A62
+    value:           4DC85818-1DC1-38E1-8518-F56DF54A3635
 install-name:    '/System/Library/PrivateFrameworks/AirPlaySupport.framework/Versions/A/AirPlaySupport'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
-    symbols:         [ _APAudioFormatASBDArrayToAPAudioFormats, _APAudioFormatAudioCompressionTypeSupportsVBR, 
-                       _APAudioFormatChooseFromPreferredAudioFormats, _APAudioFormatCompressionTypeToAudioFormatID, 
-                       _APAudioFormatCopyAudioFormatsToReadableString, _APAudioFormatCopyAudioSourceInputFormatDescriptionForContentFormatDescriptionAndSupportedFormats, 
+    symbols:         [ _APAudioFormatASBDArrayToAPAudioFormats, _APAudioFormatAtmosEnabled, 
+                       _APAudioFormatAudioCompressionTypeSupportsVBR, _APAudioFormatChooseFromPreferredAudioFormats, 
+                       _APAudioFormatCompressionTypeToAudioFormatID, _APAudioFormatCopyAudioFormatsToReadableString, 
+                       _APAudioFormatCopyAudioSourceInputFormatDescriptionForContentFormatDescriptionAndSupportedFormats, 
                        _APAudioFormatCopyPreferredBufferedAudioFormats, _APAudioFormatCopyPreferredLowLatencyAudioFormats, 
                        _APAudioFormatCopyPreferredRealTimeAudioFormats, _APAudioFormatCreateDescriptionArray, 
                        _APAudioFormatFilterFormatsForCurrentBufferedSender, _APAudioFormatFilterFormatsForCurrentLowLatencySender, 
@@ -90,13 +91,13 @@ exports:
                        _APSGetClusterModel, _APSGetDeviceClassFromDeviceModel, _APSGetDeviceClassString, 
                        _APSGetFBOPropertyCMTime, _APSGetFBOPropertyCString, _APSGetFBOPropertyDouble, 
                        _APSGetFBOPropertyInt64, _APSGetSyntheticAudioDeviceLatencyMS, 
-                       _APSGetTightSyncBuddyReachabilityInfo, _APSHDMIAudioLatencyMs, 
-                       _APSHDMIVideoLatencyMs, _APSHTTPOpenLocalFile, _APSHTTPParseByteRangeRequest, 
-                       _APSHasHDRSenderSupport, _APSHasNANSupport, _APSHasSamePersistentGroupUUID, 
-                       _APSHasUDPMirroringReceiverSupport, _APSHasUDPMirroringSenderSupport, 
-                       _APSIntrospectorAddCommand, _APSIntrospectorCollectionShow, 
-                       _APSIntrospectorInit, _APSIntrospectorSetCommandContext, _APSIsAPMSpeaker, 
-                       _APSIsAPValeriaScreenSender, _APSIsEndpointClusteringEnabled, 
+                       _APSGetTightSyncBuddyReachabilityInfo, _APSGetVolumeFadeTypeName, 
+                       _APSHDMIAudioLatencyMs, _APSHDMIVideoLatencyMs, _APSHTTPOpenLocalFile, 
+                       _APSHTTPParseByteRangeRequest, _APSHasHDRSenderSupport, _APSHasNANSupport, 
+                       _APSHasSamePersistentGroupUUID, _APSHasUDPMirroringReceiverSupport, 
+                       _APSHasUDPMirroringSenderSupport, _APSIntrospectorAddCommand, 
+                       _APSIntrospectorCollectionShow, _APSIntrospectorInit, _APSIntrospectorSetCommandContext, 
+                       _APSIsAPMSpeaker, _APSIsAPValeriaScreenSender, _APSIsEndpointClusteringEnabled, 
                        _APSIsFBOPropertyNonNull, _APSIsLinkLocalInterface, _APSIsMemberOfHTGroup, 
                        _APSIsMemberOfPersistentGroup, _APSIssueReporterProtocolGetProtocolID, 
                        _APSKeyHolderGetCMBaseObject, _APSKeyHolderGetClassID, _APSKeyHolderGetTypeID, 

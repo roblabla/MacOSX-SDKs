@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           32EA5CEB-1E17-3E48-9B94-43327EA26689
+    value:           1A097059-760B-3CBE-BE26-6EA08822CBF9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B44E3A11-450C-395B-99A0-DB7DE58B5B3E
+    value:           5B126ED1-569F-36FC-826C-79F22B7820C4
 install-name:    '/System/Library/PrivateFrameworks/ScreenSharing.framework/Versions/A/ScreenSharing'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

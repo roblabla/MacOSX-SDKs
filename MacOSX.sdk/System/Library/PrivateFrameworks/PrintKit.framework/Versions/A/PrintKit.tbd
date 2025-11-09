@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           79D53ED8-60D5-3F7E-B619-6E9751F537DF
+    value:           0C2850B1-669C-3BAF-8F2B-10386605B44B
   - target:          x86_64-maccatalyst
-    value:           79D53ED8-60D5-3F7E-B619-6E9751F537DF
+    value:           0C2850B1-669C-3BAF-8F2B-10386605B44B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           638B84A1-11BD-37B9-9103-BE98FDA26E2C
+    value:           8D3A5472-2985-37E3-8091-1A42742E16D0
   - target:          arm64e-maccatalyst
-    value:           638B84A1-11BD-37B9-9103-BE98FDA26E2C
+    value:           8D3A5472-2985-37E3-8091-1A42742E16D0
 install-name:    '/System/Library/PrivateFrameworks/PrintKit.framework/Versions/A/PrintKit'
 current-version: 253
 exports:

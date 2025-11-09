@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2EBBA622-79FD-3C84-9710-95225DBF23B1
+    value:           F794B3AE-BCCD-3A93-85C0-2FD6BE1E1F95
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D31D5C9C-2B42-3373-9CDE-26857F6F7EE6
+    value:           0E0E67A0-29B8-3EF6-B2C6-714EC068B461
 install-name:    '/System/Library/PrivateFrameworks/Seeding.framework/Versions/A/Seeding'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

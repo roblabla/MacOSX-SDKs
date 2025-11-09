@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           5EA07386-832E-3C73-92C3-3C216AB8A861
+    value:           18EB9678-7C41-3B52-9590-6C1D0DC7F5A6
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           757C4DD2-ED6F-3E65-81FB-F72936B82352
+    value:           D3C237C4-76AD-317A-A181-A0F865A15B24
 install-name:    '/System/iOSSupport/System/Library/Frameworks/MediaPlayer.framework/Versions/A/MediaPlayer'
 exports:
-  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _CGRectNormalizedRectFromSubRect, _CGRectSubRectWithNormalizedRect, 
                        _MPAVMRRouteDiscoveryModeFromDiscoveryMode, _MPAVRouteConnectionCorrelationIDUserInfoKey, 
                        _MPAVRouteConnectionEndpointIdentifierUserInfoKey, _MPAVRouteConnectionErrorDomain, 
@@ -534,9 +534,11 @@ exports:
                        _MPUniformTypeIdentifierShow, _MPUniformTypeIdentifierSong, 
                        _MPUniformTypeIdentifierVideoPodcast, _MPVolumeSettingsAlertHide, 
                        _MPVolumeSettingsAlertIsVisible, _MPVolumeSettingsAlertShow, 
-                       _MPVolumeViewRouteButtonChangedNotification, _MPVolumeViewRoutePickerPresentedNotification, 
-                       _MPVolumeViewVisibilityChangedNotification, _MPVolumeViewWirelessRouteActiveDidChangeNotification, 
-                       _MPVolumeViewWirelessRoutesAvailableDidChangeNotification, 
+                       _MPVolumeSliderVolumeControlAvailabilityDidChangeNotification, 
+                       _MPVolumeSliderVolumeControlCapabilitiesDidChangeNotification, 
+                       _MPVolumeSliderVolumeControlLabelDidChangeNotification, _MPVolumeViewRouteButtonChangedNotification, 
+                       _MPVolumeViewRoutePickerPresentedNotification, _MPVolumeViewVisibilityChangedNotification, 
+                       _MPVolumeViewWirelessRouteActiveDidChangeNotification, _MPVolumeViewWirelessRoutesAvailableDidChangeNotification, 
                        _MRMediaRemoteCommandHandlerStatusFromMPRemoteCommandHandlerStatus, 
                        _MusicLookupItemArtworkBestArtworkForPixelSize, _NSStringAggregationKeyFromMPMediaType, 
                        _NSStringFromMPMediaType, _NSStringFromMPModelRadioStationSubtype, 
@@ -651,7 +653,8 @@ exports:
                        MPPMediaQuery, MPPPersistentIDsPredicate, MPPPropertyPredicate, 
                        MPPSearchStringPredicate, MPPlayableContentManager, MPPlayableContentManagerContext, 
                        MPPlaybackArchive, MPPlaybackArchiveConfiguration, MPPlaybackArchiveDisplayProperties, 
-                       MPPlaybackSessionCommandEvent, MPPreloadPlaybackSessionCommand, 
+                       MPPlaybackSessionCommandEvent, MPPlaybackSessionCommandInfo, 
+                       MPPreloadPlaybackSessionCommand, MPPreloadPlaybackSessionCommandEvent, 
                        MPPropertySet, MPProtocolProxy, MPRadioStationEvent, MPRadioStationRemotePlaybackQueue, 
                        MPRandomDistribution, MPRatingCommand, MPRatingCommandEvent, 
                        MPRemoteCommand, MPRemoteCommandCenter, MPRemoteCommandEvent, 
@@ -677,8 +680,8 @@ exports:
                        MPStorePlatformMediaItem, MPTVOutWindow, MPTiledArtworkDataSource, 
                        MPTiledArtworkRequest, MPTimedMetadata, MPVolumeController, 
                        MPVolumeControllerRouteDataSource, MPVolumeHUDController, 
-                       MPVolumeHardwareButtonController, MPVolumeView, MPWeakTimer, 
-                       _MPBaseEntityRelationshipTranslator, _MPKeyPathEntityPropertyTranslator, 
+                       MPVolumeHardwareButtonController, MPVolumeSlider, MPVolumeView, 
+                       MPWeakTimer, _MPBaseEntityRelationshipTranslator, _MPKeyPathEntityPropertyTranslator, 
                        _MPKeyPathEntityRelationshipTranslator, _MPMediaLibraryEntityChange, 
                        _MPMediaSearchStringPredicate ]
     objc-ivars:      [ _MPMediaSearchStringPredicate._properties, _MPMediaSearchStringPredicate._searchString ]

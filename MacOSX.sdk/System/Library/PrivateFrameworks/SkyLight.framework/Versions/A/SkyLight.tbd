@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6B50EC93-3825-3C61-9FCF-3E8CE92438F6
+    value:           BABEC06C-214E-3D30-A36F-53AB473ABC93
   - target:          x86_64-maccatalyst
-    value:           6B50EC93-3825-3C61-9FCF-3E8CE92438F6
+    value:           BABEC06C-214E-3D30-A36F-53AB473ABC93
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6B1D346A-7640-3BDF-B1CC-F48CDE3A8277
+    value:           750CB992-DD41-37BC-8E51-4ABAAD0AC9A2
   - target:          arm64e-maccatalyst
-    value:           6B1D346A-7640-3BDF-B1CC-F48CDE3A8277
+    value:           750CB992-DD41-37BC-8E51-4ABAAD0AC9A2
 install-name:    '/System/Library/PrivateFrameworks/SkyLight.framework/Versions/A/SkyLight'
 current-version: 600
 compatibility-version: 64
@@ -649,20 +649,20 @@ exports:
                        _kSLSCoordinatedTileResizeNotificationName, _kSLSCoreGraphicsErrorDomain, 
                        _kSLSDefaultKeyboardIDKey, _kSLSDeviceDictionariesKey, _kSLSDeviceUsagesKey, 
                        _kSLSDisableCursorObscureMaxTimeout, _kSLSDisableCursorObscureMinTimeout, 
-                       _kSLSDisplayConfigurationTimeline, _kSLSDisplayControlNotificationBrightnessControl, 
-                       _kSLSDisplayControlNotificationCGDirectDisplayID, _kSLSDisplayControlNotificationErrorCode, 
-                       _kSLSDisplayControlNotificationErrorDescription, _kSLSDisplayControlNotificationIdleRequest, 
-                       _kSLSDisplayControlNotificationLogicalDisplaysState, _kSLSDisplayControlNotificationPayload, 
-                       _kSLSDisplayControlNotificationPayloadType, _kSLSDisplayControlNotificationState, 
-                       _kSLSDisplayControlNotificationType, _kSLSDisplayControlNotificationUUID, 
-                       _kSLSDisplayControlRequestCGDirectDisplayID, _kSLSDisplayControlRequestClamshellState, 
-                       _kSLSDisplayControlRequestIdle, _kSLSDisplayControlRequestState, 
-                       _kSLSDisplayControlRequestTimeout, _kSLSDisplayFadeTimeline, 
-                       _kSLSDisplayUUIDCallbackTimeline, _kSLSGestureScrollDeviceTypeKey, 
-                       _kSLSGestureScrollDevicesKey, _kSLSGestureScrollMouse, _kSLSGestureScrollTrackpad, 
-                       _kSLSGestureScrollTrackpadDevicesKey, _kSLSHIDEventTypeDirectTouch, 
-                       _kSLSHMDCapabilityMaxQueueSize, _kSLSHMDCapabilityMaxSize, 
-                       _kSLSHMDCapabilityMinSize, _kSLSHMDCapabilityPreferredFormat, 
+                       _kSLSDisplayCADeviceNameKey, _kSLSDisplayConfigurationTimeline, 
+                       _kSLSDisplayControlNotificationBrightnessControl, _kSLSDisplayControlNotificationCGDirectDisplayID, 
+                       _kSLSDisplayControlNotificationErrorCode, _kSLSDisplayControlNotificationErrorDescription, 
+                       _kSLSDisplayControlNotificationIdleRequest, _kSLSDisplayControlNotificationLogicalDisplaysState, 
+                       _kSLSDisplayControlNotificationPayload, _kSLSDisplayControlNotificationPayloadType, 
+                       _kSLSDisplayControlNotificationState, _kSLSDisplayControlNotificationType, 
+                       _kSLSDisplayControlNotificationUUID, _kSLSDisplayControlRequestCGDirectDisplayID, 
+                       _kSLSDisplayControlRequestClamshellState, _kSLSDisplayControlRequestIdle, 
+                       _kSLSDisplayControlRequestState, _kSLSDisplayControlRequestTimeout, 
+                       _kSLSDisplayFadeTimeline, _kSLSDisplayUUIDCallbackTimeline, 
+                       _kSLSGestureScrollDeviceTypeKey, _kSLSGestureScrollDevicesKey, 
+                       _kSLSGestureScrollMouse, _kSLSGestureScrollTrackpad, _kSLSGestureScrollTrackpadDevicesKey, 
+                       _kSLSHIDEventTypeDirectTouch, _kSLSHMDCapabilityMaxQueueSize, 
+                       _kSLSHMDCapabilityMaxSize, _kSLSHMDCapabilityMinSize, _kSLSHMDCapabilityPreferredFormat, 
                        _kSLSHMDCapabilityPreferredSize, _kSLSHMDCapabilitySupportedFormats, 
                        _kSLSHMDDisplayQueueOptionColorSpace, _kSLSHMDDisplayQueueOptionCount, 
                        _kSLSHMDDisplayQueueOptionFlags, _kSLSHMDDisplayQueueOptionPixelFormat, 

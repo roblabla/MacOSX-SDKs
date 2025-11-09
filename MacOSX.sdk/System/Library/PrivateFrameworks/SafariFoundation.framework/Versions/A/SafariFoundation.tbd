@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C2845316-20B8-3410-83A9-67AED5DE1A72
+    value:           757C264A-9C77-3546-8A35-36FA2DD059B5
   - target:          x86_64-maccatalyst
-    value:           C2845316-20B8-3410-83A9-67AED5DE1A72
+    value:           757C264A-9C77-3546-8A35-36FA2DD059B5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B39E97DF-19EA-320D-99EA-594264CFD025
+    value:           35ADC268-D1CF-379F-B62A-5C90218EBA01
   - target:          arm64e-maccatalyst
-    value:           B39E97DF-19EA-320D-99EA-594264CFD025
+    value:           35ADC268-D1CF-379F-B62A-5C90218EBA01
 install-name:    '/System/Library/PrivateFrameworks/SafariFoundation.framework/Versions/A/SafariFoundation'
-current-version: 610.2.11
+current-version: 610.3.7
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

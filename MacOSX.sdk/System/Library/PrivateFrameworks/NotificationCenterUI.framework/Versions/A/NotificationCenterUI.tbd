@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0ABF4CF9-DEE7-3D2E-A71D-AF33C0E4EB4B
+    value:           FBF81CF8-10A8-38CD-BD22-05D6187002E1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9E684FC5-AA61-37F9-B015-BA7D5657A288
+    value:           E848CA59-F34A-3E15-AEEE-75EBCD9A5150
 install-name:    '/System/Library/PrivateFrameworks/NotificationCenterUI.framework/Versions/A/NotificationCenterUI'
-current-version: 1108
+current-version: 1108.20.11
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -91,5 +91,5 @@ exports:
                        '_$sSo7CALayerC16EyeCandyGraphicsE3set21borderMaterialControl10appearanceyAC0G15LayerControllerV0H0O_AH10AppearanceOtF', 
                        _NCCHSWidgetMetricsSpecification, _NCCHSWidgetPreviewMetricsSpecification, 
                        _NCSnippetCreate, _NCSnippetDestroy ]
-    objc-classes:    [ NCCardViewController, NCCustomAlert, NCCustomAlertBackgroundView ]
+    objc-classes:    [ NCCAFenceWrapper, NCCardViewController, NCCustomAlert, NCCustomAlertBackgroundView ]
 ...

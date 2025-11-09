@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           7E5DC5F8-BD85-3483-A3DC-BF36D7D612BB
+    value:           A3BBDB43-707D-3093-8CC1-37F7C4EBC0FD
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           12D68120-14EC-3E9B-98DC-4237B4EE585E
+    value:           6C7FE0EE-5BD8-3737-973A-84362AAD1A95
 install-name:    '/System/iOSSupport/System/Library/Frameworks/AVKit.framework/Versions/A/AVKit'
 exports:
-  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _AVKitErrorDomain, _AVKitMetadataIdentifierBrandIdentifier, 
                        _AVKitMetadataIdentifierExternalContentIdentifier, _AVKitMetadataIdentifierExternalUserProfileIdentifier, 
                        _AVKitMetadataIdentifierPlaybackProgress, _AVKitMetadataIdentifierServiceIdentifier, 
@@ -29,6 +29,6 @@ exports:
                        AVPictureInPictureIndicatorView, AVPictureInPicturePlayerLayerView, 
                        AVPlayerController, AVPlayerControllerTimeResolver, AVPlayerViewController, 
                        AVPlayerViewControllerCustomControlsView, AVRoutePickerView, 
-                       AVTimecode, AVTimecodeController, AVTimer, AVValueTiming, 
-                       __AVPlayerLayerView ]
+                       AVSeymourBehavior, AVSeymourBehaviorContext, AVTimecode, AVTimecodeController, 
+                       AVTimer, AVValueTiming, __AVPlayerLayerView ]
 ...

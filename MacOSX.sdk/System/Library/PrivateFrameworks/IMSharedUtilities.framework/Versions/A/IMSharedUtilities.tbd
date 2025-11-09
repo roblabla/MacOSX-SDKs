@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           18530010-C696-3E48-A7A2-B881B008072F
+    value:           E55634F5-7E7E-3AC7-BD0C-B99C61DD3D70
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           56ED8058-AEAE-3241-9097-41D6C07B0E7D
+    value:           ABE41DBD-3C42-3DFB-B4A5-9331D5CD826C
 install-name:    '/System/Library/PrivateFrameworks/IMSharedUtilities.framework/Versions/A/IMSharedUtilities'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -173,10 +173,11 @@ exports:
                        _IMImpactEffectID, _IMImpactEffectID_InvisibleInk, _IMIsHEVCWithAlphaVideo, 
                        _IMIsHEVCWithAlphaVideoFromData, _IMIsHEVCWithAlphaVideoURL, 
                        _IMIsRunningInAutomation, _IMIsRunningInCarousel, _IMIsRunningInDebugMode, 
-                       _IMIsRunningInIMDPersistenceAgent, _IMIsRunningInMessages, 
-                       _IMIsRunningInMessagesComposeViewService, _IMIsRunningInMessagesExtension, 
-                       _IMIsRunningInMessagesMacOSX, _IMIsRunningInMobileSMS, _IMIsRunningInUnitTesting, 
-                       _IMIsRunningOnAudioAccessory, _IMIsSupportedUTIType, _IMKeyValueCollectionChangedNotification, 
+                       _IMIsRunningInGameCenter, _IMIsRunningInIMDPersistenceAgent, 
+                       _IMIsRunningInMessages, _IMIsRunningInMessagesComposeViewService, 
+                       _IMIsRunningInMessagesExtension, _IMIsRunningInMessagesMacOSX, 
+                       _IMIsRunningInMobileSMS, _IMIsRunningInUnitTesting, _IMIsRunningOnAudioAccessory, 
+                       _IMIsSupportedUTIType, _IMKeyValueCollectionChangedNotification, 
                        _IMKeyValueCollectionChangedValuesKey, _IMLogCategoryFromFilePath, 
                        _IMLogHandleForCategory, _IMLoggingLevelFromString, _IMLookUpExtensionInCache, 
                        _IMMacCatalystiMessageAppPrototype, _IMMeCardSharingNameFormatNotification, 

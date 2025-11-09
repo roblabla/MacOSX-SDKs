@@ -33,6 +33,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 
 // Phone number labels
 CONTACTS_EXTERN NSString * const CNLabelPhoneNumberiPhone                NS_AVAILABLE(10_11, 9_0);
+CONTACTS_EXTERN NSString * const CNLabelPhoneNumberAppleWatch            API_AVAILABLE(macos(11.1), ios(14.3), watchos(7.2));
 CONTACTS_EXTERN NSString * const CNLabelPhoneNumberMobile                NS_AVAILABLE(10_11, 9_0);
 CONTACTS_EXTERN NSString * const CNLabelPhoneNumberMain                  NS_AVAILABLE(10_11, 9_0);
 CONTACTS_EXTERN NSString * const CNLabelPhoneNumberHomeFax               NS_AVAILABLE(10_11, 9_0);

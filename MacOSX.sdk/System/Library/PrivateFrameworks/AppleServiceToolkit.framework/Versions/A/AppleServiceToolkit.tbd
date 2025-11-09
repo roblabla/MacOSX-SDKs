@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3E90BDAC-56DE-372F-AC83-11D0B337E453
+    value:           5BF9B1F9-EBF3-361F-AF10-5963E70FF2E1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7C1FD85C-D5A9-3140-996D-29311E3D3BED
+    value:           EF29C9EB-8D9A-3C10-8F33-C6E2B448792E
 install-name:    '/System/Library/PrivateFrameworks/AppleServiceToolkit.framework/Versions/A/AppleServiceToolkit'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

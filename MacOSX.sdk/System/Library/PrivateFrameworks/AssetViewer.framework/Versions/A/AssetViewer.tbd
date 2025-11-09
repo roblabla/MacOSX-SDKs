@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7344CB4C-9494-39B3-AAC4-873E1A9E7313
+    value:           DAEB1CF7-2A90-3F9D-AD37-77010B57FB78
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F039214A-DB14-3061-A4B5-D172C693D71A
+    value:           526CD994-B452-318D-A228-8C36C7C9B1C4
 install-name:    '/System/Library/PrivateFrameworks/AssetViewer.framework/Versions/A/AssetViewer'
 current-version: 119.6
 exports:

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E04EB289-C1CC-339E-82D2-E1BF853E0057
+    value:           C618FE77-7070-3AD1-884C-955D5C809603
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           69A7AAD0-B860-36C6-9464-617FF8977B1A
+    value:           02D83DE7-DB0C-301F-901F-FCD347ED81FE
 install-name:    '/System/Library/PrivateFrameworks/Tourist.framework/Versions/A/Tourist'
-current-version: 1.0.67
+current-version: 1.0.69
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _TouristDefinitionABTestCasesKey, _TouristDefinitionAllowQAPaths, 
@@ -28,13 +28,13 @@ exports:
                        _TouristDefinitionMinumumScaleKey, _TouristDefinitionNeverRemindMeKey, 
                        _TouristDefinitionNotificationCases, _TouristDefinitionNotificationTextKey, 
                        _TouristDefinitionNotificationTitleKey, _TouristDefinitionPlatformKey, 
-                       _TouristDefinitionPreviousSystemKey, _TouristDefinitionRemindMeLaterKey, 
-                       _TouristDefinitionScalingFactorKey, _TouristDefinitionShortDelayKey, 
-                       _TouristDefinitionShowCloseType, _TouristDefinitionShowLaterOptionsType, 
-                       _TouristDefinitionShowLaterType, _TouristDefinitionShowNotificationKey, 
-                       _TouristDefinitionTextKey, _TouristDefinitionTitleKey, _TouristDefinitionToursKey, 
-                       _TouristDefinitionTypeKey, _TouristDefinitionURLKey, _TouristDefinitionVersionKey, 
-                       _TouristDefinitionViewedKey, _TouristDefinitionWaxwingKey, 
-                       _kDaemonDefaultsID ]
+                       _TouristDefinitionPreviousSystemKey, _TouristDefinitionProductHashesKey, 
+                       _TouristDefinitionRemindMeLaterKey, _TouristDefinitionScalingFactorKey, 
+                       _TouristDefinitionShortDelayKey, _TouristDefinitionShowCloseType, 
+                       _TouristDefinitionShowLaterOptionsType, _TouristDefinitionShowLaterType, 
+                       _TouristDefinitionShowNotificationKey, _TouristDefinitionTextKey, 
+                       _TouristDefinitionTitleKey, _TouristDefinitionToursKey, _TouristDefinitionTypeKey, 
+                       _TouristDefinitionURLKey, _TouristDefinitionVersionKey, _TouristDefinitionViewedKey, 
+                       _TouristDefinitionWaxwingKey, _kDaemonDefaultsID ]
     objc-classes:    [ APDFinderTourList, APDProfile, APDTour ]
 ...

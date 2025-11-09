@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           A9032D56-EE36-3102-8C70-008B5CEE5B54
+    value:           51B6A1DA-733C-30F9-8859-9FC8210F8878
   - target:          x86_64-maccatalyst
-    value:           A9032D56-EE36-3102-8C70-008B5CEE5B54
+    value:           51B6A1DA-733C-30F9-8859-9FC8210F8878
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           08C2B50B-FCEA-3854-8BF6-E52320F9284C
+    value:           FE21DEBB-3C6A-34E7-872A-7A8571AA61F5
   - target:          arm64e-maccatalyst
-    value:           08C2B50B-FCEA-3854-8BF6-E52320F9284C
+    value:           FE21DEBB-3C6A-34E7-872A-7A8571AA61F5
 install-name:    '/System/Library/PrivateFrameworks/SpotlightIndex.framework/Versions/A/SpotlightIndex'
-current-version: 2149.5
+current-version: 2150.6
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -37,7 +37,7 @@ exports:
                        _SIDeleteCSClientStateCache, _SIDeleteCSItems, _SIDeserialize, 
                        _SIExecuteQuery, _SIExecuteQueryWithResultsCallback, _SIExecuteQueryWithResultsCallbackForTags, 
                        _SIFetchCSClientState, _SIFixupPaths, _SIFlushAndSuspendIndex, 
-                       _SIGetAccumulatedCountForBundleId, _SIGetAccumulatedSizeForGroup, 
+                       _SIForceResume, _SIGetAccumulatedCountForBundleId, _SIGetAccumulatedSizeForGroup, 
                        _SIGetAccumulatedStorageSizeForBundleId, _SIGetAccumulatedWorkTimeSinceLastSync, 
                        _SIGetAttributes, _SIGetCSAttributes, _SIGetCompletionOptionsFromRankingWeights, 
                        _SIGetExceptionPort, _SIGetIndexVersion, _SIGetLargestOid, 

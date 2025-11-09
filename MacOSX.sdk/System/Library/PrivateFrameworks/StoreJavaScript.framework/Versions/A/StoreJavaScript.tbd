@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E4D15432-B381-369E-A8FA-B08E55AEEA42
+    value:           BCDA0B81-5B5E-335D-9EC5-A6FDA8F3B18D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           84F19F4D-FB37-30BE-9D97-4C647B7A20FF
+    value:           A0A0DFF9-E6FC-3BEE-856D-63A80D045D69
 install-name:    '/System/Library/PrivateFrameworks/StoreJavaScript.framework/Versions/A/StoreJavaScript'
 current-version: 379
 exports:
@@ -25,6 +25,6 @@ exports:
                        _FRJSObjectSetPropertyAction, _FRJSObjectUnprotectAction, 
                        _JSInvalidateJSLogEnabledCache, _JSLogEnabled, __JSValueToNSObject, 
                        __NSObjectToJSValue, __contextMenuName, _didCreatePage, _didReceiveMessage, 
-                       _globalObjectIsAvailableForFrame ]
+                       _globalObjectIsAvailableForFrame, _willDestroyPage ]
     objc-classes:    [ FRBundleInterface, FRJSFunction, FRJSObject, FRWKBundleMessage ]
 ...

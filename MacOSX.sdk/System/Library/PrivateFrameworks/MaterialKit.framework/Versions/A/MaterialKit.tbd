@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           1651AC5B-DF34-39D6-ADD0-6E40DF0F870A
+    value:           F9F54F31-DD19-3178-B646-9216323D4F1B
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           BA2E422D-D61A-31F4-8993-6B595BEF403D
+    value:           03DC423A-E66D-3CB6-92CD-28AB047AB024
 install-name:    '/System/Library/PrivateFrameworks/MaterialKit.framework/Versions/A/MaterialKit'
 allowable-clients:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -17,8 +17,8 @@ allowable-clients:
                        HomeUI, LoginUI, MaterialKitTester, MaterialKitTests, MediaControls, 
                        MediaRemoteUI, MusicUIService, NotificationCenter, Pegasus, 
                        PencilKit, PlatterKit, PreBoard, RecentsAppPopover, ScreenTimeSettingsUI, 
-                       ScreenTimeUI, SearchUI, Sharing, SharingViewService, Siri, 
-                       SiriUI, SleepLockScreen, SpotlightUIInternal, SpringBoard, 
+                       ScreenTimeUI, SearchUI, Setup, Sharing, SharingViewService, 
+                       Siri, SiriUI, SleepLockScreen, SpotlightUIInternal, SpringBoard, 
                        SpringBoard-Tests, SpringBoardCore, SpringBoardFoundation, 
                        SpringBoardHome, SpringBoardUI, TVRemoteUI, TVSystemUI, UserNotificationsUIKit, 
                        UserNotificationsUIKitTests, WidgetConfigurationExtension, 

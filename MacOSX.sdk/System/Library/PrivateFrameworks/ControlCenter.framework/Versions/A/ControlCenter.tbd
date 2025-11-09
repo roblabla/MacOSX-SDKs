@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F6AD98CF-7C7D-3892-B1B2-D7977E015D82
+    value:           0E1F2654-5CEA-3008-8BF8-0E60E40717AD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           82A25E29-A7F3-3788-A940-A1B648416E0C
+    value:           001687EC-FF87-395A-8622-65384CAC2BB1
 install-name:    '/System/Library/PrivateFrameworks/ControlCenter.framework/Versions/A/ControlCenter'
-current-version: 136
+current-version: 142
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -57,6 +57,9 @@ exports:
                        '_$s13ControlCenter0aB27ModulePreferencesControllerC10identifier13defaultValuesACSS_xSgtcAA0abcD0RzlufC', 
                        '_$s13ControlCenter0aB27ModulePreferencesControllerC10identifier13defaultValuesACSS_xSgtcAA0abcD0RzlufCTq', 
                        '_$s13ControlCenter0aB27ModulePreferencesControllerC10identifier13defaultValuesACSS_xSgtcAA0abcD0Rzlufc', 
+                       '_$s13ControlCenter0aB27ModulePreferencesControllerC10identifier6useKVOACSS_SbtcfC', 
+                       '_$s13ControlCenter0aB27ModulePreferencesControllerC10identifier6useKVOACSS_SbtcfCTq', 
+                       '_$s13ControlCenter0aB27ModulePreferencesControllerC10identifier6useKVOACSS_Sbtcfc', 
                        '_$s13ControlCenter0aB27ModulePreferencesControllerC10identifierACSS_tcfC', 
                        '_$s13ControlCenter0aB27ModulePreferencesControllerC10identifierACSS_tcfCTq', 
                        '_$s13ControlCenter0aB27ModulePreferencesControllerC10identifierACSS_tcfc', 
@@ -225,6 +228,9 @@ exports:
                        '_$s13ControlCenter21PreferencesControllerC3app4keysACSS_xtcSTRzSY7ElementRpzSSAF_8RawValueRTzlufC', 
                        '_$s13ControlCenter21PreferencesControllerC3app4keysACSS_xtcSTRzSY7ElementRpzSSAF_8RawValueRTzlufCTq', 
                        '_$s13ControlCenter21PreferencesControllerC3app4keysACSS_xtcSTRzSY7ElementRpzSSAF_8RawValueRTzlufc', 
+                       '_$s13ControlCenter21PreferencesControllerC3get031_8E17B8E1F8C85735591D0C94F39DD6I0LLyxSgSSRlzClF', 
+                       '_$s13ControlCenter21PreferencesControllerC3set031_8E17B8E1F8C85735591D0C94F39DD6I0LL_6forKeyyxSg_SStRlzClF', 
+                       '_$s13ControlCenter21PreferencesControllerC5reset031_8E17B8E1F8C85735591D0C94F39DD6I0LLyyF', 
                        '_$s13ControlCenter21PreferencesControllerC6__lock031_8E17B8E1F8C85735591D0C94F39DD6I0LLAA19UnfairRecursiveLockCvM', 
                        '_$s13ControlCenter21PreferencesControllerC6__lock031_8E17B8E1F8C85735591D0C94F39DD6I0LLAA19UnfairRecursiveLockCvg', 
                        '_$s13ControlCenter21PreferencesControllerC6__lock031_8E17B8E1F8C85735591D0C94F39DD6I0LLAA19UnfairRecursiveLockCvpfi', 

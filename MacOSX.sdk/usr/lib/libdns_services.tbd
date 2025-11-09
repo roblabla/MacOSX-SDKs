@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           6844F9AB-F23C-3473-9CF7-51DC6859E760
+    value:           61EB26AD-C09E-3140-955E-16BF7DD2D6E3
   - target:          x86_64-maccatalyst
-    value:           6844F9AB-F23C-3473-9CF7-51DC6859E760
+    value:           61EB26AD-C09E-3140-955E-16BF7DD2D6E3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CCABF09A-553A-314B-9F94-2D04A1770DCC
+    value:           8FFC83B0-344F-3FE7-8FA9-8AE1AAFB99BB
   - target:          arm64e-maccatalyst
-    value:           CCABF09A-553A-314B-9F94-2D04A1770DCC
+    value:           8FFC83B0-344F-3FE7-8FA9-8AE1AAFB99BB
 install-name:    '/usr/lib/libdns_services.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _DNSXEnableProxy, _DNSXEnableProxy64, _DNSXRefDeAlloc, _advertising_proxy_block_service, 
                        _advertising_proxy_enable, _advertising_proxy_flush_entries, 

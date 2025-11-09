@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9CE5B67E-D5A4-3C25-830E-477F14CF2616
+    value:           4335C1CC-9D08-3131-9113-96ACCD1EC13B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           19C6535A-BE26-3E27-A8BC-35891017B729
+    value:           CCEE6C1B-0B1A-3B8C-9DEF-6801D54120F9
 install-name:    '/usr/libexec/SmartCardServices/drivers/ifd-ccid.bundle/Contents/MacOS/libccid.dylib'
 current-version: 0
 compatibility-version: 0

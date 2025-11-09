@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7E6778EB-0725-320F-ACB8-F3B0289F98E6
+    value:           F719DA57-EAAA-3527-B859-21025722932F
   - target:          x86_64-maccatalyst
-    value:           7E6778EB-0725-320F-ACB8-F3B0289F98E6
+    value:           F719DA57-EAAA-3527-B859-21025722932F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3AB67EC3-5B89-3C32-9CEA-B47DAA7A6250
+    value:           5867536B-0869-3ED4-AB5D-60E0FD9BFE70
   - target:          arm64e-maccatalyst
-    value:           3AB67EC3-5B89-3C32-9CEA-B47DAA7A6250
+    value:           5867536B-0869-3ED4-AB5D-60E0FD9BFE70
 install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSMatrix.framework/Versions/A/MPSMatrix'
-current-version: 124.0.30
+current-version: 124.2.1
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5F764FD4-761B-3992-8C7A-9ED0677975A7
+    value:           7E7856B2-09D8-38A9-A479-DAC798D44E25
   - target:          x86_64-maccatalyst
-    value:           5F764FD4-761B-3992-8C7A-9ED0677975A7
+    value:           7E7856B2-09D8-38A9-A479-DAC798D44E25
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6A28710E-9AF9-387B-82B1-B1030358FE4B
+    value:           BE7A17C0-62C4-376A-933E-F037B6AFCA25
   - target:          arm64e-maccatalyst
-    value:           6A28710E-9AF9-387B-82B1-B1030358FE4B
+    value:           BE7A17C0-62C4-376A-933E-F037B6AFCA25
 install-name:    '/System/Library/Frameworks/IOBluetooth.framework/Versions/A/IOBluetooth'
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -398,37 +398,37 @@ exports:
                        IOBluetoothDeviceExpansion.batteryPercentSingle, IOBluetoothDeviceExpansion.buttonMode, 
                        IOBluetoothDeviceExpansion.capabilityMask, IOBluetoothDeviceExpansion.channelBeingOpened, 
                        IOBluetoothDeviceExpansion.colorID, IOBluetoothDeviceExpansion.connecting, 
-                       IOBluetoothDeviceExpansion.connectionRetried, IOBluetoothDeviceExpansion.doubleClickMode, 
-                       IOBluetoothDeviceExpansion.findExisting, IOBluetoothDeviceExpansion.headsetBatteryPercent, 
-                       IOBluetoothDeviceExpansion.heySiriEnabled, IOBluetoothDeviceExpansion.identifier, 
-                       IOBluetoothDeviceExpansion.inEar, IOBluetoothDeviceExpansion.inEarDetect, 
-                       IOBluetoothDeviceExpansion.inquiryRSSI, IOBluetoothDeviceExpansion.isAutoRoutingEnabled, 
-                       IOBluetoothDeviceExpansion.isDevFused, IOBluetoothDeviceExpansion.isFirstPairing, 
-                       IOBluetoothDeviceExpansion.isSmartRoutingSupported, IOBluetoothDeviceExpansion.keySize, 
-                       IOBluetoothDeviceExpansion.leftClickHoldMode, IOBluetoothDeviceExpansion.leftDoubleTap, 
-                       IOBluetoothDeviceExpansion.listeningMode, IOBluetoothDeviceExpansion.listeningModeConfigs, 
-                       IOBluetoothDeviceExpansion.lmpSubversion, IOBluetoothDeviceExpansion.lmpVersion, 
-                       IOBluetoothDeviceExpansion.lowEnergyDevice, IOBluetoothDeviceExpansion.lowEnergyDeviceHID2, 
-                       IOBluetoothDeviceExpansion.lowEnergyKeyboard, IOBluetoothDeviceExpansion.lowEnergyPointer, 
-                       IOBluetoothDeviceExpansion.mTarget, IOBluetoothDeviceExpansion.manufacturerName, 
-                       IOBluetoothDeviceExpansion.micMode, IOBluetoothDeviceExpansion.nameComplete, 
-                       IOBluetoothDeviceExpansion.oneBudANC, IOBluetoothDeviceExpansion.openConnectionTarget, 
-                       IOBluetoothDeviceExpansion.primaryBud, IOBluetoothDeviceExpansion.primaryInEar, 
-                       IOBluetoothDeviceExpansion.psm, IOBluetoothDeviceExpansion.remoteNameRequestTarget, 
-                       IOBluetoothDeviceExpansion.rightClickHoldMode, IOBluetoothDeviceExpansion.rightDoubleTap, 
-                       IOBluetoothDeviceExpansion.secondaryInEar, IOBluetoothDeviceExpansion.serviceMask, 
-                       IOBluetoothDeviceExpansion.singleClickMode, IOBluetoothDeviceExpansion.streamingState, 
-                       IOBluetoothDeviceExpansion.switchControlEnabled, IOBluetoothDeviceExpansion.xpcConnection, 
-                       IOBluetoothDeviceInfoGatherer.expansionData, IOBluetoothDeviceInfoGatherer.mATCommandState, 
-                       IOBluetoothDeviceInfoGatherer.mATCommandTimer, IOBluetoothDeviceInfoGatherer.mChannelID, 
-                       IOBluetoothDeviceInfoGatherer.mDevice, IOBluetoothDeviceInfoGatherer.mGetATCommandInfo, 
-                       IOBluetoothDeviceInfoGatherer.mGetSDPInfo, IOBluetoothDeviceInfoGatherer.mInfoGathered, 
-                       IOBluetoothDeviceInfoGatherer.mLastCommandPtr, IOBluetoothDeviceInfoGatherer.mPhoneGMI, 
-                       IOBluetoothDeviceInfoGatherer.mPhoneGMM, IOBluetoothDeviceInfoGatherer.mPhoneIMSI, 
-                       IOBluetoothDeviceInfoGatherer.mPhoneManufacturer, IOBluetoothDeviceInfoGatherer.mPhoneModelNumber, 
-                       IOBluetoothDeviceInfoGatherer.mPhoneRevisionID, IOBluetoothDeviceInfoGatherer.mProgressSelector, 
-                       IOBluetoothDeviceInfoGatherer.mProgressSelectorTarget, IOBluetoothDeviceInfoGatherer.mRFCOMMChannel, 
-                       IOBluetoothDeviceInquiryCSupportObject._completeCallback, 
+                       IOBluetoothDeviceExpansion.connectionRetried, IOBluetoothDeviceExpansion.crownRotationDirection, 
+                       IOBluetoothDeviceExpansion.doubleClickMode, IOBluetoothDeviceExpansion.findExisting, 
+                       IOBluetoothDeviceExpansion.headsetBatteryPercent, IOBluetoothDeviceExpansion.heySiriEnabled, 
+                       IOBluetoothDeviceExpansion.identifier, IOBluetoothDeviceExpansion.inEar, 
+                       IOBluetoothDeviceExpansion.inEarDetect, IOBluetoothDeviceExpansion.inquiryRSSI, 
+                       IOBluetoothDeviceExpansion.isAutoRoutingEnabled, IOBluetoothDeviceExpansion.isDevFused, 
+                       IOBluetoothDeviceExpansion.isFirstPairing, IOBluetoothDeviceExpansion.isSmartRoutingSupported, 
+                       IOBluetoothDeviceExpansion.keySize, IOBluetoothDeviceExpansion.leftClickHoldMode, 
+                       IOBluetoothDeviceExpansion.leftDoubleTap, IOBluetoothDeviceExpansion.listeningMode, 
+                       IOBluetoothDeviceExpansion.listeningModeConfigs, IOBluetoothDeviceExpansion.lmpSubversion, 
+                       IOBluetoothDeviceExpansion.lmpVersion, IOBluetoothDeviceExpansion.lowEnergyDevice, 
+                       IOBluetoothDeviceExpansion.lowEnergyDeviceHID2, IOBluetoothDeviceExpansion.lowEnergyKeyboard, 
+                       IOBluetoothDeviceExpansion.lowEnergyPointer, IOBluetoothDeviceExpansion.mTarget, 
+                       IOBluetoothDeviceExpansion.manufacturerName, IOBluetoothDeviceExpansion.micMode, 
+                       IOBluetoothDeviceExpansion.nameComplete, IOBluetoothDeviceExpansion.oneBudANC, 
+                       IOBluetoothDeviceExpansion.openConnectionTarget, IOBluetoothDeviceExpansion.primaryBud, 
+                       IOBluetoothDeviceExpansion.primaryInEar, IOBluetoothDeviceExpansion.psm, 
+                       IOBluetoothDeviceExpansion.remoteNameRequestTarget, IOBluetoothDeviceExpansion.rightClickHoldMode, 
+                       IOBluetoothDeviceExpansion.rightDoubleTap, IOBluetoothDeviceExpansion.secondaryInEar, 
+                       IOBluetoothDeviceExpansion.serviceMask, IOBluetoothDeviceExpansion.singleClickMode, 
+                       IOBluetoothDeviceExpansion.streamingState, IOBluetoothDeviceExpansion.switchControlEnabled, 
+                       IOBluetoothDeviceExpansion.xpcConnection, IOBluetoothDeviceInfoGatherer.expansionData, 
+                       IOBluetoothDeviceInfoGatherer.mATCommandState, IOBluetoothDeviceInfoGatherer.mATCommandTimer, 
+                       IOBluetoothDeviceInfoGatherer.mChannelID, IOBluetoothDeviceInfoGatherer.mDevice, 
+                       IOBluetoothDeviceInfoGatherer.mGetATCommandInfo, IOBluetoothDeviceInfoGatherer.mGetSDPInfo, 
+                       IOBluetoothDeviceInfoGatherer.mInfoGathered, IOBluetoothDeviceInfoGatherer.mLastCommandPtr, 
+                       IOBluetoothDeviceInfoGatherer.mPhoneGMI, IOBluetoothDeviceInfoGatherer.mPhoneGMM, 
+                       IOBluetoothDeviceInfoGatherer.mPhoneIMSI, IOBluetoothDeviceInfoGatherer.mPhoneManufacturer, 
+                       IOBluetoothDeviceInfoGatherer.mPhoneModelNumber, IOBluetoothDeviceInfoGatherer.mPhoneRevisionID, 
+                       IOBluetoothDeviceInfoGatherer.mProgressSelector, IOBluetoothDeviceInfoGatherer.mProgressSelectorTarget, 
+                       IOBluetoothDeviceInfoGatherer.mRFCOMMChannel, IOBluetoothDeviceInquiryCSupportObject._completeCallback, 
                        IOBluetoothDeviceInquiryCSupportObject._deviceFoundCallback, 
                        IOBluetoothDeviceInquiryCSupportObject._deviceNameUpdatedCallback, 
                        IOBluetoothDeviceInquiryCSupportObject._refCon, IOBluetoothDeviceInquiryCSupportObject._startedCallback, 

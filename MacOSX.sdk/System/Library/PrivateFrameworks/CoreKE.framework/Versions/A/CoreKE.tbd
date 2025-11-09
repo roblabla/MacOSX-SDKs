@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           463A6A66-DC22-3C53-80BB-A85ADA33B132
+    value:           97F82C07-A8CF-3760-BAA1-FCB637BCBADB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3EE69CCF-506B-3087-9F26-58E6ADC83D54
+    value:           1125F0DF-583F-34A5-98C3-E604C5650515
 flags:           [ not_app_extension_safe ]
 install-name:    '/System/Library/PrivateFrameworks/CoreKE.framework/CoreKE'
-current-version: 6.12
+current-version: 6.13
 compatibility-version: 1.7
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

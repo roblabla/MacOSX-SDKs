@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0977EDC7-65B8-3C6D-9FFF-45C5FDACB041
+    value:           A1CF8545-1E6E-3BFC-B562-6187653E6C1F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EB00066A-B1A0-3733-9714-3F43B81BD623
+    value:           F58B2924-6B5B-33CA-B022-7CB00046E9C6
 install-name:    '@rpath/AppleMediaServicesUIDynamic.framework/Versions/A/AppleMediaServicesUIDynamic'
 swift-abi-version: 7
 exports:
@@ -76,15 +76,20 @@ exports:
                        '_$s27AppleMediaServicesUIDynamic13SymbolFactoryCfD', '_$s27AppleMediaServicesUIDynamic13SymbolFactoryCfd', 
                        '_$s27AppleMediaServicesUIDynamic14ActionProviderMp', '_$s27AppleMediaServicesUIDynamic14ActionProviderTL', 
                        '_$s27AppleMediaServicesUIDynamic14LayoutProviderMp', '_$s27AppleMediaServicesUIDynamic14LayoutProviderTL', 
-                       '_$s27AppleMediaServicesUIDynamic14MetricsContextC11isAnonymousSbvg', 
-                       '_$s27AppleMediaServicesUIDynamic14MetricsContextC11isAnonymousSbvpMV', 
-                       '_$s27AppleMediaServicesUIDynamic14MetricsContextC11isAnonymousSbvpWvd', 
-                       '_$s27AppleMediaServicesUIDynamic14MetricsContextC7overlaySDySSypGSgvg', 
-                       '_$s27AppleMediaServicesUIDynamic14MetricsContextC7overlaySDySSypGSgvpMV', 
-                       '_$s27AppleMediaServicesUIDynamic14MetricsContextC7overlaySDySSypGSgvpWvd', 
-                       '_$s27AppleMediaServicesUIDynamic14MetricsContextCMa', '_$s27AppleMediaServicesUIDynamic14MetricsContextCMm', 
-                       '_$s27AppleMediaServicesUIDynamic14MetricsContextCMn', '_$s27AppleMediaServicesUIDynamic14MetricsContextCN', 
-                       '_$s27AppleMediaServicesUIDynamic14MetricsContextCfD', '_$s27AppleMediaServicesUIDynamic14MetricsContextCfd', 
+                       '_$s27AppleMediaServicesUIDynamic14MetricsContextV11descriptionSSvg', 
+                       '_$s27AppleMediaServicesUIDynamic14MetricsContextV11descriptionSSvpMV', 
+                       '_$s27AppleMediaServicesUIDynamic14MetricsContextV11isAnonymousSbvg', 
+                       '_$s27AppleMediaServicesUIDynamic14MetricsContextV11isAnonymousSbvpMV', 
+                       '_$s27AppleMediaServicesUIDynamic14MetricsContextV2eeoiySbAC_ACtFZ', 
+                       '_$s27AppleMediaServicesUIDynamic14MetricsContextV4fromACs7Decoder_p_tKcfC', 
+                       '_$s27AppleMediaServicesUIDynamic14MetricsContextV6encode2toys7Encoder_p_tKF', 
+                       '_$s27AppleMediaServicesUIDynamic14MetricsContextV7overlaySDySSypGSgvg', 
+                       '_$s27AppleMediaServicesUIDynamic14MetricsContextV7overlaySDySSypGSgvpMV', 
+                       '_$s27AppleMediaServicesUIDynamic14MetricsContextVMa', '_$s27AppleMediaServicesUIDynamic14MetricsContextVMn', 
+                       '_$s27AppleMediaServicesUIDynamic14MetricsContextVN', '_$s27AppleMediaServicesUIDynamic14MetricsContextVSEAAMc', 
+                       '_$s27AppleMediaServicesUIDynamic14MetricsContextVSQAAMc', 
+                       '_$s27AppleMediaServicesUIDynamic14MetricsContextVSeAAMc', 
+                       '_$s27AppleMediaServicesUIDynamic14MetricsContextVs23CustomStringConvertibleAAMc', 
                        '_$s27AppleMediaServicesUIDynamic14PageDefinitionC22viewControllerProviderySo06NSViewH0CSg9JetEngine10JSONObjectV_AH11JSONContextVAH15BaseObjectGraphCtcvg', 
                        '_$s27AppleMediaServicesUIDynamic14PageDefinitionC22viewControllerProviderySo06NSViewH0CSg9JetEngine10JSONObjectV_AH11JSONContextVAH15BaseObjectGraphCtcvpMV', 
                        '_$s27AppleMediaServicesUIDynamic14PageDefinitionC22viewControllerProviderySo06NSViewH0CSg9JetEngine10JSONObjectV_AH11JSONContextVAH15BaseObjectGraphCtcvpWvd', 
@@ -145,7 +150,7 @@ exports:
                        '_$s27AppleMediaServicesUIDynamic16ActionDefinitionCfD', '_$s27AppleMediaServicesUIDynamic16ActionDefinitionCfd', 
                        '_$s27AppleMediaServicesUIDynamic16AnyComponentCellMp', '_$s27AppleMediaServicesUIDynamic16AnyComponentCellTL', 
                        '_$s27AppleMediaServicesUIDynamic16ArtworkImageViewC010backgroundG0So011AMSUICommonG0Cvpfi', 
-                       '_$s27AppleMediaServicesUIDynamic16ArtworkImageViewC010underlyingfG0So07NSImageG0Cvpfi', 
+                       '_$s27AppleMediaServicesUIDynamic16ArtworkImageViewC010underlyingfG0So011AMSUICommonfG0Cvpfi', 
                        '_$s27AppleMediaServicesUIDynamic16ArtworkImageViewC05wantsE5StyleSbvg', 
                        '_$s27AppleMediaServicesUIDynamic16ArtworkImageViewC05wantsE5StyleSbvpMV', 
                        '_$s27AppleMediaServicesUIDynamic16ArtworkImageViewC06removeE0yyF', 
@@ -242,6 +247,8 @@ exports:
                        '_$s27AppleMediaServicesUIDynamic18DelegateControllerC4view11withContent5frameAA07DynamicI12ViewProtocol_So6NSViewCXcSgSDys11AnyHashableVypG_So6CGRectVtF', 
                        '_$s27AppleMediaServicesUIDynamic18DelegateControllerC4view11withContent5frameAA07DynamicI12ViewProtocol_So6NSViewCXcSgSDys11AnyHashableVypG_So6CGRectVtFTq', 
                        '_$s27AppleMediaServicesUIDynamic18DelegateControllerC8delegate33_77BFDA6BF24B3BB0E335976FA330F283LLAA011DynamicViewfE0_pSgvpfi', 
+                       '_$s27AppleMediaServicesUIDynamic18DelegateControllerC9didFinishyyF', 
+                       '_$s27AppleMediaServicesUIDynamic18DelegateControllerC9didFinishyyFTq', 
                        '_$s27AppleMediaServicesUIDynamic18DelegateControllerCMa', 
                        '_$s27AppleMediaServicesUIDynamic18DelegateControllerCMm', 
                        '_$s27AppleMediaServicesUIDynamic18DelegateControllerCMn', 
@@ -662,15 +669,6 @@ exports:
                        '_$s27AppleMediaServicesUIDynamic7ArtworkC10isPortraitSbvg', 
                        '_$s27AppleMediaServicesUIDynamic7ArtworkC10isPortraitSbvgTq', 
                        '_$s27AppleMediaServicesUIDynamic7ArtworkC10isPortraitSbvpMV', 
-                       '_$s27AppleMediaServicesUIDynamic7ArtworkC11ContentModeO8rawValueAESgSi_tcfC', 
-                       '_$s27AppleMediaServicesUIDynamic7ArtworkC11ContentModeO8rawValueSivg', 
-                       '_$s27AppleMediaServicesUIDynamic7ArtworkC11ContentModeO8rawValueSivpMV', 
-                       '_$s27AppleMediaServicesUIDynamic7ArtworkC11ContentModeOMa', 
-                       '_$s27AppleMediaServicesUIDynamic7ArtworkC11ContentModeOMn', 
-                       '_$s27AppleMediaServicesUIDynamic7ArtworkC11ContentModeON', 
-                       '_$s27AppleMediaServicesUIDynamic7ArtworkC11ContentModeOSHAAMc', 
-                       '_$s27AppleMediaServicesUIDynamic7ArtworkC11ContentModeOSQAAMc', 
-                       '_$s27AppleMediaServicesUIDynamic7ArtworkC11ContentModeOSYAAMc', 
                        '_$s27AppleMediaServicesUIDynamic7ArtworkC11URLTemplateV10makeString17withSubstitutionsSSSDyAE3KeyOSSG_tF', 
                        '_$s27AppleMediaServicesUIDynamic7ArtworkC11URLTemplateV13deserializing5usingAE9JetEngine10JSONObjectV_AH11JSONContextVtKcfC', 
                        '_$s27AppleMediaServicesUIDynamic7ArtworkC11URLTemplateV1loiySbAE_AEtFZ', 
@@ -736,8 +734,8 @@ exports:
                        '_$s27AppleMediaServicesUIDynamic7ArtworkC4CropV17specificRectangleAEvau', 
                        '_$s27AppleMediaServicesUIDynamic7ArtworkC4CropV17specificRectangleAEvgZ', 
                        '_$s27AppleMediaServicesUIDynamic7ArtworkC4CropV17specificRectangleAEvpZ', 
-                       '_$s27AppleMediaServicesUIDynamic7ArtworkC4CropV20preferredContentModeAC0hI0Ovg', 
-                       '_$s27AppleMediaServicesUIDynamic7ArtworkC4CropV20preferredContentModeAC0hI0OvpMV', 
+                       '_$s27AppleMediaServicesUIDynamic7ArtworkC4CropV20preferredContentModeSo020AMSUICommonImageViewhI0Vvg', 
+                       '_$s27AppleMediaServicesUIDynamic7ArtworkC4CropV20preferredContentModeSo020AMSUICommonImageViewhI0VvpMV', 
                        '_$s27AppleMediaServicesUIDynamic7ArtworkC4CropV2ekAEvau', 
                        '_$s27AppleMediaServicesUIDynamic7ArtworkC4CropV2ekAEvgZ', 
                        '_$s27AppleMediaServicesUIDynamic7ArtworkC4CropV2ekAEvpZ', 
@@ -908,7 +906,7 @@ exports:
                        '_$sSo24NSOperationQueuePriorityV27AppleMediaServicesUIDynamicE1loiySbAB_ABtFZ', 
                        '_$sSo24NSOperationQueuePriorityVSL27AppleMediaServicesUIDynamicMc', 
                        '_$sSo6CGSizeV27AppleMediaServicesUIDynamicE6scaledyAB12CoreGraphics7CGFloatVF', 
-                       '_$sSo6CGSizeV27AppleMediaServicesUIDynamicE7fitting_4modeA2B_AC7ArtworkC11ContentModeOtF', 
+                       '_$sSo6CGSizeV27AppleMediaServicesUIDynamicE7fitting_4modeA2B_So31AMSUICommonImageViewContentModeVtF', 
                        '_$sSo6CGSizeV27AppleMediaServicesUIDynamicE8integralABvg', 
                        '_$sSo6CGSizeV27AppleMediaServicesUIDynamicE8integralABvpMV', 
                        '_$sSo7NSColorC27AppleMediaServicesUIDynamicE9hexStringABSgSS_tcfC', 

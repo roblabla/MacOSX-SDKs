@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           180C4793-3AA7-3ABE-A46B-2831D97B6108
+    value:           9E7E794D-D3D9-3EF6-80D3-D6F7EFA3EE5C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9DF63961-F143-3659-9B8E-5952C581D570
+    value:           2D561494-4106-3D9A-B957-E3322B831B91
 install-name:    '/System/Library/PrivateFrameworks/Notes.framework/Versions/A/Notes'
-current-version: 1778
+current-version: 1800
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ AvatarStack.2.preview-thunk, MacUIFrameworkTests, NoteWidgetView.2.preview-thunk, 

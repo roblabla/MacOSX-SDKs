@@ -1,4 +1,4 @@
-/* iig(DriverKit-107.40.8) generated from IOUserHIDEventDriver.iig */
+/* iig(DriverKit-107.60.3) generated from IOUserHIDEventDriver.iig */
 
 /* IOUserHIDEventDriver.iig:1-37 */
 /*
@@ -38,7 +38,7 @@ class IOHIDElement;
 class IOHIDEvent;
 class IOHIDDigitizerCollection;
 
-/* source class IOUserHIDEventDriver IOUserHIDEventDriver.iig:38-311 */
+/* source class IOUserHIDEventDriver IOUserHIDEventDriver.iig:38-341 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -197,6 +197,20 @@ protected:
      * Returns true on success.
      */
     virtual bool parseDigitizerElement(IOHIDElement *element) LOCALONLY;
+
+    /*!
+     * @function parseProximityElement
+     *
+     * @abstract
+     * Parses an element to see if it supports proximity usages.
+     *
+     * @param element
+     * An IOHIDElement object to parse.
+     *
+     * @return
+     * Returns true on success.
+     */
+    virtual bool parseProximityElement(IOHIDElement *element) LOCALONLY;
     
     /*!
      * @function handleKeyboardReport
@@ -277,6 +291,22 @@ protected:
      * The report ID.
      */
     virtual void handleDigitizerReport(uint64_t timestamp, uint32_t reportID) LOCALONLY;
+
+    /*!
+     * @function handleProximityReport
+     *
+     * @abstract
+     * Function called after receiving an input report from the device. Iterates
+     * through proximity elements and dispatches proximity events if the element
+     * value has been updated.
+     *
+     * @param timestamp
+     * The timestamp of the input report.
+     *
+     * @param reportID
+     * The report ID.
+     */
+    virtual void handleProximityReport(uint64_t timestamp, uint32_t reportID) LOCALONLY;
     
     /*!
      * @function createEventForDigitizerCollection
@@ -322,7 +352,7 @@ protected:
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IOUserHIDEventDriver IOUserHIDEventDriver.iig:38-311 */
+/* generated class IOUserHIDEventDriver IOUserHIDEventDriver.iig:38-341 */
 
 
 #define IOUserHIDEventDriver_Start_Args \
@@ -427,6 +457,10 @@ public:\
     parseDigitizerElement(\
         IOHIDElement * element) APPLE_KEXT_OVERRIDE;\
 \
+    virtual bool\
+    parseProximityElement(\
+        IOHIDElement * element) APPLE_KEXT_OVERRIDE;\
+\
     virtual void\
     handleKeyboardReport(\
         uint64_t timestamp,\
@@ -449,6 +483,11 @@ public:\
 \
     virtual void\
     handleDigitizerReport(\
+        uint64_t timestamp,\
+        uint32_t reportID) APPLE_KEXT_OVERRIDE;\
+\
+    virtual void\
+    handleProximityReport(\
         uint64_t timestamp,\
         uint32_t reportID) APPLE_KEXT_OVERRIDE;\
 \
@@ -493,6 +532,9 @@ public:
     virtual bool
     parseDigitizerElement(IOHIDElement * element) = 0;
 
+    virtual bool
+    parseProximityElement(IOHIDElement * element) = 0;
+
     virtual void
     handleKeyboardReport(uint64_t timestamp,
         uint32_t reportID) = 0;
@@ -511,6 +553,10 @@ public:
 
     virtual void
     handleDigitizerReport(uint64_t timestamp,
+        uint32_t reportID) = 0;
+
+    virtual void
+    handleProximityReport(uint64_t timestamp,
         uint32_t reportID) = 0;
 
 };
@@ -546,6 +592,6 @@ public:
 
 #endif /* !__DOCUMENTATION__ */
 
-/* IOUserHIDEventDriver.iig:313- */
+/* IOUserHIDEventDriver.iig:343- */
 
 #endif /* _HIDDRIVERKIT_IOUSERHIDEVENTDRIVER_H */

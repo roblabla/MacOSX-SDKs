@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           46E73456-236E-307D-95D6-E05265689FD1
+    value:           7EA1C552-E90E-3DF6-A5B6-915D26694670
   - target:          x86_64-maccatalyst
-    value:           46E73456-236E-307D-95D6-E05265689FD1
+    value:           7EA1C552-E90E-3DF6-A5B6-915D26694670
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           54FBA3AC-A06F-3A03-A984-1882A7AD50A8
+    value:           0C458B55-BF59-3C0F-983B-3D0AE99DBDD6
   - target:          arm64e-maccatalyst
-    value:           54FBA3AC-A06F-3A03-A984-1882A7AD50A8
+    value:           0C458B55-BF59-3C0F-983B-3D0AE99DBDD6
 install-name:    '/System/Library/PrivateFrameworks/PowerLog.framework/Versions/A/PowerLog'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F653349C-E39C-3D58-BFEA-5DE229889BFF
+    value:           A9704E8E-B575-3AEF-8148-BD5B8325D15D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           07C3EB31-974E-321D-949C-31405A10F518
+    value:           04A314D3-0392-3DCD-AD2D-6C2136849E2A
 install-name:    '/System/Library/PrivateFrameworks/Symptoms.framework/Frameworks/SymptomEvaluator.framework/Versions/A/SymptomEvaluator'
-current-version: 1431.40.36
+current-version: 1431.60.1
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _AlgosPackScore, _AlgosUnpackScore, _CLIPS_BASEBAND_BEDF_MODULE, 

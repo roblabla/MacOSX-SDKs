@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7AA3FE03-B4A1-33E8-802D-9893DB287C0D
+    value:           FAD5A87E-283C-39EE-AFD9-E4FBA9297EEA
   - target:          x86_64-maccatalyst
-    value:           7AA3FE03-B4A1-33E8-802D-9893DB287C0D
+    value:           FAD5A87E-283C-39EE-AFD9-E4FBA9297EEA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B78C5B51-C629-38B8-8A68-430898FB364E
+    value:           3EA93D7B-074D-3481-A7AD-F53B91F0C572
   - target:          arm64e-maccatalyst
-    value:           B78C5B51-C629-38B8-8A68-430898FB364E
+    value:           3EA93D7B-074D-3481-A7AD-F53B91F0C572
 install-name:    '/System/Library/PrivateFrameworks/ParsecModel.framework/Versions/A/ParsecModel'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

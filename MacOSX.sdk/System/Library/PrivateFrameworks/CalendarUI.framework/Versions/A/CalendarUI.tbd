@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0C593BB5-5A5B-3113-B2E1-16DA00B8328A
+    value:           DAE3BE21-1007-3597-A2D5-3357225C2C8D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E3FAE7EE-B192-3549-9B55-0684D0347D4C
+    value:           9C6933C0-4E92-3E06-9063-E6F6DBC3CDD4
 install-name:    '/System/Library/PrivateFrameworks/CalendarUI.framework/Versions/A/CalendarUI'
 current-version: 1063
 exports:

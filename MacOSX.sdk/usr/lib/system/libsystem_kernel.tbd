@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           56FB2A60-782B-3C46-9E2B-EB9DBC411C69
+    value:           C7D4E6AF-4446-3435-8F2C-0F5CCBEF61E9
   - target:          x86_64-maccatalyst
-    value:           56FB2A60-782B-3C46-9E2B-EB9DBC411C69
+    value:           C7D4E6AF-4446-3435-8F2C-0F5CCBEF61E9
   - target:          arm64-macos
-    value:           CE5B3846-3DD2-39EF-B76E-422FDE581D01
+    value:           7795E4F6-7356-31DD-A256-30483E74DD61
   - target:          arm64-maccatalyst
-    value:           CE5B3846-3DD2-39EF-B76E-422FDE581D01
+    value:           7795E4F6-7356-31DD-A256-30483E74DD61
   - target:          arm64e-macos
-    value:           C64A9540-FE3D-31F2-A48F-20CC2AB852E6
+    value:           C860F076-F332-3A67-A7D9-FEDF89124762
   - target:          arm64e-maccatalyst
-    value:           C64A9540-FE3D-31F2-A48F-20CC2AB852E6
+    value:           C860F076-F332-3A67-A7D9-FEDF89124762
 install-name:    '/usr/lib/system/libsystem_kernel.dylib'
-current-version: 7195.41.8
+current-version: 7195.60.74
 parent-umbrella:
   - targets:         [ i386-macos, i386-maccatalyst, x86_64-macos, x86_64-maccatalyst, 
                        arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
@@ -405,14 +405,15 @@ exports:
                        _stackshot_config_set_size_hint, _stat, _stat64, _statfs, 
                        _statfs64, _swapon, _swtch, _swtch_pri, _symlink, _symlinkat, 
                        _sync, _syscall, _syscall_thread_switch, _system_get_sfi_window, 
-                       _system_override, _system_set_sfi_window, _task_assign, _task_assign_default, 
-                       _task_create, _task_create_suid_cred, _task_for_pid, _task_generate_corpse, 
-                       _task_get_assignment, _task_get_dyld_image_infos, _task_get_emulation_vector, 
-                       _task_get_exc_guard_behavior, _task_get_exception_ports, _task_get_mach_voucher, 
-                       _task_get_special_port, _task_get_state, _task_info, _task_inspect, 
-                       _task_inspect_for_pid, _task_map_corpse_info, _task_map_corpse_info_64, 
-                       _task_name_for_pid, _task_policy, _task_policy_get, _task_policy_set, 
-                       _task_purgable_info, _task_read_for_pid, _task_register_dyld_get_process_state, 
+                       _system_override, _system_set_sfi_window, _system_version_compat_mode, 
+                       _task_assign, _task_assign_default, _task_create, _task_create_suid_cred, 
+                       _task_for_pid, _task_generate_corpse, _task_get_assignment, 
+                       _task_get_dyld_image_infos, _task_get_emulation_vector, _task_get_exc_guard_behavior, 
+                       _task_get_exception_ports, _task_get_mach_voucher, _task_get_special_port, 
+                       _task_get_state, _task_info, _task_inspect, _task_inspect_for_pid, 
+                       _task_map_corpse_info, _task_map_corpse_info_64, _task_name_for_pid, 
+                       _task_policy, _task_policy_get, _task_policy_set, _task_purgable_info, 
+                       _task_read_for_pid, _task_register_dyld_get_process_state, 
                        _task_register_dyld_image_infos, _task_register_dyld_set_dyld_state, 
                        _task_register_dyld_shared_cache_image_info, _task_restartable_ranges_register, 
                        _task_restartable_ranges_synchronize, _task_resume, _task_resume2, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E7451227-FD6A-3384-BBD0-23EBC1EAB45B
+    value:           C56AEF0F-11E6-3C48-A88B-8992E10AEFCC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8F13FE2F-84C9-368C-9C33-231AE11D914E
+    value:           A3BCB774-67BB-3865-9688-04677E783128
 install-name:    '/System/Library/PrivateFrameworks/BluetoothServices.framework/Versions/A/BluetoothServices'
 current-version: 0
 compatibility-version: 0

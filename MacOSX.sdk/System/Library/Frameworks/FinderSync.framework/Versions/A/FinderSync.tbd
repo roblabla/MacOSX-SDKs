@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           13798E7E-6FE5-365C-8D95-068F9B875B08
+    value:           BF97E3AB-6240-3702-8D29-10CAA20C6769
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           03FF6863-48DE-33A0-A964-076A81526F51
+    value:           DCB1CAC7-15AB-39C5-8C82-D90287643757
 install-name:    '/System/Library/Frameworks/FinderSync.framework/Versions/A/FinderSync'
 current-version: 0
 exports:

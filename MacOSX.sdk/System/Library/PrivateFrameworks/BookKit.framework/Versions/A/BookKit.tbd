@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           C9086A6D-D674-355A-9243-37B8A50ABAE3
+    value:           B2A767EC-4C0C-3290-AD6D-FD7F59EA9A47
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E350C413-707C-3476-ACF8-70ACF995E739
+    value:           61225FDB-B5F5-3C63-A875-62373EB5FB89
 install-name:    '/System/Library/PrivateFrameworks/BookKit.framework/Versions/A/BookKit'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

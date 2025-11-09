@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           353DC562-ABF9-324F-A812-F193962FA72F
+    value:           53B79035-0802-3E99-AD92-1F866D9A5DED
   - target:          x86_64-maccatalyst
-    value:           353DC562-ABF9-324F-A812-F193962FA72F
+    value:           53B79035-0802-3E99-AD92-1F866D9A5DED
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           22B1D2CA-AEF9-30DD-B90E-48B085C3D7AC
+    value:           6AC4610C-6F0C-3C74-970D-EE2D6513526A
   - target:          arm64e-maccatalyst
-    value:           22B1D2CA-AEF9-30DD-B90E-48B085C3D7AC
+    value:           6AC4610C-6F0C-3C74-970D-EE2D6513526A
 install-name:    '/usr/lib/swift/libswiftCoreLocation.dylib'
 current-version: 5
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftCoreLocation.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftCoreLocation.dylib', 

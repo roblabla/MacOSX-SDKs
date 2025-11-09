@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FEBF7FA1-1053-3341-B797-DC8FE3D8F4B4
+    value:           46F1E4F5-DF8F-32D4-8D0C-6FCF2C27A5CD
   - target:          x86_64-maccatalyst
-    value:           FEBF7FA1-1053-3341-B797-DC8FE3D8F4B4
+    value:           46F1E4F5-DF8F-32D4-8D0C-6FCF2C27A5CD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B1217F52-6AC5-32B4-8BB0-423BB5E1C51A
+    value:           8CC24666-D076-36FD-91F1-C083087D5D51
   - target:          arm64e-maccatalyst
-    value:           B1217F52-6AC5-32B4-8BB0-423BB5E1C51A
+    value:           8CC24666-D076-36FD-91F1-C083087D5D51
 install-name:    '/System/Library/Frameworks/CoreImage.framework/Versions/A/CoreImage'
 current-version: 5
 compatibility-version: 1.0.1
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CIDetectorAccuracy, _CIDetectorAccuracyHigh, _CIDetectorAccuracyLow, 
                        _CIDetectorAspectRatio, _CIDetectorBetterEyeLocs, _CIDetectorDetectDiacritics, 
@@ -109,10 +109,10 @@ exports:
                        _kCIImageAuxiliaryDepth, _kCIImageAuxiliaryDisparity, _kCIImageAuxiliaryHDRGainMap, 
                        _kCIImageAuxiliaryPortraitEffectsMatte, _kCIImageAuxiliarySemanticSegmentationGlassesMatte, 
                        _kCIImageAuxiliarySemanticSegmentationHairMatte, _kCIImageAuxiliarySemanticSegmentationSkinMatte, 
-                       _kCIImageAuxiliarySemanticSegmentationTeethMatte, _kCIImageCacheHint, 
-                       _kCIImageCacheImmediately, _kCIImageClampToEdge, _kCIImageColorSpace, 
-                       _kCIImageEdgeRepeat, _kCIImageEdgesAreClear, _kCIImageFlipped, 
-                       _kCIImageIgnorePixelFormatFor601Fixup, _kCIImageNearestSampling, 
+                       _kCIImageAuxiliarySemanticSegmentationSkyMatte, _kCIImageAuxiliarySemanticSegmentationTeethMatte, 
+                       _kCIImageCacheHint, _kCIImageCacheImmediately, _kCIImageClampToEdge, 
+                       _kCIImageColorSpace, _kCIImageEdgeRepeat, _kCIImageEdgesAreClear, 
+                       _kCIImageFlipped, _kCIImageIgnorePixelFormatFor601Fixup, _kCIImageNearestSampling, 
                        _kCIImageOpaque, _kCIImagePremultiplied, _kCIImageProcessorAllowPartialOutputRegion, 
                        _kCIImageProcessorSynchronizeInputs, _kCIImageProperties, 
                        _kCIImageProviderContentDigest, _kCIImageProviderName, _kCIImageProviderTileSize, 
@@ -123,6 +123,7 @@ exports:
                        _kCIImageRepresentationSemanticSegmentationGlassesMatteImage, 
                        _kCIImageRepresentationSemanticSegmentationHairMatteImage, 
                        _kCIImageRepresentationSemanticSegmentationSkinMatteImage, 
+                       _kCIImageRepresentationSemanticSegmentationSkyMatteImage, 
                        _kCIImageRepresentationSemanticSegmentationTeethMatteImage, 
                        _kCIImageTextScaleFactor, _kCIImageTextureFormat, _kCIImageTextureTarget, 
                        _kCIImageToneMapHDRtoSDR, _kCIImageYCCMatrix, _kCIInputAllowDraftModeKey, 
@@ -136,11 +137,11 @@ exports:
                        _kCIInputEnableEDRModeKey, _kCIInputEnableSharpeningKey, _kCIInputEnableVendorLensCorrectionKey, 
                        _kCIInputExtentKey, _kCIInputGradientImageKey, _kCIInputIgnoreImageOrientationKey, 
                        _kCIInputImageKey, _kCIInputImageOrientationKey, _kCIInputIntensityKey, 
-                       _kCIInputLinearSpaceFilter, _kCIInputLuminanceNoiseReductionAmountKey, 
-                       _kCIInputMaskImageKey, _kCIInputMatteImageKey, _kCIInputMoireAmountKey, 
-                       _kCIInputNeutralChromaticityXKey, _kCIInputNeutralChromaticityYKey, 
-                       _kCIInputNeutralLocationKey, _kCIInputNeutralTemperatureKey, 
-                       _kCIInputNeutralTintKey, _kCIInputNoiseReductionAmountKey, 
+                       _kCIInputLinearSpaceFilter, _kCIInputLocalToneMapAmountKey, 
+                       _kCIInputLuminanceNoiseReductionAmountKey, _kCIInputMaskImageKey, 
+                       _kCIInputMatteImageKey, _kCIInputMoireAmountKey, _kCIInputNeutralChromaticityXKey, 
+                       _kCIInputNeutralChromaticityYKey, _kCIInputNeutralLocationKey, 
+                       _kCIInputNeutralTemperatureKey, _kCIInputNeutralTintKey, _kCIInputNoiseReductionAmountKey, 
                        _kCIInputNoiseReductionContrastAmountKey, _kCIInputNoiseReductionDetailAmountKey, 
                        _kCIInputNoiseReductionSharpnessAmountKey, _kCIInputRadiusKey, 
                        _kCIInputRefractionKey, _kCIInputSaturationKey, _kCIInputScaleFactorKey, 
@@ -197,7 +198,7 @@ exports:
                        CIRectangleFeature.topLeft, CIRectangleFeature.topRight, CIRenderDestination._priv, 
                        CIRenderInfo._priv, CIRenderTask._priv, CISampler._priv, CIVector._count, 
                        CIVector._u ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ '$ld$install_name$os10.10$/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore', 
                        '$ld$install_name$os10.11$/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore', 
                        '$ld$install_name$os10.4$/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore', 

@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           3724074A-BDFD-3899-9CB2-C2823286DBED
+    value:           D6A592DE-2C02-3574-9FC6-D465E13183D3
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           61FA56B5-CAE5-31CB-AF0A-301AB2EBCD4B
+    value:           F97DE0F4-A67A-3E54-8E2D-632DD19FF68E
 install-name:    '/System/iOSSupport/System/Library/Frameworks/HomeKit.framework/Versions/A/HomeKit'
-current-version: 714.2.17
+current-version: 714.3.25
 exports:
-  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _HMAccessControlUserCodingKey, _HMAccessoryAddControlTargetsMessageKey, 
                        _HMAccessoryAllowedHostAddressesCodingKey, _HMAccessoryAllowedHostNameCodingKey, 
                        _HMAccessoryAllowedHostPurposeAsString, _HMAccessoryAllowedHostPurposeCodingKey, 
@@ -60,7 +60,9 @@ exports:
                        _HMAccessoryNetworkProtectionGroupUUIDMessageKey, _HMAccessoryNetworkProtectionModeAsString, 
                        _HMAccessoryNetworkProtectionSupportCodingKey, _HMAccessoryPairingIdentityCodingKey, 
                        _HMAccessoryPairingIdentityIncludePrivateKeyMessageKey, _HMAccessoryPairingIdentityRequestMessage, 
-                       _HMAccessoryPairingIdentityUpdatedNotification, _HMAccessoryProtectionGroupUUIDCodingKey, 
+                       _HMAccessoryPairingIdentityUpdatedNotification, _HMAccessoryPreferredMediaUserCodingKey, 
+                       _HMAccessoryPreferredMediaUserIsAutomaticMessageKey, _HMAccessoryPreferredMediaUserSelectionTypeMessageKey, 
+                       _HMAccessoryPreferredUserSelectionTypeCodingKey, _HMAccessoryProtectionGroupUUIDCodingKey, 
                        _HMAccessoryReachableTransportsMessageKey, _HMAccessoryRemoteLoginCodingKey, 
                        _HMAccessoryRemoveControlTargetsMessageKey, _HMAccessoryResetControlTargetsMessageKey, 
                        _HMAccessoryRootSettingsCodingKey, _HMAccessoryRootSettingsMessageKey, 
@@ -91,17 +93,18 @@ exports:
                        _HMAccessorySupportsAnnounceCodingKey, _HMAccessorySupportsCompanionInitiatedRestartCodingKey, 
                        _HMAccessorySupportsDoorbellChimeCodingKey, _HMAccessorySupportsIdentifyCodingKey, 
                        _HMAccessorySupportsMediaAccessControlCodingKey, _HMAccessorySupportsMusicAlarmCodingKey, 
-                       _HMAccessorySymptomsHandlerUpdatedMessage, _HMAccessoryTargetControlSupportCodingKey, 
-                       _HMAccessoryTargetControlSupportMessageKey, _HMAccessoryTargetControlUpdatedMessage, 
-                       _HMAccessoryTargetControllerHardwareSupportCodingKey, _HMAccessoryTargetControllerHardwareSupportMessageKey, 
-                       _HMAccessoryTargetControllerSupportCodingKey, _HMAccessoryTargetControllerSupportMessageKey, 
-                       _HMAccessoryTargetNetworkProtectionModeCodingKey, _HMAccessoryTransportTypesToString, 
-                       _HMAccessoryTriggerPairingIdentityUpdatedNotificationRequest, 
-                       _HMAccessoryUpdateControlTargetsMessageKey, _HMAccessoryWiFiCredentialTypeAsString, 
-                       _HMAccessoryWiFiCredentialTypeCodingKey, _HMAccessoryWiFiNetworkInfoCodingKey, 
-                       _HMAccessoryWiFiReconfigurationSupportCodingKey, _HMAccessorysupportsThirdPartyMusicCodingKey, 
-                       _HMActionSetNameKeyHomeArrival, _HMActionSetNameKeyHomeDeparture, 
-                       _HMActionSetNameKeySleep, _HMActionSetNameKeyWakeUp, _HMActionSetSerializedDataKey, 
+                       _HMAccessorySupportsPreferredMediaUserCodingKey, _HMAccessorySymptomsHandlerUpdatedMessage, 
+                       _HMAccessoryTargetControlSupportCodingKey, _HMAccessoryTargetControlSupportMessageKey, 
+                       _HMAccessoryTargetControlUpdatedMessage, _HMAccessoryTargetControllerHardwareSupportCodingKey, 
+                       _HMAccessoryTargetControllerHardwareSupportMessageKey, _HMAccessoryTargetControllerSupportCodingKey, 
+                       _HMAccessoryTargetControllerSupportMessageKey, _HMAccessoryTargetNetworkProtectionModeCodingKey, 
+                       _HMAccessoryTransportTypesToString, _HMAccessoryTriggerPairingIdentityUpdatedNotificationRequest, 
+                       _HMAccessoryUpdateControlTargetsMessageKey, _HMAccessoryUpdatePreferredMediaUserRequestMessage, 
+                       _HMAccessoryWiFiCredentialTypeAsString, _HMAccessoryWiFiCredentialTypeCodingKey, 
+                       _HMAccessoryWiFiNetworkInfoCodingKey, _HMAccessoryWiFiReconfigurationSupportCodingKey, 
+                       _HMAccessorysupportsThirdPartyMusicCodingKey, _HMActionSetNameKeyHomeArrival, 
+                       _HMActionSetNameKeyHomeDeparture, _HMActionSetNameKeySleep, 
+                       _HMActionSetNameKeyWakeUp, _HMActionSetSerializedDataKey, 
                        _HMActionSetSerializedDictionaryProtocolKey, _HMActionSetSerializedDictionaryProtocolProtoBuf, 
                        _HMActionSetSerializedDictionaryVersionKey, _HMActionSetSerializedDictionaryVersion_1_0, 
                        _HMActionSetShortcutsActionsCodingKey, _HMActionSetTypeHomeArrival, 

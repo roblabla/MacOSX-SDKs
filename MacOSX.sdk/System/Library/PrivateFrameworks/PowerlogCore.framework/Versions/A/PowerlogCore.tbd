@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EFCB7549-D982-3F82-8919-A65CD57E0337
+    value:           74197228-8351-3F24-927A-E3B5EE243703
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C7168028-919C-3AE8-9D8A-5228E675E6EE
+    value:           95A29729-E14B-3A43-ACED-4D1F05FC7ECB
 install-name:    '/System/Library/PrivateFrameworks/PowerlogCore.framework/Versions/A/PowerlogCore'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -98,7 +98,7 @@ exports:
                        _kPLMav16, _kPLMav16B, _kPLMav2, _kPLMav4, _kPLMav5, _kPLMav7, 
                        _kPLMemoryPressureNotification, _kPLSQLiteConnectionKeySchemaVersions, 
                        _kPLSQLiteConnectionKeyTableName, _kPLSQLiteConnectionTableSchemaVersions, 
-                       _kPLSatteliteProcessSemaphore, _kPLStorageDefaultsEnabled, 
+                       _kPLSaltBundleID, _kPLSatteliteProcessSemaphore, _kPLStorageDefaultsEnabled, 
                        _kPLStorageEventForwardActivityStates, _kPLStorageEventForwardActivityStatesActivityID, 
                        _kPLStorageEventForwardActivityStatesState, _kPLStorageEventForwardConfiguration, 
                        _kPLStorageEventForwardSchemaChange, _kPLStorageEventForwardSchemaChangeCurrentVersion, 

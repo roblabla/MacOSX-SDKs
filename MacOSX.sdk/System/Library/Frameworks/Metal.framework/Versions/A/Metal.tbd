@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D67B7877-602D-3AEB-BD78-4E6CDCABC769
+    value:           413B81AE-653F-3CF7-B5A4-A4391436E6D1
   - target:          x86_64-maccatalyst
-    value:           D67B7877-602D-3AEB-BD78-4E6CDCABC769
+    value:           413B81AE-653F-3CF7-B5A4-A4391436E6D1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E06F3F82-16D5-3BBF-B680-AAD23E3C4C92
+    value:           3184F3A5-FDB4-3D75-BA6E-DA1EB8BCF867
   - target:          arm64e-maccatalyst
-    value:           E06F3F82-16D5-3BBF-B680-AAD23E3C4C92
+    value:           3184F3A5-FDB4-3D75-BA6E-DA1EB8BCF867
 install-name:    '/System/Library/Frameworks/Metal.framework/Versions/A/Metal'
-current-version: 244.32.6
+current-version: 244.32.7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _MTLAddDevice, _MTLAddDeviceClass, _MTLAddMessageObserver, 
                        _MTLBVHDescriptorForMTLAccelerationStructureDescriptor, _MTLBinaryArchiveDomain, 

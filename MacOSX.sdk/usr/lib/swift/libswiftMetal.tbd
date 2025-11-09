@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E1BCD76B-E8D8-3A6C-8446-ACD327F8D672
+    value:           24B7851E-1439-3184-96EF-2780602A61E4
   - target:          x86_64-maccatalyst
-    value:           E1BCD76B-E8D8-3A6C-8446-ACD327F8D672
+    value:           24B7851E-1439-3184-96EF-2780602A61E4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3CF007A9-4B9B-3072-AEFD-36C401F32B82
+    value:           D42946BC-C1F2-3552-AE9B-FB2E7EA8DC18
   - target:          arm64e-maccatalyst
-    value:           3CF007A9-4B9B-3072-AEFD-36C401F32B82
+    value:           D42946BC-C1F2-3552-AE9B-FB2E7EA8DC18
 install-name:    '/usr/lib/swift/libswiftMetal.dylib'
 current-version: 1.3.1
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftMetal.dylib', '$ld$install_name$os10.11$@rpath/libswiftMetal.dylib', 
                        '$ld$install_name$os10.12$@rpath/libswiftMetal.dylib', '$ld$install_name$os10.13$@rpath/libswiftMetal.dylib', 

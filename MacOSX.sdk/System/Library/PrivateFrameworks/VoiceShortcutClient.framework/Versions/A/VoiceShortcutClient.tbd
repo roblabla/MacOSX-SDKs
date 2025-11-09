@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           93866FCF-2DCD-3D03-929A-784B02DDE193
+    value:           FD3B78BF-A211-3D89-95A1-C195BECF5BA0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DD6A8B38-E959-3A56-A11D-813D04A37CCD
+    value:           5BF97CA9-064F-3A88-9D0F-88AE5911620C
 install-name:    '/System/Library/PrivateFrameworks/VoiceShortcutClient.framework/Versions/A/VoiceShortcutClient'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -26,8 +26,8 @@ exports:
                        _VCBundleIdentifierShortcutsWidgetConfigurationExtension, 
                        _VCBundleIdentifierShortcutsiOS, _VCBundleIdentifierShortcutsiOSAppStore, 
                        _VCBundleIdentifierSidecar, _VCBundleIdentifierSiri, _VCBundleIdentifierSpotlight, 
-                       _VCBundleIdentifierTV, _VCBundleIdentifierVoiceMemos, _VCBundleIdentifierWallet, 
-                       _VCBundleIdentifierWeather, _VCBundleIdentifieriTunesStore, 
+                       _VCBundleIdentifierSpringBoard, _VCBundleIdentifierTV, _VCBundleIdentifierVoiceMemos, 
+                       _VCBundleIdentifierWallet, _VCBundleIdentifierWeather, _VCBundleIdentifieriTunesStore, 
                        _VCCKAccountAddedNotification, _VCCKAccountModifiedNotification, 
                        _VCCurrentPlatformShortcutsAppBundleIdentifier, _VCCurrentPlatformShortcutsRemovalServiceBundleIdentifier, 
                        _VCDKQuerySourceId, _VCDeviceHasBeenUnlocked, _VCFileProviderNonUIExtensionPointName, 
@@ -47,11 +47,12 @@ exports:
                        _VCVoiceShortcutKeyShortcutDescription, _VCVoiceShortcutKeyShortcutName, 
                        _VCVoiceShortcutManagerXPCInterface, _VCVoiceShortcutManagerXPCInterfaceMachServiceName, 
                        _VCVoiceShortcutsErrorDomain, _VoiceShortcutClientVersionNumber, 
-                       _VoiceShortcutClientVersionString, _WFColorErrorDomain, _WFDatabaseChangedNotification, 
-                       _WFDialogNotificationCategoryIdentifier, _WFDialogNotificationConfirmationCategoryIdentifier, 
-                       _WFHumanReadableNameForWorkflowType, _WFLocalizedAllShortcutsString, 
-                       _WFViewServiceDismissalReasonNotification, _WFViewServiceDismissalReasonSystemCancelled, 
-                       _WFViewServiceDismissalReasonUserCancelled, _WFViewServiceDismissalReasonUserCancelledWithHomeButton, 
+                       _VoiceShortcutClientVersionString, _WFColorErrorDomain, _WFContextualActionDescribeSurface, 
+                       _WFDatabaseChangedNotification, _WFDialogNotificationCategoryIdentifier, 
+                       _WFDialogNotificationConfirmationCategoryIdentifier, _WFHumanReadableNameForWorkflowType, 
+                       _WFLocalizedAllShortcutsString, _WFViewServiceDismissalReasonNotification, 
+                       _WFViewServiceDismissalReasonSystemCancelled, _WFViewServiceDismissalReasonUserCancelled, 
+                       _WFViewServiceDismissalReasonUserCancelledWithHomeButton, 
                        _WFWorkflowControllerRunningStateKey, _WFWorkflowRunSourceAccessibilityMagicTap, 
                        _WFWorkflowRunSourceActionExtension, _WFWorkflowRunSourceActionExtensionDrag, 
                        _WFWorkflowRunSourceActionExtensionHandoff, _WFWorkflowRunSourceAutomaticCollection, 
@@ -82,11 +83,12 @@ exports:
                        VCUserActivityDonation, VCUserActivityDonationFetcher, VCVoiceShortcut, 
                        VCVoiceShortcutClient, VCWidgetWorkflow, WFAccessibilityWorkflow, 
                        WFAccessibilityWorkflowRunnerClient, WFActionExtensionWorkflowRunnerClient, 
-                       WFColor, WFCoreDataChangeNotification, WFCoreDataObjectChange, 
-                       WFCoreDataResultState, WFDatabaseObjectDescriptor, WFGradient, 
-                       WFINShortcutRunDescriptor, WFObservableArrayResult, WFObservableObjectResult, 
-                       WFObservableResult, WFRemoteImageDrawingContext, WFShareSheetWorkflow, 
-                       WFSingleConnectionXPCListener, WFSleepWorkflowRunnerClient, 
+                       WFColor, WFContextualAction, WFContextualActionEvent, WFCoreDataChangeNotification, 
+                       WFCoreDataObjectChange, WFCoreDataResultState, WFDatabaseObjectDescriptor, 
+                       WFGradient, WFINShortcutRunDescriptor, WFObservableArrayResult, 
+                       WFObservableObjectResult, WFObservableResult, WFRemoteImageDrawingContext, 
+                       WFShareSheetWorkflow, WFSingleConnectionXPCListener, WFSleepWorkflowRunnerClient, 
+                       WFSpringBoardWebClipMetadata, WFSpringBoardWorkflowRunnerClient, 
                        WFSuggestionsWorkflowRunnerClient, WFWidgetWorkflowRunnerClient, 
                        WFWorkflowDatabaseRunDescriptor, WFWorkflowDescriptor, WFWorkflowQuery, 
                        WFWorkflowRunDescriptor, WFWorkflowRunRequest, WFWorkflowRunnerClient, 

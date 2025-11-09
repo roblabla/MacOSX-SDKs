@@ -4,25 +4,25 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           98BABDE6-3EE4-30FF-BEA9-24FF7792226C
+    value:           4F17F219-CEFF-3BD5-ACC9-3D6CDF55520D
   - target:          x86_64-maccatalyst
-    value:           98BABDE6-3EE4-30FF-BEA9-24FF7792226C
+    value:           4F17F219-CEFF-3BD5-ACC9-3D6CDF55520D
   - target:          x86_64h-macos
-    value:           1199A150-ABAF-30D1-B37E-9F8F15E00929
+    value:           45B8B821-8EB6-34FE-92E9-5CBA474499E2
   - target:          x86_64h-maccatalyst
-    value:           1199A150-ABAF-30D1-B37E-9F8F15E00929
+    value:           45B8B821-8EB6-34FE-92E9-5CBA474499E2
   - target:          arm64-macos
-    value:           A46D52C3-DE71-334E-9224-D9E660C55074
+    value:           4022FAA9-F28D-3592-A06C-8537691FA96B
   - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
+    value:           4022FAA9-F28D-3592-A06C-8537691FA96B
   - target:          arm64e-macos
-    value:           99F0D2AF-07E0-3E2F-8020-D4F7B4562A9B
+    value:           A01701F6-D89C-3E89-B429-79DB81426F12
   - target:          arm64e-maccatalyst
-    value:           99F0D2AF-07E0-3E2F-8020-D4F7B4562A9B
+    value:           A01701F6-D89C-3E89-B429-79DB81426F12
 install-name:    '/usr/lib/libcompression.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos, x86_64h-macos, x86_64-maccatalyst, 
-                       x86_64h-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ arm64-macos, x86_64-macos, arm64e-macos, x86_64h-macos, x86_64-maccatalyst, 
+                       x86_64h-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _compression_decode_buffer, _compression_decode_scratch_buffer_size, 
                        _compression_encode_buffer, _compression_encode_scratch_buffer_size, 
                        _compression_stream_destroy, _compression_stream_get_decode_state_size, 

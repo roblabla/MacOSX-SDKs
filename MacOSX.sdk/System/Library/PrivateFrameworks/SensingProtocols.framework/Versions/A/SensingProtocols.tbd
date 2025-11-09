@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2BDA5980-4E7C-3EE4-9346-CDA295E29DD3
+    value:           C06D68E3-1161-3C64-AA36-42626D971746
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           99ABAA49-E2B1-374E-BCF6-69645A1B9273
+    value:           1EACD502-7953-38A8-824C-621AE2776F9C
 install-name:    '/System/Library/PrivateFrameworks/SensingProtocols.framework/Versions/A/SensingProtocols'
 current-version: 4
 exports:

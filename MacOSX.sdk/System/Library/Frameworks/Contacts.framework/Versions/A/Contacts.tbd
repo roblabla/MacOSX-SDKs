@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F250E8CD-EE87-3AA1-8912-9E2D2E5DCB31
+    value:           D21B1094-DE5F-3556-8DF0-51E8BEBC6215
   - target:          x86_64-maccatalyst
-    value:           F250E8CD-EE87-3AA1-8912-9E2D2E5DCB31
+    value:           D21B1094-DE5F-3556-8DF0-51E8BEBC6215
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2E2F8380-6978-31DF-94AB-E99C8998AE66
+    value:           6B53F552-494F-387B-80D4-E85507755167
   - target:          arm64e-maccatalyst
-    value:           2E2F8380-6978-31DF-94AB-E99C8998AE66
+    value:           6B53F552-494F-387B-80D4-E85507755167
 install-name:    '/System/Library/Frameworks/Contacts.framework/Versions/A/Contacts'
-current-version: 3497.1
+current-version: 3497.3
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -208,25 +208,26 @@ exports:
                        _CNLabelContactRelationYoungerSiblingInLaw, _CNLabelContactRelationYoungerSister, 
                        _CNLabelContactRelationYoungerSisterInLaw, _CNLabelContactRelationYoungestBrother, 
                        _CNLabelContactRelationYoungestSister, _CNLabelDateAnniversary, 
-                       _CNLabelEmailiCloud, _CNLabelHome, _CNLabelOther, _CNLabelPhoneNumberAssistant, 
-                       _CNLabelPhoneNumberCallback, _CNLabelPhoneNumberCar, _CNLabelPhoneNumberCompanyMain, 
-                       _CNLabelPhoneNumberHomeFax, _CNLabelPhoneNumberISDN, _CNLabelPhoneNumberMain, 
-                       _CNLabelPhoneNumberMobile, _CNLabelPhoneNumberOtherFax, _CNLabelPhoneNumberPager, 
-                       _CNLabelPhoneNumberRadio, _CNLabelPhoneNumberTTY, _CNLabelPhoneNumberTelex, 
-                       _CNLabelPhoneNumberWorkFax, _CNLabelPhoneNumberiPhone, _CNLabelSchool, 
-                       _CNLabelURLAddressHomePage, _CNLabelWork, _CNLabeledValueInvalidIOSIdentifier, 
-                       _CNLinkedContactsIdentifiersPboardType, _CNLinkedOnOrAfter, 
-                       _CNLinkedOnOrAfterSimulateLinkedBefore, _CNMatchInfoExcerptEmphasisAttributeName, 
-                       _CNNotificationOriginatedExternally, _CNNotificationSaveIdentifiers, 
-                       _CNNotificationSources, _CNOtherLabel, _CNPhoneAssistantLabel, 
-                       _CNPhoneCarLabel, _CNPhoneCompanyMainLabel, _CNPhoneHomeFaxLabel, 
-                       _CNPhoneIPhoneLabel, _CNPhoneMainLabel, _CNPhoneMobileLabel, 
-                       _CNPhoneNumberCountryCodeKey, _CNPhoneNumberDigitsKey, _CNPhoneNumberStringValueKey, 
-                       _CNPhonePagerLabel, _CNPhoneRadioLabel, _CNPhoneWorkFaxLabel, 
-                       _CNPostalAddressCityKey, _CNPostalAddressCountryKey, _CNPostalAddressFormattedAddressKey, 
-                       _CNPostalAddressISOCountryCodeKey, _CNPostalAddressLocalizedPropertyNameAttribute, 
-                       _CNPostalAddressPostalCodeKey, _CNPostalAddressPropertyAttribute, 
-                       _CNPostalAddressStateKey, _CNPostalAddressStreetKey, _CNPostalAddressSubAdministrativeAreaKey, 
+                       _CNLabelEmailiCloud, _CNLabelHome, _CNLabelOther, _CNLabelPhoneNumberAppleWatch, 
+                       _CNLabelPhoneNumberAssistant, _CNLabelPhoneNumberCallback, 
+                       _CNLabelPhoneNumberCar, _CNLabelPhoneNumberCompanyMain, _CNLabelPhoneNumberHomeFax, 
+                       _CNLabelPhoneNumberISDN, _CNLabelPhoneNumberMain, _CNLabelPhoneNumberMobile, 
+                       _CNLabelPhoneNumberOtherFax, _CNLabelPhoneNumberPager, _CNLabelPhoneNumberRadio, 
+                       _CNLabelPhoneNumberTTY, _CNLabelPhoneNumberTelex, _CNLabelPhoneNumberWorkFax, 
+                       _CNLabelPhoneNumberiPhone, _CNLabelSchool, _CNLabelURLAddressHomePage, 
+                       _CNLabelWork, _CNLabeledValueInvalidIOSIdentifier, _CNLinkedContactsIdentifiersPboardType, 
+                       _CNLinkedOnOrAfter, _CNLinkedOnOrAfterSimulateLinkedBefore, 
+                       _CNMatchInfoExcerptEmphasisAttributeName, _CNNotificationOriginatedExternally, 
+                       _CNNotificationSaveIdentifiers, _CNNotificationSources, _CNOtherLabel, 
+                       _CNPhoneAssistantLabel, _CNPhoneCarLabel, _CNPhoneCompanyMainLabel, 
+                       _CNPhoneHomeFaxLabel, _CNPhoneIPhoneLabel, _CNPhoneMainLabel, 
+                       _CNPhoneMobileLabel, _CNPhoneNumberCountryCodeKey, _CNPhoneNumberDigitsKey, 
+                       _CNPhoneNumberStringValueKey, _CNPhonePagerLabel, _CNPhoneRadioLabel, 
+                       _CNPhoneWorkFaxLabel, _CNPostalAddressCityKey, _CNPostalAddressCountryKey, 
+                       _CNPostalAddressFormattedAddressKey, _CNPostalAddressISOCountryCodeKey, 
+                       _CNPostalAddressLocalizedPropertyNameAttribute, _CNPostalAddressPostalCodeKey, 
+                       _CNPostalAddressPropertyAttribute, _CNPostalAddressStateKey, 
+                       _CNPostalAddressStreetKey, _CNPostalAddressSubAdministrativeAreaKey, 
                        _CNPostalAddressSubLocalityKey, _CNReputationStoreDefaultTimeout, 
                        _CNSocialProfileBundleIdentifiersKey, _CNSocialProfileDisplayNameKey, 
                        _CNSocialProfileServiceFacebook, _CNSocialProfileServiceFlickr, 

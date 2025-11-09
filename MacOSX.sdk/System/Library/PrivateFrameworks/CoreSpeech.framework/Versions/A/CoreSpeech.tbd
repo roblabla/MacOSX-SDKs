@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CE408D86-03F1-3592-81D1-808479D9F215
+    value:           FC694CD8-E69E-3B62-B84C-886404065832
   - target:          x86_64-maccatalyst
-    value:           CE408D86-03F1-3592-81D1-808479D9F215
+    value:           FC694CD8-E69E-3B62-B84C-886404065832
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           93A9658A-29FF-3298-9223-3473B3DE208B
+    value:           8FA94C26-9449-363C-A0D5-2BFA0B2F02C9
   - target:          arm64e-maccatalyst
-    value:           93A9658A-29FF-3298-9223-3473B3DE208B
+    value:           8FA94C26-9449-363C-A0D5-2BFA0B2F02C9
 install-name:    '/System/Library/PrivateFrameworks/CoreSpeech.framework/Versions/A/CoreSpeech'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

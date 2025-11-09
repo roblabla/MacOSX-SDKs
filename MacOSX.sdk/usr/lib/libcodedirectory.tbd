@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           02922171-8AD2-3BCE-824B-A5722BF79948
+    value:           9A1DB259-4C47-3652-BA55-2002C3CDA51E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7DDA5B4F-0C40-3481-8E53-C7371D4AB417
+    value:           294FB547-FE66-3E90-8C52-49BFAB7E7AED
 install-name:    '/usr/lib/libcodedirectory.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _libcd_add_raw_blob_no_copy, _libcd_add_signature_space, _libcd_add_sslot_data_no_copy, 
                        _libcd_cd_size, _libcd_create, _libcd_free, _libcd_get_cdhash_for_type, 
                        _libcd_get_input_func_ctx, _libcd_get_output_func_ctx, _libcd_is_blob_a_linker_signature, 

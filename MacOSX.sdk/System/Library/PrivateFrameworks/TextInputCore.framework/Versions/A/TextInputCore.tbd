@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           06F78E3D-D21F-33BC-AD6E-4B1AD9604094
+    value:           99D6ADE3-6AB5-3931-9E5F-802F85608B71
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           49F01BA4-9160-3F97-BBCC-0E5787F97619
+    value:           29A60FBB-F14F-30D3-A9B6-76D27BA233F6
 install-name:    '/System/Library/PrivateFrameworks/TextInputCore.framework/Versions/A/TextInputCore'
 exports:
   - targets:         [ x86_64-macos ]
@@ -320,7 +320,7 @@ exports:
                        __ZN2KB13LanguageModel17synchronized_loadEv, __ZN2KB13LanguageModel18get_phrase_lexiconEv, 
                        __ZN2KB13LanguageModel19parametersABTestingEv, __ZN2KB13LanguageModel19perform_maintenanceEU13block_pointerFvvE, 
                        __ZN2KB13LanguageModel19remove_dynamic_wordERKNS_6StringEj, 
-                       __ZN2KB13LanguageModel21create_implementationEPK10__CFLocalePK9__CFArrayPK10__CFStringS9_PK14__CFDictionaryb, 
+                       __ZN2KB13LanguageModel21create_implementationEPK10__CFLocalePK9__CFArrayPK10__CFStringS9_PK14__CFDictionarybb, 
                        __ZN2KB13LanguageModel21find_vocabulary_wordsEPK10__CFStringRKNS_6StringERKNSt3__16vectorINS_4WordENS7_9allocatorIS9_EEEERSC_, 
                        __ZN2KB13LanguageModel21get_shared_vocabularyEv, __ZN2KB13LanguageModel22find_token_id_for_wordEPK10__CFStringRKN3WTF6RefPtrINS_19DictionaryContainerEEERKNS_20LanguageModelContextEjPK10__CFLocaleRNS_6StringERb, 
                        __ZN2KB13LanguageModel24background_loading_queueEv, __ZN2KB13LanguageModel26select_token_id_from_wordsERKNSt3__16vectorINS_4WordENS1_9allocatorIS3_EEEEPK10__CFStringRKNS_6StringERKNS_20LanguageModelContextEjbRSC_, 
@@ -367,7 +367,7 @@ exports:
                        __ZN2KB16LanguageModelStr23PredictionEnumeratorStrC2ERKS0_RKNS_20LanguageModelContextEj, 
                        __ZN2KB16LanguageModelStr26register_negative_evidenceERKNS_6StringE9TITokenIDRKNS_20LanguageModelContextEPS4_22TINegativeLearningHint, 
                        __ZN2KB16LanguageModelStr26start_session_with_contextEPK10__CFStringPK14__CFDictionary, 
-                       __ZN2KB16LanguageModelStr4loadEv, __ZN2KB16LanguageModelStrC1EPK10__CFLocalePK9__CFArrayPK10__CFStringS9_PK14__CFDictionaryb, 
+                       __ZN2KB16LanguageModelStr4loadEb, __ZN2KB16LanguageModelStrC1EPK10__CFLocalePK9__CFArrayPK10__CFStringS9_PK14__CFDictionaryb, 
                        __ZN2KB16LanguageModelStrC2EPK10__CFLocalePK9__CFArrayPK10__CFStringS9_PK14__CFDictionaryb, 
                        __ZN2KB16LanguageModelStrD0Ev, __ZN2KB16LanguageModelStrD1Ev, 
                        __ZN2KB16LanguageModelStrD2Ev, __ZN2KB16LexiconIDManager13id_for_localeERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE, 
@@ -429,7 +429,7 @@ exports:
                        __ZN2KB17LanguageModelImpl28clear_dynamic_learning_cacheEv, 
                        __ZN2KB17LanguageModelImpl29_set_impl_context_under_mutexEPvPK10__CFStringPK14__CFDictionary, 
                        __ZN2KB17LanguageModelImpl38record_usage_with_differential_privacyEPK10__CFStringj15DPReportingType, 
-                       __ZN2KB17LanguageModelImpl4loadEv, __ZN2KB17LanguageModelImpl8do_storeEb, 
+                       __ZN2KB17LanguageModelImpl4loadEb, __ZN2KB17LanguageModelImpl8do_storeEb, 
                        __ZN2KB17LanguageModelImplC1EPK10__CFLocalePK9__CFArrayPK10__CFStringS9_PK14__CFDictionaryb, 
                        __ZN2KB17LanguageModelImplC2EPK10__CFLocalePK9__CFArrayPK10__CFStringS9_PK14__CFDictionaryb, 
                        __ZN2KB17LanguageModelImplD0Ev, __ZN2KB17LanguageModelImplD1Ev, 
@@ -482,7 +482,7 @@ exports:
                        __ZN2KB21LanguageModelImplStub26k_default_dynamic_id_rangeE, 
                        __ZN2KB21LanguageModelImplStub26register_negative_evidenceERKNS_6StringE9TITokenIDRKNS_20LanguageModelContextEPS4_22TINegativeLearningHint, 
                        __ZN2KB21LanguageModelImplStub27get_or_create_shared_handleERKNS_6StringES3_, 
-                       __ZN2KB21LanguageModelImplStub4loadEv, __ZN2KB21LanguageModelImplStub8do_storeEb, 
+                       __ZN2KB21LanguageModelImplStub4loadEb, __ZN2KB21LanguageModelImplStub8do_storeEb, 
                        __ZN2KB21LanguageModelImplStubC1EPK10__CFLocalePK9__CFArrayPK10__CFStringS9_PK14__CFDictionary, 
                        __ZN2KB21LanguageModelImplStubC2EPK10__CFLocalePK9__CFArrayPK10__CFStringS9_PK14__CFDictionary, 
                        __ZN2KB21LanguageModelImplStubD0Ev, __ZN2KB21LanguageModelImplStubD1Ev, 
@@ -529,7 +529,7 @@ exports:
                        __ZN2KB22LanguageModelContainer29PredictionEnumeratorContainerC2ERKS0_RKNS_20LanguageModelContextEj, 
                        __ZN2KB22LanguageModelContainer29set_lexicon_prior_probabilityEjf, 
                        __ZN2KB22LanguageModelContainer38record_usage_with_differential_privacyEPK10__CFStringj15DPReportingType, 
-                       __ZN2KB22LanguageModelContainer4loadEv, __ZN2KB22LanguageModelContainer8do_storeEb, 
+                       __ZN2KB22LanguageModelContainer4loadEb, __ZN2KB22LanguageModelContainer8do_storeEb, 
                        __ZN2KB22LanguageModelContainerC1ERKNSt3__16vectorINS1_10shared_ptrINS_13LanguageModelEEENS1_9allocatorIS5_EEEERKNS2_IfNS6_IfEEEE, 
                        __ZN2KB22LanguageModelContainerC2ERKNSt3__16vectorINS1_10shared_ptrINS_13LanguageModelEEENS1_9allocatorIS5_EEEERKNS2_IfNS6_IfEEEE, 
                        __ZN2KB22LanguageModelContainerD0Ev, __ZN2KB22LanguageModelContainerD1Ev, 
@@ -2019,7 +2019,8 @@ exports:
                        TIResponseKitTrainerImpl, TIRevisionHistory, TIRevisionHistoryToken, 
                        TISCTextRunRequest, TISCTextRunResponse, TISK123KeyEvent, 
                        TISKBucketSwitchEvent, TISKCandidateAcceptEvent, TISKCharKeyEvent, 
-                       TISKCursorMoveEvent, TISKDeleteKeyEvent, TISKEvent, TISKInputEvent, 
+                       TISKCursorMoveEvent, TISKDeleteKeyEvent, TISKEmojiInputEvent, 
+                       TISKEmojiSearchEvent, TISKEmojiSwitchEvent, TISKEvent, TISKInputEvent, 
                        TISKInputGestureEvent, TISKLayoutSwitchEvent, TISKMetricCollector, 
                        TISKMetricDefinition, TISKPathEvent, TISKPopupVariantEvent, 
                        TISKPositionalMetricSample, TISKPredictionBarEvent, TISKSessionSamples, 

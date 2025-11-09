@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3ABCABB4-D93F-32BF-B0A6-9470D7BAD7BF
+    value:           17751B3E-2CF3-3944-BA02-124E56A10426
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           877C429B-2DE4-39C8-9108-10BC442AAA76
+    value:           2961A3D4-6A34-38E2-95D4-B2D5BB63BED1
 install-name:    '/System/Library/PrivateFrameworks/GPURawCounter.framework/Versions/A/GPURawCounter'
 current-version: 12.25
 exports:

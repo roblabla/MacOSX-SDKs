@@ -76,8 +76,7 @@ MP_API(ios(7.1), tvos(7.1), macos(10.12.2), watchos(5.0))
 ///
 /// For like/dislike, a "negative like" might be treated differently from a
 /// dislike command. The app might want to remove the "like" flag from the
-/// current track, but not blacklist and skip to the next track as it would for
-/// a dislike command.
+/// current track, but not treat it as a dislike command.
 @property (nonatomic, readonly, getter = isNegative) BOOL negative;
 
 @end

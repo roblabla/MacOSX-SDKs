@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7678078E-B6B5-37BD-9986-2DE55CD86BCF
+    value:           C7784CB3-F55B-3213-B6D0-336149388BDD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CAD04894-0A91-33C8-A690-40B30C5C51BF
+    value:           3AB6A042-9012-3088-A1E2-8BCF9A776ADD
 install-name:    '/System/Library/PrivateFrameworks/EmbeddedSensingProtocols.framework/Versions/A/EmbeddedSensingProtocols'
 current-version: 4
 exports:

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6EB08DD9-1312-32D4-BB88-8837ABC93A5C
+    value:           713B11B1-C5EE-3E05-9C70-CACF46098339
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FDB62369-FA27-34E3-B048-A1DD35B0F5C0
+    value:           7E77D6EE-6CF3-3E34-8D55-2198E16992AE
 install-name:    '/System/Library/Frameworks/CoreTelephony.framework/Support/libCommCenterBase.dylib'
 exports:
   - targets:         [ x86_64-macos ]
@@ -404,7 +404,8 @@ exports:
                        __ZN10subscriber8asStringENS_7SimCardE, __ZN10subscriber8asStringENS_7SimSlotE, 
                        __ZN10subscriber8asStringENS_7SimTypeE, __ZN10subscriber8asStringENS_8AuthInfoE, 
                        __ZN10subscriber8asStringENS_8AuthTypeE, __ZN10subscriber8asStringENS_8SimStateE, 
-                       __ZN10subscriber8asStringENS_9NpAppTypeE, __ZN10subscriber8asStringERKNSt3__16vectorINS_7SimTypeENS0_9allocatorIS2_EEEE, 
+                       __ZN10subscriber8asStringENS_9NpAppTypeE, __ZN10subscriber8asStringERKNS_15SimRefreshStageE, 
+                       __ZN10subscriber8asStringERKNSt3__16vectorINS_7SimTypeENS0_9allocatorIS2_EEEE, 
                        __ZN10subscriber9isSimDeadENS_8SimStateE, __ZN10subscriber9sParseMdnERKNSt3__16vectorIhNS0_9allocatorIhEEEE, 
                        __ZN10subscribereqERKNS_11SimCardInfoES2_, __ZN10subscriberlsERNSt3__113basic_ostreamIcNS0_11char_traitsIcEEEENS_16SubscriberIDInfoE, 
                        __ZN10subscriberlsERNSt3__113basic_ostreamIcNS0_11char_traitsIcEEEERKNS_11SimCardInfoE, 
@@ -1194,6 +1195,7 @@ exports:
                        __ZN4rest15read_rest_valueERNS_15CloudDeleteZoneERKN3xpc6objectE, 
                        __ZN4rest15read_rest_valueERNS_15CloudSyncParamsERKN3xpc6objectE, 
                        __ZN4rest15read_rest_valueERNS_15NetworkCostInfoERKN3xpc6objectE, 
+                       __ZN4rest15read_rest_valueERNS_15SimRefreshEventERKN3xpc6objectE, 
                        __ZN4rest15read_rest_valueERNS_16CarrierSpaceInfoERKN3xpc6objectE, 
                        __ZN4rest15read_rest_valueERNS_16DomainChangeInfoERKN3xpc6objectE, 
                        __ZN4rest15read_rest_valueERNS_16StkCallSetupInfoERKN3xpc6objectE, 
@@ -1228,14 +1230,14 @@ exports:
                        __ZN4rest16write_rest_valueERKNS_14WidgetStatus_sE, __ZN4rest16write_rest_valueERKNS_15AppInfoResponseE, 
                        __ZN4rest16write_rest_valueERKNS_15BundleInfoEventE, __ZN4rest16write_rest_valueERKNS_15CloudDeleteZoneE, 
                        __ZN4rest16write_rest_valueERKNS_15CloudSyncParamsE, __ZN4rest16write_rest_valueERKNS_15NetworkCostInfoE, 
-                       __ZN4rest16write_rest_valueERKNS_16CarrierSpaceInfoE, __ZN4rest16write_rest_valueERKNS_16DomainChangeInfoE, 
-                       __ZN4rest16write_rest_valueERKNS_16StkCallSetupInfoE, __ZN4rest16write_rest_valueERKNS_16SubscriptionInfoE, 
-                       __ZN4rest16write_rest_valueERKNS_17CloudDeleteRecordE, __ZN4rest16write_rest_valueERKNS_17HttpRequestParamsE, 
-                       __ZN4rest16write_rest_valueERKNS_17LastKnownHomePlmnE, __ZN4rest16write_rest_valueERKNS_17SimFileAttributesE, 
-                       __ZN4rest16write_rest_valueERKNS_18LocationCoordinateE, __ZN4rest16write_rest_valueERKNS_18MccMncComputedInfoE, 
-                       __ZN4rest16write_rest_valueERKNS_19ActiveSubscriptionsE, __ZN4rest16write_rest_valueERKNS_19FullFunctionSmsInfoE, 
-                       __ZN4rest16write_rest_valueERKNS_19LASDDatabaseVersionE, __ZN4rest16write_rest_valueERKNS_19SubscriptionContextE, 
-                       __ZN4rest16write_rest_valueERKNS_20FullFunctionCallInfoE, 
+                       __ZN4rest16write_rest_valueERKNS_15SimRefreshEventE, __ZN4rest16write_rest_valueERKNS_16CarrierSpaceInfoE, 
+                       __ZN4rest16write_rest_valueERKNS_16DomainChangeInfoE, __ZN4rest16write_rest_valueERKNS_16StkCallSetupInfoE, 
+                       __ZN4rest16write_rest_valueERKNS_16SubscriptionInfoE, __ZN4rest16write_rest_valueERKNS_17CloudDeleteRecordE, 
+                       __ZN4rest16write_rest_valueERKNS_17HttpRequestParamsE, __ZN4rest16write_rest_valueERKNS_17LastKnownHomePlmnE, 
+                       __ZN4rest16write_rest_valueERKNS_17SimFileAttributesE, __ZN4rest16write_rest_valueERKNS_18LocationCoordinateE, 
+                       __ZN4rest16write_rest_valueERKNS_18MccMncComputedInfoE, __ZN4rest16write_rest_valueERKNS_19ActiveSubscriptionsE, 
+                       __ZN4rest16write_rest_valueERKNS_19FullFunctionSmsInfoE, __ZN4rest16write_rest_valueERKNS_19LASDDatabaseVersionE, 
+                       __ZN4rest16write_rest_valueERKNS_19SubscriptionContextE, __ZN4rest16write_rest_valueERKNS_20FullFunctionCallInfoE, 
                        __ZN4rest16write_rest_valueERKNS_20LASDUpdateParametersE, 
                        __ZN4rest16write_rest_valueERKNS_21SubscriberDataIdStateE, 
                        __ZN4rest16write_rest_valueERKNS_24ManagedConfigurationInfoE, 

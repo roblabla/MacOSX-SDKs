@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           DDE7C5FC-3ED0-3160-A1B6-878DF3277308
+    value:           B2A33B9E-66D9-30B5-A18C-AD0D7F3592C5
   - target:          x86_64-maccatalyst
-    value:           DDE7C5FC-3ED0-3160-A1B6-878DF3277308
+    value:           B2A33B9E-66D9-30B5-A18C-AD0D7F3592C5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A81CA651-D4A1-38AD-8DBB-9C1FF98E2E47
+    value:           41CFE519-0190-3E90-97B3-692046037AE1
   - target:          arm64e-maccatalyst
-    value:           A81CA651-D4A1-38AD-8DBB-9C1FF98E2E47
+    value:           41CFE519-0190-3E90-97B3-692046037AE1
 install-name:    '/System/Library/Frameworks/FileProvider.framework/Versions/A/FileProvider'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

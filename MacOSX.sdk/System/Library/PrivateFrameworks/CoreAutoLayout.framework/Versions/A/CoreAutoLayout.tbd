@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FECBBB43-610D-3106-AACF-39B47A2821DC
+    value:           998BC461-F4F5-396E-9798-1C8126AD61DA
   - target:          x86_64-maccatalyst
-    value:           FECBBB43-610D-3106-AACF-39B47A2821DC
+    value:           998BC461-F4F5-396E-9798-1C8126AD61DA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F924B0EB-25FC-3C3D-8CA4-2224C3423B7C
+    value:           289ACB53-3AFD-3898-9867-BDD113D0F249
   - target:          arm64e-maccatalyst
-    value:           F924B0EB-25FC-3C3D-8CA4-2224C3423B7C
+    value:           289ACB53-3AFD-3898-9867-BDD113D0F249
 install-name:    '/System/Library/PrivateFrameworks/CoreAutoLayout.framework/Versions/A/CoreAutoLayout'
-current-version: 21
+current-version: 21.10.1
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

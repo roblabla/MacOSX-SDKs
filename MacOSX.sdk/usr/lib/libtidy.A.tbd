@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8E1A086C-8A1A-3E86-AEEB-8C05FF8356B3
+    value:           9359DC58-9E3E-3601-A47F-7794A5D4542B
   - target:          x86_64-maccatalyst
-    value:           8E1A086C-8A1A-3E86-AEEB-8C05FF8356B3
+    value:           9359DC58-9E3E-3601-A47F-7794A5D4542B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           74ED5AA6-8529-3B14-8B31-D5539BB6A29B
+    value:           B433D3CA-E9E3-3AFA-8619-91F8A9D996A9
   - target:          arm64e-maccatalyst
-    value:           74ED5AA6-8529-3B14-8B31-D5539BB6A29B
+    value:           B433D3CA-E9E3-3AFA-8619-91F8A9D996A9
 install-name:    '/usr/lib/libtidy.A.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _tidyAccessWarningCount, _tidyAttrFirst, _tidyAttrGetABBR, 
                        _tidyAttrGetALINK, _tidyAttrGetALT, _tidyAttrGetBGCOLOR, _tidyAttrGetById, 

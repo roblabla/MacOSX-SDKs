@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9C8D723D-FBE9-36CB-94C4-6EB1CDA15540
+    value:           677759D0-47A9-3B83-96EB-9D75E360D031
   - target:          x86_64-maccatalyst
-    value:           9C8D723D-FBE9-36CB-94C4-6EB1CDA15540
+    value:           677759D0-47A9-3B83-96EB-9D75E360D031
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0A0D9727-4CC5-3A18-9FE7-976DEAC9C5FB
+    value:           36D38546-091B-3CF3-9183-7927544AC661
   - target:          arm64e-maccatalyst
-    value:           0A0D9727-4CC5-3A18-9FE7-976DEAC9C5FB
+    value:           36D38546-091B-3CF3-9183-7927544AC661
 install-name:    '/System/Library/PrivateFrameworks/MapsSuggestions.framework/Versions/A/MapsSuggestions'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
@@ -119,7 +119,8 @@ exports:
                        _GEOConfigMapsSuggestionsHomeWorkImproverEnabled, _GEOConfigMapsSuggestionsHotelImproverEnabled, 
                        _GEOConfigMapsSuggestionsImminentTimeWindowDefaultMultiplicationFactor, 
                        _GEOConfigMapsSuggestionsInitialRankCarRental, _GEOConfigMapsSuggestionsInitialRankHotelReservation, 
-                       _GEOConfigMapsSuggestionsInitialRankTicketedEvent, _GEOConfigMapsSuggestionsLocationChangedTriggerMinimumUpdateTime, 
+                       _GEOConfigMapsSuggestionsInitialRankTicketedEvent, _GEOConfigMapsSuggestionsLocationAccuracyForWeatherUpdate, 
+                       _GEOConfigMapsSuggestionsLocationChangedTriggerMinimumUpdateTime, 
                        _GEOConfigMapsSuggestionsLocationShiftTimeout, _GEOConfigMapsSuggestionsLockscreenImproverEnabled, 
                        _GEOConfigMapsSuggestionsLowFrequencyLocationUpdaterInterval, 
                        _GEOConfigMapsSuggestionsLowFrequencySingleLocationUpdateTimeout, 
@@ -265,8 +266,8 @@ exports:
                        _GEOConfigMapsSuggestionsSnoozeSuppressionTimeIntervalForUserPlace, 
                        _GEOConfigMapsSuggestionsSnoozeSuppressionTimeIntervalForVehicleSetup, 
                        _GEOConfigMapsSuggestionsSnoozeSuppressionTimeIntervalForWork, 
-                       _GEOConfigMapsSuggestionsSupergreenAddDefaultETA, _GEOConfigMapsSuggestionsSupergreenAlwaysOnTop, 
-                       _GEOConfigMapsSuggestionsSupergreenApproximateCommuteEndTimeAfterArrivalInterval, 
+                       _GEOConfigMapsSuggestionsSpeedThresholdForWeatherUpdate, _GEOConfigMapsSuggestionsSupergreenAddDefaultETA, 
+                       _GEOConfigMapsSuggestionsSupergreenAlwaysOnTop, _GEOConfigMapsSuggestionsSupergreenApproximateCommuteEndTimeAfterArrivalInterval, 
                        _GEOConfigMapsSuggestionsSupergreenApproximateCommuteEndTimeAfterDepartureInterval, 
                        _GEOConfigMapsSuggestionsSupergreenApproximateCommuteStartTimeBeforeArrivalInterval, 
                        _GEOConfigMapsSuggestionsSupergreenApproximateCommuteStartTimeBeforeDepartureInterval, 
@@ -524,9 +525,11 @@ exports:
                        MapsSuggestionsInsights, MapsSuggestionsLimitedDictionary, 
                        MapsSuggestionsLocaleChangedTrigger, MapsSuggestionsLocationChangedTrigger, 
                        MapsSuggestionsLockscreenImprover, MapsSuggestionsLowVisitsImprover, 
-                       MapsSuggestionsManager, MapsSuggestionsMapsSync, MapsSuggestionsMapsSyncShortcutStorage, 
-                       MapsSuggestionsMapsSyncSource, MapsSuggestionsMeCard, MapsSuggestionsMutableSignalPack, 
-                       MapsSuggestionsMutableWeakEntries, MapsSuggestionsNearbyFilter, 
+                       MapsSuggestionsManager, MapsSuggestionsMapsAppForegroundedTrigger, 
+                       MapsSuggestionsMapsAppStateTrigger, MapsSuggestionsMapsSync, 
+                       MapsSuggestionsMapsSyncShortcutStorage, MapsSuggestionsMapsSyncSource, 
+                       MapsSuggestionsMeCard, MapsSuggestionsMutableSignalPack, MapsSuggestionsMutableWeakEntries, 
+                       MapsSuggestionsNavigationStateChangedTrigger, MapsSuggestionsNearbyFilter, 
                        MapsSuggestionsNetworkReachableTrigger, MapsSuggestionsNextETARequirements, 
                        MapsSuggestionsNoAddressFilter, MapsSuggestionsNoOperationTitleFormatter, 
                        MapsSuggestionsNoTitleFilter, MapsSuggestionsNotification, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E66281FC-766C-347A-A361-0062081B5450
+    value:           32A06C26-C7F9-380D-8BDB-05D2585BACBD
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9568CBEF-8F55-3E1B-91F5-34DFD9F82F9D
+    value:           4B1565A2-2EE2-34F1-ADA0-20694348411A
 install-name:    '/System/Library/PrivateFrameworks/AccessoryNowPlaying.framework/Versions/A/AccessoryNowPlaying'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

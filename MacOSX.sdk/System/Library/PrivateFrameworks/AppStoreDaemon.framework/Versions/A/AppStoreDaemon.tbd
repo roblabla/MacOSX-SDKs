@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0BA31AC4-3C93-3936-85AB-4D6647D193BB
+    value:           A971B282-4B45-35CF-BAB8-4CB8077BA70C
   - target:          x86_64-maccatalyst
-    value:           0BA31AC4-3C93-3936-85AB-4D6647D193BB
+    value:           A971B282-4B45-35CF-BAB8-4CB8077BA70C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           60A3B403-3A18-3340-86F3-DE41AF2F4B5E
+    value:           17020722-A434-3038-B715-DB7268DFEFB4
   - target:          arm64e-maccatalyst
-    value:           60A3B403-3A18-3340-86F3-DE41AF2F4B5E
+    value:           17020722-A434-3038-B715-DB7268DFEFB4
 install-name:    '/System/Library/PrivateFrameworks/AppStoreDaemon.framework/Versions/A/AppStoreDaemon'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -85,11 +85,11 @@ exports:
                        _ASDStoreKitKeyVendorIdentifier, _ASDStoreKitNewStorefront, 
                        _ASDStoreKitNewStorefrontCountryCode, _ASDStoreKitOldStorefront, 
                        _ASDStoreKitOldStorefrontCountryCode, _ASDStoreKitServiceName, 
+                       _ASDSubscriptionEntitlementsActivityDidChangeNotification, 
                        _ASDSubscriptionEntitlementsAppStoreDidChangeNotification, 
                        _ASDSubscriptionEntitlementsDidChangeNotification, _ASDSubscriptionEntitlementsMusicDidChangeNotification, 
                        _ASDSubscriptionEntitlementsNewsDidChangeNotification, _ASDSubscriptionEntitlementsTVDidChangeNotification, 
                        _ASDSubscriptionEntitlementsiCloudDidChangeNotification, _ASDTestFlightFeedbackErrorDomain, 
-                       _ASDTestFlightServiceErrorDomain, _ASDTestFlightServiceExtensionPointIdentifier, 
                        _ASDUpdateItemMetricsAvailableDate, _ASDUpdateItemMetricsDiscoveryDate, 
                        _ASDUpdateItemMetricsDownloadCompeleteDate, _ASDUpdateItemMetricsDownloadStartDate, 
                        _ASDUpdateItemMetricsInstallComplete, _ASDUpdateItemMetricsInstallStart, 
@@ -99,7 +99,7 @@ exports:
                        ASDAggregateClusterMappingData, ASDApp, ASDAppClusterMapping, 
                        ASDAppEvent, ASDAppLibrary, ASDAppQuery, ASDAppReviewAppMetadata, 
                        ASDAppStoreService, ASDAppUsageStats, ASDAppUsageStore, ASDApplicationMetadata, 
-                       ASDBagKeySetAggregator, ASDBaseClient, ASDBetaAppDisplayNames, 
+                       ASDArcadeService, ASDBagKeySetAggregator, ASDBaseClient, ASDBetaAppDisplayNames, 
                        ASDBetaAppFeedback, ASDBetaAppFeedbackMetadata, ASDBetaAppLaunchInfo, 
                        ASDBetaAppVersion, ASDCellularIdentity, ASDCellularSettings, 
                        ASDCheckQueueRequest, ASDCheckQueueRequestOptions, ASDClaimApplicationsRequest, 
@@ -140,10 +140,7 @@ exports:
                        ASDSoftwareUpdatesStore, ASDStoreItemMetadata, ASDStoreKitClientBroker, 
                        ASDStoreKitServiceBroker, ASDSubscriptionEntitlement, ASDSubscriptionEntitlements, 
                        ASDSystemAppMetadata, ASDSystemAppRequest, ASDTestFlightAppMetadata, 
-                       ASDTestFlightFeedback, ASDTestFlightServiceExtension, ASDTestFlightServiceExtensionContext, 
-                       ASDTestFlightServiceExtensionHostContext, ASDTestFlightServiceExtensionPushMessage, 
-                       ASDTestFlightServiceExtensionRemoteContext, ASDTestFlightServiceHost, 
-                       ASDTestFlightServiceTransaction, ASDUpdateMetricsStore, ASDUpdatePollMetrics, 
+                       ASDTestFlightFeedback, ASDUpdateMetricsStore, ASDUpdatePollMetrics, 
                        ASDUpdateWatchApps, ASDUpdatesService, ASDVPPRequest, ASDWatchAppMetadata ]
     objc-ivars:      [ ASDSoftwareUpdate._blockedBy, ASDSoftwareUpdate._installDate, 
                        ASDSoftwareUpdate._metrics, ASDSoftwareUpdate._perDevice, 

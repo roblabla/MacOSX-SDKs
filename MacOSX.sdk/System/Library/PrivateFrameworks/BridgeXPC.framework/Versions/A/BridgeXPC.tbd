@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D29FB8F3-0E9B-333E-B5F5-57D62CC49623
+    value:           EB99473A-6970-3D4B-B30E-F8EDD55372FF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FC0BB53A-6A41-334D-9227-56284DD20018
+    value:           8D6343C9-A4AD-3107-B0FB-702C43BD4CD5
 install-name:    '/System/Library/PrivateFrameworks/BridgeXPC.framework/Versions/A/BridgeXPC'
 current-version: 37
 exports:

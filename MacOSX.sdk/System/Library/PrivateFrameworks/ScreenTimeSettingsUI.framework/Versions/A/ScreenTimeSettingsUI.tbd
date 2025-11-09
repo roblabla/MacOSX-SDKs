@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           562370C8-6103-3739-A9D6-E20312EA7839
+    value:           26E07FA4-67F8-32F8-A238-8F600FCD1A4B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9FACF02E-3462-33EE-8809-880A5F47BA80
+    value:           AE1AD0CB-C9EB-3E83-8A6A-9A6C49C7DBC9
 install-name:    '/System/Library/PrivateFrameworks/ScreenTimeSettingsUI.framework/Versions/A/ScreenTimeSettingsUI'
-current-version: 494
+current-version: 495
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ ScreenTime ]

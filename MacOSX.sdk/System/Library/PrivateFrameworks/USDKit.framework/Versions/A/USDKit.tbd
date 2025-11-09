@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           14A28215-D5F5-333A-A5E3-A57A19DE76F3
+    value:           C0DF7802-05B0-32D1-83B9-8C3A0E516FC6
   - target:          x86_64-maccatalyst
-    value:           14A28215-D5F5-333A-A5E3-A57A19DE76F3
+    value:           C0DF7802-05B0-32D1-83B9-8C3A0E516FC6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5C45FF44-832D-30EE-B071-8A03FC01E369
+    value:           53BC09D2-CB39-34F5-B1DF-7BC36A687270
   - target:          arm64e-maccatalyst
-    value:           5C45FF44-832D-30EE-B071-8A03FC01E369
+    value:           53BC09D2-CB39-34F5-B1DF-7BC36A687270
 install-name:    '/System/Library/PrivateFrameworks/USDKit.framework/Versions/A/USDKit'
-current-version: 42
+current-version: 42.1
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     weak-symbols:    [ __ZTIFbvE, __ZTIN3rml16versioned_objectE, __ZTIN3rml3jobE, 

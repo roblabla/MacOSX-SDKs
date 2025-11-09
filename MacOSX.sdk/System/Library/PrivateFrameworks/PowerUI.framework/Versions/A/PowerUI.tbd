@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           28200D8F-9462-3742-85F1-F6B70B8A7B53
+    value:           14BFAB5D-E79A-335C-AA20-69DE08EC6464
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C3D593E5-C3F2-3EEE-A297-B540E1A41D3E
+    value:           F777DA47-DF0B-3751-8212-386A8501990B
 install-name:    '/System/Library/PrivateFrameworks/PowerUI.framework/Versions/A/PowerUI'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

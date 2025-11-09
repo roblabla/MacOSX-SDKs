@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3538ED44-A858-3CBE-A88F-A5A81E8439F7
+    value:           4B273AA5-37AE-3F49-8E70-83A258D56E66
   - target:          x86_64-maccatalyst
-    value:           3538ED44-A858-3CBE-A88F-A5A81E8439F7
+    value:           4B273AA5-37AE-3F49-8E70-83A258D56E66
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           88BBBA51-DC26-36DD-958E-A4C0E0CCD502
+    value:           C8978418-7F79-3FCA-826C-A1B9BA85039E
   - target:          arm64e-maccatalyst
-    value:           88BBBA51-DC26-36DD-958E-A4C0E0CCD502
+    value:           C8978418-7F79-3FCA-826C-A1B9BA85039E
 install-name:    '/System/Library/PrivateFrameworks/Catalyst.framework/Versions/A/Catalyst'
 current-version: 7
 exports:

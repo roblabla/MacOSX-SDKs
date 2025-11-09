@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           58F1EB56-4B66-34D3-A96F-639B1EA928EE
+    value:           837A7CC0-C0C4-3CDF-A5A9-C0FEF6934D21
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           64BFF26A-7B24-32CC-BEF0-93BB0E92E1D3
+    value:           B97051BF-04B1-38FA-90D0-06CB525B95B3
 install-name:    '/System/Library/PrivateFrameworks/ReminderKitInternal.framework/Versions/A/ReminderKitInternal'
 current-version: 305
 swift-abi-version: 7

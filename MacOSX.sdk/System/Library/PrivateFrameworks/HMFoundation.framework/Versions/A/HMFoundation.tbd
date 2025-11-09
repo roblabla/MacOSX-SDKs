@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           714AA0DB-1DF2-3BFB-8F32-BD014F63661C
+    value:           6F5E419F-5E4D-39A3-80AC-3B3E61098204
   - target:          x86_64-maccatalyst
-    value:           714AA0DB-1DF2-3BFB-8F32-BD014F63661C
+    value:           6F5E419F-5E4D-39A3-80AC-3B3E61098204
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2E81D3A1-4E80-32A2-B1E8-3E050FAC7967
+    value:           181A9CB1-E63E-31B7-9159-31926BE3113A
   - target:          arm64e-maccatalyst
-    value:           2E81D3A1-4E80-32A2-B1E8-3E050FAC7967
+    value:           181A9CB1-E63E-31B7-9159-31926BE3113A
 install-name:    '/System/Library/PrivateFrameworks/HMFoundation.framework/Versions/A/HMFoundation'
-current-version: 607.3.2
+current-version: 607.3.3
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C6B19137-0669-3841-8C8D-071BC76863FA
+    value:           227A96E1-AC04-3F29-9249-334D9F4291BF
   - target:          x86_64-maccatalyst
-    value:           C6B19137-0669-3841-8C8D-071BC76863FA
+    value:           227A96E1-AC04-3F29-9249-334D9F4291BF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B59AE5AD-AB10-3DB8-B2A6-256CC54C9009
+    value:           0F437CA6-52FA-3C34-9FE5-298B26B5D413
   - target:          arm64e-maccatalyst
-    value:           B59AE5AD-AB10-3DB8-B2A6-256CC54C9009
+    value:           0F437CA6-52FA-3C34-9FE5-298B26B5D413
 install-name:    '/System/Library/PrivateFrameworks/MFAAuthentication.framework/Versions/A/MFAAuthentication'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

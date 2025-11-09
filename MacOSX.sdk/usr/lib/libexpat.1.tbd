@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8235F5A5-E237-36B5-B641-E339C26FA7E7
+    value:           4408FC72-BDAA-33AE-BE14-4008642794ED
   - target:          x86_64-maccatalyst
-    value:           8235F5A5-E237-36B5-B641-E339C26FA7E7
+    value:           4408FC72-BDAA-33AE-BE14-4008642794ED
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           914FF00F-B6EF-3D26-BE08-BBDDFCF9636B
+    value:           8B917E86-B3FC-3B18-9DD2-4D157E77320B
   - target:          arm64e-maccatalyst
-    value:           914FF00F-B6EF-3D26-BE08-BBDDFCF9636B
+    value:           8B917E86-B3FC-3B18-9DD2-4D157E77320B
 install-name:    '/usr/lib/libexpat.1.dylib'
 current-version: 8
 compatibility-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _XML_DefaultCurrent, _XML_ErrorString, _XML_ExpatVersion, 
                        _XML_ExpatVersionInfo, _XML_ExternalEntityParserCreate, _XML_FreeContentModel, 

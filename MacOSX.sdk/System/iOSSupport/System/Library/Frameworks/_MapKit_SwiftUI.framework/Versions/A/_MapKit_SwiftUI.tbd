@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           5B9C7726-CC5D-3529-81A3-B6C0F6B5EC7A
+    value:           22B4A592-91DC-3B5B-843F-E58A745171B4
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           C64ECBA2-48AB-3B32-A565-58456DD1118F
+    value:           86D75995-3989-39CB-9085-529758BF9C85
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_MapKit_SwiftUI.framework/Versions/A/_MapKit_SwiftUI'
 swift-abi-version: 7
 exports:

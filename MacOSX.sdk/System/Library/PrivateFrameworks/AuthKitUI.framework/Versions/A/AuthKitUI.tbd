@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A68EE7CA-F38F-3DF4-BED1-BFACC3C898EA
+    value:           72AECF9C-D755-35CF-951C-433DF4901D8E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           79FE91C0-E749-330F-A51B-B1DF2EF3BC76
+    value:           5B2E4135-DD52-3E80-AD0D-E903244DADC4
 install-name:    '/System/Library/PrivateFrameworks/AuthKitUI.framework/Versions/A/AuthKitUI'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

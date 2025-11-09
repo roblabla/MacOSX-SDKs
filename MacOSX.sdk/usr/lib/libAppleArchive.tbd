@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           16280B32-F065-37F8-AA7C-940DED94F68C
+    value:           CE874277-2990-3C19-B998-B1DF40742CBD
   - target:          x86_64-maccatalyst
-    value:           16280B32-F065-37F8-AA7C-940DED94F68C
+    value:           CE874277-2990-3C19-B998-B1DF40742CBD
   - target:          arm64-macos
-    value:           016B24AF-8C56-3BD9-85C2-2CF1E4EAD8A9
+    value:           6FFC7771-AB45-3FC1-9B7C-A293F22D0FCC
   - target:          arm64-maccatalyst
-    value:           00000000-0000-0000-0000-000000000000
+    value:           6FFC7771-AB45-3FC1-9B7C-A293F22D0FCC
   - target:          arm64e-macos
-    value:           A0F26205-787A-3DAD-9898-657A002F0642
+    value:           CC2D37B5-EB09-3EDE-95D3-E27A18377D93
   - target:          arm64e-maccatalyst
-    value:           A0F26205-787A-3DAD-9898-657A002F0642
+    value:           CC2D37B5-EB09-3EDE-95D3-E27A18377D93
 install-name:    '/usr/lib/libAppleArchive.dylib'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos, x86_64-maccatalyst, 
-                       arm64e-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ arm64-macos, x86_64-macos, arm64e-macos, x86_64-maccatalyst, 
+                       arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _AAArchiveStreamCancel, _AAArchiveStreamClose, _AAArchiveStreamProcess, 
                        _AAArchiveStreamReadBlob, _AAArchiveStreamReadHeader, _AAArchiveStreamWriteBlob, 
                        _AAArchiveStreamWriteHeader, _AAArchiveStreamWritePathList, 

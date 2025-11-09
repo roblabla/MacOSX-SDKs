@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E14D0A35-ABCB-3871-AB48-58E1A58D3AA1
+    value:           4A84DC37-4CE2-3EA4-9939-37A3BCE1E56D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C40C6F68-8FFB-3242-AA52-625467C6A8AF
+    value:           389FDEF2-0BB8-3F9F-AF4A-ED5556FD5405
 install-name:    '/System/Library/PrivateFrameworks/ProVideo.framework/Versions/A/ProVideo'
 current-version: 548.3.42
 exports:

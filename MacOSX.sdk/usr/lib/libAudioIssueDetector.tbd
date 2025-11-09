@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           27F1F6B3-8644-3510-920C-7FABA4FCC1BA
+    value:           B981E7DE-C556-3B63-BBC0-C4B299EF79CF
   - target:          x86_64-maccatalyst
-    value:           27F1F6B3-8644-3510-920C-7FABA4FCC1BA
+    value:           B981E7DE-C556-3B63-BBC0-C4B299EF79CF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9C2AAFE8-64E1-371B-9D33-FE03984A834C
+    value:           3ABEDC85-28E9-393A-A436-DAE07EA8E0B6
   - target:          arm64e-maccatalyst
-    value:           9C2AAFE8-64E1-371B-9D33-FE03984A834C
+    value:           3ABEDC85-28E9-393A-A436-DAE07EA8E0B6
 install-name:    '/usr/lib/libAudioIssueDetector.dylib'
 exports:
-  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, x86_64-macos, arm64e-macos, 
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, x86_64-macos, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _AudioDataAnalysisManagerCreate, _AudioDataAnalysisManagerCreateNodeEnvSPL, 
                        _AudioDataAnalysisManagerCreateNodePCM, _AudioDataAnalysisManagerCreateNodeSPL, 

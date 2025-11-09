@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3CAF1251-5E3E-3F82-80FB-1DC8310CD179
+    value:           A87653A1-2A24-3F3D-87A2-DEBE9634307A
   - target:          x86_64-maccatalyst
-    value:           3CAF1251-5E3E-3F82-80FB-1DC8310CD179
+    value:           A87653A1-2A24-3F3D-87A2-DEBE9634307A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BD41EAEA-25B7-39B1-B28E-4D6E96B4FF8C
+    value:           7B3C4F17-2A75-3171-85A2-6A6D82632D12
   - target:          arm64e-maccatalyst
-    value:           BD41EAEA-25B7-39B1-B28E-4D6E96B4FF8C
+    value:           7B3C4F17-2A75-3171-85A2-6A6D82632D12
 install-name:    '/System/Library/Frameworks/AutomaticAssessmentConfiguration.framework/Versions/A/Frameworks/AACClient.framework/Versions/A/AACClient'
 swift-abi-version: 7
 exports:

@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           3140EE02-C3FD-33D7-8EF4-CF0565B15477
+    value:           7F1A550F-A101-3804-9A80-87C8EDA34607
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           740F983D-ABE4-31CB-854B-C2E26A260E8D
+    value:           D71D80FD-9F26-31EB-B080-E6DA37D9DC0D
 install-name:    '/System/iOSSupport/System/Library/Frameworks/OpenAL.framework/Versions/A/OpenAL'
 exports:
-  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _alBuffer3f, _alBuffer3i, _alBufferData, _alBufferf, _alBufferfv, 
                        _alBufferi, _alBufferiv, _alDeleteBuffers, _alDeleteSources, 
                        _alDisable, _alDistanceModel, _alDopplerFactor, _alDopplerVelocity, 

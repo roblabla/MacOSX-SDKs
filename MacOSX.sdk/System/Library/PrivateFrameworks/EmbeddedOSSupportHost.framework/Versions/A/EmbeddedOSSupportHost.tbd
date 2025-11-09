@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1329E717-3EC6-3B2F-8DE6-61F848E09FAE
+    value:           5E380A54-D5F5-3321-8DAC-97C7280AE797
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           401B8B4B-CBDB-3B04-BCB7-2130BE73F051
+    value:           34AF9F90-C754-3078-A277-36995F2BAEE8
 install-name:    '/System/Library/PrivateFrameworks/EmbeddedOSSupportHost.framework/Versions/A/EmbeddedOSSupportHost'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           4ED02ABF-EB02-371D-ABBC-624CA2A96E9F
+    value:           C23C60A6-64E0-34D4-81C9-724F51E9173D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2BF32397-381C-32E9-B2CD-AD6CBE50350E
+    value:           CF111DCC-9482-3429-A357-4D8E6262ABEA
 install-name:    '/System/Library/PrivateFrameworks/BridgeOSInstall.framework/Versions/A/BridgeOSInstall'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

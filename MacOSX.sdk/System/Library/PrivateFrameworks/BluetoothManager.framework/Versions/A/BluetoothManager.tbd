@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           EE4D2E5E-89BC-3BA2-A698-8CA5BE9DC22E
+    value:           1DCA36C8-6DA2-333F-B21B-5088ECA4746A
   - target:          x86_64-maccatalyst
-    value:           EE4D2E5E-89BC-3BA2-A698-8CA5BE9DC22E
+    value:           1DCA36C8-6DA2-333F-B21B-5088ECA4746A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           11A2A768-82E9-3C3D-8987-3B2A5A17B061
+    value:           332E746E-B99F-3A7A-8B32-BD9356D28D41
   - target:          arm64e-maccatalyst
-    value:           11A2A768-82E9-3C3D-8987-3B2A5A17B061
+    value:           332E746E-B99F-3A7A-8B32-BD9356D28D41
 install-name:    '/System/Library/PrivateFrameworks/BluetoothManager.framework/Versions/A/BluetoothManager'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

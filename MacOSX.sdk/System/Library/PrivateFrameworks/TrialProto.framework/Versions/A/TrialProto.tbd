@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7B0E9595-2365-3B43-9C53-26ED5AD7D93B
+    value:           69D7CFE8-715D-3B4B-96C8-C089833F7F5D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           45D9C8A7-3A6D-3DEB-8E4A-21E19FBE8F35
+    value:           32281B2C-AD7A-3B53-9B92-692EFE90C425
 install-name:    '/System/Library/PrivateFrameworks/TrialProto.framework/Versions/A/TrialProto'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

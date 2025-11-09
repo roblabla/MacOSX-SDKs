@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           85EC16BE-96A3-35FD-A8F2-8E24F6A7189E
+    value:           D191C6D9-7534-3A32-A8B1-B98E8ACD8AB4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           819681B6-A884-3603-95B2-0837A978F155
+    value:           B4218218-5DFF-32A6-925D-44D439A0F49E
 install-name:    '/usr/local/lib/WebKitPluginHostShim.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

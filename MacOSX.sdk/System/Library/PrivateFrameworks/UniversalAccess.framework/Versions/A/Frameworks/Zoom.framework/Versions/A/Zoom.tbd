@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           386C6405-DF30-3201-A8FB-407B6BD74F69
+    value:           AC362A79-8569-35AB-A3F1-5D91D8BB89C0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6D2B37F2-CE59-3EBE-8F19-38DD2A443706
+    value:           A9BCD0B5-6268-3AD5-B0A3-7FEB318A9AB5
 install-name:    '/System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/Frameworks/Zoom.framework/Versions/A/Zoom'
 current-version: 68
 exports:

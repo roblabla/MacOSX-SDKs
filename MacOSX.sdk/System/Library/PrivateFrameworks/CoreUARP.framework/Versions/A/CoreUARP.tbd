@@ -3,21 +3,49 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D04E7025-BB03-3ABA-80A1-23FFDAE2E83B
+    value:           3D04D2BB-F835-393A-8E00-7E95C9B33EEC
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AD058FFB-06DA-375A-8962-CD355A1BFFC2
+    value:           2870E82D-2027-370D-89F5-7D5CEB93CD0C
 install-name:    '/System/Library/PrivateFrameworks/CoreUARP.framework/Versions/A/CoreUARP'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CoreUARPVersionNumber, _CoreUARPVersionString, _UARPAccessoryCapabilityToString, 
-                       _UARPAccessoryPropertyToString, _UARPAccessoryTransportToString, 
-                       _UARPAnalyticsApplyStatusToString, _UARPAnalyticsAssetChannelTypeToString, 
-                       _UARPAnalyticsAssetDownloadStatusToString, _UARPAnalyticsStagingStatusToString, 
-                       _UARPAssetDownloadStatusToString, _UARPAssetLocationTypeToString, 
+                       _UARPAccessoryHardwareFusingToString, _UARPAccessoryPropertyToString, 
+                       _UARPAccessoryTransportToString, _UARPAnalyticsApplyStatusToString, 
+                       _UARPAnalyticsAssetChannelTypeToString, _UARPAnalyticsAssetDownloadStatusToString, 
+                       _UARPAnalyticsStagingStatusToString, _UARPAssetDownloadStatusToString, 
+                       _UARPAssetLocationTypeToString, _UARPAssetValidationStatusToString, 
                        _UARPFirmwareApplicationStatusToString, _UARPFirmwareStagingCompletionStatusToString, 
                        _UARPFirmwareUpdateAvailabilityStatusToString, _kUARPErrorDomain, 
+                       _kUARPStringMetadataAppleHeySiriFallbackModel, _kUARPStringMetadataAppleHeySiriModel, 
+                       _kUARPStringMetadataAppleHeySiriModelCertificate, _kUARPStringMetadataAppleHeySiriModelDigest, 
+                       _kUARPStringMetadataAppleHeySiriModelHash, _kUARPStringMetadataAppleHeySiriModelLocale, 
+                       _kUARPStringMetadataAppleHeySiriModelSignature, _kUARPStringMetadataAppleHeySiriModelType, 
+                       _kUARPStringMetadataAppleHostInactiveToApplyAsset, _kUARPStringMetadataAppleHostInactiveToStageAsset, 
+                       _kUARPStringMetadataAppleHostMinimumBatteryLevel, _kUARPStringMetadataAppleHostMinimumVersionMacOS, 
+                       _kUARPStringMetadataAppleHostMinimumVersioniOS, _kUARPStringMetadataAppleHostMinimumVersiontvOS, 
+                       _kUARPStringMetadataAppleHostMinimumVersionwatchOS, _kUARPStringMetadataAppleHostNetworkDelay, 
+                       _kUARPStringMetadataAppleHostReconnectAfterApply, _kUARPStringMetadataAppleHostTriggerBatteryLevel, 
+                       _kUARPStringMetadataAppleIgnoreVersion, _kUARPStringMetadataAppleMinimumBatteryLevel, 
+                       _kUARPStringMetadataAppleMinimumVersionRequired, _kUARPStringMetadataApplePayloadCertificate, 
+                       _kUARPStringMetadataApplePayloadDigest, _kUARPStringMetadataApplePayloadFileName, 
+                       _kUARPStringMetadataApplePayloadHash, _kUARPStringMetadataApplePayloadLongName, 
+                       _kUARPStringMetadataApplePayloadSignature, _kUARPStringMetadataApplePersonalizationManifestPrefix, 
+                       _kUARPStringMetadataApplePersonalizationPayloadTag, _kUARPStringMetadataApplePersonalizationRequired, 
+                       _kUARPStringMetadataApplePersonalizationSuperBinaryAssetID, 
+                       _kUARPStringMetadataAppleTriggerBatteryLevel, _kUARPStringMetadataAppleUrgentUpdate, 
+                       _kUARPStringMetadataKeyAppleFormat, _kUARPStringMetadataKeyApplePlist, 
+                       _kUARPStringMetadataKeyAppleValues, _kUARPStringMetadataRootAppleFilepath, 
+                       _kUARPStringMetadataRootAppleName, _kUARPStringMetadataRootAppleValue, 
+                       _kUARPStringSuperBinaryKeyDynamicPayload, _kUARPStringSuperBinaryKeyMetaDataFormatVersion, 
+                       _kUARPStringSuperBinaryKeyMetaDataValues, _kUARPStringSuperBinaryKeyMetadataName, 
+                       _kUARPStringSuperBinaryKeyMetadataValue, _kUARPStringSuperBinaryKeyPayload4CC, 
+                       _kUARPStringSuperBinaryKeyPayloadFilepath, _kUARPStringSuperBinaryKeyPayloadLongName, 
+                       _kUARPStringSuperBinaryKeyPayloadMetaData, _kUARPStringSuperBinaryKeyPayloadVersion, 
+                       _kUARPStringSuperBinaryKeySuperBinaryFirmwareVersion, _kUARPStringSuperBinaryKeySuperBinaryFormatVersion, 
+                       _kUARPStringSuperBinaryKeySuperBinaryMetaData, _kUARPStringSuperBinaryKeySuperBinaryPayloads, 
                        _nullableObjectsEqual, _uarpAssetCoreCompare, _uarpAssetIsDynamicAsset, 
                        _uarpAssetIsSuperBinary, _uarpControllerCallbackSendData, 
                        _uarpControllerFindAssetByAssetID, _uarpControllerGetPayloadMetaData, 
@@ -30,21 +58,22 @@ exports:
                        _uarpControllerRemoteAccessoryDataTransferPause, _uarpControllerRemoteAccessoryDataTransferResume, 
                        _uarpControllerRemoteAccessoryFind, _uarpControllerRemoteAccessoryQueryAccessoryInformation, 
                        _uarpControllerRemoteAccessoryRemove, _uarpControllerRequestAssetBuffer, 
-                       _uarpControllerRequestBuffer, _uarpControllerRequestHeySiriModels, 
-                       _uarpControllerRequestTransmitMsgBuffer, _uarpControllerRescindAssetOffer, 
-                       _uarpControllerReturnBuffer, _uarpControllerReturnTransmitMsgBuffer, 
+                       _uarpControllerRequestBuffer, _uarpControllerRequestTransmitMsgBuffer, 
+                       _uarpControllerRescindAssetOffer, _uarpControllerReturnBuffer, 
+                       _uarpControllerReturnTransmitMsgBuffer, _uarpControllerSendAppleAccessoryInformationRequest, 
+                       _uarpControllerSendNumHeySiriModelInfoRequest, _uarpControllerSendNumHeySiriModelsRequest, 
                        _uarpControllerSendPersonalizationInfoRequest, _uarpControllerTxMsgVendorSpecific, 
-                       _uarpFree, _uarpHeySiriAssetAppendHSModel, _uarpHeySiriAssetCalculateSize, 
-                       _uarpHeySiriAssetComposeHSModelMetaData, _uarpHeySiriAssetEndianSwapHeaders, 
-                       _uarpHeySiriModelAssetInitalizeSuperBinaryHeader, _uarpHtonl, 
-                       _uarpHtons, _uarpLogDebug, _uarpLogError, _uarpLogFault, _uarpLogInfo, 
-                       _uarpNtohl, _uarpNtohs, _uarpPayloadTagPack, _uarpPayloadTagUnpack, 
-                       _uarpPersonalizationPayloadBuild, _uarpPersonalizationPayloadQueryMetadataLength, 
-                       _uarpVersionCompare, _uarpVersionEndianSwap, _uarpZalloc ]
-    objc-classes:    [ UARPAccessory, UARPAccessoryID, UARPAnalyticsUpdateFirmwareManager, 
-                       UARPAnalyticsUpdateFirmwareState, UARPAsset, UARPAssetID, 
-                       UARPController, UARPControllerExportedObject, UARPControllerXPC, 
-                       UARPDeploymentRule, UARPDeploymentRuleConfig, UARPManifestProperties, 
-                       UARPPacketDumper, UARPStats, UARPUpdateFirmwareAnalyticsEventFrameworkParams, 
-                       UARPUploader ]
+                       _uarpFree, _uarpHtonl, _uarpHtonll, _uarpHtons, _uarpLogDebug, 
+                       _uarpLogError, _uarpLogFault, _uarpLogInfo, _uarpNtohl, _uarpNtohll, 
+                       _uarpNtohs, _uarpPayloadHeaderEndianSwap, _uarpPayloadTagPack, 
+                       _uarpPayloadTagUnpack, _uarpPersonalizationPayloadBuild, _uarpPersonalizationPayloadQueryMetadataLength, 
+                       _uarpSuperBinaryHeaderEndianSwap, _uarpVersionCompare, _uarpVersionEndianSwap, 
+                       _uarpZalloc ]
+    objc-classes:    [ UARPAccessory, UARPAccessoryID, UARPAccessoryMsgQueue, UARPAccessoryMsgQueueEntry, 
+                       UARPAnalyticsUpdateFirmwareManager, UARPAnalyticsUpdateFirmwareState, 
+                       UARPAsset, UARPAssetID, UARPController, UARPControllerXPC, 
+                       UARPDeploymentRule, UARPDeploymentRuleConfig, UARPHeySiriModel, 
+                       UARPManifestProperties, UARPPacketDumper, UARPStats, UARPSuperBinaryAsset, 
+                       UARPSuperBinaryAssetPayload, UARPSuperBinaryAssetTLV, UARPSuperBinaryMetaDataTable, 
+                       UARPUpdateFirmwareAnalyticsEventFrameworkParams, UARPUploader ]
 ...

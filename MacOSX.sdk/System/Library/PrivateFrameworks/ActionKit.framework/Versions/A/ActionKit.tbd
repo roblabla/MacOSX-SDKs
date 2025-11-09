@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           69C55ACE-6A41-388D-9981-13B187F17017
+    value:           B5556B3F-70CA-34C1-B1D5-6059CF2D8398
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           ED096498-5955-3422-A393-35B26C53836A
+    value:           EC9EAC0B-A554-3536-9023-679C9BDF7580
 install-name:    '/System/Library/PrivateFrameworks/ActionKit.framework/Versions/A/ActionKit'
 exports:
   - targets:         [ x86_64-macos ]
@@ -1699,8 +1699,8 @@ exports:
                        TMAPIClient, TMOAuth, TMSDKFunctions, TMSDKUserAgent, TMTumblrAuthenticator, 
                        WFAccount, WFAccountAccessResource, WFAccountCache, WFAccountPickerParameter, 
                        WFActionKitStaticInitializer, WFAddFrameToGIFAction, WFAddMusicToUpNextAction, 
-                       WFAddNewEventAction, WFAddNewReminderAction, WFAddToPlaylistAction, 
-                       WFAddToReadingListAccessResource, WFAddToReadingListAction, 
+                       WFAddNewContactAction, WFAddNewEventAction, WFAddNewReminderAction, 
+                       WFAddToPlaylistAction, WFAddToReadingListAccessResource, WFAddToReadingListAction, 
                        WFAddressAction, WFAdjustDateAction, WFAirDropAction, WFAirplaneModeSettingsClient, 
                        WFAlertAction, WFAppearanceSettingContentItem, WFAppearanceSettingValue, 
                        WFAppearanceSettingsClient, WFAppendFileAction, WFAppendToNoteAction, 
@@ -1742,13 +1742,12 @@ exports:
                        WFGetItemNameAction, WFGetItemTypeAction, WFGetLatestPhotoImportAction, 
                        WFGetLatestPhotosAction, WFGetMapsLinkAction, WFGetMyWorkflowsAction, 
                        WFGetNetworkDetailsAction, WFGetPlaylistAction, WFGetPodcastsFromLibraryAction, 
-                       WFGetStockQuoteAction, WFGetTravelTimeAction, WFGetTypeAction, 
-                       WFGetURLHeadersAction, WFGetUpcomingCalendarItemsAction, WFGetVariableAction, 
-                       WFGetWeatherForecastAction, WFGetWebPageAction, WFGiphyAction, 
-                       WFGiphyContentItem, WFGiphyImage, WFGiphyObject, WFGiphySessionManager, 
-                       WFHKGroupingIndexPathTransformer, WFHTMLFromRichTextAction, 
-                       WFHandOffPlaybackAction, WFHandlePaymentIntentAction, WFHandoffAction, 
-                       WFHealthKitUnitPlistCompiler, WFINPaymentMethodParameterState, 
+                       WFGetTravelTimeAction, WFGetTypeAction, WFGetURLHeadersAction, 
+                       WFGetUpcomingCalendarItemsAction, WFGetVariableAction, WFGetWeatherForecastAction, 
+                       WFGetWebPageAction, WFGiphyAction, WFGiphyContentItem, WFGiphyImage, 
+                       WFGiphyObject, WFGiphySessionManager, WFHKGroupingIndexPathTransformer, 
+                       WFHTMLFromRichTextAction, WFHandOffPlaybackAction, WFHandlePaymentIntentAction, 
+                       WFHandoffAction, WFHealthKitUnitPlistCompiler, WFINPaymentMethodParameterState, 
                        WFINRideOptionParameterState, WFImageCombineAction, WFImageConvertAction, 
                        WFImageConvertFormatPickerParameter, WFImageCropAction, WFImageFlipAction, 
                        WFImageResizeAction, WFImageRotateAction, WFImgurAccessResource, 
@@ -1806,7 +1805,7 @@ exports:
                        WFSendToGoodReaderAction, WFSendUserInterfaceResult, WFSetClipboardAction, 
                        WFSetDictionaryValueAction, WFSetItemNameAction, WFSetListeningModeAction, 
                        WFSetPlaybackDestinationAction, WFSetVariableAction, WFSetVolumeAction, 
-                       WFSetWiFiAction, WFSettingsClient, WFSettingsIntentHandler, 
+                       WFSetWallpaperAction, WFSetWiFiAction, WFSettingsClient, WFSettingsIntentHandler, 
                        WFShareAction, WFShareExtensionAction, WFShazamMedia, WFShazamMediaAction, 
                        WFShazamMediaContentItem, WFShortcutsAccessResource, WFShowDefinitionAction, 
                        WFShowInBlindSquareAction, WFShowInCalendarAction, WFShowInStoreAction, 
@@ -1837,17 +1836,17 @@ exports:
                        WFURLEncodeAction, WFURLGetComponentAction, WFUlyssesAccessResource, 
                        WFUlyssesAttachAction, WFUlyssesSheet, WFUlyssesSheetContentItem, 
                        WFUnitTypePickerParameter, WFVibrateAction, WFViewContentGraphAction, 
-                       WFWaitToReturnAction, WFWeatherAction, WFWeatherAirQualityPollutant, 
-                       WFWeatherAirQualityPollutantContentItem, WFWeatherAttributionAccessResource, 
-                       WFWeatherData, WFWeatherDataContentItem, WFWebAuthenticationSessionPresentationContext, 
-                       WFWiFiSettingsClient, WFWordPressAccount, WFWordPressBlog, 
-                       WFWordPressFile, WFWordPressPost, WFWordPressPostAction, WFWordPressPostType, 
-                       WFWordPressSessionManager, WFWordPressTerm, WFWunderlistAccount, 
-                       WFWunderlistAddAction, WFWunderlistFile, WFWunderlistList, 
-                       WFWunderlistListPickerParameter, WFWunderlistNote, WFWunderlistOAuth2SessionManager, 
-                       WFWunderlistReminder, WFWunderlistSessionManager, WFWunderlistTask, 
-                       WFiCloudDriveAccessResource, WFiCloudFileDownloadOperation, 
-                       WFiCloudStorageService, WFiTunesStoreCountryPickerParameter, 
+                       WFWaitToReturnAction, WFWallpaperModificationAccessResource, 
+                       WFWeatherAction, WFWeatherAirQualityPollutant, WFWeatherAirQualityPollutantContentItem, 
+                       WFWeatherAttributionAccessResource, WFWeatherData, WFWeatherDataContentItem, 
+                       WFWebAuthenticationSessionPresentationContext, WFWiFiSettingsClient, 
+                       WFWordPressAccount, WFWordPressBlog, WFWordPressFile, WFWordPressPost, 
+                       WFWordPressPostAction, WFWordPressPostType, WFWordPressSessionManager, 
+                       WFWordPressTerm, WFWunderlistAccount, WFWunderlistAddAction, 
+                       WFWunderlistFile, WFWunderlistList, WFWunderlistListPickerParameter, 
+                       WFWunderlistNote, WFWunderlistOAuth2SessionManager, WFWunderlistReminder, 
+                       WFWunderlistSessionManager, WFWunderlistTask, WFiCloudDriveAccessResource, 
+                       WFiCloudFileDownloadOperation, WFiCloudStorageService, WFiTunesStoreCountryPickerParameter, 
                        WFiTunesStoreCountrySubstitutableState, WPBase64Utils, WPStringUtils, 
                        WPXMLRPCDataCleaner, WPXMLRPCDecoder, WPXMLRPCDecoderDelegate, 
                        WPXMLRPCEncoder ]

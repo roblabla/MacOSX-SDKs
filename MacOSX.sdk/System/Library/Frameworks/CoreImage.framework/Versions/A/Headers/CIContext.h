@@ -403,6 +403,8 @@ CORE_IMAGE_EXPORT CIImageRepresentationOption const kCIImageRepresentationSemant
 // The value for kCIImageRepresentationSemanticSegmentationGlassesMatteImage should be a monochome CIImage object. */
 CORE_IMAGE_EXPORT CIImageRepresentationOption const kCIImageRepresentationSemanticSegmentationGlassesMatteImage NS_AVAILABLE(11_0, 14_1);
 
+// The value for kCIImageRepresentationSemanticSegmentationSkyMatteImage should be a monochome CIImage object. */
+CORE_IMAGE_EXPORT CIImageRepresentationOption const kCIImageRepresentationSemanticSegmentationSkyMatteImage NS_AVAILABLE(11_1, 14_3);
 
 
 /* Render a CIImage to TIFF data. Image must have a finite non-empty extent. */

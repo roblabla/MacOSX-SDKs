@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AF4FFACE-6939-3FC8-B4B5-90EA859BD3F6
+    value:           73D24EBC-3AA6-3DB5-A868-5572F6CD2CF6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           20A6471A-6EA6-34C6-A590-50134FFBEBCA
+    value:           76A16758-BDA5-3500-8614-DE53F7538D5F
 install-name:    '/System/Library/PrivateFrameworks/BiomeFoundation.framework/Versions/A/BiomeFoundation'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

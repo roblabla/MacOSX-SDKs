@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3A490AE8-1131-32D0-8BE4-52446B534F6B
+    value:           7361F4D6-023E-324E-A11F-EB5596A4EC77
   - target:          x86_64-maccatalyst
-    value:           3A490AE8-1131-32D0-8BE4-52446B534F6B
+    value:           7361F4D6-023E-324E-A11F-EB5596A4EC77
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           713721C0-CF8B-3127-91D6-7B08DA8061BA
+    value:           A0B2F081-E821-32A6-B4B1-5FC28CDC946F
   - target:          arm64e-maccatalyst
-    value:           713721C0-CF8B-3127-91D6-7B08DA8061BA
+    value:           A0B2F081-E821-32A6-B4B1-5FC28CDC946F
 install-name:    '/System/Library/PrivateFrameworks/MessageProtection.framework/Versions/A/MessageProtection'
 current-version: 224.40.3
 exports:

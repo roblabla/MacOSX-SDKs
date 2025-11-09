@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A79299F4-802E-3082-A936-8212762F0571
+    value:           9544D342-6FB3-35D1-9EF3-B5D68EA77697
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           84AEE998-F3F2-3F19-8582-7D6317703B71
+    value:           8C972EBB-7A14-3199-AE52-8E0643D7E975
 install-name:    '/System/Library/PrivateFrameworks/BlastDoor.framework/Versions/A/BlastDoor'
 swift-abi-version: 7
 allowable-clients:

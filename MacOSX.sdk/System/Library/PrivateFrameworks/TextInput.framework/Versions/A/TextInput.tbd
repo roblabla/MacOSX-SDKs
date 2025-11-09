@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E47DDD1D-5CBD-3D4C-91A8-899DF9505D9D
+    value:           8CC76A5F-A092-36EC-9D3A-CB8C36EC32F0
   - target:          x86_64-maccatalyst
-    value:           E47DDD1D-5CBD-3D4C-91A8-899DF9505D9D
+    value:           8CC76A5F-A092-36EC-9D3A-CB8C36EC32F0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           78BC14CC-BBDE-3C55-9FB4-3E7C1D0E90C4
+    value:           DB8DA877-48E2-3E90-B146-BEF683AE6D16
   - target:          arm64e-maccatalyst
-    value:           78BC14CC-BBDE-3C55-9FB4-3E7C1D0E90C4
+    value:           DB8DA877-48E2-3E90-B146-BEF683AE6D16
 install-name:    '/System/Library/PrivateFrameworks/TextInput.framework/Versions/A/TextInput'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -68,7 +68,8 @@ exports:
                        _TIInputModePropertiesDoubleSpaceReplacementKey, _TIInputModePropertiesEnablePrediction, 
                        _TIInputModePropertiesFontFallbackLanguage, _TIInputModePropertiesFontFallbacksRequiredKey, 
                        _TIInputModePropertiesFontsToAvoidKey, _TIInputModePropertiesHasWordNgramModel, 
-                       _TIInputModePropertiesInputManagerClassKey, _TIInputModePropertiesKeyboardFeatureSpecializationClassKey, 
+                       _TIInputModePropertiesIncludeLightweightLMMobileAssets, _TIInputModePropertiesInputManagerClassKey, 
+                       _TIInputModePropertiesKeyboardFeatureSpecializationClassKey, 
                        _TIInputModePropertiesLayoutTags, _TIInputModePropertiesMultilingualOnly, 
                        _TIInputModePropertiesNeverShowCandidateBar, _TIInputModePropertiesNonstopPunctuationCharactersKey, 
                        _TIInputModePropertiesPreferredASCIICapableInputModeKey, _TIInputModePropertiesPreferredNonASCIICapableInputModeKey, 

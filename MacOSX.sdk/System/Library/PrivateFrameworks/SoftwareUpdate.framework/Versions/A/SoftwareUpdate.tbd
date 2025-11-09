@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           51477310-B127-332B-8308-E90F3404C2C4
+    value:           0DBF8B1D-44BF-3139-8CDD-9E853A6B6083
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           BEE1E990-74A1-34D8-B868-8D867918D679
+    value:           A58B7139-B9EF-3460-BD2C-746B5971CC4D
 install-name:    '/System/Library/PrivateFrameworks/SoftwareUpdate.framework/Versions/A/SoftwareUpdate'
 current-version: 747
 exports:
@@ -108,8 +108,13 @@ exports:
                        _SUSoftwareUpdateMetadataKeyRestrictedToOOB, _SUSoftwareUpdateProductDetailsKeyName, 
                        _SUSoftwareUpdateProductDetailsKeyVersion, _SUStatisticsCoreAnalyticsEventPrefix, 
                        _SUStatisticsErrorNetworkReachabilityIssueDesc, _SUStatisticsErrorRTCPayloadCreationFailedDesc, 
-                       _SUStatisticsErrorRTCReportingFailedDesc, _SUStatisticsKeySecureBootPolicy, 
-                       _SUStatisticsKeyStartupManagerPolicyAllowAppleExternalDrive, 
+                       _SUStatisticsErrorRTCReportingFailedDesc, _SUStatisticsKeyBootPolicyAUXI, 
+                       _SUStatisticsKeyBootPolicyAUXP, _SUStatisticsKeyBootPolicyAUXR, 
+                       _SUStatisticsKeyBootPolicyCOIH, _SUStatisticsKeyBootPolicySIP0, 
+                       _SUStatisticsKeyBootPolicySIP1, _SUStatisticsKeyBootPolicySIP2, 
+                       _SUStatisticsKeyBootPolicySIP3, _SUStatisticsKeyBootPolicySMB2, 
+                       _SUStatisticsKeyBootPolicySMB3, _SUStatisticsKeyBootPolicySupported, 
+                       _SUStatisticsKeySecureBootPolicy, _SUStatisticsKeyStartupManagerPolicyAllowAppleExternalDrive, 
                        _SUStatisticsKeyStartupManagerPolicyAllowNetwork, _SUStatisticsKeyStartupManagerPolicyAllowWindows, 
                        _SUStatisticsRTCPayloadKeyAppBundleIDs, _SUStatisticsRTCPayloadKeyAppNames, 
                        _SUStatisticsRTCPayloadKeyCatalogURL, _SUStatisticsRTCPayloadKeyCategory, 

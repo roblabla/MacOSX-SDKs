@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1DCA0B24-3675-3D4E-BABD-5F0B971D7275
+    value:           A2DEEF63-7643-37AA-9420-ED875629D1B2
   - target:          x86_64-maccatalyst
-    value:           1DCA0B24-3675-3D4E-BABD-5F0B971D7275
+    value:           A2DEEF63-7643-37AA-9420-ED875629D1B2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           53F055F9-1BDC-308F-802F-5D15DD955085
+    value:           44607BEB-812C-3152-AFE6-51C960D15D12
   - target:          arm64e-maccatalyst
-    value:           53F055F9-1BDC-308F-802F-5D15DD955085
+    value:           44607BEB-812C-3152-AFE6-51C960D15D12
 install-name:    '/System/Library/PrivateFrameworks/DataDetectorsCore.framework/Versions/A/DataDetectorsCore'
 current-version: 674
 exports:

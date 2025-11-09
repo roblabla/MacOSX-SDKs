@@ -298,6 +298,15 @@ API_AVAILABLE(ios(11.0))
  */
 @property (nonatomic, assign, getter=userFaceTrackingEnabled) BOOL userFaceTrackingEnabled API_AVAILABLE(ios(13.0));
 
+/**
+ Enable or disable app clip code tracking. Disabled by default. When enabled, detected app clip codes will be surfaced as an ARAppClipCodeAnchor.
+ */
+@property (nonatomic, assign) BOOL appClipCodeTrackingEnabled API_AVAILABLE(ios(14.3));
+
+/**
+ Indicates whether app clip code tracking can be enabled on this device.
+ */
+@property (class, nonatomic, readonly) BOOL supportsAppClipCodeTracking API_AVAILABLE(ios(14.3));
 
 /**
  Indicates whether the scene reconstruction type is supported for the configuration on this device.
@@ -515,6 +524,15 @@ Images to detect in the scene.
  */
 @property (nonatomic, assign) NSInteger maximumNumberOfTrackedImages;
 
+/**
+ Enable or disable app clip code tracking. Disabled by default. When enabled, detected app clip codes will be surfaced as an ARAppClipCodeAnchor.
+ */
+@property (nonatomic, assign) BOOL appClipCodeTrackingEnabled API_AVAILABLE(ios(14.3));
+
+/**
+ Indicates whether app clip code tracking can be enabled on this device.
+ */
+@property (class, nonatomic, readonly) BOOL supportsAppClipCodeTracking API_AVAILABLE(ios(14.3));
 
 - (instancetype)init;
 + (instancetype)new NS_SWIFT_UNAVAILABLE("Use init() instead");
@@ -611,6 +629,15 @@ API_AVAILABLE(ios(14.0))
  */
 @property (nonatomic, copy) NSSet<ARReferenceObject *> *detectionObjects;
 
+/**
+ Enable or disable app clip code tracking. Disabled by default. When enabled, detected app clip codes will be surfaced as an ARAppClipCodeAnchor.
+ */
+@property (nonatomic, assign) BOOL appClipCodeTrackingEnabled API_AVAILABLE(ios(14.3));
+
+/**
+ Indicates whether app clip code tracking can be enabled on this device.
+ */
+@property (class, nonatomic, readonly) BOOL supportsAppClipCodeTracking API_AVAILABLE(ios(14.3));
 
 /**
  Determines the availability of geo tracking at the current location.

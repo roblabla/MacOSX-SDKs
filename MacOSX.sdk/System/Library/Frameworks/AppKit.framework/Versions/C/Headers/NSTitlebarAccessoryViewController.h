@@ -21,7 +21,7 @@ API_AVAILABLE(macos(10.10))
 #if !TARGET_OS_IPHONE
 /* The layoutAttribute defaults to NSLayoutAttributeBottom, telling the window to place this view controller's view under the titlebar. NSLayoutAttributeRight is also supported, telling the window to place the view controller's view on the right side of the window. For applications linked on Mac OS 10.11 or later, NSLayoutAttributeLeft is also supported; placing the item on the left side of the window (adjacent and to the right of the close/minimize/maximize buttons). All other values are currently invalid and will assert.
  
-    For applications linked on 10.11 and higher, a layoutAttribute== NSLayoutAttributeRight will no longer right indent toolbar items (previously it would leave a space), unless  the titleVisibility == NSWindowTitleHidden. 
+    A layoutAttribute == NSLayoutAttributeRight will indent toolbar items for all toolbar styles except NSToolbarStyleExpanded and NSToolbarStyleCompact.
  
     For applications linked on 10.12 and higher, NSLayoutAttributeLeading and NSLayoutAttributeTrailing can also be used to specify an abstract position that automatically flips depending on the localized language.  For applications that do not link on 10.12, NSLayoutAttributeLeft will automatically flip to the Right when in a Right To Left language.
  

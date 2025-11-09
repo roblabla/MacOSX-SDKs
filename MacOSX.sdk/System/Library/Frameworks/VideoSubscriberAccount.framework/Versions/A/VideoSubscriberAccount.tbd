@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           92AE146A-2D07-351F-A40D-0B7C26A4545F
+    value:           29D7A021-CA86-321C-828F-BAF913F21738
   - target:          x86_64-maccatalyst
-    value:           92AE146A-2D07-351F-A40D-0B7C26A4545F
+    value:           29D7A021-CA86-321C-828F-BAF913F21738
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2944A209-D19B-31E7-807D-6A44BC8602CC
+    value:           CFCB485F-F9C2-363B-A745-87E7449F8732
   - target:          arm64e-maccatalyst
-    value:           2944A209-D19B-31E7-807D-6A44BC8602CC
+    value:           CFCB485F-F9C2-363B-A745-87E7449F8732
 install-name:    '/System/Library/Frameworks/VideoSubscriberAccount.framework/Versions/A/VideoSubscriberAccount'
-current-version: 364.10.10
+current-version: 364.20.8
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _VSAccountProviderAuthenticationSchemeAPI, _VSAccountProviderAuthenticationSchemeSAML, 
                        _VSAccountStoreDidChangeNotification, _VSActiveSubscriptionsDidChangeNotification, 
@@ -41,12 +41,12 @@ exports:
                        _VSErrorInfoKeySAMLResponseStatus, _VSErrorInfoKeyUnsupportedProviderIdentifier, 
                        _VSErrorIsPrivateError, _VSErrorIsPublicError, _VSErrorLogObject, 
                        _VSHTTPMethodNameGET, _VSHTTPMethodNamePOST, _VSIdentityProviderAvailabilityDidChangeNotification, 
-                       _VSInvalidVerificationTokenError, _VSJSErrorDomain, _VSJSONDataValueTransformerName, 
-                       _VSLoadInterfaceFramework, _VSMainConcurrencyBindingOptions, 
-                       _VSMainThreadOperationWithBlock, _VSMetricClickTargetContinue, 
-                       _VSMetricClickTargetFindMoreApps, _VSMetricClickTargetIdentityProvider, 
-                       _VSMetricClickTargetInstallApp, _VSMetricClickTargetNotNow, 
-                       _VSMetricClickTargetOpenApp, _VSMetricClickTargetSTBOptOut, 
+                       _VSIdentityProviderInfoDidChangeNotification, _VSInvalidVerificationTokenError, 
+                       _VSJSErrorDomain, _VSJSONDataValueTransformerName, _VSLoadInterfaceFramework, 
+                       _VSMainConcurrencyBindingOptions, _VSMainThreadOperationWithBlock, 
+                       _VSMetricClickTargetContinue, _VSMetricClickTargetFindMoreApps, 
+                       _VSMetricClickTargetIdentityProvider, _VSMetricClickTargetInstallApp, 
+                       _VSMetricClickTargetNotNow, _VSMetricClickTargetOpenApp, _VSMetricClickTargetSTBOptOut, 
                        _VSMetricClickTargetSignIn, _VSMetricClickTargetSignOut, _VSMetricPageBuddyMain, 
                        _VSMetricPageBuddySingleProvider, _VSMetricPageBuddyZSO, _VSMetricPageSettingsAccountInfo, 
                        _VSMetricPageSettingsHome, _VSMetricPageSettingsPicker, _VSMetricPageTypeBuddy, 

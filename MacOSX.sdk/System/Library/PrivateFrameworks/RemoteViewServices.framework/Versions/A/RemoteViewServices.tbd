@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9078CCE3-F2F8-375B-9D02-5D3817B62E4C
+    value:           AC6E2D2F-8131-3A40-97D7-E24E2A45CD66
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9FB620E8-8F91-3EC8-8029-2D2B55F023E6
+    value:           351E4523-E99A-3849-88A1-96072B599D5C
 install-name:    '/System/Library/PrivateFrameworks/RemoteViewServices.framework/Versions/A/RemoteViewServices'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

@@ -71,43 +71,43 @@ public:
     virtual void
     free() override;
 
-    /** @deprectated */
+    /** @deprecated, use  setDataLength instead */
     virtual kern_return_t
     SetDataLength(uint32_t length) LOCALONLY;
 
-    /** @deprectated */
+    /** @deprecated use  getDataLength instead */
     virtual kern_return_t
     GetDataLength(uint32_t * length) const LOCALONLY;
 
-    /** @deprectated */
+    /** @deprecated use  setDataOffset instead */
     virtual kern_return_t
     SetDataOffset(uint16_t offset) LOCALONLY;
 
-    /** @deprectated */
+    /** @deprecated use  getDataOffset instead */
     virtual kern_return_t
     GetDataOffset(uint16_t * offset) const LOCALONLY;
 
-    /** @deprectated */
+    /** @deprecated */
     virtual kern_return_t
     SetHeadroom(uint8_t headroom) LOCALONLY;
 
-    /** @deprectated */
+    /** @deprecated */
     virtual kern_return_t
     GetHeadroom(uint8_t * headroom) const LOCALONLY;
 
-    /** @deprectated */
+    /** @deprecated*/
     virtual kern_return_t
     SetLinkHeaderLength(uint8_t length) LOCALONLY;
 
-    /** @deprectated */
+    /** @deprecated */
     virtual kern_return_t
     GetLinkHeaderLength(uint8_t * length) const LOCALONLY;
 
-    /** @deprectated */
+    /** @deprecated use getMemorySegmentOffset instead */
     virtual kern_return_t
     GetMemorySegmentOffset(uint64_t * offset) const LOCALONLY;
 
-    /** @deprectated */
+    /** @deprecated use getPacketBufferPool instead */
     virtual kern_return_t
     GetPacketBufferPool(
         IOUserNetworkPacketBufferPool ** pool) const LOCALONLY;

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           AA8F4C89-4C04-34A1-90A2-40F57EEE02F4
+    value:           45648C84-13A5-38E3-8C0C-A6AD64426757
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           901D1AC2-D0DC-3596-8E78-E85D4CA1ABD6
+    value:           53227DC0-1FFD-37E6-A067-6F49B17E7DFE
 install-name:    '/System/iOSSupport/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI'
 swift-abi-version: 7
 exports:
@@ -5485,6 +5485,8 @@ exports:
                        '_$s7SwiftUI4ViewPAAE11lineSpacingyQr12CoreGraphics7CGFloatVF', 
                        '_$s7SwiftUI4ViewPAAE11lineSpacingyQr12CoreGraphics7CGFloatVFQOMQ', 
                        '_$s7SwiftUI4ViewPAAE11onDisappear7performQryycSg_tF', '_$s7SwiftUI4ViewPAAE11onDisappear7performQryycSg_tFQOMQ', 
+                       '_$s7SwiftUI4ViewPAAE11pageCommand5value2in4stepQrAA7BindingVyqd__G_SNyqd__Gqd__tSzRd__lF', 
+                       '_$s7SwiftUI4ViewPAAE11pageCommand5value2in4stepQrAA7BindingVyqd__G_SNyqd__Gqd__tSzRd__lFQOMQ', 
                        '_$s7SwiftUI4ViewPAAE11pickerStyleyQrqd__AA06PickerE0Rd__lF', 
                        '_$s7SwiftUI4ViewPAAE11pickerStyleyQrqd__AA06PickerE0Rd__lFQOMQ', 
                        '_$s7SwiftUI4ViewPAAE11scaleEffect1x1y6anchorQr12CoreGraphics7CGFloatV_AjA9UnitPointVtF', 

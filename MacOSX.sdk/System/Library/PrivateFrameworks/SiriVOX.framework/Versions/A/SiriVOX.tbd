@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1A6C12B8-5628-3FBD-A8BE-6BF5C3A5C956
+    value:           7B69A979-34FB-37F6-BB76-05395EE6827F
   - target:          x86_64-maccatalyst
-    value:           1A6C12B8-5628-3FBD-A8BE-6BF5C3A5C956
+    value:           7B69A979-34FB-37F6-BB76-05395EE6827F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           92530D83-FAE2-3F37-90A5-DD5BB711C3B4
+    value:           08DD246B-AA27-3AAE-A258-65F11DCF5741
   - target:          arm64e-maccatalyst
-    value:           92530D83-FAE2-3F37-90A5-DD5BB711C3B4
+    value:           08DD246B-AA27-3AAE-A258-65F11DCF5741
 install-name:    '/System/Library/PrivateFrameworks/SiriVOX.framework/Versions/A/SiriVOX'
 current-version: 0
 compatibility-version: 0

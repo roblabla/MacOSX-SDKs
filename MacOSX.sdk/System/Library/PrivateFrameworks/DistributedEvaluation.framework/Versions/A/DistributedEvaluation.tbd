@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           44411C16-57F3-348B-B877-E0A5C1C3596F
+    value:           8594CEE5-2488-362B-ADFE-217983C926B1
   - target:          x86_64-maccatalyst
-    value:           44411C16-57F3-348B-B877-E0A5C1C3596F
+    value:           8594CEE5-2488-362B-ADFE-217983C926B1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0E0B5D93-6210-3EA5-BA59-86AA4B27E590
+    value:           770EE2F0-CE5D-3B65-B278-E76E674F3039
   - target:          arm64e-maccatalyst
-    value:           0E0B5D93-6210-3EA5-BA59-86AA4B27E590
+    value:           770EE2F0-CE5D-3B65-B278-E76E674F3039
 install-name:    '/System/Library/PrivateFrameworks/DistributedEvaluation.framework/Versions/A/DistributedEvaluation'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

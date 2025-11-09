@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6765A85C-90E3-393B-94A2-30A50696A72E
+    value:           936BD72B-1FBE-3235-98FA-B269D8D7F4E7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EA412D75-FCC6-356D-8DA0-39530F1E4CF1
+    value:           DA4D4B65-1ED7-3A6E-B19C-CF591AD15B89
 install-name:    '/System/Library/PrivateFrameworks/ClassroomKit.framework/Versions/A/ClassroomKit'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -304,21 +304,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3538ED44-A858-3CBE-A88F-A5A81E8439F7
+    value:           4B273AA5-37AE-3F49-8E70-83A258D56E66
   - target:          x86_64-maccatalyst
-    value:           3538ED44-A858-3CBE-A88F-A5A81E8439F7
+    value:           4B273AA5-37AE-3F49-8E70-83A258D56E66
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           88BBBA51-DC26-36DD-958E-A4C0E0CCD502
+    value:           C8978418-7F79-3FCA-826C-A1B9BA85039E
   - target:          arm64e-maccatalyst
-    value:           88BBBA51-DC26-36DD-958E-A4C0E0CCD502
+    value:           C8978418-7F79-3FCA-826C-A1B9BA85039E
 install-name:    '/System/Library/PrivateFrameworks/Catalyst.framework/Versions/A/Catalyst'
 current-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CATAssertIsNotQueue, _CATAssertIsQueue, _CATErrorDomain, 
                        _CATErrorWithCodeAndUserInfo, _CATErrorWithDomainCodeAndUserInfo, 
@@ -344,17 +344,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           66589C38-139A-3C60-ADEC-BFCB87AFC8A1
+    value:           C317996F-5486-310E-AB57-41DC0B412AF0
   - target:          x86_64-maccatalyst
-    value:           66589C38-139A-3C60-ADEC-BFCB87AFC8A1
+    value:           C317996F-5486-310E-AB57-41DC0B412AF0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D0F27EFD-F784-3D2E-9279-5D70520367E5
+    value:           25BD320D-A621-3B1F-BFFD-A247685AF994
   - target:          arm64e-maccatalyst
-    value:           D0F27EFD-F784-3D2E-9279-5D70520367E5
+    value:           25BD320D-A621-3B1F-BFFD-A247685AF994
 install-name:    '/System/Library/PrivateFrameworks/DeviceManagement.framework/Versions/A/DeviceManagement'
 current-version: 40.18
 reexported-libraries:
@@ -362,7 +362,7 @@ reexported-libraries:
                        arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/Catalyst.framework/Versions/A/Catalyst' ]
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _DMFAllConfigurationOrganizationTypes, _DMFAppLog, _DMFBundleIdentifierErrorKey, 
                        _DMFCEMReasonCodeBad, _DMFCEMReasonCodeConflict, _DMFCEMReasonCodeCouldNotDecrypt, 

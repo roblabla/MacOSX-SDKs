@@ -3,16 +3,16 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           6D4D20FD-5A5C-3C1D-B3B3-E2A0C870DB4E
+    value:           2D721870-D051-3664-B74F-A2EC781BBBC6
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           E361D306-B6DA-3774-88E6-0BA37299C9A0
+    value:           D9F360F5-FE3F-32D3-8AC6-F97EAD41E0AE
 install-name:    '/System/iOSSupport/System/Library/Frameworks/EventKitUI.framework/Versions/A/EventKitUI'
 current-version: 0
 compatibility-version: 0
 exports:
-  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _AdjustedColorForBackgroundColor, _AdjustedColorForColor, 
                        _BackgroundColorForCalendarColorWithOpaqueForStyle, _BirthdayImage, 
                        _BirthdayMonthCalendarColor, _BirthdayPadDayViewImage, _BirthdayPadWeekViewImage, 

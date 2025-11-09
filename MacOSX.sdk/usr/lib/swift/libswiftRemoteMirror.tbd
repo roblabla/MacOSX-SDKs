@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           A3B03DBB-82A9-3FD4-BE05-5F4B89EC47B8
+    value:           5ABEE997-D1D6-3D4E-97A9-17C85CD6B4B4
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           47C4501F-F242-3327-A5A4-A70A5E4A4737
+    value:           B6DFAE0D-9280-38DC-88BF-1492524FFD94
 install-name:    '/usr/lib/swift/libswiftRemoteMirror.dylib'
 current-version: 0
 exports:

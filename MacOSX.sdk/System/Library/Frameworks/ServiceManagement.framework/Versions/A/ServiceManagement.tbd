@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4E6B9A29-A2AA-3F4C-B8FF-8CE4D22741AB
+    value:           2C03BEB7-915C-3A3A-A44F-A77775E1BFD5
   - target:          x86_64-maccatalyst
-    value:           4E6B9A29-A2AA-3F4C-B8FF-8CE4D22741AB
+    value:           2C03BEB7-915C-3A3A-A44F-A77775E1BFD5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8C7ED32A-74B7-3109-AFD1-424E7051858A
+    value:           F21342A9-E6E0-3535-B40B-96E62A27ADA3
   - target:          arm64e-maccatalyst
-    value:           8C7ED32A-74B7-3109-AFD1-424E7051858A
+    value:           F21342A9-E6E0-3535-B40B-96E62A27ADA3
 install-name:    '/System/Library/Frameworks/ServiceManagement.framework/Versions/A/ServiceManagement'
 current-version: 2038.40.38
 exports:

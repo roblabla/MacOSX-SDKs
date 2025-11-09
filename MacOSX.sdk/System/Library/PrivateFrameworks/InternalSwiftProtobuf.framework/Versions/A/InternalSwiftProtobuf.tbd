@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D4DEE972-9E62-33F7-AC3A-E0AE256EA21A
+    value:           E556E934-7CF3-3764-851F-64BADD19B18B
   - target:          x86_64-maccatalyst
-    value:           D4DEE972-9E62-33F7-AC3A-E0AE256EA21A
+    value:           E556E934-7CF3-3764-851F-64BADD19B18B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F7B3CF79-320B-3D15-BB9E-1A34C86DF22F
+    value:           9FDC0F92-8F12-3021-ABC0-5760EA13EADD
   - target:          arm64e-maccatalyst
-    value:           F7B3CF79-320B-3D15-BB9E-1A34C86DF22F
+    value:           9FDC0F92-8F12-3021-ABC0-5760EA13EADD
 install-name:    '/System/Library/PrivateFrameworks/InternalSwiftProtobuf.framework/Versions/A/InternalSwiftProtobuf'
 swift-abi-version: 7
 exports:
@@ -2706,6 +2706,7 @@ exports:
                        '_$s21InternalSwiftProtobuf0C4BoolV14decodeRepeated5value4fromySaySbGz_xztKAA7DecoderRzlFZ', 
                        '_$s21InternalSwiftProtobuf0C4BoolV14decodeSingular5value4fromySbSgz_xztKAA7DecoderRzlFZ', 
                        '_$s21InternalSwiftProtobuf0C4BoolV18proto3DefaultValueSbvgZ', 
+                       '_$s21InternalSwiftProtobuf0C4BoolV9_lessThan3lhs3rhsS2b_SbtFZ', 
                        '_$s21InternalSwiftProtobuf0C4BoolVAA10MapKeyTypeAAMc', '_$s21InternalSwiftProtobuf0C4BoolVAA10MapKeyTypeAAWP', 
                        '_$s21InternalSwiftProtobuf0C4BoolVAA12MapValueTypeAAMc', 
                        '_$s21InternalSwiftProtobuf0C4BoolVAA12MapValueTypeAAWP', 
@@ -2874,8 +2875,11 @@ exports:
                        '_$s21InternalSwiftProtobuf0C8SFixed64VAA9FieldTypeAAWP', 
                        '_$s21InternalSwiftProtobuf0C8SFixed64VMa', '_$s21InternalSwiftProtobuf0C8SFixed64VMn', 
                        '_$s21InternalSwiftProtobuf0C8SFixed64VN', '_$s21InternalSwiftProtobuf10MapKeyTypeMp', 
-                       '_$s21InternalSwiftProtobuf10MapKeyTypePAA05FieldF0Tb', '_$s21InternalSwiftProtobuf10MapKeyTypeTL', 
-                       '_$s21InternalSwiftProtobuf12ExtensionMapMp', '_$s21InternalSwiftProtobuf12ExtensionMapP19fieldNumberForProto11messageType14protoFieldNameSiSgAA7Message_pXp_SStFTj', 
+                       '_$s21InternalSwiftProtobuf10MapKeyTypeP9_lessThan3lhs3rhsSb04BaseF0Qz_AHtFZTj', 
+                       '_$s21InternalSwiftProtobuf10MapKeyTypeP9_lessThan3lhs3rhsSb04BaseF0Qz_AHtFZTq', 
+                       '_$s21InternalSwiftProtobuf10MapKeyTypePAA05FieldF0Tb', '_$s21InternalSwiftProtobuf10MapKeyTypePAASL04BaseF0RpzrlE9_lessThan3lhs3rhsSbAE_AEtFZ', 
+                       '_$s21InternalSwiftProtobuf10MapKeyTypeTL', '_$s21InternalSwiftProtobuf12ExtensionMapMp', 
+                       '_$s21InternalSwiftProtobuf12ExtensionMapP19fieldNumberForProto11messageType14protoFieldNameSiSgAA7Message_pXp_SStFTj', 
                        '_$s21InternalSwiftProtobuf12ExtensionMapP19fieldNumberForProto11messageType14protoFieldNameSiSgAA7Message_pXp_SStFTq', 
                        '_$s21InternalSwiftProtobuf12ExtensionMapPyAA010AnyMessageD0_pSgAA0G0_pXp_SitcigTj', 
                        '_$s21InternalSwiftProtobuf12ExtensionMapPyAA010AnyMessageD0_pSgAA0G0_pXp_SitcigTq', 

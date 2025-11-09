@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6B65C6DA-9FB5-3C4A-9F59-B83EEC897AFF
+    value:           E7311A83-0764-30BE-98DF-9D6D1DEE49BE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4B7CC73D-1CE9-359E-BD82-86EEECDE969D
+    value:           3A5E96B4-B0A6-3A58-91F0-A7E11DE51CA1
 install-name:    '/System/Library/Frameworks/Virtualization.framework/Versions/A/Virtualization'
-current-version: 18.4
+current-version: 18.5
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _VZErrorDomain, __VZVirtualMachineGuestTypeLinux ]
     objc-classes:    [ VZBootLoader, VZBridgedNetworkDeviceAttachment, VZBridgedNetworkInterface, 
                        VZDiskImageStorageDeviceAttachment, VZEntropyDeviceConfiguration, 

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           2D8221AB-1318-3F32-8CF1-B2E9C8F3C560
+    value:           4886ABCB-FCC4-3924-8323-91DD920B7F3C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           18E3440B-51E2-36B5-9312-90E01DAAA46A
+    value:           9599D34E-4E0E-3AA0-A719-1F5941A557B6
 install-name:    '/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/JavaScriptCore'
-current-version: 610.2.11
+current-version: 610.3.7
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ __ZN3JSC19WebAssemblyFunction6createERNS_2VMEPNS_14JSGlobalObjectEPNS_9StructureEjRKN3WTF6StringEPNS_21JSWebAssemblyInstanceERNS_4Wasm6CalleeEPNS_21MacroAssemblerCodePtrILNS7_6PtrTagE64376EEEy, 

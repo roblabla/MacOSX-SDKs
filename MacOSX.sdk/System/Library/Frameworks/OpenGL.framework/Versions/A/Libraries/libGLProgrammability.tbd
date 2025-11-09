@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           24AF2C60-4125-38CE-A224-A620ED3951AF
+    value:           570616B1-98D2-3DF2-844A-EE845A8B8EDE
   - target:          x86_64-maccatalyst
-    value:           24AF2C60-4125-38CE-A224-A620ED3951AF
+    value:           570616B1-98D2-3DF2-844A-EE845A8B8EDE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8D9EBA06-A86A-3904-B259-2401632E4D16
+    value:           90DCD57F-7ECC-3D10-863C-38B018F11FF1
   - target:          arm64e-maccatalyst
-    value:           8D9EBA06-A86A-3904-B259-2401632E4D16
+    value:           90DCD57F-7ECC-3D10-863C-38B018F11FF1
 install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLProgrammability.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

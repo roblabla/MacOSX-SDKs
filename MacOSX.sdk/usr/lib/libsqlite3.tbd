@@ -4,26 +4,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F8D4C451-86E6-3DEB-B9F5-1643C98B81E3
+    value:           9CFBB72A-0CA4-32C8-967C-F2E94C66ADA1
   - target:          x86_64-maccatalyst
-    value:           F8D4C451-86E6-3DEB-B9F5-1643C98B81E3
+    value:           9CFBB72A-0CA4-32C8-967C-F2E94C66ADA1
   - target:          x86_64h-macos
-    value:           F1168163-F85F-313E-A184-C9506346FDC4
+    value:           D7017429-8D46-3ECB-8B70-4625C74918F3
   - target:          x86_64h-maccatalyst
-    value:           F1168163-F85F-313E-A184-C9506346FDC4
+    value:           D7017429-8D46-3ECB-8B70-4625C74918F3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DCC6DB3B-50D9-39CC-A2F8-CA3C51EB1316
+    value:           23EE8E77-50C4-35E8-A3C7-04C71FBD8565
   - target:          arm64e-maccatalyst
-    value:           DCC6DB3B-50D9-39CC-A2F8-CA3C51EB1316
+    value:           23EE8E77-50C4-35E8-A3C7-04C71FBD8565
 install-name:    '/usr/lib/libsqlite3.dylib'
 current-version: 321.1
 compatibility-version: 9
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, x86_64-maccatalyst, 
                        x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
     symbols:         [ __sqlite3_apple_archive, __sqlite3_apple_archive_type, __sqlite3_apple_unarchive, 
                        __sqlite3_db_clone, __sqlite3_db_copy, __sqlite3_db_copy_compact, 

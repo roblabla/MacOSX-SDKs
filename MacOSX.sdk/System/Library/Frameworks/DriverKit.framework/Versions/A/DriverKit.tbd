@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           E98E5B4B-75D5-340C-9950-CA4439416428
+    value:           CCE76D80-DB3B-3577-813D-AD99B45A2A1A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           20307C76-A45A-348C-A885-2B7D7295A7B3
+    value:           D862B89C-850C-3A67-8429-570DAB32E422
 install-name:    '/System/Library/Frameworks/DriverKit.framework/Versions/A/DriverKit'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _DriverExecutableMain, _IOBufferMemoryDescriptor_Class, _IODMACommand_Class, 
                        _IODataQueueDispatchSource_Class, _IODelay, _IODispatchQueue_Class, 
                        _IODispatchSource_Class, _IODriverKitTest, _IOFree, _IOInterruptDispatchSource_Class, 

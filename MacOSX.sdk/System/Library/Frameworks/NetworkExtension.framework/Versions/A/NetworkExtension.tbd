@@ -4,24 +4,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           09531D01-4C4B-391B-8298-B6810C12E45F
+    value:           F7DE2856-7FC5-343B-A118-416C253ED686
   - target:          x86_64-maccatalyst
-    value:           09531D01-4C4B-391B-8298-B6810C12E45F
+    value:           F7DE2856-7FC5-343B-A118-416C253ED686
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D9EEF41F-07CD-39E9-8EB5-46760456F903
+    value:           24D6931D-0496-36BD-B645-C86CFEEAD0D5
   - target:          arm64e-maccatalyst
-    value:           D9EEF41F-07CD-39E9-8EB5-46760456F903
+    value:           24D6931D-0496-36BD-B645-C86CFEEAD0D5
 install-name:    '/System/Library/Frameworks/NetworkExtension.framework/Versions/A/NetworkExtension'
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/Frameworks/Network.framework/Versions/A/Network' ]
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CFARRAY_TYPE, _CFBOOLEAN_TYPE, _CFDATA_TYPE, _CFDICTIONARY_TYPE, 
                        _CFNUMBER_TYPE, _CFSTRING_TYPE, _NEAddAddressToDictionary, 
@@ -309,7 +309,7 @@ exports:
                        NEVPNManager, NEVPNNetworkAgent, NEVPNProtocol, NEVPNProtocolIKEv2, 
                        NEVPNProtocolIPSec, NEVPNProtocolL2TP, NEVPNProtocolPPP, NEVPNProtocolPPTP, 
                        NEVPNProtocolPlugin, NWTLSParameters ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CertTypeFormat, _NEGetRefFromConfigProfileUUID, _NEImportKeychainPayload, 
                        _NEKeychainSystemRemoveWithPersistentID, _NEVerifyDesignatedRequirement, 
                        _kNEProfilePayloadVPNAppMappingDomain ]

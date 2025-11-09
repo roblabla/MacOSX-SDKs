@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           86DAF61B-7590-3B08-B7C5-BB39500BD550
+    value:           BE5588D5-BD17-39D0-9750-A3B29F3DCA76
   - target:          x86_64-maccatalyst
-    value:           86DAF61B-7590-3B08-B7C5-BB39500BD550
+    value:           BE5588D5-BD17-39D0-9750-A3B29F3DCA76
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1BDA3EE0-6894-3B0B-ACDB-1091D21D909F
+    value:           0ED1BF1C-8F02-367D-B803-2D9750540CE0
   - target:          arm64e-maccatalyst
-    value:           1BDA3EE0-6894-3B0B-ACDB-1091D21D909F
+    value:           0ED1BF1C-8F02-367D-B803-2D9750540CE0
 install-name:    '/System/Library/PrivateFrameworks/SignpostNotification.framework/Versions/A/SignpostNotification'
 current-version: 53
 exports:

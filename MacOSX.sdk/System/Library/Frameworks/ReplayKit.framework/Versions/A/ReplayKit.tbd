@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           8CE7A453-EB54-3BF2-A089-5FFA3E115E35
+    value:           6F0CCD75-B287-3A54-9FD4-CF2EF715D5C6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           67B3986A-E0AD-367B-B992-4B3D31D4CA65
+    value:           07605FB4-4CCE-3746-B895-BA262D3BCD48
 install-name:    '/System/Library/Frameworks/ReplayKit.framework/Versions/A/ReplayKit'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _RPApplicationInfoBundleIdentifierKey, _RPAudioPacketPool_Alloc, 
                        _RPAudioPacketPool_Create, _RPAudioPacketPool_Destroy, _RPAudioPacketPool_Free, 
                        _RPLogSetLogLevel, _RPRecordingErrorDomain, _RPSampleBufferUtilities_CopySampleBufferFromSourceBuffer, 

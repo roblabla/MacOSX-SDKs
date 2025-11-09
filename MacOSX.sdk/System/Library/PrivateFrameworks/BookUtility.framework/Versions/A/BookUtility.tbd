@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           06F982D2-6236-3585-9B7A-C5DE2FE248AA
+    value:           36BF43CC-F036-33F2-BFC5-7A29611ED039
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EE3EA6B5-3149-31C6-9303-3CA030B63FBA
+    value:           375CDDF5-9AC5-3949-8807-32E669B4BD1F
 install-name:    '/System/Library/PrivateFrameworks/BookUtility.framework/Versions/A/BookUtility'
-current-version: 1460
+current-version: 1471
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           314DF13A-B720-327F-90F8-2D7359F23F8C
+    value:           B7B25190-C2CC-3461-BCA6-170955DB5B16
   - target:          x86_64-maccatalyst
-    value:           314DF13A-B720-327F-90F8-2D7359F23F8C
+    value:           B7B25190-C2CC-3461-BCA6-170955DB5B16
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2C277292-2AE7-3BB4-918C-4946F3A6DA47
+    value:           B1D3E51D-E98E-3354-8903-95B619BD8B84
   - target:          arm64e-maccatalyst
-    value:           2C277292-2AE7-3BB4-918C-4946F3A6DA47
+    value:           B1D3E51D-E98E-3354-8903-95B619BD8B84
 install-name:    '/System/Library/PrivateFrameworks/CoreSuggestionsInternals.framework/Versions/A/CoreSuggestionsInternals'
-current-version: 1115.255.1
+current-version: 1115.255
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     weak-symbols:    [ __ZTIN3re217NumCapturesWalkerE, __ZTIN3re218CaptureNamesWalkerE, 
@@ -34,6 +34,7 @@ exports:
                        _SGCleavePhoneNumberAndExtension, _SGCollapseWhitespaceAndStrip, 
                        _SGContactDetailTypeDescription, _SGContactDetailTypeToEntityTypes, 
                        _SGConvertUtf8ByteOffsetsToUtf16WordOffsets, _SGCustomResponseCKPT, 
+                       _SGDBatteryMonitoringOverrideIsConnectedToPowerForTesting, 
                        _SGDBatteryMonitoringStart, _SGDCKEventReadFrom, _SGDCKInteractionInfoReadFrom, 
                        _SGDCKLocationReadFrom, _SGDCKTimeRangeReadFrom, _SGDExit, 
                        _SGDIsConnectedToPower, _SGDSetTrainingSourceRecoverer, _SGDSuggestManagerErrorDomain, 
@@ -57,17 +58,18 @@ exports:
                        _SGM2ContactCreatedReadFrom, _SGM2ContactDetailExtractionReadFrom, 
                        _SGM2ContactDetailSentReadFrom, _SGM2ContactsInterfaceCacheCountReadFrom, 
                        _SGM2ContactsInterfaceCacheHitReadFrom, _SGM2CustomResponsesHarvestReadFrom, 
-                       _SGM2FoundInMailModelScoreReadFrom, _SGM2PerfXPCLatencyReadFrom, 
-                       _SGM2SearchResultsIncludedPureSuggestionReadFrom, _SGM2SearchResultsUserSelectedContactReadFrom, 
-                       _SGM2SelfIdModelScoreReadFrom, _SGM2SerializedContactsCacheHitReadFrom, 
-                       _SGM2SqliteErrorsReadFrom, _SGM2SuggestdExitReasonReadFrom, 
-                       _SGM2SuggestedContactDetailShownReadFrom, _SGM2SuggestedContactDetailUsedReadFrom, 
-                       _SGM2UnknownContactInformationShownReadFrom, _SGMachTimeToNanoseconds, 
-                       _SGMailAttachmentMimeTypeCalendar, _SGMailAttachmentMimeTypeVcard, 
-                       _SGMailClientUtilErrorDomain, _SGMemoryHeavyOperation, _SGMurmurhashString, 
-                       _SGNSTextCheckingTypeToString, _SGNamesAsciify, _SGNamesIsMostlyAlpha, 
-                       _SGNamesOnlyNameChars, _SGNormalizeAddress, _SGNormalizeBirthday, 
-                       _SGNormalizeCNAddress, _SGNormalizeEmailAddress, _SGNormalizeInstantMessageAddress, 
+                       _SGM2FoundInMailModelScoreReadFrom, _SGM2HarvestCostBreakdownReadFrom, 
+                       _SGM2HarvestCostReadFrom, _SGM2PerfXPCLatencyReadFrom, _SGM2SearchResultsIncludedPureSuggestionReadFrom, 
+                       _SGM2SearchResultsUserSelectedContactReadFrom, _SGM2SelfIdModelScoreReadFrom, 
+                       _SGM2SerializedContactsCacheHitReadFrom, _SGM2SqliteErrorsReadFrom, 
+                       _SGM2SuggestdExitReasonReadFrom, _SGM2SuggestedContactDetailShownReadFrom, 
+                       _SGM2SuggestedContactDetailUsedReadFrom, _SGM2UnknownContactInformationShownReadFrom, 
+                       _SGMachTimeToNanoseconds, _SGMailAttachmentMimeTypeCalendar, 
+                       _SGMailAttachmentMimeTypeVcard, _SGMailClientUtilErrorDomain, 
+                       _SGMemoryHeavyOperation, _SGMurmurhashString, _SGNSTextCheckingTypeToString, 
+                       _SGNamesAsciify, _SGNamesIsMostlyAlpha, _SGNamesOnlyNameChars, 
+                       _SGNormalizeAddress, _SGNormalizeBirthday, _SGNormalizeCNAddress, 
+                       _SGNormalizeEmailAddress, _SGNormalizeInstantMessageAddress, 
                        _SGNormalizeName, _SGNormalizePhoneNumber, _SGNormalizePhoneNumberCached, 
                        _SGNormalizeSocialProfile, _SGNormalizeUnicodeString, _SGNormalizeUnicodeStringMinimally, 
                        _SGNotUserInitiated, _SGNotUserInitiatedWaitUntilAllOperationsAreFinished, 
@@ -296,8 +298,14 @@ exports:
                        _addEdge, _descriptionForIdentityKeyType, _emailAddressDomain, 
                        _enumerateTokensInEmailAddress, _findConnectedComponents, 
                        _freeDisjointSet, _freeGraph, _freeRegexp, _globEscape, _h64, 
-                       _initGraph, _kDocumentTypeEmail, _kDocumentTypeInteraction, 
-                       _kDocumentTypeSMS, _kDocumentTypeWepage, _kFtsPrefixMatchingAnything, 
+                       _initGraph, _isConnectedToPowerOverrideForTesting, _kDocumentTypeEmail, 
+                       _kDocumentTypeInteraction, _kDocumentTypeSMS, _kDocumentTypeWepage, 
+                       _kFtsPrefixMatchingAnything, _kHarvestMetricsDissectorTimer, 
+                       _kHarvestMetricsGeocodingTimer, _kHarvestMetricsHarvestTimer, 
+                       _kHarvestMetricsMessageDetectedData, _kHarvestMetricsMessageHtmlParser, 
+                       _kHarvestMetricsMessageInhumanBody, _kHarvestMetricsMessageQuotedRegions, 
+                       _kHarvestMetricsMessageSubjectDetectedData, _kHarvestMetricsPluginsTimer, 
+                       _kHarvestMetricsStorageTimer, _kHarvestMetricsVerificationTimer, 
                        _kHarvestQueueBadChecksumError, _kHarvestQueueBufferFullError, 
                        _kHarvestQueueFileOpenError, _kHarvestQueueFullError, _kHarvestQueueReadError, 
                        _kHarvestQueueUnsupportedError, _kHarvestQueueWriteError, 
@@ -357,10 +365,11 @@ exports:
                        _kSGStructuredEventModelInputMiscSubject, _kSGStructuredEventModelLocation, 
                        _kSGStructuredEventModelMappingCarRentalName, _kSGStructuredEventModelMappingEndAddress, 
                        _kSGStructuredEventModelMappingEndDatetime, _kSGStructuredEventModelMappingEndPlace, 
-                       _kSGStructuredEventModelMappingEventName, _kSGStructuredEventModelMappingHotelRestaurantName, 
-                       _kSGStructuredEventModelMappingMovieTicketName, _kSGStructuredEventModelMappingReservationId, 
-                       _kSGStructuredEventModelMappingStartAddress, _kSGStructuredEventModelMappingStartDatetime, 
-                       _kSGStructuredEventModelMappingStartPlace, _kSGStructuredEventModelTime, 
+                       _kSGStructuredEventModelMappingEventName, _kSGStructuredEventModelMappingEventPolarity, 
+                       _kSGStructuredEventModelMappingHotelRestaurantName, _kSGStructuredEventModelMappingMovieTicketName, 
+                       _kSGStructuredEventModelMappingReservationId, _kSGStructuredEventModelMappingStartAddress, 
+                       _kSGStructuredEventModelMappingStartDatetime, _kSGStructuredEventModelMappingStartPlace, 
+                       _kSGStructuredEventModelPolarity, _kSGStructuredEventModelTime, 
                        _kSGStructuredEventModelTitle, _kSGTaggedCharacterRangePOSTagAltNoun, 
                        _kSGTaggedCharacterRangePOSTagAltVerb, _kSGTaggedCharacterRangePOSTagNoun, 
                        _kSGTaggedCharacterRangePOSTagNounPlural, _kSGTaggedCharacterRangePOSTagNounProper, 
@@ -414,19 +423,21 @@ exports:
                        SGEspressoModel, SGExtractionDissector, SGExtractionDocument, 
                        SGExtractionModel, SGExtractionModelCoreMLFeatureWrapper, 
                        SGFlight, SGFlightData, SGFoundInAppsStrings, SGHKHealthStore, 
-                       SGHistoryObserver, SGHistorySharedData, SGHtmlEntities, SGHtmlParser, 
-                       SGIdentityEdge, SGIdentityKey, SGIdentityName, SGInMemoryAdapter, 
-                       SGInhumans, SGInteractionKey, SGJSBurstTrie, SGJournal, SGJournalEntry, 
+                       SGHarvestQueueMetrics, SGHarvestQueueMetricsTimer, SGHistoryObserver, 
+                       SGHistorySharedData, SGHtmlEntities, SGHtmlParser, SGIdentityEdge, 
+                       SGIdentityKey, SGIdentityName, SGInMemoryAdapter, SGInhumans, 
+                       SGInteractionKey, SGJSBurstTrie, SGJournal, SGJournalEntry, 
                        SGKeyValueCacheManager, SGLabeledValue, SGLazyImmortalResult, 
                        SGLazyPurgeableResult, SGLazyResult, SGLevenshtein, SGLexicon, 
                        SGLongRunningTask, SGLongRunningTaskManager, SGLowMemoryContactEnumeration, 
                        SGM2AutocompleteUserSelectedContact, SGM2BirthdayExtractionWithSupervision, 
                        SGM2BundleIdsTrackedAsOther, SGM2ContactCreated, SGM2ContactDetailExtraction, 
                        SGM2ContactDetailSent, SGM2ContactsInterfaceCacheCount, SGM2ContactsInterfaceCacheHit, 
-                       SGM2CustomResponsesHarvest, SGM2FoundInMailModelScore, SGM2PerfXPCLatency, 
-                       SGM2SearchResultsIncludedPureSuggestion, SGM2SearchResultsUserSelectedContact, 
-                       SGM2SelfIdModelScore, SGM2SerializedContactsCacheHit, SGM2SqliteErrors, 
-                       SGM2SuggestdExitReason, SGM2SuggestedContactDetailShown, SGM2SuggestedContactDetailUsed, 
+                       SGM2CustomResponsesHarvest, SGM2FoundInMailModelScore, SGM2HarvestCost, 
+                       SGM2HarvestCostBreakdown, SGM2PerfXPCLatency, SGM2SearchResultsIncludedPureSuggestion, 
+                       SGM2SearchResultsUserSelectedContact, SGM2SelfIdModelScore, 
+                       SGM2SerializedContactsCacheHit, SGM2SqliteErrors, SGM2SuggestdExitReason, 
+                       SGM2SuggestedContactDetailShown, SGM2SuggestedContactDetailUsed, 
                        SGM2UnknownContactInformationShown, SGMailAttachment, SGMailClientUtil, 
                        SGMailPatterns, SGMailQuoteParser, SGMeCardDissector, SGMeContact, 
                        SGMessage, SGMessageKey, SGMetricsDissector, SGMetricsHelper, 
@@ -522,6 +533,11 @@ exports:
                        SGM2FoundInMailModelScore._has, SGM2FoundInMailModelScore._key, 
                        SGM2FoundInMailModelScore._mode, SGM2FoundInMailModelScore._model, 
                        SGM2FoundInMailModelScore._result, SGM2FoundInMailModelScore._supervision, 
+                       SGM2HarvestCost._documentSource, SGM2HarvestCost._harvestSource, 
+                       SGM2HarvestCost._harvestedOnBattery, SGM2HarvestCost._has, 
+                       SGM2HarvestCost._highPriority, SGM2HarvestCost._receivedOnBattery, 
+                       SGM2HarvestCostBreakdown._componentName, SGM2HarvestCostBreakdown._documentSource, 
+                       SGM2HarvestCostBreakdown._has, SGM2HarvestCostBreakdown._significantWork, 
                        SGM2PerfXPCLatency._has, SGM2PerfXPCLatency._key, SGM2PerfXPCLatency._method, 
                        SGM2SearchResultsIncludedPureSuggestion._app, SGM2SearchResultsIncludedPureSuggestion._has, 
                        SGM2SearchResultsIncludedPureSuggestion._key, SGM2SearchResultsUserSelectedContact._app, 

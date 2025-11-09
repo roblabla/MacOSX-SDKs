@@ -4,22 +4,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           508CC10D-894C-3056-B1E1-8ABB318BCE84
+    value:           6A59E114-1CF5-373C-846B-65310DD4DBA9
   - target:          x86_64-maccatalyst
-    value:           508CC10D-894C-3056-B1E1-8ABB318BCE84
+    value:           6A59E114-1CF5-373C-846B-65310DD4DBA9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           42F7E6A4-9F20-334C-AD11-14648C803F04
+    value:           357AE9AD-F8B5-34AD-866E-8A390C15DB70
   - target:          arm64e-maccatalyst
-    value:           42F7E6A4-9F20-334C-AD11-14648C803F04
+    value:           357AE9AD-F8B5-34AD-866E-8A390C15DB70
 install-name:    '/System/Library/PrivateFrameworks/PeopleSuggester.framework/Versions/A/PeopleSuggester'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
-    symbols:         [ _Adaptable, _All, _Classic, _ContactEmbeddingAnalysisPETContactEmbeddingAnalysisEventReadFrom, 
+    symbols:         [ _Adaptable, _All, _CAPContactFillerContactEventReadFrom, _CAPContactFillerContactFillerEventForShareReadFrom, 
+                       _CAPContactFillerShareEventReadFrom, _CAPContactFillerUserEventReadFrom, 
+                       _Classic, _ContactEmbeddingAnalysisPETContactEmbeddingAnalysisEventReadFrom, 
                        _ContactEmbeddingAnalysisPETContactEmbeddingArrayEventReadFrom, 
                        _ContactEmbeddingAnalysisPETNeuralNetEmbeddingReadFrom, _CoreBehaviorAnalysisPETCoreBehaviorAnalysisEventReadFrom, 
                        _PeopleSuggesterVersionNumber, _PeopleSuggesterVersionString, 
@@ -36,13 +38,16 @@ exports:
                        __PSShareSheetSuggestionBundleIDMapping, __PSShareSheetSuggestionBundleIDs, 
                        __PSSuggestionKey, __Z16_PSUnarchiverZipPKvmP5NSURL, _distanceOfNeighborFromReference, 
                        _errRet, _fetchLimit ]
-    objc-classes:    [ ContactEmbeddingAnalysisPETContactEmbeddingAnalysisEvent, 
+    objc-classes:    [ CAPContactFillerContactEvent, CAPContactFillerContactFillerEventForShare, 
+                       CAPContactFillerShareEvent, CAPContactFillerUserEvent, ContactEmbeddingAnalysisPETContactEmbeddingAnalysisEvent, 
                        ContactEmbeddingAnalysisPETContactEmbeddingArrayEvent, ContactEmbeddingAnalysisPETNeuralNetEmbedding, 
                        CoreBehaviorAnalysisPETCoreBehaviorAnalysisEvent, FeatureVectorCoordinates, 
                        PSDESPlugin, _PSAppUsageUtilities, _PSAttachment, _PSAutocompleteSuggestion, 
                        _PSBehaviorRuleFeatureExtraction, _PSBehaviorRuleRankingUtilities, 
                        _PSConstants, _PSContactEmbeddingDataCollectionUtilities, 
-                       _PSContactEmbeddingUtilities, _PSContactResolver, _PSContactSuggester, 
+                       _PSContactEmbeddingUtilities, _PSContactFillerDataCollectionStatistics, 
+                       _PSContactFillerDataCollectionUtilities, _PSContactFillerNormalizationConstants, 
+                       _PSContactFillerRecipient, _PSContactResolver, _PSContactSuggester, 
                        _PSContactSuggestion, _PSContactSuggestionHandleAndApp, _PSEnsembleModel, 
                        _PSFamilyMLModel, _PSFamilyMLPredictionTask, _PSFamilyUtilities, 
                        _PSFeaturizedBehaviorRule, _PSFeedback, _PSFeedbackAction, 
@@ -58,7 +63,44 @@ exports:
                        _PSSiriHandleRankerPredictionContext, _PSSiriNLLogger, _PSSiriNLRankerUtilities, 
                        _PSSuggester, _PSSuggesterConfiguration, _PSSuggestion, _PSSuggestionProxy, 
                        _PSSuggestionTemplate, _PS_TPSDiscoverabilitySignal, scoredRule ]
-    objc-ivars:      [ ContactEmbeddingAnalysisPETContactEmbeddingAnalysisEvent._contactId, 
+    objc-ivars:      [ CAPContactFillerContactEvent._averageBehavioralRuleConfidence, 
+                       CAPContactFillerContactEvent._averageBehavioralRuleConviction, 
+                       CAPContactFillerContactEvent._averageBehavioralRuleLift, CAPContactFillerContactEvent._averageBehavioralRuleMLScore, 
+                       CAPContactFillerContactEvent._averageBehavioralRulePowerFactor, 
+                       CAPContactFillerContactEvent._averageBehavioralRuleSupport, 
+                       CAPContactFillerContactEvent._has, CAPContactFillerContactEvent._interactionModelScore, 
+                       CAPContactFillerContactEvent._maximumBehavioralRuleConfidence, 
+                       CAPContactFillerContactEvent._maximumBehavioralRuleConviction, 
+                       CAPContactFillerContactEvent._maximumBehavioralRuleLift, CAPContactFillerContactEvent._maximumBehavioralRuleMLScore, 
+                       CAPContactFillerContactEvent._maximumBehavioralRulePowerFactor, 
+                       CAPContactFillerContactEvent._maximumBehavioralRuleSupport, 
+                       CAPContactFillerContactEvent._minimumBehavioralRuleConfidence, 
+                       CAPContactFillerContactEvent._minimumBehavioralRuleConviction, 
+                       CAPContactFillerContactEvent._minimumBehavioralRuleLift, CAPContactFillerContactEvent._minimumBehavioralRuleMLScore, 
+                       CAPContactFillerContactEvent._minimumBehavioralRulePowerFactor, 
+                       CAPContactFillerContactEvent._minimumBehavioralRuleSupport, 
+                       CAPContactFillerContactEvent._normalizedIncomingCallFrequency, 
+                       CAPContactFillerContactEvent._normalizedIncomingTextFrequency, 
+                       CAPContactFillerContactEvent._normalizedOutgoingCallFrequency, 
+                       CAPContactFillerContactEvent._normalizedOutgoingTextFrequency, 
+                       CAPContactFillerContactEvent._normalizedShareFrequency, CAPContactFillerContactEvent._numberOfBehavioralRulesAdvocating, 
+                       CAPContactFillerContactEvent._stdevBehavioralRuleConfidence, 
+                       CAPContactFillerContactEvent._stdevBehavioralRuleConviction, 
+                       CAPContactFillerContactEvent._stdevBehavioralRuleLift, CAPContactFillerContactEvent._stdevBehavioralRuleMLScore, 
+                       CAPContactFillerContactEvent._stdevBehavioralRulePowerFactor, 
+                       CAPContactFillerContactEvent._stdevBehavioralRuleSupport, 
+                       CAPContactFillerContactEvent._timeSinceLastContactViaIncomingCall, 
+                       CAPContactFillerContactEvent._timeSinceLastContactViaIncomingText, 
+                       CAPContactFillerContactEvent._timeSinceLastContactViaOutgoingCall, 
+                       CAPContactFillerContactEvent._timeSinceLastContactViaOutgoingText, 
+                       CAPContactFillerContactEvent._timeSinceLastContactViaShare, 
+                       CAPContactFillerContactEvent._wasShareRecipient, CAPContactFillerContactFillerEventForShare._sessionId, 
+                       CAPContactFillerContactFillerEventForShare._shareEvents, CAPContactFillerShareEvent._contactEvents, 
+                       CAPContactFillerShareEvent._userEvent, CAPContactFillerUserEvent._has, 
+                       CAPContactFillerUserEvent._highConfidenceRuleCount, CAPContactFillerUserEvent._lowConfidenceRuleCount, 
+                       CAPContactFillerUserEvent._mediumConfidenceRuleCount, CAPContactFillerUserEvent._shareInteractionsSent, 
+                       CAPContactFillerUserEvent._textInteractionsReceived, CAPContactFillerUserEvent._textInteractionsSent, 
+                       ContactEmbeddingAnalysisPETContactEmbeddingAnalysisEvent._contactId, 
                        ContactEmbeddingAnalysisPETContactEmbeddingAnalysisEvent._embeddingsAfterActivation, 
                        ContactEmbeddingAnalysisPETContactEmbeddingAnalysisEvent._embeddingsBeforeActivation, 
                        ContactEmbeddingAnalysisPETContactEmbeddingArrayEvent._contactEmbeddings, 

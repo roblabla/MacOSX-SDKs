@@ -55,6 +55,7 @@ API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED
  * @method initWithDestinationNetwork:prefix:protocol
  * @discussion Initialize a newly-allocated NENetworkRule object that matches network traffic destined for a host within a specific network.
  * @param networkEndpoint An endpoint object that contains the port and address or network that the rule matches. This endpoint must contain an address, not a hostname.
+ *        If the address is a wildcard address (0.0.0.0 or ::) then the rule will match all destinations except for loopback (127.0.0.1 or ::1). To match loopback traffic set the address to the loopback address.
  *        If the port string of the endpoint is "0" or is the empty string, then the rule will match traffic on any port destined for the given address or network.
  * @param destinationPrefix An integer that in combination with the address in the endpoint specifies the destination network that the rule matches.
  * @param protocol A NENetworkRuleProtocol value indicating the protocol that the rule matches.
@@ -81,12 +82,16 @@ API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED
 
 /*!
  * @method initWithRemoteNetwork:prefix:localNetwork:prefix:interface:protocol:direction:
- * @discussion Initialize a newly-allocated NENetworkRule object that matches traffic by remote network, local network, protocol, and direction.
+ * @discussion Initialize a newly-allocated NENetworkRule object that matches traffic by remote network, local network, protocol, and direction. If both remoteNetwork and localNetwork are nil
+ *    then the rule will match all traffic of the given protocol and direction, except for loopback traffic. To match loopback traffic create a NENetworkRule with remoteNetwork and/or localNetwork properties that
+ *    explicitly match traffic to the loopback address (127.0.0.1 or ::1).
  * @param remoteNetwork An endpoint object that contains the remote port and the remote address or network that the rule matches. This endpoint must contain an address, not a hostname.
+ *    If the address is a wildcard address (0.0.0.0 or ::) then the rule will match all destinations except for loopback (127.0.0.1 or ::1). To match loopback traffic set the address to the loopback address.
  *    If the port string of the endpoint is "0" or is the empty string, then the rule will match traffic on any port coming from the remote network.
  *    Pass nil to cause the rule to match any remote network.
  * @param remotePrefix An integer that in combination with the address in remoteNetwork specifies the remote network that the rule matches.
  * @param localNetwork An endpoint object that contains the local port and the local address or network that the rule matches. This endpoint must contain an address, not a hostname.
+ *    If the address is a wildcard address (0.0.0.0 or ::) then the rule will match all local networks except for loopback (127.0.0.1 or ::1). To match loopback traffic set the address to the loopback address.
  *    If the port string of the endpoint is "0" or is the empty string, then the rule will match traffic on any port coming from the local network.
  *    Pass nil to cause the rule to match any local network.
  * @param localPrefix An integer that in combination with the address in localNetwork specifies the local network that the rule matches. This parameter

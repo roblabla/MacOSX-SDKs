@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D68BC923-40DC-3DE7-9D93-618083C9694F
+    value:           EA2239A4-E453-38B3-BFB5-2CBA9A688C76
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C9562463-86C3-3C16-8792-3989CC8E41CE
+    value:           43862C87-2D02-3659-830C-A0589AA34753
 install-name:    '/System/Library/PrivateFrameworks/SearchUI.framework/Versions/A/SearchUI'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
@@ -56,8 +56,8 @@ exports:
                        SearchUIDetailedRowCardSectionView, SearchUIDetailedRowModel, 
                        SearchUIDetailedView, SearchUIExchange, SearchUIExchangeManager, 
                        SearchUIFTETextView, SearchUIFirstTimeExperienceViewController, 
-                       SearchUIFlightCardSectionView, SearchUIGraphRenderer, SearchUIGridLayoutManager, 
-                       SearchUIGridRowModel, SearchUIHorizontallyScrollingCardSectionRowModel, 
+                       SearchUIFlightCardSectionView, SearchUIGraphRenderer, SearchUIGridCardSectionView, 
+                       SearchUIGridLayoutManager, SearchUIGridRowModel, SearchUIHorizontallyScrollingCardSectionRowModel, 
                        SearchUIImage, SearchUIImageButton, SearchUIImageCache, SearchUIImageView, 
                        SearchUIImagesCardSectionView, SearchUIKeyValueDataCardSectionView, 
                        SearchUILabel, SearchUILeadingViewController, SearchUIMapCardSectionView, 

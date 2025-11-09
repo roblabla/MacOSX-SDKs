@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E47E4F13-174D-3791-A235-3AD81586CCB9
+    value:           2EF43B96-90FB-3C50-B73E-035238504E33
   - target:          x86_64-maccatalyst
-    value:           E47E4F13-174D-3791-A235-3AD81586CCB9
+    value:           2EF43B96-90FB-3C50-B73E-035238504E33
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           16FB73BF-C144-3E54-878E-DCD40CF23BF2
+    value:           E47334AF-7E46-3FAE-B71C-9D9B4F1DF1DE
   - target:          arm64e-maccatalyst
-    value:           16FB73BF-C144-3E54-878E-DCD40CF23BF2
+    value:           E47334AF-7E46-3FAE-B71C-9D9B4F1DF1DE
 install-name:    '/usr/lib/system/libsystem_malloc.dylib'
 current-version: 317.40.8
 parent-umbrella:
@@ -22,7 +22,7 @@ parent-umbrella:
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ ___mach_stack_logging_copy_uniquing_table, ___mach_stack_logging_enumerate_records, 
                        ___mach_stack_logging_frames_for_uniqued_stack, ___mach_stack_logging_get_frames, 

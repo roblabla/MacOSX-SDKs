@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           90EBA057-624F-39C3-AC3D-10F7CFE22165
+    value:           13A10EF7-F25C-3504-9ABE-8B0E2C6A5100
   - target:          x86_64-maccatalyst
-    value:           90EBA057-624F-39C3-AC3D-10F7CFE22165
+    value:           13A10EF7-F25C-3504-9ABE-8B0E2C6A5100
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7FBCC1EF-0A70-3E49-B4A5-109968CB33A4
+    value:           1AA64427-FA98-3623-8D7F-8E9215600893
   - target:          arm64e-maccatalyst
-    value:           7FBCC1EF-0A70-3E49-B4A5-109968CB33A4
+    value:           1AA64427-FA98-3623-8D7F-8E9215600893
 install-name:    '/System/Library/Frameworks/LocalAuthentication.framework/Versions/A/LocalAuthentication'
-current-version: 827.40.37
+current-version: 827.60.15
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _LAAvailableMechanisms, _LABiometryDatabaseHash, _LACopyExternalizedContext, 
                        _LAEnabledBiometryUsers, _LAErrorDomain, _LAErrorInfoBiometryType, 

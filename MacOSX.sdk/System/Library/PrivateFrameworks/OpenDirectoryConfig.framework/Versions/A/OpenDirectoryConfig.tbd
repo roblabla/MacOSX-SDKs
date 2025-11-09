@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3580A724-8E6B-3E5B-9966-AF4FE0161177
+    value:           7E450F43-D6FD-354E-9B4C-5882135EA7DE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A7744526-0708-3CBA-B226-BE318F362E30
+    value:           D93C74AE-17F0-3C6C-B670-D372A19CF9E9
 install-name:    '/System/Library/PrivateFrameworks/OpenDirectoryConfig.framework/Versions/A/OpenDirectoryConfig'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

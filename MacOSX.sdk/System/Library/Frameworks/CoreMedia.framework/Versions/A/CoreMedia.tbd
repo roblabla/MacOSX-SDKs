@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           682AFEBA-99F1-35BF-AD0E-DE2ED4E4ED9D
+    value:           4BF8CE82-7302-39D3-8277-F6B3CE34869C
   - target:          x86_64-maccatalyst
-    value:           682AFEBA-99F1-35BF-AD0E-DE2ED4E4ED9D
+    value:           4BF8CE82-7302-39D3-8277-F6B3CE34869C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B2C764C0-CCA4-3D83-A984-15B92C1C704D
+    value:           9141F189-B9D4-3B33-AC47-AB28E04E66CC
   - target:          arm64e-maccatalyst
-    value:           B2C764C0-CCA4-3D83-A984-15B92C1C704D
+    value:           9141F189-B9D4-3B33-AC47-AB28E04E66CC
 install-name:    '/System/Library/Frameworks/CoreMedia.framework/Versions/A/CoreMedia'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CM8021ASClockAddAWDLPort, _CM8021ASClockAddIPv4Port, _CM8021ASClockAddIPv4PortAndGetIdentity, 
                        _CM8021ASClockAddIPv6Port, _CM8021ASClockAddIPv6PortAndGetIdentity, 
@@ -400,8 +400,9 @@ exports:
                        _FigCreateCFPropertyListFromData, _FigCreateNSErrorUserInfoFromSerializedDictionary, 
                        _FigCreateSerializedDictionaryFromNSErrorUserInfo, _FigCustomURLHandlerConfirmNeighborProcessByPID, 
                        _FigCustomURLHandlerGetCMBaseObject, _FigCustomURLHandlerGetClassID, 
-                       _FigCustomURLHandlerGetTypeID, _FigCustomURLHandlerRemoteClientCreateWithXPCEndpoint, 
-                       _FigCustomURLHandlerRemoteCreateWithID, _FigCustomURLHandlerServerAssociateObjectAndContentKeySessionByPID, 
+                       _FigCustomURLHandlerGetTypeID, _FigCustomURLHandlerRemoteClientCopyExistingOrCreateIfNeccessaryWithXPCEndpoint, 
+                       _FigCustomURLHandlerRemoteClientCreateWithXPCEndpoint, _FigCustomURLHandlerRemoteCreateWithID, 
+                       _FigCustomURLHandlerServerAssociateObjectAndContentKeySessionByPID, 
                        _FigCustomURLHandlerServerAssociateObjectByPID, _FigCustomURLHandlerServerCopyXPCEndpoint, 
                        _FigCustomURLHandlerServerEnsure, _FigCustomURLLoaderCreate, 
                        _FigCustomURLLoaderGetCFTypeID, _FigCustomURLLoaderGetCMBaseObject, 
@@ -797,9 +798,9 @@ exports:
                        _FigTransportStreamSendBatchSlow, _FigUInt32NearestPowerOfTwo, 
                        _FigUInt64MulDiv, _FigUSleep, _FigUserBreak, _FigUserCrash, 
                        _FigVideoCreateBlockBufferAndFormatDescriptionForHoistingInStreamParameterSets, 
-                       _FigVideoFormatDescriptionContainsAlphaChannel, _FigVideoFormatDescriptionContainsDolbyVisionMetadata, 
-                       _FigVideoFormatDescriptionContainsHDR, _FigVideoFormatDescriptionContainsWideColor, 
-                       _FigVideoFormatDescriptionCopyAsBigEndianImageDescriptionBlockBuffer, 
+                       _FigVideoFormatDescriptionConformsToDolbyVisionProfile84, 
+                       _FigVideoFormatDescriptionContainsAlphaChannel, _FigVideoFormatDescriptionContainsHDR, 
+                       _FigVideoFormatDescriptionContainsWideColor, _FigVideoFormatDescriptionCopyAsBigEndianImageDescriptionBlockBuffer, 
                        _FigVideoFormatDescriptionCreateFromBigEndianImageDescriptionBlockBuffer, 
                        _FigVideoFormatDescriptionCreateFromBigEndianImageDescriptionBlockBufferWithReporter, 
                        _FigVideoFormatDescriptionCreateFromBigEndianImageDescriptionData, 
@@ -1256,7 +1257,8 @@ exports:
                        _kFigCustomURLLoaderFinalReportKey_NetworkProtocolName, _kFigDispatchQueueCFDictionaryValueCallbacks, 
                        _kFigEndPointPlaybackSessionKey_ShouldProvideFPSSecureStop, 
                        _kFigEndpointActivateOptionKey_ApplicationDisplayID, _kFigEndpointActivateOptionKey_AvoidAuthPrompt, 
-                       _kFigEndpointActivateOptionKey_ClientPID, _kFigEndpointActivateOptionKey_EnableSplitter, 
+                       _kFigEndpointActivateOptionKey_ClientPID, _kFigEndpointActivateOptionKey_CrossfadePlayback, 
+                       _kFigEndpointActivateOptionKey_EnableSplitter, _kFigEndpointActivateOptionKey_FadeDurationInSeconds, 
                        _kFigEndpointActivateOptionKey_ForAdminControl, _kFigEndpointActivateOptionKey_HijackID, 
                        _kFigEndpointActivateOptionKey_IsAddOperation, _kFigEndpointActivateOptionKey_IsPerAppDisplay, 
                        _kFigEndpointActivateOptionKey_PrimaryUsage, _kFigEndpointActivateOptionKey_RemoteScreenSender, 
@@ -1287,6 +1289,7 @@ exports:
                        _kFigEndpointConfigurationRequest_PeersToRemove, _kFigEndpointConfigurationResponse_PeersList, 
                        _kFigEndpointConfiguration_DeviceName, _kFigEndpointConfiguration_EnableHKAccessControl, 
                        _kFigEndpointConfiguration_HKAccessControlLevel, _kFigEndpointConfiguration_Password, 
+                       _kFigEndpointDeactivateOptionKey_CrossfadePlayback, _kFigEndpointDeactivateOptionKey_FadeDurationInSeconds, 
                        _kFigEndpointDeactivateOptionKey_IsRemoveOperation, _kFigEndpointDeactivateOptionKey_Reason, 
                        _kFigEndpointDeactivateOptionKey_RoutingContextUUID, _kFigEndpointDeactivateReason_PrimaryUsageChange, 
                        _kFigEndpointDeactivateReason_UserRoutedAway, _kFigEndpointDuckAudioCommand_Duck, 
@@ -1627,6 +1630,7 @@ exports:
                        _kFigPKDCPECryptorPackagedPersistentKeyDecryptFormatType_CBCS, 
                        _kFigPKDCPECryptorPackagedPersistentKeyDecryptFormatType_CTR, 
                        _kFigPKDCPECryptorPackagedPersistentKeyKey_DecryptFormatType, 
+                       _kFigPixelBufferRecipientNotification_ServerConnectionDied, 
                        _kFigPowerLogSupportPlaybackEventKey_AverageBitRate, _kFigPowerLogSupportPlaybackEventKey_AverageNetworkThroughput, 
                        _kFigPowerLogSupportPlaybackEventKey_AverageRank, _kFigPowerLogSupportPlaybackEventKey_Category, 
                        _kFigPowerLogSupportPlaybackEventKey_IsAudioOnly, _kFigPowerLogSupportPlaybackEventKey_LogID, 
@@ -1680,7 +1684,7 @@ exports:
                        _kFigXPCRemoteClientNotification_ServerDied, _kFigXPCRemoteClientOption_DeathNoticeName, 
                        _kFigXPCRemoteClientOption_PrivilegedConnection, _kFigXPCRemoteClientOption_QueuePriority, 
                        _kFigXPCRemoteClientOption_UserID, _kFigXPCServerOption_QueuePriority ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _FigAudioDeviceClockCreate, _FigAudioDeviceClockCreateFromAudioDeviceID, 
                        _FigAudioDeviceClockGetAudioDevice, _FigAudioDeviceClockSetAudioDeviceID, 
                        _FigAudioDeviceClockSetAudioDeviceUID, _FigCheckIsCurrentDispatchQueue, 

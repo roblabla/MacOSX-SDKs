@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           CE19A7ED-1389-3479-9B59-1AC3578DE1DE
+    value:           0E29EB90-904A-32E5-A3FA-22350B6AB9B7
   - target:          x86_64-maccatalyst
-    value:           CE19A7ED-1389-3479-9B59-1AC3578DE1DE
+    value:           0E29EB90-904A-32E5-A3FA-22350B6AB9B7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B0A834A3-A5EA-30E9-8C63-9147258D0169
+    value:           07BFF3DE-575D-32BB-8C93-01252A5C84F4
   - target:          arm64e-maccatalyst
-    value:           B0A834A3-A5EA-30E9-8C63-9147258D0169
+    value:           07BFF3DE-575D-32BB-8C93-01252A5C84F4
 install-name:    '/System/Library/PrivateFrameworks/MMCS.framework/Versions/A/MMCS'
 current-version: 569
 exports:

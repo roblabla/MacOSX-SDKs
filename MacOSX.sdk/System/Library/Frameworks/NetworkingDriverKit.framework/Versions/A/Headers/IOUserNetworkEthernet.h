@@ -1,6 +1,6 @@
-/* iig(DriverKit-107.40.8) generated from IOUserNetworkEthernet.iig */
+/* iig(DriverKit-107.60.3) generated from IOUserNetworkEthernet.iig */
 
-/* IOUserNetworkEthernet.iig:1-44 */
+/* IOUserNetworkEthernet.iig:1-46 */
 /*
  * Copyright (c) 2019-2020 Apple, Inc. All rights reserved.
  *
@@ -32,6 +32,8 @@
 #ifndef _IOUSERNETWORKETHERNET_IIG
 #define _IOUSERNETWORKETHERNET_IIG
 
+#include <net/ethernet.h>
+
 #include <DriverKit/IOService.h>  /* .iig include */
 #include <DriverKit/OSAction.h>  /* .iig include */
 #include <DriverKit/IODispatchQueue.h>  /* .iig include */
@@ -45,7 +47,7 @@ struct _IOUserNetworkEthernetInterfaceDescriptor;
 struct nicproxy_limits_info_s;
 struct offload_info_s;
 
-/* source class IOUserNetworkEthernet IOUserNetworkEthernet.iig:45-140 */
+/* source class IOUserNetworkEthernet IOUserNetworkEthernet.iig:47-148 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -102,10 +104,16 @@ public:
     virtual kern_return_t
     SetPromiscuousModeEnable(bool enable) = 0;
 
+    /** @deprecated, use  setMulticastAddresses instead */
     virtual kern_return_t
     SetMulticastAddresses(
         const IOUserNetworkMACAddress * addresses,
-        uint32_t count) = 0;
+        uint32_t count);
+
+    virtual kern_return_t
+    setMulticastAddresses(
+        const ether_addr_t * addresses,
+        uint32_t count) LOCALONLY;
 
     virtual kern_return_t
     SetAllMulticastModeEnable(bool enable) = 0;
@@ -144,7 +152,7 @@ public:
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IOUserNetworkEthernet IOUserNetworkEthernet.iig:45-140 */
+/* generated class IOUserNetworkEthernet IOUserNetworkEthernet.iig:47-148 */
 
 #define IOUserNetworkEthernet_ReleaseNicProxyData_ID            0x9f4819c35f444e74ULL
 #define IOUserNetworkEthernet_RetainNicProxyData_ID            0xaa273d9e353db313ULL
@@ -535,6 +543,9 @@ protected:\
     ReportDataBandwidths_Impl(IOUserNetworkEthernet_ReportDataBandwidths_Args);\
 \
     kern_return_t\
+    SetMulticastAddresses_Impl(IOUserNetworkEthernet_SetMulticastAddresses_Args);\
+\
+    kern_return_t\
     ReportNicProxyLimits_Impl(IOUserNetworkEthernet_ReportNicProxyLimits_Args);\
 \
 
@@ -557,6 +568,11 @@ public:\
         IOUserNetworkPacketBufferPool * pool,\
         IOUserNetworkPacketQueue ** queues,\
         uint32_t queueCount) APPLE_KEXT_OVERRIDE;\
+\
+    virtual kern_return_t\
+    setMulticastAddresses(\
+        const ether_addr_t * addresses,\
+        uint32_t count) APPLE_KEXT_OVERRIDE;\
 \
     virtual kern_return_t\
     ReportAvailableMediaTypes(\
@@ -595,6 +611,10 @@ public:
         IOUserNetworkPacketBufferPool * pool,
         IOUserNetworkPacketQueue ** queues,
         uint32_t queueCount) = 0;
+
+    virtual kern_return_t
+    setMulticastAddresses(const ether_addr_t * addresses,
+        uint32_t count) = 0;
 
     virtual kern_return_t
     ReportAvailableMediaTypes(const IOUserNetworkMediaType * mediaTypes,
@@ -691,7 +711,7 @@ public:
 struct OSAction_IOUserNetworkEthernet__DataAvailable_IVars;
 struct OSAction_IOUserNetworkEthernet__DataAvailable_LocalIVars;
 
-class OSAction_IOUserNetworkEthernet__DataAvailable : public OSAction, public OSAction_IOUserNetworkEthernet__DataAvailableInterface
+class __attribute__((availability(driverkit,introduced=20,message="Type-safe OSAction factory methods are available in DriverKit 20 and newer"))) OSAction_IOUserNetworkEthernet__DataAvailable : public OSAction, public OSAction_IOUserNetworkEthernet__DataAvailableInterface
 {
 #if KERNEL
     OSDeclareDefaultStructorsWithDispatch(OSAction_IOUserNetworkEthernet__DataAvailable);
@@ -724,10 +744,10 @@ public:
 #endif /* !__DOCUMENTATION__ */
 
 
-/* IOUserNetworkEthernet.iig:171- */
+/* IOUserNetworkEthernet.iig:179- */
 
 struct _IOUserNetworkEthernetInterfaceDescriptor {
-    IOUserNetworkMACAddress     macAddress;
+    ether_addr_t macAddress;
     uint32_t                featureFlags;
     uint32_t                 _reserved;
     uint16_t                txPacketHeadroomBytes;

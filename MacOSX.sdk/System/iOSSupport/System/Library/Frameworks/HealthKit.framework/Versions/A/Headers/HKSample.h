@@ -23,6 +23,13 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0))
 @property (readonly, strong) NSDate *startDate;
 @property (readonly, strong) NSDate *endDate;
 
+/*!
+ @property      hasUndeterminedDuration
+ @abstract      Indicates whether a sample has an undetermined duration.
+ @discussion    Computed based on the endDate of a sample.
+ */
+@property (readonly) BOOL hasUndeterminedDuration API_AVAILABLE(ios(14.0), watchos(7.0));
+
 
 @end
 

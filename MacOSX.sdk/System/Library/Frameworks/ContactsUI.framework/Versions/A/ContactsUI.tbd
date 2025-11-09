@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F2F8F918-035B-36D2-A8F1-388B154F9BB7
+    value:           7434BCC6-23EA-381B-802A-D3E9E1DB9B1D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4CEEE462-04A9-380F-A6B5-C1CB80E843F7
+    value:           FF6A5236-FCE6-3CBA-BD6F-F5AEF29858EB
 install-name:    '/System/Library/Frameworks/ContactsUI.framework/Versions/A/ContactsUI'
-current-version: 2452
+current-version: 2452.2
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _ABCNContactSortByFirstName, _ABCNContactSortByLastName, _ABCNContactSortingSubstringAttributeName, 

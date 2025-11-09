@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BD4D827A-6DB3-3ECD-88B3-BFC2E4610BE3
+    value:           A0E0E052-AA68-3CDD-912F-30ABFEDABF96
   - target:          x86_64-maccatalyst
-    value:           BD4D827A-6DB3-3ECD-88B3-BFC2E4610BE3
+    value:           A0E0E052-AA68-3CDD-912F-30ABFEDABF96
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FEE7A7A7-D94F-3274-AADD-50E465E9F830
+    value:           C6FA89E8-EF53-391D-81DE-4791D90FDD10
   - target:          arm64e-maccatalyst
-    value:           FEE7A7A7-D94F-3274-AADD-50E465E9F830
+    value:           C6FA89E8-EF53-391D-81DE-4791D90FDD10
 install-name:    '/System/Library/PrivateFrameworks/CoreAccessories.framework/Versions/A/CoreAccessories'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           35FDE03E-D4C7-3759-B2B0-760D94191DA8
+    value:           C73BC0EF-1057-3643-B9CB-135DF4E277D7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5B38051E-46B6-3E3E-AAFC-40259C6AB6A4
+    value:           8E873805-C8DD-33B1-8F5B-F9A3F0D39FCD
 install-name:    '/System/Library/PrivateFrameworks/SiriInference.framework/Versions/A/SiriInference'
 current-version: 0
 compatibility-version: 0
@@ -721,7 +721,11 @@ exports:
                        '_$s13SiriInference18CoreAnalyticsValueOMa', '_$s13SiriInference18CoreAnalyticsValueOMn', 
                        '_$s13SiriInference18CoreAnalyticsValueON', '_$s13SiriInference18CoreAnalyticsValueOSEAAMc', 
                        '_$s13SiriInference18CoreAnalyticsValueOSQAAMc', '_$s13SiriInference18CoreAnalyticsValueOSeAAMc', 
-                       '_$s13SiriInference18MemorableParameterMp', '_$s13SiriInference18MemorableParameterP13memorableUUIDSSSgvgTj', 
+                       '_$s13SiriInference18FetchMorphunAssetsCACycfC', '_$s13SiriInference18FetchMorphunAssetsCACycfc', 
+                       '_$s13SiriInference18FetchMorphunAssetsCMa', '_$s13SiriInference18FetchMorphunAssetsCMn', 
+                       '_$s13SiriInference18FetchMorphunAssetsCMo', '_$s13SiriInference18FetchMorphunAssetsCN', 
+                       '_$s13SiriInference18FetchMorphunAssetsCfD', '_$s13SiriInference18MemorableParameterMp', 
+                       '_$s13SiriInference18MemorableParameterP13memorableUUIDSSSgvgTj', 
                        '_$s13SiriInference18MemorableParameterP13memorableUUIDSSSgvgTq', 
                        '_$s13SiriInference18MemorableParameterP20memorableTokenStringSSvgTj', 
                        '_$s13SiriInference18MemorableParameterP20memorableTokenStringSSvgTq', 
@@ -2038,9 +2042,9 @@ exports:
                        '_$ss5Int64V6SQLiteE17fromDatatypeValueyA2BFZ' ]
     objc-classes:    [ AppMatches, _TtC13SiriInference14RefreshRollups, _TtC13SiriInference15BackgroundQueue, 
                        _TtC13SiriInference15SaveInteraction, _TtC13SiriInference15ScrubOldRecords, 
-                       _TtC13SiriInference17ScrubDodMLRecords, _TtC13SiriInference19ScrubDeletedRecords, 
-                       _TtC13SiriInference20BackfillInteractions, _TtC13SiriInference20XPCActivityOperation, 
-                       _TtC13SiriInference23ScrubRuntimeDataRecords, _TtC13SiriInference24ProcessUnstitchedIntents, 
-                       _TtC13SiriInference25RestartableBlockOperation, _TtC13SiriInference26HolidaysDBPollingOperation, 
-                       _TtC13SiriInference26HolidaysDBUpdaterOperation ]
+                       _TtC13SiriInference17ScrubDodMLRecords, _TtC13SiriInference18FetchMorphunAssets, 
+                       _TtC13SiriInference19ScrubDeletedRecords, _TtC13SiriInference20BackfillInteractions, 
+                       _TtC13SiriInference20XPCActivityOperation, _TtC13SiriInference23ScrubRuntimeDataRecords, 
+                       _TtC13SiriInference24ProcessUnstitchedIntents, _TtC13SiriInference25RestartableBlockOperation, 
+                       _TtC13SiriInference26HolidaysDBPollingOperation, _TtC13SiriInference26HolidaysDBUpdaterOperation ]
 ...

@@ -4,23 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           549CA11C-5E8D-3D48-91D0-2B78C6AC69E9
+    value:           943473A5-A82B-3E21-8EB3-0BBDF5E605AA
   - target:          x86_64-maccatalyst
-    value:           549CA11C-5E8D-3D48-91D0-2B78C6AC69E9
+    value:           943473A5-A82B-3E21-8EB3-0BBDF5E605AA
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           26CA3CE2-9723-3E88-B2DF-E7518D76CFE6
+    value:           EFF19129-E929-3E58-A6C4-16FB9F26120C
   - target:          arm64e-maccatalyst
-    value:           26CA3CE2-9723-3E88-B2DF-E7518D76CFE6
+    value:           EFF19129-E929-3E58-A6C4-16FB9F26120C
 install-name:    '/usr/lib/libffi.dylib'
 current-version: 27
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     symbols:         [ _ffi_prep_closure, _ffi_type_complex_longdouble, _ffi_type_longdouble ]
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _ffi_call, _ffi_closure_alloc, _ffi_closure_free, _ffi_find_closure_for_code_np, 
                        _ffi_get_struct_offsets, _ffi_java_ptrarray_to_raw, _ffi_java_raw_call, 

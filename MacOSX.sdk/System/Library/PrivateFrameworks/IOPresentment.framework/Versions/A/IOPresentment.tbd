@@ -4,23 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E4B021C2-A70E-371F-BC94-6A6FDF63A47C
+    value:           070919DC-978E-3DB3-80FD-FB0C1BAAE80A
   - target:          x86_64-maccatalyst
-    value:           E4B021C2-A70E-371F-BC94-6A6FDF63A47C
+    value:           070919DC-978E-3DB3-80FD-FB0C1BAAE80A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           930E590D-52A2-3BBB-8B4F-3116C473D491
+    value:           F4CC2ABF-FAAD-3F34-9CB9-A012C9C1E387
   - target:          arm64e-maccatalyst
-    value:           930E590D-52A2-3BBB-8B4F-3116C473D491
+    value:           F4CC2ABF-FAAD-3F34-9CB9-A012C9C1E387
 install-name:    '/System/Library/PrivateFrameworks/IOPresentment.framework/Versions/A/IOPresentment'
-current-version: 50.10
+current-version: 53
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
-    symbols:         [ __ZN27IOPresentmentFailTracerImpl12format_traceEPKcS1_S1_mP13__va_list_tag, 
-                       __ZN27IOPresentmentFailTracerImpl6tracevEPKcS1_S1_mP13__va_list_tag ]
+    symbols:         [ __ZN27IOPresentmentFailTracerImpl12format_traceEPKcS1_mP13__va_list_tag, 
+                       __ZN27IOPresentmentFailTracerImpl6tracevEPKcS1_mP13__va_list_tag ]
     weak-symbols:    [ __ZTI23IOPresentmentFailTracer, __ZTI35IOPresentmentTransactionDisplayPipe, 
                        __ZTINSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __ZTINSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
@@ -66,7 +66,7 @@ exports:
                        __Z32ioPresentmentResourceAllocateRefv, __Z33IOPresentmentGPUWranglerGetTypeIDv, 
                        __Z33iopFetchDeviceMapForCrashReporterv, __Z37IOPresentmentCursorAnimationGetTypeIDv, 
                        __Z4joinRKNSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEES6_, 
-                       __Z9boot_argsv, __ZN13IOPresentment16IOPresentmentEndEP26__IOPresentmentTransactionyb, 
+                       __ZN13IOPresentment16IOPresentmentEndEP26__IOPresentmentTransactionyb, 
                        __ZN13IOPresentment18IOPresentmentBeginEP23__IOPresentmentResourceh, 
                        __ZN13IOPresentment18_IOPresentmentInitEP15__IOPresentment, 
                        __ZN13IOPresentment18_IOPresentmentTermEv, __ZN13IOPresentment19IOPresentmentCancelEP26__IOPresentmentTransaction, 
@@ -436,6 +436,6 @@ exports:
                        _kIOPresentmentVerticalSyncOffset, _kIOPresentmentVerticalSyncPulseWidth, 
                        _kIOPresentmentWidth, _kIOPresentmentWorstDictionary ]
   - targets:         [ arm64e-maccatalyst, arm64e-macos, arm64-macos, arm64-maccatalyst ]
-    symbols:         [ __ZN27IOPresentmentFailTracerImpl12format_traceEPKcS1_S1_mPc, 
-                       __ZN27IOPresentmentFailTracerImpl6tracevEPKcS1_S1_mPc ]
+    symbols:         [ __ZN27IOPresentmentFailTracerImpl12format_traceEPKcS1_mPc, 
+                       __ZN27IOPresentmentFailTracerImpl6tracevEPKcS1_mPc ]
 ...

@@ -3,18 +3,18 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           6E40EB37-8C13-3F48-AFF0-69931AD90A6C
+    value:           FD754CC6-9374-37A1-8D60-184A0E7F4160
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           13646E6D-201D-315F-B92E-E871A5629CA3
+    value:           EB44063B-6B78-3C1D-A5A6-CF151584F711
 install-name:    '/System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/Frameworks/CommerceCore.framework/Versions/A/CommerceCore'
 current-version: 379
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CKAdoptionInfoPlistPath, _CKCheckBookDownloadQueue, _CKCreateCriticalUpdateTimeStamp, 
                        _CKCriticalUpdateTimeStamp, _CKDownloadDirectory, _CKInstallPathForIAP, 
-                       _CKInstallPathForSharedIAP, _CKMDMDownloadOptionAllowRedownload, 
+                       _CKInstallPathForSharedIAP, _CKInstallPathForiOSApp, _CKMDMDownloadOptionAllowRedownload, 
                        _CKMDMDownloadOptionDsidFailback, _CKMDMDownloadOptionPerformPreflightCheck, 
                        _CKMDMManifestOptionManagedAppUUIDString, _CKMDMManifestOptionPinCertificates, 
                        _CKMDMManifestOptionPinningRevocationCheckRequired, _CKMDMProcessManifest, 

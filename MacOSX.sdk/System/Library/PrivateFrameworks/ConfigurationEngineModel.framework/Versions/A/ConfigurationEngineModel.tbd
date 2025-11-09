@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           87B49051-BC1B-31EB-B6C3-39DD32012CD1
+    value:           DDF00411-B28C-35EB-9120-5338D2CE85D2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4D5C2014-195A-37B4-87B0-1725C4F8918C
+    value:           42BB7DE8-2F85-33C2-B911-B9AE8D91D745
 install-name:    '/System/Library/PrivateFrameworks/ConfigurationEngineModel.framework/Versions/A/ConfigurationEngineModel'
 current-version: 40.18
 exports:

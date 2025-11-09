@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3248EE1D-4224-3746-890F-09B02352B2A1
+    value:           0CABE74D-2EFF-39A6-BA6F-0167058F3029
   - target:          x86_64-maccatalyst
-    value:           3248EE1D-4224-3746-890F-09B02352B2A1
+    value:           0CABE74D-2EFF-39A6-BA6F-0167058F3029
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E55A5B0A-B85D-3D02-90FB-9E958062BB40
+    value:           A5C14D6C-B0D9-3A22-B725-A3EC8B7345F1
   - target:          arm64e-maccatalyst
-    value:           E55A5B0A-B85D-3D02-90FB-9E958062BB40
+    value:           A5C14D6C-B0D9-3A22-B725-A3EC8B7345F1
 install-name:    '/System/Library/PrivateFrameworks/ToneLibrary.framework/Versions/A/ToneLibrary'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

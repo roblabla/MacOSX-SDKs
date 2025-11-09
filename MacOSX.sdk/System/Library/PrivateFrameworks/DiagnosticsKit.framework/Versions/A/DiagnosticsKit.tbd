@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           363F7431-1CD9-313C-9A6E-54F4B8818814
+    value:           BDEFC820-8179-3B45-BD8F-A892BF8783B5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           29671EDF-25B7-362B-968E-E796786867FE
+    value:           E81B7B0E-DA98-3F76-9BF9-2C73BBF6830C
 install-name:    '/System/Library/PrivateFrameworks/DiagnosticsKit.framework/Versions/A/DiagnosticsKit'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

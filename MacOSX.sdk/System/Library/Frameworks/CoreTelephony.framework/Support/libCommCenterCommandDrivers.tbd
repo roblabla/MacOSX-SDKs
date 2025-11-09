@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5948C03A-4643-3562-B42A-6995D51589C1
+    value:           C4989850-03D9-3253-85E7-6D871F963342
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           97833C66-EEED-35BA-8EE8-A8DC836D2F4A
+    value:           B2027417-C22A-30B8-9668-3D108BCC4B5A
 install-name:    '/System/Library/Frameworks/CoreTelephony.framework/Support/libCommCenterCommandDrivers.dylib'
 exports:
   - targets:         [ x86_64-macos ]

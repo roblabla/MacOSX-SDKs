@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7EA258BD-6892-3EF9-A9B5-6CDAC30012B9
+    value:           817335AF-763C-3F27-947E-68D04BD38A00
   - target:          x86_64-maccatalyst
-    value:           7EA258BD-6892-3EF9-A9B5-6CDAC30012B9
+    value:           817335AF-763C-3F27-947E-68D04BD38A00
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A203791A-42C0-39AA-BF0B-92B1852B4CAD
+    value:           3BBD9B19-8E65-3E0F-AA63-3DE6B1592742
   - target:          arm64e-maccatalyst
-    value:           A203791A-42C0-39AA-BF0B-92B1852B4CAD
+    value:           3BBD9B19-8E65-3E0F-AA63-3DE6B1592742
 install-name:    '/System/Library/PrivateFrameworks/CacheDelete.framework/Versions/A/CacheDelete'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -53,11 +53,12 @@ exports:
                        _gTimebaseConversion, _getAllVolumes, _getCacheDeleteXattr, 
                        _getFunc, _getLocalVolumes, _getRootVolume, _getbacktrace, 
                        _getbacktrace_short, _humanReadableNumber, _is_first_boot, 
-                       _lowSpaceVolumes, _mapVolume, _markNotifiedVolume, _normalizePath, 
-                       _nuke_dir, _paddingForVolume, _pruneFile, _removeBreadcrumb, 
-                       _sentinelDir, _serviceForFSPurgeableType, _set_first_boot_work_completed, 
-                       _tallyDict, _thresholdsForMountPoint, _timeStamp, _traverse_dir_with_state, 
-                       _traverse_directory, _validateTimestamp, _volumeForUUID, _writeToCacheFile ]
+                       _lowSpaceVolumes, _mapVolume, _markNotifiedVolume, _nonContainerForID, 
+                       _normalizePath, _nuke_dir, _paddingForVolume, _pruneFile, 
+                       _removeBreadcrumb, _sentinelDir, _serviceForFSPurgeableType, 
+                       _set_first_boot_work_completed, _tallyDict, _thresholdsForMountPoint, 
+                       _timeStamp, _traverse_dir_with_state, _traverse_directory, 
+                       _validateTimestamp, _volumeForUUID, _writeToCacheFile ]
     objc-classes:    [ CacheDeleteHostExtensionContext, CacheDeleteListener, CacheDeleteRemoteExtensionContext, 
                        CacheDeleteServiceInfo, CacheDeleteServiceListener, CacheDeleteVolume, 
                        CacheManagementAsset ]

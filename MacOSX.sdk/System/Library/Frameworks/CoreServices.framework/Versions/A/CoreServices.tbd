@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           9A4974FA-2056-3E8E-AB72-CE457C94CE3A
+    value:           A7A3AEEE-1D86-381B-854E-AD629F4A0138
   - target:          x86_64-maccatalyst
-    value:           9A4974FA-2056-3E8E-AB72-CE457C94CE3A
+    value:           A7A3AEEE-1D86-381B-854E-AD629F4A0138
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0663C56B-4FA6-3A6A-B67B-E5CF8A0ADD42
+    value:           E7A900F6-1E97-3ADB-96EE-A995712E1B85
   - target:          arm64e-maccatalyst
-    value:           0663C56B-4FA6-3A6A-B67B-E5CF8A0ADD42
+    value:           E7A900F6-1E97-3ADB-96EE-A995712E1B85
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices'
-current-version: 1122.4
+current-version: 1122.11
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -53,17 +53,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C7CB2D62-B4F0-37A1-A53F-5CBB01ECFB97
+    value:           947E614C-885F-31E4-89F3-EF7E93989536
   - target:          x86_64-maccatalyst
-    value:           C7CB2D62-B4F0-37A1-A53F-5CBB01ECFB97
+    value:           947E614C-885F-31E4-89F3-EF7E93989536
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EE1EBDA8-9297-3434-A3D8-EA3313BEB607
+    value:           D6278F79-0393-3F91-B77A-6670B00570BE
   - target:          arm64e-maccatalyst
-    value:           EE1EBDA8-9297-3434-A3D8-EA3313BEB607
+    value:           D6278F79-0393-3F91-B77A-6670B00570BE
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/AE.framework/Versions/A/AE'
 current-version: 918
 compatibility-version: 0
@@ -152,11 +152,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           62C51CCB-B5BC-3E48-935E-77B2968343BF
+    value:           9C615967-6D8E-307F-B028-6278A4FA7C8C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           6D2990B5-62AC-36CF-8F2C-AFC7AFB75BBA
+    value:           4A7CBA4E-46D7-3C12-9E87-20C15E4FACE6
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Versions/A/CarbonCore'
 current-version: 1307
 parent-umbrella:
@@ -806,17 +806,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           665D28E5-6D14-3CF2-8657-5B7749D0DAA3
+    value:           83CDCE83-6B48-35F1-BACF-83240D940777
   - target:          x86_64-maccatalyst
-    value:           665D28E5-6D14-3CF2-8657-5B7749D0DAA3
+    value:           83CDCE83-6B48-35F1-BACF-83240D940777
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DA58C89D-7286-3354-BAEE-8D09A7E4332E
+    value:           0B2A9791-DAE5-3D19-B10E-834F807455DE
   - target:          arm64e-maccatalyst
-    value:           DA58C89D-7286-3354-BAEE-8D09A7E4332E
+    value:           0B2A9791-DAE5-3D19-B10E-834F807455DE
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/DictionaryServices.framework/Versions/A/DictionaryServices'
 current-version: 341
 parent-umbrella:
@@ -824,7 +824,7 @@ parent-umbrella:
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        CoreServices
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _DCSActivateDictionaryPanel, _DCSCopyActiveDictionaries, _DCSCopyAvailableDictionaries, 
                        _DCSCopyDefinitionMarkup, _DCSCopyDefinitionRecords, _DCSCopyDefinitions, 
@@ -889,17 +889,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F11ED9C3-A971-3D74-AFD7-261D1BC2F97C
+    value:           FB18B8D7-C7F5-3CAB-B538-3F4B4E85D1F1
   - target:          x86_64-maccatalyst
-    value:           F11ED9C3-A971-3D74-AFD7-261D1BC2F97C
+    value:           FB18B8D7-C7F5-3CAB-B538-3F4B4E85D1F1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           262485C9-74F6-3F3F-A78C-51978EC1C143
+    value:           09DE727C-4BA5-33B7-9811-5F0CA5C86F31
   - target:          arm64e-maccatalyst
-    value:           262485C9-74F6-3F3F-A78C-51978EC1C143
+    value:           09DE727C-4BA5-33B7-9811-5F0CA5C86F31
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/FSEvents.framework/Versions/A/FSEvents'
 current-version: 1290.40.2
 parent-umbrella:
@@ -925,19 +925,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           309AC005-15D4-36A2-80F0-DC9BDCCD8542
+    value:           CAEEC254-68AE-39B5-8452-EC3E1EE8577B
   - target:          x86_64-maccatalyst
-    value:           309AC005-15D4-36A2-80F0-DC9BDCCD8542
+    value:           CAEEC254-68AE-39B5-8452-EC3E1EE8577B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7E3AC159-CF7D-3749-8B1F-00332D256508
+    value:           D9D92910-FF1A-3868-ABB6-C0E1A256A95B
   - target:          arm64e-maccatalyst
-    value:           7E3AC159-CF7D-3749-8B1F-00332D256508
+    value:           D9D92910-FF1A-3868-ABB6-C0E1A256A95B
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/LaunchServices'
-current-version: 1122.4
+current-version: 1122.11
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -1380,19 +1380,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           72B54095-8CA3-3E29-B25C-24C2D7FB9D7A
+    value:           4CE16D2B-CE04-360A-86D2-2F0F8449E502
   - target:          x86_64-maccatalyst
-    value:           72B54095-8CA3-3E29-B25C-24C2D7FB9D7A
+    value:           4CE16D2B-CE04-360A-86D2-2F0F8449E502
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           570E7AD4-F1EA-30D5-A295-68B2FBEE222A
+    value:           6F845F28-4399-36D6-95CE-23DBB548165A
   - target:          arm64e-maccatalyst
-    value:           570E7AD4-F1EA-30D5-A295-68B2FBEE222A
+    value:           6F845F28-4399-36D6-95CE-23DBB548165A
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/Metadata.framework/Versions/A/Metadata'
-current-version: 2149.5
+current-version: 2150.6
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -1800,23 +1800,24 @@ reexports:
                        _MDPlistBytesAddString, _MDPlistBytesAddUUID, _MDPlistBytesAppendMultiplePlistBytes, 
                        _MDPlistBytesAppendPlist, _MDPlistBytesAppendPlistBytes, _MDPlistBytesBeginArray, 
                        _MDPlistBytesBeginDictionary, _MDPlistBytesBeginPlist, _MDPlistBytesCopyChildPlistBytesAtIndex, 
-                       _MDPlistBytesCopyPlistAtIndex, _MDPlistBytesCopyPlistAtIndexWithAllocator, 
-                       _MDPlistBytesCopyPlistAtIndexWithCallbacks, _MDPlistBytesCopyPlistAtIndexWithCallbacksAndAllocator, 
-                       _MDPlistBytesCopyPlistBytesAtIndex, _MDPlistBytesCreate, _MDPlistBytesCreateMutable, 
-                       _MDPlistBytesCreateMutableCopy, _MDPlistBytesCreateMutableUsingMalloc, 
-                       _MDPlistBytesCreateUniquedString, _MDPlistBytesCreateWithDeallocator, 
-                       _MDPlistBytesEndArray, _MDPlistBytesEndDictionary, _MDPlistBytesEndPlist, 
-                       _MDPlistBytesGetByteVector, _MDPlistBytesGetByteVectorCount, 
-                       _MDPlistBytesGetMappedByteVector, _MDPlistBytesGetTypeID, 
-                       _MDPlistBytesSetShouldDeallocate, _MDPlistBytesSetShouldUseMalloc, 
-                       _MDPlistContainerAddBooleanValue, _MDPlistContainerAddCString, 
-                       _MDPlistContainerAddDataValue, _MDPlistContainerAddDateValue, 
-                       _MDPlistContainerAddDoubleValue, _MDPlistContainerAddFloatValue, 
-                       _MDPlistContainerAddInt32Value, _MDPlistContainerAddInt64Value, 
-                       _MDPlistContainerAddNullValue, _MDPlistContainerAddObject, 
-                       _MDPlistContainerAddPlistObject, _MDPlistContainerAddUUIDValue, 
-                       _MDPlistContainerBeginArray, _MDPlistContainerBeginContainer, 
-                       _MDPlistContainerBeginDictionary, _MDPlistContainerCopyObject, 
+                       _MDPlistBytesCopyDispatchData, _MDPlistBytesCopyPlistAtIndex, 
+                       _MDPlistBytesCopyPlistAtIndexWithAllocator, _MDPlistBytesCopyPlistAtIndexWithCallbacks, 
+                       _MDPlistBytesCopyPlistAtIndexWithCallbacksAndAllocator, _MDPlistBytesCopyPlistBytesAtIndex, 
+                       _MDPlistBytesCreate, _MDPlistBytesCreateMutable, _MDPlistBytesCreateMutableCopy, 
+                       _MDPlistBytesCreateMutableUsingMalloc, _MDPlistBytesCreateUniquedString, 
+                       _MDPlistBytesCreateWithDeallocator, _MDPlistBytesEndArray, 
+                       _MDPlistBytesEndDictionary, _MDPlistBytesEndPlist, _MDPlistBytesGetByteVector, 
+                       _MDPlistBytesGetByteVectorCount, _MDPlistBytesGetMappedByteVector, 
+                       _MDPlistBytesGetTypeID, _MDPlistBytesSetShouldDeallocate, 
+                       _MDPlistBytesSetShouldUseMalloc, _MDPlistContainerAddBooleanValue, 
+                       _MDPlistContainerAddCString, _MDPlistContainerAddDataValue, 
+                       _MDPlistContainerAddDateValue, _MDPlistContainerAddDoubleValue, 
+                       _MDPlistContainerAddFloatValue, _MDPlistContainerAddInt32Value, 
+                       _MDPlistContainerAddInt64Value, _MDPlistContainerAddNullValue, 
+                       _MDPlistContainerAddObject, _MDPlistContainerAddPlistObject, 
+                       _MDPlistContainerAddUUIDValue, _MDPlistContainerBeginArray, 
+                       _MDPlistContainerBeginContainer, _MDPlistContainerBeginDictionary, 
+                       _MDPlistContainerCopyDispatchData, _MDPlistContainerCopyObject, 
                        _MDPlistContainerCopyObjectAtKeyArray, _MDPlistContainerCopyObjectAtKeyPath, 
                        _MDPlistContainerCopyObjectsAtKeyPath, _MDPlistContainerCopyObjectsAtPlistObject, 
                        _MDPlistContainerCopyRootObject, _MDPlistContainerCreateCopy, 
@@ -1827,12 +1828,12 @@ reexports:
                        _MDPlistContainerEndDictionary, _MDPlistContainerGetBytes, 
                        _MDPlistContainerGetLength, _MDPlistContainerGetPlistObjectAtKeyArray, 
                        _MDPlistContainerGetPlistObjectAtKeyPath, _MDPlistContainerHasObjectAtKeyPath, 
-                       _MDPlistContainerSetShouldDeallocate, _MDPlistContainerWillUseMalloc, 
-                       _MDPlistDataGetBytePtr, _MDPlistDateGetValue, _MDPlistDictionaryGetCount, 
-                       _MDPlistDictionaryGetPlistObjectForKey, _MDPlistDictionaryIterate, 
-                       _MDPlistEmbeddedReferenceToPlistObject, _MDPlistEnumerateQueryResults, 
-                       _MDPlistGetPlistObjectSize, _MDPlistGetPlistObjectType, _MDPlistGetRootPlistObject, 
-                       _MDPlistNumberGetDoubleValue, _MDPlistNumberGetIntValue, _MDPlistPlistObjectToEmbeddedReference, 
+                       _MDPlistContainerWillUseMalloc, _MDPlistDataGetBytePtr, _MDPlistDateGetValue, 
+                       _MDPlistDictionaryGetCount, _MDPlistDictionaryGetPlistObjectForKey, 
+                       _MDPlistDictionaryIterate, _MDPlistEmbeddedReferenceToPlistObject, 
+                       _MDPlistEnumerateQueryResults, _MDPlistGetPlistObjectSize, 
+                       _MDPlistGetPlistObjectType, _MDPlistGetRootPlistObject, _MDPlistNumberGetDoubleValue, 
+                       _MDPlistNumberGetIntValue, _MDPlistPlistObjectToEmbeddedReference, 
                        _MDPlistReferenceToPlistObject, _MDPlistStringGetValue, _MDPlistUUIDGetValue, 
                        _MDSPathFilterDumpRawFilterInternal, _MDStoreOIDArrayAddOID, 
                        _MDStoreOIDArrayAppendOIDArray, _MDStoreOIDArrayApplyBlock, 
@@ -1856,19 +1857,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           490D44D8-E93B-30C8-9AF9-14639F9FF92F
+    value:           870F34BE-C0ED-318B-858D-5F1E4757D552
   - target:          x86_64-maccatalyst
-    value:           490D44D8-E93B-30C8-9AF9-14639F9FF92F
+    value:           870F34BE-C0ED-318B-858D-5F1E4757D552
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C6F16ECC-86B0-3722-A2DB-CB0B89799CBF
+    value:           EFFA0C4E-A0C1-3970-BE40-A0A46A35C180
   - target:          arm64e-maccatalyst
-    value:           C6F16ECC-86B0-3722-A2DB-CB0B89799CBF
+    value:           EFFA0C4E-A0C1-3970-BE40-A0A46A35C180
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/OSServices.framework/Versions/A/OSServices'
-current-version: 1122.4
+current-version: 1122.11
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -2010,17 +2011,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           42EEB92F-7C15-3DB0-930C-2418C5AF308F
+    value:           7BDD2800-BDDC-3DE0-A4A8-B1E855130E3B
   - target:          x86_64-maccatalyst
-    value:           42EEB92F-7C15-3DB0-930C-2418C5AF308F
+    value:           7BDD2800-BDDC-3DE0-A4A8-B1E855130E3B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3574ADA0-B546-3781-9CD2-9785FCEE1C93
+    value:           7A1F87D4-B5D2-3F0D-B732-FA696B45B882
   - target:          arm64e-maccatalyst
-    value:           3574ADA0-B546-3781-9CD2-9785FCEE1C93
+    value:           7A1F87D4-B5D2-3F0D-B732-FA696B45B882
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SearchKit.framework/Versions/A/SearchKit'
 current-version: 417.1
 parent-umbrella:
@@ -2150,19 +2151,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           4D05DA1D-6FD0-3467-B987-1AA217709A07
+    value:           93D2192D-7A27-3FD4-B3AB-A4DCBF8419B7
   - target:          x86_64-maccatalyst
-    value:           4D05DA1D-6FD0-3467-B987-1AA217709A07
+    value:           93D2192D-7A27-3FD4-B3AB-A4DCBF8419B7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F1234F3D-01B2-3A5B-94B6-EB47E15CBBFF
+    value:           44F30AE5-8DC1-3726-8D6E-8811972BDB60
   - target:          arm64e-maccatalyst
-    value:           F1234F3D-01B2-3A5B-94B6-EB47E15CBBFF
+    value:           44F30AE5-8DC1-3726-8D6E-8811972BDB60
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SharedFileList.framework/Versions/A/SharedFileList'
-current-version: 143
+current-version: 144
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -2172,13 +2173,13 @@ allowable-clients:
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ Foundation ]
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _SFLListChangeNotification, _SFLListLaunchNotification, _SFLServiceName, 
                        _kSFLDefaultsDomain ]
     objc-classes:    [ SFLBookmark, SFLDefaults, SFLItem, SFLManager, SFLResolveResult, 
                        _SFLItem, _SFLList ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _LSSharedFileListAddObserver, _LSSharedFileListAddObserverOnQueue, 
                        _LSSharedFileListCopyProperty, _LSSharedFileListCopySnapshot, 
                        _LSSharedFileListCreate, _LSSharedFileListGetSeedValue, _LSSharedFileListGetTypeID, 

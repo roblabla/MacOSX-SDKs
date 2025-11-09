@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F11ED9C3-A971-3D74-AFD7-261D1BC2F97C
+    value:           FB18B8D7-C7F5-3CAB-B538-3F4B4E85D1F1
   - target:          x86_64-maccatalyst
-    value:           F11ED9C3-A971-3D74-AFD7-261D1BC2F97C
+    value:           FB18B8D7-C7F5-3CAB-B538-3F4B4E85D1F1
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           262485C9-74F6-3F3F-A78C-51978EC1C143
+    value:           09DE727C-4BA5-33B7-9811-5F0CA5C86F31
   - target:          arm64e-maccatalyst
-    value:           262485C9-74F6-3F3F-A78C-51978EC1C143
+    value:           09DE727C-4BA5-33B7-9811-5F0CA5C86F31
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/FSEvents.framework/Versions/A/FSEvents'
 current-version: 1290.40.2
 parent-umbrella:

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           86958BCF-B34E-3C9F-BA60-B0191A6392DF
+    value:           344EDACC-775D-3B0A-9A73-00605606D4AB
   - target:          x86_64-maccatalyst
-    value:           86958BCF-B34E-3C9F-BA60-B0191A6392DF
+    value:           344EDACC-775D-3B0A-9A73-00605606D4AB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5C4DDF5C-0FE1-3A52-BE6C-A7F84EF039B3
+    value:           8CDA3C39-F449-33AC-88AB-49EA2228DB30
   - target:          arm64e-maccatalyst
-    value:           5C4DDF5C-0FE1-3A52-BE6C-A7F84EF039B3
+    value:           8CDA3C39-F449-33AC-88AB-49EA2228DB30
 install-name:    '/System/Library/PrivateFrameworks/IMFoundation.framework/Versions/A/IMFoundation'
 current-version: 800
 exports:

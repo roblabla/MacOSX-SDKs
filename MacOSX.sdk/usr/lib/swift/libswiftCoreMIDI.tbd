@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2A291310-228D-3E42-B5C0-20670BE81F3A
+    value:           208F0F01-BC9A-3126-AD13-F5CF821757E3
   - target:          x86_64-maccatalyst
-    value:           2A291310-228D-3E42-B5C0-20670BE81F3A
+    value:           208F0F01-BC9A-3126-AD13-F5CF821757E3
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3CA6DD1C-716A-365A-B62F-9AAF56C74DCC
+    value:           B81040CD-7DB8-3AB4-8B53-683692CD2726
   - target:          arm64e-maccatalyst
-    value:           3CA6DD1C-716A-365A-B62F-9AAF56C74DCC
+    value:           B81040CD-7DB8-3AB4-8B53-683692CD2726
 install-name:    '/usr/lib/swift/libswiftCoreMIDI.dylib'
 current-version: 2
 swift-abi-version: 7

@@ -3,15 +3,17 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           D364D3E0-3C89-3AF3-98A6-DAD3D9D7BADA
+    value:           03BDD803-1098-3024-88D0-456D4C17E0A1
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           33C8B548-745A-3889-B159-D4639961D935
+    value:           946B1FF4-9988-3327-B65E-482963081CDC
 install-name:    '/System/iOSSupport/System/Library/Frameworks/WidgetKit.framework/Versions/A/WidgetKit'
-current-version: 104.4.3
+current-version: 104.9.5
 swift-abi-version: 7
 exports:
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
+    symbols:         [ _WGWidgetUserInfoKeyFamily, _WGWidgetUserInfoKeyKind ]
   - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
     symbols:         [ '_$s5Entry9WidgetKit16TimelineProviderPTl', '_$s5Entry9WidgetKit22IntentTimelineProviderPTl', 
                        '_$s6Intent9WidgetKit0A16TimelineProviderPTl', '_$s7SwiftUI12WidgetBundleP0C3KitE4mainyyFZ', 
@@ -117,10 +119,8 @@ exports:
                        '_$s9WidgetKit0A10DescriptorV05entryC0yAA05EntryC0VSo9CHSWidgetCcvs', 
                        '_$s9WidgetKit0A10DescriptorV10intentTypeSSSgvM', '_$s9WidgetKit0A10DescriptorV10intentTypeSSSgvg', 
                        '_$s9WidgetKit0A10DescriptorV10intentTypeSSSgvpMV', '_$s9WidgetKit0A10DescriptorV10intentTypeSSSgvs', 
-                       '_$s9WidgetKit0A10DescriptorV11displayNameSo20CHSLocalizableStringCSgvM', 
-                       '_$s9WidgetKit0A10DescriptorV11displayNameSo20CHSLocalizableStringCSgvg', 
-                       '_$s9WidgetKit0A10DescriptorV11displayNameSo20CHSLocalizableStringCSgvpMV', 
-                       '_$s9WidgetKit0A10DescriptorV11displayNameSo20CHSLocalizableStringCSgvs', 
+                       '_$s9WidgetKit0A10DescriptorV11displayNameSSSgvM', '_$s9WidgetKit0A10DescriptorV11displayNameSSSgvg', 
+                       '_$s9WidgetKit0A10DescriptorV11displayNameSSSgvpMV', '_$s9WidgetKit0A10DescriptorV11displayNameSSSgvs', 
                        '_$s9WidgetKit0A10DescriptorV16widgetVisibilitySo09CHSWidgetE0VvM', 
                        '_$s9WidgetKit0A10DescriptorV16widgetVisibilitySo09CHSWidgetE0Vvg', 
                        '_$s9WidgetKit0A10DescriptorV16widgetVisibilitySo09CHSWidgetE0VvpMV', 
@@ -129,11 +129,9 @@ exports:
                        '_$s9WidgetKit0A10DescriptorV17supportedFamiliesSayAA08InternalA6FamilyOGvg', 
                        '_$s9WidgetKit0A10DescriptorV17supportedFamiliesSayAA08InternalA6FamilyOGvpMV', 
                        '_$s9WidgetKit0A10DescriptorV17supportedFamiliesSayAA08InternalA6FamilyOGvs', 
-                       '_$s9WidgetKit0A10DescriptorV17widgetDescriptionSo20CHSLocalizableStringCSgvM', 
-                       '_$s9WidgetKit0A10DescriptorV17widgetDescriptionSo20CHSLocalizableStringCSgvg', 
-                       '_$s9WidgetKit0A10DescriptorV17widgetDescriptionSo20CHSLocalizableStringCSgvpMV', 
-                       '_$s9WidgetKit0A10DescriptorV17widgetDescriptionSo20CHSLocalizableStringCSgvs', 
-                       '_$s9WidgetKit0A10DescriptorV32onURLSessionEventsConfigurationsSayAA0aE18EventConfigurationVGvM', 
+                       '_$s9WidgetKit0A10DescriptorV17widgetDescriptionSSSgvM', '_$s9WidgetKit0A10DescriptorV17widgetDescriptionSSSgvg', 
+                       '_$s9WidgetKit0A10DescriptorV17widgetDescriptionSSSgvpMV', 
+                       '_$s9WidgetKit0A10DescriptorV17widgetDescriptionSSSgvs', '_$s9WidgetKit0A10DescriptorV32onURLSessionEventsConfigurationsSayAA0aE18EventConfigurationVGvM', 
                        '_$s9WidgetKit0A10DescriptorV32onURLSessionEventsConfigurationsSayAA0aE18EventConfigurationVGvg', 
                        '_$s9WidgetKit0A10DescriptorV32onURLSessionEventsConfigurationsSayAA0aE18EventConfigurationVGvpMV', 
                        '_$s9WidgetKit0A10DescriptorV32onURLSessionEventsConfigurationsSayAA0aE18EventConfigurationVGvs', 
@@ -779,8 +777,6 @@ exports:
                        '_$sSo19CHSWidgetFamilyMaskV9WidgetKitE18avocadoSizeClassesSayAC08InternaldB0OGvg', 
                        '_$sSo19CHSWidgetFamilyMaskV9WidgetKitE18avocadoSizeClassesSayAC08InternaldB0OGvpMV', 
                        '_$sSo19CHSWidgetFamilyMaskV9WidgetKitEyABSo0aB0VcfC', '_$sSo19CHSWidgetFamilyMaskV9WidgetKitEyABxcSTRzSo0aB0V7ElementRtzlufC', 
-                       '_$sSo20CHSLocalizableStringC9WidgetKitE_9tableName10bundlePath10isVerbatimABSS_SSSgAGSbtcfC', 
-                       '_$sSo20CHSLocalizableStringC9WidgetKitE_9tableName10bundlePath10isVerbatimABSS_SSSgAGSbtcfc', 
                        '_$sSo20CHSWidgetPersonalityP9WidgetKitE14logDescriptionSSvg', 
                        '_$sSo20CHSWidgetPersonalityP9WidgetKitE14logDescriptionSSvpMV', 
                        '_$sSo7NSErrorC9WidgetKitE4code15underlyingError16debugDescription6__file6__lineAbC12CKCErrorCodeO_s0F0_pSgSSSgs12StaticStringVSitcfC', 
@@ -789,7 +785,6 @@ exports:
                        '_$sSo7NSErrorC9WidgetKitE6domain4code15underlyingError16debugDescription6__file6__lineABSS_Sis0G0_pSgSSSgs12StaticStringVSitcfc', 
                        '_$sSo9CHSWidgetC9WidgetKitE14logDescriptionSSvg', '_$sSo9CHSWidgetC9WidgetKitE14logDescriptionSSvpMV', 
                        '_OBJC_CLASS_$_CHKWidgetEnvironment', '_OBJC_CLASS_$_CHKWidgetPersonality', 
-                       '_OBJC_METACLASS_$_CHKWidgetEnvironment', '_OBJC_METACLASS_$_CHKWidgetPersonality', 
-                       _WGWidgetUserInfoKeyFamily, _WGWidgetUserInfoKeyKind ]
+                       '_OBJC_METACLASS_$_CHKWidgetEnvironment', '_OBJC_METACLASS_$_CHKWidgetPersonality' ]
     objc-classes:    [ _CHKWidgetEnvironment, _CHKWidgetPersonality ]
 ...

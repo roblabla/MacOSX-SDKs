@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           45911952-D6CE-3C6C-B0BC-EC14CB7E21E7
+    value:           EF636701-661B-397B-941A-531479A54C07
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           26C0EF29-E5E4-3319-80DC-2DDF7475A98C
+    value:           6FDB35F0-3EED-3499-BF33-4EF639E03FA7
 install-name:    '/System/Library/PrivateFrameworks/AppStoreComponents.framework/Versions/A/AppStoreComponents'
 swift-abi-version: 7
 exports:
@@ -27,6 +27,8 @@ exports:
                        '_$s18AppStoreComponents14ASCLayoutProxyC19axOfferButtonHeight12CoreGraphics7CGFloatVvgZ', 
                        '_$s18AppStoreComponents14ASCLayoutProxyC21offerProgressDiameter12CoreGraphics7CGFloatVvgZ', 
                        '_$s18AppStoreComponents14ASCLayoutProxyC23preferredFontDescriptor12forTextStyle14compatibleWithSo06NSFontH0CSo0njK0a_5JetUI0O15TraitCollectionCtFZ', 
+                       '_$s18AppStoreComponents14ASCLayoutProxyC24smallLockupEstimatedSize7fitting14compatibleWithSo6CGSizeVAH_5JetUI0N15TraitCollectionCtFZ', 
+                       '_$s18AppStoreComponents14ASCLayoutProxyC25mediumLockupEstimatedSize7fitting14compatibleWithSo6CGSizeVAH_5JetUI0N15TraitCollectionCtFZ', 
                        '_$s18AppStoreComponents14ASCLayoutProxyC28traitCollectionForMainScreen5JetUI0k5TraitG0CvgZ', 
                        '_$s18AppStoreComponents14ASCLayoutProxyCACycfC', '_$s18AppStoreComponents14ASCLayoutProxyCACycfc', 
                        '_$s18AppStoreComponents14ASCLayoutProxyCMa', '_$s18AppStoreComponents14ASCLayoutProxyCMn', 
@@ -43,34 +45,42 @@ exports:
                        _ASCArtworkDecorationHasBorder, _ASCArtworkDecorationIAP, 
                        _ASCArtworkDecorationMaskToCircle, _ASCArtworkDecorationNone, 
                        _ASCArtworkDecorationPill, _ASCArtworkDecorationRoundedRect, 
-                       _ASCArtworkDecorationTVRect, _ASCArtworkFormatHEIC, _ASCArtworkFormatIsLayered, 
-                       _ASCArtworkFormatJPEG, _ASCArtworkFormatLCR, _ASCArtworkFormatPNG, 
-                       _ASCArtworkTemplateKeyCrop, _ASCArtworkTemplateKeyFormat, 
-                       _ASCArtworkTemplateKeyHeight, _ASCArtworkTemplateKeyWidth, 
+                       _ASCArtworkDecorationScreenshot, _ASCArtworkDecorationTVRect, 
+                       _ASCArtworkFormatHEIC, _ASCArtworkFormatIsLayered, _ASCArtworkFormatJPEG, 
+                       _ASCArtworkFormatLCR, _ASCArtworkFormatPNG, _ASCArtworkTemplateKeyCrop, 
+                       _ASCArtworkTemplateKeyFormat, _ASCArtworkTemplateKeyHeight, 
+                       _ASCArtworkTemplateKeyWidth, _ASCCollectionIDGamesForYou, 
+                       _ASCCollectionIDNewArcadeGames, _ASCLockupContextAdWithLandscapeScreenshot, 
+                       _ASCLockupContextAdWithLandscapeVideo, _ASCLockupContextAdWithPortraitScreenshots, 
+                       _ASCLockupContextAdWithPortraitVideo, _ASCLockupContextAdWithText, 
                        _ASCLockupContextGameCenter, _ASCLockupContextOverlay, _ASCLockupContextOverlayClip, 
                        _ASCLockupContextStandard, _ASCLockupContextWatch, _ASCLockupKindApp, 
                        _ASCLockupKindAppBundle, _ASCLockupKindInAppPurchase, _ASCLockupViewSizeDefault, 
                        _ASCLockupViewSizeGetEstimatedSize, _ASCLockupViewSizeGetEstimatedSizeForTraits, 
                        _ASCLockupViewSizeGetIconSize, _ASCLockupViewSizeLarge, _ASCLockupViewSizeLargeAppShowcase, 
                        _ASCLockupViewSizeMedium, _ASCLockupViewSizeSmall, _ASCMetricsActivityKeyHostApp, 
-                       _ASCMetricsActivityKeyReferrerApp, _ASCMetricsActivityKeyReferrerURL, 
-                       _ASCMetricsInvocationPointAppear, _ASCMetricsInvocationPointClick, 
-                       _ASCMetricsInvocationPointDisappear, _ASCOfferFlagsGetDescription, 
-                       _ASCOfferTitleVariantConfirmation, _ASCOfferTitleVariantDiscountOwnedParent, 
-                       _ASCOfferTitleVariantDiscountUnownedParent, _ASCOfferTitleVariantNotSubscribed, 
-                       _ASCOfferTitleVariantOpen, _ASCOfferTitleVariantPreorderNotSubscribed, 
-                       _ASCOfferTitleVariantPreorderStatus, _ASCOfferTitleVariantPreorderSubscribed, 
-                       _ASCOfferTitleVariantPreorderedNotSubscribed, _ASCOfferTitleVariantPreorderedSubscribed, 
-                       _ASCOfferTitleVariantStandard, _ASCOfferTitleVariantSubscribed, 
-                       _ASCOfferTitleVariantTrial, _ASCOpenAppErrorDomain, _ASCSignpostTagCreate, 
-                       _ASCSignpostTagCreateForProcess, _ASCSignpostTagFromID, _ASCSignpostTagFromIDInProcess, 
-                       _ASCSignpostTagMaxValue, _ASCSignpostTagNull, _ASCSignpostTagUnique, 
-                       _AppStoreComponentsVersionNumber, _AppStoreComponentsVersionString ]
-    objc-classes:    [ ASCAdamID, ASCArtwork, ASCBlockDynamicColor, ASCContentSkeleton, 
-                       ASCLocalOffer, ASCLockup, ASCLockupFeatureSignpostTags, ASCLockupProductDetails, 
-                       ASCLockupRequest, ASCLockupView, ASCLockupViewGroup, ASCMetrics, 
-                       ASCMetricsActivity, ASCMetricsData, ASCOfferMetadata, ASCOfferTheme, 
-                       ASCOverlaySettings, ASCSignpostPredicate, ASCSignpostSpan, 
-                       ASCUIControlTargetAction, ASCURLOffer, ASCViewMetrics, ASCViewMetricsInstruction, 
-                       ASCViewRender, ASCWatchApps, _ASCLockupResponse, __ASCLayoutProxy ]
+                       _ASCMetricsActivityKeyRedirectURL, _ASCMetricsActivityKeyReferrerApp, 
+                       _ASCMetricsActivityKeyReferrerURL, _ASCMetricsInvocationPointAppear, 
+                       _ASCMetricsInvocationPointClick, _ASCMetricsInvocationPointDisappear, 
+                       _ASCOfferFlagsGetDescription, _ASCOfferTitleVariantConfirmation, 
+                       _ASCOfferTitleVariantDiscountOwnedParent, _ASCOfferTitleVariantDiscountUnownedParent, 
+                       _ASCOfferTitleVariantNotSubscribed, _ASCOfferTitleVariantOpen, 
+                       _ASCOfferTitleVariantPreorderNotSubscribed, _ASCOfferTitleVariantPreorderStatus, 
+                       _ASCOfferTitleVariantPreorderSubscribed, _ASCOfferTitleVariantPreorderedNotSubscribed, 
+                       _ASCOfferTitleVariantPreorderedSubscribed, _ASCOfferTitleVariantStandard, 
+                       _ASCOfferTitleVariantSubscribed, _ASCOfferTitleVariantTrial, 
+                       _ASCOpenAppErrorDomain, _ASCSignpostTagCreate, _ASCSignpostTagCreateForProcess, 
+                       _ASCSignpostTagFromID, _ASCSignpostTagFromIDInProcess, _ASCSignpostTagMaxValue, 
+                       _ASCSignpostTagNull, _ASCSignpostTagUnique, _AppStoreComponentsVersionNumber, 
+                       _AppStoreComponentsVersionString, __ASCLockupKeyIcon, __ASCLockupKeySubtitle, 
+                       __ASCLockupKeyTitle ]
+    objc-classes:    [ ASCAdamID, ASCArtwork, ASCBlockDynamicColor, ASCCollectionRequest, 
+                       ASCContentSkeleton, ASCLocalOffer, ASCLockup, ASCLockupFeatureAd, 
+                       ASCLockupFeatureSignpostTags, ASCLockupProductDetails, ASCLockupRequest, 
+                       ASCLockupView, ASCLockupViewGroup, ASCMetrics, ASCMetricsActivity, 
+                       ASCMetricsData, ASCOfferMetadata, ASCOfferTheme, ASCOverlaySettings, 
+                       ASCScreenshots, ASCSignpostPredicate, ASCSignpostSpan, ASCTrailers, 
+                       ASCUIControlTargetAction, ASCURLOffer, ASCVideo, ASCViewMetrics, 
+                       ASCViewMetricsInstruction, ASCViewRender, ASCWatchApps, _ASCLockupResponse, 
+                       __ASCLayoutProxy ]
 ...

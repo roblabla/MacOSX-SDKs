@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           19A57B3A-2A70-3F70-B43A-A529A849FC24
+    value:           24D1C249-F64A-33AD-9617-766750E529D9
   - target:          x86_64-maccatalyst
-    value:           19A57B3A-2A70-3F70-B43A-A529A849FC24
+    value:           24D1C249-F64A-33AD-9617-766750E529D9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           8EE1E091-55B8-37E2-BC11-ADCE9FA5EE09
+    value:           B930CA11-16B5-3E4F-B0D4-0A70983CBDF9
   - target:          arm64e-maccatalyst
-    value:           8EE1E091-55B8-37E2-BC11-ADCE9FA5EE09
+    value:           B930CA11-16B5-3E4F-B0D4-0A70983CBDF9
 install-name:    '/usr/lib/system/libcorecrypto_trace.dylib'
-current-version: 1000.40.21
+current-version: 1000.60.19
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -35,7 +35,7 @@ exports:
                        _ccaes_intel_xts_encrypt_aesni_mode, _ccaes_intel_xts_encrypt_opt_mode, 
                        _ccsha1_vng_intel_SupplementalSSE3_di, _ccsha224_vng_intel_SupplementalSSE3_di, 
                        _ccsha256_vng_intel_SupplementalSSE3_di ]
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CCEC_FAULT_CANARY, _CCRSA_PKCS1_FAULT_CANARY, _CCRSA_PSS_FAULT_CANARY, 
                        _cc_abort, _cc_atfork_child, _cc_atfork_parent, _cc_atfork_prepare, 
@@ -49,7 +49,11 @@ exports:
                        _ccaes_ofb_crypt_mode, _ccaes_siv_decrypt_mode, _ccaes_siv_encrypt_mode, 
                        _ccaes_siv_hmac_sha256_decrypt_mode, _ccaes_siv_hmac_sha256_encrypt_mode, 
                        _ccaes_unwind, _ccaes_xts_decrypt_mode, _ccaes_xts_encrypt_mode, 
-                       _ccansikdf_x963, _ccblowfish_cbc_decrypt_mode, _ccblowfish_cbc_encrypt_mode, 
+                       _ccansikdf_x963, _ccapsic_client_check_intersect_response, 
+                       _ccapsic_client_generate_match_response, _ccapsic_client_init, 
+                       _ccapsic_client_state_sizeof, _ccapsic_server_determine_intersection, 
+                       _ccapsic_server_encode_element, _ccapsic_server_init, _ccapsic_server_state_sizeof, 
+                       _ccblowfish_cbc_decrypt_mode, _ccblowfish_cbc_encrypt_mode, 
                        _ccblowfish_cfb8_decrypt_mode, _ccblowfish_cfb8_encrypt_mode, 
                        _ccblowfish_cfb_decrypt_mode, _ccblowfish_cfb_encrypt_mode, 
                        _ccblowfish_ctr_crypt_mode, _ccblowfish_ecb_decrypt_mode, 
@@ -113,8 +117,9 @@ exports:
                        _ccec_compact_export, _ccec_compact_export_pub, _ccec_compact_generate_key, 
                        _ccec_compact_import_priv, _ccec_compact_import_priv_size, 
                        _ccec_compact_import_pub, _ccec_compact_import_pub_size, _ccec_compact_transform_key, 
-                       _ccec_compute_key, _ccec_cp_192, _ccec_cp_224, _ccec_cp_256, 
-                       _ccec_cp_384, _ccec_cp_521, _ccec_curve_for_length_lookup, 
+                       _ccec_compressed_x962_export_pub, _ccec_compressed_x962_export_pub_size, 
+                       _ccec_compressed_x962_import_pub, _ccec_compute_key, _ccec_cp_192, 
+                       _ccec_cp_224, _ccec_cp_256, _ccec_cp_384, _ccec_cp_521, _ccec_curve_for_length_lookup, 
                        _ccec_der_export_diversified_pub, _ccec_der_export_diversified_pub_size, 
                        _ccec_der_export_priv, _ccec_der_export_priv_size, _ccec_der_import_diversified_pub, 
                        _ccec_der_import_priv, _ccec_der_import_priv_keytype, _ccec_diversify_min_entropy_len, 

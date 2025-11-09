@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           3215978D-DC59-34C9-AFA7-A5D0AE135DBD
+    value:           CF89787B-727F-33BC-A002-CB8D78EA9423
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4C1BA4EC-2AED-3DFF-A7B6-263F8C281ECA
+    value:           58FADE42-AADA-3856-8F57-CF6A7410B8DC
 install-name:    '/System/Library/PrivateFrameworks/BrightnessControl.framework/Versions/A/BrightnessControl'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

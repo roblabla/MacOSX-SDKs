@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           1337F53F-2D43-3B40-B3D9-D13722ED1221
+    value:           1858DDAB-00DF-3A9B-A382-9AD5210D5A50
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           395595DE-6E99-3525-91A9-CA2B10937808
+    value:           708102E3-E9B3-3631-B573-40E74CF58DC1
 install-name:    '/System/Library/Frameworks/CoreTelephony.framework/Support/libSystemDetermination.dylib'
 exports:
   - targets:         [ x86_64-macos ]

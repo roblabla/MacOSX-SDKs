@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           025BC0A5-1B71-3D39-BA74-0FB5AD8B7953
+    value:           1A1CA142-187F-3F11-A8A2-0CD1D4F72841
   - target:          x86_64-maccatalyst
-    value:           025BC0A5-1B71-3D39-BA74-0FB5AD8B7953
+    value:           1A1CA142-187F-3F11-A8A2-0CD1D4F72841
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E0822235-0E4F-3672-B419-F5AFCD71BA96
+    value:           9CA0AE0B-B049-3DA2-915B-8E687F722F93
   - target:          arm64e-maccatalyst
-    value:           E0822235-0E4F-3672-B419-F5AFCD71BA96
+    value:           9CA0AE0B-B049-3DA2-915B-8E687F722F93
 install-name:    '/System/Library/Frameworks/LocalAuthentication.framework/Support/SharedUtils.framework/Versions/A/SharedUtils'
-current-version: 827.40.37
+current-version: 827.60.15
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -87,12 +87,12 @@ exports:
                        _SerializeRequirement, _SerializeVerifyAclConstraint, _SerializeVerifyPolicy, 
                        _Util_GetBitCount, _Util_hexDumpToStrHelper, _Util_isNonNullEqualMemory, 
                        _Util_isNullOrZeroMemory, _gAllocatedBytes, _gLastAllocatedBytes, 
-                       _kServiceTypeCaptureRGB, _kServiceTypeSecureStorage ]
-    objc-classes:    [ BaseManagedService, DefaultServiceManager, DefaultServiceSession, 
-                       LAACMHelper, LAADMUser, LAAssertionsProxy, LACachedExternalizedContext, 
+                       _kServiceTypeSecureStorage ]
+    objc-classes:    [ BaseService, BaseServiceManager, DefaultServiceSession, LAACMHelper, 
+                       LAADMUser, LAAssertionsProxy, LACachedExternalizedContext, 
                        LADFR, LAErrorHelper, LAInternalProtocols, LAParamChecker, 
                        LAPasscodeHelper, LASecureData, LAUtils, NSXPCInvocation, 
-                       VirtualService, WeakBox ]
-    objc-ivars:      [ BaseManagedService._clients, BaseManagedService._listener, 
-                       BaseManagedService._terminating, DefaultServiceManager._sessions ]
+                       WeakBox ]
+    objc-ivars:      [ BaseService._clients, BaseService._listener, BaseService._terminating, 
+                       BaseServiceManager._sessions ]
 ...

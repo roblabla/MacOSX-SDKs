@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D066E19E-E009-3878-A2F9-927533B271A2
+    value:           56BC43AE-7BEB-35E1-A3BA-00A654B8006B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           39FF88A0-8EAA-3752-B09A-EDC7FAB606C8
+    value:           6C198CD3-F2EA-3022-8AA0-07A9C7028EF3
 install-name:    '/System/Library/Frameworks/AGL.framework/Versions/A/AGL'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

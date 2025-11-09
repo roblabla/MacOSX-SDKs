@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0653FCCA-0124-318E-9875-7A2394BF04E7
+    value:           2898FB9B-89C4-30E0-898C-217D3944BF10
   - target:          x86_64-maccatalyst
-    value:           0653FCCA-0124-318E-9875-7A2394BF04E7
+    value:           2898FB9B-89C4-30E0-898C-217D3944BF10
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           874B2C00-0D57-3B18-9050-41DAEDCADEB5
+    value:           91A266D5-A181-304A-96B7-14592F5504BB
   - target:          arm64e-maccatalyst
-    value:           874B2C00-0D57-3B18-9050-41DAEDCADEB5
+    value:           91A266D5-A181-304A-96B7-14592F5504BB
 install-name:    '/System/Library/PrivateFrameworks/ProactiveML.framework/Versions/A/ProactiveML'
-current-version: 1115.255.1
+current-version: 1115.255
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

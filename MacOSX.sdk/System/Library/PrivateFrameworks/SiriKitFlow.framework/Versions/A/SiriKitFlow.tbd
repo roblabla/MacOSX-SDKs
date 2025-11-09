@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B46BCE02-F74C-3CF1-A127-40AE4C01DB27
+    value:           C184D5F6-A396-3F0D-854E-13EBDCAEAC77
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7A9917DF-C1E1-3928-B3AB-A51D863B87AB
+    value:           2F757D3A-762F-3A3E-89E5-69F27ECD3FBC
 install-name:    '/System/Library/PrivateFrameworks/SiriKitFlow.framework/Versions/A/SiriKitFlow'
 swift-abi-version: 7
 exports:
@@ -3067,8 +3067,16 @@ exports:
                        '_$s11SiriKitFlow10DucLoggingO6loggerSo9OS_os_logCvau', '_$s11SiriKitFlow10DucLoggingO6loggerSo9OS_os_logCvgZ', 
                        '_$s11SiriKitFlow10DucLoggingO6loggerSo9OS_os_logCvpZ', '_$s11SiriKitFlow10DucLoggingOMa', 
                        '_$s11SiriKitFlow10DucLoggingOMn', '_$s11SiriKitFlow10DucLoggingON', 
-                       '_$s11SiriKitFlow11BaseConceptC11conceptTypeSSvg', '_$s11SiriKitFlow11BaseConceptC11conceptTypeSSvpMV', 
-                       '_$s11SiriKitFlow11BaseConceptC3app0A13AppResolution0G0Cvg', 
+                       '_$s11SiriKitFlow10VoidOutputMp', '_$s11SiriKitFlow11BargeInModeV04overA0ACvgZ', 
+                       '_$s11SiriKitFlow11BargeInModeV4noneACvgZ', '_$s11SiriKitFlow11BargeInModeV8rawValueACSi_tcfC', 
+                       '_$s11SiriKitFlow11BargeInModeV8rawValueSivg', '_$s11SiriKitFlow11BargeInModeV8rawValueSivpMV', 
+                       '_$s11SiriKitFlow11BargeInModeV9overAlarmACvgZ', '_$s11SiriKitFlow11BargeInModeV9overMediaACvgZ', 
+                       '_$s11SiriKitFlow11BargeInModeV9overTimerACvgZ', '_$s11SiriKitFlow11BargeInModeVMa', 
+                       '_$s11SiriKitFlow11BargeInModeVMn', '_$s11SiriKitFlow11BargeInModeVN', 
+                       '_$s11SiriKitFlow11BargeInModeVSQAAMc', '_$s11SiriKitFlow11BargeInModeVSYAAMc', 
+                       '_$s11SiriKitFlow11BargeInModeVs10SetAlgebraAAMc', '_$s11SiriKitFlow11BargeInModeVs25ExpressibleByArrayLiteralAAMc', 
+                       '_$s11SiriKitFlow11BargeInModeVs9OptionSetAAMc', '_$s11SiriKitFlow11BaseConceptC11conceptTypeSSvg', 
+                       '_$s11SiriKitFlow11BaseConceptC11conceptTypeSSvpMV', '_$s11SiriKitFlow11BaseConceptC3app0A13AppResolution0G0Cvg', 
                        '_$s11SiriKitFlow11BaseConceptC3app0A13AppResolution0G0CvpMV', 
                        '_$s11SiriKitFlow11BaseConceptC3appAC0A13AppResolution0G0C_tcfC', 
                        '_$s11SiriKitFlow11BaseConceptC3appAC0A13AppResolution0G0C_tcfCTj', 
@@ -3102,6 +3110,8 @@ exports:
                        '_$s11SiriKitFlow11DeviceStateP11inputOriginAA05InputG0OvgTj', 
                        '_$s11SiriKitFlow11DeviceStateP11inputOriginAA05InputG0OvgTq', 
                        '_$s11SiriKitFlow11DeviceStateP12isCarDNDModeSbvgTj', '_$s11SiriKitFlow11DeviceStateP12isCarDNDModeSbvgTq', 
+                       '_$s11SiriKitFlow11DeviceStateP14bargeInContextAA05BargegH0VSgvgTj', 
+                       '_$s11SiriKitFlow11DeviceStateP14bargeInContextAA05BargegH0VSgvgTq', 
                        '_$s11SiriKitFlow11DeviceStateP14isDirectActionSbvgTj', '_$s11SiriKitFlow11DeviceStateP14isDirectActionSbvgTq', 
                        '_$s11SiriKitFlow11DeviceStateP15interactionTypeAA011InteractionG0OvgTj', 
                        '_$s11SiriKitFlow11DeviceStateP15interactionTypeAA011InteractionG0OvgTq', 
@@ -3141,6 +3151,8 @@ exports:
                        '_$s11SiriKitFlow11DeviceStatePAAE13companionNameSSSgvpMV', 
                        '_$s11SiriKitFlow11DeviceStatePAAE14asCATParameterSDySSypGvg', 
                        '_$s11SiriKitFlow11DeviceStatePAAE14asCATParameterSDySSypGvpMV', 
+                       '_$s11SiriKitFlow11DeviceStatePAAE14bargeInContextAA05BargegH0VSgvg', 
+                       '_$s11SiriKitFlow11DeviceStatePAAE14bargeInContextAA05BargegH0VSgvpMV', 
                        '_$s11SiriKitFlow11DeviceStatePAAE14isDirectActionSbvg', '_$s11SiriKitFlow11DeviceStatePAAE14isDirectActionSbvpMV', 
                        '_$s11SiriKitFlow11DeviceStatePAAE15interactionTypeAA011InteractionG0Ovg', 
                        '_$s11SiriKitFlow11DeviceStatePAAE15interactionTypeAA011InteractionG0OvpMV', 
@@ -3185,7 +3197,8 @@ exports:
                        '_$s11SiriKitFlow11DisplayHintVSEAAMc', '_$s11SiriKitFlow11DisplayHintVSeAAMc', 
                        '_$s11SiriKitFlow11EmptyOutputC12flowActivityAA0cG0_pSgvg', 
                        '_$s11SiriKitFlow11EmptyOutputC12flowActivityAA0cG0_pSgvpMV', 
-                       '_$s11SiriKitFlow11EmptyOutputC8instanceAA0E0_pvgZ', '_$s11SiriKitFlow11EmptyOutputCAA0E0AAMc', 
+                       '_$s11SiriKitFlow11EmptyOutputC8instanceAA0E0_pvgZ', '_$s11SiriKitFlow11EmptyOutputCAA04VoidE0AAMc', 
+                       '_$s11SiriKitFlow11EmptyOutputCAA04VoidE0AAWP', '_$s11SiriKitFlow11EmptyOutputCAA0E0AAMc', 
                        '_$s11SiriKitFlow11EmptyOutputCAA0E0AAWP', '_$s11SiriKitFlow11EmptyOutputCMa', 
                        '_$s11SiriKitFlow11EmptyOutputCMm', '_$s11SiriKitFlow11EmptyOutputCMn', 
                        '_$s11SiriKitFlow11EmptyOutputCMo', '_$s11SiriKitFlow11EmptyOutputCMu', 
@@ -3706,10 +3719,15 @@ exports:
                        '_$s11SiriKitFlow14ActionGroupingPAAE10transitionAA0D15GroupTransitionOSgvg', 
                        '_$s11SiriKitFlow14ActionGroupingPAAE10transitionAA0D15GroupTransitionOSgvpMV', 
                        '_$s11SiriKitFlow14ActionGroupingPs28CustomDebugStringConvertibleTb', 
-                       '_$s11SiriKitFlow14ActionGroupingTL', '_$s11SiriKitFlow14CommandFailureC11descriptionSSvgTj', 
-                       '_$s11SiriKitFlow14CommandFailureC11descriptionSSvgTq', '_$s11SiriKitFlow14CommandFailureC11descriptionSSvpMV', 
-                       '_$s11SiriKitFlow14CommandFailureC6reasonSSSgvg', '_$s11SiriKitFlow14CommandFailureC6reasonSSSgvpMV', 
-                       '_$s11SiriKitFlow14CommandFailureC9errorCode6reasonACSi_SSSgtcfC', 
+                       '_$s11SiriKitFlow14ActionGroupingTL', '_$s11SiriKitFlow14BargeInContextV30approximatePreviousTTSInterval10Foundation12DateIntervalVSgvg', 
+                       '_$s11SiriKitFlow14BargeInContextV30approximatePreviousTTSInterval10Foundation12DateIntervalVSgvpMV', 
+                       '_$s11SiriKitFlow14BargeInContextV4mode30approximatePreviousTTSIntervalAcA0dE4ModeV_10Foundation12DateIntervalVSgtcfC', 
+                       '_$s11SiriKitFlow14BargeInContextV4modeAA0dE4ModeVvg', '_$s11SiriKitFlow14BargeInContextV4modeAA0dE4ModeVvpMV', 
+                       '_$s11SiriKitFlow14BargeInContextVACycfC', '_$s11SiriKitFlow14BargeInContextVMa', 
+                       '_$s11SiriKitFlow14BargeInContextVMn', '_$s11SiriKitFlow14BargeInContextVN', 
+                       '_$s11SiriKitFlow14CommandFailureC11descriptionSSvgTj', '_$s11SiriKitFlow14CommandFailureC11descriptionSSvgTq', 
+                       '_$s11SiriKitFlow14CommandFailureC11descriptionSSvpMV', '_$s11SiriKitFlow14CommandFailureC6reasonSSSgvg', 
+                       '_$s11SiriKitFlow14CommandFailureC6reasonSSSgvpMV', '_$s11SiriKitFlow14CommandFailureC9errorCode6reasonACSi_SSSgtcfC', 
                        '_$s11SiriKitFlow14CommandFailureC9errorCode6reasonACSi_SSSgtcfCTj', 
                        '_$s11SiriKitFlow14CommandFailureC9errorCode6reasonACSi_SSSgtcfCTq', 
                        '_$s11SiriKitFlow14CommandFailureC9errorCode6reasonACSi_SSSgtcfc', 
@@ -5201,6 +5219,8 @@ exports:
                        '_$s11SiriKitFlow21PaginationOutOfBoundsOs5ErrorAAMc', '_$s11SiriKitFlow21RCHAdaptedEmptyOutputC12flowActivityAA0cH0_pSgvg', 
                        '_$s11SiriKitFlow21RCHAdaptedEmptyOutputC12flowActivityAA0cH0_pSgvpMV', 
                        '_$s11SiriKitFlow21RCHAdaptedEmptyOutputC8instanceAA0F0_pvgZ', 
+                       '_$s11SiriKitFlow21RCHAdaptedEmptyOutputCAA04VoidF0AAMc', 
+                       '_$s11SiriKitFlow21RCHAdaptedEmptyOutputCAA04VoidF0AAWP', 
                        '_$s11SiriKitFlow21RCHAdaptedEmptyOutputCAA0F0AAMc', '_$s11SiriKitFlow21RCHAdaptedEmptyOutputCAA0F0AAWP', 
                        '_$s11SiriKitFlow21RCHAdaptedEmptyOutputCACycfC', '_$s11SiriKitFlow21RCHAdaptedEmptyOutputCACycfCTq', 
                        '_$s11SiriKitFlow21RCHAdaptedEmptyOutputCACycfc', '_$s11SiriKitFlow21RCHAdaptedEmptyOutputCMa', 
@@ -5370,6 +5390,9 @@ exports:
                        '_$s11SiriKitFlow22RefreshableDeviceStateC12isCarDNDModeSbvg', 
                        '_$s11SiriKitFlow22RefreshableDeviceStateC12isCarDNDModeSbvgTq', 
                        '_$s11SiriKitFlow22RefreshableDeviceStateC12isCarDNDModeSbvpMV', 
+                       '_$s11SiriKitFlow22RefreshableDeviceStateC14bargeInContextAA05BargehI0VSgvg', 
+                       '_$s11SiriKitFlow22RefreshableDeviceStateC14bargeInContextAA05BargehI0VSgvgTq', 
+                       '_$s11SiriKitFlow22RefreshableDeviceStateC14bargeInContextAA05BargehI0VSgvpMV', 
                        '_$s11SiriKitFlow22RefreshableDeviceStateC14isDirectActionSbvg', 
                        '_$s11SiriKitFlow22RefreshableDeviceStateC14isDirectActionSbvgTq', 
                        '_$s11SiriKitFlow22RefreshableDeviceStateC14isDirectActionSbvpMV', 
@@ -6583,6 +6606,8 @@ exports:
                        '_$s11SiriKitFlow35RCHDelegateToRCHFlowStrategyAdapterCyxGAA28IntentExtensionCommunicatingAAMc', 
                        '_$s11SiriKitFlow35UnsetRelationshipResponseGeneratingMp', 
                        '_$s11SiriKitFlow35UnsetRelationshipResponseGeneratingTL', 
+                       '_$s11SiriKitFlow3LogO14logAFAnalytics10startEvent03endH07andWrapyxcSo0fH4TypeV_AIyxctlFZ', 
+                       '_$s11SiriKitFlow3LogO14logAFAnalytics9eventType0G7ContextySo0f5EventH0V_SDySSypGtFZ', 
                        '_$s11SiriKitFlow3LogO18generateSignpostID2os010OSSignpostG0VyFZ', 
                        '_$s11SiriKitFlow3LogO3endyy2os12OSSignpostIDV_s12StaticStringVtFZ', 
                        '_$s11SiriKitFlow3LogO4flowSo9OS_os_logCvau', '_$s11SiriKitFlow3LogO4flowSo9OS_os_logCvgZ', 

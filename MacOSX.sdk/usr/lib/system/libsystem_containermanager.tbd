@@ -4,24 +4,24 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           269A7B7B-A9F2-36E7-B616-BB219A836E0E
+    value:           4ED09A19-04CC-3464-9EFB-F674932020B5
   - target:          x86_64-maccatalyst
-    value:           269A7B7B-A9F2-36E7-B616-BB219A836E0E
+    value:           4ED09A19-04CC-3464-9EFB-F674932020B5
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           F69F9272-6131-3AB6-9BF2-DE27E75467CB
+    value:           165B6DCF-6B92-3EC9-84D3-98FBFAB26EA1
   - target:          arm64e-maccatalyst
-    value:           F69F9272-6131-3AB6-9BF2-DE27E75467CB
+    value:           165B6DCF-6B92-3EC9-84D3-98FBFAB26EA1
 install-name:    '/usr/lib/system/libsystem_containermanager.dylib'
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CONTAINER_CURRENT_MOBILE_UID, _CONTAINER_INSTALLATION_UID, 
                        _CONTAINER_NOTIFY_CLEANUP_COMPLETE, _CONTAINER_NOTIFY_REBOOT_CLEANUP_COMPLETE, 

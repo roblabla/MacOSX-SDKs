@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2EBB877D-6741-3F37-9992-D65DC37ED2C8
+    value:           8FF159AE-F550-362D-8F12-7F9F8DDFD53A
   - target:          x86_64-maccatalyst
-    value:           2EBB877D-6741-3F37-9992-D65DC37ED2C8
+    value:           8FF159AE-F550-362D-8F12-7F9F8DDFD53A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           72D3A430-C20B-3644-8131-E42920242DA8
+    value:           5E63FE30-7C12-3A5C-885D-F5FE0FE4D7B4
   - target:          arm64e-maccatalyst
-    value:           72D3A430-C20B-3644-8131-E42920242DA8
+    value:           5E63FE30-7C12-3A5C-885D-F5FE0FE4D7B4
 install-name:    '/System/Library/PrivateFrameworks/NewsTransport.framework/Versions/A/NewsTransport'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -483,8 +483,10 @@ exports:
                        COMAPPLEFELDSPARPROTOCOLANALYTICSEVENTSWidgetEngagement._widgetContentType, 
                        COMAPPLEFELDSPARPROTOCOLANALYTICSEVENTSWidgetEngagement._widgetDisplayMode, 
                        COMAPPLEFELDSPARPROTOCOLANALYTICSEVENTSWidgetEngagement._widgetEngagementType, 
+                       COMAPPLEFELDSPARPROTOCOLANALYTICSEVENTSWidgetEngagement._widgetExposureStackLocation, 
                        COMAPPLEFELDSPARPROTOCOLANALYTICSEVENTSWidgetEngagement._widgetSectionDisplayRank, 
                        COMAPPLEFELDSPARPROTOCOLANALYTICSEVENTSWidgetEngagement._widgetSectionId, 
+                       COMAPPLEFELDSPARPROTOCOLANALYTICSEVENTSWidgetEngagement._widgetType, 
                        COMAPPLEFELDSPARPROTOCOLANALYTICSEVENTSWidgetEngagement._widgetUserId, 
                        COMAPPLEFELDSPARPROTOCOLANALYTICSEVENTSWidgetEngagement._widgetVideoPresentationReason, 
                        COMAPPLEFELDSPARPROTOCOLLIVERPOOLArticleConversionStats._channelConversionStats, 
@@ -504,6 +506,8 @@ exports:
                        COMAPPLEFELDSPARPROTOCOLLIVERPOOLTopicConversionStats._conversionStats, 
                        COMAPPLEFELDSPARPROTOCOLLIVERPOOLTopicConversionStats._tagId, 
                        COMAPPLEFELDSPARPROTOCOLScoredTagID._score, COMAPPLEFELDSPARPROTOCOLScoredTagID._tagId, 
+                       COMAPPLEFELDSPARPROTOCOLVersionedPersonalizationVector._bundleSubscribedVector, 
+                       COMAPPLEFELDSPARPROTOCOLVersionedPersonalizationVector._bundleSubscribedVectorVersion, 
                        COMAPPLEFELDSPARPROTOCOLVersionedPersonalizationVector._personalizationVector, 
                        COMAPPLEFELDSPARPROTOCOLVersionedPersonalizationVector._version, 
                        NTPBABConfig._configBuckets, NTPBABConfig._configControl, 
@@ -512,7 +516,7 @@ exports:
                        NTPBABConfigBucket._config, NTPBABConfigBucket._has, NTPBAVAsset._bookmark, 
                        NTPBAVAsset._contentKeyIdentifiers, NTPBAVAsset._has, NTPBAVAsset._identifier, 
                        NTPBAVAsset._remoteURL, NTPBAVAsset._size, NTPBAVAssetKey._createdAt, 
-                       NTPBAVAssetKey._data, NTPBAVAssetKey._expiresAt, NTPBAVAssetKey._identifier, 
+                       NTPBAVAssetKey._expiresAt, NTPBAVAssetKey._identifier, NTPBAVAssetKey._keyData, 
                        NTPBAbsolutePersonalizedSectionPresenceConfig._cTRToHide, 
                        NTPBAbsolutePersonalizedSectionPresenceConfig._cTRToShow, 
                        NTPBAbsolutePersonalizedSectionPresenceConfig._has, NTPBAbsolutePersonalizedSectionPresenceConfig._minProbabilityToShow, 
@@ -818,7 +822,7 @@ exports:
                        NTPBArticleViewWatch._articleHostViewTypeWatch, NTPBArticleViewWatch._articleId, 
                        NTPBArticleViewWatch._articleViewingSessionIdWatch, NTPBArticleViewWatch._didScroll, 
                        NTPBArticleViewWatch._has, NTPBArticleViewWatch._sourceChannelId, 
-                       NTPBAsset._error, NTPBAsset._has, NTPBAsset._type, NTPBAsset._wrappingKeyID, 
+                       NTPBAsset._error, NTPBAsset._has, NTPBAsset._size, NTPBAsset._wrappingKeyID, 
                        NTPBAudioConfigRecord._base, NTPBAudioConfigRecord._configuration, 
                        NTPBAudioConfigRecord._dailyBriefingArticleID, NTPBAudioConfigRecord._featuredAudioArticleListID, 
                        NTPBAudioConfigRecord._heroArticleIDs, NTPBAudioConfigRecord._latestAudioArticleListID, 
@@ -869,7 +873,7 @@ exports:
                        NTPBBundleSubscriberInfo._startTimestamp, NTPBBundleSubscriberInfo._subscribedChannelIds, 
                        NTPBBundleSubscriberInfo._userId, NTPBBundleSubscriberInfo._userStorefrontId, 
                        NTPBCacheCoordinatorHints._cacheHints, NTPBCacheCoordinatorHints._has, 
-                       NTPBCacheCoordinatorHints._version, NTPBCacheHint._accessDate, 
+                       NTPBCacheCoordinatorHints._version, NTPBCacheHint._accessTime, 
                        NTPBCacheHint._has, NTPBCacheHint._key, NTPBCacheHint._lifetime, 
                        NTPBCardStyle._callToActionBackgroundColor, NTPBCardStyle._callToActionForegroundColor, 
                        NTPBCardStyle._cardBackgroundColor, NTPBCardStyle._cardForegroundColor, 
@@ -1036,11 +1040,10 @@ exports:
                        NTPBEventObject._emailOptInInvite, NTPBEventObject._endOfArticleExposure, 
                        NTPBEventObject._externalAnalyticsEventSend, NTPBEventObject._feedCellExposure, 
                        NTPBEventObject._feedCellHostViewExposure, NTPBEventObject._feedEngagementMenuExposure, 
-                       NTPBEventObject._feedLoad, NTPBEventObject._feedSubscribeUnsubscribe, 
-                       NTPBEventObject._feedViewExposure, NTPBEventObject._groupViewExposure, 
-                       NTPBEventObject._inAppWebEmbedExposure, NTPBEventObject._issueDownload, 
-                       NTPBEventObject._issueExposure, NTPBEventObject._issueTocView, 
-                       NTPBEventObject._linkTap, NTPBEventObject._linkTapArticle, 
+                       NTPBEventObject._feedSubscribeUnsubscribe, NTPBEventObject._feedViewExposure, 
+                       NTPBEventObject._groupViewExposure, NTPBEventObject._inAppWebEmbedExposure, 
+                       NTPBEventObject._issueDownload, NTPBEventObject._issueExposure, 
+                       NTPBEventObject._issueTocView, NTPBEventObject._linkTap, NTPBEventObject._linkTapArticle, 
                        NTPBEventObject._localNotificationReceived, NTPBEventObject._localNotificationReturn, 
                        NTPBEventObject._mediaEngage, NTPBEventObject._mediaEngageComplete, 
                        NTPBEventObject._mediaExposure, NTPBEventObject._mediaView, 
@@ -1880,7 +1883,8 @@ exports:
                        NTPBPullToRefresh._viewId, NTPBPullToRefresh._viewType, NTPBPurchaseIDPatternPair._domainPatterns, 
                        NTPBPurchaseIDPatternPair._purchaseID, NTPBPurchaseLookupRecord._appAdamID, 
                        NTPBPurchaseLookupRecord._base, NTPBPurchaseLookupRecord._bundleChannelTagIDs, 
-                       NTPBPurchaseLookupRecord._channelTagIDs, NTPBPurchaseOfferableConfiguration._allowsPublisherPadApp, 
+                       NTPBPurchaseLookupRecord._bundleChannelTagIDsVersion, NTPBPurchaseLookupRecord._channelTagIDs, 
+                       NTPBPurchaseOfferableConfiguration._allowsPublisherPadApp, 
                        NTPBPurchaseOfferableConfiguration._allowsPublisherPhoneApp, 
                        NTPBPurchaseOfferableConfiguration._allowsPublisherWebSite, 
                        NTPBPurchaseOfferableConfiguration._has, NTPBPurchaseOfferableConfiguration._preferredOffer, 
@@ -2210,16 +2214,18 @@ exports:
                        NTPBTodayWidgetConfig._widgetSystemReloadJitterMax, NTPBTodayWidgetExposure._contentFetchDate, 
                        NTPBTodayWidgetExposure._contentId, NTPBTodayWidgetExposure._has, 
                        NTPBTodayWidgetExposure._widgetAppearanceType, NTPBTodayWidgetExposure._widgetArticleCount, 
-                       NTPBTodayWidgetExposure._widgetHeadlineExposureCount, NTPBTodayWidgetExposure._widgetIdentifier, 
-                       NTPBTodayWidgetExposure._widgetPersonalizationFeatureCTRPairs, 
+                       NTPBTodayWidgetExposure._widgetExposureStackLocation, NTPBTodayWidgetExposure._widgetHeadlineExposureCount, 
+                       NTPBTodayWidgetExposure._widgetIdentifier, NTPBTodayWidgetExposure._widgetPersonalizationFeatureCTRPairs, 
                        NTPBTodayWidgetExposure._widgetSectionsArticleCountPairs, 
-                       NTPBTodayWidgetHeadlineExposure._alternateHeadline, NTPBTodayWidgetHeadlineExposure._articleId, 
-                       NTPBTodayWidgetHeadlineExposure._has, NTPBTodayWidgetHeadlineExposure._sourceChannelId, 
-                       NTPBTodayWidgetHeadlineExposure._webEmbedId, NTPBTodayWidgetHeadlineExposure._widgetArticleCount, 
-                       NTPBTodayWidgetHeadlineExposure._widgetArticleCountInSection, 
+                       NTPBTodayWidgetExposure._widgetType, NTPBTodayWidgetHeadlineExposure._alternateHeadline, 
+                       NTPBTodayWidgetHeadlineExposure._articleId, NTPBTodayWidgetHeadlineExposure._has, 
+                       NTPBTodayWidgetHeadlineExposure._sourceChannelId, NTPBTodayWidgetHeadlineExposure._webEmbedId, 
+                       NTPBTodayWidgetHeadlineExposure._widgetArticleCount, NTPBTodayWidgetHeadlineExposure._widgetArticleCountInSection, 
                        NTPBTodayWidgetHeadlineExposure._widgetArticleRank, NTPBTodayWidgetHeadlineExposure._widgetArticleRankInSection, 
-                       NTPBTodayWidgetHeadlineExposure._widgetContentType, NTPBTodayWidgetHeadlineExposure._widgetSectionDisplayRank, 
-                       NTPBTodayWidgetHeadlineExposure._widgetSectionId, NTPBTodayWidgetSession._countOfArticlesExposedEachSections, 
+                       NTPBTodayWidgetHeadlineExposure._widgetContentType, NTPBTodayWidgetHeadlineExposure._widgetExposureStackLocation, 
+                       NTPBTodayWidgetHeadlineExposure._widgetSectionDisplayRank, 
+                       NTPBTodayWidgetHeadlineExposure._widgetSectionId, NTPBTodayWidgetHeadlineExposure._widgetType, 
+                       NTPBTodayWidgetSession._countOfArticlesExposedEachSections, 
                        NTPBTodayWidgetSession._countOfArticlesExposedPerSections, 
                        NTPBTodayWidgetSession._has, NTPBTodayWidgetSession._widgetArticleCount, 
                        NTPBTodayWidgetSession._widgetSectionIdsExposeds, NTPBTodayWidgetSession._widgetSectionsExposed, 
@@ -2267,6 +2273,8 @@ exports:
                        NTPBUserSegmentationApiConfiguration._userSegmentationRefreshRate, 
                        NTPBVanityURLMapping._paths, NTPBVanityURLPath._destinationParameters, 
                        NTPBVanityURLPath._destinationPath, NTPBVanityURLPath._sourcePath, 
+                       NTPBVersionedPersonalizationVector._bundleSubscribedVector, 
+                       NTPBVersionedPersonalizationVector._bundleSubscribedVectorVersion, 
                        NTPBVersionedPersonalizationVector._personalizationVector, 
                        NTPBVersionedPersonalizationVector._version, NTPBVideoGroupsConfig._has, 
                        NTPBVideoGroupsConfig._moreFromPublisherBarEnabled, NTPBVideoGroupsConfig._moreFromPublisherBarTime, 
@@ -2313,8 +2321,9 @@ exports:
                        NTPBWidgetEngagement._widgetArticleCountInSection, NTPBWidgetEngagement._widgetArticleRank, 
                        NTPBWidgetEngagement._widgetArticleRankInSection, NTPBWidgetEngagement._widgetContentId, 
                        NTPBWidgetEngagement._widgetContentType, NTPBWidgetEngagement._widgetDisplayMode, 
-                       NTPBWidgetEngagement._widgetEngagementType, NTPBWidgetEngagement._widgetSectionDisplayRank, 
-                       NTPBWidgetEngagement._widgetSectionId, NTPBWidgetEngagement._widgetUserId, 
+                       NTPBWidgetEngagement._widgetEngagementType, NTPBWidgetEngagement._widgetExposureStackLocation, 
+                       NTPBWidgetEngagement._widgetSectionDisplayRank, NTPBWidgetEngagement._widgetSectionId, 
+                       NTPBWidgetEngagement._widgetType, NTPBWidgetEngagement._widgetUserId, 
                        NTPBWidgetEngagement._widgetVideoPresentationReason, NTPBWidgetPersonalizationFeatureCTRPair._ctr, 
                        NTPBWidgetPersonalizationFeatureCTRPair._has, NTPBWidgetPersonalizationFeatureCTRPair._personalizationFeatureId, 
                        NTPBWidgetSectionConfigRecord._articleIDs2s, NTPBWidgetSectionConfigRecord._articleListIDs2s, 

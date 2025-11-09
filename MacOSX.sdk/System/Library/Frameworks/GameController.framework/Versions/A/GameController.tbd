@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           9C712E50-5295-3474-9B53-343F41F8B43A
+    value:           A4E78AC4-552E-3DA4-821F-0E764D28D79A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CFC29915-A5E7-3A98-A70E-CBA752B4900D
+    value:           6C380994-47A2-3B4D-8A37-32CCACDAAB11
 install-name:    '/System/Library/Frameworks/GameController.framework/Versions/A/GameController'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _ControllerClassForInterface, _ControllerClassForService, 
                        _GCAppClientInterface, _GCAppServerInterface, _GCBundleWithPID, 
                        _GCControllerButtonInputPressedThreshold, _GCControllerDidBecomeCurrentNotification, 
@@ -118,8 +118,9 @@ exports:
                        _getGCDLogger, _getGCHIDLogger, _getGCHapticsLogger, _getGCLogger, 
                        _getGCSettingsLogger, _getInterfaceNumberForDevice, _hexStringFromByteArray, 
                        _isDeviceAppleB239Digitizer, _isDeviceAppleControlCenterRemote, 
-                       _isDeviceAppleEmbeddedBluetoothButtons, _isDeviceAppleSiriRemote, 
-                       _isDeviceDualShock4, _isDeviceKeyboard, _isDeviceMFiAuthenticated, 
+                       _isDeviceAppleDirectionalRemote, _isDeviceAppleEmbeddedBluetoothButtons, 
+                       _isDeviceAppleSiriRemote, _isDeviceDualSense, _isDeviceDualShock4, 
+                       _isDeviceKeyboard, _isDeviceLuna, _isDeviceMFiAuthenticated, 
                        _isDeviceMFiGamepadCompliantForDeviceRef, _isDeviceMFiGamepadCompliantForServiceClientRef, 
                        _isDeviceMotionLite, _isDeviceMouse, _isDeviceSwitchJoyCon, 
                        _isDeviceSwitchProController, _isDeviceXboxOne, _isPartnerSupportEnabled, 
@@ -136,8 +137,9 @@ exports:
                        GCControllerElement, GCControllerElementSettings, GCControllerMBDelegate, 
                        GCControllerSFDelegate, GCControllerSettings, GCControllerTouchpad, 
                        GCDeviceBattery, GCDeviceConfigurationEvaluator, GCDeviceCursor, 
-                       GCDeviceHaptics, GCDeviceLight, GCDualShockGamepad, GCEventViewController, 
-                       GCExtendedGamepad, GCExtendedGamepadSnapshot, GCFrontmostApplicationObserver, 
+                       GCDeviceHaptics, GCDeviceLight, GCDirectionalGamepad, GCDualSenseGamepad, 
+                       GCDualShockGamepad, GCEventViewController, GCExtendedGamepad, 
+                       GCExtendedGamepadSnapshot, GCFrontmostApplicationObserver, 
                        GCGamepad, GCGamepadSnapshot, GCHIDInformation, GCHapticActuator, 
                        GCHapticCapabilities, GCHapticCapabilityGraph, GCHapticCapabilityGraphNode, 
                        GCKeyboard, GCKeyboardAndMouseEventObserver, GCKeyboardAndMouseManager, 

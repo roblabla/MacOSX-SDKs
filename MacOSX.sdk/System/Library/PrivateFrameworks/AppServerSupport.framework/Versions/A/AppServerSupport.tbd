@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           91A300DA-D32D-38D2-8B6C-3BE669304372
+    value:           27B96AA0-421E-3E5A-B9D8-9BA3F0D133E9
   - target:          x86_64-maccatalyst
-    value:           91A300DA-D32D-38D2-8B6C-3BE669304372
+    value:           27B96AA0-421E-3E5A-B9D8-9BA3F0D133E9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           77651A0E-E6A8-3BF1-A52F-DABB28F6153A
+    value:           911AB008-23FE-3134-B433-0321073F0BDC
   - target:          arm64e-maccatalyst
-    value:           77651A0E-E6A8-3BF1-A52F-DABB28F6153A
+    value:           911AB008-23FE-3134-B433-0321073F0BDC
 install-name:    '/System/Library/PrivateFrameworks/AppServerSupport.framework/Versions/A/AppServerSupport'
 current-version: 2038.40.38
 exports:

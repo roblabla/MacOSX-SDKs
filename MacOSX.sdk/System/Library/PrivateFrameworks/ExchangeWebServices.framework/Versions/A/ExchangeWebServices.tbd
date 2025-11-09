@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5D0C17DD-9DAF-39EA-810E-B15BE0DB566D
+    value:           792860BD-C521-3567-BB5F-C06F13868A68
   - target:          x86_64-maccatalyst
-    value:           5D0C17DD-9DAF-39EA-810E-B15BE0DB566D
+    value:           792860BD-C521-3567-BB5F-C06F13868A68
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           586844E4-E9DC-3400-A89C-8757A5A0B4D5
+    value:           69E6AC7E-AFC7-3205-BB3B-E83C0E9D75ED
   - target:          arm64e-maccatalyst
-    value:           586844E4-E9DC-3400-A89C-8757A5A0B4D5
+    value:           69E6AC7E-AFC7-3205-BB3B-E83C0E9D75ED
 install-name:    '/System/Library/PrivateFrameworks/ExchangeWebServices.framework/Versions/A/ExchangeWebServices'
 current-version: 281
 exports:

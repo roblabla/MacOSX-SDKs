@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           004909DC-3AB5-3099-9B6E-736A469B377A
+    value:           73F9764C-FAE9-3183-9521-FE193CE74031
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           20E3FD9D-3F2F-3F23-8071-49A323228AF1
+    value:           B97BCB3F-A3A9-3369-8758-1806EF823E01
 install-name:    '/System/Library/PrivateFrameworks/APTransport.framework/Versions/A/APTransport'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

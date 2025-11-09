@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           D739E582-19A4-3836-8DFB-D1FAB31BC47A
+    value:           16AA3D67-89A5-3082-8C91-CAD9C794DDF7
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           3EABE161-605F-3C7F-A553-56F2C07ED361
+    value:           C611AB57-B8E4-3EA1-B99D-534E632C1F4F
 install-name:    '/System/iOSSupport/System/Library/Frameworks/GameKit.framework/Versions/A/GameKit'
-current-version: 770.13.4
+current-version: 775.14.4
 reexported-libraries:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/Frameworks/ModelIO.framework/Versions/A/ModelIO', 
@@ -28,17 +28,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2F582EE6-36AD-3ADD-8D9A-BD455A3D8B69
+    value:           0C720D11-06A8-340D-B0E4-5AC76A53BBDE
   - target:          x86_64-maccatalyst
-    value:           2F582EE6-36AD-3ADD-8D9A-BD455A3D8B69
+    value:           0C720D11-06A8-340D-B0E4-5AC76A53BBDE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           67C2C87A-B178-3F67-A4F4-1EBBC858DD8C
+    value:           E502318D-4545-3FCE-9F29-DA9D174118DF
   - target:          arm64e-maccatalyst
-    value:           67C2C87A-B178-3F67-A4F4-1EBBC858DD8C
+    value:           E502318D-4545-3FCE-9F29-DA9D174118DF
 install-name:    '/System/Library/PrivateFrameworks/GameCenterFoundation.framework/Versions/A/GameCenterFoundation'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
@@ -135,7 +135,10 @@ exports:
                        _GKGameLayerDashboardScoresViewPlayerChallenged, _GKGameLayerDashboardScoresViewPlayerProfileViewed, 
                        _GKGameLayerDashboardScoresViewScoreShared, _GKGameLayerDashboardScoresViewScrolledToTop, 
                        _GKGameLayerDashboardTimeScopeChangedToAllTime, _GKGameLayerDashboardTimeScopeChangedToToday, 
-                       _GKGameLayerDashboardTimeScopeChangedToWeek, _GKGameMetadataKey, 
+                       _GKGameLayerDashboardTimeScopeChangedToWeek, _GKGameLayerDashboardTimeSpentOnAchievementsScreen, 
+                       _GKGameLayerDashboardTimeSpentOnArcadeScreen, _GKGameLayerDashboardTimeSpentOnChallengesScreen, 
+                       _GKGameLayerDashboardTimeSpentOnLeaderboardsScreen, _GKGameLayerDashboardTimeSpentOnMainScreen, 
+                       _GKGameLayerDashboardTimeSpentOnPlayerProfileScreen, _GKGameMetadataKey, 
                        _GKGamePlayerIDKey, _GKGameSessionErrorDomain, _GKGetApplicationDidEnterBackgroundNotificationName, 
                        _GKGetApplicationStateForBundleID, _GKGetApplicationWillEnterForegroundNotificationName, 
                        _GKGetApplicationWillTerminateNotificationName, _GKGetGamesPlayedDescriptorsWithinSecondsKey, 
@@ -182,35 +185,42 @@ exports:
                        _GKPlayerDidAuthenticateNotificationKeyPlayersSignedOut, _GKPlayerDidAuthenticateOldPlayerIDKey, 
                        _GKPlayerDidChangeNotificationName, _GKPlayerIDHashAddKey, 
                        _GKPlayerIDHashModKey, _GKPlayerIDKey, _GKPlayerIDNoLongerAvailable, 
-                       _GKPlayerStatusKey, _GKPlayersToInviteNotification, _GKPredicatePrefix, 
-                       _GKPreferencesIdentifier, _GKPrimaryCredentialDidChangeNotification, 
-                       _GKPrivacySettingsAchievementsKey, _GKPrivacySettingsFriendsKey, 
-                       _GKPrivacySettingsGamesPlayedKey, _GKPrivacySettingsKey, _GKProgramaticInviteTime, 
-                       _GKPurpleBuddyIdentifier, _GKPushCommandKey, _GKPushDataKey, 
-                       _GKPushEnvironmentKey, _GKPushInviteInitiate, _GKPushProtocolKey, 
-                       _GKPushTokenKey, _GKQueryParamsBagKey, _GKRTAllConnectionAttempt, 
-                       _GKRTAllMatchSuccess, _GKRTAllMatchTotal, _GKRTAutoMatchSuccess, 
-                       _GKRTAutoMatchTotal, _GKRTConnectionSuccessP2P, _GKRTConnectionSuccessRelay, 
-                       _GKRTIndirectMatchSuccess, _GKRTIndirectMatchTotal, _GKRTMessageBasedMatchSuccess, 
-                       _GKRTMessageBasedMatchTotal, _GKRTNearbyMatchSuccess, _GKRTNearbyMatchTotal, 
-                       _GKRTPushBasedMatchSuccess, _GKRTPushBasedMatchTotal, _GKRefreshSeedKey, 
-                       _GKRejectFriendRequestIDs, _GKRelayNotification, _GKRemoteUIAuthorizeAccountURLKey, 
-                       _GKRemoteUIChangePasswordURLKey, _GKRemoteUIEditAccountURLKey, 
-                       _GKRemoteUILinkAccountsURLKey, _GKRemoteUIReportProblemURLKey, 
-                       _GKReportProblemURLKey, _GKReporterAccessPointButtonTapped, 
+                       _GKPlayerProfileAchievementsByGameClicked, _GKPlayerProfileAddFriendsClicked, 
+                       _GKPlayerProfileFriendsListClicked, _GKPlayerProfileNearbyPlayersButtonToggled, 
+                       _GKPlayerProfilePrivacyClicked, _GKPlayerProfileRecentlyPlayedWithClicked, 
+                       _GKPlayerProfileSettingsClicked, _GKPlayerProfileSignInButtonClicked, 
+                       _GKPlayerProfileSignOutButtonClicked, _GKPlayerStatusKey, 
+                       _GKPlayersToInviteNotification, _GKPredicatePrefix, _GKPreferencesIdentifier, 
+                       _GKPrimaryCredentialDidChangeNotification, _GKPrivacySettingsAchievementsKey, 
+                       _GKPrivacySettingsFriendsKey, _GKPrivacySettingsGamesPlayedKey, 
+                       _GKPrivacySettingsKey, _GKProgramaticInviteTime, _GKPurpleBuddyIdentifier, 
+                       _GKPushCommandKey, _GKPushDataKey, _GKPushEnvironmentKey, 
+                       _GKPushInviteInitiate, _GKPushProtocolKey, _GKPushTokenKey, 
+                       _GKQueryParamsBagKey, _GKRTAllConnectionAttempt, _GKRTAllMatchSuccess, 
+                       _GKRTAllMatchTotal, _GKRTAutoMatchSuccess, _GKRTAutoMatchTotal, 
+                       _GKRTConnectionSuccessP2P, _GKRTConnectionSuccessRelay, _GKRTIndirectMatchSuccess, 
+                       _GKRTIndirectMatchTotal, _GKRTMessageBasedMatchSuccess, _GKRTMessageBasedMatchTotal, 
+                       _GKRTNearbyMatchSuccess, _GKRTNearbyMatchTotal, _GKRTPushBasedMatchSuccess, 
+                       _GKRTPushBasedMatchTotal, _GKRefreshSeedKey, _GKRejectFriendRequestIDs, 
+                       _GKRelayNotification, _GKRemoteUIAuthorizeAccountURLKey, _GKRemoteUIChangePasswordURLKey, 
+                       _GKRemoteUIEditAccountURLKey, _GKRemoteUILinkAccountsURLKey, 
+                       _GKRemoteUIReportProblemURLKey, _GKReportProblemURLKey, _GKReporterAccessPointButtonTapped, 
                        _GKReporterAccessPointDisabled, _GKReporterAccessPointEnabled, 
-                       _GKReporterChallengeAbort, _GKReporterChallengeIssue, _GKReporterDomainChallenge, 
-                       _GKReporterDomainCustomTournamentAction, _GKReporterDomainCustomTournamentResponse, 
-                       _GKReporterDomainDashboard, _GKReporterDomainDashboardAccessPoint, 
-                       _GKReporterDomainGameDetail, _GKReporterDomainGameLayerDashboard, 
-                       _GKReporterDomainInvite, _GKReporterDomainInviteFlow, _GKReporterDomainInviteInitiateType, 
+                       _GKReporterChallengeAbort, _GKReporterChallengeIssue, _GKReporterDomainArcadeDashboard, 
+                       _GKReporterDomainArcadeForYouTapped, _GKReporterDomainArcadeNewArcadeGamesTapped, 
+                       _GKReporterDomainArcadeOpenInTheAppStoreTapped, _GKReporterDomainArcadeSeeAllFriendsPlayingTapped, 
+                       _GKReporterDomainChallenge, _GKReporterDomainCustomTournamentAction, 
+                       _GKReporterDomainCustomTournamentResponse, _GKReporterDomainDashboard, 
+                       _GKReporterDomainDashboardAccessPoint, _GKReporterDomainGameDetail, 
+                       _GKReporterDomainGameLayerDashboard, _GKReporterDomainInvite, 
+                       _GKReporterDomainInviteFlow, _GKReporterDomainInviteInitiateType, 
                        _GKReporterDomainInviteNearbyResponse, _GKReporterDomainInviteParticipantStatusUpdate, 
                        _GKReporterDomainInviteReceivedTime, _GKReporterDomainLogin, 
                        _GKReporterDomainManualFriending, _GKReporterDomainMatch, 
                        _GKReporterDomainOnboardingEvent, _GKReporterDomainPlayerAuthentication, 
-                       _GKReporterDomainPushCount, _GKReporterDomainRTMultiplayerConnectionResult, 
-                       _GKReporterDomainRTMultiplayerConnectionType, _GKReporterDomainRelay, 
-                       _GKReporterDomainSettings, _GKReporterDomainTournamentAction, 
+                       _GKReporterDomainPlayerProfileDashboard, _GKReporterDomainPushCount, 
+                       _GKReporterDomainRTMultiplayerConnectionResult, _GKReporterDomainRTMultiplayerConnectionType, 
+                       _GKReporterDomainRelay, _GKReporterDomainSettings, _GKReporterDomainTournamentAction, 
                        _GKReporterDomainTournamentView, _GKReporterDomainTurnBased, 
                        _GKReporterGameDetailShowStorePage, _GKReporterHighlightedAccessPointDisplayed, 
                        _GKReporterHighlightedAccessPointTapped, _GKReporterInviteAcceptApp, 
@@ -223,20 +233,20 @@ exports:
                        _GKReporterMatchAdd, _GKReporterMatchAddHosted, _GKReporterMatchCancel, 
                        _GKReporterMatchConnect, _GKReporterMatchConnectionFail, _GKReporterMatchDisconnect, 
                        _GKReporterMatchFail, _GKReporterMatchFind, _GKReporterMatchFindHosted, 
-                       _GKReporterMatchQuery, _GKReporterMatchQueryGroup, _GKReporterOnboardingFieldAvatarChanged, 
-                       _GKReporterOnboardingFieldAvatarDeleted, _GKReporterOnboardingFieldAvatarEditingCanceled, 
-                       _GKReporterOnboardingFieldAvatarTapped, _GKReporterOnboardingFieldCompletionStatus, 
-                       _GKReporterOnboardingFieldDuration, _GKReporterOnboardingFieldNicknameChanged, 
-                       _GKReporterOnboardingFieldNicknameEditingCanceled, _GKReporterOnboardingFieldNicknameTapped, 
-                       _GKReporterOnboardingFieldPersonalizationAcknowledged, _GKReporterOnboardingFieldPersonalizationDismissed, 
-                       _GKReporterOnboardingFieldPersonalizationScreenDisplayed, 
-                       _GKReporterOnboardingFieldPrivacyAcknowledged, _GKReporterOnboardingFieldPrivacyLinkTapped, 
-                       _GKReporterOnboardingFieldProfilePrivacyAcknowledged, _GKReporterOnboardingFieldProfilePrivacyBackPressed, 
-                       _GKReporterOnboardingFieldProfilePrivacyClicked, _GKReporterOnboardingFieldProfilePrivacyDismissed, 
-                       _GKReporterOnboardingFieldProfilePrivacyDisplayed, _GKReporterOnboardingFieldProfilePrivacyServerError, 
-                       _GKReporterOnboardingFieldSignOutCanceled, _GKReporterOnboardingFieldSignOutTapped, 
-                       _GKReporterOnboardingFieldSignedOut, _GKReporterOnboardingFieldWelcomeScreenDisplayed, 
-                       _GKReporterOnboardingValueCompleted, _GKReporterOnboardingValueTerminated, 
+                       _GKReporterMatchQuery, _GKReporterMatchQueryGroup, _GKReporterOnboardingAvatarDeleted, 
+                       _GKReporterOnboardingAvatarEditingCancelled, _GKReporterOnboardingAvatarTapped, 
+                       _GKReporterOnboardingAvatarUpdated, _GKReporterOnboardingCompleted, 
+                       _GKReporterOnboardingDefaultNicknameChanged, _GKReporterOnboardingDuration, 
+                       _GKReporterOnboardingErrorUpdatingAvatar, _GKReporterOnboardingNicknameEditingCancelled, 
+                       _GKReporterOnboardingNicknameTapped, _GKReporterOnboardingNicknameUpdatedSuccessfully, 
+                       _GKReporterOnboardingPersonalizationAcknowledged, _GKReporterOnboardingPersonalizationDismissed, 
+                       _GKReporterOnboardingPersonalizationScreenDisplayed, _GKReporterOnboardingPrivacyAcknowledged, 
+                       _GKReporterOnboardingPrivacyLinkTapped, _GKReporterOnboardingProfilePrivacyAcknowledged, 
+                       _GKReporterOnboardingProfilePrivacyBackPressed, _GKReporterOnboardingProfilePrivacyClicked, 
+                       _GKReporterOnboardingProfilePrivacyDismissed, _GKReporterOnboardingProfilePrivacyDisplayed, 
+                       _GKReporterOnboardingProfilePrivacyServerError, _GKReporterOnboardingSignOutCancelled, 
+                       _GKReporterOnboardingSignOutTapped, _GKReporterOnboardingSignedOut, 
+                       _GKReporterOnboardingTerminated, _GKReporterOnboardingWelcomeScreenDisplayed, 
                        _GKReporterPlayerAuthenticationAuthKitInvocation, _GKReporterPlayerAuthenticationDRMResponseTime, 
                        _GKReporterPlayerAuthenticationDeviceOffline, _GKReporterPlayerAuthenticationElapsedTime, 
                        _GKReporterPlayerAuthenticationElapsedTimeWithUI, _GKReporterPlayerAuthenticationFailure, 
@@ -379,17 +389,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5236703C-1AEE-3A91-9ED2-62AFFD7643E9
+    value:           2FCAAE87-3E0A-38F1-B1E0-27C699ADF9D0
   - target:          x86_64-maccatalyst
-    value:           5236703C-1AEE-3A91-9ED2-62AFFD7643E9
+    value:           2FCAAE87-3E0A-38F1-B1E0-27C699ADF9D0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A8CD66B1-D2C6-3552-A82A-2DA020DB0D77
+    value:           B0B43E92-919C-3ED8-9284-50DF8B2ABD01
   - target:          arm64e-maccatalyst
-    value:           A8CD66B1-D2C6-3552-A82A-2DA020DB0D77
+    value:           B0B43E92-919C-3ED8-9284-50DF8B2ABD01
 install-name:    '/System/Library/PrivateFrameworks/GameCenterUICore.framework/Versions/A/GameCenterUICore'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
@@ -440,11 +450,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           5324A7AA-9D17-36A6-8167-C40189BC6379
+    value:           60C1AE52-61EE-3A54-82A8-F5C596E7A5D1
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           E6EE97C1-447F-3833-87CE-68DF6A5E5BA5
+    value:           1DC4FDC5-0C23-34DF-9574-9BEE99FE4982
 install-name:    '/System/iOSSupport/System/Library/PrivateFrameworks/GameCenterUI.framework/Versions/A/GameCenterUI'
 swift-abi-version: 7
 exports:
@@ -506,7 +516,15 @@ exports:
                        '_$s12GameCenterUI16VisualEffectViewV8$effects05SwiftC07BindingVyAA15GKVisualEffectsVGvg', 
                        '_$s12GameCenterUI16VisualEffectViewV8$effects05SwiftC07BindingVyAA15GKVisualEffectsVGvpMV', 
                        '_$s12GameCenterUI16VisualEffectViewVMa', '_$s12GameCenterUI16VisualEffectViewVMn', 
-                       '_$s12GameCenterUI16VisualEffectViewVN', '_$s12GameCenterUI5GKLogV3logyySS_So03os_E7_type_taSo0D4BitsVS2SSitFZ', 
+                       '_$s12GameCenterUI16VisualEffectViewVN', '_$s12GameCenterUI17SourceEnvironmentO8appStoreyA2CmFWC', 
+                       '_$s12GameCenterUI17SourceEnvironmentO8rawValueACSgSS_tcfC', 
+                       '_$s12GameCenterUI17SourceEnvironmentO8rawValueSSvg', '_$s12GameCenterUI17SourceEnvironmentO8rawValueSSvpMV', 
+                       '_$s12GameCenterUI17SourceEnvironmentO8settingsyA2CmFWC', 
+                       '_$s12GameCenterUI17SourceEnvironmentO9gameLayeryA2CmFWC', 
+                       '_$s12GameCenterUI17SourceEnvironmentOMa', '_$s12GameCenterUI17SourceEnvironmentOMn', 
+                       '_$s12GameCenterUI17SourceEnvironmentON', '_$s12GameCenterUI17SourceEnvironmentOSHAAMc', 
+                       '_$s12GameCenterUI17SourceEnvironmentOSQAAMc', '_$s12GameCenterUI17SourceEnvironmentOSYAAMc', 
+                       '_$s12GameCenterUI5GKLogV3logyySS_So03os_E7_type_taSo0D4BitsVS2SSitFZ', 
                        '_$s12GameCenterUI5GKLogV4httpyySS_S2SSitFZ', '_$s12GameCenterUI5GKLogV4infoyySS_S2SSitFZ', 
                        '_$s12GameCenterUI5GKLogV4perfyySS_S2SSitFZ', '_$s12GameCenterUI5GKLogV5cacheyySS_S2SSitFZ', 
                        '_$s12GameCenterUI5GKLogV5debugyySS_S2SSitFZ', '_$s12GameCenterUI5GKLogV5erroryySS_S2SSitFZ', 
@@ -541,6 +559,24 @@ exports:
                        '_$s7SwiftUI4ViewP010GameCenterB0E13visualEffectsQryF', '_$s7SwiftUI4ViewP010GameCenterB0E13visualEffectsQryFQOMQ', 
                        '_$s7SwiftUI4ViewP010GameCenterB0E13visualEffectsyQrAD08GKVisualG0VF', 
                        '_$s7SwiftUI4ViewP010GameCenterB0E13visualEffectsyQrAD08GKVisualG0VFQOMQ', 
+                       '_$s9JetEngine13ActionMetricsV12GameCenterUIE6domain9eventTypeACSS_SStcfC', 
+                       '_$s9JetEngine13ActionMetricsV12GameCenterUIE9CustomKeyO17sourceEnvironmentyA2FmFWC', 
+                       '_$s9JetEngine13ActionMetricsV12GameCenterUIE9CustomKeyO6domainyA2FmFWC', 
+                       '_$s9JetEngine13ActionMetricsV12GameCenterUIE9CustomKeyO8rawValueAFSgSS_tcfC', 
+                       '_$s9JetEngine13ActionMetricsV12GameCenterUIE9CustomKeyO8rawValueSSvg', 
+                       '_$s9JetEngine13ActionMetricsV12GameCenterUIE9CustomKeyO8rawValueSSvpMV', 
+                       '_$s9JetEngine13ActionMetricsV12GameCenterUIE9CustomKeyO9eventTypeyA2FmFWC', 
+                       '_$s9JetEngine13ActionMetricsV12GameCenterUIE9CustomKeyOMa', 
+                       '_$s9JetEngine13ActionMetricsV12GameCenterUIE9CustomKeyOMn', 
+                       '_$s9JetEngine13ActionMetricsV12GameCenterUIE9CustomKeyON', 
+                       '_$s9JetEngine13ActionMetricsV12GameCenterUIE9CustomKeyOSHADMc', 
+                       '_$s9JetEngine13ActionMetricsV12GameCenterUIE9CustomKeyOSQADMc', 
+                       '_$s9JetEngine13ActionMetricsV12GameCenterUIE9CustomKeyOSYADMc', 
+                       '_$s9JetEngine16ScalarDictionaryV12GameCenterUIE4withACSDyAA13ActionMetricsVADE9CustomKeyOSSG_tcfC', 
+                       '_$s9JetEngine16ScalarDictionaryV12GameCenterUIEySSSgAA13ActionMetricsVADE9CustomKeyOciM', 
+                       '_$s9JetEngine16ScalarDictionaryV12GameCenterUIEySSSgAA13ActionMetricsVADE9CustomKeyOcig', 
+                       '_$s9JetEngine16ScalarDictionaryV12GameCenterUIEySSSgAA13ActionMetricsVADE9CustomKeyOcipMV', 
+                       '_$s9JetEngine16ScalarDictionaryV12GameCenterUIEySSSgAA13ActionMetricsVADE9CustomKeyOcis', 
                        '_$sSS12GameCenterUIE24tripleLengthPseudoStringSSvg', '_$sSS12GameCenterUIE24tripleLengthPseudoStringSSvpMV', 
                        '_$sSS12GameCenterUIE9localizedSSvg', '_$sSS12GameCenterUIE9localizedSSvpMV', 
                        '_$sSo13GKAccessPointC12GameCenterUIE04gameD23ViewControllerDidFinishyySo06GKGamedgH0CF', 

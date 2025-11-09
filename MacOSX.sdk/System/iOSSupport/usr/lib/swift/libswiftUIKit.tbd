@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           7BCF4714-7A96-39AB-9493-CF4750365A1F
+    value:           4F63CF08-5AC6-3FCA-B29D-C4FC54C366E4
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           E82C25C7-3EAC-3FB4-97DC-0E8566AB8D0A
+    value:           54A73F23-49D6-36D3-84D9-3D6493A18C77
 install-name:    '/System/iOSSupport/usr/lib/swift/libswiftUIKit.dylib'
 current-version: 19
 swift-abi-version: 7

@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           9D82D4B5-4D34-3CC6-915C-9932DAB3527A
+    value:           9023BB46-B974-32AB-B6B8-7C98DA4870D5
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           5FE488C0-36E9-3B7B-A24E-A60E188DE140
+    value:           78220B48-9A8D-34A2-ABBA-558E216AF475
 install-name:    '/System/iOSSupport/System/Library/Frameworks/AppClip.framework/Versions/A/AppClip'
 current-version: 20.20
 exports:
-  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _APActivationPayloadErrorDomain ]
     objc-classes:    [ APActivationPayload ]
 ...

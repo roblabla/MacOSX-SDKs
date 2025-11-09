@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           11B04EA0-28EB-39EB-BC7E-128AB04278B1
+    value:           71C63CE5-094D-34AF-B538-8DCAB3B66DE9
   - target:          x86_64-maccatalyst
-    value:           11B04EA0-28EB-39EB-BC7E-128AB04278B1
+    value:           71C63CE5-094D-34AF-B538-8DCAB3B66DE9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C38556BD-B430-3234-AE2B-F07AD3420406
+    value:           085965EE-A855-340D-8022-805BB9F45A87
   - target:          arm64e-maccatalyst
-    value:           C38556BD-B430-3234-AE2B-F07AD3420406
+    value:           085965EE-A855-340D-8022-805BB9F45A87
 install-name:    '/System/Library/PrivateFrameworks/UIFoundation.framework/Versions/A/UIFoundation'
-current-version: 725
+current-version: 726.11
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -183,8 +183,8 @@ exports:
                        __UISetPointValueForAxis, __UISetSizeValueForAxis, __UISizeAdd, 
                        __UISizeEqualToSizeWithPrecision, __UISizeValueForAxis, __UISystemFontName, 
                        __UITotalEdgeDimensionsForLayoutAxis, __UITrailingOffsetForInsetsAlongAxis, 
-                       __UIUnitAnchorPointForEdges, ___CTFontGetExtraData, ___NSTokenizerLanguageSet, 
-                       ___objectEqual ]
+                       __UIUnitAnchorPointForEdges, ___CTFontGetExtraData, ___NSTextLayoutManagerLinearLayoutFragmentsDump, 
+                       ___NSTokenizerLanguageSet, ___objectEqual ]
     objc-classes:    [ NSATSGlyphStorage, NSATSLineFragment, NSATSTypesetter, NSAttributeDictionary, 
                        NSAttributeDictionaryEnumerator, NSCIDGlyphInfo, NSCTFont, 
                        NSCTFontDescriptor, NSCTGlyphInfo, NSCollectionLayoutAnchor, 

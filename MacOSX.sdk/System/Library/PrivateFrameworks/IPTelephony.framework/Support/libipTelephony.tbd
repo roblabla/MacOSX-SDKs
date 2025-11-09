@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           44FBA5F3-BB49-3C96-B27F-64C4A69D860A
+    value:           9C4FAF44-17C3-3CE1-A840-694384F6D93D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           11C2C919-2E12-3975-AA8B-5CD9CB4DAAC8
+    value:           F93DF1F4-E8B5-3FE9-9C5A-3AC9A0F255AE
 install-name:    '/System/Library/PrivateFrameworks/IPTelephony.framework/Support/libIPTelephony.dylib'
 exports:
   - targets:         [ x86_64-macos ]

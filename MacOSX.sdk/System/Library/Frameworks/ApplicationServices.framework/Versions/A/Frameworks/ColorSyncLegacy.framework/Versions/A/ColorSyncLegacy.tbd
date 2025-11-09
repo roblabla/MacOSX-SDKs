@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           0D19D3DB-CED6-354B-AEF2-FE2B4697DEB4
+    value:           33DA9348-EADF-36D2-B999-56854481D272
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           92B36E4B-A573-3973-9695-96989811EEF4
+    value:           B7489608-9E2E-32D3-A745-DB1FFDF85600
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ColorSyncLegacy.framework/Versions/A/ColorSyncLegacy'
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

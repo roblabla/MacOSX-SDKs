@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           E13C7F84-5577-311B-8BCD-99EDDF6D91DA
+    value:           585996EA-674F-36B7-82D1-943C5062722A
   - target:          x86_64-maccatalyst
-    value:           E13C7F84-5577-311B-8BCD-99EDDF6D91DA
+    value:           585996EA-674F-36B7-82D1-943C5062722A
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9BB4E3D2-1677-3DF9-B714-9EC10A4D2B10
+    value:           BF2453F8-CF64-35A5-9117-C38923DB07C8
   - target:          arm64e-maccatalyst
-    value:           9BB4E3D2-1677-3DF9-B714-9EC10A4D2B10
+    value:           BF2453F8-CF64-35A5-9117-C38923DB07C8
 install-name:    '/System/Library/PrivateFrameworks/PersonalizationPortrait.framework/Versions/A/PersonalizationPortrait'
-current-version: 1115.255.1
+current-version: 1115.255
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

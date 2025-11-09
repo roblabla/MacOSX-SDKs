@@ -4,28 +4,28 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           3BBA8497-F075-386E-9F2D-7A27EC6A9ECE
+    value:           1FCCDE75-842F-3C8E-BBA2-D43C4B6C19F4
   - target:          x86_64-maccatalyst
-    value:           3BBA8497-F075-386E-9F2D-7A27EC6A9ECE
+    value:           1FCCDE75-842F-3C8E-BBA2-D43C4B6C19F4
   - target:          x86_64h-macos
-    value:           A4151363-C17B-33EE-ACF5-69AFE43C4B50
+    value:           D2826FAB-174C-3CD6-A765-06D83A9A0EDB
   - target:          x86_64h-maccatalyst
-    value:           A4151363-C17B-33EE-ACF5-69AFE43C4B50
+    value:           D2826FAB-174C-3CD6-A765-06D83A9A0EDB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B579049F-B89C-32E8-BF1A-4D8842FABA5C
+    value:           EF07960C-DBF1-34A0-9F03-E8969D4BA4E8
   - target:          arm64e-maccatalyst
-    value:           B579049F-B89C-32E8-BF1A-4D8842FABA5C
+    value:           EF07960C-DBF1-34A0-9F03-E8969D4BA4E8
 install-name:    '/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libLinearAlgebra.dylib'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
                        arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     clients:         [ vecLib ]
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, x86_64-maccatalyst, 
                        x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
     symbols:         [ _la_add_attributes, _la_diagonal_matrix_from_vector, _la_difference, 
                        _la_elementwise_product, _la_identity_matrix, _la_inner_product, 

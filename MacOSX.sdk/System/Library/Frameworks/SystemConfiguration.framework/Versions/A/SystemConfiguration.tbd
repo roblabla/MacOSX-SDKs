@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           1FB7482B-017C-3FB5-9E63-B03E54E133EA
+    value:           8524EE4C-628F-315A-9531-44DD83CE275E
   - target:          x86_64-maccatalyst
-    value:           1FB7482B-017C-3FB5-9E63-B03E54E133EA
+    value:           8524EE4C-628F-315A-9531-44DD83CE275E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           9F5C7E75-4F2A-3D42-BC39-A85D57BA5464
+    value:           9DDF8F69-ED1D-3CF5-8BE5-45D2D2D32DF1
   - target:          arm64e-maccatalyst
-    value:           9F5C7E75-4F2A-3D42-BC39-A85D57BA5464
+    value:           9DDF8F69-ED1D-3CF5-8BE5-45D2D2D32DF1
 install-name:    '/System/Library/Frameworks/SystemConfiguration.framework/Versions/A/SystemConfiguration'
-current-version: 1109.40.9
+current-version: 1109.60.2
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CNCopyCurrentNetworkInfo, _CNCopySupportedInterfaces, _CNMarkPortalOffline, 
                        _CNMarkPortalOnline, _CNSetSupportedSSIDs, _DHCPClientPreferencesCopyApplicationOptions, 
@@ -233,12 +233,13 @@ exports:
                        __SC_logMachPortStatus, __SC_sendMachMessage, __SC_sockaddr_to_string, 
                        __SC_stringIsValidDNSName, __SC_string_to_sockaddr, __SC_syslog_os_log_mapping, 
                        __SC_trimDomain, ___SCDynamicStoreCreatePrivate, ___SCNetworkConfigurationClean, 
-                       ___SCNetworkConfigurationSaveModel, ___SCNetworkConfigurationUpgrade, 
-                       ___SCNetworkConnectionCopyOnDemandInfoWithName, ___SCNetworkInterfaceCreateCapabilities, 
-                       ___SCNetworkInterfaceCreateMediaOptions, ___SCNetworkInterfaceSetDisableUntilNeededValue, 
-                       ___SC_Log, ___SC_log_enabled, ___SC_log_send, __sc_debug, 
-                       __sc_log, __sc_verbose, __scprefs_observer_cancel, __scprefs_observer_watch, 
-                       _isa_xpc_bool, _isa_xpc_connection, _isa_xpc_dictionary, _isa_xpc_error, 
+                       ___SCNetworkConfigurationReport, ___SCNetworkConfigurationSaveModel, 
+                       ___SCNetworkConfigurationUpgrade, ___SCNetworkConnectionCopyOnDemandInfoWithName, 
+                       ___SCNetworkInterfaceCreateCapabilities, ___SCNetworkInterfaceCreateMediaOptions, 
+                       ___SCNetworkInterfaceSetDisableUntilNeededValue, ___SC_Log, 
+                       ___SC_log_enabled, ___SC_log_send, __sc_debug, __sc_log, __sc_verbose, 
+                       __scprefs_observer_cancel, __scprefs_observer_watch, _isa_xpc_bool, 
+                       _isa_xpc_connection, _isa_xpc_dictionary, _isa_xpc_error, 
                        _kCFErrorDomainSystemConfiguration, _kCFErrorDomainVPNTunnel, 
                        _kCNNetworkInfoKeyBSSID, _kCNNetworkInfoKeySSID, _kCNNetworkInfoKeySSIDData, 
                        _kSCBondStatusDeviceAggregationStatus, _kSCBondStatusDeviceCollecting, 
@@ -267,8 +268,8 @@ exports:
                        _kSCEntNetPPTP, _kSCEntNetProxies, _kSCEntNetQoSMarkingPolicy, 
                        _kSCEntNetRefreshConfiguration, _kSCEntNetSMB, _kSCEntNetService, 
                        _kSCEntNetVPN, _kSCEntUsersConsoleUser, _kSCNetworkConfigurationMigrationActionKey, 
-                       _kSCNetworkConfigurationRepair, _kSCNetworkInterfaceIPv4, 
-                       _kSCNetworkInterfaceLoopback, _kSCNetworkInterfaceType6to4, 
+                       _kSCNetworkConfigurationRepair, _kSCNetworkConfigurationRepairModel, 
+                       _kSCNetworkInterfaceIPv4, _kSCNetworkInterfaceLoopback, _kSCNetworkInterfaceType6to4, 
                        _kSCNetworkInterfaceTypeBluetooth, _kSCNetworkInterfaceTypeBond, 
                        _kSCNetworkInterfaceTypeBridge, _kSCNetworkInterfaceTypeCellular, 
                        _kSCNetworkInterfaceTypeEthernet, _kSCNetworkInterfaceTypeFireWire, 
@@ -473,7 +474,7 @@ exports:
                        _kVPNFlowPropertyType, _snhelper_flow_divert_uuid_policy_add, 
                        _snhelper_flow_divert_uuid_policy_clear, _snhelper_flow_divert_uuid_policy_remove, 
                        _snhelper_get_uuid_for_app ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _VPNConfigurationSetAuthorization, __SC_dos_encoding_and_codepage, 
                        _kSCEntNetAppleTalk, _kSCEntNetNetInfo, _kSCPropNetAppleTalkConfigMethod, 
                        _kSCPropNetAppleTalkDefaultZone, _kSCPropNetAppleTalkNetworkID, 

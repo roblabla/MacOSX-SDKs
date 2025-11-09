@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           21FCAB99-1868-3D25-977B-9B39B9B2646C
+    value:           E536D4E7-F001-3BB8-BED8-A14764883B0B
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           9A56681A-70B0-3ECD-842C-35285DA2B0AB
+    value:           A707FD7C-761D-3101-8374-9F516316C638
 install-name:    '/System/Library/PrivateFrameworks/FuseBoard.framework/Versions/A/FuseBoard'
-current-version: 234
+current-version: 235
 exports:
   - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _FUDispatchQueueCreateSerial, _FUServerInitialize, _FUSharedWorkloop, 

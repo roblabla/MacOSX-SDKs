@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           20111235-DD50-302A-95B8-6CFAAAE54CE9
+    value:           E4F8C940-2D2F-3714-8AA1-AA1A3B5A65A2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5E725A06-D145-3D1F-A646-7D881D53064A
+    value:           C538152C-26BC-3D53-8DFF-A9EB4EE7AE55
 install-name:    '/System/Library/PrivateFrameworks/Transparency.framework/Versions/A/Transparency'
 current-version: 0
 compatibility-version: 0

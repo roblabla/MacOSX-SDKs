@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           EF540C53-3E25-3A12-BE41-8F98FEA3EEE5
+    value:           C046562A-AE40-39F1-A1E3-47C967741226
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0F7C97A3-86D4-35B0-8335-6DF9DC4FEB2E
+    value:           5C2A5CCB-57C2-3495-88F7-550632F1633E
 install-name:    '/System/Library/PrivateFrameworks/PhotosUICore.framework/Versions/A/PhotosUICore'
-current-version: 311.0.120
+current-version: 321.0.102
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CALayerContentsGravityFromPXGContentsGravity, _CGImagePropertyOrientationFromPXImageOrientation, 
@@ -32,7 +32,7 @@ exports:
                        _PXAnalyticsEventNavigationListMediaTypesAnimated, _PXAnalyticsEventNavigationListMediaTypesBursts, 
                        _PXAnalyticsEventNavigationListMediaTypesDepthEffect, _PXAnalyticsEventNavigationListMediaTypesLivePhotos, 
                        _PXAnalyticsEventNavigationListMediaTypesLongExposures, _PXAnalyticsEventNavigationListMediaTypesPanoramas, 
-                       _PXAnalyticsEventNavigationListMediaTypesScreenRecordings, 
+                       _PXAnalyticsEventNavigationListMediaTypesRAW, _PXAnalyticsEventNavigationListMediaTypesScreenRecordings, 
                        _PXAnalyticsEventNavigationListMediaTypesScreenshots, _PXAnalyticsEventNavigationListMediaTypesSelfPortraits, 
                        _PXAnalyticsEventNavigationListMediaTypesSlomoVideos, _PXAnalyticsEventNavigationListMediaTypesTimelapses, 
                        _PXAnalyticsEventNavigationListMediaTypesVideos, _PXAnalyticsEventNavigationListPeople, 

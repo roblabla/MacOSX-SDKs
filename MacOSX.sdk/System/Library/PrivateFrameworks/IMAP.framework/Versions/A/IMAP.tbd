@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           BF210154-3401-3C6E-81EA-1FDB102C39B0
+    value:           DB341F37-8191-3117-8CA5-3598245E507C
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2A4D92DC-3793-3A05-931A-805475896EF7
+    value:           52765F71-E833-3B80-80F8-9B2DDF97970E
 install-name:    '/System/Library/PrivateFrameworks/IMAP.framework/Versions/A/IMAP'
-current-version: 3654.0.3
+current-version: 3654.40
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ EmailFunctionalTests, IMAPFunctionalTests, Mail, MailTests, 

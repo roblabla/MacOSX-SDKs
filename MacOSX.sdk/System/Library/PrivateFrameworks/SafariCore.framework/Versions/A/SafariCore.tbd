@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B200131E-C1AB-345B-8FE0-DC9EE2B7EE5E
+    value:           9E1CC71D-842C-3DF3-B5D5-FE1EFC273C4D
   - target:          x86_64-maccatalyst
-    value:           B200131E-C1AB-345B-8FE0-DC9EE2B7EE5E
+    value:           9E1CC71D-842C-3DF3-B5D5-FE1EFC273C4D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4C9E04B0-202F-3491-843C-317D9BD9795F
+    value:           491DC8F8-1842-3437-A12F-8B7973814EA3
   - target:          arm64e-maccatalyst
-    value:           4C9E04B0-202F-3491-843C-317D9BD9795F
+    value:           491DC8F8-1842-3437-A12F-8B7973814EA3
 install-name:    '/System/Library/PrivateFrameworks/SafariCore.framework/Versions/A/SafariCore'
-current-version: 610.2.11
+current-version: 610.3.7
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -74,8 +74,9 @@ exports:
                        _WBSPasswordManagerURLSenderSiri, _WBSPasswordManagerURLShowChangePasswordController, 
                        _WBSPasswordManagerURLTrue, _WBSPasswordRuleParserErrorCodeNoError, 
                        _WBSPasswordRuleParserErrorDomain, _WBSPrivacyPreservingDescription, 
-                       _WBSRemoteAutoFillQuirksLastUpdateTimePreferenceKey, _WBSSQLiteErrorDomain, 
-                       _WBSSafariBookmarksSyncAgentBugIDsKey, _WBSSafariBookmarksSyncAgentCloudTabsWereUpdatedOnServerNotificationName, 
+                       _WBSReleaseOnMainQueueImpl, _WBSRemoteAutoFillQuirksLastUpdateTimePreferenceKey, 
+                       _WBSSQLiteErrorDomain, _WBSSafariBookmarksSyncAgentBugIDsKey, 
+                       _WBSSafariBookmarksSyncAgentCloudTabsWereUpdatedOnServerNotificationName, 
                        _WBSSafariBookmarksSyncAgentDidDetectBugNotificationName, 
                        _WBSSafariBookmarksSyncAgentDidDetectHierarchyIssueNotificationName, 
                        _WBSSafariBookmarksSyncAgentDidUpdateBookmarksNotificationName, 

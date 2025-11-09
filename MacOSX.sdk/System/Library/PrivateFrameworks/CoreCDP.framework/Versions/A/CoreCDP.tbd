@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           F11BE045-F288-370C-855C-ACB36840597D
+    value:           E2B5735B-3BC8-30EA-86CC-9C0AFF4FD5E7
   - target:          x86_64-maccatalyst
-    value:           F11BE045-F288-370C-855C-ACB36840597D
+    value:           E2B5735B-3BC8-30EA-86CC-9C0AFF4FD5E7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EB7DFE9A-B145-3716-94BF-4EB481D8ECE4
+    value:           B0D1823D-A2BC-35DD-B6F5-42A3827C430D
   - target:          arm64e-maccatalyst
-    value:           EB7DFE9A-B145-3716-94BF-4EB481D8ECE4
+    value:           B0D1823D-A2BC-35DD-B6F5-42A3827C430D
 install-name:    '/System/Library/PrivateFrameworks/CoreCDP.framework/Versions/A/CoreCDP'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

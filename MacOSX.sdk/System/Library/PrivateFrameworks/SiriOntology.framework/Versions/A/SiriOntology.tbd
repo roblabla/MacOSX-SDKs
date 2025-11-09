@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           F7483739-FE94-3D29-9CDC-AEE70AE3A280
+    value:           610BDFEB-56A6-3CAB-AA73-E35F95CC7A75
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           CC98BD84-EE05-31CD-A56F-EE6BD6F09529
+    value:           04DBE2D7-3841-3679-921C-D0F38327397A
 install-name:    '/System/Library/PrivateFrameworks/SiriOntology.framework/Versions/A/SiriOntology'
 swift-abi-version: 7
 allowable-clients:

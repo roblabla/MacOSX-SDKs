@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FA69ABE2-F4F2-30DA-AB8B-8ED1BBAEFB3F
+    value:           0CACE142-326D-31C1-8DBA-9D5EAA4A5E48
   - target:          x86_64-maccatalyst
-    value:           FA69ABE2-F4F2-30DA-AB8B-8ED1BBAEFB3F
+    value:           0CACE142-326D-31C1-8DBA-9D5EAA4A5E48
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           25074C8E-0251-3C29-A86E-1CEFABE78447
+    value:           CEF7B09F-D337-31D6-AD62-18EE35C2ED00
   - target:          arm64e-maccatalyst
-    value:           25074C8E-0251-3C29-A86E-1CEFABE78447
+    value:           CEF7B09F-D337-31D6-AD62-18EE35C2ED00
 install-name:    '/System/Library/PrivateFrameworks/CoreRE.framework/Versions/A/CoreRE'
-current-version: 60.45.3
+current-version: 60.45.4
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     weak-symbols:    [ __ZTIU13block_pointerFvbE, __ZTSU13block_pointerFvbE ]

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           2E8EC2E5-E817-3554-83F4-EDC0DB1DB624
+    value:           66D5FEC3-6B6C-3B12-A543-063A45144CBF
   - target:          x86_64-maccatalyst
-    value:           2E8EC2E5-E817-3554-83F4-EDC0DB1DB624
+    value:           66D5FEC3-6B6C-3B12-A543-063A45144CBF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A8F6F59A-D8E9-3339-84D1-B04179542DFA
+    value:           5A1BB8E5-F10F-3B84-A0F9-F7BEFC6597A6
   - target:          arm64e-maccatalyst
-    value:           A8F6F59A-D8E9-3339-84D1-B04179542DFA
+    value:           5A1BB8E5-F10F-3B84-A0F9-F7BEFC6597A6
 install-name:    '/System/Library/PrivateFrameworks/SampleAnalysis.framework/Versions/A/SampleAnalysis'
 current-version: 275
 exports:

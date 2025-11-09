@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           D7725415-6994-3360-A5F6-295BE92C3950
+    value:           DB31C176-20B9-3658-A091-ED11EE9AA49D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           53B3D972-A5F0-34BE-B7B3-FBFDF67AE8B7
+    value:           2083C64E-F953-314D-835E-D2383673F84B
 install-name:    '/System/Library/PrivateFrameworks/PowerlogHelperdOperators.framework/Versions/A/PowerlogHelperdOperators'
 exports:
   - targets:         [ x86_64-macos ]
@@ -183,8 +183,10 @@ exports:
                        _kPLProcessMonitorAgentEventBackwardNameProcessMonitor, _kPLProcessMonitorAgentEventBackwardProcessExitHistogram, 
                        _kPLProcessMonitorAgentEventBackwardProcessPeakMemory, _kPLProcessMonitorAgentEventForwardAppResumeInferredCarry, 
                        _kPLProcessMonitorAgentEventForwardNameProcessID, _kPLProcessMonitorAgentEventIntervalNameKernelTaskMonitor, 
-                       _kPLProcessMonitorAgentEventIntervalNameProcessMonitor, _kPLProcessMonitorAgentEventPointAppResumePredictions, 
-                       _kPLProcessMonitorAgentEventPointFreezerDemotion, _kPLProcessMonitorAgentEventPointFreezerStats, 
+                       _kPLProcessMonitorAgentEventIntervalNameProcessMonitor, _kPLProcessMonitorAgentEventPointAppNotFrozen, 
+                       _kPLProcessMonitorAgentEventPointAppNotFrozenObfuscated, _kPLProcessMonitorAgentEventPointAppResumePredictions, 
+                       _kPLProcessMonitorAgentEventPointFreezerDemotion, _kPLProcessMonitorAgentEventPointFreezerDemotionObfuscated, 
+                       _kPLProcessMonitorAgentEventPointFreezerStats, _kPLProcessMonitorAgentEventPointFreezerStatsObfuscated, 
                        _kPLProcessMonitorAgentEventPointMemoryTracking, _kPLProcessMonitorAgentEventPointProcessExit, 
                        _kPLProcessMonitorAgentEventPointProcessSnapshot, _kPLProcessMonitorAgentEventPointSharedCacheReslid, 
                        _kPLProcessNetworkAgentEventBackwardNameUsage, _kPLProcessNetworkAgentEventBackwardNetworkBitmap, 
@@ -199,11 +201,12 @@ exports:
                        _kPLPushAgentEventPointSentPush, _kPLPushAgentIsDropped, _kPLPushAgentLinkQuality, 
                        _kPLPushAgentMessageIdentifier, _kPLPushAgentPriority, _kPLPushAgentServerHostname, 
                        _kPLPushAgentServerIP, _kPLPushAgentStorageFlag, _kPLPushAgentTopic, 
-                       _kPLScreenStateAgentEventForwardNameScreenState, _kPLScreenStateAgentEventPointNameBacklightEvent, 
-                       _kPLSleepWakeAgentEventForwardNamePowerState, _kPLSleepWakeAgentEventForwardNameUserIdle, 
-                       _kPLSleepWakeAgentEventPointNameKernelState, _kPLSleepWakeAgentEventPointNameScheduledWake, 
-                       _kPLSleepWakeAgentEventPointNameScheduledWakeEventTime, _kPLSleepWakeAgentEventPointNameScheduledWakeInfo, 
-                       _kPLSleepWakeAgentEventPointNameScheduledWakePID, _kPLSleepWakeAgentEventPointNameScheduledWakeProcessName, 
+                       _kPLSaltBundleID, _kPLScreenStateAgentEventForwardNameScreenState, 
+                       _kPLScreenStateAgentEventPointNameBacklightEvent, _kPLSleepWakeAgentEventForwardNamePowerState, 
+                       _kPLSleepWakeAgentEventForwardNameUserIdle, _kPLSleepWakeAgentEventPointNameKernelState, 
+                       _kPLSleepWakeAgentEventPointNameScheduledWake, _kPLSleepWakeAgentEventPointNameScheduledWakeEventTime, 
+                       _kPLSleepWakeAgentEventPointNameScheduledWakeInfo, _kPLSleepWakeAgentEventPointNameScheduledWakePID, 
+                       _kPLSleepWakeAgentEventPointNameScheduledWakeProcessName, 
                        _kPLSleepWakeAgentEventPointNameScheduledWakeSleepWakeUUID, 
                        _kPLSleepWakeAgentEventPointNameScheduledWakeType, _kPLSleepWakeAgentEventPointNameWakeGesture, 
                        _kPLSleepWakeAgentIdle, _kPLSoCAgentEventPointNameLifetimeServoStats, 
@@ -329,12 +332,16 @@ exports:
                        _kPLBatteryAgentStringCPMSGrantedBudget1, _kPLBatteryAgentStringCPMSGrantedBudget2, 
                        _kPLBatteryAgentStringCPMSGrantedBudgetTemplate, _kPLBatteryAgentStringCPMSMode, 
                        _kPLBatteryAgentStringCPMSOverrideFlags, _kPLBatteryAgentStringCPMSReason, 
-                       _kPLBatteryAgentStringCPMSRequestedBudget0, _kPLBatteryAgentStringCPMSRequestedBudget1, 
-                       _kPLBatteryAgentStringCPMSRequestedBudget2, _kPLBatteryAgentStringCPMSRequestedBudgetTemplate, 
-                       _kPLBatteryAgentStringCPMSServoControlEffort0, _kPLBatteryAgentStringCPMSServoControlEffort1, 
-                       _kPLBatteryAgentStringCPMSServoControlEffort2, _kPLBatteryAgentStringCPMSServoControlEffort3, 
-                       _kPLBatteryAgentStringCPMSServoControlEffortTemplate, _kPLBatteryAgentStringCPMSSource, 
-                       _kPLBatteryAgentStringCPMSSystemCapability0, _kPLBatteryAgentStringCPMSSystemCapability1, 
-                       _kPLBatteryAgentStringCPMSSystemCapability2, _kPLBatteryAgentStringCPMSSystemCapabilityTemplate, 
-                       _kPLBatteryAgentStringCPMSZeroSumControlEffort, _kPLSleepWakeAgentEventPointNameCurrentMachWakeTime ]
+                       _kPLBatteryAgentStringCPMSRemCapControlEffort0, _kPLBatteryAgentStringCPMSRemCapControlEffort1, 
+                       _kPLBatteryAgentStringCPMSRemCapControlEffort2, _kPLBatteryAgentStringCPMSRemCapControlEffort3, 
+                       _kPLBatteryAgentStringCPMSRemCapControlEffort4, _kPLBatteryAgentStringCPMSRemCapControlEffort5, 
+                       _kPLBatteryAgentStringCPMSRemCapControlEffortTemplate, _kPLBatteryAgentStringCPMSRequestedBudget0, 
+                       _kPLBatteryAgentStringCPMSRequestedBudget1, _kPLBatteryAgentStringCPMSRequestedBudget2, 
+                       _kPLBatteryAgentStringCPMSRequestedBudgetTemplate, _kPLBatteryAgentStringCPMSServoControlEffort0, 
+                       _kPLBatteryAgentStringCPMSServoControlEffort1, _kPLBatteryAgentStringCPMSServoControlEffort2, 
+                       _kPLBatteryAgentStringCPMSServoControlEffort3, _kPLBatteryAgentStringCPMSServoControlEffortTemplate, 
+                       _kPLBatteryAgentStringCPMSSource, _kPLBatteryAgentStringCPMSSystemCapability0, 
+                       _kPLBatteryAgentStringCPMSSystemCapability1, _kPLBatteryAgentStringCPMSSystemCapability2, 
+                       _kPLBatteryAgentStringCPMSSystemCapabilityTemplate, _kPLBatteryAgentStringCPMSZeroSumControlEffort, 
+                       _kPLSleepWakeAgentEventPointNameCurrentMachWakeTime ]
 ...

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           10555EC6-C77B-3A95-A2AD-D1E9C448AEDB
+    value:           347CB50B-CCC1-3A60-9F93-DB7FAFC5D93F
   - target:          x86_64-maccatalyst
-    value:           10555EC6-C77B-3A95-A2AD-D1E9C448AEDB
+    value:           347CB50B-CCC1-3A60-9F93-DB7FAFC5D93F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           02D1EEA8-323B-34F3-959D-13854E7E8CE8
+    value:           1D22353E-4799-383C-B7E5-A8FABB044D7D
   - target:          arm64e-maccatalyst
-    value:           02D1EEA8-323B-34F3-959D-13854E7E8CE8
+    value:           1D22353E-4799-383C-B7E5-A8FABB044D7D
 install-name:    '/System/Library/PrivateFrameworks/CalendarFoundation.framework/Versions/A/CalendarFoundation'
-current-version: 1178
+current-version: 1178.3.1
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]
@@ -161,12 +161,13 @@ exports:
                        CalAsyncBlockQueue, CalAttachmentUtils, CalCancelableDispatchBlock, 
                        CalCancelablePerformSelector, CalCancelableRunLoopPerformBlock, 
                        CalCancellableSearch, CalChangeHistoryCollector, CalChronometry, 
-                       CalContactsProvider, CalCrashReporter, CalDarwinNotificationListener, 
-                       CalDateLocalization, CalDateRange, CalDefaultDictionary, CalDefaults, 
-                       CalDescriptionBuilder, CalDeviceLockObserver, CalDisjointDateRange, 
-                       CalDispatchQueueAsyncBlockPerformer, CalEmailProvider, CalEntitlementsVerifier, 
-                       CalFileSensor, CalFoundationBundle, CalFoundationPreferences, 
-                       CalGeocoder, CalGrantedDelegate, CalLazyCreateUtils, CalLimitingQueue, 
+                       CalConferenceURLDetector, CalContactsProvider, CalCrashReporter, 
+                       CalDarwinNotificationListener, CalDateLocalization, CalDateRange, 
+                       CalDefaultDictionary, CalDefaults, CalDescriptionBuilder, 
+                       CalDeviceLockObserver, CalDisjointDateRange, CalDispatchQueueAsyncBlockPerformer, 
+                       CalEmailProvider, CalEntitlementsVerifier, CalFileSensor, 
+                       CalFoundationBundle, CalFoundationPreferences, CalGeocoder, 
+                       CalGrantedDelegate, CalLazyCreateUtils, CalLimitingQueue, 
                        CalLocation, CalLocationAuthorization, CalLocationBundle, 
                        CalLocationManager, CalLocationManagerDelegate, CalLocationPrediction, 
                        CalLogBasicTextFormatter, CalLogConfiguration, CalLogEnvelope, 

@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           70D30503-95E8-3E9A-8D68-35A1ABA6FC60
+    value:           4E590A26-5934-33EE-BFD9-391A64686FDE
   - target:          x86_64-maccatalyst
-    value:           70D30503-95E8-3E9A-8D68-35A1ABA6FC60
+    value:           4E590A26-5934-33EE-BFD9-391A64686FDE
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           41465A42-CF10-33C6-866D-01D2EC9D8887
+    value:           41777B8B-4817-3B84-9EDF-8BEE1E717456
   - target:          arm64e-maccatalyst
-    value:           41465A42-CF10-33C6-866D-01D2EC9D8887
+    value:           41777B8B-4817-3B84-9EDF-8BEE1E717456
 install-name:    '/System/Library/PrivateFrameworks/Sharing.framework/Versions/A/Sharing'
-current-version: 1570.6
+current-version: 1575
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
                        arm64-macos, arm64-maccatalyst ]

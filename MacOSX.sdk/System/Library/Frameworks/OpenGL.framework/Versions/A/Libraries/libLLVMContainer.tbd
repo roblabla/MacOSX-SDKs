@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           669AEBFC-4D21-388E-BAFA-7824F09B10AF
+    value:           D3B3D075-3A36-3AC3-B724-D9D9E16E09C3
 install-name:    '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libLLVMContainer.dylib'
 exports:
   - targets:         [ x86_64-macos ]

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B927DF74-8172-3DD6-87E7-EBEDBC86D33E
+    value:           4AE75458-8565-3939-9712-466956288E8B
   - target:          x86_64-maccatalyst
-    value:           B927DF74-8172-3DD6-87E7-EBEDBC86D33E
+    value:           4AE75458-8565-3939-9712-466956288E8B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           09A9A0CB-8A80-3FB7-A62A-DC7F824576FC
+    value:           87C48DB9-C40E-391E-BA1A-71BF249652C0
   - target:          arm64e-maccatalyst
-    value:           09A9A0CB-8A80-3FB7-A62A-DC7F824576FC
+    value:           87C48DB9-C40E-391E-BA1A-71BF249652C0
 install-name:    '/System/Library/PrivateFrameworks/TelephonyUtilities.framework/Versions/A/TelephonyUtilities'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
@@ -25,19 +25,20 @@ exports:
                        _TUAudioRouteBluetoothProductIdentifierAirPodsPro, _TUAudioRouteBluetoothProductIdentifierBeatsSolo, 
                        _TUAudioRouteBluetoothProductIdentifierBeatsSoloPro, _TUAudioRouteBluetoothProductIdentifierBeatsStudio, 
                        _TUAudioRouteBluetoothProductIdentifierBeatsStudio2, _TUAudioRouteBluetoothProductIdentifierBeatsX, 
-                       _TUAudioRouteBluetoothProductIdentifierBeatsX2, _TUAudioRouteBluetoothProductIdentifierPowerbeats, 
-                       _TUAudioRouteBluetoothProductIdentifierPowerbeats2, _TUAudioRouteBluetoothProductIdentifierPowerbeats4, 
-                       _TUAudioRouteBluetoothProductIdentifierPowerbeatsPro, _TUAudioSystemActiveCategoryVolumeChangedNotification, 
-                       _TUAudioSystemAudioPickableRoutesChanged, _TUAudioSystemDownlinkMuteStatusChangedNotification, 
-                       _TUAudioSystemTTYChangedNotification, _TUAudioSystemUplinkMuteStatusChangedNotification, 
-                       _TUBinaryGCD, _TUBundle, _TUBundleIdentifierCallServicesDaemon, 
-                       _TUBundleIdentifierFaceTimeApplication, _TUBundleIdentifierInCallServiceApplication, 
-                       _TUBundleIdentifierLivePhotoXPCService, _TUBundleIdentifierMessagesApplication, 
-                       _TUBundleIdentifierMobilePhoneApplication, _TUBundleIdentifierNanoPhoneApplication, 
-                       _TUBundleIdentifierSpringBoardApplication, _TUBundleIdentifierTelephonyUtilitiesFramework, 
-                       _TUBundleIdentifierTinCan, _TUBundleIdentifierVideoConferenceIdentifier, 
-                       _TUCTServerConnection, _TUCallAudioPropertiesChangedNotification, 
-                       _TUCallCameraTypeChangedNotification, _TUCallCapabilitiesCloudCallingDevicesChangedNotification, 
+                       _TUAudioRouteBluetoothProductIdentifierBeatsX2, _TUAudioRouteBluetoothProductIdentifierHeadPods, 
+                       _TUAudioRouteBluetoothProductIdentifierPowerbeats, _TUAudioRouteBluetoothProductIdentifierPowerbeats2, 
+                       _TUAudioRouteBluetoothProductIdentifierPowerbeats4, _TUAudioRouteBluetoothProductIdentifierPowerbeatsPro, 
+                       _TUAudioSystemActiveCategoryVolumeChangedNotification, _TUAudioSystemAudioPickableRoutesChanged, 
+                       _TUAudioSystemDownlinkMuteStatusChangedNotification, _TUAudioSystemTTYChangedNotification, 
+                       _TUAudioSystemUplinkMuteStatusChangedNotification, _TUBinaryGCD, 
+                       _TUBundle, _TUBundleIdentifierCallServicesDaemon, _TUBundleIdentifierFaceTimeApplication, 
+                       _TUBundleIdentifierInCallServiceApplication, _TUBundleIdentifierLivePhotoXPCService, 
+                       _TUBundleIdentifierMessagesApplication, _TUBundleIdentifierMobilePhoneApplication, 
+                       _TUBundleIdentifierNanoPhoneApplication, _TUBundleIdentifierSpringBoardApplication, 
+                       _TUBundleIdentifierTelephonyUtilitiesFramework, _TUBundleIdentifierTinCan, 
+                       _TUBundleIdentifierVideoConferenceIdentifier, _TUCTServerConnection, 
+                       _TUCallAudioPropertiesChangedNotification, _TUCallCameraTypeChangedNotification, 
+                       _TUCallCapabilitiesCloudCallingDevicesChangedNotification, 
                        _TUCallCapabilitiesEmergencyCallbackModeChangedNotification, 
                        _TUCallCapabilitiesEmergencyCallbackPossibleChangedNotification, 
                        _TUCallCapabilitiesFaceTimeAvailabilityChangedNotification, 
@@ -153,7 +154,7 @@ exports:
                        _TUVideoDeviceControllerDeviceBecameAvailableNotification, 
                        _TUVideoDeviceControllerDeviceDidReceiveErrorDeviceUniqueIDKey, 
                        _TUVideoDeviceControllerDeviceDidReceiveErrorErrorKey, _TUVideoDeviceControllerDeviceDidReceiveErrorNotification, 
-                       _TUVideoDeviceControllerDidStartPreviewDeviceUniqueIDKey, 
+                       _TUVideoDeviceControllerDidPausePreviewNotification, _TUVideoDeviceControllerDidStartPreviewDeviceUniqueIDKey, 
                        _TUVideoDeviceControllerDidStartPreviewNotification, _TUVideoDeviceControllerDidStopPreviewNotification, 
                        _TUVideoDeviceControllerInputDevicesChangedNotification, _TUVideoDeviceControllerLocalAttributesChangedAspectRatioKey, 
                        _TUVideoDeviceControllerLocalAttributesChangedNotification, 

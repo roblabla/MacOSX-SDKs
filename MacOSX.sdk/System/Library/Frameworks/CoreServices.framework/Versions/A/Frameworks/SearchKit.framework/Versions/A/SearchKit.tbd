@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           42EEB92F-7C15-3DB0-930C-2418C5AF308F
+    value:           7BDD2800-BDDC-3DE0-A4A8-B1E855130E3B
   - target:          x86_64-maccatalyst
-    value:           42EEB92F-7C15-3DB0-930C-2418C5AF308F
+    value:           7BDD2800-BDDC-3DE0-A4A8-B1E855130E3B
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3574ADA0-B546-3781-9CD2-9785FCEE1C93
+    value:           7A1F87D4-B5D2-3F0D-B732-FA696B45B882
   - target:          arm64e-maccatalyst
-    value:           3574ADA0-B546-3781-9CD2-9785FCEE1C93
+    value:           7A1F87D4-B5D2-3F0D-B732-FA696B45B882
 install-name:    '/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SearchKit.framework/Versions/A/SearchKit'
 current-version: 417.1
 parent-umbrella:

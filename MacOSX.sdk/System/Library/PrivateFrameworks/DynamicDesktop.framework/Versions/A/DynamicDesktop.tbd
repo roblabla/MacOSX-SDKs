@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           78C07E87-39F1-392C-A17D-884AF7D68C88
+    value:           3F1D4D29-E0A3-3E81-8797-241735D8DEE7
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B07128A2-358D-39CD-866F-D3233AB792D8
+    value:           4D0C99DB-6F05-32F9-9E7C-6EA7F71BB1EE
 install-name:    '/System/Library/PrivateFrameworks/DynamicDesktop.framework/Versions/A/DynamicDesktop'
-current-version: 2091
+current-version: 2092.20.4
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           FE422BE5-2AE0-390D-9186-D39E80930629
+    value:           67C576FA-0B3D-3DD9-BA22-BD5DD3F18BE2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           B2160B79-CDDC-33B2-A803-526E61EFF362
+    value:           1268E454-9D14-3ABC-9726-C8230F3D6405
 install-name:    '/System/Library/PrivateFrameworks/PhoneNumberResolver.framework/Versions/A/PhoneNumberResolver'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

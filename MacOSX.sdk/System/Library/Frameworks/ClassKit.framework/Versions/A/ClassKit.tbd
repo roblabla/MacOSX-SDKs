@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           D8ECF1B9-0B2E-3939-A9CD-B005AA2B8A86
+    value:           48003923-0EFF-35E6-A054-D33BBAD12354
   - target:          x86_64-maccatalyst
-    value:           D8ECF1B9-0B2E-3939-A9CD-B005AA2B8A86
+    value:           48003923-0EFF-35E6-A054-D33BBAD12354
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           7372A436-E49C-3C5B-92FD-1698D03A50E0
+    value:           68B920C0-74B6-3D8B-8F6D-DF5AB6364E8B
   - target:          arm64e-maccatalyst
-    value:           7372A436-E49C-3C5B-92FD-1698D03A50E0
+    value:           68B920C0-74B6-3D8B-8F6D-DF5AB6364E8B
 install-name:    '/System/Library/Frameworks/ClassKit.framework/Versions/A/ClassKit'
-current-version: 146.1.11
+current-version: 146.2
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _CLSAdoptPersonaUniqueIdentifier, _CLSAppleContactsPrivateEntitlement, 
                        _CLSAppleContactsPrivateUIEntitlement, _CLSApplicationIdentifierEntitlement, 
@@ -128,7 +128,7 @@ exports:
                        CLSReportItem, CLSRole, CLSSaveResponse, CLSScoreItem, CLSScoreReportItem, 
                        CLSSearchSpecification, CLSServerAlert, CLSSettingsVisibilityController, 
                        CLSTimeInterval, CLSUtil, CLSUtilityService ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ '$ld$install_name$os10.14$/System/Library/PrivateFrameworks/ClassKit.framework/Versions/A/ClassKit', 
                        '$ld$install_name$os10.15$/System/Library/PrivateFrameworks/ClassKit.framework/Versions/A/ClassKit' ]
 ...

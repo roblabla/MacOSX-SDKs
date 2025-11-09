@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           86BDA9CC-D01F-37F6-A21C-F4B4CDBEE01C
+    value:           B9339E87-054D-3487-9077-778D7D6E1702
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           D272C598-4601-3DBE-9060-AF91B9D66C83
+    value:           CDB3E589-83A8-3AFC-9425-BB5A1A812E7E
 install-name:    '/System/Library/PrivateFrameworks/CoreHAP.framework/Versions/A/CoreHAP'
-current-version: 714.2.17
+current-version: 714.3.25
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _CBUUIDCharacteristicValidRange, _HAP2AccessoryServerDiscoveryBonjourDiscoveryInfoServiceDomainKey, 
@@ -26,7 +26,8 @@ exports:
                        _HAP2TLVServicePropertiesAsString, _HAP2TLVThreadOperationTypeAsString, 
                        _HAP2UnpairedAccessoryServerPermissionTypeToString, _HAPAccessoryHasPairings, 
                        _HAPAccessoryIdentifier, _HAPAccessoryInstanceID, _HAPAccessoryReachabilityDefaultConfirmInterval, 
-                       _HAPAccessoryServerPairSetupTypeToString, _HAPAccessoryServerRelayMaximumReachabilityProbeTimeInterval, 
+                       _HAPAccessoryReachabilityDefaultSleepyConfirmInterval, _HAPAccessoryServerPairSetupTypeToString, 
+                       _HAPAccessoryServerRelayMaximumReachabilityProbeTimeInterval, 
                        _HAPAccessoryServerRelayMinimumReachabilityProbeTimeInterval, 
                        _HAPAccessoryServerRelayReachabilityProbeFactor, _HAPAttributeDatabaseKey_Accessories, 
                        _HAPAttributeDatabaseKey_AccessoryInstanceID, _HAPAttributeDatabaseKey_AuthorizationData, 

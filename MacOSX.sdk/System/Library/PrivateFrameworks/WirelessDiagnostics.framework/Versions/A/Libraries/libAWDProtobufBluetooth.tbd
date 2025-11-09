@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           123F7A30-0FB2-38BA-BE2F-91AAD8C12F05
+    value:           A00DAB50-0E97-344C-B723-AEB15F994243
   - target:          x86_64-maccatalyst
-    value:           123F7A30-0FB2-38BA-BE2F-91AAD8C12F05
+    value:           A00DAB50-0E97-344C-B723-AEB15F994243
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           358CB1D9-2E53-37BE-9D69-7CA4767A2E37
+    value:           FC908B9A-859B-32D6-8F31-B04A28FC6A3C
   - target:          arm64e-maccatalyst
-    value:           358CB1D9-2E53-37BE-9D69-7CA4767A2E37
+    value:           FC908B9A-859B-32D6-8F31-B04A28FC6A3C
 install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libAWDProtobufBluetooth.dylib'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

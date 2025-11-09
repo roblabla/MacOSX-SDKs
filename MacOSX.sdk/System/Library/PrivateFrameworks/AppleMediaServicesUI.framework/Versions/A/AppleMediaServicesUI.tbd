@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           B8797A2F-59A0-3A9E-AF5A-BF533A234898
+    value:           6B5772A4-EAD8-3B29-9339-A209A121B55D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           A11F673B-DF60-38A6-AC07-952D27FE886D
+    value:           92C3564D-CD09-3DCC-9248-9A706C2DF586
 install-name:    '/System/Library/PrivateFrameworks/AppleMediaServicesUI.framework/Versions/A/AppleMediaServicesUI'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

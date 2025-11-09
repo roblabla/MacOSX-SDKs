@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           C0D3A140-8562-3FAF-8F63-D77A1E4356A9
+    value:           A4398727-CEB9-319E-B961-C6FC5277CFB9
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           7A5DFD17-2FB7-365C-9E96-B306CD959167
+    value:           264E4036-636C-39A6-BCF0-CBE74C04A8E0
 install-name:    '/System/iOSSupport/System/Library/Frameworks/UIKit.framework/Versions/A/UIKit'
-current-version: 3999.1.255
+current-version: 4003.1.255
 reexported-libraries:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/ShareSheet.framework/Versions/A/ShareSheet', 
@@ -20,15 +20,15 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           2C75A46E-33D5-32F0-B742-BB0D03F7BB57
+    value:           26CB6C7B-D014-3B85-9982-BD1DD0CEE744
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           821A38A1-78D1-3FA7-AF42-2B1C7E16BC38
+    value:           810E2DAE-6D7F-3904-BF37-6E8147419335
 install-name:    '/System/Library/PrivateFrameworks/ShareSheet.framework/Versions/A/ShareSheet'
-current-version: 1570.6
+current-version: 1575
 exports:
-  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _UIActivityTypeAddToReadingList, _UIActivityTypeAirDrop, _UIActivityTypeAssignToContact, 
                        _UIActivityTypeCloudSharing, _UIActivityTypeCopyToPasteboard, 
                        _UIActivityTypeCreatePDF, _UIActivityTypeCreateReminder, _UIActivityTypeMail, 
@@ -60,19 +60,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           11B04EA0-28EB-39EB-BC7E-128AB04278B1
+    value:           71C63CE5-094D-34AF-B538-8DCAB3B66DE9
   - target:          x86_64-maccatalyst
-    value:           11B04EA0-28EB-39EB-BC7E-128AB04278B1
+    value:           71C63CE5-094D-34AF-B538-8DCAB3B66DE9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C38556BD-B430-3234-AE2B-F07AD3420406
+    value:           085965EE-A855-340D-8022-805BB9F45A87
   - target:          arm64e-maccatalyst
-    value:           C38556BD-B430-3234-AE2B-F07AD3420406
+    value:           085965EE-A855-340D-8022-805BB9F45A87
 install-name:    '/System/Library/PrivateFrameworks/UIFoundation.framework/Versions/A/UIFoundation'
-current-version: 725
+current-version: 726.11
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -239,8 +239,8 @@ exports:
                        __UISetPointValueForAxis, __UISetSizeValueForAxis, __UISizeAdd, 
                        __UISizeEqualToSizeWithPrecision, __UISizeValueForAxis, __UISystemFontName, 
                        __UITotalEdgeDimensionsForLayoutAxis, __UITrailingOffsetForInsetsAlongAxis, 
-                       __UIUnitAnchorPointForEdges, ___CTFontGetExtraData, ___NSTokenizerLanguageSet, 
-                       ___objectEqual ]
+                       __UIUnitAnchorPointForEdges, ___CTFontGetExtraData, ___NSTextLayoutManagerLinearLayoutFragmentsDump, 
+                       ___NSTokenizerLanguageSet, ___objectEqual ]
     objc-classes:    [ NSATSGlyphStorage, NSATSLineFragment, NSATSTypesetter, NSAttributeDictionary, 
                        NSAttributeDictionaryEnumerator, NSCIDGlyphInfo, NSCTFont, 
                        NSCTFontDescriptor, NSCTGlyphInfo, NSCollectionLayoutAnchor, 
@@ -550,15 +550,15 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           D255774B-45A6-3D7A-AA98-E169D744DA6F
+    value:           B0DC6A6B-889F-34C1-83AE-C831DF111B9A
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           4A851417-1997-3601-96FB-4AEF82DEFA16
+    value:           86864A18-C444-3149-888A-BB25D1A41109
 install-name:    '/System/iOSSupport/System/Library/PrivateFrameworks/DocumentManager.framework/Versions/A/DocumentManager'
-current-version: 200.2.4
+current-version: 200.3.1
 exports:
-  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
+  - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]
     symbols:         [ _DOCAdaptSizeToRect, _DOCAlertItemIsNotReadable, _DOCAlertUserTheNetworkIsNotReachable, 
                        _DOCAlertUserTrashedFileCanNotBeOpened, _DOCCenterSizeInRect, 
                        _DOCConvertToUINSDocumentBrowserImportMode, _DOCDefaultSaveLocationDidChangeNotification, 
@@ -637,13 +637,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           5456868C-DB10-34BD-912A-207EC7FCC754
+    value:           CEA2D307-EEC0-341B-B4AB-09F54D3B748D
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           F1851FF5-9BEF-3B01-BBD6-31EF7EC6D11A
+    value:           C9F566CA-F579-3050-8CF1-D487FBC8EC1E
 install-name:    '/System/iOSSupport/System/Library/PrivateFrameworks/UIKitCore.framework/Versions/A/UIKitCore'
-current-version: 3999.1.255
+current-version: 4003.1.255
 reexported-libraries:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/UIFoundation.framework/Versions/A/UIFoundation' ]
@@ -1380,17 +1380,18 @@ exports:
                        _UIMenuAbout, _UIMenuAlignment, _UIMenuApplication, _UIMenuBringAllToFront, 
                        _UIMenuClose, _UIMenuControllerDidHideMenuNotification, _UIMenuControllerDidShowMenuNotification, 
                        _UIMenuControllerMenuFrameDidChangeNotification, _UIMenuControllerWillHideMenuNotification, 
-                       _UIMenuControllerWillShowMenuNotification, _UIMenuDeferredMenuPlaceholder, 
-                       _UIMenuEdit, _UIMenuFile, _UIMenuFind, _UIMenuFont, _UIMenuFormat, 
-                       _UIMenuFullscreen, _UIMenuHelp, _UIMenuHide, _UIMenuLearn, 
-                       _UIMenuLookup, _UIMenuMinimizeAndZoom, _UIMenuNewScene, _UIMenuOpen, 
-                       _UIMenuOpenRecent, _UIMenuPreferences, _UIMenuPrint, _UIMenuQuit, 
-                       _UIMenuReplace, _UIMenuRoot, _UIMenuServices, _UIMenuShare, 
-                       _UIMenuSpeech, _UIMenuSpelling, _UIMenuSpellingOptions, _UIMenuSpellingPanel, 
-                       _UIMenuStandardEdit, _UIMenuSubstitutionInSelection, _UIMenuSubstitutionOptions, 
-                       _UIMenuSubstitutions, _UIMenuSubstitutionsPanel, _UIMenuText, 
-                       _UIMenuTextColor, _UIMenuTextSize, _UIMenuTextStyle, _UIMenuTextStylePasteboard, 
-                       _UIMenuToolbar, _UIMenuTransformations, _UIMenuUndoRedo, _UIMenuView, 
+                       _UIMenuControllerWillShowMenuNotification, _UIMenuControls, 
+                       _UIMenuDeferredMenuPlaceholder, _UIMenuEdit, _UIMenuFile, 
+                       _UIMenuFind, _UIMenuFont, _UIMenuFormat, _UIMenuFullscreen, 
+                       _UIMenuHelp, _UIMenuHide, _UIMenuLearn, _UIMenuLookup, _UIMenuMinimizeAndZoom, 
+                       _UIMenuNewScene, _UIMenuOpen, _UIMenuOpenRecent, _UIMenuPreferences, 
+                       _UIMenuPrint, _UIMenuQuit, _UIMenuReplace, _UIMenuRoot, _UIMenuServices, 
+                       _UIMenuShare, _UIMenuSpeech, _UIMenuSpelling, _UIMenuSpellingOptions, 
+                       _UIMenuSpellingPanel, _UIMenuStandardEdit, _UIMenuSubstitutionInSelection, 
+                       _UIMenuSubstitutionOptions, _UIMenuSubstitutions, _UIMenuSubstitutionsPanel, 
+                       _UIMenuText, _UIMenuTextColor, _UIMenuTextSize, _UIMenuTextStyle, 
+                       _UIMenuTextStylePasteboard, _UIMenuToolbar, _UIMenuTransformations, 
+                       _UIMenuUndoRedo, _UIMenuView, _UIMenuViewOrientation, _UIMenuViewSizing, 
                        _UIMenuWindow, _UIMenuWritingDirection, _UIMidPointBetweenPoints, 
                        _UIMinimumKeepAliveTimeout, _UIMinutelessTimeFormat, _UIMonthDayFormat, 
                        _UIMonthYearFormat, _UINamedLayerFocusDirectionKey, _UINavBarButtonFont, 
@@ -2273,11 +2274,11 @@ exports:
                        _UIHighlightView, _UIHostedWindow, _UIHostedWindowHostingHandle, 
                        _UIHyperAsymmetricExtender, _UIHyperConstantExtender, _UIHyperInteractor, 
                        _UIHyperplane, _UIHyperpoint, _UIHyperrectangle, _UIHyperregionUnion, 
-                       _UIHyperrepeatedRegion, _UIHyperspace, _UIHypersphere, _UIIdleModeLayoutAttributes, 
-                       _UIImageLoader, _UIImageSymbolConfiguration, _UIImageSymbolLayer, 
-                       _UIImpactFeedbackGeneratorConfiguration, _UIInterruptScrollDecelerationGestureRecognizer, 
-                       _UIItemProviderRepresentationOptions, _UIKeyboardAnimator, 
-                       _UIKeyboardChangedInformation, _UIKeyboardFeedbackGenerator, 
+                       _UIHyperrepeatedRegion, _UIHyperspace, _UIHypersphere, _UIIdleModeController, 
+                       _UIIdleModeLayoutAttributes, _UIImageLoader, _UIImageSymbolConfiguration, 
+                       _UIImageSymbolLayer, _UIImpactFeedbackGeneratorConfiguration, 
+                       _UIInterruptScrollDecelerationGestureRecognizer, _UIItemProviderRepresentationOptions, 
+                       _UIKeyboardAnimator, _UIKeyboardChangedInformation, _UIKeyboardFeedbackGenerator, 
                        _UIKeyboardFeedbackGeneratorConfiguration, _UIKeyboardHandwritingLink, 
                        _UIKitDragAndDropStatistics, _UILargeContentViewerItemStoredProperties, 
                        _UILayerHostView, _UILayoutGuide, _UILayoutSpacer, _UILegibilityImageSet, 

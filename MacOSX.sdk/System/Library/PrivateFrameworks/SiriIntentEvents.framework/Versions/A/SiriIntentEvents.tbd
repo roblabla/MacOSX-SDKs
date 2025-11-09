@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           89336D41-FF30-36C6-ADF4-71C4B553F1B6
+    value:           6733D25B-81FC-3151-9263-B143A44C18A6
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AA6A1B69-52FD-3041-83C8-20101CACC96D
+    value:           70A8B263-49B3-35D2-80CF-D5FDF05E8400
 install-name:    '/System/Library/PrivateFrameworks/SiriIntentEvents.framework/Versions/A/SiriIntentEvents'
 current-version: 0
 compatibility-version: 0

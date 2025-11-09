@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           898086B6-FA3C-3D12-BB5E-33CDF6843EFA
+    value:           44E8C1EE-FE8E-32D3-BCBE-C09644845F8D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           68F682A9-E536-3D9F-909D-8A601FE75C81
+    value:           8BEF2780-9DF4-3372-80E5-DBA6AAF15699
 install-name:    '/System/Library/PrivateFrameworks/VoiceShortcuts.framework/Versions/A/VoiceShortcuts'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

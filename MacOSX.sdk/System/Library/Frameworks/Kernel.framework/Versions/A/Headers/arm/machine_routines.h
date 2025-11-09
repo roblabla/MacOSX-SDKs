@@ -250,6 +250,8 @@ typedef struct ml_cpu_info ml_cpu_info_t;
 
 typedef enum {
 	CLUSTER_TYPE_SMP,
+	CLUSTER_TYPE_E,
+	CLUSTER_TYPE_P,
 } cluster_type_t;
 
 cluster_type_t ml_get_boot_cluster(void);

@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           1775D805-F11B-3EA8-8FC0-FC30D1D226D5
+    value:           42F0232C-2B7E-3CFD-9746-A2A707809381
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           A90FD664-4773-3AAF-B210-D377C90A9C43
+    value:           A24EF8A8-0A6B-3D6A-A437-21309B317E82
 install-name:    '/System/iOSSupport/usr/lib/swift/libswiftWebKit.dylib'
-current-version: 610.2.11
+current-version: 610.3.7
 swift-abi-version: 7
 exports:
   - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]

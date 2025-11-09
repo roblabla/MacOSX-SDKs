@@ -4,19 +4,19 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5C7C4E85-E5CB-3194-9F2D-F1790881014B
+    value:           4D6F8EF4-47D4-3F93-90AC-3F4A5772CBCB
   - target:          x86_64-maccatalyst
-    value:           5C7C4E85-E5CB-3194-9F2D-F1790881014B
+    value:           4D6F8EF4-47D4-3F93-90AC-3F4A5772CBCB
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           91F1F1BF-3658-33E9-8847-623D6F1EE1A4
+    value:           AD1E49FB-614E-3897-865E-39602B740DC2
   - target:          arm64e-maccatalyst
-    value:           91F1F1BF-3658-33E9-8847-623D6F1EE1A4
+    value:           AD1E49FB-614E-3897-865E-39602B740DC2
 install-name:    '/System/Library/PrivateFrameworks/GeoServices.framework/Versions/A/GeoServices'
-current-version: 1757.20.8
+current-version: 1757.22.10
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
     symbols:         [ __ZNK3geo11MapEdgeRoad16findEdgesForNodeEP12GEOMapAccessNSt3__110shared_ptrINS_7MapNodeEEEaU13block_pointerFvNS4_INS_7MapEdgeEEEEU13block_pointerFvP13GEOMapRequestE ]
@@ -660,7 +660,7 @@ exports:
                        _GEOMatchedTokenIsValid, _GEOMatchedTokenReadAllFrom, _GEOMatchedTokenReadFrom, 
                        _GEOMeasurementDataIsValid, _GEOMeasurementDataReadAllFrom, 
                        _GEOMeasurementDataReadFrom, _GEOMetersBetweenMapPoints, _GEOMetersPerDegreeAtLatitude, 
-                       _GEOMetersPerMapPointAtLatitude, _GEOMigrateCountryConfig, 
+                       _GEOMetersPerMapPointAtLatitude, _GEOMetroSeparator, _GEOMigrateCountryConfig, 
                        _GEOMigrateDefaults, _GEOMiniCardIsDirty, _GEOMiniCardIsValid, 
                        _GEOMiniCardReadAllFrom, _GEOMiniCardReadFrom, _GEOMinimumVisibleElevationRangeIsValid, 
                        _GEOMinimumVisibleElevationRangeReadAllFrom, _GEOMinimumVisibleElevationRangeReadFrom, 
@@ -1611,14 +1611,15 @@ exports:
                        _GeoAnalyticsConfig_CohortReportingRollDate, _GeoAnalyticsConfig_CohortReportingThresholds, 
                        _GeoAnalyticsConfig_CohortSessionID, _GeoAnalyticsConfig_CohortSessionStartTime, 
                        _GeoAnalyticsConfig_CountsAggregationDaemonIds, _GeoAnalyticsConfig_CountsAggregationInterval, 
-                       _GeoAnalyticsConfig_CountsAggregationLastRunTime, _GeoAnalyticsConfig_DisableUsage, 
-                       _GeoAnalyticsConfig_EVDirectionsFeedbackToggle, _GeoAnalyticsConfig_FifteenMonthSessionID, 
-                       _GeoAnalyticsConfig_FifteenMonthSessionIDGenTime, _GeoAnalyticsConfig_MapLaunchEventEnabled, 
-                       _GeoAnalyticsConfig_MapsLastUseDate, _GeoAnalyticsConfig_MapsUserStartDate, 
-                       _GeoAnalyticsConfig_MaximumNumberOfLogMessagesAllowedInCache, 
-                       _GeoAnalyticsConfig_NavFullTraceEvent, _GeoAnalyticsConfig_NavFullTraceEventProxy, 
-                       _GeoAnalyticsConfig_NetworkEventAnalyticsIncludeEnv, _GeoAnalyticsConfig_NetworkEventPriorityList, 
-                       _GeoAnalyticsConfig_ParkedCarTimestampResolutionInSeconds, 
+                       _GeoAnalyticsConfig_CountsAggregationLastRunTime, _GeoAnalyticsConfig_CurrentMetro, 
+                       _GeoAnalyticsConfig_DisableUsage, _GeoAnalyticsConfig_EVDirectionsFeedbackToggle, 
+                       _GeoAnalyticsConfig_FifteenMonthSessionID, _GeoAnalyticsConfig_FifteenMonthSessionIDGenTime, 
+                       _GeoAnalyticsConfig_HomeCountry, _GeoAnalyticsConfig_HomeMetro, 
+                       _GeoAnalyticsConfig_MapLaunchEventEnabled, _GeoAnalyticsConfig_MapsLastUseDate, 
+                       _GeoAnalyticsConfig_MapsUserStartDate, _GeoAnalyticsConfig_MaximumNumberOfLogMessagesAllowedInCache, 
+                       _GeoAnalyticsConfig_MetroMobileAssetCatalogLoadTime, _GeoAnalyticsConfig_NavFullTraceEvent, 
+                       _GeoAnalyticsConfig_NavFullTraceEventProxy, _GeoAnalyticsConfig_NetworkEventAnalyticsIncludeEnv, 
+                       _GeoAnalyticsConfig_NetworkEventPriorityList, _GeoAnalyticsConfig_ParkedCarTimestampResolutionInSeconds, 
                        _GeoAnalyticsConfig_PredExTrainingWeatherAllowed, _GeoAnalyticsConfig_RealtimeTrafficProbeCurrentWindowXmitCount, 
                        _GeoAnalyticsConfig_RealtimeTrafficProbeFilterEndTime, _GeoAnalyticsConfig_RealtimeTrafficProbeFilterWindowMinutes, 
                        _GeoAnalyticsConfig_RealtimeTrafficProbeWindowXmitCountLimit, 
@@ -2091,7 +2092,7 @@ exports:
                        _LOGMSGEVENTLogMsgEventTableBookingSessionReadFrom, _LOGMSGEVENTRideBookingIntentResponseFailureIsValid, 
                        _LOGMSGEVENTRideBookingIntentResponseFailureReadAllFrom, _LOGMSGEVENTRideBookingIntentResponseFailureReadFrom, 
                        _LongIntervalKeyPathFragment, _MapsAppBundleId, _MapsAuthDidFinishNotification, 
-                       _MapsFeaturesConfig_EnableAlberta, _MapsFeaturesConfig_EnableVoltron, 
+                       _MapsFeaturesConfig_EnableAlberta, _MapsFeaturesConfig_EnableEVRouting, 
                        _MapsFeaturesConfig_FeatureFlags, _MapsFeaturesConfig_IsMuninEnabled, 
                        _MapsFeaturesConfig_ShouldEnableLagunaBeach, _MapsFeaturesConfig_WaypointRoutesEnabled, 
                        _MapsSuggestionsLoggingSubsystem, _NSIntegerIsValidFloorOrdinal, 
@@ -2507,10 +2508,10 @@ exports:
                        GEOMapsSearchHomeResult, GEOMapsSearchHomeSection, GEOMapsSearchResult, 
                        GEOMapsServerMetadata, GEOMapsSuggestionsCache, GEOMapsTransitWidget, 
                        GEOMarcoLiteUsageState, GEOMatchedToken, GEOMeasurementData, 
-                       GEOMessage, GEOMessageLink, GEOMetroRegionLookup, GEOMigrator, 
-                       GEOMiniCard, GEOMinimumVisibleElevationRange, GEOModality, 
-                       GEOModule, GEOModuleLayoutEntry, GEOModuleOptions, GEOMotionContext, 
-                       GEOMultiTabsState, GEOMuninBucket, GEOMuninHEIFTextureRequester, 
+                       GEOMessage, GEOMessageLink, GEOMetroRegionAssetProvider, GEOMetroRegionLookup, 
+                       GEOMigrator, GEOMiniCard, GEOMinimumVisibleElevationRange, 
+                       GEOModality, GEOModule, GEOModuleLayoutEntry, GEOModuleOptions, 
+                       GEOMotionContext, GEOMultiTabsState, GEOMuninBucket, GEOMuninHEIFTextureRequester, 
                        GEOMuninMeshRequester, GEOMuninTileRequester, GEOMuninVersion, 
                        GEOMuninViewState, GEOMutableURLQueryItems, GEONameInfo, GEONameInfoList, 
                        GEONamedFeature, GEONavCameraState, GEONavRoutePreloadStrategy, 

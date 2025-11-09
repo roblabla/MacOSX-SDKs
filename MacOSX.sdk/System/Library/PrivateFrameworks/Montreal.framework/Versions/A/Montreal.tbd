@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           7966422E-FC9B-3D85-B3C6-BE70ED852726
+    value:           63CE0363-8DDC-3D97-A063-7840B02F3F58
   - target:          x86_64-maccatalyst
-    value:           7966422E-FC9B-3D85-B3C6-BE70ED852726
+    value:           63CE0363-8DDC-3D97-A063-7840B02F3F58
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           0FFA7F28-7F83-3A26-9D96-6AE2C1D08D95
+    value:           C49E6F1D-71DB-3238-B7E2-2B015B9C08FD
   - target:          arm64e-maccatalyst
-    value:           0FFA7F28-7F83-3A26-9D96-6AE2C1D08D95
+    value:           C49E6F1D-71DB-3238-B7E2-2B015B9C08FD
 install-name:    '/System/Library/PrivateFrameworks/Montreal.framework/Versions/A/Montreal'
 current-version: 142
 exports:

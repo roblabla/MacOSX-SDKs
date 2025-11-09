@@ -4,20 +4,20 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           C66407A6-65E3-3E45-A6AF-4F33C6F791E6
+    value:           309B12FF-9B68-3120-ABC6-8B52A0E26127
   - target:          x86_64-maccatalyst
-    value:           C66407A6-65E3-3E45-A6AF-4F33C6F791E6
+    value:           309B12FF-9B68-3120-ABC6-8B52A0E26127
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           88363938-8CE6-3DEC-88EC-570E2BF141DE
+    value:           340107E1-99AC-3524-97A5-AA6CC6EA8689
   - target:          arm64e-maccatalyst
-    value:           88363938-8CE6-3DEC-88EC-570E2BF141DE
+    value:           340107E1-99AC-3524-97A5-AA6CC6EA8689
 install-name:    '/System/Library/Frameworks/PushKit.framework/Versions/A/PushKit'
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _PKPushIncomingCallReportedNotification, _PKPushTypeComplication, 
                        _PKPushTypeFileProvider, _PKPushTypeUserNotifications, _PKPushTypeVoIP ]

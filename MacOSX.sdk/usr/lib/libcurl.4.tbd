@@ -4,22 +4,22 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           75AEA21D-B54A-343F-A567-53D91689005E
+    value:           C9541242-9ED5-3F9B-A2B2-415503447A1F
   - target:          x86_64-maccatalyst
-    value:           75AEA21D-B54A-343F-A567-53D91689005E
+    value:           C9541242-9ED5-3F9B-A2B2-415503447A1F
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3703EF53-0367-389A-B5A3-03D1FD431521
+    value:           B9C7E3F0-9F3F-3992-BC36-23E3120D7824
   - target:          arm64e-maccatalyst
-    value:           3703EF53-0367-389A-B5A3-03D1FD431521
+    value:           B9C7E3F0-9F3F-3992-BC36-23E3120D7824
 install-name:    '/usr/lib/libcurl.4.dylib'
 current-version: 9
 compatibility-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _curl_easy_cleanup, _curl_easy_duphandle, _curl_easy_escape, 
                        _curl_easy_getinfo, _curl_easy_init, _curl_easy_pause, _curl_easy_perform, 

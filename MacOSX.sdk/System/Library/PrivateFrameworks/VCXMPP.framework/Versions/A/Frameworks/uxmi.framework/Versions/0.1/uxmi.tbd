@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           AA08B58D-BA79-3222-A412-0DD575BC8F37
+    value:           2C1A7948-71DD-3329-A7E0-B0ED04E56964
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           24668312-A99C-3082-A2D0-24FE6C7EF83E
+    value:           29BE136D-237B-388C-9101-68B030322AB8
 install-name:    '/System/Library/PrivateFrameworks/VCXMPP.framework/Versions/A/Frameworks/uxmi.framework/Versions/0.1/uxmi'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

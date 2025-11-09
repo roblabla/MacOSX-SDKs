@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           0C956F42-E722-3CF6-B7B2-29E3A2AFB288
+    value:           6B8568F8-A3BA-3E83-A38D-00196EF08BC2
   - target:          x86_64-maccatalyst
-    value:           0C956F42-E722-3CF6-B7B2-29E3A2AFB288
+    value:           6B8568F8-A3BA-3E83-A38D-00196EF08BC2
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           1D3B8AD3-B3A1-3C85-94E4-19416BBDD427
+    value:           ADDD00FD-E135-3DAE-873F-56F1B6012377
   - target:          arm64e-maccatalyst
-    value:           1D3B8AD3-B3A1-3C85-94E4-19416BBDD427
+    value:           ADDD00FD-E135-3DAE-873F-56F1B6012377
 install-name:    '/System/Library/PrivateFrameworks/CoreDAV.framework/Versions/A/CoreDAV'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           542D2F64-E62E-342F-B801-AA0728D67C85
+    value:           FA0711C2-C11E-39D9-BF21-B03E8F404579
   - target:          x86_64-maccatalyst
-    value:           542D2F64-E62E-342F-B801-AA0728D67C85
+    value:           FA0711C2-C11E-39D9-BF21-B03E8F404579
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           83D1BE99-4F48-3B1C-A198-B65A4E85DEA7
+    value:           77619C10-C847-3200-8A39-D31745BCAE6B
   - target:          arm64e-maccatalyst
-    value:           83D1BE99-4F48-3B1C-A198-B65A4E85DEA7
+    value:           77619C10-C847-3200-8A39-D31745BCAE6B
 install-name:    '/System/Library/PrivateFrameworks/NewsToday.framework/Versions/A/NewsToday'
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

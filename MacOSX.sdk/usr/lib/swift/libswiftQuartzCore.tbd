@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           B50E00A9-B858-314A-B865-7A0B155B100F
+    value:           8EA8BAF8-E175-3167-B80C-0CF36505E599
   - target:          x86_64-maccatalyst
-    value:           B50E00A9-B858-314A-B865-7A0B155B100F
+    value:           8EA8BAF8-E175-3167-B80C-0CF36505E599
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5636EBFD-1356-32BE-999B-60A1C4C0F6CF
+    value:           5B9A3689-8709-3C37-9DC0-F257D32AC8E4
   - target:          arm64e-maccatalyst
-    value:           5636EBFD-1356-32BE-999B-60A1C4C0F6CF
+    value:           5B9A3689-8709-3C37-9DC0-F257D32AC8E4
 install-name:    '/usr/lib/swift/libswiftQuartzCore.dylib'
 swift-abi-version: 7
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.10$@rpath/libswiftQuartzCore.dylib', 
                        '$ld$install_name$os10.11$@rpath/libswiftQuartzCore.dylib', 

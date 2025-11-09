@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           18AF9E4D-50EB-3788-9570-5C6453061A06
+    value:           F382B98A-2CBA-3D55-8611-10B6CE0A03C9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           37931414-F75B-3938-8BFC-DBDE8F4EC590
+    value:           2BB00AA8-7E8A-34CC-A16C-419133179FE3
 install-name:    '/System/Library/PrivateFrameworks/Slideshows.framework/Versions/A/Slideshows'
 current-version: 4.5
 compatibility-version: 4.5

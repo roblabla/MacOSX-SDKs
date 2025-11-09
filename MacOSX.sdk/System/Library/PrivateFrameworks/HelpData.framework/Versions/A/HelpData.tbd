@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           5BF99582-5D78-3128-B083-C0D06074C572
+    value:           9B4AC596-C008-3D55-AC18-5F89E7306E06
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2F6B8B8B-5563-3F64-B01E-6D7830A7D661
+    value:           9C1E7BE7-9B0E-3FFA-8DC0-D0DF5BE6E316
 install-name:    '/System/Library/PrivateFrameworks/HelpData.framework/Versions/A/HelpData'
 current-version: 200
 exports:

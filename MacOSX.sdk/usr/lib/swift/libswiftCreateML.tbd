@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           24430A2A-C8F8-371D-9A10-6755955473EB
+    value:           2948F7E6-9BEB-3BB6-B5A9-16DA7EE74075
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4700B344-143A-3E82-919C-074C0B82920F
+    value:           9B026985-12E6-33A8-ABF8-074B06C79B8C
 install-name:    '/usr/lib/swift/libswiftCreateML.dylib'
 swift-abi-version: 7
 exports:
@@ -17,7 +17,8 @@ exports:
                        '$ld$install_name$os10.12$@rpath/libswiftCreateML.dylib', 
                        '$ld$install_name$os10.13$@rpath/libswiftCreateML.dylib', 
                        '$ld$install_name$os10.14$@rpath/libswiftCreateML.dylib', 
-                       '$ld$install_name$os10.9$@rpath/libswiftCreateML.dylib', '_$s8CreateML021defaultFileNameColumnE0SSvau', 
+                       '$ld$install_name$os10.9$@rpath/libswiftCreateML.dylib', '_$s10Foundation3URLV8CreateMLE10addingRootyA2CF', 
+                       '_$s10Foundation3URLV8CreateMLE12removingRootyA2CF', '_$s8CreateML021defaultFileNameColumnE0SSvau', 
                        '_$s8CreateML021defaultFileNameColumnE0SSvp', '_$s8CreateML035validateAndConvertRawDataToInternalG0_14featureColumns11labelColumn013recordingFileM0AA11MLDataTableVAG_SaySSGS2StKF', 
                        '_$s8CreateML10AssetStoreMp', '_$s8CreateML10AssetStorePAAE14getURLIfExistsy10Foundation3URLVSgSSF', 
                        '_$s8CreateML10AssetStoreTL', '_$s8CreateML10CMLVariantC10int64Values5Int64VyKF', 
@@ -2812,10 +2813,10 @@ exports:
                        '_$s8CreateML17MLTrainingSessionC8MetadataV9iterationSivs', 
                        '_$s8CreateML17MLTrainingSessionC8MetadataVAEyx_GycfC', '_$s8CreateML17MLTrainingSessionC8MetadataVMa', 
                        '_$s8CreateML17MLTrainingSessionC8MetadataVMn', '_$s8CreateML17MLTrainingSessionC8MetadataVyx_GSEAAMc', 
-                       '_$s8CreateML17MLTrainingSessionC8MetadataVyx_GSeAAMc', '_$s8CreateML17MLTrainingSessionC8delegate10parametersACyxGAA08TrainingD8Delegate_p_AA0cD10ParametersVtKcfC', 
-                       '_$s8CreateML17MLTrainingSessionC8delegate10parametersACyxGAA08TrainingD8Delegate_p_AA0cD10ParametersVtKcfCTj', 
-                       '_$s8CreateML17MLTrainingSessionC8delegate10parametersACyxGAA08TrainingD8Delegate_p_AA0cD10ParametersVtKcfCTq', 
-                       '_$s8CreateML17MLTrainingSessionC8delegate10parametersACyxGAA08TrainingD8Delegate_p_AA0cD10ParametersVtKcfc', 
+                       '_$s8CreateML17MLTrainingSessionC8MetadataVyx_GSeAAMc', '_$s8CreateML17MLTrainingSessionC8delegate10parameters9modelTypeACyxGAA08TrainingD8Delegate_p_AA0cD10ParametersVAA6_ModelC0lH0OtKcfC', 
+                       '_$s8CreateML17MLTrainingSessionC8delegate10parameters9modelTypeACyxGAA08TrainingD8Delegate_p_AA0cD10ParametersVAA6_ModelC0lH0OtKcfCTj', 
+                       '_$s8CreateML17MLTrainingSessionC8delegate10parameters9modelTypeACyxGAA08TrainingD8Delegate_p_AA0cD10ParametersVAA6_ModelC0lH0OtKcfCTq', 
+                       '_$s8CreateML17MLTrainingSessionC8delegate10parameters9modelTypeACyxGAA08TrainingD8Delegate_p_AA0cD10ParametersVAA6_ModelC0lH0OtKcfc', 
                        '_$s8CreateML17MLTrainingSessionC8delegateAA08TrainingD8Delegate_pvM', 
                        '_$s8CreateML17MLTrainingSessionC8delegateAA08TrainingD8Delegate_pvg', 
                        '_$s8CreateML17MLTrainingSessionC8delegateAA08TrainingD8Delegate_pvpMV', 

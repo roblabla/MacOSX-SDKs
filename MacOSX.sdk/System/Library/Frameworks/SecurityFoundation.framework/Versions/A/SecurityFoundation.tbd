@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           5627FC5A-A9C1-33FF-BD2A-DD3953D88611
+    value:           5F06D141-62F4-3405-BA72-24673B170A16
   - target:          x86_64-maccatalyst
-    value:           5627FC5A-A9C1-33FF-BD2A-DD3953D88611
+    value:           5F06D141-62F4-3405-BA72-24673B170A16
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           41AC3935-8CB9-3ED6-9ED7-967ECDB0A18F
+    value:           B74FE7B0-C339-3483-95F8-B219820F5540
   - target:          arm64e-maccatalyst
-    value:           41AC3935-8CB9-3ED6-9ED7-967ECDB0A18F
+    value:           B74FE7B0-C339-3483-95F8-B219820F5540
 install-name:    '/System/Library/Frameworks/SecurityFoundation.framework/Versions/A/SecurityFoundation'
 current-version: 55240.40.4
 reexported-libraries:
@@ -22,7 +22,7 @@ reexported-libraries:
                        arm64e-macos, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/Frameworks/Security.framework/Versions/A/Security' ]
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
                        arm64-macos, arm64-maccatalyst ]
     symbols:         [ _SFAccessibilityMakeWithMode, _SFCertificateAuthorityInputParmKeyDestinationKeychain, 
                        _SFCertificateAuthorityInputParmKeySignerKeychain, _SFCryptoServicesErrorDecryptionFailed, 
@@ -78,7 +78,7 @@ exports:
                        _SFSHA224DigestOperation, _SFSHA256DigestOperation, _SFSHA384DigestOperation, 
                        _SFSHA512DigestOperation, _SFServiceIdentifier, _SFSignedData, 
                        _SFSymmetricKey, _SFSymmetricKeySpecifier, _SFTripleDESKeySpecifier ]
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ __ZN10CertParser10initFieldsEv, __ZN10CertParser11fieldForOidERK9cssm_dataj, 
                        __ZN10CertParser12initWithDataERK9cssm_data, __ZN10CertParser14initWithCFDataEPK8__CFData, 
                        __ZN10CertParser15extensionForOidERK9cssm_data, __ZN10CertParser15initWithSecCertEP16__SecCertificate, 

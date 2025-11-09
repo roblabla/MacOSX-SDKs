@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           59C3FE7B-14F2-36B3-BE99-350706785D1F
+    value:           DE87B5B7-CECC-356C-8F69-E9995A2A7624
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           4634228B-8C60-3722-BB43-4E92E00C0968
+    value:           AE217F6D-6F92-3142-8A41-6F02FDF3891E
 install-name:    '/System/Library/PrivateFrameworks/ProactiveSupportStubs.framework/Versions/A/ProactiveSupportStubs'
-current-version: 294.2
+current-version: 294.4
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _ProactiveSupportStubsVersionNumber, _ProactiveSupportStubsVersionString ]

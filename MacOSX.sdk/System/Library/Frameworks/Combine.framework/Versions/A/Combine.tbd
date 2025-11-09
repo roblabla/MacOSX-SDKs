@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           BA8AEB99-50FE-327A-9237-1F48F036300E
+    value:           DEC22E75-F178-329D-B7FE-9B68B5C06E64
   - target:          x86_64-maccatalyst
-    value:           BA8AEB99-50FE-327A-9237-1F48F036300E
+    value:           DEC22E75-F178-329D-B7FE-9B68B5C06E64
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C25D1ACE-CCC3-3498-BC14-BEA8D01CAACA
+    value:           27A7DF9C-5D1C-322A-8CC5-1C810475E949
   - target:          arm64e-maccatalyst
-    value:           C25D1ACE-CCC3-3498-BC14-BEA8D01CAACA
+    value:           27A7DF9C-5D1C-322A-8CC5-1C810475E949
 install-name:    '/System/Library/Frameworks/Combine.framework/Versions/A/Combine'
 current-version: 252.100
 swift-abi-version: 7

@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           487D5AEE-735D-35F2-B2CB-4FF02F3D6EF2
+    value:           F7B963F1-8807-301E-90CE-F7AA8004CB62
   - target:          x86_64-maccatalyst
-    value:           487D5AEE-735D-35F2-B2CB-4FF02F3D6EF2
+    value:           F7B963F1-8807-301E-90CE-F7AA8004CB62
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           50DA71C2-E144-324D-81A1-9F804F936236
+    value:           0F08C6BC-4A6E-38A6-9FFE-3D6C704F876D
   - target:          arm64e-maccatalyst
-    value:           50DA71C2-E144-324D-81A1-9F804F936236
+    value:           0F08C6BC-4A6E-38A6-9FFE-3D6C704F876D
 install-name:    '@rpath/PodcastsKit.framework/Versions/A/PodcastsKit'
 swift-abi-version: 7
 allowable-clients:

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           7812BDDC-F1D2-3122-AF5A-9D3CDCC6D354
+    value:           D178B457-30B3-3A9E-A443-17453A00B885
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           644F7AAB-1918-3ECC-9E60-22FEB49DBA10
+    value:           311EC5CD-383D-3B1D-84E8-BA8CA211A09D
 install-name:    '/System/Library/Frameworks/PassKit.framework/Versions/A/PassKit'
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -24,17 +24,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           97B3AA0D-CFB4-3874-A55E-32F1BDCEE508
+    value:           52D68911-9720-357D-BAFA-61424C645050
   - target:          x86_64-maccatalyst
-    value:           97B3AA0D-CFB4-3874-A55E-32F1BDCEE508
+    value:           52D68911-9720-357D-BAFA-61424C645050
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           5FBAFFB0-DAC4-3A13-A2D0-FA5D3ADFFC76
+    value:           1BB5C216-9A86-3009-B72D-5200D0C25839
   - target:          arm64e-maccatalyst
-    value:           5FBAFFB0-DAC4-3A13-A2D0-FA5D3ADFFC76
+    value:           1BB5C216-9A86-3009-B72D-5200D0C25839
 install-name:    '/System/Library/PrivateFrameworks/PassKitCore.framework/Versions/A/PassKitCore'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos ]
@@ -46,9 +46,10 @@ exports:
     symbols:         [ _AMPEnrollmentDismissedKeyForPass, _PDAccountServiceInterface, 
                        _PDApplePayTrustAllAccessEntitlement, _PDAssertionCoordinatorInterface, 
                        _PDBasicError, _PDBasicErrorDomain, _PDBoundingBoxForRegion, 
-                       _PDCardEntitlements, _PDCardOnFilePaymentEntitlement, _PDCloudStoreServiceInterface, 
-                       _PDContactlessPassesAvailableDidChangeNotification, _PDContactlessPassesVisible, 
-                       _PDContactlessPaymentPassesAvailable, _PDContactlessPaymentPassesAvailableDidChangeNotification, 
+                       _PDCardEntitlements, _PDCardOnFilePaymentEntitlement, _PDClearLastUnlockedTime, 
+                       _PDClearWasLocked, _PDCloudStoreServiceInterface, _PDContactlessPassesAvailableDidChangeNotification, 
+                       _PDContactlessPassesVisible, _PDContactlessPaymentPassesAvailable, 
+                       _PDContactlessPaymentPassesAvailableDidChangeNotification, 
                        _PDContinuityPaymentServiceInterface, _PDCredentialStateAccess, 
                        _PDDefaultPaymentPassCachedIngestionDate, _PDDefaultPaymentPassCachedIngestionDateKey, 
                        _PDDefaultPaymentPassUniqueIdentifier, _PDDefaultPaymentPassUniqueIdentifierKey, 
@@ -56,6 +57,7 @@ exports:
                        _PDDiscoveryManagerIsDirtyKey, _PDDiscoveryServiceInterface, 
                        _PDEnableAutomaticInternalLogging, _PDExpressPassesInformation, 
                        _PDFeaturesAllAccessEntitlement, _PDGenerateRandomDeviceIdentifier, 
+                       _PDGetDeviceLockState, _PDGetLastUnlockedTime, _PDGetWasLocked, 
                        _PDInAppPaymentServiceInterface, _PDLastPaymentPassInsertionOrRemovalDate, 
                        _PDLastPaymentPassInsertionOrRemovalDateKey, _PDLastUsedPeerPaymentAlternateFundingSourcePassUniqueIdentifier, 
                        _PDLocalizedAppNameForBundleIDOrPID, _PDLocalizedAppNameForPID, 
@@ -79,25 +81,26 @@ exports:
                        _PDSetContactlessPassesVisible, _PDSetContactlessPaymentPassesAvailable, 
                        _PDSetDefaultPaymentPassCachedIngestionDate, _PDSetDefaultPaymentPassUniqueIdentifier, 
                        _PDSetDiscoveryManagerIsDirty, _PDSetExpressPassesInformation, 
-                       _PDSetLastPaymentPassInsertionOrRemovalDate, _PDSetLastUsedPeerPaymentAlternateFundingSourcePassUniqueIdentifier, 
+                       _PDSetLastPaymentPassInsertionOrRemovalDate, _PDSetLastUnlockedTime, 
+                       _PDSetLastUsedPeerPaymentAlternateFundingSourcePassUniqueIdentifier, 
                        _PDSetPaymentWebServicePushTopicsNeedingUpdate, _PDSetSanitizedAvailableWhileLocked, 
                        _PDSetSpotlightIndexNeedsIndexing, _PDSetUpgradePasscodeCheckedVersion, 
                        _PDSetUpgradeTasksRetryCount, _PDSetUpgradeTasksVersion, _PDSetUserSpecifiedDefaultPaymentPassUniqueIdentifier, 
-                       _PDSharedPaymentWebServiceDidChangeNotification, _PDSharedPeerPaymentWebServiceDidChangeNotification, 
-                       _PDSpotlighIndexNeedsIndexing, _PDSpotlightIndexNeedsIndexingKey, 
-                       _PDSupportsDisbursements, _PDTrustedDeviceEnrollmentInfoProviderExportedInterface, 
-                       _PDTypecheckArrayOfObjectsForKey, _PDTypecheckObjectForKey, 
-                       _PDUpgradePasscodeCheckedVersion, _PDUpgradePasscodeCheckedVersionKey, 
-                       _PDUpgradeTasksRetryCount, _PDUpgradeTasksRetryCountKey, _PDUpgradeTasksVersion, 
-                       _PDUpgradeTasksVersionKey, _PDUserSpecifiedDefaultPaymentPassUniqueIdentifier, 
-                       _PDUserSpecifiedDefaultPaymentPassUniqueIdentifierKey, _PDWakePassbookInBackground, 
-                       _PDWakePassbookUIServiceInBackground, _PDWalletFeaturesAllAccessEntitlement, 
-                       _PDXPCDictionaryUpdateWithDictionary, _PDXPCServiceInterface, 
-                       _PKAMPCardEligibilityStatusToString, _PKAMSBagProfileName, 
-                       _PKAMSBagProfileVersion, _PKAccessoriesLogFacility, _PKAccountAccessLevelFromString, 
-                       _PKAccountAccessLevelToString, _PKAccountActionTypeToString, 
-                       _PKAccountAttestationRequired, _PKAccountAttestationRequiredKey, 
-                       _PKAccountErrorDomain, _PKAccountEventReferenceFromAssociatedObject, 
+                       _PDSetWasLocked, _PDSharedPaymentWebServiceDidChangeNotification, 
+                       _PDSharedPeerPaymentWebServiceDidChangeNotification, _PDSpotlighIndexNeedsIndexing, 
+                       _PDSpotlightIndexNeedsIndexingKey, _PDSupportsDisbursements, 
+                       _PDTrustedDeviceEnrollmentInfoProviderExportedInterface, _PDTypecheckArrayOfObjectsForKey, 
+                       _PDTypecheckObjectForKey, _PDUpgradePasscodeCheckedVersion, 
+                       _PDUpgradePasscodeCheckedVersionKey, _PDUpgradeTasksRetryCount, 
+                       _PDUpgradeTasksRetryCountKey, _PDUpgradeTasksVersion, _PDUpgradeTasksVersionKey, 
+                       _PDUserSpecifiedDefaultPaymentPassUniqueIdentifier, _PDUserSpecifiedDefaultPaymentPassUniqueIdentifierKey, 
+                       _PDWakePassbookInBackground, _PDWakePassbookUIServiceInBackground, 
+                       _PDWalletFeaturesAllAccessEntitlement, _PDXPCDictionaryUpdateWithDictionary, 
+                       _PDXPCServiceInterface, _PKAMPCardEligibilityStatusToString, 
+                       _PKAMSBagProfileName, _PKAMSBagProfileVersion, _PKAccessoriesLogFacility, 
+                       _PKAccountAccessLevelFromString, _PKAccountAccessLevelToString, 
+                       _PKAccountActionTypeToString, _PKAccountAttestationRequired, 
+                       _PKAccountAttestationRequiredKey, _PKAccountErrorDomain, _PKAccountEventReferenceFromAssociatedObject, 
                        _PKAccountEventTypeToString, _PKAccountHash, _PKAccountLogFacility, 
                        _PKAccountPaymentFrequencyFromString, _PKAccountPaymentFrequencyToString, 
                        _PKAccountPaymentFundingSourceTypeFromString, _PKAccountPaymentFundingSourceTypeToString, 
@@ -871,8 +874,8 @@ exports:
                        _PKNumericSuggestionLastInputValueKey, _PKNumericSuggestionLastInputWentToMaxKey, 
                        _PKOSVersion, _PKObjectDescription, _PKObjectDictionary, _PKObjectDictionaryWithError, 
                        _PKObjectSettingsManagerArchivePath, _PKObjectSettingsManagerSafeHavenArchivePath, 
-                       _PKOpenWalletPrefPaneForPass, _PKOverrideDeviceName, _PKOverrideDeviceNameKey, 
-                       _PKOverrideMarketGeoExpressOpenLoopNotificationIdentifier, 
+                       _PKOpenTouchIDPreferences, _PKOpenWalletPrefPaneForPass, _PKOverrideDeviceName, 
+                       _PKOverrideDeviceNameKey, _PKOverrideMarketGeoExpressOpenLoopNotificationIdentifier, 
                        _PKOverrideMarketGeoExpressOpenLoopNotificationIdentifierKey, 
                        _PKOverrideMarketGeoExpressUpgradeHideDisableExpressModeAction, 
                        _PKOverrideMarketGeoExpressUpgradeHideDisableExpressModeActionKey, 
@@ -1676,11 +1679,11 @@ exports:
                        _PKWebServicesPaymentCardTypeToString, _PKWinterpegEntitlement, 
                        _PKWriteBadPass, _PKYearStringFromDate, _PKiMessageIsActive, 
                        _PassbookEnvironmentsURL, _SSEEffaceAuthorizationRandom, _SSEEnableOffWristAuthorization, 
-                       _SSEGetCertificate, _SSEGetCertificateExpirationDate, _SSEGetHostChallenge, 
-                       _SSEGetRosePairingInfo, _SSEGetSignedDeviceData, _SSEGetVersion, 
-                       _SSEIsFeatureSupported, _SSEIsOffWristAuthorizationEnabled, 
+                       _SSEGetCertificate, _SSEGetCertificateExpirationDate, _SSEGetEntangledAuthorizationRandom, 
+                       _SSEGetHostChallenge, _SSEGetRosePairingInfo, _SSEGetSignedDeviceData, 
+                       _SSEGetVersion, _SSEIsFeatureSupported, _SSEIsOffWristAuthorizationEnabled, 
                        _SSEIssueNewCertificate, _SSESetEffacementNotificationHandler, 
-                       __ColorForSQLValue, __CreateAttributedStringWithFontSize, 
+                       _SSEUseEntangledAuthorizationRandom, __ColorForSQLValue, __CreateAttributedStringWithFontSize, 
                        __DateForSQLValue, __DrawBorder, __DrawLogoPDFIntoContext, 
                        __HardwareVersionRangeForSQLValue, __MaximumFontSizeForStringInRect, 
                        __OSVersionRequirementRangeForSQLValue, __PDGetDestinationCoordinate, 

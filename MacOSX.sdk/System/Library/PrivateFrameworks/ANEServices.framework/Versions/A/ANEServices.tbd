@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           473001C1-884A-389E-A269-B24DE1C4678F
+    value:           F86B479B-3FA0-366C-84A6-D35253ABBF5E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E163E3FD-28A7-31DA-B61F-D45E2EC3F1C2
+    value:           F9997965-AE50-351D-9FBF-345382233A34
 install-name:    '/System/Library/PrivateFrameworks/ANEServices.framework/Versions/A/ANEServices'
 exports:
   - targets:         [ x86_64-macos ]

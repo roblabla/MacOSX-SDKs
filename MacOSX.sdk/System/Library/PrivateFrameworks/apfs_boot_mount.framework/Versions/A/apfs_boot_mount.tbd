@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           85236698-1165-3077-9F27-9113D168D4C0
+    value:           8B422626-F212-36BE-87B5-DB559A999B9E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           10AF71BE-9B58-3EBD-A293-924C5CF54E65
+    value:           C563BDA1-4D01-3CA0-9EBB-9DA0552B764E
 install-name:    '/System/Library/PrivateFrameworks/apfs_boot_mount.framework/Versions/A/apfs_boot_mount'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

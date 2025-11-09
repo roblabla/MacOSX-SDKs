@@ -3,13 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           18FED959-C6E2-3C07-8845-D581EA69589A
+    value:           527D125B-7525-3DDB-BE90-D0AE4379BB25
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           3A2621BA-E68D-35EB-95C9-8676AFBA9D55
+    value:           03313A0C-5A0C-3FEB-A374-B97709D4D9C6
 install-name:    '/System/Library/Frameworks/WebKit.framework/Versions/A/WebKit'
-current-version: 610.2.11
+current-version: 610.3.7
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/Frameworks/WebKit.framework/Versions/A/Frameworks/WebCore.framework/Versions/A/WebCore', 
@@ -437,8 +437,9 @@ exports:
                        _WKPageSetEnableVerticalRubberBanding, _WKPageSetFixedLayoutSize, 
                        _WKPageSetFullscreenDelegate, _WKPageSetGapBetweenPages, _WKPageSetIgnoresViewportScaleLimits, 
                        _WKPageSetMaintainsInactiveSelection, _WKPageSetMayStartMediaWhenInWindow, 
-                       _WKPageSetMediaCaptureEnabled, _WKPageSetMediaVolume, _WKPageSetMockCameraOrientation, 
-                       _WKPageSetMuted, _WKPageSetPageAndTextZoomFactors, _WKPageSetPageContextMenuClient, 
+                       _WKPageSetMediaCaptureEnabled, _WKPageSetMediaCaptureReportingDelayForTesting, 
+                       _WKPageSetMediaVolume, _WKPageSetMockCameraOrientation, _WKPageSetMuted, 
+                       _WKPageSetPageAndTextZoomFactors, _WKPageSetPageContextMenuClient, 
                        _WKPageSetPageDiagnosticLoggingClient, _WKPageSetPageFindClient, 
                        _WKPageSetPageFindMatchesClient, _WKPageSetPageFormClient, 
                        _WKPageSetPageInjectedBundleClient, _WKPageSetPageLength, 
@@ -922,13 +923,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           14205067-9A93-3D26-89B5-731724CACBB0
+    value:           D38A641D-2F95-3454-B8B2-01CCD628F948
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           E302D61B-CAA3-3771-BF5C-4361426B7629
+    value:           9C62FD78-68E4-3EE4-AE8F-678F96AE5C07
 install-name:    '/System/Library/Frameworks/WebKit.framework/Versions/A/Frameworks/WebCore.framework/Versions/A/WebCore'
-current-version: 610.2.11
+current-version: 610.3.7
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        WebKit
@@ -2627,12 +2628,13 @@ exports:
                        __ZN7WebCore11MediaPlayer19cdmInstanceDetachedERNS_11CDMInstanceE, 
                        __ZN7WebCore11MediaPlayer19networkStateChangedEv, __ZN7WebCore11MediaPlayer19nextBestMediaEngineEPKNS_18MediaPlayerFactoryE, 
                        __ZN7WebCore11MediaPlayer19originsInMediaCacheERKN3WTF6StringE, 
-                       __ZN7WebCore11MediaPlayer19prepareForRenderingEv, __ZN7WebCore11MediaPlayer19syncTextTrackBoundsEv, 
-                       __ZN7WebCore11MediaPlayer20cachedResourceLoaderEv, __ZN7WebCore11MediaPlayer20createResourceLoaderEv, 
-                       __ZN7WebCore11MediaPlayer20playbackStateChangedEv, __ZN7WebCore11MediaPlayer20waitingForKeyChangedEv, 
-                       __ZN7WebCore11MediaPlayer21characteristicChangedEv, __ZN7WebCore11MediaPlayer21endSimulatedHDCPErrorEv, 
-                       __ZN7WebCore11MediaPlayer21outOfBandTrackSourcesEv, __ZN7WebCore11MediaPlayer21setShouldDisableSleepEb, 
-                       __ZN7WebCore11MediaPlayer22notifyTrackModeChangedEv, __ZN7WebCore11MediaPlayer22performTaskAtMediaTimeEON3WTF8FunctionIFvvEEERKNS1_9MediaTimeE, 
+                       __ZN7WebCore11MediaPlayer19prepareForRenderingEv, __ZN7WebCore11MediaPlayer19setVisibleForCanvasEb, 
+                       __ZN7WebCore11MediaPlayer19syncTextTrackBoundsEv, __ZN7WebCore11MediaPlayer20cachedResourceLoaderEv, 
+                       __ZN7WebCore11MediaPlayer20createResourceLoaderEv, __ZN7WebCore11MediaPlayer20playbackStateChangedEv, 
+                       __ZN7WebCore11MediaPlayer20waitingForKeyChangedEv, __ZN7WebCore11MediaPlayer21characteristicChangedEv, 
+                       __ZN7WebCore11MediaPlayer21endSimulatedHDCPErrorEv, __ZN7WebCore11MediaPlayer21outOfBandTrackSourcesEv, 
+                       __ZN7WebCore11MediaPlayer21setShouldDisableSleepEb, __ZN7WebCore11MediaPlayer22notifyTrackModeChangedEv, 
+                       __ZN7WebCore11MediaPlayer22performTaskAtMediaTimeEON3WTF8FunctionIFvvEEERKNS1_9MediaTimeE, 
                        __ZN7WebCore11MediaPlayer22setPrivateBrowsingModeEb, __ZN7WebCore11MediaPlayer22setVideoFullscreenModeEj, 
                        __ZN7WebCore11MediaPlayer23beginSimulatedHDCPErrorEv, __ZN7WebCore11MediaPlayer23loadWithNextMediaEngineEPKNS_18MediaPlayerFactoryE, 
                        __ZN7WebCore11MediaPlayer23setVideoFullscreenFrameENS_9FloatRectE, 
@@ -3005,7 +3007,7 @@ exports:
                        __ZN7WebCore13MIMETypeCache23staticContainerTypeListEv, __ZN7WebCore13MIMETypeCache26isUnsupportedContainerTypeERKN3WTF6StringE, 
                        __ZN7WebCore13MediaQuerySet6createERKN3WTF6StringENS_23MediaQueryParserContextE, 
                        __ZN7WebCore13MediaQuerySetD1Ev, __ZN7WebCore13MediaQuerySetD2Ev, 
-                       __ZN7WebCore13MediaRecorder31setCustomPrivateRecorderCreatorEPFNSt3__110unique_ptrINS_20MediaRecorderPrivateENS1_14default_deleteIS3_EEEERNS_18MediaStreamPrivateEE, 
+                       __ZN7WebCore13MediaRecorder31setCustomPrivateRecorderCreatorEPFNS_11ExceptionOrINSt3__110unique_ptrINS_20MediaRecorderPrivateENS2_14default_deleteIS4_EEEEEERNS_18MediaStreamPrivateERKNS_27MediaRecorderPrivateOptionsEE, 
                        __ZN7WebCore13MediaStrategyC2Ev, __ZN7WebCore13MediaStrategyD0Ev, 
                        __ZN7WebCore13MediaStrategyD1Ev, __ZN7WebCore13MediaStrategyD2Ev, 
                        __ZN7WebCore13MutationEvent17initMutationEventERKN3WTF10AtomStringEbbPNS_4NodeERKNS1_6StringES9_S9_t, 
@@ -4753,7 +4755,8 @@ exports:
                        __ZN7WebCore21LogAdClickAttributionE, __ZN7WebCore21LogCompositingOverlapE, 
                        __ZN7WebCore21LogContentObservationE, __ZN7WebCore21LogMediaSourceSamplesE, 
                        __ZN7WebCore21LogPerformanceLoggingE, __ZN7WebCore21LogSpellingAndGrammarE, 
-                       __ZN7WebCore21MediaRecorderProvider26createMediaRecorderPrivateERNS_18MediaStreamPrivateE, 
+                       __ZN7WebCore21MediaRecorderProvider11isSupportedERKN3WTF6StringE, 
+                       __ZN7WebCore21MediaRecorderProvider26createMediaRecorderPrivateERNS_18MediaStreamPrivateERKNS_27MediaRecorderPrivateOptionsE, 
                        __ZN7WebCore21NavigatorMediaDevices12mediaDevicesERNS_9NavigatorE, 
                        __ZN7WebCore21NetworkStorageSession10getCookiesERKN3WTF3URLE, 
                        __ZN7WebCore21NetworkStorageSession10setCookiesERKN3WTF6VectorINS_6CookieELm0ENS1_15CrashOnOverflowELm16ENS1_10FastMallocEEERKNS1_3URLESB_, 
@@ -4955,6 +4958,7 @@ exports:
                        __ZN7WebCore22SourceBufferParserWebM10OnBlockEndERKN4webm15ElementMetadataERKNS1_5BlockE, 
                        __ZN7WebCore22SourceBufferParserWebM10appendDataEON3WTF6VectorIhLm0ENS1_15CrashOnOverflowELm16ENS1_10FastMallocEEENS_18SourceBufferParser11AppendFlagsE, 
                        __ZN7WebCore22SourceBufferParserWebM10invalidateEv, __ZN7WebCore22SourceBufferParserWebM12OnBlockBeginERKN4webm15ElementMetadataERKNS1_5BlockEPNS1_6ActionE, 
+                       __ZN7WebCore22SourceBufferParserWebM12OnElementEndERKN4webm15ElementMetadataE, 
                        __ZN7WebCore22SourceBufferParserWebM12OnTrackEntryERKN4webm15ElementMetadataERKNS1_10TrackEntryE, 
                        __ZN7WebCore22SourceBufferParserWebM14OnClusterBeginERKN4webm15ElementMetadataERKNS1_7ClusterEPNS1_6ActionE, 
                        __ZN7WebCore22SourceBufferParserWebM14OnElementBeginERKN4webm15ElementMetadataEPNS1_6ActionE, 
@@ -4972,6 +4976,7 @@ exports:
                        __ZN7WebCore22SourceBufferParserWebM6OnEbmlERKN4webm15ElementMetadataERKNS1_4EbmlE, 
                        __ZN7WebCore22SourceBufferParserWebM6OnInfoERKN4webm15ElementMetadataERKNS1_4InfoE, 
                        __ZN7WebCore22SourceBufferParserWebM7OnFrameERKN4webm13FrameMetadataEPNS1_6ReaderEPy, 
+                       __ZN7WebCore22SourceBufferParserWebM9setLoggerERKN3WTF6LoggerEPKv, 
                        __ZN7WebCore22SourceBufferParserWebMC1Ev, __ZN7WebCore22SourceBufferParserWebMC2Ev, 
                        __ZN7WebCore22SourceBufferParserWebMD0Ev, __ZN7WebCore22SourceBufferParserWebMD1Ev, 
                        __ZN7WebCore22SourceBufferParserWebMD2Ev, __ZN7WebCore22StorageEventDispatcher26dispatchLocalStorageEventsERKN3WTF6StringES4_S4_RKNS_18SecurityOriginDataEPNS_5FrameE, 
@@ -5123,7 +5128,7 @@ exports:
                        __ZN7WebCore24MediaRecorderPrivateMock13stopRecordingEv, __ZN7WebCore24MediaRecorderPrivateMock20videoSampleAvailableERNS_11MediaSampleE, 
                        __ZN7WebCore24MediaRecorderPrivateMock21audioSamplesAvailableERKN3WTF9MediaTimeERKNS_17PlatformAudioDataERKNS_22AudioStreamDescriptionEm, 
                        __ZN7WebCore24MediaRecorderPrivateMock25generateMockCounterStringEv, 
-                       __ZN7WebCore24MediaRecorderPrivateMock8mimeTypeEv, __ZN7WebCore24MediaRecorderPrivateMock9fetchDataEON3WTF17CompletionHandlerIFvONS1_6RefPtrINS_12SharedBufferENS1_13DumbPtrTraitsIS4_EEEERKNS1_6StringEEEE, 
+                       __ZN7WebCore24MediaRecorderPrivateMock9fetchDataEON3WTF17CompletionHandlerIFvONS1_6RefPtrINS_12SharedBufferENS1_13DumbPtrTraitsIS4_EEEERKNS1_6StringEEEE, 
                        __ZN7WebCore24MediaRecorderPrivateMockC1ERNS_18MediaStreamPrivateE, 
                        __ZN7WebCore24MediaRecorderPrivateMockC2ERNS_18MediaStreamPrivateE, 
                        __ZN7WebCore24MediaRecorderPrivateMockD0Ev, __ZN7WebCore24MediaRecorderPrivateMockD1Ev, 
@@ -5281,10 +5286,11 @@ exports:
                        __ZN7WebCore26ISOProtectionSchemeInfoBox5parseERN3JSC8DataViewERj, 
                        __ZN7WebCore26LogFormattingContextLayoutE, __ZN7WebCore26MediaRecorderPrivateWriter10appendDataEON3WTF3RefINS_12SharedBufferENS1_13DumbPtrTraitsIS3_EEEE, 
                        __ZN7WebCore26MediaRecorderPrivateWriter10appendDataEPKcm, 
-                       __ZN7WebCore26MediaRecorderPrivateWriter10initializeEv, __ZN7WebCore26MediaRecorderPrivateWriter13stopRecordingEv, 
+                       __ZN7WebCore26MediaRecorderPrivateWriter10initializeEv, __ZN7WebCore26MediaRecorderPrivateWriter10setOptionsERKNS_27MediaRecorderPrivateOptionsE, 
+                       __ZN7WebCore26MediaRecorderPrivateWriter13stopRecordingEv, 
                        __ZN7WebCore26MediaRecorderPrivateWriter16startAssetWriterEv, 
                        __ZN7WebCore26MediaRecorderPrivateWriter23appendAudioSampleBufferERKNS_17PlatformAudioDataERKNS_22AudioStreamDescriptionERKN3WTF9MediaTimeEm, 
-                       __ZN7WebCore26MediaRecorderPrivateWriter23appendVideoSampleBufferEP20opaqueCMSampleBuffer, 
+                       __ZN7WebCore26MediaRecorderPrivateWriter23appendVideoSampleBufferERNS_11MediaSampleE, 
                        __ZN7WebCore26MediaRecorderPrivateWriter23finishedFlushingSamplesEv, 
                        __ZN7WebCore26MediaRecorderPrivateWriter28flushCompressedSampleBuffersEON3WTF17CompletionHandlerIFvvEEE, 
                        __ZN7WebCore26MediaRecorderPrivateWriter29appendCompressedSampleBuffersEv, 
@@ -5295,7 +5301,7 @@ exports:
                        __ZN7WebCore26MediaRecorderPrivateWriter38processNewCompressedVideoSampleBuffersEv, 
                        __ZN7WebCore26MediaRecorderPrivateWriter43appendCompressedAudioSampleBufferIfPossibleEv, 
                        __ZN7WebCore26MediaRecorderPrivateWriter43appendCompressedVideoSampleBufferIfPossibleEv, 
-                       __ZN7WebCore26MediaRecorderPrivateWriter5clearEv, __ZN7WebCore26MediaRecorderPrivateWriter6createEbb, 
+                       __ZN7WebCore26MediaRecorderPrivateWriter5clearEv, __ZN7WebCore26MediaRecorderPrivateWriter6createEbbRKNS_27MediaRecorderPrivateOptionsE, 
                        __ZN7WebCore26MediaRecorderPrivateWriter9fetchDataEON3WTF17CompletionHandlerIFvONS1_6RefPtrINS_12SharedBufferENS1_13DumbPtrTraitsIS4_EEEEEEE, 
                        __ZN7WebCore26MediaRecorderPrivateWriterC1Ebb, __ZN7WebCore26MediaRecorderPrivateWriterC2Ebb, 
                        __ZN7WebCore26MediaRecorderPrivateWriterD1Ev, __ZN7WebCore26MediaRecorderPrivateWriterD2Ev, 
@@ -7628,7 +7634,7 @@ exports:
                        __ZNK7WebCore18IDBObjectStoreInfo12isolatedCopyEv, __ZNK7WebCore18IDBTransactionInfo12isolatedCopyEv, 
                        __ZNK7WebCore18ImageBufferBackend10toBGRADataEPv, __ZNK7WebCore18ImageBufferBackend12getImageDataENS_22AlphaPremultiplicationERKNS_7IntRectEPv, 
                        __ZNK7WebCore18ImageBufferBackend15copyImagePixelsENS_22AlphaPremultiplicationENS_11ColorFormatEjPhS1_S2_jS3_RKNS_7IntSizeE, 
-                       __ZNK7WebCore18MessagePortChannel31hasAnyMessagesPendingOrInFlightEv, 
+                       __ZNK7WebCore18MediaStreamPrivate8hasVideoEv, __ZNK7WebCore18MessagePortChannel31hasAnyMessagesPendingOrInFlightEv, 
                        __ZNK7WebCore18ParsedContentRange11headerValueEv, __ZNK7WebCore18PaymentCoordinator27shouldAllowUserAgentScriptsERNS_8DocumentE, 
                        __ZNK7WebCore18PlatformPasteboard10readBufferEmRKN3WTF6StringE, 
                        __ZNK7WebCore18PlatformPasteboard10readStringEmRKN3WTF6StringE, 
@@ -7800,7 +7806,8 @@ exports:
                        __ZNK7WebCore23FrameLoaderStateMachine32isDisplayingInitialEmptyDocumentEv, 
                        __ZNK7WebCore23MediaStreamTrackPrivate4typeEv, __ZNK7WebCore23MediaStreamTrackPrivate8settingsEv, 
                        __ZNK7WebCore24CAAudioStreamDescription19platformDescriptionEv, 
-                       __ZNK7WebCore24CAAudioStreamDescription6formatEv, __ZNK7WebCore25AsyncScrollingCoordinator12parentOfNodeEy, 
+                       __ZNK7WebCore24CAAudioStreamDescription6formatEv, __ZNK7WebCore24MediaRecorderPrivateMock8mimeTypeEv, 
+                       __ZNK7WebCore25AsyncScrollingCoordinator12parentOfNodeEy, 
                        __ZNK7WebCore25AsyncScrollingCoordinator14childrenOfNodeEy, 
                        __ZNK7WebCore25AsyncScrollingCoordinator15hasSubscrollersEv, 
                        __ZNK7WebCore25AsyncScrollingCoordinator19scrollingTreeAsTextEj, 
@@ -7816,7 +7823,8 @@ exports:
                        __ZNK7WebCore26HTMLTextFormControlElement21lastChangeWasUserEditEv, 
                        __ZNK7WebCore26HTMLTextFormControlElement23visiblePositionForIndexEi, 
                        __ZNK7WebCore26HTMLTextFormControlElement26isInnerTextElementEditableEv, 
-                       __ZNK7WebCore26MediaTrackConstraintSetMap4sizeEv, __ZNK7WebCore26MediaTrackConstraintSetMap7forEachEON3WTF8FunctionIFvRKNS_15MediaConstraintEEEE, 
+                       __ZNK7WebCore26MediaRecorderPrivateWriter8mimeTypeEv, __ZNK7WebCore26MediaTrackConstraintSetMap4sizeEv, 
+                       __ZNK7WebCore26MediaTrackConstraintSetMap7forEachEON3WTF8FunctionIFvRKNS_15MediaConstraintEEEE, 
                        __ZNK7WebCore26NetscapePlugInStreamLoader6isDoneEv, __ZNK7WebCore26ScrollingTreeScrollingNode13isLatchedNodeEv, 
                        __ZNK7WebCore26ScrollingTreeScrollingNode14dumpPropertiesERN3WTF10TextStreamEj, 
                        __ZNK7WebCore26ScrollingTreeScrollingNode15edgePinnedStateEv, 
@@ -8227,6 +8235,7 @@ exports:
                        __ZThn520_NK7WebCore15GraphicsLayerCA49platformCALayerShouldTemporarilyRetainTileCohortsEPNS_15PlatformCALayerE, 
                        __ZThn56_N7WebCore22SourceBufferParserWebM10OnBlockEndERKN4webm15ElementMetadataERKNS1_5BlockE, 
                        __ZThn56_N7WebCore22SourceBufferParserWebM12OnBlockBeginERKN4webm15ElementMetadataERKNS1_5BlockEPNS1_6ActionE, 
+                       __ZThn56_N7WebCore22SourceBufferParserWebM12OnElementEndERKN4webm15ElementMetadataE, 
                        __ZThn56_N7WebCore22SourceBufferParserWebM12OnTrackEntryERKN4webm15ElementMetadataERKNS1_10TrackEntryE, 
                        __ZThn56_N7WebCore22SourceBufferParserWebM14OnClusterBeginERKN4webm15ElementMetadataERKNS1_7ClusterEPNS1_6ActionE, 
                        __ZThn56_N7WebCore22SourceBufferParserWebM14OnElementBeginERKN4webm15ElementMetadataEPNS1_6ActionE, 
@@ -8268,13 +8277,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           29A3A6E9-86ED-3DB0-A1D5-B48C91BAB595
+    value:           F5F5FA9A-0871-3A1D-8140-E4F6706A63AF
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           FC18DD13-F2DA-33F3-ADDE-42CB85209B40
+    value:           93702060-2359-345A-BAB0-62A9D0BFF3BE
 install-name:    '/System/Library/Frameworks/WebKit.framework/Versions/A/Frameworks/WebKitLegacy.framework/Versions/A/WebKitLegacy'
-current-version: 610.2.11
+current-version: 610.3.7
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _DOMEventException, _DOMException, _DOMRangeException, _DOMXPathException, 

@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-maccatalyst
-    value:           E0130CC6-888C-32E9-87A5-B7B177B575BA
+    value:           63E8432F-CDDD-3F77-9B0E-2D6D4CEB2787
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-maccatalyst
-    value:           B7009CFC-8882-3932-9FDC-F735A4F3C652
+    value:           0BDED606-4957-3E2B-BB07-E1F2F0DD3A00
 install-name:    '/System/Library/PrivateFrameworks/VisualTestKit.framework/Versions/A/VisualTestKit'
 exports:
   - targets:         [ x86_64-maccatalyst, arm64e-maccatalyst, arm64-maccatalyst ]

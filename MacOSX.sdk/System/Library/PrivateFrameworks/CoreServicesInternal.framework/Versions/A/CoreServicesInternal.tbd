@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           FE1FB96E-9910-3892-8B96-963BED32C09C
+    value:           FD1692F7-A4B4-3FE5-B9C8-E0840D53C7D0
   - target:          x86_64-maccatalyst
-    value:           FE1FB96E-9910-3892-8B96-963BED32C09C
+    value:           FD1692F7-A4B4-3FE5-B9C8-E0840D53C7D0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           41D972A8-1C95-39BF-8C10-022544F66230
+    value:           1308E62B-1210-3F6A-98AA-7D0C527C6162
   - target:          arm64e-maccatalyst
-    value:           41D972A8-1C95-39BF-8C10-022544F66230
+    value:           1308E62B-1210-3F6A-98AA-7D0C527C6162
 install-name:    '/System/Library/PrivateFrameworks/CoreServicesInternal.framework/Versions/A/CoreServicesInternal'
 current-version: 476
 allowable-clients:

@@ -141,6 +141,8 @@ Globals:
   SwiftName: auxiliarySemanticSegmentationTeethMatte
 - Name: kCIImageAuxiliarySemanticSegmentationGlassesMatte
   SwiftName: auxiliarySemanticSegmentationGlassesMatte
+- Name: kCIImageAuxiliarySemanticSegmentationSkyMatte
+  SwiftName: auxiliarySemanticSegmentationSkyMatte
 
 # CIImageOptions - Private
 - Name: kCIImageFlipped

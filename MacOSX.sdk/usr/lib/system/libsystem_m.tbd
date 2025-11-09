@@ -4,21 +4,21 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           97B65949-541D-38CA-9FD5-6CB4D9358412
+    value:           0F98499E-662F-36EC-AB58-91A8D5A0FB74
   - target:          x86_64-maccatalyst
-    value:           97B65949-541D-38CA-9FD5-6CB4D9358412
+    value:           0F98499E-662F-36EC-AB58-91A8D5A0FB74
   - target:          x86_64h-macos
-    value:           94E97201-5B07-3D4A-A197-2A9505680FBA
+    value:           79820D9E-0FF1-3F20-AF4F-F87EE20CE8C9
   - target:          x86_64h-maccatalyst
-    value:           94E97201-5B07-3D4A-A197-2A9505680FBA
+    value:           79820D9E-0FF1-3F20-AF4F-F87EE20CE8C9
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           C53A840D-18E8-3769-AA56-B4486E3E7ED8
+    value:           129930A8-F06B-3AD4-BA84-21549591F87A
   - target:          arm64e-maccatalyst
-    value:           C53A840D-18E8-3769-AA56-B4486E3E7ED8
+    value:           129930A8-F06B-3AD4-BA84-21549591F87A
 install-name:    '/usr/lib/system/libsystem_m.dylib'
 current-version: 3186.40.2
 parent-umbrella:
@@ -148,7 +148,7 @@ exports:
                        '_tanhl$fenv_access_off', '_tanl$fenv_access_off', '_tgamma$fenv_access_off', 
                        '_tgammaf$fenv_access_off', '_tgammal$fenv_access_off', '_trunc$fenv_access_off', 
                        '_truncf$fenv_access_off', '_truncl$fenv_access_off' ]
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, x86_64-maccatalyst, 
                        x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
     symbols:         [ __FE_DFL_ENV, ___Libm_version, ___cos_d2, ___cos_f4, ___cospi, 
                        ___cospif, ___exp10, ___exp10f, ___fegetfltrounds, ___fpclassifyd, 

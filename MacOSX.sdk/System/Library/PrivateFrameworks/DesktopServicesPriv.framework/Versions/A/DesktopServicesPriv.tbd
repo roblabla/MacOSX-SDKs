@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           454680B3-38FA-35BE-8DC2-93FA4E344FDA
+    value:           732C8A0C-E7F8-372D-AE5B-84497067135E
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           04734A9A-329C-3DA9-9ABC-B48EE703056E
+    value:           9FB6D481-1E7B-3A98-AB83-B6F7BF988AF9
 install-name:    '/System/Library/PrivateFrameworks/DesktopServicesPriv.framework/Versions/A/DesktopServicesPriv'
 current-version: 0
 exports:

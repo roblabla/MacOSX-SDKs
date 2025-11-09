@@ -3,11 +3,11 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           55DDA295-27A3-33AC-8EC0-2C8BDD552594
+    value:           BCBA4281-F4FC-3DEF-9EAE-81D4B8D7CA4D
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           2495BCB8-E770-3446-A603-DDBD5791EC0D
+    value:           C74C4C2D-7C96-31EE-91D5-C693594C7853
 install-name:    '/System/Library/PrivateFrameworks/MobileAssetUpdater.framework/Versions/A/MobileAssetUpdater'
 exports:
   - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]

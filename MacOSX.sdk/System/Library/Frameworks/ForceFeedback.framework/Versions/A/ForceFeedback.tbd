@@ -3,15 +3,15 @@ tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 uuids:
   - target:          x86_64-macos
-    value:           68A3C823-FD6B-3EBE-A653-C391694574E7
+    value:           AB29674E-26C2-360C-9117-54AC93E80CB0
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           EBC88A71-E60F-3814-9367-88259865028A
+    value:           4B3883EC-A037-3268-A058-0000DC834D83
 install-name:    '/System/Library/Frameworks/ForceFeedback.framework/Versions/A/ForceFeedback'
 current-version: 1.0.2
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
     symbols:         [ _FFCreateDevice, _FFDeviceCreateEffect, _FFDeviceEscape, _FFDeviceGetForceFeedbackCapabilities, 
                        _FFDeviceGetForceFeedbackProperty, _FFDeviceGetForceFeedbackState, 
                        _FFDeviceReleaseEffect, _FFDeviceSendForceFeedbackCommand, 

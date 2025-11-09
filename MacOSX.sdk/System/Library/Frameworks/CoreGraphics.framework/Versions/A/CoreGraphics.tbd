@@ -4,26 +4,26 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-macc
                    arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           703F3664-E484-3E82-B296-C764F9ECB6AB
+    value:           FADE6748-BAEA-39B4-8196-EC064D5ED92E
   - target:          x86_64-maccatalyst
-    value:           703F3664-E484-3E82-B296-C764F9ECB6AB
+    value:           FADE6748-BAEA-39B4-8196-EC064D5ED92E
   - target:          x86_64h-macos
-    value:           5D46C6E2-8E20-3390-B5D9-A8D15A0950C6
+    value:           1429656D-D10D-3849-8B57-16AF17E32677
   - target:          x86_64h-maccatalyst
-    value:           5D46C6E2-8E20-3390-B5D9-A8D15A0950C6
+    value:           1429656D-D10D-3849-8B57-16AF17E32677
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           AAF11E81-708C-3871-B101-360DD887BE94
+    value:           B52B41D4-9DD7-3B92-81A3-9D63B7591B5D
   - target:          arm64e-maccatalyst
-    value:           AAF11E81-708C-3871-B101-360DD887BE94
+    value:           B52B41D4-9DD7-3B92-81A3-9D63B7591B5D
 install-name:    '/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics'
-current-version: 1463
+current-version: 1463.2.1
 compatibility-version: 64
 exports:
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, x86_64-maccatalyst, 
                        x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
     symbols:         [ '$ld$install_name$os10.4$/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 
                        '$ld$install_name$os10.5$/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices', 
@@ -1348,6 +1348,6 @@ exports:
                        _shape_qdrgn_alloc, _shape_qdrgn_free, _shape_union, _shape_xor ]
     objc-classes:    [ CGVirtualDisplay, CGVirtualDisplayDescriptor, CGVirtualDisplayMode, 
                        CGVirtualDisplaySettings ]
-  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, arm64-macos ]
+  - targets:         [ x86_64-macos, arm64e-macos, x86_64h-macos, arm64-macos ]
     symbols:         [ _CGSSetDisplayAcceleratorBoost, _CGVirtualDisplaySettingsRefreshDeadlineNone ]
 ...

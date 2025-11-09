@@ -4,17 +4,17 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 uuids:
   - target:          x86_64-macos
-    value:           8C7D71FC-CB07-3A44-8A69-36635A8D1DB4
+    value:           FEA8C519-ACB4-381C-9F9D-CB92AE094B23
   - target:          x86_64-maccatalyst
-    value:           8C7D71FC-CB07-3A44-8A69-36635A8D1DB4
+    value:           FEA8C519-ACB4-381C-9F9D-CB92AE094B23
   - target:          arm64-macos
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64-maccatalyst
     value:           00000000-0000-0000-0000-000000000000
   - target:          arm64e-macos
-    value:           DE2FAAAC-4A74-3C9D-B407-A449CC17AA8D
+    value:           1D5D4352-68E8-3E4D-AA4A-19109079D367
   - target:          arm64e-maccatalyst
-    value:           DE2FAAAC-4A74-3C9D-B407-A449CC17AA8D
+    value:           1D5D4352-68E8-3E4D-AA4A-19109079D367
 install-name:    '/System/Library/PrivateFrameworks/StreamingZip.framework/Versions/A/StreamingZip'
 exports:
   - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
